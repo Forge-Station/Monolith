@@ -31,6 +31,9 @@
     damage:
       types:
         Piercing: 45
+  # WOLFGATE(Wolfmed): W1: cluster pellets leave fragments behind.
+  - type: WolfmedDamageCause
+    cause: Fragment
   - type: TimedDespawn
     lifetime: 0.25
 

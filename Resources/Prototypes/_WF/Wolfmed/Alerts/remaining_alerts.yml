@@ -1,0 +1,73 @@
+# M5: condition alerts for toxins, radiation, cold and heat (plan §3.8-3.10, §5.2). Health category like every
+# condition alert, so each replaces the last. The icons are stock placeholders (art debt): the toxin gas warning,
+# the temperature warnings, and the Wolfmed downed and critical icons.
+
+- type: alert
+  id: WFWolfmedDownedToxin
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/Interface/Alerts/breathing.rsi
+    state: too_much_tox
+  name: alerts-wolfmed-downed-toxin-name
+  description: alerts-wolfmed-downed-toxin-desc
+
+- type: alert
+  id: WFWolfmedOutToxin
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/_Crescent/Interface/Alerts/human_critical.rsi
+    state: critical
+  name: alerts-wolfmed-out-toxin-name
+  description: alerts-wolfmed-out-toxin-desc
+
+- type: alert
+  id: WFWolfmedDownedRadiation
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/_WF/Wolfmed/Interface/Alerts/downed.rsi
+    state: downed
+  name: alerts-wolfmed-downed-radiation-name
+  description: alerts-wolfmed-downed-radiation-desc
+
+- type: alert
+  id: WFWolfmedDownedCold
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/Interface/Alerts/temperature.rsi
+    state: cold2
+  name: alerts-wolfmed-downed-cold-name
+  description: alerts-wolfmed-downed-cold-desc
+
+- type: alert
+  id: WFWolfmedOutCold
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/Interface/Alerts/temperature.rsi
+    state: cold3
+  name: alerts-wolfmed-out-cold-name
+  description: alerts-wolfmed-out-cold-desc
+
+- type: alert
+  id: WFWolfmedDownedHeat
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/Interface/Alerts/temperature.rsi
+    state: hot2
+  name: alerts-wolfmed-downed-heat-name
+  description: alerts-wolfmed-downed-heat-desc
+
+- type: alert
+  id: WFWolfmedOutHeat
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/Interface/Alerts/temperature.rsi
+    state: hot3
+  name: alerts-wolfmed-out-heat-name
+  description: alerts-wolfmed-out-heat-desc

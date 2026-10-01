@@ -1,0 +1,33 @@
+# What a treated limb looks like from the outside (GORE/G3). One shipped profile;
+# WolfmedTreatmentVisualsSystem indexes it by id, so the art, the per-limb states and which bleeding
+# states count as a dressing are all retuned by editing this file.
+#
+# Which BleedingTreatment values mean something is physically tied on is data rather than a switch in the
+# system: Bandaged and Sutured leave a wrap, Clamped is a tourniquet (no art in this sheet), and
+# Cauterized is a burn, not a bandage.
+#
+# The RSI ships r_leg_digitigrade and l_leg_digitigrade states as well. Nothing in this fork marks a
+# species as digitigrade, so they are unused; a fork that gains one ships a second profile pointing the
+# leg suffixes at them rather than changing any code.
+
+- type: wolfmedTreatmentOverlayProfile
+  id: WFWolfmedTreatmentOverlayDefault
+  rsi: _WF/Wolfmed/Mobs/treatment_overlays.rsi
+
+  prefixes:
+    Gauze: gauze
+    Splint: splint
+    SplintImprovised: splint_improv
+    SplintTribal: splint_tribal
+
+  suffixes:
+    Head: head
+    Chest: chest
+    RArm: r_arm
+    LArm: l_arm
+    RLeg: r_leg
+    LLeg: l_leg
+
+  dressings:
+  - Bandaged
+  - Sutured

@@ -1,0 +1,202 @@
+# Wolfmed organ data. Values are Onyx's (Resources/Prototypes/Body/base_organs.yml @ 2f5bab9).
+# health/maxHealth are omitted - WolfmedOrganComponent already defaults to 15/15, which is Onyx's
+# OrganComponent C# default, and no Onyx organ prototype overrides it.
+#
+# Same shape as _WF/Wolfmed/Body/parts.yml: separate abstract ids, not re-declarations of the upstream
+# OrganHuman* ids, because RT's ComponentRegistrySerializer throws "Duplicate ID" if a second file
+# redeclares an existing id. Each is added to the upstream organ's `parent:` list with a one-line
+# `# WOLFGATE` edit in Resources/Prototypes/Body/Organs/human.yml.
+#
+# Onyx keeps destructionWound/destructionWoundSeverity on its own OrganComponent; Wolfgate stays on
+# Shitmed's (D8), so they live on WolfmedOrgan here. Organ damage is irreversible (DECISIONS.md §8.6-4):
+# nothing in Wolfgate raises organ health, and Onyx's only healer is its own surgery (D7).
+# Human lineage only (DECISIONS.md §8.6-7, P3-D7); the other ~20 organ roots stay silent no-ops.
+#
+# M3 (plan §8): OrganDamage's selectionWeight and damageMultipliers now drive a deterministic split (a hit
+# past its part's organReach line); hitChance and maxDamageFraction are only read by Onyx's roll, which is
+# left for parts without reach lines. Every organ is impaired under WolfmedOrgan.impairedBelow (0.5).
+
+# Brain: no destruction wound - OrganHealthSystem kills the mob instead of destroying the organ.
+# WolfmedBrain is BRAIN's oxygenation clock; only an organ that carries it runs one.
+- type: entity
+  id: WFWolfmedOrganBrain
+  abstract: true
+  components:
+  - type: WolfmedOrgan
+  - type: WolfmedBrain
+  - type: OrganDamage
+    hitChance: 0.8
+    selectionWeight: 0.75
+    damageMultipliers:
+      Blunt: 0.115
+      Slash: 0.25
+      Piercing: 0.42
+      Heat: 0.15
+      Cold: 0.05
+      Shock: 0.3125
+
+# Eyes: paired organ, no internal bleeding on destruction (Onyx base_organs.yml:547).
+- type: entity
+  id: WFWolfmedOrganEyes
+  abstract: true
+  components:
+  - type: WolfmedOrgan
+  - type: OrganDamage
+    hitChance: 0.7
+    selectionWeight: 0.2275
+    damageMultipliers:
+      Blunt: 0.115
+      Slash: 0.3
+      Piercing: 0.4375
+      Heat: 0.15
+      Cold: 0.05
+      Shock: 0.25
+
+- type: entity
+  id: WFWolfmedOrganHeart
+  abstract: true
+  components:
+  - type: WolfmedOrgan
+    health: 25
+    maxHealth: 25 # playtest 4: 15 fell to three capped hits; with wolfmed.organ_hit_cap 3 an organ takes nine
+    destructionWound: InternalBleedingWound
+    destructionWoundSeverity: 45
+    # M3 (plan §8): under half health the heart is impaired, and blood regenerates at half the rate.
+    impairedRegenFactor: 0.5
+  - type: OrganDamage
+    hitChance: 0.8
+    selectionWeight: 0.64
+    damageMultipliers:
+      Blunt: 0.1
+      Slash: 0.25
+      Piercing: 0.455
+      Heat: 0.15
+      Cold: 0.05
+      Shock: 0.3375
+
+- type: entity
+  id: WFWolfmedOrganLungs
+  abstract: true
+  components:
+  - type: WolfmedOrgan
+    health: 25
+    maxHealth: 25 # playtest 4: 15 fell to three capped hits; with wolfmed.organ_hit_cap 3 an organ takes nine
+    destructionWound: InternalBleedingWound
+    destructionWoundSeverity: 35
+  - type: OrganDamage
+    selectionWeight: 1.38 # highest weight in the torso; hitChance left at the 1.0 default
+    damageMultipliers:
+      Blunt: 0.1
+      Slash: 0.25
+      Piercing: 0.42
+      Heat: 0.165
+      Cold: 0.05
+      Shock: 0.25
+
+- type: entity
+  id: WFWolfmedOrganLiver
+  abstract: true
+  components:
+  - type: WolfmedOrgan
+    health: 25
+    maxHealth: 25 # playtest 4: 15 fell to three capped hits; with wolfmed.organ_hit_cap 3 an organ takes nine
+    destructionWound: InternalBleedingWound
+    destructionWoundSeverity: 40
+    # M5 (plan §3.8, OD13): under half health the liver clears Poison at half wolfmed.toxin_clearance; failed, none.
+    impairedClearanceFactor: 0.5
+  - type: OrganDamage
+    selectionWeight: 1.1 # hitChance left at the 1.0 default
+    damageMultipliers:
+      Blunt: 0.1
+      Slash: 0.3
+      Piercing: 0.4375
+      Heat: 0.15
+      Cold: 0.05
+      Shock: 0.25
+
+- type: entity
+  id: WFWolfmedOrganStomach
+  abstract: true
+  components:
+  - type: WolfmedOrgan
+    health: 25
+    maxHealth: 25 # playtest 4: 15 fell to three capped hits; with wolfmed.organ_hit_cap 3 an organ takes nine
+    destructionWound: InternalBleedingWound
+    destructionWoundSeverity: 25
+  - type: OrganDamage
+    hitChance: 0.85
+    selectionWeight: 0.56
+    damageMultipliers:
+      Blunt: 0.1
+      Slash: 0.275
+      Piercing: 0.4025
+      Heat: 0.15
+      Cold: 0.05
+      Shock: 0.25
+
+- type: entity
+  id: WFWolfmedOrganKidneys
+  abstract: true
+  components:
+  - type: WolfmedOrgan
+    health: 25
+    maxHealth: 25 # playtest 4: 15 fell to three capped hits; with wolfmed.organ_hit_cap 3 an organ takes nine
+    destructionWound: InternalBleedingWound
+    destructionWoundSeverity: 30
+  - type: OrganDamage
+    hitChance: 0.9
+    selectionWeight: 0.51
+    damageMultipliers:
+      Blunt: 0.1
+      Slash: 0.25
+      Piercing: 0.4025
+      Heat: 0.15
+      Cold: 0.05
+      Shock: 0.25
+
+# Machine organs (BRAIN). A positronic brain is a brain: destroying it kills the chassis through the same
+# OrganHealthSystem path a fleshy one uses. It carries no WolfmedBrain, so it runs no oxygenation clock.
+- type: entity
+  id: WFWolfmedOrganPositronicBrain
+  abstract: true
+  components:
+  - type: WolfmedOrgan
+    # Playtest 3: a chassis keeps its core in the torso, where a rifle round reaches it twice as hard as a human
+    # heart (two organs share the split, not five) and a heavy blade hits the 5-a-hit cap. At 15 a sabre killed in
+    # three hits; at 40 the core fails on the rifle round the human heart does (13) and a sabre needs eight.
+    health: 40
+    maxHealth: 40
+    hitCap: 2.5 # playtest 3: at the global 5 a turret's rifle rounds shut an IPC down on the fifth and killed it on the eighth
+  - type: OrganDamage
+    hitChance: 0.8
+    selectionWeight: 0.75
+    damageMultipliers:
+      Blunt: 0.115
+      Slash: 0.25
+      Piercing: 0.42
+      Heat: 0.15
+      Cold: 0.05
+      Shock: 0.3125
+
+# The micro pump is the chassis's heart: destroying it shuts the machine down rather than killing it.
+- type: entity
+  id: WFWolfmedOrganIpcPump
+  abstract: true
+  components:
+  - type: WolfmedOrgan
+    # M4 (plan §8.5): the pump cools the positronic core; under half health it cools at half the rate.
+    impairedCoolingFactor: 0.5
+    # Playtest 3: sized with the core; the pump fails on the rifle round the human lungs are gone (about 8).
+    health: 25
+    maxHealth: 25
+    hitCap: 2.5 # playtest 3: as the core
+  - type: OrganDamage
+    hitChance: 0.8
+    selectionWeight: 0.64
+    damageMultipliers:
+      Blunt: 0.1
+      Slash: 0.25
+      Piercing: 0.4
+      Heat: 0.15
+      Cold: 0.05
+      Shock: 0.3125

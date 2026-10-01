@@ -1,0 +1,294 @@
+<Document>
+
+# Wounds
+
+Blunt, slash, piercing, thermal, and electrical damage affects individual body parts. Suffocation, radiation, and other general conditions affect the whole body.
+
+A sufficiently strong individual hit creates a wound. Weak hits usually deal damage only. Later hits worsen an existing wound.
+
+An [bold]open[/bold] wound has its full effects. A [bold]stabilized[/bold] wound is treated but not healed. A [bold]closed[/bold] wound is physically sealed. Another strong hit can reopen it.
+
+## Examination
+
+The health analyzer lists damage, wounds, pain, bleeding, fractures, and organ condition for each part. Select an area on the targeting doll before treatment. Without a selection, treatment finds the most damaged compatible part.
+
+Looking somebody over is the other half of it. The health examine verb describes only what is actually visible: cuts, burns, bruising, a limb bent the wrong way, blood, and whatever is tied or stitched over the injury. It never gives a number, and it never sees under the skin, so internal bleeding, a hairline fracture, a bruised organ, a cut tendon and a mild concussion are analyzer findings and nothing else. Clothing hides everything on the skin under it from everyone except the patient, who can look under their own sleeve; gross deformity, a missing limb, a splint, a tourniquet, sparks, a leak and blood soaking through still show. From across the room only the worst of it carries. It reads as one row per hurt part, marked in the colour of the worst thing on it, with a pictogram and a couple of words for each finding; hold the cursor over one for the whole of what you can see.
+
+Body-part damage counts toward overall health. A wound is a separate result of a strong hit: a cut, burn, electrical injury, fracture, or structural defect. Damage can be removed while a wound and its effects remain.
+
+A badly wounded limb also shows it. Past a first threshold the skin opens onto muscle, and past a second onto bone; a chassis shows bare structure and then loose wiring. A necrotic limb darkens instead. Clothing hides all of it, so strip a patient before reading them by eye, and use an analyzer when you cannot.
+
+A treated limb shows that too: a dressed bleed wears a bandage, and a reduced fracture wears its splint until a fresh hard blow knocks it loose. Both disappear when the wound underneath is dealt with.
+
+Blood goes where it is thrown. A hard hit sprays it away from whatever caused it, onto the nearest wall or the deck, and an artery or an open stump keeps throwing it every few seconds until the bleeding is stopped. It is all space cleaner's problem afterwards - the janitor's spray and a mop of cleaner take blood off walls and floors alike.
+
+## Consciousness
+
+Damage totals no longer decide whether you live. Two things do: how much pain you are in and how much blood you have left, with a working pair of legs and a lungful of air beside them.
+
+[bold]Up[/bold] is normal. [bold]Downed[/bold] is on the floor and awake: going down knocks whatever you were holding out of your hands, but you can crawl, talk, use the radio, pick your things back up and use anything in your hands, pockets or belt on yourself - a medipen, a pill, gauze, a tourniquet, a splint. You cannot stand, swing at anything, fire a gun at all, drag anybody, or touch a door, a button or a container. Treating yourself on your back takes half again as long. A [bold]Downed[/bold] alert sits with your other alerts for as long as it lasts. Past that is [bold]unconscious[/bold], which is critical condition and is exactly what it always was.
+
+Pain puts you down at 70% of your pain ceiling and out past it; blood puts you down at 60% of your volume and out at 45%; both legs gone or useless puts you down; and suffocation still takes you out the way it always did. Coming back up takes the reading dropping a tenth below what put you down and a couple of seconds on the floor, so a bleeding patient does not flicker.
+
+Nothing here can kill you on its own. A lost fight leaves a wounded crewman on the deck for a medic to find, not a body.
+
+An execution is the exception. Anybody helpless, which includes anybody Downed, can be executed with a blade, a blunt weapon or a gun in hand, and the same verb on yourself is a suicide. You are asked to confirm first, and a weapon that cannot kill is turned away. It always kills, and the weapon decides what is left of the head. A knife or a light gun opens an artery. A heavier gun puts a hole through the head and throws the brain out of it. A shotgun, or any single round that hits as hard, destroys the head. A big blade takes it off whole. A blunt weapon cracks the skull, a heavier one caves it in, and a great hammer in both hands crushes the head. A laser burns instead of bleeding, and a heavy one burns the head to ash. The brain is never destroyed outright: put back by surgery, or given a new head to sit in, it is still a way back. The suicide command uses the weapon in your hand the same way.
+
+Poison, radiation, cold and heat are causes of their own. Poison in the blood puts you down past 60 and into a [bold]toxic coma[/bold] past 120, which starves the brain; your liver clears it slowly and antitoxin (dylovene) fast. Chems that damage tissue from inside, arithrazine and most overdoses, add to that poison rather than wounding you. Radiation past 80 puts you down; past 40 your marrow stops making blood and past 100 you lose it as well, so it kills the way blood loss does - anti-radiation drugs and blood. A core that cools well below normal puts you down, then out, then stops the heart, and the cold protects the brain while it is stopped: rewarm before the paddles. A core that runs hot gives [bold]heat exhaustion[/bold], then [bold]heat stroke[/bold], which damages the brain. Being on fire does not count until a while after the fire is out.
+
+## Effects
+
+Wounds progress through minor, moderate, severe, and critical stages. Pain, bleeding, and loss of limb function increase with severity.
+
+Internal bleeding leaves no puddles and is revealed by an analyzer. A fracture is separate from blunt damage and needs separate treatment. Damaged organs also require their own treatment.
+
+## Common trauma
+
+## Blunt wound
+
+The result of a strong blunt hit. It causes pain and may bleed slightly; severe stages impair the part, while critical stages disable it.
+
+## Slash wound
+
+An open wound caused by slash damage. It bleeds more reliably than a blunt wound, causes pain, and compromises part function at severe stages.
+
+## Piercing wound
+
+A deep puncture. It is usually more painful and bleeds more heavily than a slash wound; severe punctures impair or disable the part.
+
+## Graze
+
+A round that only caught the limb. It stings, bleeds briefly, and stops on its own.
+
+## Gunshot wound
+
+A round that went through. It bleeds well and is treated like any other open wound.
+
+## Lodged round
+
+A round that stayed in. It is a matter of luck: about one rifle-weight hit in three lodges, and one lighter hit in five. Once the round is out it is an ordinary gunshot wound. It keeps bleeding, never clots on its own, and refuses every treatment - sutures, gauze, and surgery alike - until the round is out.
+
+## Shrapnel wound
+
+Fragments from a blast or from buckshot, several at a time. It behaves like a lodged round: each fragment has to come out before the wound can be closed.
+  <Box>
+    <GuideEntityEmbed Entity="Hemostat"/>
+    <GuideEntityEmbed Entity="WFWolfmedSpentRound"/>
+    <GuideEntityEmbed Entity="WFWolfmedShrapnelFragment"/>
+  </Box>
+
+## Arterial bleed
+
+A very deep cut, or a very deep puncture, that opened an artery. It bleeds several times faster than any ordinary wound and never clots on its own. Gauze slows it and nothing more; a tourniquet on the limb stops it entirely while it is on, and a torso or head artery cannot be tied off at all. Nothing closes it while it is still pumping - stop the bleeding first, then suture it or repair it surgically.
+
+## Severed tendon
+
+A deep cut to a limb can sever a tendon. In an arm or a hand it makes everything that hand does slower; in a leg or a foot it leaves a limp. It does not bleed, and no amount of gauze, sutures or medicine mends it - only the tendon repair surgery does.
+
+## Avulsion
+
+A bite that tore tissue away rather than cutting it. It bleeds, scars almost every time, and is far more likely than an ordinary wound to go bad if left open.
+
+## Crush injury
+
+What a heavy blunt hit leaves instead of a bruise. It takes the place of the ordinary blunt wound, slows the limb it is on, and at its worst starts to seep. A blow hard enough to crush can also start bleeding inside the body, which no dressing will reach.
+
+## Concussion
+
+A hard knock to the head. It puts the patient on the floor for a moment, blurs their sight and, past a point, slurs their speech; another knock makes all three worse. No item cures it - painkillers only hide what it hurts. It fades on its own, and several times faster while the patient sleeps or lies buckled in a medical bed.
+
+## Dislocated joint
+
+An arm, hand, leg or foot wrenched out of its socket by a heavy swing, a throw or a bad landing. It costs the limb its use exactly as a fracture does. Nothing heals it, and bone gel is no use: someone has to set it by hand. Alt-click the patient and choose [bold]Relocate joint[/bold], with the limb selected on the targeting doll. Doing it to yourself works, but takes far longer and hurts twice as much.
+
+## Bruised organ
+
+A blow to the chest that reached something inside it. It never destroys the organ - it only takes some of its condition, which an analyzer will show. Treat the bruising like any other blunt wound; the organ itself recovers separately.
+
+## Burn wound
+
+The result of heat exposure, including a laser or plasma weapon. Its main danger is increasing pain, and it may scar suitable tissue. Heat also seals bleeding: a hit hot enough to burn closes whatever is bleeding on that part, at the cost of a deeper burn. See "Cauterisation" below.
+
+## Charred tissue
+
+What is left when a burn reaches its critical stage: the tissue there is dead. It carries no damage type at all, so no ointment, no mesh and no amount of damage healing reaches it, and it will not close on its own. Severe charring costs the limb its use and risks the tissue rotting. The only treatment is surgery - open the part, graft the dead tissue away with a skin graft, and seal it.
+
+## Frostbite
+
+The cold equivalent of a burn, and the reason a frozen limb stops complaining. Each stage takes more feeling out of the part: the patient reports less pain there than the injury deserves, so read the analyzer rather than the patient. At the deepest stage the tissue is frozen through and at risk. Treat it like any other burn damage; the numbness lifts once the wound does.
+
+## Chemical burn
+
+Acid that is still on the skin. It keeps eating the part every few seconds no matter how much of the damage is healed, and healing it does nothing about the residue. Wash the patient: a splash of water, a spray bottle, a fire extinguisher or a water puddle all rinse it off. Then treat the burn normally.
+
+## Internal burns
+
+Current takes the shortest path through the body and cooks what is in it. A strong shock leaves these in addition to the surface electrical wound, may damage the heart, and locks the patient's muscles for a moment - long enough to drop whatever they were holding.
+
+## Electrical wound
+
+A lasting consequence of a strong electrical discharge. It causes one-time pain; severe stages impair the part and critical stages disable it. It is treated separately from an ordinary burn.
+
+## Cauterisation
+
+Heat closes bleeding. Any hit hot enough - a laser, a fire, a lit welder swung as a weapon - seals the bleeding wounds on the part it lands on and adds a burn for each one. A nicked artery closes this way; a badly severed one does not.
+
+To do it on purpose, hold something hot, select the part on the targeting doll and use the [bold]Cauterise wound[/bold] verb on the patient. A deliberate cautery seals what a stray hit cannot, including a severed artery, and costs a much deeper burn and a great deal of pain. It is a field measure: surgery is cleaner.
+  <Box>
+    <GuideEntityEmbed Entity="Gauze"/>
+    <GuideEntityEmbed Entity="Bonesetter"/>
+    <GuideEntityEmbed Entity="Tourniquet"/>
+  </Box>
+
+## Time and contamination
+
+Two things happen to a wound that nobody treats, and neither of them needs another hit.
+
+## Infection
+
+An open wound goes bad only with a reason: it is open to the air outside a sealed suit (a hardsuit or EVA suit, or its helmet for the head), something dirty went into it, or it is dirty by nature: a bite, an open abdomen, a round or shrapnel left inside, dead tissue. A clean cut under a sealed suit holds, and a minor wound never goes bad from the air alone: a scratch or a small burn is safe, a minor bite is not. Some go bad far faster: a bite, a bullet hole, an open surgical site, or anything a knife has been dug around in. An infected wound hurts and keeps reopening faster than a dressing closes it. Left alone it spreads into the part itself; nothing the patient feels beyond the pain starts until it reaches the chest or the head. From there it travels towards the chest, no wound needed: a hand infects the arm, the arm the chest; a foot the leg, then the chest; the head the chest. Once it reaches the chest or the head it gets into the blood (sepsis), and septic shock puts the patient out.
+
+Dressing a wound early cuts the rate to a seventh of itself; suturing or cauterising it stops the clock outright. Antiseptic on the skin - ethanol, bleach or spaceacillin - drains an infection that is still local. Once it has spread, spaceacillin in the bloodstream is the only answer; it clears the wounds and the infected parts together. Taking off an infected limb takes its infection with it.
+
+## Sepsis
+
+The systemic stage. It shows on the patient's own alert bar rather than on any one part, grows while the chest or the head is infected, and kills if it is left alone. Its late stage is [bold]septic shock[/bold]: the alert gains a flashing red border, the patient goes grey and clammy and drops unconscious, and the organs start to fail. Nothing else about it kills: a patient found in shock is down, not dying, until the lungs go and the brain starves. Spaceacillin pulls it back; the source has to go too, or it simply climbs again.
+
+## Necrosis
+
+Tissue dies when the blood stops reaching it. A tourniquet left on for ten minutes does it, a limb frozen through or burned to charring does it, and a severed limb put back more than five minutes late is already dead when it goes on.
+
+Dead tissue is permanent. No reagent, topical or surgery reaches it, the limb works badly, and while it is attached it keeps infecting the body towards the chest, and so keeps the patient septic. Amputation and a replacement part are the only exit. A chassis cannot rot, and a tourniquet on a cybernetic limb starts no clock.
+
+## Mechanical trauma
+
+An IPC's chassis and a cybernetic limb take their own five wounds. None of them can appear on flesh, and none of the wounds above can appear on a chassis: a machine does not bruise, concuss, dislocate a joint, get infected or go necrotic. Ordinary chassis damage is still recorded alongside these, and is what an analyzer reports as the total.
+
+## Dent
+
+Blunt force on something that does not bruise. Cosmetic at first; a deep one slows the limb. A welder or a wrench takes it out.
+
+## Chassis breach
+
+A hole in the casing, leaking coolant and hydraulic fluid. It is the mechanical bleed, and it never clots - it runs until it is welded shut. A breach opened by a round or by shrapnel holds the object, and refuses every repair until that has been pulled out.
+
+## Short circuit
+
+Current where it should not be. Each time it lands or worsens the frame locks up for a moment and the part throws sparks. A cable coil repairs it.
+
+An EMP does this to every machine part it reaches: a cybernetic limb on an otherwise organic body takes the full surge, and a whole chassis shares one between its parts. Flesh is untouched.
+
+## Servo damage
+
+A cut actuator behind the panel: the mechanical equivalent of a severed tendon. In an arm or a hand it makes hand work slow, in a leg it leaves a limp. Welding the panel does nothing; the wiring has to be replaced with a cable coil.
+
+## Overheating
+
+A part running too hot to work properly. Nothing in a toolbox or a medkit reaches it. It cools on its own, faster in a cold room or under anything cold, and in one step if the machine is doused in water.
+  <Box>
+    <GuideEntityEmbed Entity="Wrench"/>
+    <GuideEntityEmbed Entity="CableApcStack"/>
+  </Box>
+
+## Special wounds
+
+## Fracture
+
+Separate bone damage ranging from a hairline crack to a comminuted fracture. It slows movement and hand work, more so the worse the break. Reduction weakens the penalty to a quarter; mending removes it entirely. A splint reduces a broken arm or leg on the spot, a bonesetter does it on the table, and only bone gel or a bone-knitting reagent mends. A fresh hard blow to the same limb undoes a reduction, whichever did it.
+
+## Surgical incision
+
+An intentional open wound used to access deep procedures. It bleeds, especially while the patient is awake, and may scar even when closed cleanly. It must be clamped and closed after work is complete.
+
+## Dismemberment wound
+
+A bleeding injury created when a part is lost. It represents the fresh severed surface and requires bleeding control, most quickly with a tourniquet.
+
+## Amputation consequence
+
+The state of an untreated stump. Ordinary damage healing does not remove it, and a stump left untreated hides the surgeries that would attach a new part to it - a torso stump hides the surgeries for the head, both arms, both legs, and hands; an arm or leg stump hides only that limb's hand or foot. A separate surgical procedure clears the stump before attachment becomes possible again.
+
+## Internal bleeding
+
+Blood loss into the body after destruction of a suitable organ. It produces no external puddle, appears on an analyzer, and is removed by a separate operation.
+
+## Medical scar
+
+A record of completed treatment. It deals no damage and causes no functional penalty by itself; it marks prior trauma on tissue capable of scarring, including a surgical incision closed without complication.
+
+## Dismemberment
+
+Dismemberment has two phases. Accumulated structural damage first leaves a limb ready to sever. A follow-up hit - blunt, slash, piercing, or a sufficiently strong laser - completes the amputation; a firearm or beam weapon can finish a limb just as a blade can. Repairing below the dangerous level removes this state.
+
+A missing part loses all of its functions. Its stump needs separate treatment; reducing overall damage does not replace that procedure.
+
+## Quick reference
+
+Wound - cause - danger - treatment.
+
+[bold]Blunt wound[/bold] - a solid blunt hit - pain, light bleeding - bruise pack.
+
+[bold]Slash wound[/bold] - a cut - steady bleeding - gauze, then sutures.
+
+[bold]Piercing wound[/bold] - a puncture - heavier bleeding - gauze, then sutures.
+
+[bold]Burn wound[/bold] - heat, cold or acid - mounting pain, scars - ointment or regenerative mesh.
+
+[bold]Electrical wound[/bold] - a strong shock - pain, then loss of limb use - ointment, or a cable coil on a chassis.
+
+[bold]Fracture[/bold] - repeated or heavy blunt force - slower movement and hand work - a splint in the field, or bonesetter then bone gel in surgery.
+
+[bold]Graze[/bold] - a round that only caught the limb - a brief bleed - gauze, or nothing at all.
+
+[bold]Gunshot wound[/bold] - a round that went through - good bleeding, high infection risk - gauze, then sutures.
+
+[bold]Lodged round[/bold] - a heavy round that stayed in - never clots, refuses all treatment - pull it out with a hemostat, then treat the wound.
+
+[bold]Shrapnel wound[/bold] - a blast or buckshot - several fragments, each blocking treatment - pull each one out, then treat the wound.
+
+[bold]Arterial bleed[/bold] - a very deep cut or puncture - bleeds several times faster than anything else - tourniquet or clamp first, then sutures or the artery repair surgery.
+
+[bold]Severed tendon[/bold] - a deep cut to a limb - slow hand work, or a limp - the tendon repair surgery.
+
+[bold]Avulsion[/bold] - a bite that tore tissue away - bleeding, scarring, high infection risk - gauze, then sutures.
+
+[bold]Crush injury[/bold] - a heavy blunt hit - slows the limb, may start internal bleeding - bruise pack; surgery for the internal bleed.
+
+[bold]Concussion[/bold] - a hard knock to the head - knockdown, blurred sight, slurred speech - time, four times faster asleep or in a medical bed.
+
+[bold]Dislocated joint[/bold] - a heavy swing, a throw or a bad landing - costs the limb its use - the Relocate joint verb.
+
+[bold]Bruised organ[/bold] - a blow to the chest - takes organ condition without destroying it - bruise pack; the organ heals separately.
+
+[bold]Charred tissue[/bold] - a burn at its critical stage - dead tissue, no limb use, rot risk - the skin graft surgery.
+
+[bold]Frostbite[/bold] - cold - numbs the part so the patient under-reports it - ointment or regenerative mesh.
+
+[bold]Chemical burn[/bold] - acid - keeps eating the part - wash the patient, then treat the burn.
+
+[bold]Internal burns[/bold] - a strong shock - heart damage, locked muscles - ointment or regenerative mesh.
+
+[bold]Infection[/bold] - an open wound left untreated and exposed, or dirty - pain, fever, then sepsis - antiseptic while local, spaceacillin once it spreads.
+
+[bold]Necrosis[/bold] - a tourniquet left on, a frozen or charred limb, a late reattachment - permanent dead tissue that keeps the patient septic - amputation and a replacement part.
+
+[bold]Dent[/bold] - blunt force on a chassis - cosmetic, then slows the limb - welder or wrench.
+
+[bold]Chassis breach[/bold] - a cut or puncture in a chassis - the mechanical bleed; it never clots - welder, once anything embedded is out.
+
+[bold]Short circuit[/bold] - a shock to a chassis - the frame locks up and throws sparks - cable coil.
+
+[bold]Servo damage[/bold] - a deep cut to a chassis limb - slow hand work, or a limp - the servo replacement surgery.
+
+[bold]Overheating[/bold] - heat on a chassis - the part runs too hot to work - time, cold, or a dousing in water.
+
+[bold]Internal bleeding[/bold] - a destroyed organ, or a crushing blow - invisible blood loss - surgery.
+
+[bold]Surgical incision[/bold] - an opened incision - bleeding and an infection risk - clamp and close it.
+
+[bold]Dismemberment wound[/bold] - a lost limb - fast bleeding from the stump - tourniquet, then surgery.
+
+[bold]Amputation consequence[/bold] - an untreated stump - hides the surgeries that attach a new part - the stump treatment surgery.
+
+[bold]Medical scar[/bold] - treatment that finished - none; it is a record - nothing.
+</Document>

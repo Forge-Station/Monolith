@@ -1,0 +1,156 @@
+# M1a: what each consciousness cause says to the patient (plan §5.1-5.2). The id is the WolfmedCause enum
+# name. `help` is the Downed form, `helpOut` the Critical one; the `Blocked` forms are shown while something
+# else also holds the body, so no text promises waking or standing while it cannot be true.
+
+- type: wolfmedConsciousnessCause
+  id: Pain
+  alertDowned: WFWolfmedDownedPain
+  alertDownedMechanical: WFWolfmedDownedFrame
+  blockerName: wolfmed-cause-pain
+  symptom: wolfmed-cause-pain-symptom
+  help: wolfmed-cause-pain-help
+  helpMechanical: wolfmed-cause-pain-help-mechanical
+  down: wolfmed-cause-pain-down
+  wake: wolfmed-cause-pain-wake
+  stand: wolfmed-cause-pain-stand
+  syntheticHudLine: wolfmed-synthetic-cause-pain
+
+- type: wolfmedConsciousnessCause
+  id: PainFaint
+  alertOut: WFWolfmedFaintPain
+  blockerName: wolfmed-cause-pain-faint
+  titleOut: wolfmed-cause-pain-faint-title
+  symptom: wolfmed-cause-pain-faint-symptom
+  helpOut: wolfmed-cause-pain-faint-help
+  helpOutBlocked: wolfmed-cause-pain-faint-help-blocked
+  helpOutTimed: wolfmed-cause-pain-faint-help-timed # M3: was hard-coded in the condition alert system
+  out: wolfmed-cause-pain-faint-out
+  cardColour: "#e3a33c" # playtest 3: amber, a timed faint
+
+- type: wolfmedConsciousnessCause
+  id: Blood
+  alertDowned: WFWolfmedDownedBlood
+  alertOut: WFWolfmedOutBlood
+  blockerName: wolfmed-cause-blood
+  symptom: wolfmed-cause-blood-symptom
+  help: wolfmed-cause-blood-help
+  helpOut: wolfmed-cause-blood-help-out
+  helpOutBlocked: wolfmed-cause-blood-help-out-blocked
+  down: wolfmed-cause-blood-down
+  out: wolfmed-cause-blood-out
+  wake: wolfmed-cause-blood-wake
+  stand: wolfmed-cause-blood-stand
+
+- type: wolfmedConsciousnessCause
+  id: Oil
+  alertDowned: WFWolfmedDownedOil
+  alertOut: WFWolfmedOutOil
+  blockerName: wolfmed-cause-oil
+  titleOut: wolfmed-cause-oil-title-out
+  symptom: wolfmed-cause-oil-symptom
+  help: wolfmed-cause-oil-help
+  helpOut: wolfmed-cause-oil-help-out
+  helpOutBlocked: wolfmed-cause-oil-help-out-blocked
+  down: wolfmed-cause-oil-down
+  out: wolfmed-cause-oil-out
+  wake: wolfmed-cause-oil-wake
+  stand: wolfmed-cause-oil-stand
+  syntheticHudLine: wolfmed-synthetic-cause-oil
+
+- type: wolfmedConsciousnessCause
+  id: Hypoxia
+  alertDowned: WFWolfmedDownedHypoxia
+  alertOut: WFWolfmedOutHypoxia
+  blockerName: wolfmed-cause-hypoxia
+  titleDowned: wolfmed-cause-hypoxia-title-downed
+  symptom: wolfmed-cause-hypoxia-symptom
+  help: wolfmed-cause-hypoxia-help
+  helpOut: wolfmed-cause-hypoxia-help-out
+  down: wolfmed-cause-hypoxia-down
+  out: wolfmed-cause-hypoxia-out
+  wake: wolfmed-cause-hypoxia-wake
+  stand: wolfmed-cause-hypoxia-stand
+  sources:
+    Airway: wolfmed-cause-hypoxia-source-airway
+    Lungs: wolfmed-cause-hypoxia-source-lungs
+    Circulation: wolfmed-cause-hypoxia-source-circulation
+    Sepsis: wolfmed-cause-hypoxia-source-sepsis
+    Sedation: wolfmed-cause-hypoxia-source-sedation
+    Toxin: wolfmed-cause-hypoxia-source-toxin # M5
+    Heat: wolfmed-cause-hypoxia-source-heat
+
+- type: wolfmedConsciousnessCause
+  id: Sedation
+  alertDowned: WFWolfmedDownedSedation
+  alertOut: WFWolfmedOutSedation
+  blockerName: wolfmed-cause-sedation
+  titleDowned: wolfmed-cause-sedation-title-downed
+  symptom: wolfmed-cause-sedation-symptom
+  help: wolfmed-cause-sedation-help
+  helpOut: wolfmed-cause-sedation-help-out
+  down: wolfmed-cause-sedation-down
+  out: wolfmed-cause-sedation-out
+  wake: wolfmed-cause-sedation-wake
+  stand: wolfmed-cause-sedation-stand
+  cardColour: "#4f86b8" # playtest 3: steel blue
+
+- type: wolfmedConsciousnessCause
+  id: Legs
+  alertDowned: WFWolfmedDownedLegs
+  blockerName: wolfmed-cause-legs
+  symptom: wolfmed-cause-legs-symptom
+  help: wolfmed-cause-legs-help
+  down: wolfmed-cause-legs-down
+  stand: wolfmed-cause-legs-stand
+  syntheticHudLine: wolfmed-synthetic-cause-legs
+
+- type: wolfmedConsciousnessCause
+  id: Crash
+  alertDowned: WFWolfmedDownedCrash
+  blockerName: wolfmed-cause-crash
+  symptom: wolfmed-cause-crash-symptom
+  help: wolfmed-cause-crash-help
+  down: wolfmed-cause-crash-down
+  stand: wolfmed-cause-crash-stand
+
+- type: wolfmedConsciousnessCause
+  id: Arrest
+  alertOut: WFWolfmedOutArrest
+  blockerName: wolfmed-cause-arrest
+  titleOut: wolfmed-cause-arrest-title
+  symptom: wolfmed-cause-arrest-symptom
+  helpOut: wolfmed-cause-arrest-help-out
+  out: wolfmed-cause-arrest-out
+  dying: true
+  cardColour: "#d0343c" # playtest 3: red while Dying
+  sources:
+    ArrestBlood: wolfmed-cause-arrest-source-blood
+    ArrestOxygen: wolfmed-cause-arrest-source-oxygen
+    ArrestHeart: wolfmed-cause-arrest-source-heart
+    ArrestSepsis: wolfmed-cause-arrest-source-sepsis
+    ArrestShock: wolfmed-cause-arrest-source-shock
+    ArrestOther: wolfmed-cause-arrest-source-other
+    ArrestCold: wolfmed-cause-arrest-source-cold # M5
+    ArrestToxin: wolfmed-cause-arrest-source-toxin
+    ArrestHeat: wolfmed-cause-arrest-source-heat
+
+- type: wolfmedConsciousnessCause
+  id: Shutdown
+  dying: true # Playtest 5: a shut-down chassis may let go; nothing runs out, but nobody may come
+  alertOut: WFWolfmedOutShutdown
+  blockerName: wolfmed-cause-shutdown
+  titleOut: wolfmed-cause-shutdown-title
+  symptom: wolfmed-cause-shutdown-symptom
+  helpOut: wolfmed-cause-shutdown-help-out
+  out: wolfmed-cause-shutdown-out
+  wake: wolfmed-cause-shutdown-wake
+  syntheticHudLine: wolfmed-synthetic-cause-shutdown
+  cardColour: "#8b9098" # playtest 3: grey
+  sources:
+    Power: wolfmed-cause-shutdown-source-power
+    Pump: wolfmed-cause-shutdown-source-pump
+
+# An outside pressure no cause claims (admin and test keys). Stock alerts, generic lines.
+- type: wolfmedConsciousnessCause
+  id: Other
+  blockerName: wolfmed-cause-other

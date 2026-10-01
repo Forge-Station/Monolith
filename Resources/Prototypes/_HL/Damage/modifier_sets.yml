@@ -2,6 +2,7 @@
 - type: damageModifierSet
   id: Synth
   coefficients:
+    Poison: 0 # WOLFGATE(Wolfmed): Wolfmed: OD16, a Synth is mechanical and takes no poison, like the IPC set
     Heat: 0.85
     Cold: 0.6
     Radiation: 0.8

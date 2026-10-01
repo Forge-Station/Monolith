@@ -1,0 +1,57 @@
+# What comes out of a wound (W1), and what goes back on (W4). All three reuse sprites already in the repo,
+# so no new art or attribution.
+
+- type: entity
+  parent: BaseItem
+  id: WFWolfmedSpentRound
+  name: spent round
+  description: A deformed bullet, dug out of someone. Still warm.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    state: base-spent
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
+  - type: StaticPrice
+    price: 0
+
+# The skin graft (W4). Not a topical: it is the surgery tool for the graft step, which is the only thing
+# that clears charring. Sprite and item data come from the regenerative mesh it sits beside in a medkit.
+- type: entity
+  parent: BaseItem
+  id: WFWolfmedSkinGraft
+  name: skin graft
+  description: A sheet of vat-grown skin in sterile backing. Laid over dead tissue, in surgery.
+  components:
+  - type: Sprite
+    sprite: _DV/Objects/Specific/medical.rsi
+    state: regenerative-mesh
+  - type: Item
+    size: Small
+    sprite: _DV/Objects/Specific/medical.rsi
+    heldPrefix: regenerative-mesh
+  - type: WolfmedSkinGraft
+  - type: StaticPrice
+    price: 40
+
+- type: entity
+  parent: BaseItem
+  id: WFWolfmedShrapnelFragment
+  name: shrapnel
+  description: A jagged sliver of metal. It was somewhere it should not have been.
+  components:
+  - type: Sprite
+    sprite: Objects/Materials/Shards/shrapnel.rsi
+    state: shrapnelsmall
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
+  - type: StaticPrice
+    price: 0

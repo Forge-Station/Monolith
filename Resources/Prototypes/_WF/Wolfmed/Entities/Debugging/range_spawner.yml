@@ -1,0 +1,16 @@
+# The range's species markers: player mobs are save: false, so the map carries one of these per species and the
+# generator writes the mob prototype into it. Spawns on map init and deletes itself.
+- type: entity
+  name: range spawner
+  id: WFWolfmedRangeSpawner
+  parent: MarkerBase
+  suffix: DEBUG, Wolfmed range
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: Mobs/Species/Human/parts.rsi
+      state: full
+  - type: RandomSpawner
+    offset: 0
+    deleteSpawnerAfterSpawn: true

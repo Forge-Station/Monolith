@@ -60,6 +60,17 @@
   parent:
   - WizardStaffMeleeRed
   components:
+  # WOLFGATE(Wolfmed) START: this staff cuts, so it speaks the throat lines its shovel parent replaced
+  - type: Execution
+    internalMeleeExecutionMessage: execution-popup-melee-initial-internal
+    externalMeleeExecutionMessage: execution-popup-melee-initial-external
+    completeInternalMeleeExecutionMessage: execution-popup-melee-complete-internal
+    completeExternalMeleeExecutionMessage: execution-popup-melee-complete-external
+    internalSelfExecutionMessage: execution-popup-self-initial-internal
+    externalSelfExecutionMessage: execution-popup-self-initial-external
+    completeInternalSelfExecutionMessage: execution-popup-self-complete-internal
+    completeExternalSelfExecutionMessage: execution-popup-self-complete-external
+  # WOLFGATE END
   - type: Sharp
   - type: MeleeWeapon
     wideAnimationRotation: -135

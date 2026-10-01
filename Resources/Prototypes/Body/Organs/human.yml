@@ -50,7 +50,7 @@
 
 - type: entity
   id: OrganHumanBrain
-  parent: BaseHumanOrganUnGibbable
+  parent: [BaseHumanOrganUnGibbable, WFWolfmedOrganBrain] # WOLFGATE(Wolfmed): WP11-2, D8: Wolfmed organ health + organ-damage policy
   name: brain
   description: "The source of incredible, unending intelligence. Honk."
   components:
@@ -102,7 +102,7 @@
 
 - type: entity
   id: OrganHumanEyes
-  parent: BaseHumanOrgan
+  parent: [BaseHumanOrgan, WFWolfmedOrganEyes] # WOLFGATE(Wolfmed): WP11-2, D8
   name: eyes
   description: "I see you!"
   components:
@@ -151,7 +151,7 @@
 
 - type: entity
   id: OrganHumanLungs
-  parent: BaseHumanOrgan
+  parent: [BaseHumanOrgan, WFWolfmedOrganLungs] # WOLFGATE(Wolfmed): WP11-2, D8
   name: lungs
   description: "Filters oxygen from an atmosphere, which is then sent into the bloodstream to be used as an electron carrier."
   components:
@@ -192,7 +192,7 @@
 
 - type: entity
   id: OrganHumanHeart
-  parent: BaseHumanOrgan
+  parent: [BaseHumanOrgan, WFWolfmedOrganHeart] # WOLFGATE(Wolfmed): WP11-2, D8
   name: heart
   description: "I feel bad for the heartless bastard who lost this."
   components:
@@ -220,7 +220,7 @@
 
 - type: entity
   id: OrganHumanStomach
-  parent: BaseHumanOrgan
+  parent: [BaseHumanOrgan, WFWolfmedOrganStomach] # WOLFGATE(Wolfmed): WP11-2, D8
   name: stomach
   description: "Gross. This is hard to stomach."
   components:
@@ -256,7 +256,7 @@
 
 - type: entity
   id: OrganHumanLiver
-  parent: BaseHumanOrgan
+  parent: [BaseHumanOrgan, WFWolfmedOrganLiver] # WOLFGATE(Wolfmed): WP11-2, D8
   name: liver
   description: "Pairing suggestion: chianti and fava beans."
   components:
@@ -279,7 +279,7 @@
 
 - type: entity
   id: OrganHumanKidneys
-  parent: BaseHumanOrgan
+  parent: [BaseHumanOrgan, WFWolfmedOrganKidneys] # WOLFGATE(Wolfmed): WP11-2, D8
   name: kidneys
   description: "Filters toxins from the bloodstream."
   components:

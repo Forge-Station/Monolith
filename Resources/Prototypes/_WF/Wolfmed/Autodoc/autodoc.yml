@@ -1,0 +1,305 @@
+- type: entity
+  parent: [BaseStructure, ConstructibleMachine]
+  id: WFMachineAutodoc
+  name: autodoc
+  description: A surgical pod running S.A.M., the Surgical Automation Module. It operates. It does not explain.
+  components:
+  # The bed is its own layer under the occupant; the lid is a second layer the visualizer raises over them.
+  - type: Sprite
+    sprite: _WF/Wolfmed/Structures/autodoc.rsi
+    drawdepth: BelowMobs
+    layers:
+    - state: open
+      map: [ "enum.AutodocVisualLayers.Base" ]
+    - state: closed
+      map: [ "enum.AutodocVisualLayers.Lid" ]
+      visible: false
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Transform
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Autodoc
+    tools:
+    - Scalpel
+    - Retractor
+    - Hemostat
+    - Cautery
+    - Saw
+    - Drill
+    - Bonesetter
+    - BoneGel
+    - WFWolfmedSkinGraft
+    - Welder
+    - Wrench
+    - Screwdriver
+    - CableApcStack
+    # M6: the core repair's re-flash step (WolfmedCoreProbe).
+    - Multitool
+    basePrograms:
+    - WFWolfmedAutodocProgramBase
+  # The pod scrubs its own tools: without this every step would poison the patient for unsterile surgery.
+  - type: Sanitized
+  # Playtest 3: the pod's own air. While sealed (an occupant under the lid, power, an intact hull, not emagged) the
+  # patient breathes and feels this mix, put back to these figures every time it is read; otherwise the room's.
+  - type: WolfmedAutodocAtmosphere
+    volume: 400
+    pressure: 101.325
+    temperature: 293.15
+    oxygen: 0.21
+    nitrogen: 0.79
+  # Crawling into a surgical pod is exactly what a Downed player needs to be able to do.
+  - type: WolfmedDownedReachable
+  # Playtest 4, IV: the blood reservoir. A Bloodpack stack in autodoc_blood is transfused as the occupant's own blood.
+  - type: WolfmedAutodocBlood
+  - type: WolfmedAutodocAntibiotic # Playtest 5: the antibiotic course
+  - type: ContainerContainer
+    containers:
+      # The occupant stays drawn: with the lid open they lie on the bed, with it closed the lid covers them.
+      autodoc_body: !type:ContainerSlot
+        showEnts: true
+      autodoc_tools: !type:Container
+      autodoc_tray: !type:ContainerSlot
+      autodoc_disk: !type:ContainerSlot
+      autodoc_module: !type:ContainerSlot
+      autodoc_autofix: !type:ContainerSlot
+      autodoc_beaker1: !type:ContainerSlot
+      autodoc_beaker2: !type:ContainerSlot
+      autodoc_beaker3: !type:ContainerSlot
+      autodoc_blood: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: ItemSlots
+    slots:
+      autodoc_tray:
+        name: wolfmed-autodoc-slot-tray
+        locked: true
+      autodoc_disk:
+        name: wolfmed-autodoc-slot-disk
+        whitelist:
+          components:
+          - AutodocProgramDisk
+      autodoc_module:
+        name: wolfmed-autodoc-slot-module
+        whitelist:
+          components:
+          - AutodocDefibModule
+      # Its own slot rather than a shared one: the cardiac module and the autofix module are worth having
+      # at the same time, and an autofix queue that starts with a shock is the whole point of triage.
+      autodoc_autofix:
+        name: wolfmed-autodoc-slot-autofix
+        whitelist:
+          components:
+          - AutodocAutofixModule
+      autodoc_beaker1:
+        name: wolfmed-autodoc-slot-beaker
+        whitelist:
+          components:
+          - FitsInDispenser
+          - DrainableSolution # WOLFGATE: bottles and jugs too, not only beakers.
+      autodoc_beaker2:
+        name: wolfmed-autodoc-slot-beaker
+        whitelist:
+          components:
+          - FitsInDispenser
+          - DrainableSolution # WOLFGATE: bottles and jugs too, not only beakers.
+      autodoc_beaker3:
+        name: wolfmed-autodoc-slot-beaker
+        whitelist:
+          components:
+          - FitsInDispenser
+          - DrainableSolution # WOLFGATE: bottles and jugs too, not only beakers.
+      autodoc_blood:
+        name: wolfmed-autodoc-slot-blood
+        whitelist:
+          tags:
+          - Bloodpack
+  - type: UserInterface
+    interfaces:
+      enum.AutodocUiKey.Key:
+        type: AutodocBoundUserInterface
+  - type: ActivatableUI
+    key: enum.AutodocUiKey.Key
+    requiresComplex: false
+  - type: ActivatableUIRequiresPower
+  - type: Machine
+    board: WFAutodocMachineCircuitboard
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    # Playtest 3: the hull is breached past this, between the fault line (faultDamage 60) and destruction, and outside
+    # air gets in until a welder brings the damage back under it (WolfmedAutodocAtmosphere).
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      # Pre-merge review: only what a player put in spills. The built-in tools stay in the frame, or a destroy and
+      # rebuild handed out a fresh surgical set every time.
+      - !type:EmptyContainersBehaviour
+        containers:
+        - autodoc_body
+        - autodoc_tray
+        - autodoc_disk
+        - autodoc_module
+        - autodoc_autofix
+        - autodoc_beaker1
+        - autodoc_beaker2
+        - autodoc_beaker3
+        - autodoc_blood
+        - machine_board
+        - machine_parts
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  # Playtest 3: a welder repairs the pod, which closes a breached hull. BaseStructure's Repairable takes only Mono's
+  # nanite applicator; the pod takes a welder as well, the way windows do.
+  - type: Repairable
+    doAfterDelay: 5
+    qualities:
+    - Welding
+    - Applicating
+  - type: ApcPowerReceiver
+    powerLoad: 2500
+  - type: ExtensionCableReceiver
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - autodoc_body
+    - autodoc_tray
+    - autodoc_disk
+    - autodoc_module
+    - autodoc_autofix
+    - autodoc_beaker1
+    - autodoc_beaker2
+    - autodoc_beaker3
+    - autodoc_blood
+  - type: StaticPrice
+    price: 2500
+  - type: GuideHelp
+    guides:
+    - WFWolfmedAutodoc
+
+- type: entity
+  id: WFAutodocMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: autodoc machine board
+  description: A machine printed circuit board for an autodoc.
+  components:
+  - type: Sprite
+    state: medical
+  - type: MachineBoard
+    prototype: WFMachineAutodoc
+    requirements:
+      Manipulator: 2
+      MatterBin: 2
+      Capacitor: 1
+    stackRequirements:
+      Glass: 5
+      Cable: 2
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: WFBaseAutodocProgramDisk
+  name: autodoc program disk
+  description: A surgical program for an autodoc. S.A.M. reads it once and remembers.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Research/researchdisk.rsi
+    state: icon
+  - type: StaticPrice
+    price: 400
+
+- type: entity
+  parent: WFBaseAutodocProgramDisk
+  id: WFAutodocProgramDiskTransplant
+  name: autodoc program disk (transplant)
+  description: Organ removal and insertion, for an autodoc.
+  components:
+  - type: Sprite
+    color: "#b34b4b"
+  - type: AutodocProgramDisk
+    program: WFWolfmedAutodocProgramTransplant
+
+- type: entity
+  parent: WFBaseAutodocProgramDisk
+  id: WFAutodocProgramDiskLimb
+  name: autodoc program disk (limb)
+  description: Limb attachment and reattachment, for an autodoc.
+  components:
+  - type: Sprite
+    color: "#4b8ab3"
+  - type: AutodocProgramDisk
+    program: WFWolfmedAutodocProgramLimb
+
+- type: entity
+  parent: WFBaseAutodocProgramDisk
+  id: WFAutodocProgramDiskNeuro
+  name: autodoc program disk (neuro)
+  description: Brain, eye and head surgery, for an autodoc.
+  components:
+  - type: Sprite
+    color: "#9a6fb0"
+  - type: AutodocProgramDisk
+    program: WFWolfmedAutodocProgramNeuro
+
+- type: entity
+  parent: WFBaseAutodocProgramDisk
+  id: WFAutodocProgramDiskCavity
+  name: autodoc program disk (cavity)
+  description: Cavity implantation and removal, for an autodoc.
+  components:
+  - type: Sprite
+    color: "#b09a4b"
+  - type: AutodocProgramDisk
+    program: WFWolfmedAutodocProgramCavity
+
+- type: entity
+  parent: BaseItem
+  id: WFAutodocDefibModule
+  name: autodoc defibrillator module
+  description: A cardiac module for an autodoc. With one installed the pod will shock a patient whose heart has stopped.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/defib.rsi
+    state: icon
+  - type: AutodocDefibModule
+  - type: StaticPrice
+    price: 600
+
+- type: entity
+  parent: BaseItem
+  id: WFAutodocAutofixModule
+  name: autodoc autofix module
+  description: A triage module for an autodoc. With one installed the pod decides for itself what a patient needs, and does it.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Research/researchdisk.rsi
+    state: icon
+    color: "#6fd6ff"
+  - type: AutodocAutofixModule
+  - type: StaticPrice
+    price: 600

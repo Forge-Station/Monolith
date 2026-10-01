@@ -1,0 +1,158 @@
+# Wolfmed wound, dismemberment and interaction audio (V124). Every file here already ships with the
+# repo; the collections exist so the whole feedback layer can be re-pointed at other audio by editing
+# this one file, without touching a system or a wound prototype.
+
+# --- Wounds by cause (V1) ---------------------------------------------------------------------------
+
+# Something tears flesh: slashes, bites, avulsions.
+- type: soundCollection
+  id: WFWolfmedWoundFlesh
+  files:
+  - /Audio/Weapons/bladeslice.ogg
+  - /Audio/Weapons/Xeno/alien_claw_flesh1.ogg
+  - /Audio/Weapons/Xeno/alien_claw_flesh2.ogg
+  - /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+  # Playtest 4: Bleeding/blood1-3 were NovaSector's slash-wound sounds. The owner's Bobstation drips replaced them
+  # under the same names (WFWolfmedBloodDrip), and a drip is not a cut, so they left this collection.
+
+# Something punches through it: gunshots, shrapnel, stabs.
+- type: soundCollection
+  id: WFWolfmedWoundPierce
+  files:
+  - /Audio/Weapons/Guns/Hits/bullet_meat1.ogg
+  - /Audio/Weapons/Guns/Hits/bullet_meat2.ogg
+  - /Audio/Weapons/Guns/Hits/bullet_meat3.ogg
+  - /Audio/Weapons/Guns/Hits/bullet_meat4.ogg
+
+# A heavy dull hit: bruises, crush injuries, contusions.
+- type: soundCollection
+  id: WFWolfmedWoundBlunt
+  files:
+  - /Audio/Effects/hit_kick.ogg
+  - /Audio/Weapons/genhit1.ogg
+  - /Audio/Weapons/genhit2.ogg
+  - /Audio/Weapons/genhit3.ogg
+
+# A bone going. Fractures and dislocations.
+- type: soundCollection
+  id: WFWolfmedWoundBone
+  files:
+  - /Audio/Effects/snap.ogg
+  - /Audio/Effects/chopstickbreak.ogg
+  - /Audio/Weapons/Guns/Hits/snap.ogg
+
+# Heat on skin: burns, charring, cauterisation, chemical burns.
+- type: soundCollection
+  id: WFWolfmedWoundBurn
+  files:
+  - /Audio/Effects/sizzle.ogg
+  - /Audio/Effects/lightburn.ogg
+
+# Current going somewhere it should not.
+- type: soundCollection
+  id: WFWolfmedWoundShock
+  files:
+  - /Audio/Effects/sparks1.ogg
+  - /Audio/Effects/sparks2.ogg
+  - /Audio/Effects/sparks3.ogg
+  - /Audio/Effects/sparks4.ogg
+
+# A chassis taking a hit. Dents, breaches, servo damage.
+- type: soundCollection
+  id: WFWolfmedWoundChassis
+  files:
+  - /Audio/_WF/Weapons/Impacts/impact_metal_03.ogg
+  - /Audio/_WF/Weapons/Impacts/impact_metal_07.ogg
+  - /Audio/_WF/Weapons/Impacts/impact_metal_11.ogg
+  - /Audio/_WF/Weapons/Impacts/impact_metal_15.ogg
+
+# A structural member in a chassis giving way: the mechanical fracture.
+- type: soundCollection
+  id: WFWolfmedWoundFrame
+  files:
+  - /Audio/Effects/metal_crunch.ogg
+  - /Audio/Effects/metal_break1.ogg
+  - /Audio/Effects/metal_break3.ogg
+
+# --- Dismemberment (V2) -----------------------------------------------------------------------------
+
+- type: soundCollection
+  id: WFWolfmedDismemberOrganic
+  files:
+  - /Audio/Effects/gib1.ogg
+  - /Audio/Effects/gib2.ogg
+  - /Audio/Effects/gib3.ogg
+
+- type: soundCollection
+  id: WFWolfmedDismemberMechanical
+  files:
+  - /Audio/Effects/metal_break2.ogg
+  - /Audio/Effects/metal_break4.ogg
+  - /Audio/Effects/metal_scrape1.ogg
+  - /Audio/Effects/metal_scrape3.ogg
+
+# --- Interactions (the five do-afters phase 8 left silent) ------------------------------------------
+
+- type: soundCollection
+  id: WFWolfmedToolProbe
+  files:
+  - /Audio/_Shitmed/Medical/Surgery/hemostat1.ogg
+  - /Audio/_Shitmed/Medical/Surgery/retractor1.ogg
+
+- type: soundCollection
+  id: WFWolfmedToolExtract
+  files:
+  - /Audio/Effects/Fluids/splat.ogg
+
+- type: soundCollection
+  id: WFWolfmedJointStrain
+  files:
+  - /Audio/Effects/thudswoosh.ogg
+
+- type: soundCollection
+  id: WFWolfmedCauteryBegin
+  files:
+  - /Audio/_Shitmed/Medical/Surgery/cautery1.ogg
+  - /Audio/_Shitmed/Medical/Surgery/cautery2.ogg
+
+- type: soundCollection
+  id: WFWolfmedClothUnwrap
+  files:
+  - /Audio/Effects/unwrap.ogg
+  - /Audio/Items/Handcuffs/rope_takeoff.ogg
+
+- type: soundCollection
+  id: WFWolfmedPanelBeat
+  files:
+  - /Audio/Effects/metal_thud1.ogg
+  - /Audio/Effects/metal_thud2.ogg
+  - /Audio/Effects/metal_thud3.ogg
+
+# --- Bleeding out (G2) ------------------------------------------------------------------------------
+
+# A wound throwing blood through the skin. New files, imported with the splatter art.
+- type: soundCollection
+  id: WFWolfmedBleedSpurt
+  files:
+  # Wet sounds only. Bleeding/blood1-6 are the light-bleed drips (WFWolfmedBloodDrip).
+  - /Audio/_WF/Wolfmed/Bleeding/splatter.ogg
+  # Playtest 4: the owner's arterial sprays alongside the splatter.
+  - /Audio/_WF/Wolfmed/Bleeding/artery3.ogg
+
+# An open stump, which is wetter and comes with the bone.
+- type: soundCollection
+  id: WFWolfmedBleedStump
+  files:
+  - /Audio/_WF/Wolfmed/Bleeding/splatter.ogg
+  - /Audio/_WF/Wolfmed/Bleeding/artery3.ogg
+  - /Audio/_WF/Wolfmed/Bleeding/crackandbleed.ogg
+  - /Audio/Effects/Fluids/splat.ogg
+
+# A chassis losing fluid: pressure escaping, nothing wet.
+- type: soundCollection
+  id: WFWolfmedLeakHiss
+  files:
+  - /Audio/Items/hiss.ogg
+  - /Audio/Effects/spray.ogg
+  - /Audio/Effects/spray3.ogg
+

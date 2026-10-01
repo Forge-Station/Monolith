@@ -39,7 +39,7 @@
 
 - type: entity
   id: OrganSkrellLungs
-  parent: BaseHumanOrgan
+  parent: [BaseHumanOrgan, WFWolfmedOrganLungs] # WOLFGATE(Wolfmed): M4: OD16 parity, Wolfmed lung data (plan 9.2 group C)
   name: lungs
   description: "These used to be not needed as much in the not-too-distant past where gills were more relied on instead."
   components:
@@ -86,7 +86,7 @@
 
 - type: entity
   id: OrganSkrellHeart
-  parent: BaseArachnidOrgan
+  parent: [BaseArachnidOrgan, WFWolfmedOrganHeart] # WOLFGATE(Wolfmed): M4: OD16 parity, Wolfmed heart data (plan 9.2 group C)
   name: heart
   description: "A squishy little biological pump for amphibians."
   components:
@@ -172,7 +172,7 @@
 
 - type: entity
   id: OrganSkrellBrain
-  parent: BaseHumanOrganUnGibbable
+  parent: [BaseHumanOrganUnGibbable, WFWolfmedOrganBrain] # WOLFGATE(Wolfmed): M4: OD16 parity, brain clock (plan 9.2 group C)
   name: brain
   description: "The source of incredible, unending intelligence. Ribbit."
   components:

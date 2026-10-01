@@ -181,3 +181,7 @@
     - type: Stasis
       enterStasisAction: ActionStasisEnter
       exitStasisAction: ActionStasisExit
+      # WOLFGATE(Wolfmed) START: the Starlight teleport sound never shipped here, and the client logged an error every stasis.
+      stasisEnterSound: /Audio/Effects/teleport_departure.ogg
+      stasisExitSound: /Audio/Effects/teleport_arrival.ogg
+      # WOLFGATE END

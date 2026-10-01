@@ -627,6 +627,11 @@
   id: BaseMobProtoKin
   abstract: true
   components:
+    # WOLFGATE(Wolfmed): M4, OD16: a wound host, so Wolfmed decides its state (plan 9.2 group D). Not reparented to
+    # BaseMobSpeciesOrganic: that would add a respirator to a species with no lungs. LayingDown for the crawl.
+    - type: WoundHost
+    - type: PainShockTarget
+    - type: LayingDown
     - type: Repairable # So welder is just a special little snowflake in the code. I tried making healing with welder work through ConditionalHealing component, but it would require too many changes in too many places. So we will keep on the trend and have brute healing defined here. /shrug
       doAfterDelay: 1 # Faster than normal so using welding to heal isn't absolute ass for protogens
       allowSelfRepair: true
@@ -721,15 +726,22 @@
       allowedStates:
         - Alive
       damageCap: 20
-      damage:
-        groups:
-          Brute: -0.07
-          Burn: -0.07
+      # WOLFGATE(Wolfmed) START: M4, D29: passive regen is neutralised on a wound host, as BaseMobSpeciesOrganic's is.
+      # damage:
+      #   groups:
+      #     Brute: -0.07
+      #     Burn: -0.07
+      damage: {}
+      # WOLFGATE END
+    # WOLFGATE(Wolfmed) START: M4, D22, OD12: the Blunt gib moves to 1500 and the Heat body ash is removed.
+    # As for the Shadekin (shadekin.yml): a wound host's body damage is the sum of its parts, so Blunt 400 was
+    # reachable from routine limb damage, and the Heat 1500 body ash would ash the body in a long fire (OD12).
     - type: Destructible
       thresholds:
         - trigger: !type:DamageTypeTrigger
             damageType: Blunt
-            damage: 400
+            # damage: 400
+            damage: 1500
           behaviors:
             - !type:GibBehavior {}
             - !type:SpawnEntitiesBehavior
@@ -737,20 +749,21 @@
                 ShadekinShadow:
                   min: 1
                   max: 1
-        - trigger: !type:DamageTypeTrigger
-            damageType: Heat
-            damage: 1500
-          behaviors:
-            - !type:SpawnEntitiesBehavior
-              spawnInContainer: true
-              spawn:
-                Ash:
-                  min: 1
-                  max: 1
-                ShadekinShadow:
-                  min: 1
-                  max: 1
-            - !type:BurnBodyBehavior {}
+        # - trigger: !type:DamageTypeTrigger
+        #     damageType: Heat
+        #     damage: 1500
+        #   behaviors:
+        #     - !type:SpawnEntitiesBehavior
+        #       spawnInContainer: true
+        #       spawn:
+        #         Ash:
+        #           min: 1
+        #           max: 1
+        #         ShadekinShadow:
+        #           min: 1
+        #           max: 1
+        #     - !type:BurnBodyBehavior {}
+    # WOLFGATE END
 
     - type: Barotrauma
       damage:

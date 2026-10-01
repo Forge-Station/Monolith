@@ -1,0 +1,208 @@
+# Burn wounds (W4). All four are `ruleOnly` except the charring, which is created by
+# WolfmedCharringSystem off the burn's top stage rather than by a hit; the default per-damage-type pass
+# never makes any of them.
+#
+# Onyx ships one BurnWound for Heat, Cold and Caustic together. These split the three apart: cold freezes
+# and numbs, caustic keeps eating until it is washed off, and the burn itself is what chars.
+
+# Dead tissue. No damage types at all, so no ointment, no mesh, no reagent and no amount of damage removal
+# reaches it: it comes off in surgery and is replaced with a graft. Created by WolfmedCharringSystem when
+# a burn crosses into its critical stage, so the threshold is that stage's severity, not a number here.
+- type: wound
+  id: WFWolfmedCharringWound
+  name: wolfmed-wound-name-charring
+  analyzerCategory: Burn
+  ruleOnly: true
+  damageTypes: {}
+  maximumSeverity: 120
+  healingMultiplier: 0
+  behaviors:
+  - !type:WoundPainBehavior
+    painPerSeverity: 1
+    minSeverity: 3
+  - !type:WolfmedInfectionRiskBehavior
+    riskMultiplier: 2
+  - !type:WoundScarBehavior
+    threshold: 4
+    chance: 1
+  # M1b: dead skin weeps like the burn that made it (OD11); a graft is what stops it.
+  - !type:WolfmedFluidLossBehavior
+    from: 0
+    perSeverity: 0.0008
+  stages:
+    Moderate:
+      name: wound-stage-moderate
+      severity: 0
+    Severe:
+      name: wound-stage-severe
+      severity: 40
+      behaviors:
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.8
+        manipulationModifier: 1.3
+    Critical:
+      name: wound-stage-critical
+      severity: 80
+      behaviors:
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.65
+        manipulationModifier: 1.6
+      # Dead tissue that deep is on its way out whether or not it is infected. W5's timer reads this.
+      - !type:WolfmedNecrosisRiskBehavior
+        riskMultiplier: 1
+        onset: 480
+
+# Frozen tissue. Replaces the burn wound for cold: the damage is the same, what it does to the patient is
+# not. Each stage takes more feeling out of the part (WolfmedFrostbiteSystem pins the suppression there),
+# and the deepest one flags the part for W5's necrosis timer.
+- type: wound
+  id: WFWolfmedFrostbiteWound
+  name: wolfmed-wound-name-frostbite
+  analyzerCategory: Burn
+  ruleOnly: true
+  damageTypes:
+    Cold:
+      reopenMinimumDamage: 15
+      severityMultiplier: 1
+  maximumSeverity: 160
+  healingMultiplier: 0.15
+  behaviors:
+  # On the base behaviors, not only on a stage: the lifecycle filter matches at any severity this way,
+  # including the zero a removal reports.
+  - !type:WolfmedNumbnessBehavior
+    suppression: 4
+    decay: 20
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.5
+    minSeverity: 4
+  - !type:WoundScarBehavior
+    threshold: 25
+    chance: 1
+  stages:
+    Minor:
+      name: wound-stage-minor
+      severity: 0
+    Moderate:
+      name: wound-stage-moderate
+      severity: 25
+      behaviors:
+      - !type:WolfmedNumbnessBehavior
+        suppression: 12
+        decay: 30
+    Severe:
+      name: wound-stage-severe
+      severity: 50
+      behaviors:
+      - !type:WolfmedNumbnessBehavior
+        suppression: 22
+        decay: 45
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.8
+        manipulationModifier: 1.3
+    Critical:
+      name: wound-stage-critical
+      severity: 80
+      behaviors:
+      - !type:WolfmedNumbnessBehavior
+        suppression: 35
+        decay: 60
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.6
+        manipulationModifier: 1.7
+      # Frozen through. W5 reads this off WolfmedFrostbiteComponent on the part.
+      - !type:WolfmedNecrosisRiskBehavior
+        riskMultiplier: 1.5
+        onset: 300
+
+# Acid that is still on the skin. Replaces the burn wound for caustic. The residue behavior is what makes
+# it different from every other wound in the system: it keeps taking damage on a tick of its own until the
+# patient is rinsed off, and healing the burn does nothing about that.
+- type: wound
+  id: WFWolfmedChemicalBurnWound
+  name: wolfmed-wound-name-chemical-burn
+  analyzerCategory: Burn
+  ruleOnly: true
+  damageTypes:
+    Caustic:
+      reopenMinimumDamage: 12
+      severityMultiplier: 1
+  maximumSeverity: 160
+  healingMultiplier: 0.15
+  behaviors:
+  # M5 (P21): what the residue deals deepens this wound and nothing else (WolfmedChemicalBurnSystem.ResidueTarget):
+  # never a second chemical burn, and never the plain burn it used to grow. Its stages bite harder as it deepens.
+  - !type:WolfmedCausticResidueBehavior
+    damage:
+      types:
+        Caustic: 1
+    interval: 4
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.9
+    minSeverity: 4
+  - !type:WolfmedInfectionRiskBehavior
+    riskMultiplier: 1.5
+  - !type:WoundScarBehavior
+    threshold: 20
+    chance: 1
+  stages:
+    Minor:
+      name: wound-stage-minor
+      severity: 0
+    Moderate:
+      name: wound-stage-moderate
+      severity: 25
+      behaviors:
+      - !type:WolfmedCausticResidueBehavior
+        damage:
+          types:
+            Caustic: 2
+        interval: 4
+    Severe:
+      name: wound-stage-severe
+      severity: 50
+      behaviors:
+      - !type:WolfmedCausticResidueBehavior
+        damage:
+          types:
+            Caustic: 3
+        interval: 3
+
+# Burns where the current went, not where it touched. Added on top of Onyx's ElectricalWound rather than
+# replacing it: the surface mark and the damage inside are separate findings. WolfmedElectricalBurnSystem
+# locks the patient's muscles each time this lands or worsens. M3 (OD15): the heart takes a band on each hit's
+# Shock (wolfmed.electric_heart_factor over wolfmed.electric_heart_from) instead of a roll per stage.
+- type: wound
+  id: WFWolfmedInternalBurnWound
+  name: wolfmed-wound-name-internal-burn
+  analyzerCategory: Internal
+  ruleOnly: true
+  damageTypes:
+    Shock:
+      reopenMinimumDamage: 20
+      severityMultiplier: 1
+  maximumSeverity: 120
+  healingMultiplier: 0.15
+  behaviors:
+  - !type:WolfmedElectricalShockBehavior
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.8
+    minSeverity: 3
+  stages:
+    Minor:
+      name: wound-stage-minor
+      severity: 0
+    Moderate:
+      name: wound-stage-moderate
+      severity: 25
+      behaviors:
+      - !type:WolfmedElectricalShockBehavior
+        spasm: 2
+    Severe:
+      name: wound-stage-severe
+      severity: 50
+      behaviors:
+      - !type:WolfmedElectricalShockBehavior
+        spasm: 3
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.8
+        manipulationModifier: 1.3

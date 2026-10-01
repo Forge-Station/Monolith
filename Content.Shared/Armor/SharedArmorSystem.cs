@@ -41,6 +41,8 @@ public abstract partial class SharedArmorSystem : EntitySystem
 
     private void OnDamageModify(EntityUid uid, ArmorComponent component, InventoryRelayedEvent<DamageModifyEvent> args)
     {
+        if (TryApplyWoundHostArmor(uid, component, args)) return; // WOLFGATE(Wolfmed): HOOK 10
+
         args.Args.Damage = DamageSpecifier.ApplyModifierSet(args.Args.Damage,
             DamageSpecifier.PenetrateArmor(component.Modifiers, args.Args.ArmorPenetration)); // Goob edit
     }

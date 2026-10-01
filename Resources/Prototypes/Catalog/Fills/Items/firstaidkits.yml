@@ -9,6 +9,13 @@
       - id: Brutepack
       - id: Ointment
       - id: Gauze
+      # WOLFGATE(Wolfmed) START: ITEMS: the standard kit's tourniquet, splint and painkillers in a bottle; playtest 5, a suture.
+      # Fourteen of Medkit's fourteen cells with the tricordrazine; WolfmedAvailabilityTest spawns the kit.
+      - id: Tourniquet
+      - id: WFWolfmedSplint
+      - id: WFWolfmedSuture
+      - id: WFWolfmedAnalgesicPillCanister
+      # WOLFGATE END
       - id: PillCanisterTricordrazine
       # see https://github.com/tgstation/blob/master/code/game/objects/items/storage/firstaid.dm for example contents
 
@@ -23,6 +30,9 @@
         amount: 2
       - id: PillCanisterKelotane
       - id: PillCanisterDermaline
+      # WOLFGATE(Wolfmed): W7: charring is a burn and nothing else in this kit reaches it.
+      # Eight of fourteen cells - WolfmedAvailabilityTest spawns the kit so an overflow fails a test, not a round.
+      - id: WFWolfmedSkinGraft
 
 - type: entity
   id: MedkitBruteFilled
@@ -35,6 +45,14 @@
       - id: Gauze
       - id: PillCanisterIron
       - id: PillCanisterCopper
+      # WOLFGATE(Wolfmed): V5: bones break from blunt force, which is what this kit is for.
+      # Thirteen of fourteen cells - WolfmedAvailabilityTest spawns the kit so an overflow fails a test, not a round.
+      - id: WFWolfmedSplint
+      - id: WFWolfmedOsteogenPillCanister # WOLFGATE(Wolfmed): ITEMS: knits the simple break the splint holds.
+      # WOLFGATE(Wolfmed) START: playtest 5: the trauma kit stops a bleed too.
+      - id: Tourniquet
+      - id: WFWolfmedSuture
+      # WOLFGATE END
 
 - type: entity
   id: MedkitToxinFilled
@@ -85,6 +103,15 @@
       - id: RegenerativeMesh
       - id: Bloodpack
         amount: 2
+      # WOLFGATE(Wolfmed): PROTO E, P4-2: the tourniquet is back now that Medkit's grid is 6x2 (ITEMS).
+      # WP12-9 withdrew it when the 4x2 grid overflowed. WolfmedAvailabilityTest spawns the kit.
+      - id: Tourniquet
+      # WOLFGATE(Wolfmed) START: playtest 5: ahead of the standard kit, a splint, an epinephrine pen and a painkiller
+      # a downed patient can take at once. Fourteen of fourteen cells.
+      - id: WFWolfmedSplint
+      - id: EmergencyMedipen
+      - id: WFWolfmedAnalgesicPen
+      # WOLFGATE END
 
 - type: entity
   id: MedkitCombatFilled
@@ -99,6 +126,11 @@
       - id: SyringeSaline
       - id: BruteAutoInjector
       - id: BurnAutoInjector
+      # WOLFGATE(Wolfmed) START: playtest 5: the combat kit had no tourniquet. Thirteen of its fourteen cells.
+      - id: Tourniquet
+      - id: WFWolfmedSplint
+      - id: EmergencyMedipen
+      # WOLFGATE END
 
 - type: entity
   id: StimkitFilled

@@ -1,0 +1,132 @@
+# Wolfmed per-species part data (P5-1). Values are Onyx's:
+#   Slime  - ONYX Resources/Prototypes/Body/Species/slime.yml:232-239  (OrganSlimePersonExternal)
+#   Plant  - ONYX Resources/Prototypes/Body/Species/diona.yml:226-235  (OrganDionaExternal)
+#   Ipc    - ONYX Resources/Prototypes/Corvax/Body/Species/ipc.yml:322-330 (OrganIpcExternal)
+#   Cyber  - ONYX Resources/Prototypes/_Onyx/Entities/Mobs/Customization/Parts/cybernetic.yml:1-21
+#
+# Same shape as _WF/Wolfmed/Body/parts.yml: separate abstract ids, not redeclarations of the existing
+# species part bases - RT throws "Duplicate ID" on redeclaration. These get added to the corresponding
+# species part base's `parent:` list (FIRST in that list) by a later package's one-line `# WOLFGATE` edits
+# to Resources/Prototypes/Body/Parts/{slime,diona}.yml, _EinsteinEngines/Body/Parts/ipc.yml and
+# _Shitmed/Body/Parts/cybernetic.yml. RT folds multiple parents in list order onto an accumulating node and
+# never overwrites a key already present in that node unless the field is InheritanceBehavior.Always
+# (SerializationManager.Composition.cs:40-58 and :178-206) - so these MUST be FIRST in the species base's
+# parent list to beat Base<Slot>'s WolfmedBodyPart block.
+#
+# NOTE: the phase-1 files put the Wolfmed abstract LAST (Body/Parts/base.yml:137,
+# _Shitmed/Body/Parts/base.yml:47). That worked only because those parents declare no WolfmedBodyPart.
+# Do not "normalise" this file to match them.
+#
+# D8: Onyx's `- type: BodyPart / fractureProfile:` is Wolfgate's `- type: WolfmedBodyPart`.
+# P5-D3: none of these profiles sets circulatoryStream - doing so silently zeroes the species' bleeding.
+# P5-D7: no amputationThresholds key on Ipc/Cybernetic, so Base<Slot>'s organic P3 set is inherited.
+#
+# Defined in WP13-0; wired into the species part bases by WP13-1 (PROTO M/N/O/P) - each of the four is
+# now the FIRST entry of PartSlime's, PartDiona's, PartIPCBase's and CyberneticPartBase's parent list.
+
+- type: entity
+  id: WFWolfmedPartSlime
+  abstract: true
+  components:
+  # WOLFGATE (WP13-1): the `wounds` container is declared statically because these abstracts declare
+  # `- type: Woundable`, and WoundSystem.OnWoundableInit EnsureContainer's it on ComponentInit
+  # (WoundSystem.cs:60-63) - i.e. at spawn, not at body setup. Without the declaration every IPC, slime,
+  # diona and cybernetic part fails PrototypeSaveTest.UninitializedSaveTest with "modifies component on
+  # spawn: ContainerContainer". `containers` is a plain non-Always DataField, so this mapping REPLACES
+  # BasePartInorganic's (Body/Parts/base.yml:23-26); `bodypart` is restated so nothing is lost.
+  # BaseTorsoInorganic's `torso_slot` was already suppressed by the same first-parent rule before this
+  # package and is still created at runtime by SharedBodySystem - unchanged.
+  - type: ContainerContainer
+    containers:
+      bodypart: !type:Container
+        ents: []
+      wounds: !type:Container
+        ents: []
+  - type: Woundable
+    profile: SlimeBodyPartProfile
+  - type: WolfmedBodyPart
+    fractureProfile: null   # slime has no bones, as Onyx's slime does
+
+- type: entity
+  id: WFWolfmedPartDiona
+  abstract: true
+  components:
+  # WOLFGATE (WP13-1): declared `wounds` container - see WFWolfmedPartSlime above for why.
+  - type: ContainerContainer
+    containers:
+      bodypart: !type:Container
+        ents: []
+      wounds: !type:Container
+        ents: []
+  - type: Woundable
+    profile: PlantBodyPartProfile
+  - type: WolfmedBodyPart
+    fractureProfile: null
+    # Onyx: diona limbs cannot be SEVERED by damage at all. An empty flow mapping is a PRESENT key, so it
+    # suppresses Base<Slot>'s dict; `amputationThresholds:` with nothing after it parses as null, not as an
+    # empty dict, and is NOT equivalent. AmputationSystem.HandlePartDamageApplied early-returns on
+    # AmputationThresholds.Count == 0 (AmputationSystem.cs:80).
+    # This does NOT make diona limbs indestructible - see PLAN5 §8.1 and U17: they are still destroyed
+    # outright by the inherited MajorLimb/MinorLimb gib trigger.
+    amputationThresholds: {}
+
+- type: entity
+  id: WFWolfmedPartIpc
+  abstract: true
+  components:
+  # WOLFGATE (WP13-1): declared `wounds` container - see WFWolfmedPartSlime above for why.
+  - type: ContainerContainer
+    containers:
+      bodypart: !type:Container
+        ents: []
+      wounds: !type:Container
+        ents: []
+  - type: Woundable
+    profile: IpcBodyPartProfile
+  - type: WolfmedBodyPart
+    fractureProfile: null
+    # WOLFGATE (P5-D7): no amputationThresholds key, so Base<Slot>'s organic P3 set is inherited
+    # (arm Slash 130 / Piercing 250 / Blunt 250 / Heat 250 + the P3 finishing minimums,
+    # _WF/Wolfmed/Body/parts.yml:52-59). Onyx's own IPC numbers (arm 270/400/600, ONYX
+    # Corvax/Body/Species/ipc.yml:365-372) sit on a different part chain; see PLAN5 P5-D7/P5-D8.
+
+- type: entity
+  id: WFWolfmedPartCybernetic
+  abstract: true
+  components:
+  # WOLFGATE (WP13-1): declared `wounds` container - see WFWolfmedPartSlime above for why.
+  - type: ContainerContainer
+    containers:
+      bodypart: !type:Container
+        ents: []
+      wounds: !type:Container
+        ents: []
+  - type: Woundable
+    profile: CyberneticBodyPartProfile
+  - type: WolfmedBodyPart
+    fractureProfile: CyberneticFractureProfile
+    # amputationThresholds inherit Base<Slot>'s organic set (P5-D7). NOTE: cybernetic limbs DO carry a gib
+    # trigger - CyberneticPartBase declares none, but every concrete limb's second parent is
+    # BaseLeftArm/BaseLeftHand/... which parent Mono's MajorLimb (Blunt 190 / Slash 210 / Heat 250 + Ash)
+    # or MinorLimb (150/180/230). See PLAN5 P5-D8b / U15.
+
+# WOLFGATE (EVISC): an organic torso gets its damage cap and evisceration profile from WFWolfmedBaseTorso by
+# way of BaseTorso. An IPC torso parents BaseTorsoInorganic instead and inherits neither, so without this
+# it has no cap, no overflow and could never be breached. Must stay FIRST in TorsoIPC's parent list (RT
+# first-parent-wins), which is why it restates WFWolfmedPartIpc's null fracture profile.
+- type: entity
+  id: WFWolfmedBaseTorsoIpc
+  abstract: true
+  components:
+  - type: WolfmedBodyPart
+    fractureProfile: null
+    maxDamage: 250
+    eviscerationProfile: WFWolfmedEviscerationDefault
+    # M3 (plan §8, OD10): penetrating torso hits reach the positronic core and the pump, on the same lines as
+    # an organic torso (_WF/Wolfmed/Body/parts.yml), restated because this torso never inherits WFWolfmedBaseTorso.
+    organReach:
+      Piercing: 10
+      Slash: 18
+      Blunt: 30
+      Heat: 20
+      Shock: 15

@@ -256,6 +256,14 @@
   - type: FireVisuals
     alternateState: Standing
   - type: LayingDown
+  # WOLFGATE(Wolfmed): M4, OD16: Synth is mechanical. A wound host on the machine ladder (plan 3.11, 9.3): the ccu is its
+  # positronic core, the heart its coolant pump and its SynthBattery its power, so an empty battery shuts it down
+  # and never kills it. Pain shock as the IPC has it; the restart button brings a repaired core back.
+  - type: WoundHost
+  - type: PainShockTarget
+  - type: DeadStartupButton
+    sound:
+      path: /Audio/_EinsteinEngines/Effects/Silicon/startup.ogg
   - type: Tag
     tags:
     - CanPilot

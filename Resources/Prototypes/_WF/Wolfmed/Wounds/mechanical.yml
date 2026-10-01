@@ -1,0 +1,219 @@
+# Mechanical wounds (W6): what a hit does to a chassis rather than to flesh. All five are `ruleOnly`, and
+# every rule that makes them filters on `capabilities: [ Mechanical ]`, so they can only ever land on an
+# IPC or a cybernetic limb. None of them is in OrganicBodyPartProfile's supportedWounds either, so
+# CanCreateWound refuses them on flesh even if a rule were mis-filtered.
+#
+# They are ADDED to the generic chassis wound rather than replacing it (`replacesDefault: false` in
+# wound_rules.yml), the way W4's internal burn is added to the electrical wound: the chassis damage is the
+# total, these are the specific findings a mechanic acts on.
+#
+# `healingMultiplier: 1` on the four repairable ones, following the W0 rule for mechanical wounds: a tool
+# closes a chassis wound by removing damage, and the 0.15 organic nerf would leave them permanently open.
+# Which tool is decided by `damageTypes`, because that is the only thing an item's healing spec is matched
+# against: Blunt/Slash/Piercing is the welder (and, for the dent, a wrench), Shock is the cable coil.
+
+# A struck panel. Cosmetic at first and never much more than a nuisance, but it is what blunt force leaves
+# on something that does not bruise. The welder's Blunt repair closes it; so does a wrench, which is the
+# one repair tool that needs no fuel and does nothing else.
+- type: wound
+  id: WFWolfmedDentWound
+  name: wolfmed-wound-name-dent
+  analyzerCategory: Mechanical
+  ruleOnly: true
+  damageTypes:
+    Blunt:
+      reopenMinimumDamage: 10
+      severityMultiplier: 1
+  maximumSeverity: 120
+  healingMultiplier: 1
+  behaviors:
+  # An IPC feels pain (P5-D10) and a cybernetic limb does not; the profile decides, not this number.
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.4
+    minSeverity: 20
+  stages:
+    Minor:
+      name: wound-stage-mechanical-minor
+      severity: 0
+    Moderate:
+      name: wound-stage-mechanical-moderate
+      severity: 30
+      behaviors:
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.9
+        manipulationModifier: 1.15
+    Severe:
+      name: wound-stage-mechanical-severe
+      severity: 60
+      behaviors:
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.8
+        manipulationModifier: 1.35
+
+# A hole in the casing. The mechanical bleed: what runs out is coolant and hydraulic fluid, and it does not
+# clot, because nothing in a chassis is trying to. `clottingMultiplier: 0` is what says so - the leak runs
+# until somebody welds it shut.
+- type: wound
+  id: WFWolfmedBreachWound
+  name: wolfmed-wound-name-breach
+  analyzerCategory: Mechanical
+  ruleOnly: true
+  damageTypes:
+    Slash:
+      reopenMinimumDamage: 12
+      severityMultiplier: 1
+    Piercing:
+      reopenMinimumDamage: 14
+      severityMultiplier: 1
+  maximumSeverity: 160
+  healingMultiplier: 1
+  behaviors:
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.5
+    minSeverity: 10
+  stages:
+    Minor:
+      name: wound-stage-mechanical-minor
+      severity: 0
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.2
+        minimumSeverity: 2
+        clottingMultiplier: 0
+    Moderate:
+      name: wound-stage-mechanical-moderate
+      severity: 30
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.3
+        minimumSeverity: 2
+        clottingMultiplier: 0
+    Severe:
+      name: wound-stage-mechanical-severe
+      severity: 60
+      behaviors:
+      - !type:WoundBleedingBehavior
+        rate: 0.4
+        minimumSeverity: 2
+        clottingMultiplier: 0
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.85
+        manipulationModifier: 1.2
+
+# Current where it should not be. Each time it lands or worsens the frame locks up for a moment and the
+# part throws sparks (WolfmedShortCircuitSystem). Listed under Shock so the cable coil is what repairs it.
+- type: wound
+  id: WFWolfmedShortCircuitWound
+  name: wolfmed-wound-name-short-circuit
+  analyzerCategory: Mechanical
+  ruleOnly: true
+  damageTypes:
+    Shock:
+      reopenMinimumDamage: 12
+      severityMultiplier: 1
+  maximumSeverity: 100
+  healingMultiplier: 1
+  behaviors:
+  - !type:WolfmedShortCircuitBehavior
+    stun: 0.8
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.6
+    minSeverity: 5
+  stages:
+    Minor:
+      name: wound-stage-electrical-minor
+      severity: 0
+    Moderate:
+      name: wound-stage-electrical-moderate
+      severity: 25
+      behaviors:
+      - !type:WolfmedShortCircuitBehavior
+        stun: 1.4
+    Severe:
+      name: wound-stage-electrical-severe
+      severity: 50
+      behaviors:
+      - !type:WolfmedShortCircuitBehavior
+        stun: 2.2
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.85
+        manipulationModifier: 1.25
+
+# A cut actuator. The mechanical answer to a severed tendon, and it carries no damage type for the same
+# reason that one carries healingMultiplier 0: the damage the hit did is on the panel, and closing the
+# panel does nothing for the run behind it. The exit is WFSurgeryReplaceServo, whose one step wants a cable
+# coil - which is why the coil carries WolfmedServoKit.
+- type: wound
+  id: WFWolfmedServoDamageWound
+  name: wolfmed-wound-name-servo-damage
+  analyzerCategory: Mechanical
+  ruleOnly: true
+  damageTypes: {}
+  maximumSeverity: 80
+  healingMultiplier: 0
+  behaviors:
+  - !type:WolfmedLimbPenaltyBehavior
+    movementModifier: 0.65
+    manipulationModifier: 1.6
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.7
+    minSeverity: 4
+  stages:
+    Moderate:
+      name: wound-stage-mechanical-moderate
+      severity: 0
+    Severe:
+      name: wound-stage-mechanical-severe
+      severity: 30
+      behaviors:
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.5
+        manipulationModifier: 2
+
+# A part running too hot to work properly. The only wound in the model whose treatment is time: it carries
+# no damage type at all, so no tool and no damage removal reaches it, and WolfmedOverheatingSystem sheds
+# its severity on a tick - faster when Cold reaches the part, and in one step when the body is doused.
+- type: wound
+  id: WFWolfmedOverheatingWound
+  name: wolfmed-wound-name-overheating
+  analyzerCategory: Mechanical
+  ruleOnly: true
+  damageTypes: {}
+  maximumSeverity: 100
+  healingMultiplier: 0
+  behaviors:
+  # On the base behaviors as well as on the stages, so the lifecycle filter matches at any severity,
+  # including the zero a removal reports.
+  - !type:WolfmedOverheatBehavior
+    coolingPerMinute: 25
+    coolingPerCold: 1.5
+    coolingPerDousing: 15
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.3
+    minSeverity: 20
+  stages:
+    Warm:
+      name: wolfmed-wound-stage-warm
+      severity: 0
+    Hot:
+      name: wolfmed-wound-stage-hot
+      severity: 20
+      behaviors:
+      - !type:WolfmedOverheatBehavior
+        coolingPerMinute: 20
+        coolingPerCold: 1.5
+        coolingPerDousing: 15
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.9
+        manipulationModifier: 1.2
+    Overheated:
+      name: wolfmed-wound-stage-overheated
+      severity: 45
+      behaviors:
+      - !type:WolfmedOverheatBehavior
+        coolingPerMinute: 14
+        coolingPerCold: 1.5
+        coolingPerDousing: 15
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.75
+        manipulationModifier: 1.45

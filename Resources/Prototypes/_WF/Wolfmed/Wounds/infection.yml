@@ -1,0 +1,93 @@
+# Infection, sepsis and necrosis (W5). Every timer in the model is in the profile below; the CVars
+# (wolfmed.infection_*, wolfmed.necrosis_*) scale it rather than replacing it.
+
+- type: wolfmedInfectionProfile
+  id: WFWolfmedDefaultInfection
+  # Playtest 5: four a minute against a hundred (six until the owner asked for infection to be far slower to spread
+  # and to reach sepsis). An untreated ordinary cut has about six minutes before it starts to hurt, fifteen before
+  # it spreads and twenty-five before the wound itself is septic. A bad wound (risk 2 or 2.5) halves that, a dressing
+  # all but stops it.
+  progressPerMinute: 4
+  localAt: 25
+  spreadingAt: 60
+  sepsisAt: 100
+  cleanDecayPerMinute: 20
+  antibioticPerUnit: 12
+  treatmentMultipliers:
+    Bandaged: 0.15
+    Clamped: 0.5
+    Sutured: 0
+    Cauterized: 0
+  # M1b (P20): a dressed or grafted burn, which has no bleeding treatment of its own.
+  dressedMultiplier: 0.15
+  contaminationMultiplier: 2.5
+  localPainPerMinute: 4
+  severityPerMinute: 1
+  maxSeverityAdded: 15
+  feverTemperature: 313
+  feverRise: 0.05
+  # M5 (OD13): spreadingPoisonPerMinute and sepsisPoisonPerMinute are gone. Neither stage deals Poison any more;
+  # sepsis kills through its own brain drain, and the toxin load is a route of its own.
+  # INFECTION: a part's own infection, 0 to 100 (100 is Septic). A spreading wound feeds its part 4 a minute (a
+  # septic one 8); a part at partTransferStage (Septic) feeds its parent 3 a minute, towards the torso only (hand to
+  # arm to torso, foot to leg to torso, head to torso); a necrotic part is pinned at 100; an unfed part recovers 4 a
+  # minute. Playtest 5 (was 10, 8 and a transfer at Spreading): an untreated cut on a hand spreads at 15 minutes, the
+  # hand itself at about 27 and is septic at 32, the arm spreads at 52 and is septic at 66, the torso spreads at 86
+  # and sepsis starts there; a cut on the chest or head starts it at about 27. A dead arm starts it 20 minutes after
+  # it dies.
+  partLocalAt: 25
+  partSpreadingAt: 60
+  partFromWoundPerMinute: 4
+  partSpreadPerMinute: 3
+  partTransferStage: Septic
+  partRecoveryPerMinute: 4
+  partAntibioticPerUnit: 8
+  # Per source: a torso or head that is spreading or septic, so 0 to 2 sources. Playtest 5 (was 12, then 4): septic
+  # shock (wolfmed.septic_shock_at, 80) forty minutes after sepsis starts with one source, twenty with two. Shock puts
+  # the patient out; only the organ damage past 90 kills: the lungs fail, the brain starves and the heart stops about
+  # 15 minutes after the damage starts.
+  sepsisPerMinute: 2
+  sepsisRecoveryPerMinute: 8
+  sepsisAntibioticPerUnit: 6
+  # Playtest 4 (SEPSIS): past wolfmed.sepsis_organ_damage_from sepsis takes wolfmed.sepsis_organ_damage_per_minute
+  # (1.5) a minute from every torso organ, times its weight here, keyed by organ slot. With the organs at 25: kidneys
+  # and liver fail in about 11 minutes, lungs and stomach in 17, the heart in 22. Unlisted slots take the plain rate.
+  sepsisOrganWeights:
+    kidneys: 1.5
+    liver: 1.5
+    lungs: 1
+    stomach: 1
+    heart: 0.75
+  tourniquetOnset: 600
+  warnFraction: 0.6
+  reattachGrace: 300
+  necrosisWound: WFWolfmedNecrosisWound
+  necrosisSeverity: 60
+
+# Dead tissue. Like charring it carries no damage types, so nothing in a medkit and no amount of damage
+# removal reaches it - but unlike charring nothing takes it off either. The limb is finished: it works
+# badly, it keeps the patient septic, and the only exit is amputation and a replacement part.
+- type: wound
+  id: WFWolfmedNecrosisWound
+  name: wolfmed-wound-name-necrosis
+  analyzerCategory: Infection
+  ruleOnly: true
+  damageTypes: {}
+  maximumSeverity: 100
+  healingMultiplier: 0
+  behaviors:
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.6
+    minSeverity: 5
+  # Far above anything else in the system: dead tissue is a standing source of infection, not a risk of one. The
+  # part itself is pinned at 100 and feeds its parent (INFECTION); sepsis follows once that reaches the torso.
+  - !type:WolfmedInfectionRiskBehavior
+    riskMultiplier: 6
+    dirty: true # playtest 5: dead tissue is its own reason
+  - !type:WolfmedLimbPenaltyBehavior
+    movementModifier: 0.55
+    manipulationModifier: 2
+  stages:
+    Necrotic:
+      name: wolfmed-wound-stage-necrotic
+      severity: 0

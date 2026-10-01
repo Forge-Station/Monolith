@@ -12,6 +12,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_light.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): WP11-3, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.85
@@ -44,6 +45,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_medium.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): WP11-3, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.8
@@ -78,6 +80,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_heavy.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): WP11-3, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.3
@@ -113,6 +116,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_polyvalent.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): WP11-3, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.6
@@ -145,6 +149,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Armor/bulletproof_stabproof.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): WP11-3, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.65

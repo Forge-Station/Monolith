@@ -1,0 +1,43 @@
+# M4 (plan §9.1, §9.3, OD16): the deliberate differences round-start species have from the reference profile. The id
+# is the species id. WolfmedSpeciesConformanceTest runs every check on every round-start species and fails on any
+# failure not excused here, on any excuse no longer needed, and on a species whose ladder is not the one written here.
+# Only the differences plan §9.3 lists belong in this file.
+
+- type: wolfmedSpeciesException
+  id: IPC
+  mechanical: true
+  reason: >-
+    Plan 9.3, standing decisions: the machine ladder. No oxygen clock, no arrest, no Airloss; losing power or the pump
+    shuts the chassis down and never kills it; death is core failure (the core-heat route, torso hits, the core or the
+    head taken out, a gib); core repair and the restart button bring it back.
+
+- type: wolfmedSpeciesException
+  id: Synth
+  mechanical: true
+  reason: >-
+    OD16: Synth is mechanical. The IPC's ladder, with its ccu as the positronic core, its heart as the coolant pump and
+    its SynthBattery as its power.
+
+- type: wolfmedSpeciesException
+  id: Diona
+  excuses: [ Heart ]
+  reason: >-
+    Plan 9.3, OD16: no heart. Circulatory collapse instead of heart arrest: the same state from blood or oxygen, never
+    from a heart.
+
+- type: wolfmedSpeciesException
+  id: ProtoDionae
+  excuses: [ Heart ]
+  reason: Plan 9.3, OD16, as Diona (the same body).
+
+- type: wolfmedSpeciesException
+  id: SlimePerson
+  excuses: [ Heart ]
+  reason: >-
+    Plan 9.3, OD16: no heart, so circulatory collapse instead of heart arrest. Survives decapitation: its core, the
+    brain, is in the torso.
+
+- type: wolfmedSpeciesException
+  id: ProtoSlimePerson
+  excuses: [ Heart ]
+  reason: Plan 9.3, OD16, as SlimePerson (the same body).

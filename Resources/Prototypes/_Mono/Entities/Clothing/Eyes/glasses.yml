@@ -14,6 +14,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/Eyes/Glasses/ballistic_goggles_red.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Heat: 0.95
@@ -25,6 +26,11 @@
     - Inorganic
     - Silicon
     - Biological
+    - WFSiliconWolfmed # WOLFGATE(Wolfmed): the IPC's container, so its bar shows
+  - type: Tag
+    tags:
+    - PetWearable
+    
 
 - type: entity
   parent: ClothingEyesHudMedical
@@ -40,6 +46,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/Eyes/Glasses/ballistic_glasses_red.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Heat: 0.95
@@ -51,7 +58,11 @@
     - Inorganic
     - Silicon
     - Biological
-
+    - WFSiliconWolfmed # WOLFGATE(Wolfmed): the IPC's container, so its bar shows
+  - type: Tag
+    tags:
+    - PetWearable
+    
 - type: entity
   parent: ClothingEyesHudMedical
   id: ClothingEyesBallisticGogglesGreen
@@ -66,6 +77,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/Eyes/Glasses/ballistic_goggles_green.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Heat: 0.95
@@ -77,7 +89,11 @@
     - Inorganic
     - Silicon
     - Biological
-
+    - WFSiliconWolfmed # WOLFGATE(Wolfmed): the IPC's container, so its bar shows
+  - type: Tag
+    tags:
+    - PetWearable
+    
 - type: entity
   parent: ClothingEyesHudMedical
   id: ClothingEyesBallisticGlassesGreen
@@ -92,6 +108,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/Eyes/Glasses/ballistic_glasses_green.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Heat: 0.95
@@ -103,7 +120,11 @@
     - Inorganic
     - Silicon
     - Biological
-
+    - WFSiliconWolfmed # WOLFGATE(Wolfmed): the IPC's container, so its bar shows
+  - type: Tag
+    tags:
+    - PetWearable
+    
 - type: entity
   parent: ClothingEyesHudMedical
   id: ClothingEyesBallisticGogglesOrange
@@ -118,6 +139,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/Eyes/Glasses/ballistic_goggles_orange.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Heat: 0.95
@@ -129,7 +151,11 @@
     - Inorganic
     - Silicon
     - Biological
-
+    - WFSiliconWolfmed # WOLFGATE(Wolfmed): the IPC's container, so its bar shows
+  - type: Tag
+    tags:
+    - PetWearable
+    
 - type: entity
   parent: ClothingEyesHudMedical
   id: ClothingEyesBallisticGlassesOrange
@@ -144,6 +170,7 @@
   - type: Clothing
     sprite: _Mono/Clothing/Eyes/Glasses/ballistic_glasses_orange.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Heat: 0.95
@@ -155,7 +182,11 @@
     - Inorganic
     - Silicon
     - Biological
-
+    - WFSiliconWolfmed # WOLFGATE(Wolfmed): the IPC's container, so its bar shows
+  - type: Tag
+    tags:
+    - PetWearable
+    
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons]
   id: ClothingEyesTSFOfficerGlasses
@@ -169,21 +200,21 @@
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5
-  - type: ThermalVision #Forge-Change start
-    #isEquipment: true
-    #color: "#FFFFFFFF"
-    #lightRadius: 45
-    flashDurationMultiplier: 2
-    pulseTime: 3
+  - type: ThermalVision
     isEquipment: true
-    toggleAction: PulseThermalVision #Forge-Change end
+    color: "#FFFFFFFF"
+    lightRadius: 45
   - type: NightVision # Gen 4 wide-quadtube
     relayOverlay: true
     goggleEffect: true
-    viewCircleRadius: 800 #Forge-Change 400 to 800 // это радиус обзора (максимальный радиус для ТСФ)
-    viewCircleCount: 2
+    viewCircleRadius: 450
+    viewCircleCount: 4
     viewCircleSpacing: 280
-    phosphorColor: "#2E8B57" #Forge-Change #2E8B57 to #4ee293
-    lightingColor: "#FFFFFFFF" #Forge-Change #FFFFFF32 to #0CFFFF32 // темно, изменено на #FFFFFFFF
-    amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
     action: ActionToggleNightVision
+    phosphorColor: "#41D7D9"
+    lightingColor: "#FFFFFF32"
+  - type: Tag
+    tags:
+    - PetWearable
+    - SafetyDepositBlacklist
+    

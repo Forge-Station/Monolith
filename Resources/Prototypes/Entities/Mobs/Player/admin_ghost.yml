@@ -115,6 +115,7 @@
     damageContainers:
     - Biological
     - Inorganic
+    - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
   - type: ShowSyndicateIcons # Monolith
   - type: MovementSpeedModifier
     baseSprintSpeed: 16

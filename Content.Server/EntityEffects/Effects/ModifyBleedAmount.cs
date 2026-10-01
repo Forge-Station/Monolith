@@ -1,5 +1,6 @@
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
+using Content.Shared._Onyx.Wounds; // WOLFGATE(Wolfmed)
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
@@ -28,6 +29,14 @@ public sealed partial class ModifyBleedAmount : EntityEffect
                     amt *= reagentArgs.Quantity.Float();
                 amt *= reagentArgs.Scale.Float();
             }
+
+            // WOLFGATE(Wolfmed) START: a wound host's bleeding is its wounds' (GUARD E3), so a reagent treats the wounds.
+            if (args.EntityManager.HasComponent<WoundHostComponent>(args.TargetEntity))
+            {
+                args.EntityManager.System<WoundBleedingSystem>().ApplyReagentBleeding(args.TargetEntity, amt);
+                return;
+            }
+            // WOLFGATE END
 
             sys.TryModifyBleedAmount(args.TargetEntity, amt, blood);
         }

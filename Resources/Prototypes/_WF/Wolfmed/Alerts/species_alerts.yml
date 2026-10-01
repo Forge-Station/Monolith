@@ -1,0 +1,21 @@
+# M4: the Critical alerts for thermal shutdown and circulatory collapse (plan §3.11, §9). Art debt: stock icons.
+
+- type: alert
+  id: WFWolfmedOutCoreHeat
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/Interface/Alerts/borg_critical.rsi
+    state: critical
+  name: alerts-wolfmed-out-core-heat-name
+  description: alerts-wolfmed-out-core-heat-desc
+
+- type: alert
+  id: WFWolfmedOutCollapse
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/_Crescent/Interface/Alerts/human_dead.rsi
+    state: dead
+  name: alerts-wolfmed-out-collapse-name
+  description: alerts-wolfmed-out-collapse-desc

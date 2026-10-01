@@ -5,8 +5,28 @@
     Brutepack: 4294967295 # Infinite
     Ointment: 4294967295 # Infinite
     Bloodpack: 4294967295 # Infinite
+    WFWolfmedHydraulicFluidPack: 4294967295 # WOLFGATE(Wolfmed): playtest 3 IPC 2: Infinite, a chassis's refill beside the blood packs.
     Gauze: 4294967295 # Infinite
     EmergencyMedipen: 4294967295 # Infinite
+    WFWolfmedSplint: 4294967295 # WOLFGATE(Wolfmed): V5: Infinite
+    WFWolfmedAntisepticSpray: 4294967295 # WOLFGATE(Wolfmed): W5: Infinite
+    WFWolfmedAnalgesicPill: 4294967295 # WOLFGATE(Wolfmed): CONSC: Infinite
+    WFWolfmedStimPen: 20 # WOLFGATE(Wolfmed): CONSC: limited, it is the emergency rung.
+    WFWolfmedAnalgesicPen: 4294967295 # WOLFGATE(Wolfmed): playtest 1: Infinite
+    WFWolfmedOpiatePen: 40 # WOLFGATE(Wolfmed): playtest 1: limited, it sedates.
+    WFWolfmedNaloxonePen: 40 # WOLFGATE(Wolfmed): M2: OD14, reverses an overdose.
+    Tourniquet: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite
+    WFWolfmedSuture: 4294967295 # WOLFGATE(Wolfmed): playtest 5: Infinite, the plain suture.
+    WFWolfmedAnalgesicPillCanister: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite
+    WFWolfmedIbuprofenPillCanister: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite
+    WFWolfmedKetorolacPillCanister: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite
+    WFWolfmedOsteogenPillCanister: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite
+    Cautery: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite, the surgical basics a wound procedure names.
+    Hemostat: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite
+    Bonesetter: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite
+    BoneGel: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite
+    WFWolfmedIvDripFlatpack: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite
+    WFMedkitSyntheticFilled: 4294967295 # WOLFGATE(Wolfmed): ITEMS: Infinite, a first aid kit for synthetic crew.
     PillCanisterTricordrazine: 4294967295 # Infinite - Mono
     HypoMini: 4294967295 # Infinite - Mono
     HypoMiniLimitedEdition: 1 # Limited because its a direct upgrade, and can be found on expeds, 10 ->1 Forge-change

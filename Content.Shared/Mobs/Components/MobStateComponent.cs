@@ -13,7 +13,7 @@ namespace Content.Shared.Mobs.Components
     /// </summary>
     [RegisterComponent]
     [NetworkedComponent]
-    [AutoGenerateComponentState]
+    [AutoGenerateComponentState(raiseAfterAutoHandleState: true)] // WOLFGATE(Wolfmed): crit heartbeat needs a client-side signal for a server-only MobState change
     [Access(typeof(MobStateSystem), typeof(MobThresholdSystem))]
     public sealed partial class MobStateComponent : Component
     {

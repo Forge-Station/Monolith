@@ -235,6 +235,13 @@ public abstract partial class GameTest
             // So not yet.
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
+                // WOLFGATE START: keeps the failure readable once the dirty dispose's warning replaces it.
+                // NUnit rebuilds the message from the recorded assertions when the pair's dirty-dispose warning adds
+                // one, so a failure raised as an exception (any assertion inside WaitAssertion) vanished from the
+                // report. Printing it here keeps it in the test's output.
+                var result = TestContext.CurrentContext.Result;
+                TestContext.Out.WriteLine($"Test failed: {result.Message}\n{result.StackTrace}");
+                // WOLFGATE END
                 _pairDestroyed = true; // Blow it up, we failed and it might be screwed.
                 return;
             }

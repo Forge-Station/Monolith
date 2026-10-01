@@ -15,7 +15,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Body.Part;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(raiseAfterAutoHandleState: true)] // WOLFGATE(Wolfmed): HOOK 21 - P3-4 Option B needs AfterAutoHandleStateEvent on detached parts.
 //[Access(typeof(SharedBodySystem))] // goob edit - all access :godo:
 public sealed partial class BodyPartComponent : Component, ISurgeryToolComponent // Shitmed Change
 {

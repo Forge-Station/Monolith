@@ -82,6 +82,14 @@ public sealed partial class HideLayerClothingSystem : EntitySystem
 
         // This method should only be getting called while the clothing is equipped (though possibly currently in
         // the process of getting unequipped).
+        // WOLFGATE START: a client that first saw the wearer already dressed never got the equip for this item (the
+        // wearer's container state lands before its InventoryComponent has slots, so InventorySystem.OnEntInserted
+        // finds none), and InSlot stays null there. Release skipped the asserts below; Debug closed the client on
+        // the unequip. The server's HiddenLayers state carries the change, so the client has nothing to predict.
+        if (clothing.Comp2.InSlot == null || clothing.Comp2.InSlotFlag == null)
+            return;
+        // WOLFGATE END
+
         DebugTools.AssertNotNull(clothing.Comp2.InSlot);
         DebugTools.AssertNotNull(clothing.Comp2.InSlotFlag);
         DebugTools.AssertNotEqual(inSlot, SlotFlags.NONE);

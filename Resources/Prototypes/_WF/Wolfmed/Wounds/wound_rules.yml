@@ -1,0 +1,387 @@
+# Which wound a hit makes, by cause and size (W1). Rules are tried highest priority first; the first one
+# whose filters and chance roll pass wins and, with replacesDefault, takes the place of the damage type's
+# default Onyx wound. Every filter left out matches everything.
+#
+# Adding one: write the wound with `ruleOnly: true`, add it to the part profile's supportedWounds, then a
+# rule here. No C#.
+
+# Mechanical (W6) -------------------------------------------------------------
+# Every rule here filters on `capabilities: [ Mechanical ]`, which only IpcBodyPartProfile and
+# CyberneticBodyPartProfile carry, and every rule in the organic sections below filters on
+# `[ Biological ]`. That one field is the whole organic/mechanical selector: neither set can ever fire on
+# the other's parts, and the part profiles' supportedWounds lists refuse the wound a second time.
+#
+# All of them are added to the generic chassis wound rather than replacing it (`replacesDefault: false`,
+# `continue: true`), so an analyzer still reads the total as chassis damage and these say what kind it is.
+#
+# There is no mechanical gunshot, graze, lodged-round or shrapnel wound: those four are flesh injuries and
+# stay `[ Biological ]`. What a chassis keeps is the object, not the wound, so the two ballistic breach
+# rules below carry W1's `embedded` block on an ordinary breach instead.
+
+# Heat the frame cannot shed fast enough. The wound cools itself, so the threshold is what it takes to
+# push a part past working temperature, not what it takes to melt it.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleMechOverheating
+  priority: 99
+  wound: WFWolfmedOverheatingWound
+  damageTypes: [ Heat ]
+  minDamage: 8
+  severityMultiplier: 0.8
+  minSeverity: 8
+  replacesDefault: false
+  continue: true
+  capabilities: [ Mechanical ]
+
+# Current through the casing.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleMechShortCircuit
+  priority: 98
+  wound: WFWolfmedShortCircuitWound
+  damageTypes: [ Shock ]
+  minDamage: 10
+  severityMultiplier: 0.7
+  minSeverity: 7
+  replacesDefault: false
+  continue: true
+  capabilities: [ Mechanical ]
+
+# Blunt force on something that does not bruise.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleMechDent
+  priority: 94
+  wound: WFWolfmedDentWound
+  damageTypes: [ Blunt ]
+  minDamage: 8
+  severityMultiplier: 0.9
+  replacesDefault: false
+  continue: true
+  capabilities: [ Mechanical ]
+
+# A hole in the casing, and the fluid that runs out of it. Three rules rather than one, because a chassis
+# keeps what shot it: a breach opened by a round or a fragment holds the object, and W1's embedded-object
+# system then refuses every treatment - the welder included, since W2 put damage removal behind the same
+# attempt event - until it has been pulled out. The three `causes` filters partition every hit exactly
+# once, so no hit can ever match two of them and pay for the breach twice.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleMechBreachFragment
+  priority: 93
+  wound: WFWolfmedBreachWound
+  damageTypes: [ Piercing ]
+  causes: [ Explosion, Fragment ]
+  minDamage: 2 # explosion damage is split across parts, so the per-part share is small
+  severityMultiplier: 0.8
+  minSeverity: 4
+  replacesDefault: false
+  continue: true
+  capabilities: [ Mechanical ]
+  embedded:
+    item: WFWolfmedShrapnelFragment
+    minCount: 1
+    maxCount: 2
+    maxTotal: 6
+
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleMechBreachRound
+  priority: 92
+  wound: WFWolfmedBreachWound
+  damageTypes: [ Piercing ]
+  causes: [ Projectile ]
+  minDamage: 8
+  severityMultiplier: 0.8
+  minSeverity: 6
+  replacesDefault: false
+  continue: true
+  capabilities: [ Mechanical ]
+  embedded:
+    item: WFWolfmedSpentRound
+
+# Everything that is not a round or a fragment: a blade, a claw, a thrown crate, a vent. Nothing stays in.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleMechBreachSlash
+  priority: 91
+  wound: WFWolfmedBreachWound
+  damageTypes: [ Slash ]
+  minDamage: 8
+  severityMultiplier: 0.8
+  minSeverity: 6
+  replacesDefault: false
+  continue: true
+  capabilities: [ Mechanical ]
+
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleMechBreachPiercing
+  priority: 90
+  wound: WFWolfmedBreachWound
+  damageTypes: [ Piercing ]
+  causes: [ Melee, Unarmed, Bite, Thrown, Environmental, Surgery, Hitscan ]
+  minDamage: 8
+  severityMultiplier: 0.8
+  minSeverity: 6
+  replacesDefault: false
+  continue: true
+  capabilities: [ Mechanical ]
+
+# Deep enough to have cut the actuator behind the panel. A limb only, like the tendon rule it mirrors:
+# there is no servo in a torso or a head to sever.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleMechServoDamage
+  priority: 89
+  wound: WFWolfmedServoDamageWound
+  damageTypes: [ Slash, Piercing ]
+  minDamage: 16
+  severityMultiplier: 0.5
+  minSeverity: 5
+  partTypes: [ Arm, Hand, Leg, Foot ]
+  replacesDefault: false
+  continue: true
+  capabilities: [ Mechanical ]
+
+# Burns (W4) ------------------------------------------------------------------
+# Cold and caustic each replace Onyx's one shared BurnWound with a wound that behaves like the thing that
+# made it. Heat keeps the burn wound, because that is what chars; shock adds to the electrical one.
+# Charring itself has no rule: WolfmedCharringSystem makes it off the burn's top stage.
+
+# Cold does not burn, it freezes. Below the floor it is an ordinary burn wound, which is what a brush with
+# vacuum should be.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleFrostbite
+  priority: 96
+  wound: WFWolfmedFrostbiteWound
+  damageTypes: [ Cold ]
+  minDamage: 8
+  capabilities: [ Biological ]
+
+# Acid that is still on the skin. Replaces the burn wound; the residue is what makes it worth telling apart.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleChemicalBurn
+  priority: 96
+  wound: WFWolfmedChemicalBurnWound
+  damageTypes: [ Caustic ]
+  minDamage: 12 # the burn wound's own Caustic reopen threshold: below it a splash is just a burn
+  capabilities: [ Biological ]
+
+# Current through the body. Added to the electrical wound, not in place of it: the burn on the skin and the
+# damage along the path are two findings.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleInternalBurn
+  priority: 96
+  wound: WFWolfmedInternalBurnWound
+  damageTypes: [ Shock ]
+  minDamage: 15
+  severityMultiplier: 0.6
+  minSeverity: 6
+  replacesDefault: false
+  continue: true
+  capabilities: [ Biological ]
+
+# Blunt trauma (W3) -----------------------------------------------------------
+# Crush sits above the slash and bite rules because it replaces the plain bruise; everything under it runs
+# on the same hit through `continue`, so one heavy swing can crush the limb and pop the joint at once.
+
+# A crushing blow. Replaces the ordinary blunt wound: at this size the bruise IS the crush injury.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleCrushInjury
+  priority: 95
+  wound: WFWolfmedCrushInjuryWound
+  damageTypes: [ Blunt ]
+  minDamage: 30
+  continue: true
+  capabilities: [ Biological ]
+
+# Crushed tissue bleeds where nobody can see it. M3 (OD15): a band, not a roll. Every blow of 40 or more
+# bleeds inside (it was 40% of blows from 30), so a medic can read it off the size of the hit.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleCrushInternalBleed
+  priority: 90
+  wound: InternalBleedingWound
+  damageTypes: [ Blunt ]
+  minDamage: 40
+  severityMultiplier: 0.5
+  minSeverity: 10
+  partTypes: [ Head, Torso, Arm, Leg ]
+  replacesDefault: false
+  continue: true
+  capabilities: [ Biological ]
+
+# A knock to the head. Lower threshold than a crush: it takes far less to rattle a brain than to crush a
+# limb, and the concussion is added to whatever the skull itself took.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleConcussion
+  priority: 85
+  wound: WFWolfmedConcussionWound
+  damageTypes: [ Blunt ]
+  minDamage: 15
+  severityMultiplier: 0.6
+  minSeverity: 6
+  partTypes: [ Head ]
+  replacesDefault: false
+  continue: true
+  capabilities: [ Biological ]
+
+# A blow to the chest that reached something inside it.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleOrganContusion
+  priority: 80
+  wound: WFWolfmedOrganContusionWound
+  damageTypes: [ Blunt ]
+  minDamage: 20
+  severityMultiplier: 0.5
+  minSeverity: 5
+  partTypes: [ Torso ]
+  replacesDefault: false
+  continue: true
+  capabilities: [ Biological ]
+
+# A joint wrenched out of its socket by a heavy swing.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleDislocation
+  priority: 76
+  wound: WFWolfmedDislocationWound
+  damageTypes: [ Blunt ]
+  minDamage: 18
+  severityMultiplier: 0.4
+  minSeverity: 5
+  partTypes: [ Arm, Hand, Leg, Foot ]
+  replacesDefault: false
+  continue: true
+  capabilities: [ Biological ]
+
+# Or by the landing. A thrown body and a fall both arrive as blunt damage with no weapon behind it, so the
+# threshold is lower: there is no armour-shaped way to take half a landing.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleDislocationThrown
+  priority: 75
+  wound: WFWolfmedDislocationWound
+  damageTypes: [ Blunt ]
+  causes: [ Thrown, Environmental ]
+  minDamage: 10
+  maxDamage: 18 # the rule above owns everything heavier, so one landing never rolls both
+  severityMultiplier: 0.5
+  minSeverity: 5
+  partTypes: [ Arm, Hand, Leg, Foot ]
+  replacesDefault: false
+  continue: true
+  capabilities: [ Biological ]
+
+# Slash and bite (W2) ---------------------------------------------------------
+# Deterministic bands, like the ballistic ones below: a medic can read what a hit meant off the analyzer,
+# and the tests stay RNG-free. Rarity comes from the thresholds, not from a chance roll.
+
+# A bite tears tissue out rather than cutting it. Replaces the plain cut or puncture.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleAvulsion
+  priority: 80
+  wound: WFWolfmedAvulsionWound
+  damageTypes: [ Slash, Piercing ]
+  causes: [ Bite ]
+  minDamage: 6
+  capabilities: [ Biological ]
+
+# A cut deep enough to open an artery. Added to the cut rather than replacing it, and `continue` lets the
+# tendon rule roll on the same swing: one bad hit can do both.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleArterialBleedSlash
+  priority: 70
+  wound: WFWolfmedArterialBleedWound
+  damageTypes: [ Slash ]
+  minDamage: 22
+  severityMultiplier: 0.5
+  minSeverity: 8
+  replacesDefault: false
+  continue: true
+  capabilities: [ Biological ]
+
+# A puncture has to be deeper again to reach one.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleArterialBleedPiercing
+  priority: 69
+  wound: WFWolfmedArterialBleedWound
+  damageTypes: [ Piercing ]
+  minDamage: 30
+  severityMultiplier: 0.5
+  minSeverity: 8
+  replacesDefault: false
+  continue: true
+  capabilities: [ Biological ]
+
+# A limb only. A tendon in the torso or the head is not a thing a medic can splint around.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleTendonCut
+  priority: 60
+  wound: WFWolfmedTendonCutWound
+  damageTypes: [ Slash ]
+  minDamage: 16
+  severityMultiplier: 0.5
+  minSeverity: 5
+  partTypes: [ Arm, Hand, Leg, Foot ]
+  replacesDefault: false
+  capabilities: [ Biological ]
+
+# Ballistic (W1) ---------------------------------------------------------------
+
+# Explosions and buckshot leave fragments in the flesh. Explosion damage is split across parts, so the
+# per-part share is small; the floor is deliberately low.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleShrapnel
+  priority: 50
+  wound: WFWolfmedShrapnelWound
+  damageTypes: [ Piercing ]
+  causes: [ Explosion, Fragment ]
+  minDamage: 2
+  capabilities: [ Biological ]
+  embedded:
+    item: WFWolfmedShrapnelFragment
+    minCount: 1
+    maxCount: 2
+    maxTotal: 6
+
+# A rifle-weight round sometimes stays in. A roll, not a rule: most heavy hits go through.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleLodgedRoundHeavy
+  priority: 40
+  wound: WFWolfmedLodgedRoundWound
+  damageTypes: [ Piercing ]
+  causes: [ Projectile ]
+  minDamage: 18
+  chance: 0.35
+  capabilities: [ Biological ]
+  embedded:
+    item: WFWolfmedSpentRound
+
+# A lighter one sometimes does.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleLodgedRound
+  priority: 30
+  wound: WFWolfmedLodgedRoundWound
+  damageTypes: [ Piercing ]
+  causes: [ Projectile ]
+  minDamage: 7
+  maxDamage: 18
+  chance: 0.2
+  capabilities: [ Biological ]
+  embedded:
+    item: WFWolfmedSpentRound
+
+# Otherwise it went through. P6 admits Hitscan here and in the graze below, and nowhere else in this
+# section: the fork's only Piercing hitscan is railgun and coilgun fire (Magnum45, Coilgun134x92mm,
+# Hitscan145x114mm), which is hypervelocity and leaves nothing behind, so it gets the through-and-through
+# wound but never a lodged round. Lasers are Heat, so none of these Piercing rules ever sees one.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleGunshot
+  priority: 20
+  wound: WFWolfmedGunshotWound
+  damageTypes: [ Piercing ]
+  causes: [ Projectile, Hitscan ]
+  minDamage: 7
+  capabilities: [ Biological ]
+
+# A round that barely caught the limb.
+- type: wolfmedWoundRule
+  id: WFWolfmedRuleGraze
+  priority: 10
+  wound: WFWolfmedGrazeWound
+  damageTypes: [ Piercing ]
+  causes: [ Projectile, Hitscan ]
+  maxDamage: 7
+  minSeverity: 3
+  capabilities: [ Biological ]

@@ -20,7 +20,7 @@
 
 - type: entity
   id: OrganSynthBrain
-  parent: BaseItem
+  parent: [BaseItem, WFWolfmedOrganPositronicBrain] # WOLFGATE(Wolfmed): M4: OD16 Synth is mechanical, the ccu is its positronic core
   name: synth ccu
   suffix: Synth
   description: "Effectively a Synth's brain. It's somehow smoother than yours."
@@ -118,7 +118,7 @@
 
 - type: entity
   id: OrganSynthHeart
-  parent: BaseSynthOrgan
+  parent: [BaseSynthOrgan, WFWolfmedOrganIpcPump] # WOLFGATE(Wolfmed): M4: OD16 Synth is mechanical, the heart is its coolant pump
   name: synth heart
   suffix: Synth
   description: "A Synth heart. It doesn't do anything interesting yet."

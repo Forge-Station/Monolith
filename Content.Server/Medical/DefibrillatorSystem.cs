@@ -48,6 +48,7 @@ public sealed partial class DefibrillatorSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
+    [Dependency] private Content.Server._WF.Wolfmed.Life.WolfmedRevivalSystem _wolfmedRevival = default!; // WOLFGATE(Wolfmed): BRAIN
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -204,18 +205,47 @@ public sealed partial class DefibrillatorSystem : EntitySystem
         }
         else
         {
+            // WOLFGATE(Wolfmed) START: BRAIN, the Wolfmed rule replaces the threshold gate for a wound host.
+            // A wound host's damage total decides nothing. The brain and the heart do, so the whole threshold gate is
+            // replaced by the Wolfmed rule; the body lives in _WF.
+            if (_wolfmedRevival.OwnsRevival(target))
+            {
+                if (_wolfmedRevival.TryDefibrillate(target, out var wolfmedLine))
+                    dead = false;
+
+                // WOLFGATE(Wolfmed): M1a: the refusal carries the patient's numbers (blood %, units to transfuse).
+                var wolfmedText = _wolfmedRevival.LocalizeLine(target, wolfmedLine);
+                _chatManager.TrySendInGameICMessage(uid, wolfmedText,
+                    InGameICChatType.Speak, true);
+
+                // A gate is not a failed shock: the medic has to fix something before another one is worth
+                // giving, so the reason goes where they are looking rather than only into a speech bubble.
+                if (wolfmedLine != Content.Server._WF.Wolfmed.Life.WolfmedRevivalSystem.NoResponse &&
+                    wolfmedLine != "wolfmed-defib-success")
+                {
+                    _popup.PopupEntity(wolfmedText, target, user, // WOLFGATE(Wolfmed): M1a
+                        Content.Shared.Popups.PopupType.MediumCaution);
+                }
+            }
+            else
+            {
+            // WOLFGATE END
             if (_mobState.IsDead(target, mob))
                 _damageable.TryChangeDamage(target, component.ZapHeal, true, origin: uid);
 
             if (_mobThreshold.TryGetThresholdForState(target, MobState.Dead, out var threshold) &&
                 TryComp<DamageableComponent>(target, out var damageableComponent) &&
-                damageableComponent.TotalDamage < threshold)
+                // WOLFGATE(Wolfmed) START: HOOK 12, revival has to agree with whatever decides death (HOOK 11).
+                // damageableComponent.TotalDamage < threshold)
+                _mobThreshold.CheckVitalDamage(target, damageableComponent) < threshold)
+                // WOLFGATE END
             {
                 _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
                 dead = false;
 
                 RaiseLocalEvent(new EntityRevivedEvent(target, user)); // Forge-change
             }
+            } // WOLFGATE(Wolfmed): BRAIN
 
             if (_mind.TryGetMind(target, out _, out var mind) &&
                 _player.TryGetSessionById(mind.UserId, out var playerSession))

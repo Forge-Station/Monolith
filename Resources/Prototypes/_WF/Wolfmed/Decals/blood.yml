@@ -1,0 +1,76 @@
+# Floor splats (GORE/G1). Decals rather than entities: they are grid-attached, cost nothing once placed,
+# take a per-decal colour (which is what carries the blood reagent tint through the greyscale art) and are
+# already cleanable by space cleaner through CleanDecalsReaction. The same reagent takes the wall splats,
+# which had to be entities.
+#
+# showMenu is off: these are meant to be left by bleeding, not painted by a mapper.
+
+- type: decal
+  id: WFWolfmedBloodFloor1
+  tags: [ "station", "dirty" ]
+  defaultCleanable: true
+  defaultCustomColor: true
+  showMenu: false
+  sprite:
+    sprite: _WF/Wolfmed/Effects/blood_splatter.rsi
+    state: floor1
+
+- type: decal
+  id: WFWolfmedBloodFloor2
+  tags: [ "station", "dirty" ]
+  defaultCleanable: true
+  defaultCustomColor: true
+  showMenu: false
+  sprite:
+    sprite: _WF/Wolfmed/Effects/blood_splatter.rsi
+    state: floor2
+
+- type: decal
+  id: WFWolfmedBloodFloor3
+  tags: [ "station", "dirty" ]
+  defaultCleanable: true
+  defaultCustomColor: true
+  showMenu: false
+  sprite:
+    sprite: _WF/Wolfmed/Effects/blood_splatter.rsi
+    state: floor3
+
+- type: decal
+  id: WFWolfmedBloodFloor4
+  tags: [ "station", "dirty" ]
+  defaultCleanable: true
+  defaultCustomColor: true
+  showMenu: false
+  sprite:
+    sprite: _WF/Wolfmed/Effects/blood_splatter.rsi
+    state: floor4
+
+- type: decal
+  id: WFWolfmedBloodFloor5
+  tags: [ "station", "dirty" ]
+  defaultCleanable: true
+  defaultCustomColor: true
+  showMenu: false
+  sprite:
+    sprite: _WF/Wolfmed/Effects/blood_splatter.rsi
+    state: floor5
+
+- type: decal
+  id: WFWolfmedBloodFloor6
+  tags: [ "station", "dirty" ]
+  defaultCleanable: true
+  defaultCustomColor: true
+  showMenu: false
+  sprite:
+    sprite: _WF/Wolfmed/Effects/blood_splatter.rsi
+    state: floor6
+
+- type: decal
+  id: WFWolfmedBloodFloor7
+  tags: [ "station", "dirty" ]
+  defaultCleanable: true
+  defaultCustomColor: true
+  showMenu: false
+  sprite:
+    sprite: _WF/Wolfmed/Effects/blood_splatter.rsi
+    state: floor7

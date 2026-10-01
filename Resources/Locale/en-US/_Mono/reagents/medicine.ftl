@@ -2,7 +2,8 @@ reagent-name-celoxradine = celoxradine
 reagent-desc-celoxradine = A medicine developed to help workers in industrial environments heal faster from uncommon workplace hazards. Slow but multipurpose.
 
 reagent-name-rhymatine = rhymatine
-reagent-desc-rhymatine = An unusual chemical for treating cellular damage, trading cellular damage for cold and shock damage.
+# WOLFGATE(Wolfmed): its cold and shock are toxin load on a wound host, not burns.
+reagent-desc-rhymatine = An unusual chemical for treating cellular damage, trading cellular damage for a toxin load.
 
 reagent-name-mesotaxinide = mesotaxinide
 reagent-desc-mesotaxinide = A refined chemical from Ambuzol+ capable of healing large amounts of toxin damage easily. It can dissolve Latoferol-based lifeforms easily. Capable of reverting natural Letoferol mutations.

@@ -2,10 +2,15 @@
 # TODO BODY: Part damage
 - type: entity
   id: PartSynth
-  parent: [ BaseItem, BasePart ]
+  parent: [WFWolfmedPartIpc, BaseItem, BasePart] # WOLFGATE(Wolfmed): M4: OD16 Synth is mechanical, chassis wound profile; WFWolfmedPartIpc must stay FIRST (RT first-parent-wins)
   name: "synth body part"
   abstract: true
   components:
+  # WOLFGATE(Wolfmed): playtest 5, the IPC part container (as PartIPCBase), so the welder and the applicator repair a synth
+  # BasePart's Inorganic is on no repair tool's list, which left "nothing needs the welder" on a synth with three chassis
+  # breaches; WFInorganicWolfmed also carries the Cold and Caustic that Inorganic drops.
+  - type: Damageable
+    damageContainer: WFInorganicWolfmed
   - type: Extractable
     juiceSolution:
       reagents:

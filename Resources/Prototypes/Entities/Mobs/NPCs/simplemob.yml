@@ -55,6 +55,9 @@
   - type: MeleeWeapon
     angle: 0
     animation: WeaponArcBite
+  # WOLFGATE(Wolfmed): W2: an animal's unarmed attack is a bite, which Wolfmed's wound rules turn into an avulsion.
+  - type: WolfmedDamageCause
+    cause: Bite
   - type: Body
     prototype: Animal
   - type: Climbing

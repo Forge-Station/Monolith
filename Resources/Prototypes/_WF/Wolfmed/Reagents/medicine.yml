@@ -1,0 +1,26 @@
+# Spaceacillin (W5). This fork ships no antibiotic at all, so infection needed one: the only thing that
+# reaches contamination a dressing cannot, and the only thing that pulls a septic patient back.
+
+- type: reagent
+  id: Spaceacillin
+  name: reagent-name-spaceacillin
+  group: Medicine
+  desc: reagent-desc-spaceacillin
+  physicalDesc: reagent-physical-desc-cloudy
+  flavor: medicine
+  color: "#c1e1ec"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.2
+      effects:
+      - !type:WolfmedTreatInfection
+        units: 1
+      # Broad-spectrum and hard on the patient: a full bottle is worse than the infection was.
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          types:
+            Poison: 1
+# Topical use goes through the humanoid base's antiseptic touch reaction, beside ethanol and the cleaners.

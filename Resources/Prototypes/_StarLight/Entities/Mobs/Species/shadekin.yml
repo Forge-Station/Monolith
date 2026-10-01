@@ -16,6 +16,12 @@
     - type: Hunger
     - type: Thirst
     - type: LayingDown
+    # WOLFGATE(Wolfmed) START: M4, OD16: shadekin is a wound host, so Wolfmed decides its state.
+    # Plan 9.2 group D. Not reparented to BaseMobSpeciesOrganic: that would add a respirator to a species with no
+    # lungs. Its organs carry Wolfmed data.
+    - type: WoundHost
+    - type: PainShockTarget
+    # WOLFGATE END
     # - type: Genetics # Funkystation - Genetics
     #   mutationSlots: 8
     - type: Shadekin
@@ -87,16 +93,24 @@
       allowedStates:
         - Alive
       damageCap: 20
-      damage:
-        types:
-          Heat: -0.07
-        groups:
-          Brute: -0.07
+      # WOLFGATE(Wolfmed) START: M4, D29: passive regen is neutralised on a wound host, as BaseMobSpeciesOrganic's is.
+      # damage:
+      #   types:
+      #     Heat: -0.07
+      #   groups:
+      #     Brute: -0.07
+      damage: {}
+      # WOLFGATE END
+    # WOLFGATE(Wolfmed) START: M4, D22, OD12: the Blunt gib moves to 1500 and the Heat body ash is removed.
+    # A wound host's body damage is the sum of its parts, so Blunt 400 was reachable from routine limb damage;
+    # 1500 as BaseMobSpeciesOrganic. The Heat 1500 body ash is gone: the living per-part ceilings sum past it, so
+    # a long fire would have ashed the body, which OD12 rules out.
     - type: Destructible
       thresholds:
         - trigger: !type:DamageTypeTrigger
             damageType: Blunt
-            damage: 400
+            # damage: 400
+            damage: 1500
           behaviors:
             - !type:GibBehavior {}
             - !type:SpawnEntitiesBehavior
@@ -104,20 +118,21 @@
                 ShadekinShadow:
                   min: 1
                   max: 1
-        - trigger: !type:DamageTypeTrigger
-            damageType: Heat
-            damage: 1500
-          behaviors:
-            - !type:SpawnEntitiesBehavior
-              spawnInContainer: true
-              spawn:
-                Ash:
-                  min: 1
-                  max: 1
-                ShadekinShadow:
-                  min: 1
-                  max: 1
-            - !type:BurnBodyBehavior {}
+        # - trigger: !type:DamageTypeTrigger
+        #     damageType: Heat
+        #     damage: 1500
+        #   behaviors:
+        #     - !type:SpawnEntitiesBehavior
+        #       spawnInContainer: true
+        #       spawn:
+        #         Ash:
+        #           min: 1
+        #           max: 1
+        #         ShadekinShadow:
+        #           min: 1
+        #           max: 1
+        #     - !type:BurnBodyBehavior {}
+    # WOLFGATE END
     - type: NpcFactionMember
       factions:
       - NanoTrasen

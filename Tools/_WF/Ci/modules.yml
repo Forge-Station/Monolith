@@ -1,0 +1,285 @@
+# Config for modules.py; see AGENTS.md, Modularity and Documenting changes.
+
+# The Monolith commit Wolfgate is based on (its merge-base with Monolith's main). The pull request check treats lines
+# that match it as upstream code. Move it forward after merging Monolith in.
+fork_point: 0e58c7c0312741882471975c86f74ebb9b829825
+
+# Modules that live outside _WF: path globs of their files (** crosses folders, * doesn't) and their README.
+external:
+  Symphony:
+    readme: Content.Server/Symphony/README.md
+    paths:
+      - Content.*/Symphony/**
+      - "**/*.Symphony.cs"
+      - Resources/Locale/en-US/symphony/**
+
+# Edits outside _WF that can't hold a WOLFGATE marker: JSON, images, audio, rich-text .txt and map files.
+# Each entry has a path (a file, a folder or a glob), the module it serves (null for a standalone edit) and a reason.
+unmarked:
+  - path: .config/dotnet-tools.json
+    module: null
+    reason: dotnet-ef local tool manifest (pinned 10.0.12) for generating EF migrations.
+  - path: Resources/ServerInfo/Rules.txt
+    module: null
+    reason: Monolith renamed to Wolfgate in the intro and section headings (#19); the file is unused (server.rules_file is MonolithRuleset).
+  - path: Resources/Textures/Mobs/Customization/Markings/Genital/
+    module: Genitals
+    reason: Genital shape and pregnant belly sprites; Wolfgate-only RSIs at an upstream path.
+  - path: Resources/Textures/Mobs/Customization/undergarments.rsi/
+    module: Genitals
+    reason: Undergarment marking sprites; Wolfgate-only RSI at an upstream path.
+  - path: Resources/Textures/_RMC14/Mobs/Customization/undershirt.rsi/
+    module: Genitals
+    reason: Undergarment marking sprites, ported from HardLight.
+  - path: Resources/Textures/_RMC14/Mobs/Customization/underwear.rsi/
+    module: Genitals
+    reason: Undergarment marking sprites, ported from HardLight.
+  - path: Resources/Textures/_Common/Interface/VerbIcons/consent_examine_with_red_dot.svg.192dpi.png
+    module: Genitals
+    reason: Consent examine verb icon, ported from HardLight.
+  - path: "Resources/Audio/Machines/robotscream_*.ogg"
+    module: Species
+    reason: Silicon scream sounds (SiliconScreams); Wolfgate-only files at an upstream path.
+  - path: Resources/Audio/Voice/Resomi/resomi_whistle.ogg
+    module: Species
+    reason: Resomi whistle emote sound, ported from HardLight.
+  - path: Resources/Audio/Voice/Shadekin/shadekin_cry.ogg
+    module: Species
+    reason: Shadekin cry emote sound, ported from HardLight.
+  - path: Resources/Textures/Clothing/Head/Hardsuits/atmospherics.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/brigmedic.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/capspace.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/engineering-white.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/engineering.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/luxury.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/maxim.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/medical.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/paramedhelm.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/rd.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/spatiohelm.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/syndicate.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/syndiecommander.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/syndieelite.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Hardsuits/syndiemedic.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Helmets/eva.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Helmets/eva_large.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/Head/Helmets/eva_syndicate.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/atmospherics.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/brigmedic.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/capspace.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/engineering-white.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/engineering.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/luxury.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/maxim.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/medical.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/paramed.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/rd.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/spatio.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/syndicate.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/syndiecommander.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/syndieelite.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Hardsuits/syndiemedic.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Suits/eva.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Suits/eva_emergency.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Clothing/OuterClothing/Suits/eva_syndicate.rsi/
+    module: Species
+    reason: Avali equipped states added (meta.json re-serialised).
+  - path: Resources/Textures/Mobs/Customization/Vulpkanin/
+    module: Species
+    reason: Vulpkanin hair, facial hair and marking sprites; Wolfgate-only RSIs at an upstream path.
+  - path: Resources/Textures/Mobs/Customization/earrings.rsi/
+    module: Species
+    reason: Earring marking sprites, ported from HardLight; Wolfgate-only RSI at an upstream path.
+  - path: Resources/Textures/Mobs/Customization/face.rsi/
+    module: Species
+    reason: Face marking sprites, ported from HardLight; Wolfgate-only RSI at an upstream path.
+  - path: Resources/Textures/Mobs/Customization/reptilian_parts.rsi/
+    module: Species
+    reason: Floof/HardLight horn, fin, neck frill and aquatic and large wagging tail states added (meta.json re-sorted).
+  - path: Resources/Textures/Mobs/Customization/scars.rsi/
+    module: Species
+    reason: Bullet, face and neck scar states added (meta.json re-sorted).
+  - path: Resources/Textures/Mobs/Customization/tattoos.rsi/
+    module: Species
+    reason: Moth eye tattoo states added (meta.json re-sorted).
+  - path: Resources/Textures/Mobs/Species/Moth/displacement.rsi/
+    module: Species
+    reason: Moth clothing displacement maps for the protogen subspecies; Wolfgate-only RSI at an upstream path.
+  - path: Resources/Textures/Mobs/Species/Reptilian/displacement.rsi/
+    module: Species
+    reason: Reptilian clothing displacement maps for the protogen subspecies; Wolfgate-only RSI at an upstream path.
+  - path: Resources/Textures/_EE/Mobs/Customization/Harpy/harpy_wings.rsi/
+    module: Species
+    reason: whitescale_harpy_folded2 state added (meta.json re-serialised).
+  - path: Resources/Textures/_Mono/Mobs/Species/Protogen/organs.rsi/
+    module: Species
+    reason: tongueforked state added (meta.json re-serialised).
+  - path: Resources/Audio/_DEN/
+    module: Species
+    reason: The Den species voice sounds, ported in #14 (Customisation Update).
+  - path: Resources/Audio/_EE/
+    module: Species
+    reason: Einstein Engines species sounds, ported in #14 (Customisation Update).
+  - path: Resources/Audio/_FarHorizons/Voice/
+    module: Species
+    reason: Far Horizons species voices, ported in #14 (Customisation Update).
+  - path: Resources/Audio/_HL/
+    module: Species
+    reason: HardLight species sound, ported in #14 (Customisation Update).
+  - path: Resources/Audio/_Impstation/Thaven/
+    module: Species
+    reason: Thaven sounds, ported from HardLight in #14 (Customisation Update).
+  - path: Resources/Audio/_RMC14/Voice/
+    module: Species
+    reason: RMC14 species voices, ported from HardLight in #14 (Customisation Update).
+  - path: Resources/Audio/_Starlight/
+    module: Species
+    reason: Starlight species sounds, ported in #14 (Customisation Update).
+  - path: Resources/Fonts/_Starlight/
+    module: Species
+    reason: Starlight fonts, ported in #14 (Customisation Update).
+  - path: Resources/Maps/_Mono/ShuttleEvent/Xeno/
+    module: Xenoborgs
+    reason: Xenoborg shuttle event maps, ported from Monolith #4558.
+  - path: Resources/Textures/DeltaV/
+    module: Species
+    reason: Delta-V species sprites, ported in #14 (Customisation Update).
+  - path: Resources/Textures/Floof/
+    module: Species
+    reason: Floof species sprites, ported in #14 (Customisation Update).
+  - path: Resources/Textures/_Bubber/
+    module: Species
+    reason: Bubberstation species and marking sprites, ported in #14 (Customisation Update).
+  - path: Resources/Textures/_CD/Mobs/
+    module: Species
+    reason: Cosmatic Drift mob sprites, ported in #14 (Customisation Update).
+  - path: Resources/Textures/_DV/Mobs/Customization/kitsune/
+    module: Species
+    reason: Kitsune marking sprites, ported in #14 (Customisation Update).
+  - path: Resources/Textures/_DV/Mobs/Customization/thaven/
+    module: Species
+    reason: Thaven marking sprites, ported in #14 (Customisation Update).
+  - path: Resources/Textures/_FarHorizons/Mobs/
+    module: Species
+    reason: Far Horizons species sprites, ported in #14 (Customisation Update).
+  - path: Resources/Textures/_Floof/
+    module: Species
+    reason: Floof marking sprites, ported from HardLight in #14 and #129.
+  - path: Resources/Textures/_HL/
+    module: Species
+    reason: HardLight species and marking sprites, ported in #14 and #129.
+  - path: Resources/Textures/_Impstation/Mobs/Customization/thaven/
+    module: Species
+    reason: Thaven marking sprites, ported from HardLight in #14 (Customisation Update).
+  - path: Resources/Textures/_Impstation/Mobs/Species/
+    module: Species
+    reason: Impstation species sprites, ported from HardLight in #14 (Customisation Update).
+  - path: Resources/Textures/_Mono/Structures/Storage/Crates/xeno.rsi/
+    module: Xenoborgs
+    reason: Xenoborg crate sprites, ported from Monolith #4558.
+  - path: Resources/Textures/_Mono/Structures/Walls/xorgreinforced.rsi/
+    module: Xenoborgs
+    reason: Xenoborg reinforced wall sprites, ported from Monolith #4558.
+  - path: Resources/Textures/_Mono/Structures/Walls/xorgreinforced_Diag.rsi/
+    module: Xenoborgs
+    reason: Xenoborg diagonal wall sprites, ported from Monolith #4558.
+  - path: Resources/Textures/_NF/Mobs/Customization/human_hair.rsi/
+    module: Species
+    reason: Extra human hair sprites, ported in #14 (Customisation Update).
+  - path: Resources/Textures/_RMC14/Actions/
+    module: Species
+    reason: RMC14 action icons, ported from HardLight in #14 (Customisation Update).
+  - path: Resources/Textures/_RMC14/Mobs/
+    module: Species
+    reason: RMC14 mob and marking sprites, ported from HardLight in #14 (Customisation Update).
+  - path: Resources/Textures/_Starlight/
+    module: Species
+    reason: Starlight species sprites, ported in #14 (Customisation Update).
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: Traders
+    reason: NPC traders, ATMs, deposit consoles and vents placed on the Central Command map.
+  - path: Resources/Textures/Tiles/exoborg.png
+    module: Xenoborgs
+    reason: Exoborg floor tile redrawn.
+  - path: Resources/Textures/_Onyx/
+    module: Wolfmed
+    reason: Space Onyx wound-system sprites (wound and fracture states, alerts, medical items) ported with Wolfmed.
+  - path: Resources/Maps/_NF/POI/medical.yml
+    module: Wolfmed
+    reason: An autodoc pod placed in the medical POI.
+  - path: Resources/Textures/Effects/fire.rsi/
+    module: BetterFire
+    reason: Object fire state (fire) replaced with TauCeti generic_overlay.
+  - path: Resources/Textures/Mobs/Effects/onfire.rsi/
+    module: BetterFire
+    reason: Generic_mob_burning and Standing replaced with TauCeti fire sprites; Standing_underlay added.

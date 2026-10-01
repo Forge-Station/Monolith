@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Explosion.Components;
+using Content.Server._WF.Wolfmed.Explosion; // WOLFGATE(Wolfmed): HOOK 22
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -28,6 +29,8 @@ namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem
 {
+    [Dependency] private WolfmedExplosionSystem _wolfmedExplosion = default!; // WOLFGATE(Wolfmed): HOOK 22
+
     /// <summary>
     ///     Used to limit explosion processing time. See <see cref="MaxProcessingTime"/>.
     /// </summary>
@@ -468,6 +471,7 @@ public sealed partial class ExplosionSystem
                 }
 
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
+                if (!_wolfmedExplosion.TryApplyExplosionDamage(entity, damage)) // WOLFGATE(Wolfmed): HOOK 22 - wound hosts split the blast across their limbs; everyone else falls through unchanged.
                 _damageableSystem.TryChangeDamage(entity, damage, ignoreResistances: true, ignoreGlobalModifiers: true,
                 // Mono: Explosion flag for plate protection
                 originFlag: DamageableSystem.DamageOriginFlag.Explosion);

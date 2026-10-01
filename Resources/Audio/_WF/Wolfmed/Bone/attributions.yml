@@ -1,0 +1,4 @@
+- files: ["crack1.ogg", "crack2.ogg", "crack3.ogg", "tendon_snap1.ogg", "tendon_snap2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Bobstation reignited (tgstation lineage), modular_septic/sound/gore, at commit 7850ebd9f86f8ba7cef23b34b60e309c39e156e9. Downmixed to mono; tendon_snap1 converted from WAV and tendon_snap2 resampled to 44.1 kHz."
+  source: "https://gitgud.io/bobstation/bobstation-reignited/-/tree/7850ebd9f86f8ba7cef23b34b60e309c39e156e9/modular_septic/sound/gore"

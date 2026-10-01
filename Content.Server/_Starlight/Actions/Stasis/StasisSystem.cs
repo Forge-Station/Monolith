@@ -9,6 +9,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems; // HardLight
 using Content.Shared._Starlight.Actions.Stasis;
+using Content.Shared._Onyx.Wounds; // WOLFGATE(Wolfmed): a wound host's stasis runs in WolfmedStasisSystem
 using Robust.Shared.Player;
 
 namespace Content.Server._Starlight.Actions.Stasis;
@@ -186,6 +187,11 @@ public sealed class StasisSystem : SharedStasisSystem
     private void ApplyResistance(EntityUid uid, DamageChangedEvent args, StasisComponent comp,
         StasisHealingValues healingValues)
     {
+        // WOLFGATE(Wolfmed) START: a wound host keeps a hit's share before it is a wound, in WolfmedStasisSystem.
+        if (HasComp<WoundHostComponent>(uid))
+            return;
+        // WOLFGATE END
+
         // Skip if this is healing or if the damage change is from our own healing
         if (!args.DamageIncreased || args.DamageDelta == null || args.Origin == uid)
             return;
@@ -214,6 +220,11 @@ public sealed class StasisSystem : SharedStasisSystem
     {
         if (!comp.IsInStasis)
             return;
+
+        // WOLFGATE(Wolfmed) START: a wound host's stasis heals in WolfmedStasisSystem, which holds its bleeds and never sets a bone.
+        if (HasComp<WoundHostComponent>(uid))
+            return;
+        // WOLFGATE END
 
         // Apply healing effect
         var healAmount = new DamageSpecifier();

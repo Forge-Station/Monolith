@@ -158,6 +158,13 @@
           Brute: -1
       - !type:ModifyBleedAmount # Mono: buff to differentiate more from trico
         amount: -0.25
+      # WOLFGATE(Wolfmed): PROTO I: Onyx's <Onyx-PartPain> block on Bicaridine. Group is Medicine, not Onyx's
+      # Bloodstream - Wolfgate has no Bloodstream metabolism group and Bicaridine's only group is Medicine.
+      - !type:SuppressPain
+        amount: 0.75
+        decayDuration: 18
+        identifier: Bicaridine
+        recoveryMultiplier: 1.75
       - !type:HealthChange
         conditions:
         - !type:OrganType # Goobstation - Yowie
@@ -449,6 +456,11 @@
           min: 45
         reagent: Histamine
         amount: -5
+      # WOLFGATE(Wolfmed): CONSC: painkiller tier. Stimulant: this is what an emergency medipen already carries,
+      # so a pen keeps doing what players expect of it without reaching the unconscious threshold.
+      - !type:WolfmedPainRelief
+        tier: Stimulant
+        strength: 6
       - !type:HealthChange
         conditions:
           # they gotta be in crit first

@@ -37,7 +37,7 @@
 
 - type: entity
   id: OrganProtogenBrain
-  parent: BaseProtogenOrganUnGibbable
+  parent: [BaseProtogenOrganUnGibbable, WFWolfmedOrganBrain] # WOLFGATE(Wolfmed): M4: OD16 parity, brain clock (plan 9.2 group C)
   name: brain
   description: "The source of incredible, unending intelligence. 01001000 01101111 01101110 01101011 00101110"
   components:
@@ -134,7 +134,7 @@
 
 - type: entity
   id: OrganProtogenLungs
-  parent: BaseProtogenOrgan
+  parent: [BaseProtogenOrgan, WFWolfmedOrganLungs] # WOLFGATE(Wolfmed): M4: OD16 parity, Wolfmed lung data (plan 9.2 group C)
   name: lungs
   description: "Filters oxygen from an atmosphere, which is then sent into the bloodstream to be used as an electron carrier. God knows how a Protogen breathes at all."
   components:
@@ -173,7 +173,7 @@
 
 - type: entity
   id: OrganProtogenHeart
-  parent: BaseProtogenOrgan
+  parent: [BaseProtogenOrgan, WFWolfmedOrganHeart] # WOLFGATE(Wolfmed): M4: OD16 parity, Wolfmed heart data (plan 9.2 group C)
   name: heart
   description: "Even the most stone-cold, technology-based heart was alive once."
   components:

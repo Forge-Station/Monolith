@@ -1,0 +1,1061 @@
+# UI4: the analyzer's treatment procedures, one per wound prototype and one per part or body
+# condition, plus a Mechanical variant wherever a chassis is treated differently.
+#
+# Each step names the item or reagent it is done with (drawn as that prototype's sprite) and the
+# checks that grey the row out once the analyzer says it has been done. A step with no checks is
+# never greyed on its own; the whole procedure greys when the finding is gone.
+# Ids are derived by WolfmedTreatmentAdvice and a coverage test iterates every wound prototype.
+
+- type: wolfmedTreatmentProcedure
+  id: BluntWound
+  summary: wolfmed-treatment-short-blunt-wound
+  steps:
+  - text: wolfmed-treatment-step-blunt-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-blunt-wound-2
+    tool: Brutepack
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-blunt-wound-3
+    tool: HandheldHealthAnalyzer
+  avoid:
+  - wolfmed-treatment-avoid-blunt-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: SlashWound
+  summary: wolfmed-treatment-short-slash-wound
+  steps:
+  - text: wolfmed-treatment-step-slash-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-slash-wound-2
+    tool: Gauze
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-slash-wound-3
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  - text: wolfmed-treatment-step-slash-wound-4
+    reagent: Ethanol
+    done: [ Cleaned ]
+  avoid:
+  - wolfmed-treatment-avoid-slash-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: PiercingWound
+  summary: wolfmed-treatment-short-piercing-wound
+  steps:
+  - text: wolfmed-treatment-step-piercing-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-piercing-wound-2
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-piercing-wound-3
+    tool: Gauze
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-piercing-wound-4
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  avoid:
+  - wolfmed-treatment-avoid-piercing-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: BurnWound
+  summary: wolfmed-treatment-short-burn-wound
+  steps:
+  - text: wolfmed-treatment-step-burn-wound-1
+    tool: SprayBottleWater
+  - text: wolfmed-treatment-step-burn-wound-2
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-burn-wound-3
+    tool: Ointment
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-burn-wound-4
+    tool: WFWolfmedSkinGraft
+    surgery: true
+  avoid:
+  - wolfmed-treatment-avoid-burn-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: ElectricalWound
+  summary: wolfmed-treatment-short-electrical-wound
+  steps:
+  - text: wolfmed-treatment-step-electrical-wound-1
+  - text: wolfmed-treatment-step-electrical-wound-2
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-electrical-wound-3
+    tool: Ointment
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-electrical-wound-4
+    tool: HandheldHealthAnalyzer
+
+- type: wolfmedTreatmentProcedure
+  id: ElectricalWoundMechanical
+  summary: wolfmed-treatment-short-electrical-wound-mechanical
+  steps:
+  - text: wolfmed-treatment-step-electrical-wound-mechanical-1
+  - text: wolfmed-treatment-step-electrical-wound-mechanical-2
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-electrical-wound-mechanical-3
+    tool: CableApcStack
+    done: [ SubjectGone ]
+  avoid:
+  - wolfmed-treatment-avoid-electrical-wound-mechanical-1
+
+- type: wolfmedTreatmentProcedure
+  id: BoneFractureWound
+  summary: wolfmed-treatment-short-bone-fracture-wound
+  steps:
+  - text: wolfmed-treatment-step-bone-fracture-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-bone-fracture-wound-2
+    tool: WFWolfmedSplint
+    done: [ FractureReduced ]
+  - text: wolfmed-treatment-step-bone-fracture-wound-3
+  - text: wolfmed-treatment-step-bone-fracture-wound-4
+    tool: Bonesetter
+    surgery: true
+    done: [ FractureMended ]
+  - text: wolfmed-treatment-step-bone-fracture-wound-5
+    reagent: Osteogen
+    done: [ FractureMended ]
+  avoid:
+  - wolfmed-treatment-avoid-bone-fracture-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: SystemicBleedingWound
+  summary: wolfmed-treatment-short-systemic-bleeding-wound
+  steps:
+  - text: wolfmed-treatment-step-systemic-bleeding-wound-1
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-systemic-bleeding-wound-2
+    tool: Hemostat
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-systemic-bleeding-wound-3
+    tool: Bloodpack
+    done: [ BloodRestored ]
+  avoid:
+  - wolfmed-treatment-avoid-systemic-bleeding-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: SystemicBleedingWoundMechanical
+  summary: wolfmed-treatment-short-systemic-bleeding-wound-mechanical
+  steps:
+  - text: wolfmed-treatment-step-systemic-bleeding-wound-mechanical-1
+    tool: Scalpel
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-systemic-bleeding-wound-mechanical-2
+    tool: HandheldHealthAnalyzer
+
+- type: wolfmedTreatmentProcedure
+  id: InternalBleedingWound
+  summary: wolfmed-treatment-short-internal-bleeding-wound
+  steps:
+  - text: wolfmed-treatment-step-internal-bleeding-wound-1
+    tool: HandheldHealthAnalyzer
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-internal-bleeding-wound-2
+    tool: Scalpel
+    surgery: true
+  - text: wolfmed-treatment-step-internal-bleeding-wound-3
+    tool: Hemostat
+    surgery: true
+    done: [ InternalBleedingStopped ]
+  - text: wolfmed-treatment-step-internal-bleeding-wound-4
+    tool: HandheldHealthAnalyzer
+  avoid:
+  - wolfmed-treatment-avoid-internal-bleeding-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: SurgicalIncisionWound
+  summary: wolfmed-treatment-short-surgical-incision-wound
+  steps:
+  - text: wolfmed-treatment-step-surgical-incision-wound-1
+    surgery: true
+  - text: wolfmed-treatment-step-surgical-incision-wound-2
+    tool: Cautery
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-surgical-incision-wound-3
+    tool: Hemostat
+    surgery: true
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-surgical-incision-wound-4
+    reagent: Ethanol
+    done: [ Cleaned ]
+
+- type: wolfmedTreatmentProcedure
+  id: SurgicalIncisionWoundMechanical
+  summary: wolfmed-treatment-short-surgical-incision-wound-mechanical
+  steps:
+  - text: wolfmed-treatment-step-surgical-incision-wound-mechanical-1
+    surgery: true
+  - text: wolfmed-treatment-step-surgical-incision-wound-mechanical-2
+    tool: Cautery
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-surgical-incision-wound-mechanical-3
+
+- type: wolfmedTreatmentProcedure
+  id: DismembermentWound
+  summary: wolfmed-treatment-short-dismemberment-wound
+  steps:
+  - text: wolfmed-treatment-step-dismemberment-wound-1
+    tool: Tourniquet
+    done: [ Tourniqueted ]
+  - text: wolfmed-treatment-step-dismemberment-wound-2
+    tool: Hemostat
+    surgery: true
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-dismemberment-wound-3
+    tool: Tourniquet
+  - text: wolfmed-treatment-step-dismemberment-wound-4
+    surgery: true
+  avoid:
+  - wolfmed-treatment-avoid-dismemberment-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: DismembermentWoundMechanical
+  summary: wolfmed-treatment-short-dismemberment-wound-mechanical
+  steps:
+  - text: wolfmed-treatment-step-dismemberment-wound-mechanical-1
+    tool: Tourniquet
+    done: [ Tourniqueted ]
+  - text: wolfmed-treatment-step-dismemberment-wound-mechanical-2
+    tool: Hemostat
+    surgery: true
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-dismemberment-wound-mechanical-3
+    surgery: true
+
+- type: wolfmedTreatmentProcedure
+  id: AmputationConsequenceWound
+  summary: wolfmed-treatment-short-amputation-consequence-wound
+  steps:
+  - text: wolfmed-treatment-step-amputation-consequence-wound-1
+    tool: Tourniquet
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-amputation-consequence-wound-2
+    tool: Scalpel
+    surgery: true
+  - text: wolfmed-treatment-step-amputation-consequence-wound-3
+    tool: Hemostat
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-amputation-consequence-wound-4
+    surgery: true
+
+- type: wolfmedTreatmentProcedure
+  id: AmputationConsequenceWoundMechanical
+  summary: wolfmed-treatment-short-amputation-consequence-wound-mechanical
+  steps:
+  - text: wolfmed-treatment-step-amputation-consequence-wound-mechanical-1
+    tool: Welder
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-amputation-consequence-wound-mechanical-2
+    tool: Scalpel
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-amputation-consequence-wound-mechanical-3
+    surgery: true
+
+- type: wolfmedTreatmentProcedure
+  id: MedicalScarWound
+  summary: wolfmed-treatment-short-medical-scar-wound
+  steps:
+  - text: wolfmed-treatment-step-medical-scar-wound-1
+  - text: wolfmed-treatment-step-medical-scar-wound-2
+
+- type: wolfmedTreatmentProcedure
+  id: IpcMechanicalDamageWound
+  summary: wolfmed-treatment-short-ipc-mechanical-damage-wound
+  steps:
+  - text: wolfmed-treatment-step-ipc-mechanical-damage-wound-1
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-ipc-mechanical-damage-wound-2
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-ipc-mechanical-damage-wound-3
+    tool: Welder
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-ipc-mechanical-damage-wound-4
+    tool: CableApcStack
+    done: [ SubjectGone ]
+  avoid:
+  - wolfmed-treatment-avoid-ipc-mechanical-damage-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: CyberneticMechanicalDamageWound
+  summary: wolfmed-treatment-short-cybernetic-mechanical-damage-wound
+  steps:
+  - text: wolfmed-treatment-step-cybernetic-mechanical-damage-wound-1
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-cybernetic-mechanical-damage-wound-2
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-cybernetic-mechanical-damage-wound-3
+    tool: Welder
+    done: [ SubjectGone ]
+  avoid:
+  - wolfmed-treatment-avoid-cybernetic-mechanical-damage-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: CyberneticFrameFractureWound
+  summary: wolfmed-treatment-short-cybernetic-frame-fracture-wound
+  steps:
+  - text: wolfmed-treatment-step-cybernetic-frame-fracture-wound-1
+    tool: Scalpel
+    surgery: true
+  - text: wolfmed-treatment-step-cybernetic-frame-fracture-wound-2
+    tool: Bonesetter
+    surgery: true
+    done: [ FractureMended ]
+  - text: wolfmed-treatment-step-cybernetic-frame-fracture-wound-3
+    tool: Cautery
+    surgery: true
+
+- type: wolfmedTreatmentProcedure
+  id: SlimeBluntWound
+  summary: wolfmed-treatment-short-slime-blunt-wound
+  steps:
+  - text: wolfmed-treatment-step-slime-blunt-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-slime-blunt-wound-2
+    tool: Brutepack
+    done: [ SubjectGone ]
+
+- type: wolfmedTreatmentProcedure
+  id: SlimeSlashWound
+  summary: wolfmed-treatment-short-slime-slash-wound
+  steps:
+  - text: wolfmed-treatment-step-slime-slash-wound-1
+    tool: Gauze
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-slime-slash-wound-2
+    tool: MedicatedSuture
+    done: [ Sutured ]
+
+- type: wolfmedTreatmentProcedure
+  id: SlimePiercingWound
+  summary: wolfmed-treatment-short-slime-piercing-wound
+  steps:
+  - text: wolfmed-treatment-step-slime-piercing-wound-1
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-slime-piercing-wound-2
+    tool: MedicatedSuture
+    done: [ Sutured ]
+
+- type: wolfmedTreatmentProcedure
+  id: SlimeBurnWound
+  summary: wolfmed-treatment-short-slime-burn-wound
+  steps:
+  - text: wolfmed-treatment-step-slime-burn-wound-1
+    tool: SprayBottleWater
+  - text: wolfmed-treatment-step-slime-burn-wound-2
+    tool: Ointment
+    done: [ SubjectGone ]
+
+- type: wolfmedTreatmentProcedure
+  id: PlantBluntWound
+  summary: wolfmed-treatment-short-plant-blunt-wound
+  steps:
+  - text: wolfmed-treatment-step-plant-blunt-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-plant-blunt-wound-2
+    tool: Brutepack
+    done: [ SubjectGone ]
+
+- type: wolfmedTreatmentProcedure
+  id: PlantSlashWound
+  summary: wolfmed-treatment-short-plant-slash-wound
+  steps:
+  - text: wolfmed-treatment-step-plant-slash-wound-1
+    tool: Gauze
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-plant-slash-wound-2
+    tool: MedicatedSuture
+    done: [ Sutured ]
+
+- type: wolfmedTreatmentProcedure
+  id: PlantPiercingWound
+  summary: wolfmed-treatment-short-plant-piercing-wound
+  steps:
+  - text: wolfmed-treatment-step-plant-piercing-wound-1
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-plant-piercing-wound-2
+    tool: MedicatedSuture
+    done: [ Sutured ]
+
+- type: wolfmedTreatmentProcedure
+  id: PlantBurnWound
+  summary: wolfmed-treatment-short-plant-burn-wound
+  steps:
+  - text: wolfmed-treatment-step-plant-burn-wound-1
+    tool: SprayBottleWater
+  - text: wolfmed-treatment-step-plant-burn-wound-2
+    tool: Ointment
+    done: [ SubjectGone ]
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedGrazeWound
+  summary: wolfmed-treatment-short-wolfmed-graze-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-graze-wound-1
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-wolfmed-graze-wound-2
+    tool: Gauze
+    done: [ Dressed ]
+  - text: wolfmed-treatment-step-wolfmed-graze-wound-3
+    reagent: Ethanol
+    done: [ Cleaned ]
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedGunshotWound
+  summary: wolfmed-treatment-short-wolfmed-gunshot-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-gunshot-wound-1
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-wolfmed-gunshot-wound-2
+    tool: Gauze
+    done: [ Dressed ]
+  - text: wolfmed-treatment-step-wolfmed-gunshot-wound-3
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  - text: wolfmed-treatment-step-wolfmed-gunshot-wound-4
+    reagent: Ethanol
+    done: [ Cleaned ]
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-gunshot-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedLodgedRoundWound
+  summary: wolfmed-treatment-short-wolfmed-lodged-round-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-lodged-round-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-wolfmed-lodged-round-wound-2
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-wolfmed-lodged-round-wound-3
+    tool: Scalpel
+  - text: wolfmed-treatment-step-wolfmed-lodged-round-wound-4
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  - text: wolfmed-treatment-step-wolfmed-lodged-round-wound-5
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-lodged-round-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedShrapnelWound
+  summary: wolfmed-treatment-short-wolfmed-shrapnel-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-shrapnel-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-wolfmed-shrapnel-wound-2
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-wolfmed-shrapnel-wound-3
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  - text: wolfmed-treatment-step-wolfmed-shrapnel-wound-4
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-shrapnel-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedArterialBleedWound
+  summary: wolfmed-treatment-short-wolfmed-arterial-bleed-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-arterial-bleed-wound-1
+    tool: Tourniquet
+    done: [ Tourniqueted ]
+  - text: wolfmed-treatment-step-wolfmed-arterial-bleed-wound-2
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  - text: wolfmed-treatment-step-wolfmed-arterial-bleed-wound-3
+    tool: Hemostat
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-arterial-bleed-wound-4
+    tool: Welder
+  - text: wolfmed-treatment-step-wolfmed-arterial-bleed-wound-5
+    tool: Tourniquet
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-arterial-bleed-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedTendonCutWound
+  summary: wolfmed-treatment-short-wolfmed-tendon-cut-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-tendon-cut-wound-1
+    tool: Scalpel
+    surgery: true
+  - text: wolfmed-treatment-step-wolfmed-tendon-cut-wound-2
+    tool: Hemostat
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-tendon-cut-wound-3
+    tool: Cautery
+    surgery: true
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-tendon-cut-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedAvulsionWound
+  summary: wolfmed-treatment-short-wolfmed-avulsion-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-avulsion-wound-1
+    tool: Gauze
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-wolfmed-avulsion-wound-2
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  - text: wolfmed-treatment-step-wolfmed-avulsion-wound-3
+    reagent: Ethanol
+    done: [ Cleaned ]
+  - text: wolfmed-treatment-step-wolfmed-avulsion-wound-4
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedCrushInjuryWound
+  summary: wolfmed-treatment-short-wolfmed-crush-injury-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-crush-injury-wound-1
+    tool: Brutepack
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-crush-injury-wound-2
+    tool: HandheldHealthAnalyzer
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedConcussionWound
+  summary: wolfmed-treatment-short-wolfmed-concussion-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-concussion-wound-1
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-concussion-wound-2
+  - text: wolfmed-treatment-step-wolfmed-concussion-wound-3
+    tool: HandheldHealthAnalyzer
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-concussion-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedDislocationWound
+  summary: wolfmed-treatment-short-wolfmed-dislocation-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-dislocation-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-wolfmed-dislocation-wound-2
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-dislocation-wound-3
+  - text: wolfmed-treatment-step-wolfmed-dislocation-wound-4
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-dislocation-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedOrganContusionWound
+  summary: wolfmed-treatment-short-wolfmed-organ-contusion-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-organ-contusion-wound-1
+    tool: Brutepack
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-organ-contusion-wound-2
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-wolfmed-organ-contusion-wound-3
+    tool: Hemostat
+    surgery: true
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedCharringWound
+  summary: wolfmed-treatment-short-wolfmed-charring-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-charring-wound-1
+    tool: Scalpel
+    surgery: true
+  - text: wolfmed-treatment-step-wolfmed-charring-wound-2
+    tool: WFWolfmedSkinGraft
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-charring-wound-3
+    tool: Cautery
+    surgery: true
+  - text: wolfmed-treatment-step-wolfmed-charring-wound-4
+    tool: HandheldHealthAnalyzer
+    done: [ NecrosisRiskCleared ]
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-charring-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedFrostbiteWound
+  summary: wolfmed-treatment-short-wolfmed-frostbite-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-frostbite-wound-1
+  - text: wolfmed-treatment-step-wolfmed-frostbite-wound-2
+    tool: Ointment
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-frostbite-wound-3
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-wolfmed-frostbite-wound-4
+    tool: HandheldHealthAnalyzer
+    done: [ NecrosisRiskCleared ]
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedChemicalBurnWound
+  summary: wolfmed-treatment-short-wolfmed-chemical-burn-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-chemical-burn-wound-1
+    tool: SprayBottleWater
+  - text: wolfmed-treatment-step-wolfmed-chemical-burn-wound-2
+    tool: Ointment
+    done: [ SubjectGone ]
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-chemical-burn-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedInternalBurnWound
+  summary: wolfmed-treatment-short-wolfmed-internal-burn-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-internal-burn-wound-1
+  - text: wolfmed-treatment-step-wolfmed-internal-burn-wound-2
+    tool: Ointment
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-internal-burn-wound-3
+    tool: Hemostat
+    surgery: true
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedNecrosisWound
+  summary: wolfmed-treatment-short-wolfmed-necrosis-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-necrosis-wound-1
+  - text: wolfmed-treatment-step-wolfmed-necrosis-wound-2
+    tool: Saw
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-necrosis-wound-3
+    reagent: Spaceacillin
+    done: [ SepsisCleared ]
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-necrosis-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedDentWound
+  summary: wolfmed-treatment-short-wolfmed-dent-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-dent-wound-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-wolfmed-dent-wound-2
+    tool: Welder
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-dent-wound-3
+    tool: HandheldHealthAnalyzer
+    done: [ SubjectGone ]
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedBreachWound
+  summary: wolfmed-treatment-short-wolfmed-breach-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-breach-wound-1
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-wolfmed-breach-wound-2
+    tool: Welder
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-wolfmed-breach-wound-3
+    tool: HandheldHealthAnalyzer
+    done: [ SubjectGone ]
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-breach-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedShortCircuitWound
+  summary: wolfmed-treatment-short-wolfmed-short-circuit-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-short-circuit-wound-1
+  - text: wolfmed-treatment-step-wolfmed-short-circuit-wound-2
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-wolfmed-short-circuit-wound-3
+    tool: CableApcStack
+    done: [ SubjectGone ]
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-short-circuit-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedServoDamageWound
+  summary: wolfmed-treatment-short-wolfmed-servo-damage-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-servo-damage-wound-1
+    tool: Scalpel
+    surgery: true
+  - text: wolfmed-treatment-step-wolfmed-servo-damage-wound-2
+    tool: CableApcStack
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-servo-damage-wound-3
+    tool: Cautery
+    surgery: true
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-servo-damage-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedOverheatingWound
+  summary: wolfmed-treatment-short-wolfmed-overheating-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-overheating-wound-1
+    done: [ Cooled ]
+  - text: wolfmed-treatment-step-wolfmed-overheating-wound-2
+    done: [ Cooled ]
+  - text: wolfmed-treatment-step-wolfmed-overheating-wound-3
+    tool: SprayBottleWater
+    done: [ Cooled ]
+
+- type: wolfmedTreatmentProcedure
+  id: CondBleeding
+  summary: wolfmed-treatment-short-cond-bleeding
+  steps:
+  - text: wolfmed-treatment-step-cond-bleeding-1
+    tool: Gauze
+    done: [ Dressed ]
+  - text: wolfmed-treatment-step-cond-bleeding-2
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  - text: wolfmed-treatment-step-cond-bleeding-3
+    tool: Tourniquet
+    done: [ Tourniqueted ]
+  - text: wolfmed-treatment-step-cond-bleeding-4
+    tool: Tourniquet
+  avoid:
+  - wolfmed-treatment-avoid-cond-bleeding-1
+
+- type: wolfmedTreatmentProcedure
+  id: CondBleedingMechanical
+  summary: wolfmed-treatment-short-cond-bleeding-mechanical
+  steps:
+  - text: wolfmed-treatment-step-cond-bleeding-mechanical-1
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-cond-bleeding-mechanical-2
+    tool: Welder
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-cond-bleeding-mechanical-3
+
+- type: wolfmedTreatmentProcedure
+  id: CondInternalBleeding
+  summary: wolfmed-treatment-short-cond-internal-bleeding
+  steps:
+  - text: wolfmed-treatment-step-cond-internal-bleeding-1
+  - text: wolfmed-treatment-step-cond-internal-bleeding-2
+    tool: Scalpel
+    surgery: true
+  - text: wolfmed-treatment-step-cond-internal-bleeding-3
+    tool: Hemostat
+    surgery: true
+    done: [ InternalBleedingStopped ]
+  - text: wolfmed-treatment-step-cond-internal-bleeding-4
+    tool: HandheldHealthAnalyzer
+
+- type: wolfmedTreatmentProcedure
+  id: CondFracture
+  summary: wolfmed-treatment-short-cond-fracture
+  steps:
+  - text: wolfmed-treatment-step-cond-fracture-1
+    tool: WFWolfmedSplint
+    done: [ FractureReduced ]
+  - text: wolfmed-treatment-step-cond-fracture-2
+  - text: wolfmed-treatment-step-cond-fracture-3
+    tool: Bonesetter
+    surgery: true
+    done: [ FractureMended ]
+  - text: wolfmed-treatment-step-cond-fracture-4
+    reagent: Osteogen
+    done: [ FractureMended ]
+  avoid:
+  - wolfmed-treatment-avoid-cond-fracture-1
+
+- type: wolfmedTreatmentProcedure
+  id: CondFractureMechanical
+  summary: wolfmed-treatment-short-cond-fracture-mechanical
+  steps:
+  - text: wolfmed-treatment-step-cond-fracture-mechanical-1
+    tool: Scalpel
+    surgery: true
+  - text: wolfmed-treatment-step-cond-fracture-mechanical-2
+    tool: Bonesetter
+    surgery: true
+    done: [ FractureMended ]
+  - text: wolfmed-treatment-step-cond-fracture-mechanical-3
+    tool: Cautery
+    surgery: true
+
+- type: wolfmedTreatmentProcedure
+  id: CondClotting
+  summary: wolfmed-treatment-short-cond-clotting
+  steps:
+  - text: wolfmed-treatment-step-cond-clotting-1
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-cond-clotting-2
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-cond-clotting-3
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-cond-clotting-4
+
+- type: wolfmedTreatmentProcedure
+  id: CondClottingMechanical
+  summary: wolfmed-treatment-short-cond-clotting-mechanical
+  steps:
+  - text: wolfmed-treatment-step-cond-clotting-mechanical-1
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-cond-clotting-mechanical-2
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-cond-clotting-mechanical-3
+    tool: Welder
+    done: [ BleedingStopped ]
+
+- type: wolfmedTreatmentProcedure
+  id: CondEmbedded
+  summary: wolfmed-treatment-short-cond-embedded
+  steps:
+  - text: wolfmed-treatment-step-cond-embedded-1
+    done: [ PartTargeted ]
+  - text: wolfmed-treatment-step-cond-embedded-2
+    tool: Hemostat
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-cond-embedded-3
+    tool: MedicatedSuture
+    done: [ EmbeddedRemoved ]
+  - text: wolfmed-treatment-step-cond-embedded-4
+    tool: Scalpel
+
+- type: wolfmedTreatmentProcedure
+  id: CondInfectionLocal
+  summary: wolfmed-treatment-short-cond-infection-local
+  steps:
+  - text: wolfmed-treatment-step-cond-infection-local-1
+    reagent: Ethanol
+    done: [ Cleaned ]
+  - text: wolfmed-treatment-step-cond-infection-local-2
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  - text: wolfmed-treatment-step-cond-infection-local-3
+    tool: Gauze
+    done: [ Dressed ]
+  avoid:
+  - wolfmed-treatment-avoid-cond-infection-local-1
+
+- type: wolfmedTreatmentProcedure
+  id: CondInfectionSpreading
+  summary: wolfmed-treatment-short-cond-infection-spreading
+  steps:
+  - text: wolfmed-treatment-step-cond-infection-spreading-1
+    reagent: Spaceacillin
+    done: [ InfectionCleared ]
+  - text: wolfmed-treatment-step-cond-infection-spreading-2
+    reagent: Spaceacillin
+  - text: wolfmed-treatment-step-cond-infection-spreading-3
+    tool: MedicatedSuture
+    done: [ Sutured ]
+  avoid:
+  - wolfmed-treatment-avoid-cond-infection-spreading-1
+
+- type: wolfmedTreatmentProcedure
+  id: CondInfectionSeptic
+  summary: wolfmed-treatment-short-cond-infection-septic
+  steps:
+  - text: wolfmed-treatment-step-cond-infection-septic-1
+    reagent: Spaceacillin
+    done: [ InfectionCleared ]
+  - text: wolfmed-treatment-step-cond-infection-septic-2
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-cond-infection-septic-3
+    tool: Saw
+    surgery: true
+  avoid:
+  - wolfmed-treatment-avoid-cond-infection-septic-1
+
+- type: wolfmedTreatmentProcedure
+  id: CondNecrosis
+  summary: wolfmed-treatment-short-cond-necrosis
+  steps:
+  - text: wolfmed-treatment-step-cond-necrosis-1
+    tool: Saw
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-cond-necrosis-2
+    reagent: Spaceacillin
+    done: [ SepsisCleared ]
+  avoid:
+  - wolfmed-treatment-avoid-cond-necrosis-1
+
+- type: wolfmedTreatmentProcedure
+  id: CondNecrosisRisk
+  summary: wolfmed-treatment-short-cond-necrosis-risk
+  steps:
+  - text: wolfmed-treatment-step-cond-necrosis-risk-1
+    tool: Tourniquet
+  - text: wolfmed-treatment-step-cond-necrosis-risk-2
+    tool: WFWolfmedSkinGraft
+  - text: wolfmed-treatment-step-cond-necrosis-risk-3
+    surgery: true
+  - text: wolfmed-treatment-step-cond-necrosis-risk-4
+
+- type: wolfmedTreatmentProcedure
+  id: CondOverheating
+  summary: wolfmed-treatment-short-cond-overheating
+  steps:
+  - text: wolfmed-treatment-step-cond-overheating-1
+    done: [ Cooled ]
+  - text: wolfmed-treatment-step-cond-overheating-2
+    done: [ Cooled ]
+  - text: wolfmed-treatment-step-cond-overheating-3
+    tool: SprayBottleWater
+    done: [ Cooled ]
+
+- type: wolfmedTreatmentProcedure
+  id: CondImpaired
+  summary: wolfmed-treatment-short-cond-impaired
+  steps:
+  - text: wolfmed-treatment-step-cond-impaired-1
+    tool: HandheldHealthAnalyzer
+    done: [ FunctionRestored ]
+  - text: wolfmed-treatment-step-cond-impaired-2
+    tool: Bonesetter
+    done: [ FractureMended ]
+
+- type: wolfmedTreatmentProcedure
+  id: CondDisabled
+  summary: wolfmed-treatment-short-cond-disabled
+  steps:
+  - text: wolfmed-treatment-step-cond-disabled-1
+    tool: Bonesetter
+    surgery: true
+    done: [ FractureMended ]
+  - text: wolfmed-treatment-step-cond-disabled-2
+  - text: wolfmed-treatment-step-cond-disabled-3
+    tool: Hemostat
+    surgery: true
+  - text: wolfmed-treatment-step-cond-disabled-4
+    tool: Saw
+    surgery: true
+
+- type: wolfmedTreatmentProcedure
+  id: CondUnavailable
+  summary: wolfmed-treatment-short-cond-unavailable
+  steps:
+  - text: wolfmed-treatment-step-cond-unavailable-1
+    tool: Tourniquet
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-cond-unavailable-2
+    tool: Hemostat
+    surgery: true
+  - text: wolfmed-treatment-step-cond-unavailable-3
+    surgery: true
+    done: [ FunctionRestored ]
+
+- type: wolfmedTreatmentProcedure
+  id: CondSepsis
+  summary: wolfmed-treatment-short-cond-sepsis
+  steps:
+  - text: wolfmed-treatment-step-cond-sepsis-1
+    reagent: Spaceacillin
+    done: [ SepsisCleared ]
+  - text: wolfmed-treatment-step-cond-sepsis-2
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-cond-sepsis-3
+    tool: Saw
+    surgery: true
+  avoid:
+  - wolfmed-treatment-avoid-cond-sepsis-1
+
+- type: wolfmedTreatmentProcedure
+  id: CondBloodLow
+  summary: wolfmed-treatment-short-cond-blood-low
+  steps:
+  - text: wolfmed-treatment-step-cond-blood-low-1
+    tool: HandheldHealthAnalyzer
+  - text: wolfmed-treatment-step-cond-blood-low-2
+    tool: Gauze
+  - text: wolfmed-treatment-step-cond-blood-low-3
+    tool: Bloodpack
+    done: [ BloodRestored ]
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedEviscerationWound
+  summary: wolfmed-treatment-short-wolfmed-evisceration-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-evisceration-wound-1
+    tool: Gauze
+    done: [ Dressed ]
+  - text: wolfmed-treatment-step-wolfmed-evisceration-wound-2
+    tool: Bloodpack
+    done: [ BloodRestored ]
+  - text: wolfmed-treatment-step-wolfmed-evisceration-wound-3
+    surgery: true
+    done: [ OrgansRestored ]
+  - text: wolfmed-treatment-step-wolfmed-evisceration-wound-4
+    tool: Hemostat
+    surgery: true
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-wolfmed-evisceration-wound-5
+    tool: Cautery
+    surgery: true
+    done: [ SubjectGone ]
+  - text: wolfmed-treatment-step-wolfmed-evisceration-wound-6
+    reagent: Ethanol
+    done: [ Cleaned ]
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-evisceration-wound-1
+
+- type: wolfmedTreatmentProcedure
+  id: WFWolfmedChassisBreachWound
+  summary: wolfmed-treatment-short-wolfmed-chassis-breach-wound
+  steps:
+  - text: wolfmed-treatment-step-wolfmed-chassis-breach-wound-1
+    tool: Gauze
+    done: [ Dressed ]
+  - text: wolfmed-treatment-step-wolfmed-chassis-breach-wound-2
+    surgery: true
+    done: [ OrgansRestored ]
+  - text: wolfmed-treatment-step-wolfmed-chassis-breach-wound-3
+    tool: Wrench
+    surgery: true
+    done: [ BleedingStopped ]
+  - text: wolfmed-treatment-step-wolfmed-chassis-breach-wound-4
+    tool: Welder
+    surgery: true
+    done: [ SubjectGone ]
+  avoid:
+  - wolfmed-treatment-avoid-wolfmed-chassis-breach-wound-1
+
+# BRAIN: the two body-level findings. Neither is opened from a part card; the banner is the click target.
+
+- type: wolfmedTreatmentProcedure
+  id: CondCardiacArrest
+  summary: wolfmed-treatment-short-cond-cardiac-arrest
+  steps:
+  - text: wolfmed-treatment-step-cond-cardiac-arrest-1
+  - text: wolfmed-treatment-step-cond-cardiac-arrest-2
+    reagent: Saline
+    done: [ BloodRestored ]
+  - text: wolfmed-treatment-step-cond-cardiac-arrest-3
+    tool: Defibrillator
+    done: [ PulseRestored ]
+  avoid:
+  - wolfmed-treatment-avoid-cond-cardiac-arrest-1
+  - wolfmed-treatment-avoid-cond-cardiac-arrest-2
+
+- type: wolfmedTreatmentProcedure
+  id: CondBrainDeath
+  summary: wolfmed-treatment-short-cond-brain-death
+  steps:
+  - text: wolfmed-treatment-step-cond-brain-death-1
+    reagent: Saline
+    done: [ BloodRestored ]
+  - text: wolfmed-treatment-step-cond-brain-death-2
+    tool: Hemostat
+    surgery: true
+    done: [ BrainRepaired ]
+  - text: wolfmed-treatment-step-cond-brain-death-3
+    tool: Defibrillator
+    done: [ PulseRestored ]
+  avoid:
+  - wolfmed-treatment-avoid-cond-brain-death-1
+  - wolfmed-treatment-avoid-cond-brain-death-2

@@ -1,0 +1,20 @@
+# Playtest 3, IPC round 2: what a chassis runs on. An IPC used to bleed Oil, which is lamp oil (flammability 2 and a
+# FlammableTileReaction), and a lit welder exposes a hotspot on its holder's tile every tick, so repairing a leaking
+# chassis set its own puddle alight. This is the same working fluid without the fire: no flammability, no tile reaction.
+# A spill is slippery, the way fuel is, and mops up like any other. Nothing metabolises it, as nothing metabolises Oil.
+
+- type: reagent
+  id: WFWolfmedHydraulicFluid
+  name: reagent-name-wolfmed-hydraulic-fluid
+  group: Biological
+  desc: reagent-desc-wolfmed-hydraulic-fluid
+  physicalDesc: reagent-physical-desc-oily
+  flavor: oily
+  flavorMinimum: 0.05
+  recognizable: true
+  color: "#8a5a14"
+  boilingPoint: 560.0
+  meltingPoint: -50.0
+  slipData:
+    requiredSlipSpeed: 3.5
+  friction: 0.4

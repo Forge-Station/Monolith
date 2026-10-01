@@ -2,6 +2,7 @@ namespace Content.Server.Chat;
 
 using Content.Server.Chat.Systems;
 using Content.Shared.Chat.Prototypes;
+using Robust.Shared.Prototypes; // WOLFGATE(Wolfmed): HOOK 17, ProtoId<> for the Wolfmed pain-sound thresholds.
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Prototypes;
 
@@ -49,4 +50,35 @@ public sealed partial class EmoteOnDamageComponent : Component
     /// </summary>
     [DataField("emoteCooldown"), ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan EmoteCooldown = TimeSpan.FromSeconds(2);
+
+    // WOLFGATE(Wolfmed) START: HOOK 17, Wolfmed pain-sound fields.
+    // Ported from ONYX Content.Server/Chat/EmoteOnDamageComponent.cs <Onyx-PainSounds>. Purely additive: Onyx
+    // replaces Emotes with EmotesThreshold, we keep both so ZombieSystem's AddEmote(uid, "Scream") call sites are
+    // untouched (P2-D9).
+
+    /// <summary>
+    /// Emotes keyed by the total damage at which they unlock; the highest matching threshold wins.
+    /// <see cref="EmotePrototype"/>
+    /// </summary>
+    [DataField("emotesThreshold"), ViewVariables(VVAccess.ReadWrite)]
+    public Dictionary<float, HashSet<ProtoId<EmotePrototype>>> EmotesThreshold = new();
+
+    /// <summary>
+    /// Damage types that count towards the pain that triggers a threshold emote.
+    /// </summary>
+    [DataField("allowedDamageType"), ViewVariables(VVAccess.ReadWrite)]
+    public HashSet<string> AllowedDamageType = ["Blunt", "Caustic", "Heat", "Cold", "Piercing", "Shock", "Slash"];
+
+    /// <summary>
+    /// Minimum pain in a single hit before a threshold emote is considered.
+    /// </summary>
+    [DataField("painThreshold"), ViewVariables(VVAccess.ReadWrite)]
+    public float PainThreshold = 6f;
+
+    /// <summary>
+    /// Total damage at the last threshold check, used to derive the delta.
+    /// </summary>
+    [ViewVariables]
+    public float LastTotalDamage;
+    // WOLFGATE END
 }

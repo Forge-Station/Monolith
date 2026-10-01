@@ -1,10 +1,20 @@
+<!-- WOLFGATE(Wolfmed) START: HOOK 26, the window takes the Wolfmed panel's xmlns and grows for the two-pane split. -->
+<!-- xmlns:wolfmed is the Wolfmed diagnostic panel's namespace (P4-D25, parallel panel). The fixed 350x650 column
+     becomes a resizable window, since the split needs width and a user resize. The upstream attributes, which a
+     comment can't sit among:
+    SetHeight="650"
+    SetWidth="350"
+    Resizable="False"> <!- - Shitmed Change - ->
+-->
 <controls:FancyWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    SetHeight="880"
-    SetWidth="370"
-    Resizable="False"> <!-- Shitmed Change, Forge-Change: Height&Width -->
+    xmlns:wolfmed="clr-namespace:Content.Client._WF.Wolfmed.Medical"
+    SetHeight="600"
+    SetWidth="900"
+    MinSize="660 470"
+    Resizable="True"> <!-- WOLFGATE END -->
     <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#525252" BackgroundColor="#3d474d"/>
@@ -21,7 +31,21 @@
             <Label
                 Name="NoPatientDataText"
                 Text="{Loc health-analyzer-window-no-patient-data-text}"/>
+            <!-- WOLFGATE(Wolfmed) START: HOOK 26 - two-pane split, the static overview on the left and the Wolfmed tabs on the right. -->
+            <BoxContainer
+                Name="WolfmedPaneSplit"
+                Orientation="Horizontal"
+                VerticalExpand="True"
+                HorizontalExpand="True">
+            <BoxContainer
+                Name="WolfmedOverviewPane"
+                Orientation="Vertical"
+                VerticalExpand="True"
+                MinWidth="330">
+            <!-- WOLFGATE END -->
             <!-- Shitmed Change Start -->
+            <!-- WOLFGATE(Wolfmed) START: UI3 - the return button and its frame are removed. -->
+            <!-- The doll no longer switches to a per-part scan; it sets the player's targeted body part.
                 <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="2 2 2 2" MinHeight="40">
                     <PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#050505"/>
@@ -33,13 +57,16 @@
                     VerticalExpand="True"
                     StyleClasses="ButtonSquare"/>
                 </PanelContainer>
+            -->
+            <!-- WOLFGATE END -->
             <!-- Shitmed Change End -->
             <BoxContainer
                 Name="PatientDataContainer"
                 Margin="1 1"
                 Orientation="Vertical">
                 <!-- Shitmed Change Start -->
-                    <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
+                    <!-- WOLFGATE(Wolfmed): HOOK 26 - VerticalExpand was True; the damage list takes the vertical slack. -->
+                    <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="2 2 2 2">
                         <PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                         </PanelContainer.PanelOverride>
@@ -53,7 +80,10 @@
                             <PanelContainer.PanelOverride>
                                 <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
                             </PanelContainer.PanelOverride>
-                    <PanelContainer>
+                    <!-- WOLFGATE(Wolfmed): one fixed 96x96 frame for the doll and its buttons (SetSize and alignments added). -->
+                    <!-- Unsized, this panel stretched to the row height: the SpriteView stayed centred in it while PartView sat
+                         at its bottom-left, so every hover and selection highlight landed below and left of the limb. -->
+                    <PanelContainer SetSize="96 96" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextureRect Name="NoDataTex"
                                      Access="Public"
                                      SetSize="96 96"
@@ -65,6 +95,12 @@
                                     Name="SpriteView"
                                     Access="Public"
                                     SetSize="96 96"/>
+                        <!-- WOLFGATE(Wolfmed) START: each doll button is placed from its limb's pixel bounds in the status doll art. -->
+                        <!-- The art is _Shitmed/Interface/Targeting/Status/<part>.rsi, 32 px drawn at 3x; each button keeps one art
+                             pixel of margin all round, which is the hover texture's outline. Shitmed's nested 2.5x layout and the
+                             HUD doll's layout both belong to different art and sat off these limbs. WolfmedAnalyzerDollLayoutTest
+                             measures this. Shitmed's layout is kept below; its Eyes/Mouth comment has spaced dashes, as XML
+                             comments can't nest.
                         <PanelContainer
                             Name="PartView"
                             SetSize="57 96"
@@ -99,7 +135,7 @@
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Center"
                                     StyleClasses="TargetDollButtonHead">
-                                    <!--<PanelContainer
+                                    <!- -<PanelContainer
                             SetSize="15 15"
                             Margin="0 9 0 0"
                             HorizontalAlignment="Center">
@@ -123,7 +159,7 @@
                                     Stretch="KeepAspectCentered"
                                     SetSize="9 6"/>
                             </TextureButton>
-                        </PanelContainer>-->
+                        </PanelContainer>- ->
                                 </TextureButton>
                                 <TextureButton
                                     Name="ChestButton"
@@ -200,6 +236,88 @@
                                     StyleClasses="TargetDollButtonLeftHand">
                                 </TextureButton>
                             </PanelContainer>
+                        -->
+                        <PanelContainer
+                            Name="PartView"
+                            SetSize="96 96">
+                            <TextureButton
+                                Name="HeadButton"
+                                SetSize="27 27"
+                                Margin="33 6 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonHead"/>
+                            <TextureButton
+                                Name="ChestButton"
+                                SetSize="33 27"
+                                Margin="30 27 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonChest"/>
+                            <TextureButton
+                                Name="GroinButton"
+                                SetSize="33 21"
+                                Margin="30 48 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonGroin"/>
+                            <TextureButton
+                                Name="RightArmButton"
+                                SetSize="21 24"
+                                Margin="18 27 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonRightArm"/>
+                            <TextureButton
+                                Name="RightHandButton"
+                                SetSize="18 18"
+                                Margin="18 45 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonRightHand"/>
+                            <TextureButton
+                                Name="LeftArmButton"
+                                SetSize="21 24"
+                                Margin="54 27 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonLeftArm"/>
+                            <TextureButton
+                                Name="LeftHandButton"
+                                SetSize="18 18"
+                                Margin="57 45 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonLeftHand"/>
+                            <TextureButton
+                                Name="RightLegButton"
+                                SetSize="18 24"
+                                Margin="30 57 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonRightLeg"/>
+                            <TextureButton
+                                Name="RightFootButton"
+                                SetSize="24 15"
+                                Margin="24 75 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonRightFoot"/>
+                            <TextureButton
+                                Name="LeftLegButton"
+                                SetSize="18 24"
+                                Margin="45 57 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonLeftLeg"/>
+                            <TextureButton
+                                Name="LeftFootButton"
+                                SetSize="24 15"
+                                Margin="45 75 0 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                StyleClasses="TargetDollButtonLeftFoot"/>
+                        <!-- WOLFGATE END -->
                         </PanelContainer>
                     </PanelContainer>
                     </PanelContainer>
@@ -229,11 +347,13 @@
 
                 <PanelContainer StyleClasses="LowDivider"/>
 
-                <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+                <!-- WOLFGATE(Wolfmed): HOOK 26 - VerticalExpand was True; the damage list takes the vertical slack. -->
+                <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
                     <PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
                     </PanelContainer.PanelOverride>
-                    <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4">
+                    <!-- WOLFGATE(Wolfmed): HOOK 26 - VerticalExpand was True; the damage list takes the vertical slack. -->
+                    <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4">
                         <PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
                         </PanelContainer.PanelOverride>
@@ -260,7 +380,8 @@
                             Visible="False"
                             StyleClasses="LowDivider"/>
 
-            <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4" SetHeight="62">
+            <!-- WOLFGATE(Wolfmed): HOOK 26 - Name and Visible added, so an empty alert box costs the overview pane no height. -->
+            <PanelContainer Name="WolfmedAlertsPanel" Visible="False" VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4" SetHeight="62">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
                 </PanelContainer.PanelOverride>
@@ -285,8 +406,6 @@
 
             <PanelContainer StyleClasses="LowDivider"/>
             <!-- Shitmed Change End -->
-
-            <!-- Forge-Change-Start -->
             <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
@@ -307,67 +426,15 @@
             </ScrollContainer>
                 </PanelContainer>
             </PanelContainer>
-
-            <PanelContainer Name="ChemicalsDivider"
-                            Visible="False"
-                            StyleClasses="LowDivider"/>
-
-            <PanelContainer Name="ChemicalsPanel"
-                            Visible="False"
-                            VerticalExpand="False"
-                            HorizontalExpand="True"
-                            Margin="4 4 4 4"
-                            SetHeight="140">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
-                </PanelContainer.PanelOverride>
-                <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
-                    </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical"
-                                  Margin="5 5">
-                        <Label Text="{Loc 'health-analyzer-window-entity-chemicals-text'}"
-                               Margin="0 0 0 4"/>
-                        <ScrollContainer ReturnMeasure="True"
-                                         VerticalExpand="True">
-                            <BoxContainer Name="ChemicalsContainer"
-                                          Orientation="Vertical"/>
-                        </ScrollContainer>
-                    </BoxContainer>
-                </PanelContainer>
-            </PanelContainer>
-
-            <PanelContainer Name="GenesDivider"
-                            Visible="False"
-                            StyleClasses="LowDivider"/>
-
-            <PanelContainer Name="GenesPanel"
-                            Visible="False"
-                            VerticalExpand="False"
-                            HorizontalExpand="True"
-                            Margin="4 4 4 4"
-                            SetHeight="120">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
-                </PanelContainer.PanelOverride>
-                <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
-                    </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical"
-                                  Margin="5 5">
-                        <Label Text="{Loc 'health-analyzer-window-entity-genes-text'}"
-                               Margin="0 0 0 4"/>
-                        <ScrollContainer ReturnMeasure="True"
-                                         VerticalExpand="True">
-                            <BoxContainer Name="GenesContainer"
-                                          Orientation="Vertical"/>
-                        </ScrollContainer>
-                    </BoxContainer>
-                </PanelContainer>
-            </PanelContainer>
-            <!-- Forge-Change-End -->
+            <!-- WOLFGATE(Wolfmed) START: HOOK 26 - two-pane split, the static overview on the left and the Wolfmed tabs on the right. -->
+            </BoxContainer>
+            <!-- WOLFGATE(Wolfmed): HOOK 26 - the parallel Wolfmed diagnostic panel (P4-D25); the right pane, hidden for non-wound-hosts. -->
+            <wolfmed:WolfmedDiagnosticPanel Name="WolfmedPanel"
+                                            Visible="False"
+                                            HorizontalExpand="True"
+                                            VerticalExpand="True"/>
+            </BoxContainer>
+            <!-- WOLFGATE END -->
 
         </BoxContainer>
         </PanelContainer>

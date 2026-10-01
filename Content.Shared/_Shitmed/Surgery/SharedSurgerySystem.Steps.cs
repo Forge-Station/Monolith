@@ -276,8 +276,13 @@ public abstract partial class SharedSurgerySystem
     {
         if (HasComp<SurgeryOperatingTableConditionComponent>(ent))
         {
-            if (!TryComp(args.Body, out BuckleComponent? buckle) ||
-                !HasComp<OperatingTableComponent>(buckle.BuckledTo))
+            // WOLFGATE(Wolfmed) START: AUTODOC: the pod is an operating platform.
+            // if (!TryComp(args.Body, out BuckleComponent? buckle) ||
+            //     !HasComp<OperatingTableComponent>(buckle.BuckledTo))
+            if ((!TryComp(args.Body, out BuckleComponent? buckle) ||
+                !HasComp<OperatingTableComponent>(buckle.BuckledTo)) &&
+                !WolfmedOnOperatingPlatform(args.Body)) // WOLFGATE(Wolfmed): AUTODOC: the pod is an operating platform.
+            // WOLFGATE END
             {
                 args.Invalid = StepInvalidReason.NeedsOperatingTable;
                 return;
@@ -352,6 +357,11 @@ public abstract partial class SharedSurgerySystem
     {
         var group = ent.Comp.MainGroup == "Brute" ? BruteDamageTypes : BurnDamageTypes;
 
+        // WOLFGATE(Wolfmed) START: playtest 3 SAM: wounds with no damage left still close
+        if (WolfmedTendUndamaged(args.Body, args.Part, ent.Comp.MainGroup, group))
+            return;
+        // WOLFGATE END
+
         if (!HasDamageGroup(args.Body, group, out var damageable)
             && !HasDamageGroup(args.Part, group, out var _)
             || damageable == null) // This shouldnt be possible but the compiler doesn't shut up.
@@ -370,11 +380,20 @@ public abstract partial class SharedSurgerySystem
 
         var ev = new SurgeryStepDamageEvent(args.User, args.Body, args.Part, args.Surgery, adjustedDamage, 2.5f); // 0.5 -> 2.5f part damage, buffed wound surgery tending - Mono
         RaiseLocalEvent(args.Body, ref ev);
+        WolfmedTendWounds(args.Body, args.Part, ent.Comp.MainGroup); // WOLFGATE(Wolfmed): AUTODOC4: HOOK 27 - close the part's own wounds too
     }
 
     private void OnTendWoundsCheck(Entity<SurgeryTendWoundsEffectComponent> ent, ref SurgeryStepCompleteCheckEvent args)
     {
         var group = ent.Comp.MainGroup == "Brute" ? BruteDamageTypes : BurnDamageTypes;
+
+        // WOLFGATE(Wolfmed) START: AUTODOC4: HOOK 26, a wound host's tend step runs until the part's wounds are closed.
+        if (WolfmedTendPending(args.Body, args.Part, ent.Comp.MainGroup, group) is { } pending)
+        {
+            args.Cancelled = pending;
+            return;
+        }
+        // WOLFGATE END
 
         if (HasDamageGroup(args.Body, group, out var _)
             || HasDamageGroup(args.Part, group, out var _))

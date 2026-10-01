@@ -80,6 +80,9 @@ public sealed partial class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealt
                 // Since there is no MobState for a rotting mob, we have to deal with this case first.
                 if (HasComp<RottingComponent>(entity) && _prototypeMan.TryIndex(damageableComponent.RottingIcon, out var rottingIcon))
                     result.Add(rottingIcon);
+                // WOLFGATE(Wolfmed): ARREST: a stopped heart reads as a flatline, not as ordinary crit.
+                else if (WolfmedArrestIcon(entity.Owner) is { } arrestIcon)
+                    result.Add(arrestIcon);
                 else if (damageableComponent.HealthIcons.TryGetValue(state.CurrentState, out var value) && _prototypeMan.TryIndex(value, out var icon))
                     result.Add(icon);
             }

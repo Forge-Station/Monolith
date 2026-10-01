@@ -1,0 +1,16 @@
+# What it takes to burn a bleed shut, and what it costs (W4). One shipped profile; WolfmedCauterySystem
+# indexes it by id, so retuning searing is an edit to this file.
+#
+# Incidental heat is any hit that lands hot: a laser, a fire, a welder swung as a weapon. A deliberate
+# cautery is the "Cauterise wound" verb, holding something hot against the wound on purpose, and it seals
+# what incidental heat cannot at four times the burn and a good deal of pain.
+
+- type: wolfmedCauteryProfile
+  id: WFWolfmedCauteryDefault
+  minIncidentalHeat: 8
+  burnWound: BurnWound
+  incidentalBurn: 5
+  deliberateBurn: 14
+  deliberatePain: 20
+  deliberateDelay: 4
+  selfMultiplier: 2

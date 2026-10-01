@@ -59,6 +59,7 @@
     damageContainers:
     - Inorganic
     - Silicon
+    - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
 
   # Visual
   inventoryTemplateId: borgShort

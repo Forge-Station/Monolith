@@ -4,10 +4,48 @@
   parent: ClothingOuterStorageBase
   id: ClothingOuterDrakeIndustriesTruckerPuffyVest
   name: puffy vest
-  suffix: Drake # Forge-Change
   description: A flashy looking puffy and somewhat elastic vest. It makes an insane amount of noise at the slighest movement, but at least they bothered making some pockets on the inside.
   components:
+  # WOLFGATE(Genitals) START: anatomy coverage
+  - type: GenitalCoverage
+    regions: Chest
+  # WOLFGATE END
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Vests/DI-puffy-vest.rsi
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Vests/DI-puffy-vest.rsi
+
+  #Elite web vest
+- type: entity
+  parent: [ClothingOuterStorageBase, AllowSuitStorageClothing]
+  id: ClothingOuterVestWebElite
+  name: elite web vest
+  description: A synthetic armor vest. This one has added webbing and heat resistant fibers.
+  components:
+  # WOLFGATE(Genitals) START: anatomy coverage
+  - type: GenitalCoverage
+    regions: Chest
+  # WOLFGATE END
+  - type: Sprite
+    sprite: _Mono/Clothing/OuterClothing/Vests/elitevest.rsi
+  - type: Clothing
+    sprite: _Mono/Clothing/OuterClothing/Vests/elitevest.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+  - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.7
+        Heat: 0.3
+        Radiation: 0.5
+        Caustic: 0.5
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: FireProtection
+    reduction: 0.85
+  - type: StaminaDamageResistance # Mono - Stamres
+    coefficient: 0.3

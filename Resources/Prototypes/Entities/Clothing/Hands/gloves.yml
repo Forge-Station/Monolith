@@ -125,6 +125,7 @@
     fiberMaterial: fibers-durathread
     fiberColor: fibers-black
   - type: Armor
+    coverage: [Hand] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Slash: 0.95

@@ -3,10 +3,7 @@ using Content.Server.Medical.Components;
 using Content.Server.PowerCell;
 using Content.Server.Temperature.Components;
 using Content.Shared.Traits.Assorted;
-using Content.Shared.Chemistry.Components; // Forge-Change
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent; // Forge-Change
-using Content.Shared.FixedPoint; // Forge-Change
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
@@ -94,12 +91,11 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             var patientCoordinates = Transform(patient).Coordinates;
             if (!_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange))
             {
-                //Range too far, disable updates until they are back in range
-                PauseAnalyzingEntity((uid, component), patient);
+                //Range too far, disable updates
+                StopAnalyzingEntity((uid, component), patient);
                 continue;
             }
 
-            component.IsAnalyzerActive = true;
             UpdateScannedUser(uid, patient, true, component.CurrentBodyPart); // Shitmed Change
         }
     }
@@ -193,20 +189,6 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     }
 
     /// <summary>
-    /// If the scanner is active, sends one last update and sets it to inactive.
-    /// </summary>
-    /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
-    /// <param name="target">The entity to analyze</param>
-    private void PauseAnalyzingEntity(Entity<HealthAnalyzerComponent> healthAnalyzer, EntityUid target)
-    {
-        if (!healthAnalyzer.Comp.IsAnalyzerActive)
-            return;
-
-        UpdateScannedUser(healthAnalyzer, target, false);
-        healthAnalyzer.Comp.IsAnalyzerActive = false;
-    }
-
-    /// <summary>
     /// Remove the analyzer from the active list, and remove the component if it has no active analyzers
     /// </summary>
     /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
@@ -268,27 +250,16 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
 
         var bloodAmount = float.NaN;
         var bleeding = false;
-        List<ReagentQuantity>? chemicalReagents = null; // Forge-Change
         var unrevivable = false;
         var uncloneable = false; // Frontier
 
-        if (TryComp<BloodstreamComponent>(target, out var bloodstream))
+        if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
+            _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
+                ref bloodstream.BloodSolution, out var bloodSolution))
         {
-            if (_solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
-                    ref bloodstream.BloodSolution, out var bloodSolution))
-            {
-                bloodAmount = bloodSolution.FillFraction;
-                bleeding = bloodstream.BleedAmount > 0;
-            }
-
-            // Forge-Change-Start
-            if (_solutionContainerSystem.ResolveSolution(target, bloodstream.ChemicalSolutionName,
-                    ref bloodstream.ChemicalSolution, out var chemicalSolution))
-            {
-                chemicalReagents = GetChemicalReagents(chemicalSolution);
-            }
+            bloodAmount = bloodSolution.FillFraction;
+            bleeding = bloodstream.BleedAmount > 0;
         }
-            // Forge-Change-End
 
         // Shitmed Change Start
         Dictionary<TargetBodyPart, TargetIntegrity>? body = null;
@@ -313,25 +284,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             // Shitmed Change
             body,
             part != null ? GetNetEntity(part) : null,
-            chemicalReagents // Forge-Change
+            BuildWoundDiagnostics(target), BuildOrganInfo(target), BuildChemicalInfo(target, bloodstream), BuildVitalDamage(target) // WOLFGATE(Wolfmed): HOOK 23
         ));
     }
-
-    // Forge-Change-Start
-    public static List<ReagentQuantity>? GetChemicalReagents(Solution chemicalSolution)
-    {
-        List<ReagentQuantity>? reagents = null;
-
-        foreach (var quantity in chemicalSolution.Contents)
-        {
-            if (quantity.Quantity <= FixedPoint2.Zero)
-                continue;
-
-            reagents ??= new();
-            reagents.Add(quantity);
-        }
-
-        return reagents;
-    }
-    // Forge-Change-End
 }

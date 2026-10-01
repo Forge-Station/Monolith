@@ -1,0 +1,14 @@
+# Playtest 5: a jumpsuit torn into a tourniquet by hand, for the bleed that cannot wait for a medkit.
+
+- type: construction
+  name: makeshift tourniquet
+  id: WFWolfmedMakeshiftTourniquet
+  graph: WFWolfmedMakeshiftTourniquet
+  startNode: start
+  targetNode: tourniquet
+  category: construction-category-tools
+  description: Tear a jumpsuit into a strap. Stops a limb bleeding, but a hard hit knocks it loose. Hold the jumpsuit to tear, or it takes the one you are wearing.
+  icon:
+    sprite: _WF/Wolfmed/Medical/makeshift_tourniquet.rsi
+    state: tourniquet
+  objectType: Item

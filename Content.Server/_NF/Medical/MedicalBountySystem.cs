@@ -26,6 +26,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Server._NF.Traits.Assorted;
+using Content.Server._WF.Wolfmed.Life; // WOLFGATE(Wolfmed)
 
 namespace Content.Server._NF.Medical;
 
@@ -35,6 +36,7 @@ public sealed partial class MedicalBountySystem : EntitySystem
     [Dependency] IPrototypeManager _proto = default!;
     [Dependency] DamageableSystem _damageable = default!;
     [Dependency] BloodstreamSystem _bloodstream = default!;
+    [Dependency] WolfmedSpawnInjurySystem _wolfmedSpawnInjury = default!; // WOLFGATE(Wolfmed): a wound host's bounty injuries
     [Dependency] SharedContainerSystem _container = default!;
     [Dependency] StackSystem _stack = default!;
     [Dependency] AudioSystem _audio = default!;
@@ -87,7 +89,10 @@ public sealed partial class MedicalBountySystem : EntitySystem
         if (component.Bounty == null)
         {
             if (_cachedPrototypes.Count > 0)
-                component.Bounty = _random.Pick(_cachedPrototypes);
+                // WOLFGATE(Wolfmed) START: only a bounty whose injuries this body can take
+                // component.Bounty = _random.Pick(_cachedPrototypes);
+                component.Bounty = PickBountyFor(entity);
+                // WOLFGATE END
             else
                 return; // Nothing to do, keep bounty at null.
         }
@@ -129,7 +134,12 @@ public sealed partial class MedicalBountySystem : EntitySystem
             Log.Info($"Adding {randomDamage} {damageType} damage to {entityName}");
         }
 
-        _damageable.TryChangeDamage(entity, damageToApply, true, damageable: damageable);
+        // WOLFGATE(Wolfmed) START: a wound host's body has no parts at startup, so its injuries are laid on at map init.
+        // Dealt here they were lost, and the bounty could come up alive and unhurt.
+        // _damageable.TryChangeDamage(entity, damageToApply, true, damageable: damageable);
+        if (!_wolfmedSpawnInjury.Defer(entity, damageToApply))
+            _damageable.TryChangeDamage(entity, damageToApply, true, damageable: damageable);
+        // WOLFGATE END
 
         // Inject reagents into chemical solution, if any (only if entity has bloodstream)
         if (hasBloodstream && bloodstream != null)

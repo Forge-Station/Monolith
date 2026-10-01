@@ -1,0 +1,29 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tgstation's stack_objects sutures via EscapeFromNevado, modular_septic/icons/obj/items/stack_medical.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "suture"
+        },
+        {
+            "name": "suture_2"
+        },
+        {
+            "name": "suture_3"
+        },
+        {
+            "name": "suture_tar"
+        },
+        {
+            "name": "suture_tar_2"
+        },
+        {
+            "name": "suture_tar_3"
+        }
+    ]
+}

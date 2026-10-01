@@ -33,7 +33,10 @@
           base_glasses_01: CyberpunkDark
         glasses_decor:
           decor_base_glasses_01: CyberpunkDark
-
+  - type: Tag
+    tags:
+    - PetWearable
+    
 # HUDs
 - type: entity
   id: ClothingEyesPunkInfoShades
@@ -78,3 +81,8 @@
     - Inorganic
     - Silicon
     - Biological
+    - WFSiliconWolfmed # WOLFGATE(Wolfmed): the IPC's container, so its bar shows
+  - type: Tag
+    tags:
+    - PetWearable
+    

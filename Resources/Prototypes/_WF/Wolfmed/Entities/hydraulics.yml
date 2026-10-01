@@ -1,0 +1,44 @@
+# Playtest 3, IPC round 2: a chassis's refill. The blood pack's bag with its liquid layer tinted by whatever is inside,
+# so a full pack reads dark amber and a pack somebody filled with oil reads oil-coloured. Used on a body it moves the
+# body's own fluid in (WolfmedFluidPackSystem); loaded into an autodoc it is a reservoir like a jug.
+
+- type: entity
+  parent: BaseHealingItem
+  id: WFWolfmedHydraulicFluidPack
+  name: hydraulic fluid pack
+  suffix: Full
+  description: Two hundred units of non-flammable hydraulic fluid for a synthetic chassis. Use it on the chassis, or load it into an autodoc.
+  components:
+  - type: Sprite
+    layers:
+    - state: bloodpack-empty
+    - state: bloodpack-liquid-5
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+      visible: false
+  - type: Item
+    size: Small
+    heldPrefix: bloodpack
+  - type: SolutionContainerManager
+    solutions:
+      pack:
+        maxVol: 200
+        reagents:
+        - ReagentId: WFWolfmedHydraulicFluid
+          Quantity: 200
+  - type: DrainableSolution
+    solution: pack
+  - type: RefillableSolution
+    solution: pack
+  - type: ExaminableSolution
+    solution: pack
+  - type: SolutionItemStatus
+    solution: pack
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    solutionName: pack
+    maxFillLevels: 5
+    fillBaseName: bloodpack-liquid-
+  - type: WolfmedFluidPack
+    solution: pack
+  - type: StaticPrice
+    price: 40

@@ -9,6 +9,8 @@ using Content.Shared.Popups;
 using Content.Shared.Tools;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Body.Systems;
+using Content.Shared._Onyx.Wounds; // WOLFGATE(Wolfmed)
+using Content.Server.Atmos.EntitySystems; // WOLFGATE(Wolfmed)
 using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
 
 namespace Content.Server._EinsteinEngines.Silicon.WeldingHealable;
@@ -22,13 +24,22 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
     [Dependency] private SharedBodySystem _bodySystem = default!;
     public override void Initialize()
     {
-        SubscribeLocalEvent<WeldingHealableComponent, InteractUsingEvent>(Repair);
+        // WOLFGATE(Wolfmed) START: W6, wound hosts repair through the _WF partial, ahead of FlammableSystem.
+        InitializeWoundRepair();
+        // The wound-host repair in the _WF partial must beat FlammableSystem to the welder, and the engine makes
+        // every subscription a system has to one event share its ordering, so this one carries it too. Harmless:
+        // Repair only handles the interaction when it actually repairs, so a welder used on anything else still
+        // reaches FlammableSystem exactly as it did.
+        // SubscribeLocalEvent<WeldingHealableComponent, InteractUsingEvent>(Repair);
+        SubscribeLocalEvent<WeldingHealableComponent, InteractUsingEvent>(Repair,
+            before: [typeof(FlammableSystem)]);
+        // WOLFGATE END
         SubscribeLocalEvent<WeldingHealableComponent, SiliconRepairFinishedEvent>(OnRepairFinished);
     }
 
     private void OnRepairFinished(EntityUid uid, WeldingHealableComponent healableComponent, SiliconRepairFinishedEvent args)
     {
-        if (args.Cancelled || args.Used == null
+        if (HasComp<WoundHostComponent>(uid) || args.Cancelled || args.Used == null // WOLFGATE(Wolfmed): W6, wound hosts are repaired by the _WF partial.
             || !TryComp<DamageableComponent>(args.Target, out var damageable)
             || !TryComp<WeldingHealingComponent>(args.Used, out var component)
             || damageable.DamageContainerID is null
@@ -65,7 +76,7 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
     }
     private async void Repair(EntityUid uid, WeldingHealableComponent healableComponent, InteractUsingEvent args)
     {
-        if (args.Handled
+        if (HasComp<WoundHostComponent>(uid) || args.Handled // WOLFGATE(Wolfmed): W6, wound hosts are repaired by the _WF partial.
             || !EntityManager.TryGetComponent(args.Used, out WeldingHealingComponent? component)
             || !EntityManager.TryGetComponent(args.Target, out DamageableComponent? damageable)
             || damageable.DamageContainerID is null

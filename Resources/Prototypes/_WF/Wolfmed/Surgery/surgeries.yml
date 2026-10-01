@@ -1,0 +1,427 @@
+# Wolfmed wound surgeries. Six wound surgeries plus seven organ heals, expressed on Shitmed's step system
+# (D7, P4-3). Every listing condition sits on the surgery, never on a step: SurgerySystem.RefreshUI raises
+# SurgeryValidEvent on the surgery singleton only, so a condition on a step would bite at completion instead.
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryStopBleeding
+  name: Stop Bleeding
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepSutureBleeding
+  - type: WolfmedSurgeryWoundCondition
+    state: Open
+    bleeding: true
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryStopInternalBleeding
+  name: Stop Internal Bleeding
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - WFSurgeryStepStopInternalBleeding
+    - SurgeryStepSealTendWound
+  - type: WolfmedSurgeryWoundCondition
+    internalBleeding: true
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryMendFracture
+  name: Mend Fracture
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - WFSurgeryStepSetBone
+    - WFSurgeryStepMendFracture
+    - SurgeryStepSealTendWound
+  - type: WolfmedSurgeryFractureCondition
+    minGrade: Hairline
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryHealAmputationConsequence
+  name: Repair Amputation Damage
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - WFSurgeryStepHealAmputationConsequence
+    - SurgeryStepSealTendWound
+  - type: WolfmedSurgeryWoundCondition
+    woundPrototype: AmputationConsequenceWound
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryTendWoundsBruteDeep
+  name: Tend Deep Bruise Wounds
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepRepairBruteTissue
+    - SurgeryStepSealTendWound
+  - type: SurgeryWoundedCondition
+    woundGroup: Brute
+    minWoundSeverity: 100
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryTendWoundsBurnDeep
+  name: Tend Deep Burn Wounds
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepRepairBurnTissue
+    - SurgeryStepSealTendWound
+  - type: SurgeryWoundedCondition
+    woundGroup: Burn
+    minWoundSeverity: 100
+
+# Organ healing ---------------------------------------------------------------
+# Seven slots, one per human-lineage organ (Resources/Prototypes/Body/Prototypes/human.yml). The torso five
+# inherit SurgeryOpenRibcage's saw; the two head organs prefix SurgeryStepSawBones themselves, matching
+# SurgeryRemove/InsertBrain and ...Eyes, which SurgeryOpenIncision does not saw for.
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryHealHeart
+  name: Heal Heart
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - WFSurgeryStepHealHeart
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: heart
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryHealLungs
+  name: Heal Lungs
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - WFSurgeryStepHealLungs
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: lungs
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryHealLiver
+  name: Heal Liver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - WFSurgeryStepHealLiver
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: liver
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryHealStomach
+  name: Heal Stomach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - WFSurgeryStepHealStomach
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: stomach
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryHealKidneys
+  name: Heal Kidneys
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenRibcage
+    steps:
+    - WFSurgeryStepHealKidneys
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: kidneys
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryHealBrain
+  name: Heal Brain
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - WFSurgeryStepHealBrain
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Head
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: brain
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryHealEyes
+  name: Heal Eyes
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - WFSurgeryStepHealEyes
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Head
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: eyes
+
+# Slash and bite (W2) ---------------------------------------------------------
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRepairArtery
+  name: Repair Severed Artery
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - WFSurgeryStepClampArtery
+    - WFSurgeryStepRepairArtery
+    - SurgeryStepSealTendWound
+  - type: WolfmedSurgeryWoundCondition
+    woundPrototype: WFWolfmedArterialBleedWound
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRepairTendon
+  name: Repair Severed Tendon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - WFSurgeryStepRepairTendon
+    - SurgeryStepSealTendWound
+  - type: WolfmedSurgeryWoundCondition
+    woundPrototype: WFWolfmedTendonCutWound
+
+# Burns (W4) ------------------------------------------------------------------
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryGraftSkin
+  name: Graft Burned Tissue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - WFSurgeryStepGraftSkin
+    - SurgeryStepSealTendWound
+  - type: WolfmedSurgeryWoundCondition
+    woundPrototype: WFWolfmedCharringWound
+
+# Mechanical (W6) -------------------------------------------------------------
+# The mechanical repair procedure. Servo damage carries no damage type, so neither the welder nor the cable
+# coil's own healing block reaches it; the run behind the panel has to be replaced by hand.
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryReplaceServo
+  name: Replace Damaged Servo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - WFSurgeryStepReplaceServo
+    - SurgeryStepSealTendWound
+  - type: WolfmedSurgeryWoundCondition
+    woundPrototype: WFWolfmedServoDamageWound
+
+# Evisceration (EVISC) --------------------------------------------------------
+# Neither carries a `requirement`: the belly or the casing is already open, and WolfmedEviscerationSystem
+# grants Shitmed's own incision state so the organ and component surgeries list without a scalpel. The
+# clamp comes first for the same reason the artery repair's does - WolfmedArterialBleedBehavior refuses
+# every treatment while the wound is still running, so nothing closes until the bleeders are held.
+#
+# Both complete with organ slots still empty, on purpose: a closed patient missing a liver is a transplant
+# (the existing SurgeryInsert<Organ> chain), not a reason to leave an abdomen open on the table.
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryCloseEvisceration
+  name: Close Evisceration
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepClampEvisceration
+    - WFSurgeryStepCloseEvisceration
+  - type: WolfmedSurgeryWoundCondition
+    woundPrototype: WFWolfmedEviscerationWound
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryWeldChassisBreach
+  name: Weld Chassis Breach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepSeatChassisPlating
+    - WFSurgeryStepWeldChassisBreach
+  - type: WolfmedSurgeryWoundCondition
+    woundPrototype: WFWolfmedChassisBreachWound
+
+# Chassis repair (playtest 3 IPC round 2) -------------------------------------
+# A hand welder and a cable coil, as procedures. Neither opens anything: both tools work from the outside. The weld
+# runs until the part carries none of the four damage wounds, the rewire until its wiring faults are gone.
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryWeldChassis
+  name: Weld Chassis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepWeldChassis
+  - type: WolfmedSurgeryWoundCondition
+    mechanical: true
+    woundPrototypes:
+    - IpcMechanicalDamageWound
+    - WFWolfmedDentWound
+    - WFWolfmedBreachWound
+    - CyberneticMechanicalDamageWound
+
+# ElectricalWound is flesh's too, so this one lists only on a machine part.
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRewireChassis
+  name: Rewire
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepRewireChassis
+  - type: WolfmedSurgeryWoundCondition
+    mechanical: true
+    woundPrototypes:
+    - WFWolfmedShortCircuitWound
+    - ElectricalWound
+
+# Brain repair (BRAIN) --------------------------------------------------------
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRepairBrain
+  name: Repair Brain
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - WFSurgeryStepRepairBrain
+    - SurgeryStepSealOrganWound
+  - type: SurgeryPartCondition
+    part: Head
+  # M4 (OD16): a synth's brain slot holds its core, which WFSurgeryRepairSynthCore (synth_core.yml) repairs.
+  - type: SurgeryBodyComponentCondition
+    components:
+    - type: SynthBattery
+    inverse: true
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: brain
+    # BRAIN/AUTODOC4: any damaged brain, not only a destroyed one. A brain at three per cent is alive, so
+    # the destroyed-only test left the one patient who most needed this surgery with nothing listed.
+    anyDamage: true
+
+# Hand-only treatments as surgeries (AUTODOC4) --------------------------------
+# Both list only while there is something to do, so the planner cannot queue either on a clean part. The
+# extraction opens the part first because that is what makes the objects reachable, and closes after; the
+# relocation needs neither, exactly as the hand verb needs neither.
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRemoveEmbeddedObjects
+  name: Remove Embedded Objects
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - WFSurgeryStepExtractEmbedded
+    - SurgeryStepSealTendWound
+  - type: WolfmedSurgeryEmbeddedCondition
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRelocateJoint
+  name: Relocate Joint
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepRelocateJoint
+  - type: WolfmedSurgeryWoundCondition
+    woundPrototype: WFWolfmedDislocationWound
+
+# Core repair (M2, OD10) ------------------------------------------------------
+# The positronic core's answer to brain repair: a destroyed core put back together where it sits, so the chassis's
+# own mind comes back on the restart button rather than a different person in a new core. Chassis steps: unbolt the
+# housing, re-flash the core, weld the housing shut. No trauma follows on a machine.
+
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryRepairCore
+  name: Repair Positronic Core
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    steps:
+    - WFSurgeryStepUnseatCore
+    - WFSurgeryStepRepairCore
+    - WFSurgeryStepReseatCore
+  - type: SurgeryPartCondition
+    part: Torso
+  - type: WolfmedSurgeryOrganDamagedCondition
+    slot: posbrain
+    anyDamage: true
+    # M6: a whole core with the housing still unbolted still lists, so the weld that closes it can be reached.
+    validWhile:
+    - type: WolfmedCoreHousingOpen

@@ -647,7 +647,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// </summary>
     protected virtual void UpdateAmmoCount(EntityUid uid, bool prediction = true) {}
 
-    protected void SetCartridgeSpent(EntityUid uid, CartridgeAmmoComponent cartridge, bool spent)
+    protected void SetCartridgeSpent(EntityUid uid, CartridgeAmmoComponent cartridge, bool spent, bool despawn = true) // WOLFGATE(Wolfmed): playtest 1: despawn
     {
         if (cartridge.Spent != spent)
             DirtyField(uid, cartridge, nameof(CartridgeAmmoComponent.Spent));
@@ -657,7 +657,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (cartridge.DeleteOnSpawn) // Mono - No need to update appearance if cartridge is getting deleted anyways
             return;
 
-        if (cartridge.AutoTimedDespawn != 0)
+        if (despawn && cartridge.AutoTimedDespawn != 0) // WOLFGATE(Wolfmed): playtest 1: not for a casing left in a revolver's cylinder
             EnsureComp<TimedDespawnComponent>(uid).Lifetime = cartridge.AutoTimedDespawn;
         // End mono
 

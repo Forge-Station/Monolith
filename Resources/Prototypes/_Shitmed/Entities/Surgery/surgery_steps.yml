@@ -25,6 +25,8 @@
         Bloodloss: 10
     sleepModifier: 0.5
   - type: SurgeryStepEmoteEffect
+  - type: WolfmedSurgeryIncisionWoundEffect # WOLFGATE(Wolfmed): PROTO G, P4-D21: a real incision wound beside the flat charge, so it can bleed, be clamped and scar
+    severity: 10
 
 - type: entity
   parent: SurgeryStepBase
@@ -46,6 +48,8 @@
       types:
         Bloodloss: -5
     sleepModifier: 2
+  - type: WolfmedSurgeryIncisionTreatmentEffect # WOLFGATE(Wolfmed): PROTO G, P4-D21: clamps the incision wound this operation opened
+    treatment: Clamp
 
 - type: entity
   parent: SurgeryStepBase
@@ -150,7 +154,7 @@
 - type: entity
   parent: SurgeryStepBase
   id: SurgeryStepMendRibcage
-  name: Mend ribcage
+  name: Mend bone # WOLFGATE(Wolfmed): AUTODOC5: one close chain serves every part, so "ribcage" was on the head too
   categories: [ HideSpawnMenu ]
   components:
   - type: SurgeryStep
@@ -190,6 +194,8 @@
         Heat: -5
     sleepModifier: 2
   - type: SurgeryStepEmoteEffect
+  - type: WolfmedSurgeryIncisionTreatmentEffect # WOLFGATE(Wolfmed): PROTO G, P4-D21: cauterise, close and roll surgery.scar_chance on the incision wound
+    treatment: Close
 
 # Feature Insertion
 
@@ -375,6 +381,8 @@
         Heat: -5
     sleepModifier: 2
   - type: SurgeryStepEmoteEffect
+  - type: WolfmedSurgeryIncisionTreatmentEffect # WOLFGATE(Wolfmed): PROTO G, P4-D21: the wound surgeries end here, so this closes the incision they opened
+    treatment: Close
 
 # Cavity Implanting
 

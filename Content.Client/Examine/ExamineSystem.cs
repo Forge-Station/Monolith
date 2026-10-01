@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Numerics;
 using System.Threading;
-using Content.Client._Forge.UserInterface; // Forge-Change
 using Content.Client.Verbs;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
@@ -155,13 +154,11 @@ namespace Content.Client.Examine
             // Tooltips coming in from the server generally prioritize
             // opening at the old tooltip rather than the cursor/another entity,
             // since there's probably one open already if it's coming in from the server.
-            // Forge-Change-start
-            if (!TryGetEntity(ev.EntityUid, out var entity) || !entity.Value.Valid || !EntityManager.EntityExists(entity.Value))
-                return;
+            var entity = GetEntity(ev.EntityUid);
 
-            OpenTooltip(player.Value, entity.Value, ev.CenterAtCursor, ev.OpenAtOldTooltip, ev.KnowTarget);
-            UpdateTooltipInfo(player.Value, entity.Value, ev.Message, ev.Verbs);
-            // Forge-Change-end
+            OpenTooltip(player.Value, entity, ev.CenterAtCursor, ev.OpenAtOldTooltip, ev.KnowTarget);
+            UpdateTooltipInfo(player.Value, entity, ev.Message, ev.Verbs);
+            RaiseServerInfoShown(entity); // WOLFGATE(Headshot): lets the headshot join the tooltip
         }
 
         public override void SendExamineTooltip(EntityUid player, EntityUid target, FormattedMessage message, bool getVerbs, bool centerAtCursor)
@@ -187,10 +184,6 @@ namespace Content.Client.Examine
             _examinedEntity = target;
 
             const float minWidth = 300;
-            // Forge-Change-Start
-            var examineFontSize = ForgeUiSizing.ExamineFontSize;
-            var examineScale = examineFontSize / (float) ForgeUiSizing.DefaultFontSize;
-            // Forge-Change-End
 
             if (openAtOldTooltip && oldTooltipPos != null)
             {
@@ -207,7 +200,7 @@ namespace Content.Client.Examine
             }
 
             // Actually open the tooltip.
-            _examineTooltipOpen = new Popup { MaxWidth = Math.Max(400, 400 * examineScale) }; // Forge-Change
+            _examineTooltipOpen = new Popup { MaxWidth = 560 }; // WOLFGATE(Wolfmed): HOOK 14 — was 400; Onyx's part-status boxes are 520 wide
             _userInterfaceManager.ModalRoot.AddChild(_examineTooltipOpen);
             var panel = new PanelContainer() { Name = "ExaminePopupPanel" };
             panel.AddStyleClass(StyleClassEntityTooltip);
@@ -236,7 +229,7 @@ namespace Content.Client.Examine
                 var spriteView = new SpriteView
                 {
                     OverrideDirection = Direction.South,
-                    SetSize = new Vector2(32 * examineScale, 32 * examineScale) // Forge-Change
+                    SetSize = new Vector2(32, 32)
                 };
                 spriteView.SetEntity(target);
                 hBox.AddChild(spriteView);
@@ -245,15 +238,15 @@ namespace Content.Client.Examine
             if (knowTarget)
             {
                 var itemName = FormattedMessage.EscapeText(Identity.Name(target, EntityManager, player));
-                var labelMessage = FormattedMessage.FromMarkupPermissive(ForgeUiSizing.ApplyExamineFontSize($"[bold]{itemName}[/bold]")); // Forge-Change
+                var labelMessage = FormattedMessage.FromMarkupPermissive($"[bold]{itemName}[/bold]");
                 var label = new RichTextLabel();
-                label.SetMessage(labelMessage, tagsAllowed: null); // Forge-Change
+                label.SetMessage(labelMessage);
                 hBox.AddChild(label);
             }
             else
             {
                 var label = new RichTextLabel();
-                label.SetMessage(FormattedMessage.FromMarkupOrThrow(ForgeUiSizing.ApplyExamineFontSize("[bold]???[/bold]")), tagsAllowed: null); // Forge-Change
+                label.SetMessage(FormattedMessage.FromMarkupOrThrow("[bold]???[/bold]"));
                 hBox.AddChild(label);
             }
 
@@ -284,9 +277,15 @@ namespace Content.Client.Examine
                 if (string.IsNullOrWhiteSpace(text))
                     continue;
 
+                // WOLFGATE(Wolfmed) START: HOOK 14, LOOK2's inspection rows, else Onyx's part-status boxes, replace the plain label when the markup carries them.
+                // The upstream body is left un-reindented to keep the diff minimal.
+                if (!TryAddWolfmedLookMessage(vBox, message) && !TryAddPartStatusMessage(vBox, message))
+                {
+                // WOLFGATE END
                 var richLabel = new RichTextLabel() { Margin = new Thickness(4, 4, 0, 4)};
-                richLabel.SetMessage(FormattedMessage.FromMarkupPermissive(ForgeUiSizing.ApplyExamineFontSize(message.ToMarkup())), tagsAllowed: null); // Forge-Change
+                richLabel.SetMessage(message);
                 vBox.AddChild(richLabel);
+                } // WOLFGATE(Wolfmed): HOOK 14
                 break;
             }
 

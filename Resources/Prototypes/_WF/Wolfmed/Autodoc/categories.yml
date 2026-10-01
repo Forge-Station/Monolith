@@ -1,0 +1,122 @@
+# Headings for the pod's procedure list. Programs (programs.yml) say what the pod may do; this says how it is
+# grouped on screen. A surgery listed nowhere lands under the fallback heading.
+
+- type: autodocCategory
+  id: WFWolfmedAutodocCategoryBleeding
+  name: wolfmed-autodoc-category-bleeding
+  note: wolfmed-autodoc-category-bleeding-note
+  order: 10
+  surgeries:
+  - WFSurgeryStopBleeding
+  - WFSurgeryStopInternalBleeding
+  - WFSurgeryRepairArtery
+
+- type: autodocCategory
+  id: WFWolfmedAutodocCategoryWounds
+  name: wolfmed-autodoc-category-wounds
+  note: wolfmed-autodoc-category-wounds-note
+  order: 20
+  surgeries:
+  - SurgeryTendWoundsBrute
+  - SurgeryTendWoundsBurn
+  - WFSurgeryTendWoundsBruteDeep
+  - WFSurgeryTendWoundsBurnDeep
+  - WFSurgeryGraftSkin
+  - WFSurgeryRepairTendon
+  - WFSurgeryCloseEvisceration
+
+- type: autodocCategory
+  id: WFWolfmedAutodocCategoryBones
+  name: wolfmed-autodoc-category-bones
+  note: wolfmed-autodoc-category-bones-note
+  order: 30
+  surgeries:
+  - WFSurgeryMendFracture
+  - WFSurgeryHealAmputationConsequence
+
+- type: autodocCategory
+  id: WFWolfmedAutodocCategoryOrgans
+  name: wolfmed-autodoc-category-organs
+  note: wolfmed-autodoc-category-organs-note
+  order: 40
+  surgeries:
+  - WFSurgeryHealHeart
+  - WFSurgeryHealLungs
+  - WFSurgeryHealLiver
+  - WFSurgeryHealStomach
+  - WFSurgeryHealKidneys
+  - SurgeryRemoveHeart
+  - SurgeryInsertHeart
+  - SurgeryRemoveLungs
+  - SurgeryInsertLungs
+  - SurgeryRemoveLiver
+  - SurgeryInsertLiver
+  - SurgeryRemoveStomach
+  - SurgeryInsertStomach
+  - SurgeryInsertPump
+
+- type: autodocCategory
+  id: WFWolfmedAutodocCategoryNeuro
+  name: wolfmed-autodoc-category-neuro
+  note: wolfmed-autodoc-category-neuro-note
+  order: 50
+  surgeries:
+  - SurgeryAttachHead
+  - SurgeryRemoveBrain
+  - SurgeryInsertBrain
+  - SurgeryRemoveBorgBrain
+  - SurgeryInsertBorgBrain
+  - SurgeryRemoveEyes
+  - SurgeryInsertEyes
+  - WFSurgeryHealBrain
+  - WFSurgeryRepairBrain
+  - WFSurgeryHealEyes
+  - WFSurgeryRepairCore
+  - WFSurgeryRepairSynthCore
+
+- type: autodocCategory
+  id: WFWolfmedAutodocCategoryLimbs
+  name: wolfmed-autodoc-category-limbs
+  note: wolfmed-autodoc-category-limbs-note
+  order: 60
+  surgeries:
+  - SurgeryAttachLeftArm
+  - SurgeryAttachRightArm
+  - SurgeryAttachLeftLeg
+  - SurgeryAttachRightLeg
+  - SurgeryAttachLeftHand
+  - SurgeryAttachRightHand
+  - SurgeryAttachLeftFoot
+  - SurgeryAttachRightFoot
+  - SurgeryAttachHands
+  - SurgeryRemovePart
+
+- type: autodocCategory
+  id: WFWolfmedAutodocCategoryMechanical
+  name: wolfmed-autodoc-category-mechanical
+  note: wolfmed-autodoc-category-mechanical-note
+  order: 70
+  surgeries:
+  - WFSurgeryWeldChassisBreach
+  - WFSurgeryWeldChassis # Playtest 3 IPC 2: the hand welder's repair
+  - WFSurgeryRewireChassis # Playtest 3 IPC 2: the hand coil's repair
+  - WFSurgeryReplaceServo
+
+- type: autodocCategory
+  id: WFWolfmedAutodocCategoryCavity
+  name: wolfmed-autodoc-category-cavity
+  note: wolfmed-autodoc-category-cavity-note
+  order: 80
+  surgeries:
+  - SurgeryInsertItem
+
+- type: autodocCategory
+  id: WFWolfmedAutodocCategoryAccess
+  name: wolfmed-autodoc-category-access
+  note: wolfmed-autodoc-category-access-note
+  order: 90
+  fallback: true
+  surgeries:
+  - SurgeryOpenIncision
+  - SurgeryOpenRibcage
+  - SurgeryCloseIncision

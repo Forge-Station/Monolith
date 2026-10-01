@@ -1,0 +1,623 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Stumps from modular_septic/icons/mob/human/overlays/stump.dmi, https://github.com/EscapeFromNevado/EscapeFromNevado, split into a blood mask and the bone; the drip and trickle glyphs from modular_septic/icons/mob/human/overlays/bulletwound.dmi, https://gitgud.io/bobstation/bobstation-reignited, hung from each stump, by Tools/_WF/Wolfmed/gen_wolfmed_overlays.py for Wolfgate (Wolfmed)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "neck_stump",
+      "directions": 4
+    },
+    {
+      "name": "neck_stump_bone",
+      "directions": 4
+    },
+    {
+      "name": "neck_stump_drip",
+      "directions": 4,
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "neck_stump_stream",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "r_arm_stump",
+      "directions": 4
+    },
+    {
+      "name": "r_arm_stump_bone",
+      "directions": 4
+    },
+    {
+      "name": "r_arm_stump_drip",
+      "directions": 4,
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "r_arm_stump_stream",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "l_arm_stump",
+      "directions": 4
+    },
+    {
+      "name": "l_arm_stump_bone",
+      "directions": 4
+    },
+    {
+      "name": "l_arm_stump_drip",
+      "directions": 4,
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "l_arm_stump_stream",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "r_hand_stump",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_stump_bone",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_stump_drip",
+      "directions": 4,
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "r_hand_stump_stream",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "l_hand_stump",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_stump_bone",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_stump_drip",
+      "directions": 4,
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "l_hand_stump_stream",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "r_leg_stump",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_stump_bone",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_stump_drip",
+      "directions": 4,
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "r_leg_stump_stream",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "l_leg_stump",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_stump_bone",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_stump_drip",
+      "directions": 4,
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "l_leg_stump_stream",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "r_foot_stump",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_stump_bone",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_stump_drip",
+      "directions": 4,
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "r_foot_stump_stream",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "l_foot_stump",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_stump_bone",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_stump_drip",
+      "directions": 4,
+      "delays": [
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          1.5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "l_foot_stump_stream",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.3,
+          0.2
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3
+        ]
+      ]
+    }
+  ]
+}

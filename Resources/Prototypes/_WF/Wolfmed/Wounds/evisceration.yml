@@ -1,0 +1,134 @@
+# EVISC: the torso opened up. D9 never severs a torso, so the tear-off pressure that takes a limb off
+# (WoundableComponent.AmputationOverflow, past the 250 cap in Body/parts.yml) buys this instead.
+#
+# One profile, named by WFWolfmedBaseTorso's `eviscerationProfile`. Nothing else in the game names it, so a
+# part that should never be opened simply does not carry the field. Both wounds are `ruleOnly` AND created
+# by no wolfmedWoundRule at all: WolfmedEviscerationSystem is the only thing that makes either of them.
+
+- type: wolfmedEviscerationProfile
+  id: WFWolfmedEviscerationDefault
+  # Per damage type, the overflow ONE hit has to carry. Slash only: a blade or a claw opens a belly, and
+  # Blunt, Piercing and Heat are absent from the table so they can never do it however hard they land.
+  # 35 is the torso's finishing bar, roughly a two-handed swing with something sharp.
+  finishingDamage:
+    Slash: 35
+  # A blast opens anything, and it reaches past the ribs (see vitalOrgans below). Lower bar because the
+  # share one body part takes from an explosion is already a fraction of the yield.
+  explosionFinishingDamage:
+    Slash: 25
+    Heat: 30
+    Blunt: 45
+
+  organic:
+    wound: WFWolfmedEviscerationWound
+    severity: 70
+    # The abdomen. Ordered as a surgeon would find them; all four always come out.
+    organs:
+    - stomach
+    - liver
+    - kidneys
+    # Not a slot this fork ships yet; listed so an intestines organ works the day somebody adds one.
+    - intestines
+    # Behind the ribs. A cut leaves them where they are; a detonation does not.
+    vitalOrgans:
+    - heart
+    - lungs
+    vitalChance: 0.15
+    scatterSpeed: 2.5
+    spillVolume: 30
+
+  mechanical:
+    wound: WFWolfmedChassisBreachWound
+    severity: 70
+    # Whatever the chassis actually keeps in its torso. The positronic brain is deliberately absent: it is
+    # the brain, and the brain never comes out (an organic one is in the head, which is why this list can
+    # afford to be short).
+    organs:
+    - pump
+    scatterSpeed: 2.5
+    spillVolume: 15
+    # A chassis shears rather than tears; the hiss is the line that says something is leaking.
+    sound:
+      collection: WFWolfmedLeakHiss
+      params:
+        volume: -1
+        variation: 0.12
+    popup: wolfmed-chassis-breach-popup
+
+# The abdomen laid open. Everything about it says "this is not treated with an item": healingMultiplier 0
+# keeps every topical out, the arterial behavior means a dressing only slows the flow and refuses to close
+# anything while it is still running, and the exit is WFSurgeryCloseEvisceration. `damageTypes` carries Slash
+# anyway so that a suture's healing spec still resolves the torso as a part worth walking up to.
+- type: wound
+  id: WFWolfmedEviscerationWound
+  name: wolfmed-wound-name-evisceration
+  analyzerCategory: Cut
+  ruleOnly: true
+  damageTypes:
+    Slash:
+      reopenMinimumDamage: 30
+      severityMultiplier: 1
+  maximumSeverity: 200
+  healingMultiplier: 0
+  behaviors:
+  # Gauze buys a little time and nothing else, exactly as it does on a cut artery. G2's spurt system reads
+  # this behavior as a major bleed source, so an open belly throws blood on its own every few seconds.
+  - !type:WolfmedArterialBleedBehavior
+    treatmentMultipliers:
+      Bandaged: 0.6
+    tourniquetableParts: []
+  # A stray laser does not seal an open abdomen. Holding something hot against it on purpose stops the
+  # bleeding without closing the wound, which is the field answer when there is no operating table.
+  - !type:WolfmedCauteryResistBehavior
+    deliberateOnly: true
+  # W5: the single dirtiest wound in the model. Open viscera in a corridor.
+  - !type:WolfmedInfectionRiskBehavior
+    riskMultiplier: 3.5
+    dirty: true # playtest 5: an open abdomen goes bad whatever covers it
+  - !type:WoundPainBehavior
+    painPerSeverity: 1.5
+    minSeverity: 1
+  # One band, no stages, like the artery: a belly is open or it is not. clottingMultiplier 0 means it never
+  # gets a clotting deadline.
+  - !type:WoundBleedingBehavior
+    rate: 1
+    minimumSeverity: 1
+    clottingMultiplier: 0
+  # What the closing surgery leaves: an ordinary deep cut, sutured shut.
+  - !type:WolfmedClearedWoundBehavior
+    wound: SlashWound
+    severity: 25
+  - !type:WoundScarBehavior
+    threshold: 1
+    chance: 1
+
+# The chassis equivalent: plating opened far enough to spill what was behind it. Coolant does not clot and
+# a welder swung at a hole this size is not a repair, so healingMultiplier is 0 here too and the exit is
+# WFSurgeryWeldChassisBreach.
+- type: wound
+  id: WFWolfmedChassisBreachWound
+  name: wolfmed-wound-name-chassis-breach
+  analyzerCategory: Mechanical
+  ruleOnly: true
+  damageTypes:
+    Slash:
+      reopenMinimumDamage: 30
+      severityMultiplier: 1
+  maximumSeverity: 200
+  healingMultiplier: 0
+  behaviors:
+  - !type:WolfmedArterialBleedBehavior
+    treatmentMultipliers:
+      Bandaged: 0.6
+    tourniquetableParts: []
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.6
+    minSeverity: 1
+  - !type:WoundBleedingBehavior
+    rate: 1
+    minimumSeverity: 1
+    clottingMultiplier: 0
+  # Welded shut leaves the ordinary hole in the casing, which a welder CAN close.
+  - !type:WolfmedClearedWoundBehavior
+    wound: WFWolfmedBreachWound
+    severity: 25

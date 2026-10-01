@@ -1,0 +1,55 @@
+# Everything added through Wolfgate is stocked here; John Wolfgate sells the same list.
+- type: vendingMachineInventory
+  id: WFWolfgateVendInventory
+  startingInventory:
+    WFRopeHempCoil: 6
+    WFRopeSyntheticCoil: 6
+    WFRopeBungeeCoil: 4
+    WFRopeSteelCableCoil: 4
+    WFRopeTowCableCoil: 2
+    WFTetherInstaller: 3
+    WFPowerCordCoilLV: 4
+    WFPowerCordCoilMV: 4
+    WFPowerCordCoilHV: 4
+    WFShipHarpoonTurretFlatpack: 2
+    WFShipHarpoon: 8
+    WFPartsSiloFlatpack: 2
+    WFChemicalSiloFlatpack: 2
+    # Wolfmed field medicine.
+    WFWolfmedSplint: 6
+    WFWolfmedAntisepticSpray: 6
+    WFWolfmedSkinGraft: 4
+    WFWolfmedAnalgesicPill: 10
+    WFWolfmedOpiateChemistryBottle: 3
+    WFWolfmedStimPen: 4
+    WFWolfmedAnalgesicPen: 10
+    WFWolfmedOpiatePen: 6
+    WFWolfmedNaloxonePen: 4 # M2 (OD14): reverses an overdose.
+    WFWolfmedHydraulicFluidPack: 4 # Playtest 3 IPC 2: refills a chassis.
+    WFSpaceacillinChemistryBottle: 3
+    # Playtest 5 (ITEMS): the rest of the field kit, the pill forms and the surgical basics.
+    Tourniquet: 6
+    MedicatedSuture: 2
+    WFWolfmedSuture: 4 # Playtest 5: the plain suture.
+    RegenerativeMesh: 2
+    WFWolfmedAnalgesicPillCanister: 4
+    WFWolfmedIbuprofenPillCanister: 3
+    WFWolfmedKetorolacPillCanister: 3
+    WFWolfmedTramadolChemistryBottle: 3
+    WFWolfmedOxycodoneChemistryBottle: 2
+    WFWolfmedOsteogenPillCanister: 4
+    WFWolfmedOsteogenChemistryBottle: 3
+    Cautery: 2
+    Hemostat: 2
+    Bonesetter: 2
+    BoneGel: 2
+    WFMedkitSyntheticFilled: 3
+    WFWolfmedIvDripFlatpack: 3
+    # The autodoc as a flatpack, for a ship without a medical lathe (its board is printed there), and its consumables.
+    WFMachineAutodocFlatpack: 2
+    WFAutodocProgramDiskTransplant: 2
+    WFAutodocProgramDiskLimb: 2
+    WFAutodocProgramDiskNeuro: 2
+    WFAutodocProgramDiskCavity: 2
+    WFAutodocDefibModule: 2
+    WFAutodocAutofixModule: 2

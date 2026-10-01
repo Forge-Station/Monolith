@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Shared._Onyx.Wounds; // WOLFGATE(Wolfmed): HOOK 20
+using Content.Shared.Body.Part; // WOLFGATE(Wolfmed): HOOK 20 (Option B)
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -33,6 +35,8 @@ public sealed partial class DamageVisualsSystem : VisualizerSystem<DamageVisuals
         base.Initialize();
 
         SubscribeLocalEvent<DamageVisualsComponent, ComponentInit>(InitializeEntity);
+        SubscribeLocalEvent<PartDamageVisualsComponent, AfterAutoHandleStateEvent>(OnPartDamageVisualsState); // WOLFGATE(Wolfmed): HOOK 20
+        SubscribeLocalEvent<BodyPartComponent, AfterAutoHandleStateEvent>(OnBodyPartState); // WOLFGATE(Wolfmed): HOOK 20 (Option B) - needs HOOK 21's raiseAfterAutoHandleState flag
     }
 
     private void InitializeEntity(EntityUid entity, DamageVisualsComponent comp, ComponentInit args)
@@ -360,6 +364,15 @@ public sealed partial class DamageVisualsSystem : VisualizerSystem<DamageVisuals
 
         if (damageVisComp.TargetLayers != null && damageVisComp.DamageOverlayGroups != null)
             UpdateDisabledLayers(uid, spriteComponent, component, damageVisComp);
+
+        // WOLFGATE(Wolfmed) START: HOOK 20 — per-limb accuracy for wound hosts; body in _WF/Wolfmed/Damage/DamageVisualsSystem.Wolfmed.cs
+        if (damageVisComp.TargetLayers != null && damageVisComp.DamageOverlayGroups != null &&
+            TryComp(uid, out PartDamageVisualsComponent? partDamage))
+        {
+            UpdatePartDamageVisuals(uid, spriteComponent, damageVisComp, partDamage);
+            return;
+        }
+        // WOLFGATE END
 
         if (damageVisComp.Overlay && damageVisComp.DamageOverlayGroups != null && damageVisComp.TargetLayers == null)
             CheckOverlayOrdering(spriteComponent, damageVisComp);

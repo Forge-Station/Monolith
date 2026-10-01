@@ -1,0 +1,17 @@
+# Space Onyx
+# Copyright (C) 2026 Space Onyx contributors
+#
+# This file is licensed under AGPL-3.0-or-later.
+# See LICENSES for the full license text.
+
+# WOLFGATE(Wolfmed): WP10-3: only HighPainThreshold is ported; AlcoholTolerance/Parkour/Voracious/ColdBlooded/etc. are unrelated features already covered by Wolfgate's own Resources/Prototypes/Traits/quirks.yml.
+# WOLFGATE(Wolfmed): P2-D15: conflicts -> mutuallyExclusiveTraits (Wolfgate's field name); cost: 3 dropped (Quirks declares no maxTraitPoints, so cost is inert here, matching WG's own quirks.yml entries).
+- type: trait
+  id: HighPainThreshold
+  name: trait-high-pain-threshold-name
+  description: trait-high-pain-threshold-desc
+  category: Quirks
+  mutuallyExclusiveTraits:
+  - PainNumbness
+  components:
+  - type: HighPainThreshold

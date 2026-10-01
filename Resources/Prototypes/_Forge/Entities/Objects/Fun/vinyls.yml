@@ -914,7 +914,7 @@
 
 - type: entity
   name: "vinyl disk: constellations"
-  id: VinylDisConstellations
+  id: VinylDiskConstellations
   parent: BaseVinylDisk
   components:
   - type: Sprite

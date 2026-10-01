@@ -55,7 +55,7 @@
   - type: EntityTableContainerFill
     containers:
       vinyl: !type:NestedSelector
-        tableId: RandomVinylDisk
+        tableId: RandomVinylDiskAll #Forge-Change
   - type: ContainerContainer
     containers:
       vinyl: !type:ContainerSlot

@@ -48,6 +48,7 @@
 - type: entity
   abstract: true
   id: BaseVinylDiskSyndi
+  parent: BaseVinylDisk
   components:
     - type: Sprite
       sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi
@@ -528,17 +529,6 @@
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/warriors_honk.ogg
 
-# - type: entity глянуть что тут я пропустил, тут должен быть трек сразу после вариорс хонк 
-#   name: "vinyl disk: warriors honk"
-#   id: VinylDiskWarriorsHonk
-#   parent: BaseVinylDisk
-#   components:
-#   - type: Sprite
-#     state: placeholder 
-#   - type: Vinyl
-#     song:
-#       path: /Audio/_Goobstation/RadioStation/music/goonstation/warriors_honk.ogg
-
 - type: entity
   name: "vinyl disk: waystations"
   id: VinylDiskWaystations
@@ -741,17 +731,6 @@
     song:
       path: /Audio/_Goobstation/RadioStation/music/GetThatAntag!.ogg
 
-# - type: entity снова скипнул что то, глянуть потом что именно
-#   name: "vinyl disk: GetThatAntag!" #бенгер
-#   id: VinylDiskGetThatAntag!
-#   parent: BaseVinylDisk
-#   components:
-#   - type: Sprite
-#     state: placeholder  
-#   - type: Vinyl
-#     song:
-#       path: /Audio/_Goobstation/RadioStation/music/GetThatAntag!.ogg
-
 - type: entity
   name: "vinyl disk: JingleBells" #джингл белс джингл белс
   id: VinylDiskJingleBells
@@ -906,7 +885,7 @@
     song:
       path: /Audio/_Goobstation/RadioStation/music/WantYouGone.ogg
 
-#78 винилов
+#75 винилов
 
 #endregion
 
@@ -921,7 +900,7 @@
     state: placeholder  
   - type: Vinyl
     song:
-      path: /Audio/Jukebox/constellations.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/constellations.ogg
 
 - type: entity
   name: "vinyl disk: flip-flap"
@@ -932,7 +911,7 @@
     state: placeholder 
   - type: Vinyl
     song:
-      path: /Audio/Jukebox/flip-flap.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/flip-flap.ogg
 
 - type: entity
   name: "vinyl disk: sector11"
@@ -943,7 +922,7 @@
     state: placeholder 
   - type: Vinyl
     song:
-      path: /Audio/Jukebox/sector11.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/sector11.ogg
 
 - type: entity
   name: "vinyl disk: starlight"
@@ -954,7 +933,7 @@
     state: placeholder  
   - type: Vinyl
     song:
-      path: /Audio/Jukebox/starlight.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/starlight.ogg
 
 - type: entity
   name: "vinyl disk: sunset"
@@ -965,7 +944,7 @@
     state: placeholder 
   - type: Vinyl
     song:
-      path: /Audio/Jukebox/sunset.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/sunset.ogg
 
 - type: entity
   name: "vinyl disk: title3"
@@ -976,87 +955,18 @@
     state: placeholder 
   - type: Vinyl
     song:
-      path: /Audio/Jukebox/title3.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/title3.ogg
 
-#endregion
-
-#region LOBBY
 - type: entity
-  name: "vinyl disk: bucsi singularity"
-  id: VinylDiskBucsiSingularity
+  name: "vinyl disk: drifting"
+  id: VinylDiskDrifting
   parent: BaseVinylDisk
   components:
   - type: Sprite
     state: placeholder 
   - type: Vinyl
     song:
-      path: /Audio/Lobby/bucsi_singularity.ogg
-
-- type: entity
-  name: "vinyl disk: lasers rip apart the bulkhead"
-  id: VinylDiskLasersRipApartTheBulkhead
-  parent: BaseVinylDisk
-  components:
-  - type: Sprite
-    state: placeholder 
-  - type: Vinyl
-    song:
-      path: /Audio/Lobby/lasers_rip_apart_the_bulkhead.ogg
-
-- type: entity
-  name: "vinyl disk: monument"
-  id: VinylDiskMonument
-  parent: BaseVinylDisk
-  components:
-  - type: Sprite
-    state: placeholder 
-  - type: Vinyl
-    song:
-      path: /Audio/Lobby/monument.ogg
-
-- type: entity
-  name: "vinyl disk: scp isd"
-  id: VinylDiskScpIsd
-  parent: BaseVinylDisk
-  components:
-  - type: Sprite
-    state: placeholder 
-  - type: Vinyl
-    song:
-      path: /Audio/Lobby/scp_isd.ogg
-
-- type: entity
-  name: "vinyl disk: when day breaks"
-  id: VinylDiskWhenDayBreaks
-  parent: BaseVinylDisk
-  components:
-  - type: Sprite
-    state: placeholder 
-  - type: Vinyl
-    song:
-      path: /Audio/Lobby/when_day_breaks.ogg
-
-- type: entity
-  name: "vinyl disk: absconditus"
-  id: VinylDiskAbsconditus
-  parent: BaseVinylDisk
-  components:
-  - type: Sprite
-    state: placeholder 
-  - type: Vinyl
-    song:
-      path: /Audio/Lobby/absconditus.ogg
-
-- type: entity
-  name: "vinyl disk: across the void"
-  id: VinylDiskAcrossTheVoid
-  parent: BaseVinylDisk
-  components:
-  - type: Sprite
-    state: placeholder 
-  - type: Vinyl
-    song:
-      path: /Audio/Lobby/across_the_void.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/drifting.ogg
 
 - type: entity
   name: "vinyl disk: space asshole"
@@ -1067,7 +977,7 @@
     state: placeholder 
   - type: Vinyl
     song:
-      path: /Audio/_DV/Jukebox/space_asshole-MONO.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/_DV/space_asshole-MONO.ogg
 
 - type: entity
   name: "vinyl disk: frontier arrivals"
@@ -1091,4 +1001,129 @@
     song:
       path: /Audio/_NF/Jukebox/victory.ogg
 
-#94 винила
+#endregion
+
+#region LOBBY
+- type: entity
+  name: "vinyl disk: a walk in the woods"
+  id: VinylDiskAWalkInTheWoods
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/a_walk_in_the_woods.ogg
+
+- type: entity
+  name: "vinyl disk: absconditus"
+  id: VinylDiskAbsconditus
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/absconditus.ogg
+  
+- type: entity
+  name: "vinyl disk: across the void"
+  id: VinylDiskAcrossTheVoid
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/across_the_void.ogg
+
+- type: entity
+  name: "vinyl disk: at any cost"
+  id: VinylDiskAtAnyCost
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/at_any_cost.ogg
+
+- type: entity
+  name: "vinyl disk: brothers in arms"
+  id: VinylDiskBrothersInArms
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/brothers_in_arms.ogg
+
+
+- type: entity
+  name: "vinyl disk: bucsi singularity"
+  id: VinylDiskBucsiSingularity
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/bucsi_singularity.ogg
+
+- type: entity
+  name: "vinyl disk: in amber clad"
+  id: VinylDiskInAmberClad
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/in_amber_clad.ogg      
+
+- type: entity
+  name: "vinyl disk: lasers rip apart the bulkhead"
+  id: VinylDiskLasersRipApartTheBulkhead
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/lasers_rip_apart_the_bulkhead.ogg
+
+- type: entity
+  name: "vinyl disk: monument"
+  id: VinylDiskMonument
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/monument.ogg
+
+- type: entity
+  name: "vinyl disk: scp isd"
+  id: VinylDiskScpIsd
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/scp_isd.ogg
+
+- type: entity
+  name: "vinyl disk: when day breaks"
+  id: VinylDiskWhenDayBreaks
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/when_day_breaks.ogg
+
+#91 винила

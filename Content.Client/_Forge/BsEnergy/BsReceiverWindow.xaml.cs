@@ -75,6 +75,9 @@ public sealed partial class BsReceiverWindow : FancyWindow
         MoneyLabel.Text = $"${stateMessage.Money:F0}";
         ReceivedPowerLabel.Text = Loc.GetString("ui-bs-energy-network-value", ("watts", stateMessage.ReceivedPower));
 
+        RequestedPowerDecreaseButton.Disabled = stateMessage.RequestedPower <= 0;
+        RequestedPowerIncreaseButton.Disabled = stateMessage.RequestedPower >= _maxValue;
+
         if (stateMessage.TransmittersData.TryGetValue(stateMessage.ConnectedTransmitter, out var serversData))
         {
             var moneyLost = (float)stateMessage.ReceivedPower / KvtConst * serversData.Price;

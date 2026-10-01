@@ -70,6 +70,9 @@ public sealed partial class BsTransmitterWindow : FancyWindow
         TargetPowerLabel.Text = Loc.GetString("ui-bs-energy-network-value", ("watts", stateMessage.TargetPower));
         CurrentSupplyLabel.Text = Loc.GetString("ui-bs-energy-network-value", ("watts", stateMessage.AvailablePower));
 
+        RequestedPowerDecreaseButton.Disabled = stateMessage.TargetPower <= 0;
+        RequestedPowerIncreaseButton.Disabled = stateMessage.TargetPower >= _maxValue;
+
         if (stateMessage.NetworkStats is { } netStats)
         {
             NetworkStatsLabel.Text = Loc.GetString("ui-bs-energy-network-stats-value", ("load", netStats.Load), ("supply", netStats.Supply));

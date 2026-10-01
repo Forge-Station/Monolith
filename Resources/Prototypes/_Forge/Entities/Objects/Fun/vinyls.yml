@@ -9,7 +9,7 @@
   components:
   - type: Vinyl
   - type: Sprite
-    sprite: _Forge/Objects/Misc/RadioStation/vinyls.rsi #_Goobstation/Objects/Misc/RadioStation/vinyls.rsi
+    sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi
     state: placeholder     
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
@@ -45,7 +45,13 @@
     tags:
     - VinylSleeveFit
 
-
+- type: entity
+  abstract: true
+  id: BaseVinylDiskSyndi
+  components:
+    - type: Sprite
+      sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi
+      state: valid-vinyl-disk   
 
 #region GOONSTATION
 
@@ -106,7 +112,7 @@
 
 - type: entity
   name: "vinyl disk: atlas"
-  id: VinylDiskAnonymous
+  id: VinylDiskAtlas
   parent: BaseVinylDisk
   components:
   - type: Sprite
@@ -522,16 +528,16 @@
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/warriors_honk.ogg
 
-- type: entity
-  name: "vinyl disk: warriors honk"
-  id: VinylDiskWarriorsHonk
-  parent: BaseVinylDisk
-  components:
-  - type: Sprite
-    state: placeholder 
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/warriors_honk.ogg
+# - type: entity глянуть что тут я пропустил, тут должен быть трек сразу после вариорс хонк 
+#   name: "vinyl disk: warriors honk"
+#   id: VinylDiskWarriorsHonk
+#   parent: BaseVinylDisk
+#   components:
+#   - type: Sprite
+#     state: placeholder 
+#   - type: Vinyl
+#     song:
+#       path: /Audio/_Goobstation/RadioStation/music/goonstation/warriors_honk.ogg
 
 - type: entity
   name: "vinyl disk: waystations"
@@ -581,7 +587,7 @@
 
 - type: entity
   name: "vinyl disk: Bach Cello Suite" #туруруруру туруруру
-  id: VinylDiskAlsoSprachZarathustra
+  id: VinylDiskBachCelloSuite
   parent: BaseVinylDisk
   components:
   - type: Sprite
@@ -670,7 +676,7 @@
       path: /Audio/_Goobstation/RadioStation/music/BoogieParty.ogg
 
 - type: entity
-  name: "vinyl disk: BurnTheWorldWaltz"
+  name: "vinyl disk: Burn The World Waltz"
   id: VinylDiskBurnTheWorldWaltz
   parent: BaseVinylDisk
   components:
@@ -705,10 +711,10 @@
 - type: entity
   name: "vinyl disk: EphedrineOverdose" #бенгер
   id: VinylDiskEphedrineOverdose
-  parent: BaseVinylDisk
+  parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    state: placeholder  
+    #state: placeholder  
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/EphedrineOverdose.ogg
@@ -727,7 +733,7 @@
 - type: entity
   name: "vinyl disk: GetThatAntag!" #бенгер
   id: VinylDiskGetThatAntag!
-  parent: BaseVinylDisk
+  parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
     state: placeholder  
@@ -735,16 +741,16 @@
     song:
       path: /Audio/_Goobstation/RadioStation/music/GetThatAntag!.ogg
 
-- type: entity
-  name: "vinyl disk: GetThatAntag!" #бенгер
-  id: VinylDiskGetThatAntag!
-  parent: BaseVinylDisk
-  components:
-  - type: Sprite
-    state: placeholder  
-  - type: Vinyl
-    song:
-      path: /Audio/_Goobstation/RadioStation/music/GetThatAntag!.ogg
+# - type: entity снова скипнул что то, глянуть потом что именно
+#   name: "vinyl disk: GetThatAntag!" #бенгер
+#   id: VinylDiskGetThatAntag!
+#   parent: BaseVinylDisk
+#   components:
+#   - type: Sprite
+#     state: placeholder  
+#   - type: Vinyl
+#     song:
+#       path: /Audio/_Goobstation/RadioStation/music/GetThatAntag!.ogg
 
 - type: entity
   name: "vinyl disk: JingleBells" #джингл белс джингл белс
@@ -771,16 +777,16 @@
 - type: entity
   name: "vinyl disk: LAW2OPENARMORY" 
   id: VinylDiskLAW2OPENARMORY
-  parent: BaseVinylDisk
+  parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    state: placeholder 
+    state: aisad-vinyl-disk
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/LAW2OPENARMORY.ogg
 
 - type: entity
-  name: "vinyl disk: MesmerizingGalaxyLoop" 
+  name: "vinyl disk: Mesmerizing Galaxy Loop" 
   id: VinylDiskMesmerizingGalaxyLoop
   parent: BaseVinylDisk
   components:
@@ -791,7 +797,7 @@
       path: /Audio/_Goobstation/RadioStation/music/MesmerizingGalaxyLoop.ogg
 
 - type: entity
-  name: "vinyl disk: NightInVenice" 
+  name: "vinyl disk: Night In Venice" 
   id: VinylDiskNightInVenice
   parent: BaseVinylDisk
   components:
@@ -804,10 +810,10 @@
 - type: entity
   name: "vinyl disk: NUKIES_TRAP" #ебат басы
   id: VinylDiskNUKIES_TRAP
-  parent: BaseVinylDisk
+  parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    state: placeholder 
+    #state: placeholder 
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/NUKIES_TRAP.ogg
@@ -859,10 +865,10 @@
 - type: entity
   name: "vinyl disk: TraitorousIntent"
   id: VinylDiskTraitorousIntent
-  parent: BaseVinylDisk
+  parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    state: placeholder  
+    #state: placeholder  
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/TraitorousIntent.ogg

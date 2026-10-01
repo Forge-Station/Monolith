@@ -39,8 +39,6 @@ public abstract partial class SharedSurgerySystem
 
     private EntityQuery<SurgeryToolComponent> _toolQuery;
 
-    private readonly List<EntityUid> _nextStepList = new();
-
     private void InitializeSteps()
     {
         SubscribeLocalEvent<SurgeryStepComponent, SurgeryStepEvent>(OnToolStep);
@@ -758,100 +756,27 @@ public abstract partial class SharedSurgerySystem
                 if (usedEv.Cancelled)
                     return false;
 
-        foreach (var (_, entry) in components)
-        {
-            var hasComponent = HasComp(target, entry.Component.GetType());
-            if (checkMissing != hasComponent)
-                return true; // Early exit if condition fails
-        }
-
-        return false;
-    }
-
-    private bool TryToolOrganCheck(IReadOnlyDictionary<string, ComponentRegistry>? organChanges, EntityUid part, bool checkMissing = true)
-    {
-        if (organChanges == null)
-            return false;
-
-        var organSlotIdToOrgan = _body.GetPartOrgans(part).ToDictionary(o => o.Item2.SlotId, o => o.Item2);
-        foreach (var (organSlotId, compsToAdd) in organChanges)
-        {
-            if (!organSlotIdToOrgan.TryGetValue(organSlotId, out var organ))
-                continue;
-
-            if (checkMissing)
-            {
-                if (organ.OnAdd == null || compsToAdd.Keys.Any(key => !organ.OnAdd.ContainsKey(key)))
-                {
-                    return true;
-                }
+                speed *= toolSpeed;
             }
-            else
-            {
-                if (organ.OnAdd == null)
-                    continue;
 
-                if (compsToAdd.Keys.Any(key => organ.OnAdd != null && organ.OnAdd.ContainsKey(key)))
+            if (_net.IsServer)
+            {
+                foreach (var tool in validTools.Keys)
                 {
-                    return true;
+                    if (TryComp(tool, out SurgeryToolComponent? toolComp) &&
+                        toolComp.StartSound != null)
+                    {
+                        _audio.PlayPvs(toolComp.StartSound, tool);
+                    }
                 }
             }
         }
 
-        return false;
-    }
+        if (TryComp(body, out TransformComponent? xform))
+            _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
-    public bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId)
-        => TryDoSurgeryStep(body, targetPart, user, surgeryId, stepId, out _);
-
-    /// <summary>
-    /// Do a surgery step on a part, if it can be done.
-    /// Returns true if it succeeded.
-    /// </summary>
-    public bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId, out StepInvalidReason error)
-    {
-        error = StepInvalidReason.None;
-        if (!IsSurgeryValid(body, targetPart, surgeryId, stepId, user, out var surgery, out var part, out var step))
-        {
-            error = StepInvalidReason.SurgeryInvalid;
-            return false;
-        }
-
-        if (!PreviousStepsComplete(body, part, surgery, stepId))
-        {
-            error = StepInvalidReason.MissingPreviousSteps;
-            return false;
-        }
-
-        if (IsStepComplete(body, part, stepId, surgery))
-        {
-            error = StepInvalidReason.StepCompleted;
-            return false;
-        }
-
-        var tool = _hands.GetActiveItemOrSelf(user);
-        if (!CanPerformStep(user, body, part, step, tool, true, out _, out error, out var data))
-            return false;
-
-        var toolComp = _toolQuery.CompOrNull(tool);
-        var usedEv = new SurgeryToolUsedEvent(user, body);
-        usedEv.IgnoreToggle = toolComp?.IgnoreToggle ?? false;
-        RaiseLocalEvent(tool, ref usedEv);
-        if (usedEv.Cancelled)
-        {
-            error = StepInvalidReason.ToolInvalid;
-            return false;
-        }
-
-        if (toolComp?.StartSound is {} sound)
-            _audio.PlayPredicted(sound, tool, user);
-
-        _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body).Position);
-
-        // We need to check for nullability because of surgeries that dont require a tool, like Cavity Implants
-        var speed = data?.Speed ?? 1f;
-        var toolUsed = data?.Used ?? false; // if no tool is being used you can't consume it
-        var ev = new SurgeryDoAfterEvent(surgeryId, stepId, toolUsed);
+        var ev = new SurgeryDoAfterEvent(surgeryId, stepId);
+        // TODO: Move 2 seconds to a field of SurgeryStepComponent
         var duration = GetSurgeryDuration(step, user, body, speed);
 
         if (TryComp(user, out SurgerySpeedModifierComponent? surgerySpeedMod)
@@ -871,10 +796,7 @@ public abstract partial class SharedSurgerySystem
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
-        {
-            error = StepInvalidReason.DoAfterFailed;
             return false;
-        }
 
         var userName = Identity.Entity(user, EntityManager);
         var targetName = Identity.Entity(body, EntityManager);
@@ -933,8 +855,7 @@ public abstract partial class SharedSurgerySystem
 
     public (Entity<SurgeryComponent> Surgery, int Step)? GetNextStep(EntityUid body, EntityUid part, EntityUid surgery)
     {
-        _nextStepList.Clear();
-        return GetNextStep(body, part, surgery, _nextStepList);
+        return GetNextStep(body, part, surgery, new List<EntityUid>());
     }
 
     public bool PreviousStepsComplete(EntityUid body, EntityUid part, Entity<SurgeryComponent> surgery, EntProtoId step)

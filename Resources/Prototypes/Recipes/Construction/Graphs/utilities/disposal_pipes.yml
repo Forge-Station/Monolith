@@ -86,7 +86,7 @@
       completed:
       - !type:SpawnPrototype
         prototype: SheetSteel1
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -98,7 +98,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -110,7 +110,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -122,7 +122,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -135,7 +135,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -176,31 +176,6 @@
       steps:
       - tool: Welding
         doAfter: 1
-  # Forge-Change: ore disposal filter
-  - node: oreFilter
-    entity: OreDisposalFilter
-    edges:
-    - to: start
-      completed:
-      - !type:SpawnPrototype
-        prototype: SheetSteel1
-        amount: 2
-      - !type:DeleteEntity
-      steps:
-      - tool: Welding
-        doAfter: 1
-  - node: oreFilterFlipped
-    entity: OreDisposalFilterFlipped
-    edges:
-    - to: start
-      completed:
-      - !type:SpawnPrototype
-        prototype: SheetSteel1
-        amount: 2
-      - !type:DestroyEntity
-      steps:
-      - tool: Welding
-        doAfter: 1
   # DisposalJunction
   - node: junction
     entity: DisposalJunction
@@ -210,7 +185,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -226,7 +201,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -242,7 +217,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -262,7 +237,7 @@
       - !type:SpawnPrototype
         prototype: SheetSteel1
         amount: 2
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -277,7 +252,7 @@
         amount: 2
       - !type:SpawnPrototype
         prototype: CableApcStack1
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1
@@ -291,7 +266,7 @@
         amount: 2
       - !type:SpawnPrototype
         prototype: CableApcStack1
-      - !type:DestroyEntity
+      - !type:DeleteEntity
       steps:
       - tool: Welding
         doAfter: 1

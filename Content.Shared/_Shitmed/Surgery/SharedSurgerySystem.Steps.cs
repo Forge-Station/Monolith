@@ -35,8 +35,10 @@ public abstract partial class SharedSurgerySystem
 {
     private static readonly string[] BruteDamageTypes = { "Slash", "Blunt", "Piercing" };
     private static readonly string[] BurnDamageTypes = { "Heat", "Shock", "Cold", "Caustic" };
+    private readonly List<EntityUid> _nextStepList = new();
+
     private EntityQuery<BodyPartComponent> _partQuery;
-    //private EntityQuery<SurgeryIgnoreClothingComponent> _ignoreQuery;
+    private EntityQuery<SurgeryIgnoreClothingComponent> _ignoreQuery;
     private EntityQuery<SurgeryStepComponent> _stepQuery;
     private EntityQuery<SurgeryToolComponent> _toolQuery;
 
@@ -45,7 +47,7 @@ public abstract partial class SharedSurgerySystem
     private void InitializeSteps()
     {
         _partQuery = GetEntityQuery<BodyPartComponent>();
-        //_ignoreQuery = GetEntityQuery<SurgeryIgnoreClothingComponent>();
+        _ignoreQuery = GetEntityQuery<SurgeryIgnoreClothingComponent>();
         _stepQuery = GetEntityQuery<SurgeryStepComponent>();
         _toolQuery = GetEntityQuery<SurgeryToolComponent>();
 
@@ -87,12 +89,8 @@ public abstract partial class SharedSurgerySystem
 
     private void OnToolStep(Entity<SurgeryStepComponent> ent, ref SurgeryStepEvent args)
     {
-        if (ent.Comp.Tool != null)
-        {
-            foreach (var reg in ent.Comp.Tool.Values)
-            {
-                if (!AnyHaveComp(args.Tools, reg.Component, out var tool, out _))
-                    return;
+        if (!TryToolAudio(ent, args))
+           return;
 
                 if (_net.IsServer &&
                     TryComp(tool, out SurgeryToolComponent? toolComp) &&

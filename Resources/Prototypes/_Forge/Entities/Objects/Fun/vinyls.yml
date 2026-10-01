@@ -988,7 +988,7 @@
     state: placeholder 
   - type: Vinyl
     song:
-      path: /Audio/_NF/Jukebox/frontier-arrivals.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/_NF/frontier-arrivals.ogg
 
 - type: entity
   name: "vinyl disk: victory"
@@ -999,7 +999,7 @@
     state: placeholder 
   - type: Vinyl
     song:
-      path: /Audio/_NF/Jukebox/victory.ogg
+      path: /Audio/_Goobstation/RadioStation/music/Jukebox/_NF/victory.ogg
 
 #endregion
 

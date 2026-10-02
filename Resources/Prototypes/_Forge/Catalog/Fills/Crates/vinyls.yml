@@ -1,8 +1,11 @@
-
 - type: entityTable
   id: RandomVinylDiskAll
   table: !type:GroupSelector
     children:
+    #Template
+    # - id: 
+    #   weight: 1
+    #region Goonstation
     - id: VinylDiskAdventure3
       weight: 1
     - id: VinylDiskAdventure4
@@ -95,7 +98,7 @@
       weight: 1
     - id: VinylDiskXtra
       weight: 1
-    #Classical
+    #region Classical
     - id: VinylDiskAlsoSprachZarathustra
       weight: 1
     - id: VinylDiskBachCelloSuite
@@ -110,7 +113,7 @@
       weight: 1
     - id: VinylDiskWinterVivaldi
       weight: 1
-    
+    #region Goobstation
     - id: VinylDiskAirportLounge
       weight: 1
     - id: VinylDiskBoogieParty
@@ -141,7 +144,7 @@
       weight: 1
     - id: VinylDiskWantYouGone
       weight: 1
-    
+    #region Jukebox
     - id: VinylDiskConstellations
       weight: 1
     - id: VinylDiskFlipFlap
@@ -154,8 +157,28 @@
       weight: 1
     - id: VinylDiskTitle3
       weight: 1
-
+    - id: VinylDiskDrifting
+      weight: 1
+    - id: VinylDiskSpaceAsshole
+      weight: 1
+    - id: VinylDiskFrontierArrivals
+      weight: 1
+    - id: VinylDiskVictory
+      weight: 1
+    #region lobby
+    - id: VinylDiskAWalkInTheWoods
+      weight: 1
+    - id: VinylDiskAbsconditus
+      weight: 1
+    - id: VinylDiskAcrossTheVoid
+      weight: 1
+    - id: VinylDiskAtAnyCost
+      weight: 1
+    - id: VinylDiskBrothersInArms
+      weight: 1
     - id: VinylDiskBucsiSingularity
+      weight: 1
+    - id: VinylDiskInAmberClad
       weight: 1
     - id: VinylDiskLasersRipApartTheBulkhead
       weight: 1
@@ -165,17 +188,14 @@
       weight: 1
     - id: VinylDiskWhenDayBreaks
       weight: 1
-    - id: VinylDiskAbsconditus
+    #region A-Guy
+    - id: VinylDiskNothingWrongWithMegacorpos
       weight: 1
-    - id: VinylDiskAcrossTheVoid
+    - id: VinylDiskTheStation
       weight: 1
-    - id: VinylDiskSpaceAsshole
+    - id: VinylDiskTomfooleryRequired
       weight: 1
-    - id: VinylDiskFrontierArrivals
-      weight: 1
-    - id: VinylDiskVictory
-      weight: 1
-    #Syndi
+    #region Syndi
     - id: VinylDiskEphedrineOverdose
       weight: 0.1
     - id: VinylDiskGetThatAntag!
@@ -185,6 +205,10 @@
     - id: VinylDiskNUKIES_TRAP
       weight: 0.1
     - id: VinylDiskTraitorousIntent
+      weight: 0.1
+    - id: VinylDiskNuclearOperationsInfil
+      weight: 0.1
+    - id: VinylDiskRevolution
       weight: 0.1
 
 - type: entityTable
@@ -219,4 +243,8 @@
     - id: VinylDiskNUKIES_TRAP
       weight: 1
     - id: VinylDiskTraitorousIntent
+      weight: 1
+    - id: VinylDiskNuclearOperationsInfil
+      weight: 1
+    - id: VinylDiskRevolution
       weight: 1

@@ -2,10 +2,10 @@
 
 - type: entity
   abstract: true
+  parent: BaseItem
   id: BaseVinylDisk
   name: vinyl disk
   description: A vinyl disk containing music.
-  parent: BaseItem
   components:
   - type: Vinyl
   - type: Sprite
@@ -47,8 +47,8 @@
 
 - type: entity
   abstract: true
-  id: BaseVinylDiskSyndi
   parent: BaseVinylDisk
+  id: BaseVinylDiskSyndi
   components:
     - type: Sprite
       sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi
@@ -1059,7 +1059,6 @@
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/brothers_in_arms.ogg
 
-
 - type: entity
   name: "vinyl disk: bucsi singularity"
   id: VinylDiskBucsiSingularity
@@ -1126,4 +1125,60 @@
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/when_day_breaks.ogg
 
-#91 винила
+#region A-Guy
+- type: entity
+  name: "vinyl disk: Nothing Wrong With Megacorpos"
+  id: VinylDiskNothingWrongWithMegacorpos
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/A-Guy/Nothing-Wrong-With-Megacorpos.ogg
+
+- type: entity
+  name: "vinyl disk: nuclearoperations"
+  id: VinylDiskNuclearOperationsInfil
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/A-Guy/nuclearoperations_remake_infil.ogg
+
+- type: entity
+  name: "vinyl disk: revolution"
+  id: VinylDiskRevolution
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/A-Guy/revolution.ogg
+
+- type: entity
+  name: "vinyl disk: the station"
+  id: VinylDiskTheStation
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/A-Guy/thestation.ogg
+
+- type: entity
+  name: "vinyl disk: Tomfoolery Required"
+  id: VinylDiskTomfooleryRequired
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder 
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/A-Guy/Tomfoolery-Required.ogg
+
+#?? винила

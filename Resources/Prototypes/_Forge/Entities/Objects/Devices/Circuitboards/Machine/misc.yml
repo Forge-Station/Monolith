@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: SmartVinylCircuitboard
+  name: smart-vinyl machine board
+  description: A machine printed circuit board for a smart-vinyl.
+  components:
+  - type: MachineBoard
+    prototype: SmartVinylStorage
+    requirements:
+      Capacitor: 1
+    stackRequirements:
+      Glass: 5
+      Cable: 1

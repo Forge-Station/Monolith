@@ -1,4 +1,4 @@
-ent-HexNut = Гайка
+ent-HexNut = гайка
     .desc = Обычная гайка.
-ent-Screw = Винт
+ent-Screw = винт
     .desc = Обычный винт.

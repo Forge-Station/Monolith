@@ -1,0 +1,14 @@
+- type: latheRecipePack
+  id: BSparts
+  recipes:
+  - BluespaceMatterBinStockPart
+  - QuadraticCapacitorStockPart
+  - FemtoManipulatorStockPart
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: SmartVinylCircuitboard
+  icon:
+     sprite: _Forge/Structures/Machines/smartvinylstorage.rsi
+     state: smartvinyl
+  result: SmartVinylCircuitboard

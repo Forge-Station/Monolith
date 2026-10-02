@@ -1140,10 +1140,10 @@
 - type: entity
   name: "vinyl disk: nuclearoperations"
   id: VinylDiskNuclearOperationsInfil
-  parent: BaseVinylDisk
+  parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    state: placeholder 
+    #state: placeholder 
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/A-Guy/nuclearoperations_remake_infil.ogg
@@ -1151,10 +1151,10 @@
 - type: entity
   name: "vinyl disk: revolution"
   id: VinylDiskRevolution
-  parent: BaseVinylDisk
+  parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    state: placeholder 
+    #state: placeholder 
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/A-Guy/revolution.ogg

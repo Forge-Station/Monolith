@@ -1,5 +1,5 @@
 using Content.Shared.CartridgeLoader.Cartridges;
-using Content.Shared.DeltaV.CartridgeLoader.Cartridges; // DeltaV
+using Content.Shared._DV.CartridgeLoader.Cartridges; // DeltaV
 ﻿using Content.Shared.Paper;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;

@@ -21,8 +21,31 @@ public sealed class UpdateTransmitterStateData
     public int Price;
     public int CurrentConnected;
     public int MaxConnected;
+    public int LimitConnecting;
     public float TransmitterAvailablePower;
     public string GridTransmitterName = string.Empty;
+}
+
+[Serializable, NetSerializable]
+public sealed class UpdateReceiversData
+{
+    public string GridReceiverName = string.Empty;
+    public float RequestedPower;
+    public int ReceivedPower;
+    public int Priority;
+}
+
+[Serializable, NetSerializable]
+public sealed class UpdateHistoryData
+{
+    [ViewVariables]
+    public string GridReceiverName = string.Empty;
+
+    [ViewVariables]
+    public ulong TotalEnergyReceived;
+
+    [ViewVariables]
+    public ulong TotalMoneyTransferred;
 }
 
 [Serializable, NetSerializable]
@@ -53,6 +76,18 @@ public sealed class PriceMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
+public sealed class ConnectingLimitMessage : BoundUserInterfaceMessage
+{
+    public int LimitConnecting;
+}
+
+[Serializable, NetSerializable]
+public sealed class KickMessage : BoundUserInterfaceMessage
+{
+    public NetEntity KickedReceiver;
+}
+
+[Serializable, NetSerializable]
 public sealed class BsReceiverInterfaceStateMessage : BoundUserInterfaceState
 {
     public bool Enabled;
@@ -73,6 +108,7 @@ public sealed class BsTransmitterInterfaceStateMessage : BoundUserInterfaceState
     public float Income;
     public int StepSize;
     public int MaxConnected;
+    public int ConnectingLimit;
     public int MaxValue;
     public int ConnectedCount;
     public int TargetPower;
@@ -81,4 +117,6 @@ public sealed class BsTransmitterInterfaceStateMessage : BoundUserInterfaceState
     public int PowerConsumer;
     public int AvailablePower;
     public (float Load, float Supply)? NetworkStats;
+    public Dictionary<NetEntity, UpdateReceiversData> ReceiversData = new();
+    public Dictionary<NetEntity, UpdateHistoryData> HistoryData = new();
 }

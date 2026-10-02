@@ -27,9 +27,9 @@ public sealed partial class BsReceiverWindow : FancyWindow
     public event Action<NetEntity>? OnPressedChoiceServer;
     public event Action<int>? OnPowerRequest;
 
-    private readonly Dictionary<NetEntity, UiElements> _currentTransmitters = new();
+    private readonly Dictionary<NetEntity, TransmittersUiElements> _currentTransmittersUiElements = new();
 
-    private sealed class UiElements
+    private sealed class TransmittersUiElements
     {
         public Button? Button;
         public RichTextLabel? GridName;
@@ -101,7 +101,7 @@ public sealed partial class BsReceiverWindow : FancyWindow
             MoneyTimeLabel.Text = $"0 {_minuteLocStr}";
         }
 
-        UpdateServersUi(stateMessage.TransmittersData, stateMessage.Enabled, stateMessage.ConnectedTransmitter);
+        UpdateTransmittersUi(stateMessage.TransmittersData, stateMessage.Enabled, stateMessage.ConnectedTransmitter);
         SelectTransmitterUi(stateMessage.ConnectedTransmitter);
 
         _power = stateMessage.RequestedPower;
@@ -133,24 +133,24 @@ public sealed partial class BsReceiverWindow : FancyWindow
         OnPowerRequest?.Invoke(_power);
     }
 
-    private void UpdateServersUi(Dictionary<NetEntity, UpdateTransmitterStateData> transmittersData, bool enabled, NetEntity transmitterNet)
+    private void UpdateTransmittersUi(Dictionary<NetEntity, UpdateTransmitterStateData> transmittersData, bool enabled, NetEntity transmitterNet)
     {
         CheckingRemoveTransmitters(transmittersData);
 
         foreach (var (key, value) in transmittersData)
         {
-            if (transmitterNet != key && value.CurrentConnected >= value.MaxConnected)
+            if (transmitterNet != key && (value.CurrentConnected >= value.MaxConnected || value.CurrentConnected >= value.LimitConnecting))
             {
-                if (_currentTransmitters.TryGetValue(key, out var elementsToRemove))
+                if (_currentTransmittersUiElements.TryGetValue(key, out var elementsToRemove))
                 {
                     elementsToRemove.Button?.Dispose();
-                    _currentTransmitters.Remove(key);
+                    _currentTransmittersUiElements.Remove(key);
                 }
 
                 continue;
             }
 
-            if (_currentTransmitters.TryGetValue(key, out var elements))
+            if (_currentTransmittersUiElements.TryGetValue(key, out var elements))
             {
                 elements.Button?.Disabled = !enabled;
                 elements.GridName?.Text = value.GridTransmitterName;
@@ -183,7 +183,7 @@ public sealed partial class BsReceiverWindow : FancyWindow
                 var btn = new Button();
                 btn.AddChild(mainHBox);
                 btn.Disabled = !enabled;
-                btn.OnPressed += (_) =>
+                btn.OnPressed += _ =>
                 {
                     OnPressedChoiceServer?.Invoke(key);
                     SelectTransmitterUi(key);
@@ -191,7 +191,7 @@ public sealed partial class BsReceiverWindow : FancyWindow
 
                 BoxInScroll.AddChild(btn);
 
-                var newElements = new UiElements
+                var newElements = new TransmittersUiElements
                 {
                     Button = btn,
                     GridName = gridName,
@@ -199,14 +199,14 @@ public sealed partial class BsReceiverWindow : FancyWindow
                     PriceValue = priceValue,
                 };
 
-                _currentTransmitters[key] = newElements;
+                _currentTransmittersUiElements[key] = newElements;
             }
         }
     }
 
     private void SelectTransmitterUi(NetEntity transmitterNet)
     {
-        foreach (var (_, elements) in _currentTransmitters)
+        foreach (var (_, elements) in _currentTransmittersUiElements)
         {
             elements.Button?.Modulate = Color.White;
         }
@@ -214,20 +214,20 @@ public sealed partial class BsReceiverWindow : FancyWindow
         if (!transmitterNet.IsValid())
             return;
 
-        if (_currentTransmitters.TryGetValue(transmitterNet, out var uiElements))
+        if (_currentTransmittersUiElements.TryGetValue(transmitterNet, out var uiElements))
             uiElements.Button?.Modulate = Color.Lime;
     }
 
     private void CheckingRemoveTransmitters(Dictionary<NetEntity, UpdateTransmitterStateData> newData)
     {
-        var toRemove = _currentTransmitters.Keys.Where(key => !newData.ContainsKey(key)).ToList();
+        var toRemove = _currentTransmittersUiElements.Keys.Where(key => !newData.ContainsKey(key)).ToList();
         foreach (var key in toRemove)
         {
-            if (!_currentTransmitters.TryGetValue(key, out var elements))
+            if (!_currentTransmittersUiElements.TryGetValue(key, out var elements))
                 continue;
 
             elements.Button?.Dispose();
-            _currentTransmitters.Remove(key);
+            _currentTransmittersUiElements.Remove(key);
         }
     }
 }

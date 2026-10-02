@@ -12,6 +12,15 @@ public sealed partial class BsTransmitterEnergyComponent : Component
     [ViewVariables]
     public float LastDrawnPower;
 
+    [ViewVariables]
+    public int AvailablePower;
+
+    [ViewVariables]
+    public float Income;
+
+    [ViewVariables]
+    public readonly Dictionary<NetEntity, UpdateHistoryData> HistoryData = [];
+
     [DataField]
     public bool Enabled;
 
@@ -19,16 +28,13 @@ public sealed partial class BsTransmitterEnergyComponent : Component
     public int TargetPower;
 
     [DataField]
-    public int AvailablePower;
-
-    [DataField]
     public int Price;
 
     [DataField]
-    public float Income;
+    public float Money;
 
     [DataField]
-    public float Money;
+    public int ConnectingLimit;
 
     [DataField("enablePassiveIncome")]
     public bool EnablePassiveIncome { get; private set; }

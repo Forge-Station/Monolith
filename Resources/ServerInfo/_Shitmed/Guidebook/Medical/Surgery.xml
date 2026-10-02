@@ -54,17 +54,3 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 </Box>
 
 Они не идеальны по сравнению с настоящим хирургическим оборудованием, но подойдут в экстренной ситуации!
-
-## Ghetto Surgery
-
-Certain non-surgical tools can be used in a pinch, use the scalpel examine icon to see how good or bad something is.
-<Box>
-<GuideEntityEmbed Entity="Welder" Caption="welder"/>
-<GuideEntityEmbed Entity="Wirecutter" Caption="wirecutter"/>
-<GuideEntityEmbed Entity="KitchenKnife" Caption="knife"/>
-<GuideEntityEmbed Entity="Crowbar" Caption="crowbar"/>
-</Box>
-
-They aren't ideal compared to real surgical equipment, but they'll do in a pinch!
-
-</Document>

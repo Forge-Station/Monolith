@@ -104,6 +104,7 @@
       outerClothing:
       - state: equipped-OUTERCLOTHING-sealed
   - type: ToggleableClothing
+    replaceCurrentClothing: true
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitNexusMilT3
       helmetcover: ClothingHeadHelmetCoverBlock

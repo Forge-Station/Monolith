@@ -9,6 +9,8 @@
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components; // Forge - change
+using Content.Shared.Radio.Components; // Forge - change
 using Content.Shared.Silicons.StationAi;
 using Robust.Shared.Serialization;
 
@@ -23,6 +25,13 @@ public abstract partial class SharedAiRemoteControlSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeLocalEvent<AiRemoteControllerComponent, MindUnvisitedMessage>(OnMindUnvisited); // Forge - change
+    }
+
+    // Forge - change
+    protected virtual void OnMindUnvisited(EntityUid uid, AiRemoteControllerComponent component, MindUnvisitedMessage args)
+    {
+        ReturnMindIntoAi(uid);
     }
 
     public void ReturnMindIntoAi(EntityUid entity)
@@ -43,11 +52,19 @@ public abstract partial class SharedAiRemoteControlSystem : EntitySystem
 
         stationAiHeldComp.CurrentConnectedEntity = null;
 
-        _mind.TransferTo(remoteComp.LinkedMind.Value, remoteComp.AiHolder);
-
-        _stationAiSystem.SwitchRemoteEntityMode(stationAiCore, true);
+        // Forge - change: clear the link before UnVisit raises MindUnvisitedMessage.
+        var mind = remoteComp.LinkedMind.Value;
         remoteComp.AiHolder = null;
         remoteComp.LinkedMind = null;
+        if (TryComp(entity, out IntrinsicRadioTransmitterComponent? transmitter) &&
+            remoteComp.PreviouslyTransmitterChannels != null)
+            transmitter.Channels = [.. remoteComp.PreviouslyTransmitterChannels];
+        if (TryComp(entity, out ActiveRadioComponent? radio) &&
+            remoteComp.PreviouslyActiveRadioChannels != null)
+            radio.Channels = [.. remoteComp.PreviouslyActiveRadioChannels];
+        _mind.UnVisit(mind);
+
+        _stationAiSystem.SwitchRemoteEntityMode(stationAiCore, true);
 
         _xformSystem.SetCoordinates(stationAiCore.Comp.RemoteEntity.Value, Transform(entity).Coordinates);
     }

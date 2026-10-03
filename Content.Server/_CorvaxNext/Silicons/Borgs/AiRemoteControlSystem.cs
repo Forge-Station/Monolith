@@ -8,10 +8,13 @@
 
 using Content.Shared.Radio.Components;
 using Content.Server.Silicons.Laws;
+using Content.Server.Silicons.Borgs; // Forge - change
+using Content.Shared.Silicons.Borgs.Components; // Forge - change
 using Content.Shared._CorvaxNext.Silicons.Borgs;
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components; // Forge - change
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.StationAi;
@@ -33,6 +36,7 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
     [Dependency] private SharedTransformSystem _xformSystem = default!;
 
     [Dependency] private SharedMapSystem _map = default!; // Mono
+    [Dependency] private BorgSystem _borg = default!; // Forge - change
 
     public override void Initialize()
     {
@@ -93,12 +97,23 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
     private void OnReturnMindIntoAi(Entity<AiRemoteControllerComponent> entity, ref ReturnMindIntoAiEvent args) =>
         ReturnMindIntoAi(entity);
 
+    // Forge - change
+    protected override void OnMindUnvisited(EntityUid uid, AiRemoteControllerComponent component, MindUnvisitedMessage args)
+    {
+        base.OnMindUnvisited(uid, component, args);
+        if (!TerminatingOrDeleted(uid) && TryComp<BorgChassisComponent>(uid, out var chassis))
+            _borg.BorgDeactivate(uid, chassis);
+    }
+
     public void AiTakeControl(EntityUid ai, EntityUid entity)
     {
         if (!_mind.TryGetMind(ai, out var mindId, out var mind))
             return;
 
-        if (_mind.TryGetMind(entity, out _, out _))
+        if (_mind.TryGetMind(entity, out _, out _) || HasComp<VisitingMindComponent>(entity)) // Forge - change
+            return;
+
+        if (mind.OwnedEntity != ai || mind.VisitingEntity != null) // Forge - change
             return;
 
         if (!TryComp<StationAiHeldComponent>(ai, out var stationAiHeldComp))
@@ -126,11 +141,13 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
                 activeRadio.Channels = [.. stationAiActiveRadio.Channels];
         }
 
-        _mind.ControlMob(ai, entity);
         aiRemoteComp.AiHolder = ai;
         aiRemoteComp.LinkedMind = mindId;
 
         stationAiHeldComp.CurrentConnectedEntity = entity;
+        _mind.Visit(mindId, entity, mind); // Forge - change: keep ownership of the AI core.
+        if (TryComp<BorgChassisComponent>(entity, out var chassis)) // Forge - change
+            _borg.BorgActivate(entity, chassis);
 
         if (!_stationAiSystem.TryGetCore(ai, out var stationAiCore))
             return;

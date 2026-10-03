@@ -491,7 +491,7 @@
       - NotekeeperCartridge
       - NewsReaderCartridge
       - MailMetricsCartridge # DeltaV - MailMetrics courier tracker
-      - StockTradingCartridge # DeltaV - StockTrading
+      #- StockTradingCartridge # DeltaV - StockTrading
       - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -516,7 +516,7 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - StockTradingCartridge # DeltaV - StockTrading
+    #- StockTradingCartridge # DeltaV - StockTrading
     - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -1300,7 +1300,7 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - StockTradingCartridge # DeltaV - StockTrading
+    #- StockTradingCartridge # DeltaV - StockTrading
     - NanoChatCartridge # DeltaV
 
 - type: entity

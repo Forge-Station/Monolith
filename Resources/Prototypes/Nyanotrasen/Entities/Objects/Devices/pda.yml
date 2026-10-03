@@ -67,5 +67,5 @@
       - NotekeeperCartridge
       - NewsReaderCartridge
       - CrimeAssistCartridge
-      - SecWatchCartridge
+      #- SecWatchCartridge
       - NanoChatCartridge

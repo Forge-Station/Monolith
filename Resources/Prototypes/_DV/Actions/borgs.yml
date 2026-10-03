@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseAction
+  # parent: BaseAction
   id: ActionFabricateLollipop
   name: Fabricate Lollipop
   description: Fabricate a lollipop that contains a small dose of Omnizine.
@@ -12,7 +12,7 @@
       item: FoodLollipop
 
 - type: entity
-  parent: BaseAction
+  # parent: BaseAction
   id: ActionFabricateGumball
   name: Fabricate Gumball
   description: Fabricate a gumball full of sugar and medicine to treat small injuries.
@@ -26,7 +26,7 @@
       item: FoodGumball
 
 - type: entity
-  parent: BaseMentalAction
+  #parent: BaseMentalAction
   id: ActionOpenCartridges
   name: Open Programs
   description: View software installed on you

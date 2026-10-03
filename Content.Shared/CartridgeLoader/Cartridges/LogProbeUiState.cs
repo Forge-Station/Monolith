@@ -9,23 +9,26 @@ public sealed class LogProbeUiState : BoundUserInterfaceState
     /// <summary>
     /// The name of the scanned entity.
     /// </summary>
-    public string EntityName;
+    public readonly string EntityName;
 
     /// <summary>
-    /// The list of probed network devices
+    /// The list of pulled access logs.
     /// </summary>
-    public List<PulledAccessLog> PulledLogs;
+    public readonly List<PulledAccessLog> PulledLogs;
 
     /// <summary>
-    /// DeltaV: The NanoChat data if a card was scanned, null otherwise
+    /// NanoChat data if a NanoChat card was scanned.
     /// </summary>
-    public NanoChatData? NanoChatData { get; }
+    public readonly NanoChatData? NanoChatData;
 
-    public LogProbeUiState(string entityName, List<PulledAccessLog> pulledLogs, NanoChatData? nanoChatData = null) // DeltaV - NanoChat support
+    public LogProbeUiState( 
+        string entityName,
+        List<PulledAccessLog> pulledLogs,
+        NanoChatData? nanoChatData = null) // DeltaV - NanoChat support
     {
         EntityName = entityName;
         PulledLogs = pulledLogs;
-        NanoChatData = nanoChatData; // DeltaV
+        NanoChatData = nanoChatData;
     }
 }
 

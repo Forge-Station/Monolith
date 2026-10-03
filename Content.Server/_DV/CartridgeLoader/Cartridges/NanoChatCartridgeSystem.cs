@@ -62,7 +62,7 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
 
         if (!_cardQuery.TryGetComponent(cardUid, out var nanoChatCard))
             return;
-        nanoChat.SetClosed((cardUid, nanoChatCard), !HasComp<NanoChatCartridgeComponent>(args.NewActiveProgram));
+        _nanoChat.SetClosed((cardUid, nanoChatCard), !HasComp<NanoChatCartridgeComponent>(args.NewActiveProgram));
     }
 
     private void OnUiOpened(Entity<CartridgeLoaderComponent> ent, ref BoundUIOpenedEvent args)
@@ -753,9 +753,13 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
         else
             title = Loc.GetString("nano-chat-new-message-title", ("sender", senderName));
 
-        _cartridge.SendNotification(loader,
+        _cartridge.SendNotification(
+            pdaUid,
             title,
-            Loc.GetString("nano-chat-new-message-body", ("message", SharedNanoChatSystem.Truncate(message.Content, NotificationMaxLength, " [...]"))),
+            Loc.GetString(
+                "nano-chat-new-message-body",
+                ("message", SharedNanoChatSystem.Truncate(message.Content, NotificationMaxLength, " [...]"))
+            ),
             loader);
     }
 

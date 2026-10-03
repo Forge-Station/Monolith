@@ -3,6 +3,11 @@ using System.Linq;
 using Content.Server.Destructible;
 using Content.Server.Destructible.Thresholds.Triggers;
 using Content.Server.Ghost.Roles.Components;
+using Content.Server.Radio.EntitySystems;
+using Content.Shared._Forge.Radio.Components;
+using Content.Shared.Radio;
+using Content.Shared.Radio.Components;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared._Forge.Silicons.StationAi;
 using Content.Shared.Ghost.Roles;
 using Content.Shared.RCD;
@@ -115,6 +120,24 @@ public sealed class StationAiPrototypeTests
                     Is.EqualTo("ADC"));
             });
             entityManager.DeleteEntity(standardCore);
+            var stationAi = server.System<SharedStationAiSystem>();
+            var radio = server.System<RadioSystem>();
+            var handheld = prototypeManager.Index<RadioChannelPrototype>("Handheld");
+            var common = prototypeManager.Index<RadioChannelPrototype>("Common");
+            foreach (var core in new[] { forerunnerCore, forerunnerWhitelistCore })
+            {
+                var holder = entityManager.GetComponent<EncryptionKeyHolderComponent>(core);
+                var key = holder.KeyContainer.ContainedEntities.Single();
+                var configurable = entityManager.GetComponent<ConfigurableEncryptionKeyComponent>(key);
+                Assert.That(stationAi.TryGetHeld((core, entityManager.GetComponent<StationAiCoreComponent>(core)), out var brain), Is.True);
+                Assert.That(entityManager.GetComponent<IntrinsicRadioTransmitterComponent>(brain).Channels,
+                    Does.Contain((ProtoId<RadioChannelPrototype>) "Handheld"));
+                Assert.That(entityManager.GetComponent<ActiveRadioComponent>(brain).Channels,
+                    Does.Contain((ProtoId<RadioChannelPrototype>) "Handheld"));
+                configurable.Frequency = 1459;
+                Assert.That(radio.GetFrequency(brain, handheld), Is.EqualTo(1459));
+                Assert.That(radio.GetFrequency(brain, common), Is.EqualTo(common.Frequency));
+            }
             entityManager.DeleteEntity(forerunnerCore);
             entityManager.DeleteEntity(forerunnerWhitelistCore);
 

@@ -97,16 +97,30 @@ public sealed class StationAiCameraSystem : EntitySystem
             closest = camera.Owner;
         }
 
-        if (closest == null)
-            return;
-
         foreach (var brain in activeBrains)
         {
+            var hearingEntity = closest;
+            var hearingDistance = closestDistance;
+            if (_stationAi.TryGetCore(brain, out var core))
+            {
+                var coreCoordinates = _transform.GetMapCoordinates(core.Owner);
+                var coreDistance = (coreCoordinates.Position - sourcePosition).Length();
+                if (coreCoordinates.MapId == sourceCoordinates.MapId &&
+                    coreDistance <= ev.VoiceRange && coreDistance < hearingDistance)
+                {
+                    hearingEntity = core.Owner;
+                    hearingDistance = coreDistance;
+                }
+            }
+
+            if (hearingEntity == null)
+                continue;
+
             if (TryComp(brain, out ActorComponent? actor))
             {
-                ev.Recipients.TryAdd(
-                    actor.PlayerSession,
-                    new ChatSystem.ICChatRecipientData(closestDistance, false, HearingEntity: closest));
+                if (!ev.Recipients.TryGetValue(actor.PlayerSession, out var existing) || existing.Range > hearingDistance)
+                    ev.Recipients[actor.PlayerSession] =
+                        new ChatSystem.ICChatRecipientData(hearingDistance, false, HearingEntity: hearingEntity);
             }
         }
     }

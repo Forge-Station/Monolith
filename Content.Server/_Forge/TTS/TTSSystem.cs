@@ -7,6 +7,8 @@ using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.TTS;
+using Content.Shared.Chat;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -136,24 +138,47 @@ public sealed partial class TTSSystem : EntitySystem
         var obfSoundData = await GenerateTTS(obfuscatedMessage, speaker, isWhisper);
         if (obfSoundData is null) return;
 
+        if (!Exists(uid))
+            return;
+
         var fullTtsEvent = new PlayTTSEvent(fullSoundData, GetNetEntity(uid), isWhisper);
         var obfTtsEvent = new PlayTTSEvent(obfSoundData, GetNetEntity(uid), isWhisper);
 
         var xformQuery = GetEntityQuery<TransformComponent>();
         var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(uid), xformQuery);
-        var recipients = Filter.Pvs(uid).Recipients;
+        var sourceMap = xformQuery.GetComponent(uid).MapID;
+        var recipients = new Dictionary<ICommonSession, ChatSystem.ICChatRecipientData>();
+        var range = isWhisper ? SharedChatSystem.WhisperMuffledRange : ChatSystem.VoiceRange;
 
-        foreach (var session in recipients)
+        foreach (var session in Filter.Pvs(uid).Recipients)
         {
             if (!session.AttachedEntity.HasValue) continue;
 
             var listener = session.AttachedEntity.Value;
             var xform = xformQuery.GetComponent(listener);
+            if (xform.MapID != sourceMap) continue;
             var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
 
-            if (distance > ChatSystem.VoiceRange) continue;
+            if (distance > range) continue;
+            recipients.TryAdd(session, new ChatSystem.ICChatRecipientData(distance, false));
+        }
+
+        RaiseLocalEvent(new ExpandICChatRecipientsEvent(uid, uid,
+            isWhisper ? ChatChannel.Whisper : ChatChannel.Local, range, recipients));
+
+        foreach (var (session, recipient) in recipients)
+        {
+            if (session.AttachedEntity is not { } listener) continue;
             var canUnderstand = CanUnderstandLanguage(listener, language.ID);
-            var getsClearWhisper = !isWhisper || distance <= ChatSystem.WhisperClearRange;
+            var getsClearWhisper = !isWhisper || recipient.Range <= ChatSystem.WhisperClearRange;
+
+            // Camera audio must reach the listener even when the speaker is outside their PVS.
+            if (recipient.HearingEntity != null || HasComp<StationAiHeldComponent>(listener))
+            {
+                RaiseNetworkEvent(new PlayTTSEvent(canUnderstand && getsClearWhisper
+                    ? fullSoundData : obfSoundData, isWhisper: isWhisper), session);
+                continue;
+            }
 
             RaiseNetworkEvent(canUnderstand && getsClearWhisper ? fullTtsEvent : obfTtsEvent, session);
         }

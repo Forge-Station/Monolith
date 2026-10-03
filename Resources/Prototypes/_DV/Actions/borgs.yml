@@ -31,11 +31,16 @@
   name: Open Programs
   description: View software installed on you
   components:
-  - type: Action
-    itemIconStyle: NoItem
+  # - type: Action
+  #   itemIconStyle: NoItem
+  #   icon:
+  #     sprite: _DV/Interface/Actions/actions_ai.rsi
+  #     state: pda
+  #   useDelay: 0.5
+  - type: InstantAction
+    itemIconStyle: BigAction
     icon:
       sprite: _DV/Interface/Actions/actions_ai.rsi
       state: pda
     useDelay: 0.5
-  - type: InstantAction
     event: !type:TogglePdaScreenEvent

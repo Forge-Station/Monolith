@@ -68,4 +68,6 @@
       - NewsReaderCartridge
       - CrimeAssistCartridge
       #- SecWatchCartridge
-      - NanoChatCartridge
+      - BountyContractsCartridge # Frontier
+      - AstroNavCartridge # Frontier
+      - NanoChatCartridge # DeltaV

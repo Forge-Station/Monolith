@@ -57,7 +57,9 @@
     - NotekeeperCartridge
     #- NanoTaskCartridge
     - NewsReaderCartridge
-    - NanoChatCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
     cartridgeSlot:
       locked: true
       priority: -1

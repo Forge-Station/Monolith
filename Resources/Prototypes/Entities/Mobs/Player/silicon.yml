@@ -683,7 +683,10 @@
     uiKey: enum.PdaUiKey.Key
     preinstalled:
     - NewsReaderCartridge
-    - NanoChatCartridge
+    - CrewManifestCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
     cartridgeSlot:
       locked: true
       priority: -1

@@ -325,8 +325,9 @@
       - CrewManifestCartridge
       - NotekeeperCartridge
       - NewsReaderCartridge
-      - BountyContractsCartridge
-      - AstroNavCartridge
+      - BountyContractsCartridge # Frontier
+      - AstroNavCartridge # Frontier
+      - NanoChatCartridge # DeltaV
       - AgroScanCartridge
 
 - type: entity
@@ -492,6 +493,8 @@
       - NewsReaderCartridge
       - MailMetricsCartridge # DeltaV - MailMetrics courier tracker
       #- StockTradingCartridge # DeltaV - StockTrading
+      - BountyContractsCartridge # Frontier
+      - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -517,6 +520,8 @@
     - NotekeeperCartridge
     - NewsReaderCartridge
     #- StockTradingCartridge # DeltaV - StockTrading
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
     - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -538,15 +543,15 @@
   - type: Icon
     state: pda-miner
   # Frontier: cartridges moved to loadouts
-  - type: CartridgeLoader
-    uiKey: enum.PdaUiKey.Key
-    preinstalled:
+  #- type: CartridgeLoader
+    #uiKey: enum.PdaUiKey.Key
+    #preinstalled:
     #   - CrewManifestCartridge
     #   - NotekeeperCartridge
     #   - NewsReaderCartridge
     #   - AstroNavCartridge
     # End Frontier
-      - NanoChatCartridge # DeltaV
+    #  - NanoChatCartridge # DeltaV
 
 - type: entity
   parent: BasePDA
@@ -868,6 +873,8 @@
       - NotekeeperCartridge
       - NewsReaderCartridge
       - GlimmerMonitorCartridge
+      - BountyContractsCartridge # Frontier
+      - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -894,6 +901,8 @@
       - NotekeeperCartridge
       - NewsReaderCartridge
       - GlimmerMonitorCartridge
+      - BountyContractsCartridge # Frontier
+      - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -921,6 +930,8 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
     - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -992,6 +1003,8 @@
       - WantedListCartridge
       - LogProbeCartridge
       - AstroNavCartridge
+      - BountyContractsCartridge # Frontier
+      - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -1024,7 +1037,8 @@
       - LogProbeCartridge
       - WantedListCartridge
       - MedTekCartridge
-      - AstroNavCartridge
+      - BountyContractsCartridge # Frontier
+      - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV
   - type: Tag #  Ignore Chameleon tags
     tags:
@@ -1144,6 +1158,7 @@
     uiKey: enum.PdaUiKey.Key
     preinstalled:
       - NotekeeperCartridge
+      - BountyContractsCartridge # Frontier
       - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV
 
@@ -1176,7 +1191,8 @@
       - MedTekCartridge
       - WantedListCartridge
       - LogProbeCartridge
-      - AstroNavCartridge
+      - BountyContractsCartridge # Frontier
+      - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV
       - MailMetricsCartridge # Frontier
   - type: Geiger # Mono
@@ -1301,6 +1317,8 @@
     - NotekeeperCartridge
     - NewsReaderCartridge
     #- StockTradingCartridge # DeltaV - StockTrading
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
     - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -1365,6 +1383,8 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - LogProbeCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
     - NanoChatCartridge # DeltaV
 
 - type: entity
@@ -1393,6 +1413,8 @@
     - NewsReaderCartridge
     - WantedListCartridge
     - MedTekCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
     - NanoChatCartridge # DeltaV
 
 - type: entity

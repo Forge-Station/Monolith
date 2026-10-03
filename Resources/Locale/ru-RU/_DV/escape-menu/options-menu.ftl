@@ -1,8 +1,4 @@
-﻿ui-options-tab-extra = Экстра
-ui-options-general-forknotice = Примечание: эти настройки специфичны для данного форка и могут не применяться на других серверах.
-
-ui-options-no-filters = Отключить фильтры зрения рас.
-ui-options-function-swap-hands-reversed = Поменять руки(в обратную сторону)
+﻿ui-options-function-swap-hands-reversed = Поменять руки(в обратную сторону)
 
 ## DeltaV NanoChat keybinds
 ui-options-header-nano-chat = НаноЧат

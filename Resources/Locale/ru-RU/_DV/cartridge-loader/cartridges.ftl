@@ -1,29 +1,3 @@
-mail-metrics-program-name = MailMetrics
-mail-metrics-header = Прибыль с доставки писем
-mail-metrics-opened = Доход(С открытий писем)
-mail-metrics-expired = Убытки(Истек срок доставки)
-mail-metrics-damaged = Убытки (Повреждения)
-mail-metrics-tampered = Убытки (Испорченные)
-mail-metrics-unopened = Не вскрытые
-mail-metrics-count-header = Посылки
-mail-metrics-money-header = Кредиты
-mail-metrics-total = Суммарно
-mail-metrics-progress = {$opened} из {$total} посылок открыто!
-mail-metrics-progress-percent = Уровень успеха: {$successRate}%
-
-## StockTrading
-
-# General
-stock-trading-program-name = StockTrading
-stock-trading-title = Intergalactic Stock Market
-stock-trading-balance = Balance: {$balance} credits
-stock-trading-no-entries = No entries
-stock-trading-owned-shares = Owned: {$shares}
-stock-trading-buy-button = Buy
-stock-trading-sell-button = Sell
-stock-trading-amount-placeholder = Amount
-stock-trading-price-history = Price History
-
 ## NanoChat
 
 # General

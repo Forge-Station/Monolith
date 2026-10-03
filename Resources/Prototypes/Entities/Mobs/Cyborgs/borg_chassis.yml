@@ -55,7 +55,7 @@
     preinstalled:
     - CrewManifestCartridge
     - NotekeeperCartridge
-    - NanoTaskCartridge
+    #- NanoTaskCartridge
     - NewsReaderCartridge
     - NanoChatCartridge
     cartridgeSlot:

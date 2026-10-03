@@ -5,6 +5,7 @@ using Content.Server.Destructible.Thresholds.Triggers;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared._Forge.Radio.Components;
+using Content.Shared._Forge.TTS;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Silicons.StationAi;
@@ -50,9 +51,12 @@ public sealed class StationAiPrototypeTests
             {
                 var brain = entityManager.SpawnEntity(prototype, coordinates);
                 var ghostRole = entityManager.GetComponent<GhostRoleComponent>(brain);
+                var tts = entityManager.GetComponent<TTSComponent>(brain);
 
                 Assert.Multiple(() =>
                 {
+                    Assert.That(tts.VoicePrototypeId, Is.EqualTo("Glados"), prototype);
+                    Assert.That(tts.FixedVoice, Is.True, prototype);
                     Assert.That(ghostRole.ReregisterOnGhost, Is.True, $"{prototype} must reopen its takeover role");
                     Assert.That(ghostRole.RaffleConfig, Is.Not.Null, $"{prototype} must use the raffle");
                     Assert.That(ghostRole.Prototype, Is.Not.Null, $"{prototype} must reference a ghost role prototype");

@@ -110,16 +110,19 @@ public sealed partial class TTSSystem : EntitySystem
             voiceId == null)
             return;
 
-        var voiceEv = new TransformSpeakerVoiceEvent(uid, voiceId);
-        RaiseLocalEvent(uid, voiceEv);
-        voiceId = voiceEv.VoiceId;
+        if (!component.FixedVoice)
+        {
+            var voiceEv = new TransformSpeakerVoiceEvent(uid, voiceId);
+            RaiseLocalEvent(uid, voiceEv);
+            voiceId = voiceEv.VoiceId;
+        }
 
         if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var protoVoice))
             return;
 
         var obfuscatedMessage = _language.ObfuscateSpeech(args.Message, args.Language);
 
-        await Handle(uid, args.Message, protoVoice.Speaker, args.IsWhisper, obfuscatedMessage, args.Language);
+        await Handle(args.Source, args.Message, protoVoice.Speaker, args.IsWhisper, obfuscatedMessage, args.Language);
     }
 
     private async Task Handle(

@@ -40,7 +40,7 @@ public sealed partial class NanoChatLookupView : PanelContainer
         public ContactContainer(NanoChatRecipient contact, NanoChatUiState state, bool isEvenRow, Action<NanoChatRecipient>? onStartChat)
         {
             HorizontalExpand = true;
-            StyleClasses.Add(isEvenRow ? StyleClass.PanelDark : StyleClass.PanelLight);
+            StyleClasses.Add(isEvenRow ? "PanelDark" : "PanelLight");
 
             var nameLabel = new Label()
             {
@@ -62,7 +62,7 @@ public sealed partial class NanoChatLookupView : PanelContainer
                 MaxSize = new Vector2(32, 32),
                 ToolTip = Loc.GetString("nano-chat-new-chat"),
             };
-            startChatButton.AddStyleClass(StyleClass.ButtonOpenBoth);
+            startChatButton.AddStyleClass(StyleBase.ButtonOpenBoth);
 
             if (contact.Number == state.OwnNumber || state.Recipients.ContainsKey(contact.Number) || state.MaxRecipients <= state.Recipients.Count)
             {

@@ -872,7 +872,7 @@
       - CrewManifestCartridge
       - NotekeeperCartridge
       - NewsReaderCartridge
-      - GlimmerMonitorCartridge
+      #- GlimmerMonitorCartridge
       - BountyContractsCartridge # Frontier
       - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV
@@ -900,7 +900,7 @@
       - CrewManifestCartridge
       - NotekeeperCartridge
       - NewsReaderCartridge
-      - GlimmerMonitorCartridge
+      #- GlimmerMonitorCartridge
       - BountyContractsCartridge # Frontier
       - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV

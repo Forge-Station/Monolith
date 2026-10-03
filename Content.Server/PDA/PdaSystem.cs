@@ -295,8 +295,8 @@ namespace Content.Server.PDA
                 new PdaIdInfoText
                 {
                     ActualOwnerName = pda.OwnerName,
-                    IdOwner = id?.FullName,
-                    JobTitle = id?.LocalizedJobTitle,
+                    IdOwner = owner,
+                    JobTitle = job,
                     CompanyName = companyName,
                     CompanyColor = companyColor,
                     CurrentDate = pda.CurrentDate, // DeltaV - PDA date

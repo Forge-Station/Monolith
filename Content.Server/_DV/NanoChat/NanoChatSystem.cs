@@ -33,7 +33,7 @@ public sealed class NanoChatSystem : SharedNanoChatSystem
         SubscribeLocalEvent<NanoChatCardComponent, EntGotRemovedFromContainerMessage>(OnRemoved);
 
         SubscribeLocalEvent<NanoChatCardComponent, MapInitEvent>(OnCardInit);
-        SubscribeLocalEvent<NanoChatCardComponent, BeingMicrowavedEvent>(OnMicrowaved, after: [typeof(IdCardSystem)]);
+        //SubscribeLocalEvent<NanoChatCardComponent, BeingMicrowavedEvent>(OnMicrowaved, after: [typeof(IdCardSystem)]); //Forge-Change-Remove: we dont have BeingMicrowavedEvent
     }
 
     private void OnInserted(Entity<NanoChatCardComponent> ent, ref EntGotInsertedIntoContainerMessage args)
@@ -54,45 +54,45 @@ public sealed class NanoChatSystem : SharedNanoChatSystem
         Dirty(ent);
     }
 
-    private void OnMicrowaved(Entity<NanoChatCardComponent> ent, ref BeingMicrowavedEvent args)
-    {
-        // Skip if the entity was deleted (e.g., by ID card system burning it)
-        if (Deleted(ent))
-            return;
+    // private void OnMicrowaved(Entity<NanoChatCardComponent> ent, ref BeingMicrowavedEvent args) //Forge-Change-Remove: we dont have BeingMicrowavedEvent
+    // {
+    //     // Skip if the entity was deleted (e.g., by ID card system burning it)
+    //     if (Deleted(ent))
+    //         return;
 
-        if (!TryComp<MicrowaveComponent>(args.Microwave, out var micro) || micro.Broken)
-            return;
+    //     if (!TryComp<MicrowaveComponent>(args.Microwave, out var micro) || micro.Broken)
+    //         return;
 
-        var randomPick = _random.NextFloat();
+    //     var randomPick = _random.NextFloat();
 
-        // Super lucky - erase all messages (10% chance)
-        if (randomPick <= 0.10f)
-        {
-            ent.Comp.Messages.Clear();
-            // TODO: these shouldn't be shown at the same time as the popups from IdCardSystem
-            // _popup.PopupEntity(Loc.GetString("nanochat-card-microwave-erased", ("card", ent)),
-            //     ent,
-            //     PopupType.Medium);
+    //     // Super lucky - erase all messages (10% chance)
+    //     if (randomPick <= 0.10f)
+    //     {
+    //         ent.Comp.Messages.Clear();
+    //         // TODO: these shouldn't be shown at the same time as the popups from IdCardSystem
+    //         // _popup.PopupEntity(Loc.GetString("nanochat-card-microwave-erased", ("card", ent)),
+    //         //     ent,
+    //         //     PopupType.Medium);
 
-            _adminLogger.Add(LogType.Action,
-                LogImpact.Medium,
-                $"{ToPrettyString(args.Microwave)} erased all messages on {ToPrettyString(ent)}");
-        }
-        else
-        {
-            // Scramble random messages for random recipients
-            ScrambleMessages(ent);
-            // _popup.PopupEntity(Loc.GetString("nanochat-card-microwave-scrambled", ("card", ent)),
-            //     ent,
-            //     PopupType.Medium);
+    //         _adminLogger.Add(LogType.Action,
+    //             LogImpact.Medium,
+    //             $"{ToPrettyString(args.Microwave)} erased all messages on {ToPrettyString(ent)}");
+    //     }
+    //     else
+    //     {
+    //         // Scramble random messages for random recipients
+    //         ScrambleMessages(ent);
+    //         // _popup.PopupEntity(Loc.GetString("nanochat-card-microwave-scrambled", ("card", ent)),
+    //         //     ent,
+    //         //     PopupType.Medium);
 
-            _adminLogger.Add(LogType.Action,
-                LogImpact.Medium,
-                $"{ToPrettyString(args.Microwave)} scrambled messages on {ToPrettyString(ent)}");
-        }
+    //         _adminLogger.Add(LogType.Action,
+    //             LogImpact.Medium,
+    //             $"{ToPrettyString(args.Microwave)} scrambled messages on {ToPrettyString(ent)}");
+    //     }
 
-        Dirty(ent);
-    }
+    //     Dirty(ent);
+    // }
 
     private void ScrambleMessages(NanoChatCardComponent component)
     {

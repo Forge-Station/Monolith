@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Utility; // Funky Station
 using Content.Client._Funkystation.NanoChat; // Funky Station
 
-namespace Content.Client.DeltaV.CartridgeLoader.Cartridges;
+namespace Content.Client._DV.CartridgeLoader.Cartridges;
 
 [GenerateTypedNameReferences]
 public sealed partial class NanoChatMessageBubble : BoxContainer

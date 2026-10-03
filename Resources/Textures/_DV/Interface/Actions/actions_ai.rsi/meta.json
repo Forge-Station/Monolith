@@ -8,27 +8,6 @@
     },
     "states": [
         {
-            "name": "bike_horn"
-        },
-        {
-            "name": "emergency_sealant"
-        },
-        {
-            "name": "holopointer"
-        },
-        {
-            "name": "light_synthesizer"
-        },
-        {
-            "name": "nanites"
-        },
-        {
-            "name": "rgb_lighting"
-        },
-        {
-            "name": "store"
-        },
-        {
             "name": "pda"
         }
     ]

@@ -13,7 +13,7 @@ ledger-no-expenses = Нет
 ledger-balance = Баланс:
 ledger-no-balance = N/A
 
-ledger-tab-Frontier = Аванпост Фронтира
+ledger-tab-Frontier = Центральный Аванпост #Forge-change
 ledger-tab-Nfsd = ТСФ
 ledger-tab-Medical = Медицинский Аванпост
 Expensesledger-tab-Edison = Электростанция Эдиссона

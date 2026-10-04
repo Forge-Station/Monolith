@@ -14,6 +14,7 @@ public sealed partial class MechSoundboardSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
 
+    /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
@@ -43,10 +44,6 @@ public sealed partial class MechSoundboardSystem : EntitySystem
         if (args.Message is not MechSoundboardPlayMessage msg)
             return;
 
-        if (!TryComp<MechEquipmentComponent>(uid, out var equipment) ||
-            equipment.EquipmentOwner == null)
-            return;
-
         if (msg.Sound >= comp.Sounds.Count)
             return;
 
@@ -55,6 +52,6 @@ public sealed partial class MechSoundboardSystem : EntitySystem
             return;
 
         // honk!!!!!
-        _audio.PlayPvs(comp.Sounds[msg.Sound], uid);
+        _audio.PlayPredicted(comp.Sounds[msg.Sound], uid, uid);
     }
 }

@@ -1,5 +1,3 @@
-using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Mech;
@@ -7,7 +5,20 @@ namespace Content.Shared.Mech;
 [Serializable, NetSerializable]
 public enum MechUiKey : byte
 {
-    Key
+    Key,
+    Equipment
+}
+
+/// <summary>
+/// Fan states for the mech air system
+/// </summary>
+[Serializable, NetSerializable]
+public enum MechFanState : byte
+{
+    Off,
+    On,
+    Idle,
+    Na
 }
 
 /// <summary>
@@ -21,28 +32,27 @@ public sealed class MechEquipmentUiStateReadyEvent : EntityEventArgs
 /// <summary>
 /// Event raised to relay an equipment ui message
 /// </summary>
-public sealed class MechEquipmentUiMessageRelayEvent : EntityEventArgs
+public sealed class MechEquipmentUiMessageRelayEvent(MechEquipmentUiMessage message) : EntityEventArgs
 {
-    public MechEquipmentUiMessage Message;
-
-    public MechEquipmentUiMessageRelayEvent(MechEquipmentUiMessage message)
-    {
-        Message = message;
-    }
+    public MechEquipmentUiMessage Message = message;
 }
 
 /// <summary>
 /// UI event raised to remove a piece of equipment from a mech
 /// </summary>
 [Serializable, NetSerializable]
-public sealed class MechEquipmentRemoveMessage : BoundUserInterfaceMessage
+public sealed class MechEquipmentRemoveMessage(NetEntity equipment) : BoundUserInterfaceMessage
 {
-    public NetEntity Equipment;
+    public NetEntity Equipment = equipment;
+}
 
-    public MechEquipmentRemoveMessage(NetEntity equipment)
-    {
-        Equipment = equipment;
-    }
+/// <summary>
+/// UI event raised to remove a passive module from a mech
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MechModuleRemoveMessage(NetEntity module) : BoundUserInterfaceMessage
+{
+    public NetEntity Module = module;
 }
 
 /// <summary>
@@ -53,6 +63,12 @@ public abstract class MechEquipmentUiMessage : BoundUserInterfaceMessage
 {
     public NetEntity Equipment;
 }
+
+/// <summary>
+/// Purge cabin air message
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MechCabinAirMessage : BoundUserInterfaceMessage;
 
 /// <summary>
 /// event raised for the grabber equipment to eject an item from it's storage
@@ -85,6 +101,42 @@ public sealed class MechSoundboardPlayMessage : MechEquipmentUiMessage
 }
 
 /// <summary>
+/// Event raised to toggle the airtight mode of a mech
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MechAirtightMessage(bool isAirtight) : BoundUserInterfaceMessage
+{
+    public bool IsAirtight = isAirtight;
+}
+
+/// <summary>
+/// Event raised to toggle the fan state of a mech
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MechFanToggleMessage(bool isActive) : BoundUserInterfaceMessage
+{
+    public bool IsActive = isActive;
+}
+
+/// <summary>
+/// Event raised to toggle the fan module's filter on/off
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MechFilterToggleMessage(bool enabled) : BoundUserInterfaceMessage
+{
+    public bool Enabled = enabled;
+}
+
+/// <summary>
+/// Event raised to select equipment in the radial menu
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MechEquipmentSelectMessage(NetEntity? equipment) : BoundUserInterfaceMessage
+{
+    public NetEntity? Equipment = equipment;
+}
+
+/// <summary>
 /// BUI state for mechs that also contains all equipment ui states.
 /// </summary>
 /// <remarks>
@@ -108,7 +160,48 @@ public sealed class MechSoundboardPlayMessage : MechEquipmentUiMessage
 [Serializable, NetSerializable]
 public sealed class MechBoundUiState : BoundUserInterfaceState
 {
-    public Dictionary<NetEntity, BoundUserInterfaceState> EquipmentStates = new();
+    public List<NetEntity> Equipment = new();
+    public List<NetEntity> Modules = new();
+    public bool IsAirtight;
+    public bool FanActive;
+    public MechFanState FanState = MechFanState.Off;
+    public bool FilterEnabled;
+    public float CabinPressureLevel;
+    public float CabinTemperature;
+    public float GasAmountLiters;
+    public float TankPressure;
+    public bool CabinPurgeAvailable;
+
+    // Lock system
+    public bool DnaLockRegistered;
+    public bool DnaLockActive;
+    public bool CardLockRegistered;
+    public bool CardLockActive;
+    public string? OwnerDna;
+    public string? OwnerJobTitle;
+    public bool IsLocked;
+
+    // Passive modules presence
+    public bool HasFanModule;
+    public bool HasGasModule;
+
+    // Module capacity
+    public int ModuleSpaceMax;
+    public int ModuleSpaceUsed;
+
+    // Whether a pilot is currently seated in the mech
+    public bool PilotPresent;
+
+    // Mech stats for UI synchronization
+    public float Integrity;
+    public float MaxIntegrity;
+    public float Energy;
+    public float MaxEnergy;
+    public bool CanAirtight;
+    public int EquipmentUsed;
+    public int MaxEquipmentAmount;
+    public bool IsBroken;
+    public Dictionary<NetEntity, BoundUserInterfaceState> EquipmentUiStates = new();
 }
 
 [Serializable, NetSerializable]
@@ -118,11 +211,35 @@ public sealed class MechGrabberUiState : BoundUserInterfaceState
     public int MaxContents;
 }
 
+[Serializable, NetSerializable]
+public sealed class MechGeneratorUiState : BoundUserInterfaceState
+{
+    public float ChargeCurrent;
+    public float ChargeMax;
+
+    public bool HasFuel;
+    public string? FuelName;
+    public float FuelAmount;
+    public float FuelCapacity;
+}
+
+/// <summary>
+/// Event raised for mech fuel generator modules to eject their stored fuel.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class MechGeneratorEjectFuelMessage : MechEquipmentUiMessage
+{
+    public MechGeneratorEjectFuelMessage(NetEntity equipment)
+    {
+        Equipment = equipment;
+    }
+}
+
 /// <summary>
 /// List of sound collection ids to be localized and displayed.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed class MechSoundboardUiState : BoundUserInterfaceState
 {
-    public List<ProtoId<SoundCollectionPrototype>> Sounds = new();
+    public List<string> Sounds = new();
 }

@@ -6,6 +6,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Components; // Mono
 using Content.Shared.Tools.Systems;
+using Content.Shared.Repairable.Events;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Repairable;
@@ -54,6 +55,12 @@ public sealed partial class RepairableSystem : EntitySystem
     private void Repair(Entity<RepairableComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled)
+            return;
+
+        // Raise repair attempt event
+        var ev = new RepairAttemptEvent(args.User);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled)
             return;
 
         // Only try repair the target if it is damaged

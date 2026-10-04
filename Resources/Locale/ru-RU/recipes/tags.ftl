@@ -94,6 +94,14 @@ construction-graph-tag-honk-peripherals-control-module = модуль управ
 construction-graph-tag-honk-weapon-control-and-targeting-module = модуль управления оружием и наведения H.O.N.K.
 construction-graph-tag-ripley-central-control-module = центральный модуль управления "Рипли"
 construction-graph-tag-ripley-peripherals-control-module = модуль управления периферией "Рипли"
+construction-graph-tag-clarke-central-control-module = clarke central control module
+construction-graph-tag-clarke-peripherals-control-module = clarke peripherals control module
+construction-graph-tag-durand-central-control-module = durand central control module
+construction-graph-tag-durand-peripherals-control-module = durand peripherals control module
+construction-graph-tag-durand-weapon-control-and-targeting-module = durand weapon control and targeting module
+construction-graph-tag-gygax-central-control-module = gygax central control module
+construction-graph-tag-gygax-peripherals-control-module = gygax peripherals control module
+construction-graph-tag-gygax-weapon-control-and-targeting-module = gygax weapon control and targeting module
 
 # Конструкции
 construction-graph-tag-door-electronics-circuit-board = плата дверной электроники

@@ -20,7 +20,7 @@ Expensesledger-tab-Edison = Электростанция Эдиссона
 # Fallback, if this displays, something's wrong.
 ledger-tab-Unknown = Неизвестно
 
-ledger-entry-type-TickingIncome = Субсидии УСФ
+ledger-entry-type-TickingIncome = Субсидии
 ledger-entry-type-VendorTax = Налоги с продаж
 ledger-entry-type-CargoTax = Налоги с Карго
 ledger-entry-type-MailDelivered = Почтовые выплаты

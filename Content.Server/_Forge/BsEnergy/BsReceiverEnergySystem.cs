@@ -11,7 +11,9 @@ using Content.Shared.Stacks;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.BsEnergy;
 
@@ -29,8 +31,6 @@ public sealed class BsReceiverEnergySystem : EntitySystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
     private readonly Dictionary<NetEntity, UpdateTransmitterStateData> _cachedTransmittersData = new();
-    private const float UpdateInterval = BsEnergySettings.UpdateInterval;
-    private float _updateTimer;
     public override void Initialize()
     {
         base.Initialize();
@@ -42,6 +42,8 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         SubscribeLocalEvent<BsReceiverEnergyComponent, ChoiceTransmitterMessage>(OnChoiceServer);
         SubscribeLocalEvent<BsReceiverEnergyComponent, ChangePowerMessage>(OnChangePower);
         SubscribeLocalEvent<BsReceiverEnergyComponent, EnableToggleMessage>(OnEnableToggle);
+        SubscribeLocalEvent<BsReceiverEnergyComponent, SendPasswordToConnectMessage>(OnPasswordToConnect);
+        SubscribeLocalEvent<BsReceiverEnergyComponent, OpenAuthenticationMessage>(OnOpenAuthentication);
         SubscribeLocalEvent<BsReceiverEnergyComponent, ComponentInit>(OnInit);
     }
 
@@ -58,13 +60,6 @@ public sealed class BsReceiverEnergySystem : EntitySystem
 
             UpdateUI(receiverUid, receiverEnergyComponent);
         }
-
-        _updateTimer += frameTime;
-
-        if (_updateTimer < UpdateInterval)
-            return;
-
-        _updateTimer = 0;
     }
 
     private void OnAnchorStateChanged(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, AnchorStateChangedEvent args)
@@ -104,15 +99,15 @@ public sealed class BsReceiverEnergySystem : EntitySystem
 
     private void OnComponentShutdown(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, ComponentShutdown args)
     {
-        if (!receiverEnergyComponent.ConnectedTransmitter.IsValid() || !TryComp<BsTransmitterEnergyComponent>(receiverEnergyComponent.ConnectedTransmitter, out var bsTransmitterEnergyComponent))
+        if (!receiverEnergyComponent.ConnectedTransmitter.IsValid())
             return;
 
-        _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, bsTransmitterEnergyComponent);
+        _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, receiverEnergyComponent.ConnectedTransmitter);
     }
 
-    private bool CheckConnected(EntityUid transmitterUid,  BsTransmitterEnergyComponent bsTransmitterEnergyComponent)
+    private bool CheckConnected(EntityUid receiverUid,  EntityUid transmitterUid)
     {
-        return bsTransmitterEnergyComponent.Receivers.Contains(transmitterUid);
+        return TryComp<BsTransmitterEnergyComponent>(transmitterUid, out var bsTransmitterEnergyComponent) && bsTransmitterEnergyComponent.Receivers.Contains(receiverUid);
     }
 
     private void OnUIOpen(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, AfterActivatableUIOpenEvent args)
@@ -131,15 +126,38 @@ public sealed class BsReceiverEnergySystem : EntitySystem
             ReceiverOff(receiverUid, receiverEnergyComponent);
     }
 
+    private void OnPasswordToConnect(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, SendPasswordToConnectMessage args)
+    {
+        var connectingResult = _bsTransmitterEnergySystem.ReceiverConnect(receiverUid, GetEntity(args.Transmitter), args.Password);
+        UpdateAuthenticationUI(receiverUid, args.Transmitter, true, connectingResult, args.RequestId);
+    }
+
+    private void OnOpenAuthentication(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, OpenAuthenticationMessage args)
+    {
+        var transmitterUid = GetEntity(args.Transmitter);
+        if (CheckConnected(receiverUid, transmitterUid))
+        {
+            _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, transmitterUid);
+            return;
+        }
+
+        if (!TryComp<ActorComponent>(args.Actor, out var actorComponent))
+            return;
+
+        if (_uiSystem.IsUiOpen(receiverUid, BsEnergyUiKey.AuthenticationKey, args.Actor))
+            _uiSystem.CloseUi(receiverUid, BsEnergyUiKey.AuthenticationKey, actorComponent.PlayerSession);
+
+        _uiSystem.OpenUi(receiverUid, BsEnergyUiKey.AuthenticationKey, actorComponent.PlayerSession);
+        UpdateAuthenticationUI(receiverUid, args.Transmitter);
+    }
+
     private void ReceiverOff(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent)
     {
         receiverEnergyComponent.Enabled = false;
         UpdateAppearance(receiverUid, false);
 
         receiverEnergyComponent.ReceivedPower = 0;
-
-        if (TryComp<BsTransmitterEnergyComponent>(receiverEnergyComponent.ConnectedTransmitter, out var bsTransmitterEnergyComponent))
-            _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, bsTransmitterEnergyComponent);
+        _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, receiverEnergyComponent.ConnectedTransmitter);
     }
 
     private (float, float)? GetNetworkData(EntityUid receiverUid)
@@ -174,6 +192,7 @@ public sealed class BsReceiverEnergySystem : EntitySystem
                 Price = bsTransmitterEnergyComponent.Price,
                 TransmitterAvailablePower = bsTransmitterEnergyComponent.AvailablePower,
                 GridTransmitterName = gridMetaData?.EntityName ?? string.Empty,
+                HasPassword = !string.IsNullOrWhiteSpace(bsTransmitterEnergyComponent.Password),
             };
 
             _cachedTransmittersData[GetNetEntity(transmitterUid)] = transmitterStateData;
@@ -186,7 +205,6 @@ public sealed class BsReceiverEnergySystem : EntitySystem
             return;
 
         UpdateTransmittersCache();
-        TryComp<BsTransmitterEnergyComponent>(receiverEnergyComponent.ConnectedTransmitter, out var transmitterEnergyComponent);
 
         var state = new BsReceiverInterfaceStateMessage
         {
@@ -197,11 +215,32 @@ public sealed class BsReceiverEnergySystem : EntitySystem
             Enabled = receiverEnergyComponent.Enabled,
             Money = (int)receiverEnergyComponent.Money,
             ReceivedPower = receiverEnergyComponent.ReceivedPower,
-            ConnectedTransmitter = transmitterEnergyComponent != null && CheckConnected(receiverUid, transmitterEnergyComponent) ? GetNetEntity(receiverEnergyComponent.ConnectedTransmitter) : NetEntity.Invalid,
+            ConnectedTransmitter = GetNetEntity(receiverEnergyComponent.ConnectedTransmitter),
             TransmittersData = _cachedTransmittersData,
         };
 
         _uiSystem.SetUiState(receiverUid, BsEnergyUiKey.ReceiverKey, state);
+    }
+
+    private void UpdateAuthenticationUI(EntityUid receiverUid, NetEntity transmitter, bool isResponse = false, bool? connectingResult = null, int requestId = 0)
+    {
+        if (!_uiSystem.IsUiOpen(receiverUid, BsEnergyUiKey.AuthenticationKey))
+            return;
+
+        var transmitterUid = GetEntity(transmitter);
+
+        TryComp<MetaDataComponent>(Transform(transmitterUid).GridUid, out var gridMetaData);
+
+        var state = new BsReceiverAuthenticationInterfaceStateMessage
+        {
+            Transmitter = transmitter,
+            TransmitterGridName = gridMetaData?.EntityName ?? string.Empty,
+            ConnectingResult = connectingResult ?? CheckConnected(receiverUid, transmitterUid),
+            IsResponse = isResponse,
+            RequestId = requestId,
+        };
+
+        _uiSystem.SetUiState(receiverUid, BsEnergyUiKey.AuthenticationKey, state);
     }
 
     private void OnChangePower(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, ChangePowerMessage args)
@@ -226,26 +265,11 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         if (!receiverEnergyComponent.Enabled)
             return;
 
-        var selectedTransmitterUid = GetEntity(args.NetUid);
-        if (!TryComp<BsTransmitterEnergyComponent>(selectedTransmitterUid, out var bsTransmitterEnergyComponent))
-            return;
-
-        if (CheckConnected(receiverUid, bsTransmitterEnergyComponent))
-        {
-            _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, bsTransmitterEnergyComponent);
-            return;
-        }
-
-        ClosePreviousConnection(receiverUid, receiverEnergyComponent.ConnectedTransmitter);
-        receiverEnergyComponent.ConnectedTransmitter = _bsTransmitterEnergySystem.ReceiverConnect(receiverUid, bsTransmitterEnergyComponent) ? selectedTransmitterUid : EntityUid.Invalid;
-    }
-
-    private void ClosePreviousConnection(EntityUid receiverUid, EntityUid transmitterUid)
-    {
-        if (!TryComp<BsTransmitterEnergyComponent>(transmitterUid, out var bsTransmitterEnergyComponent))
-            return;
-
-        _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, bsTransmitterEnergyComponent);
+        var transmitterUid = GetEntity(args.Transmitter);
+        if (CheckConnected(receiverUid, transmitterUid))
+            _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, transmitterUid);
+        else
+            _bsTransmitterEnergySystem.ReceiverConnect(receiverUid, transmitterUid);
     }
 
     private void OnWithdraw(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, WithdrawMessage args)
@@ -261,4 +285,3 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         receiverEnergyComponent.Money = 0;
     }
 }
-

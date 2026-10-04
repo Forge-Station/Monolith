@@ -7,6 +7,7 @@ public enum BsEnergyUiKey : byte
 {
     ReceiverKey,
     TransmitterKey,
+    AuthenticationKey,
 }
 
 [Serializable, NetSerializable]
@@ -24,6 +25,7 @@ public sealed class UpdateTransmitterStateData
     public int LimitConnecting;
     public float TransmitterAvailablePower;
     public string GridTransmitterName = string.Empty;
+    public bool HasPassword;
 }
 
 [Serializable, NetSerializable]
@@ -51,7 +53,7 @@ public sealed class UpdateHistoryData
 [Serializable, NetSerializable]
 public sealed class ChoiceTransmitterMessage : BoundUserInterfaceMessage
 {
-    public NetEntity NetUid;
+    public NetEntity Transmitter;
 }
 
 [Serializable, NetSerializable]
@@ -64,6 +66,12 @@ public sealed class ChangePowerMessage : BoundUserInterfaceMessage
 public sealed class EnableToggleMessage : BoundUserInterfaceMessage
 {
     public bool Enabled;
+}
+
+[Serializable, NetSerializable]
+public sealed class OpenAuthenticationMessage : BoundUserInterfaceMessage
+{
+    public NetEntity Transmitter;
 }
 
 [Serializable, NetSerializable]
@@ -88,6 +96,20 @@ public sealed class KickMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
+public sealed class PasswordMessage : BoundUserInterfaceMessage
+{
+    public string Password = string.Empty;
+}
+
+[Serializable, NetSerializable]
+public sealed class SendPasswordToConnectMessage : BoundUserInterfaceMessage
+{
+    public NetEntity Transmitter;
+    public string Password = string.Empty;
+    public int RequestId;
+}
+
+[Serializable, NetSerializable]
 public sealed class BsReceiverInterfaceStateMessage : BoundUserInterfaceState
 {
     public bool Enabled;
@@ -99,6 +121,16 @@ public sealed class BsReceiverInterfaceStateMessage : BoundUserInterfaceState
     public (float Load, float Supply)? NetworkStats;
     public NetEntity ConnectedTransmitter;
     public Dictionary<NetEntity, UpdateTransmitterStateData> TransmittersData = new();
+}
+
+[Serializable, NetSerializable]
+public sealed class BsReceiverAuthenticationInterfaceStateMessage : BoundUserInterfaceState
+{
+    public NetEntity Transmitter;
+    public bool ConnectingResult;
+    public bool IsResponse;
+    public string TransmitterGridName = string.Empty;
+    public int RequestId;
 }
 
 [Serializable, NetSerializable]
@@ -116,6 +148,7 @@ public sealed class BsTransmitterInterfaceStateMessage : BoundUserInterfaceState
     public int Money;
     public int PowerConsumer;
     public int AvailablePower;
+    public string Password = string.Empty;
     public (float Load, float Supply)? NetworkStats;
     public Dictionary<NetEntity, UpdateReceiversData> ReceiversData = new();
     public Dictionary<NetEntity, UpdateHistoryData> HistoryData = new();

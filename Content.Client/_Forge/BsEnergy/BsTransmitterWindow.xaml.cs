@@ -15,6 +15,7 @@ public sealed partial class BsTransmitterWindow : FancyWindow
 
     private readonly string _minuteLocStr = Loc.GetString("ui-bs-energy-time-minute");
     private readonly string _balanceLocStr = Loc.GetString("ui-bs-transmitter-money-label");
+    private const int PasswordMaxLenght = BsEnergySettings.PasswordMaxLenght;
     private int _maxValue;
     private int _stepSize;
     private int _power;
@@ -25,6 +26,7 @@ public sealed partial class BsTransmitterWindow : FancyWindow
     public event Action<BaseButton.ButtonEventArgs>? OnEnableToggle;
     public event Action? OnWithdraw;
     public event Action<NetEntity>? OnKick;
+    public event Action<string>? OnPasswordChanged;
 
     private readonly Dictionary<NetEntity, ReceiversUiElements> _currentReceiversUiElements = new();
     private readonly Dictionary<NetEntity, HistoryUiElements> _historyUiElements = new();
@@ -68,6 +70,8 @@ public sealed partial class BsTransmitterWindow : FancyWindow
         PriceSpinBox.IsValid = val => val >= 0;
         PriceSpinBox.LineEditControl.PlaceHolder = $"{BsEnergySettings.PassiveIncome}";
 
+        PasswordLineEdit.IsValid = text => text.Length <= PasswordMaxLenght;
+
         Tab.SetTabTitle(0, Loc.GetString("ui-bs-transmitter-settings-tab"));
         Tab.SetTabTitle(1, Loc.GetString("ui-bs-transmitter-receivers-tab"));
         Tab.SetTabTitle(2, Loc.GetString("ui-bs-transmitter-history-tab"));
@@ -76,6 +80,17 @@ public sealed partial class BsTransmitterWindow : FancyWindow
         WithdrawButton.OnPressed += _ => OnWithdraw?.Invoke();
         PriceSpinBox.ValueChanged += args => OnPriceChanged?.Invoke(args.Value);
         ConnectedDevicesSpinBox.ValueChanged += args => OnConnectedDevicesChanged?.Invoke(args.Value);
+        PasswordLineEdit.OnTextChanged += args =>
+        {
+            var newText = args.Text;
+            if (newText.Length > PasswordMaxLenght)
+            {
+                newText = newText[..PasswordMaxLenght];
+                PasswordLineEdit.SetText(newText);
+            }
+
+            OnPasswordChanged?.Invoke(newText);
+        };
     }
 
     public void SetEntity(EntityUid uid)
@@ -131,6 +146,9 @@ public sealed partial class BsTransmitterWindow : FancyWindow
 
         if (!ConnectedDevicesSpinBox.LineEditControl.HasKeyboardFocus())
             ConnectedDevicesSpinBox.OverrideValue(stateMessage.ConnectingLimit);
+
+        if (!PasswordLineEdit.HasKeyboardFocus())
+            PasswordLineEdit.Text = stateMessage.Password;
 
         UpdateReceiversUI(stateMessage.ReceiversData, stateMessage.HistoryData);
         UpdateHistoryUI(stateMessage.HistoryData);

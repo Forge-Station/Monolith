@@ -73,6 +73,7 @@ ui-bs-receiver-money-label = Balance:
 ui-bs-receiver-withdraw-button = Withdraw Funds
 ui-bs-receiver-transmitters-label = Available Energy Sellers
 ui-bs-receiver-draw-rate-label = Grid Load:
+ui-bs-receiver-available-power-label = Available:
 
 ui-bs-transmitter-title = Bluespace Energy Transmitter
 ui-bs-transmitter-info-label = Information
@@ -99,3 +100,10 @@ ui-bs-transmitter-total-money-received-label = Received:
 ui-bs-transmitter-history-total-money-translated-label = Total Earned:
 ui-bs-transmitter-history-total-energy-received-label = Total Transmitted:
 ui-bs-transmitter-automatic-energy-sales = Automatic Energy Sales
+ui-bs-transmitter-password = Password:
+
+ui-bs-authentication-title = Authentication
+ui-bs-authentication-connection-to = Connecting to:
+ui-bs-authentication-password = Password:
+ui-bs-authentication-connecting-result-true = Connected
+ui-bs-authentication-connecting-result-false = Access denied!

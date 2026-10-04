@@ -5,7 +5,6 @@
                       MinSize="556 450"
                       Title="{Loc 'ui-bs-transmitter-title'}">
 
-
     <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" SeparationOverride="8" Margin="4">
         <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0 4 0 4">
             <PanelContainer.PanelOverride>
@@ -45,8 +44,12 @@
                                             <SpinBox Name="ConnectedDevicesSpinBox" HorizontalExpand="True" />
                                         </BoxContainer>
                                         <BoxContainer Orientation="Horizontal" Margin="30 0 0 0">
-                                            <Label Text="{Loc 'ui-bs-transmitter-expected-income-label'}" HorizontalExpand="True" />
-                                            <Label Name="ExpectedIncomeLabel" />
+                                            <Label Text="{Loc 'ui-bs-transmitter-password'}" Margin="0 0 10 0" />
+                                            <LineEdit Name="PasswordLineEdit" HorizontalExpand="True"></LineEdit>
+                                        </BoxContainer>
+                                        <BoxContainer Orientation="Horizontal" Margin="30 0 0 0">
+                                        <Label Text="{Loc 'ui-bs-transmitter-expected-income-label'}" HorizontalExpand="True" />
+                                        <Label Name="ExpectedIncomeLabel" />
                                         </BoxContainer>
                                     </BoxContainer>
                                 </BoxContainer>

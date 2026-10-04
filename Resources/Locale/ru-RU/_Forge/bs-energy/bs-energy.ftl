@@ -73,6 +73,7 @@ ui-bs-receiver-money-label = Баланс:
 ui-bs-receiver-withdraw-button = Вывести средства
 ui-bs-receiver-transmitters-label = Доступные продавцы энергии
 ui-bs-receiver-draw-rate-label = Нагрузка сети:
+ui-bs-receiver-available-power-label = Доступно:
 
 ui-bs-transmitter-title = Блюспейс передатчик энергии
 ui-bs-transmitter-info-label = Информация
@@ -98,4 +99,11 @@ ui-bs-transmitter-total-energy-received-label = Передано:
 ui-bs-transmitter-total-money-received-label = Получено:
 ui-bs-transmitter-history-total-money-transfer-label = Всего заработано:
 ui-bs-transmitter-history-total-energy-received-label = Всего Передано:
-ui-bs-transmitter-automatic-energy-sales = Автоматическая продажа
+ui-bs-transmitter-automatic-energy-sales = Автоматическая продажа энергии
+ui-bs-transmitter-password = Пароль:
+
+ui-bs-authentication-title = Аутентификация
+ui-bs-authentication-connection-to = Подключение к:
+ui-bs-authentication-password = Пароль:
+ui-bs-authentication-connecting-result-true = Подключён
+ui-bs-authentication-connecting-result-false = В доступе отказано!

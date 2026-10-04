@@ -36,6 +36,9 @@ public sealed partial class BsTransmitterEnergyComponent : Component
     [DataField]
     public int ConnectingLimit;
 
+    [DataField]
+    public string Password = string.Empty;
+
     [DataField("enablePassiveIncome")]
     public bool EnablePassiveIncome { get; private set; }
 

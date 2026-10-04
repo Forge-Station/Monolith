@@ -70,6 +70,8 @@
     interfaces:
       enum.BsEnergyUiKey.ReceiverKey:
         type: BsReceiverBoundUserInterface
+      enum.BsEnergyUiKey.AuthenticationKey:
+        type: BsReceiverAuthenticationBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.ReceiverKey
 
@@ -118,6 +120,8 @@
     interfaces:
       enum.BsEnergyUiKey.ReceiverKey:
         type: BsReceiverBoundUserInterface
+      enum.BsEnergyUiKey.AuthenticationKey:
+        type: BsReceiverAuthenticationBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.ReceiverKey
 
@@ -166,6 +170,8 @@
     interfaces:
       enum.BsEnergyUiKey.ReceiverKey:
         type: BsReceiverBoundUserInterface
+      enum.BsEnergyUiKey.AuthenticationKey:
+        type: BsReceiverAuthenticationBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.ReceiverKey
 

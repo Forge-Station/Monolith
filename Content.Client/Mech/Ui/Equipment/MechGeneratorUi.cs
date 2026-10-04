@@ -4,11 +4,11 @@ using Robust.Client.UserInterface;
 
 namespace Content.Client.Mech.Ui.Equipment;
 
-public sealed partial class MechSoundboardUi : UIFragment
+public sealed partial class MechGeneratorUi : UIFragment
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
 
-    private MechSoundboardUiFragment? _fragment;
+    private MechGeneratorUiFragment? _fragment;
 
     public override Control GetUIFragmentRoot()
     {
@@ -20,19 +20,18 @@ public sealed partial class MechSoundboardUi : UIFragment
         if (fragmentOwner == null)
             return;
 
-        _fragment = new MechSoundboardUiFragment();
-        _fragment.OnPlayAction += sound =>
+        _fragment = new MechGeneratorUiFragment();
+        _fragment.OnEject += () =>
         {
-            // TODO: IDK dog
-            userInterface.SendMessage(new MechSoundboardPlayMessage(_entMan.GetNetEntity(fragmentOwner.Value), sound));
+            userInterface.SendMessage(new MechGeneratorEjectFuelMessage(_entMan.GetNetEntity(fragmentOwner.Value)));
         };
     }
 
     public override void UpdateState(BoundUserInterfaceState state)
     {
-        if (state is not MechSoundboardUiState soundboardState)
+        if (state is not MechGeneratorUiState genState)
             return;
 
-        _fragment?.UpdateContents(soundboardState);
+        _fragment?.UpdateContents(genState);
     }
 }

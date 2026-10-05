@@ -226,7 +226,7 @@ public sealed partial class WaitAutodocStep : IAutodocStep
 
     bool IAutodocStep.Validate(Entity<AutodocComponent> ent, SharedAutodocSystem autodoc)
     {
-        return Length > 0 && Length < 30;
+        return Length > 0 && Length <= 30;
     }
 
     bool IAutodocStep.Run(Entity<AutodocComponent, HandsComponent> ent, SharedAutodocSystem autodoc)

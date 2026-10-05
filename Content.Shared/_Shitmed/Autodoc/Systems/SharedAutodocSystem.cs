@@ -225,7 +225,8 @@ public abstract class SharedAutodocSystem : EntitySystem
 
     public bool GrabItem(Entity<AutodocComponent, HandsComponent> ent, EntityUid item)
     {
-        return _hands.TryPickup(ent, item, ent.Comp1.ItemSlot, animate: false, handsComp: ent.Comp2);
+        // Machines bypass player action blockers when running programmed steps.
+        return _hands.TryPickup(ent, item, ent.Comp1.ItemSlot, checkActionBlocker: false, animate: false, handsComp: ent.Comp2);
     }
 
     public void GrabItemOrThrow(Entity<AutodocComponent, HandsComponent> ent, EntityUid item)
@@ -237,6 +238,8 @@ public abstract class SharedAutodocSystem : EntitySystem
     public void StoreItemOrThrow(Entity<AutodocComponent, HandsComponent> ent)
     {
         var item = GetHeldOrThrow(ent);
+        // Ensure the held item hand is active so storage insert / hand transfer is consistent.
+        _hands.TrySetActiveHand(ent.Owner, ent.Comp1.ItemSlot, ent.Comp2);
         if (!_storage.Insert(ent, item, out _))
             throw new AutodocError("storage-full");
     }

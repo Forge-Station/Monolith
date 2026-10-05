@@ -73,11 +73,11 @@ public abstract class SharedBatterySystem : EntitySystem
     /// Uses the cooldown time given in the component.
     /// </summary>
     [PublicAPI]
-    public virtual void TrySetChargeCooldown(Entity<BatterySelfRechargerComponent?> ent) { }
+    public virtual void TrySetChargeCooldown(Entity<PredictedBatterySelfRechargerComponent?> ent) { }
 
     /// <summary>
     /// Puts the entity's self recharge on cooldown for the specified time.
     /// </summary>
     [PublicAPI]
-    public virtual void SetChargeCooldown(Entity<BatterySelfRechargerComponent?> ent, TimeSpan cooldown) { }
+    public virtual void SetChargeCooldown(Entity<PredictedBatterySelfRechargerComponent?> ent, TimeSpan cooldown) { }
 }

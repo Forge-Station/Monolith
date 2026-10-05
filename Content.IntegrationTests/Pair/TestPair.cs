@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using System.Threading; // WOLFGATE: AsyncLocal for the returned-pair guard
 using Content.Client.IoC;
 using Content.Client.Parallax.Managers;
 using Content.IntegrationTests.Tests.Destructible;
@@ -19,9 +20,37 @@ namespace Content.IntegrationTests.Pair;
 /// <summary>
 /// This object wraps a pooled server+client pair.
 /// </summary>
-public sealed partial class TestPair : RobustIntegrationTest.TestPair
+public sealed partial class TestPair : RobustIntegrationTest.TestPair, IAsyncDisposable // WOLFGATE: dispose skips a pair the test already returned
 {
     private List<NetUserId> _modifiedProfiles = new();
+
+    // WOLFGATE START: a returned pair can be borrowed by another test before this test's `await using` disposes it
+    // The engine's DisposeAsync then sees InUse and kills the other test's pair, so remember the clean return per test.
+    private static readonly AsyncLocal<(TestPair Pair, int Borrows, string Test)?> Returned = new();
+
+    /// <summary>Returns the pair to the pool and remembers, for this test only, that it did.</summary>
+    public new ValueTask CleanReturnAsync()
+    {
+        // Set outside an async method, so the caller's flow keeps it.
+        var history = ExtendedTestHistory;
+        Returned.Value = (this, history.Count, history.Count > 0 ? history[^1].TestName : string.Empty);
+        return base.CleanReturnAsync();
+    }
+
+    /// <summary>Dirty-disposes the pair unless this test returned it and it has since gone to another test.</summary>
+    public new async ValueTask DisposeAsync()
+    {
+        var history = ExtendedTestHistory;
+        if (Returned.Value is { } returned
+            && returned.Pair == this
+            && (history.Count == returned.Borrows || history[^1]?.TestName != returned.Test))
+        {
+            return;
+        }
+
+        await base.DisposeAsync();
+    }
+    // WOLFGATE END
 
     public ContentPlayerData? PlayerData => Player?.Data.ContentData();
 

@@ -110,6 +110,9 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
     {
         var uid = ev.Entity.Owner;
 
+        if (_wfUnloading) // WOLFGATE(Planets): a chunk's own entities need no bookkeeping as its unload deletes them
+            return;
+
         if (!_xformQuery.TryGetComponent(uid, out var xform) ||
             xform.GridUid is not { } gridUid ||
             !_biomeQuery.TryGetComponent(gridUid, out var biome) ||
@@ -204,6 +207,7 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
 
         _unloadTimer += frameTime;
         var shouldUnload = _unloadTimer > UnloadInterval;
+        WfBeginUnload(); // WOLFGATE(Planets): planet layers unload on their own schedule, see BiomeSystem.WFUnload.cs
 
         while (loadBiomes.MoveNext(out var gridUid, out var biome, out var grid))
         {
@@ -219,6 +223,9 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
                 continue;
 
             LoadChunks(biome, gridUid, grid, biome.Seed);
+
+            if (WfUnload(biome, gridUid, grid)) // WOLFGATE(Planets): a planet layer is left to its own unloader
+                continue;
 
             if (shouldUnload)
                 UnloadChunks(biome, gridUid, grid, biome.Seed);
@@ -260,11 +267,16 @@ public sealed partial class BiomeSystem : SharedBiomeSystem
         {
             LoadChunkMarkers(component, gridUid, grid, chunk, seed);
 
+            if (WfDeferLoad(component, gridUid, chunk)) // WOLFGATE(Planets): the far part of a planet layer's load area is put off
+                continue;
+
             if (!component.LoadedChunks.Add(chunk))
                 continue;
 
             // Load NOW!
             LoadChunk(component, gridUid, grid, chunk, seed);
         }
+
+        WfLoadDeferred(component, gridUid, grid, seed); // WOLFGATE(Planets): what was put off loads nearest first, within the pass's budget
     }
 }

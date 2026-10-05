@@ -8,10 +8,17 @@ using Content.Server.Destructible;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NPC.Pathfinding;
 using Content.Shared.Atmos.Components;
+using Content.Server.GameTicking; // Mono
+using Content.Server.AlertLevel; // Mono
+using Content.Server.Station.Systems; // Mono
+using Content.Server._Mono.NuclearWar.Components; // Mono
+using Content.Server.Station.Systems; // Mono
+using Content.Shared.GameTicking.Components;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared._WF.Explosion; // WOLFGATE(Explosion)
 using Content.Shared.Explosion;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Explosion.EntitySystems;
@@ -30,6 +37,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Shared.Maps;
+using Content.Shared.GameTicking; // Mono
 using Robust.Shared.Map.Components;
 using Content.Shared.Tiles; // Frontier: safe zone
 using Robust.Shared.Timing; // Mono
@@ -39,18 +47,20 @@ using Content.Shared.Stacks;
 using Content.Server.Stack;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
+
 namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem : SharedExplosionSystem
 {
-    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IRobustRandom _robustRandom = default!;
     [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
-
+    [Dependency] private SharedGameTicker _gameTicker = default!; // Mono
+    [Dependency] private AlertLevelSystem _alertLevel = default!; // Mono
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private NodeGroupSystem _nodeGroupSystem = default!;
@@ -61,7 +71,9 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
     [Dependency] private PvsOverrideSystem _pvsSys = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private StackSystem _stack = default!; // Mono
+    [Dependency] private StationSystem _station = default!; // Mono
     [Dependency] private IGameTiming _gameTiming = default!; // Mono
     [Dependency] private FlammableSystem _flammableSystem = default!;
     [Dependency] private DestructibleSystem _destructibleSystem = default!;
@@ -91,6 +103,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
     ///     find errors. However some components, like rogue arrows, or some commands like the admin-smite need to have
     ///     a "default" option specified outside of yaml data-fields. Hence this const string.
     /// </remarks>
+    [ValidatePrototypeId<ExplosionPrototype>]
     public const string DefaultExplosionPrototypeId = "Default";
     private static readonly TimeSpan AlertCooldown = TimeSpan.FromSeconds(60); // Mono: Explosion Admin Alert Cooldown
     public TimeSpan NextAlertTime; // Mono
@@ -170,7 +183,9 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
     /// <inheritdoc/>
     public override void TriggerExplosive(EntityUid uid, ExplosiveComponent? explosive = null, bool delete = true, float? totalIntensity = null, float? radius = null, EntityUid? user = null)
     {
-        // log missing: false, because some entities (e.g. liquid tanks) attempt to trigger explosions when damaged,
+        var roundTime = (float) _gameTicker.RoundDuration().TotalSeconds;
+
+		// log missing: false, because some entities (e.g. liquid tanks) attempt to trigger explosions when damaged,
         // but may not actually be explosive.
         if (!Resolve(uid, ref explosive, logMissing: false))
             return;
@@ -178,6 +193,24 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         // No reusable explosions here.
         if (explosive.Exploded)
             return;
+
+        // Mono edit: Unable to explode unless roundtime is past # determined in component
+        if (explosive.TimeUntilExplodable != null)
+            if (explosive.TimeUntilExplodable > roundTime)
+                return;
+        // End mono
+
+        // Mono edit: Set station alert when exploded
+        var query = EntityQueryEnumerator<AnnouncerComponent>();
+        if (explosive.DetonationAlert != null)
+            while (query.MoveNext(out var ent, out var component))
+            {
+                if (ent != null)
+                {
+                    _alertLevel.SetLevel(ent, explosive.DetonationAlert, true, true, true, true);
+                }
+            }
+        // End mono
 
         // Mono
         var mult = 1f;
@@ -287,7 +320,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         if (!addLog)
             return;
 
-        var gridFound = _map.TryFindGridAt(mapPos, out var gridUid, out _); // Mono, sanity. Grid ID included with alerts, and mapPos is always used for coords.
+        var gridFound = _mapManager.TryFindGridAt(mapPos, out var gridUid, out _); // Mono, sanity. Grid ID included with alerts, and mapPos is always used for coords.
 
         if (user == null)
         {
@@ -337,7 +370,10 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         float tileBreakScale = 1f,
         int maxTileBreak = int.MaxValue,
         bool canCreateVacuum = true,
-        bool addLog = true)
+        // WOLFGATE(Planets) START: silent parameter, see QueuedExplosion.Silent.
+        bool addLog = true,
+        bool silent = false)
+        // WOLFGATE END
     {
         if (totalIntensity <= 0 || slope <= 0)
             return;
@@ -364,6 +400,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
 
             // they are close enough to combine so just add total intensity and prevent queuing another one
             queued.TotalIntensity += totalIntensity;
+            queued.Silent &= silent; // WOLFGATE(Planets): one audible contributor is enough to make the merged blast audible.
             return;
         }
 
@@ -377,7 +414,10 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             TileBreakScale = tileBreakScale,
             MaxTileBreak = maxTileBreak,
             CanCreateVacuum = canCreateVacuum,
-            Cause = cause
+            // WOLFGATE(Planets) START: carries the silent flag into the queued explosion.
+            Cause = cause,
+            Silent = silent
+            // WOLFGATE END
         };
         _explosionQueue.Enqueue(boom);
         _queuedExplosions.Add(boom);
@@ -413,36 +453,49 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
 
         var visualEnt = CreateExplosionVisualEntity(pos, queued.Proto.ID, spaceMatrix, spaceData, gridData.Values, iterationIntensity);
 
-        // camera shake
-        CameraShake(iterationIntensity.Count * 4f, pos, queued.TotalIntensity);
+        // WOLFGATE(Planets) START: a silent blast still carves its crater, it just does not shake, push or sound.
+        // See QueuedExplosion.Silent. The upstream shake, shockwave and sound are only re-indented under this guard.
+        if (!queued.Silent)
+        {
+            // camera shake
+            CameraShake(iterationIntensity.Count * 4f, pos, queued.TotalIntensity);
+            // WOLFGATE END
 
-        // play sound.
-        // for the normal audio, we want everyone in pvs range
-        // + if the bomb is big enough, people outside of it too
-        // this is capped to 30 because otherwise really huge bombs
-        // will attempt to play regular audio for people who can't hear it anyway because the epicenter is so far away
-        //
-        // TODO EXPLOSION redo this.
-        // Use the Filter.Pvs range-multiplier option instead of AddInRange.
-        // Also the default PVS range is 25*2 = 50. So capping it at 30 makes no sense here.
-        // So actually maybe don't use Filter.Pvs at all and only use AddInRange?
-        var audioRange = Math.Min(iterationIntensity.Count * 2, MaxExplosionAudioRange);
-        var filter = Filter.Pvs(pos).AddInRange(pos, audioRange);
-        var sound = iterationIntensity.Count < queued.Proto.SmallSoundIterationThreshold
-            ? queued.Proto.SmallSound
-            : queued.Proto.Sound;
+            // WOLFGATE(Explosion) START: lets the shockwave push shove entities out from the epicentre.
+            var shockwave = new ExplosionShockwaveEvent(pos, iterationIntensity.Count, queued.Cause);
+            RaiseLocalEvent(ref shockwave);
+            // WOLFGATE END
 
-        _audio.PlayStatic(sound, filter, entPos, true, sound.Params);
+            // WOLFGATE(Planets) START: upstream sound, re-indented under the silent guard above.
+            // play sound.
+            // for the normal audio, we want everyone in pvs range
+            // + if the bomb is big enough, people outside of it too
+            // this is capped to 30 because otherwise really huge bombs
+            // will attempt to play regular audio for people who can't hear it anyway because the epicenter is so far away
+            //
+            // TODO EXPLOSION redo this.
+            // Use the Filter.Pvs range-multiplier option instead of AddInRange.
+            // Also the default PVS range is 25*2 = 50. So capping it at 30 makes no sense here.
+            // So actually maybe don't use Filter.Pvs at all and only use AddInRange?
+            var audioRange = Math.Min(iterationIntensity.Count * 2, MaxExplosionAudioRange);
+            var filter = Filter.Pvs(pos).AddInRange(pos, audioRange);
+            var sound = iterationIntensity.Count < queued.Proto.SmallSoundIterationThreshold
+                ? queued.Proto.SmallSound
+                : queued.Proto.Sound;
 
-        // play far sound
-        // far sound should play for anyone who wasn't in range of any of the effects of the bomb
-        var farAudioRange = iterationIntensity.Count * 5;
-        var farFilter = Filter.Empty().AddInRange(pos, farAudioRange).RemoveInRange(pos, audioRange);
-        var farSound = iterationIntensity.Count < queued.Proto.SmallSoundIterationThreshold
-            ? queued.Proto.SmallSoundFar
-            : queued.Proto.SoundFar;
+            _audio.PlayStatic(sound, filter, entPos, true, sound.Params);
 
-        _audio.PlayGlobal(farSound, farFilter, true, farSound.Params);
+            // play far sound
+            // far sound should play for anyone who wasn't in range of any of the effects of the bomb
+            var farAudioRange = iterationIntensity.Count * 5;
+            var farFilter = Filter.Empty().AddInRange(pos, farAudioRange).RemoveInRange(pos, audioRange);
+            var farSound = iterationIntensity.Count < queued.Proto.SmallSoundIterationThreshold
+                ? queued.Proto.SmallSoundFar
+                : queued.Proto.SoundFar;
+
+            _audio.PlayGlobal(farSound, farFilter, true, farSound.Params);
+        }
+        // WOLFGATE END
 
         return new Explosion(this,
             queued.Proto,

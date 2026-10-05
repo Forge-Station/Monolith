@@ -1,0 +1,171 @@
+# Carcinoma: the Gut. Winding flesh throats, some choked with tendons, open into stomachs of pustules, polyps,
+# assimilation sacks and pools of digestive acid, with blood channels cut through the flesh and calcified nodes of the
+# mineral world it grew over. Nerve clusters light the way.
+# Layers run last to first and the first match wins. Walls only stand on flesh, so any other floor is open ground.
+
+- type: biomeTemplate
+  id: WFCavernBiomeCarcinoma
+  layers:
+  # Substrate and throat floor.
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorFlesh
+    threshold: -1
+  # Overgrown stretches of throat, lowest priority.
+  - !type:BiomeMetaLayer
+    template: WFCavernOvergrowthCarcinoma
+    threshold: 0.3
+    noise: { seed: 61, noiseType: OpenSimplex2, frequency: 0.03 }
+  # Nerve clusters along the throats.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFlesh]
+    entities: [WFCavernNerveCluster]
+    threshold: 0.93
+    noise: { seed: 32, noiseType: OpenSimplex2, frequency: 1 }
+  # Flesh wherever ridged noise is at most the throat threshold; a weak second octave makes the throats wiggle
+  # without breaking them.
+  - !type:BiomeMetaLayer
+    template: WFCavernRockCarcinoma
+    invert: true
+    threshold: -0.4
+    noise: { seed: 7, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 2, gain: 0.3, frequency: 0.06 }
+  # Stomachs on the web.
+  - !type:BiomeMetaLayer
+    template: WFCavernChamberCarcinoma
+    threshold: 0.25
+    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.03 }
+  # Digestive channels, highest priority: blood placed straight on the flesh, through walls and throats alike.
+  - !type:BiomeMetaLayer
+    template: WFCavernSignatureCarcinoma
+    threshold: 0.94
+    noise: { seed: 55, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.012 }
+
+- type: biomeTemplate
+  id: WFCavernRockCarcinoma
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFlesh]
+    entities: [WallMeat]
+    threshold: -1
+  # Calcified nodes: the mineral world under the flesh.
+  - !type:BiomeMetaLayer
+    template: WFCavernNodeCarcinoma
+    threshold: 0.6
+    noise: { seed: 57, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.05 }
+
+- type: biomeTemplate
+  id: WFCavernNodeCarcinoma
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFlesh]
+    entities: [WallRockAndesite]
+    threshold: -1
+  # Common.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFlesh]
+    entities: [WallRockAndesiteSalt, WallRockAndesitePlasma]
+    threshold: 0.7
+    noise: { seed: 201, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Uncommon.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFlesh]
+    entities: [WallRockAndesiteSilver, WallRockAndesiteUranium]
+    threshold: 0.8
+    noise: { seed: 202, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFlesh]
+    entities: [WallRockAndesiteGold]
+    threshold: 0.88
+    noise: { seed: 203, noiseType: OpenSimplex2, frequency: 0.09 }
+
+- type: biomeTemplate
+  id: WFCavernChamberCarcinoma
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorGut
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorGut]
+    entities: [WFCavernGutGlow]
+    threshold: 0.975
+    noise: { seed: 302, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorGut]
+    entities: [WFFleshPolyp]
+    threshold: 0.98
+    noise: { seed: 314, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorGut]
+    entities: [WFFleshPustule]
+    threshold: 0.985
+    noise: { seed: 315, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorGut]
+    entities: [WFCarcinomaAssimilationSack]
+    threshold: 0.985
+    noise: { seed: 316, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorGut]
+    entities: [WFCavernFaunaCarcinoma]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorGut]
+    entities: [WFCavernNerveCluster]
+    threshold: 0.95
+    noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
+  # Bile and undigested remains around the acid pools, and the pools inside them, on the same noise.
+  - !type:BiomeMetaLayer
+    template: WFCavernPoolEdgeCarcinoma
+    threshold: 0.3
+    noise: { seed: 60, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.06 }
+  - !type:BiomeMetaLayer
+    template: WFCavernAcidCarcinoma
+    threshold: 0.48
+    noise: { seed: 60, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.06 }
+
+# A stretch of throat grown thick with tendons.
+- type: biomeTemplate
+  id: WFCavernOvergrowthCarcinoma
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFlesh]
+    entities: [WFCavernTendons]
+    threshold: -0.45
+    noise: { seed: 62, noiseType: OpenSimplex2, frequency: 0.6 }
+
+# In game a decal lookup reads the floor already laid, and no decal lands under an anchored entity, so the acid keeps
+# the bile out from under itself. The pool edge repeats the stomach floor only so a lookup with no grid, as a preview
+# takes, finds its decals.
+- type: biomeTemplate
+  id: WFCavernPoolEdgeCarcinoma
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorGut
+    threshold: -1
+  - !type:BiomeDecalLayer
+    allowedTiles: [WFCavernFloorGut]
+    decals: [WFCavernBile1, WFCavernBile2, WFCavernBile3, WFCavernBile4]
+    threshold: 0.2
+    noise: { seed: 318, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeDecalLayer
+    allowedTiles: [WFCavernFloorGut]
+    decals: [Remains]
+    threshold: 0.8
+    noise: { seed: 319, noiseType: OpenSimplex2, frequency: 1 }
+
+- type: biomeTemplate
+  id: WFCavernAcidCarcinoma
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorGut]
+    entities: [WFCavernDigestiveAcid]
+    threshold: -1
+
+- type: biomeTemplate
+  id: WFCavernSignatureCarcinoma
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFlesh]
+    entities: [WFBloodRiver]
+    threshold: -1

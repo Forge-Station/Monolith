@@ -1,0 +1,60 @@
+- type: entity
+  id: WFFleshPustule
+  name: Fleshy Postules
+  description: A swollen sac of meat, taut with skittering shapes.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Sprite
+    drawdepth: FloorObjects
+    layers:
+    - sprite: _Mono/Mobs/Aliens/cortical_borer_egg.rsi
+      state: icon
+      color: "#d65f6d"
+      map: ["enum.WFFleshPustuleVisualLayers.Closed"]
+    - sprite: Fluids/gibblet.rsi
+      state: gibblet-4
+      color: "#8f2635"
+      visible: false
+      map: ["enum.WFFleshPustuleVisualLayers.Popped"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFFleshPustuleVisuals.Bursted:
+        enum.WFFleshPustuleVisualLayers.Closed:
+          True: { visible: false }
+          False: { visible: true }
+        enum.WFFleshPustuleVisualLayers.Popped:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      trigger:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.8
+        hard: false
+        density: 100
+        mask:
+        - ItemMask
+        layer:
+        - SlipLayer
+  - type: WFFleshPustule
+
+- type: entity
+  id: WFActionPlantFleshPustule
+  name: Plant Flesh Pustule
+  description: Plant a flesh tick nest on nearby chimera biomass.
+  components:
+  - type: WorldTargetAction
+    checkCanAccess: false
+    range: 2
+    useDelay: 30
+    icon: { sprite: _Mono/Mobs/Aliens/cortical_borer_egg.rsi, state: icon }
+    event: !type:WFPlantFleshPustuleActionEvent
+      entity: WFFleshPustule

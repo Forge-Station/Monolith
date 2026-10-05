@@ -1,0 +1,46 @@
+# Binds the Asclepiu sector body to its surface and describes the whole z-stack.
+
+- type: wfPlanetSurface
+  id: WFSurfaceAsclepiu
+  planetType: PlanetAsclepiu
+  ground: WFAsclepiuSurface
+  # No cloud layer: its opaque deck hides the ground from orbit. A third air layer keeps orbit at depth 4.
+  airLayers: 3
+  cloudLayer: false
+  orbitRange: 2000
+  buildAtRoundStart: true
+  sanctioned: true
+  # Fixed biome seed, so terrain is the same every round.
+  seed: 20260913
+  # Stamped over every member and transit map, so only the shared atmosphere belongs here.
+  networkComponents:
+  - type: MapAtmosphere
+    space: False
+    mixture:
+      volume: 2500
+      immutable: True
+      temperature: 293.15
+      moles:
+      - 21.824879
+      - 82.10312
+  groundComponents:
+  - type: CEZLevelRoof
+  - type: CEZGroundLayer
+  airComponents:
+  - type: MapLight
+    ambientLightColor: "#c8fdff"
+  - type: Gravity
+    enabled: true
+    inherent: true
+  # Unused while cloudLayer is false.
+  cloudComponents:
+  - type: CEZCloudLayer
+  - type: MapLight
+    ambientLightColor: "#c8fdff"
+  - type: Gravity
+    enabled: true
+    inherent: true
+  # Lights parked hulls; no Gravity, since nothing on orbit falls.
+  orbitComponents:
+  - type: MapLight
+    ambientLightColor: "#2a3340"

@@ -1,0 +1,126 @@
+# The shade over each hole tile of a mouth, and the climb point in the cavern under its lip.
+# A shade draws the hole's crumbling lip and leaves its middle clear, so the cavern below shows through.
+
+# Unanchored with no physics, so it never falls into the hole it marks.
+- type: entity
+  id: WFCavernShadeBase
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: false
+  # The whole tile, so the clear middle still examines and climbs.
+  - type: Clickable
+    bounds:
+      all: "-0.5,-0.5,0.5,0.5"
+  - type: Sprite
+    drawdepth: LowFloors
+    sprite: _WF/Caverns/Mouths/merak_pit.rsi
+    state: pit
+  - type: WFCavernShaft
+
+- type: entity
+  id: WFCavernShadeAsclepiu
+  parent: WFCavernShadeBase
+  components:
+  - type: Sprite
+    sprite: _WF/Caverns/Mouths/asclepiu_pit.rsi
+
+- type: entity
+  id: WFCavernShadeFervidus
+  parent: WFCavernShadeBase
+  components:
+  - type: Sprite
+    sprite: _WF/Caverns/Mouths/fervidus_pit.rsi
+
+- type: entity
+  id: WFCavernShadeMerak
+  parent: WFCavernShadeBase
+  components:
+  - type: Sprite
+    sprite: _WF/Caverns/Mouths/merak_pit.rsi
+
+- type: entity
+  id: WFCavernShadeAerumna
+  parent: WFCavernShadeBase
+  components:
+  - type: Sprite
+    sprite: _WF/Caverns/Mouths/aerumna_pit.rsi
+
+- type: entity
+  id: WFCavernShadeThrascias
+  parent: WFCavernShadeBase
+  components:
+  - type: Sprite
+    sprite: _WF/Caverns/Mouths/thrascias_pit.rsi
+
+- type: entity
+  id: WFCavernShadeCarcinoma
+  parent: WFCavernShadeBase
+  components:
+  - type: Sprite
+    sprite: _WF/Caverns/Mouths/carcinoma_pit.rsi
+
+# Ladder art only: no fixtures and no CEZLevelHighGround, so it is climbed by verb, never walked up.
+- type: entity
+  id: WFCavernClimbBase
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Objects
+    sprite: _CE/Structures/Architecture/Ladders/stone.rsi
+    state: straight
+  - type: WFCavernClimb
+
+- type: entity
+  id: WFCavernClimbAsclepiu
+  parent: WFCavernClimbBase
+  components:
+  - type: Sprite
+    sprite: _CE/Structures/Architecture/Ladders/dirt_cliff.rsi
+
+- type: entity
+  id: WFCavernClimbFervidus
+  parent: WFCavernClimbBase
+  components:
+  - type: Sprite
+    sprite: _CE/Structures/Architecture/Ladders/stone.rsi
+    color: "#5a4a44"
+
+- type: entity
+  id: WFCavernClimbMerak
+  parent: WFCavernClimbBase
+  components:
+  - type: Sprite
+    sprite: _CE/Structures/Architecture/Ladders/wooden.rsi
+
+- type: entity
+  id: WFCavernClimbAerumna
+  parent: WFCavernClimbBase
+  components:
+  - type: Sprite
+    sprite: _CE/Structures/Architecture/Ladders/stone.rsi
+    color: "#3a3342"
+
+- type: entity
+  id: WFCavernClimbThrascias
+  parent: WFCavernClimbBase
+  components:
+  - type: Sprite
+    sprite: _CE/Structures/Architecture/Ladders/stone.rsi
+    color: "#bfe6ff"
+
+- type: entity
+  id: WFCavernClimbCarcinoma
+  parent: WFCavernClimbBase
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/fleshkudzu.rsi
+    state: kudzu_11

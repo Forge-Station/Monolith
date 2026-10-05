@@ -1,0 +1,112 @@
+# Supplied soundscapes: numbered playlists crossfade; daytime is 06:00-18:00 local.
+
+- type: wfPlanetAmbience
+  id: WFPlanetAmbienceAsclepiu
+  planetType: PlanetAsclepiu
+  dayLoops:
+  - path: /Audio/_WF/Planets/Worlds/asclepiu/asclepiu_ambience_day_loop_1.ogg
+  nightLoops:
+  - path: /Audio/_WF/Planets/Worlds/asclepiu/asclepiu_ambience_night_loop_1.ogg
+  oneShots:
+  - path: /Audio/Effects/plant_rustle.ogg
+  - path: /Audio/Effects/waterswirl.ogg
+  loopVolume: -8
+  hullVolumeOffset: -6
+  oneShotVolume: -7
+  minInterval: 40
+  maxInterval: 95
+
+
+- type: wfPlanetAmbience
+  id: WFPlanetAmbienceFervidus
+  planetType: PlanetFervidus
+  loops:
+  - path: /Audio/_WF/Planets/Worlds/fervidus/fervidus_ambience_loop_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/fervidus/fervidus_ambience_loop_2.ogg
+  - path: /Audio/_WF/Planets/Worlds/fervidus/fervidus_ambience_loop_3.ogg
+  - path: /Audio/_WF/Planets/Worlds/fervidus/fervidus_ambience_loop_4.ogg
+  oneShots:
+  - path: /Audio/Effects/sizzle.ogg
+  - path: /Audio/Magic/rumble.ogg
+  loopVolume: -8
+  hullVolumeOffset: -6
+  oneShotVolume: -8
+  minInterval: 32
+  maxInterval: 78
+
+
+- type: wfPlanetAmbience
+  id: WFPlanetAmbienceMerak
+  planetType: PlanetMerak
+  dayLoops:
+  - path: /Audio/_WF/Planets/Worlds/merak/merak_ambience_day_loop_1.ogg
+  nightLoops:
+  - path: /Audio/_WF/Planets/Worlds/merak/merak_ambience_night_loop_1.ogg
+  oneShots:
+  - path: /Audio/Effects/break_stone.ogg
+  - path: /Audio/Effects/rustle4.ogg
+  - path: /Audio/Effects/rustle5.ogg
+  loopVolume: -8
+  hullVolumeOffset: -6
+  oneShotVolume: -9
+  minInterval: 45
+  maxInterval: 105
+
+
+- type: wfPlanetAmbience
+  id: WFPlanetAmbienceAerumna
+  planetType: PlanetAerumna
+  loops:
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_ambience_loop_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_ambience_loop_2.ogg
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_ambience_loop_3.ogg
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_ambience_loop_4.ogg
+  oneShots:
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_2.ogg
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_3.ogg
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_4.ogg
+  loopVolume: -8
+  hullVolumeOffset: -6
+  oneShotVolume: -9
+  minInterval: 38
+  maxInterval: 92
+
+
+- type: wfPlanetAmbience
+  id: WFPlanetAmbienceThrascias
+  planetType: PlanetThrascias
+  loops:
+  - path: /Audio/_WF/Planets/Worlds/thrascias/thracias_ambience_loop_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/thrascias/thracias_ambience_loop_2.ogg
+  oneShots:
+  - path: /Audio/Items/snap.ogg
+  - path: /Audio/Effects/Weather/wind_5_1.ogg
+  loopVolume: -8
+  hullVolumeOffset: -6
+  oneShotVolume: -10
+  minInterval: 48
+  maxInterval: 110
+
+
+- type: wfPlanetAmbience
+  id: WFPlanetAmbienceCarcinoma
+  planetType: WFPlanetCarcinoma
+  dayLoops:
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_ambience_day_loop_2.ogg
+  nightLoops:
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_ambience_night_loop_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_ambience_night_loop_2.ogg
+  dayOneShots:
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_random_sound_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_random_sound_2.ogg
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_random_sound_3.ogg
+  nightOneShots:
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_random_sound_night_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_random_sound_night_2.ogg
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_random_sound_night_3.ogg
+  loopVolume: -8
+  oneShotVolume: -8
+  hullVolumeOffset: -8
+  minInterval: 30
+  maxInterval: 72

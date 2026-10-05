@@ -30,6 +30,7 @@ public sealed partial class BiomeSystem
                 CanLoad(pSession.AttachedEntity.Value))
             {
                 var worldPos = _transform.GetWorldPosition(xform);
+                WfNoteLoader(biome, worldPos, WfLoadNowRing); // WOLFGATE(Planets): a planet layer loads nearest its loaders first
                 AddChunksInRange(biome, worldPos);
 
                 foreach (var layer in biome.MarkerLayers)
@@ -51,6 +52,7 @@ public sealed partial class BiomeSystem
                 }
 
                 var worldPos = _transform.GetWorldPosition(xform);
+                WfNoteLoader(biome, worldPos, WfLoadNowEyeRing); // WOLFGATE(Planets): less loads at once round an eye than round a body
                 AddChunksInRange(biome, worldPos);
 
                 foreach (var layer in biome.MarkerLayers)

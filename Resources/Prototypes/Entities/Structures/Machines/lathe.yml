@@ -159,6 +159,7 @@
     unlitRunningState: unlit-building
     staticPacks:
     - ToolsStatic
+    - WFPlanetStatic # WOLFGATE(Planets): landing thruster kits and parachutes.
     - PartsStatic
     - AtmosStatic
     - CablesStatic

@@ -43,6 +43,19 @@ public abstract partial class CESharedZLevelsSystem
 
             if (!_zMapQuery.HasComp(xform.MapUid))
             {
+                // WOLFGATE(Planets) START: z-motion carried off the z-network is cleared, not kept for the next planet.
+                // A body riding a hull never changes parent, so OnParentChanged cannot clear what it
+                // carries off the z-network. Anything left on it here would be spent on the next planet it reaches.
+                if (!HasComp<CEZTransitMapComponent>(xform.MapUid)
+                    && (zPhysicsComponent.Velocity != 0f || zPhysicsComponent.LocalPosition != 0f))
+                {
+                    zPhysicsComponent.Velocity = 0f;
+                    zPhysicsComponent.LocalPosition = 0f;
+                    DirtyField(uid, zPhysicsComponent, nameof(CEZPhysicsComponent.Velocity));
+                    DirtyField(uid, zPhysicsComponent, nameof(CEZPhysicsComponent.LocalPosition));
+                }
+                // WOLFGATE END
+
                 _activeBodies.RemoveAt(i);
                 continue;
             }
@@ -114,7 +127,7 @@ public abstract partial class CESharedZLevelsSystem
             if (TryMoveDownOrChasm(entity))
             {
                 zPhysicsComponent.LocalPosition += 1;
-                if (zPhysicsComponent is { CachedStickyGround: false, Fallable: true })
+                if (zPhysicsComponent is { CachedStickyGround: false, Fallable: true } && !WfSteppedDown(zPhysicsComponent)) // WOLFGATE(Caverns): stepping down onto stairs is not a fall
                 {
                     var fallEv = new CEZLevelFallMapEvent();
                     RaiseLocalEvent(entity, ref fallEv);
@@ -124,7 +137,7 @@ public abstract partial class CESharedZLevelsSystem
 
         if (zPhysicsComponent.LocalPosition >= 1)
         {
-            if (HasTileAbove(entity))
+            if (HasTileAbove(entity) || WfSealedAbove((entity.Owner, zPhysicsComponent))) // WOLFGATE(Caverns): ground over a cavern is a ceiling even where it isn't loaded
             {
                 if (float.Abs(zPhysicsComponent.Velocity) >= ImpactVelocityLimit)
                 {

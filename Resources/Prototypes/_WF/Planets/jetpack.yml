@@ -1,0 +1,50 @@
+# Atmospheric jetpack: burns welding fuel to fly in a planet's air, where a gas jetpack does nothing.
+
+- type: entity
+  parent: BaseItem
+  id: WFJetpackAtmospheric
+  name: atmospheric jetpack
+  description: A welding-fuel jetpack built for thick air. It flies on a planet's surface and climbs between its air layers, but it needs air to burn, so it is dead weight in orbit, and it cannot lift anyone against heavy gravity.
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/Objects/jetpack_atmospheric.rsi
+    state: icon
+  - type: Item
+    sprite: _WF/Planets/Objects/jetpack_atmospheric.rsi
+    size: Huge
+  - type: Clothing
+    sprite: _WF/Planets/Objects/jetpack_atmospheric.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - SuitStorage
+  - type: Jetpack
+    acceleration: 1.15
+    weightlessModifier: 2.4
+    flightMaxSpeed: 0.5 # Half a layer per second up or down.
+    toggleAction: WFActionToggleJetpackAtmospheric
+  - type: WFAtmosphericJetpack
+  - type: SolutionContainerManager
+    solutions:
+      fuel:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 100
+        maxVol: 100
+  - type: Appearance
+  - type: StaticPrice
+    price: 200
+
+- type: entity
+  id: WFActionToggleJetpackAtmospheric
+  parent: ActionToggleJetpack
+  name: Toggle atmospheric jetpack
+  description: Toggles the jetpack, giving you flight in a planet's atmosphere.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _WF/Planets/Objects/jetpack_atmospheric.rsi
+      state: icon
+    iconOn:
+      sprite: _WF/Planets/Objects/jetpack_atmospheric.rsi
+      state: icon-on

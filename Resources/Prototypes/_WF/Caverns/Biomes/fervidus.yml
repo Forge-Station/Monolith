@@ -1,0 +1,144 @@
+# Fervidus: the Cinder Vaults. Basalt cut by lava tubes with ash banks, and ash chambers holding magma lakes, all lit
+# by ember lichen.
+# Layers run last to first and the first match wins. Walls only stand on basalt, so any other floor is open ground.
+
+- type: biomeTemplate
+  id: WFCavernBiomeFervidus
+  layers:
+  # Substrate and tunnel floor.
+  - !type:BiomeTileLayer
+    tile: FloorBasalt
+    threshold: -1
+  # Tunnel litter, lowest priority.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [BasaltOne, BasaltTwo, BasaltThree, BasaltFour, BasaltFive]
+    threshold: 0.985
+    noise: { seed: 31, noiseType: OpenSimplex2, frequency: 1 }
+  # Ember lichen along the tunnels.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WFCavernEmberLichen]
+    threshold: 0.92
+    noise: { seed: 32, noiseType: OpenSimplex2, frequency: 1 }
+  # Rock wherever ridged noise is at most the tunnel threshold; the tunnels are the ridges.
+  - !type:BiomeMetaLayer
+    template: WFCavernRockFervidus
+    invert: true
+    threshold: -0.64
+    noise: { seed: 7, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.04 }
+  # Ash chambers on the web.
+  - !type:BiomeMetaLayer
+    template: WFCavernChamberFervidus
+    threshold: 0.42
+    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.028 }
+  # Lava tubes, highest priority.
+  - !type:BiomeMetaLayer
+    template: WFCavernSignatureFervidus
+    threshold: 0.86
+    noise: { seed: 55, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.009 }
+
+- type: biomeTemplate
+  id: WFCavernRockFervidus
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WallRockBasalt]
+    threshold: -1
+  # Common.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WallRockBasaltCoal, WallRockBasaltPlasma]
+    threshold: 0.7
+    noise: { seed: 201, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Uncommon.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WallRockBasaltTin, WallRockBasaltUranium]
+    threshold: 0.8
+    noise: { seed: 202, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WallRockBasaltGold, WallRockBasaltSilver]
+    threshold: 0.88
+    noise: { seed: 203, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Diamonds, found only below.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WallRockBasaltDiamond]
+    threshold: 0.9
+    noise: { seed: 206, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Very rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WallRockBasaltBluespace]
+    threshold: 0.95
+    noise: { seed: 204, noiseType: OpenSimplex2, frequency: 0.2 }
+  # Plasma golems wait in the rock.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WallRockBasaltPlasmaGolem]
+    threshold: 0.97
+    noise: { seed: 205, noiseType: OpenSimplex2, frequency: 0.2 }
+
+- type: biomeTemplate
+  id: WFCavernChamberFervidus
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorAsh
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh]
+    entities: [FloraGreyStalagmite]
+    threshold: 0.98
+    noise: { seed: 301, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh]
+    entities: [CrystalOrange]
+    threshold: 0.99
+    noise: { seed: 304, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh]
+    entities: [WFCavernFaunaFervidus]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh]
+    entities: [WFCavernEmberLichen]
+    threshold: 0.94
+    noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
+  # Magma lakes.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh]
+    entities: [FloorLavaEntity]
+    threshold: 0.55
+    noise: { seed: 305, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.05 }
+
+# A lava tube: an ash bank either side of a lava core on the same noise.
+- type: biomeTemplate
+  id: WFCavernSignatureFervidus
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorAsh
+    threshold: -1
+  # Ember lichen on the banks.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh]
+    entities: [WFCavernEmberLichen]
+    threshold: 0.93
+    noise: { seed: 320, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeMetaLayer
+    template: WFCavernTubeCoreFervidus
+    threshold: 0.95
+    noise: { seed: 55, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.009 }
+
+# The lava runs in stretches, so the tube can be crossed between them.
+- type: biomeTemplate
+  id: WFCavernTubeCoreFervidus
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh]
+    entities: [FloorLavaEntity]
+    threshold: 0
+    noise: { seed: 58, noiseType: OpenSimplex2, frequency: 0.04 }

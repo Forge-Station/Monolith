@@ -1,0 +1,128 @@
+# Sparse ambient wildlife.
+# Table spawners produce mobile animals; placing mobs directly in a biome layer would anchor them.
+
+- type: entityTable
+  id: WFFaunaAsclepiu
+  table: !type:GroupSelector
+    children:
+    - id: MobFox
+      weight: 4
+    - id: MobLizard
+      weight: 3
+    - id: MobCrab
+      weight: 2
+    - id: MobSnake
+      weight: 1
+
+- type: entity
+  id: WFFaunaAsclepiu
+  parent: MarkerBase
+  name: asclepiu wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaAsclepiu
+
+- type: entityTable
+  id: WFFaunaFervidus
+  table: !type:GroupSelector
+    children:
+    - id: WFMobArgocyteSlurvaBasalt
+      weight: 6
+    - id: WFMobArgocyteCrawlerBasalt
+      weight: 3
+    - id: WFMobArgocyteSwiperBasalt
+      weight: 1
+
+- type: entity
+  id: WFFaunaFervidus
+  parent: MarkerBase
+  name: fervidus wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaFervidus
+
+- type: entityTable
+  id: WFFaunaAerumna
+  table: !type:GroupSelector
+    children:
+    - id: MobArgocyteSlurva
+      weight: 6
+    - id: MobXenoRunner
+      weight: 1
+    - id: MobXenoDrone
+      weight: 1
+
+- type: entity
+  id: WFFaunaAerumna
+  parent: MarkerBase
+  name: aerumna wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaAerumna
+
+- type: entityTable
+  id: WFFaunaThrascias
+  table: !type:GroupSelector
+    children:
+    - id: MobArgocyteSlurva
+      weight: 7
+    - id: MobArgocyteBarrier
+      weight: 2
+    - id: MobBearSpace
+      weight: 1
+
+- type: entity
+  id: WFFaunaThrascias
+  parent: MarkerBase
+  name: thrascias wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaThrascias
+
+
+
+# Heat-adapted native; retains normal combat damage and AI.
+- type: entity
+  id: WFMobArgocyteSlurvaBasalt
+  parent: MobArgocyteSlurva
+  suffix: Fervidus
+  components:
+  - type: Temperature
+    heatDamageThreshold: 500
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+
+# Heat-adapted native; retains normal combat damage and AI.
+- type: entity
+  id: WFMobArgocyteCrawlerBasalt
+  parent: MobArgocyteCrawler
+  suffix: Fervidus
+  components:
+  - type: Temperature
+    heatDamageThreshold: 500
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+
+# Heat-adapted native; retains normal combat damage and AI.
+- type: entity
+  id: WFMobArgocyteSwiperBasalt
+  parent: MobArgocyteSwiper
+  suffix: Fervidus
+  components:
+  - type: Temperature
+    heatDamageThreshold: 500
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+
+- type: entity
+  id: WFFaunaMerak
+  parent: MarkerBase
+  name: desert wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: MonoPlanetmapFaunaDesert

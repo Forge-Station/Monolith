@@ -6,6 +6,7 @@
 using System.Numerics;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
+using Content.Shared._WF.Planets; // WOLFGATE(Planets)
 using Content.Shared.Actions;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Movement.Components;
@@ -167,13 +168,18 @@ public sealed partial class CEZLevelsSystem
             : 1f;
         var coveredMaps = new HashSet<EntityUid> { map.Value };
 
+        var wfAbove = map.Value; // WOLFGATE(Caverns): the level above the next eye, for the ground cap below.
         for (var i = 1; i <= MaxZLevelsBelowRendering; i++)
         {
+            if (WfEyesStopUnder(ent, map.Value, wfAbove, globalPos, pvsScale)) // WOLFGATE(Caverns): under a ground layer, eyes only on its cavern and only while a hole is in view.
+                break;
+
             if (!TryMapOffset(map.Value, -i, out var mapUidBelow))
                 break;
 
             SpawnViewerEye(eyes, actor, map.Value, mapUidBelow, globalPos, pvsScale);
             coveredMaps.Add(mapUidBelow);
+            wfAbove = mapUidBelow; // WOLFGATE(Caverns): track the level above the next eye.
         }
 
         // We constantly load the upper z-level for the client so that you can quickly look up and climb stairs without PVS lag.
@@ -229,7 +235,7 @@ public sealed partial class CEZLevelsSystem
         if (levelsBelow <= 0)
             return baseScale;
 
-        return baseScale * MathF.Pow(1f / CESharedZLevelsSystem.ZLevelViewShrink, levelsBelow);
+        return baseScale * MathF.Pow(1f / WFPlanetView.Shrink(EntityManager, eyeMap), levelsBelow); // WOLFGATE(Planets): a planet's lower layers are drawn smaller, so their eyes see wider
     }
 
     private void OnZLevelFall(Entity<CEZPhysicsComponent> ent, ref CEZLevelFallMapEvent args)

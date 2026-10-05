@@ -1,0 +1,114 @@
+# The Gut's own hazards: pools of digestive acid in the stomachs and tendons choking some of the throats.
+
+# Digests whoever wades in, a second at a time, with no air or fire needed. It spares the Gut's own creatures (the
+# aberrant flesh and the chimera) and anyone on a catwalk over it. It digests the dead too, so a body left in it is soon
+# past saving. It holds no reagent, so nothing spills onto the floor and the flesh it pools on is left whole.
+- type: entity
+  id: WFCavernDigestiveAcid
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: SyncSprite
+  - type: Clickable
+  - type: Sprite
+    sprite: _WF/Caverns/digestive_acid.rsi
+    drawdepth: BelowFloor
+    layers:
+    - state: acid
+      shader: unshaded
+  - type: Icon
+    sprite: _WF/Caverns/digestive_acid.rsi
+    state: full
+  - type: IconSmooth
+    key: floor
+    base: acid
+  - type: TileEmission
+    color: "#a6d42a"
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: WFDigestiveAcid
+    damage:
+      types:
+        Caustic: 5
+    whitelist:
+      components:
+      - MobState
+    ignoreFactions:
+    - AberrantFleshExpeditionNF
+    - Chimera
+    coveredBy:
+      tags:
+      - Catwalk
+    burnSound:
+      path: /Audio/Nyanotrasen/Ambience/Objects/deepfryer_sizzling.ogg
+      params:
+        volume: -4
+        maxDistance: 8
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.6
+    sprintSpeedModifier: 0.6
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepWater
+      params:
+        volume: 8
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# The surface forest's dormant tendons, grown so thick in the throats that they drag at whoever pushes through. They
+# lie under the mobs, so a click on someone standing in them reaches that someone.
+- type: entity
+  id: WFCavernTendons
+  parent: WFCarcinomaTendons
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.65
+    sprintSpeedModifier: 0.65
+
+# Bile at the edges of the acid pools.
+- type: decal
+  id: WFCavernBile1
+  defaultCleanable: true
+  sprite:
+    sprite: Fluids/vomit_toxin.rsi
+    state: vomit_toxin-0
+
+- type: decal
+  id: WFCavernBile2
+  defaultCleanable: true
+  sprite:
+    sprite: Fluids/vomit_toxin.rsi
+    state: vomit_toxin-1
+
+- type: decal
+  id: WFCavernBile3
+  defaultCleanable: true
+  sprite:
+    sprite: Fluids/vomit_toxin.rsi
+    state: vomit_toxin-2
+
+- type: decal
+  id: WFCavernBile4
+  defaultCleanable: true
+  sprite:
+    sprite: Fluids/vomit_toxin.rsi
+    state: vomit_toxin-3

@@ -1,0 +1,133 @@
+# Cavern wildlife: one marker and one table per world, sharing an id. Markers sit on chamber floors and feed the
+# planet population system, so the planet caps apply below ground too.
+
+- type: entityTable
+  id: WFCavernFaunaAsclepiu
+  table: !type:GroupSelector
+    children:
+    - id: MobBat
+      weight: 5
+    - id: MobFrog
+      weight: 3
+    - id: MobMouse
+      weight: 2
+    - id: MobSnake
+      weight: 2
+    - id: MobGiantSpider
+      weight: 1
+
+- type: entity
+  id: WFCavernFaunaAsclepiu
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaAsclepiu
+
+- type: entityTable
+  id: WFCavernFaunaFervidus
+  table: !type:GroupSelector
+    children:
+    - id: WFMobArgocyteSlurvaBasalt
+      weight: 4
+    - id: WFMobArgocyteCrawlerBasalt
+      weight: 4
+    - id: WFMobArgocyteSwiperBasalt
+      weight: 2
+    - id: MobWatcherMagmawing
+      weight: 1
+
+- type: entity
+  id: WFCavernFaunaFervidus
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaFervidus
+
+- type: entityTable
+  id: WFCavernFaunaMerak
+  table: !type:GroupSelector
+    children:
+    - id: MobLizard
+      weight: 3
+    - id: MobSnake
+      weight: 3
+    - id: MobPurpleSnake
+      weight: 1
+    - id: MobGiantSpider
+      weight: 1
+
+- type: entity
+  id: WFCavernFaunaMerak
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaMerak
+
+- type: entityTable
+  id: WFCavernFaunaAerumna
+  table: !type:GroupSelector
+    children:
+    - id: MobXenoRunner
+      weight: 3
+    - id: MobXenoDrone
+      weight: 2
+    - id: MobArgocyteSlurva
+      weight: 3
+    - id: MobXenoSpitter
+      weight: 1
+    - id: MobXenoPraetorian
+      weight: 0.5
+
+- type: entity
+  id: WFCavernFaunaAerumna
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaAerumna
+
+- type: entityTable
+  id: WFCavernFaunaThrascias
+  table: !type:GroupSelector
+    children:
+    - id: MobArgocyteSlurva
+      weight: 4
+    - id: MobArgocyteBarrier
+      weight: 2
+    - id: MobPenguin
+      weight: 2
+    - id: MobWatcherIcewing
+      weight: 1
+    - id: MobBearSpace
+      weight: 1
+
+- type: entity
+  id: WFCavernFaunaThrascias
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaThrascias
+
+- type: entityTable
+  id: WFCavernFaunaCarcinoma
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: WFFaunaCarcinoma
+      weight: 3
+    - id: WFMobFleshTick
+      weight: 4
+    - id: MobFleshAssimilatedMiner
+      weight: 1
+
+- type: entity
+  id: WFCavernFaunaCarcinoma
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaCarcinoma

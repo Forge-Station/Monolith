@@ -1,0 +1,62 @@
+- type: entity
+  id: WFCarcinomaHullTendril
+  name: anchoring flesh tendril
+  description: A thick tendril grips the hull and roots it to Carcinoma. Cut or attack every tendril to free the ship.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Mobs/Aliens/Asteroid/goliath.rsi
+    state: goliath_tentacle_wiggle
+    color: "#b56576"
+    scale: 2, 2
+    drawdepth: OverMobs
+  # The whole tile picks the tendril over the wall it grows in.
+  - type: Clickable
+    bounds:
+      all: "-0.5,-0.5,0.5,0.5"
+  - type: InteractionOutline
+  # Attack range checks ignore the wall sharing the tendril's tile.
+  - type: WallMount
+    arc: 360
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      # Hit by swings and bullets, never blocks movement; sits just proud of its wall so it is struck first.
+      fix1:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.52,-0.52,0.52,0.52"
+        hard: true
+        layer: [Opaque, BulletImpassable]
+  # Stray shots pass; aimed ones hit.
+  - type: RequireProjectileTarget
+  - type: Damageable
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [Destruction]
+  - type: AmbientSound
+    enabled: true
+    sound:
+      path: /Audio/_WF/Planets/Worlds/carcinoma/anchoring_tendril_loop.ogg
+    range: 8
+    volume: -12
+  - type: WFCarcinomaTendril
+    deploySound:
+      collection: WFTendrilDeploy
+      params:
+        volume: -6
+
+- type: soundCollection
+  id: WFTendrilDeploy
+  files:
+  - /Audio/_WF/Planets/Worlds/carcinoma/tendril_deploy_1.ogg
+  - /Audio/_WF/Planets/Worlds/carcinoma/tendril_deploy_2.ogg
+  - /Audio/_WF/Planets/Worlds/carcinoma/tendril_deploy_3.ogg

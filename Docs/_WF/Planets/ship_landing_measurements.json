@@ -1,0 +1,2882 @@
+[
+  {
+    "ID": "Akula",
+    "Name": "PPU Akula",
+    "Category": "Medium",
+    "Group": "Ussp",
+    "Path": "/SharedMaps/_Mono/Shuttles/USSP/akula.yml",
+    "Mass": 84.24539,
+    "Thrust": 2800,
+    "BestBank": 800,
+    "Banks": [
+      600,
+      800,
+      600,
+      800
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.3879959213983777,
+    "MaxGravityStrongestBank": 0.9679988346852508
+  },
+  {
+    "ID": "Ample",
+    "Name": "SKR Ample",
+    "Category": "Micro",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/ample.yml",
+    "Mass": 14.241399,
+    "Thrust": 335,
+    "BestBank": 134,
+    "Banks": [
+      67,
+      67,
+      134,
+      67
+    ],
+    "Thrusters": 5,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.397856258841521,
+    "MaxGravityStrongestBank": 0.9591425035366083
+  },
+  {
+    "ID": "Antlion",
+    "Name": "DIS Antlion",
+    "Category": "Micro",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/antlion.yml",
+    "Mass": 15.7411995,
+    "Thrust": 268,
+    "BestBank": 67,
+    "Banks": [
+      67,
+      67,
+      67,
+      67
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.7355133693240785,
+    "MaxGravityStrongestBank": 0.43387834233101963
+  },
+  {
+    "ID": "Archer",
+    "Name": "TSF-SKR Archer",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/archer.yml",
+    "Mass": 202.61234,
+    "Thrust": 2400,
+    "BestBank": 1000,
+    "Banks": [
+      600,
+      400,
+      1000,
+      400
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.207469979581764,
+    "MaxGravityStrongestBank": 0.5031124914924017
+  },
+  {
+    "ID": "Argent",
+    "Name": "TSF-SKR Argent",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/argent.yml",
+    "Mass": 223.336,
+    "Thrust": 4000,
+    "BestBank": 1600,
+    "Banks": [
+      800,
+      800,
+      1600,
+      800
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.8257119171921337,
+    "MaxGravityStrongestBank": 0.7302847668768534
+  },
+  {
+    "ID": "Arkansaw",
+    "Name": "COG Arkansaw",
+    "Category": "Large",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/arkansaw.yml",
+    "Mass": 683.7488,
+    "Thrust": 8000,
+    "BestBank": 2800,
+    "Banks": [
+      1600,
+      1800,
+      2800,
+      1800
+    ],
+    "Thrusters": 22,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.192681279259349,
+    "MaxGravityStrongestBank": 0.4174384477407722
+  },
+  {
+    "ID": "Arribane",
+    "Name": "HES Arribane",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/arribane.yml",
+    "Mass": 272.1587,
+    "Thrust": 5200,
+    "BestBank": 1600,
+    "Banks": [
+      800,
+      1400,
+      1600,
+      1400
+    ],
+    "Thrusters": 26,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.9476553781283827,
+    "MaxGravityStrongestBank": 0.5992785778856562
+  },
+  {
+    "ID": "Artemis",
+    "Name": "HME Artemis",
+    "Category": "Small",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/artemis.yml",
+    "Mass": 71.66279,
+    "Thrust": 2000,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 7,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.8449017735565585,
+    "MaxGravityStrongestBank": 1.1379607094226234
+  },
+  {
+    "ID": "Autumn",
+    "Name": "TSF-SKR Autumn",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/autumn.yml",
+    "Mass": 474.9676,
+    "Thrust": 10400,
+    "BestBank": 3200,
+    "Banks": [
+      3200,
+      2000,
+      3200,
+      2000
+    ],
+    "Thrusters": 16,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.232031640724248,
+    "MaxGravityStrongestBank": 0.6867789663766917
+  },
+  {
+    "ID": "Baeg",
+    "Name": "Z-22 Baeg",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/baeg.yml",
+    "Mass": 7.8408003,
+    "Thrust": 800,
+    "BestBank": 200,
+    "Banks": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 10.40065251344362,
+    "MaxGravityStrongestBank": 2.600163128360905
+  },
+  {
+    "ID": "Balor",
+    "Name": "Z-22 Balor",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/balor.yml",
+    "Mass": 491.42297,
+    "Thrust": 6400,
+    "BestBank": 1600,
+    "Banks": [
+      1600,
+      1600,
+      1600,
+      1600
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.3275641445511506,
+    "MaxGravityStrongestBank": 0.33189103613778764
+  },
+  {
+    "ID": "Betelgeuse",
+    "Name": "Betelgeuse",
+    "Category": "Small",
+    "Group": "Scrap",
+    "Path": "/SharedMaps/_Mono/Shuttles/betelgeuse.yml",
+    "Mass": 62.784184,
+    "Thrust": 1600,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      400,
+      400,
+      400
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.597770143754818,
+    "MaxGravityStrongestBank": 0.6494425359387045
+  },
+  {
+    "ID": "Borer",
+    "Name": "SHS-DIS Borer",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/borer.yml",
+    "Mass": 50.94439,
+    "Thrust": 1000,
+    "BestBank": 400,
+    "Banks": [
+      200,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 5,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.0009425804196614,
+    "MaxGravityStrongestBank": 0.8003770321678646
+  },
+  {
+    "ID": "Bow-Man",
+    "Name": "Z-22 Bow-Man",
+    "Category": "Micro",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/bowman.yml",
+    "Mass": 13.681998,
+    "Thrust": 1000,
+    "BestBank": 400,
+    "Banks": [
+      200,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 5,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 7.450432252987144,
+    "MaxGravityStrongestBank": 2.980172901194858
+  },
+  {
+    "ID": "Bratan",
+    "Name": "PB Bratan",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/bratan.yml",
+    "Mass": 482.60486,
+    "Thrust": 3600,
+    "BestBank": 1600,
+    "Banks": [
+      800,
+      600,
+      1600,
+      600
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 0.7603994644070103,
+    "MaxGravityStrongestBank": 0.3379553175142268
+  },
+  {
+    "ID": "Brute",
+    "Name": "DIS Brute",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/brute.yml",
+    "Mass": 203.08435,
+    "Thrust": 2800,
+    "BestBank": 1600,
+    "Banks": [
+      400,
+      400,
+      1600,
+      400
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.4054408314408062,
+    "MaxGravityStrongestBank": 0.8031090465376035
+  },
+  {
+    "ID": "Bucket",
+    "Name": "Bucket",
+    "Category": "Micro",
+    "Group": "Sr",
+    "Path": "/SharedMaps/_Mono/Shuttles/bucket.yml",
+    "Mass": 45.49439,
+    "Thrust": 1200,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 6,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.6887745724562238,
+    "MaxGravityStrongestBank": 0.8962581908187413
+  },
+  {
+    "ID": "Canister",
+    "Name": "HES Canister",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/canister.yml",
+    "Mass": 85.44319,
+    "Thrust": 1200,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 6,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.43164316572692,
+    "MaxGravityStrongestBank": 0.47721438857563997
+  },
+  {
+    "ID": "caracara",
+    "Name": "MI-COR Caracara",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/caracara.yml",
+    "Mass": 106.96458,
+    "Thrust": 2600,
+    "BestBank": 1600,
+    "Banks": [
+      400,
+      200,
+      1600,
+      400
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.4777891698328043,
+    "MaxGravityStrongestBank": 1.5247933352817258
+  },
+  {
+    "ID": "Carrion",
+    "Name": "ELH Carrion",
+    "Category": "Small",
+    "Group": "BlackMarket",
+    "Path": "/SharedMaps/_Mono/Shuttles/BlackMarket/carrion.yml",
+    "Mass": 61.12319,
+    "Thrust": 2400,
+    "BestBank": 1600,
+    "Banks": [
+      400,
+      200,
+      1600,
+      200
+    ],
+    "Thrusters": 6,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.002544992216758,
+    "MaxGravityStrongestBank": 2.668363328144505
+  },
+  {
+    "ID": "Claymore",
+    "Name": "ZOB Claymore",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/claymore.yml",
+    "Mass": 251.98831,
+    "Thrust": 6000,
+    "BestBank": 1600,
+    "Banks": [
+      1600,
+      1400,
+      1600,
+      1400
+    ],
+    "Thrusters": 24,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.427179241398276,
+    "MaxGravityStrongestBank": 0.6472477977062069
+  },
+  {
+    "ID": "Comet",
+    "Name": "CDM Comet",
+    "Category": "Large",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/comet.yml",
+    "Mass": 286.2787,
+    "Thrust": 4000,
+    "BestBank": 2000,
+    "Banks": [
+      800,
+      600,
+      2000,
+      600
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.424301552082018,
+    "MaxGravityStrongestBank": 0.712150776041009
+  },
+  {
+    "ID": "Dervi",
+    "Name": "NEI Dervi",
+    "Category": "Small",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/dervi.yml",
+    "Mass": 153.32895,
+    "Thrust": 3600,
+    "BestBank": 1600,
+    "Banks": [
+      800,
+      600,
+      1600,
+      600
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.3933671825458935,
+    "MaxGravityStrongestBank": 1.0637187477981749
+  },
+  {
+    "ID": "Drakon",
+    "Name": "NCS Drakon",
+    "Category": "Medium",
+    "Group": "Ussp",
+    "Path": "/SharedMaps/_Mono/Shuttles/USSP/drakon.yml",
+    "Mass": 157.82497,
+    "Thrust": 3800,
+    "BestBank": 2000,
+    "Banks": [
+      600,
+      600,
+      2000,
+      600
+    ],
+    "Thrusters": 13,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.4543634438905406,
+    "MaxGravityStrongestBank": 1.2917702336266004
+  },
+  {
+    "ID": "Duran",
+    "Name": "SRA Duran",
+    "Category": "Medium",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/duran.yml",
+    "Mass": 106.84278,
+    "Thrust": 1600,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      400,
+      400,
+      400
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.5265315887064053,
+    "MaxGravityStrongestBank": 0.3816328971766013
+  },
+  {
+    "ID": "Eris",
+    "Name": "PDV Eris",
+    "Category": "Small",
+    "Group": "BlackMarket",
+    "Path": "/SharedMaps/_Mono/Shuttles/BlackMarket/eris.yml",
+    "Mass": 234.684,
+    "Thrust": 7600,
+    "BestBank": 2000,
+    "Banks": [
+      1600,
+      2000,
+      2000,
+      2000
+    ],
+    "Thrusters": 26,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.3011184137062717,
+    "MaxGravityStrongestBank": 0.8687153720279662
+  },
+  {
+    "ID": "Ethereal",
+    "Name": "NS Ethereal",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/ethereal.yml",
+    "Mass": 388.14893,
+    "Thrust": 7600,
+    "BestBank": 2800,
+    "Banks": [
+      2400,
+      1200,
+      2800,
+      1200
+    ],
+    "Thrusters": 38,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.9959340704668247,
+    "MaxGravityStrongestBank": 0.7353441312246196
+  },
+  {
+    "ID": "Femur",
+    "Name": "DIS Femur",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/femur.yml",
+    "Mass": 103.41278,
+    "Thrust": 3600,
+    "BestBank": 1600,
+    "Banks": [
+      400,
+      800,
+      1600,
+      800
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.5486182371677866,
+    "MaxGravityStrongestBank": 1.5771636609634607
+  },
+  {
+    "ID": "Fortunate",
+    "Name": "UNSA Fortunate",
+    "Category": "Medium",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/fortunate.yml",
+    "Mass": 190.22635,
+    "Thrust": 5200,
+    "BestBank": 2000,
+    "Banks": [
+      1600,
+      800,
+      2000,
+      800
+    ],
+    "Thrusters": 27,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.786529604123872,
+    "MaxGravityStrongestBank": 1.0717421554322586
+  },
+  {
+    "ID": "Fracture",
+    "Name": "TSF-SKR Fracture",
+    "Category": "Medium",
+    "Group": "Security",
+    "Path": "/SharedMaps/_Mono/Shuttles/Nfsd/fracture.yml",
+    "Mass": 143.16714,
+    "Thrust": 2800,
+    "BestBank": 1200,
+    "Banks": [
+      800,
+      400,
+      1200,
+      400
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.9936351156879693,
+    "MaxGravityStrongestBank": 0.8544150495805583
+  },
+  {
+    "ID": "Framework",
+    "Name": "UNJ Framework",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/framework.yml",
+    "Mass": 24.700798,
+    "Thrust": 800,
+    "BestBank": 200,
+    "Banks": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.3014900711954525,
+    "MaxGravityStrongestBank": 0.8253725177988631
+  },
+  {
+    "ID": "Gruznyk",
+    "Name": "PPU Gruznyk",
+    "Category": "Medium",
+    "Group": "Ussp",
+    "Path": "/SharedMaps/_Mono/Shuttles/USSP/gruznyk.yml",
+    "Mass": 118.405396,
+    "Thrust": 3400,
+    "BestBank": 1200,
+    "Banks": [
+      1000,
+      600,
+      1200,
+      600
+    ],
+    "Thrusters": 17,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.927105764903814,
+    "MaxGravityStrongestBank": 1.0330961523189932
+  },
+  {
+    "ID": "Hammerhead",
+    "Name": "UI-SKR Hammerhead",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/hammerhead.yml",
+    "Mass": 375.9307,
+    "Thrust": 12000,
+    "BestBank": 4800,
+    "Banks": [
+      3600,
+      1800,
+      4800,
+      1800
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.2539018234319976,
+    "MaxGravityStrongestBank": 1.3015607293727989
+  },
+  {
+    "ID": "Hazel",
+    "Name": "BT-Y Hazel",
+    "Category": "Small",
+    "Group": "BlackMarket",
+    "Path": "/SharedMaps/_Mono/Shuttles/BlackMarket/hazel.yml",
+    "Mass": 112.013176,
+    "Thrust": 3000,
+    "BestBank": 1000,
+    "Banks": [
+      400,
+      800,
+      1000,
+      800
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.7301287980042352,
+    "MaxGravityStrongestBank": 0.9100429326680783
+  },
+  {
+    "ID": "Hermes",
+    "Name": "Hermes",
+    "Category": "Small",
+    "Group": "Sr",
+    "Path": "/SharedMaps/_Mono/Shuttles/hermes.yml",
+    "Mass": 94.11481,
+    "Thrust": 3000,
+    "BestBank": 1600,
+    "Banks": [
+      600,
+      400,
+      1600,
+      400
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.249333421100428,
+    "MaxGravityStrongestBank": 1.732977824586895
+  },
+  {
+    "ID": "Hoplite",
+    "Name": "TSF-PIN Hoplite",
+    "Category": "Small",
+    "Group": "Security",
+    "Path": "/SharedMaps/_Mono/Shuttles/Nfsd/hoplite.yml",
+    "Mass": 134.28499,
+    "Thrust": 4400,
+    "BestBank": 2000,
+    "Banks": [
+      800,
+      800,
+      2000,
+      800
+    ],
+    "Thrusters": 16,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.3400748394278814,
+    "MaxGravityStrongestBank": 1.5182158361035825
+  },
+  {
+    "ID": "Horsefly",
+    "Name": "GSI Horsefly",
+    "Category": "Small",
+    "Group": "Scrap",
+    "Path": "/SharedMaps/_Mono/Shuttles/Scrap/horsefly.yml",
+    "Mass": 38.833,
+    "Thrust": 1800,
+    "BestBank": 600,
+    "Banks": [
+      400,
+      400,
+      600,
+      400
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.725008073857547,
+    "MaxGravityStrongestBank": 1.5750026912858488
+  },
+  {
+    "ID": "Hound",
+    "Name": "Hound",
+    "Category": "Small",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/hound.yml",
+    "Mass": 25.0422,
+    "Thrust": 1200,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 6,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.884720951889479,
+    "MaxGravityStrongestBank": 1.628240317296493
+  },
+  {
+    "ID": "Hunter",
+    "Name": "Hunter",
+    "Category": "Small",
+    "Group": "Syndicate",
+    "Path": "/SharedMaps/_Mono/Shuttles/Syndicate/hunter.yml",
+    "Mass": 87.00079,
+    "Thrust": 2000,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 10,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.343353415170267,
+    "MaxGravityStrongestBank": 0.9373413660681067
+  },
+  {
+    "ID": "Hydra",
+    "Name": "Hydra",
+    "Category": "Medium",
+    "Group": "Syndicate",
+    "Path": "/SharedMaps/_Mono/Shuttles/Syndicate/hydra.yml",
+    "Mass": 177.03873,
+    "Thrust": 4000,
+    "BestBank": 1600,
+    "Banks": [
+      1600,
+      400,
+      1600,
+      400
+    ],
+    "Thrusters": 20,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.30315251774582,
+    "MaxGravityStrongestBank": 0.9212610070983279
+  },
+  {
+    "ID": "Iapetus",
+    "Name": "TSF-SKR Iapetus",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/iapetus.yml",
+    "Mass": 108.634384,
+    "Thrust": 2400,
+    "BestBank": 1000,
+    "Banks": [
+      600,
+      400,
+      1000,
+      400
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.2520339236499325,
+    "MaxGravityStrongestBank": 0.9383474681874718
+  },
+  {
+    "ID": "Infiltrator",
+    "Name": "Infiltrator",
+    "Category": "Large",
+    "Group": "Syndicate",
+    "Path": "/SharedMaps/_Mono/Shuttles/Syndicate/infiltrator.yml",
+    "Mass": 269.78714,
+    "Thrust": 5000,
+    "BestBank": 1800,
+    "Banks": [
+      800,
+      1200,
+      1800,
+      1200
+    ],
+    "Thrusters": 25,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.8892078989477703,
+    "MaxGravityStrongestBank": 0.6801148436211973
+  },
+  {
+    "ID": "Intermission",
+    "Name": "WA Intermission",
+    "Category": "Large",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/intermission.yml",
+    "Mass": 383.2853,
+    "Thrust": 5400,
+    "BestBank": 2400,
+    "Banks": [
+      1200,
+      800,
+      2400,
+      1000
+    ],
+    "Thrusters": 22,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.4361592150712021,
+    "MaxGravityStrongestBank": 0.6382929844760898
+  },
+  {
+    "ID": "Jaguar",
+    "Name": "TSF-SKR Jaguar",
+    "Category": "Small",
+    "Group": "Security",
+    "Path": "/SharedMaps/_Mono/Shuttles/Nfsd/jaguar.yml",
+    "Mass": 67.36419,
+    "Thrust": 3600,
+    "BestBank": 1600,
+    "Banks": [
+      800,
+      600,
+      1600,
+      600
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 5.447589840599586,
+    "MaxGravityStrongestBank": 2.4211510402664826
+  },
+  {
+    "ID": "Jitterbug",
+    "Name": "SE Jitterbug",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/jitterbug.yml",
+    "Mass": 77.168785,
+    "Thrust": 1600,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      400,
+      400,
+      400
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.1135343610140933,
+    "MaxGravityStrongestBank": 0.5283835902535233
+  },
+  {
+    "ID": "Judiciary",
+    "Name": "SHM Judiciary",
+    "Category": "Medium",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/judiciary.yml",
+    "Mass": 160.84576,
+    "Thrust": 2000,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 10,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.26750993230416,
+    "MaxGravityStrongestBank": 0.507003972921664
+  },
+  {
+    "ID": "Kami",
+    "Name": "MMC Kami",
+    "Category": "Small",
+    "Group": "Mieyo",
+    "Path": "/SharedMaps/_Mono/Shuttles/Mieyo/kami.yml",
+    "Mass": 133.89478,
+    "Thrust": 2800,
+    "BestBank": 1000,
+    "Banks": [
+      800,
+      600,
+      1000,
+      400
+    ],
+    "Thrusters": 15,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.131696528547384,
+    "MaxGravityStrongestBank": 0.7613201887669229
+  },
+  {
+    "ID": "Kestrel",
+    "Name": "SKR Kestrel",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/kestrel.yml",
+    "Mass": 124.02377,
+    "Thrust": 2200,
+    "BestBank": 1000,
+    "Banks": [
+      400,
+      400,
+      1000,
+      400
+    ],
+    "Thrusters": 11,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.8082094924699703,
+    "MaxGravityStrongestBank": 0.8219134056681684
+  },
+  {
+    "ID": "Kite",
+    "Name": "MMC-CSC Kite",
+    "Category": "Small",
+    "Group": "Mieyo",
+    "Path": "/SharedMaps/_Mono/Shuttles/Mieyo/kite.yml",
+    "Mass": 123.04398,
+    "Thrust": 4400,
+    "BestBank": 2200,
+    "Banks": [
+      1000,
+      600,
+      2200,
+      600
+    ],
+    "Thrusters": 16,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.645216258542878,
+    "MaxGravityStrongestBank": 1.822608129271439
+  },
+  {
+    "ID": "Kuldi",
+    "Name": "DWI Kuldi",
+    "Category": "Medium",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/kuldi.yml",
+    "Mass": 227.26575,
+    "Thrust": 2400,
+    "BestBank": 800,
+    "Banks": [
+      800,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.0764856474977573,
+    "MaxGravityStrongestBank": 0.3588285491659191
+  },
+  {
+    "ID": "Kunai",
+    "Name": "MI-COR Kunai",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/kunai.yml",
+    "Mass": 164.30516,
+    "Thrust": 3600,
+    "BestBank": 2000,
+    "Banks": [
+      400,
+      600,
+      2000,
+      600
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.233481146083423,
+    "MaxGravityStrongestBank": 1.240822858935235
+  },
+  {
+    "ID": "Leaf",
+    "Name": "PTR Leaf",
+    "Category": "Medium",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/leaf.yml",
+    "Mass": 190.03674,
+    "Thrust": 5200,
+    "BestBank": 2400,
+    "Banks": [
+      800,
+      1000,
+      2400,
+      1000
+    ],
+    "Thrusters": 20,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.7893098763924757,
+    "MaxGravityStrongestBank": 1.2873737891042196
+  },
+  {
+    "ID": "Littora",
+    "Name": "SKR Littora",
+    "Category": "Large",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/littora.yml",
+    "Mass": 230.62674,
+    "Thrust": 3600,
+    "BestBank": 1800,
+    "Banks": [
+      1000,
+      400,
+      1800,
+      400
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.5911965675108624,
+    "MaxGravityStrongestBank": 0.7955982837554312
+  },
+  {
+    "ID": "Magus",
+    "Name": "SHM Magus",
+    "Category": "Medium",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/magus.yml",
+    "Mass": 155.21715,
+    "Thrust": 3000,
+    "BestBank": 1000,
+    "Banks": [
+      800,
+      600,
+      1000,
+      600
+    ],
+    "Thrusters": 15,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.9702101059935502,
+    "MaxGravityStrongestBank": 0.6567367019978501
+  },
+  {
+    "ID": "Manus",
+    "Name": "Manus",
+    "Category": "Medium",
+    "Group": "Sr",
+    "Path": "/SharedMaps/_Mono/Shuttles/manus.yml",
+    "Mass": 92.766174,
+    "Thrust": 2400,
+    "BestBank": 1200,
+    "Banks": [
+      400,
+      400,
+      1200,
+      400
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.6372578224775487,
+    "MaxGravityStrongestBank": 1.3186289112387743
+  },
+  {
+    "ID": "McChicken",
+    "Name": "AES McChicken",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/mcchicken.yml",
+    "Mass": 74.791985,
+    "Thrust": 800,
+    "BestBank": 200,
+    "Banks": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.0903499799825407,
+    "MaxGravityStrongestBank": 0.27258749499563517
+  },
+  {
+    "ID": "McChilly",
+    "Name": "AES McChilly",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/mcchilly.yml",
+    "Mass": 39.5612,
+    "Thrust": 800,
+    "BestBank": 200,
+    "Banks": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.061348982022903,
+    "MaxGravityStrongestBank": 0.5153372455057258
+  },
+  {
+    "ID": "MClass",
+    "Name": "TSF-SKR M-Class Salvage Carrier",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/mclass.yml",
+    "Mass": 217.80711,
+    "Thrust": 5800,
+    "BestBank": 3200,
+    "Banks": [
+      1000,
+      800,
+      3200,
+      800
+    ],
+    "Thrusters": 17,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.7144817966233172,
+    "MaxGravityStrongestBank": 1.4976451291714854
+  },
+  {
+    "ID": "Medicus",
+    "Name": "UW Medicus",
+    "Category": "Medium",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/medicus.yml",
+    "Mass": 200.16635,
+    "Thrust": 4000,
+    "BestBank": 1200,
+    "Banks": [
+      1200,
+      800,
+      1200,
+      800
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.037041674277532,
+    "MaxGravityStrongestBank": 0.6111125022832595
+  },
+  {
+    "ID": "Metis",
+    "Name": "BT-Y Metis",
+    "Category": "Medium",
+    "Group": "BlackMarket",
+    "Path": "/SharedMaps/_Mono/Shuttles/BlackMarket/metis.yml",
+    "Mass": 86.24498,
+    "Thrust": 4200,
+    "BestBank": 1800,
+    "Banks": [
+      800,
+      800,
+      1800,
+      800
+    ],
+    "Thrusters": 15,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.964167845768224,
+    "MaxGravityStrongestBank": 2.127500505329239
+  },
+  {
+    "ID": "MieyoAutumn",
+    "Name": "MMC-SKR Mieyo-Autumn",
+    "Category": "Large",
+    "Group": "Mieyo",
+    "Path": "/SharedMaps/_Mono/Shuttles/Mieyo/autumn_mieyo.yml",
+    "Mass": 474.9676,
+    "Thrust": 10400,
+    "BestBank": 3200,
+    "Banks": [
+      3200,
+      2000,
+      3200,
+      2000
+    ],
+    "Thrusters": 16,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.232031640724248,
+    "MaxGravityStrongestBank": 0.6867789663766917
+  },
+  {
+    "ID": "MieyoNoble",
+    "Name": "MMC-SKR Mieyo-Noble",
+    "Category": "Small",
+    "Group": "Mieyo",
+    "Path": "/SharedMaps/_Mono/Shuttles/Mieyo/noble.yml",
+    "Mass": 130.29478,
+    "Thrust": 3200,
+    "BestBank": 1200,
+    "Banks": [
+      800,
+      600,
+      1200,
+      600
+    ],
+    "Thrusters": 16,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.5035366527378757,
+    "MaxGravityStrongestBank": 0.9388262447767034
+  },
+  {
+    "ID": "MieyoSakuratsu",
+    "Name": "MMC-SKR Sakuratsu",
+    "Category": "Medium",
+    "Group": "Mieyo",
+    "Path": "/SharedMaps/_Mono/Shuttles/Mieyo/sakuratsu_mieyo.yml",
+    "Mass": 147.01518,
+    "Thrust": 3000,
+    "BestBank": 1600,
+    "Banks": [
+      600,
+      400,
+      1600,
+      400
+    ],
+    "Thrusters": 15,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.080128035441761,
+    "MaxGravityStrongestBank": 1.1094016189022724
+  },
+  {
+    "ID": "Mite",
+    "Name": "Mite",
+    "Category": "Small",
+    "Group": "Scrap",
+    "Path": "/SharedMaps/_Mono/Shuttles/Scrap/mite.yml",
+    "Mass": 109.78517,
+    "Thrust": 3000,
+    "BestBank": 1600,
+    "Banks": [
+      600,
+      400,
+      1600,
+      400
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.7855346724290433,
+    "MaxGravityStrongestBank": 1.4856184919621565
+  },
+  {
+    "ID": "Mudskipper",
+    "Name": "SKR Mudskipper",
+    "Category": "Medium",
+    "Group": "Scrap",
+    "Path": "/SharedMaps/_Mono/Shuttles/Scrap/mudskipper.yml",
+    "Mass": 137.03596,
+    "Thrust": 5800,
+    "BestBank": 3200,
+    "Banks": [
+      600,
+      1000,
+      3200,
+      1000
+    ],
+    "Thrusters": 17,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.314440058435264,
+    "MaxGravityStrongestBank": 2.3803807218953184
+  },
+  {
+    "ID": "Natisk",
+    "Name": "NCS Natisk",
+    "Category": "Medium",
+    "Group": "Ussp",
+    "Path": "/SharedMaps/_Mono/Shuttles/USSP/natisk.yml",
+    "Mass": 121.17517,
+    "Thrust": 2200,
+    "BestBank": 800,
+    "Banks": [
+      600,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 11,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.850717091677382,
+    "MaxGravityStrongestBank": 0.6729880333372298
+  },
+  {
+    "ID": "Noble",
+    "Name": "SKR Noble",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/noble.yml",
+    "Mass": 130.29478,
+    "Thrust": 3200,
+    "BestBank": 1200,
+    "Banks": [
+      800,
+      600,
+      1200,
+      600
+    ],
+    "Thrusters": 16,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.5035366527378757,
+    "MaxGravityStrongestBank": 0.9388262447767034
+  },
+  {
+    "ID": "Notch",
+    "Name": "DIS Notch",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/notch.yml",
+    "Mass": 49.172794,
+    "Thrust": 1600,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      200,
+      800,
+      200
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.31685197093354,
+    "MaxGravityStrongestBank": 1.65842598546677
+  },
+  {
+    "ID": "Ocelot",
+    "Name": "TSF-SKR Ocelot",
+    "Category": "Small",
+    "Group": "Security",
+    "Path": "/SharedMaps/_Mono/Shuttles/Nfsd/ocelot.yml",
+    "Mass": 88.5056,
+    "Thrust": 4000,
+    "BestBank": 2000,
+    "Banks": [
+      400,
+      800,
+      2000,
+      800
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.607021439750958,
+    "MaxGravityStrongestBank": 2.303510719875479
+  },
+  {
+    "ID": "Odenta",
+    "Name": "MI-COR Odenta",
+    "Category": "Medium",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/odenta.yml",
+    "Mass": 177.63794,
+    "Thrust": 4800,
+    "BestBank": 2800,
+    "Banks": [
+      800,
+      600,
+      2800,
+      600
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.7544602019457494,
+    "MaxGravityStrongestBank": 1.6067684511350206
+  },
+  {
+    "ID": "Olympus",
+    "Name": "DIS Olympus",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/olympus.yml",
+    "Mass": 723.56616,
+    "Thrust": 8400,
+    "BestBank": 4800,
+    "Banks": [
+      1200,
+      1200,
+      4800,
+      1200
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.1834012706589914,
+    "MaxGravityStrongestBank": 0.6762292975194236
+  },
+  {
+    "ID": "Pacem",
+    "Name": "Pacem",
+    "Category": "Medium",
+    "Group": "Sr",
+    "Path": "/SharedMaps/_Mono/Shuttles/pacem.yml",
+    "Mass": 181.73833,
+    "Thrust": 5400,
+    "BestBank": 2200,
+    "Banks": [
+      2200,
+      600,
+      2000,
+      600
+    ],
+    "Thrusters": 15,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.0288531626560578,
+    "MaxGravityStrongestBank": 1.2339772144154308
+  },
+  {
+    "ID": "Padval",
+    "Name": "PB Padval",
+    "Category": "Medium",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/padval.yml",
+    "Mass": 223.8352,
+    "Thrust": 3600,
+    "BestBank": 1200,
+    "Banks": [
+      1200,
+      600,
+      1200,
+      600
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.6394761729353569,
+    "MaxGravityStrongestBank": 0.546492057645119
+  },
+  {
+    "ID": "Parabellum",
+    "Name": "Parabellum",
+    "Category": "Medium",
+    "Group": "Sr",
+    "Path": "/SharedMaps/_Mono/Shuttles/parabellum.yml",
+    "Mass": 124.64638,
+    "Thrust": 3800,
+    "BestBank": 1200,
+    "Banks": [
+      1000,
+      800,
+      1200,
+      800
+    ],
+    "Thrusters": 19,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.1076701698125633,
+    "MaxGravityStrongestBank": 0.9813695273092305
+  },
+  {
+    "ID": "Pebble",
+    "Name": "MMC Pebble",
+    "Category": "Small",
+    "Group": "Mieyo",
+    "Path": "/SharedMaps/_Mono/Shuttles/Mieyo/pebble.yml",
+    "Mass": 97.46279,
+    "Thrust": 4000,
+    "BestBank": 1800,
+    "Banks": [
+      1000,
+      600,
+      1800,
+      600
+    ],
+    "Thrusters": 11,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.183619171357832,
+    "MaxGravityStrongestBank": 1.8826286271110246
+  },
+  {
+    "ID": "Peregrine",
+    "Name": "SKR Peregrine",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/peregrine.yml",
+    "Mass": 137.03596,
+    "Thrust": 5000,
+    "BestBank": 3200,
+    "Banks": [
+      600,
+      600,
+      3200,
+      600
+    ],
+    "Thrusters": 13,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.7193448779614346,
+    "MaxGravityStrongestBank": 2.3803807218953184
+  },
+  {
+    "ID": "Phaeron",
+    "Name": "HES Phaeron",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/phaeron.yml",
+    "Mass": 160.36514,
+    "Thrust": 2400,
+    "BestBank": 800,
+    "Banks": [
+      800,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.5255704453150696,
+    "MaxGravityStrongestBank": 0.5085234817716898
+  },
+  {
+    "ID": "Phantom",
+    "Name": "IB Phantom",
+    "Category": "Small",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/phantom.yml",
+    "Mass": 72.35516,
+    "Thrust": 7000,
+    "BestBank": 3600,
+    "Banks": [
+      1400,
+      1000,
+      3600,
+      1000
+    ],
+    "Thrusters": 29,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 9.861875701629838,
+    "MaxGravityStrongestBank": 5.071821789409631
+  },
+  {
+    "ID": "Picses",
+    "Name": "SKR Picses",
+    "Category": "Medium",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/picses.yml",
+    "Mass": 145.93637,
+    "Thrust": 2800,
+    "BestBank": 1400,
+    "Banks": [
+      600,
+      400,
+      1400,
+      400
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.9558046956808344,
+    "MaxGravityStrongestBank": 0.9779023478404172
+  },
+  {
+    "ID": "Pillbox",
+    "Name": "TPC Pillbox",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/pillbox.yml",
+    "Mass": 176.31337,
+    "Thrust": 1800,
+    "BestBank": 600,
+    "Banks": [
+      400,
+      400,
+      600,
+      400
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.0406824991894266,
+    "MaxGravityStrongestBank": 0.3468941663964756
+  },
+  {
+    "ID": "Piva",
+    "Name": "PB Piva",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/piva.yml",
+    "Mass": 41.362198,
+    "Thrust": 1600,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      200,
+      800,
+      200
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.9431869335185947,
+    "MaxGravityStrongestBank": 1.9715934667592974
+  },
+  {
+    "ID": "Plutomkii",
+    "Name": "DIS Pluto MK. II",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/plutomkii.yml",
+    "Mass": 62.401592,
+    "Thrust": 2000,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 7,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.2671217485767223,
+    "MaxGravityStrongestBank": 1.306848699430689
+  },
+  {
+    "ID": "Praetorian",
+    "Name": "TSF-SKR Praetorian",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/praetorian.yml",
+    "Mass": 149.75714,
+    "Thrust": 2200,
+    "BestBank": 1000,
+    "Banks": [
+      400,
+      400,
+      1000,
+      400
+    ],
+    "Thrusters": 11,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.49749760315877,
+    "MaxGravityStrongestBank": 0.6806807287085318
+  },
+  {
+    "ID": "Promise",
+    "Name": "DFNT Promise",
+    "Category": "Medium",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/promise.yml",
+    "Mass": 308.9188,
+    "Thrust": 4800,
+    "BestBank": 1600,
+    "Banks": [
+      800,
+      1200,
+      1600,
+      1200
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.5839004815687066,
+    "MaxGravityStrongestBank": 0.5279668271895689
+  },
+  {
+    "ID": "QJ270",
+    "Name": "SKR QJ-270 Heavy Fighter",
+    "Category": "Small",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/qj270.yml",
+    "Mass": 36.703594,
+    "Thrust": 1000,
+    "BestBank": 400,
+    "Banks": [
+      200,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 5,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.7772974816718383,
+    "MaxGravityStrongestBank": 1.1109189926687353
+  },
+  {
+    "ID": "QJ340",
+    "Name": "GS QJ-340 Support Fighter",
+    "Category": "Small",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/qj340.yml",
+    "Mass": 40.802795,
+    "Thrust": 1600,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      200,
+      800,
+      200
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.9972477055850937,
+    "MaxGravityStrongestBank": 1.9986238527925468
+  },
+  {
+    "ID": "QJ490",
+    "Name": "SKR QJ-490 Air Superiority Fighter",
+    "Category": "Small",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/qj490.yml",
+    "Mass": 30.783398,
+    "Thrust": 1600,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      200,
+      800,
+      200
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 5.298274046783561,
+    "MaxGravityStrongestBank": 2.6491370233917806
+  },
+  {
+    "ID": "Rac-Man",
+    "Name": "Z-22 Rac-Man",
+    "Category": "Micro",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/racman.yml",
+    "Mass": 13.681998,
+    "Thrust": 1000,
+    "BestBank": 400,
+    "Banks": [
+      200,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 5,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 7.450432252987144,
+    "MaxGravityStrongestBank": 2.980172901194858
+  },
+  {
+    "ID": "Reaver",
+    "Name": "VG Reaver",
+    "Category": "Small",
+    "Group": "Viper",
+    "Path": "/SharedMaps/_Mono/Shuttles/Viper/reaver.yml",
+    "Mass": 65.85398,
+    "Thrust": 3600,
+    "BestBank": 1200,
+    "Banks": [
+      800,
+      800,
+      1200,
+      800
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 5.572517819943762,
+    "MaxGravityStrongestBank": 1.8575059399812541
+  },
+  {
+    "ID": "Remontnik",
+    "Name": "PPU Remontnik",
+    "Category": "Medium",
+    "Group": "Ussp",
+    "Path": "/SharedMaps/_Mono/Shuttles/USSP/remontnik.yml",
+    "Mass": 208.69032,
+    "Thrust": 4800,
+    "BestBank": 2000,
+    "Banks": [
+      1200,
+      800,
+      2000,
+      800
+    ],
+    "Thrusters": 24,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.3446062859342343,
+    "MaxGravityStrongestBank": 0.9769192858059309
+  },
+  {
+    "ID": "Rig",
+    "Name": "DIS Rig",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/rig.yml",
+    "Mass": 180.47736,
+    "Thrust": 2400,
+    "BestBank": 1200,
+    "Banks": [
+      400,
+      400,
+      1200,
+      400
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.3555623710520446,
+    "MaxGravityStrongestBank": 0.6777811855260223
+  },
+  {
+    "ID": "Rook",
+    "Name": "Rook",
+    "Category": "Small",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/rook.yml",
+    "Mass": 25.0422,
+    "Thrust": 800,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      0,
+      400,
+      0
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.256480634592986,
+    "MaxGravityStrongestBank": 1.628240317296493
+  },
+  {
+    "ID": "Rosetta",
+    "Name": "NOV-Rosetta",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/Rosetta.yml",
+    "Mass": 246.41011,
+    "Thrust": 4800,
+    "BestBank": 1200,
+    "Banks": [
+      1200,
+      1200,
+      1200,
+      1200
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.9857003273348923,
+    "MaxGravityStrongestBank": 0.4964250818337231
+  },
+  {
+    "ID": "Sabinemk2",
+    "Name": "ZOB Sabine MkII",
+    "Category": "Large",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/sabinemk2.yml",
+    "Mass": 94.115585,
+    "Thrust": 2800,
+    "BestBank": 1200,
+    "Banks": [
+      800,
+      400,
+      1200,
+      400
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.032686219998693,
+    "MaxGravityStrongestBank": 1.2997226657137255
+  },
+  {
+    "ID": "Sagittarius",
+    "Name": "HT Sagittarius",
+    "Category": "Large",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/sagittarius.yml",
+    "Mass": 222.42459,
+    "Thrust": 6600,
+    "BestBank": 3600,
+    "Banks": [
+      1000,
+      1000,
+      3600,
+      1000
+    ],
+    "Thrusters": 21,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.0247684152985825,
+    "MaxGravityStrongestBank": 1.649873681071954
+  },
+  {
+    "ID": "Sakuratsu",
+    "Name": "SKR Sakuratsu",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/sakuratsu.yml",
+    "Mass": 146.49536,
+    "Thrust": 3000,
+    "BestBank": 1600,
+    "Banks": [
+      600,
+      400,
+      1600,
+      400
+    ],
+    "Thrusters": 15,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.0875091030426955,
+    "MaxGravityStrongestBank": 1.1133381882894375
+  },
+  {
+    "ID": "Scallywag",
+    "Name": "RSC-Scallywag",
+    "Category": "Medium",
+    "Group": "Scrap",
+    "Path": "/SharedMaps/_Mono/Shuttles/Scrap/scallywag.yml",
+    "Mass": 149.31775,
+    "Thrust": 4800,
+    "BestBank": 2000,
+    "Banks": [
+      800,
+      1000,
+      2000,
+      1000
+    ],
+    "Thrusters": 15,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.2768819251939365,
+    "MaxGravityStrongestBank": 1.3653674688308068
+  },
+  {
+    "ID": "Sekunda",
+    "Name": "PPU Sekunda",
+    "Category": "Medium",
+    "Group": "Ussp",
+    "Path": "/SharedMaps/_Mono/Shuttles/USSP/sekunda.yml",
+    "Mass": 123.15358,
+    "Thrust": 3800,
+    "BestBank": 1600,
+    "Banks": [
+      1000,
+      600,
+      1600,
+      600
+    ],
+    "Thrusters": 19,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.1453396393439905,
+    "MaxGravityStrongestBank": 1.3243535323553643
+  },
+  {
+    "ID": "Sellsword",
+    "Name": "UW Sellsword",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/sellsword.yml",
+    "Mass": 78.52259,
+    "Thrust": 2800,
+    "BestBank": 1200,
+    "Banks": [
+      400,
+      600,
+      1200,
+      600
+    ],
+    "Thrusters": 11,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.634916241512356,
+    "MaxGravityStrongestBank": 1.5578212463624381
+  },
+  {
+    "ID": "Serkesh",
+    "Name": "RSC-Serkesh",
+    "Category": "Medium",
+    "Group": "Scrap",
+    "Path": "/SharedMaps/_Mono/Shuttles/Scrap/serkesh.yml",
+    "Mass": 275.23193,
+    "Thrust": 8000,
+    "BestBank": 3200,
+    "Banks": [
+      1600,
+      1600,
+      3200,
+      1600
+    ],
+    "Thrusters": 16,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.962935272357553,
+    "MaxGravityStrongestBank": 1.185174108943021
+  },
+  {
+    "ID": "Shareholder",
+    "Name": "DME Shareholder",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/shareholder.yml",
+    "Mass": 58.962585,
+    "Thrust": 800,
+    "BestBank": 200,
+    "Banks": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.3830709652164077,
+    "MaxGravityStrongestBank": 0.3457677413041019
+  },
+  {
+    "ID": "Shiv",
+    "Name": "TSF-PIN Shiv",
+    "Category": "Small",
+    "Group": "Security",
+    "Path": "/SharedMaps/_Mono/Shuttles/Nfsd/shiv.yml",
+    "Mass": 117.60497,
+    "Thrust": 2800,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      800,
+      800,
+      800
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.426964079125361,
+    "MaxGravityStrongestBank": 0.6934183083215316
+  },
+  {
+    "ID": "Siebel",
+    "Name": "MI Siebel",
+    "Category": "Medium",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/siebel.yml",
+    "Mass": 257.56552,
+    "Thrust": 6000,
+    "BestBank": 2400,
+    "Banks": [
+      1200,
+      1200,
+      2400,
+      1200
+    ],
+    "Thrusters": 24,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.374622174222053,
+    "MaxGravityStrongestBank": 0.9498488696888212
+  },
+  {
+    "ID": "Sirius",
+    "Name": "SKR Sirius",
+    "Category": "Medium",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/sirius.yml",
+    "Mass": 149.11636,
+    "Thrust": 4800,
+    "BestBank": 2200,
+    "Banks": [
+      1000,
+      800,
+      2200,
+      800
+    ],
+    "Thrusters": 24,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.2813075378558527,
+    "MaxGravityStrongestBank": 1.5039326215172657
+  },
+  {
+    "ID": "skelraak",
+    "Name": "VOX-Skelraak",
+    "Category": "Large",
+    "Group": "Scrap",
+    "Path": "/SharedMaps/_Mono/Shuttles/Scrap/skelraak.yml",
+    "Mass": 697.79913,
+    "Thrust": 12400,
+    "BestBank": 4600,
+    "Banks": [
+      2000,
+      2600,
+      4600,
+      3200
+    ],
+    "Thrusters": 23,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.8114329117720016,
+    "MaxGravityStrongestBank": 0.6719831769476781
+  },
+  {
+    "ID": "Solarsail",
+    "Name": "Solarsail",
+    "Category": "Small",
+    "Group": "Sr",
+    "Path": "/SharedMaps/_Mono/Shuttles/solarsail.yml",
+    "Mass": 65.66578,
+    "Thrust": 1200,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 6,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.8628296050303024,
+    "MaxGravityStrongestBank": 0.6209432016767674
+  },
+  {
+    "ID": "Spessbite",
+    "Name": "PTI Spessbite",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/spessbite.yml",
+    "Mass": 77.08299,
+    "Thrust": 1800,
+    "BestBank": 600,
+    "Banks": [
+      400,
+      400,
+      600,
+      400
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.3803726156978353,
+    "MaxGravityStrongestBank": 0.7934575385659451
+  },
+  {
+    "ID": "Spitfire",
+    "Name": "Spitfire",
+    "Category": "Small",
+    "Group": "Sr",
+    "Path": "/SharedMaps/_Mono/Shuttles/spitfire.yml",
+    "Mass": 44.283,
+    "Thrust": 1600,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      200,
+      800,
+      200
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.683103644631325,
+    "MaxGravityStrongestBank": 1.8415518223156624
+  },
+  {
+    "ID": "Spyglass",
+    "Name": "UI Spyglass",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/spyglass.yml",
+    "Mass": 158.73557,
+    "Thrust": 2200,
+    "BestBank": 800,
+    "Banks": [
+      600,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 11,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.4127958730731387,
+    "MaxGravityStrongestBank": 0.5137439538447777
+  },
+  {
+    "ID": "StratoRat",
+    "Name": "HES Strato-Rat",
+    "Category": "Micro",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/stratorat.yml",
+    "Mass": 42.971794,
+    "Thrust": 800,
+    "BestBank": 200,
+    "Banks": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.897743420896146,
+    "MaxGravityStrongestBank": 0.4744358552240365
+  },
+  {
+    "ID": "Strayk",
+    "Name": "NCS Strayk",
+    "Category": "Small",
+    "Group": "Ussp",
+    "Path": "/SharedMaps/_Mono/Shuttles/USSP/strayk.yml",
+    "Mass": 54.994186,
+    "Thrust": 2000,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 10,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.707184580730247,
+    "MaxGravityStrongestBank": 1.482873832292099
+  },
+  {
+    "ID": "Stubby",
+    "Name": "UW Stubby",
+    "Category": "Small",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/stubby.yml",
+    "Mass": 51.34259,
+    "Thrust": 2000,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 10,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.9708475627936024,
+    "MaxGravityStrongestBank": 1.588339025117441
+  },
+  {
+    "ID": "Sunrise",
+    "Name": "Sunrise",
+    "Category": "Small",
+    "Group": "Sr",
+    "Path": "/SharedMaps/_Mono/Shuttles/sunrise.yml",
+    "Mass": 89.4754,
+    "Thrust": 2800,
+    "BestBank": 1200,
+    "Banks": [
+      800,
+      400,
+      1200,
+      400
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.189961014050965,
+    "MaxGravityStrongestBank": 1.367126148878985
+  },
+  {
+    "ID": "Svinya",
+    "Name": "UW Svinya",
+    "Category": "Small",
+    "Group": "Ussp",
+    "Path": "/SharedMaps/_Mono/Shuttles/USSP/svinya.yml",
+    "Mass": 61.003986,
+    "Thrust": 1600,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      200,
+      800,
+      200
+    ],
+    "Thrusters": 8,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.673577406814187,
+    "MaxGravityStrongestBank": 1.3367887034070935
+  },
+  {
+    "ID": "Syringe",
+    "Name": "TSF-SKR Syringe",
+    "Category": "Small",
+    "Group": "Security",
+    "Path": "/SharedMaps/_Mono/Shuttles/Nfsd/syringe.yml",
+    "Mass": 88.29419,
+    "Thrust": 2000,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 10,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.3090262039779876,
+    "MaxGravityStrongestBank": 0.9236104815911951
+  },
+  {
+    "ID": "Takeaway",
+    "Name": "UW Takeaway",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/takeaway.yml",
+    "Mass": 199.96872,
+    "Thrust": 1800,
+    "BestBank": 600,
+    "Banks": [
+      400,
+      400,
+      600,
+      400
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 0.9175747013438407,
+    "MaxGravityStrongestBank": 0.30585823378128024
+  },
+  {
+    "ID": "Talon",
+    "Name": "Talon",
+    "Category": "Small",
+    "Group": "Syndicate",
+    "Path": "/SharedMaps/_Mono/Shuttles/Syndicate/talon.yml",
+    "Mass": 69.47438,
+    "Thrust": 3000,
+    "BestBank": 1600,
+    "Banks": [
+      600,
+      400,
+      1600,
+      400
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.401772244005874,
+    "MaxGravityStrongestBank": 2.3476118634697998
+  },
+  {
+    "ID": "Talonuran",
+    "Name": "VG Talonuran",
+    "Category": "Small",
+    "Group": "Viper",
+    "Path": "/SharedMaps/_Mono/Shuttles/Viper/talonuran.yml",
+    "Mass": 60.444183,
+    "Thrust": 3200,
+    "BestBank": 1600,
+    "Banks": [
+      400,
+      600,
+      1600,
+      600
+    ],
+    "Thrusters": 10,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 5.3966774170877265,
+    "MaxGravityStrongestBank": 2.6983387085438633
+  },
+  {
+    "ID": "Tanuki",
+    "Name": "MI-COR Tanuki",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/tanuki.yml",
+    "Mass": 170.79616,
+    "Thrust": 4000,
+    "BestBank": 1600,
+    "Banks": [
+      800,
+      800,
+      1600,
+      800
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.3873323424719994,
+    "MaxGravityStrongestBank": 0.9549329369887998
+  },
+  {
+    "ID": "Taser",
+    "Name": "Taser",
+    "Category": "Small",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/taser.yml",
+    "Mass": 10.2614,
+    "Thrust": 800,
+    "BestBank": 400,
+    "Banks": [
+      0,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 7.947204021634911,
+    "MaxGravityStrongestBank": 3.9736020108174555
+  },
+  {
+    "ID": "Tayfun",
+    "Name": "NCS Tayfun",
+    "Category": "Medium",
+    "Group": "Ussp",
+    "Path": "/SharedMaps/_Mono/Shuttles/USSP/tayfun.yml",
+    "Mass": 132.65717,
+    "Thrust": 3600,
+    "BestBank": 1200,
+    "Banks": [
+      800,
+      800,
+      1200,
+      800
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.7663222203837163,
+    "MaxGravityStrongestBank": 0.9221074067945721
+  },
+  {
+    "ID": "Tethys",
+    "Name": "PDV Tethys",
+    "Category": "Medium",
+    "Group": "BlackMarket",
+    "Path": "/SharedMaps/_Mono/Shuttles/BlackMarket/tethys.yml",
+    "Mass": 125.43518,
+    "Thrust": 2200,
+    "BestBank": 800,
+    "Banks": [
+      600,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 11,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.7878633267470285,
+    "MaxGravityStrongestBank": 0.6501321188171013
+  },
+  {
+    "ID": "Thorax",
+    "Name": "Thorax",
+    "Category": "Medium",
+    "Group": "Sr",
+    "Path": "/SharedMaps/_Mono/Shuttles/thorax.yml",
+    "Mass": 121.30496,
+    "Thrust": 3200,
+    "BestBank": 800,
+    "Banks": [
+      800,
+      800,
+      800,
+      800
+    ],
+    "Thrusters": 4,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.6890718845331465,
+    "MaxGravityStrongestBank": 0.6722679711332866
+  },
+  {
+    "ID": "Tick",
+    "Name": "GSI Tick",
+    "Category": "Small",
+    "Group": "Scrap",
+    "Path": "/SharedMaps/_Mono/Shuttles/Scrap/tick.yml",
+    "Mass": 21.082,
+    "Thrust": 1200,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 6,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 5.802303340357021,
+    "MaxGravityStrongestBank": 1.9341011134523405
+  },
+  {
+    "ID": "Tiger",
+    "Name": "NSK Tiger",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/tiger.yml",
+    "Mass": 67.08319,
+    "Thrust": 4400,
+    "BestBank": 2000,
+    "Banks": [
+      800,
+      800,
+      2000,
+      800
+    ],
+    "Thrusters": 16,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 6.686055275722944,
+    "MaxGravityStrongestBank": 3.03911603441952
+  },
+  {
+    "ID": "Tokarev",
+    "Name": "VIN Tokarev",
+    "Category": "Large",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/tokarev.yml",
+    "Mass": 333.59302,
+    "Thrust": 4000,
+    "BestBank": 1600,
+    "Banks": [
+      1200,
+      600,
+      1600,
+      600
+    ],
+    "Thrusters": 20,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.2222893534703525,
+    "MaxGravityStrongestBank": 0.488915741388141
+  },
+  {
+    "ID": "Triage",
+    "Name": "MI Triage",
+    "Category": "Small",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/triage.yml",
+    "Mass": 46.961792,
+    "Thrust": 1800,
+    "BestBank": 600,
+    "Banks": [
+      400,
+      400,
+      600,
+      400
+    ],
+    "Thrusters": 9,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.9071387763931593,
+    "MaxGravityStrongestBank": 1.3023795921310533
+  },
+  {
+    "ID": "Tumour",
+    "Name": "TSF-SKR Tumour",
+    "Category": "Medium",
+    "Group": "Security",
+    "Path": "/SharedMaps/_Mono/Shuttles/Nfsd/tumour.yml",
+    "Mass": 148.99536,
+    "Thrust": 3800,
+    "BestBank": 2000,
+    "Banks": [
+      1000,
+      400,
+      2000,
+      400
+    ],
+    "Thrusters": 19,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.5998114095708837,
+    "MaxGravityStrongestBank": 1.3683217945109916
+  },
+  {
+    "ID": "Twilight",
+    "Name": "SKR Twilight",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/twilight.yml",
+    "Mass": 111.031975,
+    "Thrust": 2200,
+    "BestBank": 800,
+    "Banks": [
+      600,
+      600,
+      800,
+      200
+    ],
+    "Thrusters": 13,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.019787166768062,
+    "MaxGravityStrongestBank": 0.7344680606429317
+  },
+  {
+    "ID": "twilightmk2",
+    "Name": "ZOB Twilight MkII",
+    "Category": "Medium",
+    "Group": "Expedition",
+    "Path": "/SharedMaps/_Mono/Shuttles/Expedition/twilightmk2.yml",
+    "Mass": 120.533356,
+    "Thrust": 4000,
+    "BestBank": 1600,
+    "Banks": [
+      800,
+      800,
+      1600,
+      800
+    ],
+    "Thrusters": 17,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.3828577438599026,
+    "MaxGravityStrongestBank": 1.353143097543961
+  },
+  {
+    "ID": "Tzipora",
+    "Name": "SKR Tzipora",
+    "Category": "Large",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/tzipora.yml",
+    "Mass": 281.3695,
+    "Thrust": 2600,
+    "BestBank": 1200,
+    "Banks": [
+      600,
+      400,
+      1200,
+      400
+    ],
+    "Thrusters": 13,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 0.9419488533039813,
+    "MaxGravityStrongestBank": 0.43474562460183747
+  },
+  {
+    "ID": "Valkyrie",
+    "Name": "PDW Valkyrie",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/valkyrie.yml",
+    "Mass": 170.63777,
+    "Thrust": 3600,
+    "BestBank": 1600,
+    "Banks": [
+      1200,
+      400,
+      1600,
+      400
+    ],
+    "Thrusters": 18,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.1505934885589526,
+    "MaxGravityStrongestBank": 0.9558193282484234
+  },
+  {
+    "ID": "Vaquita",
+    "Name": "DIS Vaquita",
+    "Category": "Small",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/vaquita.yml",
+    "Mass": 64.20238,
+    "Thrust": 1600,
+    "BestBank": 800,
+    "Banks": [
+      200,
+      200,
+      800,
+      400
+    ],
+    "Thrusters": 5,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.5403868002277945,
+    "MaxGravityStrongestBank": 1.2701934001138973
+  },
+  {
+    "ID": "Velios",
+    "Name": "WLV-Velios",
+    "Category": "Medium",
+    "Group": "Medical",
+    "Path": "/SharedMaps/_Mono/Shuttles/velios.yml",
+    "Mass": 120.87297,
+    "Thrust": 4600,
+    "BestBank": 2200,
+    "Banks": [
+      1200,
+      600,
+      2200,
+      600
+    ],
+    "Thrusters": 17,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.879355957322185,
+    "MaxGravityStrongestBank": 1.8553441535019146
+  },
+  {
+    "ID": "Venom",
+    "Name": "VG Venom",
+    "Category": "Medium",
+    "Group": "Viper",
+    "Path": "/SharedMaps/_Mono/Shuttles/Viper/venom.yml",
+    "Mass": 189.66995,
+    "Thrust": 6600,
+    "BestBank": 3400,
+    "Banks": [
+      1600,
+      800,
+      3400,
+      800
+    ],
+    "Thrusters": 15,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 3.54712422615041,
+    "MaxGravityStrongestBank": 1.8273064195320294
+  },
+  {
+    "ID": "Veska",
+    "Name": "RG Veska",
+    "Category": "Micro",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/veska.yml",
+    "Mass": 12.2514,
+    "Thrust": 335,
+    "BestBank": 134,
+    "Banks": [
+      67,
+      67,
+      134,
+      67
+    ],
+    "Thrusters": 5,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.7873408530298067,
+    "MaxGravityStrongestBank": 1.1149363412119226
+  },
+  {
+    "ID": "Victoria",
+    "Name": "NOV Victoria",
+    "Category": "Medium",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/victoria.yml",
+    "Mass": 107.23358,
+    "Thrust": 3000,
+    "BestBank": 1200,
+    "Banks": [
+      600,
+      600,
+      1200,
+      600
+    ],
+    "Thrusters": 15,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.8518156118029143,
+    "MaxGravityStrongestBank": 1.1407262447211657
+  },
+  {
+    "ID": "Vrikaash",
+    "Name": "VOX-Vrikaash",
+    "Category": "Medium",
+    "Group": "Scrap",
+    "Path": "/SharedMaps/_Mono/Shuttles/Scrap/vrikaash.yml",
+    "Mass": 321.69485,
+    "Thrust": 6400,
+    "BestBank": 3000,
+    "Banks": [
+      1000,
+      1200,
+      3000,
+      1200
+    ],
+    "Thrusters": 14,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.027994898832965,
+    "MaxGravityStrongestBank": 0.9506226088279524
+  },
+  {
+    "ID": "Welder",
+    "Name": "TSF-ENG Welder",
+    "Category": "Small",
+    "Group": "Security",
+    "Path": "/SharedMaps/_Mono/Shuttles/Nfsd/welder.yml",
+    "Mass": 180.68793,
+    "Thrust": 2000,
+    "BestBank": 800,
+    "Banks": [
+      400,
+      400,
+      800,
+      400
+    ],
+    "Thrusters": 10,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.128318855437722,
+    "MaxGravityStrongestBank": 0.45132754217508875
+  },
+  {
+    "ID": "Windreign",
+    "Name": "HES Windreign",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/windreign.yml",
+    "Mass": 741.1207,
+    "Thrust": 11200,
+    "BestBank": 4800,
+    "Banks": [
+      3200,
+      1600,
+      4800,
+      1600
+    ],
+    "Thrusters": 26,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.5404942148646807,
+    "MaxGravityStrongestBank": 0.6602118063705775
+  },
+  {
+    "ID": "Yukikaze",
+    "Name": "MMC-CSC Yukikaze",
+    "Category": "Small",
+    "Group": "Mieyo",
+    "Path": "/SharedMaps/_Mono/Shuttles/Mieyo/yukikaze.yml",
+    "Mass": 146.68518,
+    "Thrust": 3600,
+    "BestBank": 1800,
+    "Banks": [
+      1000,
+      400,
+      1800,
+      400
+    ],
+    "Thrusters": 12,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 2.5017692793792814,
+    "MaxGravityStrongestBank": 1.2508846396896407
+  },
+  {
+    "ID": "Zephyr",
+    "Name": "TSF-SKR Zephyr",
+    "Category": "Small",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/zephyr.yml",
+    "Mass": 27.823195,
+    "Thrust": 1200,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 6,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.396481389768742,
+    "MaxGravityStrongestBank": 1.465493796589581
+  },
+  {
+    "ID": "ZephyrEC",
+    "Name": "TSF-SKR Zephyr-EC",
+    "Category": "Small",
+    "Group": "Custom",
+    "Path": "/SharedMaps/_Mono/Shuttles/Carrier/zephyr_ec.yml",
+    "Mass": 26.922794,
+    "Thrust": 1200,
+    "BestBank": 400,
+    "Banks": [
+      400,
+      200,
+      400,
+      200
+    ],
+    "Thrusters": 6,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 4.5435165095200265,
+    "MaxGravityStrongestBank": 1.5145055031733423
+  },
+  {
+    "ID": "Zeros",
+    "Name": "JIN Zeros",
+    "Category": "Large",
+    "Group": "Shipyard",
+    "Path": "/SharedMaps/_Mono/Shuttles/zeros.yml",
+    "Mass": 390.80746,
+    "Thrust": 4400,
+    "BestBank": 2000,
+    "Banks": [
+      1200,
+      600,
+      2000,
+      600
+    ],
+    "Thrusters": 16,
+    "OnlineAtSpawn": 0,
+    "MaxGravityCombined": 1.1476800274278915,
+    "MaxGravityStrongestBank": 0.5216727397399508
+  }
+]

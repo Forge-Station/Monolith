@@ -1,0 +1,45 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               Title="{Loc 'wf-planet-control-title'}"
+               MinSize="620 380"
+               SetSize="680 420">
+    <BoxContainer Orientation="Horizontal" Margin="4" SeparationOverride="8">
+        <BoxContainer Orientation="Vertical" MinWidth="220" VerticalExpand="True">
+            <ItemList Name="PlanetList" VerticalExpand="True" SelectMode="Single" />
+            <Button Name="RefreshButton" Text="{Loc 'wf-planet-control-refresh'}" StyleClasses="ButtonSquare" Margin="0 4 0 0" />
+        </BoxContainer>
+
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" SeparationOverride="8">
+            <Label Name="PlanetLabel" StyleClasses="LabelHeading" />
+            <Label Name="StatusLabel" StyleClasses="LabelSubText" />
+
+            <!-- Clock -->
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                <Label Text="{Loc 'wf-planet-control-time'}" StyleClasses="LabelKeyText" MinWidth="80" VerticalAlignment="Center" />
+                <LineEdit Name="TimeEdit" PlaceHolder="HH:MM" MinWidth="70" />
+                <Button Name="TimeButton" Text="{Loc 'wf-planet-control-set'}" StyleClasses="ButtonSquare" />
+                <Button Name="DawnButton" Text="{Loc 'wf-planet-control-dawn'}" StyleClasses="ButtonSquare" />
+                <Button Name="NoonButton" Text="{Loc 'wf-planet-control-noon'}" StyleClasses="ButtonSquare" />
+                <Button Name="DuskButton" Text="{Loc 'wf-planet-control-dusk'}" StyleClasses="ButtonSquare" />
+                <Button Name="MidnightButton" Text="{Loc 'wf-planet-control-midnight'}" StyleClasses="ButtonSquare" />
+            </BoxContainer>
+
+            <!-- Weather -->
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                <Label Text="{Loc 'wf-planet-control-weather'}" StyleClasses="LabelKeyText" MinWidth="80" VerticalAlignment="Center" />
+                <OptionButton Name="WeatherOption" HorizontalExpand="True" />
+                <LineEdit Name="WeatherSecondsEdit" Text="600" MinWidth="60" ToolTip="{Loc 'wf-planet-control-weather-seconds'}" />
+                <Button Name="WeatherButton" Text="{Loc 'wf-planet-control-set'}" StyleClasses="ButtonSquare" />
+            </BoxContainer>
+
+            <!-- Gravity -->
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                <Label Text="{Loc 'wf-planet-control-gravity'}" StyleClasses="LabelKeyText" MinWidth="80" VerticalAlignment="Center" />
+                <LineEdit Name="GravityEdit" PlaceHolder="1.00" MinWidth="70" />
+                <Label Text="g" VerticalAlignment="Center" />
+                <Button Name="GravityButton" Text="{Loc 'wf-planet-control-set'}" StyleClasses="ButtonSquare" />
+            </BoxContainer>
+
+            <CheckBox Name="SanctionedCheck" Text="{Loc 'wf-planet-control-sanctioned'}" />
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

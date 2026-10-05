@@ -1,0 +1,240 @@
+# The first unsanctioned Kyphrus world. Static biomass avoids unbounded kudzu growth.
+- type: planetPalette
+  id: WFPaletteCarcinoma
+  color1: '#281013'
+  color2: '#772B36'
+  color3: '#C17A73'
+  color4: '#D8ACA0'
+
+- type: planetType
+  id: WFPlanetCarcinoma
+  name: Carcinoma
+  shader: RockyPlanet
+  earthMass: 1.0
+  rotation: 0.8
+  palette: WFPaletteCarcinoma
+  atmosphere: StandardAtmosphere
+  customData:
+    floats:
+      terrainScale: 1.0
+      macroFrequency: 3.75
+      macroAmplitude: 0.75
+      ridgeFrequency: 1.0
+      ridgeAmplitude: 3.0
+      detailFrequency: 7.5
+      detailAmplitude: 0.25
+      polarCapColor: 0.875
+      polarCapCoverage: 0.0
+
+- type: wfPlanetSurface
+  id: WFSurfaceCarcinoma
+  planetType: WFPlanetCarcinoma
+  ground: WFCarcinomaSurface
+  airLayers: 3
+  cloudLayer: false
+  orbitRange: 2000
+  buildAtRoundStart: true
+  sanctioned: false
+  gravity: 1
+  seed: 20260918
+  networkComponents:
+  - type: MapAtmosphere
+    space: false
+    mixture:
+      volume: 2500
+      immutable: true
+      temperature: 310.15
+      moles: [21.824879, 82.10312]
+  groundComponents:
+  - type: CEZLevelRoof
+  - type: CEZGroundLayer
+  airComponents:
+  - type: MapLight
+    ambientLightColor: "#b47c78"
+  - type: Gravity
+    enabled: true
+    inherent: true
+  orbitComponents:
+  - type: MapLight
+    ambientLightColor: "#2a3340"
+
+- type: planet
+  id: WFCarcinomaSurface
+  biome: WFBiomeCarcinoma
+  mapName: wf-planet-carcinoma-surface
+  mapLight: "#c88f87"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 310.15
+    moles: [21.824879, 82.10312]
+
+- type: biomeTemplate
+  id: WFBiomeCarcinoma
+  layers:
+  - !type:BiomeTileLayer
+    threshold: -1
+    tile: WFFloorFlesh
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFFaunaCarcinoma]
+    threshold: 0.97
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [FleshBlocker]
+    threshold: 0.98
+    noise: { seed: 2, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WallMeat]
+    threshold: 0.72
+    noise: { seed: 11, noiseType: OpenSimplex2, frequency: 0.025 }
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaGrove
+    threshold: 0.4
+    noise: { seed: 16, noiseType: OpenSimplex2, frequency: 0.018 }
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaTendonForest
+    threshold: 0.45
+    noise: { seed: 51, noiseType: OpenSimplex2, frequency: 0.012 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFCarcinomaAssimilationSack]
+    threshold: 0.985
+    noise: { seed: 57, noiseType: OpenSimplex2, frequency: 0.6 }
+  # One-shot nests stay sparse. The later river layer wins on overlapping cells, keeping them out of blood channels.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFFleshPustule]
+    threshold: 0.985
+    noise: { seed: 43, noiseType: OpenSimplex2, frequency: 0.35 }
+  # Rivers win over walls/trees/fauna; they are static water effects, not spreading reagent puddles.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFBloodRiver]
+    threshold: 0.94
+    noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.008, fractalType: Ridged, octaves: 1 }
+
+  # Broad seas override all terrestrial features, as on Asclepiu.
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaBloodOcean
+    threshold: 0.45
+    noise: { seed: 61, frequency: 0.002, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, lacunarity: 2 }
+
+- type: biomeTemplate
+  id: WFCarcinomaGrove
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFFleshTree]
+    threshold: 0.84
+    noise: { seed: 5, noiseType: OpenSimplex2, frequency: 1 }
+  # Independent placement keeps harvestable trees from being lost in the noise-based variant selection.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFFleshPustuleTree]
+    threshold: 0.98
+    noise: { seed: 73, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFFleshPolyp]
+    threshold: 0.96
+    noise: { seed: 74, noiseType: OpenSimplex2, frequency: 1 }
+
+- type: entity
+  id: WFFleshTreeBase
+  abstract: true
+  parent: BaseTree
+  name: flesh tree
+  description: Veined limbs reach from a trunk of living meat. Its swollen branches twitch in the wind.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _WF/Planets/Structures/flesh_trees.rsi
+    offset: 0,0.5
+    layers:
+    - state: tree01
+      map: ["tree"]
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [Destruction]
+    - trigger: !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/gib1.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeat:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [Destruction]
+
+- type: entity
+  id: WFFleshPolyp
+  parent: FleshBlocker
+  name: flesh polyp
+  description: A bulbous growth rooted in the living ground.
+  components:
+  - type: Sprite
+    color: "#b87989"
+
+- type: entity
+  id: WFBloodRiver
+  parent: FloorWaterEntity
+  name: blood river
+  description: A slow current of dark blood runs through the planet's flesh.
+  components:
+  - type: Sprite
+    color: "#b81e24"
+  - type: SolutionContainerManager
+    solutions:
+      pool:
+        maxVol: 9999999
+        reagents:
+        - ReagentId: Blood
+          Quantity: 9999999
+  - type: SolutionRegeneration
+    solution: pool
+    generated:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 100
+
+- type: entityTable
+  id: WFFaunaCarcinoma
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: WFCarcinomaAberrantFlesh
+      weight: 5
+    - !type:NestedSelector
+      tableId: WFCarcinomaNewbornFlesh
+      weight: 2
+    - id: MobLetoferolBeast
+      weight: 9
+    - id: MobLetoferolHorror
+      weight: 1
+
+- type: entity
+  id: WFFaunaCarcinoma
+  parent: MarkerBase
+  name: quarantined biothreat spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaCarcinoma
+
+# Exterior flesh terrain accepts weather without exposing indoor station flesh floors.
+- type: tile
+  id: WFFloorFlesh
+  parent: FloorFlesh
+  weather: true

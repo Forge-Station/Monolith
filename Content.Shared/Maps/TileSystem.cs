@@ -7,6 +7,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Shared.Tiles; // Frontier
+using Content.Shared._WF.Planets; // WOLFGATE(Planets)
 
 namespace Content.Shared.Maps;
 
@@ -187,7 +188,18 @@ public sealed partial class TileSystem : EntitySystem
         }
 
         var plating = _tileDefinitionManager[tileDef.BaseTurf];
-        _maps.SetTile(gridUid, mapGrid, tileRef.GridIndices, new Tile(plating.TileId));
+        // WOLFGATE(Planets) START: lattice laid on a planet's ground gives the ground back, not a hole through the world.
+        var restored = new Tile(plating.TileId);
+
+        if (plating.ID == ContentTileDefinition.SpaceID
+            && TryComp<WFPlanetBuiltTilesComponent>(gridUid, out var built)
+            && built.Underlay.Remove(tileRef.GridIndices, out var under))
+        {
+            restored = under;
+        }
+
+        _maps.SetTile(gridUid, mapGrid, tileRef.GridIndices, restored);
+        // WOLFGATE END
 
         return true;
     }

@@ -1,0 +1,120 @@
+# Thrascias: the Rime Galleries. Dug-snow tunnels and snowdrift chambers lit by rime thistles, crossed by long ice
+# galleries with ice columns, blue crystals and plasma lakes at their cores.
+# Layers run last to first and the first match wins. Walls only stand on dug snow, so any other floor is open ground.
+
+- type: biomeTemplate
+  id: WFCavernBiomeThrascias
+  layers:
+  # Substrate and tunnel floor.
+  - !type:BiomeTileLayer
+    tile: FloorSnowDug
+    threshold: -1
+  # Rime thistles along the tunnels, lowest priority.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WFCavernRimeThistle]
+    threshold: 0.945
+    noise: { seed: 32, noiseType: OpenSimplex2, frequency: 1 }
+  # Rock wherever ridged noise is at most the tunnel threshold; the tunnels are the ridges.
+  - !type:BiomeMetaLayer
+    template: WFCavernRockThrascias
+    invert: true
+    threshold: -0.6
+    noise: { seed: 7, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.045 }
+  # Snowdrift chambers on the web.
+  - !type:BiomeMetaLayer
+    template: WFCavernChamberThrascias
+    threshold: 0.35
+    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.025 }
+  # Ice galleries, highest priority.
+  - !type:BiomeMetaLayer
+    template: WFCavernSignatureThrascias
+    threshold: 0.65
+    noise: { seed: 55, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.018 }
+
+- type: biomeTemplate
+  id: WFCavernRockThrascias
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WallRockSnow]
+    threshold: -1
+  # Common.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WallRockSnowCoal, WallRockSnowTin]
+    threshold: 0.7
+    noise: { seed: 201, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Uncommon.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WallRockSnowQuartz, WallRockSnowPlasma]
+    threshold: 0.8
+    noise: { seed: 202, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WallRockSnowSilver, WallRockSnowUranium]
+    threshold: 0.88
+    noise: { seed: 203, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Very rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WallRockSnowDiamond, WallRockSnowBluespace]
+    threshold: 0.95
+    noise: { seed: 204, noiseType: OpenSimplex2, frequency: 0.2 }
+
+- type: biomeTemplate
+  id: WFCavernChamberThrascias
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorSnowdrift
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorSnowdrift]
+    entities: [WFCavernFaunaThrascias]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorSnowdrift]
+    entities: [WFCavernRimeThistle]
+    threshold: 0.96
+    noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
+  # Frozen caches.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorSnowdrift]
+    entities: [SalvageSpawnerTreasureValuable]
+    threshold: 0.997
+    noise: { seed: 311, noiseType: OpenSimplex2, frequency: 1 }
+
+# An ice gallery: an ice floor with columns and crystals around a plasma lake on the same noise.
+- type: biomeTemplate
+  id: WFCavernSignatureThrascias
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorIce
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorIce]
+    entities: [CrystalBlue, CrystalCyan]
+    threshold: 0.88
+    noise: { seed: 312, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorIce]
+    entities: [WallIce]
+    threshold: 0.9
+    noise: { seed: 313, noiseType: OpenSimplex2, frequency: 0.4 }
+  - !type:BiomeMetaLayer
+    template: WFCavernLakeThrascias
+    threshold: 0.8
+    noise: { seed: 55, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.018 }
+
+# The plasma pools in stretches down the middle of the hall, with ice to walk on either side and between them.
+- type: biomeTemplate
+  id: WFCavernLakeThrascias
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorIce]
+    entities: [FloorLiquidPlasmaEntity]
+    threshold: 0.25
+    noise: { seed: 59, noiseType: OpenSimplex2, frequency: 0.05 }

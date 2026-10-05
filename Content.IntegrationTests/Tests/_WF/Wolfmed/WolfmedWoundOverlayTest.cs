@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Content.IntegrationTests.Fixtures;
+using Content.Server.Atmos.Components;
 using Content.Server._WF.Wolfmed.Damage;
 using Content.Server._WF.Wolfmed.Gore;
 using Content.Server._WF.Wolfmed.Wounds;
@@ -201,6 +202,9 @@ public sealed class WolfmedWoundOverlayTest : GameTest
         await Server.WaitAssertion(() =>
         {
             body = SEntMan.SpawnEntity("MobHuman", map.GridCoords);
+
+            // The test map is a vacuum: a pressure tick part-way through bruises and burns the head, and no clamp takes on those.
+            SEntMan.RemoveComponent<BarotraumaComponent>(body);
             head = Part(body, BodyPartType.Head);
             Assert.That(SEntMan.System<WoundSystem>().CreateOrMergeWound(head, "WFWolfmedArterialBleedWound", FixedPoint2.New(10)),
                 Is.Not.Null);

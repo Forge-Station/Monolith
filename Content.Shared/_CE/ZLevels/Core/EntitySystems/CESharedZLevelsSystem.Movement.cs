@@ -247,6 +247,9 @@ public abstract partial class CESharedZLevelsSystem
             if (_map.TryGetTileRef(gridUid, grid, gridTile, out var tileRef) &&
                 !tileRef.Tile.IsEmpty)
                 return -floor; // tile ground has groundY == 0 -> -floor
+
+            if (WfUnloadedGround(gridUid, gridTile)) // WOLFGATE(Planets): planet terrain that isn't loaded is still ground
+                return -floor;
         }
 
         return -maxFloors;

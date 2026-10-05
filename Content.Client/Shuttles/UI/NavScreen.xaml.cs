@@ -97,6 +97,7 @@ public sealed partial class NavScreen : BoxContainer
     {
         _consoleEntity = console;
         NavRadar.SetConsole(console);
+        WfOrbitButton.SetConsole(console); // WOLFGATE(Planets): the orbit button reads its state off the console entity.
     }
 
     private void OnIFFTogglePressed(BaseButton.ButtonEventArgs args)

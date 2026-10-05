@@ -1,0 +1,10 @@
+# Supplied by the maintainer, 2026-09-18. Converted to stereo 44.1 kHz Vorbis.
+# Ambience beds loudness-normalized to -20 LUFS, true peak limited to -2 dB.
+- files:
+  - fervidus_ambience_loop_1.ogg
+  - fervidus_ambience_loop_2.ogg
+  - fervidus_ambience_loop_3.ogg
+  - fervidus_ambience_loop_4.ogg
+  license: CC0-1.0
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Worlds/fervidus

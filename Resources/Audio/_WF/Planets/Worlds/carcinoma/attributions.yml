@@ -1,0 +1,24 @@
+# Supplied by the maintainer, 2026-09-18. Converted to stereo 44.1 kHz Vorbis.
+# Ambience beds loudness-normalized to -20 LUFS, true peak limited to -2 dB.
+- files:
+  - carcinoma_ambience_day_loop_2.ogg
+  - carcinoma_ambience_night_loop_1.ogg
+  - carcinoma_ambience_night_loop_2.ogg
+  - carcinoma_random_sound_1.ogg
+  - carcinoma_random_sound_2.ogg
+  - carcinoma_random_sound_3.ogg
+  license: CC0-1.0
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Worlds/carcinoma
+
+# Original tendril loop supplied by the maintainer; converted to mono 44.1 kHz Vorbis.
+- files: [anchoring_tendril_loop.ogg]
+  license: CC0-1.0
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Worlds/carcinoma
+
+# Original clips supplied by the maintainer; trailing silence trimmed and loudness normalized to -20 LUFS.
+- files: [carcinoma_random_sound_night_1.ogg, carcinoma_random_sound_night_2.ogg, carcinoma_random_sound_night_3.ogg, tendril_deploy_1.ogg, tendril_deploy_2.ogg, tendril_deploy_3.ogg]
+  license: CC0-1.0
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Worlds/carcinoma

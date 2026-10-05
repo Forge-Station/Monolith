@@ -1,0 +1,245 @@
+# Each world alternates phased storms with 3-7 minutes of clear skies. A storm telegraphs with a light overlay, runs,
+# and winds down through a light overlay again, after /tg/station's weather; thunder drops real bolts on open ground.
+- type: wfPlanetWeather
+  id: WFPlanetWeatherAsclepiu
+  planetType: PlanetAsclepiu
+  storms:
+  - main: WFRainLow
+  - telegraph: WFRainLow
+    main: WFRainMed
+    end: WFRainEnd
+  - telegraph: WFRainLow
+    main: WFRainHigh
+    end: WFRainEnd
+    thunder: true
+  initialHour: 8
+
+- type: wfPlanetWeather
+  id: WFPlanetWeatherFervidus
+  planetType: PlanetFervidus
+  storms:
+  - main: WFAshLight
+  - telegraph: WFAshLight
+    main: WFAshStorm
+    end: WFAshLight
+  initialHour: 12
+
+- type: wfPlanetWeather
+  id: WFPlanetWeatherMerak
+  planetType: PlanetMerak
+  storms:
+  - telegraph: WFDustLow
+    main: WFDustMed
+    end: WFDustLow
+  - telegraph: WFDustLow
+    main: WFDustHigh
+    end: WFDustLow
+  initialHour: 15
+  clearMinSeconds: 300
+  clearMaxSeconds: 600
+
+- type: wfPlanetWeather
+  id: WFPlanetWeatherAerumna
+  planetType: PlanetAerumna
+  storms:
+  - main: WFRainLow
+  - telegraph: WFRainLow
+    main: WFRainMed
+    end: WFRainEnd
+  initialHour: 18
+
+- type: wfPlanetWeather
+  id: WFPlanetWeatherThrascias
+  planetType: PlanetThrascias
+  storms:
+  - main: WFSnowLight
+  - telegraph: WFSnowLight
+    main: WFSnowStorm
+    end: WFSnowLight
+  initialHour: 6
+
+- type: wfPlanetWeather
+  id: WFPlanetWeatherCarcinoma
+  planetType: WFPlanetCarcinoma
+  storms:
+  - main: WFBloodRain
+  - telegraph: WFBloodRain
+    main: WFBloodStorm
+    end: WFBloodRain
+    thunder: true
+  initialHour: 21
+
+# Overlays and rain loops from /tg/station (weather_effects.dmi, sound/ambience/weather/rain).
+- type: weather
+  id: WFRainLow
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: rain_low
+  sound:
+    path: /Audio/_WF/Planets/Weather/rain_start.ogg
+    params:
+      loop: true
+      volume: -8
+
+- type: weather
+  id: WFRainEnd
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: rain_low
+  sound:
+    path: /Audio/_WF/Planets/Weather/rain_end.ogg
+    params:
+      loop: true
+      volume: -8
+
+- type: weather
+  id: WFRainMed
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: rain_med
+  sound:
+    path: /Audio/_WF/Planets/Weather/rain_mid.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: WFRainHigh
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: rain_high
+  sound:
+    path: /Audio/_WF/Planets/Weather/rain_mid.ogg
+    params:
+      loop: true
+      volume: -2
+
+- type: weather
+  id: WFSnowLight
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: light_snow
+  sound:
+    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    params:
+      loop: true
+      volume: -8
+
+- type: weather
+  id: WFSnowStorm
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: snow_storm
+  sound:
+    path: /Audio/Effects/Weather/snowstorm.ogg
+    params:
+      loop: true
+      volume: -4
+
+- type: weather
+  id: WFAshLight
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: light_ash
+  sound:
+    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    params:
+      loop: true
+      volume: -10
+
+- type: weather
+  id: WFAshStorm
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: ash_storm
+  sound:
+    path: /Audio/Effects/Weather/snowstorm.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: WFDustLow
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: dust_low
+  sound:
+    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    params:
+      loop: true
+      volume: -10
+
+- type: weather
+  id: WFDustMed
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: dust_med
+  sound:
+    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: WFDustHigh
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: dust_high
+  sound:
+    path: /Audio/Effects/Weather/snowstorm.ogg
+    params:
+      loop: true
+      volume: -4
+
+# Tinted red; these create no reagent puddles or biomass.
+- type: weather
+  id: WFBloodRain
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: rain_low
+  color: "#b83c46"
+  sound:
+    path: /Audio/_WF/Planets/Weather/rain_start.ogg
+    params:
+      loop: true
+      volume: -8
+
+- type: weather
+  id: WFBloodStorm
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: rain_high
+  color: "#b83c46"
+  sound:
+    path: /Audio/_WF/Planets/Weather/rain_mid.ogg
+    params:
+      loop: true
+      volume: -2
+
+# A thunderbolt: one flash, one crack, gone.
+- type: entity
+  id: WFThunderbolt
+  categories: [ HideSpawnMenu ]
+  name: thunderbolt
+  components:
+  - type: Sprite
+    sprite: /Textures/_WF/Planets/Effects/thunderbolt.rsi
+    state: thunderbolt
+    offset: 0, 1
+    drawdepth: Effects
+    noRot: true
+    shader: unshaded
+  - type: PointLight
+    radius: 14
+    energy: 10
+    color: "#cfe4ff"
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 0.6
+
+# The thunder is played by the strike itself, at the spot: it outlasts the bolt by seconds.
+- type: soundCollection
+  id: WFThunder
+  files:
+  - /Audio/_WF/Planets/Weather/thunder_1.ogg
+  - /Audio/_WF/Planets/Weather/thunder_2.ogg

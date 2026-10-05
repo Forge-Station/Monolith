@@ -1,0 +1,321 @@
+# Planet-specific open terrain. Existing art, ore tables and biome layers; no upstream recipe changes.
+# Entity layers resolve from bottom to top: hazards/scenery win over wildlife, so animals spawn in clearings.
+# Low-frequency rock masks form occasional outcrops instead of a continuous wall field.
+
+- type: biomeTemplate
+  id: WFOpenBasalt
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorBasalt
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WFFaunaFervidus]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [BasaltOne, BasaltTwo, BasaltThree]
+    threshold: 0.97
+    noise: { seed: 2, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [MonoPlanetmapOreBasalt]
+    threshold: 0.65
+    noise: { seed: 11, noiseType: OpenSimplex2, frequency: 0.022 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [FloorLavaEntity]
+    threshold: 0.94
+    noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.008, fractalType: Ridged, octaves: 1 }
+
+- type: biomeTemplate
+  id: WFShadowClearings
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorChromite
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorChromite]
+    entities: [WFFaunaAerumna]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeMetaLayer
+    template: WFShadowGrove
+    threshold: 0.35
+    noise: { seed: 16, noiseType: OpenSimplex2, frequency: 0.018 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorChromite]
+    entities: [CrystalPink]
+    threshold: 0.985
+    noise: { seed: 2, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorChromite]
+    entities: [MonoPlanetmapOreChromite]
+    threshold: 0.72
+    noise: { seed: 19, noiseType: OpenSimplex2, frequency: 0.025 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorChromite]
+    entities: [MonoFloorWaterEntity]
+    threshold: 0.965
+    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.006, fractalType: Ridged, octaves: 1 }
+
+- type: biomeTemplate
+  id: WFShadowGrove
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorChromite]
+    entities: [ShadowTree, ShadowBasaltOne, ShadowBasaltTwo]
+    threshold: 0.65
+    noise: { seed: 5, noiseType: OpenSimplex2, frequency: 1 }
+
+- type: biomeTemplate
+  id: WFOpenSnow
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorSnow
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: FloorIce
+    threshold: 0.4
+    noise: { seed: 4, noiseType: OpenSimplex2, frequency: 0.018 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnow, FloorIce]
+    entities: [WFFaunaThrascias]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnow]
+    entities: [MonoPlanetmapOreSnow]
+    threshold: 0.72
+    noise: { seed: 23, noiseType: OpenSimplex2, frequency: 0.012 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnow, FloorIce]
+    entities: [FloorLiquidPlasmaEntity]
+    threshold: 0.95
+    noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.004, fractalType: Ridged, octaves: 1 }
+
+- type: biomeTemplate
+  id: WFTemperatePlains
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorPlanetGrass
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: FloorPlanetDirt
+    threshold: 0.65
+    noise: { seed: 6, noiseType: OpenSimplex2, frequency: 0.025 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt]
+    entities: [WFFaunaAsclepiu]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeMetaLayer
+    template: WFTemperateWoodland
+    threshold: 0.35
+    noise: { seed: 17, noiseType: OpenSimplex2, frequency: 0.012 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt]
+    entities: [MonoPlanetmapOreBase]
+    threshold: 0.72
+    noise: { seed: 11, noiseType: OpenSimplex2, frequency: 0.02 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt]
+    entities: [MonoFloorWaterEntity]
+    threshold: 0.95
+    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.006, fractalType: Ridged, octaves: 1 }
+
+- type: biomeTemplate
+  id: WFTemperateWoodland
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass]
+    entities: [FloraTree, FloraTreeLarge]
+    threshold: 0.65
+    noise: { seed: 9, noiseType: OpenSimplex2, frequency: 2 }
+
+- type: biomeTemplate
+  id: WFTemperateSnow
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorSnow
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnow]
+    entities: [WFFaunaAsclepiu]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnow]
+    entities: [FloraTreeSnow]
+    threshold: 0.9
+    noise: { seed: 9, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnow]
+    entities: [MonoPlanetmapOreSnow]
+    threshold: 0.75
+    noise: { seed: 23, noiseType: OpenSimplex2, frequency: 0.018 }
+
+- type: biomeTemplate
+  id: WFCoastalOcean
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorRiverbed
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorRiverbed]
+    entities: [MonoFloorWaterEntity]
+    threshold: -1
+    noise: { seed: 0, noiseType: OpenSimplex2, frequency: 0.01 }
+
+
+
+# Based on MonoDesertPermanentPlanet: native plants, fauna and richer, isolated ore outcrops.
+- type: biomeTemplate
+  id: WFOpenDesert
+  layers:
+  # Boulder Placement
+  - !type:BiomeEntityLayer
+    threshold: 0.975
+    noise:
+      seed: 0
+      frequency: 5
+      noiseType: OpenSimplex2
+    allowedTiles:
+    - FloorDesert
+    - FloorDesertRocky
+    - FloorDesertPlanet
+    - FloorAsteroidSandUnvariantizedPlanet
+    entities:
+    - FloraRockSolidPlanet
+  # Fauna Placement
+  - !type:BiomeEntityLayer
+    threshold: 0.95
+    noise:
+      seed: 0
+      frequency: 3
+      noiseType: OpenSimplex2
+    allowedTiles:
+    - FloorDesert
+    - FloorDesertRocky
+    - FloorDesertPlanet
+    - FloorAsteroidSandUnvariantizedPlanet
+    entities:
+    - WFFaunaMerak
+  # Flora Placement
+  # Piluma
+  - !type:BiomeEntityLayer
+    threshold: 0.915
+    noise:
+      seed: 0
+      frequency: 2
+      noiseType: OpenSimplex2
+    allowedTiles:
+    - FloorDesert
+    - FloorDesertPlanet
+    - FloorAsteroidSandUnvariantizedPlanet
+    entities:
+    - FloraPilumaPlant
+  # Orakim
+  - !type:BiomeEntityLayer
+    threshold: 0.925
+    noise:
+      seed: 0
+      frequency: 2
+      noiseType: OpenSimplex2
+    allowedTiles:
+    - FloorDesert
+    - FloorDesertPlanet
+    entities:
+    - FloraOrakimPlant
+  # Rock decals
+  - !type:BiomeDecalLayer
+    allowedTiles:
+    - FloorDesert
+    - FloorDesertRocky
+    - FloorDesertPlanet
+    - FloorAsteroidSandUnvariantizedPlanet
+    - FloorAsteroidSandPlanet
+    threshold: 0.9
+    divisions: 1
+    noise:
+      seed: 1
+      frequency: 5
+    decals:
+    - Basalt1
+    - Basalt2
+    - Basalt3
+    - Basalt4
+    - Basalt5
+    - Basalt6
+    - Basalt7
+    - Basalt8
+    - Basalt9
+  # Bush decals
+  - !type:BiomeDecalLayer
+    allowedTiles:
+    - FloorDesert
+    - FloorDesertPlanet
+    threshold: 0.9
+    divisions: 1
+    noise:
+      seed: 1
+      frequency: 0.9
+    decals:
+    - Bushj1
+    - Bushj2
+    - Bushj3
+  # Large rock areas
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorAsteroidSandUnvariantizedPlanet
+    threshold: 0.15
+    noise:
+      seed: 0
+      noiseType: Cellular
+      frequency: 0.05
+      lacunarity: 5
+      fractalType: FBm
+      octaves: 2
+      cellularDistanceFunction: Euclidean
+      cellularReturnType: Distance2
+    entities:
+    - MonoPlanetmapOreSandRich
+  - !type:BiomeDummyLayer
+    id: Loot
+  # Fill layer
+  # Base tiles
+  - !type:BiomeTileLayer
+    threshold: -1
+    tile: FloorAsteroidSandPlanet
+  # Apply planet desert tile as noise so it doesnt look flat and boring
+  - !type:BiomeTileLayer
+    threshold: -0.40
+    tile: FloorDesertPlanet
+    noise:
+      seed: 0
+      noiseType: Cellular
+      frequency: 0.2
+      lacunarity: 2
+      fractalType: FBm
+      octaves: 2
+      cellularDistanceFunction: Euclidean
+      cellularReturnType: Distance2
+  # Unvariantized tile for rock walls to be placed on
+  - !type:BiomeTileLayer
+    tile: FloorAsteroidSandUnvariantizedPlanet
+    threshold: -0.30
+    noise:
+      seed: 0
+      noiseType: Cellular
+      frequency: 0.05
+      lacunarity: 2
+      fractalType: FBm
+      octaves: 5
+      cellularDistanceFunction: Euclidean
+      cellularReturnType: Distance2
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorDesert, FloorDesertRocky, FloorDesertPlanet, FloorAsteroidSandUnvariantizedPlanet, FloorAsteroidSandPlanet]
+    entities: [MonoFloorWaterEntity]
+    threshold: 0.98
+    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.004, fractalType: Ridged, octaves: 1 }

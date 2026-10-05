@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Generated with PixelLab and supplied by Gandalf; dedicated to the public domain under CC0. Frames exported from the supplied Aseprite file without resizing.",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "tree01"
+    },
+    {
+      "name": "tree02"
+    },
+    {
+      "name": "tree03"
+    },
+    {
+      "name": "tree04"
+    },
+    {
+      "name": "tree05"
+    },
+    {
+      "name": "tree06"
+    },
+    {
+      "name": "tree07"
+    },
+    {
+      "name": "tree08"
+    },
+    {
+      "name": "tree09"
+    },
+    {
+      "name": "tree10"
+    },
+    {
+      "name": "tree11"
+    },
+    {
+      "name": "tree12"
+    },
+    {
+      "name": "pustules"
+    },
+    {
+      "name": "harvested"
+    }
+  ]
+}

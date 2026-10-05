@@ -116,6 +116,9 @@ public sealed partial class BiomeSystem
 
             if (TryGetEntity(indices, component, (gridUid, grid), out var entPrototype))
             {
+                if (WfLayRoll(component, gridUid, grid, indices, entPrototype, loadedEntities)) // WOLFGATE(Planets): a planet's rock spawner is rolled here from its tile, so the rock unloads and comes back the same
+                    return;
+
                 var ent = Spawn(entPrototype, _mapSystem.GridTileToLocal(gridUid, grid, indices));
 
                 if (_xformQuery.TryGetComponent(ent, out var xform) && !xform.Anchored)

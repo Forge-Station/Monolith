@@ -1,0 +1,32 @@
+# Asclepiu: temperate continents, seas and polar snow.
+
+- type: biomeTemplate
+  id: WFBiomeAsclepiu
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFTemperatePlains
+    threshold: -1
+    noise:
+      frequency: 0.001
+      noiseType: OpenSimplex2
+      fractalType: FBm
+      octaves: 2
+      lacunarity: 2
+  - !type:BiomeMetaLayer
+    template: WFCoastalOcean
+    threshold: 0.45
+    noise:
+      frequency: 0.002
+      noiseType: OpenSimplex2
+      fractalType: FBm
+      octaves: 2
+      lacunarity: 2
+  - !type:BiomeMetaLayer
+    template: WFTemperateSnow
+    threshold: 0.5
+    noise:
+      frequency: 0.001
+      noiseType: OpenSimplex2
+      fractalType: FBm
+      octaves: 2
+      lacunarity: 2

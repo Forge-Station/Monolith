@@ -1,0 +1,190 @@
+# Static forest terrain: deliberately no Kudzu, spreader or contact-damage components.
+- type: entity
+  id: WFCarcinomaTendons
+  name: dormant tendons
+  description: Dense, rooted strands of meat. These mature tendons no longer spread.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: Objects/Misc/fleshkudzu.rsi
+    state: kudzu_11
+    drawdepth: Overdoors
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        density: 7
+        shape: !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer: [MidImpassable]
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [Destruction]
+
+- type: biomeTemplate
+  id: WFCarcinomaTendonForest
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFCarcinomaTendons]
+    threshold: 0.1
+    noise: { seed: 53, noiseType: OpenSimplex2, frequency: 0.6 }
+
+- type: biomeTemplate
+  id: WFCarcinomaBloodOcean
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFBloodOceanSeabed
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFBloodOceanSeabed]
+    entities: [WFBloodOcean]
+    threshold: -1
+    noise: { seed: 0, noiseType: OpenSimplex2, frequency: 0.01 }
+
+- type: entity
+  id: WFBloodOcean
+  parent: MonoFloorWaterEntity
+  name: blood ocean
+  description: A vast sea of dark blood laps against the living shore.
+  components:
+  - type: Sprite
+    color: "#b81e24"
+  - type: SolutionContainerManager
+    solutions:
+      pool:
+        maxVol: 9999999
+        reagents:
+        - ReagentId: Blood
+          Quantity: 9999999
+  - type: SolutionRegeneration
+    solution: pool
+    generated:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 100
+
+- type: entityTable
+  id: WFCarcinomaAberrantFlesh
+  table: !type:GroupSelector
+    children:
+    - id: MobFleshJaredExpeditions
+    - id: MobFleshJaredOldExpeditions
+    - id: MobFleshGolemExpeditions
+    - id: MobFleshGolemAltExpeditions
+    - id: MobFleshGolemOldExpeditions
+    - id: MobFleshClampExpeditions
+    - id: MobFleshClampOldExpeditions
+    - id: MobFleshLoverExpeditions
+    - id: MobFleshAssimilatedMiner
+      weight: 0.4
+
+- type: entityTable
+  id: WFCarcinomaNewbornFlesh
+  table: !type:GroupSelector
+    children:
+    - id: MobFleshJaredExpeditionsNewborn
+    - id: MobFleshJaredOldExpeditionsNewborn
+    - id: MobFleshGolemExpeditionsNewborn
+    - id: MobFleshGolemAltExpeditionsNewborn
+    - id: MobFleshGolemOldExpeditionsNewborn
+    - id: MobFleshClampExpeditionsNewborn
+    - id: MobFleshClampOldExpeditionsNewborn
+    - id: MobFleshLoverExpeditionsNewborn
+    - id: MobFleshAssimilatedMiner
+      weight: 0.4
+
+- type: entity
+  parent: XenoWardingTower
+  id: WFCarcinomaAssimilationSack
+  name: assimilation sack
+  description: A swollen incubator. Newborn aberrant flesh pushes against its translucent membrane.
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCarcinomaNewbornFlesh
+    keepEntity: true
+    spawnDelay: 240
+  # Its spawn clock would start again on a fresh copy, so it stays when its chunk unloads.
+  - type: WFBiomeKeep
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 500
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Sprite
+    sprite: _NF/Structures/Specific/AberrantFlesh/digestivesack.rsi
+    drawdepth: Mobs
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: unshaded
+      shader: unshaded
+  - type: AmbientSound
+    volume: -9
+    range: 5
+    sound:
+      collection: blood #eating
+      params:
+        variation: 0.250
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection:
+          MeatBulletImpact
+    soundTypes:
+      Heat:
+        collection:
+          MeatLaserImpact
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeat:
+            min: 1
+            max: 2
+
+# Preserve the riverbed's indestructible terrain using the visually verified rust-red iron-sand artwork.
+- type: tile
+  id: WFBloodOceanSeabed
+  parent: FloorAsteroidIronsand
+  indestructible: true
+  footstepSounds:
+    collection: FootstepWater
+  barestepSounds:
+    collection: FootstepWater

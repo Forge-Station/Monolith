@@ -1,0 +1,21 @@
+# Original sounds supplied by Gandalf; trimmed trailing silence, normalized and converted to mono Vorbis.
+- files:
+  - pustule_pop.ogg
+  - bite01.ogg
+  - bite02.ogg
+  - bite03.ogg
+  - bite04.ogg
+  - bite05.ogg
+  - break01.ogg
+  - break02.ogg
+  - die01.ogg
+  - die02.ogg
+  - die03.ogg
+  - die04.ogg
+  - hunt01.ogg
+  - hunt02.ogg
+  - hunt03.ogg
+  - hunt04.ogg
+  license: CC0-1.0
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Chimera/FleshTick

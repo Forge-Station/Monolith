@@ -1,0 +1,219 @@
+# Remaining Kyphrus worlds, on existing art and biome templates; gravity and temperature are gameplay tuning.
+# Thrascias deliberately has a solid frozen surface despite its ice-giant sector sprite.
+# No biome marker layers: ore comes from the Mono ore spawners each biome lays (see planet_surfaces.yml).
+
+- type: wfPlanetSurface
+  id: WFSurfaceFervidus
+  planetType: PlanetFervidus
+  ground: WFFervidusSurface
+  airLayers: 3
+  cloudLayer: false
+  orbitRange: 2000
+  buildAtRoundStart: true
+  sanctioned: true
+  gravity: 0.9
+  seed: 20260914
+  networkComponents:
+  - type: MapAtmosphere
+    space: false
+    mixture:
+      volume: 2500
+      immutable: true
+      temperature: 373.15
+      moles: [0, 75, 25]
+  groundComponents:
+  - type: CEZLevelRoof
+  - type: CEZGroundLayer
+  airComponents:
+  - type: MapLight
+    ambientLightColor: "#a87866"
+  - type: Gravity
+    enabled: true
+    inherent: true
+  orbitComponents:
+  - type: MapLight
+    ambientLightColor: "#2a3340"
+
+- type: planet
+  id: WFFervidusSurface
+  biome: WFBiomeFervidus
+  mapName: wf-planet-fervidus-surface
+  mapLight: "#c48b71"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 373.15
+    moles: [0, 75, 25]
+
+- type: biomeTemplate
+  id: WFBiomeFervidus
+  layers:
+  # A guaranteed floor below the borrowed template prevents incidental noise gaps.
+  - !type:BiomeTileLayer
+    threshold: -1
+    tile: FloorBasalt
+  - !type:BiomeMetaLayer
+    threshold: -1
+    template: WFOpenBasalt
+
+- type: wfPlanetSurface
+  id: WFSurfaceMerak
+  planetType: PlanetMerak
+  ground: WFMerakSurface
+  airLayers: 3
+  cloudLayer: false
+  orbitRange: 2000
+  buildAtRoundStart: true
+  sanctioned: true
+  gravity: 1.15
+  seed: 20260915
+  networkComponents:
+  - type: MapAtmosphere
+    space: false
+    mixture:
+      volume: 2500
+      immutable: true
+      temperature: 318.15
+      moles: [21.824879, 82.10312]
+  groundComponents:
+  - type: CEZLevelRoof
+  - type: CEZGroundLayer
+  airComponents:
+  - type: MapLight
+    ambientLightColor: "#c4ab80"
+  - type: Gravity
+    enabled: true
+    inherent: true
+  orbitComponents:
+  - type: MapLight
+    ambientLightColor: "#2a3340"
+
+- type: planet
+  id: WFMerakSurface
+  biome: WFBiomeMerak
+  mapName: wf-planet-merak-surface
+  mapLight: "#dfc396"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 318.15
+    moles: [21.824879, 82.10312]
+
+- type: biomeTemplate
+  id: WFBiomeMerak
+  layers:
+  # A guaranteed floor below the borrowed template prevents incidental noise gaps.
+  - !type:BiomeTileLayer
+    threshold: -1
+    tile: FloorAsteroidSandPlanet
+  - !type:BiomeMetaLayer
+    threshold: -1
+    template: WFOpenDesert
+
+- type: wfPlanetSurface
+  id: WFSurfaceAerumna
+  planetType: PlanetAerumna
+  ground: WFAerumnaSurface
+  airLayers: 3
+  cloudLayer: false
+  orbitRange: 2000
+  buildAtRoundStart: true
+  sanctioned: true
+  gravity: 3
+  seed: 20260916
+  networkComponents:
+  - type: MapAtmosphere
+    space: false
+    mixture:
+      volume: 2500
+      immutable: true
+      temperature: 285.15
+      moles: [5, 70, 25]
+  groundComponents:
+  - type: CEZLevelRoof
+  - type: CEZGroundLayer
+  airComponents:
+  - type: MapLight
+    ambientLightColor: "#998374"
+  - type: Gravity
+    enabled: true
+    inherent: true
+  orbitComponents:
+  - type: MapLight
+    ambientLightColor: "#2a3340"
+
+- type: planet
+  id: WFAerumnaSurface
+  biome: WFBiomeAerumna
+  mapName: wf-planet-aerumna-surface
+  mapLight: "#9f897e"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 285.15
+    moles: [5, 70, 25]
+
+- type: biomeTemplate
+  id: WFBiomeAerumna
+  layers:
+  # A guaranteed floor below the borrowed template prevents incidental noise gaps.
+  - !type:BiomeTileLayer
+    threshold: -1
+    tile: FloorChromite
+  - !type:BiomeMetaLayer
+    threshold: -1
+    template: WFShadowClearings
+
+- type: wfPlanetSurface
+  id: WFSurfaceThrascias
+  planetType: PlanetThrascias
+  ground: WFThrasciasSurface
+  airLayers: 3
+  cloudLayer: false
+  orbitRange: 2000
+  buildAtRoundStart: true
+  sanctioned: true
+  gravity: 1.25
+  seed: 20260917
+  networkComponents:
+  - type: MapAtmosphere
+    space: false
+    mixture:
+      volume: 2500
+      immutable: true
+      temperature: 180
+      moles: [0, 100]
+  groundComponents:
+  - type: CEZLevelRoof
+  - type: CEZGroundLayer
+  airComponents:
+  - type: MapLight
+    ambientLightColor: "#92afc7"
+  - type: Gravity
+    enabled: true
+    inherent: true
+  orbitComponents:
+  - type: MapLight
+    ambientLightColor: "#2a3340"
+
+- type: planet
+  id: WFThrasciasSurface
+  biome: WFBiomeThrascias
+  mapName: wf-planet-thrascias-surface
+  mapLight: "#b9d5e8"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 180
+    moles: [0, 100]
+
+- type: biomeTemplate
+  id: WFBiomeThrascias
+  layers:
+  # A guaranteed floor below the borrowed template prevents incidental noise gaps.
+  - !type:BiomeTileLayer
+    threshold: -1
+    tile: FloorIce
+  - !type:BiomeMetaLayer
+    threshold: -1
+    template: WFOpenSnow

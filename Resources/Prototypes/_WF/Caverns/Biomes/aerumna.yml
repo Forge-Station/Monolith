@@ -1,0 +1,117 @@
+# Aerumna: the Umbral Deeps. Tight chromite crawls opening into vast bedrock galleries, lit only by pink geodes and
+# faint shadow blooms, with shadow groves in the dark.
+# Layers run last to first and the first match wins. Walls only stand on chromite, so any other floor is open ground.
+
+- type: biomeTemplate
+  id: WFCavernBiomeAerumna
+  layers:
+  # Substrate and crawl floor.
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorChromite
+    threshold: -1
+  # Shadow blooms along the crawls, lowest priority: dim, but close enough to find your way from one to the next.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorChromite]
+    entities: [WFCavernShadowBloom]
+    threshold: 0.92
+    noise: { seed: 32, noiseType: OpenSimplex2, frequency: 1 }
+  # Rock wherever ridged noise is at most the crawl threshold; the crawls are the ridges.
+  - !type:BiomeMetaLayer
+    template: WFCavernRockAerumna
+    invert: true
+    threshold: -0.58
+    noise: { seed: 7, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.05 }
+  # Cathedral galleries on the web.
+  - !type:BiomeMetaLayer
+    template: WFCavernChamberAerumna
+    threshold: 0.34
+    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.012 }
+
+- type: biomeTemplate
+  id: WFCavernRockAerumna
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorChromite]
+    entities: [WallRockChromite]
+    threshold: -1
+  # Common.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorChromite]
+    entities: [WallRockChromiteTin, WallRockChromitePlasma]
+    threshold: 0.7
+    noise: { seed: 201, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Uncommon.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorChromite]
+    entities: [WallRockChromiteQuartz, WallRockChromiteUranium]
+    threshold: 0.8
+    noise: { seed: 202, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorChromite]
+    entities: [WallRockChromiteSilver, WallRockChromiteGold]
+    threshold: 0.88
+    noise: { seed: 203, noiseType: OpenSimplex2, frequency: 0.09 }
+  # Very rare: diamonds, bluespace and the only anomaly rock.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorChromite]
+    entities: [WallRockChromiteDiamond, WallRockChromiteBluespace, WallRockChromiteArtifactAnomaly]
+    threshold: 0.95
+    noise: { seed: 204, noiseType: OpenSimplex2, frequency: 0.2 }
+
+- type: biomeTemplate
+  id: WFCavernChamberAerumna
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorBedrock
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorBedrock]
+    entities: [WFCavernFaunaAerumna]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorBedrock]
+    entities: [WFCavernShadowBloom]
+    threshold: 0.97
+    noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
+  # Shadow groves and pink geodes.
+  - !type:BiomeMetaLayer
+    template: WFCavernSignatureAerumna
+    threshold: -1
+
+- type: biomeTemplate
+  id: WFCavernSignatureAerumna
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernGroveAerumna
+    threshold: 0.3
+    noise: { seed: 55, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.02 }
+  - !type:BiomeMetaLayer
+    template: WFCavernGeodeAerumna
+    threshold: 0.75
+    noise: { seed: 56, noiseType: OpenSimplex2, frequency: 0.08 }
+
+- type: biomeTemplate
+  id: WFCavernGroveAerumna
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorBedrock]
+    entities: [ShadowTree, ShadowBasaltOne, ShadowBasaltTwo]
+    threshold: 0.5
+    noise: { seed: 309, noiseType: OpenSimplex2, frequency: 2 }
+  # Blooms gather under the shadow trees.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorBedrock]
+    entities: [WFCavernShadowBloom]
+    threshold: 0.93
+    noise: { seed: 321, noiseType: OpenSimplex2, frequency: 1 }
+
+- type: biomeTemplate
+  id: WFCavernGeodeAerumna
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorBedrock]
+    entities: [CrystalPink]
+    threshold: 0.5
+    noise: { seed: 310, noiseType: OpenSimplex2, frequency: 1 }

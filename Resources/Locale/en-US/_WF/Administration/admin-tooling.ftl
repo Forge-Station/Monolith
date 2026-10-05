@@ -114,3 +114,6 @@ cmd-spawnoutfit-success = Spawned {$mob} wearing {$gear}.
 cmd-spawnoutfitui-desc = Opens the Spawn as Outfit picker for a target entity.
 cmd-spawnoutfitui-help = Usage: {$command} <target entity>
 cmd-spawnoutfitui-invalid-args = Expected a target entity ID.
+
+## Planet control
+wf-admin-tab-planet-control = Planet Control

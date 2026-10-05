@@ -1,0 +1,69 @@
+# The maps the six caverns are spawned from, with their final air and light. No ore marker layers: cavern ore is
+# vein walls inside the rock template.
+
+- type: planet
+  id: WFCavernAsclepiuLevel
+  biome: WFCavernBiomeAsclepiu
+  mapName: wf-cavern-asclepiu-map
+  mapLight: "#6f8f86"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 285.15
+    moles: [21.824879, 82.10312]
+
+- type: planet
+  id: WFCavernFervidusLevel
+  biome: WFCavernBiomeFervidus
+  mapName: wf-cavern-fervidus-map
+  mapLight: "#c48b71"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 413.15
+    moles: [0, 60, 40]
+
+- type: planet
+  id: WFCavernMerakLevel
+  biome: WFCavernBiomeMerak
+  mapName: wf-cavern-merak-map
+  mapLight: "#dfc396"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 294.15
+    moles: [21.824879, 82.10312]
+
+- type: planet
+  id: WFCavernAerumnaLevel
+  biome: WFCavernBiomeAerumna
+  mapName: wf-cavern-aerumna-map
+  mapLight: "#2a1f3a"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 277.15
+    moles: [4, 72, 24]
+
+- type: planet
+  id: WFCavernThrasciasLevel
+  biome: WFCavernBiomeThrascias
+  mapName: wf-cavern-thrascias-map
+  mapLight: "#9fc3dc"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 235.15
+    moles: [0, 100]
+
+# Ammonia is the seventh gas.
+- type: planet
+  id: WFCavernCarcinomaLevel
+  biome: WFCavernBiomeCarcinoma
+  mapName: wf-cavern-carcinoma-map
+  mapLight: "#5a1a22"
+  atmosphere:
+    volume: 2500
+    immutable: true
+    temperature: 310.15
+    moles: [21.824879, 76, 0, 0, 0, 0, 1]

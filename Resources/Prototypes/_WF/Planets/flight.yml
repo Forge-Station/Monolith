@@ -1,0 +1,27 @@
+# Landing thrusters, the only lift a hull has over a planet, and the kit that converts an ordinary thruster.
+
+- type: entity
+  id: WFThrusterLanding
+  parent: Thruster
+  name: landing thruster
+  suffix: Landing
+  description: An atmospheric-rated thruster that maintains full thrust and normal power consumption below orbit.
+  components:
+  # Planet layers have air in them, and the stock thruster refuses to fire outside vacuum.
+  - type: Thruster
+    requireSpace: false
+  - type: WFLandingThruster
+
+- type: entity
+  id: WFLandingThrusterKit
+  parent: BaseItem
+  name: landing thruster conversion kit
+  description: A gimbal collar, a downward bell and an afternoon of work, in a box. Use it on an anchored thruster.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/Toolboxes/toolbox_blue.rsi
+    state: icon
+  - type: Item
+  - type: WFLandingThrusterKit
+  - type: StaticPrice
+    price: 400

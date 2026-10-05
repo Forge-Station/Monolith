@@ -165,12 +165,13 @@
     - type: ContainerContainer
       containers:
         ballistic-ammo: !type:Container
-    - type: BatteryAmmoProvider
+    - type: ProjectileBatteryAmmoProvider
       proto: Cartridge762x39mmFMJ
       fireCost: 100
-    - type: PredictedBattery
+    - type: Battery
       maxCharge: 10000
       startingCharge: 10000
-    - type: PredictedBatterySelfRecharger
+    - type: BatterySelfRecharger
+      autoRecharge: true
       autoRechargeRate: 25
     - type: AmmoCounter

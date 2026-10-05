@@ -2,6 +2,8 @@ using Content.Server.Communications;
 using Content.Server.CriminalRecords.Systems;
 using Content.Server.Objectives.Components;
 using Content.Server.Objectives.Systems;
+using Content.Server.Power.EntitySystems;
+using Content.Server.PowerCell;
 using Content.Server.Research.Systems;
 using Content.Shared.Alert;
 using Content.Shared.Doors.Components;
@@ -10,8 +12,6 @@ using Content.Shared.Mind;
 using Content.Shared.Ninja.Components;
 using Content.Shared.Ninja.Systems;
 using Content.Shared.Power.Components;
-using Content.Shared.Power.EntitySystems;
-using Content.Shared.PowerCell;
 using Content.Shared.Popups;
 using Content.Shared.Rounding;
 using System.Diagnostics.CodeAnalysis;
@@ -24,7 +24,7 @@ namespace Content.Server.Ninja.Systems;
 public sealed partial class SpaceNinjaSystem : SharedSpaceNinjaSystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
-    [Dependency] private PredictedBatterySystem _battery = default!;
+    [Dependency] private BatterySystem _battery = default!;
     [Dependency] private CodeConditionSystem _codeCondition = default!;
     [Dependency] private PowerCellSystem _powerCell = default!;
     [Dependency] private SharedMindSystem _mind = default!;
@@ -39,8 +39,6 @@ public sealed partial class SpaceNinjaSystem : SharedSpaceNinjaSystem
         SubscribeLocalEvent<SpaceNinjaComponent, CriminalRecordsHackedEvent>(OnCriminalRecordsHacked);
     }
 
-    // TODO: Make this charge rate based instead of updating it every single tick.
-    // Or make it client side, since power cells are predicted.
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<SpaceNinjaComponent>();
@@ -64,7 +62,7 @@ public sealed partial class SpaceNinjaSystem : SharedSpaceNinjaSystem
         return newCount - oldCount;
     }
 
-    // TODO: Generic charge indicator that is combined with borg code.
+    // TODO: can probably copy paste borg code here
     /// <summary>
     /// Update the alert for the ninja's suit power indicator.
     /// </summary>
@@ -77,10 +75,10 @@ public sealed partial class SpaceNinjaSystem : SharedSpaceNinjaSystem
             return;
         }
 
-        if (GetNinjaBattery(uid, out var batteryUid, out var batteryComp))
+        if (GetNinjaBattery(uid, out _, out var battery))
         {
-            var severity = ContentHelpers.RoundToLevels(MathF.Max(0f, _battery.GetCharge((batteryUid.Value, batteryComp))), batteryComp.MaxCharge, 8);
-            _alerts.ShowAlert(uid, comp.SuitPowerAlert, (short)severity);
+            var severity = ContentHelpers.RoundToLevels(MathF.Max(0f, battery.CurrentCharge), battery.MaxCharge, 8);
+            _alerts.ShowAlert(uid, comp.SuitPowerAlert, (short) severity);
         }
         else
         {
@@ -91,19 +89,17 @@ public sealed partial class SpaceNinjaSystem : SharedSpaceNinjaSystem
     /// <summary>
     /// Get the battery component in a ninja's suit, if it's worn.
     /// </summary>
-    public bool GetNinjaBattery(EntityUid user, [NotNullWhen(true)] out EntityUid? batteryUid, [NotNullWhen(true)] out PredictedBatteryComponent? batteryComp)
+    public bool GetNinjaBattery(EntityUid user, [NotNullWhen(true)] out EntityUid? uid, [NotNullWhen(true)] out BatteryComponent? battery)
     {
         if (TryComp<SpaceNinjaComponent>(user, out var ninja)
             && ninja.Suit != null
-            && _powerCell.TryGetBatteryFromSlot(ninja.Suit.Value, out var battery))
+            && _powerCell.TryGetBatteryFromSlot(ninja.Suit.Value, out uid, out battery))
         {
-            batteryUid = battery.Value.Owner;
-            batteryComp = battery.Value.Comp;
             return true;
         }
 
-        batteryUid = null;
-        batteryComp = null;
+        uid = null;
+        battery = null;
         return false;
     }
 

@@ -16,15 +16,10 @@ using Content.Server._NF.Power.Components; // Frontier
 
 namespace Content.Server.Power.EntitySystems
 {
-    /// <summary>
-    /// Responsible for <see cref="BatteryComponent"/>.
-    /// Unpredicted equivalent of <see cref="PredictedBatterySystem"/>.
-    /// If you make changes to this make sure to keep the two consistent.
-    /// </summary>
     [UsedImplicitly]
     public sealed partial class BatterySystem : SharedBatterySystem
     {
-        [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] protected IGameTiming Timing = default!;
 
         [Dependency] private SharedContainerSystem _containers = default!; // WD EDIT
 
@@ -36,10 +31,9 @@ namespace Content.Server.Power.EntitySystems
         {
             base.Initialize();
 
-            SubscribeLocalEvent<BatteryComponent, ComponentInit>(OnInit);
-            SubscribeLocalEvent<BatteryComponent, ExaminedEvent>(OnExamine);
-            SubscribeLocalEvent<BatteryComponent, RejuvenateEvent>(OnBatteryRejuvenate);
+            SubscribeLocalEvent<ExaminableBatteryComponent, ExaminedEvent>(OnExamine);
             SubscribeLocalEvent<PowerNetworkBatteryComponent, RejuvenateEvent>(OnNetBatteryRejuvenate);
+            SubscribeLocalEvent<BatteryComponent, RejuvenateEvent>(OnBatteryRejuvenate);
             SubscribeLocalEvent<BatteryComponent, PriceCalculationEvent>(CalculateBatteryPrice);
             SubscribeLocalEvent<BatteryComponent, ChangeChargeEvent>(OnChangeCharge);
             SubscribeLocalEvent<BatteryComponent, GetChargeEvent>(OnGetCharge);
@@ -48,38 +42,35 @@ namespace Content.Server.Power.EntitySystems
             SubscribeLocalEvent<NetworkBatteryPostSync>(PostSync);
         }
 
-        private void OnInit(Entity<BatteryComponent> ent, ref ComponentInit args)
-        {
-            DebugTools.Assert(!HasComp<PredictedBatteryComponent>(ent), $"{ent} has both BatteryComponent and PredictedBatteryComponent");
-        }
         private void OnNetBatteryRejuvenate(EntityUid uid, PowerNetworkBatteryComponent component, RejuvenateEvent args)
         {
             component.NetworkBattery.CurrentStorage = component.NetworkBattery.Capacity;
         }
+
         private void OnBatteryRejuvenate(EntityUid uid, BatteryComponent component, RejuvenateEvent args)
         {
             SetCharge(uid, component.MaxCharge, component);
         }
 
-        private void OnExamine(Entity<BatteryComponent> ent, ref ExaminedEvent args)
+        private void OnExamine(EntityUid uid, ExaminableBatteryComponent component, ExaminedEvent args)
         {
-            if (!args.IsInDetailsRange)
+            if (!TryComp<BatteryComponent>(uid, out var batteryComponent))
                 return;
-
-            if (!HasComp<ExaminableBatteryComponent>(ent))
-                return;
-
-            var chargePercentRounded = 0;
-            if (ent.Comp.MaxCharge != 0)
-                chargePercentRounded = (int)(100 * ent.Comp.CurrentCharge / ent.Comp.MaxCharge);
-
-            args.PushMarkup(
-                Loc.GetString(
-                    "examinable-battery-component-examine-detail",
-                    ("percent", chargePercentRounded),
-                    ("markupPercentColor", "green")
-                ) 
-            );
+            if (args.IsInDetailsRange)
+            {
+                var effectiveMax = batteryComponent.MaxCharge;
+                if (effectiveMax == 0)
+                    effectiveMax = 1;
+                var chargeFraction = batteryComponent.CurrentCharge / effectiveMax;
+                var chargePercentRounded = (int)(chargeFraction * 100);
+                args.PushMarkup(
+                    Loc.GetString(
+                        "examinable-battery-component-examine-detail",
+                        ("percent", chargePercentRounded),
+                        ("markupPercentColor", "green")
+                    )
+                );
+            }
         }
 
         private void PreSync(NetworkBatteryPreSync ev)
@@ -120,7 +111,7 @@ namespace Content.Server.Power.EntitySystems
 
                 if (comp.AutoRechargePause)
                 {
-                    if (comp.NextAutoRecharge > _timing.CurTime)
+                    if (comp.NextAutoRecharge > Timing.CurTime)
                         continue;
                 }
 
@@ -231,7 +222,7 @@ namespace Content.Server.Power.EntitySystems
             if (value < 0)
                 value = batteryself.AutoRechargePauseTime;
 
-            if (_timing.CurTime + TimeSpan.FromSeconds(value) <= batteryself.NextAutoRecharge)
+            if (Timing.CurTime + TimeSpan.FromSeconds(value) <= batteryself.NextAutoRecharge)
                 return;
 
             SetChargeCooldown(uid, batteryself.AutoRechargePauseTime, batteryself);
@@ -246,9 +237,9 @@ namespace Content.Server.Power.EntitySystems
                 return;
 
             if (value >= 0)
-                batteryself.NextAutoRecharge = _timing.CurTime + TimeSpan.FromSeconds(value);
+                batteryself.NextAutoRecharge = Timing.CurTime + TimeSpan.FromSeconds(value);
             else
-                batteryself.NextAutoRecharge = _timing.CurTime;
+                batteryself.NextAutoRecharge = Timing.CurTime;
         }
 
         /// <summary>

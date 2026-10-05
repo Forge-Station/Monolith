@@ -8,12 +8,7 @@
     size: Huge # Mono Revert
   - type: Sprite
     sprite: Objects/Power/portable_recharger.rsi
-    layers:
-    - map: ["enum.PowerChargerVisualLayers.Base"]
-      state: charging
-    - map: ["enum.PowerChargerVisualLayers.Light"]
-      state: charging-unlit
-      shader: unshaded
+    state: charging
   - type: Clothing
     equippedPrefix: charging
     quickEquip: false
@@ -43,4 +38,5 @@
         ejectOnUse: true # Mono
         whitelist:
           components:
-          - BatteryAmmoProvider
+          - HitscanBatteryAmmoProvider
+          - ProjectileBatteryAmmoProvider

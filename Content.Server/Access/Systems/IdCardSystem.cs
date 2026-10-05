@@ -9,7 +9,6 @@ using Content.Shared.Access.Systems;
 using Content.Shared.Chat; // Einstein Engines - Language
 using Content.Shared.Database;
 using Content.Shared.Examine;
-using Content.Shared.Kitchen;
 using Content.Shared.Popups;
 using Content.Shared._Mono.Company;
 using Robust.Shared.Prototypes;

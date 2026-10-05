@@ -13,7 +13,7 @@ namespace Content.Shared.Mech.Equipment.Systems;
 public sealed class MechChargerSystem : EntitySystem
 {
     [Dependency] private readonly SharedBatterySystem _battery = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private readonly SharedPowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 

@@ -1,6 +1,6 @@
 using Content.Server.Construction;
 using Content.Server.Construction.Components;
-using Content.Shared.Damage.Systems;
+using Content.Shared.Damage;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.Events;
 using Content.Shared.Mech.Systems;

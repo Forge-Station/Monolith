@@ -21,7 +21,7 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1500 # Mono: 1k >> 1.5k
     startingCharge: 1500 # Mono: 1k >> 1.5k
   - type: StaticPrice
@@ -66,7 +66,7 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedLightLaser
     fireCost: 20 # Mono: pistol lasers shoot efficiently
   - type: PowerCellSlot
@@ -163,6 +163,10 @@
     zeroVisible: true
   - type: StaticPrice # Mono
     price: 200
+  - type: Tag
+    tags:
+    - Sidearm
+    - LaserWeapon
 
 - type: entity
   name: retro laser blaster
@@ -178,7 +182,9 @@
     - state: mag-unshaded-4
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
-  - type: HitscanBatteryAmmoProvider
+  - type: Item
+    storedOffset: 0,-5
+  - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 33.3 # Mono: 83.3 >> 33.3
   - type: MagazineVisuals
@@ -188,6 +194,10 @@
   - type: Appearance
   - type: StaticPrice
     price: 190
+  - type: Tag
+    tags:
+    - Sidearm
+    - LaserWeapon
 
 - type: entity
   name: makeshift laser pistol
@@ -210,12 +220,16 @@
   - type: Appearance
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/makeshift.rsi
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedLaser
     fireCost: 35 # Mono: 62.5 >> 35
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 500
     startingCharge: 500
+  - type: Tag
+    tags:
+    - Sidearm
+    - LaserWeapon
 
 - type: entity
   name: tesla gun
@@ -237,7 +251,7 @@
       path: /Audio/Effects/Lightning/lightningshock.ogg
       params:
         variation: 0.2
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: TeslaGunBullet
     fireCost: 300
   - type: MagazineVisuals
@@ -271,7 +285,7 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedLaserPractice
     fireCost: 30 #Mono: 62.5 >> 30
   - type: StaticPrice
@@ -289,7 +303,7 @@
     size: Large # Forge-change
     shape: # Forge-change
     - 0,0,3,2 # Forge-change
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedMediumLaser #Mono: RedLaser >> RedMediumLaser
     fireCost: 30 #Mono: 62.5 >> 30
   - type: PirateBountyItem # Mono
@@ -334,21 +348,23 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: Pulse
     fireCost: 100
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 2000
     startingCharge: 2000
   - type: PirateBountyItem # Mono
     id: ExperimentalFactionWeapon
   # Mono Additions
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 200
-    autoRechargePause: true
     autoRechargePauseTime: 30
   # End Mono
+  - type: Tag
+    tags:
+    - Sidearm
+    - LaserWeapon
 
 - type: entity
   name: VCD QBH-12 Pulse Carbine
@@ -393,19 +409,17 @@
     - Burst # Mono
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: Pulse
     fireCost: 100
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 3000 # Mono
     startingCharge: 3000
   - type: PirateBountyItem # Mono
     id: ExperimentalFactionWeapon
   # Mono Additions
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 200
-    autoRechargePause: true
     autoRechargePauseTime: 30
   # End Mono
 
@@ -490,16 +504,65 @@
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
   - type: Gun
+    minAngle: 1 # Forge-change
+    maxAngle: 2 # Forge-change
+    fireRate: 2.5 # Forge-change 1.5->2.5
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
+  - type: BatteryAmmoProvider
+    proto: RiflePulse
+    fireCost: 100
+  - type: Battery
+    maxCharge: 6000 # Mono
+    startingCharge: 6000 # Mono
+  - type: PirateBountyItem # Mono
+    id: ExperimentalFactionWeapon
+  # Mono Additions
+  - type: PredictedBatterySelfRecharger
+    autoRechargeRate: 200
+    autoRechargePauseTime: 30
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.90
+    sprintModifier: 0.90 # Forge-change 0.85->0.90
+  # End Mono
+
+  # Mono Addition
+
+- type: entity
+  name: Cyborg pulse rifle
+  parent: [BaseWeaponBattery] # Forge-Change-delete: BaseFactionGearPDVT3
+  id: WeaponBorgPulseRifle
+  description: A weapon that used to be used by the special operations units of NT, but mounted onto a silicon. # Mono
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: Appearance
+  - type: Clothing
+    sprite: _Mono/Objects/Weapons/Guns/Battery/pulse_rifle.rsi
+  - type: Gun
     fireRate: 2.25 # Forge-change 1.5->2.25
     availableModes:
     - SemiAuto
     - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: Pulse
     fireCost: 100
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 6000 # Mono
     startingCharge: 6000 # Mono
   - type: PirateBountyItem # Mono
@@ -550,7 +613,7 @@
     fireRate: 2 # Forge-change 1.5->2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedHeavyLaser
     fireCost: 120 # Forge-change 160->120
   - type: Battery
@@ -584,10 +647,10 @@
       path: /Audio/Weapons/emitter.ogg
       params:
         pitch: 2
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: AntiParticlesProjectile
     fireCost: 500
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 10000
     startingCharge: 10000
 
@@ -620,7 +683,7 @@
     maxAngle: 2 # Forge-change
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser3.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: XrayLaser
     fireCost: 140 # Forge-change 133.3->140
   - type: MagazineVisuals
@@ -663,7 +726,7 @@
     projectileSpeed: 35 # any higher and this causes issues in lag
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletDisablerPractice
     fireCost: 50
   - type: Tag
@@ -691,7 +754,7 @@
     slots:
     - suitStorage
     - Belt
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletDisabler
     fireCost: 50
 
@@ -722,7 +785,7 @@
     - FullAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletDisablerSmg
     fireCost: 25
   - type: MagazineVisuals
@@ -760,7 +823,7 @@
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser.ogg
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletTaser
     fireCost: 200
   - type: MagazineVisuals
@@ -768,6 +831,7 @@
     steps: 5
     zeroVisible: true
   - type: Appearance
+  - type: PacifismAllowedGun
 
 - type: entity
   name: antique laser pistol
@@ -788,11 +852,10 @@
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 50 # Mono: 100 >> 50
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 40
   - type: MagazineVisuals
     magState: mag
@@ -835,11 +898,10 @@
   - type: Gun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 50 # Mono: 100 >> 50
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 20 # Mono 30 >> 20
   - type: MagazineVisuals
     magState: mag
@@ -880,7 +942,7 @@
     fireRate: 1.5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: AnomalousParticleDeltaStrong
     fireCost: 100
   - type: BatteryWeaponFireModes
@@ -933,14 +995,17 @@
     fireRate: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_clown.ogg
-  - type: HitscanBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: RedMediumLaser
     fireCost: 100
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 40
   - type: StaticPrice
     price: 750
+  - type: Tag
+    tags:
+    - Sidearm
+    - LaserWeapon
 
 - type: entity
   name: NT energy shotgun
@@ -967,7 +1032,7 @@
     fireRate: 2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: BulletLaserSpread
     fireCost: 150
   - type: BatteryWeaponFireModes
@@ -990,13 +1055,11 @@
   - type: StealTarget
     stealGroup: WeaponEnergyShotgun
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1200
     startingCharge: 1200
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 24
-    autoRechargePause: true
     autoRechargePauseTime: 30
 
 - type: entity

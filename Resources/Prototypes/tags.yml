@@ -788,6 +788,9 @@
   id: Knife
 
 - type: Tag
+  id: LaserWeapon # Used for a cargo bounty. Added to all hitscan weapons that shoot lasers.
+
+- type: Tag
   id: LavaBrig
 
 - type: Tag

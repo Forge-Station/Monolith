@@ -5,7 +5,7 @@
   components:
   - type: Item
     storedRotation: -90
-  - type: Battery
+  - type: PredictedBattery
     pricePerJoule: 0.15
   - type: PowerCell
   - type: Explosive
@@ -30,12 +30,16 @@
   - type: Tag
     tags:
       - PowerCell
-  - type: Appearance
-  - type: PowerCellVisuals
   - type: Riggable
-  - type: HitscanBatteryAmmoProvider
-    proto: RedLightLaser
-    fireCost: 50
+  - type: Appearance
+  - type: PredictedBatteryVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.BatteryVisuals.State:
+        enum.PowerCellVisualLayers.Unshaded:
+          Full: {visible: true, state: o2}
+          Neither: {visible: true, state: o1}
+          Empty: {visible: false}
 
 - type: entity
   name: potato battery
@@ -46,7 +50,7 @@
   - type: Sprite
     layers:
     - state: potato
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 70
     startingCharge: 70
   - type: Tag
@@ -73,7 +77,7 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 360
     startingCharge: 360
   - type: Tag
@@ -96,7 +100,7 @@
         state: o2
         shader: unshaded
         visible: false
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 360
     startingCharge: 0
 
@@ -114,7 +118,7 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 720
     startingCharge: 720
   - type: MachinePart # Frontier
@@ -134,7 +138,7 @@
         state: o2
         shader: unshaded
         visible: false
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 720
     startingCharge: 0
 
@@ -152,7 +156,7 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1080
     startingCharge: 1080
   - type: MachinePart # Frontier
@@ -172,7 +176,7 @@
         state: o2
         shader: unshaded
         visible: false
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1080
     startingCharge: 0
 
@@ -190,7 +194,7 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1800
     startingCharge: 1800
   - type: MachinePart # Frontier
@@ -210,7 +214,7 @@
         state: o2
         shader: unshaded
         visible: false
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1800
     startingCharge: 0
 
@@ -228,11 +232,10 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 720
     startingCharge: 720
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 12 # takes 1 minute to charge itself back to full
   - type: MachinePart # Frontier
     part: PowerCell # Frontier
@@ -251,7 +254,7 @@
       state: o2
       shader: unshaded
       visible: false
-  - type: Battery
+  - type: PredictedBattery
     startingCharge: 0
 
 - type: entity
@@ -267,11 +270,10 @@
       - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
         state: o2
         shader: unshaded
-    - type: Battery
+    - type: PredictedBattery
       maxCharge: 1200
       startingCharge: 1200
-    - type: BatterySelfRecharger
-      autoRecharge: true
+    - type: PredictedBatterySelfRecharger
       autoRechargeRate: 40
     - type: MachinePart # Frontier
       part: PowerCell # Frontier
@@ -321,7 +323,7 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 2800 # Mono: 1400 >> 2800
     startingCharge: 2800
   - type: EmpResistance # Mono also
@@ -341,7 +343,7 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 4600 # Mono: 2700 >> 4600
     startingCharge: 4600
 
@@ -362,10 +364,8 @@
   - type: Battery
     maxCharge: 7200
     startingCharge: 7200
-  - type: BatterySelfRecharger
-    autoRechargePause: true
+  - type: PredictedBatterySelfRecharger
     autoRechargePauseTime: 30 # Prevent continuous fire, but not a huge delay
-    autoRecharge: true
     autoRechargeRate: 30 # 4 minutes to fully recharge, 2.5x recharge rate of micro-reactor
 
 - type: entity
@@ -382,7 +382,7 @@
     - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
       state: o2
       shader: unshaded
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 6400 # Mono: 6100 >> 6400
     startingCharge: 6400
 
@@ -400,7 +400,7 @@
       state: o2
       shader: unshaded
       visible: false
-  - type: Battery
+  - type: PredictedBattery
     startingCharge: 0
 
 - type: entity
@@ -417,7 +417,7 @@
       state: o2
       shader: unshaded
       visible: false
-  - type: Battery
+  - type: PredictedBattery
     startingCharge: 0
 
 - type: entity
@@ -434,5 +434,5 @@
       state: o2
       shader: unshaded
       visible: false
-  - type: Battery
+  - type: PredictedBattery
     startingCharge: 0

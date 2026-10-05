@@ -17,6 +17,7 @@ public sealed partial class BatteryWeaponFireModesSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private AccessReaderSystem _accessReaderSystem = default!;
     [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
 
     public override void Initialize()
     {
@@ -125,20 +126,14 @@ public sealed partial class BatteryWeaponFireModesSystem : EntitySystem
         if (user != null)
             _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode", ("mode", prototype.Name)), uid, user.Value);
 
-        if (TryComp(uid, out ProjectileBatteryAmmoProviderComponent? projectileBatteryAmmoProviderComponent))
+        if (TryComp(uid, out BatteryAmmoProviderComponent? batteryAmmoProviderComponent))
         {
-            // TODO: Have this get the info directly from the batteryComponent when power is moved to shared.
-            var OldFireCost = projectileBatteryAmmoProviderComponent.FireCost;
-            projectileBatteryAmmoProviderComponent.Prototype = fireMode.Prototype;
-            projectileBatteryAmmoProviderComponent.FireCost = fireMode.FireCost;
+            batteryAmmoProviderComponent.Prototype = fireMode.Prototype;
+            batteryAmmoProviderComponent.FireCost = fireMode.FireCost;
 
-            float FireCostDiff = (float)fireMode.FireCost / (float)OldFireCost;
-            projectileBatteryAmmoProviderComponent.Shots = (int)Math.Round(projectileBatteryAmmoProviderComponent.Shots / FireCostDiff);
-            projectileBatteryAmmoProviderComponent.Capacity = (int)Math.Round(projectileBatteryAmmoProviderComponent.Capacity / FireCostDiff);
+            Dirty(uid, batteryAmmoProviderComponent);
 
-            Dirty(uid, projectileBatteryAmmoProviderComponent);
-            var updateClientAmmoEvent = new UpdateClientAmmoEvent();
-            RaiseLocalEvent(uid, ref updateClientAmmoEvent);
+            _gun.UpdateShots((uid, batteryAmmoProviderComponent));
         }
     }
 }

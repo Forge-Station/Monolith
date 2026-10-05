@@ -252,16 +252,14 @@
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
-  - type: ProjectileBatteryAmmoProvider
+  - type: BatteryAmmoProvider
     proto: Bullet9x19mmFMJ
     fireCost: 50 # Forge-change 100->50
-  - type: Battery
+  - type: PredictedBattery
     maxCharge: 1250 # Forge-change 1000->1250
     startingCharge: 1250 # Forge-change 1000->1250
-  - type: BatterySelfRecharger
-    autoRecharge: true
+  - type: PredictedBatterySelfRecharger
     autoRechargeRate: 50 # Forge-change 25->50
-    autoRechargePause: true # Forge-change
     autoRechargePauseTime: 5 # Forge-change
   - type: AmmoCounter
 

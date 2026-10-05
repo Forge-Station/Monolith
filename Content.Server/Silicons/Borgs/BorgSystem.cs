@@ -4,7 +4,6 @@ using Content.Server.Administration.Managers;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Hands.Systems;
-using Content.Server.PowerCell;
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared.UserInterface;
 using Content.Shared.Access;
@@ -21,6 +20,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Pointing;
+using Content.Shared.Power;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Roles;
@@ -67,6 +68,7 @@ public sealed partial class BorgSystem : SharedBorgSystem
     [Dependency] private AccessSystem _access = default!; // Frontier
 
     [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private PredictedBatterySystem _battery = default!;
 
     [Dependency] private IPrototypeManager _prototypeManager = default!;
 
@@ -83,6 +85,7 @@ public sealed partial class BorgSystem : SharedBorgSystem
         SubscribeLocalEvent<BorgChassisComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<BorgChassisComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<BorgChassisComponent, PowerCellChangedEvent>(OnPowerCellChanged);
+        SubscribeLocalEvent<BorgChassisComponent, PredictedBatteryChargeChangedEvent>(OnBatteryChargeChanged);
         SubscribeLocalEvent<BorgChassisComponent, PowerCellSlotEmptyEvent>(OnPowerCellSlotEmpty);
         SubscribeLocalEvent<BorgChassisComponent, GetCharactedDeadIcEvent>(OnGetDeadIC);
         SubscribeLocalEvent<BorgChassisComponent, ItemToggledEvent>(OnToggled);
@@ -246,17 +249,17 @@ public sealed partial class BorgSystem : SharedBorgSystem
         }
     }
 
-    private void OnPowerCellChanged(EntityUid uid, BorgChassisComponent component, PowerCellChangedEvent args)
+    private void OnBeingGibbed(EntityUid uid, BorgChassisComponent component, ref BeingGibbedEvent args)
     {
-        UpdateBatteryAlert((uid, component));
+        TryEjectPowerCell(uid, component, out var _);
 
-        // if we aren't drawing and suddenly get enough power to draw again, reeanble.
-        if (_powerCell.HasDrawCharge(uid))
-        {
-            Toggle.TryActivate(uid);
-        }
+        _container.EmptyContainer(component.BrainContainer);
+        _container.EmptyContainer(component.ModuleContainer);
+    }
 
-        UpdateUI(uid, component);
+   private void OnPowerCellChanged(Entity<BorgChassisComponent> ent, ref PowerCellChangedEvent args)
+    {
+        UpdateBattery(ent);
     }
 
     private void OnPowerCellSlotEmpty(EntityUid uid, BorgChassisComponent component, ref PowerCellSlotEmptyEvent args)
@@ -322,8 +325,8 @@ public sealed partial class BorgSystem : SharedBorgSystem
     {
         if (!_powerCell.TryGetBatteryFromSlot(ent, out var battery, slotComponent))
         {
-            _alerts.ClearAlert(ent, ent.Comp.BatteryAlert);
-            _alerts.ShowAlert(ent, ent.Comp.NoBatteryAlert);
+            _alerts.ClearAlert(ent.Owner, ent.Comp.BatteryAlert);
+            _alerts.ShowAlert(ent.Owner, ent.Comp.NoBatteryAlert);
             return;
         }
 
@@ -336,8 +339,22 @@ public sealed partial class BorgSystem : SharedBorgSystem
             chargePercent = 1;
         }
 
-        _alerts.ClearAlert(ent, ent.Comp.NoBatteryAlert);
-        _alerts.ShowAlert(ent, ent.Comp.BatteryAlert, chargePercent);
+        _alerts.ClearAlert(ent.Owner, ent.Comp.NoBatteryAlert);
+        _alerts.ShowAlert(ent.Owner, ent.Comp.BatteryAlert, chargePercent);
+    }
+
+    public bool TryEjectPowerCell(EntityUid uid, BorgChassisComponent component, [NotNullWhen(true)] out List<EntityUid>? ents)
+    {
+        ents = null;
+
+        if (!TryComp<PowerCellSlotComponent>(uid, out var slotComp) ||
+            !Container.TryGetContainer(uid, slotComp.CellSlotId, out var container) ||
+            !container.ContainedEntities.Any())
+            return false;
+
+        ents = Container.EmptyContainer(container);
+
+        return true;
     }
 
     /// <summary>
@@ -378,5 +395,13 @@ public sealed partial class BorgSystem : SharedBorgSystem
             return false;
 
         return true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        UpdateTransponder(frameTime);
+        UpdateBattery(frameTime);
     }
 }

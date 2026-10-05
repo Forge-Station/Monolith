@@ -25,7 +25,6 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Content.Shared.Power.Components;
-using Content.Shared.Power.EntitySystems;
 using Content.Shared.Stacks;
 using Content.Shared.Station.Components;
 using Content.Shared.Verbs;
@@ -57,7 +56,6 @@ public sealed partial class AdminVerbSystem
     [Dependency] private StationJobsSystem _stationJobsSystem = default!;
     [Dependency] private JointSystem _jointSystem = default!;
     [Dependency] private BatterySystem _batterySystem = default!;
-    [Dependency] private PredictedBatterySystem _predictedBatterySystem = default!;
     [Dependency] private MetaDataSystem _metaSystem = default!;
     [Dependency] private GunSystem _gun = default!;
     [Dependency] private SharedPassportSystem _passportSystem = default!; // Forge-change: _EE nationality
@@ -74,121 +72,121 @@ public sealed partial class AdminVerbSystem
             return;
 
         if (TryComp<DoorBoltComponent>(args.Target, out var bolts))
-        {
-            Verb bolt = new()
             {
-                Text = bolts.BoltsDown ? "Unbolt" : "Bolt",
-                Category = VerbCategory.Tricks,
-                Icon = bolts.BoltsDown
-                    ? new SpriteSpecifier.Texture(new("/Textures/Interface/AdminActions/unbolt.png"))
-                    : new SpriteSpecifier.Texture(new("/Textures/Interface/AdminActions/bolt.png")),
-                Act = () =>
+                Verb bolt = new()
                 {
-                    _door.SetBoltsDown((args.Target, bolts), !bolts.BoltsDown);
-                },
-                Impact = LogImpact.Medium,
-                Message = Loc.GetString(bolts.BoltsDown
-                    ? "admin-trick-unbolt-description"
-                    : "admin-trick-bolt-description"),
-                Priority = (int) (bolts.BoltsDown ? TricksVerbPriorities.Unbolt : TricksVerbPriorities.Bolt),
-            };
-            args.Verbs.Add(bolt);
-        }
+                    Text = bolts.BoltsDown ? "Unbolt" : "Bolt",
+                    Category = VerbCategory.Tricks,
+                    Icon = bolts.BoltsDown
+                        ? new SpriteSpecifier.Texture(new("/Textures/Interface/AdminActions/unbolt.png"))
+                        : new SpriteSpecifier.Texture(new("/Textures/Interface/AdminActions/bolt.png")),
+                    Act = () =>
+                    {
+                        _door.SetBoltsDown((args.Target, bolts), !bolts.BoltsDown);
+                    },
+                    Impact = LogImpact.Medium,
+                    Message = Loc.GetString(bolts.BoltsDown
+                        ? "admin-trick-unbolt-description"
+                        : "admin-trick-bolt-description"),
+                    Priority = (int) (bolts.BoltsDown ? TricksVerbPriorities.Unbolt : TricksVerbPriorities.Bolt),
+                };
+                args.Verbs.Add(bolt);
+            }
 
-        if (TryComp<AirlockComponent>(args.Target, out var airlockComp))
-        {
-            Verb emergencyAccess = new()
+            if (TryComp<AirlockComponent>(args.Target, out var airlockComp))
             {
-                Text = airlockComp.EmergencyAccess ? "Emergency Access Off" : "Emergency Access On",
-                Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/AdminActions/emergency_access.png")),
-                Act = () =>
+                Verb emergencyAccess = new()
                 {
-                    _airlockSystem.SetEmergencyAccess((args.Target, airlockComp), !airlockComp.EmergencyAccess);
-                },
-                Impact = LogImpact.Medium,
-                Message = Loc.GetString(airlockComp.EmergencyAccess
-                    ? "admin-trick-emergency-access-off-description"
-                    : "admin-trick-emergency-access-on-description"),
-                Priority = (int) (airlockComp.EmergencyAccess ? TricksVerbPriorities.EmergencyAccessOff : TricksVerbPriorities.EmergencyAccessOn),
-            };
-            args.Verbs.Add(emergencyAccess);
-        }
+                    Text = airlockComp.EmergencyAccess ? "Emergency Access Off" : "Emergency Access On",
+                    Category = VerbCategory.Tricks,
+                    Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/AdminActions/emergency_access.png")),
+                    Act = () =>
+                    {
+                        _airlockSystem.SetEmergencyAccess((args.Target, airlockComp), !airlockComp.EmergencyAccess);
+                    },
+                    Impact = LogImpact.Medium,
+                    Message = Loc.GetString(airlockComp.EmergencyAccess
+                        ? "admin-trick-emergency-access-off-description"
+                        : "admin-trick-emergency-access-on-description"),
+                    Priority = (int) (airlockComp.EmergencyAccess ? TricksVerbPriorities.EmergencyAccessOff : TricksVerbPriorities.EmergencyAccessOn),
+                };
+                args.Verbs.Add(emergencyAccess);
+            }
 
-        if (HasComp<DamageableComponent>(args.Target))
-        {
-             Verb rejuvenate = new()
+            if (HasComp<DamageableComponent>(args.Target))
             {
-                Text = "Rejuvenate",
-                Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/AdminActions/rejuvenate.png")),
-                Act = () =>
+                Verb rejuvenate = new()
                 {
-                     _rejuvenate.PerformRejuvenate(args.Target);
-                },
-                Impact = LogImpact.Extreme,
-                Message = Loc.GetString("admin-trick-rejuvenate-description"),
-                Priority = (int) TricksVerbPriorities.Rejuvenate,
-            };
-            args.Verbs.Add(rejuvenate);
-        }
+                    Text = "Rejuvenate",
+                    Category = VerbCategory.Tricks,
+                    Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/AdminActions/rejuvenate.png")),
+                    Act = () =>
+                    {
+                        _rejuvenate.PerformRejuvenate(args.Target);
+                    },
+                    Impact = LogImpact.Extreme,
+                    Message = Loc.GetString("admin-trick-rejuvenate-description"),
+                    Priority = (int) TricksVerbPriorities.Rejuvenate,
+                };
+                args.Verbs.Add(rejuvenate);
+            }
 
-        // Forge-change-start: _EE nationality
-        if (TryComp<ActorComponent>(args.Target, out var targetActor) && _mindSystem.TryGetMind(args.Target, out var mindId, out _) && _jobSystem.MindTryGetJob(mindId, out var job))
-        {
-            Verb spawnPassport = new()
+            // Forge-change-start: _EE nationality
+            if (TryComp<ActorComponent>(args.Target, out var targetActor) && _mindSystem.TryGetMind(args.Target, out var mindId, out _) && _jobSystem.MindTryGetJob(mindId, out var job))
             {
-                Text = "Spawn Passport",
-                Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Texture(new("/Textures/_Forge/Interface/Misc/spawnpassport.png")),
-                Act = () =>
+                Verb spawnPassport = new()
                 {
-                    var profile = _ticker.GetPlayerProfile(targetActor.PlayerSession);
+                    Text = "Spawn Passport",
+                    Category = VerbCategory.Tricks,
+                    Icon = new SpriteSpecifier.Texture(new("/Textures/_Forge/Interface/Misc/spawnpassport.png")),
+                    Act = () =>
+                    {
+                        var profile = _ticker.GetPlayerProfile(targetActor.PlayerSession);
 
-                    _passportSystem.SpawnPassportForPlayer(args.Target, profile, job.ID);
-                },
-                Impact = LogImpact.Medium,
-                Message = Loc.GetString("command-description-spawnpassport"),
-                Priority = (int) TricksVerbPriorities.SpawnPassport,
-            };
-            args.Verbs.Add(spawnPassport);
-        }
-        // Forge-change-end
+                        _passportSystem.SpawnPassportForPlayer(args.Target, profile, job.ID);
+                    },
+                    Impact = LogImpact.Medium,
+                    Message = Loc.GetString("command-description-spawnpassport"),
+                    Priority = (int) TricksVerbPriorities.SpawnPassport,
+                };
+                args.Verbs.Add(spawnPassport);
+            }
+            // Forge-change-end
 
-        if (!HasComp<GodmodeComponent>(args.Target))
-        {
-            Verb makeIndestructible = new()
+            if (!HasComp<GodmodeComponent>(args.Target))
             {
-                Text = "Make Indestructible",
-                Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/plus.svg.192dpi.png")),
-                Act = () =>
+                Verb makeIndestructible = new()
                 {
-                    _sharedGodmodeSystem.EnableGodmode(args.Target);
-                },
-                Impact = LogImpact.Extreme,
-                Message = Loc.GetString("admin-trick-make-indestructible-description"),
-                Priority = (int) TricksVerbPriorities.MakeIndestructible,
-            };
-            args.Verbs.Add(makeIndestructible);
-        }
-        else
-        {
-            Verb makeVulnerable = new()
+                    Text = "Make Indestructible",
+                    Category = VerbCategory.Tricks,
+                    Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/plus.svg.192dpi.png")),
+                    Act = () =>
+                    {
+                        _sharedGodmodeSystem.EnableGodmode(args.Target);
+                    },
+                    Impact = LogImpact.Extreme,
+                    Message = Loc.GetString("admin-trick-make-indestructible-description"),
+                    Priority = (int) TricksVerbPriorities.MakeIndestructible,
+                };
+                args.Verbs.Add(makeIndestructible);
+            }
+            else
             {
-                Text = "Make Vulnerable",
-                Category = VerbCategory.Tricks,
-                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/plus.svg.192dpi.png")),
-                Act = () =>
+                Verb makeVulnerable = new()
                 {
-                    _sharedGodmodeSystem.DisableGodmode(args.Target);
-                },
-                Impact = LogImpact.Extreme,
-                Message = Loc.GetString("admin-trick-make-vulnerable-description"),
-                Priority = (int) TricksVerbPriorities.MakeVulnerable,
-            };
-            args.Verbs.Add(makeVulnerable);
-        }
+                    Text = "Make Vulnerable",
+                    Category = VerbCategory.Tricks,
+                    Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/plus.svg.192dpi.png")),
+                    Act = () =>
+                    {
+                        _sharedGodmodeSystem.DisableGodmode(args.Target);
+                    },
+                    Impact = LogImpact.Extreme,
+                    Message = Loc.GetString("admin-trick-make-vulnerable-description"),
+                    Priority = (int) TricksVerbPriorities.MakeVulnerable,
+                };
+                args.Verbs.Add(makeVulnerable);
+            }
 
             if (TryComp<BatteryComponent>(args.Target, out var battery))
             {

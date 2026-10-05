@@ -1,8 +1,9 @@
+using Content.Server.Power.EntitySystems;
+using Content.Server.PowerCell;
 using Content.Server.Radio;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Interaction;
-using Content.Shared.Power.EntitySystems;
-using Content.Shared.PowerCell;
+using Content.Shared.PowerCell.Components;
 using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Radio.Components;
 using Content.Shared.DeviceNetwork.Systems;
@@ -12,7 +13,7 @@ namespace Content.Server.Radio.EntitySystems;
 public sealed partial class JammerSystem : SharedJammerSystem
 {
     [Dependency] private PowerCellSystem _powerCell = default!;
-    [Dependency] private PredictedBatterySystem _battery = default!;
+    [Dependency] private BatterySystem _battery = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedDeviceNetworkJammerSystem _jammer = default!;
 
@@ -25,8 +26,6 @@ public sealed partial class JammerSystem : SharedJammerSystem
         SubscribeLocalEvent<RadioSendAttemptEvent>(OnRadioSendAttempt);
     }
 
-    // TODO: Very important: Make this charge rate based instead of updating every single tick
-    // See PredictedBatteryComponent
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<ActiveRadioJammerComponent, RadioJammerComponent>();
@@ -34,9 +33,9 @@ public sealed partial class JammerSystem : SharedJammerSystem
         while (query.MoveNext(out var uid, out var _, out var jam))
         {
 
-            if (_powerCell.TryGetBatteryFromSlot(uid, out var battery))
+            if (_powerCell.TryGetBatteryFromSlot(uid, out var batteryUid, out var battery))
             {
-                if (!_battery.TryUseCharge(battery.Value.AsNullable(), GetCurrentWattage((uid, jam)) * frameTime))
+                if (!_battery.TryUseCharge(batteryUid.Value, GetCurrentWattage((uid, jam)) * frameTime, battery))
                 {
                     ChangeLEDState(uid, false);
                     RemComp<ActiveRadioJammerComponent>(uid);
@@ -44,7 +43,7 @@ public sealed partial class JammerSystem : SharedJammerSystem
                 }
                 else
                 {
-                    var percentCharged = _battery.GetCharge(battery.Value.AsNullable()) / battery.Value.Comp.MaxCharge;
+                    var percentCharged = battery.CurrentCharge / battery.MaxCharge;
                     var chargeLevel = percentCharged switch
                     {
                         > 0.50f => RadioJammerChargeLevel.High,
@@ -63,36 +62,53 @@ public sealed partial class JammerSystem : SharedJammerSystem
         if (args.Handled || !args.Complex)
             return;
 
-        var activated = !HasComp<ActiveRadioJammerComponent>(ent) &&
-            _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery) &&
-            _battery.GetCharge(battery.Value.AsNullable()) > GetCurrentWattage(ent);
-        if (activated)
-        {
-            ChangeLEDState(ent.Owner, true);
-            EnsureComp<ActiveRadioJammerComponent>(ent);
-            EnsureComp<DeviceNetworkJammerComponent>(ent, out var jammingComp);
-            _jammer.SetRange((ent, jammingComp), GetCurrentRange(ent));
-            _jammer.AddJammableNetwork((ent, jammingComp), DeviceNetworkComponent.DeviceNetIdDefaults.Wireless.ToString());
+    var activated = !HasComp<ActiveRadioJammerComponent>(ent) &&
+        _powerCell.TryGetBatteryFromSlot(ent.Owner, out var battery) &&
+        battery.CurrentCharge > GetCurrentWattage(ent);
 
-            // Add excluded frequencies using the system method
-            if (ent.Comp.FrequenciesExcluded != null)
-            {
-                foreach (var freq in ent.Comp.FrequenciesExcluded)
-                {
-                    _jammer.AddExcludedFrequency((ent, jammingComp), (uint)freq);
-                }
-            }
-        }
-        else
+    if (activated)
+    {
+        ChangeLEDState(ent.Owner, true);
+
+        EnsureComp<ActiveRadioJammerComponent>(ent);
+        EnsureComp<DeviceNetworkJammerComponent>(ent, out var jammingComp);
+
+        _jammer.SetRange((ent, jammingComp), GetCurrentRange(ent));
+
+        _jammer.AddJammableNetwork(
+            (ent, jammingComp),
+            DeviceNetworkComponent.DeviceNetIdDefaults.Wireless.ToString()
+        );
+
+        /// Sync excluded frequencies from RadioJammerComponent
+        /// into DeviceNetworkJammerComponen
+
+        _jammer.ClearExcludedFrequency((ent, jammingComp));
+
+        foreach (var freq in ent.Comp.FrequenciesExcluded)
         {
-            ChangeLEDState(ent.Owner, false);
-            RemCompDeferred<ActiveRadioJammerComponent>(ent);
-            RemCompDeferred<DeviceNetworkJammerComponent>(ent);
+            _jammer.AddExcludedFrequency((ent, jammingComp), (uint) freq);
         }
-        var state = Loc.GetString(activated ? "radio-jammer-component-on-state" : "radio-jammer-component-off-state");
-        var message = Loc.GetString("radio-jammer-component-on-use", ("state", state));
-        Popup.PopupEntity(message, args.User, args.User);
-        args.Handled = true;
+    }
+    else
+    {
+        ChangeLEDState(ent.Owner, false);
+
+        RemCompDeferred<ActiveRadioJammerComponent>(ent);
+        RemCompDeferred<DeviceNetworkJammerComponent>(ent);
+    }
+
+    var state = Loc.GetString(activated
+        ? "radio-jammer-component-on-state"
+        : "radio-jammer-component-off-state");
+
+    var message = Loc.GetString(
+        "radio-jammer-component-on-use",
+        ("state", state)
+    );
+
+    Popup.PopupEntity(message, args.User, args.User);
+    args.Handled = true;
     }
 
     private void OnRadioSendAttempt(ref RadioSendAttemptEvent args)

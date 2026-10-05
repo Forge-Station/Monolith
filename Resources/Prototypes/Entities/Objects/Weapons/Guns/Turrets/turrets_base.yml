@@ -143,7 +143,7 @@
     angleDecay: -4 # Mono
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
-  - type: BatteryAmmoProvider
+  - type: ProjectileBatteryAmmoProvider
     proto: BulletEnergyTurretLaser
     fireCost: 100
   - type: Battery

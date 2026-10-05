@@ -379,30 +379,7 @@ public abstract partial class SharedEntityStorageSystem : EntitySystem
         if (component.Contents.ContainedEntities.Count >= component.Capacity)
             return false;
 
-        var aabb = _lookup.GetAABBNoContainer(toInsert, Vector2.Zero, 0);
-        if (component.MaxSize < aabb.Size.X || component.MaxSize < aabb.Size.Y)
-            return false;
-
-        // Allow other systems to prevent inserting the item: e.g. the item is actually a ghost.
-        var attemptEvent = new InsertIntoEntityStorageAttemptEvent(component.Contents, toInsert);
-        RaiseLocalEvent(toInsert, ref attemptEvent);
-
-        if (attemptEvent.Cancelled)
-            return false;
-
-        // Allow other components on the container to prevent inserting the item: e.g. the container is folded
-        var containerAttemptEvent = new EntityStorageInsertedIntoAttemptEvent(component.Contents, toInsert);
-        RaiseLocalEvent(container, ref containerAttemptEvent);
-
-        if (containerAttemptEvent.Cancelled)
-            return false;
-
-        // Consult the whitelist. The whitelist ignores the default assumption about how entity storage works.
-        if (component.Whitelist != null)
-            return _whitelistSystem.IsValid(component.Whitelist, toInsert);
-
-        // The inserted entity must be a mob or an item.
-        return HasComp<MobStateComponent>(toInsert) || HasComp<ItemComponent>(toInsert);
+        return CanFit(toInsert, container, component);
     }
 
     public bool TryOpenStorage(EntityUid user, EntityUid target, bool silent = false)

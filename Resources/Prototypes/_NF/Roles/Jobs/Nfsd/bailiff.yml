@@ -56,9 +56,10 @@
   storage:
     back:
 #    - Magazine45_ACPPistolFMJ # Mono
-    - BaseSecurityUplinkRadioCaptain
+#    - BaseSecurityUplinkRadioCaptain # Forge-Change
 #    - ShipVoucherNfsdBailiff # Mono
-    - RubberStampBailiff
-    - RadioHandheldNF # Mono
-    - RubberStampTSFCaptain # Mono
+     - RubberStampBailiff
+     - FederationMilitaryCredit
+     - RadioHandheldNF # Mono
+     - RubberStampTSFCaptain # Mono
 #    - BookTSFSOP # Forge-change delete

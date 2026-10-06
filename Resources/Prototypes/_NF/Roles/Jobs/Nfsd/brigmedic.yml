@@ -53,6 +53,8 @@
     back:
     - EncryptionKeyMedical
 #    - Magazine45_ACPPistolFMJ # Mono
-    - BaseSecurityUplinkRadioOfficer #Mono: Changed to officer uplink
-    - RadioHandheldNF # Mono
+#    - BaseSecurityUplinkRadioOfficer #Mono: Changed to officer uplink
+     - FederationMilitaryCredit50
+     - FederationMilitaryCredit25
+     - RadioHandheldNF # Mono
 #    - BookTSFSOP # Forge-change delete

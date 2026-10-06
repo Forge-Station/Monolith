@@ -1,3 +1,11 @@
 - type: lobbyBackground
   id: ColossusLobbyScreen
   background: /Textures/_Mono/LobbyScreens/colossus_central_render.webp
+
+- type: lobbyBackground # Forge-Change
+  id: AepofigizmLobbyScreen
+  background: /Textures/_Forge/LobbyScreens/aepofigizm.webp
+
+- type: lobbyBackground # Forge-Change
+  id: StryzaniLobbyScreen
+  background: /Textures/_Forge/LobbyScreens/stryzani.webp

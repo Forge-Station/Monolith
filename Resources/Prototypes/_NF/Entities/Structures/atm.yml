@@ -337,30 +337,30 @@
 
 - type: entity
   parent: BaseStationAdminBankATM
-  id: StationAdminBankATMSiv
-  description: Used to transfer funds to and from SIV's bank account.
-  suffix: SIV
+  id: StationAdminBankATMEmpire
+  description: Used to transfer funds to and from Empire's bank account.
+  suffix: Empire
   components:
   - type: StationBankATM
-    account: Siv #Register in C#?
+    account: Empire #Register in C#?
   - type: CompanyAccessReader
     requiredCompanies:
-    - TSF
+    - Empire
   - type: AccessReader
-    access: [["HeadOfSecurity"]]
+    access: [["Empire"]]
 
 - type: entity
   parent: BaseStationAdminBankATM
-  id: StationAdminBankATMNfsd
-  description: Used to transfer funds to and from TSFMC-FOB's bank account.
-  suffix: TSFMC
+  id: StationAdminBankATMRenegate
+  description: Used to transfer funds to and from Renegate's bank account.
+  suffix: Renegate
   components:
   - type: StationBankATM
-    account: Nfsd
+    account: Renegate #Register in C#?
   - type: CompanyAccessReader
     requiredCompanies:
-    - TSF
+    - Renegate
   - type: AccessReader
-    access: [["HeadOfSecurity"]]
+    access: [["Renegate"]]
 
 #Forge-change-end

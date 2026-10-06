@@ -11,4 +11,7 @@
     state: full
   - type: IconSmooth
     key: windows
-    base: xenoborg
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: xenoborg

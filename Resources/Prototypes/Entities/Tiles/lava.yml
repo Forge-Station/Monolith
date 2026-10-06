@@ -35,8 +35,11 @@
     sprite: Tiles/Planet/lava.rsi
     state: full
   - type: IconSmooth
-    key: floor
-    base: lava
+    key: lava
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ lava, walls ]
+      base: water
   - type: Physics
     bodyType: Static
   - type: Fixtures

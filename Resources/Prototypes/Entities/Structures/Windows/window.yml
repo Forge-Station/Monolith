@@ -89,7 +89,10 @@
     scalingPower: 0.0005
   - type: IconSmooth
     key: walls
-    base: window
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: window
   - type: InteractionPopup
     interactSuccessString: comp-window-knock
     messagePerceivedByOthers: comp-window-knock
@@ -123,7 +126,11 @@
   - type: Icon
     sprite: Structures/Windows/tinted_window.rsi
   - type: IconSmooth
-    base: twindow
+    key: walls
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: twindow
   - type: Construction
     graph: Window
     node: tintedWindow
@@ -292,8 +299,11 @@
     - Diagonal
     - Window
   - type: IconSmooth
-    mode: Diagonal
-    base: state
+    key: walls
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
     sprite: Structures/Windows/window_diagonal.rsi
     state: state0

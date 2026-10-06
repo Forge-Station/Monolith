@@ -122,7 +122,6 @@
         acts: ["Destruction"]
   - type: IconSmooth
     key: walls
-    mode: NoSprite
   - type: Construction
     graph: Airlock
     node: highSecDoor

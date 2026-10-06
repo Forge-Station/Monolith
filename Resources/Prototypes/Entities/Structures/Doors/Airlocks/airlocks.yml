@@ -325,7 +325,6 @@
     sprite: _Forge/Structures/Doors/Airlocks/Standard/xeno.rsi # Forge-Change
   - type: IconSmooth
     key: chitin
-    mode: NoSprite
 
 - type: entity
   parent: AirlockGlass
@@ -336,4 +335,3 @@
     sprite: _Forge/Structures/Doors/Airlocks/Glass/xeno.rsi # Forge-Change
   - type: IconSmooth
     key: chitin
-    mode: NoSprite

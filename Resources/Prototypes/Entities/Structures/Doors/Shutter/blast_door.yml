@@ -60,6 +60,14 @@
   - type: ShipRepairable
     repairTime: 6
     repairCost: 8
+  - type: IconSmooth
+    key: doors
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
+  - type: PlacementReplacement
+    key: blastdoors
 
 - type: entity
   id: BlastDoorOpen
@@ -144,7 +152,6 @@
         Blunt: 25 # yowch
   - type: IconSmooth
     key: chitin
-    mode: NoSprite
 
 - type: entity
   parent: BlastDoorXeno

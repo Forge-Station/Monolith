@@ -251,7 +251,10 @@
   components:
   - type: IconSmooth
     key: walls
-    base: reinf_over
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: reinf_over
   - type: Destructible
     thresholds:
     - trigger:
@@ -315,9 +318,11 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: IconSmooth
-    mode: Diagonal
     key: walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
     sprite: Structures/Walls/reinforced_diagonal.rsi
     state: state0
@@ -525,7 +530,10 @@
     sprite: Structures/Walls/xeno.rsi
   - type: IconSmooth
     key: chitin
-    base: solid
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ chitin ]
+      base: solid
   - type: Destructible
     thresholds:
     - trigger:
@@ -547,7 +555,10 @@
     state: rgeneric
   - type: IconSmooth
     key: chitin
-    base: reinf_over
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ chitin ]
+      base: reinf_over
   - type: GenericVisualizer
     visuals:
       enum.ReinforcedWallVisuals.DeconstructionStage:

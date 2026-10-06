@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: Airlock
   parent: BaseStructure
   name: airlock
@@ -51,6 +51,12 @@
       shader: unshaded
       visible: false
     # Forge-Change-End
+  - type: IconSmooth
+    key: doors
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: AnimationPlayer
   - type: Physics
   - type: Fixtures
@@ -172,7 +178,6 @@
     key: walls
   - type: IconSmooth
     key: walls
-    mode: NoSprite
   # Forge-Change-Start
   # - type: PaintableAirlock
   #   group: Standard

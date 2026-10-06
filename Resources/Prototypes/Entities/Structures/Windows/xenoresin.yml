@@ -45,7 +45,11 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    base: xwindow
+    key: walls
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: xwindow
   - type: Construction
     graph: Window
     node: reinforcedWindow

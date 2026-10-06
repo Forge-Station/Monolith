@@ -26,7 +26,10 @@
     damageModifierSet: Metallic
   - type: IconSmooth
     key: state
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ state ]
+      base: state_
   - type: Destructible
     thresholds:
     - trigger:
@@ -84,7 +87,10 @@
     damageModifierSet: Wood
   - type: IconSmooth
     key: state
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ state ]
+      base: state_
   - type: Destructible
     thresholds:
     - trigger:
@@ -129,7 +135,10 @@
     damageModifierSet: Metallic
   - type: IconSmooth
     key: state
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ state ]
+      base: state_
   - type: Destructible
     thresholds:
     - trigger:
@@ -197,7 +206,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: metaltable
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ metaltable ]
+      base: state_
   - type: Construction
     graph: Table
     node: Table
@@ -241,6 +253,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: metalreinforcedtable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ metalreinforcedtable ]
+      base: state
   - type: Construction
     graph: Table
     node: TableReinforced
@@ -303,6 +319,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: glasstable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ glasstable ]
+      base: state
   - type: Construction
     graph: Table
     node: TableGlass
@@ -364,6 +384,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: reinforcedglasstable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ reinforcedglasstable ]
+      base: state
   - type: Construction
     graph: Table
     node: TableReinforcedGlass
@@ -425,6 +449,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: plasmaglasstable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ plasmaglasstable ]
+      base: state
   - type: Construction
     graph: Table
     node: TablePlasmaGlass
@@ -471,6 +499,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: brasstable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ brasstable ]
+      base: state
   - type: Construction
     graph: Table
     node: TableBrass
@@ -518,6 +550,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: woodtable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ woodtable ]
+      base: state
   - type: Construction
     graph: Table
     node: TableWood
@@ -561,6 +597,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: woodgambletable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ woodgambletable ]
+      base: state
   - type: Construction
     graph: Table
     node: TableCarpet
@@ -594,6 +634,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: stonetable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ stonetable ]
+      base: state
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepFloor
@@ -625,6 +669,10 @@
           "/Audio/Weapons/slash.ogg"
   - type: IconSmooth
     key: webtable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ webtable ]
+      base: state
   - type: Construction
     graph: WebStructures
     node: table
@@ -689,6 +737,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: fancytable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytable ]
+      base: state
   - type: Tag
     tags:
     - Wooden
@@ -710,6 +762,10 @@
     node: TableFancyBlue
   - type: IconSmooth
     key: fancytableblue
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytableblue ]
+      base: state
 
 - type: entity
   id: TableFancyCyan
@@ -725,6 +781,10 @@
     node: TableFancyCyan
   - type: IconSmooth
     key: fancytablecyan
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablecyan ]
+      base: state
 
 - type: entity
   id: TableFancyBlack
@@ -740,6 +800,10 @@
     node: TableFancyBlack
   - type: IconSmooth
     key: fancytableblack
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytableblack ]
+      base: state
 
 - type: entity
   id: TableFancyRed
@@ -755,6 +819,10 @@
     node: TableFancyRed
   - type: IconSmooth
     key: fancytablered
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablered ]
+      base: state
 
 - type: entity
   id: TableFancyPurple
@@ -770,6 +838,10 @@
     node: TableFancyPurple
   - type: IconSmooth
     key: fancytablepurple
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablepurple ]
+      base: state
 
 - type: entity
   id: TableFancyPink
@@ -785,6 +857,10 @@
     node: TableFancyPink
   - type: IconSmooth
     key: fancytablepink
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablepink ]
+      base: state
 
 - type: entity
   id: TableFancyGreen
@@ -800,6 +876,10 @@
     node: TableFancyGreen
   - type: IconSmooth
     key: fancytablegreen
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablegreen ]
+      base: state
 
 - type: entity
   id: TableFancyOrange
@@ -815,6 +895,10 @@
     node: TableFancyOrange
   - type: IconSmooth
     key: fancytableorange
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytableorange ]
+      base: state
 
 - type: entity
   id: TableFancyWhite
@@ -830,6 +914,10 @@
     node: TableFancyWhite
   - type: IconSmooth
     key: fancytablewhite
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablewhite ]
+      base: state
 
 #Debug
 
@@ -900,7 +988,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: counterwood
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ counterwood ]
+      base: state_
   - type: Construction
     graph: Table
     node: CounterWood
@@ -948,7 +1039,10 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: countermetal
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ countermetal ]
+      base: state_
   - type: Construction
     graph: Table
     node: CounterMetal

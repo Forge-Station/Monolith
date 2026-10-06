@@ -79,7 +79,10 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: bricks
-    base: brick
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ bricks ]
+      base: brick
 
 - type: entity
   parent: BaseWallTierTwo # Mono
@@ -98,7 +101,10 @@
     node: clockworkWall
   - type: IconSmooth
     key: walls
-    base: clock
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: clock
   - type: RCDDeconstructable # Frontier
     cost: 6 # Frontier
     delay: 8 # Frontier
@@ -127,7 +133,10 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: walls
-    base: clown
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: clown
   - type: Fixtures
     fixtures:
       fix1:
@@ -159,7 +168,10 @@
     node: meatWall
   - type: IconSmooth
     key: walls
-    base: meat
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: meat
 
 - type: entity
   parent: BaseWallTierTwo # Mono
@@ -175,7 +187,10 @@
     sprite: Structures/Walls/cult.rsi
   - type: IconSmooth
     key: walls
-    base: cult
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: cult
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -193,7 +208,10 @@
     sprite: Structures/Walls/debug.rsi
   - type: IconSmooth
     key: walls
-    base: debug
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: debug
 
 - type: entity
   parent: BaseWallTierThree # Mono - surely its fine since diamonds are so rare
@@ -213,7 +231,10 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: walls
-    base: diamond
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: diamond
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -247,7 +268,10 @@
         density: 4000
   - type: IconSmooth
     key: walls
-    base: gold
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: gold
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -267,7 +291,10 @@
     sprite: Structures/Walls/ice.rsi
   - type: IconSmooth
     key: walls
-    base: ice
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: ice
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -294,7 +321,10 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: walls
-    base: plasma
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: plasma
   - type: RadiationBlocker
     resistance: 5
 
@@ -319,7 +349,10 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: walls
-    base: plastic
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: plastic
 
 - type: entity
   parent: BaseWall
@@ -338,7 +371,10 @@
     sprite: Structures/Walls/plastitanium.rsi
   - type: IconSmooth
     key: walls
-    base: plastitanium
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: plastitanium
   - type: Fixtures
     fixtures:
       fix1:
@@ -417,9 +453,11 @@
     state: state0
   - type: PaintableWall # Forge-Change
   - type: IconSmooth
-    mode: Diagonal
     key: walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
     sprite: Structures/Walls/plastitanium_diagonal.rsi
     state: state0
@@ -464,7 +502,10 @@
     node: reinforcedWall
   - type: IconSmooth
     key: walls
-    base: reinf_over
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: reinf_over
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -515,7 +556,10 @@
     node: reinforcedWallRust
   - type: IconSmooth
     key: walls
-    base: reinf_over
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: reinf_over
   - type: RCDDeconstructable #Frontier
     cost: 6 #Frontier
     delay: 8 #Frontier
@@ -540,9 +584,11 @@
     state: state0
   - type: PaintableWall # Forge-Change
   - type: IconSmooth
-    mode: Diagonal
     key: walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
     sprite: Structures/Walls/reinforced_diagonal.rsi
     state: state0
@@ -588,7 +634,10 @@
     sprite: Structures/Walls/riveted.rsi
   - type: IconSmooth
     key: walls
-    base: riveted
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: riveted
   - type: StaticPrice
     price: 70 # Frontier: 150<115
   - type: RCDDeconstructable #Frontier
@@ -618,7 +667,10 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: walls
-    base: sandstone
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: sandstone
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -641,7 +693,10 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: walls
-    base: silver
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: silver
 
 #shuttle walls
 - type: entity
@@ -668,9 +723,11 @@
     state: state0
   - type: PaintableWall # Forge-Change
   - type: IconSmooth
-    mode: Diagonal
     key: walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
     sprite: Structures/Walls/shuttle_diagonal.rsi
     state: state0
@@ -729,7 +786,10 @@
     node: shuttleWall
   - type: IconSmooth
     key: walls
-    base: state
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -782,7 +842,10 @@
     node: shuttleInteriorWall
   - type: IconSmooth
     key: walls
-    base: state
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
 #  - type: Reflect # Frontier
 #    reflectProb: 1 # Frontier
 
@@ -808,7 +871,10 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: walls
-    base: solid
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: solid
 
 - type: entity
   parent: WallShuttleDiagonal
@@ -825,9 +891,11 @@
     sprite: Structures/Walls/solid_diagonal.rsi
     state: state0
   - type: IconSmooth
-    mode: Diagonal
     key: walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
     sprite: Structures/Walls/solid_diagonal.rsi
     state: state0
@@ -874,7 +942,10 @@
     node: wallrust
   - type: IconSmooth
     key: walls
-    base: solid
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: solid
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -890,7 +961,10 @@
     sprite: Structures/Walls/xeno.rsi
   - type: IconSmooth
     key: chitin
-    base: solid
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ chitin ]
+      base: solid
   - type: Construction
     graph: Girder
     node: wallChitin
@@ -930,7 +1004,10 @@
     resistance: 5
   - type: IconSmooth
     key: chitin
-    base: reinf_over
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ chitin ]
+      base: reinf_over
   - type: Construction
     graph: Girder
     node: reinforcedWallChitin
@@ -947,7 +1024,10 @@
     sprite: Structures/Walls/xenoborg.rsi
   - type: IconSmooth
     key: walls
-    base: xenoborg
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: xenoborg
 
 - type: entity
   parent: WallPlastitaniumDiagonal
@@ -988,7 +1068,10 @@
         density: 6000
   - type: IconSmooth
     key: walls
-    base: uranium
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: uranium
   - type: RadiationBlocker
     resistance: 6
   - type: RCDDeconstructable #Frontier
@@ -1015,7 +1098,10 @@
     node: woodWall
   - type: IconSmooth
     key: woods
-    base: wood
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ woods ]
+      base: wood
   - type: RCDDeconstructable #Frontier
     cost: 6 #Frontier
     delay: 8 #Frontier
@@ -1064,7 +1150,10 @@
           collection: WoodDestroy
   - type: IconSmooth
     key: webs
-    base: wall
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ webs ]
+      base: wall
   - type: Construction
     graph: WebStructures
     node: wall
@@ -1092,7 +1181,10 @@
     sprite: Structures/Walls/necropolis.rsi
   - type: IconSmooth
     key: walls
-    base: necropolis
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: necropolis
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -1108,7 +1200,10 @@
     sprite: Structures/Walls/mining.rsi
   - type: IconSmooth
     key: walls
-    base: mining
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: mining
   - type: RandomIconSmooth
     randomStates:
     - mining
@@ -1137,9 +1232,11 @@
     sprite: Structures/Walls/mining_diagonal.rsi
     state: state0
   - type: IconSmooth
-    mode: Diagonal
     key: walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
     sprite: Structures/Walls/mining_diagonal.rsi
     state: state0
@@ -1272,7 +1369,10 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: cobblebricks
-    base: cobblebrick
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ cobblebricks ]
+      base: cobblebrick
   - type: ArmorThickness
     thickness: 2
 
@@ -1287,7 +1387,10 @@
     sprite: Structures/Walls/cobblebrick_basalt.rsi
   - type: IconSmooth
     key: cobblebricks
-    base: cobblebrick
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ cobblebricks ]
+      base: cobblebrick
 
 - type: entity
   parent: WallCobblebrick
@@ -1305,7 +1408,10 @@
     sprite: Structures/Walls/cobblebrick_snow.rsi
   - type: IconSmooth
     key: cobblebricks
-    base: cobblebrick
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ cobblebricks ]
+      base: cobblebrick
 
 - type: entity
   parent: WallCobblebrick
@@ -1318,7 +1424,10 @@
     sprite: Structures/Walls/cobblebrick_asteroid.rsi
   - type: IconSmooth
     key: cobblebricks
-    base: cobblebrick
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ cobblebricks ]
+      base: cobblebrick
 
 - type: entity
   parent: WallCobblebrick
@@ -1331,7 +1440,10 @@
     sprite: Structures/Walls/cobblebrick_sand.rsi
   - type: IconSmooth
     key: cobblebricks
-    base: cobblebrick
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ cobblebricks ]
+      base: cobblebrick
 
 - type: entity
   parent: WallCobblebrick
@@ -1344,7 +1456,10 @@
     sprite: Structures/Walls/cobblebrick_chromite.rsi
   - type: IconSmooth
     key: cobblebricks
-    base: cobblebrick
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ cobblebricks ]
+      base: cobblebrick
 
 - type: entity
   parent: WallCobblebrick
@@ -1357,4 +1472,7 @@
     sprite: Structures/Walls/cobblebrick_andesite.rsi
   - type: IconSmooth
     key: cobblebricks
-    base: cobblebrick
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ cobblebricks ]
+      base: cobblebrick

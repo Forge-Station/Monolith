@@ -35,8 +35,11 @@
     sprite: Tiles/Planet/liquid_plasma.rsi
     state: full
   - type: IconSmooth
-    key: floor
-    base: plasma
+    key: phoron
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ phoron, walls ]
+      base: water
   - type: Physics
     bodyType: Static
   - type: Fixtures

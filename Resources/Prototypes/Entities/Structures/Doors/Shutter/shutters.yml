@@ -82,7 +82,6 @@
         acts: ["Destruction"]
   - type: IconSmooth
     key: walls
-    mode: NoSprite
   - type: DoorSignalControl
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -109,6 +108,16 @@
   - type: ShipRepairable
     repairTime: 3
     repairCost: 6
+  - type: PlacementReplacement
+    key: shutters
+  - type: IconSmooth
+    key: doors
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
+  - type: StructureAligner
+  - type: StructureAlignerPylon
 
 - type: entity
   id: ShuttersNormal

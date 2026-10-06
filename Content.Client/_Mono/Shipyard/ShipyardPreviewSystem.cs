@@ -112,10 +112,10 @@ public sealed class ShipyardPreviewSystem : SharedShipyardPreviewSystem
             // IconSmooth walls have no layerDatums — corners are added at Startup, which ran
             // before BaseRSI existed. Re-run corner setup now that BaseRSI is set.
             if (TryComp(uid, out IconSmoothComponent? smooth)
-                && smooth.Mode == IconSmoothingMode.Corners
+                && smooth.States.Length > 0
                 && sprite.BaseRSI != null)
             {
-                _iconSmooth.SetStateBase(uid, smooth, smooth.StateBase);
+                _iconSmooth.StartupLayers((uid, smooth));
             }
 
             if (TryComp(uid, out AppearanceComponent? appearance))

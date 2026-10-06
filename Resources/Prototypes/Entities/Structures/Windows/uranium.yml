@@ -35,7 +35,11 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    base: uwindow
+    key: walls
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: uwindow
   - type: Construction
     graph: Window
     node: uraniumWindow
@@ -133,9 +137,11 @@
     tags:
     - Diagonal
   - type: IconSmooth
-    mode: Diagonal
     key: walls # Frontier: windows<walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
     sprite: Structures/Windows/uranium_window_diagonal.rsi
     state: state0

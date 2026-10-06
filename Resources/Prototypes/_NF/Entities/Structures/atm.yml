@@ -332,3 +332,35 @@
   - type: CompanyAccessReader
     requiredCompanies:
     - PDV
+
+#Forge-change-start
+
+- type: entity
+  parent: BaseStationAdminBankATM
+  id: StationAdminBankATMSiv
+  description: Used to transfer funds to and from SIV's bank account.
+  suffix: SIV
+  components:
+  - type: StationBankATM
+    account: Siv #Register in C#?
+  - type: CompanyAccessReader
+    requiredCompanies:
+    - TSF
+  - type: AccessReader
+    access: [["HeadOfSecurity"]]
+
+- type: entity
+  parent: BaseStationAdminBankATM
+  id: StationAdminBankATMNfsd
+  description: Used to transfer funds to and from TSFMC-FOB's bank account.
+  suffix: TSFMC
+  components:
+  - type: StationBankATM
+    account: Nfsd
+  - type: CompanyAccessReader
+    requiredCompanies:
+    - TSF
+  - type: AccessReader
+    access: [["HeadOfSecurity"]]
+
+#Forge-change-end

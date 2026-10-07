@@ -72,22 +72,6 @@
 
 - type: latheRecipe
   parent: BaseCircuitboardRecipe
-  id: PlumbingPumpCircuitboard
-  icon:
-    sprite: _Goobstation/Structures/Machines/Plumbing/liquid_pump.rsi
-    state: icon
-  result: PlumbingPumpCircuitboard
-
-- type: latheRecipe
-  parent: BaseCircuitboardRecipe
-  id: PlumbingPumpCircuitboard
-  icon:
-    sprite: _Goobstation/Structures/Machines/Plumbing/liquid_pump.rsi
-    state: icon
-  result: PlumbingPumpCircuitboard
-
-- type: latheRecipe
-  parent: BaseCircuitboardRecipe
   id: VinylPlayerCircuitboard
   icon:
     sprite:  _Goobstation/Structures/Machines/StationRadio/vinylplayer.rsi

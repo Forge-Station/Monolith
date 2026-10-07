@@ -2,10 +2,3 @@
   id: Automation
   name: guide-entry-automation
   text: "/ServerInfo/_Forge/Guidebook/_Goobstation/Engineering/Automation.xml" # Forge-change
-  children:
-  - Plumbing
-
-- type: guideEntry
-  id: Plumbing
-  name: guide-entry-plumbing
-  text: "/ServerInfo/_Goobstation/Guidebook/Engineering/Plumbing.xml"

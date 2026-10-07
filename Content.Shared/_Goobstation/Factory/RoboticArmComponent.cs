@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 cheetah1984 <davidc71114@gmail.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared._Goobstation.Factory.Slots;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking;
@@ -16,15 +9,63 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Goobstation.Factory;
 
-/// <summary>
-/// Moves items from an input area or machine to an output area or machine.
-/// Uses <see cref="ExclusiveMachineComponent"/> for I/O slots.
-/// </summary>
 [RegisterComponent, NetworkedComponent, Access(typeof(RoboticArmSystem))]
-[AutoGenerateComponentState(fieldDeltas: true), AutoGenerateComponentPause]
+[AutoGenerateComponentState(true, fieldDeltas: true), AutoGenerateComponentPause]
 public sealed partial class RoboticArmComponent : Component
 {
     #region Linking
+    /// <summary>
+    /// Machine linked to the input port.
+    /// Might not always exist.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public NetEntity? InputMachine;
+
+    /// <summary>
+    /// Sink port on this arm that machines link to.
+    /// </summary>
+    [DataField]
+    public ProtoId<SinkPortPrototype> InputPort = "RoboticArmInput";
+
+    /// <summary>
+    /// The source port of the linked input machine.
+    /// This controls which item slot etc gets pulled from.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public ProtoId<SourcePortPrototype>? InputMachinePort;
+
+    /// <summary>
+    /// The resolved automation output slot of the input machine to take items from.
+    /// </summary>
+    [ViewVariables]
+    public AutomationSlot? InputSlot;
+
+    /// <summary>
+    /// Machine linked to the output port.
+    /// Might not always exist.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public NetEntity? OutputMachine;
+
+    /// <summary>
+    /// Source port on this arm that machines link from.
+    /// </summary>
+    [DataField]
+    public ProtoId<SourcePortPrototype> OutputPort = "RoboticArmOutput";
+
+    /// <summary>
+    /// The sink port of the linked output machine.
+    /// This controls which item slot etc gets inserted into.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public ProtoId<SinkPortPrototype>? OutputMachinePort;
+
+    /// <summary>
+    /// The resolved automation input slot of the output machine to insert items into.
+    /// </summary>
+    [ViewVariables]
+    public AutomationSlot? OutputSlot;
+
     /// <summary>
     /// Signal port invoked after an item gets moved.
     /// </summary>

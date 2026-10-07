@@ -88,7 +88,6 @@
           tags:
           - Bottle
           - PillCanister
-          - MedicalPatch # Goobstation
   - type: AutomationSlots # Goobstation
     slots:
     - !type:AutomatedSolution
@@ -108,8 +107,7 @@
       output: PlumbingDispenser
   - type: SolutionContainerManager
     solutions:
-      buffer: # Goobstation - solution shitcode doesnt like max volume 0 and i dont want to rewrite AddSolution
-        maxVol: 1000000
+      buffer: {}
   - type: DumpableSolution
     solution: buffer
     unlimited: true

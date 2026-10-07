@@ -1,9 +1,9 @@
-using Content.Goobstation.Shared.Factory.Slots;
+using Content.Shared._Goobstation.Factory.Slots;
 using Content.Shared.DeviceLinking;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Goobstation.Shared.Factory;
+namespace Content.Shared._Goobstation.Factory;
 
 public partial interface IExclusiveSlotComponent : IComponent
 {

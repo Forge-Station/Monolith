@@ -6,7 +6,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 
-namespace Content.Goobstation.Shared.Factory.Slots;
+namespace Content.Shared._Goobstation.Factory.Slots;
 
 /// <summary>
 /// An automated FitsInDispenser slot, whose solution can be used by liquid pumps.

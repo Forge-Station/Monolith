@@ -58,8 +58,8 @@
 #    - Magazine45_ACPPistolFMJ # Mono
 #    - BaseSecurityUplinkRadioCaptain # Forge-Change
 #    - ShipVoucherNfsdBailiff # Mono
-     - RubberStampBailiff
-     - FederationMilitaryCredit
-     - RadioHandheldNF # Mono
-     - RubberStampTSFCaptain # Mono
+    - RubberStampBailiff
+    - FederationMilitaryCredit
+    - RadioHandheldNF # Mono
+    - RubberStampTSFCaptain # Mono
 #    - BookTSFSOP # Forge-change delete

@@ -53,8 +53,8 @@
   storage:
     back:
 #    - Magazine45_ACPPistolFMJ Mono
-     - FederationMilitaryCredit75
+    - FederationMilitaryCredit75
 #    - BaseSecurityUplinkRadioOfficer # Forge-Change
 #    - ShipVoucherNfsdSergeant # Mono
-     - RadioHandheldNF # Mono
+    - RadioHandheldNF # Mono
 #    - BookTSFSOP # Forge-change delete

@@ -282,8 +282,8 @@ public sealed partial class GeneticsConsoleWindow : DefaultWindow
             ? branch
             : null;
 
-        ActivateButton.Disabled = !occupantReady || selected == null;
-        DeactivateButton.Disabled = !occupantReady || selected is not { CanDeactivate: true };
+        ActivateButton.Disabled = !occupantReady || state.OccupantCritical || selected == null;
+        DeactivateButton.Disabled = !occupantReady || state.OccupantCritical || selected is not { CanDeactivate: true };
         IsolateButton.Disabled = !occupantReady || selected is not { CanIsolate: true };
         CleanButton.Disabled = !occupantReady || selected is not { CanClean: true };
 

@@ -97,6 +97,24 @@
     useDelay: 3.5
 
 - type: entity
+  id: ActionForgeXenoStaminaSpit
+  name: Neurotoxin spit
+  description: Spit a sticky neurotoxin that drains stamina.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: xeno_spit
+    event: !type:ForgeXenoSpitActionEvent
+      plasmaCost: 30
+      projectile: BulletXenoStamina
+      speed: 20
+    useDelay: 2.5
+    range: 9
+    checkCanAccess: false
+
+- type: entity
   id: ActionForgeXenoPlantWeeds
   name: Plant weeds
   description: Secrete a patch of hive weeds. Plasma regenerates faster while standing on it.

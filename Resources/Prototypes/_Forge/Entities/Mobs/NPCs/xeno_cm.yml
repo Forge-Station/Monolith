@@ -243,7 +243,7 @@
   parent: MobXenoCMBase
   id: MobXenoCMBoiler
   name: xenomorph boiler
-  description: Bloated artillery. Slow, tough, and full of acid.
+  description: Bloated artillery. Spits acid while alive; ruptures into corrosive fog when killed.
   components:
   - type: Sprite
     sprite: _CM/Mobs/Xenonids/boiler.rsi
@@ -272,6 +272,16 @@
     organs:
     - OrganXenoTailHeavy
     - OrganXenoBoiler
+  - type: TriggerOnMobstateChange
+    mobState:
+    - Dead
+  - type: SmokeOnTrigger
+    duration: 12
+    spreadAmount: 28
+    solution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 35
   - type: Fixtures
     fixtures:
       fix1:
@@ -373,8 +383,8 @@
       600: Critical
       700: Dead
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.8
-    baseSprintSpeed: 3
+    baseWalkSpeed: 2.4
+    baseSprintSpeed: 4.2
   - type: MeleeWeapon
     damage:
       groups:
@@ -568,7 +578,7 @@
   parent: MobXenoCMBase
   id: MobXenoCMCarrier
   name: xenomorph carrier
-  description: A walking egg rack. The hive's logistics caste, with claws.
+  description: A walking egg rack. Spits a sticky glob that drains stamina, then closes in.
   components:
   - type: Sprite
     sprite: _CM/Mobs/Xenonids/carrier.rsi
@@ -597,6 +607,7 @@
     organs:
     - OrganXenoTail
     - OrganXenoEgg
+    - OrganXenoStaminaSpit
 
 - type: entity
   parent: MobXenoCMBase

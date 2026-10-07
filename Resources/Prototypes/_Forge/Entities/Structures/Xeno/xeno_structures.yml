@@ -274,7 +274,7 @@
 - type: entity
   id: XenoWeeds
   name: hive weeds
-  description: A carpet of living resin. It sticks to boots and walls alike.
+  description: A carpet of living resin. Boots drag; xenomorphs skim across it.
   suffix: Forge, Xeno, CM
   placement:
     mode: SnapgridCenter
@@ -305,12 +305,14 @@
         layer:
         - SlipLayer
   - type: SpeedModifierContacts
-    walkSpeedModifier: 0.85
-    sprintSpeedModifier: 0.85
+    walkSpeedModifier: 0.7
+    sprintSpeedModifier: 0.7
     ignoreWhitelist:
       components:
       - ForgeXeno
   - type: ForgeXenoWeeds
+    xenoWalkSpeedModifier: 1.2
+    xenoSprintSpeedModifier: 1.25
   - type: Damageable
     damageContainer: StructuralInorganic
   - type: Destructible
@@ -326,11 +328,11 @@
   parent: XenoWeeds
   id: XenoWeedsChoke
   name: thick hive weeds
-  description: A choking mat of resin. You have to break through it. Xenomorphs slip past.
+  description: A choking mat of resin. You can walk it, but every step fights you. Xenomorphs race across it.
   suffix: Forge, Xeno, CM, Corridor
   components:
   - type: Sprite
-    drawdepth: FloorObjects
+    drawdepth: FloorTiles
     sprite: _CM/Structures/Xenos/xeno_weeds.rsi
     layers:
     - state: hive_weed0
@@ -348,12 +350,18 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.4,-0.4,0.4,0.4"
-        density: 80
-        hard: true
-        mask:
-        - MobMask
+        hard: false
         layer:
-        - MidImpassable
+        - SlipLayer
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
+    ignoreWhitelist:
+      components:
+      - ForgeXeno
+  - type: ForgeXenoWeeds
+    xenoWalkSpeedModifier: 1.3
+    xenoSprintSpeedModifier: 1.4
   - type: Destructible
     thresholds:
     - trigger:
@@ -367,15 +375,24 @@
   parent: XenoWeeds
   id: XenoWeedNode
   name: hive weed node
-  description: A swollen node feeding weeds across the hive.
+  description: A swollen node feeding weeds across the hive. Walkable resin, not a barricade.
   suffix: Forge, Xeno, CM
   components:
   - type: Sprite
-    drawdepth: FloorObjects
+    drawdepth: FloorTiles
     sprite: _CM/Structures/Xenos/xeno_weeds.rsi
     layers:
     - state: weed0
     - state: weednode
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.6
+    sprintSpeedModifier: 0.6
+    ignoreWhitelist:
+      components:
+      - ForgeXeno
+  - type: ForgeXenoWeeds
+    xenoWalkSpeedModifier: 1.25
+    xenoSprintSpeedModifier: 1.35
 
 - type: entity
   parent: XenoWeeds
@@ -400,6 +417,9 @@
     ignoreWhitelist:
       components:
       - ForgeXeno
+  - type: ForgeXenoWeeds
+    xenoWalkSpeedModifier: 1.05
+    xenoSprintSpeedModifier: 1.05
 
 - type: entity
   parent: XenoWeeds
@@ -419,8 +439,14 @@
     key: xeno_fast
     mode: NoSprite
   - type: SpeedModifierContacts
-    walkSpeedModifier: 1.35
-    sprintSpeedModifier: 1.35
+    walkSpeedModifier: 0.85
+    sprintSpeedModifier: 0.85
+    ignoreWhitelist:
+      components:
+      - ForgeXeno
+  - type: ForgeXenoWeeds
+    xenoWalkSpeedModifier: 1.4
+    xenoSprintSpeedModifier: 1.45
 
 - type: entity
   parent: XenoWeeds
@@ -453,12 +479,15 @@
     ignoreWhitelist:
       components:
       - ForgeXeno
+  - type: ForgeXenoWeeds
+    xenoWalkSpeedModifier: 1.1
+    xenoSprintSpeedModifier: 1.1
 
 - type: entity
   parent: BaseStructure
   id: XenoEgg
   name: xenomorph egg
-  description: A leathery alien egg. Something inside wants out.
+  description: A leathery alien egg. Step close and something inside lunges.
   suffix: Forge, Xeno, CM
   placement:
     mode: SnapgridCenter
@@ -478,13 +507,13 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.3
+          radius: 0.35
         density: 40
-        mask:
-        - MachineMask
+        hard: false
         layer:
-        - MidImpassable
-        - LowImpassable
+        - SlipLayer
+  - type: ForgeXenoEggTrap
+    stunSeconds: 10
   - type: Damageable
     damageContainer: Biological
   - type: Destructible
@@ -515,6 +544,10 @@
     sprite: _CM/Structures/Xenos/xeno_egg.rsi
     state: egg_opened
     noRot: true
+  # Spent eggs keep the soft fixture but no longer stun.
+  - type: ForgeXenoEggTrap
+    stunSeconds: 0
+    openedPrototype: XenoEggOpened
   - type: Destructible
     thresholds:
     - trigger:

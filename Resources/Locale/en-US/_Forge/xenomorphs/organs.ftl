@@ -46,6 +46,8 @@ ent-OrganXenoStomp = xenomorph stomp gland
     .desc = A charge and a stomp.
 ent-OrganXenoEgg = xenomorph ovipositor gland
     .desc = Grows an egg.
+ent-OrganXenoStaminaSpit = xenomorph neurotoxin gland
+    .desc = Spits a sticky neurotoxin that drains stamina.
 
 xeno-graft-examine = Silent in hand. Graft surgically: patient down → scalpel → Start surgery → open ribcage → Graft Xenomorph Gland (gland in hand) → cauterize. Two max. No plasma for people; hide and combat wait ~1 min.
 xeno-graft-full = This body already carries two glands. A third will not take.

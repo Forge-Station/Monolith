@@ -10,6 +10,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Polymorph;
+using Robust.Server.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -20,6 +21,7 @@ public sealed partial class GeneticsSystem
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
     [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly LanguageSystem _languages = default!;
+    [Dependency] private readonly ContainerSystem _containers = default!;
 
     /// <summary>Chance a species rewrite never lets the old body back, even after death.</summary>
     private const float PermanentSpeciesChance = 0.05f;
@@ -48,6 +50,10 @@ public sealed partial class GeneticsSystem
         var payload = GetOrCreatePayload(geneId);
         var target = uid;
 
+        // ContainerSlot cannot hold both parent and child. Polymorph tries to insert the child while the
+        // parent still occupies the scanner, then banishes the parent — leaving the new body outside.
+        var hadScanner = TryGetDnaScanner(uid, out _, out var scannerComp);
+
         if (payload.Polymorph != null && !HasComp<PolymorphedEntityComponent>(uid))
         {
             var child = _polymorph.PolymorphEntity(uid, payload.Polymorph.Value);
@@ -56,10 +62,33 @@ public sealed partial class GeneticsSystem
                 TransferGenome(uid, child.Value, reapplyComponents: true);
                 target = child.Value;
                 MaybeFeralSpeech(target, payload.Polymorph.Value);
+
+                if (hadScanner && scannerComp.BodyContainer.ContainedEntity == null)
+                {
+                    _containers.Insert(child.Value, scannerComp.BodyContainer);
+                    EnsureComp<GenomeComponent>(child.Value);
+                }
             }
         }
 
         ApplyMorphExtras(target, geneId);
+    }
+
+    private bool TryGetDnaScanner(EntityUid uid, out EntityUid scannerUid, out DnaModifierScannerComponent scannerComp)
+    {
+        scannerUid = default;
+        scannerComp = null!;
+        if (!_containers.TryGetContainingContainer(uid, out var cont))
+            return false;
+
+        if (cont.ID != DnaModifierScannerComponent.ContainerId)
+            return false;
+
+        if (!TryComp(cont.Owner, out scannerComp))
+            return false;
+
+        scannerUid = cont.Owner;
+        return true;
     }
 
     private void RemoveMorphEffects(EntityUid uid, string geneId)

@@ -311,3 +311,15 @@
   - type: ForgeXenoOrgan
     actions:
     - ActionForgeXenoLayEgg
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoStaminaSpit
+  name: xenomorph neurotoxin gland
+  description: Spits a sticky neurotoxin that drains stamina.
+  components:
+  - type: Sprite
+    state: stomach
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoStaminaSpit

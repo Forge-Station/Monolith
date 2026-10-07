@@ -256,6 +256,20 @@
         Heat: 15
 
 - type: entity
+  parent: BulletXenoAcid
+  id: BulletXenoStamina
+  name: neurotoxin spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Poison: 4
+        Asphyxiation: 2
+  - type: StaminaDamageOnCollide
+    damage: 55
+
+- type: entity
   parent: BulletCannonBall
   id: ForgeBulletCannonBall
   categories: [ HideSpawnMenu ]

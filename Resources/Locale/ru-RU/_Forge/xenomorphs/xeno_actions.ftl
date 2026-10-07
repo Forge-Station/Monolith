@@ -19,6 +19,9 @@ ent-ActionForgeXenoSpit = Кислотный плевок
 ent-ActionForgeXenoSpitHeavy = Тяжёлый кислотный плевок
     .desc = Медленный и очень едкий плевок.
 
+ent-ActionForgeXenoStaminaSpit = Нейротоксинный плевок
+    .desc = Плюнуть липким нейротоксином, сажающим выносливость.
+
 ent-ActionForgeXenoPlantWeeds = Посадить сорняки
     .desc = Выделить клок ульевых сорняков. На них плазма восстанавливается быстрее.
 

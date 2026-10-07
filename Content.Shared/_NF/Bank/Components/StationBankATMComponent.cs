@@ -38,4 +38,6 @@ public enum SectorBankAccount : byte
     Medical,
     Mieyo,
     BlackMarket,
+    Imperial,
+    Renegates,
 }

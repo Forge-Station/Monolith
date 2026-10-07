@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Shared.ActionBlocker;
-using Content.Shared.Actions.Components;
+using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Body.Events;
 using Content.Shared.Containers.ItemSlots;

@@ -25,7 +25,7 @@ public sealed class MechGrabberSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VehicleSystem _vehicle = default!;
+    [Dependency] private readonly SharedVehicleSystem _vehicle = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

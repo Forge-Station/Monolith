@@ -18,7 +18,7 @@ public abstract class MechInstallSystem : EntitySystem
     [Dependency] protected readonly SharedMechSystem Mech = default!;
     [Dependency] protected readonly MechLockSystem MechLock = default!;
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
-    [Dependency] protected readonly VehicleSystem Vehicle = default!;
+    [Dependency] protected readonly SharedVehicleSystem Vehicle = default!;
 
     /// <summary>
     /// Common precondition checks before starting install. Validates mech, broken/closed states and actor relation.

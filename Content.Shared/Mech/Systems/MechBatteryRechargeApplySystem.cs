@@ -11,7 +11,7 @@ namespace Content.Shared.Mech.Systems;
 /// </summary>
 public sealed class MechBatteryRechargeApplySystem : EntitySystem
 {
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private readonly SharedPowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
 
     /// <inheritdoc/>

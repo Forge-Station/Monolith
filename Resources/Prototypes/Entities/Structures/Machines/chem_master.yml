@@ -88,6 +88,7 @@
           tags:
           - Bottle
           - PillCanister
+          - MedicalPatch # Goobstation
   - type: AutomationSlots # Goobstation
     slots:
     - !type:AutomatedSolution

@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Goobstation.Factory.Plumbing;
+namespace Content.Shared._Goobstation.AutosurgeonFactory.Plumbing;
 
 /// <summary>
 /// Adds a liquid filter which can be changed via BUI.

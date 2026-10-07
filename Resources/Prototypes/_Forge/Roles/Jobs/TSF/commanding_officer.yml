@@ -64,7 +64,9 @@
     back:
     - Multitool
     - DoorRemoteNfsd
-    - BaseSecurityUplinkRadioSheriff
+    - FederationMilitaryCredit
+    - FederationMilitaryCredit25
+  # - BaseSecurityUplinkRadioSheriff # Forge-Change
     - PhoneInstrumentHigh
     - TSFSecApartmentTablet
     - RubberStampTSFCommandingOfficer

@@ -1,11 +1,11 @@
 using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared._Goobstation.Factory.Slots;
+using Content.Goobstation.Shared.Factory.Slots;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Power.EntitySystems;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._Goobstation.Factory.Plumbing;
+namespace Content.Goobstation.Shared.Factory.Plumbing;
 
 public sealed class PlumbingPumpSystem : EntitySystem
 {

@@ -2,11 +2,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Factory.Slots;
+using Content.Goobstation.Shared.Factory.Slots;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 
-namespace Content.Shared._Goobstation.Factory;
+namespace Content.Goobstation.Shared.Factory;
 
 /// <summary>
 /// Tracks port/machine state and prevents linking multiple machines to exclusive ports.

@@ -3,7 +3,7 @@ using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 
-namespace Content.Shared._Goobstation.Factory;
+namespace Content.Goobstation.Shared.Factory;
 
 public sealed class SignalPowerSwitchSystem : EntitySystem
 {

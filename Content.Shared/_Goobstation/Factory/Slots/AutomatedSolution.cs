@@ -5,7 +5,7 @@
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 
-namespace Content.Shared._Goobstation.Factory.Slots;
+namespace Content.Goobstation.Shared.Factory.Slots;
 
 /// <summary>
 /// An automated solution that can be used by liquid pumps.

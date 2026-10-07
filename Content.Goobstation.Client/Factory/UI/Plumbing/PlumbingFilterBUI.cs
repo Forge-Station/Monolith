@@ -2,10 +2,10 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared._Goobstation.Factory.Plumbing;
+using Content.Goobstation.Shared.Factory.Plumbing;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._Goobstation.Factory.UI.Plumbing;
+namespace Content.Goobstation.Client.Factory.UI.Plumbing;
 
 public sealed class PlumbingFilterBUI : BoundUserInterface
 {

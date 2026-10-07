@@ -97,12 +97,14 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
     private void OnReturnMindIntoAi(Entity<AiRemoteControllerComponent> entity, ref ReturnMindIntoAiEvent args) =>
         ReturnMindIntoAi(entity);
 
-    // Forge - change
-    protected override void OnMindUnvisited(EntityUid uid, AiRemoteControllerComponent component, MindUnvisitedMessage args)
+    // only runs when an AI link was genuinely released, so an unrelated mind that
+    // merely stopped visiting this entity no longer shuts the chassis down and fires the
+    // "borg-mind-removed" popup.
+    protected override void OnAiReleased(EntityUid entity)
     {
-        base.OnMindUnvisited(uid, component, args);
-        if (!TerminatingOrDeleted(uid) && TryComp<BorgChassisComponent>(uid, out var chassis))
-            _borg.BorgDeactivate(uid, chassis);
+        base.OnAiReleased(entity);
+        if (!TerminatingOrDeleted(entity) && TryComp<BorgChassisComponent>(entity, out var chassis))
+            _borg.BorgDeactivate(entity, chassis);
     }
 
     public void AiTakeControl(EntityUid ai, EntityUid entity)
@@ -124,6 +126,13 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
 
         if (!_map.TryFindGridAt(Transform(ai).MapPosition, out var grid, out var _) || Transform(entity).GridUid != grid)
             return; // Mono no controlling borgs outside the ai's grid.
+
+        // resolve the core before mutating anything. This used to be checked after the
+        // mind was already moved and the borg activated, so a failed lookup left the AI piloting a
+        // borg with its eye still active, its own lawset, and no way back (ReturnMindIntoAi needs
+        // the same lookup to succeed).
+        if (!_stationAiSystem.TryGetCore(ai, out var stationAiCore))
+            return;
 
         if (TryComp(entity, out IntrinsicRadioTransmitterComponent? transmitter))
         {
@@ -148,9 +157,6 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
         _mind.Visit(mindId, entity, mind); // Forge - change: keep ownership of the AI core.
         if (TryComp<BorgChassisComponent>(entity, out var chassis)) // Forge - change
             _borg.BorgActivate(entity, chassis);
-
-        if (!_stationAiSystem.TryGetCore(ai, out var stationAiCore))
-            return;
 
         _stationAiSystem.SwitchRemoteEntityMode(stationAiCore, false);
 

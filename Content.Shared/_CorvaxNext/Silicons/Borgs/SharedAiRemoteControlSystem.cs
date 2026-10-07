@@ -26,6 +26,7 @@ public abstract partial class SharedAiRemoteControlSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<AiRemoteControllerComponent, MindUnvisitedMessage>(OnMindUnvisited); // Forge - change
+        SubscribeLocalEvent<StationAiHeldComponent, EntityTerminatingEvent>(OnHeldAiTerminating); // Forge - change
     }
 
     // Forge - change
@@ -34,39 +35,83 @@ public abstract partial class SharedAiRemoteControlSystem : EntitySystem
         ReturnMindIntoAi(uid);
     }
 
-    public void ReturnMindIntoAi(EntityUid entity)
+    /// <summary>
+    ///     Forge - change: if the AI brain itself is destroyed while it is piloting something, nothing
+    ///     un-visits the controlled entity (SharedMindSystem only reacts to the *visited* entity
+    ///     terminating), so without this the borg would stay activated, powered and stuck on the AI's
+    ///     radio channels forever.
+    /// </summary>
+    private void OnHeldAiTerminating(EntityUid uid, StationAiHeldComponent component, ref EntityTerminatingEvent args)
     {
-        if (!TryComp<AiRemoteControllerComponent>(entity, out var remoteComp))
-            return;
+        if (component.CurrentConnectedEntity is { } controlled)
+            ReleaseRemoteControl(controlled);
+    }
 
-        if (remoteComp?.AiHolder == null
-            || !_stationAiSystem.TryGetCore(remoteComp.AiHolder.Value, out var stationAiCore)
-            || stationAiCore.Comp?.RemoteEntity == null)
-            return;
+    /// <summary>
+    ///     Forge - change: restores the controlled entity to its pre-takeover state and drops the link.
+    ///     Deliberately independent of the AI core, so it still works when the core or brain is gone.
+    /// </summary>
+    /// <returns>True if an AI link was actually released.</returns>
+    public bool ReleaseRemoteControl(EntityUid entity)
+    {
+        if (!TryComp<AiRemoteControllerComponent>(entity, out var remoteComp) ||
+            remoteComp.AiHolder == null ||
+            remoteComp.LinkedMind == null)
+        {
+            return false;
+        }
 
-        if (remoteComp.LinkedMind == null)
-            return;
+        if (TryComp<StationAiHeldComponent>(remoteComp.AiHolder.Value, out var stationAiHeldComp))
+            stationAiHeldComp.CurrentConnectedEntity = null;
 
-        if (!TryComp<StationAiHeldComponent>(remoteComp.AiHolder.Value, out var stationAiHeldComp))
-            return;
-
-        stationAiHeldComp.CurrentConnectedEntity = null;
-
-        // Forge - change: clear the link before UnVisit raises MindUnvisitedMessage.
+        // Clear the link before UnVisit raises MindUnvisitedMessage, so the re-entrant call bails.
         var mind = remoteComp.LinkedMind.Value;
         remoteComp.AiHolder = null;
         remoteComp.LinkedMind = null;
+
         if (TryComp(entity, out IntrinsicRadioTransmitterComponent? transmitter) &&
             remoteComp.PreviouslyTransmitterChannels != null)
             transmitter.Channels = [.. remoteComp.PreviouslyTransmitterChannels];
         if (TryComp(entity, out ActiveRadioComponent? radio) &&
             remoteComp.PreviouslyActiveRadioChannels != null)
             radio.Channels = [.. remoteComp.PreviouslyActiveRadioChannels];
+
+        remoteComp.PreviouslyTransmitterChannels = null;
+        remoteComp.PreviouslyActiveRadioChannels = null;
+
         _mind.UnVisit(mind);
 
-        _stationAiSystem.SwitchRemoteEntityMode(stationAiCore, true);
+        OnAiReleased(entity);
+        return true;
+    }
 
-        _xformSystem.SetCoordinates(stationAiCore.Comp.RemoteEntity.Value, Transform(entity).Coordinates);
+    /// <summary>
+    ///     Forge - change: called only when an AI link was genuinely released, so server-side teardown
+    ///     (deactivating the chassis) can't fire for unrelated minds that merely stopped visiting.
+    /// </summary>
+    protected virtual void OnAiReleased(EntityUid entity)
+    {
+    }
+
+    public void ReturnMindIntoAi(EntityUid entity)
+    {
+        if (!TryComp<AiRemoteControllerComponent>(entity, out var remoteComp) || remoteComp.AiHolder == null)
+            return;
+
+        // Forge - change: resolve the core up front, but don't let a missing core abort the release -
+        // that used to leave the entity permanently linked and activated.
+        var hasCore = _stationAiSystem.TryGetCore(remoteComp.AiHolder.Value, out var stationAiCore)
+                      && stationAiCore.Comp?.RemoteEntity != null;
+        var returnCoordinates = Transform(entity).Coordinates;
+
+        if (!ReleaseRemoteControl(entity))
+            return;
+
+        if (!hasCore)
+            return;
+
+        _stationAiSystem.SwitchRemoteEntityMode(stationAiCore, true);
+        _xformSystem.SetCoordinates(stationAiCore.Comp!.RemoteEntity!.Value, returnCoordinates);
     }
 }
 

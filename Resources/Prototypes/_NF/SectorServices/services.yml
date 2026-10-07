@@ -28,6 +28,16 @@
         !type:SectorBankAccountInfo
         balance: 8000
         increasePerSecond: 65 # ~234K per hour, about enough for minimum wage for the default TSFMC size
+# Forge-change-add-start
+      Imperial:
+        !type:SectorBankAccountInfo
+        balance: 8000
+        increasePerSecond: 65 # ~234K per hour, about enough for minimum wage for the default Imperial size
+      Renegates:
+        !type:SectorBankAccountInfo
+        balance: 4000
+        increasePerSecond: 33 # ~118K per hour, about enough for minimum wage for the default Renegates size
+# Forge-change-add-end
       Medical:
         !type:SectorBankAccountInfo
         balance: 20000 # Forge-change: 8000 to 20k

@@ -10,6 +10,7 @@
     scale: 1
     requireNoGrid: true
     shape: square
+  - type: DroneSalvageKeep # Forge-change: survive drone wreck cull
   - type: SpawnItemsOnUse
     items:
     # Money - 30k # removed

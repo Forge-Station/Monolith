@@ -61,6 +61,7 @@
   - type: ThermalSignature # Mono
   - type: DisableToolUse # Forge-change
     anchoringFalse: true
+  - type: DroneSalvageKeep # Forge-change: survive drone wreck cull
 
 - type: entity
   id: NpcStationAiApproacher

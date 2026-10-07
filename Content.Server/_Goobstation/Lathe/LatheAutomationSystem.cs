@@ -1,9 +1,9 @@
-using Content.Goobstation.Shared.Factory;
+using Content.Shared._Goobstation.Factory;
 using Content.Server.Lathe;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Lathe;
 
-namespace Content.Goobstation.Server.Lathe;
+namespace Content.Server._Goobstation.Lathe;
 
 public sealed class LatheAutomationSystem : EntitySystem
 {

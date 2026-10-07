@@ -67,18 +67,6 @@ public sealed partial class RoboticArmSystem : EntitySystem
         var query = EntityQueryEnumerator<RoboticArmComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            // Cheap idle filter: an arm with no held item, no buffered inputs and no
-            // linked source machine has nothing to do. Skip before any heavier checks
-            // (power/dirty fields/event raises) to keep big factories cheap.
-            if (comp.HeldItem == null
-                && comp.InputItems.Count == 0
-                && comp.InputMachine == null)
-            {
-                if (comp.NextMove != null)
-                    StopMoving((uid, comp));
-                continue;
-            }
-
             if (!_power.IsPowered(uid))
                 continue;
 

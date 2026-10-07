@@ -337,29 +337,29 @@
 
 - type: entity
   parent: BaseStationAdminBankATM
-  id: StationAdminBankATMEmpire
+  id: StationAdminBankATMImperial
   description: Used to transfer funds to and from Empire's bank account.
-  suffix: Empire
+  suffix: Imperial
   components:
   - type: StationBankATM
-    account: Empire #Register in C#?
+    account: Imperial #Register in C#?
   - type: CompanyAccessReader
     requiredCompanies:
-    - Empire
+    - Imperial
   - type: AccessReader
     access: [["Empire"]]
 
 - type: entity
   parent: BaseStationAdminBankATM
-  id: StationAdminBankATMRenegate
+  id: StationAdminBankATMRenegates
   description: Used to transfer funds to and from Renegate's bank account.
-  suffix: Renegate
+  suffix: Renegates
   components:
   - type: StationBankATM
-    account: Renegate #Register in C#?
+    account: Renegates #Register in C#?
   - type: CompanyAccessReader
     requiredCompanies:
-    - Renegate
+    - Renegates
   - type: AccessReader
     access: [["Renegate"]]
 

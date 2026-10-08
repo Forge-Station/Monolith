@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Pixel art for Corvax Forge leviathans, palette from tgstation slimes.",
+  "size": {
+    "x": 1024,
+    "y": 1024
+  },
+  "states": [
+    {
+      "name": "alive",
+      "delays": [
+        [
+          0.16,
+          0.16,
+          0.16,
+          0.16,
+          0.16,
+          0.16,
+          0.16,
+          0.16
+        ]
+      ]
+    },
+    {
+      "name": "alive-unshaded",
+      "delays": [
+        [
+          0.16,
+          0.16,
+          0.16,
+          0.16,
+          0.16,
+          0.16,
+          0.16,
+          0.16
+        ]
+      ]
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "dead-unshaded"
+    }
+  ]
+}

@@ -24,8 +24,11 @@ public sealed class OreDisposalFilterSystem : EntitySystem
     {
         base.Initialize();
 
+        // after DisposalTubeSystem so we override the inherited DisposalJunction random routing.
         SubscribeLocalEvent<OreDisposalFilterComponent, GetDisposalsConnectableDirectionsEvent>(OnGetConnectableDirections);
-        SubscribeLocalEvent<OreDisposalFilterComponent, GetDisposalsNextDirectionEvent>(OnGetNextDirection);
+        SubscribeLocalEvent<OreDisposalFilterComponent, GetDisposalsNextDirectionEvent>(
+            OnGetNextDirection,
+            after: new[] { typeof(DisposalTubeSystem) });
 
         Subs.BuiEvents<OreDisposalFilterComponent>(OreDisposalFilterUiKey.Key, subs =>
         {

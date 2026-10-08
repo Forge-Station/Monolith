@@ -350,6 +350,8 @@
       #   tableId: CargoGiftsTable # Frontier
       - !type:NestedSelector
         tableId: CalmPestEventsTable
+      - !type:NestedSelector # Forge-Change
+        tableId: ForgeLeviathanEventsTable # Forge-Change
       # - !type:NestedSelector # Frontier
       #   tableId: SpicyPestEventsTable # Frontier
 

@@ -2,6 +2,6 @@
   parent: AirlockExternalGlass
   id: AirlockExternalGlassNfsd
   suffix: TSFMC, Glass
-  components:
-  - type: Sprite
-    sprite: _Forge/Structures/Doors/Airlocks/Glass/external_nfsd.rsi # Forge-Change
+  # components:
+  # - type: Sprite # Forge-change: wtf
+  #   sprite: _NF/Structures/Doors/Airlocks/Glass/externalnfsd.rsi

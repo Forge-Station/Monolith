@@ -1,6 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Containers.ItemSlots;
 
-namespace Content.Shared._Goobstation.Factory.Slots;
+namespace Content.Goobstation.Shared.Factory.Slots;
 
 /// <summary>
 /// Abstraction over an <see cref="ItemSlot"/> on the machine.

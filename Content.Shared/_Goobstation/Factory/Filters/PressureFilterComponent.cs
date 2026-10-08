@@ -1,8 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Atmos;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Goobstation.Factory.Filters;
+namespace Content.Goobstation.Shared.Factory.Filters;
 
 /// <summary>
 /// Requires that the pressure of an entity's gas mixture is within some range.

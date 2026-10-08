@@ -1,7 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Goobstation.Factory.Filters;
+namespace Content.Goobstation.Shared.Factory.Filters;
 
 /// <summary>
 /// A filter that requires items to have the exact same name as a set string.

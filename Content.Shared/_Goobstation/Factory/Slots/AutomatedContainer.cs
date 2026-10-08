@@ -1,6 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.Containers;
 
-namespace Content.Shared._Goobstation.Factory.Slots;
+namespace Content.Goobstation.Shared.Factory.Slots;
 
 /// <summary>
 /// Abstraction over a <see cref="BaseContainer"/> on the machine.

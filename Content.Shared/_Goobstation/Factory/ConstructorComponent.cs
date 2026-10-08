@@ -1,9 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Construction.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Goobstation.Factory;
+namespace Content.Goobstation.Shared.Factory;
 
 /// <summary>
 /// Machine that starts constructions.

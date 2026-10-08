@@ -1,16 +1,18 @@
-using Content.Shared._Goobstation.Factory;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Factory;
 using Robust.Client.GameObjects;
 using Robust.Shared.Timing;
 
-namespace Content.Client._Goobstation.Factory;
+namespace Content.Goobstation.Client.Factory;
 
 /// <summary>
 /// Animations robotic arm's arm layer swinging.
 /// Can't be done with engine AnimationPlayer as it can't animate individual layers.
 /// </summary>
-public sealed partial class RoboticArmAnimationSystem : EntitySystem
+public sealed class RoboticArmAnimationSystem : EntitySystem
 {
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void FrameUpdate(float frameTime)
     {
@@ -37,9 +39,6 @@ public sealed partial class RoboticArmAnimationSystem : EntitySystem
         var progress = (_timing.CurTime - started) / ent.Comp.MoveDelay;
         if (!ent.Comp.HasItem) // returning to the resting position when emptied
             progress = 1f - progress;
-        else if (progress > 1f) // Mono
-            progress = 2f - progress;
-        progress = Math.Clamp(progress, 0f, 1f); // Mono
         var angle = Angle.FromDegrees(progress * 180f);
         sprite.LayerSetRotation(RoboticArmLayers.Arm, angle);
     }

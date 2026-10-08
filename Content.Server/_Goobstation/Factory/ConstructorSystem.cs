@@ -1,15 +1,17 @@
-using Content.Shared._Goobstation.Factory;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Factory;
 using Content.Server.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.DoAfter;
 using Robust.Shared.Maths;
 
-namespace Content.Server._Goobstation.Factory;
+namespace Content.Goobstation.Server.Factory;
 
-public sealed partial class ConstructorSystem : SharedConstructorSystem
+public sealed class ConstructorSystem : SharedConstructorSystem
 {
-    [Dependency] private ConstructionSystem _construction = default!;
-    [Dependency] private StartableMachineSystem _machine = default!;
+    [Dependency] private readonly ConstructionSystem _construction = default!;
+    [Dependency] private readonly StartableMachineSystem _machine = default!;
 
     private EntityQuery<ActiveDoAfterComponent> _activeQuery;
 

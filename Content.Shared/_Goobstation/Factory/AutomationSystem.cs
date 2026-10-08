@@ -1,15 +1,17 @@
-using Content.Shared._Goobstation.Factory.Slots;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Factory.Slots;
 using Content.Shared.Prototypes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Factory;
+namespace Content.Goobstation.Shared.Factory;
 
-public sealed partial class AutomationSystem : EntitySystem
+public sealed class AutomationSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
     private EntityQuery<AutomationSlotsComponent> _slotsQuery;
     private EntityQuery<AutomatedComponent> _automatedQuery;
@@ -120,10 +122,7 @@ public sealed partial class AutomationSystem : EntitySystem
         return null;
     }
 
-    public bool IsAutomated(EntityUid uid)
-    {
-        return _automatedQuery.HasComp(uid);
-    }
+    public bool IsAutomated(EntityUid uid) => _automatedQuery.HasComp(uid);
 
     public bool HasSlot(Entity<AutomationSlotsComponent?> ent, string port, bool input)
     {

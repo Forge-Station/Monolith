@@ -1,8 +1,10 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.DeviceLinking;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Factory;
+namespace Content.Goobstation.Shared.Factory;
 
 /// <summary>
 /// Machine that can be started with a signal.

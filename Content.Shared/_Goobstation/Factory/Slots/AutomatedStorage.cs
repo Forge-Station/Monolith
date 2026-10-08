@@ -1,7 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 
-namespace Content.Shared._Goobstation.Factory.Slots;
+namespace Content.Goobstation.Shared.Factory.Slots;
 
 /// <summary>
 /// Abstraction over a <see cref="StorageComponent"/> grid inventory.

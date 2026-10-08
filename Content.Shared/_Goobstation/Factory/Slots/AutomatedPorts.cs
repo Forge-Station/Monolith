@@ -1,7 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.DeviceLinking;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Factory.Slots;
+namespace Content.Goobstation.Shared.Factory.Slots;
 
 /// <summary>
 /// Adds no item I/O, only enables signal ports.

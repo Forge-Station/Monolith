@@ -1,10 +1,13 @@
-using Content.Shared._Goobstation.Factory.Filters;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Factory.Filters;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
 
-namespace Content.Shared._Goobstation.Factory.Slots;
+namespace Content.Goobstation.Shared.Factory.Slots;
 
 /// <summary>
 /// An abstraction over some way to insert/take an item from a machine.
@@ -42,7 +45,7 @@ public abstract partial class AutomationSlot
     [ViewVariables]
     public EntityUid Owner;
 
-    [Dependency] public IEntityManager EntMan = default!;
+    [Dependency] public readonly IEntityManager EntMan = default!;
     protected AutomationFilterSystem _filter;
     protected EntityWhitelistSystem _whitelist;
     protected SharedDeviceLinkSystem _device;
@@ -109,4 +112,9 @@ public abstract partial class AutomationSlot
         if (Output is {} output)
             _device.RemoveSourcePort(Owner, output);
     }
+
+    /// <summary>
+    /// For plumbing slots, get the solution for this slot.
+    /// </summary>
+    public virtual Entity<SolutionComponent>? GetSolution() => null;
 }

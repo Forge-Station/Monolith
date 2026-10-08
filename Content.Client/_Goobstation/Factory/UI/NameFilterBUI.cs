@@ -1,7 +1,9 @@
-using Content.Shared._Goobstation.Factory.Filters;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Factory.Filters;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._Goobstation.Factory.UI;
+namespace Content.Goobstation.Client.Factory.UI;
 
 public sealed class NameFilterBUI : BoundUserInterface
 {

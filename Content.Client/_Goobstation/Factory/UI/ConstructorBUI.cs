@@ -1,6 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Client.Construction;
 using Content.Client.Construction.UI;
-using Content.Shared._Goobstation.Factory;
+using Content.Goobstation.Shared.Factory;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Whitelist;
 using Robust.Client.GameObjects;
@@ -12,16 +14,16 @@ using System.Linq;
 
 namespace Content.Goobstation.Client.Factory.UI;
 
-public sealed partial class ConstructorBUI : BoundUserInterface
+public sealed class ConstructorBUI : BoundUserInterface
 {
-    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     private readonly ConstructionSystem _construction;
     private readonly EntityWhitelistSystem _whitelist;
     private readonly SpriteSystem _sprite;
 
     private ConstructionMenu? _menu;
     private string? _id;
-    private List<ConstructionPrototype> _recipes = new();
+    private List<ConstructionMenu.ConstructionMenuListData> _recipes = new();
     private readonly LocId _favoriteCatName = "construction-category-favorites";
     private readonly LocId _forAllCategoryName = "construction-category-all";
 
@@ -46,13 +48,13 @@ public sealed partial class ConstructorBUI : BoundUserInterface
         _menu.RecipeSelected += (_, item) =>
         {
             _menu.ClearRecipeInfo();
-            if (item?.Metadata is ConstructionPrototype proto)
+            if (item != null && item.Prototype != null)
             {
-                _id = proto.ID;
-                _menu.SetRecipeInfo(proto.Name, proto.Description, _sprite.Frame0(proto.Icon),
-                    proto.Type != ConstructionType.Item, true); // TODO: favourites
+                _id = item.Prototype.ID;
+                _menu.SetRecipeInfo(item.Prototype.Name ?? "", item.Prototype.Description ?? "", item?.TargetPrototype,
+                    item!.Prototype.Type != ConstructionType.Item, true); // TODO: favourites
 
-                GenerateStepList(proto);
+                GenerateStepList(item.Prototype);
             }
             else
             {
@@ -125,7 +127,8 @@ public sealed partial class ConstructorBUI : BoundUserInterface
             if (_whitelist.IsWhitelistFail(recipe.EntityWhitelist, user))
                 continue;
 
-            if (searching
+            if (searching 
+                && recipe.Name != null
                 && !recipe.Name.ToLowerInvariant().Contains(search))
                 continue;
 
@@ -140,32 +143,22 @@ public sealed partial class ConstructorBUI : BoundUserInterface
                     continue;
             }
 
-            _recipes.Add(recipe);
+            if (!_construction!.TryGetRecipePrototype(recipe.ID, out var targetProtoId))
+                continue;
+
+            if (!_proto.TryIndex(targetProtoId, out EntityPrototype? proto))
+                continue;
+
+            _recipes.Add(new(recipe, proto));
         }
 
-        _recipes.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.InvariantCulture));
+        _recipes.Sort((a, b) => string.Compare(a.Prototype.Name, b.Prototype.Name, StringComparison.InvariantCulture));
 
         var recipesList = menu.Recipes;
-        recipesList.Clear();
+        recipesList.PopulateList(_recipes);
 
         menu.RecipesGridScrollContainer.Visible = false;
         menu.Recipes.Visible = true;
-
-        // no grid because fuck you
-        foreach (var recipe in _recipes)
-            recipesList.Add(GetItem(recipe, recipesList));
-    }
-
-    private ItemList.Item GetItem(ConstructionPrototype recipe, ItemList itemList)
-    {
-        return new(itemList)
-        {
-            Metadata = recipe,
-            Text = recipe.Name,
-            Icon = _sprite.Frame0(recipe.Icon),
-            TooltipEnabled = true,
-            TooltipText = recipe.Description,
-        };
     }
 
     private void GenerateStepList(ConstructionPrototype proto)

@@ -1,7 +1,9 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Goobstation.Factory.Filters;
+namespace Content.Goobstation.Shared.Factory.Filters;
 
 /// <summary>
 /// Component for machines that have a filter slot.

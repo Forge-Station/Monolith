@@ -1,6 +1,8 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Goobstation.Factory;
+namespace Content.Goobstation.Shared.Factory;
 
 /// <summary>
 /// Component added to machines with <see cref="AutomationSlotsComponent"/> to enable their ports for linking.

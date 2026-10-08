@@ -1,17 +1,19 @@
-using Content.Shared._Goobstation.Construction;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Common.Construction;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Goobstation.Factory;
+namespace Content.Goobstation.Shared.Factory;
 
-public abstract partial class SharedConstructorSystem : EntitySystem
+public abstract class SharedConstructorSystem : EntitySystem
 {
-    [Dependency] protected ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] protected IPrototypeManager Proto = default!;
-    [Dependency] protected SharedTransformSystem _transform = default!;
+    [Dependency] protected readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] protected readonly IPrototypeManager Proto = default!;
+    [Dependency] protected readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -31,7 +33,7 @@ public abstract partial class SharedConstructorSystem : EntitySystem
             return;
 
         var msg = ent.Comp.Construction is {} id
-            ? Loc.GetString("constructor-examine", ("name", Proto.Index(id).Name))
+            ? Loc.GetString("constructor-examine", ("name", Proto.Index(id).Name ?? id))
             : Loc.GetString("constructor-examine-unset");
         args.PushMarkup(msg);
     }

@@ -17,7 +17,6 @@ public sealed partial class HandheldRadioMenu : FancyWindow
     public event Action<string>? OnFrequencyChanged;
 
     private bool _updating;
-    private bool _editingFrequency;
 
     public HandheldRadioMenu()
     {
@@ -27,13 +26,8 @@ public sealed partial class HandheldRadioMenu : FancyWindow
         MicButton.OnPressed += args => OnMicPressed?.Invoke(args.Button.Pressed);
         SpeakerButton.OnPressed += args => OnSpeakerPressed?.Invoke(args.Button.Pressed);
 
-        FrequencyLineEdit.OnTextChanged += _ =>
-        {
-            _editingFrequency = true;
-            PopularFrequencyOptions.SelectId(RadioFrequencyPresetUi.CustomOptionId);
-        };
-        FrequencyLineEdit.OnTextEntered += e => SubmitFrequency(e.Text);
-        FrequencyLineEdit.OnFocusExit += e => SubmitFrequency(e.Text);
+        FrequencyLineEdit.OnTextEntered += e => OnFrequencyChanged?.Invoke(e.Text);
+        FrequencyLineEdit.OnFocusExit += e => OnFrequencyChanged?.Invoke(e.Text);
 
         RadioFrequencyPresetUi.Populate(PopularFrequencyOptions, _prototypes);
         PopularFrequencyOptions.OnItemSelected += args =>
@@ -44,19 +38,12 @@ public sealed partial class HandheldRadioMenu : FancyWindow
             PopularFrequencyOptions.SelectId(args.Id);
             if (args.Id == RadioFrequencyPresetUi.CustomOptionId)
             {
-                _editingFrequency = true;
                 FrequencyLineEdit.GrabKeyboardFocus();
                 return;
             }
 
-            SubmitFrequency(args.Id.ToString());
+            OnFrequencyChanged?.Invoke(args.Id.ToString());
         };
-    }
-
-    private void SubmitFrequency(string frequency)
-    {
-        _editingFrequency = false;
-        OnFrequencyChanged?.Invoke(frequency);
     }
 
     public void Update(HandheldRadioBoundUIState state)
@@ -64,14 +51,11 @@ public sealed partial class HandheldRadioMenu : FancyWindow
         _updating = true;
         MicButton.Pressed = state.MicEnabled;
         SpeakerButton.Pressed = state.SpeakerEnabled;
-        if (!_editingFrequency)
-        {
-            FrequencyLineEdit.Text = state.Frequency.ToString();
-            RadioFrequencyPresetUi.Select(PopularFrequencyOptions, state.Frequency);
-        }
+        FrequencyLineEdit.Text = state.Frequency.ToString();
         FrequencyLineEdit.PlaceHolder = Loc.GetString("handheld-radio-custom-placeholder",
             ("min", state.MinFrequency),
             ("max", state.MaxFrequency));
+        RadioFrequencyPresetUi.Select(PopularFrequencyOptions, state.Frequency);
         _updating = false;
     }
 }

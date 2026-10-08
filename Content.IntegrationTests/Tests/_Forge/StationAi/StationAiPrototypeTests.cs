@@ -56,6 +56,7 @@ public sealed class StationAiPrototypeTests
                 Assert.Multiple(() =>
                 {
                     Assert.That(tts.VoicePrototypeId, Is.EqualTo("Glados"), prototype);
+                    Assert.That(tts.FixedVoice, Is.True, prototype);
                     Assert.That(ghostRole.ReregisterOnGhost, Is.True, $"{prototype} must reopen its takeover role");
                     Assert.That(ghostRole.RaffleConfig, Is.Not.Null, $"{prototype} must use the raffle");
                     Assert.That(ghostRole.Prototype, Is.Not.Null, $"{prototype} must reference a ghost role prototype");

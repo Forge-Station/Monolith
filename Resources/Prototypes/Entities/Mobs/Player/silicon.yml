@@ -667,6 +667,7 @@
   - type: StationAiPersonality # Forge-Change
   - type: TTS # Forge - change
     voice: Glados
+    fixedVoice: true
   - type: GhostRole # Forge-Change
     name: ghost-role-information-station-ai-name
     description: ghost-role-information-station-ai-description

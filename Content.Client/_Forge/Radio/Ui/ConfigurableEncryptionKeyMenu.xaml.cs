@@ -14,20 +14,14 @@ public sealed partial class ConfigurableEncryptionKeyMenu : FancyWindow
     public event Action<string>? OnFrequencyChanged;
 
     private bool _updating;
-    private bool _editingFrequency;
 
     public ConfigurableEncryptionKeyMenu()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        FrequencyLineEdit.OnTextChanged += _ =>
-        {
-            _editingFrequency = true;
-            PopularFrequencyOptions.SelectId(RadioFrequencyPresetUi.CustomOptionId);
-        };
-        FrequencyLineEdit.OnTextEntered += e => SubmitFrequency(e.Text);
-        FrequencyLineEdit.OnFocusExit += e => SubmitFrequency(e.Text);
+        FrequencyLineEdit.OnTextEntered += e => OnFrequencyChanged?.Invoke(e.Text);
+        FrequencyLineEdit.OnFocusExit += e => OnFrequencyChanged?.Invoke(e.Text);
 
         RadioFrequencyPresetUi.Populate(PopularFrequencyOptions, _prototypes);
         PopularFrequencyOptions.OnItemSelected += args =>
@@ -38,32 +32,22 @@ public sealed partial class ConfigurableEncryptionKeyMenu : FancyWindow
             PopularFrequencyOptions.SelectId(args.Id);
             if (args.Id == RadioFrequencyPresetUi.CustomOptionId)
             {
-                _editingFrequency = true;
                 FrequencyLineEdit.GrabKeyboardFocus();
                 return;
             }
 
-            SubmitFrequency(args.Id.ToString());
+            OnFrequencyChanged?.Invoke(args.Id.ToString());
         };
-    }
-
-    private void SubmitFrequency(string frequency)
-    {
-        _editingFrequency = false;
-        OnFrequencyChanged?.Invoke(frequency);
     }
 
     public void Update(ConfigurableEncryptionKeyBoundUIState state)
     {
         _updating = true;
-        if (!_editingFrequency)
-        {
-            FrequencyLineEdit.Text = state.Frequency.ToString();
-            RadioFrequencyPresetUi.Select(PopularFrequencyOptions, state.Frequency);
-        }
+        FrequencyLineEdit.Text = state.Frequency.ToString();
         FrequencyLineEdit.PlaceHolder = Loc.GetString("handheld-radio-custom-placeholder",
             ("min", state.MinFrequency),
             ("max", state.MaxFrequency));
+        RadioFrequencyPresetUi.Select(PopularFrequencyOptions, state.Frequency);
         _updating = false;
     }
 }

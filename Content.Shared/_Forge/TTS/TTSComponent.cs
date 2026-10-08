@@ -17,4 +17,6 @@ public sealed partial class TTSComponent : Component
     [DataField("voice", customTypeSerializer: typeof(ProtoId<TTSVoicePrototype>))]
     public string? VoicePrototypeId { get; set; } = "Papich";
 
+    [DataField]
+    public bool FixedVoice;
 }

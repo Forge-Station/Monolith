@@ -14,10 +14,11 @@ public sealed partial class BsReceiverWindow : FancyWindow
 
     private readonly string _minuteLocStr = Loc.GetString("ui-bs-energy-time-minute");
     private readonly string _hourLocStr = Loc.GetString("ui-bs-energy-time-hour");
-    private readonly string _availablePowerLocStr = Loc.GetString("ui-bs-transmitter-current-supply-label");
+    private readonly string _availablePowerLocStr = Loc.GetString("ui-bs-receiver-available-power-label");
     private readonly string _kWLocStr = Loc.GetString("ui-bs-energy-power-kvt");
     private readonly string _priceLocStr = Loc.GetString("ui-bs-receiver-price-label");
     private const int KvtConst = BsEnergySettings.KvtConst;
+    private const string LockIconPath = "/Textures/Interface/VerbIcons/lock.svg.192dpi.png";
     private int _stepSize;
     private int _maxValue;
     private int _power;
@@ -25,16 +26,19 @@ public sealed partial class BsReceiverWindow : FancyWindow
     public event Action? OnWithdraw;
     public event Action<BaseButton.ButtonEventArgs>? OnEnableToggle;
     public event Action<NetEntity>? OnPressedChoiceServer;
+    public event Action<NetEntity>? OnOpenAuthentication;
     public event Action<int>? OnPowerRequest;
 
-    private readonly Dictionary<NetEntity, UiElements> _currentTransmitters = new();
+    private readonly Dictionary<NetEntity, TransmittersUiElements> _currentTransmittersUiElements = new();
+    private Dictionary<NetEntity, UpdateTransmitterStateData> _latestTransmittersData = new();
 
-    private sealed class UiElements
+    private sealed class TransmittersUiElements
     {
         public Button? Button;
         public RichTextLabel? GridName;
         public Label? PowerValue;
         public Label? PriceValue;
+        public TextureRect? PasswordIcon;
     }
 
     public BsReceiverWindow()
@@ -75,6 +79,9 @@ public sealed partial class BsReceiverWindow : FancyWindow
         MoneyLabel.Text = $"${stateMessage.Money:F0}";
         ReceivedPowerLabel.Text = Loc.GetString("ui-bs-energy-network-value", ("watts", stateMessage.ReceivedPower));
 
+        RequestedPowerDecreaseButton.Disabled = stateMessage.RequestedPower <= 0;
+        RequestedPowerIncreaseButton.Disabled = stateMessage.RequestedPower >= _maxValue;
+
         if (stateMessage.TransmittersData.TryGetValue(stateMessage.ConnectedTransmitter, out var serversData))
         {
             var moneyLost = (float)stateMessage.ReceivedPower / KvtConst * serversData.Price;
@@ -98,7 +105,7 @@ public sealed partial class BsReceiverWindow : FancyWindow
             MoneyTimeLabel.Text = $"0 {_minuteLocStr}";
         }
 
-        UpdateServersUi(stateMessage.TransmittersData, stateMessage.Enabled, stateMessage.ConnectedTransmitter);
+        UpdateTransmittersUi(stateMessage.TransmittersData, stateMessage.Enabled, stateMessage.ConnectedTransmitter);
         SelectTransmitterUi(stateMessage.ConnectedTransmitter);
 
         _power = stateMessage.RequestedPower;
@@ -116,6 +123,7 @@ public sealed partial class BsReceiverWindow : FancyWindow
             NetworkStatsLabel.StyleClasses.Clear();
         }
 
+        _latestTransmittersData = stateMessage.TransmittersData;
         RequestedPowerLabel.Text = Loc.GetString("ui-bs-energy-network-value", ("watts", stateMessage.RequestedPower));
         EnableButton.Pressed = stateMessage.Enabled;
     }
@@ -130,29 +138,30 @@ public sealed partial class BsReceiverWindow : FancyWindow
         OnPowerRequest?.Invoke(_power);
     }
 
-    private void UpdateServersUi(Dictionary<NetEntity, UpdateTransmitterStateData> transmittersData, bool enabled, NetEntity transmitterNet)
+    private void UpdateTransmittersUi(Dictionary<NetEntity, UpdateTransmitterStateData> transmittersData, bool enabled, NetEntity transmitterNet)
     {
         CheckingRemoveTransmitters(transmittersData);
 
         foreach (var (key, value) in transmittersData)
         {
-            if (transmitterNet != key && value.CurrentConnected >= value.MaxConnected)
+            if (transmitterNet != key && (value.CurrentConnected >= value.MaxConnected || value.CurrentConnected >= value.LimitConnecting))
             {
-                if (_currentTransmitters.TryGetValue(key, out var elementsToRemove))
+                if (_currentTransmittersUiElements.TryGetValue(key, out var elementsToRemove))
                 {
                     elementsToRemove.Button?.Dispose();
-                    _currentTransmitters.Remove(key);
+                    _currentTransmittersUiElements.Remove(key);
                 }
 
                 continue;
             }
 
-            if (_currentTransmitters.TryGetValue(key, out var elements))
+            if (_currentTransmittersUiElements.TryGetValue(key, out var elements))
             {
                 elements.Button?.Disabled = !enabled;
                 elements.GridName?.Text = value.GridTransmitterName;
                 elements.PowerValue?.Text = Loc.GetString("ui-bs-energy-network-value", ("watts", (int)value.TransmitterAvailablePower));
-                elements.PriceValue?.Text = $"${value.Price:F0} / {_minuteLocStr}";
+                elements.PriceValue?.Text = $"${value.Price:F0} {_kWLocStr} / {_minuteLocStr}";
+                elements.PasswordIcon?.Visible = value.HasPassword;
             }
             else
             {
@@ -161,7 +170,7 @@ public sealed partial class BsReceiverWindow : FancyWindow
                 gridName.MaxWidth = 200;
                 mainHBox.AddChild(gridName);
 
-                var vBoxPower = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, HorizontalExpand = true, HorizontalAlignment = HAlignment.Center, Margin = new(10,0,0,0) };
+                var vBoxPower = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, HorizontalExpand = true, HorizontalAlignment = HAlignment.Left, Margin = new(10,0,0,0) };
                 var powerText = new Label { Text = _availablePowerLocStr };
                 var powerValue = new Label { Text = Loc.GetString("ui-bs-energy-network-value", ("watts", (int)value.TransmitterAvailablePower)) };
                 vBoxPower.AddChild(powerText);
@@ -169,7 +178,7 @@ public sealed partial class BsReceiverWindow : FancyWindow
 
                 mainHBox.AddChild(vBoxPower);
 
-                var vBoxPrice = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, HorizontalExpand = true, HorizontalAlignment = HAlignment.Center};
+                var vBoxPrice = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, HorizontalExpand = true, HorizontalAlignment = HAlignment.Left, Margin = new(10,0,0,0)};
                 var priceText = new Label { Text = _priceLocStr };
                 var priceValue = new Label { Text = $"${value.Price:F0} {_kWLocStr} / {_minuteLocStr}" };
                 vBoxPrice.AddChild(priceText);
@@ -177,33 +186,39 @@ public sealed partial class BsReceiverWindow : FancyWindow
 
                 mainHBox.AddChild(vBoxPrice);
 
-                var btn = new Button();
+                var passwordIcon = new TextureRect { TexturePath = LockIconPath, Visible = value.HasPassword, HorizontalExpand = true, HorizontalAlignment = HAlignment.Right, TextureScale = new(0.7f, 0.7f)};
+                mainHBox.AddChild(passwordIcon);
+
+                var btn = new Button { Disabled = !enabled};
                 btn.AddChild(mainHBox);
-                btn.Disabled = !enabled;
-                btn.OnPressed += (_) =>
+
+                btn.OnPressed += _ =>
                 {
-                    OnPressedChoiceServer?.Invoke(key);
-                    SelectTransmitterUi(key);
+                    if (_currentTransmittersUiElements.ContainsKey(key) && _latestTransmittersData.TryGetValue(key, out var current) && current.HasPassword)
+                        OnOpenAuthentication?.Invoke(key);
+                    else
+                        OnPressedChoiceServer?.Invoke(key);
                 };
 
                 BoxInScroll.AddChild(btn);
 
-                var newElements = new UiElements
+                var newElements = new TransmittersUiElements
                 {
                     Button = btn,
                     GridName = gridName,
                     PowerValue = powerValue,
                     PriceValue = priceValue,
+                    PasswordIcon = passwordIcon,
                 };
 
-                _currentTransmitters[key] = newElements;
+                _currentTransmittersUiElements[key] = newElements;
             }
         }
     }
 
     private void SelectTransmitterUi(NetEntity transmitterNet)
     {
-        foreach (var (_, elements) in _currentTransmitters)
+        foreach (var (_, elements) in _currentTransmittersUiElements)
         {
             elements.Button?.Modulate = Color.White;
         }
@@ -211,20 +226,20 @@ public sealed partial class BsReceiverWindow : FancyWindow
         if (!transmitterNet.IsValid())
             return;
 
-        if (_currentTransmitters.TryGetValue(transmitterNet, out var uiElements))
+        if (_currentTransmittersUiElements.TryGetValue(transmitterNet, out var uiElements))
             uiElements.Button?.Modulate = Color.Lime;
     }
 
     private void CheckingRemoveTransmitters(Dictionary<NetEntity, UpdateTransmitterStateData> newData)
     {
-        var toRemove = _currentTransmitters.Keys.Where(key => !newData.ContainsKey(key)).ToList();
+        var toRemove = _currentTransmittersUiElements.Keys.Where(key => !newData.ContainsKey(key)).ToList();
         foreach (var key in toRemove)
         {
-            if (!_currentTransmitters.TryGetValue(key, out var elements))
+            if (!_currentTransmittersUiElements.TryGetValue(key, out var elements))
                 continue;
 
             elements.Button?.Dispose();
-            _currentTransmitters.Remove(key);
+            _currentTransmittersUiElements.Remove(key);
         }
     }
 }

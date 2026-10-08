@@ -24,12 +24,15 @@ public sealed class BsTransmitterBoundUserInterface : BoundUserInterface
         _window.OnEnableToggle += args => SendMessage(new EnableToggleMessage { Enabled = args.Button.Pressed});
         _window.OnWithdraw += () => SendMessage(new WithdrawMessage());
         _window.OnPriceChanged += price => SendMessage(new PriceMessage { Price = price });
+        _window.OnConnectedDevicesChanged += maxConnecting => SendMessage(new ConnectingLimitMessage { LimitConnecting = maxConnecting });
+        _window.OnKick += netUid => SendMessage(new KickMessage { KickedReceiver = netUid });
+        _window.OnPasswordChanged += password => SendMessage(new PasswordMessage { Password = password});
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        if (state is BsTransmitterInterfaceStateMessage serverInputState)
-            _window?.UpdateUI(serverInputState);
+        if (state is BsTransmitterInterfaceStateMessage transmitterInputState)
+            _window?.UpdateUI(transmitterInputState);
     }
 
     protected override void Dispose(bool disposing)

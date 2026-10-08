@@ -1477,7 +1477,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
                 continue;
             }
 
-            var total = TimeSpan.FromSeconds(timerComp.Delay);
+            var total = timerComp.Delay;
             TimeSpan remaining;
 
             if (TryComp<ActiveSignalTimerComponent>(timerUid, out var activeComp))

@@ -10,7 +10,7 @@
     board: AnomalySynchronizerCircuitboard
   - type: DeviceNetwork
     deviceNetId: Wireless
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 100
   - type: DeviceNetworkRequiresPower
   - type: DeviceLinkSource

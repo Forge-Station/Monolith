@@ -1,5 +1,6 @@
 using Content.Shared._Goobstation.Factory.Filters;
 using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Systems;
 using Robust.Shared.Containers;
 
 namespace Content.Shared._Goobstation.Factory;
@@ -7,7 +8,7 @@ namespace Content.Shared._Goobstation.Factory;
 public sealed partial class StorageBinSystem : EntitySystem
 {
     [Dependency] private AutomationFilterSystem _filter = default!;
-    [Dependency] private SharedDeviceLinkSystem _device = default!;
+    [Dependency] private DeviceLinkSystem _device = default!;
 
     public const string ContainerId = "storagebase";
 

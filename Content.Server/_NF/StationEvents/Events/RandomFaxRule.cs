@@ -118,7 +118,7 @@ public sealed partial class RandomFaxRule : StationEventSystem<RandomFaxRuleComp
                     locked: recipientPrintout.Locked,
                     stampProtected: recipientPrintout.StampProtected
                     );
-                _faxSystem.Receive(faxUid, printout, recipientAddress, faxComp);
+                _faxSystem.Receive(faxUid, printout, null, faxComp);
                 break;
             }
             stations.Add(chosenStation.Value);

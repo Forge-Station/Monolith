@@ -576,7 +576,7 @@
     deviceNetId: Wireless
     receiveFrequencyId: CrewMonitor
     prefix: device-address-prefix-crew-monitor
-#  - type: WirelessNetworkConnection
+#  - type: WirelessNetwork
 #    range: 1200
   - type: AmbientMusicMarkerMedical
   # Mono
@@ -1094,7 +1094,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
-#  - type: WirelessNetworkConnection # Frontier
+#  - type: WirelessNetwork # Frontier
 #    range: 200 # Frontier
   - type: DeviceLinkSource
     range: 200
@@ -1284,7 +1284,7 @@
     receiveFrequencyId: SurveillanceCamera
     transmitFrequencyId: SurveillanceCamera
     prefix: device-address-prefix-camera-monitor
-  - type: WiredNetworkConnection
+  - type: WiredNetwork
   - type: DeviceNetworkRequiresPower
   - type: SurveillanceCameraMonitor
   - type: ActivatableUI
@@ -1328,7 +1328,7 @@
     receiveFrequencyId: SurveillanceCamera
     transmitFrequencyId: SurveillanceCamera
     prefix: device-address-prefix-camera-monitor
-#  - type: WirelessNetworkConnection
+#  - type: WirelessNetwork
 #    range: 200
   - type: DeviceNetworkRequiresPower
   - type: Speech
@@ -1471,7 +1471,7 @@
       prefix: device-address-prefix-sensor-monitor
       sendBroadcastAttemptEvent: true
       examinableAddress: true
-    - type: WiredNetworkConnection
+    - type: WiredNetwork
     - type: DeviceList
     - type: AtmosDevice
 

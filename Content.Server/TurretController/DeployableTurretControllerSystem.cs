@@ -1,56 +1,53 @@
-using Content.Server.DeviceNetwork;
-using Content.Server.DeviceNetwork.Components;
-using Content.Server.DeviceNetwork.Systems;
-using Content.Shared.Access;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Systems;
+using Content.Shared.Access;
+using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.TurretController;
 using Content.Shared.Turrets;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using System.Linq;
-using Content.Shared.DeviceNetwork.Components;
-using Content.Shared.DeviceNetwork.Events;
+using Content.Server.Administration.Logs;
+using Content.Shared.Database;
+using Content.Shared.DeviceConfigurator;
+using Content.Shared.DeviceConfigurator.Systems;
+using Content.Shared.DeviceNetwork;
 
 namespace Content.Server.TurretController;
 
+/// <inheritdoc/>
 public sealed partial class DeployableTurretControllerSystem : SharedDeployableTurretControllerSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
+    [Dependency] private DeviceListSystem _deviceList = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
 
-    public const string CmdSetArmamemtState = "set_armament_state";
-    public const string CmdSetAccessExemptions = "set_access_exemption";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<DeployableTurretControllerComponent, BoundUIOpenedEvent>(OnBUIOpened);
-        SubscribeLocalEvent<DeployableTurretControllerComponent, DeviceListUpdateEvent>(OnDeviceListUpdate);
-        SubscribeLocalEvent<DeployableTurretControllerComponent, DeviceNetworkPacketEvent<TurretStatePayload>>(OnPacketReceived);
-    }
-
+    [SubscribeLocalEvent]
     private void OnBUIOpened(Entity<DeployableTurretControllerComponent> ent, ref BoundUIOpenedEvent args)
     {
+        if (!TryComp<DeviceNetworkComponent>(ent, out var deviceNetwork))
+            return;
+
+        var payload = new TurretControllerRequestPayload();
+        foreach (var (address, _) in _deviceList.GetDeviceList(ent.Owner))
+        {
+            _deviceNetwork.SendPacket((ent.Owner, deviceNetwork), address, ref payload);
+        }
+
         UpdateUIState(ent);
     }
 
-    /// <summary>
-    /// Each time you add devices to the controller it will update all turrets.
-    /// </summary>
+    [SubscribeLocalEvent]
     private void OnDeviceListUpdate(Entity<DeployableTurretControllerComponent> ent, ref DeviceListUpdateEvent args)
     {
         if (!TryComp<DeviceNetworkComponent>(ent, out var deviceNetwork))
             return;
 
-        // List of turrets
-        var turretsToAdd = args.Devices;
+        // List of new added turrets
+        var turretsToAdd = args.Devices.Except(args.OldDevices);
 
-        // Refresh turrets
-        ent.Comp.LinkedTurrets.Clear();
-
-        // Request data from newly added devices
+        // Request data from newly linked devices
         var payload = new TurretControllerRequestPayload();
 
         foreach (var turretUid in turretsToAdd)
@@ -61,22 +58,34 @@ public sealed partial class DeployableTurretControllerSystem : SharedDeployableT
             if (!TryComp<DeviceNetworkComponent>(turretUid, out var turretDeviceNetwork))
                 continue;
 
-            _deviceNetwork.SendPacket(ent.Owner, turretDeviceNetwork.Address, ref payload);
+            _deviceNetwork.SendPacket((ent.Owner, deviceNetwork), turretDeviceNetwork.Address, ref payload);
         }
+
+        // Remove newly unlinked devices
+        var turretsToRemove = args.OldDevices.Except(args.Devices);
+        var refreshUi = false;
+
+        foreach (var turretUid in turretsToRemove)
+        {
+            if (!TryComp<DeviceNetworkComponent>(turretUid, out var turretDeviceNetwork))
+                continue;
+
+            if (ent.Comp.LinkedTurrets.Remove((turretDeviceNetwork.Address, turretDeviceNetwork.Prefix)))
+                refreshUi = true;
+        }
+
+        if (refreshUi)
+            UpdateUIState(ent);
     }
 
-    /// <summary>
-    /// When recieving the packet back from the turret it will update the current updatedstates.
-    /// </summary>
+    [SubscribeLocalEvent]
     private void OnPacketReceived(Entity<DeployableTurretControllerComponent> ent, ref DeviceNetworkPacketEvent<TurretStatePayload> args)
     {
-        ent.Comp.LinkedTurrets[args.SenderAddress] = args.Data.State;
+        // If an update was received from a turret, connect to it and update the UI
+        ent.Comp.LinkedTurrets[args.Sender.Comp.LocAddress] = args.Data.State;
         UpdateUIState(ent);
     }
 
-    /// <summary>
-    /// When you change the armament setting send a packet to the turrets to update them.
-    /// </summary>
     protected override void ChangeArmamentSetting(Entity<DeployableTurretControllerComponent> ent, int armamentState, EntityUid? user = null)
     {
         base.ChangeArmamentSetting(ent, armamentState, user);
@@ -90,14 +99,17 @@ public sealed partial class DeployableTurretControllerSystem : SharedDeployableT
             ArmamentState = armamentState,
         };
 
-        _deviceNetwork.SendPacket(ent.Owner, null, ref payload);
+        _adminLogger.Add(LogType.ItemConfigure, LogImpact.Medium, $"{ToPrettyString(user)} set {ToPrettyString(ent)} to {armamentState}");
+
+        _deviceNetwork.SendPacket((ent.Owner, device), null, ref payload);
     }
 
-    /// <summary>
-    /// When changing the access levels send another packet to the turrets.
-    /// </summary>
-    protected override void ChangeExemptAccessLevels
-        (Entity<DeployableTurretControllerComponent> ent, HashSet<ProtoId<AccessLevelPrototype>> exemptions, bool enabled, EntityUid? user = null)
+    protected override void ChangeExemptAccessLevels(
+        Entity<DeployableTurretControllerComponent> ent,
+        HashSet<ProtoId<AccessLevelPrototype>> exemptions,
+        bool enabled,
+        EntityUid? user = null
+    )
     {
         base.ChangeExemptAccessLevels(ent, exemptions, enabled, user);
 
@@ -111,46 +123,26 @@ public sealed partial class DeployableTurretControllerSystem : SharedDeployableT
             AccessExemptions = turretTargetingSettings.ExemptAccessLevels,
         };
 
-        _deviceNetwork.SendPacket(ent.Owner, null, ref payload);
-    }
-
-    /// <summary>
-    /// Updates the UI state for the user that currently has it open.
-    /// </summary>
-    private void UpdateUIState(Entity<DeployableTurretControllerComponent> ent)
-    {
-        var turretStates = new List<(string, string)>();
-
-        foreach (var (address, turret) in ent.Comp.LinkedTurrets)
-            turretStates.Add((address, GetTurretStateDescription(turret)));
-
-        // Live turret data.
-        var message = new DeployableTurretControllerBoundInterfaceMessage(turretStates);
-        _userInterfaceSystem.ServerSendUiMessage(ent.Owner, DeployableTurretControllerUiKey.Key, message);
-
-        // For when it changes states or opens the UI.
-        var state = new DeployableTurretControllerBoundInterfaceState(turretStates);
-        _userInterfaceSystem.SetUiState(ent.Owner, DeployableTurretControllerUiKey.Key, state);
-    }
-
-    private string GetTurretStateDescription(DeployableTurretState state)
-    {
-        switch (state)
+        foreach (var exemption in exemptions)
         {
-            case DeployableTurretState.Disabled:
-                return "turret-controls-window-turret-disabled";
-            case DeployableTurretState.Firing:
-                return "turret-controls-window-turret-firing";
-            case DeployableTurretState.Deploying:
-                return "turret-controls-window-turret-deploying";
-            case DeployableTurretState.Deployed:
-                return "turret-controls-window-turret-deployed";
-            case DeployableTurretState.Retracting:
-                return "turret-controls-window-turret-retracting";
-            case DeployableTurretState.Retracted:
-                return "turret-controls-window-turret-retracted";
+            _adminLogger.Add(LogType.ItemConfigure, LogImpact.Medium, $"{ToPrettyString(user)} set {ToPrettyString(ent)} authorization of {exemption} to {enabled}");
         }
 
-        return "turret-controls-window-turret-error";
+        _deviceNetwork.SendPacket((ent.Owner, device), null, ref payload);
+    }
+
+    private void UpdateUIState(Entity<DeployableTurretControllerComponent> ent)
+    {
+        var turretStates = new Dictionary<LocDeviceAddress, string>();
+
+        foreach (var (address, state) in ent.Comp.LinkedTurrets)
+        {
+            var stateName = state.ToString().ToLower();
+            var stateDesc = Loc.GetString("turret-controls-window-turret-" + stateName);
+            turretStates.Add(address, stateDesc);
+        }
+
+        var uiState = new DeployableTurretControllerBoundInterfaceState(turretStates);
+        _userInterfaceSystem.SetUiState(ent.Owner, DeployableTurretControllerUiKey.Key, uiState);
     }
 }

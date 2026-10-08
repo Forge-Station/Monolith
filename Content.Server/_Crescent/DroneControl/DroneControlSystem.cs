@@ -53,7 +53,7 @@ public sealed partial class DroneControlSystem : EntitySystem
         args.Sources = new();
         args.Sources.Add(ent);
 
-        foreach (var (name, device) in _deviceList.GetDeviceList(ent))
+        foreach (var (_, (device, name)) in _deviceList.GetDeviceList(ent.Owner))
         {
             var xform = Transform(device);
             if (xform.GridUid == null)
@@ -151,9 +151,9 @@ public sealed partial class DroneControlSystem : EntitySystem
         if (!TryComp<DeviceListComponent>(source, out var devList))
             return;
 
-        var linked = _deviceList.GetDeviceList(source, devList);
+        var linked = _deviceList.GetDeviceList((source, devList));
 
-        foreach (var (name, droneUid) in linked)
+        foreach (var (_, (droneUid, name)) in linked)
         {
             if (selected.Contains(GetNetEntity(droneUid)) && TryComp<DeviceNetworkComponent>(droneUid, out var droneNet))
                 _deviceNetwork.SendPacket(source, droneNet.Address, ref payload);
@@ -167,7 +167,7 @@ public sealed partial class DroneControlSystem : EntitySystem
         var drones = new List<(NetEntity, NetEntity)>();
         var toRemove = new List<EntityUid>();
 
-        foreach (var (name, device) in _deviceList.GetDeviceList(console))
+        foreach (var (_, (device, name)) in _deviceList.GetDeviceList(console))
         {
             var xform = Transform(device);
             if (xform.GridUid == null)
@@ -186,7 +186,7 @@ public sealed partial class DroneControlSystem : EntitySystem
         if (toRemove.Count != 0)
         {
             var newList = new List<EntityUid>();
-            foreach (var (name, device) in _deviceList.GetDeviceList(console))
+            foreach (var (_, (device, name)) in _deviceList.GetDeviceList(console))
             {
                 if (!toRemove.Contains(device))
                     newList.Add(device);

@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Access.Systems;
 using Content.Server.DeviceNetwork.Systems;
+using Content.Shared.DeviceNetwork.Systems;
 using Content.Server.Medical.CrewMonitoring;
 using Content.Server.Popups;
 //using Content.Server.Station.Systems; //Frontier Modification
@@ -489,7 +490,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
     private void OnServerDisconnected(EntityUid uid, SingletonDeviceNetServerComponent _server, ref DeviceNetServerDisconnectedEvent args)
     {
         if (!TryComp<DeviceNetworkComponent>(uid, out var serverDevice)
-            || string.IsNullOrEmpty(serverDevice.Address))
+            || serverDevice.Address == DeviceAddress.Invalid)
             return;
 
         var addr = serverDevice.Address;

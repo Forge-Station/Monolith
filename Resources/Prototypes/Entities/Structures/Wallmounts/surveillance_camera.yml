@@ -82,7 +82,7 @@
     transmitFrequencyId: SurveillanceCamera
     prefix: device-address-prefix-camera
   - type: DeviceNetworkRequiresPower
-  - type: WiredNetworkConnection
+  - type: WiredNetwork
   - type: StationAiVision
   - type: StationAiCameraRelay # Forge-Change
   - type: ShipRepairable

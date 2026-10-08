@@ -1,4 +1,6 @@
 using Content.Shared.DeviceLinking; //Mono
+using Content.Shared.DeviceLinking.Components;
+using Content.Shared.DeviceLinking.Systems;
 using Content.Shared.Gravity;
 using Content.Shared.StepTrigger.Components;
 using Content.Shared.Whitelist;
@@ -15,7 +17,7 @@ public sealed partial class StepTriggerSystem : EntitySystem
     [Dependency] private SharedGravitySystem _gravity = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private SharedDeviceLinkSystem _links = default!; //Mono
+    [Dependency] private DeviceLinkSystem _links = default!; //Mono
 
     [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsquery = default!;
 

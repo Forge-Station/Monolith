@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Shared.DeviceNetwork.Components; // Forge-Change-add: notify NetworkConfigurator on mode cycle
+using Content.Shared.DeviceConfigurator.Components; // Forge-Change-add: notify NetworkConfigurator on mode cycle
 using Content.Shared.Interaction;
 using Content.Shared.Prying.Components;
 using Content.Shared.Tools.Components;

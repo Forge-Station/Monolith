@@ -29,7 +29,7 @@ public sealed class DnaModifierScannerSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly ClimbSystem _climb = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
-    [Dependency] private readonly Content.Server.DeviceLinking.Systems.DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly GeneticsConsoleSystem _console = default!;
     [Dependency] private readonly GeneticsSystem _genetics = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;

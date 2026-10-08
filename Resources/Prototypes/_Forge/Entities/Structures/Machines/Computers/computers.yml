@@ -502,7 +502,7 @@
     deviceNetId: Wired
     receiveFrequencyId: BasicDevice
     prefix: device-address-prefix-hydroponics-console
-  - type: WiredNetworkConnection
+  - type: WiredNetwork
   - type: DeviceList
     deviceLimit: 32
   - type: ActivatableUI
@@ -578,7 +578,7 @@
         type: RemnantConsoleBoundUserInterface
   - type: DeviceNetwork
     deviceNetId: Wireless
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 200
   - type: DeviceLinkSource
     ports:

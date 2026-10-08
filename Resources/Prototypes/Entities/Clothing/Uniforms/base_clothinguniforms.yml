@@ -69,7 +69,7 @@
     deviceNetId: Wireless
     transmitFrequencyId: SuitSensor
     savableAddress: false
-  # - type: WirelessNetworkConnection # Frontier - Remove range for long space sensors
+  # - type: WirelessNetwork # Frontier - Remove range for long space sensors
   #   range: 1200 # Frontier - Remove range for long space sensors
   # - type: StationLimitedNetwork # Frontier - Remove range for long space sensors
 

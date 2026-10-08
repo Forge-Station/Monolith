@@ -1,12 +1,14 @@
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
+using Content.Shared.DeviceLinking.Payloads;
+using Content.Shared.DeviceLinking.Systems;
 using Content.Shared.Power.EntitySystems;
 
 namespace Content.Shared._Goobstation.Factory;
 
 public sealed partial class StartableMachineSystem : EntitySystem
 {
-    [Dependency] private SharedDeviceLinkSystem _device = default!;
+    [Dependency] private DeviceLinkSystem _device = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
 
     private EntityQuery<StartableMachineComponent> _query;

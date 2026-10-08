@@ -5,6 +5,12 @@
   state: ai
 
 - type: stationAiScreen
+  id: StationAiScreenDefaultADS
+  name: station-ai-screen-default-ads
+  sprite: _Forge/Mobs/Silicon/station_ai.rsi
+  state: ai
+
+- type: stationAiScreen
   id: StationAiScreenFace
   name: station-ai-screen-face
   sprite: Mobs/Silicon/output.rsi

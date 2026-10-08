@@ -1,0 +1,83 @@
+- type: entity
+  id: AdsMachineryDataFilter
+  parent: BaseMachinePowered
+  name: ancient data filter
+  description: Various data keep popping up on the screen of this strange machine.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Decoration/machinery_ads.rsi
+    snapCardinals: true
+    layers:
+    - state: datafilter
+      visible: true
+    - state: datafilter_unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: PowerSwitch
+  - type: Anchorable
+  - type: Pullable
+
+- type: entity
+  id: AdsMachineryDataServer
+  parent: BaseMachinePowered
+  name: ancient data server
+  description: A large and bulky server. It is noisy.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Decoration/machinery_ads.rsi
+    snapCardinals: true
+    layers:
+    - state: dataserver
+      visible: true
+    - state: dataserver_unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -15
+    range: 2
+    sound:
+      path: /Audio/Ambience/Objects/server_fans.ogg
+  - type: PowerSwitch
+  - type: Anchorable
+  - type: Pullable
+
+- type: entity
+  id: AdsMachineryDataValidator
+  parent: BaseMachinePowered
+  name: ancient data validator
+  description: An old-looking machine. You have no idea what it does.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Decoration/machinery_ads.rsi
+    snapCardinals: true
+    layers:
+    - state: datavalidator
+      visible: true
+    - state: datavalidator_unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: PowerSwitch
+  - type: Anchorable
+  - type: Pullable

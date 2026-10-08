@@ -1,0 +1,222 @@
+- type: entity
+  parent: BaseStructure
+  id: CryoPodAsakimADS
+  name: asakim cryo pod
+  description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Decoration/cryogenics.rsi
+    drawdepth: Mobs
+    noRot: true
+    offset: 0, 0.5
+    state: pod-asakim
+  - type: Transform
+    noRot: true
+    anchored: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5" #Mono: "-0.5,-0.5,0.5,0.90" >> "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+          - MachineMask
+        layer:
+          - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: SolutionContainerManager
+    solutions:
+      pod:
+        maxVol: 150
+        reagents:
+          - ReagentId: Cryoxadone
+            Quantity: 150
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: WindowShatter
+        - !type:SpillBehavior
+          solution: pod
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            AsakimCorpse:
+             min: 1
+             max: 1
+            ShardGlass:
+             min: 1
+             max: 3
+            CryoPodDestroyedADS:
+             min: 1
+             max: 1
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+  - type: PointLight
+    color: "#c23d5a"
+    radius: 3
+    energy: 10
+
+- type: entity
+  parent: BaseStructure
+  id: CryoPodBiomassADS
+  name: biomass cryo pod
+  description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Decoration/cryogenics.rsi
+    drawdepth: Mobs
+    noRot: true
+    offset: 0, 0.5
+    state: pod-biomass
+  - type: Transform
+    noRot: true
+    anchored: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5" #Mono: "-0.5,-0.5,0.5,0.90" >> "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+          - MachineMask
+        layer:
+          - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: SolutionContainerManager
+    solutions:
+      pod:
+        maxVol: 150
+        reagents:
+          - ReagentId: NaturalLetoferol
+            Quantity: 150
+  - type: ExaminableSolution
+    solution: pod
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: WindowShatter
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            ShardGlass:
+             min: 1
+             max: 3
+            CryoPodDestroyedADS:
+             min: 1
+             max: 1
+        - !type:SpillBehavior
+          solution: pod
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+  - type: PointLight
+    color: "#c23d5a"
+    radius: 3
+    energy: 10
+
+- type: entity
+  parent: BaseStructure
+  id: CryoPodDestroyedADS
+  name: destroyed cryo pod
+  description: A cryo pod that has seen better days. It's entirely inoperable; not good for anything but scrap.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Decoration/cryogenics.rsi
+    drawdepth: Mobs
+    noRot: true
+    offset: 0, 0.5
+    state: pod-cracked
+  - type: Transform
+    noRot: true
+    anchored: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.90"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 2000 # 20 sheets
+      Glass: 1000 # 10 sheets
+
+- type: entity
+  parent: BaseStructure
+  id: CryoPodEmptyADS
+  name: empty cryo pod
+  description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Decoration/cryogenics.rsi
+    drawdepth: Mobs
+    noRot: true
+    offset: 0, 0.5
+    state: pod-empty
+  - type: Transform
+    noRot: true
+    anchored: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5" #Mono: "-0.5,-0.5,0.5,0.90" >> "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+          - MachineMask
+        layer:
+          - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: WindowShatter
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            ShardGlass:
+             min: 1
+             max: 3
+            CryoPodDestroyedADS:
+             min: 1
+             max: 1
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]

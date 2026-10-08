@@ -945,7 +945,7 @@
   - BallisticArtilleryTier4HP # This shit is massive lol
   suffix: Large, Для маппинга T3
   name: L-20 Apollo Mining Laser Cannon
-  description: One of the Pantheon Collective's top weapons, the Apollo is aptly named for its beams heating surfaces to beyond the temperature of nearby stars.
+  description: Pantheon Collective mining laser. Mined ore deposits into the turret and travels through disposal pipes under it to ore storage — same as ship drills.
   components:
   - type: StaticPrice
     price: 15000
@@ -1001,6 +1001,10 @@
   - type: ShipRepairable
     repairTime: 25
     repairCost: 100
+  # Forge-Change: ore-pipe inlet + buffer — mined ore flushes into DisposalTrunk under the turret.
+  - type: OrePipeInlet
+  - type: OrePipeBuffer
+    maxTotalCount: 200
 
 # PRE- FRACTURE
 
@@ -1014,7 +1018,7 @@
   - BallisticArtilleryTier4HP # This shit is massive lol
   suffix: НЕ МАППИТЬ, САНЯЯЯ!!!
   name: L-20 Apollo Mining Laser Cannon
-  description: One of the Pantheon Collective's top weapons, the Apollo is aptly named for its beams heating surfaces to beyond the temperature of nearby stars.
+  description: Pantheon collective mining laser. Mined ore deposits into the turret and travels through disposal pipes under it to ore storage — same as ship drills.
   components:
   - type: StaticPrice
     price: 15000
@@ -1072,6 +1076,10 @@
   - type: ShipRepairable
     repairTime: 25
     repairCost: 100
+  # Forge-Change: ore-pipe inlet + buffer — mined ore flushes into DisposalTrunk under the turret.
+  - type: OrePipeInlet
+  - type: OrePipeBuffer
+    maxTotalCount: 200
 
 # PRE- FRACTURE
 

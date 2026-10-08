@@ -1,5 +1,5 @@
 ore-pipe-examine-connected = [color=green]Connected to the ore conduit with valid path to storage — mined ore will travel through the pipes.[/color]
-ore-pipe-examine-disconnected = [color=red]Not connected to an ore conduit or incomplete pipe path — the drill is idle.[/color] Needs a pipe trunk under the drill and a complete path along the arrows to storage.
+ore-pipe-examine-disconnected = [color=red]Not connected to an ore conduit or incomplete pipe path — ore will not travel through the pipes.[/color] Needs a pipe trunk under the drill/turret and a complete path along the arrows to storage.
 ore-pipe-examine-hold-no-trunk = [color=orange]No intake trunk here — ore from the pipes will not be stored.[/color]
 ore-pipe-examine-buffer = Ore buffer: [color=cyan]{$count}[/color] / {$max}
 

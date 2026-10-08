@@ -464,7 +464,12 @@
       Structural: 35
   - type: HitscanBasicRaycast
     maxDistance: 600
-  - type: HitscanGathering
+  # Forge-Change: mining hitscan deposits ore into the turret OrePipeBuffer (same as ship drills).
+  - type: MiningGatheringSoft
+  - type: MiningGatheringHard
+  - type: DrakeHitscanGathering
+    collectToGun: true
+    teleportOre: false
 
 # Prometheus
 

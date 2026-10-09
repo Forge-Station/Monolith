@@ -13,8 +13,11 @@ ledger-no-expenses = Нет
 ledger-balance = Баланс:
 ledger-no-balance = N/A
 
-ledger-tab-Frontier = Центральный Аванпост #Forge-change
+ledger-tab-Frontier = Центральный Аванпост
 ledger-tab-Nfsd = ТСФ
+ledger-tab-Imperial = СИВ
+ledger-tab-Renegates = ВКР
+ledger-tab-BlackMarket = Пираты
 ledger-tab-Medical = Медицинский Аванпост
 Expensesledger-tab-Edison = Электростанция Эдиссона
 # Fallback, if this displays, something's wrong.

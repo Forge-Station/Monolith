@@ -1,0 +1,62 @@
+- type: entity
+  parent: BaseShipLPCOneUse
+  id: WFAsfVoucherCivilian
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon
+    - state: screen
+      color: "#B57BFF"
+    - state: screen2
+      color: "#E6C8FF"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Custom
+    companyName: WFAsf
+    vessels:
+    - WFAsfGleaner
+    - WFAsfPorter
+    - WFAsfLamplighter
+
+- type: entity
+  parent: BaseShipLPCOneUse
+  id: WFAsfVoucherEscort
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon_fighter
+    - state: screen
+      color: "#B57BFF"
+    - state: screen5
+      color: "#E6C8FF"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Custom
+    companyName: WFAsf
+    vessels:
+    - WFAsfVigil
+    - WFAsfBulwark
+
+- type: entity
+  parent: BaseShipLPCOneUse
+  id: WFAsfVoucherLodestar
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon_capital
+    - state: screen
+      color: "#B57BFF"
+    - state: screen4
+      color: "#E6C8FF"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: true
+    consoleType: Custom
+    companyName: WFAsf
+    vessels:
+    - WFAsfLodestar

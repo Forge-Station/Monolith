@@ -1,0 +1,82 @@
+# Lantern Post armoury: ASF-coloured racks filled with coilguns, and suit storage for the Pathfinder modsuits.
+
+- type: entity
+  id: WFAsfGunRack
+  parent: StructureGunRack
+  suffix: ASF, Empty
+  components:
+  - type: Sprite
+    layers:
+    - state: base-gun
+      color: "#3E2C52"
+    - state: base-gun-decal
+      color: "#A66BE0"
+
+- type: entity
+  id: WFAsfGunRackFilled
+  parent: WFAsfGunRack
+  suffix: ASF, Filled, Coil rifles
+  components:
+  - type: ContainerFill
+    containers:
+      weapon1:
+      - WFAsfWeaponRifleCoil
+      weapon2:
+      - WFAsfWeaponRifleCoil
+      weapon3:
+      - WFAsfWeaponRifleCoil
+
+- type: entity
+  id: WFAsfPistolRack
+  parent: StructurePistolRack
+  suffix: ASF, Empty
+  components:
+  - type: Sprite
+    layers:
+    - state: base-pistol
+      color: "#3E2C52"
+    - state: base-pistol-decal
+      color: "#A66BE0"
+
+- type: entity
+  id: WFAsfPistolRackFilled
+  parent: WFAsfPistolRack
+  suffix: ASF, Filled, Coil pistols
+  components:
+  - type: ContainerFill
+    containers:
+      weapon1:
+      - WFAsfWeaponPistolCoil
+      weapon2:
+      - WFAsfWeaponPistolCoil
+      weapon3:
+      - WFAsfWeaponPistolCoil
+      weapon4:
+      - WFAsfWeaponPistolCoil
+
+- type: entity
+  id: WFAsfSuitStoragePathfinder
+  parent: SuitStorageBase
+  suffix: ASF, Pathfinder modsuit
+  components:
+  - type: AccessReader
+    access: [["WFAsfSecurity"]]
+  - type: StorageFill
+    contents:
+    - id: WFAsfClothingModsuitFieldPowerCell
+    - id: ClothingMaskBreath
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+
+- type: entity
+  id: WFAsfSuitStorageEVA
+  parent: SuitStorageBase
+  suffix: ASF, EVA suit
+  components:
+  - type: StorageFill
+    contents:
+    - id: WFAsfClothingOuterEVA
+    - id: WFAsfClothingHeadEVA
+    - id: ClothingMaskBreath
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled

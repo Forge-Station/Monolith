@@ -1,0 +1,280 @@
+# Lantern Post bounties: monolithic crystals and alien artifacts, paid in ARG (WFAsfRewardGrant).
+# A crystal pays about 1.25 ARG per 1,000 spesos of its sale price. Artifact bounties ask for an effect an artifact
+# keeps for good once its node is reached (the utility effects), so the property is still there when it is shipped.
+
+- type: Tag
+  id: WFMonolithicCrystalSmall
+
+- type: Tag
+  id: WFMonolithicCrystalMedium
+
+- type: Tag
+  id: WFMonolithicCrystalLarge
+
+# Crystals
+
+- type: cargoBounty
+  id: WFAsfBountyCrystalSmall
+  reward: 25
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-crystal
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-crystal-small
+    amount: 2
+    whitelist:
+      tags:
+      - WFMonolithicCrystalSmall
+
+- type: cargoBounty
+  id: WFAsfBountyCrystalSmallBulk
+  reward: 70
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-crystal
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-crystal-small
+    amount: 5
+    whitelist:
+      tags:
+      - WFMonolithicCrystalSmall
+
+- type: cargoBounty
+  id: WFAsfBountyCrystalMedium
+  reward: 25
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-crystal
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-crystal-medium
+    amount: 1
+    whitelist:
+      tags:
+      - WFMonolithicCrystalMedium
+
+- type: cargoBounty
+  id: WFAsfBountyCrystalLarge
+  reward: 50
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-crystal
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-crystal-large
+    amount: 1
+    whitelist:
+      tags:
+      - WFMonolithicCrystalLarge
+
+# Artifacts
+
+# Four fragments craft into an artifact (15 ARG), so six pay a little more than crafting them first.
+- type: cargoBounty
+  id: WFAsfBountyArtifactFragments
+  reward: 20
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-fragments
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-fragments
+    amount: 6
+    whitelist:
+      tags:
+      - ArtifactFragment
+
+- type: cargoBounty
+  id: WFAsfBountyArtifact
+  reward: 15
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact
+    amount: 1
+    whitelist:
+      components:
+      - Artifact
+
+- type: cargoBounty
+  id: WFAsfBountySurvey
+  reward: 45
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-survey
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact
+    amount: 1
+    whitelist:
+      components:
+      - Artifact
+  - name: wf-asf-bounty-name-crystal-small
+    amount: 2
+    whitelist:
+      tags:
+      - WFMonolithicCrystalSmall
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactStorage
+  reward: 30
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-storage
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - Storage
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactIntercom
+  reward: 30
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-intercom
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - Intercom
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactInstrument
+  reward: 25
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-instrument
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - Instrument
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactVessel
+  reward: 25
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-vessel
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - RefillableSolution
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactWandering
+  reward: 25
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-wandering
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - RandomWalk
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactSpeed
+  reward: 30
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-speed
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - HeldSpeedModifier
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactPower
+  reward: 50
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-power
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - PowerSupplier
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactDrill
+  reward: 45
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-drill
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - Sharp
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactMultitool
+  reward: 50
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-multitool
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - MultipleTool
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactGun
+  reward: 50
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-gun
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - Artifact
+      - RevolverAmmoProvider

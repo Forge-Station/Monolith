@@ -1,0 +1,30 @@
+ent-WFAsfClothingModsuitField = ASF Pathfinder modsuit control unit
+    .desc = An ASF field modsuit built on the Minerva research frame, with extra plating for survey work that goes wrong. Takes armor plates.
+ent-WFAsfClothingModsuitFieldPowerCell = { ent-WFAsfClothingModsuitField }
+    .desc = { ent-WFAsfClothingModsuitField.desc }
+ent-WFAsfClothingModsuitHelmetField = Pathfinder modsuit helmet
+    .desc = A plated modsuit helmet with a lilac visor and a headlamp.
+ent-WFAsfClothingModsuitGauntletsField = Pathfinder modsuit gauntlets
+    .desc = Armored modsuit gauntlets.
+ent-WFAsfClothingModsuitChestplateField = Pathfinder modsuit chestplate
+    .desc = A pearl-white modsuit chestplate with a slot for armor plates.
+ent-WFAsfClothingModsuitBootsField = Pathfinder modsuit boots
+    .desc = Sealed, armored modsuit boots.
+
+ent-WFAsfClothingModsuitAegis = ASF Aegis modsuit control unit
+    .desc = A Pathfinder refitted with a hardlight emitter in the control unit. While the suit is sealed it can project a personal shield that absorbs fire until it breaks.
+ent-WFAsfClothingModsuitAegisPowerCell = { ent-WFAsfClothingModsuitAegis }
+    .desc = { ent-WFAsfClothingModsuitAegis.desc }
+ent-WFAsfClothingModsuitHelmetAegis = Aegis modsuit helmet
+    .desc = A dark armored modsuit helmet. The visor glows while the emitter runs.
+ent-WFAsfClothingModsuitGauntletsAegis = Aegis modsuit gauntlets
+    .desc = { ent-WFAsfClothingModsuitGauntletsField.desc }
+ent-WFAsfClothingModsuitChestplateAegis = Aegis modsuit chestplate
+    .desc = A dark violet modsuit chestplate with hardlight seams and a slot for armor plates.
+ent-WFAsfClothingModsuitBootsAegis = Aegis modsuit boots
+    .desc = { ent-WFAsfClothingModsuitBootsField.desc }
+
+wf-asf-modsuit-aegis-shield-hint = Seal the suit, then use the shield action or alt-click the control unit to raise the hardlight shield.
+wf-asf-modsuit-shield-unsealed = Seal the suit first.
+wf-asf-research-field-modsuit = ASF Pathfinder modsuit
+wf-asf-research-aegis-modsuit = ASF Aegis hardlight modsuit

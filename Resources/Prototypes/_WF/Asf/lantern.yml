@@ -1,0 +1,64 @@
+- type: pointOfInterest
+  id: WFAsfLantern
+  parent: BaseRepairablePOI # mobile: no ForceAnchor, it flies on its own engines
+  name: 'ASF Lantern Post'
+  minimumDistance: 5500
+  maximumDistance: 7000
+  spawnGroup: Required
+  gridPath: /Maps/_WF/Asf/lantern.yml
+  addComponents:
+  - type: IFF
+    color: "#A66BE0"
+  - type: WorldGenDistanceCarver
+    distanceThresholds:
+    - maxDistance: 800
+      prob: 0.0
+    - maxDistance: 1500
+      prob: 0.3
+
+- type: gameMap
+  id: WFAsfLantern
+  mapName: 'ASF Lantern Post'
+  mapPath: /Maps/_WF/Asf/lantern.yml
+  minPlayers: 0
+  stations:
+    WFAsfLantern:
+      stationProto: StandardFrontierOutpost
+      gridComponents:
+      - type: DeleteNearbyDrones
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'ASF Lantern Post'
+      - type: ExtraStationInformation
+        icon:
+          sprite: _WF/Asf/Structures/Banners/federation.rsi
+          state: asf-federation-banner
+        stationSubtext: wf-asf-lantern-subtext
+        stationDescription: wf-asf-lantern-description
+        lobbySortOrder: 5
+      - type: StationJobs
+        availableJobs:
+          WFAsfEnvoy: [1, 1]
+          WFAsfEnforcer: [-1, -1]
+          WFAsfFieldResearcher: [-1, -1]
+          WFAsfColonist: [-1, -1]
+      - type: StationDeadDropHintExempt
+      - type: StationCargoBountyDatabase
+        availableBounties:
+        - WFAsfBountyCrystalSmall
+        - WFAsfBountyCrystalSmallBulk
+        - WFAsfBountyCrystalMedium
+        - WFAsfBountyCrystalLarge
+        - WFAsfBountyArtifactFragments
+        - WFAsfBountyArtifact
+        - WFAsfBountySurvey
+        - WFAsfBountyArtifactStorage
+        - WFAsfBountyArtifactIntercom
+        - WFAsfBountyArtifactInstrument
+        - WFAsfBountyArtifactVessel
+        - WFAsfBountyArtifactWandering
+        - WFAsfBountyArtifactSpeed
+        - WFAsfBountyArtifactPower
+        - WFAsfBountyArtifactDrill
+        - WFAsfBountyArtifactMultitool
+        - WFAsfBountyArtifactGun

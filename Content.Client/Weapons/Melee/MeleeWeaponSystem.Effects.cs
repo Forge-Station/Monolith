@@ -121,9 +121,9 @@ public sealed partial class MeleeWeaponSystem
                     Property = nameof(SpriteComponent.Rotation),
                     KeyFrames =
                     {
-//                       new AnimationTrackProperty.KeyFrame(startRotation, 0f), // Forge-Change
-//                       new AnimationTrackProperty.KeyFrame(startRotation, slashStart), // Forge-Change
-//                       new AnimationTrackProperty.KeyFrame(endRotation, slashEnd) // Forge-Change
+//                       new AnimationTrackProperty.KeyFrame(startRotation, 0f), // Forge-Change Commented
+//                       new AnimationTrackProperty.KeyFrame(startRotation, slashStart), // Forge-Change Commented
+//                       new AnimationTrackProperty.KeyFrame(endRotation, slashEnd) // Forge-Change Commented
 // Forge-Change-Start
                         new AnimationTrackProperty.KeyFrame(Angle.Lerp(startRotation, endRotation, 0.0f), length * 0.0f),
                         new AnimationTrackProperty.KeyFrame(Angle.Lerp(startRotation, endRotation, 0.5f), length * 0.10f),
@@ -139,9 +139,9 @@ public sealed partial class MeleeWeaponSystem
                     Property = nameof(SpriteComponent.Offset),
                     KeyFrames =
                     {
-//                        new AnimationTrackProperty.KeyFrame(startRotationOffset, 0f), // Forge-Change
-//                        new AnimationTrackProperty.KeyFrame(startRotationOffset, slashStart), // Forge-Change
-//                        new AnimationTrackProperty.KeyFrame(endRotationOffset, slashEnd) // Forge-Change
+//                        new AnimationTrackProperty.KeyFrame(startRotationOffset, 0f), // Forge-Change Commented
+//                        new AnimationTrackProperty.KeyFrame(startRotationOffset, slashStart), // Forge-Change Commented
+//                        new AnimationTrackProperty.KeyFrame(endRotationOffset, slashEnd) // Forge-Change Commented
 // Forge-Change-Start
                         new AnimationTrackProperty.KeyFrame(Vector2.Lerp(startRotationOffset, endRotationOffset, 0.0f), length * 0.0f),
                         new AnimationTrackProperty.KeyFrame(minRotationOffset, length * 0.10f),
@@ -156,10 +156,10 @@ public sealed partial class MeleeWeaponSystem
 
     private Animation GetThrustAnimation(SpriteComponent sprite, float offset, Angle spriteRotation, float length) // Forge-Change: added offset, float length. Removed distance
     {
-//        const float thrustEnd = 0.05f; // Forge-Change
-//        const float length = 0.15f; // Forge-Change
-//        var startOffset = sprite.Rotation.RotateVec(new Vector2(0f, -distance / 5f)); // Commented by LuaM
-//        var endOffset = sprite.Rotation.RotateVec(new Vector2(0f, -distance)); // Commented by LuaM
+//        const float thrustEnd = 0.05f; // Forge-Change Commented
+//        const float length = 0.15f; // Forge-Change Commented
+//        var startOffset = sprite.Rotation.RotateVec(new Vector2(0f, -distance / 5f)); // Forge-Change Commented
+//        var endOffset = sprite.Rotation.RotateVec(new Vector2(0f, -distance)); // Forge-Change Commented
 // Forge-Change-Start
         var startOffset = Vector2.Zero;
         var endOffset = sprite.Rotation.RotateVec(new Vector2(0f, -offset * 1.2f));
@@ -177,9 +177,9 @@ public sealed partial class MeleeWeaponSystem
                     Property = nameof(SpriteComponent.Offset),
                     KeyFrames =
                     {
-//                        new AnimationTrackProperty.KeyFrame(startOffset, 0f), // Forge-Change
-//                        new AnimationTrackProperty.KeyFrame(endOffset, thrustEnd), // Forge-Change
-//                        new AnimationTrackProperty.KeyFrame(endOffset, length), // Forge-Change
+//                        new AnimationTrackProperty.KeyFrame(startOffset, 0f), // Forge-Change Commented
+//                        new AnimationTrackProperty.KeyFrame(endOffset, thrustEnd), // Forge-Change Commented
+//                        new AnimationTrackProperty.KeyFrame(endOffset, length), // Forge-Change Commented
 // Forge-Change-Start
                         new AnimationTrackProperty.KeyFrame(Vector2.Lerp(startOffset, endOffset, 0f), length * 0f),
                         new AnimationTrackProperty.KeyFrame(Vector2.Lerp(startOffset, endOffset, 0.65f), length * 0.10f),
@@ -233,8 +233,8 @@ public sealed partial class MeleeWeaponSystem
                     InterpolationMode = AnimationInterpolationMode.Linear,
                     KeyFrames =
                     {
-//                        new AnimationTrackProperty.KeyFrame(direction.Normalized() * 0.15f, 0f), // Forge-Change
-//                        new AnimationTrackProperty.KeyFrame(Vector2.Zero, length) // Forge-Change
+//                        new AnimationTrackProperty.KeyFrame(direction.Normalized() * 0.15f, 0f), // Forge-Change Commented
+//                        new AnimationTrackProperty.KeyFrame(Vector2.Zero, length) // Forge-Change Commented
 // Forge-Change-Start
                         new AnimationTrackProperty.KeyFrame(Vector2.Zero, 0f),
                         new AnimationTrackProperty.KeyFrame(direction.Normalized() * 0.15f, length * 0.4f),
@@ -265,7 +265,7 @@ public sealed partial class MeleeWeaponSystem
                 targetPos += entRotation.RotateVec(arcComponent.Offset);
             }
 
-//            TransformSystem.SetWorldPosition(uid, targetPos); // Forge-Change
+//            TransformSystem.SetWorldPosition(uid, targetPos); // Forge-Change Commented
 // Forge-Change-Start
             var localPos = Vector2.Transform(targetPos, TransformSystem.GetInvWorldMatrix(xform.ParentUid));
             TransformSystem.SetLocalPositionNoLerp(uid, localPos, xform);

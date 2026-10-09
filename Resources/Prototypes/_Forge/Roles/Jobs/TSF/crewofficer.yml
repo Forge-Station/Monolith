@@ -27,6 +27,7 @@
   - Medical
   - Chemistry
   - TsfmcEngineering
+  - TurretCommandTSF
   accessGroups:
   - TsfGeneralAccess
   special:

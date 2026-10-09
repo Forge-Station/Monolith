@@ -324,11 +324,14 @@ public sealed partial class ShipyardConsoleMenu : FancyWindow
     public void UpdateState(ShipyardConsoleInterfaceState state)
     {
         BalanceLabel.Text = BankSystemExtensions.ToSpesoString(state.Balance);
-        var shipPrice = 0;
-        if (!state.FreeListings)
-            shipPrice = state.ShipSellValue;
 
-        ShipAppraisalLabel.Text = $"{BankSystemExtensions.ToSpesoString(shipPrice)} ({state.SellRate * 100.0f:F1}%)";
+        // Forge-change-start Voucher Has Cost
+        ShipAppraisalKeyLabel.Text = state.PurchasedWithVoucher
+            ? Loc.GetString("shipyard-console-appraisal-voucher-label")
+            : Loc.GetString("shipyard-console-appraisal-label");
+
+        ShipAppraisalLabel.Text = $"{BankSystemExtensions.ToSpesoString(state.ShipSellValue)} ({state.SellRate * 100.0f:F1}%)";
+        // Forge-change-end
         SellShipButton.Disabled = state.ShipDeedTitle == null;
         UnassignDeedButton.Disabled = state.ShipDeedTitle == null;
 

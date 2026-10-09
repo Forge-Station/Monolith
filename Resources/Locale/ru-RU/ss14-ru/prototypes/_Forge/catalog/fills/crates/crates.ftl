@@ -47,3 +47,9 @@ ent-CrateEmpireMaterial = имперский ящик
     .desc = { ent-CrateBaseSecure.desc }
     .suffix = Материалы
 
+ent-CrateMaterialsAdvancedFilled = { ent-CrateGenericSteel }
+    .desc = { ent-CrateGenericSteel.desc }
+    .suffix = Продвинутые материалы, Full
+ent-CrateMaterialsSuperFilled = { ent-CrateGenericSteel }
+    .desc = { ent-CrateGenericSteel.desc }
+    .suffix = Супер материалы, Full

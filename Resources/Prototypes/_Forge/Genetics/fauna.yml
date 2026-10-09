@@ -1,0 +1,585 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+#
+# Player bodies for hostile-fauna genes. They keep the creature's look and natural
+# weapons, but not its AI, ghost role, or station-hostile faction. A minded body
+# sleeps HTN, so the subject stays in control.
+
+- type: entity
+  parent: SimpleSpaceMobBase
+  id: MobGeneFaunaBase
+  abstract: true
+  suffix: Genetics
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+  - type: CombatMode
+  - type: Speech
+    speechVerb: LargeMob
+  - type: Puller
+    needsHands: false
+  - type: MovementAlwaysTouching
+  - type: NoSlip
+
+- type: entity
+  parent: MobGeneFaunaBase
+  id: MobGeneSpaceSpider
+  name: space spider
+  description: It's so glowing, it looks dangerous.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Animals/spacespider.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: spacespider
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: spacespider
+        BaseUnshaded: glow
+      Dead:
+        Base: spacespider_dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      90: Dead
+  - type: Stamina
+    critThreshold: 150
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 4
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 120
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 6
+        Poison: 4
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        reagents:
+        - ReagentId: ChloralHydrate
+          Quantity: 40
+  - type: MeleeChemicalInjector
+    solution: melee
+    transferAmount: 2
+  - type: PointLight
+    radius: 1.2
+    energy: 2
+    color: "#4faffb"
+  - type: Speech
+    speechVerb: Arachnid
+    speechSounds: Arachnid
+    allowedEmotes: ['Click', 'Chitter']
+  - type: Vocal
+    sounds:
+      Unsexed: UnisexArachnid
+  - type: TypingIndicator
+    proto: spider
+
+- type: entity
+  parent:
+  - MobGeneFaunaBase
+  - FlyingMobBase
+  id: MobGeneSpaceDragon
+  name: space dragon
+  description: A flying leviathan, loosely related to space carps. This one has no rift.
+  components:
+  - type: Sprite
+    sprite: Mobs/Aliens/Carps/dragon.rsi
+    noRot: true
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: alive-unshaded
+      shader: unshaded
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        alive: Rainbow
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+        BaseUnshaded: alive-unshaded
+      Critical:
+        Base: crit
+      Dead:
+        Base: dead
+        BaseUnshaded: dead-unshaded
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      180: Critical
+      220: Dead
+  - type: Stamina
+    critThreshold: 200
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.2
+    baseSprintSpeed: 4.8
+    baseWeightlessModifier: 1.6
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 100
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: Flammable
+    damage:
+      types: {}
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 12
+        Piercing: 8
+  - type: ActionGun
+    action: ActionDragonsBreath
+    gunProto: DragonsBreathGun
+  - type: InteractionPopup
+    successChance: 0.25
+    interactSuccessString: petting-success-dragon
+    interactFailureString: petting-failure-dragon
+    interactFailureSound:
+      path: /Audio/Animals/space_dragon_roar.ogg
+    soundPerceivedByOthers: false
+
+- type: entity
+  parent: MobGeneFaunaBase
+  id: MobGeneSpaceBear
+  name: space bear
+  description: It looks friendly. Why don't you give it a hug?
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Animals/bear.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: bear
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bear
+        BaseUnshaded: glow
+      Critical:
+        Base: bear_dead
+      Dead:
+        Base: bear_dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      130: Dead
+  - type: Stamina
+    critThreshold: 160
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.8
+    baseSprintSpeed: 3.6
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Blunt: 12
+        Slash: 6
+  - type: PointLight
+    radius: 1.2
+    energy: 2
+    color: "#4faffb"
+  - type: Vocal
+    sounds:
+      Unsexed: Bear
+  - type: InteractionPopup
+    successChance: 0.25
+    interactSuccessString: petting-success-bear
+    interactFailureString: petting-failure-bear
+
+- type: entity
+  parent:
+  - MobGeneFaunaBase
+  - FlyingMobBase
+  id: MobGeneSpaceCarp
+  name: space carp
+  description: It's a space carp.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Carps/space.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: mouth
+      shader: unshaded
+  - type: RandomSprite
+    available:
+    - enum.DamageStateVisualLayers.Base:
+        alive: Rainbow
+      enum.DamageStateVisualLayers.BaseUnshaded:
+        mouth: ""
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+        BaseUnshaded: mouth
+      Dead:
+        Base: dead
+        BaseUnshaded: dead_mouth
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      55: Dead
+  - type: Stamina
+    critThreshold: 100
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 3.5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 80
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Blunt: 5
+        Slash: 7
+  - type: TypingIndicator
+    proto: alien
+
+- type: entity
+  parent: MobGeneFaunaBase
+  id: MobGeneSpaceCobra
+  name: space cobra
+  description: Long fangs and a glowing hood, and the alluring look begs to come closer.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Animals/spacecobra.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: spacecobra
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: spacecobra
+        BaseUnshaded: glow
+      Dead:
+        Base: dead_spacecobra
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: Stamina
+    critThreshold: 150
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.6
+    baseSprintSpeed: 3.4
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSnake
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 120
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MeleeWeapon
+    hidden: true
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 6
+        Poison: 4
+  - type: SolutionContainerManager
+    solutions:
+      melee:
+        reagents:
+        - ReagentId: NorepinephricAcid
+          Quantity: 36
+  - type: MeleeChemicalInjector
+    solution: melee
+    transferAmount: 2
+  - type: PointLight
+    radius: 1.1
+    energy: 1.5
+    color: "#4faffb"
+
+- type: entity
+  parent: MobGeneFaunaBase
+  id: MobGeneGoliath
+  name: goliath
+  description: A massive beast that uses long tentacles to ensnare its prey.
+  components:
+  - type: Sprite
+    sprite: Mobs/Aliens/Asteroid/goliath.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: goliath
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: goliath
+      Dead:
+        Base: goliath_dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      180: Dead
+  - type: Stamina
+    critThreshold: 180
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2.4
+  - type: MeleeWeapon
+    soundHit:
+      path: "/Audio/Weapons/smash.ogg"
+    angle: 0
+    attackRate: 0.75
+    animation: WeaponArcPunch
+    damage:
+      types:
+        Slash: 10
+        Piercing: 8
+  - type: ActionGrant
+    actions:
+    - ActionGoliathTentacle
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+    - Goliath
+
+- type: entity
+  parent:
+  - MobGeneFaunaBase
+  - FlyingMobBase
+  id: MobGeneWatcher
+  name: watcher
+  description: It's like it's staring right through you.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Lavaland/watcher.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: base
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: unshaded
+      shader: unshaded
+      color: red
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: base
+        BaseUnshaded: unshaded
+      Dead:
+        Base: dead
+        BaseUnshaded: dead-unshaded
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      60: Dead
+  - type: Stamina
+    critThreshold: 80
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4
+    baseSprintSpeed: 5.5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 80
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: PointLight
+    radius: 1.5
+    energy: 0.5
+    color: red
+  - type: ProjectileBatteryAmmoProvider
+    proto: WatcherBolt
+    fireCost: 50
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 50
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: Gun
+    fireRate: 0.5
+    useKey: true
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+
+- type: entity
+  parent: MobGeneFaunaBase
+  id: MobGeneXenoRunner
+  name: runner
+  description: They mostly come at night. Mostly.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Xenos/runner.rsi
+    offset: 0,0.6
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: running
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: running
+      Critical:
+        Base: crit
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      90: Dead
+  - type: Stamina
+    critThreshold: 160
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 5.2
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 235
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    attackRate: 1.4
+    soundHit:
+      collection: AlienClaw
+    animation: WeaponArcBite
+    damage:
+      groups:
+        Brute: 8
+
+- type: entity
+  parent:
+  - MobGeneFaunaBase
+  - FlyingMobBase
+  id: MobGeneShark
+  name: sharkminnow
+  description: A dangerous shark from the blackness of endless space, who loves to drink blood.
+  components:
+  - type: Sprite
+    sprite: Mobs/Aliens/Carps/sharkminnow.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: mouth
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+        BaseUnshaded: mouth
+      Dead:
+        Base: dead
+        BaseUnshaded: dead_mouth
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      140: Dead
+  - type: Stamina
+    critThreshold: 150
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 4.2
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 100
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Slash: 10
+        Bloodloss: 4

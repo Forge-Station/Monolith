@@ -1,0 +1,34 @@
+- type: entity
+  parent: BlastDoorIndestructible
+  id: BlastDoorAdmin
+  name: blast door
+  description: An indestructible blast door. Device-link ports can only be bound by administrators.
+  suffix: Forge, Admin, Indestructible
+  components:
+  - type: AdminOnlyDeviceLink
+  - type: AccessReader
+    enabled: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+  - type: Weldable
+    time: 60
+  - type: Door
+    canPry: false
+
+- type: entity
+  parent: BlastDoorAdmin
+  id: BlastDoorAdminOpen
+  suffix: Forge, Admin, Indestructible, Open
+  components:
+  - type: Door
+    state: Open
+    canPry: false
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false

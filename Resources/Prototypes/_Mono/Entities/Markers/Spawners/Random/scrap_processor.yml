@@ -268,7 +268,7 @@
     - id: ShredderMachineCircuitboard
     - id: ShuttleGunKineticCircuitboard
     - id: NFScrapProcessorCircuitboard
-    - id: SalvageMagnetMachineCircuitboard
+    #- id: SalvageMagnetMachineCircuitboard #Forge-Change-remove
     - id: MaterialSiloMachineCircuitboard
     #Lathes&Automation
     - id: AutolatheMachineCircuitboard

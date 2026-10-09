@@ -25,3 +25,7 @@ ent-ClothingNeckCloakVulpcaninCloakEmpire = плащ из шкуры вульп�
 
 ent-ClothingNeckMantleUI = мантия U.I.
     .desc = Удобная мантия что скрывает правую часть тела, возможно под ней кобура.
+ent-ClothingNeckMantleNexus = мантия Nexus
+    .desc = Мантия, гордо разукрашенная в цвета Nexus.
+ent-ClothingNeckCloakNexus = плащ Nexus
+    .desc = Стильный плащ Nexus.

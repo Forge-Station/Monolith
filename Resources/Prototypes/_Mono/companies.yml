@@ -33,6 +33,7 @@
   color: "#00d1a0" # Forge-change
   whitelisted: true
   hidden: true # Forge-change: hide cauz' i dont have description and im lazy to create it. If u add the desc: please switch to false
+  companyUplinkCurrency: TTIMedicalCredit # Forge-change
 
 - type: company
   id: Colonial

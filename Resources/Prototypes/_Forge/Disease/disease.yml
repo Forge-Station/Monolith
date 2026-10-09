@@ -5,7 +5,7 @@
   organ: Body
   interval: 12
   severityDecay: 3
-  flareDelay: 320
+  flareDelay: 380
   triggers:
     - !type:DamageTrigger
       damageThreshold: 10

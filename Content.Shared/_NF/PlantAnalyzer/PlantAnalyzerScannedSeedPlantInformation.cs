@@ -42,8 +42,10 @@ public sealed class PlantAnalyzerScannedSeedPlantInformation : BoundUserInterfac
     public float Endurance;
     public GasFlags ConsumeGases;
     public GasFlags ExudeGases;
+    public PlantChemEntry[]? ChemicalEntries; // Forge-Change
     public string[]? SeedChem;
     public string[]? MutationNames;
+    public string[]? PinnedTraits; // Forge-Change
     //Tolerances tab
     public float NutrientConsumption;
     public float WaterConsumption;
@@ -102,3 +104,13 @@ public enum AnalyzerHarvestType : byte
     NoRepeat,
     SelfHarvest
 }
+
+// Forge-Change-start
+[Serializable, NetSerializable]
+public struct PlantChemEntry
+{
+    public string Id;
+    public float Min;
+    public float Max;
+}
+// Forge-Change-end

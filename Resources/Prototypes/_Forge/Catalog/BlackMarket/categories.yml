@@ -1,0 +1,35 @@
+- type: blackMarketCategory
+  id: Weapons
+  name: black-market-category-weapons
+  contractPool: BlackMarketPoolWeapons
+  passiveRefreshDelay: 900 # 15 minutes
+  purchasedRefreshDelay: 300 # 5 minutes
+  recentHistorySize: 5
+  stubContract: BMContractStubWeapons
+
+- type: blackMarketCategory
+  id: Armory
+  name: black-market-category-armory
+  contractPool: BlackMarketPoolArmory
+  passiveRefreshDelay: 1080 # 18 minutes
+  purchasedRefreshDelay: 360 # 6 minutes
+  recentHistorySize: 5
+  stubContract: BMContractStubArmory
+
+- type: blackMarketCategory
+  id: Resources
+  name: black-market-category-resources
+  contractPool: BlackMarketPoolResources
+  passiveRefreshDelay: 180 # 3 minutes
+  purchasedRefreshDelay: 90 # 1.5 minutes
+  recentHistorySize: 0
+  stubContract: BMContractStubResources
+
+- type: blackMarketCategory
+  id: Other
+  name: black-market-category-other
+  contractPool: BlackMarketPoolOther
+  passiveRefreshDelay: 360 # 6 minutes
+  purchasedRefreshDelay: 180 # 3 minutes
+  recentHistorySize: 4
+  stubContract: BMContractStubOther

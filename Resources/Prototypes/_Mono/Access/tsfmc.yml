@@ -11,6 +11,7 @@
   - Security
   - Mercenary # Frontier
   - Captain # Frontier
+  - TurretCommandTSFShuttle # Forge-Change
 
 - type: accessGroup
   id: TSF

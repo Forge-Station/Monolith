@@ -48,7 +48,7 @@ namespace Content.Shared.Localizations
             _loc.AddFunction(fallbackCulture, "MANY", FormatMany);
 
             _loc.SetCulture(culture);
-            _loc.SetFallbackCluture(fallbackCulture);
+            _loc.SetFallbackCulture(fallbackCulture);
         }
 
         private void RegisterCommonFunctions(CultureInfo culture)

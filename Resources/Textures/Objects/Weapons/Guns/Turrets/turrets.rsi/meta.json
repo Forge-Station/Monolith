@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from https://github.com/tgstation/tgstation/commit/42e0275d860551197687c571c689c270ff423288",
+  "copyright": "Taken from https://github.com/tgstation/tgstation/commit/42e0275d860551197687c571c689c270ff423288 Forge-Change: syndie_shotgun, syndie_sniper, syndie_mg",
   "size": {
     "x": 32,
     "y": 32
@@ -13,6 +13,18 @@
     },
     {
       "name": "syndie_lethal",
+      "directions": 8
+    },
+    {
+      "name": "syndie_shotgun",
+      "directions": 8
+    },
+    {
+      "name": "syndie_sniper",
+      "directions": 8
+    },
+    {
+      "name": "syndie_mg",
       "directions": 8
     },
     {

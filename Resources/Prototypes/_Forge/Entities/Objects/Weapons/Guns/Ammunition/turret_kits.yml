@@ -1,0 +1,198 @@
+# Cartridge kits for command turrets. The turret itself deploys empty.
+- type: entity
+  parent: BaseItem
+  id: MagazineTurretBallistic
+  name: ballistic turret cartridge kit
+  description: Sixty rounds of 7.62x39mm. Load this into a ballistic command turret.
+  components:
+  - type: Tag
+    tags:
+    - MagazineTurretBallistic
+  - type: Item
+    size: Normal
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x39mmFMJ
+    capacity: 60
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge762x39mmFMJ
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _NF/Objects/Weapons/Guns/Ammunition/Magazine/Turret/box_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 11
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseItem
+  id: MagazineTurretShotgun
+  name: shotgun turret cartridge kit
+  description: Sixteen shells of 12-gauge buckshot. Load this into a shotgun command turret.
+  components:
+  - type: Tag
+    tags:
+    - MagazineTurretShotgun
+  - type: Item
+    size: Normal
+  - type: BallisticAmmoProvider
+    proto: ShellShotgun12_gaugeBuckshot
+    capacity: 16
+    mayTransfer: true
+    whitelist:
+      tags:
+      - ShellShotgun12_gaugeBuckshot
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _NF/Objects/Weapons/Guns/Ammunition/Magazine/Turret/box_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 11
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseItem
+  id: MagazineTurretSniper
+  name: sniper turret cartridge kit
+  description: Eight rounds of 12.7x99mm. Load this into a sniper command turret.
+  components:
+  - type: Tag
+    tags:
+    - MagazineTurretSniper
+  - type: Item
+    size: Normal
+  - type: BallisticAmmoProvider
+    proto: Cartridge127x99mm
+    capacity: 8
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge127x99mm
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _NF/Objects/Weapons/Guns/Ammunition/Magazine/Turret/box_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 11
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: BaseItem
+  id: MagazineTurretMachinegun
+  name: machine gun turret cartridge kit
+  description: One hundred and twenty rounds of 7.62x39mm. Load this into a machine-gun command turret.
+  components:
+  - type: Tag
+    tags:
+    - MagazineTurretMachinegun
+  - type: Item
+    size: Normal
+  - type: BallisticAmmoProvider
+    proto: Cartridge762x39mmFMJ
+    capacity: 120
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge762x39mmFMJ
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _NF/Objects/Weapons/Guns/Ammunition/Magazine/Turret/box_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 11
+    zeroVisible: false
+  - type: Appearance
+
+# Empty kits. Same slot as the loaded kit, so the player fills them with any round of that caliber.
+- type: entity
+  parent: MagazineTurretBallistic
+  id: MagazineTurretBallisticEmpty
+  name: empty ballistic turret cartridge kit
+  suffix: empty
+  description: An empty kit for a ballistic command turret. Holds sixty rounds of any 7.62x39mm.
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+    capacity: 60
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge762x39mmFMJ
+
+- type: entity
+  parent: MagazineTurretShotgun
+  id: MagazineTurretShotgunEmpty
+  name: empty shotgun turret cartridge kit
+  suffix: empty
+  description: An empty kit for a shotgun command turret. Holds sixteen shells of any 12 gauge.
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+    capacity: 16
+    mayTransfer: true
+    whitelist:
+      tags:
+      - ShellShotgun12_gaugeBuckshot
+
+- type: entity
+  parent: MagazineTurretSniper
+  id: MagazineTurretSniperEmpty
+  name: empty sniper turret cartridge kit
+  suffix: empty
+  description: An empty kit for a sniper command turret. Holds eight rounds of any 12.7x99mm.
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+    capacity: 8
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge127x99mm
+
+- type: entity
+  parent: MagazineTurretMachinegun
+  id: MagazineTurretMachinegunEmpty
+  name: empty machine gun turret cartridge kit
+  suffix: empty
+  description: An empty kit for a machine-gun command turret. Holds one hundred and twenty rounds of any 7.62x39mm.
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+    capacity: 120
+    mayTransfer: true
+    whitelist:
+      tags:
+      - Cartridge762x39mmFMJ
+

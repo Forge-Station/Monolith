@@ -1,5 +1,6 @@
 using Content.Server._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared._Forge.Features.Components;
 using Content.Shared.Examine;
@@ -19,6 +20,40 @@ public sealed partial class PaperLanguageSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<PaperLanguageComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PaperLanguageComponent, PaperComponent.PaperInputTextMessage>(OnInputText);
+        // Directed at the writer (same pattern as BlockWritingSystem).
+        SubscribeLocalEvent<LanguageSpeakerComponent, PaperWriteAttemptEvent>(OnWriteAttempt);
+    }
+
+    /// <summary>
+    /// Block opening/saving the paper editor when existing text is in a language
+    /// the writer cannot understand, so write-mode cannot leak plaintext.
+    /// </summary>
+    private void OnWriteAttempt(Entity<LanguageSpeakerComponent> writer, ref PaperWriteAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (HasComp<GhostComponent>(writer))
+            return;
+
+        if (!TryComp<PaperLanguageComponent>(args.Paper, out var paperLang))
+            return;
+
+        if (!TryComp<PaperComponent>(args.Paper, out var paper) || string.IsNullOrWhiteSpace(paper.Content))
+            return;
+
+        foreach (var segment in GetEffectiveSegments(paperLang, paper.Content))
+        {
+            if (string.IsNullOrWhiteSpace(segment.Text))
+                continue;
+
+            if (_language.CanUnderstand(writer.Owner, segment.Language))
+                continue;
+
+            args.Cancelled = true;
+            args.FailReason = "paper-language-cannot-edit";
+            return;
+        }
     }
 
     private void OnExamined(EntityUid uid, PaperLanguageComponent component, ExaminedEvent args)

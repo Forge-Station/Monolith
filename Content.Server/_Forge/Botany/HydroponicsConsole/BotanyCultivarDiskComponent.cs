@@ -13,4 +13,7 @@ public sealed partial class BotanyCultivarDiskComponent : Component
 
     [DataField]
     public SeedData? Seed;
+
+    [DataField]
+    public int PrintsUsed;
 }

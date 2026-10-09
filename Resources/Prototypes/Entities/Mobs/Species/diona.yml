@@ -135,6 +135,37 @@
   - type: Carriable # Carrying system from nyanotrasen.
   - type: ProtectedFromStepTriggers # Frontier
   - type: FTLKnockdownImmune # Frontier
+  #Forge-Change-start
+  # - type: PlantAnalyzer
+  #   settings:
+  #     scanDelay: 0.8
+  #     exposeAdvancedData: true
+  #   scanningEndSound:
+  #     path: "/Audio/Items/Medical/healthscanner.ogg"
+  # - type: ActivatableUI
+  #   key: enum.PlantAnalyzerUiKey.Key
+  #   inHandsOnly: false
+  #   requireActiveHand: false
+  # - type: UserInterface
+  #   interfaces:
+  #     enum.PlantAnalyzerUiKey.Key:
+  #       type: PlantAnalyzerBoundUserInterface
+  # - type: ItemToggle
+  #   onUse: false
+  - type: PlantHolder
+    drawWarnings: false
+    wateringSound:
+      path: /Audio/Effects/Fluids/slosh.ogg
+      params:
+        volume: -6
+        variation: 0.20
+  - type: PlantHealthBarTarget
+  - type: ShowPlantHealthBars
+  - type: CollectiveMind
+    channels:
+    - RootMind
+    defaultChannel: RootMind
+  #Forge-Change-end
 
 - type: entity
   parent: BaseSpeciesDummy

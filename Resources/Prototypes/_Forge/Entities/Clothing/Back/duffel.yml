@@ -71,3 +71,13 @@
   - type: Storage
     grid:
     - 0,0,9,5
+
+- type: entity
+  parent: NFClothingDuffel
+  id: ClothingBackpackDuffelNexus
+  name: nexus duffel
+  suffix: Nexus
+  description: Branded Nexus duffel bag.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Back/Duffels/duffels_nexus.rsi

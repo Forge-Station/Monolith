@@ -3,11 +3,37 @@ using Robust.Shared.GameStates;
 
 namespace Content.Shared._NF.CrateMachine.Components;
 
+// Forge-change-start New parameter for crate machine
+/// <summary>
+/// Determines which console system may use a crate machine and how delivery is fulfilled.
+/// </summary>
+public enum CrateMachineKind : byte
+{
+    /// <summary>
+    /// Standard cargo/market lift used by NF market consoles.
+    /// </summary>
+    Cargo = 0,
+
+    /// <summary>
+    /// Contraband lift used by Forge black market consoles.
+    /// </summary>
+    BlackMarket = 1,
+}
+// Forge-change-end
+
 [RegisterComponent]
 [NetworkedComponent]
 [Access(typeof(SharedCrateMachineSystem))]
 public sealed partial class CrateMachineComponent: Component
 {
+    // Forge-change-start New parameter for crate machine
+    /// <summary>
+    /// Which delivery workflow this lift uses.
+    /// </summary>
+    [DataField]
+    public CrateMachineKind Kind = CrateMachineKind.Cargo;
+    // Forge-change-end
+
     /// <summary>
     /// Used by the animation code to determine whether the next action is opening or closing
     /// </summary>

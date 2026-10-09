@@ -206,7 +206,7 @@
   suffix: Profile, Mining
   components:
   - type: PoiTreasury
-    rewardIntervalMinutes: 5
+    rewardIntervalMinutes: 15
     rewardTable: !type:NestedSelector
       tableId: PoiTreasuryLootMining
 

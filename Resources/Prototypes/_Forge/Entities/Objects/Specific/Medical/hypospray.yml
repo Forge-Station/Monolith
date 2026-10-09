@@ -1,3 +1,47 @@
+# region Hypospray
+- type: entity
+  parent: BaseItem
+  name: hypospray TTI
+  id: MedHypoTTI
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Medical/medihypo.rsi
+    layers:
+      - state: hypo
+        map: ["enum.SolutionContainerLayers.Base"]
+      - state: hypo_fill1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+  - type: Item
+    sprite: _Forge/Objects/Specific/Medical/medihypo.rsi
+  - type: SolutionContainerManager
+    solutions:
+      hypospray:
+        maxVol: 35
+  - type: RefillableSolution
+    solution: hypospray
+  - type: ExaminableSolution
+    solution: hypospray
+  - type: Hypospray
+    onlyAffectsMobs: false
+  - type: UseDelay
+    delay: 0.5
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: hypo_fill
+    solutionName: hypospray
+  - type: StaticPrice
+    price: 2500
+    vendPrice: 50000
+  - type: Tag
+    tags:
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: Trauma Team International
+    hasEngravingText: forge-engraving-generic-has-message
+
+# region Medipen
 - type: entity
   name: боевой стимулятор
   parent: [ BaseCentcommContraband, ChemicalMedipen ]

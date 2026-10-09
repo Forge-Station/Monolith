@@ -1,0 +1,508 @@
+#region BM Drake Industries
+
+#Clothing
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskDrakeIndustriesBroken1
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Drake Industries sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+  - type: TechnologyDisk
+    recipes:
+    - ClothingUniformDrakeIndustriesHauler
+    - ClothingUniformDrakeIndustriesTrucker
+    - ClothingUniformDrakeIndustriesWatchdog
+    - ClothingMaskDrakeIndustries
+    - ClothingMaskDrakeIndustriesWatchdog
+    - ClothingBeltDrakeIndustries
+    - ClothingOuterDrakeIndustriesTruckerPuffyVest
+    - ClothingNeckDrakeIndustriesBadge
+    - ClothingBackpackDrakeIndustries
+    - ClothingBackpackDuffelDrakeIndustries
+    - ClothingBackpackSatchelDrakeIndustries
+    - ClothingShoesBootsMagDrakeIndustries
+    - ClothingNeckCloakDrakeIndustries
+    - ClothingNeckCloakDrakeIndustriesRipped
+    - ClothingHeadHatBeretDrakeIndustries
+    - ClothingOuterHardsuitDrakeMk4
+    - ClothingOuterHardsuitDrakeMk8
+    - ClothingOuterHardsuitDrakeMk16
+    - ClothingShoesBootsMagDrakeIndustrial
+    - JetpackDrakeIndustrial
+  - type: StaticPrice
+    price: 1000
+
+#Tecnologies
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskDrakeIndustriesBroken2
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Drake Industries sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+  - type: TechnologyDisk
+    recipes:
+    - DrakeOreProcessorMk2MachineCircuitboard
+    - DrakeScrapProcessorMachineCircuitboard
+    - DrakeUraniumCentrifugeMachineCircuitboard
+    - DrakeCentrifugeFissileUranium3
+    - DrakeCentrifugePlastitanium
+    - DrakeCentrifugeIridiumMatrix
+    - DrakeCentrifugeCryoBinder
+    - DrakeCentrifugeIridite
+  - type: StaticPrice
+    price: 1000
+
+#Weapon
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskDrakeIndustriesBroken3
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Drake Industries sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+  - type: TechnologyDisk
+    recipes:
+    - WeaponDrakeIndustrialGrenadeLauncher
+    - SeismicCharge
+    - DrakeIndustrialOreBag
+    - DrakeIndustrialConstructionBag
+    - WeaponDrakeIndustrialCutter
+    - PlasmaTank
+    - WeaponDrakeIndustrialLaser
+    - WeaponTurretDrakeApolloMk2Circuitboard
+  - type: StaticPrice
+    price: 1000
+
+#region BM Nexus
+
+#Clothing
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskNexusStarConsortiumBroken1
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Nexus Star Consortium sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: nsc
+  - type: TechnologyDisk
+    recipes:
+    - ClothingUniformJumpsuitNexusTurtleneck
+    - ClothingUniformJumpsuitNexusWorker
+    - ClothingOuterCoatNexusGreatcoat
+    - ClothingHeadHatNexusBeret
+    - ClothingHeadHatNexusCap
+    - ClothingHeadHatNexusStarBeret
+    - ClothingHeadHatNexusGarrisonCap
+    - ClothingOuterHardsuitNexusWorker
+    - ClothingOuterHardsuitNexusMilT1
+    - ClothingOuterHardsuitNexusMilT2
+    - ClothingOuterHardsuitNexusMilT3
+    - ClothingUniformJumpsuitNexusSecurity
+    - ClothingEyesGlassesNexus
+    - ClothingMaskGasNexus
+    - ClothingBeltWebbingsNormalNexus
+    - ClothingBeltWebbingsBigNexus
+    - ClothingOuterVestWebNexus
+    - ClothingHeadHelmetNexus
+    - ClothingHelmetAttachmentNVGsNexus
+    - ClothingHandsGlovesCombatNexus
+    - ClothingShoesBootsMagNexus
+  - type: StaticPrice
+    price: 1000
+
+#Weapon
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskNexusStarConsortiumBroken2
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Nexus Star Consortium sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: nsc
+  - type: TechnologyDisk
+    recipes:
+    - WeaponEnergyPistolNexusProjector
+    - WeaponEnergyPistolNexusDoznavatel
+    - WeaponEnergySwordNexusProtos
+    - WeaponEnergyRifleNexusKiy
+    - WeaponEnergyShotgunNexusUdarnik
+    - WeaponSubMachineGunNexusShebet
+    - Magazine635x40mmCaselessNexus
+    - Magazine635x40mmCaselessNexusEmpty
+    - WeaponSniperRifleNexusDlan
+    - Magazine135x110mm
+    - Magazine135x110mmHE
+    - AmmoBox135x110mm
+    - AmmoBox135x110mmHE
+  - type: StaticPrice
+    price: 1000
+
+#Technologies
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskNexusStarConsortiumBroken3
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Nexus Star Consortium sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: nsc
+  - type: TechnologyDisk
+    recipes:
+    - BriefcaseNexus
+    - PenNexus
+    - BoxFolderClipboardNexus
+    - RubberStampNexus
+  - type: StaticPrice
+    price: 1000
+
+#region BM Nanotrasen
+
+#Clothing
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskNanotrasenBroken1
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Nanotrasen sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: nt
+  - type: TechnologyDisk
+    recipes:
+    - ClothingUniformJumpsuitSec
+    - ClothingUniformJumpskirtSec
+    - ClothingUniformJumpsuitSeniorOfficer
+    - ClothingUniformJumpskirtSeniorOfficer
+    - ClothingHeadHelmetJustice
+    - ClothingOuterHardsuitSecurity
+    - ClothingUniformJumpsuitHoS
+    - ClothingUniformJumpskirtHoS
+    - ClothingUniformJumpsuitHoSAlt
+    - ClothingUniformJumpskirtHoSAlt
+    - ClothingUniformJumpskirtHosFormal
+    - ClothingUniformJumpsuitHosFormal
+    - ClothingOuterWinterHoS
+    - ClothingOuterCoatHoSTrench
+    - ClothingHeadHatBeretHoS
+    - ClothingHeadHatHoshat
+    - ClothingOuterHardsuitSecurityRed
+    - ClothingUniformJumpsuitATU
+    - ClothingUniformJumpskirtTAF
+    - ClothingUniformJumpsuitTraumaBlue
+    - ClothingUniformJumpskirtTraumaBlue
+    - ClothingUniformJumpsuitTraumaStandart
+    - ClothingUniformJumpsuitTraumaDirector
+    - ClothingOuterRobeTraumaBomber
+    - ClothingOuterCoatTrauma
+    - ClothingMaskSterileTrauma
+    - ClothingNeckCloakTrauma
+    - ClothingNeckMantleTrauma
+    - ClothingHeadHatTraumaDirectorBeret
+    - ClothingHeadHatTraumaBeret
+    - ClothingOuterHardsuitTrauma
+    - ClothingOuterHardsuitTraumaShooter
+    - ClothingOuterArmorBodyTrauma
+    - ClothingHeadHatArmoredTrauma
+    - ClothingHeadHatArmoredTraumaShooter
+    - ClothingShoesBootsMagTrauma
+    - ClothingOuterHardsuitERTSecurity
+    - ClothingUniformJumpsuitERTSecurity
+    - ClothingUniformJumpsuitERTMedic
+    - ClothingUniformJumpsuitERTMailCarrier
+    - ClothingUniformJumpsuitERTEngineer
+    - ClothingUniformJumpsuitERTJanitor
+    - ClothingUniformJumpsuitERTChaplain
+    - ClothingHeadHelmetERTSecurity
+    - ClothingHeadHelmetERTMedic
+    - ClothingHeadHelmetERTMailCarrier
+    - ClothingHeadHelmetERTEngineer
+    - ClothingHeadHelmetERTJanitor
+    - ClothingMaskGasERT
+    - ClothingBackpackERTSecurity
+    - ClothingBackpackERTMedical
+    - ClothingBackpackERTChaplain
+    - ClothingBackpackERTMailCarrier
+    - ClothingBackpackERTEngineer
+    - ClothingBackpackERTJanitor
+    - ClothingOuterHardsuitERTMedical
+    - ClothingOuterHardsuitERTJanitor
+    - ClothingOuterHardsuitERTEngineer
+    - ClothingOuterHardsuitERTMailCarrier
+    - ClothingOuterHardsuitERTChaplain
+    - ClothingOuterHardsuitCBURN
+  - type: StaticPrice
+    price: 1000
+
+#Technologies
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskNanotrasenBroken2
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Nanotrasen sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: nt
+  - type: TechnologyDisk
+    recipes:
+    - RobocopCircuitBoard
+    - ArtistCircuitBoard
+    - NutimovCircuitBoard
+    - PaladinCircuitBoard
+    - NTDefaultCircuitBoard
+    - OverlordCircuitBoard
+    - CommandmentCircuitBoard
+    - LiveLetLiveCircuitBoard
+    - AsimovCircuitBoard
+    - CorporateCircuitBoard
+    - StationAiUploadCircuitboard
+    - CloningConsoleComputerCircuitboard
+    - MedicalBiofabMachineBoard
+    - CloningPodMachineCircuitboard
+    - MedicalScannerMachineCircuitboard
+    - MedicalTechFabCircuitboard
+    - OmnizineChemistryBottle
+    - JugOmnizine
+    - BrutepackAdvanced1
+    - OintmentAdvanced1
+    - Hypospray
+    - CentCommHypo
+    - HypoBrigmedic
+    - HypoMiniLimitedEdition
+
+#Weapon
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskNanotrasenBroken3
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Nanotrasen sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: nt
+  - type: TechnologyDisk
+    recipes:
+    - WeaponRevolverInspector
+    - WeaponFlareGunSecurity
+    - WeaponPistolMk58
+    - WeaponRevolverMateba
+    - WeaponPulsePistol
+    - EnergySwordBlue
+    - EnergyShield
+    - WeaponEnergyGunLawbringer
+    - WeaponEnergyShotgun
+    - WeaponPulseCarbine
+    - WeaponRifleNtsfLtr
+    - WeaponSubMachineGunVectorNtsfHclm
+    - Magazine45_ACPPistolHighCapacityFMJ
+    - Magazine45_ACPPistolHighCapacityEmpty
+    - WeaponLRC21PPL
+    - PulsedPlasmaLaserCanister
+    - WeaponPulseRifle
+    - WeaponLauncherMPSSM
+    - CartridgeMPSSMHEAT
+    - CartridgeMPSSMMissile
+    - WeaponMechCombatPulseRifleTSF
+    - WeaponLauncherMk348
+    - WeaponHeavyPulseCannon
+
+#region BM Harmony
+
+#Clothing
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskHarmonyBroken1
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Harmony Medical Enterprise sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: harmony
+  - type: TechnologyDisk
+    recipes:
+    - HMEJumpsuit
+    - HMEJumpskirt
+    - HMEBeret
+    - HMELightModsuit
+    - HMEHeavyModsuit
+
+#Tecnologies
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskHarmonyBroken2
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Harmony Medical Enterprise sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: harmony
+  - type: TechnologyDisk
+    recipes:
+    - RegenerativeMesh1
+    - MedicatedSuture1
+    - Bloodpack1
+    - RegenerativeMesh1
+    - MedicatedSuture1
+    - Bloodpack1
+    - HMEAdvancedMedkitCombat
+    - HMESynthFleshPack1
+    - HMEElasticGaugePack1
+    - HMESynthBloodpack1
+    - HMEAdvancedCompactDefibrillator
+    - HMEBasicHypo
+    - HMEStandartHypo
+
+#region BM Ullman Industries
+
+#Clothing
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskUIBroken1
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Ullman Industries sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: ullman
+  - type: TechnologyDisk
+    recipes:
+    - UllmanModsuit
+    - UllmanClothingMagboots
+    - UllmanClothingMaskGas
+    - UllmanClothingEyesGooglesUI
+    - UllmanUniformJumpsuitUI
+    - UllmanNeckPonchoUI
+    - UllmanNeckOvercoatUI
+    - UllmanNeckHeavyOvercoatUI
+    - UllmanNeckMantleUI
+    - UllmanUniformShirtUI
+    - UllmanHeadHatCapUI
+    - UllmanHeadHatBeretUI
+    - UllmanHardsuitPilot
+    - UllmanHardsuitEngineer
+    - UllmanHardsuitEnforcer
+    - UllmanLightJuggernaut # Forge-change
+    - UllmanHardsuitEnforcerMKII
+    - UllmanHardsuitMedical # Forge-change
+
+#Weapon
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT1 ]
+  id: TechDiskUIBroken2
+  name: A shabby, worn disc with scratches and chips.
+  description: A disk capable of adding advanced bluespace storage to a server's recipes. Ullman Industries sticker is attached.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/drake_disciplines_disk.rsi
+      state: broken
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: ullman
+  - type: TechnologyDisk
+    recipes:
+    - UllmanSniperRifle
+    - UllmanMagazine135x110mm
+    - UllmanMagazine135x110mmEmpty
+    - UllmanMagazine135x110mmHE
+    - AmmoBox135x110mm
+    - AmmoBox135x110mmHE
+    - UllmanWeaponPulsePistol
+    - UllmanWeaponPulseSniper
+    - UllmanWeaponPulseRifle
+    - UllmanMeleePlasmaBlade
+    - UllmanWeaponSmartMagnum
+    - MagazineSmartMagnum
+    - MagazineSmartMagnumExt

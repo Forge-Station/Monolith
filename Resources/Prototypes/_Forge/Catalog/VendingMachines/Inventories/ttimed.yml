@@ -1,0 +1,25 @@
+- type: vendingMachineInventory
+  id: TTIMedInventory
+  startingInventory:
+    TTIPremiumTrackingImplanter: 6
+    HandheldHealthAnalyzer: 3
+    Brutepack: 5
+    Ointment: 5
+    Bloodpack: 5
+    Gauze: 5
+    EpinephrineChemistryBottle: 3
+    PillCanisterTricordrazine: 3
+    PillCanisterCodeine: 3
+    PillCanisterNaloxone: 3
+    Syringe: 5
+    BoxBottle: 3
+    ClothingEyesHudMedical: 2
+    ClothingEyesEyepatchHudMedical: 2
+    MedicalTrackingImplanterLabeled: 12
+    SadTromboneImplanterLabeled: 12
+    BikeHornImplanterLabeled: 12
+    LightImplanterLabeled: 12
+    BoxFolderMedicalDoctor: 12
+    MedTekCartridge: 3
+  contrabandInventory:
+    FoodApple: 1

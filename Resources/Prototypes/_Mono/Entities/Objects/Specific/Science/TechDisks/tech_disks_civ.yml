@@ -227,6 +227,27 @@
     - MachineShieldMS250Circuitboard
     - MachineShieldMS100Circuitboard
 
+# Forge — bluespace boarding scrambler. Not on the open Experimental tree; rare fracture loot.
+- type: entity
+  parent: TechDiskBase
+  id: TechDiskBoardingScrambler
+  name: pre-fracture bluespace scrambler tech disk
+  description: A precursor disk that adds the bluespace boarding scrambler board and flatpack to a server's recipes. Scarcer than the shuttle shield disk.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#ff6868"
+    - state: label
+    - state: protect
+    - state: holo
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - BoardingBluespaceScramblerMachineCircuitboard
+    - BoardingBluespaceScramblerFlatpack
+
 # Forge — civilian FSG tier 3 (not on CivilianServices tree; loot / trade)
 - type: entity
   parent: TechDiskBase
@@ -333,3 +354,23 @@
     - BluespaceMatterBinStockPart
     - QuadraticCapacitorStockPart
     - FemtoManipulatorStockPart
+
+# Forge-change
+- type: entity
+  parent: [ TechDiskBase, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
+  id: TechDiskCloaking
+  name: disc with cloaking technology ADSCDM "Weeping Angel"
+  description: A disk containing a cloaking device ADSCDM "Weeping Angel"
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: ["enum.DamageStateVisualLayers.Base"]
+      color: "#d4d4d4"
+    - state: label
+    - state: protect
+    - state: holo
+      shader: unshaded
+  - type: TechnologyDisk
+    recipes:
+    - MachineCloakingWeepingAngelCircuitboard

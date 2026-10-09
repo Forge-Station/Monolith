@@ -6,7 +6,9 @@ using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Labels;
 using Content.Server.Popups;
 using Content.Shared._Forge.Botany;
+using Content.Shared._Forge.Botany;
 using Content.Shared._Forge.Botany.HydroponicsConsole;
+using Content.Shared.Atmos;
 using Content.Shared.Atmos;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Systems;
@@ -91,6 +93,12 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
             return;
         }
 
+        if (disk.Seed.CultivarJournalLocked)
+        {
+            _popup.PopupEntity(Loc.GetString("hydroponics-console-save-printed-seeds"), ent, args.User);
+            return;
+        }
+
         if (ent.Comp.Journal.Count >= HydroponicsConsoleComponent.MaxJournalEntries)
         {
             _popup.PopupEntity(Loc.GetString("hydroponics-console-journal-full"), ent, args.User);
@@ -102,7 +110,8 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
             LineName = string.IsNullOrWhiteSpace(disk.LineName)
                 ? Loc.GetString(disk.Seed.DisplayName)
                 : disk.LineName.Trim(),
-            Seed = disk.Seed.Clone()
+            Seed = disk.Seed.Clone(),
+            PrintsUsed = disk.PrintsUsed
         });
 
         _popup.PopupEntity(Loc.GetString("hydroponics-console-disk-imported", ("name", disk.LineName)), ent, args.User);
@@ -123,6 +132,10 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
         args.PushMarkup(Loc.GetString("botany-cultivar-disk-contents",
             ("name", ent.Comp.LineName),
             ("plant", Loc.GetString(ent.Comp.Seed.DisplayName))));
+        var remaining = HydroponicsConsoleComponent.MaxCultivarPrints - ent.Comp.PrintsUsed;
+        args.PushMarkup(Loc.GetString("botany-cultivar-disk-prints",
+            ("used", ent.Comp.PrintsUsed),
+            ("remaining", remaining)));
     }
 
     private void OnSaveCultivar(Entity<HydroponicsConsoleComponent> ent, ref HydroponicsConsoleSaveCultivarMessage args)
@@ -130,6 +143,18 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
         if (!TryGetLinkedTray(ent.Owner, args.Tray, out var tray, out var holder) || holder.Seed == null)
         {
             _popup.PopupEntity(Loc.GetString("hydroponics-console-save-empty"), ent, args.Actor);
+            return;
+        }
+
+        if (holder.Seed.CultivarJournalLocked)
+        {
+            _popup.PopupEntity(Loc.GetString("hydroponics-console-save-printed-seeds"), ent, args.Actor);
+            return;
+        }
+
+        if (holder.CultivarArchived)
+        {
+            _popup.PopupEntity(Loc.GetString("hydroponics-console-save-already-archived"), ent, args.Actor);
             return;
         }
 
@@ -143,9 +168,11 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
         ent.Comp.Journal.Add(new BotanyCultivarStored
         {
             LineName = lineName,
-            Seed = holder.Seed.Clone()
+            Seed = holder.Seed.Clone(),
+            PrintsUsed = 0
         });
 
+        holder.CultivarArchived = true;
         _popup.PopupEntity(Loc.GetString("hydroponics-console-save-ok", ("name", lineName)), ent, args.Actor);
         UpdateUi(ent.Owner, ent.Comp);
     }
@@ -173,9 +200,22 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
         if (!TryGetEntry(ent.Comp, args.Index, out var stored) || stored.Seed == null)
             return;
 
-        var packet = _botany.SpawnSeedPacket(stored.Seed.Clone(), Transform(args.Actor).Coordinates, args.Actor);
+        if (stored.PrintsUsed >= HydroponicsConsoleComponent.MaxCultivarPrints)
+        {
+            _popup.PopupEntity(Loc.GetString("hydroponics-console-print-limit"), ent, args.Actor);
+            return;
+        }
+
+        var packetSeed = stored.Seed.Clone();
+        packetSeed.CultivarJournalLocked = true;
+        var packet = _botany.SpawnSeedPacket(packetSeed, Transform(args.Actor).Coordinates, args.Actor);
         _label.Label(packet, stored.LineName);
-        _popup.PopupEntity(Loc.GetString("hydroponics-console-print-packet-ok", ("name", stored.LineName)), ent, args.Actor);
+
+        stored.PrintsUsed++;
+        var remaining = HydroponicsConsoleComponent.MaxCultivarPrints - stored.PrintsUsed;
+        _popup.PopupEntity(Loc.GetString("hydroponics-console-print-packet-ok",
+            ("name", stored.LineName), ("remaining", remaining)), ent, args.Actor);
+        UpdateUi(ent.Owner, ent.Comp);
     }
 
     private void OnEjectDisk(Entity<HydroponicsConsoleComponent> ent, ref HydroponicsConsoleEjectDiskMessage args)
@@ -187,6 +227,7 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
         var diskComp = EnsureComp<BotanyCultivarDiskComponent>(disk);
         diskComp.LineName = stored.LineName;
         diskComp.Seed = stored.Seed.Clone();
+        diskComp.PrintsUsed = stored.PrintsUsed;
         _hands.TryPickupAnyHand(args.Actor, disk);
         _popup.PopupEntity(Loc.GetString("hydroponics-console-eject-disk-ok", ("name", stored.LineName)), ent, args.Actor);
     }
@@ -286,16 +327,20 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
             entry.CarnivorousGrab = holder.Seed.CarnivorousGrab;
             entry.CarnivorousPestEater = holder.Seed.CarnivorousPestEater;
             entry.GeneLocked = holder.Seed.GeneLocked;
+            entry.PinnedTraits = holder.Seed.PinnedTraits.ToArray();
             entry.Chemicals = holder.Seed.Chemicals.Keys.ToArray();
             entry.Mutations = holder.Seed.Mutations.Select(m => m.Name).ToArray();
-            entry.ConsumeGases = FormatGases(holder.Seed.ConsumeGasses);
-            entry.ExudeGases = FormatGases(holder.Seed.ExudeGasses);
+            entry.ConsumeGasEntries = ToGasEntries(holder.Seed.ConsumeGasses);
+            entry.ExudeGasEntries = ToGasEntries(holder.Seed.ExudeGasses);
+            entry.ConsumeGases = BotanyLocalization.FormatGases(holder.Seed.ConsumeGasses);
+            entry.ExudeGases = BotanyLocalization.FormatGases(holder.Seed.ExudeGasses);
             entry.IdealHeat = holder.Seed.IdealHeat;
             entry.HeatTolerance = holder.Seed.HeatTolerance;
             entry.LowPressure = holder.Seed.LowPressureTolerance;
             entry.HighPressure = holder.Seed.HighPressureTolerance;
             entry.IdealLight = holder.Seed.IdealLight;
             entry.LightTolerance = holder.Seed.LightTolerance;
+            entry.CanSaveToJournal = !holder.CultivarArchived && !holder.Seed.CultivarJournalLocked;
         }
 
         return entry;
@@ -317,11 +362,17 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
             CarnivorousGrab = seed.CarnivorousGrab,
             CarnivorousPestEater = seed.CarnivorousPestEater,
             GeneLocked = seed.GeneLocked,
+            PinnedTraits = seed.PinnedTraits.ToArray(),
             Ligneous = seed.Ligneous,
             Chemicals = seed.Chemicals.Keys.ToArray(),
             Mutations = seed.Mutations.Select(m => m.Name).ToArray(),
-            ConsumeGases = FormatGases(seed.ConsumeGasses),
-            ExudeGases = FormatGases(seed.ExudeGasses),
+            ConsumeGasEntries = ToGasEntries(seed.ConsumeGasses),
+            ExudeGasEntries = ToGasEntries(seed.ExudeGasses),
+            ConsumeGases = BotanyLocalization.FormatGases(seed.ConsumeGasses),
+            ExudeGases = BotanyLocalization.FormatGases(seed.ExudeGasses),
+            PrintsUsed = stored.PrintsUsed,
+            PrintsRemaining = HydroponicsConsoleComponent.MaxCultivarPrints - stored.PrintsUsed,
+            CanPrint = stored.PrintsUsed < HydroponicsConsoleComponent.MaxCultivarPrints,
         };
     }
 
@@ -358,11 +409,8 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
         return name.Length <= 32 ? name : name[..32];
     }
 
-    private static string FormatGases(Dictionary<Gas, float> gases)
+    private static HydroGasEntry[] ToGasEntries(Dictionary<Gas, float> gases)
     {
-        if (gases.Count == 0)
-            return string.Empty;
-
-        return string.Join(", ", gases.Select(g => $"{g.Key} ({g.Value:0.##})"));
+        return gases.Select(g => new HydroGasEntry { Gas = (byte)g.Key, Amount = g.Value }).ToArray();
     }
 }

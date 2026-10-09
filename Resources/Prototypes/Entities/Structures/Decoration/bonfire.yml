@@ -35,6 +35,9 @@
     graph: FiresGraph # Frontier
     node: BonfireNode # Frontier
   - type: EntityRadiusHeater # Mono
+  - type: Tag # Forge-change
+    tags:
+      - NoGridGodmode
 
 - type: entity
   id: LegionnaireBonfire
@@ -47,3 +50,6 @@
       - state: legionnaire_bonfire
   - type: PointLight
     color: "#FF5601"
+  - type: Tag # Forge-change
+    tags:
+      - NoGridGodmode

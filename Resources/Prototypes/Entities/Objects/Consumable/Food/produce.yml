@@ -2613,3 +2613,39 @@
     entries:
       Taco: AnomalyBerry
       Burger: AnomalyBerryBurger
+
+# Forge-Change-start
+- type: entity
+  name: bluespace tomato
+  parent: FoodTomato
+  id: FoodBluespaceTomato
+  description: It's definitely here?
+  components:
+  - type: BluespaceTomato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 29
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: SpaceLube
+          Quantity: 15
+        - ReagentId: Vitamin
+          Quantity: 4
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/bluespace_tomato.rsi
+    state: produce
+  - type: Produce
+    seedId: bluespaceTomato # Forge-Change
+  - type: Extractable
+    grindableSolutionName: food
+    juiceSolution:
+      reagents:
+      - ReagentId: SpaceLube
+        Quantity: 10
+  - type: Tag
+    tags:
+    - Fruit
+    - Vegetable
+# Forge-Change-end

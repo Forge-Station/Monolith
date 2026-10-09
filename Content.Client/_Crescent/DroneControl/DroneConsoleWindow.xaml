@@ -4,11 +4,15 @@
                     Title="{Loc 'drone-console-title'}"
                     SetSize="1000 600"
                     MinSize="800 500">
-    <GridContainer Columns="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <BoxContainer Orientation="Horizontal"
+                  HorizontalExpand="True"
+                  VerticalExpand="True">
 
         <BoxContainer Orientation="Vertical"
                       MinWidth="250"
+                      MaxWidth="250"
                       HorizontalExpand="False"
+                      VerticalExpand="True"
                       Margin="5">
             <controls:StripeBack>
                 <Label Text="{Loc 'drone-console-list'}" FontColorOverride="LightGray" Align="Center"/>
@@ -23,13 +27,15 @@
             </BoxContainer>
         </BoxContainer>
 
-        <!-- Mono - wrap -->
-        <LayoutContainer>
+        <!-- Mono - wrap: LayoutContainer + Wide so radar mode buttons can inject and the map fills leftover space. -->
+        <LayoutContainer HorizontalExpand="True"
+                         VerticalExpand="True"
+                         Margin="5 4 10 5">
             <ui:ShuttleNavControl Name="NavRadar"
                                   HorizontalExpand="True"
                                   VerticalExpand="True"
-                                  MinHeight="400"/>
+                                  VerticalAlignment="Stretch"/>
         </LayoutContainer>
 
-    </GridContainer>
+    </BoxContainer>
 </controls:FancyWindow>

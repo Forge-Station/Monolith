@@ -161,8 +161,10 @@ public sealed class PoiTreasurySystem : EntitySystem
         if (IsLeaderOnGrid(container.Owner, args.User))
             return;
 
-        _popup.PopupEntity(Loc.GetString("poi-treasury-withdraw-denied"), args.Item, args.User, PopupType.SmallCaution);
         args.Cancel();
+
+        if (args.ShowPopup)
+            _popup.PopupEntity(Loc.GetString("poi-treasury-withdraw-denied"), args.Item, args.User, PopupType.SmallCaution);
     }
 
     private bool IsLeaderOnGrid(EntityUid treasury, EntityUid user)

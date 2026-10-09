@@ -25,6 +25,9 @@
       - !type:SuppressEffect
         syndrome: PainSyndrome
         duration: 600
+      - !type:RemoveSyndromeEffect
+        syndrome: PainSyndrome
+        severity: 0.4
       - !type:SuppressEffect
         syndrome: ChronicPain
         duration: 540

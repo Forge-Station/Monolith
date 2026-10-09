@@ -1,0 +1,1065 @@
+# Packed command turrets. They deploy empty; load a cartridge kit.
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretEmpirePacked
+  name: packed imperial ballistic turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretEmpire
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretEmpirePackingGraph
+  start: WeaponTurretEmpirePacked
+  graph:
+  - node: WeaponTurretEmpirePacked
+    entity: WeaponTurretEmpire
+    edges:
+    - to: WeaponTurretEmpirePacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretEmpirePacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretNanoTrasenPacked
+  name: packed NanoTrasen ballistic turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretNanoTrasen
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretNanoTrasenPackingGraph
+  start: WeaponTurretNanoTrasenPacked
+  graph:
+  - node: WeaponTurretNanoTrasenPacked
+    entity: WeaponTurretNanoTrasen
+    edges:
+    - to: WeaponTurretNanoTrasenPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretNanoTrasenPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretCCPacked
+  name: packed Colossus ballistic turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretCC
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretCCPackingGraph
+  start: WeaponTurretCCPacked
+  graph:
+  - node: WeaponTurretCCPacked
+    entity: WeaponTurretCC
+    edges:
+    - to: WeaponTurretCCPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretCCPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretTSFMCPacked
+  name: packed TSF ballistic turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretTSFMC
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretTSFMCPackingGraph
+  start: WeaponTurretTSFMCPacked
+  graph:
+  - node: WeaponTurretTSFMCPacked
+    entity: WeaponTurretTSFMC
+    edges:
+    - to: WeaponTurretTSFMCPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretTSFMCPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretUSSPPacked
+  name: packed USSP ballistic turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretUSSP
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretUSSPPackingGraph
+  start: WeaponTurretUSSPPacked
+  graph:
+  - node: WeaponTurretUSSPPacked
+    entity: WeaponTurretUSSP
+    edges:
+    - to: WeaponTurretUSSPPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretUSSPPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretPDVPacked
+  name: packed PDV ballistic turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretPDV
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretPDVPackingGraph
+  start: WeaponTurretPDVPacked
+  graph:
+  - node: WeaponTurretPDVPacked
+    entity: WeaponTurretPDV
+    edges:
+    - to: WeaponTurretPDVPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretPDVPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretViperPacked
+  name: packed Viper Group ballistic turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretViper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretViperPackingGraph
+  start: WeaponTurretViperPacked
+  graph:
+  - node: WeaponTurretViperPacked
+    entity: WeaponTurretViper
+    edges:
+    - to: WeaponTurretViperPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretViperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretEmpireShotgunPacked
+  name: packed imperial shotgun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretEmpireShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretEmpireShotgunPackingGraph
+  start: WeaponTurretEmpireShotgunPacked
+  graph:
+  - node: WeaponTurretEmpireShotgunPacked
+    entity: WeaponTurretEmpireShotgun
+    edges:
+    - to: WeaponTurretEmpireShotgunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretEmpireShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretEmpireSniperPacked
+  name: packed imperial sniper turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretEmpireSniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretEmpireSniperPackingGraph
+  start: WeaponTurretEmpireSniperPacked
+  graph:
+  - node: WeaponTurretEmpireSniperPacked
+    entity: WeaponTurretEmpireSniper
+    edges:
+    - to: WeaponTurretEmpireSniperPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretEmpireSniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretEmpireMachinegunPacked
+  name: packed imperial machine gun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretEmpireMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretEmpireMachinegunPackingGraph
+  start: WeaponTurretEmpireMachinegunPacked
+  graph:
+  - node: WeaponTurretEmpireMachinegunPacked
+    entity: WeaponTurretEmpireMachinegun
+    edges:
+    - to: WeaponTurretEmpireMachinegunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretEmpireMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretTSFShotgunPacked
+  name: packed TSF shotgun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretTSFShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretTSFShotgunPackingGraph
+  start: WeaponTurretTSFShotgunPacked
+  graph:
+  - node: WeaponTurretTSFShotgunPacked
+    entity: WeaponTurretTSFShotgun
+    edges:
+    - to: WeaponTurretTSFShotgunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretTSFShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretTSFSniperPacked
+  name: packed TSF sniper turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretTSFSniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretTSFSniperPackingGraph
+  start: WeaponTurretTSFSniperPacked
+  graph:
+  - node: WeaponTurretTSFSniperPacked
+    entity: WeaponTurretTSFSniper
+    edges:
+    - to: WeaponTurretTSFSniperPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretTSFSniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretTSFMachinegunPacked
+  name: packed TSF machine gun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretTSFMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretTSFMachinegunPackingGraph
+  start: WeaponTurretTSFMachinegunPacked
+  graph:
+  - node: WeaponTurretTSFMachinegunPacked
+    entity: WeaponTurretTSFMachinegun
+    edges:
+    - to: WeaponTurretTSFMachinegunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretTSFMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretCCShotgunPacked
+  name: packed Colossus shotgun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretCCShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretCCShotgunPackingGraph
+  start: WeaponTurretCCShotgunPacked
+  graph:
+  - node: WeaponTurretCCShotgunPacked
+    entity: WeaponTurretCCShotgun
+    edges:
+    - to: WeaponTurretCCShotgunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretCCShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretCCSniperPacked
+  name: packed Colossus sniper turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretCCSniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretCCSniperPackingGraph
+  start: WeaponTurretCCSniperPacked
+  graph:
+  - node: WeaponTurretCCSniperPacked
+    entity: WeaponTurretCCSniper
+    edges:
+    - to: WeaponTurretCCSniperPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretCCSniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretCCMachinegunPacked
+  name: packed Colossus machine gun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretCCMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretCCMachinegunPackingGraph
+  start: WeaponTurretCCMachinegunPacked
+  graph:
+  - node: WeaponTurretCCMachinegunPacked
+    entity: WeaponTurretCCMachinegun
+    edges:
+    - to: WeaponTurretCCMachinegunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretCCMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretUSSPShotgunPacked
+  name: packed USSP shotgun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretUSSPShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretUSSPShotgunPackingGraph
+  start: WeaponTurretUSSPShotgunPacked
+  graph:
+  - node: WeaponTurretUSSPShotgunPacked
+    entity: WeaponTurretUSSPShotgun
+    edges:
+    - to: WeaponTurretUSSPShotgunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretUSSPShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretUSSPSniperPacked
+  name: packed USSP sniper turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretUSSPSniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretUSSPSniperPackingGraph
+  start: WeaponTurretUSSPSniperPacked
+  graph:
+  - node: WeaponTurretUSSPSniperPacked
+    entity: WeaponTurretUSSPSniper
+    edges:
+    - to: WeaponTurretUSSPSniperPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretUSSPSniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretUSSPMachinegunPacked
+  name: packed USSP machine gun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretUSSPMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretUSSPMachinegunPackingGraph
+  start: WeaponTurretUSSPMachinegunPacked
+  graph:
+  - node: WeaponTurretUSSPMachinegunPacked
+    entity: WeaponTurretUSSPMachinegun
+    edges:
+    - to: WeaponTurretUSSPMachinegunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretUSSPMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretPDVShotgunPacked
+  name: packed PDV shotgun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretPDVShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretPDVShotgunPackingGraph
+  start: WeaponTurretPDVShotgunPacked
+  graph:
+  - node: WeaponTurretPDVShotgunPacked
+    entity: WeaponTurretPDVShotgun
+    edges:
+    - to: WeaponTurretPDVShotgunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretPDVShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretPDVSniperPacked
+  name: packed PDV sniper turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretPDVSniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretPDVSniperPackingGraph
+  start: WeaponTurretPDVSniperPacked
+  graph:
+  - node: WeaponTurretPDVSniperPacked
+    entity: WeaponTurretPDVSniper
+    edges:
+    - to: WeaponTurretPDVSniperPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretPDVSniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretPDVMachinegunPacked
+  name: packed PDV machine gun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretPDVMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretPDVMachinegunPackingGraph
+  start: WeaponTurretPDVMachinegunPacked
+  graph:
+  - node: WeaponTurretPDVMachinegunPacked
+    entity: WeaponTurretPDVMachinegun
+    edges:
+    - to: WeaponTurretPDVMachinegunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretPDVMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretVGShotgunPacked
+  name: packed Viper Group shotgun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretVGShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretVGShotgunPackingGraph
+  start: WeaponTurretVGShotgunPacked
+  graph:
+  - node: WeaponTurretVGShotgunPacked
+    entity: WeaponTurretVGShotgun
+    edges:
+    - to: WeaponTurretVGShotgunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretVGShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretVGSniperPacked
+  name: packed Viper Group sniper turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretVGSniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretVGSniperPackingGraph
+  start: WeaponTurretVGSniperPacked
+  graph:
+  - node: WeaponTurretVGSniperPacked
+    entity: WeaponTurretVGSniper
+    edges:
+    - to: WeaponTurretVGSniperPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretVGSniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretVGMachinegunPacked
+  name: packed Viper Group machine gun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretVGMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretVGMachinegunPackingGraph
+  start: WeaponTurretVGMachinegunPacked
+  graph:
+  - node: WeaponTurretVGMachinegunPacked
+    entity: WeaponTurretVGMachinegun
+    edges:
+    - to: WeaponTurretVGMachinegunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretVGMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretNTShotgunPacked
+  name: packed NanoTrasen shotgun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretNTShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretNTShotgunPackingGraph
+  start: WeaponTurretNTShotgunPacked
+  graph:
+  - node: WeaponTurretNTShotgunPacked
+    entity: WeaponTurretNTShotgun
+    edges:
+    - to: WeaponTurretNTShotgunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretNTShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretNTSniperPacked
+  name: packed NanoTrasen sniper turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretNTSniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretNTSniperPackingGraph
+  start: WeaponTurretNTSniperPacked
+  graph:
+  - node: WeaponTurretNTSniperPacked
+    entity: WeaponTurretNTSniper
+    edges:
+    - to: WeaponTurretNTSniperPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretNTSniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretNTMachinegunPacked
+  name: packed NanoTrasen machine gun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretNTMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretNTMachinegunPackingGraph
+  start: WeaponTurretNTMachinegunPacked
+  graph:
+  - node: WeaponTurretNTMachinegunPacked
+    entity: WeaponTurretNTMachinegun
+    edges:
+    - to: WeaponTurretNTMachinegunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretNTMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+

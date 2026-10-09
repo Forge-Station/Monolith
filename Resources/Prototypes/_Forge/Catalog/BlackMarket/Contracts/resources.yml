@@ -1,0 +1,228 @@
+# KoT-change-start
+#region Base material
+
+- type: blackMarketContract
+  id: BMContractResourcesSheetSteel
+  category: Resources
+  price: 2000
+  name: black-market-contract-sheet-steel
+  description: black-market-contract-sheet-steel-desc
+  icon: SheetSteel
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 20000
+  contents:
+  - proto: SheetSteel
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesSheetGlass
+  category: Resources
+  price: 2500
+  name: black-market-contract-sheet-glass
+  description: black-market-contract-sheet-glass-desc
+  icon: SheetGlass
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 25000
+  contents:
+  - proto: SheetGlass
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesSheetPlastic
+  category: Resources
+  price: 3000
+  name: black-market-contract-sheet-plastic
+  description: black-market-contract-sheet-plastic-desc
+  icon: SheetPlastic
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 30000
+  contents:
+  - proto: SheetPlastic
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesMaterialCloth
+  category: Resources
+  price: 1500
+  name: black-market-contract-material-cloth
+  description: black-market-contract-material-cloth-desc
+  icon: MaterialCloth
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 15000
+  contents:
+  - proto: MaterialCloth
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesIngotSilver
+  category: Resources
+  price: 5000
+  name: black-market-contract-ingot-silver
+  description: black-market-contract-ingot-silver-desc
+  icon: IngotSilver
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 50000
+  contents:
+  - proto: IngotSilver
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesIngotGold
+  category: Resources
+  price: 6000
+  name: black-market-contract-ingot-gold
+  description: black-market-contract-ingot-gold-desc
+  icon: IngotGold
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 60000
+  contents:
+  - proto: IngotGold
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesMaterialDiamond
+  category: Resources
+  price: 300000
+  name: black-market-contract-material-diamond
+  description: black-market-contract-material-diamond-desc
+  icon: MaterialDiamond
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 3000000
+  contents:
+  - proto: MaterialDiamond
+    amount: 1
+
+- type: blackMarketContract
+  id: BMContractResourcesMaterialBluespace
+  category: Resources
+  price: 45000
+  name: black-market-contract-material-bluespace
+  description: black-market-contract-material-bluespace-desc
+  icon: MaterialBluespace
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.05
+  dynamicPriceMax: 450000
+  contents:
+  - proto: MaterialBluespace
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesSheetUranium
+  category: Resources
+  price: 6000
+  name: black-market-contract-sheet-uranium
+  description: black-market-contract-sheet-uranium-desc
+  icon: SheetUranium
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.10
+  dynamicPriceMax: 60000
+  contents:
+  - proto: SheetUranium
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesSheetPlasma
+  category: Resources
+  price: 6000
+  name: black-market-contract-sheet-plasma
+  description: black-market-contract-sheet-plasma-desc
+  icon: SheetPlasma
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.10
+  dynamicPriceMax: 60000
+  contents:
+  - proto: SheetPlasma
+    amount: 2
+
+#region Advanced materials
+
+- type: blackMarketContract
+  id: BMContractResourcesMaterialDurathread
+  category: Resources
+  price: 7000
+  name: black-market-contract-material-durathread
+  description: black-market-contract-material-durathread-desc
+  icon: MaterialDurathread
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 70000
+  contents:
+  - proto: MaterialDurathread
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesSheetPlasteel
+  category: Resources
+  price: 10000
+  name: black-market-contract-sheet-plasteel
+  description: black-market-contract-sheet-plasteel-desc
+  icon: SheetPlasteel
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 100000
+  contents:
+  - proto: SheetPlasteel
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesSheetPlastitanium
+  category: Resources
+  price: 54000
+  name: black-market-contract-sheet-plastitanium
+  description: black-market-contract-sheet-plastitanium-desc
+  icon: SheetPlastitanium
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.15
+  dynamicPriceMax: 540000
+  contents:
+  - proto: SheetPlastitanium
+    amount: 2
+
+- type: blackMarketContract
+  id: BMContractResourcesSheetIridite10
+  category: Resources
+  price: 90000
+  name: black-market-contract-sheet-iridite
+  description: black-market-contract-sheet-iridite-desc
+  icon: SheetIridite10
+  purchaseLimit: 0
+  dynamicPrice: true
+  dynamicPriceIncreasePercent: 0.30
+  dynamicPriceMax: 1000000
+  contents:
+  - proto: SheetIridite10
+    amount: 1
+
+# KoT-change-end
+
+#region Stub Contract
+- type: blackMarketContract
+  id: BMContractStubResources
+  category: Resources
+  stub: true
+  price: 0
+  name: black-market-contract-stub-name
+  description: black-market-contract-stub-desc
+  icon: Paper
+  contents: []
+

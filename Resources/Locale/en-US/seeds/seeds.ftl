@@ -141,3 +141,5 @@ seeds-cherry-name = cherry
 seeds-cherry-display-name = cherry tree
 seeds-anomaly-berry-name = anomaly berry
 seeds-anomaly-berry-display-name = anomaly berries
+seeds-bluespacetomato-name = bluespace tomato
+seeds-bluespacetomato-display-name = bluespace tomato plant

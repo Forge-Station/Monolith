@@ -59,6 +59,12 @@ shuttle-console-ftl-state-Invalid = Invalid
 
 shuttle-console-map-settings = Settings
 shuttle-console-ftl-button = FTL
+shuttle-console-cloak-button = Cloaking
+shuttle-console-toggle-mod-button = Toggle mode
+shuttle-console-cloak-none = Cloaking: None
+shuttle-console-cloak-ready = Cloaking: Ready
+shuttle-console-cloak-active = Cloaking: Active
+shuttle-console-cloak-cooldown = Cloaking: Cooldown
 shuttle-console-map-rebuild = Scan
 shuttle-console-map-beacons = Show Beacons
 

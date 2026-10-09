@@ -22,6 +22,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Player; // Mono
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Shared._Forge.ReviveReward; // Forge-change
 
 namespace Content.Server.Medical.CPR;
 
@@ -132,6 +133,8 @@ public sealed partial class CPRSystem : EntitySystem
             && damageableComponent.TotalDamage < threshold)
         {
             _mobStateSystem.ChangeMobState(args.Target.Value, MobState.Critical, state, performer);
+
+            RaiseLocalEvent(new EntityRevivedEvent(target, performer)); // Forge-change
 
             // Mono Edit: Informs the ghost they've been revived.
             if (_mind.TryGetMind(target, out _, out var mind) &&

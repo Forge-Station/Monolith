@@ -89,7 +89,7 @@
     phosphorColor: "#c2ffc2"
     lightingColor: "#0EFFFFFF"
     amplification: 1.2
-  
+
 - type: entity
   id: ClothingNightVision1Nexus
   abstract: true
@@ -103,7 +103,7 @@
     viewCircleCount: 1
     viewCircleSpacing: 0
     phosphorColor: "#41D7D9"
-    lightingColor: "#FFFFFF32"
+    lightingColor: "#ffffffca"
     amplification: 1.2
 
 - type: entity
@@ -134,8 +134,8 @@
     viewCircleRadius: 525
     viewCircleCount: 2
     viewCircleSpacing: 400
-    phosphorColor: "#aa9c00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#e8c733"
+    lightingColor: "#ffffffca"
     amplification: 1.2
 
 - type: entity
@@ -150,8 +150,8 @@
     viewCircleRadius: 525
     viewCircleCount: 2
     viewCircleSpacing: 400
-    phosphorColor: "#aa9c00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#e8c733"
+    lightingColor: "#ffffffca"
     amplification: 1.2
 
 - type: entity
@@ -183,7 +183,7 @@
     viewCircleCount: 2
     viewCircleSpacing: 400
     phosphorColor: "#41D7D9"
-    lightingColor: "#FFFFFF32"
+    lightingColor: "#ffffffca"
     amplification: 1.2
 
 - type: entity
@@ -262,8 +262,8 @@
     viewCircleRadius: 475
     viewCircleCount: 4
     viewCircleSpacing: 250
-    phosphorColor: "#aa9c00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#e8c733"
+    lightingColor: "#ffffffca"
     amplification: 1.2
 
 - type: entity
@@ -278,8 +278,8 @@
     viewCircleRadius: 475
     viewCircleCount: 4
     viewCircleSpacing: 250
-    phosphorColor: "#aa9c00"
-    lightingColor: "#FFFFFF32"
+    phosphorColor: "#e8c733"
+    lightingColor: "#ffffffca"
     amplification: 1.2
 
 - type: entity
@@ -311,7 +311,7 @@
     viewCircleCount: 4
     viewCircleSpacing: 250
     phosphorColor: "#41D7D9"
-    lightingColor: "#FFFFFF32"
+    lightingColor: "#ffffffca"
     amplification: 1.2
 
 - type: entity

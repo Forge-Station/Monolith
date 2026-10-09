@@ -7,4 +7,9 @@ public enum StepInvalidReason
     NeedsOperatingTable,
     Armor,
     MissingTool,
+    SurgeryInvalid,
+    MissingPreviousSteps,
+    StepCompleted,
+    ToolInvalid,
+    DoAfterFailed
 }

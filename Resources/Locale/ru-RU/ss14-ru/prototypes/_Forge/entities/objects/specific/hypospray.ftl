@@ -4,3 +4,6 @@ ent-MethadoneMedipen = медипен метадона
     .desc = { ent-ChemicalMedipen.desc }
 ent-MorphineMedipen = медипен морфина
     .desc = { ent-ChemicalMedipen.desc }
+
+ent-MedHypoTTI = гипоспрей
+    .desc = Стерильный инъектор для быстрого введения лекарств пациентам.

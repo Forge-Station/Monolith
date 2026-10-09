@@ -29,6 +29,7 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Physics;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Turrets;
+using Content.Server._Forge.Turrets; // Forge-Change
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -71,6 +72,7 @@ public sealed partial class NPCUtilitySystem : EntitySystem
     [Dependency] private GunSystem _gun = default!; // Mono
     [Dependency] private NPCCombatSystem _npcCombat = default!;
     [Dependency] private TurretTargetSettingsSystem _turretTargetSettings = default!;
+    [Dependency] private TurretCommandSystem _turretCommand = default!; // Forge-Change
 
     private EntityQuery<PuddleComponent> _puddleQuery;
     private EntityQuery<TransformComponent> _xformQuery;
@@ -406,6 +408,14 @@ public sealed partial class NPCUtilitySystem : EntitySystem
             }
             case TurretTargetingCon:
             {
+                // Forge-Change-start
+                if (_turretCommand.BlocksTarget(owner, targetUid))
+                    return 0f;
+
+                if (_turretCommand.ForcesTarget(owner, targetUid))
+                    return 1f;
+                // Forge-Change-end
+
                 if (!TryComp<TurretTargetSettingsComponent>(owner, out var turretTargetSettings) ||
                     _turretTargetSettings.EntityIsTargetForTurret((owner, turretTargetSettings), targetUid))
                     return 1f;
@@ -534,6 +544,8 @@ public sealed partial class NPCUtilitySystem : EntitySystem
                 {
                     entities.Add(ent);
                 }
+
+                _turretCommand.AddForcedTargets(owner, vision, entities); // Forge-Change
                 break;
             }
             // Mono - TODO: consider factions

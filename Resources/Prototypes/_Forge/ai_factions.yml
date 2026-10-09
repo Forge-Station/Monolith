@@ -12,6 +12,19 @@
   defaultHostile: true
 
 - type: npcFaction
+  id: ShipTurret
+  friendly:
+  - ShipTurret
+  neutral:
+  - Cat
+  - PetsNT
+  - SimpleNeutral
+  - MD
+  - ContrabandDetection
+  - Mouse
+  defaultHostile: true
+
+- type: npcFaction
   id: EmpireTurret
   friendly:
   - Empire

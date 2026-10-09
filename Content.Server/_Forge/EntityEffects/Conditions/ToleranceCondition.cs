@@ -1,4 +1,5 @@
 using Robust.Shared.Prototypes;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.EntityEffects;
 using Content.Shared._Forge.Body.Components;
 using Content.Shared._Forge.Body.Syndromes;
@@ -9,7 +10,7 @@ namespace Content.Server._Forge.EntityEffects.Conditions;
 public sealed partial class ToleranceCondition : EntityEffectCondition
 {
     [DataField(required: true)]
-    public string Reagent = string.Empty;
+    public ProtoId<ReagentPrototype> Reagent;
 
     [DataField]
     public float Min = 0f;

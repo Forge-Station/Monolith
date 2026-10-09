@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2TTI] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision2TTI, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
   id: ClothingHeadHelmetHardsuitTrauma
   name: armed trauma unit T-23 tacsuit helmet
   description: The standard combat suit of the Armed Trauma Unit, outfitted with a limited-range radar hud as well as a medical hud.
@@ -24,19 +24,21 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: RadarConsole
-    followEntity: true
-    noRotate: true
-  - type: DetectionRangeMultiplier
-    infraredMultiplier: 0.5
-    visualMultiplier: 0.75
-  - type: ActivatableUI
-    key: enum.RadarConsoleUiKey.Key
-    singleUser: true
-  - type: UserInterface
-    interfaces:
-      enum.RadarConsoleUiKey.Key:
-        type: RadarConsoleBoundUserInterface
+  # Forge-change replace with BaseClothingHelmetMassScanner
+  # - type: RadarConsole
+  #   followEntity: true
+  #   noRotate: true
+  # - type: DetectionRangeMultiplier
+  #   infraredMultiplier: 0.5
+  #   visualMultiplier: 0.75
+  # - type: ActivatableUI
+  #   key: enum.RadarConsoleUiKey.Key
+  #   singleUser: true
+  # - type: UserInterface
+  #   interfaces:
+  #     enum.RadarConsoleUiKey.Key:
+  #       type: RadarConsoleBoundUserInterface
+  # Forge-change-end
   - type: Armor
     modifiers:
       coefficients:
@@ -55,7 +57,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4TTI, ShowSecurityIcons] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4TTI, ShowSecurityIcons, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
   id: ClothingHeadHelmetHardsuitTraumaLeader
   name: armed trauma unit T-53 tacsuit helmet
   description: The commander's tacsuit in the Armed Trauma Unit, outfitted with a medical and long-range radar hud as well as thermals and night vision.
@@ -85,16 +87,18 @@
     pulseTime: 3
     isEquipment: true
     toggleAction: PulseThermalVision
-  - type: RadarConsole
-    followEntity: true
-    noRotate: true
-  - type: ActivatableUI
-    key: enum.RadarConsoleUiKey.Key
-    singleUser: true
-  - type: UserInterface
-    interfaces:
-      enum.RadarConsoleUiKey.Key:
-        type: RadarConsoleBoundUserInterface
+  # Forge-change replace with BaseClothingHelmetMassScanner
+  #- type: RadarConsole
+  #  followEntity: true
+  #  noRotate: true
+  #- type: ActivatableUI
+  #  key: enum.RadarConsoleUiKey.Key
+  #  singleUser: true
+  #- type: UserInterface
+  #  interfaces:
+  #    enum.RadarConsoleUiKey.Key:
+  #      type: RadarConsoleBoundUserInterface
+  # Forge-change-end
   - type: Armor
     modifiers:
       coefficients:

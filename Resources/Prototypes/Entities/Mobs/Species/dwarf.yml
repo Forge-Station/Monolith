@@ -73,6 +73,8 @@
   - type: InnateMiningScannerViewer # Frontier
     pingSound: null # Frontier
     viewRange: 5 # Frontier
+  - type: AlcoholTolerance #Forge-Change: same multiplier like trait AlcoholTolerance
+    visualScaleMultiplier: 0.35 #Forge-Change
 
 - type: entity
   parent: BaseSpeciesDummy

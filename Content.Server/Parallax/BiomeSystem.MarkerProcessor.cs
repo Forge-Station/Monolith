@@ -315,6 +315,12 @@ public sealed partial class BiomeSystem
             component.ModifiedTiles.Remove(chunk);
             _tilePool.Return(modified);
         }
+        else
+        {
+            // Forge-Change: marker tiles (rivers stand-ins, structures) must stay modified
+            // or the next chunk unload treats them as untouched biome and deletes them.
+            component.ModifiedTiles[chunk] = modified;
+        }
 
         component.PendingMarkers.Remove(chunk);
     }

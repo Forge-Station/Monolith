@@ -185,6 +185,10 @@ public sealed partial class FelinidSystem : EntitySystem
 
     private void OnHairballPickupAttempt(EntityUid uid, HairballComponent component, GettingPickedUpAttemptEvent args)
     {
+        // Opening the context menu also checks pickup. Don't roll vomit until the player actually tries to pick it up.
+        if (!args.ShowPopup)
+            return;
+
         if (HasComp<FelinidComponent>(args.User) || !HasComp<StatusEffectsComponent>(args.User))
             return;
 

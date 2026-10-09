@@ -94,6 +94,17 @@ public sealed partial class MutationSystem : EntitySystem
         CrossBool(ref result.CarnivorousGrab, a.CarnivorousGrab);
         CrossBool(ref result.CarnivorousPestEater, a.CarnivorousPestEater);
         CrossBool(ref result.GeneLocked, a.GeneLocked);
+        // Forge-Change-start
+        result.CultivarJournalLocked = a.CultivarJournalLocked || b.CultivarJournalLocked;
+        if (result.GeneLocked)
+        {
+            result.PinnedTraits = a.GeneLocked && b.GeneLocked
+                ? a.PinnedTraits.Union(b.PinnedTraits).Distinct().ToList()
+                : a.GeneLocked
+                    ? new List<string>(a.PinnedTraits)
+                    : new List<string>(b.PinnedTraits);
+        }
+        // Forge-Change-end
         CrossFloat(ref result.RadiationIntensity, a.RadiationIntensity);
         CrossFloat(ref result.GrabRange, a.GrabRange);
 
@@ -144,6 +155,11 @@ public sealed partial class MutationSystem : EntitySystem
         result.CarnivorousGrab |= donor.CarnivorousGrab;
         result.CarnivorousPestEater |= donor.CarnivorousPestEater;
         result.GeneLocked |= donor.GeneLocked;
+        // Forge-Change-start
+        result.CultivarJournalLocked |= donor.CultivarJournalLocked;
+        if (donor.GeneLocked && donor.PinnedTraits.Count > 0)
+            result.PinnedTraits = result.PinnedTraits.Union(donor.PinnedTraits).Distinct().ToList();
+        // Forge-Change-end
         if (donor.Radioactive)
             result.RadiationIntensity = MathF.Max(result.RadiationIntensity, donor.RadiationIntensity);
         if (donor.CarnivorousGrab)

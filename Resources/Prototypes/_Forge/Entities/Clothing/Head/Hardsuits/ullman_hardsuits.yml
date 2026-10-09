@@ -1,6 +1,6 @@
 # UI Advanced Light hardsuit helmet
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Ullman]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Ullman, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitUllmanMedical
   name: ullman medical hardsuit helmet
   description: The medical hardsuit helmet is used by the Ullman Industries medical staff.

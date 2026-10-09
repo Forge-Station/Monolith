@@ -1,0 +1,47 @@
+- type: entity
+  parent: HandheldCrewMonitor
+  id: TTIHandheldCrewMonitor
+  categories: [ DoNotMap ]
+  name: TTI handheld crew monitor
+  description: A hand-held crew monitor displaying the status of client tracker sensors.
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Medical/ttihandheldmonitor.rsi
+    layers:
+      - state: icon
+      - state: screen
+        shader: unshaded
+        visible: true
+        map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerCellSlotVisuals.Enabled:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ActivatableUI
+    key: enum.CrewMonitoringUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.CrewMonitoringUIKey.Key:
+        type: CrewMonitoringBoundUserInterface
+      enum.HealthAnalyzerUiKey.Key:
+        type: HealthAnalyzerBoundUserInterface
+  - type: CrewMonitoringConsole
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewNanotrasenMonitor
+  - type: HealthAnalyzer
+    scanningEndSound:
+      path: "/Audio/Items/Medical/healthscanner.ogg"
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 15000
+  - type: Tag
+    tags:
+    - DiscreteHealthAnalyzer
+    - HighRiskItem
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: Trauma Team International
+    hasEngravingText: forge-engraving-generic-has-message

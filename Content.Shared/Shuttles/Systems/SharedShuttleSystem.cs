@@ -1,10 +1,12 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._Mono.Ships;
+using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.UI.MapObjects;
 using Content.Shared.Whitelist;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
@@ -21,6 +23,7 @@ public abstract partial class SharedShuttleSystem : EntitySystem
     [Dependency] protected SharedTransformSystem XformSystem = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private SharedPowerReceiverSystem _powerReceiverSystem = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
 
     public const float FTLRange = 0f;
     public const float FTLBufferRange = 20f;
@@ -116,6 +119,10 @@ public abstract partial class SharedShuttleSystem : EntitySystem
     {
         foreach (var beacon in beacons)
         {
+            // Skip beacons with invalid NetEntity IDs
+            if (beacon.Entity == NetEntity.Invalid)
+                continue;
+
             var beaconCoords = XformSystem.ToMapCoordinates(GetCoordinates(beacon.Coordinates));
 
             if (beaconCoords.MapId != mapId)
@@ -132,7 +139,10 @@ public abstract partial class SharedShuttleSystem : EntitySystem
         /// Forge-Change-Start
         // physics.BodyType; /// Forge-Change-Del
 
-        if (physics.BodyType != BodyType.Static && physics.Mass < (20f * TileDensityMultiplier)) // A grid of approx 20 tiles, to not draw tiny grids.
+        var minTiles = _cfg.IsCVarRegistered(CCVars.DrawGridMinTiles.Name) 
+            ? _cfg.GetCVar(CCVars.DrawGridMinTiles) 
+            : 10; // Default fallback value
+        if (physics.BodyType != BodyType.Static && physics.Mass < (minTiles * TileDensityMultiplier)) // A grid of approx minTiles tiles, to not draw tiny grids.
         {
             return false;
         }

@@ -232,7 +232,7 @@
 # MARSOC only
 
 - type: entity
-  parent: [EnergyShieldClothing, ClothingOuterHardsuitM86, BaseFactionGearTSFT3]
+  parent: [MonoEnergyShieldClothing, ClothingOuterHardsuitM86, BaseFactionGearTSFT3] # Forge-change replace EnergyShieldClothing by MonoEnergyShieldClothing
   id: ClothingOuterHardsuitM86Mk4
   name: M86 Mk.4(B) hardsuit
   description: A limited-production redesign proposal for the M86 Mk.3(R), outfitted with an inbuilt personal shield generator.
@@ -249,17 +249,41 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.55
-        Slash: 0.45
-        Piercing: 0.45
-        Shock: 0.95
-        Heat: 0.7
+        Blunt: 0.4 # Forge-change 0.55 -> 0.4
+        Slash: 0.4 # Forge-change 0.45 -> 0.4
+        Piercing: 0.35 # Forge-change 0.45 -> 0.35
+        Shock: 0.6 # Forge-change 0.95 -> 0.6
+        Heat: 0.4 # Forge-change 0.7 -> 0.4
         Poison: 0.825
-        Radiation: 0.5
+        Radiation: 0.4 # Forge-change 0.5 -> 0.4
         Caustic: 0.6
+  - type: PersonalShield
+    shield:
+      maxCharge: 850 # Forge-change
+      regenRate: 30 # Forge-change
+      spinupTime: 1
+      breakCooldown: 15 # Forge-change
+      powerDraw: 0.1 # Forge-change
+      blockModifier: # Forge-change
+        coefficients: # Forge-change
+          Blunt: 1 # Forge-change
+          Slash: 1 # Forge-change
+          Piercing: 1 # Forge-change
+          Heat: 1.25 # Forge-change
+          Radiation: 0.25 # Forge-change
+  - type: Battery
+    maxCharge: 100 # Forge-change 60->100
+    startingCharge: 100 # Forge-change 60->100
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargePause: true # Forge-change
+    autoRechargePauseTime: 8 # Forge-change
+    autoRechargeRate: 100 # Forge-change 3->100
   - type: ClothingSpeedModifier
     walkModifier: 0.9
-    sprintModifier: 0.875
+    sprintModifier: 0.9 # Forge-change 0.875 -> 0.9
+  - type: StaminaDamageResistance # Forge-change
+    coefficient: 0.3 # Forge-change
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing
     blockUnequipWhenAttached: false

@@ -110,3 +110,13 @@
     - 0,0,1,4
     - 3,0,6,4
     - 8,0,9,4
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: ClothingBackpackSatchelNexus
+  name: exus bag
+  suffix: Nexus
+  description: Nexus branded bag
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Back/Satchels/satchels_nexus.rsi

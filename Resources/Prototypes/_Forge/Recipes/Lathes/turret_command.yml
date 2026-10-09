@@ -1,0 +1,455 @@
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: TurretCommandShipCircuitboard
+  result: TurretCommandShipCircuitboard
+  categories:
+  - Circuitry
+  - Turrets
+
+- type: latheRecipe
+  id: WeaponTurretMercenaryPacked
+  result: WeaponTurretMercenaryPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Gold: 200
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretAdventurerPacked
+  result: WeaponTurretAdventurerPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Gold: 200
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretAdventurerShotgunPacked
+  result: WeaponTurretAdventurerShotgunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 1800
+    Glass: 400
+    Plastic: 400
+
+- type: latheRecipe
+  id: WeaponTurretAdventurerSniperPacked
+  result: WeaponTurretAdventurerSniperPacked
+  categories:
+  - Turrets
+  completetime: 12
+  materials:
+    Steel: 2200
+    Glass: 600
+    Gold: 300
+    Plastic: 400
+
+- type: latheRecipe
+  id: MagazineTurretBallistic
+  result: MagazineTurretBallistic
+  categories:
+  - Turrets
+  completetime: 4
+  materials:
+    Steel: 600
+    Plastic: 100
+
+- type: latheRecipe
+  id: MagazineTurretShotgun
+  result: MagazineTurretShotgun
+  categories:
+  - Turrets
+  completetime: 4
+  materials:
+    Steel: 450
+    Plastic: 80
+
+- type: latheRecipe
+  id: MagazineTurretSniper
+  result: MagazineTurretSniper
+  categories:
+  - Turrets
+  completetime: 6
+  materials:
+    Steel: 900
+    Plastic: 100
+
+- type: latheRecipe
+  id: MagazineTurretMachinegun
+  result: MagazineTurretMachinegun
+  categories:
+  - Turrets
+  completetime: 6
+  materials:
+    Steel: 1200
+    Plastic: 200
+
+- type: latheRecipe
+  id: MagazineTurretBallisticEmpty
+  result: MagazineTurretBallisticEmpty
+  categories:
+  - Turrets
+  completetime: 2
+  materials:
+    Steel: 80
+    Plastic: 40
+
+- type: latheRecipe
+  id: MagazineTurretShotgunEmpty
+  result: MagazineTurretShotgunEmpty
+  categories:
+  - Turrets
+  completetime: 2
+  materials:
+    Steel: 60
+    Plastic: 30
+
+- type: latheRecipe
+  id: MagazineTurretSniperEmpty
+  result: MagazineTurretSniperEmpty
+  categories:
+  - Turrets
+  completetime: 2
+  materials:
+    Steel: 100
+    Plastic: 40
+
+- type: latheRecipe
+  id: MagazineTurretMachinegunEmpty
+  result: MagazineTurretMachinegunEmpty
+  categories:
+  - Turrets
+  completetime: 2
+  materials:
+    Steel: 150
+    Plastic: 60
+
+- type: latheRecipe
+  id: WeaponTurretAdventurerMachinegunPacked
+  result: WeaponTurretAdventurerMachinegunPacked
+  categories:
+  - Turrets
+  completetime: 12
+  materials:
+    Steel: 2500
+    Glass: 500
+    Gold: 200
+    Plastic: 600
+
+- type: latheRecipe
+  id: WeaponTurretEmpirePacked
+  result: WeaponTurretEmpirePacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretNanoTrasenPacked
+  result: WeaponTurretNanoTrasenPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretCCPacked
+  result: WeaponTurretCCPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretTSFMCPacked
+  result: WeaponTurretTSFMCPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretUSSPPacked
+  result: WeaponTurretUSSPPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretPDVPacked
+  result: WeaponTurretPDVPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretViperPacked
+  result: WeaponTurretViperPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretEmpireShotgunPacked
+  result: WeaponTurretEmpireShotgunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretEmpireSniperPacked
+  result: WeaponTurretEmpireSniperPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretEmpireMachinegunPacked
+  result: WeaponTurretEmpireMachinegunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretTSFShotgunPacked
+  result: WeaponTurretTSFShotgunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretTSFSniperPacked
+  result: WeaponTurretTSFSniperPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretTSFMachinegunPacked
+  result: WeaponTurretTSFMachinegunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretCCShotgunPacked
+  result: WeaponTurretCCShotgunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretCCSniperPacked
+  result: WeaponTurretCCSniperPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretCCMachinegunPacked
+  result: WeaponTurretCCMachinegunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretUSSPShotgunPacked
+  result: WeaponTurretUSSPShotgunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretUSSPSniperPacked
+  result: WeaponTurretUSSPSniperPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretUSSPMachinegunPacked
+  result: WeaponTurretUSSPMachinegunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretPDVShotgunPacked
+  result: WeaponTurretPDVShotgunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretPDVSniperPacked
+  result: WeaponTurretPDVSniperPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretPDVMachinegunPacked
+  result: WeaponTurretPDVMachinegunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretVGShotgunPacked
+  result: WeaponTurretVGShotgunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretVGSniperPacked
+  result: WeaponTurretVGSniperPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretVGMachinegunPacked
+  result: WeaponTurretVGMachinegunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretNTShotgunPacked
+  result: WeaponTurretNTShotgunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretNTSniperPacked
+  result: WeaponTurretNTSniperPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretNTMachinegunPacked
+  result: WeaponTurretNTMachinegunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+

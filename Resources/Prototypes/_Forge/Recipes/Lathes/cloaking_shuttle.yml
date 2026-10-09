@@ -1,0 +1,14 @@
+﻿- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineCloakingCDMSCircuitboard
+  result: MachineCloakingCDMSCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineCloakingChameleonCircuitboard
+  result: MachineCloakingChameleonCircuitboard
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: MachineCloakingWeepingAngelCircuitboard
+  result: MachineCloakingWeepingAngelCircuitboard

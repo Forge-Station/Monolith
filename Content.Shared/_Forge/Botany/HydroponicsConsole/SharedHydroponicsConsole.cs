@@ -17,6 +17,13 @@ public sealed class HydroponicsConsoleBoundUserInterfaceState : BoundUserInterfa
 }
 
 [Serializable, NetSerializable]
+public struct HydroGasEntry
+{
+    public byte Gas;
+    public float Amount;
+}
+
+[Serializable, NetSerializable]
 public sealed class HydroponicsConsoleTrayEntry
 {
     public NetEntity Entity;
@@ -42,8 +49,11 @@ public sealed class HydroponicsConsoleTrayEntry
     public bool CarnivorousGrab;
     public bool CarnivorousPestEater;
     public bool GeneLocked;
+    public string[] PinnedTraits = Array.Empty<string>();
     public string[] Chemicals = Array.Empty<string>();
     public string[] Mutations = Array.Empty<string>();
+    public HydroGasEntry[] ConsumeGasEntries = Array.Empty<HydroGasEntry>();
+    public HydroGasEntry[] ExudeGasEntries = Array.Empty<HydroGasEntry>();
     public string ConsumeGases = string.Empty;
     public string ExudeGases = string.Empty;
     public float IdealHeat;
@@ -53,6 +63,7 @@ public sealed class HydroponicsConsoleTrayEntry
     public float IdealLight;
     public float LightTolerance;
     public HydroponicsLightMode LightMode;
+    public bool CanSaveToJournal;
 }
 
 [Serializable, NetSerializable]
@@ -69,11 +80,17 @@ public sealed class HydroponicsCultivarRecord
     public bool CarnivorousGrab;
     public bool CarnivorousPestEater;
     public bool GeneLocked;
+    public string[] PinnedTraits = Array.Empty<string>();
     public bool Ligneous;
     public string[] Chemicals = Array.Empty<string>();
     public string[] Mutations = Array.Empty<string>();
+    public HydroGasEntry[] ConsumeGasEntries = Array.Empty<HydroGasEntry>();
+    public HydroGasEntry[] ExudeGasEntries = Array.Empty<HydroGasEntry>();
     public string ConsumeGases = string.Empty;
     public string ExudeGases = string.Empty;
+    public int PrintsUsed;
+    public int PrintsRemaining;
+    public bool CanPrint;
 }
 
 [Serializable, NetSerializable]

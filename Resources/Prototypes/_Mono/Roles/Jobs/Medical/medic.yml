@@ -39,7 +39,7 @@
 - type: startingGear
   id: MdMedicGear
   equipment:
-    pocket1: HypoBrigmedic
+    pocket1: TTIHandheldCrewMonitor # Forge-change
     pocket2: MedicalAppraisalTool
   storage:
     back:

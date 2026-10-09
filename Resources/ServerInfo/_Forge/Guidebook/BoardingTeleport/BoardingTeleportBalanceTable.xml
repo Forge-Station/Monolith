@@ -65,7 +65,7 @@
 
   *T3 наследует скорости и СМ от T1, пока не переопределены в YAML.
 
-  **Пробитие:** захват возможен, если `engineTier` &gt; класса активного щита цели.
+  **Пробитие:** активный щит не срывает захват. К прыжку добавляется +0.35 разброса и +4% риска, плюс +0.45 разброса и +5% риска за каждый класс щита выше класса двигателя. Иммунитет `BluespaceTeleportImmune` по-прежнему запрещает захват.
 
   ---
 
@@ -84,7 +84,7 @@
 
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">T1</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportPlatform</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Left" Margin="2">15 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">12 с</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">30 с</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">240 с</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">550</Box></ColorBox>
@@ -92,7 +92,7 @@
 
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">T2</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportPlatformAdvanced</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Left" Margin="2">12 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">10 с</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">25 с</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">210 с</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">800</Box></ColorBox>
@@ -100,7 +100,7 @@
 
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">T4</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingTeleportPlatformExperimental</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Left" Margin="2">10 с</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">8 с</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">20 с</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">180 с</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">2000</Box></ColorBox>
@@ -124,14 +124,14 @@
 
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">BoardingBluespaceScrambler</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">2500</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Left" Margin="2">блок захвата; +1.5 разброс, +18% риск</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">блок захвата; +1.5 разброс, +18% риск; только редкий диск предтечей</Box></ColorBox>
   </Table>
 
   ---
 
   ## Режимы высадки (консоль)
 
-  Базовая задержка = `departureDelay` платформы × множитель режима × масштаб дистанции (мин. 2 с). Каждые 250 м до цели +1 к масштабу (макс. ×2.5).
+  Базовая задержка = `departureDelay` платформы × множитель режима × масштаб дистанции (мин. 2 с). Каждые 250 м до цели +1 к масштабу (макс. ×2.0).
 
   <Table Columns="4">
     <ColorBox><Box>Режим</Box></ColorBox>
@@ -155,7 +155,7 @@
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">24%</Box></ColorBox>
   </Table>
 
-  Итоговый риск также растёт от скорости цели, недогруза СМ (+до 28%), старения захвата и глушителя. Предел отображения: 2%–85%.
+  Итоговый риск также растёт от скорости цели, недогруза СМ (+до 28%), живого щита цели, старения захвата и глушителя. Предел отображения: 2%–85%.
 
   ---
 
@@ -178,10 +178,10 @@
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">3 с заряд, 40% риск, разброс 2.5, 1 раз</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">Старение захвата</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Left" Margin="2">каждые 45 с: +0.2 разброс, +2% риск; макс. возраст 300 с; **не стареет во время зарядки платформы**</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">каждые 60 с: +0.12 разброс, +1.2% риск; макс. возраст 480 с; **не стареет во время зарядки платформы**</Box></ColorBox>
 
     <ColorBox><Box HorizontalAlignment="Left" Margin="2">Блип на радаре цели</Box></ColorBox>
-    <ColorBox><Box HorizontalAlignment="Left" Margin="2">45 с (скрытный/точный прогрев)</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Left" Margin="2">45 с у точного и ускоренного режимов. Скрытный отметку не ставит.</Box></ColorBox>
   </Table>
 
   [textlink="← Обзор" link="BoardingTeleport"]

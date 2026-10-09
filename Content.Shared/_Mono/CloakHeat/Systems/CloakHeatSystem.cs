@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._Forge.CloakingShuttle;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Shared.Physics.Components;
@@ -56,13 +57,23 @@ public sealed partial class CloakHeatSystem : EntitySystem
                 }
                 else
                 {
-                    // Still in cooldown
-                    if ((iffComp.Flags & IFFFlags.Hide) != 0)
+                    // Still in cooldown. Device cloak owns Hide while it is running.
+                    if ((iffComp.Flags & IFFFlags.Hide) != 0
+                        && !(TryComp<CloakingShuttleComponent>(gridUid, out var cooldownCloak) && cooldownCloak.Active))
                     {
                         _shuttle.RemoveIFFFlag(gridUid, IFFFlags.Hide, iffComp);
                     }
                     continue;
                 }
+            }
+
+            // Forge-Change - Cloaking: device cloak has its own duration and must not be stripped by IFF heat.
+            if (TryComp<CloakingShuttleComponent>(gridUid, out var deviceCloak) && deviceCloak.Active)
+            {
+                heatComp.CurrentHeat -= heatComp.HeatDissipationRate * deltaTime;
+                heatComp.CurrentHeat = Math.Max(0f, heatComp.CurrentHeat);
+                Dirty(gridUid, heatComp);
+                continue;
             }
 
             if (TryComp<PhysicsComponent>(gridUid, out var pcomp))

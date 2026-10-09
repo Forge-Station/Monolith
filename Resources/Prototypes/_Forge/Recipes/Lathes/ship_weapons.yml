@@ -48,7 +48,27 @@
     Glass: 750
     Gold: 200
     Silver: 100
+#Forge-change start
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: AmmoLoaderSmallMachineCircuitboard
+  result: AmmoLoaderSmallMachineCircuitboard
+  materials:
+    Steel: 150
+    Glass: 750
+    Gold: 200
+    Silver: 100
 
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: AmmoLoaderMachineCircuitboard
+  result: AmmoLoaderMachineCircuitboard
+  materials:
+    Steel: 150
+    Glass: 750
+    Gold: 200
+    Silver: 100
+#Forge-change end
 # T1
 
 - type: latheRecipe

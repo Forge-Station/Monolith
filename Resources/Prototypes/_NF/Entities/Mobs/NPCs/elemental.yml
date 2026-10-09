@@ -388,6 +388,7 @@
       - SimpleHostile
   - type: Damageable
     damageContainer: StructuralInorganic
+  - type: OreDrillHarvestTarget # Forge-Change: drill kills feed ore into pipe buffer
   - type: MovementIgnoreGravity # Or they just can't do something
   - type: Appearance # Next three components make the mob fall over when dead
   - type: StandingState

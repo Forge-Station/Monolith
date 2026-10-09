@@ -55,6 +55,7 @@
   - type: Tag
     tags:
     - Wooden
+    - NoGridGodmode # Forge-change
   - type: Flammable
     fireSpread: true
     damage:
@@ -106,6 +107,7 @@
   - type: Tag
     tags:
     - Wooden
+    - NoGridGodmode # Forge-change
   - type: Flammable
     fireSpread: true
     damage:

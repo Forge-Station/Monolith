@@ -257,6 +257,63 @@
 
 - type: latheRecipe
   parent: NSCApparelRecipe
+  id: ClothingBackpackDuffelNexus
+  result: ClothingBackpackDuffelNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingBackpackSatchelNexus
+  result: ClothingBackpackSatchelNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingBackpackNexus
+  result: ClothingBackpackNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingHeadsetNexus
+  result: ClothingHeadsetNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+    Steel: 500
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingNeckCloakNexus
+  result: ClothingNeckCloakNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingBackpackMessengerNexus
+  result: ClothingBackpackMessengerNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingNeckMantleNexus
+  result: ClothingNeckMantleNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
   id: ClothingHeadHatNexusBeret
   result: ClothingHeadHatNexusBeret
   completetime: 5

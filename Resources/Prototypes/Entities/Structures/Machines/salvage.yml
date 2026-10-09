@@ -3,6 +3,7 @@
   id: SalvageMagnet
   name: salvage magnet
   description: Pulls in salvage.
+  categories: [HideSpawnMenu] #Forge-Change
   components:
   - type: Sprite
     sprite: Structures/Machines/salvage.rsi
@@ -50,6 +51,7 @@
   id: SalvageLocator
   name: salvage locator
   description: Locates salvage.
+  categories: [HideSpawnMenu] #Forge-Change
   components:
   - type: SalvageMagnet
   - type: ApcPowerReceiver

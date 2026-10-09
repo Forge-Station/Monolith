@@ -17,3 +17,18 @@
   - type: BatterySelfRecharger
     autoRecharge: false
     autoRechargeRate: 0.12 # 12 -> 0.12
+
+- type: entity
+  parent: BasePowerCell
+  id: PowerCellInternalHardsuit
+  name: Internal power cell hardsuit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Battery
+    maxCharge: 150
+    startingCharge: 150
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargePause: true
+    autoRechargePauseTime: 5
+    autoRechargeRate: 2.5

@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: BaseWeaponCommandBallisticTurret
   id: WeaponTurretEmpire
   name: imperial ballistic turret
   suffix: Империя
@@ -8,3 +8,9 @@
   - type: NpcFactionMember
     factions:
     - EmpireTurret
+  - type: TurretCommandLink
+    faction: Empire
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretEmpirePackingGraph
+    node: WeaponTurretEmpirePacked

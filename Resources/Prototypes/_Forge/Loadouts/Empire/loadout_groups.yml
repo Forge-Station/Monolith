@@ -154,6 +154,16 @@
   - ClothingNeckCloakEmpirePreafect
 
 - type: loadoutGroup
+  id: EmpireHeadPreafect
+  name: loadout-group-contractor-head
+  minLimit: 1
+  loadouts:
+  - ClothingHeadHatEmpireBeret
+  - ClothingHeadHatEmpireTricorne
+  - ClothingHeadHatEmpirePreafect
+  - ClothingHeadHatEmpirePreafectOrange
+
+- type: loadoutGroup
   id: EmpireCommanderHead
   name: loadout-group-contractor-head
   minLimit: 1
@@ -271,6 +281,12 @@
   - EmpireIFFPurple
   - ClothingNeckCloakVulpcaninCloakEmpire
 
+- type: loadoutGroup
+  id: EmpireInquisitorHead
+  name: loadout-group-contractor-head
+  minLimit: 1
+  loadouts:
+  - ClothingHeadHatEmpirePreafectViolet
 # region Consul
 - type: loadoutGroup
   id: EmpireConsulJumpsuit

@@ -183,6 +183,7 @@
 - type: roleLoadout
   id: JobInquisitor # Inquisitor
   groups:
+  - EmpireInquisitorHead
   - EmpireNeckInquisitor
   - EmpireFace
   - EmpireGlasses
@@ -213,7 +214,7 @@
   id: JobPraefect # Lord
   groups:
   - EmpireNeckPreafect
-  - EmpireCommanderHead
+  - EmpireHeadPreafect
   - EmpireFace
   - EmpireGlasses
   - EmpireBalaclava

@@ -4,8 +4,8 @@
   description: Used to transfer funds to and from the local MMC account.
   suffix: Mieyo
   components:
-  - type: StationBankATM
-    account: Mieyo
+  # - type: StationBankATM # Forge-change-del
+  #   account: Mieyo
   - type: CompanyAccessReader
     requiredCompanies:
     - MMC

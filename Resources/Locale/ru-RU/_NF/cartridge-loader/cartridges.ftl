@@ -17,7 +17,8 @@ ledger-tab-Frontier = Центральный Аванпост
 ledger-tab-Nfsd = ТСФ
 ledger-tab-Imperial = СИВ
 ledger-tab-Renegates = ВКР
-ledger-tab-BlackMarket = Пираты
+
+
 ledger-tab-Medical = Медицинский Аванпост
 Expensesledger-tab-Edison = Электростанция Эдиссона
 # Fallback, if this displays, something's wrong.

@@ -37,7 +37,7 @@
   suffix: Imperial
   components:
   - type: StationBankATM
-    account: Imperial #Register in C#?
+    account: Imperial
   - type: CompanyAccessReader
     requiredCompanies:
     - Imperial
@@ -51,7 +51,7 @@
   suffix: Renegates
   components:
   - type: StationBankATM
-    account: Renegates #Register in C#?
+    account: Renegates
   - type: CompanyAccessReader
     requiredCompanies:
     - Renegates

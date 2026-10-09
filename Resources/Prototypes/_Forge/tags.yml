@@ -289,3 +289,10 @@
 
 - type: Tag
   id: TTIEquip
+
+#nuclear machines
+- type: Tag
+  id: NuclearReactorSmallMachineCircuitboard
+
+- type: Tag
+  id: TurbineSmallMachineCircuitboard

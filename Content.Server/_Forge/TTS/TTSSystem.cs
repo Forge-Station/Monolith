@@ -7,6 +7,8 @@ using Content.Shared._EinsteinEngines.Language.Components;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared._Forge.CCVars;
 using Content.Shared._Forge.TTS;
+using Content.Shared.Chat;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -89,6 +91,10 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
     {
+        // cheap bail-outs first, so we don't snapshot recipients for nothing.
+        if (!_isEnabled || args.Message.Length > MaxMessageChars)
+            return;
+
         if (TryComp<MindContainerComponent>(uid, out var mindCon)
             && mindCon.Mind is { } mindUid
             && TryComp<MindComponent>(mindUid, out var mind)
@@ -99,25 +105,103 @@ public sealed partial class TTSSystem : EntitySystem
                 return;
         }
 
+        // snapshot the listener set on the speaking tick, before any await below.
+        // Audio must reach exactly who received the text; recomputing it after the TTS API
+        // round-trip would use world state up to several seconds newer than the chat message.
+        var recipients = CaptureRecipients(args.Source, args.IsWhisper, args.Recipients, out var inPvs);
+        if (recipients.Count == 0)
+            return;
+
         if (HasComp<ActiveRadioComponent>(uid))
             await Task.Delay(1000);
 
         var voiceId = component.VoicePrototypeId;
-        if (!_isEnabled ||
-            args.Message.Length > MaxMessageChars ||
-            voiceId == null)
+        if (voiceId == null)
             return;
 
-        var voiceEv = new TransformSpeakerVoiceEvent(uid, voiceId);
-        RaiseLocalEvent(uid, voiceEv);
-        voiceId = voiceEv.VoiceId;
+        if (!component.FixedVoice)
+        {
+            var voiceEv = new TransformSpeakerVoiceEvent(uid, voiceId);
+            RaiseLocalEvent(uid, voiceEv);
+            voiceId = voiceEv.VoiceId;
+        }
 
         if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var protoVoice))
             return;
 
         var obfuscatedMessage = _language.ObfuscateSpeech(args.Message, args.Language);
 
-        await Handle(uid, args.Message, protoVoice.Speaker, args.IsWhisper, obfuscatedMessage, args.Language);
+        await Handle(args.Source, args.Message, protoVoice.Speaker, args.IsWhisper, obfuscatedMessage, args.Language, recipients, inPvs);
+    }
+
+    /// <summary>
+    ///     builds the set of sessions that should hear this line.
+    ///     Must be called synchronously on the speaking tick.
+    /// </summary>
+    private Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> CaptureRecipients(
+        EntityUid source,
+        bool isWhisper,
+        Dictionary<ICommonSession, ChatSystem.ICChatRecipientData>? fromChat,
+        out HashSet<ICommonSession> inPvs)
+    {
+        var result = new Dictionary<ICommonSession, ChatSystem.ICChatRecipientData>();
+
+        // a positional PlayTTSEvent only plays if the client actually knows the
+        // source entity, and an AI's PVS follows its remote eye rather than its brain. Record who
+        // has the speaker in PVS right now so Handle can pick positional vs. source-less audio.
+        inPvs = Exists(source)
+            ? [.. Filter.Pvs(source).Recipients]
+            : [];
+
+        // Reuse what ChatSystem already computed for this message: it has run the camera and
+        // station-AI expansion once already, so we neither repeat that station-wide scan nor
+        // end up delivering audio to a different set of players than the text went to.
+        // Copied rather than aliased, since other EntitySpokeEvent handlers may still mutate it.
+        if (fromChat != null)
+        {
+            foreach (var (session, data) in fromChat)
+            {
+                // Distant ghost observers are added with Range -1: they get the text, not the audio.
+                if (data.Range < 0)
+                    continue;
+
+                result[session] = data;
+            }
+
+            return result;
+        }
+
+        // Fallback: the event came from something other than the local say/whisper paths, so
+        // there is no precomputed set and we have to build (and expand) one ourselves.
+        if (!Exists(source))
+            return result;
+
+        var xformQuery = GetEntityQuery<TransformComponent>();
+        var sourceXform = xformQuery.GetComponent(source);
+        var sourcePos = _xforms.GetWorldPosition(sourceXform, xformQuery);
+        var sourceMap = sourceXform.MapID;
+        var range = isWhisper ? SharedChatSystem.WhisperMuffledRange : ChatSystem.VoiceRange;
+
+        foreach (var session in inPvs)
+        {
+            if (session.AttachedEntity is not { } listener ||
+                !xformQuery.TryGetComponent(listener, out var xform) ||
+                xform.MapID != sourceMap)
+            {
+                continue;
+            }
+
+            var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
+            if (distance > range)
+                continue;
+
+            result.TryAdd(session, new ChatSystem.ICChatRecipientData(distance, false));
+        }
+
+        RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, source,
+            isWhisper ? ChatChannel.Whisper : ChatChannel.Local, range, result));
+
+        return result;
     }
 
     private async Task Handle(
@@ -126,7 +210,9 @@ public sealed partial class TTSSystem : EntitySystem
         string speaker,
         bool isWhisper,
         string obfuscatedMessage,
-        LanguagePrototype language
+        LanguagePrototype language,
+        Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> recipients,
+        HashSet<ICommonSession> inPvs
         )
     {
         var fullSoundData = await GenerateTTS(message, speaker, isWhisper);
@@ -136,24 +222,28 @@ public sealed partial class TTSSystem : EntitySystem
         var obfSoundData = await GenerateTTS(obfuscatedMessage, speaker, isWhisper);
         if (obfSoundData is null) return;
 
+        if (!Exists(uid))
+            return;
+
         var fullTtsEvent = new PlayTTSEvent(fullSoundData, GetNetEntity(uid), isWhisper);
         var obfTtsEvent = new PlayTTSEvent(obfSoundData, GetNetEntity(uid), isWhisper);
 
-        var xformQuery = GetEntityQuery<TransformComponent>();
-        var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(uid), xformQuery);
-        var recipients = Filter.Pvs(uid).Recipients;
-
-        foreach (var session in recipients)
+        foreach (var (session, recipient) in recipients)
         {
-            if (!session.AttachedEntity.HasValue) continue;
-
-            var listener = session.AttachedEntity.Value;
-            var xform = xformQuery.GetComponent(listener);
-            var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
-
-            if (distance > ChatSystem.VoiceRange) continue;
+            if (session.AttachedEntity is not { } listener) continue;
             var canUnderstand = CanUnderstandLanguage(listener, language.ID);
-            var getsClearWhisper = !isWhisper || distance <= ChatSystem.WhisperClearRange;
+            var getsClearWhisper = !isWhisper || recipient.Range <= ChatSystem.WhisperClearRange;
+
+            // Forge-Change: relayed audio (cameras, AI eyes) and any listener that doesn't have the
+            // speaker in PVS must get a source-less event, because a positional one references an
+            // entity their client doesn't know and would simply not play. Everyone else keeps
+            // directional audio - including an AI whose eye is watching the speaker directly.
+            if (recipient.HearingEntity != null || !inPvs.Contains(session))
+            {
+                RaiseNetworkEvent(new PlayTTSEvent(canUnderstand && getsClearWhisper
+                    ? fullSoundData : obfSoundData, isWhisper: isWhisper), session);
+                continue;
+            }
 
             RaiseNetworkEvent(canUnderstand && getsClearWhisper ? fullTtsEvent : obfTtsEvent, session);
         }

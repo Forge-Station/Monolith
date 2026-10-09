@@ -174,7 +174,7 @@ binds:
 - function: SwapHands
   type: State
   key: X
-  # DeltaV - Begin custom keybinds
+# DeltaV - Begin custom keybinds
 # - function: SwapHandsReversed
 #   type: State
 #   key: X

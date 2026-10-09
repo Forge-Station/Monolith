@@ -12,6 +12,7 @@ using Content.Shared.Whitelist; // Forge-Change
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;  // Forge-Change
 
 namespace Content.Shared.Item.ItemToggle;
 /// <summary>
@@ -28,6 +29,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!; // Forge-Change
     [Dependency] private SharedBodySystem _body = default!; // Forge-Change
+    [Dependency] private readonly IGameTiming _gameTiming = default!; // Forge-Change
 
     private EntityQuery<ItemToggleComponent> _query;
 
@@ -277,8 +279,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     private void TurnOnOnWielded(Entity<ItemToggleComponent> ent, ref ItemWieldedEvent args)
     {
-        // FIXME: for some reason both client and server play sound
-        TryActivate((ent, ent.Comp));
+        TryActivate((ent, ent.Comp), args.User);  // Forge-Change
     }
 
     public bool IsActivated(Entity<ItemToggleComponent?> ent)
@@ -302,6 +303,9 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     private void UpdateActiveSound(Entity<ItemToggleActiveSoundComponent> ent, ref ItemToggledEvent args)
     {
+        if (!_gameTiming.IsFirstTimePredicted)  // Forge-Change
+            return;
+
         var (uid, comp) = ent;
         if (!args.Activated)
         {

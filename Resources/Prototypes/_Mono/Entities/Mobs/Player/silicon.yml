@@ -292,6 +292,8 @@
     container: station_ai_mind_slot
   - type: ContainerFill
     containers:
+      key_slots: # Forge - change
+      - EncryptionKeyCustom
       station_ai_mind_slot:
       - StationAiBrainRedacted
   - type: Anchorable
@@ -346,11 +348,13 @@
   components:
   - type: IntrinsicRadioTransmitter
     channels:
+    - Handheld # Forge - change
     - Common
     - Remnants
     - Traffic
   - type: ActiveRadio
     channels:
+    - Handheld # Forge - change
     - Common
     - Remnants
     - Traffic
@@ -382,6 +386,8 @@
     container: station_ai_mind_slot
   - type: ContainerFill
     containers:
+      key_slots: # Forge - change
+      - EncryptionKeyCustom
       station_ai_mind_slot:
       - StationAiBrainVessel
   - type: Anchorable
@@ -419,6 +425,7 @@
   components:
   - type: IntrinsicRadioTransmitter
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Science
@@ -427,6 +434,7 @@
     - Medical
   - type: ActiveRadio
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Science
@@ -450,6 +458,8 @@
     container: station_ai_mind_slot
   - type: ContainerFill
     containers:
+      key_slots: # Forge - change
+      - EncryptionKeyCustom
       station_ai_mind_slot:
       - StationAiBrainTSFMC
   - type: Anchorable
@@ -496,6 +506,7 @@
   components:
   - type: IntrinsicRadioTransmitter
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Science
@@ -506,6 +517,7 @@
     - Command
   - type: ActiveRadio
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Science
@@ -531,6 +543,8 @@
     container: station_ai_mind_slot
   - type: ContainerFill
     containers:
+      key_slots: # Forge - change
+      - EncryptionKeyCustom
       station_ai_mind_slot:
       - StationAiBrainPDV
   - type: Anchorable
@@ -582,6 +596,7 @@
   components:
   - type: IntrinsicRadioTransmitter
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Science
@@ -591,6 +606,7 @@
     - Freelance
   - type: ActiveRadio
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Science
@@ -658,6 +674,7 @@
   components:
   - type: IntrinsicRadioTransmitter
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Science
@@ -668,6 +685,7 @@
     - Service
   - type: ActiveRadio
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Science
@@ -864,12 +882,14 @@
   components:
   - type: IntrinsicRadioTransmitter
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Xenoborg
     - Mothership
   - type: ActiveRadio
     channels:
+    - Handheld # Forge - change
     - Common
     - Traffic
     - Xenoborg

@@ -1,6 +1,6 @@
-- type: lobbyBackground
-  id: ColossusLobbyScreen
-  background: /Textures/_Mono/LobbyScreens/colossus_central_render.webp
+#- type: lobbyBackground   # Forge-Change Commented
+#  id: ColossusLobbyScreen
+#  background: /Textures/_Mono/LobbyScreens/colossus_central_render.webp
 
 - type: lobbyBackground # Forge-Change
   id: AepofigizmLobbyScreen

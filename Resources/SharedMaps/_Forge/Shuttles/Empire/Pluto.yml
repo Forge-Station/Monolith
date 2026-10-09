@@ -6659,7 +6659,7 @@ entities:
     - type: Transform
       pos: 2.5,-15.5
       parent: 1
-- proto: SuitStorageEmpire14m
+- proto: SuitStorageRI14
   entities:
   - uid: 902
     components:

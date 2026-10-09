@@ -36,8 +36,8 @@
     sprintModifier: 0.9 # Forge-change
   # Forge-change-start
   - type: WieldDelay
-    baseDelay: 1.2
-    modifiedDelay: 1.2
+    baseDelay: 0.6
+    modifiedDelay: 0.6
     preventFiring: true
   # Forge-change-end
   - type: CursorOffsetRequiresWield

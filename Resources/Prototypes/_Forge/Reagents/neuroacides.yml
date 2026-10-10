@@ -1,0 +1,222 @@
+- type: reagent
+  id: NeuroAcidCobra
+  name: reagent-name-neuroacid-cobra
+  group: Toxins
+  desc: reagent-desc-neuroacid-cobra
+  physicalDesc: reagent-physical-desc-cloudy
+  flavor: smokey
+  color: "#855395FF"
+  boilingPoint: 255.0
+  meltingPoint: 36.0
+  metabolisms:
+    Poison:
+      metabolismRate: 0.5
+      effects:
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - neuroacid-effect-second
+        - neuroacid-effect-first
+        - neuroacid-effect-third
+        - neuroacid-effect-fourth
+        probability: 0.7
+        conditions:
+        - !type:ReagentThreshold
+          max: 30
+      - !type:StaminaDamageEffect
+        forceCrit: true
+        conditions:
+        - !type:ReagentThreshold
+          min: 9
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Yowie
+          shouldHave: false
+        damage:
+          types:
+            Poison: 1
+      - !type:TunnelVision
+        intensity: 0.9
+        pulse: 1.7
+        darkness: 0.8
+        color: "#855395FF"
+        time: 3
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+      - !type:Oxygenate
+        factor: -1
+        conditions:
+        - !type:ReagentThreshold
+          min: 9
+    Narcotic:
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.8
+        sprintSpeedModifier: 0.8
+      - !type:Jitter
+
+
+- type: reagent
+  id: N611
+  name: reagent-name-n611
+  group: Toxins
+  desc: reagent-desc-n611
+  physicalDesc: reagent-physical-desc-cloudy
+  flavor: smokey
+  color: "#66CDAA"
+  boilingPoint: 255.0
+  meltingPoint: 36.0
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        ignoreResistances: false
+        damage:
+          types:
+            Caustic: 0.25
+      - !type:Emote
+        emote: Scream
+        probability: 0.4
+  metabolisms:
+    Poison:
+      metabolismRate: 0.5  
+      effects:
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - neuroacid-effect-second
+        - neuroacid-effect-first
+        - neuroacid-effect-third
+        - neuroacid-effect-fourth
+        probability: 0.8
+        conditions:
+        - !type:ReagentThreshold
+          max: 30
+      - !type:StaminaDamageEffect
+        forceCrit: true
+        conditions:
+        - !type:ReagentThreshold
+          min: 6
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Yowie
+          shouldHave: false
+        damage:
+          types:
+            Poison: 2
+            Caustic: 0.5
+      - !type:TunnelVision
+        intensity: 1.1
+        pulse: 1.7
+        darkness: 0.9
+        color: "#66CDAA"
+        time: 3
+        conditions:
+        - !type:ReagentThreshold
+          min: 7
+      - !type:Oxygenate
+        factor: -1.2
+        conditions:
+        - !type:ReagentThreshold
+          min: 6
+    Narcotic:
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.7
+        sprintSpeedModifier: 0.7
+      - !type:Jitter
+    Gas:
+      metabolismRate: 0.05
+      effects:
+      - !type:StaminaDamageEffect
+        forceCrit: true
+        conditions:
+        - !type:ReagentThreshold
+          min: 6
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Yowie
+          shouldHave: false
+        scaleByQuantity: true
+        ignoreResistances: true
+        damage:
+          types:
+            Poison: 2
+            Caustic: 0.5
+      - !type:Oxygenate
+        factor: -1.2
+        conditions:
+        - !type:ReagentThreshold
+          min: 6
+      - !type:TunnelVision
+        intensity: 1.1
+        pulse: 1.7
+        darkness: 0.9
+        color: "#66CDAA"
+        time: 3
+        conditions:
+        - !type:ReagentThreshold
+          min: 7    
+
+- type: reaction
+  id: N611
+  requiredMixerCategories:
+  - Centrifuge
+  reactants:
+    Desoxyephedrine:
+      amount: 3
+    Dylovene:
+      amount: 1
+    DexalinPlus:
+      amount: 1
+    NeuroAcidCobra:
+      amount: 3
+  products:
+    N611: 1
+
+
+- type: gas
+  id: 13
+  name: gases-n611
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 20
+  color: "#66CDAA"
+  reagent: N611
+  pricePerMole: 0
+  gasOverlaySprite: /Textures/Effects/atmospherics.rsi
+  gasOverlayState: n611
+  gasMolesVisible: 1.5
+
+
+- type: entity
+  parent: StorageCanister
+  id: N611Canister
+  name: N-611 canister
+  suffix: Filled
+  description: Боевая канистра с газообразным нейротоксином N-611. Крайне опасна. Крепится к портам ключом.
+  components:
+  - type: GasCanister
+    gasMixture:
+      volume: 1500
+      moles:
+        N611: 1500
+      temperature: 293.15
+
+- type: reaction
+  id: N611Vaporize
+  requiredMixerCategories:
+  - Electrolysis
+  reactants:
+    N611:
+      amount: 1
+  effects:
+    - !type:CreateGas
+      gas: N611
+      multiplier: 3

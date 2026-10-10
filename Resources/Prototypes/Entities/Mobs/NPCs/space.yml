@@ -354,17 +354,16 @@
       animation: WeaponArcBite
       damage:
         types:
-          Piercing: 6
-          Poison: 4
+          Piercing: 0.5
     - type: SolutionContainerManager
       solutions:
         melee:
           reagents:
-          - ReagentId: NorepinephricAcid
+          - ReagentId: NeuroAcidCobra
             Quantity: 90
     - type: MeleeChemicalInjector
       solution: melee
-      transferAmount: 6
+      transferAmount: 4
     - type: LanguageKnowledge # Einstein Engines - Language
       speaks:
       - Xeno

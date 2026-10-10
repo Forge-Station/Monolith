@@ -447,3 +447,14 @@ reagent-effect-guidebook-add-to-chemicals =
         [1] to
         *[-1] from
     } the solution
+
+reagent-effect-guidebook-stamina-damage =
+    { $chance ->
+        [1] Deals
+       *[other] Deal
+    } { NATURALFIXED($amount, 2) } stamina damage
+reagent-effect-guidebook-stamina-crit =
+    { $chance ->
+        [1] Causes
+       *[other] Cause
+    } complete stamina exhaustion

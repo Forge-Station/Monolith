@@ -228,7 +228,7 @@ namespace Content.Shared.Atmos
         /// <summary>
         ///     Total number of gases. Increase this if you want to add more!
         /// </summary>
-        public const int TotalNumberOfGases = 13; //Funky/Goob: 9 >> 13
+        public const int TotalNumberOfGases = 14; //Forge-change N611
 
         /// <summary>
         ///     This is the actual length of the gases arrays in mixtures.
@@ -430,5 +430,6 @@ namespace Content.Shared.Atmos
         Healium = 10, //Funky/Goob
         Nitrium = 11, //Funky/Goob
 		Pluoxium = 12, //Funky/Goob
+        N611 = 13, //Forge-change N611
     }
 }

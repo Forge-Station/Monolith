@@ -1,6 +1,6 @@
 - type: entity
   id: ChemMaster
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseAutomatedMachine ] # Goob: Automation
   name: ChemMaster 4000
   description: An industrial grade chemical manipulator with pill and bottle production included.
   placement:
@@ -88,6 +88,16 @@
           tags:
           - Bottle
           - PillCanister
+  - type: AutomationSlots # Goobstation
+    slots:
+    - !type:AutomatedItemSlot
+      input: AutomationSlotBeaker
+      output: AutomationSlotBeaker
+      slotId: beakerSlot
+    - !type:AutomatedItemSlot # not very useful because you can't tell it to make pills
+      input: AutomationSlotBottles
+      output: AutomationSlotBottles
+      slotId: outputSlot
   - type: SolutionContainerManager
     solutions:
       buffer: {}

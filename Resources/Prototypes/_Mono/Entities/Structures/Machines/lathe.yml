@@ -502,7 +502,7 @@
 
 - type: entity
   id: IndustrialFurnaceEconomy
-  parent: [ BaseMachinePowered, BaseStructureDisableToolUse ]
+  parent: [ BaseMachinePowered, BaseStructureDisableToolUse, BaseAutomatedMachine ] # Goob: Automation
   name: industrial arc furnace
   description: An advanced arc furnace capable of melting ore and refining material through heat. Essential for creating advanced alloys.
   components:
@@ -596,7 +596,7 @@
 
 - type: entity
   id: IndustrialFurnaceEconomyCompact
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseAutomatedMachine ] # Goob: Automation
   name: compact arc furnace
   description: A compact version advanced arc furnace capable of melting ore and refining material through heat. Essential for creating advanced alloys. Slower and less capacity.
   components:
@@ -679,7 +679,7 @@
 
 - type: entity
   id: PrecisionAssemblerEconomy
-  parent: [ BaseMachinePowered, BaseStructureDisableToolUse ]
+  parent: [ BaseMachinePowered, BaseStructureDisableToolUse, BaseAutomatedMachine ] # Goob: Automation
   name: precision assembler
   description: A high-accuracy microfabricator capable of manipulating almost all forms of matter in the right circumstances. Astoundingly useful for creating advanced components of all kinds.
   components:
@@ -775,7 +775,7 @@
 
 - type: entity
   id: PrecisionAssemblerEconomyCompact
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseAutomatedMachine ] # Goob: Automation
   name: compact precision assembler
   description: A high-accuracy microfabricator capable of manipulating almost all forms of matter in the right circumstances. Astoundingly useful for creating advanced components of all kinds. This one is slower and has less space inside.
   components:

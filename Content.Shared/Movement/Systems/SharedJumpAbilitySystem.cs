@@ -9,6 +9,7 @@ using Content.Shared.Item.ItemToggle; // Forge-Change
 using Content.Shared.Item.ItemToggle.Components; // Forge-Change
 using Content.Shared.Popups; // Forge-Change
 using Content.Shared.Timing; // Forge-Change
+using Content.Shared._Forge.Movement.Components //Forg-change
 
 namespace Content.Shared.Movement.Systems;
 
@@ -85,11 +86,11 @@ public sealed partial class SharedJumpAbilitySystem : EntitySystem
         if (ent.Comp.Container is not { } container)
             return;
 
-        if (TryComp<JumpAbilityComponent>(container, out var jump))
+        if (HasComp<JumpAbilityComponent>(container))
         {
-            if (!jump.RequireItemActivation)
+            if (!HasComp<JumpItemActivationComponent>(container))
                 return;
-            else if (TryComp<ItemToggleComponent>(container, out var item) && item.Activated)
+            else (TryComp<ItemToggleComponent>(container, out var item) && item.Activated)
                 return;
         }
 

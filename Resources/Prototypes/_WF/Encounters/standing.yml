@@ -1,0 +1,24 @@
+# Faction standing: who is at war with whom. War is mutual, so each pair is listed once. A faction's patrols warn
+# off and fire on ships of the companies it is at war with, and leave everyone else alone.
+# The Federation and the Dynasty are under a ceasefire. They are at war only once it has been declared (declaredWar):
+# until then their patrols warn each other's ships off and fire only when fired on.
+
+- type: wfStanding
+  id: TSF
+  atWar: [ RedSailCorsairs ]
+  declaredWar: [ PDV, PDVCivilian, PDVHighComm ]
+
+- type: wfStanding
+  id: TSFCivilian
+  atWar: [ RedSailCorsairs ]
+  declaredWar: [ PDV, PDVHighComm ]
+
+- type: wfStanding
+  id: TSFHighComm
+  atWar: [ RedSailCorsairs ]
+  declaredWar: [ PDV, PDVCivilian, PDVHighComm ]
+
+# The encounter pirates: at war with both navies and their civilians.
+- type: wfStanding
+  id: WFAshfallReavers
+  atWar: [ TSF, TSFCivilian, TSFHighComm, PDV, PDVCivilian, PDVHighComm ]

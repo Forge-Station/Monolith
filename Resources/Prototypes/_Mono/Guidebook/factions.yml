@@ -28,6 +28,10 @@
   name: PDV
   text: "/ServerInfo/_Mono/Guidebook/Factions/PDV.xml"
   priority: 3
+  # WOLFGATE(ColdWar) START: the Vanguard's standing orders page
+  children:
+  - WFPdvStandingOrders
+  # WOLFGATE END
 
 - type: guideEntry
   id: Smuggling

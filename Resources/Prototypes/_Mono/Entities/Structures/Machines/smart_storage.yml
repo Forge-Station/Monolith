@@ -14,15 +14,16 @@
     - machine_board
   - type: StationAiWhitelist
   - type: Appearance
-  - type: Sprite
-    sprite: _Mono/Structures/Machines/smartarmory.rsi
-    snapCardinals: true
-    layers:
-    - state: armory
-      map: ["enum.StorageVisualLayers.Base"]
-    - state: armory_door
-      map: ["enum.StorageVisualLayers.Door"]
-      shader: unshaded
+  - type: Sprite 
+  #Forge-Change-remove: why mono add sprite to base parent???
+  #   sprite: _Mono/Structures/Machines/smartarmory.rsi
+  #   snapCardinals: true
+  #   layers:
+  #   - state: armory
+  #     map: ["enum.StorageVisualLayers.Base"]
+  #   - state: armory_door
+  #     map: ["enum.StorageVisualLayers.Door"]
+  #     shader: unshaded
   - type: PointLight
     radius: 1.5
     energy: 1.6

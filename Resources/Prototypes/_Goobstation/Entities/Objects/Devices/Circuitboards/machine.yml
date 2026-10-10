@@ -86,8 +86,8 @@
     stackRequirements:
       Manipulator: 1
       Steel: 5
-      WoodPlank: 10 #Forge-Change
-      Plastic: 5 #Forge-Change
+      #WoodPlank: 10 #Forge-Change
+      Plastic: 15 #Forge-Change
 
 - type: entity
   parent: BaseMachineCircuitboard

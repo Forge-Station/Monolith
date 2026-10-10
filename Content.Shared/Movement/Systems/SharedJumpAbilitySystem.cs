@@ -31,9 +31,7 @@ public sealed partial class SharedJumpAbilitySystem : EntitySystem
 
         SubscribeLocalEvent<JumpAbilityComponent, GravityJumpEvent>(OnGravityJump);
 
-        // Forge-Change-start: toggle-gated jump with user-side cooldown.
-        SubscribeLocalEvent<JumpAbilityComponent, MapInitEvent>(OnToggleJumpMapInit);
-        SubscribeLocalEvent<JumpAbilityComponent, ItemToggledEvent>(OnToggleJumpToggled);
+        // Forge-Change-start: optional activation gate + user-side cooldown for toggle items.
         SubscribeLocalEvent<InstantActionComponent, ActionAttemptEvent>(OnToggleJumpActionAttempt);
         SubscribeLocalEvent<InstantActionComponent, ActionPerformedEvent>(OnToggleJumpActionPerformed);
         SubscribeLocalEvent<DidEquipHandEvent>(OnToggleJumpDidEquipHand, after: [typeof(SharedActionsSystem)]);
@@ -57,19 +55,6 @@ public sealed partial class SharedJumpAbilitySystem : EntitySystem
     }
 
     // Forge-Change-start
-    private void OnToggleJumpMapInit(Entity<JumpAbilityComponent> ent, ref MapInitEvent args)
-    {
-        if (!HasComp<ItemToggleComponent>(ent))
-            return;
-
-        UpdateToggleJumpActionEnabled(ent, Comp<ItemToggleComponent>(ent).Activated);
-    }
-
-    private void OnToggleJumpToggled(Entity<JumpAbilityComponent> ent, ref ItemToggledEvent args)
-    {
-        UpdateToggleJumpActionEnabled(ent, args.Activated);
-    }
-
     private void OnToggleJumpDidEquipHand(DidEquipHandEvent args)
     {
         if (!HasComp<JumpAbilityComponent>(args.Equipped) || !HasComp<ItemToggleComponent>(args.Equipped))
@@ -86,13 +71,10 @@ public sealed partial class SharedJumpAbilitySystem : EntitySystem
         if (ent.Comp.Container is not { } container)
             return;
 
-        if (HasComp<JumpAbilityComponent>(container))
-        {
-            if (!HasComp<JumpItemActivationComponent>(container))
-                return;
-            else if (TryComp<ItemToggleComponent>(container, out var item) && item.Activated)
-                return;
-        }
+        // Only items with both jump + item toggle use this gate/cooldown path.
+        if (!TryComp<JumpAbilityComponent>(container, out var jump)
+            || !TryComp<ItemToggleComponent>(container, out var toggle))
+            return;
 
         if (TryComp<UseDelayComponent>(args.User, out var useDelay)
             && _useDelay.IsDelayed((args.User, useDelay), ToggleJumpDelayId))
@@ -100,6 +82,11 @@ public sealed partial class SharedJumpAbilitySystem : EntitySystem
             args.Cancelled = true;
             return;
         }
+
+        // Boots / bastion: RequireItemActivation = false → always allow (ignore magboots toggle).
+        // Blade: RequireItemActivation = true → allow only while activated, else popup.
+        if (!jump.RequireItemActivation || toggle.Activated)
+            return;
 
         args.Cancelled = true;
         _popup.PopupClient(Loc.GetString("jump-ability-requires-active"), args.User, args.User);
@@ -143,17 +130,6 @@ public sealed partial class SharedJumpAbilitySystem : EntitySystem
 
             _actions.SetCooldown(actionId, info.StartTime, info.EndTime);
             _actions.UpdateAction(actionId, action);
-        }
-    }
-
-    private void UpdateToggleJumpActionEnabled(EntityUid uid, bool enabled)
-    {
-        if (!TryComp<ActionGrantComponent>(uid, out var grant))
-            return;
-
-        foreach (var actionEnt in grant.ActionEntities)
-        {
-            _actions.SetEnabled(actionEnt, enabled);
         }
     }
     // Forge-Change-end

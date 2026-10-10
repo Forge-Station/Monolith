@@ -7,23 +7,11 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Goobstation.Factory;
 
 [RegisterComponent, NetworkedComponent, Access(typeof(SharedInteractorSystem))]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class InteractorComponent : Component
 {
     [DataField]
     public string ToolContainerId = "interactor_tool";
-
-    /// <summary>
-    /// Signal port to toggle or enable/disable <see cref="AltInteract"/>.
-    /// </summary>
-    [DataField]
-    public ProtoId<SinkPortPrototype> AltInteractPort = "AltInteract";
-
-    /// <summary>
-    /// Whether to use alt interaction, i.e. use the highest priority verb on the target entity.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool AltInteract;
 
     /// <summary>
     /// Fixture to look for target items with.

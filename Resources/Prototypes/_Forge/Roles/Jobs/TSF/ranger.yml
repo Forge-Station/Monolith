@@ -44,5 +44,7 @@
   storage:
     back:
     - Magazine45_ACPPistolFMJ
-    - BaseSecurityUplinkRadioDeputy
+    - FederationMilitaryCredit50
+    - FederationMilitaryCredit25
+  # - BaseSecurityUplinkRadioDeputy #Forge-change
     - RadioHandheldNF

@@ -1,0 +1,200 @@
+- type: entity
+  id: DisciplinesDiskLI
+  parent: BaseItem
+  name: technology disk (LI)
+  suffix: Longsword
+  description: Disk with Longsword International technology.
+  components:
+  - type: DisciplinesDisk
+    disciplines:
+    - LI
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: Objects/Misc/diskcases.rsi
+      state: icon_base
+    - sprite: _Forge/Objects/Specific/Research/disciplinesdisk.rsi
+      state: longsword
+  - type: StaticPrice
+    price: 1000
+    vendPrice: 50000
+
+
+- type: latheRecipePack
+  id: LIRecipes
+  recipes:
+  - ClothingUniformJumpsuitLI
+  - ClothingHeadHatBereLI
+  - ClothingOuterHardsuitLIlight
+  - WeaponRifleLIR12
+  - WeaponRifleAlien
+  - WeaponLIR31
+  - MagazineLIR31
+  - MagazineLIR31Pls
+  - MagazineLIR31trs
+  - PowerCellLIR31
+  - ClothingBeltLIWebbing
+
+- type: techDiscipline
+  id: LI
+  name: research-discipline-LI
+  color: "#5c2626"
+  icon:
+    sprite: _Forge/Interface/Misc/company_icons.rsi
+    state: longsword
+  tierPrerequisites:
+    1: 0
+    2: 0.5
+    3: 0.5
+  uiName: LI
+
+
+
+- type: technology
+  id: LIBasicApparel
+  name: research-technology-li-basic-apparel
+  entityIcon: ClothingUniformJumpsuitLI
+  discipline: LI
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - ClothingUniformJumpsuitLI
+  - ClothingHeadHatBereLI
+  - ClothingBeltLIWebbing
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 0, 0
+
+- type: technology
+  id: LIEquipmentT1
+  name: research-technology-li-equipment-t1
+  entityIcon: ClothingOuterHardsuitLIlight
+  discipline: LI
+  tier: 1
+  cost: 35000
+  recipeUnlocks:
+  - ClothingOuterHardsuitLIlight
+  - WeaponRifleLIR12
+  technologyPrerequisites:
+  - LIBasicApparel
+  position: 0, 2
+
+- type: technology
+  id: LIEquipmentT2
+  name: research-technology-li-equipment-t2
+  entityIcon: WeaponRifleAlien
+  discipline: LI
+  tier: 2
+  cost: 60000
+  recipeUnlocks:
+  - WeaponRifleAlien
+  technologyPrerequisites:
+  - LIEquipmentT1
+  - UniversalMaterialResearchT2
+  position: 0, 2
+
+- type: technology
+  id: LIEquipmentT3
+  name: research-technology-li-equipment-t3
+  entityIcon: WeaponLIR31
+  discipline: LI
+  tier: 3
+  cost: 100000
+  recipeUnlocks:
+  - WeaponLIR31
+  - PowerCellLIR31
+  - MagazineLIR31
+  - MagazineLIR31Pls
+  - MagazineLIR31trs
+  technologyPrerequisites:
+  - LIEquipmentT2
+  - UniversalMaterialResearchT3
+  position: 0, 2
+
+
+
+- type: latheRecipe
+  id: ClothingBeltLIWebbing
+  result: ClothingBeltLIWebbing
+  completetime: 2
+  materials:
+    Cloth: 100
+
+- type: latheRecipe
+  id: ClothingUniformJumpsuitLI
+  result: ClothingUniformJumpsuitLI
+  completetime: 2
+  materials:
+    Cloth: 100
+
+- type: latheRecipe
+  id: ClothingHeadHatBereLI
+  result: ClothingHeadHatBereLI
+  completetime: 1
+  materials:
+    Cloth: 50
+
+- type: latheRecipe
+  id: ClothingOuterHardsuitLIlight
+  result: ClothingOuterHardsuitLIlight
+  completetime: 6
+  materials:
+    Steel: 400
+    Plastic: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: WeaponRifleLIR12
+  result: WeaponRifleLIR12
+  completetime: 5
+  materials:
+    Steel: 300
+    Plastic: 150
+
+- type: latheRecipe
+  id: WeaponRifleAlien
+  result: WeaponRifleAlien
+  completetime: 5
+  materials:
+    Steel: 350
+    Plastic: 150
+
+- type: latheRecipe
+  id: WeaponLIR31
+  result: WeaponLIR31
+  completetime: 8
+  materials:
+    Steel: 500
+    Plastic: 200
+    Gold: 100
+
+- type: latheRecipe
+  id: MagazineLIR31
+  result: MagazineLIR31
+  completetime: 2
+  materials:
+    Steel: 100
+
+- type: latheRecipe
+  id: MagazineLIR31Pls
+  result: MagazineLIR31Pls
+  completetime: 2
+  materials:
+    Steel: 100
+    Plastic: 50
+
+- type: latheRecipe
+  id: MagazineLIR31trs
+  result: MagazineLIR31trs
+  completetime: 2
+  materials:
+    Steel: 75
+
+- type: latheRecipe
+  id: PowerCellLIR31
+  result: PowerCellLIR31
+  completetime: 3
+  materials:
+    Steel: 100
+    Gold: 50

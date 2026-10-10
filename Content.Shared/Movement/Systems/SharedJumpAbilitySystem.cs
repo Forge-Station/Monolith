@@ -85,11 +85,13 @@ public sealed partial class SharedJumpAbilitySystem : EntitySystem
         if (ent.Comp.Container is not { } container)
             return;
 
-        if (TryComp<JumpAbilityComponent>(container, out var jump) && !jump.RequireItemActivation)
-            return;
-
-        if (TryComp<JumpAbilityComponent>(container, out var jump2) && jump2.RequireItemActivation && TryComp<ItemToggleComponent>(container, out var item) && item.Activated)
-            return;
+        if (TryComp<JumpAbilityComponent>(container, out var jump))
+        {
+            if (!jump.RequireItemActivation)
+                return;
+            else if (TryComp<ItemToggleComponent>(container, out var item) && item.Activated)
+                return;
+        }
 
         if (TryComp<UseDelayComponent>(args.User, out var useDelay)
             && _useDelay.IsDelayed((args.User, useDelay), ToggleJumpDelayId))

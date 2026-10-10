@@ -23,7 +23,7 @@ public sealed partial class JumpAbilityComponent : Component
     /// Basic “throwing” speed for TryThrow method.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float JumpThrowSpeed = 115f;
+    public float JumpThrowSpeed = 120f; //Forge-Change 10 >> 120
 
     /// <summary>
     /// This gets played whenever the jump action is used.

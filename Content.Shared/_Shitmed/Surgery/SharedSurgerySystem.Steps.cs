@@ -722,19 +722,28 @@ public abstract partial class SharedSurgerySystem
     private void OnSurgeryTargetStepChosen(Entity<SurgeryTargetComponent> ent, ref SurgeryStepChosenBuiMsg args)
     {
         var user = args.Actor;
-        if (GetEntity(args.Entity) is not { Valid: true } body ||
-            GetEntity(args.Part) is not { Valid: true } targetPart ||
-            !IsSurgeryValid(body, targetPart, args.Surgery, args.Step, user, out var surgery, out var part, out var step))
+        if (GetEntity(args.Entity) is {} body &&
+            GetEntity(args.Part) is {} targetPart)
         {
-            return;
+            TryDoSurgeryStep(body, targetPart, user, args.Surgery, args.Step);
         }
+    }
 
-        if (!PreviousStepsComplete(body, part, surgery, args.Step) ||
-            IsStepComplete(body, part, args.Step, surgery))
-            return;
+    /// <summary>
+    /// Do a surgery step on a part, if it can be done.
+    /// Returns true if it succeeded.
+    /// </summary>
+    public bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId)
+    {
+        if (!IsSurgeryValid(body, targetPart, surgeryId, stepId, user, out var surgery, out var part, out var step))
+            return false;
+
+        if (!PreviousStepsComplete(body, part, surgery, stepId) ||
+            IsStepComplete(body, part, stepId, surgery))
+            return false;
 
         if (!CanPerformStep(user, body, part, step, true, out _, out _, out var validTools))
-            return;
+            return false;
 
         var speed = 1f;
         var usedEv = new SurgeryToolUsedEvent(user, body);
@@ -745,7 +754,7 @@ public abstract partial class SharedSurgerySystem
             {
                 RaiseLocalEvent(tool, ref usedEv);
                 if (usedEv.Cancelled)
-                    return;
+                    return false;
 
                 speed *= toolSpeed;
             }
@@ -757,7 +766,7 @@ public abstract partial class SharedSurgerySystem
                     if (TryComp(tool, out SurgeryToolComponent? toolComp) &&
                         toolComp.StartSound != null)
                     {
-                        _audio.PlayEntity(toolComp.StartSound, user, tool);
+                        _audio.PlayPvs(toolComp.StartSound, tool);
                     }
                 }
             }
@@ -766,7 +775,7 @@ public abstract partial class SharedSurgerySystem
         if (TryComp(body, out TransformComponent? xform))
             _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
-        var ev = new SurgeryDoAfterEvent(args.Surgery, args.Step);
+        var ev = new SurgeryDoAfterEvent(surgeryId, stepId);
         // TODO: Move 2 seconds to a field of SurgeryStepComponent
         var duration = GetSurgeryDuration(step, user, body, speed);
 
@@ -786,21 +795,22 @@ public abstract partial class SharedSurgerySystem
             BreakOnHandChange = true,
         };
 
-        if (_doAfter.TryStartDoAfter(doAfter))
-        {
-            var userName = Identity.Entity(user, EntityManager);
-            var targetName = Identity.Entity(ent.Owner, EntityManager);
+        if (!_doAfter.TryStartDoAfter(doAfter))
+            return false;
 
-            var locName = $"surgery-popup-procedure-{args.Surgery}-step-{args.Step}";
-            var locResult = Loc.GetString(locName,
+        var userName = Identity.Entity(user, EntityManager);
+        var targetName = Identity.Entity(body, EntityManager);
+
+        var locName = $"surgery-popup-procedure-{surgeryId}-step-{stepId}";
+        var locResult = Loc.GetString(locName,
+            ("user", userName), ("target", targetName), ("part", part));
+
+        if (locResult == locName)
+            locResult = Loc.GetString($"surgery-popup-step-{stepId}",
                 ("user", userName), ("target", targetName), ("part", part));
 
-            if (locResult == locName)
-                locResult = Loc.GetString($"surgery-popup-step-{args.Step}",
-                    ("user", userName), ("target", targetName), ("part", part));
-
-            _popup.PopupEntity(locResult, user);
-        }
+        _popup.PopupEntity(locResult, user);
+        return true;
     }
 
     private float GetSurgeryDuration(EntityUid surgeryStep, EntityUid user, EntityUid target, float toolSpeed)
@@ -946,129 +956,129 @@ public abstract partial class SharedSurgerySystem
         return false;
     }
 
-    private bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId)
-    =>      TryDoSurgeryStep(body, targetPart, user, surgeryId, stepId, out _);
+    // private bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId)
+    // =>      TryDoSurgeryStep(body, targetPart, user, surgeryId, stepId, out _);
 
-    /// <summary>
-    /// Do a surgery step on a part, if it can be done.
-    /// Returns true if it succeeded.
-    /// </summary>
-    public bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId, out StepInvalidReason error)
-    {
-        error = StepInvalidReason.None;
-        if (!IsSurgeryValid(body, targetPart, surgeryId, stepId, user, out var surgery, out var part, out var step))
-        {
-            error = StepInvalidReason.SurgeryInvalid;
-            return false;
-        }
+    // /// <summary>
+    // /// Do a surgery step on a part, if it can be done.
+    // /// Returns true if it succeeded.
+    // /// </summary>
+    // public bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId, out StepInvalidReason error)
+    // {
+    //     error = StepInvalidReason.None;
+    //     if (!IsSurgeryValid(body, targetPart, surgeryId, stepId, user, out var surgery, out var part, out var step))
+    //     {
+    //         error = StepInvalidReason.SurgeryInvalid;
+    //         return false;
+    //     }
 
-        if (!PreviousStepsComplete(body, part, surgery, stepId))
-        {
-            error = StepInvalidReason.MissingPreviousSteps;
-            return false;
-        }
+    //     if (!PreviousStepsComplete(body, part, surgery, stepId))
+    //     {
+    //         error = StepInvalidReason.MissingPreviousSteps;
+    //         return false;
+    //     }
 
-        if (IsStepComplete(body, part, stepId, surgery))
-        {
-            error = StepInvalidReason.StepCompleted;
-            return false;
-        }
+    //     if (IsStepComplete(body, part, stepId, surgery))
+    //     {
+    //         error = StepInvalidReason.StepCompleted;
+    //         return false;
+    //     }
 
-        //var tool = _hands.GetActiveItemOrSelf(user);
-        if (!CanPerformStep(user, body, part, step, true, out _, out var reason, out var validTools))
-        {
-            error = reason;
-            return false;
-        }
+    //     //var tool = _hands.GetActiveItemOrSelf(user);
+    //     if (!CanPerformStep(user, body, part, step, true, out _, out var reason, out var validTools))
+    //     {
+    //         error = reason;
+    //         return false;
+    //     }
 
-        var speed = 1f;
-        //var toolComp = _toolQuery.CompOrNull(tool);
-        var usedEv = new SurgeryToolUsedEvent(user, body);
-        //usedEv.IgnoreToggle = toolComp?.IgnoreToggle ?? false;
-        // RaiseLocalEvent(tool, ref usedEv);
-        // if (usedEv.Cancelled)
-        // {
-        //     error = StepInvalidReason.ToolInvalid;
-        //     return false;
-        // }
+    //     var speed = 1f;
+    //     //var toolComp = _toolQuery.CompOrNull(tool);
+    //     var usedEv = new SurgeryToolUsedEvent(user, body);
+    //     //usedEv.IgnoreToggle = toolComp?.IgnoreToggle ?? false;
+    //     // RaiseLocalEvent(tool, ref usedEv);
+    //     // if (usedEv.Cancelled)
+    //     // {
+    //     //     error = StepInvalidReason.ToolInvalid;
+    //     //     return false;
+    //     // }
 
-        // if (toolComp?.StartSound is {} sound)
-        //     _audio.PlayPredicted(sound, tool, user);
+    //     // if (toolComp?.StartSound is {} sound)
+    //     //     _audio.PlayPredicted(sound, tool, user);
 
-        // _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body).Position);
+    //     // _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body).Position);
 
-        // We need to check for nullability because of surgeries that dont require a tool, like Cavity Implants
-        if (validTools?.Count > 0)
-        {
-            foreach (var (tool, toolSpeed) in validTools)
-            {
-                RaiseLocalEvent(tool, ref usedEv);
-                if (usedEv.Cancelled)
-                {
-                    error = StepInvalidReason.ToolInvalid;
-                    return false;
-                }
+    //     // We need to check for nullability because of surgeries that dont require a tool, like Cavity Implants
+    //     if (validTools?.Count > 0)
+    //     {
+    //         foreach (var (tool, toolSpeed) in validTools)
+    //         {
+    //             RaiseLocalEvent(tool, ref usedEv);
+    //             if (usedEv.Cancelled)
+    //             {
+    //                 error = StepInvalidReason.ToolInvalid;
+    //                 return false;
+    //             }
 
-                speed *= toolSpeed;
-            }
+    //             speed *= toolSpeed;
+    //         }
 
-            if (_net.IsServer)
-            {
-                foreach (var tool in validTools.Keys)
-                {
-                    if (TryComp(tool, out SurgeryToolComponent? toolComp) &&
-                        toolComp.StartSound != null)
-                    {
-                        _audio.PlayPvs(toolComp.StartSound, tool);
-                    }
-                }
-            }
-        }
+    //         if (_net.IsServer)
+    //         {
+    //             foreach (var tool in validTools.Keys)
+    //             {
+    //                 if (TryComp(tool, out SurgeryToolComponent? toolComp) &&
+    //                     toolComp.StartSound != null)
+    //                 {
+    //                     _audio.PlayPvs(toolComp.StartSound, tool);
+    //                 }
+    //             }
+    //         }
+    //     }
 
-        if (TryComp(body, out TransformComponent? xform))
-            _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
+    //     if (TryComp(body, out TransformComponent? xform))
+    //         _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
-        var ev = new SurgeryDoAfterEvent(surgeryId, stepId);
-        // TODO: Move 2 seconds to a field of SurgeryStepComponent
-        var duration = GetSurgeryDuration(step, user, body, speed);
+    //     var ev = new SurgeryDoAfterEvent(surgeryId, stepId);
+    //     // TODO: Move 2 seconds to a field of SurgeryStepComponent
+    //     var duration = GetSurgeryDuration(step, user, body, speed);
 
-        if (TryComp(user, out SurgerySpeedModifierComponent? surgerySpeedMod)
-            && surgerySpeedMod is not null)
-            duration = duration / surgerySpeedMod.SpeedModifier;
+    //     if (TryComp(user, out SurgerySpeedModifierComponent? surgerySpeedMod)
+    //         && surgerySpeedMod is not null)
+    //         duration = duration / surgerySpeedMod.SpeedModifier;
 
 
-        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(duration), ev, body, part)
-        {
-            BreakOnMove = true,
-            //BreakOnTargetMove = true, I fucking hate wizden dude.
-            CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-            NeedHand = true,
-            BreakOnHandChange = true,
-            AttemptFrequency = AttemptFrequency.EveryTick,
-            DistanceThreshold = null
-        };
+    //     var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(duration), ev, body, part)
+    //     {
+    //         BreakOnMove = true,
+    //         //BreakOnTargetMove = true, I fucking hate wizden dude.
+    //         CancelDuplicate = true,
+    //         DuplicateCondition = DuplicateConditions.SameEvent,
+    //         NeedHand = true,
+    //         BreakOnHandChange = true,
+    //         AttemptFrequency = AttemptFrequency.EveryTick,
+    //         DistanceThreshold = null
+    //     };
 
-        if (!_doAfter.TryStartDoAfter(doAfter))
-        {
-            error = StepInvalidReason.DoAfterFailed;
-            return false;
-        }
+    //     if (!_doAfter.TryStartDoAfter(doAfter))
+    //     {
+    //         error = StepInvalidReason.DoAfterFailed;
+    //         return false;
+    //     }
 
-        var userName = Identity.Entity(user, EntityManager);
-        var targetName = Identity.Entity(body, EntityManager);
+    //     var userName = Identity.Entity(user, EntityManager);
+    //     var targetName = Identity.Entity(body, EntityManager);
 
-        var locName = $"surgery-popup-procedure-{surgeryId}-step-{stepId}";
-        var locResult = Loc.GetString(locName,
-            ("user", userName), ("target", targetName), ("part", part));
+    //     var locName = $"surgery-popup-procedure-{surgeryId}-step-{stepId}";
+    //     var locResult = Loc.GetString(locName,
+    //         ("user", userName), ("target", targetName), ("part", part));
 
-        if (locResult == locName)
-            locResult = Loc.GetString($"surgery-popup-step-{stepId}",
-                ("user", userName), ("target", targetName), ("part", part));
+    //     if (locResult == locName)
+    //         locResult = Loc.GetString($"surgery-popup-step-{stepId}",
+    //             ("user", userName), ("target", targetName), ("part", part));
 
-        _popup.PopupPredicted(locResult, user, user);
-        return true;
-    }
+    //     _popup.PopupPredicted(locResult, user, user);
+    //     return true;
+    // }
 
     private (Entity<SurgeryComponent> Surgery, int Step)? GetNextStep(EntityUid body, EntityUid part, Entity<SurgeryComponent?> surgery, List<EntityUid> requirements, EntityUid user)
     {

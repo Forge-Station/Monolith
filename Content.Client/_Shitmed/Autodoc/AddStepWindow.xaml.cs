@@ -125,7 +125,6 @@ public sealed partial class AddStepWindow : FancyWindow
             {
                 if (!int.TryParse(responses[field].Trim(), out var length))
                     return;
-
                 if (length < 1 || length > 30)
                     return;
 

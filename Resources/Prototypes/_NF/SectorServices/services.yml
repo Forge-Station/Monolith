@@ -28,6 +28,16 @@
         !type:SectorBankAccountInfo
         balance: 8000
         increasePerSecond: 65 # ~234K per hour, about enough for minimum wage for the default TSFMC size
+# Forge-change-add-start
+      Imperial:
+        !type:SectorBankAccountInfo
+        balance: 8000
+        increasePerSecond: 65 # ~234K per hour, about enough for minimum wage for the default Imperial size
+      Renegates:
+        !type:SectorBankAccountInfo
+        balance: 4000
+        increasePerSecond: 33 # ~118K per hour, about enough for minimum wage for the default Renegates size
+# Forge-change-add-end
       Medical:
         !type:SectorBankAccountInfo
         balance: 20000 # Forge-change: 8000 to 20k
@@ -36,10 +46,10 @@
 #        !type:SectorBankAccountInfo
 #        balance: 150000
 #        increasePerSecond: 30
-      BlackMarket:
-        !type:SectorBankAccountInfo
-        balance: 8000
-        increasePerSecond: 120 # ~432k per hour, with the decoupling of smuggling from PDV they need a boost now while TSF gets tons of money just from the sector operating too.
+#      BlackMarket: # Forge-Change: disabled PDV
+#        !type:SectorBankAccountInfo
+#        balance: 8000
+#        increasePerSecond: 120 # ~432k per hour, with the decoupling of smuggling from PDV they need a boost now while TSF gets tons of money just from the sector operating too.
 # mono edit end
 
  # A global source of character records (DNA, fingerprints, criminal records, etc.)

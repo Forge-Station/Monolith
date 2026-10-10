@@ -166,31 +166,33 @@
   - type: Computer
     board: ComputerWithdrawBankATMComputerCircuitboard
 
-- type: entity
-  suffix: BlackMarket
-  parent: [BaseStructureDisableToolUse, BaseStructureDestructible, ComputerBankATMDeposit]
-  id: ComputerBlackMarketBankATM
-  name: phaethon treasury ATM #mono
-  description: An ATM connected to the Phaethon Dynasties treasury. There is a 5% deposit fee. #mono
-  components:
-  - type: Sprite
-    netsync: false
-    noRot: true
-    sprite: _NF/Structures/Machines/atm/illegal_atm.rsi
-    layers:
-    - map: ["computerLayerBody"]
-      state: icon
-    - map: ["computerLayerScreen"]
-      state: unshaded
-  - type: ActivatableUI
-    key: enum.BankATMMenuUiKey.BlackMarket
-  - type: UserInterface
-    interfaces:
-      enum.BankATMMenuUiKey.BlackMarket:
-        type: BankATMMenuBoundUserInterface
-  - type: BankATM
-    taxAccounts:
-      BlackMarket: 0.02 # Monolith #STOP-TAXES
+# Forge-change-delete-start
+# - type: entity
+#   suffix: BlackMarket
+#   parent: [BaseStructureDisableToolUse, BaseStructureDestructible, ComputerBankATMDeposit]
+#   id: ComputerBlackMarketBankATM
+#   name: phaethon treasury ATM #mono
+#   description: An ATM connected to the Phaethon Dynasties treasury. There is a 5% deposit fee. #mono
+#   components:
+#   - type: Sprite
+#     netsync: false
+#     noRot: true
+#     sprite: _NF/Structures/Machines/atm/illegal_atm.rsi
+#     layers:
+#     - map: ["computerLayerBody"]
+#       state: icon
+#     - map: ["computerLayerScreen"]
+#       state: unshaded
+#   - type: ActivatableUI
+#     key: enum.BankATMMenuUiKey.BlackMarket
+#   - type: UserInterface
+#     interfaces:
+#       enum.BankATMMenuUiKey.BlackMarket:
+#         type: BankATMMenuBoundUserInterface
+#   - type: BankATM
+#     taxAccounts:
+#       BlackMarket: 0.02 # Monolith #STOP-TAXES
+# Forge-change-delete-end
 
 - type: entity
   suffix: Wallmount, BlackMarket
@@ -214,8 +216,8 @@
       enum.BankATMMenuUiKey.BlackMarket:
         type: BankATMMenuBoundUserInterface
   - type: BankATM
-    taxAccounts:
-      BlackMarket: 0.02 # Monolith #STOP-TAXES
+    # taxAccounts: # Forge-change-del
+    #   BlackMarket: 0.02 # Monolith #STOP-TAXES
 
 - type: entity
   name: station administration console
@@ -303,32 +305,34 @@
   - type: AccessReader
     access: [["ChiefMedicalOfficer"]]
 
-- type: entity
-  parent: BaseStationAdminBankATM
-  id: StationAdminBankATMBlackMarket
-  description: Used to transfer funds to and from the black market account.
-  suffix: Black Market
-  components:
-  - type: Sprite
-    layers:
-      - map: ["computerLayerBody"]
-        state: computer
-      - map: ["computerLayerKeyboard"]
-        state: generic_keyboard
-      - map: ["computerLayerScreen"]
-        state: comm_syndie
-      - map: ["computerLayerKeys"]
-        state: syndie_key
-  - type: PointLight
-    enabled: false
-    color: "#FF0040"
-    radius: 2.0
-    energy: 1.5
-  - type: LitOnPowered
-  - type: StationBankATM
-    account: BlackMarket
-  - type: AccessReader
-    access: [["Pirate"]]
-  - type: CompanyAccessReader
-    requiredCompanies:
-    - PDV
+# Forge-change-delete-start
+# - type: entity
+#   parent: BaseStationAdminBankATM
+#   id: StationAdminBankATMBlackMarket
+#   description: Used to transfer funds to and from the black market account.
+#   suffix: Black Market
+#   components:
+#   - type: Sprite
+#     layers:
+#       - map: ["computerLayerBody"]
+#         state: computer
+#       - map: ["computerLayerKeyboard"]
+#         state: generic_keyboard
+#       - map: ["computerLayerScreen"]
+#         state: comm_syndie
+#       - map: ["computerLayerKeys"]
+#         state: syndie_key
+#   - type: PointLight
+#     enabled: false
+#     color: "#FF0040"
+#     radius: 2.0
+#     energy: 1.5
+#   - type: LitOnPowered
+#   - type: StationBankATM
+#     account: BlackMarket
+#   - type: AccessReader
+#     access: [["Pirate"]]
+#   - type: CompanyAccessReader
+#     requiredCompanies:
+#     - PDV
+# Forge-change-delete end

@@ -54,7 +54,7 @@
   - type: JumpAbility
     jumpDistance: 2.5
     jumpSound: /Audio/Effects/Footsteps/suitstep2.ogg
-  - type: JumpItemActivation
+    requireItemActivation: true
   - type: ActionGrant
     actions:
     - ActionGravityJump

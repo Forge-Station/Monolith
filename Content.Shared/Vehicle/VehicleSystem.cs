@@ -4,7 +4,6 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
@@ -74,29 +73,6 @@ public sealed partial class VehicleSystem : EntitySystem
 
         if (!CanOperate((vehicleUid, vehicle), ent.Owner))
             args.Cancel();
-    }
-
-    [SubscribeLocalEvent]
-    private void OnOperatorCanAttackFromContainer(Entity<VehicleOperatorComponent> ent, ref CanAttackFromContainerEvent args)
-    {
-        if (ent.Comp.Vehicle is not { } vehicleUid ||
-            !_vehicleQuery.TryComp(vehicleUid, out var vehicle) ||
-            !vehicle.CanAttack)
-            return;
-
-        args.CanAttack = true;
-    }
-
-    [SubscribeLocalEvent]
-    private void OnOperatorAttackAttempt(Entity<VehicleOperatorComponent> ent, ref AttackAttemptEvent args)
-    {
-        if (ent.Comp.Vehicle is not { } vehicleUid ||
-            !_vehicleQuery.TryComp(vehicleUid, out var vehicle) ||
-            !vehicle.CanAttack ||
-            args.Target != vehicleUid)
-            return;
-
-        args.Cancel();
     }
 
     [SubscribeLocalEvent]
@@ -325,7 +301,7 @@ public sealed partial class VehicleSystem : EntitySystem
         if (TerminatingOrDeleted(entity))
             return;
 
-        if (!Resolve(entity, ref entity.Comp, false))
+        if (!Resolve(entity, ref entity.Comp))
             return;
 
         _actionBlocker.UpdateCanMove(entity);

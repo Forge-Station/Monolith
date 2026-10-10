@@ -85,7 +85,10 @@ public sealed partial class SharedJumpAbilitySystem : EntitySystem
         if (ent.Comp.Container is not { } container)
             return;
 
-        if (!HasComp<JumpAbilityComponent>(container) || !TryComp<ItemToggleComponent>(container, out var toggle))
+        if (TryComp<JumpAbilityComponent>(container, out var jump) && !jump.RequireItemActivation)
+            return;
+
+        if (TryComp<JumpAbilityComponent>(container, out var jump2) && jump2.RequireItemActivation && TryComp<ItemToggleComponent>(container, out var item) && item.Activated)
             return;
 
         if (TryComp<UseDelayComponent>(args.User, out var useDelay)
@@ -94,9 +97,6 @@ public sealed partial class SharedJumpAbilitySystem : EntitySystem
             args.Cancelled = true;
             return;
         }
-
-        if (toggle.Activated)
-            return;
 
         args.Cancelled = true;
         _popup.PopupClient(Loc.GetString("jump-ability-requires-active"), args.User, args.User);

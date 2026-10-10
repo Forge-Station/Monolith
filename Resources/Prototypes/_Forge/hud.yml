@@ -1,0 +1,5 @@
+- type: hudTheme
+  id: ForgePickMeTheme
+  name: ui-options-hud-theme-pickme
+  path: PickMe
+  order: 7

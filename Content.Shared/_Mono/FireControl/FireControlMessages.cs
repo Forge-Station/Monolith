@@ -12,6 +12,9 @@ public sealed class FireControlConsoleUpdateEvent : EntityEventArgs
 [Serializable, NetSerializable]
 public sealed class FireControlConsoleBoundInterfaceState : BoundUserInterfaceState
 {
+    // WOLFGATE(CombatConsole): carry authoritative groups and countermeasure state.
+    public Content.Shared._WF.CombatConsole.WFCombatConsoleState Combat = new();
+
     public bool Connected;
     public FireControllableEntry[] FireControllables;
     public NavInterfaceState NavState;

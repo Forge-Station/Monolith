@@ -198,6 +198,7 @@ public sealed partial class TileSystem : EntitySystem
             restored = under;
         }
 
+        if (restored.IsEmpty) WfRecordHullTileDeconstruction(gridUid, tileRef.GridIndices); // WOLFGATE(Shuttles): cutting the last lattice leaves the hull survey before any split copies it.
         _maps.SetTile(gridUid, mapGrid, tileRef.GridIndices, restored);
         // WOLFGATE END
 

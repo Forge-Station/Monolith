@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client._Shitmed.UserInterface.Systems.Targeting.Widgets;
+using Content.Client._WF.Cockpit;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -70,6 +71,7 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
 
         _untilRefresh = RefreshInterval;
         RefreshLocalVisibility();
+        ApplyVisibility();
         if (!_active)
             return;
         PositionHud();
@@ -163,11 +165,17 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
         if (_active == active)
             return;
         _active = active;
-        _hud.Visible = active;
+        ApplyVisibility();
         _untilRefresh = 0f;
 
         if (active)
             RefreshReadout();
+    }
+
+    /// <summary>Shows the panel while worn, except under the cockpit, which has no HUD corner for it.</summary>
+    private void ApplyVisibility()
+    {
+        _hud.Visible = _active && !_ui.GetUIController<WFCockpitUIController>().Active;
     }
 
     private void PositionHud()

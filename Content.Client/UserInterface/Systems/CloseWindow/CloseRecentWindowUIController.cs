@@ -1,5 +1,6 @@
 using Content.Client.Gameplay;
 using Content.Client.Info;
+using Content.Client.Shuttles.UI; // WOLFGATE(Cockpit)
 using Robust.Client.Input;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -41,6 +42,9 @@ public sealed partial class CloseRecentWindowUIController : UIController
         for (int i=recentlyInteractedWindows.Count-1; i>=0; i--)
         {
             var window = recentlyInteractedWindows[i];
+            // WOLFGATE(Cockpit): Escape must not close the hidden helm that supplies the cockpit.
+            if (window is ShuttleConsoleWindow { WfCockpitActive: true })
+                continue;
             recentlyInteractedWindows.RemoveAt(i); // Should always be removed as either the reference is stale or we're closing it
             if (window.IsOpen)
             {
@@ -131,6 +135,9 @@ public sealed partial class CloseRecentWindowUIController : UIController
         for (var i = recentlyInteractedWindows.Count - 1; i >= 0; i--)
         {
             var window = recentlyInteractedWindows[i];
+            // WOLFGATE(Cockpit): Escape must not close the hidden helm that supplies the cockpit.
+            if (window is ShuttleConsoleWindow { WfCockpitActive: true })
+                continue;
             if (window.IsOpen)
                 return true;
 

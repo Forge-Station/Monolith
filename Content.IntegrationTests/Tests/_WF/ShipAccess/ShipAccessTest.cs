@@ -1,13 +1,17 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Content.Client._WF.ShipAccess;
+using Content.Client._WF.Stylesheets;
+using Content.Client.Shuttles.UI;
 using Content.IntegrationTests.Pair;
 using Content.Server._WF.ShipAccess;
 using Content.Server.StationRecords;
 using Content.Shared._Mono.Company;
 using Content.Shared._Mono.Shipyard;
 using Content.Shared._NF.Shipyard.Components;
+using Content.Shared._WF.CCVar;
 using Content.Shared._WF.ShipAccess;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
@@ -19,10 +23,14 @@ using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Power;
 using Content.Shared.StationRecords;
+using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Localization;
 using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -32,7 +40,7 @@ namespace Content.IntegrationTests.Tests._WF.ShipAccess;
 /// Ship access through the normal airlock access readers: the deed and listed ID cards open a locked ship by the
 /// crew record keys they carry, an unlocked ship's doors get their own access back, the faction's access level
 /// opens a faction ship, a refusal denies and a hacked or emagged reader opens as on any airlock, readers on
-/// doors built later follow the lock, and the console tab loads and knows the deed holder.
+/// doors built later follow the lock, and the console tab loads, knows the deed holder and shows its notices in full.
 /// </summary>
 [TestFixture]
 [TestOf(typeof(WFShipAccessSystem))]
@@ -541,6 +549,158 @@ public sealed class ShipAccessTest
         });
 
         await pair.CleanReturnAsync();
+    }
+
+    /// <summary>The access page's one-line notices, by control name.</summary>
+    private static readonly string[] Notices =
+    {
+        "ReadOnlyLabel", "CodeAlertLabel", "AllowListEmptyLabel", "NearbyEmptyLabel", "DoorNoneLabel", "DoorPlayersEmptyLabel",
+    };
+
+    /// <summary>
+    /// The notices the page can show together: the deed holder sees the code alert and the empty lists of a picked door,
+    /// anyone else sees the read-only notice and no door picked. The owner-only parts are hidden from everyone else.
+    /// </summary>
+    private static readonly string[][] NoticeStates =
+    {
+        new[] { "CodeAlertLabel", "AllowListEmptyLabel", "NearbyEmptyLabel", "DoorPlayersEmptyLabel" },
+        new[] { "ReadOnlyLabel", "AllowListEmptyLabel", "DoorNoneLabel" },
+    };
+
+    /// <summary>The owner-only boxes that hold some of the notices.</summary>
+    private static readonly string[] OwnerBoxes = { "CodeBox", "NearbyBox", "AllDoorsBox", "DoorBox", "DoorPlayersBox" };
+
+    /// <summary>
+    /// The notices on the access page, among them "only the owner can change who may board", wrap onto as many lines
+    /// as their column needs instead of being clipped, at the helm's smallest and default sizes in both skins.
+    /// </summary>
+    [Test]
+    public async Task NoticesAreNotClippedAtTheHelmSizes()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+        await pair.Client.WaitAssertion(() =>
+        {
+            var settings = pair.Client.ResolveDependency<IConfigurationManager>();
+            var ui = pair.Client.ResolveDependency<IUserInterfaceManager>();
+            var originalSkin = settings.GetCVar(WolfgateCVars.UiStyle);
+            using var helm = new ShuttleConsoleWindow();
+            var access = helm.FindControl<ShipAccessScreen>("AccessContainer");
+            helm.OpenCentered();
+            try
+            {
+                foreach (var skin in new[] { WolfgateSkins.Retro.Id, WolfgateSkins.Futurist.Id })
+                foreach (var size in new[] { helm.MinSize, ShuttleConsoleWindow.WfDefaultSize })
+                {
+                    settings.SetCVar(WolfgateCVars.UiStyle, skin);
+                    helm.SwitchMode(ShuttleConsoleWindow.ShuttleConsoleMode.Access);
+                    access.SetShuttle(null);
+                    access.Refresh();
+
+                    foreach (var state in NoticeStates)
+                    {
+                        foreach (var name in OwnerBoxes)
+                            Find<Control>(access, name).Visible = false;
+                        foreach (var name in Notices)
+                            Find<WFWrappedLabel>(access, name).Visible = false;
+                        foreach (var name in state)
+                        {
+                            for (Control? parent = Find<WFWrappedLabel>(access, name); parent != null && parent != access; parent = parent.Parent)
+                                parent.Visible = true;
+                        }
+
+                        Find<WFWrappedLabel>(access, "CodeAlertLabel").Text = Loc.GetString("ship-access-code-alert", ("misses", 3), ("locked", 1));
+                        helm.SetSize = size;
+                        foreach (var control in Tree(helm))
+                            control.InvalidateMeasure();
+                        helm.Measure(size);
+                        helm.Arrange(UIBox2.FromDimensions(Vector2.Zero, size));
+                        foreach (var name in state)
+                            AssertShownInFull(Find<WFWrappedLabel>(access, name), ui, $"{skin}, {size}, {string.Join("+", state)}, {name}");
+                    }
+                }
+            }
+            finally
+            {
+                helm.Close();
+                settings.SetCVar(WolfgateCVars.UiStyle, originalSkin);
+            }
+        });
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>A wrapped label breaks at spaces to its width, keeps every word and splits a word wider than the line.</summary>
+    [Test]
+    public async Task WrappedLabelBreaksToItsWidth()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+        await pair.Client.WaitAssertion(() =>
+        {
+            var ui = pair.Client.ResolveDependency<IUserInterfaceManager>();
+            var label = new WFWrappedLabel { Text = Loc.GetString("ship-access-read-only"), HorizontalExpand = true };
+            var longWord = new WFWrappedLabel { Text = new string('W', 60), HorizontalExpand = true };
+            var box = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
+            box.AddChild(label);
+            box.AddChild(longWord);
+            ui.WindowRoot.AddChild(box);
+            try
+            {
+                foreach (var width in new[] { 120f, 200f, 4000f })
+                {
+                    var size = new Vector2(width, 400);
+                    box.SetSize = size;
+                    box.InvalidateMeasure();
+                    box.Measure(size);
+                    box.Arrange(UIBox2.FromDimensions(Vector2.Zero, size));
+                    AssertShownInFull(label, ui, $"width {width}");
+                    if (width == 120f)
+                        Assert.That(label.Lines.Count, Is.GreaterThan(1), "A narrow column wraps the notice.");
+                    if (width == 4000f)
+                        Assert.That(label.Lines.Count, Is.EqualTo(1), "A wide column keeps the notice on one line.");
+
+                    var font = FontOf(longWord, ui);
+                    Assert.That(string.Concat(longWord.Lines), Is.EqualTo(longWord.Text), $"width {width}: a long word loses nothing");
+                    foreach (var line in longWord.Lines)
+                        Assert.That(TextWidth(font, line, longWord.UIScale), Is.LessThanOrEqualTo(longWord.PixelWidth + 1), $"width {width}: a split word stays inside the label");
+                }
+            }
+            finally
+            {
+                ui.WindowRoot.RemoveChild(box);
+            }
+        });
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>All the label's text shows: every word kept, each line inside the label's width and the label tall enough for its lines.</summary>
+    internal static void AssertShownInFull(WFWrappedLabel label, IUserInterfaceManager ui, string context)
+    {
+        var font = FontOf(label, ui);
+        var scale = label.UIScale;
+        var lines = label.Lines;
+        Assert.That(label.VisibleInTree, Is.True, $"{context}: the notice must be on screen");
+        Assert.That(label.PixelWidth, Is.GreaterThan(0), context);
+        Assert.That(lines, Is.Not.Empty, context);
+        Assert.That(string.Join(" ", lines), Is.EqualTo(label.Text), $"{context}: wrapping must keep every word");
+        foreach (var line in lines)
+            Assert.That(TextWidth(font, line, scale), Is.LessThanOrEqualTo(label.PixelWidth + 1), $"{context}: \"{line}\" runs past the label");
+
+        var needed = font.GetHeight(scale) + font.GetLineHeight(scale) * (lines.Count - 1);
+        Assert.That(label.PixelHeight + 1, Is.GreaterThanOrEqualTo(needed), $"{context}: the label has no room for its {lines.Count} lines");
+    }
+
+    /// <summary>The font the label draws with: its own, else the stylesheet's, else the theme default.</summary>
+    private static Font FontOf(Label label, IUserInterfaceManager ui)
+    {
+        return label.FontOverride ?? (label.TryGetStyleProperty<Font>(Label.StylePropertyFont, out var styled)
+            ? styled : ui.ThemeDefaults.LabelFont);
+    }
+
+    private static int TextWidth(Font font, string text, float scale)
+    {
+        var width = 0;
+        foreach (var rune in text.EnumerateRunes())
+            width += font.GetCharMetrics(rune, scale)?.Advance ?? 0;
+        return width;
     }
 
     /// <summary>Moves the client's player, with a new mind, into a named MobHuman on the map.</summary>

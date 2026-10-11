@@ -1,5 +1,7 @@
 using Content.Server._Mono.Ships.Systems;
 using Content.Server._Mono.Shuttles.Components;
+using Content.Server._WF.Shuttles.Systems; // WOLFGATE(Shuttles)
+using Content.Shared._WF.Shuttles; // WOLFGATE(Shuttles)
 using Content.Server.Power.EntitySystems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
@@ -52,6 +54,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     [Dependency] private StationJobsSystem _stationJobs = default!;
     [Dependency] private ILogManager _log = default!;
     [Dependency] private CrewedShuttleSystem _crewedShuttle = default!;
+    [Dependency] private ShuttleCameraSystem _camera = default!; // WOLFGATE(Shuttles)
 
     private ISawmill _sawmill = default!;
 
@@ -416,20 +419,32 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
                 FTLState.Invalid,
                 default,
                 new List<ShuttleBeaconObject>(),
-                new List<ShuttleExclusionObject>());
+                new List<ShuttleExclusionObject>(),
+                WFFtlDriveStatus.Missing); // WOLFGATE(Shuttles): a console off any grid has no drive
         }
 
         if (_ui.HasUi(consoleUid, ShuttleConsoleUiKey.Key))
         {
+            // WOLFGATE(ShipShields) START: include directional shield settings in the helm state
+            // _ui.SetUiState(consoleUid, ShuttleConsoleUiKey.Key, new ShuttleBoundUserInterfaceState(navState, mapState, dockState,
+            //     GetTractorCaptureSources(shuttleGridUid))); // WOLFGATE(TractorBeam)
             _ui.SetUiState(consoleUid, ShuttleConsoleUiKey.Key, new ShuttleBoundUserInterfaceState(navState, mapState, dockState,
-                GetTractorCaptureSources(shuttleGridUid))); // WOLFGATE
+                GetTractorCaptureSources(shuttleGridUid))
+            {
+                ShieldShunt = GetWolfgateShieldShuntState(shuttleGridUid),
+                CockpitAutopilotActive = GetWfCockpitAutopilotStatus(entity), // WOLFGATE(Cockpit): report confirmed steering in the initial helm snapshot.
+            });
+            // WOLFGATE END
         }
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        UpdateTractorCaptureWarnings(frameTime); // WOLFGATE
+        UpdateTractorCaptureWarnings(frameTime); // WOLFGATE(TractorBeam)
+        UpdateWolfgateShieldHelms(frameTime); // WOLFGATE(ShipShields): refresh open helm shield status on visible changes
+        UpdateWfCockpitStatuses(frameTime); // WOLFGATE(Cockpit): keep autopilot lamps current while any helm page is open.
+        UpdateWfFtlDrive(frameTime); // WOLFGATE(Shuttles): keep the FTL page current when a drive is built, removed or loses power
 
         var toRemove = new ValueList<(EntityUid, PilotComponent)>();
         var query = EntityQueryEnumerator<PilotComponent>();
@@ -480,6 +495,9 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         ActionBlockerSystem.UpdateCanMove(entity);
         pilotComponent.Position = EntityManager.GetComponent<TransformComponent>(entity).Coordinates;
         Dirty(entity, pilotComponent);
+
+        EntityManager.System<ShipStatusSystem>().ObserveHull(uid); // WOLFGATE(Shuttles): capture hull condition before piloting can damage it.
+        _camera.OnPilotAdded(entity, (uid, component)); // WOLFGATE(Shuttles): restore the console's camera view
     }
 
     public void RemovePilot(EntityUid pilotUid, PilotComponent pilotComponent)
@@ -491,6 +509,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
         pilotComponent.Console = null;
         pilotComponent.Position = null;
+        _camera.OnPilotRemoved(pilotUid); // WOLFGATE(Shuttles)
         _eyeSystem.ResetZoom(pilotUid);
 
         if (!helm.SubscribedPilots.Remove(pilotUid))
@@ -597,7 +616,8 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             ftlState,
             stateDuration,
             beacons ?? new List<ShuttleBeaconObject>(),
-            exclusions ?? new List<ShuttleExclusionObject>());
+            exclusions ?? new List<ShuttleExclusionObject>(),
+            _shuttle.GetFtlDriveStatus(shuttle.Owner)); // WOLFGATE(Shuttles): report the drive so the FTL page can warn
     }
 
     /// <summary>

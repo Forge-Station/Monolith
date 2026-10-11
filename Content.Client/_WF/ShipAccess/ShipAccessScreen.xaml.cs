@@ -83,6 +83,9 @@ public sealed partial class ShipAccessScreen : BoxContainer
     /// <summary>The deed holder picked a rule for the selected door.</summary>
     public event Action<NetEntity, WFDoorAccessRule>? DoorRuleChanged;
 
+    /// <summary>The deed holder confirmed one rule for every door on the ship.</summary>
+    public event Action<WFDoorAccessRule>? AllDoorRulesChanged;
+
     /// <summary>The deed holder ticked or unticked a card on the selected door.</summary>
     public event Action<NetEntity, WFShipAccessKey, bool>? DoorPlayerChanged;
 
@@ -123,6 +126,17 @@ public sealed partial class ShipAccessScreen : BoxContainer
                 DoorRuleChanged?.Invoke(_entManager.GetNetEntity(door), (WFDoorAccessRule) args.Id);
         };
 
+        foreach (var rule in Rules)
+            AllDoorsRuleButton.AddItem(RuleName(rule), (int) rule);
+
+        AllDoorsRuleButton.OnItemSelected += args =>
+        {
+            AllDoorsRuleButton.SelectId(args.Id);
+            RefreshAllDoorsHint();
+        };
+        AllDoorsApplyButton.OnPressed += _ => AllDoorRulesChanged?.Invoke((WFDoorAccessRule) AllDoorsRuleButton.SelectedId);
+        RefreshAllDoorsHint();
+
         BuildLegend();
 
         _client.CodesReceived += OnCodes;
@@ -143,6 +157,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
         };
         ShipCodeRevealButton.OnToggled += _ => RefreshCodes();
         DoorCodeRevealButton.OnToggled += _ => RefreshCodes();
+        WfRefitInstruments();
     }
 
     protected override void Dispose(bool disposing)
@@ -301,6 +316,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
 
         CodeAlertLabel.Visible = _codesKnown && _misses > 0;
         CodeAlertLabel.Text = Loc.GetString("ship-access-code-alert", ("misses", _misses), ("locked", _lockedOut));
+        CodeAlertLabel.ToolTip = CodeAlertLabel.Text;
     }
 
     private void OnCodes(WFShipAccessCodesEvent ev)
@@ -385,10 +401,12 @@ public sealed partial class ShipAccessScreen : BoxContainer
         LockedCheck.Visible = isOwner;
         LockedLabel.Visible = !isOwner;
         CodeBox.Visible = isOwner;
+        AllDoorsBox.Visible = isOwner;
 
         OwnerLabel.Text = comp != null && comp.OwnerName.Length > 0 ? comp.OwnerName : Loc.GetString("ship-access-owner-none");
         var faction = comp != null ? comp.Mode == WFShipAccessMode.Faction : _grid != null && _access.IsFactionGrid(_grid.Value, out _);
         ModeLabel.Text = Loc.GetString(faction ? "ship-access-mode-faction" : "ship-access-mode-private");
+        OwnerLabel.ToolTip = OwnerLabel.Text;
         LockedLabel.Text = comp == null ? "-" : Loc.GetString(comp.Locked ? "ship-access-locked-yes" : "ship-access-locked-no");
 
         _builderChecks.Clear();
@@ -428,6 +446,10 @@ public sealed partial class ShipAccessScreen : BoxContainer
         DoorRuleButton.Visible = isOwner;
         DoorRuleButton.SelectId((int) selected.Rule);
         SetHint(DoorRuleHint, Loc.GetString(RuleKey(selected.Rule, "desc")));
+        DoorRuleHint.Visible = !isOwner;
+        DoorRuleButton.ToolTip = DoorRuleHint.ToolTip;
+        DoorRuleLabel.ToolTip = DoorRuleHint.ToolTip;
+        DoorNameLabel.ToolTip = DoorNameLabel.Text;
 
         DoorCodeBox.Visible = isOwner && WFShipAccessSystem.TakesCode(selected.Rule);
         var takesPlayers = WFShipAccessSystem.TakesPlayers(selected.Rule);
@@ -450,11 +472,20 @@ public sealed partial class ShipAccessScreen : BoxContainer
                 };
                 check.OnToggled += args => DoorPlayerChanged?.Invoke(netDoor, key, args.Pressed);
                 _doorPlayerChecks[key] = check;
+                WfStyleAccess(check);
                 DoorPlayersContainer.AddChild(check);
             }
         }
 
         DoorPlayersEmptyLabel.Visible = DoorPlayersContainer.ChildCount == 0;
+    }
+
+    /// <summary>What the rule picked for every door does, under the set-all control.</summary>
+    private void RefreshAllDoorsHint()
+    {
+        var rule = (WFDoorAccessRule) AllDoorsRuleButton.SelectedId;
+        SetHint(AllDoorsHint, Loc.GetString("ship-access-all-doors-hint", ("desc", Loc.GetString(RuleKey(rule, "desc")))));
+        AllDoorsRuleButton.ToolTip = AllDoorsHint.ToolTip;
     }
 
     /// <summary>Whether a listed card's key is on the door's own list.</summary>
@@ -484,9 +515,9 @@ public sealed partial class ShipAccessScreen : BoxContainer
     {
         foreach (var rule in Rules)
         {
-            var row = new BoxContainer { Orientation = LayoutOrientation.Horizontal, Margin = new Thickness(6, 0) };
+            var row = new BoxContainer { Orientation = LayoutOrientation.Horizontal, Margin = new Thickness(6, 0), SeparationOverride = 6, HorizontalExpand = true };
             row.AddChild(Swatch(rule));
-            row.AddChild(new Label { Text = RuleName(rule), VerticalAlignment = VAlignment.Center, StyleClasses = { "LabelSecondaryColor" } });
+            row.AddChild(new Label { Text = RuleName(rule), HorizontalExpand = true, VerticalAlignment = VAlignment.Center, StyleClasses = { "LabelSecondaryColor" } });
             LegendContainer.AddChild(row);
         }
     }
@@ -496,6 +527,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
         return new PanelContainer
         {
             MinSize = new Vector2(12, 12),
+            StyleClasses = { "WfNativeStyle" },
             VerticalAlignment = VAlignment.Center,
             Margin = new Thickness(0, 0, 4, 0),
             PanelOverride = new StyleBoxFlat { BackgroundColor = ShipAccessDoorMapControl.ColorFor(rule) },
@@ -506,6 +538,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
     private static void SetHint(RichTextLabel label, string text)
     {
         label.SetMessage(FormattedMessage.FromUnformatted(text), Muted);
+        label.ToolTip = text;
     }
 
     private Control EntryRow(WFShipAccessEntry entry, bool editable)
@@ -525,7 +558,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
         }
 
         if (!editable)
-            return row;
+            return WfAccessPersonRow(row);
 
         var key = entry.Key;
         var builder = new CheckBox
@@ -543,7 +576,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
         remove.AddStyleClass("ButtonSquare");
         remove.OnPressed += _ => RemoveRequested?.Invoke(key);
         row.AddChild(remove);
-        return row;
+        return WfAccessPersonRow(row);
     }
 
     private Control NearbyRow(NearbyPerson person)
@@ -567,7 +600,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
         var netEntity = _entManager.GetNetEntity(person.Uid);
         add.OnPressed += _ => AddRequested?.Invoke(netEntity);
         row.AddChild(add);
-        return row;
+        return WfAccessPersonRow(row);
     }
 
     private static BoxContainer Row()

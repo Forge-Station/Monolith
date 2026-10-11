@@ -166,6 +166,9 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         {
             _ftlAngle -= Angle.FromDegrees(15f) * args.Delta.Y; // Mono Edit: Subtract instead of add to preserve clockwise rotation when scrolling up. (positive angles are actually counter-clockwise)
             _ftlAngle = _ftlAngle.Reduced();
+            // WOLFGATE(Cockpit): rotating an FTL destination must not also scroll its MFD page.
+            if (WfCockpitControls)
+                args.Handle();
             return;
         }
 

@@ -1,7 +1,6 @@
 // Copyright Rane (elijahrane@gmail.com) 2025
 // All rights reserved. Relicensed under AGPL with permission
 
-using System.Linq;
 using Content.Shared._Mono.FireControl;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -15,9 +14,6 @@ public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
     [ViewVariables]
     private FireControlWindow? _window;
 
-    // Forge-Change: client-side cap mirrors server MaxWeapons.
-    private int _maxActiveWeapons = int.MaxValue;
-
     public FireControlConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
@@ -28,16 +24,7 @@ public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
         _window = this.CreateWindow<FireControlWindow>();
 
         _window.OnServerRefresh += OnRefreshServer;
-        // Forge-Change-Start: weapon preset UI callbacks.
-        _window.OnPresetNameChanged += OnPresetNameChanged;
-        _window.OnPresetSaveRequested += OnPresetSaveRequested;
-        // Forge-Change-End
-
-        _window.Radar.OnWeaponGridClick += weapon =>
-        {
-            if (_window.TryToggleWeaponFromRadar(weapon))
-                UpdateSelectedWeapons();
-        };
+        _window.CombatMessage += SendMessage; // WOLFGATE(CombatConsole): send group and flare commands through the console UI.
 
         _window.Radar.OnRadarClick += (coords) =>
         {
@@ -67,18 +54,6 @@ public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
         SendMessage(new FireControlConsoleRefreshServerMessage());
     }
 
-    // Forge-Change-Start
-    private void OnPresetNameChanged(int presetIndex, string name)
-    {
-        SendMessage(new FireControlConsoleSetPresetNameMessage(presetIndex, name));
-    }
-
-    private void OnPresetSaveRequested(int presetIndex, string name, List<GunneryWeaponPresetWeaponState> weapons)
-    {
-        SendMessage(new FireControlConsoleSavePresetMessage(presetIndex, name, weapons));
-    }
-    // Forge-Change-End
-
     private void UpdateSelectedWeapons()
     {
         if (_window?.Radar is not FireControlNavControl navControl)
@@ -107,13 +82,7 @@ public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
         }
 
         if (selected.Count > 0)
-        {
-            // Forge-Change: trim selection before sending fire message.
-            if (_maxActiveWeapons > 0 && selected.Count > _maxActiveWeapons)
-                selected = selected.Take(_maxActiveWeapons).ToList();
-
             SendMessage(new FireControlConsoleFireMessage(selected, coordinates));
-        }
     }
 
     private void SendCursorUpdateMessage(NetCoordinates coordinates)
@@ -128,14 +97,6 @@ public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
 
         if (state is not FireControlConsoleBoundInterfaceState castState)
             return;
-
-        _maxActiveWeapons = castState.MaxActiveWeapons;
-
-        // Forge-Change: feed the shield bar with the console's grid so it can resolve the local emitter.
-        EntityUid? grid = null;
-        if (EntMan.TryGetComponent<TransformComponent>(Owner, out var consoleXform))
-            grid = consoleXform.GridUid;
-        _window?.SetShuttle(grid);
 
         _window?.UpdateStatus(castState);
         if (_window?.Radar is FireControlNavControl navControl)

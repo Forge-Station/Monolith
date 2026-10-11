@@ -158,7 +158,7 @@ public partial class BaseShuttleControl : MapGridControl
 
         var minDistance = MathF.Pow(EquatorialMultiplier, EquatorialMultiplier * 1.5f);
         var maxDistance = MathF.Pow(2f, EquatorialMultiplier * 6f);
-        var cornerDistance = MathF.Sqrt(WorldRange * WorldRange + WorldRange * WorldRange);
+        var cornerDistance = WfFitInstrument ? WorldRangeVector.Length() : MathF.Sqrt(WorldRange * WorldRange + WorldRange * WorldRange); // WOLFGATE(CombatConsole): fill rectangular plots with range rings.
 
         var origin = MidPointVector; // Mono
 
@@ -182,7 +182,7 @@ public partial class BaseShuttleControl : MapGridControl
         {
             Angle angle = (Math.PI / gridLinesRadial) * i;
             // TODO: Handle distance properly.
-            var aExtent = angle.ToVec() * ScaledMinimapRadius * 1.42f;
+            var aExtent = angle.ToVec() * (WfFitInstrument ? WorldRangeVector.Length() * MinimapScale : ScaledMinimapRadius * 1.42f); // WOLFGATE(CombatConsole): extend plot axes to the viewport corners.
             var lineColor = Color.MediumSpringGreen.WithAlpha(0.02f);
             handle.DrawLine(origin - aExtent, origin + aExtent, lineColor);
         }
@@ -192,7 +192,7 @@ public partial class BaseShuttleControl : MapGridControl
     protected void DrawNorthLine(DrawingHandleScreen handle, Angle angle)
     {
         var origin = MidPointVector;
-        var aExtent = (angle - Math.Tau / 4).ToVec() * ScaledMinimapRadius * 1.42f;
+        var aExtent = (angle - Math.Tau / 4).ToVec() * (WfFitInstrument ? WorldRangeVector.Length() * MinimapScale : ScaledMinimapRadius * 1.42f); // WOLFGATE(CombatConsole): extend the north line across the rectangular viewport.
         var lineColor = Color.Red.WithAlpha(0.1f);
         handle.DrawLine(origin, origin + aExtent, lineColor);
     }

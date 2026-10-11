@@ -20,6 +20,7 @@ public partial class ShuttleNavControl
     // Keep the server's grid-relative origin even while the user pans onto map coordinates.
     private EntityCoordinates? _wfRadarOrigin;
     private EntityUid? _wfTerrainMap;
+    private Button? _wfTerrainButton;
     private TimeSpan _wfTerrainRefresh;
     private readonly Vector2[][] _wfTerrainVertices = new Vector2[12][];
     private readonly Dictionary<int, int> _wfTerrainColours = new();
@@ -35,7 +36,7 @@ public partial class ShuttleNavControl
 
     private void AddWfTerrainButton(LayoutContainer parent)
     {
-        var button = new Button
+        var button = _wfTerrainButton = new Button
         {
             Text = Loc.GetString(ShowPlanetTerrain ? "wf-radar-terrain-on" : "wf-radar-terrain-off"),
             ToolTip = Loc.GetString("wf-radar-terrain-tooltip"),

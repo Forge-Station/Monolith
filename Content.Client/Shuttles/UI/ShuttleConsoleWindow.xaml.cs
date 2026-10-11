@@ -91,10 +91,16 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         NfInitialize(); // Frontier Initialization for the ShuttleConsoleWindow
         WfInitialize(); // WOLFGATE(Shuttles)
         WfAccessInitialize(); // WOLFGATE(ShipAccess)
+        WfShieldInitialize(); // WOLFGATE(ShipShields): add the shield allocation tab.
+        WfInitializeInstruments(); // WOLFGATE(CombatConsole): compose the flight deck instrument panels.
     }
 
     private void ClearModes(ShuttleConsoleMode mode)
     {
+        // WOLFGATE(ShipShields) START: hide shield allocation outside its helm tab.
+        if (mode != ShuttleConsoleMode.Shields)
+            _shieldScreen.Visible = false;
+        // WOLFGATE END
         if (mode != ShuttleConsoleMode.Nav)
         {
             NavContainer.Visible = false;
@@ -159,6 +165,11 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
     {
         switch (mode)
         {
+            // WOLFGATE(ShipShields) START: expose allocation controls at the helm.
+            case ShuttleConsoleMode.Shields:
+                _shieldScreen.Visible = true;
+                break;
+            // WOLFGATE END
             case ShuttleConsoleMode.Nav:
                 NavContainer.Visible = true;
                 break;
@@ -201,22 +212,25 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         Access, // WOLFGATE(ShipAccess)
         Map,
         Dock,
+        Shields, // WOLFGATE(ShipShields): shield allocation mode.
     }
 
     public void UpdateState(EntityUid owner, ShuttleBoundUserInterfaceState cState)
     {
+        WfUpdateCockpitAutopilot(cState.CockpitAutopilotActive); // WOLFGATE(Cockpit): consume authoritative autopilot status on every page.
         var coordinates = _entManager.GetCoordinates(cState.NavState.Coordinates);
         NavContainer.SetShuttle(coordinates?.EntityId);
         NavContainer.SetConsole(owner);
         MapContainer.SetShuttle(coordinates?.EntityId);
         MapContainer.SetConsole(owner);
-        // WOLFGATE(Shuttles) START: ship screen, collision and tractor state
+        // WOLFGATE(Shuttles) START: ship screen and collision state
         ShipContainer.SetShuttle(coordinates?.EntityId);
         ShipContainer.SetConsole(owner);
         CollisionBanner.SetShuttle(coordinates?.EntityId);
-        WfUpdateTractorCapture(cState.TractorSources);
         // WOLFGATE END
+        WfUpdateTractorCapture(cState.TractorSources); // WOLFGATE(TractorBeam)
         WfAccessUpdateState(coordinates?.EntityId, owner); // WOLFGATE(ShipAccess)
+        WfShieldUpdateState(cState.ShieldShunt, cState.NavState.Angle); // WOLFGATE(ShipShields): share authoritative allocation across helms.
 
         NavContainer.UpdateState(cState.NavState);
         MapContainer.UpdateState(cState.MapState);

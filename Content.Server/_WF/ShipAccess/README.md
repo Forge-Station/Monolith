@@ -151,6 +151,7 @@ and `ShipAccessKeypadWindow` (the keypad). The `WFShipLocked` access level is in
 - [`Content.Client/_WF/ShipAccess/ShuttleConsoleBoundUserInterface.ShipAccess.cs`](../../../Content.Client/_WF/ShipAccess/ShuttleConsoleBoundUserInterface.ShipAccess.cs)
 - [`Content.Client/_WF/ShipAccess/ShuttleConsoleWindow.ShipAccess.cs`](../../../Content.Client/_WF/ShipAccess/ShuttleConsoleWindow.ShipAccess.cs)
 - [`Content.Client/_WF/ShipAccess/WFShipAccessClientSystem.cs`](../../../Content.Client/_WF/ShipAccess/WFShipAccessClientSystem.cs)
+- [`Content.Client/_WF/ShipAccess/WFWrappedLabel.cs`](../../../Content.Client/_WF/ShipAccess/WFWrappedLabel.cs)
 
 ### Integration tests
 

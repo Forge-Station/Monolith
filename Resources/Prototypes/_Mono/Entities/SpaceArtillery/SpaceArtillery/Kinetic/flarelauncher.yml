@@ -17,6 +17,8 @@
   - type: AmmoCounter
   - type: WirelessNetworkConnection
     range: 700
+  # WOLFGATE(CombatConsole): identify launchers for shared automatic countermeasure control.
+  - type: WFFlareLauncher
   - type: GunSignalControl
   - type: Gun
     fireRate: 3

@@ -55,7 +55,7 @@
                             </BoxContainer>
                         </GridContainer>
                     </PanelContainer>
-                    <Label Name="ReadOnlyLabel"
+                    <access:WFWrappedLabel Name="ReadOnlyLabel"
                            Text="{Loc 'ship-access-read-only'}"
                            StyleClasses="LabelSecondaryColor"
                            HorizontalAlignment="Center"
@@ -72,13 +72,13 @@
                             <Button Name="ShipCodeClearButton" Text="{Loc 'ship-access-code-clear'}" StyleClasses="ButtonSquare" MinWidth="60"/>
                         </BoxContainer>
                         <RichTextLabel Name="ShipCodeHint" HorizontalExpand="True" Margin="0 2 0 0"/>
-                        <Label Name="CodeAlertLabel" Text="" FontColorOverride="#ff8038" HorizontalAlignment="Center" Margin="0 4 0 0" Visible="False"/>
+                        <access:WFWrappedLabel Name="CodeAlertLabel" Text="" FontColorOverride="#ff8038" HorizontalAlignment="Center" Margin="0 4 0 0" Visible="False"/>
                     </BoxContainer>
                     <controls:StripeBack MinSize="48 48" Margin="0 8 0 0">
                         <Label Text="{Loc 'ship-access-allow-list'}" VerticalExpand="True" HorizontalAlignment="Center"/>
                     </controls:StripeBack>
                     <BoxContainer Name="AllowListContainer" Orientation="Vertical" Margin="8 4 8 4" SeparationOverride="2"/>
-                    <Label Name="AllowListEmptyLabel"
+                    <access:WFWrappedLabel Name="AllowListEmptyLabel"
                            Text="{Loc 'ship-access-allow-list-empty'}"
                            StyleClasses="LabelSecondaryColor"
                            HorizontalAlignment="Center"
@@ -86,7 +86,7 @@
                     <BoxContainer Name="NearbyBox" Orientation="Vertical" Visible="False">
                         <Label Text="{Loc 'ship-access-nearby'}" FontColorOverride="#00ff2a" Margin="8 6 8 2"/>
                         <BoxContainer Name="NearbyContainer" Orientation="Vertical" Margin="8 0 8 4" SeparationOverride="2"/>
-                        <Label Name="NearbyEmptyLabel"
+                        <access:WFWrappedLabel Name="NearbyEmptyLabel"
                                Text="{Loc 'ship-access-nearby-empty'}"
                                StyleClasses="LabelSecondaryColor"
                                HorizontalAlignment="Center"
@@ -95,7 +95,7 @@
                     <controls:StripeBack MinSize="48 48" Margin="0 8 0 0">
                         <Label Text="{Loc 'ship-access-door'}" VerticalExpand="True" HorizontalAlignment="Center"/>
                     </controls:StripeBack>
-                    <Label Name="DoorNoneLabel"
+                    <access:WFWrappedLabel Name="DoorNoneLabel"
                            Text="{Loc 'ship-access-door-none'}"
                            StyleClasses="LabelSecondaryColor"
                            HorizontalAlignment="Center"
@@ -118,7 +118,7 @@
                             <BoxContainer Name="DoorPlayersBox" Orientation="Vertical" Visible="False">
                                 <Label Text="{Loc 'ship-access-door-players'}" FontColorOverride="#00ff2a" Margin="0 4 0 2"/>
                                 <BoxContainer Name="DoorPlayersContainer" Orientation="Vertical" SeparationOverride="2"/>
-                                <Label Name="DoorPlayersEmptyLabel"
+                                <access:WFWrappedLabel Name="DoorPlayersEmptyLabel"
                                        Text="{Loc 'ship-access-door-players-empty'}"
                                        StyleClasses="LabelSecondaryColor"
                                        HorizontalAlignment="Center"

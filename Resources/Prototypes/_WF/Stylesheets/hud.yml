@@ -1,0 +1,41 @@
+# Wolfgate HUD theme, paired with the Wolfgate (Futurist) UI skin.
+- type: hudTheme
+  id: WFTheme
+  name: ui-options-hud-theme-wolfgate
+  path: /Textures/_WF/Stylesheets/Interface/Wolfgate/
+  order: -1
+
+- type: uiTheme
+  id: WFTheme
+  path: /Textures/_WF/Stylesheets/Interface/Wolfgate/
+  colors:
+    whiteText: "#E6EDF3"
+    slotSelectedGold: "#46D7FF"
+    slotColor: "#0E141B"
+    slotOutline: "#2A3B4D"
+    slotText: "#8A9BAB"
+    nanoGold: "#46D7FF"
+    goodGreenFore: "#3CE39B"
+    concerningOrangeFore: "#FFB547"
+    dangerousRedFore: "#FF4D5E"
+
+# Aphelion cassette-futurism theme, paired with the WolfgateRetro UI skin. Listed first and used as the client default.
+- type: hudTheme
+  id: WFRetroTheme
+  name: ui-options-hud-theme-wolfgate-retro
+  path: /Textures/_WF/Stylesheets/Interface/WolfgateRetro/
+  order: -2
+
+- type: uiTheme
+  id: WFRetroTheme
+  path: /Textures/_WF/Stylesheets/Interface/WolfgateRetro/
+  colors:
+    whiteText: "#EDE6D2"
+    slotSelectedGold: "#F2A54A"
+    slotColor: "#1C1B18"
+    slotOutline: "#4B4739"
+    slotText: "#A39E8C"
+    nanoGold: "#F2A54A"
+    goodGreenFore: "#A6C85A"
+    concerningOrangeFore: "#F2C14E"
+    dangerousRedFore: "#E0645A"

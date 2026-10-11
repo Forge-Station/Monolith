@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client.Hands.Systems;
+using Content.Client._WF.Cockpit; // WOLFGATE(Cockpit)
 using Content.Shared._RMC14.CombatMode; // Mono
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Client.GameObjects;
@@ -63,6 +64,10 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
+        // WOLFGATE(Cockpit): character combat indicators must not cover the ship's aiming reticle.
+        if (IoCManager.Resolve<IUserInterfaceManager>().GetUIController<WFCockpitUIController>().Active)
+            return false;
+
         if (!_combat.IsInCombatMode())
             return false;
 

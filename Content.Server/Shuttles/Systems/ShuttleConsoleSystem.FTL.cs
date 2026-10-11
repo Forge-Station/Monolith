@@ -2,6 +2,7 @@ using Content.Server.Power.EntitySystems; // Mono
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Shared._Mono.Ships;
+using Content.Shared._WF.Shuttles; // WOLFGATE(Shuttles)
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Events;
@@ -131,7 +132,7 @@ public sealed partial class ShuttleConsoleSystem
         var angle = args.Angle.Reduced();
         var targetCoordinates = new EntityCoordinates(targetXform.MapUid!.Value, _transform.GetWorldPosition(targetXform));
 
-        ConsoleFTL(ent, targetCoordinates, angle, targetXform.MapID);
+        ConsoleFTL(ent, targetCoordinates, angle, targetXform.MapID, args.Actor); // WOLFGATE(Shuttles): the no-drive refusal goes only to the sender
     }
 
     private void OnPositionFTLMessage(Entity<ShuttleConsoleComponent> entity, ref ShuttleConsoleFTLPositionMessage args)
@@ -146,13 +147,13 @@ public sealed partial class ShuttleConsoleSystem
 
         var targetCoordinates = new EntityCoordinates(mapUid, args.Coordinates.Position);
         var angle = args.Angle.Reduced();
-        ConsoleFTL(entity, targetCoordinates, angle, args.Coordinates.MapId);
+        ConsoleFTL(entity, targetCoordinates, angle, args.Coordinates.MapId, args.Actor); // WOLFGATE(Shuttles): the no-drive refusal goes only to the sender
     }
 
     /// <summary>
     /// Handles shuttle console FTLs.
     /// </summary>
-    private void ConsoleFTL(Entity<ShuttleConsoleComponent> ent, EntityCoordinates targetCoordinates, Angle targetAngle, MapId targetMap)
+    private void ConsoleFTL(Entity<ShuttleConsoleComponent> ent, EntityCoordinates targetCoordinates, Angle targetAngle, MapId targetMap, EntityUid wfActor) // WOLFGATE(Shuttles): the no-drive refusal goes only to the sender
     {
         var consoleUid = GetDroneConsole(ent.Owner);
 
@@ -179,6 +180,17 @@ public sealed partial class ShuttleConsoleSystem
         {
             return;
         }
+
+        // WOLFGATE(Shuttles) START: a jump needs a powered drive; this is the test the helm's FTL page reports
+        var wfDrive = _shuttle.GetFtlDriveStatus(shuttleUid.Value);
+        if (wfDrive != WFFtlDriveStatus.Ready)
+        {
+            _popup.PopupEntity(Loc.GetString(wfDrive == WFFtlDriveStatus.Missing
+                ? "shuttle-console-no-powered-ftl-drive"
+                : "shuttle-console-ftl-drive-unpowered"), ent.Owner, wfActor, PopupType.Medium);
+            return;
+        }
+        // WOLFGATE END
 
         targetCoordinates = _shuttle.ClampCoordinatesToFTLRange(shuttleUid.Value, targetCoordinates);
 

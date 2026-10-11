@@ -339,7 +339,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         Reset
     }
 
-    public sealed class RadarModeButton : BaseButton
+    public sealed partial class RadarModeButton : BaseButton // WOLFGATE(CombatConsole): theme the original radar mode controls.
     {
         private readonly RadarModeButtonIcon _icon;
 
@@ -355,6 +355,10 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
         protected override void Draw(DrawingHandleScreen handle)
         {
+            // WOLFGATE(CombatConsole) START: instrument scopes retain these buttons with the selected console palette.
+            if (WfDrawInstrument(handle))
+                return;
+            // WOLFGATE END
             var alpha = DrawMode switch
             {
                 DrawModeEnum.Pressed => 0.62f,
@@ -466,6 +470,10 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     {
         base.KeyBindDown(args);
 
+        // WOLFGATE(Cockpit): a cockpit aim handler owns its consumed click through release.
+        if (args.Handled)
+            return;
+
         if (args.Function != EngineKeyFunctions.UIClick)
             return;
 
@@ -477,6 +485,10 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
         base.KeyBindUp(args);
+
+        // WOLFGATE(Cockpit): a cockpit aim handler owns its consumed click through release.
+        if (args.Handled)
+            return;
 
         if (args.Function != EngineKeyFunctions.UIClick)
             return;
@@ -795,7 +807,10 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         var shuttleToView = Matrix3x2.CreateScale(new Vector2(MinimapScale, -MinimapScale)) * Matrix3x2.CreateTranslation(MidPointVector);
         var worldToView = worldToShuttle * shuttleToView;
 
-        var viewBounds = new Box2Rotated(new Box2(-WorldRange, -WorldRange, WorldRange, WorldRange).Translated(mapPos.Position), worldRot, mapPos.Position);
+        // WOLFGATE(CombatConsole) START: retain hulls visible beyond the shorter edge of a rectangular plot.
+        // var viewBounds = new Box2Rotated(new Box2(-WorldRange, -WorldRange, WorldRange, WorldRange).Translated(mapPos.Position), worldRot, mapPos.Position);
+        var viewBounds = new Box2Rotated(new Box2(-WorldRangeVector, WorldRangeVector).Translated(mapPos.Position), worldRot, mapPos.Position);
+        // WOLFGATE END
         var viewAABB = viewBounds.CalcBoundingBox();
 
         foreach (var grid in _grids)

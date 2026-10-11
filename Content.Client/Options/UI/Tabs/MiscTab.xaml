@@ -9,6 +9,7 @@
                        StyleClasses="LabelKeyText"/>
                 <ui:OptionDropDown Name="DropDownHudTheme" Title="{Loc 'ui-options-hud-theme'}" />
                 <ui:OptionDropDown Name="DropDownHudLayout" Title="{Loc 'ui-options-hud-layout'}" />
+                <CheckBox Name="CockpitAutoEnterCheckBox" Text="{Loc 'ui-options-wf-cockpit-auto-enter'}" /> <!-- WOLFGATE(Cockpit): open the cockpit view automatically -->
                 <Label Text="{Loc 'ui-options-general-discord'}"
                        StyleClasses="LabelKeyText"/>
                 <CheckBox Name="DiscordRich" Text="{Loc 'ui-options-discordrich'}" />

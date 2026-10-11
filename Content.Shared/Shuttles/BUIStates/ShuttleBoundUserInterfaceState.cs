@@ -6,6 +6,10 @@ namespace Content.Shared.Shuttles.BUIStates;
 [Serializable, NetSerializable]
 public sealed class ShuttleBoundUserInterfaceState : BoundUserInterfaceState
 {
+    // WOLFGATE(Cockpit) START: include confirmed autopilot activity in the initial helm state.
+    /// <summary>Null means this console has no available autopilot.</summary>
+    public bool? CockpitAutopilotActive;
+    // WOLFGATE END
     public NavInterfaceState NavState;
     public ShuttleMapInterfaceState MapState;
     public DockingInterfaceState DockState;

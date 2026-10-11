@@ -5,11 +5,11 @@
 # CorvaxForge
 
 - type: vessel
-  id: akrtur
+  id: arktur
   parent: BaseVessel
   name: G3 «Арктур»
   description: Крупный ракетоноситель верфи G3. Оснащён четырьмя ракетными установками "Паладин" и автопушечным вооружением. Имеет усиленную броню на носу, но уязвим сзади.
-  price: 1 #sell 210
+  price: 365000 #sell 304(85% по верфи)
   category: Large
   group: Shipyard
   access: Mercenary
@@ -23,7 +23,7 @@
   - AME
 
 - type: gameMap
-  id: akrtur
+  id: arktur
   mapName: 'G3 «Арктур»'
   mapPath: /SharedMaps/_Forge/Shuttles/Mercenary/arktur.yml
   minPlayers: 0

@@ -40,4 +40,4 @@
     #    - Defibrillator # Goobstation
     #    - GunApplySolution # Goobstation - Syndicate dart gun
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.75  # Forge-Change

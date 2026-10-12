@@ -1,5 +1,5 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Tabletop
 {
@@ -14,7 +14,7 @@ namespace Content.Server.Tabletop
         /// <param name="entityManager">Dependency that can be used for spawning entities.</param>
         public abstract void SetupTabletop(TabletopSession session, IEntityManager entityManager);
 
-        [DataField("boardPrototype", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("boardPrototype", customTypeSerializer:typeof(ProtoId<EntityPrototype>))]
         public string BoardPrototype = default!;
     }
 }

@@ -99,6 +99,12 @@ public sealed partial class StealthComponent : Component
     /// </summary>
     [DataField("examinedDesc")]
     public string ExaminedDesc = "stealth-visual-effect";
+
+    /// <summary>
+    /// The frequency of the shimmer effect. 0 disables shimmering, leaving only a static distortion.
+    /// </summary>
+    [DataField]
+    public float ShimmerFrequency = 1f;
 }
 
 [Serializable, NetSerializable]

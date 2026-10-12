@@ -1,7 +1,6 @@
 using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 using System.Linq;
 using Content.Shared.Inventory;
 
@@ -14,7 +13,7 @@ namespace Content.Server.Jobs
     [DataDefinition]
     public sealed partial class GiveItemSpecial : JobSpecial
     {
-        [DataField("prototype", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<EntityPrototype>))]
+        [DataField("prototype", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public HashSet<String> Prototype { get; private set; } = new();
 
         public override void AfterEquip(EntityUid mob)

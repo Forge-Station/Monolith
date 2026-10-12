@@ -6,6 +6,7 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 
 namespace Content.Client.Administration.UI.Tabs.AdminbusTab
@@ -14,6 +15,8 @@ namespace Content.Client.Administration.UI.Tabs.AdminbusTab
     [UsedImplicitly]
     public sealed partial class LoadBlueprintsWindow : DefaultWindow
     {
+        [Dependency] private IEntityManager _entManager = default!;
+
         public LoadBlueprintsWindow()
         {
             RobustXamlLoader.Load(this);
@@ -21,7 +24,7 @@ namespace Content.Client.Administration.UI.Tabs.AdminbusTab
 
         protected override void EnteredTree()
         {
-            var mapManager = IoCManager.Resolve<IMapManager>();
+            var mapManager = _entManager.System<SharedMapSystem>();
 
             foreach (var mapId in mapManager.GetAllMapIds())
             {

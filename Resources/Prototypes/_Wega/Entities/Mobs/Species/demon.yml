@@ -78,7 +78,7 @@
         Piercing: 3
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: ForgeDemon #Forge-Change
+    damageModifierSet: Demon
   - type: Bloodstream
     bloodMaxVolume: 200
     bloodReagent: DemonBlood
@@ -97,8 +97,8 @@
     - Kelael
     - TauCetiBasic
   - type: Temperature
-    heatDamageThreshold: 343 #~70
-    coldDamageThreshold: 255 #~-18
+    heatDamageThreshold: 343
+    coldDamageThreshold: 255
     currentTemperature: 310.15
     specificHeat: 46
     coldDamage:

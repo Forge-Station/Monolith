@@ -1,7 +1,7 @@
 using Content.Server.Cargo.Systems;
 using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Cargo.Components;
 
@@ -9,7 +9,7 @@ namespace Content.Server.Cargo.Components;
 [Access(typeof(CargoSystem))]
 public sealed partial class CargoPalletConsoleComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite), DataField("cashType", customTypeSerializer:typeof(PrototypeIdSerializer<StackPrototype>))]
+    [ViewVariables(VVAccess.ReadWrite), DataField("cashType", customTypeSerializer:typeof(ProtoId<StackPrototype>))]
     public string CashType = "Credit";
 
     // Frontier

@@ -1,3 +1,13 @@
+research-technology-forge-turret-command = Turret command
+research-technology-forge-turret-adventurer = Adventurer turrets
+research-technology-forge-turret-mercenary = Mercenary turret
+research-technology-forge-turret-nt = NanoTrasen turrets
+research-technology-forge-turret-cc = Colossus turrets
+research-technology-forge-turret-empire = Imperial turrets
+research-technology-forge-turret-tsf = TSF turrets
+research-technology-forge-turret-ussp = USSP turrets
+research-technology-forge-turret-pdv = PDV turrets
+research-technology-forge-turret-vg = Viper Group turrets
 forge-research-technology-shipweapon-entry = Entry Ship Weapons
 forge-research-technology-shipweapon-midline = Midline Ship Weapons
 forge-research-technology-shipweapon-rac30 = RAC-30 Autocannon

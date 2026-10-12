@@ -1,5 +1,5 @@
 using Content.Shared.Construction.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._NF.Power.Components;
 
@@ -9,7 +9,7 @@ public sealed partial class UpgradeBatteryComponent : Component
     /// <summary>
     ///     The machine part that affects the power capacity.
     /// </summary>
-    [DataField("machinePartPowerCapacity", customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
+    [DataField("machinePartPowerCapacity", customTypeSerializer: typeof(ProtoId<MachinePartPrototype>))]
     public string MachinePartPowerCapacity = "PowerCell";
 
     /// <summary>

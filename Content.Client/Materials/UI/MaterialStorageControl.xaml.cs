@@ -51,7 +51,10 @@ public sealed partial class MaterialStorageControl : ScrollContainer
         var canEject = materialStorage.CanEjectStoredMaterials;
         var mats = _materialStorage.GetStoredMaterials((_owner.Value, materialStorage));
 
-        if (_currentMaterials.Equals(mats))
+        // Content equality — Dictionary.Equals is reference equality and would thrash the UI every frame.
+        // Forge-Change: avoid rebuilding MaterialDisplay rows every FrameUpdate.
+        if (_currentMaterials.Count == mats.Count
+            && _currentMaterials.All(kv => mats.TryGetValue(kv.Key, out var amount) && amount == kv.Value))
             return;
 
         var missing = new List<string>();

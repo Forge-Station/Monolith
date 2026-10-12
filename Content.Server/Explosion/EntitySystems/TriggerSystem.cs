@@ -41,6 +41,8 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
 using Robust.Shared.Map.Components;
+using Content.Server._Forge.ReviveReward; // Forge-change: medical update is real??
+using Content.Shared.Humanoid.Prototypes;
 
 namespace Content.Server.Explosion.EntitySystems
 {
@@ -262,8 +264,11 @@ namespace Content.Server.Explosion.EntitySystems
 
             // Frontier: Gets species of the implant user
             var speciesText = $"";
-            if (TryComp<HumanoidAppearanceComponent>(implanted.ImplantedEntity, out var species))
-                speciesText = $" ({species.Species})";
+            if (TryComp<HumanoidAppearanceComponent>(implanted.ImplantedEntity, out var species) &&
+                _prototypeManager.TryIndex(species.Species, out SpeciesPrototype? speciesProto))
+            {
+                speciesText = $" ({Loc.GetString(speciesProto.Name)})";
+            }
 
             var critMessage = Loc.GetString(component.CritMessage, ("user", implanted.ImplantedEntity.Value), ("specie", speciesText), ("grid", gridText), ("position", posText));
             var reviveMessage = Loc.GetString(component.ReviveMessage, ("user", implanted.ImplantedEntity.Value), ("specie", speciesText), ("grid", gridText), ("position", posText)); // Mono
@@ -279,16 +284,25 @@ namespace Content.Server.Explosion.EntitySystems
                 switch (mobstate.CurrentState)
                 {
                     case MobState.Critical:
-                    {
-                        var message = mobstate.PreviousState == MobState.Dead ? reviveMessage : critMessage;
-                        _radioSystem.SendRadioMessage(uid, message, radioChannel, uid, null, language);
-                        break;
-                    }
+                        {
+                            var message = mobstate.PreviousState == MobState.Dead ? reviveMessage : critMessage;
+                            _radioSystem.SendRadioMessage(uid, message, radioChannel, uid, null, language);
+                            break;
+                        }
                     case MobState.Dead:
-                    {
-                        _radioSystem.SendRadioMessage(uid, deathMessage, radioChannel, uid, null, language);
-                        break;
-                    }
+                        {
+                            _radioSystem.SendRadioMessage(uid, deathMessage, radioChannel, uid, null, language);
+
+                            // Forge-change-start
+                            if (TryComp<ReviveRewardComponent>(uid, out var reviveReward))
+                            {
+                                reviveReward.Death = true;
+                                reviveReward.DeathPos = pos.Position;
+                            }
+                            // Forge-change-end
+
+                            break;
+                        }
                 }
             }
 

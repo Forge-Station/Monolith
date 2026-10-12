@@ -3,13 +3,13 @@
   name: loadout-group-weapon
   minLimit: 1
   loadouts:
-  - FactionFrostLoadout
+  # - FactionFrostLoadout # Forge-change delete additional frost
   - FactionDrozdLoadout
   - FactionRiversongLoadout
   - FactionDragonfangLoadout
   - FactionBanditLoadout
   fallbacks:
-  - FactionFrostLoadout
+  - FactionDrozdLoadout # Forge-change fallback to drozd
 
 - type: loadoutGroup
   id: TsfmcFirearmCommand

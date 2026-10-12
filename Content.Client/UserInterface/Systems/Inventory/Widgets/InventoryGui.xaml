@@ -1,4 +1,5 @@
-﻿<!-- Forge-Change: clothing grid sits above the backpack toggle so opening I no longer covers the back slot. -->
+﻿<!-- Forge-Change: left-aligned overlay so the clothing grid expands up from the
+     toggle on one baseline (no gap). Stays on the left so opening I does not cover the back slot. -->
 <widgets:InventoryGui
     xmlns="https://spacestation14.io"
     xmlns:inventory="clr-namespace:Content.Client.UserInterface.Systems.Inventory.Controls"
@@ -7,25 +8,28 @@
     Name="InventoryInterface"
     VerticalExpand="True"
     VerticalAlignment="Bottom"
-    Orientation="Vertical"
+    Orientation="Horizontal"
     HorizontalAlignment="Left">
-    <inventory:ItemSlotButtonContainer
-        Name="InventoryHotbar"
-        Access="Public"
-        Visible="False"
-        MaxColumns="3"
-        SlotGroup="Default"
-        ExpandBackwards="True"
-        VerticalExpand="False"
-        HorizontalAlignment="Left"
-    />
-    <!-- Needs to default to invisible because if we attach to a non-slots entity this will never get unset -->
-    <controls:SlotButton
-        Name="InventoryButton"
-        Access="Public"
-        Visible="False"
-        HorizontalAlignment="Left"
-        HorizontalExpand="False"
-        VerticalExpand="False"
-        ButtonTexturePath="Slots/toggle"/>
+    <Control HorizontalAlignment="Left">
+        <!-- Needs to default to invisible because if we attach to a non-slots entity this will never get unset -->
+        <controls:SlotButton
+            Name="InventoryButton"
+            Access="Public"
+            Visible="False"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            HorizontalExpand="False"
+            VerticalExpand="False"
+            ButtonTexturePath="Slots/toggle"/>
+        <inventory:ItemSlotButtonContainer
+            Name="InventoryHotbar"
+            Access="Public"
+            Visible="False"
+            MaxColumns="3"
+            SlotGroup="Default"
+            ExpandBackwards="True"
+            VerticalExpand="True"
+            HorizontalAlignment="Left"
+        />
+    </Control>
 </widgets:InventoryGui>

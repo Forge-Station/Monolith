@@ -65,3 +65,5 @@
   #   department: Civilian    # Forge-Change-Del
   - type: Wires
     layoutId: AirlockSecurity
+  - type: Airlock # Forge-change
+    openUnlitVisible: false

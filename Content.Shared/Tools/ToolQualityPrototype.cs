@@ -1,5 +1,5 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Tools
@@ -33,7 +33,7 @@ namespace Content.Shared.Tools
         /// <summary>
         ///     The default entity prototype for this tool type.
         /// </summary>
-        [DataField("spawn", required:true, customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("spawn", required:true, customTypeSerializer:typeof(ProtoId<EntityPrototype>))]
         public string Spawn { get; private set; } = string.Empty;
     }
 }

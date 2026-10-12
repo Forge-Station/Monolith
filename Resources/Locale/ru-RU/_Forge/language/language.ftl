@@ -153,6 +153,9 @@ language-ValyrianStandard-description =
     Редко используется за пределами родных миров и в современности вытеснен.
     Его носители - те, кто стремится сохранить традиции и верования древних народов до колониальной эпохи.
 
+language-Rumbling-name = Рокот
+language-Rumbling-description = Гррав!
+
 
 
 # == Animal ==

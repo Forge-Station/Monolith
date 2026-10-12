@@ -38,9 +38,9 @@ public sealed partial class TippyUI : UIWidget
             TextureScale = visuals.BackgroundScale,
             Mode = backgroundImageMode,
             PatchMarginLeft = backgroundPatchMargin.Left,
-            PatchMarginBottom = backgroundPatchMargin.Bottom,
+            PatchMarginTop = backgroundPatchMargin.Top,
             PatchMarginRight = backgroundPatchMargin.Right,
-            PatchMarginTop = backgroundPatchMargin.Top
+            PatchMarginBottom = backgroundPatchMargin.Bottom
         };
     }
 

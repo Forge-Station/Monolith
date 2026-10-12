@@ -242,6 +242,92 @@
     tags:
     - MachineBoard3x3
 
+#region Cloaking
+- type: entity
+  id: MachineCloakingCDMSCircuitboard
+  parent: BaseMachineCircuitboard
+  name: CDM-S "Stick" board
+  description: CDM-S "Stick" board
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: CloakingDeviceStick
+    requirements:
+      Capacitor: 4
+      MatterBin: 2
+      Manipulator: 4
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 3
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Steel: 10
+      Glass: 10
+      Plasteel: 10
+      Plasma: 30
+      UraniumFissile: 1
+
+- type: entity
+  id: MachineCloakingChameleonCircuitboard
+  parent: BaseMachineCircuitboard
+  name: CDM-A "Chameleon" board
+  description: CDM-A "Chameleon" board
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: CloakingDeviceChameleon
+    minimumStockPartRating: 4
+    requirements:
+      Capacitor: 4
+      MatterBin: 2
+      Manipulator: 4
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 6
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Steel: 17
+      Glass: 17
+      Plasteel: 28
+      Plasma: 42
+      Gold: 7
+      Silver: 7
+      UraniumFissile: 2
+
+- type: entity
+  id: MachineCloakingWeepingAngelCircuitboard
+  parent: BaseMachineCircuitboard
+  name: ADSCDM "Weeping Angel" board
+  description: ADSCDM "Weeping Angel" board
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: CloakingDeviceWeepingAngel
+    frameSize: 2x2
+    minimumStockPartRating: 6
+    requirements:
+      Capacitor: 8
+      MatterBin: 4
+      Manipulator: 4
+    componentRequirements:
+      AmeFuelContainer:
+        amount: 12
+        defaultPrototype: AmeJar
+    stackRequirements:
+      Steel: 40
+      Glass: 40
+      Plasteel: 66
+      Plasma: 78
+      Gold: 20
+      Silver: 20
+      UraniumFissile: 4
+  - type: Tag
+    tags:
+    - MachineBoard2x2
+
 #region BsBoarding
 - type: entity
   parent: BaseComputerCircuitboard

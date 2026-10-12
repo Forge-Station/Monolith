@@ -47,7 +47,6 @@ public abstract partial class SharedDoorSystem : EntitySystem
     [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
 
 
-    [ValidatePrototypeId<TagPrototype>]
     public const string DoorBumpTag = "DoorBumpOpener";
 
     /// <summary>

@@ -94,7 +94,7 @@
 - type: listing
   id: ContractorUplinkAsmg
   name: АСПТ
-  description: Разобранная и упакованная Автономная Сторожевая Пулеметная Турель (АСПТ). ВНИМАНИЕ! Разобранная турель будет враждебной к любому, кто не находился рядом (в пределах 3 м) после распаковки!
+  description: Разобранная и упакованная Автономная Сторожевая Пулеметная Турель (АСПТ). После установки слушается консоли турелей на этом гриде.
   productEntity: WeaponCaseHeavyAsmgtExpeditions
   discountCategory: usualDiscounts
   discountDownTo:

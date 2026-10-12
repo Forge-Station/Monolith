@@ -1,6 +1,6 @@
 using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.EntityEffects.Effects;
 
@@ -10,7 +10,7 @@ public sealed partial class CreateEntityReactionEffect : EntityEffect
     /// <summary>
     ///     What entity to create.
     /// </summary>
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField(required: true, customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string Entity = default!;
 
     /// <summary>

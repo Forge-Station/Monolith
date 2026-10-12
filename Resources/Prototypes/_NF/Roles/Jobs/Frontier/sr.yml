@@ -29,6 +29,8 @@
   canBeAntag: false
   access:
   - NtSecApartment
+  - TurretCommandNT # Forge-Change
+  - TurretCommandNTShuttle # Forge-Change
   accessGroups:
   - AllAccessSR # Forge-Change
   special:

@@ -1,7 +1,7 @@
 using Content.Shared.Alert;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Abilities.Mime
 {
@@ -20,10 +20,10 @@ namespace Content.Server.Abilities.Mime
         /// <summary>
         /// The wall prototype to use.
         /// </summary>
-        [DataField("wallPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("wallPrototype", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string WallPrototype = "WallInvisible";
 
-        [DataField("invisibleWallAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("invisibleWallAction", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string? InvisibleWallAction = "ActionMimeInvisibleWall";
 
         [DataField("invisibleWallActionEntity")] public EntityUid? InvisibleWallActionEntity;

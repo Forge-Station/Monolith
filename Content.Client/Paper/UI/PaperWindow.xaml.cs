@@ -153,9 +153,9 @@ namespace Content.Client.Paper.UI
                     TextureScale = visuals.BackgroundScale,
                     Mode = backgroundImageMode,
                     PatchMarginLeft = backgroundPatchMargin.Left,
-                    PatchMarginBottom = backgroundPatchMargin.Bottom,
+                    PatchMarginTop = backgroundPatchMargin.Top,
                     PatchMarginRight = backgroundPatchMargin.Right,
-                    PatchMarginTop = backgroundPatchMargin.Top
+                    PatchMarginBottom = backgroundPatchMargin.Bottom
                 };
 
             }
@@ -173,8 +173,7 @@ namespace Content.Client.Paper.UI
             }
 
             HeaderImage.ModulateSelfOverride = visuals.HeaderImageModulate;
-            HeaderImage.Margin = new Thickness(visuals.HeaderMargin.Left, visuals.HeaderMargin.Top,
-                    visuals.HeaderMargin.Right, visuals.HeaderMargin.Bottom);
+            HeaderImage.Margin = visuals.HeaderMargin;
 
 
             PaperContent.ModulateSelfOverride = visuals.ContentImageModulate;
@@ -195,9 +194,7 @@ namespace Content.Client.Paper.UI
                 _paperContentLineScale = visuals.ContentImageNumLines;
             }
 
-            PaperContent.Margin = new Thickness(
-                    visuals.ContentMargin.Left, visuals.ContentMargin.Top,
-                    visuals.ContentMargin.Right, visuals.ContentMargin.Bottom);
+            PaperContent.Margin = visuals.ContentMargin;
 
             if (visuals.MaxWritableArea != null)
             {
@@ -269,9 +266,13 @@ namespace Content.Client.Paper.UI
         ///     Initialize the paper contents, i.e. the text typed by the
         ///     user and any stamps that have peen put on the page.
         /// </summary>
-        public void Populate(PaperComponent.PaperBoundUserInterfaceState state)
+        /// <param name="obscureWhileEditing">
+        /// When true, Mode is Write but the local player cannot read the page —
+        /// show the same garbled text as reading and do not put it in the editor.
+        /// </param>
+        public void Populate(PaperComponent.PaperBoundUserInterfaceState state, bool obscureWhileEditing = false)
         {
-            bool isEditing = state.Mode == PaperComponent.PaperAction.Write;
+            bool isEditing = state.Mode == PaperComponent.PaperAction.Write && !obscureWhileEditing;
             bool wasEditing = InputContainer.Visible;
             InputContainer.Visible = isEditing;
             EditButtons.Visible = isEditing;

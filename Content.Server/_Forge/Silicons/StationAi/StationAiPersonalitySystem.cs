@@ -4,6 +4,7 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.RandomMetadata;
 using Content.Shared._Forge.CCVars;
+using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared._Forge.Silicons.StationAi;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -54,6 +55,7 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         SubscribeLocalEvent<StationAiPersonalityComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<StationAiPersonalityComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<StationAiPersonalityComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<AiRemoteControllerComponent, PlayerDetachedEvent>(OnRemotePlayerDetached);
         SubscribeLocalEvent<StationAiPersonalityComponent, ComponentShutdown>(OnPersonalityShutdown);
         SubscribeLocalEvent<StationAiHeldComponent, OpenStationAiCustomizationEvent>(OnOpenCustomization);
         SubscribeLocalEvent<StationAiHeldComponent, StationAiCustomizationApplyMessage>(OnApplyCustomization);
@@ -144,17 +146,28 @@ public sealed class StationAiPersonalitySystem : EntitySystem
     private void OnPlayerDetached(Entity<StationAiPersonalityComponent> ent, ref PlayerDetachedEvent args)
     {
         RaiseAvailabilityChanged(ent.Owner, true);
-        if (args.Player.Status is not (SessionStatus.Disconnected or SessionStatus.Zombie) ||
-            !TryGetOwnedMind(ent.Owner, out var mind) ||
-            mind.Comp.UserId != args.Player.UserId)
+        ScheduleSsdRelease(ent.Owner, args.Player);
+    }
+
+    private void OnRemotePlayerDetached(Entity<AiRemoteControllerComponent> ent, ref PlayerDetachedEvent args)
+    {
+        if (ent.Comp.AiHolder is { } brain)
+            ScheduleSsdRelease(brain, args.Player);
+    }
+
+    private void ScheduleSsdRelease(EntityUid brain, ICommonSession player)
+    {
+        if (player.Status is not (SessionStatus.Disconnected or SessionStatus.Zombie) ||
+            !TryGetOwnedMind(brain, out var mind) ||
+            mind.Comp.UserId != player.UserId)
         {
             return;
         }
 
         var timeout = Math.Max(1f, _configuration.GetCVar(ForgeCCVars.StationAiSsdGracePeriod));
-        _ssdReleases[ent.Owner] = new SsdRelease(
+        _ssdReleases[brain] = new SsdRelease(
             mind.Owner,
-            args.Player.UserId,
+            player.UserId,
             _timing.CurTime + TimeSpan.FromSeconds(timeout));
     }
 

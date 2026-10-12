@@ -1,7 +1,7 @@
 using Content.Shared.Construction.Conditions;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Construction.Prototypes;
@@ -32,7 +32,7 @@ public sealed partial class ConstructionPrototype : IPrototype
     /// <summary>
     ///     The <see cref="ConstructionGraphPrototype"/> this construction will be using.
     /// </summary>
-    [DataField("graph", customTypeSerializer: typeof(PrototypeIdSerializer<ConstructionGraphPrototype>), required: true)]
+    [DataField("graph", customTypeSerializer: typeof(ProtoId<ConstructionGraphPrototype>), required: true)]
     public string Graph = string.Empty;
 
     /// <summary>
@@ -92,7 +92,7 @@ public sealed partial class ConstructionPrototype : IPrototype
     /// <summary>
     ///     Construction to replace this construction with when the current one is 'flipped'
     /// </summary>
-    [DataField("mirror", customTypeSerializer: typeof(PrototypeIdSerializer<ConstructionPrototype>))]
+    [DataField("mirror", customTypeSerializer: typeof(ProtoId<ConstructionPrototype>))]
     public string? Mirror;
 
     /// <summary>

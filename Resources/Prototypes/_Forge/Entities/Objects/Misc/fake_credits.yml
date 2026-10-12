@@ -1,0 +1,9 @@
+- type: entity
+  parent: SpaceCashCounterfeit
+  id: SpaceCashCounterfeit100000
+  name: creditts
+  description: Valerian Standard C- What the hell...? THESE ARE LOUSY FAKES!!!
+  components:
+  - type: Stack
+    stackType: CreditCounterfeit
+    count: 100000

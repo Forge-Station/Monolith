@@ -11,7 +11,7 @@
         brain: OrganHumanBrain
         eyes: OrganHumanEyes
     torso:
-      part: TorsoDwarf #Forge-Change
+      part: TorsoHuman
       connections:
       - right arm
       - left arm

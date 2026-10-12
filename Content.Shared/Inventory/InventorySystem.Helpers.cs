@@ -2,12 +2,14 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Hands.Components;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Prototypes;
+using Content.Shared.Tag; // Forge-change
 
 namespace Content.Shared.Inventory;
 
 public partial class InventorySystem
 {
     [Dependency] private SharedStorageSystem _storageSystem = default!;
+    [Dependency] private TagSystem _tag = default!; // Forge-change
 
     /// <summary>
     /// Yields all entities in hands or inventory slots with the specific flags.
@@ -151,5 +153,17 @@ public partial class InventorySystem
 
         containingEntity = container.Owner;
         return true;
+    }
+
+    // Forge-change
+    public bool HasEquippedTag(EntityUid actor, ProtoId<TagPrototype> tag)
+    {
+        var enumerator = GetSlotEnumerator(actor);
+        while (enumerator.NextItem(out var item))
+        {
+            if (_tag.HasTag(item, tag))
+                return true;
+        }
+        return false;
     }
 }

@@ -1,6 +1,5 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Shared.Humanoid.Markings;
 
@@ -13,7 +12,7 @@ public sealed partial class MarkingPoints
     [DataField("required", required: true)]
     public bool Required = false;
     // Default markings for this layer.
-    [DataField("defaultMarkings", customTypeSerializer:typeof(PrototypeIdListSerializer<MarkingPrototype>))]
+    [DataField("defaultMarkings", customTypeSerializer:typeof(ProtoId<MarkingPrototype>))]
     public List<string> DefaultMarkings = new();
 
     public static Dictionary<MarkingCategories, MarkingPoints> CloneMarkingPointDictionary(Dictionary<MarkingCategories, MarkingPoints> self)

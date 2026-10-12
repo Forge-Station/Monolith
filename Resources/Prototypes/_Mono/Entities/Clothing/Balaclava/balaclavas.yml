@@ -8,22 +8,22 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
-    color: "#1F1F1F"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
+    color: "#333333" #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
       right:
       - state: inhand-right
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
 
 - type: entity
   parent: ClothingBalaclavaBase
@@ -32,10 +32,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     color: "#6A6A6A"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -56,9 +56,9 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -76,10 +76,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     color: "#ff2c2c"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -100,10 +100,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     color: "#4CBB17"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -124,22 +124,22 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
-    color: "#2832C2"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
+    color: "#253c5e" #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
       right:
       - state: inhand-right
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
 
 - type: entity
   parent: ClothingBalaclavaBase
@@ -148,10 +148,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     color: "#B200ED"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -172,10 +172,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     color: "#FFF200"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -196,10 +196,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     color: "#d2B48C"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -213,6 +213,54 @@
       - state: inhand-right
         color: "#d2B48C"
 
+- type: entity #Forge-Change-Start
+  parent: ClothingBalaclavaBase
+  id: ClothingBalaclavaSkiMaskMerc
+  name: merc ski mask balaclava
+  description: A colored balaclava to make you look menacing.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    color: "#818155"
+  - type: Clothing
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    clothingVisuals:
+      balaclava:
+      - state: equipped-BALACLAVA
+        color: "#818155"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#818155"
+      right:
+      - state: inhand-right
+        color: "#818155"
+
+- type: entity
+  parent: ClothingBalaclavaBase
+  id: ClothingBalaclavaSkiMaskPink
+  name: pink ski mask balaclava
+  description: A colored balaclava to make you look menacing.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    color: "#e979ec"
+  - type: Clothing
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    clothingVisuals:
+      balaclava:
+      - state: equipped-BALACLAVA
+        color: "#e979ec"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#e979ec"
+      right:
+      - state: inhand-right
+        color: "#e979ec" #Forge-Change-End
+
 - type: entity
   parent: ClothingBalaclavaBase
   id: ClothingBalaclavaSkiMaskRangerGreen
@@ -220,10 +268,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     color: "#4A5A49"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -244,10 +292,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     color: "#81613C"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -270,22 +318,22 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
-    color: "#1F1F1F"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
+    color: "#333333" #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
       right:
       - state: inhand-right
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
 
 - type: entity
   parent: ClothingBalaclavaBase
@@ -294,10 +342,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     color: "#6A6A6A"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -318,9 +366,9 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -338,10 +386,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     color: "#ff2c2c"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -362,10 +410,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     color: "#4CBB17"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -386,22 +434,22 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
-    color: "#2832C2"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
+    color: "#253c5e" #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
       right:
       - state: inhand-right
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
 
 - type: entity
   parent: ClothingBalaclavaBase
@@ -410,10 +458,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     color: "#B200ED"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -434,10 +482,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     color: "#FFF200"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -458,10 +506,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     color: "#d2B48C"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -475,6 +523,54 @@
       - state: inhand-right
         color: "#d2B48C"
 
+- type: entity #Forge-Change-Start
+  parent: ClothingBalaclavaBase
+  id: ClothingBalaclavaSkiMaskMouthMerc
+  name: merc ski mask balaclava (mouth)
+  description: A colored balaclava to make you look menacing.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    color: "#818155"
+  - type: Clothing
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    clothingVisuals:
+      balaclava:
+      - state: equipped-BALACLAVA
+        color: "#818155"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#818155"
+      right:
+      - state: inhand-right
+        color: "#818155"
+
+- type: entity
+  parent: ClothingBalaclavaBase
+  id: ClothingBalaclavaSkiMaskMouthPink
+  name: pink ski mask balaclava (mouth)
+  description: A colored balaclava to make you look menacing.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    color: "#e979ec"
+  - type: Clothing
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi
+    clothingVisuals:
+      balaclava:
+      - state: equipped-BALACLAVA
+        color: "#e979ec"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#e979ec"
+      right:
+      - state: inhand-right
+        color: "#e979ec" #Forge-Change-End
+
 - type: entity
   parent: ClothingBalaclavaBase
   id: ClothingBalaclavaSkiMaskMouthRangerGreen
@@ -482,10 +578,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     color: "#4A5A49"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -506,10 +602,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     color: "#81613C"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_ski_mask_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -532,22 +628,22 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
-    color: "#1F1F1F"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
+    color: "#333333" #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
       right:
       - state: inhand-right
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
 
 - type: entity
   parent: ClothingBalaclavaBase
@@ -556,10 +652,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     color: "#6A6A6A"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -580,9 +676,9 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -600,10 +696,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     color: "#ff2c2c"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -624,10 +720,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     color: "#4CBB17"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -648,22 +744,22 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
-    color: "#2832C2"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
+    color: "#253c5e" #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
       right:
       - state: inhand-right
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
 
 - type: entity
   parent: ClothingBalaclavaBase
@@ -672,10 +768,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     color: "#B200ED"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -696,10 +792,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     color: "#FFF200"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -720,10 +816,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     color: "#d2B48C"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -737,6 +833,54 @@
       - state: inhand-right
         color: "#d2B48C"
 
+- type: entity #Forge-Change-Start
+  parent: ClothingBalaclavaBase
+  id: ClothingBalaclavaClassicMerc
+  name: merc classic balaclava
+  description: A colored balaclava to make you look menacing.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi
+    color: "#818155"
+  - type: Clothing
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi
+    clothingVisuals:
+      balaclava:
+      - state: equipped-BALACLAVA
+        color: "#818155"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#818155"
+      right:
+      - state: inhand-right
+        color: "#818155"
+
+- type: entity
+  parent: ClothingBalaclavaBase
+  id: ClothingBalaclavaClassicPink
+  name: pink classic balaclava
+  description: A colored balaclava to make you look menacing.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi
+    color: "#e979ec"
+  - type: Clothing
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi
+    clothingVisuals:
+      balaclava:
+      - state: equipped-BALACLAVA
+        color: "#e979ec"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#e979ec"
+      right:
+      - state: inhand-right
+        color: "#e979ec" #Forge-Change-End
+
 - type: entity
   parent: ClothingBalaclavaBase
   id: ClothingBalaclavaClassicRangerGreen
@@ -744,10 +888,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     color: "#4A5A49"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -768,10 +912,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     color: "#81613C"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -794,22 +938,22 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
-    color: "#1F1F1F"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
+    color: "#333333" #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
       right:
       - state: inhand-right
-        color: "#1F1F1F"
+        color: "#333333" #Forge-Change
 
 - type: entity
   parent: ClothingBalaclavaBase
@@ -818,10 +962,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     color: "#6A6A6A"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -842,9 +986,9 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -862,10 +1006,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     color: "#ff2c2c"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -886,10 +1030,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     color: "#4CBB17"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -910,22 +1054,22 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
-    color: "#2832C2"
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
+    color: "#253c5e" #Forge-Change
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
       right:
       - state: inhand-right
-        color: "#2832C2"
+        color: "#253c5e" #Forge-Change
 
 - type: entity
   parent: ClothingBalaclavaBase
@@ -934,10 +1078,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     color: "#B200ED"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -958,10 +1102,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     color: "#FFF200"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -982,10 +1126,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     color: "#d2B48C"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -999,6 +1143,54 @@
       - state: inhand-right
         color: "#d2B48C"
 
+- type: entity #Forge-Change-Start
+  parent: ClothingBalaclavaBase
+  id: ClothingBalaclavaClassicMouthMerc
+  name: merc classic balaclava (mouth)
+  description: A colored balaclava to make you look menacing.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    color: "#818155"
+  - type: Clothing
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    clothingVisuals:
+      balaclava:
+      - state: equipped-BALACLAVA
+        color: "#818155"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#818155"
+      right:
+      - state: inhand-right
+        color: "#818155"
+
+- type: entity
+  parent: ClothingBalaclavaBase
+  id: ClothingBalaclavaClassicMouthPink
+  name: pink classic balaclava (mouth)
+  description: A colored balaclava to make you look menacing.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    color: "#e979ec"
+  - type: Clothing
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi
+    clothingVisuals:
+      balaclava:
+      - state: equipped-BALACLAVA
+        color: "#e979ec"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#e979ec"
+      right:
+      - state: inhand-right
+        color: "#e979ec" #Forge-Change-End
+
 - type: entity
   parent: ClothingBalaclavaBase
   id: ClothingBalaclavaClassicMouthRangerGreen
@@ -1006,10 +1198,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     color: "#4A5A49"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA
@@ -1030,10 +1222,10 @@
   description: A colored balaclava to make you look menacing.
   components:
   - type: Sprite
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     color: "#81613C"
   - type: Clothing
-    sprite: _Mono/Clothing/Balaclavas/balaclava_ski_mask.rsi
+    sprite: _Forge/Clothing/Balaclavas/balaclava_classic_mouth.rsi #Forge-Change
     clothingVisuals:
       balaclava:
       - state: equipped-BALACLAVA

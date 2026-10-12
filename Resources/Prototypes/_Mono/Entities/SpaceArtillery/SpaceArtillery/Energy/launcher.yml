@@ -325,7 +325,7 @@
     range: 500
   - type: FireControlRotate
   - type: Gun
-    damageModifier: 5
+    damageModifier: 1 # Forge-Change
     fireRate: 5
     recoil: 2 # 2/25x
     projectileSpeed: 20

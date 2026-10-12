@@ -18,11 +18,6 @@
     damageRecovery:
       types:
         Asphyxiation: -1.0
-  #Forge-Change-start
-  - type: Damageable
-    damageContainer: Biological
-    damageModifierSet: ForgeDwarf
-    #Forge-Change-end
   - type: Sprite
     noRot: true
     drawdepth: Mobs
@@ -78,6 +73,8 @@
   - type: InnateMiningScannerViewer # Frontier
     pingSound: null # Frontier
     viewRange: 5 # Frontier
+  - type: AlcoholTolerance #Forge-Change: same multiplier like trait AlcoholTolerance
+    visualScaleMultiplier: 0.35 #Forge-Change
 
 - type: entity
   parent: BaseSpeciesDummy

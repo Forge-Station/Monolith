@@ -58,13 +58,21 @@
     canCreateVacuum: false
 
 - type: entity
-  parent: BaseWeaponBallisticTurret
+  parent: BaseWeaponCommandBallisticTurret # Forge-Change
   id: WeaponTurretNanoTrasen
   suffix: NanoTrasen
   components:
   - type: NpcFactionMember
     factions:
     - NanoTrasen
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: NT
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretNanoTrasenPackingGraph
+    node: WeaponTurretNanoTrasenPacked
+  # Forge-Change-end
 
 - type: entity
   parent: BaseWeaponBallisticTurret

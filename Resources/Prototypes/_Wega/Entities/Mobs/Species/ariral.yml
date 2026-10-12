@@ -33,7 +33,7 @@
         Piercing: 6
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: ForgeAriral #Forge-Change
+    damageModifierSet: Ariral
   - type: Bloodstream
     bloodMaxVolume: 200
     bloodReagent: AriralBlood
@@ -83,7 +83,7 @@
     - Ilasir
     - TauCetiBasic
     understands:
-    #- Draconic #Forge-Change-Remove: why they undetstood draconic?????
+    - Draconic
     - Ilasir
     - TauCetiBasic
   - type: Wagging

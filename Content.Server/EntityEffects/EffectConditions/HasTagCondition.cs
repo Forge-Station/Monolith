@@ -2,14 +2,14 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.EntityEffects.EffectConditions;
 
 [UsedImplicitly]
 public sealed partial class HasTag : EntityEffectCondition
 {
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<TagPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<TagPrototype>))]
     public string Tag = default!;
 
     [DataField]

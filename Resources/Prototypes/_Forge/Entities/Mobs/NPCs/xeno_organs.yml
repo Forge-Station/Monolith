@@ -1,0 +1,325 @@
+# Glands that carry a caste's abilities. A xenomorph grows them;
+# butchering drops each one with a 5% chance. A hand or a pocket grants nothing.
+# A surgeon grafts one into a humanoid torso (ribcage open). Two glands at most.
+
+- type: entity
+  parent: BaseItem
+  id: OrganXenoBase
+  abstract: true
+  name: xenomorph gland
+  description: A wet gland cut from a xenomorph. Silent until a surgeon grafts it into a body.
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+    state: stomach
+  - type: Item
+    size: Small
+  - type: Organ
+    slotId: xeno_graft_a
+  - type: ForgeXenoOrgan
+    actions: []
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoRest
+  name: xenomorph rest gland
+  description: A slow gland. The owner can lie down and knit itself back together.
+  components:
+  - type: Sprite
+    state: liver
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoRest
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoTail
+  name: xenomorph tail gland
+  description: The muscle that drives a tail stab.
+  components:
+  - type: Sprite
+    state: muscle
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoTailStab
+
+- type: entity
+  parent: OrganXenoTail
+  id: OrganXenoTailHeavy
+  name: xenomorph heavy tail gland
+  description: A thicker tail gland. The stab hits harder.
+  components:
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoTailStabHeavy
+
+- type: entity
+  parent: OrganXenoTail
+  id: OrganXenoTailQueen
+  name: xenomorph royal tail gland
+  description: The queen's tail. It does not miss gently.
+  components:
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoTailStabQueen
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoAcidWeak
+  name: xenomorph weak acid gland
+  description: A small acid sac. Enough for a weak glob.
+  components:
+  - type: Sprite
+    state: stomach
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoAcidWeak
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoAcidSpit
+  name: xenomorph acid spit gland
+  description: Acid, and the reflex to spit it.
+  components:
+  - type: Sprite
+    state: stomach
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoAcidWeak
+    - ActionForgeXenoSpit
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoSpitter
+  name: xenomorph spitter gland
+  description: A swollen acid sac with a heavy spit behind it.
+  components:
+  - type: Sprite
+    state: stomach
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoAcid
+    - ActionForgeXenoSpit
+    - ActionForgeXenoSpitHeavy
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoBoiler
+  name: xenomorph boiler gland
+  description: Acid under pressure. The spit is slow and heavy.
+  components:
+  - type: Sprite
+    state: stomach
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoAcid
+    - ActionForgeXenoSpitHeavy
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoPraetorianAcid
+  name: xenomorph praetorian acid gland
+  description: A soldier's acid sac. Spit, not a boiler's lob.
+  components:
+  - type: Sprite
+    state: stomach
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoAcid
+    - ActionForgeXenoSpit
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoAcid
+  name: xenomorph acid gland
+  description: Corrosive acid, nothing else.
+  components:
+  - type: Sprite
+    state: stomach
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoAcid
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoWeeds
+  name: xenomorph weed gland
+  description: Secretes a patch of hive weeds and nothing more ambitious.
+  components:
+  - type: Sprite
+    state: appendix
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoPlantWeeds
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoResin
+  name: xenomorph resin gland
+  description: Weeds, walls, membranes, doors and sticky resin.
+  components:
+  - type: Sprite
+    state: appendix
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoPlantWeeds
+    - ActionForgeXenoResinWall
+    - ActionForgeXenoResinMembrane
+    - ActionForgeXenoResinDoor
+    - ActionForgeXenoStickyResin
+
+- type: entity
+  parent: OrganXenoResin
+  id: OrganXenoResinFast
+  name: xenomorph fast resin gland
+  description: A builder's full resin kit, including the quick secretion.
+  components:
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoPlantWeeds
+    - ActionForgeXenoResinWall
+    - ActionForgeXenoResinMembrane
+    - ActionForgeXenoResinDoor
+    - ActionForgeXenoStickyResin
+    - ActionForgeXenoFastResin
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoPheromone
+  name: xenomorph pheromone gland
+  description: A chemical shout the rest of the hive can feel.
+  components:
+  - type: Sprite
+    state: nerve
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoPheromones
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoPheromoneTransfer
+  name: xenomorph plasma gland
+  description: Pheromones, and the ability to push plasma into another xenomorph.
+  components:
+  - type: Sprite
+    state: heart-on
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoPheromones
+    - ActionForgeXenoTransferPlasma
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoScreech
+  name: xenomorph screech gland
+  description: Pheromones and a screech that rattles the room.
+  components:
+  - type: Sprite
+    state: nerve
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoPheromones
+    - ActionForgeXenoScreech
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoQueen
+  name: xenomorph royal gland
+  description: Pheromones, screech, gut, zoom and plasma transfer. The queen's nervous system in one piece.
+  components:
+  - type: Sprite
+    state: brain
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoPheromones
+    - ActionForgeXenoScreech
+    - ActionForgeXenoGut
+    - ActionForgeXenoZoom
+    - ActionForgeXenoTransferPlasma
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoHide
+  name: xenomorph hide gland
+  description: Lets the owner drop out of sight.
+  components:
+  - type: Sprite
+    state: lung-l
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoHide
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoLeap
+  name: xenomorph leap gland
+  description: Hind-leg muscle for a long leap.
+  components:
+  - type: Sprite
+    state: muscle
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoLeap
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoPounce
+  name: xenomorph pounce gland
+  description: A lurker's pounce.
+  components:
+  - type: Sprite
+    state: muscle
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoPounce
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoFortify
+  name: xenomorph carapace gland
+  description: Locks the body into a fortified stance.
+  components:
+  - type: Sprite
+    state: heart-off
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoFortify
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoWarrior
+  name: xenomorph warrior gland
+  description: Punch, lunge and fling.
+  components:
+  - type: Sprite
+    state: muscle
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoPunch
+    - ActionForgeXenoLunge
+    - ActionForgeXenoFling
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoStomp
+  name: xenomorph stomp gland
+  description: A charge and a stomp.
+  components:
+  - type: Sprite
+    state: muscle
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoCharge
+    - ActionForgeXenoStomp
+
+- type: entity
+  parent: OrganXenoBase
+  id: OrganXenoEgg
+  name: xenomorph ovipositor gland
+  description: Grows an egg.
+  components:
+  - type: Sprite
+    state: appendix
+  - type: ForgeXenoOrgan
+    actions:
+    - ActionForgeXenoLayEgg

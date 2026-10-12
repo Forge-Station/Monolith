@@ -59,11 +59,11 @@
                             <gfx:StyleBoxFlat BorderThickness="3" BorderColor="#212121" BackgroundColor="#111111"/>
                         </PanelContainer.PanelOverride>
                         <ScrollContainer VerticalExpand="True" HScrollEnabled="False" Margin="7 7 7 7">
+                            <!-- Forge-Change: no VerticalExpand on RecipeList (ScrollContainer child) — avoids zero-height buttons / UIBox2 assert. -->
                             <BoxContainer
                                 Name="RecipeList"
                                 Orientation="Vertical"
                                 HorizontalExpand="True"
-                                VerticalExpand="True"
                                 RectClipContent="True">
                             </BoxContainer>
                         </ScrollContainer>
@@ -137,7 +137,6 @@
                         Name="QueueList"
                         Orientation="Vertical"
                         HorizontalExpand="True"
-                        VerticalExpand="True"
                         RectClipContent="True">
                     </BoxContainer>
                     </controls:StripeBack>

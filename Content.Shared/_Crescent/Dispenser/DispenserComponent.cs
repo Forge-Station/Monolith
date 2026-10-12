@@ -1,7 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 
 namespace Content.Shared._Crescent.Dispenser;
 
@@ -26,7 +25,7 @@ public sealed partial class DispenserComponent : Component
     /// A list of input and output items.
     /// When the player activates with a specific input item, dispense the respective output item.
     /// </summary>
-    [DataField("inventory", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<string, EntityPrototype>))]
+    [DataField("inventory", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public Dictionary<string, string> Inventory { get; private set; } = new();
 
     /// <summary>

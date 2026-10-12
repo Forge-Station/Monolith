@@ -333,9 +333,11 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
                 mutationStrings.Add(seed.DisplayName);
         }
 
-        var chemStrings = seedData.Chemicals
-            .Select(c => $"{c.Key} ({c.Value.Min}-{c.Value.Max})")
+        // Forge-Change-start
+        var chemEntries = seedData.Chemicals
+            .Select(c => new PlantChemEntry { Id = c.Key, Min = c.Value.Min, Max = c.Value.Max })
             .ToArray();
+        // Forge-Change-end
 
         var mutationNames = seedData.Mutations
             .Select(m => m.Name)
@@ -348,8 +350,11 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
             IsTray = isTray,
             HasPlant = true,
             SeedName = seedData.DisplayName,
-            SeedChem = chemStrings,
+            // Forge-Change-start
+            ChemicalEntries = chemEntries,
             MutationNames = mutationNames,
+            PinnedTraits = GetPinnedTraits(seedData),
+            // Forge-Change-end
             HarvestType = harvestType,
             ExudeGases = GetGasFlags(seedData.ExudeGasses.Keys),
             ConsumeGases = GetGasFlags(seedData.ConsumeGasses.Keys),
@@ -400,6 +405,20 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
 
         return ret;
     }
+
+    // Forge-Change-start
+    private static string[] GetPinnedTraits(SeedData seed)
+    {
+        if (!seed.GeneLocked || seed.PinnedTraits.Count == 0)
+            return Array.Empty<string>();
+
+        var result = new string[seed.PinnedTraits.Count];
+        for (var i = 0; i < seed.PinnedTraits.Count; i++)
+            result[i] = seed.PinnedTraits[i];
+
+        return result;
+    }
+    // Forge-Change-end
 
     public GasFlags GetGasFlags(IEnumerable<Gas> gases)
     {

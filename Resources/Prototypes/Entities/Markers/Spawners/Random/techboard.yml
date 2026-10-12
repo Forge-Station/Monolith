@@ -31,5 +31,5 @@
     - ComputerMassMediaCircuitboard
     - AutolatheMachineCircuitboard
     - ProtolatheMachineCircuitboard
-    - SalvageMagnetMachineCircuitboard
+    #- SalvageMagnetMachineCircuitboard #Forge-Change-remove
     rareChance: 0.05

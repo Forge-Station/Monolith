@@ -2,7 +2,7 @@
   id: OmnizineChemistryBottle
   result: OmnizineChemistryBottle
   parent: BioGenFoodRecipe
-  completetime: 5 
+  completetime: 5
   materials:
     Biomass: 20
     Plasma: 1000
@@ -17,7 +17,7 @@
     Biomass: 180
     Plasma: 3000
     Glass: 1000
-    
+
 - type: latheRecipe
   parent: BaseToolRecipe
   id: Hypospray
@@ -29,7 +29,7 @@
     Gold: 2500
     Plastic: 3000
     UraniumDepleted: 500
-    
+
 - type: latheRecipe
   parent: BaseToolRecipe
   id: HypoBrigmedic
@@ -51,7 +51,7 @@
     Silver: 1500
     Gold: 1500
     Plastic: 2000
-    
+
 - type: latheRecipe
   parent: BaseToolRecipe
   id: CentCommHypo
@@ -63,7 +63,7 @@
     Gold: 3000
     Plastic: 4000
     UraniumFissile: 100
-    
+
 - type: latheRecipe
   parent: BaseToolRecipe
   id: BrutepackAdvanced1
@@ -72,7 +72,7 @@
   materials:
     Steel: 1000
     Plastic: 1000
-    
+
 - type: latheRecipe
   parent: BaseToolRecipe
   id: OintmentAdvanced1
@@ -81,5 +81,5 @@
   materials:
     Glass: 1000
     Plastic: 1000
-    
+
 

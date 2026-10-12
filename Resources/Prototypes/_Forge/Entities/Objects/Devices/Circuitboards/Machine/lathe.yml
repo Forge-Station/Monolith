@@ -165,3 +165,40 @@
   - type: Tag
     tags:
     - MachineBoard3x3
+
+#Forge-Change start
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: AmmoLoaderSmallMachineCircuitboard
+  name: small ammo loader machine board
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: AmmoLoaderSmall
+    requirements:
+      MatterBin: 4
+      Manipulator: 3
+    stackRequirements:
+      Steel: 5
+      Glass: 5
+      Plasma: 2
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: AmmoLoaderMachineCircuitboard
+  name: ammo loader machine board
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: AmmoLoader
+    requirements:
+      MatterBin: 5
+      Manipulator: 4
+    stackRequirements:
+      Steel: 10
+      Glass: 10
+      Plasma: 4
+
+#Forge-Change end

@@ -27,7 +27,6 @@ public sealed partial class FlatpackCreatorMenu : FancyWindow
 
     private EntityUid _owner;
 
-    [ValidatePrototypeId<EntityPrototype>]
     public const string NoBoardEffectId = "FlatpackerNoBoardEffect";
 
     private EntityUid? _currentBoard = EntityUid.Invalid;

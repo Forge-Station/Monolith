@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._NF.Whitelist.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Audio;
 using Content.Shared.Body.Components;
@@ -102,8 +103,19 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
         if (HasComp<MobStateComponent>(item) && !CanGib(uid, item, component)) // whitelist? We be gibbing, boy!
             return false;
 
-        if (_whitelistSystem.IsWhitelistFail(component.Whitelist, item) ||
-            _whitelistSystem.IsBlacklistPass(component.Blacklist, item))
+        // Forge-change-start: shipyard vouchers are validated separately and may lack PhysicalComposition.
+        var isShipyardVoucher = HasComp<NFShipyardVoucherComponent>(item);
+
+        if (!isShipyardVoucher &&
+            (_whitelistSystem.IsWhitelistFail(component.Whitelist, item) ||
+            _whitelistSystem.IsBlacklistPass(component.Blacklist, item)))
+            return false;
+        // Forge-change-end
+        // Forge-change-start: allow systems to block material reclaimer processing.
+        var attempt = new AttemptMaterialReclaimEvent(uid, user);
+        RaiseLocalEvent(item, ref attempt);
+        if (attempt.Cancelled)
+        // Forge-change-end
             return false;
 
         if (Container.TryGetContainingContainer((item, null, null), out _) && !Container.TryRemoveFromContainer(item))
@@ -244,6 +256,11 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
         if (!Resolve(reclaimer, ref reclaimerComponent))
             return TimeSpan.Zero;
 
+        // Forge-change-start: shipyard vouchers always take 15 seconds to reclaim.
+        if (HasComp<NFShipyardVoucherComponent>(item))
+            return TimeSpan.FromSeconds(15);
+        // Forge-change-end
+        
         if (!reclaimerComponent.ScaleProcessSpeed ||
             !Resolve(item, ref compositionComponent, false))
             return reclaimerComponent.MinimumProcessDuration;
@@ -272,3 +289,7 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
 
 [ByRefEvent]
 public record struct GotReclaimedEvent(EntityCoordinates ReclaimerCoordinates);
+
+// Forge-change: used by unused shipyard voucher reclaim validation.
+[ByRefEvent]
+public record struct AttemptMaterialReclaimEvent(EntityUid Reclaimer, EntityUid? User = null, bool Cancelled = false);

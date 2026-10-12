@@ -1,7 +1,7 @@
-﻿using Content.Shared.DisplacementMap;
+using Content.Shared.DisplacementMap;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Inventory;
 
@@ -10,7 +10,7 @@ namespace Content.Shared.Inventory;
 [AutoGenerateComponentState(true)]
 public sealed partial class InventoryComponent : Component
 {
-    [DataField("templateId", customTypeSerializer: typeof(PrototypeIdSerializer<InventoryTemplatePrototype>))]
+    [DataField("templateId", customTypeSerializer: typeof(ProtoId<InventoryTemplatePrototype>))]
     [AutoNetworkedField]
     public string TemplateId { get; set; } = "human";
 
@@ -33,12 +33,6 @@ public sealed partial class InventoryComponent : Component
     /// </summary>
     [DataField]
     public Dictionary<string, DisplacementData> MaleDisplacements = new();
-
-    /// <summary>
-    /// Mono - blocks slots with those names from receiving InventoryRelayEvent-s.
-    /// </summary>
-    [DataField]
-    public List<string> RelayBlockedSlots = new();
 }
 
 /// <summary>

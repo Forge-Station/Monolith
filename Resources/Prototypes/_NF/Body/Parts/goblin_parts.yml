@@ -31,13 +31,6 @@
         Quantity: 10
       - ReagentId: GoblinBlood
         Quantity: 20
-  #Forge-Change-Start
-  - type: MovementBodyPartModifier
-    walkModifier: 1.4
-    sprintModifier: 1.4
-    group: torso
-  #Forge-Change-end
-
 
 - type: entity
   id: HeadGoblin

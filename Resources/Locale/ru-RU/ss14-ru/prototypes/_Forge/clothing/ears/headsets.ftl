@@ -22,3 +22,6 @@ ent-ClothingHeadsetRenegade = гарнитура ренегатов
 
 ent-ClothingHeadsetMdMedical = медицинская гарнитура TTI
     .desc = Гарнитура с особым ключом шифрования для сотрудников Травмы Тима.
+
+ent-ClothingHeadsetNexus = гарнитура Nexus
+    .desc = Фирменная гарнитура Nexus.

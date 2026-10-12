@@ -1,0 +1,156 @@
+# Expandable ore hold for ship-drill logistics.
+
+- type: entity
+  parent: [BaseMachinePowered, ConstructibleMachine]
+  id: MachineOrePipeStorage
+  name: ore hold
+  description: Receives ore from ship drills through the pipe network. Needs an intake trunk on this tile.
+  components:
+  - type: Sprite
+    sprite: Structures/Storage/orebox.rsi
+    noRot: true
+    layers:
+    - state: orebox
+    - state: orebox-top
+      map: [ top ]
+      visible: true
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ExtensionCableReceiver
+  - type: LitOnPowered
+  - type: PointLight
+    radius: 1.2
+    energy: 1.2
+    color: "#C4A35A"
+    castShadows: false
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Machine
+    board: OrePipeStorageMachineCircuitboard
+  - type: OreHold
+    baseCapacity: 500
+  - type: OrePipeOutlet
+    maxInsertPerFlush: 80
+  - type: ActivatableUI
+    key: enum.OreHoldUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.OreHoldUiKey.Key:
+        type: OreHoldBoundUserInterface
+  - type: Anchorable
+  - type: InteractionOutline
+
+- type: entity
+  parent: [BaseMachinePowered, ConstructibleMachine]
+  id: MachineOreHoldModule
+  name: ore hold module
+  description: Expands nearby ore hold capacity when placed along the pipe line.
+  components:
+  - type: Sprite
+    sprite: Structures/Storage/orebox.rsi
+    noRot: true
+    layers:
+    - state: orebox
+    - state: orebox-top
+      color: "#7EC8E3"
+  - type: Appearance
+  - type: ApcPowerReceiver
+    powerLoad: 100
+  - type: ExtensionCableReceiver
+  - type: LitOnPowered
+  - type: PointLight
+    radius: 1.0
+    energy: 0.8
+    color: "#7EC8E3"
+    castShadows: false
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Machine
+    board: OreHoldModuleMachineCircuitboard
+  - type: OreHoldModule
+    extraCapacity: 500
+  - type: Anchorable
+  - type: InteractionOutline
+
+- type: entity
+  id: OrePipeStorageMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: ore hold machine board
+  description: A machine printed circuit board for an ore hold.
+  components:
+  - type: MachineBoard
+    prototype: MachineOrePipeStorage
+    stackRequirements:
+      Steel: 4
+      Cable: 2
+
+- type: entity
+  id: OreHoldModuleMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: ore hold module machine board
+  description: A machine printed circuit board for an ore hold capacity module.
+  components:
+  - type: MachineBoard
+    prototype: MachineOreHoldModule
+    stackRequirements:
+      Steel: 3
+      Cable: 2

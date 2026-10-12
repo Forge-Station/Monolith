@@ -16,5 +16,9 @@ namespace Content.Shared.Botany
         HasPlant,
         WeedsHigh,
         Radioactive,
+        // Forge-Change-start
+        WaterPercent,
+        NutritionPercent,
+        // Forge-Change-end
     }
 }

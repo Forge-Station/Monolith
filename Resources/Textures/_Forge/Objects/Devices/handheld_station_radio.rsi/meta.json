@@ -1,8 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Inhand sprites taken from cev-eris and modified by Swept and dvir01 at https://github.com/discordia-space/CEV-Eris/commit/efce5b6c3be75458ce238dcc01510e8f8a653ca6, also modified by teasum",
-  "copyright": "base sprite taken from Unknown, recolored to blue, split the display animation into its own layer by rouden_ (discord) at https://github.com/Goob-Station/Goob-Station/pull/5365, also modified by teasum",
+  "copyright": "base sprite taken from Unknown, recolored to blue, split the display animation into its own layer by rouden_ (discord) at https://github.com/Goob-Station/Goob-Station/pull/5365, modifided by teasum(git and discord), resprited teasum's version by asiashvee(discord)",
   "size": {
     "x": 32,
     "y": 32
@@ -10,14 +9,6 @@
   "states": [
     {
       "name": "base"
-    },
-    {
-      "name": "walkietalkie-inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "walkietalkie-inhand-left",
-      "directions": 4
     }
   ]
 }

@@ -10,8 +10,6 @@ public sealed partial class HarpyVisualsSystem : EntitySystem
     [Dependency] private TagSystem _tagSystem = default!;
     [Dependency] private SharedHumanoidAppearanceSystem _humanoidSystem = default!;
 
-    //    [ValidatePrototypeId<TagPrototype>] // Frontier
-    //    private const string HarpyWingsTag = "HidesHarpyWings"; // Frontier
 
     public override void Initialize()
     {

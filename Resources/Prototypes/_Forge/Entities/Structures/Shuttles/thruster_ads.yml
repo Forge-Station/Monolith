@@ -14,11 +14,15 @@
 - type: entity
   id: ThrusterLargeADS
   name: large thruster ADS
-  parent: ThrusterADS
+  parent: [ThrusterLarge, BaseStructureDisableToolUse]
   suffix: ADS
   components:
   - type: Sprite
     sprite: _Mono/Structures/Shuttles/thrusterrogue_large.rsi
+  - type: Machine
+    board: ThrusterRogueMachineCircuitboard
+    partOverrides:
+      Capacitor: QuadraticCapacitorStockPart
 
 - type: entity
   id: GyroscopeADS

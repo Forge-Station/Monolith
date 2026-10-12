@@ -17,3 +17,6 @@ ent-StationRadioRigCircuitboard = радиоустановка (машинная
 ent-StationRadioCircuitboard = станционное радио (машинная плата)
     .desc = Печатная плата станционного радио.
     .suffix = { ent-BaseMachineCircuitboard.suffix }
+ent-StationRadioUwUCircuitboard = станционное мяукащее радио (машинная плата)
+    .desc = Печатная плата станционного мяукащего радио.
+    .suffix = { ent-BaseMachineCircuitboard.suffix }

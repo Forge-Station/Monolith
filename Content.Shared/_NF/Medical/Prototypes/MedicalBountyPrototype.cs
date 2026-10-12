@@ -2,7 +2,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
+using Content.Shared.Tag; // Forge-change
 
 namespace Content.Shared._NF.Medical.Prototypes;
 
@@ -27,13 +27,13 @@ public sealed partial class MedicalBountyPrototype : IPrototype
     /// <summary>
     /// Damage types to be added to a bountied entity and the bonus/penalties associated with them
     /// </summary>
-    [DataField(required: true, customTypeSerializer: typeof(PrototypeIdDictionarySerializer<RandomDamagePreset, DamageTypePrototype>))]
+    [DataField(required: true, customTypeSerializer: typeof(ProtoId<DamageTypePrototype>))]
     public Dictionary<string, RandomDamagePreset> DamageSets = new();
 
     /// <summary>
     /// Damage types to be added to a bountied entity and the bonus/penalties associated with them
     /// </summary>
-    [DataField(customTypeSerializer: typeof(PrototypeIdDictionarySerializer<RandomReagentPreset, ReagentPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<ReagentPrototype>))]
     public Dictionary<string, RandomReagentPreset> Reagents = new();
 
     /// <summary>
@@ -47,6 +47,26 @@ public sealed partial class MedicalBountyPrototype : IPrototype
     /// </summary>
     [DataField]
     public int MaximumDamageToRedeem = 99;
+
+    // Forge-change-start
+    /// <summary>
+    /// Bonus reward prototype
+    /// </summary>
+    [DataField]
+    public ProtoId<EntityPrototype>? BonusReward = "TTIMedicalCredit1";
+
+    /// <summary>
+    /// Bonus reward percentage. Name has a logic to it...
+    /// </summary>
+    [DataField]
+    public float BonusRewardPercent = 0.005f;
+
+    /// <summary>
+    /// Bonus reward for turning in a body equipped with gear bearing the TTIEquip tag
+    /// </summary>
+    [DataField(customTypeSerializer: typeof(ProtoId<TagPrototype>))]
+    public string BonusRewardTag = "TTIEquip";
+    // Forge-change-end
 }
 
 [DataDefinition, Serializable, NetSerializable]

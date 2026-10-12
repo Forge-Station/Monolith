@@ -1,5 +1,5 @@
 # All Forge
-
+# Forge-change TODO: OMG PLEASE CLEAN DELETE IDK JUST AAAAAHHHH
 - type: loadout
   id: MdMedicOuterClothingEVA
   price: 0
@@ -41,11 +41,10 @@
   name: loadout-group-contractor-outerclothing
   minLimit: 1
   loadouts:
-  - MdMedicOuterClothingOuterHardsuitTrauma # Forge-change
   - MdMedicOuterClothingOuterArmorBodyTrauma # Forge-change
   - MdMedicOuterClothingOuterRobeTraumaBomber # Forge-change
   - MdMedicOuterClothingOuterCoatTrauma # Forge-change
-  - MdMedicOuterClothingLightHardsuit
+  # - MdMedicOuterClothingLightHardsuit # Forge-change
   fallbacks:
   - MdMedicOuterClothingOuterArmorBodyTrauma # Forge-change
 # Forge start

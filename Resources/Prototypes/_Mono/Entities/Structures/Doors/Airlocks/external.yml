@@ -27,6 +27,8 @@
   components:
   - type: Sprite
     sprite: _Mono/Structures/Doors/Airlocks/Glass/externalmieyo.rsi
+  - type: Airlock # Forge-change
+    openUnlitVisible: false
 
 - type: entity
   parent: AirlockExternalGlassMieyo

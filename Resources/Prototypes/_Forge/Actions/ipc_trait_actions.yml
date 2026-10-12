@@ -1,0 +1,13 @@
+- type: entity
+  id: ActionIPCLaserGun
+  categories: [ HideSpawnMenu ]
+  name: laser arm
+  description: Fires a laser from arm at the designated point.
+  components:
+  - type: WorldTargetAction
+    icon: { sprite: _NF/Objects/Weapons/Guns/Battery/laser_pistol.rsi, state: icon }
+    event: !type:ActionGunShootEvent
+    priority: 2
+    checkCanAccess: false
+    range: 0
+    itemIconStyle: BigAction

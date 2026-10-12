@@ -17,3 +17,30 @@
       - id: SheetSteel
       - id: SheetGlass
       - id: SheetPlastic
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateMaterialsAdvancedFilled
+  suffix: Filled, Advanced Materials (full)
+  name: materials crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: SheetPlasteel
+      - id: SheetPGlass
+      - id: SheetPlasma
+      - id: IngotSilver
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateMaterialsSuperFilled
+  suffix: Filled, Super Materials (full)
+  name: materials crate
+  components:
+  - type: StorageFill
+    contents:
+      - id: SheetPlastitanium
+      - id: SheetUGlass
+      - id: SheetUranium
+      - id: IngotGold
+

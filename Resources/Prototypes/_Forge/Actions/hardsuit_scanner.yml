@@ -1,0 +1,27 @@
+# mass scanner action
+- type: entity
+  id: ActionHardsuitMassScanner
+  name: Hardsuit mass scanner
+  description: Open the integrated mass scanner from your hardsuit helmet.
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    icon:
+      sprite: Objects/Tools/handheld_mass_scanner.rsi
+      state: icon
+    event: !type:OpenUiActionEvent
+      key: enum.RadarConsoleUiKey.Key
+
+# crew monitor action
+- type: entity
+  id: ActionHandheldCrewMonitorScanner
+  name: Handheld crew monitor scanner
+  description: Open the handheld crew monitor scanner.
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    icon:
+      sprite: Objects/Specific/Medical/handheldcrewmonitor.rsi
+      state: icon
+    event: !type:OpenUiActionEvent
+      key: enum.CrewMonitoringUIKey.Key

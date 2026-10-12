@@ -27,7 +27,7 @@
     reduction: 0.7
 
 - type: entity
-  parent: [ClothingModsuitChestplateBase, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
+  parent: [ClothingModsuitChestplateBase, ClothingFlightProfileHard] # Forge-change add ClothingFlightProfile
   id: ClothingModsuitChestplateUSSPZastavnik
   name: Brust Zastavnika
   description: An imposing armored shell designed to absorb punishment and maintain stability under pressure.
@@ -36,21 +36,21 @@
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Modsuits/ussp-zastavnik.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 0.74 # Forge-change 0.75 -> 0.74
-    sprintModifier: 0.74 # Forge-change 0.75 -> 0.74
+    walkModifier: 0.625 # Forge-change 0.75 -> 0.625
+    sprintModifier: 0.625 # Forge-change 0.75 -> 0.625
   - type: ExplosionResistance
-    damageCoefficient: 0.35 # Forge-change 0.3 -> 0.35
+    damageCoefficient: 0.3
   - type: StaminaDamageResistance
-    coefficient: 0.3 # Forge-change 0.4 -> 0.3
+    coefficient: 0.1 # Forge-change 0.4 -> 0.1
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.55 # Forge-change 0.45 -> 0.55
-        Slash: 0.55 # Forge-change 0.45 -> 0.55
-        Piercing: 0.425 # Forge-change 0.3 -> 0.425
-        Heat: 0.6 # Forge-change 0.55 -> 0.6
+        Blunt: 0.375 # Forge-change 0.45 -> 0.375
+        Slash: 0.375 # Forge-change 0.45 -> 0.375
+        Piercing: 0.275 # Forge-change 0.3 -> 0.275
+        Heat: 0.45 # Forge-change 0.55 -> 0.45
         Caustic: 0.4
-        Radiation: 0.375 # Forge-change 0.35 -> 0.375
+        Radiation: 0.275 # Forge-change 0.35 -> 0.275
   - type: FireProtection
     reduction: 0.5
 

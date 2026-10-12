@@ -152,9 +152,9 @@
   description: High-quality nitrile gloves. Expensive medical PPE.
   components:
   - type: Sprite
-    sprite: Clothing/Hands/Gloves/nitrile.rsi
+    sprite: _Forge/Clothing/Hands/Gloves/nitrile.rsi # Forge-change
   - type: Clothing
-    sprite: Clothing/Hands/Gloves/nitrile.rsi
+    sprite: _Forge/Clothing/Hands/Gloves/nitrile.rsi # Forge-change
   - type: Fiber
     fiberMaterial: fibers-nitrile
   - type: FingerprintMask
@@ -264,9 +264,9 @@
   description: These tactical gloves are fireproof and shock resistant.
   components:
   - type: Sprite
-    sprite: Clothing/Hands/Gloves/combat.rsi
+    sprite: _Forge/Clothing/Hands/Gloves/combat.rsi # Forge-change
   - type: Clothing
-    sprite: Clothing/Hands/Gloves/combat.rsi
+    sprite: _Forge/Clothing/Hands/Gloves/combat.rsi # Forge-change
   - type: Insulated
   - type: Fiber
     fiberMaterial: fibers-insulative
@@ -333,9 +333,9 @@
   description: Insulated gloves resistant to shocks, or at least they used to.
   components:
   - type: Sprite
-    sprite: Clothing/Hands/Gloves/fingerlessinsuls.rsi
+    sprite: _Forge/Clothing/Hands/Gloves/fingerlessinsuls.rsi # Forge-change
   - type: Clothing
-    sprite: Clothing/Hands/Gloves/fingerlessinsuls.rsi
+    sprite: _Forge/Clothing/Hands/Gloves/fingerlessinsuls.rsi # Forge-change
   - type: Fiber
     fiberMaterial: fibers-insulative
     fiberColor: fibers-yellow

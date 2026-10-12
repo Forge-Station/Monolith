@@ -40,4 +40,8 @@ public sealed partial class ShuttleDeedComponent : Component
     /// </summary>
     [DataField]
     public EntityUid? DeedHolder;
+
+    // Forge-change: baseline appraisal for voucher shuttle resale payouts.
+    [DataField]
+    public int SpawnAppraisalValue;
 }

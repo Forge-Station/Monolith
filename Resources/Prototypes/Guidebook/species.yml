@@ -4,29 +4,28 @@
   text: "/ServerInfo/_Forge/Guidebook/Mobs/Species.xml" # Forge-change
   children:
   - Arachnid
-  - Ariral
-  - Demon # Wega
+  - Diona # Note: Frontier changes inside
+  - Dwarf # Note: Frontier changes inside
+  - Human
+  - Moth
+  - Reptilian # Monolith changes inside
+  - SlimePerson
   - Vox
+  - Goblin # Frontier
   - Vulpkanin # DeltaV
   - Harpy # DeltaV
-  - Hydrakin # Monolith/Obelisk
-  - Goblin # Frontier
-  - Dwarf # Note: Frontier changes inside
-  - Diona # Note: Frontier changes inside
-  - IPC # EE
-  - Moth
+  - Felinid # DeltaV
   - Oni # DeltaV
-  - Rodentia # DeltaV
-  - Resomi # Floof
-  - Skrell # Wega
-  - SlimePerson 
-  - Tajaran # Goobstation
-  - Reptilian # Monolith changes inside
   - Chitinid # DeltaV
-  - Human
-  #- Flight # CE #Forge-Change-Remove: uncomment when mono add working z-layers
-  # - Protogen # Mono
-  #- Felinid # DeltaV #Forge-Change-Remove:
+  - Resomi # Floof
+ # - Protogen # Mono
+  - IPC # EE
+  - Rodentia # DeltaV
+  - Tajaran # Goobstation
+  - Hydrakin # Monolith/Obelisk
+  - Demon # Wega
+  - Skrell # Wega
+  - Flight # CE
 
 - type: guideEntry
   id: Arachnid
@@ -36,7 +35,7 @@
 - type: guideEntry
   id: Diona
   name: species-name-diona
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/_NF/Diona.xml" # Forge-change
+  text: "/ServerInfo/_Forge/Guidebook/_NF/Mobs/Diona.xml" # Forge-change
 
 - type: guideEntry
   id: Dwarf

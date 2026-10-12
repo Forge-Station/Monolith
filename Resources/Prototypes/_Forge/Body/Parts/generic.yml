@@ -53,3 +53,101 @@
     carryAssistSlowdownPenaltyModifier: 0.2
     pullingAssistSlowdownPenaltyModifier: 0.1
     pullingAssistMassPenaltyModifier: 0.1
+
+#region IPC trait bodyparts
+- type: entity
+  parent: LeftArmCyberneticBase
+  id: IPCBadServoLeftArm
+  name: bad servo left arm
+  description: Very low-quality left arm.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: GenerateChildPart
+      id: IPCBadServoLeftHand
+
+- type: entity
+  parent: LeftHandCybernetic
+  id: IPCBadServoLeftHand
+  name: bad servo left arm
+  description: Very low-quality left hand.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: DoAfterDelayMultiplier
+    multiplier: 1.15
+
+- type: entity
+  parent: RightArmCyberneticBase
+  id: IPCBadServoRightArm
+  name: bad servo right arm
+  description: Very low-quality right arm.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: GenerateChildPart
+      id: IPCBadServoRightHand
+
+- type: entity
+  parent: RightHandCybernetic
+  id: IPCBadServoRightHand
+  name: bad servo right arm
+  description: Very low-quality right hand.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: DoAfterDelayMultiplier
+    multiplier: 1.15
+
+- type: entity
+  parent: LeftLegCyberneticBase
+  id: IPCBadServoLeftLeg
+  name: bad servo left leg
+  description: Very low-quaity left leg.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MovementBodyPart
+    walkSpeed: 2 #-20%
+    sprintSpeed: 3.6 #-20%
+
+- type: entity
+  parent: RightLegCyberneticBase
+  id: IPCBadServoRightLeg
+  name: bad servo right leg
+  description: Very low-quaity right leg.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MovementBodyPart
+    walkSpeed: 2 #-20%
+    sprintSpeed: 3.6 #-20%
+
+- type: entity
+  parent: RightArmCyberneticBase
+  id: IPCLaserGunRightArm
+  name: right ipc arm with laser
+  description: Just common ipc right arm with a built-in laser gun.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: BodyPart
+    onAdd:
+    - type: ActionGun
+      action: ActionIPCLaserGun
+      gunProto: IPCLaserGun
+
+# - type: entity ебанные губы не могут без щиткода
+#   parent: RightArmCyberneticBase
+#   id: IPCMantisBladeRightArm
+#   name: right ipc arm with mantis blade
+#   description: Run.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: MantisBladeArm
+#     actionProto: ActionToggleRightMantisBlade
+
+# - type: entity
+#   parent: LeftArmCyberneticBase
+#   id: IPCMantisBladeLeftArm
+#   name: left ipc arm with mantis blade
+#   description: Run.
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: MantisBladeArm
+#     actionProto: ActionTogglLeftMantisBlade
+
+#endregion

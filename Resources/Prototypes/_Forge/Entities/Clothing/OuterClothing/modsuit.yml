@@ -1,7 +1,6 @@
 #region Company
 
 # Harmony Medical Enterprises
-
 - type: entity
   parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateHMELightSuit
@@ -22,20 +21,22 @@
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Mecha/mechmove03.ogg
     slots: [ outerClothing ]
-  - type: RadarConsole
-    followEntity: true
-    noRotate: true
-  - type: DetectionRangeMultiplier
-    infraredMultiplier: 0.5
-    visualMultiplier: 0.75
   - type: ActivatableUI
-    key: enum.RadarConsoleUiKey.Key
-    inHandsOnly: false # Mono
-    singleUser: true
+    key: enum.CrewMonitoringUIKey.Key
   - type: UserInterface
     interfaces:
-      enum.RadarConsoleUiKey.Key:
-        type: RadarConsoleBoundUserInterface
+      enum.CrewMonitoringUIKey.Key:
+        type: CrewMonitoringBoundUserInterface
+  - type: CrewMonitoringConsole
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewMonitor
+  - type: ActionGrant
+    actions:
+    - ActionHandheldCrewMonitorScanner
+  - type: ItemActionGrant
+    actions:
+    - ActionHandheldCrewMonitorScanner
   - type: SealableClothing
     sealUpPopup: sealable-clothing-seal-up-chestplate
     sealDownPopup: sealable-clothing-seal-down-chestplate
@@ -56,11 +57,11 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Shock: 0.8
-        Piercing: 0.8
-        Heat: 0.8
+        Blunt: 0.5
+        Slash: 0.5
+        Shock: 0.7
+        Piercing: 0.65
+        Heat: 0.65
         Caustic: 0.25
         Radiation: 0.25
         Poison: 0.3
@@ -73,7 +74,7 @@
       coolingCoefficient: 0.1
       heatingCoefficient: 0.4
   - type: StaminaDamageResistance
-    coefficient: 0.7
+    coefficient: 0.4
   - type: FireProtection
     reduction: 0.45
 
@@ -97,20 +98,23 @@
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Mecha/mechmove03.ogg
     slots: [ outerClothing ]
-  - type: RadarConsole
-    followEntity: true
-    noRotate: true
-  - type: DetectionRangeMultiplier
-    infraredMultiplier: 0.5
-    visualMultiplier: 0.75
   - type: ActivatableUI
-    key: enum.RadarConsoleUiKey.Key
-    inHandsOnly: false # Mono
-    singleUser: true
+    key: enum.CrewMonitoringUIKey.Key
   - type: UserInterface
     interfaces:
-      enum.RadarConsoleUiKey.Key:
-        type: RadarConsoleBoundUserInterface
+      enum.CrewMonitoringUIKey.Key:
+        type: CrewMonitoringBoundUserInterface
+  - type: CrewMonitoringConsole
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewMonitor
+  - type: ActionGrant
+    actions:
+    - ActionHandheldCrewMonitorScanner
+  - type: ItemActionGrant
+    actions:
+    - ActionHandheldCrewMonitorScanner
+    activeIfWorn: true
   - type: SealableClothing
     sealUpPopup: sealable-clothing-seal-up-chestplate
     sealDownPopup: sealable-clothing-seal-down-chestplate
@@ -124,7 +128,7 @@
       outerClothing-vox:
       - state: equipped-OUTERCLOTHING-sealed-vox
   - type: ExplosionResistance
-    damageCoefficient: 0.6
+    damageCoefficient: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.85
     sprintModifier: 0.85
@@ -133,9 +137,9 @@
       coefficients:
         Blunt: 0.4
         Slash: 0.4
-        Piercing: 0.65
+        Piercing: 0.6
         Shock: 0.7
-        Heat: 0.65
+        Heat: 0.6
         Caustic: 0.1
         Radiation: 0.1
         Poison: 0.2
@@ -148,11 +152,11 @@
       coolingCoefficient: 0.1
       heatingCoefficient: 0.4
   - type: StaminaDamageResistance
-    coefficient: 0.4
+    coefficient: 0.3
   - type: FireProtection
     reduction: 0.1
-# ARS Omnissia
 
+# ARS Omnissia
 - type: entity
   parent: ClothingModsuitChestplateBase
   id: ClothingModsuitChestplateOmnissia

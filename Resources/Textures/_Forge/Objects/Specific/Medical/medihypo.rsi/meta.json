@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from vgstation at commit https://github.com/vgstation-coders/vgstation13/commit/1cdfb0230cc96d0ba751fa002d04f8aa2f25ad7d and modified by emisse for ss14, further modified with fill sprites by SlamBamActionman (github), (Medic) modify and recolor by v6st fot Forge",
+  "copyright": "Taken from YogStation at https://github.com/yogstation13/Yogstation at b38f136e1e3b587de23956df450e6d320046bc2b, modified by a_person5660/ReggieTheRat, split to layers pheenty; recolor and hypo_fill by v6st for Forge",
   "size": {
     "x": 32,
     "y": 32

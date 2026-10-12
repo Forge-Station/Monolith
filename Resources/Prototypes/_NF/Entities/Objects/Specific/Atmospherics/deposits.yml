@@ -16,6 +16,8 @@
   - type: Fixtures
   - type: GasDeposit
   - type: RandomGasDeposit
+  # Drop with the asteroid tile when drills remove the floor under the deposit.
+  - type: RequiresTile
   - type: Sprite
     drawdepth: FloorTiles
     sprite: _NF/Objects/Specific/Atmospherics/deposit.rsi

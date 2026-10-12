@@ -76,6 +76,13 @@
     - RenegateEquipmentDynamic
     - RenegateAmmoDynamic
     - RenegateVoucherDynamic
+    - ForgeTurretEmpire # Forge-Change
+    - ForgeTurretTSF # Forge-Change
+    - ForgeTurretPDV # Forge-Change
+    - ForgeTurretCC # Forge-Change
+    - ForgeTurretUSSP # Forge-Change
+    - ForgeTurretVG # Forge-Change
+    - ForgeTurretKits # Forge-Change
     #Forge-Change-End
   - type: MaterialStorage
     whitelist:
@@ -142,6 +149,8 @@
     - ResearchedExplosives
     - SecurityEquipment
     - SmartGun
+    - ForgeTurretUSSP # Forge-Change
+    - ForgeTurretKits # Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:
@@ -204,6 +213,8 @@
     - ResearchedExplosives
     - SecurityEquipment
     - SmartGun
+    - ForgeTurretVG # Forge-Change
+    - ForgeTurretKits # Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:
@@ -526,7 +537,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "1.4,0.4,-0.4,-0.4"
+          bounds: "-0.4, -0.4, 1.4, 0.4"
         density: 190
         mask:
         - MachineMask
@@ -705,7 +716,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "1.4,0.4,-0.4,-0.4"
+          bounds: "-0.4, -0.4, 1.4, 0.4"
         density: 190
         mask:
         - MachineMask
@@ -877,7 +888,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,1.5,1.2,-0.5"
+          bounds: "-0.5, -0.5, 1.2, 1.5"
         density: 1500
         mask:
         - MachineMask

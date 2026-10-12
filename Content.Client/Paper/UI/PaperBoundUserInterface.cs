@@ -16,6 +16,7 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
     private PaperWindow? _window;
 
     private PaperAction _mode; // Forge-Change
+    private bool _obscureWhileEditing; // Forge-Change
 
     public PaperBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -57,12 +58,17 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
 
         var visuals = EntMan.System<PaperLanguageVisualsSystem>();
 
-        // Obfuscate unknown languages only when reading. Writers need the real
-        // markup so pens (including CC / syndicate) can edit the page.
-        if (_mode != PaperAction.Write && visuals.TryFormatForReader(Owner, paperState, out var formatted))
+        // Always obfuscate unknown languages. Skipping this in Write mode let
+        // anyone who opened the editor read foreign plaintext. Literate writers
+        // still get the real markup (TryFormatForReader leaves it unchanged).
+        _obscureWhileEditing = false;
+        if (visuals.TryFormatForReader(Owner, paperState, out var formatted))
+        {
             paperState = formatted;
+            _obscureWhileEditing = _mode == PaperAction.Write;
+        }
 
-        _window?.Populate(paperState);
+        _window?.Populate(paperState, _obscureWhileEditing);
         RefreshLanguageOptions();
     }
 
@@ -71,7 +77,7 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
         if (_window == null)
             return;
 
-        if (_mode != PaperAction.Write)
+        if (_mode != PaperAction.Write || _obscureWhileEditing)
         {
             _window.SetLanguageOptions([], null);
             return;

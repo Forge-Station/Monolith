@@ -6,6 +6,7 @@ namespace Content.Server._Forge.Botany.HydroponicsConsole;
 public sealed partial class HydroponicsConsoleComponent : Component
 {
     public const int MaxJournalEntries = 24;
+    public const int MaxCultivarPrints = 5;
 
     [DataField]
     public float UpdateInterval = 1f;
@@ -24,4 +25,7 @@ public sealed partial class BotanyCultivarStored
 
     [DataField]
     public SeedData? Seed;
+
+    [DataField]
+    public int PrintsUsed;
 }

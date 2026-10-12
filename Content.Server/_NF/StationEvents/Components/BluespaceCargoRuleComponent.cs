@@ -1,6 +1,6 @@
 using Content.Server.StationEvents.Events;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.StationEvents.Components;
 
@@ -11,13 +11,13 @@ namespace Content.Server.StationEvents.Components;
 [RegisterComponent, Access(typeof(BluespaceCargoRule))]
 public sealed partial class BluespaceCargoRuleComponent : Component
 {
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string SpawnerPrototype = "RandomCargoSpawner";
 
     [DataField]
     public bool RequireSafeAtmosphere = false;
 
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField(customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string FlashPrototype = "EffectFlashBluespace";
 
     [DataField]

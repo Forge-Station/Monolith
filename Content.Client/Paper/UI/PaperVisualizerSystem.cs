@@ -13,10 +13,12 @@ public sealed partial class PaperVisualizerSystem : VisualizerSystem<PaperVisual
         if (args.Sprite == null)
             return;
 
-        if (AppearanceSystem.TryGetData<PaperStatus>(uid, PaperVisuals.Status, out var writingStatus, args.Component))
+        if (AppearanceSystem.TryGetData<PaperStatus>(uid, PaperVisuals.Status, out var writingStatus, args.Component)
+            && _sprite.LayerMapTryGet((uid, args.Sprite), PaperVisualLayers.Writing, out _, false))
             _sprite.LayerSetVisible((uid, args.Sprite), PaperVisualLayers.Writing, writingStatus == PaperStatus.Written);
 
-        if (AppearanceSystem.TryGetData<string>(uid, PaperVisuals.Stamp, out var stampState, args.Component))
+        if (AppearanceSystem.TryGetData<string>(uid, PaperVisuals.Stamp, out var stampState, args.Component)
+            && _sprite.LayerMapTryGet((uid, args.Sprite), PaperVisualLayers.Stamp, out _, false))
         {
             if (stampState != string.Empty)
             {

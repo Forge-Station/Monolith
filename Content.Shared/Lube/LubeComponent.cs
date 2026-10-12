@@ -2,7 +2,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Lube;
 
@@ -21,7 +21,7 @@ public sealed partial class LubeComponent : Component
     /// <summary>
     /// Reagent that will be used as glue.
     /// </summary>
-    [DataField("reagent", customTypeSerializer: typeof(PrototypeIdSerializer<ReagentPrototype>))]
+    [DataField("reagent", customTypeSerializer: typeof(ProtoId<ReagentPrototype>))]
     public string Reagent = "SpaceLube";
 
     /// <summary>

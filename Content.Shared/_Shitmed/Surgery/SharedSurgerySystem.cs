@@ -21,6 +21,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
+using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -49,8 +50,20 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedCorticalBorerSystem _corticalBorer = default!;
 
-    private readonly Dictionary<EntProtoId, EntityUid> _surgeries = new();
 
+    /// <summary>
+    /// Cache of all surgery prototypes' singleton entities.
+    /// Cleared after a prototype reload.
+    /// </summary>
+    private readonly Dictionary<EntProtoId, EntityUid> _surgeries = new();
+    private readonly List<EntProtoId> _allSurgeries = new();
+
+    /// <summary>
+    /// Every surgery entity prototype id.
+    /// Kept in sync with prototype reloads.
+    /// </summary>
+    public IReadOnlyList<EntProtoId> AllSurgeries => _allSurgeries;
+    
     public override void Initialize()
     {
         base.Initialize();
@@ -63,6 +76,7 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SurgeryCorticalBorerConditionComponent, SurgeryValidEvent>(OnCorticalBorerValid);
         SubscribeLocalEvent<SurgeryPartConditionComponent, SurgeryValidEvent>(OnPartConditionValid);
         SubscribeLocalEvent<SurgeryOrganConditionComponent, SurgeryValidEvent>(OnOrganConditionValid);
+        SubscribeLocalEvent<SurgeryHasBodyConditionComponent, SurgeryValidEvent>(OnHasBodyConditionValid);
         SubscribeLocalEvent<SurgeryWoundedConditionComponent, SurgeryValidEvent>(OnWoundedValid);
         SubscribeLocalEvent<SurgeryPartRemovedConditionComponent, SurgeryValidEvent>(OnPartRemovedConditionValid);
         SubscribeLocalEvent<SurgeryBodyConditionComponent, SurgeryValidEvent>(OnBodyConditionValid);
@@ -73,8 +87,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SurgeryPartComponentConditionComponent, SurgeryValidEvent>(OnPartComponentConditionValid);
         SubscribeLocalEvent<SurgeryOrganOnAddConditionComponent, SurgeryValidEvent>(OnOrganOnAddConditionValid);
         //SubscribeLocalEvent<SurgeryRemoveLarvaComponent, SurgeryCompletedEvent>(OnRemoveLarva);
+        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         InitializeSteps();
+
+        LoadPrototypes();
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -86,9 +103,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     {
         if (!_timing.IsFirstTimePredicted)
             return;
+        if (args.Cancelled)
+        {
+            var failEv = new SurgeryStepFailedEvent(args.User, ent, args.Surgery, args.Step);
+            RaiseLocalEvent(args.User, ref failEv);
+            return;
+        }
 
-        if (args.Cancelled
-            || args.Handled
+        if (args.Handled
             || args.Target is not { } target
             || !IsSurgeryValid(ent, target, args.Surgery, args.Step, args.User, out var surgery, out var part, out var step)
             || !PreviousStepsComplete(ent, part, surgery, args.Step)
@@ -98,9 +120,12 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
-        args.Repeat = (HasComp<SurgeryRepeatableStepComponent>(step) && !IsStepComplete(ent, part, args.Step, surgery));
-        var ev = new SurgeryStepEvent(args.User, ent, part, GetTools(args.User), surgery);
+        var complete = IsStepComplete(ent, part, args.Step, surgery);
+        args.Repeat = HasComp<SurgeryRepeatableStepComponent>(step) && !complete;
+        //args.Repeat = (HasComp<SurgeryRepeatableStepComponent>(step) && !IsStepComplete(ent, part, args.Step, surgery));
+        var ev = new SurgeryStepEvent(args.User, ent, part, GetTools(args.User), surgery, step, complete);
         RaiseLocalEvent(step, ref ev);
+        RaiseLocalEvent(args.User, ref ev);
         RefreshUI(ent);
     }
 
@@ -209,6 +234,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             args.Cancelled = true;
     }
 
+    private void OnHasBodyConditionValid(Entity<SurgeryHasBodyConditionComponent> ent, ref SurgeryValidEvent args)
+    {
+        if (CompOrNull<BodyPartComponent>(args.Part)?.Body == null)
+            args.Cancelled = true;
+    }
     private void OnOrganConditionValid(Entity<SurgeryOrganConditionComponent> ent, ref SurgeryValidEvent args)
     {
         if (!TryComp<BodyPartComponent>(args.Part, out var partComp)
@@ -382,5 +412,28 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     protected virtual void RefreshUI(EntityUid body)
     {
+    }
+
+     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (!args.WasModified<EntityPrototype>())
+            return;
+
+        LoadPrototypes();
+    }
+
+    private void LoadPrototypes()
+    {
+        // Cache is probably invalid so delete it
+        foreach (var uid in _surgeries.Values)
+        {
+            Del(uid);
+        }
+        _surgeries.Clear();
+
+        _allSurgeries.Clear();
+        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
+            if (entity.HasComponent<SurgeryComponent>())
+                _allSurgeries.Add(new EntProtoId(entity.ID));
     }
 }

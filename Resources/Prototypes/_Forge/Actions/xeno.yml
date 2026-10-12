@@ -1,0 +1,476 @@
+# Colonial Marines xenomorph abilities.
+# Icons taken from RMC-14.
+
+- type: entity
+  id: ActionForgeXenoRest
+  name: Rest
+  description: Lie down to recover plasma and wounds faster. Use again to stand.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: resting
+    event: !type:ForgeXenoRestActionEvent
+    useDelay: 1
+
+- type: entity
+  id: ActionForgeXenoTailStab
+  name: Tail stab
+  description: Impale a nearby target with your tail.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: tail_attack
+    event: !type:ForgeXenoTailStabActionEvent
+      damage:
+        groups:
+          Brute: 30
+    useDelay: 4
+    range: 2.5
+
+- type: entity
+  id: ActionForgeXenoTailStabHeavy
+  parent: ActionForgeXenoTailStab
+  components:
+  - type: EntityTargetAction
+    event: !type:ForgeXenoTailStabActionEvent
+      damage:
+        groups:
+          Brute: 48
+
+- type: entity
+  id: ActionForgeXenoTailStabQueen
+  parent: ActionForgeXenoTailStab
+  components:
+  - type: EntityTargetAction
+    event: !type:ForgeXenoTailStabActionEvent
+      damage:
+        groups:
+          Brute: 54
+
+- type: entity
+  id: ActionForgeXenoAcid
+  name: Corrosive acid
+  description: Spit a heavy glob of acid.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:ForgeXenoAcidActionEvent
+      plasmaCost: 75
+      projectile: BulletXenoAcid
+      speed: 18
+    useDelay: 8
+    range: 8
+    checkCanAccess: false
+
+- type: entity
+  id: ActionForgeXenoAcidWeak
+  parent: ActionForgeXenoAcid
+  components:
+  - type: WorldTargetAction
+    event: !type:ForgeXenoAcidActionEvent
+      plasmaCost: 50
+      projectile: BulletXenoAcidWeak
+      speed: 18
+
+- type: entity
+  id: ActionForgeXenoSpit
+  name: Acid spit
+  description: Spit a glob of acid.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: xeno_spit
+    event: !type:ForgeXenoSpitActionEvent
+      plasmaCost: 25
+      projectile: BulletXenoAcid
+      speed: 22
+    useDelay: 2
+    range: 10
+    checkCanAccess: false
+
+- type: entity
+  id: ActionForgeXenoSpitHeavy
+  parent: ActionForgeXenoSpit
+  name: Heavy acid spit
+  components:
+  - type: WorldTargetAction
+    event: !type:ForgeXenoSpitActionEvent
+      plasmaCost: 50
+      projectile: BulletXenoAcidHeavy
+      speed: 18
+    useDelay: 3.5
+
+- type: entity
+  id: ActionForgeXenoPlantWeeds
+  name: Plant weeds
+  description: Secrete a patch of hive weeds. Plasma regenerates faster while standing on it.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: plant_weeds
+    event: !type:ForgeXenoConstructActionEvent
+      plasmaCost: 50
+      prototype: XenoWeeds
+      delay: 1
+    useDelay: 2
+    range: 1.5
+    checkCanAccess: true
+
+- type: entity
+  id: ActionForgeXenoResinWall
+  name: Secrete resin wall
+  description: Grow a resin wall.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: resin_wall
+    event: !type:ForgeXenoConstructActionEvent
+      plasmaCost: 100
+      prototype: WallXenoResin
+      delay: 2
+    useDelay: 3
+    range: 1.5
+    checkCanAccess: true
+
+- type: entity
+  id: ActionForgeXenoResinMembrane
+  name: Secrete resin membrane
+  description: Grow a translucent resin membrane.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: resin_membrane
+    event: !type:ForgeXenoConstructActionEvent
+      plasmaCost: 75
+      prototype: WallXenoMembrane
+      delay: 2
+    useDelay: 3
+    range: 1.5
+    checkCanAccess: true
+
+- type: entity
+  id: ActionForgeXenoResinDoor
+  name: Secrete resin door
+  description: Grow a resin sphincter. It opens for the hive.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: resin_door
+    event: !type:ForgeXenoConstructActionEvent
+      plasmaCost: 100
+      prototype: DoorXenoResin
+      delay: 2
+    useDelay: 3
+    range: 1.5
+    checkCanAccess: true
+
+- type: entity
+  id: ActionForgeXenoStickyResin
+  name: Secrete sticky resin
+  description: Coat the floor in resin that clings to anything that is not of the hive.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: sticky_resin
+    event: !type:ForgeXenoConstructActionEvent
+      plasmaCost: 40
+      prototype: XenoStickyResin
+      delay: 1
+    useDelay: 2
+    range: 1.5
+    checkCanAccess: true
+
+- type: entity
+  id: ActionForgeXenoFastResin
+  name: Secrete fast resin
+  description: Coat the floor in slick resin.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: fast_resin
+    event: !type:ForgeXenoConstructActionEvent
+      plasmaCost: 40
+      prototype: XenoFastResin
+      delay: 1
+    useDelay: 2
+    range: 1.5
+    checkCanAccess: true
+
+- type: entity
+  id: ActionForgeXenoLayEgg
+  name: Lay egg
+  description: Plant a xenomorph egg.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: lay_egg
+    event: !type:ForgeXenoConstructActionEvent
+      plasmaCost: 150
+      prototype: XenoEgg
+      delay: 3
+    useDelay: 8
+    range: 1.5
+    checkCanAccess: true
+
+- type: entity
+  id: ActionForgeXenoLeap
+  name: Leap
+  description: Throw yourself at a target.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: pounce
+    event: !type:ForgeXenoLeapActionEvent
+      speed: 16
+      stunSeconds: 2
+    useDelay: 6
+    range: 8
+    checkCanAccess: false
+
+- type: entity
+  id: ActionForgeXenoPounce
+  parent: ActionForgeXenoLeap
+  name: Pounce
+  description: A longer leap that knocks the target down and grabs them.
+  components:
+  - type: WorldTargetAction
+    event: !type:ForgeXenoLeapActionEvent
+      plasmaCost: 20
+      speed: 18
+      stunSeconds: 4
+      pullOnHit: true
+      hitDamage:
+        groups:
+          Brute: 15
+    useDelay: 10
+    range: 7
+
+- type: entity
+  id: ActionForgeXenoCharge
+  parent: ActionForgeXenoLeap
+  name: Charge
+  description: A crushing rush. Anything you hit gets flattened.
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: charge
+    event: !type:ForgeXenoLeapActionEvent
+      smash: true
+      plasmaCost: 40
+      speed: 20
+      stunSeconds: 2.5
+      hitDamage:
+        types:
+          Blunt: 60
+          Structural: 80
+    useDelay: 12
+    range: 8
+
+- type: entity
+  id: ActionForgeXenoHide
+  name: Hide
+  description: Bend light around your carapace. Attacking breaks the effect.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: xenohide
+    event: !type:ForgeXenoHideActionEvent
+    useDelay: 2
+
+- type: entity
+  id: ActionForgeXenoPunch
+  name: Punch
+  description: A stunning blow.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: dislocate
+    event: !type:ForgeXenoPunchActionEvent
+      stunSeconds: 1.5
+      damage:
+        types:
+          Blunt: 27.5
+    useDelay: 6
+    range: 1.5
+
+- type: entity
+  id: ActionForgeXenoLunge
+  name: Lunge
+  description: Hurl yourself at a target and pin them.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: pounce
+    event: !type:ForgeXenoLeapActionEvent
+      speed: 16
+      stunSeconds: 2
+      pullOnHit: true
+    useDelay: 8
+    range: 5
+    checkCanAccess: false
+
+- type: entity
+  id: ActionForgeXenoFling
+  name: Fling
+  description: Hurl a nearby target away.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: fling
+    event: !type:ForgeXenoFlingActionEvent
+      plasmaCost: 0
+      throwSpeed: 14
+      stunSeconds: 1
+    useDelay: 6
+    range: 2
+
+- type: entity
+  id: ActionForgeXenoFortify
+  name: Fortify
+  description: Lock your crest. You barely move, and you barely get hurt.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: fortify
+    event: !type:ForgeXenoFortifyActionEvent
+    useDelay: 2
+
+- type: entity
+  id: ActionForgeXenoCrest
+  parent: ActionForgeXenoFortify
+  name: Crest defense
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: crest_defense
+
+- type: entity
+  id: ActionForgeXenoTransferPlasma
+  name: Transfer plasma
+  description: Push plasma into another xenomorph.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: transfer_plasma
+    event: !type:ForgeXenoTransferPlasmaActionEvent
+      amount: 50
+    useDelay: 2
+    range: 2
+
+- type: entity
+  id: ActionForgeXenoPheromones
+  name: Emit pheromones
+  description: A combat scent. You move faster while it lasts.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: emit_pheromones
+    event: !type:ForgeXenoPheromonesActionEvent
+    useDelay: 2
+
+- type: entity
+  id: ActionForgeXenoZoom
+  name: Toggle zoom
+  description: Focus your eyes further out.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: toggle_long_range
+    event: !type:ForgeXenoZoomActionEvent
+    useDelay: 1
+
+- type: entity
+  id: ActionForgeXenoScreech
+  name: Screech
+  description: A psychic howl that drops everything nearby that is not of the hive.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: screech
+    event: !type:ForgeXenoScreechActionEvent
+      plasmaCost: 250
+      range: 7
+      stunSeconds: 3
+    useDelay: 45
+
+- type: entity
+  id: ActionForgeXenoGut
+  name: Gut
+  description: Tear a downed victim open.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: gut
+    event: !type:ForgeXenoGutActionEvent
+      plasmaCost: 200
+      damage:
+        groups:
+          Brute: 80
+    useDelay: 10
+    range: 1.5
+
+- type: entity
+  id: ActionForgeXenoStomp
+  name: Stomp
+  description: Slam the ground and knock everyone around you down.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:ForgeXenoStompActionEvent
+      plasmaCost: 50
+      range: 1.8
+      stunSeconds: 2
+      damage:
+        types:
+          Blunt: 40
+    useDelay: 12

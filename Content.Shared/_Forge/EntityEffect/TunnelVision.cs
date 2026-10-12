@@ -10,7 +10,6 @@ namespace Content.Shared._Forge.EntityEffects.Effects;
 [DataDefinition]
 public sealed partial class TunnelVision : EntityEffect
 {
-    [ValidatePrototypeId<StatusEffectPrototype>]
     public const string Key = "TunnelVision";
 
     [DataField(required: true)]

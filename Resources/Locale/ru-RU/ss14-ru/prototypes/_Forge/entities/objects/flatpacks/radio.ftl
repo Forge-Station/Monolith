@@ -6,3 +6,5 @@ ent-VinylPlayerFlatpack = запакованный {ent-VinylPlayer}
     .desc = Содержит в себе запакованный {ent-VinylPlayer}.
 ent-StationRadioReceiverFlatpack = запакованный {ent-StationRadioReceiver}
     .desc = Содержит в себе запакованный {ent-StationRadioReceiver}.
+ent-StationRadioReceiverUwuFlatpack = запакованный {ent-StationRadioReceiverUwU}
+    .desc = Содержит в себе запакованный {ent-StationRadioReceiverUwU}.

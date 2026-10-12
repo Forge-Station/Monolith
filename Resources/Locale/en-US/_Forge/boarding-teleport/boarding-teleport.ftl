@@ -16,7 +16,7 @@ boarding-teleport-window-apc-risk = APC underload: +{$percent}% risk
 boarding-teleport-window-mode-sector = [color=#87b7ff]Mode:[/color] search and lock
 boarding-teleport-window-mode-grid = [color=#ffd27f]Mode:[/color] landing point
 boarding-teleport-window-mode-ready = [color=#8dff99]Mode:[/color] channel stable, platforms ready
-boarding-teleport-window-mode-summary-Stealth = [color=#6bb8ff]Mode:[/color] Stealth — moderate risk, balanced speed
+boarding-teleport-window-mode-summary-Stealth = [color=#6bb8ff]Mode:[/color] Stealth — no radar blip on the target, moderate risk
 boarding-teleport-window-mode-summary-Precise = [color=#9bff96]Mode:[/color] Precise — longer charge, minimal scatter
 boarding-teleport-window-mode-summary-Rapid = [color=#ffae63]Mode:[/color] Rapid — short charge, high risk
 boarding-teleport-window-mode-button-Stealth = Stealth
@@ -44,8 +44,9 @@ boarding-teleport-platform-charge-started = Platform charge started.
 boarding-teleport-platform-countdown = Jump in {$seconds}s
 boarding-teleport-status-NoGrid = The console must be installed on a grid.
 boarding-teleport-status-NoEngine = No bluespace engine on this grid. Install one on the same shuttle as the console.
-boarding-teleport-status-TargetShielded = Target has active shields — bluespace lock denied.
+boarding-teleport-status-TargetShielded = Target shield refuses bluespace — lock denied.
 boarding-teleport-status-TargetShieldTooStrong = Target shields exceed this engine tier. Upgrade the drive or wait for shields to drop.
+boarding-teleport-window-shield-pierce = Piercing target shields: +{$risk}% risk
 boarding-teleport-status-SourceShieldBlocksTeleport = Your ship shield blocks outgoing bluespace boarding.
 boarding-teleport-status-TargetInFtl = Target is in FTL — landing lock unavailable.
 boarding-teleport-status-NoEnginePower = Bluespace engine is unpowered.
@@ -133,7 +134,7 @@ research-discipline-forge-boarding-teleport-advanced = Advanced bluespace boardi
 research-discipline-forge-boarding-teleport-tier3 = Military bluespace boarding
 research-discipline-forge-boarding-teleport-experimental = Experimental bluespace boarding
 research-technology-forge-boarding-teleport-tier1 = Basic boarding kit
-research-technology-forge-boarding-teleport-tier1-desc = Unlocks fabrication of tier-1 bluespace boarding components after super parts are available.
+research-technology-forge-boarding-teleport-tier1-desc = Unlocks fabrication of tier-1 bluespace boarding components after super parts are available. The scrambler is not on this tree — it comes from a rare precursor disk.
 research-technology-forge-boarding-teleport-tier2 = Improved bluespace drive
 research-technology-forge-boarding-teleport-tier3-base = Military boarding (in development)
 research-technology-forge-boarding-teleport-tier4 = Phase-shift drive T4
@@ -166,9 +167,9 @@ ent-ComputerBoardingTeleport = bluespace boarding console
 ent-BoardingTeleportEngine = bluespace boarding engine
     .desc = Powers the console on the same grid. Sets acquisition range and lock tolerances.
 ent-BoardingTeleportEngineAdvanced = advanced bluespace boarding engine
-    .desc = Extended acquisition range and tier-2 shield penetration.
+    .desc = Extended acquisition range. A matched shield only adds a light jolt to the lock.
 ent-BoardingTeleportEngineTier3 = military bluespace boarding engine
-    .desc = A hardened drive that pierces tier-1 and tier-2 shields when establishing a landing lock.
+    .desc = A hardened drive. Live shields add less scatter and risk than a civilian engine.
 ent-BoardingTeleportEngineExperimental = experimental bluespace boarding engine
     .desc = Phase-shift tuned drive with higher risk tolerance and faster lock recovery.
 ent-BoardingBluespaceScrambler = bluespace scrambler

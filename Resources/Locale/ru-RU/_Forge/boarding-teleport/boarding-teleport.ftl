@@ -16,7 +16,7 @@ boarding-teleport-window-apc-risk = Недогруз СМ: +{$percent}% к ри�
 boarding-teleport-window-mode-sector = [color=#87b7ff]Режим:[/color] поиск и захват цели
 boarding-teleport-window-mode-grid = [color=#ffd27f]Режим:[/color] точка высадки
 boarding-teleport-window-mode-ready = [color=#8dff99]Режим:[/color] канал стабилен, платформы в строю
-boarding-teleport-window-mode-summary-Stealth = [color=#6bb8ff]Режим:[/color] Скрытный — умеренный риск, сбалансированная скорость
+boarding-teleport-window-mode-summary-Stealth = [color=#6bb8ff]Режим:[/color] Скрытный — цель не видит отметку на радаре, умеренный риск
 boarding-teleport-window-mode-summary-Precise = [color=#9bff96]Режим:[/color] Точный — дольше заряд, минимальный разброс
 boarding-teleport-window-mode-summary-Rapid = [color=#ffae63]Режим:[/color] Ускоренный — быстрый заряд, высокий риск
 boarding-teleport-window-mode-button-Stealth = Скрытный
@@ -42,8 +42,9 @@ boarding-teleport-status-TargetMoving = Цель движется слишком
 boarding-teleport-status-InvalidLanding = На эту клетку высадка невозможна (нет тайла).
 boarding-teleport-status-NoGrid = Консоль должна стоять на судне.
 boarding-teleport-status-NoEngine = На судне нет блюспейс-двигателя. Установите его на том же шаттле, что и консоль.
-boarding-teleport-status-TargetShielded = У цели активны щиты — блюспейс-захват заблокирован.
+boarding-teleport-status-TargetShielded = Щит цели не пропускает блюспейс — захват заблокирован.
 boarding-teleport-status-TargetShieldTooStrong = Щиты цели сильнее класса двигателя. Усильте привод или дождитесь спада щитов.
+boarding-teleport-window-shield-pierce = Щиты цели пробиваются: +{$risk}% к риску
 boarding-teleport-status-SourceShieldBlocksTeleport = Щит вашего корабля блокирует исходящий блюспейс-абордаж.
 boarding-teleport-status-TargetInFtl = Цель в FTL — захват высадки невозможен.
 boarding-teleport-status-NoEnginePower = Блюспейс-двигатель обесточен.
@@ -133,7 +134,7 @@ research-discipline-forge-boarding-teleport-advanced = Продвинутый б
 research-discipline-forge-boarding-teleport-tier3 = Военный блюспейс-абордаж
 research-discipline-forge-boarding-teleport-experimental = Экспериментальный блюспейс-абордаж
 research-technology-forge-boarding-teleport-tier1 = Базовый комплект абордажа
-research-technology-forge-boarding-teleport-tier1-desc = Открывает сборку базовых узлов блюспейс-абордажа после изучения суперкомпонентов.
+research-technology-forge-boarding-teleport-tier1-desc = Открывает сборку базовых узлов блюспейс-абордажа после изучения суперкомпонентов. Глушитель в дерево не входит — он только на редком диске предтечей.
 research-technology-forge-boarding-teleport-tier2 = Улучшенный блюспейс-привод
 research-technology-forge-boarding-teleport-tier3-base = Военный абордаж (в разработке)
 research-technology-forge-boarding-teleport-tier4 = Фазовый привод T4

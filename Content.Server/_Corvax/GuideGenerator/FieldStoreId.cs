@@ -2,15 +2,11 @@ using System.Collections;
 using System.Linq;
 using System.Reflection;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Serialization.Markdown.Mapping;
 using Robust.Shared.Serialization.Markdown.Sequence;
 using Robust.Shared.Serialization.Markdown.Value;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 
 namespace Content.Server.Corvax.GuideGenerator;
 
@@ -54,7 +50,7 @@ public static class FieldStoreId
     {
         var underlying = ResolveConcreteType(Nullable.GetUnderlyingType(memberType) ?? memberType, node);
 
-        if (TryGetEntityPrototypeSerializerKind(customTypeSerializer, out var serializerKind))
+        if (TryGetEntityPrototypeSerializerKind(customTypeSerializer, underlying, out var serializerKind))
         {
             ExtractIdsFromCustomSerializer(serializerKind, node, outIds, underlying);
             return;
@@ -142,7 +138,7 @@ public static class FieldStoreId
         DictionaryValue
     }
 
-    private static bool TryGetEntityPrototypeSerializerKind(Type? serializerType, out EntityPrototypeSerializerKind kind)
+    private static bool TryGetEntityPrototypeSerializerKind(Type? serializerType, Type declaredType, out EntityPrototypeSerializerKind kind)
     {
         kind = default;
         if (serializerType == null || !serializerType.IsGenericType)
@@ -151,33 +147,34 @@ public static class FieldStoreId
         var def = serializerType.GetGenericTypeDefinition();
         var args = serializerType.GetGenericArguments();
 
-        if ((def == typeof(PrototypeIdSerializer<>) || def == typeof(AbstractPrototypeIdSerializer<>)) &&
-            args[0] == typeof(EntityPrototype))
+        if (def == typeof(ProtoId<>) && args[0] == typeof(EntityPrototype))
         {
+            if (typeof(IDictionary).IsAssignableFrom(declaredType) && declaredType.IsGenericType)
+            {
+                var dictArgs = declaredType.GetGenericArguments();
+                if (dictArgs[1] == typeof(EntityPrototype))
+                {
+                    kind = EntityPrototypeSerializerKind.DictionaryValue;
+                    return true;
+                }
+
+                kind = EntityPrototypeSerializerKind.DictionaryKey;
+                return true;
+            }
+
+            if (GetElementType(declaredType) != null)
+            {
+                kind = EntityPrototypeSerializerKind.Sequence;
+                return true;
+            }
+
             kind = EntityPrototypeSerializerKind.Single;
             return true;
         }
 
-        if ((def == typeof(PrototypeIdListSerializer<>) || def == typeof(AbstractPrototypeIdListSerializer<>)
-             || def == typeof(PrototypeIdHashSetSerializer<>) || def == typeof(AbstractPrototypeIdHashSetSerializer<>)
-             || def == typeof(PrototypeIdArraySerializer<>) || def == typeof(AbstractPrototypeIdArraySerializer<>)) &&
-            args[0] == typeof(EntityPrototype))
+        if (def == typeof(AbstractPrototypeIdArraySerializer<>) && args[0] == typeof(EntityPrototype))
         {
             kind = EntityPrototypeSerializerKind.Sequence;
-            return true;
-        }
-
-        if ((def == typeof(PrototypeIdDictionarySerializer<,>) || def == typeof(AbstractPrototypeIdDictionarySerializer<,>)) &&
-            args[1] == typeof(EntityPrototype))
-        {
-            kind = EntityPrototypeSerializerKind.DictionaryKey;
-            return true;
-        }
-
-        if ((def == typeof(PrototypeIdValueDictionarySerializer<,>) || def == typeof(AbstractPrototypeIdValueDictionarySerializer<,>)) &&
-            args[1] == typeof(EntityPrototype))
-        {
-            kind = EntityPrototypeSerializerKind.DictionaryValue;
             return true;
         }
 

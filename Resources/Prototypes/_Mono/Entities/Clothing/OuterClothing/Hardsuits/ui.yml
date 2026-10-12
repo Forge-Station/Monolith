@@ -67,7 +67,7 @@
       regenRate: 10.8 # Forge-change 6->10.8
       spinupTime: 1
       breakCooldown: 17.5 # Forge-change 30->17.5
-      powerDraw: 0.02 # Forge-change 0.5->0.02
+      powerDraw: 0.1 # Forge-change 0.5->0.1
       blockModifier: # Forge-change
         coefficients: # Forge-change
           Blunt: 1 # Forge-change

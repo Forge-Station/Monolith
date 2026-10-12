@@ -12,6 +12,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Timing;
 using static Content.Client.Tips.TippyUI;
 
@@ -141,7 +142,7 @@ public sealed partial class TippyUIController : UIController
                 {
                     var paper = EntityManager.AddComponent<PaperVisualsComponent>(_entity);
                     paper.BackgroundImagePath = "/Textures/Interface/Paper/paper_background_default.svg.96dpi.png";
-                    paper.BackgroundPatchMargin = new(16f, 16f, 16f, 16f);
+                    paper.BackgroundPatchMargin = new Thickness(16f);
                     paper.BackgroundModulate = new(255, 255, 204);
                     paper.FontAccentColor = new(0, 0, 0);
                 }

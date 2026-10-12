@@ -1,5 +1,6 @@
 using Content.Server.Destructible;
 using Content.Server.Gatherable.Components;
+using Content.Shared._Forge.OrePipe;
 using Content.Shared.Destructible;
 using Content.Shared.Interaction;
 using Content.Shared.Tag;
@@ -74,6 +75,10 @@ public sealed partial class GatherableSystem : EntitySystem
 
         // Spawn the loot!
         if (component.Loot == null)
+            return;
+
+        // Forge-Change: ship drills use abstract ore buffers — never drop Dynamic loot piles.
+        if (gatherer != null && HasComp<OrePipeBufferComponent>(gatherer.Value))
             return;
 
         var pos = _transform.GetMapCoordinates(gatheredUid);

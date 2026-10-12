@@ -55,14 +55,12 @@ public sealed partial class FillWallPaintCommand : IConsoleCommand
 
         if (!remove)
         {
-            var parsed = Color.TryFromHex(args[1]);
-            if (parsed == null)
+            if (!Color.TryFromHex(args[1], out color))
             {
                 shell.WriteError($"Failed to parse color '{args[1]}'. Expected #RRGGBB or #RRGGBBAA.");
                 return;
             }
 
-            color = parsed.Value;
             color = WallPaintColor.Clamp(color);
         }
 

@@ -18,9 +18,8 @@ public sealed partial class ParallaxOverlay : Overlay
 {
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private IConfigurationManager _configurationManager = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IParallaxManager _manager = default!;
     private readonly ParallaxSystem _parallax;
     private readonly CESharedZLevelsSystem _zLevel; //CrystallEdge
@@ -72,7 +71,7 @@ public sealed partial class ParallaxOverlay : Overlay
             ShaderInstance? shader;
 
             if (!string.IsNullOrEmpty(layer.Config.Shader))
-                shader = _prototypeManager.Index<ShaderPrototype>(layer.Config.Shader).Instance();
+                shader = _protoManager.Index<ShaderPrototype>(layer.Config.Shader).Instance();
             else
                 shader = null;
 

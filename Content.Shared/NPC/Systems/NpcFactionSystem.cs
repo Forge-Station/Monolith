@@ -228,6 +228,19 @@ public sealed partial class NpcFactionSystem : EntitySystem
         return ent.Comp.Factions.Overlaps(other.Comp.Factions) || ent.Comp.FriendlyFactions.Overlaps(other.Comp.Factions);
     }
 
+    // Forge-Change-start
+    /// <summary>
+    /// True when <paramref name="ent"/> treats <paramref name="other"/> as a hostile faction member.
+    /// </summary>
+    public bool IsHostileFactionMember(Entity<NpcFactionMemberComponent?> ent, Entity<NpcFactionMemberComponent?> other)
+    {
+        if (!Resolve(ent, ref ent.Comp, false) || !Resolve(other, ref other.Comp, false))
+            return false;
+
+        return ent.Comp.HostileFactions.Overlaps(other.Comp.Factions);
+    }
+    // Forge-Change-end
+
     public bool IsFactionFriendly(string target, string with)
     {
         return _factions[target].Friendly.Contains(with) && _factions[with].Friendly.Contains(target);

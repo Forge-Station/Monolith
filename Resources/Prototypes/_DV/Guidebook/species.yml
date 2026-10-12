@@ -1,7 +1,7 @@
-# - type: guideEntry #Forge-Change-Remove
-#   id: Felinid
-#   name: species-name-felinid
-#   text: "/ServerInfo/_Forge/Guidebook/Mobs/_DV/Felinid.xml" # Forge-change
+- type: guideEntry
+  id: Felinid
+  name: species-name-felinid
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_DV/Felinid.xml" # Forge-change
 
 - type: guideEntry
   id: Harpy

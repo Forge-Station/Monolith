@@ -1,5 +1,8 @@
-ent-ChameleonProjector = маскировочный проектор
+ent-ChameleonProjectorNoBattery = маскировочный проектор
     .desc = Схожая с голопаразитной технология, позволяющая создать из твёрдого света копию любого объекта, находящегося около вас. Маскировка спадает при поднятии или отключении.
+ent-ChameleonProjector = { ent-ChameleonProjectorNoBattery }
+    .desc = { ent-ChameleonProjectorNoBattery.desc }
+    .suffix = Батарея
 ent-ChameleonDisguise = Урист МакКляйнер
     .desc = { ent-BaseMob.desc }
 ent-ActionDisguiseNoRot = Вкл\выкл вращение

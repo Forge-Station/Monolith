@@ -5,12 +5,12 @@
   id: BaseMobMoth
   abstract: true
   components:
-  # - type: CEZFlyer # Mono: z-level flight #Forge-Change-Comment: uncomment when mono add working z-layers
-  #   flightSpeed: 0.35
-  #   flightMoveSpeedModifier: 0.35
-  #   hoverStaminaDrain: 4
-  # - type: CEControllableFlight
-  #   startFlightDoAfter: 2
+  - type: CEZFlyer # Mono: z-level flight
+    flightSpeed: 0.35
+    flightMoveSpeedModifier: 0.35
+    hoverStaminaDrain: 4
+  - type: CEControllableFlight
+    startFlightDoAfter: 2
   - type: HumanoidAppearance
     species: Moth
     hideLayersOnEquip:
@@ -27,7 +27,7 @@
     requiredLegs: 2
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: ForgeMoth #Forge-Change
+    damageModifierSet: Moth
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Speech

@@ -1,5 +1,5 @@
 using Content.Server.Speech.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Speech.Components;
 
@@ -9,7 +9,7 @@ namespace Content.Server.Speech.Components;
 [RegisterComponent]
 public sealed partial class ReplacementAccentComponent : Component
 {
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<ReplacementAccentPrototype>), required: true)]
+    [DataField(customTypeSerializer: typeof(ProtoId<ReplacementAccentPrototype>), required: true)]
     public string Accent = default!;
 
 }

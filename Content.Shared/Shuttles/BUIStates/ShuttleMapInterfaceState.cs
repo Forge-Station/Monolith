@@ -28,6 +28,10 @@ public sealed class ShuttleMapInterfaceState
     public StartEndTime BioScanTime; // Forge-Change - BioScan
     public ShuttleBioScanStatus BioScanStatus; // Forge-Change - BioScan
     public bool BioScanAvailable; // Forge-Change - BioScan
+    public StartEndTime CloakingTimeActive; // Forge-Change - Cloaking
+    public StartEndTime CloakingTimeCooldown; // Forge-Change - Cloaking
+    public ShuttleCloakingStatus CloakingStatus; // Forge-Change - Cloaking
+    public ShuttleConsoleMapScreenMode MapScreenMapScreenMode; // Forge-Change - Cloaking
 
     /// <summary>
     /// When false, <see cref="Destinations"/> and <see cref="Exclusions"/> are empty and the client should keep prior lists.
@@ -42,6 +46,10 @@ public sealed class ShuttleMapInterfaceState
         StartEndTime bioScanTime, // Forge-Change - BioScan
         ShuttleBioScanStatus bioScanStatus, // Forge-Change - BioScan
         bool bioScanAvailable, // Forge-Change - BioScan
+        StartEndTime cloakingTimeActive, // Forge-Change - Cloaking
+        StartEndTime cloakingTimeCooldown, // Forge-Change - Cloaking
+        ShuttleCloakingStatus cloakingStatus, // Forge-Change - Cloaking
+        ShuttleConsoleMapScreenMode mapScreenMapScreenMode, // Forge-Change - Cloaking
         bool includeBeaconExclusionLists = true)
     {
         FTLState = ftlState;
@@ -51,6 +59,10 @@ public sealed class ShuttleMapInterfaceState
         BioScanTime = bioScanTime; // Forge-Change - BioScan
         BioScanStatus = bioScanStatus; // Forge-Change - BioScan
         BioScanAvailable = bioScanAvailable; // Forge-Change - BioScan
+        CloakingTimeActive = cloakingTimeActive; // Forge-Change - Cloaking
+        CloakingTimeCooldown = cloakingTimeCooldown; // Forge-Change - Cloaking
+        CloakingStatus = cloakingStatus; // Forge-Change - Cloaking
+        MapScreenMapScreenMode = mapScreenMapScreenMode; // Forge-Change - Cloaking
         IncludeBeaconExclusionLists = includeBeaconExclusionLists;
     }
 }
@@ -69,3 +81,21 @@ public enum ShuttleBioScanStatus : byte
     NoAccess,
 }
 // Forge-Change-end - BioScan
+
+// Forge-Change-start - Cloaking
+[Serializable, NetSerializable]
+public enum ShuttleCloakingStatus : byte
+{
+    None,
+    Ready,
+    Active,
+    Cooldown,
+}
+
+[Serializable, NetSerializable]
+public enum ShuttleConsoleMapScreenMode : byte
+{
+    BioScan,
+    Cloaking,
+}
+// Forge-Change-end - Cloaking

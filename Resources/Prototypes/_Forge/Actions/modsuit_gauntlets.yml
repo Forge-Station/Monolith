@@ -1,3 +1,4 @@
+# ARS Omnissia
 - type: entity
   id: ActionModsuitGauntletToolsMenu
   name: Integrated gauntlet tools
@@ -6,4 +7,15 @@
   - type: InstantAction
     clientExclusive: true
     icon: { sprite: _Forge/Clothing/Hands/Modsuits/omnissiamod.rsi, state: gauntlets }
+    event: !type:OpenModsuitGauntletToolsMenuActionEvent {}
+
+# Harmony Medical Enterprises
+- type: entity
+  id: ActionHMEGauntletToolsMenu
+  name: Integrated hardsuit medical tools
+  description: Open the radial menu to deploy integrated medical tools.
+  components:
+  - type: InstantAction
+    clientExclusive: true
+    icon: { sprite: Objects/Specific/Medical/healthanalyzer.rsi, state: icon }
     event: !type:OpenModsuitGauntletToolsMenuActionEvent {}

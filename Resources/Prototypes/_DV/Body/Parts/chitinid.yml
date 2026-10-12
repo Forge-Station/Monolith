@@ -32,12 +32,6 @@
         Quantity: 10
       - ReagentId: InsectBlood
         Quantity: 20
-  #Forge-Change-Start
-  - type: MovementBodyPartModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
-    group: torso
-  #Forge-Change-end
 
 
 - type: entity

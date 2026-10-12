@@ -5,13 +5,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: DefibrillatorCompact
     - id: HandheldCrewMonitor
     - id: MedicatedSuture
     - id: RegenerativeMesh
     - id: Gauze
     - id: Bloodpack
-    - id: OmnimedTool
     - id: HypoMini
     - id: EpinephrineChemistryBottle
     - id: EpinephrineChemistryBottle
@@ -23,13 +21,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: DefibrillatorCompact
     - id: HandheldCrewMonitor
     - id: MedicatedSuture
     - id: RegenerativeMesh
     - id: Gauze
     - id: Bloodpack
-    - id: OmnimedTool
     - id: HypoMini
     - id: EpinephrineChemistryBottle
     - id: EpinephrineChemistryBottle

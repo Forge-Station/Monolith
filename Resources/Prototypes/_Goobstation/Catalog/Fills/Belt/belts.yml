@@ -7,16 +7,18 @@
     contents:
     # Forge-Change-Start
       - id: DefibrillatorCompact
+      - id: EnergyScalpel
+      - id: AdvancedRetractor
+      - id: EnergyCautery
+      - id: BoneGel # Mono: AdvancedBoneGel->BoneGel
       - id: HandheldCrewMonitor
       - id: MedicatedSuture
       - id: RegenerativeMesh
-      - id: Gauze
       - id: Bloodpack
-      - id: OmnimedTool
       - id: HypoMini
       - id: EpinephrineChemistryBottle
       - id: EpinephrineChemistryBottle
-    # Forge-Change-Start
+    # Forge-Change-End
 
 - type: entity
   id: ClothingBeltHolsterFilledCentComm

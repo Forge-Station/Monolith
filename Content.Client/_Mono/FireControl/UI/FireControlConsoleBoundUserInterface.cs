@@ -2,6 +2,7 @@
 // All rights reserved. Relicensed under AGPL with permission
 
 using Content.Shared._Mono.FireControl;
+using Content.Shared._WF.ShipShields; // WOLFGATE(ShipShields)
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Shared.Map;
@@ -90,6 +91,16 @@ public sealed class FireControlConsoleBoundUserInterface : BoundUserInterface
         // Send an empty weapon list to indicate this is just a cursor update, not a firing action
         SendMessage(new FireControlConsoleFireMessage(new List<NetEntity>(), coordinates));
     }
+
+    // WOLFGATE(ShipShields) START: shield state for the gunner's shield control
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+
+        if (message is WFShipShieldHelmUpdateMessage update)
+            _window?.WfUpdateShields(update.ShieldShunt);
+    }
+    // WOLFGATE END
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {

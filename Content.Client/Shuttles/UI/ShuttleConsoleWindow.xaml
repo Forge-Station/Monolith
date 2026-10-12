@@ -1,11 +1,13 @@
 <!-- WOLFGATE(Shuttles): xmlns:wf and xmlns:tractor for _WF shuttle and tractor beam controls -->
 <!-- WOLFGATE(ShipAccess): xmlns:access for the access tab -->
+<!-- WOLFGATE(Hailing): xmlns:hail for the hail key -->
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
                       xmlns:wf="clr-namespace:Content.Client._WF.Shuttles.UI"
                       xmlns:tractor="clr-namespace:Content.Client._WF.TractorBeam.UI"
                       xmlns:access="clr-namespace:Content.Client._WF.ShipAccess"
+                      xmlns:hail="clr-namespace:Content.Client._WF.Hailing"
                       xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                       Title="{Loc 'shuttle-console-window-title'}"
                       SetSize="1000 1000"
@@ -68,6 +70,14 @@
                     VerticalExpand="True"
                     Text="DOCK"
                     StyleClasses="ButtonSquare"/>
+            <!-- WOLFGATE(Hailing) START: opens the hail window and lights up with the console's hail -->
+            <hail:HailKey Name="HailButton"
+                    HorizontalExpand="True"
+                    VerticalExpand="True"
+                    Text="{Loc 'hail-console-button'}"
+                    ToolTip="{Loc 'hail-console-button-tooltip'}"
+                    StyleClasses="ButtonSquare"/>
+            <!-- WOLFGATE END -->
         </BoxContainer>
         </PanelContainer>
         <wf:ShuttleCameraBar Name="CameraBar" SetWidth="970"/> <!-- WOLFGATE(Shuttles): hull camera views -->

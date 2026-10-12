@@ -46,6 +46,20 @@ public static class WFCockpitPanelLayout
     public static bool CanExpand(Vector2 size, float left) =>
         SideWidth(size, left, true) - SideWidth(size, left, false) >= 1;
 
+    /// <summary>The height of the flight panel at the foot of the left column.</summary>
+    public static float FlightHeight(Vector2 size) => Math.Clamp(size.Y * 0.27f, 218, 250);
+
+    /// <summary>The most the communications and shield row takes from the world view above it.</summary>
+    public const float RowExtra = 40;
+
+    /// <summary>
+    /// The height of the communications and shield row. On a tall enough screen it stands a little above the flight
+    /// panel beside it, the difference coming off the world view, because chat and the shield controls need the room
+    /// more. A short screen has none to give: the maximised MFD already runs out of height there.
+    /// </summary>
+    public static float RowHeight(Vector2 size) =>
+        FlightHeight(size) + Math.Clamp((size.Y - 720) * 0.12f, 0, RowExtra);
+
     /// <summary>The height of the centre and side columns from <paramref name="top"/> to the bottom margin.</summary>
     public static float Height(Vector2 size, float top) => Math.Max(320, size.Y - top - Margin);
 

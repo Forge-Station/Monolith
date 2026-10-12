@@ -1,0 +1,11 @@
+# Synthesised tones, made by Tools/_WF/Hailing/gen_hail_sounds.py (mono Vorbis quality 4).
+- files: ["hail_ring.ogg", "hail_calling.ogg", "hail_open.ogg", "hail_close.ogg", "hail_message.ogg"]
+  license: "CC0-1.0"
+  copyright: ""
+  source: "https://github.com/VanguardControl/Wolfgate"
+
+# The "prayers answered" choir from Meridian Rift (tgstation's sound/effects/pray_chaplain.ogg), mixed down to mono.
+- files: ["hail_god.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Meridian Rift (tgstation codebase) at commit 5cec204da500c61fa94fdaf5c5a138764920e2c1, mixed to mono."
+  source: "https://github.com/Aphelion-Moon/Meridian-Rift/blob/5cec204da500c61fa94fdaf5c5a138764920e2c1/sound/effects/pray_chaplain.ogg"

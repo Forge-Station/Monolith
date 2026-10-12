@@ -1,0 +1,45 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:hail="clr-namespace:Content.Client._WF.Hailing"
+                      Title="{Loc 'hail-window-title'}"
+                      MinSize="380 480"
+                      SetSize="380 540">
+    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+        <hail:HailScreen Name="Viewscreen" MinSize="0 176"/>
+        <Label Name="StatusLabel" ClipText="True" MinSize="0 23" FontColorOverride="#00ff2a"/>
+
+        <!-- Nobody on the line: the ships in range -->
+        <BoxContainer Name="ContactsBox" Orientation="Vertical" VerticalExpand="True" SeparationOverride="4">
+            <Label Text="{Loc 'hail-contacts-heading'}" StyleClasses="LabelSubText"/>
+            <PanelContainer StyleClasses="AngleRect" VerticalExpand="True">
+                <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+                    <BoxContainer Orientation="Vertical">
+                        <BoxContainer Name="ContactList" Orientation="Vertical" SeparationOverride="2"/>
+                        <Label Name="NoContactsLabel"
+                               Text="{Loc 'hail-no-contacts'}"
+                               StyleClasses="LabelSubText"
+                               Align="Center"
+                               Margin="0 12"/>
+                    </BoxContainer>
+                </ScrollContainer>
+            </PanelContainer>
+        </BoxContainer>
+
+        <!-- A hail going out, coming in, open or just finished -->
+        <BoxContainer Name="CallBox" Orientation="Vertical" VerticalExpand="True" SeparationOverride="6" Visible="False">
+            <OutputPanel Name="ChatLog" VerticalExpand="True" MinSize="0 120"/>
+            <BoxContainer Name="PendingRow" Orientation="Horizontal" SeparationOverride="6">
+                <Button Name="AnswerButton" Text="{Loc 'hail-answer'}" HorizontalExpand="True" StyleClasses="ButtonSquare"/>
+                <Button Name="DeclineButton" Text="{Loc 'hail-decline'}" HorizontalExpand="True" StyleClasses="ButtonSquare"/>
+            </BoxContainer>
+            <BoxContainer Name="ChatRow" Orientation="Vertical" SeparationOverride="6">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                    <LineEdit Name="ChatEntry" HorizontalExpand="True" PlaceHolder="{Loc 'hail-chat-placeholder'}"/>
+                    <Button Name="SendButton" Text="{Loc 'hail-chat-send'}" StyleClasses="ButtonSquare"/>
+                </BoxContainer>
+                <Button Name="EndButton" Text="{Loc 'hail-close-channel'}" StyleClasses="ButtonSquare"/>
+            </BoxContainer>
+            <Button Name="BackButton" Text="{Loc 'hail-back'}" StyleClasses="ButtonSquare"/>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

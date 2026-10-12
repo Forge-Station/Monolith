@@ -111,6 +111,7 @@ public sealed partial class WFCockpitView : Control
         _world = world;
         _translation = parts.Translation;
         _comms = Panel("wf-cockpit-comms", communications, true);
+        console.WfHailJoinComms(_comms, _lease); // WOLFGATE(Hailing): the hail strip rides the communications caption row.
         var flight = Column(Scroll(parts.Flight), console.WfCockpitStatus());
         flight.VerticalExpand = true;
         _flight = Panel("wf-cockpit-flight", flight, true);
@@ -213,6 +214,7 @@ public sealed partial class WFCockpitView : Control
         _banner.Measure(new Vector2(availableSize.X - 2 * margin, availableSize.Y));
         var (top, left, side, bottom) = Edges(availableSize);
         UpdateExpand(availableSize, left);
+        var flight = WFCockpitPanelLayout.FlightHeight(availableSize);
         var height = WFCockpitPanelLayout.Height(availableSize, top);
         PreMeasureDocked(availableSize, left, side, height, bottom);
         var frame = CurrentFrame(availableSize);
@@ -221,12 +223,12 @@ public sealed partial class WFCockpitView : Control
         var leftSpan = availableSize.Y - margin - leftTop;
         _tcas.Measure(new Vector2(left, leftSpan));
         var modesHeight = MeasureGunnery(left, leftSpan - _tcas.DesiredSize.Y - 6);
-        _camera.Measure(new Vector2(left, leftSpan - bottom));
-        var leftHeight = Math.Max(80, leftSpan - bottom - _camera.DesiredSize.Y - modesHeight - _tcas.DesiredSize.Y - 18);
+        _camera.Measure(new Vector2(left, leftSpan - flight));
+        var leftHeight = Math.Max(80, leftSpan - flight - _camera.DesiredSize.Y - modesHeight - _tcas.DesiredSize.Y - 18);
         if (!_showGunnery)
             FitDials(leftHeight);
         _left.Measure(new Vector2(left, leftHeight));
-        _flight.Measure(new Vector2(left, bottom));
+        _flight.Measure(new Vector2(left, flight));
         _right.Measure(frame.Mfd.Size);
         if (frame.WorldShown)
             _world.Measure(frame.World.Size);
@@ -250,7 +252,8 @@ public sealed partial class WFCockpitView : Control
         _brand.Arrange(UIBox2.FromDimensions(new Vector2(margin, top), new Vector2(left, brandHeight)));
         var leftTop = top + brandHeight + 6;
         var leftSpan = size.Y - margin - leftTop;
-        var flightY = size.Y - bottom - margin;
+        var flight = WFCockpitPanelLayout.FlightHeight(size);
+        var flightY = size.Y - flight - margin;
         var cameraHeight = _camera.DesiredSize.Y;
         var cameraY = flightY - cameraHeight - 6;
         var tcasHeight = _tcas.DesiredSize.Y;
@@ -259,7 +262,7 @@ public sealed partial class WFCockpitView : Control
         _left.Arrange(UIBox2.FromDimensions(new Vector2(margin, instrumentsTop), new Vector2(left, Math.Max(1, tcasY - instrumentsTop - 6))));
         _tcas.Arrange(UIBox2.FromDimensions(new Vector2(margin, tcasY), new Vector2(left, tcasHeight)));
         _camera.Arrange(UIBox2.FromDimensions(new Vector2(margin, cameraY), new Vector2(left, cameraHeight)));
-        _flight.Arrange(UIBox2.FromDimensions(new Vector2(margin, flightY), new Vector2(left, bottom)));
+        _flight.Arrange(UIBox2.FromDimensions(new Vector2(margin, flightY), new Vector2(left, flight)));
         _translation.Arrange(frame.Motion);
         _right.Arrange(frame.Mfd);
         if (frame.WorldShown)
@@ -271,13 +274,13 @@ public sealed partial class WFCockpitView : Control
         return size;
     }
 
-    /// <summary>The top of the centre and side columns, the left and side column widths, and the lower row's height.</summary>
+    /// <summary>The top of the centre and side columns, the left and side column widths, and the communications and shield row's height.</summary>
     private (float Top, float Left, float Side, float Bottom) Edges(Vector2 size)
     {
         var top = WFCockpitPanelLayout.Margin + (_banner.Visible ? _banner.DesiredSize.Y + 6 : 0);
         var left = _showGunnery ? Math.Clamp(size.X * 0.27f, 320, 420) : Math.Clamp(size.X * 0.21f, 220, 320);
         var side = WFCockpitPanelLayout.SideWidth(size, left, _expanded && !_maximised);
-        var bottom = Math.Clamp(size.Y * 0.27f, 218, 250);
+        var bottom = WFCockpitPanelLayout.RowHeight(size);
         return (top, left, side, bottom);
     }
 

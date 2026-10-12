@@ -38,6 +38,7 @@ public sealed partial class ShuttleConsoleBoundUserInterface : BoundUserInterfac
         WfAccessOpen(); // WOLFGATE(ShipAccess)
         WfShieldOpen(); // WOLFGATE(ShipShields): route shield allocation requests through the helm.
         WfCockpitAutoEnter(); // WOLFGATE(Cockpit): enter the cockpit by itself when the helm opens while buckled.
+        WfHailOpen(); // WOLFGATE(Hailing): the hail window and its requests
     }
 
     private void OnToggleFTLLockRequest(List<NetEntity> dockEntities, bool enabled)

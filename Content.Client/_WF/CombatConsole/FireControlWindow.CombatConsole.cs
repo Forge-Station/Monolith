@@ -150,7 +150,7 @@ public sealed partial class FireControlWindow
         battery.SetWidth = 324;
         battery.HorizontalExpand = false;
         var scope = Scope("wf-console-fire-scope", NavRadar, new Vector2(240, 120));
-        var instruments = Row(battery, scope);
+        var instruments = Row(battery, scope, WfCreateShieldPanel()); // WOLFGATE(ShipShields): the gunner's shield control, on the right.
         instruments.VerticalExpand = true;
         RefreshButton.Name = "CockpitGunneryRefresh";
         RefreshButton.Text = Loc.GetString("wf-gunnery-link");

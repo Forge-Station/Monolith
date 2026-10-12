@@ -32,6 +32,7 @@ public sealed partial class ShuttleConsoleBoundUserInterface
         base.ReceiveMessage(message);
         WfCockpitGunneryReceive(message); // WOLFGATE(Cockpit): refresh the linked weapon bank independently.
         WfShieldReceiveMessage(message); // WOLFGATE(ShipShields): update shield controls without refreshing navigation.
+        WfHailReceiveMessage(message); // WOLFGATE(Hailing): ships in range and why a hail stopped
 
         // WOLFGATE(Cockpit): refresh the status lamp without changing the active MFD.
         if (message is Content.Shared._WF.Cockpit.WFCockpitAutopilotUpdateMessage autopilot)

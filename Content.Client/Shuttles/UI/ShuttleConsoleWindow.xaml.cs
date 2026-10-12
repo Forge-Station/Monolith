@@ -93,6 +93,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         WfAccessInitialize(); // WOLFGATE(ShipAccess)
         WfShieldInitialize(); // WOLFGATE(ShipShields): add the shield allocation tab.
         WfInitializeInstruments(); // WOLFGATE(CombatConsole): compose the flight deck instrument panels.
+        WfHailInitialize(); // WOLFGATE(Hailing): hail button and banner
     }
 
     private void ClearModes(ShuttleConsoleMode mode)
@@ -231,6 +232,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         WfUpdateTractorCapture(cState.TractorSources); // WOLFGATE(TractorBeam)
         WfAccessUpdateState(coordinates?.EntityId, owner); // WOLFGATE(ShipAccess)
         WfShieldUpdateState(cState.ShieldShunt, cState.NavState.Angle); // WOLFGATE(ShipShields): share authoritative allocation across helms.
+        WfHailUpdateState(owner); // WOLFGATE(Hailing): point the banner and window at this console
 
         NavContainer.UpdateState(cState.NavState);
         MapContainer.UpdateState(cState.MapState);

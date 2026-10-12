@@ -116,7 +116,18 @@ public sealed class WFCockpitPanelLayoutTest
         var size = new Vector2(width, height);
         var left = LeftColumn(width);
         return new WFCockpitPanelLayout.Metrics(size, 8, left, WFCockpitPanelLayout.SideWidth(size, left, expanded),
-            Math.Clamp(height * 0.27f, 218, 250), 44, strip, votes);
+            WFCockpitPanelLayout.RowHeight(size), 44, strip, votes);
+    }
+
+    [TestCase(636, 0)]
+    [TestCase(720, 0)]
+    [TestCase(900, 21.6f)]
+    [TestCase(1080, 40)]
+    [TestCase(1440, 40)]
+    public void TheLowerRowOnlyGrowsWhereTheScreenCanSpareIt(float height, float extra)
+    {
+        var size = new Vector2(1920, height);
+        Assert.That(WFCockpitPanelLayout.RowHeight(size) - WFCockpitPanelLayout.FlightHeight(size), Is.EqualTo(extra).Within(0.01f));
     }
 
     [Test]

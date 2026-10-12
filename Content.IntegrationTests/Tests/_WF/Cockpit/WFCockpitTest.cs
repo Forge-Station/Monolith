@@ -1749,9 +1749,11 @@ public sealed class WFCockpitTest : InteractionTest
         }
         else
             Assert.That(Bottom(mfd), Is.LessThanOrEqualTo(comms.GlobalPosition.Y), "A maximised MFD stops above the lower row.");
-        Assert.That(flight.GlobalPosition.Y, Is.EqualTo(comms.GlobalPosition.Y).Within(1), "The lower control panels must align.");
-        Assert.That(flight.Height, Is.EqualTo(comms.Height).Within(1));
-        Assert.That(flight.Height, Is.EqualTo(shields.Height).Within(1));
+        Assert.That(Bottom(flight), Is.EqualTo(Bottom(comms)).Within(1), "The lower control panels must end on one line.");
+        Assert.That(comms.Height, Is.EqualTo(shields.Height).Within(1));
+        Assert.That(comms.Height - flight.Height,
+            Is.EqualTo(WFCockpitPanelLayout.RowHeight(hud.Size) - WFCockpitPanelLayout.FlightHeight(hud.Size)).Within(1),
+            "Communications and shields stand as much taller than the flight panel as the screen can spare.");
         var status = Named<WFCockpitStatusLights>(hud, "CockpitStatus");
         Assert.That(status.VisibleInTree, Is.True);
         Assert.That(status.ChildCount, Is.EqualTo(6));

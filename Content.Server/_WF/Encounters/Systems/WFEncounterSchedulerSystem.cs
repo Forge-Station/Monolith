@@ -8,6 +8,7 @@ using Content.Shared._WF.CCVar;
 using Content.Shared._WF.Encounters;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Station.Components;
 using Robust.Server.Player;
@@ -270,6 +271,9 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
                 || start == WFEncounterStart.Scheduled && prototype.Start == WFEncounterStart.RoundStart
                     && prototype.Replaceable && (!_roundStartDue || _startedAtRoundStart.Contains(prototype.ID));
             var weight = prototype.Weight * (preset != null && preset.Weights.TryGetValue(prototype.Category, out var scale) ? scale : 1f);
+            var weighed = new WFEncounterWeightEvent(prototype, weight);
+            RaiseLocalEvent(ref weighed);
+            weight = weighed.Weight;
             // A round-start or round-long encounter takes nothing from the budget, so it needs no room in it.
             var cost = prototype.Lifetime == WFEncounterLifetime.Persistent || prototype.Start == WFEncounterStart.RoundStart
                 ? 0
@@ -382,15 +386,12 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
         return false;
     }
 
-    /// <summary>
-    /// The stations and outposts of a map: station grids with a docking port that nobody holds a deed to. A map with fewer than two, such as
-    /// the development map, is topped up with its other unowned grids that have a port, so station encounters can still be tried.
-    /// </summary>
     /// <summary>Stations kept secret: never a stop or a berth, and open space near them is never used.</summary>
     private readonly List<string> _hidden = new();
     private float _hiddenClearance;
 
-    private List<Entity<MapGridComponent>> Stations(MapId map)
+    /// <summary>The stations and outposts of a map; a map with fewer than two is topped up with other unowned grids that have a port.</summary>
+    public List<Entity<MapGridComponent>> Stations(MapId map)
     {
         var stations = new List<Entity<MapGridComponent>>();
         var others = new List<Entity<MapGridComponent>>();
@@ -414,7 +415,7 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
             if (!ported.Contains(uid))
                 continue;
 
-            if (_hidden.Count > 0 && Avoided(uid, _hidden))
+            if (IsHidden(uid))
                 continue;
 
             if (HasComp<StationMemberComponent>(uid))
@@ -429,6 +430,8 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
             stations.AddRange(others.Take(2 - stations.Count));
         }
 
+        var found = new WFEncounterStationsEvent(map, stations);
+        RaiseLocalEvent(ref found);
         return stations;
     }
 
@@ -448,6 +451,15 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
             return !ships.Any(other => other.MapId == at.MapId
                 && (other.Position - at.Position).LengthSquared() < StationSpacing * StationSpacing);
         }).ToList();
+    }
+
+    /// <summary>Whether a grid is a secret station: its name matches the hidden list, or its IFF hides it or its label.</summary>
+    public bool IsHidden(EntityUid station)
+    {
+        if (TryComp<IFFComponent>(station, out var iff) && (iff.Flags & (IFFFlags.Hide | IFFFlags.HideLabel | IFFFlags.HideLabelAlways)) != 0)
+            return true;
+
+        return _hidden.Count > 0 && Avoided(station, _hidden);
     }
 
     /// <summary>Whether a station's grid name, station name or station id contains any of the given fragments.</summary>
@@ -472,7 +484,7 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
     /// <summary>Whether a point is within the hidden clearance of a station kept secret.</summary>
     private bool NearHiddenStation(Vector2 point, MapId map)
     {
-        if (_hidden.Count == 0 || _hiddenClearance <= 0f)
+        if (_hiddenClearance <= 0f)
             return false;
 
         var query = EntityQueryEnumerator<MapGridComponent, TransformComponent>();
@@ -480,8 +492,32 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
         {
             if (xform.MapID == map && uid != xform.MapUid && !HasComp<ShuttleDeedComponent>(uid)
                 && (HasComp<StationMemberComponent>(uid) || HasComp<Content.Server.Station.Components.BecomesStationComponent>(uid))
-                && Avoided(uid, _hidden)
+                && IsHidden(uid)
                 && (_transform.GetWorldPosition(xform) - point).LengthSquared() < _hiddenClearance * _hiddenClearance)
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>Whether a grid is part of a secret place: itself hidden, docked to a hidden station, or within the hidden clearance of one.</summary>
+    public bool IsSecretPlace(EntityUid grid)
+    {
+        if (TerminatingOrDeleted(grid))
+            return false;
+
+        if (IsHidden(grid))
+            return true;
+
+        var xform = Transform(grid);
+        if (NearHiddenStation(_transform.GetWorldPosition(xform), xform.MapID))
+            return true;
+
+        var docks = EntityQueryEnumerator<Content.Server.Shuttles.Components.DockingComponent, TransformComponent>();
+        while (docks.MoveNext(out _, out var dock, out var dockXform))
+        {
+            if (dockXform.GridUid == grid && dock.DockedWith is { } other
+                && Transform(other).GridUid is { } otherGrid && IsHidden(otherGrid))
                 return true;
         }
 
@@ -556,6 +592,18 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
         }
 
         return false;
+    }
+
+    /// <summary>Whether a point on a map is open sector space, clear of grids, stations, planet wells and hidden stations.</summary>
+    public bool IsClearSpace(MapId map, Vector2 point, float gridClearance, float stationClearance)
+    {
+        if (!_maps.MapExists(map) || !IsSector(map, _maps.GetMapEntityId(map)))
+            return false;
+
+        _nearby.Clear();
+        _maps.FindGridsIntersecting(map, Box2.CenteredAround(point, new Vector2(gridClearance * 2f)), ref _nearby, approx: true, includeMap: false);
+        return _nearby.Count == 0 && !NearStation(stationClearance, point, map) && !InGravityWell(point, map)
+            && !NearHiddenStation(point, map);
     }
 
     /// <summary>A point in clear space at the prototype's distance from a random living player.</summary>

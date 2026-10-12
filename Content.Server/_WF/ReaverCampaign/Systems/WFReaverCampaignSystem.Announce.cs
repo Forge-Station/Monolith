@@ -1,64 +1,25 @@
 using System.Globalization;
 using System.Numerics;
-using Content.Server._WF.PlanetComms;
 using Content.Server._WF.ReaverCampaign.Components;
 using Content.Shared._WF.ReaverCampaign;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._WF.ReaverCampaign.Systems;
 
 public sealed partial class WFReaverCampaignSystem
 {
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private WFPlanetCommsSystem _planetComms = default!;
-
     private static readonly ProtoId<RadioChannelPrototype> WarningChannel = "Common";
 
-    /// <summary>How long a quiet banner holds the next one back; a quiet banner inside it goes out on the radio instead.</summary>
-    public static readonly TimeSpan QuietBannerInterval = TimeSpan.FromMinutes(5);
-
-    /// <summary>A banner to everyone: red with the rising sound, or teal with the falling one; without <paramref name="chime"/> it is silent and never held back.</summary>
+    /// <summary>A sector-wide announcement from the sector watch: red with the rising sound, or teal with the falling one.</summary>
     private void Announce(WFReaverCampaignPrototype campaign, string message, bool rising, bool chime = true)
     {
         _chat.DispatchGlobalAnnouncement(message, Loc.GetString("wf-reaver-watch"), playSound: chime,
             announcementSound: chime ? rising ? campaign.RisingSound : campaign.FallingSound : null,
             colorOverride: rising ? campaign.RisingColor : campaign.FallingColor);
-    }
-
-    /// <summary>Plays the campaign's capital sound to everyone, on top of a capital event's chime.</summary>
-    private void PlayCapital(WFReaverCampaignPrototype campaign)
-    {
-        _audio.PlayGlobal(_audio.ResolveSound(campaign.CapitalSound), _planetComms.Reachable(Filter.Broadcast(), null), true,
-            AudioParams.Default.WithVolume(-2f));
-    }
-
-    /// <summary>A banner to everyone with no sound, at most one per <see cref="QuietBannerInterval"/>; inside the window it goes out on the radio.</summary>
-    private void AnnounceQuiet(WFReaverCampaignPrototype campaign, string message, bool rising)
-    {
-        var now = _timing.CurTime;
-        if (State() is { } state)
-        {
-            if (state.LastQuietBanner is { } last && now - last < QuietBannerInterval && Radio(_territory.SectorMap, message))
-                return;
-
-            state.LastQuietBanner = now;
-        }
-
-        _chat.DispatchGlobalAnnouncement(message, Loc.GetString("wf-reaver-watch"), playSound: false,
-            colorOverride: rising ? campaign.RisingColor : campaign.FallingColor);
-    }
-
-    /// <summary>A routine line on the common channel from the sector watch, with no banner.</summary>
-    private void AnnounceRadio(string message)
-    {
-        Radio(_territory.SectorMap, message);
     }
 
     /// <summary>Announces something at a place, with the station, bearing and range from the nearest station added as arguments.</summary>
@@ -128,14 +89,13 @@ public sealed partial class WFReaverCampaignSystem
         Radio(map, message);
     }
 
-    /// <summary>Says something on the common channel as the sector watch; false if there is no watch to say it.</summary>
-    private bool Radio(MapId map, string message)
+    /// <summary>Says something on the common channel as the sector watch.</summary>
+    private void Radio(MapId map, string message)
     {
         if (State() is not { } state || Watch(state, map) is not { } watch)
-            return false;
+            return;
 
         _radio.SendRadioMessage(watch, message, WarningChannel, watch);
-        return true;
     }
 
     /// <summary>The sector watch's radio: an entity on the map, named for it and heard without a telecom server.</summary>
@@ -148,8 +108,6 @@ public sealed partial class WFReaverCampaignSystem
             return null;
 
         var watch = Spawn(null, new EntityCoordinates(uid, Vector2.Zero));
-        // A hull passing over the map origin would otherwise pick it up.
-        Transform(watch).GridTraversal = false;
         _meta.SetEntityName(watch, Loc.GetString("wf-reaver-watch"));
         EnsureComp<TelecomExemptComponent>(watch);
         state.Watch = watch;

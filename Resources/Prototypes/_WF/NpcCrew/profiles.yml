@@ -303,8 +303,7 @@
     WFCrewGunner: [ WFCrewPdvOfficer ]
     WFCrewMarine: [ WFCrewPdvGuard ]
 
-# Reavers: pirate slops and bandanas on the hands, a tricorn and a stolen cloak on the officers, red raider hardsuits on
-# the riflemen and orange combat hardsuits over fatigues on the bruisers (see ReaverGear).
+# Reavers: pirate slops and bandanas, a tricorn on the officers, and whatever armour they took off the last crew.
 - type: startingGear
   id: WFCrewPirateHand
   equipment:
@@ -321,9 +320,9 @@
 - type: startingGear
   id: WFCrewPirateBruiser
   equipment:
-    jumpsuit: WFClothingUniformReaverFatigues
-    outerClothing: WFClothingOuterHardsuitReaverCombat
-    head: WFClothingHeadHelmetHardsuitReaverCombat
+    jumpsuit: ClothingUniformJumpsuitPirate
+    outerClothing: ClothingOuterArmorBasic
+    head: ClothingHeadHatPirates
     eyes: ClothingEyesEyepatch
     shoes: ClothingShoesBootsPirate
     belt: WeaponPistolMk58
@@ -336,8 +335,8 @@
   id: WFCrewPirateRifle
   equipment:
     jumpsuit: ClothingUniformJumpsuitPirate
-    outerClothing: WFClothingOuterHardsuitReaver
-    head: WFClothingHeadHelmetHardsuitReaver
+    outerClothing: ClothingOuterArmorBulletproof
+    head: ClothingHeadBandBlack
     shoes: ClothingShoesBootsPirate
     gloves: ClothingHandsGlovesColorBlack
     back: WeaponRifleLecter
@@ -352,7 +351,6 @@
     jumpsuit: ClothingUniformJumpsuitPirate
     outerClothing: ClothingOuterCoatPirateCaptain
     head: ClothingHeadHatPirateTricord
-    neck: WFClothingNeckReaverCaptainCloak
     shoes: ClothingShoesBootsPirate
     belt: WeaponPistolMk58
     pocket1: Magazine45_ACPPistolFMJ
@@ -364,18 +362,8 @@
   id: WFCrewProfilePirate
   firstNames: WFNamesPirateFirst
   lastNames: WFNamesPirateLast
-  # Pirates never fly adamantite: the black-market hulls' armour is swapped for plain plastitanium when they crew one.
-  hullSwaps:
-    WFWallAdamantite: WallPlastitanium
-    WFWallAdamantiteDiagonal: WallPlastitaniumDiagonal
-    WFWallAdamantiteCapital: WallPlastitanium
-    WFWallAdamantiteDiagonalCapital: WallPlastitaniumDiagonal
   components:
   - type: PirateAccent
-  # Reavers cut organs out of the downed instead of killing, and steal till hit when they board.
-  - type: WFNpcIntent
-    set: WFIntentsReaver
-    boarder: true
   - type: WFCrewSuitUp
   - type: PressureImmunity
   - type: BreathingImmunity

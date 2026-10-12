@@ -363,11 +363,19 @@ public sealed partial class InternetSoundSystem : EntitySystem
     /// </summary>
     public void Stop(ICommonSession? admin)
     {
+        var playing = _tracks.Count > 0;
         _playlist.ClearAll();
 
         foreach (var track in _tracks.Values.ToList())
         {
             Drop(track);
+        }
+
+        // A round restart with nothing playing is not worth an admin log entry, and the test pool's recycled rounds collide on its id.
+        if (admin == null && !playing)
+        {
+            SendState();
+            return;
         }
 
         Report(admin, Loc.GetString("wf-internet-sound-stopped"), false);

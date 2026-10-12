@@ -279,6 +279,11 @@ binds:
 - function: OpenGuidebook
   type: State
   key: NumpadNum0
+# WOLFGATE(SectorControl): sector map key
+- function: OpenSectorMap
+  type: State
+  key: N
+  mod1: Shift
 - function: OpenAHelp
   type: State
   key: F1

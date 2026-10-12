@@ -10,7 +10,12 @@ completed, one side left, nothing left) and removes its ships once no player is 
 round-start encounters once the stations exist, then starts weighted encounters that fit, in open space, beside a
 station or on a circuit of several. It is off until `wf.encounters.enabled` is set. `WFEncounterVoteSystem` has the
 lobby vote for the preset. `WFEncounterZoneSystem` warns player ships of another company off a ship's warning zone
-and has its crew fire on them inside its attack zone. `WFEncounterMarkerSystem` sends every ship of every visible
+and has its crew fire on them inside its attack zone; the hail and the call to arms are made once for a side, by
+whichever of its ships speaks first, however many hold the zone, and the radar draws one pair of rings round a side
+(its widest ranges plus the spread of its ships) rather than a ring per hull. Whose side a vessel is on is judged by
+conduct as well as colours: `WFEncounterRewardSystem` answers the crews' friendly-fire query, vouching for a vessel
+that the side took as an ally or that has hit the side's enemies at least twice as often as the side itself over the
+last half minute, so a stray round in a melee is not an attack. `WFEncounterMarkerSystem` sends every ship of every visible
 encounter to all players, each with its side and colour; the radar draws them, with their zones, sector-wide, and
 ghosts find them on the Encounters tab of the orbit menu.
 
@@ -50,6 +55,16 @@ prototype, ship or state.
 Admins use the Encounters window in the Wolfgate admin tab, or `wf_encounter list | spawn <prototype> [distance] |
 end <encounter> | schedule | pause | resume`. Other code calls `WFEncounterSystem.TrySpawn`, `Resolve`, `End` and
 `Reveal` and listens for `WFEncounterStartedEvent` and `WFEncounterResolvedEvent`.
+
+Systems that run encounters of their own (the Reaver campaign, sector control) have more entry points. `TrySpawn(..., offBudget)`
+keeps a transient encounter out of the cap and budget. `SetOrders(encounter, key, queue)` gives one ship a fresh queue
+as its own orders. `WFEncounterRewardSystem.PayBounty` pays a beaten encounter's bounty to every player who hit its ships
+(split per attacking ship, then per head), with a fifth for the players aboard any supporter grids, and returns how many
+were paid, and its optional `extraCredits` are further rewards of which only the faction credits are handed out, so one
+bounty can pay several navies; `GetHelpers` is
+the helper rule it shares with the Decided payout. The scheduler's `IsClearSpace` and `Stations` give placement checks, and
+the broadcast by-ref `WFEncounterWeightEvent` (change a candidate's weight) and `WFEncounterStationsEvent` (drop stations
+from a map's list) let other modules shape what it picks and where.
 
 `Docs/_WF/Encounters/design.md` is the original design. Not built: mass scanner contacts and lazy loading (ships
 are always real), freight value and payouts, follow-up encounters, and a real FTL jump on exit.
@@ -105,6 +120,8 @@ are always real), freight value and payouts, follow-up encounters, and a real FT
 - [`Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.BatchCore.cs`](../../../Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.BatchCore.cs)
 - [`Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.Battle.cs`](../../../Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.Battle.cs)
 - [`Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.FriendlyFire.cs`](../../../Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.FriendlyFire.cs)
+- [`Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.NeutralZones.cs`](../../../Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.NeutralZones.cs)
 - [`Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.Pinned.cs`](../../../Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.Pinned.cs)
 - [`Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.Reactor.cs`](../../../Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.Reactor.cs)
 - [`Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.Storyteller.cs`](../../../Content.IntegrationTests/Tests/_WF/Encounters/WFEncounterTest.Storyteller.cs)

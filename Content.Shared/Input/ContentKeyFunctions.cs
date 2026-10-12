@@ -25,15 +25,10 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction CycleChatChannelForward = "CycleChatChannelForward";
         public static readonly BoundKeyFunction CycleChatChannelBackward = "CycleChatChannelBackward";
         public static readonly BoundKeyFunction EscapeContext = "EscapeContext";
-        // DeltaV - Begin NanoChat keybinds
-        public static readonly BoundKeyFunction NanoChatNavigateUp = "NanoChatNavigateUp";
-        public static readonly BoundKeyFunction NanoChatNavigateDown = "NanoChatNavigateDown";
-        public static readonly BoundKeyFunction NanoChatNavigateUpUnread = "NanoChatNavigateUpUnread";
-        public static readonly BoundKeyFunction NanoChatNavigateDownUnread = "NanoChatNavigateDownUnread";
-        // DeltaV - End NanoChat keybinds
         public static readonly BoundKeyFunction OpenCharacterMenu = "OpenCharacterMenu";
-        public static readonly BoundKeyFunction OpenConsentWindow = "OpenConsentWindow"; // WOLFGATE - consent system
-        public static readonly BoundKeyFunction OpenAnatomyPanel = "OpenAnatomyPanel"; // WOLFGATE - anatomy panel
+        public static readonly BoundKeyFunction OpenConsentWindow = "OpenConsentWindow"; // WOLFGATE(Genitals): consent system
+        public static readonly BoundKeyFunction OpenAnatomyPanel = "OpenAnatomyPanel"; // WOLFGATE(Genitals): anatomy panel
+        public static readonly BoundKeyFunction OpenSectorMap = "OpenSectorMap"; // WOLFGATE(SectorControl): sector map
         public static readonly BoundKeyFunction OpenEmotesMenu = "OpenEmotesMenu";
         public static readonly BoundKeyFunction OpenCraftingMenu = "OpenCraftingMenu";
         public static readonly BoundKeyFunction OpenLanguageMenu = "OpenLanguageMenu"; // Einstein Engines - Language
@@ -167,8 +162,19 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction MappingRemoveDecal = "MappingRemoveDecal";
         public static readonly BoundKeyFunction MappingCancelEraseDecal = "MappingCancelEraseDecal";
         public static readonly BoundKeyFunction MappingOpenContextMenu = "MappingOpenContextMenu";
-        public static readonly BoundKeyFunction MappingEyedropper = "MappingEyedropper"; // Forge-Change
-        public static readonly BoundKeyFunction MappingEyedropperTile = "MappingEyedropperTile"; // Forge-Change
-        public static readonly BoundKeyFunction MappingEyedropperDecal = "MappingEyedropperDecal"; // Forge-Change
+        // WOLFGATE(MappingTools) START: Select tool, clipboard and undo keys for the mapping tools
+        public static readonly BoundKeyFunction WFMappingEnableSelect = "WFMappingEnableSelect";
+        public static readonly BoundKeyFunction WFMappingSelect = "WFMappingSelect";
+        public static readonly BoundKeyFunction WFMappingSelectCancel = "WFMappingSelectCancel";
+        public static readonly BoundKeyFunction WFMappingCopy = "WFMappingCopy";
+        public static readonly BoundKeyFunction WFMappingCut = "WFMappingCut";
+        public static readonly BoundKeyFunction WFMappingPaste = "WFMappingPaste";
+        public static readonly BoundKeyFunction WFMappingDelete = "WFMappingDelete";
+        public static readonly BoundKeyFunction WFMappingRotate = "WFMappingRotate";
+        public static readonly BoundKeyFunction WFMappingMirror = "WFMappingMirror";
+        public static readonly BoundKeyFunction WFMappingMirrorVertical = "WFMappingMirrorVertical";
+        public static readonly BoundKeyFunction WFMappingUndo = "WFMappingUndo";
+        public static readonly BoundKeyFunction WFMappingRedo = "WFMappingRedo";
+        // WOLFGATE END
     }
 }

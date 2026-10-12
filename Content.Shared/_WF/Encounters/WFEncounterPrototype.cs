@@ -279,6 +279,10 @@ public sealed partial class WFEncounterShip
     [DataField]
     public bool Evades = true;
 
+    /// <summary>Whether the ship holds its station and turns its guns on threats, without ever flying at them.</summary>
+    [DataField]
+    public bool Platform;
+
     /// <summary>Flight limits; none uses the cautious defaults.</summary>
     [DataField]
     public ProtoId<WFCrewNavigationProfilePrototype>? Navigation;

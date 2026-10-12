@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using Content.Server._Mono.AlertLevel;
 using Content.Server._WF.Encounters.Components;
@@ -32,6 +33,7 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
     [Dependency] private WFEncounterSystem _encounters = default!;
     [Dependency] private WFCrewAlertSystem _alerts = default!;
     [Dependency] private WFCrewEscortSystem _escorts = default!;
+    [Dependency] private WFCrewShipStatusSystem _status = default!;
     [Dependency] private MobStateSystem _mobs = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private WarLevelSystem _warLevel = default!;
@@ -58,6 +60,12 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
 
         /// <summary>The companies of the living players aboard.</summary>
         public readonly HashSet<string> Aboard = new();
+
+        /// <summary>The company the ship itself flies, or empty for none.</summary>
+        public string GridFlag = string.Empty;
+
+        /// <summary>Whether a living player aboard is of no company.</summary>
+        public bool Unflagged;
     }
 
     public override void Update(float frameTime)
@@ -78,7 +86,8 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
             foreach (var ship in encounter.Ships.Values)
             {
                 // A ship lying in wait gives itself away to nobody.
-                if (ship.WarnRange <= 0f && ship.AttackRange <= 0f || ship.Lurking || TerminatingOrDeleted(ship.Grid))
+                if (ship.WarnRange <= 0f && ship.AttackRange <= 0f || ship.Lurking || TerminatingOrDeleted(ship.Grid)
+                    || Disabled(ship))
                     continue;
 
                 if (!crewedKnown)
@@ -117,7 +126,7 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
 
             foreach (var ship in encounter.Ships.Values)
             {
-                if (!ship.Lurking && !TerminatingOrDeleted(ship.Grid))
+                if (!ship.Lurking && !TerminatingOrDeleted(ship.Grid) && !Disabled(ship))
                     _fleet.Add((uid, ship));
             }
         }
@@ -139,7 +148,7 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
                     continue;
 
                 var theirs = Company(rival.Grid);
-                if (WFCompanyFamily.Same(company, theirs))
+                if (WFCompanyFamily.Same(company, theirs) || IsNeutral(ship, theirs))
                     continue;
                 // The sides of one encounter were set on each other when it was written, ceasefire or no.
                 var enemies = other == uid ? Opposed(company, theirs, true) : AtWar(company, theirs);
@@ -178,7 +187,7 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
                 if (!IsPlayerShip(grid))
                     continue;
 
-                _crewed[grid] = crewed = new Crewed();
+                _crewed[grid] = crewed = new Crewed { GridFlag = WFCompanyFamily.Of(Company(grid)) };
             }
 
             // Companies are kept by faction: a Federation civilian aboard flies a Federation flag.
@@ -190,6 +199,8 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
                 crewed.Flags.Add(company);
             if (own.Length > 0)
                 crewed.Aboard.Add(own);
+            else
+                crewed.Unflagged = true;
         }
     }
 
@@ -203,14 +214,26 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
         return HasComp<ShuttleDeedComponent>(grid) || !HasComp<StationMemberComponent>(grid);
     }
 
-    /// <summary>Whether any port of a grid is docked to another.</summary>
+    /// <summary>Whether a ship is out of the fight, a derelict aside: a disabled one no longer hails, fires or answers rivals.</summary>
+    private bool Disabled(WFEncounterShipState ship)
+    {
+        return !ship.Derelict && _status.IsDisabled(ship.Grid);
+    }
+
+    /// <summary>Whether any port of a grid is docked to another, a ship of its own company and encounter fleet aside: its garrison is not a berth.</summary>
     private bool IsDocked(EntityUid grid)
     {
         var docks = EntityQueryEnumerator<Content.Server.Shuttles.Components.DockingComponent, TransformComponent>();
         while (docks.MoveNext(out _, out var dock, out var xform))
         {
-            if (xform.GridUid == grid && dock.DockedWith != null)
-                return true;
+            if (xform.GridUid != grid || dock.DockedWith is not { } other)
+                continue;
+
+            if (Transform(other).GridUid is { } alongside && HasComp<WFEncounterGridComponent>(alongside)
+                && WFCompanyFamily.Same(Company(grid), Company(alongside)))
+                continue;
+
+            return true;
         }
 
         return false;
@@ -311,6 +334,42 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
         return false;
     }
 
+    /// <summary>Whether a company is one the ship's zones leave alone.</summary>
+    private static bool IsNeutral(WFEncounterShipState ship, string company)
+    {
+        var family = WFCompanyFamily.Of(company);
+        if (family.Length == 0)
+            return false;
+
+        foreach (var neutral in ship.NeutralCompanies)
+        {
+            if (WFCompanyFamily.Of(neutral) == family)
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Whether an intruder is left alone: it flies a neutral flag or, with none, has none but neutral people aboard,
+    /// or it is docked to a neutral company's station.
+    /// </summary>
+    private bool IsNeutral(WFEncounterShipState ship, EntityUid intruder, Crewed crewed)
+    {
+        if (ship.NeutralCompanies.Count == 0)
+            return false;
+
+        if (crewed.GridFlag.Length > 0)
+        {
+            if (IsNeutral(ship, crewed.GridFlag))
+                return true;
+        }
+        else if (!crewed.Unflagged && crewed.Aboard.Count > 0 && crewed.Aboard.All(company => IsNeutral(ship, company)))
+            return true;
+
+        return _encounters.IsBerthedAtNeutral(intruder, ship.NeutralCompanies);
+    }
+
     private void Watch(WFEncounterComponent encounter, WFEncounterShipState ship)
     {
         Forget(ship);
@@ -333,6 +392,14 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
             // radio. So does anyone flying with one of its people.
             if (company.Length > 0 && (crewed.Flags.Contains(company) || crewed.Aboard.Contains(company)))
                 continue;
+
+            // Neutral companies, and ships berthed with one, are left alone whatever their IFF says.
+            if (IsNeutral(ship, intruder, crewed))
+            {
+                Release(encounter, ship, intruder);
+                _alerts.EndZoneWarning(ship.Grid, intruder);
+                continue;
+            }
 
             // Anyone else is only known for what he is by his IFF. With that switched off he is nobody's friend: he is
             // told to show himself and shot across the bows in the warning zone, and fired on in the attack zone. With

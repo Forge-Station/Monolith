@@ -27,8 +27,9 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.EscapeContext);
             common.AddFunction(ContentKeyFunctions.ExamineEntity);
             common.AddFunction(ContentKeyFunctions.OpenAHelp);
-            common.AddFunction(ContentKeyFunctions.OpenConsentWindow); // WOLFGATE - consent system
-            common.AddFunction(ContentKeyFunctions.OpenAnatomyPanel); // WOLFGATE - anatomy panel
+            common.AddFunction(ContentKeyFunctions.OpenConsentWindow); // WOLFGATE(Genitals): consent system
+            common.AddFunction(ContentKeyFunctions.OpenAnatomyPanel); // WOLFGATE(Genitals): anatomy panel
+            common.AddFunction(ContentKeyFunctions.OpenSectorMap); // WOLFGATE(SectorControl): sector map
             common.AddFunction(ContentKeyFunctions.TakeScreenshot);
             common.AddFunction(ContentKeyFunctions.TakeScreenshotNoUI);
             common.AddFunction(ContentKeyFunctions.ToggleFullscreen);
@@ -43,20 +44,9 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.ResetZoom);
             common.AddFunction(ContentKeyFunctions.InspectEntity);
             common.AddFunction(ContentKeyFunctions.ToggleRoundEndSummaryWindow);
-            // DeltaV - Begin NanoChat keybinds
-            common.AddFunction(ContentKeyFunctions.NanoChatNavigateUp);
-            common.AddFunction(ContentKeyFunctions.NanoChatNavigateDown);
-            common.AddFunction(ContentKeyFunctions.NanoChatNavigateUpUnread);
-            common.AddFunction(ContentKeyFunctions.NanoChatNavigateDownUnread);
-            // DeltaV - End NanoChat keybinds
 
             // Not in engine, because engine cannot check for sanbox/admin status before starting placement.
             common.AddFunction(ContentKeyFunctions.EditorCopyObject);
-            common.AddFunction(ContentKeyFunctions.MappingUnselect); // Forge-Change
-            common.AddFunction(ContentKeyFunctions.MappingEyedropper); // Forge-Change
-            common.AddFunction(ContentKeyFunctions.MappingEyedropperTile); // Forge-Change
-            common.AddFunction(ContentKeyFunctions.MappingEyedropperDecal); // Forge-Change
-            common.AddFunction(ContentKeyFunctions.MappingRemoveDecal); // Forge-Change
 
             // Not in engine because the engine doesn't understand what a flipped object is
             common.AddFunction(ContentKeyFunctions.EditorFlipObject);
@@ -70,6 +60,8 @@ namespace Content.Client.Input
             human.AddFunction(EngineKeyFunctions.MoveLeft);
             human.AddFunction(EngineKeyFunctions.MoveRight);
             human.AddFunction(EngineKeyFunctions.Walk);
+            human.AddFunction(ContentKeyFunctions.ShuttleAscend); // Mono / PZN
+            human.AddFunction(ContentKeyFunctions.ShuttleDescend);
             human.AddFunction(ContentKeyFunctions.SwapHands);
             human.AddFunction(ContentKeyFunctions.SwapHandsPrevious); // Frontier
             human.AddFunction(ContentKeyFunctions.Drop);

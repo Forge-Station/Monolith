@@ -1,0 +1,20 @@
+- type: gamePreset
+  id: MonoAshfall
+  alias:
+    - ashfall
+    - monoashfall
+  name: wf-reaver-preset-title
+  description: wf-reaver-preset-description
+  showInVote: true
+  rules:
+  - NFAdventure
+  - BasicStationEventScheduler
+  - BluespaceEventScheduler
+  - BluespaceDungeonEventScheduler
+  - BluespaceSalvageEventScheduler
+  - SmugglingEventScheduler
+  - FrontierRoundstartVariation
+  - MonoMonolithicEventsScheduler
+  - ManualPortstrikeTsfPdv
+  - StarSystemKyphrus
+  - WFReaverCampaignRule

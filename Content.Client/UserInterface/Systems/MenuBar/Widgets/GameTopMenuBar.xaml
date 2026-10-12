@@ -33,6 +33,17 @@
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
         />
+    <!-- WOLFGATE(SectorControl) START: sector map button beside the guidebook; its icon is set in code from menu.rsi -->
+    <ui:MenuButton
+        Name="SectorMapButton"
+        Access="Internal"
+        BoundKey = "{x:Static is:ContentKeyFunctions.OpenSectorMap}"
+        ToolTip="{Loc 'wf-sector-map-button-tooltip'}"
+        MinSize="42 64"
+        HorizontalExpand="True"
+        AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
+        />
+    <!-- WOLFGATE END -->
     <ui:MenuButton
         Name="CharacterButton"
         Access="Internal"

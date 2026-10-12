@@ -377,7 +377,9 @@ public sealed partial class WFGunnerDutySystem : EntitySystem
             return null;
         // An assigned target starts out of range, so only its state releases the gunner, as for the pilot.
         var assigned = _objectives.IsAttackTarget(grid, crew.Group, ship);
-        if (_status.ShouldDisengage(grid, ship, range: !assigned))
+        // A ship that has fired on this one is answered from beyond a deterring crew's range, as its captain does.
+        var fired = !assigned && _alerts.FiredShipGuns(grid, crew.Group, ship);
+        if (_status.ShouldDisengage(grid, ship, range: !assigned && !fired, shooter: fired))
             return null;
         // Reported attackers stay targets even inside the formation for their attack window.
         if (!hostile && (_escorts.AreInFormation(grid, ship)

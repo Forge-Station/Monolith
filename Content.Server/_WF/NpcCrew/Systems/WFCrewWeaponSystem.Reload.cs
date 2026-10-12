@@ -27,22 +27,12 @@ public sealed partial class WFCrewWeaponSystem
     [Dependency] private Content.Server.Atmos.EntitySystems.AtmosphereSystem _atmos = default!;
     [Dependency] private SharedMapSystem _maps = default!;
     [Dependency] private WFCrewEvaSystem _eva = default!;
-    [Dependency] private WFCrewStealthSystem _stealth = default!;
     [Dependency] private Robust.Shared.Timing.IGameTiming _timing = default!;
-    [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private SharedTransformSystem _xformSystem = default!;
-    [Dependency] private Robust.Shared.Random.IRobustRandom _random = default!;
 
     private const string MagazineSlot = "gun_magazine";
     private const float LookupRange = 10f;
     private static readonly TimeSpan ThreatCacheTime = TimeSpan.FromSeconds(0.5);
     private readonly Dictionary<EntityUid, (TimeSpan Until, bool Threat)> _threats = new();
-
-    /// <summary>Faction members found by one lookup, reused so a threat check allocates no set.</summary>
-    private readonly HashSet<Entity<NpcFactionMemberComponent>> _nearbyMembers = new();
-
-    /// <summary>Spare candidate lists; a target check may run another crewman's, so each check rents its own.</summary>
-    private readonly Stack<List<EntityUid>> _candidateLists = new();
     private float _reloadTimer;
 
     public override void Update(float frameTime)
@@ -82,8 +72,7 @@ public sealed partial class WFCrewWeaponSystem
             }
             if (HasLiveThreat(uid))
                 TryReloadOrSwitch(uid);
-            // A grabber's baton is out for someone who isn't a threat; holstering it here also restarts its cooldown for good.
-            else if (!HasComp<WFCrewGrabberComponent>(uid))
+            else
             {
                 RemCompDeferred<NPCRangedCombatComponent>(uid);
                 RemCompDeferred<NPCMeleeCombatComponent>(uid);
@@ -99,28 +88,30 @@ public sealed partial class WFCrewWeaponSystem
         if (_threats.TryGetValue(uid, out var cached) && now < cached.Until)
             return cached.Threat;
         var threat = PickTarget(uid) != null;
-        // Spread over a second, so the crew's checks don't all fall due on the same tick.
-        _threats[uid] = (now + ThreatCacheTime * (1 + _random.NextFloat()), threat);
+        _threats[uid] = (now + ThreatCacheTime, threat);
         return threat;
     }
 
-    /// <summary>
-    /// Hostiles within normal vision: the set the faction lookup gives, without its allocations. The crew's explicit,
-    /// shared and radio targets are walked by <see cref="PickTarget"/> itself.
-    /// </summary>
-    private void NearbyHostiles(EntityUid uid, NpcFactionMemberComponent member, List<EntityUid> candidates)
+    /// <summary>Hostiles within normal vision, plus the crew's shared targets and radio contacts.</summary>
+    private IEnumerable<EntityUid> Candidates(EntityUid uid)
     {
         var range = TryComp<HTNComponent>(uid, out var htn)
             && htn.Blackboard.TryGetValue<float>("VisionRadius", out var vision, EntityManager) ? vision : LookupRange;
         // Alert-widened vision would turn the faction lookup into a scan of every faction member on the map.
-        var hostileFactions = member.HostileFactions;
-        _nearbyMembers.Clear();
-        _lookup.GetEntitiesInRange(_xformSystem.GetMapCoordinates(uid), Math.Min(range, LookupRange), _nearbyMembers);
-        foreach (var near in _nearbyMembers)
+        foreach (var target in _factions.GetNearbyHostiles(uid, Math.Min(range, LookupRange)))
+            yield return target;
+        if (!TryComp<WFCrewComponent>(uid, out var crew) || Transform(uid).GridUid is not { } grid)
+            yield break;
+        TryComp<NpcFactionMemberComponent>(uid, out var member);
+        foreach (var target in EntityManager.System<WFCrewAlertSystem>().GetSharedHostiles(grid, crew.Group))
         {
-            if (near.Owner != uid && hostileFactions.Overlaps(near.Comp.Factions)
-                && !_factions.IsEntityFriendly((uid, member), (near.Owner, near.Comp)) && !_factions.IsIgnored(uid, near.Owner))
-                candidates.Add(near.Owner);
+            if (IsHostile(uid, member, target))
+                yield return target;
+        }
+        foreach (var target in crew.RadioSightings.Keys)
+        {
+            if (IsHostile(uid, member, target))
+                yield return target;
         }
     }
 
@@ -138,22 +129,11 @@ public sealed partial class WFCrewWeaponSystem
     /// <summary>Crew defend their assigned ship without pursuing targets across docking connections.</summary>
     public bool CanEngage(EntityUid uid, EntityUid target)
     {
-        if (TerminatingOrDeleted(target) || !_mobs.IsAlive(target) || Transform(uid).GridUid is not { } grid)
-            return false;
-
-        // Someone it has finished with, or a boarding party's mark that has not hit it (NpcIntents).
-        if (_factions.IsIgnored(uid, target) || EntityManager.System<Content.Server._WF.NpcIntents.WFNpcIntentSystem>().HoldsFireOn(uid, target))
-            return false;
-
-        if (HasComp<WFCrewNonLethalComponent>(uid) && CompOrNull<Content.Shared.Cuffs.Components.CuffableComponent>(target)?.CuffedHandCount > 0)
+        if (TerminatingOrDeleted(target) || !_mobs.IsAlive(target)
+            || Transform(uid).GridUid is not { } grid || Transform(target).GridUid != grid)
             return false;
 
         TryComp<WFCrewComponent>(uid, out var crew);
-        if (OnSight(uid, crew, grid, target))
-            return true;
-        if (Transform(target).GridUid != grid)
-            return false;
-
         var attacked = WasAttackedBy(uid, target);
         // Off his post's grid a crewman starts nothing. He answers whoever attacked him, in sight, only when sent
         // there on a job or a raid, or when the attacker is his faction's enemy anyway, as for a raider carried off;
@@ -187,21 +167,6 @@ public sealed partial class WFCrewWeaponSystem
     {
         return TryComp<WFCrewComponent>(uid, out var crew) && crew.Struck.TryGetValue(target, out var at)
                && _timing.CurTime < at + PursuitWindow;
-    }
-
-    /// <summary>
-    /// Whether an on-sight crewman opens fire on a faction enemy he sees: anywhere for the hands, only aboard for the
-    /// helm, guns and radio, which stay manned against anyone outside.
-    /// </summary>
-    private bool OnSight(EntityUid uid, WFCrewComponent? crew, EntityUid grid, EntityUid target)
-    {
-        if (!TryComp<WFCrewOnSightComponent>(crew?.Post?.EntityId ?? grid, out var onSight)
-            || Transform(target).GridUid != grid && IsStationCrew(uid)
-            || !IsFactionEnemy(uid, target) || !CanSee(uid, target))
-            return false;
-
-        var company = WFCompanyFamily.Of(CompOrNull<Content.Shared._Mono.Company.CompanyComponent>(target)?.CompanyName.Id);
-        return company.Length == 0 || !onSight.Spares.Any(spared => WFCompanyFamily.Of(spared) == company);
     }
 
     /// <summary>Whether the target belongs to a faction the crewman's own is hostile to, attack or no attack.</summary>
@@ -311,54 +276,18 @@ public sealed partial class WFCrewWeaponSystem
 
     /// <summary>
     /// Walls and closed opaque doors conceal boarders; radio awareness does not extend eyesight. Only what is built
-    /// into the ship blocks the view: a crewmate, a body, a crate or a locker in between does not. A stealthed mob that
-    /// has done nothing hostile lately is not seen, unless <paramref name="ignoreStealth"/>.
+    /// into the ship blocks the view: a crewmate, a body, a crate or a locker in between does not.
     /// </summary>
-    public bool CanSee(EntityUid uid, EntityUid target, bool ignoreStealth = false) => !TerminatingOrDeleted(target)
-        && (ignoreStealth || !_stealth.Unseen(target))
+    public bool CanSee(EntityUid uid, EntityUid target) => !TerminatingOrDeleted(target)
         && _interaction.InRangeUnobstructed(uid, target, 10f, Content.Shared.Physics.CollisionGroup.Opaque,
             predicate: blocker => !Transform(blocker).Anchored);
 
     /// <summary>Chooses a living hostile aboard the crewman's own ship.</summary>
     public EntityUid? PickTarget(EntityUid uid)
     {
-        TryComp<NpcFactionMemberComponent>(uid, out var member);
-        if (member != null)
+        foreach (var target in Candidates(uid))
         {
-            // The lookup's set is shared, so its hits are copied out before any check can run another lookup.
-            var nearby = _candidateLists.TryPop(out var spare) ? spare : new List<EntityUid>();
-            try
-            {
-                NearbyHostiles(uid, member, nearby);
-                foreach (var target in nearby)
-                {
-                    if (CanEngage(uid, target))
-                        return target;
-                }
-            }
-            finally
-            {
-                nearby.Clear();
-                _candidateLists.Push(nearby);
-            }
-
-            foreach (var target in _factions.GetHostiles(uid))
-            {
-                if (!_factions.IsIgnored(uid, target) && CanEngage(uid, target))
-                    return target;
-            }
-        }
-
-        if (!TryComp<WFCrewComponent>(uid, out var crew) || Transform(uid).GridUid is not { } grid)
-            return null;
-        foreach (var target in EntityManager.System<WFCrewAlertSystem>().GetSharedHostiles(grid, crew.Group))
-        {
-            if (IsHostile(uid, member, target) && CanEngage(uid, target))
-                return target;
-        }
-        foreach (var target in crew.RadioSightings.Keys)
-        {
-            if (IsHostile(uid, member, target) && CanEngage(uid, target))
+            if (CanEngage(uid, target))
                 return target;
         }
         return null;

@@ -25,16 +25,16 @@
   # Delta-V specific species
   <Box>
     <GuideEntityEmbed Entity="MobVulpkanin" Caption="Vulpkanin"/>
-    <GuideEntityEmbed Entity="MobFelinid" Caption="Felinid"/>
+    <!-- <GuideEntityEmbed Entity="MobFelinid" Caption="Felinid"/> #Forge-change-del-->
     <GuideEntityEmbed Entity="MobHarpy" Caption="Harpy"/>
     <GuideEntityEmbed Entity="MobOni" Caption="Oni"/>
     <GuideEntityEmbed Entity="MobChitinid" Caption="Chitinid"/>
   </Box>
 
-  # Monolith specific species
+  <!-- # Monolith specific species #Forge-change-del
   <Box>
     <GuideEntityEmbed Entity="MobProtogen" Caption="Protogen"/>
-  </Box>
+  </Box> -->
 
   # Goobstation specific species
   <Box>

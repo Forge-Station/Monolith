@@ -1,5 +1,6 @@
 <Document>
   # Скреллы
+  [bold](Может содержать неактуальную или устаревшую информацию)[/bold]
   <Box>
     <GuideEntityEmbed Entity="MobSkrell" Caption=""/>
   </Box>

@@ -16,6 +16,7 @@
   - AutodocCircuitboard
   - OperatingTableCircuitboard
   - ClothingHandsGlovesSurgical
+  - AutodocUpgradeKitBluespace
   technologyPrerequisites:
   - CyberneticEnhancements
   position: -2, 13

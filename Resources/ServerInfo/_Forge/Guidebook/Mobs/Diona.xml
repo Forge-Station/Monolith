@@ -1,5 +1,6 @@
 <Document>
   # Дионы
+  [bold](Может содержать неактуальную или устаревшую информацию)[/bold]
   <Box>
     <GuideEntityEmbed Entity="MobDiona" Caption=""/>
   </Box>

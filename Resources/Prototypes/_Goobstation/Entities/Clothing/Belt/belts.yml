@@ -10,7 +10,7 @@
     sprite: _Goobstation/Clothing/Belt/cmowebbing.rsi
   - type: Storage
     grid:
-      - 0,0,6,2
+      - 0,0,11,1 # Forge-Change
     #whitelist: # I have no idea why is, say, wrench here, but it's just copied from medical belt. Mono: Comments out Whitelist
     #  tags:
     #    - Wrench
@@ -40,4 +40,4 @@
     #    - Defibrillator # Goobstation
     #    - GunApplySolution # Goobstation - Syndicate dart gun
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.75  # Forge-Change

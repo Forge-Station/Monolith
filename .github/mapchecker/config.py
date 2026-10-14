@@ -11,6 +11,8 @@ ILLEGAL_MATCHES = [
     "SurveillanceCameraWireless",
     "PDA",
     "FTLPoint",
+    "StationAnchorIndestructible",
+    "StationAnchor"
 ]
 # List of specific legal entities that override the above.  Does not check suffixes.
 LEGAL_OVERRIDES = [
@@ -73,5 +75,7 @@ CONDITIONALLY_ILLEGAL_MATCHES = {
         "WallPlastitaniumDiagonalOutpost",
         "ReinforcedWindowDiagonalOutpost",
         "PlastitaniumWindowDiagonalOutpost",
+        "StationAnchorIndestructible",
+        "StationAnchor",
     ]
 }

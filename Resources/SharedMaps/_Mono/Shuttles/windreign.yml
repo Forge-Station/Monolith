@@ -9216,7 +9216,7 @@ entities:
     - type: Transform
       pos: -9.229659,26.493763
       parent: 1
-- proto: GasDepositLocatorUnpowered
+- proto: GasDepositLocator
   entities:
   - uid: 861
     components:

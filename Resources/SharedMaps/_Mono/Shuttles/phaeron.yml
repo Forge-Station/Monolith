@@ -2879,7 +2879,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: GasDepositLocatorUnpowered
+- proto: GasDepositLocator
   entities:
   - uid: 290
     components:

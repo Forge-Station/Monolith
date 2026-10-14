@@ -36,8 +36,8 @@
   </Box>
   <Box>
     <GuideEntityEmbed Entity="MobDemon" Caption="Аркана"/>
-    <GuideEntityEmbed Entity="MobSkrell" Caption="Скрелл"/>
     <GuideEntityEmbed Entity="MobAriral" Caption="Арирал"/>
+    <GuideEntityEmbed Entity="MobSkrell" Caption="Скрелл"/>
   </Box>
   <!-- # Monolith specific species #Forge-change-del
   <Box>

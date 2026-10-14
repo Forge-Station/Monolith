@@ -30,6 +30,8 @@
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
     state: icon
+  - type: Item
+    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/nexus_t1_mil_hardsuit.rsi
     clothingVisuals:
@@ -45,7 +47,7 @@
         Piercing: 0.575
         Heat: 0.6
         Radiation: 0.5
-        Caustic: 0.8
+        Caustic: 0.75
   - type: StaminaDamageResistance
     coefficient: 0.3
   - type: ClothingSpeedModifier
@@ -79,8 +81,9 @@
         Slash: 0.475
         Piercing: 0.475
         Heat: 0.5
+        Shock: 0.9
         Radiation: 0.5
-        Caustic: 0.8
+        Caustic: 0.5
   - type: StaminaDamageResistance
     coefficient: 0.3
   - type: ToggleableClothing
@@ -123,8 +126,8 @@
         Piercing: 0.7
         Heat: 0.775
         Radiation: 0.275
-        Caustic: 0.8
-        Poison: 0.8
+        Shock: 0.8
+        Caustic: 0.6
   - type: ClothingSpeedModifier
     walkModifier: 0.85
     sprintModifier: 0.85

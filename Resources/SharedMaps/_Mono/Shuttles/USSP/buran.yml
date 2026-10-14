@@ -1541,7 +1541,7 @@ entities:
       - 9
 - proto: PoweredLightSodium
   entities:
-   - uid: 1484
+  - uid: 1484
     components:
     - type: Transform
       rot: 3.141592653589793 rad

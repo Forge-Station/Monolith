@@ -12,7 +12,6 @@ ILLEGAL_MATCHES = [
     "PDA",
     "FTLPoint",
     "StationAnchorIndestructible",
-    "StationAnchor"
 ]
 # List of specific legal entities that override the above.  Does not check suffixes.
 LEGAL_OVERRIDES = [
@@ -21,6 +20,10 @@ LEGAL_OVERRIDES = [
     "ShowcaseRobot," # decoration
     "AlwaysPoweredStrobeLight", # decoration
     "SmallLightDim", #decoraction
+    "MiniStationAnchor",
+    "StationAnchor",
+    "StationAnchorOff",
+
 ]
 # List of matchers that are illegal to use, unless the map is a ship and the ship belongs to the keyed shipyard.
 CONDITIONALLY_ILLEGAL_MATCHES = {
@@ -76,6 +79,5 @@ CONDITIONALLY_ILLEGAL_MATCHES = {
         "ReinforcedWindowDiagonalOutpost",
         "PlastitaniumWindowDiagonalOutpost",
         "StationAnchorIndestructible",
-        "StationAnchor",
     ]
 }

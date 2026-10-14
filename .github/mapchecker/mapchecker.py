@@ -43,12 +43,12 @@ if __name__ == "__main__":
         default=[
             "Resources/Prototypes/_NF/Maps/Outpost",  # Colonial Outpost
             "Resources/Prototypes/_NF/PointsOfInterest",  # Points of interest
-            "Resources/Prototypes/_NF/Shipyard",  # Shipyard ships.
+            #"Resources/Prototypes/_NF/Shipyard",  # Shipyard ships.
             "Resources/Prototypes/_Mono/Outpost",  # Colonial Outpost
             "Resources/Prototypes/_Mono/PointsOfInterest",  # Points of interest
             "Resources/Prototypes/_Mono/Shipyard",  # Shipyard ships.
             "Resources/Prototypes/_Forge/Outpost",  # Colonial Outpost
-            "Resources/Prototypes/_Forge/PointsOfInterest",  # Points of interest
+            "Resources/Prototypes/_Forge/PointsOflnterest",  # Points of interest
             "Resources/Prototypes/_Forge/Shipyard",  # Shipyard ships.
         ]
     )

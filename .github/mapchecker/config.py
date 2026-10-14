@@ -6,12 +6,7 @@ ILLEGAL_MATCHES = [
     "Admeme",
     "EncryptionKeyCommand",
     "SurveillanceCameraWireless",
-    "APCHighCapacity",
-    "APCSuperCapacity",
-    "APCHyperCapacity",
     "PDA",
-    "SpawnPointPassenger",
-    "SalvageShuttleMarker",
     "FTLPoint",
 ]
 # List of specific legal entities that override the above.  Does not check suffixes.

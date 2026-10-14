@@ -1062,7 +1062,7 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 2
-- proto: PoweredStrobeLight
+- proto: AlwaysPoweredStrobeLight
   entities:
   - uid: 25
     components:

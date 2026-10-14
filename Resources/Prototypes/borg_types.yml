@@ -177,6 +177,7 @@
   - type: ShowHealthIcons
     damageContainers:
     - Biological
+  - type: SurgeryIgnoreClothing #Forge-Change
 
   # Visual
   inventoryTemplateId: borgDutch

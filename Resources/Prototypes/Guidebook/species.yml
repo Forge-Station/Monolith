@@ -25,6 +25,7 @@
   - Hydrakin # Monolith/Obelisk
   - Demon # Wega
   - Skrell # Wega
+  - Ariral # Wega
  # - Flight # CE #Forge-change-del
 
 - type: guideEntry
@@ -91,3 +92,8 @@
   id: Hydrakin
   name: species-name-hydrakin
   text: "/ServerInfo/_Forge/Guidebook/Mobs/Hydrakin.xml" # Forge-change
+
+- type: guideEntry
+  id: Ariral
+  name: species-name-ariral
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_Wega/Ariral.xml" # Forge-change

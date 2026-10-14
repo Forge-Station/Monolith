@@ -1,7 +1,7 @@
 <Document>
-  # Разновидности
+  # Разновидности расс
 
-  В секторе обитают различные разумные виды животных.
+  Система Икар населена следующими рассами:
 
   <Box>
     <GuideEntityEmbed Entity="MobArachnid" Caption="Арахнид"/>
@@ -37,6 +37,7 @@
   <Box>
     <GuideEntityEmbed Entity="MobDemon" Caption="Аркана"/>
     <GuideEntityEmbed Entity="MobSkrell" Caption="Скрелл"/>
+    <GuideEntityEmbed Entity="MobAriral" Caption="Арирал"/>
   </Box>
   <!-- # Monolith specific species #Forge-change-del
   <Box>

@@ -838,7 +838,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -7.5,30.5
       parent: 1
-- proto: AlwaysPoweredLightSodium
+- proto: PoweredLightSodium
   entities:
   - uid: 13
     components:

@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/10/2025 14:56:35
-  entityCount: 2804
+  entityCount: 2802
 maps: []
 grids:
 - 1
@@ -2074,65 +2074,7 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 8
-- proto: AlwaysPoweredlightBlue
-  entities:
-  - uid: 72
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -7.5,-30.5
-      parent: 1
-  - uid: 73
-    components:
-    - type: Transform
-      pos: -4.5,-7.5
-      parent: 1
-  - uid: 74
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -4.5,-16.5
-      parent: 1
-  - uid: 75
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 6.5,-16.5
-      parent: 1
-  - uid: 76
-    components:
-    - type: Transform
-      pos: 5.5,-5.5
-      parent: 1
-  - uid: 77
-    components:
-    - type: Transform
-      pos: -5.5,-20.5
-      parent: 1
-  - uid: 78
-    components:
-    - type: Transform
-      pos: 6.5,-20.5
-      parent: 1
-  - uid: 79
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 9.5,-29.5
-      parent: 1
-- proto: AlwaysPoweredLightLED
-  entities:
-  - uid: 80
-    components:
-    - type: Transform
-      pos: 0.5,-30.5
-      parent: 1
-  - uid: 81
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-37.5
-      parent: 1
+  
 - proto: AmeController
   entities:
   - uid: 82
@@ -13145,6 +13087,50 @@ entities:
       parent: 1
 - proto: PoweredlightBlue
   entities:
+  - uid: 72
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-30.5
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      pos: -4.5,-7.5
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,-16.5
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,-16.5
+      parent: 1
+  - uid: 76
+    components:
+    - type: Transform
+      pos: 5.5,-5.5
+      parent: 1
+  - uid: 77
+    components:
+    - type: Transform
+      pos: -5.5,-20.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      pos: 6.5,-20.5
+      parent: 1
+  - uid: 79
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,-29.5
+      parent: 1
   - uid: 1929
     components:
     - type: Transform
@@ -13191,6 +13177,17 @@ entities:
       parent: 1
 - proto: PoweredlightLED
   entities:
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 0.5,-30.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,-37.5
+      parent: 1
   - uid: 1936
     components:
     - type: Transform

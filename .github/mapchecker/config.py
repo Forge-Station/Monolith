@@ -3,6 +3,7 @@ ILLEGAL_MATCHES = [
     "DO NOT MAP",
     "DoNotMap",
     "DEBUG",
+    "OUTPOST ONLY"
     "Always Powered",
     "Unowered",
     "Admeme",
@@ -15,7 +16,9 @@ ILLEGAL_MATCHES = [
 LEGAL_OVERRIDES = [
     "ButtonFrameCautionSecurity", # red button
     "PosterLegitPDAAd",
-    "ShowcaseRobot" # decoration
+    "ShowcaseRobot," # decoration
+    "AlwaysPoweredStrobeLight", # decoration
+    "SmallLightDim", #decoraction
 ]
 # List of matchers that are illegal to use, unless the map is a ship and the ship belongs to the keyed shipyard.
 CONDITIONALLY_ILLEGAL_MATCHES = {
@@ -47,5 +50,28 @@ CONDITIONALLY_ILLEGAL_MATCHES = {
         "PlastititaniumWindowDiagonalIndestructible",
         "ClosetMaintenanceFilledRandom",
         "ClosetWallMaintenanceFilledRandom",
+        "AirlockGlassShuttleShipyardOutpost",
+        "BaseWallOutpost",
+        "WallReinforcedOutpost",
+        "WallMiningOutpost",
+        "WallPlastitaniumOutpost",
+        "ReinforcedWindowOutpost",
+        "PlastitaniumWindowOutpost",
+        "AirlockShuttleNfsdOutpostLocked",
+        "AirlockGlassShuttleNfsdOutpostLocked",
+        "AirlockShuttleUSSPOutpostLocked",
+        "AirlockGlassShuttleUSSPOutpostLocked",
+        "AirlockGlassShuttleNfsdOutpost",
+        "AirlockShuttleNfsdOutpost",
+        "AirlockShuttleOutpost",
+        "AirlockGlassShuttleOutpost",
+        "AirlockExternalShuttleMieyoLockedOutpost",
+        "AirlockExternalGlassShuttleMieyoLockedOutpost",
+        "WallRiveted",
+        "WallReinforcedDiagonalOutpost",
+        "WallMiningDiagonalOutpost",
+        "WallPlastitaniumDiagonalOutpost",
+        "ReinforcedWindowDiagonalOutpost",
+        "PlastitaniumWindowDiagonalOutpost",
     ]
 }

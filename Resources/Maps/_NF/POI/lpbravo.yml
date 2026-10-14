@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 05/17/2026 14:02:30
-  entityCount: 6324
+  entityCount: 6323
 maps: []
 grids:
 - 1
@@ -2227,26 +2227,7 @@ entities:
     components:
     - type: Transform
       pos: -0.6999247,-16.228281
-      parent: 1
-- proto: AlwaysPoweredlightRed
-  entities:
-  - uid: 130
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 22.5,16.5
-      parent: 1
-  - uid: 131
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 14.5,16.5
-      parent: 1
-  - uid: 132
-    components:
-    - type: Transform
-      pos: 18.5,20.5
-      parent: 1
+      parent: 1 
 - proto: AmmoniaCanister
   entities:
   - uid: 133
@@ -18344,6 +18325,23 @@ entities:
       parent: 1
 - proto: PoweredlightRed
   entities:
+  - uid: 130
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 22.5,16.5
+      parent: 1
+  - uid: 131
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 14.5,16.5
+      parent: 1
+  - uid: 132
+    components:
+    - type: Transform
+      pos: 18.5,20.5
+      parent: 1
   - uid: 2023
     components:
     - type: Transform

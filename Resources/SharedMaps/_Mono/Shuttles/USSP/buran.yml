@@ -1539,7 +1539,7 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 9
-- proto: AlwaysPoweredLightSodium
+- proto: PoweredLightSodium
   entities:
   - uid: 40
     components:

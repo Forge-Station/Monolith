@@ -311,7 +311,7 @@ entities:
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
-- proto: AlwaysPoweredLightExterior
+- proto: PoweredLightExterior
   entities:
   - uid: 8
     components:

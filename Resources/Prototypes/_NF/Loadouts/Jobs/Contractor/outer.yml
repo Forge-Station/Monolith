@@ -28,23 +28,34 @@
   equipment:
     outerClothing: ClothingOuterHardsuitVoidParamed
 
-- type: loadout
-  id: ContractorClothingOuterHardsuitUIEngineer
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: ContractorT1
-  price: 7500
-  equipment:
-    outerClothing: ClothingOuterHardsuitUllmanEngineer
+# Forge-change-start remove UI Engineer hardsuit
+#- type: loadout
+#  id: ContractorClothingOuterHardsuitUIEngineer
+#  effects:
+#  - !type:GroupLoadoutEffect
+#    proto: ContractorT1
+#  price: 7500
+#  equipment:
+#    outerClothing: ClothingOuterHardsuitUllmanEngineer
 
 - type: loadout
   id: ContractorClothingOuterHardsuitUIPilot
   effects:
   - !type:GroupLoadoutEffect
     proto: ContractorT1
-  price: 7500
+  price: 25000 # Forge-change 7500->25000
   equipment:
     outerClothing: ClothingOuterHardsuitUIPilot
+
+- type: loadout
+  id: ContractorClothingOuterHardsuitUsspL10A
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 32500 # Forge-change 7500->32500
+  equipment:
+    outerClothing: ClothingOuterHardsuitUsspL10A
+# Forge-change-end
 
 - type: loadout
   id: ContractorClothingOuterHoodieGrey

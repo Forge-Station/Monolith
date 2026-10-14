@@ -5,7 +5,7 @@ ILLEGAL_MATCHES = [
     "DEBUG",
     "OUTPOST ONLY"
     "Always Powered",
-    "Unowered",
+    "Unpowered",
     "Admeme",
     "EncryptionKeyCommand",
     "SurveillanceCameraWireless",

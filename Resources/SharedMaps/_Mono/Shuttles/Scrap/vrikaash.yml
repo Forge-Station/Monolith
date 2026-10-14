@@ -838,14 +838,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -7.5,30.5
       parent: 1
-- proto: PoweredLightSodium
-  entities:
-  - uid: 13
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -13.5,3.5
-      parent: 1
 - proto: AmmoLoaderSmall
   entities:
   - uid: 14
@@ -5658,6 +5650,12 @@ entities:
       parent: 1
 - proto: PoweredlightSodium
   entities:
+  - uid: 13
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -13.5,3.5
+      parent: 1
   - uid: 808
     components:
     - type: Transform

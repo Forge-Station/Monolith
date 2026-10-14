@@ -29,12 +29,17 @@
   - any-glob-to-any-file:
     - "Resources/SharedMaps/_Forge/Shuttles/**/*.yml" # Grid Files
     - "Resources/Prototypes/_Forge/Shipyard/**/*.yml" # Prototypes Files
+    - "Resources/SharedMaps/_Mono/Shuttles/**/*.yml" # Grid Files
+    - "Resources/Prototypes/_Mono/Shipyard/**/*.yml" # Prototypes Files
 
 "Map-POI":
 - changed-files:
   - any-glob-to-any-file:
     - "Resources/Maps/_Forge/POI/**/*.yml" # Grid Files
     - "Resources/Prototypes/_Forge/PointsOflnterest/**/*.yml" # Prototypes Files
+    - "Resources/Maps/_Mono/POI/**/*.yml" # Grid Files
+    - "Resources/Prototypes/_Mono/PointsOfInterest/**/*.yml" # Prototypes Files
+
 
 "Sprites":
 - changed-files:

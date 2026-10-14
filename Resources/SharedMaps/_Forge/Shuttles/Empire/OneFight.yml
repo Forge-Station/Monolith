@@ -2280,7 +2280,7 @@ entities:
     - type: Transform
       pos: 2.5,-3.5
       parent: 1
-- proto: SuitStorageEmpire14m
+- proto: SuitStorageRI14
   entities:
   - uid: 284
     components:

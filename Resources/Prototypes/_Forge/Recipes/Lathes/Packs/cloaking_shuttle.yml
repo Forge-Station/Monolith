@@ -3,4 +3,8 @@
   recipes:
   - MachineCloakingCDMSCircuitboard
   - MachineCloakingChameleonCircuitboard
+
+- type: latheRecipePack
+  id: CloakingShuttleCircuitsADSPack
+  recipes:
   - MachineCloakingWeepingAngelCircuitboard

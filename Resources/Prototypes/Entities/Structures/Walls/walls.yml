@@ -65,6 +65,10 @@
   id: WallBrick
   name: brick wall
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactConcrete
   - type: Sprite
     sprite: Structures/Walls/brick.rsi
   - type: Icon
@@ -250,6 +254,10 @@
   id: WallIce
   name: ice wall
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactIce
   - type: Tag
     tags:
     - Wall
@@ -266,6 +274,10 @@
   id: WallPlasma
   name: plasma wall
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactGlass
   - type: Tag
     tags:
     - Wall
@@ -589,6 +601,10 @@
   id: WallSandstone
   name: sandstone wall
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactConcrete
   - type: Tag
     tags:
     - Wall
@@ -985,6 +1001,10 @@
   name: wood wall
   description: The traditional greytide defense.
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactWood
   - type: Sprite
     sprite: Structures/Walls/wood.rsi
   - type: Icon
@@ -1151,6 +1171,10 @@
   id: WallVaultRock
   name: rock vault wall
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactConcrete
   - type: Sprite
     sprite: Structures/Walls/vault.rsi
     state: rockvault
@@ -1163,6 +1187,10 @@
   id: WallVaultSandstone
   name: sandstone vault wall
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactConcrete
   - type: Sprite
     sprite: Structures/Walls/vault.rsi
     state: sandstonevault
@@ -1266,6 +1294,10 @@
   name: snow brick wall
   description: A cold, not-so-impenetrable wall.
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactIce
   - type: Sprite
     sprite: Structures/Walls/cobblebrick_snow.rsi
   - type: Icon

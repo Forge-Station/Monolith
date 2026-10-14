@@ -46448,7 +46448,7 @@ entities:
     - type: Transform
       parent: 1
       pos: 0.5,-21.5
-- proto: SuitStorageEmpire14m
+- proto: SuitStorageRI14
   entities:
   - uid: 6017
     components:
@@ -46546,7 +46546,7 @@ entities:
     - type: Transform
       parent: 1
       pos: 18.5,-12.5
-- proto: SuitStorageRI22
+- proto: SuitStorageRI14
   entities:
   - uid: 6035
     components:
@@ -46562,7 +46562,8 @@ entities:
     components:
     - type: Transform
       parent: 1
-      pos: 9.5,-13.5
+- proto: SuitStorageRI14
+  entities:
   - uid: 6038
     components:
     - type: Transform

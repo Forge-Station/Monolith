@@ -116,8 +116,8 @@
     walkModifier: 0.7 # 0.4->0.7
     sprintModifier: 0.7 # 0.35->0.7
   - type: WieldDelay
-    baseDelay: 1 # 2->1
-    modifiedDelay: 1 # 2->1
+    baseDelay: 0.8 # 2->0.8
+    modifiedDelay: 0.8 # 2->0.8
     preventFiring: true
   - type: Appearance
   - type: StaticPrice # Mono
@@ -222,7 +222,7 @@
     maxAngle: 20 # 36->20
     angleIncrease: 1.5 # 4->1.5
     angleDecay: 8 # 16->8
-    fireRate: 6 # 5->6
+    fireRate: 7.25 # 5->7.25
     projectileSpeed: 50
     selectedMode: FullAuto
     availableModes:
@@ -260,8 +260,8 @@
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: WieldDelay
-    baseDelay: 0.8
-    modifiedDelay: 0.8
+    baseDelay: 0.7
+    modifiedDelay: 0.7
     preventFiring: true
   - type: SpeedModifiedOnWield
     walkModifier: 0.9 # 0.7->0.9

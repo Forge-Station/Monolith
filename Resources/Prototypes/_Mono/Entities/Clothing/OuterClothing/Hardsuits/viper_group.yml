@@ -6,8 +6,8 @@
   components:
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/viper_group_standard.rsi
-  - type: Item
-    size: Huge
+  #- type: Item # Forge-change
+  #  size: Huge # Forge-change
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/viper_group_standard.rsi
   - type: PressureProtection
@@ -23,6 +23,7 @@
         Piercing: 0.475 # Forge-change 0.5 -> 0.475
         Heat: 0.525 # Forge-change 0.67 -> 0.525
         Radiation: 0.45 # Forge-change 0.5 -> 0.45
+        Shock: 0.9 # Forge-change
         Caustic: 0.5
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.3 # Forge-change 0.5 -> 0.3
@@ -70,7 +71,7 @@
         Piercing: 0.525 # Forge-change 0.67 -> 0.525
         Heat: 0.475 # Forge-change 0.4 -> 0.475
         Radiation: 0.5 # Forge-change 0.25 -> 0.5
-        Caustic: 0.1
+        Caustic: 0.3 # Forge-change 0.1 -> 0.3
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.3 # Forge-change 0.67 -> 0.3
   - type: ClothingSpeedModifier
@@ -109,6 +110,8 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.35 # Forge-change 0.4 -> 0.35
+  - type: FireProtection # Forge-change
+    reduction: 0.85 # Forge-change
   - type: Armor
     modifiers:
       coefficients:
@@ -117,7 +120,8 @@
         Piercing: 0.325 # Forge-change 0.34 -> 0.325
         Heat: 0.45 # Forge-change 0.6 -> 0.45
         Radiation: 0.3 # Forge-change 0.5 -> 0.3
-        Caustic: 0.25
+        Caustic: 0.6 # Forge-change 0.25 -> 0.6
+        Shock: 0.6 # Forge-change
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.1 # Forge-change 0.34 -> 0.1
   - type: ClothingSpeedModifier
@@ -147,8 +151,8 @@
   components:
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/viper_group_initiate.rsi
-  - type: Item
-    size: Huge
+  #- type: Item # Forge-change
+  #  size: Huge # Forge-change
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/viper_group_initiate.rsi
   - type: PressureProtection
@@ -164,7 +168,7 @@
         Piercing: 0.6 # Forge-change 0.67 -> 0.6
         Heat: 0.65 # Forge-change 0.84 -> 0.65
         Radiation: 0.55 # Forge-change 0.5 -> 0.55
-        Caustic: 0.5
+        Caustic: 0.75 # Forge-change 0.5 -> 0.75
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.35 # Forge-change 0.67 -> 0.35
   - type: ClothingSpeedModifier

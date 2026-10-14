@@ -46,6 +46,8 @@
         Piercing: 25 # Forge-change 20->25
         Heat: 10
     armorPenetration: -0.1 # Forge-change
+  - type: IgniteOnCollide
+    fireStacks: 1.6 # Forge-change 0.4->1.6
 
 - type: entity
   id: Bullet357_magnumAP

@@ -77,8 +77,9 @@
   - changed-files:
     - any-glob-to-any-file: "**/*.yml"
     - all-globs-to-any-file:
-      - "!Resources/Maps/_NF/**/*.yml"
-      - "!Resources/Prototypes/Maps/_NF/**/*.yml"
+      - "!Resources/Maps/**/*.yml"
+      - "!Resources/Prototypes/Maps/**/*.yml"
+      - "!Resources/SharedMaps/**/*.yml"
 
 "DB Migration":
 - changed-files:

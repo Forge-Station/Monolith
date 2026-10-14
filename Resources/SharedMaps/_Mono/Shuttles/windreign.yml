@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/18/2026 18:31:12
-  entityCount: 2561
+  entityCount: 2560
 maps: []
 grids:
 - 1
@@ -15870,6 +15870,12 @@ entities:
       parent: 1
 - proto: WallReinforced
   entities:
+  - uid: 2491
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -6.5,20.5
+      parent: 1
   - uid: 359
     components:
     - type: Transform
@@ -17559,14 +17565,6 @@ entities:
     components:
     - type: Transform
       pos: -13.5,0.5
-      parent: 1
-- proto: WallReinforcedOutpost
-  entities:
-  - uid: 2491
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -6.5,20.5
       parent: 1
 - proto: WallSolid
   entities:

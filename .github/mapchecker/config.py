@@ -3,6 +3,8 @@ ILLEGAL_MATCHES = [
     "DO NOT MAP",
     "DoNotMap",
     "DEBUG",
+    "Always Powered",
+    "Unowered",
     "Admeme",
     "EncryptionKeyCommand",
     "SurveillanceCameraWireless",

@@ -1,0 +1,842 @@
+﻿- type: entity
+  id: KiasManagementConsole
+  parent: BaseComputer
+  name: KIAS management console
+  components:
+  - type: Computer
+    board: KiasManagementConsoleBoard
+  - type: KiasDevice
+    role: Display
+  - type: KiasDisplay
+  - type: KiasManagement
+  - type: KiasResourceMonitor
+  - type: KiasClaimable
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Key:
+        type: KiasBoundUserInterface
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,1.45,0.45"
+        density: 190
+        mask: [MachineMask]
+        layer: [MachineLayer]
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerBody:
+          True: { color: White }
+          False: { color: Gray }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/management.rsi
+    offset: 0.5, 0
+    layers:
+    - state: base
+      map: [computerLayerBody, "0"]
+    - state: blank
+      map: ["computerLayerKeyboard"]
+    - state: blank
+      map: ["computerLayerScreen"]
+    - state: blank
+      map: ["computerLayerKeys"]
+    - state: blank
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+- type: entity
+  id: KiasManagementConsoleBoard
+  parent: BaseComputerCircuitboard
+  name: KIAS management console board
+  components:
+  - type: ComputerBoard
+    prototype: KiasManagementConsole
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasManagementConsoleBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasManagementConsoleBoard
+
+- type: entity
+  id: KiasIffReceiver
+  parent: BaseKiasServer
+  name: KiasIffReceiver
+  components:
+  - type: Machine
+    board: KiasIffReceiverBoard
+  - type: KiasDevice
+    role: Iff
+  - type: KiasIffReceiver
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/iff-receiver.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasDockingSensor
+  parent: BaseKiasServer
+  name: KiasDockingSensor
+  components:
+  - type: Machine
+    board: KiasDockingSensorBoard
+  - type: KiasDevice
+    role: Docking
+  - type: KiasDockingSensor
+  - type: DeviceLinkSource
+    ports: [DockStatus, KiasDocked, KiasUndocked]
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/docking-sensor.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasDeviceAdapter
+  parent: BaseKiasServer
+  name: KiasDeviceAdapter
+  components:
+  - type: Machine
+    board: KiasDeviceAdapterBoard
+  - type: KiasDevice
+    role: Adapter
+  - type: KiasDeviceAdapter
+  - type: DeviceLinkSink
+    ports: [On, Off, Toggle, KiasEmergency]
+  - type: DeviceLinkSource
+    ports: [On, Off, Status]
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/adapter.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasWirelessTransceiver
+  parent: BaseKiasServer
+  name: KiasWirelessTransceiver
+  components:
+  - type: Machine
+    board: KiasWirelessTransceiverBoard
+  - type: KiasDevice
+    role: Adapter
+  - type: KiasWireless
+  - type: KiasDeviceAdapter
+  - type: DeviceLinkSink
+    ports: [On, Off, Toggle, KiasEmergency]
+  - type: DeviceLinkSource
+    ports: [On, Off, Status]
+    range: 200
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Sensor
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Sensor:
+        type: KiasLocalBoundUserInterface
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/wireless.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasKeySwitch
+  parent: BaseKiasWallDevice
+  name: KiasKeySwitch
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasKeySwitchBoard
+  - type: KiasDevice
+    role: MasterSwitch
+  - type: KiasKeySwitch
+  - type: ItemSlots
+    slots:
+      kias-key:
+        whitelist:
+          components: [KiasMasterKey]
+        ejectOnInteract: false
+  - type: ContainerContainer
+    containers:
+      kias-key: !type:ContainerSlot
+  - type: Sprite
+    scale: 0.5, 0.5
+    offset: 0, -0.2
+    noRot: false
+    sprite: _Forge/KIAS/Pack/key-switch.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasRotarySwitch
+  parent: BaseKiasWallDevice
+  name: KiasRotarySwitch
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasRotarySwitchBoard
+  - type: KiasDevice
+    role: Adapter
+  - type: KiasRotary
+    positions: 3
+  - type: DeviceLinkSource
+    ports: [KiasPosition0, KiasPosition1, KiasPosition2, KiasPosition3]
+  - type: Sprite
+    scale: 0.5, 0.5
+    offset: 0, -0.2
+    noRot: false
+    sprite: _Forge/KIAS/Pack/rotary-switch.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasResourceMonitor
+  parent: BaseKiasServer
+  name: KiasResourceMonitor
+  components:
+  - type: Machine
+    board: KiasResourceMonitorBoard
+  - type: KiasDevice
+    role: Resource
+  - type: KiasResourceMonitor
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Sensor
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Sensor:
+        type: KiasLocalBoundUserInterface
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/resource-monitor.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasIffReceiverBoard
+  parent: BaseMachineCircuitboard
+  name: KiasIffReceiver board
+  components:
+  - type: MachineBoard
+    prototype: KiasIffReceiver
+    requirements: { Capacitor: 1, MatterBin: 1 }
+    stackRequirements: { Steel: 5 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasIffReceiverBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasIffReceiverBoard
+
+- type: entity
+  id: KiasDockingSensorBoard
+  parent: BaseMachineCircuitboard
+  name: KiasDockingSensor board
+  components:
+  - type: MachineBoard
+    prototype: KiasDockingSensor
+    requirements: { Capacitor: 1, MatterBin: 1 }
+    stackRequirements: { Steel: 5 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasDockingSensorBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasDockingSensorBoard
+
+- type: entity
+  id: KiasDeviceAdapterBoard
+  parent: BaseMachineCircuitboard
+  name: KiasDeviceAdapter board
+  components:
+  - type: MachineBoard
+    prototype: KiasDeviceAdapter
+    requirements: { Capacitor: 1, MatterBin: 1 }
+    stackRequirements: { Steel: 5 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasDeviceAdapterBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasDeviceAdapterBoard
+
+- type: entity
+  id: KiasWirelessTransceiverBoard
+  parent: BaseMachineCircuitboard
+  name: KiasWirelessTransceiver board
+  components:
+  - type: MachineBoard
+    prototype: KiasWirelessTransceiver
+    requirements: { Capacitor: 1, MatterBin: 1 }
+    stackRequirements: { Steel: 5 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasWirelessTransceiverBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasWirelessTransceiverBoard
+
+- type: entity
+  id: KiasKeySwitchBoard
+  parent: BaseMachineCircuitboard
+  name: KiasKeySwitch board
+  components:
+  - type: MachineBoard
+    prototype: KiasKeySwitch
+    requirements: { Capacitor: 1, MatterBin: 1 }
+    stackRequirements: { Steel: 5 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasKeySwitchBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasKeySwitchBoard
+
+- type: entity
+  id: KiasRotarySwitchBoard
+  parent: BaseMachineCircuitboard
+  name: KiasRotarySwitch board
+  components:
+  - type: MachineBoard
+    prototype: KiasRotarySwitch
+    requirements: { Capacitor: 1, MatterBin: 1 }
+    stackRequirements: { Steel: 5 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasRotarySwitchBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasRotarySwitchBoard
+
+- type: entity
+  id: KiasResourceMonitorBoard
+  parent: BaseMachineCircuitboard
+  name: KiasResourceMonitor board
+  components:
+  - type: MachineBoard
+    prototype: KiasResourceMonitor
+    requirements: { Capacitor: 1, MatterBin: 1 }
+    stackRequirements: { Steel: 5 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasResourceMonitorBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasResourceMonitorBoard
+
+- type: entity
+  id: KiasFlipFlop
+  parent: KiasDeviceAdapter
+  name: KIAS flip-flop
+  components:
+  - type: Machine
+    board: KiasFlipFlopBoard
+
+  - type: SignalSwitch
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/flipflop.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasEmergencyReceiver
+  parent: KiasDeviceAdapter
+  name: KIAS emergency button receiver
+  components:
+  - type: Machine
+    board: KiasEmergencyReceiverBoard
+  - type: KiasDeviceAdapter
+    emergency: true
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/emergency-receiver.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasEmergencyButton
+  parent: SignalButton
+  name: KIAS emergency button
+  components:
+  - type: Transform
+    noRot: false
+    anchored: true
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: KiasDevice
+    role: Adapter
+  - type: SignalSwitch
+    onPort: KiasEmergencyPressed
+    offPort: KiasEmergencyPressed
+    statusPort: KiasEmergencyPressed
+  - type: DeviceLinkSource
+    ports: [KiasEmergencyPressed]
+  - type: Construction
+    graph: KiasEmergencyButtonGraph
+    node: button
+  - type: Sprite
+    scale: 0.55, 0.55
+    offset: 0, -0.2
+    noRot: false
+    sprite: _Forge/KIAS/Pack/emergency-button.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+    drawdepth: WallMountedItems
+- type: entity
+  id: KiasNavigationLight
+  parent: PoweredSmallLight
+  name: KIAS navigation light
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: KiasLightGroup
+    group: NAVIGATION
+  - type: PoweredLightVisuals
+    spriteStateMap: { empty: empty, off: off, on: base, broken: broken, burned: burned }
+  - type: Sprite
+    noRot: false
+    sprite: _Forge/KIAS/Pack/navigation-light.rsi
+    layers:
+    - state: base
+      map: ["enum.PoweredLightLayers.Base", "0"]
+    drawdepth: WallMountedItems
+- type: sourcePort
+  id: KiasEmergencyPressed
+  name: kias-port-emergency
+  description: kias-port-emergency
+  defaultLinks: [KiasEmergency]
+
+- type: sinkPort
+  id: KiasEmergency
+  name: kias-port-emergency
+  description: kias-port-emergency
+
+- type: sourcePort
+  id: KiasDocked
+  name: kias-trigger-docked
+  description: kias-trigger-docked
+  defaultLinks: [KiasAnnounce]
+
+- type: sourcePort
+  id: KiasUndocked
+  name: kias-trigger-undocked
+  description: kias-trigger-undocked
+  defaultLinks: [KiasAnnounce]
+
+- type: sourcePort
+  id: KiasPosition0
+  name: kias-position-zero
+  description: kias-position-zero
+  defaultLinks: [Off]
+
+- type: sourcePort
+  id: KiasPosition1
+  name: kias-position-one
+  description: kias-position-one
+  defaultLinks: [On]
+
+- type: sourcePort
+  id: KiasPosition2
+  name: kias-position-two
+  description: kias-position-two
+  defaultLinks: [Toggle]
+
+- type: sourcePort
+  id: KiasPosition3
+  name: kias-position-three
+  description: kias-position-three
+  defaultLinks: [KiasAnnounce]
+
+- type: entity
+  id: KiasFlipFlopBoard
+  parent: KiasDeviceAdapterBoard
+  name: KIAS flip-flop board
+  components:
+  - type: MachineBoard
+    prototype: KiasFlipFlop
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasEmergencyReceiverBoard
+  parent: KiasDeviceAdapterBoard
+  name: KIAS emergency receiver board
+  components:
+  - type: MachineBoard
+    prototype: KiasEmergencyReceiver
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasFlipFlopBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasFlipFlopBoard
+
+- type: latheRecipe
+  id: KiasEmergencyReceiverBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasEmergencyReceiverBoard
+
+- type: constructionGraph
+  id: KiasEmergencyButtonGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: button
+      steps:
+      - material: Steel
+        amount: 1
+        doAfter: 2
+      - material: Cable
+        amount: 1
+  - node: button
+    entity: KiasEmergencyButton
+    edges:
+    - to: start
+      steps:
+      - tool: Screwing
+        doAfter: 2
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+      - !type:DeleteEntity {}
+
+- type: construction
+  id: KiasEmergencyButton
+  name: kias-emergency-button-name
+  description: kias-emergency-button-description
+  graph: KiasEmergencyButtonGraph
+  startNode: start
+  targetNode: button
+  category: construction-category-machines
+  objectType: Structure
+  icon: { sprite: _Forge/KIAS/Pack/emergency-button.rsi, state: base }
+  canRotate: true
+  canBuildInImpassable: true
+
+- type: Tag
+  id: KiasBasicModule
+- type: Tag
+  id: KiasAdvancedModule
+
+- type: entity
+  id: KiasJammer
+  parent: RadioJammer
+  name: KIAS electronic warfare module
+  components:
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+  - type: Machine
+    board: KiasJammerBoard
+  - type: KiasDevice
+    role: Adapter
+  - type: KiasIntegrated
+  - type: DeviceLinkSink
+    ports: [On, Off]
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers: [machine_board, machine_parts]
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/jammer.rsi
+    layers:
+    - state: base
+      map: ["0"]
+    - state: jammer_high_charge
+      map: ["enum.RadioJammerLayers.LED", "RadioJammerLayers.LED"]
+      visible: false
+- type: entity
+  id: KiasJammerBoard
+  parent: BaseMachineCircuitboard
+  name: KIAS electronic warfare board
+  components:
+  - type: MachineBoard
+    prototype: KiasJammer
+    requirements: { Capacitor: 1, MatterBin: 1 }
+    stackRequirements: { Steel: 5 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasJammerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasJammerBoard
+
+- type: entity
+  id: KiasAdvancedRoomScanner
+  parent: KiasRoomScanner
+  name: KIAS advanced room scanner
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasAdvancedRoomScannerBoard
+  - type: KiasRoomScanner
+    advanced: true
+  - type: Sprite
+    scale: 0.65, 0.65
+    offset: 0, -0.2
+    noRot: false
+    sprite: _Forge/KIAS/Pack/advanced-scanner.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+    drawdepth: WallMountedItems
+  - type: ItemSlots
+    slots:
+      kias-module-1:
+        startingItem: KiasMotionModule
+        whitelist:
+          components: [KiasScannerModule]
+      kias-module-2:
+        startingItem: KiasIdentityModule
+        whitelist:
+          components: [KiasScannerModule]
+      kias-module-3:
+        startingItem: KiasThreatModule
+        whitelist:
+          components: [KiasScannerModule]
+      kias-module-4:
+        startingItem: KiasSpectralModule
+        whitelist:
+          components: [KiasScannerModule]
+      kias-module-5:
+        startingItem: KiasBiometricModule
+        whitelist:
+          components: [KiasScannerModule]
+      kias-module-6:
+        startingItem: KiasRadiationModule
+        whitelist:
+          components: [KiasScannerModule]
+
+- type: entity
+  id: KiasAdvancedRoomScannerBoard
+  parent: KiasRoomScannerBoard
+  name: KIAS advanced scanner board
+  components:
+  - type: MachineBoard
+    prototype: KiasAdvancedRoomScanner
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasAdvancedRoomScannerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasAdvancedRoomScannerBoard
+
+- type: entity
+  id: KiasIntegrationKit
+  parent: BaseItem
+  name: KIAS integration kit
+  components:
+  - type: Sprite
+    scale: 0.60, 0.60
+    sprite: _Forge/KIAS/Pack/integration-kit.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+  - type: KiasIntegrationKit
+
+- type: latheRecipe
+  id: KiasIntegrationKit
+  result: KiasIntegrationKit
+  completetime: 2
+  materials: { Steel: 300, Glass: 100 }
+
+- type: entity
+  id: KiasMaydayAntenna
+  parent: KiasWirelessTransceiver
+  name: KIAS emergency antenna
+  components:
+  - type: Machine
+    board: KiasMaydayAntennaBoard
+  - type: KiasMaydayAntenna
+  - type: TelecomExempt
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/mayday.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasMaydayAntennaBoard
+  parent: KiasWirelessTransceiverBoard
+  name: KIAS emergency antenna board
+  components:
+  - type: MachineBoard
+    prototype: KiasMaydayAntenna
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasMaydayAntennaBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasMaydayAntennaBoard
+
+- type: entity
+  id: KiasIdentityModule
+  parent: BaseKiasScannerModule
+  name: KIAS identity module
+  components:
+  - type: KiasScannerModule
+    module: Identity
+  - type: Tag
+    tags: [KiasBasicModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-identity.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasIdentityModule
+  result: KiasIdentityModule
+  completetime: 2
+  materials: { Steel: 100, Glass: 100 }
+
+- type: entity
+  id: KiasConnectorModule
+  parent: BaseKiasScannerModule
+  name: KIAS connector module
+  components:
+  - type: KiasScannerModule
+    module: Connector
+  - type: Tag
+    tags: [KiasBasicModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-connector.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasConnectorModule
+  result: KiasConnectorModule
+  completetime: 2
+  materials: { Steel: 100, Glass: 100 }
+
+- type: entity
+  id: KiasOpticalModule
+  parent: BaseKiasScannerModule
+  name: KIAS optical module
+  components:
+  - type: KiasScannerModule
+    module: Optical
+  - type: Tag
+    tags: [KiasBasicModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-optical.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasOpticalModule
+  result: KiasOpticalModule
+  completetime: 2
+  materials: { Steel: 100, Glass: 100 }
+
+- type: entity
+  id: KiasThreatModule
+  parent: BaseKiasScannerModule
+  name: KIAS threat module
+  components:
+  - type: KiasScannerModule
+    module: Threat
+  - type: Tag
+    tags: [KiasAdvancedModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-threat.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasThreatModule
+  result: KiasThreatModule
+  completetime: 2
+  materials: { Steel: 100, Glass: 100 }

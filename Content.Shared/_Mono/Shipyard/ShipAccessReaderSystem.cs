@@ -143,19 +143,10 @@ public sealed partial class ShipAccessReaderSystem : EntitySystem
         // Log.Debug("ShipAccess: User {0} has {1} accessible ID cards: {2}", user, accessibleCards.Count, string.Join(", ", accessibleCards));
 
         // Check if any of the user's ID cards have a deed for this specific ship
-        foreach (var cardUid in accessibleCards)
-        {
-            if (TryComp<ShuttleDeedComponent>(cardUid, out var cardDeed))
-            {
-                // Log.Debug("ShipAccess: ID card {0} has deed for shuttle {1}, target ship is {2}", cardUid, cardDeed.ShuttleUid, shipDeed.ShuttleUid);
-                // Check if this deed is for the same ship
-                if (cardDeed.ShuttleUid == shipDeed.ShuttleUid)
-                {
-                    // Log.Debug("ShipAccess: User {0} has correct deed access via card {1}", user, cardUid);
-                    return true; // User has the correct deed
-                }
-            }
-        }
+        // #Forge-change START (KIAS): Адаптер использует штатную проверку ship deed без копии правил доступа.
+        if (HasDeedAccess(gridUid, accessibleCards))
+            return true;
+        // #Forge-change END (KIAS)
 
         // Find all accessible vouchers for the user
         var accessibleVouchers = FindAccessibleVouchers(user);
@@ -229,7 +220,9 @@ public sealed partial class ShipAccessReaderSystem : EntitySystem
     /// </summary>
     /// <param name="user">The user to check</param>
     /// <returns>Collection of accessible ID card entities</returns>
-    private HashSet<EntityUid> FindAccessibleIdCards(EntityUid user)
+    // #Forge-change START (KIAS): Адаптер использует штатную проверку ship deed без копии правил доступа.
+    public HashSet<EntityUid> FindAccessibleIdCards(EntityUid user)
+    // #Forge-change END (KIAS)
     {
         var cards = new HashSet<EntityUid>();
 
@@ -260,6 +253,22 @@ public sealed partial class ShipAccessReaderSystem : EntitySystem
         return cards;
     }
 
+    // #Forge-change START (KIAS): Адаптер использует штатную проверку ship deed без копии правил доступа.
+    public bool HasDeedAccess(EntityUid grid, EntityUid user) => HasDeedAccess(grid, FindAccessibleIdCards(user));
+
+    public bool HasDeedAccess(EntityUid grid, IEnumerable<EntityUid> cards)
+    {
+        if (!TryComp<ShuttleDeedComponent>(grid, out var ship) || ship.ShuttleUid == null)
+            return false;
+        foreach (var card in cards)
+        {
+            if (TryComp<ShuttleDeedComponent>(card, out var deed) && deed.ShuttleUid == ship.ShuttleUid)
+                return true;
+        }
+        return false;
+    }
+
+    // #Forge-change END (KIAS)
     /// <summary>
     /// Finds all vouchers that the user can access (in hands or inventory).
     /// </summary>

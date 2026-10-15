@@ -117,6 +117,9 @@ public sealed class FireControlConsoleFireEvent : EntityEventArgs
 [Serializable, NetSerializable]
 public struct FireControllableEntry
 {
+    // #Forge-change START (KIAS): Штатное BUI передаёт состояние автоматики без отдельного окна управления.
+    public bool KiasReserved;
+    // #Forge-change END (KIAS)
     /// <summary>
     /// The entity in question
     /// </summary>

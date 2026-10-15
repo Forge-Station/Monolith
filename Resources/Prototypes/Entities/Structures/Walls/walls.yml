@@ -9,6 +9,9 @@
     snap:
     - Wall
   components:
+  # #Forge-change START (KIAS): Штатный корпус предоставляет адаптеру маркер контроля повреждений.
+  - type: KiasHullStructure
+  # #Forge-change END (KIAS)
   - type: Anchorable
     flags:
     - Anchorable

@@ -1,0 +1,89 @@
+{
+  "version": "4.1",
+  "scope": "Strict v4.1: native categories, repeated lifecycle, continuous four-client soak, replicated cost attribution and real A/B Quick",
+  "deferralsDocument": "DEFERRED_CHECKS.md",
+  "deferredChecks": [],
+  "requirements": [
+    {
+      "id": "rooms",
+      "description": "RoomGate, Briar (-11,2), exterior geometry and visual evidence"
+    },
+    {
+      "id": "physical_cards",
+      "description": "27 real physical preset programs"
+    },
+    {
+      "id": "native_fire_atmos",
+      "description": "Ignition, propagation, suppression, breach/repair, vent/pump and real doors"
+    },
+    {
+      "id": "native_guns",
+      "description": "Native gun shots, projectile flight/impact, exterior flash and IFF"
+    },
+    {
+      "id": "native_pdc",
+      "description": "Actual hostile interception (not 100%), friendly/occlusion/empty-slot controls, cassette reload and jamming; separate finite gun magazine exhaustion/reload"
+    },
+    {
+      "id": "native_ftl_navigation",
+      "description": "Powered FTL with completion, range/energy rules, exit and separate native navigation arrival"
+    },
+    {
+      "id": "native_collision",
+      "description": "Rigid body contact, hull damage and collision thresholds"
+    },
+    {
+      "id": "native_crew",
+      "description": "Tracked and registered crew: independent critical/death waves, native revive, departure, visitor/threat, fauna"
+    },
+    {
+      "id": "native_data_power",
+      "description": "DATA cut/restore, core/rack voltage loss, card state and queue recovery"
+    },
+    {
+      "id": "native_other",
+      "description": "Native anomaly, radiation exposure/clear, structural damage/repair, actual lamp power/commands, docking/undocking and ALL/ANY fanout"
+    },
+    {
+      "id": "sync_composite",
+      "description": "All required 40-ship synchronous waves and composite/restore postconditions"
+    },
+    {
+      "id": "scaling",
+      "description": "1/10/20/40 ship tiers and at least 8 compatible hull classes"
+    },
+    {
+      "id": "network",
+      "description": "Real client/network activity and serialization metrics"
+    },
+    {
+      "id": "runtime_comparison",
+      "description": "Comparable before/after CPU, allocations, latency and zero silent drops"
+    },
+    {
+      "id": "physics_experiment",
+      "description": "Controlled A/B/C/D idle and collision experiment, inventory, variance and overhead"
+    },
+    {
+      "id": "fresh_builds",
+      "description": "Fresh matched Release A/B builds and Debug/Release regression results"
+    },
+    {
+      "id": "lab_lifecycle",
+      "description": "Repeated A/B40 DATA floor/cable inventory, medical recovery and four-client dock/undock with no suppressed errors"
+    },
+    {
+      "id": "inactivity_soak",
+      "description": "Four continuous real InGame clients for longer than the original 25-minute guest inactivity timeout"
+    },
+    {
+      "id": "cost_attribution",
+      "description": "Three replicated A/B 1/10/40 IDLE/MIXED, exclusive additive costs, calibrated instrumentation, causal probes and measured B before/after"
+    },
+    {
+      "id": "quick_ab",
+      "description": "Root BAT Quick: actual A and B FullGame categories, repeated DATA/Crew/Dock and four real clients"
+    }
+  ],
+  "ownerDeferredMeasurements": []
+}

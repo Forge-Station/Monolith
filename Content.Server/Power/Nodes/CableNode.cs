@@ -7,6 +7,14 @@ namespace Content.Server.Power.Nodes
     [DataDefinition]
     public sealed partial class CableNode : Node
     {
+        // #Forge-change START (KIAS): Силовое реле разрывает штатную связность узла; DATA-топология остаётся внутри KIAS.
+        public override bool Connectable(IEntityManager entMan, TransformComponent? xform = null)
+        {
+            return base.Connectable(entMan, xform)
+                && !entMan.System<Content.Server._Forge.KIAS.KiasRelaySystem>().IsCableBlocked(Owner);
+        }
+
+        // #Forge-change END (KIAS)
         public override IEnumerable<Node> GetReachableNodes(
             Entity<TransformComponent> xform,
             EntityQuery<NodeContainerComponent> nodeQuery,

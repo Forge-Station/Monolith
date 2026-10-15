@@ -1,0 +1,602 @@
+- type: entity
+  id: KiasCoreBoard
+  parent: BaseMachineCircuitboard
+  name: KiasCore machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasCore
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasCoreBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasCoreBoard
+
+- type: entity
+  id: KiasDefenceServerBoard
+  parent: BaseMachineCircuitboard
+  name: KiasDefenceServer machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasDefenceServer
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasDefenceServerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasDefenceServerBoard
+
+- type: entity
+  id: KiasAtmosServerBoard
+  parent: BaseMachineCircuitboard
+  name: KiasAtmosServer machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasAtmosServer
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasAtmosServerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasAtmosServerBoard
+
+- type: entity
+  id: KiasPowerServerBoard
+  parent: BaseMachineCircuitboard
+  name: KiasPowerServer machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasPowerServer
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasPowerServerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasPowerServerBoard
+
+- type: entity
+  id: KiasCrewServerBoard
+  parent: BaseMachineCircuitboard
+  name: KiasCrewServer machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasCrewServer
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasCrewServerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasCrewServerBoard
+
+- type: entity
+  id: KiasNavigationServerBoard
+  parent: BaseMachineCircuitboard
+  name: KiasNavigationServer machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasNavigationServer
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasNavigationServerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasNavigationServerBoard
+
+- type: entity
+  id: KiasRecorderBoard
+  parent: BaseMachineCircuitboard
+  name: KiasRecorder machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasRecorder
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasRecorderBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasRecorderBoard
+
+- type: entity
+  id: KiasSpeakerBoard
+  parent: BaseMachineCircuitboard
+  name: KiasSpeaker machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasSpeaker
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasSpeakerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasSpeakerBoard
+
+- type: entity
+  id: KiasRoomScannerBoard
+  parent: BaseMachineCircuitboard
+  name: KiasRoomScanner machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasRoomScanner
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasRoomScannerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasRoomScannerBoard
+
+- type: entity
+  id: KiasHorizonBoard
+  parent: BaseMachineCircuitboard
+  name: KiasHorizon machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasHorizon
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasHorizonBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasHorizonBoard
+
+- type: entity
+  id: KiasHullSensorBoard
+  parent: BaseMachineCircuitboard
+  name: KiasHullSensor machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasHullSensor
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasHullSensorBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasHullSensorBoard
+
+- type: entity
+  id: KiasIntegrityMonitorBoard
+  parent: BaseMachineCircuitboard
+  name: KiasIntegrityMonitor machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasIntegrityMonitor
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasIntegrityMonitorBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasIntegrityMonitorBoard
+
+- type: entity
+  id: KiasCollisionMonitorBoard
+  parent: BaseMachineCircuitboard
+  name: KiasCollisionMonitor machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasCollisionMonitor
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasCollisionMonitorBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasCollisionMonitorBoard
+
+- type: entity
+  id: KiasLightControllerBoard
+  parent: BaseMachineCircuitboard
+  name: KiasLightController machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasLightController
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasLightControllerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasLightControllerBoard
+
+- type: entity
+  id: KiasSuppressionBoard
+  parent: BaseMachineCircuitboard
+  name: KiasSuppression machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasSuppression
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasSuppressionBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasSuppressionBoard
+
+- type: entity
+  id: KiasRelayBoard
+  parent: BaseMachineCircuitboard
+  name: KiasRelay machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasRelay
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasRelayBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasRelayBoard
+
+- type: entity
+  id: KiasPdcRadarBoard
+  parent: BaseMachineCircuitboard
+  name: KiasPdcRadar machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasPdcRadar
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasPdcRadarBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasPdcRadarBoard
+
+- type: entity
+  id: KiasWeaponFlashDetectorBoard
+  parent: BaseMachineCircuitboard
+  name: KiasWeaponFlashDetector machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasWeaponFlashDetector
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasWeaponFlashDetectorBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasWeaponFlashDetectorBoard
+
+- type: entity
+  id: KiasProximitySensorBoard
+  parent: BaseMachineCircuitboard
+  name: KiasProximitySensor machine board
+  components:
+  - type: MachineBoard
+    prototype: KiasProximitySensor
+    requirements:
+      Capacitor: 1
+      MatterBin: 1
+    stackRequirements:
+      Steel: 5
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasProximitySensorBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasProximitySensorBoard
+
+- type: entity
+  id: KiasDisplayBoard
+  parent: BaseComputerCircuitboard
+  name: KIAS display computer board
+  components:
+  - type: ComputerBoard
+    prototype: KiasDisplay
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasDisplayBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasDisplayBoard
+
+- type: latheRecipe
+  id: KiasServiceTool
+  result: KiasServiceTool
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasMasterKey
+  result: KiasMasterKey
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasCrewTransponder
+  result: KiasCrewTransponder
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasSuppressionCartridge
+  result: KiasSuppressionCartridge
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasMotionModule
+  result: KiasMotionModule
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasIdModule
+  result: KiasIdModule
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasTransponderModule
+  result: KiasTransponderModule
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasBiometricModule
+  result: KiasBiometricModule
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasRadiationModule
+  result: KiasRadiationModule
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasSpectralModule
+  result: KiasSpectralModule
+  completetime: 3
+  materials:
+    Steel: 300
+    Glass: 200
+
+- type: latheRecipe
+  id: KiasDataCableStack1
+  result: KiasDataCableStack1
+  completetime: 3
+  materials:
+    Steel: 50
+    Glass: 50
+
+- type: latheRecipePack
+  id: KiasBoards
+  recipes:
+  - KiasControllerRackBoard
+  - KiasControllerProgrammerBoard
+  - KiasManagementConsoleBoard
+  - KiasFlipFlopBoard
+  - KiasEmergencyReceiverBoard
+  - KiasIffReceiverBoard
+  - KiasDockingSensorBoard
+  - KiasDeviceAdapterBoard
+  - KiasWirelessTransceiverBoard
+  - KiasKeySwitchBoard
+  - KiasRotarySwitchBoard
+  - KiasResourceMonitorBoard
+  - KiasCoreBoard
+  - KiasDefenceServerBoard
+  - KiasAtmosServerBoard
+  - KiasPowerServerBoard
+  - KiasCrewServerBoard
+  - KiasNavigationServerBoard
+  - KiasRecorderBoard
+  - KiasSpeakerBoard
+  - KiasRoomScannerBoard
+  - KiasAdvancedRoomScannerBoard
+  - KiasMaydayAntennaBoard
+  - KiasIntegrationKit
+  - KiasJammerBoard
+  - KiasIdentityModule
+  - KiasConnectorModule
+  - KiasOpticalModule
+  - KiasThreatModule
+  - KiasHorizonBoard
+  - KiasHullSensorBoard
+  - KiasIntegrityMonitorBoard
+  - KiasCollisionMonitorBoard
+  - KiasLightControllerBoard
+  - KiasSuppressionBoard
+  - KiasRelayBoard
+  - KiasPdcRadarBoard
+  - KiasWeaponFlashDetectorBoard
+  - KiasProximitySensorBoard
+  - KiasDisplayBoard
+
+- type: latheRecipePack
+  id: KiasTools
+  recipes:
+  - KiasProgrammableController
+  - KiasServiceTool
+  - KiasMasterKey
+  - KiasCrewTransponder
+  - KiasSuppressionCartridge
+  - KiasMotionModule
+  - KiasIdModule
+  - KiasTransponderModule
+  - KiasBiometricModule
+  - KiasRadiationModule
+  - KiasSpectralModule
+  - KiasDataCableStack1

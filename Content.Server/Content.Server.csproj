@@ -28,4 +28,12 @@
   <Import Project="..\RobustToolbox\Imports\Server.props" />
   <Import Project="..\RobustToolbox\Imports\Shared.props" />
   <Import Project="..\RobustToolbox\Imports\Packaging.props" />
+  <!-- #Forge-change START (KIAS): Серверные UI fixtures включаются сборкой только по лабораторному флагу. -->
+  <ItemGroup Condition="'$(KiasLabScannerUi)' == 'true'">
+    <Compile Include="../Tools/KiasBenchmark/Server/ScannerUiLab.cs" Link="ScannerUiLab.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(KiasLabLiveUi)' == 'true'">
+    <Compile Include="../Tools/KiasBenchmark/Server/LiveUiLab.cs" Link="LiveUiLab.cs" />
+  </ItemGroup>
+  <!-- #Forge-change END (KIAS) -->
 </Project>

@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Generated with OpenAI imagegen for Forge, 2026-10-08",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "coilmv-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "coilmv-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "coilmv-10"
+    },
+    {
+      "name": "coilmv-20"
+    },
+    {
+      "name": "coilmv-30"
+    }
+  ]
+}

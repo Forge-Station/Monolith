@@ -389,6 +389,10 @@ public sealed partial class FireControlSystem : EntitySystem
                 controlled.NetEntity = EntityManager.GetNetEntity(controllable);
                 controlled.Coordinates = GetNetCoordinates(Transform(controllable).Coordinates);
                 controlled.Name = MetaData(controllable).EntityName;
+                // #Forge-change START (KIAS): Штатная консоль передаёт состояние автоматики и согласует ручное управление.
+                controlled.KiasReserved = TryComp<Content.Shared._Forge.KIAS.KiasPdcWeaponComponent>(controllable, out var kiasWeapon)
+                    && kiasWeapon.AutomaticGrid != null;
+                // #Forge-change END (KIAS)
 
                 var (ammoCount, hasManualReload) = GetWeaponAmmunitionInfo(controllable);
                 controlled.AmmoCount = ammoCount;

@@ -78,6 +78,9 @@ public sealed partial class ShuttleSystem
     // One heavy impact pass per grid-pair per tick — fixture contacts after IMapManager/physics
     // bumps otherwise re-run ThrowEntitiesOnGrid for every overlapping fixture (ram / drill scrape / AME debris).
     private readonly HashSet<(EntityUid, EntityUid)> _impactsThisTick = new();
+    // #Forge-change START (KIAS): Адаптер получает принятый нативной физикой удар без повторения collision solver.
+    private readonly HashSet<(EntityUid, EntityUid)> _collisionSignalsThisTick = new();
+    // #Forge-change END (KIAS)
     private GameTick _impactTick;
 
     private void InitializeImpact()
@@ -133,23 +136,42 @@ public sealed partial class ShuttleSystem
         {
             _impactTick = _gameTiming.CurTick;
             _impactsThisTick.Clear();
+            // #Forge-change START (KIAS): Адаптер получает принятый нативной физикой удар без повторения collision solver.
+            _collisionSignalsThisTick.Clear();
+            // #Forge-change END (KIAS)
         }
 
         var impactPair = args.OurEntity.CompareTo(args.OtherEntity) <= 0
             ? (args.OurEntity, args.OtherEntity)
             : (args.OtherEntity, args.OurEntity);
-        if (!_impactsThisTick.Add(impactPair))
+        // #Forge-change START (KIAS): Адаптер получает принятый нативной физикой удар без повторения collision solver.
+        if (_impactsThisTick.Contains(impactPair))
+        // #Forge-change END (KIAS)
             return;
 
         var ourBody = args.OurBody;
         var otherBody = args.OtherBody;
 
+        // #Forge-change START (KIAS): Адаптер получает принятый нативной физикой удар без повторения collision solver.
+        var relativeSpeed = (ourBody.LinearVelocity - otherBody.LinearVelocity).Length();
+        if (relativeSpeed > 0.1f && _collisionSignalsThisTick.Add(impactPair))
+        {
+            var collision = new Content.Shared._Forge.KIAS.KiasGridCollisionEvent(args.OurEntity, args.OtherEntity, relativeSpeed);
+            RaiseLocalEvent(args.OurEntity, ref collision, true);
+            collision = new Content.Shared._Forge.KIAS.KiasGridCollisionEvent(args.OtherEntity, args.OurEntity, relativeSpeed);
+            RaiseLocalEvent(args.OtherEntity, ref collision, true);
+        }
+
+        // #Forge-change END (KIAS)
         // TODO: Would also be nice to have a continuous sound for scraping.
         var ourXform = Transform(args.OurEntity);
         var otherXform = Transform(args.OtherEntity);
         var worldPoints = args.WorldPoints;
         var worldNormal = args.WorldNormal;
 
+        // #Forge-change START (KIAS): Адаптер получает принятый нативной физикой удар без повторения collision solver.
+        var impactAccepted = false;
+        // #Forge-change END (KIAS)
         for (var i = 0; i < worldPoints.Length; i++)
         {
             var worldPoint = worldPoints[i];
@@ -183,6 +205,16 @@ public sealed partial class ShuttleSystem
                 continue;
             }
 
+            // #Forge-change START (KIAS): Адаптер получает принятый нативной физикой удар без повторения collision solver.
+            // Only a contact passing the impact threshold consumes the pair for this tick.
+            if (!impactAccepted)
+            {
+                if (!_impactsThisTick.Add(impactPair))
+                    return;
+                impactAccepted = true;
+            }
+
+            // #Forge-change END (KIAS)
             // Play impact sound
             var coordinates = new EntityCoordinates(ourXform.MapUid.Value, worldPoint);
 

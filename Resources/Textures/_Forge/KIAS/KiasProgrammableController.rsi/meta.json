@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "controller"
+    }
+  ],
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Hurtsay for Forge"
+}

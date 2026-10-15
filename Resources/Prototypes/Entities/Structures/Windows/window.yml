@@ -8,6 +8,9 @@
     snap:
     - Window
   components:
+  # #Forge-change START (KIAS): Штатное окно предоставляет адаптеру маркер контроля повреждений.
+  - type: KiasHullStructure
+  # #Forge-change END (KIAS)
   - type: Anchorable
     flags:
     - Anchorable
@@ -145,6 +148,9 @@
     snap:
     - Window
   components:
+  # #Forge-change START (KIAS): Штатное окно предоставляет адаптеру маркер контроля повреждений.
+  - type: KiasHullStructure
+  # #Forge-change END (KIAS)
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag

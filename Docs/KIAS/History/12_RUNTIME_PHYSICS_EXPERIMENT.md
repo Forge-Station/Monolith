@@ -1,0 +1,17 @@
+# 12 — Runtime hotspot and physics A/B/C/D experiment
+
+New report baseline (different test methodology than old): average tick A≈2.44ms B≈3.24ms; PhysicsSystem A≈0.714ms B≈0.897ms Δ≈0.183ms; KiasCrewSystem≈0.150ms; KiasControllerRuntimeSystem≈0.302ms; prior reported RuntimeCommands allocations 38.6–39.5GB over run incl warmup. Treat as leads, NOT causal proof. Record git SHA and comparable before/after state.
+
+## ControllerRuntime optimization
+Trace `KiasControllerRuntimeSystem.Update`, `OnEmission`, `_events/_work/_commands`, `QueueWork`, `Execute`, `Command` and `KiasControllerIoSystem.Command`, plus fanout `ANY/ALL`, topology `Index/Unindex`, related caches. Pin down hot allocations, expensive validation / LINQ `ToArray` / `ToDictionary` / closure / `new Cause`, and scheduling. Preserve event ordering, per-command input snapshot (must not alias reused mutable buffers!), feedback loop budgets, timer tokens, fault semantics and `ANY/ALL` mapping. Only remove allocations with demonstrable safety; no dropping unchanged pulses or debouncing genuine distinct critical events. Instrument event queued→executed tick latency p50/p95/p99/max, backlog high water + duration, incoming/emitted/consumed/dropped commands, individual actuators latency and allocations. Sync 40-ship waves, compare before/after and semantic event outputs. Assert 0 dropped, 0 latent faults, exact fanout and deterministic processing.
+
+## Physics controlled experiment (separate BEFORE full benchmark, agent CAN run)
+Make exactly matched same-map same-entities/positions native experiments at 40 Briar, idle and real collision wave, 60 TPS, >=1800 tick warmup and sufficient measured duration for confidence (e.g. 5–10min each; paired ABBA or replicated short runs). Four isolated variants; flags change only intended dimension:
+- A: neutral build without KIAS, inventory parity report.
+- B: KIAS full baseline code/config.
+- C: KIAS with graph evaluation/actuation paused **only in diagnostic build**, preserve all physics components, collisions, device entities, power, sensors; no runtime mutation of production semantics.
+- D: KIAS full functioning with selected KIAS-only collision groups disabled in diagnostic fixture; inventory all affected prototypes and identify those essential for bullets, objects, mounting, hitboxes. Compare optional D subtiers by prototype class.
+
+Big caveat: the existing A/B differs in entity inventory (old report +~36k entities in B). Report per-category entity/fixture counts, broadphase proxy counts, active dynamic/kinematic/static, contact pairs, physics queries, real collision events and movement, grid contacts, body sleeps; **do not call total Physics delta 'caused by KIAS colliders'** before controlling for this. If possible do D2 same B build with only KIAS shapes changed and determine true collider overhead. Keep diagnostic instrumentation symmetric across variants and record overhead. Do not touch generic Robust PhysicsSystem unless profiles prove a reusable non-KIAS root cause, maintain correct game interactions and upstream style.
+
+Agent chooses safe fixes based on measured culprit, reruns regression: collisions/ballistics/door interaction/explosion/scanners/mounting/salvage/PDC. A diagnostic noncollidable device might stop reacting to shots — reject if intended physically collidable. Report all experiment rows, confidence/run variance, per-tick median/p95/p99 and CPU/GC, before/after; if unproven, leave intact and flag unresolved rather than guess. **Do not run long final ABBA as part of these experiments.**

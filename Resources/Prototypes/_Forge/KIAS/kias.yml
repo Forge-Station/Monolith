@@ -1,0 +1,1040 @@
+- type: entity
+  id: KiasDataCable
+  name: KIAS data cable
+  description: An underfloor automation bus with a two tile service radius.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Visibility
+    layer: 1
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/cable.rsi
+    color: "#65DEFF"
+    layers:
+    - state: data_0
+      map: ["0"]
+    drawdepth: ThinWire
+  - type: Icon
+    sprite: _Forge/KIAS/Pack/cable.rsi
+    state: data_0
+  - type: Appearance
+  - type: CableVisualizer
+    statePrefix: data_
+  - type: SubFloorHide
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Cable
+    cableType: Data
+    cableDroppedOnCutPrototype: KiasDataCableStack1
+  - type: KiasDataCable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [Destruction]
+
+- type: stack
+  id: KiasDataCable
+  name: KIAS data cable
+  icon: { sprite: /Textures/_Forge/KIAS/Pack/coil.rsi, state: coilmv-30 }
+  spawn: KiasDataCableStack1
+  maxCount: 100
+
+- type: entity
+  id: KiasDataCableStack
+  parent: CableStack
+  name: KIAS data cable coil
+  components:
+  - type: Stack
+    stackType: KiasDataCable
+    baseLayer: base
+    layerStates: [coilmv-10, coilmv-20, coilmv-30]
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/coil.rsi
+    color: White
+    layers:
+    - state: coilmv-30
+      map: [base, "0"]
+  - type: Item
+    sprite: _Forge/KIAS/Pack/coil.rsi
+    heldPrefix: coilmv
+  - type: CablePlacer
+    cablePrototypeID: KiasDataCable
+    blockingWireType: Data
+  - type: Appearance
+
+- type: entity
+  id: KiasDataCableStack1
+  parent: KiasDataCableStack
+  suffix: 1
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  id: BaseKiasServer
+  parent: BaseMachinePowered
+  abstract: true
+  components:
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers: [machine_board, machine_parts]
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Sprite
+    sprite: Structures/Machines/server.rsi
+    layers:
+    - state: server
+    - state: variant-crew
+      color: Cyan
+  - type: ApcPowerReceiver
+    powerLoad: 100
+  - type: ExtensionCableReceiver
+  - type: KiasDevice
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.KiasVisuals.Status:
+        0:
+          enum.KiasDeviceStatus.Online: { color: White }
+          enum.KiasDeviceStatus.Offline: { color: Gray }
+          enum.KiasDeviceStatus.NoPower: { color: Gray }
+          enum.KiasDeviceStatus.NoDataPath: { color: Orange }
+          enum.KiasDeviceStatus.Disconnected: { color: Gray }
+          enum.KiasDeviceStatus.DuplicateCore: { color: Red }
+
+- type: entity
+  id: BaseKiasWallDevice
+  parent: BaseKiasServer
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+    snap: [Wallmount]
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: WallMount
+    arc: 175
+  - type: Sprite
+    noRot: false
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/air_monitors.rsi
+    layers:
+    - state: alarm0
+  - type: Fixtures
+    fixtures: {}
+
+- type: entity
+  id: KiasCore
+  parent: BaseKiasServer
+  name: KIAS core
+  components:
+  - type: Sprite
+    sprite: _Forge/KIAS/KiasCore.rsi
+    drawdepth: Mobs
+    offset: 0, 0.5
+    layers:
+    - state: core
+      map: ["0"]
+  - type: GenericVisualizer
+    visuals:
+      enum.KiasVisuals.Status:
+        0:
+          enum.KiasDeviceStatus.Online: { color: White }
+          enum.KiasDeviceStatus.Offline: { color: Gray }
+          enum.KiasDeviceStatus.NoPower: { color: Gray }
+          enum.KiasDeviceStatus.NoDataPath: { color: Orange }
+          enum.KiasDeviceStatus.Disconnected: { color: Gray }
+          enum.KiasDeviceStatus.DuplicateCore: { color: Red }
+  - type: Machine
+    board: KiasCoreBoard
+  - type: KiasCore
+  - type: KiasAudio
+  - type: KiasClaimable
+  - type: AccessReader
+  - type: WiresPanel
+  - type: Wires
+    layoutId: KiasAccess
+  - type: UserInterface
+    interfaces:
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: KiasProtocol
+    protocols:
+    - presetId: battle-impact
+      trigger: HullImpact
+      actions:
+      - kind: Announce
+      - kind: Lights
+        group: EMERGENCY
+        value: true
+      - kind: Pdc
+        value: true
+    - presetId: battle-flash
+      trigger: WeaponFlash
+      disposition: Hostile
+      actions:
+      - kind: Announce
+      - kind: Lights
+        group: EMERGENCY
+        value: true
+      - kind: Pdc
+        value: true
+    - presetId: battle-manual
+      trigger: Manual
+      actions:
+      - kind: Announce
+      - kind: Lights
+        group: EMERGENCY
+        value: true
+      - kind: Pdc
+        value: true
+    - presetId: flash-unknown
+      trigger: WeaponFlash
+      disposition: Unknown
+      actions: [{ kind: Announce }]
+    - presetId: hull-damage
+      trigger: HullDamage
+      actions: [{ kind: Announce }]
+    - presetId: collision
+      trigger: Collision
+      actions: [{ kind: Announce }]
+    - presetId: atmosphere
+      trigger: AtmosDanger
+      actions: [{ kind: Announce }]
+    - presetId: anomaly
+      trigger: AnomalyGrowth
+      actions: [{ kind: Announce }]
+    - presetId: contact
+      trigger: Contact
+      actions: [{ kind: Announce }]
+    - presetId: arrival
+      trigger: Arrival
+      actions: [{ kind: Announce }]
+    - presetId: proximity
+      trigger: Proximity
+      actions: [{ kind: Announce }]
+    - presetId: crew-critical
+      trigger: CrewCritical
+      actions: [{ kind: Announce }]
+    - presetId: crew-dead
+      trigger: CrewDead
+      actions: [{ kind: Announce }]
+    - presetId: vessel-critical
+      trigger: VesselCritical
+      actions: [{ kind: Announce }, { kind: Mayday }]
+    - presetId: power-deficit
+      trigger: PowerDeficit
+      actions: [{ kind: Announce }]
+    - presetId: fire
+      trigger: Fire
+      actions: [{ kind: Announce }]
+    - presetId: radiation
+      enabled: true
+      trigger: Radiation
+      actions:
+      - kind: Announce
+    - presetId: local-threat
+      enabled: true
+      trigger: LocalThreat
+      actions:
+      - kind: Announce
+    - presetId: boarding
+      enabled: true
+      trigger: Boarding
+      actions:
+      - kind: Announce
+    - presetId: greeting
+      enabled: true
+      trigger: CaptainGreeting
+      actions:
+      - kind: Announce
+    - presetId: fire-clear
+      enabled: true
+      trigger: FireClear
+      actions:
+      - kind: Announce
+    - presetId: atmos-clear
+      enabled: true
+      trigger: AtmosClear
+      actions:
+      - kind: Announce
+    - presetId: medical-assistance
+      enabled: true
+      trigger: CrewUnavailable
+      requireCrewUnavailable: true
+      cooldown: 180
+      actions:
+      - kind: MedicalHelp
+      - kind: Record
+    - presetId: quiet
+      enabled: false
+      trigger: QuietMode
+      actions:
+      - kind: Lights
+        group: QUIET
+        value: false
+    - presetId: power-lost
+      trigger: PowerLost
+      actions: [{ kind: Announce }]
+    - presetId: boot
+      trigger: Boot
+      actions: [{ kind: Announce }]
+    - presetId: shutdown
+      trigger: Shutdown
+      actions: [{ kind: Announce }]
+  - type: KiasDevice
+    role: Core
+
+- type: entity
+  id: KiasDefenceServer
+  parent: BaseKiasServer
+  name: KIAS defence server
+  components:
+  - type: Machine
+    board: KiasDefenceServerBoard
+  - type: KiasDevice
+    role: Defence
+  - type: KiasDefence
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/defence-server.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasAtmosServer
+  parent: BaseKiasServer
+  name: KIAS atmosphere server
+  components:
+  - type: KiasAtmosProfile
+  - type: Machine
+    board: KiasAtmosServerBoard
+  - type: KiasDevice
+    role: Atmosphere
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/atmos-server.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasPowerServer
+  parent: BaseKiasServer
+  name: KIAS power server
+  components:
+  - type: KiasPowerProfile
+  - type: Machine
+    board: KiasPowerServerBoard
+  - type: KiasDevice
+    role: Power
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/power-server.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasCrewServer
+  parent: BaseKiasServer
+  name: KIAS crew server
+  components:
+  - type: Machine
+    board: KiasCrewServerBoard
+  - type: KiasCrewServer
+  - type: KiasDevice
+    role: Crew
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Crew
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Crew:
+        type: KiasLocalBoundUserInterface
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/crew-server.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasNavigationServer
+  parent: BaseKiasServer
+  name: KIAS navigation server
+  components:
+  - type: KiasNavigationProfile
+  - type: Machine
+    board: KiasNavigationServerBoard
+  - type: KiasDevice
+    role: Navigation
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/navigation-server.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasRecorder
+  parent: BaseKiasServer
+  name: KIAS recorder
+  components:
+  - type: Machine
+    board: KiasRecorderBoard
+  - type: KiasDevice
+    role: Recorder
+  - type: KiasRecorder
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 2000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [Destruction]
+  - type: KiasDisplay
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Recorder
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Recorder:
+        type: KiasLocalBoundUserInterface
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/recorder.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: sinkPort
+  id: KiasAnnounce
+  name: kias-port-announce
+  description: kias-port-announce-description
+
+- type: entity
+  id: KiasSpeaker
+  parent: BaseKiasWallDevice
+  name: KIAS speaker
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasSpeakerBoard
+  - type: KiasDevice
+    role: Speaker
+  - type: KiasSpeaker
+  - type: Speech
+    speechVerb: Robotic
+  - type: Sprite
+    scale: 0.65, 0.65
+    offset: 0, -0.2
+    noRot: false
+    sprite: _Forge/KIAS/Pack/speaker.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+    drawdepth: WallMountedItems
+  - type: DeviceLinkSink
+    ports: [KiasAnnounce]
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Speaker
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Speaker:
+        type: KiasLocalBoundUserInterface
+
+- type: entity
+  id: KiasDisplay
+  parent: BaseComputer
+  name: KIAS display
+  placement:
+    mode: SnapgridCenter
+    snap: [Wallmount]
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: WallMount
+    arc: 175
+  - type: Sprite
+    noRot: false
+    sprite: _Forge/KIAS/Pack/display.rsi
+    layers:
+    - state: base
+      map: [computerLayerBody, "0"]
+    - state: blank
+      map: ["computerLayerKeyboard"]
+    - state: blank
+      map: ["computerLayerScreen"]
+    - state: blank
+      map: ["computerLayerKeys"]
+    - state: blank
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    drawdepth: WallMountedItems
+  - type: Computer
+    board: KiasDisplayBoard
+  - type: KiasDevice
+    role: Display
+  - type: KiasDisplay
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Wall
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Wall:
+        type: KiasLocalBoundUserInterface
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerBody:
+          True: { color: White }
+          False: { color: Gray }
+- type: entity
+  id: KiasServiceTool
+  parent: BaseItem
+  name: KIAS service multitool
+  components:
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/service-tool.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+  - type: Item
+    size: Small
+  - type: KiasServiceTool
+  - type: KiasDisplay
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Service
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Service:
+        type: KiasLocalBoundUserInterface
+
+- type: sourcePort
+  id: KiasMotion
+  name: kias-port-motion
+  description: kias-port-motion-description
+  defaultLinks: [KiasAnnounce]
+
+- type: entity
+  id: KiasRoomScanner
+  parent: BaseKiasWallDevice
+  name: KIAS basic room scanner
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasRoomScannerBoard
+  - type: KiasDevice
+    role: Scanner
+  - type: KiasRoomScanner
+  - type: Eye
+  - type: SurveillanceCamera
+    active: false
+    nameSet: true
+    networkSet: true
+    useEntityNameAsCameraId: true
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: SurveillanceCameraGeneral
+    transmitFrequencyId: SurveillanceCamera
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: Sprite
+    scale: 0.65, 0.65
+    offset: 0, -0.2
+    noRot: false
+    sprite: _Forge/KIAS/Pack/scanner.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+    drawdepth: WallMountedItems
+  - type: DeviceLinkSource
+    ports: [KiasMotion]
+  - type: ItemSlots
+    slots:
+      kias-module-1:
+        startingItem: KiasMotionModule
+        whitelist:
+          tags: [KiasBasicModule]
+      kias-module-2:
+        startingItem: KiasIdentityModule
+        whitelist:
+          tags: [KiasBasicModule]
+      kias-module-3:
+        startingItem: KiasIdModule
+        whitelist:
+          tags: [KiasBasicModule]
+      kias-module-4:
+        startingItem: KiasTransponderModule
+        whitelist:
+          tags: [KiasBasicModule]
+      kias-module-5:
+        startingItem: KiasOpticalModule
+        whitelist:
+          tags: [KiasBasicModule]
+      kias-module-6:
+        startingItem: KiasConnectorModule
+        whitelist:
+          tags: [KiasBasicModule]
+  - type: ContainerContainer
+    containers:
+      kias-module-1: !type:ContainerSlot
+      kias-module-2: !type:ContainerSlot
+      kias-module-3: !type:ContainerSlot
+      kias-module-4: !type:ContainerSlot
+      kias-module-5: !type:ContainerSlot
+      kias-module-6: !type:ContainerSlot
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Scanner
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Scanner:
+        type: KiasLocalBoundUserInterface
+
+- type: entity
+  id: BaseKiasScannerModule
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: id_mod
+  - type: Item
+    size: Tiny
+  - type: KiasScannerModule
+
+- type: entity
+  id: KiasMotionModule
+  parent: BaseKiasScannerModule
+  name: KIAS motion module
+  components:
+  - type: KiasScannerModule
+    module: Motion
+
+  - type: Tag
+    tags: [KiasBasicModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-motion.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasIdModule
+  parent: BaseKiasScannerModule
+  name: KIAS ID module
+  components:
+  - type: KiasScannerModule
+    module: Identity
+
+  - type: Tag
+    tags: [KiasBasicModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-identity.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasTransponderModule
+  parent: BaseKiasScannerModule
+  name: KIAS transponder module
+  components:
+  - type: KiasScannerModule
+    module: Identity
+
+  - type: Tag
+    tags: [KiasBasicModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-identity.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasBiometricModule
+  parent: BaseKiasScannerModule
+  name: KIAS biometric module
+  components:
+  - type: KiasScannerModule
+    module: Biometric
+
+  - type: Tag
+    tags: [KiasAdvancedModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-biometric.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasRadiationModule
+  parent: BaseKiasScannerModule
+  name: KIAS radiation module
+  components:
+  - type: KiasScannerModule
+    module: Radiation
+
+  - type: Tag
+    tags: [KiasAdvancedModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-radiation.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasSpectralModule
+  parent: BaseKiasScannerModule
+  name: KIAS spectral module
+  components:
+  - type: KiasScannerModule
+    module: Spectral
+
+  - type: Tag
+    tags: [KiasAdvancedModule]
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _Forge/KIAS/Pack/module-spectral.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasCrewTransponder
+  parent: BaseItem
+  name: KIAS crew transponder
+  components:
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/transponder.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+  - type: Item
+    size: Tiny
+    shape:
+    - 0,0,0,0
+  - type: KiasTransponder
+
+- type: entity
+  id: KiasHorizon
+  parent: BaseKiasServer
+  name: KIAS Horizon bluespace interferometer
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasHorizonBoard
+  - type: KiasDevice
+    role: Horizon
+  - type: KiasHorizon
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Sensor
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Sensor:
+        type: KiasLocalBoundUserInterface
+  - type: Sprite
+    noRot: false
+    snapCardinals: false
+    sprite: _Forge/KIAS/Pack/horizon.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasMasterKey
+  parent: BaseItem
+  name: KIAS master key
+  components:
+  - type: Sprite
+    scale: 0.5, 0.5
+    sprite: _Forge/KIAS/Pack/master-key.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+  - type: Item
+    size: Tiny
+  - type: KiasMasterKey
+
+- type: entity
+  id: KiasHullSensor
+  parent: BaseKiasWallDevice
+  name: KIAS hull impact sensor
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasHullSensorBoard
+  - type: KiasDevice
+    role: Hull
+  - type: KiasHullSensor
+  - type: Sprite
+    noRot: false
+    snapCardinals: false
+    sprite: _Forge/KIAS/Pack/hull-sensor.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasIntegrityMonitor
+  parent: BaseKiasServer
+  name: KIAS hull integrity monitor
+  components:
+  - type: Machine
+    board: KiasIntegrityMonitorBoard
+  - type: KiasDevice
+    role: Hull
+  - type: KiasIntegrityMonitor
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/integrity-monitor.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasCollisionMonitor
+  parent: BaseKiasServer
+  name: KIAS collision monitor
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasCollisionMonitorBoard
+  - type: KiasDevice
+    role: Hull
+  - type: KiasCollisionMonitor
+  - type: Sprite
+    noRot: false
+    snapCardinals: false
+    sprite: _Forge/KIAS/Pack/collision-monitor.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasLightController
+  parent: BaseKiasWallDevice
+  name: KIAS light group controller
+  components:
+  - type: Machine
+    board: KiasLightControllerBoard
+  - type: KiasDevice
+    role: Light
+  - type: KiasLightController
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Sensor
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Sensor:
+        type: KiasLocalBoundUserInterface
+  - type: DeviceLinkSink
+    ports: [On, Off]
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/light-controller.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: sinkPort
+  id: KiasSuppress
+  name: kias-port-suppress
+  description: kias-port-suppress-description
+
+- type: entity
+  id: KiasSuppression
+  parent: BaseKiasWallDevice
+  name: KIAS fire suppression module
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasSuppressionBoard
+  - type: KiasDevice
+    role: Suppression
+  - type: KiasSuppression
+  - type: DeviceLinkSink
+    ports: [KiasSuppress]
+  - type: ItemSlots
+    slots:
+      kias-cartridge:
+        startingItem: KiasSuppressionCartridge
+        whitelist:
+          components: [KiasSuppressionCartridge]
+  - type: ContainerContainer
+    containers:
+      kias-cartridge: !type:ContainerSlot
+  - type: Sprite
+    scale: 0.75, 0.75
+    offset: 0, -0.2
+    noRot: false
+    sprite: _Forge/KIAS/Pack/suppression.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasSuppressionCartridge
+  parent: BaseItem
+  name: KIAS suppression cartridge
+  components:
+  - type: Sprite
+    scale: 0.75, 0.75
+    sprite: _Forge/KIAS/Pack/cartridge.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+  - type: Item
+    size: Small
+  - type: KiasSuppressionCartridge
+
+- type: entity
+  id: KiasRelay
+  parent: BaseKiasServer
+  name: KIAS four channel relay
+  components:
+  - type: Machine
+    board: KiasRelayBoard
+  - type: KiasDevice
+    role: Relay
+  - type: KiasRelay
+  - type: SubFloorHide
+  - type: Visibility
+    layer: 1
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/relay.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasPdcRadar
+  parent: BaseKiasServer
+  name: KIAS point defence radar
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasPdcRadarBoard
+  - type: KiasDevice
+    role: PdcRadar
+  - type: KiasPdcRadar
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Sensor
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Sensor:
+        type: KiasLocalBoundUserInterface
+  - type: Sprite
+    noRot: false
+    snapCardinals: false
+    sprite: _Forge/KIAS/Pack/pdc-radar.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasWeaponFlashDetector
+  parent: BaseKiasServer
+  name: KIAS weapon flash detector
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasWeaponFlashDetectorBoard
+  - type: KiasDevice
+    role: WeaponFlash
+  - type: KiasWeaponFlash
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Sensor
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Sensor:
+        type: KiasLocalBoundUserInterface
+  - type: Sprite
+    noRot: false
+    snapCardinals: false
+    sprite: _Forge/KIAS/Pack/flash-detector.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasProximitySensor
+  parent: BaseKiasServer
+  name: KIAS proximity sensor
+  components:
+  - type: Transform
+    noRot: false
+  - type: Rotatable
+    rotateWhileAnchored: false
+  - type: Machine
+    board: KiasProximitySensorBoard
+  - type: KiasDevice
+    role: Proximity
+  - type: KiasProximity
+  - type: KiasLocalUi
+  - type: ActivatableUI
+    key: enum.KiasUiKey.Sensor
+  - type: UserInterface
+    interfaces:
+      enum.KiasUiKey.Sensor:
+        type: KiasLocalBoundUserInterface
+  - type: Sprite
+    noRot: false
+    snapCardinals: false
+    sprite: _Forge/KIAS/Pack/proximity-sensor.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: wireLayout
+  id: KiasAccess
+  wires:
+  - !type:AccessWireAction

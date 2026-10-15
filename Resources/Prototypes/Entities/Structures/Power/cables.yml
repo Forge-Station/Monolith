@@ -4,6 +4,9 @@
   placement:
     mode: SnapgridCenter
   components:
+  # #Forge-change START (KIAS): Штатные кабели получают данные для измерения сети и силового реле.
+  - type: KiasPowerCable
+  # #Forge-change END (KIAS)
   - type: Visibility
     layer: 1
   - type: Cable

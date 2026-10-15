@@ -23,6 +23,9 @@ namespace Content.Server.Ame.EntitySystems;
 
 public sealed partial class AmeControllerSystem : EntitySystem
 {
+    // #Forge-change START (KIAS): Адаптеру нужен сигнал изменения впрыска, которым владеет штатная система AME.
+    public event Action<EntityUid, bool>? InjectionChanged;
+    // #Forge-change END (KIAS)
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private AppearanceSystem _appearanceSystem = default!;
@@ -232,6 +235,9 @@ public sealed partial class AmeControllerSystem : EntitySystem
             return;
 
         controller.Injecting = value;
+        // #Forge-change START (KIAS): Адаптеру нужен сигнал изменения впрыска, которым владеет штатная система AME.
+        InjectionChanged?.Invoke(uid, value);
+        // #Forge-change END (KIAS)
         UpdateDisplay(uid, controller.Stability, controller);
         if (!value && TryComp<PowerSupplierComponent>(uid, out var powerOut))
             powerOut.MaxSupply = 0;

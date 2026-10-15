@@ -21,6 +21,17 @@
   <ItemGroup>
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
   </ItemGroup>
+  <!-- #Forge-change START (KIAS): Диагностические команды компилируются только с явными лабораторными флагами. -->
+  <ItemGroup Condition="'$(KiasLabVisual)' == 'true'">
+    <Compile Include="../Tools/KiasBenchmark/Client/KiasLabVisualCommand.cs" Link="KiasLabVisualCommand.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(KiasLabScannerUi)' == 'true'">
+    <Compile Include="../Tools/KiasBenchmark/Client/ScannerUiLab.cs" Link="ScannerUiLab.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(KiasLabLiveUi)' == 'true'">
+    <Compile Include="../Tools/KiasBenchmark/Client/LiveUiLab.cs" Link="LiveUiLab.cs" />
+  </ItemGroup>
+  <!-- #Forge-change END (KIAS) -->
   <ItemGroup>
     <Folder Include="_Mono\Research\UI\" />
   </ItemGroup>

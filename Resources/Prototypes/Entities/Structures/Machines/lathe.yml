@@ -163,6 +163,9 @@
     - PartsStatic
     - AtmosStatic
     - CablesStatic
+    # #Forge-change START (KIAS): Рецепты KIAS добавляются в штатные списки производства без замены прототипов станков.
+    - KiasTools
+    # #Forge-change END (KIAS)
     - CargoStatic
     - MaterialsStatic
     - BasicChemistryStatic
@@ -329,6 +332,9 @@
     runningState: building
     staticPacks:
     - ScienceBoardsStatic
+    # #Forge-change START (KIAS): Рецепты KIAS добавляются в штатные списки производства без замены прототипов станков.
+    - KiasBoards
+    # #Forge-change END (KIAS)
     - ServiceBoardsStatic
     - CargoBoardsStatic
     - MedicalBoardsStatic # Shitmed Change

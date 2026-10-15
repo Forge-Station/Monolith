@@ -1,0 +1,7576 @@
+[
+  {
+    "type": "kiasControllerProgram",
+    "id": "battle-impact",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "battle-impact",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 2,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 2,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 11,
+          "kind": "All",
+          "x": 1920,
+          "y": 1380,
+          "profile": "Lighting",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 12,
+          "kind": "All",
+          "x": 1920,
+          "y": 1560,
+          "profile": "DefenceController",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "HullImpact",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 11,
+          "toPort": "On"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 12,
+          "toPort": "Enable"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "battle-flash",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "battle-flash",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "EnumCompare",
+          "x": 320,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "EnumConstant",
+          "x": 0,
+          "y": 1104,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "And",
+          "x": 640,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 2,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 11,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 2,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 12,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 13,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 14,
+          "kind": "All",
+          "x": 1920,
+          "y": 1380,
+          "profile": "Lighting",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 15,
+          "kind": "All",
+          "x": 1920,
+          "y": 1560,
+          "profile": "DefenceController",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Disposition",
+          "toNode": 4,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 6,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "Value",
+          "toNode": 6,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "WeaponFlash",
+          "toNode": 7,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 7,
+          "fromPort": "True",
+          "toNode": 8,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 11,
+          "fromPort": "Value",
+          "toNode": 10,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 12,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 9,
+          "fromPort": "Value",
+          "toNode": 12,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 12,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Ready",
+          "toNode": 12,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 13,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 13,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Ready",
+          "toNode": 13,
+          "toPort": "Record"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Ready",
+          "toNode": 14,
+          "toPort": "On"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Ready",
+          "toNode": 15,
+          "toPort": "Enable"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "battle-manual",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "battle-manual",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 2,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 2,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 11,
+          "kind": "All",
+          "x": 1920,
+          "y": 1380,
+          "profile": "Lighting",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 12,
+          "kind": "All",
+          "x": 1920,
+          "y": 1560,
+          "profile": "DefenceController",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Manual",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 11,
+          "toPort": "On"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 12,
+          "toPort": "Enable"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "flash-unknown",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "flash-unknown",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "EnumCompare",
+          "x": 320,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "EnumConstant",
+          "x": 0,
+          "y": 1104,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "And",
+          "x": 640,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 2,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 11,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Disposition",
+          "toNode": 4,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 6,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "Value",
+          "toNode": 6,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "WeaponFlash",
+          "toNode": 7,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 7,
+          "fromPort": "True",
+          "toNode": 8,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 9,
+          "fromPort": "Value",
+          "toNode": 10,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 11,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 11,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Ready",
+          "toNode": 11,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "hull-damage",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "hull-damage",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 1,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "HullDamage",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "collision",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "collision",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 2,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 2,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Collision",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "atmosphere",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "atmosphere",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "AtmosDanger",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "anomaly",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "anomaly",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 1,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "AnomalyGrowth",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "contact",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "contact",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 1,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Contact",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "arrival",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "arrival",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Arrival",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "proximity",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "proximity",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 1,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Proximity",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "crew-critical",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "crew-critical",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "CrewCritical",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "crew-dead",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "crew-dead",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "CrewDead",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "vessel-critical",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "vessel-critical",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 11,
+          "kind": "All",
+          "x": 1920,
+          "y": 1380,
+          "profile": "NavigationComms",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 12,
+          "kind": "StringLatch",
+          "x": 1600,
+          "y": 1100,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 13,
+          "kind": "Latch",
+          "x": 1600,
+          "y": 1320,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 14,
+          "kind": "Clock",
+          "x": 1920,
+          "y": 1584,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 180,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "VesselCritical",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 12,
+          "toPort": "Value"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 12,
+          "toPort": "Store"
+        },
+        {
+          "fromNode": 12,
+          "fromPort": "Stored",
+          "toNode": 11,
+          "toPort": "MaydayMessage"
+        },
+        {
+          "fromNode": 12,
+          "fromPort": "Saved",
+          "toNode": 11,
+          "toPort": "Mayday"
+        },
+        {
+          "fromNode": 12,
+          "fromPort": "Saved",
+          "toNode": 13,
+          "toPort": "Set"
+        },
+        {
+          "fromNode": 13,
+          "fromPort": "Value",
+          "toNode": 14,
+          "toPort": "Enabled"
+        },
+        {
+          "fromNode": 14,
+          "fromPort": "Tick",
+          "toNode": 11,
+          "toPort": "Mayday"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "AlertReset",
+          "toNode": 13,
+          "toPort": "Reset"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "AlertReset",
+          "toNode": 12,
+          "toPort": "Reset"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "power-deficit",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "power-deficit",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 1,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "PowerDeficit",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "fire",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "fire",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Fire",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "radiation",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "radiation",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Radiation",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "local-threat",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "local-threat",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "LocalThreat",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "boarding",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "boarding",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "EnumConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 3,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 996,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 1200,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Boarding",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 8,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Alert"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "EscalateAlert"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 9,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "greeting",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "greeting",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "CaptainGreeting",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "fire-clear",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "fire-clear",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "FireClear",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "atmos-clear",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "atmos-clear",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "AtmosClear",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "medical-assistance",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "medical-assistance",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "And",
+          "x": 640,
+          "y": 440,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 180,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "NavigationComms",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "AllCrewUnavailable",
+          "toNode": 4,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "Value",
+          "toNode": 5,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "CrewUnavailable",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "True",
+          "toNode": 6,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 6,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "MaydayMessage"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "MedicalHelp"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 9,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 9,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Ready",
+          "toNode": 9,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "quiet",
+    "enabled": false,
+    "program": {
+      "version": 1,
+      "name": "quiet",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Lighting",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "QuietMode",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Off"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "power-lost",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "power-lost",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "PowerLost",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "boot",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "boot",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "OnStart",
+          "x": 0,
+          "y": 1104,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 9,
+          "kind": "StringConstant",
+          "x": 1600,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "KIAS online",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 10,
+          "kind": "All",
+          "x": 1920,
+          "y": 440,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 11,
+          "kind": "StringConstant",
+          "x": 1600,
+          "y": 660,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "KIAS online",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Started",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 6,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 6,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 9,
+          "fromPort": "Value",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 7,
+          "fromPort": "Value",
+          "toNode": 8,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 11,
+          "fromPort": "Value",
+          "toNode": 10,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 10,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Ready",
+          "toNode": 10,
+          "toPort": "Record"
+        }
+      ]
+    }
+  },
+  {
+    "type": "kiasControllerProgram",
+    "id": "shutdown",
+    "enabled": true,
+    "program": {
+      "version": 1,
+      "name": "shutdown",
+      "nodes": [
+        {
+          "id": 1,
+          "kind": "Any",
+          "x": 0,
+          "y": 0,
+          "profile": "Automation",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 2,
+          "kind": "NumberCompare",
+          "x": 320,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "GreaterEqual"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 3,
+          "kind": "NumberConstant",
+          "x": 0,
+          "y": 996,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 4,
+          "kind": "If",
+          "x": 960,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 5,
+          "kind": "Cooldown",
+          "x": 1280,
+          "y": 0,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 10,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 6,
+          "kind": "EnumConstant",
+          "x": 1280,
+          "y": 220,
+          "profile": "",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 7,
+          "kind": "All",
+          "x": 1920,
+          "y": 0,
+          "profile": "Speaker",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        },
+        {
+          "id": 8,
+          "kind": "All",
+          "x": 1920,
+          "y": 220,
+          "profile": "Recorder",
+          "deviceName": "",
+          "room": "",
+          "group": "",
+          "config": {
+            "bool": false,
+            "number": 0,
+            "text": "",
+            "enum": 0,
+            "seconds": 1,
+            "comparison": "Equal"
+          },
+          "portSnapshot": []
+        }
+      ],
+      "wires": [
+        {
+          "fromNode": 1,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "A"
+        },
+        {
+          "fromNode": 3,
+          "fromPort": "Value",
+          "toNode": 2,
+          "toPort": "B"
+        },
+        {
+          "fromNode": 2,
+          "fromPort": "Value",
+          "toNode": 4,
+          "toPort": "Condition"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Shutdown",
+          "toNode": 4,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 4,
+          "fromPort": "True",
+          "toNode": 5,
+          "toPort": "Trigger"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 5,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 7,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 6,
+          "fromPort": "Value",
+          "toNode": 7,
+          "toPort": "Channel"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 7,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 7,
+          "toPort": "Alarm"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "Message",
+          "toNode": 8,
+          "toPort": "Message"
+        },
+        {
+          "fromNode": 1,
+          "fromPort": "EventKey",
+          "toNode": 8,
+          "toPort": "Key"
+        },
+        {
+          "fromNode": 5,
+          "fromPort": "Ready",
+          "toNode": 8,
+          "toPort": "Record"
+        }
+      ]
+    }
+  }
+]

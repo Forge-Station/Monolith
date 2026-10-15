@@ -181,7 +181,9 @@ public sealed partial class AtmosAlarmableSystem : EntitySystem
         alarmable.LastAlarmState = type;
         UpdateAppearance(uid, type);
         PlayAlertSound(uid, type, alarmable);
-        RaiseLocalEvent(uid, new AtmosAlarmEvent(type), true);
+        // #Forge-change START (KIAS): Адаптер получает фактическое состояние после изменения штатной атмосферной тревоги.
+        RaiseLocalEvent(uid, new AtmosAlarmEvent(type, uid), true);
+        // #Forge-change END (KIAS)
     }
 
     public void SyncAlertsToNetwork(EntityUid uid, string? address = null, AtmosAlarmableComponent? alarmable = null, TagComponent? tags = null)
@@ -317,9 +319,17 @@ public sealed partial class AtmosAlarmableSystem : EntitySystem
 public sealed class AtmosAlarmEvent : EntityEventArgs
 {
     public AtmosAlarmType AlarmType { get; }
+    // #Forge-change START (KIAS): Адаптер получает фактическое состояние после изменения штатной атмосферной тревоги.
+    public EntityUid? Source { get; }
+    // #Forge-change END (KIAS)
 
-    public AtmosAlarmEvent(AtmosAlarmType netMax)
+    // #Forge-change START (KIAS): Адаптер получает фактическое состояние после изменения штатной атмосферной тревоги.
+    public AtmosAlarmEvent(AtmosAlarmType netMax, EntityUid? source = null)
+    // #Forge-change END (KIAS)
     {
         AlarmType = netMax;
+        // #Forge-change START (KIAS): Адаптер получает фактическое состояние после изменения штатной атмосферной тревоги.
+        Source = source;
+        // #Forge-change END (KIAS)
     }
 }

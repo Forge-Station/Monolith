@@ -1,0 +1,11 @@
+kias-room-coverage = Покрытие: помещение. Геометрия: { $status }. Площадь: { $tiles } тайлов; граница: { $doors } дверей; версия: { $revision }.
+kias-room-status-ok = замкнутое помещение
+kias-room-status-nointeriorseed = нет внутренней клетки перед сканером
+kias-room-status-opentospace = открытая область, достижимые клетки грида в радиусе 7
+kias-room-status-unsupportedgeometry = неподдерживаемая геометрия
+kias-room-status-roomtoolarge = превышен предел площади
+kias-room-status-rebuildpending = идёт перестройка
+kias-room-status-ambiguousboundary = неоднозначная граница
+kias-room-status-exteriorsector = наружный сектор с учётом корпуса
+kias-exterior-coverage = Покрытие: наружный сектор. Геометрия: { $status }. Площадь: { $tiles } тайлов; граница: { $doors } дверей; версия: { $revision }.
+kias-exterior-range = Дальность наружного сектора: { $range } м.

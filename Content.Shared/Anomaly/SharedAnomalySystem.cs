@@ -229,12 +229,17 @@ public abstract partial class SharedAnomalySystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        var newVal = component.Stability + change;
+        // #Forge-change START (KIAS): Событие передаёт старый и новый growth после штатного изменения аномалии.
+        var previous = component.Stability;
+        var newVal = previous + change;
+        // #Forge-change END (KIAS)
 
         component.Stability = Math.Clamp(newVal, 0, 1);
         Dirty(uid, component);
 
-        var ev = new AnomalyStabilityChangedEvent(uid, component.Stability, component.Severity);
+        // #Forge-change START (KIAS): Событие передаёт старый и новый growth после штатного изменения аномалии.
+        var ev = new AnomalyStabilityChangedEvent(uid, component.Stability, component.Severity, previous);
+        // #Forge-change END (KIAS)
         RaiseLocalEvent(uid, ref ev, true);
     }
 

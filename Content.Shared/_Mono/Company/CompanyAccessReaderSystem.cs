@@ -23,23 +23,26 @@ public sealed partial class CompanyAccessReaderSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        // Get user's company
-        if (!TryComp<CompanyComponent>(args.User, out var userCompany))
+        // #Forge-change START (KIAS): Адаптер использует штатную проверку company без копии правил доступа.
+        if (!IsAllowed(entity, args.User))
         {
-            if (entity.Comp.Inverted)
-                return;
-
+        // #Forge-change END (KIAS)
             args.Cancel();
             if (entity.Comp.PopupMessage != null)
+                // #Forge-change START (KIAS): Адаптер использует штатную проверку company без копии правил доступа.
                 _popup.PopupClient(Loc.GetString(entity.Comp.PopupMessage), entity, args.User);
-            return;
+                // #Forge-change END (KIAS)
         }
+    // #Forge-change START (KIAS): Адаптер использует штатную проверку company без копии правил доступа.
+    }
+    // #Forge-change END (KIAS)
 
-        if (!entity.Comp.RequiredCompanies.Contains(userCompany.CompanyName) == !entity.Comp.Inverted)
-        {
-            args.Cancel();
-            if (entity.Comp.PopupMessage != null)
-                _popup.PopupClient(Loc.GetString(entity.Comp.PopupMessage), entity, args.User);
-        }
+    // #Forge-change START (KIAS): Адаптер использует штатную проверку company без копии правил доступа.
+    public bool IsAllowed(EntityUid target, EntityUid user)
+    {
+        if (!TryComp<CompanyAccessReaderComponent>(target, out var reader)) return true;
+        if (!TryComp<CompanyComponent>(user, out var company)) return reader.Inverted;
+        return reader.RequiredCompanies.Contains(company.CompanyName) != reader.Inverted;
+    // #Forge-change END (KIAS)
     }
 }

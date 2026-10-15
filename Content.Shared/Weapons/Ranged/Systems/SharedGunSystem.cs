@@ -360,6 +360,19 @@ public abstract partial class SharedGunSystem : EntitySystem
             autoShoot.RemainingTime = duration;
     }
 
+    // #Forge-change START (KIAS): Штатный CancelShots согласованно сбрасывает очередь и синхронизирует оружие.
+    public void CancelShots(EntityUid gunUid, EntityCoordinates? restoreAim = null)
+    {
+        if (TryComp<AutoShootGunComponent>(gunUid, out var auto))
+            auto.RemainingTime = TimeSpan.Zero;
+        if (TryComp<GunComponent>(gunUid, out var gun))
+        {
+            gun.ShootCoordinates = restoreAim;
+            Dirty(gunUid, gun);
+        }
+    }
+
+    // #Forge-change END (KIAS)
     protected void AttemptShoot(EntityUid user, EntityUid gunUid, GunComponent gun)
     {
         if (_autoShootGunQuery.TryComp(gunUid, out var auto) && !auto.CanFire && auto.RemainingTime <= TimeSpan.Zero) // Frontier // Mono

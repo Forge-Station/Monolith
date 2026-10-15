@@ -171,6 +171,11 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     public void OnCableAnchorStateChanged(EntityUid uid, CableComponent component, CableAnchorStateChangedEvent args)
     {
+        // #Forge-change START (KIAS): Штатный монитор пропускает отдельный тип DATA, не являющийся силовой сетью.
+        if (component.CableType == CableType.Data)
+            return;
+
+        // #Forge-change END (KIAS)
         var xform = args.Transform;
 
         if (xform.GridUid == null || !TryComp<MapGridComponent>(xform.GridUid, out var grid))
@@ -923,7 +928,9 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
         var query = AllEntityQuery<CableComponent, TransformComponent>();
         while (query.MoveNext(out var ent, out var cable, out var entXform))
         {
-            if (entXform.GridUid != gridUid)
+            // #Forge-change START (KIAS): Штатный монитор пропускает отдельный тип DATA, не являющийся силовой сетью.
+            if (entXform.GridUid != gridUid || cable.CableType == CableType.Data)
+            // #Forge-change END (KIAS)
                 continue;
 
             var tile = _sharedMapSystem.GetTileRef(gridUid, grid, entXform.Coordinates);
@@ -964,7 +971,9 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
             var relative = SharedMapSystem.GetChunkRelative(gridIndices, ChunkSize);
             var flag = GetFlag(relative);
 
-            if (TryComp<CableComponent>(ent, out var cable))
+            // #Forge-change START (KIAS): Штатный монитор пропускает отдельный тип DATA, не являющийся силовой сетью.
+            if (TryComp<CableComponent>(ent, out var cable) && cable.CableType != CableType.Data)
+            // #Forge-change END (KIAS)
                 chunk.PowerCableData[(int) cable.CableType] |= flag;
         }
 

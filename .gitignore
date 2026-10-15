@@ -315,3 +315,11 @@ Resources/MapImages
 
 # Forge secrets
 /MonolithSecrets
+
+# Local KIAS test results, logs, screenshots, reports and analysis archives
+/.kias-benchmark/
+
+# Test runner results saved outside the KIAS output directory
+*.trx
+*.coverage
+*.coveragexml

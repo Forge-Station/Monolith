@@ -1,0 +1,551 @@
+[
+  {
+    "asset": "adapter",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor device-link adapter: compact connection hub with THREE chunky silver cable sockets and cyan linking arrows."
+  },
+  {
+    "asset": "advanced-scanner",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Edit the supplied KIAS advanced-scanner sprite into a SMALL WALL MOUNTED game-ready Space Station 14 sprite. Keep dark charcoal metal with muted violet edge highlights and cyan indicator pixel, chunky exact logical 32x32 pixel art, 16 flat colors, no antialiasing, no smooth shading, no tiny subpixel details. Single south-facing top-down 3/4 sprite on transparent background, no wall in image. Wall bracket/back plate at TOP behind device, front face points DOWN away from wall. Compact body occupies approximately 18 pixels wide by 16 pixels high at native resolution, centered. Small advanced modular wall scanner with downward-facing cyan lens and two small violet sensor pods. NOT tall freestanding rack, NOT floor standing cabinet. Preserve consistent KIAS style."
+  },
+  {
+    "asset": "atmos-server",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART ITEM, SINGLE SPRITE, transparent background. Exactly a 32 columns by 32 rows logical pixel grid, enlarged as a mosaic of perfectly square uniform flat-color pixels. Each logical pixel is 32x32 pixels in the enlarged 1024x1024 output. Classic SS13/SS14 extremely low-resolution sprite: chunky shapes, maximum 16 colors, NO tiny details, fine texture, gradients, glow haze, smooth rendering, text or perspective realism. South-facing top-down 3/4 with small top face. Use reference image ONLY for dark charcoal/violet metal and cyan accent palette, NOT its tall silhouette. Subject: A squat WIDE square server cabinet occupying one floor tile, 28 logical pixels wide and 28 tall. Two large round cyan pressure gauges and a fan vent across front. NO vertical core tube. Clear silhouette, 2px transparent margin, dark outline 1 logical pixel thick. Design must remain crisp and readable after nearest-neighbor export to exactly 32x32 PNG."
+  },
+  {
+    "asset": "board",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Flat SMALL handheld electronic circuit BOARD, rectangular 26 pixels wide and 22 high, dark purple PCB, black central microchip, cyan simple traces and silver connector teeth along bottom. NOT a tower or metal machine."
+  },
+  {
+    "asset": "cable",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "Native MV cable assets reused with prototype tint",
+    "prompt": "No generation: sixteen original MIXnikita MV cable masks are copied to data_0 through data_15; the KIAS prototype applies #65DEFF tint."
+  },
+  {
+    "asset": "cartridge",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Handheld fire suppression cartridge: cylindrical purple canister, cyan narrow level window, silver screw cap. Item not machine."
+  },
+  {
+    "asset": "coil",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Handheld COIL of cyan insulated data cable: three neat loops, purple end caps and silver connectors."
+  },
+  {
+    "asset": "collision-monitor",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor collision monitor: squat cabinet with cyan screen showing two approaching objects and chunky side sensor bumpers."
+  },
+  {
+    "asset": "controller-card",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small portable programmable automation CARD, flat dark-purple reinforced case, small cyan graph window, silver edge connector teeth. Flat top-down view, NOT a machine tower."
+  },
+  {
+    "asset": "crew-server",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Squat WIDE square crew server cabinet 28 pixels wide and 28 tall, large cyan PERSON BADGE on dark screen, small card reader below, NO core tube."
+  },
+  {
+    "asset": "defence-server",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART ITEM, SINGLE SPRITE, transparent background. Exactly a 32 columns by 32 rows logical pixel grid, enlarged as a mosaic of perfectly square uniform flat-color pixels. Each logical pixel is 32x32 pixels in the enlarged 1024x1024 output. Classic SS13/SS14 extremely low-resolution sprite: chunky shapes, maximum 16 colors, NO tiny details, fine texture, gradients, glow haze, smooth rendering, text or perspective realism. South-facing top-down 3/4 with small top face. Use reference image ONLY for dark charcoal/violet metal and cyan accent palette, NOT its tall silhouette. Subject: A squat WIDE square server cabinet occupying one floor tile, 28 logical pixels wide and 28 tall. Front is a dark screen with a large cyan targeting cross/brackets, below is a 3-pixel tall cooling grille. NO vertical core tube. Clear silhouette, 2px transparent margin, dark outline 1 logical pixel thick. Design must remain crisp and readable after nearest-neighbor export to exactly 32x32 PNG."
+  },
+  {
+    "asset": "display",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: WIDE rectangular wall information monitor 28 pixels wide, 20 high, cyan abstract status bars inside bevelled purple frame. NO tower, no desk."
+  },
+  {
+    "asset": "docking-sensor",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor docking sensor: pair of silver hook arms around cyan contact status lens, squat purple base."
+  },
+  {
+    "asset": "emergency-button",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Wall emergency push button: prominent RED square button, purple bevelled safety rim, metal guard, tiny cyan status LED."
+  },
+  {
+    "asset": "emergency-receiver",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor emergency receiver: compact reinforced cabinet with cyan warning TRIANGLE screen and short emergency antenna."
+  },
+  {
+    "asset": "flash-detector",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Wall weapon flash detector: TWO narrow cyan sensor eyes under angular purple shielding hood."
+  },
+  {
+    "asset": "flipflop",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor bistable signal toggle: squat panel with TWO opposing cyan arrow pictograms, pair of sockets."
+  },
+  {
+    "asset": "horizon",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor bluespace interferometer: raised metallic semicircular sensor ring surrounding cyan crystal on wide squat metal pedestal."
+  },
+  {
+    "asset": "hull-sensor",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small wall hull sensor: angular housing with large flat silver contact plate and cyan fracture warning glyph."
+  },
+  {
+    "asset": "iff-receiver",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor friend-or-foe receiver: twin short antennae on compact cabinet, cyan split friend badge display."
+  },
+  {
+    "asset": "integration-kit",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Handheld electronics integration kit: silver socket adapter connector with dark-purple protective bracket and cyan linking indicator."
+  },
+  {
+    "asset": "integrity-monitor",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor structural integrity monitor: broad reinforced compact cabinet, cyan SHIELD outline screen, steel support struts."
+  },
+  {
+    "asset": "jammer",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Portable electronic jammer: broad compact reinforced purple case, THREE stubby aerials and small cyan power indicator."
+  },
+  {
+    "asset": "jammer-low",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Precise game sprite edit. Input is native 32x32 SS14 pixel art. Keep EXACTLY the existing dark violet/charcoal compact radio jammer, THREE antennas, metal case silhouette, pixel grid, placement and transparent background. Change only the tiny cyan power/charge indicator to RED for low charge. No other changes. Crisp flat-color logical pixel squares, maximum 16 colors. No tiny extra details, smoothing, gradients, text, scene or shadow. Enlarge if needed but retain exact logical 32x32 grid."
+  },
+  {
+    "asset": "jammer-medium",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Precise game sprite edit. Input is native 32x32 SS14 pixel art. Keep EXACTLY the existing dark violet/charcoal compact radio jammer, THREE antennas, metal case silhouette, pixel grid, placement and transparent background. Change only the tiny cyan power/charge indicator to AMBER for medium charge. No other changes. Crisp flat-color logical pixel squares, maximum 16 colors. No tiny extra details, smoothing, gradients, text, scene or shadow. Enlarge if needed but retain exact logical 32x32 grid."
+  },
+  {
+    "asset": "jammer-off",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Precise game sprite edit. Input is native 32x32 SS14 pixel art. Keep EXACTLY the existing dark violet/charcoal compact radio jammer, THREE antennas, metal case silhouette, pixel grid, placement and transparent background. Change only the tiny cyan power/charge indicator to dark blue charcoal, fully off. No other changes. Crisp flat-color logical pixel squares, maximum 16 colors. No tiny extra details, smoothing, gradients, text, scene or shadow. Enlarge if needed but retain exact logical 32x32 grid."
+  },
+  {
+    "asset": "key-switch",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Wall physical key switch: large silver circular keyhole on bevelled purple plate, tiny cyan indicator."
+  },
+  {
+    "asset": "light-broken",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Precise game sprite edit, input is native 32x32 pixel art. Keep EXACTLY the existing 32x32 logical grid, image positioning, transparent background, purple metal silhouette, 1px outline and flat-color pixel style. Output enlarged square pixel art without extra detail, no smoothing or antialiasing. Make only the lamp glass visibly cracked and dark, with a tiny silver diagonal fracture line, no light emission. Keep the housing unchanged. No new object, no text or background."
+  },
+  {
+    "asset": "light-burned",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Precise game sprite edit, input is native 32x32 pixel art. Keep EXACTLY the existing 32x32 logical grid, image positioning, transparent background, purple metal silhouette, 1px outline and flat-color pixel style. Output enlarged square pixel art without extra detail, no smoothing or antialiasing. Make only the lens dark black charred glass, with a small burnt brown spot, no light emission. Keep the housing unchanged. No new object, no text or background."
+  },
+  {
+    "asset": "light-controller",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor light-group controller: compact cabinet with cyan lightbulb icon screen, six small channel indicators."
+  },
+  {
+    "asset": "light-empty",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Precise game sprite edit, input is native 32x32 pixel art. Keep EXACTLY the existing 32x32 logical grid, image positioning, transparent background, purple metal silhouette, 1px outline and flat-color pixel style. Output enlarged square pixel art without extra detail, no smoothing or antialiasing. Remove only the bulb/lens, exposing a small dark empty bulb socket. Keep the purple metal housing unchanged. No new object, no text or background."
+  },
+  {
+    "asset": "light-off",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Precise game sprite edit, input is native 32x32 pixel art. Keep EXACTLY the existing 32x32 logical grid, image positioning, transparent background, purple metal silhouette, 1px outline and flat-color pixel style. Output enlarged square pixel art without extra detail, no smoothing or antialiasing. Turn only the cyan lamp lens OFF: lens is dark charcoal blue glass with NO bright cyan pixels. Keep the housing unchanged. No new object, no text or background."
+  },
+  {
+    "asset": "management",
+    "frame": [
+      64,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Create one production Space Station 14 game sprite: KIAS management console, logical 64x32 pixels, enlarged at integer scale, transparent background. Reference image sets style only: dark charcoal and muted violet bevelled steel, thick dark pixel outline, restrained bright cyan luminous displays. South-facing top-down 3/4 machinery. Wide two-tile desk console with two inset cyan screens, small central radar display, low keyboard/control deck and sturdy base. Silhouette fills 64x32 rectangular frame with 1px transparent margin. True crisp pixel art with every logical pixel a flat color square, limited 16-color palette, no antialiasing, no gradients, no labels, no text, no shadow outside object. Single sprite, not a sheet, isolated. Match the reference pixel scale and industrial detailing. Distinct from a programmer: no card slot."
+  },
+  {
+    "asset": "master-key",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Physical master shutdown KEY, purple broad bevelled head with cyan diamond, silver key shaft and obvious mechanical teeth. NOT machinery."
+  },
+  {
+    "asset": "mayday",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor distress antenna: TALL segmented metal aerial above sturdy square purple transmitter pedestal with cyan signal display."
+  },
+  {
+    "asset": "module-biometric",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small flat removable scanner MODULE cartridge with silver edge connector and cyan HEART and heartbeat glyph."
+  },
+  {
+    "asset": "module-connector",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small flat removable scanner MODULE cartridge with silver edge connector and cyan PLUG/link connector glyph."
+  },
+  {
+    "asset": "module-identity",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small flat removable scanner MODULE cartridge with silver edge connector and cyan ID BADGE/person glyph."
+  },
+  {
+    "asset": "module-motion",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small flat removable scanner MODULE cartridge with silver edge connector and cyan RUNNING PERSON glyph."
+  },
+  {
+    "asset": "module-optical",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small flat removable scanner MODULE cartridge with silver edge connector and cyan EYE/lens glyph."
+  },
+  {
+    "asset": "module-radiation",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small flat removable scanner MODULE cartridge with silver edge connector and cyan RADIATION trefoil glyph."
+  },
+  {
+    "asset": "module-spectral",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small flat removable scanner MODULE cartridge with silver edge connector and cyan PRISM diamond glyph."
+  },
+  {
+    "asset": "module-threat",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small flat removable scanner MODULE cartridge with silver edge connector and cyan CLAW warning triangle glyph."
+  },
+  {
+    "asset": "navigation-light",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Wall navigation beacon: small purple metal case with cyan lamp lens and dark protective cross braces."
+  },
+  {
+    "asset": "navigation-server",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Squat WIDE square navigation server cabinet 28 pixels wide and 28 tall, large cyan COMPASS ARROW on screen, row of controls below, NO core tube."
+  },
+  {
+    "asset": "pdc-radar",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor point defence radar: squat armoured base with circular upward tilted cyan radar plate and metal hood."
+  },
+  {
+    "asset": "power-server",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART ITEM, SINGLE SPRITE, transparent background. Exactly a 32 columns by 32 rows logical pixel grid, enlarged as a mosaic of perfectly square uniform flat-color pixels. Each logical pixel is 32x32 pixels in the enlarged 1024x1024 output. Classic SS13/SS14 extremely low-resolution sprite: chunky shapes, maximum 16 colors, NO tiny details, fine texture, gradients, glow haze, smooth rendering, text or perspective realism. South-facing top-down 3/4 with small top face. Use reference image ONLY for dark charcoal/violet metal and cyan accent palette, NOT its tall silhouette. Subject: A squat WIDE square server cabinet occupying one floor tile, 28 logical pixels wide and 28 tall. LARGE recognizable cyan lightning bolt in front dark screen and two chunky metal terminals at bottom. NO vertical core tube. Clear silhouette, 2px transparent margin, dark outline 1 logical pixel thick. Design must remain crisp and readable after nearest-neighbor export to exactly 32x32 PNG."
+  },
+  {
+    "asset": "programmer-card",
+    "frame": [
+      64,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Precise sprite edit. Keep the input programming console EXACTLY unchanged: same outline, canvas position, transparent margins, 64x32 logical pixel grid, dark charcoal/violet case, left cyan monitor, controls, lighting and palette. Change ONLY the card slot at the right: insert a small visibly protruding charcoal and violet programmable controller card with silver contacts and cyan small diamond indicator into that empty horizontal slot. Card occupies middle of the slot and protrudes down toward controls, obvious at native 64x32 resolution. Slot rim remains visible. No other changes. True transparent background. Crisp pixel art without smoothing."
+  },
+  {
+    "asset": "programmer-empty",
+    "frame": [
+      64,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Single production SS14 KIAS sprite on genuinely transparent background. Reference is style only: dark charcoal and muted violet industrial bevelled metal, cyan indicator glow, dark outline, classic south-facing top-down 3/4 pixel art. Logical 32x32 pixels enlarged as crisp flat color squares, limited palette, NO smooth shading, antialiasing, text, logo, scene, ground, external shadow. Object fills frame with 1px margins. Wide TWO TILE 64x32 programming desk console: one large cyan graph display on LEFT, physical card writer on RIGHT with a conspicuous empty dark horizontal rectangular slot, cyan rim and chamfered mouth, controls below it. Card slot must be obvious at native resolution. Wide sturdy base with grille. Logical 64x32 rather than 32x32."
+  },
+  {
+    "asset": "proximity-sensor",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Wall proximity sensor: small square purple housing with large cyan SONAR-circle eye and tiny side brackets."
+  },
+  {
+    "asset": "rack",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Single production SS14 KIAS sprite on genuinely transparent background. Reference is style only: dark charcoal and muted violet industrial bevelled metal, cyan indicator glow, dark outline, classic south-facing top-down 3/4 pixel art. Logical 32x32 pixels enlarged as crisp flat color squares, limited palette, NO smooth shading, antialiasing, text, logo, scene, ground, external shadow. Object fills frame with 1px margins. Compact floor controller cabinet with eight clearly separate thin horizontal card sockets in two columns of four, cyan status LEDs beside them, small upper status display, sturdy metal enclosure."
+  },
+  {
+    "asset": "recorder",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Squat WIDE square black-box recorder 28 pixels wide and 28 tall, cyan waveform screen across upper half, three archival drive drawers below."
+  },
+  {
+    "asset": "relay",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor power/data relay: four large silver cable terminals surrounding squat compact purple case, cyan lightning indicator."
+  },
+  {
+    "asset": "resource-monitor",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor resource monitor: compact cabinet with THREE stacked cyan bar gauges, reinforced lower drawer."
+  },
+  {
+    "asset": "rotary-switch",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Wall selector switch: large silver rotary dial with FOUR position marks, cyan selector pointer."
+  },
+  {
+    "asset": "scanner",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Edit the supplied KIAS scanner sprite into a SMALL WALL MOUNTED game-ready Space Station 14 sprite. Keep dark charcoal metal with muted violet edge highlights and cyan indicator pixel, chunky exact logical 32x32 pixel art, 16 flat colors, no antialiasing, no smooth shading, no tiny subpixel details. Single south-facing top-down 3/4 sprite on transparent background, no wall in image. Wall bracket/back plate at TOP behind device, front face points DOWN away from wall. Compact body occupies approximately 18 pixels wide by 16 pixels high at native resolution, centered. Small modular wall motion scanner with downward-facing cyan rectangular optical window. NOT tall freestanding rack, NOT floor standing cabinet. Preserve consistent KIAS style."
+  },
+  {
+    "asset": "service-tool",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "ONE game-ready SS14 KIAS handheld diagnostic MULTITOOL. Strict logical 32x32 pixel art, enlarged as chunky uniform flat-color squares on a square image. Genuinely transparent background. Device 16 logical pixels wide, 26 high, dark charcoal/violet bevelled plastic and metal, large cyan oscilloscope mini screen, 3 chunky buttons and two short silver probes. Reference sets palette only, do not copy its tall core tube. Top-down 3/4 portable item, thick 1px outline, maximum 16 flat colors, no gradients, fine detail, antialiasing, smooth shading, text, exterior shadow or scene. Native 32x32 readability, 2px transparent margins."
+  },
+  {
+    "asset": "speaker",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Edit the supplied KIAS speaker sprite into a SMALL WALL MOUNTED game-ready Space Station 14 sprite. Keep dark charcoal metal with muted violet edge highlights and cyan indicator pixel, chunky exact logical 32x32 pixel art, 16 flat colors, no antialiasing, no smooth shading, no tiny subpixel details. Single south-facing top-down 3/4 sprite on transparent background, no wall in image. Wall bracket/back plate at TOP behind device, front face points DOWN away from wall. Compact body occupies approximately 18 pixels wide by 16 pixels high at native resolution, centered. Compact wall PA speaker with dark grille and tiny cyan LED. NOT tall freestanding rack, NOT floor standing cabinet. Preserve consistent KIAS style."
+  },
+  {
+    "asset": "suppression",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "Edit the supplied KIAS suppression sprite into a SMALL WALL MOUNTED game-ready Space Station 14 sprite. Keep dark charcoal metal with muted violet edge highlights and cyan indicator pixel, chunky exact logical 32x32 pixel art, 16 flat colors, no antialiasing, no smooth shading, no tiny subpixel details. Single south-facing top-down 3/4 sprite on transparent background, no wall in image. Wall bracket/back plate at TOP behind device, front face points DOWN away from wall. Compact body occupies approximately 18 pixels wide by 16 pixels high at native resolution, centered. Compact wall fire suppression nozzle, small cyan cylinder and clear downward-facing discharge tip. NOT tall freestanding rack, NOT floor standing cabinet. Preserve consistent KIAS style."
+  },
+  {
+    "asset": "transponder",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Small handheld crew beacon with cyan person symbol display, short antenna and belt clip."
+  },
+  {
+    "asset": "wireless",
+    "frame": [
+      32,
+      32
+    ],
+    "method": "OpenAI imagegen",
+    "prompt": "GAME-READY PIXEL ART: ONE sprite for Space Station 14. Genuinely TRANSPARENT background. A SQUARE 32 columns by 32 rows logical pixel grid enlarged to 1024x1024, each flat-color logical pixel a 32px square. Very low resolution crisp chunky pixel art, maximum 16 flat colors, large readable features only, NO fine details, texture, antialiasing, gradients, smooth shading, glow haze, text, scene, ground or exterior shadows. Reference image sets ONLY the dark charcoal/violet metal and bright cyan palette; DO NOT COPY its tall core shape or aspect ratio. South-facing top-down 3/4 with small top face. MUST be readable as a native 32x32 sprite. All floor machines except the distress antenna have a compact WIDE one-tile silhouette roughly 28px wide and 28px tall, not a narrow tall core. Small portable items have appropriate handheld silhouette. Subject: Floor wireless transceiver: twin tall antennae above compact cabinet with cyan radio-wave display."
+  }
+]

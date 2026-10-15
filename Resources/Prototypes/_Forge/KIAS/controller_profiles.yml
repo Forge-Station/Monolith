@@ -1,0 +1,244 @@
+- type: kiasControllerProfile
+  id: RoomScanner
+  component: KiasRoomScanner
+  ports:
+  - { id: Motion, direction: Output, type: Signal, name: kias-controller-port-motion, description: kias-controller-help-roomscanner-motion }
+  - { id: Occupied, direction: Output, type: Bool, name: kias-controller-port-occupied, description: kias-controller-help-roomscanner-occupied }
+  - { id: Entities, direction: Output, type: Number, name: kias-controller-port-entities, description: kias-controller-help-roomscanner-entities }
+  - { id: Crew, direction: Output, type: Number, name: kias-controller-port-crew, description: kias-controller-help-roomscanner-crew }
+  - { id: PersonCritical, direction: Output, type: Signal, name: kias-controller-port-personcritical, description: kias-controller-help-roomscanner-personcritical }
+  - { id: PersonDead, direction: Output, type: Signal, name: kias-controller-port-persondead, description: kias-controller-help-roomscanner-persondead }
+  - { id: Person, direction: Output, type: Entity, name: kias-controller-port-person, description: kias-controller-help-roomscanner-person }
+  - { id: AnomalyGrowth, direction: Output, type: Signal, name: kias-controller-port-anomalygrowth, description: kias-controller-help-roomscanner-anomalygrowth }
+  - { id: Radiation, direction: Output, type: Signal, name: kias-controller-port-radiation, description: kias-controller-help-roomscanner-radiation }
+  - { id: Threat, direction: Output, type: Signal, name: kias-controller-port-threat, description: kias-controller-help-roomscanner-threat }
+  - { id: FaunaThreat, direction: Output, type: Signal, name: kias-controller-port-faunathreat, description: kias-controller-help-roomscanner-faunathreat }
+
+- type: kiasControllerProfile
+  id: HullSensor
+  component: KiasHullSensor
+  ports:
+  - { id: Impact, direction: Output, type: Signal, name: kias-controller-port-impact, description: kias-controller-help-hullsensor-impact }
+  - { id: Structure, direction: Output, type: Entity, name: kias-controller-port-structure, description: kias-controller-help-hullsensor-structure }
+
+- type: kiasControllerProfile
+  id: IntegrityMonitor
+  component: KiasIntegrityMonitor
+  ports:
+  - { id: Damage, direction: Output, type: Signal, name: kias-controller-port-damage, description: kias-controller-help-integritymonitor-damage }
+  - { id: Amount, direction: Output, type: Number, name: kias-controller-port-amount, description: kias-controller-help-integritymonitor-amount }
+  - { id: Structure, direction: Output, type: Entity, name: kias-controller-port-structure, description: kias-controller-help-integritymonitor-structure }
+
+- type: kiasControllerProfile
+  id: CollisionMonitor
+  component: KiasCollisionMonitor
+  ports:
+  - { id: Collision, direction: Output, type: Signal, name: kias-controller-port-collision, description: kias-controller-help-collisionmonitor-collision }
+  - { id: RelativeSpeed, direction: Output, type: Number, name: kias-controller-port-relativespeed, description: kias-controller-help-collisionmonitor-relativespeed }
+  - { id: OtherGrid, direction: Output, type: Entity, name: kias-controller-port-othergrid, description: kias-controller-help-collisionmonitor-othergrid }
+
+- type: kiasControllerProfile
+  id: AtmosSafety
+  component: KiasAtmosProfile
+  ports:
+  - { id: Danger, direction: Output, type: Signal, name: kias-controller-port-danger, description: kias-controller-help-atmossafety-danger }
+  - { id: Fire, direction: Output, type: Signal, name: kias-controller-port-fire, description: kias-controller-help-atmossafety-fire }
+  - { id: Clear, direction: Output, type: Signal, name: kias-controller-port-clear, description: kias-controller-help-atmossafety-clear }
+  - { id: Source, direction: Output, type: Entity, name: kias-controller-port-source, description: kias-controller-help-atmossafety-source }
+
+- type: kiasControllerProfile
+  id: PowerMonitor
+  component: KiasPowerProfile
+  ports:
+  - { id: Deficit, direction: Output, type: Signal, name: kias-controller-port-deficit, description: kias-controller-help-powermonitor-deficit }
+  - { id: Supply, direction: Output, type: Number, name: kias-controller-port-supply, description: kias-controller-help-powermonitor-supply }
+  - { id: Consumption, direction: Output, type: Number, name: kias-controller-port-consumption, description: kias-controller-help-powermonitor-consumption }
+  - { id: Difference, direction: Output, type: Number, name: kias-controller-port-difference, description: kias-controller-help-powermonitor-difference }
+  - { id: Channel, direction: Output, type: Enum, name: kias-controller-port-channel, description: kias-controller-help-powermonitor-channel, enumDomain: PowerChannel }
+
+- type: kiasControllerProfile
+  id: Horizon
+  component: KiasHorizon
+  ports:
+  - { id: Contact, direction: Output, type: Signal, name: kias-controller-port-contact, description: kias-controller-help-horizon-contact }
+  - { id: ContactEntity, direction: Output, type: Entity, name: kias-controller-port-contactentity, description: kias-controller-help-horizon-contactentity }
+  - { id: Distance, direction: Output, type: Number, name: kias-controller-port-distance, description: kias-controller-help-horizon-distance }
+  - { id: Bearing, direction: Output, type: Number, name: kias-controller-port-bearing, description: kias-controller-help-horizon-bearing }
+  - { id: Disposition, direction: Output, type: Enum, name: kias-controller-port-disposition, description: kias-controller-help-horizon-disposition, enumDomain: ContactDisposition }
+
+- type: kiasControllerProfile
+  id: WeaponFlashDetector
+  component: KiasWeaponFlash
+  ports:
+  - { id: Triggered, direction: Output, type: Signal, name: kias-controller-port-triggered, description: kias-controller-help-weaponflashdetector-triggered }
+  - { id: Source, direction: Output, type: Entity, name: kias-controller-port-source, description: kias-controller-help-weaponflashdetector-source }
+  - { id: Disposition, direction: Output, type: Enum, name: kias-controller-port-disposition, description: kias-controller-help-weaponflashdetector-disposition, enumDomain: ContactDisposition }
+
+- type: kiasControllerProfile
+  id: ProximitySensor
+  component: KiasProximity
+  ports:
+  - { id: Contact, direction: Output, type: Signal, name: kias-controller-port-contact, description: kias-controller-help-proximitysensor-contact }
+  - { id: ContactEntity, direction: Output, type: Entity, name: kias-controller-port-contactentity, description: kias-controller-help-proximitysensor-contactentity }
+  - { id: Distance, direction: Output, type: Number, name: kias-controller-port-distance, description: kias-controller-help-proximitysensor-distance }
+  - { id: Disposition, direction: Output, type: Enum, name: kias-controller-port-disposition, description: kias-controller-help-proximitysensor-disposition, enumDomain: ContactDisposition }
+
+- type: kiasControllerProfile
+  id: CrewMonitor
+  component: KiasCrewServer
+  ports:
+  - { id: CrewCritical, direction: Output, type: Signal, name: kias-controller-port-crewcritical, description: kias-controller-help-crewmonitor-crewcritical }
+  - { id: CrewDead, direction: Output, type: Signal, name: kias-controller-port-crewdead, description: kias-controller-help-crewmonitor-crewdead }
+  - { id: Person, direction: Output, type: Entity, name: kias-controller-port-person, description: kias-controller-help-crewmonitor-person }
+  - { id: Crew, direction: Output, type: Number, name: kias-controller-port-crew, description: kias-controller-help-crewmonitor-crew }
+  - { id: Unavailable, direction: Output, type: Bool, name: kias-controller-port-unavailable, description: kias-controller-help-crewmonitor-unavailable }
+
+- type: kiasControllerProfile
+  id: NavigationComms
+  component: KiasNavigationProfile
+  ports:
+  - { id: Arrival, direction: Output, type: Signal, name: kias-controller-port-arrival, description: kias-controller-help-navigationcomms-arrival }
+  - { id: MaydayMessage, direction: Input, type: String, name: kias-controller-port-maydaymessage, description: kias-controller-help-navigationcomms-maydaymessage }
+  - { id: Mayday, direction: Input, type: Signal, name: kias-controller-port-mayday, description: kias-controller-help-navigationcomms-mayday }
+  - { id: MedicalHelp, direction: Input, type: Signal, name: kias-controller-port-medicalhelp, description: kias-controller-help-navigationcomms-medicalhelp }
+
+- type: kiasControllerProfile
+  id: Speaker
+  component: KiasSpeaker
+  ports:
+  - { id: Key, direction: Input, type: String, name: kias-controller-port-key, description: kias-controller-help-speaker-key }
+  - { id: Message, direction: Input, type: String, name: kias-controller-port-message, description: kias-controller-help-speaker-message }
+  - { id: Announce, direction: Input, type: Signal, name: kias-controller-port-announce, description: kias-controller-help-speaker-announce }
+  - { id: Alarm, direction: Input, type: Signal, name: kias-controller-port-alarm, description: kias-controller-help-speaker-alarm }
+  - { id: Channel, direction: Input, type: Enum, name: kias-controller-port-channel, description: kias-controller-help-speaker-channel, enumDomain: AudioChannel }
+
+- type: kiasControllerProfile
+  id: Recorder
+  component: KiasRecorder
+  ports:
+  - { id: Key, direction: Input, type: String, name: kias-controller-port-key, description: kias-controller-help-recorder-key }
+  - { id: Message, direction: Input, type: String, name: kias-controller-port-message, description: kias-controller-help-recorder-message }
+  - { id: Record, direction: Input, type: Signal, name: kias-controller-port-record, description: kias-controller-help-recorder-record }
+
+- type: kiasControllerProfile
+  id: Lighting
+  component: KiasLightFixture
+  ports:
+  - { id: Set, direction: Input, type: Bool, name: kias-controller-port-set, description: kias-controller-help-lighting-set }
+  - { id: On, direction: Input, type: Signal, name: kias-controller-port-on, description: kias-controller-help-lighting-on }
+  - { id: Off, direction: Input, type: Signal, name: kias-controller-port-off, description: kias-controller-help-lighting-off }
+
+- type: kiasControllerProfile
+  id: LightController
+  component: KiasLightController
+  ports:
+  - { id: Set, direction: Input, type: Bool, name: kias-controller-port-set, description: kias-controller-help-lightcontroller-set }
+  - { id: On, direction: Input, type: Signal, name: kias-controller-port-on, description: kias-controller-help-lightcontroller-on }
+  - { id: Off, direction: Input, type: Signal, name: kias-controller-port-off, description: kias-controller-help-lightcontroller-off }
+
+- type: kiasControllerProfile
+  id: Suppression
+  component: KiasSuppression
+  ports:
+  - { id: Trigger, direction: Input, type: Signal, name: kias-controller-port-trigger, description: kias-controller-help-suppression-trigger }
+
+- type: kiasControllerProfile
+  id: Relay
+  component: KiasRelay
+  ports:
+  - { id: State, direction: Output, type: Bool, name: kias-controller-port-state, description: kias-controller-help-relay-state }
+  - { id: Closed, direction: Input, type: Bool, name: kias-controller-port-closed, description: kias-controller-help-relay-closed }
+  - { id: Open, direction: Input, type: Signal, name: kias-controller-port-open, description: kias-controller-help-relay-open }
+  - { id: Close, direction: Input, type: Signal, name: kias-controller-port-close, description: kias-controller-help-relay-close }
+
+- type: kiasControllerProfile
+  id: DefenceController
+  component: KiasDefence
+  ports:
+  - { id: Lock, direction: Input, type: Signal, name: kias-controller-port-lock, description: kias-controller-help-defencecontroller-lock }
+  - { id: Unlock, direction: Input, type: Signal, name: kias-controller-port-unlock, description: kias-controller-help-defencecontroller-unlock }
+  - { id: Automatic, direction: Input, type: Bool, name: kias-controller-port-automatic, description: kias-controller-help-defencecontroller-automatic }
+  - { id: Enable, direction: Input, type: Signal, name: kias-controller-port-enable, description: kias-controller-help-defencecontroller-enable }
+  - { id: Disable, direction: Input, type: Signal, name: kias-controller-port-disable, description: kias-controller-help-defencecontroller-disable }
+  - { id: FireLock, direction: Input, type: Bool, name: kias-controller-port-firelock, description: kias-controller-help-defencecontroller-firelock }
+
+- type: kiasControllerProfile
+  id: Jammer
+  component: RadioJammer
+  ports:
+  - { id: Enabled, direction: Input, type: Bool, name: kias-controller-port-enabled, description: kias-controller-help-jammer-enabled }
+  - { id: Enable, direction: Input, type: Signal, name: kias-controller-port-enable, description: kias-controller-help-jammer-enable }
+  - { id: Disable, direction: Input, type: Signal, name: kias-controller-port-disable, description: kias-controller-help-jammer-disable }
+
+- type: kiasControllerProfile
+  id: Decoy
+  component: KiasDecoyLauncher
+  ports:
+  - { id: Deploy, direction: Input, type: Signal, name: kias-controller-port-deploy, description: kias-controller-help-decoy-deploy }
+
+- type: kiasControllerProfile
+  id: Ventilation
+  component: GasVentPump
+  ports:
+  - { id: Restore, direction: Input, type: Signal, name: kias-controller-port-restore, description: kias-controller-help-ventilation-restore }
+
+- type: kiasControllerProfile
+  id: DockingSensor
+  component: KiasDockingSensor
+  ports:
+  - { id: Docked, direction: Output, type: Signal, name: kias-controller-port-docked, description: kias-controller-help-dockingsensor-docked }
+  - { id: Undocked, direction: Output, type: Signal, name: kias-controller-port-undocked, description: kias-controller-help-dockingsensor-undocked }
+
+- type: kiasControllerProfile
+  id: DeviceAdapter
+  component: KiasDeviceAdapter
+  ports:
+  - { id: State, direction: Output, type: Bool, name: kias-controller-port-state, description: kias-controller-help-deviceadapter-state }
+  - { id: On, direction: Input, type: Signal, name: kias-controller-port-on, description: kias-controller-help-deviceadapter-on }
+  - { id: Off, direction: Input, type: Signal, name: kias-controller-port-off, description: kias-controller-help-deviceadapter-off }
+  - { id: Toggle, direction: Input, type: Signal, name: kias-controller-port-toggle, description: kias-controller-help-deviceadapter-toggle }
+
+- type: kiasControllerProfile
+  id: Automation
+  component: KiasCore
+  ports:
+  - { id: AlertReset, direction: Output, type: Signal, name: kias-controller-port-alertreset, description: kias-controller-help-automation-alertreset }
+  - { id: SetQuietMode, direction: Input, type: Signal, name: kias-controller-port-setquietmode, description: kias-controller-help-automation-setquietmode }
+  - { id: HullImpact, direction: Output, type: Signal, name: kias-controller-port-hullimpact, description: kias-controller-help-automation-hullimpact }
+  - { id: HullDamage, direction: Output, type: Signal, name: kias-controller-port-hulldamage, description: kias-controller-help-automation-hulldamage }
+  - { id: Collision, direction: Output, type: Signal, name: kias-controller-port-collision, description: kias-controller-help-automation-collision }
+  - { id: AtmosDanger, direction: Output, type: Signal, name: kias-controller-port-atmosdanger, description: kias-controller-help-automation-atmosdanger }
+  - { id: AnomalyGrowth, direction: Output, type: Signal, name: kias-controller-port-anomalygrowth, description: kias-controller-help-automation-anomalygrowth }
+  - { id: Contact, direction: Output, type: Signal, name: kias-controller-port-contact, description: kias-controller-help-automation-contact }
+  - { id: Arrival, direction: Output, type: Signal, name: kias-controller-port-arrival, description: kias-controller-help-automation-arrival }
+  - { id: WeaponFlash, direction: Output, type: Signal, name: kias-controller-port-weaponflash, description: kias-controller-help-automation-weaponflash }
+  - { id: Proximity, direction: Output, type: Signal, name: kias-controller-port-proximity, description: kias-controller-help-automation-proximity }
+  - { id: CrewCritical, direction: Output, type: Signal, name: kias-controller-port-crewcritical, description: kias-controller-help-automation-crewcritical }
+  - { id: CrewDead, direction: Output, type: Signal, name: kias-controller-port-crewdead, description: kias-controller-help-automation-crewdead }
+  - { id: VesselCritical, direction: Output, type: Signal, name: kias-controller-port-vesselcritical, description: kias-controller-help-automation-vesselcritical }
+  - { id: PowerDeficit, direction: Output, type: Signal, name: kias-controller-port-powerdeficit, description: kias-controller-help-automation-powerdeficit }
+  - { id: Manual, direction: Output, type: Signal, name: kias-controller-port-manual, description: kias-controller-help-automation-manual }
+  - { id: Fire, direction: Output, type: Signal, name: kias-controller-port-fire, description: kias-controller-help-automation-fire }
+  - { id: Docked, direction: Output, type: Signal, name: kias-controller-port-docked, description: kias-controller-help-automation-docked }
+  - { id: Undocked, direction: Output, type: Signal, name: kias-controller-port-undocked, description: kias-controller-help-automation-undocked }
+  - { id: Radiation, direction: Output, type: Signal, name: kias-controller-port-radiation, description: kias-controller-help-automation-radiation }
+  - { id: LocalThreat, direction: Output, type: Signal, name: kias-controller-port-localthreat, description: kias-controller-help-automation-localthreat }
+  - { id: Boarding, direction: Output, type: Signal, name: kias-controller-port-boarding, description: kias-controller-help-automation-boarding }
+  - { id: CaptainGreeting, direction: Output, type: Signal, name: kias-controller-port-captaingreeting, description: kias-controller-help-automation-captaingreeting }
+  - { id: FireClear, direction: Output, type: Signal, name: kias-controller-port-fireclear, description: kias-controller-help-automation-fireclear }
+  - { id: AtmosClear, direction: Output, type: Signal, name: kias-controller-port-atmosclear, description: kias-controller-help-automation-atmosclear }
+  - { id: CrewUnavailable, direction: Output, type: Signal, name: kias-controller-port-crewunavailable, description: kias-controller-help-automation-crewunavailable }
+  - { id: QuietMode, direction: Output, type: Signal, name: kias-controller-port-quietmode, description: kias-controller-help-automation-quietmode }
+  - { id: PowerLost, direction: Output, type: Signal, name: kias-controller-port-powerlost, description: kias-controller-help-automation-powerlost }
+  - { id: Boot, direction: Output, type: Signal, name: kias-controller-port-boot, description: kias-controller-help-automation-boot }
+  - { id: Shutdown, direction: Output, type: Signal, name: kias-controller-port-shutdown, description: kias-controller-help-automation-shutdown }
+  - { id: Message, direction: Output, type: String, name: kias-controller-port-message, description: kias-controller-help-automation-message }
+  - { id: Value, direction: Output, type: Number, name: kias-controller-port-value, description: kias-controller-help-automation-value }
+  - { id: Disposition, direction: Output, type: Enum, name: kias-controller-port-disposition, description: kias-controller-help-automation-disposition, enumDomain: ContactDisposition }
+  - { id: AllCrewUnavailable, direction: Output, type: Bool, name: kias-controller-port-allcrewunavailable, description: kias-controller-help-automation-allcrewunavailable }
+  - { id: Alert, direction: Input, type: Enum, name: kias-controller-port-alert, description: kias-controller-help-automation-alert, enumDomain: Alert }
+  - { id: SetAlert, direction: Input, type: Signal, name: kias-controller-port-setalert, description: kias-controller-help-automation-setalert }
+  - { id: EscalateAlert, direction: Input, type: Signal, name: kias-controller-port-escalatealert, description: kias-controller-help-automation-escalatealert }
+  - { id: EventKey, direction: Output, type: String, name: kias-controller-port-eventkey, description: kias-controller-help-automation-eventkey }
+  - { id: RunManual, direction: Input, type: Signal, name: kias-controller-port-runmanual, description: kias-controller-help-automation-runmanual }
+  - { id: ResetAlert, direction: Input, type: Signal, name: kias-controller-port-resetalert, description: kias-controller-help-automation-resetalert }

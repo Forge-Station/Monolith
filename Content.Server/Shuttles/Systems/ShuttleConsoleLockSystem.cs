@@ -860,31 +860,10 @@ public sealed partial class ShuttleConsoleLockSystem : SharedShuttleConsoleLockS
     /// </summary>
     private bool HasDeedAccess(EntityUid console, EntityUid user, ShuttleConsoleLockComponent lockComp)
     {
-        // Get the grid the console is on
-        var consoleTransform = Transform(console);
-        if (consoleTransform.GridUid == null)
-            return false;
-
-        var gridUid = consoleTransform.GridUid.Value;
-
-        // Check if this is a ship with a deed
-        if (!TryComp<ShuttleDeedComponent>(gridUid, out var shipDeed))
-            return false;
-
-        // Find all accessible ID cards for the user
-        var idCards = FindAccessibleIdCards(user);
-
-        // Check if any ID card has deed access for this ship
-        foreach (var cardUid in idCards)
-        {
-            if (TryComp<ShuttleDeedComponent>(cardUid, out var cardDeed) &&
-                cardDeed.ShuttleUid == shipDeed.ShuttleUid)
-            {
-                return true; // User has deed access
-            }
-        }
-
-        return false;
+        // #Forge-change START (KIAS): Адаптер использует ту же проверку deed, что и штатная консоль шаттла.
+        return Transform(console).GridUid is { } grid
+            && EntityManager.System<ShipAccessReaderSystem>().HasDeedAccess(grid, FindAccessibleIdCards(user));
+        // #Forge-change END (KIAS)
     }
 
     /// <summary>

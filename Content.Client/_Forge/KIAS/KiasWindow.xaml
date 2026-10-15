@@ -1,0 +1,33 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:kias="clr-namespace:Content.Client._Forge.KIAS"
+                      Title="{Loc 'kias-window-title'}" SetSize="900 650" MinSize="650 450" Resizable="True">
+    <BoxContainer Orientation="Vertical" Margin="8">
+        <RichTextLabel Name="Status"/>
+        <RichTextLabel Name="Counts" Margin="0 8"/>
+        <Button Name="RefreshButton" Text="{Loc 'kias-refresh'}"/>
+        <RichTextLabel Name="Alert"/>
+        <TabContainer Name="Pages" VerticalExpand="True" Margin="0 8">
+            <ScrollContainer HScrollEnabled="False">
+                <BoxContainer Orientation="Vertical">
+                    <Label Name="Devices"/>
+                    <Label Name="EventLog"/>
+                    <BoxContainer Name="AudioPanel" Orientation="Vertical" Margin="0 8"/>
+                    <Label Name="Automation"/>
+                    <Label Text="{Loc 'kias-controller-management-help'}" ClipText="True"/>
+                    <BoxContainer Orientation="Horizontal">
+                        <Button Name="RunManual" Text="{Loc 'kias-run-manual'}"/>
+                        <Button Name="RunQuiet" Text="{Loc 'kias-controller-quiet'}"/>
+                        <Button Name="ResetAlert" Text="{Loc 'kias-reset-alert'}"/>
+                    </BoxContainer>
+                </BoxContainer>
+            </ScrollContainer>
+            <ScrollContainer HScrollEnabled="False"><Label Name="AtmosDetails"/></ScrollContainer>
+            <ScrollContainer HScrollEnabled="False"><Label Name="CrewDetails"/></ScrollContainer>
+            <ScrollContainer HScrollEnabled="False"><Label Name="PowerDetails"/></ScrollContainer>
+            <ScrollContainer HScrollEnabled="False"><Label Name="DefenceDetails"/></ScrollContainer>
+            <ScrollContainer HScrollEnabled="False"><Label Name="NavigationDetails"/></ScrollContainer>
+            <ScrollContainer HScrollEnabled="False"><Label Name="FaultDetails"/></ScrollContainer>
+        </TabContainer>
+    </BoxContainer>
+</controls:FancyWindow>

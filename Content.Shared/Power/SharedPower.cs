@@ -30,5 +30,8 @@ namespace Content.Shared.Power
         HighVoltage,
         MediumVoltage,
         Apc,
+        // #Forge-change START (KIAS): DATA получает отдельный enum; значения существующих силовых типов сохраняются.
+        Data,
+        // #Forge-change END (KIAS)
     }
 }

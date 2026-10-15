@@ -1,0 +1,821 @@
+[
+  {
+    "prototype": "KiasAdvancedRoomScanner",
+    "spriteScale": "0.65, 0.65",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasAdvancedRoomScannerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasAtmosServer",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasAtmosServerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasBiometricModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasCollisionMonitor",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasCollisionMonitorBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasConnectorModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasControllerProgrammer",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasControllerProgrammerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasControllerRack",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasControllerRackBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasCore",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasCoreBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasCrewServer",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasCrewServerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasCrewTransponder",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDataCable",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDataCableStack",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDataCableStack1",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDefenceServer",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDefenceServerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDeviceAdapter",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDeviceAdapterBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDisplay",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDisplayBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDockingSensor",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasDockingSensorBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasEmergencyButton",
+    "spriteScale": "0.55, 0.55",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasEmergencyReceiver",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasEmergencyReceiverBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasFlipFlop",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasFlipFlopBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasHorizon",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasHorizonBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasHullSensor",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasHullSensorBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasIdModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasIdentityModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasIffReceiver",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasIffReceiverBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasIntegrationKit",
+    "spriteScale": "0.75, 0.75",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasIntegrityMonitor",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasIntegrityMonitorBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasJammer",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasJammerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasKeySwitch",
+    "spriteScale": "0.5, 0.5",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasKeySwitchBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasLightController",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasLightControllerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasManagementConsole",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasManagementConsoleBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasMasterKey",
+    "spriteScale": "0.5, 0.5",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasMaydayAntenna",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasMaydayAntennaBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasMotionModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasNavigationLight",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasNavigationServer",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasNavigationServerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasOpticalModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasPdcRadar",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasPdcRadarBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasPowerServer",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasPowerServerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasProgrammableController",
+    "spriteScale": "0.75, 0.75",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasProximitySensor",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasProximitySensorBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasRadiationModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasRecorder",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasRecorderBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasRelay",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasRelayBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasResourceMonitor",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasResourceMonitorBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasRoomScanner",
+    "spriteScale": "0.65, 0.65",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasRoomScannerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasRotarySwitch",
+    "spriteScale": "0.5, 0.5",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasRotarySwitchBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasServiceTool",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasSpeaker",
+    "spriteScale": "0.65, 0.65",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasSpeakerBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasSpectralModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasSuppression",
+    "spriteScale": "0.75, 0.75",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": true,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasSuppressionBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasSuppressionCartridge",
+    "spriteScale": "0.75, 0.75",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasThreatModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasTransponderModule",
+    "spriteScale": "0.7, 0.7",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasWeaponFlashDetector",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": true,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasWeaponFlashDetectorBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasWirelessTransceiver",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "true",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  },
+  {
+    "prototype": "KiasWirelessTransceiverBoard",
+    "spriteScale": "1, 1",
+    "spriteNoRot": "false",
+    "transformNoRot": "false",
+    "wallMounted": false,
+    "rotatable": false,
+    "rotateWhileAnchored": "false"
+  }
+]

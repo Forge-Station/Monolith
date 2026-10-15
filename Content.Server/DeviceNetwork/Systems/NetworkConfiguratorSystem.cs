@@ -255,13 +255,27 @@ public sealed partial class NetworkConfiguratorSystem : SharedNetworkConfigurato
 
         if (TryComp(configurator.ActiveDeviceLink, out DeviceLinkSourceComponent? activeSource) && TryComp(targetUid, out DeviceLinkSinkComponent? targetSink))
         {
-            _deviceLinkSystem.LinkDefaults(user, configurator.ActiveDeviceLink.Value, targetUid.Value, activeSource, targetSink);
+            // #Forge-change START (KIAS): Выбор defaults адаптера изолирован от общего DeviceLink.
+            LinkDefaults(user, configurator.ActiveDeviceLink.Value, targetUid.Value, activeSource, targetSink);
+            // #Forge-change END (KIAS)
         }
         else if (TryComp(configurator.ActiveDeviceLink, out DeviceLinkSinkComponent? activeSink) && TryComp(targetUid, out DeviceLinkSourceComponent? targetSource))
         {
-            _deviceLinkSystem.LinkDefaults(user, targetUid.Value, configurator.ActiveDeviceLink.Value, targetSource, activeSink);
+            // #Forge-change START (KIAS): Выбор defaults адаптера изолирован от общего DeviceLink.
+            LinkDefaults(user, targetUid.Value, configurator.ActiveDeviceLink.Value, targetSource, activeSink);
+            // #Forge-change END (KIAS)
         }
     }
+
+    // #Forge-change START (KIAS): Порты адаптера без defaultLinks не отменяют штатные On/Off связи.
+    private void LinkDefaults(EntityUid user, EntityUid source, EntityUid sink, DeviceLinkSourceComponent sourceComp, DeviceLinkSinkComponent sinkComp)
+    {
+        if (HasComp<Content.Shared._Forge.KIAS.KiasDeviceAdapterComponent>(source))
+            EntityManager.System<Content.Server._Forge.KIAS.KiasDeviceSystem>().LinkDefaults(user, source, sink);
+        else
+            _deviceLinkSystem.LinkDefaults(user, source, sink, sourceComp, sinkComp);
+    }
+    // #Forge-change END (KIAS)
 
     private bool AccessCheck(EntityUid target, EntityUid? user, NetworkConfiguratorComponent component)
     {
@@ -393,10 +407,15 @@ public sealed partial class NetworkConfiguratorSystem : SharedNetworkConfigurato
     {
         var hasLinking = HasComp<DeviceLinkSinkComponent>(target) || HasComp<DeviceLinkSourceComponent>(target);
 
-        if (!configurator.LinkModeActive &&
-            hasLinking &&
-            HasComp<BoardingTeleportPlatformComponent>(target) &&
-            HasComp<DeviceNetworkComponent>(target))
+        // #Forge-change START (KIAS): Только KIAS сохраняет выбранный Link/List режим при совмещённых штатных компонентах.
+        if (hasLinking && HasComp<DeviceNetworkComponent>(target)
+            && (HasComp<Content.Shared._Forge.KIAS.KiasDeviceComponent>(target)
+                || HasComp<Content.Shared._Forge.KIAS.KiasIntegratedComponent>(target)))
+            return;
+
+        if (!configurator.LinkModeActive && hasLinking && HasComp<BoardingTeleportPlatformComponent>(target)
+            && HasComp<DeviceNetworkComponent>(target))
+        // #Forge-change END (KIAS)
         {
             SetMode(configuratorUid, configurator, userUid, false);
             return;
@@ -602,7 +621,11 @@ public sealed partial class NetworkConfiguratorSystem : SharedNetworkConfigurato
 
         var sinks = _deviceLinkSystem.GetSinkPorts(sinkUid, sinkComponent);
         var links = _deviceLinkSystem.GetLinks(sourceUid, sinkUid, sourceComponent);
-        var defaults = _deviceLinkSystem.GetDefaults(sources);
+        // #Forge-change START (KIAS): Палитра показывает те же defaultLinks, которые связывает адаптер.
+        var defaults = HasComp<Content.Shared._Forge.KIAS.KiasDeviceAdapterComponent>(sourceUid)
+            ? EntityManager.System<Content.Server._Forge.KIAS.KiasDeviceSystem>().DefaultLinks(sourceUid)
+            : _deviceLinkSystem.GetDefaults(sources);
+        // #Forge-change END (KIAS)
 
         var sourceAddress = Resolve(sourceUid, ref sourceNetworkComponent, false) ? sourceNetworkComponent.Address : "";
         var sinkAddress = Resolve(sinkUid, ref sinkNetworkComponent, false) ? sinkNetworkComponent.Address : "";

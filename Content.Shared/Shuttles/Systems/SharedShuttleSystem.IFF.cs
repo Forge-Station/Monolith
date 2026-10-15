@@ -75,6 +75,11 @@ public abstract partial class SharedShuttleSystem
                 : entName;
         // Forge-Change-end
 
+        // #Forge-change START (KIAS): Штатная IFF-метка учитывает Mayday и синхронизируется через Dirty.
+        if (HasComp<Content.Shared._Forge.KIAS.KiasMaydayComponent>(gridUid))
+            labelText = "[MAYDAY] " + labelText;
+
+        // #Forge-change END (KIAS)
         // Add company info if available
         if (companyName != null && companyColor != null)
         {
@@ -89,6 +94,23 @@ public abstract partial class SharedShuttleSystem
     /// Sets the color for this grid to appear as on radar.
     /// </summary>
     [PublicAPI]
+    // #Forge-change START (KIAS): Штатная IFF-метка учитывает Mayday и синхронизируется через Dirty.
+    public void SetKiasMayday(EntityUid gridUid, bool enabled)
+    {
+        if (!enabled && !TerminatingOrDeleted(gridUid))
+            RemComp<Content.Shared._Forge.KIAS.KiasMaydayComponent>(gridUid);
+        if (TerminatingOrDeleted(gridUid) || !TryComp<IFFComponent>(gridUid, out var component))
+            return;
+        if (enabled && component.ReadOnly)
+            return;
+        if (enabled)
+            EnsureComp<Content.Shared._Forge.KIAS.KiasMaydayComponent>(gridUid);
+        else
+            RemComp<Content.Shared._Forge.KIAS.KiasMaydayComponent>(gridUid);
+        Dirty(gridUid, component);
+    }
+
+    // #Forge-change END (KIAS)
     public void SetIFFColor(EntityUid gridUid, Color color, IFFComponent? component = null)
     {
         component ??= EnsureComp<IFFComponent>(gridUid);

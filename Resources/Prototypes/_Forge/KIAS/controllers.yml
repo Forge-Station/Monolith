@@ -1,0 +1,157 @@
+- type: entity
+  id: KiasProgrammableController
+  parent: BaseItem
+  name: KIAS programmable controller
+  description: A portable automation program. Runs only in a connected controller rack.
+  components:
+  - type: Sprite
+    scale: 0.75, 0.75
+    sprite: _Forge/KIAS/Pack/controller-card.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+  - type: Item
+    size: Tiny
+  - type: KiasControllerCard
+
+- type: latheRecipe
+  id: KiasProgrammableController
+  result: KiasProgrammableController
+  completetime: 2
+  materials: { Steel: 100, Glass: 100, Gold: 50 }
+
+- type: entity
+  id: KiasControllerRack
+  parent: BaseKiasServer
+  name: KIAS controller rack
+  description: Executes up to eight physical programmable controllers.
+  components:
+  - type: Machine
+    board: KiasControllerRackBoard
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/rack.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+  - type: KiasDevice
+    role: Controller
+  - type: KiasControllerRack
+  - type: ActivatableUI
+    key: enum.KiasControllerUiKey.Rack
+  - type: UserInterface
+    interfaces:
+      enum.KiasControllerUiKey.Rack:
+        type: KiasControllerBoundUserInterface
+  - type: DeviceLinkSource
+    ports: []
+  - type: ItemSlots
+    slots:
+      kias-controller-1: { name: kias-controller-slot-1, priority: 1, whitelist: { components: [KiasControllerCard] } }
+      kias-controller-2: { name: kias-controller-slot-2, priority: 2, whitelist: { components: [KiasControllerCard] } }
+      kias-controller-3: { name: kias-controller-slot-3, priority: 3, whitelist: { components: [KiasControllerCard] } }
+      kias-controller-4: { name: kias-controller-slot-4, priority: 4, whitelist: { components: [KiasControllerCard] } }
+      kias-controller-5: { name: kias-controller-slot-5, priority: 5, whitelist: { components: [KiasControllerCard] } }
+      kias-controller-6: { name: kias-controller-slot-6, priority: 6, whitelist: { components: [KiasControllerCard] } }
+      kias-controller-7: { name: kias-controller-slot-7, priority: 7, whitelist: { components: [KiasControllerCard] } }
+      kias-controller-8: { name: kias-controller-slot-8, priority: 8, whitelist: { components: [KiasControllerCard] } }
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      kias-controller-1: !type:ContainerSlot
+      kias-controller-2: !type:ContainerSlot
+      kias-controller-3: !type:ContainerSlot
+      kias-controller-4: !type:ContainerSlot
+      kias-controller-5: !type:ContainerSlot
+      kias-controller-6: !type:ContainerSlot
+      kias-controller-7: !type:ContainerSlot
+      kias-controller-8: !type:ContainerSlot
+
+- type: entity
+  id: KiasControllerProgrammer
+  parent: BaseKiasServer
+  name: KIAS controller programming console
+  description: Edits and writes programs to a physical controller card.
+  components:
+  - type: Machine
+    board: KiasControllerProgrammerBoard
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/programmer.rsi
+    offset: 0.5, 0
+    layers:
+    - state: empty
+      map: ["0"]
+  - type: KiasDevice
+    role: Display
+  - type: KiasControllerProgrammer
+  - type: ActivatableUI
+    key: enum.KiasControllerUiKey.Programmer
+  - type: UserInterface
+    interfaces:
+      enum.KiasControllerUiKey.Programmer:
+        type: KiasControllerBoundUserInterface
+  - type: ItemSlots
+    slots:
+      kias-controller:
+        name: kias-controller-slot
+        whitelist: { components: [KiasControllerCard] }
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      kias-controller: !type:ContainerSlot
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,1.45,0.45"
+        density: 190
+        mask: [MachineMask]
+        layer: [MachineLayer]
+  - type: GenericVisualizer
+    visuals:
+      enum.KiasVisuals.CardInserted:
+        0:
+          False: { state: empty }
+          True: { state: card }
+- type: entity
+  id: KiasControllerRackBoard
+  parent: BaseMachineCircuitboard
+  name: KIAS controller rack board
+  components:
+  - type: MachineBoard
+    prototype: KiasControllerRack
+    requirements: { Capacitor: 2, MatterBin: 1 }
+    stackRequirements: { Steel: 5 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: entity
+  id: KiasControllerProgrammerBoard
+  parent: BaseMachineCircuitboard
+  name: KIAS controller programmer board
+  components:
+  - type: MachineBoard
+    prototype: KiasControllerProgrammer
+    requirements: { Capacitor: 1, MatterBin: 1 }
+    stackRequirements: { Steel: 5, Glass: 2 }
+  - type: Sprite
+    sprite: _Forge/KIAS/Pack/board.rsi
+    color: White
+    layers:
+    - state: base
+      map: ["0"]
+- type: latheRecipe
+  id: KiasControllerRackBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasControllerRackBoard
+
+- type: latheRecipe
+  id: KiasControllerProgrammerBoard
+  parent: BaseGoldCircuitboardRecipe
+  result: KiasControllerProgrammerBoard

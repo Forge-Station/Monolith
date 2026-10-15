@@ -1,0 +1,11 @@
+kias-room-coverage = Coverage: room. Geometry: { $status }. Area: { $tiles } tiles; boundary: { $doors } doors; revision: { $revision }.
+kias-room-status-ok = enclosed room
+kias-room-status-nointeriorseed = no interior tile in front of scanner
+kias-room-status-opentospace = open area, reachable grid tiles within radius 7
+kias-room-status-unsupportedgeometry = unsupported geometry
+kias-room-status-roomtoolarge = area limit exceeded
+kias-room-status-rebuildpending = rebuilding
+kias-room-status-ambiguousboundary = ambiguous boundary
+kias-room-status-exteriorsector = exterior sector, hull occlusion applies
+kias-exterior-coverage = Coverage: exterior sector. Geometry: { $status }. Area: { $tiles } tiles; boundary: { $doors } doors; revision: { $revision }.
+kias-exterior-range = Exterior sector reach: { $range } m.

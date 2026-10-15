@@ -515,8 +515,14 @@ public sealed partial class FireControlSystem : EntitySystem
     /// <summary>
     /// Attempts to fire a weapon, handling aiming and firing logic.
     /// </summary>
-    public bool AttemptFire(EntityUid weapon, EntityUid user, EntityCoordinates coords, FireControllableComponent? comp = null, bool noServer = false)
+    // #Forge-change START (KIAS): Проверка автоматики выполняется до нативного резервирования цели и выстрела.
+    public bool AttemptFire(EntityUid weapon, EntityUid user, EntityCoordinates coords, FireControllableComponent? comp = null, bool noServer = false, bool kiasAutomatic = false)
+    // #Forge-change END (KIAS)
     {
+        // #Forge-change START (KIAS): Проверка автоматики выполняется до нативного резервирования цели и выстрела.
+        if (!EntityManager.System<Content.Server._Forge.KIAS.KiasDefenceSystem>().AuthorizeFire(weapon, kiasAutomatic, user))
+            return false;
+        // #Forge-change END (KIAS)
         if (!Resolve(weapon, ref comp))
             return false;
 

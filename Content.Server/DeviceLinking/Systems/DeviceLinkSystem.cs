@@ -5,6 +5,10 @@ using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.DeviceNetwork.Components;
+// #Forge-change START (KIAS): Источник и приёмник передают адаптеру фактический порт; доставка остаётся штатной.
+using Content.Shared._Forge.KIAS;
+using Content.Server._Forge.KIAS;
+// #Forge-change END (KIAS)
 
 namespace Content.Server.DeviceLinking.Systems;
 
@@ -21,9 +25,26 @@ public sealed partial class DeviceLinkSystem : SharedDeviceLinkSystem
     }
 
     #region Sending & Receiving
+    // #Forge-change START (KIAS): Источник и приёмник передают адаптеру фактический порт; доставка остаётся штатной.
+    public bool InvokeSink(EntityUid source, EntityUid target, string port, NetworkPayload? data = null)
+    {
+        if (!TryComp<DeviceLinkSourceComponent>(source, out var sourceComp)
+            || !TryComp<DeviceLinkSinkComponent>(target, out var sink) || !sink.Ports.Contains(port)) return false;
+        InvokeDirect((source, sourceComp), (target, sink), "Controller", port, data);
+        return true;
+    }
+
+    // #Forge-change END (KIAS)
     public override void InvokePort(EntityUid uid, string port, NetworkPayload? data = null, DeviceLinkSourceComponent? sourceComponent = null)
     {
-        if (!Resolve(uid, ref sourceComponent) || !sourceComponent.Outputs.TryGetValue(port, out var sinks))
+        // #Forge-change START (KIAS): Источник и приёмник передают адаптеру фактический порт; доставка остаётся штатной.
+        if (!Resolve(uid, ref sourceComponent) || !sourceComponent.Ports.Contains(port))
+            return;
+
+        var invoked = new DeviceLinkPortInvokedEvent(port, data);
+        RaiseLocalEvent(uid, ref invoked);
+        if (!sourceComponent.Outputs.TryGetValue(port, out var sinks))
+        // #Forge-change END (KIAS)
             return;
 
         foreach (var sinkUid in sinks)
@@ -50,6 +71,14 @@ public sealed partial class DeviceLinkSystem : SharedDeviceLinkSystem
         if (!Resolve(sink, ref sink.Comp))
             return;
 
+        // #Forge-change START (KIAS): Источник и приёмник передают адаптеру фактический порт; доставка остаётся штатной.
+        if (HasComp<KiasDeviceComponent>(source)
+            && Transform(source).GridUid is { } grid
+            && TryComp<KiasGridComponent>(grid, out var runtime) && runtime.Testing
+            && !HasComp<KiasSpeakerComponent>(sink))
+            return;
+
+        // #Forge-change END (KIAS)
         var invokeCounter = GetEffectiveInvokeCounter(sink.Comp);
         if (invokeCounter > sink.Comp.InvokeLimit)
         {
@@ -65,7 +94,9 @@ public sealed partial class DeviceLinkSystem : SharedDeviceLinkSystem
         //Just skip using device networking if the source or the sink doesn't support it
         if (!HasComp<DeviceNetworkComponent>(source) || !TryComp<DeviceNetworkComponent>(sink, out var sinkNetwork))
         {
-            var eventArgs = new SignalReceivedEvent(sinkPort, source);
+            // #Forge-change START (KIAS): Источник и приёмник передают адаптеру фактический порт; доставка остаётся штатной.
+            var eventArgs = new SignalReceivedEvent(sinkPort, source, data, sourcePort);
+            // #Forge-change END (KIAS)
             RaiseLocalEvent(sink, ref eventArgs);
             return;
         }

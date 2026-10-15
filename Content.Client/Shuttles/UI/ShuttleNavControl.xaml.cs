@@ -606,6 +606,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         // Draw shields
         DrawShields(handle, xform, worldToShuttle);
         DrawAnnihilatorZones(handle, worldToView, xform.MapID); // Forge-Change
+        // #Forge-change START (KIAS): Наследник рисует покрытие через штатную матрицу радара без копии его реализации.
+        DrawSensorCoverage(handle, worldToView, xform.MapID);
+        // #Forge-change END (KIAS)
 
         // Frontier Corvax: north line drawing
         DrawNorthLine(handle, worldRot);
@@ -1125,6 +1128,10 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         handle.DrawCircle(p, 3f * UIScale, color, true);
     }
 
+    // #Forge-change START (KIAS): Наследник рисует покрытие через штатную матрицу радара без копии его реализации.
+    protected virtual void DrawSensorCoverage(DrawingHandleScreen handle, Matrix3x2 worldToView, MapId mapId) { }
+
+    // #Forge-change END (KIAS)
     private void DrawAnnihilatorZones(DrawingHandleScreen handle, Matrix3x2 worldToView, MapId currentMapId)
     {
         var zoneQuery = EntManager.EntityQueryEnumerator<AnnihilatorZoneVisualsComponent, TransformComponent>();

@@ -47,8 +47,8 @@
   - type: EncryptionHolderRequiresLock
   - type: SiliconEmitSoundOnDrained
     sound: "/Audio/_Goobstation/Voice/IPC/energy_low.ogg" # Goobstation - ipc audio
-    minInterval: 8
-    maxInterval: 12
+    minInterval: 30 #Forge-Change 8=>30
+    maxInterval: 60 #Forge-Change 12=>60
     popUp: "silicon-power-low"
   - type: Lock
     locked: true
@@ -72,7 +72,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      100: Dead # mono
+      150: Dead # mono #Forge-Change 100 => 150
     stateAlertDict:
       Alive: BorgHealth
       Critical: BorgCrit
@@ -89,9 +89,10 @@
       - !type:GibBehavior { }
   - type: SlowOnDamage
     speedModifierThresholds:
-      60: 0.7
-      90: 0.5
-      120: 0.3
+      60: 0.9 #Forge-Change 0.7=>0.9
+      90: 0.8 #Forge-Change 0.5=>0.8
+      120: 0.6 #Forge-Change 0.3=>0.6
+      150: 0.4 #Forge-Change
   - type: SiliconDownOnDead
   - type: Inventory
     templateId: ipc
@@ -131,6 +132,13 @@
   - type: WeldingHealable
   - type: TTS # Forge-Change
   - type: RetroMonitorView # Mono
+  #Forge-Change-start
+  - type: CollectiveMind
+    channels:
+    - Binary
+    defaultChannel: Binary
+  #Forge-Change-end
+  
 
 - type: entity
   save: false

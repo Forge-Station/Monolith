@@ -435,6 +435,10 @@ public sealed class BoardingTeleportWindow : FancyWindow
                 ("scatter", $"{state.LockScatterPenalty:0.00}"),
                 ("risk", $"{state.LockRiskPenalty:0}")));
 
+        if (state.ShieldPierceRiskPercent > 0.05f)
+            parts.Add(Loc.GetString("boarding-teleport-window-shield-pierce",
+                ("risk", $"{state.ShieldPierceRiskPercent:0}")));
+
         return string.Join(" | ", parts);
     }
 

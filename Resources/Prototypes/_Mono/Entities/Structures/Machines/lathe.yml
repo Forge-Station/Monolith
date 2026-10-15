@@ -76,6 +76,13 @@
     - RenegateEquipmentDynamic
     - RenegateAmmoDynamic
     - RenegateVoucherDynamic
+    - ForgeTurretEmpire # Forge-Change
+    - ForgeTurretTSF # Forge-Change
+    - ForgeTurretPDV # Forge-Change
+    - ForgeTurretCC # Forge-Change
+    - ForgeTurretUSSP # Forge-Change
+    - ForgeTurretVG # Forge-Change
+    - ForgeTurretKits # Forge-Change
     #Forge-Change-End
   - type: MaterialStorage
     whitelist:
@@ -142,6 +149,8 @@
     - ResearchedExplosives
     - SecurityEquipment
     - SmartGun
+    - ForgeTurretUSSP # Forge-Change
+    - ForgeTurretKits # Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:
@@ -204,6 +213,8 @@
     - ResearchedExplosives
     - SecurityEquipment
     - SmartGun
+    - ForgeTurretVG # Forge-Change
+    - ForgeTurretKits # Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:

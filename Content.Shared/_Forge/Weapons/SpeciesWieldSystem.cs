@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -85,8 +85,11 @@ public sealed class SpeciesWieldSystem : EntitySystem
             handsComponent.Hands.Values.Count(hand => hand.HeldEntity == null) >= 2)
             return;
 
-        _popup.PopupClient("Этот предмет требует две руки! Освободите обе руки.", args.User, args.User);
         args.Cancel();
+
+        // Verb checks raise this event with ShowPopup false. The message is only for a real pickup.
+        if (args.ShowPopup)
+            _popup.PopupClient("Этот предмет требует две руки! Освободите обе руки.", args.User, args.User);
     }
 
     private void OnUnequippedHand(EntityUid uid, SpeciesWieldComponent speciesOneHandedComponent, GotUnequippedHandEvent args)

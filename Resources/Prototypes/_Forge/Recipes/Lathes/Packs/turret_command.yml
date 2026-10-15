@@ -1,0 +1,85 @@
+# One shared research unlocks every recipe. Each fabricator only lists the turrets that crew should print.
+
+- type: latheRecipePack
+  id: ForgeTurretKits
+  recipes:
+  - MagazineTurretBallistic
+  - MagazineTurretShotgun
+  - MagazineTurretSniper
+  - MagazineTurretMachinegun
+  - MagazineTurretBallisticEmpty
+  - MagazineTurretShotgunEmpty
+  - MagazineTurretSniperEmpty
+  - MagazineTurretMachinegunEmpty
+
+- type: latheRecipePack
+  id: ForgeTurretAdventurer
+  recipes:
+  - TurretCommandShipCircuitboard
+  - WeaponTurretAdventurerPacked
+  - WeaponTurretAdventurerShotgunPacked
+  - WeaponTurretAdventurerSniperPacked
+  - WeaponTurretAdventurerMachinegunPacked
+
+# Mercenaries share the ship console with adventurers, so they keep a single ballistic turret.
+- type: latheRecipePack
+  id: ForgeTurretMercenary
+  recipes:
+  - TurretCommandShipCircuitboard
+  - WeaponTurretMercenaryPacked
+
+- type: latheRecipePack
+  id: ForgeTurretEmpire
+  recipes:
+  - WeaponTurretEmpirePacked
+  - WeaponTurretEmpireShotgunPacked
+  - WeaponTurretEmpireSniperPacked
+  - WeaponTurretEmpireMachinegunPacked
+
+- type: latheRecipePack
+  id: ForgeTurretTSF
+  recipes:
+  - WeaponTurretTSFMCPacked
+  - WeaponTurretTSFShotgunPacked
+  - WeaponTurretTSFSniperPacked
+  - WeaponTurretTSFMachinegunPacked
+
+- type: latheRecipePack
+  id: ForgeTurretNT
+  recipes:
+  - WeaponTurretNanoTrasenPacked
+  - WeaponTurretNTShotgunPacked
+  - WeaponTurretNTSniperPacked
+  - WeaponTurretNTMachinegunPacked
+
+- type: latheRecipePack
+  id: ForgeTurretUSSP
+  recipes:
+  - WeaponTurretUSSPPacked
+  - WeaponTurretUSSPShotgunPacked
+  - WeaponTurretUSSPSniperPacked
+  - WeaponTurretUSSPMachinegunPacked
+
+- type: latheRecipePack
+  id: ForgeTurretPDV
+  recipes:
+  - WeaponTurretPDVPacked
+  - WeaponTurretPDVShotgunPacked
+  - WeaponTurretPDVSniperPacked
+  - WeaponTurretPDVMachinegunPacked
+
+- type: latheRecipePack
+  id: ForgeTurretVG
+  recipes:
+  - WeaponTurretViperPacked
+  - WeaponTurretVGShotgunPacked
+  - WeaponTurretVGSniperPacked
+  - WeaponTurretVGMachinegunPacked
+
+- type: latheRecipePack
+  id: ForgeTurretCC
+  recipes:
+  - WeaponTurretCCPacked
+  - WeaponTurretCCShotgunPacked
+  - WeaponTurretCCSniperPacked
+  - WeaponTurretCCMachinegunPacked

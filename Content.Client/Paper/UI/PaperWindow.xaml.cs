@@ -266,9 +266,13 @@ namespace Content.Client.Paper.UI
         ///     Initialize the paper contents, i.e. the text typed by the
         ///     user and any stamps that have peen put on the page.
         /// </summary>
-        public void Populate(PaperComponent.PaperBoundUserInterfaceState state)
+        /// <param name="obscureWhileEditing">
+        /// When true, Mode is Write but the local player cannot read the page —
+        /// show the same garbled text as reading and do not put it in the editor.
+        /// </param>
+        public void Populate(PaperComponent.PaperBoundUserInterfaceState state, bool obscureWhileEditing = false)
         {
-            bool isEditing = state.Mode == PaperComponent.PaperAction.Write;
+            bool isEditing = state.Mode == PaperComponent.PaperAction.Write && !obscureWhileEditing;
             bool wasEditing = InputContainer.Visible;
             InputContainer.Visible = isEditing;
             EditButtons.Visible = isEditing;

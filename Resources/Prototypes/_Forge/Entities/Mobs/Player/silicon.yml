@@ -252,6 +252,8 @@
     container: station_ai_mind_slot
   - type: ContainerFill
     containers:
+      key_slots: # Forge - change
+      - EncryptionKeyCustom
       station_ai_mind_slot:
       - StationAiBrainForerunner
   - type: Anchorable
@@ -263,6 +265,8 @@
   components:
   - type: ContainerFill
     containers:
+      key_slots: # Forge - change
+      - EncryptionKeyCustom
       station_ai_mind_slot:
       - StationAiBrainForerunnerWhitelist
 
@@ -393,11 +397,13 @@
     - RoleInformationBorgForerunner
   - type: IntrinsicRadioTransmitter
     channels:
+    - Handheld # Forge - change
     - Common
     - Remnants
     - Traffic
   - type: ActiveRadio
     channels:
+    - Handheld # Forge - change
     - Common
     - Remnants
     - Traffic

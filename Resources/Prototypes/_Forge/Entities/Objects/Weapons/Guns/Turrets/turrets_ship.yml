@@ -1,0 +1,433 @@
+- type: entity
+  parent: BaseWeaponCommandBallisticTurret
+  id: WeaponTurretMercenary
+  name: mercenary ballistic turret
+  suffix: Mercenary
+  description: A mercenary ship turret. It obeys this ship's turret command console.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - ShipTurret
+  - type: TurretCommandLink
+    faction: Ship
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretMercenaryPackingGraph
+    node: WeaponTurretMercenaryPacked
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretMercenaryPacked
+  name: packed mercenary turret
+  description: A disassembled mercenary ballistic turret. Deploy it on the deck.
+  suffix: Mercenary, Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretMercenary
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretMercenaryPackingGraph
+  start: WeaponTurretMercenaryPacked
+  graph:
+  - node: WeaponTurretMercenaryPacked
+    entity: WeaponTurretMercenary
+    edges:
+    - to: WeaponTurretMercenaryPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretMercenaryPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseWeaponCommandBallisticTurret
+  id: WeaponTurretAdventurer
+  name: adventurer ballistic turret
+  suffix: Adventurer
+  description: An adventurer ship turret. It obeys this ship's turret command console.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - ShipTurret
+  - type: TurretCommandLink
+    faction: Ship
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretAdventurerPackingGraph
+    node: WeaponTurretAdventurerPacked
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretAdventurerPacked
+  name: packed adventurer turret
+  description: A disassembled adventurer ballistic turret. Deploy it on the deck.
+  suffix: Adventurer, Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretAdventurer
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretAdventurerPackingGraph
+  start: WeaponTurretAdventurerPacked
+  graph:
+  - node: WeaponTurretAdventurerPacked
+    entity: WeaponTurretAdventurer
+    edges:
+    - to: WeaponTurretAdventurerPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretAdventurerPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretMercenaryShotgun
+  name: mercenary shotgun turret
+  suffix: Mercenary
+  description: A mercenary ship turret that fires buckshot. It obeys this ship's turret command console.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - ShipTurret
+  - type: TurretCommandLink
+    faction: Ship
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretMercenaryShotgunPackingGraph
+    node: packed
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretMercenaryShotgunPacked
+  name: packed mercenary shotgun turret
+  suffix: Mercenary, Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretMercenaryShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretMercenaryShotgunPackingGraph
+  start: packed
+  graph:
+  - node: packed
+    entity: WeaponTurretMercenaryShotgun
+    edges:
+    - to: packed
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretMercenaryShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretMercenarySniper
+  name: mercenary sniper turret
+  suffix: Mercenary
+  description: A mercenary ship turret that fires a heavy accurate round. It obeys this ship's turret command console.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - ShipTurret
+  - type: TurretCommandLink
+    faction: Ship
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretMercenarySniperPackingGraph
+    node: packed
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretMercenarySniperPacked
+  name: packed mercenary sniper turret
+  suffix: Mercenary, Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretMercenarySniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretMercenarySniperPackingGraph
+  start: packed
+  graph:
+  - node: packed
+    entity: WeaponTurretMercenarySniper
+    edges:
+    - to: packed
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretMercenarySniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretMercenaryMachinegun
+  name: mercenary machine gun turret
+  suffix: Mercenary
+  description: A mercenary ship turret with a wide cone of fire. It obeys this ship's turret command console.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - ShipTurret
+  - type: TurretCommandLink
+    faction: Ship
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretMercenaryMachinegunPackingGraph
+    node: packed
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretMercenaryMachinegunPacked
+  name: packed mercenary machine gun turret
+  suffix: Mercenary, Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretMercenaryMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretMercenaryMachinegunPackingGraph
+  start: packed
+  graph:
+  - node: packed
+    entity: WeaponTurretMercenaryMachinegun
+    edges:
+    - to: packed
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretMercenaryMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretAdventurerShotgun
+  name: adventurer shotgun turret
+  suffix: Adventurer
+  description: An adventurer ship turret that fires buckshot. It obeys this ship's turret command console.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - ShipTurret
+  - type: TurretCommandLink
+    faction: Ship
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretAdventurerShotgunPackingGraph
+    node: packed
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretAdventurerShotgunPacked
+  name: packed adventurer shotgun turret
+  suffix: Adventurer, Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretAdventurerShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretAdventurerShotgunPackingGraph
+  start: packed
+  graph:
+  - node: packed
+    entity: WeaponTurretAdventurerShotgun
+    edges:
+    - to: packed
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretAdventurerShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretAdventurerSniper
+  name: adventurer sniper turret
+  suffix: Adventurer
+  description: An adventurer ship turret that fires a heavy accurate round. It obeys this ship's turret command console.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - ShipTurret
+  - type: TurretCommandLink
+    faction: Ship
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretAdventurerSniperPackingGraph
+    node: packed
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretAdventurerSniperPacked
+  name: packed adventurer sniper turret
+  suffix: Adventurer, Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretAdventurerSniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretAdventurerSniperPackingGraph
+  start: packed
+  graph:
+  - node: packed
+    entity: WeaponTurretAdventurerSniper
+    edges:
+    - to: packed
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretAdventurerSniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretAdventurerMachinegun
+  name: adventurer machine gun turret
+  suffix: Adventurer
+  description: An adventurer ship turret with a wide cone of fire. It obeys this ship's turret command console.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - ShipTurret
+  - type: TurretCommandLink
+    faction: Ship
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretAdventurerMachinegunPackingGraph
+    node: packed
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretAdventurerMachinegunPacked
+  name: packed adventurer machine gun turret
+  suffix: Adventurer, Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretAdventurerMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretAdventurerMachinegunPackingGraph
+  start: packed
+  graph:
+  - node: packed
+    entity: WeaponTurretAdventurerMachinegun
+    edges:
+    - to: packed
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretAdventurerMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14

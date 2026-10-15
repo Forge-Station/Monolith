@@ -293,7 +293,6 @@
   color: "#B82121"
   image: /Textures/_Mono/Companies/thevipergroup.png # Example
   whitelisted: true
-  hidden: true # Forge-change
   # Forge-change: delete logins, add icon, note & special's
   note: viper-group-company-note
   icon: ViperGroup

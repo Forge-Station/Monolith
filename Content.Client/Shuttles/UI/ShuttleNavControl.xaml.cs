@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Client._Mono.Radar;
 using Content.Client.Station; // Frontier
 using Content.Shared._Crescent.ShipShields;
+using Content.Shared._Forge.CloakingShuttle; // Forge-Change - Cloaking
 using Content.Shared._Forge.LetoferolAnnihilator; // Forge-Change
 using Content.Shared._Forge.Shuttles.Components; // Forge-Change: nav markers
 using Content.Shared._Mono.Company;
@@ -633,7 +634,14 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
             var ourGridToWorld = _transform.GetWorldMatrix(ourGridId.Value);
             var ourGridToShuttle = Matrix3x2.Multiply(ourGridToWorld, worldToShuttle);
             var ourGridToView = ourGridToShuttle * shuttleToView;
-            var color = _shuttles.GetIFFColor(ourGridId.Value, self: true);
+
+            // Forge-Change-start - Cloaking
+            Color color;
+            if (ourGridId is { } gridId && EntManager.TryGetComponent<CloakingShuttleComponent>(gridId, out var cloak) && cloak.Active)
+                color = CloakingShuttleComponent.StealthColor;
+            else
+                color = _shuttles.GetIFFColor(ourGridId.Value, self: true);
+            // Forge-Change-end - Cloaking
 
             DrawGrid(handle, ourGridToView, (ourGridId.Value, ourGrid), color);
             DrawDocks(handle, ourGridId.Value, ourGridToView);
@@ -1427,6 +1435,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
             if (EntManager.HasComponent<FTLComponent>(gridUid))
                 continue;
 
+            if (EntManager.TryGetComponent<IFFComponent>(gridUid, out var iff) && (iff.Flags & IFFFlags.Hide) != 0 && consoleXform.GridUid != gridUid)
+                continue;
+
             var detectionLevel = _consoleEntity == null ? DetectionLevel.Detected : GetGridDetected(gridUid);
             if (detectionLevel == DetectionLevel.Undetected)
                 continue;
@@ -1470,6 +1481,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 continue;
 
             if (!EntManager.TryGetComponent<TransformComponent>(gUid, out var parentXform))
+                continue;
+
+            if (EntManager.TryGetComponent<IFFComponent>(gUid, out var iff) && (iff.Flags & IFFFlags.Hide) != 0 && consoleXform.GridUid != gUid)
                 continue;
 
             var outline = ShipShieldOutline.GetVertices(grid.Comp, shieldState.Padding);

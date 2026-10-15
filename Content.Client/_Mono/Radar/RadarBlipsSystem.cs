@@ -14,6 +14,7 @@ public sealed partial class RadarBlipsSystem : EntitySystem
     [Dependency] private SharedTransformSystem _xform = default!;
 
     private const double BlipStaleSeconds = 3.0;
+    private float _suppressPruneTimer;
     private TimeSpan _lastRequestTime = TimeSpan.Zero;
     private static readonly TimeSpan RequestThrottle = TimeSpan.FromMilliseconds(500);
 
@@ -106,6 +107,23 @@ public sealed partial class RadarBlipsSystem : EntitySystem
         });
     }
     // Forge-Change-End
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        // Hits suppress blips locally, and the set is only pruned when a radar report arrives.
+        // Players who never open a radar otherwise keep every projectile hit for the whole round.
+        if (_suppressedBlips.Count == 0)
+            return;
+
+        _suppressPruneTimer += frameTime;
+        if (_suppressPruneTimer < 2f)
+            return;
+
+        _suppressPruneTimer = 0f;
+        PruneSuppressedBlips(_blips);
+    }
 
     public void RequestBlips(EntityUid console)
     {

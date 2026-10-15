@@ -446,7 +446,11 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             ShuttleBioScanStatus.None,
 
-            true);
+            true,
+            default, // Forge-Change - Cloaking
+            default, // Forge-Change - Cloaking
+            ShuttleCloakingStatus.None, // Forge-Change - Cloaking
+            ShuttleConsoleMapScreenMode.BioScan); // Forge-Change - Cloaking
 
 
 
@@ -492,6 +496,15 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         displayRisk = BoardingTeleportBalance.ApplyLockRiskPenalty(displayRisk / 100f, lockRiskPenalty) * 100f;
         if (ent.Comp.TargetGrid is { } uiTargetRisk && _lock.TryGetScramblerEffect(uiTargetRisk, out var uiScramblerRisk))
             displayRisk = BoardingTeleportBalance.ApplyScramblerRiskBonus(displayRisk / 100f, uiScramblerRisk.RiskBonus) * 100f;
+
+        var shieldPierceRisk = 0f;
+        if (_engine.TryGetLinkedEngine(ent.Owner, ent.Comp, out _, out var pierceEngine) &&
+            ent.Comp.TargetGrid is { } pierceTarget &&
+            BoardingTeleportShieldHelper.TryGetShieldPiercePressure(EntityManager, pierceTarget, pierceEngine, out var pierceScatter, out shieldPierceRisk))
+        {
+            displayScatter = BoardingTeleportBalance.ApplyScramblerScatterBonus(displayScatter, pierceScatter);
+            displayRisk = BoardingTeleportBalance.ApplyScramblerRiskBonus(displayRisk / 100f, shieldPierceRisk) * 100f;
+        }
 
         var lockAge = _lock.GetEffectiveLockAge(ent.Comp);
         var platforms = BuildPlatformUiEntries(ent.Owner, ent.Comp);
@@ -540,7 +553,9 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             GetSelectedLandingNet(ent.Comp),
 
-            platforms);
+            platforms,
+
+            shieldPierceRisk * 100f);
 
 
 
@@ -678,6 +693,14 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         var scatterRadius = BoardingTeleportBalance.ComputeScatterRadius(mode, distanceScale, experimentalScatter);
         scatterRadius = BoardingTeleportBalance.ApplyLockScatterPenalty(scatterRadius, lockScatter);
         scatterRadius = BoardingTeleportBalance.ApplyScramblerScatterBonus(scatterRadius, scramScatter);
+
+        if (platform.LinkedConsole is { } pierceConsole &&
+            _engine.TryGetLinkedEngine(pierceConsole, console, out _, out var pierceEngine) &&
+            console.TargetGrid is { } pierceTarget &&
+            BoardingTeleportShieldHelper.TryGetShieldPiercePressure(EntityManager, pierceTarget, pierceEngine, out var pierceScatter, out _))
+        {
+            scatterRadius = BoardingTeleportBalance.ApplyScramblerScatterBonus(scatterRadius, pierceScatter);
+        }
 
         if (experimentalScatter && TryFindPhaseShiftLanding(center, out landing))
 
@@ -1030,6 +1053,14 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
             ApplyLockAndScramblerToBalance(console, console.TargetGrid, out _, out var lockRisk, out _, out var scramRisk, out _);
             chance = BoardingTeleportBalance.ApplyLockRiskPenalty(chance, lockRisk);
             chance = BoardingTeleportBalance.ApplyScramblerRiskBonus(chance, scramRisk);
+
+            if (consoleUid is { } shieldConsole &&
+                _engine.TryGetLinkedEngine(shieldConsole, console, out _, out var shieldEngine) &&
+                console.TargetGrid is { } shieldTarget &&
+                BoardingTeleportShieldHelper.TryGetShieldPiercePressure(EntityManager, shieldTarget, shieldEngine, out _, out var shieldRisk))
+            {
+                chance = BoardingTeleportBalance.ApplyScramblerRiskBonus(chance, shieldRisk);
+            }
         }
 
         return chance;
@@ -1235,13 +1266,11 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         }
 
-        if (!BoardingTeleportShieldHelper.CanEngineBypassTargetShield(EntityManager, targetGrid, engine, out _))
+        if (BoardingTeleportShieldHelper.HasActiveTeleportImmuneShield(EntityManager, targetGrid))
 
         {
 
-            status = BoardingTeleportShieldHelper.HasActiveTeleportImmuneShield(EntityManager, targetGrid)
-                ? BoardingTeleportStatus.TargetShielded
-                : BoardingTeleportStatus.TargetShieldTooStrong;
+            status = BoardingTeleportStatus.TargetShielded;
 
             return false;
 

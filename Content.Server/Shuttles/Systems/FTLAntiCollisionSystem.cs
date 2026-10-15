@@ -91,11 +91,14 @@ public sealed partial class FTLAntiCollisionSystem : EntitySystem
         var intersectingGrids = new List<Entity<MapGridComponent>>();
         _mapManager.FindGridsIntersecting(mapId, new Box2(
             shuttlePosition - new Vector2(range, range),
-            shuttlePosition + new Vector2(range, range)), ref intersectingGrids);
+            shuttlePosition + new Vector2(range, range)), ref intersectingGrids, includeMap: false);
         foreach (var otherGrid in intersectingGrids)
         {
             // Skip self
             if (otherGrid.Owner == shuttle)
+                continue;
+            // Skip map-as-grid entities (planets after IMapManager removal).
+            if (HasComp<MapComponent>(otherGrid.Owner))
                 continue;
 
             // Skip ships that are docked to this shuttle
@@ -210,11 +213,14 @@ public sealed partial class FTLAntiCollisionSystem : EntitySystem
         var nearbyGrids = new List<Entity<MapGridComponent>>();
         _mapManager.FindGridsIntersecting(mapId, new Box2(
             position - new Vector2(checkSize, checkSize),
-            position + new Vector2(checkSize, checkSize)), ref nearbyGrids);
+            position + new Vector2(checkSize, checkSize)), ref nearbyGrids, includeMap: false);
         foreach (var otherGrid in nearbyGrids)
         {
             // Skip self
             if (otherGrid.Owner == shuttle)
+                continue;
+
+            if (HasComp<MapComponent>(otherGrid.Owner))
                 continue;
 
             // Skip ships that are docked to this shuttle

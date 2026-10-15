@@ -167,6 +167,8 @@
     - UniversalMissileAmmo
     - UniversalOrdinance
     - ResearchedExplosives
+    - ForgeTurretTSF # Forge-Change
+    - ForgeTurretKits # Forge-Change
     # Mono end
   - type: EmagLatheRecipes
     emagStaticPacks:
@@ -227,6 +229,8 @@
     - UllmanForgeRecipes # Forge-change
     - MonoViperGroupDynamic #Forge-Change
     - ForgeMercenaryVouchers # Forge-Change
+    - ForgeTurretMercenary # Forge-Change
+    - ForgeTurretKits # Forge-Change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - NFMercenaryTechfabDeprecatedEmag
@@ -294,6 +298,8 @@
     - UniversalShellAmmo
     - UniversalOrdinance
     # Mono end
+    - ForgeTurretMercenary # Forge-Change
+    - ForgeTurretKits # Forge-Change
   - type: PirateBountyItem # Mono
     id: Techfab
 

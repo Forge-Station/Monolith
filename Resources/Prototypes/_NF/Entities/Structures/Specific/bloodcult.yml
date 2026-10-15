@@ -206,7 +206,7 @@
     radius: 10
     energy: 0.8
     softness: 1
-    offset: "0, -0.5"
+    offset: "0, 0.495"
     color: "#990000"
 
 # Props and decoration

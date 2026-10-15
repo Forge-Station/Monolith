@@ -62,6 +62,13 @@ namespace Content.Server.Engineering.EntitySystems
             if (component.Deleted || !IsTileClear())
                 return;
 
+            // Forge-Change-start
+            var attempt = new SpawnAfterInteractAttemptEvent(args.User, args.ClickLocation.SnapToGrid(grid));
+            RaiseLocalEvent(uid, attempt);
+            if (attempt.Cancelled)
+                return;
+            // Forge-Change-end
+
             if (EntityManager.TryGetComponent(uid, out StackComponent? stackComp)
                 && component.RemoveOnInteract && !_stackSystem.Use(uid, 1, stackComp))
             {

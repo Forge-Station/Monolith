@@ -1,6 +1,7 @@
 - type: latheRecipe
   id: ForgeShipVoucherCorvet
   result: ShipVoucherCorvet
+  materialDiscountScale: 0
   completetime: 10
   materials:
     Steel: 44000
@@ -15,6 +16,7 @@
 - type: latheRecipe
   id: ForgeShipVoucherSeeker
   result: ShipVoucherSeeker
+  materialDiscountScale: 0
   completetime: 10
   materials:
     Steel: 40000
@@ -29,6 +31,7 @@
 - type: latheRecipe
   id: ForgeShipVoucherHammerhead
   result: ShipVoucherHammerhead
+  materialDiscountScale: 0
   completetime: 10
   materials:
     Steel: 66000
@@ -43,6 +46,7 @@
 - type: latheRecipe
   id: ForgeShipVoucherDreadnought
   result: ShipVoucherDreadnought
+  materialDiscountScale: 0
   completetime: 10
   materials:
     Steel: 43000
@@ -60,6 +64,7 @@
 - type: latheRecipe
   id: ForgeShipVoucherAchilles
   result: ShipVoucherAchilles
+  materialDiscountScale: 0
   completetime: 10
   materials:
     Steel: 46000
@@ -77,6 +82,7 @@
 - type: latheRecipe
   id: ForgeShipVoucherBriar
   result: ShipVoucherBriar
+  materialDiscountScale: 0
   completetime: 10
   materials:
     Steel: 58000

@@ -64,22 +64,30 @@ public static class BoardingTeleportShieldHelper
         return TryGetActiveShieldEmitter(entMan, grid, out _, out var emitter) && emitter.BluespaceTeleportImmune;
     }
 
-    public static bool CanEngineBypassTargetShield(
+    /// <summary>
+    /// Active shields no longer deny a lock. They add scatter and destabilization.
+    /// A stronger drive pays only the base jolt; a weaker drive pays extra per tier it is behind.
+    /// Immune shields are a hard block and do not use this pressure.
+    /// </summary>
+    public static bool TryGetShieldPiercePressure(
         IEntityManager entMan,
         EntityUid targetGrid,
         BoardingTeleportEngineComponent engine,
-        out int shieldTier)
+        out float scatterBonus,
+        out float riskBonus)
     {
-        shieldTier = 0;
+        scatterBonus = 0f;
+        riskBonus = 0f;
 
-        if (!TryGetActiveShieldEmitter(entMan, targetGrid, out _, out var emitter))
-            return true;
-
-        if (emitter.BluespaceTeleportImmune)
+        if (!TryGetActiveShieldEmitter(entMan, targetGrid, out _, out var emitter) ||
+            emitter.BluespaceTeleportImmune)
+        {
             return false;
+        }
 
-        shieldTier = GetEffectiveShieldTier(emitter);
-        var engineTier = GetEffectiveEngineTier(engine);
-        return engineTier > shieldTier;
+        var gap = Math.Max(0, GetEffectiveShieldTier(emitter) - GetEffectiveEngineTier(engine));
+        scatterBonus = BoardingTeleportConstants.ShieldPierceBaseScatter + gap * BoardingTeleportConstants.ShieldPierceGapScatter;
+        riskBonus = BoardingTeleportConstants.ShieldPierceBaseRisk + gap * BoardingTeleportConstants.ShieldPierceGapRisk;
+        return true;
     }
 }

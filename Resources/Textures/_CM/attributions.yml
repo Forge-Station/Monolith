@@ -1,0 +1,17 @@
+# Colonial Marines sprites.
+# Taken from RMC-14, which ports them from CM-SS13.
+
+- files: ["Mobs/Xenonids"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Sprites by @aleksh and @.sigma_draconis, via RMC-14"
+  source: "https://github.com/RMC-14/RMC-14/tree/master/Resources/Textures/_RMC14/Mobs/Xenonids"
+
+- files: ["Structures/Xenos"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 via RMC-14"
+  source: "https://github.com/RMC-14/RMC-14/tree/master/Resources/Textures/_RMC14/Structures/Xenos"
+
+- files: ["Interface/Actions/xeno_actions.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13, new sprites by Aleksh, via RMC-14"
+  source: "https://github.com/RMC-14/RMC-14/tree/master/Resources/Textures/_RMC14/Actions/xeno_actions.rsi"

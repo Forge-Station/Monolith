@@ -102,6 +102,9 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
                 case DifficultyRating.Extreme:
                     difficultyColor = Color.FromHex("#D381C996");
                     break;
+                case DifficultyRating.ExtraHard: // Forge-Change
+                    difficultyColor = Color.FromHex("#B6FF2E");
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -170,10 +173,15 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
             });
 
             var biome = mission.Biome;
+            // Forge-Change-Start: missing biome prototype must not throw when the card is built.
+            if (!_prototype.TryIndex<SalvageBiomeModPrototype>(biome, out var biomeProto) ||
+                !Loc.TryGetString(biomeProto.Description, out var biomeName))
+                biomeName = biome;
+            // Forge-Change-End
 
             lBox.AddChild(new Label
             {
-                Text = Loc.GetString(_prototype.Index<SalvageBiomeModPrototype>(biome).ID),
+                Text = biomeName, // Forge-Change
                 FontColorOverride = StyleNano.NanoGold,
                 HorizontalAlignment = HAlignment.Left,
                 Margin = new Thickness(0f, 0f, 0f, 5f),
@@ -227,6 +235,8 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
             {
                 HorizontalExpand = true,
                 VerticalAlignment = VAlignment.Bottom,
+                MinHeight = 36, // Forge-Change
+                Margin = new Thickness(0f, 8f, 0f, 0f), // Forge-Change
                 Pressed = state.ActiveMission == missionParams.Index,
                 ToggleMode = true,
                 Disabled = state.Claimed || state.Cooldown,
@@ -234,9 +244,28 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
 
             claimButton.Label.Margin = new Thickness(0f, 5f);
 
-            claimButton.OnPressed += args =>
+            claimButton.OnPressed += _ =>
             {
-                ClaimMission?.Invoke(missionParams.Index);
+                // Forge-Change-Start: extra-hard hive needs an explicit confirm.
+                if (missionParams.Difficulty != DifficultyRating.ExtraHard)
+                {
+                    ClaimMission?.Invoke(missionParams.Index);
+                    return;
+                }
+
+                // Toggle already pressed the button. Leave it up until they confirm.
+                claimButton.Pressed = false;
+                claimButton.Disabled = true;
+
+                var dialog = new SalvageHiveConfirmWindow();
+                dialog.Confirmed += () => ClaimMission?.Invoke(missionParams.Index);
+                dialog.OnClose += () =>
+                {
+                    if (claimButton.Parent != null)
+                        claimButton.Disabled = false;
+                };
+                dialog.OpenCentered();
+                // Forge-Change-End
             };
 
             if (state.ActiveMission == missionParams.Index)
@@ -248,6 +277,17 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
             {
                 claimButton.Text = Loc.GetString("salvage-expedition-window-claim");
             }
+
+            // Forge-Change-Start: description scrolls inside the card so the claim button keeps a real height.
+            var detailsScroll = new ScrollContainer
+            {
+                HorizontalExpand = true,
+                VerticalExpand = true,
+                HScrollEnabled = false,
+                VScrollEnabled = true,
+            };
+            detailsScroll.AddChild(lBox);
+            // Forge-Change-End
 
             var box = new PanelContainer
             {
@@ -263,8 +303,7 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
                         Children =
                         {
                             missionStripe,
-                            lBox,
-                            new Control() {VerticalExpand = true},
+                            detailsScroll, // Forge-Change
                             claimButton,
                         },
                         Margin = new Thickness(5f, 5f)

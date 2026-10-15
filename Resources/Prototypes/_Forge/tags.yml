@@ -18,6 +18,18 @@
   id: ADTWeaponMeleePrasatChainswordInq
 
 - type: Tag
+  id: MagazineTurretBallistic
+
+- type: Tag
+  id: MagazineTurretShotgun
+
+- type: Tag
+  id: MagazineTurretSniper
+
+- type: Tag
+  id: MagazineTurretMachinegun
+
+- type: Tag
   id: MagazineAntiMateriel
 
 - type: Tag
@@ -277,3 +289,10 @@
 
 - type: Tag
   id: TTIEquip
+
+#nuclear machines
+- type: Tag
+  id: NuclearReactorSmallMachineCircuitboard
+
+- type: Tag
+  id: TurbineSmallMachineCircuitboard

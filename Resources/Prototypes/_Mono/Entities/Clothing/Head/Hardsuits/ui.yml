@@ -41,7 +41,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Ullman, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
   id: ClothingHelmetHardsuitUIEnforcerMKII
   name: U.I. ENFORCER MKII Combat helmet
   description: This top of the line helmet comes with flashproof lining, a mass scanner and an inbuilt medical diagnostic system.
@@ -54,16 +54,18 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
-  - type: RadarConsole
-    followEntity: true
-    noRotate: true
-  - type: ActivatableUI
-    key: enum.RadarConsoleUiKey.Key
-    singleUser: true
-  - type: UserInterface
-    interfaces:
-      enum.RadarConsoleUiKey.Key:
-        type: RadarConsoleBoundUserInterface
+  # Forge-change replace with BaseClothingHelmetMassScanner
+  #- type: RadarConsole
+  #  followEntity: true
+  #  noRotate: true
+  #- type: ActivatableUI
+  #  key: enum.RadarConsoleUiKey.Key
+  #  singleUser: true
+  #- type: UserInterface
+  #  interfaces:
+  #    enum.RadarConsoleUiKey.Key:
+  #      type: RadarConsoleBoundUserInterface
+  # Forge-change-end
   - type: FlashImmunity
   # - type: NightVision # Gen 2 quadtube # Forge-change
   #   relayOverlay: true # Forge-change
@@ -176,7 +178,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Ullman] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Ullman, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
   id: ClothingHelmetHardsuitUIDirector
   name: U.I. VK-1 experimental helmet
   description: A purpose built helmet designed by Felix Ullman, for Felix Ullman.
@@ -189,16 +191,18 @@
   - type: PressureProtection
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
-  - type: RadarConsole
-    followEntity: true
-    noRotate: true
-  - type: ActivatableUI
-    key: enum.RadarConsoleUiKey.Key
-    singleUser: true
-  - type: UserInterface
-    interfaces:
-      enum.RadarConsoleUiKey.Key:
-        type: RadarConsoleBoundUserInterface
+  # Forge-change replace with BaseClothingHelmetMassScanner
+  #- type: RadarConsole
+  #   followEntity: true
+  #   noRotate: true
+  #- type: ActivatableUI
+  #  key: enum.RadarConsoleUiKey.Key
+  #  singleUser: true
+  #- type: UserInterface
+  #  interfaces:
+  #    enum.RadarConsoleUiKey.Key:
+  #      type: RadarConsoleBoundUserInterface
+  # Forge-change-end
   - type: FlashImmunity
   # - type: NightVision # Gen 4 # Forge-change
   #   relayOverlay: true # Forge-change

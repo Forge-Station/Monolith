@@ -282,6 +282,10 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
             }
 
             expedition.DungeonLocation = dungeonOffset;
+
+            // Forge-Change: carve a resin-door tunnel from the dungeon out into the hive caves.
+            if (biome != null)
+                _biome.ConnectXenoHive(mapUid, grid, biome, dungeon);
         }
 
         // Frontier: get map bounding box
@@ -289,6 +293,15 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         foreach (var tile in dungeon.AllTiles)
         {
             dungeonBox = dungeonBox.ExtendToContain(tile);
+        }
+
+        // Forge-Change: dungeon floors, structures and room fills are not biome content.
+        // Without this, a chunk unload treats matching tiles as untouched and wipes them.
+        if (biome != null)
+        {
+            var reserved = new List<(Vector2i Index, Tile Tile)>();
+            var reserveBox = new Box2(dungeonBox.Left - 1, dungeonBox.Bottom - 1, dungeonBox.Right + 1, dungeonBox.Top + 1);
+            _biome.ReserveTiles(mapUid, reserveBox, reserved, biome, grid);
         }
 
         var stationData = _entManager.GetComponent<StationDataComponent>(Station);
@@ -498,6 +511,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         var groupSpawns = _salvage.GetSpawnCount(mission.Difficulty) * scale;
         var groupSum = faction.MobGroups.Sum(o => o.Prob);
         var validSpawns = new List<Vector2i>();
+        var roomCounts = new Dictionary<int, int>(); // Forge-Change
 
         for (var i = 0; i < groupSpawns; i++)
         {
@@ -514,14 +528,17 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                 var mobGroupIndex = random.Next(faction.MobGroups.Count);
                 var mobGroup = faction.MobGroups[mobGroupIndex];
 
-                var spawnRoomIndex = random.Next(dungeon.Rooms.Count);
-                var spawnRoom = dungeon.Rooms[spawnRoomIndex];
-                validSpawns.Clear();
-                validSpawns.AddRange(spawnRoom.Tiles);
-                random.Shuffle(validSpawns);
-
                 foreach (var entry in EntitySpawnCollection.GetSpawns(mobGroup.Entries, random))
                 {
+                    // Forge-Change: spread mobs so one room cannot absorb every group.
+                    if (!TryPickSpawnRoom(dungeon, faction.MaxMobsPerRoom, roomCounts, random, out var spawnRoomIndex))
+                        continue;
+
+                    var spawnRoom = dungeon.Rooms[spawnRoomIndex];
+                    validSpawns.Clear();
+                    validSpawns.AddRange(spawnRoom.Tiles);
+                    random.Shuffle(validSpawns);
+
                     while (validSpawns.Count > 0)
                     {
                         var spawnTile = validSpawns[^1];
@@ -539,6 +556,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                         _entManager.RemoveComponent<GhostTakeoverAvailableComponent>(uid);
                         _entManager.RemoveComponent<GhostRoleComponent>(uid);
                         _entManager.InitializeAndStartEntity(uid);
+                        roomCounts[spawnRoomIndex] = roomCounts.GetValueOrDefault(spawnRoomIndex) + 1;
 
                         break;
                     }
@@ -548,6 +566,41 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// Forge-Change: pick a room that still has space under <paramref name="maxPerRoom"/>.
+    /// A non-positive cap keeps the old fully random pick.
+    /// </summary>
+    private static bool TryPickSpawnRoom(
+        Dungeon dungeon,
+        int maxPerRoom,
+        Dictionary<int, int> roomCounts,
+        Random random,
+        out int roomIndex)
+    {
+        roomIndex = 0;
+        if (dungeon.Rooms.Count == 0)
+            return false;
+
+        if (maxPerRoom <= 0)
+        {
+            roomIndex = random.Next(dungeon.Rooms.Count);
+            return true;
+        }
+
+        var open = new List<int>();
+        for (var i = 0; i < dungeon.Rooms.Count; i++)
+        {
+            if (roomCounts.GetValueOrDefault(i) < maxPerRoom)
+                open.Add(i);
+        }
+
+        if (open.Count == 0)
+            return false;
+
+        roomIndex = open[random.Next(open.Count)];
+        return true;
     }
 
     #endregion

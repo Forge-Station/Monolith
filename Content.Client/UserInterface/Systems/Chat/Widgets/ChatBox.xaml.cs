@@ -1,3 +1,4 @@
+using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Client._Forge.UserInterface; // Forge-Change
 using Content.Shared.CCVar;
@@ -187,6 +188,8 @@ public partial class ChatBox : UIWidget
             ));
         } // WD EDIT END
         Contents.AddMessage(formatted, tagsAllowed: null); // Forge-Change
+        while (Contents.EntryCount > ChatUIController.MaxChatHistory)
+            Contents.RemoveEntry(0);
     }
 
     public void Focus(ChatSelectChannel? channel = null)

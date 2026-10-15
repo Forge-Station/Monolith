@@ -5,6 +5,8 @@ using Content.Shared.Atmos;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._Shitmed.Targeting; // Shitmed
 using Content.Shared.Alert;
+using Content.Shared._Forge.Genetics; // Forge-Change
+using Content.Shared._Forge.Genetics.Components; // Forge-Change
 using Content.Shared.Chemistry.Reagent; // Forge-Change
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -118,6 +120,8 @@ namespace Content.Client.HealthAnalyzer.UI
                 || !_entityManager.TryGetComponent<DamageableComponent>(isPart ? part : _target, out var damageable))
             {
                 NoPatientDataText.Visible = true;
+                GenesPanel.Visible = false;
+                GenesDivider.Visible = false;
                 return;
             }
 
@@ -228,6 +232,7 @@ namespace Content.Client.HealthAnalyzer.UI
 
             DrawDiagnosticGroups(damageSortedGroups, damagePerType);
             DrawChemicalReagents(msg.ChemicalReagents); // Forge-Change
+            DrawActiveGenes(); // Forge-Change
         }
         // Shitmed Change End
 
@@ -276,6 +281,53 @@ namespace Content.Client.HealthAnalyzer.UI
                         ("reagent", entry.Name),
                         ("amount", entry.Quantity)),
                     FontColorOverride = Color.FromHex("#ff9100"),
+                    Margin = new Thickness(0, 2),
+                });
+            }
+        }
+
+        private void DrawActiveGenes()
+        {
+            GenesContainer.RemoveAllChildren();
+
+            if (_target == null
+                || !_entityManager.TryGetComponent<GenomeComponent>(_target.Value, out var genome)
+                || genome.Genes.Count == 0)
+            {
+                GenesPanel.Visible = false;
+                GenesDivider.Visible = false;
+                return;
+            }
+
+            var names = new List<string>();
+            foreach (var (id, state) in genome.Genes)
+            {
+                if (!state.Active)
+                    continue;
+
+                if (!_prototypes.TryIndex<GenePrototype>(id, out var proto))
+                    continue;
+
+                names.Add(Loc.GetString(proto.Name));
+            }
+
+            if (names.Count == 0)
+            {
+                GenesPanel.Visible = false;
+                GenesDivider.Visible = false;
+                return;
+            }
+
+            names.Sort(StringComparer.CurrentCulture);
+            GenesPanel.Visible = true;
+            GenesDivider.Visible = true;
+
+            foreach (var name in names)
+            {
+                GenesContainer.AddChild(new Label
+                {
+                    Text = Loc.GetString("health-analyzer-window-gene-text", ("gene", name)),
+                    FontColorOverride = Color.FromHex("#7DDE4A"),
                     Margin = new Thickness(0, 2),
                 });
             }

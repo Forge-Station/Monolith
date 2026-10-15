@@ -42,7 +42,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Viper, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
   id: ClothingHeadHelmetHardsuitViperGroupMedic
   name: RIPPER mk.III viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in medical HUD complemented by thermal pulse systems.
@@ -80,7 +80,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision4Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ShowSecurityIcons, ClothingNightVision4Viper, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
   id: ClothingHeadHelmetHardsuitViperGroupJuggernaut
   name: IMP mk.IV viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in identity tracking HUD complemented by a night-vision system.
@@ -126,7 +126,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Viper] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingHeadSuitWithLightBase, ClothingNightVision1Viper, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
   id: ClothingHeadHelmetHardsuitViperGroupInitiate
   name: BROOD mk.I viper hardsuit helmet
   description: A hardsuit helmet with signature markings of the Viper Group. Has a built-in navigation system complemented by flash resistant viewports.
@@ -140,16 +140,18 @@
     color: "#eb772a"
     radius: 6 # Forge-Change
     energy: 4 # Forge-Change
-  - type: RadarConsole
-    followEntity: true
-    noRotate: true
-  - type: ActivatableUI
-    key: enum.RadarConsoleUiKey.Key
-    singleUser: true
-  - type: UserInterface
-    interfaces:
-      enum.RadarConsoleUiKey.Key:
-        type: RadarConsoleBoundUserInterface
+  # Forge-change replace with BaseClothingHelmetMassScanner
+  #- type: RadarConsole
+  #   followEntity: true
+  #   noRotate: true
+  #- type: ActivatableUI
+  #  key: enum.RadarConsoleUiKey.Key
+  #  singleUser: true
+  #- type: UserInterface
+  #  interfaces:
+  #    enum.RadarConsoleUiKey.Key:
+  #      type: RadarConsoleBoundUserInterface
+  # Forge-change-end
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000

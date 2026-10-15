@@ -1,0 +1,32 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Nanolaminate wall sprites from TG Station via _Shitmed/Structures/Walls/abductor.rsi; secret-door frames assembled for Forge mapping",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "assembly"
+        },
+        {
+            "name": "closed"
+        },
+        {
+            "name": "closing",
+            "delays": [
+                [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+            ]
+        },
+        {
+            "name": "open"
+        },
+        {
+            "name": "opening",
+            "delays": [
+                [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+            ]
+        }
+    ]
+}

@@ -1,0 +1,162 @@
+# Tier 1 is shared: kits and the ship console.
+# Tier 2 is split. Each faction studies only its own turrets.
+
+- type: technology
+  id: ForgeTurretCommand
+  name: research-technology-forge-turret-command
+  entityIcon: MagazineTurretBallistic
+  discipline: FactionUniversal
+  tier: 1
+  cost: 10000
+  position: 11, 0
+  recipeUnlocks:
+  - TurretCommandShipCircuitboard
+  - MagazineTurretBallistic
+  - MagazineTurretShotgun
+  - MagazineTurretSniper
+  - MagazineTurretMachinegun
+  - MagazineTurretBallisticEmpty
+  - MagazineTurretShotgunEmpty
+  - MagazineTurretSniperEmpty
+  - MagazineTurretMachinegunEmpty
+
+- type: technology
+  id: ForgeTurretAdventurer
+  name: research-technology-forge-turret-adventurer
+  entityIcon: WeaponTurretAdventurerPacked
+  discipline: FactionUniversal
+  tier: 2
+  cost: 18000
+  position: 11, 1
+  technologyPrerequisites:
+  - ForgeTurretCommand
+  recipeUnlocks:
+  - WeaponTurretAdventurerPacked
+  - WeaponTurretAdventurerShotgunPacked
+  - WeaponTurretAdventurerSniperPacked
+  - WeaponTurretAdventurerMachinegunPacked
+
+- type: technology
+  id: ForgeTurretMercenary
+  name: research-technology-forge-turret-mercenary
+  entityIcon: WeaponTurretMercenaryPacked
+  discipline: FactionUniversal
+  tier: 2
+  cost: 8000
+  position: 12, 1
+  technologyPrerequisites:
+  - ForgeTurretCommand
+  recipeUnlocks:
+  - WeaponTurretMercenaryPacked
+
+- type: technology
+  id: ForgeTurretNT
+  name: research-technology-forge-turret-nt
+  entityIcon: WeaponTurretNanoTrasenPacked
+  discipline: FactionUniversal
+  tier: 2
+  cost: 15000
+  position: 11, 2
+  technologyPrerequisites:
+  - ForgeTurretCommand
+  recipeUnlocks:
+  - WeaponTurretNanoTrasenPacked
+  - WeaponTurretNTShotgunPacked
+  - WeaponTurretNTSniperPacked
+  - WeaponTurretNTMachinegunPacked
+
+- type: technology
+  id: ForgeTurretCC
+  name: research-technology-forge-turret-cc
+  entityIcon: WeaponTurretCCPacked
+  discipline: FactionUniversal
+  tier: 2
+  cost: 15000
+  position: 12, 2
+  technologyPrerequisites:
+  - ForgeTurretCommand
+  recipeUnlocks:
+  - WeaponTurretCCPacked
+  - WeaponTurretCCShotgunPacked
+  - WeaponTurretCCSniperPacked
+  - WeaponTurretCCMachinegunPacked
+
+- type: technology
+  id: ForgeTurretEmpire
+  name: research-technology-forge-turret-empire
+  entityIcon: WeaponTurretEmpirePacked
+  discipline: Empire
+  tier: 2
+  cost: 15000
+  position: 9, 17
+  technologyPrerequisites:
+  - ForgeTurretCommand
+  recipeUnlocks:
+  - WeaponTurretEmpirePacked
+  - WeaponTurretEmpireShotgunPacked
+  - WeaponTurretEmpireSniperPacked
+  - WeaponTurretEmpireMachinegunPacked
+
+- type: technology
+  id: ForgeTurretTSF
+  name: research-technology-forge-turret-tsf
+  entityIcon: WeaponTurretTSFMCPacked
+  discipline: Tsfmc
+  tier: 2
+  cost: 15000
+  position: 14, 2
+  technologyPrerequisites:
+  - ForgeTurretCommand
+  recipeUnlocks:
+  - WeaponTurretTSFMCPacked
+  - WeaponTurretTSFShotgunPacked
+  - WeaponTurretTSFSniperPacked
+  - WeaponTurretTSFMachinegunPacked
+
+- type: technology
+  id: ForgeTurretUSSP
+  name: research-technology-forge-turret-ussp
+  entityIcon: WeaponTurretUSSPPacked
+  discipline: Ussp
+  tier: 2
+  cost: 15000
+  position: 14, 8
+  technologyPrerequisites:
+  - ForgeTurretCommand
+  recipeUnlocks:
+  - WeaponTurretUSSPPacked
+  - WeaponTurretUSSPShotgunPacked
+  - WeaponTurretUSSPSniperPacked
+  - WeaponTurretUSSPMachinegunPacked
+
+- type: technology
+  id: ForgeTurretPDV
+  name: research-technology-forge-turret-pdv
+  entityIcon: WeaponTurretPDVPacked
+  discipline: Pdv
+  tier: 2
+  cost: 15000
+  position: 14, 9
+  technologyPrerequisites:
+  - ForgeTurretCommand
+  recipeUnlocks:
+  - WeaponTurretPDVPacked
+  - WeaponTurretPDVShotgunPacked
+  - WeaponTurretPDVSniperPacked
+  - WeaponTurretPDVMachinegunPacked
+
+- type: technology
+  id: ForgeTurretVG
+  name: research-technology-forge-turret-vg
+  entityIcon: WeaponTurretViperPacked
+  discipline: ViperGroup
+  tier: 2
+  cost: 15000
+  position: 13, 1
+  technologyPrerequisites:
+  - ForgeTurretCommand
+  recipeUnlocks:
+  - WeaponTurretViperPacked
+  - WeaponTurretVGShotgunPacked
+  - WeaponTurretVGSniperPacked
+  - WeaponTurretVGMachinegunPacked

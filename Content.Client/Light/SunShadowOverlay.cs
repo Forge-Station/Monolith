@@ -60,16 +60,18 @@ public sealed partial class SunShadowOverlay : Overlay
 
         if (res.Target?.Size != targetSize)
         {
+            res.Target?.Dispose();
             res.Target = _clyde
                 .CreateRenderTarget(targetSize,
                     new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb),
                     name: "sun-shadow-target");
+        }
 
-            if (res.BlurTarget?.Size != targetSize)
-            {
-                res.BlurTarget = _clyde
-                    .CreateRenderTarget(targetSize, new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb), name: "sun-shadow-blur");
-            }
+        if (res.BlurTarget?.Size != targetSize)
+        {
+            res.BlurTarget?.Dispose();
+            res.BlurTarget = _clyde
+                .CreateRenderTarget(targetSize, new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb), name: "sun-shadow-blur");
         }
 
         var lightScale = viewport.LightRenderTarget.Size / (Vector2)viewport.Size;

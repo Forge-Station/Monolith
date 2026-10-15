@@ -311,10 +311,13 @@ public sealed partial class EventHorizonSystem : SharedEventHorizonSystem
         var box = Box2.CenteredAround(mapPos.Position, new Vector2(range, range));
         var circle = new Circle(mapPos.Position, range);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapSystem.FindGridsIntersecting(mapPos.MapId, box, ref grids);
+        _mapSystem.FindGridsIntersecting(mapPos.MapId, box, ref grids, includeMap: false);
 
         foreach (var grid in grids)
         {
+            if (HasComp<MapComponent>(grid.Owner))
+                continue;
+
             // TODO: Remover grid.Owner when this iterator returns entityuids as well.
             AttemptConsumeTiles(uid, _mapSystem.GetTilesIntersecting(grid.Owner, grid.Comp, circle), grid, grid, eventHorizon);
         }

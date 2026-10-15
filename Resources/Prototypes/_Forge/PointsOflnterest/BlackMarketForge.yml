@@ -1,0 +1,43 @@
+# Author Info
+# GitHub: KoT-Corvax
+# Discord: kot098211
+
+# Notes:
+# Forge: KoT - This station will be useless without the prototype at its center.
+
+- type: pointOfInterest
+  id: BMRoger
+  parent: [BasePOI, BaseRepairablePOI]
+  name: 'Станция «Роджер»'
+  minimumDistance: 8000
+  maximumDistance: 10000
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
+  spawnGroup: Required
+  gridPath: /Maps/_Forge/POI/blackmarket.yml
+  addComponents:
+  - type: IFF
+    color: "#780707"
+  - type: ProtectedGrid
+    preventTeleportation: true
+  - type: WorldGenDistanceCarver
+    distanceThresholds:
+    # Dead zone
+    - maxDistance: 800
+      prob: 0.0
+    - maxDistance: 1500
+      prob: 0.3
+
+- type: gameMap
+  id: BMRoger
+  mapName: 'Станция «Роджер»'
+  mapPath: /Maps/_Forge/POI/blackmarket.yml
+  minPlayers: 0
+  stations:
+    BMRoger:
+      stationProto: RecordsFrontierOutpostCargo
+      gridComponents:
+        - type: VesselInfo
+          description: "Древнее, ржавеющее, грузовое судно переоборудованное в станцию под нужды местных контрабандистов."
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Станция «Роджер»'

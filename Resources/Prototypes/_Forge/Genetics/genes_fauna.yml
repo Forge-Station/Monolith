@@ -1,0 +1,114 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+#
+# Hostile fauna bodies. One active form at a time; they displace other morphs.
+# Rarer from irradiation than ordinary genes. The dragon is the expensive one.
+
+- type: gene
+  id: GeneFormSpaceSpider
+  name: gene-fauna-spider-name
+  description: gene-fauna-desc
+  quality: Neutral
+  instability: 36
+  weight: 0.65
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedSpaceSpider
+
+- type: gene
+  id: GeneFormSpaceDragon
+  name: gene-fauna-dragon-name
+  description: gene-fauna-desc
+  quality: Neutral
+  instability: 48
+  weight: 0.45
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedSpaceDragon
+
+- type: gene
+  id: GeneFormSpaceBear
+  name: gene-fauna-bear-name
+  description: gene-fauna-desc
+  quality: Neutral
+  instability: 30
+  weight: 0.65
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedSpaceBear
+
+- type: gene
+  id: GeneFormSpaceCarp
+  name: gene-fauna-carp-name
+  description: gene-fauna-desc
+  quality: Neutral
+  instability: 28
+  weight: 0.65
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedSpaceCarp
+
+- type: gene
+  id: GeneFormSpaceCobra
+  name: gene-fauna-cobra-name
+  description: gene-fauna-desc
+  quality: Neutral
+  instability: 36
+  weight: 0.65
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedSpaceCobra
+
+- type: gene
+  id: GeneFormGoliath
+  name: gene-fauna-goliath-name
+  description: gene-fauna-desc
+  quality: Neutral
+  instability: 40
+  weight: 0.55
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedGoliath
+
+- type: gene
+  id: GeneFormWatcher
+  name: gene-fauna-watcher-name
+  description: gene-fauna-desc
+  quality: Neutral
+  instability: 34
+  weight: 0.6
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedWatcher
+
+- type: gene
+  id: GeneFormXenoRunner
+  name: gene-fauna-xeno-name
+  description: gene-fauna-desc
+  quality: Neutral
+  instability: 36
+  weight: 0.55
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedXenoRunner
+
+- type: gene
+  id: GeneFormShark
+  name: gene-fauna-shark-name
+  description: gene-fauna-desc
+  quality: Neutral
+  instability: 32
+  weight: 0.6
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedShark

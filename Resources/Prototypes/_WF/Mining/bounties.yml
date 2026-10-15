@@ -1,0 +1,14 @@
+# Hokkaido buys PDV composite, so breaking PDV raiders pays MIC.
+- type: cargoBounty
+  id: WFMMCBountyPdvComposite
+  reward: 25
+  rewardSuffix: MIC
+  rewardProto: MMCIndustrialCredit
+  description: mmc-bounty-desc-generic
+  idPrefix: HKD-VLE
+  entries:
+  - name: wf-mmc-bounty-name-pdv-composite
+    amount: 10
+    whitelist:
+      tags:
+      - WFPdvComposite

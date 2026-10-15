@@ -4,11 +4,11 @@
 - type: pointOfInterest
   id: Hokkaido
   parent: [BasePOI, BaseRepairablePOI]
-  name: 'MMC Хоккайдо'
+  name: 'MMC Hokkaido'
   minimumDistance: 2000
   maximumDistance: 8000
   spawnGroup: Required
-  gridPath: /Maps/_Forge/POI/hokkaido.yml
+  gridPath: /Maps/_Mono/POI/hokkaido.yml
   addComponents:
   - type: IFF
     color: "#EEEEEE"
@@ -23,13 +23,47 @@
 
 - type: gameMap
   id: Hokkaido
-  mapName: 'MMC Хоккайдо'
-  mapPath: /Maps/_Forge/POI/hokkaido.yml
+  mapName: 'MMC Hokkaido'
+  mapPath: /Maps/_Mono/POI/hokkaido.yml
   minPlayers: 0
   stations:
     Hokkaido:
       stationProto: RecordsFrontierOutpostCargo
+      gridComponents:
+        - type: DeleteNearbyDrones
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'MMC Хоккайдо'
+          mapNameTemplate: 'MMC Hokkaido'
+        - type: ExtraStationInformation
+          icon: /Textures/_Mono/Interface/Misc/LateJoin/lathe.png
+          stationSubtext: 'frontier-lobby-hokkaido-subtext'
+          stationDescription: 'frontier-lobby-hokkaido-description'
+        - type: StationJobs
+          availableJobs:
+            MMCLiason: [ 1, 1 ]
+            MMCSecurity: [ 5, 5 ]
+            MMCEmployee: [ -1, -1 ]
+          tags:
+          - MieyoLiason
         - type: StationDeadDropHintExempt
+        - type: StationCargoBountyDatabase
+          availableBounties:
+          - MMCBountyT2IndustrialParts
+          - MMCBountyT4ArmorPlates
+          - MMCBountyT3Processors
+          - MMCBountyT2Processors
+          - MMCBountyT2ProcessorsBulk
+          - MMCBountyT1MotorsBulk
+          - MMCBountyT1SensorsBulk
+          - MMCBountyT1CamerasBulk
+          - MMCBountyT3ArmorPlatesBulk
+          - MMCBountyT2ArmorPlatesBulk
+          - MMCBountyT2MiscCompsBulk
+          - MMCBountyT3IndustrialParts
+          - MMCBountySpaceCashT1
+          - MMCBountySpaceCashT2
+          - MMCBountySpaceCashT3
+          - MMCBountyIridite
+          - MMCBountyPlastitanium
+          - MMCBountyIriditeBulk
+          - WFMMCBountyPdvComposite # WOLFGATE(Mining): Hokkaido buys PDV composite

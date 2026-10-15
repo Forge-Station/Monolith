@@ -270,6 +270,12 @@ public sealed partial class WFCrewAlertSystem : EntitySystem
     public void ReportShipThreat(EntityUid grid, string group, EntityUid attacker) => ReportAttack(grid, attacker, group);
 
     /// <summary>
+    /// Reports a drydock breaking a ship up as an attack on it by the drydock's grid. Never excused as stray fire,
+    /// whatever its colours.
+    /// </summary>
+    public void ReportBreaking(EntityUid grid, EntityUid attacker) => ReportAttack(grid, attacker, gunfire: true);
+
+    /// <summary>
     /// Reports a vessel's ship-weapon fire that came at a ship, hit or miss, as an attack. False while it is let pass
     /// as stray shots from the ship's own side.
     /// </summary>

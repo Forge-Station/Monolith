@@ -21,6 +21,11 @@ public sealed class GasSaleConsoleBoundUserInterfaceState(int appraisal, GasMixt
     /// Whether or not the buttons on the interface are enabled.
     /// </summary>
     public bool Enabled = enabled;
+
+    // WOLFGATE(Mining) START: the appraisal shows the payout currency
+    /// <summary>Short name of the currency the console pays in, such as MIC; null when it pays credits.</summary>
+    public string? Currency;
+    // WOLFGATE END
 }
 
 [Serializable, NetSerializable]

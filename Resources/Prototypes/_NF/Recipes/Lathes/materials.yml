@@ -21,6 +21,7 @@
   result: SpawnRandomRefinedScrap
 #  parent: BaseMaterialsNoDiscountRecipe #Mono
   completetime: 0.1
+  materialDiscountScale: 0 # WOLFGATE(Mining): SmeltScrap always costs 400 raw, lathe upgrades don't discount it
   icon:
     sprite: _NF/Objects/Materials/ore.rsi
     state: scrapore

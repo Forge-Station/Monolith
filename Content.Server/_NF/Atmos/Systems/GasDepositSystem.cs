@@ -270,6 +270,10 @@ public sealed partial class GasDepositSystem : SharedGasDepositSystem
             return;
         }
 
+        // WOLFGATE(Mining): a sale that would pay nothing is refused and leaves the gas in the sale points
+        if (RefuseWorthlessSale(ent, gridUid, args.Actor))
+            return;
+
         var mixture = new GasMixture();
         foreach (var salePoint in GetNearbySalePoints(ent, gridUid))
         {
@@ -303,9 +307,10 @@ public sealed partial class GasDepositSystem : SharedGasDepositSystem
         if (TryComp<MarketModifierComponent>(ent, out var priceMod))
             amount *= priceMod.Mod;
 
+        // WOLFGATE(Mining): the appraisal shows the payout currency
         UI.SetUiState(ent.Owner,
             GasSaleConsoleUiKey.Key,
-            new GasSaleConsoleBoundUserInterfaceState((int)amount, mixture, mixture.TotalMoles > 0));
+            new GasSaleConsoleBoundUserInterfaceState((int)amount, mixture, mixture.TotalMoles > 0) { Currency = PayoutCurrency(ent) });
     }
 
     private void GetNearbyMixtures(EntityUid consoleUid, EntityUid gridUid, out GasMixture mixture, out double value)

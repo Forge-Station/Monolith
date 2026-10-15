@@ -1,0 +1,7 @@
+# Machines lathe upgrade kits can't be fitted to; ore processors carry it.
+- type: Tag
+  id: WFNoLatheUpgradeKit
+
+# PDV composite sheets, for the Hokkaido composite bounty.
+- type: Tag
+  id: WFPdvComposite

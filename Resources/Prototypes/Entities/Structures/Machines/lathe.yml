@@ -768,6 +768,12 @@
   - type: PlaceableSurface # DeltaV: Allow ore bags to dump into it directly
     isPlaceable: false # but not place on it if you just click it with a random item
   - type: OreSiloClient #Gives silo access to ore holding
+  # WOLFGATE(Mining) START: lathe upgrade kits don't fit ore processors; Structure repeats BaseStructure's tag
+  - type: Tag
+    tags:
+    - Structure
+    - WFNoLatheUpgradeKit
+  # WOLFGATE END
 
 - type: entity
   parent: OreProcessor
@@ -780,7 +786,8 @@
   - type: Machine
     board: OreProcessorIndustrialMachineCircuitboard
   - type: Lathe
-    partRatingMaterialUseMultiplier: 0.92 # Mono
+    # WOLFGATE(Mining): smaller matter-bin bonus on the industrial processor, 0.92 -> 0.97
+    partRatingMaterialUseMultiplier: 0.97 # Mono
     materialUseMultiplier: 0.6 # Mono
     timeMultiplier: 0.5
     staticPacks:

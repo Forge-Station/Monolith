@@ -1,0 +1,141 @@
+- type: entity
+  id: WFBaseFabricationSilo
+  abstract: true
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: fabrication silo
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/silo.rsi
+    snapCardinals: true
+    layers:
+    - state: silo
+      map: [ "base" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        base:
+          True: { state: silo_active }
+          False: { state: silo }
+  - type: FabricationSilo
+  - type: ActivatableUI
+    key: enum.OreSiloUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.OreSiloUiKey.Key:
+        type: FabricationSiloBoundUserInterface
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask: [MachineMask]
+        layer: [MachineLayer]
+  - type: WiresVisuals
+  - type: WiresPanel
+  - type: StaticPrice
+    price: 1500
+
+- type: entity
+  id: WFMachinePartsSilo
+  parent: WFBaseFabricationSilo
+  name: parts silo
+  description: Stores precursor components and supplies them to linked fabrication machines. Use a component on it, or dump a bag into it, to deposit components that fabrication machines use.
+  components:
+  - type: FabricationSilo
+    kind: Parts
+  - type: Sprite
+    sprite: _WF/Lathe/parts_silo.rsi
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      fabrication_parts: !type:Container
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - fabrication_parts
+  - type: Machine
+    board: WFPartsSiloMachineCircuitboard
+
+- type: entity
+  id: WFMachineChemicalSilo
+  parent: WFBaseFabricationSilo
+  name: chemical silo
+  description: Stores up to 1500u of chemicals without letting them react and supplies them to linked fabrication machines. Pour in chemicals that fabrication machines use with a beaker, jug, jerry can or syringe; withdraw them one at a time into an inserted beaker.
+  components:
+  - type: FabricationSilo
+    kind: Chemicals
+  - type: Sprite
+    sprite: _WF/Lathe/chemical_silo.rsi
+  # The store never reacts, so nothing may drain or draw it: no Drainable, Drawable, Dumpable or Spillable.
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 1500
+        canReact: false
+  - type: RefillableSolution
+    solution: tank
+    preventTransferOut: true
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      beakerSlot: !type:ContainerSlot
+  # Clicking with a beaker pours; alt-click or the window inserts it.
+  - type: ItemSlots
+    slots:
+      beakerSlot:
+        insertOnInteract: false
+        ejectOnBreak: true
+        whitelist:
+          components:
+          - FitsInDispenser
+  - type: ExaminableSolution
+    solution: tank
+  - type: Machine
+    board: WFChemicalSiloMachineCircuitboard
+
+- type: entity
+  id: WFPartsSiloMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: parts silo machine board
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: WFMachinePartsSilo
+    requirements:
+      MatterBin: 4
+    stackRequirements:
+      Cable: 1
+    tagRequirements:
+      MicroprocessorEconomy1:
+        amount: 1
+        defaultPrototype: MicroprocessorEconomy1
+      ComponentBrickEconomy1:
+        amount: 4
+        defaultPrototype: ComponentBrickEconomy1
+
+- type: entity
+  id: WFChemicalSiloMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: chemical silo machine board
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: WFMachineChemicalSilo
+    requirements:
+      MatterBin: 4
+    stackRequirements:
+      Cable: 1
+    tagRequirements:
+      MicroprocessorEconomy1:
+        amount: 1
+        defaultPrototype: MicroprocessorEconomy1
+      ComponentBrickEconomy1:
+        amount: 4
+        defaultPrototype: ComponentBrickEconomy1

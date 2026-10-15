@@ -13,6 +13,8 @@
     blacklist:
       components:
       - UpgradedMachine
+      tags: # WOLFGATE(Mining): kits don't fit ore processors
+      - WFNoLatheUpgradeKit # WOLFGATE(Mining)
     # ALWAYS add UpgradedMachine to components in inheritors
 
 - type: entity

@@ -13,6 +13,19 @@
   - type: Item
     sprite: _Mono/Objects/Tools/repair_device.rsi
     size: Normal
+    inhandVisuals: #Forge-change-add
+      left:
+      - state: inhand-left
+      - playerToggle: true
+        map: ["layer_srd_charge"]
+        sprite: _Mono/Objects/Tools/repair_device_overlays.rsi
+        state: charge-left
+      right:
+      - state: inhand-right
+      - playerToggle: true
+        map: ["layer_srd_charge"]
+        sprite: _Mono/Objects/Tools/repair_device_overlays.rsi
+        state: charge-right #Forge-change-end
   - type: Clothing
     quickEquip: false
     slots:

@@ -11,6 +11,10 @@
   # #Forge-change START (KIAS): Штатное окно предоставляет адаптеру маркер контроля повреждений.
   - type: KiasHullStructure
   # #Forge-change END (KIAS)
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactGlass
   - type: Anchorable
     flags:
     - Anchorable
@@ -151,6 +155,10 @@
   # #Forge-change START (KIAS): Штатное окно предоставляет адаптеру маркер контроля повреждений.
   - type: KiasHullStructure
   # #Forge-change END (KIAS)
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactGlass
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag

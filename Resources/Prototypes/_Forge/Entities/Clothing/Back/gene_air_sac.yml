@@ -1,0 +1,42 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+# Biological air reserve. Not worn on the back — inserted into the backpack (or a hidden body container).
+- type: entity
+  parent: BaseItem
+  id: ClothingBackGeneticAirSac
+  name: biological air sac
+  description: A living bladder of respiratory mix grown into the body. Roughly two minutes of breathable gas.
+  components:
+  - type: Sprite
+    sprite: Objects/Tanks/emergency.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: Objects/Tanks/emergency.rsi
+  - type: Tag
+    tags:
+    - GasTank
+  - type: BreathMask
+    allowedSlots: All
+  - type: UseDelay
+    delays:
+      gasTank:
+        length: 1.0
+  - type: GasTank
+    outputPressure: 21.3
+    air:
+      # ~2 minutes of breathable oxygen
+      volume: 0.66
+      moles:
+        Oxygen: 0.1353910175
+      temperature: 293.15
+  - type: ActivatableUI
+    key: enum.SharedGasTankUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SharedGasTankUiKey.Key:
+        type: GasTankBoundUserInterface
+  - type: Unremoveable
+    deleteOnDrop: false

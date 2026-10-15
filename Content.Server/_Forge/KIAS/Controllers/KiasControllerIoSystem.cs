@@ -217,7 +217,6 @@ public sealed partial class KiasControllerIoSystem : EntitySystem
 
     public void Emit(EntityUid device, string profile, string port, KiasGraphValue value)
     {
-        using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.IoEmit);
         if (value.Type == KiasPortType.Number && !double.IsFinite(value.Number)) return;
         if (value.Type == KiasPortType.String)
         {

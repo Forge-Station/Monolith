@@ -169,15 +169,12 @@ public sealed partial class KiasControllerRuntimeSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
-        using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.RuntimeUpdate);
         if (_kias.MeasureUpdates)
         {
             if (_events.Count > 0 || _dispatch != null || _waitingDispatches.Count > 0) EventQueueMetrics.BackloggedTicks++;
             if (_work.Count > 0) WorkQueueMetrics.BackloggedTicks++;
             if (_commands.Count > 0) CommandQueueMetrics.BackloggedTicks++;
         }
-        if (_kias.MeasureUpdates) _kias.Phases[(int) KiasPhase.RuntimeUpdate].MaxQueue = Math.Max(_kias.Phases[(int) KiasPhase.RuntimeUpdate].MaxQueue, _events.Count + PendingEventDispatchCount + _work.Count + _commands.Count + _boots.Count);
         var now = _timing.CurTime.TotalSeconds;
         for (var i = Math.Min(128, _waitingTimers.Count); i > 0; i--)
         {
@@ -201,7 +198,6 @@ public sealed partial class KiasControllerRuntimeSystem : EntitySystem
         {
             if (i > 0 && System.Diagnostics.Stopwatch.GetElapsedTime(bootStart).TotalMilliseconds >= 4
                 || !_boots.TryDequeue(out var boot)) break;
-            using var stage = new KiasPhaseMeasurement(_kias, KiasPhase.RuntimeBoot);
             _booting.Remove(boot.Card);
             if (!_cards.ContainsKey(boot.Card) && Available(boot.Rack, boot.Card)) Boot(boot.Rack, boot.Card);
             else if (!TerminatingOrDeleted(boot.Card) && Transform(boot.Card).ParentUid is var parent && HasComp<KiasControllerRackComponent>(parent)) Reconcile(parent);
@@ -209,7 +205,6 @@ public sealed partial class KiasControllerRuntimeSystem : EntitySystem
         var evaluations = 0;
         for (var i = 0; i < 128 && evaluations < 2048 && _timers.Min is { } timer && timer.Due <= now; i++)
         {
-            using var stage = new KiasPhaseMeasurement(_kias, KiasPhase.RuntimeTimers);
             _timers.Remove(timer);
             if (_kias.TopologyPending(timer.Runtime.Grid))
             {
@@ -228,7 +223,6 @@ public sealed partial class KiasControllerRuntimeSystem : EntitySystem
         var dispatchBudget = 4096;
         for (var i = 0; i < 64 && evaluations < 2048; i++)
         {
-            using var stage = new KiasPhaseMeasurement(_kias, KiasPhase.RuntimeEvents);
             if (_dispatch == null && !ResumeDispatch())
             {
                 if (!_events.TryPeek(out var ev)) break;
@@ -247,7 +241,6 @@ public sealed partial class KiasControllerRuntimeSystem : EntitySystem
         }
         for (var i = 0; i < 256 && evaluations < 2048 && _work.TryPeek(out var work); i++)
         {
-            using var stage = new KiasPhaseMeasurement(_kias, KiasPhase.RuntimeWork);
             if (_kias.TopologyPending(work.Runtime.Grid)) break;
             _work.Dequeue();
             if (_kias.MeasureUpdates) WorkQueueMetrics.Consume(work.QueuedTick, _timing.CurTick.Value);
@@ -262,7 +255,6 @@ public sealed partial class KiasControllerRuntimeSystem : EntitySystem
         }
         for (var i = 0; i < 128 && _commands.TryPeek(out var command); i++)
         {
-            using var stage = new KiasPhaseMeasurement(_kias, KiasPhase.RuntimeCommands);
             if (_kias.TopologyPending(command.Runtime.Grid)) break;
             _commands.Dequeue();
             Execute(command);

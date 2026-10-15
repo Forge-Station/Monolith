@@ -28,9 +28,6 @@ public sealed partial class KiasSystem : EntitySystem
 
     public IReadOnlySet<EntityUid> ActiveGrids => _active;
     public bool MeasureUpdates;
-    public readonly KiasPhaseMetrics[] Phases = Enum.GetValues<KiasPhase>().Select(_ => new KiasPhaseMetrics()).ToArray();
-    public double MeasuredUpdateMilliseconds;
-    public long MeasuredUpdateBytes;
 
     public override void Initialize()
     {
@@ -57,7 +54,6 @@ public sealed partial class KiasSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(this);
         base.Update(frameTime);
         if (_dirtyQueue.Count == 0)
             return;

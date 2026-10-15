@@ -323,3 +323,7 @@ Resources/MapImages
 *.trx
 *.coverage
 *.coveragexml
+
+/.kias/
+
+/KIAS_REVIEW/

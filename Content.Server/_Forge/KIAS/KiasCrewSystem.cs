@@ -223,7 +223,6 @@ public sealed class KiasCrewSystem : EntitySystem
 
     public void RebuildCoverage(EntityUid? grid)
     {
-        using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.CrewCoverage);
         if (grid is { } changedGrid) DisableOfflineCameras(changedGrid);
         if (grid is not { } uid || !TryComp<KiasGridComponent>(uid, out var runtime) || !runtime.Active || !TryComp<MapGridComponent>(uid, out var map))
             return;
@@ -441,8 +440,6 @@ public sealed class KiasCrewSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
-        using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.CrewUpdate);
         const int gridBudget = 8;
         for (var i = 0; i < gridBudget && _scans.TryDue(_timing.CurTime, out var grid); i++)
         {
@@ -458,7 +455,6 @@ public sealed class KiasCrewSystem : EntitySystem
 
     private void Scan(EntityUid grid, Dictionary<Vector2i, List<EntityUid>> coverage)
     {
-        using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.CrewScan);
         if (!TryComp<KiasGridComponent>(grid, out var runtime) || !runtime.Active || !TryComp<MapGridComponent>(grid, out var map))
             return;
         var scratch = ScratchFor(grid);
@@ -485,7 +481,6 @@ public sealed class KiasCrewSystem : EntitySystem
             {
                 if (TerminatingOrDeleted(person) || !IsKiasTrackedEntity(person))
                     continue;
-                using var peoplePhase = new KiasPhaseMeasurement(_kias, KiasPhase.CrewPeople);
                 var position = _transform.ToCoordinates(grid, _transform.GetMapCoordinates(person));
                 var tile = _map.TileIndicesFor(grid, map, position);
                 var moved = !scratch.PreviousLocations.TryGetValue(person, out var previousTile) || previousTile != tile;
@@ -542,7 +537,6 @@ public sealed class KiasCrewSystem : EntitySystem
                     details.AppendLine(Loc.GetString("kias-radiation", ("name", Name(person)), ("value", radiation.CurrentRadiation)));
             }
         }
-        using var registrationPhase = new KiasPhaseMeasurement(_kias, KiasPhase.CrewRegistration);
         var serials = scratch.Serials;
         var registered = scratch.Registered;
         scratch.Devices.AddRange(runtime.Online);
@@ -561,8 +555,6 @@ public sealed class KiasCrewSystem : EntitySystem
             {
                 if ((scanner.Modules & KiasScannerModules.Threat) != 0)
                 {
-                    using var faunaPhase = new KiasPhaseMeasurement(_kias, KiasPhase.CrewFauna);
-                    if (_kias.MeasureUpdates) _kias.Phases[(int) KiasPhase.CrewFauna].Items += _fauna.Count;
                     foreach (var creature in _fauna)
                     {
                         if (!TryComp<MobStateComponent>(creature, out var state) || state.CurrentState != MobState.Alive

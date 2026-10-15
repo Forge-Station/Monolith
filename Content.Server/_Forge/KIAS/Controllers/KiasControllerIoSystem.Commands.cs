@@ -11,7 +11,6 @@ public sealed partial class KiasControllerIoSystem
     public void Command(EntityUid grid, EntityUid card, EntityUid target, KiasControllerNode node, string port,
         KiasGraphValue value, KiasCommandInputs inputs)
     {
-        using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.IoCommand);
         if (!_kias.IsOnline(target) || Transform(target).GridUid != grid || !Profiles(target).Contains(node.Profile)) return;
         var schema = Schema(node.Profile);
         var accepted = false;

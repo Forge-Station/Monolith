@@ -142,7 +142,6 @@ public sealed class KiasExternalSensorSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
         const int sensorBudget = 8;
         for (var i = 0; i < sensorBudget && _scans.TryDue(_timing.CurTime, out var uid); i++)
         {

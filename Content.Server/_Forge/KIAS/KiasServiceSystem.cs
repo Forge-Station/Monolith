@@ -255,7 +255,6 @@ public sealed class KiasServiceSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
         if (_tests.Count == 0)
             return;
         foreach (var (grid, test) in _tests.ToArray())

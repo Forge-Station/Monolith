@@ -282,7 +282,6 @@ public sealed class KiasDefenceSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
         if (_enabledGrids.Count == 0)
             return;
         if (_timing.CurTime >= _nextScan)

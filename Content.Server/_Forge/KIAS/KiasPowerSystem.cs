@@ -153,7 +153,6 @@ public sealed class KiasPowerSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
         const int gridBudget = 4;
         for (var i = 0; i < gridBudget && _samples.TryDue(_timing.CurTime, out var grid); i++)
         {

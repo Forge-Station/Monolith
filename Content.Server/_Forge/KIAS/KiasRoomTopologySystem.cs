@@ -142,7 +142,6 @@ public sealed partial class KiasRoomTopologySystem : EntitySystem
         {
             _queued.Remove(grid);
             if (!_grids.TryGetValue(grid, out var rooms) || TerminatingOrDeleted(grid)) continue;
-            using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.RoomGeometry);
             if (rooms.Job == null || rooms.JobGeneration != rooms.Generation)
             {
                 rooms.Job?.Dispose();

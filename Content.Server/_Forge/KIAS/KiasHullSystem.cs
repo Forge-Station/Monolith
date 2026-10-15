@@ -136,7 +136,6 @@ public sealed class KiasHullSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
         if (_due.Count == 0 || _timing.CurTime < _nextFlush)
             return;
         foreach (var grid in _due.Where(p => p.Value <= _timing.CurTime).Select(p => p.Key).ToArray())

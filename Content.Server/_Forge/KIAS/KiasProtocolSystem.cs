@@ -142,7 +142,6 @@ public sealed class KiasProtocolSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
         for (var i = 0; i < 8 && _emergencies.TryDue(_timing.CurTime, out var grid); i++)
         {
             if (!TryProtocol(grid, out var protocols)) { _emergencies.Remove(grid); continue; }
@@ -273,7 +272,6 @@ public sealed class KiasProtocolSystem : EntitySystem
 
     public void Trigger(EntityUid grid, KiasTrigger trigger, KiasContactDisposition? disposition = null, float value = 0, string? message = null, string? eventKey = null)
     {
-        using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.ProtocolTrigger);
         if (!TryProtocol(grid, out _) || !_executing.Add(grid)) return;
         try
         {

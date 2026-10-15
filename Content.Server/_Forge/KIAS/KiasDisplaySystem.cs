@@ -144,7 +144,6 @@ public sealed partial class KiasDisplaySystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
         if (_timing.CurTime >= _nextMonitorRefresh && _coverageTools.Count > 0)
         {
             _nextMonitorRefresh = _timing.CurTime + TimeSpan.FromSeconds(1);

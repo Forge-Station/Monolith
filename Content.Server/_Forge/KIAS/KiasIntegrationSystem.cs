@@ -123,7 +123,6 @@ public sealed class KiasIntegrationSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        using var measurement = new KiasUpdateMeasurement(_kias);
         if (_pendingRooms.Count == 0) return;
         foreach (var grid in _pendingRooms.Take(4).ToArray())
         {
@@ -134,7 +133,6 @@ public sealed class KiasIntegrationSystem : EntitySystem
 
     public bool CanControl(EntityUid target)
     {
-        using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.IntegrationControl);
         if (TerminatingOrDeleted(target) || !Transform(target).Anchored || Transform(target).GridUid is not { } grid
             || !TryComp<KiasGridComponent>(grid, out var runtime) || !runtime.Active || runtime.Core is not { } core
             || !TryComp<MapGridComponent>(grid, out var map)) return false;
@@ -185,7 +183,6 @@ public sealed class KiasIntegrationSystem : EntitySystem
 
     public void Reconcile(EntityUid grid)
     {
-        using var phase = new KiasPhaseMeasurement(_kias, KiasPhase.IntegrationReconcile);
         if (!TryComp<KiasGridComponent>(grid, out var runtime) || !TryComp<MapGridComponent>(grid, out var map)) return;
         if (runtime.Active && (runtime.Core is not { } core || !_kias.IsOnline(core))) return;
         var candidates = _candidates;

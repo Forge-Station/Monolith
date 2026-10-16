@@ -29,7 +29,7 @@
          ref: main
 
      - name: Setup Python
-       uses: actions/setup_python@v5
+       uses: actions/setup-python@v5
        with:
          python-version: '3.12'
 

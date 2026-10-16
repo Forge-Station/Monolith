@@ -170,7 +170,7 @@
     radius: 2.0
     energy: 7.0
   - type: IgniteOnCollide
-    fireStacks: 0.4 # Mono
+    fireStacks: 1.2 # Forge-change 0.4->1.2
   - type: Tracer # Mono
     color: "#D1B479FF"
     length: 3

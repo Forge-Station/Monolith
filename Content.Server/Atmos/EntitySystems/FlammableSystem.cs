@@ -283,8 +283,13 @@ namespace Content.Server.Atmos.EntitySystems
 
         public void UpdateAppearance(EntityUid uid, FlammableComponent? flammable = null, AppearanceComponent? appearance = null)
         {
-            if (!Resolve(uid, ref flammable, ref appearance))
+            // Forge-change-start
+            if (!Resolve(uid, ref flammable, false))
                 return;
+            // safe AppearanceComp check
+            if (appearance == null && !TryComp<AppearanceComponent>(uid, out appearance))
+                return;
+            // Forge-change-end
 
             _appearance.SetData(uid, FireVisuals.OnFire, flammable.OnFire, appearance);
             _appearance.SetData(uid, FireVisuals.FireStacks, flammable.FireStacks, appearance);

@@ -47,6 +47,11 @@ loadout-name-ContractorClothingOuterCoatBomberRandomized = punk jacket (random)
 loadout-name-ContractorClothingShoesBootsPunkRandomized = punk boots (random)
 loadout-name-ContractorClothingMaskPunkHalf = punk halfmask (random)
 
+loadout-name-tti-belt-webbing-empty = TTI trauma webbing (empty)
+loadout-name-tti-belt-webbing-filled = TTI trauma webbing (filled)
+loadout-name-tti-belt-trauma-empty = TTI paramedic belt (empty)
+loadout-name-tti-belt-trauma-filled = TTI paramedic belt (filled)
+
 loadout-name-ContractorBoxSurvivalNFOxygenExtended = extended-oxygen survival box
 loadout-name-ContractorBoxSurvivalNFNitrogenExtended = extended-nitrogen survival box
 loadout-name-NfsdBoxSurvivalNfsdOxygen = extended-oxygen survival box

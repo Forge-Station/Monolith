@@ -84,10 +84,11 @@ public sealed partial class GeneticsSystem
         if (cont.ID != DnaModifierScannerComponent.ContainerId)
             return false;
 
-        if (!TryComp(cont.Owner, out scannerComp))
+        if (!TryComp(cont.Owner, out DnaModifierScannerComponent? found))
             return false;
 
         scannerUid = cont.Owner;
+        scannerComp = found;
         return true;
     }
 

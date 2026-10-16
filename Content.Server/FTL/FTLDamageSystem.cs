@@ -30,8 +30,8 @@ public sealed partial class FTLDamageSystem : EntitySystem
     {
         base.Initialize();
 
-        // Subscribe to the event that's raised when an entity's map changes
-        SubscribeLocalEvent<TransformComponent, EntParentChangedMessage>(OnEntParentChanged);
+        // Broadcast: only one directed TransformComponent+EntParentChangedMessage subscription is allowed.
+        SubscribeLocalEvent<EntParentChangedMessage>(OnEntParentChanged);
     }
 
     public override void Update(float frameTime)
@@ -90,12 +90,15 @@ public sealed partial class FTLDamageSystem : EntitySystem
         // Forge-Change-End
     }
 
-    private void OnEntParentChanged(EntityUid uid, TransformComponent transform, ref EntParentChangedMessage args)
+    private void OnEntParentChanged(ref EntParentChangedMessage args)
     {
+        var uid = args.Entity;
+        var transform = args.Transform;
+
         // Skip if the entity is deleted or queued for deletion
         if (EntityManager.Deleted(uid) || EntityManager.IsQueuedForDeletion(uid))
             return;
-            
+
         if (!transform.MapUid.HasValue)
             return;
 

@@ -29,7 +29,8 @@ public sealed class DroneSalvageSystem : EntitySystem
         _xformQuery = GetEntityQuery<TransformComponent>();
 
         SubscribeLocalEvent<DroneSalvageGridComponent, EntityTerminatingEvent>(OnGridTerminating);
-        SubscribeLocalEvent<TransformComponent, EntParentChangedMessage>(OnParentChanged);
+        // Broadcast: only one directed TransformComponent+EntParentChangedMessage subscription is allowed.
+        SubscribeLocalEvent<EntParentChangedMessage>(OnParentChanged);
     }
 
     private void OnGridTerminating(Entity<DroneSalvageGridComponent> ent, ref EntityTerminatingEvent args)
@@ -37,8 +38,11 @@ public sealed class DroneSalvageSystem : EntitySystem
         ExtractKeepItems(ent.Owner);
     }
 
-    private void OnParentChanged(EntityUid uid, TransformComponent xform, ref EntParentChangedMessage args)
+    private void OnParentChanged(ref EntParentChangedMessage args)
     {
+        var uid = args.Entity;
+        var xform = args.Transform;
+
         if (args.OldParent is not { } oldParent || !_salvageGridQuery.HasComp(oldParent))
             return;
 

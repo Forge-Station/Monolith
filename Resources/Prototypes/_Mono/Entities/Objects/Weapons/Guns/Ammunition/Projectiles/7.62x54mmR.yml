@@ -46,6 +46,8 @@
         Piercing: 20 # Forge-change 25->20
         Heat: 10 # Forge-change 15->10
     armorPenetration: -0.1 # Forge-change
+  - type: IgniteOnCollide
+    fireStacks: 1.9 # Forge-change 0.4->1.9
 
 - type: entity
   id: Bullet762x54mmRUranium

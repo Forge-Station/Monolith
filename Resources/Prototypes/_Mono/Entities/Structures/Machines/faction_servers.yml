@@ -172,6 +172,7 @@
   id: ResearchAndDevelopmentServerDebug
   parent: BaseRdServerFaction
   name: debug R&D server
+  suffix: Debug
   description: Contains the collective knowledge of Everyone. Damn
   components:
   - type: TechnologyDatabase

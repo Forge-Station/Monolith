@@ -33,8 +33,10 @@ public sealed partial class BsTransmitterEnergyComponent : Component
     [DataField]
     public float Money;
 
+    // -1 means "not configured yet" and is replaced with MaxConnected on init.
+    // 0 is a real limit and must survive map load.
     [DataField]
-    public int ConnectingLimit;
+    public int ConnectingLimit = -1;
 
     [DataField]
     public string Password = string.Empty;

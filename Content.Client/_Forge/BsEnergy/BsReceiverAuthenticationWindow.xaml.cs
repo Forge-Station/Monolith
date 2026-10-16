@@ -56,12 +56,15 @@ public sealed partial class BsReceiverAuthenticationWindow : FancyWindow
 
         if (stateMessage.ConnectingResult)
         {
-            Timer.Spawn(_closeDelay,
-                () =>
-                {
-                    if (IsOpen)
-                        Close();
-                });
+            Timer.Spawn(_closeDelay, () =>
+            {
+                if (Disposed || !IsOpen)
+                    return;
+
+                PasswordLineEdit.ReleaseKeyboardFocus();
+                if (!Disposed && IsOpen)
+                    Close();
+            });
         }
     }
 }

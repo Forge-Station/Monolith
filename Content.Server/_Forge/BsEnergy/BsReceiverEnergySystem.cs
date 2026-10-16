@@ -13,7 +13,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.BsEnergy;
 
@@ -31,6 +30,9 @@ public sealed class BsReceiverEnergySystem : EntitySystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
     private readonly Dictionary<NetEntity, UpdateTransmitterStateData> _cachedTransmittersData = new();
+    private const float UpdateInterval = BsEnergySettings.UpdateInterval;
+    private float _updateTimer;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -57,9 +59,16 @@ public sealed class BsReceiverEnergySystem : EntitySystem
                 receiverEnergyComponent.OldEnableState = receiverEnergyComponent.Enabled;
                 UpdateAppearance(receiverUid, receiverEnergyComponent.Enabled);
             }
-
-            UpdateUI(receiverUid, receiverEnergyComponent);
         }
+
+        _updateTimer += frameTime;
+        if (_updateTimer < UpdateInterval)
+            return;
+
+        _updateTimer = 0;
+        var uiQuery = EntityQueryEnumerator<BsReceiverEnergyComponent>();
+        while (uiQuery.MoveNext(out var receiverUid, out var receiverEnergyComponent))
+            UpdateUI(receiverUid, receiverEnergyComponent);
     }
 
     private void OnAnchorStateChanged(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, AnchorStateChangedEvent args)
@@ -88,6 +97,7 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         args.Handled = true;
 
         QueueDel(args.Used);
+        UpdateUI(receiverUid, receiverEnergyComponent);
     }
 
     private void UpdateAppearance(EntityUid receiverUid, bool enabled)
@@ -124,12 +134,22 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         }
         else
             ReceiverOff(receiverUid, receiverEnergyComponent);
+
+        UpdateUI(receiverUid, receiverEnergyComponent);
     }
 
     private void OnPasswordToConnect(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, SendPasswordToConnectMessage args)
     {
-        var connectingResult = _bsTransmitterEnergySystem.ReceiverConnect(receiverUid, GetEntity(args.Transmitter), args.Password);
+        var transmitterUid = GetEntity(args.Transmitter);
+        if (!Exists(transmitterUid))
+        {
+            UpdateAuthenticationUI(receiverUid, args.Transmitter, true, false, args.RequestId);
+            return;
+        }
+
+        var connectingResult = _bsTransmitterEnergySystem.ReceiverConnect(receiverUid, transmitterUid, args.Password);
         UpdateAuthenticationUI(receiverUid, args.Transmitter, true, connectingResult, args.RequestId);
+        UpdateUI(receiverUid, receiverEnergyComponent);
     }
 
     private void OnOpenAuthentication(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, OpenAuthenticationMessage args)
@@ -138,6 +158,7 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         if (CheckConnected(receiverUid, transmitterUid))
         {
             _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, transmitterUid);
+            UpdateUI(receiverUid, receiverEnergyComponent);
             return;
         }
 
@@ -158,6 +179,7 @@ public sealed class BsReceiverEnergySystem : EntitySystem
 
         receiverEnergyComponent.ReceivedPower = 0;
         _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, receiverEnergyComponent.ConnectedTransmitter);
+        UpdateUI(receiverUid, receiverEnergyComponent);
     }
 
     private (float, float)? GetNetworkData(EntityUid receiverUid)
@@ -216,7 +238,7 @@ public sealed class BsReceiverEnergySystem : EntitySystem
             Money = (int)receiverEnergyComponent.Money,
             ReceivedPower = receiverEnergyComponent.ReceivedPower,
             ConnectedTransmitter = GetNetEntity(receiverEnergyComponent.ConnectedTransmitter),
-            TransmittersData = _cachedTransmittersData,
+            TransmittersData = new Dictionary<NetEntity, UpdateTransmitterStateData>(_cachedTransmittersData),
         };
 
         _uiSystem.SetUiState(receiverUid, BsEnergyUiKey.ReceiverKey, state);
@@ -228,14 +250,18 @@ public sealed class BsReceiverEnergySystem : EntitySystem
             return;
 
         var transmitterUid = GetEntity(transmitter);
-
-        TryComp<MetaDataComponent>(Transform(transmitterUid).GridUid, out var gridMetaData);
+        var gridName = string.Empty;
+        if (Exists(transmitterUid))
+        {
+            TryComp<MetaDataComponent>(Transform(transmitterUid).GridUid, out var gridMetaData);
+            gridName = gridMetaData?.EntityName ?? string.Empty;
+        }
 
         var state = new BsReceiverAuthenticationInterfaceStateMessage
         {
             Transmitter = transmitter,
-            TransmitterGridName = gridMetaData?.EntityName ?? string.Empty,
-            ConnectingResult = connectingResult ?? CheckConnected(receiverUid, transmitterUid),
+            TransmitterGridName = gridName,
+            ConnectingResult = connectingResult ?? (Exists(transmitterUid) && CheckConnected(receiverUid, transmitterUid)),
             IsResponse = isResponse,
             RequestId = requestId,
         };
@@ -258,6 +284,7 @@ public sealed class BsReceiverEnergySystem : EntitySystem
             _bsTransmitterEnergySystem.UpdatePriorityClients(bsTransmitterEnergyComponent);
 
         _audio.PlayPvs(_audio.ResolveSound(receiverEnergyComponent.SoundClick), receiverUid);
+        UpdateUI(receiverUid, receiverEnergyComponent);
     }
 
     private void OnChoiceServer(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, ChoiceTransmitterMessage args)
@@ -268,8 +295,10 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         var transmitterUid = GetEntity(args.Transmitter);
         if (CheckConnected(receiverUid, transmitterUid))
             _bsTransmitterEnergySystem.ReceiverDisconnect(receiverUid, transmitterUid);
-        else
+        else if (Exists(transmitterUid))
             _bsTransmitterEnergySystem.ReceiverConnect(receiverUid, transmitterUid);
+
+        UpdateUI(receiverUid, receiverEnergyComponent);
     }
 
     private void OnWithdraw(EntityUid receiverUid, BsReceiverEnergyComponent receiverEnergyComponent, WithdrawMessage args)
@@ -283,5 +312,6 @@ public sealed class BsReceiverEnergySystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("popup-bs-energy-withdraw-successful"), receiverUid);
         _stackSystem.Spawn((int)receiverEnergyComponent.Money, stackPrototype, receiverUid.ToCoordinates());
         receiverEnergyComponent.Money = 0;
+        UpdateUI(receiverUid, receiverEnergyComponent);
     }
 }

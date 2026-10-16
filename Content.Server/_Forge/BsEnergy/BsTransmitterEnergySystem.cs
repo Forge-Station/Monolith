@@ -51,18 +51,16 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var queryServer = _entityManager.AllEntityQueryEnumerator<BsTransmitterEnergyComponent>();
-        while (queryServer.MoveNext(out var transmitterUid, out var bsTransmitterEnergyComponent))
-        {
-            UpdateUI(transmitterUid, bsTransmitterEnergyComponent);
-        }
-
         _updateTimer += frameTime;
         if (_updateTimer < UpdateInterval)
             return;
 
         _updateTimer = 0;
         UpdatePower();
+
+        var queryServer = _entityManager.AllEntityQueryEnumerator<BsTransmitterEnergyComponent>();
+        while (queryServer.MoveNext(out var transmitterUid, out var bsTransmitterEnergyComponent))
+            UpdateUI(transmitterUid, bsTransmitterEnergyComponent);
     }
 
     public void UpdatePriorityClients(BsTransmitterEnergyComponent bsTransmitterEnergyComponent)
@@ -104,6 +102,7 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
         }
 
         UpdatePriorityClients(bsTransmitterEnergyComponent);
+        UpdateUI(transmitterUid, bsTransmitterEnergyComponent);
         return true;
     }
 
@@ -121,43 +120,38 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
                 continue;
             }
 
-            var transmissionBudget = (int)Math.Ceiling(bsTransmitterEnergyComponent.LastDrawnPower * GeneratorLossFactor);
-            var remainingForClients = Math.Max(0, transmissionBudget);
+            UpdatePriorityClients(bsTransmitterEnergyComponent);
+
+            // Last tick's draw is the budget. Delivering `requested` watts costs requested / lossFactor,
+            // so a full network draw of requested / lossFactor arrives as `requested` on the receiver.
+            var remainingBudget = Math.Max(0f, bsTransmitterEnergyComponent.LastDrawnPower);
             var totalIncome = 0f;
             var totalRequested = 0;
             var totalGranted = 0;
-
             var toDisconnect = new List<EntityUid>();
+
             foreach (var receiverUid in bsTransmitterEnergyComponent.Receivers)
             {
                 if (!receiverUid.IsValid() ||
                     !_entityManager.TryGetComponent<BsReceiverEnergyComponent>(receiverUid, out var bsReceiverEnergyComponent) ||
                     !_entityManager.TryGetComponent<PowerSupplierComponent>(receiverUid, out var powerSupplierComponent))
-                    continue;
-
-                if (bsReceiverEnergyComponent.Enabled)
-                    totalRequested += bsReceiverEnergyComponent.RequestedPower;
-
-                if (!bsReceiverEnergyComponent.Enabled || remainingForClients <= 0)
                 {
-                    powerSupplierComponent.MaxSupply = 0;
-                    bsReceiverEnergyComponent.ReceivedPower = 0;
+                    toDisconnect.Add(receiverUid);
                     continue;
                 }
 
-                var granted = Math.Min(bsReceiverEnergyComponent.RequestedPower, remainingForClients);
-                var grantedWithLosses = (int)Math.Ceiling(granted * GeneratorLossFactor);
-                var losses = granted - grantedWithLosses;
-                var grantedWithCompensation = grantedWithLosses;
+                if (!bsReceiverEnergyComponent.Enabled)
+                {
+                    toDisconnect.Add(receiverUid);
+                    continue;
+                }
 
-                if (remainingForClients >= bsReceiverEnergyComponent.RequestedPower + losses)
-                    grantedWithCompensation += losses;
-                else
-                    grantedWithCompensation = granted;
+                totalRequested += bsReceiverEnergyComponent.RequestedPower;
 
-                var transferMoney = (float)grantedWithCompensation / KvtConst * (bsTransmitterEnergyComponent.Price / 60f) * UpdateInterval;
+                var (delivered, spent) = AllocateDelivery(bsReceiverEnergyComponent.RequestedPower, remainingBudget);
+                var transferMoney = delivered / (float)KvtConst * (bsTransmitterEnergyComponent.Price / 60f) * UpdateInterval;
 
-                if (bsReceiverEnergyComponent.Money < transferMoney)
+                if (delivered > 0 && bsReceiverEnergyComponent.Money < transferMoney)
                 {
                     toDisconnect.Add(receiverUid);
                     powerSupplierComponent.MaxSupply = 0;
@@ -166,51 +160,86 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
                     continue;
                 }
 
-                powerSupplierComponent.MaxSupply = grantedWithCompensation;
-                bsReceiverEnergyComponent.ReceivedPower = grantedWithCompensation;
+                powerSupplierComponent.MaxSupply = delivered;
+                bsReceiverEnergyComponent.ReceivedPower = delivered;
+                remainingBudget = Math.Max(0f, remainingBudget - spent);
+
+                if (delivered <= 0)
+                    continue;
+
                 bsReceiverEnergyComponent.Money -= transferMoney;
                 bsTransmitterEnergyComponent.Money += transferMoney;
                 totalIncome += transferMoney;
-                totalGranted += grantedWithCompensation;
-                remainingForClients -= grantedWithCompensation;
-
-                if (!bsTransmitterEnergyComponent.HistoryData.TryGetValue(GetNetEntity(receiverUid), out var historyData))
-                    historyData = bsTransmitterEnergyComponent.HistoryData[GetNetEntity(receiverUid)] = new();
+                totalGranted += delivered;
 
                 TryComp<MetaDataComponent>(Transform(receiverUid).GridUid, out var gridMetaData);
-
-                historyData.GridReceiverName = gridMetaData?.EntityName ?? string.Empty;
-                historyData.TotalEnergyReceived += (ulong)grantedWithCompensation;
-                historyData.TotalMoneyTransferred += (ulong)transferMoney;
+                AddHistory(bsTransmitterEnergyComponent, receiverUid, gridMetaData?.EntityName ?? string.Empty, delivered, transferMoney);
             }
 
             foreach (var receiverUid in toDisconnect)
             {
-                ReceiverDisconnect(receiverUid, transmitterUid);
+                if (!receiverUid.IsValid())
+                {
+                    bsTransmitterEnergyComponent.Receivers.Remove(receiverUid);
+                    continue;
+                }
+
+                ReceiverDisconnect(receiverUid, transmitterUid, updateUi: false);
             }
 
-            var maxSupply = GetNetworkMaxSupply(transmitterUid) ?? 0f;
-            maxSupply = Math.Min(MathF.Floor(maxSupply * GeneratorLossFactor), MathF.Floor(bsTransmitterEnergyComponent.TargetPower * GeneratorLossFactor));
-            bsTransmitterEnergyComponent.AvailablePower = Math.Max(0, (int)maxSupply - totalGranted);
+            bsTransmitterEnergyComponent.AvailablePower = GetAvailablePower(
+                transmitterUid,
+                powerConsumerComponent,
+                bsTransmitterEnergyComponent.TargetPower,
+                totalGranted);
 
-            if (bsTransmitterEnergyComponent.EnablePassiveIncome && remainingForClients > 0)
+            if (bsTransmitterEnergyComponent.EnablePassiveIncome && remainingBudget > 0f)
             {
-                var passiveIncome = (float)remainingForClients / KvtConst * (PassiveIncome / 60f) * UpdateInterval;
+                var passiveIncome = remainingBudget / KvtConst * (PassiveIncome / 60f) * UpdateInterval;
                 bsTransmitterEnergyComponent.Money += passiveIncome;
                 totalIncome += passiveIncome;
-
-                if (!bsTransmitterEnergyComponent.HistoryData.TryGetValue(NetEntity.Invalid, out var historyData))
-                    historyData = bsTransmitterEnergyComponent.HistoryData[NetEntity.Invalid] = new();
-
-                historyData.GridReceiverName = Loc.GetString("ui-bs-transmitter-automatic-energy-sales");
-                historyData.TotalEnergyReceived += (ulong)remainingForClients;
-                historyData.TotalMoneyTransferred += (ulong)passiveIncome;
+                AddHistory(
+                    bsTransmitterEnergyComponent,
+                    EntityUid.Invalid,
+                    Loc.GetString("ui-bs-transmitter-automatic-energy-sales"),
+                    (int)Math.Floor(remainingBudget),
+                    passiveIncome);
             }
 
-            bsTransmitterEnergyComponent.Income = totalIncome / UpdateInterval * 60;
-            powerConsumerComponent.DrawRate = bsTransmitterEnergyComponent.EnablePassiveIncome ? bsTransmitterEnergyComponent.TargetPower : Math.Min(MathF.Floor(totalRequested / GeneratorLossFactor), bsTransmitterEnergyComponent.TargetPower);
+            bsTransmitterEnergyComponent.Income = totalIncome / UpdateInterval * 60f;
+            var neededDraw = (float)Math.Ceiling(totalRequested / (double)GeneratorLossFactor);
+            powerConsumerComponent.DrawRate = bsTransmitterEnergyComponent.EnablePassiveIncome
+                ? bsTransmitterEnergyComponent.TargetPower
+                : Math.Min(neededDraw, bsTransmitterEnergyComponent.TargetPower);
             bsTransmitterEnergyComponent.LastDrawnPower = powerConsumerComponent.ReceivedPower;
         }
+    }
+
+    private static (int Delivered, float Spent) AllocateDelivery(int requested, float remainingBudget)
+    {
+        if (requested <= 0 || remainingBudget <= 0f)
+            return (0, 0f);
+
+        var cost = requested / GeneratorLossFactor;
+        if (remainingBudget >= cost)
+            return (requested, cost);
+
+        return ((int)Math.Floor(remainingBudget * GeneratorLossFactor), remainingBudget);
+    }
+
+    private void AddHistory(BsTransmitterEnergyComponent transmitter, EntityUid receiverUid, string gridName, int energy, float money)
+    {
+        var key = receiverUid.IsValid() ? GetNetEntity(receiverUid) : NetEntity.Invalid;
+        if (!transmitter.HistoryData.TryGetValue(key, out var history))
+            history = transmitter.HistoryData[key] = new();
+
+        if (!string.IsNullOrEmpty(gridName))
+            history.GridReceiverName = gridName;
+
+        if (energy > 0)
+            history.TotalEnergyReceived += (ulong)energy;
+
+        history.TotalMoneyTransferred += money;
     }
 
     private void OnAnchorStateChanged(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, AnchorStateChangedEvent args)
@@ -221,7 +250,11 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
 
     private void OnInit(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, ComponentInit args)
     {
-        bsTransmitterEnergyComponent.ConnectingLimit = bsTransmitterEnergyComponent.MaxConnected;
+        if (bsTransmitterEnergyComponent.ConnectingLimit < 0)
+            bsTransmitterEnergyComponent.ConnectingLimit = bsTransmitterEnergyComponent.MaxConnected;
+        else
+            bsTransmitterEnergyComponent.ConnectingLimit = Math.Clamp(bsTransmitterEnergyComponent.ConnectingLimit, 0, bsTransmitterEnergyComponent.MaxConnected);
+
         UpdateAppearance(transmitterUid, bsTransmitterEnergyComponent.Enabled);
     }
 
@@ -229,29 +262,57 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
     {
         bsTransmitterEnergyComponent.Price = Math.Max(0, args.Price);
         DisconnectAllReceivers(bsTransmitterEnergyComponent);
+        UpdateUI(transmitterUid, bsTransmitterEnergyComponent);
     }
 
     private void OnChangePassword(EntityUid uid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, PasswordMessage args)
     {
-        if (args.Password.Length <= BsEnergySettings.PasswordMaxLenght)
-            bsTransmitterEnergyComponent.Password = args.Password;
+        if (args.Password.Length > BsEnergySettings.PasswordMaxLenght)
+            return;
+
+        var password = string.IsNullOrWhiteSpace(args.Password) ? string.Empty : args.Password;
+        if (password == bsTransmitterEnergyComponent.Password)
+            return;
+
+        bsTransmitterEnergyComponent.Password = password;
+        DisconnectAllReceivers(bsTransmitterEnergyComponent);
+        UpdateUI(uid, bsTransmitterEnergyComponent);
     }
 
     private void OnChangeConnectingLimit(EntityUid uid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, ConnectingLimitMessage args)
     {
-        if (bsTransmitterEnergyComponent.ConnectingLimit != args.LimitConnecting &&
-            args.LimitConnecting >= 0 && args.LimitConnecting <= bsTransmitterEnergyComponent.MaxConnected)
+        if (args.LimitConnecting < 0 || args.LimitConnecting > bsTransmitterEnergyComponent.MaxConnected ||
+            bsTransmitterEnergyComponent.ConnectingLimit == args.LimitConnecting)
+            return;
 
-            bsTransmitterEnergyComponent.ConnectingLimit = args.LimitConnecting;
+        bsTransmitterEnergyComponent.ConnectingLimit = args.LimitConnecting;
+        TrimReceiversToLimit(uid, bsTransmitterEnergyComponent);
+        UpdateUI(uid, bsTransmitterEnergyComponent);
+    }
+
+    private void TrimReceiversToLimit(EntityUid transmitterUid, BsTransmitterEnergyComponent transmitter)
+    {
+        while (transmitter.Receivers.Count > transmitter.ConnectingLimit)
+        {
+            var count = transmitter.Receivers.Count;
+            ReceiverDisconnect(transmitter.Receivers[^1], transmitterUid, updateUi: false);
+            if (transmitter.Receivers.Count >= count)
+                transmitter.Receivers.RemoveAt(transmitter.Receivers.Count - 1);
+        }
     }
 
     private void OnKick(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, KickMessage args)
     {
         var receiverUid = GetEntity(args.KickedReceiver);
-        ReceiverDisconnect(receiverUid, transmitterUid);
+        if (!bsTransmitterEnergyComponent.Receivers.Contains(receiverUid))
+            return;
+
+        ReceiverDisconnect(receiverUid, transmitterUid, updateUi: false);
 
         if (TryComp<BsReceiverEnergyComponent>(receiverUid, out var bsReceiverEnergyComponent))
             bsReceiverEnergyComponent.Enabled = false;
+
+        UpdateUI(transmitterUid, bsTransmitterEnergyComponent);
     }
 
     private void OnWithdraw(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, WithdrawMessage args)
@@ -265,6 +326,7 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("popup-bs-energy-withdraw-successful"), transmitterUid);
         _stackSystem.Spawn((int)bsTransmitterEnergyComponent.Money, stackPrototype, transmitterUid.ToCoordinates());
         bsTransmitterEnergyComponent.Money = 0;
+        UpdateUI(transmitterUid, bsTransmitterEnergyComponent);
     }
 
     private void UpdateAppearance(EntityUid transmitterUid, bool enabled)
@@ -278,54 +340,82 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
     {
         foreach (var receiverUid in bsTransmitterEnergyComponent.Receivers)
         {
-            if (!TryComp<BsReceiverEnergyComponent>(receiverUid, out var bsReceiverEnergyComponent) ||
-                !TryComp<PowerSupplierComponent>(receiverUid, out var powerSupplierComponent))
+            if (TryComp<PowerSupplierComponent>(receiverUid, out var powerSupplierComponent))
+                powerSupplierComponent.MaxSupply = 0;
+
+            if (!TryComp<BsReceiverEnergyComponent>(receiverUid, out var bsReceiverEnergyComponent))
                 continue;
 
-            bsReceiverEnergyComponent.ConnectedTransmitter = EntityUid.Invalid;
-            powerSupplierComponent.MaxSupply = 0;
+            bsReceiverEnergyComponent.ReceivedPower = 0;
+            if (bsReceiverEnergyComponent.ConnectedTransmitter == transmitterUid)
+                bsReceiverEnergyComponent.ConnectedTransmitter = EntityUid.Invalid;
         }
     }
 
-    public void ReceiverDisconnect(EntityUid receiverUid, EntityUid transmitterUid)
+    public void ReceiverDisconnect(EntityUid receiverUid, EntityUid transmitterUid, bool updateUi = true)
     {
         if (!receiverUid.IsValid())
             return;
 
+        if (TryComp<BsTransmitterEnergyComponent>(transmitterUid, out var transmitter))
+        {
+            if (!transmitter.Receivers.Remove(receiverUid))
+            {
+                if (!TryComp<BsReceiverEnergyComponent>(receiverUid, out var linked) || linked.ConnectedTransmitter != transmitterUid)
+                    return;
+            }
+        }
+        else if (TryComp<BsReceiverEnergyComponent>(receiverUid, out var linked) &&
+                 linked.ConnectedTransmitter != transmitterUid &&
+                 transmitterUid.IsValid())
+        {
+            return;
+        }
+
         if (TryComp<PowerSupplierComponent>(receiverUid, out var powerSupplierComponent))
             powerSupplierComponent.MaxSupply = 0;
 
-        if (TryComp<BsReceiverEnergyComponent>(receiverUid, out var bsReceiverEnergyComponent))
+        if (TryComp<BsReceiverEnergyComponent>(receiverUid, out var receiver))
         {
-            bsReceiverEnergyComponent.ReceivedPower = 0;
-            bsReceiverEnergyComponent.ConnectedTransmitter = EntityUid.Invalid;
+            receiver.ReceivedPower = 0;
+            if (!transmitterUid.IsValid() || receiver.ConnectedTransmitter == transmitterUid)
+                receiver.ConnectedTransmitter = EntityUid.Invalid;
         }
 
-        if (TryComp<BsTransmitterEnergyComponent>(transmitterUid, out var bsTransmitterEnergyComponent))
-            bsTransmitterEnergyComponent.Receivers.Remove(receiverUid);
+        if (updateUi && transmitter != null)
+            UpdateUI(transmitterUid, transmitter);
+    }
+
+    private (float Load, float Supply, float MaxSupply)? GetNetworkStats(EntityUid transmitterUid)
+    {
+        if (!TryComp<PowerConsumerComponent>(transmitterUid, out var powerConsumerComponent))
+            return null;
+
+        if (powerConsumerComponent.Net is { IsConnectedNetwork: true } net)
+            return (net.NetworkNode.LastCombinedLoad, net.NetworkNode.LastCombinedSupply, net.NetworkNode.LastCombinedMaxSupply);
+
+        return null;
     }
 
     private (float, float)? GetNetworkData(EntityUid transmitterUid)
     {
-        if (!TryComp<PowerConsumerComponent>(transmitterUid, out var powerConsumerComponent))
+        if (GetNetworkStats(transmitterUid) is not { } stats)
             return null;
 
-        (float, float)? networkStats = null;
-        if (powerConsumerComponent.Net is { IsConnectedNetwork: true } net)
-            networkStats = (net.NetworkNode.LastCombinedLoad, net.NetworkNode.LastCombinedSupply);
-
-        return networkStats;
+        return (stats.Load, stats.Supply);
     }
 
-    private float? GetNetworkMaxSupply(EntityUid transmitterUid)
+    private int GetAvailablePower(EntityUid transmitterUid, PowerConsumerComponent powerConsumer, int targetPower, int totalGranted)
     {
-        if (!TryComp<PowerConsumerComponent>(transmitterUid, out var powerConsumerComponent))
-            return null;
+        var spare = 0f;
+        if (GetNetworkStats(transmitterUid) is { } stats)
+            spare = Math.Max(0f, stats.MaxSupply - stats.Load) + powerConsumer.ReceivedPower;
 
-        if (powerConsumerComponent.Net is { IsConnectedNetwork: true } net)
-            return net.NetworkNode.LastCombinedMaxSupply;
+        var deliverableCap = (int)Math.Min(
+            MathF.Floor(spare * GeneratorLossFactor),
+            MathF.Floor(targetPower * GeneratorLossFactor));
 
-        return null;
+        return Math.Max(0, deliverableCap - totalGranted);
     }
 
     private void DisconnectAllReceivers(BsTransmitterEnergyComponent transmitterComp)
@@ -362,6 +452,8 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
         }
         else
             TransmitterOff(transmitterUid, bsTransmitterEnergyComponent);
+
+        UpdateUI(transmitterUid, bsTransmitterEnergyComponent);
     }
 
     private void TransmitterOff(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent)
@@ -390,6 +482,7 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
             powerConsumerComponent.DrawRate = power;
 
         _audio.PlayPvs(_audio.ResolveSound(bsTransmitterEnergyComponent.SoundClick), transmitterUid);
+        UpdateUI(transmitterUid, bsTransmitterEnergyComponent);
     }
 
     private void UpdateReceiversCache(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent)
@@ -421,20 +514,13 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
         if (!bsTransmitterEnergyComponent.EnablePassiveIncome)
             return;
 
-        if (_cachedReceiversData[transmitterUid].TryGetValue(NetEntity.Invalid, out var autoSaleReceiverData))
-            autoSaleReceiverData.ReceivedPower = bsTransmitterEnergyComponent.AvailablePower;
-        else
+        _cachedReceiversData[transmitterUid][NetEntity.Invalid] = new UpdateReceiversData
         {
-            var receiverStateData = new UpdateReceiversData
-            {
-                GridReceiverName = Loc.GetString("ui-bs-transmitter-automatic-energy-sales"),
-                Priority = int.MaxValue,
-                RequestedPower = float.PositiveInfinity,
-                ReceivedPower = bsTransmitterEnergyComponent.AvailablePower,
-            };
-
-            _cachedReceiversData[transmitterUid][NetEntity.Invalid] = receiverStateData;
-        }
+            GridReceiverName = Loc.GetString("ui-bs-transmitter-automatic-energy-sales"),
+            Priority = int.MaxValue,
+            RequestedPower = float.PositiveInfinity,
+            ReceivedPower = bsTransmitterEnergyComponent.AvailablePower,
+        };
     }
 
     private void UpdateUI(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent)
@@ -460,11 +546,27 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
             PowerConsumer = (int)powerConsumerComponent.ReceivedPower,
             AvailablePower = bsTransmitterEnergyComponent.AvailablePower,
             NetworkStats = GetNetworkData(transmitterUid),
-            ReceiversData = _cachedReceiversData[transmitterUid],
-            HistoryData = bsTransmitterEnergyComponent.HistoryData,
+            ReceiversData = new Dictionary<NetEntity, UpdateReceiversData>(_cachedReceiversData[transmitterUid]),
+            HistoryData = CopyHistory(bsTransmitterEnergyComponent.HistoryData),
             Password = bsTransmitterEnergyComponent.Password,
         };
 
         _uiSystem.SetUiState(transmitterUid, BsEnergyUiKey.TransmitterKey, state);
+    }
+
+    private static Dictionary<NetEntity, UpdateHistoryData> CopyHistory(Dictionary<NetEntity, UpdateHistoryData> source)
+    {
+        var copy = new Dictionary<NetEntity, UpdateHistoryData>(source.Count);
+        foreach (var (key, value) in source)
+        {
+            copy[key] = new UpdateHistoryData
+            {
+                GridReceiverName = value.GridReceiverName,
+                TotalEnergyReceived = value.TotalEnergyReceived,
+                TotalMoneyTransferred = value.TotalMoneyTransferred,
+            };
+        }
+
+        return copy;
     }
 }

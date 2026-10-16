@@ -47,7 +47,7 @@ public sealed class UpdateHistoryData
     public ulong TotalEnergyReceived;
 
     [ViewVariables]
-    public ulong TotalMoneyTransferred;
+    public float TotalMoneyTransferred;
 }
 
 [Serializable, NetSerializable]

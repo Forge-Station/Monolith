@@ -40,10 +40,13 @@ public sealed class BsReceiverBoundUserInterface : BoundUserInterface
         if (!disposing)
             return;
 
-        Timer.Spawn(TimeSpan.Zero,
-            () =>
+        Timer.Spawn(TimeSpan.Zero, () =>
         {
-            if (EntMan.TryGetComponent<UserInterfaceComponent>(Owner, out var uiComp) && uiComp.ClientOpenInterfaces.TryGetValue(BsEnergyUiKey.AuthenticationKey, out var authBui))
+            if (!EntMan.EntityExists(Owner))
+                return;
+
+            if (EntMan.TryGetComponent<UserInterfaceComponent>(Owner, out var uiComp) &&
+                uiComp.ClientOpenInterfaces.TryGetValue(BsEnergyUiKey.AuthenticationKey, out var authBui))
                 authBui.Close();
         });
 

@@ -9,7 +9,6 @@
   - type: Sprite
   - type: Appearance
   - type: GenericVisualizer
-  - type: WiresPanel
   - type: Fixtures
     fixtures:
       fix1:

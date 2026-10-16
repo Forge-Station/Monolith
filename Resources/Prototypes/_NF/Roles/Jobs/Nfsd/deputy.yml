@@ -42,7 +42,9 @@
 #    pocket1: WeaponPistolMk58 #WeaponPistolMk58Nonlethal
   storage:
     back:
-#    - Magazine45_ACPPistolFMJ  Mono
-    - BaseSecurityUplinkRadioDeputy #Mono: Added Deputy uplink
+#   - Magazine45_ACPPistolFMJ  Mono
+#   - BaseSecurityUplinkRadioDeputy #Mono: Added Deputy uplink
+    - FederationMilitaryCredit50
+    - FederationMilitaryCredit25
     - RadioHandheldNF # Mono
-#    - BookTSFSOP # Forge-change delete
+#   - BookTSFSOP # Forge-change delete

@@ -114,10 +114,10 @@ public sealed partial class ForgeXenoOrganSystem : EntitySystem
 
     private void AttachIfHosted(Entity<ForgeXenoOrganComponent> ent)
     {
-        EnsureActions(ent);
         if (ContainingHost(ent) is not { } host)
             return;
 
+        EnsureActions(ent);
         Grant(ent, host);
     }
 

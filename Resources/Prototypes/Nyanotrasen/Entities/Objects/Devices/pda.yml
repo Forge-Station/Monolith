@@ -60,14 +60,12 @@
     accentVColor: "#DFDFDF"
 #  - type: Icon
 #    state: pda-guard
-  - type: CartridgeLoader # DeltaV - Crime Assist + SecWatch, increased diskSpace by 2 to fit them
+  - type: CartridgeLoader # Crime Assist and SecWatch are not merged; keep room for the shared cartridges.
     diskSpace: 7
     preinstalled:
       - CrewManifestCartridge
       - NotekeeperCartridge
       - NewsReaderCartridge
-      - CrimeAssistCartridge
-      #- SecWatchCartridge
       - BountyContractsCartridge # Frontier
       - AstroNavCartridge # Frontier
       - NanoChatCartridge # DeltaV

@@ -19,18 +19,20 @@
     sprite: _Forge/Objects/Weapons/Guns/Snipers/nexus_bal_sniper_inhand_x96.rsi
     shape:
     - 0,0,7,2
-  - type: HeldSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.7
+    sprintModifier: 0.55
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
-  - type: SpeedModifiedOnWield
-    walkModifier: 0.225
-    sprintModifier: 0.225
+  - type: WieldDelay
+    baseDelay: 0.75
+    modifiedDelay: 0.75
+    preventFiring: true
   - type: GunRequiresWield
   - type: Gun
     examineCaliber: gun-examine-caliber-60
+    projectileSpeed: 65
     fireRate: 0.5
     selectedMode: SemiAuto
     availableModes:

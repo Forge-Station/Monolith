@@ -138,6 +138,8 @@
           32:
             sprite: _Wega/Demon/Mobs/Species/Demon/displacement.rsi
             state: jumpsuit-female
+  - type: TypingIndicator   # Forge-Change
+    proto: demon
 
 - type: entity
   parent: MobHumanDummy

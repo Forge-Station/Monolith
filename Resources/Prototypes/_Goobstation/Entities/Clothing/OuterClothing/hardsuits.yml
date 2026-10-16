@@ -79,7 +79,8 @@
         Piercing: 0.55 # Forge-change 0.75 -> 0.55
         Heat: 0.6 # Forge-change 0.5 -> 0.6
         Radiation: 0.6 # Forge-change 0.2 -> 0.6
-        Caustic: 0.3
+        Caustic: 0.6 # Forge-change 0.3 -> 0.6
+        Shock: 0.8 # Forge-change
   - type: ClothingSpeedModifier
     walkModifier: 0.9 # Forge-change 0.95 -> 0.9
     sprintModifier: 0.9 # Forge-change 0.95 -> 0.9

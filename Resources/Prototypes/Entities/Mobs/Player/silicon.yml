@@ -8,6 +8,7 @@
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
+    - Handheld # Forge - change
     - Common
     - Command
     - Engineering
@@ -18,6 +19,7 @@
     - Supply
   - type: ActiveRadio
     channels:
+    - Handheld # Forge - change
     - Common
     - Command
     - Engineering
@@ -455,6 +457,18 @@
     needsPower: false # Mono
   - type: StationAiCore
   - type: StationAiScreen # Forge-Change
+  - type: EncryptionKeyHolder # Forge - change
+    keysUnlocked: false
+    keySlots: 1
+  - type: ContainerContainer # Forge - change
+    containers:
+      station_ai_mind_slot: !type:ContainerSlot
+        showEnts: true
+      key_slots: !type:Container
+  - type: ContainerFill # Forge - change
+    containers:
+      key_slots:
+      - EncryptionKeyCustom
   - type: StationAiVision
   - type: InteractionOutline
   - type: Sprite
@@ -490,6 +504,8 @@
     interfaces:
         enum.HolopadUiKey.AiRequestWindow:
           type: HolopadBoundUserInterface
+        enum.ConfigurableEncryptionKeyUiKey.Key: # Forge - change
+          type: ConfigurableEncryptionKeyBoundUserInterface
         enum.HolopadUiKey.AiActionWindow:
           type: HolopadBoundUserInterface   
 
@@ -528,6 +544,7 @@
       machine_board: !type:Container
         showEnts: false
         occludes: true
+      key_slots: !type:Container # Forge - change
       machine_parts: !type:Container
         showEnts: false
         occludes: true
@@ -657,6 +674,9 @@
     mindRole: "MindRoleSiliconBrain"
     silent: true
   - type: StationAiPersonality # Forge-Change
+  - type: TTS # Forge - change
+    voice: Glados
+    fixedVoice: true
   - type: GhostRole # Forge-Change
     name: ghost-role-information-station-ai-name
     description: ghost-role-information-station-ai-description

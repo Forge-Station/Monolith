@@ -15,3 +15,10 @@ Entries:
   id: 2
   time: '2026-10-16T21:31:47.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/528
+- author: artur-001
+  changes:
+    - type: Tweak
+      message: Обновление блюспейс передатчика и приёмника энергии.
+  id: 3
+  time: '2026-10-16T22:35:50.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/497

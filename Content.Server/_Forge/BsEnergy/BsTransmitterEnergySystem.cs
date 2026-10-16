@@ -79,7 +79,7 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
         if (!receiverUid.IsValid() || !transmitterUid.IsValid() ||
             !TryComp<BsTransmitterEnergyComponent>(transmitterUid, out var bsTransmitterEnergyComponent) ||
             bsTransmitterEnergyComponent.Receivers.Count >= bsTransmitterEnergyComponent.MaxConnected ||
-            bsTransmitterEnergyComponent.Receivers.Count >= bsTransmitterEnergyComponent.ConnectingLimit ||
+            bsTransmitterEnergyComponent.Receivers.Count >= bsTransmitterEnergyComponent.EffectiveConnectingLimit ||
             !bsTransmitterEnergyComponent.Enabled ||
             !string.IsNullOrWhiteSpace(bsTransmitterEnergyComponent.Password) && bsTransmitterEnergyComponent.Password != password ||
             !TryComp<BsReceiverEnergyComponent>(receiverUid, out var bsReceiverEnergyComponent) ||
@@ -250,11 +250,6 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
 
     private void OnInit(EntityUid transmitterUid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, ComponentInit args)
     {
-        if (bsTransmitterEnergyComponent.ConnectingLimit < 0)
-            bsTransmitterEnergyComponent.ConnectingLimit = bsTransmitterEnergyComponent.MaxConnected;
-        else
-            bsTransmitterEnergyComponent.ConnectingLimit = Math.Clamp(bsTransmitterEnergyComponent.ConnectingLimit, 0, bsTransmitterEnergyComponent.MaxConnected);
-
         UpdateAppearance(transmitterUid, bsTransmitterEnergyComponent.Enabled);
     }
 
@@ -282,17 +277,19 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
     private void OnChangeConnectingLimit(EntityUid uid, BsTransmitterEnergyComponent bsTransmitterEnergyComponent, ConnectingLimitMessage args)
     {
         if (args.LimitConnecting < 0 || args.LimitConnecting > bsTransmitterEnergyComponent.MaxConnected ||
-            bsTransmitterEnergyComponent.ConnectingLimit == args.LimitConnecting)
+            bsTransmitterEnergyComponent.EffectiveConnectingLimit == args.LimitConnecting)
             return;
 
-        bsTransmitterEnergyComponent.ConnectingLimit = args.LimitConnecting;
+        bsTransmitterEnergyComponent.ConnectingLimit = args.LimitConnecting == bsTransmitterEnergyComponent.MaxConnected
+            ? -1
+            : args.LimitConnecting;
         TrimReceiversToLimit(uid, bsTransmitterEnergyComponent);
         UpdateUI(uid, bsTransmitterEnergyComponent);
     }
 
     private void TrimReceiversToLimit(EntityUid transmitterUid, BsTransmitterEnergyComponent transmitter)
     {
-        while (transmitter.Receivers.Count > transmitter.ConnectingLimit)
+        while (transmitter.Receivers.Count > transmitter.EffectiveConnectingLimit)
         {
             var count = transmitter.Receivers.Count;
             ReceiverDisconnect(transmitter.Receivers[^1], transmitterUid, updateUi: false);
@@ -535,7 +532,7 @@ public sealed class BsTransmitterEnergySystem : EntitySystem
         {
             StepSize = bsTransmitterEnergyComponent.StepSize,
             MaxConnected = bsTransmitterEnergyComponent.MaxConnected,
-            ConnectingLimit = bsTransmitterEnergyComponent.ConnectingLimit,
+            ConnectingLimit = bsTransmitterEnergyComponent.EffectiveConnectingLimit,
             Income = bsTransmitterEnergyComponent.Income,
             MaxValue = bsTransmitterEnergyComponent.MaxValue,
             ConnectedCount = bsTransmitterEnergyComponent.Receivers.Count,

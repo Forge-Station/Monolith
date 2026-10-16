@@ -210,7 +210,7 @@ public sealed class BsReceiverEnergySystem : EntitySystem
             {
                 CurrentConnected = bsTransmitterEnergyComponent.Receivers.Count,
                 MaxConnected = bsTransmitterEnergyComponent.MaxConnected,
-                LimitConnecting = bsTransmitterEnergyComponent.ConnectingLimit,
+                LimitConnecting = bsTransmitterEnergyComponent.EffectiveConnectingLimit,
                 Price = bsTransmitterEnergyComponent.Price,
                 TransmitterAvailablePower = bsTransmitterEnergyComponent.AvailablePower,
                 GridTransmitterName = gridMetaData?.EntityName ?? string.Empty,

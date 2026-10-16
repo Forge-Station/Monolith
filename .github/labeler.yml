@@ -12,7 +12,7 @@
 
 "Map-Event":
 - changed-files:
-  - any-glob-to-any-file: "Resources/Maps/_Forge/Event/**/*.yml" # Grid Files  
+  - any-glob-to-any-file: "Resources/Maps/_Forge/Event/**/*.yml" # Grid Files
 
 "Map-Dungeon":
 - changed-files:
@@ -22,7 +22,7 @@
 - changed-files:
   - any-glob-to-any-file:
     - "Resources/Maps/_Forge/Outpost/*.yml" # Map Files
-    - "Resources/Prototypes/_Forge/Maps/Outpost/*.yml" # Prototypes Files
+    - "Resources/Prototypes/_Forge/Outpost/*.yml" # Prototypes Files
 
 "Map-Shuttle":
 - changed-files:
@@ -39,6 +39,8 @@
     - "Resources/Prototypes/_Forge/PointsOflnterest/**/*.yml" # Prototypes Files
     - "Resources/Maps/_Mono/POI/**/*.yml" # Grid Files
     - "Resources/Prototypes/_Mono/PointsOfInterest/**/*.yml" # Prototypes Files
+    - "Resources/Maps/_NF/POI/**/*.yml" # Grid Files
+    - "Resources/Prototypes/_NF/PointsOfInterest/**/*.yml" # Prototypes Files
 
 
 "Sprites":

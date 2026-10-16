@@ -1,6 +1,6 @@
 #region Empire
 - type: entity
-  id: SuitStorageEmpire14m
+  id: SuitStorageRI14
   parent: SuitStorageBase
   suffix: Filled, RI-14
   components:

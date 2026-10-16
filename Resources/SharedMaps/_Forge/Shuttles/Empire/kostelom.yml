@@ -4630,7 +4630,7 @@ entities:
     - type: Transform
       pos: -0.5,-12.5
       parent: 1
-- proto: SuitStorageEmpire14m
+- proto: SuitStorageRI14
   entities:
   - uid: 588
     components:

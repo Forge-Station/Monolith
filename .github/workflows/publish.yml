@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
 
     steps:
     - uses: actions/checkout@v3.6.0
@@ -59,12 +62,20 @@ jobs:
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
 
-    # - name: Publish changelog (Discord)
-    #   continue-on-error: true
-    #   run: Tools/actions_changelogs_since_last_run.py
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #     DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
+    - name: Setup Python
+      uses: actions/setup_python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install changelog deps
+      run: pip install requests pyyaml
+    
+    - name: Publish changelog (Discord)
+      continue-on-error: true
+      run: Tools/actions_changelogs_since_last_run.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_CHANGELOG_WEBHOOK }}
 
     #- name: Publish changelog (RSS)
     #  continue-on-error: true

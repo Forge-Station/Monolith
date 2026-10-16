@@ -322,7 +322,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
     {
         // Forge-Change: PDAs must never appear as ghost roles (use-in-hand used to flood the list).
         // Station AI brains carry a PDA and are still real ghost roles.
-        if (HasComp<PdaComponent>(role.Owner) && !HasComp<StationAiPersonalityComponent>(role.Owner))
+        if (IsSuppressedPdaGhostRole(role.Owner))
             return;
 
         if (_ghostRoles.ContainsValue(role))
@@ -584,7 +584,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
     {
         var metaQuery = GetEntityQuery<MetaDataComponent>();
         return _ghostRoles.Count(pair => metaQuery.GetComponent(pair.Value.Owner).EntityPaused == false
-                                        && !HasComp<PdaComponent>(pair.Value.Owner)); // Forge-Change
+                                        && !IsSuppressedPdaGhostRole(pair.Value.Owner)); // Forge-Change
     }
 
     /// <summary>
@@ -604,7 +604,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
                 continue;
 
             // Forge-Change: hide leftover PDA ghost roles from the list.
-            if (HasComp<PdaComponent>(uid))
+            if (IsSuppressedPdaGhostRole(uid))
                 continue;
 
 
@@ -778,7 +778,15 @@ public sealed partial class GhostRoleSystem : EntitySystem
         return Resolve(uid, ref component, false) &&
                !component.Taken &&
                !MetaData(uid).EntityPaused &&
-               !HasComp<PdaComponent>(uid); // Forge-Change: PDAs cannot be taken as ghost roles
+               !IsSuppressedPdaGhostRole(uid); // Forge-Change: PDAs cannot be taken as ghost roles
+    }
+
+    /// <summary>
+    /// PDAs must not appear as ghost roles. Station AI brains carry a PDA and remain real takeover roles.
+    /// </summary>
+    private bool IsSuppressedPdaGhostRole(EntityUid uid)
+    {
+        return HasComp<PdaComponent>(uid) && !HasComp<StationAiPersonalityComponent>(uid);
     }
 
     private void OnTakeoverTakeRole(EntityUid uid, GhostTakeoverAvailableComponent component, ref TakeGhostRoleEvent args)

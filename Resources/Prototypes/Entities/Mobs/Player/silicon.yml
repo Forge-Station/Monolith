@@ -699,7 +699,10 @@
   - type: ContainerContainer
     containers:
       program-container: !type:Container
-      Cartridge-Slot: !type:ContainerSlot
+      Cartridge-Slot: !type:ContainerSlot {}
+      PDA-id: !type:ContainerSlot {}
+      PDA-pen: !type:ContainerSlot {}
+      PDA-pai: !type:ContainerSlot {}
   - type: ItemSlots
   - type: PdaBorderColor
     borderColor: "#45453f"

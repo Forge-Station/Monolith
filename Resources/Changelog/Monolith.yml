@@ -23532,3 +23532,16 @@ Entries:
   id: 2590
   time: '2026-10-16T19:16:31.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/530
+- author: teasum
+  changes:
+    - type: Add
+      message: Добавил блюспейс хирургические перчатки
+    - type: Add
+      message: добавил блюспейс модуль для автодока
+    - type: Add
+      message: дал игнор одежды перчам тти и мед боргу
+    - type: Remove
+      message: Убрал возможность самоопераций
+  id: 2591
+  time: '2026-10-16T19:35:07.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/526

@@ -5,7 +5,7 @@ on:
     types: [closed]
 
 env:
-  GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.FORGE_TOKEN }}
   CHANGELOG_DIR: Resources/Changelog/Monolith.yml # Mono
   PR_NUMBER: ${{ github.event.number }}
 

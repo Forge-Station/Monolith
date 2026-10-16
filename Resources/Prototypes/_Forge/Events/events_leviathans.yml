@@ -1,0 +1,63 @@
+# Rare space leviathan encounters.
+
+- type: entityTable
+  id: ForgeLeviathanEventsTable
+  table: !type:AllSelector
+    children:
+    - id: ForgeVoidDrakeSpawn
+    - id: ForgeVoidWormSpawn
+    - id: ForgeVoidMedusaSpawn
+
+- type: entity
+  parent: BaseGameRule
+  id: ForgeVoidDrakeSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-forge-void-drake-start
+    startAudio:
+      path: /Audio/Animals/space_dragon_roar.ogg
+    weight: 2
+    earliestStart: 45
+    reoccurrenceDelay: 75
+    minimumPlayers: 15
+    duration: null
+    maxOccurrences: 1
+  - type: ForgeSpaceMobSpawnRule
+    prototype: MobForgeVoidDrakeAI
+    spawnDistance: 80
+
+- type: entity
+  parent: BaseGameRule
+  id: ForgeVoidWormSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-forge-void-worm-start
+    startAudio:
+      path: /Audio/Effects/demon_consume.ogg
+    weight: 2
+    earliestStart: 50
+    reoccurrenceDelay: 75
+    minimumPlayers: 15
+    duration: null
+    maxOccurrences: 1
+  - type: ForgeSpaceMobSpawnRule
+    prototype: MobForgeVoidWorm
+    spawnDistance: 90
+
+- type: entity
+  parent: BaseGameRule
+  id: ForgeVoidMedusaSpawn
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-forge-void-medusa-start
+    startAudio:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+    weight: 2
+    earliestStart: 40
+    reoccurrenceDelay: 75
+    minimumPlayers: 15
+    duration: null
+    maxOccurrences: 1
+  - type: ForgeSpaceMobSpawnRule
+    prototype: MobForgeVoidMedusaAI
+    spawnDistance: 70

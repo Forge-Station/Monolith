@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Pixel art for Corvax Forge leviathans.",
+  "size": {
+    "x": 1024,
+    "y": 1024
+  },
+  "states": [
+    {
+      "name": "alive",
+      "directions": 4,
+      "delays": [
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ],
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ],
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ],
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ]
+      ]
+    },
+    {
+      "name": "alive-unshaded",
+      "directions": 4,
+      "delays": [
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ],
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ],
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ],
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ]
+      ]
+    },
+    {
+      "name": "crit",
+      "directions": 4
+    },
+    {
+      "name": "dead",
+      "directions": 4
+    },
+    {
+      "name": "dead-unshaded",
+      "directions": 4
+    }
+  ]
+}

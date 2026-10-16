@@ -153,8 +153,9 @@ language-ValyrianStandard-description =
     Редко используется за пределами родных миров и в современности вытеснен.
     Его носители - те, кто стремится сохранить традиции и верования древних народов до колониальной эпохи.
 
+chat-language-Rumbling-name = Рокот
 language-Rumbling-name = Рокот
-language-Rumbling-description = Гррав!
+language-Rumbling-description = Напоминает смесь "грр" и "гр-р", с лёгким акцентом "гр". А так вполне себе.
 
 
 

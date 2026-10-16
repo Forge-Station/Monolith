@@ -8,6 +8,8 @@
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/merc_warlordsuit.rsi
   - type: Clothing
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/merc_warlordsuit.rsi
+  - type: Item # Forge-change
+    size: Huge # Forge-change
   - type: PressureProtection
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
@@ -21,7 +23,7 @@
         Piercing: 0.6
         Heat: 0.5 # Forge-change 0.65-> 0.5
         Radiation: 0.5 # Forge-change 0.6-> 0.5
-        Caustic: 0.8
+        Caustic: 0.75 # Forge-change 0.8 -> 0.75
   - type: ClothingSpeedModifier
     walkModifier: 0.91 # 0.95-> 0.91 Forge-change 
     sprintModifier: 0.91 # 0.95-> 0.91 Forge-change 
@@ -56,9 +58,10 @@
         Blunt: 0.5 # Forge-change 0.6-> 0.5 
         Slash: 0.5 # Forge-change 0.6-> 0.5 
         Piercing: 0.5 # Forge-change 0.45-> 0.5 
-        Heat: 0.55 # Forge-change 0.45-> 0.55 
+        Heat: 0.525 # Forge-change 0.45-> 0.525 
         Radiation: 0.5 # Added Radiation Resist
-        Caustic: 0.65
+        Caustic: 0.5 # Forge-change 0.65 -> 0.5
+        Shock: 0.9 # Forge-change
   - type: ExplosionResistance
     damageCoefficient: 0.5 # 0.35-> 0.5 Forge-change 
   - type: PressureProtection

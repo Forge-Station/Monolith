@@ -53,6 +53,7 @@
   storage:
     back:
     - Magazine45_ACPPistolFMJ
-    - BaseSecurityUplinkRadioCaptain
+    - FederationMilitaryCredit
+#   - BaseSecurityUplinkRadioCaptain # Forge-Change-delete
     - RadioHandheldNF
     - TSFSecApartmentTablet

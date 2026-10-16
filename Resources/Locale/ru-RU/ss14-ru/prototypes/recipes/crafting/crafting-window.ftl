@@ -981,6 +981,11 @@ construction-recipe-recipe-clothing-shoes-clown-mod-whoopie-desc = {ent-Clothing
 construction-recipe-crate-wood = {ent-CrateWood}
 construction-recipe-crate-wood-desc = {ent-CrateWood.desc}
 
+construction-recipe-nuclear-reactor-small-constructable-craft = { ent-NuclearReactorSmallConstructable }
+construction-recipe-nuclear-reactor-small-constructable-craft-desc = { ent-NuclearReactorSmallConstructable.desc }
+construction-recipe-turbine-small-constructable-craft = { ent-TurbineSmallConstructable }
+construction-recipe-turbine-small-constructable-craft-desc = { ent-TurbineSmallConstructable.desc }
+
 
 # Не переводиться
 construction-recipe-pressure-plate-recipe = {ent-PressurePlate}

@@ -92,6 +92,8 @@
   - type: ContainerContainer
     containers:
       harvestContainer: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
   # Forge-Change-end
   - type: Destructible
     thresholds:

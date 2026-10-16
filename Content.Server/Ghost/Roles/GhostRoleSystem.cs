@@ -36,6 +36,7 @@ using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Roles.Jobs;
 using Content.Server._NF.Players.GhostRole.Events; // Frontier
 using Content.Shared.PDA; // Forge-Change
+using Content.Server._Forge.Silicons.StationAi; // Forge-Change
 
 namespace Content.Server.Ghost.Roles;
 
@@ -320,7 +321,8 @@ public sealed partial class GhostRoleSystem : EntitySystem
     public void RegisterGhostRole(Entity<GhostRoleComponent> role)
     {
         // Forge-Change: PDAs must never appear as ghost roles (use-in-hand used to flood the list).
-        if (HasComp<PdaComponent>(role.Owner))
+        // Station AI brains carry a PDA and are still real ghost roles.
+        if (HasComp<PdaComponent>(role.Owner) && !HasComp<StationAiPersonalityComponent>(role.Owner))
             return;
 
         if (_ghostRoles.ContainsValue(role))

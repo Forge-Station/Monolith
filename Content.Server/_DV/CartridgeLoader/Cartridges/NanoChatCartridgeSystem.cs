@@ -697,18 +697,22 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
             return (true, new List<Entity<NanoChatCardComponent>>());
 
         var deliverableRecipients = new List<Entity<NanoChatCardComponent>>();
+        var hadOtherMember = false;
 
         foreach (var memberNumber in groupRecipient.Members)
         {
             if (memberNumber == senderNumber)
                 continue;
 
+            hadOtherMember = true;
             var (failed, memberCards) = AttemptMessageDelivery(sender, memberNumber);
             if (!failed)
                 deliverableRecipients.AddRange(memberCards);
         }
 
-        return (false, deliverableRecipients);
+        // A group with nobody else still keeps the sender's own copy.
+        // If other members exist and none can be reached, delivery failed.
+        return (hadOtherMember && deliverableRecipients.Count == 0, deliverableRecipients);
     }
 
     /// <summary>
@@ -913,6 +917,43 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
         _cartridge.UpdateCartridgeUiState(loader, state);
     }
 
+    // Personal NanoChat numbers occupy 0..9998. Group ids stay above that so the two pools cannot collide.
+    private const uint GroupNumberFloor = 10000;
+
+    /// <summary>
+    ///     Picks a group id that no card currently uses as its own number or as a chat id.
+    /// </summary>
+    private bool TryAllocateGroupNumber(uint ownerNumber, out uint groupNumber)
+    {
+        groupNumber = (uint)(HashCode.Combine(ownerNumber, _timing.CurTime.Ticks) & 0x7FFFFFFF);
+        if (groupNumber < GroupNumberFloor)
+            groupNumber += GroupNumberFloor;
+
+        for (var attempt = 0; attempt < 64; attempt++)
+        {
+            if (!IsGroupNumberTaken(groupNumber))
+                return true;
+
+            groupNumber++;
+            if (groupNumber < GroupNumberFloor)
+                groupNumber = GroupNumberFloor;
+        }
+
+        return false;
+    }
+
+    private bool IsGroupNumberTaken(uint groupNumber)
+    {
+        var query = EntityQueryEnumerator<NanoChatCardComponent>();
+        while (query.MoveNext(out var uid, out var card))
+        {
+            if (card.Number == groupNumber || _nanoChat.GetRecipient((uid, card), groupNumber) != null)
+                return true;
+        }
+
+        return false;
+    }
+
     /// <summary>
     ///     Handles creation of a new group chat.
     /// </summary>
@@ -929,14 +970,8 @@ public sealed class NanoChatCartridgeSystem : EntitySystem
                 name = name[..IdCardConsoleComponent.MaxFullNameLength];
         }
 
-        // Generate a unique group number (surely unique I actually have no idea how to generate good unique numbers.)
-        var groupNumber = (uint) (HashCode.Combine(card.Comp.Number.Value, _timing.CurTime.Ticks) & 0x7FFFFFFF);
-
-        // This fucking sucks (fire emoji)
-        while (_nanoChat.GetRecipient((card, card.Comp), groupNumber) != null)
-        {
-            groupNumber++;
-        }
+        if (!TryAllocateGroupNumber(card.Comp.Number.Value, out var groupNumber))
+            return;
 
         // Create group chat recipient
         var members = new HashSet<uint> { card.Comp.Number.Value };

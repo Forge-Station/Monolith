@@ -34,6 +34,7 @@ public sealed class NanoChatSystem : SharedNanoChatSystem
         SubscribeLocalEvent<NanoChatCardComponent, EntGotRemovedFromContainerMessage>(OnRemoved);
 
         SubscribeLocalEvent<NanoChatCardComponent, MapInitEvent>(OnCardInit);
+        SubscribeLocalEvent<NanoChatCardComponent, ComponentShutdown>(OnCardShutdown);
         SubscribeLocalEvent<NanoChatCardComponent, BeingMicrowavedEvent>(OnMicrowaved, after: [typeof(IdCardSystem)]);
     }
 
@@ -97,6 +98,8 @@ public sealed class NanoChatSystem : SharedNanoChatSystem
 
     private void ScrambleMessages(NanoChatCardComponent component)
     {
+        var moves = new List<(uint From, uint To, List<NanoChatMessage> Messages)>();
+
         foreach (var (recipientNumber, messages) in component.Messages)
         {
             for (var i = 0; i < messages.Count; i++)
@@ -110,19 +113,45 @@ public sealed class NanoChatSystem : SharedNanoChatSystem
                 messages[i] = message;
             }
 
-            // 25% chance to reassign the conversation to a random recipient
+            // 25% chance to reassign the conversation to a random recipient.
+            // Applied after the loop so the dictionary is not mutated while enumerating it.
             if (_random.Prob(0.25f) && component.Recipients.Count > 0)
             {
                 var newRecipient = _random.Pick(component.Recipients.Keys.ToList());
-                if (newRecipient == recipientNumber)
-                    continue;
-
-                if (!component.Messages.ContainsKey(newRecipient))
-                    component.Messages[newRecipient] = new List<NanoChatMessage>();
-
-                component.Messages[newRecipient].AddRange(messages);
-                component.Messages[recipientNumber].Clear();
+                if (newRecipient != recipientNumber)
+                    moves.Add((recipientNumber, newRecipient, messages.ToList()));
             }
+        }
+
+        var additions = new Dictionary<uint, List<NanoChatMessage>>();
+        var sources = new HashSet<uint>();
+        foreach (var (from, to, messages) in moves)
+        {
+            sources.Add(from);
+            if (!additions.TryGetValue(to, out var bucket))
+            {
+                bucket = new List<NanoChatMessage>();
+                additions[to] = bucket;
+            }
+
+            bucket.AddRange(messages);
+        }
+
+        foreach (var from in sources)
+        {
+            if (component.Messages.TryGetValue(from, out var source))
+                source.Clear();
+        }
+
+        foreach (var (to, messages) in additions)
+        {
+            if (!component.Messages.TryGetValue(to, out var destination))
+            {
+                destination = new List<NanoChatMessage>();
+                component.Messages[to] = destination;
+            }
+
+            destination.AddRange(messages);
         }
     }
 
@@ -147,9 +176,27 @@ public sealed class NanoChatSystem : SharedNanoChatSystem
         if (ent.Comp.Number != null)
             return;
 
-        // Assign a random number
-        _name.GenerateUniqueName(ent, _nameIdentifierGroup, out var number);
+        if (!_name.TryTakeIdentifier(_nameIdentifierGroup, out var number))
+            return;
+
         ent.Comp.Number = (uint)number;
         Dirty(ent);
+    }
+
+    private void OnCardShutdown(Entity<NanoChatCardComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp.Number is not uint number || number > int.MaxValue)
+            return;
+
+        var query = EntityQueryEnumerator<NanoChatCardComponent>();
+        while (query.MoveNext(out var uid, out var card))
+        {
+            if (uid == ent.Owner || card.Number != number)
+                continue;
+
+            return;
+        }
+
+        _name.ReleaseIdentifier(_nameIdentifierGroup, (int)number);
     }
 }

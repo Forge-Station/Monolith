@@ -71,6 +71,7 @@
         - Cartridge
   - type: ActionGrant
     actions:
+    - ActionViewLaws
     - ActionOpenCartridges
   - type: StationAiWhitelist
   - type: BorgPda

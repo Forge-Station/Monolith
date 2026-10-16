@@ -7,6 +7,8 @@ using Content.Shared.Access.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Systems;
+using Content.Server.Shuttles.Systems;
+using Content.Shared.Shuttles.Components;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
@@ -24,6 +26,7 @@ namespace Content.Server.Research.Systems
         [Dependency] private RadioSystem _radio = default!;
         [Dependency] private StationSystem _station = default!;
         [Dependency] private EntityLookupSystem _lookup = default!;
+        [Dependency] private ShuttleConsoleLockSystem _shuttleLock = default!;
 
         public override void Initialize()
         {

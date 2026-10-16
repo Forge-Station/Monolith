@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Access.Components;
 using Content.Shared.Research.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.UserInterface;
 
 namespace Content.Server.Research.Systems;
@@ -31,6 +32,12 @@ public sealed partial class ResearchSystem
             return;
         }
 
+        if (IsServerShipLocked(uid))
+        {
+            _popup.PopupEntity(Loc.GetString("shuttle-console-locked"), args.Actor);
+            return;
+        }
+
         if (!TryGetEntity(args.Client, out var clientUid) || !HasComp<ResearchClientComponent>(clientUid))
             return;
 
@@ -53,11 +60,26 @@ public sealed partial class ResearchSystem
             return;
         }
 
+        if (IsServerShipLocked(uid))
+        {
+            _popup.PopupEntity(Loc.GetString("shuttle-console-locked"), args.Actor);
+            return;
+        }
+
         if (!TryGetEntity(args.Client, out var clientUid))
             return;
 
         RevokeClient(uid, clientUid.Value, component);
         UpdateLinkInterface(uid, component);
+    }
+
+    /// <summary>
+    /// Deeded ships lock this console together with the helm and gunnery consoles.
+    /// </summary>
+    private bool IsServerShipLocked(EntityUid uid)
+    {
+        return TryComp<ShuttleConsoleLockComponent>(uid, out var lockComp)
+               && _shuttleLock.GetEffectiveLockState(uid, lockComp);
     }
 
     public void AuthorizeClient(EntityUid server, EntityUid client, ResearchServerComponent? serverComponent = null)

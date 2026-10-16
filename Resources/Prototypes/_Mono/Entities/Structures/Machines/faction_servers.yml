@@ -67,6 +67,7 @@
       enum.ResearchServerLinkUiKey.Key:
         type: ResearchServerLinkBoundUserInterface
   - type: AccessReader
+  - type: ShuttleConsoleLock # Forge-change: same ship lock as shuttle and gunnery consoles
   - type: GuideHelp
     guides:
     - Science

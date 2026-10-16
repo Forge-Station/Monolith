@@ -152,16 +152,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             args.Cancelled = true;
     }
 
-    /*private void OnLarvaValid(Entity<SurgeryLarvaConditionComponent> ent, ref SurgeryValidEvent args)
-    {
-        if (!TryComp(args.Body, out VictimInfectedComponent? infected))
-            args.Cancelled = true;
-
-        // The larva has fully developed and surgery is now impossible
-        if (infected != null && infected.SpawnedLarva != null)
-            args.Cancelled = true;
-    }*/
-
     private void OnCorticalBorerValid(Entity<SurgeryCorticalBorerConditionComponent> ent, ref SurgeryValidEvent args)
     {
         if (!HasComp<CorticalBorerInfestedComponent>(args.Body) ||
@@ -188,19 +178,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (CompOrNull<BodyPartComponent>(args.Part)?.Body == null)
             args.Cancelled = true;
     }
-
-    // private void OnPartConditionValid(Entity<SurgeryPartConditionComponent> ent, ref SurgeryValidEvent args)
-    // {
-    //     var present = true;
-    //     foreach (var reg in ent.Comp.Components.Values)
-    //     {
-    //         var compType = reg.Component.GetType();
-    //         if (!HasComp(args.Part, compType))
-    //             present = false;
-    //     }
-    //     if (ent.Comp.Inverse ? present : !present)
-    //         args.Cancelled = true;
-    // }
 
     // This is literally a duplicate of the checks in OnToolCheck for SurgeryStepComponent.AddOrganOnAdd
     private void OnOrganOnAddConditionValid(Entity<SurgeryOrganOnAddConditionComponent> ent, ref SurgeryValidEvent args)
@@ -332,11 +309,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             args.Cancelled = true;
         }
     }
-
-    /*private void OnRemoveLarva(Entity<SurgeryRemoveLarvaComponent> ent, ref SurgeryCompletedEvent args)
-    {
-        RemCompDeferred<VictimInfectedComponent>(ent);
-    }*/
 
     protected bool IsSurgeryValid(EntityUid body, EntityUid targetPart, EntProtoId surgery, EntProtoId stepId,
         EntityUid user, out Entity<SurgeryComponent> surgeryEnt, out EntityUid part, out EntityUid step)

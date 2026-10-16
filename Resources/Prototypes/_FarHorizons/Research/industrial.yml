@@ -4,8 +4,10 @@
   entityIcon: NuclearReactorSmall # Mono
   discipline: Industrial
   tier: 1
-  cost: 7500
+  cost: 25000
   recipeUnlocks:
+  - NuclearReactorSmallMachineCircuitboard
+  - TurbineSmallMachineCircuitboard
   - NuclearFabricatorMachineCircuitboard
   - NuclearReactorMonitorComputerCircuitboard
   - GasTurbineMonitorComputerCircuitboard

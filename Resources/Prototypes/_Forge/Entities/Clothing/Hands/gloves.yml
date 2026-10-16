@@ -112,3 +112,6 @@
   - type: Clothing
     sprite: _Forge/Clothing/Hands/Gloves/tti_gloves.rsi
   - type: Insulated
+  - type: ClothingGrantComponent
+    component:
+    - type: SurgeryIgnoreClothing

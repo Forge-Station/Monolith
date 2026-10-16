@@ -1,0 +1,8 @@
+Entries:
+- author: teasum
+  changes:
+    - type: Add
+      message: Портировал наночат и часть улучшений для него
+  id: 1
+  time: '2026-10-16T20:44:28.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/494

@@ -2,7 +2,7 @@
   id: ResearchAndDevelopmentServer
   parent: [ BaseMachinePowered, ConstructibleMachine ]
   name: R&D server
-  description: Contains the collective knowledge of the station's scientists. Destroying it would send them back to the stone age. You don't want that do you?
+  description: Contains the collective knowledge of the station's scientists. Use it to authorize research equipment before it can access unlocked technologies.
   components:
   - type: Sprite
     sprite: Structures/Machines/server.rsi
@@ -74,6 +74,15 @@
         whitelist:
           components:
           - DisciplinesDisk
+  # Forge-change: equipment authorization console on the research server
+  - type: ActivatableUI
+    key: enum.ResearchServerLinkUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ResearchServerLinkUiKey.Key:
+        type: ResearchServerLinkBoundUserInterface
+  - type: AccessReader
   - type: GuideHelp
     guides:
     - Science

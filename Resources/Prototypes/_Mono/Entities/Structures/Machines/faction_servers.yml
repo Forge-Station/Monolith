@@ -58,6 +58,15 @@
     range: 5
     sound:
       path: /Audio/Ambience/Objects/server_fans.ogg
+  # Forge-change: equipment authorization console on the research server
+  - type: ActivatableUI
+    key: enum.ResearchServerLinkUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ResearchServerLinkUiKey.Key:
+        type: ResearchServerLinkBoundUserInterface
+  - type: AccessReader
   - type: GuideHelp
     guides:
     - Science

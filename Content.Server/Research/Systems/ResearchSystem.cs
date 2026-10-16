@@ -32,8 +32,38 @@ namespace Content.Server.Research.Systems
             InitializeConsole();
             InitializeSource();
             InitializeServer();
+            InitializeLink(); // Forge-change
 
             SubscribeLocalEvent<TechnologyDatabaseComponent, ResearchRegistrationChangedEvent>(OnDatabaseRegistrationChanged);
+        }
+
+        /// <summary>
+        /// Whether a research client is allowed to connect to a research server.
+        /// Requires the same owning station (or same grid if neither has a station),
+        /// and an explicit authorization on the server when restriction is enabled.
+        /// </summary>
+        public bool CanClientAccessServer(EntityUid client, EntityUid server, bool checkAuthorization = true)
+        {
+            var clientStation = _station.GetOwningStation(client);
+            var serverStation = _station.GetOwningStation(server);
+
+            if (clientStation != null || serverStation != null)
+            {
+                if (clientStation != serverStation)
+                    return false;
+            }
+            else
+            {
+                var clientGrid = Transform(client).GridUid;
+                var serverGrid = Transform(server).GridUid;
+                if (clientGrid == null || clientGrid != serverGrid)
+                    return false;
+            }
+
+            if (checkAuthorization && !IsClientAuthorized(server, client))
+                return false;
+
+            return true;
         }
 
         /// <summary>

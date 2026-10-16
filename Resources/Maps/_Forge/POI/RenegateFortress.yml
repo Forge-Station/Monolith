@@ -19152,7 +19152,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingOuterHardsuitRenegatecriii200
+- proto: ClothingOuterHardsuitRenegatebsii20
   entities:
   - uid: 1254
     components:
@@ -31864,7 +31864,7 @@ entities:
           - 2872
           showEnts: False
           occludes: True
-- proto: SuitStoragecriii200
+- proto: SuitStoragebsii20
   entities:
   - uid: 4577
     components:

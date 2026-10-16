@@ -15649,7 +15649,7 @@ entities:
     - type: Transform
       pos: 4.5,26.5
       parent: 1
-- proto: SuitStorageM86
+- proto: SuitStorageM82b
   entities:
   - uid: 1434
     components:

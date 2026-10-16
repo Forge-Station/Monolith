@@ -1,14 +1,12 @@
-# костюм облегчённого джаггернаута HV-2
+# lightweight jagernaut hardsuit HV-2
 - type: entity
   parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, BaseFactionGearOtherFactionT2, ClothingFlightProfileMedium]
   id: ClothingOuterHardsuitHV2
-  name: костюм облегчённого джаггернаута HV-2 # HV-2
-  description: Облегченный боевой костюм джаггернаута для Императорской гвардии. Призван защищать подданных императора от пулевых раненией, ценой меньшей мобильности. # A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  name: HV-2 light jagernaut hardsuit
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
-  - type: Item
-    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight.rsi
   - type: PressureProtection
@@ -43,12 +41,12 @@
     price: 17800
     vendPrice: 8500
 
-# костюм облегчённого джаггернаута HV-2c
+# lightweight jagernaut hardsuit HV-2c
 - type: entity
   parent: ClothingOuterHardsuitHV2
   id: ClothingOuterHardsuitHV2Com
-  name: костюм облегчённого джаггернаута HV-2c # HV-2c
-  description: Облегченный боевой костюм джаггернаута для Императорской гвардии. Призван защищать подданных императора от пулевых раненией, ценой меньшей мобильности. Данный экземпляр похоже принадлежит лидеру. # A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  name: HV-2c light jagernaut hardsuit
+  description: A hardsuit issued to Imperial guardian commander operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight_commander.rsi
@@ -82,12 +80,12 @@
     price: 34800
     vendPrice: 8500
 
-# костюм облегчённого джаггернаута HV-2i
+# lightweight jagernaut hardsuit HV-2i
 - type: entity
   parent: ClothingOuterHardsuitHV2
   id: ClothingOuterHardsuitHV2Inq
-  name: костюм облегчённого джаггернаута HV-2i # HV-2i
-  description: Облегченный боевой костюм джаггернаута для Императорской гвардии. Призван защищать подданных императора от пулевых раненией, ценой меньшей мобильности. Данный экземпляр похоже принадлежит инквизитору. # A hardsuit issued to Imperial Inquisitor operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  name: HV-2i light jagernaut hardsuit
+  description: A hardsuit issued to Imperial Inquisitor operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empirelight_violet.rsi
@@ -219,8 +217,6 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_medium.rsi
-  - type: Item
-    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_medium.rsi
   - type: PressureProtection
@@ -235,7 +231,7 @@
         Slash: 0.4
         Piercing: 0.3
         Heat: 0.4
-        Shock: 0.75
+        Shock: 0.8
         Radiation: 0.4
         Caustic: 0.5
   - type: StaminaDamageResistance
@@ -301,7 +297,7 @@
         Slash: 0.4
         Piercing: 0.3
         Heat: 0.4
-        Shock: 0.75
+        Shock: 0.8
         Radiation: 0.3
         Caustic: 0.7
   - type: StaminaDamageResistance
@@ -331,8 +327,6 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy.rsi
-  - type: Item
-    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy.rsi
   - type: PressureProtection
@@ -340,6 +334,8 @@
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
     damageCoefficient: 0.2
+  - type: FireProtection
+    reduction: 0.85
   - type: Armor
     modifiers:
       coefficients:
@@ -347,7 +343,7 @@
         Slash: 0.35
         Piercing: 0.225
         Heat: 0.375
-        Shock: 0.75
+        Shock: 0.6
         Radiation: 0.15
         Caustic: 0.6
   - type: StaminaDamageResistance
@@ -377,8 +373,6 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_lord.rsi
-  - type: Item
-    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_lord.rsi
   - type: Armor
@@ -388,7 +382,7 @@
         Slash: 0.375
         Piercing: 0.225
         Heat: 0.35
-        Shock: 0.75
+        Shock: 0.6
         Radiation: 0.1
         Caustic: 0.6
   - type: ClothingSpeedModifier
@@ -412,8 +406,6 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_inq.rsi
-  - type: Item
-    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_heavy_inq.rsi
   - type: ToggleableClothing
@@ -435,8 +427,6 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
-  - type: Item
-    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_vigilance.rsi
   - type: PressureProtection
@@ -445,7 +435,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.2
   - type: FireProtection
-    reduction: 0.8
+    reduction: 0.1
   - type: Armor
     modifiers:
       coefficients:
@@ -455,7 +445,7 @@
         Shock: 0.75
         Heat: 0.4
         Radiation: 0.1
-        Caustic: 0.8
+        Caustic: 0.4
   - type: StaminaDamageResistance
     coefficient: 0.5
   - type: ClothingSpeedModifier
@@ -489,8 +479,6 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
-  - type: Item
-    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_militant.rsi
   - type: PressureProtection
@@ -562,8 +550,6 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
-  - type: Item
-    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_stealh.rsi
   - type: PressureProtection
@@ -578,7 +564,7 @@
         Slash: 0.55
         Piercing: 0.5
         Heat: 0.55
-        Shock: 0.9
+        Shock: 0.8
         Radiation: 0.55
         Caustic: 0.8
   - type: StaminaDamageResistance
@@ -611,6 +597,8 @@
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_light_medic.rsi
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/empire_light_medic.rsi
+  - type: Item
+    size: Huge
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000

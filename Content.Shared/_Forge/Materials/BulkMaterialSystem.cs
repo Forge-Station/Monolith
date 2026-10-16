@@ -5,7 +5,6 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
@@ -37,9 +36,9 @@ public sealed class BulkMaterialSystem : EntitySystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedItemSystem _item = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedVirtualItemSystem _virtual = default!;
 
@@ -48,12 +47,14 @@ public sealed class BulkMaterialSystem : EntitySystem
     private readonly HashSet<EntityUid> _looseSet = new();
     private readonly HashSet<Entity<BulkMaterialComponent>> _nearby = new();
     private readonly HashSet<EntityUid> _suppress = new();
+    private readonly HashSet<EntityUid> _applied = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<BulkMaterialComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<BulkMaterialComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<BulkMaterialComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<BulkMaterialComponent, StackCountChangedEvent>(OnCountChanged);
         SubscribeLocalEvent<BulkMaterialComponent, EntGotInsertedIntoContainerMessage>(OnInserted);
@@ -83,7 +84,12 @@ public sealed class BulkMaterialSystem : EntitySystem
             if (!TryComp<BulkMaterialComponent>(uid, out var bulk) || !TryComp<StackComponent>(uid, out var stack))
                 continue;
 
-            if (_container.IsEntityInContainer(uid) || TerminatingOrDeleted(uid))
+            // A stack already queued at count 0 must not run. It would suck the merged
+            // pile back into itself and then be deleted at the end of the tick.
+            if (_container.IsEntityInContainer(uid) || TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
+                continue;
+
+            if (stack.Count <= 0)
                 continue;
 
             MergeNearby(uid, bulk, stack);
@@ -95,13 +101,44 @@ public sealed class BulkMaterialSystem : EntitySystem
 
     private void OnInit(Entity<BulkMaterialComponent> ent, ref ComponentInit args)
     {
+        // Uninitialized maps must keep prototype data. PrototypeSaveTest spawns there
+        // and fails if Stack/Item are rewritten before the map itself is initialized.
+        if (_net.IsServer && !IsLiveMap(ent.Owner))
+            return;
+
+        Apply(ent);
+    }
+
+    private void OnMapInit(Entity<BulkMaterialComponent> ent, ref MapInitEvent args)
+    {
+        if (_applied.Contains(ent.Owner))
+            return;
+
+        Apply(ent);
+    }
+
+    private void Apply(Entity<BulkMaterialComponent> ent)
+    {
+        _applied.Add(ent.Owner);
         Refresh(ent);
         if (_net.IsServer && !_container.IsEntityInContainer(ent.Owner))
             Track(ent.Owner);
     }
 
+    private bool IsLiveMap(EntityUid uid)
+    {
+        if (!TryComp(uid, out TransformComponent? xform))
+            return false;
+
+        if (xform.MapUid is { } mapUid)
+            return _map.IsInitialized(mapUid);
+
+        return xform.MapID == MapId.Nullspace;
+    }
+
     private void OnShutdown(Entity<BulkMaterialComponent> ent, ref ComponentShutdown args)
     {
+        _applied.Remove(ent.Owner);
         Untrack(ent.Owner);
         if (FindMob(ent.Owner) is { } mob)
             RefreshCarrier(mob);
@@ -160,6 +197,9 @@ public sealed class BulkMaterialSystem : EntitySystem
 
     private void Refresh(Entity<BulkMaterialComponent> ent)
     {
+        if (_net.IsServer && !IsLiveMap(ent.Owner))
+            return;
+
         if (!_suppress.Add(ent.Owner))
             return;
 
@@ -232,12 +272,9 @@ public sealed class BulkMaterialSystem : EntitySystem
         if (HasVirtual(holder, uid))
             return;
 
+        // Keep the stack in hand. Dropping it here deleted the pile the player had just combined.
         if (!TryComp<HandsComponent>(holder, out var hands) || hands.CountFreeHands() < 1)
-        {
-            _popup.PopupEntity(Loc.GetString("multi-handed-item-pick-up-fail", ("number", 1), ("item", uid)), holder, holder);
-            _hands.TryDrop(holder, uid);
             return;
-        }
 
         _virtual.TrySpawnVirtualItemInHand(uid, holder);
     }
@@ -250,7 +287,7 @@ public sealed class BulkMaterialSystem : EntitySystem
         if (!TryComp<StorageComponent>(container.Owner, out var storage))
             return;
 
-        if (storage.Container is not { } storageContainer || !storageContainer.Contains(uid))
+        if (storage.Container is not { } storageContainer || !ListedIn(storageContainer, uid))
             return;
 
         if (TryPlace(uid, container.Owner, storage, item))
@@ -258,21 +295,34 @@ public sealed class BulkMaterialSystem : EntitySystem
 
         var count = stack.Count;
         var kept = HighestFittingCount(uid, container.Owner, storage, item, bulk, count);
-        if (kept <= 0)
+        if (kept <= 0 || kept >= count)
         {
-            _container.Remove(uid, container, force: true);
-            _transform.SetMapCoordinates(uid, _transform.GetMapCoordinates(container.Owner));
+            ApplyPresentation(uid, count, bulk, item);
             return;
         }
 
-        if (kept >= count)
-            return;
-
         var leftover = count - kept;
+        if (!TrySpawnLeftover(stack, leftover, container.Owner))
+        {
+            ApplyPresentation(uid, count, bulk, item);
+            return;
+        }
+
         _stack.SetCount(uid, kept, stack);
         ApplyPresentation(uid, kept, bulk, item);
         TryPlace(uid, container.Owner, storage, item);
-        SpawnLeftover(stack, leftover, container.Owner);
+    }
+
+    private static bool ListedIn(BaseContainer container, EntityUid uid)
+    {
+        var list = container.ContainedEntities;
+        for (var i = 0; i < list.Count; i++)
+        {
+            if (list[i] == uid)
+                return true;
+        }
+
+        return false;
     }
 
     private bool TryPlace(EntityUid uid, EntityUid storageUid, StorageComponent storage, ItemComponent item)
@@ -331,14 +381,21 @@ public sealed class BulkMaterialSystem : EntitySystem
             yield return 1;
     }
 
-    private void SpawnLeftover(StackComponent stack, int amount, EntityUid near)
+    private bool TrySpawnLeftover(StackComponent stack, int amount, EntityUid near)
     {
         if (amount <= 0 || !_prototype.TryIndex<StackPrototype>(stack.StackTypeId, out var proto))
-            return;
+            return false;
 
-        var spawned = Spawn(proto.Spawn, _transform.GetMapCoordinates(near));
-        if (TryComp<StackComponent>(spawned, out var spawnedStack))
-            _stack.SetCount(spawned, amount, spawnedStack);
+        var coords = _transform.GetMapCoordinates(near);
+        if (coords.MapId == MapId.Nullspace)
+            return false;
+
+        var spawned = Spawn(proto.Spawn, coords);
+        if (!TryComp<StackComponent>(spawned, out var spawnedStack))
+            return !TerminatingOrDeleted(spawned);
+
+        _stack.SetCount(spawned, amount, spawnedStack);
+        return !TerminatingOrDeleted(spawned);
     }
 
     private void MergeNearby(EntityUid uid, BulkMaterialComponent bulk, StackComponent stack)

@@ -75,6 +75,10 @@ public sealed class DroneSalvageSystem : EntitySystem
         if (!_xformQuery.TryGetComponent(grid, out var gridXform) || gridXform.MapUid is not { } mapUid)
             return;
 
+        // Map deletion terminates the map before its grids. There is nowhere to park salvage.
+        if (TerminatingOrDeleted(mapUid))
+            return;
+
         _extractScratch.Clear();
         CollectKeepOnGrid(grid, grid, _extractScratch);
 
@@ -113,6 +117,7 @@ public sealed class DroneSalvageSystem : EntitySystem
 
         // If grid-traversal already parented the core/blackbox onto a foreign hull, peel it back to the map.
         if (xform.MapUid is { } mapUid
+            && !TerminatingOrDeleted(mapUid)
             && xform.ParentUid != mapUid
             && _gridQuery.HasComp(xform.ParentUid))
         {

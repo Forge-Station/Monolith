@@ -390,19 +390,23 @@ public abstract partial class SharedGunSystem
     /// </summary>
     private void SyncBallisticEntitiesFromContainer(BallisticAmmoProviderComponent component)
     {
+        // Container.Contains asserts InContainer, which ContainerManager only sets on startup.
+        // Map load calls this from ComponentInit, while the shell is already listed in the container.
+        var contained = component.Container.ContainedEntities;
+
         for (var i = component.Entities.Count - 1; i >= 0; i--)
         {
             var ent = component.Entities[i];
-            if (Exists(ent) && component.Container.Contains(ent))
+            if (Exists(ent) && ContainsUid(contained, ent))
                 continue;
 
             component.Entities.RemoveAt(i);
         }
 
-        foreach (var contained in component.Container.ContainedEntities)
+        foreach (var ent in contained)
         {
-            if (!component.Entities.Contains(contained))
-                component.Entities.Add(contained);
+            if (!component.Entities.Contains(ent))
+                component.Entities.Add(ent);
         }
     }
 
@@ -410,6 +414,17 @@ public abstract partial class SharedGunSystem
     {
         SyncBallisticEntitiesFromContainer(component);
         UpdateBallisticAppearance(uid, component);
+    }
+
+    private static bool ContainsUid(IReadOnlyList<EntityUid> entities, EntityUid uid)
+    {
+        for (var i = 0; i < entities.Count; i++)
+        {
+            if (entities[i] == uid)
+                return true;
+        }
+
+        return false;
     }
     // Forge-Change-end
 

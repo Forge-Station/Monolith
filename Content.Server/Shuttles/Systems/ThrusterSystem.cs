@@ -12,6 +12,7 @@ using Content.Shared.Shuttles.Components;
 using Content.Shared.Temperature;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics; // Forge-Change
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -35,6 +36,18 @@ public sealed partial class ThrusterSystem : EntitySystem
     [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!; // Forge-Change
+
+    // Forge-Change-start: conflict checks run on anchor / rotate / removal, not every tick.
+    private readonly HashSet<EntityUid> _nozzleEnts = new();
+    private readonly HashSet<Vector2i> _occupiedTiles = new();
+    private readonly HashSet<Vector2i> _previousTiles = new();
+    private readonly HashSet<Vector2i> _scanTiles = new();
+    private readonly HashSet<Vector2i> _fixtureTiles = new();
+    private readonly List<Vector2i> _nozzleTiles = new();
+    private readonly List<EntityUid> _conflictList = new();
+    private bool _refreshingConflicts;
+    // Forge-Change-end
 
     // Essentially whenever thruster enables we update the shuttle's available impulses which are used for movement.
     // This is done for each direction available.
@@ -101,20 +114,36 @@ public sealed partial class ThrusterSystem : EntitySystem
         {
             args.PushMarkup(enabled);
 
-            if (component.Type == ThrusterType.Linear &&
-                EntityManager.TryGetComponent(uid, out TransformComponent? xform) &&
+            if (EntityManager.TryGetComponent(uid, out TransformComponent? xform) && // Forge-Change
                 xform.Anchored)
             {
+                // Forge-Change-start: check if the thruster is stacked
+                var stacked = HasStackedThruster(uid, xform);
+                if (stacked)
+                    args.PushMarkup(Loc.GetString("thruster-comp-stacked"));
+
+                if (component.Type != ThrusterType.Linear)
+                    return;
+
+                // Forge-Change-end
                 var nozzleLocalization = ContentLocalizationManager.FormatDirection(xform.LocalRotation.Opposite().ToWorldVec().GetDir()).ToLower();
                 var nozzleDir = Loc.GetString("thruster-comp-nozzle-direction",
                     ("direction", nozzleLocalization));
 
                 args.PushMarkup(nozzleDir);
 
-                var exposed = NozzleExposed(xform);
+                // Forge-Change-start: check if the nozzle is blocked by a thruster
+                if (stacked)
+                    return;
 
-                var nozzleText =
-                    Loc.GetString(exposed ? "thruster-comp-nozzle-exposed" : "thruster-comp-nozzle-not-exposed");
+                string nozzleText;
+                if (!NozzleExposed(uid, xform))
+                    nozzleText = Loc.GetString("thruster-comp-nozzle-not-exposed");
+                else if (NozzleBlockedByThruster(uid, xform))
+                    nozzleText = Loc.GetString("thruster-comp-nozzle-blocked");
+                else
+                    nozzleText = Loc.GetString("thruster-comp-nozzle-exposed");
+                // Forge-Change-end
 
                 args.PushMarkup(nozzleText);
             }
@@ -128,45 +157,42 @@ public sealed partial class ThrusterSystem : EntitySystem
 
     private void OnShuttleTileChange(EntityUid uid, ShuttleComponent component, ref TileChangedEvent args)
     {
+        var xformQuery = GetEntityQuery<TransformComponent>(); // Forge-Change
+        var thrusterQuery = GetEntityQuery<ThrusterComponent>(); // Forge-Change
+
         foreach (var change in args.Changes)
         {
-            // If the old tile was space but the new one isn't then disable all adjacent thrusters
+            // Forge-Change: Plating placed over space blocks every thruster whose exhaust covers that tile.
             if (_turf.IsSpace(change.NewTile) || !_turf.IsSpace(change.OldTile))
                 continue;
 
             var tilePos = change.GridIndices;
             var grid = Comp<MapGridComponent>(uid);
-            var xformQuery = GetEntityQuery<TransformComponent>();
-            var thrusterQuery = GetEntityQuery<ThrusterComponent>();
 
-            for (var x = -1; x <= 1; x++)
+            // Forge-Change-start: Large thrusters are two tiles wide, so the anchor can sit diagonally off the blocked tile.
+            for (var x = -2; x <= 2; x++)
             {
-                for (var y = -1; y <= 1; y++)
+                for (var y = -2; y <= 2; y++)
                 {
-                    if (x != 0 && y != 0)
-                        continue;
-
                     var checkPos = tilePos + new Vector2i(x, y);
-                    var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(uid, grid, checkPos);
+                    var enumerator = _mapSystem.GetAnchoredEntities(uid, grid, checkPos);
 
                     while (enumerator.MoveNext(out var ent))
                     {
                         if (!thrusterQuery.TryGetComponent(ent.Value, out var thruster) || !thruster.RequireSpace)
                             continue;
 
-                        // Work out if the thruster is facing this direction
                         var xform = xformQuery.GetComponent(ent.Value);
-                        var direction = xform.LocalRotation.ToWorldVec();
-
-                        if (new Vector2i((int)direction.X, (int)direction.Y) != new Vector2i(x, y))
+                        GetNozzleTiles(ent.Value, xform, _nozzleTiles);
+                        if (!_nozzleTiles.Contains(tilePos))
                             continue;
+            // Forge-Change-end
 
                         DisableThruster(ent.Value, thruster, xform.GridUid);
                     }
                 }
             }
         }
-
     }
 
     private void OnActivateThruster(EntityUid uid, ThrusterComponent component, ActivateInWorldEvent args)
@@ -199,6 +225,11 @@ public sealed partial class ThrusterSystem : EntitySystem
     {
         // TODO: Disable visualizer for old direction
         // TODO: Don't make them rotatable and make it require anchoring.
+
+        // Forge-Change-start: a turn can point the nozzle at another thruster, or swing a wide body off one.
+        if (TryComp(uid, out TransformComponent? movedXform))
+            RefreshConflictsAfterMove(uid, movedXform, args);
+        // Forge-Change-end
 
         if (!component.Enabled ||
             !EntityManager.TryGetComponent(uid, out TransformComponent? xform) ||
@@ -273,6 +304,11 @@ public sealed partial class ThrusterSystem : EntitySystem
         {
             DisableThruster(uid, component);
         }
+
+        // Forge-Change-start: installing or unwrenching changes who shares the tile and who the nozzle hits.
+        if (TryComp(uid, out TransformComponent? xform))
+            RefreshConflictingThrusters(uid, xform);
+        // Forge-Change-end
     }
 
     private void OnThrusterInit(EntityUid uid, ThrusterComponent component, ComponentInit args)
@@ -305,6 +341,11 @@ public sealed partial class ThrusterSystem : EntitySystem
     private void OnThrusterShutdown(EntityUid uid, ThrusterComponent component, ComponentShutdown args)
     {
         DisableThruster(uid, component);
+
+        // Forge-Change-start: removal is the moment a stacked or blocked neighbor may fire again.
+        if (TryComp(uid, out TransformComponent? xform))
+            RefreshConflictingThrusters(uid, xform);
+        // Forge-Change-end
     }
 
     private void OnPowerChange(EntityUid uid, ThrusterComponent component, ref PowerChangedEvent args)
@@ -499,23 +540,275 @@ public sealed partial class ThrusterSystem : EntitySystem
             return false;
         }
 
+        // Forge-Change-start: two or more thrusters on one tile never produce thrust.
+        if (HasStackedThruster(uid, xform))
+            return false;
+        // Forge-Change-end
+
         if (!component.RequireSpace)
             return true;
 
-        return NozzleExposed(xform);
+        // Forge-Change-start:
+        // Plating blocks the nozzle here. Tile placement itself is handled by OnShuttleTileChange,
+        // so neither check runs every tick. Wide thrusters must clear every tile in front of the body.
+        return NozzleExposed(uid, xform) && !NozzleBlockedByThruster(uid, xform);
     }
 
-    private bool NozzleExposed(TransformComponent xform)
+    private bool NozzleExposed(EntityUid uid, TransformComponent xform)
     {
-        if (xform.GridUid == null)
+        if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
             return true;
 
-        var (x, y) = xform.LocalPosition + xform.LocalRotation.Opposite().ToWorldVec();
-        var mapGrid = Comp<MapGridComponent>(xform.GridUid.Value);
-        var tile = _mapSystem.GetTileRef(xform.GridUid.Value, mapGrid, new Vector2i((int)Math.Floor(x), (int)Math.Floor(y)));
+        GetNozzleTiles(uid, xform, _nozzleTiles);
+        foreach (var tile in _nozzleTiles)
+        {
+            var tileRef = _mapSystem.GetTileRef(gridUid, grid, tile);
+            if (!_turf.IsSpace(tileRef))
+                return false;
+        }
 
-        return _turf.IsSpace(tile);
+        return true;
     }
+        // Forge-Change-end
+
+    // Forge-Change-Start: stacked thrusters and thrusters exhausting into each other.
+    /// <summary>
+    /// Tiles directly in front of the thruster body, one step along the exhaust.
+    /// A 1x1 thruster yields one tile. A 2x2 thruster yields both tiles along its nose.
+    /// </summary>
+    private void GetNozzleTiles(EntityUid uid, TransformComponent xform, List<Vector2i> tiles)
+    {
+        tiles.Clear();
+        if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
+            return;
+
+        var nozzleVec = xform.LocalRotation.Opposite().ToWorldVec();
+        var nozzleDir = new Vector2i((int)Math.Round(nozzleVec.X), (int)Math.Round(nozzleVec.Y));
+        if (nozzleDir == Vector2i.Zero)
+            return;
+
+        _fixtureTiles.Clear();
+        CollectFixtureTiles(uid, xform.LocalPosition, xform.LocalRotation, grid, _fixtureTiles);
+
+        if (_fixtureTiles.Count == 0)
+        {
+            var anchor = _mapSystem.CoordinatesToTile(gridUid, grid, xform.Coordinates);
+            tiles.Add(anchor + nozzleDir);
+            return;
+        }
+
+        foreach (var bodyTile in _fixtureTiles)
+        {
+            var ahead = bodyTile + nozzleDir;
+            if (_fixtureTiles.Contains(ahead) || tiles.Contains(ahead))
+                continue;
+
+            tiles.Add(ahead);
+        }
+    }
+
+    private bool IsBlockingThruster(EntityUid uid)
+    {
+        if (!TryComp<ThrusterComponent>(uid, out var thruster))
+            return false;
+
+        if (thruster.LifeStage > ComponentLifeStage.Running || TerminatingOrDeleted(uid))
+            return false;
+
+        return Transform(uid).Anchored;
+    }
+
+    private bool HasStackedThruster(EntityUid uid, TransformComponent xform)
+    {
+        if (!xform.Anchored || xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
+            return false;
+
+        var tile = _mapSystem.CoordinatesToTile(gridUid, grid, xform.Coordinates);
+        var anchored = _mapSystem.GetAnchoredEntities(gridUid, grid, tile);
+        while (anchored.MoveNext(out var other))
+        {
+            if (other.Value != uid && IsBlockingThruster(other.Value))
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// True when another anchored thruster occupies any exhaust tile.
+    /// Wide thrusters count if their solid body covers that tile, even when their anchor is elsewhere.
+    /// </summary>
+    private bool NozzleBlockedByThruster(EntityUid uid, TransformComponent xform)
+    {
+        if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
+            return false;
+
+        GetNozzleTiles(uid, xform, _nozzleTiles);
+        foreach (var tile in _nozzleTiles)
+        {
+            var anchored = _mapSystem.GetAnchoredEntities(gridUid, grid, tile);
+            while (anchored.MoveNext(out var other))
+            {
+                if (other.Value != uid && IsBlockingThruster(other.Value))
+                    return true;
+            }
+
+            _nozzleEnts.Clear();
+            _lookup.GetLocalEntitiesIntersecting(gridUid, tile, _nozzleEnts, gridComp: grid);
+            foreach (var other in _nozzleEnts)
+            {
+                if (other == uid || !IsBlockingThruster(other))
+                    continue;
+
+                if (HardFixtureCoversTile(other, tile, grid))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool HardFixtureCoversTile(EntityUid uid, Vector2i tile, MapGridComponent grid)
+    {
+        if (!TryComp(uid, out TransformComponent? xform))
+            return false;
+
+        _fixtureTiles.Clear();
+        CollectFixtureTiles(uid, xform.LocalPosition, xform.LocalRotation, grid, _fixtureTiles);
+        return _fixtureTiles.Contains(tile);
+    }
+
+    private void CollectFixtureTiles(EntityUid uid, Vector2 localPosition, Angle rotation, MapGridComponent grid, HashSet<Vector2i> tiles)
+    {
+        if (!TryComp<FixturesComponent>(uid, out var fixtures))
+            return;
+
+        var tileSize = grid.TileSize;
+        var xf = new Transform(localPosition, rotation);
+        foreach (var (id, fixture) in fixtures.Fixtures)
+        {
+            if (id == BurnFixture || !fixture.Hard)
+                continue;
+
+            for (var i = 0; i < fixture.Shape.ChildCount; i++)
+            {
+                var aabb = fixture.Shape.ComputeAABB(xf, i);
+                var x0 = (int)Math.Floor(aabb.Left / tileSize);
+                var y0 = (int)Math.Floor(aabb.Bottom / tileSize);
+                var x1 = (int)Math.Floor((aabb.Right - 0.001f) / tileSize);
+                var y1 = (int)Math.Floor((aabb.Top - 0.001f) / tileSize);
+                for (var x = x0; x <= x1; x++)
+                {
+                    for (var y = y0; y <= y1; y++)
+                        tiles.Add(new Vector2i(x, y));
+                }
+            }
+        }
+    }
+
+    private void RefreshConflictsAfterMove(EntityUid uid, TransformComponent xform, MoveEvent args)
+    {
+        Vector2i? previousAnchor = null;
+        _previousTiles.Clear();
+
+        if (args.OldPosition.EntityId == xform.ParentUid &&
+            xform.GridUid is { } gridUid &&
+            TryComp<MapGridComponent>(gridUid, out var grid))
+        {
+            previousAnchor = _mapSystem.CoordinatesToTile(gridUid, grid, args.OldPosition);
+            _previousTiles.Add(previousAnchor.Value);
+            CollectFixtureTiles(uid, args.OldPosition.Position, args.OldRotation, grid, _previousTiles);
+        }
+
+        RefreshConflictingThrusters(uid, xform, previousAnchor);
+    }
+
+    /// <summary>
+    /// Re-evaluates thrusters that share a tile with <paramref name="uid"/> or exhaust into its body.
+    /// Called when a thruster is anchored, rotated, or removed.
+    /// </summary>
+    private void RefreshConflictingThrusters(EntityUid uid, TransformComponent xform, Vector2i? previousAnchor = null)
+    {
+        if (_refreshingConflicts)
+            return;
+
+        if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
+            return;
+
+        _refreshingConflicts = true;
+        try
+        {
+            var anchor = _mapSystem.CoordinatesToTile(gridUid, grid, xform.Coordinates);
+            _occupiedTiles.Clear();
+            _occupiedTiles.Add(anchor);
+            CollectFixtureTiles(uid, xform.LocalPosition, xform.LocalRotation, grid, _occupiedTiles);
+            if (previousAnchor != null)
+            {
+                foreach (var tile in _previousTiles)
+                    _occupiedTiles.Add(tile);
+            }
+
+            _scanTiles.Clear();
+            foreach (var tile in _occupiedTiles)
+            {
+                for (var x = -2; x <= 2; x++)
+                {
+                    for (var y = -2; y <= 2; y++)
+                        _scanTiles.Add(new Vector2i(tile.X + x, tile.Y + y));
+                }
+            }
+
+            _conflictList.Clear();
+            foreach (var tile in _scanTiles)
+            {
+                var anchored = _mapSystem.GetAnchoredEntities(gridUid, grid, tile);
+                while (anchored.MoveNext(out var other))
+                {
+                    if (other.Value == uid || !TryComp<ThrusterComponent>(other.Value, out var thruster))
+                        continue;
+
+                    if (thruster.LifeStage > ComponentLifeStage.Running)
+                        continue;
+
+                    var otherXform = Transform(other.Value);
+                    var otherAnchor = _mapSystem.CoordinatesToTile(gridUid, grid, otherXform.Coordinates);
+                    var sameTile = otherAnchor == anchor || previousAnchor is { } oldAnchor && otherAnchor == oldAnchor;
+                    var exhaustsIntoUs = false;
+                    if (thruster.Type == ThrusterType.Linear && thruster.RequireSpace)
+                    {
+                        GetNozzleTiles(other.Value, otherXform, _nozzleTiles);
+                        foreach (var nozzle in _nozzleTiles)
+                        {
+                            if (!_occupiedTiles.Contains(nozzle))
+                                continue;
+
+                            exhaustsIntoUs = true;
+                            break;
+                        }
+                    }
+
+                    if (sameTile || exhaustsIntoUs)
+                        _conflictList.Add(other.Value);
+                }
+            }
+
+            foreach (var other in _conflictList)
+            {
+                if (!TryComp<ThrusterComponent>(other, out var thruster))
+                    continue;
+
+                if (CanEnable(other, thruster))
+                    EnableThruster(other, thruster);
+                else
+                    DisableThruster(other, thruster);
+            }
+        }
+        finally
+        {
+            _refreshingConflicts = false;
+        }
+    }
+    // Forge-Change-End
 
     #region Burning
 

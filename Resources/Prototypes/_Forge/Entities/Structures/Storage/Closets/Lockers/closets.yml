@@ -1,0 +1,13 @@
+- type: entity
+  id: ClosetForerunner
+  name: forerunner closet
+  parent: ClosetSteelBase
+  description: "Ancient closet."
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Storage/closet.rsi
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: forerunner
+    stateDoorOpen: forerunner_open
+    stateDoorClosed: forerunner_door

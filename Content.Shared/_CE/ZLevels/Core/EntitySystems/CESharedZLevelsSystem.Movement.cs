@@ -16,6 +16,7 @@ namespace Content.Shared._CE.ZLevels.Core.EntitySystems;
 public abstract partial class CESharedZLevelsSystem
 {
     private readonly List<EntityUid> _dirtyMovementBodies = new();
+    private readonly HashSet<EntityUid> _dirtyMovementSet = new(); // Forge-change: fix duplicate and O(N) list search. idk what, maybe?
 
     private void InitializeMovement()
     {
@@ -144,7 +145,7 @@ public abstract partial class CESharedZLevelsSystem
 
     private void OnMoveEvent(Entity<CEZPhysicsComponent> entity, ref MoveEvent args)
     {
-        if (_dirtyMovementBodies.Contains(entity))
+        if (!_dirtyMovementSet.Add(entity.Owner))
             return;
 
         _dirtyMovementBodies.Add(entity);
@@ -497,6 +498,7 @@ public abstract partial class CESharedZLevelsSystem
         }
 
         _dirtyMovementBodies.Clear();
+        _dirtyMovementSet.Clear();
     }
 }
 

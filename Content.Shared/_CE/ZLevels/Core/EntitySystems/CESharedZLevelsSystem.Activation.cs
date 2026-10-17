@@ -13,6 +13,7 @@ namespace Content.Shared._CE.ZLevels.Core.EntitySystems;
 public abstract partial class CESharedZLevelsSystem
 {
     private readonly List<EntityUid> _activeBodies = new();
+    private readonly HashSet<EntityUid> _activeBodySet = new(); // Forge-change: fix duplicate and O(N) list search. idk what, maybe?
 
     public IReadOnlyList<EntityUid> ActiveBodies => _activeBodies;
 
@@ -95,12 +96,13 @@ public abstract partial class CESharedZLevelsSystem
         if (!Resolve(entity, ref entity.Comp, false))
             return;
 
-        if (_activeBodies.Contains(entity))
+        if (_activeBodySet.Contains(entity.Owner))
             return;
 
         entity.Comp.Sleeping = false;
         entity.Comp.SleepTimer = 0f;
 
+        _activeBodySet.Add(entity.Owner);
         _activeBodies.Add(entity);
     }
 
@@ -113,7 +115,8 @@ public abstract partial class CESharedZLevelsSystem
         entity.Comp.Sleeping = true;
         entity.Comp.SleepTimer = 0f;
 
-        _activeBodies.Remove(entity);
+        if (_activeBodySet.Remove(entity.Owner))
+            _activeBodies.Remove(entity);
     }
 
     [PublicAPI]

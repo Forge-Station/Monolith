@@ -75,6 +75,27 @@ wf-reaver-convoy-destroyed = The Reaver convoy bound for {$callsign} is destroye
        *[other] Bounty {$bounty} spesos paid.
     }
 
+# The tier 5 citadel: setting out, stopped on the way, raised and fallen; $station, $bearing and $range are as above
+wf-reaver-citadel-launched = The Reavers are raising a citadel at {$callsign}. {$range} km bearing {$bearing} from {$station}. Stop it before it digs in.
+wf-reaver-citadel-convoy-destroyed = The Reaver citadel convoy bound for {$callsign} is destroyed. { $paid ->
+        [0] No bounty was claimed.
+       *[other] Bounty {$bounty} { $bounty ->
+            [one] thaler
+           *[other] thalers
+        } paid.
+    }
+wf-reaver-citadel-raised = The Reavers have raised a citadel at {$callsign}, {$range} km bearing {$bearing} from {$station}. Bounty {$bounty} { $bounty ->
+            [one] thaler
+           *[other] thalers
+        }.
+wf-reaver-citadel-fallen = The Reaver citadel at {$callsign} has fallen. { $paid ->
+        [0] No bounty was claimed.
+       *[other] Bounty {$bounty} { $bounty ->
+            [one] thaler
+           *[other] thalers
+        } paid.
+    } The Ashfall Reavers are finished.
+
 # A hub gaining a level; $minutes is the reinforcement's reckoned flight
 wf-reaver-reinforcement-launched = Reaver reinforcements are inbound to {$callsign}, ETA {$minutes} min.
 wf-reaver-grown = The Reaver stronghold at {$callsign} has grown to level {$level}.
@@ -89,6 +110,17 @@ wf-reaver-raid-station-warning = Reaver raiders are heading for {$station}, bear
 wf-reaver-raid-hunting = Reaver raiders are hunting {$ship}, bearing {$bearing}, {$range} km.
 wf-reaver-intercept-warning = Reaver patrol turning to intercept {$ship}, bearing {$bearing}, {$range} km.
 
+# Another faction challenging a Reaver cell; $faction is the challenger
+wf-reaver-response-launched = Reaver gunships are scrambling to {$callsign} to drive off the intruder.
+wf-reaver-response-destroyed = Reaver gunships destroyed at {$callsign}. { $paid ->
+        [0] No bounty was claimed.
+       *[other] Bounty {$bounty} { $bounty ->
+            [one] thaler
+           *[other] thalers
+        } paid.
+    }
+wf-reaver-cell-lost = {$callsign} lost to the {$faction}.
+
 # Map legend line
 wf-reaver-legend = {$faction}: {$tier}, { $strongholds ->
         [one] {$strongholds} stronghold
@@ -96,12 +128,20 @@ wf-reaver-legend = {$faction}: {$tier}, { $strongholds ->
     }, { $cells ->
         [one] {$cells} cell
        *[other] {$cells} cells
-    }, bounty {$bounty}{$levels}
+    }, bounty {$bounty}{$levels}{$citadel}
 wf-reaver-legend-broken = {$faction}: broken, no strongholds standing
+wf-reaver-legend-finished = {$faction}: finished, { $strongholds ->
+        [one] {$strongholds} stronghold
+       *[other] {$strongholds} strongholds
+    } left, { $cells ->
+        [one] {$cells} cell
+       *[other] {$cells} cells
+    }
 wf-reaver-legend-levels = , { $count ->
         [one] level {$levels}
        *[other] levels {$levels}
     }
+wf-reaver-legend-citadel = , citadel at {$callsign}
 
 wf-reaver-round-end = Reavers held up to { $peak ->
         [one] {$peak} cell
@@ -121,26 +161,42 @@ wf-reaver-round-end = Reavers held up to { $peak ->
     } stopped and { $raids ->
         [one] {$raids} raid was
        *[other] {$raids} raids were
-    } sent. Players retook { $retaken ->
+    } sent.{$citadels} Players retook { $retaken ->
         [one] {$retaken} cell
        *[other] {$retaken} cells
     }.
+
+# Added to the round-end line when a citadel was raised; it starts with a space
+wf-reaver-round-end-citadels = {" "}They raised { $raised ->
+        [one] {$raised} citadel
+       *[other] {$raised} citadels
+    } and {$fallen} fell.
 
 wf-reaver-round-end-broken = The Reavers were broken { $count ->
         [one] once
        *[other] {$count} times
     }.
+wf-reaver-round-end-finished = The Reavers were finished when their citadel fell.
+wf-reaver-round-end-lost = The Reavers lost { $count ->
+        [one] {$count} cell
+       *[other] {$count} cells
+    } to challenges.
 
 # wf_reavers command
 cmd-wf_reavers-desc = Shows and drives the Ashfall Reaver campaign.
-cmd-wf_reavers-help = Usage: {$command} status | found [x y] | convoy | reinforce <stronghold uid> | tier <n> | spread | patrol | raid | intercept <grid uid> | pause | resume | clear
-    found places a level 0 hub at once, an admin shortcut; convoy sends one out from a standing stronghold, as the campaign does; reinforce sends a stronghold its next reinforcement now.
+cmd-wf_reavers-help = Usage: {$command} status | found [x y] | convoy | citadel | reinforce <stronghold uid> | tier <n> | spread | patrol | raid | intercept <grid uid> | respond <q> <r> | pause | resume | clear
+    found places a level 0 hub at once, an admin shortcut; convoy sends one out from a standing stronghold, as the campaign does; citadel sends the citadel out now at any tier, one at a time; reinforce sends a stronghold its next reinforcement now; respond sends a response pack to a challenged Reaver cell.
 cmd-wf_reavers-hint-sub = Subcommand
 cmd-wf_reavers-hint-x = Map x in metres
 cmd-wf_reavers-hint-y = Map y in metres
 cmd-wf_reavers-hint-tier = Threat tier
 cmd-wf_reavers-hint-grid = Grid uid of the ship to intercept
 cmd-wf_reavers-hint-stronghold = Stronghold uid
+cmd-wf_reavers-hint-q = Cell column (q)
+cmd-wf_reavers-hint-r = Cell row (r)
+cmd-wf_reavers-bad-cell = Not a cell: {$q} {$r}
+cmd-wf_reavers-respond = A response pack is scrambling to {$callsign}.
+cmd-wf_reavers-respond-failed = No response pack could be sent: the cell is not a challenged Reaver cell, a pack already defends it, or no stronghold has clear space beside it.
 cmd-wf_reavers-no-campaign = No Reaver campaign runs under the current preset.
 cmd-wf_reavers-status-header = Campaign {$campaign}: running {$running}, paused {$paused}, tier {$tier}, score {$score}.
 cmd-wf_reavers-status-counts = { $strongholds ->
@@ -159,7 +215,7 @@ cmd-wf_reavers-status-counts = { $strongholds ->
 cmd-wf_reavers-status-clocks = Seconds to next spread: {$spread}. Seconds to next raid: {$raid}.
 cmd-wf_reavers-no-stronghold = No stronghold stands. Run wf_reavers found to place one now.
 cmd-wf_reavers-status-switch-off = No stronghold stands and none will be founded: {$cvar} is off. Run wf_reavers found to place one anyway.
-cmd-wf_reavers-status-mode-off = No stronghold stands and none will be founded: the Ashfall game mode is not running. Admins can force it with {$cvar} or by adding the rule (addgamerule WFReaverCampaignRule).
+cmd-wf_reavers-status-mode-off = No stronghold stands and none will be founded: the Contested Sector game mode is not running. Admins can force it with {$cvar} or by adding the rule (addgamerule WFReaverCampaignRule).
 cmd-wf_reavers-status-not-in-round = No stronghold stands and none will be founded: no round is in progress.
 cmd-wf_reavers-status-paused = No stronghold stands and none will be founded: the campaign is paused. Run wf_reavers resume.
 cmd-wf_reavers-status-runner-paused = No stronghold stands and none will be founded: the event runner is paused, which holds the campaign too. Unpause it in the Encounters window.
@@ -176,6 +232,10 @@ cmd-wf_reavers-status-founding-untimed = No stronghold stands and the founding c
 cmd-wf_reavers-status-stronghold = Stronghold {$uid} at {$callsign}: level {$level}, {$prototype}, {$hits} hits, {$patrols} patrols, {$reinforcements} reinforcements{$state}.
 cmd-wf_reavers-status-stronghold-inbound = , one inbound
 cmd-wf_reavers-status-stronghold-scattered = , broken apart
+cmd-wf_reavers-status-stronghold-citadel = , the citadel
+cmd-wf_reavers-status-citadel-convoy = Citadel convoy {$uid} bound for {$callsign}: {$range} km to go, under way {$seconds} s.
+cmd-wf_reavers-status-finished = The Reavers are finished: their citadel fell. Nothing more is founded, launched or sent this round; what stands fights on until broken. Run wf_reavers clear to lift it.
+cmd-wf_reavers-status-citadel-due = At Overrun: the citadel sets out in {$seconds} s, once a held cell qualifies.
 cmd-wf_reavers-status-reinforcement = Reinforcement {$uid} for {$callsign}, level {$level}: {$phase}, {$range} km from the hub, out {$seconds} s.
 cmd-wf_reavers-status-intercept = Patrol {$patrol} intercepting {$ship} ({$uid}) for {$seconds} s.
 cmd-wf_reavers-status-mark = {$ship} ({$uid}) is marked for {$seconds} s more.
@@ -187,6 +247,8 @@ cmd-wf_reavers-reinforce = Reinforcement {$uid} sent to the stronghold at {$call
 cmd-wf_reavers-reinforce-failed = No reinforcement could be sent: the stronghold is at its tier's level cap, one is already on its way, or there is no clear space for it.
 cmd-wf_reavers-found-failed = No stronghold could be founded there.
 cmd-wf_reavers-convoy = Convoy {$uid} sent to found a stronghold at {$callsign}.
+cmd-wf_reavers-citadel = Citadel convoy {$uid} sent to raise a citadel at {$callsign}.
+cmd-wf_reavers-citadel-failed = No citadel could be sent: the campaign has none, one stands or is under way, the Reavers are finished, no held cell qualifies, or no stronghold has clear space beside it.
 cmd-wf_reavers-convoy-failed = No convoy could be sent: one is already under way, or no held cell qualifies, or no stronghold has clear space beside it.
 cmd-wf_reavers-bad-position = Not a position: {$x} {$y}
 cmd-wf_reavers-bad-tier = Not a tier from 0 to {$max}: {$arg}
@@ -206,12 +268,14 @@ cmd-wf_reavers-cleared = Cleared the campaign: {$count} encounters ended.
 
 # Encounter names
 wf-reaver-name-stronghold = Reaver stronghold {$designation}
+wf-reaver-name-citadel = Reaver citadel {$designation}
 wf-reaver-name-level = {$name} (level {$level})
 wf-reaver-name-reinforcement = Reaver reinforcements {$designation}
 wf-reaver-name-patrol = Reaver patrol {$designation}
 wf-reaver-name-raid = Reaver raiders {$designation}
+wf-reaver-name-response = Reaver response pack
 wf-reaver-name-boarders = Reaver boarders {$designation}
 
 # Game mode
-wf-reaver-preset-title = Ashfall
-wf-reaver-preset-description = Standard sector, and the Ashfall Reavers build strongholds and spread across it.
+wf-reaver-preset-title = Contested Sector
+wf-reaver-preset-description = Standard sector with two threats on the map: the Ashfall Reavers build strongholds and spread, the Automated Defense System holds ground of its own, and the two fight over it.

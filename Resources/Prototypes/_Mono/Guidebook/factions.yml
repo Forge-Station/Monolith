@@ -11,6 +11,7 @@
   - Viper_Group
   - MMC
   - WFAsf # WOLFGATE(Asf)
+  - WFAds # WOLFGATE(AdsIncursion)
 
 - type: guideEntry
   id: TSFMC_Entry

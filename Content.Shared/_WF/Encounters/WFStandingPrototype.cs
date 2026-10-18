@@ -33,4 +33,7 @@ public enum WFEncounterZoneTargets : byte
 
     /// <summary>Only ships of a company the ship's company is at war with.</summary>
     AtWar,
+
+    /// <summary>Only ships that declared themselves a threat when hailed, or fired on it; the rest are asked.</summary>
+    Interrogate,
 }

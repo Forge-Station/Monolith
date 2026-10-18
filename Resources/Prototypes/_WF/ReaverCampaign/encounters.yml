@@ -38,6 +38,41 @@
     objectives:
     - kind: Hold
 
+# The citadel: the tier 5 set piece, flown out as a convoy from the highest-level stronghold. Vulture carries 9 docking
+# ports and its own Sentinel shield generator, so the campaign places none. It holds and does not evade, as a hub.
+- type: wfEncounter
+  id: WFReaverCitadel
+  name: wf-reaver-name-citadel
+  start: Manual
+  lifetime: Persistent
+  category: Threat
+  icon: Flag
+  leash: 2000
+  manifests: [ WFManifestContraband ]
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationRaider
+    side: reavers
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    vessels: [ Vulture ]
+    deckhands: 6
+    guards: 4
+    cargo: 8
+    fuelStores: 16
+    skill: Veteran
+    evades: false
+    platform: true
+    warnRange: 2000
+    attackRange: 1200
+    zoneLines: wf-encounter-pirate-zone
+    disengage: Deter
+    disengageRange: 1500
+    objectives:
+    - kind: Hold
+
 # A gunship that flies in from the sector edge to dock with a hub and raise it to level 1 or 2. The campaign gives it
 # its orders: go to the hub, then dock.
 - type: wfEncounter
@@ -180,6 +215,56 @@
     warnRange: 900
     attackRange: 450
     zoneLines: wf-encounter-pirate-zone
+    objectives:
+    - kind: Escort
+      target: raider
+
+# A response to a challenge on a Reaver cell: the nearest stronghold sends a raider and its wing to the cell, where they
+# attack the challenger, then fly home. They hold their ground and drive the intruder off rather than run.
+- type: wfEncounter
+  id: WFReaverResponsePack
+  name: wf-reaver-name-response
+  start: Manual
+  lifetime: Transient
+  category: Threat
+  icon: Skull
+  cost: 2
+  minPlayers: 3
+  duration: 3600
+  ships:
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    side: reavers
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 3
+    warnRange: 900
+    attackRange: 450
+    evades: false
+    zoneLines: wf-encounter-pirate-zone
+    disengage: Deter
+    disengageRange: 1200
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    side: reavers
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    warnRange: 900
+    attackRange: 450
+    evades: false
+    zoneLines: wf-encounter-pirate-zone
+    disengage: Deter
+    disengageRange: 1200
     objectives:
     - kind: Escort
       target: raider

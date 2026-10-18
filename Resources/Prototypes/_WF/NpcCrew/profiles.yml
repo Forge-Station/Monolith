@@ -362,6 +362,12 @@
   id: WFCrewProfilePirate
   firstNames: WFNamesPirateFirst
   lastNames: WFNamesPirateLast
+  # Pirates never fly adamantite: the black-market hulls' armour is swapped for plain plastitanium when they crew one.
+  hullSwaps:
+    WFWallAdamantite: WallPlastitanium
+    WFWallAdamantiteDiagonal: WallPlastitaniumDiagonal
+    WFWallAdamantiteCapital: WallPlastitanium
+    WFWallAdamantiteDiagonalCapital: WallPlastitaniumDiagonal
   components:
   - type: PirateAccent
   - type: WFCrewSuitUp

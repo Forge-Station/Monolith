@@ -12,8 +12,8 @@
   abstract: true
   minimumDistance: 4000 # Some sane defaults
   maximumDistance: 8000
-  # WOLFGATE(ReaverCampaign): the Ashfall game mode spawns the same sector as Standard
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoAshfall, MonoRogueTSF, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsf, MonoChimeraPdv ] # Behold my list of gamerules
+  # WOLFGATE(ReaverCampaign): the Contested Sector game mode spawns the same sector as Standard
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, WFContestedSector, MonoRogueTSF, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsf, MonoChimeraPdv ] # Behold my list of gamerules
   spawnGroup: Optional
   addComponents:
   - type: IFF

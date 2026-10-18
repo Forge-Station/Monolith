@@ -1,0 +1,212 @@
+# The Automated Defense System's encounters. Everything here is started by the ADS campaign or an admin, never the
+# storyteller. The first ship listed is the lead: a node breaks when its lead is out of the fight, and a sentinel,
+# sweep or interdictor flies the lead's orders. Every ADS ship disables what it fights: its guns stop once the target is
+# combat-ineffective, so nobody is hunted or boarded. Nobody gets a deed to a machine. Every zone interrogates: a ship
+# is hailed and asked whether it is a threat, and only one that says YES or fires on the ADS is fired on.
+
+# A node: a Nebula holding a cell centre as a gun platform. The lead does not evade: a hub that ran from an alert
+# would undock everything on it. The campaign adds sentinels to it as it ages.
+- type: wfEncounter
+  id: WFAdsNode
+  name: wf-ads-name-node
+  start: Manual
+  lifetime: Persistent
+  category: Threat
+  icon: Flag
+  leash: 2000
+  manifests: [ WFManifestAdsTech ]
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationRaider
+    side: ads
+    faction: WFAds
+    distress: false
+    company: WFAds
+    profile: WFCrewProfileAds
+    vessels: [ WFAdsNebula ]
+    deckhands: 2
+    guards: 2
+    cargo: 2
+    # Jars stowed for the plant: the restock tops the stores up past this whenever they run low.
+    fuelStores: 12
+    skill: Regular
+    evades: false
+    platform: true
+    warnRange: 1800
+    attackRange: 1000
+    zoneLines: wf-ads-zone
+    zoneTargets: Interrogate
+    disengage: Disable
+    disengageRange: 1500
+    iffColor: "#9B4DFF"
+    deed: null
+    objectives:
+    - kind: Hold
+
+# A sentinel: a Wyrm with a pilot, a gunner and one hand. The campaign orders it to its node, then to circle it.
+- type: wfEncounter
+  id: WFAdsSentinel
+  name: wf-ads-name-sentinel
+  start: Manual
+  lifetime: Persistent
+  category: Threat
+  icon: Shield
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationRaider
+    side: ads
+    faction: WFAds
+    distress: false
+    company: WFAds
+    profile: WFCrewProfileAds
+    vessels: [ WFAdsWyrm ]
+    deckhands: 1
+    captain: false
+    engineer: false
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    evades: false
+    warnRange: 1200
+    attackRange: 700
+    zoneLines: wf-ads-zone
+    zoneTargets: Interrogate
+    disengage: Disable
+    disengageRange: 1000
+    iffColor: "#9B4DFF"
+    deed: null
+
+# A sweep: a lone Wyrm flying a route through held space and home. The route is set by the campaign.
+- type: wfEncounter
+  id: WFAdsSweep
+  name: wf-ads-name-sweep
+  start: Manual
+  lifetime: Transient
+  category: Threat
+  icon: Shield
+  duration: 3600
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationRaider
+    side: ads
+    faction: WFAds
+    distress: false
+    company: WFAds
+    profile: WFCrewProfileAds
+    vessels: [ WFAdsWyrm ]
+    deckhands: 1
+    captain: false
+    engineer: false
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    warnRange: 1200
+    attackRange: 700
+    zoneLines: wf-ads-zone
+    zoneTargets: Interrogate
+    disengage: Disable
+    disengageRange: 1000
+    iffColor: "#9B4DFF"
+    deed: null
+
+# The conflict boat: a Wyrm sent to contest a cell another faction holds, or to run a player ship down and disable it.
+# The campaign flies it to the cell, and it holds there once it arrives.
+- type: wfEncounter
+  id: WFAdsInterdictor
+  name: wf-ads-name-interdictor
+  start: Manual
+  lifetime: Persistent
+  category: Threat
+  icon: Swords
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationRaider
+    side: ads
+    faction: WFAds
+    distress: false
+    company: WFAds
+    profile: WFCrewProfileAds
+    vessels: [ WFAdsWyrm ]
+    deckhands: 1
+    captain: false
+    engineer: false
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    evades: false
+    warnRange: 1200
+    attackRange: 700
+    zoneLines: wf-ads-zone
+    zoneTargets: Interrogate
+    disengage: Disable
+    disengageRange: 1000
+    iffColor: "#9B4DFF"
+    deed: null
+    objectives:
+    - kind: Hold
+
+# The dreadnought: a Wyvern raised at tier 5 with one directive, the Reavers' strongholds. A ship under way, not a
+# platform: the campaign flies it at the nearest standing stronghold and sets it on the hub, and with none standing it
+# holds by a node. It fires on players only by the interrogation rules, like every ADS ship.
+- type: wfEncounter
+  id: WFAdsDreadnought
+  name: wf-ads-name-dreadnought
+  start: Manual
+  lifetime: Persistent
+  category: Threat
+  icon: Skull
+  manifests: [ WFManifestAdsTech ]
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationRaider
+    side: ads
+    faction: WFAds
+    distress: false
+    company: WFAds
+    profile: WFCrewProfileAds
+    vessels: [ WFAdsWyvern ]
+    deckhands: 8
+    guards: 6
+    engineer: true
+    cargo: 4
+    fuelStores: 24
+    skill: Veteran
+    evades: false
+    platform: false
+    warnRange: 2500
+    attackRange: 1500
+    zoneLines: wf-ads-zone
+    zoneTargets: Interrogate
+    disengage: Disable
+    disengageRange: 2000
+    iffColor: "#9B4DFF"
+    deed: null
+
+# A node flying out from a standing one to found itself, as a Reaver convoy does. It is a node in all but its leash:
+# the campaign flies it to its cell, so it may stray.
+- type: wfEncounter
+  id: WFAdsDeployment
+  name: wf-ads-name-deployment
+  start: Manual
+  lifetime: Persistent
+  category: Threat
+  icon: Flag
+  manifests: [ WFManifestAdsTech ]
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationRaider
+    side: ads
+    faction: WFAds
+    distress: false
+    company: WFAds
+    profile: WFCrewProfileAds
+    vessels: [ WFAdsNebula ]
+    deckhands: 2
+    guards: 2
+    cargo: 2
+    fuelStores: 12
+    skill: Regular
+    evades: false
+    platform: true
+    warnRange: 1800
+    attackRange: 1000
+    zoneLines: wf-ads-zone
+    zoneTargets: Interrogate
+    disengage: Disable
+    disengageRange: 1500
+    iffColor: "#9B4DFF"
+    deed: null

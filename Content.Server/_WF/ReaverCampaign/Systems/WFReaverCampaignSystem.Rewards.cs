@@ -32,12 +32,12 @@ public sealed partial class WFReaverCampaignSystem
         }
     }
 
-    /// <summary>Pays a broken stronghold's bounty, at its higher tier and scaled by its level, to those who hit it or its reinforcements and the ships that stood by; returns the bounty and how many were paid.</summary>
+    /// <summary>Pays a broken stronghold's bounty, at its higher tier and scaled by its level and the citadel's scale, to those who hit it or its reinforcements and the ships that stood by; returns the bounty and how many were paid.</summary>
     private (int Bounty, int Paid) PayStrongholdBounty(WFReaverCampaignPrototype campaign, WFReaverCampaignComponent state,
         Entity<WFReaverStrongholdComponent, WFEncounterComponent> stronghold)
     {
         var (uid, comp, encounter) = stronghold;
-        var factor = LevelFactor(campaign, comp.Level);
+        var factor = BountyFactor(campaign, comp);
         var bounty = (int) (ByTier(campaign.StrongholdBounty, Math.Max(comp.Tier, state.Tier), 0) * factor);
         var attackers = encounter.ShipHits.Keys.Select(key => key.Attacker).ToHashSet();
         var supporters = new List<EntityUid>();
@@ -48,7 +48,7 @@ public sealed partial class WFReaverCampaignSystem
         }
 
         var (reward, extra) = Rewards(campaign, bounty, grant => (int) (grant.Stronghold * factor));
-        var paid = _rewards.PayBounty(uid, reward, "breaking the Reaver stronghold", supporters, extra);
+        var paid = _rewards.PayBounty(uid, reward, comp.Citadel ? "breaking the Reaver citadel" : "breaking the Reaver stronghold", supporters, extra);
         return (bounty, paid);
     }
 
@@ -68,12 +68,14 @@ public sealed partial class WFReaverCampaignSystem
         return (campaign.PatrolBounty, paid);
     }
 
-    /// <summary>Pays half the current tier's stronghold bounty, credits included, to those who hit a destroyed convoy; returns the bounty and how many were paid.</summary>
-    private (int Bounty, int Paid) PayConvoyBounty(WFReaverCampaignPrototype campaign, WFReaverCampaignComponent state, EntityUid convoy)
+    /// <summary>Pays half the current tier's stronghold bounty, or half a level 0 citadel's, credits included, to those who hit a destroyed convoy; returns the bounty and how many were paid.</summary>
+    private (int Bounty, int Paid) PayConvoyBounty(WFReaverCampaignPrototype campaign, WFReaverCampaignComponent state, EntityUid convoy,
+        bool citadel)
     {
-        var bounty = ByTier(campaign.StrongholdBounty, state.Tier, 0) / 2;
-        var (reward, extra) = Rewards(campaign, bounty, grant => grant.Stronghold / 2);
-        var paid = _rewards.PayBounty(convoy, reward, "destroying the Reaver convoy", null, extra);
+        var scale = citadel ? campaign.CitadelBountyScale : 1f;
+        var bounty = (int) (ByTier(campaign.StrongholdBounty, state.Tier, 0) * scale) / 2;
+        var (reward, extra) = Rewards(campaign, bounty, grant => (int) (grant.Stronghold * scale) / 2);
+        var paid = _rewards.PayBounty(convoy, reward, citadel ? "destroying the Reaver citadel convoy" : "destroying the Reaver convoy", null, extra);
         return (bounty, paid);
     }
 

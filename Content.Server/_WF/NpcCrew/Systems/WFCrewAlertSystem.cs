@@ -17,6 +17,7 @@ namespace Content.Server._WF.NpcCrew.Systems;
 /// <summary>Shares live targets among on-sight crew aboard the same ship and restores awareness after an alert.</summary>
 public sealed partial class WFCrewAlertSystem : EntitySystem
 {
+    [Dependency] private Robust.Shared.Prototypes.IPrototypeManager _prototypes = default!;
     [Dependency] private NpcFactionSystem _factions = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private HTNSystem _htn = default!;
@@ -156,6 +157,8 @@ public sealed partial class WFCrewAlertSystem : EntitySystem
     /// </summary>
     private bool Excuse(EntityUid grid, EntityUid attacker)
     {
+        if (OwnKind(grid, attacker))
+            return true;
         if (KnownAttacker(grid, attacker))
             return false;
         if (Friend(grid, attacker))
@@ -177,6 +180,8 @@ public sealed partial class WFCrewAlertSystem : EntitySystem
     /// <summary>Whether a vessel's recent fire on a ship is being let pass: a friend's, or a few strays from its own side.</summary>
     public bool IsExcused(EntityUid grid, EntityUid attacker)
     {
+        if (OwnKind(grid, attacker))
+            return true;
         if (KnownAttacker(grid, attacker))
             return false;
         if (Friend(grid, attacker))
@@ -185,6 +190,13 @@ public sealed partial class WFCrewAlertSystem : EntitySystem
         return SameFaction(grid, attacker)
                && (!_strays.TryGetValue((grid, attacker), out var strays) || _timing.CurTime - strays.First > StrayWindow
                    || strays.Count <= StrayHits);
+    }
+
+    /// <summary>Whether two ships fly under one crew profile that never turns on its own, whatever fire passes between them.</summary>
+    public bool OwnKind(EntityUid first, EntityUid second)
+    {
+        return TryComp<WFCrewShipProfileComponent>(first, out var own) && TryComp<WFCrewShipProfileComponent>(second, out var other)
+            && own.Profile == other.Profile && _prototypes.TryIndex(own.Profile, out var profile) && profile.ForgivesOwn;
     }
 
     /// <summary>Whether whoever knows the vessel, the encounter it is fighting in, vouches for it as the ship's friend.</summary>

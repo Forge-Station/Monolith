@@ -79,11 +79,18 @@ public sealed class WFSectorRetake
     public HashSet<EntityUid> Ships = new();
 }
 
-/// <summary>A cell a faction takes at the deadline if it has been quiet since the contest began.</summary>
+/// <summary>
+/// A cell a faction takes at the deadline if it has been quiet since the contest began; a challenge, on a cell another
+/// faction holds, is taken instead if the challenger is in the cell and the holder is not.
+/// </summary>
 public sealed class WFSectorContest
 {
     [ViewVariables]
     public ProtoId<WFSectorFactionPrototype> Faction;
+
+    /// <summary>The faction a challenge would take the cell from; null for an ordinary contest.</summary>
+    [ViewVariables]
+    public ProtoId<WFSectorFactionPrototype>? Holder;
 
     /// <summary>The claim's source once taken; the contest is dropped if it goes first.</summary>
     [ViewVariables]

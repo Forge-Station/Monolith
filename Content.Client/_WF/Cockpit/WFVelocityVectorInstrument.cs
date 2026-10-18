@@ -120,7 +120,7 @@ public sealed class WFVelocityVectorInstrument : Control
             new Vector2(face * 1.45f, MathF.Min(18 * UIScale, face * 0.32f)));
         handle.DrawRect(readout, skin.Ink);
         WFInstrumentText.DrawFitted(handle, _digits, _speedText,
-            new UIBox2(readout.TopLeft + new Vector2(UIScale), readout.BottomRight - new Vector2(UIScale)), UIScale, tint);
+            new UIBox2(readout.TopLeft + new Vector2(UIScale), Vector2.Max(readout.TopLeft + new Vector2(UIScale), readout.BottomRight - new Vector2(UIScale))), UIScale, tint);
         if (!digital)
             WFInstrumentGlass.Round(handle, center, face + 2 * UIScale, UIScale);
         var captionScale = WFInstrumentText.FitScale(handle, _labels, _caption, UIScale, PixelWidth - 16 * UIScale, 18 * UIScale);

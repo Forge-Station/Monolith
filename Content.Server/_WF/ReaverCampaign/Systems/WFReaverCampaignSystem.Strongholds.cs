@@ -32,6 +32,9 @@ public sealed partial class WFReaverCampaignSystem
     /// <summary>How long after its founding a stronghold may send its first patrol.</summary>
     private static readonly TimeSpan FirstPatrolDelay = TimeSpan.FromMinutes(2);
 
+    /// <summary>How long a hub may sit out of power unattacked before it is broken anyway: four restocks' worth.</summary>
+    public static readonly TimeSpan StarvedGrace = TimeSpan.FromMinutes(20);
+
     /// <summary>Founds the first stronghold or a regrouped one far out, or sends a convoy from a standing one to found a later one; one founding at a time.</summary>
     private void TickFounding(WFReaverCampaignPrototype campaign, WFReaverCampaignComponent state)
     {
@@ -43,14 +46,18 @@ public sealed partial class WFReaverCampaignSystem
             if (state.Founded > 0)
                 state.NoStrongholdSince ??= now;
 
-            if (convoys == 0 && FoundingDue(campaign, state) is { } due && now >= due && now >= _nextFoundTry && !TryFound(out _))
+            if (convoys == 0 && !state.Finished && FoundingDue(campaign, state) is { } due && now >= due && now >= _nextFoundTry
+                && !TryFound(out _))
                 _nextFoundTry = now + FoundRetry;
             return;
         }
 
+        // The citadel and its convoy stand outside the stronghold cap and the one-convoy rule.
         state.NoStrongholdSince = null;
-        if (convoys > 0
-            || standing.Count + convoys >= campaign.MaxStrongholds
+        var ordinary = OrdinaryConvoys();
+        if (ordinary > 0
+            || state.Finished
+            || standing.Count(stronghold => !stronghold.Comp1.Citadel) + ordinary >= campaign.MaxStrongholds
             || _territory.Held(_territory.SectorMap, campaign.Faction).Count < campaign.CellsPerStronghold * standing.Count
             || state.LastFounded is { } last && now < last + campaign.FoundInterval
             || now < _nextFoundTry)
@@ -60,20 +67,23 @@ public sealed partial class WFReaverCampaignSystem
             _nextFoundTry = now + FoundRetry;
     }
 
-    /// <summary>When a founding is due with none standing: the first after the stations generate, a regroup after the last stronghold fell; null if that clock has not started.</summary>
+    /// <summary>When a founding is due with none standing: the first after the stations generate, a regroup after the last stronghold fell; null if that clock has not started or the Reavers are finished.</summary>
     public TimeSpan? FoundingDue(WFReaverCampaignPrototype campaign, WFReaverCampaignComponent? state)
     {
+        if (state is { Finished: true })
+            return null;
+
         if (state == null || state.Founded == 0)
             return _stationsAt is { } at ? at + campaign.FirstStrongholdDelay : null;
 
         return state.NoStrongholdSince is { } since ? since + campaign.RegroupDelay : null;
     }
 
-    /// <summary>Founds a stronghold at once where the rules put it: a quiet cell far out with none standing, otherwise a held frontier cell. The campaign sends a convoy for the latter.</summary>
+    /// <summary>Founds a stronghold at once where the rules put it: a quiet cell far out with none standing, otherwise a held frontier cell; none once finished. The campaign sends a convoy for the latter.</summary>
     public bool TryFound(out EntityUid stronghold)
     {
         stronghold = default;
-        if (Campaign is not { } campaign || State(true) is not { } state)
+        if (Campaign is not { } campaign || State(true) is not { } state || state.Finished)
             return false;
 
         var standing = Strongholds();
@@ -87,11 +97,11 @@ public sealed partial class WFReaverCampaignSystem
             && TryFoundAt(_territory.Centre(_territory.SectorMap, later), out stronghold);
     }
 
-    /// <summary>Founds a level 0 hub at a point, shields it, claims its cell and ring and announces it.</summary>
+    /// <summary>Founds a level 0 hub at a point, shields it, claims its cell and ring and announces it; none once finished.</summary>
     public bool TryFoundAt(MapCoordinates at, out EntityUid stronghold, ProtoId<WFEncounterPrototype>? prototype = null)
     {
         stronghold = default;
-        if (Campaign is not { } campaign || State(true) is not { } state
+        if (Campaign is not { } campaign || State(true) is not { } state || state.Finished
             || !_prototypes.TryIndex(prototype ?? campaign.Stronghold, out var encounterPrototype)
             || encounterPrototype.Ships.Count == 0)
             return false;
@@ -113,9 +123,9 @@ public sealed partial class WFReaverCampaignSystem
             EnsureShield(campaign, ship.Grid);
     }
 
-    /// <summary>Makes an encounter a stronghold in a cell: claims the cell and ring, counts the founding and announces it at a point.</summary>
+    /// <summary>Makes an encounter a stronghold, or the citadel, in a cell: claims the cell and its rings, counts the founding and announces it at a point.</summary>
     private void Establish(WFReaverCampaignPrototype campaign, WFReaverCampaignComponent state, EntityUid uid, string lead,
-        WFSectorCell cell, MapCoordinates at, bool regroup)
+        WFSectorCell cell, MapCoordinates at, bool regroup, bool citadel = false)
     {
         var now = _timing.CurTime;
         var comp = EnsureComp<WFReaverStrongholdComponent>(uid);
@@ -124,25 +134,38 @@ public sealed partial class WFReaverCampaignSystem
         comp.Lead = lead;
         comp.NextPatrol = now + FirstPatrolDelay;
         comp.NextReinforcement = now + campaign.ReinforcementInterval;
+        comp.Citadel = citadel;
+        if (citadel)
+            comp.BaseName = Loc.GetString("wf-reaver-name-citadel", ("designation", WFSectorHex.Callsign(cell)));
+
         if (TryComp<WFEncounterComponent>(uid, out var encounter))
             SetLevel((uid, comp, encounter), 0);
 
-        ClaimCells(campaign, at.MapId, cell, uid);
+        ClaimCells(campaign, at.MapId, cell, uid, citadel ? campaign.CitadelRings : 1);
         state.Founded++;
-        state.LastFounded = now;
         state.NoStrongholdSince = null;
         state.Defeated = false;
+
+        // The citadel stands outside the founding interval, so it does not hold back the next stronghold.
+        if (citadel)
+            state.Citadels++;
+        else
+            state.LastFounded = now;
+
         Recompute();
-        AnnouncePlace(campaign, regroup ? "wf-reaver-regrouped" : "wf-reaver-founded", true, at.MapId, at.Position,
+        var bounty = ByTier(campaign.StrongholdBounty, state.Tier, 0);
+        AnnouncePlace(campaign, citadel ? "wf-reaver-citadel-raised" : regroup ? "wf-reaver-regrouped" : "wf-reaver-founded", true,
+            at.MapId, at.Position,
             ("callsign", WFSectorHex.Callsign(cell)),
-            ("bounty", ByTier(campaign.StrongholdBounty, state.Tier, 0)));
+            ("bounty", citadel ? (int) (bounty * campaign.CitadelBountyScale) : bounty));
+        if (citadel)
+            PlayCapital(campaign);
     }
 
-    /// <summary>Claims a stronghold's cell and ring for it; a station cell in the ring is contested instead.</summary>
-    private void ClaimCells(WFReaverCampaignPrototype campaign, MapId map, WFSectorCell cell, EntityUid stronghold)
+    /// <summary>Claims a stronghold's cell and its rings for it; a station cell among them is contested instead.</summary>
+    private void ClaimCells(WFReaverCampaignPrototype campaign, MapId map, WFSectorCell cell, EntityUid stronghold, int rings = 1)
     {
-        var cells = new List<WFSectorCell> { cell };
-        cells.AddRange(WFSectorHex.Ring(cell, 1));
+        var cells = WFSectorHex.Within(cell, Math.Max(1, rings));
         foreach (var claimed in cells)
         {
             if (_territory.Owner(map, claimed) == null && BlockadeTargets(campaign, map, claimed) is { Count: > 0 } stations)
@@ -162,7 +185,7 @@ public sealed partial class WFReaverCampaignSystem
         foreach (var (uid, comp, encounter) in Strongholds())
         {
             comp.Cell = _territory.CellOf(new MapCoordinates(Position(encounter, comp.Lead), map));
-            ClaimCells(campaign, map, comp.Cell, uid);
+            ClaimCells(campaign, map, comp.Cell, uid, comp.Citadel ? campaign.CitadelRings : 1);
         }
 
         // A convoy's cell is found again from its point; the next tick contests it.
@@ -278,15 +301,36 @@ public sealed partial class WFReaverCampaignSystem
             var (uid, comp, encounter) = stronghold;
             if (!encounter.Ships.TryGetValue(comp.Lead, out var lead) || !_encounters.InFight(lead))
             {
-                _encounters.Resolve(uid, LostResolution(encounter, comp.Lead));
+                // A hub that went dark with nobody shooting at it has not been beaten: its engineer and the restock
+                // bring the power back. One that stays dark past the grace is broken all the same.
+                if (lead != null && encounter.ShipHits.Count == 0 && comp.NpcHits.Count == 0 && _encounters.OutForWantOfPower(lead))
+                {
+                    if (!comp.Starved)
+                    {
+                        Log.Info($"Reaver stronghold {ToPrettyString(uid)} is out of power with no attack on it and is left standing.");
+                        comp.StarvedSince = _timing.CurTime;
+                    }
+
+                    comp.Starved = true;
+                    if (_timing.CurTime - comp.StarvedSince < StarvedGrace)
+                        continue;
+
+                    Log.Info($"Reaver stronghold {ToPrettyString(uid)} has been out of power past the grace and is broken.");
+                }
+
+                // Brought down by another campaign's guns, it is beaten all the same.
+                _encounters.Resolve(uid, comp.NpcHits.Count > 0 ? WFEncounterResolution.Destroyed : LostResolution(encounter, comp.Lead));
                 continue;
             }
 
-            var hits = encounter.ShipHits.Values.Sum();
+            comp.Starved = false;
+            var playerHits = encounter.ShipHits.Values.Sum();
+            var hits = playerHits + comp.NpcHits.Values.Sum();
             if (hits > comp.Hits)
             {
                 comp.LastHit = _timing.CurTime;
                 var fresh = MarkAttackers(comp, encounter);
+                fresh.AddRange(FreshNpcAttackers(comp));
                 ScatterReinforcements(uid, fresh);
                 RespondToHit(stronghold, fresh);
             }
@@ -298,12 +342,50 @@ public sealed partial class WFReaverCampaignSystem
             if (comp.Scattered)
                 RegroupReinforcements(uid, false);
 
-            if (_timing.CurTime - comp.LastHit <= SupportWindow)
+            // Standing by only counts against a player assault, as only a player's hits pay.
+            if (playerHits > 0 && _timing.CurTime - comp.LastHit <= SupportWindow)
                 TrackSupport(comp, encounter, _transform.GetWorldPosition(lead.Grid), ships, elapsed);
         }
     }
 
-    /// <summary>Frees a stronghold's cells; broken, it pays its bounty and is announced.</summary>
+    /// <summary>
+    /// Counts a ship weapon hit by another campaign's ship on a stronghold's hub or one of its reinforcements, so the
+    /// hub breaks its reinforcements away and sends a sortie at it as it would at a player ship. No bounty or mark.
+    /// </summary>
+    public bool RecordCampaignHit(EntityUid victim, EntityUid attacker)
+    {
+        if (!TryComp<WFEncounterGridComponent>(victim, out var marker) || TerminatingOrDeleted(attacker))
+            return false;
+
+        var owner = marker.Encounter;
+        if (TryComp<WFReaverReinforcementComponent>(owner, out var reinforcement))
+            owner = reinforcement.Stronghold;
+
+        if (!TryComp<WFReaverStrongholdComponent>(owner, out var stronghold)
+            || !TryComp<WFEncounterComponent>(owner, out var encounter) || encounter.Resolution != null)
+            return false;
+
+        stronghold.NpcHits[attacker] = stronghold.NpcHits.GetValueOrDefault(attacker) + 1;
+        return true;
+    }
+
+    /// <summary>The other campaigns' ships that have hit a stronghold since it was last looked at.</summary>
+    private List<EntityUid> FreshNpcAttackers(WFReaverStrongholdComponent stronghold)
+    {
+        var fresh = new List<EntityUid>();
+        foreach (var (attacker, hits) in stronghold.NpcHits)
+        {
+            if (hits <= stronghold.AttackerHits.GetValueOrDefault(attacker))
+                continue;
+
+            stronghold.AttackerHits[attacker] = hits;
+            fresh.Add(attacker);
+        }
+
+        return fresh;
+    }
+
+    /// <summary>Frees a stronghold's cells; broken, it pays its bounty and is announced, and a fallen citadel finishes the Reavers.</summary>
     private void StrongholdResolved(Entity<WFReaverStrongholdComponent> stronghold, WFEncounterResolution resolution)
     {
         var (uid, comp) = stronghold;
@@ -322,9 +404,22 @@ public sealed partial class WFReaverCampaignSystem
         var (bounty, paid) = PayStrongholdBounty(campaign, state, (uid, comp, encounter));
         var freed = _territory.Release(uid);
         state.Broken++;
+        if (comp.Citadel)
+        {
+            state.CitadelsBroken++;
+            state.Finished = true;
+            Log.Info($"Reaver citadel {ToPrettyString(uid)} fell; the Reavers are finished for the round.");
+
+            // A convoy under way would found a stronghold; it is recalled.
+            foreach (var (convoy, _, _) in Convoys())
+            {
+                _encounters.End(convoy);
+            }
+        }
+
         AfterStrongholdGone(state);
         var position = Position(encounter, comp.Lead);
-        AnnouncePlace(campaign, "wf-reaver-broken", false, Transform(uid).MapID, position,
+        AnnouncePlace(campaign, comp.Citadel ? "wf-reaver-citadel-fallen" : "wf-reaver-broken", false, Transform(uid).MapID, position,
             ("callsign", WFSectorHex.Callsign(comp.Cell)),
             ("bounty", bounty),
             ("paid", paid),
@@ -332,10 +427,10 @@ public sealed partial class WFReaverCampaignSystem
         AnnounceDefeat(campaign, state);
     }
 
-    /// <summary>Announces the end of the campaign when the last stronghold has broken with no convoy out to found another.</summary>
+    /// <summary>Announces the end of the campaign when the last stronghold has broken with no convoy out to found another; a finished campaign has had its ending.</summary>
     private void AnnounceDefeat(WFReaverCampaignPrototype campaign, WFReaverCampaignComponent state)
     {
-        if (Strongholds().Count > 0 || Convoys().Count > 0)
+        if (state.Finished || Strongholds().Count > 0 || Convoys().Count > 0)
             return;
 
         state.Defeated = true;

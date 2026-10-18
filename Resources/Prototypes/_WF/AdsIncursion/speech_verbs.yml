@@ -1,0 +1,11 @@
+# How the Automated Defense System's units speak: the silicon verbs in the system's readout face (fonts.yml), so a unit
+# reads as a machine in chat and on the radio, as synthetic speech does in SS13.
+- type: speechVerb
+  id: WFAdsSynth
+  name: wf-ads-speech-verb-name
+  fontId: WFAdsSynth
+  fontSize: 10
+  speechVerbStrings:
+  - chat-speech-verb-robotic-1
+  - chat-speech-verb-robotic-2
+  - chat-speech-verb-robotic-3

@@ -79,7 +79,7 @@ public sealed partial class WFReaverCampaignSystem
     private bool TryLaunchPatrol(EntityUid stronghold, out EntityUid uid)
     {
         uid = default;
-        if (Campaign is not { } campaign
+        if (Campaign is not { } campaign || State() is { Finished: true }
             || !TryComp<WFReaverStrongholdComponent>(stronghold, out var comp)
             || !TryComp<WFEncounterComponent>(stronghold, out var encounter) || encounter.Resolution != null
             || !_prototypes.TryIndex(campaign.Patrol, out var prototype) || prototype.Ships.Count == 0)
@@ -347,10 +347,10 @@ public sealed partial class WFReaverCampaignSystem
         var freed = !guarded && _territory.Owner(map, cell) == campaign.Faction && _territory.Free(map, cell);
         var (bounty, paid) = PayPatrolBounty(campaign, uid);
         state.PatrolsDestroyed++;
-        Announce(campaign, Loc.GetString(freed ? "wf-reaver-patrol-destroyed" : "wf-reaver-patrol-destroyed-held",
+        AnnounceRadio(Loc.GetString(freed ? "wf-reaver-patrol-destroyed" : "wf-reaver-patrol-destroyed-held",
             ("callsign", WFSectorHex.Callsign(cell)),
             ("bounty", bounty),
-            ("paid", paid)), false, chime: false);
+            ("paid", paid)));
         Recompute();
     }
 }

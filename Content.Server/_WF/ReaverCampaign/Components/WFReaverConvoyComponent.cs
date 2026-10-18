@@ -29,4 +29,8 @@ public sealed partial class WFReaverConvoyComponent : Component
     /// <summary>When it has taken too long: it founds where it stands if that is in its cell, and is ended otherwise.</summary>
     [ViewVariables]
     public TimeSpan Overdue;
+
+    /// <summary>Whether it goes to raise the citadel rather than a stronghold.</summary>
+    [ViewVariables]
+    public bool Citadel;
 }

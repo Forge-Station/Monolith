@@ -13,8 +13,8 @@
   maximumDistance: 200 # Mono
   posX: 3500
   posY: -5000
-  # WOLFGATE(ReaverCampaign): the Ashfall game mode spawns the same sector as Standard
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoAshfall, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsf ]
+  # WOLFGATE(ReaverCampaign): the Contested Sector game mode spawns the same sector as Standard
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, WFContestedSector, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsf ]
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/tsfmc_industry.yml
   addComponents:

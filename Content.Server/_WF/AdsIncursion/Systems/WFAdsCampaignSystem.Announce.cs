@@ -1,6 +1,5 @@
 using System.Numerics;
 using Content.Server._WF.AdsIncursion.Components;
-using Content.Server._WF.PlanetComms;
 using Content.Server._WF.ReaverCampaign.Systems;
 using Content.Shared._WF.AdsIncursion;
 using Content.Shared.Radio;
@@ -24,7 +23,6 @@ public sealed partial class WFAdsCampaignSystem
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private WFPlanetCommsSystem _planetComms = default!;
 
     private static readonly ProtoId<RadioChannelPrototype> WarningChannel = "Common";
 
@@ -67,11 +65,9 @@ public sealed partial class WFAdsCampaignSystem
     private void Banner(string sender, string message, SoundSpecifier? sound, Color colour)
     {
         var wrapped = Loc.GetString("wf-ads-announcement-wrap", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
-        // Worlds with no mass transceiver up miss it.
-        var reach = _planetComms.Reachable(Filter.Broadcast(), null);
-        _chatManager.ChatMessageToManyFiltered(reach, ChatChannel.Radio, message, wrapped, default, false, true, colour);
+        _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrapped, default, false, true, colour);
         if (sound != null)
-            _audio.PlayGlobal(_audio.ResolveSound(sound), reach, true, AudioParams.Default.WithVolume(-2f));
+            _audio.PlayGlobal(_audio.ResolveSound(sound), Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
     }
 
@@ -146,8 +142,6 @@ public sealed partial class WFAdsCampaignSystem
             return null;
 
         var watch = Spawn(null, new EntityCoordinates(uid, Vector2.Zero));
-        // A hull passing over the map origin would otherwise pick it up.
-        Transform(watch).GridTraversal = false;
         _meta.SetEntityName(watch, Loc.GetString("wf-ads-watch"));
         EnsureComp<TelecomExemptComponent>(watch);
         EnsureComp<SpeechComponent>(watch).SpeechVerb = SynthVerb;

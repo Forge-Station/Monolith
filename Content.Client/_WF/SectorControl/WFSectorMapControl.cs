@@ -208,6 +208,12 @@ public sealed class WFSectorMapControl : Control
                 continue;
 
             var remaining = WFSectorOverlay.FormatRemaining(contest.Remaining(_timing.CurTime));
+            if (view.Owners.TryGetValue(cell, out var held) && held != contest.Faction)
+            {
+                return Loc.GetString("wf-sector-map-hover-challenged", ("callsign", callsign), ("distance", distance),
+                    ("holder", view.Names[held]), ("faction", view.Names[contest.Faction]), ("time", remaining));
+            }
+
             return Loc.GetString("wf-sector-map-hover-contested",
                 ("callsign", callsign), ("distance", distance), ("faction", view.Names[contest.Faction]), ("time", remaining));
         }
@@ -250,19 +256,37 @@ public sealed class WFSectorMapControl : Control
 
         var cell = WFSectorHex.CellOf(blip.Position, view.CellSize);
         var callsign = WFSectorHex.Callsign(cell);
-        into.Add(view.Owners.TryGetValue(cell, out var owner)
-            ? new WFSectorReadoutLine(Loc.GetString("wf-sector-map-card-held", ("callsign", callsign), ("faction", view.Names[owner])), CardColor, null)
-            : new WFSectorReadoutLine(Loc.GetString("wf-sector-map-card-open", ("callsign", callsign)), CardColor, null));
-
+        var held = view.Owners.TryGetValue(cell, out var owner);
+        WFSectorContestView? challenge = null;
         foreach (var contest in view.Contests)
         {
-            if (contest.Cell != cell)
-                continue;
+            if (contest.Cell == cell && held && owner != contest.Faction)
+                challenge = contest;
+        }
 
-            var remaining = WFSectorOverlay.FormatRemaining(contest.Remaining(_timing.CurTime));
-            into.Add(new WFSectorReadoutLine(Loc.GetString("wf-sector-map-card-contested",
-                ("faction", view.Names[contest.Faction]), ("time", remaining)), CardColor, null));
-            break;
+        // A challenged cell gets one line naming both factions in place of the held and contested lines.
+        if (challenge is { } challenged)
+        {
+            into.Add(new WFSectorReadoutLine(Loc.GetString("wf-sector-map-card-challenged", ("callsign", callsign),
+                ("holder", view.Names[owner]), ("faction", view.Names[challenged.Faction]),
+                ("time", WFSectorOverlay.FormatRemaining(challenged.Remaining(_timing.CurTime)))), CardColor, null));
+        }
+        else
+        {
+            into.Add(held
+                ? new WFSectorReadoutLine(Loc.GetString("wf-sector-map-card-held", ("callsign", callsign), ("faction", view.Names[owner])), CardColor, null)
+                : new WFSectorReadoutLine(Loc.GetString("wf-sector-map-card-open", ("callsign", callsign)), CardColor, null));
+
+            foreach (var contest in view.Contests)
+            {
+                if (contest.Cell != cell)
+                    continue;
+
+                var remaining = WFSectorOverlay.FormatRemaining(contest.Remaining(_timing.CurTime));
+                into.Add(new WFSectorReadoutLine(Loc.GetString("wf-sector-map-card-contested",
+                    ("faction", view.Names[contest.Faction]), ("time", remaining)), CardColor, null));
+                break;
+            }
         }
 
         foreach (var retake in view.Retakes)

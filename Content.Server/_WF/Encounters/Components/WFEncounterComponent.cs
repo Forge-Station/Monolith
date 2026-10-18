@@ -115,6 +115,9 @@ public sealed partial class WFEncounterComponent : Component
     /// <summary>The vessels each side has called its guns onto, and when it may call each again.</summary>
     public Dictionary<(string Side, EntityUid Intruder), TimeSpan> Called = new();
 
+    /// <summary>The vessels its interrogating ships have asked, and when each may be asked again.</summary>
+    public Dictionary<EntityUid, TimeSpan> Interrogated = new();
+
     /// <summary>When its ships jump out, whoever is near.</summary>
     [DataField]
     public TimeSpan? JumpAt;
@@ -248,6 +251,12 @@ public sealed partial class WFEncounterShipState
 
     /// <summary>Intruders inside the attack zone that have been told so.</summary>
     public HashSet<EntityUid> Engaged = new();
+
+    /// <summary>Vessels that answered its interrogation as a threat: an interrogating zone fires on them for the encounter's life.</summary>
+    public HashSet<EntityUid> Declared = new();
+
+    /// <summary>Vessels in its warning zone that an interrogating zone has no cause to fire on, as of its last look: those it asks.</summary>
+    public HashSet<EntityUid> Strangers = new();
 }
 
 /// <summary>Marks a passenger an encounter put aboard one of its ships.</summary>

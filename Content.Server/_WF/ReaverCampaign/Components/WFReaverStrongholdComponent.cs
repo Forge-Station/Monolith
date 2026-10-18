@@ -18,15 +18,19 @@ public sealed partial class WFReaverStrongholdComponent : Component
     [ViewVariables]
     public string Lead = string.Empty;
 
-    /// <summary>Ship weapon hits its ships have taken from player ships.</summary>
+    /// <summary>Ship weapon hits its ships have taken from player ships and from other campaigns' ships.</summary>
     [ViewVariables]
     public int Hits;
 
-    /// <summary>Hits each player ship has landed on it, so a fresh hit marks the ship that made it.</summary>
+    /// <summary>Hits each attacking ship has landed on it, so a fresh hit is told from an old one; only a player ship's is marked.</summary>
     [ViewVariables]
     public Dictionary<EntityUid, int> AttackerHits = new();
 
-    /// <summary>When its ships last took a hit from a player ship.</summary>
+    /// <summary>Ship weapon hits each ship of another campaign, such as the ADS dreadnought, has landed on its hub or reinforcements. Answered as a player's are, but never paid or marked.</summary>
+    [ViewVariables]
+    public Dictionary<EntityUid, int> NpcHits = new();
+
+    /// <summary>When its ships last took a hit.</summary>
     [ViewVariables]
     public TimeSpan LastHit;
 
@@ -77,4 +81,8 @@ public sealed partial class WFReaverStrongholdComponent : Component
     /// <summary>The encounter's name without its level, so the level can be shown on the map.</summary>
     [ViewVariables]
     public string BaseName = string.Empty;
+
+    /// <summary>Whether it is the tier 5 citadel: more rings, a higher level cap, a scaled bounty, and the Reavers finished when it falls.</summary>
+    [ViewVariables]
+    public bool Citadel;
 }

@@ -30,12 +30,12 @@ public sealed partial class WFReaverCampaignSystem
         _territory.SetPresence(campaign.Faction, map, cells);
     }
 
-    /// <summary>Whether an encounter is a Reaver stronghold, reinforcement, patrol, raid or convoy.</summary>
+    /// <summary>Whether an encounter is a Reaver stronghold, reinforcement, patrol, raid, convoy or response pack.</summary>
     private bool IsCampaignEncounter(EntityUid uid)
     {
         return HasComp<WFReaverStrongholdComponent>(uid) || HasComp<WFReaverReinforcementComponent>(uid)
             || HasComp<WFReaverPatrolComponent>(uid) || HasComp<WFReaverRaidComponent>(uid)
-            || HasComp<WFReaverConvoyComponent>(uid);
+            || HasComp<WFReaverConvoyComponent>(uid) || HasComp<WFReaverResponseComponent>(uid);
     }
 
     /// <summary>Whether a campaign encounter's lead ship is in a disputed cell.</summary>

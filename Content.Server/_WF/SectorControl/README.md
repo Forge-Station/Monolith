@@ -42,15 +42,19 @@ it), or on empty space the cell, its distance from the centre and who holds it. 
 guidebook or its key (Shift+N, rebindable), "Sector map" in the game menu or the `wf_sectormap` command (`WFSectorMapControl`,
 `WFSectorMapWindow`, `WFSectorMapUIController` in `Content.Client/_WF/SectorControl`).
 
-Drivers use `WFSectorTerritorySystem` (`CellOf`, `Centre`, `Owner`, `TryClaim`, `Contest`, `SetContestDeadline`, `DropContest`, `Release`, `Free`,
+A faction can challenge a cell another holds (`Challenge`): at the deadline it takes the cell, with no clearing, if
+its ships are there and the holder's are not, and the challenge is dropped otherwise or when its source dies; the map
+reads "held by X, challenged by Y, m:ss".
+
+Drivers use `WFSectorTerritorySystem` (`CellOf`, `Centre`, `Owner`, `TryClaim`, `Contest`, `Challenge`, `SetContestDeadline`, `DropContest`, `Release`, `Free`,
 `Held`, `Frontier`, `Sources`, `StationsIn`, `CanClaim`), `WFSectorActivitySystem` (`LastActivity`, `IsQuiet`,
 `ActiveShips`) and `WFSectorSyncSystem.SetStatus` for their legend line, and listen for the events in
 `WFSectorEvents.cs`. A claim lasts while any of its sources exists. `WFSectorProtectionSystem` vetoes claims on the
 origin cell and its ring and on cells holding a station named in `wf.sector.protected_stations` (the Halcyon), for
 every driver. The hex maths is in `Content.Shared/_WF/SectorControl/WFSectorHex.cs` so the client draws with it.
 
-Admins use `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest <faction> <q> <r> <minutes> | clear
-[faction] | callsign <x> <y>`. `wf.sector.enabled` turns it all off and clears the territory. State lives on
+Admins use `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest <faction> <q> <r> <minutes> | challenge
+<faction> <q> <r> <minutes> | clear [faction] | callsign <x> <y>`. `wf.sector.enabled` turns it all off and clears the territory. State lives on
 `WFSectorTerritoryComponent` on the map entity, where VV shows it, and goes with the round.
 
 `Docs/_WF/SectorControl/design.md` is the design.
@@ -94,6 +98,7 @@ Admins use `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest 
 ### Integration tests
 
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorActivityTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorActivityTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorChallengeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorChallengeTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorClearingTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorClearingTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorControlTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorControlTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorDisputeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorDisputeTest.cs)

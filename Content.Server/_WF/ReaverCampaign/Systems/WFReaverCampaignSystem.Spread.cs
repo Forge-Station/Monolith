@@ -30,7 +30,7 @@ public sealed partial class WFReaverCampaignSystem
     /// <summary>Takes one quiet, unvetoed frontier cell within support range of a stronghold; a station cell is contested as a blockade.</summary>
     public bool TrySpreadOnce()
     {
-        if (Campaign is not { } campaign || State(true) is null)
+        if (Campaign is not { } campaign || State(true) is not { Finished: false })
             return false;
 
         var standing = Strongholds();
@@ -81,7 +81,7 @@ public sealed partial class WFReaverCampaignSystem
         if (!_territory.Contest(map, cell, campaign.Faction, _timing.CurTime + BlockadeTime, source))
             return false;
 
-        Announce(campaign, Loc.GetString("wf-reaver-blockade",
+        AnnounceQuiet(campaign, Loc.GetString("wf-reaver-blockade",
             ("station", Name(station)),
             ("callsign", WFSectorHex.Callsign(cell)),
             ("minutes", (int) BlockadeTime.TotalMinutes)), true);

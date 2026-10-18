@@ -13,7 +13,7 @@ public sealed partial class WFReaverCampaignSystem
     private const float SortieLeash = 6000f;
 
     /// <summary>
-    /// A stronghold's answer to a fresh hit from a player ship: the patrols within two cells are called back to circle
+    /// A stronghold's answer to a fresh hit from a player ship or another campaign's: the patrols within two cells are called back to circle
     /// it, and with no reinforcement docked to break away a sortie pack is sent against the ship that hit it hardest,
     /// one at a time, five minutes apart.
     /// </summary>

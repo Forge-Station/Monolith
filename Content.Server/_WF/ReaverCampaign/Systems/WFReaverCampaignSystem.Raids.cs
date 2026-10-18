@@ -66,10 +66,10 @@ public sealed partial class WFReaverCampaignSystem
         TryLaunchRaid();
     }
 
-    /// <summary>Launches one raid now, whatever the clock and cap; false if nothing qualifies.</summary>
+    /// <summary>Launches one raid now, whatever the clock and cap; false if nothing qualifies or the Reavers are finished.</summary>
     public bool TryLaunchRaid()
     {
-        if (Campaign is not { } campaign || State(true) is not { } state)
+        if (Campaign is not { } campaign || State(true) is not { } state || state.Finished)
             return false;
 
         var standing = Strongholds();

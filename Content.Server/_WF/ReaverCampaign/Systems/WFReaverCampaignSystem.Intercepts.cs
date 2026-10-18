@@ -89,7 +89,7 @@ public sealed partial class WFReaverCampaignSystem
     public bool TryIntercept(EntityUid target)
     {
         var map = _territory.SectorMap;
-        if (Campaign is not { } campaign || State(true) is not { } state || TerminatingOrDeleted(target)
+        if (Campaign is not { } campaign || State(true) is not { Finished: false } state || TerminatingOrDeleted(target)
             || !HasComp<MapGridComponent>(target) || HasComp<WFEncounterGridComponent>(target) || Transform(target).MapID != map
             || _scheduler.IsSecretPlace(target) || Neutral(target))
             return false;
@@ -132,7 +132,7 @@ public sealed partial class WFReaverCampaignSystem
         return StartIntercept(campaign, (uid, comp, encounter), target, at, comp.Route.ToList());
     }
 
-    /// <summary>Turns a patrol on a ship: close on where it is and attack it, then fly the rest of the route and home. Warns those aboard and the sector.</summary>
+    /// <summary>Turns a patrol on a ship: close on where it is and attack it, then fly the rest of the route and home. Warns those aboard a player ship and the sector.</summary>
     private bool StartIntercept(WFReaverCampaignPrototype campaign, Entity<WFReaverPatrolComponent, WFEncounterComponent> patrol,
         EntityUid target, Vector2 at, List<Vector2> resume)
     {
@@ -157,7 +157,9 @@ public sealed partial class WFReaverCampaignSystem
         var from = encounter.Ships.TryGetValue(comp.Lead, out var lead) && !TerminatingOrDeleted(lead.Grid)
             ? _transform.GetWorldPosition(lead.Grid)
             : comp.LastSeen;
-        WarnShip(campaign, Transform(target).MapID, target, from, "wf-reaver-intercept-warning", "wf-reaver-intercept-warning");
+        // Another campaign's ship has no crew to warn, and the sector is not told of a fight between machines.
+        if (!HasComp<WFEncounterGridComponent>(target))
+            WarnShip(campaign, Transform(target).MapID, target, from, "wf-reaver-intercept-warning", "wf-reaver-intercept-warning");
         return true;
     }
 

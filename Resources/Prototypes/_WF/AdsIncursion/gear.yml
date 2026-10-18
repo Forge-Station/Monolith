@@ -1,0 +1,19 @@
+# Energy weapons for the Automated Defense System's units, which go bare: no clothing, no suits. The IPC inventory has no
+# ears slot, so none carries a headset. Weapons sit in the belt and back slots, which need no jumpsuit, never in a bag:
+# the crew draws from slots.
+
+- type: startingGear
+  id: WFCrewAdsUnit
+  equipment:
+    belt: WeaponLaserGun
+
+- type: startingGear
+  id: WFCrewAdsOfficer
+  equipment:
+    belt: WeaponLaserGun
+
+- type: startingGear
+  id: WFCrewAdsSentry
+  equipment:
+    back: WeaponLaserCarbine
+    belt: WeaponLaserGun

@@ -19,21 +19,29 @@ public readonly record struct WFSectorCellChangedEvent(
     ProtoId<WFSectorFactionPrototype>? Previous,
     ProtoId<WFSectorFactionPrototype>? Owner);
 
-/// <summary>Raised, by ref and broadcast, when a faction contests a cell or the contest's deadline moves. Drivers announce it.</summary>
+/// <summary>
+/// Raised, by ref and broadcast, when a faction contests a cell or the contest's deadline moves. Drivers announce it.
+/// <c>Holder</c> is the faction a challenge is taking the cell from; null for a plain contest.
+/// </summary>
 [ByRefEvent]
 public readonly record struct WFSectorCellContestedEvent(
     MapId Map,
     WFSectorCell Cell,
     ProtoId<WFSectorFactionPrototype> Faction,
-    TimeSpan Deadline);
+    TimeSpan Deadline,
+    ProtoId<WFSectorFactionPrototype>? Holder = null);
 
-/// <summary>Raised, by ref and broadcast, when a contest ends: claimed at its deadline, or dropped.</summary>
+/// <summary>
+/// Raised, by ref and broadcast, when a contest ends: claimed (or, for a challenge, transferred) at its deadline, or
+/// dropped. <c>Holder</c> is the faction a challenge was against; null for a plain contest.
+/// </summary>
 [ByRefEvent]
 public readonly record struct WFSectorContestResolvedEvent(
     MapId Map,
     WFSectorCell Cell,
     ProtoId<WFSectorFactionPrototype> Faction,
-    bool Claimed);
+    bool Claimed,
+    ProtoId<WFSectorFactionPrototype>? Holder = null);
 
 /// <summary>Raised, by ref and broadcast, when a cell becomes or stops being disputed: a faction's ship and a crewed player ship are in it together.</summary>
 [ByRefEvent]

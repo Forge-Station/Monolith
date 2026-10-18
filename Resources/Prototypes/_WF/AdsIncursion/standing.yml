@@ -1,0 +1,5 @@
+# The Automated Defense System disarms the navies, their civilians and the Reavers. War is mutual, so each of them is
+# at war with it too.
+- type: wfStanding
+  id: WFAds
+  atWar: [ TSF, TSFCivilian, TSFHighComm, PDV, PDVCivilian, PDVHighComm, WFAshfallReavers ]

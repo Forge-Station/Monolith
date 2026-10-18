@@ -1,0 +1,13 @@
+# The Automated Defense System's crews, set up as WFPdvNavy is: hostile to every faction that is not neutral to it.
+# Neutral to pets and the harmless, but not to PirateNF: the Reavers are its enemy.
+- type: npcFaction
+  id: WFAds
+  friendly:
+  - WFAds
+  neutral:
+  - Cat
+  - PetsNT
+  - MD
+  - Mouse
+  - SimpleNeutral
+  defaultHostile: true

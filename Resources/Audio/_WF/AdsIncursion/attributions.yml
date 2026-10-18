@@ -1,0 +1,6 @@
+# The malfunctioning-AI alert from Meridian Rift (tgstation's sound/announcer/default/aimalf.ogg), mixed down to mono. The
+# Automated Defense System's major announcements play it.
+- files: ["aimalf.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Meridian Rift (tgstation codebase) at commit 5cec204da500c61fa94fdaf5c5a138764920e2c1, mixed to mono."
+  source: "https://github.com/Aphelion-Moon/Meridian-Rift/blob/5cec204da500c61fa94fdaf5c5a138764920e2c1/sound/announcer/default/aimalf.ogg"

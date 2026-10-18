@@ -44,11 +44,11 @@ public sealed partial class WFReaverCampaignSystem
         return convoys;
     }
 
-    /// <summary>Sends a convoy to the held cell the rules pick next, unless one is already under way.</summary>
+    /// <summary>Sends a convoy to the held cell the rules pick next, unless an ordinary one is already under way or the Reavers are finished.</summary>
     public bool TryLaunchConvoy(out EntityUid convoy)
     {
         convoy = default;
-        if (Campaign is not { } campaign || State(true) == null || Convoys().Count > 0)
+        if (Campaign is not { } campaign || State(true) is not { } state || OrdinaryConvoys() > 0 || state.Finished)
             return false;
 
         var standing = Strongholds();
@@ -60,14 +60,28 @@ public sealed partial class WFReaverCampaignSystem
     /// <summary>Sends a hub from the standing stronghold nearest a cell to found itself there: contests the cell and announces it.</summary>
     public bool TryLaunchConvoy(WFSectorCell target, out EntityUid convoy)
     {
+        return TryLaunchConvoy(target, out convoy, false);
+    }
+
+    /// <summary>
+    /// Sends a hub out to found itself in a cell: a stronghold from the standing one nearest the cell, or the citadel from
+    /// the highest-level one. Contests the cell and announces it; refused once finished.
+    /// </summary>
+    public bool TryLaunchConvoy(WFSectorCell target, out EntityUid convoy, bool citadel)
+    {
         convoy = default;
-        if (Campaign is not { } campaign || State(true) is not { } state
-            || !_prototypes.TryIndex(campaign.Stronghold, out var prototype) || prototype.Ships.Count == 0)
+        if (Campaign is not { } campaign || State(true) is not { } state || state.Finished
+            || (citadel ? campaign.Citadel : campaign.Stronghold) is not { } prototypeId
+            || !_prototypes.TryIndex(prototypeId, out var prototype) || prototype.Ships.Count == 0)
             return false;
 
         var map = _territory.SectorMap;
         var centre = WFSectorHex.Centre(target, _territory.CellSize);
-        foreach (var source in Strongholds().OrderBy(entry => Vector2.DistanceSquared(Position(entry.Comp2, entry.Comp1.Lead), centre)))
+        var sources = citadel
+            ? Strongholds().OrderByDescending(entry => entry.Comp1.Level)
+                .ThenBy(entry => Vector2.DistanceSquared(Position(entry.Comp2, entry.Comp1.Lead), centre))
+            : Strongholds().OrderBy(entry => Vector2.DistanceSquared(Position(entry.Comp2, entry.Comp1.Lead), centre));
+        foreach (var source in sources)
         {
             if (!TryClearPoint(map, Position(source.Comp2, source.Comp1.Lead), ConvoySpawnMin, ConvoySpawnMax, SpawnClearance, out var start))
                 continue;
@@ -95,15 +109,27 @@ public sealed partial class WFReaverCampaignSystem
             comp.Lead = lead;
             comp.Launched = _timing.CurTime;
             comp.Overdue = _timing.CurTime + ConvoyEta(start, goal) * 2 + ConvoySlack;
+            comp.Citadel = citadel;
             _territory.Contest(map, target, campaign.Faction, _timing.CurTime + ConvoyEta(start, goal), uid);
 
             var (station, bearing, range) = Place(map, goal);
-            Announce(campaign, Loc.GetString("wf-reaver-convoy-launched",
+            var launched = Loc.GetString(citadel ? "wf-reaver-citadel-launched" : "wf-reaver-convoy-launched",
                 ("callsign", WFSectorHex.Callsign(target)),
                 ("station", station),
                 ("bearing", bearing),
-                ("range", range)), true, chime: false);
-            Log.Info($"Reaver convoy {ToPrettyString(uid)} launched from {ToPrettyString(source.Owner)} for {WFSectorHex.Callsign(target)}.");
+                ("range", range));
+
+            // The citadel setting out is a capital event: a chimed banner with the capital sound on top.
+            if (citadel)
+            {
+                Announce(campaign, launched, true);
+                PlayCapital(campaign);
+            }
+            else
+            {
+                AnnounceQuiet(campaign, launched, true);
+            }
+            Log.Info($"Reaver {(citadel ? "citadel convoy" : "convoy")} {ToPrettyString(uid)} launched from {ToPrettyString(source.Owner)} for {WFSectorHex.Callsign(target)}.");
             convoy = uid;
             return true;
         }
@@ -207,6 +233,7 @@ public sealed partial class WFReaverCampaignSystem
         var target = comp.Target;
         var lead = comp.Lead;
         var where = comp.TargetPosition;
+        var citadel = comp.Citadel;
         if (encounter.Ships.TryGetValue(lead, out var standing) && !TerminatingOrDeleted(standing.Grid))
         {
             // A lead that stopped short of its point, but in the cell, founds where it stands.
@@ -225,9 +252,9 @@ public sealed partial class WFReaverCampaignSystem
         encounter.Leash = _prototypes.TryIndex(encounter.Prototype, out var prototype) ? prototype.Leash : 0f;
         _encounters.SetOrders(convoy, lead, new List<WFCrewObjective> { new() { Kind = WFCrewObjectiveKind.Hold } });
 
-        Establish(campaign, state, convoy, lead, target, at, false);
+        Establish(campaign, state, convoy, lead, target, at, false, citadel);
         SeedHits(convoy, encounter);
-        Log.Info($"Reaver convoy {ToPrettyString(convoy)} founded a stronghold at {WFSectorHex.Callsign(target)}.");
+        Log.Info($"Reaver convoy {ToPrettyString(convoy)} founded a {(citadel ? "citadel" : "stronghold")} at {WFSectorHex.Callsign(target)}.");
         return true;
     }
 
@@ -254,7 +281,7 @@ public sealed partial class WFReaverCampaignSystem
         Mark(stronghold.AttackerHits.Keys);
     }
 
-    /// <summary>Withdraws a convoy's contest; destroyed, it pays half a stronghold's bounty and is announced.</summary>
+    /// <summary>Withdraws a convoy's contest; destroyed, it pays half a stronghold's bounty, or half the citadel's, and is announced.</summary>
     private void ConvoyResolved(Entity<WFReaverConvoyComponent> convoy, WFEncounterResolution resolution)
     {
         var (uid, comp) = convoy;
@@ -266,12 +293,12 @@ public sealed partial class WFReaverCampaignSystem
             return;
 
         Mark(encounter.ShipHits.Keys.Select(key => key.Attacker));
-        var (bounty, paid) = PayConvoyBounty(campaign, state, uid);
+        var (bounty, paid) = PayConvoyBounty(campaign, state, uid, comp.Citadel);
         state.ConvoysDestroyed++;
-        Announce(campaign, Loc.GetString("wf-reaver-convoy-destroyed",
+        AnnounceQuiet(campaign, Loc.GetString(comp.Citadel ? "wf-reaver-citadel-convoy-destroyed" : "wf-reaver-convoy-destroyed",
             ("callsign", WFSectorHex.Callsign(comp.Target)),
             ("bounty", bounty),
-            ("paid", paid)), false, chime: false);
+            ("paid", paid)), false);
         Recompute();
     }
 }

@@ -158,6 +158,8 @@ public sealed partial class WFReaverCampaignSystem : EntitySystem
         SubscribeLocalEvent<WFSectorRetakeAttemptEvent>(OnRetakeAttempt);
         SubscribeLocalEvent<WFSectorCellRetakenEvent>(OnRetaken);
         SubscribeLocalEvent<WFSectorCellClearingEvent>(OnClearing);
+        SubscribeLocalEvent<WFSectorCellContestedEvent>(OnCellContested);
+        SubscribeLocalEvent<WFSectorContestResolvedEvent>(OnContestResolved);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndText);
     }
 
@@ -178,6 +180,7 @@ public sealed partial class WFReaverCampaignSystem : EntitySystem
         _nextTick = TimeSpan.Zero;
         _lastTick = TimeSpan.Zero;
         _nextFoundTry = TimeSpan.Zero;
+        _nextCitadelTry = TimeSpan.Zero;
         _legend = null;
         _clearingPending.Clear();
         _campaignDirty = true;
@@ -227,6 +230,7 @@ public sealed partial class WFReaverCampaignSystem : EntitySystem
         TendReinforcements();
         TendPatrols(state);
         TendRaids();
+        TendResponses();
         TendIntercepts(state);
         TendMarks();
         if (!running || Campaign is not { } campaign)
@@ -235,9 +239,11 @@ public sealed partial class WFReaverCampaignSystem : EntitySystem
             return;
         }
 
-        if (!held)
+        // A finished campaign founds, launches and sends nothing more; what stands fights on until broken.
+        if (!held && !state.Finished)
         {
             TickFounding(campaign, state);
+            TickCitadel(campaign, state);
             TickReinforce(campaign, state);
             TickSpread(campaign, state);
             TickPatrols(campaign, state);
@@ -405,6 +411,8 @@ public sealed partial class WFReaverCampaignSystem : EntitySystem
             ConvoyResolved((args.Encounter, convoy), args.Resolution);
         else if (TryComp<WFReaverReinforcementComponent>(args.Encounter, out var reinforcement))
             ReinforcementResolved((args.Encounter, reinforcement), args.Resolution);
+        else if (TryComp<WFReaverResponseComponent>(args.Encounter, out var response))
+            ResponseResolved((args.Encounter, response), args.Resolution);
     }
 
     /// <summary>Scales the storyteller's own Reaver encounters by the tier, within the campaign's cap.</summary>
@@ -429,12 +437,19 @@ public sealed partial class WFReaverCampaignSystem : EntitySystem
             ("patrols", state.PatrolsDestroyed),
             ("convoys", state.ConvoysDestroyed),
             ("raids", state.Raids),
-            ("retaken", state.Retaken)));
-        if (state.Defeats > 0)
+            ("retaken", state.Retaken),
+            ("citadels", state.Citadels > 0
+                ? Loc.GetString("wf-reaver-round-end-citadels", ("raised", state.Citadels), ("fallen", state.CitadelsBroken))
+                : string.Empty)));
+        if (state.Finished)
+            args.AddLine(Loc.GetString("wf-reaver-round-end-finished"));
+        else if (state.Defeats > 0)
             args.AddLine(Loc.GetString("wf-reaver-round-end-broken", ("count", state.Defeats)));
+        if (state.CellsLost > 0)
+            args.AddLine(Loc.GetString("wf-reaver-round-end-lost", ("count", state.CellsLost)));
     }
 
-    /// <summary>Ends every campaign encounter, frees the faction's cells and starts the regroup clock. Returns how many encounters ended.</summary>
+    /// <summary>Ends every campaign encounter, frees the faction's cells, lifts a finished campaign and starts the regroup clock. Returns how many encounters ended.</summary>
     public int ClearCampaign()
     {
         var ended = new List<EntityUid>();
@@ -443,7 +458,7 @@ public sealed partial class WFReaverCampaignSystem : EntitySystem
         {
             if (encounter.Resolution == null && (HasComp<WFReaverStrongholdComponent>(uid) || HasComp<WFReaverConvoyComponent>(uid)
                     || HasComp<WFReaverPatrolComponent>(uid) || HasComp<WFReaverRaidComponent>(uid)
-                    || HasComp<WFReaverReinforcementComponent>(uid)))
+                    || HasComp<WFReaverReinforcementComponent>(uid) || HasComp<WFReaverResponseComponent>(uid)))
                 ended.Add(uid);
         }
 
@@ -458,6 +473,7 @@ public sealed partial class WFReaverCampaignSystem : EntitySystem
 
         if (state != null)
         {
+            state.Finished = false;
             state.NoStrongholdSince = state.Founded > 0 ? _timing.CurTime : null;
             state.NextSpread = null;
             state.NextRaid = null;

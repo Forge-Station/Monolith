@@ -1,0 +1,51 @@
+# An IPC crew body for the Automated Defense System: built as WFMobCrewBodyHuman is, on the IPC player mob. A crew
+# profile gives it its role's kit and a loadout when spawned. The IPC mob has no ears slot, so its radio is its own.
+# It is built immune to vacuum, so it is never put in a suit, even at a post with no air, and speaks in the synthetic
+# verbs and face (WFAdsSynth).
+- type: entity
+  parent: [ MobIPC, MobPrying, WFCrewKit ]
+  id: WFMobCrewBodyIpc
+  name: automaton
+  description: A unit of the Automated Defense System, still following its directives.
+  suffix: NPC crew body
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PressureImmunity
+  - type: BreathingImmunity
+  - type: Speech
+    speechVerb: WFAdsSynth
+
+# The Automated Defense System's units: positronic automatons that need no air and shrug off vacuum. Every crew is at
+# the top of the ladder, and its hulls come plated in adamantite: the system fires on nobody first, so what it does fight
+# it must be able to outlast. They name themselves from its designations and serial numbers.
+- type: wfCrewProfile
+  id: WFCrewProfileAds
+  firstNames: WFNamesAdsDesignation
+  lastNames: WFNamesAdsSerial
+  components:
+  - type: PressureImmunity
+  - type: BreathingImmunity
+  bodies:
+  - WFMobCrewBodyIpc
+  skills: [ Veteran ]
+  # One system: its ships never count one another as attackers, however much fire passes between them.
+  forgivesOwn: true
+  hullSwaps:
+    WallPlastitanium: WFWallAdamantite
+    WallPlastitaniumDiagonal: WFWallAdamantiteDiagonal
+  titles:
+    WFCrewCaptain: wf-ads-title-captain
+    WFCrewPilot: wf-ads-title-pilot
+    WFCrewRadioOperator: wf-ads-title-radio-operator
+    WFCrewGunner: wf-ads-title-gunner
+    WFCrewEngineer: wf-ads-title-engineer
+    WFCrewDeckhand: wf-ads-title-deckhand
+    WFCrewMarine: wf-ads-title-marine
+  loadouts:
+    WFCrewDeckhand: [ WFCrewAdsUnit ]
+    WFCrewEngineer: [ WFCrewAdsUnit ]
+    WFCrewMarine: [ WFCrewAdsSentry ]
+    WFCrewPilot: [ WFCrewAdsOfficer ]
+    WFCrewRadioOperator: [ WFCrewAdsOfficer ]
+    WFCrewCaptain: [ WFCrewAdsOfficer ]
+    WFCrewGunner: [ WFCrewAdsOfficer ]

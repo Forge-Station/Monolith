@@ -11,8 +11,8 @@
   name: 'PDV Helios Fortress'
   minimumDistance: 22000
   maximumDistance: 27000 # somewhere in far reaches 1 or 2
-  # WOLFGATE(ReaverCampaign): the Ashfall game mode spawns the same sector as Standard
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoAshfall, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraPdv ]
+  # WOLFGATE(ReaverCampaign): the Contested Sector game mode spawns the same sector as Standard
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, WFContestedSector, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraPdv ]
   spawnGroup: Required
   gridPath: /Maps/_Mono/POI/pdvhelios.yml
   addComponents:

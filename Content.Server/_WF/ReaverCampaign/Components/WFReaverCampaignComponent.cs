@@ -24,6 +24,10 @@ public sealed partial class WFReaverCampaignComponent : Component
     [ViewVariables]
     public TimeSpan? TierAnnounced;
 
+    /// <summary>When a quiet banner was last sent.</summary>
+    [ViewVariables]
+    public TimeSpan? LastQuietBanner;
+
     /// <summary>When the last stronghold was founded; a convoy counts when it arrives.</summary>
     [ViewVariables]
     public TimeSpan? LastFounded;
@@ -84,4 +88,24 @@ public sealed partial class WFReaverCampaignComponent : Component
     /// <summary>Held cells players have retaken this round.</summary>
     [ViewVariables]
     public int Retaken;
+
+    /// <summary>Held cells another faction took by challenge this round.</summary>
+    [ViewVariables]
+    public int CellsLost;
+
+    /// <summary>Since when the campaign has stood at tier 5; null below it.</summary>
+    [ViewVariables]
+    public TimeSpan? OverrunSince;
+
+    /// <summary>Whether the citadel has fallen: the Reavers found, launch and send nothing more this round, and what stands fights on until broken.</summary>
+    [ViewVariables]
+    public bool Finished;
+
+    /// <summary>Citadels raised this round.</summary>
+    [ViewVariables]
+    public int Citadels;
+
+    /// <summary>Citadels broken this round.</summary>
+    [ViewVariables]
+    public int CitadelsBroken;
 }

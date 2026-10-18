@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._WF.SectorControl.Commands;
 
-/// <summary>Sector territory from the console: show it, claim, free or contest a cell, clear it, name a cell.</summary>
+/// <summary>Sector territory from the console: show it, claim, free, contest or challenge a cell, clear it, name a cell.</summary>
 [AdminCommand(AdminFlags.Admin)]
 public sealed partial class WFSectorCommand : LocalizedEntityCommands
 {
@@ -18,7 +18,7 @@ public sealed partial class WFSectorCommand : LocalizedEntityCommands
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private WFSectorTerritorySystem _territory = default!;
 
-    private static readonly string[] Subcommands = { "status", "claim", "free", "contest", "clear", "callsign" };
+    private static readonly string[] Subcommands = { "status", "claim", "free", "contest", "challenge", "clear", "callsign" };
 
     public override string Command => "wf_sector";
 
@@ -51,6 +51,9 @@ public sealed partial class WFSectorCommand : LocalizedEntityCommands
                 break;
             case "contest" when args.Length == 5:
                 Contest(shell, map, args);
+                break;
+            case "challenge" when args.Length == 5:
+                Challenge(shell, map, args);
                 break;
             case "clear" when args.Length is 1 or 2:
                 ProtoId<WFSectorFactionPrototype>? only = null;
@@ -92,13 +95,14 @@ public sealed partial class WFSectorCommand : LocalizedEntityCommands
         return args.Length switch
         {
             1 => CompletionResult.FromHintOptions(Subcommands, Loc.GetString("cmd-wf_sector-hint-sub")),
-            2 when args[0] is "claim" or "contest" or "clear" =>
+            2 when args[0] is "claim" or "contest" or "challenge" or "clear" =>
                 CompletionResult.FromHintOptions(factions, Loc.GetString("cmd-wf_sector-hint-faction")),
             2 when args[0] == "free" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-q")),
             3 when args[0] == "free" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-r")),
-            3 when args[0] is "claim" or "contest" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-q")),
-            4 when args[0] is "claim" or "contest" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-r")),
+            3 when args[0] is "claim" or "contest" or "challenge" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-q")),
+            4 when args[0] is "claim" or "contest" or "challenge" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-r")),
             5 when args[0] == "contest" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-minutes")),
+            5 when args[0] == "challenge" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-challenge-minutes")),
             2 when args[0] == "callsign" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-x")),
             3 when args[0] == "callsign" => CompletionResult.FromHint(Loc.GetString("cmd-wf_sector-hint-y")),
             _ => CompletionResult.Empty,
@@ -130,9 +134,10 @@ public sealed partial class WFSectorCommand : LocalizedEntityCommands
 
         foreach (var (cell, contest) in territory.Contests)
         {
-            shell.WriteLine(Loc.GetString("cmd-wf_sector-status-contest",
+            shell.WriteLine(Loc.GetString(contest.Holder == null ? "cmd-wf_sector-status-contest" : "cmd-wf_sector-status-challenge",
                 ("callsign", WFSectorHex.Callsign(cell)),
                 ("faction", contest.Faction.Id),
+                ("holder", contest.Holder?.Id ?? string.Empty),
                 ("seconds", Math.Max(0, (int) (contest.Deadline - _timing.CurTime).TotalSeconds))));
         }
 
@@ -147,18 +152,32 @@ public sealed partial class WFSectorCommand : LocalizedEntityCommands
     /// <summary>wf_sector contest &lt;faction&gt; &lt;q&gt; &lt;r&gt; &lt;minutes&gt;: a contest decided that many minutes from now.</summary>
     private void Contest(IConsoleShell shell, MapId map, string[] args)
     {
-        if (!TryFaction(shell, args[1], out var faction) || !TryCell(shell, args[2], args[3], out var cell))
+        if (!TryFaction(shell, args[1], out var faction) || !TryCell(shell, args[2], args[3], out var cell) || !TryMinutes(shell, args[4], out var minutes))
             return;
-
-        if (!float.TryParse(args[4], out var minutes) || !float.IsFinite(minutes) || minutes is < 0 or > 600)
-        {
-            shell.WriteLine(Loc.GetString("cmd-wf_sector-bad-minutes", ("arg", args[4])));
-            return;
-        }
 
         shell.WriteLine(Loc.GetString(_territory.Contest(map, cell, faction, _timing.CurTime + TimeSpan.FromMinutes(minutes))
             ? "cmd-wf_sector-contested"
             : "cmd-wf_sector-contest-failed", ("faction", faction.Id), ("callsign", WFSectorHex.Callsign(cell))));
+    }
+
+    /// <summary>wf_sector challenge &lt;faction&gt; &lt;q&gt; &lt;r&gt; &lt;minutes&gt;: a challenge on another faction's cell, with no source.</summary>
+    private void Challenge(IConsoleShell shell, MapId map, string[] args)
+    {
+        if (!TryFaction(shell, args[1], out var faction) || !TryCell(shell, args[2], args[3], out var cell) || !TryMinutes(shell, args[4], out var minutes))
+            return;
+
+        shell.WriteLine(Loc.GetString(_territory.Challenge(map, cell, faction, _timing.CurTime + TimeSpan.FromMinutes(minutes), null)
+            ? "cmd-wf_sector-challenged"
+            : "cmd-wf_sector-challenge-failed", ("faction", faction.Id), ("callsign", WFSectorHex.Callsign(cell))));
+    }
+
+    private bool TryMinutes(IConsoleShell shell, string arg, out float minutes)
+    {
+        if (float.TryParse(arg, out minutes) && float.IsFinite(minutes) && minutes is >= 0 and <= 600)
+            return true;
+
+        shell.WriteLine(Loc.GetString("cmd-wf_sector-bad-minutes", ("arg", arg)));
+        return false;
     }
 
     private bool TryFaction(IConsoleShell shell, string arg, out ProtoId<WFSectorFactionPrototype> faction)

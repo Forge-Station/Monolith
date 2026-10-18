@@ -408,7 +408,7 @@ public sealed partial class WFEncounterTest : InteractionTest
         await RunTicks(10);
     }
 
-    /// <summary>Every body and loadout of every crew profile makes a living, dressed crewman with his role's kit.</summary>
+    /// <summary>Every body and loadout of every crew profile makes a living crewman with his role's kit, dressed unless his loadout is bare.</summary>
     [Test]
     public async Task EveryCrewProfileBodyAndLoadoutSpawns()
     {
@@ -439,8 +439,13 @@ public sealed partial class WFEncounterTest : InteractionTest
                         var member = crew.SpawnCrewman(role, post, "bodies", loadout, profile.Bodies[0]);
                         Assert.That(member, Is.Not.Null, $"{profile.ID}: {role} in {loadout}");
                         SEntMan.GetComponent<Content.Server.NPC.HTN.HTNComponent>(member!.Value).Enabled = false;
-                        Assert.That(Server.System<Content.Shared.Inventory.InventorySystem>().TryGetSlotEntity(member.Value, "jumpsuit", out _),
-                            Is.True, $"{loadout} left {role} undressed");
+                        // A loadout with no jumpsuit, such as the ADS automatons', goes bare but armed.
+                        var inventory = Server.System<Content.Shared.Inventory.InventorySystem>();
+                        if (prototypes.Index(loadout).Equipment.ContainsKey("jumpsuit"))
+                            Assert.That(inventory.TryGetSlotEntity(member.Value, "jumpsuit", out _), Is.True, $"{loadout} left {role} undressed");
+                        else
+                            Assert.That(inventory.TryGetSlotEntity(member.Value, "belt", out _) || inventory.TryGetSlotEntity(member.Value, "back", out _),
+                                Is.True, $"{loadout} left {role} bare and unarmed");
                         spawned.Add(member.Value);
                     }
                 }

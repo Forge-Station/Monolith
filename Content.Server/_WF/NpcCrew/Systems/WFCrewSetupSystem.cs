@@ -264,7 +264,7 @@ public sealed partial class WFCrewSetupSystem : EntitySystem
             // A role the profile has no loadout for keeps its own mob and gear, so nobody is spawned naked.
             var body = loadout != null && profile != null && profile.Bodies.Count > 0 ? _random.Pick(profile.Bodies) : (EntProtoId?) null;
             var uid = _crew.SpawnCrewman(post.Role, new EntityCoordinates(grid, post.Position), mission.Group, loadout, body,
-                profile != null ? FlavourName(profile) : null);
+                profile != null ? FlavourName(profile) : null, profile?.ID);
             if (uid is not { } mob)
                 continue;
             if (profile != null && profile.Components.Count > 0)
@@ -308,6 +308,40 @@ public sealed partial class WFCrewSetupSystem : EntitySystem
     }
 
     /// <summary>Updates an existing crew without requiring a new spawn roster.</summary>
+    /// <summary>Records on a grid the profile its crew flies under, for the rules a profile sets between its own ships.</summary>
+    public void MarkProfile(EntityUid grid, ProtoId<WFCrewProfilePrototype>? profileId)
+    {
+        if (profileId is { } id && _prototypes.HasIndex(id))
+            EnsureComp<WFCrewShipProfileComponent>(grid).Profile = id;
+    }
+
+    /// <summary>Replaces the hull parts a profile swaps out on a grid, in place and anchored as they were. Returns how many.</summary>
+    public int ApplyHullSwaps(EntityUid grid, ProtoId<WFCrewProfilePrototype>? profileId)
+    {
+        if (profileId is not { } id || !_prototypes.TryIndex(id, out var profile) || profile.HullSwaps.Count == 0)
+            return 0;
+
+        var swaps = new List<(EntityUid Old, EntProtoId New, EntityCoordinates At, Angle Rotation)>();
+        var query = EntityQueryEnumerator<TransformComponent, MetaDataComponent>();
+        while (query.MoveNext(out var uid, out var xform, out var meta))
+        {
+            if (xform.GridUid != grid || meta.EntityPrototype is not { } proto || !profile.HullSwaps.TryGetValue(proto.ID, out var replacement))
+                continue;
+            swaps.Add((uid, replacement, xform.Coordinates, xform.LocalRotation));
+        }
+
+        foreach (var (old, replacement, at, rotation) in swaps)
+        {
+            QueueDel(old);
+            var spawned = Spawn(replacement, at);
+            _transform.SetLocalRotation(spawned, rotation);
+            if (!Transform(spawned).Anchored)
+                _transform.AnchorEntity(spawned);
+        }
+
+        return swaps.Count;
+    }
+
     public bool TryApplyMission(EntityUid grid, WFCrewMission mission)
     {
         if (!ValidateMission(grid, mission))

@@ -161,13 +161,17 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
         }
     }
 
-    /// <summary>Drops contests whose source is gone and decides those past their deadline.</summary>
+    /// <summary>
+    /// Drops contests whose source is gone and challenges whose holder lost the cell, and decides those past their
+    /// deadline: a contest by quiet, a challenge by presence.
+    /// </summary>
     private void CheckContests(MapId map, WFSectorTerritoryComponent territory)
     {
         var due = new List<(WFSectorCell Cell, WFSectorContest Contest)>();
         foreach (var (cell, contest) in territory.Contests)
         {
             if (contest.Source is { } source && TerminatingOrDeleted(source)
+                || contest.Holder is { } holder && !HeldBy(territory, cell, holder)
                 || _timing.CurTime >= contest.Deadline && !territory.Disputed.ContainsKey(cell))
                 due.Add((cell, contest));
         }
@@ -175,12 +179,57 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
         foreach (var (cell, contest) in due)
         {
             territory.Contests.Remove(cell);
-            var claimed = (contest.Source is not { } source || !TerminatingOrDeleted(source))
-                && Quiet(territory, cell, contest.Started)
-                && TryClaim(map, cell, contest.Faction, contest.Source);
-            var ev = new WFSectorContestResolvedEvent(map, cell, contest.Faction, claimed);
+            var live = contest.Source is not { } source || !TerminatingOrDeleted(source);
+            bool claimed;
+            if (contest.Holder is { } holder)
+            {
+                // A challenge is won by having ships in the cell when its holder has none; player quiet does not count.
+                claimed = live
+                    && territory.Claims.TryGetValue(cell, out var claim) && claim.Faction == holder
+                    && HasPresence(territory, contest.Faction, cell)
+                    && !HasPresence(territory, holder, cell);
+                if (claimed)
+                    Transfer(map, cell, territory, territory.Claims[cell], contest.Faction, contest.Source);
+            }
+            else
+            {
+                claimed = live
+                    && Quiet(territory, cell, contest.Started)
+                    && TryClaim(map, cell, contest.Faction, contest.Source);
+            }
+
+            var ev = new WFSectorContestResolvedEvent(map, cell, contest.Faction, claimed, contest.Holder);
             RaiseLocalEvent(ref ev);
         }
+    }
+
+    /// <summary>Whether a cell is held by a faction.</summary>
+    private static bool HeldBy(WFSectorTerritoryComponent territory, WFSectorCell cell, ProtoId<WFSectorFactionPrototype> faction)
+    {
+        return territory.Claims.TryGetValue(cell, out var claim) && claim.Faction == faction;
+    }
+
+    /// <summary>Hands a challenged cell to the challenger: the holder's claim goes without clearing and the winner's takes its place.</summary>
+    private void Transfer(
+        MapId map,
+        WFSectorCell cell,
+        WFSectorTerritoryComponent territory,
+        WFSectorClaim claim,
+        ProtoId<WFSectorFactionPrototype> challenger,
+        EntityUid? source)
+    {
+        var taken = new WFSectorClaim { Faction = challenger, Since = _timing.CurTime };
+        if (source is { } supporter)
+        {
+            taken.Sources.Add(supporter);
+            taken.Sourced = true;
+        }
+
+        territory.Claims[cell] = taken;
+        territory.Clearing.Remove(cell);
+        territory.Retakes.Remove(cell);
+        var changed = new WFSectorCellChangedEvent(map, cell, claim.Faction, challenger);
+        RaiseLocalEvent(ref changed);
     }
 
     /// <summary>Reports the cells a faction's ships are in now. Drivers call it every tick; a report counts for a few seconds.</summary>
@@ -389,6 +438,12 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
         }
     }
 
+    /// <summary>Whether a faction's driver reported a ship of its in a cell within the presence timeout, as of now.</summary>
+    private bool HasPresence(WFSectorTerritoryComponent territory, ProtoId<WFSectorFactionPrototype> faction, WFSectorCell cell)
+    {
+        return Present(territory, faction, cell, _timing.CurTime);
+    }
+
     /// <summary>Whether a faction's driver reported a ship of its in a cell within the presence timeout.</summary>
     private bool Present(WFSectorTerritoryComponent territory, ProtoId<WFSectorFactionPrototype> faction, WFSectorCell cell, TimeSpan now)
     {
@@ -467,7 +522,7 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
         if (territory != null && territory.Claims.TryGetValue(cell, out var claim))
             return claim.Faction == faction;
 
-        if (territory != null && territory.Contests.TryGetValue(cell, out var contest) && contest.Faction != faction)
+        if (territory != null && territory.Contests.TryGetValue(cell, out var contest) && contest.Holder == null && contest.Faction != faction)
             return false;
 
         var attempt = new WFSectorClaimAttemptEvent(map, cell, faction, source);
@@ -496,7 +551,8 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
             return true;
         }
 
-        if (territory.Contests.TryGetValue(cell, out var contest) && contest.Faction != faction)
+        // A challenge on an unheld cell is stale (its holder lost it) and blocks no one; it ends unclaimed.
+        if (territory.Contests.TryGetValue(cell, out var contest) && contest.Holder == null && contest.Faction != faction)
             return false;
 
         var attempt = new WFSectorClaimAttemptEvent(map, cell, faction, source);
@@ -504,9 +560,9 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
         if (attempt.Cancelled)
             return false;
 
-        if (territory.Contests.Remove(cell))
+        if (territory.Contests.Remove(cell, out var removed))
         {
-            var resolved = new WFSectorContestResolvedEvent(map, cell, faction, true);
+            var resolved = new WFSectorContestResolvedEvent(map, cell, removed.Faction, removed.Holder == null, removed.Holder);
             RaiseLocalEvent(ref resolved);
         }
 
@@ -559,6 +615,36 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Challenges another faction's cell until the deadline: the challenger takes it then if its source lives, its ships
+    /// are in the cell and the holder's are not, else the challenge is dropped. Fails on an unheld, own or contested
+    /// cell, or a veto.
+    /// </summary>
+    public bool Challenge(MapId map, WFSectorCell cell, ProtoId<WFSectorFactionPrototype> faction, TimeSpan deadline, EntityUid? source)
+    {
+        if (!Enabled || !_prototypes.HasIndex(faction) || source is { } live && TerminatingOrDeleted(live)
+            || Territory(map) is not { } territory || territory.Contests.ContainsKey(cell)
+            || !territory.Claims.TryGetValue(cell, out var held) || held.Faction == faction)
+            return false;
+
+        var attempt = new WFSectorClaimAttemptEvent(map, cell, faction, source);
+        RaiseLocalEvent(ref attempt);
+        if (attempt.Cancelled)
+            return false;
+
+        territory.Contests[cell] = new WFSectorContest
+        {
+            Faction = faction,
+            Holder = held.Faction,
+            Source = source,
+            Started = _timing.CurTime,
+            Deadline = deadline,
+        };
+        var ev = new WFSectorCellContestedEvent(map, cell, faction, deadline, held.Faction);
+        RaiseLocalEvent(ref ev);
+        return true;
+    }
+
     /// <summary>Moves a contest's deadline, raising the contested event again. Returns whether there was one.</summary>
     public bool SetContestDeadline(MapId map, WFSectorCell cell, TimeSpan deadline)
     {
@@ -566,7 +652,7 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
             return false;
 
         contest.Deadline = deadline;
-        var ev = new WFSectorCellContestedEvent(map, cell, contest.Faction, deadline);
+        var ev = new WFSectorCellContestedEvent(map, cell, contest.Faction, deadline, contest.Holder);
         RaiseLocalEvent(ref ev);
         return true;
     }
@@ -577,7 +663,7 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
         if (Territory(map) is not { } territory || !territory.Contests.Remove(cell, out var contest))
             return false;
 
-        var ev = new WFSectorContestResolvedEvent(map, cell, contest.Faction, false);
+        var ev = new WFSectorContestResolvedEvent(map, cell, contest.Faction, false, contest.Holder);
         RaiseLocalEvent(ref ev);
         return true;
     }

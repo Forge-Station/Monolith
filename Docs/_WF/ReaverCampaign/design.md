@@ -75,7 +75,7 @@ under the cap for the current tier, sends the next one
 (`TryReinforce`; a hub that cannot send one tries again after a minute). The convoy spawns at a clear point 25 to
 28 km from the origin on the side the hub is on (within about 20 degrees of the line from the origin through it), or
 failing that at a clear point 3 to 5 km from the hub. The lead is ordered `GoTo` the hub (range 600 m), then `Dock`
-on the hub's grid, and the sector watch says "Reaver reinforcements are inbound to K-7, ETA n min" (no chime; the
+on the hub's grid, and the sector watch says "Reaver reinforcements are inbound to K-7, ETA n min" (a radio line; the
 ETA is the distance at 30 m/s). It carries `WFReaverReinforcementComponent` (stronghold, level, phase, deadline).
 There is one on the way per hub.
 
@@ -83,7 +83,7 @@ There is one on the way per hub.
 (`DockingSystem.AreGridsDocked`). On the dock (`CompleteDock`) the hub's level becomes the reinforcement's, it joins
 `Reinforcements`, `NextReinforcement` restarts, the hub encounter is renamed "Reaver stronghold XX-123 (level n)",
 which the map's hover card and the admin window read, and the legend gains the levels ("level 2", or "levels 3/1");
-the sector watch says "The Reaver stronghold at K-7 has grown to level n" (no chime). A pilot that runs out of docking
+the sector watch says "The Reaver stronghold at K-7 has grown to level n" (a radio line). A pilot that runs out of docking
 attempts (`WFPilotDockFailedEvent`; a crowded face, a lane that is never clear, three failed attempts) flies the
 reinforcement to 300 m of the hub and holds there (`Holding`), and it still counts: a dock that cannot be flown does
 not stall the stronghold. There is no timer on a dock in progress, so a heavy still settling in is not cut off.
@@ -126,7 +126,7 @@ the reckoned trip plus the slack). Orders by `SetOrders`: the
 lead `GoTo` the target centre (range 300, nudged clear as patrol route points are). The
 encounter's leash is off while it flies. The target cell is contested for the faction with the convoy as the source
 and a deadline of the reckoned arrival (distance / 30 m/s) plus 3 min, moved with `SetContestDeadline` as the convoy
-goes, so the framework never takes it first. The sector watch says so without a chime: "A Reaver convoy is under way to
+goes, so the framework never takes it first. The sector watch says so in a quiet banner: "A Reaver convoy is under way to
 K-7, 4.2 km bearing 045 from Outpost Lambda. Stop it before it digs in." If no stronghold has a clear point beside it,
 the founding is tried again after a minute.
 
@@ -151,6 +151,48 @@ half each navy's stronghold credits) to those who hit it, marks them, counts it 
 "The Reaver convoy bound for K-7 is destroyed." with the paid line as other bounties. `Ended` pays nothing.
 `wf_reavers status` with no stronghold standing and a convoy out says the next founding waits for it. A convoy is
 neither a stronghold nor a patrol: it sends no patrols, does not score, supports no cells and is no raid source.
+
+## Citadel
+
+The capstone of an Overrun round: one stronghold bigger than the rest, raised in the open and fought over as the
+round's set piece. Off when the campaign's `citadel` is null.
+
+**Setting out.** `OverrunSince` on the campaign state marks when tier 5 was reached and is cleared when the tier drops.
+Once the campaign has stood at tier 5 for `citadelDelay`, with no citadel standing, none under way and the campaign not finished, it
+launches one through the convoy path (`TryLaunchCitadel`, then `TryLaunchConvoy(target, out convoy, citadel: true)`):
+the target is picked as any convoy's (a held edge cell two from every stronghold and convoy target, nearer the core
+first), the hub sets out from the highest-level standing stronghold (nearest the target among equals), the target is
+contested as usual, and the convoy carries `Citadel = true`. The sector watch announces it in a chimed banner, with the
+campaign's `capitalSound` (the gamma alert) played on top: "The Reavers are raising a citadel at K-7. 4.2 km bearing 045
+from Outpost Lambda. Stop it before it digs in." A launch that finds
+no cell or no clear point is tried again after a minute. The citadel stands outside the founding rules: it and its
+convoy do not count against `maxStrongholds`, its convoy does not block the one ordinary convoy, and its founding does
+not restart `foundInterval`.
+
+**Stopped on the way.** A citadel convoy whose lead is out of the fight pays half a level 0 citadel's bounty (credits
+the same) and is announced "The Reaver citadel convoy bound for K-7 is destroyed." with the paid line.
+
+**Raised.** `CompleteFounding` makes it a stronghold with `Citadel = true` that claims its cell and `citadelRings`
+rings (2), named "Reaver citadel K-7 (level n)". The sector watch says with a chime "The Reavers have raised a citadel
+at K-7, 4.2 km bearing 045 from Outpost Lambda. Bounty n thalers.", again with the capital sound, and `Citadels` counts it. Its level cap is
+`maxLevelByTier[tier] + citadelExtraLevels`; past the end of `reinforcements` it reuses the last entry. Otherwise it is
+a stronghold: patrols, sorties, raids, spread support, the retake veto on its own cell. It scores as a stronghold plus
+10, so Overrun holds while it stands. The legend gains ", citadel at K-7" and `wf_reavers status` marks it.
+
+**Fallen.** Broken as any hub (lead out of the fight), it pays `strongholdBounty[tier] × citadelBountyScale × (1 +
+levelBountyScale × level)`, credits scaled the same, and the sector watch says with a chime "The Reaver citadel at K-7
+has fallen. Bounty n thalers paid. The Ashfall Reavers are finished." That is the ending: the citadel does not come
+back. `Finished` on the state is set and holds until `wf_reavers clear` or the round restarts. While it holds the
+campaign founds, regroups, spreads and launches nothing: no convoy, citadel, patrol, sortie, reinforcement, intercept,
+raid or response pack, by the tick or by the `Try` methods, and a convoy under way is recalled. Strongholds, patrols and packs still out fight on until
+they are broken, and their cells free as usual. The tier still follows the score but a rise is never announced again,
+and the last stronghold breaking adds no "broken" line. The legend reads "finished", `wf_reavers status` says so, and
+the round summary notes it. `CitadelsBroken` counts it; the round summary names both counts. Ended by an admin or the
+round, it pays and announces nothing and finishes nothing. The numbers by preset are in the table under The game mode.
+
+`WFReaverCitadel` is a Vulture (9 docking ports and its own Sentinel shield generator, so `EnsureShield` places none):
+6 hands, 4 guards, 8 crates of `WFManifestContraband`, 16 jars of fuel, Veteran crew, a gun platform that does not
+evade, warn 2000 m, attack 1200 m, `disengage: Deter` at 1500 m, `leash: 2000`, `icon: Flag`.
 
 ## Spread
 
@@ -179,7 +221,7 @@ through held space, each checked clear (a point that is not is nudged or skipped
 route flown, it resolves `Completed`, jumps out and is swept; the stronghold sends another after `patrolInterval`.
 
 **Patrol killed.** When a patrol resolves `Destroyed`, the cell its lead died in is freed unless a stronghold stands
-in it, the patrol bounty is paid, and the sector watch says so without a chime ("Reaver patrol destroyed at K-7, the
+in it, the patrol bounty is paid, and the sector watch says so on the radio ("Reaver patrol destroyed at K-7, the
 cell is clear, bounty paid"). A patrol whose lead is out of the fight (above) is broken at once, whatever its wing is
 doing: the encounter resolves `Destroyed` (cell freed, bounty paid, cap freed) and the wing turns for the point it set out
 from. **Leash.** A patrol's lead outside held space and the ring of cells round it for 10 s is called back: its orders
@@ -190,15 +232,18 @@ docked, no sortie out, the campaign running, the ship within 5 km and five minut
 a fresh offBudget patrol with orders `GoTo` the ship, `Attack` it, then home. The pack gives the chase up and flies home
 when it is more than 6 km from the hub or its target has been out of held space for 20 s. A hub's gunners also answer a
 ship that fires on it from beyond its 1200 m deterrence range, out to three times that, and its zones stay up while its
-own reinforcement is docked. A reinforcement that broke away to attack is called back past 6 km.
+own reinforcement is docked. A reinforcement that broke away to attack is called back past 6 km. Another campaign's
+ship that hits a hub or its reinforcements, the ADS dreadnought, is answered the same way: its hits are kept apart in
+the hub's `NpcHits` (`RecordCampaignHit`), count toward `Hits`, break the reinforcements away and send a sortie pack
+(with no warning line), but pay nothing and mark nothing, and a hub they bring down is broken, not starved.
 
 **Retaken cells.** Sector control frees a held cell a player ship has sat in unopposed for a while (`WFSectorRetakeAttemptEvent`
 asks, `WFSectorCellRetakenEvent` follows); the campaign vetoes a cell with a standing stronghold in it, which is freed only
-by breaking the hub, and announces the others, with no chime: "K-7 retaken from the Reavers." A ship out of the fight no
+by breaking the hub, and announces the others on the radio: "K-7 retaken from the Reavers." A ship out of the fight no
 longer counts as the Reavers' presence in a cell.
 
 **Freed space and the ending.** Any Reaver cell that is freed (a broken hub, a retake, `clear`) is clearing for
-`wf.sector.clearing_minutes`: no drones, and Sector Watch says so with no chime, one line per batch freed in the same
+`wf.sector.clearing_minutes`: no drones, and Sector Watch says so on the radio, one line per batch freed in the same
 frame: "Reaver space at K-7, K-8 is clearing. Drone activity returns in 10 minutes. Clear the area." When the last
 standing stronghold breaks with no convoy out, a chimed line follows the stronghold's own: "The Ashfall Reavers are
 broken. Their strongholds are gone and the sector is clear." The legend shows "broken, no strongholds standing" until a
@@ -246,7 +291,7 @@ reads "Reaver raiders are hunting Hauler, bearing 045, 3.2 km." Marks run out in
 
 ## Threat
 
-Score = strongholds × 10 + held cells + 20 × (1 − distance of the nearest held cell to the origin / 27 000). Tier
+Score = strongholds × 10 (20 for the citadel) + held cells + 20 × (1 − distance of the nearest held cell to the origin / 27 000). Tier
 thresholds are the campaign's (`tierThresholds`, five numbers). Tier names: None, Scattered, Organised, Entrenched,
 Dominant, Overrun. A rise is announced at once; a fall only after the score has stayed under the threshold for 10
 min, and never within 10 min of the last tier announcement. The announcement comes from the sector watch
@@ -255,6 +300,20 @@ colour falling, and names the tier, the strongholds and cells held and the curre
 breaking and regrouping are announced the same way with the cell callsign and the bearing and range from the nearest
 station. The legend line sent to the framework reads "Ashfall Reavers: Entrenched, 3 strongholds, 21 cells, bounty
 180,000".
+
+## Announcements
+
+The sector watch speaks in three tiers so a banner stays rare. A **chimed banner** (global, with the campaign's rising or
+falling sound and colour) is for the big moments: tier changes, a stronghold or citadel founded (first, regrouped or
+convoy arrived), broken or fallen, the citadel setting out, and the Reavers being broken. The capital events, the citadel
+setting out and raised, also play the campaign's `capitalSound` (`/Audio/Misc/gamma.ogg`, the alert-level sound) on top
+of the chime; the citadel's fall keeps its falling chime alone. A **quiet banner** (global, no sound) is for convoys under
+way, the citadel convoy destroyed, a station blockade and a cell lost to the other faction; at most one goes out
+per campaign every 5 minutes (`QuietBannerInterval`, `LastQuietBanner` on the campaign), and one inside the window is sent
+as a radio line instead, never dropped. Everything routine is a **radio line** on the Common channel from the watch
+entity, with no banner but still in every chat log: reinforcements launched, grown and destroyed, patrols and response
+packs destroyed, the response pack launched, clearing and retaken. Ship and station warnings are
+unchanged. A founding or breaking announced in the same tick as a tier change is still a banner but silent, as before.
 
 ## Rewards
 
@@ -271,14 +330,14 @@ announcement says the bounty was paid only when it is above zero. Stronghold bou
 
 ## The game mode
 
-The Reavers are their own game mode, "Ashfall" (preset `MonoAshfall`, alias `ashfall`, shown in the gamemode vote). It has
+The Reavers run in the "Contested Sector" game mode (preset `WFContestedSector`, aliases `contested` and `ashfall`, shown in the gamemode vote), shared with the ADS incursion. It has
 the same rules as Standard plus the game rule `WFReaverCampaignRule`, and the same points of interest spawn. The campaign
 is on only while that rule runs; `wf.reavers.enabled` (default false) is an admin override that forces it on without
 the rule, and `addgamerule WFReaverCampaignRule` starts it by hand. While it is off, `wf_reavers status` says the game
 mode is not running and names both ways in.
 
 The lobby's sector danger vote picks the campaign: each `wfReaverCampaign` names the `wfEncounterPreset` it serves.
-The campaign runs only when `wf.encounters.enabled` and `wf.sector.enabled` are on and the Ashfall rule runs (or the override is set); a
+The campaign runs only when `wf.encounters.enabled` and `wf.sector.enabled` are on and the Contested Sector rule runs (or the override is set); a
 preset with no campaign runs none (logged once).
 
 | | Quiet | Standard | Dangerous |
@@ -299,6 +358,10 @@ preset with no campaign runs none (logged once).
 | raidInterval by tier (3–5) | 60, 50, 40 min | 40, 32, 26 min | 30, 24, 18 min |
 | threatScale by tier | 1,1,1,1.1,1.2,1.3 | 1,1,1.1,1.2,1.35,1.5 | 1,1.1,1.2,1.3,1.4,1.5 |
 | tierThresholds | 10,22,40,60,80 | 12,30,55,80,105 | 15,35,60,90,120 |
+| citadelDelay | 20 min | 10 min | 6 min |
+| citadelExtraLevels | 2 | 2 | 2 |
+| citadelBountyScale | 3 | 3 | 3 |
+| citadelRings | 2 | 2 | 2 |
 
 Standard, unopposed: Scattered at the first founding (25 min), Organised about 2.5 h, Entrenched about 3.5 h,
 Dominant near the fifth hour, the front in the inner ring by the end. Any crew can set that back at any time.
@@ -312,8 +375,9 @@ Dominant near the fifth hour, the front in the inner ring by the end. Any crew c
 - Navies: the Halcyon's cell is never taken, but a front at the doorstep is theirs, and each navy's faction credits
   (TSF and PDV alike) flow through the bounty.
 - Ghosts: strongholds, patrols and raids on the Encounters tab of the orbit menu as any encounter.
-- Admins: `wf_reavers status | found [x y] | convoy | reinforce <stronghold uid> | tier <n> | spread | patrol | raid | intercept <grid uid> |
-  pause | resume | clear` (`found` founds a level 0 hub at once as an admin shortcut, `convoy` sends one out as the campaign does, `reinforce`
+- Admins: `wf_reavers status | found [x y] | convoy | citadel | reinforce <stronghold uid> | tier <n> | spread | patrol | raid | intercept <grid uid> |
+  pause | resume | clear` (`found` founds a level 0 hub at once as an admin shortcut, `convoy` sends one out as the campaign does, `citadel`
+  sends the citadel out now at any tier, one at a time and not once finished, `reinforce`
   sends a stronghold its next reinforcement now, within the tier cap; status lists each stronghold's level and
   reinforcements, convoys with their target and distance left, reinforcements with their phase and range, intercepts
   and marks), and every campaign encounter in
@@ -332,7 +396,7 @@ Dominant near the fifth hour, the front in the inner ring by the end. Any crew c
   `Components/WFReaverRaidComponent.cs` (target), `Components/WFReaverMarkComponent.cs` (until when a ship is
   marked), `Components/WFReaverCampaignComponent.cs` (campaign state on the sector map entity: tier, score, clocks,
   intercept clocks, counters for the round summary), `Systems/WFReaverCampaignSystem.cs` with partials
-  `.Strongholds.cs`, `.Hub.cs` (shield placement, levels), `.Reinforcements.cs`, `.Convoys.cs`, `.Spread.cs`, `.Patrols.cs`, `.Intercepts.cs`, `.Response.cs` (sorties), `.Retakes.cs`, `.Raids.cs`, `.Threat.cs`, `.Announce.cs`,
+  `.Strongholds.cs`, `.Hub.cs` (shield placement, levels), `.Reinforcements.cs`, `.Convoys.cs`, `.Citadel.cs` (the tier 5 citadel and the finished state), `.Spread.cs`, `.Patrols.cs`, `.Intercepts.cs`, `.Response.cs` (sorties), `.Retakes.cs`, `.Raids.cs`, `.Threat.cs`, `.Announce.cs`,
   `.Rewards.cs`, `Commands/WFReaverCommand.cs`.
 - `Resources/Prototypes/_WF/ReaverCampaign/campaigns.yml`, `encounters.yml`; `Resources/Locale/en-US/_WF/ReaverCampaign/reavers.ftl`;
   `Resources/ServerInfo/_WF/ReaverCampaign/Reavers.xml` guidebook page if the guidebook takes module pages without

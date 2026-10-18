@@ -63,6 +63,18 @@ the contest. For a station cell this is the blockade warning: traffic can hold t
 also contest a cell it already holds, to show a move on it (a Reaver founding convoy); the cell stays held.
 `SetContestDeadline` moves a deadline and raises the contested event again; `DropContest` withdraws one.
 
+**Challenges.** `Challenge(map, cell, faction, deadline, source)` contests a cell another faction holds; it fails on an
+unheld, own or contested cell, a dead source or a claim-attempt veto (so protected cells can't be challenged). It is a
+`WFSectorContest` with `Holder` set, and the contested and resolved events carry that `Holder`. At the deadline (held
+like any contest's while the cell is disputed) player quiet does not count: the challenger wins when its source lives,
+it has reported presence in the cell within the presence timeout and the holder has none. The cell then transfers: the
+holder's claim goes without clearing, the challenger's claim (with its source) takes its place and
+`WFSectorCellChangedEvent(holder, challenger)` fires. Otherwise, or when its source dies or the holder loses the cell
+first (a `Free`, a `Release`, its last source gone), the challenge is dropped. Retakes skip a challenged cell as any
+contested one. Nothing new goes on the wire: the client reads a contest on a held cell of another faction as a
+challenge, keeps the holder's fill under the contest's pulse and countdown, and the hover line and blip card read
+"held by X, challenged by Y, m:ss".
+
 **Disputed cells.** A driver reports where its faction's ships are every tick with
 `WFSectorTerritorySystem.SetPresence(faction, map, cells)`; a report counts for five seconds. Once a second the
 territory system marks a cell **disputed** when a faction has presence in it and a crewed player ship is in it
@@ -125,8 +137,8 @@ default, rebindable), "Sector map" in the game menu or the client command `wf_se
 on the ghost and a white ring marks it); the window follows the player's map (or any map the client has, the sector map
 first). The shuttle console has no sector mode: its MAP tab already shows the territory.
 
-**Admin.** `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest <faction> <q> <r> <minutes> | clear
-[faction] | callsign <x> <y>` (`LocalizedEntityCommands`, `AdminFlags.Admin`).
+**Admin.** `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest <faction> <q> <r> <minutes> | challenge
+<faction> <q> <r> <minutes> | clear [faction] | callsign <x> <y>` (`LocalizedEntityCommands`, `AdminFlags.Admin`).
 
 **State and lifecycle.** Claims, contests and activity live on `WFSectorTerritoryComponent` on the sector map entity,
 so VV shows them, and are reset on `RoundRestartCleanupEvent`. Nothing runs unless `wf.sector.enabled` (default true)
@@ -135,10 +147,11 @@ and the round is in progress.
 ## Public API
 
 `WFSectorTerritorySystem`: `CellOf(MapCoordinates)`, `Centre(map, cell)`, `Owner(map, cell)`, `TryClaim`, `Release`,
-`Free`, `Contest`, `SetContestDeadline`, `DropContest`, `Held(faction)`, `Frontier(faction)` (unowned cells adjacent to held ones), `Sources(map, cell)`,
+`Free`, `Contest`, `Challenge`, `SetContestDeadline`, `DropContest`, `ContestOf`, `Held(faction)`, `Frontier(faction)` (unowned cells adjacent to held ones), `Sources(map, cell)`,
 `StationsIn(map, cell)`. `WFSectorActivitySystem`: `LastActivity`, `IsQuiet`, `ActiveShips(map, cell)`. Local events
 in `WFSectorEvents.cs`: `WFSectorClaimAttemptEvent` (cancellable, by ref), `WFSectorCellChangedEvent`,
-`WFSectorCellContestedEvent`, `WFSectorContestResolvedEvent`, `WFSectorRetakeAttemptEvent` (cancellable),
+`WFSectorCellContestedEvent` and `WFSectorContestResolvedEvent` (with the challenged `Holder`, null for a plain contest),
+`WFSectorRetakeAttemptEvent` (cancellable),
 `WFSectorCellRetakingEvent`, `WFSectorCellRetakenEvent`, `WFSectorCellClearingEvent`, `WFSectorCellClearedEvent`, and `WFSectorResetEvent`, raised when territory comes back on
 after being switched off or resized, so drivers can claim what they still hold again.
 
@@ -156,7 +169,7 @@ after being switched off or resized, so drivers can claim what they still hold a
   own `wfSectorFaction` (the Reavers' is in `Resources/Prototypes/_WF/ReaverCampaign/factions.yml`), and the tests
   declare theirs.
 - Tests: `Content.Tests/_WF/SectorControl/WFSectorHexTest.cs`; `Content.IntegrationTests/Tests/_WF/SectorControl/`
-  (claims and sources, protection veto, activity with the station and moved rules, contest deadline, sync event,
+  (claims and sources, protection veto, activity with the station and moved rules, contest deadline, challenges, sync event,
   notices in chat with and without a PA speaker, a leave told inside the cooldown, no grids on the wire, the sector
   map kept empty, the cell grid and callsigns, the grids named by the MAP tab's rule, one marker per encounter, the map
   window's layout, fit and zoom, the top-bar button and key, a ghost's sync and centring).

@@ -117,8 +117,7 @@ public sealed partial class WFAdsCampaignSystem
     /// <summary>Plays the campaign's capital sound to everyone, on top of a capital event's chime.</summary>
     private void PlayCapital(WFAdsCampaignPrototype campaign)
     {
-        _audio.PlayGlobal(_audio.ResolveSound(campaign.CapitalSound), _planetComms.Reachable(Filter.Broadcast(), null), true,
-            AudioParams.Default.WithVolume(-2f));
+        _audio.PlayGlobal(_audio.ResolveSound(campaign.CapitalSound), Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
     }
 
     /// <summary>Runs <see cref="TendDreadnoughts"/> once, as a tick does.</summary>

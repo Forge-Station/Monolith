@@ -12,7 +12,7 @@
     size: Tiny
   - type: BotanyCultivarDisk
   - type: StaticPrice
-    price: 40
+    price: 0 # lol
   - type: Tag
     tags:
     - Document

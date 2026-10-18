@@ -133,7 +133,7 @@ public sealed partial class GhostGui : UIWidget
         // if (GhostRespawnButton.Text != text)
         //     GhostRespawnButton.Text = text;
 
-        GhostRespawnButton.Text = text;
+        GhostRespawnButton.Text = text; // Forge-change
 
         if (GhostRespawnButton.Disabled != disabled)
             GhostRespawnButton.Disabled = disabled;

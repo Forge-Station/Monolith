@@ -222,6 +222,9 @@
           shouldHave: false
       - !type:Drunk
         boozePower: 2
+        conditions: # Forge-change: and now we here. Dwarf not drunk because dwarf IS drunk
+        - !type:OrganType
+          type: Dwarf
 
 - type: reagent
   id: Gin

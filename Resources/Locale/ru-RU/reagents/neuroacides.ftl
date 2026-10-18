@@ -1,6 +1,9 @@
 reagent-name-neuroacid-cobra = нейротоксин кобры
 reagent-desc-neuroacid-cobra = Опасный нейротоксин, создаваемый космической коброй в недрах её органов.
 
+reagent-name-neuroacid-hand = синтетический нейротоксин
+reagent-desc-neuroacid-hand = Синтетический нейротоксин, простейший из всех возможных. Искусственая репликация нейротоксина кобры.
+
 neuroacid-effect-first = Твои лёгкие горят, дрожь пронзает тело.
 neuroacid-effect-second = Размышления становятся туманными.
 neuroacid-effect-third = Глаза закрывает цветной пеленой.

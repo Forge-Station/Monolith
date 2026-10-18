@@ -72,3 +72,25 @@ Entries:
   id: 6
   time: '2026-10-17T22:28:07.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/536
+- author: Fallen-Seraphim
+  changes:
+    - type: Add
+      message: >-
+        Добавлен синтетический нейротоксин - аналог нейротоксина кобры, но без
+        бега. Добавлен один альтернативный рецепт.
+    - type: Tweak
+      message: Увеличен урон нейротоксинов. Часть рецептов изменены.
+    - type: Fix
+      message: >-
+        Воздушная сигнализация теперь знает что делать. Скрубберы теперь могут
+        его собирать. 
+  id: 7
+  time: '2026-10-18T18:25:28.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/537
+- author: KoT-Corvax
+  changes:
+    - type: Fix
+      message: Поправлены допущенные опечатки в гайдбуках.
+  id: 8
+  time: '2026-10-18T18:26:35.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/539

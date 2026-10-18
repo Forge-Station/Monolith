@@ -56,7 +56,77 @@
         walkSpeedModifier: 0.8
         sprintSpeedModifier: 0.8
       - !type:Jitter
- 
+
+- type: reagent
+  id: NeuroAcidHandemade
+  name: reagent-name-neuroacid-hand
+  group: Toxins
+  desc: reagent-desc-neuroacid-hand
+  physicalDesc: reagent-physical-desc-cloudy
+  flavor: smokey
+  color: "#855395FF"
+  boilingPoint: 255.0
+  meltingPoint: 36.0
+  metabolisms:
+    Poison:
+      metabolismRate: 0.45
+      effects:
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - neuroacid-effect-second
+        - neuroacid-effect-first
+        - neuroacid-effect-third
+        - neuroacid-effect-fourth
+        probability: 0.7
+        conditions:
+        - !type:ReagentThreshold
+          max: 30
+      - !type:StaminaDamageEffect
+        forceCrit: true
+        conditions:
+        - !type:ReagentThreshold
+          min: 9
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Yowie
+          shouldHave: false
+        damage:
+          types:
+            Poison: 1
+      - !type:TunnelVision
+        intensity: 0.9
+        pulse: 1.7
+        darkness: 0.8
+        color: "#855395FF"
+        time: 3
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+      - !type:Oxygenate
+        factor: -1
+        conditions:
+        - !type:ReagentThreshold
+          min: 9
+    Narcotic:
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.8
+        sprintSpeedModifier: 0.8
+      - !type:Jitter
+
+- type: reaction
+  id: NeuroAcidHandemade
+  requiredMixerCategories:
+  - Centrifuge
+  reactants:
+    Desoxyephedrine:
+      amount: 1
+    Dylovene:
+      amount: 1
+  products:
+    NeuroAcidHandemade: 2
  
 - type: reagent
   id: N611
@@ -108,8 +178,8 @@
           shouldHave: false
         damage:
           types:
-            Poison: 2
-            Caustic: 0.5
+            Poison: 4
+            Caustic: 1
       - !type:TunnelVision
         intensity: 1.1
         pulse: 1.7
@@ -153,8 +223,8 @@
         ignoreResistances: true
         damage:
           types:
-            Poison: 2
-            Caustic: 0.5
+            Poison: 4
+            Caustic: 1
       - !type:Oxygenate
         factor: -1.2
         conditions:
@@ -187,10 +257,26 @@
       amount: 1
     DexalinPlus:
       amount: 1
-    NeuroAcidCobra:
+    NeuroAcidHandemade:
       amount: 3
   products:
-    N611: 1
+    N611: 2
+
+- type: reaction
+  id: N611Sec
+  requiredMixerCategories:
+  - Centrifuge
+  reactants:
+    Desoxyephedrine:
+      amount: 3
+    Dylovene:
+      amount: 1
+    DexalinPlus:
+      amount: 1
+    Peranol:
+      amount: 5
+  products:
+    N611: 3
  
  
 - type: gas
@@ -408,7 +494,7 @@
           shouldHave: false
         damage:
           types:
-            Poison: 0.6
+            Poison: 1.5
       - !type:TunnelVision
         intensity: 0.8
         pulse: 1.4
@@ -468,7 +554,7 @@
           shouldHave: false
         damage:
           types:
-            Poison: 0.6
+            Poison: 1.2
       - !type:TunnelVision
         intensity: 0.8
         pulse: 1.4
@@ -528,8 +614,8 @@
         scaleByQuantity: true
         damage:
           types:
-            Cellular: 0.8
-            Caustic: 0.6
+            Cellular: 2
+            Caustic: 2
       - !type:ModifyBleedAmount
         amount: 2
         conditions:
@@ -593,8 +679,8 @@
           shouldHave: false
         damage:
           types:
-            Cellular: 0.8
-            Caustic: 0.6
+            Cellular: 2
+            Caustic: 2
       - !type:ModifyBleedAmount
         amount: 2
         conditions:
@@ -631,7 +717,7 @@
   requiredMixerCategories:
   - Centrifuge
   reactants:
-    Vestine:
+    Lipolicide:
       amount: 1
     N611:
       amount: 2

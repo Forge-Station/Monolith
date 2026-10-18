@@ -22,6 +22,7 @@ public sealed partial class WoundSystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private Content.Shared._WF.Wolfmed.Wounds.WolfmedBleedGateSystem _wfBleedGate = default!; // WOLFGATE(Wolfmed)
 
     private readonly Dictionary<ProtoId<DamageTypePrototype>, List<(WoundPrototype Wound, WoundDamageTypeSettings Settings)>>
         _woundsByDamageType = new();
@@ -247,7 +248,8 @@ public sealed partial class WoundSystem : EntitySystem
             bleedingBehavior.Rate > 0f && wound.Comp.Severity >= bleedingBehavior.MinimumSeverity)
         {
             if (!TryComp(wound, out WoundBleedingComponent? bleeding) &&
-                wound.Comp.Severity > previousSeverity) // WOLFGATE(Wolfmed): only a wound that just grew rolls, see LastSyncSeverity
+                wound.Comp.Severity > previousSeverity && // WOLFGATE(Wolfmed): only a wound that just grew rolls, see LastSyncSeverity
+                _wfBleedGate.PartCanStartBleeding(wound.Comp.HoldingPart)) // WOLFGATE(Wolfmed): the body or its gear may refuse a new bleed.
             {
                 var chance = Math.Clamp(bleedingBehavior.Chance, 0f, 1f);
                 if (chance > 0f && _random.Prob(chance))
@@ -266,7 +268,8 @@ public sealed partial class WoundSystem : EntitySystem
         if (prototype.TryGetBehavior(wound.Comp.Severity, out WoundInternalBleedingBehavior internalBehavior) &&
             internalBehavior.Rate > 0f)
         {
-            if (!TryComp(wound, out WoundInternalBleedingComponent? internalBleeding))
+            if (!TryComp(wound, out WoundInternalBleedingComponent? internalBleeding) &&
+                _wfBleedGate.PartCanStartBleeding(wound.Comp.HoldingPart)) // WOLFGATE(Wolfmed): the body or its gear may refuse a new bleed.
             {
                 var chance = Math.Clamp(internalBehavior.Chance, 0f, 1f);
                 if (chance > 0f && _random.Prob(chance))

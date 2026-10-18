@@ -57,6 +57,7 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, RefreshFrictionModifiersEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, RefreshWeightlessModifiersEvent>(RefRelayInventoryEvent); // Mono
         SubscribeLocalEvent<InventoryComponent, GetExplosionResistanceEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedBleedAttemptEvent>(RefRelayInventoryEvent); // WOLFGATE(Wolfmed): worn items may refuse a bleed.
         SubscribeLocalEvent<InventoryComponent, IsWeightlessEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSpeedModifierContactCapEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSlowedOverSlipperyModifierEvent>(RefRelayInventoryEvent);

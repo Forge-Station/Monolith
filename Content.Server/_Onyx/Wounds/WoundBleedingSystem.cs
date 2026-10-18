@@ -34,6 +34,7 @@ public sealed partial class WoundBleedingSystem : EntitySystem
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private WoundSystem _wounds = default!;
+    [Dependency] private Content.Shared._WF.Wolfmed.Wounds.WolfmedBleedGateSystem _wfBleedGate = default!; // WOLFGATE(Wolfmed)
 
     public override void Initialize()
     {
@@ -76,7 +77,8 @@ public sealed partial class WoundBleedingSystem : EntitySystem
     }
     private void OnWoundChanged(Entity<WoundBleedingComponent> wound, ref WoundChangedEvent args)
     {
-        if (args.Severity > args.OldSeverity && !_wfInfection.ApplyingCreep) // WOLFGATE(Wolfmed): infection creep is not a new injury, it must not strip the dressing
+        if (args.Severity > args.OldSeverity && !_wfInfection.ApplyingCreep && // WOLFGATE(Wolfmed): infection creep is not a new injury, it must not strip the dressing
+            (!TryComp(wound, out WoundComponent? wfCore) || _wfBleedGate.PartCanStartBleeding(wfCore.HoldingPart))) // WOLFGATE(Wolfmed): the body or its gear may refuse a deeper bleed.
         {
             wound.Comp.BleedingSeverity += args.Severity - args.OldSeverity;
             // WOLFGATE(Wolfmed): playtest 4: a tourniquet stays tied whatever the wound does under it (the strap's own

@@ -34,6 +34,7 @@ public sealed partial class BloodstreamSystem : EntitySystem
     [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _wfDormancy = default!; // WOLFGATE(Dormancy): skips NPC bodies nobody is near
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _robustRandom = default!;
+    [Dependency] private Content.Shared._WF.Wolfmed.Wounds.WolfmedBleedGateSystem _wfBleedGate = default!; // WOLFGATE(Wolfmed)
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private PopupSystem _popupSystem = default!;
@@ -242,6 +243,9 @@ public sealed partial class BloodstreamSystem : EntitySystem
         var oldBleedAmount = ent.Comp.BleedAmount;
         var total = bloodloss.GetTotal();
         var totalFloat = total.Float();
+        if (totalFloat > 0 && !_wfBleedGate.CanStartBleeding(ent)) // WOLFGATE(Wolfmed): the body or its gear refused the bleed; cautery still works.
+            return;
+
         TryModifyBleedAmount(ent, totalFloat, ent);
 
         /// <summary>

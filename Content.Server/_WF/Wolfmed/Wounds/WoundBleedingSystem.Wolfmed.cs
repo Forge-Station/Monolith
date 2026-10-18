@@ -46,7 +46,7 @@ public sealed partial class WoundBleedingSystem
             return false;
 
         if (amount > 0f)
-            return ModifyBodyBleeding(body, amount);
+            return _wfBleedGate.Bypass(() => ModifyBodyBleeding(body, amount)); // a reagent bleed is no hit; the gate doesn't apply
 
         var remaining = -amount * _configuration.GetCVar(WolfmedCVars.BleedRate);
         var modified = false;

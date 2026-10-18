@@ -237,6 +237,7 @@ Skipped ("dirty-disposed").
 - [`Content.Shared/_WF/Wolfmed/Surgery/WolfmedSurgeryProgressComponent.cs`](../../../Content.Shared/_WF/Wolfmed/Surgery/WolfmedSurgeryProgressComponent.cs)
 - [`Content.Shared/_WF/Wolfmed/Targeting/WolfmedAimScatterSystem.cs`](../../../Content.Shared/_WF/Wolfmed/Targeting/WolfmedAimScatterSystem.cs)
 - [`Content.Shared/_WF/Wolfmed/Targeting/WoundTargetResolver.cs`](../../../Content.Shared/_WF/Wolfmed/Targeting/WoundTargetResolver.cs)
+- [`Content.Shared/_WF/Wolfmed/Wounds/WolfmedBleedGateSystem.cs`](../../../Content.Shared/_WF/Wolfmed/Wounds/WolfmedBleedGateSystem.cs)
 - [`Content.Shared/_WF/Wolfmed/Wounds/WolfmedBurnFluidComponents.cs`](../../../Content.Shared/_WF/Wolfmed/Wounds/WolfmedBurnFluidComponents.cs)
 - [`Content.Shared/_WF/Wolfmed/Wounds/WolfmedCauteryProfilePrototype.cs`](../../../Content.Shared/_WF/Wolfmed/Wounds/WolfmedCauteryProfilePrototype.cs)
 - [`Content.Shared/_WF/Wolfmed/Wounds/WolfmedChemicalBurnComponent.cs`](../../../Content.Shared/_WF/Wolfmed/Wounds/WolfmedChemicalBurnComponent.cs)
@@ -1071,6 +1072,7 @@ Skipped ("dirty-disposed").
   - a bleed that starts on an old wound under a tourniquet is tied off as well
   - playtest 4: a bleed opening on a part under a tourniquet (or below one) is tied off
   - infection creep is not a new injury, it must not strip the dressing
+  - the body or its gear may refuse a deeper bleed.
   - playtest 4: a tourniquet stays tied whatever the wound does under it (the strap's own
   - playtest 1: once per cooldown, not every vacuum tick
   - dressing
@@ -1115,6 +1117,7 @@ Skipped ("dirty-disposed").
   - M3: an impaired heart regenerates at its band's factor (plan §8); 1 everywhere else.
   - CONSC: blood volume is a consciousness input and the bloodstream raises no event
   - GUARD E, wound hosts get their bleeding from WoundBleedingSystem instead.
+  - the body or its gear refused the bleed; cautery still works.
   - GUARD E2 — Onyx's HealthExaminable covers pallor per-part for wound hosts
   - GUARD E3, a wound host's bleed amount is written only through the wound projection.
   - GUARD E3
@@ -1406,6 +1409,7 @@ Skipped ("dirty-disposed").
   - D17 - was OnRejuvenate(Entity\<BodyComponent>, ref RejuvenateEvent); now a public entry point.
   - W5: a part healed on its own keeps its dead tissue and its tourniquet otherwise.
   - only a wound that just grew rolls, see LastSyncSeverity
+  - the body or its gear may refuse a new bleed.
   - a grown wound gets its WoundChangedEvent next, and the bleeding system adds the growth
   - W2: damage removal is a treatment too, so a wound that refuses treatment (an
   - an item working on the wound itself closes it at full strength. HealingMultiplier is how much
@@ -1481,6 +1485,7 @@ Skipped ("dirty-disposed").
   - GUARD F; LOOK adds detailed
   - GUARD F, legacy threshold text is for non-wound-hosts only.
   - GUARD F, a wound host gets a visual inspection instead (P2-D20/D2).
+- [`Content.Shared/Inventory/InventorySystem.Relay.cs`](../../../Content.Shared/Inventory/InventorySystem.Relay.cs): worn items may refuse a bleed.
 - [`Content.Shared/Medical/HealingDoAfterEvent.cs`](../../../Content.Shared/Medical/HealingDoAfterEvent.cs): the wound-host limb chosen when treatment started, kept across repeats.
 - [`Content.Shared/MedicalScanner/HealthAnalyzerScannedUserMessage.cs`](../../../Content.Shared/MedicalScanner/HealthAnalyzerScannedUserMessage.cs)
   - EXT 2 — Wolfmed diagnostic payload types.

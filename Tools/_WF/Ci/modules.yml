@@ -16,30 +16,6 @@ external:
 # Edits outside _WF that can't hold a WOLFGATE marker: JSON, images, audio, rich-text .txt and map files.
 # Each entry has a path (a file, a folder or a glob), the module it serves (null for a standalone edit) and a reason.
 unmarked:
-  - path: Resources/Maps/Shuttles/dart.yml
-    module: Cloning
-    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
-  - path: Resources/Maps/Shuttles/emergency_raven.yml
-    module: Cloning
-    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
-  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
-    module: Cloning
-    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
-  - path: Resources/Maps/_Mono/ShuttleEvent/asakim_medium.yml
-    module: Cloning
-    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
-  - path: Resources/Maps/_Mono/ShuttleEvent/asakim_small.yml
-    module: Cloning
-    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
-  - path: Resources/Maps/centcomm.yml
-    module: Cloning
-    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
-  - path: Resources/Maps/_Mono/POI/pdvhelios.yml
-    module: LiveFixes
-    reason: Removed saved configurator lists that held invalid entity references.
-  - path: Resources/Fonts/ComicNeue
-    module: Clown
-    reason: Comic Neue font and its OFL licence for the Clown trait speech.
   - path: .config/dotnet-tools.json
     module: null
     reason: dotnet-ef local tool manifest (pinned 10.0.12) for generating EF migrations.
@@ -196,9 +172,18 @@ unmarked:
   - path: Resources/Textures/Mobs/Customization/tattoos.rsi/
     module: Species
     reason: Moth eye tattoo states added (meta.json re-sorted).
+  - path: Resources/Textures/Mobs/Species/Moth/displacement.rsi/
+    module: Species
+    reason: Moth clothing displacement maps for the protogen subspecies; Wolfgate-only RSI at an upstream path.
+  - path: Resources/Textures/Mobs/Species/Reptilian/displacement.rsi/
+    module: Species
+    reason: Reptilian clothing displacement maps for the protogen subspecies; Wolfgate-only RSI at an upstream path.
   - path: Resources/Textures/_EE/Mobs/Customization/Harpy/harpy_wings.rsi/
     module: Species
     reason: whitescale_harpy_folded2 state added (meta.json re-serialised).
+  - path: Resources/Textures/_Mono/Mobs/Species/Protogen/organs.rsi/
+    module: Species
+    reason: tongueforked state added (meta.json re-serialised).
   - path: Resources/Audio/_DEN/
     module: Species
     reason: The Den species voice sounds, ported in #14 (Customisation Update).
@@ -206,8 +191,8 @@ unmarked:
     module: Species
     reason: Einstein Engines species sounds, ported in #14 (Customisation Update).
   - path: Resources/Audio/_FarHorizons/Voice/
-    module: EmoteVoices
-    reason: Robotic voice packs for the scream and laugh picker, ported from HardLight (Far Horizons).
+    module: Species
+    reason: Far Horizons species voices, ported in #14 (Customisation Update).
   - path: Resources/Audio/_HL/
     module: Species
     reason: HardLight species sound, ported in #14 (Customisation Update).
@@ -217,15 +202,6 @@ unmarked:
   - path: Resources/Audio/_RMC14/Voice/
     module: Species
     reason: RMC14 species voices, ported from HardLight in #14 (Customisation Update).
-  - path: Resources/Audio/_RMC14/Machines/
-    module: DecorImport
-    reason: Door sounds, ported from RMC-14.
-  - path: Resources/Audio/_Starlight/Effects/chisel.ogg
-    module: DecorImport
-    reason: Obelisk hit sound, ported from Starlight.
-  - path: Resources/Audio/_Starlight/Effects/stones_falling.ogg
-    module: DecorImport
-    reason: Obelisk break sound, ported from Starlight.
   - path: Resources/Audio/_Starlight/
     module: Species
     reason: Starlight species sounds, ported in #14 (Customisation Update).
@@ -253,12 +229,9 @@ unmarked:
   - path: Resources/Textures/_DV/Mobs/Customization/thaven/
     module: Species
     reason: Thaven marking sprites, ported in #14 (Customisation Update).
-  - path: Resources/Textures/_Mono/Mobs/Species/Protogen/organs.rsi/
+  - path: Resources/Textures/_FarHorizons/Mobs/
     module: Species
-    reason: Back to Monolith's state list; the tongueforked state left with the protogen subspecies.
-  - path: Resources/Textures/_FarHorizons/Mobs/Customization/
-    module: Species
-    reason: Protogen and subspecies-shaped marking sprites, ported in #14 (Customisation Update).
+    reason: Far Horizons species sprites, ported in #14 (Customisation Update).
   - path: Resources/Textures/_Floof/
     module: Species
     reason: Floof marking sprites, ported from HardLight in #14 and #129.
@@ -295,51 +268,9 @@ unmarked:
   - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
     module: Traders
     reason: NPC traders, ATMs, deposit consoles and vents placed on the Central Command map.
-  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
-    module: MilitaryVehicles
-    reason: The military outfitter counter placed beside the ATMs on the Central Command map.
-  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
-    module: Minigames
-    reason: Two game hosts, the dealer and the riddle sage, seated at the bar lounge tables.
-  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
-    module: Planets
-    reason: A weather forecast computer beside the station radar console.
-  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
-    module: BritishFood
-    reason: Mrs. Luvvit's Pie & Mash in the trade hall kiosk row, in place of a potted plant and its front pane.
-  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
-    module: TradeGoods
-    reason: Both Exped chutes become CC chutes, so every chute on the station pays from one table.
-  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
-    module: null
-    reason: Sector map entity gets its Parallax component and Colossus Sector name back after the #427 re-save dropped them.
-  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
-    module: Contracts
-    reason: Contract boards with pickup pads at the central plaza and beside each of the six dock arms.
-  - path: Resources/Maps/_Mono/POI/tsfmchalcyon.yml
-    module: Contracts
-    reason: TSF faction contract boards with pickup pads in the arrival hall, by both west public docks and the navy dock hall.
-  - path: Resources/Maps/_Mono/POI/camelot.yml
-    module: Contracts
-    reason: USSP faction contract boards with pickup pads off the warp corridor and by the north-west and south-west docks.
-  - path: Resources/Maps/_Mono/POI/pdvhelios.yml
-    module: Contracts
-    reason: PDV faction contract boards with pickup pads in the civilian arm by the west docks and in the cargo bay.
   - path: Resources/Maps/_Mono/POI/underground.yml
     module: LockableButtons
     reason: The two blast door buttons take Underground access; the station's crew has no Pirate access.
-  - path: Resources/Maps/_Mono/POI/underground.yml
-    module: TradeGoods
-    reason: The fence chute and the smuggling-crate vendor in the cargo bay, beside the sell pallets.
-  - path: Resources/Maps/_Mono/POI/tsfmc_industry.yml
-    module: null
-    reason: Stellar Blessing lighting, colour-coded distro, fire suit lockers and extinguishers.
-  - path: Resources/Maps/_Mono/POI/pdvhelios.yml
-    module: null
-    reason: Helios mapping fixes for lighting, wallmounts and small layout tweaks.
-  - path: Resources/Maps/_Mono/POI/Dungeons/zvezda.yml
-    module: null
-    reason: Zvezda lighting re-work and power generation.
   - path: Resources/Textures/Tiles/exoborg.png
     module: Xenoborgs
     reason: Exoborg floor tile redrawn.
@@ -1288,6 +1219,30 @@ unmarked:
   - path: Content.Server/Worldgen/Systems/WorldgenConfigSystem.cs
     module: EngineCompat
     reason: Engine v280 removed IMapManager; uses SharedMapSystem.
+  - path: Content.Server/Xenoarchaeology/Equipment/Components/AnalysisConsoleComponent.cs
+    module: EngineCompat
+    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
+  - path: Content.Server/Xenoarchaeology/Equipment/Components/ArtifactAnalyzerComponent.cs
+    module: EngineCompat
+    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
+  - path: Content.Server/Xenoarchaeology/Equipment/Components/TraversalDistorterComponent.cs
+    module: EngineCompat
+    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
+  - path: Content.Server/Xenoarchaeology/XenoArtifacts/ArtifactComponent.cs
+    module: EngineCompat
+    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
+  - path: Content.Server/Xenoarchaeology/XenoArtifacts/ArtifactSystem.Actions.cs
+    module: EngineCompat
+    reason: Engine v289 removed [ValidatePrototypeId]; its constants became ProtoId fields.
+  - path: Content.Server/Xenoarchaeology/XenoArtifacts/Effects/Components/ChemicalPuddleArtifactComponent.cs
+    module: EngineCompat
+    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
+  - path: Content.Server/Xenoarchaeology/XenoArtifacts/Effects/Components/FoamArtifactComponent.cs
+    module: EngineCompat
+    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
+  - path: Content.Server/Xenoarchaeology/XenoArtifacts/Triggers/Components/ArtifactDamageTriggerComponent.cs
+    module: EngineCompat
+    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
   - path: Content.Server/_CE/Power/Nodes/CECableVerticalNode.cs
     module: EngineCompat
     reason: Engine v280 removed IMapManager; uses SharedMapSystem.
@@ -2251,12 +2206,6 @@ unmarked:
   - path: Resources/Maps/_NF/POI/medical.yml
     module: Wolfmed
     reason: An autodoc pod placed in the medical POI.
-  - path: Resources/Maps/_NF/POI/cargodepot.yml
-    module: TradeGoods
-    reason: A market console and crate machine, so what a depot buys can be bought back there.
-  - path: Resources/Maps/_NF/POI/cargodepotalt.yml
-    module: TradeGoods
-    reason: A market console and crate machine, so what a depot buys can be bought back there.
   - path: Resources/Textures/Effects/fire.rsi/
     module: BetterFire
     reason: Object fire state (fire) replaced with TauCeti generic_overlay.
@@ -2272,9 +2221,6 @@ unmarked:
   - path: Resources/Audio/_Mono/RadioStation/
     module: null
     reason: Nulb vinyl tracks (Monolith#4835) re-encoded to mono Vorbis q0 to cut download size.
-  - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/guppy.yml
-    module: Shipyard
-    reason: Saved with its air filled in; the starter ship spawned as vacuum.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/MotleyAnne/inertia.yml
     module: ShipArmor
     reason: PDV hull refit from plastitanium to adamantite walls.
@@ -2307,10 +2253,10 @@ unmarked:
     reason: PDV hull refit from plastitanium to adamantite walls.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/layak.yml
     module: ShipArmor
-    reason: PDV hull with a shield generator, kept on plastitanium instead of adamantite.
+    reason: PDV hull refit from plastitanium to adamantite walls.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/motleyanne.yml
     module: ShipArmor
-    reason: PDV hull with a shield generator, kept on plastitanium instead of adamantite.
+    reason: PDV hull refit from plastitanium to adamantite walls.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/neptune.yml
     module: ShipArmor
     reason: PDV hull refit from plastitanium to adamantite walls.
@@ -2322,7 +2268,7 @@ unmarked:
     reason: PDV hull refit from plastitanium to adamantite walls.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/saturn.yml
     module: ShipArmor
-    reason: PDV hull with a shield generator, kept on plastitanium instead of adamantite.
+    reason: PDV hull refit from plastitanium to adamantite walls.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/scorpion.yml
     module: ShipArmor
     reason: PDV hull refit from plastitanium to adamantite walls.
@@ -2332,36 +2278,6 @@ unmarked:
   - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/caracara.yml
     module: null
     reason: PDV pack, top-left thruster was mapped disabled.
-  - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/caracara.yml
-    module: AsteroidMining
-    reason: Its Apollo mining laser is swapped for the M40 Prospector, the heavy asteroid mining laser.
-  - path: Resources/SharedMaps/_Mono/Shuttles/MMC/akasono.yml
-    module: AsteroidMining
-    reason: Its M25 mining pulsar is swapped for the M12 Prospector, the light asteroid mining laser.
-  - path: Resources/SharedMaps/_Mono/Shuttles/MMC/kami.yml
-    module: AsteroidMining
-    reason: Its M25 mining pulsars are swapped for M12 Prospectors, the light asteroid mining laser.
-  - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/noble.yml
-    module: AsteroidMining
-    reason: Its M25 mining pulsars are swapped for M12 Prospectors, the light asteroid mining laser.
-  - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/peregrine.yml
-    module: AsteroidMining
-    reason: Its M25 mining pulsars are swapped for M12 Prospectors, the light asteroid mining laser.
-  - path: Resources/SharedMaps/_Mono/Shuttles/CivilianExp/pelican.yml
-    module: AsteroidMining
-    reason: Its M25 mining pulsar is swapped for the M12 Prospector, the light asteroid mining laser.
-  - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/arribane.yml
-    module: AsteroidMining
-    reason: Its M25 mining pulsars are swapped for M12 Prospectors, the light asteroid mining laser.
-  - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/rosetta.yml
-    module: AsteroidMining
-    reason: Its Apollo mining laser is swapped for the M40 Prospector, the heavy asteroid mining laser.
-  - path: Resources/Maps/_Mono/Bluespace/prefracture.yml
-    module: null
-    reason: Hardpoints mapped under the Unidentified Vessel's Scythe, Sunder and Flayer guns so gunnery links them.
-  - path: Resources/Maps/_Mono/Monolithic/monolithicasteroidsmallship.yml
-    module: null
-    reason: Hardpoint mapped under the asteroid ship's AK570 so gunnery links it.
   - path: Resources/Maps/_Mono/POI/tsfmchalcyon.yml
     module: ArmorBalance
     reason: Reverts Monolith#4845, putting the mapped M82b and M82c suit storage back in place of the M86.
@@ -2404,513 +2320,9 @@ unmarked:
   - path: Resources/SharedMaps/_Mono/Shuttles/TSF/shiv.yml
     module: ArmorBalance
     reason: Reverts Monolith#4845, putting the mapped M82b and M82c suit storage back in place of the M86.
-  - path: Resources/SharedMaps/_Mono/Shuttles/TSF/shiv.yml
-    module: AsteroidMining
-    reason: Its M25 mining pulsars are swapped for M12 Prospectors, the light asteroid mining laser.
   - path: Resources/SharedMaps/_Mono/Shuttles/TSF/spekter.yml
     module: ArmorBalance
     reason: Reverts Monolith#4845, putting the mapped M82b and M82c suit storage back in place of the M86.
   - path: Resources/SharedMaps/_Mono/Shuttles/TSF/xiphos.yml
     module: ArmorBalance
     reason: Reverts Monolith#4845, putting the mapped M82b and M82c suit storage back in place of the M86.
-  - path: Resources/Textures/ADT/
-    module: DecorImport
-    reason: Decor sprites, ported from ADT.
-  - path: Resources/Textures/Backmen/
-    module: DecorImport
-    reason: Decor sprites, ported from Backmen.
-  - path: Resources/Textures/Corvax/
-    module: DecorImport
-    reason: Decor sprites, ported from Corvax.
-  - path: Resources/Textures/_CP14/
-    module: DecorImport
-    reason: Decor sprites, ported from CrystallEdge.
-  - path: Resources/Textures/_DEN/
-    module: DecorImport
-    reason: Decor sprites, ported from Delta-V.
-  - path: Resources/Textures/_DV/CosmicCult/
-    module: DecorImport
-    reason: Decor sprites, ported from Delta-V.
-  - path: Resources/Textures/_DV/Objects/Decoration/
-    module: DecorImport
-    reason: Decor sprites, ported from Delta-V.
-  - path: Resources/Textures/_DV/Structures/Walls/
-    module: DecorImport
-    reason: Wall sprites, ported from Delta-V.
-  - path: Resources/Textures/_DV/Tiles/
-    module: DecorImport
-    reason: Floor tile sprites, ported from Delta-V.
-  - path: Resources/Textures/Nyanotrasen/Structures/walls/paper.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Delta-V.
-  - path: Resources/Textures/Nyanotrasen/Structures/walls/drywall.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Delta-V.
-  - path: Resources/Textures/_NF/Structures/Walls/shuttleinterior.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Frontier.
-  - path: Resources/Textures/_NF/Tiles/
-    module: DecorImport
-    reason: Floor tile sprites, ported from Frontier.
-  - path: Resources/Textures/_NF/Objects/Tiles/woodtile.rsi/
-    module: DecorImport
-    reason: Floor tile item sprites, ported from Frontier.
-  - path: Resources/Textures/_NF/Structures/Wallmounts/trophies.rsi/
-    module: DecorImport
-    reason: Decor sprites, ported from Frontier.
-  - path: Resources/Audio/_DV/CosmicCult/
-    module: DecorImport
-    reason: Door sounds, ported from Delta-V.
-  - path: Resources/Textures/_Euphoria/
-    module: DecorImport
-    reason: Decor sprites, ported from Panta Rhei.
-  - path: Resources/Textures/_Floof/Structures/
-    module: DecorImport
-    reason: Decor sprites, ported from Panta Rhei.
-  - path: Resources/Textures/_Goobstation/Structures/Decoration/
-    module: DecorImport
-    reason: Decor sprites, ported from Goob Station.
-  - path: Resources/Textures/_Goobstation/Structures/Specific/
-    module: DecorImport
-    reason: Decor sprites, ported from Goob Station.
-  - path: Resources/Textures/_Goobstation/Flock/
-    module: DecorImport
-    reason: Flock floor tile and structure sprites, ported from Goob Station.
-  - path: Resources/Audio/_Goobstation/Flock/
-    module: DecorImport
-    reason: Flock structure sounds, ported from Goob Station.
-  - path: Resources/Textures/_Impstation/Structures/Furniture/
-    module: DecorImport
-    reason: Decor sprites, ported from Impstation.
-  - path: Resources/Textures/_Impstation/Structures/crystal.rsi/
-    module: DecorImport
-    reason: Crystal sprites, ported from Impstation.
-  - path: Resources/Textures/_Impstation/Structures/Lighting/
-    module: DecorImport
-    reason: Decor sprites, ported from Impstation.
-  - path: Resources/Textures/_Impstation/Structures/Walls/
-    module: DecorImport
-    reason: Wall sprites, ported from Impstation.
-  - path: Resources/Textures/_Impstation/Tiles/
-    module: DecorImport
-    reason: Floor tile sprites, ported from Impstation.
-  - path: Resources/Textures/_Impstation/Objects/Tiles/
-    module: DecorImport
-    reason: Floor tile item sprites, ported from Impstation.
-  - path: Resources/Textures/_Moffstation/Structures/
-    module: DecorImport
-    reason: Wall and door sprites, ported from Moffstation.
-  - path: Resources/Textures/_Moffstation/Tiles/
-    module: DecorImport
-    reason: Floor tile sprites, ported from Moffstation.
-  - path: Resources/Textures/_Lavaland/Objects/Decoration/
-    module: DecorImport
-    reason: Decor sprites, ported from Goob Station.
-  - path: Resources/Textures/_Lavaland/Structures/
-    module: DecorImport
-    reason: Decor sprites, ported from Goob Station.
-  - path: Resources/Textures/_Lavaland/Objects/Materials/
-    module: DecorImport
-    reason: Legion skull sprite, ported from Goob Station.
-  - path: Resources/Textures/_Nuclear14/Structures/Furniture/Street_Furniture/
-    module: DecorImport
-    reason: Decor sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Furniture/schoolchair.rsi/
-    module: DecorImport
-    reason: Decor sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/half/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/slanted/adobe.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/slanted/bunker.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/slanted/comb.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/slanted/dungeonalt.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/slanted/prison.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/slanted/rustvault.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/slanted/rustvaultvent.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/slanted/vaultvent.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/tall/adobe.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/tall/bunker.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/tall/comb.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/tall/dungeonalt.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/tall/prison.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/ms13/tall/rustvault.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/nc14/enclavewall.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Walls/nc14/ruins.rsi/
-    module: DecorImport
-    reason: Wall sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Doors/FalloutDoors/bunkerdoor.rsi/
-    module: DecorImport
-    reason: Door sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Doors/FalloutDoors/glassbunkerdoor.rsi/
-    module: DecorImport
-    reason: Door sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Doors/FalloutDoors/housecleandoor.rsi/
-    module: DecorImport
-    reason: Door sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Doors/FalloutDoors/irondoor.rsi/
-    module: DecorImport
-    reason: Door sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Doors/FalloutDoors/securedoor_ncr.rsi/
-    module: DecorImport
-    reason: Door sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Structures/Doors/FalloutDoors/vaultdoor.rsi/
-    module: DecorImport
-    reason: Door sprites, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Tiles/roadinnermiddlewithtop.png
-    module: DecorImport
-    reason: Road tile, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Tiles/roadouterturnstop.png
-    module: DecorImport
-    reason: Road tile, ported from Nuclear 14.
-  - path: Resources/Textures/_Nuclear14/Tiles/roadouterturnwtop.png
-    module: DecorImport
-    reason: Road tile, ported from Nuclear 14.
-  - path: Resources/Textures/_Paradise/
-    module: DecorImport
-    reason: Decor sprites, ported from Starlight.
-  - path: Resources/Textures/_RMC14/Decals/
-    module: DecorImport
-    reason: Decor sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Objects/Flora/
-    module: DecorImport
-    reason: Decor sprites, ported from Einstein Engines.
-  - path: Resources/Textures/_RMC14/Objects/Medical/
-    module: DecorImport
-    reason: Decor sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Objects/Misc/Janitorial/cart_wreck.rsi/
-    module: DecorImport
-    reason: Decor sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/Flora/
-    module: DecorImport
-    reason: Decor sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/Furniture/
-    module: DecorImport
-    reason: Decor sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/Wallmounts/Lighting/
-    module: DecorImport
-    reason: Decor sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/hybrisa_misc_props/64x64.rsi/
-    module: DecorImport
-    reason: Decor sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/overhead_neon_signs.rsi/
-    module: DecorImport
-    reason: Neon sign sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/overhead_signs.rsi/
-    module: DecorImport
-    reason: Sign sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Effects/LightMasks/
-    module: DecorImport
-    reason: Light mask for the neon signs, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/Doors/
-    module: DecorImport
-    reason: Door sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/Walls/
-    module: DecorImport
-    reason: Wall sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/research_icechunk.rsi/
-    module: DecorImport
-    reason: Ice chunk sample sprites, ported from RMC-14.
-  - path: Resources/Textures/_DV/Structures/Decoration/lavafountains.rsi/
-    module: DecorImport
-    reason: Lava fountain sprites, ported from Delta-V.
-  - path: Resources/Textures/_RMC14/Structures/obelisk.rsi/
-    module: DecorImport
-    reason: Ancient obelisk sprite, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/mushrooms.rsi/
-    module: DecorImport
-    reason: Mushroom sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Effects/LightMasks/quad_cone.png
-    module: DecorImport
-    reason: Glowshroom light mask, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/Windows/
-    module: DecorImport
-    reason: Window sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/Machines/drop_pod.rsi/
-    module: DecorImport
-    reason: Drop pod sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Structures/fences.rsi/
-    module: DecorImport
-    reason: Fence sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/almayer/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/asphalt/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/corsat/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/escape_pods/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/floors/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/hybrisa/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/kutjevo/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/auto_ice/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/auto_shale/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/beach/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/browndirt_road/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/grass_dirt/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/interior/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/meta.json
-    module: DecorImport
-    reason: Tile sprite attribution, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/red_desert/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/runed_sandstone/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/planet/sorokyne/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/shiva/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_RMC14/Tiles/varadero/
-    module: DecorImport
-    reason: Tile sprites, ported from RMC-14.
-  - path: Resources/Textures/_Shitmed/Structures/Furniture/
-    module: DecorImport
-    reason: Decor sprites, ported from Goob Station.
-  - path: Resources/Textures/_Shitmed/Structures/Tables/
-    module: DecorImport
-    reason: Decor sprites, ported from Goob Station.
-  - path: Resources/Textures/_Starlight/Decals/
-    module: DecorImport
-    reason: Decor sprites, ported from Starlight.
-  - path: Resources/Textures/_Starlight/Structures/Decorations/
-    module: DecorImport
-    reason: Phoron crystal sprite, ported from Starlight.
-  - path: Resources/Textures/_Starlight/Structures/Furniture/
-    module: DecorImport
-    reason: Decor sprites, ported from Starlight.
-  - path: Resources/Textures/_Starlight/Structures/Wallmounts/
-    module: DecorImport
-    reason: Decor sprites, ported from Starlight.
-  - path: Resources/Textures/_Starlight/Structures/Walls/
-    module: DecorImport
-    reason: Wall sprites, ported from Starlight.
-  - path: Resources/Textures/_Starlight/Structures/Doors/
-    module: DecorImport
-    reason: Door sprites, ported from Starlight.
-  - path: Resources/Textures/_Starlight/Structures/wall_fan.rsi/
-    module: DecorImport
-    reason: Wall fan sprite, ported from Starlight.
-  - path: Resources/Textures/_Starlight/Tiles/
-    module: DecorImport
-    reason: Floor tile sprites, ported from Starlight.
-  - path: Resources/Textures/_Starlight/Objects/Tiles/
-    module: DecorImport
-    reason: Floor tile item sprites, ported from Starlight.
-  - path: Resources/Textures/_Starlight/Objects/Decoration/Flora/Abyss/obelisk.rsi/
-    module: DecorImport
-    reason: Abyss obelisk sprites, ported from Starlight.
-  - path: Resources/Textures/_Blimpuf/
-    module: DecorImport
-    reason: Wall and door sprites, ported from Starlight.
-  - path: Resources/Textures/_White/Decals/
-    module: DecorImport
-    reason: Decor sprites, ported from White Dream.
-  - path: Resources/Textures/_White/Objects/Decoration/
-    module: DecorImport
-    reason: Decor sprites, ported from White Dream.
-  - path: Resources/Textures/_White/Tiles/
-    module: DecorImport
-    reason: Floor tile sprites, ported from White Dream.
-  - path: Resources/Textures/_White/Objects/Tiles/
-    module: DecorImport
-    reason: Floor tile item sprites, ported from White Dream.
-  - path: Resources/Textures/_White/Structures/Walls/
-    module: DecorImport
-    reason: Wall sprites, ported from White Dream.
-  - path: Resources/Audio/_CP14/Effects/bone_crush1.ogg
-    module: DecorImport
-    reason: Bone crack sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Effects/bone_crush2.ogg
-    module: DecorImport
-    reason: Bone crack sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Effects/crystal_ding.ogg
-    module: DecorImport
-    reason: Ice block ding sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Effects/crystal_ding2.ogg
-    module: DecorImport
-    reason: Ice block ding sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Effects/Footsteps/bones1.ogg
-    module: DecorImport
-    reason: Bone footstep sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Effects/Footsteps/bones2.ogg
-    module: DecorImport
-    reason: Bone footstep sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Effects/Footsteps/bones3.ogg
-    module: DecorImport
-    reason: Bone footstep sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Effects/Footsteps/bones4.ogg
-    module: DecorImport
-    reason: Bone footstep sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Items/grass_gather.ogg
-    module: DecorImport
-    reason: Grass hit sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Items/grass_gather2.ogg
-    module: DecorImport
-    reason: Grass hit sound, ported from CrystallEdge.
-  - path: Resources/Audio/_CP14/Items/grass_gather3.ogg
-    module: DecorImport
-    reason: Grass hit sound, ported from CrystallEdge.
-  - path: Resources/Audio/_Starlight/Effects/Machinery/electric_buzz.ogg
-    module: DecorImport
-    reason: Bar sign buzz sound, ported from Starlight.
-  - path: Resources/Textures/Structures/Changeling/
-    module: DecorImport
-    reason: Changeling cocoon sprite, ported from Space Wizards.
-  - path: Resources/Textures/_White/Structures/Furniture/
-    module: DecorImport
-    reason: Resin nest sprite, ported from Goob Station.
-  - path: Resources/Audio/Items/Artifact/artifact-force-activated1.ogg
-    module: Xenoarch
-    reason: Artifact forced activation sound from the wizden xenoarch rework.
-  - path: Resources/Audio/_NF/Items/Artifact/
-    module: Xenoarch
-    reason: Frontier's quieter artifact unlock failure sound.
-  - path: Resources/Textures/Objects/Specific/Xenoarchaeology/xeno_artifacts.rsi/
-    module: Xenoarch
-    reason: Artifact activation state from the wizden xenoarch rework.
-  - path: Resources/Maps/Shuttles/ShuttleEvent/incorporation.yml
-    module: Xenoarch
-    reason: Mapped artifacts use XenoArtifact; BiasedArtifact no longer exists.
-  - path: Resources/Maps/elkridge.yml
-    module: Xenoarch
-    reason: Removed the mapped artifact's BiasedArtifact component, which no longer exists.
-  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd.rsi/
-    module: null
-    reason: Licence and credit set as in HardLight 0fc067be74.
-  - path: Resources/Maps/Dungeon/haunted.yml
-    module: null
-    reason: Removed every chasm.
-  - path: Resources/Maps/Dungeon/mineshaft.yml
-    module: null
-    reason: Removed every chasm.
-  - path: Resources/Maps/_Mono/Crocus/jianghui_industrial_0.yml
-    module: null
-    reason: Removed every chasm.
-  - path: Resources/Maps/_Mono/Crocus/jianghui_industrial_1.yml
-    module: null
-    reason: Removed every chasm.
-  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd_combat.rsi/
-    module: null
-    reason: Licence and credit set as in HardLight 0fc067be74.
-  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd_command.rsi/
-    module: null
-    reason: Licence and credit set as in HardLight 0fc067be74.
-  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd_experimental.rsi/
-    module: null
-    reason: Licence and credit set as in HardLight 0fc067be74.
-  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd_sheriff.rsi/
-    module: null
-    reason: Licence and credit set as in HardLight 0fc067be74.
-  - path: LICENSES/MIT.txt
-    module: null
-    reason: Copyright lines for both holders of the MIT code, Space Wizards and New Frontiers.
-  - path: LICENSES/LicenseRef-Starlight.txt
-    module: null
-    reason: Starlight licence text, required by the Starlight-licensed code under _Starlight and _FarHorizons.
-  - path: Resources/Textures/Objects/Fun/rubber_hammer.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/Objects/Misc/chopstick.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/Structures/Power/Generation/Singularity/collector.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/Structures/Power/cell_recharger.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/nuclear_reactor.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_component_cap.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/turbine.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_Goobstation/Objects/Misc/RadioStation/vinyls.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_Goobstation/Objects/Misc/RadioStation/vinylsleeves.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_Goobstation/Objects/Weapons/Guns/Battery/lawbringer.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_Goobstation/Structures/Machines/StationRadio/radiostationrig.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_Goobstation/Structures/Machines/StationRadio/stationradioserver.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_Goobstation/Structures/Machines/StationRadio/tapedeck.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_Goobstation/Structures/Machines/StationRadio/vinylplayer.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_NF/Effects/mobspawn.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
-  - path: Resources/Textures/_NF/Structures/Machines/scrap_processor.rsi/
-    module: null
-    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.

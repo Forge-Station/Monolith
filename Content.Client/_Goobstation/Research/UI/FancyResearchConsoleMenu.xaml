@@ -4,8 +4,8 @@
                       xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls;assembly=Content.Client"
                       xmlns:goob="clr-namespace:Content.Client._Goobstation.Research.UI"
                       Title="{Loc 'research-console-menu-title'}"
-                      SetSize="1260 850"
-                      MinSize="600 400"> <!-- Frontier: add MinSize-->
+                      SetSize="1480 850"
+                      MinSize="980 520"> <!-- Frontier: add MinSize-->
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="True"
                   VerticalExpand="True">
@@ -24,27 +24,77 @@
                 <Button Name="ServerButton" Text="{Loc 'research-console-menu-server-selection-button'}" MinHeight="40"/>
             </BoxContainer>
         </BoxContainer>
-        <ScrollContainer HorizontalExpand="True"
-                         VerticalExpand="False"
-                         Margin="10 0 10 8"
-                         MinHeight="42"
-                         HScrollEnabled="True"
-                         VScrollEnabled="False"
-                         ReturnMeasure="True">
-            <BoxContainer Name="DisciplineTabsContainer"
-                          Orientation="Horizontal"
-                          HorizontalExpand="True"
-                          VerticalAlignment="Center"
-                          SeparationOverride="4"/>
-        </ScrollContainer>
+        <BoxContainer Orientation="Horizontal"
+                      HorizontalExpand="True"
+                      VerticalExpand="False"
+                      Margin="10 0 10 8">
+            <Button Name="TabsToggleButton"
+                    MinHeight="32"
+                    MinWidth="32"
+                    Margin="0 0 6 0"/>
+            <ScrollContainer Name="DisciplineTabsScroll"
+                             HorizontalExpand="True"
+                             VerticalExpand="False"
+                             MinHeight="42"
+                             HScrollEnabled="True"
+                             VScrollEnabled="False"
+                             ReturnMeasure="True">
+                <BoxContainer Name="DisciplineTabsContainer"
+                              Orientation="Horizontal"
+                              HorizontalExpand="True"
+                              VerticalAlignment="Center"
+                              SeparationOverride="4"/>
+            </ScrollContainer>
+        </BoxContainer>
         <BoxContainer Orientation="Horizontal"
                       HorizontalExpand="True"
                       VerticalExpand="True">
+            <BoxContainer Name="SearchColumn"
+                          Orientation="Horizontal"
+                          VerticalExpand="True"
+                          HorizontalExpand="False"
+                          MinWidth="360"
+                          MaxWidth="480"
+                          Margin="10 0 8 10">
+                <Button Name="SearchToggleButton"
+                        VerticalExpand="True"
+                        MinWidth="28"
+                        MaxWidth="28"/>
+                <BoxContainer Name="SearchBody"
+                              Orientation="Vertical"
+                              VerticalExpand="True"
+                              HorizontalExpand="True"
+                              Margin="6 0 0 0">
+                <LineEdit Name="TechnologySearch"
+                          PlaceHolder="{Loc 'research-console-search-placeholder'}"
+                          HorizontalExpand="True"/>
+                <PanelContainer Name="SearchResultsPanel"
+                                VerticalExpand="True"
+                                HorizontalExpand="True"
+                                Margin="0 4 0 0">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                    </PanelContainer.PanelOverride>
+                    <ScrollContainer Name="SearchResultsScroll"
+                                     VerticalExpand="True"
+                                     HorizontalExpand="True"
+                                     HScrollEnabled="False"
+                                     VScrollEnabled="True">
+                        <BoxContainer Name="SearchResults"
+                                      Orientation="Vertical"
+                                      HorizontalExpand="True"/>
+                    </ScrollContainer>
+                </PanelContainer>
+                </BoxContainer>
+            </BoxContainer>
             <BoxContainer Orientation="Vertical"
                           VerticalExpand="True"
                           HorizontalExpand="True"
                           SizeFlagsStretchRatio="3"
                           Margin="0 0 0 10">
+                <RichTextLabel Name="PathLabel"
+                               Margin="0 0 8 4"
+                               HorizontalExpand="True"/>
                 <PanelContainer Name="ResearchesContainer" VerticalExpand="True" HorizontalExpand="True">
                     <PanelContainer.PanelOverride>
                         <gfx:StyleBoxFlat BackgroundColor="#222226FF" />

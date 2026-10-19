@@ -58,6 +58,16 @@
     range: 5
     sound:
       path: /Audio/Ambience/Objects/server_fans.ogg
+  # Forge-change: equipment authorization console on the research server
+  - type: ActivatableUI
+    key: enum.ResearchServerLinkUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ResearchServerLinkUiKey.Key:
+        type: ResearchServerLinkBoundUserInterface
+  - type: AccessReader
+  - type: ShuttleConsoleLock # Forge-change: same ship lock as shuttle and gunnery consoles
   - type: GuideHelp
     guides:
     - Science
@@ -162,6 +172,7 @@
   id: ResearchAndDevelopmentServerDebug
   parent: BaseRdServerFaction
   name: debug R&D server
+  suffix: Debug
   description: Contains the collective knowledge of Everyone. Damn
   components:
   - type: TechnologyDatabase

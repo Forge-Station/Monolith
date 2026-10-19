@@ -1,5 +1,6 @@
 - type: entity
   id: ImmovableRod
+  suffix: DO NOT MAP
   name: immovable rod
   description: You can sense that it's hungry. That's usually a bad sign.
   components:

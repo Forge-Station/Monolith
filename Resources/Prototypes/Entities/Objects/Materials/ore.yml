@@ -9,6 +9,7 @@
   - type: Item
     sprite: Objects/Materials/ore.rsi
     size: Normal
+  - type: BulkMaterial # Forge-change
   - type: Tag
     tags:
     - Ore

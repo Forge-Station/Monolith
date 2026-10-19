@@ -7793,7 +7793,7 @@ entities:
     - type: Transform
       pos: 4.5,-17.5
       parent: 1
-- proto: HandheldHealthAnalyzerUnpowered
+- proto: HandheldHealthAnalyzer
   entities:
   - uid: 617
     components:

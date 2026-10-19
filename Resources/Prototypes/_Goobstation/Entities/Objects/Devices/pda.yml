@@ -46,7 +46,9 @@
     - NewsReaderCartridge
     - LogProbeCartridge
     - MedTekCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
 
 - type: entity
   parent: NavyCaptainPDA

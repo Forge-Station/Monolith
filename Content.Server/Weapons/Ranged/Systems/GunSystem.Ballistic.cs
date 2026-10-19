@@ -13,8 +13,10 @@ public sealed partial class GunSystem
     {
         if (!Resolve(ent, ref ent.Comp))
             return;
+
+        // Keep Entities and the ballistic-ammo container in sync (avoids stale UID PVS spam).
         ent.Comp.Entities.Add(ammoEntity);
-        DirtyField(ent, ent.Comp, nameof(BallisticAmmoProviderComponent.Entities));
+        Containers.Insert(ammoEntity, ent.Comp.Container);
     }
 
     protected override void Cycle(EntityUid uid, BallisticAmmoProviderComponent component, MapCoordinates coordinates)
@@ -22,15 +24,10 @@ public sealed partial class GunSystem
         EntityUid? ent = null;
 
         // Forge-Change-start: drop stale ballistic entities before cycle (Drake seismic launcher).
-        var removedInvalid = false;
         while (component.Entities.Count > 0 && !Exists(component.Entities[^1]))
         {
             component.Entities.RemoveAt(component.Entities.Count - 1);
-            removedInvalid = true;
         }
-
-        if (removedInvalid)
-            DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
         // Forge-Change-end
 
         // TODO: Combine with TakeAmmo
@@ -38,7 +35,6 @@ public sealed partial class GunSystem
         {
             var existing = component.Entities[^1];
             component.Entities.RemoveAt(component.Entities.Count - 1);
-            DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
 
             Containers.Remove(existing, component.Container);
 			ent = existing; //Mono: Sound bugfix

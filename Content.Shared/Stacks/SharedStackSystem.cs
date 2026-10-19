@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._Forge.Materials;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -123,10 +124,17 @@ namespace Content.Shared.Stacks
             if (string.IsNullOrEmpty(recipientStack.StackTypeId) || !recipientStack.StackTypeId.Equals(donorStack.StackTypeId))
                 return false;
 
-            transferred = Math.Min(donorStack.Count, GetAvailableSpace(recipientStack));
-            SetCount(donor, donorStack.Count - transferred, donorStack);
+            // A negative gap means this stack is already over its cap. Do not apply it:
+            // that subtracts from the held stack and deletes it.
+            var available = GetAvailableSpace(recipientStack);
+            if (available <= 0 || donorStack.Count <= 0)
+                return false;
+
+            transferred = Math.Min(donorStack.Count, available);
+            // Credit the survivor first. Zeroing the donor first drops the material if the second update fails.
             SetCount(recipient, recipientStack.Count + transferred, recipientStack);
-            return transferred > 0;
+            SetCount(donor, donorStack.Count - transferred, donorStack);
+            return true;
         }
 
         /// <summary>
@@ -310,15 +318,21 @@ namespace Content.Shared.Stacks
             if (component == null)
                 return 1;
 
-            if (component.MaxCountOverride != null)
-                return component.MaxCountOverride.Value;
-
-            if (string.IsNullOrEmpty(component.StackTypeId))
+            if (string.IsNullOrEmpty(component.StackTypeId) && component.MaxCountOverride == null)
                 return 1;
 
-            var stackProto = _prototype.Index<StackPrototype>(component.StackTypeId);
+            var cap = component.MaxCountOverride
+                ?? (string.IsNullOrEmpty(component.StackTypeId)
+                    ? 1
+                    : _prototype.Index<StackPrototype>(component.StackTypeId).MaxCount ?? int.MaxValue);
 
-            return stackProto.MaxCount ?? int.MaxValue;
+            // Bulk ore and sheets stack past the prototype cap. Read it here so the cap is not
+            // copied onto the component during init (that fails the uninitialized-map save test).
+            if (component.Owner.IsValid()
+                && TryComp<BulkMaterialComponent>(component.Owner, out var bulk))
+                cap = Math.Max(cap, bulk.MaxCount);
+
+            return cap;
         }
 
         /// <summary>
@@ -353,6 +367,11 @@ namespace Content.Shared.Stacks
                 return false;
 
             if (insertStack.StackTypeId != targetStack.StackTypeId)
+                return false;
+
+            // Count 0 queues the donor for deletion without removing it until the end of the tick.
+            // Filling that donor again would move the whole pile onto an entity that is about to be deleted.
+            if (EntityManager.IsQueuedForDeletion(targetEnt))
                 return false;
 
             var available = GetAvailableSpace(targetStack);

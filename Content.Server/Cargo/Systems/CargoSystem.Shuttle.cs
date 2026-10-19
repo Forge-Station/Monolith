@@ -81,7 +81,7 @@ public sealed partial class CargoSystem
         }
 
         // Frontier: per-object market modification
-        GetPalletGoods(uid, gridUid, out var toSell, out var amount, out var noModAmount, out var blackMarketTaxAmount, out var frontierTaxAmount, out var nfsdTaxAmount, out var medicalTaxAmount);
+        GetPalletGoods(uid, gridUid, out var toSell, out var amount, out var noModAmount, out var frontierTaxAmount, out var nfsdTaxAmount, out var medicalTaxAmount); // Forge-change-del out var
 
         amount += noModAmount;
         // End Frontier
@@ -286,11 +286,11 @@ public sealed partial class CargoSystem
 
     #region Station
 
-    private bool SellPallets(Entity<CargoPalletConsoleComponent> consoleUid, EntityUid gridUid, out double amount, out double noMultiplierAmount, out double blackMarketTaxAmount, out double frontierTaxAmount, out double nfsdTaxAmount, out double medicalTaxAmount) // Frontier: first arg to Entity, add noMultiplierAmount
+    private bool SellPallets(Entity<CargoPalletConsoleComponent> consoleUid, EntityUid gridUid, out double amount, out double noMultiplierAmount, out double frontierTaxAmount, out double nfsdTaxAmount, out double medicalTaxAmount) // Frontier: first arg to Entity, add noMultiplierAmount // Forge-del: out double blackMarketTaxAmount,
     {
-        GetPalletGoods(consoleUid, gridUid, out var toSell, out amount, out noMultiplierAmount, out blackMarketTaxAmount, out frontierTaxAmount, out nfsdTaxAmount, out medicalTaxAmount); // Frontier: add noMultiplierAmount
+        GetPalletGoods(consoleUid, gridUid, out var toSell, out amount, out noMultiplierAmount, out frontierTaxAmount, out nfsdTaxAmount, out medicalTaxAmount); // Frontier: add noMultiplierAmount // Forge-del: out blackMarketTaxAmount,
 
-        Log.Debug($"Cargo sold {toSell.Count} entities for {amount} (plus {noMultiplierAmount} without mods). (Taxes: Black Market: {blackMarketTaxAmount}, CO: {frontierTaxAmount}, TSFMC: {nfsdTaxAmount}, MD: {medicalTaxAmount})"); // Frontier: add section in parentheses
+        Log.Debug($"Cargo sold {toSell.Count} entities for {amount} (plus {noMultiplierAmount} without mods). (Taxes: CO: {frontierTaxAmount}, TSFMC: {nfsdTaxAmount}, MD: {medicalTaxAmount})"); // Frontier: add section in parentheses // Forge-del: Black Market: {blackMarketTaxAmount},
 
         if (toSell.Count == 0)
             return false;
@@ -341,11 +341,11 @@ public sealed partial class CargoSystem
         }
     }
 
-    private void GetPalletGoods(Entity<CargoPalletConsoleComponent> consoleUid, EntityUid gridUid, out HashSet<EntityUid> toSell, out double amount, out double noMultiplierAmount, out double blackMarketTaxAmount, out double frontierTaxAmount, out double nfsdTaxAmount, out double medicalTaxAmount) // Frontier: first arg to Entity, add noMultiplierAmount
+    private void GetPalletGoods(Entity<CargoPalletConsoleComponent> consoleUid, EntityUid gridUid, out HashSet<EntityUid> toSell, out double amount, out double noMultiplierAmount, out double frontierTaxAmount, out double nfsdTaxAmount, out double medicalTaxAmount) // Frontier: first arg to Entity, add noMultiplierAmount // Forge-del: out double blackMarketTaxAmount,
     {
         amount = 0;
         noMultiplierAmount = 0;
-        blackMarketTaxAmount = 0;
+        // blackMarketTaxAmount = 0; /// Forge-change-del
         frontierTaxAmount = 0;
         nfsdTaxAmount = 0;
         medicalTaxAmount = 0;
@@ -424,9 +424,11 @@ public sealed partial class CargoSystem
                     {
                         switch (account)
                         {
-                            case SectorBankAccount.BlackMarket:
-                                blackMarketTaxAmount += price * taxCoeff;
-                                break;
+                            // Forge-change-del-start
+                            // case SectorBankAccount.BlackMarket:
+                            //     blackMarketTaxAmount += price * taxCoeff;
+                            //     break;
+                            // Forge-change-del-end
                             case SectorBankAccount.Frontier:
                                 frontierTaxAmount += price * taxCoeff;
                                 break;
@@ -484,26 +486,30 @@ public sealed partial class CargoSystem
             return;
         }
 
-        if (!SellPallets((uid, component), gridUid, out var price, out var noMultiplierPrice, out var blackMarketTaxAmount, out var frontierTaxAmount, out var nfsdTaxAmount, out var medicalTaxAmount)) // Frontier: convert first arg to Entity, add noMultiplierPrice
+        if (!SellPallets((uid, component), gridUid, out var price, out var noMultiplierPrice, out var frontierTaxAmount, out var nfsdTaxAmount, out var medicalTaxAmount)) // Frontier: convert first arg to Entity, add noMultiplierPrice // Forge-del: out var blackMarketTaxAmount,
             return;
 
         price += noMultiplierPrice;
 
         // End Frontier: market modifiers & immune objects
         // Mono Begin
-        if (blackMarketTaxAmount > 0)
-            _bank.TrySectorDeposit(SectorBankAccount.BlackMarket, (int)blackMarketTaxAmount, LedgerEntryType.BlackMarketSales);
+        // Forge-change-del-start
+        // if (blackMarketTaxAmount > 0)
+        //     _bank.TrySectorDeposit(SectorBankAccount.BlackMarket, (int)blackMarketTaxAmount, LedgerEntryType.BlackMarketSales);
+        // Forge-change-del-end
         if (frontierTaxAmount > 0)
             _bank.TrySectorDeposit(SectorBankAccount.Frontier, (int)frontierTaxAmount, LedgerEntryType.ColonialOutpostSales);
         if (nfsdTaxAmount > 0)
             _bank.TrySectorDeposit(SectorBankAccount.Nfsd, (int)nfsdTaxAmount, LedgerEntryType.TSFMCSales);
         if (medicalTaxAmount > 0)
             _bank.TrySectorDeposit(SectorBankAccount.Medical, (int)medicalTaxAmount, LedgerEntryType.MedicalSales);
-        if (blackMarketTaxAmount < 0)
-        {
-            blackMarketTaxAmount = -blackMarketTaxAmount;
-            _bank.TrySectorWithdraw(SectorBankAccount.BlackMarket, (int)blackMarketTaxAmount, LedgerEntryType.BlackMarketPenalties);
-        }
+        // Forge-change-del-start
+        // if (blackMarketTaxAmount < 0)
+        // {
+        //     blackMarketTaxAmount = -blackMarketTaxAmount;
+        //     _bank.TrySectorWithdraw(SectorBankAccount.BlackMarket, (int)blackMarketTaxAmount, LedgerEntryType.BlackMarketPenalties);
+        // }
+        // Forge-change-del-end
         if (frontierTaxAmount < 0)
         {
             frontierTaxAmount = -frontierTaxAmount;

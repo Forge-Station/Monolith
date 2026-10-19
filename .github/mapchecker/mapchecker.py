@@ -28,7 +28,9 @@ if __name__ == "__main__":
             "Resources/Prototypes/Nyanotrasen/Entities",  # Nyanotrasen
             "Resources/Prototypes/_DV/Entities",  # DeltaV
             "Resources/Prototypes/_Mono/Entities",  # Monolith
-            "Resources/Prototypes/_Goob/Entities",  # Goob
+            "Resources/Prototypes/_Goobstation/Entities",  # Goob
+            "Resources/Prototypes/_Forge/Entities", # Forge
+            "Resources/Prototypes/_RMC14/Entities", #RMC14
         ]
     )
     parser.add_argument(
@@ -39,12 +41,15 @@ if __name__ == "__main__":
         nargs="+",  # We accept multiple pathspecs, but need at least one.
         required=False,
         default=[
-            "Resources/Prototypes/_NF/Maps/Outpost",  # Colonial Outpost
+            #"Resources/Prototypes/_NF/Maps/Outpost",  # Colonial Outpost
             "Resources/Prototypes/_NF/PointsOfInterest",  # Points of interest
-            "Resources/Prototypes/_NF/Shipyard",  # Shipyard ships.
-            "Resources/Prototypes/_Mono/Outpost",  # Colonial Outpost
+            #"Resources/Prototypes/_NF/Shipyard",  # Shipyard ships.
+            #"Resources/Prototypes/_Mono/Outpost",  # Colonial Outpost
             "Resources/Prototypes/_Mono/PointsOfInterest",  # Points of interest
             "Resources/Prototypes/_Mono/Shipyard",  # Shipyard ships.
+            "Resources/Prototypes/_Forge/Outpost",  # Colonial Outpost
+            "Resources/Prototypes/_Forge/PointsOflnterest",  # Points of interest
+            "Resources/Prototypes/_Forge/Shipyard",  # Shipyard ships.
         ]
     )
     parser.add_argument(
@@ -99,7 +104,7 @@ if __name__ == "__main__":
     if os.path.isfile(args.whitelist) is False:
         logger.warning(f"Whitelist '{args.whitelist}' is not a file. Continuing without it.")
     else:
-        with open(args.whitelist, "r") as whitelist:
+        with open(args.whitelist, "r", encoding="utf-8-sig") as whitelist:
             file_data = yaml.load(whitelist, Loader=YamlLoaderIgnoringTags)
             if file_data is None:
                 logger.warning(f"Whitelist '{args.whitelist}' is empty. Continuing without it.")
@@ -123,7 +128,7 @@ if __name__ == "__main__":
 
     # Collect all prototypes and sort into the collectors.
     for proto_file in proto_paths:
-        with open(proto_file, "r") as proto:
+        with open(proto_file, "r", encoding="utf-8-sig") as proto:
             logger.debug(f"Reading prototype file '{proto_file}'.")
             file_data = yaml.load(proto, Loader=YamlLoaderIgnoringTags)
             if file_data is None:
@@ -160,7 +165,7 @@ if __name__ == "__main__":
 
     # Check all maps for illegal prototypes.
     for map_proto in map_proto_paths:
-        with open(map_proto, "r") as map:
+        with open(map_proto, "r", encoding="utf-8-sig") as map:
             file_data = yaml.load(map, Loader=YamlLoaderIgnoringTags)
             if file_data is None:
                 logger.warning(f"Map prototype '{map_proto}' is empty. Continuing without it.")
@@ -225,7 +230,7 @@ if __name__ == "__main__":
             # Now we check the map file for these illegal prototypes. I'm being lazy here and just matching against the
             # entire file contents, without loading YAML at all. This is fine, because this job only runs after
             # Content.YamlLinter runs. TODO: It does not.
-            with open("Resources" + map_file_location, "r") as map_file:
+            with open("Resources" + map_file_location, "r", encoding="utf-8-sig") as map_file:
                 map_file_contents = map_file.read()
                 for check in illegal_prototypes:
                     # Wrap in 'proto: ' and '\n' here, to ensure we only match actual prototypes, not 'part of word'

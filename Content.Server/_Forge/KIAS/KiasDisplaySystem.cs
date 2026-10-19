@@ -130,6 +130,7 @@ public sealed partial class KiasDisplaySystem : EntitySystem
             if (runtime.Core is { } core && TryComp<KiasProtocolComponent>(core, out var protocols))
             {
                 state.Alert = Loc.GetString($"kias-alert-{protocols.Alert.ToString().ToLowerInvariant()}");
+                state.CrewResponsePending = protocols.PendingMaydayReason.Length > 0;
             }
         }
         if (TryComp<KiasRecorderComponent>(display, out var recorder))

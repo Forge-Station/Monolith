@@ -82,7 +82,9 @@ public sealed partial class KiasSystem : EntitySystem
     private void OnDeviceAnchor(Entity<KiasDeviceComponent> ent, ref AnchorStateChangedEvent args) => RegisterDevice(ent);
     private void OnDevicePower(Entity<KiasDeviceComponent> ent, ref PowerChangedEvent args)
     {
-        if (!args.Powered && ent.Comp.Status == KiasDeviceStatus.Online && ent.Comp.RegisteredGrid is { } grid && _active.Contains(grid))
+        if (!args.Powered && !HasComp<KiasIntegratedComponent>(ent)
+            && ent.Comp.Role is KiasDeviceRole.Core or KiasDeviceRole.Controller
+            && ent.Comp.Status == KiasDeviceStatus.Online && ent.Comp.RegisteredGrid is { } grid && _active.Contains(grid))
         {
             var message = Loc.GetString("kias-device-power-lost", ("device", Name(ent)));
             EntityManager.System<KiasSafetySystem>().Publish(grid, message, true, announce: false, key: $"power-lost:{ent.Owner}");

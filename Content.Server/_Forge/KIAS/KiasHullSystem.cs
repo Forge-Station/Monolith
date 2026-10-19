@@ -11,12 +11,17 @@ namespace Content.Server._Forge.KIAS;
 
 public sealed class KiasHullSystem : EntitySystem
 {
+    private const int MaxNativeDamageSourcesPerGrid = 32;
+    private static readonly TimeSpan NativeDamageBatchInterval = TimeSpan.FromSeconds(0.25);
     [Dependency] private KiasSystem _kias = default!;
     [Dependency] private KiasSafetySystem _safety = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     private readonly Dictionary<EntityUid, Dictionary<(string Location, byte Kind), float>> _pending = new();
     private readonly Dictionary<EntityUid, TimeSpan> _due = new();
+    private readonly Dictionary<EntityUid, Dictionary<EntityUid, float>> _nativeDamage = new();
+    private readonly Dictionary<EntityUid, float> _nativeDamageOverflow = new();
+    private readonly Dictionary<EntityUid, TimeSpan> _nativeDamageDue = new();
     private readonly Dictionary<EntityUid, Dictionary<EntityUid, TimeSpan>> _collisions = new();
     private TimeSpan _nextFlush;
 
@@ -61,8 +66,20 @@ public sealed class KiasHullSystem : EntitySystem
         var positive = FixedPoint2.Zero;
         foreach (var value in delta.DamageDict.Values)
             if (value > FixedPoint2.Zero) positive += value;
-        var damage = new KiasHullDamageEvent(grid, uid, (float) positive);
-        RaiseLocalEvent(grid, ref damage, true);
+        if (positive <= FixedPoint2.Zero || !HasMonitor<KiasIntegrityMonitorComponent>(grid)) return;
+
+        if (!_nativeDamage.TryGetValue(grid, out var sources))
+        {
+            _nativeDamage.Add(grid, sources = new());
+            _nativeDamageDue[grid] = _timing.CurTime + NativeDamageBatchInterval;
+        }
+
+        if (sources.ContainsKey(uid))
+            sources[uid] += (float) positive;
+        else if (sources.Count < MaxNativeDamageSourcesPerGrid)
+            sources.Add(uid, (float) positive);
+        else
+            _nativeDamageOverflow[grid] = _nativeDamageOverflow.GetValueOrDefault(grid) + (float) positive;
     }
 
     private void OnImpact(ref KiasHullImpactEvent args)
@@ -124,6 +141,9 @@ public sealed class KiasHullSystem : EntitySystem
             return;
         _pending.Remove(args.Grid);
         _due.Remove(args.Grid);
+        _nativeDamage.Remove(args.Grid);
+        _nativeDamageOverflow.Remove(args.Grid);
+        _nativeDamageDue.Remove(args.Grid);
         _collisions.Remove(args.Grid);
     }
 
@@ -131,11 +151,39 @@ public sealed class KiasHullSystem : EntitySystem
     {
         _pending.Remove(args.EntityUid);
         _due.Remove(args.EntityUid);
+        _nativeDamage.Remove(args.EntityUid);
+        _nativeDamageOverflow.Remove(args.EntityUid);
+        _nativeDamageDue.Remove(args.EntityUid);
         _collisions.Remove(args.EntityUid);
     }
 
     public override void Update(float frameTime)
     {
+        foreach (var grid in _nativeDamageDue.Where(p => p.Value <= _timing.CurTime).Select(p => p.Key).ToArray())
+        {
+            _nativeDamageDue.Remove(grid);
+            if (!_nativeDamage.Remove(grid, out var sources))
+                continue;
+
+            var overflow = _nativeDamageOverflow.Remove(grid, out var pendingOverflow) ? pendingOverflow : 0;
+            foreach (var (source, damage) in sources)
+            {
+                if (TerminatingOrDeleted(source))
+                {
+                    overflow += damage;
+                    continue;
+                }
+                var ev = new KiasHullDamageEvent(grid, source, damage);
+                RaiseLocalEvent(grid, ref ev, true);
+            }
+
+            if (overflow > 0)
+            {
+                var ev = new KiasHullDamageEvent(grid, grid, overflow);
+                RaiseLocalEvent(grid, ref ev, true);
+            }
+        }
+
         if (_due.Count == 0 || _timing.CurTime < _nextFlush)
             return;
         foreach (var grid in _due.Where(p => p.Value <= _timing.CurTime).Select(p => p.Key).ToArray())

@@ -13,6 +13,9 @@ using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Shared.Timing;
+using Robust.Shared.Map.Components;
+using Content.Server.Shuttles.Components;
+using Robust.Shared.Map;
 
 namespace Content.Server._Forge.KIAS;
 
@@ -28,6 +31,8 @@ public sealed class KiasProtocolSystem : EntitySystem
         protocols.Alert = KiasAlert.Normal;
         protocols.MaydayReason = string.Empty;
         protocols.CriticalLatched = false;
+        protocols.CriticalSince = protocols.CriticalRecoverySince = TimeSpan.Zero;
+        AcknowledgeCrew(grid);
         _shuttles.SetKiasMayday(grid, false);
         if (Comp<KiasGridComponent>(grid).Core is { } core)
             EntityManager.System<KiasControllerIoSystem>().Emit(core, "Automation", "AlertReset", KiasGraphValue.Pulse);
@@ -64,6 +69,12 @@ public sealed class KiasProtocolSystem : EntitySystem
         SubscribeLocalEvent<KiasAvailabilityChangedEvent>(OnAvailability);
         SubscribeLocalEvent<KiasTopologyChangedEvent>(OnTopology);
         SubscribeLocalEvent<GridRemovalEvent>(OnGridRemoved);
+        SubscribeLocalEvent<TileChangedEvent>(OnTilesChanged);
+    }
+
+    private void OnTilesChanged(ref TileChangedEvent args)
+    {
+        if (TryProtocol(args.Entity.Owner, out var protocols)) protocols.HullSampled = false;
     }
 
     private void OnImpact(ref KiasHullImpactEvent args)
@@ -83,7 +94,36 @@ public sealed class KiasProtocolSystem : EntitySystem
         _atmosAlarms.RemoveWhere(uid => TerminatingOrDeleted(uid) || Transform(uid).GridUid == grid);
     }
 
-    private void OnTopology(ref KiasTopologyChangedEvent args) => ReconcileAlarms(args.Grid);
+    private void OnTopology(ref KiasTopologyChangedEvent args)
+    {
+        ReconcileAlarms(args.Grid);
+        if (TryProtocol(args.Grid, out var protocols)) SampleHull(args.Grid, protocols);
+    }
+
+    private void SampleHull(EntityUid grid, KiasProtocolComponent protocols)
+    {
+        if (TryComp<ShuttleComponent>(grid, out var shuttle) && shuttle.LinearThrust.Any(thrust => thrust > 0))
+            protocols.HadPropulsion = true;
+        if (!TryComp<MapGridComponent>(grid, out var map)
+            || protocols.HullSampled && protocols.HullTileRevision == map.LastTileModifiedTick.Value) return;
+        protocols.HullSampled = true;
+        protocols.HullTileRevision = map.LastTileModifiedTick.Value;
+        var count = EntityManager.System<SharedMapSystem>().GetFilledTileCount((grid, map));
+        protocols.HullTiles = count;
+        protocols.HullBaselineTiles = Math.Max(protocols.HullBaselineTiles, count);
+    }
+
+    public bool HasCriticalHullFailure(EntityUid grid)
+    {
+        if (!TryProtocol(grid, out var protocols)) return false;
+        SampleHull(grid, protocols);
+        if (protocols.DamageEvidenceUntil <= _timing.CurTime && !protocols.CriticalLatched) return false;
+        var hullLoss = protocols.HullBaselineTiles > 0
+            && protocols.HullBaselineTiles - protocols.HullTiles >= protocols.HullBaselineTiles * Math.Clamp(protocols.CriticalHullLossFraction, 0.1f, 1);
+        var disabled = protocols.HadPropulsion && (!TryComp<ShuttleComponent>(grid, out var shuttle)
+            || !shuttle.Enabled || !shuttle.LinearThrust.Any(thrust => thrust > 0));
+        return hullLoss || disabled;
+    }
 
     private void ReconcileAlarms(EntityUid grid)
     {
@@ -119,6 +159,7 @@ public sealed class KiasProtocolSystem : EntitySystem
 
     private bool HasDistress(EntityUid grid, KiasProtocolComponent protocols) => protocols.DamageEvidenceUntil > _timing.CurTime
         || protocols.CrewDistressUntil > _timing.CurTime || EntityManager.System<KiasPowerSystem>().HasDeficit(grid)
+        || protocols.CriticalLatched && (HasCriticalHullFailure(grid) || _crew.CrewUnavailable(grid))
         || _fireAlarms.Any(alarm => !TerminatingOrDeleted(alarm) && Transform(alarm).GridUid == grid);
 
     private EntityUid Antenna(EntityUid grid) => TryComp<KiasGridComponent>(grid, out var runtime)
@@ -154,16 +195,37 @@ public sealed class KiasProtocolSystem : EntitySystem
                     Trigger(grid, KiasTrigger.CrewUnavailable);
             }
             else protocols.CrewUnavailableSince = TimeSpan.Zero;
-            var critical = protocols.DamageEvidenceUntil > _timing.CurTime &&
-                (EntityManager.System<KiasPowerSystem>().HasDeficit(grid) || protocols.CrewUnavailableSince != TimeSpan.Zero
-                    && _timing.CurTime - protocols.CrewUnavailableSince >= TimeSpan.FromSeconds(30));
-            if (critical && !protocols.CriticalLatched) Trigger(grid, KiasTrigger.VesselCritical);
-            protocols.CriticalLatched = critical;
+            var critical = HasCriticalHullFailure(grid) || distress
+                && (protocols.CrewDistressUntil > _timing.CurTime || protocols.CriticalLatched)
+                && protocols.CrewUnavailableSince != TimeSpan.Zero
+                && _timing.CurTime - protocols.CrewUnavailableSince >= TimeSpan.FromSeconds(30);
+            if (critical)
+            {
+                protocols.CriticalRecoverySince = TimeSpan.Zero;
+                if (protocols.CriticalSince == TimeSpan.Zero) protocols.CriticalSince = _timing.CurTime;
+                if (!protocols.CriticalLatched && _timing.CurTime - protocols.CriticalSince >= TimeSpan.FromSeconds(Math.Clamp(protocols.CriticalConfirmationSeconds, 1, 120)))
+                {
+                    protocols.CriticalLatched = true;
+                    Trigger(grid, KiasTrigger.VesselCritical);
+                }
+            }
+            else
+            {
+                protocols.CriticalSince = TimeSpan.Zero;
+                if (protocols.CriticalRecoverySince == TimeSpan.Zero) protocols.CriticalRecoverySince = _timing.CurTime;
+                if (_timing.CurTime - protocols.CriticalRecoverySince >= TimeSpan.FromSeconds(30)) protocols.CriticalLatched = false;
+            }
+            if (protocols.PendingMaydayReason.Length > 0)
+            {
+                if (!distress) CancelMayday(protocols);
+                else if (_timing.CurTime >= protocols.CrewResponseDeadline) SendMayday(grid, protocols);
+            }
             if (protocols.MaydayReason.Length > 0)
             {
                 _shuttles.SetKiasMayday(grid, Antenna(grid).Valid);
             }
-            if (!distress && protocols.MaydayReason.Length == 0) _emergencies.Remove(grid);
+            if (!distress && protocols.MaydayReason.Length == 0 && !protocols.CriticalLatched && protocols.PendingMaydayReason.Length == 0)
+                _emergencies.Remove(grid);
         }
     }
 
@@ -210,7 +272,6 @@ public sealed class KiasProtocolSystem : EntitySystem
             protocols.RecentDamage = 0;
             protocols.DamageWindow = _timing.CurTime + TimeSpan.FromSeconds(5);
         }
-        var previous = protocols.RecentDamage;
         protocols.RecentDamage += args.Damage;
         if (protocols.RecentDamage >= protocols.CriticalDamageThreshold)
         {
@@ -272,7 +333,11 @@ public sealed class KiasProtocolSystem : EntitySystem
 
     public void Trigger(EntityUid grid, KiasTrigger trigger, KiasContactDisposition? disposition = null, float value = 0, string? message = null, string? eventKey = null)
     {
-        if (!TryProtocol(grid, out _) || !_executing.Add(grid)) return;
+        if (!TryProtocol(grid, out _)) return;
+        if (trigger is KiasTrigger.HullDamage or KiasTrigger.HullImpact or KiasTrigger.Proximity or KiasTrigger.PowerLost
+            or KiasTrigger.CrewUnavailable or KiasTrigger.VesselCritical)
+            eventKey = trigger.ToString();
+        if (!_executing.Add(grid)) return;
         try
         {
             if (Comp<KiasGridComponent>(grid).Core is not { } source) return;
@@ -290,7 +355,8 @@ public sealed class KiasProtocolSystem : EntitySystem
     public bool Mayday(EntityUid grid, string reason)
     {
         if (!_kias.HasRole(grid, KiasDeviceRole.Navigation) || !TryProtocol(grid, out var protocols)
-            || protocols.MaydayAfter > _timing.CurTime)
+            || protocols.MaydayAfter > _timing.CurTime || protocols.CrewAcknowledgedUntil > _timing.CurTime
+            || protocols.PendingMaydayReason.Length > 0 || !HasDistress(grid, protocols))
             return false;
         var runtime = Comp<KiasGridComponent>(grid);
         if (runtime.Testing)
@@ -298,14 +364,45 @@ public sealed class KiasProtocolSystem : EntitySystem
         var source = Antenna(grid);
         if (!source.Valid)
             return false;
-        protocols.MaydayReason = reason[..Math.Min(reason.Length, 256)];
-        protocols.MaydayAfter = _timing.CurTime + TimeSpan.FromSeconds(180);
+        protocols.PendingMaydayReason = string.IsNullOrWhiteSpace(reason) ? Loc.GetString("kias-trigger-vesselcritical") : reason[..Math.Min(reason.Length, 256)];
+        protocols.CrewResponseDeadline = _timing.CurTime + TimeSpan.FromSeconds(Math.Clamp(protocols.CrewResponseSeconds, 10, 120));
         _emergencies.Add(grid, _timing.CurTime);
-        var message = Loc.GetString("kias-mayday", ("ship", Name(grid)), ("reason", reason[..Math.Min(reason.Length, 256)]));
+        _safety.Publish(grid, Loc.GetString("kias-crew-response-request", ("seconds", Math.Clamp(protocols.CrewResponseSeconds, 10, 120))),
+            true, key: "crew-response-request", channel: KiasAudioChannel.Emergency);
+        return true;
+    }
+
+    private static void CancelMayday(KiasProtocolComponent protocols)
+    {
+        protocols.PendingMaydayReason = string.Empty;
+        protocols.CrewResponseDeadline = TimeSpan.Zero;
+    }
+
+    public bool AcknowledgeCrew(EntityUid grid)
+    {
+        if (!TryProtocol(grid, out var protocols)) return false;
+        CancelMayday(protocols);
+        protocols.CrewAcknowledgedUntil = _timing.CurTime + TimeSpan.FromSeconds(180);
+        protocols.MaydayReason = string.Empty;
+        _shuttles.SetKiasMayday(grid, false);
+        _display.RefreshOpen(grid);
+        return true;
+    }
+
+    private void SendMayday(EntityUid grid, KiasProtocolComponent protocols)
+    {
+        var source = Antenna(grid);
+        if (!source.Valid || !_kias.HasRole(grid, KiasDeviceRole.Navigation)) { CancelMayday(protocols); return; }
+        protocols.MaydayReason = protocols.PendingMaydayReason;
+        CancelMayday(protocols);
+        protocols.MaydayAfter = _timing.CurTime + TimeSpan.FromSeconds(180);
+        var position = EntityManager.System<SharedTransformSystem>().GetMapCoordinates(grid);
+        var message = Loc.GetString("kias-mayday", ("ship", Name(grid)), ("reason", protocols.MaydayReason),
+            ("x", MathF.Round(position.X)), ("y", MathF.Round(position.Y)),
+            ("map", Transform(grid).MapUid is { } mapUid ? Name(mapUid) : position.MapId.ToString()));
         _radio.SendRadioMessage(source, message, "Traffic", source);
         _shuttles.SetKiasMayday(grid, true);
         _safety.Publish(grid, message, true);
-        return true;
     }
 
     private void OnAvailability(ref KiasAvailabilityChangedEvent args)
@@ -331,6 +428,8 @@ public sealed class KiasProtocolSystem : EntitySystem
                 protocols.DamageEvidenceUntil = TimeSpan.Zero;
                 protocols.CrewDistressUntil = TimeSpan.Zero;
                 protocols.CriticalLatched = false;
+                protocols.CriticalSince = protocols.CriticalRecoverySince = TimeSpan.Zero;
+                CancelMayday(protocols);
             }
         }
     }
@@ -340,7 +439,8 @@ public sealed class KiasProtocolSystem : EntitySystem
         if (!HasComp<KiasManagementComponent>(ent) || Transform(ent).GridUid is not { } grid || !_kias.IsOnline(ent) || !_kias.CanConfigure(grid, args.Actor)
             || !TryProtocol(grid, out var protocols))
             return;
-        if (args.Reset) ResetAlert(grid);
+        if (args.Acknowledge) AcknowledgeCrew(grid);
+        else if (args.Reset) ResetAlert(grid);
         else Trigger(grid, args.Quiet ? KiasTrigger.QuietMode : KiasTrigger.Manual);
     }
 }

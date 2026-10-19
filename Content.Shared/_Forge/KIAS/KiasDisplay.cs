@@ -58,6 +58,7 @@ public sealed class KiasManagementState : BoundUserInterfaceState
 {
     public KiasAudioSettingsView? Audio;
     public bool Online;
+    public bool CrewResponsePending;
     public int Entities;
     public int Crew;
     public string Devices = string.Empty;

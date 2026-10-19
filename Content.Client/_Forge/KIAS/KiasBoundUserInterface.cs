@@ -19,6 +19,7 @@ public sealed class KiasBoundUserInterface : BoundUserInterface
         _window.ControlRequested += reset => SendMessage(new KiasControlMessage { Reset = reset });
         _window.AudioChanged += message => SendMessage(message);
         _window.QuietRequested += () => SendMessage(new KiasControlMessage { Quiet = true });
+        _window.CrewAcknowledged += () => SendMessage(new KiasControlMessage { Acknowledge = true });
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

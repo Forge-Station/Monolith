@@ -19,6 +19,7 @@
                         <Button Name="RunManual" Text="{Loc 'kias-run-manual'}"/>
                         <Button Name="RunQuiet" Text="{Loc 'kias-controller-quiet'}"/>
                         <Button Name="ResetAlert" Text="{Loc 'kias-reset-alert'}"/>
+                        <Button Name="AcknowledgeCrew" Text="{Loc 'kias-crew-acknowledge'}"/>
                     </BoxContainer>
                 </BoxContainer>
             </ScrollContainer>

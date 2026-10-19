@@ -110,7 +110,7 @@ kias-config-owner = Only the ship owner can configure protocols on an online dis
 kias-crew-dead = Death detected: { $location }.
 kias-crew-critical = Critical crew condition: { $location }.
 kias-fire-alarm = Fire alarm: { $location }.
-kias-mayday = MAYDAY. { $ship }. { $reason }
+kias-mayday = MAYDAY. { $ship }. Coordinates: { $x }, { $y }; map: { $map }. { $reason }
 kias-trigger-hullimpact = Hull impact
 kias-trigger-hulldamage = Structural damage
 kias-trigger-collision = Ship collision
@@ -886,3 +886,6 @@ kias-suppression-empty = Install a new suppression cartridge.
 kias-controller-mapping = Mapping (frozen map)
 kias-controller-page-previous = Previous
 kias-controller-page-next = Next
+
+kias-crew-acknowledge = Crew responding
+kias-crew-response-request = Crew, confirm you are responding at the KIAS management console. MAYDAY will be sent in { $seconds } seconds if no response is received.

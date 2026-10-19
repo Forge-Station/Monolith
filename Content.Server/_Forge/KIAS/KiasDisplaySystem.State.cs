@@ -61,6 +61,7 @@ public sealed partial class KiasDisplaySystem
                 && x.Devices == y.Devices && x.Log == y.Log && x.Atmos == y.Atmos && x.CrewDetails == y.CrewDetails && x.Power == y.Power
                 && x.Defence == y.Defence && x.Navigation == y.Navigation && x.Faults == y.Faults && x.Alert == y.Alert && x.Resources == y.Resources
                 && x.Automation == y.Automation
+                && x.CrewResponsePending == y.CrewResponsePending
                 && (x.Audio?.Notification, x.Audio?.Warning, x.Audio?.Battle, x.Audio?.Emergency) == (y.Audio?.Notification, y.Audio?.Warning, y.Audio?.Battle, y.Audio?.Emergency),
             _ => false,
         };

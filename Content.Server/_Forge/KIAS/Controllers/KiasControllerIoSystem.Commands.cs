@@ -8,6 +8,7 @@ namespace Content.Server._Forge.KIAS.Controllers;
 
 public sealed partial class KiasControllerIoSystem
 {
+    private readonly KiasEmissionGate _notificationGate = new();
     public void Command(EntityUid grid, EntityUid card, EntityUid target, KiasControllerNode node, string port,
         KiasGraphValue value, KiasCommandInputs inputs)
     {
@@ -20,6 +21,19 @@ public sealed partial class KiasControllerIoSystem
                 { accepted = true; break; }
         if (!accepted) return;
         if (Comp<KiasGridComponent>(grid).Testing && node.Profile is not ("Speaker" or "Recorder")) return;
+        if (node.Profile == "Speaker" && port is "Announce" or "Alarm")
+        {
+            var notification = inputs.Read("Key").Text;
+            var cooldown = notification switch
+            {
+                "HullDamage" => 30,
+                "HullImpact" or "Proximity" or "PowerLost" => 10,
+                "CrewUnavailable" or "VesselCritical" => 60,
+                _ => 0,
+            };
+            if (cooldown > 0 && !_notificationGate.Allow(grid, $"{target}:{notification}", _timing.CurTime,
+                    cooldown, 0, out _)) return;
+        }
         CommandDispatched?.Invoke(grid, card, target, node.Profile, port);
         if (node.Profile.StartsWith("Link.", StringComparison.Ordinal))
         {

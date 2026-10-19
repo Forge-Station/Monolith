@@ -156,7 +156,7 @@ kias-config-owner = Протоколы может настраивать тол�
 kias-crew-dead = Обнаружена смерть: { $location }.
 kias-crew-critical = Критическое состояние экипажа: { $location }.
 kias-fire-alarm = Пожарная тревога: { $location }.
-kias-mayday = MAYDAY. { $ship }. { $reason }
+kias-mayday = MAYDAY. { $ship }. Координаты: { $x }, { $y }; карта: { $map }. { $reason }
 kias-trigger-hullimpact = Попадание в корпус
 kias-trigger-hulldamage = Повреждение корпуса
 kias-trigger-collision = Столкновение кораблей
@@ -853,3 +853,6 @@ kias-suppression-empty = Установите новый картридж пож
 kias-controller-mapping = Маппинг (замороженная карта)
 kias-controller-page-previous = Назад
 kias-controller-page-next = Далее
+
+kias-crew-acknowledge = Экипаж на связи
+kias-crew-response-request = Экипаж, подтвердите, что вы на связи, в консоли управления KIAS. При отсутствии ответа через { $seconds } секунд будет отправлен MAYDAY.

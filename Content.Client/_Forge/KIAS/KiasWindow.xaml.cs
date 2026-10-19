@@ -14,6 +14,7 @@ public sealed partial class KiasWindow : FancyWindow
     public event Action<bool>? ControlRequested;
     public event Action<KiasAudioSettingsMessage>? AudioChanged;
     public event Action? QuietRequested;
+    public event Action? CrewAcknowledged;
     private readonly Dictionary<Label, RichTextLabel> _details = new();
     private readonly Dictionary<KiasAudioChannel, OptionButton> _tonePickers = new();
 
@@ -59,6 +60,7 @@ public sealed partial class KiasWindow : FancyWindow
         RunManual.OnPressed += _ => ControlRequested?.Invoke(false);
         ResetAlert.OnPressed += _ => ControlRequested?.Invoke(true);
         RunQuiet.OnPressed += _ => QuietRequested?.Invoke();
+        AcknowledgeCrew.OnPressed += _ => CrewAcknowledged?.Invoke();
     }
 
     public void UpdateState(KiasManagementState state)
@@ -93,5 +95,6 @@ public sealed partial class KiasWindow : FancyWindow
         foreach (var (label, wrapped) in _details)
             wrapped.SetMessage(Robust.Shared.Utility.FormattedMessage.FromUnformatted(label.Text ?? string.Empty));
         RunManual.Disabled = RunQuiet.Disabled = ResetAlert.Disabled = !state.Online;
+        AcknowledgeCrew.Disabled = !state.Online || !state.CrewResponsePending;
     }
 }

@@ -31,6 +31,15 @@ public sealed partial class KiasProtocolComponent : Component
     public bool CriticalLatched;
     public bool CaptainGreeted;
     public TimeSpan CrewDistressUntil;
+    [DataField] public float CriticalHullLossFraction = 0.4f;
+    [DataField] public float CriticalConfirmationSeconds = 15;
+    [DataField] public float CrewResponseSeconds = 30;
+    public int HullBaselineTiles, HullTiles;
+    public uint HullTileRevision;
+    public bool HullSampled, HadPropulsion;
+    public TimeSpan CriticalSince, CriticalRecoverySince;
+    public string PendingMaydayReason = string.Empty;
+    public TimeSpan CrewResponseDeadline, CrewAcknowledgedUntil;
 }
 
 [DataDefinition]
@@ -96,6 +105,7 @@ public sealed class KiasControlMessage : BoundUserInterfaceMessage
 {
     public bool Reset;
     public bool Quiet;
+    public bool Acknowledge;
 }
 
 [Serializable, NetSerializable]

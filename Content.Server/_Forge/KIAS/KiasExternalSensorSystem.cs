@@ -1,12 +1,18 @@
-using System.Linq;
 using System.Numerics;
 using Content.Shared._Forge.KIAS;
 using Content.Shared._Forge.KIAS.Controllers;
 using Content.Server._Forge.KIAS.Controllers;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Server._Mono.SpaceArtillery.Components;
+using Content.Server._Mono.Radar;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
+using Content.Server.Shuttles.Components;
+using Content.Shared.Shuttles.Components;
+using Content.Shared._NF.Shipyard.Components;
+using System.Linq;
 
 namespace Content.Server._Forge.KIAS;
 
@@ -35,6 +41,25 @@ public sealed class KiasExternalSensorSystem : EntitySystem
         SubscribeLocalEvent<GridRemovalEvent>(OnGridRemoved);
         SubscribeLocalEvent<KiasWeaponFlashEvent>(OnFlash);
         SubscribeLocalEvent<KiasProximityEvent>(OnProximity);
+        SubscribeLocalEvent<GridSplitEvent>(OnSplit);
+    }
+
+    private void OnSplit(ref GridSplitEvent args)
+    {
+        var origin = EnsureComp<KiasGridOriginComponent>(args.Grid);
+        if (!origin.Origin.Valid) origin.Origin = args.Grid;
+        foreach (var fragment in args.NewGrids)
+            EnsureComp<KiasGridOriginComponent>(fragment).Origin = origin.Origin;
+    }
+
+    public bool IsVesselContact(EntityUid observer, EntityUid contact)
+    {
+        if (observer == contact || TerminatingOrDeleted(contact) || HasComp<MapComponent>(contact)
+            || !TryComp<ShuttleComponent>(contact, out var shuttle)) return false;
+        if (TryComp<KiasGridOriginComponent>(observer, out var own)
+            && own.Origin.Valid && TryComp<KiasGridOriginComponent>(contact, out var other) && own.Origin == other.Origin) return false;
+        return HasComp<IFFComponent>(contact) || HasComp<ShuttleDeedComponent>(contact)
+            || shuttle.LinearThrust.Any(thrust => thrust > 0);
     }
 
     private void OnGridRemoved(GridRemovalEvent args) => Clear(args.EntityUid);
@@ -93,7 +118,8 @@ public sealed class KiasExternalSensorSystem : EntitySystem
 
     private void OnNativeFired(EntityUid uid, TransformComponent component, AmmoShotEvent args)
     {
-        if (!HasComp<Content.Server._Mono.SpaceArtillery.Components.SpaceArtilleryComponent>(uid)) return;
+        if (!HasComp<GunComponent>(uid) || !HasComp<SpaceArtilleryComponent>(uid)
+            || !HasComp<RadarBlipComponent>(uid)) return;
         var fired = new KiasWeaponFiredEvent(uid);
         OnFired(ref fired);
     }
@@ -152,9 +178,9 @@ public sealed class KiasExternalSensorSystem : EntitySystem
             var nearby = new List<Entity<MapGridComponent>>();
             _map.FindGridsIntersecting(position.MapId, new Box2(position.Position - new Vector2(range), position.Position + new Vector2(range)), ref nearby, includeMap: false);
             var current = new HashSet<EntityUid>();
-            foreach (var contact in nearby)
+            foreach (var contact in nearby.OrderBy(contact => sensor.Contacts.Contains(contact.Owner) ? 0 : 1).ThenBy(contact => contact.Owner.Id))
             {
-                if (contact.Owner == grid || TerminatingOrDeleted(contact) || HasComp<MapComponent>(contact))
+                if (!IsVesselContact(grid, contact))
                     continue;
                 var target = _transform.ToMapCoordinates(new EntityCoordinates(contact, contact.Comp.LocalAABB.Center));
                 var distance = Vector2.Distance(target.Position, position.Position);

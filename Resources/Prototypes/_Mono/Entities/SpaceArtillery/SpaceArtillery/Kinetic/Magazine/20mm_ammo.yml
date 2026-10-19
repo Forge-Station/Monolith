@@ -55,7 +55,7 @@
   - type: Appearance
   - type: SpentAmmoVisuals
   - type: StaticPrice
-    price: 1
+    price: 0.01 # Forge-change: 1 -> 0.01
   - type: Destructible
     thresholds:
     - trigger:
@@ -131,7 +131,7 @@
   - type: Appearance
   - type: SpentAmmoVisuals
   - type: StaticPrice
-    price: 1
+    price: 0.01 # Forge-change: 1 -> 0.01
   - type: Destructible
     thresholds:
     - trigger:

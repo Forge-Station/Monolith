@@ -9,6 +9,7 @@
   - type: Item
     sprite: Objects/Materials/materials.rsi
     size: Normal
+  - type: BulkMaterial # Forge-change
   - type: Tag
     tags:
       - DroneUsable

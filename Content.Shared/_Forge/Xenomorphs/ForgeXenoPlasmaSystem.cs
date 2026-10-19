@@ -89,8 +89,7 @@ public sealed class ForgeXenoPlasmaSystem : EntitySystem
                 continue;
 
             var regen = OnWeeds(xform) ? plasma.RegenOnWeeds : plasma.Regen;
-            if (HasComp<ForgeXenoRestingComponent>(uid))
-                regen *= plasma.RestMultiplier;
+            // Rest gland removed — plasma regen is baseline only.
 
             if (regen <= 0f)
                 continue;

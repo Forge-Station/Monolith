@@ -1,0 +1,29 @@
+﻿<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      SetSize="330 145"
+                      MinSize="330 145"
+                      Title="{Loc 'ui-bs-authentication-title'}">
+
+    <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0 4 0 4">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BorderThickness="7" BorderColor="#252525" BackgroundColor="#3d474d"/>
+        </PanelContainer.PanelOverride>
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                    <Label Text="{Loc 'ui-bs-authentication-connection-to'}" />
+                    <Label Name="ConnectionTo" Margin="5 0 0 0"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                    <Label Text="{Loc 'ui-bs-authentication-password'}" Margin="0 0 10 0" />
+                    <LineEdit Name="PasswordLineEdit" HorizontalExpand="True"></LineEdit>
+                </BoxContainer>
+                <Label Name="ConnectingResult" Visible="False" HorizontalExpand="True" HorizontalAlignment="Center" />
+            </BoxContainer>
+        </PanelContainer>
+    </PanelContainer>
+</controls:FancyWindow>

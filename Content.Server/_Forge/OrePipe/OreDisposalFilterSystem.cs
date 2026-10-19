@@ -68,10 +68,13 @@ public sealed class OreDisposalFilterSystem : EntitySystem
     private bool HolderIsFiltered(DisposalHolderComponent holder, OreDisposalFilterComponent filter)
     {
         // Empty filter = pass everything straight.
-        if (filter.Filtered.Count == 0 || holder.Container.ContainedEntities.Count == 0)
+        // Container can be null when OrePipeSystem probes tube directions with a throwaway holder
+        // (IsPipePathClosed / CanDrillOperate) — treat that as empty content.
+        if (filter.Filtered.Count == 0 ||
+            holder.Container?.ContainedEntities is not { Count: > 0 } contained)
             return false;
 
-        foreach (var ent in holder.Container.ContainedEntities)
+        foreach (var ent in contained)
         {
             if (!TryComp<StackComponent>(ent, out var stack))
                 continue;

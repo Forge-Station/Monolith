@@ -35,8 +35,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 500
       behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
@@ -69,6 +74,8 @@
     interfaces:
       enum.BsEnergyUiKey.ReceiverKey:
         type: BsReceiverBoundUserInterface
+      enum.BsEnergyUiKey.AuthenticationKey:
+        type: BsReceiverAuthenticationBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.ReceiverKey
 
@@ -117,8 +124,23 @@
     interfaces:
       enum.BsEnergyUiKey.ReceiverKey:
         type: BsReceiverBoundUserInterface
+      enum.BsEnergyUiKey.AuthenticationKey:
+        type: BsReceiverAuthenticationBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.ReceiverKey
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1300
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   name: bluespace energy receiver T3
@@ -165,8 +187,23 @@
     interfaces:
       enum.BsEnergyUiKey.ReceiverKey:
         type: BsReceiverBoundUserInterface
+      enum.BsEnergyUiKey.AuthenticationKey:
+        type: BsReceiverAuthenticationBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.ReceiverKey
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1750
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 #BsTransmitter
 - type: entity
@@ -253,6 +290,19 @@
         type: BsTransmitterBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.TransmitterKey
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1300
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   name: bluespace energy transmitter T3
@@ -304,6 +354,19 @@
         type: BsTransmitterBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.TransmitterKey
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1750
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 #BsTransmitter for stationary energy stations
 - type: entity
@@ -392,6 +455,19 @@
         type: BsTransmitterBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.TransmitterKey
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1300
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   name: bluespace energy transmitter T3
@@ -444,3 +520,16 @@
         type: BsTransmitterBoundUserInterface
   - type: ActivatableUI
     key: enum.BsEnergyUiKey.TransmitterKey
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1750
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

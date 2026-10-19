@@ -372,3 +372,18 @@ reagent-effect-guidebook-plant-seeds-remove = { $chance ->
 [1] Удаляет
 *[other] удаляют
 } семена растения
+reagent-effect-guidebook-stamina-damage =
+    { $chance ->
+        [1] Наносит
+       *[other] наносят
+    } { NATURALFIXED($amount, 2) } урона по выносливости
+reagent-effect-guidebook-stamina-crit =
+    { $chance ->
+        [1] Вызывает
+       *[other] вызывают
+    } полное истощение выносливости
+reagent-effect-guidebook-absorb-reagent =
+    { $chance ->
+        [1] Всасывается
+       *[other] всасываются
+    } в кровь

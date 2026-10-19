@@ -1,6 +1,3 @@
-ent-ActionForgeXenoRest = Отдых
-    .desc = Лечь, чтобы быстрее восстанавливать плазму и раны. Ещё раз — встать.
-
 ent-ActionForgeXenoTailStab = Удар хвостом
     .desc = Пронзить цель хвостом.
 
@@ -21,6 +18,9 @@ ent-ActionForgeXenoSpit = Кислотный плевок
 
 ent-ActionForgeXenoSpitHeavy = Тяжёлый кислотный плевок
     .desc = Плюнуть медленным и сильным сгустком кислоты.
+
+ent-ActionForgeXenoStaminaSpit = Нейротоксинный плевок
+    .desc = Плюнуть липким нейротоксином, сажающим выносливость.
 
 ent-ActionForgeXenoPlantWeeds = Посадить сорняки
     .desc = Выделить немного ульевых сорняков. На них плазма восстанавливается быстрее.

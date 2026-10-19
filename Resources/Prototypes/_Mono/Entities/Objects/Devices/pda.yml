@@ -10,8 +10,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Mono/Objects/Devices/pda.rsi
     layers:
@@ -127,7 +128,9 @@
     - MedTekCartridge
     - WantedListCartridge
     - LogProbeCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
     - MailMetricsCartridge # Frontier
   - type: Geiger # Mono
     showExamine: true
@@ -146,8 +149,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Mono/Objects/Devices/pda.rsi
     layers:
@@ -208,8 +212,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: PdaBorderColor
     borderColor: "#533980"
 
@@ -236,8 +241,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: PdaBorderColor
     borderColor: "#EEEEEE"
 
@@ -313,8 +319,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Mono/Objects/Devices/pda.rsi
     layers:
@@ -395,8 +402,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Mono/Objects/Devices/pda.rsi
     layers:

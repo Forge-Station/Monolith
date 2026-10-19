@@ -9,8 +9,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Forge/Objects/Devices/pda.rsi
     layers:
@@ -122,8 +123,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Forge/Objects/Devices/pda.rsi
     layers:
@@ -373,8 +375,9 @@
     - CrewManifestCartridge
     - NotekeeperCartridge
     - NewsReaderCartridge
-    - BountyContractsCartridge
-    - AstroNavCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
   - type: Sprite
     sprite: _Forge/Objects/Devices/pda.rsi
     layers:

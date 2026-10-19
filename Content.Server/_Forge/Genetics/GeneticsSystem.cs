@@ -5,8 +5,10 @@ using Content.Shared._Forge.Genetics.Components;
 using Content.Shared.Cloning;
 using Content.Shared.Damage;
 using Content.Shared.Forensics.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs.Components;
@@ -25,6 +27,8 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly GeneticsServerSystem _servers = default!;
 
@@ -163,12 +167,15 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
         RefreshVisuals(uid, genome);
         Dirty(uid, genome);
 
+        // Discover BEFORE morph — GeneActivatedEvent polymorphs the body onto a paused map,
+        // and Discover/FindConsole then fail to resolve the DNA server from the scanner.
+        var alreadyKnown = IsDiscovered(uid, geneId);
+        var recorded = Discover(uid, geneId);
+
         var ev = new GeneActivatedEvent(geneId);
         RaiseLocalEvent(uid, ref ev);
         MaybeGoHostile(GetMorphedBody(uid), proto);
 
-        var alreadyKnown = IsDiscovered(uid, geneId);
-        var recorded = Discover(uid, geneId);
         if (!recorded)
             _popup.PopupEntity(Loc.GetString("genetics-no-server"), uid);
         if (alreadyKnown)
@@ -300,24 +307,62 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
         IdentifyClosest(uid, genome);
     }
 
-    public bool CanIrradiate(EntityUid uid)
+    /// <summary>
+    /// Subject must be organic, conscious enough to rewrite, and fully stripped — gear blocks the emitter.
+    /// </summary>
+    public bool CanModifyGenes(EntityUid uid)
     {
-        return CanMutate(uid) && !_mobState.IsCritical(uid);
+        return CanMutate(uid) && !_mobState.IsIncapacitated(uid) && IsBare(uid);
     }
 
-    public void PulseBranchBlock(EntityUid uid, string geneId, int blockIndex, GenomeComponent? genome = null)
+    public bool CanIrradiate(EntityUid uid) => CanModifyGenes(uid);
+
+    /// <summary>
+    /// True when nothing is worn or held. Gene work requires a naked subject.
+    /// </summary>
+    public bool IsBare(EntityUid uid)
+    {
+        var slots = _inventory.GetSlotEnumerator(uid);
+        while (slots.NextItem(out _))
+            return false;
+
+        foreach (var _ in _hands.EnumerateHeld(uid))
+            return false;
+
+        return true;
+    }
+
+    /// <summary>
+    /// Shared gate for console gene edits. Returns false and pops why when blocked.
+    /// </summary>
+    public bool TryEnsureCanModifyGenes(EntityUid uid)
     {
         if (!CanMutate(uid))
         {
             _popup.PopupEntity(Loc.GetString("genetics-steel-no-mutate"), uid);
-            return;
+            return false;
         }
 
-        if (_mobState.IsCritical(uid))
+        if (_mobState.IsIncapacitated(uid))
         {
             _popup.PopupEntity(Loc.GetString("genetics-irradiate-critical"), uid);
-            return;
+            return false;
         }
+
+        if (!IsBare(uid))
+        {
+            _popup.PopupEntity(Loc.GetString("genetics-modify-need-bare"), uid);
+            return false;
+        }
+
+        return true;
+    }
+
+    public void PulseBranchBlock(EntityUid uid, string geneId, int blockIndex, GenomeComponent? genome = null)
+    {
+        if (!TryEnsureCanModifyGenes(uid))
+            return;
+
         GeneBranch branch;
         if (Enum.TryParse(geneId, out GeneBranch parsed))
             branch = parsed;
@@ -327,8 +372,8 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
             return;
 
         var damage = new DamageSpecifier();
-        damage.DamageDict["Radiation"] = 2;
-        _damageable.TryChangeDamage(uid, damage, origin: uid);
+        damage.DamageDict["Cellular"] = 2;
+        _damageable.TryChangeDamage(uid, damage, ignoreResistances: true, origin: uid);
         PulseBranchBlock(uid, branch, blockIndex, genome);
     }
 

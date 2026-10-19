@@ -1,0 +1,136 @@
+- type: entity
+  id: BaseStructureHoloComputer
+  parent: BaseStructure
+  abstract: true
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.35,0.25,0.35"
+        density: 190
+        mask:
+          - TabletopMachineMask
+        layer:
+          - TabletopMachineLayer
+  - type: InteractionOutline
+  - type: Rotatable
+  - type: Anchorable
+  - type: Construction
+    graph: Computer
+    node: frameUnsecured
+  - type: Sprite
+    drawdepth: SmallObjects
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Electronic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: StaticPrice
+    price: 100
+
+- type: entity
+  parent: BaseStructureHoloComputer
+  id: HoloComputerForerunner
+  name: ancient holocomputer
+  description: Used to access something.. This computer is a relic of a bygone era.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/computers_forerunner.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: holocomputer
+    - map: ["computerLayerScreen"]
+      state: holoscreen
+  - type: PowerSwitch
+  - type: Animateable
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmash
+  - type: Computer
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ExtensionCableReceiver
+  - type: ActivatableUIRequiresPower
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+  - type: LitOnPowered
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    enabled: false
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    offset: "0, 0.4"
+    castShadows: false
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: Keyboard
+      params:
+        volume: -1
+        variation: 0.10
+        pitch: 1.10
+    blacklist:
+      tags:
+      - NoConsoleSound
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+        ents: []
+  - type: LightningTarget
+    priority: 1
+  - type: RequireProjectileTarget
+  - type: Electrified
+    enabled: false
+    usesApcPower: true
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: Wires
+    boardName: wires-board-name-computer
+    layoutId: Computer
+  - type: LanguageSpeaker
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+  - type: ExaminableBattery
+  - type: BatterySelfRecharger
+  - type: ApcPowerReceiverBattery
+    idleLoad: 5
+    batteryRechargeRate: 250
+    batteryRechargeEfficiency: 0.95
+    # ambience
+  - type: SpamEmitSoundRequirePower
+  - type: SpamEmitSound
+    minInterval: 12
+    maxInterval: 36
+    sound:
+      collection: MonoComputerSFX
+      params:
+        volume: -12
+        maxDistance: 4
+        variation: 0.05

@@ -1,0 +1,78 @@
+{
+    "versiunlit": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Created by Hurtsay(disc:hinzomnia) for CorvaxForge.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "datafilter_unlit",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+]
+        },
+        {
+            "name": "datafilter"
+        },
+        {
+            "name": "dataserver_unlit",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+              ]
+        },
+        {
+            "name": "dataserver"
+        },
+        {
+            "name": "datavalidator_unlit",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+              ]
+        },
+        {
+            "name": "datavalidator"
+        }
+    ]
+}

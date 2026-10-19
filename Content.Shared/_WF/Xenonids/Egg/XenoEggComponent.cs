@@ -72,10 +72,6 @@ public sealed partial class XenoEggComponent : Component
     [DataField, AutoNetworkedField]
     public bool Cultivated;
 
-    /// <summary>An egg that comes into the world grown and cultivated, such as a wild hive's: set in its prototype.</summary>
-    [DataField]
-    public bool Planted;
-
     [DataField]
     public TimeSpan FragileEggDuration = TimeSpan.FromMinutes(6);
 

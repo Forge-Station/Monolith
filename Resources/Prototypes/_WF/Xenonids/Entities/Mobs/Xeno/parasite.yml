@@ -1,0 +1,178 @@
+- type: entity
+  abstract: true
+  parent:
+  - CMXenoUndeveloped
+  - CMXenoFlammable
+  - RMCXenoVentCrawler
+  id: CMXenoParasiteBase
+  name: Child
+  suffix: Parasite
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleParasite
+  - type: GhostRole
+    name: cm-job-name-xeno-parasite
+    prob: 0
+    raffle:
+      settings: parasiteTimeRequirement
+  - type: Sprite
+    sprite: _WF/Xenonids/Mobs/Xenonids/Parasite/parasite.rsi
+  # WOLFGATE: cut FiremanCarriable
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  # WOLFGATE: cut RMCSynthGrabbable (synths)
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      35: Dead # TODO RMC14 gib on death
+  - type: Xeno
+    role: CMXenoParasite
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoWatch
+    - ActionXenoHide
+    - ActionXenoLeap
+    tier: 0
+    hudOffset: -0.1,0.1
+    contributesToVictory: false
+    countedInSlots: false
+    unlockAt: 0
+    emoteSounds: Larva
+    muteOnSpawn: true
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
+  - type: XenoHide
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 185
+        # WOLFGATE: no BarricadeImpassable or BarbedBarricade layers here
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: XenoAnimateMovement
+  - type: XenoLeap
+    knockdownTime: 1
+  - type: AcidBloodSplash
+    damage:
+      types:
+        Heat: 5
+  - type: RMCGibOnDeath
+    gibChance: 0.75
+  - type: RMCSpawnEntitiesOnGib
+    entities:
+    # - RMCDecalSpawnerGibsParasite # TODO
+    - RMCGibEffectXenoSmall
+  - type: XenoParasite
+  - type: InfectOnPullAttempt
+  - type: Item
+    size: Ginormous # WOLFGATE: RMC's Invalid item size is not in Wolfgate
+  - type: WhitelistPickupBy
+    whitelist:
+      components:
+      - Xeno
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 5
+  - type: DamageOffWeeds
+    damage:
+      types:
+        Blunt: 0.5
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_WF/Xenonids/Xeno/alien_parasite_dies.ogg
+      params:
+        volume: -4
+  - type: IdentityBlocker
+  - type: Clothing
+    quickEquip: false
+    slots: [mask]
+    sprite: _WF/Xenonids/Mobs/Xenonids/Parasite/parasite.rsi
+  - type: HideLayerClothing
+    slots:
+    - Snout
+  - type: Speech
+    speechSounds: XenonidLarva
+    allowedEmotes: [ "XenoRoar" ]
+  - type: RMCSize
+    size: Small
+  - type: CanEscapeInventory
+    baseResistTime: 1
+  # WOLFGATE: cut HTN (the parasite AI needs RMC's NPC module, not ported) and TacticalMapIcon
+  - type: AddAccentClothing
+    accent: ReplacementAccent
+    replacement: mumble
+  - type: Blindfold
+  # WOLFGATE: cut StandingState downSound: null (the field is not nullable here); the base xeno's StandingState applies
+  - type: XenoInhandSprite
+    stateName: parasite
+  # WOLFGATE: cut RMCBuckleOffset
+  - type: XenoRankNames #TODO change ranks based on total hugs done
+    rankNames:
+      0: rmc-xeno-young
+      2: rmc-xeno-mature-parasite
+      3: rmc-xeno-elder-parasite
+      4: rmc-xeno-ancient-parasite
+      5: rmc-xeno-prime-parasite
+  - type: FixedIdentity
+    name: cm-job-name-xeno-parasite
+  - type: VentCrawler
+    ventCrawlIcon: parasite
+  - type: Unshieldable
+  - type: ExcludedFromKingVote
+  - type: MindTakeoverBehavior
+    ejectFromLarvaQueues: false
+  - type: RemoveComponents
+    components:
+    - type: ComplexInteraction
+    - type: CanBeLarvaQueued
+
+- type: entity
+  parent: CMXenoParasiteBase
+  id: CMXenoParasite
+  components:
+  # WOLFGATE: cut SleepNPC (RMC's NPC module) and RMCActionOrder
+  - type: ParasiteAI
+  - type: XenoEvolution
+    strains:
+    - RMCXenoParasiteWatcher
+
+- type: entity
+  parent: CMXenoParasiteBase
+  id: RMCXenoParasiteWatcher
+  suffix: Parasite, Watcher
+  components:
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoWatch
+    - ActionXenoLeap
+    - ActionXenoZoom
+  - type: XenoStrain
+    name: rmc-xeno-watcher-name
+    description: rmc-xeno-watcher-description
+    popup: rmc-xeno-watcher-popup
+  - type: Sprite
+    sprite: _WF/Xenonids/Mobs/Xenonids/Parasite/watcher_parasite.rsi
+  - type: XenoZoom
+    zoom: 1.3, 1.3
+    blockLeaps: true
+    speed: 0
+  - type: XenoHidden
+  # WOLFGATE: cut RMCActionOrder
+
+- type: entity
+  parent: CMXenoParasite
+  id: RMCXenoParasitePrimeHiveAssign
+  suffix: Parasite, Auto-Assign, Prime Hive
+  components:
+  - type: AutoAssignHive

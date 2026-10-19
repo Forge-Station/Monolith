@@ -1,0 +1,44 @@
+using Content.Shared.FixedPoint;
+using Content.Shared.Movement.Systems;
+using Robust.Shared.Timing;
+
+namespace Content.Shared._WF.Xenonids.Projectile.Bone;
+
+public sealed partial class XenoBoneChipsSystem : EntitySystem
+{
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private XenoProjectileSystem _xenoProjectile = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<XenoBoneChipsComponent, XenoBoneChipsActionEvent>(OnXenoBoneSpursAction);
+        SubscribeLocalEvent<SlowedByBoneChipsComponent, RefreshMovementSpeedModifiersEvent>(OnSlowedBySpitRefreshMovement);
+    }
+
+    private void OnXenoBoneSpursAction(Entity<XenoBoneChipsComponent> xeno, ref XenoBoneChipsActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!_xenoProjectile.TryGetTargetCoordinates(args.Entity, args.Coords, out var coords))
+            return;
+
+        args.Handled = _xenoProjectile.TryShoot(
+            xeno,
+            coords,
+            FixedPoint2.Zero,
+            xeno.Comp.ProjectileId,
+            null,
+            1,
+            Angle.Zero,
+            xeno.Comp.Speed,
+            target: args.Entity
+        );
+    }
+
+    private void OnSlowedBySpitRefreshMovement(Entity<SlowedByBoneChipsComponent> slowed, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (slowed.Comp.ExpiresAt > _timing.CurTime)
+            args.ModifySpeed(slowed.Comp.Multiplier, slowed.Comp.Multiplier);
+    }
+}

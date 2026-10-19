@@ -31,6 +31,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Shared._WF.RMCCore.Fireman; // WOLFGATE(RMCCore)
 
 namespace Content.Shared.Movement.Pulling.Systems;
 
@@ -583,6 +584,13 @@ public sealed partial class PullingSystem : EntitySystem
 
         if (pullable.Comp.Puller == pullerUid)
         {
+            // WOLFGATE(RMCCore) START: RMC lets the puller handle a toggle-off (xenos keep their grab, devour)
+            var rmcToggleEv = new RMCPullToggleEvent();
+            RaiseLocalEvent(pullerUid, ref rmcToggleEv);
+            if (rmcToggleEv.Handled)
+                return true;
+            // WOLFGATE END
+
             return TryStopPull(pullable, pullable.Comp);
         }
 

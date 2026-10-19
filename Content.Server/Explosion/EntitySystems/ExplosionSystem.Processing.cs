@@ -24,6 +24,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using System.Numerics;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
+using Content.Shared._WF.RMCCore.Explosion; // WOLFGATE(RMCCore)
 
 namespace Content.Server.Explosion.EntitySystems;
 
@@ -476,6 +477,10 @@ public sealed partial class ExplosionSystem
                 // Mono: Explosion flag for plate protection
                 originFlag: DamageableSystem.DamageOriginFlag.Explosion);
 
+                // WOLFGATE(RMCCore) START: RMC explosion reactions (stun on explosion, destroyed or gibbed by explosion type)
+                var receivedEv = new ExplosionReceivedEvent(id, epicenter, damage);
+                RaiseLocalEvent(entity, ref receivedEv);
+                // WOLFGATE END
             }
         }
 

@@ -1,0 +1,362 @@
+- type: entity
+  abstract: true
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoMobCollision
+  id: RMCXenoQueenBase
+  name: Queen
+  description: A huge, looming alien creature. The biggest and the baddest.
+  components:
+  # Queens and kings are huge: pressure neither hurts nor throws them (other castes keep RMC's MovedByPressure).
+  - type: PressureImmunity
+  - type: MovedByPressure
+    enabled: false
+  - type: CanBuildThickFromConstructNode
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleQueen
+  - type: GhostRole
+    name: cm-job-name-xeno-queen
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    description: cm-xeno-description
+    raffle:
+      settings: short
+    rules: cm-xeno-rules
+  - type: Sprite
+    sprite: _WF/Xenonids/Mobs/Xenonids/Queen/queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _WF/Xenonids/Mobs/Xenonids/Queen/ovipositor.rsi
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _WF/Xenonids/Effects/xeno_shields.rsi
+      visible: false
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+    - CanPilot
+  # The queen can fly a ship from its shuttle console; gunnery consoles stay closed to every xeno.
+  - type: XenoConsoleUser
+    whitelist:
+      components:
+      - ShuttleConsole
+  - type: Xeno
+    role: CMXenoQueen
+    spawnAtLeaderPoint: true
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoOrderConstruction
+    - ActionXenoAcidNormal
+    - ActionXenoPheromones
+    - ActionXenoWordQueen
+    - ActionXenoPsychicWhisper
+    - ActionXenoPsychicRadiance
+    - ActionXenoGiveOrder
+    - ActionXenoGut
+    - ActionXenoPlantWeeds
+    - ActionXenoChooseStructure
+    - ActionXenoSecreteStructure
+    - ActionXenoGrowOvipositor
+    - ActionXenoManageHive
+    # WOLFGATE: cut ActionXenoRoyalJelly (commendations)
+    # WOLFGATE: cut ActionXenoMarkResin (RMC mark system)
+    tier: 0
+    bypassTierCount: true
+    unlockAt: 0
+    hudOffset: -0.1,0
+  - type: XenoHeavy
+  - type: XenoAcid
+  - type: XenoConstruction
+    buildDelay: 2
+    canBuild:
+    - WallXenoResin
+    - WallXenoResinReflective #TODO should only be available while in ovipositor mode
+    - WallXenoMembrane
+    - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
+    - XenoResinSpikes
+    - HiveAcidPillarXeno
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
+    - HiveSensorXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
+  - type: XenoDevour
+  - type: XenoPheromones
+    pheromonesMultiplier: 4
+    pheroSuffix: queen
+  - type: XenoPlasma
+    plasma: 1000
+    maxPlasma: 1000
+    plasmaRegenOnWeeds: 4
+    plasmaTransferDelay: 0
+  - type: CMArmor
+    xenoArmor: 25
+    explosionArmor: 100
+  - type: XenoWordQueen
+  - type: VehicleDamageMultiplier
+    multiplier: 3
+  - type: XenoPsychicCommunication
+  # WOLFGATE: cut InnateCommandSpeech (RMC command speech)
+  # WOLFGATE: cut RMCInnateRadioTextIncrease (RMC radio text)
+  - type: XenoGut
+  - type: XenoClaws
+    clawType: VerySharp
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 54
+  - type: XenoOvipositorCapable
+  - type: Tackle
+    chance: 0.55
+    stunMin: 5
+    stunMax: 6
+  - type: TunnelRenamer
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.52
+        density: 185
+        layer:
+        - BulletImpassable
+  # WOLFGATE: cut DropshipHijacker (dropship hijack)
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.4
+    baseSprintSpeed: 2.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.505
+      whitelist:
+        components:
+        - HumanoidAppearance # WOLFGATE: humanoids stand in for marines
+    - multiplier: 0.5475
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.43
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: MobMover
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: XenoFootstepLarge
+      params:
+        volume: 0
+#  - type: RandomSound
+#    sound:
+#      collection: XenoQueenBreath # TODO RMC14
+#      params:
+#        volume: -10
+#    min: 45
+#    max: 60
+  - type: SoundOnDeath
+    sound:
+      path: /Audio/_WF/Xenonids/Xeno/alien_queen_died.ogg
+      params:
+        volume: -6
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoEgg
+      - XenoFruit
+  - type: XenoEvolutionGranter
+  - type: XenoEvolutionCapped
+    id: CMXenoQueen
+    max: 1
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/_WF/Xenonids/Xeno/alien_queen_command.ogg
+      params:
+        volume: -8
+  - type: XenoAnnounceDeath
+    message: cm-xeno-death-queen
+    color: "#921992"
+  - type: XenoMaturing
+    critThreshold: 1000
+    deadThreshold: 1100
+    addComponents:
+    - type: XenoScreech
+    - type: XenoToggleSpit
+    addActions:
+    - ActionXenoScreech
+    - ActionXenoSpitQueen
+    - ActionXenoToggleSpitType
+  - type: RMCSize
+    size: Immobile
+  - type: RMCXenoDamageVisuals
+    prefix: queen
+  - type: PreventPulledWhileAlive
+    whitelist:
+      components:
+      - Xeno
+    exceptEffects:
+    - Stun
+    - KnockedDown
+  # WOLFGATE: cut TacticalMapUser (tactical map)
+  # WOLFGATE: cut TacticalMapIcon (tactical map)
+  - type: AcidTrap
+  # WOLFGATE: cut TacticalMapLiveUpdateOnOvi (tactical map)
+  # WOLFGATE: cut RMCPointing (RMC pointing)
+  - type: ManageHive
+  - type: HiveLeaderGranter
+  - type: XenoHeal
+  - type: StunOnExplosionReceived
+    weak: false
+  - type: XenoSpit
+    projectileId: XenoQueenNeuroSpitProjectile
+    plasmaCost: 50
+  # WOLFGATE: cut CommendationGiver (commendations)
+  - type: XenoInhands
+    prefix: queen
+  - type: XenoOmitNumber
+  # WOLFGATE: cut the bypass whitelists (RMC fire types aren't ported); tile fire immunity halves burn damage
+  - type: RMCFireArmorDebuffModifier
+    debuffModifier: 1.4
+  - type: RMCImmuneToIgnition
+  - type: RMCImmuneToFireTileDamage
+  # WOLFGATE: cut IntelRecoverCorpseObjectiveOnDeath (intel)
+  - type: QueenEyeAction
+  # WOLFGATE: RMC lights the eye's view only around weed nodes and hive structures; the queen lights her own spot so the eye never opens on pure static
+  - type: QueenEyeVision
+    range: 14
+  - type: StunFriendlyXenoOnStep
+    whitelist:
+      components:
+      - StunFriendlyXenoOnStep
+  - type: XenoToggleChargingKnockback
+    enabled: false
+  - type: XenoToggleChargingStop
+  - type: FixedIdentity
+    name: cm-job-name-xeno-queen
+  # WOLFGATE: cut RMCSurgeryXenoHeart (RMC medical)
+  - type: RMCTrackable
+  - type: ExcludedFromKingVote
+    canVote: true
+  - type: RemoveComponents
+    components:
+    - type: Gibbable
+    - type: CanBeLarvaQueued
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: CMXenoQueen
+  # WOLFGATE: cut RMCActionOrder (the XenoEvolution strain list for events stays out too)
+
+- type: entity
+  id: XenoLeaderPheromoneRelay
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: XenoPheromones
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenMaid
+  suffix: Cat Maid Queen
+  components:
+  - type: Sprite
+    sprite: _WF/Xenonids/Mobs/Xenonids/Extras/Maid_queen/maid_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _WF/Xenonids/Mobs/Xenonids/Extras/Maid_queen/maid_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoStrain
+    name: rmc-xeno-maid-name
+    description: rmc-xeno-maid-description
+    popup: rmc-xeno-maid-popup
+  - type: OwOAccent
+  - type: Speech
+    speechSounds: Cat
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenMagical
+  suffix: Magical Girl Queen
+  components:
+  - type: Sprite
+    sprite: _WF/Xenonids/Mobs/Xenonids/Extras/magicalgirl_queen/magical_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _WF/Xenonids/Mobs/Xenonids/Extras/magicalgirl_queen/magical_ovipositor.rsi
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoStrain
+    name: rmc-xeno-magicalgirl-name
+    description: rmc-xeno-magicalgirl-description
+    popup: rmc-xeno-magicalgirl-popup
+
+- type: entity
+  parent: StationAiHolo
+  id: RMCQueenEye
+  name: queen eye
+  description: It seems to be a visual projection of someone.
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: Sprite
+    color: "#a800a8"
+    sprite: _WF/Xenonids/Effects/xeno_eye.rsi
+    layers:
+    - state: hudeye1
+  - type: Eye
+    drawFov: false
+  - type: QueenEye
+  # WOLFGATE: cut MotionDetectorTracked (motion detector)
+  - type: Visibility
+    layer: 32770

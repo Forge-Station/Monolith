@@ -1,0 +1,12 @@
+# RMC-14: Resources/Prototypes/_RMC14/StatusEffects/status_effects.yml
+- type: statusEffect
+  id: Blinded
+
+# RMC-14: Resources/Prototypes/_RMC14/StatusEffects/status_effects.yml
+- type: statusEffect
+  id: Deaf
+
+# RMC-14: Resources/Prototypes/_RMC14/StatusEffects/status_effects.yml
+- type: statusEffect
+  id: Unconscious
+  alert: RMCUnconscious

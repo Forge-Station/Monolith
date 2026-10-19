@@ -22,6 +22,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using static Content.Shared.Damage.DamageableSystem;
+using Content.Shared._WF.RMCCore.Damage; // WOLFGATE(RMCCore)
 
 namespace Content.Shared.Damage
 {
@@ -260,6 +261,15 @@ namespace Content.Shared.Damage
                     return damage;
                 }
             }
+
+            // WOLFGATE(RMCCore) START: RMC shields take their share after resistances, even when resistances are ignored
+            var afterResist = new DamageModifyAfterResistEvent(damage, origin, tool);
+            RaiseLocalEvent(uid.Value, afterResist);
+            damage = afterResist.Damage;
+
+            if (damage.Empty)
+                return damage;
+            // WOLFGATE END
 
             // WOLFGATE(Species) START: heal modifiers, ported from HardLight
             // Lets healing be adjusted even when resistances are ignored. Synths use this to be immune to

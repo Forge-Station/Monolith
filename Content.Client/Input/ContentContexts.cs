@@ -1,3 +1,4 @@
+using Content.Shared._WF.RMCCore.Input; // WOLFGATE(Xenonids)
 using Content.Shared.Input;
 using Robust.Shared.Input;
 
@@ -168,6 +169,13 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.OpenDecalSpawnWindow);
             common.AddFunction(ContentKeyFunctions.OpenAdminMenu);
             common.AddFunction(ContentKeyFunctions.OpenGuidebook);
+
+            // WOLFGATE(Xenonids) START: RMC's resist key and the xenonid input context xeno mobs use
+            human.AddFunction(CMKeyFunctions.RMCResist);
+            var xenonid = contexts.New("xenonid", "human");
+            xenonid.AddFunction(CMKeyFunctions.CMXenoWideSwing);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoRest);
+            // WOLFGATE END
         }
     }
 }

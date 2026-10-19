@@ -20,7 +20,6 @@ wf-spawn-node-recent = Recent
 wf-spawn-group-mobs = Mobs
 wf-spawn-group-weapons = Weapons
 wf-spawn-group-vehicles = Vehicles
-wf-spawn-group-streets = Streets
 wf-spawn-group-xenonids = Xenonids
 wf-spawn-group-clothing = Clothing
 wf-spawn-group-engineering = Engineering
@@ -51,12 +50,6 @@ wf-spawn-category-vehicle-interiors = Interiors and fixtures
 wf-spawn-category-vehicle-scenery = Scenery vehicles
 wf-spawn-category-xeno-castes = Castes
 wf-spawn-category-xeno-hive = Hive, eggs and weeds
-
-wf-spawn-category-street-furniture = Furniture
-wf-spawn-category-street-signs = Signs and posters
-wf-spawn-category-street-lighting = Lighting
-wf-spawn-category-street-buildings = Platforms, fences and rails
-wf-spawn-category-street-yards = Containers and yards
 
 wf-spawn-category-clothing-head = Head
 wf-spawn-category-clothing-eyes = Eyes & Masks

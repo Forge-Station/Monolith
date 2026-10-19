@@ -1,0 +1,51 @@
+# Actions whose parents land in different lanes: the praetorian dash, the praetorian and warden acid sprays, crush and ram.
+- type: entity
+  parent: ActionXenoLeap
+  id: ActionXenoDash
+  name: Dash (40)
+  description: Dash a short distance towards a given location.
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_dash
+    useDelay: 10
+
+- type: entity
+  parent: ActionXenoSprayAcid
+  id: ActionXenoSprayAcidPraetorian
+  name: Spray Acid (80)
+  description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid![/color]
+  components:
+  - type: WorldTargetAction
+    useDelay: 10
+
+- type: entity
+  parent: ActionXenoSprayAcidPraetorian
+  id: ActionXenoSprayAcidWarden
+  name: Spray Acid (130)
+  components:
+  - type: WorldTargetAction
+    useDelay: 13
+
+- type: entity
+  parent: ActionXenoStomp
+  id: ActionXenoCrush
+  name: Crush (25)
+  description: Slam the ground with a 7x7 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
+  components:
+  - type: InstantAction
+    useDelay: 12
+
+- type: entity
+  parent: ActionXenoFling
+  id: ActionXenoRam
+  name: Ram (10)
+  components:
+  - type: EntityTargetAction
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: fling # TODO RMC14 ram
+    useDelay: 10
+  - type: XenoActionPlasma
+    cost: 10

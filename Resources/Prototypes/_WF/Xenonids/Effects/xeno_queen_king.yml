@@ -1,0 +1,88 @@
+# Just fades out with no movement animation
+- type: entity
+  parent: RMCBaseEffect
+  id: CMEffectScreech
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 3.2
+  - type: RMCXenoScreechShockWave
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/xeno_screech.rsi
+    noRot: true
+    state: screech
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: CMEffectScreech
+  id: RMCEffectScreechKing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCXenoScreechShockWave
+    waveSpeed: 10
+    waveStrength: 3
+  - type: Sprite
+    layers:
+    - state: screech
+      visible: false
+
+# WOLFGATE: RMC's RMCEffectXenoTelegraphKing is a child of its green telegraph; this one stands alone
+- type: entity
+  id: WFEffectXenoTelegraphKing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _WF/Xenonids/Effects/xeno_telegraph_big.rsi
+    state: expand_out
+    color: "#A50824"
+    noRot: true
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# WOLFGATE: RMC's RMCEffectExtraSlash is shared with the hunter castes; this copy is the king's rend slash
+- type: entity
+  parent: RMCBaseEffect
+  id: WFEffectRendSlash
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/attacks.rsi
+    noRot: true
+    state: slash
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# WOLFGATE: RMC's CMExplosionEffectGrenade belongs to its grenades; this is the destroy leap's impact
+- type: entity
+  id: WFEffectDestroyExplosion
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/grenade_explosion.rsi
+    state: grenade
+  - type: TimedDespawn
+    lifetime: 0.6
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealQueen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+  - type: Sprite
+    color: "#D9F500"

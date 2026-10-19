@@ -1,0 +1,123 @@
+# RMC-14: Resources/Prototypes/_RMC14/Effects/slam.yml
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectSlam
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/attacks.rsi
+    noRot: true
+    state: slam
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/screech.yml
+- type: entity
+  parent: CMEffectScreech
+  id: RMCEffectScreechValkyrie
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCXenoScreechShockWave
+    waveSpeed: 30.6
+    waveStrength: 0.25
+    downScale: 1.0
+  - type: Sprite
+    layers:
+    - state: screech
+      visible: false
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/screech.yml
+- type: entity
+  parent: RMCEffectScreechValkyrie
+  id: RMCEffectScreechValkyrieWeak
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCXenoScreechShockWave
+    waveSpeed: 25
+    waveStrength: 0.12
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/heal.yml
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealAilments
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+  - type: Sprite
+    color: "#F5007A"
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/disarm.yml
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectDisarm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/attacks.rsi
+    noRot: true
+    state: disarm
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+- type: entity
+  parent: RMCEffectXenoTelegraphGreen
+  id: RMCEffectXenoTelegraphInvisible
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+      - state: xeno_telegraph_base
+        visible: false
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+- type: entity
+  id: RMCEffectXenoTelegraphAbduct
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _WF/Xenonids/Effects/xeno_telegraph.rsi
+    noRot: true
+    state: xeno_telegraph_abduct_hook_anim
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+- type: entity
+  parent: RMCEffectXenoTelegraphLash
+  id: RMCEffectXenoTelegraphLashAnim
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xeno_telegraph_lash_anim
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+- type: entity
+  id: RMCEffectXenoTelegraphLash
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _WF/Xenonids/Effects/xeno_telegraph.rsi
+    noRot: true
+    state: xeno_telegraph_lash
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu

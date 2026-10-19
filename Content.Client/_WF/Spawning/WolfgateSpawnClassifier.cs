@@ -185,19 +185,6 @@ public sealed class WolfgateSpawnClassifier
             return Has(comps, _item) ? WfSpawnCategory.VehicleParts : WfSpawnCategory.VehicleInteriors;
         }
 
-        // The ported street furniture, by the folder it came in.
-        if (HasCategory(proto, "WFStreets"))
-        {
-            if (HasCategory(proto, "WFStreetsSigns"))
-                return WfSpawnCategory.StreetSigns;
-            if (HasCategory(proto, "WFStreetsLighting"))
-                return WfSpawnCategory.StreetLighting;
-            if (HasCategory(proto, "WFStreetsBuildings"))
-                return WfSpawnCategory.StreetBuildings;
-            if (HasCategory(proto, "WFStreetsYards"))
-                return WfSpawnCategory.StreetYards;
-            return WfSpawnCategory.StreetFurniture;
-        }
         // Everything the xenonids module adds, apart from its rounds and effects.
         if (HasCategory(proto, "WFXenonids") && !Has(comps, _projectile) && !Lineage("Effect"))
             return Has(comps, _mobState) ? WfSpawnCategory.XenoCastes : WfSpawnCategory.XenoHive;

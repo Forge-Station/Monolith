@@ -1,0 +1,57 @@
+using Content.Shared._WF.RMCCore.Evasion;
+using Content.Shared.Damage;
+using Robust.Shared.Network;
+using Robust.Shared.Timing;
+
+namespace Content.Shared._WF.RMCCore.Damage;
+
+public sealed partial class RMCTemporaryInvincibilitySystem : EntitySystem
+{
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EvasionSystem _evasion = default!;
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        // WOLFGATE: RMC fire (RMCIgniteAttemptEvent) is cut; upstream fire ignores temporary invincibility
+        SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, BeforeDamageChangedEvent>(OnBeforeDamage);
+        SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, EvasionRefreshModifiersEvent>(OnGetEvasion);
+        SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, ComponentStartup>(OnAdded);
+    }
+
+    private void OnAdded(Entity<RMCTemporaryInvincibilityComponent> ent, ref ComponentStartup args)
+    {
+        _evasion.RefreshEvasionModifiers(ent);
+    }
+
+    private void OnBeforeDamage(Entity<RMCTemporaryInvincibilityComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnGetEvasion(Entity<RMCTemporaryInvincibilityComponent> ent, ref EvasionRefreshModifiersEvent args)
+    {
+        args.Evasion += 1000; // Bullets need to always miss
+    }
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+
+        var invQuery = EntityQueryEnumerator<RMCTemporaryInvincibilityComponent>();
+
+        while (invQuery.MoveNext(out var uid, out var comp))
+        {
+            if (time < comp.ExpiresAt)
+                continue;
+
+            RemCompDeferred<RMCTemporaryInvincibilityComponent>(uid);
+            _evasion.RefreshEvasionModifiers(uid);
+        }
+    }
+}

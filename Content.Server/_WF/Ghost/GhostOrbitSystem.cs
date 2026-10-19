@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Server._WF.Encounters.Components;
 using Content.Server._WF.Encounters.Systems;
-using Content.Server._WF.PlanetPois;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Dragon;
@@ -11,7 +10,6 @@ using Content.Server.Tesla.Components;
 using Content.Server.Warps;
 using Content.Shared._NF.Shipyard.Components;
 using Content.Shared._WF.Ghost;
-using Content.Shared._WF.Planets;
 using Content.Shared._WF.Xenonids;
 using Content.Shared._WF.Xenonids.Evolution;
 using Content.Shared._WF.Xenonids.Hive;
@@ -44,11 +42,10 @@ namespace Content.Server._WF.Ghost;
 /// <summary>
 /// Builds the categorised target list for the ghost orbit menu and handles orbit requests.
 /// </summary>
-public sealed partial class GhostOrbitSystem : EntitySystem
+public sealed class GhostOrbitSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private IAdminManager _admin = default!;
-    [Dependency] private Content.Shared.Access.Systems.SharedIdCardSystem _idCards = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private FollowerSystem _follower = default!;
     [Dependency] private JobSystem _jobs = default!;
@@ -99,7 +96,6 @@ public sealed partial class GhostOrbitSystem : EntitySystem
         AddInterests(targets, seen, isAdmin);
         AddMobs(targets, seen, isAdmin);
         AddSessions(targets, seen, isAdmin);
-        AddPlanetPois(targets, seen, isAdmin);
         AddWarpPoints(targets, seen, isAdmin);
         return targets;
     }
@@ -113,26 +109,7 @@ public sealed partial class GhostOrbitSystem : EntitySystem
         if (!Exists(target) || target == ghost)
             return;
 
-        // Hive announcements speak as the hive itself, which lives in nullspace; warping there loses the ghost.
-        if (Transform(target).MapUid == null)
-            return;
-
         var isAdmin = _admin.IsAdmin(ghost);
-        // A site's signal hangs over it on the orbit layer; the ghost goes down to the site itself.
-        if (TryComp<WFPoiSignalComponent>(target, out var signal))
-        {
-            if (TerminatingOrDeleted(signal.Ground))
-                return;
-
-            _adminLog.Add(LogType.GhostWarp, $"{ToPrettyString(ghost)} ghost warped to {ToPrettyString(target)}");
-            var ghostXform = Transform(ghost);
-            _transform.SetCoordinates(ghost, ghostXform, new EntityCoordinates(signal.Ground, new Vector2(signal.Origin.X + 0.5f, signal.Origin.Y + 0.5f)));
-            _transform.AttachToGridOrMap(ghost, ghostXform);
-            if (TryComp<PhysicsComponent>(ghost, out var ghostPhysics))
-                _physics.SetLinearVelocity(ghost, Vector2.Zero, body: ghostPhysics);
-            return;
-        }
-
         TryComp<WarpPointComponent>(target, out var warp);
         if (!isAdmin && (warp is { AdminOnly: true } || (_ghostQuery.HasComp(target) && _admin.IsAdmin(target))))
         {
@@ -271,8 +248,6 @@ public sealed partial class GhostOrbitSystem : EntitySystem
                 Detail = detail,
                 Prototype = meta.EntityPrototype?.ID,
                 JobIcon = icon,
-                CompanyRank = _idCards.TryFindIdCard(uid, out var card) &&
-                              TryComp<Content.Shared._WF.Companies.WFCompanyRankIconComponent>(card, out var rankIcon) ? rankIcon.RankId : 0,
                 Damage = dead ? 1f : GetDamage(uid),
                 Followers = CountFollowers(uid, isAdmin),
                 Disconnected = playerOwned && !hasClient && !dead,
@@ -348,35 +323,6 @@ public sealed partial class GhostOrbitSystem : EntitySystem
                     Followers = CountFollowers(ship.Grid, isAdmin),
                 });
             }
-        }
-    }
-
-    /// <summary>One entry per planetary site, by its real name, for every ghost.</summary>
-    private void AddPlanetPois(List<GhostOrbitTarget> targets, HashSet<EntityUid> seen, bool isAdmin)
-    {
-        // Each world by its orbit map, which holds the signals.
-        var worlds = new Dictionary<EntityUid, string>();
-        var bodies = AllEntityQuery<WFSectorPlanetComponent, MetaDataComponent>();
-        while (bodies.MoveNext(out _, out var body, out var bodyMeta))
-        {
-            if (TryGetEntity(body.OrbitMap, out var orbit))
-                worlds[orbit.Value] = bodyMeta.EntityName;
-        }
-
-        var query = AllEntityQuery<WFPoiSignalComponent, TransformComponent, MetaDataComponent>();
-        while (query.MoveNext(out var uid, out var signal, out var xform, out var meta))
-        {
-            if (!Listable(uid, xform, meta) || TerminatingOrDeleted(signal.Ground) || !seen.Add(uid))
-                continue;
-
-            targets.Add(new GhostOrbitTarget
-            {
-                Entity = GetNetEntity(uid),
-                Name = Loc.GetString(signal.Name),
-                Category = GhostOrbitCategory.PlanetPoi,
-                Detail = xform.MapUid is { } map ? worlds.GetValueOrDefault(map) : null,
-                Followers = CountFollowers(uid, isAdmin),
-            });
         }
     }
 

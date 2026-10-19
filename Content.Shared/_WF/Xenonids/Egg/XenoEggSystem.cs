@@ -106,7 +106,6 @@ public sealed partial class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, XenoConstructionRangeEvent>(OnXenoConstructionRange);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, XenoRestAttemptEvent>(OnXenoRest);
 
-        SubscribeLocalEvent<XenoEggComponent, MapInitEvent>(OnXenoEggMapInit);
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
         SubscribeLocalEvent<XenoEggComponent, UseInHandEvent>(OnXenoEggUseInHand);
@@ -224,15 +223,6 @@ public sealed partial class XenoEggSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnXenoEggMapInit(Entity<XenoEggComponent> egg, ref MapInitEvent args)
-    {
-        if (!egg.Comp.Planted)
-            return;
-
-        egg.Comp.Cultivated = true;
-        SetEggState(egg, XenoEggState.Grown);
-    }
-
     private void OnXenoEggAfterState(Entity<XenoEggComponent> egg, ref AfterAutoHandleStateEvent args)
     {
         var ev = new XenoEggStateChangedEvent();
@@ -326,7 +316,7 @@ public sealed partial class XenoEggSystem : EntitySystem
 
         // Hand code is god-awful and its reach distance is inconsistent with args.CanReach
         // so we need to set the position ourselves.
-        _transform.SetCoordinates(egg, GetCoordinates(args.Coordinates));
+        _transform.SetCoordinates(egg, EntityManager.GetCoordinates(args.Coordinates));
         _transform.SetLocalRotation(egg, 0);
 
         SetEggState(egg, XenoEggState.Growing);
@@ -702,7 +692,7 @@ public sealed partial class XenoEggSystem : EntitySystem
         }
 
         var tile = _map.TileIndicesFor(gridId, grid, coordinates);
-        var anchored = _map.GetAnchoredEntities(gridId, grid, tile);
+        var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         hasHiveWeeds = _weeds.IsOnHiveWeeds((gridId, grid), coordinates);
         while (anchored.MoveNext(out var uid))
         {

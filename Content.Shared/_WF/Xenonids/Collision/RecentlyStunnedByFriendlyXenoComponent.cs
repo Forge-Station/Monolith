@@ -1,0 +1,12 @@
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+
+namespace Content.Shared._WF.Xenonids.Collision;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[Access(typeof(XenoCollisionSystem))]
+public sealed partial class RecentlyStunnedByFriendlyXenoComponent : Component
+{
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan At;
+}

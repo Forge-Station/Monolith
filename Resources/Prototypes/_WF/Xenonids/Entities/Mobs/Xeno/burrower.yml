@@ -1,0 +1,128 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  # WOLFGATE: cut parent RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - RMCXenoVentCrawler
+  id: CMXenoBurrower
+  name: Burrower
+  description: A beefy alien with sharp claws.
+  components:
+  - type: CanBuildThickFromConstructNode
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleBurrower
+  - type: Sprite
+    sprite: _WF/Xenonids/Mobs/Xenonids/Burrower/burrower.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    # WOLFGATE: cut RMCSynthGrabbable (synths)
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: Xeno
+    role: CMXenoBurrower
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidNormal
+    - ActionXenoOrderConstruction
+    - ActionXenoDigTunnel
+    - ActionXenoPlantWeeds
+    - ActionXenoResinHole
+    - ActionXenoBurrow
+    - ActionXenoTremor
+    - ActionXenoDevolve
+    tier: 2
+    hudOffset: -0.15,0.56
+    unlockAt: 420 # 7 minutes
+  - type: XenoLight
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoDrone
+  - type: XenoPlasma
+    plasma: 600
+    maxPlasma: 600
+    plasmaRegenOnWeeds: 4.5
+  - type: XenoAcid
+  - type: CMArmor
+    xenoArmor: 25
+    explosionArmor: 40
+  - type: XenoDevour
+  - type: XenoStomp
+    selfEffect: CMEffectSelfStomp
+    shortRange: 0
+    range: 4
+    plasmaCost: 100
+    paralyzeTime: 2
+    slowBigInsteadOfStun: true
+    slows: false
+    sound: /Audio/_WF/Xenonids/Xeno/alien_footstep_charge1.ogg
+    debuffsHurtXenosMore: false
+  - type: XenoBurrow
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 27.5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 36
+  - type: Tackle
+    min: 3
+    max: 5
+    chance: 0.4
+    stunMin: 4
+    stunMax: 5
+  - type: TunnelRenamer
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6425
+      whitelist:
+        components:
+        - HumanoidAppearance # WOLFGATE: humanoids stand in for marines
+    - multiplier: 0.7125
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.4775
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: RMCXenoDamageVisuals
+    prefix: burrower
+  # WOLFGATE: cut TacticalMapIcon (tactical map)
+  - type: AcidTrap #Do 2 CM code they make level 3 traps at a level 2 cost
+    trapLevel: 3
+    spray: XenoAcidSprayTrapStrong
+  - type: XenoConstruction
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
+    - HiveSensorXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
+  # WOLFGATE: cut IntelRecoverCorpseObjectiveOnDeath (intel)
+  - type: FixedIdentity
+    name: cm-job-name-xeno-burrower
+  # WOLFGATE: cut RMCSurgeryXenoHeart (RMC medical)
+  - type: VentCrawler
+    ventCrawlIcon: burrower
+  # WOLFGATE: cut RMCActionOrder

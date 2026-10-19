@@ -1,0 +1,120 @@
+# RMC-14: Resources/Prototypes/_RMC14/StatusEffects/status_effects.yml
+- type: entity
+  parent: MobStatusEffectBase
+  id: Dazed
+  name: Dazed
+  components:
+  - type: RMCDazed
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/base.yml
+- type: entity
+  id: RMCBaseEffect
+  abstract: true
+  components:
+  - type: RMCNightVisionVisible
+    priority: 1
+  # WOLFGATE: cut RMCEffect (RMC effect layering is not ported)
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/gib.yml
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCBaseGibEffect
+  abstract: true
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+  - type: TimedDespawn
+    lifetime: 0.8
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Entities/Markers/Spawners/Random/Decals/gibs.yml
+- type: entity
+  abstract: true
+  parent: DecalSpawnerBase
+  id: RMCDecalSpawnerGibsBase
+  suffix: RMC14, Gibs
+  components:
+  - type: RandomDecalSpawner
+    radius: 0
+    randomRotation: false
+    cleanable: true
+    deleteSpawnerAfterSpawn: true
+
+# RMC-14: Resources/Prototypes/_RMC14/Entities/Markers/Spawners/Random/Decals/gibs.yml
+- type: entity
+  parent: RMCDecalSpawnerGibsBase
+  id: RMCDecalSpawnerGibsDrone
+  name: gibs spawner
+  suffix: RMC14, Drone
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalGibSplatterDrone
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/gib.yml
+- type: entity
+  parent: RMCBaseGibEffect
+  id: RMCGibEffectXenoSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/Gibs/xeno_gib_small.rsi
+    state: small_gib
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/slash.yml
+- type: entity
+  parent: [WeaponArcClaw, RMCBaseEffect]
+  id: RMCWeaponArcXenoClaw
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/attacks.rsi
+    noRot: true
+    state: slash
+
+# RMC-14: Resources/Prototypes/_RMC14/Entities/Markers/Spawners/Random/Decals/splatters.yml
+- type: entity
+  abstract: true
+  parent: DecalSpawnerBase
+  id: RMCDecalSpawnerBase
+  suffix: RMC14, Blood Splatters
+  components:
+  - type: RandomDecalSpawner
+    radius: 0
+    randomRotation: true
+    cleanable: true
+    deleteSpawnerAfterSpawn: true
+
+# RMC-14: Resources/Prototypes/_RMC14/Entities/Markers/Spawners/Random/Decals/splatters.yml
+- type: entity
+  parent: RMCDecalSpawnerBase
+  id: RMCDecalSpawnerXenoSplatters
+  name: xeno blood spawner
+  suffix: RMC14
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalBloodXenonidSplatter1
+    - RMCDecalBloodXenonidSplatter2
+    - RMCDecalBloodXenonidSplatter3
+    - RMCDecalBloodXenonidSplatter4
+    - RMCDecalBloodXenonidSplatter5
+    - RMCDecalBloodXenonidSplatter6
+
+# RMC-14: Resources/Prototypes/_RMC14/Entities/Markers/Spawners/Random/Decals/splatters.yml
+- type: entity
+  parent: RMCDecalSpawnerXenoSplatters
+  id: RMCDecalSpawnerAcidBloodSplash
+  name: xeno acid splash spawner
+  suffix: RMC14
+  components:
+  - type: RandomDecalSpawner
+    radius: 0.7
+    prob: 0.5
+    maxDecalsPerTile: 4

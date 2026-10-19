@@ -1,0 +1,29 @@
+# WOLFGATE: no department inheritance or isCM flag here; hidden from the character editor
+- type: department
+  id: CMXeno
+  name: department-CMXeno
+  description: cm-department-Xeno-description
+  color: "#8b36a6"
+  weight: 100
+  editorHidden: true
+  # WOLFGATE: customName, departmentRadio and headOfDepartment are RMC fields Wolfgate lacks
+  roles:
+  - CMXenoLarva
+  - CMXenoBoiler
+  - CMXenoBurrower
+  - CMXenoCarrier
+  - CMXenoCrusher
+  - CMXenoDefender
+  - CMXenoDrone
+  - CMXenoHivelord
+  - CMXenoParasite
+  - CMXenoLesserDrone
+  - CMXenoLurker
+  - CMXenoPraetorian
+  - CMXenoQueen
+  - CMXenoRavager
+  - CMXenoRunner
+  - CMXenoSentinel
+  - CMXenoSpitter
+  - CMXenoWarrior
+  - CMXenoSelectableXeno

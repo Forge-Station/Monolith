@@ -1,0 +1,7 @@
+# RMC-14: Resources/Prototypes/_RMC14/Decals/gib_splatters.yml
+- type: decal
+  id: RMCDecalGibSplatterLesserDrone
+  parent: RMCDecalBloodBase
+  sprite:
+    sprite: _WF/Xenonids/Decals/gibs.rsi
+    state: lesser_drone

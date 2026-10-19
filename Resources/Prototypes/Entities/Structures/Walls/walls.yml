@@ -36,6 +36,12 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallic
+  # WOLFGATE(Xenonids): RMC's wall rule, sharp xeno claws break it in 20 hits and blunter ones not at all
+  - type: ReceiverXenoClaws
+    maxHealth: 1300
+    hitsToDestroy: 20
+  # WOLFGATE(Xenonids): walls hold up resin doors and membranes, as RMC's walls do
+  - type: XenoConstructionSupport
   - type: Physics
     bodyType: Static
   - type: Fixtures

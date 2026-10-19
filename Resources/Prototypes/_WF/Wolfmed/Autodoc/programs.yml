@@ -32,6 +32,8 @@
   - WFSurgeryHealLiver
   - WFSurgeryHealStomach
   - WFSurgeryHealKidneys
+  # Xenomorph larva, listed only while the patient carries one.
+  - WFSurgeryAlienEmbryoRemoval
   # Mechanical.
   - WFSurgeryWeldChassisBreach
   - WFSurgeryWeldChassis

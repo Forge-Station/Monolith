@@ -1,7 +1,5 @@
-# Everything weeds are but the spreading, so weeds that never spread (WFXenoWeedsWild) are not walked every tick.
 - type: entity # TODO RMC14 sound
-  id: WFXenoWeedsBase
-  abstract: true
+  id: XenoWeeds
   categories: [ WFXenonids ]
   name: weeds
   description: Weird black weeds...
@@ -30,6 +28,7 @@
     level: 1
   - type: RMCMesonsNonviewable
   - type: Clickable
+  - type: XenoWeedsSpreading
   - type: Sprite
     sprite: _WF/Xenonids/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
@@ -137,12 +136,6 @@
 #      collection: FootstepWater
 #      params:
 #        volume: 8
-
-- type: entity
-  parent: WFXenoWeedsBase
-  id: XenoWeeds
-  components:
-  - type: XenoWeedsSpreading
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds

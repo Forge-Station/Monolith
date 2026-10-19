@@ -1,0 +1,502 @@
+# Xeno AI
+- type: htnCompound
+  id: CMXenoCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: CMXenoMeleeCombatCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
+
+# Selects a target in melee and tries to attack it.
+- type: htnCompound
+  id: CMXenoMeleeCombatCompound
+  branches:
+  # Melee combat (unarmed or otherwise)
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: NearbyMeleeTargets
+    - !type:HTNCompoundTask
+      task: MeleeAttackTargetCompound
+
+- type: emote
+  id: CMXenoDeathGasp
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  chatMessages: [ "cm-xeno-death-gasp" ]
+
+# TODO RMC14 xenos should bleed and hurt nearby marines when damaged
+- type: entity
+  id: CMXenoBase
+  abstract: true
+  save: false
+  categories: [ WFXenonids ]
+  components: # TODO RMC14 camera recoil from large explosions? check 13
+  - type: ZombieImmune
+  - type: BlockEntityStorage
+    whitelist:
+      components:
+      - EntityStorage
+  - type: Damageable
+    damageContainer: Xeno
+  - type: Destructible
+    thresholds: []
+  # WOLFGATE: cut RMCMedicalExamine
+  # WOLFGATE: cut RMCBlockMedicalExamine
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  # WOLFGATE: RMC's Language is cut; every xeno speaks and understands what the crew does, so a lesser drone is heard by the hive
+  - type: LanguageKnowledge
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Critical
+      300: Dead
+    stateAlertDict:
+      Alive: XenoHealth
+      Critical: XenoCrit
+      Dead: XenoDead
+    displayDamageInAlert: true
+  # WOLFGATE: upstream crit succumb stands in for RMC's ghost action
+  - type: MobStateActions
+    actions:
+      Critical:
+      - ActionCritSuccumb
+  - type: Deathgasp
+    prototype: CMXenoDeathGasp
+  - type: SoundOnDeath
+    sound:
+      collection: XenoDeath
+      params:
+        volume: -4
+  # WOLFGATE: cut RMCHealthExaminable
+  - type: AcidBloodSplash
+    closeSplashRadius: 0.5
+    standardSplashRadius: 1.5
+    gibSplashRadius: 2.5
+    damage:
+      types:
+        Heat: 25
+  # WOLFGATE: cut RMCDefibrillatorBlocked
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4
+  - type: Climbing
+  - type: Insulated
+  - type: Input
+    context: "xenonid"
+  - type: Clickable
+  - type: InteractionOutline
+  - type: InputMover
+  - type: LagCompensation
+  - type: MobMover
+  - type: Emoting
+  - type: Actions
+  - type: Alerts
+  # WOLFGATE: cut AreaInfo
+  - type: Appearance
+  - type: DoAfter
+  - type: Examiner
+  - type: Eye
+  - type: ContentEye
+  - type: CameraRecoil
+  - type: MindContainer
+    showExamineInfo: true
+  - type: StatusIcon
+  - type: RotationVisuals
+    defaultRotation: 0
+    horizontalRotation: 0
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+  - type: FireVisuals
+    sprite: _WF/Xenonids/Mobs/Effects/on_fire_xeno.rsi
+    normalState: simple_onfire
+    lightEnergyPerStack: 0.2
+    lightRadiusPerStack: 0.1
+    maxLightRadius: 2
+    maxLightEnergy: 8
+  # WOLFGATE: cut RMCFireColor
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _WF/Xenonids/Effects/xeno_shields.rsi
+      visible: false
+  # WOLFGATE: cut Spottable
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        # WOLFGATE: no BarricadeImpassable or BarbedBarricade layers here
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 0
+        layer:
+        - BulletImpassable
+  # WOLFGATE: cut CMSurgeryTarget
+  - type: Gibbable
+  - type: RMCGibOnDeath
+  - type: RMCSpawnEntitiesOnGib
+    entities:
+    - RMCDecalSpawnerGibsDrone # TODO one for every caste
+    - RMCGibEffectXenoSmall # TODO larger gib effect for larger xenos
+  - type: Body
+    prototype: Xenonid
+  - type: Xeno
+  # WOLFGATE: every xeno is a hive member from spawn so WFXenoHiveBootstrapSystem can give it the default hive
+  - type: HiveMember
+  - type: VehicleDamageMultiplier
+    multiplier: 1.5
+  - type: XenoRegen
+  - type: XenoStateVisuals
+  - type: UserInterface
+    interfaces:
+      # WOLFGATE: RMC surgery and tactical map UIs are cut
+      enum.XenoEvolutionUIKey.Key:
+        type: XenoEvolutionBui
+      enum.XenoDevolveUIKey.Key:
+        type: XenoDevolveBui
+      enum.XenoPheromonesUI.Key:
+        type: XenoPheromonesBui
+      enum.XenoWordQueenUI.Key:
+        type: XenoWordQueenBui
+      enum.XenoChooseStructureUI.Key:
+        type: XenoChooseStructureBui
+      enum.XenoOrderConstructionUI.Key:
+        type: XenoOrderConstructionBui
+      enum.XenoFruitChooseUI.Key:
+        type: XenoFruitChooseBui
+      enum.XenoReserveParasiteChangeUI.Key:
+        type: ReserveParasitesBoundUserInterface
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
+        requireInputValidation: false
+      enum.XenoWatchUIKey.Key:
+        type: XenoWatchBui
+      enum.HiveTeamUIKey.Key:
+        type: HiveTeamBui
+      enum.HiveLeaderSquadUIKey.Key:
+        type: HiveLeaderSquadBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: TypingIndicator
+    proto: alien
+  - type: MovedByPressure
+  - type: NoSlip
+  - type: RMCSize
+    size: Xeno
+  - type: Pullable
+  - type: Speech
+    speechVerb: Xeno
+    allowedEmotes: [ "Growl", "Hiss", "XenoRoar", "XenoHelp", "XenoTailSwipe" ]
+  - type: GhostOnMove
+    mustBeDead: true
+  - type: WhitelistPickup
+  - type: DropHeldOnIncapacitate
+  # WOLFGATE: Wolfgate's night vision, on from spawn with a toggle action
+  - type: NightVision
+    enabled: true
+    relayOverlay: false
+    action: ActionToggleNightVision
+    lightingColor: "#FFFFFF32"
+  - type: ParalyzeOnPullAttemptImmune
+  - type: InfectOnPullAttemptImmune
+  - type: GhostTakeoverAvailable
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+    - Muted
+    - Blinded
+    - Unconscious
+    - TemporaryBlindness
+    - Deaf
+  - type: ImmuneToClothingRequiredStepTrigger
+  # WOLFGATE: cut IntrinsicRadioReceiver
+  # WOLFGATE: cut IntrinsicRadioTransmitter
+  # WOLFGATE: cut ActiveRadio
+  - type: StandingState
+  - type: SlowOnPull
+    slowdowns:
+      # WOLFGATE: humanoids stand in for marines
+      - multiplier: 0.6
+        whitelist:
+          components:
+          - HumanoidAppearance
+      - multiplier: 0.665
+        whitelist:
+          components:
+          - XenoLight
+      - multiplier: 0.445
+        whitelist:
+          components:
+          - XenoHeavy
+  # WOLFGATE: humanoids stand in for RMC's Infectable and Synth (cut)
+  - type: PullWhitelist
+    whitelist:
+      components:
+      - Xeno
+      - HumanoidAppearance
+  - type: BlockPullingDead
+  - type: XenoFriendly
+  # WOLFGATE: cut Undisposable
+  # WOLFGATE: cut ShortExamine
+  - type: DamageMobState
+    critDamage:
+      groups:
+        Brute: 1.25
+  - type: AffectableByWeeds
+  - type: ComplexInteraction
+  - type: UserLimitHits
+  - type: MovementIgnoreGravity
+  # WOLFGATE: cut DisableConstruction
+  - type: XenoAnnounceDeath
+    message: cm-xeno-death
+    color: "#459A62"
+  - type: ExplosionResistance
+    damageCoefficient: 2
+  # WOLFGATE: Wolfgate's Xeno faction
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: RMCNightVisionVisible
+  # WOLFGATE: cut CrashLandable
+  # WOLFGATE: cut UserBlacklistActivatableUI
+  - type: ActiveInputMover
+  - type: HiveTracker
+    trackerModes:
+    - Queen
+    - HiveLeader
+    - Tunnel
+    - HiveCore
+  - type: RequireProjectileTarget
+    active: false
+  # WOLFGATE: cut TacticalMapTracked
+  # WOLFGATE: cut TacMapXenoAlert
+  # WOLFGATE: cut TacticalMapUser
+  # WOLFGATE: cut TacticalMapLiveUpdateOnOvi
+  # WOLFGATE: cut MotionDetectorTracked
+  # WOLFGATE: cut TacticalMapIcon
+  # WOLFGATE: cut XenoMapTracked
+  - type: Evasion
+  # WOLFGATE: cut RMCWeaponAccuracy
+  - type: StunOnExplosionReceived
+    weak: true
+  - type: AssignXenoName
+  # WOLFGATE: orbital bombardment is cut, so no explosion type gibs xenos yet
+  - type: MobGibbedByExplosionType
+    explosions: []
+
+  # WOLFGATE: cut TileFirePatter
+  # WOLFGATE: no CanBeFirePatted; XenoFirePatter pats anything burning
+  # WOLFGATE: cut BlockIdExamine
+  - type: NoStunOnExit
+  - type: RMCSpeciesSlowdownModifier
+    slowModifier: 0.75
+    superSlowModifier: 1.5
+    durationMultiplier: 0.666
+  # WOLFGATE: cut RMCCanBeFultoned
+  - type: CMArmor
+  - type: CriticalGraceTime
+  - type: RMCObstacleSlamming
+  # WOLFGATE: no buckleDelay or clickUnbuckle on Wolfgate's buckle
+  - type: Buckle
+  # WOLFGATE: cut BuckleWhitelist
+  # WOLFGATE: cut RMCBuckleDrawDepth
+  # WOLFGATE: cut RMCBuckleOffset
+  - type: RMCArmorModifier
+  - type: RMCObstacleSlamCauserImmune
+  - type: RMCMobCollisionMass
+  - type: XenoRankNames
+  - type: Blindable
+  # WOLFGATE: humanoids stand in for marines
+  - type: FixedIdentity
+    name: cm-xeno-name
+    whitelist:
+      components:
+      - HumanoidAppearance
+  - type: EmoteCooldown
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
+  - type: CanBeLarvaQueued
+
+- type: entity
+  abstract: true
+  id: CMXenoPrying
+  components:
+  - type: Prying
+    pryPowered: true
+    speedModifier: 2.7
+
+- type: entity
+  abstract: true
+  id: CMXenoPuller
+  components:
+  - type: Puller
+
+- type: entity
+  abstract: true
+  id: CMXenoMelee
+  components:
+  - type: CombatMode
+    canDisarm: true
+    disarmFailChance: 0
+  - type: MeleeWeapon
+    autoAttack: true
+    widePrimary: true
+    altDisarm: true
+    angle: 0
+    soundHit:
+      collection: RCMXenoClaw
+    animation: RMCWeaponArcXenoClaw
+    damage:
+      groups:
+        Brute: 12
+    soundSwing:
+      path: /Audio/_WF/Xenonids/Weapons/alien_claw_swipe.ogg
+      params:
+        variation: 0.1
+        volume: -5
+  - type: MeleeDamageMultiplier # 1.5x Damage against other xenos
+    whitelist:
+      components:
+      - Xeno
+  - type: Tackle
+  - type: XenoClaws
+
+- type: entity
+  abstract: true
+  id: CMXenoLarge
+  components:
+  - type: Speech
+    speechVerb: LargeMob
+
+- type: entity
+  abstract: true
+  parent: CMXenoBase
+  id: CMXenoUndeveloped
+
+- type: entity
+  id: CMXenoAI
+  parent: CMXenoBase
+  abstract: true
+#  components:
+#  - type: HTN # TODO RMC14 needs to not target nested marines
+#    rootTask:
+#      task: CMXenoCompound
+
+- type: entity
+  abstract: true
+  id: RMCXenoVentCrawler
+  components:
+  - type: VentCrawler
+    ventCrawlIcon: unknown
+  - type: RMCTrayCrawler
+
+- type: entity
+  id: CMXenoDeveloped
+  parent:
+  - CMXenoBase
+  - CMXenoPrying
+  - CMXenoPuller
+  - CMXenoMelee
+  - CMXenoAI
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: Hands
+  - type: GiveHands
+    hands:
+    - name: Right Hand
+      location: Right
+    - name: Left Hand
+      location: Left
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoFruit
+  - type: ParalyzeOnPullAttempt
+  # WOLFGATE: RMC's FirePatter on upstream fire
+  - type: XenoFirePatter
+    stacks: -5
+  - type: RMCHandEmotes
+  - type: XenoToggleChargingKnockback
+  - type: XenoCanAddPlasmaToConstruct
+
+- type: entity
+  abstract: true
+  id: CMXenoTail
+  components:
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
+    tailRange: 2.5
+
+- type: entity
+  abstract: true
+  id: CMXenoFlammable
+  components:
+  - type: Flammable
+    fireSpread: false
+    canResistFire: true
+    damage: #per second, scales with number of fire 'stacks'
+      types:
+        Heat: 1
+
+# WOLFGATE: cut RMCXenoCommendationReceiver (commendations)
+
+- type: entity
+  abstract: true
+  id: RMCXenoSpeechSounds
+  components:
+  - type: Speech
+    speechSounds: Xenonid
+
+- type: entity
+  abstract: true
+  id: RMCXenoMobCollision
+  components:
+  - type: MobCollision
+    minimumSpeedModifier: 0.25
+  - type: RMCMobCollision
+
+- type: speechVerb
+  id: Xeno
+  name: chat-speech-verb-name-default
+  speechVerbStrings:
+  - hisses

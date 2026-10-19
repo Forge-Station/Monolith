@@ -46,6 +46,7 @@ using Robust.Shared.Timing; // Mono
 using Content.Shared.Stacks;
 using Content.Server.Stack;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
+using Content.Shared._WF.RMCCore.Explosion; // WOLFGATE(RMCCore)
 
 
 namespace Content.Server.Explosion.EntitySystems;
@@ -233,6 +234,11 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             explosive.MaxTileBreak,
             explosive.CanCreateVacuum,
             user);
+
+        // WOLFGATE(RMCCore) START: RMC explosion effects (CMExplosionEffect, wall charges) run when the explosive goes off
+        var cmTriggeredEv = new CMExplosiveTriggeredEvent();
+        RaiseLocalEvent(uid, ref cmTriggeredEv);
+        // WOLFGATE END
 
         if (explosive.DeleteAfterExplosion ?? delete)
             EntityManager.QueueDeleteEntity(uid);

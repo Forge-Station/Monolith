@@ -1,0 +1,48 @@
+using Content.Shared._WF.RMCCore.Stealth;
+using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
+using Robust.Shared.Prototypes;
+
+namespace Content.Client._WF.RMCCore.Stealth;
+
+public sealed partial class EntityInvisibilityVisualsSystem : EntitySystem
+{
+    [Dependency] private IPrototypeManager _prototypes = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<EntityTurnInvisibleComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<EntityTurnInvisibleComponent, ComponentShutdown>(OnShutdown);
+    }
+
+    private void OnStartup(Entity<EntityTurnInvisibleComponent> ent, ref ComponentStartup args)
+    {
+        if (!TryComp(ent, out SpriteComponent? sprite))
+            return;
+
+        sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
+    }
+
+    private void OnShutdown(Entity<EntityTurnInvisibleComponent> ent, ref ComponentShutdown args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        if (!TryComp(ent, out SpriteComponent? sprite))
+            return;
+
+        sprite.PostShader = null;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var invisible = EntityQueryEnumerator<EntityTurnInvisibleComponent, SpriteComponent>();
+        while (invisible.MoveNext(out var uid, out var comp, out var sprite))
+        {
+            var opacity =  TryComp<EntityActiveInvisibleComponent>(uid, out var activeInvisible) ? activeInvisible.Opacity : 1;
+            sprite.PostShader?.SetParameter("visibility", opacity);
+        }
+    }
+}

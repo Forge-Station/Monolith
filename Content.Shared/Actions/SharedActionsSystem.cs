@@ -16,6 +16,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared._WF.RMCCore.Actions; // WOLFGATE(RMCCore)
 
 namespace Content.Shared.Actions;
 
@@ -220,9 +221,21 @@ public abstract partial class SharedActionsSystem : EntitySystem
         if (!TryGetActionData(actionId, out var action) || action.UseDelay == null)
             return;
 
-        action.Cooldown = (GameTiming.CurTime, GameTiming.CurTime + action.UseDelay.Value);
+        // WOLFGATE(RMCCore) START: RMC handlers can shorten the use delay window (ActionReducedUseDelay)
+        // action.Cooldown = (GameTiming.CurTime, GameTiming.CurTime + action.UseDelay.Value);
+        action.Cooldown = RMCUseDelayWindow(actionId.Value, action.UseDelay.Value, GameTiming.CurTime);
+        // WOLFGATE END
         Dirty(actionId.Value, action);
     }
+
+    // WOLFGATE(RMCCore) START: raises RMC's StartUseDelayEvent and returns the cooldown window it settles on
+    private (TimeSpan Start, TimeSpan End) RMCUseDelayWindow(EntityUid actionId, TimeSpan delay, TimeSpan start)
+    {
+        var ev = new StartUseDelayEvent { Delay = delay, Start = start, End = start + delay };
+        RaiseLocalEvent(actionId, ref ev);
+        return (ev.Start, ev.End);
+    }
+    // WOLFGATE END
 
     public void SetUseDelay(EntityUid? actionId, TimeSpan? delay)
     {
@@ -512,6 +525,14 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
     public bool ValidateEntityTarget(EntityUid user, EntityUid target, Entity<EntityTargetActionComponent> actionEnt)
     {
+        // WOLFGATE(RMCCore) START: RMC puts some actions on cooldown when their entity target misses (RMCCooldownOnMiss)
+        if (!target.IsValid() || Deleted(target))
+        {
+            EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(GetNetEntity(actionEnt)));
+            return false;
+        }
+        // WOLFGATE END
+
         var comp = actionEnt.Comp;
         if (!ValidateEntityTargetBase(user,
                 target,
@@ -695,7 +716,10 @@ public abstract partial class SharedActionsSystem : EntitySystem
         if (action is { UseDelay: not null, Charges: null or < 1 })
         {
             dirty = true;
-            action.Cooldown = (curTime, curTime + action.UseDelay.Value);
+            // WOLFGATE(RMCCore) START: same use delay window as StartUseDelay
+            // action.Cooldown = (curTime, curTime + action.UseDelay.Value);
+            action.Cooldown = RMCUseDelayWindow(actionId, action.UseDelay.Value, curTime);
+            // WOLFGATE END
         }
 
         if (dirty)

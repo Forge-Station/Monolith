@@ -99,6 +99,14 @@
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 90
+  # WOLFGATE(Xenonids): species can host facehuggers, be devoured by xenos and are slowed by their weeds
+  - type: Infectable
+  - type: Devourable
+  # WOLFGATE(Xenonids): xeno slows (slowing spit, neurotoxin) need RMC's species modifier; RMC's marine values
+  - type: RMCSpeciesSlowdownModifier
+    slowModifier: 2
+    superSlowModifier: 4
+  - type: AffectableByWeeds
   - type: HumanoidAppearance
     species: Human
   - type: SlowOnDamage

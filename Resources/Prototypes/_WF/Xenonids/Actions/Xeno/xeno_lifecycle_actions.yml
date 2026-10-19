@@ -1,0 +1,277 @@
+# Actions of the egg, parasite, projectile and acid code, from RMC xeno_offense_actions.yml and xeno_self_actions.yml.
+# WOLFGATE: RMC's guidebook action entities are not ported
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAcidNormal
+  name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
+  description: Melts down a structure or item over time.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    checkCanInteract: false
+    repeat: true
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidNormal
+      strength: Normal
+      plasmaCost: 100
+      time: 50 # seconds
+      dps: 7.2
+      expendableLightDps: 2.5
+
+- type: entity
+  parent: ActionXenoAcidNormal
+  id: ActionXenoAcidWeak
+  name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
+  description: Melts down a structure or item over time.
+  components:
+  - type: EntityTargetAction
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidWeak
+      strength: Weak
+      plasmaCost: 75
+      time: 125 # seconds or 2~ minutes
+      dps: 3.6
+      expendableLightDps: 0.8
+
+- type: entity
+  parent: ActionXenoAcidNormal
+  id: ActionXenoAcidStrong
+  name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
+  description: Melts down a structure or item over time.
+  components:
+  - type: EntityTargetAction
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidStrong
+      strength: Strong
+      plasmaCost: 125
+      time: 20 # seconds
+      dps: 18
+      expendableLightDps: 35
+
+- type: entity
+  parent: ActionXenoAcidNormal
+  id: ActionXenoAcidAcider
+  name: Strong Corrosive Acid (100 acid)
+  description: Melts down barricades or items over time. You cannot melt structures.
+  components:
+  - type: EntityTargetAction
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidStrong
+      strength: Strong
+      plasmaCost: 0
+      energyCost: 100
+      applyTimeMultiplier: 0.25
+      time: 20 # seconds
+      dps: 18
+      expendableLightDps: 35
+      vehicleDamage: 50
+
+# WOLFGATE: the spits take an entity or a tile, so they are EntityWorldTargetActions (RMC combines two target components)
+- type: entity
+  id: ActionXenoSlowingSpit
+  parent: ActionXenoBase
+  name: Slowing Spit (20) # TODO RMC14 proper plasma costs
+  description: Launches a damageless projectile that will slow the first enemy that it hits, and paralyze them if they have no armor. It'll also drain helpful substances from their body.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: xeno_spit
+    useDelay: 2
+    repeat: true
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoSlowingSpitActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoScatteredSpit
+  parent: ActionXenoBase
+  name: Scattered Spit (20) # TODO RMC14 proper plasma costs
+  description: Launches multiple damageless projectiles that will briefly paralyze any enemies they hit.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: acid_shotgun
+    useDelay: 7
+    repeat: true
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoScatteredSpitActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoSpit
+  parent: ActionXenoBase
+  name: Xeno Spit (25) # TODO RMC14 proper plasma costs
+  description: Launches a projectile that will deal damage to the first enemy that it hits.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: xeno_spit
+    useDelay: 2.5
+    repeat: true
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoSpitActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoSpitPraetorian
+  parent: ActionXenoSpit
+  components:
+  - type: EntityWorldTargetAction
+    useDelay: 2
+
+- type: entity
+  id: ActionXenoChargeSpit
+  parent: ActionXenoBase
+  name: Charge Spit (50) # TODO RMC14 proper plasma costs
+  description: Charges up your next spit, making it deal more damage and coat the enemy in acid, but have less range. Increases your movement speed until the ability expires.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: charge_spit
+    useDelay: 12
+    event: !type:XenoChargeSpitActionEvent
+  - type: XenoActionPlasma
+    cost: 50
+
+- type: entity
+  id: ActionXenoAcidBall
+  parent: ActionXenoBase
+  name: Acid Ball (80) # TODO RMC14 proper plasma costs
+  description: Throws a projectile that will explode into acid spit in all directions after a short delay.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_acid_ball
+    useDelay: 18
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoAcidBallActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoBoneChips
+  parent: ActionXenoBase
+  name: Bone Chips
+  description: Launch a projectile that will damage and slow down the first enemy it hits.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: runner_bonespur
+    useDelay: 12
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoBoneChipsActionEvent
+
+- type: entity
+  id: ActionXenoAcidShotgun
+  parent: ActionXenoBase
+  name: Acid Shotgun (40)
+  description: Launches multiple acid projectiles that deal increased damage to trapped targets. Each hit grants a stack of insight that can empower Deploy Traps. Hitting a trapped target grants 10 stacks.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: acid_shotgun
+    useDelay: 13
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoAcidShotgunActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 40
+
+- type: entity
+  id: ActionXenoGrowOvipositor
+  parent: ActionXenoBase
+  name: Grow Ovipositor (500)
+  description: Become immobile and start laying eggs which will produce children. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: grow_ovipositor
+    event: !type:XenoGrowOvipositorActionEvent
+  - type: XenoGrowOvipositorAction
+
+- type: entity
+  id: ActionXenoRetrieveEgg
+  parent: ActionXenoBase
+  name: Retrieve Egg
+  description: Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs. Using an egg in hand will put it into your storage.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: retrieve_egg
+    checkCanAccess: false
+    deselectOnMiss: false
+    repeat: true
+    range: 16
+    event: !type:XenoRetrieveEggActionEvent
+
+- type: entity
+  id: ActionXenoThrowParasite
+  parent: ActionXenoBase
+  name: Carrier's Bond
+  description: Retrieves a child from your storage if you have an empty hand. Using this on a child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: throw_parasite
+    useDelay: 0
+    checkCanAccess: false
+    deselectOnMiss: false
+    repeat: true
+    range: 16
+    event: !type:XenoThrowParasiteActionEvent
+
+- type: entity
+  id: ActionXenoParasiteReserve
+  parent: ActionXenoBase
+  name: Set Child Reserve
+  description: Sets your child Reserves. Observers cannot join as a stored child if your children stored is less than or equal to your reserve.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: reserve_parasite
+    useDelay: 1
+    event: !type:XenoReserveParasiteActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoGenerateEggs
+  name: Generate Eggs (50)
+  description: Generate an egg every 30 seconds, which goes into your storage. [color=cyan]Consumes 15 plasma every 2 seconds.[/color]
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: lay_egg
+    event: !type:XenoGenerateEggsActionEvent

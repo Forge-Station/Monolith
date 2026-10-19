@@ -1,0 +1,7 @@
+# RMC-14: Resources/Prototypes/_RMC14/Roles/Jobs/JobIcons/base_job_icon.yml
+- type: jobIcon
+  parent: JobIcon
+  id: CMJobIconBase
+  abstract: true
+  locationPreference: Left
+  offset: 3

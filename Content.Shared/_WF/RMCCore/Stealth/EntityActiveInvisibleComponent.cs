@@ -1,0 +1,23 @@
+using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
+
+namespace Content.Shared._WF.RMCCore.Stealth;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+public sealed partial class EntityActiveInvisibleComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public float Opacity = 0.1f;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 EvasionModifier = 0;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 EvasionFriendlyModifier = 0;
+
+    /// <summary>
+    /// If the entity should collide with other mobs while invisible.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DisableMobCollision;
+}

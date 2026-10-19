@@ -1,0 +1,234 @@
+using Content.Shared._WF.RMCCore.Actions;
+using Content.Shared._WF.Barricades;
+using Content.Shared._WF.RMCCore.Line;
+using Content.Shared._WF.RMCCore.Map;
+using Content.Shared._WF.RMCCore.OnCollide;
+using Content.Shared._WF.Vehicles.Core;
+using Content.Shared._WF.Xenonids.Hive;
+using Content.Shared._WF.Xenonids.Plasma;
+using Content.Shared.Actions;
+using Content.Shared.Coordinates;
+using Content.Shared.Damage;
+using Content.Shared.DoAfter;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+
+namespace Content.Shared._WF.Xenonids.Spray;
+
+public sealed partial class XenoSprayAcidSystem : EntitySystem
+{
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private LineSystem _line = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedOnCollideSystem _onCollide = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private RMCMapSystem _rmcMap = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VehicleWheelSystem _vehicleWheels = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+
+    private EntityQuery<BarricadeComponent> _barricadeQuery;
+    private EntityQuery<XenoSprayAcidComponent> _xenoSprayAcidQuery;
+
+    public override void Initialize()
+    {
+        _barricadeQuery = GetEntityQuery<BarricadeComponent>();
+        _xenoSprayAcidQuery = GetEntityQuery<XenoSprayAcidComponent>();
+
+        SubscribeLocalEvent<XenoSprayAcidComponent, XenoSprayAcidActionEvent>(OnSprayAcidAction);
+        SubscribeLocalEvent<XenoSprayAcidComponent, XenoSprayAcidDoAfter>(OnSprayAcidDoAfter);
+
+        SubscribeLocalEvent<SprayAcidedComponent, MapInitEvent>(OnSprayAcidedMapInit);
+        SubscribeLocalEvent<SprayAcidedComponent, ComponentRemove>(OnSprayAcidedRemove);
+    }
+
+    private void OnSprayAcidAction(Entity<XenoSprayAcidComponent> xeno, ref XenoSprayAcidActionEvent args)
+    {
+        if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+            return;
+
+        var target = GetNetCoordinates(args.Target);
+
+        var xenoCoords = _transform.GetMoverCoordinates(xeno);
+
+        var length = (target.Position - xenoCoords.Position).Length();
+
+        if (length > xeno.Comp.Range)
+        {
+            var direction = (target.Position - xenoCoords.Position).Normalized();
+            var newTile = direction * xeno.Comp.Range;
+            target = new NetCoordinates(GetNetEntity(args.Target.EntityId), xenoCoords.Position + newTile);
+        }
+
+        var ev = new XenoSprayAcidDoAfter(target);
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.DoAfter, ev, xeno) { BreakOnMove = true };
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnSprayAcidDoAfter(Entity<XenoSprayAcidComponent> xeno, ref XenoSprayAcidDoAfter args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        args.Handled = true;
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+            return;
+
+        _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
+
+        if (_net.IsClient)
+            return;
+
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoSprayAcidActionEvent>(xeno))
+        {
+            _actions.StartUseDelay(action.AsNullable());
+        }
+
+        CreateLine(
+            xeno,
+            xeno.Owner.ToCoordinates(),
+            GetCoordinates(args.Coordinates),
+            xeno.Comp.Delay,
+            xeno.Comp.Range,
+            xeno.Comp.Acid
+        );
+    }
+
+    private void OnSprayAcidedMapInit(Entity<SprayAcidedComponent> ent, ref MapInitEvent args)
+    {
+        _appearance.SetData(ent, SprayAcidedVisuals.Acided, true);
+    }
+
+    private void OnSprayAcidedRemove(Entity<SprayAcidedComponent> ent, ref ComponentRemove args)
+    {
+        if (!TerminatingOrDeleted(ent))
+            _appearance.SetData(ent, SprayAcidedVisuals.Acided, false);
+    }
+
+    private void TryAcid(Entity<XenoSprayAcidComponent> acid, RMCAnchoredEntitiesEnumerator anchored)
+    {
+        while (anchored.MoveNext(out var uid))
+        {
+            TryAcid(acid, uid);
+        }
+    }
+
+    private void TryAcid(Entity<XenoSprayAcidComponent> acid, EntityUid target)
+    {
+        var time = _timing.CurTime;
+        if (!_barricadeQuery.HasComp(target))
+            return;
+
+        var comp = EnsureComp<SprayAcidedComponent>(target);
+        comp.Damage = acid.Comp.BarricadeDamage;
+        comp.ExpireAt = time + acid.Comp.BarricadeDuration;
+        Dirty(target, comp);
+    }
+
+    private void TryAcidVehicleWheels(EntityUid splatter)
+    {
+        if (!TryComp(splatter, out DamageOnCollideComponent? onCollide))
+            return;
+
+        var damage = _onCollide.GetCollideDamage((splatter, onCollide)).GetTotal().Float();
+        if (damage <= 0f)
+            return;
+
+        var splatterMap = _transform.GetMapId(splatter);
+        var splatterAabb = _lookup.GetWorldAABB(splatter);
+        var vehicles = new HashSet<Entity<VehicleWheelSlotsComponent>>();
+        _lookup.GetEntitiesIntersecting(splatterMap, splatterAabb, vehicles);
+        foreach (var vehicle in vehicles)
+        {
+            _vehicleWheels.DamageWheels(vehicle, damage);
+        }
+    }
+
+    public void CreateLine(EntityUid user, EntityCoordinates start, EntityCoordinates end, TimeSpan delay, float range, EntProtoId acid, bool ignoreBlocker = true)
+    {
+        var tiles = _line.DrawLine(start, end, delay, range, out var blocker);
+        if (!ignoreBlocker && blocker != null)
+            return;
+
+        var active = EnsureComp<ActiveAcidSprayingComponent>(user);
+        active.Blocker = blocker;
+        active.Acid = acid;
+        active.Spawn = tiles;
+        Dirty(user, active);
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        var spraying = EntityQueryEnumerator<ActiveAcidSprayingComponent>();
+        while (spraying.MoveNext(out var uid, out var active))
+        {
+            active.Chain ??= _onCollide.SpawnChain();
+            for (var i = active.Spawn.Count - 1; i >= 0; i--)
+            {
+                var acid = active.Spawn[i];
+                if (time < acid.At)
+                    continue;
+
+                var spawned = Spawn(active.Acid, acid.Coordinates);
+                var splatter = EnsureComp<XenoAcidSplatterComponent>(spawned);
+                _hive.SetSameHive(uid, spawned);
+                splatter.Xeno = uid;
+                Dirty(spawned, splatter);
+
+                TryAcidVehicleWheels(spawned);
+
+                if (_xenoSprayAcidQuery.TryComp(uid, out var xenoSprayAcid))
+                {
+                    var spray = new Entity<XenoSprayAcidComponent>(uid, xenoSprayAcid);
+
+                    // Same tile
+                    TryAcid(spray, _rmcMap.GetAnchoredEntitiesEnumerator(spawned));
+
+                    if (active.Spawn.Count <= 1 && active.Blocker != null)
+                    {
+                        TryAcid(spray, active.Blocker.Value);
+                        active.Blocker = null;
+                        Dirty(uid, active);
+                    }
+                }
+
+                _onCollide.SetChain(spawned, active.Chain.Value);
+
+                active.Spawn.RemoveAt(i);
+            }
+
+            if (active.Spawn.Count == 0)
+                RemCompDeferred<ActiveAcidSprayingComponent>(uid);
+        }
+
+        var acidedQuery = EntityQueryEnumerator<SprayAcidedComponent>();
+        while (acidedQuery.MoveNext(out var uid, out var acided))
+        {
+            if (time >= acided.ExpireAt)
+            {
+                RemCompDeferred<SprayAcidedComponent>(uid);
+                continue;
+            }
+
+            if (time < acided.NextDamageAt)
+                continue;
+
+            acided.NextDamageAt = time + acided.DamageEvery;
+            _damageable.TryChangeDamage(uid, acided.Damage, origin: uid);
+        }
+    }
+}

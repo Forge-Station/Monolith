@@ -273,6 +273,34 @@
               3
             ]
           ]
+        },
+        {
+            "name": "forerunner_computer",
+            "directions": 4
+        },
+        {
+            "name": "forerunner_screen",
+            "directions": 4
+        },
+        {
+            "name": "forerunner_keyboard",
+            "directions": 4
+        },
+        {
+            "name": "forerunner_keyboard_off",
+            "directions": 4
+        },
+        {
+            "name": "forerunner_screen_error",
+            "directions": 4
+        },
+        {
+            "name": "forerunner_keyboard_error",
+            "directions": 4
+        },
+        {
+            "name": "forerunner_keyboard_off_error",
+            "directions": 4
         }
     ]
 }

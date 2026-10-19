@@ -1,3 +1,4 @@
+# New holocomputer, really cool and futuristic. It’s just a decoration(and button).
 - type: entity
   id: BaseStructureHoloComputer
   parent: BaseStructure
@@ -45,7 +46,7 @@
   parent: BaseStructureHoloComputer
   id: HoloComputerForerunner
   name: ancient holocomputer
-  description: Used to access something.. This computer is a relic of a bygone era.
+  description: Used to do something.. This computer is a relic of a bygone era.
   placement:
     mode: SnapgridCenter
   components:
@@ -67,6 +68,10 @@
     powerLoad: 200
   - type: ExtensionCableReceiver
   - type: ActivatableUIRequiresPower
+  - type: SignalSwitch
+    onPort: Pressed
+    offPort: Pressed
+    statusPort: Pressed
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -123,7 +128,6 @@
     idleLoad: 5
     batteryRechargeRate: 250
     batteryRechargeEfficiency: 0.95
-    # ambience
   - type: SpamEmitSoundRequirePower
   - type: SpamEmitSound
     minInterval: 12
@@ -134,3 +138,48 @@
         volume: -12
         maxDistance: 4
         variation: 0.05
+
+#Frame and computers with different screens in forerunner style
+
+#Decoration
+- type: entity
+  parent: BaseComputer
+  id: BaseComputerForerunner
+  name: ancient computer
+  description: An ancient device. Old, battered, scratched up, but it makes such a pleasant sound when it starts up.
+  suffix: Forge, Forerunner
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: forerunner_computer
+    - map: ["computerLayerKeyboard"]
+      state: forerunner_keyboard_off
+    - map: ["computerLayerScreen"]
+      state: forerunner_screen
+    - map: ["computerLayerKeys"]
+      state: forerunner_keyboard
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+
+- type: entity
+  parent: BaseComputer
+  id: ComputerForerunnerError
+  name: ancient computer
+  description: An ancient device. Great secrets lie hidden behind this error.
+  suffix: Forge, Forerunner, Error
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: forerunner_computer
+    - map: ["computerLayerKeyboard"]
+      state: forerunner_keyboard_off_error
+    - map: ["computerLayerScreen"]
+      state: forerunner_screen_error
+    - map: ["computerLayerKeys"]
+      state: forerunner_keyboard_error
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open

@@ -261,6 +261,21 @@
     price: 80
     vendPrice: 120
 
+#USSP(K) company
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretVdv
+  name: beret VDV.
+  description: Beret of the Airborne Troops of the USSP. Seeing it, you remember some song.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hats/beret_vdv.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hats/beret_vdv.rsi
+  - type: StaticPrice
+    price: 10
+    vendPrice: 250
+
 #region Other
 - type: entity
   parent: [ ClothingHeadBase, BaseCentcommContraband ]

@@ -1,0 +1,29 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+- type: entity
+  name: bone blade
+  parent: BaseItem
+  id: GeneBoneBlade
+  description: A jagged blade of living bone forced out through flesh. It still feels warm.
+  components:
+  - type: Sharp
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/armblade.rsi
+    state: icon
+  - type: MeleeWeapon
+    wideAnimationRotation: 90
+    attackRate: 0.9
+    heavyStaminaCost: 8
+    damage:
+      types:
+        Slash: 18
+        Piercing: 6
+  - type: Item
+    size: Normal
+    sprite: Objects/Weapons/Melee/armblade.rsi
+  - type: Prying
+  - type: Unremoveable
+    deleteOnDrop: true
+  - type: GeneticBoneBlade

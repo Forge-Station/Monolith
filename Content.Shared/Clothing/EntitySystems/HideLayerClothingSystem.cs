@@ -16,7 +16,34 @@ public sealed partial class HideLayerClothingSystem : EntitySystem
         SubscribeLocalEvent<HideLayerClothingComponent, ClothingGotUnequippedEvent>(OnHideGotUnequipped);
         SubscribeLocalEvent<HideLayerClothingComponent, ClothingGotEquippedEvent>(OnHideGotEquipped);
         SubscribeLocalEvent<HideLayerClothingComponent, ItemMaskToggledEvent>(OnHideToggled);
+
+        //Forge-Change-Start
+        SubscribeLocalEvent<HideLayerClothingComponent, ComponentStartup>(OnHideStartup);
+        SubscribeLocalEvent<HideLayerClothingComponent, ComponentShutdown>(OnHideShutdown);
+        //Forge-Change-End
     }
+
+    //Forge-Change-Start
+    private void OnHideStartup(Entity<HideLayerClothingComponent> ent, ref ComponentStartup args)
+    {
+        if (TryComp<ClothingComponent>(ent, out var clothing) && clothing.InSlot is not null)
+        {
+            var wearer = Transform(ent).ParentUid;
+            if (wearer.IsValid() && TryComp<HumanoidAppearanceComponent>(wearer, out var humanoid))
+                SetLayerVisibility((ent.Owner, ent.Comp, clothing), (wearer, humanoid), true);
+        }
+    }
+
+    private void OnHideShutdown(Entity<HideLayerClothingComponent> ent, ref ComponentShutdown args)
+    {
+        if (TryComp<ClothingComponent>(ent, out var clothing) && clothing.InSlot is not null)
+        {
+            var wearer = Transform(ent).ParentUid;
+            if (wearer.IsValid() && TryComp<HumanoidAppearanceComponent>(wearer, out var humanoid))
+                SetLayerVisibility((ent.Owner, ent.Comp, clothing), (wearer, humanoid), false);
+        }
+    }
+    //Forge-Change-End
 
     private void OnHideToggled(Entity<HideLayerClothingComponent> ent, ref ItemMaskToggledEvent args)
     {

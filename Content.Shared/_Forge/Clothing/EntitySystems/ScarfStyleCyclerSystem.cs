@@ -4,7 +4,7 @@ using Content.Shared._Forge.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Popups;
+using Content.Shared.Popups; ///test
 
 namespace Content.Shared._Forge.Clothing.Components;
 

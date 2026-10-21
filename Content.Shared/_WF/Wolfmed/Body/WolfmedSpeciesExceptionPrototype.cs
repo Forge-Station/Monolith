@@ -38,7 +38,7 @@ public enum WolfmedSpeciesCheck : byte
     /// <summary>Mechanical: every coolant pump carries WolfmedOrgan.</summary>
     PumpData,
 
-    /// <summary>Mechanical: pulling the power source shuts the chassis down.</summary>
+    /// <summary>Mechanical: pulling the power source puts the chassis on low power (Synthetics), not down.</summary>
     PowerShutdown,
 
     /// <summary>Mechanical: taking the core out kills.</summary>

@@ -1,10 +1,13 @@
 using Content.Server._EinsteinEngines.Silicon.Charge;
 using Content.Server._EinsteinEngines.Silicon.Death;
+using Content.Server._WF.Synthetics;
 using Content.Server._WF.Wolfmed.Consciousness;
+using Content.Server.Body.Components;
 using Content.Shared._EinsteinEngines.Silicon.Components;
 using Content.Shared._HL.Silicons.Synths.Battery;
 using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared._WF.Wolfmed.Body;
+using Content.Shared._WF.Wolfmed.CCVar;
 using Content.Shared._WF.Wolfmed.Consciousness;
 using Content.Shared._WF.Wolfmed.Life;
 using Content.Shared._WF.Wolfmed.Wounds;
@@ -12,12 +15,16 @@ using Content.Shared.Body.Systems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Content.Shared.PowerCell.Components;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
 namespace Content.Server._WF.Wolfmed.Life;
 
-/// <summary>A mechanical body's cardiac arrest: without power or its pump it shuts down until repaired.</summary>
+/// <summary>
+/// A mechanical body's cardiac arrest: without its pump it shuts down until repaired. Without power a synthetic
+/// chassis goes on low power instead (Synthetics); only a mechanical body that is not synthetic shuts down for it.
+/// </summary>
 // No blood and no breathing means no oxygenation clock, so a shut-down machine stays unconscious indefinitely with
 // nothing running out. Death is still the brain, the positronic one for a chassis, through the ordinary organ path.
 public sealed class WolfmedShutdownSystem : EntitySystem
@@ -28,13 +35,18 @@ public sealed class WolfmedShutdownSystem : EntitySystem
     /// <summary>How often a chassis that is already down re-checks that it should still be.</summary>
     private static readonly TimeSpan ReconcileInterval = TimeSpan.FromSeconds(1);
 
+    /// <summary>How far above the arrest line the fluid must be before a dry chassis restarts.</summary>
+    private const float DryRestartMargin = 0.05f;
+
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
     [Dependency] private SharedBodySystem _body = default!;
     [Dependency] private WolfmedConsciousnessSystem _consciousness = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SiliconChargeSystem _siliconCharge = default!;
     [Dependency] private WolfmedDyingActionsSystem _dyingActions = default!; // Playtest 5
+    [Dependency] private WFLowPowerSystem _lowPower = default!; // Synthetics
 
     private TimeSpan _nextReconcile;
 
@@ -155,13 +167,22 @@ public sealed class WolfmedShutdownSystem : EntitySystem
         // they are two halves of one state and only one of them survives a rejuvenate. SetExternalPressure
         // is itself a no-op when the level has not moved.
         var power = powered ?? HasPower(body);
-        var down = !power || !HasPump(body);
+        // Synthetics: an empty cell puts a synthetic chassis on low power, still up; the pump alone shuts it down.
+        var lowPower = !power && _lowPower.SetLowPower(body, true);
+        if (power)
+            _lowPower.SetLowPower(body, false);
+
+        var pump = HasPump(body);
+        var dry = pump && IsDry(body);
+        var down = !power && !lowPower || !pump || dry;
         if (down)
         {
             // M1a: the reason the HUD and the alerts name. An empty cell is the one the player can fix.
             var fresh = !HasComp<WolfmedShutdownComponent>(body);
             var shutdown = EnsureComp<WolfmedShutdownComponent>(body);
-            var reason = power ? WolfmedCauseSource.Pump : WolfmedCauseSource.Power;
+            var reason = !power && !lowPower ? WolfmedCauseSource.Power
+                : !pump ? WolfmedCauseSource.Pump
+                : WolfmedCauseSource.Fluid;
             if (shutdown.Reason != reason)
             {
                 shutdown.Reason = reason;
@@ -192,6 +213,23 @@ public sealed class WolfmedShutdownSystem : EntitySystem
             return !synth.Unpowered;
 
         return !TryComp(body, out SiliconDownOnDeadComponent? silicon) || !silicon.Dead;
+    }
+
+    /// <summary>
+    /// Synthetics playtest, "HYDRAULIC PRESSURE LOW is a perma state, unable to even succumb": below the blood level
+    /// an organic heart stops at, the pump has nothing to move and the chassis shuts down, with Succumb as in arrest.
+    /// It restarts a little above that line, so a chassis on the line does not flicker.
+    /// </summary>
+    public bool IsDry(EntityUid body)
+    {
+        if (!HasComp<BloodstreamComponent>(body) || !TryComp(body, out WolfmedConsciousnessComponent? consciousness))
+            return false;
+
+        var line = _configuration.GetCVar(WolfmedCVars.ArrestBlood);
+        if (CompOrNull<WolfmedShutdownComponent>(body)?.Reason == WolfmedCauseSource.Fluid)
+            line += DryRestartMargin;
+
+        return consciousness.BloodFraction <= line;
     }
 
     /// <summary>A coolant pump in the chassis that has not been destroyed. The analyzer's cooling line reads it too.</summary>

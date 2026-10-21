@@ -464,7 +464,7 @@ public sealed class WolfmedSyntheticHudTest : GameTest
             hudSystem.Refresh((body, hud));
             Assert.Multiple(() =>
             {
-                Assert.That(hud.Sensors, Is.EqualTo(0f).Within(0.01f), "an undamaged chassis reports sensor load.");
+                Assert.That(hud.Sensors, Is.EqualTo(1f).Within(0.01f), "an undamaged chassis reports sensor load.");
                 Assert.That(hud.CoreTemperature, Is.GreaterThan(0f), "no chassis temperature on the readout.");
             });
 
@@ -480,7 +480,7 @@ public sealed class WolfmedSyntheticHudTest : GameTest
 
             Assert.Multiple(() =>
             {
-                Assert.That(hud.Sensors, Is.EqualTo(0.5f).Within(0.01f), "half the soft cap is half the sensor load.");
+                Assert.That(hud.Sensors, Is.EqualTo(0.5f).Within(0.01f), "half the soft cap is half the sensor headroom.");
                 Assert.That(hud.CoreTemperature, Is.EqualTo(450f).Within(0.5f));
                 Assert.That(Loc.GetString("wolfmed-synthetic-row-core-temp", ("value", 450)), Does.Contain("450 K"));
             });

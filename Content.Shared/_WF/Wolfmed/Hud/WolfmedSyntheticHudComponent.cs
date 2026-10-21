@@ -54,9 +54,9 @@ public sealed partial class WolfmedSyntheticHudComponent : Component
     [AutoNetworkedField]
     public string CauseLine = string.Empty;
 
-    /// <summary>M1a D: damage-sensor load, the chassis's pain against its soft cap, 0 to 1 (plan §5.6).</summary>
+    /// <summary>M1a D: damage-sensor headroom, 1 less the chassis's pain against its soft cap, 0 to 1 (plan §5.6).</summary>
     [AutoNetworkedField]
-    public float Sensors;
+    public float Sensors = 1f;
 
     /// <summary>M1a D: chassis temperature in kelvin, or -1 when it has none (plan §5.6; the M4 core-heat input).</summary>
     [AutoNetworkedField]
@@ -124,4 +124,19 @@ public enum WolfmedSyntheticCondition : byte
 
     /// <summary>M4 (plan §3.11): core or chassis past the warning line, before thermal shutdown.</summary>
     CoreTempCritical,
+
+    /// <summary>The optics carry flash damage: blurred or blind until glass or the eye surgery fixes them.</summary>
+    OpticsDamaged,
+
+    /// <summary>Synthetics: the chassis panel has cut the part's servos and sensors. Shown instead of PartDisabled.</summary>
+    PartIsolated,
+
+    /// <summary>Synthetics: an empty cell or none. On the torso, and on each arm low power has cut.</summary>
+    LowPower,
+
+    /// <summary>Synthetics: the radiation collector is full; more radiation strains it and leaks into the core.</summary>
+    RadSaturated,
+
+    /// <summary>Synthetics: no working radiation collector; radiation goes straight into the core.</summary>
+    RadMissing,
 }

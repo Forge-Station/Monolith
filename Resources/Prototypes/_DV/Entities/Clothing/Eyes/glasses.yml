@@ -14,6 +14,7 @@
     - Inorganic
     - Silicon
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
+    - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
     #- HumanoidSilicon # DeltaV - IPCs #mono - commented out 
   - type: Sprite
     sprite: _DV/Clothing/Eyes/Glasses/traymeson.rsi

@@ -211,6 +211,9 @@ public sealed class WolfmedWoundTreatmentMatrixTest : GameTest
             "a deep cut to a chassis limb", "slow hand work, or a limp", "WFSurgeryReplaceServo"),
         ["WFWolfmedOverheatingWound"] = new(Nothing, Exit.Time,
             "heat on a chassis", "the part runs too hot to work properly"),
+        // Synthetics: made only by a hand reattach (WFSyntheticLimbSystem).
+        ["WFWolfmedLooseCouplingWound"] = new(Coil, Exit.Items,
+            "a chassis limb put back on by hand", "slow hand work, or a limp"),
 
         // EVISC, a torso opened by damage its cap could not absorb.
         ["WFWolfmedEviscerationWound"] = new(Nothing, Exit.Surgery,

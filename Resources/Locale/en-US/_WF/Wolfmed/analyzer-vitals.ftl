@@ -9,6 +9,7 @@ wolfmed-vitals-state-faint-timed = FAINTED: { $cause }, { $seconds } s
 wolfmed-vitals-state-unconscious = UNCONSCIOUS: { $cause }
 wolfmed-vitals-state-arrest = CARDIAC ARREST: { $cause }
 wolfmed-vitals-state-shutdown = SHUTDOWN: { $cause }
+wolfmed-vitals-state-low-power = LOW POWER: cell empty
 wolfmed-vitals-state-dead = DEAD
 wolfmed-vitals-state-dead-brain = DEAD: catastrophic brain injury
 wolfmed-vitals-state-dead-mechanical = CORE FAILURE
@@ -43,6 +44,7 @@ wolfmed-vitals-source-arrestshock = shock
 wolfmed-vitals-source-arrestother = unknown cause
 wolfmed-vitals-source-power = no power
 wolfmed-vitals-source-pump = coolant pump offline
+wolfmed-vitals-source-fluid = hydraulic pressure lost
 
 # Playtest 3: breathing, the pulse and the blood are items on the one vitals line, shown only when not normal.
 wolfmed-vitals-breathing-depressed = Breathing depressed, sedation { $percent }%

@@ -235,9 +235,9 @@ public sealed class WolfmedMechanicalWoundTest : GameTest
             var body = entities.SpawnEntity("MobIPC", map.GridCoords);
             var chassis = Part(entities, body, BodyPartType.Torso);
 
-            // The IPC modifier set multiplies Shock by 2.5 before routing, so 12 reaches the part as 30,
-            // and the rule's severityMultiplier 0.7 makes that a 21-severity short. M6 (P25): this file's Damage
-            // helper ignores resistances, which the routing now honours, so this hit takes the resistances.
+            // The IPC modifier set multiplies Shock by 1.6 before routing (Synthetics playtest: was 2.5), so 12 reaches
+            // the part as 19.2, and the rule's severityMultiplier 0.7 makes that a 13.44-severity short. M6 (P25): this
+            // file's Damage helper ignores resistances, which the routing now honours, so this hit takes the resistances.
             entities.System<DamageableSystem>().TryChangeDamage(body, Spec("Shock", 12), origin: null,
                 targetPart: TargetBodyPart.Torso);
             var short_ = FindWound(entities, wounds, chassis, "WFWolfmedShortCircuitWound");
@@ -245,7 +245,7 @@ public sealed class WolfmedMechanicalWoundTest : GameTest
             Assert.Multiple(() =>
             {
                 Assert.That(entities.GetComponent<WoundComponent>(short_).Severity,
-                    Is.EqualTo(FixedPoint2.New(21)));
+                    Is.EqualTo(FixedPoint2.New(13.44)));
                 Assert.That(entities.HasComponent<StunnedComponent>(body), Is.True,
                     "the frame locks up each time the short lands.");
                 Assert.That(traits.TryGetBehavior(short_, out WolfmedShortCircuitBehavior arc), Is.True);
@@ -315,16 +315,16 @@ public sealed class WolfmedMechanicalWoundTest : GameTest
             var body = entities.SpawnEntity("MobIPC", map.GridCoords);
             var arm = Part(entities, body, BodyPartType.Arm, BodyPartSymmetry.Left);
 
-            // The IPC modifier set multiplies Heat by 1.5, so 40 reaches the part as 60; the rule's
-            // severityMultiplier 0.8 makes that 48, past the 45 the worst stage starts at. M6 (P25): the Damage
-            // helper ignores resistances, which the routing now honours, so this hit takes the resistances.
-            entities.System<DamageableSystem>().TryChangeDamage(body, Spec("Heat", 40), origin: null,
+            // The IPC modifier set multiplies Heat by 1.1 (Synthetics playtest: was 1.5), so 55 reaches the part as 60.5;
+            // the rule's severityMultiplier 0.8 makes that 48.4, past the 45 the worst stage starts at. M6 (P25): the
+            // Damage helper ignores resistances, which the routing now honours, so this hit takes the resistances.
+            entities.System<DamageableSystem>().TryChangeDamage(body, Spec("Heat", 55), origin: null,
                 targetPart: TargetBodyPart.LeftArm);
             var wound = FindWound(entities, wounds, arm, "WFWolfmedOverheatingWound");
 
             Assert.Multiple(() =>
             {
-                Assert.That(entities.GetComponent<WoundComponent>(wound).Severity, Is.EqualTo(FixedPoint2.New(48)));
+                Assert.That(entities.GetComponent<WoundComponent>(wound).Severity, Is.EqualTo(FixedPoint2.New(48.4)));
                 Assert.That(overheating.IsOverheating(arm), Is.True);
                 Assert.That(prototypes.Index<WoundPrototype>("WFWolfmedOverheatingWound").DamageTypes, Is.Empty,
                     "no damage type means no tool and no damage removal reaches it.");

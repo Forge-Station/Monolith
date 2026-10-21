@@ -109,6 +109,9 @@ public sealed class WolfmedVitalsReport
     /// <summary>A chassis: machine words, no pulse, no breathing, oil instead of blood.</summary>
     public bool Mechanical;
 
+    /// <summary>A synthetic running on an empty cell: up, slow, one arm. The state line names it over ONLINE.</summary>
+    public bool LowPower;
+
     /// <summary>Dead with the brain organ at 0 HP: catastrophic brain injury, not permanent loss.</summary>
     public bool BrainDestroyed;
 
@@ -484,6 +487,7 @@ public static class WolfmedVitalsText
             // M4 (OD16): a heartless species' arrest.
             WolfmedVitalsState.Arrest when report.Heartless => Loc.GetString("wolfmed-vitals-state-collapse",
                 ("cause", CauseName(report.Cause, report.Source, report.Mechanical))),
+            WolfmedVitalsState.Up when report.LowPower => Loc.GetString("wolfmed-vitals-state-low-power"),
             WolfmedVitalsState.Up => Loc.GetString(report.Mechanical
                 ? "wolfmed-vitals-state-up-mechanical"
                 : "wolfmed-vitals-state-up"),

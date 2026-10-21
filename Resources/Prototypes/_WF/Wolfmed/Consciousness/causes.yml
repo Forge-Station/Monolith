@@ -149,6 +149,7 @@
   sources:
     Power: wolfmed-cause-shutdown-source-power
     Pump: wolfmed-cause-shutdown-source-pump
+    Fluid: wolfmed-cause-shutdown-source-fluid
 
 # An outside pressure no cause claims (admin and test keys). Stock alerts, generic lines.
 - type: wolfmedConsciousnessCause

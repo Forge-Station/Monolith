@@ -289,9 +289,8 @@ public sealed class WolfmedDyingActionsSystem : EntitySystem
         else if (_shutdown.IsShutDown(body))
         {
             // Playtest 5: a chassis with no power or no pump. Core failure, like thermal shutdown, and the same way back.
-            var reason = Loc.GetString(CompOrNull<WolfmedShutdownComponent>(body)?.Reason == WolfmedCauseSource.Pump
-                ? "wolfmed-cause-shutdown-source-pump"
-                : "wolfmed-cause-shutdown-source-power");
+            var source = CompOrNull<WolfmedShutdownComponent>(body)?.Reason ?? WolfmedCauseSource.Power;
+            var reason = Loc.GetString($"wolfmed-cause-shutdown-source-{source.ToString().ToLowerInvariant()}");
             text = minutes is { } rot
                 ? Loc.GetString("wolfmed-succumb-dialog-text-shutdown", ("reason", reason), ("minutes", rot))
                 : Loc.GetString("wolfmed-succumb-dialog-text-shutdown-no-decay", ("reason", reason));

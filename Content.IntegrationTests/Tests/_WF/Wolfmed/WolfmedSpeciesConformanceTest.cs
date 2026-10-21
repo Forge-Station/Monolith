@@ -162,7 +162,8 @@ public sealed class WolfmedSpeciesConformanceTest : GameTest
 
             foreach (var (species, body) in machines)
             {
-                if (!shutdown.IsShutDown(body))
+                // Synthetics: no power is low power, still up, rather than a shutdown.
+                if (shutdown.IsShutDown(body) || !SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(body))
                     Fail(species, WolfmedSpeciesCheck.PowerShutdown);
 
                 var core = graph.GetBodyOrgans(body).FirstOrDefault(organ => SEntMan.HasComponent<BrainComponent>(organ.Id)).Id;

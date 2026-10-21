@@ -20,6 +20,10 @@ public sealed partial class BodyPartFunctionalitySystem : EntitySystem
         if (TryComp(part, out CyberneticsComponent? cybernetics) && cybernetics.Disabled)
             return BodyPartFunctionalityState.Disabled;
 
+        // WOLFGATE(Synthetics): a chassis part isolated from the panel has no servos.
+        if (HasComp<Content.Shared._WF.Synthetics.WFIsolatedPartComponent>(part))
+            return BodyPartFunctionalityState.Disabled;
+
         if (!_configuration.GetCVar(CCVars.WoundsBodyPartFunctionalityEnabled))
             return BodyPartFunctionalityState.Functional;
 

@@ -44,6 +44,7 @@
     - Inorganic
     - Silicon
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
+    - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
   inventoryTemplateId: borgShort
   spriteBodyState: engineer
   spriteHasMindState: engineer_l
@@ -127,6 +128,7 @@
     - Inorganic
     - Silicon
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
+    - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
   inventoryTemplateId: borgShort
   spriteBodyState: engineer
   spriteHasMindState: engineer_l
@@ -188,6 +190,7 @@
     - Inorganic
     - Silicon
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
+    - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/_Mono/Effects/Footsteps/borgwalk3.ogg
@@ -224,6 +227,7 @@
     - Inorganic
     - Silicon
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
+    - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/_Mono/Effects/Footsteps/borgwalk3.ogg
@@ -258,6 +262,7 @@
     - Inorganic
     - Silicon
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
+    - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/_Mono/Effects/Footsteps/borgwalk4.ogg
@@ -294,6 +299,7 @@
     - Inorganic
     - Silicon
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
+    - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/_Mono/Effects/Footsteps/borgwalk4.ogg

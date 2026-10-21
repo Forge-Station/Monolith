@@ -22,6 +22,7 @@ using Content.Shared._WF.Wolfmed.Wounds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Body.Part;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Containers.ItemSlots;
@@ -513,16 +514,21 @@ public sealed class WolfmedMedicInfoTest : GameTest
         });
 
         var (ipc, mindId) = await Possess("MobIPC", map.GridCoords);
-        EntityUid faint = default, bled = default;
+        EntityUid faint = default, bled = default, pump = default, pumpPart = default;
+        var pumpSlot = string.Empty;
         FixedPoint2 damage = default;
 
         await Server.WaitPost(() =>
         {
             faint = SEntMan.SpawnEntity("MobHuman", map.GridCoords);
             bled = SEntMan.SpawnEntity("MobHuman", map.GridCoords);
-            var slots = SEntMan.System<ItemSlotsSystem>();
-            Assert.That(slots.TryGetSlot(ipc, "cell_slot", out var slot), Is.True);
-            SEntMan.System<SharedContainerSystem>().Remove(slot!.Item!.Value, slot.ContainerSlot!);
+            // Synthetics: an empty cell is low power, not shutdown; the pump out is what shuts a chassis down.
+            var graph = SEntMan.System<SharedBodySystem>();
+            pump = graph.GetBodyOrgans(ipc).First(o => SEntMan.HasComponent<Content.Shared._Shitmed.Body.Organ.HeartComponent>(o.Id)).Id;
+            Assert.That(SEntMan.System<SharedContainerSystem>().TryGetContainingContainer(pump, out var holder), Is.True);
+            pumpPart = holder!.Owner;
+            pumpSlot = SEntMan.GetComponent<Content.Shared.Body.Organ.OrganComponent>(pump).SlotId;
+            Assert.That(graph.RemoveOrgan(pump), Is.True);
         });
         await RunSeconds(2);
 
@@ -569,7 +575,7 @@ public sealed class WolfmedMedicInfoTest : GameTest
             SEntMan.GetComponent<WolfmedDormantComponent>(ipc).StableSeconds = 89f;
             dormant.Tick(ipc, 2f);
             Assert.That(dormant.WaitAsGhost(ipc), Is.True, "the offer did not come back once stable again.");
-            Assert.That(SEntMan.System<WolfmedShutdownSystem>().RestoreCell(ipc), Is.True);
+            Assert.That(SEntMan.System<SharedBodySystem>().InsertOrgan(pumpPart, pump, pumpSlot), Is.True, "the pump did not go back.");
         });
         await RunSeconds(3);
         Assert.That(await ClientWindows<ReturnToBodyMenu>(), Is.GreaterThan(0), "the waiting ghost was not offered the way back.");

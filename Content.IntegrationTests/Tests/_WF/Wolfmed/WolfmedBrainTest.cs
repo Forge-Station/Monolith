@@ -509,13 +509,16 @@ public sealed class WolfmedBrainTest : GameTest
             Assert.That(shutdown.IsMechanical(ipc), Is.True, "the IPC fixture is not mechanical.");
             Assert.That(life.GetBrain(ipc), Is.Null, "a chassis is running an oxygenation clock.");
 
-            // The cell going flat is the other half of it, and it is not death either.
+            // The cell going flat is not death either, nor a shutdown any more: Synthetics runs it on low power.
             entities.EventBus.RaiseLocalEvent(ipc, new Content.Server._EinsteinEngines.Silicon.Death
                 .SiliconChargeDeathEvent(ipc, null, ipc));
-            Assert.That(shutdown.IsShutDown(ipc), Is.True, "a chassis with a flat cell kept running.");
+            Assert.That(shutdown.IsShutDown(ipc), Is.False, "a chassis with a flat cell shut down.");
+            Assert.That(entities.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(ipc), Is.True,
+                "a chassis with a flat cell is not on low power.");
             entities.EventBus.RaiseLocalEvent(ipc, new Content.Server._EinsteinEngines.Silicon.Death
                 .SiliconChargeAliveEvent(ipc, null, ipc));
-            Assert.That(shutdown.IsShutDown(ipc), Is.False, "power came back and the chassis stayed down.");
+            Assert.That(entities.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(ipc), Is.False,
+                "power came back and the chassis stayed on low power.");
 
             var pump = Organ<HeartComponent>(entities, ipc);
             Assert.That(graph.RemoveOrgan(pump), Is.True);

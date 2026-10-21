@@ -25,7 +25,7 @@
   priority: 99
   wound: WFWolfmedOverheatingWound
   damageTypes: [ Heat ]
-  minDamage: 8
+  minDamage: 3 # Synthetics playtest: at 8 an armoured chassis never warmed, and lasers never put it down
   severityMultiplier: 0.8
   minSeverity: 8
   replacesDefault: false
@@ -38,7 +38,7 @@
   priority: 98
   wound: WFWolfmedShortCircuitWound
   damageTypes: [ Shock ]
-  minDamage: 10
+  minDamage: 3 # Synthetics playtest: armour no longer stops the finding, as it never stops a flesh burn
   severityMultiplier: 0.7
   minSeverity: 7
   replacesDefault: false
@@ -51,7 +51,7 @@
   priority: 94
   wound: WFWolfmedDentWound
   damageTypes: [ Blunt ]
-  minDamage: 8
+  minDamage: 3 # Synthetics playtest: armour no longer stops the finding, as it never stops a bruise
   severityMultiplier: 0.9
   replacesDefault: false
   continue: true

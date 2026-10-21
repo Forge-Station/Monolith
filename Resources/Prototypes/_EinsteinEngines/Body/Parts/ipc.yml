@@ -46,6 +46,9 @@
         id: "posbrain"
       pump:
         id: "pump"
+      # WOLFGATE(Synthetics): the radiation collector's slot
+      radcollector:
+        id: "radcollector"
   - type: Destructible # no ashing trigger
     thresholds:
     - trigger:
@@ -72,41 +75,49 @@
         id: "eyes"
 
 - type: entity
-  parent: [ PartIPCBase, BaseLeftArm ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcArm must stay FIRST
+  parent: [ WFWolfmedPartIpcArm, PartIPCBase, BaseEdibleCyberneticLimb, BaseLeftArm ] # WOLFGATE(Wolfmed): metallic edible profile
   id: LeftArmIPC
   name: "left ipc arm"
 
 - type: entity
-  parent: [ PartIPCBase, BaseRightArm ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcArm must stay FIRST
+  parent: [ WFWolfmedPartIpcArm, PartIPCBase, BaseEdibleCyberneticLimb, BaseRightArm ] # WOLFGATE(Wolfmed): metallic edible profile
   id: RightArmIPC
   name: "right ipc arm"
 
 - type: entity
-  parent: [ PartIPCBase, BaseLeftHand ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcHand must stay FIRST
+  parent: [ WFWolfmedPartIpcHand, PartIPCBase, BaseEdibleCyberneticLimb, BaseLeftHand ] # WOLFGATE(Wolfmed): metallic edible profile
   id: LeftHandIPC
   name: "left ipc hand"
 
 - type: entity
-  parent: [ PartIPCBase, BaseRightHand ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcHand must stay FIRST
+  parent: [ WFWolfmedPartIpcHand, PartIPCBase, BaseEdibleCyberneticLimb, BaseRightHand ] # WOLFGATE(Wolfmed): metallic edible profile
   id: RightHandIPC
   name: "right ipc hand"
 
 - type: entity
-  parent: [ PartIPCBase, BaseLeftLeg ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcLeg must stay FIRST
+  parent: [ WFWolfmedPartIpcLeg, PartIPCBase, BaseEdibleCyberneticLimb, BaseLeftLeg ] # WOLFGATE(Wolfmed): metallic edible profile
   id: LeftLegIPC
   name: "left ipc leg"
 
 - type: entity
-  parent: [ PartIPCBase, BaseRightLeg ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcLeg must stay FIRST
+  parent: [ WFWolfmedPartIpcLeg, PartIPCBase, BaseEdibleCyberneticLimb, BaseRightLeg ] # WOLFGATE(Wolfmed): metallic edible profile
   id: RightLegIPC
   name: "right ipc leg"
 
 - type: entity
-  parent: [ PartIPCBase, BaseLeftFoot ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcFoot must stay FIRST
+  parent: [ WFWolfmedPartIpcFoot, PartIPCBase, BaseEdibleCyberneticLimb, BaseLeftFoot ] # WOLFGATE(Wolfmed): metallic edible profile
   id: LeftFootIPC
   name: "left ipc foot"
 
 - type: entity
-  parent: [ PartIPCBase, BaseRightFoot ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcFoot must stay FIRST
+  parent: [ WFWolfmedPartIpcFoot, PartIPCBase, BaseEdibleCyberneticLimb, BaseRightFoot ] # WOLFGATE(Wolfmed): metallic edible profile
   id: RightFootIPC
   name: "right ipc foot"

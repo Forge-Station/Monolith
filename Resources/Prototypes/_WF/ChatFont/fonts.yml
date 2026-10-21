@@ -1,0 +1,17 @@
+# Client fonts for the chat fonts that had none. Default and BoxRound come from Resources/Prototypes/fonts.yml.
+
+- type: font
+  id: WFRobotoMono
+  path: /Fonts/RobotoMono/RobotoMono-Regular.ttf
+
+- type: font
+  id: WFIceberg
+  path: /Fonts/Iceberg/Iceberg-Regular.ttf
+
+- type: font
+  id: WFFondamento
+  path: /Fonts/Fondamento-Regular.ttf
+
+- type: font
+  id: WFMinecraftia
+  path: /Fonts/Minecraftia.ttf

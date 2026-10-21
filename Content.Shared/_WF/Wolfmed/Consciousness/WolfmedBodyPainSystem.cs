@@ -127,6 +127,10 @@ public sealed class WolfmedBodyPainSystem : EntitySystem
                 continue;
 
             any = true;
+            // Synthetics: an isolated chassis part has its sensors off; anything it still holds is not felt.
+            if (HasComp<Content.Shared._WF.Synthetics.WFIsolatedPartComponent>(part))
+                continue;
+
             value += pain.Value;
         }
 

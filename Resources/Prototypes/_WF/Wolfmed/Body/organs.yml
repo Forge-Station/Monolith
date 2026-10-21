@@ -164,6 +164,8 @@
     # Playtest 3: a chassis keeps its core in the torso, where a rifle round reaches it twice as hard as a human
     # heart (two organs share the split, not five) and a heavy blade hits the 5-a-hit cap. At 15 a sabre killed in
     # three hits; at 40 the core fails on the rifle round the human heart does (13) and a sabre needs eight.
+    # Synthetics playtest: left at 40 (twenty rifle rounds at the 2.5 cap must still be able to reach it); what went
+    # down early was the sensor load, fixed on the chassis wound, not the core.
     health: 40
     maxHealth: 40
     hitCap: 2.5 # playtest 3: at the global 5 a turret's rifle rounds shut an IPC down on the fifth and killed it on the eighth
@@ -187,8 +189,9 @@
     # M4 (plan §8.5): the pump cools the positronic core; under half health it cools at half the rate.
     impairedCoolingFactor: 0.5
     # Playtest 3: sized with the core; the pump fails on the rifle round the human lungs are gone (about 8).
-    health: 25
-    maxHealth: 25
+    # Synthetics playtest: raised towards the core but under it, so a torso full of rounds shuts a synthetic down after a human's heart, and before the core.
+    health: 35
+    maxHealth: 35
     hitCap: 2.5 # playtest 3: as the core
   - type: OrganDamage
     hitChance: 0.8

@@ -7,7 +7,7 @@ using Robust.Shared.GameObjects;
 
 namespace Content.IntegrationTests.Tests._WF.Wolfmed;
 
-/// <summary>An awake NPC's aim moves around the body instead of staying on the torso; a body with no NPC brain keeps its own.</summary>
+/// <summary>An NPC's aim moves around the body instead of staying on the torso; a body with no NPC brain keeps its own.</summary>
 [TestFixture]
 [TestOf(typeof(WolfmedNpcAimSystem))]
 public sealed class WolfmedNpcAimTest
@@ -35,8 +35,6 @@ public sealed class WolfmedNpcAimTest
 
         await server.WaitPost(() =>
         {
-            // Only awake NPCs aim; with no player connected this one would sleep.
-            server.CfgMan.SetCVar(Content.Shared.CCVar.CCVars.NPCPauseWhenNoPlayersInRange, false);
             npc = entMan.SpawnEntity("WolfmedNpcAimTestMob", map.GridCoords);
             player = entMan.SpawnEntity("MobHuman", map.GridCoords);
         });

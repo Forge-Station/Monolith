@@ -169,8 +169,8 @@ public sealed class WolfmedSpeciesTest : GameTest
     }
 
     /// <summary>
-    /// <c>SynthBranchTest</c> (plan §12 M4, OD16: the mechanical branch). An empty SynthBattery shuts the synth down with
-    /// reason Power, on its own readout too, and nothing kills it over 30 minutes; the battery back brings it up.
+    /// <c>SynthBranchTest</c> (plan §12 M4, OD16: the mechanical branch). An empty SynthBattery puts the synth on low power
+    /// (Synthetics), still up, on its own readout too, and nothing kills it over 30 minutes; the battery back ends it.
     /// Taking the core out is core failure; a destroyed core is repaired on the head and the restart brings the same
     /// mind back.
     /// </summary>
@@ -224,15 +224,15 @@ public sealed class WolfmedSpeciesTest : GameTest
             var comp = Consc(synth);
             Assert.Multiple(() =>
             {
-                Assert.That(comp.State, Is.EqualTo(WolfmedConsciousness.Unconscious), "an empty battery left the synth up.");
-                Assert.That(comp.Cause, Is.EqualTo(WolfmedCause.Shutdown));
-                Assert.That(comp.CauseSource, Is.EqualTo(WolfmedCauseSource.Power));
-                Assert.That(s.AnalyzerLines(synth)[0], Is.EqualTo("SHUTDOWN: no power"));
+                Assert.That(comp.State, Is.EqualTo(WolfmedConsciousness.Up), "an empty battery took the synth down.");
+                Assert.That(shutdown.IsShutDown(synth), Is.False, "an empty battery shut the synth down.");
+                Assert.That(SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(synth), Is.True,
+                    "an empty battery did not put the synth on low power.");
                 Assert.That(SEntMan.GetComponent<WolfmedSyntheticHudComponent>(synth).CauseLine,
-                    Is.EqualTo("wolfmed-synthetic-cause-shutdown"));
+                    Is.EqualTo("wolfmed-synthetic-cause-low-power"));
             });
 
-            // Thirty minutes on the life and core-heat ticks: nothing runs out on a shut-down synth.
+            // Thirty minutes on the life and core-heat ticks: nothing runs out on a synth with no power.
             s.Advance(synth, 1800);
             for (var second = 0; second < 1800; second += 30)
                 SEntMan.System<WolfmedOverheatSystem>().Tick(synth, 30f);
@@ -248,7 +248,8 @@ public sealed class WolfmedSpeciesTest : GameTest
         });
         await RunSeconds(3);
         await Server.WaitAssertion(() =>
-            Assert.That(Consc(synth).State, Is.EqualTo(WolfmedConsciousness.Up), "a charged battery did not bring the synth up."));
+            Assert.That(SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(synth), Is.False,
+                "a charged battery left the synth on low power."));
 
         await Server.WaitAssertion(() =>
         {

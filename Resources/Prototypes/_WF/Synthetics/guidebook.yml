@@ -1,0 +1,6 @@
+# The synthetic repair guide, a child of the Medical guide (Resources/Prototypes/Guidebook/medical.yml).
+
+- type: guideEntry
+  id: WFSynthsAndYou
+  name: guide-entry-synths-and-you
+  text: "/ServerInfo/_WF/Synthetics/SynthsAndYou.xml"

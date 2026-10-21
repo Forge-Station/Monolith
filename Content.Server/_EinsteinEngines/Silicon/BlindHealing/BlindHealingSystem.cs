@@ -46,7 +46,7 @@ public sealed partial class BlindHealingSystem : SharedBlindHealingSystem
         _adminLogger.Add(LogType.Healed, $"{ToPrettyString(args.User):user} repaired {ToPrettyString(uid):target}'s vision");
 
         var str = Loc.GetString("comp-repairable-repair",
-            ("target", uid),
+            ("target", args.Target.Value), // WOLFGATE(Wolfmed): the repaired body, not the glass
             ("tool", args.Used!));
         _popup.PopupEntity(str, uid, args.User);
 
@@ -68,19 +68,23 @@ public sealed partial class BlindHealingSystem : SharedBlindHealingSystem
 
     private void OnInteract(EntityUid uid, BlindHealingComponent component, ref AfterInteractEvent args)
     {
-
+        // WOLFGATE(Wolfmed) START: check and repair the target's optics, not the user's own
         if (args.Handled
-            || !TryComp<DamageableComponent>(args.User, out var damageable)
+            || !args.CanReach
+            || args.Target is not { } target
+            || !TryComp<DamageableComponent>(target, out var damageable)
             || damageable.DamageContainerID != null && !component.DamageContainers.Contains(damageable.DamageContainerID)
-            || !TryComp<BlindableComponent>(args.User, out var blindcomp)
+            || !TryComp<BlindableComponent>(target, out var blindcomp)
             || blindcomp.EyeDamage == 0
-            || args.User == args.Target && !component.AllowSelfHeal)
+            || args.User == target && !component.AllowSelfHeal)
             return;
 
-        TryHealBlindness(uid, args.User, args.User,
-            args.User == args.Target
+        args.Handled = true;
+        TryHealBlindness(uid, args.User, target,
+            args.User == target
                 ? component.DoAfterDelay * component.SelfHealPenalty
                 : component.DoAfterDelay);
+        // WOLFGATE END
     }
 
     private void OnUse(EntityUid uid, BlindHealingComponent component, ref UseInHandEvent args)

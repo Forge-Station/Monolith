@@ -1,7 +1,6 @@
 using Content.Server.NPC.HTN;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Body.Systems;
-using Content.Shared.NPC;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -11,7 +10,7 @@ namespace Content.Server._WF.Wolfmed.Targeting;
 /// NPCs pick a new body part to aim at every second, by their targeting odds. Only players ever changed the aim, so
 /// every mob hit the torso, and limbs, heads and the wounds they take were never reached.
 /// </summary>
-public sealed partial class WolfmedNpcAimSystem : EntitySystem
+public sealed class WolfmedNpcAimSystem : EntitySystem
 {
     /// <summary>How often an NPC's aim moves to another part.</summary>
     private static readonly TimeSpan Interval = TimeSpan.FromSeconds(1);
@@ -30,9 +29,8 @@ public sealed partial class WolfmedNpcAimSystem : EntitySystem
 
         _next = _timing.CurTime + Interval;
 
-        // Only awake NPCs fight; a sleeping one gets its aim within a second of waking.
-        var query = EntityQueryEnumerator<ActiveNPCComponent, HTNComponent, TargetingComponent>();
-        while (query.MoveNext(out var uid, out _, out _, out var targeting))
+        var query = EntityQueryEnumerator<HTNComponent, TargetingComponent>();
+        while (query.MoveNext(out var uid, out _, out var targeting))
         {
             if (HasComp<ActorComponent>(uid))
                 continue;

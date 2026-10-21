@@ -218,7 +218,7 @@
     drinkSpeed: 2
   - type: SynthShock
     batteryChargeMultiplier: 10.8
-    cellularDamageMultiplier: 0.2
+    cellularDamageMultiplier: 0 # WOLFGATE(Wolfmed): shock already short-circuits the chassis; the Cellular side effect had no repair
   - type: BatteryAlert
     batteryAlert: BorgBattery
     noBatteryAlert: BorgBatteryNone

@@ -669,8 +669,8 @@ public sealed class WolfmedCauseScenarioTest : GameTest
         });
 
         // --- M4: IPC power loss plus overheating (plan §12 M4, deferred from M1a). ---
-        // The core past its 500 K line with the cell pulled: Cause CoreHeat, Blockers Shutdown (Power), Succumb offered.
-        // Cooled under 450 K: Cause Shutdown (Power), Succumb removed, no text promising the IPC comes back Downed.
+        // The core past its 500 K line with the cell pulled: Cause CoreHeat, Succumb offered, and low power underneath
+        // rather than a shutdown (Synthetics). Cooled under 450 K: up on low power, Succumb removed.
         await OverrideCVar(Side.Server, WolfmedCVars.IpcCoreHeatK, 500f);
         await OverrideCVar(Side.Server, WolfmedCVars.IpcCoreHeatWakeK, 450f);
         EntityUid ipc = default;
@@ -704,12 +704,12 @@ public sealed class WolfmedCauseScenarioTest : GameTest
             Assert.Multiple(() =>
             {
                 Assert.That(comp.State, Is.EqualTo(WolfmedConsciousness.Unconscious));
-                Assert.That(comp.Cause, Is.EqualTo(WolfmedCause.CoreHeat), "the shutdown outranked thermal shutdown.");
-                Assert.That(comp.Blockers & WolfmedCauseFlags.Shutdown, Is.EqualTo(WolfmedCauseFlags.Shutdown),
-                    "the pulled cell is not a blocker.");
-                Assert.That(SEntMan.GetComponent<WolfmedShutdownComponent>(ipc).Reason, Is.EqualTo(WolfmedCauseSource.Power));
+                Assert.That(comp.Cause, Is.EqualTo(WolfmedCause.CoreHeat), "low power outranked thermal shutdown.");
+                Assert.That(comp.Blockers & WolfmedCauseFlags.Shutdown, Is.EqualTo(WolfmedCauseFlags.None),
+                    "the pulled cell shut the chassis down instead of low power.");
+                Assert.That(SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(ipc), Is.True,
+                    "the pulled cell did not put the chassis on low power.");
                 Assert.That(SEntMan.HasComponent<WolfmedDyingActionsComponent>(ipc), Is.True, "thermal shutdown offers no Succumb.");
-                Assert.That(alerts.GetConditionText(ipc), Does.Contain("Also: shutdown"));
             });
 
             // Cooled under the wake line; the cell is still out.
@@ -722,13 +722,11 @@ public sealed class WolfmedCauseScenarioTest : GameTest
             var text = alerts.GetConditionText(ipc);
             Assert.Multiple(() =>
             {
-                Assert.That(comp.State, Is.EqualTo(WolfmedConsciousness.Unconscious), "a cooled chassis with no cell came up.");
-                Assert.That(comp.Cause, Is.EqualTo(WolfmedCause.Shutdown));
-                Assert.That(comp.CauseSource, Is.EqualTo(WolfmedCauseSource.Power));
+                Assert.That(comp.State, Is.Not.EqualTo(WolfmedConsciousness.Unconscious),
+                    "a cooled chassis on low power stayed down.");
                 Assert.That(SEntMan.HasComponent<WolfmedDyingActionsComponent>(ipc), Is.False, "Succumb outlived thermal shutdown.");
-                Assert.That(comp.LastConditionLine, Does.Not.Contain("Downed").And.Not.Contain("online"),
-                    $"the cooling line promised the chassis back: {comp.LastConditionLine}");
-                Assert.That(text, Does.Not.Contain("Downed"), $"the condition text promised Downed: {text}");
+                Assert.That(SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(ipc), Is.True);
+                Assert.That(text, Does.Not.Contain("Also: shutdown"), $"the condition text names a shutdown: {text}");
             });
 
             var slots = SEntMan.System<ItemSlotsSystem>();
@@ -736,13 +734,13 @@ public sealed class WolfmedCauseScenarioTest : GameTest
             Assert.That(SEntMan.System<SharedContainerSystem>().Insert(cell, slot!.ContainerSlot!), Is.True);
         });
 
-        var back = await WaitFor(() => Consc(ipc).State != WolfmedConsciousness.Unconscious, 5f);
-        Assert.That(back, Is.Not.Null, "the cell back did not bring the cooled chassis round.");
+        var back = await WaitFor(() => !SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(ipc), 5f);
+        Assert.That(back, Is.Not.Null, "the cell back did not take the cooled chassis off low power.");
     }
 
     /// <summary>
-    /// IPC shutdown (plan §3.11): a pulled cell shuts the chassis down with reason Power and the HUD says so;
-    /// nothing kills it; the cell back brings it up within 2 s. A pulled pump is reason Pump; back in, up.
+    /// IPC shutdown (plan §3.11): a pulled cell puts the chassis on low power (Synthetics), up, and the HUD says so;
+    /// nothing kills it; the cell back ends it within 2 s. A pulled pump is a shutdown, reason Pump; back in, up.
     /// Oil at 45% Downs it with cause Oil. And the chassis temperature in a 10-stack fire, for M4.
     /// </summary>
     [Test]
@@ -782,37 +780,33 @@ public sealed class WolfmedCauseScenarioTest : GameTest
             var comp = Consc(ipc);
             Assert.Multiple(() =>
             {
-                Assert.That(comp.State, Is.EqualTo(WolfmedConsciousness.Unconscious), "no cell, still running.");
-                Assert.That(comp.Cause, Is.EqualTo(WolfmedCause.Shutdown));
-                Assert.That(comp.CauseSource, Is.EqualTo(WolfmedCauseSource.Power));
-                Assert.That(SEntMan.GetComponent<WolfmedShutdownComponent>(ipc).Reason, Is.EqualTo(WolfmedCauseSource.Power));
+                Assert.That(comp.State, Is.EqualTo(WolfmedConsciousness.Up), "no cell took the chassis down.");
+                Assert.That(SEntMan.HasComponent<WolfmedShutdownComponent>(ipc), Is.False, "no cell shut the chassis down.");
+                Assert.That(SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(ipc), Is.True,
+                    "no cell, and not on low power.");
                 Assert.That(SEntMan.GetComponent<WolfmedSyntheticHudComponent>(ipc).CauseLine,
-                    Is.EqualTo("wolfmed-synthetic-cause-shutdown"));
-                Assert.That(Loc.GetString("wolfmed-synthetic-cause-shutdown", ("source", comp.CauseSource.ToString())),
-                    Does.Contain("CELL EMPTY"));
-                Assert.That(alerts.GetShownHealthAlert(ipc)?.Id, Is.EqualTo("WFWolfmedOutShutdown"));
-                Assert.That(alerts.GetTitle(ipc), Is.EqualTo("Shutdown: no power"));
-                Assert.That(s.AnalyzerLines(ipc)[0], Is.EqualTo("SHUTDOWN: no power"), "M1a D: the analyzer line.");
+                    Is.EqualTo("wolfmed-synthetic-cause-low-power"));
+                Assert.That(alerts.GetShownHealthAlert(ipc)?.Id, Is.Not.EqualTo("WFWolfmedOutShutdown"));
                 Assert.That(SEntMan.HasComponent<WolfmedSyntheticHudComponent>(ipc), Is.True,
                     "no synthetic readout, so the client heartbeat gate has nothing to read.");
             });
 
-            // Thirty minutes on the life tick: nothing runs out on a shut-down chassis.
+            // Thirty minutes on the life tick: nothing runs out on a chassis with no power.
             s.Advance(ipc, 1800);
-            Assert.That(SEntMan.System<MobStateSystem>().IsDead(ipc), Is.False, "a shutdown killed the chassis.");
+            Assert.That(SEntMan.System<MobStateSystem>().IsDead(ipc), Is.False, "low power killed the chassis.");
         });
 
         await RunSeconds(10);
         await Server.WaitAssertion(() =>
         {
-            Assert.That(SEntMan.System<MobStateSystem>().IsDead(ipc), Is.False, "a shutdown killed the chassis.");
+            Assert.That(SEntMan.System<MobStateSystem>().IsDead(ipc), Is.False, "low power killed the chassis.");
             Assert.That(slots.TryGetSlot(ipc, "cell_slot", out var slot), Is.True);
             Assert.That(containers.Insert(cell, slot!.ContainerSlot!), Is.True);
         });
 
-        var up = await WaitFor(() => Consc(ipc).State == WolfmedConsciousness.Up, 3f);
-        Assert.That(up, Is.Not.Null, "the cell back did not bring the chassis up.");
-        Assert.That(up!.Value, Is.LessThanOrEqualTo(2f * (1 + Band)), "the chassis took too long to come up.");
+        var up = await WaitFor(() => !SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(ipc), 3f);
+        Assert.That(up, Is.Not.Null, "the cell back did not take the chassis off low power.");
+        Assert.That(up!.Value, Is.LessThanOrEqualTo(2f * (1 + Band)), "the chassis took too long to repower.");
 
         // --- The pump out, then back in. ---
         EntityUid pump = default;

@@ -21,6 +21,7 @@ using Content.Shared._WF.Wolfmed.Consciousness;
 using Content.Shared._WF.Wolfmed.Life;
 using Content.Shared.Actions;
 using Content.Shared.Body.Part;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
@@ -176,9 +177,10 @@ public sealed class WolfmedHonestEndingTest : GameTest
             SetPain(s, fainted, BodyPartType.Head, 100);
             s.SetBlood(bled, 0.33f);
 
-            var slots = SEntMan.System<ItemSlotsSystem>();
-            Assert.That(slots.TryGetSlot(ipc, "cell_slot", out var slot), Is.True);
-            SEntMan.System<SharedContainerSystem>().Remove(slot!.Item!.Value, slot.ContainerSlot!);
+            // Synthetics: an empty cell is low power, not shutdown; the pump out is what shuts a chassis down.
+            var pump = SEntMan.System<SharedBodySystem>().GetBodyOrgans(ipc)
+                .First(o => SEntMan.HasComponent<Content.Shared._Shitmed.Body.Organ.HeartComponent>(o.Id)).Id;
+            Assert.That(SEntMan.System<SharedBodySystem>().RemoveOrgan(pump), Is.True);
 
             Assert.That(s.Life.StartArrest(arrested, "oxygen"), Is.True);
         });

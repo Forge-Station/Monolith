@@ -239,7 +239,11 @@ A [bold]chassis breach[/bold] is the mechanical bleed: coolant and hydraulic flu
 
 A [bold]short circuit[/bold] locks the frame up for a moment and throws sparks each time it lands. A [bold]cable coil[/bold] repairs it.
 
-[bold]Servo damage[/bold] is the mechanical severed tendon: a cut actuator that leaves the limb slow or lame. Welding the panel shut does nothing for it - it takes a cable coil, because the wiring behind the panel is what has to be replaced.
+[bold]Servo damage[/bold] is the mechanical severed tendon: a cut actuator that leaves the limb slow or lame. Welding the panel shut does nothing for it - it takes a cable coil, because the wiring behind the panel is what has to be replaced. Lie down and run [bold]Replace Damaged Servo[/bold] with the coil in hand; nothing has to be cut open, so a synth can do it alone.
+
+[bold]Cold and acid damage[/bold] on a chassis is welded out like a dent.
+
+[bold]Damaged optics[/bold] come from welding without eye protection and from bright flashes: the view blurs, and the eyes show as damaged on an analyzer. A [bold]sheet of glass[/bold] used on the chassis replaces the lenses; the Heal Eyes surgery does it too.
 
 [bold]Overheating[/bold] is the one injury whose treatment is time. No tool reaches it. The part sheds heat on its own, faster in a cold room or under anything cold, and fastest of all if the patient is hosed down with water or an extinguisher.
 
@@ -248,6 +252,7 @@ A chassis cannot become infected, cannot go septic and cannot become necrotic. A
     <GuideEntityEmbed Entity="Welder"/>
     <GuideEntityEmbed Entity="Wrench"/>
     <GuideEntityEmbed Entity="CableApcStack"/>
+    <GuideEntityEmbed Entity="SheetGlass"/>
     <GuideEntityEmbed Entity="FireExtinguisher"/>
   </Box>
 

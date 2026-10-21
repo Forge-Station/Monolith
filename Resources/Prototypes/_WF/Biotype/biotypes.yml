@@ -1,0 +1,413 @@
+# What a mob of the other biotype becomes. WFBiotypeSystem strips `remove` and `removeItemSlots`, adds `ensure` where
+# the mob has none, adds `components` over whatever it has and rebuilds the body as `body`. Values are copied from the
+# species they come from: the IPC (_EinsteinEngines/Entities/Mobs/Player/ipc.yml, silicon_base.yml) and the organic
+# species bases (Entities/Mobs/base.yml, Entities/Mobs/Species/base.yml). WoundHost goes last: its startup takes the
+# health alerts over from the MobThresholds added before it.
+
+- type: wfBiotype
+  id: WFBiotypeSynthetic
+  biotype: Synthetic
+  name: wf-biotype-synthetic
+  description: wf-biotype-synthetic-desc
+  icon:
+    sprite: Objects/Specific/Robotics/mmi.rsi
+    state: posibrain
+  body: IPC
+  remove:
+  - Barotrauma
+  - Butcherable
+  - CPRTraining
+  - Dna
+  - EmitSoundOnInternalsActive
+  - EmoteOnDamage
+  - Fingerprint
+  - Hunger
+  - InjectableSolution
+  - Internals
+  - PassiveDamage
+  - Perishable
+  - Respirator
+  - SleepEmitSound
+  - TemperatureSpeed
+  - Thirst
+  # A synth's own power and blood: a synth choosing Synthetic keeps its body and never gets here.
+  - SynthBattery
+  - SynthBloodstream
+  - SynthShock
+  - BatteryAlert
+  - BlockInjection
+  - UniversalHealModifier
+  - Uncloneable
+  - Sanitized
+  ensure:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        locked: true
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
+  components:
+  - type: Damageable
+    damageContainer: WFSiliconWolfmed
+    damageModifierSet: IPC
+  - type: Bloodstream
+    bloodReagent: WFWolfmedHydraulicFluid
+    bloodMaxVolume: 250
+    # Synthetics playtest: HYDRAULIC PRESSURE LOW with no way out. Half a human's blood regeneration, so a sealed
+    # chassis tops itself up in about half an hour; a pack or the autodoc is still the quick fix.
+    bloodRefreshAmount: 0.5
+    chemicalMaxVolume: 0
+    bloodlossDamage:
+      types: {}
+    bloodlossHealDamage:
+      types: {}
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+    fitsInCharger: true
+  - type: BatterySlotRequiresLock
+    itemSlot: cell_slot
+  - type: EncryptionHolderRequiresLock
+  - type: SiliconEmitSoundOnDrained
+    sound: "/Audio/_Goobstation/Voice/IPC/energy_low.ogg"
+    minInterval: 8
+    maxInterval: 12
+    popUp: "silicon-power-low"
+  - type: Lock
+    locked: true
+    lockOnClick: false
+    unlockOnClick: false
+    lockTime: 5
+    unlockTime: 5
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Critical: BorgCrit
+      Dead: BorgDead
+  - type: TypingIndicator
+    proto: robot
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 1500
+      behaviors:
+      - !type:GibBehavior { }
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      60: 0.7
+      90: 0.5
+      120: 0.3
+  - type: SiliconDownOnDead
+  - type: Silicon
+    entityType: enum.SiliconType.Player
+    batteryPowered: true
+    drainPerSecond: 0.65
+    chargeThresholdMid: 0.80
+    chargeThresholdLow: 0.35
+    chargeThresholdCritical: 0.10
+    speedModifierThresholds:
+      4: 1
+      3: 1
+      2: 0.80
+      1: 0.45
+      0: 0.00
+  - type: BatteryDrinker
+  - type: EncryptionKeyHolder
+    keySlots: 8
+    examineWhileLocked: false
+    keysExtractionMethod: Cutting
+    keysUnlocked: false
+  - type: ActiveRadio
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+  - type: DeadStartupButton
+    sound:
+      path: /Audio/_EinsteinEngines/Effects/Silicon/startup.ogg
+  - type: EmitBuzzWhileDamaged
+  - type: WeldingHealable
+  - type: Temperature
+    interactionExchangeCoefficient: 0.002
+    heatDamageThreshold: 1800
+    coldDamageThreshold: 260
+    currentTemperature: 310.15
+    specificHeat: 42
+    coldDamage:
+      types:
+        Cold: 0.1
+    heatDamage:
+      types:
+        Heat: 3
+    atmosTemperatureTransferEfficiency: 0.05
+  - type: ThermalRegulator
+    metabolismHeat: 800
+    radiatedHeat: 100
+    implicitHeatRegulation: 500
+    sweatHeatRegulation: 2000
+    shiveringHeatRegulation: 2000
+    normalBodyTemperature: 310.15
+    thermalRegulationTemperatureThreshold: 25
+  - type: KillOnOverheat
+  - type: Flammable
+    fireSpread: true
+    canResistFire: true
+    damage:
+      types:
+        Heat: 0
+  - type: Deathgasp
+    prototype: SiliconDeathgasp
+    needsCritical: true
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection: MetalBulletImpact
+    soundTypes:
+      Heat:
+        collection: MetalLaserImpact
+  - type: HealthExaminable
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+    - Stutter
+    - SeeingRainbows
+    - Electrocution
+    - SlurredSpeech
+    - PressureImmunity
+    - Muted
+    - TemporaryBlindness
+    - Pacified
+    - Flashed
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+      Acidic: [Touch]
+    reactions:
+    - reagents: [Water, SpaceCleaner]
+      methods: [Touch]
+      effects:
+      - !type:WashCreamPieReaction
+      - !type:WolfmedCoolOverheating
+  - type: ZombieImmune
+  - type: WoundHost
+  - type: PainShockTarget
+
+- type: wfBiotype
+  id: WFBiotypeOrganic
+  biotype: Organic
+  name: wf-biotype-organic
+  description: wf-biotype-organic-desc
+  icon:
+    sprite: Mobs/Species/Human/organs.rsi
+    state: heart-on
+  body: Human
+  remove:
+  - Silicon
+  - PowerCellSlot
+  - BatterySlotRequiresLock
+  - EncryptionHolderRequiresLock
+  - Lock
+  - SiliconEmitSoundOnDrained
+  - SiliconDownOnDead
+  - BatteryDrinker
+  - DeadStartupButton
+  - EmitBuzzWhileDamaged
+  - WeldingHealable
+  - KillOnOverheat
+  - ZombieImmune
+  - SynthBattery
+  - SynthBloodstream
+  - SynthShock
+  - BatteryAlert
+  - BlockInjection
+  - UniversalHealModifier
+  - Uncloneable
+  - Sanitized
+  # The radio trio stays: the IPC inventory has no ears slot, so an organic IPC would have no radio at all.
+  removeItemSlots:
+  - cell_slot
+  ensure:
+  - type: SolutionContainerManager
+  components:
+  - type: Damageable
+    damageContainer: Biological
+  - type: Dna
+  - type: Bloodstream
+    bloodlossDamage:
+      types:
+        Bloodloss: 0.5
+    bloodlossHealDamage:
+      types:
+        Bloodloss: -1
+  - type: InjectableSolution
+    solution: chemicals
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Critical
+      200: Dead
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 1500
+      behaviors:
+      - !type:GibBehavior { }
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      60: 0.7
+      80: 0.5
+  - type: Temperature
+    heatDamageThreshold: 325
+    coldDamageThreshold: 260
+    currentTemperature: 310.15
+    specificHeat: 42
+    coldDamage:
+      types:
+        Cold: 0.1
+    heatDamage:
+      types:
+        Heat: 0.3
+  - type: TemperatureSpeed
+    thresholds:
+      293: 0.8
+      280: 0.6
+      260: 0.4
+  - type: ThermalRegulator
+    metabolismHeat: 800
+    radiatedHeat: 100
+    implicitHeatRegulation: 500
+    sweatHeatRegulation: 2000
+    shiveringHeatRegulation: 2000
+    normalBodyTemperature: 310.15
+    thermalRegulationTemperatureThreshold: 2
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.50
+        Heat: 0.1
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damageCap: 20
+    damage: {}
+  - type: Fingerprint
+  - type: Perishable
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeat
+      amount: 5
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 1.0
+    damageRecovery:
+      types:
+        Asphyxiation: -1.0
+  - type: Internals
+  - type: EmitSoundOnInternalsActive
+    sound:
+      collection: InternalsBreathing
+      params:
+        maxDistance: 3
+        rolloffFactor: 2
+        volume: -10
+  - type: Hunger
+  - type: Thirst
+  - type: SleepEmitSound
+  - type: EmoteOnDamage
+    emotesThreshold:
+      50: [ Scream ]
+      80: [ Scream, Crying ]
+    emoteChance: 0.6
+    withChat: true
+    hiddenFromChatWindow: true
+    emoteCooldown: 8
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+    - Stutter
+    - SeeingRainbows
+    - Electrocution
+    - Drunk
+    - SlurredSpeech
+    - RatvarianLanguage
+    - PressureImmunity
+    - Muted
+    - ForcedSleep
+    - TemporaryBlindness
+    - Pacified
+    - StaminaModifier
+    - Flashed
+    - RadiationProtection
+    - Drowsiness
+    - Adrenaline
+    - ClawsGrowthSuppression
+  - type: HealthExaminable
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+    - Cold
+    - Caustic
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+      Acidic: [Touch, Ingestion]
+    reactions:
+    - reagents: [Water, SpaceCleaner]
+      methods: [Touch]
+      effects:
+      - !type:WashCreamPieReaction
+      - !type:WashChemicalBurns
+      - !type:WolfmedCoolOverheating
+    - reagents: [Ethanol, Bleach, Spaceacillin]
+      methods: [Touch]
+      effects:
+      - !type:WolfmedCleanWounds
+  - type: Deathgasp
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection: MeatBulletImpact
+    soundTypes:
+      Heat:
+        collection: MeatLaserImpact
+  - type: CPRTraining
+  - type: Flammable
+    fireSpread: true
+    canResistFire: true
+    damage:
+      types:
+        Heat: 0.5
+  - type: Blindable
+  - type: WoundHost
+  - type: PainShockTarget

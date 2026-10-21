@@ -29,6 +29,8 @@ public sealed class WolfmedSyntheticHudOverlaySystem : EntitySystem
     /// <summary>The blip a new fault line announces itself with. Quiet, local, and rate limited.</summary>
     private const string FaultSound = "/Audio/Machines/beep.ogg";
 
+    private const string AlarmSound = "/Audio/Machines/beep.ogg";
+
     /// <summary>The one-off tone when the readout drops to standby.</summary>
     private const string StandbySound = "/Audio/Machines/buzz-sigh.ogg";
 
@@ -60,6 +62,9 @@ public sealed class WolfmedSyntheticHudOverlaySystem : EntitySystem
     private float _time;
     private float _spinner;
     private float _nextBlip;
+
+    /// <summary>Synthetics playtest: a quiet alarm while the chassis is close to going down, quicker the closer it is.</summary>
+    private float _nextAlarm;
     private float _nextGlitch;
     private float _jitterUntil;
     private float _deadTime;
@@ -135,6 +140,8 @@ public sealed class WolfmedSyntheticHudOverlaySystem : EntitySystem
                 _audio.PlayGlobal(StandbySound, Filter.Local(), false, AudioParams.Default.WithVolume(-12f));
         }
 
+        UpdateAlarm(strain, dead || standby);
+
         SetOverlays(true);
     }
 
@@ -174,6 +181,26 @@ public sealed class WolfmedSyntheticHudOverlaySystem : EntitySystem
             _nextBlip = _time + 0.2f;
             _audio.PlayGlobal(FaultSound, Filter.Local(), false, AudioParams.Default.WithVolume(-14f));
         }
+    }
+
+    /// <summary>
+    /// Past the heavy line the readout beeps, 2.5 s apart at the line and 0.8 s apart at the limit, quietly: the
+    /// chassis is about to go down and the owner may be looking elsewhere. Silent once it is down or dead.
+    /// </summary>
+    private void UpdateAlarm(float strain, bool silent)
+    {
+        if (silent || strain < WolfmedSyntheticHudLineSystem.HeavyAt)
+        {
+            _nextAlarm = 0f;
+            return;
+        }
+
+        if (_time < _nextAlarm)
+            return;
+
+        var urgency = Math.Clamp((strain - WolfmedSyntheticHudLineSystem.HeavyAt) / (1f - WolfmedSyntheticHudLineSystem.HeavyAt), 0f, 1f);
+        _nextAlarm = _time + MathHelper.Lerp(2.5f, 0.8f, urgency);
+        _audio.PlayGlobal(AlarmSound, Filter.Local(), false, AudioParams.Default.WithVolume(-16f));
     }
 
     private void BuildSystem(WolfmedSyntheticHudComponent hud, WolfmedSyntheticTier tier)
@@ -252,6 +279,12 @@ public sealed class WolfmedSyntheticHudOverlaySystem : EntitySystem
         {
             _hud.Banner = Loc.GetString("wolfmed-synthetic-banner-integrity", ("value", Percent(hud.Integrity)));
             _hud.BannerSeverity = WolfmedSyntheticSeverity.Crit;
+        }
+        else if (causeLine != null)
+        {
+            // Synthetics: the one cause a chassis still up carries is low power.
+            _hud.Banner = causeLine;
+            _hud.BannerSeverity = WolfmedSyntheticSeverity.Warn;
         }
         else
         {

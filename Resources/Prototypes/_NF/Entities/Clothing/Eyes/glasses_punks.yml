@@ -82,6 +82,7 @@
     - Silicon
     - Biological
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): the IPC's container, so its bar shows
+    - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
   - type: Tag
     tags:
     - PetWearable

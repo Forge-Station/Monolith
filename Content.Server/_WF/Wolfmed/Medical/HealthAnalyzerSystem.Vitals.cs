@@ -47,6 +47,7 @@ public sealed partial class HealthAnalyzerSystem
             Source = consciousness.CauseSource,
             Blockers = consciousness.Blockers,
             Mechanical = mechanical,
+            LowPower = HasComp<Content.Shared._WF.Synthetics.WFLowPowerComponent>(body),
             Sedation = CompOrNull<WolfmedPainReliefComponent>(body)?.Sedation ?? 0f,
             PumpRunning = mechanical && _shutdown.HasPump(body),
             // Read fresh rather than off the networked copy the life tick writes once a second, so the pulse

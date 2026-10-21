@@ -333,7 +333,9 @@ public sealed class WolfmedPlaytestOneTest : GameTest
 
         await Server.WaitAssertion(() =>
         {
-            Assert.That(Consc(ipc).Cause, Is.EqualTo(WolfmedCause.Shutdown), "pulling the cell did not shut the chassis down.");
+            // Synthetics: a pulled cell is low power now, not a shutdown.
+            Assert.That(SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(ipc), Is.True,
+                "pulling the cell did not put the chassis on low power.");
             SEntMan.System<RejuvenateSystem>().PerformRejuvenate(ipc);
 
             var slots = SEntMan.System<ItemSlotsSystem>();
@@ -344,6 +346,8 @@ public sealed class WolfmedPlaytestOneTest : GameTest
                 Assert.That(SEntMan.GetComponent<MetaDataComponent>(slot.Item!.Value).EntityPrototype?.ID,
                     Is.EqualTo(slot.StartingItem), "the cell is not the chassis's own starting cell.");
                 Assert.That(SEntMan.HasComponent<WolfmedShutdownComponent>(ipc), Is.False, "the chassis is still shut down.");
+                Assert.That(SEntMan.HasComponent<Content.Shared._WF.Synthetics.WFLowPowerComponent>(ipc), Is.False,
+                    "the chassis is still on low power.");
                 Assert.That(Consc(ipc).State, Is.EqualTo(WolfmedConsciousness.Up));
             });
         });

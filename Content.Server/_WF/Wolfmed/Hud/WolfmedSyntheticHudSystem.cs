@@ -15,6 +15,7 @@ using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
+using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -37,6 +38,12 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
 
     private static readonly TimeSpan Interval = TimeSpan.FromSeconds(0.5);
 
+    /// <summary>Synthetics: the standby title while the chassis panel reboots the frame.</summary>
+    private const string RebootLine = "wolfmed-synthetic-cause-reboot";
+
+    /// <summary>Synthetics: the banner while the chassis runs on low power, up but crawling on one arm.</summary>
+    private const string LowPowerLine = "wolfmed-synthetic-cause-low-power";
+
     [Dependency] private BloodstreamSystem _blood = default!;
 
     [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _dormancy = default!;
@@ -55,6 +62,7 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
     [Dependency] private WolfmedWoundTraitSystem _traits = default!;
     [Dependency] private WoundSystem _wounds = default!;
     [Dependency] private Content.Server._HL.Silicons.Synths.Battery.SynthBatterySystem _synthBattery = default!; // M4
+    [Dependency] private Content.Server._WF.Synthetics.WFRadCollectorSystem _radCollector = default!; // Synthetics
 
     private TimeSpan _next;
 
@@ -143,7 +151,12 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
                 Add(found, target, line.Line, tag, line.Advice);
             }
 
-            if (state == BodyPartFunctionalityState.Disabled)
+            // Synthetics: a part the panel isolated says so, rather than reading as broken; one low power cut says that.
+            if (CompOrNull<Content.Server._WF.Synthetics.WFLowPowerPartComponent>(part) is { UserIsolated: false })
+                AddCondition(found, target, WolfmedSyntheticCondition.LowPower);
+            else if (HasComp<Content.Shared._WF.Synthetics.WFIsolatedPartComponent>(part))
+                AddCondition(found, target, WolfmedSyntheticCondition.PartIsolated);
+            else if (state == BodyPartFunctionalityState.Disabled)
                 AddCondition(found, target, WolfmedSyntheticCondition.PartDisabled);
             else if (state == BodyPartFunctionalityState.Unavailable)
                 AddCondition(found, target, WolfmedSyntheticCondition.PartMissing);
@@ -174,6 +187,14 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
         if (down)
             AddCondition(found, TargetBodyPart.Torso, WolfmedSyntheticCondition.Shutdown);
 
+        // Synthetics: an empty cell no longer shuts the chassis down; it runs on low power.
+        var lowPower = HasComp<Content.Shared._WF.Synthetics.WFLowPowerComponent>(hud.Owner);
+        if (lowPower)
+            AddCondition(found, TargetBodyPart.Torso, WolfmedSyntheticCondition.LowPower);
+
+        // Synthetics: a panel reboot puts the readout on its standby screen, REBOOT PENDING under it.
+        var rebooting = HasComp<Content.Server._WF.Synthetics.WFChassisRebootComponent>(hud.Owner);
+
         var core = _life.GetBrainOrgan(hud.Owner);
         var offline = core is { } organ && organ.Comp.Health <= FixedPoint2.Zero;
         if (offline)
@@ -190,6 +211,18 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
         if (heat is { Hot: true, ThermalShutdown: false } && !offline)
             AddCondition(found, TargetBodyPart.Torso, WolfmedSyntheticCondition.CoreTempCritical);
 
+        if (TryComp(hud.Owner, out BlindableComponent? sight) && sight.EyeDamage > sight.MinDamage)
+            AddCondition(found, TargetBodyPart.Head, WolfmedSyntheticCondition.OpticsDamaged);
+
+        // Synthetics: the radiation collector, full or missing.
+        if (HasComp<Content.Shared._WF.Synthetics.WFChassisComponent>(hud.Owner))
+        {
+            if (_radCollector.GetCollector(hud.Owner) is not { } collector)
+                AddCondition(found, TargetBodyPart.Torso, WolfmedSyntheticCondition.RadMissing);
+            else if (collector.Comp1.Charge >= collector.Comp1.Capacity)
+                AddCondition(found, TargetBodyPart.Torso, WolfmedSyntheticCondition.RadSaturated);
+        }
+
         var faults = Order(hud.Comp.Faults, found);
         var advice = faults.Count > 0 ? faults[0].Advice : string.Empty;
         var power = _charge.TryGetSiliconBattery(hud.Owner, out var battery) && battery.MaxCharge > 0f
@@ -198,10 +231,14 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
 
         var newIntegrity = weight > 0f ? integrity / weight : 1f;
         var newServos = limbs > 0f ? servos / limbs : 1f;
-        var causeLine = CauseLine(hud.Owner);
+        var causeLine = rebooting && !down ? RebootLine : CauseLine(hud.Owner);
+        if (causeLine.Length == 0 && lowPower)
+            causeLine = LowPowerLine;
+        down |= rebooting;
+        // Full like every other gauge when nothing is wrong; it empties as the damage sensors overload.
         var sensors = TryComp(hud.Owner, out PainComponent? pain) && pain.SoftPainCap > FixedPoint2.Zero
-            ? Math.Clamp(pain.Value.Float() / pain.SoftPainCap.Float(), 0f, 1f)
-            : 0f;
+            ? 1f - Math.Clamp(pain.Value.Float() / pain.SoftPainCap.Float(), 0f, 1f)
+            : 1f;
         // M4 (plan §3.11): the CORE row is the core's own temperature once the core-heat route tracks it.
         var temperature = heat?.CoreTemperature ??
                           (TryComp(hud.Owner, out TemperatureComponent? chassis) ? chassis.CurrentTemperature : -1f);
@@ -321,7 +358,7 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
     }
 
     /// <summary>How whole one part is: 1 untouched, 0 at the damage that would take it off.</summary>
-    private float PartIntegrity(EntityUid part)
+    public float PartIntegrity(EntityUid part)
     {
         var thresholds = _wfPart.Get(part).AmputationThresholds;
         if (thresholds.Count == 0 || !TryComp(part, out DamageableComponent? damageable))

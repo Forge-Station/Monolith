@@ -19,6 +19,7 @@
       organs:
         posbrain: PositronicBrain
         pump: OrganIPCPump
+        radcollector: WFOrganRadCollector # WOLFGATE(Synthetics): soaks up radiation instead of the body
     right arm:
       part: RightArmIPC
       connections:

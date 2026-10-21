@@ -1,0 +1,70 @@
+# The survival box a synthetic body is issued in place of the breather boxes: no air, food or medicine, but a spare
+# cell, fluid and cable for the faults a chassis runs into, and the standard flares, crowbar and mass scanner.
+
+- type: loadoutEffectGroup
+  id: WFSyntheticBody
+  effects:
+  - !type:WFBiotypeLoadoutEffect
+    biotypes:
+    - Synthetic
+
+- type: entity
+  parent: BoxBaseSurvivalMono
+  id: WFBoxSurvivalSynthetic
+  name: synthetic survival box
+  description: A standard issue survival box for synthetics. A spare power cell, hydraulic fluid and cable to keep a chassis running in an emergency.
+  suffix: Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: PowerCellMedium
+    - id: WFWolfmedHydraulicFluidPack
+    - id: CableApcStack10
+    - id: Flare
+    - id: SignalFlareGreen
+    - id: SignalFlareWhite
+    - id: WeaponFlareGun
+    - id: CrowbarPocket
+    - id: HandHeldMassScanner
+  # The survival box's own list, with cells, fluid packs and cable in place of air and medicine.
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,4,2
+    whitelist:
+      components:
+      - Tool
+      - ToggleCellDraw
+      - RadarConsole
+      - LightBehaviour
+      - PowerCell
+      - CablePlacer
+      - DrainableSolution
+      tags:
+      - SurvivalBox
+      - SignalFlareLaunchable
+      - SignalFlareLauncher
+  - type: Sprite
+    layers:
+    - state: internals
+    - state: circuit
+
+- type: loadout
+  id: WFEmergencySynthetic
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFSyntheticBody
+  storage:
+    back:
+    - WFBoxSurvivalSynthetic
+
+# The contractor-style groups are hidden and filled from fallbacks, so the box there hides rather than shows its gate.
+- type: loadout
+  id: WFContractorBoxSurvivalSynthetic
+  name: synthetic survival box
+  hideEffects:
+  - !type:GroupLoadoutEffect
+    proto: WFSyntheticBody
+  storage:
+    back:
+    - WFBoxSurvivalSynthetic

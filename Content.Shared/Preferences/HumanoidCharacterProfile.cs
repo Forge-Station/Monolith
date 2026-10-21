@@ -2,8 +2,15 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared._Mono.Company;
 using Content.Shared._NF.Bank;
-using Content.Shared._WF.Genitals; // WOLFGATE
-using Content.Shared._WF.Genitals.Migration; // WOLFGATE
+using Content.Shared._WF.Biotype; // WOLFGATE(Biotype)
+using Content.Shared._WF.ChatFont; // WOLFGATE(ChatFont)
+using Content.Shared._WF.TypingBubble; // WOLFGATE(TypingBubble)
+using Content.Shared._WF.BloodColour; // WOLFGATE(BloodColour)
+using Content.Shared._WF.EmoteVoices; // WOLFGATE(EmoteVoices)
+using Content.Shared._WF.Genitals; // WOLFGATE(Genitals)
+using Content.Shared._WF.Genitals.Migration; // WOLFGATE(Genitals)
+using Content.Shared._WF.Genitals.Profile; // WOLFGATE(Genitals)
+using Content.Shared._WF.LegStyle; // WOLFGATE(LegStyle)
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
@@ -34,7 +41,7 @@ namespace Content.Shared.Preferences
 
         public const int MaxNameLength = 32;
         public const int MaxLoadoutNameLength = 32;
-        public const int MaxDescLength = 4096; // WOLFGATE: was 512
+        public const int MaxDescLength = 4096; // WOLFGATE(Humanoid): was 512
 
         public const int DefaultBalance = 75000;
 
@@ -145,20 +152,35 @@ namespace Content.Shared.Preferences
         [DataField]
         public string Company { get; private set; } = "None";
 
+        // WOLFGATE(Humanoid) START: custom species display name
         /// <summary>
-        /// WOLFGATE - shown instead of the species name wherever the species is displayed. Empty means
+        /// Shown instead of the species name wherever the species is displayed. Empty means
         /// the species' own name is used.
         /// </summary>
         [DataField]
         public string CustomSpeciesName { get; private set; } = string.Empty;
 
         public const int MaxCustomSpeciesNameLength = 32;
+        // WOLFGATE END
 
+        // WOLFGATE(Genitals) START: creator anatomy
         /// <summary>
-        /// WOLFGATE - creator anatomy. Absent data (old exports, old code paths) means not yet migrated.
+        /// Creator anatomy. Absent data (old exports, old code paths) means not yet migrated.
         /// </summary>
         [DataField]
         public GenitalProfile Genitals { get; private set; } = GenitalProfile.Unmigrated;
+        // WOLFGATE END
+
+        // Mono start
+        [DataField]
+        public List<string> Flags { get; private set; } = [];
+
+        [DataField]
+        public List<PersistentProfileComponent> Components { get; private set; } = [];
+
+        [DataField]
+        public List<PersistentProfileItem> Items { get; private set; } = [];
+        // Mono end
 
         public HumanoidCharacterProfile(
             string name,
@@ -175,9 +197,17 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
-            string company = "None",
-            string customSpeciesName = "",
-            GenitalProfile? genitals = null) // WOLFGATE
+            string company = "None", // WOLFGATE: the company is passed through the constructor
+            string customSpeciesName = "", // WOLFGATE(Humanoid)
+            GenitalProfile? genitals = null, // WOLFGATE(Genitals)
+            IEnumerable<string>? flags = null, // Mono
+            IEnumerable<PersistentProfileComponent>? components = null, // Mono
+            // WOLFGATE(EmoteVoices) START: the chosen voices follow the Mono data
+            // IEnumerable<PersistentProfileItem>? items = null) // Mono
+            IEnumerable<PersistentProfileItem>? items = null, // Mono
+            ProtoId<EmoteVoicePrototype>? screamVoice = null,
+            ProtoId<EmoteVoicePrototype>? laughVoice = null)
+            // WOLFGATE END
         {
             Name = name;
             FlavorText = flavortext;
@@ -194,8 +224,15 @@ namespace Content.Shared.Preferences
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
             Company = company;
-            CustomSpeciesName = customSpeciesName;
-            Genitals = genitals ?? GenitalProfile.Unmigrated; // WOLFGATE
+            CustomSpeciesName = customSpeciesName; // WOLFGATE(Humanoid)
+            Genitals = genitals ?? GenitalProfile.Unmigrated; // WOLFGATE(Genitals)
+            // Mono start
+            Flags = flags is null ? [] : [..flags];
+            Components = components is null ? [] : [..components];
+            Items = items is null ? [] : [..items];
+            // Mono end
+            ScreamVoice = screamVoice; // WOLFGATE(EmoteVoices)
+            LaughVoice = laughVoice; // WOLFGATE(EmoteVoices)
         }
 
         /// <summary>Copy constructor but with overridable references (to prevent useless copies)</summary>
@@ -206,9 +243,22 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts)
             : this(other.Name, other.FlavorText, other.Species, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
-                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company, other.CustomSpeciesName,
-                other.Genitals) // WOLFGATE - GenitalProfile is immutable, so copies share it
+                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company, other.CustomSpeciesName, // WOLFGATE(Humanoid)
+                other.Genitals, // WOLFGATE(Genitals): GenitalProfile is immutable, so copies share it
+                // WOLFGATE(EmoteVoices) START: copies keep the chosen voices
+                // other.Flags, other.Components, other.Items) // Mono
+                other.Flags, other.Components, other.Items, // Mono
+                other.ScreamVoice, other.LaughVoice)
+                // WOLFGATE END
         {
+            HeadshotUrl = other.HeadshotUrl; // WOLFGATE(Headshot)
+            MismatchedParts = other.MismatchedParts; // WOLFGATE(Species)
+            CustomMarkings = new(other.CustomMarkings); // WOLFGATE(CustomMarkings)
+            LegStance = other.LegStance; // WOLFGATE(LegStyle)
+            Biotype = other.Biotype; // WOLFGATE(Biotype)
+            ChatFont = other.ChatFont; // WOLFGATE(ChatFont)
+            TypingIndicator = other.TypingIndicator; // WOLFGATE(TypingBubble)
+            BloodColor = other.BloodColor; // WOLFGATE(BloodColour)
         }
 
         /// <summary>Copy constructor</summary>
@@ -227,10 +277,26 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
-                other.Company,
-                other.CustomSpeciesName,
-                other.Genitals.Clone()) // WOLFGATE
+                other.Company, // WOLFGATE: copies keep the company
+                other.CustomSpeciesName, // WOLFGATE(Humanoid)
+                other.Genitals.Clone(), // WOLFGATE(Genitals)
+                other.Flags, // Mono
+                other.Components, // Mono
+                // WOLFGATE(EmoteVoices) START: copies keep the chosen voices
+                // other.Items) // Mono
+                other.Items, // Mono
+                other.ScreamVoice,
+                other.LaughVoice)
+                // WOLFGATE END
         {
+            HeadshotUrl = other.HeadshotUrl; // WOLFGATE(Headshot)
+            MismatchedParts = other.MismatchedParts; // WOLFGATE(Species)
+            CustomMarkings = new(other.CustomMarkings); // WOLFGATE(CustomMarkings)
+            LegStance = other.LegStance; // WOLFGATE(LegStyle)
+            Biotype = other.Biotype; // WOLFGATE(Biotype)
+            ChatFont = other.ChatFont; // WOLFGATE(ChatFont)
+            TypingIndicator = other.TypingIndicator; // WOLFGATE(TypingBubble)
+            BloodColor = other.BloodColor; // WOLFGATE(BloodColour)
         }
 
         /// <summary>
@@ -252,7 +318,7 @@ namespace Content.Shared.Preferences
             return new()
             {
                 Species = species,
-                Genitals = GenitalProfile.Empty, // WOLFGATE - nothing to migrate
+                Genitals = GenitalProfile.Empty, // WOLFGATE(Genitals): nothing to migrate
             };
         }
 
@@ -305,7 +371,7 @@ namespace Content.Shared.Preferences
                 Gender = gender,
                 Species = species,
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
-                Genitals = GenitalProfile.Empty, // WOLFGATE - random profiles have no anatomy
+                Genitals = GenitalProfile.Empty, // WOLFGATE(Genitals): random profiles have no anatomy
             };
         }
 
@@ -415,22 +481,40 @@ namespace Content.Shared.Preferences
             return new(this) { PreferenceUnavailable = mode };
         }
 
-        /// <summary>WOLFGATE</summary>
+        // WOLFGATE(Humanoid) START: custom species display name setter
         public HumanoidCharacterProfile WithCustomSpeciesName(string customSpeciesName)
         {
             return new(this) { CustomSpeciesName = customSpeciesName };
         }
+        // WOLFGATE END
 
-        /// <summary>WOLFGATE - replaces the creator anatomy.</summary>
+        // WOLFGATE(Genitals) START: replaces the creator anatomy
+        /// <summary>Copy of this profile with the creator anatomy replaced.</summary>
         public HumanoidCharacterProfile WithGenitals(GenitalProfile genitals)
         {
             return new(this) { Genitals = genitals };
         }
+        // WOLFGATE END
 
         public HumanoidCharacterProfile WithCompany(string company)
         {
             return new(this) { Company = company };
         }
+
+        // Mono start
+        public HumanoidCharacterProfile WithPersistentData(
+            IEnumerable<string> flags,
+            IEnumerable<PersistentProfileComponent> components,
+            IEnumerable<PersistentProfileItem> items)
+        {
+            return new(this)
+            {
+                Flags = [..flags],
+                Components = [..components],
+                Items = [..items],
+            };
+        }
+        // Mono end
 
         public HumanoidCharacterProfile WithAntagPreferences(IEnumerable<ProtoId<AntagPrototype>> antagPreferences)
         {
@@ -548,8 +632,20 @@ namespace Content.Shared.Preferences
             if (SpawnPriority != other.SpawnPriority) return false;
             if (Species != other.Species) return false;
             if (Company != other.Company) return false;
-            if (CustomSpeciesName != other.CustomSpeciesName) return false; // WOLFGATE
-            if (!Genitals.MemberwiseEquals(other.Genitals)) return false; // WOLFGATE
+            if (CustomSpeciesName != other.CustomSpeciesName) return false; // WOLFGATE(Humanoid)
+            if (!Genitals.MemberwiseEquals(other.Genitals)) return false; // WOLFGATE(Genitals)
+            if (HeadshotUrl != other.HeadshotUrl) return false; // WOLFGATE(Headshot)
+            if (MismatchedParts != other.MismatchedParts) return false; // WOLFGATE(Species)
+            if (!CustomMarkingsEqual(other)) return false; // WOLFGATE(CustomMarkings)
+            if (LegStance != other.LegStance) return false; // WOLFGATE(LegStyle)
+            if (Biotype != other.Biotype) return false; // WOLFGATE(Biotype)
+            if (ChatFont != other.ChatFont) return false; // WOLFGATE(ChatFont)
+            if (TypingIndicator != other.TypingIndicator) return false; // WOLFGATE(TypingBubble)
+            if (BloodColor != other.BloodColor) return false; // WOLFGATE(BloodColour)
+            if (ScreamVoice != other.ScreamVoice || LaughVoice != other.LaughVoice) return false; // WOLFGATE(EmoteVoices)
+            if (!Flags.SequenceEqual(other.Flags)) return false; // Mono
+            if (!Components.SequenceEqual(other.Components)) return false; // Mono
+            if (!Items.SequenceEqual(other.Items)) return false; // Mono
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
@@ -597,15 +693,16 @@ namespace Content.Shared.Preferences
 
             var age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
 
-            // WOLFGATE - anatomy: convert legacy genital markings and drop adult-only markings below the adult age, then
-            // apply the adult gate and organ rules. This runs before marking validation, which would keep or drop the old ids.
+            // WOLFGATE(Genitals) START: converts legacy genital markings and applies the anatomy rules
+            // Adult-only markings are dropped below the adult age, then the adult gate and organ rules apply. This
+            // runs before marking validation, which would keep or drop the old ids.
             var wfContext = LegacyGenitalMarkings.ContextFor(Species, Appearance.SkinColor, prototypeManager);
             var (wfAppearance, wfGenitals) = LegacyGenitalMarkings.Migrate(Appearance,
                 Genitals ?? GenitalProfile.Unmigrated, // crafted network data can deliver null
                 wfContext);
             wfAppearance = GenitalAdultMarkings.StripIfMinor(wfAppearance, age, prototypeManager);
             wfGenitals = GenitalProfileValidator.EnsureValid(wfGenitals, age, Species, prototypeManager);
-            // End WOLFGATE
+            // WOLFGATE END
 
             var gender = Gender switch
             {
@@ -656,11 +753,22 @@ namespace Content.Shared.Preferences
                 name = GetName(Species, gender);
             }
 
-            // WOLFGATE: permissive, because RemoveMarkupOrThrow threw on text like "[]" and the save handler is
-            // async void, so the character silently failed to save. Stray tags are stripped instead.
+            // WOLFGATE(Humanoid) START: flavor text strips stray tags instead of throwing
+            // RemoveMarkupOrThrow threw on text like "[]" and the save handler is async void, so the character
+            // silently failed to save.
+            // string flavortext;
+            // if (FlavorText.Length > MaxDescLength)
+            // {
+            //     flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText)[..MaxDescLength];
+            // }
+            // else
+            // {
+            //     flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText);
+            // }
             var flavortext = FormattedMessage.RemoveMarkupPermissive(FlavorText);
             if (flavortext.Length > MaxDescLength)
                 flavortext = flavortext[..MaxDescLength];
+            // WOLFGATE END
 
             // Frontier
             //make sure theres no funny bank stuff going on
@@ -671,7 +779,8 @@ namespace Content.Shared.Preferences
             }
             // End Frontier
 
-            var appearance = HumanoidCharacterAppearance.EnsureValid(wfAppearance, Species, Sex); // WOLFGATE - wfAppearance
+            // WOLFGATE(Species): the option widens the hair check
+            var appearance = HumanoidCharacterAppearance.EnsureValid(wfAppearance, Species, Sex, MismatchedParts); // WOLFGATE(Genitals): validates the appearance after legacy genital markings were migrated
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
@@ -724,17 +833,27 @@ namespace Content.Shared.Preferences
             Gender = gender;
             BankBalance = bankBalance;
             Appearance = appearance;
-            Genitals = wfGenitals; // WOLFGATE
+            Genitals = wfGenitals; // WOLFGATE(Genitals)
             SpawnPriority = spawnPriority;
 
-            // WOLFGATE: the custom species name is free text, so it gets the same treatment as the
-            // character name: trimmed, length-capped and stripped of anything that is not printable.
+            // WOLFGATE(Humanoid) START: the custom species name is sanitized like the character name
+            // It is free text, so it is trimmed, length-capped and stripped of anything that is not printable.
             CustomSpeciesName = new string(CustomSpeciesName
                     .Trim()
                     .Where(c => !char.IsControl(c))
                     .Take(MaxCustomSpeciesNameLength)
                     .ToArray())
                 .Trim();
+            // WOLFGATE END
+
+            EnsureHeadshotValid(); // WOLFGATE(Headshot)
+            EnsureCustomMarkingsValid(configManager); // WOLFGATE(CustomMarkings)
+            EnsureValidEmoteVoices(prototypeManager); // WOLFGATE(EmoteVoices)
+            LegStance = LegStyleRules.Validate(Species, LegStance, prototypeManager); // WOLFGATE(LegStyle): legs the species doesn't have fall back to its own
+            Biotype = WFBiotypeRules.Resolve(Biotype, speciesPrototype); // WOLFGATE(Biotype): Default and unknown values become the species' own
+            ChatFont = WFChatFontRules.Validate(ChatFont, prototypeManager); // WOLFGATE(ChatFont): an unknown font becomes the default
+            TypingIndicator = WFTypingBubbleRules.Validate(TypingIndicator, prototypeManager); // WOLFGATE(TypingBubble): an unknown or hidden bubble becomes the species' own
+            BloodColor = WFBloodColourRules.Validate(BloodColor); // WOLFGATE(BloodColour)
 
             // Check if the company exists, if not set to "None"
             if (!string.IsNullOrEmpty(Company) &&
@@ -793,6 +912,9 @@ namespace Content.Shared.Preferences
                 if (!protoManager.TryIndex(trait, out var traitProto))
                     continue;
 
+                if (WFBiotypeGates.TraitBlocked(traitProto, this, protoManager)) // WOLFGATE(Biotype): a trait the effective biotype can't take is dropped
+                    continue;
+
                 // Always valid.
                 if (traitProto.Category == null)
                 {
@@ -835,26 +957,52 @@ namespace Content.Shared.Preferences
 
         public override bool Equals(object? obj)
         {
-            // WOLFGATE - MemberwiseEquals: Equals(other) resolved to this override and recursed forever.
+            // WOLFGATE: MemberwiseEquals - Equals(other) resolved to this override and recursed forever.
             return ReferenceEquals(this, obj) || obj is HumanoidCharacterProfile other && MemberwiseEquals(other);
         }
 
         public override int GetHashCode()
         {
-            // WOLFGATE - only fields MemberwiseEquals compares by value, so profiles that are Equal hash alike.
-            // The collections and Appearance hashed by reference, which broke that once Equals became value equality.
             var hashCode = new HashCode();
+            // WOLFGATE START: hash only what MemberwiseEquals compares by value
+            // These hashed by reference and broke equal profiles hashing alike.
+            // hashCode.Add(_jobPriorities);
+            // hashCode.Add(_antagPreferences);
+            // hashCode.Add(_traitPreferences);
+            // hashCode.Add(_loadouts);
+            // WOLFGATE END
             hashCode.Add(Name);
             hashCode.Add(FlavorText);
             hashCode.Add(Species);
             hashCode.Add(Age);
             hashCode.Add((int)Sex);
             hashCode.Add((int)Gender);
+            // WOLFGATE START: removed - Appearance hashed by reference, broke equal profiles hashing alike
+            // hashCode.Add(Appearance);
+            // WOLFGATE END
             hashCode.Add(BankBalance); // Frontier
+            // Mono start
+            foreach (var flag in Flags)
+                hashCode.Add(flag);
+            foreach (var component in Components)
+                hashCode.Add(component);
+            foreach (var item in Items)
+                hashCode.Add(item);
+            // Mono end
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)PreferenceUnavailable);
-            hashCode.Add(Company); // WOLFGATE
-            hashCode.Add(CustomSpeciesName); // WOLFGATE
+            hashCode.Add(Company); // WOLFGATE: the company is part of the hash
+            hashCode.Add(CustomSpeciesName); // WOLFGATE(Humanoid)
+            hashCode.Add(HeadshotUrl); // WOLFGATE(Headshot)
+            hashCode.Add(MismatchedParts); // WOLFGATE(Species)
+            hashCode.Add(CustomMarkings.Count); // WOLFGATE(CustomMarkings)
+            hashCode.Add((int) LegStance); // WOLFGATE(LegStyle)
+            hashCode.Add((int) Biotype); // WOLFGATE(Biotype)
+            hashCode.Add(ChatFont); // WOLFGATE(ChatFont)
+            hashCode.Add(TypingIndicator); // WOLFGATE(TypingBubble)
+            hashCode.Add(BloodColor); // WOLFGATE(BloodColour)
+            hashCode.Add(ScreamVoice); // WOLFGATE(EmoteVoices)
+            hashCode.Add(LaughVoice); // WOLFGATE(EmoteVoices)
             return hashCode.ToHashCode();
         }
 

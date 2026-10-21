@@ -20,6 +20,7 @@ public sealed class WolfmedWoundSurgerySystem : EntitySystem
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private OrganHealthSystem _organHealth = default!;
+    [Dependency] private Body.WolfmedOpticsSystem _optics = default!;
     [Dependency] private Life.WolfmedLifeSystem _life = default!; // BRAIN
     [Dependency] private PainSystem _pain = default!;
     [Dependency] private WolfmedSurgeryConditionSystem _conditions = default!;
@@ -99,6 +100,10 @@ public sealed class WolfmedWoundSurgerySystem : EntitySystem
 
     private void OnHealOrgan(Entity<WolfmedSurgeryOrganHealEffectComponent> ent, ref SurgeryStepEvent args)
     {
+        // Healing the eyes also clears the blur that welder flashes left, which shows on the same organ.
+        if (ent.Comp.Slot == "eyes")
+            _optics.ClearEyeDamage(args.Body);
+
         if (_conditions.TryFindOrgan(args.Part, ent.Comp.Slot, out var organ))
             _organHealth.ChangeHealth(organ, ent.Comp.Amount);
     }

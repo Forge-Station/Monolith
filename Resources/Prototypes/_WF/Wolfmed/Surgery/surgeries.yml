@@ -256,7 +256,8 @@
 
 # Mechanical (W6) -------------------------------------------------------------
 # The mechanical repair procedure. Servo damage carries no damage type, so neither the welder nor the cable
-# coil's own healing block reaches it; the run behind the panel has to be replaced by hand.
+# coil's own healing block reaches it; the run behind the panel has to be replaced by hand. Like the weld and the
+# rewire it works from the outside: lie down, coil in hand, no scalpel, so a synth can do it alone in the field.
 
 - type: entity
   parent: SurgeryBase
@@ -265,10 +266,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Surgery
-    requirement: SurgeryOpenIncision
     steps:
     - WFSurgeryStepReplaceServo
-    - SurgeryStepSealTendWound
   - type: WolfmedSurgeryWoundCondition
     woundPrototype: WFWolfmedServoDamageWound
 

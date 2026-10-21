@@ -128,6 +128,9 @@
         Blunt: -25
         Piercing: -25
         Slash: -25
+        # WOLFGATE(Wolfmed): frost-cracked and acid-eaten plating; nothing else repaired a chassis's Cold or Caustic
+        Cold: -25
+        Caustic: -25
   # WOLFGATE(Wolfmed): V124: the welder loop covers the pass; this is the seam cooling at the end of it.
   - type: WolfmedRepairSound
     endSound:

@@ -839,7 +839,7 @@ public sealed class WolfmedConsequencesTest : GameTest
             {
                 Assert.That(heartFailed, Is.Not.Null, "forty rounds never failed the human heart.");
                 Assert.That(pumpFailed, Is.Not.Null, "forty rounds never failed the pump.");
-                // Playtest 4 (organs 25, cap 3): the human heart and the pump both go on hit 10, the core on hit 16.
+                // Synthetics playtest (pump 35, core 40): the pump goes after the human heart and before the core.
                 Assert.That(pumpFailed ?? 0, Is.GreaterThanOrEqualTo(heartFailed ?? 0), "the pump fails before a human heart.");
                 Assert.That(coreFailed ?? 0, Is.GreaterThan(pumpFailed ?? 0), "the core failed no later than the pump.");
             });

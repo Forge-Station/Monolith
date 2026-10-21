@@ -156,8 +156,9 @@ wolfmed-cause-shutdown = shutdown
 wolfmed-cause-shutdown-title = Shutdown: { $source }
 wolfmed-cause-shutdown-source-power = no power
 wolfmed-cause-shutdown-source-pump = coolant pump offline
+wolfmed-cause-shutdown-source-fluid = hydraulic pressure lost
 wolfmed-cause-shutdown-symptom = Systems down. Nothing is getting worse.
-wolfmed-cause-shutdown-help-out = A charged cell or working pump brings you back, unless something else holds you.
+wolfmed-cause-shutdown-help-out = A charged cell, a working pump or hydraulic fluid brings you back, unless something else holds you. You may let go.
 wolfmed-cause-shutdown-out = Power lost. Shutting down.
 wolfmed-cause-shutdown-wake = Systems online.
 

@@ -1,0 +1,37 @@
+# Loose coupling: a chassis limb clicked back on by hand rather than seated by a mechanic. It works, badly, until
+# its coupling is repaired. Made only by WFSyntheticLimbSystem on a hand reattach (ruleOnly, and listed on
+# IpcBodyPartProfile so CanCreateWound accepts it). Listed under Shock, the cable coil's repair type, with a reopen
+# line no hit reaches; healingMultiplier 1 as for the other repairable mechanical wounds. When it closes the limb
+# loses WFLooseLimbComponent.
+- type: wound
+  id: WFWolfmedLooseCouplingWound
+  name: wf-synthetics-wound-name-loose-coupling
+  analyzerCategory: Mechanical
+  ruleOnly: true
+  damageTypes:
+    Shock:
+      reopenMinimumDamage: 999
+      severityMultiplier: 1
+  maximumSeverity: 60
+  healingMultiplier: 1
+  behaviors:
+  - !type:WoundPainBehavior
+    painPerSeverity: 0.2
+  stages:
+    Loose:
+      name: wf-synthetics-wound-stage-loose
+      severity: 0
+      behaviors:
+      - !type:WolfmedLimbPenaltyBehavior
+        movementModifier: 0.7
+        manipulationModifier: 1.5
+
+# What a loose limb looks like from outside: it sits crooked in its socket.
+- type: wolfmedWoundLook
+  id: WFWolfmedLookLooseCoupling
+  wound: WFWolfmedLooseCouplingWound
+  visibility: Skin
+  description: wf-synthetics-look-loose-coupling
+  label: wf-synthetics-look-loose-coupling-short
+  icon: impaired
+  colour: impaired

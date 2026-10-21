@@ -61,6 +61,9 @@
         Heat: -9
         Shock: -9
         Radiation: -9
+        # WOLFGATE(Wolfmed): as the welder, so a chassis's Cold and Caustic damage can be repaired
+        Cold: -9
+        Caustic: -9
 
 - type: entity
   name: experimental nanite applicator

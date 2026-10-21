@@ -115,6 +115,14 @@
   severity: Fail
   advice: wolfmed-synthetic-advice-servo
 
+# Synthetics: a limb the chassis panel isolated. Deliberate, so it is a note rather than a failure.
+- type: syntheticHudLine
+  id: WFSyntheticHudPartIsolated
+  condition: PartIsolated
+  line: wolfmed-synthetic-line-isolated
+  severity: Info
+  advice: wolfmed-synthetic-advice-isolated
+
 - type: syntheticHudLine
   id: WFSyntheticHudPartMissing
   condition: PartMissing
@@ -144,3 +152,11 @@
   line: wolfmed-synthetic-line-core-temp-critical
   severity: Crit
   advice: wolfmed-synthetic-advice-core-temp
+
+# Flash-burnt optics: a sheet of glass replaces the lenses, the eye surgery does it too.
+- type: syntheticHudLine
+  id: WFSyntheticHudOpticsDamaged
+  condition: OpticsDamaged
+  line: wolfmed-synthetic-line-optics
+  severity: Warn
+  advice: wolfmed-synthetic-advice-optics

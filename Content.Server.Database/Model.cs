@@ -58,17 +58,6 @@ namespace Content.Server.Database
         public DbSet<WolfgateCustomMarking> WolfgateCustomMarking { get; set; } = null!;
         // WOLFGATE END
         public DbSet<WolfgateFeedbackReport> WolfgateFeedbackReport { get; set; } = null!; // WOLFGATE(Feedback): player bug reports and suggestions
-        // WOLFGATE(Companies) START: player-run companies, their ranks, members and ledger
-        public DbSet<WolfgateCompany> WolfgateCompany { get; set; } = null!;
-        public DbSet<WolfgateCompanyRank> WolfgateCompanyRank { get; set; } = null!;
-        public DbSet<WolfgateCompanyMember> WolfgateCompanyMember { get; set; } = null!;
-        public DbSet<WolfgateCompanyLedger> WolfgateCompanyLedger { get; set; } = null!;
-        public DbSet<WolfgateCompanyLicence> WolfgateCompanyLicence { get; set; } = null!;
-        public DbSet<WolfgateCompanyApplication> WolfgateCompanyApplication { get; set; } = null!;
-        // WOLFGATE END
-
-        public DbSet<WolfgateGameScore> WolfgateGameScore { get; set; } = null!; // WOLFGATE(GameHub): best level scores
-        public DbSet<WolfgateContractStanding> WolfgateContractStanding { get; set; } = null!; // WOLFGATE(Contracts): standing with contractors
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -489,80 +478,6 @@ namespace Content.Server.Database
             modelBuilder.Entity<WolfgateFeedbackReport>()
                 .HasIndex(r => r.Status);
             // WOLFGATE END
-
-            // WOLFGATE(GameHub) START: one best score per player, game and level
-            modelBuilder.Entity<WolfgateGameScore>()
-                .HasIndex(s => new { s.PlayerUserId, s.Game, s.Level })
-                .IsUnique();
-
-            modelBuilder.Entity<WolfgateGameScore>()
-                .HasIndex(s => s.Game);
-            // WOLFGATE END
-
-            // WOLFGATE(Contracts) START: one standing per character and contractor
-            modelBuilder.Entity<WolfgateContractStanding>()
-                .HasIndex(s => new { s.PlayerUserId, s.CharacterName, s.Contractor })
-                .IsUnique();
-            // WOLFGATE END
-
-            // WOLFGATE(Companies) START: names and tags are unique; a character's membership goes with the character
-            modelBuilder.Entity<WolfgateCompany>()
-                .HasIndex(c => c.Name)
-                .IsUnique();
-
-            modelBuilder.Entity<WolfgateCompany>()
-                .HasIndex(c => c.Tag)
-                .IsUnique();
-
-            modelBuilder.Entity<WolfgateCompanyRank>()
-                .HasOne(r => r.Company)
-                .WithMany(c => c.Ranks)
-                .HasForeignKey(r => r.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<WolfgateCompanyMember>()
-                .HasOne(m => m.Company)
-                .WithMany(c => c.Members)
-                .HasForeignKey(m => m.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<WolfgateCompanyMember>()
-                .HasOne(m => m.Profile)
-                .WithOne()
-                .HasForeignKey<WolfgateCompanyMember>(m => m.ProfileId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<WolfgateCompanyLedger>()
-                .HasOne(l => l.Company)
-                .WithMany()
-                .HasForeignKey(l => l.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<WolfgateCompanyLedger>()
-                .HasIndex(l => new { l.CompanyId, l.Time });
-
-            modelBuilder.Entity<WolfgateCompanyLicence>()
-                .HasOne(l => l.Company)
-                .WithMany()
-                .HasForeignKey(l => l.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<WolfgateCompanyApplication>()
-                .HasOne(a => a.Company)
-                .WithMany()
-                .HasForeignKey(a => a.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<WolfgateCompanyApplication>()
-                .HasOne(a => a.Profile)
-                .WithMany()
-                .HasForeignKey(a => a.ProfileId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<WolfgateCompanyApplication>()
-                .HasIndex(a => new { a.CompanyId, a.ProfileId })
-                .IsUnique();
-            // WOLFGATE END
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -651,11 +566,6 @@ namespace Content.Server.Database
         // WOLFGATE(Biotype): organic or synthetic body, 0 for the species' own.
         [Column("biotype")] public int Biotype { get; set; }
 
-        // WOLFGATE(Augments) START: augments picked per slot (slot:augment[:style] entries) and priced ones paid for.
-        [Column("augments")] public string Augments { get; set; } = "";
-        [Column("augment_unlocks")] public string AugmentUnlocks { get; set; } = "";
-        // WOLFGATE END
-
         // WOLFGATE(BloodColour): blood and flesh colour as hex, null for the species' own.
         [Column("blood_color")] public string? BloodColor { get; set; }
 
@@ -664,12 +574,6 @@ namespace Content.Server.Database
 
         // WOLFGATE(TypingBubble): the typingIndicator prototype id, null for the species' own.
         [Column("typing_indicator")] public string? TypingIndicator { get; set; }
-
-        // WOLFGATE(EmoteVoices): the wfMessageSound prototype id, empty for the species' own.
-        [Column("message_sound")] public string MessageSound { get; set; } = "";
-
-        // WOLFGATE(Voice): the voice settings as JSON, null in rows saved before voices existed.
-        [Column("speech_voice")] public string? SpeechVoice { get; set; }
 
         public int PreferenceId { get; set; }
         public Preference Preference { get; set; } = null!;
@@ -874,9 +778,6 @@ namespace Content.Server.Database
         /// Corresponding loadout prototype.
         /// </summary>
         public string LoadoutName { get; set; } = string.Empty;
-
-        // WOLFGATE(Gags): colours picked for the loadout's recolourable item, comma-separated hex; empty for its own.
-        public string GagsColors { get; set; } = string.Empty;
 
         /*
          * Insert extra data here like custom descriptions or colors or whatever.
@@ -1918,256 +1819,6 @@ namespace Content.Server.Database
         /// shows the notice, at login if need be, and clears it once the player has closed it.
         /// </summary>
         public bool NotifyPlayer { get; set; }
-    }
-    // WOLFGATE END
-
-    // WOLFGATE(Companies) START: player-run companies, their ranks, members and ledger
-    /// <summary>A player-run company. Its owner is a member character with no rank.</summary>
-    public class WolfgateCompany
-    {
-        [Key]
-        public int Id { get; set; }
-
-        [Required, MaxLength(32)]
-        public string Name { get; set; } = null!;
-
-        [Required, MaxLength(5)]
-        public string Tag { get; set; } = null!;
-
-        [Required, MaxLength(1024)]
-        public string Description { get; set; } = "";
-
-        /// <summary>The company colour as #RRGGBB.</summary>
-        [Required, MaxLength(9)]
-        public string Colour { get; set; } = "#FFFFFF";
-
-        /// <summary>Profile id of the owning character.</summary>
-        public int OwnerProfileId { get; set; }
-
-        public long Balance { get; set; }
-
-        /// <summary>Percent of members' earnings paid into the account.</summary>
-        public int Cut { get; set; }
-
-        public bool Recruiting { get; set; }
-
-        /// <summary>Set by an admin: no credits move in or out.</summary>
-        public bool Frozen { get; set; }
-
-        /// <summary>The 32x32 logo as raw RGBA bytes; null for none.</summary>
-        public byte[]? Logo { get; set; }
-
-        /// <summary>Counts logo changes, so clients know when to fetch it again.</summary>
-        public int LogoVersion { get; set; }
-
-        /// <summary>Set by an admin: the company can't change its art.</summary>
-        public bool ArtLocked { get; set; }
-
-        /// <summary>What a member pays into the account to launch a company ship.</summary>
-        public int LaunchFee { get; set; }
-
-        /// <summary>The owner's own rank title; empty for the default.</summary>
-        [Required, MaxLength(32)]
-        public string OwnerTitle { get; set; } = "";
-
-        /// <summary>The owner's base job; empty for the default.</summary>
-        [Required, MaxLength(64)]
-        public string OwnerJob { get; set; } = "";
-
-        /// <summary>The owner's 8x8 job icon as raw RGBA bytes; null for none.</summary>
-        public byte[]? OwnerIcon { get; set; }
-
-        public int OwnerIconVersion { get; set; }
-
-        /// <summary>The rank anyone may join at without applying; null when joining needs an invitation or application.</summary>
-        public int? OpenRankId { get; set; }
-
-        /// <summary>Set by the owner: only members see who is in the company.</summary>
-        public bool Private { get; set; }
-
-        /// <summary>Loadout prototype ids issued to the owner, comma-separated.</summary>
-        [Required, MaxLength(2048)]
-        public string OwnerLoadout { get; set; } = "";
-
-        public DateTime CreatedAt { get; set; }
-
-        public List<WolfgateCompanyRank> Ranks { get; set; } = null!;
-        public List<WolfgateCompanyMember> Members { get; set; } = null!;
-    }
-
-    /// <summary>A rank in a company; lower order is higher rank.</summary>
-    public class WolfgateCompanyRank
-    {
-        [Key]
-        public int Id { get; set; }
-
-        public int CompanyId { get; set; }
-        public WolfgateCompany Company { get; set; } = null!;
-
-        public int Order { get; set; }
-
-        [Required, MaxLength(32)]
-        public string Title { get; set; } = null!;
-
-        /// <summary>WFCompanyPermissions flags.</summary>
-        public int Permissions { get; set; }
-
-        public int Wage { get; set; }
-
-        public int WithdrawCap { get; set; }
-
-        [Required, MaxLength(64)]
-        public string BaseJob { get; set; } = null!;
-
-        /// <summary>The 8x8 job icon as raw RGBA bytes; null for the base job's own.</summary>
-        public byte[]? Icon { get; set; }
-
-        public int IconVersion { get; set; }
-
-        /// <summary>Loadout prototype ids issued at each spawn, comma-separated.</summary>
-        [Required, MaxLength(2048)]
-        public string Loadout { get; set; } = "";
-    }
-
-    /// <summary>A character's membership; one company per character.</summary>
-    public class WolfgateCompanyMember
-    {
-        [Key]
-        public int ProfileId { get; set; }
-        public Profile Profile { get; set; } = null!;
-
-        public int CompanyId { get; set; }
-        public WolfgateCompany Company { get; set; } = null!;
-
-        /// <summary>Null for the owner.</summary>
-        public int? RankId { get; set; }
-
-        public DateTime JoinedAt { get; set; }
-
-        /// <summary>Played seconds not yet paid a wage.</summary>
-        public int UnpaidSeconds { get; set; }
-
-        public int WithdrawnToday { get; set; }
-
-        /// <summary>The UTC day WithdrawnToday counts.</summary>
-        public DateTime WithdrawDay { get; set; }
-    }
-
-    /// <summary>One movement of credits in or out of a company's account.</summary>
-    public class WolfgateCompanyLedger
-    {
-        [Key]
-        public int Id { get; set; }
-
-        public int CompanyId { get; set; }
-        public WolfgateCompany Company { get; set; } = null!;
-
-        public DateTime Time { get; set; }
-
-        /// <summary>WFCompanyLedgerKind.</summary>
-        public int Kind { get; set; }
-
-        public long Amount { get; set; }
-
-        public long BalanceAfter { get; set; }
-
-        public int? ActorProfileId { get; set; }
-
-        [Required, MaxLength(64)]
-        public string ActorName { get; set; } = "";
-
-        [Required, MaxLength(128)]
-        public string Note { get; set; } = "";
-    }
-
-    // WOLFGATE END
-
-    // WOLFGATE(Contracts) START: a character's standing with one contractor of the contract board
-    public class WolfgateContractStanding
-    {
-        [Key]
-        public int Id { get; set; }
-
-        public Guid PlayerUserId { get; set; }
-
-        [Required, MaxLength(64)]
-        public string CharacterName { get; set; } = "";
-
-        [Required, MaxLength(64)]
-        public string Contractor { get; set; } = "";
-
-        public int Points { get; set; }
-
-        /// <summary>The last round its drift toward neutral was applied in.</summary>
-        public int LastRound { get; set; }
-
-        public DateTime Updated { get; set; }
-    }
-    // WOLFGATE END
-
-    // WOLFGATE(GameHub) START: a player's best score on one level of a hub game
-    public class WolfgateGameScore
-    {
-        [Key]
-        public int Id { get; set; }
-
-        public Guid PlayerUserId { get; set; }
-
-        [Required, MaxLength(64)]
-        public string PlayerName { get; set; } = "";
-
-        [Required, MaxLength(64)]
-        public string Game { get; set; } = "";
-
-        public int Level { get; set; }
-
-        public int Score { get; set; }
-
-        public DateTime Time { get; set; }
-    }
-    // WOLFGATE END
-
-    // WOLFGATE(Companies) START: a company's ship licences
-    /// <summary>A company's permanent right to launch one copy of a ship design each round.</summary>
-    public class WolfgateCompanyLicence
-    {
-        [Key]
-        public int Id { get; set; }
-
-        public int CompanyId { get; set; }
-        public WolfgateCompany Company { get; set; } = null!;
-
-        [Required, MaxLength(64)]
-        public string Vessel { get; set; } = null!;
-
-        public long PricePaid { get; set; }
-
-        public DateTime BoughtAt { get; set; }
-
-        /// <summary>The name this ship launches under, kept between rounds.</summary>
-        [Required, MaxLength(64)]
-        public string ShipName { get; set; } = string.Empty;
-    }
-
-    /// <summary>A character's request to join a company, with the rank they want and why.</summary>
-    public class WolfgateCompanyApplication
-    {
-        [Key]
-        public int Id { get; set; }
-
-        public int CompanyId { get; set; }
-        public WolfgateCompany Company { get; set; } = null!;
-
-        public int ProfileId { get; set; }
-        public Profile Profile { get; set; } = null!;
-
-        /// <summary>The rank asked for; null for any.</summary>
-        public int? RankId { get; set; }
-
-        [Required, MaxLength(500)]
-        public string Message { get; set; } = "";
-
-        public DateTime CreatedAt { get; set; }
     }
     // WOLFGATE END
 }

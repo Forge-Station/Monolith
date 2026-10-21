@@ -1,3 +1,4 @@
+# WOLFGATE(Species): ported from HardLight
 # TODO: Add descriptions (many)
 # TODO BODY: Part damage
 - type: entity
@@ -54,7 +55,8 @@
 - type: entity
   id: LeftArmSynth
   name: "left synth arm"
-  parent: [ PartSynth, BaseLeftArm ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcArm must stay FIRST
+  parent: [ WFWolfmedPartIpcArm, PartSynth, BaseEdibleCyberneticLimb, BaseLeftArm ] # WOLFGATE(Wolfmed): metallic edible profile
   components:
   - type: Sprite
     sprite: _HL/Mobs/Species/Synth/parts.rsi
@@ -63,7 +65,8 @@
 - type: entity
   id: RightArmSynth
   name: "right synth arm"
-  parent: [ PartSynth, BaseRightArm ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcArm must stay FIRST
+  parent: [ WFWolfmedPartIpcArm, PartSynth, BaseEdibleCyberneticLimb, BaseRightArm ] # WOLFGATE(Wolfmed): metallic edible profile
   components:
   - type: Sprite
     sprite: _HL/Mobs/Species/Synth/parts.rsi
@@ -72,7 +75,8 @@
 - type: entity
   id: LeftHandSynth
   name: "left synth hand"
-  parent: [ PartSynth, BaseLeftHand ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcHand must stay FIRST
+  parent: [ WFWolfmedPartIpcHand, PartSynth, BaseEdibleCyberneticLimb, BaseLeftHand ] # WOLFGATE(Wolfmed): metallic edible profile
   components:
   - type: Sprite
     sprite: _HL/Mobs/Species/Synth/parts.rsi
@@ -81,7 +85,8 @@
 - type: entity
   id: RightHandSynth
   name: "right synth hand"
-  parent: [ PartSynth, BaseRightHand ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcHand must stay FIRST
+  parent: [ WFWolfmedPartIpcHand, PartSynth, BaseEdibleCyberneticLimb, BaseRightHand ] # WOLFGATE(Wolfmed): metallic edible profile
   components:
   - type: Sprite
     sprite: _HL/Mobs/Species/Synth/parts.rsi
@@ -90,7 +95,8 @@
 - type: entity
   id: LeftLegSynth
   name: "left synth leg"
-  parent: [ PartSynth, BaseLeftLeg ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcLeg must stay FIRST
+  parent: [ WFWolfmedPartIpcLeg, PartSynth, BaseEdibleCyberneticLimb, BaseLeftLeg ] # WOLFGATE(Wolfmed): metallic edible profile
   components:
   - type: Sprite
     sprite: _HL/Mobs/Species/Synth/parts.rsi
@@ -99,7 +105,8 @@
 - type: entity
   id: RightLegSynth
   name: "right synth leg"
-  parent: [ PartSynth, BaseRightLeg ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcLeg must stay FIRST
+  parent: [ WFWolfmedPartIpcLeg, PartSynth, BaseEdibleCyberneticLimb, BaseRightLeg ] # WOLFGATE(Wolfmed): metallic edible profile
   components:
   - type: Sprite
     sprite: _HL/Mobs/Species/Synth/parts.rsi
@@ -108,7 +115,8 @@
 - type: entity
   id: LeftFootSynth
   name: "left synth foot"
-  parent: [ PartSynth, BaseLeftFoot ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcFoot must stay FIRST
+  parent: [ WFWolfmedPartIpcFoot, PartSynth, BaseEdibleCyberneticLimb, BaseLeftFoot ] # WOLFGATE(Wolfmed): metallic edible profile
   components:
   - type: Sprite
     sprite: _HL/Mobs/Species/Synth/parts.rsi
@@ -117,7 +125,8 @@
 - type: entity
   id: RightFootSynth
   name: "right synth foot"
-  parent: [ PartSynth, BaseRightFoot ]
+  # WOLFGATE(Synthetics): lego limbs, chassis amputation thresholds; WFWolfmedPartIpcFoot must stay FIRST
+  parent: [ WFWolfmedPartIpcFoot, PartSynth, BaseEdibleCyberneticLimb, BaseRightFoot ] # WOLFGATE(Wolfmed): metallic edible profile
   components:
   - type: Sprite
     sprite: _HL/Mobs/Species/Synth/parts.rsi

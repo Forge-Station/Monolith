@@ -246,6 +246,7 @@
     - Inorganic
     - Silicon
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
+    - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
   - type: InteractionPopup
     interactSuccessString: petting-success-syndicate-cyborg
     interactFailureString: petting-failure-syndicate-cyborg

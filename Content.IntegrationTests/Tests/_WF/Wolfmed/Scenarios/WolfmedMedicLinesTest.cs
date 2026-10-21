@@ -237,7 +237,8 @@ public sealed class WolfmedMedicLinesTest : GameTest
             Assert.Multiple(() =>
             {
                 // Playtest 3: the pump running and full oil are normal, so the chassis's vitals line says so.
-                Assert.That(lines[0], Is.EqualTo("SHUTDOWN: no power"));
+                // Synthetics: an empty cell no longer shuts the chassis down; it runs on low power.
+                Assert.That(lines[0], Is.EqualTo("LOW POWER: cell empty"));
                 Assert.That(lines[1], Is.EqualTo("Vitals normal"));
                 Assert.That(lines.Any(line => line.StartsWith("Defib")), Is.False, "a chassis got a defib verdict.");
                 Assert.That(lines.Any(line => line.Contains("ulse") || line.Contains("reathing") ||

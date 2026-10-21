@@ -82,14 +82,14 @@ public sealed class WolfmedHealingTargetTest : GameTest
         await server.WaitAssertion(() =>
         {
             var wounds = entities.System<WoundSystem>();
-            var other = wounds.GetWounds(right).Sum(wound => wound.Comp.Severity.Float());
+            var other = wounds.GetWounds(right).Where(Treatable).Sum(wound => wound.Comp.Severity.Float());
             if (missingPart)
             {
                 Assert.That(other, Is.EqualTo(6f), "a missing target must not send the treatment to another leg.");
                 return;
             }
 
-            var treated = wounds.GetWounds(left).Sum(wound => wound.Comp.Severity.Float());
+            var treated = wounds.GetWounds(left).Where(Treatable).Sum(wound => wound.Comp.Severity.Float());
             Assert.Multiple(() =>
             {
                 Assert.That(treated, Is.LessThan(6f),
@@ -101,4 +101,8 @@ public sealed class WolfmedHealingTargetTest : GameTest
             });
         });
     }
+
+    // Heat on a cybernetic leg also warms it; that finding cools by itself and no item treats it.
+    private static bool Treatable(Entity<WoundComponent> wound) =>
+        wound.Comp.Prototype != "WFWolfmedOverheatingWound";
 }

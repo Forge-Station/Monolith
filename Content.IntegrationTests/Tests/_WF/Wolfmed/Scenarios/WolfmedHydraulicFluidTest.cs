@@ -11,6 +11,9 @@ using Content.Server.Body.Components;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server._WF.Wolfmed.Autodoc;
 using Content.Server._WF.Wolfmed.Medical;
+using Content.Shared._WF.Wolfmed.Life;
+using Content.Shared._WF.Wolfmed.Consciousness;
+using Content.Server._WF.Wolfmed.Life;
 using Content.Shared._Onyx.Wounds;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._WF.Wolfmed.Autodoc;
@@ -416,6 +419,55 @@ public sealed class WolfmedHydraulicFluidTest : GameTest
         SEntMan.System<SharedSolutionContainerSystem>().TryGetSolution(pack, "pack", out _, out var solution)
             ? solution.Volume
             : FixedPoint2.Zero;
+
+    /// <summary>
+    /// Synthetics playtest, "HYDRAULIC PRESSURE LOW is a perma state, unable to even succumb": a chassis drained past
+    /// an organic's arrest line shuts down with Succumb, and a refill starts it again.
+    /// </summary>
+    [Test]
+    public async Task DryChassisShutsDownTest()
+    {
+        await OverrideCVar(Side.Server, WolfmedCVars.Consciousness, true);
+        var map = await CreateTestMap();
+        EntityUid ipc = default;
+
+        await Server.WaitAssertion(() =>
+        {
+            SEntMan.System<AtmosphereSystem>().SetMapAtmosphere(map.MapUid, false, WolfmedIvDripTest.StationAir());
+            ipc = SEntMan.SpawnEntity("MobIPC", map.GridCoords);
+        });
+        await RunSeconds(1);
+
+        await Server.WaitAssertion(() =>
+        {
+            var max = SEntMan.GetComponent<BloodstreamComponent>(ipc).BloodMaxVolume;
+            new WolfmedScenario(SEntMan).Bloodstream.TryModifyBloodLevel(ipc, -max * 0.8f);
+        });
+        await RunSeconds(4);
+
+        await Server.WaitAssertion(() =>
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(SEntMan.GetComponentOrNull<WolfmedShutdownComponent>(ipc)?.Reason, Is.EqualTo(WolfmedCauseSource.Fluid),
+                    "a chassis with a fifth of its fluid did not shut down for it.");
+                Assert.That(SEntMan.HasComponent<WolfmedDyingActionsComponent>(ipc), "a dry chassis cannot succumb.");
+            });
+
+            var max = SEntMan.GetComponent<BloodstreamComponent>(ipc).BloodMaxVolume;
+            new WolfmedScenario(SEntMan).Bloodstream.TryModifyBloodLevel(ipc, max);
+        });
+        await RunSeconds(4);
+
+        await Server.WaitAssertion(() =>
+        {
+            Assert.Multiple(() =>
+            {
+                Assert.That(SEntMan.HasComponent<WolfmedShutdownComponent>(ipc), Is.False, "a refilled chassis stayed shut down.");
+                Assert.That(SEntMan.HasComponent<WolfmedDyingActionsComponent>(ipc), Is.False, "Succumb outlived the refill.");
+            });
+        });
+    }
 
     private FixedPoint2 PackReagent(EntityUid pack, string reagent) =>
         SEntMan.System<SharedSolutionContainerSystem>().TryGetSolution(pack, "pack", out _, out var solution)

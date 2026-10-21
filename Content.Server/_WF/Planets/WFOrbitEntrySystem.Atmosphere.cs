@@ -43,14 +43,14 @@ public sealed partial class WFOrbitEntrySystem
             && _zLevels.WfTryGetLiftRatio(grid, out var ratio)
             && ratio < CEZLevelsSystem.WFFullLiftRatio)
         {
-            reason = Loc.GetString("wf-flight-lift-warning", ("ratio", ratio.ToString("F2")));
+            reason = Loc.GetString("wf-flight-lift-warning", ("percent", CEZLevelsSystem.WfLiftPercent(ratio)));
             return false;
         }
 
         _zLevels.WfGetAtmospherePower(grid, out _, out var powerDeficit);
         if (!confirmed && powerDeficit)
         {
-            reason = Loc.GetString("wf-flight-confirm-power-deficit");
+            reason = Loc.GetString("wf-flight-power-warning");
             return false;
         }
 

@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server._CE.ZLevels.Core.Components;
+using Content.Server._WF.Planets;
 using Content.Server._WF.Planets.Flight;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
@@ -16,13 +17,14 @@ namespace Content.Server._CE.ZLevels.Core;
 /// <summary>Atmospheric flight hooks: thruster lift over a planet, sinking without it, and touchdown costs.</summary>
 public sealed partial class CEZLevelsSystem
 {
-    /// <summary>Crashed hulls stop paying hover power while grounded; an ascent command restores full demand.</summary>
+    /// <summary>A crashed hull resting on the ground with no ascent command; its engines skip the overload pulse.</summary>
     public bool WfWreckResting(EntityUid grid) =>
         HasComp<WFCrashImpactComponent>(grid) && WfHasSkidGround(grid) &&
         !HasComp<WFLiftoffComponent>(grid) && _pilotVerticalInput.GetValueOrDefault(grid) <= 0f;
 
     [Dependency] private SharedDestructibleSystem _wfDestructible = default!;
     [Dependency] private WFFlightSystem _wfFlight = default!;
+    [Dependency] private WFOrbitEntrySystem _wfOrbitEntry = default!;
     [Dependency] private ThrusterSystem _wfThrusters = default!;
 
     /// <summary>Lift ratio at or above which a hull flies normally; below it the hull is lift-lost.</summary>
@@ -108,6 +110,12 @@ public sealed partial class CEZLevelsSystem
         _wfThrusters.WfAtmospherePower(CollectRigidSet(grid), out demand, out deficit);
     }
 
+    /// <summary>Hover power demand for the grid's rigid set, whether it is short, and by how many watts.</summary>
+    public void WfGetAtmospherePower(EntityUid grid, out float demand, out bool deficit, out float shortfall)
+    {
+        _wfThrusters.WfAtmospherePower(CollectRigidSet(grid), out demand, out deficit, out shortfall);
+    }
+
     /// <summary>Pooled lift over pooled weight for a grid's whole rigid set; one is level flight.</summary>
     /// <param name="grid">Any member of the rigid body.</param>
     /// <param name="ratio">Lift over weight, or positive infinity for a weightless or force-anchored set.</param>
@@ -179,25 +187,23 @@ public sealed partial class CEZLevelsSystem
         return ratio >= WFPartialLiftRatio ? gravity * (1f - ratio) : gravity;
     }
 
-    /// <summary>True when vertical input on an orbit layer is dropped; descent uses the console button.</summary>
+    /// <summary>
+    /// True when vertical input on an orbit layer is handled here: descend drops into the atmosphere when lift and
+    /// power need no confirm, and is otherwise refused with the reason.
+    /// </summary>
     // Climb is refused too: CE's climb falls back to the gap below when there is none above.
-    private bool WfRefusesOrbitInput(EntityUid grid, float input)
+    private bool WfRefusesOrbitInput(EntityUid pilot, EntityUid console, EntityUid grid, float input)
     {
         if (input == 0f || Transform(grid).MapUid is not { } mapUid || !WfIsOrbitLayer(mapUid))
             return false;
 
-        // Only a descent has a button to point the pilot at.
-        if (input < 0f && _timing.CurTime >= _wfNextOrbitRefusal.GetValueOrDefault(grid))
-        {
-            _wfNextOrbitRefusal[grid] = _timing.CurTime + WFOrbitRefusalCooldown;
+        if (input > 0f || _timing.CurTime < _wfNextOrbitRefusal.GetValueOrDefault(grid))
+            return true;
 
-            var pilots = EntityQueryEnumerator<PilotComponent>();
-            while (pilots.MoveNext(out var pilotUid, out var pilot))
-            {
-                if (pilot.Console is { } console && !TerminatingOrDeleted(console) && Transform(console).GridUid == grid)
-                    _popup.PopupEntity(Loc.GetString("wf-flight-descend-use-button"), console, pilotUid);
-            }
-        }
+        _wfNextOrbitRefusal[grid] = _timing.CurTime + WFOrbitRefusalCooldown;
+
+        if (!_wfOrbitEntry.TryEnterAtmosphere(console, false, out var reason))
+            _popup.PopupEntity(reason, console, pilot);
 
         return true;
     }

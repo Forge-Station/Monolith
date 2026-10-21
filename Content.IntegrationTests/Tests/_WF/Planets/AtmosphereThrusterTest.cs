@@ -55,7 +55,7 @@ public sealed class AtmosphereThrusterTest
             state.PulseAt = TimeSpan.Zero;
             system.WfSetPowerPulse(state, true);
             system.WfRefreshAtmosphereThruster(engine, thruster);
-            Assert.That(receiver.Load, Is.EqualTo(state.RatedLoad * 3f));
+            Assert.That(receiver.Load, Is.EqualTo(state.RatedLoad * ThrusterSystem.WfAtmospherePowerMultiplier));
             Assert.That(thruster.IsOn, Is.True);
             Assert.That(system.WfAtmosphericForce(engine, thruster), Is.GreaterThan(0f));
             state.PulseAt = TimeSpan.Zero;
@@ -101,7 +101,7 @@ public sealed class AtmosphereThrusterTest
             batteries.SetMaxCharge(apc, 1000000f);
             batteries.SetCharge(apc, 1000000f);
             var supply = em.GetComponent<PowerNetworkBatteryComponent>(apc);
-            supply.MaxSupply = em.GetComponent<WFAtmosphereThrusterComponent>(engine).RatedLoad * 2f;
+            supply.MaxSupply = em.GetComponent<WFAtmosphereThrusterComponent>(engine).RatedLoad * 0.5f;
             supply.SupplyRampTolerance = 100000f;
             supply.SupplyRampRate = 100000f;
             server.System<SharedPowerReceiverSystem>().SetNeedsPower(engine, true);
@@ -125,7 +125,7 @@ public sealed class AtmosphereThrusterTest
                 else
                 {
                     retries++;
-                    Assert.That(receiver.Load, Is.EqualTo(state.RatedLoad * 3f));
+                    Assert.That(receiver.Load, Is.EqualTo(state.RatedLoad * ThrusterSystem.WfAtmospherePowerMultiplier));
                 }
             });
         }
@@ -149,45 +149,6 @@ public sealed class AtmosphereThrusterTest
             Assert.DoesNotThrow(() => server.System<CEZLevelsSystem>().WfGetAtmospherePower(hull, out _, out _));
         });
         await server.WaitRunTicks(pair.SecondsToTicks(1f));
-        await Teardown(pair, layers);
-        await pair.CleanReturnAsync();
-    }
-
-    /// <summary>Thrust and APC demand track the engine, hover and re-entry included, without compounding.</summary>
-    [Test]
-    public async Task GroundedWreckStopsHoverDrawAndAscentRestoresIt()
-    {
-        await using var pair = await PoolManager.GetServerClient();
-        var server = pair.Server;
-        var em = server.EntMan;
-        await EnableFeature(pair);
-        var layers = await BuildStandalone(pair);
-        await LayTiles(pair, layers[0], new Vector2i(-8, -8), new Vector2i(32, 32));
-        var hull = await BuildHull(pair, await MapIdOf(pair, layers[0]));
-        await MapInitHull(pair, hull);
-        await RemoveOrdinaryThrusters(pair, hull);
-        var engine = await AddPaidEngine(pair, hull, 4000f);
-        await server.WaitPost(() => em.EnsureComponent<WFCrashImpactComponent>(hull));
-        await server.WaitRunTicks(pair.SecondsToTicks(0.5f));
-        await server.WaitAssertion(() =>
-        {
-            var state = em.GetComponent<WFAtmosphereThrusterComponent>(engine);
-            Assert.That(state.PowerLimited, Is.False);
-            Assert.That(em.GetComponent<ApcPowerReceiverComponent>(engine).Load, Is.EqualTo(state.RatedLoad));
-        });
-        var pilot = await HoldVertical(pair, hull, Content.Shared.Movement.Systems.ShuttleButtons.None);
-        var console = FindShuttleConsole(em, hull);
-        var levels = server.System<CEZLevelsSystem>();
-        var started = false;
-        string? reason = null;
-        await server.WaitPost(() => started = levels.WfTryBeginLiftoff(hull, console, pilot, out reason));
-        Assert.That(started, Is.True, $"The wreck's Liftoff request was refused: {reason}");
-        await server.WaitRunTicks(pair.SecondsToTicks(0.5f));
-        await server.WaitAssertion(() =>
-        {
-            var state = em.GetComponent<WFAtmosphereThrusterComponent>(engine);
-            Assert.That(em.GetComponent<ApcPowerReceiverComponent>(engine).Load, Is.EqualTo(state.RatedLoad * 3f));
-        });
         await Teardown(pair, layers);
         await pair.CleanReturnAsync();
     }
@@ -240,7 +201,7 @@ public sealed class AtmosphereThrusterTest
                     {
                         thrusters.WfRefreshAtmosphereThruster(engine, thruster);
                         var force = destination.Atmosphere ? 2000f : 4000f;
-                        var load = normalLoad * (destination.Atmosphere ? 3f : 1f);
+                        var load = normalLoad * (destination.Atmosphere ? ThrusterSystem.WfAtmospherePowerMultiplier : 1f);
                         using (Assert.EnterMultipleScope())
                         {
                             Assert.That(thruster.Thrust, Is.EqualTo(force).Within(0.01f));
@@ -269,9 +230,9 @@ public sealed class AtmosphereThrusterTest
                     "This engine has enough lift to hover; the hull must hold its air layer.");
                 Assert.That(em.GetComponent<ShuttleComponent>(hull).ThrustDirections, Is.EqualTo(DirectionFlag.None));
                 Assert.That(thruster.Thrust, Is.EqualTo(2000f).Within(0.01f));
-                Assert.That(thruster.OriginalLoad, Is.EqualTo(normalLoad * 3f).Within(0.01f));
+                Assert.That(thruster.OriginalLoad, Is.EqualTo(normalLoad * ThrusterSystem.WfAtmospherePowerMultiplier).Within(0.01f));
                 Assert.That(em.GetComponent<ApcPowerReceiverComponent>(engine).Load,
-                    Is.EqualTo(normalLoad * 3f).Within(0.01f), "Hover must pay the atmospheric load without directional input.");
+                    Is.EqualTo(normalLoad * ThrusterSystem.WfAtmospherePowerMultiplier).Within(0.01f), "Hover must pay the atmospheric load without directional input.");
                 AssertSingleEngineBank(em, hull, engine, 2000f);
             }
             transform.SetCoordinates(hull, new EntityCoordinates(space.MapUid, Vector2.Zero));
@@ -331,7 +292,7 @@ public sealed class AtmosphereThrusterTest
 
     [TestCase(false)]
     [TestCase(true)]
-    public async Task ActualPowerLossStopsLiftAndPowerReturnWithholdsItForTwoSeconds(bool converted)
+    public async Task ActualPowerLossStopsLiftAndPowerReturnRestoresIt(bool converted)
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -368,19 +329,11 @@ public sealed class AtmosphereThrusterTest
             receiver.SetNeedsPower(engine, false);
         });
 
-        // Allow the APC poll to observe returning power, while remaining inside the recovery window.
+        // Returning power restores lift as soon as the APC poll sees it.
         await server.WaitRunTicks(pair.SecondsToTicks(0.75f));
         await server.WaitAssertion(() =>
         {
             Assert.That(em.GetComponent<ApcPowerReceiverComponent>(engine).Powered, Is.True);
-            Assert.That(zLevels.WfGetLandingThrust(hull), Is.Zero, "Returning power must not immediately recover lift.");
-        });
-        await server.WaitRunTicks(pair.SecondsToTicks(1f));
-        await server.WaitAssertion(() =>
-            Assert.That(zLevels.WfGetLandingThrust(hull), Is.Zero, "The two-second recovery buffer ended early."));
-        await server.WaitRunTicks(pair.SecondsToTicks(1.25f));
-        await server.WaitAssertion(() =>
-        {
             Assert.That(em.GetComponent<ThrusterComponent>(engine).IsOn, Is.True);
             Assert.That(zLevels.WfGetLandingThrust(hull), Is.EqualTo(capacity).Within(0.01f));
             AssertSingleEngineBank(em, hull, engine, capacity * Gravity);
@@ -421,7 +374,7 @@ public sealed class AtmosphereThrusterTest
             transform.SetCoordinates(hull, new EntityCoordinates(layers[0], Vector2.Zero));
             thrusters.WfRefreshAtmosphereThruster(engine, original);
             Assert.That(original.Thrust, Is.EqualTo(490.5f).Within(0.01f));
-            Assert.That(originalReceiver.Load, Is.EqualTo(normalLoad * 3f).Within(0.01f));
+            Assert.That(originalReceiver.Load, Is.EqualTo(normalLoad * ThrusterSystem.WfAtmospherePowerMultiplier).Within(0.01f));
             coords = em.GetComponent<TransformComponent>(engine).Coordinates;
             rotation = em.GetComponent<TransformComponent>(engine).LocalRotation;
             var user = em.SpawnEntity(ViewerProto, new EntityCoordinates(hull, coords.Position + Vector2.One));
@@ -515,7 +468,7 @@ public sealed class AtmosphereThrusterTest
             var convertedLoad = em.GetComponent<ThrusterComponent>(converted).OriginalLoad;
             Assert.That(ordinaryLoad, Is.GreaterThan(0f));
             Assert.That(convertedLoad, Is.GreaterThan(0f));
-            var expected = 3f * ordinaryLoad + convertedLoad;
+            var expected = ThrusterSystem.WfAtmospherePowerMultiplier * ordinaryLoad + convertedLoad;
 
             // Forecast atmosphere demand while still in space, before any multipliers have been applied.
             zLevels.WfGetAtmospherePower(hull, out var demand, out var deficit);
@@ -536,7 +489,7 @@ public sealed class AtmosphereThrusterTest
 
             em.EventBus.RaiseLocalEvent(converted, new ActivateInWorldEvent(converted, converted, true));
             zLevels.WfGetAtmospherePower(hull, out demand, out deficit);
-            Assert.That(demand, Is.EqualTo(3f * ordinaryLoad).Within(0.01f));
+            Assert.That(demand, Is.EqualTo(ThrusterSystem.WfAtmospherePowerMultiplier * ordinaryLoad).Within(0.01f));
             Assert.That(deficit, Is.False, "A disabled engine contributes neither demand nor a deficit.");
         });
 
@@ -570,6 +523,46 @@ public sealed class AtmosphereThrusterTest
                 server.System<SharedTransformSystem>().SetCoordinates(hull, new EntityCoordinates(map, Vector2.Zero));
                 Assert.That(zLevels.WfManeuveringFactor(hull), Is.EqualTo(1f));
             }
+        });
+
+        await Teardown(pair, layers);
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>Lift advice names the fewest conversions first, then landing thrusters on top, and nothing at full lift.</summary>
+    [Test]
+    public async Task LiftAdviceCountsConversionsThenAdditions()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var em = server.EntMan;
+        var zLevels = server.System<CEZLevelsSystem>();
+        await EnableFeature(pair);
+        var layers = await BuildStandalone(pair);
+        var hull = await BuildHull(pair, await MapIdOf(pair, layers[0]));
+        await MapInitHull(pair, hull);
+        await RemoveOrdinaryThrusters(pair, hull);
+
+        // 225 half-mass tiles need 112.5 lift at 1 g; each engine is rated 100 and gives 50 unconverted.
+        var first = await AddPaidEngine(pair, hull, 100f * Gravity);
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(zLevels.WfTryGetPlanetGravity(hull, out var gravity) && gravity == 1f, Is.True,
+                "Precondition: the expected counts assume a 1 g world.");
+            zLevels.WfGetLiftAdvice(hull, out var convert, out var add);
+            Assert.That((convert, add), Is.EqualTo((1, 1)), "Converting the one engine reaches 100; one more covers the rest.");
+        });
+
+        var second = await AddPaidEngine(pair, hull, 100f * Gravity);
+        await server.WaitAssertion(() =>
+        {
+            zLevels.WfGetLiftAdvice(hull, out var convert, out var add);
+            Assert.That((convert, add), Is.EqualTo((1, 0)), "One conversion lifts 100 + 50 past 112.5.");
+
+            em.EnsureComponent<WFLandingThrusterComponent>(first);
+            em.EnsureComponent<WFLandingThrusterComponent>(second);
+            zLevels.WfGetLiftAdvice(hull, out convert, out add);
+            Assert.That((convert, add), Is.EqualTo((0, 0)), "A hull with full lift was given advice.");
         });
 
         await Teardown(pair, layers);

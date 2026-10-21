@@ -110,12 +110,12 @@ public sealed partial class CEZLevelsSystem
             if (vertical == 0f)
                 continue;
 
-            // WOLFGATE(Planets) START: grounded planet ascent is a latched console action; airborne input keeps CE's normal control.
+            // WOLFGATE(Planets) START: grounded ascend engages liftoff; airborne input keeps CE's normal control.
             if (WfHandleLiftoffPilotInput(pilotUid, console, grid, vertical))
                 continue;
 
-            // WOLFGATE(Planets): an orbit layer is left through the console's enter-atmosphere button, never on the keys.
-            if (WfRefusesOrbitInput(grid, vertical))
+            // WOLFGATE(Planets): descend from orbit enters the atmosphere only when no confirm is needed.
+            if (WfRefusesOrbitInput(pilotUid, console, grid, vertical))
                 continue;
             // WOLFGATE END
 

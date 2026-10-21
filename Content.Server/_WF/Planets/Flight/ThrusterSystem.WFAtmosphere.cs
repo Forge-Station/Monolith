@@ -13,13 +13,13 @@ using Robust.Shared.Map.Components;
 
 namespace Content.Server.Shuttles.Systems;
 
-/// <summary>Ordinary engines sacrifice thrust and draw more power below orbit. Conversions retain their ratings.</summary>
+/// <summary>Ordinary engines lose half their thrust below orbit. Conversions retain their ratings.</summary>
 public sealed partial class ThrusterSystem
 {
     public const float WfAtmosphereThrustMultiplier = 0.5f;
-    public const float WfAtmospherePowerMultiplier = 3f;
+    // Hover power multiplier for ordinary engines; 1 keeps atmosphere power the same as space.
+    public const float WfAtmospherePowerMultiplier = 1f;
     public const float WfStandardGravity = 9.81f;
-    public static readonly TimeSpan WfPowerRecoveryDelay = TimeSpan.FromSeconds(2);
     private TimeSpan _wfNextAtmosphereUpdate;
     private TimeSpan _wfRestingAt;
     private readonly Dictionary<EntityUid, bool> _wfResting = new();
@@ -101,8 +101,7 @@ public sealed partial class ThrusterSystem
             thruster.Thrust = thrust;
         }
         state.Atmospheric = inAtmosphere;
-        var hoverPower = penalized && (xform.GridUid is not { } restingGrid || !WfRestingWreck(restingGrid));
-        thruster.OriginalLoad = state.RatedLoad * (hoverPower ? WfAtmospherePowerMultiplier : 1f);
+        thruster.OriginalLoad = state.RatedLoad * (penalized ? WfAtmospherePowerMultiplier : 1f);
         if (TryComp<ApcPowerReceiverComponent>(uid, out var receiver))
             receiver.Load = thruster.Enabled && !state.Cooling ? thruster.OriginalLoad : 1f;
         if (state.Cooling)
@@ -110,16 +109,6 @@ public sealed partial class ThrusterSystem
         else if (!thruster.IsOn && CanEnable(uid, thruster))
             EnableThruster(uid, thruster);
 
-        // Lost power removes lift immediately. Returning power must stay up for two seconds before lifting again.
-        if (inAtmosphere && !thruster.IsOn && state.WasPowered)
-            state.RecoverAt = _timing.CurTime + WfPowerRecoveryDelay;
-        if (inAtmosphere && !thruster.IsOn && state.RecoverAt > TimeSpan.Zero)
-            state.RecoverAt = _timing.CurTime + WfPowerRecoveryDelay;
-        // Power can return between sweeps, so the hold restarts from the first sweep that sees the engine back on.
-        if (inAtmosphere && thruster.IsOn && !state.WasPowered && state.RecoverAt > TimeSpan.Zero)
-            state.RecoverAt = _timing.CurTime + WfPowerRecoveryDelay;
-        if (!inAtmosphere)
-            state.RecoverAt = TimeSpan.Zero;
         state.WasPowered = thruster.IsOn;
     }
 
@@ -143,26 +132,35 @@ public sealed partial class ThrusterSystem
         WfRefreshAtmosphereThruster(uid, thruster);
     }
 
-    /// <summary>Prospective atmospheric force, even in orbit; ignores unavailable engines and recovery flicker.</summary>
+    /// <summary>Prospective atmospheric force, even in orbit; ignores unavailable engines.</summary>
     public float WfAtmosphericForce(EntityUid uid, ThrusterComponent thruster)
     {
         if (thruster.Type != ThrusterType.Linear || !thruster.Enabled || !thruster.IsOn)
             return 0f;
-        var rating = thruster.Thrust;
-        if (TryComp<WFAtmosphereThrusterComponent>(uid, out var state))
-        {
-            if (state.Cooling || (state.Atmospheric && !state.PowerLimited && _timing.CurTime < state.RecoverAt))
-                return 0f;
-            rating = state.RatedThrust;
-        }
-        return rating * (HasComp<WFLandingThrusterComponent>(uid) ? 1f : WfAtmosphereThrustMultiplier);
+        if (TryComp<WFAtmosphereThrusterComponent>(uid, out var state) && state.Cooling)
+            return 0f;
+        return WfRatedThrust(uid, thruster) * (HasComp<WFLandingThrusterComponent>(uid) ? 1f : WfAtmosphereThrustMultiplier);
+    }
+
+    /// <summary>The engine's rating without the atmosphere penalty.</summary>
+    public float WfRatedThrust(EntityUid uid, ThrusterComponent thruster)
+    {
+        return TryComp<WFAtmosphereThrusterComponent>(uid, out var state) ? state.RatedThrust : thruster.Thrust;
     }
 
     /// <summary>Continuous engine demand and local power-network headroom, not a battery endurance guarantee.</summary>
     public void WfAtmospherePower(IEnumerable<EntityUid> grids, out float demand, out bool deficit)
     {
+        WfAtmospherePower(grids, out demand, out deficit, out _);
+    }
+
+    /// <inheritdoc cref="WfAtmospherePower(IEnumerable{EntityUid}, out float, out bool)"/>
+    /// <param name="shortfall">Watts the networks are short, summed over networks; unlinked engines count their whole demand.</param>
+    public void WfAtmospherePower(IEnumerable<EntityUid> grids, out float demand, out bool deficit, out float shortfall)
+    {
         demand = 0f;
         deficit = false;
+        shortfall = 0f;
         var extraByNet = new Dictionary<PowerState.Network, float>();
         foreach (var grid in grids)
         {
@@ -182,6 +180,7 @@ public sealed partial class ThrusterSystem
                 if (receiver.PowerDisabled || receiver.Provider?.Net is not { } net)
                 {
                     deficit = true;
+                    shortfall += requested;
                     continue;
                 }
                 extraByNet[net.NetworkNode] = extraByNet.GetValueOrDefault(net.NetworkNode) + requested - receiver.Load;
@@ -189,8 +188,18 @@ public sealed partial class ThrusterSystem
         }
         foreach (var (net, extra) in extraByNet)
         {
-            if (!WfTryGetPowerStatistics(net, out var stats) || stats.Consumption + extra > stats.SupplyCurrent + 1f)
+            if (!WfTryGetPowerStatistics(net, out var stats))
+            {
                 deficit = true;
+                shortfall += MathF.Max(extra, 0f);
+                continue;
+            }
+            var missing = stats.Consumption + extra - stats.SupplyCurrent;
+            if (missing > 1f)
+            {
+                deficit = true;
+                shortfall += missing;
+            }
         }
     }
 }

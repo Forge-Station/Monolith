@@ -1,37 +1,68 @@
 ## Shuttle console: entering the atmosphere
 wf-shuttle-console-enter-atmosphere = Enter atmosphere: { $planet }
-wf-shuttle-console-lift-ratio = Atmo lift { $ratio } : 1
-wf-shuttle-console-atmosphere-power = Atmo power { $power } kW
-wf-shuttle-console-atmosphere-power-deficit = Power deficit
-wf-shuttle-console-lift-power-deficit = Power deficit | Lift { $ratio }
-wf-shuttle-console-atmosphere-mode-tooltip = Atmosphere mode:
-    Ordinary thrusters: 50% thrust, 3× power.
-    Converted thrusters: normal thrust and power.
+wf-shuttle-console-atmosphere-mode-tooltip = In atmosphere:
+    Ordinary thrusters give half thrust.
+    Landing thrusters give full thrust.
+    Lift must reach 100% to take off or hover.
+
+## Shuttle console: flight status and checklist
+wf-flight-phase-orbit = In orbit: { $planet }
+wf-flight-phase-landed = Landed: { $planet }
+wf-flight-phase-lifting = Lifting off
+wf-flight-phase-spooling = Engines spooling: { $countdown } s
+wf-flight-phase-climbing = Climbing
+wf-flight-phase-descending = Descending
+wf-flight-phase-hovering = Hovering
+wf-flight-phase-lift-lost = LIFT LOST: falling
+wf-flight-ready = READY FOR LIFTOFF
+wf-flight-not-ready = NOT READY
+wf-flight-check-lift = Lift
+wf-flight-check-lift-value = { $percent }% / 100%
+wf-flight-check-power = Power
+wf-flight-check-power-ok = OK, { $power } kW
+wf-flight-check-power-short = Short { $short } kW
+wf-flight-check-hold = Held: { $reason }
+wf-flight-fix-convert = Fix: convert { $count } { $count ->
+        [one] thruster
+       *[other] thrusters
+    } to landing thrusters.
+wf-flight-fix-add = Fix: add { $count } more landing { $count ->
+        [one] thruster
+       *[other] thrusters
+    }.
+wf-flight-fix-convert-add = Fix: convert all { $convert } ordinary thrusters and add { $add } landing { $add ->
+        [one] thruster
+       *[other] thrusters
+    }.
+wf-flight-fix-power = Fix: add { $short } kW of power supply.
+wf-flight-hint-grounded = Hold ascend or press Liftoff to take off.
+wf-flight-hint-air = Ascend and descend change altitude.
+wf-flight-hint-orbit = Hold descend to enter the atmosphere.
 
 ## Descent gates
-wf-flight-descend-use-button = Use the console's "enter atmosphere" control to leave orbit.
 wf-flight-busy = This hull is already under way.
 wf-flight-descent-refused = Atmospheric entry refused.
-wf-flight-lift-warning = Atmospheric lift is { $ratio } : 1. Confirm descent to proceed.
+wf-flight-lift-warning = Lift is only { $percent }%. Use Enter atmosphere on the console to descend anyway.
+wf-flight-power-warning = Not enough power to hover. Use Enter atmosphere on the console to descend anyway.
 
 ## Confirm dialog
 wf-flight-confirm-title = Atmospheric entry
 wf-flight-confirm-descend = Descend
 wf-flight-confirm-abort = Stay in orbit
-wf-flight-confirm-text = { $planet }: atmo lift [color={ $colour }]{ $ratio } : 1[/color].
-    Atmo power demand: { $power } kW.
-wf-flight-confirm-low-lift = Low lift: cannot climb back out.
-wf-flight-confirm-falling = Low lift: hull will fall.
-wf-flight-confirm-power-deficit = Power deficit: lift may fail.
+wf-flight-confirm-text = { $planet }: lift [color={ $colour }]{ $percent }%[/color] of the 100% needed to hover.
+    Hover power: { $power } kW.
+wf-flight-confirm-low-lift = Not enough lift: the hull will sink and can't climb back out.
+wf-flight-confirm-falling = Far too little lift: the hull will fall and crash.
+wf-flight-confirm-power-deficit = Not enough power: thrusters will cut out.
 
 ## Thruster examination
-wf-thruster-atmosphere-mode = Atmosphere Mode: 50% thrust, 3x power draw.
-wf-thruster-landing-converted = Landing conversion: full thrust and normal power draw in atmosphere.
+wf-thruster-atmosphere-mode = Atmosphere mode: half thrust. A landing conversion restores full thrust.
+wf-thruster-landing-converted = Landing conversion: full thrust in atmosphere.
 
 ## Landing thruster conversion kit
 wf-landing-kit-wrong-target = Use the kit on a linear thruster, not a gyroscope.
 wf-landing-kit-not-anchored = Anchor the thruster before converting it.
-wf-landing-kit-converted = Landing conversion installed: full thrust and normal power use in atmosphere.
+wf-landing-kit-converted = Landing conversion installed: full thrust in atmosphere.
 
 ## Flight alarm situation codes
 wf-alert-lift-lost = Lift Lost

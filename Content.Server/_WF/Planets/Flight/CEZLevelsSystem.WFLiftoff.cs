@@ -28,16 +28,47 @@ public sealed partial class CEZLevelsSystem
                && HasGroundUnderFootprint((grid, gridComp), map);
     }
 
-    /// <summary>Shared ascent gate; raises <see cref="WFLiftoffAttemptEvent"/> on each transit-set member.</summary>
+    /// <summary>Shared ascent gate: <see cref="WfLiftoffHold"/>, then power, then lift.</summary>
     public bool WfCanLiftoff(EntityUid grid, [NotNullWhen(false)] out string? reason)
     {
-        reason = null;
-
-        if (TerminatingOrDeleted(grid) || !TryComp<MapGridComponent>(grid, out _))
+        if (WfLiftoffHold(grid) is { } hold)
         {
-            reason = Loc.GetString("wf-liftoff-no-hull");
+            reason = hold;
             return false;
         }
+
+        WfGetAtmospherePower(grid, out _, out var powerDeficit);
+        if (powerDeficit)
+        {
+            reason = Loc.GetString("wf-liftoff-power-deficit");
+            return false;
+        }
+
+        if (!WfTryGetLiftRatio(grid, out var ratio) || ratio < WFFullLiftRatio)
+        {
+            reason = Loc.GetString("wf-liftoff-insufficient-lift", ("percent", WfLiftPercent(ratio)));
+            return false;
+        }
+
+        reason = null;
+        return true;
+    }
+
+    /// <summary>Lift ratio as a whole percentage for player text.</summary>
+    public static int WfLiftPercent(float ratio)
+    {
+        return float.IsFinite(ratio) ? (int) MathF.Floor(ratio * 100f) : 999;
+    }
+
+    /// <summary>
+    /// Why the hull can't leave the ground regardless of lift and power, or null when nothing holds it.
+    /// Raises <see cref="WFLiftoffAttemptEvent"/> on each transit-set member.
+    /// </summary>
+    public string? WfLiftoffHold(EntityUid grid)
+    {
+
+        if (TerminatingOrDeleted(grid) || !TryComp<MapGridComponent>(grid, out _))
+            return Loc.GetString("wf-liftoff-no-hull");
 
         var transitSet = CollectTransitSet(grid);
         string? eventReason = null;
@@ -52,46 +83,21 @@ public sealed partial class CEZLevelsSystem
         }
 
         if (eventReason is not null)
-        {
-            reason = eventReason;
-            return false;
-        }
+            return eventReason;
 
         if (!WfIsPlanetFlight(grid))
-        {
-            reason = Loc.GetString("wf-liftoff-not-planet");
-            return false;
-        }
+            return Loc.GetString("wf-liftoff-not-planet");
 
         if (HasComp<FTLComponent>(grid))
-        {
-            reason = Loc.GetString("wf-flight-busy");
-            return false;
-        }
+            return Loc.GetString("wf-flight-busy");
 
         foreach (var member in transitSet)
         {
             if (HasComp<ForceAnchorComponent>(member))
-            {
-                reason = Loc.GetString("wf-liftoff-force-anchored");
-                return false;
-            }
+                return Loc.GetString("wf-liftoff-force-anchored");
         }
 
-        WfGetAtmospherePower(grid, out _, out var powerDeficit);
-        if (powerDeficit)
-        {
-            reason = Loc.GetString("wf-liftoff-power-deficit");
-            return false;
-        }
-
-        if (!WfTryGetLiftRatio(grid, out var ratio) || ratio < WFFullLiftRatio)
-        {
-            reason = Loc.GetString("wf-liftoff-insufficient-lift", ("ratio", ratio.ToString("F2")));
-            return false;
-        }
-
-        return true;
+        return null;
     }
 
     /// <summary>Validates and latches a grounded button request.</summary>
@@ -131,7 +137,7 @@ public sealed partial class CEZLevelsSystem
         RemComp<WFLiftoffComponent>(grid);
     }
 
-    /// <summary>Descend cancels liftoff; grounded ascend input points the pilot to the console button.</summary>
+    /// <summary>Descend cancels liftoff; grounded ascend input engages liftoff like the console button.</summary>
     private bool WfHandleLiftoffPilotInput(EntityUid pilot, EntityUid console, EntityUid grid, float vertical)
     {
         if (vertical < 0f && HasComp<WFLiftoffComponent>(grid))
@@ -143,16 +149,21 @@ public sealed partial class CEZLevelsSystem
         if (vertical <= 0f || !WfIsPlanetFlight(grid))
             return false;
 
-        var active = HasComp<WFLiftoffComponent>(grid);
         if (WfCanOfferLiftoff(grid))
         {
-            // Raised for tether subscribers; grounded input never launches.
-            WfCanLiftoff(grid, out _);
+            if (HasComp<WFLiftoffComponent>(grid))
+                return true;
 
-            if (!active && _timing.CurTime >= _wfNextLiftoffInputPopup.GetValueOrDefault(grid))
+            if (WfTryBeginLiftoff(grid, console, pilot, out var refusal))
+            {
+                _wfFlight.PlayTakeoff(grid);
+                return true;
+            }
+
+            if (_timing.CurTime >= _wfNextLiftoffInputPopup.GetValueOrDefault(grid))
             {
                 _wfNextLiftoffInputPopup[grid] = _timing.CurTime + WFLiftoffInputPopupCooldown;
-                _popup.PopupEntity(Loc.GetString("wf-liftoff-use-button"), console, pilot);
+                _popup.PopupEntity(refusal, console, pilot);
             }
 
             return true;

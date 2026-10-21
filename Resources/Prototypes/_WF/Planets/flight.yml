@@ -5,7 +5,7 @@
   parent: Thruster
   name: landing thruster
   suffix: Landing
-  description: An atmospheric-rated thruster that maintains full thrust and normal power consumption below orbit.
+  description: An atmospheric-rated thruster that keeps full thrust below orbit.
   components:
   # Planet layers have air in them, and the stock thruster refuses to fire outside vacuum.
   - type: Thruster

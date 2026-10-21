@@ -36,17 +36,37 @@ public sealed partial class WFConsoleOrbitTargetComponent : Component
     [DataField, AutoNetworkedField]
     public bool LiftoffActive;
 
-    /// <summary>Prospective atmosphere thrust over hull weight at this world's gravity; 1 is level flight. Only meaningful in orbit.</summary>
+    /// <summary>Prospective atmosphere thrust over hull weight at this world's gravity; 1 is level flight. Zero away from a planet.</summary>
     [DataField, AutoNetworkedField]
     public float LiftRatio;
 
-    /// <summary>Prospective atmosphere power demand in watts. Only meaningful while in orbit.</summary>
+    /// <summary>Prospective atmosphere power demand in watts. Zero away from a planet.</summary>
     [DataField, AutoNetworkedField]
     public float AtmospherePowerDemand;
 
     /// <summary>True when prospective atmosphere power demand exceeds available power.</summary>
     [DataField, AutoNetworkedField]
     public bool AtmospherePowerDeficit;
+
+    /// <summary>Watts the hull's power networks are short of the atmosphere demand; zero when they cover it.</summary>
+    [DataField, AutoNetworkedField]
+    public float AtmospherePowerShortfall;
+
+    /// <summary>True while the hull flies below orbit without touching the ground.</summary>
+    [DataField, AutoNetworkedField]
+    public bool Airborne;
+
+    /// <summary>Why a grounded hull can't lift off for reasons other than lift and power, or null when nothing holds it.</summary>
+    [DataField, AutoNetworkedField]
+    public string? Hold;
+
+    /// <summary>Ordinary thrusters to convert to landing thrusters for full lift; zero when lift is enough.</summary>
+    [DataField, AutoNetworkedField]
+    public int ConvertAdvice;
+
+    /// <summary>Landing thrusters to add on top of every conversion for full lift; zero when conversions suffice.</summary>
+    [DataField, AutoNetworkedField]
+    public int AddAdvice;
 
     /// <summary>Seconds until this hull's orbit decays into the atmosphere, or -1 while holding station; only meaningful in orbit.</summary>
     [DataField, AutoNetworkedField]

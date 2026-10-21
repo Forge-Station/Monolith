@@ -105,6 +105,11 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
         var liftRatio = 0f;
         var atmospherePower = 0f;
         var powerDeficit = false;
+        var powerShortfall = 0f;
+        var airborne = false;
+        string? hold = null;
+        var convertAdvice = 0;
+        var addAdvice = 0;
         var decaySeconds = -1f;
 
         if (xform.GridUid is { } grid && HasComp<ShuttleComponent>(grid) && Transform(grid).MapUid is { } mapUid)
@@ -127,7 +132,7 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
                         decaySeconds = MathF.Max(0f, (float) (decay.DecayAt - _timing.CurTime).TotalSeconds);
                 }
             }
-            else if ((liftoffAvailable || liftoffActive) && TryGetLiftoffPlanet(mapUid, out var liftoffPlanet))
+            else if (TryGetLiftoffPlanet(mapUid, out var liftoffPlanet))
             {
                 planet = GetNetEntity(liftoffPlanet);
                 planetName = Name(liftoffPlanet);
@@ -138,18 +143,27 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
                 planetName = Name(nearest.Value);
             }
 
-            if (inOrbit || liftoffAvailable || liftoffActive)
+            airborne = !liftoffAvailable
+                       && !liftoffActive
+                       && !HasComp<WFOrbitLayerComponent>(mapUid)
+                       && _zLevels.WfIsPlanetFlight(grid);
+
+            if (inOrbit || liftoffAvailable || liftoffActive || airborne)
             {
                 _zLevels.WfTryGetLiftRatio(grid, out liftRatio);
-                _zLevels.WfGetAtmospherePower(grid, out atmospherePower, out powerDeficit);
+                _zLevels.WfGetAtmospherePower(grid, out atmospherePower, out powerDeficit, out powerShortfall);
+                _zLevels.WfGetLiftAdvice(grid, out convertAdvice, out addAdvice);
             }
+
+            if (liftoffAvailable && !liftoffActive)
+                hold = _zLevels.WfLiftoffHold(grid);
         }
 
         var unsanctioned = TryGetEntity(planet, out var planetUid)
             && TryComp<WFSectorPlanetComponent>(planetUid, out var planetSector)
             && !planetSector.Sanctioned;
 
-        if (planet is null && !inOrbit && !liftoffAvailable && !liftoffActive)
+        if (planet is null && !inOrbit && !liftoffAvailable && !liftoffActive && !airborne)
         {
             RemCompDeferred<WFConsoleOrbitTargetComponent>(console);
             return;
@@ -166,6 +180,11 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
             && comp.LiftoffActive == liftoffActive
             && MathF.Abs(comp.AtmospherePowerDemand - atmospherePower) < 1f
             && comp.AtmospherePowerDeficit == powerDeficit
+            && MathF.Abs(comp.AtmospherePowerShortfall - powerShortfall) < 1f
+            && comp.Airborne == airborne
+            && comp.Hold == hold
+            && comp.ConvertAdvice == convertAdvice
+            && comp.AddAdvice == addAdvice
             && MathF.Abs(comp.LiftRatio - liftRatio) < LiftRatioEpsilon
             && MathF.Abs(comp.DecaySeconds - decaySeconds) < DecaySecondsEpsilon)
         {
@@ -182,6 +201,11 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
         comp.LiftRatio = liftRatio;
         comp.AtmospherePowerDemand = atmospherePower;
         comp.AtmospherePowerDeficit = powerDeficit;
+        comp.AtmospherePowerShortfall = powerShortfall;
+        comp.Airborne = airborne;
+        comp.Hold = hold;
+        comp.ConvertAdvice = convertAdvice;
+        comp.AddAdvice = addAdvice;
         comp.DecaySeconds = decaySeconds;
         Dirty(console, comp);
     }

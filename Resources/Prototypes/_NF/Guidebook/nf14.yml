@@ -35,6 +35,9 @@
   name: guide-entry-piloting
   text: "/ServerInfo/_Forge/Guidebook/_NF/Piloting.xml" # Forge-change
   priority: 2
+  # WOLFGATE(Planets): planet flight guide under piloting
+  children:
+  - WFPlanetFlight
 
 - type: guideEntry
   id: SectorTopology

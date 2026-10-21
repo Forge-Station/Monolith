@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._WF.Tether;
 using Robust.Client.Graphics;
+using Robust.Client.UserInterface;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -43,11 +44,39 @@ public sealed class RopeVisualizerSystem : EntitySystem
         base.Shutdown();
     }
 
+    /// <summary>
+    /// World box around the main viewport's corners. Not <see cref="IEyeManager.GetWorldViewbounds"/>: on the frame
+    /// the player changes bodies its corners can come out inverted or NaN, and the engine's Box2 asserts on that.
+    /// </summary>
+    private bool TryGetViewBox(out Box2 view)
+    {
+        view = default;
+        if (_eye.MainViewport is not Control viewport)
+            return false;
+
+        var size = (Vector2) viewport.PixelSize;
+        var a = _eye.ScreenToMap(Vector2.Zero).Position;
+        var b = _eye.ScreenToMap(new Vector2(size.X, 0f)).Position;
+        var c = _eye.ScreenToMap(new Vector2(0f, size.Y)).Position;
+        var d = _eye.ScreenToMap(size).Position;
+        var min = Vector2.Min(Vector2.Min(a, b), Vector2.Min(c, d));
+        var max = Vector2.Max(Vector2.Max(a, b), Vector2.Max(c, d));
+
+        if (!float.IsFinite(min.X) || !float.IsFinite(min.Y) || !float.IsFinite(max.X) || !float.IsFinite(max.Y))
+            return false;
+
+        view = new Box2(min, max);
+        return true;
+    }
+
     public override void FrameUpdate(float frameTime)
     {
         base.FrameUpdate(frameTime);
         _seen.Clear();
-        var view = _eye.GetWorldViewbounds().CalcBoundingBox().Enlarged(ViewMargin);
+        if (!TryGetViewBox(out var view))
+            return;
+
+        view = view.Enlarged(ViewMargin);
         var currentMap = _eye.CurrentMap;
         var time = (float) (_timing.CurTime.TotalSeconds % 1000);
 

@@ -6,6 +6,16 @@ shuttle console's orbit button (an unsanctioned world asks first), descend throu
 thrusters, lift off again, and land hard, skid, break up or crash when lift is lost. Hulls that stop keeping station
 fall out of orbit, and a world's gravity well pulls adrift hulls in from the sector.
 
+The shuttle console's flight panel (`WFOrbitButton`, fed by `WFConsoleOrbitTargetComponent`) shows the flight
+phase, lift and power against what flight needs, what holds a landed hull down, and how many thrusters to convert
+or add (`CEZLevelsSystem.WfGetLiftAdvice`). Holding ascend on the ground lifts off and holding descend in orbit enters
+the atmosphere when no confirm is needed; the buttons do the same. Ordinary thrusters give half thrust below orbit
+and landing thrusters full thrust; power draw is the same as in space. The ship previewer estimates the strongest
+gravity a vessel lifts off in (`ShipPreviewLift`). The guidebook page is Planet Flight, under Piloting.
+
+Rideable vehicles use the same z-level physics as loose objects, so a hoverbike and its buckled rider leaving a
+descending ship move onto the planet layers before the temporary flight map is deleted.
+
 Worlds have day and night, phased weather with thunder, fauna, ambience, terrain on the orbit radar and an approach
 cinematic on the hop in; Carcinoma is a quarantined flesh world whose tendrils hold landed hulls down. Lower layers of a planet are drawn smaller
 (`WFPlanetView`, the perspective Monolith turned off for other z-levels). Jetpacks only
@@ -75,6 +85,7 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
 - [`Content.Server/_WF/Planets/Flight/CEZLevelsSystem.WFFlight.cs`](Flight/CEZLevelsSystem.WFFlight.cs)
 - [`Content.Server/_WF/Planets/Flight/CEZLevelsSystem.WFGravityCache.cs`](Flight/CEZLevelsSystem.WFGravityCache.cs)
 - [`Content.Server/_WF/Planets/Flight/CEZLevelsSystem.WFLandingClearance.cs`](Flight/CEZLevelsSystem.WFLandingClearance.cs)
+- [`Content.Server/_WF/Planets/Flight/CEZLevelsSystem.WFLiftAdvice.cs`](Flight/CEZLevelsSystem.WFLiftAdvice.cs)
 - [`Content.Server/_WF/Planets/Flight/CEZLevelsSystem.WFLiftoff.cs`](Flight/CEZLevelsSystem.WFLiftoff.cs)
 - [`Content.Server/_WF/Planets/Flight/CEZLevelsSystem.WFVirtualMass.cs`](Flight/CEZLevelsSystem.WFVirtualMass.cs)
 - [`Content.Server/_WF/Planets/Flight/MoverController.WFAtmosphere.cs`](Flight/MoverController.WFAtmosphere.cs)
@@ -200,7 +211,9 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
 - [`Content.IntegrationTests/Tests/_WF/Planets/CrashAudioTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/CrashAudioTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/CrashBreakupFallTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/CrashBreakupFallTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/CrashThrustTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/CrashThrustTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Planets/CrashVehicleFallTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/CrashVehicleFallTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/FlightAudioLoadTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/FlightAudioLoadTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Planets/FlightReadinessTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/FlightReadinessTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/FlightSafetyTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/FlightSafetyTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/FlightTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/FlightTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/GroundContactTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/GroundContactTest.cs)
@@ -208,6 +221,7 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
 - [`Content.IntegrationTests/Tests/_WF/Planets/LiftoffTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/LiftoffTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/OrbitalMobFallTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/OrbitalMobFallTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/OrbitArrivalTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/OrbitArrivalTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Planets/OrbitBeaconPinTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/OrbitBeaconPinTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/OrbitDecayTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/OrbitDecayTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/OrbitEntryTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/OrbitEntryTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/ParachuteTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/ParachuteTest.cs)
@@ -226,6 +240,7 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
 - [`Content.IntegrationTests/Tests/_WF/Planets/PlanetRadarTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/PlanetRadarTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/PlanetTimepieceTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/PlanetTimepieceTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/PlanetWeatherTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/PlanetWeatherTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Planets/SectorBodyPinTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/SectorBodyPinTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/SetDownTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/SetDownTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/StructuralCrashTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/StructuralCrashTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Planets/TerrainAtmosphereTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Planets/TerrainAtmosphereTest.cs)
@@ -243,6 +258,7 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
 - [`Resources/Prototypes/_WF/Planets/fauna.yml`](../../../Resources/Prototypes/_WF/Planets/fauna.yml)
 - [`Resources/Prototypes/_WF/Planets/flight.yml`](../../../Resources/Prototypes/_WF/Planets/flight.yml)
 - [`Resources/Prototypes/_WF/Planets/flight_alerts.yml`](../../../Resources/Prototypes/_WF/Planets/flight_alerts.yml)
+- [`Resources/Prototypes/_WF/Planets/guidebook.yml`](../../../Resources/Prototypes/_WF/Planets/guidebook.yml)
 - [`Resources/Prototypes/_WF/Planets/infestation.yml`](../../../Resources/Prototypes/_WF/Planets/infestation.yml)
 - [`Resources/Prototypes/_WF/Planets/jetpack.yml`](../../../Resources/Prototypes/_WF/Planets/jetpack.yml)
 - [`Resources/Prototypes/_WF/Planets/kyphrus_planets.yml`](../../../Resources/Prototypes/_WF/Planets/kyphrus_planets.yml)
@@ -259,6 +275,7 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
 
 - [`Resources/Locale/en-US/_WF/Planets/carcinoma.ftl`](../../../Resources/Locale/en-US/_WF/Planets/carcinoma.ftl)
 - [`Resources/Locale/en-US/_WF/Planets/flight.ftl`](../../../Resources/Locale/en-US/_WF/Planets/flight.ftl)
+- [`Resources/Locale/en-US/_WF/Planets/guidebook.ftl`](../../../Resources/Locale/en-US/_WF/Planets/guidebook.ftl)
 - [`Resources/Locale/en-US/_WF/Planets/infestation.ftl`](../../../Resources/Locale/en-US/_WF/Planets/infestation.ftl)
 - [`Resources/Locale/en-US/_WF/Planets/jetpack.ftl`](../../../Resources/Locale/en-US/_WF/Planets/jetpack.ftl)
 - [`Resources/Locale/en-US/_WF/Planets/kyphrus.ftl`](../../../Resources/Locale/en-US/_WF/Planets/kyphrus.ftl)
@@ -343,6 +360,10 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
 - [`Resources/Audio/_WF/Planets/Worlds/thrascias/thracias_ambience_loop_1.ogg`](../../../Resources/Audio/_WF/Planets/Worlds/thrascias/thracias_ambience_loop_1.ogg)
 - [`Resources/Audio/_WF/Planets/Worlds/thrascias/thracias_ambience_loop_2.ogg`](../../../Resources/Audio/_WF/Planets/Worlds/thrascias/thracias_ambience_loop_2.ogg)
 
+### Guidebook
+
+- [`Resources/ServerInfo/_WF/Planets/Guidebook/PlanetFlight.xml`](../../../Resources/ServerInfo/_WF/Planets/Guidebook/PlanetFlight.xml)
+
 ### Tools
 
 - [`Tools/_WF/Planets/gen_flight_placeholders.py`](../../../Tools/_WF/Planets/gen_flight_placeholders.py)
@@ -368,8 +389,11 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
 - [`Content.Client/Light/RoofOverlay.cs`](../../../Content.Client/Light/RoofOverlay.cs)
   - the open-grating check below reads tile definitions.
   - open grating is no roof.
+- [`Content.Client/Movement/Systems/FloorOcclusionSystem.cs`](../../../Content.Client/Movement/Systems/FloorOcclusionSystem.cs): a new entity's state lands before its sprite initialises; startup sets the shader.
 - [`Content.Client/Shuttles/UI/NavScreen.xaml`](../../../Content.Client/Shuttles/UI/NavScreen.xaml): enter/leave planet orbit, which needs no FTL drive (xmlns:wf above).
-- [`Content.Client/Shuttles/UI/NavScreen.xaml.cs`](../../../Content.Client/Shuttles/UI/NavScreen.xaml.cs): the orbit button reads its state off the console entity.
+- [`Content.Client/Shuttles/UI/NavScreen.xaml.cs`](../../../Content.Client/Shuttles/UI/NavScreen.xaml.cs)
+  - the orbit button reads its state off the console entity.
+  - the flight panel's phase replaces the coarse status over a planet.
 - [`Content.Client/Shuttles/UI/ShuttleNavControl.xaml.cs`](../../../Content.Client/Shuttles/UI/ShuttleNavControl.xaml.cs)
   - retain the moving origin while panned.
   - a map-pinned radar must follow travel to another map.
@@ -398,8 +422,8 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
 - [`Content.Server/_CE/ZLevels/Core/CEZLevelsSystem.GroundFriction.cs`](../../_CE/ZLevels/Core/CEZLevelsSystem.GroundFriction.cs): a crash skid scales down the landed body's tile friction instead of adding drag.
 - [`Content.Server/_CE/ZLevels/Core/CEZLevelsSystem.PilotControl.cs`](../../_CE/ZLevels/Core/CEZLevelsSystem.PilotControl.cs)
   - the liftoff latch needs the pilot.
-  - grounded planet ascent is a latched console action; airborne input keeps CE's normal control.
-  - an orbit layer is left through the console's enter-atmosphere button, never on the keys.
+  - grounded ascend engages liftoff; airborne input keeps CE's normal control.
+  - descend from orbit enters the atmosphere only when no confirm is needed.
   - a console latch feeds the same CE takeoff spool and flight integrator.
   - the climb is scaled by the maneuvering factor below.
   - only thrust left after hovering can climb.
@@ -415,7 +439,9 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
   - a hull that sets down breaks the trees and rocks it would rest against
 - [`Content.Server/_CE/ZLevels/Core/CEZLevelsSystem.View.cs`](../../_CE/ZLevels/Core/CEZLevelsSystem.View.cs): a planet's lower layers are drawn smaller, so their eyes see wider
 - [`Content.Server/_CE/ZLevels/Core/CEZLevelsSystem.WallCollision.cs`](../../_CE/ZLevels/Core/CEZLevelsSystem.WallCollision.cs): a skidding hull flattens obstacles instead of bouncing.
-- [`Content.Server/_FarHorizons/StarSystem/StarSystemMapSystem.cs`](../../_FarHorizons/StarSystem/StarSystemMapSystem.cs): register sector bodies that have a Wolfgate surface.
+- [`Content.Server/_FarHorizons/StarSystem/StarSystemMapSystem.cs`](../../_FarHorizons/StarSystem/StarSystemMapSystem.cs)
+  - keep the star off hulls that arrive on top of it.
+  - register sector bodies that have a Wolfgate surface.
 - [`Content.Server/Atmos/EntitySystems/AtmosphereSystem.API.cs`](../../Atmos/EntitySystems/AtmosphereSystem.API.cs): bare planet ground nobody built on isn't tracked
 - [`Content.Server/Atmos/EntitySystems/AtmosphereSystem.Processing.cs`](../../Atmos/EntitySystems/AtmosphereSystem.Processing.cs)
   - bare planet ground keeps no map tile alive
@@ -485,8 +511,10 @@ ground overhead is a ceiling (the Caverns `WfSealedAbove`). `WFAtmosphericJetpac
   - orbit well moved out of Monolith's drone belt, a hazard world at its edge.
   - quarantined biothreat world, unsanctioned.
 - [`Resources/Prototypes/_Mono/Entities/Mobs/Chimera/biomass.yml`](../../../Resources/Prototypes/_Mono/Entities/Mobs/Chimera/biomass.yml): prevent action-spawned biomass from colonizing planets, too.
+- [`Resources/Prototypes/_NF/Guidebook/nf14.yml`](../../../Resources/Prototypes/_NF/Guidebook/nf14.yml): planet flight guide under piloting
 - [`Resources/Prototypes/_NF/Loadouts/contractor_loadout_groups.yml`](../../../Resources/Prototypes/_NF/Loadouts/contractor_loadout_groups.yml): planetary clock and weather HUD.
 - [`Resources/Prototypes/Entities/Mobs/Species/moth.yml`](../../../Resources/Prototypes/Entities/Mobs/Species/moth.yml): z-level flight is back on, which Monolith#4812 turned off
+- [`Resources/Prototypes/Entities/Objects/Vehicles/buckleable.yml`](../../../Resources/Prototypes/Entities/Objects/Vehicles/buckleable.yml): vehicles and their riders leave temporary flight maps through normal z-level physics.
 - [`Resources/Prototypes/Entities/Structures/Machines/lathe.yml`](../../../Resources/Prototypes/Entities/Structures/Machines/lathe.yml): landing thruster kits and parachutes.
 
 <!-- WOLFGATE-GENERATED END -->

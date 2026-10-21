@@ -42,7 +42,7 @@ public sealed partial class WFEnterAtmosphereConfirmWindow : FancyWindow
 
         var message = FormattedMessage.FromMarkupPermissive(Loc.GetString("wf-flight-confirm-text",
             ("planet", FormattedMessage.EscapeText(planet)),
-            ("ratio", ratio.ToString("F2")),
+            ("percent", float.IsFinite(ratio) ? (int) MathF.Floor(ratio * 100f) : 999),
             ("power", (powerDemand / 1000f).ToString("N0")),
             ("colour", colour)));
 

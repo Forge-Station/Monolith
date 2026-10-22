@@ -21,8 +21,8 @@
     action: ActionCycleScarfStyle
     prefixes:
     - ""
-    - 1
-    - 2 #Forge-change-end
+    - "1"
+    - "2" #Forge-change-end
 
 - type: entity
   parent: ClothingScarfBase

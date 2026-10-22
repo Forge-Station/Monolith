@@ -4,13 +4,13 @@ using Content.Shared._Forge.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Popups; ///test
+using Content.Shared.Popups;
 
-namespace Content.Shared._Forge.Clothing.Components;
+namespace Content.Shared._Forge.Clothing.EntitySystems;
 
 public sealed class ScarfStyleCyclerSystem : EntitySystem
 {
-    [Dependency] private InventorySystem _inventorySystem = default!;
+    [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private ClothingSystem _clothing = default!;
 
     public override void Initialize()
@@ -22,11 +22,11 @@ public sealed class ScarfStyleCyclerSystem : EntitySystem
 
     private void OnGetActions(Entity<ScarfStyleCyclerComponent> ent, ref GetItemActionsEvent args)
     {
-        if (_inventory.InSlotWithFlags(ent, SlotFlags.NECK))
+        if (_inventory.InSlotWithFlags(ent.Owner, SlotFlags.NECK))
             args.AddAction(ref ent.Comp.ActionEntity, ent.Comp.Action);
     }
 
-    private void OnSycleStyle(Entity<ScarfStyleCyclerComponent> ent, ref CycleScarfEvent args)
+    private void OnCycleStyle(Entity<ScarfStyleCyclerComponent> ent, ref CycleScarfEvent args)
     {
         var comp = ent.Comp;
         if (comp.ActionEntity == null || comp.Prefixes.Count == 0)

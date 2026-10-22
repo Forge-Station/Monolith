@@ -198,7 +198,7 @@ public sealed partial class WFReaverCampaignSystem
             if (!hubEncounter.Ships.TryGetValue(home.Lead, out var hub) || TerminatingOrDeleted(hub.Grid))
                 continue;
 
-            var docked = _docking.AreGridsDocked(lead.Grid, hub.Grid);
+            var docked = _encounters.AreDocked(lead, hub);
             switch (comp.Phase)
             {
                 case WFReaverReinforcementPhase.Inbound:

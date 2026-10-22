@@ -1,4 +1,6 @@
+using Content.Shared._NF.Shipyard.Prototypes;
 using Content.Shared._WF.Encounters;
+using Content.Shared._WF.NpcCrew;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -60,6 +62,22 @@ public sealed partial class WFEncounterComponent : Component
     /// <summary>Started by an admin: it stays, ships and all, with no clock on it, until an admin ends it.</summary>
     [DataField]
     public bool Pinned;
+
+    /// <summary>Whether its ships are simulated while nobody is near. A warrant on a captain names him, so its encounter is always real.</summary>
+    [DataField]
+    public bool Simulated;
+
+    /// <summary>The cargo manifest picked for the run, loaded when a ship is spawned.</summary>
+    [DataField]
+    public ProtoId<WFEncounterManifestPrototype>? Manifest;
+
+    /// <summary>The threat tier it spawned at, if its ships fly by tier.</summary>
+    [DataField]
+    public int? Tier;
+
+    /// <summary>The threat rank shown on the map; none for an unranked encounter.</summary>
+    [DataField]
+    public int? Threat;
 
     /// <summary>The stations its placement chose, in the order a route calls at them.</summary>
     [DataField]
@@ -176,6 +194,51 @@ public sealed partial class WFEncounterShipState
     /// <summary>Whether it is a crewless hulk, in the encounter for as long as it is there.</summary>
     [DataField]
     public bool Derelict;
+
+    /// <summary>Whether its hull got pirate retrofitting that mounts guns: a civilian hull the raiders armed.</summary>
+    [DataField]
+    public bool Retrofitted;
+
+    /// <summary>Whether it is simulated: <see cref="Grid"/> is then a plain stand-in entity at its position, not a hull.</summary>
+    [DataField]
+    public bool Virtual;
+
+    /// <summary>The hull it flies, picked when the encounter started.</summary>
+    [DataField]
+    public ProtoId<VesselPrototype>? Vessel;
+
+    /// <summary>Its crew's skill, or none for each crewman to take one from the profile's pool.</summary>
+    [DataField]
+    public WFCrewSkill? Skill;
+
+    [DataField]
+    public ProtoId<WFPirateRetrofitPrototype>? Retrofit;
+
+    /// <summary>Seeds its retrofit, so it looks the same each time it is spawned.</summary>
+    [DataField]
+    public int Seed;
+
+    /// <summary>Its name, given to the hull or its stand-in.</summary>
+    [DataField]
+    public string Name = string.Empty;
+
+    /// <summary>Crew it carried when it was last spawned; a real ship that has lost any is never simulated again.</summary>
+    [DataField]
+    public int Crew;
+
+    /// <summary>Since when no player has been near this real ship.</summary>
+    public TimeSpan? AloneSince;
+
+    /// <summary>Its hull is spawned but not yet refitted, crewed and powered; it is left alone until it is.</summary>
+    public bool Building;
+
+    /// <summary>Players have boarded or docked with it, or anyone has shot it: it stays real.</summary>
+    [DataField]
+    public bool Touched;
+
+    /// <summary>The ship it was docked with while simulated and is docking with again; it counts as docked meanwhile.</summary>
+    [DataField]
+    public EntityUid? RedockTo;
 
     /// <summary>Whether it lies in wait, its IFF label hidden, until the encounter begins.</summary>
     [DataField]

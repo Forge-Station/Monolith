@@ -37,6 +37,8 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
     [Dependency] private MobStateSystem _mobs = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private WarLevelSystem _warLevel = default!;
+    [Dependency] private WFCrewStealthSystem _stealth = default!;
+    [Dependency] private WFCrewSparedSystem _spared = default!;
 
     private static readonly TimeSpan Interval = TimeSpan.FromSeconds(1);
     private static readonly TimeSpan WarnCooldown = TimeSpan.FromSeconds(45);
@@ -92,7 +94,7 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
             foreach (var ship in encounter.Ships.Values)
             {
                 // A ship lying in wait gives itself away to nobody.
-                if (ship.WarnRange <= 0f && ship.AttackRange <= 0f || ship.Lurking || TerminatingOrDeleted(ship.Grid)
+                if (ship.WarnRange <= 0f && ship.AttackRange <= 0f || ship.Lurking || ship.Virtual || TerminatingOrDeleted(ship.Grid)
                     || Disabled(ship))
                     continue;
 
@@ -132,7 +134,7 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
 
             foreach (var ship in encounter.Ships.Values)
             {
-                if (!ship.Lurking && !TerminatingOrDeleted(ship.Grid) && !Disabled(ship))
+                if (!ship.Lurking && !ship.Virtual && !TerminatingOrDeleted(ship.Grid) && !Disabled(ship))
                     _fleet.Add((uid, ship));
             }
         }
@@ -186,12 +188,13 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
         var players = EntityQueryEnumerator<ActorComponent, TransformComponent>();
         while (players.MoveNext(out var uid, out _, out var xform))
         {
-            if (xform.GridUid is not { } grid || HasComp<GhostComponent>(uid) || _mobs.IsDead(uid))
+            // A pilot's mech flying free of any grid is a vessel of its own.
+            if ((xform.GridUid ?? _alerts.FreeMechOf(uid)) is not { } grid || HasComp<GhostComponent>(uid) || _mobs.IsDead(uid))
                 continue;
 
             if (!_crewed.TryGetValue(grid, out var crewed))
             {
-                if (!IsPlayerShip(grid) || _encounters.DockedAtStation(grid))
+                if (!IsPlayerShip(grid) || _encounters.DockedAtStation(grid) || _stealth.ShipUnseen(grid))
                     continue;
 
                 _crewed[grid] = crewed = new Crewed { GridFlag = WFCompanyFamily.Of(Company(grid)) };
@@ -401,10 +404,14 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
             if (intruder == ship.Grid || _escorts.AreInFormation(ship.Grid, intruder))
                 continue;
 
-            // The ship's own faction comes and goes as it likes, IFF or no: its ships keep each other posted over the
-            // radio. So does anyone flying with one of its people.
-            if (company.Length > 0 && (crewed.Flags.Contains(company) || crewed.Aboard.Contains(company)))
+            // Its own side comes and goes as it likes: a hull showing its colours, or one with its people free aboard.
+            // A ship that minds only NPCs lets every player vessel by. Their fire is still answered.
+            if (ship.NpcTargetsOnly || _spared.Spared(ship.Grid, intruder))
+            {
+                Release(encounter, ship, intruder);
+                _alerts.EndZoneWarning(ship.Grid, intruder);
                 continue;
+            }
 
             // Neutral companies, and ships berthed with one, are left alone whatever their IFF says.
             if (IsNeutral(ship, intruder, crewed))
@@ -429,7 +436,17 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
             // Anyone else is only known for what he is by his IFF. With that switched off he is nobody's friend: he is
             // told to show himself and shot across the bows in the warning zone, and fired on in the attack zone. With
             // it on, a patrol only minds its faction's enemies.
-            var masked = IffMasked(intruder);
+            // A navy patrol knows the station's own people and the judges by their codes, IFF or none: their ships, the
+            // Roswell among them, fly dark by design. They are judged by their company like anyone showing an IFF.
+            var masked = IffMasked(intruder) && !(ship.ZoneTargets == WFEncounterZoneTargets.AtWar && StationAuthority(crewed));
+            // A ship minding only known threats leaves a player hull running dark alone; its fire is still answered.
+            if (masked && ship.KnownThreatsOnly)
+            {
+                Release(encounter, ship, intruder);
+                _alerts.EndZoneWarning(ship.Grid, intruder);
+                continue;
+            }
+
             // A civilian ship showing its IFF is never a navy patrol's target, whichever navy its faction is at war with.
             // A zone that warns everyone off, like the USSP remnant's, still does.
             if (!masked && ship.ZoneTargets == WFEncounterZoneTargets.AtWar && IsCivilian(crewed))
@@ -521,7 +538,7 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
     /// <summary>Below this speed, in metres a second, a vessel is lying still.</summary>
     private const float IdleSpeed = 2f;
 
-    /// <summary>Every ship-weapon round in flight, with the grid it was fired from.</summary>
+    /// <summary>Every ship-weapon or free-flying mech round in flight, with the grid or mech it was fired from.</summary>
     private void GatherShots()
     {
         _shots.Clear();
@@ -530,10 +547,13 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
         while (query.MoveNext(out var uid, out var projectile, out var xform))
         {
             _liveShots.Add(uid);
-            if (!_alerts.IsShipWeapon(projectile.Weapon) || Transform(projectile.Weapon!.Value).GridUid is not { } shooter)
+            var shooter = _alerts.IsShipWeapon(projectile.Weapon)
+                ? Transform(projectile.Weapon!.Value).GridUid
+                : _alerts.FreeMechOf(projectile.Weapon ?? projectile.Shooter);
+            if (shooter is not { } source)
                 continue;
 
-            _shots.Add((uid, _transform.GetWorldPosition(xform), xform.MapID, shooter));
+            _shots.Add((uid, _transform.GetWorldPosition(xform), xform.MapID, source));
         }
 
         _answeredShots.RemoveWhere(key => !_liveShots.Contains(key.Shot));
@@ -630,6 +650,21 @@ public sealed partial class WFEncounterZoneSystem : EntitySystem
         crewed.RawFlags.All(company => company.EndsWith("Civilian", StringComparison.Ordinal));
 
     /// <summary>Whether a ship has its IFF switched off, so nobody can tell whose it is.</summary>
+    /// <summary>Companies a navy patrol knows whatever their IFF says: Caelestinus staff and the judges.</summary>
+    private static readonly string[] StationCompanies = { "Colonial", "WFJudges" };
+
+    /// <summary>Whether a ship flies for the station or carries its staff: its flag, or any player aboard.</summary>
+    private static bool StationAuthority(Crewed crewed)
+    {
+        foreach (var company in StationCompanies)
+        {
+            if (crewed.GridFlag == company || crewed.Aboard.Contains(company))
+                return true;
+        }
+
+        return false;
+    }
+
     private bool IffMasked(EntityUid grid)
     {
         return TryComp<Content.Shared.Shuttles.Components.IFFComponent>(grid, out var iff)

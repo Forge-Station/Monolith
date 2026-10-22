@@ -60,4 +60,30 @@ public sealed class EncountersCVars
     /// <summary>How far, in metres, open-space encounters keep from a hidden station.</summary>
     public static readonly CVarDef<float> HiddenClearance =
         CVarDef.Create("wf.encounters.hidden_clearance", 6000f, CVar.SERVERONLY);
+    /// <summary>
+    /// Whether encounter ships are simulated while no player is near: a point on the sector map with no grid, spawned
+    /// as a real ship once a player comes within <see cref="MaterializeRange"/> or plots a jump near it.
+    /// </summary>
+    public static readonly CVarDef<bool> Simulate =
+        CVarDef.Create("wf.encounters.simulate", true, CVar.SERVERONLY);
+
+    /// <summary>How near, in metres, a player brings a simulated ship to spawn it; past radar range so none pops in on a scope.</summary>
+    public static readonly CVarDef<float> MaterializeRange =
+        CVarDef.Create("wf.encounters.materialize_range", 4000f, CVar.SERVERONLY);
+
+    /// <summary>How far, in metres, every player must be from an untouched real ship for it to go back to simulation.</summary>
+    public static readonly CVarDef<float> DematerializeRange =
+        CVarDef.Create("wf.encounters.dematerialize_range", 6000f, CVar.SERVERONLY);
+
+    /// <summary>Seconds an untouched real ship must be left that far alone before it goes back to simulation.</summary>
+    public static readonly CVarDef<float> DematerializeDelay =
+        CVarDef.Create("wf.encounters.dematerialize_delay", 120f, CVar.SERVERONLY);
+
+    /// <summary>Seconds between one ship spawning or despawning for simulation and the next, so a crowd of them doesn't stall a tick.</summary>
+    public static readonly CVarDef<float> MaterializeInterval =
+        CVarDef.Create("wf.encounters.materialize_interval", 1.5f, CVar.SERVERONLY);
+
+    /// <summary>Seconds a simulated fight between two even ships takes, on average, before one of them is lost.</summary>
+    public static readonly CVarDef<float> DuelMeanSeconds =
+        CVarDef.Create("wf.encounters.duel_mean_seconds", 120f, CVar.SERVERONLY);
 }

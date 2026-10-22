@@ -47,7 +47,7 @@ public sealed partial class WFCrewObjectiveSystem : EntitySystem
     /// <summary>Validates the entire replacement or append before altering the running queue.</summary>
     public bool SetQueue(EntityUid grid, string group, List<WFCrewObjective> objectives, bool append = false)
     {
-        if (!HasComp<MapGridComponent>(grid) || Transform(grid).MapUid == null || group.Length > 64 || objectives.Count > 64
+        if (!IsShip(grid) || Transform(grid).MapUid == null || group.Length > 64 || objectives.Count > 64
             || objectives.Any(item => !Valid(grid, item)))
             return false;
         var key = (grid, group);
@@ -75,7 +75,7 @@ public sealed partial class WFCrewObjectiveSystem : EntitySystem
         if (item.Kind is WFCrewObjectiveKind.Hold or WFCrewObjectiveKind.GoTo or WFCrewObjectiveKind.Undock or WFCrewObjectiveKind.Repair)
             return true;
         return item.Target is { } net && TryGetEntity(net, out var target) && target is { } uid && uid != grid
-            && HasComp<MapGridComponent>(uid) && Transform(uid).MapUid == Transform(grid).MapUid;
+            && IsShip(uid) && Transform(uid).MapUid == Transform(grid).MapUid;
     }
 
     /// <summary>The raw status of a crew's queue, such as running, dock-failed or target-lost; null without a queue.</summary>
@@ -124,12 +124,13 @@ public sealed partial class WFCrewObjectiveSystem : EntitySystem
             && state.Items[0].Kind == WFCrewObjectiveKind.Loot && state.Items[0].Target == GetNetEntity(prey);
     }
 
-    /// <summary>Returns the explicitly assigned attack target while its task is running.</summary>
-    public EntityUid? AttackTarget(EntityUid grid, string group)
+    /// <summary>Returns the explicitly assigned attack target while its task is running; a simulated ship only when asked for.</summary>
+    public EntityUid? AttackTarget(EntityUid grid, string group, bool simulated = false)
     {
         if (_queues.TryGetValue((grid, group), out var state) && !state.Paused && state.Items.Count > 0
             && state.Items[0].Kind == WFCrewObjectiveKind.Attack && state.Items[0].Target is { } net
-            && TryGetEntity(net, out var target) && target is { } uid && !TerminatingOrDeleted(uid))
+            && TryGetEntity(net, out var target) && target is { } uid && !TerminatingOrDeleted(uid)
+            && (simulated || !HasComp<WFCrewVirtualShipComponent>(uid)))
             return uid;
         return null;
     }
@@ -157,6 +158,12 @@ public sealed partial class WFCrewObjectiveSystem : EntitySystem
     private void UpdateEscort(EntityUid grid, string group, QueueState state)
     {
         var escorts = EntityManager.System<WFCrewEscortSystem>();
+        // A simulated ship keeps station by its queue alone, and nobody escorts a stand-in.
+        if (HasComp<WFCrewVirtualShipComponent>(grid))
+        {
+            escorts.Clear(grid, group);
+            return;
+        }
         if (!state.Paused && state.Items.FirstOrDefault() is { Kind: WFCrewObjectiveKind.Escort, Target: { } net }
             && TryGetEntity(net, out var target) && target is { } leader)
             escorts.SetEscort(grid, group, leader);
@@ -178,6 +185,12 @@ public sealed partial class WFCrewObjectiveSystem : EntitySystem
             if (TerminatingOrDeleted(grid))
             {
                 _queues.Remove(key);
+                continue;
+            }
+            // A simulated ship flies its queue as a point; it has no pilot to wait on.
+            if (TryComp<WFCrewVirtualShipComponent>(grid, out var simulated))
+            {
+                StepVirtual((grid, simulated), state, elapsed);
                 continue;
             }
             if (state.Paused || state.Items.Count == 0)
@@ -212,6 +225,18 @@ public sealed partial class WFCrewObjectiveSystem : EntitySystem
                     state.Started = false;
             }
             var target = item.Target is { } net ? GetEntity(net) : EntityUid.Invalid;
+            // A target still simulated is only a point: the ship flies at it until it is spawned and the task starts over.
+            if (target.IsValid() && HasComp<WFCrewVirtualShipComponent>(target))
+            {
+                if (!state.Started || state.Pilot != pilot)
+                {
+                    _pilots.GoTo(pilot, new List<EntityCoordinates> { new(Transform(grid).MapUid!.Value, ShipCentre(target)) });
+                    state.Started = true;
+                    state.Pilot = pilot;
+                }
+                state.Status = "running";
+                continue;
+            }
             var travels = item.Kind is WFCrewObjectiveKind.GoTo or WFCrewObjectiveKind.Undock or WFCrewObjectiveKind.Retreat;
             if (!state.Started || state.Pilot != pilot)
             {
@@ -479,6 +504,7 @@ public sealed partial class WFCrewObjectiveSystem : EntitySystem
             if (alive)
                 row.Alive++;
         }
+        AddVirtualRows(result);
         foreach (var (key, row) in result)
         {
             if (!_queues.TryGetValue(key, out var state) || state.Items.Count == 0)

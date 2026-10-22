@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server._WF.Encounters.Components;
+using Content.Server._WF.NpcCrew.Components;
 using Content.Server._WF.NpcCrew.Systems;
 using Content.Shared._WF.Encounters;
 using Content.Shared.Shuttles.Components;
@@ -71,9 +72,11 @@ public sealed partial class WFEncounterMarkerSystem : EntitySystem
                     Color = ShipColor(encounter, ship),
                     Map = position.MapId,
                     Position = position.Position,
-                    Velocity = body?.LinearVelocity ?? Vector2.Zero,
+                    Velocity = body?.LinearVelocity ?? CompOrNull<WFCrewVirtualShipComponent>(ship.Grid)?.Velocity ?? Vector2.Zero,
                     WarnRange = disabled ? 0f : ship.WarnRange,
                     AttackRange = disabled ? 0f : ship.AttackRange,
+                    Threat = encounter.Threat,
+                    Retrofitted = ship.Retrofitted,
                 });
             }
         }

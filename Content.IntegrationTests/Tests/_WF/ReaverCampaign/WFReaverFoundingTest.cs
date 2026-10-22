@@ -166,7 +166,8 @@ public sealed class WFReaverFoundingTest : WFReaverTestBase
             Assert.That(territory.Owner(map, comp.Cell)?.Id, Is.EqualTo(Reavers));
             foreach (var cell in WFSectorHex.Ring(comp.Cell, 1))
             {
-                if (WFSectorHex.Distance(cell, WFSectorCell.Origin) > WFSectorProtectionSystem.CoreRadius)
+                // Past the sector's edge nothing is held.
+                if (WFSectorHex.Distance(cell, WFSectorCell.Origin) > WFSectorProtectionSystem.CoreRadius && WFSectorHex.InSector(cell, territory.CellSize))
                     Assert.That(territory.Owner(map, cell)?.Id, Is.EqualTo(Reavers));
             }
 

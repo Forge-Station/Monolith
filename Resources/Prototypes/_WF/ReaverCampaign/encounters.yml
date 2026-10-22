@@ -24,6 +24,29 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Saintie ]
+    # Hulls of several makes with docking ports for reinforcements. A fixed gun count keeps them alike; the campaign
+    # anchors a shield on any without one. From tier 3 only hulls with six hardpoints or more.
+    tiers:
+    - minTier: 0
+      vessels: [ Balor, MClass, Intermission, Hammerhead, Arkansaw, Claymore, Pelican, Saintie ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitHubLight
+    - minTier: 2
+      vessels: [ Balor, MClass, Intermission, Hammerhead, Arkansaw, Claymore, Pelican, Saintie ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitHubMedium
+    - minTier: 3
+      vessels: [ MClass, Intermission, Hammerhead, Arkansaw, Claymore, Saintie ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHubHeavy
+    - minTier: 4
+      vessels: [ MClass, Intermission, Hammerhead, Arkansaw, Claymore, Saintie ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitHubSiege
+    - minTier: 5
+      vessels: [ MClass, Intermission, Hammerhead, Arkansaw, Claymore, Saintie ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitHubSiege
     deckhands: 4
     guards: 3
     cargo: 4
@@ -58,6 +81,8 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Vulture ]
+    # The citadel keeps its own guns; only its decks are worn.
+    retrofit: WFPirateRetrofitGrime
     deckhands: 6
     guards: 4
     cargo: 8
@@ -146,6 +171,28 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Kalisto, Metis, Bastion, Garm ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Bastion, Garm ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 2
     engineer: false
     skill: Regular
@@ -162,6 +209,27 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Carrion, Hazel, Horsefly, Tick ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 0
     captain: false
     roles: [ WFCrewPilot, WFCrewGunner ]
@@ -196,6 +264,28 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 3
     warnRange: 900
     attackRange: 450
@@ -208,6 +298,27 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 0
     captain: false
     roles: [ WFCrewPilot, WFCrewGunner ]
@@ -240,6 +351,28 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 3
     warnRange: 900
     attackRange: 450
@@ -255,6 +388,27 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 0
     captain: false
     roles: [ WFCrewPilot, WFCrewGunner ]
@@ -290,6 +444,19 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Hazel, Metis, Mudskipper ]
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Takeaway, Caracara ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Takeaway, Arribane, Zeros, Peregrine ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 4
+      vessels: [ Hazel, Metis, Mudskipper ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
     captain: false
     deckhands: 2
     guards: 2
@@ -316,6 +483,28 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 3
     warnRange: 900
     attackRange: 450
@@ -328,6 +517,27 @@
     company: WFAshfallReavers
     profile: WFCrewProfilePirate
     vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 0
     captain: false
     roles: [ WFCrewPilot, WFCrewGunner ]

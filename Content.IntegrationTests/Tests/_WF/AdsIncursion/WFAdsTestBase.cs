@@ -245,10 +245,12 @@ public abstract class WFAdsTestBase : WFReaverTestBase
         return source;
     }
 
-    /// <summary>The cell two out from a centre that lies farthest from the origin, clear of the protected core.</summary>
+    /// <summary>The cell of a ring round a centre that lies farthest from the origin, clear of the protected core and inside the sector's edge.</summary>
     protected static WFSectorCell FarCell(WFSectorCell centre, int ring)
     {
-        return WFSectorHex.Ring(centre, ring).OrderByDescending(cell => WFSectorHex.Distance(cell, WFSectorCell.Origin)).First();
+        return WFSectorHex.Ring(centre, ring)
+            .Where(cell => WFSectorHex.InSector(cell, SectorControlCVars.CellSize.DefaultValue))
+            .OrderByDescending(cell => WFSectorHex.Distance(cell, WFSectorCell.Origin)).First();
     }
 
     /// <summary>The lead hull of an encounter.</summary>

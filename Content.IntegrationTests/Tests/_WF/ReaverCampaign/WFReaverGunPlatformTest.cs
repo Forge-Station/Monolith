@@ -25,7 +25,42 @@ namespace Content.IntegrationTests.Tests._WF.ReaverCampaign;
 [TestOf(typeof(WFPilotDutySystem))]
 public sealed class WFReaverGunPlatformTest : WFReaverTestBase
 {
-    private const string Hub = "WFReaverStronghold";
+    private const string Hub = "WFTestReaverStrongholdSaintie";
+
+    // The stronghold flies a hull of a pool by tier; these tests are about Saintie's guns, so it is pinned here.
+    [TestPrototypes]
+    private const string Prototypes = @"
+- type: wfEncounter
+  id: WFTestReaverStrongholdSaintie
+  name: wf-reaver-name-stronghold
+  start: Manual
+  lifetime: Persistent
+  category: Threat
+  icon: Flag
+  leash: 2000
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationRaider
+    side: reavers
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    vessels: [ Saintie ]
+    deckhands: 4
+    guards: 3
+    fuelStores: 12
+    skill: Regular
+    evades: false
+    platform: true
+    warnRange: 1500
+    attackRange: 900
+    zoneLines: wf-encounter-pirate-zone
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Hold
+";
 
     /// <summary>How far off its station the hub may drift while it turns.</summary>
     private const float StationReach = 100f;

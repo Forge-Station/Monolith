@@ -130,7 +130,8 @@ public sealed class WFReaverConvoyTest : WFReaverTestBase
             Assert.That(territory.Sources(map, target), Does.Contain(convoy));
             foreach (var cell in WFSectorHex.Ring(target, 1))
             {
-                if (WFSectorHex.Distance(cell, WFSectorCell.Origin) > WFSectorProtectionSystem.CoreRadius)
+                // Past the sector's edge nothing is held.
+                if (WFSectorHex.Distance(cell, WFSectorCell.Origin) > WFSectorProtectionSystem.CoreRadius && WFSectorHex.InSector(cell, territory.CellSize))
                     Assert.That(territory.Owner(map, cell)?.Id, Is.EqualTo(Reavers), WFSectorHex.Callsign(cell));
             }
 

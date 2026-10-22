@@ -118,6 +118,7 @@ public sealed partial class WFReaverCampaignSystem
 
         encounter.Name = Loc.GetString("wf-reaver-name-level", ("name", comp.BaseName), ("level", level));
         _meta.SetEntityName(uid, encounter.Name);
+        SetThreat(comp, encounter);
     }
 
     /// <summary>The cap on a stronghold's level at the current tier, and the length of the reinforcement list.</summary>

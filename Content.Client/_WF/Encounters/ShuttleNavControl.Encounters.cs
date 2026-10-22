@@ -20,6 +20,9 @@ public partial class ShuttleNavControl
 
     private static readonly ResPath MarkerGlyphs = new("/Textures/_WF/Encounters/markers.rsi");
     private readonly Dictionary<WFEncounterIcon, Texture> _encounterGlyphs = new();
+    private WFEncounterRanks? _encounterRanks;
+
+    private WFEncounterRanks EncounterRanks => _encounterRanks ??= new WFEncounterRanks(EntManager.System<SpriteSystem>());
 
     /// <summary>The texture for a glyph, loaded once.</summary>
     private Texture EncounterGlyph(WFEncounterIcon icon)
@@ -79,8 +82,14 @@ public partial class ShuttleNavControl
                 if (!group.Named)
                 {
                     // Above the ship: its own IFF label hangs below and to the right, and the admin crew tag sits between.
-                    var at = PlaceEncounterLabel(point + new Vector2(10f, -54f) * UIScale, handle.GetDimensions(Font, marker.Name, UIScale * 0.8f));
+                    // The threat rank follows the name on the same line.
+                    var dimensions = handle.GetDimensions(Font, marker.Name, UIScale * 0.8f);
+                    var rank = dimensions.Y;
+                    var width = WFEncounterRanks.Width(marker.Threat, rank);
+                    var at = PlaceEncounterLabel(point + new Vector2(10f, -54f) * UIScale,
+                        dimensions + new Vector2(width > 0f ? width + 3f * UIScale : 0f, 0f));
                     handle.DrawString(Font, at, marker.Name, UIScale * 0.8f, color);
+                    EncounterRanks.Draw(handle, at + new Vector2(dimensions.X + 3f * UIScale, 0f), marker.Threat, rank);
                 }
             }
 

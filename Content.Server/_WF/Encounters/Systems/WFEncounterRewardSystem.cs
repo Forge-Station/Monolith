@@ -72,6 +72,7 @@ public sealed partial class WFEncounterRewardSystem : EntitySystem
 
     private void OnHullHit(ref WFCrewHullHitEvent args)
     {
+        Damaged(args.Grid);
         // Judged before it is counted, as the crews judged it, so the same hit is never weighed twice.
         RecordHit(args.Grid, args.AttackerGrid);
         Track(args.Grid, args.AttackerGrid);
@@ -83,8 +84,17 @@ public sealed partial class WFEncounterRewardSystem : EntitySystem
         if (!_alerts.IsShipWeapon(args.Weapon))
             return;
 
+        Damaged(args.Grid);
         RecordHit(args.Grid, args.AttackerGrid);
         Track(args.Grid, args.AttackerGrid);
+    }
+
+    /// <summary>An encounter ship hit by any ship weapon, an NPC's included, stays real: it would come back whole from simulation.</summary>
+    private void Damaged(EntityUid victim)
+    {
+        if (TryComp<WFEncounterGridComponent>(victim, out var marker) && TryComp<WFEncounterComponent>(marker.Encounter, out var encounter)
+            && encounter.Ships.TryGetValue(marker.Key, out var ship))
+            ship.Touched = true;
     }
 
     /// <summary>How long a vessel's hits count toward whom it is fighting.</summary>

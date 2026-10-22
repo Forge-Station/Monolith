@@ -515,7 +515,8 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
     /// <summary>Whether a faction could claim a cell now: it is unheld or its own, and no protection rule vetoes it.</summary>
     public bool CanClaim(MapId map, WFSectorCell cell, ProtoId<WFSectorFactionPrototype> faction, EntityUid? source = null)
     {
-        if (!Enabled || !_prototypes.HasIndex(faction) || map == MapId.Nullspace || !_map.MapExists(map))
+        if (!Enabled || !_prototypes.HasIndex(faction) || map == MapId.Nullspace || !_map.MapExists(map)
+            || !WFSectorHex.InSector(cell, CellSize))
             return false;
 
         var territory = Territory(map);
@@ -533,8 +534,9 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
     /// <summary>Claims a cell for a faction with a source, or with none until freed; fails on another faction's cell or contest, or a veto.</summary>
     public bool TryClaim(MapId map, WFSectorCell cell, ProtoId<WFSectorFactionPrototype> faction, EntityUid? source)
     {
+        // Nothing past the sector's edge can be held: the map shows no cell there.
         if (!Enabled || !_prototypes.HasIndex(faction) || source is { } live && TerminatingOrDeleted(live)
-            || Territory(map, true) is not { } territory)
+            || !WFSectorHex.InSector(cell, CellSize) || Territory(map, true) is not { } territory)
             return false;
 
         if (territory.Claims.TryGetValue(cell, out var held))
@@ -587,7 +589,7 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
     public bool Contest(MapId map, WFSectorCell cell, ProtoId<WFSectorFactionPrototype> faction, TimeSpan deadline, EntityUid? source = null)
     {
         if (!Enabled || !_prototypes.HasIndex(faction) || source is { } live && TerminatingOrDeleted(live)
-            || Territory(map, true) is not { } territory || territory.Contests.ContainsKey(cell))
+            || !WFSectorHex.InSector(cell, CellSize) || Territory(map, true) is not { } territory || territory.Contests.ContainsKey(cell))
             return false;
 
         if (territory.Claims.TryGetValue(cell, out var held))

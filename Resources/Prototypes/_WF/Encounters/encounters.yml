@@ -377,6 +377,28 @@
   - key: raider
     navigation: WFCrewNavigationRaider
     vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     offset: 0, 450
     side: pirates
     faction: PirateNF
@@ -429,6 +451,28 @@
   - key: raider
     navigation: WFCrewNavigationRaider
     vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     offset: 0, 600
     side: pirates
     faction: PirateNF
@@ -443,6 +487,27 @@
   - key: wing
     navigation: WFCrewNavigationRaider
     vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 0
     captain: false
     roles: [ WFCrewPilot, WFCrewGunner ]
@@ -477,6 +542,28 @@
   - key: raider
     navigation: WFCrewNavigationRaider
     vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     side: pirates
     faction: PirateNF
     distress: false
@@ -491,6 +578,27 @@
   - key: wing
     navigation: WFCrewNavigationRaider
     vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
     deckhands: 0
     captain: false
     roles: [ WFCrewPilot, WFCrewGunner ]
@@ -529,6 +637,19 @@
   - key: boarder
     navigation: WFCrewNavigationRaider
     vessels: [ Hazel, Metis, Mudskipper ]
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Takeaway, Caracara ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Takeaway, Arribane, Zeros, Peregrine ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 4
+      vessels: [ Hazel, Metis, Mudskipper ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
     side: pirates
     faction: PirateNF
     distress: false

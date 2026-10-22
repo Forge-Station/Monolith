@@ -4,7 +4,8 @@ Faction territory on the sector map. The sector is a grid of flat-top hexes (`wf
 the origin; a `wfSectorFaction` holds cells, and the shuttle console's MAP tab, the nav radar and the sector map
 window show them in the faction's colour. The module only keeps and shows territory: who claims what, and why, is up to a driver such as the
 Reaver campaign. Every cell has a callsign (`WFSectorHex.Callsign`, such as `N-13` for the origin) for
-announcements and the map.
+announcements and the map. The sector is the cells whose centre lies within `WFSectorHex.SectorRadius` (30 km)
+of the origin, the grid the map outlines; a cell past it can't be claimed or contested.
 
 Players see held cells, borders and contested cells with their countdown on the map, and a legend line per faction
 that the driver writes. A crewed player ship that has been inside a faction's space for ten seconds is told "WARNING:
@@ -102,6 +103,7 @@ Admins use `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest 
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorClearingTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorClearingTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorControlTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorControlTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorDisputeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorDisputeTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorEdgeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorEdgeTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorHiddenStationTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorHiddenStationTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorMapTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorMapTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorNoticeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorNoticeTest.cs)

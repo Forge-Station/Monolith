@@ -62,6 +62,9 @@ public sealed class WFSectorMapControl : Control
     private static readonly Color DimColor = Color.FromHex("#8a96a3");
     private static readonly Color ShadowColor = Color.Black.WithAlpha(0.8f);
     private static readonly ResPath MarkerGlyphs = new("/Textures/_WF/Encounters/markers.rsi");
+    private WFEncounterRanks? _ranks;
+
+    private WFEncounterRanks Ranks => _ranks ??= new WFEncounterRanks(_entManager.System<SpriteSystem>());
 
     private readonly WFSectorOverlay _overlay = new();
     private readonly Font _font;
@@ -252,7 +255,16 @@ public sealed class WFSectorMapControl : Control
             ("distance", distance), ("bearing", Bearing(from, blip.Position))), CardColor, null));
 
         if (blip.Kind == WFSectorBlipKind.Encounter)
+        {
+            // A ranked encounter's card names its threat and what it flies.
+            if (blip.Threat is { } threat)
+            {
+                into.Add(new WFSectorReadoutLine(Loc.GetString("wf-encounter-threat-rank", ("threat", threat)), WFEncounterRanks.Tint(threat), null));
+                into.Add(new WFSectorReadoutLine(Loc.GetString(blip.Retrofitted ? "wf-encounter-threat-retrofit" : "wf-encounter-threat-gunship"), CardColor, null));
+            }
+
             return;
+        }
 
         var cell = WFSectorHex.CellOf(blip.Position, view.CellSize);
         var callsign = WFSectorHex.Callsign(cell);
@@ -413,7 +425,8 @@ public sealed class WFSectorMapControl : Control
                 continue;
 
             var color = marker.Color ?? WFEncounterColors.Category(marker.Category);
-            into.Add(new WFSectorEncounterView(marker.Encounter, marker.Name, marker.Category, color, system.GetPosition(marker)));
+            into.Add(new WFSectorEncounterView(marker.Encounter, marker.Name, marker.Category, color, system.GetPosition(marker),
+                marker.Threat, marker.Retrofitted));
         }
     }
 
@@ -707,8 +720,14 @@ public sealed class WFSectorMapControl : Control
         foreach (var encounter in _encounters)
         {
             var point = Vector2.Transform(encounter.Position, worldToView);
-            if (bounds.Contains(point))
-                handle.DrawTextureRect(Glyph(GlyphFor(encounter.Category)), UIBox2.FromDimensions(point - glyph / 2f, glyph), WFEncounterColors.Category(encounter.Category));
+            if (!bounds.Contains(point))
+                continue;
+
+            handle.DrawTextureRect(Glyph(GlyphFor(encounter.Category)), UIBox2.FromDimensions(point - glyph / 2f, glyph), WFEncounterColors.Category(encounter.Category));
+            // Its threat rank in a row under the glyph.
+            var rank = 9f * UIScale;
+            var width = WFEncounterRanks.Width(encounter.Threat, rank);
+            Ranks.Draw(handle, point + new Vector2(-width / 2f, glyph.Y / 2f + UIScale), encounter.Threat, rank);
         }
 
         _placedLabels.Clear();
@@ -914,10 +933,12 @@ public enum WFSectorBlipKind : byte
 }
 
 /// <summary>An encounter on the sector map: its name, its category, its first ship's side colour and where that ship is in map space.</summary>
-public readonly record struct WFSectorEncounterView(NetEntity Encounter, string Name, WFEncounterCategory Category, Color Color, Vector2 Position);
+public readonly record struct WFSectorEncounterView(NetEntity Encounter, string Name, WFEncounterCategory Category, Color Color, Vector2 Position,
+    int? Threat = null, bool Retrofitted = false);
 
 /// <summary>A blip on the sector map, a named grid or an encounter, with what its card shows.</summary>
-public readonly record struct WFSectorBlip(WFSectorBlipKind Kind, string Name, Vector2 Position, Color Color, EntityUid Grid, NetEntity Encounter, WFEncounterCategory Category)
+public readonly record struct WFSectorBlip(WFSectorBlipKind Kind, string Name, Vector2 Position, Color Color, EntityUid Grid, NetEntity Encounter, WFEncounterCategory Category,
+    int? Threat = null, bool Retrofitted = false)
 {
     /// <summary>The blip of a named grid.</summary>
     public static WFSectorBlip Of(WFSectorLandmarkView landmark)
@@ -928,7 +949,8 @@ public readonly record struct WFSectorBlip(WFSectorBlipKind Kind, string Name, V
     /// <summary>The blip of an encounter's marker.</summary>
     public static WFSectorBlip Of(WFSectorEncounterView encounter)
     {
-        return new WFSectorBlip(WFSectorBlipKind.Encounter, encounter.Name, encounter.Position, encounter.Color, EntityUid.Invalid, encounter.Encounter, encounter.Category);
+        return new WFSectorBlip(WFSectorBlipKind.Encounter, encounter.Name, encounter.Position, encounter.Color, EntityUid.Invalid, encounter.Encounter, encounter.Category,
+            encounter.Threat, encounter.Retrofitted);
     }
 
     /// <summary>Whether two blips are the same grid or encounter, wherever each has moved since; two nones are the same.</summary>

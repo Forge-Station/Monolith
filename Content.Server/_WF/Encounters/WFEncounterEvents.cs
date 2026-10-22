@@ -19,3 +19,19 @@ public record struct WFEncounterWeightEvent(WFEncounterPrototype Prototype, floa
 /// <summary>Raised, by ref and broadcast, with the stations of a map before they are used; a subscriber may remove entries.</summary>
 [ByRefEvent]
 public readonly record struct WFEncounterStationsEvent(MapId Map, List<Entity<MapGridComponent>> Stations);
+
+/// <summary>Raised, by ref and broadcast, when an encounter whose ships fly by tier spawns with no tier given; a sector threat sets it.</summary>
+[ByRefEvent]
+public record struct WFEncounterThreatTierEvent(int? Tier);
+
+/// <summary>Raised, by ref and broadcast, when a simulated encounter ship's hull has been spawned.</summary>
+[ByRefEvent]
+public readonly record struct WFEncounterShipSpawnedEvent(EntityUid Encounter, string Key, EntityUid Grid);
+
+/// <summary>Raised, by ref and broadcast, each round two simulated ships fight: the victim's stand-in and the attacker's.</summary>
+[ByRefEvent]
+public readonly record struct WFEncounterSimulatedHitEvent(EntityUid Victim, EntityUid Attacker);
+
+/// <summary>Raised, by ref and broadcast, before each marker update goes out; a subscriber may add markers of its own.</summary>
+[ByRefEvent]
+public readonly record struct WFEncounterCollectMarkersEvent(List<WFEncounterMarker> Markers);

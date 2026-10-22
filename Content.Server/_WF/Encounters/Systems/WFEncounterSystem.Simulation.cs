@@ -63,16 +63,6 @@ public sealed partial class WFEncounterSystem
         Subs.CVar(_config, EncountersCVars.MaterializeInterval, value => _materializeInterval = TimeSpan.FromSeconds(value), true);
         Subs.CVar(_config, EncountersCVars.DuelMeanSeconds, value => _duelMean = MathF.Max(value, 1f), true);
         SubscribeLocalEvent<FTLStartedEvent>(OnFtlStarted);
-        SubscribeLocalEvent<Content.Server._WF.Planets.Hop.WFPlanetHopStartedEvent>(OnHopStarted);
-    }
-
-    /// <summary>A hop out of orbit is noticed like a jump, so the ships about its exit are up before the hull arrives.</summary>
-    private void OnHopStarted(ref Content.Server._WF.Planets.Hop.WFPlanetHopStartedEvent ev)
-    {
-        if (HasComp<WFEncounterGridComponent>(ev.Hull))
-            return;
-
-        _jumps.Add((_transform.ToMapCoordinates(ev.Target), _timing.CurTime + JumpNotice));
     }
 
     /// <summary>A player's ship plotting a jump spawns the simulated ships about its exit while it is in transit.</summary>
@@ -139,9 +129,6 @@ public sealed partial class WFEncounterSystem
             || TerminatingOrDeleted(state.Grid) || state.Virtual != up)
             return;
 
-        if (up && _simulate && _battleHeat.IsHot(_transform.GetMapCoordinates(state.Grid)))
-            return;
-
         if (up)
             Materialize((uid, encounter), key, state);
         else
@@ -176,9 +163,7 @@ public sealed partial class WFEncounterSystem
                 if (ship.Virtual)
                 {
                     // Turned off, every simulated ship is spawned; a resolved encounter's stand-ins just wait for cleanup.
-                    // A stand-in near a big fight stays simulated until it dies down.
-                    if (encounter.Resolution == null && (!_simulate || nearest <= _materializeRange || JumpingNear(at))
-                        && !(_simulate && _battleHeat.IsHot(at)))
+                    if (encounter.Resolution == null && (!_simulate || nearest <= _materializeRange || JumpingNear(at)))
                         spawn.Add((uid, key, _simulate ? nearest : 0f));
                     continue;
                 }

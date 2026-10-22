@@ -137,7 +137,8 @@ public sealed class WFReaverCitadelTest : WFReaverTestBase
             Assert.That(territory.ContestOf(MapData.MapId, target), Is.Null, "The contest is withdrawn.");
             foreach (var cell in WFSectorHex.Within(target, 2))
             {
-                if (WFSectorHex.Distance(cell, WFSectorCell.Origin) > WFSectorProtectionSystem.CoreRadius)
+                // Past the sector's edge nothing is held.
+                if (WFSectorHex.Distance(cell, WFSectorCell.Origin) > WFSectorProtectionSystem.CoreRadius && WFSectorHex.InSector(cell, territory.CellSize))
                     Assert.That(territory.Owner(MapData.MapId, cell)?.Id, Is.EqualTo(Reavers), $"{WFSectorHex.Callsign(cell)} is held");
             }
 

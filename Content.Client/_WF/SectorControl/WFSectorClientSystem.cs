@@ -22,7 +22,7 @@ public sealed class WFSectorClientSystem : EntitySystem
     [Dependency] private SharedShuttleSystem _shuttles = default!;
 
     /// <summary>How far from the origin the sector map outlines every cell, in metres.</summary>
-    public const float SectorRadius = 30000f;
+    public const float SectorRadius = WFSectorHex.SectorRadius;
 
     /// <summary>The colour an open cell's callsign is printed in.</summary>
     public static readonly Color OpenCellColor = Color.FromHex("#5c6670");

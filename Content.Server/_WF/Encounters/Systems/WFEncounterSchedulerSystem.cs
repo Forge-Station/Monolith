@@ -230,16 +230,18 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
     /// <summary>
     /// Starts an encounter for an admin. Open-space encounters go where asked; the others are placed beside
     /// stations on that map as usual, because their orders are aimed at those stations. Pinned, it stays until an
-    /// admin ends it; otherwise it jumps out and is cleaned up like a scheduled one.
+    /// admin ends it; otherwise it jumps out and is cleaned up like a scheduled one. A tier, if given, overrides the
+    /// sector threat's for ships that fly by tier.
     /// </summary>
-    public bool TryStartAt(WFEncounterPrototype prototype, MapCoordinates near, out EntityUid encounter, EntityUid? spawner, bool pinned = true)
+    public bool TryStartAt(WFEncounterPrototype prototype, MapCoordinates near, out EntityUid encounter, EntityUid? spawner,
+        bool pinned = true, int? tier = null)
     {
         encounter = default;
         if (prototype.Placement == WFEncounterPlacement.OpenSpace)
-            return _encounters.TrySpawn(prototype, near, out encounter, spawner, pinned: pinned);
+            return _encounters.TrySpawn(prototype, near, out encounter, spawner, pinned: pinned, tier: tier);
 
         return TryPlaceAtStations(prototype, near.MapId, out var origin, out var stops)
-            && _encounters.TrySpawn(prototype, origin, out encounter, spawner, stops, pinned);
+            && _encounters.TrySpawn(prototype, origin, out encounter, spawner, stops, pinned, tier: tier);
     }
 
     private bool TryStart(WFEncounterPrototype prototype, out EntityUid encounter)

@@ -101,9 +101,11 @@ public sealed partial class WFReaverCampaignSystem
     public bool TryFoundAt(MapCoordinates at, out EntityUid stronghold, ProtoId<WFEncounterPrototype>? prototype = null)
     {
         stronghold = default;
+        // Nothing past the sector's edge can be held, so no stronghold is founded there.
         if (Campaign is not { } campaign || State(true) is not { } state || state.Finished
             || !_prototypes.TryIndex(prototype ?? campaign.Stronghold, out var encounterPrototype)
-            || encounterPrototype.Ships.Count == 0)
+            || encounterPrototype.Ships.Count == 0
+            || !WFSectorHex.InSector(_territory.CellOf(at), _territory.CellSize))
             return false;
 
         var regroup = state.Founded > 0 && Strongholds().Count == 0;
@@ -116,10 +118,10 @@ public sealed partial class WFReaverCampaignSystem
         return true;
     }
 
-    /// <summary>Anchors a shield generator on the hub's lead hull if it has none.</summary>
+    /// <summary>Anchors a shield generator on the hub's lead hull if it has none; a simulated hub gets it once its hull is spawned.</summary>
     private void ShieldHub(WFReaverCampaignPrototype campaign, EntityUid encounter, string lead)
     {
-        if (TryComp<WFEncounterComponent>(encounter, out var comp) && comp.Ships.TryGetValue(lead, out var ship))
+        if (TryComp<WFEncounterComponent>(encounter, out var comp) && comp.Ships.TryGetValue(lead, out var ship) && !ship.Virtual)
             EnsureShield(campaign, ship.Grid);
     }
 

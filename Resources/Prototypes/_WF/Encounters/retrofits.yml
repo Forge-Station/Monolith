@@ -1,0 +1,117 @@
+# Pirate retrofitting: what raiders do to a hull they took. Each tier band of a pirate or Reaver ship names one. The
+# gun pools grow with the threat tier; the low tiers carry nothing bigger than 57mm and no EMP.
+
+- type: wfPirateRetrofit
+  id: WFPirateRetrofitBase
+  abstract: true
+  tileSwaps:
+  - from: [ FloorSteel, FloorSteelMini, FloorSteelMono, FloorSteelPavement, FloorSteelPavementVertical, FloorSteelOffset,
+      FloorSteelDiagonal, FloorSteelHerringbone, FloorDark, FloorDarkMono, FloorDarkMini, FloorDarkPavement,
+      FloorDarkPavementVertical, FloorDarkOffset, FloorDarkDiagonal, FloorDarkHerringbone, FloorWhite, FloorWhiteMono,
+      FloorWhiteMini, FloorWhiteOffset, FloorWhitePavement, FloorTechMaint, FloorTechMaint2, FloorTechMaintAlt ]
+    to: [ FloorSteelDirty, FloorSteelDirty, FloorSteelDamaged ]
+    chance: 0.3
+  - from: [ Plating ]
+    to: [ PlatingDamaged ]
+    chance: 0.35
+  - from: [ FloorWood, FloorWoodLarge ]
+    to: [ FloorBrokenWood ]
+    chance: 0.3
+  wallSwaps:
+    WallSolid: WallSolidRust
+    WallReinforced: WallReinforcedRust
+  wallChance: 0.35
+  decals:
+  - id: Dirt
+    weight: 3
+  - id: DirtLight
+    weight: 3
+  - id: DirtMedium
+    weight: 2
+  - id: DirtHeavy
+    weight: 1
+  - id: Rust
+    weight: 2
+  - id: Damaged
+    weight: 1
+  - id: burnt1
+  - id: burnt2
+  - id: burnt3
+  - id: burnt4
+  # Oil
+  - id: DirtHeavy
+    color: "#1c1a18DD"
+  # Old blood
+  - id: DirtMedium
+    color: "#5a0d0dCC"
+    weight: 0.7
+  decalDensity: 0.35
+  cobwebChance: 0.4
+  lightsOut: 0.25
+  litter: [ RandomSpawner, RandomSpawner, ShardGlass, PartRodMetal1 ]
+  litterDensity: 0.02
+
+# Grime only: the hull keeps the guns it was built with.
+- type: wfPirateRetrofit
+  id: WFPirateRetrofitGrime
+  parent: WFPirateRetrofitBase
+
+# Tiers 0-1: light guns.
+- type: wfPirateRetrofit
+  id: WFPirateRetrofitLight
+  parent: WFPirateRetrofitBase
+  guns: [ WeaponTurretL85Autocannon, WeaponTurretAK570, WeaponTurretAdderScattercannon, WeaponTurretM25,
+    WeaponLaserTurretL1Phalanx, WeaponTurretVanyk ]
+  minGuns: 2
+  maxGuns: 3
+
+# Tier 2: light and medium guns.
+- type: wfPirateRetrofit
+  id: WFPirateRetrofitMedium
+  parent: WFPirateRetrofitBase
+  guns: [ WeaponTurretL85Autocannon, WeaponTurretAK570, WeaponTurretAdderScattercannon, WeaponTurretM25,
+    WeaponLaserTurretL1Phalanx, WeaponTurretVanyk, WeaponTurretRAC30, WeaponTurretAC-35, WeaponTurretDravon,
+    WeaponTurretType54, WeaponTurretType35, WeaponLaserTurretPrometheus, WeaponTurretVespera ]
+  minGuns: 3
+  maxGuns: 4
+
+# Tier 3: adds the Fang 57mm and the Serpent torpedo.
+- type: wfPirateRetrofit
+  id: WFPirateRetrofitHeavy
+  parent: WFPirateRetrofitMedium
+  guns: [ WeaponTurretL85Autocannon, WeaponTurretAK570, WeaponTurretAdderScattercannon, WeaponTurretM25,
+    WeaponLaserTurretL1Phalanx, WeaponTurretVanyk, WeaponTurretRAC30, WeaponTurretAC-35, WeaponTurretDravon,
+    WeaponTurretType54, WeaponTurretType35, WeaponLaserTurretPrometheus, WeaponTurretVespera, WeaponTurretFang,
+    WeaponTurretSerpentMissile ]
+  minGuns: 4
+  maxGuns: 5
+
+# Stronghold hubs: a fixed count, so hulls of different makes stand alike.
+- type: wfPirateRetrofit
+  id: WFPirateRetrofitHubLight
+  parent: WFPirateRetrofitLight
+  minGuns: 4
+  maxGuns: 4
+
+- type: wfPirateRetrofit
+  id: WFPirateRetrofitHubMedium
+  parent: WFPirateRetrofitMedium
+  minGuns: 4
+  maxGuns: 4
+
+- type: wfPirateRetrofit
+  id: WFPirateRetrofitHubHeavy
+  parent: WFPirateRetrofitHeavy
+  minGuns: 6
+  maxGuns: 6
+
+# Tier 4 and up: heavy guns too.
+- type: wfPirateRetrofit
+  id: WFPirateRetrofitHubSiege
+  parent: WFPirateRetrofitHeavy
+  guns: [ WeaponTurretAK570, WeaponTurretRAC30, WeaponTurretAC-35, WeaponTurretDravon, WeaponTurretType54,
+    WeaponTurretType35, WeaponLaserTurretPrometheus, WeaponTurretVespera, WeaponTurretFang, WeaponTurretSerpentMissile,
+    WeaponTurretCyrexa, WeaponTurretHydra, WeaponTurretBofors, WeaponTurretPinhole, WeaponTurretPaladin,
+    WeaponTurretVanquisher, WeaponTurretScythe, WeaponTurretSunder, WeaponTurretCerberus ]
+  minGuns: 6
+  maxGuns: 6

@@ -10,6 +10,11 @@ The sector watch announces in three tiers: chimed banners for the big moments, a
 (the rest go on the radio) and routine lines on the Common channel only.
 A cell where a campaign ship and a crewed player ship meet is disputed: the map hatches it, and the stronghold's
 reinforcement clock, the convoy and reinforcement deadlines there hold until one side leaves or dies; spread skips it.
+Campaign crews fire on sight (`WFCrewOnSightComponent` on every campaign hull, set in `SpawnEncounter`): any faction
+enemy a crewman sees within 10 m is engaged, aboard or off the ship; the helm, guns and radio only turn on one aboard.
+The faction's neutral companies are spared. The sector's random Reaver encounters keep the ordinary rules.
+Campaign crews carry their own NPC faction, `WFAshfallReavers`, hostile to everyone, the Dynasty's people included;
+the Fugitive and Godfather jobs add `WFUnderground` beside `NanoTrasen`, and the two are allies.
 
 A stronghold is a hub: a shielded Saintie with docking ports and no guard ships. A hull with no shield generator is
 given one, anchored on a free tile in reach of an APC, when the hub spawns. The first stronghold, and a regrouped one
@@ -32,7 +37,7 @@ and in the legend), announced to the sector; a reinforcement whose pilot gives u
 and counts all the same, and one that never gets near the hub is ended past its deadline. One lost on the way
 founds nothing and pays the patrol bounty. When the hub is hit by player ships its reinforcements undock and attack
 the ship that is hitting it, and dock again three minutes after the last hit
-with no attacker near. Breaking the hub ends its reinforcements and pays `strongholdBounty[tier]` times one plus
+with no attacker near. Breaking the hub resolves its reinforcements, which then go through the usual cleanup, and pays `strongholdBounty[tier]` times one plus
 half the level.
 
 At tier 5 the Reavers raise a citadel (`citadel` on the campaign, `WFReaverCitadel`, a Vulture; `.Citadel`). Once the
@@ -45,7 +50,9 @@ or launched, and what still stands fights on until broken. `wf_reavers citadel` 
 Players fight it by breaking strongholds (the lead ship out of the fight breaks it: its cells are freed and its bounty
 paid to everyone who hit it, with a fifth for the ships that stood by the assault), killing patrols (the cell the lead
 died in is freed and a smaller bounty paid; each navy's members also get its own faction credits, from the campaign's
-`credits` list), and flying lanes: only quiet cells are taken, and a station's cell is
+`credits` list, and each player ship that helped break a stronghold or convoy, or destroy a patrol or reinforcement,
+gets the campaign's `strongholdVoucher` or `patrolVoucher`, a `WFDrydockRepairVoucher` bound to that ship, unless it
+still holds one), and flying lanes: only quiet cells are taken, and a station's cell is
 contested for ten minutes, announced as a blockade, before it falls. Each storyteller preset has its own
 `wfReaverCampaign` (`Resources/Prototypes/_WF/ReaverCampaign/campaigns.yml`) with the pace, caps, tier ladder,
 bounties and encounter prototypes; a preset with none runs no campaign. It runs only while `wf.encounters.enabled`,
@@ -126,6 +133,7 @@ and counted for the round summary. `wf_reavers respond <q> <r>` sends one by han
 - [`Content.Server/_WF/ReaverCampaign/Systems/WFReaverCampaignSystem.Neutral.cs`](Systems/WFReaverCampaignSystem.Neutral.cs)
 - [`Content.Server/_WF/ReaverCampaign/Systems/WFReaverCampaignSystem.Patrols.cs`](Systems/WFReaverCampaignSystem.Patrols.cs)
 - [`Content.Server/_WF/ReaverCampaign/Systems/WFReaverCampaignSystem.Raids.cs`](Systems/WFReaverCampaignSystem.Raids.cs)
+- [`Content.Server/_WF/ReaverCampaign/Systems/WFReaverCampaignSystem.Ranks.cs`](Systems/WFReaverCampaignSystem.Ranks.cs)
 - [`Content.Server/_WF/ReaverCampaign/Systems/WFReaverCampaignSystem.Reinforcements.cs`](Systems/WFReaverCampaignSystem.Reinforcements.cs)
 - [`Content.Server/_WF/ReaverCampaign/Systems/WFReaverCampaignSystem.Response.cs`](Systems/WFReaverCampaignSystem.Response.cs)
 - [`Content.Server/_WF/ReaverCampaign/Systems/WFReaverCampaignSystem.Retakes.cs`](Systems/WFReaverCampaignSystem.Retakes.cs)
@@ -158,11 +166,15 @@ and counted for the round summary. `wf_reavers respond <q> <r>` sends one by han
 - [`Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverPauseTest.cs`](../../../Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverPauseTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverRaidTest.cs`](../../../Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverRaidTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverReinforcementTest.cs`](../../../Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverReinforcementTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverSanctuaryTest.cs`](../../../Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverSanctuaryTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverSimulationTest.cs`](../../../Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverSimulationTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverStarvedTest.cs`](../../../Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverStarvedTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverStrongholdTest.cs`](../../../Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverStrongholdTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverTestBase.cs`](../../../Content.IntegrationTests/Tests/_WF/ReaverCampaign/WFReaverTestBase.cs)
 
 ### Prototypes
 
+- [`Resources/Prototypes/_WF/ReaverCampaign/ai_factions.yml`](../../../Resources/Prototypes/_WF/ReaverCampaign/ai_factions.yml)
 - [`Resources/Prototypes/_WF/ReaverCampaign/campaigns.yml`](../../../Resources/Prototypes/_WF/ReaverCampaign/campaigns.yml)
 - [`Resources/Prototypes/_WF/ReaverCampaign/companies.yml`](../../../Resources/Prototypes/_WF/ReaverCampaign/companies.yml)
 - [`Resources/Prototypes/_WF/ReaverCampaign/encounters.yml`](../../../Resources/Prototypes/_WF/ReaverCampaign/encounters.yml)
@@ -187,8 +199,12 @@ and counted for the round summary. `wf_reavers respond <q> <r>` sends one by han
 - [`Resources/Prototypes/_Mono/PointsOfInterest/tsfmcindustry.yml`](../../../Resources/Prototypes/_Mono/PointsOfInterest/tsfmcindustry.yml): the Contested Sector game mode spawns the same sector as Standard
 - [`Resources/Prototypes/_Mono/PointsOfInterest/underground.yml`](../../../Resources/Prototypes/_Mono/PointsOfInterest/underground.yml): the station flies the neutral WFUnderground company, so the Reavers leave it and its cell alone
 - [`Resources/Prototypes/_Mono/PointsOfInterest/ussp.yml`](../../../Resources/Prototypes/_Mono/PointsOfInterest/ussp.yml): the Contested Sector game mode spawns the same sector as Standard
-- [`Resources/Prototypes/_Mono/Roles/Jobs/Underground/fugitive.yml`](../../../Resources/Prototypes/_Mono/Roles/Jobs/Underground/fugitive.yml): Underground crew fly the neutral WFUnderground company, so the Reavers leave them alone
-- [`Resources/Prototypes/_Mono/Roles/Jobs/Underground/godfather.yml`](../../../Resources/Prototypes/_Mono/Roles/Jobs/Underground/godfather.yml): Underground crew fly the neutral WFUnderground company, so the Reavers leave them alone
+- [`Resources/Prototypes/_Mono/Roles/Jobs/Underground/fugitive.yml`](../../../Resources/Prototypes/_Mono/Roles/Jobs/Underground/fugitive.yml)
+  - Underground crew fly the neutral WFUnderground company, so the Reavers leave them alone
+  - Underground people are allied with the Reaver campaign's crews
+- [`Resources/Prototypes/_Mono/Roles/Jobs/Underground/godfather.yml`](../../../Resources/Prototypes/_Mono/Roles/Jobs/Underground/godfather.yml)
+  - Underground crew fly the neutral WFUnderground company, so the Reavers leave them alone
+  - Underground people are allied with the Reaver campaign's crews
 - [`Resources/Prototypes/_NF/PointsOfInterest/base.yml`](../../../Resources/Prototypes/_NF/PointsOfInterest/base.yml): the Contested Sector game mode spawns the same sector as Standard
 
 <!-- WOLFGATE-GENERATED END -->

@@ -101,3 +101,14 @@ Entries:
   id: 9
   time: '2026-10-18T21:38:34.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/538
+- author: artur-001
+  changes:
+    - type: Fix
+      message: Исправлено отображение меток на скрытых шаттлах.
+    - type: Fix
+      message: >-
+        На скрытые шаттлы нельзя навести фокус при выборе таковых в списке
+        шаттлов
+  id: 10
+  time: '2026-10-20T07:25:43.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/541

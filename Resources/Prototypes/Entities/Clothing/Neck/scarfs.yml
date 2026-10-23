@@ -9,6 +9,11 @@
     color: "#ff2c2c"
   - type: Clothing
     sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#ff2c2c"
+        map: ["scarf-style"]
   - type: Item #Forge-change-add-start new changable states with action
     inhandVisuals:
       left:
@@ -19,10 +24,13 @@
         color: "#ff2c2c"
   - type: ScarfStyleCycler
     action: ActionCycleScarfStyle
-    prefixes:
-    - ""
-    - "1"
-    - "2" #Forge-change-end
+    states:
+    - state: equipped-NECK
+      color: "#ff2c2c"
+    - state: 1-equipped-NECK
+      color: "#ff2c2c"
+    - state: 2-equipped-NECK
+      color: "#ff2c2c" #Forge-change-end
 
 - type: entity
   parent: ClothingScarfBase

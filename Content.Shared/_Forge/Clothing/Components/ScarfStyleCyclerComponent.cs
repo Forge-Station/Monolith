@@ -24,8 +24,20 @@ public sealed partial class ScarfStyleCyclerComponent : Component
     /// <summary>
     /// Prefixes cycles by action; "" = default "equipped-NECK" state.
     /// </summary>
+    [DataDefinition]
+    public partial struct ScarfStyleEntry
+    {
+        [DataField(required: true)]
+        public string State = string.Empty;
+
+        [DataField]
+        public Color? Color;
+
+        public ScarfStyleEntry() { }
+    }
+
     [DataField]
-    public List<string> Prefixes = new() { "" };
+    public List<ScarfStyleEntry> States = new();
 
     [DataField, AutoNetworkedField]
     public int CurrentIndex;

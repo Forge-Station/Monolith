@@ -1,4 +1,4 @@
-#region Forge-change
+#region Forge-change-add
 
 - type: entity
   parent: ClothingScarfBase

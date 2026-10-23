@@ -1,3 +1,5 @@
+#region Forge-change
+
 - type: entity
   parent: ClothingScarfBase
   id: ClothingNeckScarfStripedRed
@@ -39,9 +41,32 @@
   description: A stylish striped blue scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Scarfs/blue.rsi
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi #Forge-change-start
+    color: "#253c5e"
   - type: Clothing
-    sprite: Clothing/Neck/Scarfs/blue.rsi
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#253c5e"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#253c5e"
+      right:
+      - state: inhand-right
+        color: "#253c5e"
+  - type: ScarfStyleCycler
+    action: ActionCycleScarfStyle
+    states:
+    - state: equipped-NECK
+      color: "#253c5e"
+    - state: 1-equipped-NECK
+      color: "#253c5e"
+    - state: 2-equipped-NECK
+      color: "#253c5e" #Forge-change-end
 
 - type: entity
   parent: ClothingScarfBase
@@ -50,9 +75,32 @@
   description: A stylish striped green scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
   components:
   - type: Sprite
-    sprite: Clothing/Neck/Scarfs/green.rsi
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi #Forge-change-start
+    color: "#4CBB17"
   - type: Clothing
-    sprite: Clothing/Neck/Scarfs/green.rsi
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#4CBB17"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#4CBB17"
+      right:
+      - state: inhand-right
+        color: "#4CBB17"
+  - type: ScarfStyleCycler
+    action: ActionCycleScarfStyle
+    states:
+    - state: equipped-NECK
+      color: "#4CBB17"
+    - state: 1-equipped-NECK
+      color: "#4CBB17"
+    - state: 2-equipped-NECK
+      color: "#4CBB17" #Forge-change-end
 
 - type: entity
   parent: ClothingScarfBase
@@ -60,10 +108,33 @@
   name: striped black scarf
   description: A stylish striped black scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
   components:
-    - type: Sprite
-      sprite: Clothing/Neck/Scarfs/black.rsi
-    - type: Clothing
-      sprite: Clothing/Neck/Scarfs/black.rsi
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi #Forge-change-start
+    color: "#333333"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#333333"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#333333"
+      right:
+      - state: inhand-right
+        color: "#333333"
+  - type: ScarfStyleCycler
+    action: ActionCycleScarfStyle
+    states:
+    - state: equipped-NECK
+      color: "#333333"
+    - state: 1-equipped-NECK
+      color: "#333333"
+    - state: 2-equipped-NECK
+      color: "#333333" #Forge-change-end
 
 - type: entity
   parent: ClothingScarfBase
@@ -71,10 +142,33 @@
   name: striped brown scarf
   description: A stylish striped brown scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
   components:
-    - type: Sprite
-      sprite: Clothing/Neck/Scarfs/brown.rsi
-    - type: Clothing
-      sprite: Clothing/Neck/Scarfs/brown.rsi
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi #Forge-change-start
+    color: "#81613C"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#81613C"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#81613C"
+      right:
+      - state: inhand-right
+        color: "#81613C"
+  - type: ScarfStyleCycler
+    action: ActionCycleScarfStyle
+    states:
+    - state: equipped-NECK
+      color: "#81613C"
+    - state: 1-equipped-NECK
+      color: "#81613C"
+    - state: 2-equipped-NECK
+      color: "#81613C" #Forge-change-end
 
 - type: entity
   parent: ClothingScarfBase
@@ -82,10 +176,33 @@
   name: striped light blue scarf
   description: A stylish striped light blue scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
   components:
-    - type: Sprite
-      sprite: Clothing/Neck/Scarfs/lightblue.rsi
-    - type: Clothing
-      sprite: Clothing/Neck/Scarfs/lightblue.rsi
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi #Forge-change-start
+    color: "#ADD8E6"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#ADD8E6"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#ADD8E6"
+      right:
+      - state: inhand-right
+        color: "#ADD8E6"
+  - type: ScarfStyleCycler
+    action: ActionCycleScarfStyle
+    states:
+    - state: equipped-NECK
+      color: "#ADD8E6"
+    - state: 1-equipped-NECK
+      color: "#ADD8E6"
+    - state: 2-equipped-NECK
+      color: "#ADD8E6" #Forge-change-end
 
 - type: entity
   parent: ClothingScarfBase
@@ -93,10 +210,33 @@
   name: striped orange scarf
   description: A stylish striped orange scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
   components:
-    - type: Sprite
-      sprite: Clothing/Neck/Scarfs/orange.rsi
-    - type: Clothing
-      sprite: Clothing/Neck/Scarfs/orange.rsi
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi #Forge-change-start
+    color: "#FFA500"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#FFA500"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#FFA500"
+      right:
+      - state: inhand-right
+        color: "#FFA500"
+  - type: ScarfStyleCycler
+    action: ActionCycleScarfStyle
+    states:
+    - state: equipped-NECK
+      color: "#FFA500"
+    - state: 1-equipped-NECK
+      color: "#FFA500"
+    - state: 2-equipped-NECK
+      color: "#FFA500" #Forge-change-end
 
 - type: entity
   parent: ClothingScarfBase
@@ -104,10 +244,35 @@
   name: striped purple scarf
   description: A stylish striped purple scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
   components:
-    - type: Sprite
-      sprite: Clothing/Neck/Scarfs/purple.rsi
-    - type: Clothing
-      sprite: Clothing/Neck/Scarfs/purple.rsi
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi #Forge-change-start
+    color: "#B200ED"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#B200ED"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#B200ED"
+      right:
+      - state: inhand-right
+        color: "#B200ED"
+  - type: ScarfStyleCycler
+    action: ActionCycleScarfStyle
+    states:
+    - state: equipped-NECK
+      color: "#B200ED"
+    - state: 1-equipped-NECK
+      color: "#B200ED"
+    - state: 2-equipped-NECK
+      color: "#B200ED" #Forge-change-end
+
+#region Forge-change-end
 
 - type: entity
   parent: [ ClothingScarfBase ]

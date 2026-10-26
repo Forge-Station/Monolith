@@ -35,8 +35,8 @@
 - type: vendingMachineInventory
   id: CompanyVendInventoryUllman
   startingInventory:
-    ClothingOuterHardsuitUIPilot: 2
-    ClothingOuterHardsuitUllmanEngineer: 2
+    ClothingOuterHardsuitUIPilot: 4
+    ClothingOuterHardsuitUllmanEngineer: 3
     ClothingUniformJumpsuitSalvageSpecialist: 4294967295
     ClothingNeckUllimanOvercoat: 4294967295
     ClothingNeckHeavyUllimanOvercoat: 2
@@ -79,7 +79,7 @@
     ClothingUniformUSSP: 6 # Infinite
     ClothingHeadsetUSSP: 6 # Infinite
     EncryptionKeyUssp: 6
-    ClothingOuterHardsuitUsspL27: 4 # Infinite
+    # ClothingOuterHardsuitUsspL27: 4 # Infinite # Forge-change remove L27 hardsuit
     ClothingOuterHardsuitUsspL10: 4 # Infinite
     ClothingOuterHardsuitUsspM10: 4 # Infinite
     ClothingOuterCoatUSSP: 4 # Infinite

@@ -706,6 +706,16 @@ public sealed partial class MapScreen : BoxContainer
         }
     }
 
+    //Forge-Change-start
+    private bool IsIFFHide(EntityUid uid)
+    {
+        if (!_entManager.TryGetComponent<IFFComponent>(uid, out var iffComp))
+            return false;
+
+        return (iffComp.Flags & IFFFlags.Hide) != 0x0;
+    }
+    //Forge-Change-End
+
     private void OnMapObjectPress(IMapObject mapObject)
     {
         if (IsFTLBlocked())
@@ -793,7 +803,8 @@ public sealed partial class MapScreen : BoxContainer
 
         gridButton.OnPressed += args =>
         {
-            OnMapObjectPress(mapObj);
+            if (mapObj is GridMapObject gridMapObject && !IsIFFHide(gridMapObject.Entity)) // Forge-Change
+                OnMapObjectPress(mapObj);
         };
 
         if (gridContents.ChildCount > 1)

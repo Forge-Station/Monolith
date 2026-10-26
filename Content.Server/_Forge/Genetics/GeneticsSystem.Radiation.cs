@@ -26,22 +26,12 @@ public sealed partial class GeneticsSystem
 
     public void IrradiateSubject(EntityUid uid, int completionDelta = 25)
     {
-        if (!CanMutate(uid))
-        {
-            _popup.PopupEntity(Loc.GetString("genetics-steel-no-mutate"), uid);
+        if (!TryEnsureCanModifyGenes(uid))
             return;
-        }
-
-        if (_mobState.IsCritical(uid))
-        {
-            _popup.PopupEntity(Loc.GetString("genetics-irradiate-critical"), uid);
-            return;
-        }
 
         var damage = new DamageSpecifier();
-        damage.DamageDict["Radiation"] = 6;
-        damage.DamageDict["Cellular"] = 1;
-        _damageable.TryChangeDamage(uid, damage, origin: uid);
+        damage.DamageDict["Cellular"] = 7;
+        _damageable.TryChangeDamage(uid, damage, ignoreResistances: true, origin: uid);
 
         MutateRandom(uid, completionDelta, activateOnComplete: true);
     }

@@ -1539,8 +1539,26 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 9
-- proto: AlwaysPoweredLightSodium
+- proto: PoweredLightSodium
   entities:
+  - uid: 1484
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,-3.5
+      parent: 1
+  - uid: 1485
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -3.5,-9.5
+      parent: 1
+  - uid: 1486
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -1.5,32.5
+      parent: 1
   - uid: 40
     components:
     - type: Transform
@@ -10771,27 +10789,7 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -3.5,9.5
-      parent: 1
-- proto: PoweredlightSodium
-  entities:
-  - uid: 1484
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,-3.5
-      parent: 1
-  - uid: 1485
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -3.5,-9.5
-      parent: 1
-  - uid: 1486
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,32.5
-      parent: 1
+      parent: 1 
 - proto: PoweredWarmSmallLight
   entities:
   - uid: 1487

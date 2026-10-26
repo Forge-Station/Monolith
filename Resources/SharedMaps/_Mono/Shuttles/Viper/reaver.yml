@@ -2010,6 +2010,16 @@ entities:
       parent: 1
 - proto: WallPlastitanium
   entities:
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: -2.5,1.5
+      parent: 1
   - uid: 14
     components:
     - type: Transform
@@ -2262,18 +2272,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 5.5,-4.5
-      parent: 1
-- proto: WallPlastitaniumOutpost
-  entities:
-  - uid: 21
-    components:
-    - type: Transform
-      pos: 3.5,1.5
-      parent: 1
-  - uid: 22
-    components:
-    - type: Transform
-      pos: -2.5,1.5
       parent: 1
 - proto: WallReinforced
   entities:

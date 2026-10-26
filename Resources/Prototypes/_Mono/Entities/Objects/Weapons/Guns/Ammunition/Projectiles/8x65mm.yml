@@ -33,6 +33,8 @@
         Piercing: 22 # Forge-change 15->22
         Heat: 14 # Forge-change 10->14
     armorPenetration: 0 # Forge-change 0.65->0.1
+  - type: IgniteOnCollide
+    fireStacks: 2.2 # Forge-change 0.4->2.2
 
 # Forge-change-start
 - type: entity

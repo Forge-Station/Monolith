@@ -8,32 +8,32 @@
 
 # Notes:
 #
-- type: pointOfInterest
-  id: Edison
-  parent: [BasePOI, BaseRepairablePOI]
-  name: 'Электростанция Эдисон'
-  minimumDistance: 5650
-  maximumDistance: 7400
-  spawnGroup: Required
-  gridPath: /Maps/_NF/POI/edison.yml
-  addComponents:
-  - type: IFF
-    color: "#3737F8"
-  - type: SolarPoweredGrid
-    trackOnInit: true
-    doNotCull: true
+# - type: pointOfInterest #Forge-change-del-start
+#   id: Edison
+#   parent: [BasePOI, BaseRepairablePOI]
+#   name: 'Электростанция Эдисон'
+#   minimumDistance: 5650
+#   maximumDistance: 7400
+#   spawnGroup: Required
+#   gridPath: /Maps/_Forge/POI/edison.yml #Forge-change
+#   addComponents:
+#   - type: IFF
+#     color: "#3737F8"
+#   - type: SolarPoweredGrid
+#     trackOnInit: true
+#     doNotCull: true
 
-- type: gameMap
-  id: Edison
-  mapName: 'Электростанция Эдисон'
-  mapPath: /Maps/_NF/POI/edison.yml
-  minPlayers: 0
-  stations:
-    Edison:
-      stationProto: RecordsFrontierOutpost
-      components:
-        - type: StationNameSetup
-          mapNameTemplate: 'Электростанция Эдисон'
+# - type: gameMap
+#   id: Edison
+#   mapName: 'Электростанция Эдисон'
+#   mapPath: /Maps/_Forge/POI/edison.yml #Forge-change
+#   minPlayers: 0
+#   stations:
+#     Edison:
+#       stationProto: RecordsFrontierOutpost
+#       components:
+#         - type: StationNameSetup
+#           mapNameTemplate: 'Электростанция Эдисон' #Forge-change-del-end
         # - type: StationJobs
           # availableJobs:
             # Pilot: [ 0, 0 ]

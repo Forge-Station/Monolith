@@ -47,7 +47,7 @@
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: StaticPrice
-    price: 1
+    price: 0.05 # Forge-change: 1 -> 0.05
   - type: Destructible
     thresholds:
     - trigger:
@@ -122,7 +122,7 @@
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: StaticPrice
-    price: 1
+    price: 0.05 # Forge-change: 1 -> 0.05
   - type: Destructible
     thresholds:
     - trigger:
@@ -217,7 +217,7 @@
       map: ["enum.AmmoVisualLayers.Base"]
   - type: Appearance
   - type: StaticPrice
-    price: 1
+    price: 0.05 # Forge-change: 1 -> 0.05
   - type: Destructible
     thresholds:
     - trigger:

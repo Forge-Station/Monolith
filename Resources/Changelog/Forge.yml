@@ -1,0 +1,114 @@
+Entries:
+- author: teasum
+  changes:
+    - type: Add
+      message: Портировал наночат и часть улучшений для него
+  id: 1
+  time: '2026-10-16T20:44:28.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/494
+- author: teasum
+  changes:
+    - type: Fix
+      message: пофиксил фолсу
+    - type: Fix
+      message: пофиксил мапчекер
+  id: 2
+  time: '2026-10-16T21:31:47.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/528
+- author: artur-001
+  changes:
+    - type: Tweak
+      message: Обновление блюспейс передатчика и приёмника энергии.
+  id: 3
+  time: '2026-10-16T22:35:50.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/497
+- author: mersen-tyn
+  changes:
+    - type: Fix
+      message: >-
+        Дроны при уничтожении больше не вываливают весь лут. Остаются ядро и
+        чёрный ящик.
+    - type: Fix
+      message: Баллистические магазины перезаряжаются и не ломают счётчик патронов.
+    - type: Tweak
+      message: >-
+        Оборудование РнД получает технологии только после разрешения на сервере.
+        Сервер закрыт замком шаттла.
+    - type: Tweak
+      message: >-
+        В консоли исследований появились поиск, сворачиваемые категории и
+        нормальное дерево.
+    - type: Tweak
+      message: >-
+        Руды и листы рядом на полу сами сливаются. Крупный стак занимает больше
+        места в сумке, а от 301 штук замедляет и требует обе руки.
+    - type: Fix
+      message: >-
+        Поправлены ловушка яиц и сорняки ксеносов, омоложение, сканер ДНК и
+        маркеры шаттлов.
+  id: 4
+  time: '2026-10-16T22:44:32.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/532
+- author: Fallen-Seraphim
+  changes:
+    - type: Add
+      message: >-
+        Добавлен Нейротоксин кобры, жидкий и газообразный N-611, N-611-P, A-517
+        и V-903. (Нейро-паралитические газы/препараты в жидком и газообразном
+        виде)
+    - type: Tweak
+      message: >-
+        Кобра не наносит урон ядами, только механический и нейротоксин в вашу
+        кровь.
+  id: 5
+  time: '2026-10-16T23:18:35.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/517
+- author: mersen-tyn
+  changes:
+    - type: Fix
+      message: >-
+        подправил вылеты от столкновений шаттлов, теперь должно работать
+        корректно и правильно (ну если что - пингуйте меня, вооот-с)
+  id: 6
+  time: '2026-10-17T22:28:07.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/536
+- author: Fallen-Seraphim
+  changes:
+    - type: Add
+      message: >-
+        Добавлен синтетический нейротоксин - аналог нейротоксина кобры, но без
+        бега. Добавлен один альтернативный рецепт.
+    - type: Tweak
+      message: Увеличен урон нейротоксинов. Часть рецептов изменены.
+    - type: Fix
+      message: >-
+        Воздушная сигнализация теперь знает что делать. Скрубберы теперь могут
+        его собирать. 
+  id: 7
+  time: '2026-10-18T18:25:28.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/537
+- author: KoT-Corvax
+  changes:
+    - type: Fix
+      message: Поправлены допущенные опечатки в гайдбуках.
+  id: 8
+  time: '2026-10-18T18:26:35.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/539
+- author: vsixst
+  changes:
+    - type: Fix
+      message: Дворф больше не может опьянеть, ведь дворф и есть пьянство.
+  id: 9
+  time: '2026-10-18T21:38:34.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/538
+- author: artur-001
+  changes:
+    - type: Fix
+      message: Исправлено отображение меток на скрытых шаттлах.
+    - type: Fix
+      message: >-
+        На скрытые шаттлы нельзя навести фокус при выборе таковых в списке
+        шаттлов
+  id: 10
+  time: '2026-10-20T07:25:43.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/541

@@ -71,7 +71,7 @@ tsf-o6 = Полковник
 # mmc-liason = Corporate Liason
 
 ### CC/MD ranks
-cc-judge = Охраник НТ
+cc-judge = Охранник НТ
 cc-stc = Диспетчер
 cc-overseer = Представитель НТ
 md-doc = Директор TTI

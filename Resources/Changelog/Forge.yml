@@ -112,3 +112,10 @@ Entries:
   id: 10
   time: '2026-10-20T07:25:43.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/541
+- author: artur-001
+  changes:
+    - type: Fix
+      message: Опечатка должности охранника НТ в чате.
+  id: 11
+  time: '2026-10-26T17:44:20.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/548

@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: superbrothers/close-pull-request@v3
       with:
-        comment: "Спасибо за вклад в Forge-station! Похоже, что ты создал пулл-реквест из master, main или другой основной ветки разработки. Это то,[чего стоит избегать](https://jmeridth.com/posts/do-not-issue-pull-requests-from-your-master-branch/). \n \n Мы предлагаем тебе посмотреть [нашу документацию по использованию гита](https://docs.spacestation14.com/en/general-development/setup/git-for-the-ss14-developer.html). \n \n Ты можешь переместить свою работу в другую ветку [этими командами](https://ohshitgit.com/#accidental-commit-master). После, тебе следует пересоздать пулл-реквест используя новую ветку и сбрось основную ветку. \n \n Этот пулл-реквест будет автоматически закрыт."
+        comment: "Спасибо за вклад в Forge-station! Похоже, что ты создал пулл-реквест из master, main или другой основной ветки разработки. Это то, [чего стоит избегать](https://jmeridth.com/posts/do-not-issue-pull-requests-from-your-master-branch/). \n \n Тебе стоит посмотреть [нашу документацию по использованию гита](https://docs.spacestation14.com/en/general-development/setup/git-for-the-ss14-developer.html). \n \n Ты можешь переместить свою работу в другую ветку [этими командами](https://ohshitgit.com/#accidental-commit-master). После, тебе следует пересоздать пулл-реквест используя новую ветку и сбрось основную ветку. \n \n Этот пулл-реквест будет автоматически закрыт."
 
     # If you prefer to just comment on the pr and not close it, uncomment the below and comment the above
 

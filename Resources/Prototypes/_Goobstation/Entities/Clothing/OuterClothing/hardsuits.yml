@@ -57,7 +57,7 @@
   id: ClothingOuterHardsuitCybersunStealth
   suffix: stealth
   name: stealth hardsuit
-  description: A hardsuit with stealth plating for operations, the shielding doesn't work while you're moving though! Needs the helmet on to finish the stealth field.
+  description: A hardsuit with stealth plating for covert operations. The field can be switched on and off from the helmet, which it needs to work, and it fades while you're moving. # WOLFGATE(ArmorBalance): grammar pass.
   components:
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/cybersunstealth.rsi
@@ -75,7 +75,7 @@
       coefficients:
         Blunt: 0.7
         Slash: 0.7
-        Piercing: 0.75
+        Piercing: 0.7 # WOLFGATE(Stealth): Monolith#4845's stealth suit piercing.
         Heat: 0.5
         Radiation: 0.2
         Caustic: 0.3

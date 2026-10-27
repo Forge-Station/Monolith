@@ -45,10 +45,11 @@
     coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        # WOLFGATE(ArmorBalance): helmet tier rule, T2 0.9 and T3 0.85.
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
   - type: HideLayerClothing
     slots:
     - Hair
@@ -60,7 +61,7 @@
   parent: [ClothingHeadHelmetHardsuitSyndieElite, ShowSecurityIcons]
   id: ClothingHeadHelmetHardsuitAshenElite
   name: PDV CV-53 combat tacsuit helmet
-  description: Based off of the CV-32 hardsuit, this tacsuit sacrifices heavy armor plates for environmental protection, and an advanced NVD suite.
+  description: Based on the CV-32 hardsuit, this tacsuit helmet trades heavy armor plates for environmental protection and an advanced NVD suite. # WOLFGATE(ArmorBalance): grammar pass.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -81,7 +82,7 @@
   parent: [ClothingHeadHelmetHardsuitSyndieElite, ShowSecurityIcons]
   id: ClothingHeadHelmetHardsuitVizier
   name: PDV CV-67 combat hardsuit helmet
-  description: An adorned tacsuit designed with an imperfect nanolaminate composition. High maneuverability, sturdy armor.
+  description: An adorned tacsuit helmet with an imperfect nanolaminate composition. High maneuverability, sturdy armor. # WOLFGATE(ArmorBalance): grammar pass.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -105,6 +106,15 @@
   description: A combat hardsuit helmet designed by the Phaethon Dynasty for Tarkhans. A full gen-4 NVD suite is installed.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorBalance): helmet tier rule, T2 0.9 and T3 0.85.
+  - type: Armor
+    coverage: [Head]
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
   - type: Sprite
     sprite: _Mono/Clothing/Head/Hardsuits/basilisk.rsi
   - type: Clothing

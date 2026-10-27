@@ -4,6 +4,12 @@
   name: M82c hardsuit
   description: A hardsuit issued to marines operating in low-pressure and high-risk environments. Specialized in bullet protection.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c.rsi
   - type: Item
@@ -47,8 +53,16 @@
   parent: [ ClothingOuterHardsuitM82c, BaseFactionGearTSFT2 ]
   id: ClothingOuterHardsuitM82b
   name: M82b hardsuit
-  description: Corpsman variant of the M82c outfitted with caustic and radiological shielding. Some of the blunt-absorbent gel layer is sacrificed for the NBC protection.
+  description: A corpsman variant of the M82c, outfitted with caustic and radiological shielding. Some of the blunt-absorbent gel layer is sacrificed for the NBC protection. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): sealed spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-sealed-spall-examine
+    blocks:
+    - WFWolfmedChemicalBurnWound
+    - WFWolfmedFrostbiteWound
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82b.rsi
   - type: Clothing
@@ -74,8 +88,15 @@
   parent: [ClothingOuterHardsuitBase, BaseFactionGearTSFT3]
   id: ClothingOuterHardsuitM86
   name: M86 Mk.3(R) hardsuit
-  description: An armored hardsuit, designed to be an upgrade for the M82 series. The extra general armor gives it significant weight to move around.
+  description: An armored hardsuit, designed as an upgrade to the M82 series. The extra armor makes it heavy to move around in. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): bone plating.
+  - type: WFWoundWard
+    examine: wf-armor-spec-bone-plating-examine
+    hardens:
+      InternalBleedingWound: 2
+      WFWolfmedCrushInjuryWound: 2
+      WFWolfmedDislocationWound: 2
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/m86.rsi
   - type: Item
@@ -122,6 +143,11 @@
   name: TSFMC M92 colonel tacsuit
   description: A heavy, gilded tacsuit, stripped of its shield but now capable of taking a lot of physical damage. Usually assigned to commanding officers of TSF flagships.
   components:
+  # WOLFGATE(ArmorSpecialization): concussion ward.
+  - type: WFWoundWard
+    examine: wf-armor-spec-concussion-ward-examine
+    blocks:
+    - WFWolfmedConcussionWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/tsfmc_colonel.rsi # Mono
   - type: Clothing
@@ -142,14 +168,14 @@
     modifiers:
       coefficients:
         # WOLFGATE(ArmorBalance): sidegrade pass.
-        Blunt: 0.45
-        Slash: 0.45
-        Piercing: 0.45
-        Heat: 0.65
+        Blunt: 0.35
+        Slash: 0.35
+        Piercing: 0.35
+        Heat: 0.45
         Radiation: 0.4
         Caustic: 0.5
   - type: ClothingSpeedModifier # Mono - Armor Value Changes
-    walkModifier: 0.9
+    walkModifier: 0.95
     sprintModifier: 1
   - type: StaminaDamageResistance # Mono - Stamres
     coefficient: 0.35
@@ -160,7 +186,7 @@
   parent: [ClothingOuterHardsuitBaseNoPlateholder, MonoEnergyShieldClothing, BaseFactionGearTSFT3 ] # Jugger Suit
   id: ClothingOuterHardsuitNfsdExperimental
   name: TSFMC M92-X tacsuit
-  description: An experimental modification of the M92 tacsuit for spec-ops units of the TSFMC. Durable, and comes with an integrated soft-shield along with numerous gadgets at the cost of insulation and solid armor. # WOLFGATE(SoftShield): soft shield
+  description: An experimental modification of the M92 tacsuit for TSFMC spec-ops units. Durable, with an integrated soft shield and numerous gadgets, at the cost of insulation and solid armor. # WOLFGATE(SoftShield): soft shield
   components:
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/tsfmc_experimental.rsi # Mono
@@ -195,8 +221,8 @@
         Radiation: 0.5
         Caustic: 0.8
   - type: ClothingSpeedModifier # Mono - Armor Value Changes
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 1.15
+    sprintModifier: 1.15
   - type: HeldSpeedModifier
   - type: FactionClothing
     faction: NanoTrasen
@@ -257,6 +283,12 @@
   name: M86 Mk.4(B) hardsuit
   description: A limited-production redesign proposal for the M86 Mk.3(R), trading the Mk.3's bulk for lighter plating and a faster stride. # WOLFGATE(ArmorBalance): no shield, faster.
   components:
+  # WOLFGATE(ArmorSpecialization): shock absorbers.
+  - type: WFWoundWard
+    examine: wf-armor-spec-shock-absorbers-examine
+    hardens:
+      WFWolfmedConcussionWound: 2
+      WFWolfmedOrganContusionWound: 2
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/m86_mk4.rsi
   - type: Clothing

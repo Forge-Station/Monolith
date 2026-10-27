@@ -91,4 +91,49 @@ public sealed class WFSoftShieldTest
 
         await pair.CleanReturnAsync();
     }
+
+    [Test]
+    public async Task SoftShieldStopsArterialCuts()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entities = server.ResolveDependency<IEntityManager>();
+        var maps = entities.System<SharedMapSystem>();
+        var inventory = entities.System<InventorySystem>();
+        var toggle = entities.System<ItemToggleSystem>();
+        var damageable = entities.System<DamageableSystem>();
+
+        EntityUid human = default;
+        await server.WaitAssertion(() =>
+        {
+            maps.CreateMap(out var mapId);
+            var coords = new MapCoordinates(0, 0, mapId);
+            human = entities.SpawnEntity("MobHuman", coords);
+            var suit = entities.SpawnEntity("ClothingOuterHardsuitAshenElite", coords);
+            Assert.That(inventory.TryEquip(human, suit, "outerClothing", silent: true, force: true), Is.True);
+            Assert.That(toggle.TryActivate(suit, human, predicted: false), Is.True);
+        });
+
+        await server.WaitRunTicks(300);
+
+        await server.WaitAssertion(() =>
+        {
+            // Well past the slash artery rule's 22 even after the field and the suit take their share.
+            var hit = new DamageSpecifier();
+            hit.DamageDict["Slash"] = FixedPoint2.New(150);
+            damageable.TryChangeDamage(human, hit, origin: human,
+                targetPart: Content.Shared._Shitmed.Targeting.TargetBodyPart.LeftArm);
+
+            var query = entities.EntityQueryEnumerator<WoundComponent>();
+            while (query.MoveNext(out _, out var wound))
+            {
+                if (entities.GetComponent<BodyPartComponent>(wound.HoldingPart).Body != human)
+                    continue;
+                Assert.That(wound.Prototype.ToString(), Is.Not.EqualTo("WFWolfmedArterialBleedWound"),
+                    "An active soft shield must not let a hit cut an artery.");
+            }
+        });
+
+        await pair.CleanReturnAsync();
+    }
 }

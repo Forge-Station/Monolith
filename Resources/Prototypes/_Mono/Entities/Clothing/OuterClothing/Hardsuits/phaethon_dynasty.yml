@@ -2,8 +2,10 @@
   parent: [ ClothingOuterHardsuitBase, BaseFactionGearPDVT2 ]
   id: ClothingOuterHardsuitPirateScaf
   name: PDV SCAF hardsuit
-  description: An old SCAF suit painted in an PDV tan color scheme. The armor feels degraded, but lighter.
+  description: An old SCAF suit painted in a PDV tan color scheme. The armor feels degraded, but lighter. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): ablative coat.
+  - type: WFAblativeCoat
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/scaf_pirate.rsi
   - type: Item
@@ -50,8 +52,14 @@
   parent: [ ClothingOuterHardsuitSyndie, BaseFactionGearPDVT2 ]
   id: ClothingOuterHardsuitAshen
   name: PDV CV-32 combat hardsuit
-  description: A combat hardsuit designed by the Phaethon Dynasty. A heavier but still general-purpose hardsuit. Sacrifices most of its protection for reinforced ballistic platings.
+  description: A combat hardsuit designed by the Phaethon Dynasty. Heavier, but still general-purpose, it sacrifices some of its protection for reinforced ballistic plating. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/syndicate.rsi
   - type: Clothing
@@ -89,8 +97,10 @@
   parent: [ ClothingOuterHardsuitBase, BaseFactionGearPDVT3 ]
   id: ClothingOuterHardsuitPDVMedic
   name: PDV CV-82 combat tacsuit
-  description: Fast combat hardsuit designed by the Phaethon Dynasty. The armor features various reinforced plating in vital areas.
+  description: A fast combat hardsuit designed by the Phaethon Dynasty. The armor features reinforced plating in vital areas. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): auto-tourniquet.
+  - type: WFAutoTourniquet
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/pdv_medic.rsi
   - type: Item
@@ -138,6 +148,12 @@
   name: PDV CV-67 combat tacsuit
   description: An adorned tacsuit designed with an imperfect nanolaminate composition. High maneuverability, sturdy armor.
   components:
+  # WOLFGATE(ArmorSpecialization): commander's weave.
+  - type: WFWoundWard
+    examine: wf-armor-spec-commander-examine
+    blocks:
+    - WFWolfmedConcussionWound
+    - WFWolfmedArterialBleedWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/pdv_vizier.rsi
   - type: Clothing
@@ -158,7 +174,7 @@
   parent: [ ClothingOuterHardsuitBaseNoPlateholder, MonoEnergyShieldClothing ]
   id: ClothingOuterHardsuitAshenElite
   name: PDV CV-53 combat tacsuit
-  description: Originally based off of the CV-32 hardsuit, the CV-53 tacsuit sacrifices conventional armor plating for environmental protection, and a rechargeable soft-shield. # WOLFGATE(SoftShield): soft shield
+  description: Originally based on the CV-32 hardsuit, the CV-53 tacsuit sacrifices conventional armor plating for environmental protection and a rechargeable soft shield. # WOLFGATE(SoftShield): soft shield
   components:
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/syndieelite.rsi
@@ -249,8 +265,11 @@
   parent: ClothingOuterHardsuitAshen
   id: ClothingOuterHardsuitTarkhan
   name: "PDV CV-280 'Basilisk' combat hardsuit"
-  description: A combat hardsuit designed by the Phaethon Dynasty for Tarkhans. Utilizes an imperfect nanolaminate composition like the CV-67 to save weight, and an installed hydraulic rig for more mobility, and painted in a royal Tarkhan white palette. A rare sight.
+  description: A combat hardsuit designed by the Phaethon Dynasty for Tarkhans. Like the CV-67, it uses an imperfect nanolaminate composition to save weight, and a hydraulic rig adds mobility. Painted in the royal Tarkhan white palette, it is a rare sight. # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): limb lock.
+  - type: WFLimbLock
+    breakthrough: 40
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/basilisk.rsi
   - type: Clothing

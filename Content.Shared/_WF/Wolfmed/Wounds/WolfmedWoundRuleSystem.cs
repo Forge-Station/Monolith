@@ -26,6 +26,7 @@ public sealed class WolfmedWoundRuleSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private WolfmedEmbeddedObjectSystem _embedded = default!;
     [Dependency] private WoundSystem _wounds = default!;
+    [Dependency] private WolfmedBleedGateSystem _bleedGate = default!;
     [Dependency] private WolfmedChemicalBurnSystem _chemicalBurns = default!; // M5 (P21)
 
     /// <summary>Damage types explosions scale the severity of, mirroring WoundSystem.HandlePartDamageApplied.</summary>
@@ -125,7 +126,9 @@ public sealed class WolfmedWoundRuleSystem : EntitySystem
         // M5 (P21): acid residue still on the skin deepens the chemical burn it came from, never a plain burn.
         if (_chemicalBurns.ResidueTarget is { } residue && residue.Part == part.Owner)
         {
-            _wounds.CreateOrMergeWound(part.AsNullable(), residue.Wound, args.Amount);
+            // A sealed layer keeps residue off covered skin as well as fresh acid.
+            if (!ArmorRefuses(part, residue.Wound, args.Amount, FixedPoint2.Zero))
+                _wounds.CreateOrMergeWound(part.AsNullable(), residue.Wound, args.Amount);
             args.SuppressDefault = true;
             return;
         }
@@ -139,7 +142,7 @@ public sealed class WolfmedWoundRuleSystem : EntitySystem
 
         foreach (var rule in EnumerateRules(args.DamageType))
         {
-            if (!Matches(rule, part, args.Amount, cause) ||
+            if (!Matches(rule, part, args.Amount, cause, multiplier) ||
                 rule.Chance < 1f && !Roll(Math.Clamp(rule.Chance, 0f, 1f)))
                 continue;
 
@@ -173,7 +176,8 @@ public sealed class WolfmedWoundRuleSystem : EntitySystem
         WolfmedWoundRulePrototype rule,
         Entity<WoundableComponent> part,
         FixedPoint2 amount,
-        WolfmedWoundCause cause)
+        WolfmedWoundCause cause,
+        float severityMultiplier = 1f)
     {
         if (amount < rule.MinDamage || rule.MaxDamage is { } max && amount > max)
             return false;
@@ -190,7 +194,28 @@ public sealed class WolfmedWoundRuleSystem : EntitySystem
              !profile.TreatmentCapabilities.Overlaps(rule.Capabilities)))
             return false;
 
+        // A hit that may not open a bleed may not cut an artery either.
+        if (_prototypes.TryIndex(rule.Wound, out var wound) &&
+            wound.TryGetBehavior(FixedPoint2.Max(amount * rule.SeverityMultiplier * severityMultiplier, rule.MinSeverity),
+                out WolfmedArterialBleedBehavior _) &&
+            !_bleedGate.PartCanStartBleeding(part))
+            return false;
+
+        if (ArmorRefuses(part, rule.Wound, amount, rule.MinDamage))
+            return false;
+
         return _wounds.CanCreateWound(part.AsNullable(), rule.Wound);
+    }
+
+    /// <summary>Whether worn armour refuses this wound, or needs a bigger hit than <paramref name="amount"/> for it.</summary>
+    private bool ArmorRefuses(EntityUid part, ProtoId<WoundPrototype> wound, FixedPoint2 amount, FixedPoint2 minDamage)
+    {
+        if (!TryComp(part, out BodyPartComponent? attached) || attached.Body is not { } body)
+            return false;
+
+        var attempt = new WolfmedWoundRuleAttemptEvent(part, wound, amount);
+        RaiseLocalEvent(body, ref attempt);
+        return attempt.Cancelled || amount < minDamage * attempt.MinDamageMultiplier;
     }
 
     private void Apply(WolfmedWoundRulePrototype rule, Entity<WoundableComponent> part, FixedPoint2 severity)

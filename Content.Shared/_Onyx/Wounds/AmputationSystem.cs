@@ -184,11 +184,23 @@ public sealed partial class AmputationSystem : EntitySystem
             var minimum = wf.DismembermentFinishingDamage.GetValueOrDefault(type,
                 host.DefaultDismembermentFinishingDamage.GetValueOrDefault(type));
             if (minimum > FixedPoint2.Zero && amount >= minimum)
-                return true;
+                // WOLFGATE(Wolfmed) START: worn armour with a limb lock may keep the limb on.
+                // return true;
+                return WfMaySever(body, part, amount);
+                // WOLFGATE END
         }
 
         return false;
     }
+
+    // WOLFGATE(Wolfmed) START: asked only once a hit would take the limb, so ordinary hits skip the inventory relay.
+    private bool WfMaySever(EntityUid body, EntityUid part, FixedPoint2 finishing)
+    {
+        var ev = new Content.Shared._WF.Wolfmed.Wounds.WolfmedSeverAttemptEvent(part, finishing);
+        RaiseLocalEvent(body, ref ev);
+        return !ev.Cancelled;
+    }
+    // WOLFGATE END
 
     private bool TryExplosionAmputate(
         EntityUid body,

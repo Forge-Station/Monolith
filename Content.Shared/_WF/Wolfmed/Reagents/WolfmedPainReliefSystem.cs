@@ -51,7 +51,9 @@ public sealed class WolfmedPainReliefSystem : EntitySystem
     /// <summary>Pain units discounted from the Downed test. Every tier counts here.</summary>
     public float GetRelief(Entity<WolfmedPainReliefComponent?> body)
     {
-        return Resolve(body, ref body.Comp, false) ? body.Comp.Relief : 0f;
+        var armor = new Content.Shared._WF.Wolfmed.Wounds.WolfmedArmorPainReliefEvent();
+        RaiseLocalEvent(body, ref armor);
+        return (Resolve(body, ref body.Comp, false) ? body.Comp.Relief : 0f) + armor.Relief;
     }
 
     /// <summary>Pain units discounted from the Unconscious test. A weak painkiller never reaches this.</summary>

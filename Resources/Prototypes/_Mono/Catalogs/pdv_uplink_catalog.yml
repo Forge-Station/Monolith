@@ -1354,7 +1354,7 @@
   description: uplink-pirate-cv32-hardsuit-desc
   productEntity: ClothingOuterHardsuitAshen
   cost:
-    Doubloon: 35 # WOLFGATE(ArmorBalance): PDV suits cannot be crafted.
+    Doubloon: 45 # WOLFGATE(ArmorBalance): Monolith's price; PDV suits are printable again.
   categories:
   - UplinkPirateEquipment
   conditions:
@@ -1369,7 +1369,7 @@
   description: uplink-pirate-cv53-tacsuit-desc
   productEntity: ClothingOuterHardsuitAshenElite
   cost:
-    Doubloon: 35 # WOLFGATE(ArmorBalance): PDV suits cannot be crafted.
+    Doubloon: 45 # WOLFGATE(ArmorBalance): Monolith's price; PDV suits are printable again.
   categories:
   - UplinkPirateEquipment
   conditions:
@@ -1385,7 +1385,7 @@
   description: uplink-pirate-cv82-tacsuit-desc
   productEntity: ClothingOuterHardsuitPDVMedic
   cost:
-    Doubloon: 80 # WOLFGATE(ArmorBalance): PDV suits cannot be crafted.
+    Doubloon: 90
   categories:
   - UplinkPirateEquipment
   conditions:

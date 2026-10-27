@@ -64,9 +64,26 @@
     - type: Stealth
       enabledOnDeath: false
       enabledOnCrit: false
-      minVisibility: 0.15 # Mono: Changed to be not fully invisible
-      maxVisibility: 0.6 # Mono: Changed to be partially invisible
+      # WOLFGATE(Stealth) START: full invisibility, as Monolith#4845 had it.
+      # minVisibility: 0.15 # Mono: Changed to be not fully invisible
+      # maxVisibility: 0.6 # Mono: Changed to be partially invisible
+      # WOLFGATE END
     - type: StealthOnMove
       passiveVisibilityRate: -0.4
       movementVisibilityRate: 0.4
+  # WOLFGATE(Stealth): stealth toggle, the CV-53 helmet's night vision and a thermal pulse.
+  - type: WFStealthToggle
+  - type: NightVision # Gen 4 quadtube
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 4
+    viewCircleSpacing: 260
+    phosphorColor: "#41D7D9"
+    lightingColor: "#FFFFFF32"
+  - type: ThermalVision
+    pulseTime: 1
+    isEquipment: true
+    toggleAction: PulseThermalVision
 

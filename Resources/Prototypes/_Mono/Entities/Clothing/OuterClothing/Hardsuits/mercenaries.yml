@@ -46,8 +46,14 @@
   parent: [ClothingOuterHardsuitBase, ClothingFlightProfileMedium, ShowSecurityIcons] # Forge-change add ClothingFlightProfile
   id: ClothingOuterHardsuitScaf
   name: SCAF hardsuit
-  description: A kevlar reinforced combat hardsuit. Old yet sturdy nonetheless. # mono - not green anymore cuh
+  description: A Kevlar-reinforced combat hardsuit. Old, yet sturdy nonetheless. # mono - not green anymore cuh # WOLFGATE(ArmorBalance): grammar pass.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Hardsuits/scaf.rsi
   - type: Clothing

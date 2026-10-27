@@ -1,1 +1,1 @@
-wf-soft-shield-examine = [color=#4f94ad]Soft shield:[/color] hits pass through, but it soaks {$percent}% of their {$group} damage and stops the wearer bleeding while it is up.
+wf-soft-shield-examine = [color=#4f94ad]Soft Shield:[/color] Hits pass through the field, but it absorbs {$percent}% of their {$group} damage and stops you from bleeding while it's up. Burns pass straight through.

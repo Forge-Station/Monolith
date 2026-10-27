@@ -77,7 +77,7 @@ public abstract partial class SharedStealthSystem : EntitySystem
         }
         else
         {
-            component.Enabled = true;
+            component.Enabled = !HasComp<Content.Shared._WF.Stealth.WFStealthSuppressedComponent>(uid); // WOLFGATE(Stealth): a wearer who switched stealth off stays visible on revival.
         }
         SetEnabled(uid, component.Enabled, component);// to update the sprite;
         Dirty(uid, component);

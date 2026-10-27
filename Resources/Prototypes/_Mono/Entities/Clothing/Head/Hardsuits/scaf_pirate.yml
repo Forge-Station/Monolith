@@ -2,7 +2,7 @@
   parent: [ClothingHeadHardsuitBase, ShowSecurityIcons, ClothingHeadSuitWithLightBase] # Forge-Change-delete: BaseFactionGearPDVT2
   id: ClothingHeadHelmetHardsuitPirateScaf
   name: PDV SCAF hardsuit helmet
-  description: An old SCAF suit painted in an PDV tan color scheme. Has been outfitted with a thermal pulse scanner.
+  description: An old SCAF helmet painted in a PDV tan color scheme. It has been outfitted with a thermal pulse scanner. # WOLFGATE(ArmorBalance): grammar pass.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -24,10 +24,11 @@
     coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        # WOLFGATE(ArmorBalance): helmet tier rule, T2 0.9 and T3 0.85.
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
   - type: HideLayerClothing
     slots:
     - Hair

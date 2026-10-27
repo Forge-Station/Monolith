@@ -58,6 +58,10 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, RefreshWeightlessModifiersEvent>(RefRelayInventoryEvent); // Mono
         SubscribeLocalEvent<InventoryComponent, GetExplosionResistanceEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedBleedAttemptEvent>(RefRelayInventoryEvent); // WOLFGATE(Wolfmed): worn items may refuse a bleed.
+        // WOLFGATE(Wolfmed): worn items may refuse a wound or a lost limb, or dull pain.
+        SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedWoundRuleAttemptEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedSeverAttemptEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedArmorPainReliefEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, IsWeightlessEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSpeedModifierContactCapEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSlowedOverSlipperyModifierEvent>(RefRelayInventoryEvent);

@@ -276,14 +276,24 @@ public sealed partial class WoundSystem : EntitySystem
                     internalBleeding = AddComp<WoundInternalBleedingComponent>(wound);
             }
 
-            if (internalBleeding != null)
+            // WOLFGATE(Wolfmed) START: a refused bleed doesn't deepen an internal one either; it may still ease off.
+            // if (internalBleeding != null)
+            // {
+            //     internalBleeding.Rate = internalBehavior.Rate;
+            //     internalBleeding.Severity = wound.Comp.State == WoundState.Open
+            //         ? wound.Comp.Severity
+            //         : FixedPoint2.Zero;
+            //     Dirty(wound, internalBleeding);
+            // }
+            var internalTarget = wound.Comp.State == WoundState.Open ? wound.Comp.Severity : FixedPoint2.Zero;
+            if (internalBleeding != null &&
+                (internalTarget <= internalBleeding.Severity || _wfBleedGate.PartCanStartBleeding(wound.Comp.HoldingPart)))
             {
                 internalBleeding.Rate = internalBehavior.Rate;
-                internalBleeding.Severity = wound.Comp.State == WoundState.Open
-                    ? wound.Comp.Severity
-                    : FixedPoint2.Zero;
+                internalBleeding.Severity = internalTarget;
                 Dirty(wound, internalBleeding);
             }
+            // WOLFGATE END
         }
         else
             RemComp<WoundInternalBleedingComponent>(wound);

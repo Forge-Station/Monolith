@@ -32,23 +32,6 @@ public sealed class WFNewbieWelcomeTest : GameTest
         return result;
     }
 
-    /// <summary>
-    /// Ticks until a welcome window is open or about ten seconds of game time and three of real time pass. The greeting waits for the player's
-    /// playtime, which loads from the database in its own time on a busy runner.
-    /// </summary>
-    private async Task<(int Welcome, int Crew)> WaitForWelcome()
-    {
-        var open = await OpenWindows();
-        for (var i = 0; i < 60 && open.Welcome == 0; i++)
-        {
-            await RunTicksSync(5);
-            await Task.Delay(50);
-            open = await OpenWindows();
-        }
-
-        return open;
-    }
-
     private async Task CloseAll()
     {
         await Client.WaitPost(() =>
@@ -78,17 +61,11 @@ public sealed class WFNewbieWelcomeTest : GameTest
         await OverrideCVar(Side.Client, WFNewbieCVars.ShowWelcome, true);
         await CloseAll();
 
-        // Far above any playtime the pooled session may have built up, so it counts as fresh, and a pooled server may
-        // already have greeted this player.
-        await OverrideCVar(Side.Server, WFNewbieCVars.Hours, 100000f);
-        await OverrideCVar(Side.Server, WFNewbieCVars.FreshHours, 100000f);
-        await Server.WaitPost(() => SEntMan.System<Content.Server._WF.Newbie.WFNewbieWelcomeSystem>().Forget(ServerSession!.UserId));
-
         // The pool keeps popups off; turning them on greets this fresh player once.
         await OverrideCVar(Side.Server, WFNewbieCVars.Welcome, true);
         await Server.WaitPost(() => SEntMan.System<Content.Server._WF.Newbie.WFNewbieWelcomeSystem>().GreetAll());
         await RunTicksSync(5);
-        var first = await WaitForWelcome();
+        var first = await OpenWindows();
 
         await Server.WaitPost(() => SEntMan.System<Content.Server._WF.Newbie.WFNewbieWelcomeSystem>().GreetAll());
         await RunTicksSync(5);

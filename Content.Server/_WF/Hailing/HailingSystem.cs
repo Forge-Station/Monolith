@@ -6,9 +6,11 @@ using Content.Server._WF.ShipPa;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Mono.Detection;
 using Content.Shared._WF.Hailing;
+using Content.Shared._WF.Newbie;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Shuttles.Components;
 using Robust.Server.GameObjects;
@@ -27,7 +29,7 @@ namespace Content.Server._WF.Hailing;
 /// Ship-to-ship hailing from the shuttle console. One ship rings another's consoles and pages its PA, and
 /// whoever answers gets the caller on a screen with a chat line between the two helms.
 /// </summary>
-public sealed class HailingSystem : EntitySystem
+public sealed partial class HailingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
@@ -40,6 +42,8 @@ public sealed class HailingSystem : EntitySystem
     [Dependency] private DetectionSystem _detection = default!;
     [Dependency] private ShipPaSystem _pa = default!;
     [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private WFNewbieSystem _newbie = default!;
 
     /// <summary>Lines of a call each console keeps.</summary>
     public const int MaxLog = 60;
@@ -78,6 +82,9 @@ public sealed class HailingSystem : EntitySystem
     private readonly Dictionary<EntityUid, TimeSpan> _nextPage = new();
 
     private readonly List<(EntityUid Console, HailEndReason Reason, HailEndReason PeerReason)> _ending = new();
+
+    /// <summary>Ends of automated consoles waiting to be announced once the hail code has finished.</summary>
+    private readonly List<HailCallEndedEvent> _stopped = new();
     private readonly List<EntityUid> _consoles = new();
     private readonly List<EntityUid> _expired = new();
     private readonly HashSet<EntityUid> _feed = new();
@@ -91,6 +98,8 @@ public sealed class HailingSystem : EntitySystem
         Subs.CVar(_cfg, HailingCVars.RingTimeout, value => _ringTimeout = value, true);
         Subs.CVar(_cfg, HailingCVars.RetryDelay, value => _retryDelay = value, true);
 
+        InitializeServices();
+
         SubscribeLocalEvent<HailConsoleComponent, ComponentShutdown>(OnShutdown);
 
         // ShuttleConsoleSystem owns the open and close subscriptions for these consoles; only new message
@@ -102,6 +111,7 @@ public sealed class HailingSystem : EntitySystem
             subs.Event<HailAnswerMessage>(OnAnswer);
             subs.Event<HailEndMessage>(OnEnd);
             subs.Event<HailSayMessage>(OnSay);
+            subs.Event<HailChooseMessage>(OnChoose);
         });
     }
 
@@ -152,6 +162,11 @@ public sealed class HailingSystem : EntitySystem
         Say(ent, args.Actor, args.Text);
     }
 
+    private void OnChoose(Entity<ShuttleConsoleComponent> ent, ref HailChooseMessage args)
+    {
+        Choose(ent, args.Actor, args.Id);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -196,6 +211,8 @@ public sealed class HailingSystem : EntitySystem
         }
 
         _ending.Clear();
+
+        UpdateRelays();
 
         if (!check)
             return;
@@ -310,7 +327,7 @@ public sealed class HailingSystem : EntitySystem
             targets.Add(new HailTarget
             {
                 Ship = GetNetEntity(ship),
-                Name = ShipLabel(console, ship),
+                Name = _newbie.TagShipName(ship, ShipLabel(console, ship)),
                 Distance = distance,
                 Busy = !free,
             });
@@ -346,20 +363,61 @@ public sealed class HailingSystem : EntitySystem
     }
 
     /// <summary>
+    /// The state of a console's hail, or null if it is idle.
+    /// </summary>
+    public HailState? GetState(EntityUid console)
+    {
+        return TryComp<HailConsoleComponent>(console, out var hail) ? hail.State : null;
+    }
+
+    /// <summary>
     /// Hails a ship from a console, ringing every free console aboard it. False if the hail never started.
     /// </summary>
     public bool TryHail(EntityUid console, EntityUid user, EntityUid ship)
     {
+        return StartHail(console, user, ship, false, out _);
+    }
+
+    /// <summary>
+    /// Hails a ship from a console run by an NPC: no UI or player is needed, and the call lasts while the
+    /// operator is alive and on the console's ship. False if the hail never started.
+    /// </summary>
+    public bool TryHailAutomated(EntityUid console, EntityUid operatorUid, EntityUid ship)
+    {
+        return TryHailAutomated(console, operatorUid, ship, out _);
+    }
+
+    /// <summary>
+    /// As above, and says why a hail that never started was turned away: the other ship can't be reached, is
+    /// busy, or this console hailed too recently. Null when the fault is at this end: the console is in use
+    /// or dead, or its operator is not there.
+    /// </summary>
+    public bool TryHailAutomated(EntityUid console, EntityUid operatorUid, EntityUid ship, out HailEndReason? refused)
+    {
+        refused = null;
+        return AutomatedPresent(console, operatorUid) && StartHail(console, operatorUid, ship, true, out refused);
+    }
+
+    private bool StartHail(EntityUid console, EntityUid user, EntityUid ship, bool automated, out HailEndReason? refused)
+    {
+        refused = null;
+
         if (HasComp<HailConsoleComponent>(console) || !Usable(console, out var grid))
             return false;
 
         var now = _timing.CurTime;
 
         if (_nextHail.TryGetValue(console, out var next) && now < next)
+        {
+            refused = HailEndReason.Cooldown;
             return Refuse(console, HailEndReason.Cooldown);
+        }
 
         if (!CanReach(console, grid, ship, _range, out _))
+        {
+            refused = HailEndReason.Unavailable;
             return Refuse(console, HailEndReason.Unavailable);
+        }
 
         _consoles.Clear();
         var busy = false;
@@ -377,11 +435,15 @@ public sealed class HailingSystem : EntitySystem
         }
 
         if (_consoles.Count == 0)
-            return Refuse(console, busy ? HailEndReason.Busy : HailEndReason.Unavailable);
+        {
+            refused = busy ? HailEndReason.Busy : HailEndReason.Unavailable;
+            return Refuse(console, refused.Value);
+        }
 
         var hail = AddComp<HailConsoleComponent>(console);
         hail.State = HailState.Calling;
-        hail.PeerShip = ShipLabel(console, ship);
+        hail.Automated = automated;
+        hail.PeerShip = _newbie.TagShipName(ship, ShipLabel(console, ship));
         hail.PeerGrid = ship;
         hail.OperatorUid = user;
         hail.Operator = GetNetEntity(user);
@@ -405,7 +467,7 @@ public sealed class HailingSystem : EntitySystem
         {
             var ring = AddComp<HailConsoleComponent>(target);
             ring.State = HailState.Ringing;
-            ring.PeerShip = ShipLabel(target, grid);
+            ring.PeerShip = _newbie.TagShipName(grid, ShipLabel(target, grid));
             ring.Peer = console;
             ring.PeerGrid = grid;
             ring.StateTime = now;
@@ -484,6 +546,21 @@ public sealed class HailingSystem : EntitySystem
     /// </summary>
     public void Answer(EntityUid console, EntityUid user, bool accept)
     {
+        Answer(console, user, accept, false);
+    }
+
+    /// <summary>
+    /// Answers or declines a hail for an NPC at the console: no UI is needed, and the call lasts while the
+    /// operator is alive and on the console's ship.
+    /// </summary>
+    public void AnswerAutomated(EntityUid console, EntityUid operatorUid, bool accept)
+    {
+        if (!accept || AutomatedPresent(console, operatorUid))
+            Answer(console, operatorUid, accept, true);
+    }
+
+    private void Answer(EntityUid console, EntityUid user, bool accept, bool automated)
+    {
         if (!TryComp<HailConsoleComponent>(console, out var hail) || hail.State != HailState.Ringing ||
             hail.Peer is not { } caller)
         {
@@ -504,12 +581,21 @@ public sealed class HailingSystem : EntitySystem
 
         StopRinging(caller, console);
 
+        hail.Automated = automated;
         var callerOperator = callerHail.OperatorUid;
         Open((console, hail), user, caller, callerOperator);
         Open((caller, callerHail), callerOperator, console, user);
 
         _adminLogger.Add(LogType.Action, LogImpact.Low,
             $"{ToPrettyString(user):player} on {ToPrettyString(callerHail.PeerGrid):grid} answered a hail from {ToPrettyString(callerOperator):player} on {ToPrettyString(hail.PeerGrid):grid}");
+
+        if (callerHail.Automated)
+        {
+            var answered = new HailAnsweredEvent(caller, GridOf(caller), GridOf(console));
+            RaiseLocalEvent(ref answered);
+        }
+
+        AnnounceStopped();
     }
 
     /// <summary>
@@ -549,15 +635,19 @@ public sealed class HailingSystem : EntitySystem
 
                 break;
         }
+
+        AnnounceStopped();
     }
 
     /// <summary>
-    /// Sends a line down a console's open channel. Only the person on the call can.
+    /// Sends a line down a console's open channel. Only the person on the call can, and not while they have
+    /// answers to pick from.
     /// </summary>
     public bool Say(EntityUid console, EntityUid user, string text)
     {
         if (!TryComp<HailConsoleComponent>(console, out var hail) || hail.State != HailState.Connected ||
-            hail.OperatorUid != user || hail.Peer is not { } peer || !TryComp<HailConsoleComponent>(peer, out var peerHail))
+            hail.OperatorUid != user || hail.Options.Count > 0 ||
+            hail.Peer is not { } peer || !TryComp<HailConsoleComponent>(peer, out var peerHail))
         {
             return false;
         }
@@ -568,6 +658,14 @@ public sealed class HailingSystem : EntitySystem
             return false;
         }
 
+        return Speak((console, hail), user, (peer, peerHail), text);
+    }
+
+    /// <summary>
+    /// Puts a line in both logs as said by the person on one end.
+    /// </summary>
+    private bool Speak(Entity<HailConsoleComponent> from, EntityUid user, Entity<HailConsoleComponent> to, string text)
+    {
         text = SharedChatSystem.SanitizeAnnouncement(text, HailConsoleComponent.MaxLineLength)
             .Replace('\r', ' ')
             .Replace('\n', ' ')
@@ -576,14 +674,98 @@ public sealed class HailingSystem : EntitySystem
         if (text.Length == 0)
             return false;
 
-        var name = hail.Remote ? Loc.GetString("hail-god-name") : Identity.Name(user, EntityManager);
-        AddLine((console, hail), name, text, true);
-        AddLine((peer, peerHail), name, text, false);
-        _audio.PlayPvs(MessageSound, peer);
+        var name = from.Comp.Remote ? Loc.GetString("hail-god-name") : Identity.Name(user, EntityManager);
+        AddLine(from, name, text, true);
+        AddLine(to, name, text, false);
+        _audio.PlayPvs(MessageSound, to);
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low,
-            $"Hail from {ToPrettyString(user):player} on {ToPrettyString(peerHail.PeerGrid):grid} to {ToPrettyString(hail.PeerGrid):grid}: {text}");
+            $"Hail from {ToPrettyString(user):player} on {ToPrettyString(to.Comp.PeerGrid):grid} to {ToPrettyString(from.Comp.PeerGrid):grid}: {text}");
 
+        return true;
+    }
+
+    /// <summary>
+    /// Puts answers in front of the person on the other end of an open channel, who must pick one instead of
+    /// typing. Only the person on the call at <paramref name="console"/> can offer. False if nothing was offered.
+    /// </summary>
+    public bool Offer(EntityUid console, EntityUid user, IReadOnlyList<HailOption> options)
+    {
+        if (options.Count == 0 || options.Count > HailConsoleComponent.MaxOptions ||
+            !TryComp<HailConsoleComponent>(console, out var hail) || hail.State != HailState.Connected ||
+            hail.OperatorUid != user || hail.Peer is not { } peer ||
+            !TryComp<HailConsoleComponent>(peer, out var peerHail) || peerHail.State != HailState.Connected ||
+            peerHail.Peer != console || peerHail.Remote)
+        {
+            return false;
+        }
+
+        var list = new List<HailOption>(options.Count);
+        var ids = new HashSet<string>();
+
+        foreach (var option in options)
+        {
+            if (string.IsNullOrEmpty(option.Id) || string.IsNullOrEmpty(option.Text) || !ids.Add(option.Id))
+                return false;
+
+            // Cut to length, then cleaned as a spoken line is, so the answer shown is the one that goes in the logs.
+            var text = option.Text.Length > HailConsoleComponent.MaxOptionLength
+                ? option.Text[..HailConsoleComponent.MaxOptionLength]
+                : option.Text;
+
+            text = SharedChatSystem.SanitizeAnnouncement(text, HailConsoleComponent.MaxLineLength)
+                .Replace('\r', ' ')
+                .Replace('\n', ' ')
+                .Trim();
+
+            if (text.Length == 0)
+                return false;
+
+            list.Add(new HailOption(option.Id, text));
+        }
+
+        peerHail.Options = list;
+        Dirty(peer, peerHail);
+        return true;
+    }
+
+    /// <summary>
+    /// Takes back the answers a console has offered, so the other end can type again.
+    /// </summary>
+    public void ClearOptions(EntityUid offerer)
+    {
+        if (TryComp<HailConsoleComponent>(offerer, out var hail) && hail.Peer is { } peer &&
+            TryComp<HailConsoleComponent>(peer, out var peerHail) && peerHail.Options.Count > 0)
+        {
+            peerHail.Options.Clear();
+            Dirty(peer, peerHail);
+        }
+    }
+
+    /// <summary>
+    /// Picks one of the answers on offer at a console. Only the person on the call can, and only an id that
+    /// was offered. The answer's text goes in both logs as said by them.
+    /// </summary>
+    public bool Choose(EntityUid console, EntityUid user, string id)
+    {
+        if (!TryComp<HailConsoleComponent>(console, out var hail) || hail.State != HailState.Connected ||
+            hail.OperatorUid != user || hail.Peer is not { } peer || !TryComp<HailConsoleComponent>(peer, out var peerHail))
+        {
+            return false;
+        }
+
+        var index = hail.Options.FindIndex(option => option.Id == id);
+
+        if (index < 0)
+            return false;
+
+        var text = hail.Options[index].Text;
+        hail.Options.Clear();
+        Dirty(console, hail);
+        Speak((console, hail), user, (peer, peerHail), text);
+
+        var chosen = new HailOptionChosenEvent(peer, GridOf(peer), console, GridOf(console), user, id);
+        RaiseLocalEvent(ref chosen);
         return true;
     }
 
@@ -699,6 +881,9 @@ public sealed class HailingSystem : EntitySystem
 
     private void Remove(EntityUid console, HailConsoleComponent hail, HailEndReason? reason)
     {
+        if (TryComp<HailRelayComponent>(console, out var relay))
+            CloseRelays((console, relay));
+
         if (hail.State == HailState.Calling)
         {
             var delay = reason is HailEndReason.Declined or HailEndReason.NoAnswer
@@ -707,6 +892,10 @@ public sealed class HailingSystem : EntitySystem
 
             _nextHail[console] = _timing.CurTime + delay;
         }
+
+        var automated = hail.Automated;
+        var connected = hail.State == HailState.Connected;
+        var peerGrid = hail.PeerGrid;
 
         if (hail.Remote)
         {
@@ -724,6 +913,22 @@ public sealed class HailingSystem : EntitySystem
         }
 
         RemComp<HailConsoleComponent>(console);
+
+        if (automated)
+            _stopped.Add(new HailCallEndedEvent(console, GridOf(console), peerGrid, reason ?? HailEndReason.PeerClosed, connected));
+    }
+
+    /// <summary>
+    /// Announces the ends queued while a hail was being torn down, so a listener can start a new one.
+    /// </summary>
+    private void AnnounceStopped()
+    {
+        while (_stopped.Count > 0)
+        {
+            var stopped = _stopped[0];
+            _stopped.RemoveAt(0);
+            RaiseLocalEvent(ref stopped);
+        }
     }
 
     private bool Refuse(EntityUid console, HailEndReason reason)
@@ -748,7 +953,12 @@ public sealed class HailingSystem : EntitySystem
 
         foreach (var uid in _consoles)
         {
+            var automated = TryComp<HailConsoleComponent>(uid, out var ring) && ring.Automated;
+            var peerGrid = ring?.PeerGrid;
             RemComp<HailConsoleComponent>(uid);
+
+            if (automated)
+                _stopped.Add(new HailCallEndedEvent(uid, GridOf(uid), peerGrid, HailEndReason.PeerClosed, false));
         }
     }
 
@@ -774,7 +984,25 @@ public sealed class HailingSystem : EntitySystem
         if (hail.Remote)
             return true;
 
+        if (hail.Automated)
+            return hail.OperatorUid is { } npc && AutomatedPresent(console, npc);
+
         return hail.OperatorUid is { } user && Exists(user) && _ui.IsUiOpen(console, ShuttleConsoleUiKey.Key, user);
+    }
+
+    /// <summary>
+    /// Whether an NPC can man a console without a UI: it exists, is alive and is on the console's ship.
+    /// </summary>
+    private bool AutomatedPresent(EntityUid console, EntityUid operatorUid)
+    {
+        return Exists(operatorUid) && !TerminatingOrDeleted(console) && !TerminatingOrDeleted(operatorUid) &&
+               _mobState.IsAlive(operatorUid) &&
+               Transform(console).GridUid is { } grid && Transform(operatorUid).GridUid == grid;
+    }
+
+    private EntityUid? GridOf(EntityUid console)
+    {
+        return TryComp<TransformComponent>(console, out var xform) ? xform.GridUid : null;
     }
 
     private bool Usable(EntityUid console, out EntityUid grid)
@@ -836,18 +1064,13 @@ public sealed class HailingSystem : EntitySystem
     /// <summary>
     /// A ship's name as a console's radar would give it, so a ship running dark stays unnamed.
     /// </summary>
-    private string ShipLabel(EntityUid console, EntityUid ship)
+    public string ShipLabel(EntityUid console, EntityUid ship)
     {
-        if (TryComp<IFFComponent>(ship, out var iff))
+        // Radar never names a ship that hides its label, however close it is.
+        if (TryComp<IFFComponent>(ship, out var iff) &&
+            (iff.Flags & (IFFFlags.HideLabel | IFFFlags.HideLabelAlways)) != 0)
         {
-            if ((iff.Flags & IFFFlags.HideLabelAlways) != 0)
-                return Loc.GetString("hail-unknown-vessel");
-
-            if ((iff.Flags & IFFFlags.HideLabel) != 0 &&
-                _detection.IsGridDetected(ship, console) != DetectionLevel.Detected)
-            {
-                return Loc.GetString("hail-unknown-vessel");
-            }
+            return Loc.GetString("hail-unknown-vessel");
         }
 
         var name = Name(ship);

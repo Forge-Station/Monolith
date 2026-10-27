@@ -48,6 +48,7 @@ These are the conflict rules of Monolith:
 - 3. [textlink="Engage in fair play when making demands." link="MonolithRuleConflictThreeFairPlay"]
 - 4. [textlink="Follow the conditions for portstriking." link="MonolithRuleConflictFourPortStriking"]
 <!-- WOLFGATE(ColdWar): the war declaration rule -->- 5. [textlink="Follow the conditions for declaring war." link="WFRuleConflictFiveDeclaringWar"]
+<!-- WOLFGATE(Newbie): the new player rule -->- 6. [textlink="Go easy on new players." link="WFRuleConflictSixNewPlayers"]
 
 ## Admin Decisions
 - [color=yellow][bold]All admin decisions are final.[/bold][/color]

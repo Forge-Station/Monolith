@@ -75,12 +75,6 @@ public sealed partial class WFNewbieWelcomeSystem : EntitySystem
         }
     }
 
-    /// <summary>Lets a player be greeted again this join.</summary>
-    public void Forget(NetUserId user)
-    {
-        _greeted.Remove(user);
-    }
-
     private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
     {
         if (args.NewStatus == SessionStatus.Disconnected)

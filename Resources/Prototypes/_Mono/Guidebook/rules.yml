@@ -28,6 +28,7 @@
     - MonolithRuleConflictThreeFairPlay
     - MonolithRuleConflictFourPortStriking
     - WFRuleConflictFiveDeclaringWar # WOLFGATE(ColdWar)
+    - WFRuleConflictSixNewPlayers # WOLFGATE(Newbie)
 
 #MARK: Core Rules
 

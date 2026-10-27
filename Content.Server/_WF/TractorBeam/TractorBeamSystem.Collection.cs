@@ -11,10 +11,12 @@ namespace Content.Server._WF.TractorBeam;
 public sealed partial class TractorBeamSystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedMapSystem _beamMap = default!;
 
     private readonly HashSet<EntityUid> _coneEntities = new();
     private readonly Dictionary<EntityUid, List<EntityUid>> _collectionTargets = new();
     private readonly List<(EntityUid Target, Vector2 Force, Vector2 SourceOffset)> _pullRequests = new();
+    private List<Entity<MapGridComponent>> _beamGrids = new();
 
     /// <summary>Uses the target fan, limited by the dish's forward operating sector.</summary>
     private void FindCollectionTargets(EntityUid uid, TractorBeamEmitterComponent beam)
@@ -29,12 +31,15 @@ public sealed partial class TractorBeamSystem
         _coneEntities.Clear();
         _lookup.GetEntitiesIntersecting(map, bounds, _coneEntities, LookupFlags.Dynamic);
 
-        // Grids have their own broadphase trees and are not returned as ordinary loose entities.
-        var grids = EntityQueryEnumerator<MapGridComponent, PhysicsComponent, TransformComponent>();
-        while (grids.MoveNext(out var grid, out _, out _, out var gridTransform))
+        // Grids have their own broadphase trees and are not returned as ordinary loose entities. Only grids in the
+        // beam's bounds are checked: the dock walk in IsMovableGrid across thousands of asteroid grids froze the server.
+        _beamGrids.Clear();
+        _beamMap.FindGridsIntersecting(map, bounds, ref _beamGrids, approx: true, includeMap: false);
+        foreach (var (grid, _) in _beamGrids)
         {
-            if (gridTransform.MapID == map && grid != source && grid != target && IsMovableGrid(grid) &&
-                TractorBeamGeometry.IntersectsBox(start, end, _lookup.GetWorldAABB(grid, gridTransform), width))
+            if (grid != source && grid != target &&
+                TractorBeamGeometry.IntersectsBox(start, end, _lookup.GetWorldAABB(grid), width) &&
+                IsMovableGrid(grid))
                 _coneEntities.Add(grid);
         }
 

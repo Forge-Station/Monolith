@@ -6256,7 +6256,7 @@ entities:
           showEnts: False
           occludes: True
           ent: 431
-- proto: WeaponTurretM25
+- proto: WFWeaponTurretMiningLaserSmall
   entities:
   - uid: 41
     components:

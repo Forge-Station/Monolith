@@ -2,7 +2,7 @@
   id: WFCarabela
   parent: BaseVessel
   name: MI-COR Carabela
-  description: A Militia Ironworks salvage frigate refitted for shipbreaking. Carries a mobile drydock crane, a pinch reactor and basic FTL. Armed with three L85 autocannons and an M25 mining pulser for light mining.
+  description: A Militia Ironworks salvage frigate refitted for shipbreaking. Carries a mobile drydock crane, a pinch reactor and basic FTL. Armed with three L85 autocannons and an M12 mining laser for light mining.
   price: 125000
   category: Medium
   group: Shipyard

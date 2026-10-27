@@ -150,7 +150,11 @@ public sealed partial class FireControlWindow
         battery.SetWidth = 324;
         battery.HorizontalExpand = false;
         var scope = Scope("wf-console-fire-scope", NavRadar, new Vector2(240, 120));
-        var instruments = Row(battery, scope, WfCreateShieldPanel()); // WOLFGATE(ShipShields): the gunner's shield control, on the right.
+        // WOLFGATE(ShipShields): the gunner's shield control, on the right.
+        // WOLFGATE(AsteroidMining): the mining laser panel sits under the shield control.
+        var right = Column(WfCreateShieldPanel(), WfCreateMiningPanel());
+        right.VerticalExpand = true;
+        var instruments = Row(battery, scope, right);
         instruments.VerticalExpand = true;
         RefreshButton.Name = "CockpitGunneryRefresh";
         RefreshButton.Text = Loc.GetString("wf-gunnery-link");

@@ -1,0 +1,33 @@
+- type: vessel
+  id: WFDredger
+  parent: BaseVessel
+  name: MMC Dredger
+  description: A lightly armed mining and salvage vessel with an ore processor, a scrap processor, salvage radar, ore magnet, tractor beam and a pinch generator. Comes with four M12 mining lasers, plus four autocannons to hold its claim.
+  price: 150000 # ~50% over the 99833 appraisal
+  category: Medium
+  group: Mieyo
+  access: Mieyo
+  shuttlePath: /SharedMaps/_WF/Shipyard/Shuttles/dredger.yml
+  guidebookPage: null
+  class:
+  - Salvage
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: WFDredger
+  mapName: 'MMC Dredger'
+  mapPath: /SharedMaps/_WF/Shipyard/Shuttles/dredger.yml
+  minPlayers: 0
+  stations:
+    WFDredger:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Dredger MMC{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          MMCEmployee: [ 0, 0 ]

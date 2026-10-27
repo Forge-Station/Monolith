@@ -1,5 +1,7 @@
 using System.Numerics;
+using Content.Shared._WF.CCVar;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Configuration;
 using static Content.Client._WF.CombatConsole.WFInstrumentTheme;
 
 namespace Content.Client._WF.Cockpit;
@@ -15,6 +17,11 @@ public sealed partial class WFCockpitView
     /// <summary>What the shield panel needs around its controls: the panel frame and room for a scroll bar.</summary>
     private const float ShieldChrome = 38;
 
+    /// <summary>The MFD page a cockpit opens on when none is saved.</summary>
+    public const string DefaultPage = "wf-cockpit-nav";
+
+    /// <summary>An optional page to open as soon as it has something to show: the saved page, or one that went away while open.</summary>
+    private string? _awaitedPage;
     private bool _swapped;
     private bool _expanded;
     private bool _expandMoot;
@@ -30,6 +37,59 @@ public sealed partial class WFCockpitView
 
     /// <summary>Whether the MFD has taken over the world view's space and the world view is not drawn.</summary>
     public bool MfdMaximised => _maximised;
+
+    /// <summary>Opens on the MFD page and panel arrangement the player last chose in any cockpit.</summary>
+    private void LoadLayout()
+    {
+        var config = IoCManager.Resolve<IConfigurationManager>();
+        var page = config.GetCVar(WolfgateCVars.CockpitMfdPage);
+        if (!_pageHosts.ContainsKey(page))
+            page = DefaultPage;
+        else if (!_selectors[page].Visible)
+        {
+            _awaitedPage = page;
+            page = DefaultPage;
+        }
+        SelectPage(page);
+        SetSwapped(config.GetCVar(WolfgateCVars.CockpitMfdSwapped));
+        SetExpanded(config.GetCVar(WolfgateCVars.CockpitMfdExpanded));
+        SetMaximised(config.GetCVar(WolfgateCVars.CockpitMfdMaximised));
+    }
+
+    /// <summary>
+    /// Shows an optional page's selector only while it has something to show. A page that goes away while open hands the
+    /// MFD back to the default page, and opens again if it returns before the player picks another.
+    /// </summary>
+    private void SyncOptionalPages()
+    {
+        foreach (var (key, content) in _pages)
+        {
+            if (content is not IWFCockpitOptionalPage optional || _selectors[key].Visible == optional.Available)
+                continue;
+            _selectors[key].Visible = optional.Available;
+            if (optional.Available && _awaitedPage == key)
+            {
+                _awaitedPage = null;
+                SelectPage(key);
+            }
+            else if (!optional.Available && _page == key)
+            {
+                _awaitedPage = key;
+                SelectPage(DefaultPage);
+            }
+        }
+    }
+
+    /// <summary>Saves the MFD page and panel arrangement when the player changes one.</summary>
+    private void SaveLayout()
+    {
+        var config = IoCManager.Resolve<IConfigurationManager>();
+        config.SetCVar(WolfgateCVars.CockpitMfdPage, _page);
+        config.SetCVar(WolfgateCVars.CockpitMfdSwapped, _swapped);
+        config.SetCVar(WolfgateCVars.CockpitMfdExpanded, _expanded);
+        config.SetCVar(WolfgateCVars.CockpitMfdMaximised, _maximised);
+        config.SaveToFile();
+    }
 
     /// <summary>Creates a compact toggle for the MFD's own controls; console buttons clip their text, so the width is fixed.</summary>
     private static Button PanelButton(string text, string help, string name, float width)

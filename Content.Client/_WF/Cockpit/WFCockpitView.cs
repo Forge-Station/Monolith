@@ -41,10 +41,14 @@ public sealed partial class WFCockpitView : Control
     private readonly (string Key, Control Content)[] _pages;
     private readonly (Control Dial, float Full)[] _dials;
     private bool _restored;
-    private bool _compactDials;
+    private float _dialScale = 1f;
+    private string _page = DefaultPage;
 
     /// <summary>Whether the dial column is too short for full-size dials and shows the smaller faces.</summary>
-    public bool CompactDials => _compactDials;
+    public bool CompactDials => _dialScale < 1f;
+
+    /// <summary>The scale the dials are drawn at, 1 when the column fits them whole.</summary>
+    public float DialScale => _dialScale;
 
     /// <summary>Creates the cockpit, borrowing every control through the caller's lease so a failed build can be undone.</summary>
     public WFCockpitView(ShuttleConsoleWindow console, InGameScreen screen, MainViewport viewport, Action exit, WFCockpitLease lease)
@@ -127,8 +131,14 @@ public sealed partial class WFCockpitView : Control
             button.AddStyleClass("WfCompact");
             button.ToolTip = Loc.GetString(key);
             button.Group = group;
-            button.OnPressed += _ => SelectPage(key);
-            button.Pressed = key == "wf-cockpit-nav";
+            button.OnPressed += _ =>
+            {
+                _awaitedPage = null;
+                SelectPage(key);
+                SaveLayout();
+            };
+            button.Pressed = key == DefaultPage;
+            button.Visible = content is not IWFCockpitOptionalPage;
             selectors.AddChild(button);
             _selectors.Add(key, button);
             content.HorizontalExpand = content.VerticalExpand = true;
@@ -137,11 +147,23 @@ public sealed partial class WFCockpitView : Control
         }
         // Short captions, with the full names in the tooltips, so the caption and the three toggles fit the narrowest MFD header.
         _swap = PanelButton("wf-cockpit-swap", "wf-cockpit-swap-help", "CockpitMfdSwap", 60);
-        _swap.OnToggled += args => SetSwapped(args.Pressed);
+        _swap.OnToggled += args =>
+        {
+            SetSwapped(args.Pressed);
+            SaveLayout();
+        };
         _expand = PanelButton("wf-cockpit-expand", "wf-cockpit-expand-help", "CockpitMfdExpand", 80);
-        _expand.OnToggled += args => SetExpanded(args.Pressed);
+        _expand.OnToggled += args =>
+        {
+            SetExpanded(args.Pressed);
+            SaveLayout();
+        };
         _maximise = PanelButton("wf-cockpit-maximise", "wf-cockpit-maximise-help", "CockpitMfdMaximise", 84);
-        _maximise.OnToggled += args => SetMaximised(args.Pressed);
+        _maximise.OnToggled += args =>
+        {
+            SetMaximised(args.Pressed);
+            SaveLayout();
+        };
         var caption = Label("wf-cockpit-mfd", Accent);
         caption.HorizontalExpand = true;
         var mfd = Column(Row(caption, _swap, _expand, _maximise), selectors, display);
@@ -170,9 +192,10 @@ public sealed partial class WFCockpitView : Control
         AddChild(_camera);
         AddChild(_shields);
         InitializeGunnery(viewport);
+        InitializeScanner(viewport);
         LayoutContainer.SetAnchorPreset(this, LayoutContainer.LayoutPreset.Wide);
         screen.AddChild(this);
-        SelectPage("wf-cockpit-nav");
+        LoadLayout();
         console.WfSendCockpitGunnery(new Content.Shared._WF.Cockpit.WFCockpitGunnerySessionMessage(true));
         console.WfSetCockpitActive(true);
         Install(this);
@@ -181,6 +204,7 @@ public sealed partial class WFCockpitView : Control
     /// <summary>Switches only the MFD; cameras, flight controls, shield controls and chat stay in place.</summary>
     public void SelectPage(string key)
     {
+        _page = key;
         foreach (var (page, _) in _pages)
             _pageHosts[page].Visible = page == key;
         foreach (var (page, button) in _selectors)
@@ -310,16 +334,16 @@ public sealed partial class WFCockpitView : Control
             _translation.DesiredSize.Y, strip, votes), _swapped, _maximised);
     }
 
-    /// <summary>Swaps the large dials for compact ones while the instrument column is too short to show them whole.</summary>
+    /// <summary>Shrinks the dials to fill the instrument column while it is too short to show them whole.</summary>
     private void FitDials(float columnHeight)
     {
-        var compact = WFCockpitInstrumentSizing.UseCompact(columnHeight);
-        if (compact == _compactDials)
+        var scale = WFCockpitInstrumentSizing.DialScale(columnHeight);
+        if (scale == _dialScale)
             return;
-        _compactDials = compact;
+        _dialScale = scale;
         foreach (var (dial, full) in _dials)
         {
-            dial.SetHeight = compact ? WFCockpitInstrumentSizing.CompactHeight(full) : full;
+            dial.SetHeight = WFCockpitInstrumentSizing.ScaledHeight(full, scale);
             for (var parent = dial.Parent; parent != null && parent != this; parent = parent.Parent)
                 parent.InvalidateMeasure();
         }
@@ -329,5 +353,6 @@ public sealed partial class WFCockpitView : Control
     {
         base.FrameUpdate(args);
         _console.WfCockpitRefresh();
+        SyncOptionalPages();
     }
 }

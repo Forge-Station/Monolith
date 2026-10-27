@@ -1,5 +1,6 @@
 using Content.Server.Atmos.Components;
 using Content.Server.Shuttles.Systems;
+using Content.Server._WF.AsteroidMining; // WOLFGATE(AsteroidMining)
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Events;
 
@@ -22,6 +23,9 @@ public sealed partial class AutomaticAtmosSystem : EntitySystem
     private void OnMassDataChanged(Entity<MapGridComponent> ent, ref MassDataChangedEvent ev)
     {
         if (_atmosphereSystem.HasAtmosphere(ent))
+            return;
+
+        if (HasComp<WFAsteroidGridComponent>(ent)) // WOLFGATE(AsteroidMining): asteroid rocks are airless; atmos per rock grid is wasted work
             return;
 
         // We can't actually count how many tiles there are efficiently, so instead estimate with the mass.

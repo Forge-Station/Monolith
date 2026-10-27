@@ -38,6 +38,7 @@ using Content.Shared._WF.Cockpit;
 using Content.Shared._WF.Shuttles;
 using Content.Shared._WF.ShipShields;
 using Content.Shared.Buckle;
+using Content.Shared.Chat;
 using Content.Shared.Inventory;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Shuttles.Components;
@@ -49,6 +50,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Input;
 using Robust.Shared.Localization;
+using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Physics;
@@ -95,6 +97,19 @@ public sealed class WFCockpitTest : InteractionTest
         - WallLayer
 ";
     protected override string PlayerPrototype => "WFCockpitTestMob";
+
+    /// <summary>The pooled client keeps its settings, so a saved cockpit layout must not reach the next test.</summary>
+    [TearDown]
+    public async Task ResetCockpitLayout() => await Client.WaitPost(ResetSavedLayout);
+
+    private void ResetSavedLayout()
+    {
+        var settings = Client.ResolveDependency<IConfigurationManager>();
+        settings.SetCVar(WolfgateCVars.CockpitMfdPage, WolfgateCVars.CockpitMfdPage.DefaultValue);
+        settings.SetCVar(WolfgateCVars.CockpitMfdSwapped, false);
+        settings.SetCVar(WolfgateCVars.CockpitMfdExpanded, false);
+        settings.SetCVar(WolfgateCVars.CockpitMfdMaximised, false);
+    }
 
     [Test]
     public async Task SeatedCockpitRestoresHudAndBindings()
@@ -171,6 +186,10 @@ public sealed class WFCockpitTest : InteractionTest
             var originalPlotControls = plots.Select(plot => plot.WfCockpitControls).ToArray();
             var networkPorts = Named<GridContainer>(window, "NetworkPortsBox");
             var originalNetworkLayout = (networkPorts.LimitedDimension, networkPorts.Rows, networkPorts.Columns);
+            var helmKeys = new[] { "IFFToggle", "IFFDetailedToggle", "DockToggle" }.Select(name => Named<Button>(window, name)).ToArray();
+            var helmKeyCaptions = helmKeys.Select(key => key.Text).ToArray();
+            var helmKeyParent = helmKeys[0].Parent;
+            var helmKeyOrder = helmKeys.Select(key => key.GetPositionInParent()).ToArray();
             Assert.That(AimOverlayPresent(), Is.False, "Without a cockpit the ship cam has no aim lines.");
             Assert.That(controller.Enter(window), Is.True);
             Assert.That(AimOverlayPresent(), Is.True, "An open cockpit draws its aim lines on the ship cam.");
@@ -183,6 +202,23 @@ public sealed class WFCockpitTest : InteractionTest
             Assert.That(normalHud.Where(control => control != chat && control != viewport && control is not AlertsUI)
                 .All(control => !control.VisibleInTree), Is.True, "Character HUD controls must stay hidden.");
             var hud = screen.Children.OfType<WFCockpitView>().Single();
+            var radar = window.FindControl<NavScreen>("NavContainer").FindControl<ShuttleNavControl>("NavRadar");
+            var sensorKeys = helmKeys;
+            Layout(hud, new Vector2(1130, 636));
+            Assert.That(sensorKeys.Select(key => Ancestors(key, hud).Contains(radar.Parent)), Is.All.True,
+                "The contact toggles must ride on the cockpit's radar scope.");
+            foreach (var (key, shown) in new (Button, Func<bool>)[]
+                     {
+                         (sensorKeys[0], () => radar.ShowIFF), (sensorKeys[1], () => radar.ShowIFFDetailed),
+                         (sensorKeys[2], () => radar.ShowDocks),
+                     })
+            {
+                var before = shown();
+                Toggle(key, !before);
+                Assert.That(shown(), Is.EqualTo(!before), $"{key.Name} on the scope must still drive the radar.");
+                Toggle(key, before);
+                Assert.That(shown(), Is.EqualTo(before));
+            }
             Assert.That(alerts.VisibleInTree, Is.True, "Crew status alerts must remain available in cockpit.");
             Assert.That(votes.VisibleInTree, Is.True, "Live votes must not be hidden with character hotkeys.");
             Assert.That(speech.VisibleInTree, Is.True, "Speech bubbles must continue updating in cockpit.");
@@ -277,7 +313,7 @@ public sealed class WFCockpitTest : InteractionTest
             {
                 settings.SetCVar(WolfgateCVars.UiStyle, theme);
                 AssertFuelBinding(Named<ShipScreen>(hud, "ShipContainer"), hud);
-                foreach (var size in new[] { new Vector2(1130, 636), new Vector2(1600, 900) })
+                foreach (var size in new[] { new Vector2(1130, 636), new Vector2(1366, 768), new Vector2(1600, 900) })
                 {
                     var swap = Named<Button>(hud, "CockpitMfdSwap");
                     var maximise = Named<Button>(hud, "CockpitMfdMaximise");
@@ -369,7 +405,7 @@ public sealed class WFCockpitTest : InteractionTest
             Assert.That(gunMessages.OfType<WFCockpitGunnerySessionMessage>().Last().Controlling, Is.True,
                 "GUNS must explicitly request firing control.");
             foreach (var theme in new[] { WolfgateSkins.Retro.Id, WolfgateSkins.Futurist.Id })
-            foreach (var size in new[] { new Vector2(1130, 636), new Vector2(1600, 900) })
+            foreach (var size in new[] { new Vector2(1130, 636), new Vector2(1366, 768), new Vector2(1600, 900) })
             {
                 settings.SetCVar(WolfgateCVars.UiStyle, theme);
                 Layout(hud, size);
@@ -489,6 +525,12 @@ public sealed class WFCockpitTest : InteractionTest
             Assert.That(viewport.Parent, Is.SameAs(viewportParent));
             Assert.That(viewport.Visible, Is.True, "Leaving with the MFD maximised must bring the world view back.");
             Assert.That(chat.Parent, Is.SameAs(chatParent));
+            Assert.That(helmKeys.Select(key => key.Text), Is.EqualTo(helmKeyCaptions),
+                "Leaving must give the helm's contact toggles their full captions back.");
+            Assert.That(helmKeys.Select(key => key.Parent), Is.All.SameAs(helmKeyParent));
+            Assert.That(helmKeys.Select(key => key.GetPositionInParent()), Is.EqualTo(helmKeyOrder),
+                "Leaving must put the contact toggles back in order above the IFF search.");
+            Assert.That(helmKeys.Select(key => key.HasStyleClass("WfCompact")), Is.All.False);
             Assert.That(alerts.Parent, Is.SameAs(alertsParent));
             Assert.That(votes.Parent, Is.SameAs(votesParent));
             Assert.That(speech.Parent, Is.SameAs(speechParent));
@@ -507,8 +549,9 @@ public sealed class WFCockpitTest : InteractionTest
             var reentered = screen.Children.OfType<WFCockpitView>().Single();
             Assert.That(reentered, Is.Not.SameAs(hud));
             Assert.That(AimOverlayPresent(), Is.True, "Entering again must draw the aim lines again.");
-            Assert.That((reentered.PanelsSwapped, reentered.MfdExpanded, reentered.MfdMaximised), Is.EqualTo((false, false, false)),
-                "Panel arrangements last one cockpit session.");
+            Assert.That((reentered.PanelsSwapped, reentered.MfdExpanded, reentered.MfdMaximised), Is.EqualTo((true, true, true)),
+                "A new cockpit opens in the arrangement the pilot last set.");
+            ResetSavedLayout();
             reentered.SetMaximised(true);
             Assert.That(viewport.Visible, Is.False);
             window.Close();
@@ -849,6 +892,144 @@ public sealed class WFCockpitTest : InteractionTest
         });
     }
 
+    /// <summary>
+    /// A chat line whose tag throws while laying out (an empty scramble alphabet divides by zero) stays in the history
+    /// for the round. Every refill ran into it, and the one as the chat box re-entered the screen on leaving the cockpit
+    /// stopped the engine's tree entry before the input line: the chat then took no text until the player rejoined.
+    /// </summary>
+    [Test]
+    public async Task AChatLineThatFailsToLayOutDoesNotKillTheChatOnCockpitExit()
+    {
+        var (console, chair) = await SpawnHelm();
+        await MakePilot(console);
+        await Buckle(chair);
+        await RunTicks(10);
+        var settings = Client.ResolveDependency<IConfigurationManager>();
+        var originalLayout = settings.GetCVar(CCVars.UILayout);
+        await Client.WaitAssertion(() => settings.SetCVar(CCVars.UILayout, "Default"));
+        await RunTicks(3);
+        // The fallback logs the bad line as an error, which is the point; focusing the chat also warns about the
+        // typing indicator on the tick after. Neither is a failure.
+        var failureLevel = Pair.ClientLogHandler.FailureLevel;
+        Pair.ClientLogHandler.FailureLevel = LogLevel.Fatal;
+        try
+        {
+            await Client.WaitAssertion(() =>
+            {
+                var ui = Client.ResolveDependency<IUserInterfaceManager>();
+                var controller = ui.GetUIController<WFCockpitUIController>();
+                var chatController = ui.GetUIController<ChatUIController>();
+                var screen = (InGameScreen) ui.ActiveScreen!;
+                var chat = screen.ChatBox;
+                var input = chat.ChatInput.Input;
+                var log = chat.FindControl<OutputPanel>("Contents");
+                var window = OpenHelm(console);
+                try
+                {
+                    chatController.History.Clear();
+                    chat.Repopulate();
+                    void Say(string text) => chatController.ProcessChatMessage(
+                        new ChatMessage(ChatChannel.Local, text, text, NetEntity.Invalid, null), speechBubble: false);
+                    Say("before");
+                    var bad = "[scramble rate=1 length=5 chars=\"\"]";
+                    Assert.DoesNotThrow(() => Say(bad), "The line arrives like any other.");
+                    Say("after");
+                    Assert.That(log.EntryCount, Is.EqualTo(3), "The bad line is shown, as text.");
+                    Assert.That(log.GetMessage(1).ToString(), Does.Contain("scramble"));
+                    for (var round = 0; round < 3; round++)
+                    {
+                        var context = $"round {round}";
+                        chat.Focus();
+                        Assert.That(ui.KeyboardFocused, Is.SameAs(input), context);
+                        Assert.That(controller.Enter(window), Is.True, context);
+                        Assert.That(input.IsInsideTree, $"{context}: the chat input takes text in the cockpit");
+                        Say($"in the cockpit {round}");
+                        chat.Focus();
+                        controller.Exit();
+                        Assert.That(controller.Active, Is.False, context);
+                        Assert.That(input.IsInsideTree, $"{context}: the chat input must be in the tree to take text");
+                        Assert.That(Descendants(screen).Where(control => !control.IsInsideTree), Is.Empty,
+                            $"{context}: every HUD control came back into the tree");
+                        Assert.That(screen.GetWidget<ResizableChatBox>(), Is.SameAs(chat), $"{context}: the screen knows its chat box again");
+                        Assert.That(log.EntryCount, Is.EqualTo(4 + round), $"{context}: the refill shows every line");
+                        chat.Focus();
+                        Assert.That(ui.KeyboardFocused, Is.SameAs(input), $"{context}: the chat takes focus after the cockpit");
+                    }
+                }
+                finally
+                {
+                    controller.Exit();
+                    window.Dispose();
+                    chatController.History.Clear();
+                    chat.Repopulate();
+                    settings.SetCVar(CCVars.UILayout, originalLayout);
+                }
+            });
+            await RunTicks(5);
+        }
+        finally
+        {
+            Pair.ClientLogHandler.FailureLevel = failureLevel;
+        }
+    }
+
+    /// <summary>
+    /// A build that fails after its view reached the screen must hand every HUD widget back, in the tree and known
+    /// to the screen, and the next entry must work.
+    /// </summary>
+    [Test]
+    public async Task ACockpitBuildThatFailsOnTheScreenGivesTheWholeHudBack()
+    {
+        var (console, chair) = await SpawnHelm();
+        await MakePilot(console);
+        await Buckle(chair);
+        await RunTicks(10);
+        var settings = Client.ResolveDependency<IConfigurationManager>();
+        var originalLayout = settings.GetCVar(CCVars.UILayout);
+        await Client.WaitAssertion(() => settings.SetCVar(CCVars.UILayout, "Default"));
+        await RunTicks(3);
+        await Client.WaitAssertion(() =>
+        {
+            var ui = Client.ResolveDependency<IUserInterfaceManager>();
+            var controller = ui.GetUIController<WFCockpitUIController>();
+            var screen = (InGameScreen) ui.ActiveScreen!;
+            var hud = screen.Children.ToArray();
+            var chat = screen.ChatBox;
+            var window = OpenHelm(console);
+            try
+            {
+                // The first gunnery message goes out after the view is on the screen.
+                var fail = true;
+                window.WfCockpitGunneryCommand += _ =>
+                {
+                    if (!fail)
+                        return;
+                    fail = false;
+                    throw new InvalidOperationException("probe");
+                };
+                Assert.Throws<InvalidOperationException>(() => controller.Enter(window));
+                Assert.That(controller.Active, Is.False);
+                Assert.That(screen.Children.ToArray(), Is.EqualTo(hud), "Every HUD child must be back, in order, and nothing else.");
+                Assert.That(hud.All(child => child.IsInsideTree), Is.True);
+                Assert.That(chat.ChatInput.Input.IsInsideTree, Is.True, "The chat input must be in the tree to take text.");
+                Assert.That(screen.GetWidget<ResizableChatBox>(), Is.SameAs(chat));
+                Assert.That(screen.GetWidget<AlertsUI>()?.IsInsideTree, Is.True);
+                Assert.That(screen.GetWidget<MainViewport>()?.IsInsideTree, Is.True);
+                Assert.That(window.Visible, Is.True, "The helm window returns when the cockpit cannot be built.");
+
+                Assert.That(controller.Enter(window), Is.True, "The next entry must work.");
+                controller.Exit();
+                Assert.That(screen.Children.ToArray(), Is.EqualTo(hud));
+            }
+            finally
+            {
+                controller.Exit();
+                window.Dispose();
+                settings.SetCVar(CCVars.UILayout, originalLayout);
+            }
+        });
+    }
+
     [Test]
     public async Task APoppedOutChatLogFollowsTheChatIntoTheCockpitAndBack()
     {
@@ -1057,12 +1238,16 @@ public sealed class WFCockpitTest : InteractionTest
 
             Toggle(expand, true);
             Toggle(swap, true);
+            Toggle(Named<Control>(hud, "CockpitMfdSelectors").Children.OfType<Button>().ElementAt(2), true);
             controller.Exit();
             Assert.That(controller.Enter(window), Is.True);
             var fresh = screen.Children.OfType<WFCockpitView>().Single();
             Assert.That(fresh, Is.Not.SameAs(hud));
-            Assert.That((fresh.PanelsSwapped, fresh.MfdExpanded, fresh.MfdMaximised), Is.EqualTo((false, false, false)),
-                "Panel arrangements last one cockpit session.");
+            Assert.That((fresh.PanelsSwapped, fresh.MfdExpanded, fresh.MfdMaximised), Is.EqualTo((true, true, false)),
+                "A new cockpit opens in the arrangement the pilot last set.");
+            Assert.That(Named<Control>(fresh, "CockpitMfdSelectors").Children.OfType<Button>().Where(button => button.Visible).Select(button => button.Pressed),
+                Is.EqualTo(new[] { false, false, true, false, false, false, false, false }),
+                "A new cockpit opens on the MFD page the pilot last chose.");
         });
     }
 
@@ -1706,6 +1891,7 @@ public sealed class WFCockpitTest : InteractionTest
         Assert.That(Bottom(tcas), Is.LessThanOrEqualTo(camera.GlobalPosition.Y));
         Assert.That(Ancestors(tcas, hud).OfType<ScrollContainer>(), Is.Empty,
             "TCAS lamps must never scroll with the instrument bank.");
+        AssertRadarKeys(hud, ui, $"{theme}, {size}, {page}", page);
         var speedLimit = Named<Control>(hud, "MaximumShuttleSpeedBox");
         Assert.That(Ancestors(speedLimit, hud), Does.Not.Contain(flight));
         Assert.That(Ancestors(speedLimit, hud), Does.Contain(mfd), "The speed limiter belongs on SYS.");
@@ -1763,8 +1949,8 @@ public sealed class WFCockpitTest : InteractionTest
             "Flight-status lamps must remain visible when flight controls need to scroll.");
         var heading = Named<WFHeadingInstrument>(hud, "CockpitHeading");
         var dialScroll = Named<ScrollContainer>(hud, "CockpitInstrumentScroll");
-        var headingHeight = hud.CompactDials ? WFCockpitInstrumentSizing.CompactHeight(176) : 176;
-        var dialHeight = hud.CompactDials ? WFCockpitInstrumentSizing.CompactHeight(160) : 160;
+        var headingHeight = WFCockpitInstrumentSizing.ScaledHeight(176, hud.DialScale);
+        var dialHeight = WFCockpitInstrumentSizing.ScaledHeight(160, hud.DialScale);
         if (hud.CompactDials)
             Assert.That(dialScroll.Height, Is.LessThan(WFCockpitInstrumentSizing.FullColumnHeight + 8),
                 $"{theme}, {size}: compact dials are only for columns too short to show the full-size ones.");
@@ -1784,6 +1970,9 @@ public sealed class WFCockpitTest : InteractionTest
         var instrumentScroll = Named<ScrollContainer>(hud, "CockpitInstrumentScroll");
         Assert.That(Ancestors(hull, instruments), Does.Contain(instrumentScroll));
         Assert.That(fuelBank.Width, Is.GreaterThanOrEqualTo(hull.Width - 1));
+        if (hud.DialScale > WFCockpitInstrumentSizing.MinScale)
+            Assert.That(fuelBank.GlobalPosition.Y - Bottom(hull), Is.LessThan(48),
+                $"{theme}, {size}: scaled dials fill the column, leaving no gap above the fuel strip.");
         Assert.That(fuel.Width, Is.GreaterThanOrEqualTo(104), "The fuel scale must remain readable at compact side-panel widths.");
         Assert.That(fuel.CompactStrip, Is.True);
         Assert.That(fuel.Height, Is.EqualTo(44).Within(1));
@@ -1881,7 +2070,7 @@ public sealed class WFCockpitTest : InteractionTest
         Assert.That(Bottom(arc), Is.LessThanOrEqualTo(Bottom(shields)));
         Assert.That(Descendants(shields).OfType<Slider>().Single().Width, Is.GreaterThan(100),
             "The permanent shield power slider must remain usable.");
-        var buttons = selectors.Children.OfType<Button>().ToArray();
+        var buttons = selectors.Children.OfType<Button>().Where(button => button.Visible).ToArray();
         Assert.That(buttons, Has.Length.EqualTo(8));
         foreach (var button in buttons)
         {
@@ -2225,6 +2414,37 @@ public sealed class WFCockpitTest : InteractionTest
                 else
                     AssertLabelFits((Button) control, ui, context);
             }
+        }
+    }
+
+    /// <summary>The IFF, detailed IFF and docks toggles sit on the NAV scope's glass, clear of its mode buttons, and nowhere else.</summary>
+    private static void AssertRadarKeys(WFCockpitView hud, IUserInterfaceManager ui, string context, string page)
+    {
+        var keys = new[] { "IFFToggle", "IFFDetailedToggle", "DockToggle" }.Select(name => Named<Button>(hud, name)).ToArray();
+        foreach (var key in keys)
+            Assert.That(key.VisibleInTree, Is.EqualTo(page == "wf-cockpit-nav"), $"{context}: {key.Name} belongs with the radar on NAV.");
+        if (page != "wf-cockpit-nav")
+            return;
+        Assert.That(keys.Select(key => key.Text), Is.EqualTo(new[]
+        {
+            Loc.GetString("shuttle-console-iff-toggle-short"), Loc.GetString("shuttle-console-iff-detailed-short"),
+            Loc.GetString("shuttle-console-dock-toggle-short"),
+        }), context);
+        var radar = Named<ShuttleNavControl>(hud, "NavRadar");
+        var modes = Named<Control>(hud, "WfRadarModes");
+        Assert.That(modes.VisibleInTree, Is.True, context);
+        for (var index = 0; index < keys.Length; index++)
+        {
+            var key = keys[index];
+            Assert.That(key.GlobalPosition.X, Is.GreaterThanOrEqualTo(radar.GlobalPosition.X), $"{context}: {key.Name}");
+            Assert.That(Right(key), Is.LessThanOrEqualTo(Right(radar) + 1), $"{context}: {key.Name}");
+            Assert.That(key.GlobalPosition.Y, Is.GreaterThanOrEqualTo(radar.GlobalPosition.Y), $"{context}: {key.Name}");
+            Assert.That(Bottom(key), Is.LessThanOrEqualTo(Bottom(radar) + 1), $"{context}: {key.Name}");
+            Assert.That(key.GlobalPosition.X >= Right(modes) || Bottom(key) <= modes.GlobalPosition.Y, Is.True,
+                $"{context}: {key.Name} must not cover the radar's mode buttons.");
+            if (index > 0)
+                Assert.That(key.GlobalPosition.X, Is.GreaterThanOrEqualTo(Right(keys[index - 1])), $"{context}: {key.Name}");
+            AssertLabelFits(key, ui, context);
         }
     }
 

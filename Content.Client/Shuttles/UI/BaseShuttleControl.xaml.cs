@@ -425,7 +425,8 @@ public partial class BaseShuttleControl : MapGridControl
     }
     // End Mono
 
-    protected void DrawGrid(DrawingHandleScreen handle, Matrix3x2 gridToView, Entity<MapGridComponent> grid, Color color, float alpha = 0.01f, bool drawFill = false)
+    // WOLFGATE(AsteroidMining): queue lets the radar's grid loops batch every grid into one draw call
+    protected void DrawGrid(DrawingHandleScreen handle, Matrix3x2 gridToView, Entity<MapGridComponent> grid, Color color, float alpha = 0.01f, bool drawFill = false, bool queue = false)
     {
         var rator = Maps.GetAllTilesEnumerator(grid.Owner, grid.Comp);
         var minimapScale = MinimapScale;
@@ -657,6 +658,14 @@ public partial class BaseShuttleControl : MapGridControl
             gridData.LastBuild = grid.Comp.LastTileModifiedTick;
         }
 
+        // WOLFGATE(AsteroidMining) START: queued grids are transformed and drawn with the rest of their loop
+        if (queue)
+        {
+            WfQueueGrid(handle, gridToView, gridData, color, alpha, drawFill);
+            return;
+        }
+        // WOLFGATE END
+
         var totalData = gridData.Vertices.Count;
         var triCount = gridData.EdgeIndex;
         var edgeCount = totalData - gridData.EdgeIndex;
@@ -711,6 +720,7 @@ public partial class BaseShuttleControl : MapGridControl
     private record struct GridDrawJob : IParallelRobustJob
     {
         public int BatchSize => 64;
+        public int MinimumBatchParallel => 64; // WOLFGATE(AsteroidMining): small grids aren't worth a thread-pool round trip
 
         public float MinimapScale;
         public Vector2 MidPoint;

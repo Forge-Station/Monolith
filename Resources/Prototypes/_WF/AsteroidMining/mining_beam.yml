@@ -1,0 +1,326 @@
+- type: entity
+  id: WFWeaponTurretMiningBeam
+  name: M40 Prospector mining laser
+  parent:
+  - BallisticArtillery
+  - BallisticArtilleryTier2HP
+  - ConstructibleMachine
+  description: A heavy industrial mining laser. It pours heat into an asteroid until the gases trapped inside expand and split the rock apart from within. Push it too hard and the rock goes off all at once.
+  components:
+  - type: StaticPrice
+    price: 6000
+  - type: Sprite
+    sprite: _WF/AsteroidMining/Structures/mining_beam.rsi
+    layers:
+    - state: space_artillery
+      map: [ "enum.WFMiningBeamVisualLayers.Base" ]
+  - type: Appearance
+  - type: AmmoCounter
+  # Draws 5 kW from the grid while firing and 1 kW idle; firing outpaces the recharge slightly, so a full battery covers a minute.
+  - type: Battery
+    maxCharge: 30000
+    startingCharge: 30000
+  - type: ExaminableBattery
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 4000
+  - type: WirelessNetworkConnection
+    range: 500
+  - type: FireControlRotate
+  - type: Gun
+    fireRate: 10
+    recoil: 0
+    minAngle: 0
+    maxAngle: 0
+    shootThermalSignature: 20000
+    soundGunshot: null
+    soundEmpty:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+  - type: SpaceArtillery
+    powerChargeRate: 4000
+    powerUsePassive: 1000
+    powerUseActive: 0
+  - type: Actions
+  - type: HitscanBatteryAmmoProvider
+    proto: WFMiningBeamPulse
+    fireCost: 450
+  - type: Machine
+    board: WFWeaponTurretMiningBeamCircuitboard
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.75,-0.75,0.75,0.75"
+        density: 1500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: RadarBlip
+    radarColor: "#ffb347"
+    scale: 1.5
+    visibleFromOtherGrids: true
+    gridConfig:
+      color: "#ffb347"
+      shape: Square
+      respectZoom: true
+      rotate: true
+      bounds: "-1,-1,1,1"
+  - type: ShipGunType
+    shipType: Energy
+  - type: ShipGunClass
+    shipClass: Light
+  - type: ShipRepairable
+    repairTime: 15
+    repairCost: 40
+  - type: HardpointAnchorableOnly
+    class: Energy
+    size: Heavy
+  - type: WFMiningBeamEmitter
+    strength: 1.5
+    crackRate: 2
+
+# One pulse of the mining laser. It draws no flash of its own; the beam overlay draws the laser.
+- type: entity
+  id: WFMiningBeamPulse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanAmmo
+  - type: HitscanBasicRaycast
+    maxDistance: 60
+  - type: HitscanRadarSignature
+    radarColor: "#ffb347"
+  # Enough to break tile rock through gathering; asteroids and boulders it heats are taken out of the hit list first.
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 1
+        Structural: 1
+  - type: HitscanGathering
+  - type: WFMiningPulse
+
+- type: entity
+  id: WFWeaponTurretMiningBeamCircuitboard
+  parent: BaseMachineCircuitboard
+  name: M40 Prospector mining laser machine board
+  description: A machine printed circuit board for an M40 Prospector mining laser.
+  suffix: Machine Board
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: WFWeaponTurretMiningBeam
+    requirements:
+      MatterBin: 2
+      Manipulator: 4
+    stackRequirements:
+      Steel: 10
+      Plasma: 5
+      CableHV: 2
+    tagRequirements:
+      MicroprocessorEconomy1:
+        amount: 2
+        defaultPrototype: MicroprocessorEconomy1
+      MotorEconomy1:
+        amount: 1
+        defaultPrototype: MotorEconomy1
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: WFWeaponTurretMiningBeamCircuitboard
+  result: WFWeaponTurretMiningBeamCircuitboard
+  completetime: 8
+  materials:
+    Steel: 1500
+    Plasteel: 600
+    Glass: 1000
+    Gold: 500
+    Silver: 400
+    Plasma: 800
+
+# Can't overcharge a rock alone; metallic rock needs a pair, which works at half an M40's pace.
+- type: entity
+  id: WFWeaponTurretMiningLaserSmall
+  name: M12 Prospector mining laser
+  parent:
+  - BallisticArtillery
+  - BallisticArtilleryTier1HP
+  - ConstructibleMachine
+  description: A compact mining laser for smaller ships. It slowly heats an asteroid until the gases trapped inside expand and crack the rock open.
+  components:
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    sprite: _WF/AsteroidMining/Structures/mining_laser_small.rsi
+    layers:
+    - state: space_artillery
+      map: [ "enum.WFMiningBeamVisualLayers.Base" ]
+  - type: Appearance
+  - type: AmmoCounter
+  # Draws 1.9 kW from the grid while firing and 0.4 kW idle; a full battery covers a minute of fire.
+  - type: Battery
+    maxCharge: 6000
+    startingCharge: 6000
+  - type: ExaminableBattery
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 1500
+  - type: WirelessNetworkConnection
+    range: 500
+  - type: FireControlRotate
+  - type: Gun
+    fireRate: 10
+    recoil: 0
+    minAngle: 0
+    maxAngle: 0
+    shootThermalSignature: 8000
+    soundGunshot: null
+    soundEmpty:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+  - type: SpaceArtillery
+    powerChargeRate: 1500
+    powerUsePassive: 400
+    powerUseActive: 0
+  - type: Actions
+  - type: HitscanBatteryAmmoProvider
+    proto: WFMiningBeamPulseSmall
+    fireCost: 160
+  - type: Machine
+    board: WFWeaponTurretMiningLaserSmallCircuitboard
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 800
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: RadarBlip
+    radarColor: "#ffb347"
+    scale: 1
+    visibleFromOtherGrids: true
+    gridConfig:
+      color: "#ffb347"
+      shape: Square
+      respectZoom: true
+      rotate: true
+      bounds: "-0.6,-0.6,0.6,0.6"
+  - type: ShipGunType
+    shipType: Energy
+  - type: ShipGunClass
+    shipClass: Superlight
+  - type: ShipRepairable
+    repairTime: 10
+    repairCost: 20
+  - type: HardpointAnchorableOnly
+    class: Energy
+    size: Light
+  - type: WFMiningBeamEmitter
+    strength: 0.7
+    crackRate: 0.5
+    loopSound:
+      path: /Audio/_WF/AsteroidMining/mining_laser_light.ogg
+      params:
+        volume: -7
+        loop: true
+        maxDistance: 18
+    beamWidth: 0.55
+    muzzleOffset: 0, -0.34
+
+- type: entity
+  parent: WFMiningBeamPulse
+  id: WFMiningBeamPulseSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicRaycast
+    maxDistance: 40
+
+- type: entity
+  id: WFWeaponTurretMiningLaserSmallCircuitboard
+  parent: BaseMachineCircuitboard
+  name: M12 Prospector mining laser machine board
+  description: A machine printed circuit board for an M12 Prospector mining laser.
+  suffix: Machine Board
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: WFWeaponTurretMiningLaserSmall
+    requirements:
+      MatterBin: 1
+      Manipulator: 2
+    stackRequirements:
+      Steel: 5
+      Plasma: 2
+      CableHV: 1
+    tagRequirements:
+      MicroprocessorEconomy1:
+        amount: 1
+        defaultPrototype: MicroprocessorEconomy1
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: WFWeaponTurretMiningLaserSmallCircuitboard
+  result: WFWeaponTurretMiningLaserSmallCircuitboard
+  completetime: 6
+  materials:
+    Steel: 600
+    Glass: 500
+    Plastic: 300
+    Gold: 200
+    Plasma: 300
+
+# Flatpacks, sold by cargo, unpack into a ready laser to bolt onto a hardpoint.
+- type: entity
+  parent: BaseFlatpack
+  id: WFFlatpackMiningBeam
+  name: M40 Prospector flatpack
+  description: A flatpack used for constructing an M40 Prospector heavy mining laser. Mounts on a heavy energy hardpoint.
+  components:
+  - type: Flatpack
+    entity: WFWeaponTurretMiningBeam
+  - type: StaticPrice
+    price: 6000
+
+- type: entity
+  parent: BaseFlatpack
+  id: WFFlatpackMiningLaserSmall
+  name: M12 Prospector flatpack
+  description: A flatpack used for constructing an M12 Prospector light mining laser. Mounts on a light energy hardpoint.
+  components:
+  - type: Flatpack
+    entity: WFWeaponTurretMiningLaserSmall
+  - type: StaticPrice
+    price: 2000
+
+- type: cargoProduct
+  id: WFMiningBeam
+  icon:
+    sprite: _WF/AsteroidMining/Structures/mining_beam.rsi
+    state: space_artillery
+  product: WFFlatpackMiningBeam
+  cost: 7500
+  category: cargoproduct-category-name-shuttle
+  group: market
+
+- type: cargoProduct
+  id: WFMiningLaserSmall
+  icon:
+    sprite: _WF/AsteroidMining/Structures/mining_laser_small.rsi
+    state: space_artillery
+  product: WFFlatpackMiningLaserSmall
+  cost: 2500
+  category: cargoproduct-category-name-shuttle
+  group: market

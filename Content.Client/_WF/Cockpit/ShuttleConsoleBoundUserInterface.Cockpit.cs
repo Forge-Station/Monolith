@@ -1,4 +1,5 @@
 using Content.Client._WF.Cockpit;
+using Content.Shared._WF.AsteroidMining;
 using Content.Shared._WF.Cockpit;
 using Robust.Client.UserInterface;
 
@@ -29,5 +30,7 @@ public sealed partial class ShuttleConsoleBoundUserInterface
     {
         if (message is WFCockpitGunneryStateMessage state)
             _window?.WfReceiveCockpitGunnery(state);
+        else if (message is WFMiningBeamGunneryUpdateMessage mining)
+            _window?.WfReceiveCockpitMining(mining.State);
     }
 }

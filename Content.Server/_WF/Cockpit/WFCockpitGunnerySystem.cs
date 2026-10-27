@@ -94,6 +94,20 @@ public sealed partial class WFCockpitGunnerySystem : EntitySystem
         CanUseHelm(actor, session.Helm) && CanUseConsole(actor, session.Helm, console)
             ? console : null;
 
+    /// <summary>Returns the console linked through this helm only while the complete authorization still holds.</summary>
+    public EntityUid? GetConsole(EntityUid actor, EntityUid helm) =>
+        _sessions.TryGetValue(actor, out var session) && session.Helm == helm ? GetConsole(actor) : null;
+
+    /// <summary>Every pilot's helm and linked console, for telemetry sent through the helm without repeating authorization.</summary>
+    public IEnumerable<(EntityUid Actor, EntityUid Helm, EntityUid Console)> Links()
+    {
+        foreach (var (actor, session) in _sessions)
+        {
+            if (session.Console is { } console)
+                yield return (actor, session.Helm, console);
+        }
+    }
+
     /// <summary>Rechecks the seat, live helm subscription, reach, access and server ownership for every command.</summary>
     public bool CanOperate(EntityUid actor, EntityUid console) =>
         _sessions.TryGetValue(actor, out var session) && session.Console == console && session.Controlling &&

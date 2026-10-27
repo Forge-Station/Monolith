@@ -30,6 +30,7 @@ public sealed partial class ShuttleConsoleWindow
             ("wf-cockpit-dock", DockContainer.WfCockpitDock(lease)),
             ("wf-cockpit-access", AccessContainer),
             ("wf-cockpit-shield-page", shieldDetails),
+            ("wf-cockpit-mining", WfCockpitMiningPage(lease)),
             ("wf-cockpit-systems", systems),
             ("wf-cockpit-alarms", announcements),
         };

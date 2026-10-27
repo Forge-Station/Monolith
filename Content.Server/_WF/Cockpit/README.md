@@ -46,7 +46,9 @@ when clear, and FAULT lights when TCAS is off or telemetry is unavailable. The b
 using guns, with impact countdown, bearing, closing speed and full threat details on hover.
 The speed limiter lives on SYS; flight controls retain dampeners and orbit controls.
 The MFD holds navigation, hull overlays, strategic travel, docking, access, shield details and auxiliary
-systems. Its header has three toggles. Swap trades places between the world view and the MFD: the MFD
+systems, plus mining (AsteroidMining) on ships with mining lasers. A page that implements `IWFCockpitOptionalPage`
+shows its selector only while it has something to show; if it goes away while open the MFD falls back to NAV and
+returns to it when it comes back, as it does when it was the saved page. Its header has three toggles. Swap trades places between the world view and the MFD: the MFD
 takes the large centre area and the world view the full-height column beside it, and nothing else moves.
 Expand shares the width of the two big areas half and half; whichever of them is in the full-height side column
 (the MFD, or the world view when swapped) grows and the other gives way, and the motion gauges and lower row follow
@@ -133,6 +135,7 @@ NAV plot (`WFCockpitAimLines`) and the ship cam (`WFCockpitAimOverlay`, added wh
 - [`Content.Client/_WF/Cockpit/DockingScreen.Cockpit.cs`](../../../Content.Client/_WF/Cockpit/DockingScreen.Cockpit.cs)
 - [`Content.Client/_WF/Cockpit/DockingScreen.CockpitStatus.cs`](../../../Content.Client/_WF/Cockpit/DockingScreen.CockpitStatus.cs)
 - [`Content.Client/_WF/Cockpit/FireControlWindow.Cockpit.cs`](../../../Content.Client/_WF/Cockpit/FireControlWindow.Cockpit.cs)
+- [`Content.Client/_WF/Cockpit/IWFCockpitOptionalPage.cs`](../../../Content.Client/_WF/Cockpit/IWFCockpitOptionalPage.cs)
 - [`Content.Client/_WF/Cockpit/MapGridControl.Cockpit.cs`](../../../Content.Client/_WF/Cockpit/MapGridControl.Cockpit.cs)
 - [`Content.Client/_WF/Cockpit/MapScreen.Cockpit.cs`](../../../Content.Client/_WF/Cockpit/MapScreen.Cockpit.cs)
 - [`Content.Client/_WF/Cockpit/MapScreen.CockpitStatus.cs`](../../../Content.Client/_WF/Cockpit/MapScreen.CockpitStatus.cs)

@@ -86,6 +86,7 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
 
         newPlacer.OwnedDebris[_xformSys.GetWorldPosition(xform)] = uid; // Change our owner.
         component.OwningController = newChunk.Value;
+        component.LastKey = _xformSys.GetWorldPosition(xform); // WOLFGATE(AsteroidMining): drifting rocks left a stale key per move
     }
 
     /// <summary>
@@ -240,7 +241,7 @@ public sealed partial class DebrisFeaturePlacerSystem : BaseWorldSystem
                 continue;
             // WOLFGATE END
 
-            var ent = Spawn(debrisFeatureEv.DebrisProto, coords);
+            var ent = Spawn(placing.Proto, coords); // WOLFGATE(AsteroidMining): a placing handler may swap the debris
             component.OwnedDebris.Add(point, ent);
 
             var owned = EnsureComp<OwnedDebrisComponent>(ent);

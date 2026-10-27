@@ -5,7 +5,7 @@
   id: WFAsfGleaner
   parent: BaseVessel
   name: ASF Gleaner
-  description: A one-man mining pod with 2 M25 mining pulsers, an ore magnet and an ore box. No weapons, no shield.
+  description: A one-man mining pod with 2 M12 mining lasers, an ore magnet and an ore box. No weapons, no shield.
   price: 25000
   category: Micro
   group: Custom

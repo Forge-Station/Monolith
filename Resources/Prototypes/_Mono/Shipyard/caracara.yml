@@ -8,7 +8,9 @@
   id: caracara
   parent: BaseVessel
   name: MI-COR Caracara
-  description: A Militia Ironworks salvage frigate fitted with an Apollo super‑mining laser. Its forward cockpit offers a clear view of the dig site. Includes an  ultra‑efficient pinch reactor, basic FTL, and a compact galley for long shifts in the belt. When paired with the Apollo, its three 20 mm mounts provide adequate defensive fire.
+  # WOLFGATE(AsteroidMining): fitted with the M40 mining laser in place of the Apollo
+  # description: A Militia Ironworks salvage frigate fitted with an Apollo super‑mining laser. Its forward cockpit offers a clear view of the dig site. Includes an  ultra‑efficient pinch reactor, basic FTL, and a compact galley for long shifts in the belt. When paired with the Apollo, its three 20 mm mounts provide adequate defensive fire.
+  description: A Militia Ironworks salvage frigate fitted with an M40 Prospector mining laser for cracking asteroids. Its forward cockpit offers a clear view of the dig site. Includes an ultra-efficient pinch reactor, basic FTL, and a compact galley for long shifts in the belt. Its three 20 mm mounts provide light defensive fire.
   price: 89609
   category: Medium
   group: Shipyard

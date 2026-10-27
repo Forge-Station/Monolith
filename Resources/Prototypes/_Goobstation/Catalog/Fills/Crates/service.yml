@@ -79,90 +79,91 @@
     - id: CdDiskXgOnboarding4
       weight: 0.1
 
-- type: entityTable
-  id: RandomVinylDisk
-  table: !type:GroupSelector
-    children:
-    - id: VinylDiskAI
-      weight: 1
-    - id: VinylDiskDevil
-      weight: 1
-    - id: VinylDiskPizza
-      weight: 1
-    - id: VinylDiskGlossy
-      weight: 1
-    - id: VinylDiskRed
-      weight: 1
-    - id: VinylDiskLightBlue
-      weight: 1
-    - id: VinylDiskBanana
-      weight: 1
-    - id: VinylDiskCarrot
-      weight: 1
-    - id: VinylDiskCyan
-      weight: 1
-    - id: VinylDiskBlue
-      weight: 1
-    - id: VinylDiskYellow
-      weight: 1
-    - id: VinylDiskGreen
-      weight: 1
-    - id: VinylDiskPurple
-      weight: 1
-    - id: VinylDiskOrange
-      weight: 1
-    - id: VinylDiskWhite
-      weight: 1
-    - id: VinylDiskLightRed
-      weight: 1
-    - id: VinylDiskDarkBlue
-      weight: 1
-    - id: VinylDiskPink
-      weight: 1
-    - id: VinylDiskBurnTheWorld
-      weight: 1
-    - id: VinylDiskFeralAngel
-      weight: 1
-    - id: VinylDiskAlsoSprach
-      weight: 1
-    - id: VinylDiskValkyries
-      weight: 1
-    - id: VinylDiskRomeoJuliet
-      weight: 1
-    - id: VinylDiskRussian
-      weight: 1
-    - id: VinylDiskFlowerDuet
-      weight: 1
-    - id: VinylDiskWinterVivaldi
-      weight: 1
-    - id: VinylDiskBachCello
-      weight: 1
-    - id: VinylDiskFloaty
-      weight: 1
-    - id: VinylDiskLime
-      weight: 1
-    - id: VinylDiskForgotten
-      weight: 0.05
-    - id: VinylDiskGetThatAntag
-      weight: 1
-    - id: VinylDiskLaw2
-      weight: 1
-    - id: VinylDiskEphedrine
-      weight: 1
-    - id: VinylDiskRunningOut
-      weight: 1
-    - id: VinylDiskJourney
-      weight: 1
-    - id: VinylDiskTraitorousIntent
-      weight: 1
-    - id: VinylDiskViolet
-      weight: 1
-    - id: VinylDiskWantYouGone
-      weight: 1
-    - id: VinylDiskEgg
-      weight: 1
-    - id: VinylDiskWeAreNumberTwo
-      weight: 1
+#Forge-Change-remove: moved to _Forge
+# - type: entityTable
+#   id: RandomVinylDisk
+#   table: !type:GroupSelector
+#     children:
+#     - id: VinylDiskAI
+#       weight: 1
+#     - id: VinylDiskDevil
+#       weight: 1
+#     - id: VinylDiskPizza
+#       weight: 1
+#     - id: VinylDiskGlossy
+#       weight: 1
+#     - id: VinylDiskRed
+#       weight: 1
+#     - id: VinylDiskLightBlue
+#       weight: 1
+#     - id: VinylDiskBanana
+#       weight: 1
+#     - id: VinylDiskCarrot
+#       weight: 1
+#     - id: VinylDiskCyan
+#       weight: 1
+#     - id: VinylDiskBlue
+#       weight: 1
+#     - id: VinylDiskYellow
+#       weight: 1
+#     - id: VinylDiskGreen
+#       weight: 1
+#     - id: VinylDiskPurple
+#       weight: 1
+#     - id: VinylDiskOrange
+#       weight: 1
+#     - id: VinylDiskWhite
+#       weight: 1
+#     - id: VinylDiskLightRed
+#       weight: 1
+#     - id: VinylDiskDarkBlue
+#       weight: 1
+#     - id: VinylDiskPink
+#       weight: 1
+#     - id: VinylDiskBurnTheWorld
+#       weight: 1
+#     - id: VinylDiskFeralAngel
+#       weight: 1
+#     - id: VinylDiskAlsoSprach
+#       weight: 1
+#     - id: VinylDiskValkyries
+#       weight: 1
+#     - id: VinylDiskRomeoJuliet
+#       weight: 1
+#     - id: VinylDiskRussian
+#       weight: 1
+#     - id: VinylDiskFlowerDuet
+#       weight: 1
+#     - id: VinylDiskWinterVivaldi
+#       weight: 1
+#     - id: VinylDiskBachCello
+#       weight: 1
+#     - id: VinylDiskFloaty
+#       weight: 1
+#     - id: VinylDiskLime
+#       weight: 1
+#     - id: VinylDiskForgotten
+#       weight: 0.05
+#     - id: VinylDiskGetThatAntag
+#       weight: 1
+#     - id: VinylDiskLaw2
+#       weight: 1
+#     - id: VinylDiskEphedrine
+#       weight: 1
+#     - id: VinylDiskRunningOut
+#       weight: 1
+#     - id: VinylDiskJourney
+#       weight: 1
+#     - id: VinylDiskTraitorousIntent
+#       weight: 1
+#     - id: VinylDiskViolet
+#       weight: 1
+#     - id: VinylDiskWantYouGone
+#       weight: 1
+#     - id: VinylDiskEgg
+#       weight: 1
+#     - id: VinylDiskWeAreNumberTwo
+#       weight: 1
 
 - type: entityTable
   id: RandomVinylSleeve

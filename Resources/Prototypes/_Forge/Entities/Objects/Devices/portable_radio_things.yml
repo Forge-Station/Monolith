@@ -1,0 +1,208 @@
+- type: entity
+  name: radio receiver handheld
+  description: A handy handheld radio with adjustible frequency.
+  parent: [BaseItem, RecyclableItemDeviceSmall]
+  id: StationRadioReceiverHandheld
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Devices/handheld_station_radio.rsi
+    layers:
+    - state: base
+  - type: RadioSpeaker
+    powerRequired: False
+    speakNormally: true
+    enabled: true
+    channels:
+    - RadioShow
+  - type: Speech
+    speechVerb: StationRadio
+  - type: ActiveRadio
+    channels:
+    - RadioShow
+  - type: StationRadioReceiver
+    frequency: 1285
+  - type: ActivatableUI
+    key: enum.StationRadioFrequencyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationRadioFrequencyUiKey.Key:
+        type: StationRadioFrequencyBoundUserInterface
+  - type: StaticPrice
+    price: 50
+
+- type: entity
+  parent: Clothing
+  id: StationRadioServerPortable
+  name: portable radio server
+  description: A high-tech recharger adapted for portability equipped with an inbuilt microreactor.
+  components:
+  - type: Item
+    size: Huge # Mono Revert
+  - type: Sprite
+    sprite: _Forge/Objects/Devices/radio_server_portable.rsi
+    state: server
+  - type: Clothing
+    equippedPrefix: server
+    quickEquip: false
+    slots:
+    - back
+    - Belt # Mono
+    - SuitStorage # Mono
+  - type: ContainerContainer
+    containers:
+      rig_slot: !type:ContainerSlot
+      vinyl_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      rig_slot:
+        ejectOnUse: true # Mono
+        whitelist:
+          tags:
+          - PortableRadioRig
+      vinyl_slot:
+        ejectOnUse: true # Mono
+        whitelist:
+          tags:
+          - PortableVinylPlayer
+  - type: StationRadioServer
+  - type: DeviceLinkSource
+    ports:
+    - StationRadioServerPort
+  - type: TelecomExempt
+  - type: RadioMicrophone
+    powerRequired: false
+    broadcastChannel: RadioShow
+    frequency: 1285
+    unobstructedRequired: true
+    toggleOnInteract: false
+  - type: ActivatableUI
+    key: enum.StationRadioFrequencyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationRadioFrequencyUiKey.Key:
+        type: StationRadioFrequencyBoundUserInterface
+
+- type: entity
+  id: StationRadioRigPortable
+  name: radio rig portable
+  description: A handy handheld radio with adjustible frequency.
+  parent: [BaseItem, RecyclableItemDeviceSmall]
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Devices/radio_rig_portable.rsi
+    layers:
+    - state: icon
+  - type: DeviceLinkSink
+    ports:
+    - StationRadioRigPort
+  - type: RadioRig
+    frequency: 1285
+  - type: ActivatableUI
+    key: enum.StationRadioFrequencyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationRadioFrequencyUiKey.Key:
+        type: StationRadioFrequencyBoundUserInterface
+  - type: StaticPrice
+    price: 50
+  - type: Tag
+    tags:
+      - PortableRadioRig
+
+- type: entity
+  id: VinylPlayerPortable
+  name: portable vinyl player
+  description: A handy handheld radio with adjustible frequency.
+  parent: [BaseItem, RecyclableItemDeviceSmall]
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Devices/radio_player_portable.rsi
+    layers:
+    - state: player-close
+  - type: VinylPlayer
+  - type: DeviceLinkSource
+    ports:
+    - VinylPlayerPort
+  - type: DeviceList
+  - type: ContainerContainer
+    containers:
+      vinyl: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      vinyl:
+        name: vinyl
+        whitelist:
+          components:
+          - Vinyl
+  - type: ItemMapper
+    containerWhitelist: [vinyl]
+    mapLayers:
+      disk_installed:
+        whitelist:
+          components:
+          - Vinyl
+  - type: StaticPrice
+    price: 50
+  - type: Tag
+    tags:
+      - PortableVinylPlayer
+
+- type: entity
+  parent: [NFPouchUtility]
+  id: PouchVinylHolder
+  name: vinyl punch
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+      color: "#333349"
+    - state: closed
+      map: ["closeLayer"]
+      color: "#6f7b94"
+    - state: open
+      color: "#6f7b94"
+      map: ["openLayer"]
+      visible: false
+    - state: inside
+      map: ["insideLayer"]
+      visible: false
+    - state: fill-util4-1
+      map: [ "pouchFill4" ]
+      visible: false
+    - state: fill-util3-1
+      map: [ "pouchFill3" ]
+      visible: false
+    - state: fill-util2-1
+      map: [ "pouchFill2" ]
+      visible: false
+    - state: fill-util1-1
+      map: [ "pouchFill1" ]
+      visible: false
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#6f7b94"
+      right:
+      - state: inhand-right
+        color: "#6f7b94"
+  - type: Clothing
+    clothingVisuals:
+      belt:
+      - state: equipped-BELT
+        color: "#6f7b94"
+      pocket:
+      - state: equipped-BELT
+        color: "#6f7b94"
+  - type: Storage
+    grid:
+    - 0,0,6,3
+    whitelist:
+      tags:
+        - CD
+        - VinylSleeveFit
+        - VinylSleeve
+      components:
+          - Vinyl
+  - type: StaticPrice
+    price: 50

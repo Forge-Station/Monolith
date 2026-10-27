@@ -1,0 +1,250 @@
+- type: entityTable
+  id: RandomVinylDiskAll
+  table: !type:GroupSelector
+    children:
+    #Template
+    # - id: 
+    #   weight: 1
+    #region Goonstation
+    - id: VinylDiskAdventure3
+      weight: 1
+    - id: VinylDiskAdventure4
+      weight: 1
+    - id: VinylDiskAdventure5
+      weight: 1
+    - id: VinylDiskAfterParty
+      weight: 1
+    - id: VinylDiskAnonymous
+      weight: 1
+    - id: VinylDiskAtlas
+      weight: 1
+    - id: VinylDiskAtmosphere
+      weight: 1
+    - id: VinylDiskBanjo1
+      weight: 1
+    - id: VinylDiskBeaches
+      weight: 1
+    - id: VinylDiskBiodome
+      weight: 1
+    - id: VinylDiskBlackWingInterface
+      weight: 1
+    - id: VinylDiskBumblebee
+      weight: 1
+    - id: VinylDiskChill1
+      weight: 1
+    - id: VinylDiskChill2
+      weight: 1
+    - id: VinylDiskChill3
+      weight: 1
+    - id: VinylDiskChill4
+      weight: 1
+    - id: VinylDiskChristmasSong
+      weight: 1
+    - id: VinylDiskCloudSkyManGuy
+      weight: 1
+    - id: VinylDiskDanceOnASpaceVolcano
+      weight: 1
+    - id: VinylDiskDistantStar
+      weight: 1
+    - id: VinylDiskEveryoneIsSoAlive
+      weight: 1
+    - id: VinylDiskFloaty
+      weight: 1
+    - id: VinylDiskFunkadelic
+      weight: 1
+    - id: VinylDiskGiga
+      weight: 1
+    - id: VinylDiskGraveyard
+      weight: 1
+    - id: VinylDiskGroovy
+      weight: 1
+    - id: VinylDiskHighTechnologicBeat
+      weight: 1
+    - id: VinylDiskHonkmas
+      weight: 1
+    - id: VinylDiskItFeelsGoodToBeAliveToo
+      weight: 1
+    - id: VinylDiskKeyLime
+      weight: 1
+    - id: VinylDiskLayEggIsTrue
+      weight: 1
+    - id: VinylDiskLunch
+      weight: 1
+    - id: VinylDiskMaxi
+      weight: 1
+    - id: VinylDiskMonkeyRiot
+      weight: 1
+    - id: VinylDiskOhNoEvilStar
+      weight: 1
+    - id: VinylDiskPlanets
+      weight: 1
+    - id: VinylDiskRepose
+      weight: 1
+    - id: VinylDiskRiverdancer
+      weight: 1
+    - id: VinylDiskSpaceGardener
+      weight: 1
+    - id: VinylDiskUguu
+      weight: 1
+    - id: VinylDiskUpbeat1
+      weight: 1
+    - id: VinylDiskUpbeat2
+      weight: 1
+    - id: VinylDiskWarriorsHonk
+      weight: 1
+    - id: VinylDiskWaystations
+      weight: 1
+    - id: VinylDiskWeAreNumberTwo
+      weight: 1
+    - id: VinylDiskXtra
+      weight: 1
+    #region Classical
+    - id: VinylDiskAlsoSprachZarathustra
+      weight: 1
+    - id: VinylDiskBachCelloSuite
+      weight: 1
+    - id: VinylDiskRideOfTheValkyries
+      weight: 1
+    - id: VinylDiskRomeoAndJuliet
+      weight: 1
+    - id: VinylDiskRussianDance
+      weight: 1
+    - id: VinylDiskTheFlowerDuet
+      weight: 1
+    - id: VinylDiskWinterVivaldi
+      weight: 1
+    #region Goobstation
+    - id: VinylDiskAirportLounge
+      weight: 1
+    - id: VinylDiskBoogieParty
+      weight: 1
+    - id: VinylDiskBurnTheWorldWaltz
+      weight: 1
+    - id: VinylDiskFeralAngelWaltz
+      weight: 1
+    - id: VinylDiskJingleBells
+      weight: 1
+    - id: VinylDiskLateNightRadio
+      weight: 1
+    - id: VinylDiskMesmerizingGalaxyLoop
+      weight: 1
+    - id: VinylDiskNightInVenice
+      weight: 1
+    - id: VinylDiskOpenTTDJourney
+      weight: 1
+    - id: VinylDiskpeakasshole
+      weight: 1
+    - id: VinylDiskRunningOutCover
+      weight: 1
+    - id: VinylDiskSpaceJazz
+      weight: 1
+    - id: VinylDiskVibingOverVenus
+      weight: 1
+    - id: VinylDiskViolet
+      weight: 1
+    - id: VinylDiskWantYouGone
+      weight: 1
+    #region Jukebox
+    - id: VinylDiskConstellations
+      weight: 1
+    - id: VinylDiskFlipFlap
+      weight: 1
+    - id: VinylDiskSector11
+      weight: 1
+    - id: VinylDiskStarlight
+      weight: 1
+    - id: VinylDiskSunset
+      weight: 1
+    - id: VinylDiskTitle3
+      weight: 1
+    - id: VinylDiskDrifting
+      weight: 1
+    - id: VinylDiskSpaceAsshole
+      weight: 1
+    - id: VinylDiskFrontierArrivals
+      weight: 1
+    - id: VinylDiskVictory
+      weight: 1
+    #region lobby
+    - id: VinylDiskAWalkInTheWoods
+      weight: 1
+    - id: VinylDiskAbsconditus
+      weight: 1
+    - id: VinylDiskAcrossTheVoid
+      weight: 1
+    - id: VinylDiskAtAnyCost
+      weight: 1
+    - id: VinylDiskBrothersInArms
+      weight: 1
+    - id: VinylDiskBucsiSingularity
+      weight: 1
+    - id: VinylDiskInAmberClad
+      weight: 1
+    - id: VinylDiskLasersRipApartTheBulkhead
+      weight: 1
+    - id: VinylDiskMonument
+      weight: 1
+    - id: VinylDiskScpIsd
+      weight: 1
+    - id: VinylDiskWhenDayBreaks
+      weight: 1
+    #region A-Guy
+    - id: VinylDiskNothingWrongWithMegacorpos
+      weight: 1
+    - id: VinylDiskTheStation
+      weight: 1
+    - id: VinylDiskTomfooleryRequired
+      weight: 1
+    #region Syndi
+    - id: VinylDiskEphedrineOverdose
+      weight: 0.1
+    - id: VinylDiskGetThatAntag!
+      weight: 0.1
+    - id: VinylDiskLAW2OPENARMORY
+      weight: 0.1
+    - id: VinylDiskNUKIES_TRAP
+      weight: 0.1
+    - id: VinylDiskTraitorousIntent
+      weight: 0.1
+    - id: VinylDiskNuclearOperationsInfil
+      weight: 0.1
+    - id: VinylDiskRevolution
+      weight: 0.1
+
+- type: entityTable
+  id: RandomVinylDiskClassical
+  table: !type:GroupSelector
+    children:
+    - id: VinylDiskAlsoSprachZarathustra
+      weight: 1
+    - id: VinylDiskBachCelloSuite
+      weight: 1
+    - id: VinylDiskRideOfTheValkyries
+      weight: 1
+    - id: VinylDiskRomeoAndJuliet
+      weight: 1
+    - id: VinylDiskRussianDance
+      weight: 1
+    - id: VinylDiskTheFlowerDuet
+      weight: 1
+    - id: VinylDiskWinterVivaldi
+      weight: 1
+
+- type: entityTable
+  id: RandomVinylDiskSyndicate
+  table: !type:GroupSelector
+    children:
+    - id: VinylDiskEphedrineOverdose
+      weight: 1
+    - id: VinylDiskGetThatAntag!
+      weight: 1
+    - id: VinylDiskLAW2OPENARMORY
+      weight: 1
+    - id: VinylDiskNUKIES_TRAP
+      weight: 1
+    - id: VinylDiskTraitorousIntent
+      weight: 1
+    - id: VinylDiskNuclearOperationsInfil
+      weight: 1
+    - id: VinylDiskRevolution
+      weight: 1

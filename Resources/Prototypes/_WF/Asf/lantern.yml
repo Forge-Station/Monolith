@@ -52,13 +52,13 @@
         - WFAsfBountyArtifactFragments
         - WFAsfBountyArtifact
         - WFAsfBountySurvey
-        - WFAsfBountyArtifactStorage
-        - WFAsfBountyArtifactIntercom
-        - WFAsfBountyArtifactInstrument
         - WFAsfBountyArtifactVessel
         - WFAsfBountyArtifactWandering
         - WFAsfBountyArtifactSpeed
-        - WFAsfBountyArtifactPower
         - WFAsfBountyArtifactDrill
         - WFAsfBountyArtifactMultitool
-        - WFAsfBountyArtifactGun
+        - WFAsfBountyArtifactLamp
+        - WFAsfBountyArtifactRainbowLamp
+        - WFAsfBountyArtifactRadioactive
+        - WFAsfBountyArtifactGravity
+        - WFAsfBountyArtifactStealth

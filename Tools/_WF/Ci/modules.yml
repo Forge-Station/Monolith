@@ -1231,30 +1231,6 @@ unmarked:
   - path: Content.Server/Worldgen/Systems/WorldgenConfigSystem.cs
     module: EngineCompat
     reason: Engine v280 removed IMapManager; uses SharedMapSystem.
-  - path: Content.Server/Xenoarchaeology/Equipment/Components/AnalysisConsoleComponent.cs
-    module: EngineCompat
-    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
-  - path: Content.Server/Xenoarchaeology/Equipment/Components/ArtifactAnalyzerComponent.cs
-    module: EngineCompat
-    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
-  - path: Content.Server/Xenoarchaeology/Equipment/Components/TraversalDistorterComponent.cs
-    module: EngineCompat
-    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
-  - path: Content.Server/Xenoarchaeology/XenoArtifacts/ArtifactComponent.cs
-    module: EngineCompat
-    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
-  - path: Content.Server/Xenoarchaeology/XenoArtifacts/ArtifactSystem.Actions.cs
-    module: EngineCompat
-    reason: Engine v289 removed [ValidatePrototypeId]; its constants became ProtoId fields.
-  - path: Content.Server/Xenoarchaeology/XenoArtifacts/Effects/Components/ChemicalPuddleArtifactComponent.cs
-    module: EngineCompat
-    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
-  - path: Content.Server/Xenoarchaeology/XenoArtifacts/Effects/Components/FoamArtifactComponent.cs
-    module: EngineCompat
-    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
-  - path: Content.Server/Xenoarchaeology/XenoArtifacts/Triggers/Components/ArtifactDamageTriggerComponent.cs
-    module: EngineCompat
-    reason: Engine v289 removed the PrototypeId serializers; uses the EngineCompat copies.
   - path: Content.Server/_CE/Power/Nodes/CECableVerticalNode.cs
     module: EngineCompat
     reason: Engine v280 removed IMapManager; uses SharedMapSystem.
@@ -2746,3 +2722,18 @@ unmarked:
   - path: Resources/Textures/_White/Structures/Furniture/
     module: DecorImport
     reason: Resin nest sprite, ported from Goob Station.
+  - path: Resources/Audio/Items/Artifact/artifact-force-activated1.ogg
+    module: Xenoarch
+    reason: Artifact forced activation sound from the wizden xenoarch rework.
+  - path: Resources/Audio/_NF/Items/Artifact/
+    module: Xenoarch
+    reason: Frontier's quieter artifact unlock failure sound.
+  - path: Resources/Textures/Objects/Specific/Xenoarchaeology/xeno_artifacts.rsi/
+    module: Xenoarch
+    reason: Artifact activation state from the wizden xenoarch rework.
+  - path: Resources/Maps/Shuttles/ShuttleEvent/incorporation.yml
+    module: Xenoarch
+    reason: Mapped artifacts use XenoArtifact; BiasedArtifact no longer exists.
+  - path: Resources/Maps/elkridge.yml
+    module: Xenoarch
+    reason: Removed the mapped artifact's BiasedArtifact component, which no longer exists.

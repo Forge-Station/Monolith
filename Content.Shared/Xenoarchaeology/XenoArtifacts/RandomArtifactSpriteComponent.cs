@@ -10,7 +10,7 @@ public sealed partial class RandomArtifactSpriteComponent : Component
     public int MaxSprite = 14;
 
     [DataField("activationTime")]
-    public double ActivationTime = 2.0;
+    public double ActivationTime = 0.4; // WOLFGATE(Xenoarch): wizden's short activation flash
 
     public TimeSpan? ActivationStart;
 }

@@ -1,6 +1,6 @@
 # Lantern Post bounties: monolithic crystals and alien artifacts, paid in ARG (WFAsfRewardGrant).
 # A crystal pays about 1.25 ARG per 1,000 spesos of its sale price. Artifact bounties ask for an effect an artifact
-# keeps for good once its node is reached (the utility effects), so the property is still there when it is shipped.
+# keeps for good once its node is reached, so the property is still there when it is shipped.
 
 - type: Tag
   id: WFMonolithicCrystalSmall
@@ -98,7 +98,7 @@
     amount: 1
     whitelist:
       components:
-      - Artifact
+      - XenoArtifact
 
 - type: cargoBounty
   id: WFAsfBountySurvey
@@ -112,60 +112,12 @@
     amount: 1
     whitelist:
       components:
-      - Artifact
+      - XenoArtifact
   - name: wf-asf-bounty-name-crystal-small
     amount: 2
     whitelist:
       tags:
       - WFMonolithicCrystalSmall
-
-- type: cargoBounty
-  id: WFAsfBountyArtifactStorage
-  reward: 30
-  rewardSuffix: ARG
-  rewardProto: WFAsfRewardGrant
-  description: wf-asf-bounty-desc-artifact
-  idPrefix: LTN
-  entries:
-  - name: wf-asf-bounty-name-artifact-storage
-    amount: 1
-    whitelist:
-      requireAll: true
-      components:
-      - Artifact
-      - Storage
-
-- type: cargoBounty
-  id: WFAsfBountyArtifactIntercom
-  reward: 30
-  rewardSuffix: ARG
-  rewardProto: WFAsfRewardGrant
-  description: wf-asf-bounty-desc-artifact
-  idPrefix: LTN
-  entries:
-  - name: wf-asf-bounty-name-artifact-intercom
-    amount: 1
-    whitelist:
-      requireAll: true
-      components:
-      - Artifact
-      - Intercom
-
-- type: cargoBounty
-  id: WFAsfBountyArtifactInstrument
-  reward: 25
-  rewardSuffix: ARG
-  rewardProto: WFAsfRewardGrant
-  description: wf-asf-bounty-desc-artifact
-  idPrefix: LTN
-  entries:
-  - name: wf-asf-bounty-name-artifact-instrument
-    amount: 1
-    whitelist:
-      requireAll: true
-      components:
-      - Artifact
-      - Instrument
 
 - type: cargoBounty
   id: WFAsfBountyArtifactVessel
@@ -180,7 +132,7 @@
     whitelist:
       requireAll: true
       components:
-      - Artifact
+      - XenoArtifact
       - RefillableSolution
 
 - type: cargoBounty
@@ -196,7 +148,7 @@
     whitelist:
       requireAll: true
       components:
-      - Artifact
+      - XenoArtifact
       - RandomWalk
 
 - type: cargoBounty
@@ -212,24 +164,8 @@
     whitelist:
       requireAll: true
       components:
-      - Artifact
+      - XenoArtifact
       - HeldSpeedModifier
-
-- type: cargoBounty
-  id: WFAsfBountyArtifactPower
-  reward: 50
-  rewardSuffix: ARG
-  rewardProto: WFAsfRewardGrant
-  description: wf-asf-bounty-desc-artifact
-  idPrefix: LTN
-  entries:
-  - name: wf-asf-bounty-name-artifact-power
-    amount: 1
-    whitelist:
-      requireAll: true
-      components:
-      - Artifact
-      - PowerSupplier
 
 - type: cargoBounty
   id: WFAsfBountyArtifactDrill
@@ -244,7 +180,7 @@
     whitelist:
       requireAll: true
       components:
-      - Artifact
+      - XenoArtifact
       - Sharp
 
 - type: cargoBounty
@@ -260,21 +196,85 @@
     whitelist:
       requireAll: true
       components:
-      - Artifact
+      - XenoArtifact
       - MultipleTool
 
 - type: cargoBounty
-  id: WFAsfBountyArtifactGun
-  reward: 50
+  id: WFAsfBountyArtifactLamp
+  reward: 20
   rewardSuffix: ARG
   rewardProto: WFAsfRewardGrant
   description: wf-asf-bounty-desc-artifact
   idPrefix: LTN
   entries:
-  - name: wf-asf-bounty-name-artifact-gun
+  - name: wf-asf-bounty-name-artifact-lamp
     amount: 1
     whitelist:
       requireAll: true
       components:
-      - Artifact
-      - RevolverAmmoProvider
+      - XenoArtifact
+      - RandomPointLight
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactRainbowLamp
+  reward: 45
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-rainbow-lamp
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - XenoArtifact
+      - RgbLightController
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactRadioactive
+  reward: 20
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-radioactive
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - XenoArtifact
+      - RadiationSource
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactGravity
+  reward: 30
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-gravity
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - XenoArtifact
+      - GravityWell
+
+- type: cargoBounty
+  id: WFAsfBountyArtifactStealth
+  reward: 45
+  rewardSuffix: ARG
+  rewardProto: WFAsfRewardGrant
+  description: wf-asf-bounty-desc-artifact
+  idPrefix: LTN
+  entries:
+  - name: wf-asf-bounty-name-artifact-stealth
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - XenoArtifact
+      - Stealth

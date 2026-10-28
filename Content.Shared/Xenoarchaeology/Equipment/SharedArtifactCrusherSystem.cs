@@ -3,6 +3,7 @@ using Content.Shared.Storage.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Content.Shared.Emag.Systems;
+using Content.Shared.Xenoarchaeology.Equipment.Components; // WOLFGATE(Xenoarch)
 
 namespace Content.Shared.Xenoarchaeology.Equipment;
 
@@ -64,8 +65,12 @@ public abstract partial class SharedArtifactCrusherSystem : EntitySystem
         if (!_emag.CheckFlag(ent, EmagType.Interaction))
             return;
 
-        if (ent.Comp.AutoLock)
-            ent.Comp.AutoLock = false;
+        // WOLFGATE(Xenoarch) START: wizden's fix, only an unemag that clears the auto-lock is handled
+        if (!ent.Comp.AutoLock)
+            return;
+
+        ent.Comp.AutoLock = false;
+        // WOLFGATE END
         args.Handled = true;
     }
     // End Frontier

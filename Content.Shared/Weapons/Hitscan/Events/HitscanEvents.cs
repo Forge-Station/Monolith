@@ -94,3 +94,11 @@ public record struct HitscanDamageDealtEvent
     /// </summary>
     public DamageSpecifier DamageDealt;
 }
+
+// WOLFGATE(Xenoarch) START: raised on each entity a hitscan strikes, for artifact laser triggers
+/// <summary>
+/// Raised on an entity struck by a hitscan, after ship shields intercept it.
+/// </summary>
+[ByRefEvent]
+public record struct HitscanRaycastStrikeEvent(EntityUid Hitscan, EntityUid Gun, EntityUid? Shooter);
+// WOLFGATE END

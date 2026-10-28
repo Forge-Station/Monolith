@@ -724,3 +724,74 @@ WolfmedStimPen: WFWolfmedStimPen
 WFWindreignCarrierComputer: null
 # WOLFGATE END
 
+# WOLFGATE START: Monolith#4816 renamed the WL-01 suit and helmet without a migration
+# 2026-10-08
+ClothingOuterHardsuitMercenaryWarlord: ClothingOuterHardsuitWarlord
+ClothingHelmetHardsuitMercenaryWarlord: ClothingHelmetHardsuitWarlord
+# WOLFGATE END
+
+
+# WOLFGATE(Avali) START: WF prefix on the Avali brain and bio-synthetic limbs
+# 2026-10-09
+OrganAvaliBrain: WFOrganAvaliBrain
+BioSynthAvaliHeadEmpty: WFBioSynthAvaliHeadEmpty
+BioSynthAvaliLeftArm: WFBioSynthAvaliLeftArm
+BioSynthAvaliRightArm: WFBioSynthAvaliRightArm
+BioSynthAvaliLeftHand: WFBioSynthAvaliLeftHand
+BioSynthAvaliRightHand: WFBioSynthAvaliRightHand
+BioSynthAvaliLeftLeg: WFBioSynthAvaliLeftLeg
+BioSynthAvaliRightLeg: WFBioSynthAvaliRightLeg
+BioSynthAvaliLeftFoot: WFBioSynthAvaliLeftFoot
+BioSynthAvaliRightFoot: WFBioSynthAvaliRightFoot
+# WOLFGATE END
+
+# WOLFGATE(ClownCosmetics) START: WF prefix on the ported clown and mime clothing
+ClothingHeadHatCircusClown: WFClothingHeadHatCircusClown
+ClothingUniformCircusClown: WFClothingUniformCircusClown
+ClothingUniformJokester: WFClothingUniformJokester
+ClothingOuterCoatJokester: WFClothingOuterCoatJokester
+ClothingUniformJesterEvil: WFClothingUniformJesterEvil
+ClothingHeadJesterEvilHat: WFClothingHeadJesterEvilHat
+ClothingNeckRuffle: WFClothingNeckRuffle
+ClothingMaskClownNose: WFClothingMaskClownNose
+ClothingShoesCircus: WFClothingShoesCircus
+ClothingShoesJokester: WFClothingShoesJokester
+ClothingShoesJesterEvilJanglers: WFClothingShoesJesterEvilJanglers
+ClothingHeadHatMimeBowler: WFClothingHeadHatMimeBowler
+ClothingOuterCoatPufferMime: WFClothingOuterCoatPufferMime
+ClothingUniformJumpsuitMimeCropped: WFClothingUniformJumpsuitMimeCropped
+ClothingUniformJumpskirtMimeCropped: WFClothingUniformJumpskirtMimeCropped
+ClothingUniformJumpsuitMimeNouveau: WFClothingUniformJumpsuitMimeNouveau
+ClothingUniformJumpskirtMimeNouveau: WFClothingUniformJumpskirtMimeNouveau
+ClothingShoesMimeBoots: WFClothingShoesMimeBoots
+CandyClownUniformSuit: WFCandyClownUniformSuit
+StripedClownUniformSuit: WFStripedClownUniformSuit
+SpottedClownUniformSuit: WFSpottedClownUniformSuit
+ClothingUniformJumpsuitPerformerClown: WFClothingUniformJumpsuitPerformerClown
+ClothingUniformJumpskirtPerformerClown: WFClothingUniformJumpskirtPerformerClown
+ClothingUniformJumpsuitClownFormal: WFClothingUniformJumpsuitClownFormal
+ClothingUniformJumpskirtClownFormal: WFClothingUniformJumpskirtClownFormal
+ClothingUniformJumpsuitPerformerMime: WFClothingUniformJumpsuitPerformerMime
+ClothingUniformJumpskirtPerformerMime: WFClothingUniformJumpskirtPerformerMime
+ClothingUniformJumpsuitMimeSuaveWhite: WFClothingUniformJumpsuitMimeSuaveWhite
+ClothingUniformJumpsuitMimeSuaveBlack: WFClothingUniformJumpsuitMimeSuaveBlack
+MimeFrillsUniformSuit: WFMimeFrillsUniformSuit
+ClothingMaskSusMime: WFClothingMaskSusMime
+ClothingUnderSocksMime: WFClothingUnderSocksMime
+ClothingMaskMimeSecurity: WFClothingMaskMimeSecurity
+CoolCoyoteClothesSexyclown: WFCoolCoyoteClothesSexyclown
+CoolCoyoteClothesSexymime: WFCoolCoyoteClothesSexymime
+# WOLFGATE END
+
+# WOLFGATE(Xenoarch) START: wizden xenoarch rework replaced the old artifact types
+SimpleXenoArtifact: ComplexXenoArtifact
+MediumXenoArtifact: ComplexXenoArtifact
+SimpleXenoArtifactItem: ComplexXenoArtifactItem
+MediumXenoArtifactItem: ComplexXenoArtifactItem
+VariedXenoArtifactItem: ComplexXenoArtifactItem
+# WOLFGATE END
+
+# WOLFGATE(DecorImport) START: duplicate flesh wall art merged into the TauCeti meatland wall
+# 2026-10-26
+GoonSetpiecesBloodwall: TauCetiMeatlandWall
+# WOLFGATE END

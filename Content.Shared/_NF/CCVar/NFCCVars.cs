@@ -336,4 +336,16 @@ public sealed class NFCCVars
     /// </summary>
     public static readonly CVarDef<float> CrateGenerationGridBoundsScale =
         CVarDef.Create("nf14.events.crate_generation_grid_bounds_scale", 0.6f, CVar.SERVERONLY);
+
+    // WOLFGATE(Xenoarch) START: Frontier's xenoarch cvar, ported with the rework
+    /*
+     * Xenoarchaeology
+     */
+
+    /// <summary>
+    /// If true, every artifact node can only be activated once.
+    /// </summary>
+    public static readonly CVarDef<bool> XenoarchSingleUseNodes =
+        CVarDef.Create("nf14.xenoarch.single_use_nodes", true, CVar.REPLICATED);
+    // WOLFGATE END
 }

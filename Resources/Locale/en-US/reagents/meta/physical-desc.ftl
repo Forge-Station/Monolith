@@ -96,5 +96,5 @@ reagent-physical-desc-holy = holy
 reagent-physical-desc-slimy = slimy
 reagent-physical-desc-neural = neural
 
-# Wolfgate: ported from HardLight
-reagent-physical-desc-unidentifiable = unidentifiable
+# WOLFGATE(Xenoarch)
+reagent-physical-desc-non-newtonian = non-newtonian

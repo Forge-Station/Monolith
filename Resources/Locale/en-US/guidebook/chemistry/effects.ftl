@@ -118,12 +118,6 @@ reagent-effect-guidebook-status-effect =
                 } {NATURALFIXED($time, 3)} {MANY("second", $time)} of {LOC($key)}
     }
 
-reagent-effect-guidebook-activate-artifact =
-    { $chance ->
-        [1] Attempts
-        *[other] attempt
-    } to activate an artifact
-
 reagent-effect-guidebook-set-solution-temperature-effect =
     { $chance ->
         [1] Sets
@@ -389,6 +383,16 @@ reagent-effect-guidebook-add-to-solution-reaction =
         [1] Causes
         *[other] cause
     } chemicals applied to an object to be added to its internal solution container
+
+reagent-effect-guidebook-artifact-unlock =
+    { $chance ->
+        [1] Helps
+        *[other] help
+        } unlock an alien artifact.
+
+# WOLFGATE(Xenoarch)
+reagent-effect-guidebook-artifact-durability-restore =
+    Restores {$restored} durability in active alien artifact nodes.
 
 reagent-effect-guidebook-plant-attribute =
     { $chance ->

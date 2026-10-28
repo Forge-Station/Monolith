@@ -1,0 +1,9 @@
+// WOLFGATE(Xenoarch) START: wizden's xenoarch rework
+namespace Content.Shared.Xenoarchaeology.Artifact.XAT.Components;
+
+/// <summary>
+/// This is used for an artifact that is activated by being microwaved.
+/// </summary>
+[RegisterComponent, Access(typeof(XATMicrowaveSystem))]
+public sealed partial class XATMicrowaveComponent : Component;
+// WOLFGATE END

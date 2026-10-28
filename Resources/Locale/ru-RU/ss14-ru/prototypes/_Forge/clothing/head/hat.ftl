@@ -30,3 +30,5 @@ ent-ClothingHeadHatCapUI = кепка U.I.
     .desc = Обычная чёрная бейсболка с фиолетовым черепом.
 ent-ClothingHeadHatBeretUI = берет U.I.
     .desc = Тёмный берет с лого Ullman Industries. Стоп почему контрабандисты себя выделяют?
+ent-ClothingHeadHatBeretVdv = Берет ВДВ
+    .desc = Берет Воздушно десантных войск СССП. Видя его вы вспоминаете какую-то песню.

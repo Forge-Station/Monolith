@@ -17,9 +17,16 @@
   - type: Battery
     maxCharge: 3000
     startingCharge: 3000
+  # Forge-change-start: add self recharger
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 100
+    autoRechargePause: true
+    autoRechargePauseTime: 10
+  # Forge-change-end
   - type: HitscanBatteryAmmoProvider
     proto: PulsedPlasma
-    fireCost: 3000
+    fireCost: 750 # Forge-change 3000->750
   - type: StaticPrice
     price: 2200
   - type: Tag

@@ -36,6 +36,10 @@
     - Magazine45_ACPSubMachineGunIncendiary
     - AmmoBox45_ACPIncendiary
     - AmmoBox23x75mmFlashbang
+    - Magazine635x40mmCaselessIncendiary
+    - AmmoBox635x40mmCaselessIncendiary
+    - Magazine68x52mmCaselessIncendiary
+    - AmmoBox68x52mmCaselessIncendiary
 
 - type: entity
   parent: NFBaseBlueprintArmory
@@ -72,6 +76,12 @@
     - Magazine45_ACPPistolUranium
     - Magazine45_ACPSubMachineGunUranium
     - AmmoBox45_ACPUranium
+    - Magazine635x40mmCaselessUranium
+    - AmmoBox635x40mmCaselessUranium
+    - Magazine68x52mmCaselessUranium
+    - AmmoBox68x52mmCaselessUranium
+    - Magazine8x65mmSKRUranium
+    - AmmoBox8x65mmSKRUranium
 
 - type: entity
   parent: NFBaseBlueprintArmory
@@ -91,6 +101,8 @@
     - AmmoBox762x39mmPlasteelAP
     - AmmoBox357_magnumPlasteelAP
     - SpeedLoader357_magnumPlasteelAP
+    - Magazine68x52mmPlasteelAP
+    - AmmoBox68x52mmPlasteelAP
     - Magazine46x30mmPistolPlasteelAP
     - Magazine46x30mmSubMachineGunPlasteelAP
     - AmmoBox46x30mmPlasteelAP
@@ -109,6 +121,10 @@
     - AmmoBox23x75mmFlechette
     - Magazine12_gaugeFlechette
     - AmmoBox12_gaugeFlechette
+    - Magazine635x40mmCaselessPlasteelAP
+    - AmmoBox635x40mmCaselessPlasteelAP
+    - Magazine8x65mmSKRPlasteelAP
+    - AmmoBox8x65mmSKRPlasteelAP
 
 - type: entity
   parent: NFBaseBlueprintArmory
@@ -131,6 +147,8 @@
     - AmmoBox762x39mmRIP
     - SpeedLoader357_magnumRIP
     - AmmoBox357_magnumRIP
+    - Magazine68x52mmRIP
+    - AmmoBox68x52mmRIP
     - Magazine46x30mmPistolRIP
     - Magazine46x30mmSubMachineGunRIP
     - AmmoBox46x30mmRIP
@@ -143,6 +161,10 @@
     - Magazine45_ACPPistolRIP
     - Magazine45_ACPSubMachineGunRIP
     - AmmoBox45_ACPRIP
+    - Magazine635x40mmCaselessRIP
+    - AmmoBox635x40mmCaselessRIP
+    - Magazine8x65mmSKRRIP
+    - AmmoBox8x65mmSKRRIP
 
 - type: entity
   parent: NFBaseBlueprintArmory
@@ -158,3 +180,13 @@
     - PrintableStickyBomb
     - PrintableBombCollar
     - PrintableBombCollarSealer
+
+- type: entity
+  parent: NFBaseBlueprintArmory
+  id: ForgeBlueprintPulsedPlasmaLaserCanister
+  name: pulsed plasma laser canister blueprint
+  description: A blueprint with a schematic of a pulsed plasma laser canister. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - PulsedPlasmaLaserCanister

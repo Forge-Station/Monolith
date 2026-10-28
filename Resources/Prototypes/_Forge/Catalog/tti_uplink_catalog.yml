@@ -17,13 +17,49 @@
           - FactionStaticUplinkTTI
 
 - type: listing
-  id: UplinkTTIBulldog
-  name:  uplink-tti-Bulldog-name
-  description: uplink-tti-Bulldog-desc
-  productEntity: ClothingBackpackDuffelTraumaFilledBulldog
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Shotguns/bulldog.rsi, state: icon }
+  id: UplinkTTIPulseRifle
+  name: ent-WeaponPulseRifle
+  description: ent-WeaponPulseRifle.desc
+  productEntity: WeaponPulseRifle
+  icon: { entity: WeaponPulseRifle }
   cost:
-    TTIMedicalCredit: 70
+    TTIMedicalCredit: 140
+  categories:
+    - UplinkTTIWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 2
+
+- type: listing
+  id: UplinkTTIPulsePistol
+  name: ent-WeaponPulsePistol
+  description: ent-WeaponPulsePistol.desc
+  productEntity: WeaponPulsePistol
+  icon: { entity: WeaponPulsePistol }
+  cost:
+    TTIMedicalCredit: 80
+  categories:
+    - UplinkTTIWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 4
+
+- type: listing
+  id: UplinkTTINtsfLtr
+  name: ent-WeaponRifleNtsfLtr
+  description: ent-WeaponRifleNtsfLtr.desc
+  productEntity: WeaponRifleNtsfLtr
+  icon: { entity: WeaponRifleNtsfLtr }
+  cost:
+    TTIMedicalCredit: 100
   categories:
     - UplinkTTIWeapons
   conditions:
@@ -35,13 +71,31 @@
       stock: 3
 
 - type: listing
-  id: UplinkTTIMla73
-  name: ent-WeaponSubMachineGunMla73Registered
-  description: ent-WeaponSubMachineGunMla73Registered.desc
-  productEntity: ClothingBackpackDuffelTraumaFilledMla73
-  icon: { entity: WeaponSubMachineGunMla73Registered }
+  id: UplinkTTILRC21PPL
+  name: ent-WeaponLRC21PPL
+  description: ent-WeaponLRC21PPL.desc
+  productEntity: WeaponLRC21PPL
+  icon: { entity: WeaponLRC21PPL }
   cost:
-    TTIMedicalCredit: 55
+    TTIMedicalCredit: 220
+  categories:
+    - UplinkTTIWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 1
+
+- type: listing
+  id: UplinkTTIEnergySword
+  name: ent-EnergySword
+  description: ent-EnergySword.desc
+  productEntity: EnergySword
+  icon: { entity: EnergySword }
+  cost:
+    TTIMedicalCredit: 75
   categories:
     - UplinkTTIWeapons
   conditions:
@@ -51,6 +105,42 @@
           - FactionStaticUplinkTTI
     - !type:ListingLimitedStockCondition
       stock: 3
+
+- type: listing
+  id: UplinkTTIEnergyShield
+  name: ent-EnergyShield
+  description: ent-EnergyShield.desc
+  productEntity: EnergyShield
+  icon: { entity: EnergyShield }
+  cost:
+    TTIMedicalCredit: 60
+  categories:
+    - UplinkTTIWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 3
+
+- type: listing
+  id: UplinkTTIVector45_ACP
+  name: ent-WeaponSubMachineGunVector45_ACP
+  description: ent-WeaponSubMachineGunVector45_ACP.desc
+  productEntity: WeaponSubMachineGunVector45_ACP
+  icon: { entity: WeaponSubMachineGunVector45_ACP }
+  cost:
+    TTIMedicalCredit: 90
+  categories:
+    - UplinkTTIWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 4
 
 # region Ammo
 
@@ -71,10 +161,89 @@
           - FactionStaticUplinkTTI
 
 - type: listing
-  id: UplinkTTIAmmoBox12gauge
-  productEntity: AmmoBox12_gaugeBuckshot
+  id: UplinkTTIAmmoTechFabFlatpack
+  name:  ent-AmmoTechFabFlatpack
+  description: ent-AmmoTechFabFlatpack.desc
+  productEntity: AmmoTechFabFlatpack
   cost:
-    TTIMedicalCredit: 3
+    TTIMedicalCredit: 50
+  categories:
+    - UplinkTTIAmmo
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 2
+
+- type: listing
+  id: UplinkTTIBlueprintRIPAmmo
+  name:  ent-ForgeBlueprintRIPAmmo
+  description: ent-ForgeBlueprintRIPAmmo.desc
+  productEntity: ForgeBlueprintRIPAmmo
+  cost:
+    TTIMedicalCredit: 25
+  categories:
+    - UplinkTTIAmmo
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintUraniumAmmo
+  name:  ent-ForgeBlueprintUraniumAmmo
+  description: ent-ForgeBlueprintUraniumAmmo.desc
+  productEntity: ForgeBlueprintUraniumAmmo
+  cost:
+    TTIMedicalCredit: 25
+  categories:
+    - UplinkTTIAmmo
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintIncendiaryAmmo
+  name:  ent-ForgeBlueprintIncendiaryAmmo
+  description: ent-ForgeBlueprintIncendiaryAmmo.desc
+  productEntity: ForgeBlueprintIncendiaryAmmo
+  cost:
+    TTIMedicalCredit: 30
+  categories:
+    - UplinkTTIAmmo
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintAPAmmo
+  name:  ent-ForgeBlueprintAPAmmo
+  description: ent-ForgeBlueprintAPAmmo.desc
+  productEntity: ForgeBlueprintAPAmmo
+  cost:
+    TTIMedicalCredit: 35
+  categories:
+    - UplinkTTIAmmo
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintPulsedPlasmaLaserCanister
+  name:  ent-ForgeBlueprintPulsedPlasmaLaserCanister
+  description: ent-ForgeBlueprintPulsedPlasmaLaserCanister.desc
+  productEntity: ForgeBlueprintPulsedPlasmaLaserCanister
+  cost:
+    TTIMedicalCredit: 35
   categories:
     - UplinkTTIAmmo
   conditions:
@@ -108,7 +277,7 @@
   productEntity: MedicalTechFabFlatpack
   icon: { entity: MedicalTechFab }
   cost:
-    TTIMedicalCredit: 10
+    TTIMedicalCredit: 15
   categories:
     - UplinkTTIUtility
   conditions:
@@ -123,7 +292,7 @@
   description: uplink-tti-hypospray-desc
   productEntity: MedHypoTTI
   cost:
-    TTIMedicalCredit: 15
+    TTIMedicalCredit: 20
   categories:
     - UplinkTTIUtility
   conditions:
@@ -222,6 +391,21 @@
           - FactionStaticUplinkTTI
 
 - type: listing
+  id: UplinkTTIVendingMachineRestockChemVend
+  name: ent-CrateVendingMachineRestockChemVendFilled
+  description: ent-CrateVendingMachineRestockChemVendFilled.desc
+  productEntity: CrateVendingMachineRestockChemVendFilled
+  cost:
+    TTIMedicalCredit: 5
+  categories:
+    - UplinkTTIUtility
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
   id: UplinkTTISpaceCash25000
   name: uplink-tti-spacecash25000-name
   description: uplink-tti-spacecash25000-desc
@@ -257,7 +441,7 @@
   id: UplinkTTIDefibrillatorCompact
   productEntity: DefibrillatorCompact
   cost:
-    TTIMedicalCredit: 30
+    TTIMedicalCredit: 15
   categories:
     - UplinkTTIUtility
   conditions:
@@ -272,7 +456,7 @@
   id: UplinkTTIOmnimedTool
   productEntity: OmnimedTool
   cost:
-    TTIMedicalCredit: 20
+    TTIMedicalCredit: 30
   categories:
     - UplinkTTIUtility
   conditions:
@@ -282,6 +466,21 @@
           - FactionStaticUplinkTTI
     - !type:ListingLimitedStockCondition
       stock: 3
+
+- type: listing
+  id: UplinkTTIHandheldCrewMonitor
+  productEntity: TTIHandheldCrewMonitor
+  cost:
+    TTIMedicalCredit: 50
+  categories:
+    - UplinkTTIUtility
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 4
 
 # region Hardsuits (Armor)
 
@@ -351,7 +550,7 @@
         tags:
           - FactionStaticUplinkTTI
     - !type:ListingLimitedStockCondition
-      stock: 15
+      stock: 5
 
 - type: listing
   id: UplinkTTIClothingOuterHardsuitTraumaShooter
@@ -359,7 +558,7 @@
   productEntity: ClothingOuterHardsuitTraumaShooter
   icon: { sprite: _Forge/Clothing/OuterClothing/Hardsuits/tti_shooter_hardsuit.rsi, state: icon }
   cost:
-    TTIMedicalCredit: 95
+    TTIMedicalCredit: 180
   categories:
     - UplinkTTIEquip
   conditions:
@@ -368,7 +567,7 @@
         tags:
           - FactionStaticUplinkTTI
     - !type:ListingLimitedStockCondition
-      stock: 10
+      stock: 3
 
 - type: listing
   id: UplinkTTIClothingShoesBootsMagTrauma
@@ -376,7 +575,7 @@
   productEntity: ClothingShoesBootsMagTrauma
   icon: { sprite: _Forge/Clothing/Shoes/Boots/tti_magboots.rsi, state: icon }
   cost:
-    TTIMedicalCredit: 35
+    TTIMedicalCredit: 25
   categories:
     - UplinkTTIEquip
   conditions:
@@ -385,7 +584,41 @@
         tags:
           - FactionStaticUplinkTTI
     - !type:ListingLimitedStockCondition
-      stock: 15
+      stock: 6
+
+- type: listing
+  id: UplinkTTIClothingEyesHudTrauma
+  description: uplink-tti-clothingeyeshudtrauma-desc
+  productEntity: ClothingEyesHudTrauma
+  icon: { entity: ClothingEyesHudTrauma }
+  cost:
+    TTIMedicalCredit: 25
+  categories:
+    - UplinkTTIEquip
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 6
+
+- type: listing
+  id: UplinkTTIClothingHandsGlovesCombatTrauma
+  description: uplink-tti-clothinghandsglovescombattrauma-desc
+  productEntity: ClothingHandsGlovesCombatTrauma
+  icon: { entity: ClothingHandsGlovesCombatTrauma }
+  cost:
+    TTIMedicalCredit: 25
+  categories:
+    - UplinkTTIEquip
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:ListingLimitedStockCondition
+      stock: 6
 
 # region Blueprints
 
@@ -421,6 +654,134 @@
         tags:
           - FactionStaticUplinkTTI
 
+- type: listing
+  id: UplinkTTIBlueprintCyberneticEyes
+  name:  uplink-tti-blueprintcyberneticeyes-name
+  description: uplink-tti-blueprintcyberneticeyes-desc
+  productEntity: ForgeBlueprintCyberneticEyes
+  icon: { entity: ForgeBlueprintCyberneticEyes }
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIBlueprints
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintCyberneticHands
+  name:  uplink-tti-blueprintcybernetichands-name
+  description: uplink-tti-blueprintcybernetichands-desc
+  productEntity: ForgeBlueprintCyberneticHands
+  icon: { entity: ForgeBlueprintCyberneticHands }
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIBlueprints
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintCyberneticLegs
+  name:  uplink-tti-blueprintcyberneticlegs-name
+  description: uplink-tti-blueprintcyberneticlegs-desc
+  productEntity: ForgeBlueprintCyberneticLegs
+  icon: { entity: ForgeBlueprintCyberneticLegs }
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIBlueprints
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintCyberneticOrgans
+  name:  uplink-tti-blueprintcyberneticorgans-name
+  description: uplink-tti-blueprintcyberneticorgans-desc
+  productEntity: ForgeBlueprintCyberneticOrgans
+  icon: { entity: ForgeBlueprintCyberneticOrgans }
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIBlueprints
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintCyberneticArms
+  name:  uplink-tti-blueprintcyberneticarms-name
+  description: uplink-tti-blueprintcyberneticarms-desc
+  productEntity: ForgeBlueprintCyberneticArms
+  icon: { entity: ForgeBlueprintCyberneticArms }
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIBlueprints
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintSubdermalImplants
+  name:  uplink-tti-blueprintsubdermalimplants-name
+  description: uplink-tti-blueprintsubdermalimplants-desc
+  productEntity: ForgeBlueprintSubdermalImplants
+  icon: { entity: ForgeBlueprintSubdermalImplants }
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIBlueprints
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintAdvancedTools
+  name:  uplink-tti-blueprintadvancedtools-name
+  description: uplink-tti-blueprintadvancedtools-desc
+  productEntity: ForgeBlueprintAdvancedTools
+  icon: { entity: ForgeBlueprintAdvancedTools }
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIBlueprints
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
+  id: UplinkTTIBlueprintAdvancedShipRepairTools
+  name:  uplink-tti-blueprintadvancedshiprepairtools-name
+  description: uplink-tti-blueprintadvancedshiprepairtools-desc
+  productEntity: ForgeBlueprintAdvancedShipRepairTools
+  icon: { entity: ForgeBlueprintAdvancedShipRepairTools }
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIBlueprints
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
 # region Med
 - type: listing
   id: UplinkTTIOmnizineChemistryBottle
@@ -429,7 +790,7 @@
   productEntity: OmnizineChemistryBottle
   icon: { sprite: _DV/Objects/Specific/Chemistry/bottle.rsi, state: bottle-1 }
   cost:
-    TTIMedicalCredit: 5
+    TTIMedicalCredit: 10
   categories:
     - UplinkTTIMed
   conditions:
@@ -623,7 +984,7 @@
         tags:
           - FactionStaticUplinkTTI
     - !type:ListingLimitedStockCondition
-      stock: 5
+      stock: 7
 
 - type: listing
   id: UplinkTTIMaterialsAdvanced
@@ -641,7 +1002,7 @@
         tags:
           - FactionStaticUplinkTTI
     - !type:ListingLimitedStockCondition
-      stock: 4
+      stock: 5
 
 - type: listing
   id: UplinkTTIMaterialsSuper
@@ -652,14 +1013,14 @@
     TTIMedicalCredit: 25
   categories:
     - UplinkTTIBundles
-  restockTime: 3600
+  restockTime: 1800
   conditions:
     - !type:StoreWhitelistCondition
       whitelist:
         tags:
           - FactionStaticUplinkTTI
     - !type:ListingLimitedStockCondition
-      stock: 3
+      stock: 4
 
 - type: listing
   id: UplinkTTIChemicalSynthesisKit
@@ -682,6 +1043,24 @@
 - type: listing
   id: UplinkTTIBoxT3SuperCapacitor
   productEntity: BoxT3SuperCapacitor
+  cost:
+    TTIMedicalCredit: 20
+  categories:
+    - UplinkTTIBundles
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+    - !type:BuyerJobCondition
+      whitelist:
+      - DirectorOfCare
+    - !type:ListingLimitedStockCondition
+      stock: 3
+
+- type: listing
+  id: UplinkTTIBoxT3ComponentsAssorted
+  productEntity: BoxT3ComponentsAssorted
   cost:
     TTIMedicalCredit: 20
   categories:

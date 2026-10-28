@@ -3,71 +3,75 @@
   id: MurderedBlunt
   damageSets:
     Blunt:
-      min: 150
-      max: 400
-      value: 10
+      min: 150 # Forge-change 150->250
+      max: 400 # Forge-change 400->500
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Asphyxiation:
       min: 50
       max: 200
       value: 10
       penalty: 10
-  baseReward: 2000 # 4K-8K
+  baseReward: 2000 # Forge-change 4k-8k -> 2375-5750 
+  bonusRewardPercent: 0.003 # Forge-change (7-17)
 
 - type: medicalBounty
   id: MurderedPierce
   damageSets:
     Piercing:
-      min: 150
-      max: 400
-      value: 10
+      min: 250 # Forge-change 150->250
+      max: 500 # Forge-change 400->500
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Bloodloss:
       min: 50
       max: 200
       value: 10
       penalty: 10
-  baseReward: 2000 # 4K-8K
+  baseReward: 2000 # Forge-change 4k-8k -> 2375-5750 
+  bonusRewardPercent: 0.003 # Forge-change (7-17)
 
 - type: medicalBounty
   id: MurderedSlash
   damageSets:
     Slash:
-      min: 150
-      max: 400
-      value: 10
+      min: 250 # Forge-change 150->250
+      max: 500 # Forge-change 400->500
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Bloodloss:
       min: 50
       max: 200
       value: 10
       penalty: 10
-  baseReward: 2000 # 4K-8K
+  baseReward: 2000 # Forge-change 4k-8k -> 2375-5750 
+  bonusRewardPercent: 0.003 # Forge-change (7-17)
 
 - type: medicalBounty
   id: MildBruteMix
   damageSets:
     Blunt:
-      min: 75
-      max: 150
-      value: 10
+      min: 125 # Forge-change 75->125
+      max: 200 # Forge-change 150->200
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Piercing:
-      min: 75
-      max: 150
-      value: 10
+      min: 125 # Forge-change 75->125
+      max: 200 # Forge-change 150->200
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Slash:
-      min: 75
-      max: 150
-      value: 10
+      min: 125 # Forge-change 75->125
+      max: 200 # Forge-change 150->200
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Bloodloss:
-      min: 75
+      min: 100 # Forge-change 75->100
       max: 150
       value: 10
       penalty: 10
-  baseReward: 2000 # 5K-8K
+  baseReward: 2000 # Forge-change 5k-8k -> 3812-6000 
+  bonusRewardPercent: 0.003 # Forge-change (11-18)
 
 - type: medicalBounty
   id: Suffocated
@@ -75,74 +79,78 @@
     Asphyxiation:
       min: 150
       max: 400
-      value: 10
+      value: 6 # Forge-change 10->6
       penalty: 10
     Bloodloss:
-      min: 50
+      min: 125 # Forge-change 50->125
       max: 200
       value: 10
       penalty: 10
-  baseReward: 2000 # 4K-8K
+  baseReward: 2000 # Forge-change 4k-8k -> 2150-4400
+  bonusRewardPercent: 0.003 # Forge-change (6-13)
 
 - type: medicalBounty
   id: PlasmaFire
   damageSets:
     Heat:
       min: 1000
-      max: 3000
-      value: 10
+      max: 2250
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
-  baseReward: 2000 # 10K-32K
+  baseReward: 2000 # Forge-change 10k-32k -> 7500-16875
+  bonusRewardPercent: 0.002 # Forge-change (15-33)
 
 - type: medicalBounty
   id: Spaced
   damageSets:
     Blunt:
-      min: 50
-      max: 100
-      value: 10
+      min: 100 # Forge-change 50->100
+      max: 150 # Forge-change 100->150
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Piercing:
-      min: 50
-      max: 100
-      value: 10
+      min: 100 # Forge-change 50->100
+      max: 150 # Forge-change 100->150
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Slash:
-      min: 50
-      max: 100
-      value: 10
+      min: 100 # Forge-change 50->100
+      max: 150 # Forge-change 100->150
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Cold:
       min: 600
       max: 2000
-      value: 10
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
-  baseReward: 1000 # 8500-24K
+  baseReward: 1000 # Forge-change 8500-24k -> 6750-18375
+  bonusRewardPercent: 0.0015 # Forge-change (10-27)
 
 - type: medicalBounty
   id: MildBurnMix
   damageSets:
     Heat:
-      min: 50
-      max: 150
-      value: 10
+      min: 100 # Forge-change 50->100
+      max: 200 # Forge-change 150->200
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Cold:
-      min: 50
-      max: 150
-      value: 10
+      min: 100 # Forge-change 50->100
+      max: 200 # Forge-change 150->200
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Shock:
-      min: 50
-      max: 150
-      value: 10
+      min: 100 # Forge-change 50->100
+      max: 200 # Forge-change 150->200
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Caustic:
-      min: 50
-      max: 150
-      value: 10
+      min: 100 # Forge-change 50->100
+      max: 200 # Forge-change 150->200
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
-  baseReward: 2000 # 4K-8K
+  baseReward: 2000 # Forge-change 4k-8k -> 3000-6000
+  bonusRewardPercent: 0.003 # Forge-change (9-18)
 
 - type: medicalBounty
   id: Insuls
@@ -150,51 +158,54 @@
     Heat:
       min: 200
       max: 400
-      value: 10
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Shock:
       min: 400
       max: 600
-      value: 10
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
-  baseReward: 1500 # 7500-11500
+  baseReward: 1500 # Forge-change 7500-11500 -> 4500-7500
+  bonusRewardPercent: 0.003 # Forge-change (13-22)
 
 - type: medicalBounty
   id: AcidSlimes
   damageSets:
     Caustic:
-      min: 300
-      max: 500
-      value: 20
+      min: 400 # Forge-change 200->400
+      max: 600 # Forge-change 300->600
+      value: 10 # Forge-change 20->10
       penalty: 20
-  baseReward: 2500 # 8K-12K
+  baseReward: 2500 # Forge-change 8k-12k -> 4000-10000
+  bonusRewardPercent: 0.002 # Forge-change (8-20)
 
 - type: medicalBounty
   id: SpiderAttackMild
   damageSets:
     Poison:
-      min: 100
-      max: 200
+      min: 150 # Forge-change 100->150
+      max: 250 # Forge-change 200->250
       value: 15
       penalty: 15
     Asphyxiation:
-      min: 100
+      min: 150 # Forge-change 100->150
       max: 200
-      value: 10
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
   reagents:
     Mechanotoxin:
       min: 30
       max: 50
       value: 20
-  baseReward: 3500 # 6600-10500
+  baseReward: 3500 # Forge-change 6600-10500 -> 3975-6250
+  bonusRewardPercent: 0.004 # Forge-change (15-25)
 
 - type: medicalBounty
   id: SpiderAttack
   damageSets:
     Poison:
-      min: 200
-      max: 400
+      min: 300 # Forge-change 200->300
+      max: 600 # Forge-change 400->600
       value: 15
       penalty: 15
   reagents:
@@ -202,88 +213,93 @@
       min: 30
       max: 50
       value: 20
-  baseReward: 5000 # 7100-10500 # Mono increase
+  baseReward: 5000 # Forge-change 7100-10500 -> 5100-10000
+  bonusRewardPercent: 0.004 # Forge-change (20-40)
 
 - type: medicalBounty
   id: DeliciousMushroom
   damageSets:
     Poison:
-      min: 100
-      max: 200
+      min: 400 # Forge-change 100->400
+      max: 700 # Forge-change 200->700
       value: 15
       penalty: 15
     Asphyxiation:
       min: 100
       max: 200
-      value: 10
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
   reagents:
     Amatoxin:
       min: 30
       max: 50
-      value: 30
-  baseReward: 4000 # 6400-10500 # Mono Increase
+      value: 20
+  baseReward: 4000 # Forge-change 6400-10500 -> 7350-13000
+  bonusRewardPercent: 0.0035 # Forge-change (25-45)
 
 - type: medicalBounty
   id: HyperpacmanGoneWrong
   damageSets:
     Radiation:
-      min: 150
+      min: 350 # Forge-change 150->350
       max: 800
-      value: 15
+      value: 20 # Forge-change 15->20
       penalty: 15
     Cellular:
-      min: 60
-      max: 140
-      value: 25
+      min: 80 # Forge-change 60->80
+      max: 120 # Forge-change 140->120
+      value: 30 # Forge-change 25->30
       penalty: 25
     Asphyxiation:
       min: 100
       max: 200
-      value: 10
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
-  baseReward: 6000 # ~6250-19K # Mono Buff
+  baseReward: 6000 # Forge-change 6250-19k -> 10150-21100
+  bonusRewardPercent: 0.004 # Forge-change (40-84)
 
 - type: medicalBounty
   id: AsphyxAndCellular
   damageSets:
     Asphyxiation:
-      min: 200
-      max: 400
-      value: 10
+      min: 100 # Forge-change 200->100
+      max: 200 # Forge-change 400->200
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
     Cellular:
-      min: 60
-      max: 140
-      value: 25
+      min: 200 # Forge-change 60->200
+      max: 300 # Forge-change 140->300
+      value: 30 # Forge-change 25->30
       penalty: 25
-  baseReward: 5000 # 5500-9500 # Mono Buff
+  baseReward: 5000 # Forge-change 5500-9500 -> 6750-10500
+  bonusRewardPercent: 0.006 # Forge-change (40-63)
 
 - type: medicalBounty
   id: DeliciousUranium
   damageSets:
     Radiation:
-      min: 50
-      max: 300
-      value: 15
+      min: 200 # Forge-change 50->200
+      max: 450 # Forge-change 300->450
+      value: 20 # Forge-change 15->20
       penalty: 15
     Cellular:
-      min: 60
-      max: 100
-      value: 25
+      min: 100 # Forge-change 60->100
+      max: 175 # Forge-change 100->175
+      value: 30 # Forge-change 25->30
       penalty: 25
     Asphyxiation: # Value padding
       min: 100
       max: 200
-      value: 10
+      value: 7.5 # Forge-change 10->7.5
       penalty: 10
   reagents:
     Uranium:
       min: 30
       max: 50
-      value: 25
+      value: 20 # Forge-change 25->20
     Radium:
       min: 30
       max: 50
-      value: 25
-  baseReward: 6000 # 5300-13500 # Mono Buff
+      value: 20 # Forge-change 25->20
+  baseReward: 6000 # Forge-change 5300-13500 -> 8950-17750
+  bonusRewardPercent: 0.005 # Forge-change (44-88)

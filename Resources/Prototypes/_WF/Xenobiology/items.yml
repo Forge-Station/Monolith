@@ -1,0 +1,280 @@
+# Ported from Goobstation via Trauma Station (extract_items.yml, effect_spawns.yml). The volatile organ is a plain
+# power cell here and the mob spawners only list mobs Wolfgate has.
+
+- type: entity
+  parent: BasePowerCell
+  id: XenobioVolatileOrgan
+  name: volatile slime cell
+  description: A pulsating mass of slime that holds a charge and slowly refills itself.
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/volatile_organ.rsi
+      state: icon
+  - type: GenericVisualizer
+    visuals: {}
+  - type: Item
+    size: Normal
+  - type: Battery
+    maxCharge: 5200
+    startingCharge: 5200
+  - type: BatterySelfRecharger
+    autoRechargeRate: 40
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 15
+  - type: Tag
+    tags:
+    - PowerCell
+    - DroneUsable
+
+- type: entity
+  name: goop ball
+  parent:
+  - BaseItem
+  - ItemHeftyBase
+  id: XenobioGoopBall
+  description: Not as goopy as it looks. Proven to capture fires on the same level as the holofan. Screaming included!
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/goo_ball.rsi
+      state: icon
+  - type: Item
+    size: Normal
+  - type: Damageable
+    damageContainer: Biological
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 0.1
+    damage:
+      types:
+        Blunt: 1
+    soundHit:
+      collection: desecration
+  - type: UseDelay
+    delay: 0.5
+  - type: EmitSoundOnUse
+    sound:
+      collection: desecration
+      params:
+        variation: 0.125
+  - type: EmitSoundOnLand
+    sound:
+      collection: desecration
+      params:
+        variation: 0.125
+  - type: EmitSoundOnCollide
+    sound:
+      collection: desecration
+      params:
+        variation: 0.125
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 1
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: desecration
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          XenoGooWall:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts:
+        - Destruction
+
+- type: entity
+  id: XenoGooWall
+  name: gelatinous growth
+  description: This could very well be the blob from space LIDL.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/goo_ball.rsi
+      state: goo-wall
+    drawdepth: WallMountedItems
+  - type: Clickable
+  - type: Damageable
+    damageModifierSet: Slime
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts:
+        - Destruction
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: desecration
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        density: 7
+        shape: !type:PhysShapeAabb
+          bounds: -0.5,-0.5,0.5,0.5
+        layer:
+        - MidImpassable
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5
+  - type: SpamEmitSound
+    minInterval: 20
+    maxInterval: 60
+    sound:
+      collection: MaleScreams
+      params:
+        variation: 0.125
+  - type: PointLight
+    enabled: true
+    radius: 3
+    color: teal
+
+- type: entity
+  name: random hostile mob spawner
+  id: RHostileMobSpawner
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ] # extract spawns, not mapping spawners
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+  - type: SpawnOnDespawn
+    prototype: RandomHostileMobSpawner
+
+- type: entity
+  parent: MarkerBase
+  id: RandomHostileMobSpawner
+  name: random hostile mob spawner
+  categories: [ HideSpawnMenu ] # extract spawns, not mapping spawners
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - MobBearSpace
+    - MobKangarooSpace
+    - MobAdultSlimesYellowAngry
+    - MobAngryBee
+    - MobSpiderSpace
+    - MobCobraSpace
+    - MobCarp
+    - MobCarpMagic
+    - MobCarpHolo
+    - MobCarpRainbow
+    - ReagentSlimeSpawner
+    - MobAbomination
+    - MobWatcherLavaland
+    - MobWatcherIcewing
+    - MobWatcherMagmawing
+    - MobLuminousPerson
+    - MobLuminousObject
+    - MobLuminousEntity
+    - MobLaserRaptor
+    - MobTomatoKiller
+    - MobRatKing
+    - MobTick
+    - MobPurpleSnake
+    - MobSmallPurpleSnake
+    offset: 0.0
+
+- type: entity
+  name: random neutral mob spawner
+  id: RNeutralMobSpawner
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ] # extract spawns, not mapping spawners
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+  - type: SpawnOnDespawn
+    prototype: RandomNeutralMobSpawner
+
+- type: entity
+  parent: MarkerBase
+  id: RandomNeutralMobSpawner
+  name: random neutral mob spawner
+  categories: [ HideSpawnMenu ] # extract spawns, not mapping spawners
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - MobBee
+    - MobGorilla
+    - MobKangaroo
+    - MobMonkey
+    - MobKobold
+    - MobMouse
+    - MobMouseCancer
+    - MobGiantSpider
+    - MobGiantSpiderWizard
+    - MobFox
+    - MobReindeerBuck
+    - MobReindeerDoe
+    - MobSlimeXenobioBabyGrey
+    - MobSnail
+    - MobSnailSpeed
+    - MobSnailMoth
+    offset: 0.0
+
+- type: entity
+  name: random passive mob spawner
+  id: RPassiveMobSpawner
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ] # extract spawns, not mapping spawners
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+  - type: SpawnOnDespawn
+    prototype: RandomPassiveMobSpawner
+
+- type: entity
+  parent: MarkerBase
+  id: RandomPassiveMobSpawner
+  name: random passive mob spawner
+  categories: [ HideSpawnMenu ] # extract spawns, not mapping spawners
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - MobChicken
+    - MobDuckMallard
+    - MobDuckWhite
+    - MobDuckBrown
+    - MobButterfly
+    - MobCow
+    - MobCrab
+    - MobGoat
+    - MobGoose
+    - MobLizard
+    - MobSlug
+    - MobFrog
+    - MobParrot
+    - MobPenguin
+    - MobSnake
+    - MobPossum
+    - MobPossumOld
+    - MobRaccoon
+    - MobCorgi
+    - MobCorgiPuppy
+    - MobCat
+    - MobCatCalico
+    - MobCatCaracal
+    - MobCatKitten
+    - MobSloth
+    - MobFerret
+    - MobHamster
+    - MobPig
+    - MobDionaNymph
+    - MobCatShadow
+    offset: 0.0

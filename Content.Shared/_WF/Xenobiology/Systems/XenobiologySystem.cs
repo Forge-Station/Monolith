@@ -8,7 +8,6 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -40,11 +39,6 @@ public sealed partial class XenobiologySystem : EntitySystem
     /// Hunger a fresh slime starts with: hungry enough to hunt, not enough to grow.
     /// </summary>
     public const float StartingHunger = 40f;
-
-    /// <summary>
-    /// Fewest slimes a split makes; one would only look like the slime changing colour.
-    /// </summary>
-    public const int MinOffspring = 2;
 
     private readonly List<Entity<SlimeComponent>> _splitting = new();
     private readonly List<Entity<PendingSlimeSpawnComponent>> _pending = new();
@@ -117,22 +111,17 @@ public sealed partial class XenobiologySystem : EntitySystem
             return;
 
         if (SpawnSlime(ent, ent.Comp.BasePrototype, ent.Comp.Breed) is { } slime)
-            RandomizeStats(slime);
+        {
+            // Every spawned slime gets its own spread of stats; offspring inherit them.
+            var s = slime.Comp;
+            s.MutationChance *= _random.NextFloat(0.5f, 1.5f);
+            s.MaxOffspring += _random.Next(-1, 2);
+            s.ExtractsProduced += _random.Next(0, 2);
+            s.MitosisHunger *= _random.NextFloat(0.75f, 1.2f);
+            Dirty(slime);
+        }
 
         QueueDel(ent);
-    }
-
-    /// <summary>
-    /// Gives a newly spawned slime its own spread of stats; offspring inherit them.
-    /// </summary>
-    public void RandomizeStats(Entity<SlimeComponent> slime)
-    {
-        var s = slime.Comp;
-        s.MutationChance *= _random.NextFloat(0.5f, 1.5f);
-        s.MaxOffspring += _random.Next(-1, 2);
-        s.ExtractsProduced += _random.Next(0, 2);
-        s.MitosisHunger *= _random.NextFloat(0.75f, 1.2f);
-        Dirty(slime);
     }
 
     public override void Update(float frameTime)
@@ -164,12 +153,7 @@ public sealed partial class XenobiologySystem : EntitySystem
             if (value > slime.MitosisHunger - slime.JitterDifference)
                 _jitter.DoJitter(uid, TimeSpan.FromSeconds(1), true);
 
-            if (value < slime.MitosisHunger)
-                continue;
-
-            var attempt = new SlimeGrowthAttemptEvent();
-            RaiseLocalEvent(uid, ref attempt);
-            if (!attempt.Cancelled)
+            if (value >= slime.MitosisHunger)
                 _splitting.Add((uid, slime));
         }
 
@@ -180,11 +164,11 @@ public sealed partial class XenobiologySystem : EntitySystem
     }
 
     /// <summary>
-    /// Splits a slime into at least two offspring, each of which may mutate into one of its potential breeds.
+    /// Splits a slime into offspring, each of which may mutate into one of its potential breeds.
     /// </summary>
     public void DoMitosis(Entity<SlimeComponent> ent)
     {
-        var offspring = _random.Next(MinOffspring, Math.Max(MinOffspring, ent.Comp.MaxOffspring) + 1);
+        var offspring = _random.Next(1, Math.Max(1, ent.Comp.MaxOffspring) + 1);
         _audio.PlayPvs(ent.Comp.MitosisSound, ent);
 
         for (var i = 0; i < offspring; i++)
@@ -215,25 +199,7 @@ public sealed partial class XenobiologySystem : EntitySystem
         if (TerminatingOrDeleted(parent) || !ProtoMan.TryIndex(breedId, out var breed))
             return null;
 
-        return SetUpBreed(SpawnNextToOrDrop(proto, parent, null, breed.Components), breed);
-    }
-
-    /// <summary>
-    /// Spawns <paramref name="proto"/> at <paramref name="coordinates"/> as a slime of <paramref name="breedId"/>.
-    /// </summary>
-    public Entity<SlimeComponent>? SpawnSlimeAt(EntityCoordinates coordinates, EntProtoId proto, ProtoId<BreedPrototype> breedId)
-    {
-        if (!ProtoMan.TryIndex(breedId, out var breed))
-            return null;
-
-        return SetUpBreed(SpawnAtPosition(proto, coordinates, breed.Components), breed);
-    }
-
-    /// <summary>
-    /// Applies a freshly spawned slime's breed colour, shader and name.
-    /// </summary>
-    private Entity<SlimeComponent>? SetUpBreed(EntityUid uid, BreedPrototype breed)
-    {
+        var uid = SpawnNextToOrDrop(proto, parent, null, breed.Components);
         if (!TryComp<SlimeComponent>(uid, out var slime))
             return null;
 

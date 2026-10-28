@@ -18,6 +18,7 @@
         layer:
         - MachineLayer
   - type: Lathe
+  - type: FabricationSiloClient # WOLFGATE(Lathe): lathes link fabrication silos
   - type: MaterialStorage
     whitelist: # Frontier
       tags: # Frontier
@@ -176,7 +177,7 @@
     - NFServiceStatic # Frontier
     - MonoRestraintsStatic # Mono
     - ReportingStatic # DeltaV
-    - TetherStatic # WOLFGATE
+    - WFTetherStatic # WOLFGATE(Tether)
   - type: EmagLatheRecipes
     emagStaticPacks:
     - StaticAmmoRecipePack
@@ -277,6 +278,7 @@
     # Einstein Engines Packs
     - Translators
     - RCD # Mono!
+    - WFXenobiologyTools # WOLFGATE(Xenobiology): slime scanner and xenovac
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - DynamicAmmoRecipePack
@@ -351,7 +353,9 @@
     - AiCoreBoard
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
-    - ReactorCircuitboards # FH edit
+    - ReactorCircuitboards # FH edit\
+    - ServiceBoardsGoob #Forge-Change
+    - WFXenobiologyBoards # WOLFGATE(Xenobiology): slime grinder and bounty console boards
   - type: MaterialStorage
     whitelist:
       tags:
@@ -398,6 +402,7 @@
     - MechMiscStatic # Mono
     # Shitmed Change
     - IPCPartsStatic
+    - WFSynthOrgansStatic # WOLFGATE(Wolfmed): replacement synth organs
     dynamicPacks:
     - Robotics
     - BorgModules
@@ -500,6 +505,7 @@
     - StaticAmmoRecipePack
     - StaticGrenades
     - SecurityWeaponsStatic
+    - WFRavagerDroneVouchersStatic # WOLFGATE(OldVessels): Ravager drone LPCs
     dynamicPacks:
     - SecurityEquipment
     - SecurityExplosives
@@ -618,13 +624,15 @@
     # Shitmed Change
     - SMSurgery
     - SMCybernetics
+    - WFWolfmedAutodocPrograms # WOLFGATE(Wolfmed): AUTODOC: the four program disks, behind the same research as the rest of medbay.
     # Einstein Engines Packs
     - Translators # Language
     - TranslatorImplanters # Language
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: StealTarget
-    stealGroup: MedicalTechFabCircuitboard
+    stealGroup:
+    - MedicalTechFabCircuitboard
   - type: PirateBountyItem # Mono
     id: Techfab
 

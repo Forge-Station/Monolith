@@ -1,0 +1,137 @@
+# Ported from Goobstation via Trauma Station (slime_grinder.yml, production.yml).
+
+- type: entity
+  parent:
+  - BaseMachinePowered
+  - ConstructibleMachine
+  id: SlimeGrinder
+  name: slime grinder
+  description: Produces extracts from a slimes corpse.
+  components:
+  - type: Sprite
+    sprite: _WF/Xenobiology/Specific/Xenobiology/slime_processor.rsi
+    granularLayersRendering: true
+    layers:
+    - state: processor
+      map:
+      - enum.PowerDeviceVisualLayers.Powered
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { state: processor_on }
+          False: { state: processor }
+  - type: Rotatable
+  - type: Appearance
+  - type: SlimeGrinder
+  - type: Climbable
+    delay: 1
+  - type: AmbientSound
+    enabled: false
+    volume: -5
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/reclaimer_ambience.ogg
+  - type: Machine
+    board: SlimeGrinderMachineCircuitboard
+  - type: GuideHelp
+    guides:
+    - Xenobiology
+
+- type: entity
+  id: SlimeGrinderMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: slime grinder machine board
+  description: A machine printed circuit board for a slime grinder.
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: SlimeGrinder
+    stackRequirements:
+      Manipulator: 5
+      Steel: 5
+    tagRequirements:
+      Knife:
+        amount: 2
+        defaultPrototype: KitchenKnife
+        examineName: construction-insert-info-examine-name-knife
+
+- type: entity
+  id: ComputerScienceXenobiologyBounty
+  parent: BaseComputer
+  name: xenobiological bounty console
+  description: Lists bounties for xenobiological goods. Bring them here to earn research points for the linked research server.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: computer
+    - map: [ "computerLayerKeyboard" ]
+      state: generic_keyboard
+    - map: [ "computerLayerScreen" ]
+      sprite: _WF/Xenobiology/bounty_computer.rsi
+      state: xenobiology
+    - map: [ "computerLayerKeys" ]
+      state: tech_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: ResearchClient
+  - type: XenobiologyBountyConsole
+  - type: ActivatableUI
+    key: enum.XenobiologyBountyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.XenobiologyBountyUiKey.Key:
+        type: XenobiologyBountyConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: XenobiologyBountyComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: GuideHelp
+    guides:
+    - Xenobiology
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: XenobiologyBountyComputerCircuitboard
+  name: xenobiological bounty console board
+  description: A computer printed circuit board for a xenobiological bounty console.
+  components:
+  - type: Sprite
+    state: cpu_science
+  - type: ComputerBoard
+    prototype: ComputerScienceXenobiologyBounty
+
+# Flatpacks, so John Wolfgate and the Wolfgate vendor can sell the machines to ships without the research.
+- type: entity
+  parent: BaseNFFlatpack
+  id: WFSlimeGrinderFlatpack
+  name: slime grinder flatpack
+  description: A flatpack used for constructing a slime grinder.
+  components:
+  - type: Flatpack
+    entity: SlimeGrinder
+  - type: Sprite
+    layers:
+    - state: science_lathe
+  - type: StaticPrice
+    price: 1500
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: WFXenobiologyBountyConsoleFlatpack
+  name: xenobiological bounty console flatpack
+  description: A flatpack used for constructing a xenobiological bounty console.
+  components:
+  - type: Flatpack
+    entity: ComputerScienceXenobiologyBounty
+  - type: Sprite
+    layers:
+    - state: science_console
+  - type: StaticPrice
+    price: 1000

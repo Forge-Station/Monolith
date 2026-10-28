@@ -61,11 +61,6 @@ public sealed partial class MobGrowthSystem : EntitySystem
                 || !growth.Stages.ContainsKey(stage.NextStage))
                 continue;
 
-            var attempt = new SlimeGrowthAttemptEvent();
-            RaiseLocalEvent(uid, ref attempt);
-            if (attempt.Cancelled)
-                continue;
-
             _hunger.ModifyHunger(uid, growth.GrowthCost, hunger);
             growth.CurrentStage = stage.NextStage;
             Dirty(uid, growth);

@@ -1,0 +1,140 @@
+# The Market PDA app: live chute prices, sector alerts and the hold.
+- type: entity
+  parent: NFBasePDACartridge
+  id: WFMarketCartridge
+  name: market cartridge
+  description: A PDA program listing what every station's turn-in chute pays right now, and the reason for each price.
+  components:
+  - type: Sprite
+    sprite: _WF/TradeGoods/market.rsi
+    state: cart-market
+  - type: Icon
+    sprite: _WF/TradeGoods/market.rsi
+    state: cart-market
+  - type: UIFragment
+    ui: !type:MarketUi
+  - type: Cartridge
+    programName: wf-market-program-name
+    icon: { sprite: _WF/TradeGoods/market.rsi, state: icon }
+    readonly: true
+  - type: WFMarketCartridge
+  - type: StaticPrice
+    price: 50
+    vendPrice: 500
+
+# Priority deliveries: sealed crates for one station, worth most if delivered before the deadline.
+- type: entity
+  parent: BaseTradeItem
+  id: WFTradeConsignment
+  name: priority delivery crate
+  description: A sealed, stamped crate bound for one station, with a delivery deadline on the label.
+  components:
+  - type: Sprite
+    layers:
+    - state: luxury
+      color: "#e8c46a"
+  - type: StaticPrice
+    price: 100
+  - type: WFConsignment
+  - type: WFCargoMass
+    class: Light
+
+- type: entity
+  parent: WFTradeConsignment
+  id: WFTradeConsignmentHeavy
+  name: heavy priority delivery crate
+  description: A sealed, stamped crate of heavy machinery bound for one station, with a delivery deadline on the label.
+  components:
+  - type: Sprite
+    layers:
+    - state: metal
+      color: "#e8c46a"
+  - type: WFConsignment
+    value: 32000
+    onTimeBonus: 14000
+    latePenalty: 14000
+  - type: WFCargoMass
+    class: Bulk
+
+# The Underground's fence: takes freight with a manifest seal, at full price, and nothing else.
+- type: entity
+  parent: BaseCargoChute
+  id: WFCargoChuteUnderground
+  name: Underground fence chute
+  description: An unlicensed turn-in chute. It only takes sealed freight off the haulers, no questions asked.
+  components:
+  - type: Dispenser
+    defaultItem: PaperWrittenDispenserInstructions
+    inventory:
+      TradeGoodAmmo: SpaceCash6000
+      TradeGoodSupplies: SpaceCash2500
+      TradeGoodMedicalSupplies: SpaceCash2500
+      TradeGoodChemicalSupplies: SpaceCash3000
+      TradeGoodChemicalsVolatile: SpaceCash4000
+      TradeGoodWeaponParts: SpaceCash6000
+      TradeGoodScrap: SpaceCash2500
+      TradeGoodFissionFuel: SpaceCash12000
+      TradeGoodFusionFuel: SpaceCash8000
+      TradeGoodComponents: SpaceCash2500
+      TradeGoodShipComponents: SpaceCash4000
+      TradeGoodEquipment: SpaceCash2500
+      TradeGoodFertilizer: SpaceCash3000
+      TradeGoodLuxuries: SpaceCash9000
+      TradeGoodFabric: SpaceCash2500
+      TradeGoodMetals: SpaceCash2500
+
+# Contraband: a smuggling crate sold at the Underground. Open stations pay well for it, but customs flags some sellers,
+# and security can seize it for faction credits.
+- type: entity
+  parent: BaseTradeItem
+  id: WFTradeGoodContraband
+  name: smuggling crate
+  description: A blacked-out crate striped in red warning paint, its labels scraped off and its seals replaced. Someone pays well for whatever is inside, that's all that matters.
+  components:
+  - type: Sprite
+    sprite: _WF/TradeGoods/smuggling.rsi
+    layers:
+    - state: icon
+  - type: Item
+    size: Ginormous
+    sprite: _Mono/Objects/TradeGoods/trade.rsi
+  - type: StaticPrice
+    vendPrice: 10000
+  - type: Contraband
+    severity: Class3General
+    turnInValues:
+      FederationMilitaryCredit: 15
+  - type: WFCargoMass
+    class: Standard
+  # Shows on radar like the PDV supply crates.
+  - type: RadarBlip
+    radarColor: "#cc4e0e"
+    scale: 1.5
+    shape: hexagon
+    visibleFromOtherGrids: true
+
+# What open chutes list a smuggling crate at; it pays well over any legal good to cover the risk.
+- type: entity
+  parent: SpaceCash
+  id: WFSpaceCash40000
+  suffix: 40000
+  components:
+  - type: Icon
+    sprite: _NF/Objects/Economy/cash.rsi
+    state: cash_25000
+  - type: Stack
+    count: 40000
+
+- type: entity
+  parent: VendingMachineTraderBaikal
+  id: WFVendingMachineFence
+  name: Underground fence vendor
+  description: Sells smuggling crates to anyone who asks no questions.
+  components:
+  - type: VendingMachine
+    pack: WFFenceInventory
+
+- type: vendingMachineInventory
+  id: WFFenceInventory
+  startingInventory:
+    WFTradeGoodContraband: 4294967295 # Infinite

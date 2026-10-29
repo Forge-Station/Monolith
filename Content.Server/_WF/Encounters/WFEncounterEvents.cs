@@ -12,6 +12,28 @@ public readonly record struct WFEncounterStartedEvent(EntityUid Encounter);
 [ByRefEvent]
 public readonly record struct WFEncounterResolvedEvent(EntityUid Encounter, WFEncounterResolution Resolution);
 
+/// <summary>
+/// Raised, by ref and broadcast, for each station a run could start its route at; a subscriber may change the weight,
+/// such as to send freight toward a station that is short.
+/// </summary>
+[ByRefEvent]
+public record struct WFEncounterStationWeightEvent(WFEncounterPrototype Prototype, EntityUid Station, float Weight);
+
+/// <summary>Raised broadcast to ask what the trade cargo aboard a ship is worth; the market answers.</summary>
+[ByRefEvent]
+public record struct WFCargoValueQueryEvent(EntityUid Grid)
+{
+    public int Value;
+}
+
+/// <summary>Raised broadcast for each crate a run's manifest loads aboard one of its ships.</summary>
+[ByRefEvent]
+public readonly record struct WFEncounterCargoLoadedEvent(EntityUid Encounter, EntityUid Grid, EntityUid Crate);
+
+/// <summary>Raised broadcast when one of a run's ships docks at one of its route's stops, crewed or simulated.</summary>
+[ByRefEvent]
+public readonly record struct WFEncounterStopReachedEvent(EntityUid Encounter, EntityUid Grid, EntityUid Station);
+
 /// <summary>Raised, by ref and broadcast, for each candidate when the storyteller picks; a subscriber may change the weight.</summary>
 [ByRefEvent]
 public record struct WFEncounterWeightEvent(WFEncounterPrototype Prototype, float Weight);

@@ -12,7 +12,8 @@ override so both hulls can draw it. Its ends are two entities with
 The physical body a rope pulls on is the attach point's **grid** while the point is
 anchored (or has no dynamic body of its own), otherwise the point's own body, so
 loose crates can be towed. Both ends on the same body means no joint and no forces:
-the rope is visual only.
+the rope is visual only. A towed hull's cargo weight (CargoLoad) is not added to the towing ship's: a loaded barge
+on a rope is a tug job, and a loose crate on a rope pulls with its real mass.
 
 Rope is one sided. Below its rest length it does nothing at all. Past it, the server
 applies a spring-damper as impulses at both anchor points (plus the torque each

@@ -450,7 +450,7 @@ public sealed partial class MoverController : SharedMoverController
             dir = dir - dirCompVel + scaledComp;
         }
 
-        return dir * shuttle.AccelerationMultiplier * WfAtmosphereManeuvering(xform.Owner); // WOLFGATE(Planets): reserve thrust for planetary lift.
+        return dir * shuttle.AccelerationMultiplier * WfAtmosphereManeuvering(xform.Owner); // WOLFGATE(Planets): planet lift and cargo load scale thrust
     }
 
     /// <summary>

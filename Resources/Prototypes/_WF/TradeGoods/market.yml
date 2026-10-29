@@ -1,0 +1,232 @@
+# Chute market tuning. Floors sit near each good's vendor price, so a glutted market still covers a bought crate.
+- type: wfTradeMarket
+  id: WFTradeMarketDefault
+  perSale: 0.035
+  # Goods the economy lathes print cheaply saturate faster.
+  perSaleOverrides:
+    TradeGoodFertilizer: 0.05
+    TradeGoodComponents: 0.05
+    TradeGoodScrap: 0.05
+  halfLife: 1500
+  floor: 0.2
+  floorPrices:
+    TradeGoodFertilizer: 1000
+    TradeGoodComponents: 1000
+    TradeGoodSupplies: 1000
+    TradeGoodMedicalSupplies: 1000
+    TradeGoodScrap: 1000
+    TradeGoodEquipment: 1000
+    TradeGoodFabric: 1000
+    TradeGoodMetals: 1000
+    TradeGoodChemicalSupplies: 1500
+    TradeGoodChemicalsVolatile: 1500
+    TradeGoodWeaponParts: 3000
+    TradeGoodShipComponents: 2400
+    TradeGoodLuxuries: 5000
+    TradeGoodAmmo: 2500
+    TradeGoodFissionFuel: 6000
+    TradeGoodFusionFuel: 3000
+  # Cargo-console trading crates share one demand per station; the floor still covers the console price.
+  tradeCratePerSale: 0.05
+  tradeCrateFloor: 0.3
+  # Each trade good bought from a station's vendor makes it scarcer there; vendors never charge below base.
+  buyPerPurchase: 0.03
+  buyScarcityCap: 0.6
+  modifierCap: 2.5
+  minHaulDistance: 3000
+  highlight: 1.4
+  groups:
+    Medical: [ TradeGoodMedicalSupplies ]
+    Supplies: [ TradeGoodSupplies ]
+    Ammo: [ TradeGoodAmmo ]
+    WeaponParts: [ TradeGoodWeaponParts ]
+    ShipComponents: [ TradeGoodShipComponents ]
+    Chemicals: [ TradeGoodChemicalSupplies, TradeGoodChemicalsVolatile ]
+    Fuel: [ TradeGoodFissionFuel, TradeGoodFusionFuel ]
+    Luxuries: [ TradeGoodLuxuries ]
+    Industrial: [ TradeGoodMetals, TradeGoodScrap, TradeGoodComponents, TradeGoodEquipment ]
+    Agriculture: [ TradeGoodFertilizer ]
+    Textiles: [ TradeGoodFabric ]
+  hotCargoChutes: [ CargoChuteHideout, WFCargoChuteUnderground ]
+  # The Underground fence only fences freight taken off NPC haulers.
+  sealedOnlyChutes: [ WFCargoChuteUnderground ]
+  # Smuggling crates from the Underground: open chutes pay a fixed price that sales never glut, but customs flags some
+  # sellers with a warrant.
+  contrabandGoods: [ WFTradeGoodContraband ]
+  contrabandWarrantChance: 0.05
+  contrabandWarrant: 10000
+  contrabandWarrantCooldown: 1800
+  contrabandAlertChannel: Nfsd
+  # Off the books: the app lists these under its Underground tab, shown only to the companies below.
+  hiddenChutes: [ CargoChuteHideout, WFCargoChuteUnderground ]
+  undergroundCompanies: [ PDV, PDVCivilian, PDVHighComm, WFUnderground ]
+  # The app groups stations by faction, in this order; a chute listed nowhere is Independent.
+  marketFactions:
+  - name: wf-market-faction-caelestinus
+    color: "#5fa8d3"
+    chutes: [ CargoChuteTradeMall, CargoChuteDepot, CargoChuteDepotAlt, CargoChuteExped, CargoChuteMD ]
+  - name: wf-market-faction-tsf
+    color: "#5b7fe0"
+    chutes: [ CargoChuteTSFMC ]
+  - name: wf-market-faction-ussp
+    color: "#d0573f"
+    chutes: [ CargoChuteBaikal ]
+  - name: wf-market-faction-pdv
+    color: "#d4a83a"
+    chutes: [ CargoChuteJupiter, CargoChuteHideout ]
+  - name: wf-market-faction-underground
+    color: "#d84a4a"
+    chutes: [ WFCargoChuteUnderground ]
+  warDemandChutes: [ CargoChuteTSFMC, CargoChuteHideout ]
+  blockadeGroups: [ Medical, Supplies, Ammo, ShipComponents ]
+  blockadeFactor: 1.8
+  reliefFactor: 1.5
+  warGroups: [ Ammo, WeaponParts, Medical ]
+  warFactor: 1.5
+  raidGroups: [ ShipComponents, Medical ]
+  raidFactor: 1.5
+  raidWindow: 900
+  reliefBounty: 6000
+  hotCargoLawful: 0.6
+  salvageBonus: 1.25
+  shortageMinutes: 25,40
+  rushMinutes: 20,35
+  consignmentMinutes: 30,45
+  consignments:
+    WFTradeConsignment: 0.7
+    WFTradeConsignmentHeavy: 0.3
+  # While the war is hot, a navy pays its own people faction credits for munitions and ship parts, and pays the enemy's
+  # people more for war goods. The TSF posts a warrant on its own who sell war goods to the PDV.
+  navies:
+  - name: wf-trade-navy-tsf
+    chutes: [ CargoChuteTSFMC ]
+    companies: [ TSF, TSFCivilian ]
+    enemies: [ PDV, PDVCivilian ]
+    creditEntity: FederationMilitaryCredit1
+    postsDefectorWarrants: true
+  - name: wf-trade-navy-pdv
+    chutes: [ CargoChuteHideout, CargoChuteJupiter ]
+    companies: [ PDV, PDVCivilian ]
+    enemies: [ TSF, TSFCivilian ]
+    creditEntity: Doubloon1
+  warEffortGroups: [ Ammo, WeaponParts, ShipComponents ]
+  warEffortCredits: 2
+  defectorFactor: 1.3
+  defectorWarrant: 10000
+
+# Shortages: one station pays more for a group for a while. Booms raise a group everywhere and are rarer.
+- type: wfTradeShortage
+  id: WFTradeShortageMedical
+  group: Medical
+  goods: wf-trade-goods-medical
+  weight: 3
+
+- type: wfTradeShortage
+  id: WFTradeShortageSupplies
+  group: Supplies
+  goods: wf-trade-goods-supplies
+  weight: 3
+
+- type: wfTradeShortage
+  id: WFTradeShortageAmmo
+  group: Ammo
+  goods: wf-trade-goods-ammo
+  weight: 2
+
+- type: wfTradeShortage
+  id: WFTradeShortageShipComponents
+  group: ShipComponents
+  goods: wf-trade-goods-ship-components
+  weight: 2
+
+- type: wfTradeShortage
+  id: WFTradeShortageChemicals
+  group: Chemicals
+  goods: wf-trade-goods-chemicals
+  weight: 2
+
+- type: wfTradeShortage
+  id: WFTradeShortageFuel
+  group: Fuel
+  goods: wf-trade-goods-fuel
+  weight: 1.5
+
+- type: wfTradeShortage
+  id: WFTradeShortageIndustrial
+  group: Industrial
+  goods: wf-trade-goods-industrial
+  weight: 2
+
+- type: wfTradeShortage
+  id: WFTradeShortageAgriculture
+  group: Agriculture
+  goods: wf-trade-goods-agriculture
+  weight: 1.5
+
+- type: wfTradeShortage
+  id: WFTradeBoomLuxuries
+  group: Luxuries
+  goods: wf-trade-goods-luxuries
+  sectorWide: true
+  minFactor: 1.3
+  maxFactor: 1.5
+  duration: 1200
+  weight: 1.5
+
+- type: wfTradeShortage
+  id: WFTradeBoomFuel
+  group: Fuel
+  goods: wf-trade-goods-fuel
+  sectorWide: true
+  minFactor: 1.3
+  maxFactor: 1.5
+  duration: 1200
+  weight: 1
+
+- type: wfTradeShortage
+  id: WFTradeBoomTextiles
+  group: Textiles
+  goods: wf-trade-goods-textiles
+  sectorWide: true
+  minFactor: 1.3
+  maxFactor: 1.5
+  duration: 1200
+  weight: 1
+
+# Rush orders: a station wants a few crates fast.
+- type: wfTradeRush
+  id: WFTradeRushMedical
+  group: Medical
+  goods: wf-trade-goods-medical
+  weight: 3
+
+- type: wfTradeRush
+  id: WFTradeRushSupplies
+  group: Supplies
+  goods: wf-trade-goods-supplies
+  weight: 3
+
+- type: wfTradeRush
+  id: WFTradeRushAmmo
+  group: Ammo
+  goods: wf-trade-goods-ammo
+  weight: 2
+
+- type: wfTradeRush
+  id: WFTradeRushShipComponents
+  group: ShipComponents
+  goods: wf-trade-goods-ship-components
+  weight: 2
+
+- type: wfTradeRush
+  id: WFTradeRushIndustrial
+  group: Industrial
+  goods: wf-trade-goods-industrial
+  weight: 2
+
+- type: wfTradeRush
+  id: WFTradeRushLuxuries
+  group: Luxuries
+  goods: wf-trade-goods-luxuries
+  count: 2,4
+  weight: 1

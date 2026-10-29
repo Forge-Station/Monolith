@@ -253,6 +253,7 @@ public sealed partial class ShuttleConsoleSystem
                 drive,
                 out var massAdjustedStartupTime,
                 out var massAdjustedHyperSpaceTime);
+            massAdjustedStartupTime += WfCargoSpoolPenalty(shuttleUid.Value, drive); // WOLFGATE(CargoLoad): cargo lengthens the spool
             _shuttle.FTLToCoordinates(shuttleUid.Value, shuttleComp, adjustedCoordinates, targetAngle, massAdjustedStartupTime, massAdjustedHyperSpaceTime);
         }
     }

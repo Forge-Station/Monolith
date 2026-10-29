@@ -40,6 +40,10 @@ public sealed partial class WFConsoleOrbitTargetComponent : Component
     [DataField, AutoNetworkedField]
     public float LiftRatio;
 
+    /// <summary>Cargo tonnes counted against lift across the hull's rigid set. Zero away from a planet.</summary>
+    [DataField, AutoNetworkedField]
+    public float CargoLoad;
+
     /// <summary>Prospective atmosphere power demand in watts. Zero away from a planet.</summary>
     [DataField, AutoNetworkedField]
     public float AtmospherePowerDemand;

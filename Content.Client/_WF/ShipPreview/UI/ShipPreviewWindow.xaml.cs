@@ -69,8 +69,9 @@ public sealed partial class ShipPreviewWindow : DefaultWindow
 
         LiftLabel.Text = !Preview.HasPreview
             ? string.Empty
-            : Preview.MaxLiftGravity > 0f
-                ? Loc.GetString("wf-ship-preview-planet-lift", ("gravity", Preview.MaxLiftGravity.ToString("0.00")))
-                : Loc.GetString("wf-ship-preview-planet-none");
+            : (Preview.MaxLiftGravity > 0f
+                  ? Loc.GetString("wf-ship-preview-planet-lift", ("gravity", Preview.MaxLiftGravity.ToString("0.00")))
+                  : Loc.GetString("wf-ship-preview-planet-none"))
+              + "\n" + Loc.GetString("wf-ship-preview-rated-load", ("tonnes", (int) ShipPreviewLift.RatedLoad(Preview.TileCount)));
     }
 }

@@ -43,3 +43,10 @@
   - type: MultiHandedItem # Mono
   - type: StaticPrice # Mono
     price: 100
+  - type: ThermalSignature # Mono
+  - type: PassiveThermalSignature # Mono
+    signature: 15000
+  # WOLFGATE(TradeGoods): chutes check where a crate was made
+  - type: WFTradeOrigin
+  # WOLFGATE(CargoLoad): trade crates weigh down the ship carrying them
+  - type: WFCargoMass

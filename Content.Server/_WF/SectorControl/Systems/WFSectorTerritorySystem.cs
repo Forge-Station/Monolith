@@ -665,7 +665,7 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
         if (Territory(map) is not { } territory || !territory.Contests.Remove(cell, out var contest))
             return false;
 
-        var ev = new WFSectorContestResolvedEvent(map, cell, contest.Faction, false, contest.Holder);
+        var ev = new WFSectorContestResolvedEvent(map, cell, contest.Faction, false, contest.Holder, Dropped: true);
         RaiseLocalEvent(ref ev);
         return true;
     }

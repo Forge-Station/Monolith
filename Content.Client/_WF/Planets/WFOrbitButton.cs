@@ -31,6 +31,8 @@ public sealed partial class WFOrbitButton : BoxContainer
     private readonly GridContainer _checks;
     private readonly Label _liftValue;
     private readonly Label _powerValue;
+    private readonly Label _cargoName;
+    private readonly Label _cargoValue;
     private readonly ProgressBar _liftBar;
     private readonly RichTextLabel _holdLabel;
     private readonly RichTextLabel _fixLabel;
@@ -117,6 +119,8 @@ public sealed partial class WFOrbitButton : BoxContainer
 
         _liftValue = new Label { HorizontalExpand = true, Align = Label.AlignMode.Right };
         _powerValue = new Label { HorizontalExpand = true, Align = Label.AlignMode.Right };
+        _cargoName = new Label { Text = Loc.GetString("wf-flight-check-cargo"), FontColorOverride = Neutral, Visible = false };
+        _cargoValue = new Label { HorizontalExpand = true, Align = Label.AlignMode.Right, Visible = false };
 
         _checks = new GridContainer
         {
@@ -131,6 +135,8 @@ public sealed partial class WFOrbitButton : BoxContainer
         _checks.AddChild(_liftValue);
         _checks.AddChild(new Label { Text = Loc.GetString("wf-flight-check-power"), FontColorOverride = Neutral });
         _checks.AddChild(_powerValue);
+        _checks.AddChild(_cargoName);
+        _checks.AddChild(_cargoValue);
 
         _liftBar = new ProgressBar
         {
@@ -317,6 +323,12 @@ public sealed partial class WFOrbitButton : BoxContainer
             ? Loc.GetString("wf-flight-check-power-short", ("short", shortKw))
             : Loc.GetString("wf-flight-check-power-ok", ("power", (target.AtmospherePowerDemand / 1000f).ToString("N0")));
         _powerValue.FontColorOverride = target.AtmospherePowerDeficit ? LiftBad : LiftGood;
+
+        var cargo = target.CargoLoad >= 0.5f;
+        _cargoName.Visible = cargo;
+        _cargoValue.Visible = cargo;
+        _cargoValue.Text = Loc.GetString("wf-flight-check-cargo-value", ("tonnes", (int) MathF.Round(target.CargoLoad)));
+        _cargoValue.FontColorOverride = target.LiftRatio < FullLift ? LiftMarginal : Neutral;
 
         string? fix = null;
         if (target.LiftRatio < FullLift)

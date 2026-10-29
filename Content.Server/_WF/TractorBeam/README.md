@@ -72,6 +72,8 @@ toward the dish, with no collection speed cap or arrival brake. The dish's offse
 also applies rotational recoil to the arrestor. Debris can strike and damage
 equipment through normal collision and impact behavior; this is an intentional risk
 of collecting the wrong objects. The selected vessel uses the separate range control.
+Collected trade crates land in the collecting ship's hold and count toward its cargo weight (CargoLoad). A beam-held
+grid's cargo is not added to the holding ship's thrust penalty: towing a loaded barge is a tug role for now.
 
 ## Test vessel
 

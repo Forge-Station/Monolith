@@ -18,6 +18,15 @@ public static class ShipPreviewLift
     private const float OrdinaryAtmosphereThrust = 0.5f;
     private const float StandardGravity = 9.81f;
 
+    /// <summary>
+    /// Tonnes of cargo a hull carries before losing a quarter of its thrust in space: a third of its tile mass, from the
+    /// cargo load factor hull / (hull + load).
+    /// </summary>
+    public static float RatedLoad(int tileCount)
+    {
+        return tileCount * TileMass / 3f;
+    }
+
     /// <summary>Gravity, in g, at which lift equals weight; zero when the hull has no linear thrusters.</summary>
     public static float MaxLiftGravity(IEntityManager entMan, IPrototypeManager protoMan, EntityUid grid, int tileCount)
     {

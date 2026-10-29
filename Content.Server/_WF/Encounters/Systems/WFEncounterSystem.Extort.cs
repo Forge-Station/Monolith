@@ -151,7 +151,7 @@ public sealed partial class WFEncounterSystem
             return;
 
         PruneSpared(extort);
-        if (NearestCrewedShip(ship.Grid, extort.Config.Reach, ExtortOffLimits(extort), ship.NeutralCompanies) is not { } mark || !Shadow(ship, extort, mark))
+        if (RichestNearbyShip(ship.Grid, extort.Config.Reach, ExtortOffLimits(extort), ship.NeutralCompanies) is not { } mark || !Shadow(ship, extort, mark))
         {
             extort.NextMark = now + ExtortLookAgain;
             return;
@@ -313,7 +313,7 @@ public sealed partial class WFEncounterSystem
             || extort.Operator is not { } speaker)
             return;
 
-        var toll = extort.Config.Toll;
+        var toll = extort.Toll = CargoToll(extort.Config.Toll, extort.Mark);
         SetExtortPhase(extort, WFExtortPhase.Demand);
         extort.DemandEnds = _timing.CurTime + ExtortAnswerTime;
         ExtortSay(extort, "demand", ("ship", ExtortMarkName(extort)), ("toll", toll));
@@ -332,7 +332,7 @@ public sealed partial class WFEncounterSystem
             || extort.Phase != WFExtortPhase.Demand)
             return;
 
-        var toll = extort.Config.Toll;
+        var toll = extort.Toll ?? extort.Config.Toll;
         if (args.Id != ExtortPay)
         {
             ExtortSay(extort, "refused");

@@ -22,6 +22,9 @@ public sealed partial class WFOrbitEntrySystem
     // The readout shows two decimals.
     private const float LiftRatioEpsilon = 0.01f;
 
+    // The hold readout shows whole tonnes.
+    private const float CargoLoadEpsilon = 0.5f;
+
     // Below CE's 0.25 settle zone, or a hull with lift would drift straight back into orbit.
     private const float AtmosphereEntryProgress = 0.7f;
 
@@ -47,6 +50,11 @@ public sealed partial class WFOrbitEntrySystem
             && ratio < CEZLevelsSystem.WFFullLiftRatio)
         {
             reason = Loc.GetString("wf-flight-lift-warning", ("percent", CEZLevelsSystem.WfLiftPercent(ratio)));
+            _zLevels.WfGetSetLiftMass(grid, out var setHull, out var setLoad);
+            var warning = new WFLiftWarningEvent(grid, ratio, CEZLevelsSystem.WFFullLiftRatio, setHull, setLoad);
+            RaiseLocalEvent(ref warning);
+            if (warning.Hint is { } hint)
+                reason += " " + hint;
             return false;
         }
 

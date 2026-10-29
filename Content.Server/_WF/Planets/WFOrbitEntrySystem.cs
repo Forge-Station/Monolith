@@ -98,6 +98,7 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
         var liftoffAvailable = false;
         var liftoffActive = false;
         var liftRatio = 0f;
+        var cargoLoad = 0f;
         var atmospherePower = 0f;
         var powerDeficit = false;
         var powerShortfall = 0f;
@@ -146,6 +147,7 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
             if (inOrbit || liftoffAvailable || liftoffActive || airborne)
             {
                 _zLevels.WfTryGetLiftRatio(grid, out liftRatio);
+                cargoLoad = _zLevels.WfGetSetLiftLoad(grid);
                 _zLevels.WfGetAtmospherePower(grid, out atmospherePower, out powerDeficit, out powerShortfall);
                 _zLevels.WfGetLiftAdvice(grid, out convertAdvice, out addAdvice);
             }
@@ -181,6 +183,7 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
             && comp.ConvertAdvice == convertAdvice
             && comp.AddAdvice == addAdvice
             && MathF.Abs(comp.LiftRatio - liftRatio) < LiftRatioEpsilon
+            && MathF.Abs(comp.CargoLoad - cargoLoad) < CargoLoadEpsilon
             && MathF.Abs(comp.DecaySeconds - decaySeconds) < DecaySecondsEpsilon)
         {
             return;
@@ -194,6 +197,7 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
         comp.LiftoffAvailable = liftoffAvailable;
         comp.LiftoffActive = liftoffActive;
         comp.LiftRatio = liftRatio;
+        comp.CargoLoad = cargoLoad;
         comp.AtmospherePowerDemand = atmospherePower;
         comp.AtmospherePowerDeficit = powerDeficit;
         comp.AtmospherePowerShortfall = powerShortfall;

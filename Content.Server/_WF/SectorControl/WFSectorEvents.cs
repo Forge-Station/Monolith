@@ -33,7 +33,8 @@ public readonly record struct WFSectorCellContestedEvent(
 
 /// <summary>
 /// Raised, by ref and broadcast, when a contest ends: claimed (or, for a challenge, transferred) at its deadline, or
-/// dropped. <c>Holder</c> is the faction a challenge was against; null for a plain contest.
+/// dropped. <c>Holder</c> is the faction a challenge was against; null for a plain contest. <c>Dropped</c> is set when
+/// the contest was called off rather than decided.
 /// </summary>
 [ByRefEvent]
 public readonly record struct WFSectorContestResolvedEvent(
@@ -41,7 +42,8 @@ public readonly record struct WFSectorContestResolvedEvent(
     WFSectorCell Cell,
     ProtoId<WFSectorFactionPrototype> Faction,
     bool Claimed,
-    ProtoId<WFSectorFactionPrototype>? Holder = null);
+    ProtoId<WFSectorFactionPrototype>? Holder = null,
+    bool Dropped = false);
 
 /// <summary>Raised, by ref and broadcast, when a cell becomes or stops being disputed: a faction's ship and a crewed player ship are in it together.</summary>
 [ByRefEvent]

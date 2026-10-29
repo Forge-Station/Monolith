@@ -22,6 +22,8 @@ wf-flight-check-power = Power
 wf-flight-check-power-ok = OK, { $power } kW
 wf-flight-check-power-short = Short { $short } kW
 wf-flight-check-hold = Held: { $reason }
+wf-flight-check-cargo = Cargo
+wf-flight-check-cargo-value = { $tonnes } t
 wf-flight-fix-convert = Fix: convert { $count } { $count ->
         [one] thruster
        *[other] thrusters

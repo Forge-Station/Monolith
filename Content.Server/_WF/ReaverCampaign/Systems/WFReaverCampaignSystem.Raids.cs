@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server._WF.Encounters;
 using Content.Server._WF.Encounters.Components;
 using Content.Server._WF.ReaverCampaign.Components;
 using Content.Server._WF.SectorControl.Systems;
@@ -8,6 +9,7 @@ using Content.Shared._WF.Encounters;
 using Content.Shared._WF.NpcCrew;
 using Content.Shared._WF.ReaverCampaign;
 using Content.Shared._WF.SectorControl;
+using Content.Shared.Station.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -102,7 +104,7 @@ public sealed partial class WFReaverCampaignSystem
                 || !marked && !InOrBeside(held, _territory.GridCell(ship)))
                 continue;
 
-            candidates.Add((ship, marked ? crew * MarkWeight : crew));
+            candidates.Add((ship, (marked ? crew * MarkWeight : crew) * CargoWeight(ship)));
         }
 
         if (PickWeighted(candidates) is not { } target)
@@ -245,6 +247,34 @@ public sealed partial class WFReaverCampaignSystem
 
         raid = (uid, encounter);
         return true;
+    }
+
+    /// <summary>A laden ship draws raiders: up to three times the weight for a hold worth 100,000 or more.</summary>
+    private float CargoWeight(EntityUid ship)
+    {
+        var ev = new WFCargoValueQueryEvent(ship);
+        RaiseLocalEvent(ref ev);
+        return 1f + Math.Min(2f, ev.Value / 50000f);
+    }
+
+    /// <summary>
+    /// Whether a raid was launched at a station's grid within a window; false while the campaign is held, as a hold
+    /// moves the raid times forward.
+    /// </summary>
+    public bool RecentlyRaided(EntityUid station, TimeSpan window)
+    {
+        return LastRaid(station) is { } at && _timing.CurTime - at < window;
+    }
+
+    /// <summary>When a raid was last launched at a station's grid, or null; null while the campaign is held.</summary>
+    public TimeSpan? LastRaid(EntityUid station)
+    {
+        return !Held
+               && HasComp<StationMemberComponent>(station)
+               && State() is { } state
+               && state.Raided.TryGetValue(station, out var at)
+            ? at
+            : null;
     }
 
     /// <summary>Marks a launched raid, its target's cooldown and the tallies.</summary>

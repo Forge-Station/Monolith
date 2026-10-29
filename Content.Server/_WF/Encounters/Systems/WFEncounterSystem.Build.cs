@@ -357,7 +357,9 @@ public sealed partial class WFEncounterSystem
 
         foreach (var tile in _planner.CargoTiles(build.Grid, build.Ship.Cargo))
         {
-            Spawn(_random.Pick(manifest.Crates), tile);
+            var crate = Spawn(_random.Pick(manifest.Crates), tile);
+            var loaded = new WFEncounterCargoLoadedEvent(build.Encounter, build.Grid, crate);
+            RaiseLocalEvent(ref loaded);
         }
     }
 

@@ -157,6 +157,12 @@ public sealed partial class WFCrewObjectiveSystem
             case WFCrewObjectiveKind.Loot:
                 if (ship.Comp.DockedTo == target || Approach(ship, from, ShipCentre(target), VirtualDockReach, elapsed))
                 {
+                    if (item.Kind == WFCrewObjectiveKind.Dock && ship.Comp.DockedTo != target)
+                    {
+                        var docked = new WFCrewVirtualDockedEvent(ship, target);
+                        RaiseLocalEvent(ref docked);
+                    }
+
                     ship.Comp.DockedTo = target;
                     Finish(state);
                 }

@@ -600,11 +600,11 @@ public abstract partial class InventorySystem
         }
     }
 
-    private void OnBeingGibbed(Entity<InventoryComponent> ent, ref BeingGibbedEvent args)
-    {
-        foreach (var item in GetHandOrInventoryEntities((ent, null, ent)))
-        {
-            args.Giblets.Add(item);
-        }
-    }
+    // private void OnBeingGibbed(Entity<InventoryComponent> ent, ref BeingGibbedEvent args)
+    // {
+    //     foreach (var item in GetHandOrInventoryEntities((ent, null, ent)))
+    //     {
+    //         args.Giblets.Add(item);
+    //     }
+    // }
 }

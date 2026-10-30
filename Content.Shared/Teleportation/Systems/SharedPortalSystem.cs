@@ -230,15 +230,11 @@ public abstract partial class SharedPortalSystem : EntitySystem
         _audio.PlayPredicted(arrivalSound, subject, subject);
     }
 
-    /// <summary>
-    /// Finds a random coordinate within the portal's radius and teleports the subject there.
-    /// Attempts to not put the subject inside a static entity (e.g. wall).
-    /// </summary>
-    /// <param name="ent"> The portal being collided with. </param>
-    /// <param name="subject"> The entity getting teleported. </param>
-    private void TeleportRandomly(Entity<PortalComponent> ent, EntityUid subject)
+    private void TeleportRandomly(EntityUid portal, EntityUid subject, PortalComponent? component = null)
     {
-        var xform = Transform(ent);
+        if (!Resolve(portal, ref component))
+            return;
+        var xform = Transform(portal);
         var coords = xform.Coordinates;
         var newCoords = coords.Offset(_random.NextVector2(component.MaxRandomRadius));
         for (var i = 0; i < MaxRandomTeleportAttempts; i++)

@@ -1099,8 +1099,8 @@ namespace Content.Shared.Interaction
             var interactUsingEvent = new InteractUsingEvent(user, used, target, clickLocation);
             RaiseLocalEvent(target, interactUsingEvent, true);
 
-            var userInteractUsingEvent = new UserInteractUsingEvent(user, used, target, clickLocation);
-            RaiseLocalEvent(user, userInteractUsingEvent, true);
+            //var userInteractUsingEvent = new UserInteractUsingEvent(user, used, target, clickLocation);
+            //RaiseLocalEvent(user, userInteractUsingEvent, true);
 
             DoContactInteraction(user, used, null, true, interactUsingEvent, interactionParticles: interactUsingEvent.InteractionParticle); // Stellar - interaction particles
             DoContactInteraction(user, target, used, true, interactUsingEvent, interactionParticles: interactUsingEvent.InteractionParticle); // Stellar - interaction particles

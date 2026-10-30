@@ -36,6 +36,7 @@ using Content.Shared._ES.Sparks;
 using Robust.Shared.Audio;
 
 // Mono
+using System.Numerics;
 namespace Content.Shared.RCD.Systems;
 
 [Virtual]

@@ -33,6 +33,7 @@ public abstract partial class SharedStrippableSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private SharedHandsSystem _handsSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedInteractionSystem _interactionSystem = default!;
 
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 

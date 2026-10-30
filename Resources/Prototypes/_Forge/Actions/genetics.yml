@@ -1,0 +1,77 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+- type: entity
+  id: ActionGeneticTelekinesis
+  name: Telekinetic grasp
+  description: Lift an object within five tiles, then steer it with the mouse. Use again on it to drop.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Objects/Weapons/Guns/Launchers/force_gun.rsi
+      state: base
+    event: !type:GeneticTelekinesisActionEvent
+    useDelay: 0.5
+    range: 5
+    canTargetSelf: false
+
+- type: entity
+  id: ActionGeneticTelekinesisFling
+  name: Telekinetic fling
+  description: Hurl the object you are holding with telekinesis toward a point.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Objects/Weapons/Guns/Launchers/force_gun.rsi
+      state: base-unshaded
+    event: !type:GeneticTelekinesisFlingActionEvent
+    useDelay: 0.5
+    range: 15
+    checkCanAccess: false
+
+- type: entity
+  id: ActionGeneticTelepathy
+  name: Telepathy
+  description: Send a silent mental message into a visible mind within five tiles.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/actions_mecha.rsi
+      state: meson
+    event: !type:GeneticTelepathyActionEvent
+    useDelay: 3
+    range: 5
+    canTargetSelf: false
+    whitelist:
+      components:
+      - MobState
+
+- type: entity
+  id: ActionGeneticSlimeTransform
+  name: Slime transformation
+  description: Shift between a flesh blob and a slimeperson body. Tears tissue for 5 slash.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Mobs/Aliens/slimes.rsi
+      state: blue_adult_slime
+    event: !type:GeneticSlimeTransformActionEvent
+    useDelay: 5
+
+- type: entity
+  id: ActionGeneticBoneWeapon
+  name: Grow bone blade
+  description: Grow or retract a bone blade. Growing costs 15 slash.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Objects/Weapons/Melee/armblade.rsi
+      state: icon
+    event: !type:GeneticBoneWeaponActionEvent
+    useDelay: 8

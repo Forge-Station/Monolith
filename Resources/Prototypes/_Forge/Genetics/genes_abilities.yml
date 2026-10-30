@@ -1,0 +1,151 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+# Ability / specialty genes
+
+- type: gene
+  id: GeneTelekinesis
+  name: gene-telekinesis-name
+  description: gene-telekinesis-desc
+  quality: Good
+  instability: 30
+  branch: Neural
+  sequenceLength: 7
+  glowColor: "#A060FF"
+  glowEnergy: 1.2
+  conflicts:
+  - GeneStabilizedDna
+  components:
+  - type: GeneticTelekinesis
+    range: 5
+    throwSpeedMultiplier: 1.75
+    throwRangeBonus: 4
+
+- type: gene
+  id: GeneTelepathy
+  name: gene-telepathy-name
+  description: gene-telepathy-desc
+  quality: Good
+  instability: 18
+  branch: Neural
+  sequenceLength: 5
+  glowColor: "#80C0FF"
+  glowEnergy: 0.8
+  conflicts:
+  - GeneStabilizedDna
+  components:
+  - type: GeneticTelepathy
+    range: 5
+
+- type: gene
+  id: GeneStrongStomach
+  name: gene-strong-stomach-name
+  description: gene-strong-stomach-desc
+  quality: Good
+  instability: 10
+  branch: Metabolism
+  sequenceLength: 3
+  conflicts:
+  - GeneStabilizedDna
+  components:
+  - type: GeneticStrongStomach
+
+- type: gene
+  id: GeneUnstableDna
+  name: gene-unstable-dna-name
+  description: gene-unstable-dna-desc
+  quality: Neutral
+  instability: 32
+  sequenceLength: 7
+  branch: Morphology
+  lockBranch: true
+  glowColor: "#40FF88"
+  glowEnergy: 1.4
+  visualFlicker: true
+  speciesTarget: SlimePerson
+  conflicts:
+  - GeneStabilizedDna
+  components:
+  - type: GeneticSlimeForm
+    transformSlash: 5
+
+- type: gene
+  id: GeneStabilizedDna
+  name: gene-stabilized-dna-name
+  description: gene-stabilized-dna-desc
+  quality: Good
+  instability: 5
+  branch: Metabolism
+  sequenceLength: 7
+  glowColor: "#FFFFFF"
+  glowEnergy: 0.5
+  conflicts:
+  - GeneTelekinesis
+  - GeneTelepathy
+  - GeneStrongStomach
+  - GeneUnstableDna
+  - GeneBoneWeapon
+  - GeneAtomicMetabolism
+  - GeneOrganAdapt
+  - GeneRegen
+  - GeneHulk
+  - GeneHaste
+  components:
+  - type: GeneticStabilizedDna
+    healPerTick: 5
+    interval: 1s
+
+- type: gene
+  id: GeneBoneWeapon
+  name: gene-bone-weapon-name
+  description: gene-bone-weapon-desc
+  quality: Good
+  instability: 22
+  branch: Physical
+  sequenceLength: 5
+  glowColor: "#E8D8C0"
+  glowEnergy: 0.6
+  conflicts:
+  - GeneStabilizedDna
+  components:
+  - type: GeneticBoneWeapon
+    growSlash: 15
+
+- type: gene
+  id: GeneAtomicMetabolism
+  name: gene-atomic-metabolism-name
+  description: gene-atomic-metabolism-desc
+  quality: Good
+  instability: 28
+  branch: Metabolism
+  sequenceLength: 7
+  glowColor: "#66FF44"
+  glowEnergy: 2.8
+  conflicts:
+  - GeneStabilizedDna
+  - GeneRadResist
+  components:
+  - type: GeneticAtomicMetabolism
+    healPerRad: 3
+    nutritionPerRad: 2
+    radiationIntensity: 0.35
+    radiationSlope: 1.2
+
+- type: gene
+  id: GeneOrganAdapt
+  name: gene-organ-adapt-name
+  description: gene-organ-adapt-desc
+  quality: Good
+  instability: 30
+  branch: Adaptation
+  sequenceLength: 7
+  glowColor: "#A0C8FF"
+  glowEnergy: 1.0
+  conflicts:
+  - GeneStabilizedDna
+  - GeneSpaceAdapt
+  - GeneNoBreath
+  components:
+  - type: GeneticOrganAdapt
+    bloodVolumeFactor: 0.5

@@ -1,12 +1,19 @@
 ent-AirlockUSSP = шлюз
     .desc = { ent-Airlock.desc }
     .suffix = USSP, Закрыт
-ent-AirlockUSSPSecure = шлюз
+ent-AirlockUSSPSecure = { ent-AirlockUSSP }
     .desc = { ent-Airlock.desc }
-    .suffix = USSP Secure, Закрыт
-ent-AirlockUSSPCommand = шлюз
+    .suffix = USSP Безопасность, Закрыт
+ent-AirlockUSSPCommand = { ent-AirlockUSSP }
     .desc = { ent-Airlock.desc }
     .suffix = Командование USSP, Закрыт
 ent-AirlockTsfEngineering = шлюз
     .desc = { ent-Airlock.desc }
     .suffix = Инженерный TSF, Закрыт
+
+ent-AirlockViper = { ent-AirlockSyndicate }
+    .desc = { ent-AirlockSyndicate.desc }
+ent-AirlockViperCommand = { ent-AirlockSyndicate }
+    .desc = { ent-AirlockSyndicate.desc }
+ent-AirlockMieyo = { ent-Airlock }
+    .desc = { ent-Airlock.desc }

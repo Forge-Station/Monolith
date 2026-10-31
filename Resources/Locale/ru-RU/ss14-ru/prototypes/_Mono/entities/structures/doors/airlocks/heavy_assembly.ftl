@@ -32,3 +32,6 @@ ent-AirlockHeavyAssemblyTSFMC = { ent-AirlockHeavyAssembly }
 ent-AirlockHeavyAssemblyUSSP = { ent-AirlockHeavyAssembly }
     .desc = { ent-AirlockHeavyAssembly.desc }
     .suffix = USSP
+
+ent-AirlockHeavyAssemblyMieyo = { ent-AirlockHeavyAssembly }
+    .desc = { ent-AirlockHeavyAssembly.desc }

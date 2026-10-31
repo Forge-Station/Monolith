@@ -16,7 +16,7 @@
     - to: flat-butter
       steps:
       - tag: NFButterStick
-        name: a stick of butter
+        name: construction-required-stick-of-butter # Forge-change
         icon:
           sprite: Objects/Consumable/Food/ingredients.rsi
           state: butter

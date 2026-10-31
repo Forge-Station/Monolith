@@ -17,5 +17,9 @@ general-station-record-console-reset-filters = Сброс
 general-station-record-console-delete = Удалить
 general-station-record-job-filter = Должность
 general-station-record-species-filter = Раса
+general-station-record-console-ad-label = Реклама
+general-station-record-console-ad-default-text = Напишите здесь рекламу для вашего корабля! (макс. {$size} симв.)
+general-station-record-console-ad-unsaved-changes = У вас есть несохранённые изменения.
+general-station-record-console-ad-submit = Отправить
 
 general-station-record-console-record-nationality = Национальность: { $nationality }

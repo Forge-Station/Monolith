@@ -1,0 +1,16 @@
+job-name-ussp-commissar = СССП Комиссар
+job-name-ussp-sergeant = СССП Сержант
+job-name-ussp-rifleman = СССП Стрелок
+job-supervisors-ussp-highcomm = командованию Нова Цигни
+job-supervisors-ussp-commissars = комиссару
+job-supervisors-ussp-sergeant = сержантам
+job-name-tsf-borg = ТСФ Киборг
+job-name-pdv-borg = СИВ Киборг
+job-name-vg-infanteer = ВКР Пехотинец
+job-name-vg-lieutenant = ВКР Лейтенант
+job-name-vg-commander = ВКР Командир
+job-name-mmc-liason = ММС Корпоративный представитель
+job-name-mmc-security = ММС Корпоративная охрана
+job-name-mmc-employee = ММС Сотрудник
+job-supervisors-mmc-highcomm = совету директоров Миеё
+job-supervisors-mmc-liason = корпоративному представителю

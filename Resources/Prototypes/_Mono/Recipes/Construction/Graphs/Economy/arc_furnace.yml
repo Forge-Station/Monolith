@@ -12,7 +12,7 @@
         icon:
           sprite: _Mono/Objects/Materials/bayponents.rsi
           state: "armor1"
-        name: basic armor plate
+        name: construction-required-basic-armor-plate # Forge-change
         doAfter: 1
       - tool: Screwing
         doAfter: 2
@@ -24,7 +24,7 @@
         icon:
           sprite: _Mono/Objects/Materials/bayponents.rsi
           state: "armor1"
-        name: basic armor plate
+        name: construction-required-basic-armor-plate # Forge-change
         doAfter: 1
       - tool: Screwing
         doAfter: 2
@@ -36,7 +36,7 @@
         icon:
           sprite: _Mono/Objects/Materials/bayponents.rsi
           state: "armor1"
-        name: basic armor plate
+        name: construction-required-basic-armor-plate # Forge-change
         doAfter: 1
       - tool: Screwing
         doAfter: 2
@@ -88,7 +88,7 @@
         icon:
           sprite: _Mono/Objects/Materials/bayponents.rsi
           state: "electromagnet2_unfinished"
-        name: compound electromagnet
+        name: construction-required-compound-electromagnet # Forge-change
       - tool: Screwing
         doAfter: 2
       - tool: Cutting

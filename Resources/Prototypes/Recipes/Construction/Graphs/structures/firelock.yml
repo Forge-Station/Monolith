@@ -50,7 +50,7 @@
           steps:
             - tag: FirelockElectronics
               store: board
-              name: firelock electronics
+              name: construction-required-firelock-electronics # Forge-change
               icon:
                 sprite: "Objects/Misc/module.rsi"
                 state: "mainboard"

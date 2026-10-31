@@ -8,3 +8,7 @@ ent-AirlockHatchMaintenanceEmpireOfficer = { ent-AirlockHatchMaintenance }
     .desc = { ent-AirlockHatchMaintenance.desc }
 ent-AirlockHatchMaintenanceEmpire = { ent-AirlockHatchMaintenance }
     .desc = { ent-AirlockHatchMaintenance.desc }
+
+ent-AirlockHatchRemnant = { ent-AirlockHatch }
+    .suffix = Forge, Remnant
+    .desc = { ent-AirlockHatch.desc }

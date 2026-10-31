@@ -1,5 +1,5 @@
-ent-BaseBorgModule = модуль борга
-    .desc = Техническая деталь, дающая боргам новые способности.
+ent-BaseBorgModule = модуль киборга
+    .desc = Техническое устройство, дающее киборгам новые возможности.
 ent-BaseProviderBorgModule = { "" }
     .desc = { "" }
 ent-ActionBorgSwapModule = Сменить модуль
@@ -134,4 +134,5 @@ ent-BorgModuleSurgery = хирургический модуль борга
     .desc = { ent-BaseBorgModuleMedical.desc }
 ent-BorgModuleAdvancedSurgery = продвинутый хирургический модуль борга
     .desc = { ent-BaseBorgModuleMedical.desc }
-
+ent-BorgModuleMercenary = модуль киборга-наёмника
+    .desc = { ent-BaseBorgModule.desc }

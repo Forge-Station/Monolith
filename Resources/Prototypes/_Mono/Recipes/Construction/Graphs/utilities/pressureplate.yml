@@ -13,7 +13,7 @@
               amount: 2
               doAfter: 1
             - tag: RemoteSignaller
-              name: remote signaller
+              name: construction-required-remote-signaller # Forge-change
               icon:
                 sprite: Objects/Devices/signaller.rsi
                 state: signaller

@@ -10,3 +10,15 @@ ent-JawsOfLifeRightArm =  J.W.L правая рука
     .desc = Кибернетическая правая рука, позволяющая своему владельцу вскрывать шлюзы.
 ent-JawsOfLifeLeftArm =  J.W.L левая рука
     .desc = Кибернетическая левая рука, позволяющая своему владельцу вскрывать шлюзы.
+
+ent-LeftHandCybernetic = кибернетическая левая кисть
+    .desc = { "" }
+
+ent-RightHandCybernetic = кибернетическая правая кисть
+    .desc = { "" }
+
+ent-LeftFootCybernetic = кибернетическая левая ступня
+    .desc = { "" }
+
+ent-RightFootCybernetic = кибернетическая правая ступня
+    .desc = { "" }

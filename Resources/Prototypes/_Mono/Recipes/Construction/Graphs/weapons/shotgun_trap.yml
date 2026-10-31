@@ -13,19 +13,19 @@
               amount: 4
               doAfter: 1
             - tag: ModularReceiver
-              name: modular receiver
+              name: construction-required-modular-receiver # Forge-change
               icon:
                 sprite: Objects/Misc/modular_receiver.rsi
                 state: icon
               doAfter: 2
             - tag: Pipe
-              name: pipe
+              name: construction-required-pipe # Forge-change
               icon:
                 sprite: Structures/Piping/Atmospherics/pipe.rsi
                 state: pipeStraight
               doAfter: 2
             - tag: RemoteSignaller
-              name: remote signaller
+              name: construction-required-remote-signaller # Forge-change
               icon:
                 sprite: Objects/Devices/signaller.rsi
                 state: signaller

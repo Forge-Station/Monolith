@@ -1,7 +1,10 @@
 ent-BaseHydrakinOrgan = орган гидракина
 ent-OrganHydrakinStomach = желудок гидракина
+    .desc = { "" }
 ent-OrganHydrakinBrain = мозг гидракина
+    .desc = { ent-OrganHumanBrain.desc }
 ent-OrganHydrakinLiver = печень гидракина
+    .desc = { "" }
 ent-OrganHydrakinHeart = сердце гидракина
     .desc = Мне жаль того бессердечного ублюдка, который это потерял.
 ent-OrganHydrakinLungs = легкие гидракина

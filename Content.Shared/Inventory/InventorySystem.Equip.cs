@@ -591,4 +591,20 @@ public abstract partial class InventorySystem
         entityUid = container.ContainedEntity;
         return entityUid != null;
     }
+
+    public void TriggerHandContactInteraction(EntityUid uid)
+    {
+        foreach (var item in _handsSystem.EnumerateHeld(uid))
+        {
+            _interactionSystem.DoContactInteraction(uid, item, null, true); // Stellar - Interaction particles
+        }
+    }
+
+    // private void OnBeingGibbed(Entity<InventoryComponent> ent, ref BeingGibbedEvent args)
+    // {
+    //     foreach (var item in GetHandOrInventoryEntities((ent, null, ent)))
+    //     {
+    //         args.Giblets.Add(item);
+    //     }
+    // }
 }

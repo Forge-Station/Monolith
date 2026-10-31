@@ -114,6 +114,9 @@
       path: /Audio/Machines/button.ogg
       params:
         variation: 0.250
+  - type: ItemTogglePrefix
+    prefixOn: on
+    prefixOff: off
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
@@ -126,6 +129,11 @@
     bluntStaminaDamageFactor: 2.0
     angle: 60
     animation: WeaponArcThrust
+  # ES START
+  - type: ESSparkOnItemToggle
+    count: 1
+    sparkPrototype: SLEffectSparksBaton # Starlight, smaller sparks
+  # ES END
   - type: StaminaDamageOnHit
     damage: 35
     sound: /Audio/Weapons/egloves.ogg

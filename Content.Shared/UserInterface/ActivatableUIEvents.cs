@@ -31,6 +31,11 @@ public sealed class AfterActivatableUIOpenEvent : EntityEventArgs
         User = who;
         Actor = actor;
     }
+
+    /// <summary>
+    /// Stellar - if an interaction particle should be played for this event.
+    /// </summary>
+    public bool InteractionParticle;
 }
 
 /// <summary>

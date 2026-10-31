@@ -113,6 +113,11 @@
     price: 20 # Frontier 40<20
   - type: IgnitionSource
     temperature: 700
+  # Moffstation - Start - More Sparks
+  - type: ESSparkOnItemToggle
+    count: 1
+    sparkPrototype: MoffEffectSparksSilent
+  # Moffstation - End
   - type: WeldingHealing # EE IPCs
     damageContainers:
       - Silicon

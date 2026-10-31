@@ -105,6 +105,7 @@ namespace Content.Shared.Stacks
             }
 
             _storage.PlayPickupAnimation(args.Used, popupPos, userCoords, localRotation, args.User);
+            args.InteractionParticle = false; // Stellar
         }
 
         private bool TryMergeStacks(

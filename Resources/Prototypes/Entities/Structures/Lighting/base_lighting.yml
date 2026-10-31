@@ -88,6 +88,9 @@
   - type: ShipRepairable
     repairTime: 1
     repairCost: 2
+  # ES START
+  - type: ESSparkOnHit
+  # ES END
   placement:
     mode: SnapgridCenter
     snap:

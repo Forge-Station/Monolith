@@ -1,14 +1,12 @@
+using System.Linq; // Forge-Change
 using System.Numerics;
 using Content.Shared._Mono.PersonalShield;
 using Content.Shared.Inventory;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.GameObjects;
-using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._Mono.PersonalShield;
@@ -22,7 +20,12 @@ public sealed partial class PersonalShieldOverlay : Overlay
     private readonly SharedTransformSystem _transform;
     private readonly SpriteSystem _sprite;
     private readonly InventorySystem _inventory;
-    private readonly ShaderInstance _shader;
+    // Forge-Change-Start
+    private readonly ShaderPrototype _shaderProto;
+    private readonly Dictionary<EntityUid, ShaderInstance> _shaders = new();
+    private const int CleanupTick = 600;
+    private int _tickCounter;
+    // Forge-Change-End
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -32,8 +35,7 @@ public sealed partial class PersonalShieldOverlay : Overlay
         _transform = _entManager.System<SharedTransformSystem>();
         _sprite = _entManager.System<SpriteSystem>();
         _inventory = _entManager.System<InventorySystem>();
-        var protoMan = IoCManager.Resolve<IPrototypeManager>();
-        _shader = protoMan.Index(ShaderId).InstanceUnique();
+        _shaderProto = IoCManager.Resolve<IPrototypeManager>().Index(ShaderId); // Forge-Change
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -65,28 +67,58 @@ public sealed partial class PersonalShieldOverlay : Overlay
             if (!TryGetHitboxSize(wearer.Value, sprite, out var extents))
                 continue;
 
+            // Forge-Change-Start
+            if (!_shaders.TryGetValue(uid, out var shader))
+                _shaders[uid] = shader = _shaderProto.InstanceUnique();
+            // Forge-Change-End
+
             var size = extents * shield.Scale;
 
-            _shader.SetParameter("progress", GetProgress(shield));
-            _shader.SetParameter("skin_color", shield.Color);
-            _shader.SetParameter("brightness", shield.Brightness);
-            _shader.SetParameter("pixel_grid", shield.PixelGrid);
-            _shader.SetParameter("hex_density", shield.HexDensity);
-            _shader.SetParameter("form_origin", shield.FormOrigin);
-            _shader.SetParameter("fill_level", shield.FillLevel);
-            _shader.SetParameter("line_level", shield.LineLevel);
-            _shader.SetParameter("rim_level", shield.RimLevel);
-            _shader.SetParameter("core_fade", shield.CoreFade);
-            _shader.SetParameter("shard_scale", shield.ShardScale);
-            _shader.SetParameter("alpha_bands", shield.AlphaBands);
-            _shader.SetParameter("breath_depth", shield.BreathDepth);
+            // Forge-Change-Start
+            shader.SetParameter("progress", GetProgress(shield));
+            shader.SetParameter("skin_color", shield.Color);
+            shader.SetParameter("brightness", shield.Brightness);
+            shader.SetParameter("pixel_grid", shield.PixelGrid);
+            shader.SetParameter("hex_density", shield.HexDensity);
+            shader.SetParameter("form_origin", shield.FormOrigin);
+            shader.SetParameter("fill_level", shield.FillLevel);
+            shader.SetParameter("line_level", shield.LineLevel);
+            shader.SetParameter("rim_level", shield.RimLevel);
+            shader.SetParameter("core_fade", shield.CoreFade);
+            shader.SetParameter("shard_scale", shield.ShardScale);
+            shader.SetParameter("alpha_bands", shield.AlphaBands);
+            shader.SetParameter("breath_depth", shield.BreathDepth);
 
-            handle.UseShader(_shader);
+            handle.UseShader(shader);
+            // Forge-Change-End
 
             var worldPos = _transform.GetWorldPosition(xform);
             handle.SetTransform(Matrix3x2.Multiply(counterRot, Matrix3Helpers.CreateTranslation(worldPos)));
             handle.DrawTextureRect(Texture.White, Box2.CenteredAround(Vector2.Zero, size));
         }
+
+        // Forge-Change-Start
+        if (_tickCounter >= CleanupTick)
+        {
+            List<EntityUid>? dead = null;
+            foreach (var entUid in _shaders.Keys.Where(entUid => !_entManager.EntityExists(entUid)))
+            {
+                (dead ??= []).Add(entUid);
+            }
+
+            if (dead != null)
+            {
+                foreach (var entUid in dead)
+                {
+                    _shaders.Remove(entUid);
+                }
+            }
+
+            _tickCounter = 0;
+        }
+        else
+            _tickCounter++;
+        // Forge-Change-End
 
         handle.SetTransform(Matrix3x2.Identity);
         handle.UseShader(null);

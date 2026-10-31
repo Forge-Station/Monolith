@@ -82,79 +82,129 @@ surgery-popup-step-SurgeryStepRemoveXenoGraft = { $user } извлекает ж�
 # КПБ
 ent-PartIPC = часть тела КПБ
 ent-TorsoIPC = торс КПБ
+    .desc = { "" }
 ent-HeadIPC = голова КПБ
+    .desc = { "" }
 ent-LeftArmIPC = левая рука КПБ
+    .desc = { "" }
 ent-RightArmIPC = правая рука КПБ
+    .desc = { "" }
 ent-LeftHandIPC = левая кисть КПБ
+    .desc = { "" }
 ent-RightHandIPC = правая кисть КПБ
+    .desc = { "" }
 ent-LeftLegIPC = левая нога КПБ
+    .desc = { "" }
 ent-RightLegIPC = правая нога КПБ
+    .desc = { "" }
 ent-LeftFootIPC = левая ступня КПБ
+    .desc = { "" }
 ent-RightFootIPC = правая ступня КПБ
+    .desc = { "" }
 
 
 # Органы КПБ
 ent-OrganIPCEyes = глаза КПБ
+    .desc = 01001001 00100000 01110011 01100101 01100101 00100000 01111001 01101111 01110101 00100001
 ent-OrganIPCTongue = голосовой модуль КПБ
+    .desc = Голосовой модулятор, используемый для воспроизведения речи.
 ent-OrganIPCEars = слуховой модуль КПБ
+    .desc = { "" }
 ent-OrganIPCPump = жидкостная помпа КПБ
+    .desc = Микропомпа для циркуляции охлаждающей жидкости.
 
 
 # Дварф
 ent-RightHandDwarf = правое запястье дварфа
+    .desc = { ent-PartHuman.desc }
 ent-LeftHandDwarf = левое запястье дварфа
+    .desc = { ent-PartHuman.desc }
 
 
 # Фелиниды
 ent-LeftHandFelinid = левое запястье фелинида
+    .desc = { ent-PartHuman.desc }
 ent-RightHandFelinid = правое запястье фелинида
+    .desc = { ent-PartHuman.desc }
 
 
 # Юви
 ent-LeftHandYowie = левое запястье Юви
+    .desc = { ent-PartHuman.desc }
 ent-RightHandYowie = правое запястье Юви
+    .desc = { ent-PartHuman.desc }
 
 
 # Хитиниды
 ent-PartChitinidBase = часть тела Хитинида
 ent-TorsoChitinid = тело Хитинида
+    .desc = { "" }
 ent-HeadChitinid = голова Хитинида
+    .desc = { "" }
 ent-LeftArmChitinid = левая рука Хитинида
+    .desc = { "" }
 ent-RightArmChitinid = правая рука Хитинида
+    .desc = { "" }
 ent-LeftHandChitinid = левая кисть Хитинида
+    .desc = { "" }
 ent-RightHandChitinid = правая кисть Хитинида
+    .desc = { "" }
 ent-LeftLegChitinid = левая нога Хитинида
+    .desc = { "" }
 ent-RightLegChitinid = правая нога Хитинида
+    .desc = { "" }
 ent-LeftFootChitinid = левая стопа Хитинида
+    .desc = { "" }
 ent-RightFootChitinid = правая стопа Хитинида
+    .desc = { "" }
 
 
 # Гидракины
 ent-PartHydrakin = часть тела Гидракина
 ent-TorsoHydrakin = тело Гидракина
+    .desc = { "" }
 ent-HeadHydrakin = голова Гидракина
+    .desc = { "" }
 ent-LeftArmHydrakin = левая рука Гидракина
+    .desc = { "" }
 ent-RightArmHydrakin = правая рука Гидракина
+    .desc = { "" }
 ent-LeftHandHydrakin = левая кисть Гидракина
+    .desc = { "" }
 ent-RightHandHydrakin = правая кисть Гидракина
+    .desc = { "" }
 ent-LeftLegHydrakin = левая нога Гидракина
+    .desc = { "" }
 ent-RightLegHydrakin = правая нога Гидракина
+    .desc = { "" }
 ent-LeftFootHydrakin = левая стопа Гидракина
+    .desc = { "" }
 ent-RightFootHydrakin = правая стопа Гидракина
+    .desc = { "" }
 
 
 # Резоми
 ent-PartResomi = часть тела Резоми
 ent-TorsoResomi = тело Резоми
+    .desc = { "" }
 ent-HeadResomi = голова Резоми
+    .desc = { "" }
 ent-LeftArmResomi = левая рука Резоми
+    .desc = { "" }
 ent-RightArmResomi = правая рука Резоми
+    .desc = { "" }
 ent-LeftHandResomi = левая кисть Резоми
+    .desc = { "" }
 ent-RightHandResomi = правая кисть Резоми
+    .desc = { "" }
 ent-LeftLegResomi = левая нога Резоми
+    .desc = { "" }
 ent-RightLegResomi = правая нога Резоми
+    .desc = { "" }
 ent-LeftFootResomi = левая ступня Резоми
-ent-RightFootResomi= правая ступня Резоми
+    .desc = { "" }
+ent-RightFootResomi = правая ступня Резоми
+    .desc = { "" }
 
 # Карпы
 ent-TailCarp = хвост карпа

@@ -1,0 +1,26 @@
+ent-ShuttleConsoleCircuitboardANALR67RWR = плата консоли управления шаттлом (AN/ALR-67 RWR)
+    .desc = Печатная плата компьютера для консоли управления шаттлом. Эта оснащена AN/ALR-67 RWR для звукового предупреждения о захвате ракетой.
+ent-ComputerShuttleTSFNVWS = консоль управления шаттлом
+    .desc = Используется для управления шаттлом. Эта консоль оснащена TSFN VWS для звукового предупреждения о ракетной угрозе.
+    .suffix = TSFN/TSFMC VWS
+ent-ShuttleConsoleCircuitboardTSFN = плата консоли управления шаттлом (TSFN VWS)
+    .desc = Печатная плата компьютера для консоли управления шаттлом. Эта оснащена TSFN VWS для звукового предупреждения о захвате ракетой.
+    .suffix = Настольная, TSFN/TSFMC VWS
+ent-ComputerShuttleKPV63RWR = консоль управления шаттлом
+    .desc = Используется для управления шаттлом. Эта консоль оснащена KPV-63 RWR для звукового предупреждения о ракетной угрозе.
+    .suffix = PDV/USSP KPV-63 RWR
+ent-ShuttleConsoleCircuitboardKPV63RWR = плата консоли управления шаттлом (KPV-63 RWR)
+    .desc = Печатная плата компьютера для консоли управления шаттлом. Эта оснащена KPV-63 RWR для звукового предупреждения о захвате ракетой.
+ent-ComputerShuttleANALR67RWR = консоль управления шаттлом
+    .desc = Используется для управления шаттлом. Эта консоль оснащена AN/ALR-67 RWR для звукового предупреждения о ракетной угрозе.
+    .suffix = Альт. AN/ALR-67 RWR
+
+ent-ComputerTabletopShuttleTSFNVWS = { ent-ComputerShuttleTSFNVWS }
+    .desc = { ent-ComputerShuttleTSFNVWS.desc }
+    .suffix = Настольная, TSFN/TSFMC VWS
+ent-ComputerTabletopShuttleKPV63RWR = { ent-ComputerShuttleKPV63RWR }
+    .desc = { ent-ComputerShuttleKPV63RWR.desc }
+    .suffix = Настольная, PDV/USSP KPV-63 RWR
+ent-ComputerTabletopShuttleANALR67RWR = { ent-ComputerShuttleANALR67RWR }
+    .desc = { ent-ComputerShuttleANALR67RWR.desc }
+    .suffix = Настольная, альт. AN/ALR-67

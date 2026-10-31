@@ -21,3 +21,5 @@ ent-HoloprojectorSecurity = проектор голобарьера
 ent-HoloprojectorSecurityEmpty = { ent-HoloprojectorSecurity }
     .suffix = Пустой
     .desc = { ent-HoloprojectorSecurity.desc }
+ent-HoloprojectorFieldTSF = проектор силового поля ТСФ
+    .desc = Создаёт непроницаемое силовое поле. Близкое нахождение может вызвать рак. А может и не вызвать.

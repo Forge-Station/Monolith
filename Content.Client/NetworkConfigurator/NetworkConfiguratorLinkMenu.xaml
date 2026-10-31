@@ -1,7 +1,8 @@
+<!-- Forge-change: добавлен ключ локализации network-configurator-window-title для заголовка окна. -->
 <controls:FancyWindow xmlns="https://spacestation14.io"
                 xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                 xmlns:networkConfigurator="clr-namespace:Content.Client.NetworkConfigurator"
-                Title="Network Configurator" MinSize="620 400" RectClipContent="True">
+                Title="{Loc network-configurator-window-title}" MinSize="620 400" RectClipContent="True">
     <BoxContainer Orientation="Vertical" VerticalExpand="True">
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
             <Label Margin="12 0" Text="{Loc signal-port-selector-help}"/>

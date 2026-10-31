@@ -14,7 +14,7 @@
           data: 1
 
       - tag: HonkerCentralControlModule
-        name: H.O.N.K. central control module
+        name: construction-required-h-o-n-k-central-control-module # Forge-change
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: "mainboard"
@@ -31,7 +31,7 @@
           data: 3
 
       - tag: HonkerPeripheralsControlModule
-        name: H.O.N.K. peripherals control module
+        name: construction-required-h-o-n-k-peripherals-control-module # Forge-change
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: id_mod
@@ -48,7 +48,7 @@
           data: 5
 
       - tag: HonkerTargetingControlModule
-        name: H.O.N.K. weapon control and targeting module
+        name: construction-required-h-o-n-k-weapon-control-and-targeting-module # Forge-change
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: id_mod
@@ -68,7 +68,7 @@
 #currently mechs don't support upgrading. add them back in once that's squared away.
 
       - component: PowerCell
-        name: power cell
+        name: construction-required-power-cell # Forge-change
         store: battery-container
         icon:
           sprite: Objects/Power/power_cells.rsi
@@ -89,7 +89,7 @@
         icon:
           sprite: "Clothing/Mask/clown.rsi"
           state: "icon"
-        name: "a clown's mask"
+        name: construction-required-clown-s-mask # Forge-change
         doAfter: 1
         completed:
         - !type:VisualizerDataInt
@@ -100,7 +100,7 @@
         icon:
           sprite: "Clothing/Shoes/Specific/clown.rsi"
           state: "icon"
-        name: "a clown's shoes"
+        name: construction-required-clown-s-shoes # Forge-change
         doAfter: 1
         completed:
         - !type:VisualizerDataInt

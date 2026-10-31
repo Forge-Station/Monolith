@@ -3,3 +3,7 @@ ent-90mmBulletBase = снаряд
 ent-220mmBulletAPHE = снаряд CYREXA 220 мм
 ent-255mmBulletAPHE = снаряд Bofors 255 мм
 ent-AdderBullet = снаряд Adder
+ent-ShipRailgunProjectileEMP = 280-мм ЭМИ-снаряд M381 «Чарон», 26,5 кг
+    .desc = { ent-BaseBulletTrigger.desc }
+ent-ShipRailgunProjectileAphe = 280-мм бронебойно-фугасный снаряд M381 «Чарон», 26,5 кг
+    .desc = { ent-BaseBulletTrigger.desc }

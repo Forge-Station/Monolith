@@ -1,7 +1,7 @@
 # Прочие
 ent-BaseShipLPC = ship LPC
     .desc = Содержит необходимые данные для консоли верфи для производства определённого проекта.
-ent-ShipVoucherFrontierIronMan = ваучер на 3-22 «Бег»
+ent-ShipVoucherFrontierIronMan = ваучер на «Бег»
     .desc = Позволяет бесплатный приобрести одино судно «Бег» на верфи. Уничтожается при продаже.
 ent-ShipVoucherHound = ваучер на «Гончая»
     .desc = Небольшая карта, содержащая данные для получения дрона класса «Гончая» из резервов авианосца «Опустошитель».
@@ -37,7 +37,7 @@ ent-ShipVoucherTsfT0 = корабельный ваучер ТСФ уровня T
 ent-ShipVoucherTsfT1Random = случайный ваучер ТСФ
     .desc = { ent-ShipVoucherTsfT0.desc }
     .suffix = Т1
-ent-ShipVoucherTsfT2Random = случайный ваучер ТСФ
+ent-ShipVoucherTsfT2Random = { ent-ShipVoucherTsfT1Random }
     .desc = { ent-ShipVoucherTsfT0.desc }
     .suffix = Т2
 ent-ShipVoucherBalor = ваучер «Балор»
@@ -50,3 +50,6 @@ ent-ShipVoucherPolaris =  ваучер на TSF-PIN «Полярис»
     .desc = Небольшая карта, содержащая данные для получения корабля класса «Полярис» из резервов флагманского корабля ТСФ.
 ent-ShipVoucherFujian = ваучер на TSF-PIN «Fujian»
     .desc = Небольшая карта, содержащая данные для получения корабля класса «Fujian» из резервов флагманского корабля ТСФ.
+
+ent-ShipVoucherSpekter = ваучер на ТСФ «Спектр»
+    .desc = Небольшая карта с данными для получения ракетного корвета класса «Спектр» из резервов флагмана.

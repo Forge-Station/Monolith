@@ -7,7 +7,7 @@
     - to: pyrogelbombempty
       steps:
       - tag: DrinkBottle
-        name: an empty bottle
+        name: construction-required-empty-bottle # Forge-change
         icon:
           sprite: Objects/Consumable/Drinks/vodkabottle.rsi
           state: icon

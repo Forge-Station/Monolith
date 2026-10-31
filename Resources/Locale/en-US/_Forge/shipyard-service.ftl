@@ -1,3 +1,4 @@
+docking-port-name-drydock = DRYDOCK
 shipyard-service-window-title = Drydock Console
 shipyard-service-no-bank = No bank account
 shipyard-service-no-shuttle = No docked shuttle

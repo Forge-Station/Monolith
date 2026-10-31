@@ -412,3 +412,17 @@
       sprite: Interface/Actions/night_vision.rsi
       state: icon
     event: !type:ToggleNightVisionEvent {}
+
+# Forge-Change-add-Start
+
+- type: entity
+  id: ActionCycleScarfStyle
+  name: Change style scarf
+  description: Personal your scarf
+  components:
+  - type: InstantAction
+    useDelay: 0.5
+    itemIconStyle: BigItem
+    event: !type:CycleScarfEvent
+
+# Forge-Change-add-End

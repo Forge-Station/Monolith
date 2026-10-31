@@ -172,7 +172,7 @@ viper-group-description = [color=#B82121]Viper Group[/color] живёт по ж�
 
     Если вы ищете богатство и опасность, готовы к смелым и безжалостным действиям — [color=#B82121]Viper Group[/color] ждёт вас.
 
-viper-group-company-note = [bold][color=#B82121]Viper Group[/color] — ОПГ, а это значит что к вам будет повышенный интерес со стороны [color=#047ABD]Транс-Солнечной Федерации[/color] с начала раунда.
+viper-group-company-note = [bold]Компания [color=#B82121]Viper Group[/color] и [color=#047ABD]Транс-Солнечная Федерация[/color] являются врагами за пределами Безопасной Зоны. Учитывайте это.
     Компании [color=#B82121]Viper Group[/color] и [color=#B01340]СССП(К)[/color] являются врагами за пределами Безопасной Зоны. Учитывайте это.
     Компания [color=#B82121]Viper Group[/color] сотрудничают с [color=#0f3b62]«Nexus»[/color], но их отношения ещё не дружеские.[/bold]
 

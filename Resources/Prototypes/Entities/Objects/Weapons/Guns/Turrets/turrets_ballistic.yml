@@ -145,3 +145,21 @@
     interactFailureString: petting-failure-generic
     interactSuccessSound:
       path: /Audio/Animals/snake_hiss.ogg
+
+#Forge-Change-Start
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretForerunner
+  name: forerunner turret
+  suffix: Forerunner
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SyndicateNF
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Turrets/forerunnerturret.rsi
+    layers:
+    - state: base
+    - state: unlit
+      shader: unshaded
+#Forge-Change-End

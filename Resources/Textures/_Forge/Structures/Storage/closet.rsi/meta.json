@@ -132,6 +132,15 @@
     },
     {
       "name": "emp_med_open"
+    },
+    {
+      "name": "forerunner"
+    },
+    {
+      "name": "forerunner_door"
+    },
+    {
+      "name": "forerunner_open"
     }
   ]
 }

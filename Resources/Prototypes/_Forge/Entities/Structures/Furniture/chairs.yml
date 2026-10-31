@@ -1,0 +1,9 @@
+- type: entity
+  name: chair
+  id: ChairForerunner
+  parent: Chair
+  suffix: Forerunner
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Furniture/chairs.rsi
+    state: forerunner

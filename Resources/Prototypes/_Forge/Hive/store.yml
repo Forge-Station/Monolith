@@ -1,0 +1,8 @@
+- type: currency
+  id: HiveDNA
+  displayName: store-currency-display-hive-dna
+  canWithdraw: false
+
+- type: storeCategory
+  id: HiveAbilities
+  name: store-category-hive-abilities

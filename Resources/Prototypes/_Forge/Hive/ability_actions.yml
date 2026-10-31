@@ -1,0 +1,222 @@
+
+- type: entity
+  abstract: true
+  id: BaseActionHiveAbility
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    useDelay: 2
+
+# Рука-клинок
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveArmBlade
+  name: Arm Blade
+  description: Turn one of your arms into a blade of bone and flesh, or back.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: handblade }
+    event: !type:HiveToggleHandItemEvent
+      item: HiveArmBlade
+      popupOn: hive-arm-blade-on
+      popupOff: hive-arm-blade-off
+
+# Молот плоти
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveFleshyMaul
+  name: Fleshy Maul
+  description: Turn one of your arms into a massive maul of bone and flesh, or back.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: hammer }
+    event: !type:HiveToggleHandItemEvent
+      item: HiveFleshyMaul
+      popupOn: hive-fleshy-maul-on
+      popupOff: hive-fleshy-maul-off
+
+# Костяной щит
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveOrganicShield
+  name: Organic Shield
+  description: Turn one of your arms into a large fleshy shield, or back.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: shield }
+    event: !type:HiveToggleHandItemEvent
+      item: HiveOrganicShield
+      popupOn: hive-organic-shield-on
+      popupOff: hive-organic-shield-off
+
+# Хитиновая броня
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveChitinousArmor
+  name: Chitinous Armor
+  description: Grow a chitinous carapace over your body, or shed it.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: armour }
+    useDelay: 5
+    event: !type:HiveToggleArmorEvent
+      items:
+        outerClothing: HiveChitinousArmor
+        head: HiveChitinousHelmet
+      popupOn: hive-chitinous-armor-on
+      popupOff: hive-chitinous-armor-off
+
+# Мясное щупальце — ванильное заклинание-снаряд, как у мага.
+- type: entity
+  id: ActionHiveTentacle
+  categories: [ HideSpawnMenu ]
+  name: Tentacle
+  description: Lash out with a fleshy tentacle. Yanks the item out of the victim's active hand, or pulls the victim to you.
+  components:
+  - type: WorldTargetAction
+    useDelay: 10
+    itemIconStyle: NoItem
+    checkCanAccess: false
+    raiseOnUser: true
+    range: 8
+    sound: !type:SoundCollectionSpecifier
+      collection: gib
+    icon: { sprite: _Forge/HiveActions.rsi, state: pu }
+    event: !type:ProjectileSpellEvent
+      prototype: HiveTentacleProjectile
+
+# Выброс адреналина
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveAdrenaline
+  name: Epinephrine Overdose
+  description: Instantly shake off stuns, become briefly immune to them and resistant to pain. Works while unconscious.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: andrenalin }
+    useDelay: 60
+    checkCanInteract: false
+    checkConsciousness: false
+    event: !type:HiveAdrenalineEvent
+      stunImmunity: 10
+      painResistance: 20
+
+# Исцеление плоти
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveFleshmend
+  name: Fleshmend
+  description: Rapidly heal your flesh over time. Using it again while active extends it but weakens the healing.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: heal }
+    useDelay: 20
+    event: !type:HiveFleshmendEvent
+      duration: 10
+      recastMultiplier: 0.5
+      bloodPerSecond: 2
+      healPerSecond:
+        groups:
+          Brute: -1
+          Burn: -1
+          Airloss: -1
+
+# Диссонирующий крик
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveDissonantShriek
+  name: Dissonant Shriek
+  description: Emit an electromagnetic shriek that disables electronics around you, including radio headsets.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: high_cortizole }
+    useDelay: 60
+    event: !type:HiveDissonantShriekEvent
+      range: 5
+      energyConsumption: 50000
+      duration: 20
+
+# Резонансный крик
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveResonantShriek
+  name: Resonant Shriek
+  description: Emit a high-frequency shriek that disorients everyone around you and shatters lights.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: low_cortisole }
+    useDelay: 60
+    event: !type:HiveResonantShriekEvent
+      range: 5
+      duration: 10
+      disorientation: 40
+      staminaDamage: 40
+      breakLights: true
+
+# Продвинутое зрение
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveAugmentedEyesight
+  name: Augmented Eyesight
+  description: Cycle your eyes between normal, night and thermal vision. Thermal vision makes you vulnerable to flashes.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: watch }
+    useDelay: 1
+    event: !type:HiveAugmentedEyesightEvent
+      thermalFlashMultiplier: 2
+
+# Напряжение мышц
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveStrainedMuscles
+  name: Strained Muscles
+  description: Push your leg muscles past their limits to run much faster, at the cost of stamina. You lose your balance when it ends.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: force }
+    useDelay: 10
+    event: !type:HiveStrainedMusclesEvent
+      speedMultiplier: 1.5
+      staminaPerSecond: 6
+      knockdownOnEnd: 2
+
+# Кожа-хамелеон
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveChameleonSkin
+  name: Chameleon Skin
+  description: Shift the pigment of your skin to slowly fade from view while standing still. Toggleable.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: stels }
+    useDelay: 10
+    event: !type:HiveChameleonSkinEvent
+      passiveVisibilityRate: -0.15
+      movementVisibilityRate: 0.2
+
+# Обмен ДНК
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveDnaChannel
+  name: Hive Absorb DNA
+  description: Share your DNA points with the Hive, or take some from its common storage.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: sharedDNA }
+    useDelay: 1
+    event: !type:HiveDnaChannelEvent
+
+# Связь Улья
+- type: entity
+  parent: BaseActionHiveAbility
+  id: ActionHiveHivemindLink
+  name: Hivemind Link
+  description: Share a piece of the Hive with the victim you are pulling, letting them speak with the Hive for a while.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: mindhive }
+    useDelay: 10
+    event: !type:HiveHivemindLinkEvent
+      duration: 7200 # 120 минут

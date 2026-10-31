@@ -1,0 +1,183 @@
+# Предметы из плоти, создаваемые способностями Улья.
+# Им при создании автоматически добавляются HiveBodyPart и Unremoveable (нельзя выбросить/снять).
+# Спрайты — временные (ванильные), помечены TODO.
+
+# Рука-клинок: 45 урона, вскрывает двери, слегка смягчает урон, пока в руке.
+- type: entity
+  parent: ArmBlade
+  id: HiveArmBlade
+  categories: [ HideSpawnMenu ]
+  name: arm blade
+  description: A grotesque blade of bone and flesh that grows out of your arm.
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: 90
+    attackRate: 0.75
+    heavyStaminaCost: 10
+    damage:
+      types:
+        Slash: 30
+        Piercing: 15
+  - type: Item
+    size: Huge
+    sprite: Objects/Weapons/Melee/arm_blade.rsi
+  - type: Prying
+    speedModifier: 1.5
+  - type: Blocking # «шанс заблокировать» — пассивное смягчение урона, пока клинок в руке
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
+
+# Молот плоти: 40 урона, опрокидывает на 4 секунды, ломает стены и конструкции.
+- type: entity
+  parent: BaseItem
+  id: HiveFleshyMaul
+  categories: [ HideSpawnMenu ]
+  name: fleshy maul
+  description: A massive hammer of bone and flesh, grown from an arm.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/hammer.rsi
+    state: icon
+  - type: Item
+    size: Huge
+    sprite: Objects/Weapons/Melee/hammer.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 0.6
+    heavyStaminaCost: 15
+    damage:
+      types:
+        Blunt: 40
+        Structural: 60
+    soundHit:
+      collection: MetalThud
+  - type: KnockdownOnHit
+    duration: 4
+    chance: 1.0
+
+# Костяной щит.
+- type: entity
+  parent: BaseShield
+  id: HiveOrganicShield
+  categories: [ HideSpawnMenu ]
+  name: organic shield
+  description: A large shield of meat and bone, grown from an arm.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/hiveshields.rsi
+    state: riot-icon
+  - type: Item
+    sprite: Objects/Weapons/Melee/hiveshields.rsi
+    size: Ginormous
+    heldPrefix: riot
+  - type: Blocking
+    passiveBlockModifier:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.8
+    activeBlockModifier:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.7
+      flatReductions:
+        Blunt: 1
+        Slash: 1
+        Piercing: 1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 0
+
+# Хитиновая броня (костюм + шлем). Хорошо держит физический урон, хуже — остальные типы.
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: HiveChitinousArmor
+  categories: [ HideSpawnMenu ]
+  name: chitinous armor
+  description: A thick carapace of chitin that has grown over the body.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Armor/ling_armor.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Armor/ling_armor.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.5
+        Heat: 0.9
+        Cold: 0.9
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: StaminaDamageResistance
+    coefficient: 0.8
+  - type: StaticPrice
+    price: 0
+
+- type: entity
+  parent: ClothingHeadHelmetBase
+  id: HiveChitinousHelmet
+  categories: [ HideSpawnMenu ]
+  name: chitinous helmet
+  description: A thick chitin shell that has grown over the head.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/ling_helmet.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Helmets/ling_helmet.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.9
+  - type: StaticPrice
+    price: 0
+
+# Снаряд мясного щупальца (выпускается ActionHiveTentacle через ProjectileSpellEvent).
+- type: entity
+  parent: BaseBullet
+  id: HiveTentacleProjectile
+  categories: [ HideSpawnMenu ]
+  name: tentacle
+  components:
+  - type: Sprite
+    noRot: false
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi # TODO
+    layers:
+    - state: chronobolt
+  - type: Projectile
+    noDamageDelete: false
+    damage:
+      types:
+        Blunt: 0
+  - type: TimedDespawn
+    lifetime: 0.4 # ~8 тайлов
+  - type: HiveTentacle
+    yankItems: true
+    pullSpeed: 10
+    knockdown: 1

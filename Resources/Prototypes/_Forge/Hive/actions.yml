@@ -1,0 +1,29 @@
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: ActionHiveShop
+  name: Evolution
+  description: Open the evolution menu to buy Hive abilities for DNA points.
+  components:
+  - type: InstantAction
+    icon: Interface/Actions/shop.png # TODO: своя иконка
+    event: !type:HiveShopActionEvent
+    priority: -100
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  id: ActionHiveDevour
+  name: Devour
+  description: Devour a dead or dying humanoid body to gain its DNA. The body can not be revived afterwards.
+  components:
+  - type: EntityTargetAction
+    icon: { sprite: _Forge/HiveActions.rsi, state: eatdna }
+    iconOn: { sprite: _Forge/HiveActions.rsi, state: eatdna }
+    event: !type:HiveDevourActionEvent
+    canTargetSelf: false
+    checkCanAccess: true
+    range: 1.5
+    useDelay: 5
+    priority: -99
+    whitelist:
+      components:
+      - HumanoidAppearance

@@ -159,7 +159,8 @@ public sealed partial class LinkedLifecycleGridSystem : EntitySystem
     /// </summary>
     private void HandlePulledEntity(Entity<PullerComponent?> entity, ref List<(Entity<TransformComponent> Entity, EntityUid MapUid, Vector2 MapPosition)> listToReparent)
     {
-        if (!Resolve(entity, ref entity.Comp))
+        // Forge-Change: observers and other mobs in the reparent query have no puller. Resolve would log that.
+        if (!Resolve(entity, ref entity.Comp, false))
             return;
 
         if (entity.Comp.Pulling is not EntityUid pulled)

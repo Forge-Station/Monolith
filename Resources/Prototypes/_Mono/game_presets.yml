@@ -14,7 +14,7 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
@@ -31,7 +31,7 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
@@ -48,7 +48,7 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
@@ -65,7 +65,7 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
@@ -82,7 +82,7 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
@@ -109,7 +109,7 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoChimeraSTCShuttleSpawnerScheduler
@@ -127,7 +127,7 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoChimeraSTCShuttleSpawnerSchedulerSlow

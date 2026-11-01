@@ -254,10 +254,14 @@ public sealed partial class MeleeWeaponSystem
         var query = EntityQueryEnumerator<TrackUserComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var arcComponent, out var xform))
         {
-            if (arcComponent.User == null || EntityManager.Deleted(arcComponent.User) || !xform.ParentUid.IsValid()) // Forge-Change: added || EntityManager.Deleted(arcComponent.User) || !xform.ParentUid.IsValid())
+            // Forge-Change: a deleted attacker has no transform. GetWorldPosition would throw and kill the effect pass.
+            if (arcComponent.User is not { } arcUser
+                || !TryComp(arcUser, out TransformComponent? userXform)
+                || EntityManager.Deleted(arcUser)
+                || !xform.ParentUid.IsValid())
                 continue;
 
-            Vector2 targetPos = TransformSystem.GetWorldPosition(arcComponent.User.Value);
+            Vector2 targetPos = TransformSystem.GetWorldPosition(userXform);
 
             if (arcComponent.Offset != Vector2.Zero)
             {

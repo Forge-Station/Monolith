@@ -99,7 +99,9 @@
   name: PDV CV-82 combat tacsuit
   description: A fast combat hardsuit designed by the Phaethon Dynasty. The armor features reinforced plating in vital areas. # WOLFGATE(ArmorBalance): grammar pass.
   components:
-  # WOLFGATE(ArmorSpecialization): auto-tourniquet.
+  # WOLFGATE(ArmorSpecialization): auto-tourniquet, plasma reserve and steady hands.
+  - type: WFSteadyHands
+  - type: WFPlasmaReserve
   - type: WFAutoTourniquet
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/pdv_medic.rsi

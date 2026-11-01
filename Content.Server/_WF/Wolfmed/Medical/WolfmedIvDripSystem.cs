@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -81,6 +82,10 @@ public sealed partial class WolfmedIvDripSystem : EntitySystem
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private TagSystem _tags = default!;
     [Dependency] private WoundSystem _wounds = default!;
+    [Dependency] private WolfmedIvLineSystem _line = default!;
+
+    /// <summary>Where tgstation's IV line leaves the stand: its spout, 9 pixels right of centre and 2 up.</summary>
+    private static readonly Vector2 SpoutOffset = new(9f / 32f, 2f / 32f);
 
     private float _rateDefault = 5f;
     private float _rateMin;
@@ -481,6 +486,7 @@ public sealed partial class WolfmedIvDripSystem : EntitySystem
 
         ent.Comp.Patient = patient;
         ent.Comp.NextUpdate = _timing.CurTime + TimeSpan.FromSeconds(MathF.Max(0.1f, ent.Comp.Interval));
+        _line.Show(ent.Owner, patient, SpoutOffset);
 
         if (user is { } attacher)
         {
@@ -503,6 +509,7 @@ public sealed partial class WolfmedIvDripSystem : EntitySystem
             return;
 
         ent.Comp.Patient = null;
+        _line.Hide(ent.Owner, patient);
         if (announce && !TerminatingOrDeleted(patient))
         {
             _popup.PopupEntity(Loc.GetString("wolfmed-iv-detached", ("drip", ent.Owner),

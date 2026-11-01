@@ -201,19 +201,20 @@ public sealed class WolfmedWoundRuleSystem : EntitySystem
             !_bleedGate.PartCanStartBleeding(part))
             return false;
 
-        if (ArmorRefuses(part, rule.Wound, amount, rule.MinDamage))
+        if (ArmorRefuses(part, rule.Wound, amount, rule.MinDamage, rule.ID, cause))
             return false;
 
         return _wounds.CanCreateWound(part.AsNullable(), rule.Wound);
     }
 
     /// <summary>Whether worn armour refuses this wound, or needs a bigger hit than <paramref name="amount"/> for it.</summary>
-    private bool ArmorRefuses(EntityUid part, ProtoId<WoundPrototype> wound, FixedPoint2 amount, FixedPoint2 minDamage)
+    private bool ArmorRefuses(EntityUid part, ProtoId<WoundPrototype> wound, FixedPoint2 amount, FixedPoint2 minDamage,
+        string? rule = null, WolfmedWoundCause cause = WolfmedWoundCause.None)
     {
         if (!TryComp(part, out BodyPartComponent? attached) || attached.Body is not { } body)
             return false;
 
-        var attempt = new WolfmedWoundRuleAttemptEvent(part, wound, amount);
+        var attempt = new WolfmedWoundRuleAttemptEvent(part, wound, amount) { Rule = rule, Cause = cause };
         RaiseLocalEvent(body, ref attempt);
         return attempt.Cancelled || amount < minDamage * attempt.MinDamageMultiplier;
     }

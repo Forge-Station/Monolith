@@ -3,6 +3,7 @@ using Content.Shared._Onyx.Medical.Tourniquet;
 using Content.Shared._Onyx.Wounds;
 using Content.Shared._Shitmed.Medical.Surgery;
 using Content.Shared._WF.Wolfmed.CCVar;
+using Content.Shared._WF.Wolfmed.Wounds;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -31,10 +32,16 @@ public sealed class WolfmedDoAfterInterruptSystem : EntitySystem
         if (line <= 0f || total < FixedPoint2.New(line))
             return 0;
 
+        // Steady hands (worn medic gear) keep treatment going through hits under a higher line.
+        var steady = new WolfmedSteadyHandsEvent();
+        RaiseLocalEvent(hit.Body, ref steady);
+        var steadyLine = FixedPoint2.New(line * MathF.Max(1f, steady.Multiplier));
+
         var cancelled = 0;
         foreach (var doAfter in doAfters.DoAfters.Values.ToArray())
         {
-            if (doAfter.Cancelled || doAfter.Completed || !Interrupts(doAfter.Args, total))
+            if (doAfter.Cancelled || doAfter.Completed || !Interrupts(doAfter.Args, total) ||
+                IsTreatment(doAfter.Args) && total < steadyLine)
                 continue;
 
             _doAfter.Cancel(hit.Body, doAfter.Index, doAfters);
@@ -46,6 +53,10 @@ public sealed class WolfmedDoAfterInterruptSystem : EntitySystem
 
     /// <summary>Treatment and surgery always; anything else only when it asks to break on damage this size.</summary>
     public static bool Interrupts(DoAfterArgs args, FixedPoint2 hit) =>
-        args.Event is HealingDoAfterEvent or SurgeryDoAfterEvent or TourniquetDoAfterEvent ||
+        IsTreatment(args) ||
         args.BreakOnDamage && hit >= args.DamageThreshold;
+
+    /// <summary>Treatment and surgery, which break on any hit past the line whatever they ask.</summary>
+    public static bool IsTreatment(DoAfterArgs args) =>
+        args.Event is HealingDoAfterEvent or SurgeryDoAfterEvent or TourniquetDoAfterEvent;
 }

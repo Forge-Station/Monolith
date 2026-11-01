@@ -60,7 +60,7 @@ public sealed partial class AmputationSystem : EntitySystem
             return;
         }
 
-        if (IsFinishingHit(args.Body, part.Owner, args.Damage)) // WOLFGATE(Wolfmed): P3-D15
+        if (IsFinishingHit(args.Body, part.Owner, args.Damage, args.IsExplosion)) // WOLFGATE(Wolfmed): P3-D15; the explosion flag is for blast liners.
             TryAmputate(args.Body, part.Owner);
     }
 
@@ -119,7 +119,7 @@ public sealed partial class AmputationSystem : EntitySystem
                     damageBeforeHit.DamageDict.GetValueOrDefault(type) - amount);
 
         if (ReachedThreshold(damageBeforeHit, _wfPart.Get(part).AmputationThresholds) && // WOLFGATE(Wolfmed): D8
-            IsFinishingHit(args.Body, part.Owner, args.Damage)) // WOLFGATE(Wolfmed): P3-D15
+            IsFinishingHit(args.Body, part.Owner, args.Damage, args.IsExplosion)) // WOLFGATE(Wolfmed): P3-D15; the explosion flag is for blast liners.
             TryAmputate(args.Body, part.Owner);
     }
 
@@ -170,7 +170,7 @@ public sealed partial class AmputationSystem : EntitySystem
         return progress;
     }
 
-    private bool IsFinishingHit(EntityUid body, EntityUid part, DamageSpecifier damage) // WOLFGATE(Wolfmed): D8/P3-D15
+    private bool IsFinishingHit(EntityUid body, EntityUid part, DamageSpecifier damage, bool explosion = false) // WOLFGATE(Wolfmed): D8/P3-D15; explosion for blast liners.
     {
         var wf = _wfPart.Get(part); // WOLFGATE(Wolfmed): D8
         if (!TryComp(body, out WoundHostComponent? host))
@@ -186,7 +186,7 @@ public sealed partial class AmputationSystem : EntitySystem
             if (minimum > FixedPoint2.Zero && amount >= minimum)
                 // WOLFGATE(Wolfmed) START: worn armour with a limb lock may keep the limb on.
                 // return true;
-                return WfMaySever(body, part, amount);
+                return WfMaySever(body, part, amount, explosion);
                 // WOLFGATE END
         }
 
@@ -194,9 +194,9 @@ public sealed partial class AmputationSystem : EntitySystem
     }
 
     // WOLFGATE(Wolfmed) START: asked only once a hit would take the limb, so ordinary hits skip the inventory relay.
-    private bool WfMaySever(EntityUid body, EntityUid part, FixedPoint2 finishing)
+    private bool WfMaySever(EntityUid body, EntityUid part, FixedPoint2 finishing, bool explosion)
     {
-        var ev = new Content.Shared._WF.Wolfmed.Wounds.WolfmedSeverAttemptEvent(part, finishing);
+        var ev = new Content.Shared._WF.Wolfmed.Wounds.WolfmedSeverAttemptEvent(part, finishing) { IsExplosion = explosion };
         RaiseLocalEvent(body, ref ev);
         return !ev.Cancelled;
     }
@@ -209,7 +209,7 @@ public sealed partial class AmputationSystem : EntitySystem
         DamageSpecifier hit,
         DamageSpecifier? totalDamage = null)
     {
-        if (!IsFinishingHit(body, part.Owner, hit)) // WOLFGATE(Wolfmed): P3-D15
+        if (!IsFinishingHit(body, part.Owner, hit, explosion: true)) // WOLFGATE(Wolfmed): P3-D15; explosion for blast liners.
             return false;
 
         if (totalDamage == null)

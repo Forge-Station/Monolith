@@ -43,6 +43,16 @@ public sealed partial class OrganDamageSystem : EntitySystem
         _amputation.HandlePartDamageApplied(part, ref args); // WOLFGATE(Wolfmed): D26 lifted in phase 3 (WP11-1); order wounds -> fractures -> amputation -> bleeding is load-bearing.
         _bleeding.HandlePartDamageApplied(part, ref total); // WOLFGATE(Wolfmed): M1b: Total
 
+        // WOLFGATE(ArmorSpecialization) START: a blast liner keeps an explosion from reaching the organs it covers.
+        if (args.IsExplosion)
+        {
+            var wfBlast = new Content.Shared._WF.Wolfmed.Wounds.WolfmedOrganBlastAttemptEvent(part.Owner);
+            RaiseLocalEvent(args.Body, ref wfBlast);
+            if (wfBlast.Cancelled)
+                return;
+        }
+        // WOLFGATE END
+
         // WOLFGATE(Wolfmed): M3: a part with reach lines takes organ damage by the size of the whole hit (plan §8), and
         // checks the head blow there; the roll below stays for parts without them.
         if (_net.IsServer && _wfOrgans.HandleHit(part, total.Damage))

@@ -279,3 +279,12 @@
     state: septicshock
   name: alerts-wolfmed-out-septicshock-name
   description: alerts-wolfmed-out-septicshock-desc
+
+# A drip or a suit plasma line is in the patient; walking off rips or pulls it out (tgstation's iv_connected).
+- type: alert
+  id: WFWolfmedIvConnected
+  icons:
+  - sprite: /Textures/_WF/Wolfmed/Interface/Alerts/iv_connected.rsi
+    state: iv_connected
+  name: alerts-wolfmed-iv-connected-name
+  description: alerts-wolfmed-iv-connected-desc

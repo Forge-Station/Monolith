@@ -18,6 +18,10 @@ public record struct WolfmedWoundRuleAttemptEvent(
     ProtoId<WoundPrototype> Wound,
     FixedPoint2 Amount) : IInventoryRelayEvent
 {
+    /// <summary>The wound rule asking, or null when no rule is (acid residue deepening a burn).</summary>
+    public string? Rule;
+    /// <summary>What dealt the hit, so armour can answer explosions alone.</summary>
+    public WolfmedWoundCause Cause;
     public bool Cancelled;
     public float MinDamageMultiplier = 1f;
     public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
@@ -30,6 +34,15 @@ public record struct WolfmedWoundRuleAttemptEvent(
 [ByRefEvent]
 public record struct WolfmedSeverAttemptEvent(EntityUid Part, FixedPoint2 HitDamage) : IInventoryRelayEvent
 {
+    public bool IsExplosion;
+    public bool Cancelled;
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
+}
+
+/// <summary>Raised on a body, and relayed to its worn items, before an explosion damages the organs in a part.</summary>
+[ByRefEvent]
+public record struct WolfmedOrganBlastAttemptEvent(EntityUid Part) : IInventoryRelayEvent
+{
     public bool Cancelled;
     public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
@@ -39,6 +52,38 @@ public record struct WolfmedSeverAttemptEvent(EntityUid Part, FixedPoint2 HitDam
 public record struct WolfmedArmorPainReliefEvent : IInventoryRelayEvent
 {
     public float Relief;
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
+}
+
+/// <summary>
+/// Raised on a body that was hit mid-treatment, and relayed to its worn items: treatment and surgery break only on a
+/// hit of the interrupt line times <see cref="Multiplier"/>.
+/// </summary>
+[ByRefEvent]
+public record struct WolfmedSteadyHandsEvent : IInventoryRelayEvent
+{
+    public float Multiplier = 1f;
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
+
+    public WolfmedSteadyHandsEvent() { }
+}
+
+/// <summary>
+/// Raised on a body, and relayed to its worn items, to ask whether they keep infection out. With a
+/// <see cref="Part"/>, whether a wound on that part can go bad; without one, whether wounds this body treats start clean.
+/// </summary>
+[ByRefEvent]
+public record struct WolfmedSterileEvent(EntityUid? Part) : IInventoryRelayEvent
+{
+    public bool Sterile;
+    public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
+}
+
+/// <summary>Raised on a body, and relayed to its worn items, before it screams or cries out in pain.</summary>
+[ByRefEvent]
+public record struct WolfmedPainNoiseAttemptEvent : IInventoryRelayEvent
+{
+    public bool Cancelled;
     public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;
 }
 

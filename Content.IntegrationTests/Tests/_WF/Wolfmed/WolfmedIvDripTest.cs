@@ -235,6 +235,25 @@ public sealed class WolfmedIvDripTest : GameTest
         });
     }
 
+    /// <summary>A patient deleted mid-drip leaves no line on the stand and logs no error.</summary>
+    [Test]
+    public async Task DeletedPatientDropsTheLineTest()
+    {
+        var (_, drip, patient, _) = await Setup("WolfmedIvTestHuman", "Bloodpack", packs: 5);
+
+        await Server.WaitAssertion(() => Iv.Attach(drip, patient));
+        await RunSeconds(1);
+        await Server.WaitPost(() => SEntMan.DeleteEntity(patient));
+        await RunSeconds(2);
+
+        await Server.WaitAssertion(() =>
+        {
+            Assert.That(drip.Comp.Patient, Is.Null, "the drip kept a deleted patient.");
+            Assert.That(SEntMan.HasComponent<Content.Shared.Physics.JointVisualsComponent>(drip), Is.False,
+                "the line outlived the patient.");
+        });
+    }
+
     /// <summary>
     /// (3) The patient moved two tiles off rips the needle out: detached, and a new puncture on an arm. Put in a pod
     /// instead, the patient is detached with nothing torn.
@@ -255,6 +274,9 @@ public sealed class WolfmedIvDripTest : GameTest
         await Server.WaitAssertion(() =>
         {
             Assert.That(drip.Comp.Patient, Is.EqualTo(patient), "the needle came out of a patient who stayed put.");
+            Assert.That(SEntMan.GetComponent<Content.Shared.Physics.JointVisualsComponent>(drip).Target,
+                Is.EqualTo(SEntMan.GetNetEntity(patient)), "no line is drawn from the stand to the patient.");
+            Assert.That(SEntMan.HasComponent<WolfmedIvLinedComponent>(patient), Is.True, "the patient has no IV Connected alert.");
             SEntMan.System<SharedTransformSystem>().SetCoordinates(patient, map.GridCoords.Offset(new Vector2(2f, 0f)));
         });
 
@@ -264,6 +286,9 @@ public sealed class WolfmedIvDripTest : GameTest
         await Server.WaitAssertion(() =>
         {
             Assert.That(drip.Comp.Patient, Is.Null, "the needle stayed in a patient two tiles away.");
+            Assert.That(SEntMan.HasComponent<Content.Shared.Physics.JointVisualsComponent>(drip), Is.False,
+                "the line is still drawn after the needle came out.");
+            Assert.That(SEntMan.HasComponent<WolfmedIvLinedComponent>(patient), Is.False, "the IV Connected alert stayed.");
             Assert.That(ArmPunctures(patient), Is.EqualTo(1), "ripping the needle out opened no puncture on an arm.");
 
             var wound = ArmWounds(patient).First(wound => wound.Comp.Prototype == "PiercingWound");

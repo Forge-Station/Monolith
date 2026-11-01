@@ -56,7 +56,9 @@
   name: RIPPER mk.III viper hardsuit
   description: A combat medical hardsuit adorned with signature markings of the Viper Group. The armor features various reinforced plating in vital areas.
   components:
-  # WOLFGATE(ArmorSpecialization): tendon guards.
+  # WOLFGATE(ArmorSpecialization): tendon guards, plasma reserve and steady hands.
+  - type: WFSteadyHands
+  - type: WFPlasmaReserve
   - type: WFWoundWard
     examine: wf-armor-spec-tendon-ward-examine
     blocks:
@@ -226,7 +228,10 @@
     - description: Alt-click or otherwise interact to toggle additional shielding.
       color: "#4f94ad"
       requireDetailRange: true
-    - description: The MEDUSA shield projector is designed to inhibit the velocity of incoming conventional firearms. However, it struggles against anything involving high-energy particles and close-range directed force.
+    # WOLFGATE(SoftShield) START: the description matches the soft shield it now has.
+    # - description: The MEDUSA shield projector is designed to inhibit the velocity of incoming conventional firearms. However, it struggles against anything involving high-energy particles and close-range directed force.
+    - description: The MEDUSA soft-shield lets blows and rounds through but bleeds off much of their force, and keeps its wearer from bleeding while it holds. It does nothing against lasers or fire.
+    # WOLFGATE END
       color: "#94768c"
       requireDetailRange: true
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits

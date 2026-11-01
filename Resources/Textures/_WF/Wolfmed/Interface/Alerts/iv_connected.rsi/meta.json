@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation via Meridian-Rift at commit 4f62b92501944380384a536912eb259d31f97caf (icons/hud/screen_alert.dmi, state iv_connected)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "iv_connected"
+    }
+  ]
+}

@@ -66,6 +66,10 @@ public sealed class WolfmedStasisSystem : EntitySystem
             {
                 if (!stasis.IsInStasis)
                 {
+                    // A stasis weave's hold is the weave's to lift.
+                    if (hold.HeldUntil != null)
+                        continue;
+
                     RemComp<WolfmedStasisHoldComponent>(uid);
                     RefreshBleeding(uid);
                     continue;
@@ -89,7 +93,7 @@ public sealed class WolfmedStasisSystem : EntitySystem
     }
 
     /// <summary>Every bleeding wound on the body recomputed against the hold, and the body's total with it.</summary>
-    private void RefreshBleeding(EntityUid body)
+    public void RefreshBleeding(EntityUid body)
     {
         foreach (var (part, _) in _body.GetBodyChildren(body))
         {

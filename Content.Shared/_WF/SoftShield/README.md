@@ -38,7 +38,11 @@ hard-block handler. `WFSoftShieldTest` covers both suits.
 - [`Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/tsfmc.yml`](../../../Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/tsfmc.yml)
   - soft shield
   - brute damage bleeds through the field dampened.
-- [`Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/ui.yml`](../../../Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/ui.yml): hard shields are retired; brute damage bleeds through the field dampened.
-- [`Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/viper_group.yml`](../../../Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/viper_group.yml): hard shields are retired; brute damage bleeds through the field dampened.
+- [`Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/ui.yml`](../../../Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/ui.yml)
+  - hard shields are retired; brute damage bleeds through the field dampened.
+  - the soft shield it now has, described like the others.
+- [`Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/viper_group.yml`](../../../Resources/Prototypes/_Mono/Entities/Clothing/OuterClothing/Hardsuits/viper_group.yml)
+  - hard shields are retired; brute damage bleeds through the field dampened.
+  - the description matches the soft shield it now has.
 
 <!-- WOLFGATE-GENERATED END -->

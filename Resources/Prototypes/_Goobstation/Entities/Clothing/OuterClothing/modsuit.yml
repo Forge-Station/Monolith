@@ -49,6 +49,11 @@
   description: A special modular suit spaceproof cover designed for compact folding inside modular suit control.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): cold seal.
+  - type: WFWoundWard
+    examine: wf-armor-spec-cold-sealed-examine
+    blocks:
+    - WFWolfmedFrostbiteWound
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Modsuits/standard.rsi
   - type: SealableClothingVisuals
@@ -79,6 +84,12 @@
   description: A robust modular suit cover with ceramic inserts for extra protection.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Modsuits/security.rsi
     layers:
@@ -127,6 +138,14 @@
   description: A robust modular suit cover with EXTRA ceramic inserts for slightly more protection.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): bone plating and blast liner.
+  - type: WFBlastLiner
+  - type: WFWoundWard
+    examine: wf-armor-spec-bone-plating-examine
+    hardens:
+      InternalBleedingWound: 2
+      WFWolfmedCrushInjuryWound: 2
+      WFWolfmedDislocationWound: 2
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Modsuits/headofsecurity.rsi
     layers:
@@ -175,6 +194,10 @@
   description: A white and blue-ish-grey steel plate for keeping out the harsh void of space and the occasional bullet.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): plasma reserve, steady hands and emergency stasis weave.
+  - type: WFSteadyHands
+  - type: WFStasisWeave
+  - type: WFPlasmaReserve
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Modsuits/paramedic.rsi
     layers:
@@ -214,6 +237,13 @@
   description: A tough armor plate to defend against harsh atmospheric conditions and shockwaves.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): insulation and servo assist.
+  - type: WFServoAssist
+  - type: WFWoundWard
+    examine: wf-armor-spec-insulation-examine
+    blocks:
+    - WFWolfmedInternalBurnWound
+    - WFWolfmedShortCircuitWound
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Modsuits/engineer.rsi
     layers:
@@ -253,6 +283,18 @@
   description: A fire-proof armor plate to defend against harsh atmospheric conditions.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): fire rating and sealed layer.
+  - type: WFAblativeCoat
+    damageType: Heat
+    maxCharge: 80
+    charge: 80
+    regenRate: 10
+    examine: wf-armor-spec-fire-rated-examine
+  - type: WFWoundWard
+    examine: wf-armor-spec-sealed-examine
+    blocks:
+    - WFWolfmedChemicalBurnWound
+    - WFWolfmedFrostbiteWound
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Modsuits/atmostech.rsi
     layers:
@@ -292,6 +334,9 @@
   description: A bulky bomb and bat proof chunk of steel.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): EMP hardening and decon coating.
+  - type: WFEmpHardened
+  - type: WFDeconCoating
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Modsuits/researchdirector.rsi
     layers:
@@ -331,6 +376,12 @@
   description: This shit is made out of DIAMONDS, man, this armor was forged with GEMS.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): concussion ward and EMP hardening.
+  - type: WFEmpHardened
+  - type: WFWoundWard
+    examine: wf-armor-spec-concussion-ward-examine
+    blocks:
+    - WFWolfmedConcussionWound
   - type: Sprite
     sprite: _Goobstation/Clothing/OuterClothing/Modsuits/captain.rsi
     layers:

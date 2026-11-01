@@ -55,7 +55,9 @@
   name: M82b hardsuit
   description: A corpsman variant of the M82c, outfitted with caustic and radiological shielding. Some of the blunt-absorbent gel layer is sacrificed for the NBC protection. # WOLFGATE(ArmorBalance): grammar pass.
   components:
-  # WOLFGATE(ArmorSpecialization): sealed spall liner.
+  # WOLFGATE(ArmorSpecialization): sealed spall liner, plasma reserve and sterile weave.
+  - type: WFSterileWeave
+  - type: WFPlasmaReserve
   - type: WFWoundWard
     examine: wf-armor-spec-sealed-spall-examine
     blocks:

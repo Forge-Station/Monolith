@@ -5,6 +5,13 @@
   description: Thick plating fused with internal atmosphere control.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): bone plating.
+  - type: WFWoundWard
+    examine: wf-armor-spec-bone-plating-examine
+    hardens:
+      InternalBleedingWound: 2
+      WFWolfmedCrushInjuryWound: 2
+      WFWolfmedDislocationWound: 2
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Modsuits/ussp-varyag.rsi
   - type: ClothingSpeedModifier
@@ -33,6 +40,12 @@
   description: An imposing armored shell designed to absorb punishment and maintain stability under pressure.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Modsuits/ussp-zastavnik.rsi
   - type: ClothingSpeedModifier
@@ -62,6 +75,12 @@
   description: The chestpiece has some warning label on the inside about radiation leaks- and a note next to it 'Remove this label in the final product - Felix
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Modsuits/rogue.rsi
   - type: ExplosionResistance
@@ -94,6 +113,12 @@
   description: Reinforced military modification of Sapper Modsuit, featuring better bullet resistance.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): insulation.
+  - type: WFWoundWard
+    examine: wf-armor-spec-insulation-examine
+    blocks:
+    - WFWolfmedInternalBurnWound
+    - WFWolfmedShortCircuitWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Modsuits/tsfmc-volta.rsi
   - type: ClothingSpeedModifier
@@ -132,6 +157,13 @@
   description: A well rounded modsuit that focuses on mobility with its Actuator Enhancement System allowing its wearer to leap across the battlefield for rapid redeployment.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner and blast liner.
+  - type: WFBlastLiner
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Modsuits/mercenary.rsi
     layers:

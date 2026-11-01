@@ -9,6 +9,11 @@
   name: basic hardsuit
   description: A basic, universal hardsuit that protects the wearer against the horrors of life in space. Beats not having a hardsuit, at least.
   components:
+  # WOLFGATE(ArmorSpecialization): cold seal.
+  - type: WFWoundWard
+    examine: wf-armor-spec-cold-sealed-examine
+    blocks:
+    - WFWolfmedFrostbiteWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/basic.rsi
   - type: Clothing
@@ -47,6 +52,18 @@
   name: atmos hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has thermal shielding.
   components:
+  # WOLFGATE(ArmorSpecialization): fire rating and sealed layer.
+  - type: WFAblativeCoat
+    damageType: Heat
+    maxCharge: 80
+    charge: 80
+    regenRate: 10
+    examine: wf-armor-spec-fire-rated-examine
+  - type: WFWoundWard
+    examine: wf-armor-spec-sealed-examine
+    blocks:
+    - WFWolfmedChemicalBurnWound
+    - WFWolfmedFrostbiteWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/atmospherics.rsi
   - type: Clothing
@@ -91,6 +108,9 @@
   name: engineering hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has radiation shielding.
   components:
+  # WOLFGATE(ArmorSpecialization): servo assist and rad sink.
+  - type: WFServoAssist
+  - type: WFRadSink
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/engineering.rsi
   - type: Clothing
@@ -143,6 +163,14 @@
   name: spationaut hardsuit
   description: A lightweight hardsuit designed for industrial EVA in zero gravity.
   components:
+  # WOLFGATE(ArmorSpecialization): impact dampers and emergency thrusters.
+  - type: WFSuitThrusters
+  - type: WFWoundWard
+    examine: wf-armor-spec-impact-dampers-examine
+    blockRules:
+    - WFWolfmedRuleDislocationThrown
+    hardens:
+      WFWolfmedConcussionWound: 2
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/spatio.rsi
   - type: Clothing
@@ -183,8 +211,21 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitSalvage
   name: mining hardsuit
-  description: A special suit that protects against hazardous, low pressure environments. Has reinforced plating for wildlife encounters.
+  # WOLFGATE(ArmorSpecialization): the description matches its cave-in plating and ore scanner.
+  # description: A special suit that protects against hazardous, low pressure environments. Has reinforced plating for wildlife encounters.
+  description: A special suit that protects against hazardous, low pressure environments. Has reinforced plating against cave-ins and a built-in ore scanner.
   components:
+  # WOLFGATE(ArmorSpecialization): ore sense and cave-in rating.
+  - type: ItemToggle
+    activated: true
+    onUse: false
+    onActivate: false
+  - type: MiningScanner
+  - type: WFWoundWard
+    examine: wf-armor-spec-mining-examine
+    hardens:
+      WFWolfmedCrushInjuryWound: 2
+      WFWolfmedOrganContusionWound: 2
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/salvage.rsi
   - type: Clothing
@@ -224,6 +265,10 @@
   name: goliath hardsuit
   description: A lightweight hardsuit, adorned with a patchwork of thick, chitinous goliath hide.
   components:
+  # WOLFGATE(ArmorSpecialization): strong wildlife padding and haul frame.
+  - type: WFWildlifePadding
+    multiplier: 0.4
+  - type: WFHaulFrame
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/goliath.rsi
   - type: Clothing
@@ -267,6 +312,14 @@
   name: salvager maxim hardsuit
   description: Fire. Heat. These things forge great weapons, they also forge great salvagers.
   components:
+  # WOLFGATE(ArmorSpecialization): fire rating and blast liner.
+  - type: WFBlastLiner
+  - type: WFAblativeCoat
+    damageType: Heat
+    maxCharge: 80
+    charge: 80
+    regenRate: 10
+    examine: wf-armor-spec-fire-rated-examine
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/maxim.rsi
   - type: Clothing
@@ -308,6 +361,12 @@
   name: judge's hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/security.rsi
   - type: Clothing
@@ -347,6 +406,10 @@
   name: brigmedic hardsuit
   description: Special hardsuit of the guardian angel of the brig. It is the medical version of the security hardsuit.
   components:
+  # WOLFGATE(ArmorSpecialization): auto-tourniquet, plasma reserve and steady hands.
+  - type: WFSteadyHands
+  - type: WFPlasmaReserve
+  - type: WFAutoTourniquet
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/brigmedic.rsi
   - type: Clothing
@@ -384,6 +447,12 @@
   name: warden's hardsuit
   description: A specialized riot suit geared to combat low pressure environments.
   components:
+  # WOLFGATE(ArmorSpecialization): shock absorbers.
+  - type: WFWoundWard
+    examine: wf-armor-spec-shock-absorbers-examine
+    hardens:
+      WFWolfmedConcussionWound: 2
+      WFWolfmedOrganContusionWound: 2
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/security-warden.rsi
   - type: Clothing
@@ -423,6 +492,13 @@
   name: captain's armored spacesuit
   description: A formal armored spacesuit, made for the station's captain.
   components:
+  # WOLFGATE(ArmorSpecialization): concussion ward and plush lining.
+  - type: WFWoundWard
+    examine: wf-armor-spec-concussion-ward-examine
+    blocks:
+    - WFWolfmedConcussionWound
+  - type: WFPainDampener
+    examine: wf-armor-spec-plush-lining-examine
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/capspace.rsi
   - type: Clothing
@@ -463,6 +539,9 @@
   name: chief engineer's hardsuit
   description: A special hardsuit that protects against hazardous, low pressure environments, made for the chief engineer of the station.
   components:
+  # WOLFGATE(ArmorSpecialization): servo assist and EMP hardening.
+  - type: WFServoAssist
+  - type: WFEmpHardened
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/engineering-white.rsi
   - type: Clothing
@@ -517,6 +596,10 @@
   name: chief medical officer's hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Built with lightweight materials for faster movement.
   components:
+  # WOLFGATE(ArmorSpecialization): plasma reserve, steady hands and emergency stasis weave.
+  - type: WFSteadyHands
+  - type: WFStasisWeave
+  - type: WFPlasmaReserve
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/medical.rsi
   - type: Clothing
@@ -551,8 +634,17 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitRd
   name: experimental research hardsuit
-  description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
+  # WOLFGATE(ArmorSpecialization): the description matches its insulation and EMP hardening.
+  # description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
+  description: A special suit that protects against hazardous, low pressure environments. Its insulated, EMP-hardened lining keeps experiments from going wrong on the wearer.
   components:
+  # WOLFGATE(ArmorSpecialization): insulation and EMP hardening.
+  - type: WFEmpHardened
+  - type: WFWoundWard
+    examine: wf-armor-spec-insulation-examine
+    blocks:
+    - WFWolfmedInternalBurnWound
+    - WFWolfmedShortCircuitWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/rd.rsi
   - type: Clothing
@@ -608,6 +700,13 @@
   name: overseer's hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner and concussion ward.
+  - type: WFWoundWard
+    examine: wf-armor-spec-overseer-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
+    - WFWolfmedConcussionWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/security-red.rsi
   - type: Clothing
@@ -648,6 +747,14 @@
   name: luxury mining hardsuit
   description: A refurbished mining hardsuit, fashioned after the Quartermaster's colors. Graphene lining provides less protection, but is much easier to move.
   components:
+  # WOLFGATE(ArmorSpecialization): plush lining and ore sense.
+  - type: WFPainDampener
+    examine: wf-armor-spec-plush-lining-examine
+  - type: ItemToggle
+    activated: true
+    onUse: false
+    onActivate: false
+  - type: MiningScanner
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/luxury.rsi
   - type: Clothing
@@ -688,6 +795,12 @@
   name: blood-red hardsuit
   description: A heavily armored hardsuit and a common sight amongst organised criminals in the greater Perseus Arm. A rare find in the Colossus sector.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
   - type: Item
@@ -735,6 +848,10 @@
   name: blood-red medic hardsuit
   description: A heavily armored and agile advanced hardsuit specifically designed for field medic operations.
   components:
+  # WOLFGATE(ArmorSpecialization): auto-tourniquet, plasma reserve and steady hands.
+  - type: WFSteadyHands
+  - type: WFPlasmaReserve
+  - type: WFAutoTourniquet
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndiemedic.rsi
   - type: Clothing
@@ -771,6 +888,8 @@
   name: elite hardsuit
   description: An elite version of the blood-red hardsuit, with improved mobility and fireproofing.
   components:
+  # WOLFGATE(ArmorSpecialization): ablative coat.
+  - type: WFAblativeCoat
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
   - type: Clothing
@@ -818,6 +937,12 @@
   name: commander hardsuit
   description: A bulked up version of the blood-red hardsuit, purpose-built for the commander of a boarding squad. Has significantly improved armor for those deadly front-lines firefights.
   components:
+  # WOLFGATE(ArmorSpecialization): commander's weave.
+  - type: WFWoundWard
+    examine: wf-armor-spec-commander-examine
+    blocks:
+    - WFWolfmedConcussionWound
+    - WFWolfmedArterialBleedWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
   - type: Clothing
@@ -907,6 +1032,8 @@
   name: wizard hardsuit
   description: A bizarre gem-encrusted suit that radiates magical energies.
   components:
+  # WOLFGATE(ArmorSpecialization): arcane weave.
+  - type: WFArmorDeflect
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/wizard.rsi
   - type: Clothing
@@ -947,6 +1074,8 @@
   name: organic space suit
   description: A spaceworthy biomass of pressure and temperature resistant tissue.
   components:
+  # WOLFGATE(ArmorSpecialization): living tissue.
+  - type: WFLivingTissue
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/lingspacesuit.rsi
   - type: Clothing
@@ -987,6 +1116,11 @@
   suffix: Rogue
   description: A heavy space suit that provides some basic protection from the cold harsh realities of deep space.
   components:
+  # WOLFGATE(ArmorSpecialization): cold seal.
+  - type: WFWoundWard
+    examine: wf-armor-spec-cold-sealed-examine
+    blocks:
+    - WFWolfmedFrostbiteWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/pirateeva.rsi
   - type: Clothing
@@ -1025,6 +1159,13 @@
   name: pirate captain's hardsuit
   description: An ancient armored hardsuit, perfect for defending against space scurvy and toolbox-wielding scallywags.
   components:
+  # WOLFGATE(ArmorSpecialization): concussion ward and plush lining.
+  - type: WFWoundWard
+    examine: wf-armor-spec-concussion-ward-examine
+    blocks:
+    - WFWolfmedConcussionWound
+  - type: WFPainDampener
+    examine: wf-armor-spec-plush-lining-examine
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/piratecaptain.rsi
   - type: Clothing
@@ -1067,6 +1208,12 @@
   name: ERT leader's hardsuit
   description: A protective hardsuit worn by the leader of an emergency response team.
   components:
+  # WOLFGATE(ArmorSpecialization): concussion ward and steady hands.
+  - type: WFSteadyHands
+  - type: WFWoundWard
+    examine: wf-armor-spec-concussion-ward-examine
+    blocks:
+    - WFWolfmedConcussionWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
   - type: Clothing
@@ -1107,6 +1254,13 @@
   name: ERT engineer's hardsuit
   description: A protective hardsuit worn by the engineers of an emergency response team.
   components:
+  # WOLFGATE(ArmorSpecialization): insulation and servo assist.
+  - type: WFServoAssist
+  - type: WFWoundWard
+    examine: wf-armor-spec-insulation-examine
+    blocks:
+    - WFWolfmedInternalBurnWound
+    - WFWolfmedShortCircuitWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
   - type: Clothing
@@ -1148,6 +1302,13 @@
   name: ERT security's hardsuit
   description: A protective hardsuit worn by the security officers of an emergency response team.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner and blast liner.
+  - type: WFBlastLiner
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
   - type: Clothing
@@ -1172,6 +1333,9 @@
   name: ERT janitor's hardsuit
   description: A protective hardsuit worn by the janitors of an emergency response team.
   components:
+  # WOLFGATE(ArmorSpecialization): anti-slip treads and decon coating.
+  - type: WFDeconCoating
+  - type: NoSlip
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi
   - type: Clothing
@@ -1192,6 +1356,13 @@
   name: death squad hardsuit
   description: An advanced hardsuit favored by commandos for use in special operations.
   components:
+  # WOLFGATE(ArmorSpecialization): limb lock and spall liner.
+  - type: WFLimbLock
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
   - type: Clothing
@@ -1237,6 +1408,13 @@
   name: CBURN exosuit
   description: A lightweight yet strong exosuit used for special cleanup operations.
   components:
+  # WOLFGATE(ArmorSpecialization): sealed layer and decon coating.
+  - type: WFDeconCoating
+  - type: WFWoundWard
+    examine: wf-armor-spec-sealed-examine
+    blocks:
+    - WFWolfmedChemicalBurnWound
+    - WFWolfmedFrostbiteWound
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/cburn.rsi
   - type: Clothing
@@ -1283,6 +1461,14 @@
   name: clown hardsuit
   description: A custom-made clown hardsuit.
   components:
+  # WOLFGATE(ArmorSpecialization): comedic padding, anti-slip treads and honking.
+  - type: WFHonkOnHit
+  - type: WFWoundWard
+    examine: wf-armor-spec-comedic-examine
+    blocks:
+    - WFWolfmedConcussionWound
+    - WFWolfmedDislocationWound
+  - type: NoSlip
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/clown.rsi
   - type: Clothing
@@ -1319,11 +1505,38 @@
 
 #Mime Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitClown
+  # WOLFGATE(ArmorSpecialization) START: the mime stops inheriting the clown's passives.
+  # parent: ClothingOuterHardsuitClown
+  parent: ClothingOuterHardsuitBase
+  # WOLFGATE END
   id: ClothingOuterHardsuitMime
   name: mime hardsuit
   description: A custom-made mime hardsuit.
   components:
+  # WOLFGATE(ArmorSpecialization) START: vow of silence, plus the clown hardsuit's protection it used to inherit.
+  - type: WFVowOfSilence
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepCarpet
+      params:
+        volume: -8
+  - type: PressureProtection
+    highPressureMultiplier: 0.5
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.9
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Caustic: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: HeldSpeedModifier
+  # WOLFGATE END
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/mime.rsi
   - type: Clothing
@@ -1349,6 +1562,13 @@
   name: Santa's hardsuit
   description: A festive, cheerful hardsuit that protects the jolly gift-giver while on sleighrides in space. Offers some resistance against asteroid strikes.
   components:
+  # WOLFGATE(ArmorSpecialization): cold seal and plush lining.
+  - type: WFWoundWard
+    examine: wf-armor-spec-cold-sealed-examine
+    blocks:
+    - WFWolfmedFrostbiteWound
+  - type: WFPainDampener
+    examine: wf-armor-spec-plush-lining-examine
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/santahardsuit.rsi
   - type: Clothing

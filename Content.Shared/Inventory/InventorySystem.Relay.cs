@@ -58,10 +58,15 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, RefreshWeightlessModifiersEvent>(RefRelayInventoryEvent); // Mono
         SubscribeLocalEvent<InventoryComponent, GetExplosionResistanceEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedBleedAttemptEvent>(RefRelayInventoryEvent); // WOLFGATE(Wolfmed): worn items may refuse a bleed.
-        // WOLFGATE(Wolfmed): worn items may refuse a wound or a lost limb, or dull pain.
+        // WOLFGATE(Wolfmed): worn items may refuse a wound or a lost limb, dull pain, steady treatment or keep wounds clean.
         SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedWoundRuleAttemptEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedSeverAttemptEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedArmorPainReliefEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedSteadyHandsEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedSterileEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedPainNoiseAttemptEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.Wolfmed.Wounds.WolfmedOrganBlastAttemptEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, Content.Shared._WF.ArmorSpecialization.WFToolSpeedEvent>(RefRelayInventoryEvent); // WOLFGATE(ArmorSpecialization): worn gear may speed tool work.
         SubscribeLocalEvent<InventoryComponent, IsWeightlessEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSpeedModifierContactCapEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GetSlowedOverSlipperyModifierEvent>(RefRelayInventoryEvent);

@@ -41,12 +41,19 @@ public sealed class WFArmorSpecializationSystem : EntitySystem
         SubscribeLocalEvent<WFAblativeCoatComponent, ExaminedEvent>(OnCoatExamined);
     }
 
+    /// <summary>The body wearing <paramref name="suit"/> in a clothing slot; a suit carried in hand has none.</summary>
+    public EntityUid? GetWearer(EntityUid suit) =>
+        _inventory.TryGetContainingSlot(suit, out _) && _inventory.TryGetContainingEntity(suit, out var wearer)
+            ? wearer
+            : null;
+
     private void OnWoundRuleAttempt(Entity<WFWoundWardComponent> ent, ref InventoryRelayedEvent<WolfmedWoundRuleAttemptEvent> args)
     {
         if (!WolfmedArmorCoverage.Covers(EntityManager, ent.Owner, args.Args.Part))
             return;
 
-        if (ent.Comp.Blocks.Contains(args.Args.Wound))
+        if (ent.Comp.Blocks.Contains(args.Args.Wound) ||
+            args.Args.Rule is { } rule && ent.Comp.BlockRules.Contains(rule))
             args.Args.Cancelled = true;
         else if (ent.Comp.Hardens.TryGetValue(args.Args.Wound, out var multiplier))
             args.Args.MinDamageMultiplier = MathF.Max(args.Args.MinDamageMultiplier, multiplier);
@@ -87,8 +94,11 @@ public sealed class WFArmorSpecializationSystem : EntitySystem
         if (ent.Comp.Charge <= 0f || !_prototypes.TryIndex(ent.Comp.DamageGroup, out DamageGroupPrototype? group))
             return damage;
 
+        // A single-type coat (Heat for a fire-rated suit) soaks only that type.
+        IReadOnlyList<string> types = ent.Comp.DamageType is { } single ? new List<string> { single.Id } : group.DamageTypes;
+
         var requested = FixedPoint2.Zero;
-        foreach (var type in group.DamageTypes)
+        foreach (var type in types)
         {
             if (damage.DamageDict.TryGetValue(type, out var amount) && amount > 0)
                 requested += amount * ent.Comp.Reduction;
@@ -103,7 +113,7 @@ public sealed class WFArmorSpecializationSystem : EntitySystem
 
         var result = new DamageSpecifier(damage);
         var absorbed = FixedPoint2.Zero;
-        foreach (var type in group.DamageTypes)
+        foreach (var type in types)
         {
             if (!result.DamageDict.TryGetValue(type, out var amount) || amount <= 0)
                 continue;
@@ -161,12 +171,12 @@ public sealed class WFArmorSpecializationSystem : EntitySystem
 
     private void OnDampenerExamined(Entity<WFPainDampenerComponent> ent, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("wf-armor-spec-pain-dampener-examine"));
+        args.PushMarkup(Loc.GetString(ent.Comp.Examine));
     }
 
     private void OnCoatExamined(Entity<WFAblativeCoatComponent> ent, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("wf-armor-spec-ablative-examine",
+        args.PushMarkup(Loc.GetString(ent.Comp.Examine,
             ("percent", (int) MathF.Round(ent.Comp.Charge / MathF.Max(ent.Comp.MaxCharge, 1f) * 100f))));
     }
 }

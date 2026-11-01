@@ -38,6 +38,12 @@ public sealed partial class EmoteOnDamageSystem
             HasComp<PainNumbnessComponent>(uid)) // WOLFGATE(Wolfmed): P2-D8 parity - Wolfgate's PainNumbness trait grants the legacy component.
             return;
 
+        // WOLFGATE(ArmorSpecialization): worn gear may silence pain noises (the mime's vow).
+        var wfNoise = new Content.Shared._WF.Wolfmed.Wounds.WolfmedPainNoiseAttemptEvent();
+        RaiseLocalEvent(uid, ref wfNoise);
+        if (wfNoise.Cancelled)
+            return;
+
         var pain = args.DamageDelta is null ? totalDelta : 0f;
         if (args.DamageDelta is { } delta)
         {

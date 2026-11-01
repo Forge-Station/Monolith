@@ -46,3 +46,6 @@ wolfmed-iv-examine-container-empty = Attached is an empty { $container }.
 wolfmed-iv-examine-nothing = No container is attached.
 wolfmed-iv-examine-connected = { CAPITALIZE(THE($target)) } is connected.
 wolfmed-iv-examine-not-connected = Nothing is connected.
+
+alerts-wolfmed-iv-connected-name = IV connected
+alerts-wolfmed-iv-connected-desc = An IV line is in your arm. Have it taken out, or bring the stand or the medic with you, before you move away, or it will be pulled out.

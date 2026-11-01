@@ -1,71 +1,53 @@
-// Forge-Change-full: drop stale broadphase ids before physics so a missing transform cannot fill the client log.
-using System.Collections.Generic;
+// Forge-Change-full: drop a stale broadphase id when its entity is deleted, without scanning the map every tick.
 using Robust.Shared.GameObjects;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._Forge.Physics;
 
 /// <summary>
 /// A client that loses an entity from PVS can leave its id in a map broadphase tree after the
-/// transform is gone. The engine's contact pass then throws on that id every physics tick and
-/// never clears the moved-grid set, so the same exception is written until the log fills the disk.
-/// Drop those ids before physics runs.
+/// transform is gone. The engine's contact pass then throws on that id and keeps the moved-grid
+/// set, so the same exception is written until the log fills the disk.
+/// The id is removed when that entity is deleted. Scanning every tree every tick costs as much
+/// as a slice of physics on a full map, and the server never has this PVS bug.
 /// </summary>
 public sealed class StaleBroadphaseSystem : EntitySystem
 {
-    private EntityQuery<TransformComponent> _xformQuery;
-    private readonly List<EntityUid> _stale = new();
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        _xformQuery = GetEntityQuery<TransformComponent>();
-        UpdatesBefore.Add(typeof(SharedPhysicsSystem));
-        // SimulateWorld raises this immediately before FindNewContacts.
-        SubscribeLocalEvent<PhysicsUpdateBeforeSolveEvent>(OnBeforeSolve);
-    }
-
-    public override void Update(float frameTime)
-    {
-        PurgeAll();
-    }
-
-    private void OnBeforeSolve(ref PhysicsUpdateBeforeSolveEvent ev)
-    {
-        PurgeAll();
-    }
-
-    /// <summary>
-    /// Prediction reset calls FindNewContacts outside the entity-system update, before this
-    /// system's Update. The client entry point calls this in PreEngine so that pass is clean too.
-    /// </summary>
-    public void PurgeAll()
-    {
-        var query = EntityQueryEnumerator<BroadphaseComponent>();
-        while (query.MoveNext(out _, out var broadphase))
-        {
-            Purge(broadphase.SundriesTree);
-            Purge(broadphase.StaticSundriesTree);
-        }
-    }
-
-    private void Purge(DynamicTree<EntityUid>? tree)
-    {
-        if (tree == null || tree.Count == 0)
+        if (!_net.IsClient)
             return;
 
-        foreach (var uid in tree)
-        {
-            if (!_xformQuery.HasComponent(uid))
-                _stale.Add(uid);
-        }
+        EntityManager.EntityDeleted += OnEntityDeleted;
+    }
 
-        foreach (var uid in _stale)
-        {
-            tree.Remove(uid);
-        }
+    public override void Shutdown()
+    {
+        if (_net.IsClient)
+            EntityManager.EntityDeleted -= OnEntityDeleted;
 
-        _stale.Clear();
+        base.Shutdown();
+    }
+
+    private void OnEntityDeleted(Entity<MetaDataComponent> entity)
+    {
+        var uid = entity.Owner;
+        var query = EntityQueryEnumerator<BroadphaseComponent>();
+        while (query.MoveNext(out var broadphaseUid, out var broadphase))
+        {
+            if (broadphaseUid == uid)
+                continue;
+
+            // An entity lives in at most one sundries tree. A miss is one dictionary lookup.
+            if (broadphase.SundriesTree is { Count: > 0 } sundries && sundries.Remove(uid))
+                return;
+
+            if (broadphase.StaticSundriesTree is { Count: > 0 } staticTree && staticTree.Remove(uid))
+                return;
+        }
     }
 }

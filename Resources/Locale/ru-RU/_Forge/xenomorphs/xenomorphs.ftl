@@ -1,6 +1,4 @@
 forge-xeno-no-plasma = Не хватает плазмы.
-forge-xeno-rest-down = Вы укладываетесь на смолу.
-forge-xeno-rest-up = Вы поднимаетесь.
 forge-xeno-hide-on = Вы растворяетесь из виду.
 forge-xeno-hide-off = Вы сбрасываете маскировку.
 forge-xeno-fortify-on = Вы запираете гребень. Двигаться почти невозможно.

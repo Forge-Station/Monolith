@@ -119,7 +119,10 @@ namespace Content.Shared.Chemistry
         U1 = 1,
         U5 = 5,
         U10 = 10,
+        U15 = 15, // Forge-Change
+        U20 = 20, // Forge-Change
         U25 = 25,
+        U30 = 30, // Forge-Change
         U50 = 50,
         U100 = 100,
         All,

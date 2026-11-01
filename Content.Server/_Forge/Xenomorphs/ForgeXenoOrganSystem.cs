@@ -114,10 +114,10 @@ public sealed partial class ForgeXenoOrganSystem : EntitySystem
 
     private void AttachIfHosted(Entity<ForgeXenoOrganComponent> ent)
     {
-        EnsureActions(ent);
         if (ContainingHost(ent) is not { } host)
             return;
 
+        EnsureActions(ent);
         Grant(ent, host);
     }
 
@@ -191,8 +191,7 @@ public sealed partial class ForgeXenoOrganSystem : EntitySystem
 
     private static bool KeepsOwnDelay(BaseActionEvent? ev)
     {
-        return ev is ForgeXenoRestActionEvent
-            or ForgeXenoFortifyActionEvent
+        return ev is ForgeXenoFortifyActionEvent
             or ForgeXenoZoomActionEvent
             or ForgeXenoPheromonesActionEvent;
     }

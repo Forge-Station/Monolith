@@ -48,6 +48,20 @@ public sealed partial class ResearchServerComponent : Component
     [DataField("insertedDisks")]
     [ViewVariables(VVAccess.ReadOnly)]
     public List<EntityUid> InsertedDisks = new();
+
+    /// <summary>
+    /// When true, only clients in <see cref="AuthorizedClients"/> may connect to this server.
+    /// Equipment is authorized via the research server link console UI.
+    /// </summary>
+    [DataField]
+    public bool RestrictClientConnections = true;
+
+    /// <summary>
+    /// Research clients explicitly allowed to link to this server.
+    /// Server-side only; sent to clients through the link UI state.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public HashSet<EntityUid> AuthorizedClients = new();
     // Forge-change end
 }
 

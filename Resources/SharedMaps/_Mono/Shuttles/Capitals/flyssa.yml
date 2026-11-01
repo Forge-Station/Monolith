@@ -2038,7 +2038,7 @@ entities:
       deviceLists:
       - 2364
       - 2430
-- proto: AlwaysPoweredlightBlue
+- proto: PoweredlightBlue
   entities:
   - uid: 2881
     components:

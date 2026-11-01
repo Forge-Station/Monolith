@@ -1,5 +1,5 @@
 ent-WeaponTurretDrakeApolloMk2 = D-20 Apollo MK2 mining laser cannon
-    .desc = A Drake Industries rework of the Apollo mining laser. Slower, heavier beams shatter asteroid and supercompacted rock, teleporting mined ore to a point just below the turret.
+    .desc = A Drake Industries rework of the Apollo mining laser. Heavier beams shatter rock; mined ore deposits into the turret and travels through disposal pipes underneath — same as ship drills.
 
 ent-WeaponTurretDrakeApolloMk2Portable = D-20 Apollo MK2 mining laser cannon
     .desc = { ent-WeaponTurretDrakeApolloMk2.desc }

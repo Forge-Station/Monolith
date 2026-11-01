@@ -40,7 +40,6 @@ using Robust.Shared.Replays;
 using Robust.Shared.Timing;
 using Content.Client._NF.Emp.Overlays; // Frontier
 using Content.Client._Forge.DiscordAuth;
-using Content.Shared._Forge.Physics; // Forge-Change
 using Content.Client._Forge.JoinQueue; // Forge-Change
 using Content.Client._Forge.Sponsor; // Forge-Change
 using Content.Client._Mono.Company; // Mono
@@ -257,12 +256,6 @@ namespace Content.Client.Entry
             {
                 if (_baseClient.RunLevel is ClientRunLevel.InGame or ClientRunLevel.SinglePlayerGame)
                 {
-                    // Forge-Change-Start: ApplyGameState resets physics contacts before entity systems run.
-                    // A stale broadphase id has to be gone before that, or the client logs the same
-                    // missing-transform exception on every state.
-                    _entitySystemManager.GetEntitySystem<StaleBroadphaseSystem>().PurgeAll();
-                    // Forge-Change-End
-
                     var updateSystem = _entitySystemManager.GetEntitySystem<BuiPreTickUpdateSystem>();
                     updateSystem.RunUpdates();
                 }

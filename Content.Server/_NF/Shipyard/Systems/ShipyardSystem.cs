@@ -193,6 +193,14 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         ShipyardSaleResult result = new ShipyardSaleResult();
         bill = 0;
 
+        // WOLFGATE(Companies) START: company hangar ships belong to the company and can't be sold
+        if (HasComp<Content.Server._WF.Companies.WFCompanyHangarShipComponent>(shuttleUid))
+        {
+            result.Error = ShipyardSaleError.InvalidShip;
+            return result;
+        }
+        // WOLFGATE END
+
         if (!TryComp<StationDataComponent>(stationUid, out var stationGrid)
             || !HasComp<ShuttleComponent>(shuttleUid)
             || !TryComp(shuttleUid, out TransformComponent? xform)

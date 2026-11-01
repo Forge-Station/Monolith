@@ -9,6 +9,18 @@ ship-access-owner-none = None
 ship-access-mode = Mode
 ship-access-mode-private = Private
 ship-access-mode-faction = Faction
+ship-access-mode-crew = Crew
+ship-access-mode-company = Company
+ship-access-no-company = Join a player company, and enter the round as that character, before selecting Company access.
+ship-access-linked-company = Linked company: {$name} ({$count} issued IDs). Members playing this round open these doors; leaving the company removes access.
+ship-access-mode-hint = Private admits the owner and allowed IDs. Crew also admits current crew members' issued IDs. Faction also admits company access. Individual door rules override this mode.
+ship-access-no-crew = Join a crew through Crew Setup and enter the round before selecting Crew access.
+ship-access-mode-unavailable = This ship does not support that access mode.
+ship-access-linked-crew = Linked crew: {$name} ({$count} issued IDs). Leaving the crew or respawning removes crew access; ownership and deliberately allowed IDs remain.
+ship-access-rule-crew-name = Crew
+ship-access-rule-company-name = Company
+ship-access-rule-company-desc = The owner and members of the linked company who are playing this round, even when the ship uses another mode or is unlocked.
+ship-access-rule-crew-desc = The owner and current members of the linked crew, even when the ship uses another mode or is unlocked. Leaving the crew or respawning removes crew access. Join a crew through Crew Setup before selecting this rule.
 ship-access-lock = Lock
 ship-access-locked-check = Locked
 ship-access-locked-yes = Locked
@@ -23,13 +35,15 @@ ship-access-nearby-empty = Nobody is standing near the console.
 ship-access-add = Add
 ship-access-no-card = no ID
 ship-access-no-record = no record
+ship-access-held = in hand
 ship-access-label-guest = Guest
 
 # Server popups
-ship-access-not-owner = Only the ship's owner can change the ship's access.
+ship-access-not-owner = Your ID is not an owner of this ship.
 ship-access-added = { $name }'s ID card may now open the ship.
 ship-access-add-no-card = They carry no ID card.
 ship-access-add-no-record = Their ID card has no crew record, so no door can be keyed to it.
+ship-access-add-card-no-record = That ID card has no crew record, so no door can be keyed to it.
 ship-access-add-out-of-range = They must stand closer to the console.
 ship-access-add-already = That ID card is already allowed aboard.
 ship-access-allow-list-cleared = Allow list cleared: { $count } removed.
@@ -50,13 +64,22 @@ ship-access-rule-code-name = Code
 ship-access-rule-players-or-code-name = Chosen IDs or code
 ship-access-rule-public-name = Public
 ship-access-rule-sealed-name = Sealed
-ship-access-rule-default-desc = Follows the ship: while it is locked, the owner (the deed, or the ID card worn by a player the ship is registered to), the allowed ID cards and, on a faction ship, its company's access. Unlocked, the door keeps its own access.
+ship-access-rule-default-desc = Follows the ship: while it is locked, the owner (the deed, or the ID card worn by a player the ship is registered to), the allowed ID cards and the selected mode's crew or company access. Unlocked, the door keeps its own access, and the owner and the allowed ID cards open it too.
 ship-access-rule-owner-only-desc = Only the owner opens this door, locked ship or not: the deed, or the ID card worn by a player the ship is registered to.
 ship-access-rule-players-desc = The owner and the ID cards ticked below.
 ship-access-rule-code-desc = The owner, or anyone who enters this door's code or the ship code at its keypad.
 ship-access-rule-players-or-code-desc = The owner, the ID cards ticked below, or a code at the keypad.
 ship-access-rule-public-desc = Anyone opens this door, even while the ship is locked, whatever access its electronics ask for.
 ship-access-rule-sealed-desc = Bolted shut for everyone, the owner included. Pick another rule to unseal it.
+ship-access-all-doors = All doors
+ship-access-all-doors-apply = Set all
+ship-access-all-doors-confirm = Confirm
+ship-access-all-doors-hint = Gives every door on the ship this rule. Firelocks are left alone; lockers and lockable buttons always follow the ship. { $desc }
+ship-access-all-doors-set = { $count ->
+        [0] No doors changed.
+        [one] 1 door set.
+       *[other] { $count } doors set.
+    }
 ship-access-door-not-on-ship = That door is not on this ship.
 ship-access-seal-pending = The door will bolt as soon as it is shut and powered.
 ship-access-no-owner-key = Neither the deed nor your ID card has a crew record, so no door can be keyed to you. Locking would shut you out.

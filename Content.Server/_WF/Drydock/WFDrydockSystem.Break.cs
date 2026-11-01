@@ -1,6 +1,9 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server._NF.Shipyard.Systems;
 using Content.Server._WF.NpcCrew.Systems;
+using Content.Server._NF.Station.Components;
+using Content.Server.Atmos.Components;
 using Content.Server.Cargo.Systems;
 using Content.Server.Construction;
 using Content.Server.Construction.Components;
@@ -9,6 +12,7 @@ using Content.Shared._Crescent.Hardpoints;
 using Content.Shared._Mono.ShipRepair.Components;
 using Content.Shared._NF.Shipyard.Components;
 using Content.Shared._WF.Drydock;
+using Content.Shared.Access.Systems;
 using Content.Shared.Construction.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -16,6 +20,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Materials;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Station.Components;
+using Robust.Shared.Player;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -25,7 +30,7 @@ namespace Content.Server._WF.Drydock;
 
 /// <summary>
 /// Hull breaking at a mobile drydock: the cranes peel a ship tile by tile from its edges inward, and pay out a share
-/// of what it was built from, within caps set by its size.
+/// of what it was built from.
 /// </summary>
 public sealed partial class WFDrydockSystem
 {
@@ -33,6 +38,8 @@ public sealed partial class WFDrydockSystem
     [Dependency] private FlatpackSystem _flatpack = default!;
     [Dependency] private MaterialStorageSystem _sheets = default!;
     [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedIdCardSystem _idCards = default!;
+    [Dependency] private ShipyardSystem _shipyard = default!;
 
     /// <summary>Flatpack that hardware stripped off a hull comes out in.</summary>
     private static readonly EntProtoId SalvagedFlatpack = "WFSalvagedFlatpack";
@@ -43,7 +50,30 @@ public sealed partial class WFDrydockSystem
     /// <summary>Damage type salvaged hardware unpacks with.</summary>
     private static readonly ProtoId<DamageTypePrototype> SalvageDamage = "Blunt";
 
+    /// <summary>Damage past which a barrier counts as indestructible, such as monolith tenebris.</summary>
+    private const float IndestructibleDamage = 50000;
+
     private static readonly Vector2i[] Neighbours = { new(1, 0), new(-1, 0), new(0, 1), new(0, -1) };
+
+    /// <summary>How long a broken tile waits for others to lift with it.</summary>
+    private static readonly TimeSpan LiftBatch = TimeSpan.FromSeconds(10);
+
+    /// <summary>Tile lookups a job's connectivity checks may make a tick; a hull that would split checks over several.</summary>
+    private const int LiftCheckBudget = 1024;
+
+    /// <summary>The eight tiles around a tile in ring order; even entries are its sides.</summary>
+    private static readonly Vector2i[] Ring =
+    {
+        new(1, 0), new(1, 1), new(0, 1), new(-1, 1), new(-1, 0), new(-1, -1), new(0, -1), new(1, -1),
+    };
+
+    // Scratch collections for the connectivity checks, reused so a busy break allocates nothing per check.
+    private readonly HashSet<Vector2i> _liftExcluded = new();
+    private readonly List<Vector2i> _liftNeighbours = new();
+    private readonly Dictionary<Vector2i, int> _liftOwner = new();
+    private readonly Queue<Vector2i>[] _liftQueues = { new(), new(), new(), new() };
+    private readonly List<(int Index, float Distance)> _breakReach = new();
+    private readonly List<CraneReach?> _breakJobReach = new();
 
     private void InitializeBreak()
     {
@@ -88,23 +118,99 @@ public sealed partial class WFDrydockSystem
         if (!TryComp<WFDrydockJobComponent>(console, out var job))
             return false;
 
-        if (job.Attacker is { } attacker)
-            _crewAlert.ReportBreaking(ship, attacker);
+        job.Attacker = BreakerVessel(console, ship, actor);
+        job.Breaker = actor;
+        _crewAlert.ReportBreaking(ship, job.Attacker, job.Breaker);
+
+        if (TryComp<WFDrydockChopShopComponent>(console, out var chop))
+        {
+            SetUpChopPay(chop, job, items);
+            if (IsLawfulProperty(chop, ship, actor))
+                PostBreakWarrant(console, chop, ship, actor);
+        }
 
         return true;
     }
 
-    /// <summary>Why a ship can't be broken at a console, or null. Stations, outposts and the drydock's own grid are refused.</summary>
+    /// <summary>
+    /// The vessel a break is blamed on: the console's own grid when it stands on a ship, as a mobile drydock does, else
+    /// the nearest ship registered to the breaker's player, else the ship on the deed of their ID. Null when none is a
+    /// ship other than the one being broken.
+    /// </summary>
+    private EntityUid? BreakerVessel(EntityUid console, EntityUid ship, EntityUid breaker)
+    {
+        if (Transform(console).GridUid is { } yard && yard != ship && HasComp<ShuttleDeedComponent>(yard))
+            return yard;
+
+        if (TryComp<ActorComponent>(breaker, out var actor))
+        {
+            var at = _transform.GetMapCoordinates(breaker);
+            EntityUid? nearest = null;
+            var best = float.MaxValue;
+            var owned = EntityQueryEnumerator<ShipOwnershipComponent, TransformComponent>();
+            while (owned.MoveNext(out var uid, out var ownership, out var xform))
+            {
+                if (uid == ship || ownership.OwnerUserId != actor.PlayerSession.UserId || xform.MapID != at.MapId)
+                    continue;
+
+                var distance = (_transform.GetWorldPosition(xform) - at.Position).LengthSquared();
+                if (distance < best)
+                {
+                    best = distance;
+                    nearest = uid;
+                }
+            }
+
+            if (nearest != null)
+                return nearest;
+        }
+
+        if (_idCards.TryFindIdCard(breaker, out var card) && _shipyard.TryGetDeedShip(card, out var deedShip) && deedShip != ship)
+            return deedShip;
+
+        return null;
+    }
+
+    /// <summary>Why a ship can't be broken at a console, or null.</summary>
     public string? BreakRefusal(EntityUid console, WFDrydockConsoleComponent comp, EntityUid ship)
     {
         if (IsShipyardGrid(console, comp, ship))
             return Loc.GetString("drydock-console-own-grid");
 
-        // A bought ship is a station of its own but carries a deed; a station member without one is an outpost or POI.
-        if (HasComp<StationMemberComponent>(ship) && !HasComp<ShuttleDeedComponent>(ship))
+        if (IsOutpost(ship))
             return Loc.GetString("drydock-console-break-station");
 
+        // A company hangar ship is relaunched free each round, so breaking it would print money.
+        if (HasComp<Content.Server._WF.Companies.WFCompanyHangarShipComponent>(ship))
+            return Loc.GetString("wf-company-break-refused");
+
+        if (HasIndestructibleBarrier(ship))
+            return Loc.GetString("drydock-console-break-indestructible");
+
         return null;
+    }
+
+    /// <summary>
+    /// Whether a grid is part of a station or outpost rather than a ship. A ship can be a station of its own: one bought
+    /// carries a deed, and one spawned without an owner still has a vessel station.
+    /// </summary>
+    private bool IsOutpost(EntityUid grid)
+    {
+        if (!TryComp<StationMemberComponent>(grid, out var member) || HasComp<ShuttleDeedComponent>(grid))
+            return false;
+
+        return !HasComp<ExtraShuttleInformationComponent>(member.Station);
+    }
+
+    /// <summary>Whether a grid has a damageable wall, window or door that can't be destroyed, such as a vault's.</summary>
+    private bool HasIndestructibleBarrier(EntityUid ship)
+    {
+        if (!TryComp<MapGridComponent>(ship, out var grid))
+            return false;
+
+        var barriers = new HashSet<Entity<AirtightComponent>>();
+        _lookup.GetLocalEntitiesIntersecting(ship, grid.LocalAABB, barriers);
+        return barriers.Any(b => HasComp<DamageableComponent>(b) && _destructible.DestroyedAt(b).Float() >= IndestructibleDamage);
     }
 
     /// <summary>Lists a break item per hull tile, timed by the entities its crane strips off it.</summary>
@@ -144,29 +250,47 @@ public sealed partial class WFDrydockSystem
     /// </summary>
     private WFDrydockWorkItem? TakeBreakTile(WFDrydockConsoleComponent comp, WFDrydockJobComponent job, WFDrydockJobSlot slot)
     {
-        var reach = new List<(int Index, float Distance)>();
+        var own = ReachOf(job.Ship, slot.Crane);
+        var all = _breakJobReach;
+        JobReach(job, all);
+        var reach = _breakReach;
+        reach.Clear();
         var stranded = -1;
         var strandedDistance = float.MaxValue;
         for (var i = 0; i < job.Pending.Count; i++)
         {
             var pos = job.Pending[i].LocalPos;
             var distance = (pos - slot.ToolPos).LengthSquared();
-            if (CanReach(comp, job.Ship, slot.Crane, pos))
+            if (Reaches(comp, own, pos))
                 reach.Add((i, distance));
-            else if (distance < strandedDistance && !ReachableByJob(comp, job, pos))
+            else if (distance < strandedDistance && !ReachableByAny(comp, all, pos))
             {
                 stranded = i;
                 strandedDistance = distance;
             }
         }
 
-        // Only the nearest few usually need the costlier connectivity check.
+        // Only the nearest few usually need the costlier connectivity check. Tiles found to split the hull are skipped
+        // until another tile comes off, and once this tick's checks are spent the rest wait for the next.
         reach.Sort((a, b) => a.Distance.CompareTo(b.Distance));
         var best = stranded;
         foreach (var (index, _) in reach)
         {
-            if (!Liftable(job, slot, job.Pending[index].TileIndex))
+            var tile = job.Pending[index].TileIndex;
+            if (job.Unliftable.Contains(tile))
                 continue;
+
+            if (job.LiftCheckBudget <= 0)
+            {
+                job.LiftChecksDeferred = true;
+                return null;
+            }
+
+            if (!Liftable(job, slot, tile))
+            {
+                job.Unliftable.Add(tile);
+                continue;
+            }
 
             best = index;
             break;
@@ -178,6 +302,7 @@ public sealed partial class WFDrydockSystem
         var item = job.Pending[best];
         job.Pending[best] = job.Pending[^1];
         job.Pending.RemoveAt(job.Pending.Count - 1);
+        job.Unliftable.Clear();
         return item;
     }
 
@@ -190,19 +315,20 @@ public sealed partial class WFDrydockSystem
         if (!TryComp<MapGridComponent>(job.Ship, out var grid))
             return true;
 
-        var lifting = new HashSet<Vector2i> { tile };
+        var lifting = _liftExcluded;
+        lifting.Clear();
+        lifting.Add(tile);
         foreach (var other in job.Slots)
         {
             if (other != slot && other.Item is { Kind: WFDrydockWorkKind.Break } item)
                 lifting.Add(item.TileIndex);
         }
 
-        bool Present(Vector2i index) => !lifting.Contains(index) && !_map.GetTileRef(job.Ship, grid, index).Tile.IsEmpty;
-
-        var neighbours = new List<Vector2i>();
+        var neighbours = _liftNeighbours;
+        neighbours.Clear();
         foreach (var step in Neighbours)
         {
-            if (Present(tile + step))
+            if (LiftPresent(job, grid, tile + step))
                 neighbours.Add(tile + step);
         }
 
@@ -212,27 +338,128 @@ public sealed partial class WFDrydockSystem
         if (neighbours.Count <= 1)
             return true;
 
-        // Its neighbours must still reach each other around it.
-        var unfound = new HashSet<Vector2i>(neighbours.Skip(1));
-        var seen = new HashSet<Vector2i> { neighbours[0] };
-        var queue = new Queue<Vector2i>();
-        queue.Enqueue(neighbours[0]);
-        while (queue.TryDequeue(out var at))
+        // Most edge tiles have their neighbours joined through the ring of eight around them.
+        if (RingJoins(job, grid, tile))
+            return true;
+
+        return NeighboursJoin(job, grid, neighbours);
+    }
+
+    /// <summary>Whether a tile is still standing for a connectivity check, spending one of the job's lookups.</summary>
+    private bool LiftPresent(WFDrydockJobComponent job, MapGridComponent grid, Vector2i index)
+    {
+        job.LiftCheckBudget--;
+        return !_liftExcluded.Contains(index) && !job.Lifting.Contains(index) &&
+               !_map.GetTileRef(job.Ship, grid, index).Tile.IsEmpty;
+    }
+
+    /// <summary>Whether a tile's present side neighbours lie on one unbroken arc of its eight surrounding tiles.</summary>
+    private bool RingJoins(WFDrydockJobComponent job, MapGridComponent grid, Vector2i tile)
+    {
+        Span<bool> ring = stackalloc bool[Ring.Length];
+        var start = -1;
+        for (var i = 0; i < Ring.Length; i++)
         {
-            foreach (var step in Neighbours)
-            {
-                var next = at + step;
-                if (!Present(next) || !seen.Add(next))
-                    continue;
-
-                if (unfound.Remove(next) && unfound.Count == 0)
-                    return true;
-
-                queue.Enqueue(next);
-            }
+            ring[i] = LiftPresent(job, grid, tile + Ring[i]);
+            if (!ring[i] && i % 2 == 0)
+                start = i;
         }
 
-        return false;
+        // Walks the ring from an empty side, counting arcs that hold a side neighbour.
+        var arcs = 0;
+        var inArc = false;
+        var arcHasSide = false;
+        for (var n = 1; n <= Ring.Length; n++)
+        {
+            var i = (start + n) % Ring.Length;
+            if (ring[i])
+            {
+                inArc = true;
+                arcHasSide |= i % 2 == 0;
+                continue;
+            }
+
+            if (inArc && arcHasSide)
+                arcs++;
+            inArc = false;
+            arcHasSide = false;
+        }
+
+        return arcs <= 1;
+    }
+
+    /// <summary>
+    /// Whether the given tiles still reach each other. Floods from each in turn and stops as soon as one flood closes
+    /// without meeting the rest, so a split costs the smaller piece rather than the whole hull.
+    /// </summary>
+    private bool NeighboursJoin(WFDrydockJobComponent job, MapGridComponent grid, List<Vector2i> starts)
+    {
+        var owner = _liftOwner;
+        owner.Clear();
+        Span<int> parent = stackalloc int[Neighbours.Length];
+        for (var i = 0; i < starts.Count; i++)
+        {
+            parent[i] = i;
+            owner[starts[i]] = i;
+            _liftQueues[i].Clear();
+            _liftQueues[i].Enqueue(starts[i]);
+        }
+
+        int Find(Span<int> p, int i)
+        {
+            while (p[i] != i)
+                i = p[i];
+            return i;
+        }
+
+        var groups = starts.Count;
+        Span<bool> open = stackalloc bool[Neighbours.Length];
+        while (true)
+        {
+            for (var i = 0; i < starts.Count; i++)
+            {
+                if (!_liftQueues[i].TryDequeue(out var at))
+                    continue;
+
+                foreach (var step in Neighbours)
+                {
+                    var next = at + step;
+                    if (owner.TryGetValue(next, out var other))
+                    {
+                        var a = Find(parent, i);
+                        var b = Find(parent, other);
+                        if (a != b)
+                        {
+                            parent[b] = a;
+                            if (--groups == 1)
+                                return true;
+                        }
+
+                        continue;
+                    }
+
+                    if (!LiftPresent(job, grid, next))
+                        continue;
+
+                    owner[next] = i;
+                    _liftQueues[i].Enqueue(next);
+                }
+            }
+
+            // A joined group whose floods have all run dry is cut off from the others.
+            open.Clear();
+            for (var i = 0; i < starts.Count; i++)
+            {
+                if (_liftQueues[i].Count > 0)
+                    open[Find(parent, i)] = true;
+            }
+
+            for (var i = 0; i < starts.Count; i++)
+            {
+                if (Find(parent, i) == i && !open[i])
+                    return false;
+            }
+        }
     }
 
     /// <summary>Gives up a break's tiles that no crane can lift without splitting the hull, leaving them standing.</summary>
@@ -259,37 +486,20 @@ public sealed partial class WFDrydockSystem
         return berthArea.Intersects(_transform.GetWorldMatrix(job.Ship).TransformBox(grid.LocalAABB));
     }
 
-    /// <summary>What breaking the whole ship would pay now, within its caps.</summary>
+    /// <summary>What breaking the whole ship would pay now.</summary>
     private Dictionary<string, int> BreakPreview(EntityUid ship, WFDrydockMaterialPaymentComponent pay)
     {
         var total = new Dictionary<string, int>();
         if (!TryComp<MapGridComponent>(ship, out var grid))
             return total;
 
-        var count = 0;
         var tiles = _map.GetAllTilesEnumerator(ship, grid);
         while (tiles.MoveNext(out var tile))
         {
-            count++;
             AddTileYield(ship, grid, tile.Value.GridIndices, pay, total);
         }
 
-        var caps = BreakCaps(pay, count);
-        var preview = new Dictionary<string, int>();
-        foreach (var (id, amount) in total)
-        {
-            var capped = caps.TryGetValue(id, out var cap) ? Math.Min(amount, cap) : amount;
-            if (capped > 0)
-                preview[id] = capped;
-        }
-
-        return preview;
-    }
-
-    /// <summary>Most of each capped material breaking so many tiles may pay.</summary>
-    private static Dictionary<string, int> BreakCaps(WFDrydockMaterialPaymentComponent pay, int tiles)
-    {
-        return pay.BreakCap.ToDictionary(c => c.Key.Id, c => (int) (c.Value * tiles));
+        return total;
     }
 
     /// <summary>
@@ -303,7 +513,7 @@ public sealed partial class WFDrydockSystem
         while (anchored.MoveNext(out var uid))
         {
             if (!IsSalvagedWhole(uid.Value) && MetaData(uid.Value).EntityPrototype is { } proto)
-                AddBreakYield(pay, ConstructionMaterials(proto), yield);
+                AddBreakYield(pay, proto, yield);
         }
 
         AddPerTileYield(pay, yield);
@@ -318,12 +528,13 @@ public sealed partial class WFDrydockSystem
         }
     }
 
-    /// <summary>Adds the share of a set of materials a break recovers.</summary>
-    private static void AddBreakYield(WFDrydockMaterialPaymentComponent pay, Dictionary<string, int> materials, Dictionary<string, int> yield)
+    /// <summary>Adds the share of an entity's construction materials a break recovers.</summary>
+    private void AddBreakYield(WFDrydockMaterialPaymentComponent pay, EntityPrototype proto, Dictionary<string, int> yield)
     {
-        foreach (var (id, amount) in materials)
+        var wall = IsWall(proto);
+        foreach (var (id, amount) in ConstructionMaterials(proto))
         {
-            var units = (int) (amount * BreakShare(pay, id));
+            var units = (int) (amount * (wall ? pay.StructureYield : BreakShare(pay, id)));
             if (units > 0)
                 yield[id] = yield.GetValueOrDefault(id) + units;
         }
@@ -343,14 +554,14 @@ public sealed partial class WFDrydockSystem
 
     /// <summary>
     /// Breaks one tile: packs its hardware for the crane, strips everything else anchored on it, credits the yield to
-    /// the crane within the caps of the tiles lifted so far, reports the attack, then lifts the tile. Everyone and everything still aboard
-    /// is set adrift before the last tile goes, so nothing is deleted with the hull.
+    /// the crane, reports the attack, then lifts the tile. Everyone and everything still aboard is set adrift before the
+    /// last tile goes, so nothing is deleted with the hull.
     /// </summary>
     private void ApplyBreak(EntityUid console, WFDrydockJobComponent job, WFDrydockJobSlot slot, WFDrydockWorkItem item)
     {
         var ship = job.Ship;
         if (TerminatingOrDeleted(ship) || !TryComp<MapGridComponent>(ship, out var grid) ||
-            _map.GetTileRef(ship, grid, item.TileIndex).Tile.IsEmpty)
+            job.Lifting.Contains(item.TileIndex) || _map.GetTileRef(ship, grid, item.TileIndex).Tile.IsEmpty)
             return;
 
         var pay = CompOrNull<WFDrydockMaterialPaymentComponent>(console);
@@ -377,105 +588,82 @@ public sealed partial class WFDrydockSystem
             {
                 SalvageParts(uid, crane, drop);
                 if (pay != null && MetaData(uid).EntityPrototype is { } proto)
-                    AddBreakYield(pay, ConstructionMaterials(proto), yield);
+                    AddBreakYield(pay, proto, yield);
             }
 
-            QueueDel(uid);
+            // Deleted now, not queued: lifting the tile below unanchors what's left, and a cable unanchored alive
+            // drops a coil as if cut.
+            Del(uid);
         }
 
         if (pay != null)
             AddPerTileYield(pay, yield);
 
-        EnsureComp<WFHulkComponent>(ship).Broken.Add(item.TileIndex);
-        var credit = CreditBreak(ship, job, pay, yield);
-        if (credit.Count > 0)
+        EnsureComp<WFHulkComponent>(ship).LastWork = _timing.CurTime;
+        // A chop shop pays in thalers, not materials.
+        var chop = HasComp<WFDrydockChopShopComponent>(console);
+        if (yield.Count > 0 && !chop)
         {
-            DepositYield(crane, drop, credit);
-            AddBill(job.Yield, credit);
+            DepositYield(crane, drop, yield);
+            AddBill(job.Yield, yield);
         }
 
-        if (job.Attacker is { } attacker && !TerminatingOrDeleted(attacker))
-            _crewAlert.ReportBreaking(ship, attacker);
+        _crewAlert.ReportBreaking(ship, job.Attacker, job.Breaker);
 
-        var last = IsLastTile(ship, grid);
+        var last = IsLastTile(job, grid);
         if (last)
         {
             job.HullGone = true;
             SetAdrift(ship);
         }
 
+        if (chop)
+            PrintChopCash(console, job, item);
+
         // Lifting a tile casts off whoever stands on it; lifting the last one deletes the grid.
-        _map.SetTile(ship, grid, item.TileIndex, Tile.Empty);
-        if (last && !TerminatingOrDeleted(ship))
+        if (job.Lifting.Count == 0)
+            job.LiftAt = _timing.CurTime + LiftBatch;
+        job.Lifting.Add(item.TileIndex);
+        if (!last)
+            return;
+
+        LiftTiles(job);
+        if (!TerminatingOrDeleted(ship))
             QueueDel(ship);
     }
 
-    /// <summary>
-    /// Raises a broken item's bill to its full materials: a rebuild's construction materials, or a tile's own yield
-    /// grossed up by the share a break recovers of it.
-    /// </summary>
-    private void BillBroken(WFDrydockMaterialPaymentComponent pay, WFDrydockWorkItem item)
+    /// <summary>Lifts a break's finished tiles in one change.</summary>
+    private void LiftTiles(WFDrydockJobComponent job)
     {
-        if (item.Materials == null)
+        if (job.Lifting.Count == 0)
             return;
 
-        var full = new Dictionary<string, int>();
-        if (item.Kind == WFDrydockWorkKind.Tile)
+        if (!TerminatingOrDeleted(job.Ship) && TryComp<MapGridComponent>(job.Ship, out var grid))
         {
-            foreach (var (id, amount) in pay.BreakTileYield)
+            var tiles = new List<(Vector2i, Tile)>(job.Lifting.Count);
+            foreach (var index in job.Lifting)
             {
-                var recovered = BreakShare(pay, id.Id);
-                var share = recovered > 0 ? recovered : 1f;
-                full[id.Id] = (int) Math.Ceiling(amount / share);
+                tiles.Add((index, Tile.Empty));
             }
-        }
-        else if (item.Prototype is { } protoId && _prototype.TryIndex(protoId, out var proto))
-        {
-            full = ConstructionMaterials(proto);
+
+            _map.SetTiles(job.Ship, grid, tiles);
         }
 
-        foreach (var (id, amount) in full)
-        {
-            item.Materials[id] = Math.Max(item.Materials.GetValueOrDefault(id), amount);
-        }
+        job.Lifting.Clear();
     }
 
-    /// <summary>Whether a grid has one tile left, or none.</summary>
-    private bool IsLastTile(EntityUid ship, MapGridComponent grid)
+    /// <summary>Whether a grid has one tile left, or none, not counting tiles waiting to lift.</summary>
+    private bool IsLastTile(WFDrydockJobComponent job, MapGridComponent grid)
     {
-        var tiles = _map.GetAllTilesEnumerator(ship, grid);
+        var tiles = _map.GetAllTilesEnumerator(job.Ship, grid);
         var count = 0;
-        while (count < 2 && tiles.MoveNext(out _))
+        while (count < 2 && tiles.MoveNext(out var tile))
         {
-            count++;
+            if (!job.Lifting.Contains(tile.Value.GridIndices))
+                count++;
         }
 
         return count <= 1;
-    }
-
-    /// <summary>
-    /// Adds a lifted tile's yield to the job and returns what it now owes: the yield so far, held to the caps of the
-    /// tiles lifted so far. Yield past them waits for later tiles, so a whole hull pays its full caps, and each part of
-    /// one broken in its own job pays only for its own tiles.
-    /// </summary>
-    private Dictionary<string, int> CreditBreak(EntityUid ship, WFDrydockJobComponent job,
-        WFDrydockMaterialPaymentComponent? pay, Dictionary<string, int> yield)
-    {
-        EnsureComp<WFHulkComponent>(ship).LastWork = _timing.CurTime;
-        job.Lifted++;
-        AddBill(job.Recovered, yield);
-
-        var caps = pay != null ? BreakCaps(pay, job.Lifted) : new Dictionary<string, int>();
-        var credit = new Dictionary<string, int>();
-        foreach (var (id, recovered) in job.Recovered)
-        {
-            var owed = caps.TryGetValue(id, out var cap) ? Math.Min(recovered, cap) : recovered;
-            var take = owed - job.Yield.GetValueOrDefault(id);
-            if (take > 0)
-                credit[id] = take;
-        }
-
-        return credit;
     }
 
     /// <summary>Puts materials in a crane's silo or its own storage, or drops them as sheets at it when neither takes them.</summary>
@@ -541,6 +729,10 @@ public sealed partial class WFDrydockSystem
         {
             foreach (var part in container.ContainedEntities.ToList())
             {
+                // Sheets are paid in the yield.
+                if (HasComp<MaterialComponent>(part))
+                    continue;
+
                 if (_container.Remove(part, container, destination: drop) && crane.Valid)
                     _fabricationSilo.ReturnPart(crane, part);
             }
@@ -577,7 +769,9 @@ public sealed partial class WFDrydockSystem
     /// <summary>Ends a break and reports what the cranes recovered.</summary>
     private void EndBreak(EntityUid console, WFDrydockConsoleComponent comp, WFDrydockJobComponent job, JobEnd end)
     {
-        var yield = job.Yield.Count == 0 ? Loc.GetString("drydock-console-materials-none") : FormatMaterials(job.Yield);
+        var yield = HasComp<WFDrydockChopShopComponent>(console)
+            ? Loc.GetString("drydock-chop-yield", ("cash", job.CashPaid))
+            : job.Yield.Count == 0 ? Loc.GetString("drydock-console-materials-none") : FormatMaterials(job.Yield);
         var message = end switch
         {
             JobEnd.Finished when job.HullGone || job.Skipped == 0 =>

@@ -76,8 +76,51 @@ public sealed partial class WFShipAccessServerSystem
     /// <summary>Sets a door's rule. Sealing bolts and closes it; leaving Sealed unbolts it. False when nothing changed.</summary>
     public bool SetDoorRule(Entity<WFShipAccessComponent> ship, EntityUid door, WFDoorAccessRule rule)
     {
-        var comp = EnsureComp<WFDoorAccessRuleComponent>(door);
-        var old = comp.Rule;
+        if (!ApplyDoorRule(door, rule, out var old))
+            return false;
+
+        RefreshReader(door);
+        _adminLog.Add(LogType.Action, LogImpact.Low,
+            $"Door {ToPrettyString(door):door} on {ToPrettyString(ship.Owner):grid} was set to rule {rule} (was {old})");
+        return true;
+    }
+
+    /// <summary>Sets every door on the ship to one rule, as the console's set-all control does, and returns how many changed.</summary>
+    public int SetAllDoorRules(Entity<WFShipAccessComponent> ship, WFDoorAccessRule rule)
+    {
+        var changed = 0;
+        var children = Transform(ship.Owner).ChildEnumerator;
+        while (children.MoveNext(out var child))
+        {
+            if (IsRuledDoor(child) && ApplyDoorRule(child, rule, out _))
+                changed++;
+        }
+
+        if (changed == 0)
+            return 0;
+
+        RefreshShip(ship);
+        _adminLog.Add(LogType.Action, LogImpact.Low,
+            $"Every door on {ToPrettyString(ship.Owner):grid} was set to rule {rule} ({changed} changed)");
+        return changed;
+    }
+
+    /// <summary>Writes a door's rule and its bolts, leaving the reader to the caller. False when nothing changed.</summary>
+    private bool ApplyDoorRule(EntityUid door, WFDoorAccessRule rule, out WFDoorAccessRule old)
+    {
+        old = WFDoorAccessRule.Default;
+        if (!Enum.IsDefined(rule))
+            return false;
+        if (!TryComp<WFDoorAccessRuleComponent>(door, out var comp))
+        {
+            // A door without the component already follows the ship.
+            if (rule == WFDoorAccessRule.Default)
+                return false;
+
+            comp = AddComp<WFDoorAccessRuleComponent>(door);
+        }
+
+        old = comp.Rule;
         if (old == rule)
             return false;
 
@@ -89,9 +132,6 @@ public sealed partial class WFShipAccessServerSystem
         else if (old == WFDoorAccessRule.Sealed)
             Unseal((door, comp));
 
-        RefreshReader(door);
-        _adminLog.Add(LogType.Action, LogImpact.Low,
-            $"Door {ToPrettyString(door):door} on {ToPrettyString(ship.Owner):grid} was set to rule {rule} (was {old})");
         return true;
     }
 
@@ -235,10 +275,40 @@ public sealed partial class WFShipAccessServerSystem
         if (!TryGetEditableShip(console, args.Actor, out var ship) || !TryGetShipDoor(console, ship, args.Door, args.Actor, out var door))
             return;
 
+        if (args.Rule == WFDoorAccessRule.Crew && !TryLinkCrew(ship, args.Actor))
+        {
+            Popup(console, args.Actor, "ship-access-no-crew");
+            return;
+        }
+        if (args.Rule == WFDoorAccessRule.Company && !TryLinkCompany(ship, args.Actor))
+        {
+            Popup(console, args.Actor, "ship-access-no-company");
+            return;
+        }
+
         // Sealing an open or unpowered door is deferred, so say so rather than leave the owner guessing.
         if (SetDoorRule(ship, door, args.Rule) && args.Rule == WFDoorAccessRule.Sealed
             && (!_door.IsBolted(door) || Comp<WFDoorAccessRuleComponent>(door).SealPending))
             Popup(console, args.Actor, "ship-access-seal-pending");
+    }
+
+    private void OnSetAllDoorRules(Entity<ShuttleConsoleComponent> console, ref WFShipAccessSetAllDoorRulesMessage args)
+    {
+        if (!TryGetEditableShip(console, args.Actor, out var ship))
+            return;
+
+        if (args.Rule == WFDoorAccessRule.Crew && !TryLinkCrew(ship, args.Actor))
+        {
+            Popup(console, args.Actor, "ship-access-no-crew");
+            return;
+        }
+        if (args.Rule == WFDoorAccessRule.Company && !TryLinkCompany(ship, args.Actor))
+        {
+            Popup(console, args.Actor, "ship-access-no-company");
+            return;
+        }
+        var changed = SetAllDoorRules(ship, args.Rule);
+        _popup.PopupEntity(Loc.GetString("ship-access-all-doors-set", ("count", changed)), console.Owner, args.Actor);
     }
 
     private void OnSetDoorPlayer(Entity<ShuttleConsoleComponent> console, ref WFShipAccessSetDoorPlayerMessage args)
@@ -250,7 +320,7 @@ public sealed partial class WFShipAccessServerSystem
     /// <summary>Resolves a console message's door and checks it is a door on the console's own grid. Firelocks take no rule.</summary>
     private bool TryGetShipDoor(Entity<ShuttleConsoleComponent> console, Entity<WFShipAccessComponent> ship, NetEntity netDoor, EntityUid actor, out EntityUid door)
     {
-        if (TryGetEntity(netDoor, out var uid) && HasComp<DoorComponent>(uid) && !HasComp<FirelockComponent>(uid) && Transform(uid.Value).GridUid == ship.Owner)
+        if (TryGetEntity(netDoor, out var uid) && IsRuledDoor(uid.Value) && Transform(uid.Value).GridUid == ship.Owner)
         {
             door = uid.Value;
             return true;

@@ -269,7 +269,7 @@ public sealed partial class CriminalRecordsConsoleWindow : FancyWindow
         // Job icon
         if (_proto.TryIndex<JobIconPrototype>(stationRecord.JobIcon, out var proto))
         {
-            PersonJobIcon.Texture = _spriteSystem.Frame0(proto.Icon);
+            PersonJobIcon.Texture = Content.Client._WF.Companies.WFCompanyRankIcons.Or(stationRecord.WFCompanyRank, _spriteSystem.Frame0(proto.Icon)); // WOLFGATE(Companies): rank icon
         }
 
         PersonPrints.Text = stationRecord.Fingerprint ??  Loc.GetString("generic-not-available-shorthand");

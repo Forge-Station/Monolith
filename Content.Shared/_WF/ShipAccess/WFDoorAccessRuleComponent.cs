@@ -5,7 +5,7 @@ namespace Content.Shared._WF.ShipAccess;
 
 /// <summary>
 /// A door's own access rule, overriding the ship-wide one; the server writes it into the door's airlock access
-/// reader. Serialises with the grid. Doors only; lockers keep the ship rule. Codes never live here:
+/// reader. Serialises with the grid. Doors only; lockers and lockable buttons keep the ship rule. Codes never live here:
 /// <see cref="HasOwnCode"/> only says the server holds one.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
@@ -39,7 +39,7 @@ public sealed partial class WFDoorAccessRuleComponent : Component
     public bool SealPending;
 }
 
-/// <summary>The seven per-door rules from the design table. Every rule but Default applies whether or not the ship is locked.</summary>
+/// <summary>The per-door access rules. Every rule but Default applies whether or not the ship is locked.</summary>
 [Serializable, NetSerializable]
 public enum WFDoorAccessRule : byte
 {
@@ -63,4 +63,10 @@ public enum WFDoorAccessRule : byte
 
     /// <summary>Nobody, bolted shut; the deed holder unseals it from the console.</summary>
     Sealed,
+
+    /// <summary>The owner and current members of the linked crew, regardless of ship mode.</summary>
+    Crew,
+
+    /// <summary>The owner and members of the linked company, regardless of ship mode.</summary>
+    Company,
 }

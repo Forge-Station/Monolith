@@ -12,16 +12,36 @@ public sealed partial class WFShipAccessServerSystem
     {
         Subs.BuiEvents<ShuttleConsoleComponent>(ShuttleConsoleUiKey.Key, subs =>
         {
+            subs.Event<WFShipAccessSetModeMessage>(OnSetMode);
             subs.Event<WFShipAccessSetLockedMessage>(OnSetLocked);
             subs.Event<WFShipAccessAddPlayerMessage>(OnAddPlayer);
             subs.Event<WFShipAccessRemoveMessage>(OnRemove);
             subs.Event<WFShipAccessSetBuilderMessage>(OnSetBuilder);
             subs.Event<WFShipAccessSetDoorRuleMessage>(OnSetDoorRule);
+            subs.Event<WFShipAccessSetAllDoorRulesMessage>(OnSetAllDoorRules);
             subs.Event<WFShipAccessSetDoorPlayerMessage>(OnSetDoorPlayer);
             subs.Event<WFShipAccessRequestCodesMessage>(OnRequestCodes);
             subs.Event<WFShipAccessSetShipCodeMessage>(OnSetShipCode);
             subs.Event<WFShipAccessSetDoorCodeMessage>(OnSetDoorCode);
         });
+    }
+
+    private void OnSetMode(Entity<ShuttleConsoleComponent> console, ref WFShipAccessSetModeMessage args)
+    {
+        if (!TryGetEditableShip(console, args.Actor, out var ship))
+            return;
+        if (args.Mode == WFShipAccessMode.Crew && !TryLinkCrew(ship, args.Actor))
+        {
+            Popup(console, args.Actor, "ship-access-no-crew");
+            return;
+        }
+        if (args.Mode == WFShipAccessMode.Company && !TryLinkCompany(ship, args.Actor))
+        {
+            Popup(console, args.Actor, "ship-access-no-company");
+            return;
+        }
+        if (!SetMode(ship, args.Mode))
+            Popup(console, args.Actor, "ship-access-mode-unavailable");
     }
 
     private void OnSetLocked(Entity<ShuttleConsoleComponent> console, ref WFShipAccessSetLockedMessage args)
@@ -56,6 +76,13 @@ public sealed partial class WFShipAccessServerSystem
         if (!TryGetEditableShip(console, actor, out var ship) || !TryGetEntity(args.Target, out var target))
             return;
 
+        // An ID card in the owner's own hands is added as it is; its owner need not be there.
+        if (_access.TryGetHeldCard(actor, target.Value, out var held))
+        {
+            AddHeldCard(console, actor, ship, held);
+            return;
+        }
+
         if (!_transform.InRange(Transform(console.Owner).Coordinates, Transform(target.Value).Coordinates, WFShipAccessSystem.AddRange))
         {
             Popup(console, actor, "ship-access-add-out-of-range");
@@ -81,6 +108,24 @@ public sealed partial class WFShipAccessServerSystem
         }
 
         _popup.PopupEntity(Loc.GetString("ship-access-added", ("name", Name(target.Value))), console.Owner, actor);
+    }
+
+    private void AddHeldCard(Entity<ShuttleConsoleComponent> console, EntityUid actor, Entity<WFShipAccessComponent> ship, EntityUid card)
+    {
+        if (!_access.TryGetKey(card, out _))
+        {
+            Popup(console, actor, "ship-access-add-card-no-record");
+            return;
+        }
+
+        var name = _access.CardHolderName(card);
+        if (!TryAddCard(ship, card, name))
+        {
+            Popup(console, actor, "ship-access-add-already");
+            return;
+        }
+
+        _popup.PopupEntity(Loc.GetString("ship-access-added", ("name", name)), console.Owner, actor);
     }
 
     /// <summary>

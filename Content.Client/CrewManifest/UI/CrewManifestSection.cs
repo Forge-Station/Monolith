@@ -57,7 +57,7 @@ public sealed class CrewManifestSection : BoxContainer
                 {
                     TextureScale = new Vector2(2, 2),
                     VerticalAlignment = VAlignment.Center,
-                    Texture = spriteSystem.Frame0(jobIcon.Icon),
+                    Texture = Content.Client._WF.Companies.WFCompanyRankIcons.Or(entry.WFCompanyRank, spriteSystem.Frame0(jobIcon.Icon)), // WOLFGATE(Companies): rank icon
                     Margin = new Thickness(0, 0, 4, 0)
                 };
 

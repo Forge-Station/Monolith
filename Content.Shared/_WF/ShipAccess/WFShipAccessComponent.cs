@@ -41,17 +41,49 @@ public sealed partial class WFShipAccessComponent : Component
     [ViewVariables, AutoNetworkedField]
     public List<NetUserId> OwnerUsers = new();
 
+    /// <summary>
+    /// The owner record keys the readers were last written with, so an ID card carrying one edits the ship's access
+    /// like the deed holder. Written by the server; round state.
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public List<WFShipAccessKey> OwnerKeys = new();
+
+    /// <summary>The linked scenario crew; round-scoped and server-only.</summary>
+    [ViewVariables]
+    public int? CrewId;
+
+    /// <summary>The linked crew's display name, independent of its access mode.</summary>
+    [ViewVariables, AutoNetworkedField]
+    public string? CrewName;
+
+    /// <summary>Issued ID cards of current crew members, separate from deliberately invited guests.</summary>
+    [ViewVariables, AutoNetworkedField]
+    public List<WFShipAccessKey> CrewKeys = new();
+
     /// <summary>The old "lock ship" toggle. While set, every door and locker reader on the grid admits only the keys above.</summary>
     [DataField, AutoNetworkedField]
     public bool Locked;
+
+    /// <summary>The player company linked for Company access.</summary>
+    [ViewVariables]
+    public int? CompanyId;
+
+    [ViewVariables, AutoNetworkedField]
+    public string? CompanyName;
+
+    /// <summary>Issued IDs of the linked company's members playing this round.</summary>
+    [ViewVariables, AutoNetworkedField]
+    public List<WFShipAccessKey> CompanyKeys = new();
 }
 
-/// <summary>Private admits the deed and the allow list; Faction also admits the ship company's access level.</summary>
+/// <summary>Private admits owners and guests; Faction adds company access, and Crew adds current crew cards.</summary>
 [Serializable, NetSerializable]
 public enum WFShipAccessMode : byte
 {
     Private,
     Faction,
+    Crew,
+    Company,
 }
 
 /// <summary>A crew record key as the ship access lists hold it: the record's station and id, as written on an ID card.</summary>

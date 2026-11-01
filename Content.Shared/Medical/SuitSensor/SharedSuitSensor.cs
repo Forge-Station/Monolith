@@ -29,6 +29,7 @@ public sealed class SuitSensorStatus
     public float? DamagePercentage => TotalDamageThreshold == null || TotalDamage == null ? null : TotalDamage / (float) TotalDamageThreshold;
     public NetCoordinates? Coordinates;
 	public string LocationName;
+    public int WFCompanyRank; // WOLFGATE(Companies): rank whose custom icon replaces JobIcon
 }
 
 [Serializable, NetSerializable]
@@ -60,6 +61,7 @@ public static class SuitSensorConstants
     public const string NET_NAME = "name";
     public const string NET_JOB = "job";
     public const string NET_JOB_ICON = "jobIcon";
+    public const string NET_WF_COMPANY_RANK = "wfCompanyRank"; // WOLFGATE(Companies)
     public const string NET_JOB_DEPARTMENTS = "jobDepartments";
     public const string NET_IS_ALIVE = "alive";
     public const string NET_TOTAL_DAMAGE = "vitals";

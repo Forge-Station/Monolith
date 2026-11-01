@@ -47,6 +47,7 @@ public sealed partial class WFEncounterBountySystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private BountyContractSystem _board = default!;
     [Dependency] private BankSystem _bank = default!;
+    [Dependency] private Content.Server._WF.Companies.WFCompanySystem _companies = default!;
     [Dependency] private WFEncounterSystem _encounters = default!;
     [Dependency] private WFCrewSystem _crew = default!;
     [Dependency] private MobStateSystem _mobs = default!;
@@ -377,6 +378,16 @@ public sealed partial class WFEncounterBountySystem : EntitySystem
     }
 
     private bool Deposit(ICommonSession session, int amount)
+    {
+        // A member's company takes its cut of the bounty once the rest is paid.
+        var cut = _companies.CutFor(session, amount);
+        if (!DepositAll(session, amount - cut))
+            return false;
+        _companies.PayCut(session, cut, "bounty");
+        return true;
+    }
+
+    private bool DepositAll(ICommonSession session, int amount)
     {
         if (session.AttachedEntity is { } mob && HasComp<BankAccountComponent>(mob))
             return _bank.TryBankDeposit(mob, amount, false);

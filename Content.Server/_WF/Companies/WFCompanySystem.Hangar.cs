@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Content.Server.Cargo.Systems;
 using Content.Server.Database;
 using Content.Server._WF.RoundSetup;
-using Content.Shared.Mobs.Components;
 using Content.Shared._NF.Shipyard.Prototypes;
 using Content.Shared._WF.Companies;
 using Content.Shared._WF.RoundSetup;
@@ -46,10 +45,6 @@ public sealed partial class WFCompanySystem
             var children = Transform(parent).ChildEnumerator;
             while (children.MoveNext(out var child))
             {
-                // Whoever is aboard already, and what they carry, stay their own.
-                if (HasComp<MobStateComponent>(child))
-                    continue;
-
                 EnsureComp<WFCompanyPropertyComponent>(child).CompanyId = companyId;
                 pending.Push(child);
             }

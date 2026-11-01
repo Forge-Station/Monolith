@@ -36,6 +36,11 @@ public sealed partial record GeneralStationRecord
     [DataField]
     public string JobPrototype = string.Empty;
 
+    // WOLFGATE(Companies) START: the holder's company rank, whose custom job icon screens show instead of JobIcon
+    [DataField]
+    public int WFCompanyRank;
+    // WOLFGATE END
+
     /// <summary>
     ///     Species tied to this station record.
     /// </summary>

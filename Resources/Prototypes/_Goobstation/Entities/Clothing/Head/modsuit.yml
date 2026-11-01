@@ -66,7 +66,6 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2
-
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -87,7 +86,16 @@
     - Snout
     - HeadTop
     - HeadSide
-
+  - type: ComponentToggler
+    components:
+    - type: BreathMask
+    - type: PressureProtection
+      highPressureMultiplier: 0.3
+      lowPressureMultiplier: 1000
+    - type: TemperatureProtection
+      heatingCoefficient: 0.01
+      coolingCoefficient: 0.01
+  
 - type: entity
   parent: BaseClothingModsuitHelmet
   id: ClothingModsuitHelmetStandard
@@ -146,7 +154,7 @@
         isLooped: true
 
 - type: entity
-  parent: [BaseClothingModsuitHelmet, ClothingNightVision2Normal, ShowSecurityIcons] # Forge-change add ClothingNightVision
+  parent: [BaseClothingModsuitHelmetHideIdentity, ClothingNightVision2Normal, ShowSecurityIcons] # Forge-change add ClothingNightVision
   id: ClothingModsuitHelmetSecurity
   name: soldat modsuit helmet
   description: A robust brain bucket for holding your brain in place just enough for it to be salvageable.
@@ -209,7 +217,7 @@
         isLooped: true
 
 - type: entity
-  parent: [BaseClothingModsuitHelmet, ClothingNightVision2Normal, ShowSecurityIcons] # Forge-change add ClothingNightVision
+  parent: [BaseClothingModsuitHelmetHideIdentity, ClothingNightVision2Normal, ShowSecurityIcons] # Forge-change add ClothingNightVision
   id: ClothingModsuitHelmetHeadOfSecurity
   name: bulwark modsuit helmet
   description: Put on the HEAD of security.. How do you see out of this thing?
@@ -322,7 +330,7 @@
         isLooped: true
 
 - type: entity
-  parent: BaseClothingModsuitHelmet
+  parent: BaseClothingModsuitHelmetHideIdentity
   id: ClothingModsuitHelmetEngineer
   name: sapper modsuit helmet
   description: A flat plate with cameras allowing your vision. turns you into an aero-cuck, but not like that matters in space.
@@ -435,7 +443,7 @@
         isLooped: true
 
 - type: entity
-  parent: BaseClothingModsuitHelmet
+  parent: BaseClothingModsuitHelmetHideIdentity
   id: ClothingModsuitHelmetResearchDirector
   name: minerva modsuit helmet
   description: A dark dark dark visor protecting your precious face from shrap and blast.

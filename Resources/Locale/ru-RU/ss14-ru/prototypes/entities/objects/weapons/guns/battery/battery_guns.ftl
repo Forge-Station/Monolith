@@ -94,6 +94,11 @@ ent-WeaponPistolCHIMPUpgraded = { ent-ForgeWeaponPistolCHIMPUpgraded }
     .desc = { ent-ForgeWeaponPistolCHIMPUpgraded.desc }
 ent-WeaponEnergyShotgun = { ent-ForgeWeaponEnergyShotgun }
     .desc = { ent-ForgeWeaponEnergyShotgun.desc }
-
 ent-WeaponParticleDecelerator = портативный замедлитель частиц
     .desc = Портативный замедлитель частиц, способный рассеять теслу или сингулярность. На рукоятке наклейка: «Только для уполномоченного персонала».
+ent-WeaponLaserGunXenoborg = лазерная винтовка ксеноборга
+    .desc = Экспериментальный гражданский высокоэнергетический лазерный пистолет с самозаряжающейся ядерной батареей.
+ent-WeaponLaserCannonXenoborg = лазерная пушка ксеноборга
+    .desc = Мощное лазерное оружие для тяжёлых условий эксплуатации. На рукоятке наклейка: «Только для уполномоченного персонала».
+ent-WeaponLaserGun = ретро-лазерный бластер
+    .desc = Гражданское оружие, использующее свет, усиленный вынужденным излучением.

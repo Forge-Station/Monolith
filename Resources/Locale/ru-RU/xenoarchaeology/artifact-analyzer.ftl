@@ -38,3 +38,20 @@ analysis-console-extract-value = [font="Monospace" size=11][color=orange]Узе�
 analysis-console-extract-none = [font="Monospace" size=11][color=orange] У разблокированых узлов не осталось очков для извлечения [/color][/font]
 analysis-console-extract-sum = [font="Monospace" size=11][color=orange]Всего изучено: { $value }[/color][/font]
 analyzer-artifact-extract-popup = Поверхность артефакта мерцает энергией!
+
+analysis-console-scan-button = Сканировать
+analysis-console-scan-tooltip-info = Сканирует артефакт, чтобы получить сведения о его структуре.
+analysis-console-print-button = Печать
+analysis-console-print-tooltip-info = Печатает отчёт с текущими данными об артефакте.
+analysis-console-extract-button-info = Извлекает очки из артефакта за вновь изученные узлы.
+analysis-console-bias-up = Вверх
+analysis-console-bias-down = Вниз
+analysis-console-bias-button-info-up = Направляет переходы между узлами артефакта к нулевой глубине.
+analysis-console-bias-button-info-down = Направляет переходы между узлами артефакта к большей глубине.
+analysis-console-no-server-connected = Невозможно извлечь очки: сервер не подключён.
+analysis-console-no-artifact-placed = На сканере нет артефакта.
+analysis-console-no-points-to-extract = Нет очков для извлечения.
+analyzer-artifact-component-upgrade-analysis = длительность анализа
+analysis-console-print-popup = Консоль напечатала отчёт.
+analysis-report-title = Отчёт об артефакте: узел {$id}
+artifact-analyzer-upgrade-duration = Время сканирования

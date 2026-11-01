@@ -8,6 +8,7 @@ ent-GasMiningDrillMachineCircuitboard = буровая установка для
     .desc = Печатная плата буровой установки для добычи газа.
 ent-NfsdTechFabCircuitboard = техфаб ТСФ (машинная плата)
     .desc = Печатная плата техфабрикатора ТСФ.
+    .suffix = Машинная плата
 ent-GaslockFrameMachineCircuitboard = переносной газовый шлюз (машинная плата)
     .desc = Печатная плата переносного газового шлюза.
 ent-ThrusterSecurityMachineCircuitboard = двигатель ТСФ (машинная плата)

@@ -54,11 +54,12 @@ ent-AiHeldSec = модуль ИИ охраны
 ent-PlayerXenoBorg = { ent-BorgChassisSelectableXenoborg }
     .suffix = Роль призрака, Ксеноборг, Батарея, Модуль
     .desc = { ent-BorgChassisSelectableXenoborg.desc }
-
 ent-PlayerXenoBorgGhostRole = { ent-PlayerXenoBorg }
     .suffix = Роль призрака
     .desc = { ent-PlayerXenoBorg.desc }
-
 ent-PlayerXenoBorgGhostRolePlaytime = { ent-PlayerXenoBorg }
     .suffix = Роль призрака, Требуется игровое время
     .desc = { ent-PlayerXenoBorg.desc }
+ent-MothershipCore = { ent-PlayerStationXenoborgAiEmpty }
+    .desc = { ent-PlayerStationXenoborgAiEmpty.desc }
+    .suffix = Роль призрака, Ксеноборги

@@ -74,3 +74,7 @@ ent-PlayerBorgDerelict = { ent-BorgChassisDerelict }
     .desc = { ent-BorgChassisDerelict.desc }
 ent-PlayerBorgDerelictGhostRole = { ent-PlayerBorgDerelict }
     .desc = { ent-PlayerBorgDerelict.desc }
+ent-XenoborgCircuitBoard = плата законов ксеноборгов
+    .desc = Электронная плата, содержащая набор законов ксеноборгов.
+ent-PDVCircuitBoard = плата законов ПДВ
+    .desc = Электронная плата, содержащая набор законов ПДВ.

@@ -14,3 +14,5 @@ ent-PDVDenasvarIDCard = ID-карта Денасвара ФДА
 ent-PDVAsvaranIDCard = ID-карта асварана ФДА
 ent-PDVGrandVizierIDCard = ID-карта великого визиря ФДА
 ent-PDVSpasakaIDCard = хамелеон
+ent-PDVTarkhanIDCard = ID-карта тархана ПДВ
+    .desc = { ent-PirateIDCard.desc }

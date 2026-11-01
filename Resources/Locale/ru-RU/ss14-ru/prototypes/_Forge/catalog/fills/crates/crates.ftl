@@ -49,7 +49,7 @@ ent-CrateEmpireMaterial = имперский ящик
 
 ent-CrateMaterialsAdvancedFilled = { ent-CrateGenericSteel }
     .desc = { ent-CrateGenericSteel.desc }
-    .suffix = Продвинутые материалы, Full
+    .suffix = Продвинутые материалы, Полный
 ent-CrateMaterialsSuperFilled = { ent-CrateGenericSteel }
     .desc = { ent-CrateGenericSteel.desc }
-    .suffix = Супер материалы, Full
+    .suffix = Суперматериалы, Полный

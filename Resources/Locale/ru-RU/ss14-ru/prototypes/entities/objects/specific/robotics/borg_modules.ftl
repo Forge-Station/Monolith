@@ -136,3 +136,5 @@ ent-BorgModuleAdvancedSurgery = продвинутый хирургически�
     .desc = { ent-BaseBorgModuleMedical.desc }
 ent-BorgModuleMercenary = модуль киборга-наёмника
     .desc = { ent-BaseBorgModule.desc }
+ent-BorgModuleSecurity = охранный модуль киборга
+    .desc = { ent-BaseBorgModule.desc }

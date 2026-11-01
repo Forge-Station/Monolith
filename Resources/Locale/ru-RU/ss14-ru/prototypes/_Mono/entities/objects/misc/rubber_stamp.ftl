@@ -6,3 +6,12 @@ ent-RubberStampTSFColonel = печать командующего офицера
     .desc = { ent-RubberStampBase.desc }
 ent-RubberStampTSFCaptain = офицерская печать ТСФ
     .desc = { ent-RubberStampBase.desc }
+
+ent-RubberStampPDVVizier = печать великого визиря ПДВ
+    .desc = { ent-RubberStampBase.desc }
+
+ent-RubberStampPDVAsvaran = печать асварана ПДВ
+    .desc = { ent-RubberStampBase.desc }
+
+ent-RubberStampPDVSpasaka = печать спасаки ПДВ
+    .desc = { ent-RubberStampBase.desc }

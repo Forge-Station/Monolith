@@ -13,10 +13,13 @@ ent-MarsocFTLPDA = TSFMC MARSOC fire team leader PDA
     .desc = { ent-TsfEngiPDA.desc }
 ent-MarsocPDA = КПК оперативника MARSOC ТСФ
     .desc = Стандартный персональный компьютер ТСФ.
-ent-BasePDVPDA = КПК ФДА
-    .desc = Базовый персональный компьютер для ограничения доступа и организации, произведённый в династии Фаэтон.
+ent-BasePDVPDA = КПК ПДВ
+    .desc = Базовый персональный компьютер для организации работы и управления доступом, произведённый в династии Фаэтон.
 ent-PDVRakhshanPDA = КПК рахшана ФДА
 ent-PDVGrandVizierPDA = КПК великого визиря ФДА
 ent-PDVAsvaranPDA = КПК асварана ФДА
 ent-PDVSpasakaPDA = КПК спасаки ФДА
 ent-PDVDenasvarPDA = КПК Денасвара ФДА
+
+ent-PDVTarkhanPDA = КПК тархана ПДВ
+    .desc = { ent-BasePDVPDA.desc }

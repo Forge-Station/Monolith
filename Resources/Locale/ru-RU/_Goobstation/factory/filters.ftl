@@ -1,7 +1,7 @@
 automation-filter-examine-empty = [color=red]Фильтр ещё не настроен.[/color]
 automation-filter-examine-string = Фильтр настроен на «{$name}».
 stack-filter-examine = Фильтр настроен на минимум [color=green]{$size}[/color] предметов в стопке.
-combined-filter-examine = Фильтр использует логическую операцию [color=green]{$gate}[/color] для сравнения входных сигналов.
+combined-filter-examine = Фильтр использует логическую операцию [color=green]{ logic-gate-operation-name }[/color] для сравнения входных сигналов.
 pressure-filter-examine = Фильтр настроен на давление от [color=green]{$min}[/color] до [color=green]{$max}[/color] кПа.
 label-filter-window-title = Настройка фильтра меток
 label-filter-placeholder = метка для сравнения

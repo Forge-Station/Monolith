@@ -197,6 +197,16 @@
         Piercing: 0.90
         Heat: 0.90
         Radiation: 0.5
+  - type: ComponentToggler
+    components:
+    - type: BreathMask
+    - type: EyeProtection
+    - type: PressureProtection
+      highPressureMultiplier: 0.3
+      lowPressureMultiplier: 1000
+    - type: TemperatureProtection
+      heatingCoefficient: 0.01
+      coolingCoefficient: 0.01
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: ToggleableVisuals
     spriteLayer: light

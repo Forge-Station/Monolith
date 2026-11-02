@@ -7235,8 +7235,32 @@ entities:
     - type: Transform
       parent: 1
       pos: 12.5,28.5
+      anchored: true
     missingComponents:
     - Anchorable
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Metallic
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 0
+    - type: Physics
+      bodyType: Static
+    - type: DisableToolUse
+      anchoring: true
+      prying: true
+      screwing: true
+      cutting: true
+      welding: true
+      pulsing: true
+      slicing: true
+      sawing: true
+      honking: true
+      rolling: true
+      digging: true
+
 - proto: BunkBottom
   entities:
   - uid: 864

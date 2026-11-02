@@ -14923,6 +14923,7 @@ entities:
     - type: Transform
       pos: 9.5,-4.5
       parent: 2
+      anchored: true
     - type: ThermalSignature
       storedHeat: 119999940
     - type: Battery
@@ -14937,8 +14938,6 @@ entities:
       - trigger:
           !type:DamageTrigger
           damage: 0
-    - type: Transform
-      anchored: true
     - type: Physics
       bodyType: Static
     - type: DisableToolUse

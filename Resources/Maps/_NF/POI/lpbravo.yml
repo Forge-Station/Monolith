@@ -17511,8 +17511,10 @@ entities:
     - type: Transform
       pos: 35.5,8.5
       parent: 1
+    # Forge-Change-Start
     missingComponents:
     - Anchorable
+    # Forge-Change-End
 - proto: Magazine556x45mmIncendiary
   entities:
   - uid: 1876

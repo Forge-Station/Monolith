@@ -55484,7 +55484,6 @@ entities:
     - type: Transform
       pos: 13.5,15.5
       parent: 1
-    - type: Transform
       anchored: true
     - type: Physics
       bodyType: Static

@@ -50388,7 +50388,7 @@ entities:
     - type: Transform
       pos: 3.5,-26.5
       parent: 1
-    - type: Transform
+      # Forge-Change-Start
       anchored: true
     - type: Physics
       bodyType: Static
@@ -50404,6 +50404,7 @@ entities:
       honking: true
       rolling: true
       digging: true
+      # Forge-Change-End
 - proto: ShipBattlemap
   entities:
   - uid: 7649

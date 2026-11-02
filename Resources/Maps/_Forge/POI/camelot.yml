@@ -55484,8 +55484,23 @@ entities:
     - type: Transform
       pos: 13.5,15.5
       parent: 1
-    missingComponents:
-    - Anchorable
+    - type: Transform
+      anchored: true
+    - type: Physics
+      bodyType: Static
+    - type: DisableToolUse
+      anchoring: true
+      prying: true
+      screwing: true
+      cutting: true
+      welding: true
+      pulsing: true
+      slicing: true
+      sawing: true
+      honking: true
+      rolling: true
+      digging: true
+
 - proto: ShuttersNormal
   entities:
   - uid: 8343

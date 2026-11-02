@@ -41,7 +41,7 @@ public sealed partial class ContractorEvacuationSystem : EntitySystem
     [Dependency] private MapLoaderSystem _mapLoader = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private RobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;

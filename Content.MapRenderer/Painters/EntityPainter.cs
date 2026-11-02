@@ -45,7 +45,7 @@ public sealed class EntityPainter
 
         foreach (var entity in entities)
         {
-            Run(canvas, entity, xformSystem, customOffset);
+            Run(canvas, entity, xformSystem);
         }
 
         Console.WriteLine($"{nameof(EntityPainter)} painted {entities.Count} entities in {(int)stopwatch.Elapsed.TotalMilliseconds} ms");
@@ -137,8 +137,8 @@ public sealed class EntityPainter
             coloredImage.Mutate(o => o.BackgroundColor(imageColor));
 
             var (imgX, imgY) = rsi?.Size ?? (EyeManager.PixelsPerMeter, EyeManager.PixelsPerMeter);
-            var offsetX = (int)(entity.Sprite.Offset.X + customOffset.X) * EyeManager.PixelsPerMeter;
-            var offsetY = (int)(entity.Sprite.Offset.Y + customOffset.X) * EyeManager.PixelsPerMeter;
+            var offsetX = (int)(entity.Sprite.Offset.X * EyeManager.PixelsPerMeter);
+            var offsetY = (int)(entity.Sprite.Offset.Y * EyeManager.PixelsPerMeter);
             image.Mutate(o => o
                 .DrawImage(coloredImage, PixelColorBlendingMode.Multiply, PixelAlphaCompositionMode.SrcAtop, 1)
                 .Resize(imgX, imgY)

@@ -12,11 +12,11 @@ using Content.Shared.Weapons.Melee.Events;
 namespace Content.Shared._Forge.Trade;
 
 
-public sealed class NcContractGhostRolePerksSystem : EntitySystem
+public sealed partial class NcContractGhostRolePerksSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
 
     public override void Initialize()
     {

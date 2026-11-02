@@ -31,7 +31,7 @@ public sealed partial class ContractsSystem : EntitySystem
 {
     [Dependency] private BankSystem _bank = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private IGameTiming _gameTiming = default!;;
+    [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private MindSystem _mindSystem = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private IPrototypeManager _proto = default!;

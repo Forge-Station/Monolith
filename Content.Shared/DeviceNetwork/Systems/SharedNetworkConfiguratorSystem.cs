@@ -7,9 +7,9 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.DeviceNetwork.Systems;
 
-public abstract class SharedNetworkConfiguratorSystem : EntitySystem
+public abstract partial class SharedNetworkConfiguratorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedToolSystem _toolSystem = default!;
+    [Dependency] private SharedToolSystem _toolSystem = default!;
 
     public override void Initialize()
     {

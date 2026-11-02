@@ -1,0 +1,37 @@
+- type: vessel
+  id: Hamit
+  parent: BaseVessel
+  name: RG-PIR Hamit
+  description: A multipurpose mercenary ship with an armament of 4 225mm cannons, 4 20mm PD guns, and 6 57mm autocannons. Lacks a bit in protection compared to proper military ships of this size.
+  price: 184600
+  category: Small
+  group: Shipyard
+  access: Pirate
+  purchasable: false
+  shuttlePath: /Maps/_Forge/Shuttles/Rodger/hamit.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  - Patrol
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: Hamit
+  mapName: 'RG-PIR Hamit'
+  mapPath: /Maps/_Forge/Shuttles/Rodger/hamit.yml
+  minPlayers: 0
+  stations:
+    Hamit:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'RG-PIR Hamit MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

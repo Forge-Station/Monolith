@@ -12,7 +12,7 @@ namespace Content.Client._Forge.ShipyardService.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ShipyardServiceGridWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private ShipyardServiceBoundUserInterfaceState _state = new();
 

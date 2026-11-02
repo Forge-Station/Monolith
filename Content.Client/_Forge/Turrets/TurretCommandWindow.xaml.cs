@@ -19,7 +19,7 @@ public sealed partial class TurretCommandWindow : FancyWindow
     public event Action<TurretDoctrine>? OnDoctrineSelected;
     public event Action? OnRefreshRequested;
 
-    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private IEntityManager _entities = default!;
 
     private readonly Color _stoodDown = Color.FromHex("#6e6e6e");
     private readonly Color _jammed = Color.FromHex("#d04040");

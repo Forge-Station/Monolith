@@ -6,10 +6,10 @@ using Robust.Shared.Network;
 
 namespace Content.Client._Forge.DiscordAuth;
 
-public sealed class DiscordAuthManager
+public sealed partial class DiscordAuthManager
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IStateManager _state = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private IStateManager _state = default!;
 
     public string AuthLink = default!;
     public string ErrorMessage = default!;

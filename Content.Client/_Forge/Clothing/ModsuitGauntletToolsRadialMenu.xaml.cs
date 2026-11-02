@@ -23,8 +23,8 @@ public sealed partial class ModsuitGauntletToolsRadialMenu : RadialMenu
         { ModsuitGauntletToolSlot.Piping, new SpriteSpecifier.Rsi(new ResPath("Forge/Objects/Tools/rpd.rsi"), "icon") },
     };
 
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     private SpriteSystem _sprites = default!;
 

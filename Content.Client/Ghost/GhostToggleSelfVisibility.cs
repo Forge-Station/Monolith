@@ -1,6 +1,7 @@
 ﻿using Content.Shared.Ghost;
 using Robust.Client.GameObjects;
 using Robust.Shared.Console;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Ghost;
 
@@ -25,6 +26,7 @@ public sealed partial class GhostToggleSelfVisibility : LocalizedEntityCommands
         if (!EntityManager.TryGetComponent(attachedEntity, out SpriteComponent? spriteComponent))
             return;
 
+        var entityManager = IoCManager.Resolve<IEntityManager>();
         var spriteSys = entityManager.System<SpriteSystem>();
         spriteSys.SetVisible((attachedEntity.Value, spriteComponent), !spriteComponent.Visible);
     }

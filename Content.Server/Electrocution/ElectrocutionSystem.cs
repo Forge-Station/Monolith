@@ -386,7 +386,7 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
             return false;
 
         if (!TryComp<StatusEffectsComponent>(uid, out var statusEffects) ||
-            !_statusEffects.CanApplyEffect(uid, StatusKeyIn, statusEffects))
+            !_statusEffects.CanApplyEffect(uid, StatusEffectKey, statusEffects))
         {
             return false;
         }

@@ -14,6 +14,7 @@ namespace Content.Client.DoAfter;
 
 public sealed class DoAfterOverlay : Overlay
 {
+    private static readonly ProtoId<ShaderPrototype> UnshadedShader = "unshaded";
     private readonly IEntityManager _entManager;
     private readonly IGameTiming _timing;
     private readonly IPlayerManager _player;
@@ -21,6 +22,7 @@ public sealed class DoAfterOverlay : Overlay
     private readonly MetaDataSystem _meta;
     private readonly ProgressColorSystem _progressColor;
     private readonly SharedContainerSystem _container;
+    private readonly SpriteSystem _sprite = default;
 
     private readonly Texture _barTexture;
     private readonly ShaderInstance _unshadedShader;
@@ -57,7 +59,7 @@ public sealed class DoAfterOverlay : Overlay
         var sprite = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/progress_bar.rsi"), "icon");
         _barTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
 
-        _unshadedShader = protoManager.Index<ShaderPrototype>("unshaded").Instance();
+        _unshadedShader = protoManager.Index(UnshadedShader).Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)

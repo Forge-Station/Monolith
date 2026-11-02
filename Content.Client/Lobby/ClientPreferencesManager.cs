@@ -20,7 +20,7 @@ namespace Content.Client.Lobby
     public sealed partial class ClientPreferencesManager : IClientPreferencesManager
     {
         [Dependency] private IClientNetManager _netManager = default!;
-        [Dependency] private BaseClient _baseClient = default!;
+        [Dependency] private IBaseClient _baseClient = default!;
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IConfigurationManager _cfg = default!; // Forge-Change
         [Dependency] private Players.PlayTimeTracking.JobRequirementsManager _jobRequirements = default!; // Forge-Change

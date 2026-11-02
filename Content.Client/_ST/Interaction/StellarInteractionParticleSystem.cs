@@ -5,6 +5,7 @@
 using System.Numerics;
 using Content.Client._Moffstation.Interaction;
 using Content.Shared._ST.Interaction;
+using Content.Shared._Starlight.CCVar;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;

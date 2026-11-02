@@ -3,9 +3,6 @@ using Robust.Shared.Configuration;
 namespace Content.Shared._Starlight.CCVar;
 public sealed partial class StarlightCCVars
 {
-    public static readonly CVarDef<bool> TracesEnabled =
-        CVarDef.Create("opt.traces_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
-
     /// <summary>
     /// Controls which interaction particles are displayed.
     /// </summary>

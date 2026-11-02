@@ -168,17 +168,6 @@
     Plastic: 500
 
 - type: latheRecipe
-  id: WeaponTurretCCPacked
-  result: WeaponTurretCCPacked
-  categories:
-  - Turrets
-  completetime: 10
-  materials:
-    Steel: 2000
-    Glass: 500
-    Plastic: 500
-
-- type: latheRecipe
   id: WeaponTurretTSFMCPacked
   result: WeaponTurretTSFMCPacked
   categories:
@@ -280,39 +269,6 @@
 - type: latheRecipe
   id: WeaponTurretTSFMachinegunPacked
   result: WeaponTurretTSFMachinegunPacked
-  categories:
-  - Turrets
-  completetime: 10
-  materials:
-    Steel: 2000
-    Glass: 500
-    Plastic: 500
-
-- type: latheRecipe
-  id: WeaponTurretCCShotgunPacked
-  result: WeaponTurretCCShotgunPacked
-  categories:
-  - Turrets
-  completetime: 10
-  materials:
-    Steel: 2000
-    Glass: 500
-    Plastic: 500
-
-- type: latheRecipe
-  id: WeaponTurretCCSniperPacked
-  result: WeaponTurretCCSniperPacked
-  categories:
-  - Turrets
-  completetime: 10
-  materials:
-    Steel: 2000
-    Glass: 500
-    Plastic: 500
-
-- type: latheRecipe
-  id: WeaponTurretCCMachinegunPacked
-  result: WeaponTurretCCMachinegunPacked
   categories:
   - Turrets
   completetime: 10

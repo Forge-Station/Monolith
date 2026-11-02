@@ -66,22 +66,6 @@
   - WeaponTurretNTMachinegunPacked
 
 - type: technology
-  id: ForgeTurretCC
-  name: research-technology-forge-turret-cc
-  entityIcon: WeaponTurretCCPacked
-  discipline: FactionUniversal
-  tier: 2
-  cost: 15000
-  position: 12, 2
-  technologyPrerequisites:
-  - ForgeTurretCommand
-  recipeUnlocks:
-  - WeaponTurretCCPacked
-  - WeaponTurretCCShotgunPacked
-  - WeaponTurretCCSniperPacked
-  - WeaponTurretCCMachinegunPacked
-
-- type: technology
   id: ForgeTurretEmpire
   name: research-technology-forge-turret-empire
   entityIcon: WeaponTurretEmpirePacked

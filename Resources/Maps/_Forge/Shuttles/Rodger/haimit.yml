@@ -2382,8 +2382,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 2
-      configurators:
-      - invalid
 - proto: GasMixerOn
   entities:
   - uid: 291
@@ -2538,8 +2536,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 2
-      configurators:
-      - invalid
   - uid: 308
     components:
     - type: Transform
@@ -2551,8 +2547,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 2
-      configurators:
-      - invalid
 - proto: GasVentScrubber
   entities:
   - uid: 309
@@ -2566,8 +2560,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 2
-      configurators:
-      - invalid
     - type: AtmosPipeLayers
       pipeLayer: Secondary
   - uid: 310
@@ -2581,8 +2573,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 2
-      configurators:
-      - invalid
     - type: AtmosPipeLayers
       pipeLayer: Secondary
 - proto: GeneratorCRPinchShuttle

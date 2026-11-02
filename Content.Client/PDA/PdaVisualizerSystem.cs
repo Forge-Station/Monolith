@@ -4,9 +4,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.PDA;
 
-public sealed class PdaVisualizerSystem : VisualizerSystem<PdaVisualsComponent>
+public sealed partial class PdaVisualizerSystem : VisualizerSystem<PdaVisualsComponent>
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
     protected override void OnAppearanceChange(EntityUid uid, PdaVisualsComponent comp, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)

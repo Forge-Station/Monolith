@@ -4,9 +4,9 @@ using Content.Shared.DeviceLinking;
 
 namespace Content.Server._Forge.Features;
 
-public sealed class DeviceLinkOnTriggerSystem : EntitySystem
+public sealed partial class DeviceLinkOnTriggerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
+    [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
 
     public override void Initialize()
     {

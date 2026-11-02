@@ -5,11 +5,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.Genetics.Mutations;
 
-public sealed class GeneticRegenSystem : EntitySystem
+public sealed partial class GeneticRegenSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {

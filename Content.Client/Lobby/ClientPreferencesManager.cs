@@ -19,11 +19,11 @@ namespace Content.Client.Lobby
     /// </summary>
     public sealed partial class ClientPreferencesManager : IClientPreferencesManager
     {
-        [Dependency] private readonly IClientNetManager _netManager = default!;
-        [Dependency] private readonly IBaseClient _baseClient = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!; // Forge-Change
-        [Dependency] private readonly Players.PlayTimeTracking.JobRequirementsManager _jobRequirements = default!; // Forge-Change
+        [Dependency] private IClientNetManager _netManager = default!;
+        [Dependency] private BaseClient _baseClient = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IConfigurationManager _cfg = default!; // Forge-Change
+        [Dependency] private Players.PlayTimeTracking.JobRequirementsManager _jobRequirements = default!; // Forge-Change
 
         public event Action? OnServerDataLoaded;
 

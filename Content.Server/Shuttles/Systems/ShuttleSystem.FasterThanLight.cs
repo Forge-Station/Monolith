@@ -41,6 +41,7 @@ namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class ShuttleSystem
 {
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     /*
      * This is a way to move a shuttle from one location to another, via an intermediate map for fanciness.
      */
@@ -799,12 +800,27 @@ public sealed partial class ShuttleSystem
 
         if (!Exists(comp.TargetCoordinates.EntityId))
         {
-            // Uhh good luck
-            // Pick earliest map?
-            var maps = EntityQuery<MapComponent>().Select(o => o.MapId).ToList();
-            var map = maps.Min(o => o.GetHashCode());
-            mapId = new MapId(map);
-            TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            // Prefer a map that actually allows this shuttle, instead of whichever map id hashes lowest.
+            var allowed = EntityQuery<MapComponent, FTLDestinationComponent>()
+                .Where(o => _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, uid))
+                .OrderBy(o => o.Item1.MapId.GetHashCode())
+                .FirstOrDefault();
+
+            if (allowed.Item1 != null)
+            {
+                mapId = allowed.Item1.MapId;
+                TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            }
+            else
+            {
+                var maps = EntityQuery<MapComponent>().Select(o => o.MapId).ToList();
+                if (maps.Count == 0)
+                    return;
+
+                var map = maps.Min(o => o.GetHashCode());
+                mapId = new MapId(map);
+                TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            }
         }
         // Docking FTL
         else if (HasComp<MapGridComponent>(target.EntityId) && !HasComp<MapComponent>(target.EntityId))

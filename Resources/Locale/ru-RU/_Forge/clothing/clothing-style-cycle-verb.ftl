@@ -1,1 +1,1 @@
-scarf-style-cycle-verb = Сменить укладку
+scarf-style-cycle-verb = Сменить стиль

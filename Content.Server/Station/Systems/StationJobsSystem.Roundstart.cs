@@ -305,10 +305,13 @@ public sealed partial class StationJobsSystem
             _player.TryGetSessionById(player, out var nfSession);
             // End Frontier
 
+            var bannedRoles = _banManager.GetJobBans(player);
             foreach (var station in givenStations)
             {
-                // Pick a random overflow job from that station
-                var overflows = GetOverflowJobs(station).ToList();
+                // Pick a random overflow job from that station and skip roles this player is banned from.
+                var overflows = GetOverflowJobs(station)
+                    .Where(job => bannedRoles == null || !bannedRoles.Contains(job))
+                    .ToList();
                 _random.Shuffle(overflows);
 
                 // Frontier: check job requirements on overflow jobs

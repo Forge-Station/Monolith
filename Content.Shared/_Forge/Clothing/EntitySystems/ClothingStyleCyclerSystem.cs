@@ -16,10 +16,10 @@ public sealed class ClothingStyleCyclerSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<ClothingStyleCyclerComponent, GetItemActionsEvent>(OnGetActions);
-        SubscribeLocalEvent<ClothingStyleCyclerComponent, CycleScarfEvent>(OnCycleStyleAction);
+        SubscribeLocalEvent<ClothingStyleCyclerComponent, CycleClothingStyleEvent>(OnCycleStyleAction);
         SubscribeLocalEvent<ClothingStyleCyclerComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternateVerb);
-        // SubscribeLocalEvent<ScarfStyleCyclerComponent, GotUnequippedEvent>(OnUnequipped); Remove by save style yo
     }
 
     private void OnGetActions(Entity<ClothingStyleCyclerComponent> ent, ref GetItemActionsEvent args)
@@ -68,13 +68,9 @@ public sealed class ClothingStyleCyclerSystem : EntitySystem
         Dirty(ent.Owner, clothing);
     }
 
-    private bool inValidSlot(Entity<ClothingStyleCyclerComponent> ent)
+    private bool InValidSlot(Entity<ClothingStyleCyclerComponent> ent)
     {
-        if (ent.Comp.RequiredSlots != SlotFlags.NONE)
-            return _inventory.InSlotWithFlags(ent.Owner, ent.Comp.RequiredSlots);
-
-        return TryComp(ent.Owner, out ClothingComponent? clothing)
-            && clothing.InSlotFlag is {} flag
-            && clothing.Slots.HasFlag(flag);
+        return ent.Comp.RequiredSlots == SlotFlags.NONE
+            || _inventory.InSlotWithFlags(ent.Owner, ent.Comp.RequiredSlots);
     }
 }

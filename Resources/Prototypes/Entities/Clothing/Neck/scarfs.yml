@@ -320,6 +320,329 @@
     - state: 2-equipped-NECK
       color: "#B200ED" #Forge-change-end
 
+#Forge-change-add
+
+- type: entity
+  parent: ClothingScarfBase
+  id: ClothingNeckScarfStripedGrey
+  name: striped grey scarf
+  description: A stylish striped grey scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    color: "#6A6A6A"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#6A6A6A"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#6A6A6A"
+      right:
+      - state: inhand-right
+        color: "#6A6A6A"
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingStyle
+    slot: neck
+    mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
+    requiredSlots: NECK #only in slot
+    states:
+    - state: equipped-NECK
+      color: "#6A6A6A"
+    - state: 1-equipped-NECK
+      color: "#6A6A6A"
+    - state: 2-equipped-NECK
+      color: "#6A6A6A"
+
+- type: entity
+  parent: ClothingScarfBase
+  id: ClothingNeckScarfStripedWhite
+  name: striped white scarf
+  description: A stylish striped white scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    color: "#FFFFFF"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#FFFFFF"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#FFFFFF"
+      right:
+      - state: inhand-right
+        color: "#FFFFFF"
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingStyle
+    slot: neck
+    mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
+    requiredSlots: NECK #only in slot
+    states:
+    - state: equipped-NECK
+      color: "#FFFFFF"
+    - state: 1-equipped-NECK
+      color: "#FFFFFF"
+    - state: 2-equipped-NECK
+      color: "#FFFFFF"
+
+- type: entity
+  parent: ClothingScarfBase
+  id: ClothingNeckScarfStripedYellow
+  name: striped yellow scarf
+  description: A stylish striped yellow scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    color: "#FFF200"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#FFF200"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#FFF200"
+      right:
+      - state: inhand-right
+        color: "#FFF200"
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingStyle
+    slot: neck
+    mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
+    requiredSlots: NECK #only in slot
+    states:
+    - state: equipped-NECK
+      color: "#FFF200"
+    - state: 1-equipped-NECK
+      color: "#FFF200"
+    - state: 2-equipped-NECK
+      color: "#FFF200"
+
+- type: entity
+  parent: ClothingScarfBase
+  id: ClothingNeckScarfStripedSand
+  name: striped sand scarf
+  description: A stylish striped sand scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    color: "#d2B48C"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#d2B48C"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#d2B48C"
+      right:
+      - state: inhand-right
+        color: "#d2B48C"
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingStyle
+    slot: neck
+    mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
+    requiredSlots: NECK #only in slot
+    states:
+    - state: equipped-NECK
+      color: "#d2B48C"
+    - state: 1-equipped-NECK
+      color: "#d2B48C"
+    - state: 2-equipped-NECK
+      color: "#d2B48C"
+
+- type: entity
+  parent: ClothingScarfBase
+  id: ClothingNeckScarfStripedOliva
+  name: striped oliva scarf
+  description: A stylish striped oliva scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    color: "#818155"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#818155"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#818155"
+      right:
+      - state: inhand-right
+        color: "#818155"
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingStyle
+    slot: neck
+    mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
+    requiredSlots: NECK #only in slot
+    states:
+    - state: equipped-NECK
+      color: "#818155"
+    - state: 1-equipped-NECK
+      color: "#818155"
+    - state: 2-equipped-NECK
+      color: "#818155"
+
+- type: entity
+  parent: ClothingScarfBase
+  id: ClothingNeckScarfStripedPink
+  name: striped pink scarf
+  description: A stylish striped pink scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    color: "#e979ec"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#e979ec"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#e979ec"
+      right:
+      - state: inhand-right
+        color: "#e979ec"
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingStyle
+    slot: neck
+    mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
+    requiredSlots: NECK #only in slot
+    states:
+    - state: equipped-NECK
+      color: "#e979ec"
+    - state: 1-equipped-NECK
+      color: "#e979ec"
+    - state: 2-equipped-NECK
+      color: "#e979ec"
+
+- type: entity
+  parent: ClothingScarfBase
+  id: ClothingNeckScarfStripedGreenranger
+  name: striped green ranger scarf
+  description: A stylish striped green ranger scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    color: "#4A5A49"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#4A5A49"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#4A5A49"
+      right:
+      - state: inhand-right
+        color: "#4A5A49"
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingStyle
+    slot: neck
+    mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
+    requiredSlots: NECK #only in slot
+    states:
+    - state: equipped-NECK
+      color: "#4A5A49"
+    - state: 1-equipped-NECK
+      color: "#4A5A49"
+    - state: 2-equipped-NECK
+      color: "#4A5A49"
+
+- type: entity
+  parent: ClothingScarfBase
+  id: ClothingNeckScarfStripedSpecialNT
+  name: striped specialNT scarf
+  description: A stylish striped specialNT scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    color: "#193455"
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/Scarfs/forgescarfs.rsi
+    clothingVisuals:
+      neck:
+      - state: equipped-NECK
+        color: "#193455"
+        map: ["scarf-style"]
+  - type: Item #Forge-change-add-start new changable states with action
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#193455"
+      right:
+      - state: inhand-right
+        color: "#193455"
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingStyle
+    slot: neck
+    mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
+    requiredSlots: NECK #only in slot
+    states:
+    - state: equipped-NECK
+      color: "#193455"
+    - state: 1-equipped-NECK
+      color: "#193455"
+    - state: 2-equipped-NECK
+      color: "#193455"
+
+#Forge-change-end
 #region Forge-change-end
 
 - type: entity

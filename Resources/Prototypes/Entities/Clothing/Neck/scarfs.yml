@@ -25,7 +25,7 @@
       - state: inhand-right
         color: "#ff2c2c"
   - type: ClothingStyleCycler
-    action: ActionCycleClothingfStyle
+    action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
     states:
@@ -61,7 +61,7 @@
       - state: inhand-right
         color: "#253c5e"
   - type: ClothingStyleCycler
-    action: ActionCycleClothingfStyle
+    action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
     states:
@@ -97,7 +97,7 @@
       - state: inhand-right
         color: "#4CBB17"
   - type: ClothingStyleCycler
-    action: ActionCycleClothingfStyle
+    action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
     states:
@@ -133,7 +133,7 @@
       - state: inhand-right
         color: "#333333"
   - type: ClothingStyleCycler
-    action: ActionCycleClothingfStyle
+    action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
     states:
@@ -169,7 +169,7 @@
       - state: inhand-right
         color: "#81613C"
   - type: ClothingStyleCycler
-    action: ActionCycleClothingfStyle
+    action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
     states:
@@ -205,7 +205,7 @@
       - state: inhand-right
         color: "#ADD8E6"
   - type: ClothingStyleCycler
-    action: ActionCycleClothingfStyle
+    action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
     states:
@@ -241,7 +241,7 @@
       - state: inhand-right
         color: "#FFA500"
   - type: ClothingStyleCycler
-    action: ActionCycleClothingfStyle
+    action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
     states:
@@ -277,7 +277,7 @@
       - state: inhand-right
         color: "#B200ED"
   - type: ClothingStyleCycler
-    action: ActionCycleClothingfStyle
+    action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
     states:

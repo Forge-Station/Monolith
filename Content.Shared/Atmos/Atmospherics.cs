@@ -130,7 +130,10 @@ namespace Content.Shared.Atmos
         /// </summary>
         public const float MinimumAirToSuspend = (MolesCellStandard * MinimumAirRatioToSuspend);
 
-        public const float MinimumTemperatureToMove = (T20C + 100f);
+        /// <summary>
+        /// Minimum temperature difference, in kelvin, before LINDA reports a pressure difference for space wind.
+        /// </summary>
+        public const float MinimumTemperatureToMove = 5f;
 
         public const float MinimumMolesDeltaToMove = (MolesCellStandard * MinimumAirRatioToMove);
 

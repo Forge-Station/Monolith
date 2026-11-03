@@ -255,6 +255,12 @@ public abstract partial class SharedShuttleSystem : EntitySystem
             return false;
         }
 
+        if (!coordinates.IsValid(EntityManager) || !double.IsFinite(angle.Theta))
+        {
+            Log.Error($"Found invalid FTL destination with coordinates {coordinates} and angle {angle} for shuttle {shuttleUid}");
+            return false;
+        }
+
         // Just checks if any grids inside of a buffer range at the target position.
         _grids.Clear();
         var mapCoordinates = coordinates.ToMap(EntityManager, XformSystem);

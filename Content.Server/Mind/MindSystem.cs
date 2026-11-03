@@ -246,7 +246,7 @@ public sealed partial class MindSystem : SharedMindSystem
             // If you are transferring to your own ghost then you can no longer return to body
             if (TryComp(entity.Value, out GhostComponent? ghostComponent))
             {
-                _ghosts.SetCanReturnToBody((entity.Value, ghostComponent), false);
+                _ghosts.SetCanReturnToBody(ghostComponent, false);
             }
         }
         else if (mind.VisitingEntity != null

@@ -28,6 +28,8 @@
     action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
       color: "#ff2c2c"
@@ -64,6 +66,8 @@
     action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
       color: "#253c5e"
@@ -100,6 +104,8 @@
     action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
       color: "#4CBB17"
@@ -136,6 +142,8 @@
     action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
       color: "#333333"
@@ -172,6 +180,8 @@
     action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
       color: "#81613C"
@@ -208,6 +218,8 @@
     action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
       color: "#ADD8E6"
@@ -244,6 +256,8 @@
     action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
       color: "#FFA500"
@@ -280,6 +294,8 @@
     action: ActionCycleClothingStyle
     slot: neck
     mapKey: scarf-style
+    cycleDelay: 1 #in seconds
+    requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
       color: "#B200ED"

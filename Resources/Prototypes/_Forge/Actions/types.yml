@@ -33,6 +33,6 @@
   description: Cycle through available styles.
   components:
   - type: InstantAction
-    useDelay: 1
+    useDelay: 2
     itemIconStyle: BigItem
     event: !type:CycleClothingStyleEvent

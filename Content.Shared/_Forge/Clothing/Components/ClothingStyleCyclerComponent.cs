@@ -1,8 +1,10 @@
 using Content.Shared.Actions;
+using Content.Shared.DoAfter;
 using Content.Shared._Forge.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._Forge.Clothing.Components;
 
@@ -48,6 +50,9 @@ public sealed partial class ClothingStyleCyclerComponent : Component
 
     [DataField, AutoNetworkedField]
     public int CurrentIndex;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan CycleDelay = TimeSpan.FromSeconds(2);
 }
 
 [DataDefinition]
@@ -60,3 +65,6 @@ public partial struct ClothingStyleEntry
     public Color? Color;
 }
 public sealed partial class CycleClothingStyleEvent : InstantActionEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class ClothingStyleCycleDoAfterEvent : SimpleDoAfterEvent;

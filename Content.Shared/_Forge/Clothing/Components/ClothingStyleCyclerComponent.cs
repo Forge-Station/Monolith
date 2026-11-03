@@ -5,6 +5,7 @@ using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._Forge.Clothing.Components;
 
@@ -53,6 +54,9 @@ public sealed partial class ClothingStyleCyclerComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan CycleDelay = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public SoundSpecifier? CycleSound;
 }
 
 [DataDefinition]

@@ -29,6 +29,8 @@
     slot: neck
     mapKey: scarf-style
     cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
     requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
@@ -67,6 +69,8 @@
     slot: neck
     mapKey: scarf-style
     cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
     requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
@@ -105,6 +109,8 @@
     slot: neck
     mapKey: scarf-style
     cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
     requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
@@ -143,6 +149,8 @@
     slot: neck
     mapKey: scarf-style
     cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
     requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
@@ -181,6 +189,8 @@
     slot: neck
     mapKey: scarf-style
     cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
     requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
@@ -219,6 +229,8 @@
     slot: neck
     mapKey: scarf-style
     cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
     requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
@@ -257,6 +269,8 @@
     slot: neck
     mapKey: scarf-style
     cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
     requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK
@@ -295,6 +309,8 @@
     slot: neck
     mapKey: scarf-style
     cycleDelay: 1 #in seconds
+    cycleSound: !type:SoundCollectionSpecifier
+      collection: ClothingStyleCycler
     requiredSlots: NECK #only in slot
     states:
     - state: equipped-NECK

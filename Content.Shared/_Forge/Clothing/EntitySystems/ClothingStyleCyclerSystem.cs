@@ -6,6 +6,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Verbs;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._Forge.Clothing.EntitySystems;
 
@@ -15,6 +16,7 @@ public sealed class ClothingStyleCyclerSystem : EntitySystem
     [Dependency] private ClothingSystem _clothing = default!;
     [Dependency] private readonly SharedItemSystem _itemSys = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -78,10 +80,10 @@ public sealed class ClothingStyleCyclerSystem : EntitySystem
             return;
 
         args.Handled = true;
-        CycleStyle(ent);
+        CycleStyle(ent, args.User);
     }
 
-    private void CycleStyle(Entity<ClothingStyleCyclerComponent> ent)
+    private void CycleStyle(Entity<ClothingStyleCyclerComponent> ent, EntityUid user)
     {
         var comp = ent.Comp;
         if (comp.States.Count == 0)
@@ -89,6 +91,10 @@ public sealed class ClothingStyleCyclerSystem : EntitySystem
 
         comp.CurrentIndex = (comp.CurrentIndex + 1) % comp.States.Count;
         ApplyStyle(ent);
+
+        if (comp.CycleSound != null)
+            _audio.PlayPredicted(comp.CycleSound, ent.Owner, user);
+
         Dirty(ent);
     }
 

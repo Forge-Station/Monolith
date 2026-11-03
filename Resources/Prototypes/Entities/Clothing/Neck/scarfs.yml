@@ -24,8 +24,10 @@
       right:
       - state: inhand-right
         color: "#ff2c2c"
-  - type: ScarfStyleCycler
-    action: ActionCycleScarfStyle
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingfStyle
+    slot: neck
+    mapKey: scarf-style
     states:
     - state: equipped-NECK
       color: "#ff2c2c"
@@ -58,8 +60,10 @@
       right:
       - state: inhand-right
         color: "#253c5e"
-  - type: ScarfStyleCycler
-    action: ActionCycleScarfStyle
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingfStyle
+    slot: neck
+    mapKey: scarf-style
     states:
     - state: equipped-NECK
       color: "#253c5e"
@@ -92,8 +96,10 @@
       right:
       - state: inhand-right
         color: "#4CBB17"
-  - type: ScarfStyleCycler
-    action: ActionCycleScarfStyle
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingfStyle
+    slot: neck
+    mapKey: scarf-style
     states:
     - state: equipped-NECK
       color: "#4CBB17"
@@ -126,8 +132,10 @@
       right:
       - state: inhand-right
         color: "#333333"
-  - type: ScarfStyleCycler
-    action: ActionCycleScarfStyle
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingfStyle
+    slot: neck
+    mapKey: scarf-style
     states:
     - state: equipped-NECK
       color: "#333333"
@@ -160,8 +168,10 @@
       right:
       - state: inhand-right
         color: "#81613C"
-  - type: ScarfStyleCycler
-    action: ActionCycleScarfStyle
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingfStyle
+    slot: neck
+    mapKey: scarf-style
     states:
     - state: equipped-NECK
       color: "#81613C"
@@ -194,8 +204,10 @@
       right:
       - state: inhand-right
         color: "#ADD8E6"
-  - type: ScarfStyleCycler
-    action: ActionCycleScarfStyle
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingfStyle
+    slot: neck
+    mapKey: scarf-style
     states:
     - state: equipped-NECK
       color: "#ADD8E6"
@@ -228,8 +240,10 @@
       right:
       - state: inhand-right
         color: "#FFA500"
-  - type: ScarfStyleCycler
-    action: ActionCycleScarfStyle
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingfStyle
+    slot: neck
+    mapKey: scarf-style
     states:
     - state: equipped-NECK
       color: "#FFA500"
@@ -262,8 +276,10 @@
       right:
       - state: inhand-right
         color: "#B200ED"
-  - type: ScarfStyleCycler
-    action: ActionCycleScarfStyle
+  - type: ClothingStyleCycler
+    action: ActionCycleClothingfStyle
+    slot: neck
+    mapKey: scarf-style
     states:
     - state: equipped-NECK
       color: "#B200ED"

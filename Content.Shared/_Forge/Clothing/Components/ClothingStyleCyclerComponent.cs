@@ -1,6 +1,6 @@
 using Content.Shared.Actions;
 using Content.Shared._Forge.Clothing.EntitySystems;
-using Content.Shared.Inventory
+using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 

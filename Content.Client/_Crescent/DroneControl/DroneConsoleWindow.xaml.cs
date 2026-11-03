@@ -37,6 +37,9 @@ public sealed partial class DroneConsoleWindow : FancyWindow
         _shuttles = _entity.System<SharedShuttleSystem>();
         _xform = _entity.System<SharedTransformSystem>();
 
+        // Same as RadarConsoleWindow / NavScreen: Wide fill inside the Mono LayoutContainer wrap.
+        LayoutContainer.SetAnchorPreset(NavRadar, LayoutContainer.LayoutPreset.Wide);
+
         NavRadar.OnRadarClick += OnRadarClick;
 
         SelectAllBtn.OnPressed += _ =>

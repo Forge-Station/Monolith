@@ -18,6 +18,10 @@
       BZ: danger  #Funky
       Healium: stationNO #Funky 
       Nitrium: danger #Funky
+      N611: danger #Forge-change start
+      N611P: danger
+      A517: danger
+      V903: danger #Foege change end
 
 - type: entity
   parent: [AirSensorVoxBase, AirSensor]
@@ -45,6 +49,10 @@
     - BZ #Funky
     - Healium #Funky
     - Nitrium #Funky
+    - N611 #Forge-change start
+    - N611P
+    - A517
+    - V903 #Foege change end
 
 # use this to prevent overriding filters with hardcoded defaults
 - type: entity

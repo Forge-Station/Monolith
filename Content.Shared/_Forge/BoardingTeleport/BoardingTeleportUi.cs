@@ -29,6 +29,7 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
     public readonly bool UseSharedLandingZone;
     public readonly NetCoordinates? SelectedLandingCoordinates;
     public readonly List<BoardingTeleportPlatformUiEntry> Platforms;
+    public readonly float ShieldPierceRiskPercent;
 
     public BoardingTeleportBoundUserInterfaceState(
         BoardingTeleportPage page,
@@ -52,7 +53,8 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
         int selectedPlatformSlot,
         bool useSharedLandingZone,
         NetCoordinates? selectedLandingCoordinates,
-        List<BoardingTeleportPlatformUiEntry> platforms)
+        List<BoardingTeleportPlatformUiEntry> platforms,
+        float shieldPierceRiskPercent = 0f)
     {
         Page = page;
         NavState = navState;
@@ -76,6 +78,7 @@ public sealed class BoardingTeleportBoundUserInterfaceState : BoundUserInterface
         UseSharedLandingZone = useSharedLandingZone;
         SelectedLandingCoordinates = selectedLandingCoordinates;
         Platforms = platforms;
+        ShieldPierceRiskPercent = shieldPierceRiskPercent;
     }
 }
 

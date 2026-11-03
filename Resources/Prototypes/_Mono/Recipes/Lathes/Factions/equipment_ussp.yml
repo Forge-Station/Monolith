@@ -51,7 +51,7 @@
 
 
 - type: latheRecipe
-  parent: ForgeLightJuggernautT2CompanyRecipe # Forge-change
+  parent: ForgeHeavyJuggernautT3CompanyRecipe # Forge-change
   id: ClothingModsuitUSSPZastavnikUSSP
   result: ClothingModsuitUSSPZastavnik
   # materials: # Forge-change

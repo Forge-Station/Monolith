@@ -173,6 +173,10 @@
   - type: SSDIndicator
   - type: StandingState
   - type: Dna
+  # New Frontiers - Genetics - Organic genome for DNA modifier
+  # This code is licensed under AGPLv3. See LICENSE
+  - type: Genome
+  # End of modified code
   - type: MindContainer
     showExamineInfo: true
   - type: CanEnterCryostorage

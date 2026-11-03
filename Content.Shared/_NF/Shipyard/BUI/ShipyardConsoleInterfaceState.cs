@@ -16,6 +16,7 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
     public readonly (List<string> available, List<string> unavailable) ShipyardPrototypes;
     public readonly string ShipyardName;
     public readonly bool FreeListings;
+    public readonly bool PurchasedWithVoucher; // Forge-change: separate voucher resale UI state from purchase free listings.
     public readonly float SellRate;
     public readonly List<HangarVesselUiEntry> HangarVessels;
     public readonly int HangarMaxSlots;
@@ -33,6 +34,8 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
         float sellRate,
         List<HangarVesselUiEntry>? hangarVessels = null,
         int hangarMaxSlots = 2)
+        bool purchasedWithVoucher, // Forge-change
+        float sellRate)
     {
         Balance = balance;
         AccessGranted = accessGranted;
@@ -43,6 +46,7 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
         ShipyardPrototypes = shipyardPrototypes;
         ShipyardName = shipyardName;
         FreeListings = freeListings;
+        PurchasedWithVoucher = purchasedWithVoucher; // Forge-change
         SellRate = sellRate;
         HangarVessels = hangarVessels ?? [];
         HangarMaxSlots = hangarMaxSlots;

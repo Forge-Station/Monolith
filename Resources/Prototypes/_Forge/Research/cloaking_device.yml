@@ -1,0 +1,14 @@
+﻿- type: technology
+  id: CloakingDeviceResearch
+  name: research-technology-cloaking-device
+  entityIcon: CloakingDeviceStick
+  discipline: Experimental
+  tier: 3
+  cost: 50000
+  recipeUnlocks:
+  - MachineCloakingCDMSCircuitboard
+  - MachineCloakingChameleonCircuitboard
+  technologyPrerequisites:
+  - ShuttleAdvancedComponents
+  - PortableFission
+  position: -5, 5

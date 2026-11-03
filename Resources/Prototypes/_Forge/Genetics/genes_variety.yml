@@ -1,0 +1,475 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+# Animal bodies. One active form at a time; they displace other morphs.
+
+- type: gene
+  id: GeneFormCat
+  name: gene-beast-cat-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedCat
+
+- type: gene
+  id: GeneFormMouse
+  name: gene-beast-mouse-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedMouse
+
+- type: gene
+  id: GeneFormPig
+  name: gene-beast-pig-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedPig
+
+- type: gene
+  id: GeneFormCow
+  name: gene-beast-cow-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedCow
+
+- type: gene
+  id: GeneFormGoat
+  name: gene-beast-goat-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedGoat
+
+- type: gene
+  id: GeneFormFox
+  name: gene-beast-fox-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedFox
+
+- type: gene
+  id: GeneFormChicken
+  name: gene-beast-chicken-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedChicken
+
+- type: gene
+  id: GeneFormDuck
+  name: gene-beast-duck-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedDuck
+
+- type: gene
+  id: GeneFormPenguin
+  name: gene-beast-penguin-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedPenguin
+
+- type: gene
+  id: GeneFormParrot
+  name: gene-beast-parrot-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedParrot
+
+- type: gene
+  id: GeneFormCrab
+  name: gene-beast-crab-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedCrab
+
+- type: gene
+  id: GeneFormHamster
+  name: gene-beast-hamster-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedHamster
+
+- type: gene
+  id: GeneFormGoose
+  name: gene-beast-goose-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedGoose
+
+- type: gene
+  id: GeneFormButterfly
+  name: gene-beast-butterfly-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedButterfly
+
+- type: gene
+  id: GeneFormBat
+  name: gene-beast-bat-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedBat
+
+- type: gene
+  id: GeneFormBee
+  name: gene-beast-bee-name
+  description: gene-beast-desc
+  quality: Neutral
+  instability: 28
+  sequenceLength: 7
+  branch: Morphology
+  polymorphPool:
+  - GeneForcedBee
+
+# Appearance traits. The exact marking is rolled per shift.
+
+- type: gene
+  id: GeneFelineEars
+  name: gene-ears-feline-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 10
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - FelinidEarsBasic
+  - FelinidEarsCurled
+  - FelinidEarsDroopy
+  - FelinidEarsFuzzy
+  - FelinidEarsTall
+
+- type: gene
+  id: GeneFelineTail
+  name: gene-tail-feline-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 10
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - FelinidTailBasic
+  - FelinidTailBasicWithBow
+  - FelinidTailBasicWithBell
+  - FelinidTailBasicWithBowAndBell
+
+- type: gene
+  id: GeneVulpEars
+  name: gene-ears-vulp-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 10
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - VulpEar
+  - VulpEarFox
+  - VulpEarFennec
+  - VulpEarWolf
+  - VulpEarJackal
+
+- type: gene
+  id: GeneVulpTail
+  name: gene-tail-vulp-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 10
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - VulpTail
+  - VulpTailTip
+  - VulpTailWag
+  - VulpTailWagTip
+
+- type: gene
+  id: GeneDemonCrown
+  name: gene-horns-demon-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 12
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - DemonHornsDeer
+  - DemonHornsSmall
+  - DemonHornsBuffalo
+  - DemonHornsRam
+  - DemonHornsUnicorn
+
+- type: gene
+  id: GeneHarpyPlumage
+  name: gene-tail-harpy-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 12
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - HarpyTailPhoenix
+  - HarpyTailRooster
+  - HarpyTailFinch
+  - HarpyTailPeacock
+
+- type: gene
+  id: GeneResomiPlume
+  name: gene-tail-resomi-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 12
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - ResomiTail
+  - ResomiTailBird
+  - ResomiTailFeathered
+  - ResomiTailFeathers
+
+- type: gene
+  id: GeneReptileSnout
+  name: gene-snout-lizard-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 10
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - LizardSnoutRound
+  - LizardSnoutSharp
+  - LizardSnoutSplotch
+
+- type: gene
+  id: GeneHousecatEars
+  name: gene-ears-cat-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 8
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - CatEars
+
+- type: gene
+  id: GeneHousecatTail
+  name: gene-tail-cat-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 8
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - CatTail
+
+- type: gene
+  id: GeneMothAntennae
+  name: gene-antennae-moth-name
+  description: gene-marking-extra-desc
+  quality: Neutral
+  instability: 8
+  sequenceLength: 4
+  branch: Morphology
+  markingPool:
+  - MothAntennasClassicAspen
+  - MothAntennasClassicBrown
+  - MothAntennasClassicDeathshead
+  - MothAntennasClassicFeathery
+  - MothAntennasClassicFirewatch
+
+# Buffs, debuffs, and small abilities.
+
+- type: gene
+  id: GeneVigor
+  name: gene-vigor-name
+  description: gene-vigor-desc
+  quality: Good
+  instability: 12
+  sequenceLength: 4
+  branch: Physical
+  conflicts:
+  - GeneLethargy
+  components:
+  - type: Vigor
+
+- type: gene
+  id: GeneLethargy
+  name: gene-lethargy-name
+  description: gene-lethargy-desc
+  quality: Bad
+  instability: 0
+  sequenceLength: 4
+  branch: Physical
+  conflicts:
+  - GeneVigor
+  components:
+  - type: Lethargy
+
+- type: gene
+  id: GeneTenacity
+  name: gene-tenacity-name
+  description: gene-tenacity-desc
+  quality: Good
+  instability: 14
+  sequenceLength: 4
+  branch: Physical
+  conflicts:
+  - GeneGlassJaw
+  components:
+  - type: Tenacity
+
+- type: gene
+  id: GeneGlassJaw
+  name: gene-glass-jaw-name
+  description: gene-glass-jaw-desc
+  quality: Bad
+  instability: 0
+  sequenceLength: 4
+  branch: Physical
+  conflicts:
+  - GeneTenacity
+  components:
+  - type: GlassJaw
+
+- type: gene
+  id: GeneWillToLive
+  name: gene-will-live-name
+  description: gene-will-live-desc
+  quality: Good
+  instability: 16
+  sequenceLength: 4
+  branch: Metabolism
+  conflicts:
+  - GeneWillToDie
+  components:
+  - type: WillToLive
+
+- type: gene
+  id: GeneWillToDie
+  name: gene-will-die-name
+  description: gene-will-die-desc
+  quality: Bad
+  instability: 0
+  sequenceLength: 4
+  branch: Metabolism
+  conflicts:
+  - GeneWillToLive
+  components:
+  - type: WillToDie
+
+- type: gene
+  id: GeneThiefHands
+  name: gene-thief-name
+  description: gene-thief-desc
+  quality: Good
+  instability: 10
+  sequenceLength: 4
+  branch: Neural
+  components:
+  - type: Thieving
+    stealthy: true
+    stripTimeReduction: 1
+
+- type: gene
+  id: GeneSecondWind
+  name: gene-second-wind-name
+  description: gene-second-wind-desc
+  quality: Good
+  instability: 18
+  sequenceLength: 4
+  branch: Physical
+  components:
+  - type: StaminaModifier
+    modifier: 1.5
+
+- type: gene
+  id: GeneBlastPadding
+  name: gene-blast-padding-name
+  description: gene-blast-padding-desc
+  quality: Good
+  instability: 16
+  sequenceLength: 4
+  branch: Adaptation
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.55
+    worn: false
+
+- type: gene
+  id: GeneClinicalSight
+  name: gene-clinical-sight-name
+  description: gene-clinical-sight-desc
+  quality: Good
+  instability: 12
+  sequenceLength: 4
+  branch: Vision
+  components:
+  - type: ShowHealthBars
+
+- type: gene
+  id: GeneWeightless
+  name: gene-weightless-name
+  description: gene-weightless-desc
+  quality: Neutral
+  instability: 20
+  sequenceLength: 7
+  branch: Adaptation
+  components:
+  - type: MovementIgnoreGravity
+    weightless: true

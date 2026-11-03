@@ -98,8 +98,8 @@
   parent: BaseCircuitboardRecipe
   id: StationRadioCircuitboard
   icon:
-    sprite:  _Goobstation/Structures/Machines/StationRadio/stationradio.rsi
-    state: icon
+    sprite:  _Forge/Structures/Machines/StationRadio/stationradio.rsi #Forge-change
+    state: icon-1 #Forge-change
   result: StationRadioCircuitboard
 
 #Forge-Change-UwU-start
@@ -108,6 +108,6 @@
   id: StationRadioUwUCircuitboard
   icon:
     sprite:  _Forge/Structures/Machines/StationRadio/stationradioUwU.rsi
-    state: icon
+    state: icon-2 #Forge-change
   result: StationRadioUwUCircuitboard
 #Forge-Change-UwU-end

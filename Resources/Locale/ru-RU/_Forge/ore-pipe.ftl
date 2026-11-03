@@ -1,5 +1,5 @@
 ore-pipe-examine-connected = [color=green]Подключён к рудопроводу с валидным путём к хранилищу — добытое уйдёт по трубам.[/color]
-ore-pipe-examine-disconnected = [color=red]Не подключён к рудопроводу или путь к хранилищу не завершён — бур простаивает.[/color] Нужен ствол трубы прямо под буром и полный путь по стрелкам до хранилища.
+ore-pipe-examine-disconnected = [color=red]Не подключён к рудопроводу или путь к хранилищу не завершён — руда не уйдёт по трубам.[/color] Нужен ствол трубы прямо под буром/турелью и полный путь по стрелкам до хранилища.
 ore-pipe-examine-hold-no-trunk = [color=orange]Нет приёмного ствола — руда из труб сюда не попадёт.[/color]
 ore-pipe-examine-buffer = Буфер руды: [color=cyan]{$count}[/color] / {$max}
 

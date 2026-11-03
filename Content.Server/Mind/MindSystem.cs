@@ -70,7 +70,10 @@ public sealed partial class MindSystem : SharedMindSystem
         TransferTo(mindId, null, createGhost: false, mind: mind);
         DebugTools.AssertNull(mind.OwnedEntity);
 
-        if (!component.GhostOnShutdown || _gameTicker.RunLevel == GameRunLevel.PreRoundLobby)
+        // Forge-Change: ghost-role takeover moves the player onto a new mind before this observer
+        // is actually deleted. The abandoned mind has no user; spawning another observer
+        // here leaves their old ghost standing in the world.
+        if (mind.UserId == null || !component.GhostOnShutdown || _gameTicker.RunLevel == GameRunLevel.PreRoundLobby)
             return;
 
         var ghost = _ghosts.SpawnGhost((mindId, mind), uid);

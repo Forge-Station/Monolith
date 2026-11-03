@@ -1,0 +1,655 @@
+# Mapping spawners for containment cells, hives, and remnant ruins.
+# Place these — they spawn on map init.
+
+- type: entity
+  abstract: true
+  parent: MarkerBase
+  id: ForgeMappingSpawnerBase
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+
+# region Forerunner borgs
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobForerunnerBorg
+  name: remnant cyborg spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Silicon/chassis.rsi
+      state: robot
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForerunnerBorg
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobForerunnerBorgEngineer
+  name: remnant engineer cyborg spawner
+  suffix: Forge, Mapping, AI, Engineer
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Silicon/chassis.rsi
+      state: synd_engi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForerunnerBorgEngineer
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobForerunnerBorgAssault
+  name: remnant assault cyborg spawner
+  suffix: Forge, Mapping, AI, Assault
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Silicon/chassis.rsi
+      state: synd_sec
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForerunnerBorgAssault
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobForerunnerBorgRandom
+  name: remnant cyborg spawner
+  suffix: Forge, Mapping, AI, Random
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Silicon/chassis.rsi
+      state: synd_engi
+  - type: RandomSpawner
+    prototypes:
+    - MobForerunnerBorg
+    - MobForerunnerBorgEngineer
+    rarePrototypes:
+    - MobForerunnerBorgAssault
+    rareChance: 0.25
+    chance: 1
+    offset: 0.0
+
+# endregion
+# region CM xenomorphs
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMLarva
+  name: xenomorph larva spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/larva.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMLarva
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMDrone
+  name: xenomorph drone spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/drone.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMDrone
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMRunner
+  name: xenomorph runner spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/runner.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMRunner
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMSentinel
+  name: xenomorph sentinel spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/sentinel.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMSentinel
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMSpitter
+  name: xenomorph spitter spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/spitter.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMSpitter
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMWarrior
+  name: xenomorph warrior spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/warrior.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMWarrior
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMLurker
+  name: xenomorph lurker spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/lurker.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMLurker
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMDefender
+  name: xenomorph defender spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/defender.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMDefender
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMRavager
+  name: xenomorph ravager spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/ravager.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMRavager
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMPraetorian
+  name: xenomorph praetorian spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/praetorian.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMPraetorian
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMCrusher
+  name: xenomorph crusher spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/crusher.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMCrusher
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMHivelord
+  name: xenomorph hivelord spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/hivelord.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMHivelord
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMCarrier
+  name: xenomorph carrier spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/carrier.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMCarrier
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMBurrower
+  name: xenomorph burrower spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/burrower.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMBurrower
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMBoiler
+  name: xenomorph boiler spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/boiler.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMBoiler
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMQueen
+  name: xenomorph queen spawner
+  suffix: Forge, Mapping, CM, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/queen.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobXenoCMQueen
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoCMT1
+  name: xenomorph spawner
+  suffix: Forge, Mapping, CM, AI, T1
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: _CM/Mobs/Xenonids/drone.rsi
+      state: alive
+  - type: RandomSpawner
+    prototypes:
+    - MobXenoCMLarva
+    - MobXenoCMLesserDrone
+    - MobXenoCMDrone
+    - MobXenoCMRunner
+    - MobXenoCMSentinel
+    rarePrototypes:
+    - MobXenoCMWarrior
+    - MobXenoCMSpitter
+    rareChance: 0.12
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: SpawnMobXenoCMT1
+  id: SpawnMobXenoCMT2
+  suffix: Forge, Mapping, CM, AI, T2
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - MobXenoCMDrone
+    - MobXenoCMWarrior
+    - MobXenoCMLurker
+    - MobXenoCMSpitter
+    - MobXenoCMDefender
+    - MobXenoCMBurrower
+    rarePrototypes:
+    - MobXenoCMRavager
+    - MobXenoCMPraetorian
+    - MobXenoCMHivelord
+    rareChance: 0.12
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: SpawnMobXenoCMT1
+  id: SpawnMobXenoCMT3
+  suffix: Forge, Mapping, CM, AI, T3
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - MobXenoCMRavager
+    - MobXenoCMPraetorian
+    - MobXenoCMCrusher
+    - MobXenoCMHivelord
+    - MobXenoCMBoiler
+    - MobXenoCMCarrier
+    rarePrototypes:
+    - MobXenoCMQueen
+    rareChance: 0.06
+    chance: 1
+    offset: 0.0
+
+# endregion
+# region Fauna containment
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobGoliath
+  name: goliath spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Aliens/Asteroid/goliath.rsi
+      state: goliath
+  - type: ConditionalSpawner
+    prototypes:
+    - MobGoliath
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobHivelord
+  name: hivelord spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Aliens/Asteroid/hivelord.rsi
+      state: hivelord
+  - type: ConditionalSpawner
+    prototypes:
+    - MobHivelord
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobWatcher
+  name: watcher spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Aliens/Lavaland/watcher.rsi
+      state: base
+  - type: RandomSpawner
+    prototypes:
+    - MobWatcherLavaland
+    - MobWatcherIcewing
+    - MobWatcherMagmawing
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobLaserRaptor
+  name: laser raptor spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Aliens/laser_raptor.rsi
+      state: laser_raptor
+  - type: ConditionalSpawner
+    prototypes:
+    - MobLaserRaptor
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobDragonDungeon
+  name: space dragon spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Aliens/Carps/dragon.rsi
+      state: alive
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDragonDungeon
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobLuminous
+  name: luminous entity spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+  - type: RandomSpawner
+    prototypes:
+    - MobLuminousPerson
+    - MobLuminousObject
+    - MobLuminousEntity
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobFleshRandom
+  name: aberrant flesh spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Aliens/flesh.rsi
+      state: jared
+  - type: RandomSpawner
+    prototypes:
+    - MobFleshJared
+    - MobFleshGolem
+    - MobFleshClamp
+    - MobFleshLover
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobSlimeAngry
+  name: angry slime spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Aliens/slimes.rsi
+      state: blue_adult_slime
+  - type: RandomSpawner
+    prototypes:
+    - MobAdultSlimesBlueAngry
+    - MobAdultSlimesGreenAngry
+    - MobAdultSlimesYellowAngry
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobSpaceFauna
+  name: space fauna spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Animals/bear.rsi
+      state: bear
+  - type: RandomSpawner
+    prototypes:
+    - MobBearSpace
+    - MobKangarooSpace
+    - MobSpiderSpace
+    - MobCobraSpace
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobCarpRandom
+  name: space carp spawner
+  suffix: Forge, Mapping, AI
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Aliens/Carps/space.rsi
+      state: alive
+  - type: RandomSpawner
+    prototypes:
+    - MobCarp
+    - MobCarpMagic
+    - MobShark
+    rarePrototypes:
+    - MobCarpDragon
+    rareChance: 0.08
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobXenoVanillaRandom
+  name: xeno spawner
+  suffix: Forge, Mapping, AI, Vanilla
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Aliens/Xenos/burrower.rsi
+      state: running
+  - type: RandomSpawner
+    prototypes:
+    - NFMobXeno
+    - NFMobXenoDrone
+    - NFMobXenoRunner
+    - NFMobXenoSpitter
+    rarePrototypes:
+    - NFMobXenoPraetorian
+    - NFMobXenoRavager
+    rareChance: 0.12
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobContainmentMix
+  name: containment fauna spawner
+  suffix: Forge, Mapping, AI, Mix
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+  - type: RandomSpawner
+    prototypes:
+    - MobGoliath
+    - MobHivelord
+    - MobWatcherLavaland
+    - MobCarp
+    - MobAdultSlimesBlueAngry
+    - MobFleshJared
+    - MobBearSpace
+    - MobLaserRaptor
+    rarePrototypes:
+    - MobXenoCMWarrior
+    - MobForerunnerBorg
+    - MobArgocytePouncer
+    rareChance: 0.15
+    chance: 1
+    offset: 0.0
+
+# endregion

@@ -8,10 +8,13 @@
 
 using Content.Shared.Radio.Components;
 using Content.Server.Silicons.Laws;
+using Content.Server.Silicons.Borgs; // Forge - change
+using Content.Shared.Silicons.Borgs.Components; // Forge - change
 using Content.Shared._CorvaxNext.Silicons.Borgs;
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components; // Forge - change
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.StationAi;
@@ -33,6 +36,7 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
     [Dependency] private SharedTransformSystem _xformSystem = default!;
 
     [Dependency] private SharedMapSystem _map = default!; // Mono
+    [Dependency] private BorgSystem _borg = default!; // Forge - change
 
     public override void Initialize()
     {
@@ -93,12 +97,25 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
     private void OnReturnMindIntoAi(Entity<AiRemoteControllerComponent> entity, ref ReturnMindIntoAiEvent args) =>
         ReturnMindIntoAi(entity);
 
+    // only runs when an AI link was genuinely released, so an unrelated mind that
+    // merely stopped visiting this entity no longer shuts the chassis down and fires the
+    // "borg-mind-removed" popup.
+    protected override void OnAiReleased(EntityUid entity)
+    {
+        base.OnAiReleased(entity);
+        if (!TerminatingOrDeleted(entity) && TryComp<BorgChassisComponent>(entity, out var chassis))
+            _borg.BorgDeactivate(entity, chassis);
+    }
+
     public void AiTakeControl(EntityUid ai, EntityUid entity)
     {
         if (!_mind.TryGetMind(ai, out var mindId, out var mind))
             return;
 
-        if (_mind.TryGetMind(entity, out _, out _))
+        if (_mind.TryGetMind(entity, out _, out _) || HasComp<VisitingMindComponent>(entity)) // Forge - change
+            return;
+
+        if (mind.OwnedEntity != ai || mind.VisitingEntity != null) // Forge - change
             return;
 
         if (!TryComp<StationAiHeldComponent>(ai, out var stationAiHeldComp))
@@ -109,6 +126,13 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
 
         if (!_map.TryFindGridAt(Transform(ai).MapPosition, out var grid, out var _) || Transform(entity).GridUid != grid)
             return; // Mono no controlling borgs outside the ai's grid.
+
+        // resolve the core before mutating anything. This used to be checked after the
+        // mind was already moved and the borg activated, so a failed lookup left the AI piloting a
+        // borg with its eye still active, its own lawset, and no way back (ReturnMindIntoAi needs
+        // the same lookup to succeed).
+        if (!_stationAiSystem.TryGetCore(ai, out var stationAiCore))
+            return;
 
         if (TryComp(entity, out IntrinsicRadioTransmitterComponent? transmitter))
         {
@@ -126,14 +150,13 @@ public sealed partial class AiRemoteControlSystem : SharedAiRemoteControlSystem
                 activeRadio.Channels = [.. stationAiActiveRadio.Channels];
         }
 
-        _mind.ControlMob(ai, entity);
         aiRemoteComp.AiHolder = ai;
         aiRemoteComp.LinkedMind = mindId;
 
         stationAiHeldComp.CurrentConnectedEntity = entity;
-
-        if (!_stationAiSystem.TryGetCore(ai, out var stationAiCore))
-            return;
+        _mind.Visit(mindId, entity, mind); // Forge - change: keep ownership of the AI core.
+        if (TryComp<BorgChassisComponent>(entity, out var chassis)) // Forge - change
+            _borg.BorgActivate(entity, chassis);
 
         _stationAiSystem.SwitchRemoteEntityMode(stationAiCore, false);
 

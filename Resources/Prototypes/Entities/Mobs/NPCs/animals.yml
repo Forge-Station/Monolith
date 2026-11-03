@@ -3776,8 +3776,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      30: Critical
-      60: Dead
+      50: Critical #Forge-Change: 30 => 50
+      70: Dead #Forge-Change: 60 => 70
   - type: MovementSpeedModifier
     baseWalkSpeed : 2.5
     baseSprintSpeed : 4.5
@@ -3815,6 +3815,17 @@
     storedOffset: 0,0
     shape:
       - 0, 0, 3, 3
+  #Forge-Change-start
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damageCap: 50
+    damage:
+      types:
+        Heat: -0.3
+      groups:
+        Brute: -0.3
+  #Forge-Change-end
 
 - type: entity
   parent: MobDionaNymph

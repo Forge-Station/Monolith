@@ -232,7 +232,7 @@ public abstract partial class SharedHandsSystem : EntitySystem
 
         var entity = hand.HeldEntity!.Value;
 
-        if (!CanPickupToHand(uid, entity, handsComp.ActiveHand, checkActionBlocker, handsComp))
+        if (!CanPickupToHand(uid, entity, handsComp.ActiveHand, checkActionBlocker: checkActionBlocker, handsComp: handsComp))
             return false;
 
         DoDrop(uid, hand, false, handsComp, log:false);

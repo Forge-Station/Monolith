@@ -8,6 +8,10 @@
     snap:
     - Window
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactGlass
   - type: Anchorable
     flags:
     - Anchorable
@@ -145,6 +149,10 @@
     snap:
     - Window
   components:
+  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+    soundGroups:
+      Brute:
+        collection: WolfgateBulletImpactGlass
   - type: WallMount
     arc: 360 # interact despite grilles
   - type: Tag

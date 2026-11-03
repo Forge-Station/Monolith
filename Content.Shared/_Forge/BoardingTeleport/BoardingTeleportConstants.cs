@@ -14,7 +14,7 @@ public static class BoardingTeleportConstants
     public const float MinDepartureDelay = 2f;
 
     public const float DistanceUnitsPerScaleStep = 250f;
-    public const float MaxDistanceScale = 2.5f;
+    public const float MaxDistanceScale = 2.0f;
 
     public const float StealthScatter = 1.20f;
     public const float PreciseScatter = 0.60f;
@@ -36,10 +36,19 @@ public static class BoardingTeleportConstants
     public const int ScatterSampleAttempts = 16;
     public const int PhaseShiftNeighborAttempts = 8;
 
-    public const float LockDegradeIntervalSeconds = 45f;
-    public const float LockDegradeScatterBonus = 0.20f;
-    public const float LockDegradeRiskBonus = 0.02f;
-    public const float LockMaxAgeSeconds = 300f;
+    public const float LockDegradeIntervalSeconds = 60f;
+    public const float LockDegradeScatterBonus = 0.12f;
+    public const float LockDegradeRiskBonus = 0.012f;
+    public const float LockMaxAgeSeconds = 480f;
+
+    /// <summary>
+    /// Added when the target shield is up. A drive that matches or beats the shield pays only the base.
+    /// Each shield tier above the engine adds the gap amounts. The lock is not refused.
+    /// </summary>
+    public const float ShieldPierceBaseScatter = 0.35f;
+    public const float ShieldPierceBaseRisk = 0.04f;
+    public const float ShieldPierceGapScatter = 0.45f;
+    public const float ShieldPierceGapRisk = 0.05f;
 
     public const float DefaultEngineJumpCooldown = 25f;
     public const float EmergencyReturnDelay = 3f;
@@ -66,5 +75,7 @@ public static class BoardingTeleportConstants
     public const float ScramblerDefaultRiskBonus = 0.18f;
 
     public const float ChargeLockCheckIntervalSeconds = 1f;
+
+    /// <summary>Radar mark on the target during a precise or rapid charge. Stealth does not spawn one.</summary>
     public const float DetectionBlipDurationSeconds = 45f;
 }

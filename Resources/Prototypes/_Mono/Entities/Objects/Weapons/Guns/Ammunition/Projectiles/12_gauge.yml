@@ -81,6 +81,8 @@
     ignited: true
   - type: TimedDespawn # Forge-change
     lifetime: 0.33 # Forge-change
+  - type: IgniteOnCollide
+    fireStacks: 0.8 # Forge-change 0.4->0.8
 
 - type: entity
   id: Pellet12_gaugeIncendiarySpread

@@ -154,6 +154,7 @@
 
 - type: entity
   id: SpawnDroneNeedle
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -174,6 +175,7 @@
 
 - type: entity
   id: SpawnDroneWedge
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -196,6 +198,7 @@
 
 - type: entity
   id: SpawnDroneDander
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -216,6 +219,7 @@
     
 - type: entity
   id: SpawnDroneMote
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -238,6 +242,7 @@
 
 - type: entity
   id: SpawnDroneBasicSmall
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -245,6 +250,7 @@
 
 - type: entity
   id: SpawnDroneBasicMedium
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -252,6 +258,7 @@
 
 - type: entity
   id: SpawnDroneMPulsar
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -272,6 +279,7 @@
 
 - type: entity
   id: SpawnDroneLance
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -294,6 +302,7 @@
 
 - type: entity                        # Forge
   id: SpawnDroneParalysis
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -314,6 +323,7 @@
 
 - type: entity
   id: SpawnDroneGust
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -334,6 +344,7 @@
 
 - type: entity
   id: SpawnDroneWasp
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -354,6 +365,7 @@
 
 - type: entity
   id: SpawnDroneCrown
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -374,6 +386,7 @@
 
 - type: entity
   id: SpawnDronePiercer
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -396,6 +409,7 @@
 
 - type: entity
   id: SpawnDroneMedusa
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -416,6 +430,7 @@
 
 - type: entity
   id: SpawnDroneAssembly
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -436,6 +451,7 @@
 
 - type: entity
   id: SpawnDroneBracket
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -458,6 +474,7 @@
 
 - type: entity
   id: SpawnDroneMauler
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner
@@ -478,6 +495,7 @@
 
 - type: entity
   id: SpawnDroneQuake
+  suffix: Debug
   parent: SpawnDroneBase
   components:
   - type: GridSpawner

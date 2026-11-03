@@ -591,10 +591,11 @@ public sealed partial class ChatSystem : SharedChatSystem
         // Einstein Engines - Language end
 
         var speechOrigin = ResolveLocalSpeechOrigin(source); // Forge-Change
-        SendInVoiceRange(ChatChannel.Local, name, message, wrappedMessage, obfuscated, wrappedObfuscated, source, range, languageOverride: language, speechOrigin: speechOrigin); // Einstein Engines - Language
+        var recipients = SendInVoiceRange(ChatChannel.Local, name, message, wrappedMessage, obfuscated, wrappedObfuscated, source, range, languageOverride: language, speechOrigin: speechOrigin); // Einstein Engines - Language
 
         // Forge-Change: keep speaker components on the AI while local acoustics originate from its camera.
         var ev = new EntitySpokeEvent(speechOrigin, message, null, false, language); // Einstein Engines - Language
+        ev.Recipients = recipients; // Forge-Change: let TTS reuse the exact listener set the text went to.
         RaiseLocalEvent(source, ev, true);
 
         // To avoid logging any messages sent by entities that are not players, like vendors, cloning, etc.
@@ -660,7 +661,8 @@ public sealed partial class ChatSystem : SharedChatSystem
 
 
         var speechOrigin = ResolveLocalSpeechOrigin(source); // Forge-Change
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ChatChannel.Whisper, speechOrigin))
+        var whisperRecipients = GetRecipients(source, WhisperMuffledRange, ChatChannel.Whisper, speechOrigin); // Forge-Change
+        foreach (var (session, data) in whisperRecipients)
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -704,6 +706,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // Forge-Change: keep radio and voice components on the speaker while local acoustics use the camera.
         var ev = new EntitySpokeEvent(speechOrigin, message, channel, true, language); // Einstein Engines - Languages
+        ev.Recipients = whisperRecipients; // Forge-Change: let TTS reuse the exact listener set the text went to.
         RaiseLocalEvent(source, ev, true);
         if (!hideLog)
             if (originalMessage == message)
@@ -959,12 +962,14 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Sends a chat message to the given players in range of the source entity.
     /// </summary>
-    private void SendInVoiceRange(ChatChannel channel, string name, string message, string wrappedMessage, string obfuscated, string obfuscatedWrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null, LanguagePrototype? languageOverride = null, EntityUid? speechOrigin = null) // Einstein Engines - Language
+    // Forge-Change: returns the recipient set it used so callers can hand it to EntitySpokeEvent.
+    private Dictionary<ICommonSession, ICChatRecipientData> SendInVoiceRange(ChatChannel channel, string name, string message, string wrappedMessage, string obfuscated, string obfuscatedWrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null, LanguagePrototype? languageOverride = null, EntityUid? speechOrigin = null) // Einstein Engines - Language
     {
         var language = languageOverride ?? _language.GetLanguage(source); // Einstein Engines - Language
         var transmissionSource = speechOrigin is { } origin && Exists(origin) ? origin : source; // Forge-Change
 
-        foreach (var (session, data) in GetRecipients(source, VoiceRange, channel, transmissionSource))
+        var recipients = GetRecipients(source, VoiceRange, channel, transmissionSource); // Forge-Change
+        foreach (var (session, data) in recipients)
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
@@ -985,6 +990,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(transmissionSource), null, MessageRangeHideChatForReplay(range))); // Forge-Change
+
+        return recipients; // Forge-Change
     }
 
     /// <summary>
@@ -1301,6 +1308,15 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     ///     message gets sent on this channel, this should be set to null to prevent duplicate messages.
     /// </summary>
     public RadioChannelPrototype? Channel;
+
+    /// <summary>
+    ///     Forge-Change: the recipient set ChatSystem already computed for this message, including
+    ///     camera/station-AI expansion. Handlers that need to reach the same listeners (e.g. TTS)
+    ///     should reuse this instead of recomputing it, so they agree with the delivered text and
+    ///     don't repeat the station-wide camera scan. Null when the event was raised by something
+    ///     other than the local say/whisper paths.
+    /// </summary>
+    public Dictionary<ICommonSession, ChatSystem.ICChatRecipientData>? Recipients;
 
     public EntitySpokeEvent(EntityUid source, string message, RadioChannelPrototype? channel, bool isWhisper, LanguagePrototype language) // Einstein Engines - Language
     {

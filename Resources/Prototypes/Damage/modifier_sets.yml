@@ -191,7 +191,7 @@
     Blunt: 0.7
     Slash: 0.8
     Piercing: 0.9 # Mono
-    Heat: 1.5
+    Heat: 1.2 #Forge-Change 1.5 => 1.2
     Shock: 1.2
 
 - type: damageModifierSet

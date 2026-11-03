@@ -12,6 +12,15 @@ public sealed partial class BsTransmitterEnergyComponent : Component
     [ViewVariables]
     public float LastDrawnPower;
 
+    [ViewVariables]
+    public int AvailablePower;
+
+    [ViewVariables]
+    public float Income;
+
+    [ViewVariables]
+    public readonly Dictionary<NetEntity, UpdateHistoryData> HistoryData = [];
+
     [DataField]
     public bool Enabled;
 
@@ -19,16 +28,23 @@ public sealed partial class BsTransmitterEnergyComponent : Component
     public int TargetPower;
 
     [DataField]
-    public int AvailablePower;
-
-    [DataField]
     public int Price;
 
     [DataField]
-    public float Income;
+    public float Money;
+
+    // -1 means the limit was never changed and resolves to MaxConnected.
+    // It must stay untouched on spawn: writing it fails UninitializedSaveTest.
+    // 0 is a real limit.
+    [DataField]
+    public int ConnectingLimit = -1;
+
+    public int EffectiveConnectingLimit => ConnectingLimit < 0
+        ? MaxConnected
+        : Math.Clamp(ConnectingLimit, 0, MaxConnected);
 
     [DataField]
-    public float Money;
+    public string Password = string.Empty;
 
     [DataField("enablePassiveIncome")]
     public bool EnablePassiveIncome { get; private set; }

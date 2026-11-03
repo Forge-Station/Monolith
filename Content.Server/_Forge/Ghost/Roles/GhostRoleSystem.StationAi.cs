@@ -15,6 +15,16 @@ public sealed partial class GhostRoleSystem
         _pendingReregistrations.Add(role.Owner);
     }
 
+    /// <summary>
+    /// Toggles deferred reopen-on-ghost. Disabling also drops a role already queued this tick.
+    /// </summary>
+    public void SetReregisterOnGhost(Entity<GhostRoleComponent> role, bool enabled)
+    {
+        role.Comp.ReregisterOnGhost = enabled;
+        if (!enabled)
+            _pendingReregistrations.Remove(role.Owner);
+    }
+
     private void ProcessPendingReregistrations()
     {
         if (_pendingReregistrations.Count == 0)

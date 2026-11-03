@@ -80,6 +80,47 @@ public sealed partial class NameIdentifierSystem : EntitySystem
             : $"{randomVal}";
     }
 
+    /// <summary>
+    /// Takes a free identifier from the group without renaming the entity.
+    /// </summary>
+    public bool TryTakeIdentifier(ProtoId<NameIdentifierGroupPrototype> proto, out int identifier)
+    {
+        identifier = 0;
+        if (!CurrentIds.TryGetValue(proto, out var set) || set.Count == 0)
+            return false;
+
+        identifier = set[^1];
+        set.RemoveAt(set.Count - 1);
+        return true;
+    }
+
+    /// <summary>
+    /// Returns an identifier to its pool. Values outside the group range, and values already free, are ignored.
+    /// </summary>
+    public void ReleaseIdentifier(ProtoId<NameIdentifierGroupPrototype> proto, int identifier)
+    {
+        if (!_prototypeManager.TryIndex(proto, out var group))
+            return;
+
+        if (identifier < group.MinValue || identifier >= group.MaxValue)
+            return;
+
+        var ids = GetOrCreateIdList(group);
+        if (ids.Contains(identifier))
+            return;
+
+        if (ids.Count == 0)
+        {
+            ids.Add(identifier);
+            return;
+        }
+
+        var randomIndex = _robustRandom.Next(ids.Count);
+        var swapped = ids[randomIndex];
+        ids[randomIndex] = identifier;
+        ids.Add(swapped);
+    }
+
     private void OnMapInit(EntityUid uid, NameIdentifierComponent component, MapInitEvent args)
     {
         if (!_prototypeManager.TryIndex<NameIdentifierGroupPrototype>(component.Group, out var group))

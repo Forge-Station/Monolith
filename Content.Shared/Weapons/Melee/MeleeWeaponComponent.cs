@@ -111,7 +111,10 @@ public sealed partial class MeleeWeaponComponent : Component
     public Angle Angle = Angle.FromDegrees(60);
 
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
-    public EntProtoId Animation = "WeaponArcPunch";
+    public EntProtoId Animation = ItemLightAnimation; // Forge-Change: WeaponArcPunch > WeaponArcThrust
+
+    public static readonly EntProtoId ItemLightAnimation = "WeaponArcThrust"; // Forge-Change
+    public static readonly EntProtoId UnarmedLightAnimation = "WeaponArcPunch"; // Forge-Change
 
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
     public EntProtoId WideAnimation = "WeaponArcSlash";
@@ -123,8 +126,14 @@ public sealed partial class MeleeWeaponComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField]
     public Angle WideAnimationRotation = Angle.Zero;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
+    [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField] // Forge-Change: AutoNetworkedField
     public bool SwingLeft;
+
+    [DataField, AutoNetworkedField]
+    public bool SwingBeverage = true; // Forge-Change
+
+    [DataField, AutoNetworkedField]
+    public float AnimationOffset = 1f; // Forge-Change
 
 
     // Sounds

@@ -1,0 +1,19 @@
+# Used by chimers
+- type: language
+  id: Rumbling
+  speech:
+    fontId: Pangolin
+    color: "#d39b00"
+  isVisibleLanguage: true
+  obfuscation:
+    !type:SyllableObfuscation
+    minSyllables: 1
+    maxSyllables: 3
+    replacement:
+    - гр
+    - рр
+    - грр
+    - ррр
+    - грав
+    - рррр
+    

@@ -86,7 +86,7 @@
 
 # OIII-18 "Omega" hardsuit
 - type: entity
-  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade, BaseClothingHelmetMassScanner ]
   id: ClothingHeadHelmetHardsuitRenegateEnergyShield
   name: OIII-18 "Omega" helmet
   description: The interchangeable helmet system for the majority of OIII-18 hardsuits.
@@ -115,7 +115,7 @@
 
 # YIV3020 "Svyatogor" juggernaut suit
 - type: entity
-  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Renegade ]
+  parent: [ ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Renegade, BaseClothingHelmetMassScanner ]
   id: ClothingHeadHelmetHardsuitRenegateHeavyJuggernaut
   name: YIV3020 "Svyatogor" helmet
   description: The interchangeable helmet system for the majority of YIV3020 hardsuits.
@@ -143,7 +143,7 @@
 
 # SYS-549 "Cloak"
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Renegade, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Renegade, ShowMedicalIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitRenegateStealth 
   name: hardsuit SYS-549 "Cloak"
   description: The interchangeable helmet system for the majority of SYS-549 hardsuits. Has a stealth generator.
@@ -182,26 +182,30 @@
     parent: true
     components:
     - type: Stealth
-      minVisibility: 0.01
+      minVisibility: -1.5
       maxVisibility: 1
-      damageVisibilityModifier: 1
-      attackVisibilityModifier: 1
+      damageVisibilityModifier: 0.5
+      attackVisibilityModifier: 1.5
     - type: StealthOnMove
-      passiveVisibilityRate: -0.2
-      movementVisibilityRate: 0
+      passiveVisibilityRate: -0.33
+      movementVisibilityRate: 0.17
   - type: UseDelay
     delay: 2
   - type: PowerCellDraw
-    drawRate: 2
+    drawRate: 0.5
   - type: ToggleCellDraw
+  - type: ClothingBatteryAlert
   - type: ItemSlots
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellInternalHardsuit
+        disableEject: true
+        swap: false
 
 # RMP-240 "Cicada"
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Renegade, ShowMedicalIcons, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Renegade, ShowMedicalIcons, ShowSecurityIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitRenegateAdvancedLight
   name: hardsuit RMP-240 "Cicada"
   description: The interchangeable helmet system for the majority of RMP-240 hardsuits. Has a many visors and high quality NVG.
@@ -231,7 +235,7 @@
 
 # LRC-4034 "Prism"
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Renegade, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Renegade, ShowMedicalIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitRenegateReflectElite
   name: hardsuit LRC-4034 "Prism"
   description: The interchangeable helmet system for the majority of LRC-4034 hardsuits. Has a many visors, high quality NVG and a reflective plate of armor.
@@ -267,7 +271,7 @@
 
 # CRIII-278 "Sequent"
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Renegade, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitRenegateCommander
   name: hardsuit CRIII-278 "Sequent"
   description: The interchangeable helmet system for the majority of CRIII-278 hardsuits. Has a many visors, high quality NVG and a thermal vision.

@@ -1,0 +1,41 @@
+# Author Info
+# GitHub:
+# Discord: Checkraze
+
+# Maintainer Info
+# GitHub: ???
+# Discord: ???
+
+# Notes:
+#
+- type: pointOfInterest
+  id: Edison
+  parent: [BasePOI, BaseRepairablePOI]
+  name: 'Электростанция Эдисон'
+  minimumDistance: 5650
+  maximumDistance: 7400
+  spawnGroup: Required
+  gridPath: /Maps/_Forge/POI/edison.yml #Forge-change
+  addComponents:
+  - type: IFF
+    color: "#3737F8"
+  - type: SolarPoweredGrid
+    trackOnInit: true
+    doNotCull: true
+
+- type: gameMap
+  id: Edison
+  mapName: 'Электростанция Эдисон'
+  mapPath: /Maps/_Forge/POI/edison.yml #Forge-change
+  minPlayers: 0
+  stations:
+    Edison:
+      stationProto: RecordsFrontierOutpost
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Электростанция Эдисон'
+        # - type: StationJobs
+          # availableJobs:
+            # Pilot: [ 0, 0 ]
+            # Mercenary: [ 0, 0 ]
+            # Contractor: [ 0, 0 ]

@@ -50,4 +50,8 @@ public sealed partial class ShuttleDeedComponent : Component
 
     [DataField]
     public HangarVesselState HangarState = HangarVesselState.Deployed;
+    
+    // Forge-change: baseline appraisal for voucher shuttle resale payouts.
+    [DataField]
+    public int SpawnAppraisalValue;
 }

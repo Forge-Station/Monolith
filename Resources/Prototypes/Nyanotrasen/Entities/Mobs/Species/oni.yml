@@ -47,6 +47,12 @@
   - type: NpcFactionMember
     factions:
     - NanoTrasen
+  #Forge-Change-start
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      60: 0.8 #base 0.7
+      80: 0.7 #base 0.5
+  #Forge-Change-end
 
 - type: entity
   save: false

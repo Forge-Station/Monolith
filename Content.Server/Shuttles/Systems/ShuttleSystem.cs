@@ -122,6 +122,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+        UpdateDeferredImpactTileBreaks();
         UpdateHyperspace();
         // Forge-Change:start add-poi-capture-update
         UpdateForgePoiCapture();

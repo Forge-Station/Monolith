@@ -16,6 +16,7 @@ public class ShuttleRecord(
     uint purchasePrice,
     TimeSpan? timeOfPurchase = null,
     Guid? persistedVesselId = null
+    uint spawnAppraisalValue = 0, // Forge-change
 )
 {
     [ViewVariables]
@@ -46,4 +47,7 @@ public class ShuttleRecord(
 
     [ViewVariables]
     public Guid? PersistedVesselId { get; set; } = persistedVesselId;
+    // Forge-change: copied to deeds for voucher shuttle resale baseline.
+    [ViewVariables]
+    public uint SpawnAppraisalValue { get; set; } = spawnAppraisalValue;
 }

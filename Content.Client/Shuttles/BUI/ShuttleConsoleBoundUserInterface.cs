@@ -1,6 +1,7 @@
 using System.Numerics; // Forge-Change
 using Content.Client.Shuttles.UI;
 using Content.Shared._Forge.Bss;
+using Content.Shared._Forge.CloakingShuttle; // Forge-Change
 using Content.Shared._Forge.ShipyardService.Components; // Forge-Change
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Events;
@@ -38,6 +39,8 @@ public sealed partial class ShuttleConsoleBoundUserInterface : BoundUserInterfac
         _window.RequestBeaconFTL += OnFTLBeaconRequest;
         _window.RequestAutopilot += OnAutopilotRequest; // Mono
         _window.RequestBioScan += OnBioScanRequest; // Forge-Change - BioScan
+        _window.OnCloaking += OnCloaking; // Forge-Change - Cloaking
+        _window.OnMapToggleMod += OnMapToggleMod; // Forge-Change - Cloaking
         _window.DockRequest += OnDockRequest;
         _window.UndockRequest += OnUndockRequest;
         _window.UndockAllRequest += OnUndockAllRequest;
@@ -179,6 +182,18 @@ public sealed partial class ShuttleConsoleBoundUserInterface : BoundUserInterfac
             Coordinates = obj,
         });
     }
+
+    // Forge-Change-start - Cloaking
+    private void OnCloaking()
+    {
+        SendMessage(new CloakingShuttleMessage());
+    }
+
+    private void OnMapToggleMod()
+    {
+        SendMessage(new MapToggleModShuttleMessage());
+    }
+    // Forge-Change-end - Cloaking
 
     protected override void Dispose(bool disposing)
     {

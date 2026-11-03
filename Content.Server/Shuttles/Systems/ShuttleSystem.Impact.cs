@@ -23,6 +23,7 @@ using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using System.Numerics;
 
 using Content.Server._Mono.Cleanup;
@@ -74,6 +75,26 @@ public sealed partial class ShuttleSystem
     private HashSet<EntityUid> _intersecting = new();
     // for _adminLogSpacing
     private Dictionary<EntityUid, TimeSpan> _impactedAt = new();
+    // One heavy impact pass per grid-pair per tick — fixture contacts after IMapManager/physics
+    // bumps otherwise re-run ThrowEntitiesOnGrid for every overlapping fixture (ram / drill scrape / AME debris).
+    private readonly HashSet<(EntityUid, EntityUid)> _impactsThisTick = new();
+    private GameTick _impactTick;
+
+    /// <summary>
+    /// Tile breaks must not run inside StartCollide / physics contact generation — SetTiles rebuilds
+    /// grid chunk fixtures and leaves stale Broadphase proxies (Entity 0 crash on client+server).
+    /// </summary>
+    /// <remarks>
+    /// A ram empties every tile in the impact radius on both grids, and a scrape repeats that for
+    /// every contact point. The client applies the whole set in one state and deparents each tile's
+    /// entities into the map broadphase. Past a handful of tiles that insert corrupts
+    /// <c>B2DynamicTree.RotateNodes</c> and the client physics tick dies. Drain the queue at the
+    /// same pace as one ship drill.
+    /// </remarks>
+    private const int MaxImpactTileBreaksPerTick = 4;
+    private const int MaxImpactSparksPerTick = 4;
+    private readonly Dictionary<EntityUid, ImpactTileQueue> _deferredTileBreaks = new();
+    private readonly HashSet<EntityUid> _impactBreakFinished = new();
 
     private void InitializeImpact()
     {
@@ -105,6 +126,134 @@ public sealed partial class ShuttleSystem
     }
 
     /// <summary>
+    /// Apply a few deferred impact tile breaks after physics has finished the current collide pass.
+    /// The rest stays queued so the client never deparents a whole hull in one state.
+    /// </summary>
+    private void UpdateDeferredImpactTileBreaks()
+    {
+        if (_deferredTileBreaks.Count == 0)
+            return;
+
+        var tileBudget = MaxImpactTileBreaksPerTick;
+        var sparkBudget = MaxImpactSparksPerTick;
+        _impactBreakFinished.Clear();
+
+        foreach (var (gridUid, queue) in _deferredTileBreaks)
+            queue.Batch.Clear();
+
+        // One real break per grid per pass, so both hulls open together
+        // instead of the first queue spending the whole budget.
+        var pending = true;
+        while (pending && tileBudget > 0)
+        {
+            pending = false;
+            foreach (var (gridUid, queue) in _deferredTileBreaks)
+            {
+                if (tileBudget <= 0)
+                    break;
+
+                if (_impactBreakFinished.Contains(gridUid))
+                    continue;
+
+                if (TerminatingOrDeleted(gridUid) || !TryComp(gridUid, out MapGridComponent? grid))
+                {
+                    _impactBreakFinished.Add(gridUid);
+                    continue;
+                }
+
+                if (!TryTakeImpactTile(gridUid, grid, queue, out var entry))
+                    continue;
+
+                queue.Batch.Add(entry);
+                tileBudget--;
+                pending = true;
+            }
+        }
+
+        foreach (var (gridUid, queue) in _deferredTileBreaks)
+        {
+            if (_impactBreakFinished.Contains(gridUid))
+                continue;
+
+            if (TerminatingOrDeleted(gridUid) || !TryComp(gridUid, out MapGridComponent? grid))
+            {
+                _impactBreakFinished.Add(gridUid);
+                continue;
+            }
+
+            if (queue.Batch.Count > 0)
+                _mapSystem.SetTiles(gridUid, grid, queue.Batch);
+
+            if (TerminatingOrDeleted(gridUid))
+            {
+                _impactBreakFinished.Add(gridUid);
+                continue;
+            }
+
+            while (sparkBudget > 0 && queue.Sparks.Count > 0)
+            {
+                var last = queue.Sparks.Count - 1;
+                var tile = queue.Sparks[last];
+                queue.Sparks.RemoveAt(last);
+                queue.SparkTiles.Remove(tile);
+                sparkBudget--;
+                Spawn(_sparkEffect, _mapSystem.GridTileToLocal(gridUid, grid, tile));
+            }
+
+            if (queue.Broken.Count == 0 && queue.Sparks.Count == 0)
+                _impactBreakFinished.Add(gridUid);
+        }
+
+        foreach (var uid in _impactBreakFinished)
+            _deferredTileBreaks.Remove(uid);
+    }
+
+    private bool TryTakeImpactTile(
+        EntityUid gridUid,
+        MapGridComponent grid,
+        ImpactTileQueue queue,
+        out (Vector2i GridIndices, Tile Tile) entry)
+    {
+        while (queue.Broken.Count > 0)
+        {
+            var last = queue.Broken.Count - 1;
+            entry = queue.Broken[last];
+            queue.Broken.RemoveAt(last);
+            queue.BrokenTiles.Remove(entry.GridIndices);
+
+            if (!_mapSystem.GetTileRef(gridUid, grid, entry.GridIndices).Tile.IsEmpty)
+                return true;
+        }
+
+        entry = default;
+        return false;
+    }
+
+    private void QueueImpactTiles(EntityUid uid, List<(Vector2i, Tile)> brokenTiles, List<Vector2i> sparkTiles)
+    {
+        if (brokenTiles.Count == 0 && sparkTiles.Count == 0)
+            return;
+
+        if (!_deferredTileBreaks.TryGetValue(uid, out var queue))
+        {
+            queue = new ImpactTileQueue();
+            _deferredTileBreaks[uid] = queue;
+        }
+
+        foreach (var (indices, tile) in brokenTiles)
+        {
+            if (queue.BrokenTiles.Add(indices))
+                queue.Broken.Add((indices, tile));
+        }
+
+        foreach (var indices in sparkTiles)
+        {
+            if (queue.SparkTiles.Add(indices))
+                queue.Sparks.Add(indices);
+        }
+    }
+
+    /// <summary>
     /// Handles collision between two shuttles, applying impact damage and effects.
     /// </summary>
     private void OnShuttleCollide(EntityUid uid, ShuttleComponent component, ref StartCollideEvent args)
@@ -118,6 +267,22 @@ public sealed partial class ShuttleSystem
         if (!_gridQuery.TryComp(args.OurEntity, out var ourGrid) ||
             !_gridQuery.TryComp(args.OtherEntity, out var otherGrid)
         )
+            return;
+
+        // Map-as-grid entities must never go through shuttle impact (planet maps after IMapManager removal).
+        if (HasComp<MapComponent>(args.OurEntity) || HasComp<MapComponent>(args.OtherEntity))
+            return;
+
+        if (_impactTick != _gameTiming.CurTick)
+        {
+            _impactTick = _gameTiming.CurTick;
+            _impactsThisTick.Clear();
+        }
+
+        var impactPair = args.OurEntity.CompareTo(args.OtherEntity) <= 0
+            ? (args.OurEntity, args.OtherEntity)
+            : (args.OtherEntity, args.OurEntity);
+        if (!_impactsThisTick.Add(impactPair))
             return;
 
         var ourBody = args.OurBody;
@@ -144,6 +309,9 @@ public sealed partial class ShuttleSystem
             // Get the velocity in relation to the contact normal
             // If this still causes issues see https://box2d.org/posts/2020/06/ghost-collisions/
             // This should only be a potential problem on chunk seams.
+            if (jungleDiff < float.Epsilon || worldNormal.LengthSquared() < float.Epsilon)
+                continue;
+
             var dotProduct = MathF.Abs(Vector2.Dot(topDiff.Normalized(), worldNormal.Normalized()));
             jungleDiff *= dotProduct;
 
@@ -271,7 +439,8 @@ public sealed partial class ShuttleSystem
         _physics.ApplyLinearImpulse(ent, deltaV * body.FixturesMass, body: body);
 
         // process tile and entity damage
-        ProcessImpactZone(ent, grid, tile, energy, deltaV.Normalized(), radius);
+        var dir = deltaV.LengthSquared() > float.Epsilon ? deltaV.Normalized() : Vector2.Zero;
+        ProcessImpactZone(ent, grid, tile, energy, dir, radius);
 
         // throw every entity on grid if the impulse is not negligible
         if (deltaV.Length() > _minImpulseVelocity)
@@ -398,11 +567,9 @@ public sealed partial class ShuttleSystem
 
         ProcessTileBatch(uid, grid, tilesToProcess, dir, 0, tilesToProcess.Count, brokenTiles, sparkTiles);
 
-        // Only proceed with visual effects if the entity still exists
-        if (Exists(uid))
-        {
-            ProcessBrokenTilesAndSparks(uid, grid, brokenTiles, sparkTiles);
-        }
+        // Defer SetTiles — breaking floors mid-StartCollide rebuilds grid fixtures while
+        // BroadphaseContactJob still holds stale proxies (Entity 0 / invalid contact crashes).
+        QueueImpactTiles(uid, brokenTiles, sparkTiles);
     }
 
     /// <summary>
@@ -490,34 +657,20 @@ public sealed partial class ShuttleSystem
     }
 
     /// <summary>
-    /// Process visual effects and tile breaking after entity processing
-    /// </summary>
-    private void ProcessBrokenTilesAndSparks(
-        EntityUid uid,
-        MapGridComponent grid,
-        List<(Vector2i, Tile)> brokenTiles,
-        List<Vector2i> sparkTiles)
-    {
-        // Break tiles
-        _mapSystem.SetTiles(uid, grid, brokenTiles);
-
-        if (TerminatingOrDeleted(uid))
-            return;
-
-        // Spawn spark effects
-        foreach (var tile in sparkTiles)
-        {
-            var coords = _mapSystem.GridTileToLocal(uid, grid, tile);
-            Spawn(_sparkEffect, coords);
-        }
-    }
-
-    /// <summary>
     /// Check whether this impact should be logged to admins.
     /// Used to prevent spamming logs.
     /// </summary>
     private bool CheckShouldLog(EntityUid uid)
     {
         return !(_impactedAt.ContainsKey(uid) && _gameTiming.CurTime < _impactedAt[uid] + _adminLogSpacing);
+    }
+
+    private sealed class ImpactTileQueue
+    {
+        public readonly List<(Vector2i GridIndices, Tile Tile)> Broken = new();
+        public readonly HashSet<Vector2i> BrokenTiles = new();
+        public readonly List<(Vector2i GridIndices, Tile Tile)> Batch = new();
+        public readonly List<Vector2i> Sparks = new();
+        public readonly HashSet<Vector2i> SparkTiles = new();
     }
 }

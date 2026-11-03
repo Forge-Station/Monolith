@@ -123,6 +123,12 @@ public sealed partial class ChatUIController : UIController
     /// </summary>
     private const int SpeechBubbleCap = 4;
 
+    /// <summary>
+    ///     How many chat lines the client keeps. Popups are copied into chat by default,
+    ///     and nothing else drops old lines, so an uncut log grows for the whole round.
+    /// </summary>
+    public const int MaxChatHistory = 300;
+
     private LayoutContainer _speechBubbleRoot = default!;
 
     /// <summary>
@@ -888,6 +894,9 @@ public sealed partial class ChatUIController : UIController
         if (!msg.HideChat)
         {
             History.Add((_timing.CurTick, msg));
+            while (History.Count > MaxChatHistory)
+                History.RemoveAt(0);
+
             MessageAdded?.Invoke(msg);
 
             if (!msg.Read)

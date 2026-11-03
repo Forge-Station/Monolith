@@ -1,9 +1,12 @@
 using System.Linq;
 using Content.Server._Mono.AlertLevel;
+using Content.Server._WF.Encounters;
+using Content.Server._WF.Encounters.Components;
 using Content.Server._WF.Encounters.Systems;
 using Content.Server._WF.ReaverCampaign.Systems;
 using Content.Server._WF.SectorControl;
 using Content.Server._WF.SectorControl.Systems;
+using Content.Shared._WF.Encounters;
 using Content.Shared._WF.SectorControl;
 using Content.Shared._WF.TradeGoods;
 using Content.Shared.GameTicking;
@@ -56,6 +59,8 @@ public sealed class WFTradeSectorSystem : EntitySystem
         SubscribeLocalEvent<WFSectorCellContestedEvent>(OnContested);
         SubscribeLocalEvent<WFSectorContestResolvedEvent>(OnResolved, after: [typeof(WFReaverCampaignSystem)]);
         SubscribeLocalEvent<WarLevelChangedEvent>(OnWarLevelChanged);
+        SubscribeLocalEvent<WFEncounterStationsEvent>(OnStations);
+        SubscribeLocalEvent<WFEncounterResolvedEvent>(OnEncounterResolved);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnCleanup);
     }
 
@@ -70,14 +75,11 @@ public sealed class WFTradeSectorSystem : EntitySystem
         var profile = _market.Profile(args.Grid);
         var good = args.Good;
 
-        if (TryStationCell(args.Grid, out var map, out var cell))
-        {
-            if (BlockadingOwner(map, cell, args.Grid) && InAny(good, profile.BlockadeGroups))
-                args.Modifiers.Add(new WFTradeModifier(profile.BlockadeFactor, "wf-trade-reason-blockade"));
+        if (IsBlockaded(args.Grid) && InAny(good, profile.BlockadeGroups))
+            args.Modifiers.Add(new WFTradeModifier(profile.BlockadeFactor, "wf-trade-reason-blockade"));
 
-            if (UnderAttempt(map, cell, args.Grid))
-                args.Modifiers.Add(new WFTradeModifier(profile.ReliefFactor, "wf-trade-reason-relief"));
-        }
+        if (TryStationCell(args.Grid, out var map, out var cell) && UnderAttempt(map, cell, args.Grid))
+            args.Modifiers.Add(new WFTradeModifier(profile.ReliefFactor, "wf-trade-reason-relief"));
 
         if (_war.GetWarLevel(args.Grid)
             && MetaData(args.Chute).EntityPrototype is { } chute
@@ -93,9 +95,7 @@ public sealed class WFTradeSectorSystem : EntitySystem
     private void OnBuyQuote(WFTradeBuyQuoteEvent args)
     {
         var profile = _market.Profile(args.Grid);
-        if (TryStationCell(args.Grid, out var map, out var cell)
-            && BlockadingOwner(map, cell, args.Grid)
-            && InAny(args.Good, profile.BlockadeGroups))
+        if (IsBlockaded(args.Grid) && InAny(args.Good, profile.BlockadeGroups))
             args.Modifiers.Add(new WFTradeModifier(profile.BlockadeFactor, "wf-trade-reason-blockade"));
 
         if (_reaver.RecentlyRaided(args.Grid, profile.RaidWindow) && InAny(args.Good, profile.RaidGroups))
@@ -117,6 +117,46 @@ public sealed class WFTradeSectorSystem : EntitySystem
 
         cell = _territory.GridCell(grid);
         return true;
+    }
+
+    /// <summary>Whether a station is blockaded now, by a faction holding its cell or by raiders on its approaches.</summary>
+    public bool IsBlockaded(EntityUid grid)
+    {
+        return RaidersBlockading(grid) || TryStationCell(grid, out var map, out var cell) && BlockadingOwner(map, cell, grid);
+    }
+
+    /// <summary>Whether a running encounter is blockading a station.</summary>
+    public bool RaidersBlockading(EntityUid grid)
+    {
+        var query = EntityQueryEnumerator<WFEncounterComponent>();
+        while (query.MoveNext(out var encounter))
+        {
+            if (encounter.Blockades && encounter.Begun && encounter.Resolution == null && encounter.Stops.Contains(grid))
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>Freighters and traders stay away from a blockaded station, which keeps what it's owed building up.</summary>
+    private void OnStations(ref WFEncounterStationsEvent args)
+    {
+        if (!_territory.Unfiltered)
+            args.Stations.RemoveAll(station => IsBlockaded(station));
+    }
+
+    /// <summary>Says how a raider blockade ended.</summary>
+    private void OnEncounterResolved(ref WFEncounterResolvedEvent args)
+    {
+        if (!TryComp<WFEncounterComponent>(args.Encounter, out var encounter) || !encounter.Blockades || !encounter.Begun)
+            return;
+
+        var line = args.Resolution == WFEncounterResolution.Destroyed ? "wf-trade-blockade-driven-off" : "wf-trade-blockade-withdrawn";
+        foreach (var station in encounter.Stops)
+        {
+            if (!TerminatingOrDeleted(station))
+                _market.Announce(Loc.GetString(line, ("station", Name(station))), station);
+        }
     }
 
     /// <summary>Whether a station's cell is held by a faction that blockades it.</summary>
@@ -290,7 +330,7 @@ public sealed class WFTradeSectorSystem : EntitySystem
     {
         foreach (var grid in _market.Chutes().Select(chute => chute.Grid).Distinct())
         {
-            if (TryStationCell(grid, out var map, out var cell) && BlockadingOwner(map, cell, grid))
+            if (IsBlockaded(grid))
                 yield return grid;
         }
     }

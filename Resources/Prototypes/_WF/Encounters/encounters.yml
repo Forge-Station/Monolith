@@ -120,6 +120,7 @@
 # The crew are ordinary spacers in working clothes: the hands only fight back when attacked, and an officer may have the only gun.
 - type: wfEncounter
   id: WFEncounterFreightSmall
+  freight: true
   name: wf-encounter-name-freighter
   announcement: wf-encounter-announce-freight-run
   announceOnRadio: true
@@ -156,6 +157,7 @@
 
 - type: wfEncounter
   id: WFEncounterFreightMedium
+  freight: true
   name: wf-encounter-name-freighter
   announcement: wf-encounter-announce-freight-run
   announceOnRadio: true
@@ -191,6 +193,7 @@
 
 - type: wfEncounter
   id: WFEncounterFreightLarge
+  freight: true
   name: wf-encounter-name-freighter
   announcement: wf-encounter-announce-freight-run
   announceOnRadio: true
@@ -409,6 +412,112 @@
     objectives:
     - kind: Attack
       target: hauler
+
+# Raiders sit on a station's approaches. While they hold them the station is blockaded: its supply lines are cut,
+# freighters stay away and it pays relief prices. Driving them off lifts it and pays whoever did.
+- type: wfEncounter
+  id: WFEncounterStationBlockade
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  leash: 2500
+  name: wf-encounter-name-station-blockade
+  announcement: wf-encounter-announce-station-blockade
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 2
+  weight: 1.5
+  minPlayers: 4
+  placement: Station
+  standoff: 1500
+  blockades: true
+  cooldown: 3600
+  duration: 3600
+  rewards:
+  - side: pirates
+    spesos: 40000
+  ships:
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-blockade-zone
+    zoneTargets: Everyone
+    disengage: Deter
+    disengageRange: 1500
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 700
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    offset: 0, 450
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-blockade-zone
+    zoneTargets: Everyone
+    disengage: Deter
+    disengageRange: 1500
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 700
 
 # The same ambush on a bigger scale, for more players: a large freighter with its guns and shields, and a raider with a
 # wingman on it. The freighter makes its own call, as before.

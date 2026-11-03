@@ -55,6 +55,12 @@ public sealed partial class WFEncounterComponent : Component
     [DataField]
     public bool OffBudget;
 
+    /// <summary>A freight run, on its own schedule.</summary>
+    public bool Freight;
+
+    /// <summary>While it runs, its station counts as blockaded.</summary>
+    public bool Blockades;
+
     /// <summary>Whether it is kept off the sector markers.</summary>
     [DataField]
     public bool Hidden;

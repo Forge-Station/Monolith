@@ -33,8 +33,8 @@ public sealed partial class MarketUi : UIFragment
     }
 }
 
-/// <summary>A header and two tabs: prices by station as cards, and alerts tagged by kind; hidden markets get a third.</summary>
-public sealed class MarketUiFragment : BoxContainer
+/// <summary>A header and tabs: prices by station as cards, alerts tagged by kind, materials and the sector's stocks; hidden markets get their own.</summary>
+public sealed partial class MarketUiFragment : BoxContainer
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IResourceCache _resources = default!;
@@ -63,6 +63,8 @@ public sealed class MarketUiFragment : BoxContainer
     private readonly BoxContainer _prices;
     private readonly BoxContainer _alerts;
     private readonly BoxContainer _underground;
+    private readonly BoxContainer _materials;
+    private readonly BoxContainer _sector;
 
     private WFMarketUiState? _state;
 
@@ -113,11 +115,24 @@ public sealed class MarketUiFragment : BoxContainer
         _underground = AddScroll(null);
         _tabs.SetTabTitle(UndergroundTab, Loc.GetString("wf-market-tab-underground"));
         _tabs.SetTabVisible(UndergroundTab, false);
+        _materials = AddScroll(null);
+        _tabs.SetTabTitle(MaterialsTab, Loc.GetString("wf-market-tab-materials"));
+        _sector = AddScroll(null);
+        _tabs.SetTabTitle(SectorTab, Loc.GetString("wf-market-tab-sector"));
         SetTitles(0);
     }
 
     /// <summary>The Underground tab, shown only when the server sends hidden markets.</summary>
     private const int UndergroundTab = 2;
+
+    private const int MaterialsTab = 3;
+
+    private const int SectorTab = 4;
+
+    /// <summary>Levels a row's shelf bar spans.</summary>
+    private const float BarSpan = 1.5f;
+
+    private const int BarWidth = 36;
 
     /// <summary>A scrolling list, added to a parent or as a tab of its own.</summary>
     private BoxContainer AddScroll(BoxContainer? parent)
@@ -223,6 +238,8 @@ public sealed class MarketUiFragment : BoxContainer
         SetTitles(state.Alerts.Count);
         UpdatePrices();
         UpdateAlerts(state);
+        UpdateMaterials(state);
+        UpdateSector(state);
     }
 
     private void UpdatePrices()
@@ -384,6 +401,12 @@ public sealed class MarketUiFragment : BoxContainer
             Align = Label.AlignMode.Right,
             Margin = new Thickness(0, 0, 8, 0),
         });
+        if (price.Level is { } level)
+            row.AddChild(ShelfBar(level));
+
+        if (price.Stock is { } stock)
+            row.AddChild(Dimmed(Loc.GetString("wf-market-price-stock", ("stock", stock)), 48));
+
         row.AddChild(Dimmed(Loc.GetString("wf-market-price-weight", ("tonnes", price.Tonnes),
             ("perTonne", price.Tonnes > 0 ? (int) (price.Amount / price.Tonnes) : 0)), 78));
         var reason = Dimmed(price.Reason, 64);
@@ -392,6 +415,69 @@ public sealed class MarketUiFragment : BoxContainer
         reason.FontColorOverride = price.Factor >= 1.02f || price.Factor <= 0.98f ? colour : Quiet;
         row.AddChild(reason);
         content.AddChild(index % 2 == 1 ? Panel(row, RowShade, Color.Transparent, new Thickness(0), new Thickness(0)) : row);
+    }
+
+    /// <summary>A small bar showing how full a station's shelf is: red when scarce, gold when tight, green when stocked.</summary>
+    private static Control ShelfBar(float level)
+    {
+        var bar = new ProgressBar
+        {
+            MinValue = 0f,
+            MaxValue = BarSpan,
+            Value = Math.Clamp(level, 0f, BarSpan),
+            MinSize = new Vector2(BarWidth, 6),
+            VerticalAlignment = VAlignment.Center,
+            Margin = new Thickness(0, 0, 6, 0),
+            ForegroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = level < 0.3f ? Down : level < 0.7f ? Hot : Up },
+            BackgroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = Quiet },
+            ToolTip = Loc.GetString("wf-market-shelf-tooltip", ("percent", (int) MathF.Round(level * 100f))),
+        };
+        return bar;
+    }
+
+    /// <summary>A card per good: the crates in the sector, what's waiting on freight, the flow and who is short.</summary>
+    private void UpdateSector(WFMarketUiState state)
+    {
+        _sector.RemoveAllChildren();
+        foreach (var good in state.Sector)
+        {
+            var body = new BoxContainer { Orientation = LayoutOrientation.Vertical, HorizontalExpand = true };
+            body.AddChild(new Label { Text = good.Good, FontColorOverride = Bright, ClipText = true });
+            body.AddChild(Dimmed(Loc.GetString("wf-market-sector-stock", ("stock", good.Stock), ("owed", good.Owed))));
+            body.AddChild(Dimmed(Loc.GetString("wf-market-sector-flow", ("made", good.Made), ("used", good.Used))));
+            if (good.Short.Count > 0)
+            {
+                var scarce = Dimmed(Loc.GetString("wf-market-sector-short", ("stations", string.Join(", ", good.Short))));
+                scarce.FontColorOverride = Down;
+                body.AddChild(scarce);
+            }
+
+            _sector.AddChild(Card(body, good.Short.Count > 0 ? Down : Hot));
+        }
+
+        if (state.Sector.Count == 0)
+            _sector.AddChild(new Label { Text = Loc.GetString("wf-market-no-sector"), FontColorOverride = Dim });
+    }
+
+    /// <summary>A card per material: the station paying most for it and the one selling it cheapest.</summary>
+    private void UpdateMaterials(WFMarketUiState state)
+    {
+        _materials.RemoveAllChildren();
+        foreach (var material in state.Materials)
+        {
+            var body = new BoxContainer { Orientation = LayoutOrientation.Vertical, HorizontalExpand = true };
+            body.AddChild(new Label { Text = material.Good, FontColorOverride = Bright, ClipText = true });
+            body.AddChild(Dimmed(material.BestPay > 0.0
+                ? Loc.GetString("wf-market-material-pays", ("station", material.BestPayStation), ("amount", Math.Round(material.BestPay, 2)))
+                : Loc.GetString("wf-market-material-no-buyer")));
+            body.AddChild(Dimmed(material.Cheapest > 0.0
+                ? Loc.GetString("wf-market-material-sells", ("station", material.CheapestStation), ("amount", Math.Round(material.Cheapest, 2)), ("stock", material.Stock))
+                : Loc.GetString("wf-market-material-no-stock")));
+            _materials.AddChild(Card(body, Hot));
+        }
+
+        if (state.Materials.Count == 0)
+            _materials.AddChild(new Label { Text = Loc.GetString("wf-market-no-materials"), FontColorOverride = Dim });
     }
 
     private void UpdateAlerts(WFMarketUiState state)

@@ -1,5 +1,7 @@
 #nullable enable
+using System.Linq;
 using System.Numerics;
+using Content.Server._NF.Market.Components;
 using Content.Server._WF.TradeGoods.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -50,6 +52,12 @@ public static class TradeTestWorld
         var crate = entMan.SpawnEntity(proto, new EntityCoordinates(madeOn, 0.5f, 0.5f));
         entMan.System<SharedTransformSystem>().SetCoordinates(crate, to);
         return crate;
+    }
+
+    /// <summary>A station's console stock of a good.</summary>
+    public static int Stock(IEntityManager entMan, EntityUid station, string good)
+    {
+        return entMan.GetComponent<CargoMarketDataComponent>(station).MarketDataList.FirstOrDefault(entry => entry.Prototype == good)?.Quantity ?? 0;
     }
 
     /// <summary>An entity's name.</summary>

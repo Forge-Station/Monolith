@@ -129,6 +129,7 @@
       TradeGoodLuxuries: SpaceCash18000
       TradeGoodFertilizer: SpaceCash5000
       TradeGoodShipComponents: SpaceCash8000
+      TradeGoodChemicalSupplies: SpaceCash2000 # WOLFGATE(TradeGoods): what the depot makes medical supplies from
       WFTradeGoodContraband: WFSpaceCash40000 # WOLFGATE(TradeGoods): open stations pay well for contraband
 
 - type: entity

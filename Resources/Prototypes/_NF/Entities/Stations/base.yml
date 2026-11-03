@@ -89,6 +89,7 @@
       - Paper
       components:
       - Anchorable # No structures, they won't fit in crates
+      - WFTradeOrigin # WOLFGATE(TradeGoods): trade crates are materials to lathes, not console stock
       - Food
       - Currency # No selling money.
       - SpaceGarbage

@@ -79,6 +79,7 @@
   id: Base150mmShellAmmoRecipe
   abstract: true
   materials:
+    WFMunitions: 250 # WOLFGATE(TradeGoods): researched ship ammo uses bulk munitions from ammo crates
     Steel: 1200
 
 - type: latheRecipe
@@ -86,6 +87,7 @@
   id: BaseRailgunSlugRecipe
   abstract: true
   materials:
+    WFMunitions: 500 # WOLFGATE(TradeGoods): researched ship ammo uses bulk munitions from ammo crates
     Steel: 1500
     Plasteel: 250
     Plasma: 100 # ionized plasma gas
@@ -95,6 +97,7 @@
   id: BaseTorpedoRecipe
   abstract: true
   materials:
+    WFMunitions: 1000 # WOLFGATE(TradeGoods): researched ship ammo uses bulk munitions from ammo crates
     Steel: 3000
     Plasma: 300 # explosive payload
     Glass: 150 # optical seeker
@@ -108,6 +111,7 @@
   id: BaseLightOrdinanceAmmoRecipe
   abstract: true
   materials:
+    WFMunitions: 500 # WOLFGATE(TradeGoods): researched ship ammo uses bulk munitions from ammo crates
     Steel: 1200
     Plasma: 400 # explosive payload
     Silver: 200 # electronics/misc
@@ -117,6 +121,7 @@
   id: BaseLightOrdinanceAdvancedAmmoRecipe
   abstract: true
   materials:
+    WFMunitions: 1000 # WOLFGATE(TradeGoods): researched ship ammo uses bulk munitions from ammo crates
     Steel: 1200
     Plasma: 600 # explosive payload/advanced
     Glass: 400 # opticals/misc

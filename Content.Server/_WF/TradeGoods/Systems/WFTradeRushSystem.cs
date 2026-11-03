@@ -19,15 +19,19 @@ public sealed class WFTradeRush
     public float Factor;
     public TimeSpan Ends;
 
+    /// <summary>A big order for a full hold, on its own schedule and wording, paying the same for its last crate as its first.</summary>
+    public bool Bulk;
+
     /// <summary>Crates each ship or seller delivered toward it.</summary>
     public readonly Dictionary<string, int> Filled = new();
 }
 
 /// <summary>
 /// Every so often a station posts a rush order for a number of crates of one group and pays a premium for each until
-/// the order is filled or expires. The first ships to deliver split it.
+/// the order is filled or expires. The first ships to deliver split it. Bulk orders work the same way, for a hold's
+/// worth of crates over a longer window at a flat price. Orders go to the stations furthest under target for their goods.
 /// </summary>
-public sealed class WFTradeRushSystem : EntitySystem
+public sealed partial class WFTradeRushSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _proto = default!;
@@ -36,11 +40,15 @@ public sealed class WFTradeRushSystem : EntitySystem
     [Dependency] private WFTradeMarketSystem _market = default!;
     [Dependency] private WFTradeSectorSystem _sector = default!;
 
-    /// <summary>Most rush orders open across the sector at once.</summary>
+    /// <summary>Most rush orders, and most bulk orders, open across the sector at once.</summary>
     private const int MaxActive = 2;
+
+    /// <summary>How much likelier an order is for goods a station is scarce of.</summary>
+    private const float ScarceDraw = 8f;
 
     private readonly List<WFTradeRush> _active = new();
     private TimeSpan? _next;
+    private TimeSpan? _nextBulk;
 
     public IReadOnlyList<WFTradeRush> Active => _active;
 
@@ -64,6 +72,13 @@ public sealed class WFTradeRushSystem : EntitySystem
     {
         _active.Clear();
         _next = null;
+        _nextBulk = null;
+    }
+
+    /// <summary>Whether a station has an open order that still wants a good.</summary>
+    public bool Wants(EntityUid grid, string good)
+    {
+        return RushFor(grid, good) != null;
     }
 
     private WFTradeRush? RushFor(EntityUid grid, string good)
@@ -73,8 +88,11 @@ public sealed class WFTradeRushSystem : EntitySystem
 
     private void OnQuote(WFTradeQuoteEvent args)
     {
-        if (RushFor(args.Grid, args.Good) is { } rush)
-            args.Modifiers.Add(new WFTradeModifier(rush.Factor, "wf-trade-reason-rush"));
+        if (RushFor(args.Grid, args.Good) is not { } rush)
+            return;
+
+        args.Modifiers.Add(new WFTradeModifier(rush.Factor, rush.Bulk ? "wf-trade-reason-bulk" : "wf-trade-reason-rush"));
+        args.NoGlut |= rush.Bulk;
     }
 
     private void OnSale(WFTradeSaleEvent args)
@@ -91,7 +109,7 @@ public sealed class WFTradeRushSystem : EntitySystem
         _active.Remove(rush);
         var fills = string.Join(", ", rush.Filled.OrderByDescending(fill => fill.Value)
             .Select(fill => Loc.GetString("wf-trade-rush-fill", ("seller", fill.Key), ("count", fill.Value))));
-        _market.Announce(Loc.GetString("wf-trade-rush-filled", ("station", Name(rush.Grid)), ("fills", fills)), rush.Grid);
+        _market.Announce(Loc.GetString("wf-trade-rush-filled", ("bulk", rush.Bulk), ("station", Name(rush.Grid)), ("fills", fills)), rush.Grid);
     }
 
     public override void Update(float frameTime)
@@ -113,76 +131,94 @@ public sealed class WFTradeRushSystem : EntitySystem
                 continue;
 
             _active.Remove(rush);
-            _market.Announce(Loc.GetString("wf-trade-rush-expired", ("station", Name(rush.Grid)), ("goods", Loc.GetString(rush.Goods))), rush.Grid);
+            _market.Announce(Loc.GetString("wf-trade-rush-expired", ("bulk", rush.Bulk), ("station", Name(rush.Grid)), ("goods", Loc.GetString(rush.Goods))), rush.Grid);
         }
 
         var profile = _proto.Index(WFTradeMarketSystem.DefaultProfile);
-        _next ??= now + TimeSpan.FromMinutes(_random.Next(profile.RushMinutes.X, Math.Max(profile.RushMinutes.X, profile.RushMinutes.Y) + 1));
-        if (now < _next)
-            return;
-
-        _next = now + TimeSpan.FromMinutes(_random.Next(profile.RushMinutes.X, Math.Max(profile.RushMinutes.X, profile.RushMinutes.Y) + 1));
-        if (_active.Count < MaxActive)
-            Start();
+        _next = PostDue(_next, profile.RushMinutes, false);
+        _nextBulk = PostDue(_nextBulk, profile.BulkMinutes, true);
     }
 
-    /// <summary>Posts a random rush order at a station that buys its goods, isn't blockaded and has no rush open.</summary>
-    public WFTradeRush? Start(ProtoId<WFTradeRushPrototype>? forced = null)
+    /// <summary>Posts an order of one kind if it's due, and returns when the next one is due.</summary>
+    private TimeSpan PostDue(TimeSpan? next, Vector2i minutes, bool bulk)
+    {
+        var now = _timing.CurTime;
+        if (next is { } due && now < due)
+            return due;
+
+        if (next != null && _active.Count(rush => rush.Bulk == bulk) < MaxActive)
+            Start(bulk: bulk);
+
+        return now + TimeSpan.FromMinutes(_random.Next(minutes.X, Math.Max(minutes.X, minutes.Y) + 1));
+    }
+
+    /// <summary>
+    /// Posts a rush or bulk order, random unless forced, at a station that buys its goods, isn't blockaded and has no
+    /// order open.
+    /// </summary>
+    public WFTradeRush? Start(ProtoId<WFTradeRushPrototype>? forced = null, bool bulk = false)
     {
         var profile = _proto.Index(WFTradeMarketSystem.DefaultProfile);
         var blockaded = _sector.Blockaded().ToHashSet();
         var chutes = _market.Chutes();
-        var options = new List<(WFTradeRushPrototype Proto, List<EntityUid> Grids)>();
+        var options = new List<(WFTradeRushPrototype Proto, List<EntityUid> Grids, float Weight)>();
         foreach (var proto in _proto.EnumeratePrototypes<WFTradeRushPrototype>())
         {
-            if (forced != null && proto.ID != forced)
+            if (forced != null ? proto.ID != forced : proto.Bulk != bulk)
                 continue;
 
             var goods = _market.Group(profile, proto.Group);
             var grids = chutes
                 .Where(chute => (proto.Chutes.Count == 0 || MetaData(chute.Chute).EntityPrototype is { } chuteProto && proto.Chutes.Contains(chuteProto.ID))
-                                && goods.Any(good => chute.Dispenser.Inventory.ContainsKey(good))
+                                && goods.Any(good => chute.Dispenser.Inventory.ContainsKey(good) || _market.Restocking(chute.Grid, good))
                                 && !blockaded.Contains(chute.Grid)
                                 && _active.All(rush => rush.Grid != chute.Grid))
                 .Select(chute => chute.Grid)
                 .Distinct()
                 .ToList();
 
-            if (grids.Count > 0)
-                options.Add((proto, grids));
+            if (grids.Count == 0)
+                continue;
+
+            // A station scarce of the goods posts first, and the worst-off of those.
+            var scarce = grids.Any(grid => goods.Any(good => _market.Restocking(grid, good)));
+            options.Add((proto, grids, scarce ? proto.Weight * ScarceDraw : proto.Weight));
         }
 
         if (options.Count == 0)
             return null;
 
-        var total = options.Sum(option => option.Proto.Weight);
+        var total = options.Sum(option => option.Weight);
         var roll = _random.NextFloat() * total;
-        var (picked, candidates) = options[^1];
+        var (picked, candidates, _) = options[^1];
         foreach (var option in options)
         {
-            roll -= option.Proto.Weight;
+            roll -= option.Weight;
             if (roll <= 0f)
             {
-                (picked, candidates) = option;
+                (picked, candidates, _) = option;
                 break;
             }
         }
 
+        _random.Shuffle(candidates);
+        var pickedGoods = _market.Group(profile, picked.Group);
         var count = _random.Next(picked.Count.X, Math.Max(picked.Count.X, picked.Count.Y) + 1);
         var minutes = _random.Next(picked.Minutes.X, Math.Max(picked.Minutes.X, picked.Minutes.Y) + 1);
         var rush = new WFTradeRush
         {
-            Grid = _random.Pick(candidates),
+            Grid = candidates.MinBy(grid => pickedGoods.Min(good => _market.KnownLevel(grid, good))),
             Group = picked.Group,
             Goods = picked.Goods,
             Total = count,
             Remaining = count,
             Factor = MathF.Round(_random.NextFloat(picked.MinFactor, picked.MaxFactor), 2),
             Ends = _timing.CurTime + TimeSpan.FromMinutes(minutes),
+            Bulk = picked.Bulk,
         };
 
         _active.Add(rush);
-        _market.Announce(Loc.GetString("wf-trade-rush-start",
+        _market.Announce(Loc.GetString("wf-trade-rush-start", ("bulk", rush.Bulk),
             ("station", Name(rush.Grid)), ("count", count), ("goods", Loc.GetString(rush.Goods)),
             ("factor", WFTradeMarketSystem.Shown(rush.Factor)), ("minutes", minutes)), rush.Grid);
 

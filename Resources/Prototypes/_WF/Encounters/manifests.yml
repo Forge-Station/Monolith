@@ -1,0 +1,240 @@
+# What a freight run may be carrying. One is picked per run; the captain names it and the hold is filled from it. A
+# crate listed twice is twice as likely. Most of a hold is Monolith's trade goods, the crates the Trade Mall sells and
+# every station's turn-in chute pays for, two to ten thousand each depending on where they are taken, with the dear and
+# dangerous ones (reactor fuel, ammunition, luxuries) rare. The rest is the cargo catalogue's crates, which sell at a
+# pallet for what is in them, and the lots in crates.yml that no catalogue has.
+# A stop restocks only the trade goods aboard and the manifest's materials. Every good a station vendor sells has to be
+# on a manifest that runs at any player count. Plasma, uranium, lithium and precious metals stay with the miners.
+
+- type: wfEncounterManifest
+  id: WFManifestGeneral
+  name: wf-encounter-cargo-general
+  materials: [ SheetSteel1, SheetGlass1, SheetPlastic1 ]
+  crates:
+  - TradeGoodSupplies
+  - TradeGoodSupplies
+  - TradeGoodSupplies
+  - TradeGoodMetals
+  - TradeGoodMetals
+  - TradeGoodFabric
+  - TradeGoodFabric
+  - TradeGoodComponents
+  - TradeGoodComponents
+  - TradeGoodEquipment
+  - TradeGoodEquipment
+  - TradeGoodScrap
+  - TradeGoodFertilizer
+  - CrateMaterialSteel
+  - CrateMaterialPlastic
+  - CrateFoodMRE
+  - CrateEmergencyInternalsLarge
+  - CrateServiceSmokeables
+  - CrateFunInstrumentsVariety
+  - WFCrateLotTools
+  - WFCrateLotSurvival
+
+- type: wfEncounterManifest
+  id: WFManifestFood
+  name: wf-encounter-cargo-food
+  crates:
+  - TradeGoodSupplies
+  - TradeGoodSupplies
+  - TradeGoodSupplies
+  - TradeGoodFertilizer
+  - TradeGoodFertilizer
+  - CrateFoodMRE
+  - CrateFoodMRE
+  - WFCrateFoodRations
+  - CrateFoodBarSupply
+  - CrateFoodPizzaLarge
+  - CrateFoodSoftdrinksLarge
+  - CrateFreezer
+  - CrateVendingMachineRestockChefvendFilled
+  - CrateVendingMachineRestockBoozeFilled
+  - CrateVendingMachineRestockHotDrinksFilled
+  - CrateVendingMachineRestockNutriMaxFilled
+  - CrateHydroponicsSeeds
+  - CrateHydroponicsSeedsExotic
+
+- type: wfEncounterManifest
+  id: WFManifestMedical
+  name: wf-encounter-cargo-medical
+  crates:
+  - TradeGoodMedicalSupplies
+  - TradeGoodMedicalSupplies
+  - TradeGoodMedicalSupplies
+  - TradeGoodMedicalSupplies
+  - TradeGoodChemicalSupplies
+  - TradeGoodChemicalSupplies
+  - TradeGoodChemicalSupplies
+  - TradeGoodChemicalsVolatile
+  - TradeGoodSupplies
+  - CrateMedicalSupplies
+  - CrateEmergencyAdvancedKit
+  - CrateEmergencyBruteKit
+  - CrateEmergencyBurnKit
+  - CrateEmergencyO2Kit
+  - CrateEmergencyToxinKit
+  - CrateMedicalSurgery
+  - CrateVendingMachineRestockMedicalFilled
+  - WFCrateLotMedical
+
+- type: wfEncounterManifest
+  id: WFManifestIndustrial
+  name: wf-encounter-cargo-industrial
+  materials: [ SheetSteel1, SheetPlasteel1, SheetCopper1 ]
+  crates:
+  - TradeGoodMetals
+  - TradeGoodMetals
+  - TradeGoodMetals
+  - TradeGoodScrap
+  - TradeGoodScrap
+  - TradeGoodComponents
+  - TradeGoodComponents
+  - TradeGoodEquipment
+  - TradeGoodFissionFuel
+  - TradeGoodAmmo
+  - CrateMaterialSteel
+  - CrateMaterialSteel
+  - CrateMaterialPlasteel
+  - CrateMaterialPlasma
+  - CrateMaterialUranium
+  - CrateEngineeringCableBulk
+  - WeldingFuelTankFull
+  - NFMagnetBoxOre
+  - WFCrateLotTools
+  - WFCrateOreCommon
+
+- type: wfEncounterManifest
+  id: WFManifestParts
+  name: wf-encounter-cargo-parts
+  materials: [ SheetGlass1, SheetPlastic1, SheetCopper1 ]
+  crates:
+  - TradeGoodShipComponents
+  - TradeGoodShipComponents
+  - TradeGoodShipComponents
+  - TradeGoodComponents
+  - TradeGoodComponents
+  - TradeGoodComponents
+  - TradeGoodEquipment
+  - TradeGoodEquipment
+  - TradeGoodFusionFuel
+  - TradeGoodWeaponParts
+  - CrateEngineeringThruster
+  - CrateEngineeringSmallThruster
+  - CrateEngineeringGyroscope
+  - PortableGeneratorPacmanFlatpack
+  - PortableGeneratorSuperPacmanFlatpack
+  - CrateEngineeringAMEJar
+  - CrateAirlockKit
+  - WFCrateShipSystems
+  - WFCrateLotParts
+
+- type: wfEncounterManifest
+  id: WFManifestLuxury
+  name: wf-encounter-cargo-luxury
+  crates:
+  - TradeGoodLuxuries
+  - TradeGoodLuxuries
+  - TradeGoodLuxuries
+  - TradeGoodFabric
+  - TradeGoodFabric
+  - TradeGoodSupplies
+  - CrateFunInstrumentsString
+  - CrateFunInstrumentsBrass
+  - CrateFunInstrumentsWoodwind
+  - CrateFunBoardGames
+  - CrateFunParty
+  - CrateFunMysteryFigurines
+  - CrateServiceTheatre
+  - CrateServiceCustomSmokable
+  - CrateCargoLuxuryHardsuit
+  - WFCrateLotLuxury
+  - WFCrateLuxuryBullion
+
+- type: wfEncounterManifest
+  id: WFManifestSalvage
+  name: wf-encounter-cargo-salvage
+  materials: [ ScrapOre1, SteelOre1, Salt1 ]
+  crates:
+  - TradeGoodScrap
+  - TradeGoodScrap
+  - TradeGoodScrap
+  - TradeGoodScrap
+  - TradeGoodMetals
+  - TradeGoodMetals
+  - TradeGoodComponents
+  - NFMagnetBoxOre
+  - NFMagnetBoxOre
+  - NFMagnetBoxConstruction
+  - NFMagnetBoxRubbish
+  - CrateSalvageEquipment
+  - WFCrateOreCommon
+  - WFCrateOreCommon
+  - WFCrateOrePrecious
+  - WFCrateSalvageSorted
+  - WFCrateLotSalvage
+
+# Arms and armor for independent haulers: armory-locked, unbranded, and no TSF-issue rifles. Mostly small lots.
+- type: wfEncounterManifest
+  id: WFManifestArms
+  name: wf-encounter-cargo-arms
+  crates:
+  - TradeGoodWeaponParts
+  - TradeGoodWeaponParts
+  - TradeGoodWeaponParts
+  - TradeGoodAmmo
+  - TradeGoodAmmo
+  - TradeGoodEquipment
+  - CrateArmorySMG
+  - CrateArmoryLaser
+  - CrateArmoryShotgun
+  - CrateSecurityRiot
+  - CrateSecurityArmor
+  - CrateSecurityArmor
+  - CrateSecurityNonlethal
+  - CrateRestraints
+  - WFCrateLotArms
+  - WFCrateArmsSupplies
+
+# A smuggler's hold, announced as general cargo so nobody knows until they board.
+- type: wfEncounterManifest
+  id: WFManifestContraband
+  name: wf-encounter-cargo-general
+  crates:
+  - TradeGoodAmmo
+  - TradeGoodAmmo
+  - TradeGoodChemicalsVolatile
+  - TradeGoodChemicalsVolatile
+  - TradeGoodLuxuries
+  - TradeGoodFissionFuel
+  - TradeGoodWeaponParts
+  - WFCrateLotContraband
+  - WFCrateLotContraband
+  - WFCrateContrabandHeavyArms
+  - WFCrateLuxuryBullion
+  - WFCrateOrePrecious
+  - CrateArmorySMGExpedition
+  - CrateTradeSecureHigh
+  - CrateFunPirate
+
+# TSF stock only: it has the TSF-issue rifles and their ammunition.
+- type: wfEncounterManifest
+  id: WFManifestMunitions
+  name: wf-encounter-cargo-munitions
+  crates:
+  - TradeGoodAmmo
+  - TradeGoodAmmo
+  - TradeGoodAmmo
+  - TradeGoodWeaponParts
+  - TradeGoodWeaponParts
+  - CrateArmorySMGNfsd
+  - WFCrateArmsTsfRifles
+  - WFCrateArmsTsfRifles
+  - WFCrateArmsVault
+  - CrateArmoryShotgunNfsd
+  - CrateSecurityRiot
+  - CrateSecurityArmor
+  - CrateSecurityArmor
+  - WFCrateArmsSupplies
+  - CrateVendingMachineRestockAmmoFilled

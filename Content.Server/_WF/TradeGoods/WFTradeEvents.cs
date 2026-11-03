@@ -20,6 +20,9 @@ public sealed class WFTradeQuoteEvent(EntityUid grid, EntityUid chute, string go
     public readonly EntityUid? Seller = seller;
 
     public readonly List<WFTradeModifier> Modifiers = new();
+
+    /// <summary>Set when the station wants this crate outright, at a flat price however full its shelf is.</summary>
+    public bool NoGlut;
 }
 
 /// <summary>

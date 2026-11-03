@@ -48,7 +48,7 @@ public sealed class MarketBestSaleTest
             var underground = Holder("WFUnderground");
 
             // A glut at the mall leaves the depot paying most for an ordinary hauled crate.
-            market.AddPressure(map.Grid.Owner, Fabric, 0.5f);
+            market.SetVendorStock(map.Grid.Owner, Fabric, 170);
             var crate = TradeTestWorld.Hauled(entMan, far, map.GridCoords);
             var depotQuote = market.Quote(depot, Fabric, crate, lawful)!.Value.Amount;
             Assert.That(depotQuote, Is.GreaterThan(market.Quote(mall, Fabric, crate, lawful)!.Value.Amount));
@@ -60,7 +60,7 @@ public sealed class MarketBestSaleTest
             var origin = entMan.GetComponent<WFTradeOriginComponent>(crate);
             origin.Run = "WF test freighter";
             origin.Destination = near;
-            market.AddPressure(depotGrid, Fabric, 0.5f);
+            market.SetVendorStock(depotGrid, Fabric, 170);
             var fenceQuote = market.Quote(fence, Fabric, crate, underground)!.Value.Amount;
             Assert.That(fenceQuote, Is.GreaterThan(market.Quote(depot, Fabric, crate, underground)!.Value.Amount));
             Assert.That(cartridge.BestSale(crate, underground), Is.EqualTo((fenceName, fenceQuote)));

@@ -34,6 +34,18 @@ public sealed class EncountersCVars
     public static readonly CVarDef<int> MaxActive =
         CVarDef.Create("wf.encounters.max_active", 2, CVar.SERVERONLY);
 
+    /// <summary>Shortest wait between freight runs, which keep their own schedule, in seconds.</summary>
+    public static readonly CVarDef<float> FreightIntervalMin =
+        CVarDef.Create("wf.encounters.freight_interval_min", 600f, CVar.SERVERONLY);
+
+    /// <summary>Longest wait between freight runs, in seconds.</summary>
+    public static readonly CVarDef<float> FreightIntervalMax =
+        CVarDef.Create("wf.encounters.freight_interval_max", 1200f, CVar.SERVERONLY);
+
+    /// <summary>The scheduler starts no freight run while this many are unresolved.</summary>
+    public static readonly CVarDef<int> FreightMaxActive =
+        CVarDef.Create("wf.encounters.freight_max_active", 4, CVar.SERVERONLY);
+
     /// <summary>A resolved encounter's ships are removed once no player is within this distance.</summary>
     public static readonly CVarDef<float> CleanupRange =
         CVarDef.Create("wf.encounters.cleanup_range", 2500f, CVar.SERVERONLY);

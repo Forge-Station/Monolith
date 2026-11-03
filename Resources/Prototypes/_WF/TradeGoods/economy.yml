@@ -1,0 +1,148 @@
+# The sector economy: who makes and uses what. Rates are crates of each output an hour across the sector, shared between
+# the stations running an industry, so a round's mix of depots doesn't change how much the sector makes. Every good but
+# Fission Fuel has a maker at a station that always spawns; Fission Fuel comes from outside by freight.
+- type: wfTradeIndustry
+  id: WFTradeIndustryAgriculture
+  name: wf-trade-industry-agriculture
+  input: TradeGoodSupplies
+  outputs: [ TradeGoodFertilizer, TradeGoodFabric ]
+  rate: 16
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryChemicals
+  name: wf-trade-industry-chemicals
+  input: TradeGoodFertilizer
+  outputs: [ TradeGoodChemicalSupplies, TradeGoodChemicalsVolatile ]
+  rate: 11
+  materials: [ PlasmaOre1, Coal1, Salt1 ]
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryPharmaceuticals
+  name: wf-trade-industry-pharmaceuticals
+  input: TradeGoodChemicalSupplies
+  outputs: [ TradeGoodMedicalSupplies ]
+  rate: 23
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryFood
+  name: wf-trade-industry-food
+  input: TradeGoodFertilizer
+  outputs: [ TradeGoodSupplies ]
+  rate: 40
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryMunitions
+  name: wf-trade-industry-munitions
+  input: TradeGoodChemicalsVolatile
+  outputs: [ TradeGoodAmmo ]
+  rate: 8
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryRefining
+  name: wf-trade-industry-refining
+  input: TradeGoodScrap
+  outputs: [ TradeGoodMetals ]
+  rate: 7
+  materials: [ SteelOre1, CopperOre1, ScrapOre1 ]
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryFabrication
+  name: wf-trade-industry-fabrication
+  input: TradeGoodMetals
+  outputs: [ TradeGoodComponents, TradeGoodWeaponParts ]
+  rate: 10
+  materials: [ SheetSteel1, SheetCopper1 ]
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryShipWorks
+  name: wf-trade-industry-ship-works
+  input: TradeGoodComponents
+  outputs: [ TradeGoodShipComponents, TradeGoodEquipment ]
+  rate: 11
+  materials: [ SheetPlasteel1, SheetSteel1 ]
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryReclamation
+  name: wf-trade-industry-reclamation
+  input: TradeGoodEquipment
+  outputs: [ TradeGoodScrap ]
+  rate: 4
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryLuxuryGoods
+  name: wf-trade-industry-luxury-goods
+  input: TradeGoodFabric
+  outputs: [ TradeGoodLuxuries ]
+  rate: 10
+  materials: [ IngotGold1, IngotSilver1, MaterialDiamond1, GoldOre1, SilverOre1, DiamondOre1 ]
+
+- type: wfTradeIndustry
+  id: WFTradeIndustryReactors
+  name: wf-trade-industry-reactors
+  input: TradeGoodFissionFuel
+  outputs: [ TradeGoodFusionFuel ]
+  rate: 14
+  materials: [ UraniumOre1, SheetUranium1 ]
+
+# Upkeep: what running short of a good does beyond its price. A station's services get dearer as their goods run low, and
+# patrols fly less the less ammunition the sector holds.
+- type: wfTradeService
+  id: WFTradeServiceDrydock
+  name: wf-trade-service-drydock
+  goods: [ TradeGoodShipComponents ]
+  goodsName: wf-trade-goods-ship-components
+
+- type: wfTradeService
+  id: WFTradeServicePatrols
+  name: wf-trade-service-patrols
+  goods: [ TradeGoodAmmo ]
+  goodsName: wf-trade-goods-ammo
+
+# Station roles, by POI or game map id. A station with no role stands outside the sector economy: it trades, but its stock
+# only settles back to its target, which is how the Underground stays off the books.
+- type: wfTradeStation
+  id: WFTradeStationCaelestinus
+  stations: [ Frontier ]
+  industries: [ WFTradeIndustryFood, WFTradeIndustryLuxuryGoods, WFTradeIndustryReactors, WFTradeIndustryShipWorks ]
+  population: 2
+  uses: [ TradeGoodSupplies, TradeGoodMedicalSupplies, TradeGoodFabric, TradeGoodLuxuries, TradeGoodFusionFuel ]
+
+- type: wfTradeStation
+  id: WFTradeStationCamelot
+  stations: [ USSPCamelot ]
+  industries: [ WFTradeIndustryChemicals, WFTradeIndustryFabrication, WFTradeIndustryReclamation, WFTradeIndustryRefining ]
+  uses: [ TradeGoodSupplies, TradeGoodMedicalSupplies, TradeGoodAmmo, TradeGoodFusionFuel ]
+
+- type: wfTradeStation
+  id: WFTradeStationHalcyon
+  stations: [ TSFMCHalcyon ]
+  industries: [ WFTradeIndustryMunitions ]
+  population: 1.5
+  uses: [ TradeGoodSupplies, TradeGoodMedicalSupplies, TradeGoodAmmo, TradeGoodWeaponParts, TradeGoodShipComponents, TradeGoodFusionFuel ]
+
+- type: wfTradeStation
+  id: WFTradeStationZvezda
+  stations: [ Zvezda ]
+  industries: [ WFTradeIndustryAgriculture, WFTradeIndustryPharmaceuticals ]
+  uses: [ TradeGoodSupplies, TradeGoodMedicalSupplies, TradeGoodLuxuries, TradeGoodFabric, TradeGoodEquipment ]
+
+- type: wfTradeStation
+  id: WFTradeStationDepot
+  stations: [ CargoDepot ]
+  industries: [ WFTradeIndustryAgriculture, WFTradeIndustryMunitions ]
+  population: 0.5
+  uses: [ TradeGoodSupplies, TradeGoodMedicalSupplies, TradeGoodShipComponents ]
+
+- type: wfTradeStation
+  id: WFTradeStationDepotAlt
+  stations: [ CargoDepotAlt ]
+  industries: [ WFTradeIndustryFood, WFTradeIndustryPharmaceuticals, WFTradeIndustryRefining ]
+  population: 0.5
+  uses: [ TradeGoodMedicalSupplies, TradeGoodEquipment, TradeGoodShipComponents ]
+
+- type: wfTradeStation
+  id: WFTradeStationDrydock
+  stations: [ WFDrydock ]
+  population: 0.5
+  uses: [ TradeGoodShipComponents, TradeGoodMetals, TradeGoodSupplies ]
+  services: [ WFTradeServiceDrydock ]

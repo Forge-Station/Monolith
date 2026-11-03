@@ -24,7 +24,7 @@ using Robust.Shared.Timing;
 namespace Content.IntegrationTests.Tests._WF.TradeGoods;
 
 /// <summary>
-/// Live chute prices: recovery after a dump, pressure shared per station, the printed price sheet, a pending quote's
+/// Live chute prices: recovery after a dump, one shelf per station, the printed price sheet, a pending quote's
 /// safety, war demand, shortage expiry and a blockade broken by traffic.
 /// </summary>
 [TestFixture]
@@ -114,7 +114,7 @@ public sealed class TradePricingTest
         var map = await pair.CreateTestMap();
         var entMan = server.EntMan;
         var market = entMan.System<WFTradeMarketSystem>();
-        var timing = server.ResolveDependency<IGameTiming>();
+        var economy = entMan.System<WFTradeEconomySystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -132,31 +132,24 @@ public sealed class TradePricingTest
                 market.Sell(chute, Crate(entMan, far, map.GridCoords), user);
             }
 
-            // A 20-crate dump lands on the pressure price unless the good's floor is above it.
-            var perSale = profile.PerSaleOverrides.GetValueOrDefault(CrateProto, profile.PerSale);
-            var floor = profile.FloorPrices.TryGetValue(CrateProto, out var floorPrice)
-                ? System.Math.Min(floorPrice, basePrice)
-                : basePrice * profile.Floor;
             var dumped = market.Quote(chute, CrateProto)!.Value;
-            Assert.That(dumped.Amount, Is.EqualTo(System.Math.Max(basePrice * (1f - dump * perSale), floor)).Within(1));
             Assert.That(dumped.Amount, Is.LessThan(basePrice * 0.9f), "The dump should push the price well below base.");
 
-            var pressure = market.Pressure(grid, CrateProto);
-            Assert.That(pressure, Is.LessThanOrEqualTo(1f), "Recovery to 0.9x in log2(10) half-lives needs pressure of at most 1.");
-
-            // Stamp the pressure log2(10) half-lives ago: it has fallen to a tenth.
-            var window = System.TimeSpan.FromSeconds(profile.HalfLife.TotalSeconds * System.Math.Log2(10));
-            entMan.GetComponent<WFTradeMarketComponent>(grid).Pressure[CrateProto] = (pressure, timing.CurTime - window);
+            // A station outside the economy settles back on the half-life: log2(10) of them leaves a tenth of the glut.
+            var hours = (float) (profile.HalfLife.TotalHours * System.Math.Log2(10));
+            economy.Tick(hours);
+            var row = market.Row(grid, CrateProto);
+            row.Priced = row.Stock / profile.StockTarget;
             var recovered = market.Quote(chute, CrateProto)!.Value;
             Assert.That(recovered.Amount, Is.GreaterThanOrEqualTo(basePrice * 0.9f),
-                $"Price {recovered.Amount} hadn't recovered to 0.9x of {basePrice} after {window}.");
+                $"Price {recovered.Amount} hadn't recovered to 0.9x of {basePrice} after {hours} hours.");
         });
 
         await pair.CleanReturnAsync();
     }
 
     [Test]
-    public async Task ChutesOnOneStationSharePressure()
+    public async Task ChutesOnOneStationShareAShelf()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = false });
         var server = pair.Server;
@@ -219,7 +212,7 @@ public sealed class TradePricingTest
 
             // One good off its base, so the sheet has to be live rather than the static manifest. (Sell would leave a
             // pending quote, which the payout pays instead of printing.)
-            market.AddPressure(map.Grid.Owner, CrateProto, 0.1f);
+            market.SetVendorStock(map.Grid.Owner, CrateProto, 140);
             Assert.That(market.Quote(chute, CrateProto)!.Value.Amount, Is.LessThan(market.Quote(chute, CrateProto)!.Value.Base));
             Assert.That(dispenser.Inventory.Keys.Any(good => cargo.GoodWeight(good) > 0f), Is.True,
                 "No listed good has a weight, so the per-tonne figure isn't tested.");

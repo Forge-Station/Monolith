@@ -43,6 +43,9 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
     /// <summary>Set while this system reads the station list, so blockaded stations stay in it.</summary>
     private bool _unfiltered;
 
+    /// <summary>Whether the station list is being read whole, blockaded stations included.</summary>
+    public bool Unfiltered => _unfiltered;
+
     /// <summary>Whether sector control runs; off clears every map's territory.</summary>
     public bool Enabled { get; private set; }
 

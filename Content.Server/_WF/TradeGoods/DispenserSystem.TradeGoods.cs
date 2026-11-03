@@ -57,15 +57,20 @@ public sealed partial class DispenserSystem
     }
 
     /// <summary>
-    /// Takes a crate priced by who carries it where, such as a consignment, whether or not the chute lists it. False for
-    /// any other item.
+    /// Takes a crate priced by who carries it where, such as a consignment, whether or not the chute lists it, or one its
+    /// station's vendors are scarce of. False for any other item.
     /// </summary>
     private bool WfTakeSpecialCrate(EntityUid uid, DispenserComponent component, EntityUid used, EntityUid user, VirtualItemComponent? virtualItem, EntityUid usedHand)
     {
-        if (!_wfSpecialCrates.IsSpecial(used))
+        var special = _wfSpecialCrates.IsSpecial(used);
+        if (!special && !_wfMarket.TakesToRestock(uid, used))
             return false;
 
-        if (RefuseLocalGoods(uid, component, used, user) || _wfSpecialCrates.Price(uid, used) is not { } amount)
+        if (RefuseLocalGoods(uid, component, used, user))
+            return true;
+
+        var price = special ? _wfSpecialCrates.Price(uid, used) : _wfMarket.Quote(uid, MetaData(used).EntityPrototype!.ID, used, user)?.Amount;
+        if (price is not { } amount)
             return true;
 
         _wfMarket.Sell(uid, used, user, amount);

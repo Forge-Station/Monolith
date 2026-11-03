@@ -19,6 +19,13 @@ public readonly record struct WFEncounterResolvedEvent(EntityUid Encounter, WFEn
 [ByRefEvent]
 public record struct WFEncounterStationWeightEvent(WFEncounterPrototype Prototype, EntityUid Station, float Weight);
 
+/// <summary>
+/// Raised, by ref and broadcast, for each manifest a run could carry; a subscriber may change the weight, such as to
+/// send what its stops lack.
+/// </summary>
+[ByRefEvent]
+public record struct WFEncounterManifestWeightEvent(WFEncounterManifestPrototype Manifest, IReadOnlyList<EntityUid> Stops, float Weight);
+
 /// <summary>Raised broadcast to ask what the trade cargo aboard a ship is worth; the market answers.</summary>
 [ByRefEvent]
 public record struct WFCargoValueQueryEvent(EntityUid Grid)

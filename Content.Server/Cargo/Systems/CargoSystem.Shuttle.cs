@@ -1,3 +1,4 @@
+using System.Linq; // WOLFGATE: sums the bounty hand-in value
 using Content.Server.Cargo.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Cargo;
@@ -18,9 +19,14 @@ using Content.Server._NF.Trade; // Mono
 using Content.Shared._NF.Bank.BUI;
 using Content.Shared._NF.Trade;
 using Content.Shared.Mech.Components;
-using Robust.Shared.Toolshed.Commands.Math; // Mono
-using Content.Shared._Forge.Crypto.Components; // Forge-Change
-using Content.Shared._Forge.CCVars;
+using Robust.Shared.Toolshed.Commands.Math;
+using Content.Server._Mono.Store.Components;
+using Content.Shared.FixedPoint;
+using Robust.Shared.Prototypes;
+using Content.Shared._Mono.Company;
+using Content.Server._Mono.Store; // Mono
+using Content.Server._Mono.Cargo; // Mono
+using Content.Server.Radio.EntitySystems; // Mono
 
 
 namespace Content.Server.Cargo.Systems;
@@ -33,6 +39,9 @@ public sealed partial class CargoSystem
 
     // Frontier addition:
     // The maximum distance from the console to look for pallets.
+
+    [Dependency] private RadioSystem _radio = default!; // Mono
+    [Dependency] private CurrencyInjectionSystem _currencyInjection = default!;
     private const int DefaultPalletDistance = 8;
 
     private static readonly SoundPathSpecifier ApproveSound = new("/Audio/Effects/Cargo/ping.ogg");
@@ -81,10 +90,15 @@ public sealed partial class CargoSystem
         }
 
         // Frontier: per-object market modification
-        GetPalletGoods(uid, gridUid, out var toSell, out var amount, out var noModAmount, out var frontierTaxAmount, out var nfsdTaxAmount, out var medicalTaxAmount); // Forge-change-del out var
+        GetPalletGoods(uid, gridUid, out var toSell, out var amount, out var noModAmount, out var blackMarketTaxAmount, out var frontierTaxAmount, out var nfsdTaxAmount, out var medicalTaxAmount, out _, out _);
 
         amount += noModAmount;
         // End Frontier
+
+        // WOLFGATE(CargoSales) START: a pallet that would be refused pays nothing, so it shows nothing
+        if (WfRefuseOverLimit(uid, WfWithContents(toSell)))
+            amount = 0;
+        // WOLFGATE END
 
         // Monolith: display multiplier
         var station = _station.GetOwningStation(uid);
@@ -286,17 +300,18 @@ public sealed partial class CargoSystem
 
     #region Station
 
-    private bool SellPallets(Entity<CargoPalletConsoleComponent> consoleUid, EntityUid gridUid, out double amount, out double noMultiplierAmount, out double frontierTaxAmount, out double nfsdTaxAmount, out double medicalTaxAmount) // Frontier: first arg to Entity, add noMultiplierAmount // Forge-del: out double blackMarketTaxAmount,
+    private bool SellPallets(Entity<CargoPalletConsoleComponent> consoleUid, EntityUid gridUid, out double amount, out double noMultiplierAmount, out double blackMarketTaxAmount, out double frontierTaxAmount, out double nfsdTaxAmount, out double medicalTaxAmount, out Dictionary<string, FixedPoint2>? currencyInjections, out ProtoId<CompanyPrototype>? injectionCompany) // Frontier: first arg to Entity, add noMultiplierAmount
     {
-        GetPalletGoods(consoleUid, gridUid, out var toSell, out amount, out noMultiplierAmount, out frontierTaxAmount, out nfsdTaxAmount, out medicalTaxAmount); // Frontier: add noMultiplierAmount // Forge-del: out blackMarketTaxAmount,
+        GetPalletGoods(consoleUid, gridUid, out var toSell, out amount, out noMultiplierAmount, out blackMarketTaxAmount, out frontierTaxAmount, out nfsdTaxAmount, out medicalTaxAmount, out currencyInjections, out injectionCompany); // Frontier: add noMultiplierAmount
 
-        Log.Debug($"Cargo sold {toSell.Count} entities for {amount} (plus {noMultiplierAmount} without mods). (Taxes: CO: {frontierTaxAmount}, TSFMC: {nfsdTaxAmount}, MD: {medicalTaxAmount})"); // Frontier: add section in parentheses // Forge-del: Black Market: {blackMarketTaxAmount},
+        Log.Debug($"Cargo sold {toSell.Count} entities for {amount} (plus {noMultiplierAmount} without mods). (Taxes: Black Market: {blackMarketTaxAmount}, CO: {frontierTaxAmount}, TSFMC: {nfsdTaxAmount}, MD: {medicalTaxAmount})"); // Frontier: add section in parentheses
 
         if (toSell.Count == 0)
             return false;
 
-        var ev = new EntitySoldEvent(toSell, gridUid); // Frontier: add gridUid
-        RaiseLocalEvent(ref ev);
+        // Mono comment out to move above sold event
+        //var ev = new EntitySoldEvent(toSell, gridUid); // Frontier: add gridUid
+        //RaiseLocalEvent(ref ev);
 
         // Collect all container entities and their contained entities recursively
         var allEntsToDelete = new HashSet<EntityUid>(toSell);
@@ -313,12 +328,92 @@ public sealed partial class CargoSystem
             }
         }
 
+        // WOLFGATE(CargoSales) START: the MaxPerSale check runs apart from the alert
+        if (WfRefuseOverLimit(consoleUid, allEntsToDelete))
+            return false;
+        // WOLFGATE END
+
+        SendSoldAlert(consoleUid, allEntsToDelete); // Mono: sell snitching
+
+        var ev = new EntitySoldEvent(toSell, gridUid); // Mono: moved here so refused sales dont count as sold
+        RaiseLocalEvent(ref ev);
+
         foreach (var ent in allEntsToDelete)
         {
             Del(ent);
         }
 
         return true;
+    }
+    /// <summary>
+    /// Mono: Sold stuff that have <see cref="SoldAlertComponent"/> sends a radio
+    /// message if it meets its Threshold.
+    /// </summary>
+    private void SendSoldAlert(EntityUid console, HashSet<EntityUid> sold)
+    {
+        Dictionary<string, (int Count, SoldAlertComponent Alert, string Name)>? groups = null;
+
+        foreach (var ent in sold)
+        {
+            if (!TryComp<SoldAlertComponent>(ent, out var alert))
+                continue;
+
+            var key = alert.GroupId ?? MetaData(ent).EntityPrototype?.ID;
+            if (key == null)
+                continue;
+
+            var amount = 1;
+            if (TryComp<StackComponent>(ent, out var stack))
+                amount = stack.Count;
+
+            groups ??= new();
+            if (groups.TryGetValue(key, out var existing))
+                groups[key] = (existing.Count + amount, existing.Alert, existing.Name);
+            else
+                groups[key] = (amount, alert, MetaData(ent).EntityName);
+        }
+
+        if (groups == null)
+            return;
+
+        string? location = null;
+
+        foreach (var (count, alert, name) in groups.Values)
+        {
+            if (count < alert.Threshold)
+                continue;
+
+            location ??= GetConsoleLocation(console);
+
+            var message = Loc.GetString(alert.Message, ("item", name), ("count", count), ("location", location));
+            var speaker = Transform(console).GridUid ?? console;
+            foreach (var channel in alert.Channels)
+            {
+                _radio.SendRadioMessage(speaker, message, channel, console);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Mono: Location for the console. Probably shouldn't do this here.
+    /// </summary>
+    private string GetConsoleLocation(EntityUid console)
+    {
+        var xform = Transform(console);
+
+        var gridName = xform.GridUid is { } grid
+            ? MetaData(grid).EntityName
+            : Loc.GetString("cargo-sold-alert-location-space");
+
+        // World coordinates
+        var coords = _transformSystem.GetMapCoordinates(console, xform);
+        var x = (int)coords.X;
+        var y = (int)coords.Y;
+
+        return Loc.GetString("cargo-sold-alert-location",
+            ("grid", gridName),
+            ("x", x),
+            ("y", y));
     }
 
     /// <summary>
@@ -341,15 +436,17 @@ public sealed partial class CargoSystem
         }
     }
 
-    private void GetPalletGoods(Entity<CargoPalletConsoleComponent> consoleUid, EntityUid gridUid, out HashSet<EntityUid> toSell, out double amount, out double noMultiplierAmount, out double frontierTaxAmount, out double nfsdTaxAmount, out double medicalTaxAmount) // Frontier: first arg to Entity, add noMultiplierAmount // Forge-del: out double blackMarketTaxAmount,
+    private void GetPalletGoods(Entity<CargoPalletConsoleComponent> consoleUid, EntityUid gridUid, out HashSet<EntityUid> toSell, out double amount, out double noMultiplierAmount, out double blackMarketTaxAmount, out double frontierTaxAmount, out double nfsdTaxAmount, out double medicalTaxAmount, out Dictionary<string, FixedPoint2>? currencyInjections, out ProtoId<CompanyPrototype>? injectionCompany) // Frontier: first arg to Entity, add noMultiplierAmount // Mono: add currencyInjections
     {
         amount = 0;
         noMultiplierAmount = 0;
-        // blackMarketTaxAmount = 0; /// Forge-change-del
+        blackMarketTaxAmount = 0;
         frontierTaxAmount = 0;
         nfsdTaxAmount = 0;
         medicalTaxAmount = 0;
         toSell = new HashSet<EntityUid>();
+        currencyInjections = null;
+        injectionCompany = null;
 
         foreach (var (palletUid, _, _) in GetCargoPallets(consoleUid, gridUid, BuySellType.Sell))
         {
@@ -380,14 +477,19 @@ public sealed partial class CargoSystem
                 if (_blacklistQuery.HasComponent(ent))
                     continue;
 
-                if (HasComp<CryptoCoinComponent>(ent)) // Forge-Change: bitcoin can only be sold in crypto console.
-                    continue;
-
                 // Mono: Use vending machine discount pricing for cargo sales
                 var price = _pricing.GetPriceWithVendingDiscount(ent, gridUid);
                 if (price == 0)
                     continue;
                 toSell.Add(ent);
+
+                // WOLFGATE START: items handed in to a bounty are paid by its reward, not sold
+                if (IsBountyComplete(ent, out var turnedIn))
+                    price -= turnedIn.Sum(item => _pricing.GetPriceWithVendingDiscount(item, gridUid, false));
+                // WOLFGATE END
+                // WOLFGATE(TradeGoods): materials pay what the station's stock makes them worth
+                else
+                    price += _wfMaterials.WfPalletAdjustment(ent, gridUid);
 
                 var station = _station.GetOwningStation(ent);
                 double multiplier = 1;
@@ -424,11 +526,9 @@ public sealed partial class CargoSystem
                     {
                         switch (account)
                         {
-                            // Forge-change-del-start
-                            // case SectorBankAccount.BlackMarket:
-                            //     blackMarketTaxAmount += price * taxCoeff;
-                            //     break;
-                            // Forge-change-del-end
+                            case SectorBankAccount.BlackMarket:
+                                blackMarketTaxAmount += price * taxCoeff;
+                                break;
                             case SectorBankAccount.Frontier:
                                 frontierTaxAmount += price * taxCoeff;
                                 break;
@@ -440,6 +540,26 @@ public sealed partial class CargoSystem
                                 break;
                             default:
                                 break;
+                        }
+                    }
+                }
+                // Mono: Calculate if any factions need to receive currency
+                if (TryComp<CurrencyInjectionOnSellComponent>(ent, out var injection))
+                {
+                    injectionCompany = injection.Company;
+                    if (currencyInjections == null)
+                        // WOLFGATE(CargoSales) START: adding to the component's own dictionary raised that item's payout on every appraisal
+                        currencyInjections = new Dictionary<string, FixedPoint2>(injection.Amount);
+                        // currencyInjections = injection.Amount;
+                        // WOLFGATE END
+                    else
+                    {
+                        foreach (var key in injection.Amount.Keys)
+                        {
+                            if (currencyInjections.Keys.Contains(key))
+                                currencyInjections[key] += injection.Amount[key];
+                            else
+                                currencyInjections[key] = injection.Amount[key];
                         }
                     }
                 }
@@ -486,30 +606,26 @@ public sealed partial class CargoSystem
             return;
         }
 
-        if (!SellPallets((uid, component), gridUid, out var price, out var noMultiplierPrice, out var frontierTaxAmount, out var nfsdTaxAmount, out var medicalTaxAmount)) // Frontier: convert first arg to Entity, add noMultiplierPrice // Forge-del: out var blackMarketTaxAmount,
+        if (!SellPallets((uid, component), gridUid, out var price, out var noMultiplierPrice, out var blackMarketTaxAmount, out var frontierTaxAmount, out var nfsdTaxAmount, out var medicalTaxAmount, out var currencyInjections, out var injectionCompany)) // Frontier: convert first arg to Entity, add noMultiplierPrice
             return;
 
         price += noMultiplierPrice;
 
         // End Frontier: market modifiers & immune objects
         // Mono Begin
-        // Forge-change-del-start
-        // if (blackMarketTaxAmount > 0)
-        //     _bank.TrySectorDeposit(SectorBankAccount.BlackMarket, (int)blackMarketTaxAmount, LedgerEntryType.BlackMarketSales);
-        // Forge-change-del-end
+        if (blackMarketTaxAmount > 0)
+            _bank.TrySectorDeposit(SectorBankAccount.BlackMarket, (int)blackMarketTaxAmount, LedgerEntryType.BlackMarketSales);
         if (frontierTaxAmount > 0)
             _bank.TrySectorDeposit(SectorBankAccount.Frontier, (int)frontierTaxAmount, LedgerEntryType.ColonialOutpostSales);
         if (nfsdTaxAmount > 0)
             _bank.TrySectorDeposit(SectorBankAccount.Nfsd, (int)nfsdTaxAmount, LedgerEntryType.TSFMCSales);
         if (medicalTaxAmount > 0)
             _bank.TrySectorDeposit(SectorBankAccount.Medical, (int)medicalTaxAmount, LedgerEntryType.MedicalSales);
-        // Forge-change-del-start
-        // if (blackMarketTaxAmount < 0)
-        // {
-        //     blackMarketTaxAmount = -blackMarketTaxAmount;
-        //     _bank.TrySectorWithdraw(SectorBankAccount.BlackMarket, (int)blackMarketTaxAmount, LedgerEntryType.BlackMarketPenalties);
-        // }
-        // Forge-change-del-end
+        if (blackMarketTaxAmount < 0)
+        {
+            blackMarketTaxAmount = -blackMarketTaxAmount;
+            _bank.TrySectorWithdraw(SectorBankAccount.BlackMarket, (int)blackMarketTaxAmount, LedgerEntryType.BlackMarketPenalties);
+        }
         if (frontierTaxAmount < 0)
         {
             frontierTaxAmount = -frontierTaxAmount;
@@ -525,19 +641,14 @@ public sealed partial class CargoSystem
             medicalTaxAmount = -medicalTaxAmount;
             _bank.TrySectorWithdraw(SectorBankAccount.Medical, (int)medicalTaxAmount, LedgerEntryType.MedicalPenalties);
         }
-        // Mono End
-        var stackPrototype = _protoMan.Index<StackPrototype>(component.CashType);
-        var payout = (int) price;
-        var poiTaxRate = _cfgManager.GetCVar(ForgeCCVars.PoiCaptureSalesTaxRate);
-        if (poiTaxRate > 0f)
-        {
-            var poiTax = (int) Math.Floor(price * poiTaxRate);
-            if (poiTax > 0 && _poiTreasury.TryDepositCash(uid, poiTax, component.CashType))
-                payout -= poiTax;
-        }
 
-        if (payout > 0)
-            _stack.Spawn(payout, stackPrototype, xform.Coordinates);
+        // Faction currency injections
+        if (injectionCompany != null && currencyInjections != null)
+            _currencyInjection.InjectCurrency(injectionCompany ?? "PDV", currencyInjections); // the "if null" case should never actually be used here, but my IDE apparently thinks an explicit check of "is this not null" isn't good enough
+        // Mono End
+        price = EntityManager.System<Content.Server._WF.Companies.WFCompanySystem>().TakeCut(args.Actor, (int) price, "cargo"); // WOLFGATE(Companies): the seller's company takes its cut
+        var stackPrototype = _protoMan.Index<StackPrototype>(component.CashType);
+        _stack.Spawn((int)price, stackPrototype, xform.Coordinates);
         _audio.PlayPvs(ApproveSound, uid);
         UpdatePalletConsoleInterface((uid, component)); // Frontier: EntityUid<Entity
     }

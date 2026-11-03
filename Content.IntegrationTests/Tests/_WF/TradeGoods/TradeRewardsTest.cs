@@ -13,7 +13,7 @@ using Robust.Shared.Timing;
 namespace Content.IntegrationTests.Tests._WF.TradeGoods;
 
 /// <summary>
-/// Payouts beyond the chute price: rush orders raise a station's quote until filled or expired.
+/// Payouts beyond the chute price: rush and bulk orders raise a station's quote until filled or expired.
 /// </summary>
 [TestFixture]
 [TestOf(typeof(WFTradeRushSystem))]
@@ -22,7 +22,9 @@ public sealed class TradeRewardsTest
     private const string Fabric = TradeTestWorld.Fabric;
     private const string Metals = "TradeGoodMetals";
     private const string Scrap = "TradeGoodScrap";
+    private const string HiddenChute = "CargoChuteHideout";
     private static readonly ProtoId<WFTradeRushPrototype> IndustrialRush = "WFTradeRushIndustrial";
+    private static readonly ProtoId<WFTradeRushPrototype> IndustrialBulk = "WFTradeBulkIndustrial";
 
     /// <summary>A real round: rush orders only expire while one is running.</summary>
     [Test]
@@ -95,6 +97,70 @@ public sealed class TradeRewardsTest
             Assert.That(rushes.Active, Does.Not.Contain(expiring), "An expired rush stayed open.");
             var scrap = market.Quote(chute, Scrap)!.Value;
             Assert.That(scrap.Amount, Is.EqualTo(scrap.Base), "An expired rush still raised the price.");
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    private static string StartText(bool bulk)
+    {
+        return Loc.GetString("wf-trade-rush-start", ("bulk", bulk), ("station", "Depot"), ("count", 30),
+            ("goods", "supplies"), ("minutes", 50), ("factor", 1.4));
+    }
+
+    [Test]
+    public async Task BulkOrdersTakeAHoldAtOpenStations()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = false });
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+        var entMan = server.EntMan;
+        var market = entMan.System<WFTradeMarketSystem>();
+        var rushes = entMan.System<WFTradeRushSystem>();
+
+        await server.WaitAssertion(() =>
+        {
+            var hidden = TradeTestWorld.MarketChute(entMan, map, HiddenChute);
+            Assert.That(rushes.Start(IndustrialBulk), Is.Null, "A hidden market took a bulk order.");
+            entMan.DeleteEntity(hidden);
+
+            var chute = TradeTestWorld.MarketChute(entMan, map);
+            var far = TradeTestWorld.Grid(entMan, map, new Vector2(5000f, 0f), "WF test far yard");
+            var seller = entMan.SpawnEntity(null, map.GridCoords);
+
+            var profile = market.Profile(map.Grid.Owner);
+            market.SetVendorStock(map.Grid.Owner, Metals, (int) (profile.StockTarget * 1.2f));
+
+            var bulk = rushes.Start(IndustrialBulk)!;
+            Assert.That(bulk, Is.Not.Null, "No station could post an industrial bulk order.");
+            Assert.That(bulk.Bulk, Is.True);
+            Assert.That(bulk.Total, Is.InRange(25, 45));
+
+            var quote = market.Quote(chute, Metals)!.Value;
+            Assert.That(quote.Reason, Is.EqualTo((LocId) "wf-trade-reason-bulk"));
+            Assert.That(quote.Factor, Is.EqualTo(bulk.Factor).Within(0.01f));
+
+            for (var i = 0; i < bulk.Total; i++)
+            {
+                Assert.That(market.Quote(chute, Metals)!.Value.Amount, Is.EqualTo(quote.Amount), $"Crate {i + 1} of the order paid less.");
+                market.Sell(chute, TradeTestWorld.Hauled(entMan, far, map.GridCoords, Metals), seller);
+            }
+
+            Assert.That(bulk.Remaining, Is.Zero, "A hold's worth of crates didn't fill the order.");
+            Assert.That(rushes.Active, Does.Not.Contain(bulk), "A filled bulk order stayed open.");
+            Assert.That(market.Delivered(map.Grid.Owner, Metals), Is.EqualTo(bulk.Total));
+
+            // Past the order, the crates it brought weigh on the price again.
+            Assert.That(market.Quote(chute, Metals)!.Value.Factor, Is.LessThan(1f), "An order's crates should still fill the shelf.");
+
+            // Unforced rolls keep the two kinds apart.
+            Assert.That(rushes.Start()!.Bulk, Is.False, "A rush roll posted a bulk order.");
+            rushes.Clear();
+            Assert.That(rushes.Start(bulk: true)!.Bulk, Is.True, "A bulk roll posted a rush order.");
+            rushes.Clear();
+
+            Assert.That(StartText(true), Does.StartWith("BULK ORDER:"));
+            Assert.That(StartText(false), Does.StartWith("RUSH:"));
         });
 
         await pair.CleanReturnAsync();

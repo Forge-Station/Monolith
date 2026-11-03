@@ -23,7 +23,7 @@
   minPlayers: 0
   stations:
     WFAsfLantern:
-      stationProto: StandardFrontierOutpost
+      stationProto: MarketFrontierOutpost
       gridComponents:
       - type: DeleteNearbyDrones
       components:

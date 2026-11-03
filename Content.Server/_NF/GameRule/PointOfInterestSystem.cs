@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server._NF.Trade;
+using Content.Server._WF.TradeGoods.Components; // WOLFGATE(TradeGoods)
 using Content.Server.GameTicking;
 using Content.Server.Station.Systems;
 using Content.Shared._NF.CCVar;
@@ -287,6 +288,7 @@ public sealed partial class PointOfInterestSystem : EntitySystem
         _meta.SetEntityName(loadedGrid.Value, stationName, meta);
 
         EntityManager.AddComponents(loadedGrid.Value, proto.AddComponents);
+        EnsureComp<WFTradeStationComponent>(loadedGrid.Value).Id = proto.ID; // WOLFGATE(TradeGoods): stations take their economy role from their POI
 
         // Rename warp points after set up if needed
         if (proto.NameWarp)

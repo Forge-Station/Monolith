@@ -17,13 +17,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._WF.TradeGoods.Systems;
 
-/// <summary>A chute's live quote for one good: its base price, what it pays now and the reason players see.</summary>
-public readonly record struct WFTradeQuote(int Base, int Amount, float Factor, LocId Reason);
+/// <summary>
+/// A chute's live quote for one good: its base price, what it pays now, the reason players see and whether selling at it
+/// leaves the price where it is.
+/// </summary>
+public readonly record struct WFTradeQuote(int Base, int Amount, float Factor, LocId Reason, bool NoGlut = false);
 
 /// <summary>
-/// Station markets for the trade-goods chutes. Each chute grid keeps a pressure per good that sales raise and time
-/// decays; sector modules add modifiers through <see cref="WFTradeQuoteEvent"/>. The chute pays the quote taken when
-/// the crate went in.
+/// Station markets for the trade-goods chutes. A chute pays its table price scaled by how full the station's shelf is;
+/// sector modules add modifiers through <see cref="WFTradeQuoteEvent"/>. The chute pays the quote taken when the crate
+/// went in.
 /// </summary>
 public sealed partial class WFTradeMarketSystem : EntitySystem
 {
@@ -44,13 +47,13 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
     /// <summary>Quotes this far below base suggest a better station in the sale popup.</summary>
     private const float LowQuote = 0.7f;
 
-    /// <summary>Pressure above which a freighter's recent supply is named as the reason for a lower price.</summary>
-    private const float SuppliedPressure = 0.02f;
+    /// <summary>How far a stock factor has to move from 1 before players see it as anything but steady.</summary>
+    private const float SteadyBand = 0.02f;
 
     private readonly Dictionary<string, int?> _cashValues = new();
 
-    /// <summary>Until when NPC freight supply explains a good's low price at a market.</summary>
-    private readonly Dictionary<(EntityUid Grid, string Good), TimeSpan> _supplied = new();
+    /// <summary>Each station id's economy role, built on first use.</summary>
+    private Dictionary<string, WFTradeStationPrototype>? _roles;
 
     public override void Initialize()
     {
@@ -65,7 +68,6 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
 
     private void OnCleanup(RoundRestartCleanupEvent args)
     {
-        _supplied.Clear();
         _pending.Clear();
         _exchange = null;
     }
@@ -74,6 +76,9 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
     {
         if (args.WasModified<EntityPrototype>())
             _cashValues.Clear();
+
+        if (args.WasModified<WFTradeStationPrototype>())
+            _roles = null;
     }
 
     /// <summary>The market profile a grid uses.</summary>
@@ -88,7 +93,11 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
     /// <summary>What a chute's own table pays for a good, or null if it does not buy it.</summary>
     public int? BasePrice(DispenserComponent chute, string good)
     {
-        return chute.Inventory.TryGetValue(good, out var cash) ? CashValue(cash) : null;
+        if (!chute.Inventory.TryGetValue(good, out var cash) || CashValue(cash) is not { } listed)
+            return null;
+
+        var profile = Profile(null);
+        return profile.ContrabandGoods.Contains(good) ? listed : (int) MathF.Round(listed * profile.ChuteTableRate);
     }
 
     /// <summary>The spesos a cash prototype is worth, from its stack count.</summary>
@@ -98,14 +107,14 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
             return cached;
 
         int? value = null;
-        if (_proto.TryIndex<EntityPrototype>(cash, out var proto) && proto.TryGetComponent<StackComponent>(out var stack, _factory))
+        if (_proto.TryIndex<EntityPrototype>(cash, out var proto) && proto.TryComp<StackComponent>(out var stack, _factory))
             value = stack.Count;
 
         _cashValues[cash] = value;
         return value;
     }
 
-    /// <summary>A good's pressure at a market now, decayed since it was last touched.</summary>
+    /// <summary>A console trading crate's pressure at a market now, decayed since it was last touched.</summary>
     public float Pressure(EntityUid grid, string good)
     {
         if (!TryComp<WFTradeMarketComponent>(grid, out var market) || !market.Pressure.TryGetValue(good, out var entry))
@@ -119,20 +128,12 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
         return pressure;
     }
 
-    /// <summary>
-    /// Adds pressure to a good at a market, creating the market if needed. Supply from freight is tagged as such, and
-    /// eases the good's scarcity at the station's vendors by the same amount.
-    /// </summary>
-    public void AddPressure(EntityUid grid, string good, float amount, bool supplied = false)
+    /// <summary>Adds console trading crate pressure at a market, creating the market if needed.</summary>
+    public void AddPressure(EntityUid grid, string good, float amount)
     {
         var market = EnsureComp<WFTradeMarketComponent>(grid);
         var pressure = Pressure(grid, good);
         market.Pressure[good] = (Math.Max(0f, pressure + amount), _timing.CurTime);
-        if (!supplied)
-            return;
-
-        _supplied[(grid, good)] = _timing.CurTime + Profile(grid).HalfLife;
-        AddScarcity(grid, good, -amount);
     }
 
     /// <summary>Crates of a good delivered to a market this round.</summary>
@@ -145,21 +146,23 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
     public WFTradeQuote? Quote(EntityUid chute, string good, EntityUid? crate = null, EntityUid? seller = null)
     {
         if (!TryComp<DispenserComponent>(chute, out var dispenser)
-            || BasePrice(dispenser, good) is not { } basePrice
-            || basePrice <= 0
-            || Transform(chute).GridUid is not { } grid)
+            || Transform(chute).GridUid is not { } grid
+            || (BasePrice(dispenser, good) ?? RestockBase(grid, good)) is not { } basePrice
+            || basePrice <= 0)
             return null;
 
+        var restocking = BasePrice(dispenser, good) == null;
         var profile = Profile(grid);
-        // Contraband has a fixed street price: sales never glut it.
-        var pressure = profile.ContrabandGoods.Contains(good) ? 0f : Pressure(grid, good);
+        var ev = new WFTradeQuoteEvent(grid, chute, good, crate, seller);
+        RaiseLocalEvent(ev);
+
+        // Contraband has a fixed street price, and a bulk order a flat one: the shelf doesn't move either.
+        var contraband = profile.ContrabandGoods.Contains(good);
+        var stock = contraband || ev.NoGlut ? 1f : LevelFactor(profile, ChuteLevel(grid, good));
         var floor = profile.FloorPrices.TryGetValue(good, out var floorPrice)
             ? Math.Min(floorPrice, basePrice)
             : basePrice * profile.Floor;
-        var price = MathF.Max(basePrice * (1f - pressure), floor);
-
-        var ev = new WFTradeQuoteEvent(grid, chute, good, crate, seller);
-        RaiseLocalEvent(ev);
+        var price = MathF.Max(basePrice * stock, floor);
 
         var raise = 1f;
         var lower = 1f;
@@ -185,26 +188,26 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
         }
 
         // Contraband has a fixed street price: no event raises it.
-        if (profile.ContrabandGoods.Contains(good))
+        if (contraband)
         {
             raise = 1f;
             raiseReason = null;
         }
 
         raise = Math.Min(raise, profile.ModifierCap);
-        var amount = (int) MathF.Round(price * raise * lower);
-        var supplied = _supplied.TryGetValue((grid, good), out var until) && _timing.CurTime < until;
+        var amount = (int) MathF.Round(MathF.Min(price * raise, basePrice * profile.PriceCap) * lower);
         var reason = lowerReason
                      ?? raiseReason
-                     ?? (crate == null && IsSealedOnly(chute) ? "wf-trade-reason-sealed-only"
-                         : supplied && pressure >= SuppliedPressure ? "wf-trade-reason-supplied"
-                         : pressure < 0.15f ? "wf-trade-reason-steady"
-                         : "wf-trade-reason-glutted");
-        return new WFTradeQuote(basePrice, amount, amount / (float) basePrice, reason);
+                     ?? (restocking ? "wf-trade-reason-restock"
+                         : crate == null && IsSealedOnly(chute) ? "wf-trade-reason-sealed-only"
+                         : stock >= 1f + SteadyBand ? "wf-trade-reason-wanted"
+                         : stock <= 1f - SteadyBand ? "wf-trade-reason-glutted"
+                         : "wf-trade-reason-steady");
+        return new WFTradeQuote(basePrice, amount, amount / (float) basePrice, reason, ev.NoGlut);
     }
 
     /// <summary>
-    /// Takes a crate into a chute: quotes it, holds the amount for the payout, adds pressure and raises the sale.
+    /// Takes a crate into a chute: quotes it, holds the amount for the payout, puts it on the shelf and raises the sale.
     /// </summary>
     public void Sell(EntityUid chute, EntityUid crate, EntityUid seller, int? fixedAmount = null)
     {
@@ -222,9 +225,6 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
                 return;
 
             amount = quote.Amount;
-            var profile = Profile(grid);
-            if (!profile.ContrabandGoods.Contains(good))
-                AddPressure(grid, good, profile.PerSaleOverrides.GetValueOrDefault(good, profile.PerSale));
             if (quote.Factor < LowQuote && Best(good, grid) is { } best)
             {
                 _popup.PopupEntity(Loc.GetString("wf-trade-sale-low",
@@ -239,6 +239,13 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
         var market = EnsureComp<WFTradeMarketComponent>(grid);
         market.Delivered[good] = market.Delivered.GetValueOrDefault(good) + 1;
         EnsureComp<WFTradeChuteComponent>(chute).PendingAmount = amount;
+
+        // Every crate delivered goes on the shelf, except what's fenced at a working station: that never reaches its books.
+        if (!Profile(grid).ContrabandGoods.Contains(good) && (!IsHiddenChute(chute) || Role(grid) == null))
+        {
+            AddStock(grid, good, 1f);
+            RefreshVendors(grid);
+        }
 
         var ship = CompOrNull<WFTradeOriginComponent>(crate)?.Carrier;
         if (ship is { } carrier && TerminatingOrDeleted(carrier))

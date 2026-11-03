@@ -50,7 +50,7 @@
   minPlayers: 0
   stations:
     CargoDepot:
-      stationProto: StandardFrontierOutpost
+      stationProto: MarketFrontierOutpost # WOLFGATE(TradeGoods): was StandardFrontierOutpost; pallets price materials by station stock
       components: &cargoStationComponents
         - type: StationNameSetup
           mapNameTemplate: 'Грузовое депо' # Has a letter appended in PointOfInterestSystem
@@ -64,5 +64,5 @@
   minPlayers: 0
   stations:
     CargoDepotAlt:
-      stationProto: StandardFrontierOutpost
+      stationProto: MarketFrontierOutpost # WOLFGATE(TradeGoods): was StandardFrontierOutpost; pallets price materials by station stock
       components: *cargoStationComponents

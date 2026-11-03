@@ -6,7 +6,9 @@ using Content.Shared._NF.Bank.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared._WF.Drydock;
+using Content.Shared._WF.TradeGoods;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._WF.Drydock;
 
@@ -296,7 +298,7 @@ public sealed partial class WFDrydockSystem
             return;
         }
 
-        var price = WorkPrice(ship, slot.Comp, upgrade, items);
+        var price = WorkPrice(slot.Console, ship, slot.Comp, upgrade, items);
         if (!TryComp<BankAccountComponent>(actor, out var bank))
         {
             Tell(actor, helm, Loc.GetString("drydock-console-no-bank-account"));
@@ -521,11 +523,14 @@ public sealed partial class WFDrydockSystem
         return BuildRefitWork(ship, comp, upgrade, out items);
     }
 
-    /// <summary>Price of a repair (with its fee) or a refit.</summary>
-    private int WorkPrice(EntityUid ship, WFDrydockConsoleComponent comp, string? upgrade, List<WFDrydockWorkItem> items)
+    private static readonly ProtoId<WFTradeServicePrototype> DrydockService = "WFTradeServiceDrydock";
+
+    /// <summary>Price of a repair (with its fee) or a refit, dearer while the yard is short of parts.</summary>
+    private int WorkPrice(EntityUid console, EntityUid ship, WFDrydockConsoleComponent comp, string? upgrade, List<WFDrydockWorkItem> items)
     {
         var cost = items.Sum(i => i.Cost);
-        return upgrade == null ? RepairFee(ship, comp) + cost : cost;
+        var price = upgrade == null ? RepairFee(ship, comp) + cost : cost;
+        return Transform(console).GridUid is { } yard ? (int) MathF.Ceiling(price * _tradeMarket.ServicePrice(yard, DrydockService)) : price;
     }
 
     /// <summary>Orders two extents as (short, long).</summary>

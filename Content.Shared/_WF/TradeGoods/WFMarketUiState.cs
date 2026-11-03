@@ -9,6 +9,12 @@ public sealed class WFMarketUiState : BoundUserInterfaceState
     public List<WFMarketStation> Stations = new();
     public List<WFMarketAlert> Alerts = new();
 
+    /// <summary>Where each material sells best and is cheapest to buy.</summary>
+    public List<WFMarketMaterial> Materials = new();
+
+    /// <summary>What the sector holds, makes and uses of each good, scarcest first.</summary>
+    public List<WFMarketSectorGood> Sector = new();
+
     /// <summary>
     /// This copy leaves out the hidden markets and the holder's own alerts: the full one was sent to the viewers
     /// alone in a <see cref="WFMarketPrivateStateEvent"/>, since UI state reaches every client near the PDA.
@@ -44,9 +50,22 @@ public sealed class WFMarketStation
     public Color FactionColor = Color.Gray;
 }
 
-/// <summary>One good's live sell or buy price at a station; <c>Reason</c> is already localized.</summary>
+/// <summary>
+/// One good's live sell or buy price at a station; <c>Reason</c> is already localized. <c>Stock</c> is what a vendor has
+/// left, or null if it never runs out. <c>Level</c> is how full the station's shelf is, or null outside the sector economy.
+/// </summary>
 [Serializable, NetSerializable]
-public readonly record struct WFMarketPrice(string Good, int Amount, float Factor, string Reason, float Tonnes, bool Highlight);
+public readonly record struct WFMarketPrice(string Good, int Amount, float Factor, string Reason, float Tonnes, bool Highlight, int? Stock = null, float? Level = null);
+
+/// <summary>A good across the sector: crates on hand and owed, made and used per hour, and the stations scarce of it.</summary>
+[Serializable, NetSerializable]
+public readonly record struct WFMarketSectorGood(string Good, int Stock, int Owed, int Made, int Used, List<string> Short);
+
+/// <summary>
+/// A material's best pallet and cheapest console stock across the holder's markets, per unit; a price of zero means none.
+/// </summary>
+[Serializable, NetSerializable]
+public readonly record struct WFMarketMaterial(string Good, double BestPay, string BestPayStation, double Cheapest, string CheapestStation, int Stock);
 
 /// <summary>A sector event in the Alerts tab; <c>Ends</c> is game time, or null for no countdown.</summary>
 [Serializable, NetSerializable]

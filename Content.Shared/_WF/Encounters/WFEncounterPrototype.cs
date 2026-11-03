@@ -81,6 +81,14 @@ public sealed partial class WFEncounterPrototype : IPrototype
     [DataField]
     public List<ProtoId<WFEncounterManifestPrototype>> Manifests = new();
 
+    /// <summary>A freight run: it keeps its own schedule and cap, outside the storyteller's, so it never crowds out the sector's events.</summary>
+    [DataField]
+    public bool Freight;
+
+    /// <summary>While it runs, the station it is placed at counts as blockaded.</summary>
+    [DataField]
+    public bool Blockades;
+
     /// <summary>Who starts it: the storyteller at round start, the storyteller during the round, or only admins and code.</summary>
     [DataField]
     public WFEncounterStart Start = WFEncounterStart.Scheduled;

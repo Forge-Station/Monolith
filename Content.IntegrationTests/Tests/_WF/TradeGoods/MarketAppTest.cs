@@ -25,7 +25,7 @@ public sealed class MarketAppTest
             var station = new WFMarketStation { Name = "Halcyon", Faction = "Trans-Solarian Federation" };
             station.Prices.Add(new WFMarketPrice("medical supplies", 9500, 1.9f, "blockade", 1f, true));
             station.Prices.Add(new WFMarketPrice("metals", 2000, 0.5f, "glutted", 5f, false));
-            station.Buys.Add(new WFMarketPrice("fabric", 1130, 1.13f, "scarce", 1f, false));
+            station.Buys.Add(new WFMarketPrice("fabric", 1130, 1.13f, "scarce", 1f, false, 44, 0.37f));
             var rival = new WFMarketStation { Name = "Camelot", Faction = "USSP" };
             rival.Prices.Add(new WFMarketPrice("medical supplies", 6000, 1f, "steady", 1f, false));
             var state = new WFMarketUiState();
@@ -36,6 +36,9 @@ public sealed class MarketAppTest
             state.Stations.Add(fence);
             state.Alerts.Add(new WFMarketAlert("Freighter Plutomkii inbound to Halcyon with medical supplies", null, false, WFMarketAlertKind.Traffic));
             state.Alerts.Add(new WFMarketAlert("RUSH Halcyon", System.TimeSpan.FromHours(1), true));
+            state.Materials.Add(new WFMarketMaterial("steel", 6.5, "Halcyon", 9.25, "Camelot", 1200));
+            state.Materials.Add(new WFMarketMaterial("gold bar", 22, "Camelot", 0, string.Empty, 0));
+            state.Sector.Add(new WFMarketSectorGood("medical supplies", 310, 40, 23, 19, new List<string> { "Halcyon" }));
 
             var fragment = new MarketUiFragment(EntityUid.Invalid);
             fragment.UpdatePublicState(state);
@@ -62,6 +65,13 @@ public sealed class MarketAppTest
             Assert.That(texts, Has.Some.EqualTo("BUY HERE"), "Vendor prices should show on the station's card.");
             Assert.That(texts, Has.Some.EqualTo("1130"));
             Assert.That(texts, Has.Some.EqualTo("scarce"));
+            Assert.That(texts, Has.Some.Contains("Sell at Halcyon: 6.5 each"));
+            Assert.That(texts, Has.Some.Contains("Buy at Camelot: 9.25 each, 1200 in stock"));
+            Assert.That(texts, Has.Some.Contains("No station has this in stock"));
+            Assert.That(texts, Has.Some.EqualTo("44 left"), "A vendor row should show its stock.");
+            Assert.That(texts, Has.Some.Contains("310 crates in the sector, 40 waiting on freight"));
+            Assert.That(texts, Has.Some.Contains("23 made and 19 used an hour"));
+            Assert.That(texts, Has.Some.Contains("Short at Halcyon"));
             Assert.That(texts.Any(text => text.Contains('{') || text.Contains("wf-market")), Is.False, "Every string should resolve.");
 
             // An empty state says so on every tab.
@@ -69,6 +79,7 @@ public sealed class MarketAppTest
             texts = Texts(fragment).ToList();
             Assert.That(texts, Has.Some.Contains("No stations"));
             Assert.That(texts, Has.Some.Contains("Nothing happening"));
+            Assert.That(texts, Has.Some.Contains("No station is reporting"));
         });
 
         await pair.CleanReturnAsync();

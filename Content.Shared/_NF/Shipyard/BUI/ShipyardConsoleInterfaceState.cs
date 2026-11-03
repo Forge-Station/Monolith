@@ -31,11 +31,10 @@ public sealed class ShipyardConsoleInterfaceState : BoundUserInterfaceState
         (List<string> available, List<string> unavailable) shipyardPrototypes,
         string shipyardName,
         bool freeListings,
+        bool purchasedWithVoucher, // Forge-change
         float sellRate,
         List<HangarVesselUiEntry>? hangarVessels = null,
         int hangarMaxSlots = 2)
-        bool purchasedWithVoucher, // Forge-change
-        float sellRate)
     {
         Balance = balance;
         AccessGranted = accessGranted;

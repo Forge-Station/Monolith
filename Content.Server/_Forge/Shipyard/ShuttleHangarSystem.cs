@@ -315,6 +315,7 @@ public sealed partial class ShipyardSystem
                 current.ShipyardPrototypes,
                 current.ShipyardName,
                 current.FreeListings,
+                current.PurchasedWithVoucher,
                 current.SellRate,
                 entries,
                 Math.Max(0, _configManager.GetCVar(ForgeCCVars.HangarMaxSlots))));

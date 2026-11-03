@@ -15,8 +15,8 @@ public class ShuttleRecord(
     bool purchasedWithVoucher,
     uint purchasePrice,
     TimeSpan? timeOfPurchase = null,
-    Guid? persistedVesselId = null
-    uint spawnAppraisalValue = 0, // Forge-change
+    Guid? persistedVesselId = null,
+    uint spawnAppraisalValue = 0 // Forge-change
 )
 {
     [ViewVariables]

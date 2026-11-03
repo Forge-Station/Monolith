@@ -26,7 +26,7 @@ public sealed class ClothingStyleCyclerSystem : EntitySystem
     {
         if (!ent.Comp.CycleViaAction || !InValidSlot(ent))
             return;
-        args.AddAction(ref ent Comp.ActionEntity, ent.Comp.Action);
+        args.AddAction(ref ent.Comp.ActionEntity, ent.Comp.Action);
     }
 
     private void OnCycleStyleAction(Entity<ClothingStyleCyclerComponent> ent, ref CycleClothingStyleEvent args)

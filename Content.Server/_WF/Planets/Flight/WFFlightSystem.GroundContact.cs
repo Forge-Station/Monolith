@@ -22,7 +22,7 @@ public sealed partial class WFFlightSystem
         var halfSize = hull.Comp.LocalAABB.Size.Length() * 0.5f;
         var range = halfSize + 80f;
         skid.Loop = _audio.PlayStatic(SkidSound, _audience.Aboard(hull).AddInRange(centre, range), coords, true,
-            AudioParams.Default.WithLoop(true).WithVolume(6f).WithReferenceDistance(Math.Max(8f, halfSize))
+            AudioParams.Default.WithLoop(true).WithVolume(SkidGrindVolume).WithReferenceDistance(Math.Max(8f, halfSize))
                 .WithMaxDistance(range).WithRolloffFactor(1f))?.Entity;
         skid.NextLoopRefresh = _timing.CurTime + TimeSpan.FromSeconds(10);
     }
@@ -44,7 +44,7 @@ public sealed partial class WFFlightSystem
         var range = hull.LocalAABB.Size.Length() * 0.5f + 80f;
         skid.ImpactStream = _audio.PlayStatic(HardLandingSound,
             _audience.Aboard(grid).AddInRange(_transform.ToMapCoordinates(coords), range), coords, true,
-            AudioParams.Default.WithVolume(6f).WithReferenceDistance(12f).WithMaxDistance(range))?.Entity;
+            AudioParams.Default.WithVolume(SkidImpactVolume).WithReferenceDistance(12f).WithMaxDistance(range))?.Entity;
     }
 
     /// <summary>Light abrasion on a few contact tiles and their anchored structures, including detached sections.</summary>

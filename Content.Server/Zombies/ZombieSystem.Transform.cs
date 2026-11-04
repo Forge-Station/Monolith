@@ -22,6 +22,8 @@ using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.MouseRotator; // WOLFGATE(NpcFacing)
+using Content.Shared.Movement.Components; // WOLFGATE(NpcFacing)
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NameModifier.EntitySystems;
@@ -253,6 +255,10 @@ public sealed partial class ZombieSystem
         else
         {
             _npc.WakeNPC(target, htn);
+            // WOLFGATE(NpcFacing) START: combat mode above ran before HTN existed, so it gave this mindless zombie a mouse rotator and pinned its facing.
+            RemComp<MouseRotatorComponent>(target);
+            RemComp<NoRotateOnMoveComponent>(target);
+            // WOLFGATE END
         }
 
         if (!HasComp<GhostRoleMobSpawnerComponent>(target) && !hasMind) //this specific component gives build test trouble so pop off, ig

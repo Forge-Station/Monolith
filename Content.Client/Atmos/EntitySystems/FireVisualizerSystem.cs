@@ -82,6 +82,11 @@ public sealed partial class FireVisualizerSystem : VisualizerSystem<FireVisualsC
         else
             sprite.LayerSetState(index, component.NormalState);
 
+        // WOLFGATE START: a mob that arrives burning would get its light child before it is initialised itself; the appearance update queued at startup lays it.
+        if (LifeStage(uid) < EntityLifeStage.Initialized)
+            return;
+        // WOLFGATE END
+
         component.LightEntity ??= Spawn(null, new EntityCoordinates(uid, default));
         var light = EnsureComp<PointLightComponent>(component.LightEntity.Value);
 

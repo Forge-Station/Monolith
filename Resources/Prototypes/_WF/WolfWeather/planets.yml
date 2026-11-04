@@ -1,0 +1,204 @@
+# Weathers the planets use, picked per world by each wfPlanetWeather's wolfWeathers table.
+
+# A planet thunderstorm: a bolt every 6 to 22 seconds lands near a visitor out in the open, as planet storms always did.
+- type: wolfWeather
+  parent: WFStorm
+  id: WFThunderstorm
+  lightning:
+    interval: 6, 22
+    strikeChance: 1
+    nearSound:
+      collection: WFWolfThunderNear
+      params:
+        maxDistance: 120
+        referenceDistance: 10
+        rolloffFactor: 0.3
+        variation: 0.05
+    farSound:
+      collection: WFWolfThunderFar
+      params:
+        volume: 0
+        variation: 0.05
+
+- type: wolfWeather
+  id: WFAshfall
+  wind: 1.2, -0.3
+  gust: 0.2
+  gustPeriod: 18
+  sounds:
+  - files:
+    - /Audio/Effects/Weather/snowstorm_weak.ogg
+    volume: 0.3
+  ambientTint: "#d8c8b8"
+  layers:
+  - kind: Snow
+    windScale: 0.5
+    spacing: 0.5
+    density: 0.4
+    fallSpeed: 0.8
+    width: 1
+    wobble: 1
+    color: "#4a4440b3"
+  - kind: Snow
+    windScale: 0.6
+    spacing: 0.8
+    density: 0.35
+    fallSpeed: 1.2
+    width: 2
+    wobble: 1.5
+    color: "#6e6560cc"
+    minQuality: 2
+
+# Strong enough to blow loose items about.
+- type: wolfWeather
+  id: WFAshStorm
+  wind: 4.5, -0.8
+  gust: 0.3
+  gustPeriod: 12
+  windResponse: 4
+  sounds:
+  - files:
+    - /Audio/Effects/Weather/snowstorm.ogg
+    volume: 0.35
+  - collection: WFWolfWindStrong
+    volume: 0.35
+  ambientTint: "#b09080"
+  layers:
+  - kind: Fog
+    spacing: 6
+    density: 0.6
+    softness: 0.35
+    windScale: 1.5
+    color: "#3a302a80"
+  - kind: Snow
+    windScale: 0.6
+    spacing: 0.3
+    density: 0.6
+    fallSpeed: 1.5
+    width: 1
+    wobble: 0.8
+    color: "#3c3632cc"
+  - kind: Snow
+    windScale: 0.7
+    spacing: 0.6
+    density: 0.5
+    fallSpeed: 2
+    width: 2
+    wobble: 1
+    color: "#5a504ae6"
+    minQuality: 2
+
+- type: wolfWeather
+  id: WFDustLight
+  wind: 2, 0.2
+  gust: 0.25
+  gustPeriod: 15
+  sounds:
+  - collection: WFWolfWindLight
+    volume: 0.3
+  ambientTint: "#f0e4d0"
+  layers:
+  - kind: Fog
+    spacing: 8
+    density: 0.4
+    softness: 0.4
+    windScale: 1.2
+    color: "#c8a87850"
+  - kind: Snow
+    windScale: 1.5
+    spacing: 0.6
+    density: 0.25
+    fallSpeed: 0.3
+    width: 1
+    wobble: 0.5
+    color: "#b89a6c99"
+    minQuality: 2
+
+- type: wolfWeather
+  id: WFSandstorm
+  wind: 4, 0.3
+  gust: 0.3
+  gustPeriod: 12
+  windResponse: 4
+  sounds:
+  - files:
+    - /Audio/Effects/Weather/snowstorm_weak.ogg
+    volume: 0.35
+  - collection: WFWolfWindStrong
+    volume: 0.3
+  ambientTint: "#e0c8a0"
+  layers:
+  - kind: Fog
+    spacing: 6
+    density: 0.6
+    softness: 0.35
+    windScale: 1.4
+    color: "#c09868a0"
+  - kind: Snow
+    windScale: 1.6
+    spacing: 0.4
+    density: 0.45
+    fallSpeed: 0.4
+    width: 1
+    wobble: 0.5
+    color: "#a88a5cb3"
+
+- type: wolfWeather
+  id: WFSandstormHeavy
+  wind: 6, 0.4
+  gust: 0.35
+  gustPeriod: 10
+  windResponse: 3
+  sounds:
+  - files:
+    - /Audio/Effects/Weather/snowstorm.ogg
+    volume: 0.4
+  - collection: WFWolfWindStrong
+    volume: 0.4
+  ambientTint: "#c8a878"
+  layers:
+  - kind: Fog
+    spacing: 4
+    density: 0.8
+    softness: 0.3
+    windScale: 1.6
+    color: "#b08858c0"
+  - kind: Snow
+    windScale: 1.8
+    spacing: 0.3
+    density: 0.6
+    fallSpeed: 0.5
+    width: 1
+    wobble: 0.5
+    color: "#98784cd9"
+  - kind: Snow
+    windScale: 2
+    spacing: 0.6
+    density: 0.45
+    fallSpeed: 0.6
+    width: 2
+    wobble: 0.8
+    color: "#b89a6ce6"
+    minQuality: 2
+
+# Carcinoma's blood storm strikes like a thunderstorm.
+- type: wolfWeather
+  parent: WFBloodRainHeavy
+  id: WFBloodStorm
+  wind: 2, 0
+  lightning:
+    interval: 6, 22
+    strikeChance: 1
+    flashColor: "#ffd0c8"
+    nearSound:
+      collection: WFWolfThunderNear
+      params:
+        maxDistance: 120
+        referenceDistance: 10
+        rolloffFactor: 0.3
+        variation: 0.05
+    farSound:
+      collection: WFWolfThunderFar
+      params:
+        volume: 0
+        variation: 0.05

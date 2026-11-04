@@ -1,7 +1,11 @@
 using System.Globalization;
 using Content.Shared._CE.ZLevels.Core.Components;
+using Content.Shared._WF.CCVar;
+using Content.Server._WF.WolfWeather;
 using Content.Shared._WF.Planets;
+using Content.Shared._WF.WolfWeather;
 using Content.Shared.Weather;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -12,10 +16,12 @@ namespace Content.Server._WF.Planets;
 /// <summary>Bounded planet-wide weather cycles. Orbit remains dry; the timepiece reports surface conditions.</summary>
 public sealed partial class WFPlanetWeatherSystem : EntitySystem
 {
+    [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedWeatherSystem _weather = default!;
+    [Dependency] private WolfWeatherSystem _wolfWeather = default!;
     private TimeSpan _nextUpdate;
 
     public void Configure(EntityUid network, WFPlanetSurfacePrototype surface, string name)
@@ -28,7 +34,11 @@ public sealed partial class WFPlanetWeatherSystem : EntitySystem
             comp.Profile = profile.ID;
             comp.PlanetName = name;
             comp.Epoch = _timing.CurTime;
-            comp.NextChange = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(profile.ClearMinSeconds, profile.ClearMaxSeconds));
+            // A world with seasons starts each round in a random one.
+            StartSeason(comp, profile, profile.Seasons.Count > 1 ? _random.Next(profile.Seasons.Count) : 0);
+            var clearScale = GetSeason(comp, profile, _timing.CurTime)?.ClearScale ?? 1f;
+            comp.NextChange = _timing.CurTime + TimeSpan.FromSeconds(
+                _random.NextFloat(profile.ClearMinSeconds, profile.ClearMaxSeconds) * clearScale);
             PublishNetwork(Comp<WFPlanetNetworkComponent>(network), comp, profile);
             return;
         }
@@ -45,28 +55,28 @@ public sealed partial class WFPlanetWeatherSystem : EntitySystem
         {
             if (MetaData(uid).EntityPaused || !_proto.TryIndex(state.Profile, out var profile))
                 continue;
-            if (_timing.CurTime >= state.NextChange)
+            if (state.AdminHeld && _timing.CurTime >= state.NextChange)
+                state.AdminHeld = false;
+            // An admin's weather holds even while the cycle is off, until its time is up.
+            if (!_cfg.GetCVar(PlanetCVars.PlanetWeather) && !state.AdminHeld)
             {
-                if (profile.Storms.Count > 0 || state.Phase != WFStormPhase.None)
-                {
-                    AdvanceStorm(state, profile);
-                }
-                else
-                {
-                    state.Current = state.Current == null && profile.Weather.Count > 0
-                        ? (ProtoId<WeatherPrototype>?) _random.Pick(profile.Weather) : null;
-                    var seconds = state.Current == null
-                        ? _random.NextFloat(profile.ClearMinSeconds, profile.ClearMaxSeconds)
-                        : _random.NextFloat(profile.WeatherMinSeconds, profile.WeatherMaxSeconds);
-                    state.NextChange = _timing.CurTime + TimeSpan.FromSeconds(seconds);
-                }
+                // Held clear: anything already falling stops, and nothing new is scheduled.
+                state.Current = null;
+                state.Phase = WFStormPhase.None;
+                state.NextChange = _timing.CurTime + TimeSpan.FromSeconds(profile.ClearMinSeconds);
+                state.Upcoming.Clear();
             }
-            UpdateThunder(network, state, profile);
-            foreach (var layer in network.Layers)
+            else if (_timing.CurTime >= state.NextChange)
             {
-                if (layer != network.OrbitMap && !TerminatingOrDeleted(layer))
-                    Apply(layer, state);
+                Advance(state, profile);
             }
+            else
+            {
+                Fill(state, profile);
+            }
+            // Weather falls on the surface only; the air above, the orbit and the levels below stay clear.
+            if (!TerminatingOrDeleted(network.GroundMap))
+                Apply(network.GroundMap, state);
             PublishNetwork(network, state, profile);
         }
         // Transit maps are created on demand while a ship changes altitude.
@@ -76,7 +86,6 @@ public sealed partial class WFPlanetWeatherSystem : EntitySystem
             if (transit.LowerMap is { } lower && TryGetWorld(lower, out var world) &&
                 TryComp<WFPlanetWeatherComponent>(world, out var state) && !MetaData(world).EntityPaused)
             {
-                Apply(uid, state);
                 if (_proto.TryIndex(state.Profile, out var profile) && TryGetReport(lower, out var name, out _, out var weather))
                 {
                     PublishMap(uid, name, GetMinuteOfDay(state, profile), weather);
@@ -98,9 +107,10 @@ public sealed partial class WFPlanetWeatherSystem : EntitySystem
         }
     }
 
-    private int GetMinuteOfDay(WFPlanetWeatherComponent state, WFPlanetWeatherPrototype profile)
+    /// <summary>The world's local minute of the day now, or at a given time.</summary>
+    public int GetMinuteOfDay(WFPlanetWeatherComponent state, WFPlanetWeatherPrototype profile, TimeSpan? at = null)
     {
-        var elapsed = (_timing.CurTime - state.Epoch).TotalSeconds;
+        var elapsed = ((at ?? _timing.CurTime) - state.Epoch).TotalSeconds;
         var minutes = Math.Floor(profile.InitialHour * 60 + elapsed * 1440 / Math.Max(1, profile.DaySeconds));
         return (int) ((minutes % 1440 + 1440) % 1440);
     }
@@ -137,19 +147,44 @@ public sealed partial class WFPlanetWeatherSystem : EntitySystem
         if (!TryComp<MapComponent>(map, out var mapComp) || HasComp<WFOrbitLayerComponent>(map))
             return;
         var applied = EnsureComp<WFPlanetWeatherAppliedComponent>(map);
-        if (applied.Current == state.Current && applied.EndTime == state.NextChange)
+        var wolf = ResolveWolfWeather(state.Profile, state.Current);
+        var hasWolf = HasComp<WolfWeatherMapComponent>(map);
+        if (applied.Current == state.Current && applied.EndTime == state.NextChange && applied.WolfWeather == wolf && hasWolf)
             return;
         // Clear on a virgin map needs no WeatherComponent or network update.
         if (state.Current != null || applied.Current != null)
             _weather.SetWeather(mapComp.MapId, state.Current is { } id ? _proto.Index(id) : null,
                 state.Current != null ? state.NextChange : null);
+        // WolfWeather draws, sounds, blows and strikes for the stock weather; its state on a layer, even clear, keeps the
+        // stock overlay and loop off there. Open-ended, so each phase cross-fades into the next when the scheduler moves.
+        if (applied.WolfWeather != wolf || !hasWolf)
+            _wolfWeather.SetWeather(map, wolf, null);
         applied.Current = state.Current;
         applied.EndTime = state.NextChange;
+        applied.WolfWeather = wolf;
     }
 
-    private bool TryGetWorld(EntityUid map, out EntityUid world)
+    /// <summary>The WolfWeather that shows a stock weather on a world: its own table's, else any world's, else none.</summary>
+    public ProtoId<WolfWeatherPrototype>? ResolveWolfWeather(ProtoId<WFPlanetWeatherPrototype> profile, ProtoId<WeatherPrototype>? weather)
+    {
+        if (weather is not { } id)
+            return null;
+        if (_proto.TryIndex(profile, out var own) && own.WolfWeathers.TryGetValue(id, out var wolf))
+            return wolf;
+        foreach (var other in _proto.EnumeratePrototypes<WFPlanetWeatherPrototype>())
+        {
+            if (other.WolfWeathers.TryGetValue(id, out wolf))
+                return wolf;
+        }
+        return null;
+    }
+
+    /// <summary>The world entity a planet layer, or a transit map between two, belongs to.</summary>
+    public bool TryGetWorld(EntityUid map, out EntityUid world)
     {
         world = default;
+        if (TryComp<CEZTransitMapComponent>(map, out var transit) && transit.LowerMap is { } lower)
+            map = lower;
         if (TryComp<WFPlanetLayerComponent>(map, out var layer) && layer.Network is { } net &&
             TryGetEntity(net, out var resolved) && resolved is { } uid && HasComp<WFPlanetNetworkComponent>(uid))
         {

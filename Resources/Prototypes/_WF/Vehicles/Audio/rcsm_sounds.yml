@@ -1,0 +1,485 @@
+# RCSM sound collections for the ground vehicles, and the PMC tank's guns and shell with RCSM sounds.
+
+- type: soundCollection
+  id: WFRcsmTracksStop
+  files:
+  - /Audio/_WF/Vehicles/RCSM/tracks/tracks_stop1.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/tracks_stop2.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/tracks_stop3.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/tracks_stop4.ogg
+
+- type: soundCollection
+  id: WFRcsmTurretStart
+  files:
+  - /Audio/_WF/Vehicles/RCSM/turret/start1.ogg
+  - /Audio/_WF/Vehicles/RCSM/turret/start2.ogg
+  - /Audio/_WF/Vehicles/RCSM/turret/start3.ogg
+
+- type: soundCollection
+  id: WFRcsmTurretStop
+  files:
+  - /Audio/_WF/Vehicles/RCSM/turret/stop1.ogg
+  - /Audio/_WF/Vehicles/RCSM/turret/stop2.ogg
+  - /Audio/_WF/Vehicles/RCSM/turret/stop3.ogg
+
+- type: soundCollection
+  id: WFRcsmCannon
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/cannon1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/cannon2.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/cannon3.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/cannon4.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/cannon5.ogg
+
+- type: soundCollection
+  id: WFRcsmCannonFar
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/cannon_far1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/cannon_far2.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/cannon_far3.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/cannon_far4.ogg
+
+- type: soundCollection
+  id: WFRcsmCannonReload
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/reload1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/reload2.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/reload3.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/reload4.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/reload5.ogg
+
+- type: soundCollection
+  id: WFRcsmHeavyMG
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/mg1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/mg2.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/mg3.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/mg4.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/mg5.ogg
+
+- type: soundCollection
+  id: WFRcsmSmokeLauncher
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/smoke1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/smoke2.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/smoke3.ogg
+
+- type: soundCollection
+  id: WFRcsmHitBullet
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/bullet1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/bullet2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/bullet3.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/bullet4.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/bullet5.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/bullet6.ogg
+
+- type: soundCollection
+  id: WFRcsmHitShell
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell3.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell4.ogg
+
+- type: soundCollection
+  id: WFRcsmCollide
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/collide1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/collide2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/collide3.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/collide4.ogg
+
+- type: soundCollection
+  id: WFRcsmCrash
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/crash1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/crash2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/crash3.ogg
+
+- type: soundCollection
+  id: WFRcsmCrush
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/crush1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/crush2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/crush3.ogg
+
+- type: soundCollection
+  id: WFRcsmPivotScreech
+  files:
+  - /Audio/_WF/Vehicles/RCSM/tracks/screech1.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/screech2.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/screech3.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/screech4.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/screech5.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/rattle1.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/rattle2.ogg
+  - /Audio/_WF/Vehicles/RCSM/tracks/rattle3.ogg
+
+- type: soundCollection
+  id: WFRcsmBreechOpen
+  files:
+  - /Audio/_WF/Vehicles/RCSM/loading/breech_open1.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/breech_open2.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/breech_open3.ogg
+
+- type: soundCollection
+  id: WFRcsmStubDrop
+  files:
+  - /Audio/_WF/Vehicles/RCSM/loading/stub1.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/stub2.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/stub3.ogg
+
+- type: soundCollection
+  id: WFRcsmAmmoDoor
+  files:
+  - /Audio/_WF/Vehicles/RCSM/loading/ammo_door1.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/ammo_door2.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/ammo_door3.ogg
+
+- type: soundCollection
+  id: WFRcsmRoundHandle
+  files:
+  - /Audio/_WF/Vehicles/RCSM/loading/round1.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/round2.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/round3.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/round4.ogg
+
+- type: soundCollection
+  id: WFRcsmRam
+  files:
+  - /Audio/_WF/Vehicles/RCSM/loading/ram1.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/ram2.ogg
+  - /Audio/_WF/Vehicles/RCSM/loading/ram3.ogg
+
+- type: soundCollection
+  id: WFRcsmRicochet
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico3.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico4.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico5.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico6.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico7.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico8.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico9.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico10.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico11.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico12.ogg
+
+- type: soundCollection
+  id: WFRcsmShellRicochet
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico_shell1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico_shell2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico_shell3.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/rico_shell4.ogg
+
+- type: soundCollection
+  id: WFRcsmShellBlast
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_he1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_he2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_he3.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_frag1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_frag2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_frag3.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_frag4.ogg
+
+- type: soundCollection
+  id: WFRcsmShellBlastFar
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_far1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_far2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_far3.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_far4.ogg
+
+- type: soundCollection
+  id: WFRcsmCannonWW2
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_cannon1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_cannon2.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_cannon3.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_cannon4.ogg
+
+- type: soundCollection
+  id: WFRcsmCannonWW2Far
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_cannon_far1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_cannon_far2.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_cannon_far3.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_cannon_far4.ogg
+
+- type: soundCollection
+  id: WFRcsmCannonMech
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_mech1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/ww2_mech2.ogg
+
+- type: soundCollection
+  id: WFRcsmHeavyCannon
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/heavy_cannon1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/heavy_cannon2.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/heavy_cannon3.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/heavy_cannon4.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/heavy_cannon5.ogg
+
+- type: soundCollection
+  id: WFRcsmHeavyCannonFar
+  files:
+  - /Audio/_WF/Vehicles/RCSM/weapons/heavy_cannon_far1.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/heavy_cannon_far2.ogg
+  - /Audio/_WF/Vehicles/RCSM/weapons/heavy_cannon_far3.ogg
+
+- type: soundCollection
+  id: WFRcsmShellImpact
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_ap1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_ap2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_ap3.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/shell_ap4.ogg
+
+- type: soundCollection
+  id: WFRcsmElectricTurretStart
+  files:
+  - /Audio/_WF/Vehicles/RCSM/turret/electric_start1.ogg
+  - /Audio/_WF/Vehicles/RCSM/turret/electric_start2.ogg
+
+- type: soundCollection
+  id: WFRcsmElectricTurretStop
+  files:
+  - /Audio/_WF/Vehicles/RCSM/turret/electric_stop1.ogg
+  - /Audio/_WF/Vehicles/RCSM/turret/electric_stop2.ogg
+
+- type: soundCollection
+  id: WFRcsmHydraulicTurretStart
+  files:
+  - /Audio/_WF/Vehicles/RCSM/turret/hydraulic_start1.ogg
+  - /Audio/_WF/Vehicles/RCSM/turret/hydraulic_start2.ogg
+
+- type: soundCollection
+  id: WFRcsmHydraulicTurretStop
+  files:
+  - /Audio/_WF/Vehicles/RCSM/turret/hydraulic_stop1.ogg
+  - /Audio/_WF/Vehicles/RCSM/turret/hydraulic_stop2.ogg
+
+- type: soundCollection
+  id: WFRcsmVehicleBlastAmmo
+  files:
+  - /Audio/_WF/Vehicles/RCSM/destroyed/blast_ammo.ogg
+
+- type: soundCollection
+  id: WFRcsmVehicleBlastLayer
+  files:
+  - /Audio/_WF/Vehicles/RCSM/destroyed/layer1.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/layer2.ogg
+
+- type: soundCollection
+  id: WFRcsmVehicleBlast
+  files:
+  - /Audio/_WF/Vehicles/RCSM/destroyed/blast1.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/blast2.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/blast3.ogg
+
+- type: soundCollection
+  id: WFRcsmVehicleDebris
+  files:
+  - /Audio/_WF/Vehicles/RCSM/destroyed/debris1.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/debris2.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/debris3.ogg
+
+- type: soundCollection
+  id: WFRcsmVehicleCookoff
+  files:
+  - /Audio/_WF/Vehicles/RCSM/destroyed/cookoff1.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/cookoff2.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/cookoff3.ogg
+
+- type: soundCollection
+  id: WFRcsmVehicleCrackers
+  files:
+  - /Audio/_WF/Vehicles/RCSM/destroyed/crackers1.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/crackers2.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/crackers3.ogg
+
+- type: soundCollection
+  id: WFRcsmVehicleBurn
+  files:
+  - /Audio/_WF/Vehicles/RCSM/destroyed/burn1.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/burn2.ogg
+
+- type: soundCollection
+  id: WFRcsmVehicleFire
+  files:
+  - /Audio/_WF/Vehicles/RCSM/destroyed/fire1.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/fire2.ogg
+
+- type: soundCollection
+  id: WFRcsmVehicleFireStress
+  files:
+  - /Audio/_WF/Vehicles/RCSM/destroyed/stress1.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/stress2.ogg
+  - /Audio/_WF/Vehicles/RCSM/destroyed/stress3.ogg
+
+- type: soundCollection
+  id: WFRcsmCarCrash
+  files:
+  - /Audio/_WF/Vehicles/RCSM/impacts/car_crash1.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/car_crash2.ogg
+  - /Audio/_WF/Vehicles/RCSM/impacts/car_crash3.ogg
+
+- type: soundCollection
+  id: WFRcsmEngineRev
+  files:
+  - /Audio/_WF/Vehicles/RCSM/engines/rev1.ogg
+  - /Audio/_WF/Vehicles/RCSM/engines/rev2.ogg
+  - /Audio/_WF/Vehicles/RCSM/engines/rev3.ogg
+  - /Audio/_WF/Vehicles/RCSM/engines/rev4.ogg
+
+- type: soundCollection
+  id: WFRcsmEngineShift
+  files:
+  - /Audio/_WF/Vehicles/RCSM/engines/shift1.ogg
+  - /Audio/_WF/Vehicles/RCSM/engines/shift2.ogg
+  - /Audio/_WF/Vehicles/RCSM/engines/shift3.ogg
+  - /Audio/_WF/Vehicles/RCSM/engines/shift4.ogg
+
+# The LTB shell with RCSM blast sounds: same damage numbers as RMCLTBCannon.
+- type: explosion
+  id: WFRcsmTankShell
+  damagePerIntensity:
+    types:
+      Blunt: 20
+      Heat: 20
+      Structural: 400
+  tileBreakChance: [0, 0.5, 1]
+  tileBreakIntensity: [0, 8, 20]
+  tileBreakRerollReduction: 20
+  sound:
+    collection: WFRcsmShellBlast
+    params:
+      volume: 4
+  smallSound:
+    collection: WFRcsmShellBlast
+    params:
+      volume: 2
+  soundFar:
+    collection: WFRcsmShellBlastFar
+    params:
+      volume: 4
+  smallSoundFar:
+    collection: WFRcsmShellBlastFar
+    params:
+      volume: 2
+
+- type: entity
+  parent: RMCProjectileLTBCannon
+  id: WFRcsmProjectileLTBCannon
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Explosive
+    explosionType: WFRcsmTankShell
+  # Forced, so the hit is a shell strike rather than the target's own small-arms clink. Plays even where a safe zone
+  # stops the blast.
+  - type: Projectile
+    soundHit:
+      collection: WFRcsmShellImpact
+      params:
+        volume: 4
+        maxDistance: 24
+    forceSound: true
+
+- type: entity
+  parent: VehicleCartridgeLTBCannon
+  id: WFRcsmCartridgeLTBCannon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: WFRcsmProjectileLTBCannon
+
+# The PMC armed loadout's guns with RCSM sounds.
+- type: entity
+  parent: VehicleTankLTBCannon
+  id: WFVehicleTankLTBCannonRcsm
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_WF/Vehicles/RCSM/weapons/tank_fire_122mm.ogg
+      params:
+        volume: 2
+        maxDistance: 28
+  - type: BallisticAmmoProvider
+    proto: WFRcsmCartridgeLTBCannon
+  - type: WFGunExtraSounds
+    distantSound:
+      collection: WFRcsmHeavyCannonFar
+    # A manual loader's cycle, fitted to the cannon's 20 s between shots: breech opens and drops the case stub, the
+    # ammo door opens, the round comes out of the rack, gets rammed, and the breech closes as the gun comes ready.
+    loadingSequence:
+    # Recoil and breech clatter right behind the bang.
+    - delay: 0.05
+      sound:
+        collection: WFRcsmCannonMech
+        params:
+          maxDistance: 12
+    - delay: 0.8
+      sound:
+        collection: WFRcsmBreechOpen
+        params:
+          maxDistance: 10
+    - delay: 1.4
+      sound:
+        collection: WFRcsmStubDrop
+        params:
+          volume: -3
+          maxDistance: 8
+    - delay: 4.5
+      sound:
+        collection: WFRcsmAmmoDoor
+        params:
+          maxDistance: 10
+    - delay: 7
+      sound:
+        collection: WFRcsmRoundHandle
+        params:
+          maxDistance: 8
+    - delay: 11
+      sound:
+        collection: WFRcsmAmmoDoor
+        params:
+          volume: -2
+          maxDistance: 10
+    - delay: 14.5
+      sound:
+        collection: WFRcsmRam
+        params:
+          maxDistance: 10
+    - delay: 17.5
+      sound:
+        collection: WFRcsmCannonReload
+        params:
+          maxDistance: 10
+
+- type: entity
+  parent: VehicleTankRERE700
+  id: WFVehicleTankRERE700Rcsm
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Gun
+    soundGunshot:
+      collection: WFRcsmHeavyMG
+      params:
+        volume: -2
+        maxDistance: 18
+
+- type: entity
+  parent: VehicleTankRocketLauncher
+  id: WFVehicleTankSmokeLauncherRcsm
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Gun
+    soundGunshot:
+      collection: WFRcsmSmokeLauncher

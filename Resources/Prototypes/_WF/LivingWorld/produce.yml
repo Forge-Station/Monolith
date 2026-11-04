@@ -1,0 +1,161 @@
+# Wild produce picked from planet flora. Content lanes make children of the abstract bases; the concrete ones are
+# generic defaults a plant's loot can name, and the ones the recipes use.
+
+- type: entity
+  abstract: true
+  parent: FoodInjectableBase
+  id: WFWildProduceBase
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    state: produce
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+  - type: Extractable
+    grindableSolutionName: food
+
+# Cook two with water in a big bowl for mushroom soup (recipes.yml).
+- type: entity
+  abstract: true
+  parent: WFWildProduceBase
+  id: WFWildMushroomBase
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/chanterelle.rsi
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  parent: WFWildMushroomBase
+  id: WFWildMushroom
+  name: wild mushroom
+  description: A pale cap pulled from the dirt. It smells earthy and safe enough.
+  components:
+  - type: Sprite
+    color: "#e8d9b8"
+
+- type: entity
+  abstract: true
+  parent: WFWildProduceBase
+  id: WFWildBerryBase
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/berries.rsi
+  - type: FlavorProfile
+    flavors:
+    - berry
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Vitamin
+          Quantity: 2
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceBerry
+        Quantity: 5
+  - type: Tag
+    tags:
+    - Fruit
+
+- type: entity
+  parent: WFWildBerryBase
+  id: WFWildBerries
+  name: wild berries
+  description: A handful of small, tart berries.
+
+# Eating one heals a little; cut one with a knife for a poultice.
+- type: entity
+  abstract: true
+  parent: WFWildProduceBase
+  id: WFHealingHerbBase
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/aloe.rsi
+  - type: FlavorProfile
+    flavors:
+    - leafy
+    - medicine
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Bicaridine
+          Quantity: 4
+        - ReagentId: Kelotane
+          Quantity: 3
+        - ReagentId: Nutriment
+          Quantity: 1
+  - type: SliceableFood
+    count: 1
+    slice: WFHerbPoultice
+  - type: Tag
+    tags:
+    - Vegetable
+
+- type: entity
+  parent: WFHealingHerbBase
+  id: WFHealingHerb
+  name: healing herb
+  description: Thick, sappy leaves that numb a cut when chewed. Cut it up to bind on a wound.
+
+- type: entity
+  parent: BaseHealingItem
+  id: WFHerbPoultice
+  name: herb poultice
+  description: Crushed leaves wrapped tight. Pressed on a wound, it stops the worst of it.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/aloe.rsi
+    state: cream
+  - type: Item
+    size: Tiny
+  - type: Healing
+    damageContainers:
+    - Biological
+    damage:
+      groups:
+        Brute: -12
+      types:
+        Heat: -4
+    bloodlossModifier: -2
+    delay: 3
+    healingBeginSound:
+      collection: WFFloraVineSnap
+
+# Cut with a knife into cotton for cloth.
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: WFPlantFibreBase
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/cotton.rsi
+    state: produce
+    color: "#b7b98a"
+  - type: Log
+    spawnedPrototype: MaterialCotton1
+    spawnCount: 1
+
+- type: entity
+  parent: WFPlantFibreBase
+  id: WFPlantFibre
+  name: plant fibre
+  description: Tough strands stripped from a stalk. Cut it down and it spins like cotton.

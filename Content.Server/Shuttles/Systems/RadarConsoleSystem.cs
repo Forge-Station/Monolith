@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._WF.Vehicles.Scanner; // WOLFGATE(Vehicles)
 using Content.Server.UserInterface;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
@@ -23,10 +24,12 @@ public sealed partial class RadarConsoleSystem : SharedRadarConsoleSystem
         base.Initialize();
         SubscribeLocalEvent<RadarConsoleComponent, ComponentStartup>(OnRadarStartup);
         SubscribeLocalEvent<RadarConsoleComponent, BoundUIOpenedEvent>(OnUIOpened); // Frontier
+        SubscribeLocalEvent<RadarConsoleComponent, MapUidChangedEvent>(OnWfMapChanged); // WOLFGATE(Vehicles): carried in or out of a vehicle.
     }
 
     private void OnRadarStartup(EntityUid uid, RadarConsoleComponent component, ComponentStartup args)
     {
+        _wfMeta.AddFlag(uid, MetaDataFlags.ExtraTransformEvents); // WOLFGATE(Vehicles): needed for MapUidChangedEvent.
         UpdateState(uid, component);
     }
 
@@ -44,6 +47,16 @@ public sealed partial class RadarConsoleSystem : SharedRadarConsoleSystem
         var parentUid = xform.GridUid;
         EntityCoordinates? coordinates = null;
         Angle? angle = null;
+        // WOLFGATE(Vehicles) START: a vehicle's scanner looks out from the vehicle, not from the seat inside it.
+        var wfOrigin = new WFRadarOriginEvent();
+        RaiseLocalEvent(uid, ref wfOrigin);
+        if (wfOrigin.Origin is { } wfOriginUid)
+        {
+            coordinates = new EntityCoordinates(wfOriginUid, Vector2.Zero);
+            angle = Angle.Zero;
+        }
+        else
+        // WOLFGATE END
         if (component.FollowEntity)
         {
             coordinates = new EntityCoordinates(uid, Vector2.Zero);

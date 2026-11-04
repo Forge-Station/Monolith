@@ -11,3 +11,4 @@ wf-liftoff-force-anchored = The hull is force-anchored and cannot lift off.
 wf-liftoff-power-deficit = Not enough power for the thrusters to lift the hull.
 wf-liftoff-insufficient-lift = Not enough lift: { $percent }% of the 100% needed.
 wf-liftoff-blocked = Something is holding the hull down.
+wf-liftoff-settled = This hull is wrecked into the ground. It will never fly again.

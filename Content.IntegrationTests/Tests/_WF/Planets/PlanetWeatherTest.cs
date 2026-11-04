@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.IntegrationTests.Pair;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Content.Server.Parallax;
@@ -7,7 +8,9 @@ using Robust.Shared.GameObjects;
 using System.Linq;
 using Content.Server._WF.Planets;
 using Content.Shared._CE.ZLevels.Core.Components;
+using Content.Shared._WF.CCVar;
 using Content.Shared._WF.Planets;
+using Content.Shared._WF.WolfWeather;
 using Content.Shared.Weather;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
@@ -26,6 +29,7 @@ public sealed class PlanetWeatherTest
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
         await EnableFeature(pair);
+        await SetWeather(pair, true);
         var server = pair.Server;
         var client = pair.Client;
         var worlds = new System.Collections.Generic.List<(string Name, System.Collections.Generic.List<EntityUid> Layers)>();
@@ -124,6 +128,7 @@ public sealed class PlanetWeatherTest
             }
         }
         foreach (var (_, layers) in worlds) await Teardown(pair, layers);
+        await SetWeather(pair, false);
         await pair.CleanReturnAsync();
     }
 
@@ -163,10 +168,11 @@ public sealed class PlanetWeatherTest
     }
 
     [Test]
-    public async Task CyclesReachAirAndTransitButNotOrbitAndReturnToClear()
+    public async Task CyclesReachTheGroundOnlyAndReturnToClear()
     {
         await using var pair = await PoolManager.GetServerClient();
         await EnableFeature(pair);
+        await SetWeather(pair, true);
         var layers = await BuildStandalone(pair);
         var server = pair.Server;
         var transit = await pair.CreateTestMap();
@@ -186,9 +192,16 @@ public sealed class PlanetWeatherTest
         {
             var em = server.EntMan;
             var expected = em.GetComponent<WeatherComponent>(layers[0]).Weather.Keys.Single();
+            foreach (var layer in layers.Skip(1).Append(transit.MapUid))
+            {
+                Assert.That(em.TryGetComponent<WeatherComponent>(layer, out var above) && above.Weather.Count > 0, Is.False,
+                    "Weather fell above the surface.");
+                Assert.That(em.HasComponent<WolfWeatherMapComponent>(layer), Is.False, "Weather state sits above the surface.");
+            }
             foreach (var layer in layers.Take(layers.Count - 1).Append(transit.MapUid))
             {
-                Assert.That(em.GetComponent<WeatherComponent>(layer).Weather.ContainsKey(expected), Is.True);
+                if (layer == layers[0])
+                    Assert.That(em.GetComponent<WeatherComponent>(layer).Weather.ContainsKey(expected), Is.True);
                 var environment = em.GetComponent<WFPlanetEnvironmentComponent>(layer);
                 Assert.That(environment.PlanetName, Is.EqualTo("Asclepiu"));
                 Assert.That(environment.Weather, Is.Not.EqualTo("Clear"));
@@ -231,11 +244,11 @@ public sealed class PlanetWeatherTest
         await server.WaitRunTicks(pair.SecondsToTicks(17f));
         await server.WaitAssertion(() =>
         {
-            foreach (var layer in layers.Take(layers.Count - 1).Append(transit.MapUid))
-                Assert.That(server.EntMan.GetComponent<WeatherComponent>(layer).Weather, Is.Empty);
+            Assert.That(server.EntMan.GetComponent<WeatherComponent>(layers[0]).Weather, Is.Empty);
             server.EntMan.DeleteEntity(transit.MapUid);
         });
         await Teardown(pair, layers);
+        await SetWeather(pair, false);
         await pair.CleanReturnAsync();
     }
 
@@ -274,5 +287,71 @@ public sealed class PlanetWeatherTest
         });
         await Teardown(pair, layers);
         await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task WeatherOffKeepsEveryWorldClear()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        await EnableFeature(pair);
+        var layers = await BuildStandalone(pair);
+        var server = pair.Server;
+        await server.WaitPost(() =>
+        {
+            var network = server.EntMan.GetComponent<CEZMapComponent>(layers[0]).NetworkUid;
+            server.EntMan.GetComponent<WFPlanetWeatherComponent>(network).NextChange = TimeSpan.Zero;
+        });
+        await server.WaitRunTicks(pair.SecondsToTicks(3f));
+        await server.WaitAssertion(() =>
+        {
+            var em = server.EntMan;
+            var network = em.GetComponent<CEZMapComponent>(layers[0]).NetworkUid;
+            Assert.That(em.GetComponent<WFPlanetWeatherComponent>(network).Current, Is.Null, "Weather came while it is switched off.");
+            Assert.That(em.TryGetComponent<WeatherComponent>(layers[0], out var ground) && ground.Weather.Count > 0, Is.False);
+        });
+        await Teardown(pair, layers);
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>An admin's weather shows and holds for its time while the cycle is off, then the world goes clear.</summary>
+    [Test]
+    public async Task AdminWeatherHoldsWhileTheCycleIsOff()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        await EnableFeature(pair);
+        var layers = await BuildStandalone(pair);
+        var server = pair.Server;
+        var weathers = server.System<WFPlanetWeatherSystem>();
+        EntityUid network = default;
+        ProtoId<WeatherPrototype> rain = default;
+        await server.WaitPost(() =>
+        {
+            network = server.EntMan.GetComponent<CEZMapComponent>(layers[0]).NetworkUid;
+            var state = server.EntMan.GetComponent<WFPlanetWeatherComponent>(network);
+            rain = server.ResolveDependency<IPrototypeManager>().Index(state.Profile).Storms[0].Main;
+            Assert.That(weathers.SetWeather(network, rain, TimeSpan.FromSeconds(5)), Is.True);
+        });
+        await server.WaitRunTicks(pair.SecondsToTicks(2f));
+        await server.WaitAssertion(() =>
+        {
+            var state = server.EntMan.GetComponent<WFPlanetWeatherComponent>(network);
+            Assert.That(state.Current, Is.EqualTo(rain), "The cycle being off cleared an admin's weather.");
+            Assert.That(server.EntMan.TryGetComponent<WolfWeatherMapComponent>(layers[0], out var wolf)
+                && SharedWolfWeatherSystem.GetCurrent(wolf)?.Weather == weathers.ResolveWolfWeather(state.Profile, rain), Is.True,
+                "The admin's weather isn't shown on the ground.");
+        });
+        await server.WaitRunTicks(pair.SecondsToTicks(5f));
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(server.EntMan.GetComponent<WFPlanetWeatherComponent>(network).Current, Is.Null, "The admin's weather outlasted its time.");
+        });
+        await Teardown(pair, layers);
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>Turns planet weather on or off; it is off by default.</summary>
+    private static async Task SetWeather(TestPair pair, bool on)
+    {
+        await pair.Server.WaitPost(() => pair.Server.CfgMan.SetCVar(PlanetCVars.PlanetWeather, on));
     }
 }

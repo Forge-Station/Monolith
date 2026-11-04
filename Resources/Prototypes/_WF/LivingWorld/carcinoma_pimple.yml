@@ -1,0 +1,80 @@
+# Carcinoma's pimple: a pus-filled growth that swells when someone not of the flesh comes within two metres, then
+# bursts in a spray of gore and blinding spores. Hitting it pops it at once, so shoot it from afar.
+- type: entity
+  id: WFCarcinomaPimple
+  name: pimple
+  description: A taut, yellowed blister of flesh the size of a head. Something inside it shifts when you come close.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _Mono/Mobs/Aliens/cortical_borer_egg.rsi
+    layers:
+    - state: icon
+      color: "#e3b07e"
+      map: ["pimple"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        pimple:
+          Idle: { scale: "1,1", color: "#e3b07e" }
+          Armed: { scale: "1.35,1.35", color: "#f2d27a" }
+          Spent: { visible: false }
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        hard: false
+        density: 50
+        layer:
+        - BulletImpassable
+  - type: Damageable
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: WFReactiveFlora
+    behaviour: Explode
+    range: 2
+    cooldown: 1
+    checkInterval: 0.5
+    ignoreFactions: [Chimera, AberrantFleshExpeditionNF]
+    armDelay: 1.5
+    armSound:
+      collection: WFFloraPodSwell
+    armPopup: wf-flora-pimple-swells
+    sound:
+      collection: WFFloraGore
+    popup: wf-flora-pimple-burst
+    burstRadius: 1.5
+    burstDamage:
+      types:
+        Blunt: 8
+        Slash: 7
+    burstSpill:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 20
+    solution:
+      reagents:
+      - ReagentId: TearGas
+        Quantity: 10
+    cloudDuration: 4
+    cloudSpread: 3
+    deleteOnBurst: true

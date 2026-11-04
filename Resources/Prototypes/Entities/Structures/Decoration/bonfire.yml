@@ -9,7 +9,24 @@
     sprite: Structures/Decoration/bonfire.rsi
     layers:
       - state: bonfire
+        # WOLFGATE(Bonfires): named so the sprite can show a burnt-out fire
+        map: ["base"]
       - state: burning
+        # WOLFGATE(Bonfires): named so the sprite can show a burnt-out fire
+        map: ["fire"]
+  # WOLFGATE(Bonfires) START: a fire burns its fuel down, goes out, and is fed and lit again
+  - type: WFBonfireFuel
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFBonfireVisuals.Lit:
+        base:
+          True: { state: bonfire }
+          False: { state: bonfire_extinguished }
+        fire:
+          True: { visible: true }
+          False: { visible: false }
+  # WOLFGATE END
   - type: PointLight
     radius: 5
     energy: 3
@@ -34,10 +51,11 @@
   - type: Construction # Frontier
     graph: FiresGraph # Frontier
     node: BonfireNode # Frontier
+  # WOLFGATE(Warmth): radiant warmth that holds off a blizzard, toward body temperature rather than past it
   - type: EntityRadiusHeater # Mono
-  - type: Tag # Forge-change
-    tags:
-      - NoGridGodmode
+    radius: 3.5
+    thermalEnergy: 30000
+    limit: 311
 
 - type: entity
   id: LegionnaireBonfire
@@ -50,6 +68,6 @@
       - state: legionnaire_bonfire
   - type: PointLight
     color: "#FF5601"
-  - type: Tag # Forge-change
-    tags:
-      - NoGridGodmode
+  # WOLFGATE(Bonfires): lava-world decor with no logs to burn: it keeps burning
+  - type: WFBonfireFuel
+    infinite: true

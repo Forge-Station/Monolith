@@ -108,10 +108,14 @@ public sealed partial class BiomeSystem
     {
         var loadedEntities = new Dictionary<EntityUid, Vector2i>();
         component.LoadedEntities.Add(chunk, loadedEntities);
+        WfOccupiedTiles(gridUid, grid, chunk); // WOLFGATE(Planets): nobody standing in a chunk as it loads is walled in
 
         ForEachTileInChunk(chunk, modified, indices =>
         {
             if (HasAnchoredEntity(gridUid, grid, indices))
+                return;
+
+            if (_wfOccupied.Contains(indices)) // WOLFGATE(Planets)
                 return;
 
             if (TryGetEntity(indices, component, (gridUid, grid), out var entPrototype))

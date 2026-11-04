@@ -21,8 +21,13 @@
   - HandheldStationMap
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
-  - SprayPainterAmmo  # Forge-Change
   - EconomyPlanner # Mono
+  # Mono - Signal Flares
+  - BoxDispenserFlare
+  - BoxDispenserFlareGreen
+  - BoxDispenserFlareRed
+  - BoxDispenserFlareWhite
+  - BoxDispenserFlareGold
 
 - type: latheRecipePack
   id: AtmosStatic
@@ -42,8 +47,6 @@
   - MailingUnitElectronics
   - SignalTimerElectronics
   - APCElectronics
-  - LargeAPCLightElectronics
-  - LargeAPCMediumElectronics
   - SMESMachineCircuitboard
   - SubstationMachineCircuitboard
   - WallmountSubstationElectronics
@@ -55,7 +58,7 @@
   id: EngineeringBoardsStatic
   recipes:
   - SpaceHeaterMachineCircuitBoard
-  - MaterialReclaimerMachineCircuitboardRecipe # Forge-Change
+  - WFWeatherForecastComputerCircuitboard # WOLFGATE(Planets): weather forecast console board
 
 ## Dynamic
 
@@ -67,8 +70,8 @@
   - JawsOfLife
   - ExperimentalNaniteApplicator
   - TrayGoggles # Delta-V
-  # - Fulton # Frontier
-  # - FultonBeacon # Frontier
+  - Fulton
+  - FultonBeacon
 
 - type: latheRecipePack
   id: AtmosTools

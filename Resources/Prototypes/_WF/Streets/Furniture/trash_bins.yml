@@ -1,0 +1,82 @@
+# Hand-written: RMC's trash bins are disposal units on its own pipe network. Here they are plain bins that hold a few
+# items, drawn from RMC's sprites.
+
+- type: entity
+  abstract: true
+  parent: BaseStructureDynamic
+  id: WFStreetsTrashBinBase
+  categories: [ WFStreets, WFStreetsFurniture ]
+  name: trash bin
+  description: A street bin. Somebody will empty it one day.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: VehicleSmashable
+  - type: Sprite
+    noRot: true
+    sprite: _WF/Streets/Structures/Piping/disposal.rsi
+    state: trashcan
+  - type: InteractionOutline
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,3
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  parent: WFStreetsTrashBinBase
+  id: WFStreetsTrashBin
+  suffix: Grey
+
+- type: entity
+  parent: WFStreetsTrashBinBase
+  id: WFStreetsTrashBinGreen
+  suffix: Green
+  components:
+  - type: Sprite
+    state: trashgreen
+
+- type: entity
+  parent: WFStreetsTrashBinBase
+  id: WFStreetsTrashBinBlue
+  suffix: Blue
+  components:
+  - type: Sprite
+    state: trashblue

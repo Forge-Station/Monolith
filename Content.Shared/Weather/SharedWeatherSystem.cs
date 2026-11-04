@@ -53,8 +53,14 @@ public abstract partial class SharedWeatherSystem : EntitySystem
 
         var tileDef = (ContentTileDefinition) _tileDefManager[tileRef.Tile.TypeId];
 
-        if (!tileDef.Weather)
+        // WOLFGATE(Planets) START: on a planet, roofs decide rather than the tile, and a vessel is always under cover.
+        // upstream original, kept for merges:
+        // if (!tileDef.Weather)
+        //     return false;
+        var wfExposure = WfPlanetExposure(uid);
+        if (wfExposure == false || wfExposure == null && !tileDef.Weather)
             return false;
+        // WOLFGATE END
 
         var anchoredEntities = _mapSystem.GetAnchoredEntitiesEnumerator(uid, grid, tileRef.GridIndices);
 

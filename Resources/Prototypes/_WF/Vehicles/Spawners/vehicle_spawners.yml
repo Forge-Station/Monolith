@@ -1,0 +1,534 @@
+# Random spawners for mappers: drivable vehicles (green), loose vehicle parts (blue) and scenery vehicles (red),
+# damaged and destroyed variants included. Scenery tables weight each family, so the many car colours don't crowd
+# out the trucks.
+
+- type: entity
+  parent: MarkerBase
+  id: WFRandomCivilianVehicleSpawner
+  name: random civilian vehicle spawner
+  suffix: Civilian
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/van.rsi
+      state: van_base
+      scale: 0.25, 0.25
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: AU14VehicleCivTruck
+      - id: AU14VehicleCivArmoredTruck
+      - id: AU14VehicleCivturquiseCargo
+      - id: AU14VehicleCivCivTruck1
+      - id: AU14VehicleCivCivTruck2
+      - id: AU14VehicleCivCivTruck3
+      - id: AU14VehicleCivMedTruck
+      - id: AU14VehicleCivGarbageTruck
+      - id: AU14VehicleCivBrownBarrelsTruck
+      - id: AU14VehicleCivBrownCargoTruck
+      - id: AU14VehicleCivBlueCargoTruck
+      - id: AU14VehicleCivBlueTruck
+      - id: AU14VehicleCivEMSAmbulance
+      - id: AU14VehicleCivCopMonoSupron
+      - id: CMUCargoCarrier
+
+- type: entity
+  parent: MarkerBase
+  id: WFRandomVanSpawner
+  name: random van spawner
+  suffix: Van
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/van.rsi
+      state: van_base
+      scale: 0.25, 0.25
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: VehicleVan
+      - id: VehicleBoxVan
+      - id: VehiclePizzaVan
+      - id: VehicleCLFVan
+      - id: AU14VehicleCivVan
+      - id: AU14VehicleCivHSVan
+      - id: VehicleCMBPoliceVan
+
+- type: entity
+  parent: MarkerBase
+  id: WFRandomTankSpawner
+  name: random tank spawner
+  suffix: Tank
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/tank.rsi
+      state: tank_base
+      scale: 0.25, 0.25
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: WFVehicleTankArmed
+      - id: WFVehicleTankPMCArmed
+      - id: WFVehicleTankTWEArmed
+      - id: VehicleSPPTank
+      - id: VehicleSPPTankCommand
+
+- type: entity
+  parent: MarkerBase
+  id: WFRandomMilitaryVehicleSpawner
+  name: random military vehicle spawner
+  suffix: Military
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/apc.rsi
+      state: apc_base
+      scale: 0.25, 0.25
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: WFVehicleAPCArmed
+      - id: WFVehicleAPCTrackedArmed
+      - id: WFVehicleAPCMedArmed
+      - id: WFVehicleAPCCommandArmed
+      - id: VehicleSPPAPC
+      - id: VehicleAPCPMC
+      - id: WFVehicleHumveeARCArmed
+      - id: VehicleHumvee
+      - id: VehicleHumveeMedical
+      - id: VehicleHumveeTransport
+      - id: VehicleAev
+      - id: VehicleSPPVanArmed
+      - id: VehicleSPPVanMedical
+      - id: VehicleSPPVanLogistics
+      - id: VehicleSPPVanPrisoner
+
+- type: entity
+  parent: MarkerBase
+  id: WFRandomVehiclePartSpawner
+  name: random vehicle part spawner
+  suffix: Part
+  components:
+  - type: Sprite
+    layers:
+    - state: blue
+    - sprite: _WF/Vehicles/tank.rsi
+      state: tank_turret_0
+      scale: 0.25, 0.25
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: RMCAPCFrontCannon
+      - id: RMCAPCDualCannon
+      - id: RMCAPCFlareLauncher
+      - id: VehicleTankArmorBallistic
+      - id: VehicleTankArmorConcussive
+      - id: VehicleTankArmorCaustic
+      - id: VehicleTankArmorPaladin
+      - id: VehicleTankSnowplow
+      - id: VehicleHumveeTurret
+      - id: VehicleHumveeTurretArmed
+      - id: VehicleHumveeARCTurret
+      - id: VehicleHumveeCannon
+      - id: VehicleHumveeARCCannon
+      - id: VehicleHumveeLauncher
+      - id: VehicleHumveeOverlight
+      - id: VehicleSPPAPCWheel
+      - id: VehicleSPPTankReactiveArmor
+      - id: VehicleSPPTankWarningArray
+      - id: VehicleSPPTankOverdriveEnhancer
+      - id: VehicleSPPTankArtilleryModule
+      - id: VehicleSPPAPCMinigun
+      - id: VehicleSPPAPCAutocannon
+      - id: VehicleSPPAPCHJ35Launcher
+      - id: VehicleSPPAPCFlareLauncher
+      - id: VehicleSPPTankP17702
+      - id: VehicleSPPTankRailgun
+      - id: VehicleSPPTankHJ35TLauncher
+      - id: VehicleSPPTankCupola
+      - id: VehicleSPPTankRocketLauncher
+      - id: VehicleSPPTankFlareModule
+      - id: VehicleSPPVanTurret
+      - id: VehicleSPPVanCannon
+      - id: VehicleTankWarningArray
+      - id: VehicleTankOverdriveEnhancer
+      - id: VehicleTankArtilleryModule
+      - id: VehicleHumveeSnowplow
+      - id: VehicleHumveeHatch
+      - id: RMCAPCFreightStorage
+      - id: VehicleTankLTBCannon
+      - id: VehicleTankLTAAAPMinigun
+      - id: VehicleTankAceAutocannon
+      - id: VehicleTankGrenadeLauncher
+      - id: VehicleTankTowLauncher
+      - id: VehicleTankM56Cupola
+      - id: VehicleTankRocketLauncher
+      - id: VehicleTankFlareModule
+      - id: VehicleTankDragonFlamer
+      - id: VehicleTankFlamer
+      - id: VehicleTankTurret
+      - id: VehicleSPPTankTurret
+      - id: VehicleSPPAPCTurret
+      - id: RMCVanWheel
+      - id: VehicleSPPVanWheel
+      - id: VehicleHumveeWheel
+      - id: RMCAPCWheel
+      - id: VehicleTankTreads
+      - id: VehicleTankReinforcedTreads
+
+- type: entity
+  parent: MarkerBase
+  id: WFRandomCivilianSceneryVehicleSpawner
+  name: random civilian scenery vehicle spawner
+  suffix: Civilian, Scenery
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _WF/Vehicles/Props/vehicles.rsi
+      state: miyahira_black
+      scale: 0.25, 0.25
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - !type:GroupSelector
+        weight: 4
+        children:
+        - id: RMCPropVehicleMonoSupronBlack
+        - id: RMCPropVehicleMonoSupronBlackDamaged1
+        - id: RMCPropVehicleMonoSupronBlackDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronBlackDamaged3
+        - id: RMCPropVehicleMonoSupronBlackDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronBlackDamaged4
+        - id: RMCPropVehicleMonoSupronBlackDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronBlackDamaged5
+        - id: RMCPropVehicleMonoSupronBlackDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronBlackDestroyed
+        - id: RMCPropVehicleMonoSupronBlackDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronBlackFlipped
+        - id: RMCPropVehicleMonoSupronBlue
+        - id: RMCPropVehicleMonoSupronBlueDamaged1
+        - id: RMCPropVehicleMonoSupronBlueDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronBlueDamaged3
+        - id: RMCPropVehicleMonoSupronBlueDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronBlueDamaged4
+        - id: RMCPropVehicleMonoSupronBlueDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronBlueDamaged5
+        - id: RMCPropVehicleMonoSupronBlueDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronBlueDestroyed
+        - id: RMCPropVehicleMonoSupronBlueDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronBlueFlipped
+        - id: RMCPropVehicleMonoSupronBlueOffset
+        - id: RMCPropVehicleMonoSupronBrown
+        - id: RMCPropVehicleMonoSupronBrownDamaged1
+        - id: RMCPropVehicleMonoSupronBrownDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronBrownDamaged3
+        - id: RMCPropVehicleMonoSupronBrownDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronBrownDamaged4
+        - id: RMCPropVehicleMonoSupronBrownDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronBrownDamaged5
+        - id: RMCPropVehicleMonoSupronBrownDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronBrownDestroyed
+        - id: RMCPropVehicleMonoSupronBrownDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronBrownFlipped
+        - id: RMCPropVehicleMonoSupronCop
+        - id: RMCPropVehicleMonoSupronCopDamaged1
+        - id: RMCPropVehicleMonoSupronCopDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronCopDamaged3
+        - id: RMCPropVehicleMonoSupronCopDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronCopDamaged4
+        - id: RMCPropVehicleMonoSupronCopDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronCopDamaged5
+        - id: RMCPropVehicleMonoSupronCopDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronCopDestroyed
+        - id: RMCPropVehicleMonoSupronCopDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronCopFlipped
+        - id: RMCPropVehicleMonoSupronDesatBlue
+        - id: RMCPropVehicleMonoSupronDesatBlueDamaged1
+        - id: RMCPropVehicleMonoSupronDesatBlueDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronDesatBlueDamaged3
+        - id: RMCPropVehicleMonoSupronDesatBlueDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronDesatBlueDamaged4
+        - id: RMCPropVehicleMonoSupronDesatBlueDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronDesatBlueDamaged5
+        - id: RMCPropVehicleMonoSupronDesatBlueDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronDesatBlueDestroyed
+        - id: RMCPropVehicleMonoSupronDesatBlueDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronDesatBlueFlipped
+        - id: RMCPropVehicleMonoSupronGreen
+        - id: RMCPropVehicleMonoSupronGreenDamaged1
+        - id: RMCPropVehicleMonoSupronGreenDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronGreenDamaged3
+        - id: RMCPropVehicleMonoSupronGreenDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronGreenDamaged4
+        - id: RMCPropVehicleMonoSupronGreenDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronGreenDamaged5
+        - id: RMCPropVehicleMonoSupronGreenDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronGreenDestroyed
+        - id: RMCPropVehicleMonoSupronGreenDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronGreenFlipped
+        - id: RMCPropVehicleMonoSupronLightBlue
+        - id: RMCPropVehicleMonoSupronLightBlueDamaged1
+        - id: RMCPropVehicleMonoSupronLightBlueDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronLightBlueDamaged3
+        - id: RMCPropVehicleMonoSupronLightBlueDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronLightBlueDamaged4
+        - id: RMCPropVehicleMonoSupronLightBlueDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronLightBlueDamaged5
+        - id: RMCPropVehicleMonoSupronLightBlueDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronLightBlueDestroyed
+        - id: RMCPropVehicleMonoSupronLightBlueDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronLightBlueFlipped
+        - id: RMCPropVehicleMonoSupronOrange
+        - id: RMCPropVehicleMonoSupronOrangeDamaged1
+        - id: RMCPropVehicleMonoSupronOrangeDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronOrangeDamaged3
+        - id: RMCPropVehicleMonoSupronOrangeDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronOrangeDamaged4
+        - id: RMCPropVehicleMonoSupronOrangeDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronOrangeDamaged5
+        - id: RMCPropVehicleMonoSupronOrangeDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronOrangeDestroyed
+        - id: RMCPropVehicleMonoSupronOrangeDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronOrangeFlipped
+        - id: RMCPropVehicleMonoSupronPink
+        - id: RMCPropVehicleMonoSupronPinkDamaged1
+        - id: RMCPropVehicleMonoSupronPinkDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronPinkDamaged3
+        - id: RMCPropVehicleMonoSupronPinkDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronPinkDamaged4
+        - id: RMCPropVehicleMonoSupronPinkDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronPinkDamaged5
+        - id: RMCPropVehicleMonoSupronPinkDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronPinkDestroyed
+        - id: RMCPropVehicleMonoSupronPinkDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronPinkFlipped
+        - id: RMCPropVehicleMonoSupronPurple
+        - id: RMCPropVehicleMonoSupronPurpleDamaged1
+        - id: RMCPropVehicleMonoSupronPurpleDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronPurpleDamaged3
+        - id: RMCPropVehicleMonoSupronPurpleDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronPurpleDamaged4
+        - id: RMCPropVehicleMonoSupronPurpleDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronPurpleDamaged5
+        - id: RMCPropVehicleMonoSupronPurpleDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronPurpleDestroyed
+        - id: RMCPropVehicleMonoSupronPurpleDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronPurpleFlipped
+        - id: RMCPropVehicleMonoSupronRed
+        - id: RMCPropVehicleMonoSupronRedDamaged1
+        - id: RMCPropVehicleMonoSupronRedDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronRedDamaged3
+        - id: RMCPropVehicleMonoSupronRedDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronRedDamaged4
+        - id: RMCPropVehicleMonoSupronRedDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronRedDamaged5
+        - id: RMCPropVehicleMonoSupronRedDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronRedDestroyed
+        - id: RMCPropVehicleMonoSupronRedDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronRedFlipped
+        - id: RMCPropVehicleMonoSupronRedOffset
+        - id: RMCPropVehicleMonoSupronShell
+        - id: RMCPropVehicleMonoSupronShellFlipped
+        - id: RMCPropVehicleMonoSupronTaxi
+        - id: RMCPropVehicleMonoSupronTaxiDamaged1
+        - id: RMCPropVehicleMonoSupronTaxiDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronTaxiDamaged3
+        - id: RMCPropVehicleMonoSupronTaxiDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronTaxiDamaged4
+        - id: RMCPropVehicleMonoSupronTaxiDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronTaxiDamaged5
+        - id: RMCPropVehicleMonoSupronTaxiDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronTaxiDestroyed
+        - id: RMCPropVehicleMonoSupronTaxiDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronTaxiFlipped
+        - id: RMCPropVehicleMonoSupronTurquoise
+        - id: RMCPropVehicleMonoSupronTurquoiseDamaged1
+        - id: RMCPropVehicleMonoSupronTurquoiseDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronTurquoiseDamaged3
+        - id: RMCPropVehicleMonoSupronTurquoiseDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronTurquoiseDamaged4
+        - id: RMCPropVehicleMonoSupronTurquoiseDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronTurquoiseDamaged5
+        - id: RMCPropVehicleMonoSupronTurquoiseDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronTurquoiseDestroyed
+        - id: RMCPropVehicleMonoSupronTurquoiseDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronTurquoiseFlipped
+        - id: RMCPropVehicleMonoSupronTurquoiseOffset
+        - id: RMCPropVehicleMonoSupronWY
+        - id: RMCPropVehicleMonoSupronWYDamaged1
+        - id: RMCPropVehicleMonoSupronWYDamaged1Flipped
+        - id: RMCPropVehicleMonoSupronWYDamaged3
+        - id: RMCPropVehicleMonoSupronWYDamaged3Flipped
+        - id: RMCPropVehicleMonoSupronWYDamaged4
+        - id: RMCPropVehicleMonoSupronWYDamaged4Flipped
+        - id: RMCPropVehicleMonoSupronWYDamaged5
+        - id: RMCPropVehicleMonoSupronWYDamaged5Flipped
+        - id: RMCPropVehicleMonoSupronWYDestroyed
+        - id: RMCPropVehicleMonoSupronWYDestroyedFlipped
+        - id: RMCPropVehicleMonoSupronWYFlipped
+      - !type:GroupSelector
+        weight: 2
+        children:
+        - id: RMCPropVehicleSmallTruckBlue
+        - id: RMCPropVehicleSmallTruckBlueCargo
+        - id: RMCPropVehicleSmallTruckBlueCargoF
+        - id: RMCPropVehicleSmallTruckBlueF
+        - id: RMCPropVehicleSmallTruckBrown
+        - id: RMCPropVehicleSmallTruckBrownCargo
+        - id: RMCPropVehicleSmallTruckBrownCargoAlt
+        - id: RMCPropVehicleSmallTruckBrownCargoAltF
+        - id: RMCPropVehicleSmallTruckBrownCargoF
+        - id: RMCPropVehicleSmallTruckBrownF
+        - id: RMCPropVehicleSmallTruckGarbage
+        - id: RMCPropVehicleSmallTruckGarbageF
+        - id: RMCPropVehicleSmallTruckGreen
+        - id: RMCPropVehicleSmallTruckGreenF
+        - id: RMCPropVehicleSmallTruckMedical
+        - id: RMCPropVehicleSmallTruckMedicalF
+        - id: RMCPropVehicleSmallTruckMining
+        - id: RMCPropVehicleSmallTruckMiningF
+        - id: RMCPropVehicleSmallTruckRed
+        - id: RMCPropVehicleSmallTruckRedF
+      - !type:GroupSelector
+        weight: 1
+        children:
+        - id: RMCPropVehicleTruck
+        - id: RMCPropVehicleTruckBroken
+        - id: RMCPropVehicleTruckCargo
+        - id: RMCPropVehicleTruckMining
+      - !type:GroupSelector
+        weight: 1
+        children:
+        - id: RMCPropVehicleLoaderTruckBlack
+        - id: RMCPropVehicleLoaderTruckBlackF
+        - id: RMCPropVehicleLoaderTruckBlackFilled
+        - id: RMCPropVehicleLoaderTruckBlackFilledF
+        - id: RMCPropVehicleLoaderTruckBlue
+        - id: RMCPropVehicleLoaderTruckBlueF
+        - id: RMCPropVehicleLoaderTruckBlueFilled
+        - id: RMCPropVehicleLoaderTruckBlueFilledF
+        - id: RMCPropVehicleLoaderTruckTeal
+        - id: RMCPropVehicleLoaderTruckTealF
+        - id: RMCPropVehicleLoaderTruckTealFilled
+        - id: RMCPropVehicleLoaderTruckTealFilledF
+        - id: RMCPropVehicleLoaderTruckWhite
+        - id: RMCPropVehicleLoaderTruckWhiteF
+        - id: RMCPropVehicleLoaderTruckWhiteFilled
+        - id: RMCPropVehicleLoaderTruckWhiteFilledF
+        - id: RMCPropVehicleLoaderTruckWhiteWeYa
+        - id: RMCPropVehicleLoaderTruckWhiteWeYaF
+        - id: RMCPropVehicleLoaderTruckWhiteWeYaFilled
+        - id: RMCPropVehicleLoaderTruckWhiteWeYaFilledF
+      - !type:GroupSelector
+        weight: 1
+        children:
+        - id: RMCPropVehicleLongTruckBlue
+        - id: RMCPropVehicleLongTruckBlueF
+        - id: RMCPropVehicleLongTruckBrown
+        - id: RMCPropVehicleLongTruckBrownF
+        - id: RMCPropVehicleLongTruckDonk
+        - id: RMCPropVehicleLongTruckDonkF
+        - id: RMCPropVehicleLongTruckMining
+        - id: RMCPropVehicleLongTruckMiningF
+        - id: RMCPropVehicleLongTruckRed
+        - id: RMCPropVehicleLongTruckRedF
+        - id: RMCPropVehicleLongTruckWeYaBlue
+        - id: RMCPropVehicleLongTruckWeYaBlueF
+      - !type:GroupSelector
+        weight: 1
+        children:
+        - id: RMCPropVehicleCrawler
+        - id: RMCPropVehicleCrawlerCovered
+        - id: RMCPropVehicleCrawlerCrate
+        - id: RMCPropVehicleCrawlerCrate2
+        - id: RMCPropVehicleCrawlerCrate3
+        - id: RMCPropVehicleCrawlerCrateWY
+        - id: RMCPropVehicleCrawlerFuel
+        - id: RMCPropVehicleCrawlerMining
+        - id: RMCPropVehicleCrawlerMiningFuel
+      - !type:GroupSelector
+        weight: 0.5
+        children:
+        - id: RMCPropVehicleTractor
+        - id: RMCPropVehicleTractorDamaged
+      - !type:GroupSelector
+        weight: 0.5
+        children:
+        - id: RMCPropVehicleCargoCrane
+        - id: RMCPropVehicleCargoCraneCargo
+        - id: RMCPropVehicleCargoCraneDestroyed
+      - !type:GroupSelector
+        weight: 0.5
+        children:
+        - id: RMCPropVehicleAmbulance
+        - id: RMCPropVehicleAmbulanceF
+
+- type: entity
+  parent: MarkerBase
+  id: WFRandomMilitarySceneryVehicleSpawner
+  name: random military scenery vehicle spawner
+  suffix: Military, Scenery
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _WF/Vehicles/humvee.rsi
+      state: humvee_base
+      scale: 0.25, 0.25
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - id: WFSceneryTankWreck
+      - id: WFSceneryWYTankWreck
+      - id: WFScenerySPPTankWreck
+      - id: WFSceneryHobelarWreck
+      - id: WFSceneryAPCWreck
+      - id: WFSceneryWYAPCWreck
+      - id: WFScenerySPPAPCWreck
+      - id: WFSceneryHumveeWreck
+      - id: WFScenerySPPVanWreck
+
+- type: entity
+  parent: MarkerBase
+  id: WFRandomVanSceneryVehicleSpawner
+  name: random van scenery vehicle spawner
+  suffix: Van, Scenery
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _WF/Vehicles/van.rsi
+      state: van_base
+      scale: 0.25, 0.25
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - !type:GroupSelector
+        weight: 1
+        children:
+        - id: RMCPropVehicleVan
+        - id: RMCPropVehicleVanCandy
+        - id: RMCPropVehicleVanDamaged
+      - !type:GroupSelector
+        weight: 2
+        children:
+        - id: RMCPropVehicleBoxVanBlueGrey
+        - id: RMCPropVehicleBoxVanBlueGreyF
+        - id: RMCPropVehicleBoxVanMaintGrey
+        - id: RMCPropVehicleBoxVanMaintGreyF
+        - id: RMCPropVehicleBoxVanMaintWhite
+        - id: RMCPropVehicleBoxVanMaintWhiteF
+        - id: RMCPropVehicleBoxVanMining
+        - id: RMCPropVehicleBoxVanMiningF
+        - id: RMCPropVehicleBoxVanPizza
+        - id: RMCPropVehicleBoxVanPizzaF
+        - id: RMCPropVehicleBoxVanRed
+        - id: RMCPropVehicleBoxVanRedF
+        - id: RMCPropVehicleBoxVanWhite
+        - id: RMCPropVehicleBoxVanWhiteF

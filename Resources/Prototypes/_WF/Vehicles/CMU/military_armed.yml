@@ -1,0 +1,123 @@
+# The two CMU tanks with their weapons fitted, for admin spawning. Names are in cmu-military.ftl. The picks are the author's, for the owner to change.
+#
+# The Hobelar gets the L26A2 autocannon in its turret, the L98 hull machine gun in its secondary slot and the L-39T smoke
+# discharger in its support slot, which is the vendor's loadout. The heavy electrolaser takes the same turret slot as the
+# autocannon, so it is not fitted. The Longstreet gets the LTB cannon and the RE700 cupola on its turret and the smoke launcher
+# on its support mount, the RMC armed tank's set with the RE700 for the M56 cupola. A child's ItemSlots replace the parent's,
+# so each loadout lists every slot of its vehicle, and each loadout is the FIRST parent of its tank: with two parents the first
+# one's value of a field wins, so a loadout listed second would be dropped and the tank would spawn unarmed.
+
+- type: entity
+  parent: VehicleTankTurretTWE
+  id: WFVehicleTankTurretTWEArmed
+  components:
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: VehicleTankAutocannonTWE
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      turret-launcher:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+
+- type: entity
+  id: WFVehicleTankTWEArmedLoadout
+  categories: [ WFVehicles ]
+  abstract: true
+  components:
+  - type: ItemSlots
+    slots:
+      primary:
+        startingItem: WFVehicleTankTurretTWEArmed
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      secondary:
+        startingItem: VehicleTankCupolaTWE
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      support:
+        startingItem: VehicleTankRocketLauncherTWE
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleTankTreadsTWE
+        disableEject: true
+        whitelist:
+          components:
+          - VehicleWheelItem
+
+- type: entity
+  parent: [ WFVehicleTankTWEArmedLoadout, VehicleTankTWE ]
+  id: WFVehicleTankTWEArmed
+  suffix: Drivable, Tank, CMU, TWE, Armed
+
+- type: entity
+  parent: VehicleTankTurretPMC
+  id: WFVehicleTankTurretPMCArmed
+  components:
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: WFVehicleTankLTBCannonRcsm
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      turret-launcher:
+        startingItem: WFVehicleTankRERE700Rcsm
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+
+- type: entity
+  id: WFVehicleTankPMCArmedLoadout
+  categories: [ WFVehicles ]
+  abstract: true
+  components:
+  - type: ItemSlots
+    slots:
+      armor:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      primary:
+        startingItem: WFVehicleTankTurretPMCArmed
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      secondary:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      support:
+        startingItem: WFVehicleTankSmokeLauncherRcsm
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleTankTreads
+        disableEject: true
+        whitelist:
+          components:
+          - VehicleWheelItem
+
+- type: entity
+  parent: [ WFVehicleTankPMCArmedLoadout, VehicleTankPMC ]
+  id: WFVehicleTankPMCArmed
+  suffix: Drivable, Tank, CMU, PMC, Armed

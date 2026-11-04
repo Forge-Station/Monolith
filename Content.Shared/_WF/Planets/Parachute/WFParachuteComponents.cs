@@ -41,3 +41,7 @@ public sealed partial class WFParachutedComponent : Component
 /// <summary>Do-after for strapping a parachute on.</summary>
 [Serializable, NetSerializable]
 public sealed partial class WFParachuteAttachDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>Lets alternate falling systems accept an existing parachute pack.</summary>
+[ByRefEvent]
+public record struct WFParachuteAttachAttemptEvent(bool Allowed);

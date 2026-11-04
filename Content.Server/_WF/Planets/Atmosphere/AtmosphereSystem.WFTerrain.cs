@@ -2,6 +2,7 @@ using Content.Server._WF.Planets.Atmosphere;
 using Content.Server.Atmos.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared._WF.Planets;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 
@@ -49,6 +50,34 @@ public sealed partial class AtmosphereSystem
         return false;
     }
 
+    /// <summary>
+    /// Takes the smoke, the missing oxygen and the heat a fire left out of a tracked tile on a planet layer, back to the
+    /// map's air. Bare ground shares that air already.
+    /// </summary>
+    public void WfRestoreBurntAir(EntityUid grid, Vector2i index)
+    {
+        if (!WfIsTerrain(grid) || !_atmosQuery.TryComp(grid, out var atmos)
+            || !atmos.Tiles.TryGetValue(index, out var tile) || tile.Air is not { Immutable: false } air
+            || !TryComp<MapAtmosphereComponent>(Transform(grid).MapUid, out var map) || map.Space
+            || map.Mixture.Volume <= 0f)
+        {
+            return;
+        }
+
+        var scale = air.Volume / map.Mixture.Volume;
+        var oxygen = map.Mixture.GetMoles(Gas.Oxygen) * scale;
+
+        if (air.GetMoles(Gas.Oxygen) < oxygen)
+            air.SetMoles(Gas.Oxygen, oxygen);
+
+        air.SetMoles(Gas.Smoke, MathF.Min(air.GetMoles(Gas.Smoke), map.Mixture.GetMoles(Gas.Smoke) * scale));
+
+        if (air.Temperature > map.Mixture.Temperature)
+            air.Temperature = map.Mixture.Temperature;
+
+        tile.Hotspot = new Hotspot();
+    }
+
     /// <summary>Whether the grid is a planet layer's ground.</summary>
     private bool WfIsTerrain(EntityUid grid)
     {
@@ -75,15 +104,28 @@ public sealed partial class AtmosphereSystem
         return !_map.TryGetTile(mapGrid, index, out var tile) || tile.IsEmpty || terrain.OpenTiles.Contains(tile.TypeId);
     }
 
-    /// <summary>Fills a tile newly built on a planet layer with the air around it, or the map's air, instead of a vacuum.</summary>
+    /// <summary>
+    /// Fills a tile newly built on a planet layer with the air around it, or the map's air, instead of a vacuum. On the
+    /// ground grid it takes its neighbours' air; on any other grid, the layer's.
+    /// </summary>
     private void WfFillTerrainTile(
         Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent,
         TileAtmosphere tile,
         AirtightData airtight)
     {
         // FixVacuum has already averaged the neighbours in.
-        if (airtight.FixVacuum || tile.Air is not { Immutable: false } air || !WfIsTerrain(ent))
+        if (airtight.FixVacuum || tile.Air is not { Immutable: false } air)
             return;
+
+        if (!WfIsTerrain(ent))
+        {
+            // A grid off the ground, such as a city's upper level, gets its atmosphere only once it is big enough, every
+            // tile at once; without this its sealed rooms start as a vacuum. Orbit's air is space, so it stays empty.
+            if (ent.Comp4.MapUid is { } layer && HasComp<WFPlanetLayerComponent>(layer))
+                WfFillFromMap(ent, air);
+
+            return;
+        }
 
         var neighbours = 0;
 
@@ -110,6 +152,12 @@ public sealed partial class AtmosphereSystem
             return;
         }
 
+        WfFillFromMap(ent, air);
+    }
+
+    /// <summary>Gives a tile's air the grid's map air, scaled to the tile's volume, unless the map is space.</summary>
+    private void WfFillFromMap(Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> ent, GasMixture air)
+    {
         if (!TryComp<MapAtmosphereComponent>(ent.Comp4.MapUid, out var map) || map.Space)
             return;
 

@@ -235,7 +235,7 @@ public sealed partial class CEZLevelsSystem
         if (levelsBelow <= 0)
             return baseScale;
 
-        return baseScale * MathF.Pow(1f / WFPlanetView.Shrink(EntityManager, eyeMap), levelsBelow); // WOLFGATE(Planets): a planet's lower layers are drawn smaller, so their eyes see wider
+        return baseScale / WFPlanetView.LayerScale(WFPlanetView.Shrink(EntityManager, eyeMap), -levelsBelow); // WOLFGATE(Planets): a planet's lower layers are drawn smaller, so their eyes see wider
     }
 
     private void OnZLevelFall(Entity<CEZPhysicsComponent> ent, ref CEZLevelFallMapEvent args)

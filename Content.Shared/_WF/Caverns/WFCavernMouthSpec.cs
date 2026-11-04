@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._WF.Caverns;
 
-/// <summary>How a cavern's mouths are placed, shaped and fitted out: the hole, its lip, the pad below and the climb point.</summary>
+/// <summary>How a cavern's mouths are placed, shaped and fitted out: the hole, its lip, the pad below and the stairs.</summary>
 [DataDefinition]
 public sealed partial class WFCavernMouthSpec
 {
@@ -59,29 +59,25 @@ public sealed partial class WFCavernMouthSpec
     [DataField]
     public int PadRadius = 3;
 
-    /// <summary>The side of the hole whose lip holds the climb point.</summary>
+    /// <summary>The side of the hole whose lip the stairs come out on.</summary>
     [DataField]
-    public Direction ClimbSide = Direction.South;
+    public Direction StairsSide = Direction.South;
 
     /// <summary>The unanchored pit entity over each hole tile.</summary>
     [DataField(required: true)]
     public EntProtoId Shade;
 
-    /// <summary>The anchored climb entity in the cavern under the lip.</summary>
+    /// <summary>The walkable stairs cut in the cavern under the hole's edge, up to the lip.</summary>
     [DataField(required: true)]
-    public EntProtoId ClimbPoint;
+    public EntProtoId Stairs;
 
-    /// <summary>Decor anchored on random lip tiles, never on or beside the climb tile.</summary>
+    /// <summary>Decor anchored on random lip tiles, never on or beside the stairs top.</summary>
     [DataField]
     public List<EntProtoId> Rim = new();
 
     /// <summary>About how many rim decor entities a hole at the top of the size range gets; smaller ones get fewer, at least one.</summary>
     [DataField]
     public int RimCount = 3;
-
-    /// <summary>Base climb-up time in seconds, before surface gravity scales it.</summary>
-    [DataField]
-    public float ClimbSeconds = 4f;
 
     /// <summary>Seconds a standard shovel takes to dig a shaft through ground it can't otherwise dig; a faster tool takes less.</summary>
     [DataField]

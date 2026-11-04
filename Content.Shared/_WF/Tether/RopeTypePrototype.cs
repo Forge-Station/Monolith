@@ -1,3 +1,4 @@
+using Robust.Shared.Utility;
 using Content.Shared.Stacks;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -56,6 +57,14 @@ public sealed partial class RopeTypePrototype : IPrototype
     /// <summary>Drawn width in metres.</summary>
     [DataField]
     public float Width = 0.1f;
+
+    /// <summary>Drawn instead of a plain strip, once per segment along the rope; u runs across it, v along it.</summary>
+    [DataField]
+    public ResPath? SegmentTexture;
+
+    /// <summary>Width at end B as a share of the width at end A, so a tentacle narrows to its tip.</summary>
+    [DataField]
+    public float Taper = 1f;
 
     /// <summary>Verlet chain resolution. The point count is clamped to [8, 96].</summary>
     [DataField]

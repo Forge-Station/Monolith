@@ -1,8 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Shuttles.Components;
-using Content.Server.Shuttles.Events;
-using Content.Server.Shuttles.Systems;
 using Content.Server._WF.Planets.Flight;
+using Content.Server._WF.Planets.Hop;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._WF.CCVar;
 using Content.Shared._WF.Planets.Flight;
@@ -21,7 +20,7 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private ShuttleSystem _shuttle = default!;
+    [Dependency] private WFPlanetHopSystem _hop = default!;
 
     private static readonly TimeSpan RefreshInterval = TimeSpan.FromSeconds(1);
 
@@ -45,9 +44,6 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
             subs.Event<WFEnterAtmosphereMessage>(OnEnterAtmosphereMessage);
             subs.Event<WFLiftoffMessage>(OnLiftoffMessage);
         });
-
-        SubscribeLocalEvent<WFPlanetApproachComponent, FTLStartedEvent>(OnApproachStarted);
-        SubscribeLocalEvent<WFPlanetApproachComponent, FTLCompletedEvent>(OnApproachCompleted);
     }
 
     /// <inheritdoc/>
@@ -60,7 +56,6 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
 
         _nextRefresh = _timing.CurTime + RefreshInterval;
         Refresh();
-        SweepApproaches();
     }
 
     /// <summary>Recomputes every shuttle console's orbit readout.</summary>
@@ -114,7 +109,7 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
 
         if (xform.GridUid is { } grid && HasComp<ShuttleComponent>(grid) && Transform(grid).MapUid is { } mapUid)
         {
-            busy = HasComp<FTLComponent>(grid);
+            busy = _hop.IsBusy(grid);
             liftoffAvailable = _zLevels.WfCanOfferLiftoff(grid);
             liftoffActive = HasComp<WFLiftoffComponent>(grid);
 
@@ -240,7 +235,7 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
         return body != null;
     }
 
-    /// <summary>Moves the console's hull onto a body's orbit layer at the same spot, re-checking every gate.</summary>
+    /// <summary>Moves the console's hull onto a body's orbit layer, inside the world's circle, re-checking every gate.</summary>
     public bool TryEnterOrbit(EntityUid console, EntityUid planetUid, [NotNullWhen(false)] out string? reason)
     {
         if (!TryGetHull(console, out var hull, out reason))
@@ -274,16 +269,8 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
             return false;
         }
 
-        if (!_shuttle.CanFTL(hull.Value.Owner, out reason))
+        if (!_hop.TryStart(hull.Value, orbitUid.Value, worldPos, planetUid, true, out reason))
             return false;
-
-        if (!_shuttle.WfFTLToLayer(hull.Value, orbitUid.Value, worldPos))
-        {
-            reason = Loc.GetString("wf-orbit-refused");
-            return false;
-        }
-
-        MarkApproach(hull.Value.Owner, planetUid, true);
 
         _nextRefresh = TimeSpan.Zero;
         return true;
@@ -309,16 +296,8 @@ public sealed partial class WFOrbitEntrySystem : EntitySystem
             return false;
         }
 
-        if (!_shuttle.CanFTL(hull.Value.Owner, out reason))
+        if (!_hop.TryStart(hull.Value, sectorMap, _transform.GetWorldPosition(hull.Value.Owner), body.Value, false, out reason))
             return false;
-
-        if (!_shuttle.WfFTLToLayer(hull.Value, sectorMap, _transform.GetWorldPosition(hull.Value.Owner)))
-        {
-            reason = Loc.GetString("wf-orbit-refused");
-            return false;
-        }
-
-        MarkApproach(hull.Value.Owner, body.Value, false);
 
         _nextRefresh = TimeSpan.Zero;
         return true;

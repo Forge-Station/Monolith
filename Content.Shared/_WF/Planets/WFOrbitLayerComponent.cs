@@ -24,6 +24,13 @@ public sealed partial class WFOrbitLayerComponent : Component
     [DataField, AutoNetworkedField]
     public List<Vector3> RadarScars = new();
 
+    /// <summary>The ground's circle (see <see cref="WFPlanetBoundsComponent"/>): the radar draws nothing outside it. Zero radius is unbounded.</summary>
+    [DataField, AutoNetworkedField]
+    public Vector2 BoundsCentre;
+
+    [DataField, AutoNetworkedField]
+    public float BoundsRadius;
+
     /// <summary>The sector body this layer orbits, used by the inbound FTL range gate.</summary>
     [DataField, AutoNetworkedField]
     public NetEntity? Planet;

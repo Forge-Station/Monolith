@@ -35,6 +35,7 @@ public sealed partial class MoverController : SharedMoverController
     private readonly Dictionary<EntityUid, (Vector2 LinearInput, float AngularInput, Vector2 Force, float Torque)> _shuttlePropulsion = new();
 
     [Dependency] private EntityQuery<ActiveInputMoverComponent> _activeQuery = default!;
+    [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _wfDormancy = default!; // WOLFGATE(Dormancy): skips movers at rest nobody is near
     [Dependency] private EntityQuery<DroneConsoleComponent> _droneQuery = default!;
     [Dependency] private EntityQuery<ShuttleComponent> _shuttleQuery = default!;
     [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
@@ -203,6 +204,11 @@ public sealed partial class MoverController : SharedMoverController
         {
             if (IsPaused(uid) && !_ghostQuery.HasComp(uid)) // Frontier: Skip processing paused entities. Ghosts are excepted for mapping reasons
                 continue; // Frontier
+
+            // WOLFGATE(Dormancy) START: an NPC at rest with no input on planet ground no player is near has nothing to move
+            if (activeComp.RelayedFrom == null && moverComp.HeldMoveButtons == MoveButtons.None && _wfDormancy.MoverSleeps(uid))
+                continue;
+            // WOLFGATE END
 
             _seenRelayMovers.Clear(); // O(1) if already empty
             QueueRelaySources(activeComp.RelayedFrom);

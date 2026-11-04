@@ -94,7 +94,7 @@ public sealed class GroundContactTest
             loop = skid.Loop!.Value;
             impact = skid.ImpactStream!.Value;
             Assert.That(em.GetComponent<AudioComponent>(loop).FileName, Does.EndWith("ground_grind_loop.ogg"));
-            Assert.That(em.GetComponent<AudioComponent>(loop).Params.Volume, Is.GreaterThan(0f));
+            Assert.That(em.GetComponent<AudioComponent>(loop).Params.Volume, Is.EqualTo(WFFlightSystem.SkidGrindVolume));
             Assert.That(em.GetComponent<AudioComponent>(loop).Params.MaxDistance, Is.GreaterThanOrEqualTo(80f));
             var allowed = new[] { 10, 11, 12, 3, 4 }.Select(i => $"/Audio/_WF/Planets/Flight/crash{i}.ogg");
             Assert.That(allowed, Does.Contain(em.GetComponent<AudioComponent>(impact).FileName));

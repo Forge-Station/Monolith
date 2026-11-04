@@ -42,6 +42,4 @@ company_whitelist = false
 # WOLFGATE(Planets) START: planet networks are on in development builds.
 [wf]
 planet_networks = true
-# WOLFGATE(Caverns): caverns are on in development builds.
-caverns = true
 # WOLFGATE END

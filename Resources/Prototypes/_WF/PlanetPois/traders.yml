@@ -1,0 +1,224 @@
+- type: traderDialogue
+  id: WFPoiFuelDialogue
+  greeting: wf-poi-fuel-greeting
+  farewell: wf-poi-trader-farewell
+  options:
+  - prompt: wf-poi-fuel-shop
+    response: wf-poi-fuel-stock
+    action: OpenShop
+
+- type: entity
+  id: WFPoiFuelTrader
+  parent: WFBaseTrader
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFTraderFuelTechnicianProfile
+  - type: Loadout
+    prototypes: [ WFTraderFuelTechnicianGear ]
+  - type: Trader
+    dialogue: WFPoiFuelDialogue
+  - type: TraderShop
+    vendors: [ VendingMachineFuelVend, VendingMachineYouToolPOI ]
+
+# The roadside mechanic (mechanic_shop.yml): fixes a vehicle parked out front for a price set by its damage and
+# value, and sells delivery beacons and repair boxes. Killable and unarmed: hurt, he runs.
+- type: humanoidProfile
+  id: WFPoiMechanicProfile
+  profile:
+    name: Hollis Brandt
+    species: Human
+    age: 52
+    sex: Male
+    gender: Male
+    appearance:
+      hair: HumanHairBalding
+      hairColor: "#3B3026"
+      facialHair: HumanFacialHairFullbeard
+      facialHairColor: "#3B3026"
+      eyeColor: "#5B6F7A"
+      skinColor: "#C79C7A"
+
+- type: startingGear
+  id: WFPoiMechanicGear
+  equipment:
+    jumpsuit: ClothingUniformOveralls
+    shoes: ClothingShoesBootsWork
+    gloves: ClothingHandsGlovesColorBlack
+    belt: ClothingBeltUtility
+
+- type: traderDialogue
+  id: WFPoiMechanicDialogue
+  greeting: wf-poi-mechanic-greeting
+  farewell: wf-poi-mechanic-farewell
+  options:
+  - prompt: wf-poi-mechanic-prompt-repair
+    response: wf-poi-mechanic-response-repair
+    action: RepairVehicle
+  - prompt: wf-poi-mechanic-prompt-shop
+    response: wf-poi-mechanic-response-shop
+    action: OpenShop
+  - prompt: wf-poi-mechanic-prompt-beacon
+    response: wf-poi-mechanic-response-beacon
+
+- type: entity
+  id: WFPoiMechanic
+  parent: WFBaseTrader
+  suffix: Trader, Mechanic
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFPoiMechanicProfile
+  - type: Loadout
+    prototypes: [ WFPoiMechanicGear ]
+  # No weapon and no fighting: the brain only stands about, and runs when TraderFleeSystem names somewhere to run to.
+  - type: HTN
+    rootTask:
+      task: WFTraderCompound
+    blackboard:
+      NavInteract: !type:Bool
+        true
+  - type: Trader
+    dialogue: WFPoiMechanicDialogue
+    killable: true
+  - type: WFCowardice
+  - type: TraderShop
+    vendors: [ WFTraderStockMechanic ]
+  - type: TraderVehicleRepair
+
+- type: vendingMachineInventory
+  id: WFTraderMechanicInventory
+  startingInventory:
+    WFVehicleBeaconATV: 4
+    WFVehicleBeaconCivTruck1: 2
+    WFVehicleBeaconCivTruck: 2
+    WFVehicleBeaconCivVan: 2
+    WFVehicleBeaconVan: 1
+    WFVehicleRepairKit: 6
+    JugWeldingFuel: 4
+    WelderIndustrial: 2
+    Wrench: 3
+    Crowbar: 3
+
+# A beacon costs its catalogue listing (its vend price); the tools cost three times what they appraise for.
+- type: entity
+  id: WFTraderStockMechanic
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderMechanicInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 3
+
+# The roadside innkeeper (roadside_inn.yml): a warm welcome, food, drink and a bed. He would sooner be paid in organs,
+# at half what they appraise for, and sells a few. Anyone left dead or dying in his inn he eats, and he gives them back
+# up when he dies. Killable and unarmed: hurt, he runs.
+- type: humanoidProfile
+  id: WFPoiInnkeeperProfile
+  profile:
+    name: Amos Fennick
+    species: Human
+    age: 61
+    sex: Male
+    gender: Male
+    appearance:
+      hair: HumanHairCombover
+      hairColor: "#8A8580"
+      facialHair: HumanFacialHairSelleck
+      facialHairColor: "#8A8580"
+      eyeColor: "#6B4E2E"
+      skinColor: "#D9B39A"
+
+- type: startingGear
+  id: WFPoiInnkeeperGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitBartender
+    outerClothing: ClothingOuterApronChef
+    shoes: ClothingShoesColorBrown
+    neck: ClothingNeckTieRed
+
+- type: traderDialogue
+  id: WFPoiInnkeeperDialogue
+  greeting: wf-poi-innkeeper-greeting
+  farewell: wf-poi-innkeeper-farewell
+  options:
+  - prompt: wf-poi-innkeeper-prompt-shop
+    response: wf-poi-innkeeper-response-shop
+    action: OpenShop
+  - prompt: wf-poi-innkeeper-prompt-pay
+    response: wf-poi-innkeeper-response-pay
+  - prompt: wf-poi-innkeeper-prompt-room
+    response: wf-poi-innkeeper-response-room
+  - prompt: wf-poi-innkeeper-prompt-stew
+    response: wf-poi-innkeeper-response-stew
+
+- type: entity
+  id: WFPoiInnkeeper
+  parent: WFBaseTrader
+  suffix: Trader, Innkeeper
+  components:
+  - type: HumanoidAppearance
+    species: Human
+    initial: WFPoiInnkeeperProfile
+  - type: Loadout
+    prototypes: [ WFPoiInnkeeperGear ]
+  - type: HTN
+    rootTask:
+      task: WFTraderDevourCompound
+    blackboard:
+      NavInteract: !type:Bool
+        true
+  - type: Trader
+    dialogue: WFPoiInnkeeperDialogue
+    killable: true
+  - type: WFCowardice
+    cowardice: 0.4
+  - type: TraderShop
+    vendors: [ WFTraderStockInn ]
+  # Organs, never a brain (it carries a mind).
+  - type: TraderGoodsPayment
+    whitelist:
+      components:
+      - Organ
+    blacklist:
+      components:
+      - MindContainer
+    rate: 0.5
+  - type: Devourer
+    foodPreference: Humanoid
+    whitelist:
+      components:
+      - HumanoidAppearance
+  - type: TraderDevour
+
+- type: vendingMachineInventory
+  id: WFTraderInnInventory
+  startingInventory:
+    FoodSoupStew: 10
+    FoodPieMeat: 4
+    FoodBreadMeat: 4
+    FoodBurgerHuman: 2
+    DrinkBeerBottleFull: 10
+    DrinkAleBottleFull: 6
+    DrinkWineBottleFull: 3
+    DrinkWaterBottleFull: 10
+    OrganHumanHeart: 1
+    OrganHumanLiver: 2
+    OrganHumanKidneys: 2
+    OrganHumanLungs: 1
+    OrganHumanEyes: 2
+    OrganHumanStomach: 1
+
+# Twice what anything appraises for, organs included, so none of it resells at a profit.
+- type: entity
+  id: WFTraderStockInn
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderInnInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 2

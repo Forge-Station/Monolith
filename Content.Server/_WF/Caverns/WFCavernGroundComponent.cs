@@ -33,9 +33,9 @@ public sealed partial class WFCavernGroundComponent : Component
     [ViewVariables]
     public Dictionary<Vector2i, EntityUid> Shades = new();
 
-    /// <summary>The climb point under each lip, by tile index (the same on both maps).</summary>
+    /// <summary>The stairs cut under holes, by tile index (the same on both maps): where the cavern leads back up.</summary>
     [ViewVariables]
-    public Dictionary<Vector2i, EntityUid> ClimbPoints = new();
+    public Dictionary<Vector2i, EntityUid> Stairways = new();
 
     /// <summary>Ground tiles emptied since the hole queue last ran: holes, or an unload's.</summary>
     [ViewVariables]
@@ -49,7 +49,7 @@ public sealed partial class WFCavernGroundComponent : Component
     [ViewVariables]
     public HashSet<Vector2i> FloorOpened = new();
 
-    /// <summary>Holes whose stairs went since the hole queue last ran, which it gives a landing and a climb point.</summary>
+    /// <summary>Holes whose stairs went since the hole queue last ran, which it gives a landing and stairs.</summary>
     [ViewVariables]
     public HashSet<Vector2i> Refit = new();
 }
@@ -106,13 +106,13 @@ public sealed class WFCavernCell
 /// <summary>Where a cell's mouth goes: the anchor tile and the shape grown around it.</summary>
 public readonly record struct WFCavernSite(Vector2i Origin, WFCavernMouthShape Shape);
 
-/// <summary>A stamped way down: a shaped hole, the lip around it and the climb tile on that lip.</summary>
+/// <summary>A stamped way down: a shaped hole, the lip around it and the lip tile its stairs come out on.</summary>
 public sealed class WFCavernMouth
 {
     /// <summary>The anchor: the hole tile nearest the hole's centroid.</summary>
     public readonly Vector2i Origin;
 
-    /// <summary>The lip tile over the climb point.</summary>
+    /// <summary>The lip tile at the top of the mouth's stairs.</summary>
     public readonly Vector2i ClimbTile;
 
     /// <summary>Why the mouth exists.</summary>

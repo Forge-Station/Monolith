@@ -1,0 +1,163 @@
+# Seats inside vehicle interiors. The driver's seat makes whoever is buckled into it the vehicle's operator, and carries
+# the vehicle's mass scanner (WFVehicleScanner), which looks out from the vehicle.
+
+- type: entity
+  parent: SeatBase
+  id: RMCSeatDriver
+  categories: [ WFVehicles ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _WF/Vehicles/Furniture/vehicle_seats.rsi
+    state: pilot_chair
+  - type: Destructible
+    thresholds: []
+  - type: VehicleDriverSeat
+  - type: WFVehicleScanner
+  - type: RadarConsole
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: WFVehicleRadarBoundUserInterface
+
+- type: entity
+  parent: SeatBase
+  id: CMSeatPassenger
+  categories: [ WFVehicles ]
+  name: passenger seat
+  description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _WF/Vehicles/Furniture/vehicle_seats.rsi
+    state: base
+  - type: Destructible
+    thresholds: []
+
+- type: entity
+  parent: RMCSeatDriver
+  id: RMCSeatVanDriver
+  name: van driver seat
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/Furniture/chairs.rsi
+    state: comfychair
+
+- type: entity
+  abstract: true
+  parent: SeatBase
+  id: RMCSeatArmoredBase
+  categories: [ WFVehicles ]
+  name: armored seat
+  description: A reinforced chair designed for vehicle interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _WF/Vehicles/Interiors/general.rsi
+    state: armor_chair
+  - type: Destructible
+    thresholds: []
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmored
+  name: armored seat
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmoredDriver
+  name: armored driver's seat
+  components:
+  - type: VehicleDriverSeat
+  - type: WFVehicleScanner
+  - type: RadarConsole
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: WFVehicleRadarBoundUserInterface
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmoredWeaponsOperator
+  name: armored weapons operator seat
+  components:
+  - type: VehicleWeaponsSeat
+    isPrimaryOperatorSeat: true
+    allowUiSelection: true
+    allowHotbarSelection: true
+  - type: UserInterface
+    interfaces:
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+
+- type: entity
+  abstract: true
+  parent: SeatBase
+  id: RMCSeatHumveeBase
+  categories: [ WFVehicles ]
+  name: humvee seat
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _WF/Vehicles/Interiors/general_humvee.rsi
+    state: car_seat
+    drawdepth: BelowMobs
+  - type: Destructible
+    thresholds: []
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveePassenger
+  name: humvee passenger seat
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveeDriver
+  name: humvee driver seat
+  components:
+  - type: VehicleDriverSeat
+  - type: WFVehicleScanner
+  - type: RadarConsole
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: WFVehicleRadarBoundUserInterface
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveeARCDriver
+  name: ARC driver seat
+  components:
+  - type: VehicleDriverSeat
+  - type: WFVehicleScanner
+  - type: RadarConsole
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: WFVehicleRadarBoundUserInterface
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveeWeaponsOperator
+  name: humvee gunner seat
+  components:
+  - type: VehicleWeaponsSeat
+    isPrimaryOperatorSeat: true
+    allowUiSelection: true
+    allowHotbarSelection: true
+  - type: UserInterface
+    interfaces:
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface

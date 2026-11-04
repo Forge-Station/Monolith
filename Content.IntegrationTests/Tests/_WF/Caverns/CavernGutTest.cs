@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Content.Server._WF.Caverns;
 using Content.Server._WF.Planets;
+using Content.Shared._WF.Birds;
 using Content.Server.NPC.HTN;
 using Content.Shared._WF.Caverns;
 using Content.Shared.Damage;
@@ -31,7 +32,15 @@ public sealed class CavernGutTest
     private const string Floor = "WFCavernFloorGut";
 
     /// <summary>What spawns the Gut's own creatures: its wildlife markers and its assimilation sacks.</summary>
-    private static readonly string[] NativeSpawners = { "WFCavernFaunaCarcinoma", "WFCarcinomaAssimilationSack" };
+    private static readonly string[] NativeSpawners =
+    {
+        "WFCavernFaunaCarcinoma",
+        "WFCavernFaunaCarcinomaStomach",
+        "WFCavernFaunaCarcinomaNerve",
+        "WFCavernFaunaCarcinomaOssuary",
+        "WFCavernFaunaCarcinomaBlood",
+        "WFCarcinomaAssimilationSack",
+    };
 
     /// <summary>Seconds the mobs stand still before they are checked.</summary>
     private const float StandSeconds = 3f;
@@ -70,6 +79,9 @@ public sealed class CavernGutTest
                     $"{spawnerId} spawns no wildlife.");
                 CollectSpawns(protoMan, protoMan.Index(spawner!.Table).Table, natives);
             }
+
+            // Birds never touch the ground's fixtures, so they can't stand in a pool.
+            natives.RemoveWhere(id => protoMan.Index<EntityPrototype>(id).TryGetComponent<WFBirdComponent>(out _, factory));
         });
 
         var pools = new List<Vector2i> { Vector2i.Zero, new(2, 0) };

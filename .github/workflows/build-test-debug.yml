@@ -2,8 +2,7 @@ name: Build & Test Debug
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  # auto-cancel active runs.
-  cancel-in-progress: false # Forge-Change
+  cancel-in-progress: true
 
 on:
   push:
@@ -16,9 +15,30 @@ on:
 jobs:
   build:
     if: github.event.pull_request.draft == false
+    # WOLFGATE(Ci) START: split the integration tests over four runners; each builds and runs one shard
+    # strategy:
+    #   matrix:
+    #     os: [ubuntu-latest]
+    name: build (${{ matrix.os }}, ${{ matrix.shard }})
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        # Pinned: on ubuntu-26.04 the cockpit and console label-width tests fail with the same code.
+        os: [ubuntu-24.04]
+        shard: [ wf-heavy, wf-planets, wf-rest, core ]
+        include:
+        - shard: wf-heavy
+          where: "test =~ 'Tests[.]_WF[.](Wolfmed|Encounters|NpcCrew|Vehicles)[.]'"
+        # Whole worlds built per test: on one runner with the rest they ran it out of memory.
+        - shard: wf-planets
+          where: "test =~ 'Tests[.]_WF[.](Planet[A-Za-z]*|Caverns|LivingWorld|SandMaw)[.]'"
+        - shard: wf-rest
+          where: "test =~ 'Tests[.]_WF[.]' && test !~ 'Tests[.]_WF[.](Wolfmed|Encounters|NpcCrew|Vehicles|RoundSetup|Planet[A-Za-z]*|Caverns|LivingWorld|SandMaw)[.]' && test !~ ShipyardTest"
+        # Upstream and other forks, plus RoundSetup; Content.Tests runs here too.
+        - shard: core
+          where: "(test !~ 'Tests[.]_WF[.]' || test =~ 'Tests[.]_WF[.]RoundSetup[.]') && test !~ ShipyardTest"
+          unit: true
+    # WOLFGATE END
 
     runs-on: ${{ matrix.os }}
 
@@ -50,6 +70,7 @@ jobs:
       run: dotnet build --configuration DebugOpt --no-restore /p:WarningsAsErrors=nullable /m
 
     - name: Run Content.Tests
+      if: matrix.unit # WOLFGATE(Ci): unit tests run once, on the core shard
       shell: pwsh
       run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0 NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
 
@@ -57,13 +78,22 @@ jobs:
       shell: pwsh
       run: |
         $env:DOTNET_gcServer=1
-        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj --filter "FullyQualifiedName!~ShipyardTest" -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        # WOLFGATE(Ci) START: exclude Shipyard tests in NUnit itself; the --filter form still ran them and only hid the results
+        # dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj --filter "FullyQualifiedName!~ShipyardTest" -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        # dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- 'NUnit.Where=test !~ ShipyardTest' NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        # Each shard's filter comes from the matrix; together they cover every test but the Shipyard ones.
+        # dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- "NUnit.Where=${{ matrix.where }}" NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        # Above AssemblySelectLimit (default 2000) the adapter runs the whole assembly and only hides the extra results.
+        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- "NUnit.Where=${{ matrix.where }}" NUnit.AssemblySelectLimit=100000 NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed NUnit.TestOutputXml="logs" NUnit.WorkDirectory="$(pwd)/test_results"
+        # WOLFGATE END
 
     - name: Archive NUnit3 test results.
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: nunit3-results-${{ matrix.os }}
+        # WOLFGATE(Ci): one artifact per shard
+        # name: nunit3-results-${{ matrix.os }}
+        name: nunit3-results-${{ matrix.os }}-${{ matrix.shard }}
         path: test_results/*
         retention-days: 7
         compression-level: 9
@@ -71,7 +101,12 @@ jobs:
     name: Build & Test Debug
     needs:
       - build
+    # WOLFGATE(Ci) START: report failure instead of skipping when a shard fails; a skipped required check counts as passed
+    if: always() && github.event.pull_request.draft != true
     runs-on: ubuntu-latest
     steps:
+      # - name: CI succeeded
+      #   run: exit 0
       - name: CI succeeded
-        run: exit 0
+        run: test "${{ needs.build.result }}" = "success"
+    # WOLFGATE END

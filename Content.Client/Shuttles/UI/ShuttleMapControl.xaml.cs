@@ -104,6 +104,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         _physicsQuery = EntManager.GetEntityQuery<PhysicsComponent>();
 
         _font = new VectorFont(cache.GetResource<FontResource>("/EngineFonts/NotoSans/NotoSans-Regular.ttf"), 10);
+        WfAddPlanetScanner(); // WOLFGATE(PlanetScan): hovering a world opens its scan.
     }
 
     public void SetMap(MapId mapId, Vector2 offset, bool recentering = false)
@@ -277,7 +278,10 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
             return;
         }
 
-        DrawParallax(handle);
+        // WOLFGATE(Planets) START: over a world, the world fills the plot instead of space.
+        if (!DrawWfPlanetBackground(handle, _mapManager.GetMapOrInvalid(ViewingMap)))
+            DrawParallax(handle);
+        // WOLFGATE END
 
         var viewedMapUid = Maps.GetMap(ViewingMap);
         var matty = Matrix3Helpers.CreateInverseTransform(Offset, Angle.Zero);

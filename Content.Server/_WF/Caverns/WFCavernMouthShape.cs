@@ -4,7 +4,7 @@ using Content.Shared._WF.Caverns;
 
 namespace Content.Server._WF.Caverns;
 
-/// <summary>A mouth's hole, lip, climb tile and rim decor spots as offsets from its anchor, grown from one seed.</summary>
+/// <summary>A mouth's hole, lip, stairs top and rim decor spots as offsets from its anchor, grown from one seed.</summary>
 // Pure: the same spec and seed give the same shape in every process, so a cell's site never depends on claim timing.
 public sealed class WFCavernMouthShape
 {
@@ -24,10 +24,10 @@ public sealed class WFCavernMouthShape
     /// <summary>The lip: every tile touching the hole, diagonals included, that is not hole.</summary>
     public readonly HashSet<Vector2i> Ring = new();
 
-    /// <summary>Lip tiles that take rim decor, never on or beside the climb tile, nor beside each other.</summary>
+    /// <summary>Lip tiles that take rim decor, never on or beside the stairs top, nor beside each other.</summary>
     public readonly List<Vector2i> Rim = new();
 
-    /// <summary>The lip tile over the climb point: outermost on the climb side, beside the hole.</summary>
+    /// <summary>The lip tile at the top of the stairs: outermost on the stairs side, beside the hole.</summary>
     public Vector2i Climb;
 
     /// <summary>The hole's lowest corner tile.</summary>
@@ -72,7 +72,7 @@ public sealed class WFCavernMouthShape
 
         var shape = new WFCavernMouthShape { Fallback = !grown };
         shape.Place(tiles);
-        shape.FindClimb(spec.ClimbSide);
+        shape.FindClimb(spec.StairsSide);
         shape.PickRim(spec, random);
         return shape;
     }
@@ -523,7 +523,7 @@ public sealed class WFCavernMouthShape
         }
     }
 
-    /// <summary>The lip tile beside the hole farthest out on the climb side, nearest the centroid across that side.</summary>
+    /// <summary>The lip tile beside the hole farthest out on the stairs side, nearest the centroid across that side.</summary>
     private void FindClimb(Direction side)
     {
         var step = side.ToIntVec();
@@ -539,7 +539,7 @@ public sealed class WFCavernMouthShape
             .First();
     }
 
-    /// <summary>Picks the rim decor spots at random among lip tiles clear of the climb tile and of each other.</summary>
+    /// <summary>Picks the rim decor spots at random among lip tiles clear of the stairs top and of each other.</summary>
     // A hole at the top of the size range gets about rimCount; a smaller one proportionally fewer, but at least one.
     private void PickRim(WFCavernMouthSpec spec, System.Random random)
     {

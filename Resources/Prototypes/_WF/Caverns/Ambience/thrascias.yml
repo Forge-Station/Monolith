@@ -1,0 +1,18 @@
+# Under the ice: a cave bed with wind coming down the shafts, and the ice cracking and shifting now and then. Named by
+# the Rime Galleries in caverns.yml and played clear underground.
+
+- type: wfPlanetAmbience
+  id: WFPlanetAmbienceThrasciasCavern
+  loops:
+  - path: /Audio/Ambience/ambicave.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/xen_nih_wind1_mix.ogg
+  oneShots:
+  - path: /Audio/Effects/glass_crack1.ogg
+  - path: /Audio/Effects/glass_crack3.ogg
+  - path: /Audio/Items/snap.ogg
+  - path: /Audio/Effects/break_stone.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/wind_fall.ogg
+  loopVolume: -9
+  oneShotVolume: -9
+  minInterval: 25
+  maxInterval: 65

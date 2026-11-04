@@ -253,6 +253,14 @@ public sealed partial class ShuttleSystem
             return false;
         }
 
+        // WOLFGATE(Planets) START: a hull mid-hop can't jump, nor can a ship docked to one
+        if (HasComp<Content.Server._WF.Planets.Hop.WFPlanetHopComponent>(shuttleUid))
+        {
+            reason = Loc.GetString("wf-orbit-hopping");
+            return false;
+        }
+        // WOLFGATE END
+
         if (TryComp<PhysicsComponent>(shuttleUid, out var shuttlePhysics))
         {
 
@@ -1043,7 +1051,7 @@ public sealed partial class ShuttleSystem
         }
     }
 
-    private void LeaveNoFTLBehind(Entity<TransformComponent> grid, Matrix3x2 oldGridMatrix, EntityUid? oldMapUid)
+    public void LeaveNoFTLBehind(Entity<TransformComponent> grid, Matrix3x2 oldGridMatrix, EntityUid? oldMapUid) // WOLFGATE(Planets): a hop leaves NoFTL entities behind too
     {
         if (oldMapUid == null)
             return;

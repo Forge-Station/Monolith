@@ -41,6 +41,17 @@
     entities: [WFCarcinomaTendons]
     threshold: 0.1
     noise: { seed: 53, noiseType: OpenSimplex2, frequency: 0.6 }
+  # Grasping vines (_WF/Planets/Life) stand on tendon tiles: the same noise, a higher threshold.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFCarcinomaTendonVine]
+    threshold: 0.95
+    noise: { seed: 53, noiseType: OpenSimplex2, frequency: 0.6 }
+  # Rare pockets of resin and hive wall; they win over the tendons where they stand.
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaHivePocket
+    threshold: 0.9
+    noise: { seed: 83, noiseType: OpenSimplex2, frequency: 0.04 }
 
 - type: biomeTemplate
   id: WFCarcinomaBloodOcean
@@ -57,11 +68,17 @@
 - type: entity
   id: WFBloodOcean
   parent: MonoFloorWaterEntity
-  name: blood ocean
-  description: A vast sea of dark blood laps against the living shore.
+  name: blood lake
+  description: A still lake of dark blood laps against the living shore.
   components:
+  # Recoloured art: a tint only multiplies, and the water sprite is dark blue, so tinting it red read as black.
   - type: Sprite
-    color: "#b81e24"
+    sprite: _WF/Planets/BloodWater/blood-lake.rsi
+  - type: Icon
+    sprite: _WF/Planets/BloodWater/blood-lake.rsi
+  # Blood isn't water: it never freezes into lake ice.
+  - type: WFFreezableWater
+    freezeAt: 0
   - type: SolutionContainerManager
     solutions:
       pool:

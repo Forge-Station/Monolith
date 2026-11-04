@@ -20,6 +20,8 @@ public sealed class WolfmedBreathingAlertSystem : EntitySystem
     private static readonly TimeSpan TickInterval = TimeSpan.FromSeconds(1);
 
     [Dependency] private AlertsSystem _alerts = default!;
+
+    [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _dormancy = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private WolfmedBreathingSystem _breathing = default!;
@@ -48,6 +50,9 @@ public sealed class WolfmedBreathingAlertSystem : EntitySystem
         var query = EntityQueryEnumerator<WolfmedConsciousnessComponent>();
         while (query.MoveNext(out var body, out _))
         {
+            if (_dormancy.BodySleeps(body))
+                continue;
+
             if (!_mobState.IsDead(body) && _breathing.Assess(body).Source == WolfmedBreathingSource.Lungs)
             {
                 if (_noLungs.Add(body))

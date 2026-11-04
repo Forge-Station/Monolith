@@ -1,0 +1,51 @@
+# Gunnery co-processor chips (WFGunneryChipSystem): use one on a gunnery control server to raise its processing power
+# for good, up to three chips a server. Found in the holds of crashed ships (_WF/PlanetPois/wreck_loot.yml).
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: WFGunneryChipBase
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+
+- type: entity
+  parent: WFGunneryChipBase
+  id: WFGunneryChipBasic
+  name: gunnery co-processor chip
+  description: A co-processor for a gunnery control server. Fit it to raise the server's processing power by 6.
+  components:
+  - type: Sprite
+    state: cpuboard
+  - type: WFGunneryChip
+    power: 6
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  parent: WFGunneryChipBase
+  id: WFGunneryChipAdvanced
+  name: advanced gunnery co-processor chip
+  description: A fast co-processor for a gunnery control server. Fit it to raise the server's processing power by 12.
+  components:
+  - type: Sprite
+    state: cpuboard_adv
+  - type: WFGunneryChip
+    power: 12
+  - type: StaticPrice
+    price: 7500
+
+- type: entity
+  parent: WFGunneryChipBase
+  id: WFGunneryChipMilitary
+  name: military gunnery co-processor chip
+  description: A military-grade co-processor for a gunnery control server. Fit it to raise the server's processing power by 24.
+  components:
+  - type: Sprite
+    state: cpuboard_super
+  - type: WFGunneryChip
+    power: 24
+  - type: StaticPrice
+    price: 15000

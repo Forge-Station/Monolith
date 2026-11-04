@@ -22,11 +22,11 @@
   copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
   source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Flight
 
-# PLACEHOLDER: a copy of /Audio/Effects/Shuttle/hyperspace_begin.ogg until the maintainer supplies the takeoff sound.
+# First 9 s of sound/bms_objects/rocket/rocket_booster.wav, faded out, mono, normalised to -14 LUFS.
 - files: ["takeoff.ogg"]
-  license: CC-BY-SA-3.0
-  copyright: "Placeholder copy of hyperspace_begin.ogg from NSV-13, edited by _starch_ (discord) to fit SS14."
-  source: https://github.com/BeeStation/NSV13/tree/master/nsv13/sound/effects/ship
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_objects/rocket/rocket_booster.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
 
 # Sourced by the maintainer (2026-09-15), converted to stereo 44.1 kHz Vorbis on import.
 - files: ["thrust_loop.ogg"]

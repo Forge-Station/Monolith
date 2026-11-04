@@ -18,11 +18,25 @@ public sealed class PlanetControlInfo
     /// <summary>The scheduled weather prototype, or empty for clear skies.</summary>
     public string Weather = string.Empty;
 
+    /// <summary>The WolfWeather shown on the ground, or empty for none.</summary>
+    public string WolfWeather = string.Empty;
+
     /// <summary>Seconds until the scheduler next changes the weather.</summary>
     public float WeatherSeconds;
 
     public float Gravity = 1f;
     public bool Sanctioned = true;
+
+    /// <summary>The current season's id, or empty for a world without seasons.</summary>
+    public string Season = string.Empty;
+    public float SeasonSecondsLeft;
+
+    /// <summary>Every season the world has, as ids and Fluent names in the same order.</summary>
+    public List<string> SeasonIds = new();
+    public List<string> SeasonNames = new();
+
+    /// <summary>The outdoor air temperature in kelvin; NaN until the world has one.</summary>
+    public float Temperature = float.NaN;
 }
 
 /// <summary>Client asks the server for the world list. Admin-only; ignored otherwise.</summary>
@@ -55,4 +69,7 @@ public sealed class PlanetControlSetEvent : EntityEventArgs
 
     public float? Gravity;
     public bool? Sanctioned;
+
+    /// <summary>A season id to start now.</summary>
+    public string? Season;
 }

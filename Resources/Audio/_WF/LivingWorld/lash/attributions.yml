@@ -1,0 +1,29 @@
+- files:
+  - tent_strike1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/tentacle/tent_strike1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - tent_strike2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/tentacle/tent_strike2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - tent_swoosh1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/tentacle/tent_swoosh1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - tent_swoosh2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/tentacle/tent_swoosh2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - tent_swoosh3.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/tentacle/tent_swoosh3.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

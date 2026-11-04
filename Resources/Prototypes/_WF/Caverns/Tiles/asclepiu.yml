@@ -1,0 +1,26 @@
+# The Underkarst's zone floors, laid over the chamber dirt in patches. Like every cavern floor each is indestructible,
+# can't be dug and has no base turf.
+
+# Dripstone halls: pale flowstone.
+- type: tile
+  id: WFCavernFloorFlowstone
+  parent: AuroraFloorCaveAdhomai
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+# Flooded grottos: wet, teal-streaked rock.
+- type: tile
+  id: WFCavernFloorWetRock
+  parent: NovaFloorPoolCobbleWateryrock
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+# Mushroom hollows: dark, damp soil.
+- type: tile
+  id: WFCavernFloorCaveSoil
+  parent: CitFloorSpooktimeDirtpatch
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""

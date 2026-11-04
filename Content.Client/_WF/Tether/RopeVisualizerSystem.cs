@@ -93,7 +93,7 @@ public sealed class RopeVisualizerSystem : EntitySystem
             chain.MapId = mapId;
 
             var span = new Box2(Vector2.Min(endA, endB), Vector2.Max(endA, endB))
-                .Enlarged(MathF.Max(rope.Length * 0.5f, 1f));
+                .Enlarged(float.IsFinite(rope.Length) ? MathF.Max(rope.Length * 0.5f, 1f) : 1f);
             chain.Visible = mapId == currentMap && view.Intersects(span);
             // A hidden chain keeps its last simulated ends, so a big move off screen reseeds it on return.
             if (!chain.Visible)
@@ -152,6 +152,10 @@ public sealed class RopeVisualizerSystem : EntitySystem
         chain.Color = Color.InterpolateBetween(proto.Color, proto.TautColor,
             Math.Clamp(float.IsFinite(rope.Strain) ? rope.Strain : 0f, 0f, 1f));
         chain.Width = MathF.Max(proto.Width, 0.01f);
+        chain.Taper = Math.Clamp(proto.Taper, 0.05f, 1f);
+        chain.SegmentTexture = proto.SegmentTexture is { } segmentTexture
+            ? _resources.GetResource<TextureResource>(segmentTexture).Texture
+            : null;
 
         if (chain.Count != count || chain.Points.Length < count || !MathHelper.CloseTo(chain.SegmentRest, rest, 0.0001f))
         {

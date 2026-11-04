@@ -1,0 +1,83 @@
+# How each world reclaims the ships that crashed on it (WFPlanetPoiSystem.Wrecks): its ground creeping over the deck,
+# what grows or settles there, the wildlife that moved in and the crew that never left (wreck_crew.yml),
+# and sometimes salvage still in the hold (wreck_loot.yml).
+
+- type: wfWreckTheme
+  id: WFWreckThemeVerda
+  floorTile: FloorPlanetGrass
+  floorChance: 0.25
+  overgrowth: [ FloraTree ]
+  overgrowthChance: 0.04
+  fauna: !type:NestedSelector
+    tableId: WFFaunaAsclepiu
+  crew: !type:EntSelector
+    id: WFWreckZombieVerda
+  loot: !type:NestedSelector
+    tableId: WFWreckLoot
+
+- type: wfWreckTheme
+  id: WFWreckThemeMerak
+  floorTile: FloorDesert
+  floorChance: 0.35
+  overgrowth: [ FloraRockSolidPlanet ]
+  overgrowthChance: 0.03
+  fauna: !type:NestedSelector
+    tableId: MonoPlanetmapFaunaDesert
+  crew: !type:EntSelector
+    id: WFWreckZombieMerak
+  loot: !type:NestedSelector
+    tableId: WFWreckLoot
+
+- type: wfWreckTheme
+  id: WFWreckThemeFervidus
+  floorTile: FloorBasalt
+  floorChance: 0.3
+  overgrowth: [ BasaltOne, BasaltTwo, Ash ]
+  overgrowthChance: 0.08
+  fauna: !type:NestedSelector
+    tableId: WFFaunaFervidus
+  crew: !type:EntSelector
+    id: WFWreckZombieFervidus
+  loot: !type:NestedSelector
+    tableId: WFWreckLoot
+
+- type: wfWreckTheme
+  id: WFWreckThemeThrascias
+  floorTile: FloorSnow
+  floorChance: 0.4
+  overgrowth: [ IceCrust, FloraTreeSnow ]
+  overgrowthChance: 0.06
+  fauna: !type:NestedSelector
+    tableId: WFFaunaThrascias
+  crew: !type:EntSelector
+    id: WFWreckZombieThrascias
+  loot: !type:NestedSelector
+    tableId: WFWreckLoot
+
+- type: wfWreckTheme
+  id: WFWreckThemeAerumna
+  floorTile: FloorChromite
+  floorChance: 0.3
+  overgrowth: [ CrystalPink, ShadowBasaltOne ]
+  overgrowthChance: 0.05
+  fauna: !type:NestedSelector
+    tableId: WFFaunaAerumna
+  crew: !type:EntSelector
+    id: WFWreckZombieAerumna
+  loot: !type:NestedSelector
+    tableId: WFWreckLoot
+
+- type: wfWreckTheme
+  id: WFWreckThemeCarcinoma
+  floorTile: WFFloorFlesh
+  floorChance: 0.5
+  overgrowth: [ WFCarcinomaTendons, WFFleshPolyp ]
+  overgrowthChance: 0.15
+  minFauna: 2
+  maxFauna: 4
+  fauna: !type:NestedSelector
+    tableId: WFFaunaCarcinoma
+  crew: !type:EntSelector
+    id: WFWreckZombieCarcinoma
+  loot: !type:NestedSelector
+    tableId: WFWreckLoot

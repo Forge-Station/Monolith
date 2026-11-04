@@ -27,6 +27,8 @@ public sealed class WolfmedWoundOverlaySystem : EntitySystem
     private static readonly Color FallbackBlood = Color.FromHex("#800000");
 
     [Dependency] private IConfigurationManager _cfg = default!;
+
+    [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _dormancy = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedBodySystem _body = default!;
     [Dependency] private WolfmedGoreSystem _gore = default!;
@@ -94,7 +96,10 @@ public sealed class WolfmedWoundOverlaySystem : EntitySystem
             _nextSweep = now + TimeSpan.FromSeconds(MathF.Max(0.1f, _cfg.GetCVar(WolfmedCVars.OverlayRefreshSeconds)));
             var hosts = EntityQueryEnumerator<WoundHostComponent, PartDamageVisualsComponent>();
             while (hosts.MoveNext(out var uid, out _, out _))
-                _pending.Add(uid);
+            {
+                if (!_dormancy.BodySleeps(uid))
+                    _pending.Add(uid);
+            }
         }
 
         if (_pending.Count == 0)

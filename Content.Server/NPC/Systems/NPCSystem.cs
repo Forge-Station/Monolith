@@ -79,6 +79,7 @@ namespace Content.Server.NPC.Systems
         public void OnNPCMapInit(EntityUid uid, HTNComponent component, MapInitEvent args)
         {
             component.Blackboard.SetValue(NPCBlackboard.Owner, uid);
+            EntityManager.System<Content.Server._WF.PlanetNatives.WFPlanetNativeSystem>().TryMark(uid); // WOLFGATE(PlanetNatives): NPCs born on a planet leave each other alone.
             WakeNPC(uid, component);
         }
 
@@ -187,8 +188,15 @@ namespace Content.Server.NPC.Systems
                 if (_mobState.IsIncapacitated(npcUid))
                     continue;
 
-                var npcCoords = npcTransform.Coordinates;
-                var hasNearbyPlayer = false;
+                // WOLFGATE(Vehicles) START: an NPC in a vehicle's cabin is where the vehicle is too, as players are, or he sleeps on boarding.
+                // var npcCoords = npcTransform.Coordinates;
+                var npcCoords = WfPlayerPresence(npcUid);
+                // WOLFGATE END
+                // WOLFGATE(NpcCrew): ship crews with something to do must work even without nearby player bodies.
+                // var hasNearbyPlayer = false;
+                var hasNearbyPlayer = EntityManager.System<Content.Server._WF.NpcCrew.Systems.WFCrewSleepSystem>().StaysAwake(npcUid);
+                // WOLFGATE(Waypoints): a helm on autopilot flies on with nobody living near, such as an admin ghost at it.
+                hasNearbyPlayer |= EntityManager.System<Content.Server._WF.Waypoints.WFWaypointSystem>().AutopilotEngaged(npcUid, htn);
 
                 var minDistance = htn.SleepPlayerCheckRangeOverride ?? _playerPauseDistance; // Mono
                 // Mono
@@ -212,7 +220,7 @@ namespace Content.Server.NPC.Systems
                             || TryComp<MobStateComponent>(playerEnt, out var state) && state.CurrentState != MobState.Alive)
                             continue;
 
-                        var playerCoords = Transform(playerEnt).Coordinates;
+                        var playerCoords = WfPlayerPresence(playerEnt); // WOLFGATE(Vehicles): a player in a vehicle's cabin is where the vehicle is.
 
                         if (npcCoords.TryDistance(EntityManager, playerCoords, out var distance) &&
                             distance <= minDistance)

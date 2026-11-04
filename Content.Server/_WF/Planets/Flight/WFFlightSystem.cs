@@ -68,6 +68,16 @@ public sealed partial class WFFlightSystem : EntitySystem
     /// <summary>Lift-lost alarm volume (dB), kept under the callouts.</summary>
     public const float AlarmVolume = -6f;
 
+    /// <summary>Takeoff volume (dB); the clip is mastered at -14 LUFS.</summary>
+    public const float TakeoffVolume = 0f;
+
+    /// <summary>Hard-landing thud volume (dB) aboard the hull.</summary>
+    public const float HardLandingVolume = 0f;
+
+    /// <summary>Volume (dB) of the rock-contact impacts and the grind loop while a hull skids.</summary>
+    public const float SkidImpactVolume = -3f;
+    public const float SkidGrindVolume = -4f;
+
     /// <summary>Caution alarm looped while lift is lost.</summary>
     public static readonly SoundSpecifier LiftLostLoop =
         new SoundPathSpecifier("/Audio/_WF/Planets/Flight/lift_lost.ogg");
@@ -215,7 +225,8 @@ public sealed partial class WFFlightSystem : EntitySystem
 
         var centre = _transform.ToMapCoordinates(new EntityCoordinates(grid, hull.LocalAABB.Center));
         var radius = hull.LocalAABB.Size.Length() * 0.5f + 32f;
-        _audio.PlayGlobal(TakeoffSound, _audience.Aboard(grid).AddInRange(centre, radius), true);
+        _audio.PlayGlobal(TakeoffSound, _audience.Aboard(grid).AddInRange(centre, radius), true,
+            AudioParams.Default.WithVolume(TakeoffVolume));
     }
 
     /// <summary>Starts a hard-landing skid; <paramref name="thud"/> is false after a crash.</summary>
@@ -233,7 +244,7 @@ public sealed partial class WFFlightSystem : EntitySystem
             var centre = _transform.ToMapCoordinates(new EntityCoordinates(grid, hull.LocalAABB.Center));
             var radius = hull.LocalAABB.Size.Length() * 0.5f + 32f;
             _audio.PlayGlobal(HardLandingSound, _audience.Aboard(grid).AddInRange(centre, radius),
-                true, AudioParams.Default.WithVolume(8f));
+                true, AudioParams.Default.WithVolume(HardLandingVolume));
         }
 
         // The grind loop is started per section by the moving-ground sweep.

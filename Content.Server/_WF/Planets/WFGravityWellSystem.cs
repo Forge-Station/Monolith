@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server._NF.Shuttles.Components;
+using Content.Server._WF.Planets.Hop;
 using Content.Server._WF.ShipPa;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
@@ -22,10 +23,10 @@ public sealed partial class WFGravityWellSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private ShuttleSystem _shuttle = default!;
     [Dependency] private ShipPaSystem _pa = default!;
     [Dependency] private WFOrbitDecaySystem _decay = default!;
-    [Dependency] private WFOrbitEntrySystem _orbitEntry = default!;
+    [Dependency] private WFPlanetHopSystem _hop = default!;
+    [Dependency] private WFLooseDebrisSystem _debris = default!;
 
     /// <summary>Pull at the rim of the well and at the capture line, in m/s².</summary>
     public const float RimAcceleration = 0.15f;
@@ -107,8 +108,9 @@ public sealed partial class WFGravityWellSystem : EntitySystem
             {
                 if (xform.MapUid != sectorMap
                     || physics.BodyType == BodyType.Static
-                    || HasComp<FTLComponent>(grid)
-                    || HasComp<ForceAnchorComponent>(grid))
+                    || _hop.IsBusy(grid)
+                    || HasComp<ForceAnchorComponent>(grid)
+                    || _debris.IsDebris(grid))
                 {
                     continue;
                 }
@@ -175,17 +177,13 @@ public sealed partial class WFGravityWellSystem : EntitySystem
         }
     }
 
-    /// <summary>Moves a hull onto the orbit layer at its current spot, via the console's hop.</summary>
+    /// <summary>Moves a hull onto the orbit layer, inside the world's circle, via the console's hop.</summary>
     private bool TryCapture(EntityUid grid, EntityUid body, EntityUid orbit)
     {
-        if (!TryComp<ShuttleComponent>(grid, out var shuttle) || !_shuttle.CanFTL(grid, out _))
+        if (!TryComp<ShuttleComponent>(grid, out var shuttle))
             return false;
 
-        if (!_shuttle.WfFTLToLayer((grid, shuttle), orbit, _transform.GetWorldPosition(grid)))
-            return false;
-
-        _orbitEntry.MarkApproach(grid, body, true);
-        return true;
+        return _hop.TryStart((grid, shuttle), orbit, _transform.GetWorldPosition(grid), body, true, out _);
     }
 
     /// <summary>Tops up infall speed toward the local limit for one frame.</summary>

@@ -3,6 +3,7 @@ using Content.Client._CE.ZLevels.Core;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
 using Content.Shared._WF.Caverns;
+using Content.Shared._WF.Planets;
 
 namespace Content.Client._WF.Caverns;
 
@@ -53,7 +54,7 @@ public sealed partial class WFCavernViewSystem : EntitySystem
         float shrink = CESharedZLevelsSystem.ZLevelViewShrink)
     {
         var centre = view.Center;
-        var widen = MathF.Pow(shrink, depth);
+        var widen = 1f / WFPlanetView.LayerScale(shrink, depth);
         Angle rotation = eyeRotation * -1;
         var shift = rotation.ToWorldVec() * CESharedZLevelsSystem.ZLevelOffset * (depth - ownDepth);
 

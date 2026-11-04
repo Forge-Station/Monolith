@@ -1,0 +1,85 @@
+# Bare military chassis for the outfitter: wheels or treads and basic armour, turret and weapon mounts empty. The APCs,
+# the FV150 light tank and the AEV are sold as they spawn; these three needed their slots changed. Names are in
+# military_vehicles.ftl.
+
+# The tank with its empty turret and ballistic plating.
+- type: entity
+  parent: VehicleTank
+  id: WFMilitaryChassisTank
+  suffix: Drivable, Tank, Chassis
+  components:
+  - type: ItemSlots
+    slots:
+      armor:
+        startingItem: VehicleTankArmorBallistic
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      primary:
+        startingItem: VehicleTankTurret
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      secondary:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      support:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleTankTreads
+        disableEject: true
+        whitelist:
+          components:
+          - VehicleWheelItem
+
+# The Longstreet with its empty turret and ballistic plating.
+- type: entity
+  parent: VehicleTankPMC
+  id: WFMilitaryChassisTankPMC
+  suffix: Drivable, Tank, CMU, PMC, Chassis
+  components:
+  - type: ItemSlots
+    slots:
+      armor:
+        startingItem: VehicleTankArmorBallistic
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      primary:
+        startingItem: VehicleTankTurretPMC
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      secondary:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      support:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleTankTreads
+        disableEject: true
+        whitelist:
+          components:
+          - VehicleWheelItem
+
+# The humvee with nothing in its turret ring.
+- type: entity
+  parent: VehicleHumveeBase
+  id: WFMilitaryChassisHumvee
+  suffix: Drivable, Humvee, Chassis
+  components:
+  - type: WFMilitaryVehicle

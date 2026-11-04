@@ -1,0 +1,23 @@
+- files:
+  - web_break01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/web/web_break01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - web_largebreak01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/web/web_largebreak01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - int_vinebreak1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/object/int_vinebreak1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - int_vinebreak2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/object/int_vinebreak2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

@@ -15,7 +15,7 @@ using static Content.IntegrationTests.Tests._WF.Caverns.CavernFixture;
 namespace Content.IntegrationTests.Tests._WF.Planets;
 
 /// <summary>
-/// A planet layer loads the ground round a new arrival at once and the far part of its load area over the passes
+/// A planet layer loads the block a new arrival stands in at once and the rest of its load area over the passes
 /// after, except under a hull, which loads at once wherever it is.
 /// </summary>
 [TestFixture]
@@ -27,7 +27,7 @@ public sealed class TerrainLoadTest
     /// <summary>Where the viewer arrives.</summary>
     private static readonly Vector2i Home = new(200, 40);
 
-    /// <summary>Two chunks out: inside the part that loads at once.</summary>
+    /// <summary>Two chunks out: the next block over, which loads a pass or two after the first.</summary>
     private static readonly Vector2i Near = Home + new Vector2i(16, -16);
 
     /// <summary>Fresh ground, far from the first.</summary>
@@ -85,12 +85,13 @@ public sealed class TerrainLoadTest
                 Assert.Multiple(() =>
                 {
                     Assert.That(arrived, Is.True, "Precondition: the ground under the viewer never loaded.");
-                    Assert.That(biomes.WfIsChunkLoaded(biome, Near), Is.True, "Ground two chunks from the viewer was put off.");
+                    Assert.That(biomes.WfIsChunkLoaded(biome, Home), Is.True, "Ground under the viewer was put off.");
+                    Assert.That(biomes.WfIsChunkLoaded(biome, Near), Is.False, "Ground two chunks from the viewer loaded in the pass it came into range.");
                     Assert.That(biomes.WfIsChunkLoaded(biome, UnderHull), Is.True, "Ground under a hull was put off.");
                     Assert.That(biomes.WfIsChunkLoaded(biome, Far), Is.False, "Far ground loaded in the pass it came into range.");
-                    // The six by six chunks round the viewer, twelve more round the hull, and one block of four.
-                    Assert.That(Loaded(biomes, biome, Home), Is.EqualTo(52),
-                        "The first pass did not load just the ring, the ground round the hull and one whole block.");
+                    // The viewer's block of four chunks, sixteen round the hull, and one more block of four.
+                    Assert.That(Loaded(biomes, biome, Home), Is.EqualTo(24),
+                        "The first pass did not load just the viewer's block, the ground round the hull and one whole block.");
                 });
             });
 

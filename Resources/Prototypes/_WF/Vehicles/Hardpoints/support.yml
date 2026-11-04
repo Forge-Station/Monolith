@@ -1,0 +1,134 @@
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankWarningArray
+  name: integrated weapons sensor array
+  description: An integrated sensor array that improves the fire rate of onboard weapons.
+  components:
+  - type: StaticPrice
+    price: 4200
+  - type: Sprite
+    state: warray
+  - type: HardpointItem
+    hardpointType: HardpointTypeSupport
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.075
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 250
+  - type: VehicleWeaponSupportAttachment
+    fireRateMultiplier: 1.15
+  - type: HardpointVisual
+    vehicleState: warray_0
+    damagedVehicleState: warray_1
+
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankOverdriveEnhancer
+  name: overdrive enhancer
+  description: An overdrive enhancer support attachment for a tank.
+  components:
+  - type: StaticPrice
+    price: 4900
+  - type: Sprite
+    state: odrive_enhancer
+  - type: HardpointItem
+    hardpointType: HardpointTypeSupport
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.075
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 250
+  - type: VehicleSpeedModifierAttachment
+    speedMultiplier: 1.2
+  - type: HardpointVisual
+    vehicleState: odrive_enhancer_0
+    damagedVehicleState: odrive_enhancer_1
+
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankArtilleryModule
+  name: artillery module
+  description: An artillery support module for a tank.
+  components:
+  - type: Sprite
+    state: artillery
+  - type: HardpointItem
+    hardpointType: HardpointTypeSupport
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.075
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 250
+  - type: VehicleGunnerViewAttachment
+    pvsScale: 0.35
+    cursorMaxOffset: 5
+    cursorPvsIncrease: 0.5
+  - type: HardpointVisual
+    vehicleState: artillerymod_0
+    damagedVehicleState: artillerymod_1
+
+- type: entity
+  parent: VehicleHumveeHardpointBase
+  id: VehicleHumveeSnowplow
+  name: humvee snowplow
+  description: A reinforced plow attachment for a humvee.
+  components:
+  - type: VehiclePlow
+    structureDamageMultiplier: 1.5
+  - type: Sprite
+    state: snowplow
+  - type: HardpointItem
+    hardpointType: HardpointTypeFrontAttachment
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeFrontAttachment
+    damageMultiplier: 0.075
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 100
+  - type: HardpointVisual
+    vehicleState: snowplow_0
+    damagedVehicleState: snowplow_1
+
+- type: entity
+  parent: VehicleHumveeHardpointBase
+  id: VehicleHumveeHatch
+  name: humvee hatch
+  description: A hatch assembly for a humvee.
+  components:
+  - type: Sprite
+    state: humveehatch
+  - type: HardpointItem
+    hardpointType: HardpointTypeRoofAttachment
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeRoofAttachment
+    damageMultiplier: 0.075
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 100
+  - type: HardpointVisual
+    vehicleState: humveehatch_0
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCFreightStorage
+  name: APC freight storage
+  description: A cargo pod for APC support slots.
+  components:
+  - type: StaticPrice
+    price: 2800
+  - type: Sprite
+    state: freighter_storage
+  - type: HardpointItem
+    hardpointType: HardpointTypeSupportAttachment
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.075
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 100
+  - type: HardpointVisual
+    vehicleState: freight_0
+    damagedVehicleState: freight_1

@@ -1,0 +1,15 @@
+# Foraged mushrooms cook like hydroponics chanterelles: two in a big bowl with water make mushroom soup.
+- type: microwaveMealRecipe
+  id: RecipeWFWildMushroomSoup
+  name: wild mushroom soup recipe
+  result: FoodSoupMushroom
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    WFWildMushroom: 2
+  recipeType:
+  - Oven
+  - Microwave

@@ -1,4 +1,7 @@
 using System.Numerics;
+using Content.Client._WF.Options; // WOLFGATE(Options)
+using Content.Shared._WF.RMCCore.Input; // WOLFGATE(Xenonids)
+using Content.Shared._WF.LandingGuide; // WOLFGATE(LandingGuide)
 using Content.Client.Stylesheets;
 using Content.Shared.CCVar;
 using Content.Shared.Input;
@@ -123,6 +126,17 @@ namespace Content.Client.Options.UI.Tabs
                 });
             };
 
+            // WOLFGATE(Options) START: SS13 keybind preset button
+            Ss13DefaultsButton.OnPressed += _ =>
+            {
+                _deferCommands.Add(() =>
+                {
+                    Ss13KeybindPreset.Apply(_inputManager, _cfg.GetCVar(CCVars.ToggleWalk));
+                    _inputManager.SaveToUserData();
+                });
+            };
+            // WOLFGATE END
+
             var first = true;
 
             void AddHeader(string headerContents)
@@ -188,6 +202,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.ActivateItemInWorld);
             AddButton(ContentKeyFunctions.AltActivateItemInWorld);
             AddButton(ContentKeyFunctions.Drop);
+            AddButton(ContentKeyFunctions.WFOfferItem); // WOLFGATE(ExtraInteractions): hold out the active item
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
             AddButton(ContentKeyFunctions.SwapHandsPrevious); // Frontier
@@ -251,8 +266,9 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.OpenInventoryMenu);
             AddButton(ContentKeyFunctions.OpenLanguageMenu); // Einstein Engines - Language
             AddButton(ContentKeyFunctions.OpenAHelp);
-            AddButton(ContentKeyFunctions.OpenConsentWindow); // WOLFGATE - consent system
-            AddButton(ContentKeyFunctions.OpenAnatomyPanel); // WOLFGATE - anatomy panel
+            AddButton(ContentKeyFunctions.OpenConsentWindow); // WOLFGATE(Options): consent system
+            AddButton(ContentKeyFunctions.OpenAnatomyPanel); // WOLFGATE(Genitals): anatomy panel
+            AddButton(ContentKeyFunctions.OpenSectorMap); // WOLFGATE(SectorControl): sector map
             AddButton(ContentKeyFunctions.OpenActionsMenu);
             AddButton(ContentKeyFunctions.OpenEmotesMenu);
             AddButton(ContentKeyFunctions.ToggleRoundEndSummaryWindow);
@@ -265,14 +281,6 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.WindowCloseRecent);
             AddButton(EngineKeyFunctions.EscapeMenu);
             AddButton(ContentKeyFunctions.EscapeContext);
-
-            // DeltaV - Begin NanoChat keybinds
-            AddHeader("ui-options-header-nano-chat");
-            AddButton(ContentKeyFunctions.NanoChatNavigateUp);
-            AddButton(ContentKeyFunctions.NanoChatNavigateDown);
-            AddButton(ContentKeyFunctions.NanoChatNavigateUpUnread);
-            AddButton(ContentKeyFunctions.NanoChatNavigateDownUnread);
-            // DeltaV - End NanoChat keybinds
 
             // Shitmed Change Start - TODO: Add hands, feet and groin targeting.
             AddHeader("ui-options-header-targeting");
@@ -287,6 +295,13 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.TargetRightLeg);
             AddButton(ContentKeyFunctions.TargetRightFoot);
             // Shitmed Change End
+
+            // WOLFGATE(Xenonids) START: RMC's xeno keys
+            AddHeader("ui-options-header-rmc-xeno");
+            AddButton(CMKeyFunctions.CMXenoWideSwing);
+            AddButton(CMKeyFunctions.RMCXenoRest);
+            AddButton(CMKeyFunctions.RMCResist);
+            // WOLFGATE END
 
             AddHeader("ui-options-header-misc");
             AddButton(ContentKeyFunctions.TakeScreenshot);
@@ -307,6 +322,9 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.ShuttleRotateLeft);
             AddButton(ContentKeyFunctions.ShuttleRotateRight);
             AddButton(ContentKeyFunctions.ShuttleBrake);
+            AddButton(ContentKeyFunctions.ShuttleAscend); // Mono
+            AddButton(ContentKeyFunctions.ShuttleDescend); // Mono
+            AddButton(WFLandingGuideKeys.WFToggleLandingGuide); // WOLFGATE(LandingGuide): landing guide toggle
 
             AddHeader("ui-options-header-map-editor");
             AddButton(EngineKeyFunctions.EditorPlaceObject);
@@ -316,9 +334,6 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(EngineKeyFunctions.EditorRotateObject);
             AddButton(ContentKeyFunctions.EditorFlipObject);
             AddButton(ContentKeyFunctions.EditorCopyObject);
-            AddButton(ContentKeyFunctions.MappingEyedropper); // Forge-Change
-            AddButton(ContentKeyFunctions.MappingEyedropperTile); // Forge-Change
-            AddButton(ContentKeyFunctions.MappingEyedropperDecal); // Forge-Change
 
             AddHeader("ui-options-header-dev");
             AddButton(EngineKeyFunctions.ShowDebugConsole);

@@ -1,0 +1,483 @@
+# CMU's four military ground vehicles, unarmed. Each keeps its CMU id, name and description and uses the RMC family's handling
+# numbers, not CMU's (Docs/_WF/Vehicles/cmu-military.md). The PMC tank, TWE tank and PMC APC are thin children of the tank and APC
+# families; the AEV is built on the unarmed root, because the tank family carries the weapons component.
+#
+# Left empty for the armed packages: the turret guns (the TWE turret's autocannon, cupola, electrolaser and smoke discharger
+# in VehicleTankAutocannonTWE, VehicleTankCupolaTWE, VehicleTankHeavyElectrolaserTWE and VehicleTankRocketLauncherTWE, the PMC
+# tank's RE700 cupola VehicleTankRERE700). The PMC APC gets the APC family's two port guns at spawn, as CMU fits them.
+#
+# Prices are placeholders.
+
+## Tanks
+- type: entity
+  parent: VehicleTankBase
+  id: VehicleTankPMC
+  name: M34A2 Longstreet 'Yutani'
+  description: A light tank used by the Yutani Corporation for security and military operations, often seen in colonial sectors where Yutani has a presence.
+  suffix: Drivable, Tank, CMU, PMC
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/wytank.rsi
+  # A child's slots replace the family's whole dictionary, so all five are listed.
+  - type: ItemSlots
+    slots:
+      armor:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      primary:
+        startingItem: VehicleTankTurretPMC
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      secondary:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      support:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleTankTreads
+        disableEject: true
+        whitelist:
+          components:
+          - VehicleWheelItem
+  - type: StaticPrice
+    price: 80000
+  - type: VehicleSound
+    runningSound: null
+    collisionSound:
+      collection: WFRcsmCollide
+    mobCollisionSound:
+      collection: WFRcsmCrush
+    crashSound:
+      collection: WFRcsmCrash
+    hornSound: /Audio/_WF/Vehicles/RCSM/horn/horn.ogg
+    hornCooldown: 2
+  - type: WFVehicleEngineAudio
+    gears: 0
+    startSound: /Audio/_WF/Vehicles/RCSM/engine/start.ogg
+    stopSound: /Audio/_WF/Vehicles/RCSM/engine/stop.ogg
+    idleLoop: /Audio/_WF/Vehicles/RCSM/engine/idle_loop.ogg
+    driveLoop: /Audio/_WF/Vehicles/RCSM/engine/drive_loop.ogg
+    highLoop: /Audio/_WF/Vehicles/RCSM/engine/high.ogg
+    revSound:
+      collection: WFRcsmEngineRev
+    tracksLoop: /Audio/_WF/Vehicles/RCSM/tracks/tracks_loop.ogg
+    tracksStopSound:
+      collection: WFRcsmTracksStop
+    pivotLoop: /Audio/_WF/Vehicles/RCSM/tracks/pivot_creak_loop.ogg
+    pivotScreechSound:
+      collection: WFRcsmPivotScreech
+  - type: WFVehicleHitSound
+    lightHitSound:
+      collection: WFRcsmHitBullet
+    heavyHitSound:
+      collection: WFRcsmHitShell
+    lightRicochetSound:
+      collection: WFRcsmRicochet
+    heavyRicochetSound:
+      collection: WFRcsmShellRicochet
+
+# The FV150 Hobelar. A smaller hull than the Longstreet, its own turret and treads, and slots that take only TWE parts
+# (HardpointCompatibilityTWETank). CMU also declared an armor slot with no armor art and nothing that fits it, which is left out.
+- type: entity
+  parent: VehicleTankBase
+  id: VehicleTankTWE
+  name: FV150 Hobelar LCT
+  description: The FV150 ‘Hobelar’ Light Cavalry Tank is a 6m long, 6m wide, 8m tall support vehicle for the RMC. Originally procured for the Special Air Service operations as an Airborne tank, this model has been made into a support vehicle for the Royal Marines thanks to a change of symbol and technological design. Entrance at the back.
+  suffix: Drivable, Tank, CMU, TWE
+  components:
+  - type: WFVehicleEngineAudio
+    startSound: /Audio/_WF/Vehicles/RCSM/engines/challenger/start.ogg
+    stopSound: /Audio/_WF/Vehicles/RCSM/engines/challenger/stop.ogg
+    idleLoop: /Audio/_WF/Vehicles/RCSM/engines/challenger/idle.ogg
+    driveLoop: /Audio/_WF/Vehicles/RCSM/engines/challenger/drive.ogg
+    highLoop: /Audio/_WF/Vehicles/RCSM/engines/challenger/high.ogg
+    revSound:
+      collection: WFRcsmEngineRev
+    tracksLoop: /Audio/_WF/Vehicles/RCSM/engines/challenger/tracks.ogg
+    startDelay: 3
+    tracksStopSound:
+      collection: WFRcsmTracksStop
+    pivotLoop: /Audio/_WF/Vehicles/RCSM/tracks/pivot_creak_loop.ogg
+    pivotScreechSound:
+      collection: WFRcsmPivotScreech
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.8,-1.2,0.8,1.2
+        density: 1500
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        - Vehicle
+        layer:
+        - LargeMobLayer
+        - Vehicle
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.8,-1.2,0.8,1.2
+        density: 1500
+        mask:
+        - MidImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Sprite
+    sprite: _WF/Vehicles/CMU/fv150/exterior.rsi
+    layers:
+    - map: [ base ]
+      state: tank_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: tank_turret_0
+      visible: false
+    - map: [ secondary ]
+      sprite: _WF/Vehicles/tank.rsi
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      sprite: _WF/Vehicles/tank.rsi
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: ItemSlots
+    slots:
+      primary:
+        startingItem: VehicleTankTurretTWE
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      secondary:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      support:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleTankTreadsTWE
+        disableEject: true
+        whitelist:
+          components:
+          - VehicleWheelItem
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyTank
+    slots:
+    - id: primary
+      hardpointType: HardpointTypeTurret
+      slotType: HardpointSlotTypeTurret
+      compatibilityId: HardpointCompatibilityTWETank
+      visualLayer: primary
+      insertDelay: 3.0
+      required: false
+    - id: secondary
+      hardpointType: HardpointTypeSecondary
+      compatibilityId: HardpointCompatibilityTWETank
+      visualLayer: secondary
+      insertDelay: 2.5
+      required: false
+    - id: support
+      hardpointType: HardpointTypeSupport
+      slotType: HardpointSlotTypeSupportAttachment
+      compatibilityId: HardpointCompatibilityTWETank
+      visualLayer: support
+      insertDelay: 2.0
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeTreads
+      compatibilityId: HardpointCompatibilityTWETank
+      insertDelay: 2.0
+  - type: StaticPrice
+    price: 60000
+
+# The armored engineering vehicle: a Longstreet chassis that hauls people and cargo and carries no guns. It is built on the
+# unarmed root, so it never has the weapons component or window, and has no primary or secondary slot. CMU's plow cleared walls;
+# here it is the tank snowplow armor plate and does nothing (plows and wall smashing are deferred). Its hull, handling and
+# parts are the tank family's, copied from VehicleTankBase.
+- type: entity
+  parent: WFVehicleUnarmedBase
+  id: VehicleAev
+  name: M34E1 Armored Engineering Vehicle
+  description: An unarmed engineering vehicle built on the chassis of a Longstreet Tank, fitted with a reinforced plow, built for hauling personnel/cargo and clearing enemy defenses without interrupting the flow of combat.
+  suffix: Drivable, Tank, CMU, AEV, Unarmed
+  components:
+  - type: WFMilitaryVehicle
+  - type: VehicleSound
+    runningSound: null
+    collisionSound:
+      collection: WFRcsmCollide
+    mobCollisionSound:
+      collection: WFRcsmCrush
+    crashSound:
+      collection: WFRcsmCrash
+    hornSound: /Audio/_WF/Vehicles/RCSM/horn/horn.ogg
+    hornCooldown: 2
+  - type: WFVehicleEngineAudio
+    startSound: /Audio/_WF/Vehicles/RCSM/engines/m60/start.ogg
+    stopSound: /Audio/_WF/Vehicles/RCSM/engines/m60/stop.ogg
+    idleLoop: /Audio/_WF/Vehicles/RCSM/engines/m60/idle.ogg
+    driveLoop: /Audio/_WF/Vehicles/RCSM/engines/m60/drive.ogg
+    highLoop: /Audio/_WF/Vehicles/RCSM/engines/m60/high.ogg
+    revSound:
+      collection: WFRcsmEngineRev
+    tracksLoop: /Audio/_WF/Vehicles/RCSM/engines/m60/tracks.ogg
+    startDelay: 4
+    tracksStopSound:
+      collection: WFRcsmTracksStop
+    pivotLoop: /Audio/_WF/Vehicles/RCSM/tracks/pivot_creak_loop.ogg
+    pivotScreechSound:
+      collection: WFRcsmPivotScreech
+  - type: WFVehicleHitSound
+    lightHitSound:
+      collection: WFRcsmHitBullet
+    lightRicochetSound:
+      collection: WFRcsmRicochet
+    heavyHitSound:
+      collection: WFRcsmHitShell
+    heavyRicochetSound:
+      collection: WFRcsmShellRicochet
+  - type: WFVehicleDestroyedSound
+    sequence:
+    - sound:
+        collection: WFRcsmVehicleBlastAmmo
+        params:
+          volume: 6
+          maxDistance: 40
+    - sound:
+        collection: WFRcsmVehicleBlastLayer
+        params:
+          volume: 4
+          maxDistance: 30
+    - delay: 0.5
+      sound:
+        collection: WFRcsmVehicleDebris
+    - delay: 1.6
+      sound:
+        collection: WFRcsmVehicleCookoff
+        params:
+          maxDistance: 24
+    - delay: 3
+      sound:
+        collection: WFRcsmVehicleCrackers
+    - delay: 4.2
+      sound:
+        collection: WFRcsmVehicleBurn
+        params:
+          maxDistance: 16
+    - delay: 6
+      sound:
+        collection: WFRcsmVehicleCookoff
+        params:
+          volume: -3
+          maxDistance: 24
+    - delay: 8
+      sound:
+        collection: WFRcsmVehicleFire
+        params:
+          maxDistance: 14
+    - delay: 11
+      sound:
+        collection: WFRcsmVehicleFireStress
+        params:
+          maxDistance: 12
+  - type: VehiclePlowChassis
+    structureDamageMultiplier: 4
+    poweredDemolitionDamagePerSecond: 2000
+    poweredDemolitionWarmup: 0.5
+  - type: WarpPoint
+    follow: true
+    location: AEV
+  - type: GridVehicleMover
+    plowRamMinSpeed: 0.1
+    maxRotationSpeedDegrees: 60
+    rotationAccelerationDegrees: 120
+    rotationDecelerationDegrees: 180
+    alignmentAssistDegrees: 8
+    maxSpeed: 6
+    acceleration: 2.2
+    deceleration: 9
+    maxReverseSpeed: 3
+    reverseAcceleration: 2
+    turnDelay: 1
+    turnInPlace: true
+    turnInPlaceMaxSpeed: 1
+    canPushVehicles: true
+    weightClass: Medium
+  - type: VehicleOvercharge
+    speedMultiplier: 1.3
+    duration: 3
+    cooldown: 20
+    overchargeSound: /Audio/_WF/Vehicles/overdrive_activate.ogg
+  - type: VehicleSpotlight
+    radius: 8
+    energy: 3
+    softness: 2
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -1.2,-1.6,1.2,1.6
+        density: 1500
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        - Vehicle
+        layer:
+        - LargeMobLayer
+        - Vehicle
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -1.2,-1.6,1.2,1.6
+        density: 1500
+        mask:
+        - MidImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: VehicleFrameTank
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _WF/Vehicles/tank.rsi
+    layers:
+    - map: [ base ]
+      state: aev_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ armor ]
+      state: ARMOR
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 3
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: VehicleHardpointVisuals
+  - type: ItemSlots
+    slots:
+      armor:
+        startingItem: VehicleTankSnowplow
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      support:
+        startingItem: VehicleTankOverdriveEnhancer
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleTankTreads
+        disableEject: true
+        whitelist:
+          components:
+          - VehicleWheelItem
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyTank
+    slots:
+    - id: armor
+      hardpointType: HardpointTypeArmor
+      slotType: HardpointSlotTypeArmor
+      visualLayer: armor
+      insertDelay: 2.5
+      required: false
+    # The support slot takes the support modules that are not guns: the tank's smoke launcher and flare module would sit here
+    # inert, since the AEV has no weapons seat. The overdrive enhancer, warning array and artillery module carry one of these
+    # three; the mounted flag rides on a turret, which the AEV lacks, and does not fit. Its plow is armor, in the slot above.
+    - id: support
+      hardpointType: HardpointTypeSupport
+      slotType: HardpointSlotTypeSupportAttachment
+      visualLayer: support
+      insertDelay: 2.0
+      required: false
+      whitelist:
+        components:
+        - VehicleSpeedModifierAttachment
+        - VehicleWeaponSupportAttachment
+        - VehicleGunnerViewAttachment
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeTreads
+      insertDelay: 2.0
+  # The root sets integrity too, so a larger frame has to set both or it starts partly worn.
+  - type: HardpointIntegrity
+    maxIntegrity: 1500
+    integrity: 1500
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/cmu_arv.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 0,2
+      radius: 1
+      interiorCoords: -1.3,-1
+  - type: StaticPrice
+    price: 70000
+
+## APC
+# The Weyland-Yutani armored personnel carrier: the APC with the PMC hull sprite. CMU raised its capacity to 20; the APC family's
+# 18 is the number of seats in its interior and is kept.
+- type: entity
+  parent: VehicleAPC
+  id: VehicleAPCPMC
+  name: Weyland-Yutani armored personnel carrier
+  description: An armored personnel carrier operated by Weyland-Yutani's private military contractors.
+  suffix: Drivable, APC, CMU, PMC
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      sprite: _WF/Vehicles/apc_pmc.rsi
+      state: hull_wy
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: StaticPrice
+    price: 40000

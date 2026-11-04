@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Numerics;
 using Content.IntegrationTests.Pair;
 using Content.Server._WF.Planets;
+using Content.Server._WF.Planets.Bounds;
+using Content.Server._WF.Planets.Hop;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.CCVar;
 using Content.Shared._FarHorizons.StarSystem;
+using Content.Shared._WF.CCVar;
 using Content.Shared._WF.Planets;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Shuttles.Components;
@@ -24,7 +27,7 @@ namespace Content.IntegrationTests.Tests._WF.Planets;
 /// <summary>The shuttle console's enter and leave orbit actions, which need no FTL drive.</summary>
 [TestFixture]
 [TestOf(typeof(WFOrbitEntrySystem))]
-public sealed class OrbitEntryTest
+public sealed partial class OrbitEntryTest
 {
     /// <summary>The shuttle console prototype; the orbit action is a message on its own BUI key.</summary>
     private const string ConsoleProto = "ComputerShuttle";
@@ -38,6 +41,9 @@ public sealed class OrbitEntryTest
     /// <summary>The star system stamped on the test sector map, so hops carry the approach mark.</summary>
     private const string SystemProto = "SystemKyphrus";
 
+    /// <summary>The radius of a bounded test world, in tiles.</summary>
+    private const int BoundedRadius = 64;
+
     /// <summary>The docking airlock fitted to the hull for a tender to dock with.</summary>
     private const string DockProto = "AirlockShuttle";
 
@@ -45,11 +51,13 @@ public sealed class OrbitEntryTest
     private sealed class HopTrace
     {
         public bool Arrived;
-        public bool CameFromFtlMap;
+        public bool CameFromHoldMap;
+        public bool EverOnFtlMap;
+        public bool EverHadFtlComponent;
         public TimeSpan End;
         public TimeSpan ArrivalTime;
-        public bool HullMarkedOnLastFtlTick;
-        public bool TenderMarkedOnLastFtlTick;
+        public bool HullMarkedOnLastHoldTick;
+        public bool TenderMarkedOnLastHoldTick;
         public bool HullMarkedOnArrival;
         public bool TenderMarkedOnArrival;
         public bool TenderArrived;
@@ -196,6 +204,116 @@ public sealed class OrbitEntryTest
         await pair.CleanReturnAsync();
     }
 
+    /// <summary>A hull entering from anywhere in the orbit range comes out where it can descend, on its own side of the world.</summary>
+    [TestCase(OrbitRange - 100f)]
+    [TestCase(BoundedRadius + 5f)]
+    [TestCase(10f)]
+    public async Task EntersOrbitInsideTheWorldsCircle(float from)
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var orbits = server.System<WFOrbitEntrySystem>();
+        var bounds = server.System<WFPlanetBoundsSystem>();
+        var transform = server.System<SharedTransformSystem>();
+
+        var site = await BuildSite(pair, BoundedRadius);
+        var centre = Vector2.Zero;
+
+        await server.WaitPost(() => centre = transform.GetWorldPosition(site.Body));
+        await MoveTo(pair, site.Hull, site.SectorMap, centre + new Vector2(from, 0f));
+
+        await server.WaitAssertion(() =>
+            Assert.That(orbits.TryEnterOrbit(site.Console, site.Body, out var reason), Is.True, $"Refused orbit: {reason}"));
+
+        var arrived = false;
+        for (var i = 0; i < HopTimeout * 2 && !arrived; i++)
+        {
+            await server.WaitRunTicks(pair.SecondsToTicks(0.5f));
+            await server.WaitPost(() =>
+                arrived = entMan.GetComponent<TransformComponent>(site.Hull).MapUid == site.Orbit
+                    && !entMan.HasComponent<FTLComponent>(site.Hull));
+        }
+
+        await server.WaitAssertion(() =>
+        {
+            var offset = bounds.HullCentre(site.Hull) - centre;
+
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(arrived, Is.True, "The hull never finished the hop into orbit.");
+                Assert.That(bounds.IsHullInside(site.Hull), Is.True, $"The hull came out {offset} from the centre, past the world's edge.");
+                Assert.That(offset.X, Is.GreaterThanOrEqualTo(Math.Min(from, BoundedRadius - 20f)), "The hull was pulled further in than it needed to be, or across the world.");
+            }
+        });
+
+        await Teardown(pair, site);
+        await server.WaitPost(() =>
+        {
+            server.CfgMan.SetCVar(PlanetCVars.Bounds, false);
+            server.CfgMan.SetCVar(PlanetCVars.Radius, 0);
+        });
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>A ship parked over the edge doesn't scatter an arrival past the ring: it comes out further in and clear.</summary>
+    [Test]
+    public async Task EntersOrbitInsideTheRingWhenTheEdgeIsTaken()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var orbits = server.System<WFOrbitEntrySystem>();
+        var bounds = server.System<WFPlanetBoundsSystem>();
+        var transform = server.System<SharedTransformSystem>();
+
+        var site = await BuildSite(pair, BoundedRadius);
+        var centre = Vector2.Zero;
+        var orbitId = MapId.Nullspace;
+
+        await server.WaitPost(() =>
+        {
+            centre = transform.GetWorldPosition(site.Body);
+            orbitId = entMan.GetComponent<MapComponent>(site.Orbit).MapId;
+        });
+
+        var parked = await BuildHull(pair, orbitId, centre + new Vector2(BoundedRadius - 24f, -6f));
+        await MoveTo(pair, site.Hull, site.SectorMap, centre + new Vector2(OrbitRange - 100f, 0f));
+
+        await server.WaitAssertion(() =>
+            Assert.That(orbits.TryEnterOrbit(site.Console, site.Body, out var reason), Is.True, $"Refused orbit: {reason}"));
+
+        var arrived = false;
+        for (var i = 0; i < HopTimeout * 2 && !arrived; i++)
+        {
+            await server.WaitRunTicks(pair.SecondsToTicks(0.5f));
+            await server.WaitPost(() =>
+                arrived = entMan.GetComponent<TransformComponent>(site.Hull).MapUid == site.Orbit
+                    && !entMan.HasComponent<FTLComponent>(site.Hull));
+        }
+
+        await server.WaitAssertion(() =>
+        {
+            var hullBox = transform.GetWorldMatrix(site.Hull).TransformBox(entMan.GetComponent<MapGridComponent>(site.Hull).LocalAABB);
+            var parkedBox = transform.GetWorldMatrix(parked).TransformBox(entMan.GetComponent<MapGridComponent>(parked).LocalAABB);
+
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(arrived, Is.True, "The hull never finished the hop into orbit.");
+                Assert.That(bounds.IsHullInside(site.Hull), Is.True, "The hull came out past the ring.");
+                Assert.That(hullBox.Intersects(parkedBox), Is.False, "The hull came out on top of the parked ship.");
+            }
+        });
+
+        await Teardown(pair, site);
+        await server.WaitPost(() =>
+        {
+            server.CfgMan.SetCVar(PlanetCVars.Bounds, false);
+            server.CfgMan.SetCVar(PlanetCVars.Radius, 0);
+        });
+        await pair.CleanReturnAsync();
+    }
+
     /// <summary>Crew on the deck ride the hop unharmed, without being thrown or dropped a level.</summary>
     [Test]
     public async Task CrewRideTheHopIntoOrbitUnharmed()
@@ -248,7 +366,7 @@ public sealed class OrbitEntryTest
         var worstHeight = 0f;
         var trail = $"hull={site.Hull} orbit={site.Orbit}";
 
-        // The whole hop and six seconds after it: spool-up, tunnel, arrival.
+        // The whole hop and six seconds after it: warm-up, hold map, landing.
         for (var i = 0; i < 70; i++)
         {
             await server.WaitRunTicks(pair.SecondsToTicks(0.25f));
@@ -365,8 +483,8 @@ public sealed class OrbitEntryTest
         var joining = await DockTender(pair, site);
 
         await server.WaitAssertion(() =>
-            Assert.That(entMan.GetComponent<FTLComponent>(site.Hull).State, Is.EqualTo(FTLState.Starting),
-                "Precondition: the dock changes land inside the hull's spool-up."));
+            Assert.That(entMan.GetComponent<WFPlanetHopComponent>(site.Hull).Phase, Is.EqualTo(WFPlanetHopPhase.Warm),
+                "Precondition: the dock changes land inside the hull's warm-up."));
 
         var trace = await TraceHop(pair, site.Hull, joining, site.Orbit, leaving);
 
@@ -389,16 +507,21 @@ public sealed class OrbitEntryTest
         await pair.CleanReturnAsync();
     }
 
-    /// <summary>An arrival phase longer than the hop's travel leg still keeps the mark until the hull lands.</summary>
+    /// <summary>The hop keeps its own clock: the FTL timing cvars change nothing, and the mark lasts until the hull lands.</summary>
     [Test]
-    public async Task ApproachOutlastsALongArrivalPhase()
+    public async Task HopClockIgnoresTheFtlCvars()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
         var orbits = server.System<WFOrbitEntrySystem>();
 
-        // Arrival comes at the startup plus the longer of the travel time and this; TestPair reverts it.
-        await server.WaitPost(() => server.CfgMan.SetCVar(CCVars.FTLArrivalTime, ShuttleSystem.WfOrbitTravelTime + 3f));
+        // TestPair reverts these.
+        await server.WaitPost(() =>
+        {
+            server.CfgMan.SetCVar(CCVars.FTLArrivalTime, 30f);
+            server.CfgMan.SetCVar(CCVars.FTLTravelTime, 60f);
+            server.CfgMan.SetCVar(CCVars.FTLStartupTime, 30f);
+        });
 
         var site = await BuildSite(pair);
         await MoveTo(pair, site.Hull, site.SectorMap, new Vector2(400f, 0f));
@@ -412,8 +535,8 @@ public sealed class OrbitEntryTest
         await server.WaitAssertion(() =>
         {
             Assert.That(trace.Arrived, Is.True, "The hull never reached the orbit layer.");
-            Assert.That(trace.ArrivalTime - trace.End, Is.GreaterThan(TimeSpan.FromSeconds(2)),
-                "Precondition: the hull stays on the FTL map past two one-second sweeps after the approach's end time.");
+            Assert.That(trace.ArrivalTime - trace.End, Is.LessThan(TimeSpan.FromSeconds(1)),
+                "The hull landed well after the approach ended: the hop followed the FTL timing.");
         });
 
         AssertApproachHeld(trace, tender: false);
@@ -496,8 +619,8 @@ public sealed class OrbitEntryTest
         await pair.CleanReturnAsync();
     }
 
-    /// <summary>An owned Asclepiu stack plus a driveless 5x5 hull carrying one shuttle console.</summary>
-    private static async Task<Site> BuildSite(TestPair pair)
+    /// <summary>An owned Asclepiu stack plus a driveless 5x5 hull carrying one shuttle console; a radius bounds the world.</summary>
+    private static async Task<Site> BuildSite(TestPair pair, int radius = 0)
     {
         var server = pair.Server;
         var entMan = server.EntMan;
@@ -507,6 +630,15 @@ public sealed class OrbitEntryTest
         var shuttles = server.System<ShuttleSystem>();
 
         await EnableFeature(pair);
+
+        if (radius > 0)
+        {
+            await server.WaitPost(() =>
+            {
+                server.CfgMan.SetCVar(PlanetCVars.Bounds, true);
+                server.CfgMan.SetCVar(PlanetCVars.Radius, radius);
+            });
+        }
 
         var stack = await BuildOwnedStack(pair);
         var site = new Site { Layers = stack.Layers, Body = stack.Body, SectorMap = stack.BodyMap };
@@ -637,7 +769,7 @@ public sealed class OrbitEntryTest
         var timing = server.ResolveDependency<IGameTiming>();
         var trace = new HopTrace();
         var ticks = pair.SecondsToTicks(HopTimeout);
-        var onFtl = false;
+        var onHold = false;
         var hullMarked = false;
         var tenderMarked = false;
 
@@ -661,20 +793,26 @@ public sealed class OrbitEntryTest
                 if (leftBehind is { } other && entMan.HasComponent<WFPlanetApproachComponent>(other))
                     trace.LeftBehindMarked = true;
 
+                if (entMan.HasComponent<FTLComponent>(hull) || tender is { } ftlTender && entMan.HasComponent<FTLComponent>(ftlTender))
+                    trace.EverHadFtlComponent = true;
+
+                if (hullMap is { } current && entMan.HasComponent<FTLMapComponent>(current))
+                    trace.EverOnFtlMap = true;
+
                 if (hullMap == map)
                 {
                     trace.Arrived = true;
                     trace.ArrivalTime = timing.CurTime;
-                    trace.CameFromFtlMap = onFtl;
-                    trace.HullMarkedOnLastFtlTick = hullMarked;
-                    trace.TenderMarkedOnLastFtlTick = tenderMarked;
+                    trace.CameFromHoldMap = onHold;
+                    trace.HullMarkedOnLastHoldTick = hullMarked;
+                    trace.TenderMarkedOnLastHoldTick = tenderMarked;
                     trace.HullMarkedOnArrival = hullMark;
                     trace.TenderMarkedOnArrival = tenderMark;
                     trace.TenderArrived = tender is { } riding && entMan.GetComponent<TransformComponent>(riding).MapUid == map;
                     return;
                 }
 
-                onFtl = hullMap is { } mapUid && entMan.HasComponent<FTLMapComponent>(mapUid);
+                onHold = hullMap is { } mapUid && entMan.HasComponent<WFPlanetHopMapComponent>(mapUid);
                 hullMarked = hullMark;
                 tenderMarked = tenderMark;
             });
@@ -683,20 +821,22 @@ public sealed class OrbitEntryTest
         return trace;
     }
 
-    /// <summary>The hull outlasts the approach's end time on the FTL map, and the marks bridge exactly that gap.</summary>
+    /// <summary>The hop runs on the hold map with the marks held to the last tick there, and it never touches FTL.</summary>
     private static void AssertApproachHeld(HopTrace trace, bool tender = true)
     {
-        TestContext.Out.WriteLine($"The hull left the FTL map {(trace.ArrivalTime - trace.End).TotalMilliseconds:F0} ms after the approach's end time.");
+        TestContext.Out.WriteLine($"The hull left the hold map {(trace.ArrivalTime - trace.End).TotalMilliseconds:F0} ms after the approach's end time.");
 
         using (Assert.EnterMultipleScope())
         {
-            Assert.That(trace.CameFromFtlMap, Is.True, "The hop never passed through the FTL map.");
-            Assert.That(trace.ArrivalTime, Is.GreaterThan(trace.End),
-                "Precondition: the hull leaves the FTL map after the approach's end time, which is the gap clients must hold.");
-            Assert.That(trace.HullMarkedOnLastFtlTick, Is.True,
-                "The hull lost its approach mark while still on the FTL map, so its crew would see the FTL starfield.");
+            Assert.That(trace.CameFromHoldMap, Is.True, "The hop never passed through its hold map.");
+            Assert.That(trace.EverOnFtlMap, Is.False, "The hop went through the FTL map.");
+            Assert.That(trace.EverHadFtlComponent, Is.False, "The hull or its tender carried an FTLComponent during the hop.");
+            Assert.That(trace.ArrivalTime, Is.GreaterThanOrEqualTo(trace.End),
+                "The hull left the hold map before the approach's end time.");
+            Assert.That(trace.HullMarkedOnLastHoldTick, Is.True,
+                "The hull lost its approach mark while still on the hold map, so its crew would see an empty sky.");
             Assert.That(trace.HullMarkedOnArrival, Is.False,
-                "The hull still carries its approach mark after arriving, which a following jump could inherit.");
+                "The hull still carries its approach mark after arriving, which a following hop could inherit.");
         }
 
         if (!tender)
@@ -705,8 +845,8 @@ public sealed class OrbitEntryTest
         using (Assert.EnterMultipleScope())
         {
             Assert.That(trace.TenderArrived, Is.True, "The docked tender did not arrive with the hull.");
-            Assert.That(trace.TenderMarkedOnLastFtlTick, Is.True,
-                "The docked tender carried no approach mark on the FTL map, so its crew would see the tunnel.");
+            Assert.That(trace.TenderMarkedOnLastHoldTick, Is.True,
+                "The docked tender carried no approach mark on the hold map, so its crew would see an empty sky.");
             Assert.That(trace.TenderMarkedOnArrival, Is.False,
                 "The docked tender still carries its approach mark after arriving.");
         }

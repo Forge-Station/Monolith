@@ -135,3 +135,5 @@
   - type: TileEntityEffect
     effects:
     - !type:ExtinguishReaction
+  # WOLFGATE(GroundCover): lakes and ponds freeze over in cold air
+  - type: WFFreezableWater

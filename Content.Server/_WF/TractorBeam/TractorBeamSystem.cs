@@ -106,7 +106,7 @@ public sealed partial class TractorBeamSystem : VirtualController
         return !TerminatingOrDeleted(uid) && !Paused(uid) && HasComp<MapGridComponent>(uid) &&
                !Transform(uid).Anchored &&
                (!TryComp<ShuttleComponent>(uid, out var shuttle) || shuttle.Enabled) &&
-               !HasComp<FTLComponent>(uid) && TryComp<PhysicsComponent>(uid, out var body) &&
+               !HasComp<FTLComponent>(uid) && !HasComp<Content.Server._WF.Planets.Hop.WFPlanetHopComponent>(uid) && TryComp<PhysicsComponent>(uid, out var body) &&
                body.BodyType == BodyType.Dynamic && float.IsFinite(body.Mass) && body.Mass > 0;
     }
 

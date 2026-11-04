@@ -11,6 +11,7 @@ namespace Content.Server.Body.Systems
     public sealed partial class StomachSystem : EntitySystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _wfDormancy = default!; // WOLFGATE(Dormancy): skips NPC bodies nobody is near
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private Content.Server._WF.Wolfmed.Medical.WolfmedOralAbsorptionSystem _wolfmedAbsorption = default!; // WOLFGATE(Wolfmed): playtest 1
 
@@ -42,6 +43,7 @@ namespace Content.Server.Body.Systems
                     continue;
 
                 stomach.NextUpdate += stomach.UpdateInterval;
+                if (_wfDormancy.BodySleeps(uid)) continue; // WOLFGATE(Dormancy): an NPC body no player is near on a planet skips its upkeep
 
                 // Get our solutions
                 if (!_solutionContainerSystem.ResolveSolution((uid, sol), DefaultSolutionName, ref stomach.Solution, out var stomachSolution))

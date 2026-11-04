@@ -70,16 +70,12 @@
   id: WFCavernFaunaAerumna
   table: !type:GroupSelector
     children:
-    - id: MobXenoRunner
+    - id: WFMobCavernDeepBat
+      weight: 4
+    - id: WFMobCavernUmbralSpider
       weight: 3
-    - id: MobXenoDrone
-      weight: 2
     - id: MobArgocyteSlurva
       weight: 3
-    - id: MobXenoSpitter
-      weight: 1
-    - id: MobXenoPraetorian
-      weight: 0.5
 
 - type: entity
   id: WFCavernFaunaAerumna

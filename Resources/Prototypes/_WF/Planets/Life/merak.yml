@@ -1,0 +1,365 @@
+# Merak's living desert: a wildlife table per region, and plants that do something (_WF/LivingWorld components).
+# The sand maws are Merak's sarlacc and stay as they are (_WF/SandMaw); nothing here repeats them.
+
+# Dunes: the desert tarantula lies in wait. Sparse; half the time nothing comes.
+- type: entityTable
+  id: WFFaunaMerakDunes
+  table: !type:GroupSelector
+    children:
+    - id: WFMobDesertTarantula
+      weight: 1
+    - !type:NoneSelector
+      weight: 1
+
+- type: entity
+  id: WFFaunaMerakDunes
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaMerakDunes
+
+# Badlands: lizards, and the odd cobra in the rock shade.
+- type: entityTable
+  id: WFFaunaMerakBadlands
+  table: !type:GroupSelector
+    children:
+    - id: MobLizard
+      weight: 3
+    - id: MobCobraSpace
+      weight: 1
+
+- type: entity
+  id: WFFaunaMerakBadlands
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaMerakBadlands
+
+# Cactus fields: kangaroos.
+- type: entityTable
+  id: WFFaunaMerakCactus
+  table: !type:GroupSelector
+    children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdGlassSwift
+      weight: 1
+    - id: MobKangarooPlanet
+      weight: 1
+
+- type: entity
+  id: WFFaunaMerakCactus
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaMerakCactus
+
+# Gravel flats: ore crabs, placed in a band round the ore outcrops.
+- type: entityTable
+  id: WFFaunaMerakFlats
+  table: !type:GroupSelector
+    children:
+    - id: MobIronCrab
+      weight: 3
+    - id: MobQuartzCrab
+      weight: 2
+
+- type: entity
+  id: WFFaunaMerakFlats
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaMerakFlats
+
+# Oases: goats and crabs.
+- type: entityTable
+  id: WFFaunaMerakOasis
+  table: !type:GroupSelector
+    children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdGlassSwift
+      weight: 3
+    - id: MobGoat
+      weight: 3
+    - id: MobCrab
+      weight: 3
+
+- type: entity
+  id: WFFaunaMerakOasis
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaMerakOasis
+
+# A separate, very rare oasis site: a mimic posing as a crate, and most visits find nothing.
+- type: entityTable
+  id: WFFaunaMerakMimic
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCrateMimic
+      weight: 1
+    - !type:NoneSelector
+      weight: 2
+
+- type: entity
+  id: WFFaunaMerakMimic
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaMerakMimic
+
+# A space spider recoloured sand: slower than its cousin and hits far harder.
+- type: entity
+  id: WFMobDesertTarantula
+  parent: MobSpiderSpace
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/Life/merak/tarantula.rsi
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.8
+    baseSprintSpeed: 2.6
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      70: Dead
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 14
+        Poison: 6
+
+# Something that isn't a crate. It walks like a mimic and hits like one.
+- type: entity
+  id: WFMobCrateMimic
+  parent: MobMimic
+  components:
+  - type: Sprite
+    sprite: Structures/Storage/Crates/generic.rsi
+    state: icon
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+
+# Barrel cactus: pick the top off by hand for a cup of water.
+- type: entity
+  id: WFMerakBarrelCactus
+  parent: ChompFloraDesertPlanetBarrelcacti
+  components:
+  - type: Sprite
+    layers:
+    - state: barrelcacti0
+      map: [ "cactus" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        cactus:
+          True: { color: "#9a9a7c" }
+          False: { color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    harvestTime: 3
+    regrowTime: 600
+    harvestSound:
+      collection: WFFloraSplat
+    table: !type:AllSelector
+      children:
+      - id: WFCactusWater
+
+- type: entity
+  id: WFCactusWater
+  parent: DrinkWaterCup
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+        reagents:
+        - ReagentId: Water
+          Quantity: 15
+
+# Agave: cut a leaf for its sap.
+- type: entity
+  id: WFMerakAgave
+  parent: CoyoteFloraWasteplantWildAgave
+  components:
+  - type: Sprite
+    layers:
+    - state: wild_agave
+      map: [ "agave" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        agave:
+          True: { color: "#a3a68a" }
+          False: { color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    harvestTime: 2
+    regrowTime: 900
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFAgaveSap
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Sweet and sticky: sugar for the still.
+- type: entity
+  id: WFAgaveSap
+  parent: WFWildProduceBase
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/aloe.rsi
+    color: "#d9b25a"
+  - type: FlavorProfile
+    flavors:
+    - sweet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 6
+        - ReagentId: Nutriment
+          Quantity: 2
+
+# Sting-nettle, hiding among the desert grass: a sting and a one second stun, tinted brighter while it fires.
+- type: entity
+  id: WFMerakStingNettle
+  parent: AuroraFloraGrassDesert
+  components:
+  - type: Sprite
+    layers:
+    - state: desert_grass
+      map: [ "nettle" ]
+      color: "#a9c45e"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        nettle:
+          Idle: { color: "#a9c45e" }
+          Armed: { color: "#f0f27a" }
+          Spent: { color: "#a9c45e" }
+  - type: WFReactiveFlora
+    behaviour: Lash
+    range: 1
+    cooldown: 8
+    checkInterval: 0.5
+    sound:
+      collection: WFFloraSwoosh
+    popup: wf-flora-nettle-lash
+    damage:
+      types:
+        Piercing: 1
+        Poison: 2
+    stunTime: 1
+    ignoreFactions: [Passive, SimpleHostile, SimpleNeutral]
+
+# Date palm: a shade palm in the oasis whose fruit can be picked by hand.
+- type: entity
+  id: WFMerakDatePalm
+  parent: ChompTreeDesertPlanetPalmtree
+  components:
+  - type: WFRegrowingHarvest
+    harvestTime: 3
+    regrowTime: 900
+    table: !type:AllSelector
+      children:
+      - id: WFMerakDates
+        amount: !type:RangeNumberSelector
+          range: 2, 4
+
+- type: entity
+  id: WFMerakDates
+  parent: WFWildBerryBase
+  components:
+  - type: Sprite
+    color: "#6b3b1a"
+  - type: FlavorProfile
+    flavors:
+    - sweet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Sugar
+          Quantity: 3
+
+# Tumbleweed: a dry bush that rustles now and then in the wind. It stays where it is.
+- type: entity
+  id: WFMerakTumbleweed
+  parent: CMGrassDesertHeavy
+  components:
+  - type: Sprite
+    scale: 0.75, 0.75
+    layers:
+    - state: heavygrass_1
+      color: "#d4bd7c"
+  - type: SpamEmitSound
+    minInterval: 30
+    maxInterval: 90
+    sound:
+      collection: storageRustle
+      params:
+        volume: -14
+        variation: 0.2
+
+# Spitting cactus: a red-spined cactus that flicks slow needles at anyone it sees. A hazard, so kept out of cavern mouths.
+- type: entity
+  id: WFMerakSpittingCactus
+  parent: CoyoteFloraWasteplantWildFeracactus
+  components:
+  - type: Sprite
+    layers:
+    - state: wild_feracactus
+      map: [ "cactus" ]
+      color: "#e0a898"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        cactus:
+          Idle: { color: "#e0a898" }
+          Armed: { color: "#ff7050" }
+          Spent: { color: "#e0a898" }
+  - type: WFReactiveFlora
+    behaviour: Spit
+    range: 6
+    cooldown: 6
+    checkInterval: 0.5
+    projectile: WFMerakCactusSpine
+    projectileSpeed: 7
+    sound:
+      collection: WFFloraSpit
+    ignoreFactions: [Passive, SimpleHostile, SimpleNeutral]
+
+- type: entity
+  id: WFMerakCactusSpine
+  parent: BaseBullet
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    layers:
+    - state: bullet
+      shader: unshaded
+      color: "#d4d98a"
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 7
+  - type: TimedDespawn
+    lifetime: 2.5
+  - type: Tracer
+    color: "#FFD4D98A"
+    length: 1

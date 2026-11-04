@@ -1,0 +1,132 @@
+# Cavern encounters (WFCavernEncounterSystem): each is a room cleared of rock in the cavern's own floor, laid out as
+# listed. tables.yml says which worlds get which.
+
+# The Old Wise Miner's camp: a fire, his bedroll, a rack of picks and his ore sacks. He plays for ore across a crate
+# (Minigames).
+- type: wfCavernEncounter
+  id: WFCavernEncounterMinerCamp
+  radius: 5
+  entries:
+  - ids: [ WFCavernCampfire ]
+  - ids: [ WFMinigameOldMiner ]
+    distance: 2
+    table: TableWood
+  - ids: [ CMBedBedrollComfy ]
+    distance: 3
+  - ids: [ Rack ]
+    distance: 3
+  - ids: [ Pickaxe ]
+    min: 2
+    max: 2
+    distance: 3
+  - ids: [ OreBag ]
+    min: 2
+    max: 3
+    distance: 3
+  - ids: [ GoonLantern ]
+    distance: 4
+    lit: true
+
+# Tunnel raiders round their fire, with scrap, a tent and a few barricades.
+- type: wfCavernEncounter
+  id: WFCavernEncounterRaiders
+  radius: 6
+  entries:
+  - ids: [ WFCavernCampfire ]
+  - ids: [ RMCBarricadeWood ]
+    min: 2
+    max: 3
+    distance: 5
+  - ids: [ ScrapSteel ]
+    min: 2
+    max: 4
+    distance: 4
+  - ids: [ WFMobTunnelRaider, WFMobTunnelRaider, WFMobTunnelRaiderGunner ]
+    min: 3
+    max: 5
+    distance: 3
+
+# A lost surveyor by his lantern.
+- type: wfCavernEncounter
+  id: WFCavernEncounterSurveyor
+  radius: 4
+  entries:
+  - ids: [ GoonLantern ]
+    lit: true
+  - ids: [ WFMobLostSurveyor ]
+    distance: 2
+  - ids: [ ClothingBackpackDuffel ]
+    distance: 2
+
+# A miner walled in by a rock fall, with the pick he dropped outside it.
+- type: wfCavernEncounter
+  id: WFCavernEncounterTrappedMiner
+  radius: 4
+  collapse: true
+  entries:
+  - ids: [ WFMobTrappedMiner ]
+  - ids: [ Pickaxe ]
+    distance: 3
+  - ids: [ GoonLantern ]
+    distance: 3
+    lit: true
+
+# A blind crawler nest among old bones.
+- type: wfCavernEncounter
+  id: WFCavernEncounterCrawlers
+  radius: 6
+  entries:
+  - ids: [ WFMobBlindCrawler ]
+    min: 3
+    max: 5
+    distance: 4
+  - ids: [ ADTAncientAnimalLeftBone ]
+    min: 2
+    max: 3
+    distance: 5
+
+# The Lamplighter among the dead lanterns of those it caught, and a ring of lit ones that go out as you come.
+- type: wfCavernEncounter
+  id: WFCavernEncounterLamplighter
+  radius: 7
+  entries:
+  - ids: [ WFMobLamplighter ]
+  - ids: [ LanternFlash, FlashlightLantern ]
+    min: 2
+    max: 3
+    distance: 4
+  - ids: [ WFCavernOmenLantern ]
+    min: 3
+    max: 4
+    distance: 6
+    minDistance: 5
+    lit: true
+
+# The Echo, waiting in the dark with what's left of its last listeners.
+- type: wfCavernEncounter
+  id: WFCavernEncounterEcho
+  radius: 5
+  entries:
+  - ids: [ WFMobCavernEcho ]
+  - ids: [ ClothingBackpackDuffel, ClothingHeadHatHardhatYellow ]
+    min: 1
+    max: 2
+    distance: 4
+
+# A camp someone left in a hurry: a bedroll, a lantern still burning, and what they couldn't carry.
+- type: wfCavernEncounter
+  id: WFCavernEncounterAbandonedCamp
+  radius: 4
+  entries:
+  - ids: [ GoonLantern ]
+    lit: true
+  - ids: [ CMBedBedrollComfy ]
+    distance: 3
+  - ids: [ OreBag, Pickaxe, ClothingBackpackDuffel, ClothingHeadHatHardhatYellow ]
+    min: 2
+    max: 3
+    distance: 3
+  - ids: [ ScrapSteel ]
+    min: 1
+    max: 2
+    distance: 3

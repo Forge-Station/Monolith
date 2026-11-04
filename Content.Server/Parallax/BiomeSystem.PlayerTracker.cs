@@ -30,7 +30,7 @@ public sealed partial class BiomeSystem
                 CanLoad(pSession.AttachedEntity.Value))
             {
                 var worldPos = _transform.GetWorldPosition(xform);
-                WfNoteLoader(biome, worldPos, WfLoadNowRing); // WOLFGATE(Planets): a planet layer loads nearest its loaders first
+                WfNoteBodyLoader(biome, worldPos); // WOLFGATE(Planets): a planet layer loads nearest its loaders first
                 AddChunksInRange(biome, worldPos);
 
                 foreach (var layer in biome.MarkerLayers)

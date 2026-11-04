@@ -1,0 +1,28 @@
+# Seats of a crewed ground vehicle. The driver and gunner are worked by the vehicle brain and sit with their HTN asleep;
+# troopers ride in the cabin and fight on foot once the crew bails.
+
+- type: wfCrewRole
+  id: WFVehicleDriver
+  kit: WFCrewKitOfficer
+  mob: WFMobCrewOfficer
+  duty: Guard
+  engagement: WhenAttacked
+  title: wf-vehicle-crew-role-driver
+  order: 10
+
+- type: wfCrewRole
+  id: WFVehicleGunner
+  kit: WFCrewKitGunner
+  mob: WFMobCrewGunner
+  duty: Guard
+  engagement: WhenAttacked
+  title: wf-vehicle-crew-role-gunner
+  order: 20
+
+- type: wfCrewRole
+  id: WFVehicleTrooper
+  mob: WFMobCrewMarine
+  duty: Guard
+  engagement: OnSight
+  title: wf-vehicle-crew-role-trooper
+  order: 30

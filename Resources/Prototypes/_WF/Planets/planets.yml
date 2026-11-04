@@ -4,12 +4,18 @@
   id: WFSurfaceAsclepiu
   planetType: PlanetAsclepiu
   ground: WFAsclepiuSurface
-  # No cloud layer: its opaque deck hides the ground from orbit. A third air layer keeps orbit at depth 4.
-  airLayers: 3
+  radius: 384
+  pois: WFPoisAsclepiu
+  # No cloud layer: its opaque deck hides the ground from orbit. Four air layers hold Crocus's upper levels (WFCityCrocus).
+  airLayers: 4
   cloudLayer: false
   orbitRange: 2000
   buildAtRoundStart: true
   sanctioned: true
+  climate: wf-planet-scan-climate-verda
+  hazards:
+  - wf-planet-scan-hazard-thunderstorms
+  - wf-planet-scan-hazard-wildlife
   # Fixed biome seed, so terrain is the same every round.
   seed: 20260913
   # Stamped over every member and transit map, so only the shared atmosphere belongs here.

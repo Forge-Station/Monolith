@@ -82,20 +82,25 @@ public abstract partial class CESharedZLevelsSystem
 
         if (zPhysicsComponent.VelocityRaiseEvent)
         {
-            var velocityEvent = new CEGetZVelocityEvent((entity, zPhysicsComponent));
+            var velocityEvent = new CEGetZVelocityEvent((entity, zPhysicsComponent), frameTime);
             RaiseLocalEvent(entity, ref velocityEvent);
 
             zPhysicsComponent.Velocity += velocityEvent.VelocityDelta * frameTime;
         }
 
+        zPhysicsComponent.Velocity = Math.Clamp(zPhysicsComponent.Velocity, -ZVelocityLimit, ZVelocityLimit);
         zPhysicsComponent.LocalPosition += zPhysicsComponent.Velocity * frameTime;
         var distanceToGround = zPhysicsComponent.LocalPosition - zPhysicsComponent.CachedGroundHeight;
 
-        if (zPhysicsComponent.AutoStep && distanceToGround < 0)
-            zPhysicsComponent.LocalPosition -= distanceToGround;
+        var stickyGround = zPhysicsComponent.CachedStickyGround &&
+            zPhysicsComponent.Velocity is <= 0 and > -2f;
+        WfGroundless(zPhysicsComponent, ref stickyGround); // WOLFGATE(Planets): a ghost never sticks to stairs or stays between levels
 
-        if (zPhysicsComponent.CachedStickyGround)
-            zPhysicsComponent.LocalPosition -= distanceToGround;
+        if (stickyGround || zPhysicsComponent.AutoStep && distanceToGround < 0)
+            zPhysicsComponent.LocalPosition = zPhysicsComponent.CachedGroundHeight;
+
+        if (stickyGround)
+            distanceToGround = 0;
 
         if (zPhysicsComponent is { Velocity: < 0, Fallable: true })
         {
@@ -124,7 +129,7 @@ public abstract partial class CESharedZLevelsSystem
 
         if (zPhysicsComponent.LocalPosition < 0)
         {
-            if (TryMoveDownOrChasm(entity))
+            if (TryMoveDown(entity))
             {
                 zPhysicsComponent.LocalPosition += 1;
                 if (zPhysicsComponent is { CachedStickyGround: false, Fallable: true } && !WfSteppedDown(zPhysicsComponent)) // WOLFGATE(Caverns): stepping down onto stairs is not a fall
@@ -139,7 +144,7 @@ public abstract partial class CESharedZLevelsSystem
         {
             if (HasTileAbove(entity) || WfSealedAbove((entity.Owner, zPhysicsComponent))) // WOLFGATE(Caverns): ground over a cavern is a ceiling even where it isn't loaded
             {
-                if (float.Abs(zPhysicsComponent.Velocity) >= ImpactVelocityLimit)
+                if (zPhysicsComponent.Velocity >= ImpactVelocityLimit)
                 {
                     var hitEv = new CEZLevelHitEvent(zPhysicsComponent.Velocity);
                     RaiseLocalEvent(entity, ref hitEv);
@@ -148,7 +153,8 @@ public abstract partial class CESharedZLevelsSystem
                     RaiseLocalEvent(entity, ref land);
                 }
                 zPhysicsComponent.LocalPosition = 1;
-                zPhysicsComponent.Velocity = -zPhysicsComponent.Velocity * zPhysicsComponent.Bounciness;
+                if (zPhysicsComponent.Velocity > 0)
+                    zPhysicsComponent.Velocity = -zPhysicsComponent.Velocity * zPhysicsComponent.Bounciness;
             }
             else
             {
@@ -157,8 +163,7 @@ public abstract partial class CESharedZLevelsSystem
             }
         }
 
-        if (float.Abs(zPhysicsComponent.Velocity) > ZVelocityLimit)
-            zPhysicsComponent.Velocity = float.Sign(zPhysicsComponent.Velocity) * ZVelocityLimit;
+        WFNoteHeight(entity, zPhysicsComponent.LocalPosition); // WOLFGATE(Performance): predicted height joins the sprite passes
 
         if (float.Abs(oldVelocity - zPhysicsComponent.Velocity) > 0.001f)
             DirtyField(entity, zPhysicsComponent, nameof(CEZPhysicsComponent.Velocity));
@@ -169,6 +174,10 @@ public abstract partial class CESharedZLevelsSystem
         if (zPhysicsComponent.VelocityGravity)
         {
             var targetStatus = distanceToGround > AirborneHeightThreshold ? BodyStatus.InAir : BodyStatus.OnGround;
+            // WOLFGATE(Planets): a thrown body stays InAir until the throw lands, or friction eats a jump at once.
+            if (targetStatus == BodyStatus.OnGround && HasComp<ThrownItemComponent>(entity))
+                targetStatus = entity.Comp2.BodyStatus;
+
             if (entity.Comp2.BodyStatus != targetStatus)
             {
                 _physicsSystem.SetBodyStatus(entity, entity.Comp2, targetStatus);

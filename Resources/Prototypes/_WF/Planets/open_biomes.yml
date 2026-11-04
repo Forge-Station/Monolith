@@ -2,6 +2,7 @@
 # Entity layers resolve from bottom to top: hazards/scenery win over wildlife, so animals spawn in clearings.
 # Low-frequency rock masks form occasional outcrops instead of a continuous wall field.
 
+# Fervidus: black basalt flats, ashfields (WFFervidusAshFields, Biomes/fervidus.yml) and lava channels with a crust of cooled rock.
 - type: biomeTemplate
   id: WFOpenBasalt
   layers:
@@ -13,18 +14,64 @@
     entities: [WFFaunaFervidus]
     threshold: 0.95
     noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  # Ashfields cover about a third of the surface: ash tiles, flora and small tar and sulfur pools.
+  - !type:BiomeMetaLayer
+    template: WFFervidusAshFields
+    threshold: 0.12
+    noise: { seed: 51, noiseType: OpenSimplex2, frequency: 0.007, fractalType: FBm, octaves: 2 }
+  # A crust of cooled rock round every lava channel: the lava noise at a lower threshold.
+  - !type:BiomeTileLayer
+    tile: WFFloorFervidusAshRock
+    threshold: 0.84
+    noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.008, fractalType: Ridged, octaves: 1 }
+  # Wildlife and spitting flowers of that crust: the same noise, so they stay in the band round the lava.
+  - !type:BiomeMetaLayer
+    template: WFFervidusLavaCrust
+    threshold: 0.84
+    noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.008, fractalType: Ridged, octaves: 1 }
+  # Scattered volcanic rock, a layer for each kind; lit vents and siderite growths are the rarer sort.
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorBasalt]
+    allowedTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
+    entities: [GoonFakeobjectRockpile]
+    threshold: 0.985
+    noise: { seed: 71, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
+    entities: [GoonFakeobjectRockpileBig]
+    threshold: 0.985
+    noise: { seed: 72, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
+    entities: [CMRockBlackGroundDense]
+    threshold: 0.985
+    noise: { seed: 73, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
+    entities: [CMRockBlackGroundDense3]
+    threshold: 0.985
+    noise: { seed: 74, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
+    entities: [TgFloraRockVolcano]
+    threshold: 0.99
+    noise: { seed: 75, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
+    entities: [TgFloraRockSideriteGrowth]
+    threshold: 0.99
+    noise: { seed: 76, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
     entities: [BasaltOne, BasaltTwo, BasaltThree]
     threshold: 0.97
     noise: { seed: 2, noiseType: OpenSimplex2, frequency: 1 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorBasalt]
+    allowedTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
     entities: [MonoPlanetmapOreBasalt]
     threshold: 0.65
     noise: { seed: 11, noiseType: OpenSimplex2, frequency: 0.022 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorBasalt]
+    allowedTiles: [FloorBasalt, WFFloorFervidusAshDust, WFFloorFervidusAshRock, WFFloorFervidusAshDirt]
     entities: [FloorLavaEntity]
     threshold: 0.94
     noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.008, fractalType: Ridged, octaves: 1 }
@@ -36,64 +83,90 @@
     tile: FloorChromite
     threshold: -1
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorChromite]
+    allowedTiles: [FloorChromite, WFFloorAerumnaClay, WFFloorAerumnaClayRock, WFFloorAerumnaDusk]
     entities: [WFFaunaAerumna]
     threshold: 0.95
     noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  # Shrouded clay flats between the groves, with patches of bare rock; chromite shows through elsewhere.
+  - !type:BiomeTileLayer
+    tile: WFFloorAerumnaDusk
+    threshold: -0.08
+    noise: { seed: 61, noiseType: OpenSimplex2, frequency: 0.011, fractalType: FBm, octaves: 2 }
+  - !type:BiomeTileLayer
+    tile: WFFloorAerumnaClay
+    threshold: 0.1
+    noise: { seed: 61, noiseType: OpenSimplex2, frequency: 0.011, fractalType: FBm, octaves: 2 }
+  - !type:BiomeTileLayer
+    tile: WFFloorAerumnaClayRock
+    threshold: 0.5
+    noise: { seed: 61, noiseType: OpenSimplex2, frequency: 0.011, fractalType: FBm, octaves: 2 }
   - !type:BiomeMetaLayer
     template: WFShadowGrove
     threshold: 0.35
     noise: { seed: 16, noiseType: OpenSimplex2, frequency: 0.018 }
+  # The fungal forest and its shrouded ground.
+  - !type:BiomeMetaLayer
+    template: WFAerumnaFungalForest
+    threshold: 0.4
+    noise: { seed: 71, noiseType: OpenSimplex2, frequency: 0.009, fractalType: FBm, octaves: 2 }
+  - !type:BiomeMetaLayer
+    template: WFAerumnaBoulderField
+    threshold: 0.55
+    noise: { seed: 89, noiseType: OpenSimplex2, frequency: 0.014 }
+  - !type:BiomeMetaLayer
+    template: WFAerumnaRuinPocket
+    threshold: 0.88
+    noise: { seed: 97, noiseType: OpenSimplex2, frequency: 0.045 }
+  - !type:BiomeTileLayer
+    tile: WFFloorAerumnaDusk
+    threshold: 0.7
+    noise: { seed: 83, noiseType: OpenSimplex2, frequency: 0.010 }
+  - !type:BiomeMetaLayer
+    template: WFAerumnaCrystalSpires
+    threshold: 0.82
+    noise: { seed: 83, noiseType: OpenSimplex2, frequency: 0.010 }
+  # The xenonid hive, last so its ground wins where regions overlap; a dusk band rings it, on the hive's own noise.
+  - !type:BiomeTileLayer
+    tile: WFFloorAerumnaDusk
+    threshold: 0.48
+    noise: { seed: 131, noiseType: OpenSimplex2, frequency: 0.012, fractalType: FBm, octaves: 2 }
+  - !type:BiomeMetaLayer
+    template: WFAerumnaHive
+    threshold: 0.6
+    noise: { seed: 131, noiseType: OpenSimplex2, frequency: 0.012, fractalType: FBm, octaves: 2 }
+  # Lone stones scattered over the flats.
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorChromite]
+    allowedTiles: [FloorChromite, WFFloorAerumnaClay, WFFloorAerumnaClayRock, WFFloorAerumnaDusk]
+    entities: [GoonStone2, GoonStone3, GoonStone4, GoonStone5, DarkPackFloraRockDarkpack]
+    threshold: 0.965
+    noise: { seed: 91, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorChromite, WFFloorAerumnaClay, WFFloorAerumnaClayRock, WFFloorAerumnaDusk, WFFloorAerumnaCrystalBed]
     entities: [CrystalPink]
     threshold: 0.985
     noise: { seed: 2, noiseType: OpenSimplex2, frequency: 1 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorChromite]
+    allowedTiles: [FloorChromite, WFFloorAerumnaClay, WFFloorAerumnaClayRock, WFFloorAerumnaDusk]
     entities: [MonoPlanetmapOreChromite]
     threshold: 0.72
     noise: { seed: 19, noiseType: OpenSimplex2, frequency: 0.025 }
+  # Pools in the clearings, a dozen tiles or so across.
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorChromite]
+    allowedTiles: [FloorChromite, WFFloorAerumnaClay, WFFloorAerumnaClayRock, WFFloorAerumnaDusk, WFFloorAerumnaShroud, WFFloorAerumnaCrystalBed, WFFloorAerumnaHive]
     entities: [MonoFloorWaterEntity]
-    threshold: 0.965
-    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.006, fractalType: Ridged, octaves: 1 }
+    threshold: 0.75
+    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.016, fractalType: FBm, octaves: 2 }
 
 - type: biomeTemplate
   id: WFShadowGrove
   layers:
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorChromite]
+    allowedTiles: [FloorChromite, WFFloorAerumnaClay, WFFloorAerumnaClayRock, WFFloorAerumnaDusk]
     entities: [ShadowTree, ShadowBasaltOne, ShadowBasaltTwo]
     threshold: 0.65
     noise: { seed: 5, noiseType: OpenSimplex2, frequency: 1 }
 
-- type: biomeTemplate
-  id: WFOpenSnow
-  layers:
-  - !type:BiomeTileLayer
-    tile: FloorSnow
-    threshold: -1
-  - !type:BiomeTileLayer
-    tile: FloorIce
-    threshold: 0.4
-    noise: { seed: 4, noiseType: OpenSimplex2, frequency: 0.018 }
-  - !type:BiomeEntityLayer
-    allowedTiles: [FloorSnow, FloorIce]
-    entities: [WFFaunaThrascias]
-    threshold: 0.95
-    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
-  - !type:BiomeEntityLayer
-    allowedTiles: [FloorSnow]
-    entities: [MonoPlanetmapOreSnow]
-    threshold: 0.72
-    noise: { seed: 23, noiseType: OpenSimplex2, frequency: 0.012 }
-  - !type:BiomeEntityLayer
-    allowedTiles: [FloorSnow, FloorIce]
-    entities: [FloorLiquidPlasmaEntity]
-    threshold: 0.95
-    noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.004, fractalType: Ridged, octaves: 1 }
+# WFOpenSnow (Thrascias) moved to Biomes/thrascias.yml as WFThrasciasTerrain.
 
 - type: biomeTemplate
   id: WFTemperatePlains
@@ -101,63 +174,260 @@
   - !type:BiomeTileLayer
     tile: FloorPlanetGrass
     threshold: -1
+  # Meadow patches in a livelier green, a darker floor under the woodland, dirt, and a mud ring round each pond.
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaMeadowGrass
+    threshold: 0.35
+    noise: { seed: 61, noiseType: OpenSimplex2, frequency: 0.005 }
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaForestGrass
+    threshold: 0.25
+    noise: { seed: 17, noiseType: OpenSimplex2, frequency: 0.005 }
   - !type:BiomeTileLayer
     tile: FloorPlanetDirt
-    threshold: 0.65
-    noise: { seed: 6, noiseType: OpenSimplex2, frequency: 0.025 }
+    threshold: 0.72
+    noise: { seed: 6, noiseType: OpenSimplex2, frequency: 0.01 }
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaPondMud
+    threshold: 0.76
+    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.03, fractalType: FBm, octaves: 2 }
+  # Decals go first: a decal layer that passes blocks every entity layer listed before it.
+  - !type:BiomeDecalLayer
+    allowedTiles: [WFFloorVerdaMeadowGrass]
+    decals: [AuroraDecalFloorDecalKonyangFlowers]
+    threshold: 0.75
+    noise: { seed: 64, noiseType: OpenSimplex2, frequency: 4 }
+  # Wildlife by region (Planets/Life/verda_mobs.yml): meadow, woods and the pond shores.
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt]
-    entities: [WFFaunaAsclepiu]
+    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt, WFFloorVerdaMeadowGrass]
+    entities: [WFFaunaVerdaMeadow]
     threshold: 0.95
     noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaForestGrass]
+    entities: [WFFaunaVerdaWoods]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaPondMud]
+    entities: [WFFaunaVerdaShore]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  # Wildflower meadows.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMeadowGrass]
+    entities: [CoyoteWildPlantFlowerBlue, CoyoteWildPlantFlowerOrange]
+    threshold: 0.84
+    noise: { seed: 201, noiseType: OpenSimplex2, frequency: 5 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMeadowGrass]
+    entities: [CoyoteWildPlantFlowerPink, CoyoteWildPlantFlowerPurple]
+    threshold: 0.84
+    noise: { seed: 202, noiseType: OpenSimplex2, frequency: 5 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMeadowGrass]
+    entities: [CoyoteWildPlantFlowerRed, CoyoteWildPlantFlowerWhite]
+    threshold: 0.84
+    noise: { seed: 203, noiseType: OpenSimplex2, frequency: 5 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMeadowGrass]
+    entities: [CoyoteWildPlantFlowerYellowhite, CoyoteWildPlantPetuniaBlue]
+    threshold: 0.84
+    noise: { seed: 204, noiseType: OpenSimplex2, frequency: 5 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMeadowGrass]
+    entities: [DarkPackFloraDarkpackFlowerMarigold, CoyoteFloraWildPlantThistle]
+    threshold: 0.84
+    noise: { seed: 205, noiseType: OpenSimplex2, frequency: 5 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMeadowGrass]
+    entities: [CoyoteFloraTallgrass3, CoyoteFloraTallgrass5]
+    threshold: 0.84
+    noise: { seed: 206, noiseType: OpenSimplex2, frequency: 5 }
+  # Bees and snakes stand where a wildflower or a clump of tall grass would (same noise, a higher threshold, listed after).
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMeadowGrass]
+    entities: [WFFaunaVerdaBees]
+    threshold: 0.97
+    noise: { seed: 201, noiseType: OpenSimplex2, frequency: 5 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMeadowGrass]
+    entities: [WFFaunaVerdaGrass]
+    threshold: 0.97
+    noise: { seed: 206, noiseType: OpenSimplex2, frequency: 5 }
   - !type:BiomeMetaLayer
     template: WFTemperateWoodland
-    threshold: 0.35
-    noise: { seed: 17, noiseType: OpenSimplex2, frequency: 0.012 }
+    threshold: 0.2
+    noise: { seed: 17, noiseType: OpenSimplex2, frequency: 0.005 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt]
+    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt, WFFloorVerdaMeadowGrass, WFFloorVerdaForestGrass]
     entities: [MonoPlanetmapOreBase]
     threshold: 0.72
     noise: { seed: 11, noiseType: OpenSimplex2, frequency: 0.02 }
+  # Reeds round the ponds.
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt]
+    allowedTiles: [WFFloorVerdaPondMud]
+    entities: [AuroraFloraBushKonyangReeds, CoyoteFloraTallgrass9]
+    threshold: 0.4
+    noise: { seed: 228, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaPondMud]
+    entities: [AuroraAssunzioneGrassAlt, AuroraFloraBushKonyangReeds]
+    threshold: 0.4
+    noise: { seed: 229, noiseType: OpenSimplex2, frequency: 3 }
+  # Pond rings: reeds to cut, a lotus to eat, shore sage to heal with (Planets/Life/verda.yml).
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaPondMud]
+    entities: [WFVerdaPlantReeds]
+    threshold: 0.9
+    noise: { seed: 301, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaPondMud]
+    entities: [WFVerdaPlantLotus]
+    threshold: 0.91
+    noise: { seed: 302, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaPondMud]
+    entities: [WFVerdaPlantShoreSage]
+    threshold: 0.91
+    noise: { seed: 303, noiseType: OpenSimplex2, frequency: 4 }
+  # Ponds a few tiles across, between the lakes.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt, WFFloorVerdaMeadowGrass, WFFloorVerdaForestGrass, WFFloorVerdaPondMud]
     entities: [MonoFloorWaterEntity]
-    threshold: 0.95
-    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.006, fractalType: Ridged, octaves: 1 }
+    threshold: 0.85
+    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.03, fractalType: FBm, octaves: 2 }
 
+# Woodland: broadleaf and oak, with bushes, ferns and mossy stones beneath, and conifer stands (WFVerdaPineGrove).
 - type: biomeTemplate
   id: WFTemperateWoodland
   layers:
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetGrass]
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [GoonShrub, CoyoteFloraBigBush]
+    threshold: 0.9
+    noise: { seed: 207, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [CoyoteFloraSmallBush, AuroraFloraBushGrove]
+    threshold: 0.9
+    noise: { seed: 208, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [AuroraAssunzioneBushFerny, CoyoteFloraTallgrass5]
+    threshold: 0.9
+    noise: { seed: 209, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [AuroraRockKonyangMoss, VoreFloraSmallbould]
+    threshold: 0.95
+    noise: { seed: 210, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [GoonStone, CoyoteFloraStump]
+    threshold: 0.95
+    noise: { seed: 211, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeMetaLayer
+    template: WFVerdaPineGrove
+    threshold: 0.45
+    noise: { seed: 19, noiseType: OpenSimplex2, frequency: 0.02 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
     entities: [FloraTree, FloraTreeLarge]
-    threshold: 0.65
-    noise: { seed: 9, noiseType: OpenSimplex2, frequency: 2 }
-
+    threshold: 0.9
+    noise: { seed: 212, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [NebulaTreeHardwoodMahogany, NebulaTreeHardwoodWalnut]
+    threshold: 0.9
+    noise: { seed: 213, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [NebulaTreeHardwoodYew, CoyoteTreeVirgoBigtree2]
+    threshold: 0.9
+    noise: { seed: 214, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [CoyoteFloraTreeOakOne, CoyoteFloraTreeOakTwo]
+    threshold: 0.9
+    noise: { seed: 215, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [CoyoteFloraTreeOakFour, CoyoteFloraTreeOakFive]
+    threshold: 0.9
+    noise: { seed: 216, noiseType: OpenSimplex2, frequency: 2 }
+  # Forage and a hazard under the trees (Planets/Life/verda.yml): mushrooms, berries and snapping brambles.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaForestGrass]
+    entities: [WFVerdaPlantMushroom]
+    threshold: 0.9
+    noise: { seed: 304, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [WFVerdaPlantBerryBush]
+    threshold: 0.93
+    noise: { seed: 305, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [WFVerdaPlantBramble]
+    threshold: 0.98
+    noise: { seed: 306, noiseType: OpenSimplex2, frequency: 4 }
+# Highlands: rough snow in drifts, snow-capped rocks, snow shrubs and snowy pines.
 - type: biomeTemplate
   id: WFTemperateSnow
   layers:
   - !type:BiomeTileLayer
     tile: FloorSnow
     threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaSnowRough
+    threshold: 0.35
+    noise: { seed: 65, noiseType: OpenSimplex2, frequency: 0.01 }
+  - !type:BiomeDecalLayer
+    allowedTiles: [FloorSnow, WFFloorVerdaSnowRough]
+    decals: [AuroraDecalFloorDecalSnowdrift]
+    divisions: 2
+    threshold: 0.78
+    noise: { seed: 96, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeDecalLayer
+    allowedTiles: [FloorSnow, WFFloorVerdaSnowRough]
+    decals: [AuroraDecalFloorDecalSnowrocks]
+    threshold: 0.86
+    noise: { seed: 97, noiseType: OpenSimplex2, frequency: 3 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorSnow]
-    entities: [WFFaunaAsclepiu]
+    allowedTiles: [FloorSnow, WFFloorVerdaSnowRough]
+    entities: [WFFaunaVerdaSnow]
     threshold: 0.95
     noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorSnow]
-    entities: [FloraTreeSnow]
-    threshold: 0.9
-    noise: { seed: 9, noiseType: OpenSimplex2, frequency: 2 }
+    allowedTiles: [FloorSnow, WFFloorVerdaSnowRough]
+    entities: [GoonShrubSnow, GoonShrubSnow2]
+    threshold: 0.88
+    noise: { seed: 246, noiseType: OpenSimplex2, frequency: 3 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorSnow]
+    allowedTiles: [FloorSnow, WFFloorVerdaSnowRough]
+    entities: [GoonStoneSnow, GoonStoneSnow3]
+    threshold: 0.95
+    noise: { seed: 247, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnow, WFFloorVerdaSnowRough]
+    entities: [GoonStoneSnow2, AuroraFloraRockSnow]
+    threshold: 0.95
+    noise: { seed: 248, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnow, WFFloorVerdaSnowRough]
+    entities: [FloraTreeSnow, ShiptestFloraTreePine]
+    threshold: 0.9
+    noise: { seed: 249, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnow, WFFloorVerdaSnowRough]
     entities: [MonoPlanetmapOreSnow]
     threshold: 0.75
     noise: { seed: 23, noiseType: OpenSimplex2, frequency: 0.018 }
 
+# A lake: riverbed under open water, as far as its meta layer reaches.
 - type: biomeTemplate
-  id: WFCoastalOcean
+  id: WFTemperateLake
   layers:
   - !type:BiomeTileLayer
     tile: FloorRiverbed
@@ -314,8 +584,9 @@
       octaves: 5
       cellularDistanceFunction: Euclidean
       cellularReturnType: Distance2
+  # Oasis ponds, ten tiles or so across.
   - !type:BiomeEntityLayer
     allowedTiles: [FloorDesert, FloorDesertRocky, FloorDesertPlanet, FloorAsteroidSandUnvariantizedPlanet, FloorAsteroidSandPlanet]
     entities: [MonoFloorWaterEntity]
-    threshold: 0.98
-    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.004, fractalType: Ridged, octaves: 1 }
+    threshold: 0.8
+    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.016, fractalType: FBm, octaves: 2 }

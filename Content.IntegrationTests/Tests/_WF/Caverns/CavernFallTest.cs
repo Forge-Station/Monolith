@@ -4,6 +4,7 @@ using Content.IntegrationTests.Pair;
 using Content.Server._CE.ZLevels.Core;
 using Content.Server._WF.Caverns;
 using Content.Shared._CE.ZLevels.Core.Components;
+using Content.Shared._WF.Caverns;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Maps;
@@ -53,7 +54,7 @@ public sealed class CavernFallTest
             try
             {
                 var gate = await Gate(pair, world);
-                var mob = await StepIntoGate(pair, world, gate, "MobHuman");
+                var mob = await StepIntoGate(pair, world, gate, CavernOf(pair, surfaceId).Mouths, "MobHuman");
 
                 var landed = await WaitForLanding(pair, world, mob, ticks: 120);
                 Assert.That(landed, Is.True, $"{surfaceId}: the mob never landed in the cavern within 120 ticks.");
@@ -70,7 +71,7 @@ public sealed class CavernFallTest
                             $"{surfaceId}: the fall into the cavern left the mob {entMan.GetComponent<MobStateComponent>(mob).CurrentState}.");
                         Assert.That(blunt, Is.InRange(ExpectedBlunt[surfaceId] - BluntTolerance, ExpectedBlunt[surfaceId] + BluntTolerance),
                             $"{surfaceId}: the landing dealt {blunt} Blunt; section 3.5 says {ExpectedBlunt[surfaceId]}.");
-                        Assert.That(TileOf(pair, world.Cavern, mob), Is.EqualTo(LandingIndex(gate)),
+                        Assert.That(TileOf(pair, world.Cavern, mob), Is.EqualTo(LandingIndex(gate, CavernOf(pair, surfaceId).Mouths)),
                             $"{surfaceId}: the mob landed off the landing tile.");
                     }
                 });
@@ -103,7 +104,7 @@ public sealed class CavernFallTest
         {
             var cavern = CavernOf(pair, surfaceId);
             var gate = await Gate(pair, world);
-            var item = await StepIntoGate(pair, world, gate, "Crowbar");
+            var item = await StepIntoGate(pair, world, gate, cavern.Mouths, "Crowbar");
 
             var landed = await WaitForLanding(pair, world, item, ticks: 120);
             Assert.That(landed, Is.True, "The dropped item never came to rest in the cavern.");
@@ -116,7 +117,7 @@ public sealed class CavernFallTest
 
                 using (Assert.EnterMultipleScope())
                 {
-                    Assert.That(index, Is.EqualTo(LandingIndex(gate)), "The item came to rest off the landing tile.");
+                    Assert.That(index, Is.EqualTo(LandingIndex(gate, cavern.Mouths)), "The item came to rest off the landing tile.");
                     Assert.That(tileDefs[tile.TypeId].ID, Is.EqualTo(cavern.Mouths.LandingTile.Id),
                         "The tile under the item is not the world's landing tile.");
                 }
@@ -132,7 +133,7 @@ public sealed class CavernFallTest
 
     /// <summary>Spawns an entity on the gate's lip, lets it settle, then steps it onto the hole's bottom-left tile.</summary>
     // A step onto the hole is what walking in comes to; the z-physics sees the same empty tile either way.
-    private static async Task<EntityUid> StepIntoGate(TestPair pair, World world, WFCavernMouth gate, string proto)
+    private static async Task<EntityUid> StepIntoGate(TestPair pair, World world, WFCavernMouth gate, WFCavernMouthSpec spec, string proto)
     {
         var server = pair.Server;
         var entMan = server.EntMan;
@@ -154,7 +155,7 @@ public sealed class CavernFallTest
 
         await server.WaitPost(() =>
         {
-            transform.SetCoordinates(uid, new EntityCoordinates(world.Ground, TileCentre(gate.Origin)));
+            transform.SetCoordinates(uid, new EntityCoordinates(world.Ground, TileCentre(DropTile(gate, spec))));
             levels.WakeBody(uid);
         });
 

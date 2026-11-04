@@ -1,0 +1,71 @@
+# The tank crew's seats and the APC's port gun seat, on the armored seat base of seats.yml. A weapons seat makes whoever is
+# strapped into it a weapons operator (VehicleWeaponsSeat) and opens the weapons window.
+
+# The driver also works the tank's support hardpoints from the hotbar.
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatTankDriver
+  name: tank driver seat
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: VehicleDriverSeat
+  - type: WFVehicleScanner
+  - type: RadarConsole
+  - type: VehicleWeaponsSeat
+    isPrimaryOperatorSeat: false
+    allowUiSelection: false
+    allowHotbarSelection: true
+    allowedHardpointTypes:
+    - HardpointTypeSupport
+  - type: UserInterface
+    interfaces:
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatTankGunner
+  name: tank gunner seat
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: VehicleWeaponsSeat
+    isPrimaryOperatorSeat: true
+    allowUiSelection: true
+    allowHotbarSelection: true
+  - type: UserInterface
+    interfaces:
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatTankCommander
+  name: tank commander seat
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: VehicleWeaponsSeat
+    isPrimaryOperatorSeat: false
+    allowUiSelection: true
+    allowHotbarSelection: true
+    baseViewPvsScale: 0.35
+    baseViewCursorMaxOffset: 5
+    baseViewCursorPvsIncrease: 0.5
+    allowedHardpointTypes:
+    - HardpointTypeSecondary
+    - HardpointTypeLauncher
+  - type: UserInterface
+    interfaces:
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmoredPortGunOperator
+  name: armored port gun operator seat
+  components:
+  - type: VehiclePortGunSeat

@@ -50,7 +50,8 @@ public sealed class PlanetPopulationTest
                 Assert.That(biome.LoadedEntities, Is.Empty, "An unvisited planet spawned scenery or wildlife eagerly.");
             }
             TestContext.Out.WriteLine($"Six empty planet networks: {allLayers.Count} maps, {stopwatch.ElapsedMilliseconds} ms construction, zero loaded terrain chunks.");
-            Assert.That(allLayers, Has.Count.EqualTo(30));
+            // Five worlds of five layers and Verda (Asclepiu) of six, its fourth air layer holding Crocus's upper levels.
+            Assert.That(allLayers, Has.Count.EqualTo(31));
 
             List<EntityUid> Animals(EntityUid? ground = null)
             {

@@ -4,11 +4,13 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Shared._WF.Planets.Administration;
 using Content.Shared._WF.Planets;
+using Content.Shared._WF.WolfWeather;
 using Content.Shared.Administration;
 using Content.Shared.Database;
 using Content.Shared.Weather;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._WF.Planets.Administration;
 
@@ -18,7 +20,9 @@ public sealed partial class PlanetControlSystem : EntitySystem
     [Dependency] private IAdminManager _adminManager = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private WFPlanetWeatherSystem _weather = default!;
+    [Dependency] private WFPlanetClimateSystem _climate = default!;
     [Dependency] private CEZLevelsSystem _zLevels = default!;
 
     /// <summary>Gravity an admin may set, in gees; zero would divide every lift ratio by nothing.</summary>
@@ -71,8 +75,30 @@ public sealed partial class PlanetControlSystem : EntitySystem
                 info.Built = true;
                 _weather.TryGetState(world.Value, out info.MinuteOfDay, out info.DaySeconds, out info.Weather, out info.WeatherSeconds);
 
+                // What WolfWeather is showing on the ground, which an admin's wolfweather command may have changed.
+                if (TryComp<WolfWeatherMapComponent>(network.GroundMap, out var wolf) && SharedWolfWeatherSystem.GetCurrent(wolf) is { } shown
+                    && (shown.End is not { } end || end > _timing.CurTime))
+                    info.WolfWeather = shown.Weather.Id;
+
                 if (TryComp<WFPlanetLayerComponent>(network.GroundMap, out var ground))
                     info.Gravity = ground.Gravity;
+
+                if (TryComp<WFPlanetWeatherComponent>(world, out var state) && _proto.TryIndex(state.Profile, out var profile))
+                {
+                    foreach (var season in profile.Seasons)
+                    {
+                        info.SeasonIds.Add(season.Id);
+                        info.SeasonNames.Add(season.Name);
+                    }
+
+                    if (_weather.GetSeasonIndex(state, profile, _timing.CurTime, out var left) is { } index)
+                    {
+                        info.Season = profile.Seasons[index].Id;
+                        info.SeasonSecondsLeft = left;
+                    }
+                }
+
+                info.Temperature = _climate.GetOutsideTemperature(world.Value) ?? float.NaN;
             }
 
             list.Add(info);
@@ -114,6 +140,13 @@ public sealed partial class PlanetControlSystem : EntitySystem
                 if (_weather.SetWeather(world.Value, weather, TimeSpan.FromSeconds(seconds)))
                     changes.Add($"weather={(weather?.Id ?? "clear")} for {seconds:F0}s");
             }
+
+            if (!string.IsNullOrEmpty(ev.Season) && _weather.SetSeason(world.Value, ev.Season))
+                changes.Add($"season={ev.Season}");
+
+            // The air follows an admin's change at once; left to ease it would stay warm for minutes after a blizzard.
+            if (ev.MinuteOfDay != null || ev.SetWeather || !string.IsNullOrEmpty(ev.Season))
+                _climate.Snap(world.Value);
 
             if (ev.Gravity is { } gravity)
             {

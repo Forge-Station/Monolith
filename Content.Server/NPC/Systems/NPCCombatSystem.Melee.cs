@@ -95,7 +95,7 @@ public sealed partial class NPCCombatSystem
         // TODO: When I get parallel operators move this as NPC combat shouldn't be handling this.
         _steering.Register(uid, new EntityCoordinates(component.Target, Vector2.Zero), steering);
 
-        if (distance > weapon.Range)
+        if (distance > weapon.Range && !WfHullInReach(uid, component.Target, weapon.Range)) // WOLFGATE(Vehicles): a vehicle is in reach once its hull is.
         {
             component.Status = CombatStatus.TargetOutOfRange;
             return;

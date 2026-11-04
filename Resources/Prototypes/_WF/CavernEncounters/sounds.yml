@@ -1,0 +1,66 @@
+- type: soundCollection
+  id: WFCavernEncounterCrawlerAlert
+  files:
+  - /Audio/_WF/CavernEncounters/crawler/alert1.ogg
+
+- type: soundCollection
+  id: WFCavernEncounterCrawlerBite
+  files:
+  - /Audio/_WF/CavernEncounters/crawler/attack1.ogg
+  - /Audio/_WF/CavernEncounters/crawler/attack2.ogg
+
+- type: soundCollection
+  id: WFCavernEncounterLamplighterDouse
+  files:
+  - /Audio/_WF/CavernEncounters/lamplighter/moan1.ogg
+  - /Audio/_WF/CavernEncounters/lamplighter/moan3.ogg
+
+- type: soundCollection
+  id: WFCavernEncounterLamplighterStrike
+  files:
+  - /Audio/_WF/CavernEncounters/lamplighter/claw_strike1.ogg
+
+- type: soundCollection
+  id: WFCavernEncounterEchoLunge
+  files:
+  - /Audio/_WF/CavernEncounters/echo/alert1.ogg
+
+- type: soundCollection
+  id: WFCavernEncounterEchoStrike
+  files:
+  - /Audio/_WF/CavernEncounters/echo/claw_strike2.ogg
+
+# Telegraphs (WFCavernTelegraph): what you hear before an encounter is in sight.
+- type: soundCollection
+  id: WFCavernEncounterCampFire
+  files:
+  - /Audio/_WF/CavernEncounters/camp/r_ambience_fire1.ogg
+
+- type: soundCollection
+  id: WFCavernEncounterCrawlerClick
+  files:
+  - /Audio/_WF/CavernEncounters/crawler/idle1.ogg
+  - /Audio/_WF/CavernEncounters/crawler/idle2.ogg
+  - /Audio/_WF/CavernEncounters/crawler/idle3.ogg
+
+- type: soundCollection
+  id: WFCavernEncounterEchoWhisper
+  files:
+  - /Audio/_NF/Effects/bloodcult/whispers.ogg
+  - /Audio/_WF/CavernEncounters/echo/tc_breathing.ogg
+
+- type: soundCollection
+  id: WFCavernEncounterRaiderChatter
+  files:
+  - /Audio/Voice/Human/manlaugh1.ogg
+  - /Audio/Voice/Human/manlaugh2.ogg
+  - /Audio/Voice/Human/male_cough_1.ogg
+  - /Audio/Voice/Human/male_cough_2.ogg
+  - /Audio/_Crescent/Radio/radio_broadband.ogg
+  - /Audio/_Crescent/Radio/radio_shortband.ogg
+
+- type: soundCollection
+  id: WFCavernEncounterOmenFizzle
+  files:
+  - /Audio/_WF/CavernEncounters/omen/elec_spark1.ogg
+  - /Audio/_WF/CavernEncounters/omen/elec_spark2.ogg

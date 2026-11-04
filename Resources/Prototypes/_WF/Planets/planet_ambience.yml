@@ -1,4 +1,5 @@
 # Supplied soundscapes: numbered playlists crossfade; daytime is 06:00-18:00 local.
+# The /Audio/_WF/LivingWorld/ambience/ beds and accents are Black Mesa sounds (Tools/_WF/LivingWorld/import_bms.py).
 
 - type: wfPlanetAmbience
   id: WFPlanetAmbienceAsclepiu
@@ -10,6 +11,11 @@
   oneShots:
   - path: /Audio/Effects/plant_rustle.ogg
   - path: /Audio/Effects/waterswirl.ogg
+  dayOneShots:
+  - path: /Audio/Effects/plant_rustle.ogg
+  - path: /Audio/Effects/waterswirl.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/hawk1.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/eagle1.ogg
   loopVolume: -8
   hullVolumeOffset: -6
   oneShotVolume: -7
@@ -25,9 +31,11 @@
   - path: /Audio/_WF/Planets/Worlds/fervidus/fervidus_ambience_loop_2.ogg
   - path: /Audio/_WF/Planets/Worlds/fervidus/fervidus_ambience_loop_3.ogg
   - path: /Audio/_WF/Planets/Worlds/fervidus/fervidus_ambience_loop_4.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/o_ambience_disaster_fire1.ogg
   oneShots:
   - path: /Audio/Effects/sizzle.ogg
   - path: /Audio/Magic/rumble.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/o_ambience_disaster_rumble1.ogg
   loopVolume: -8
   hullVolumeOffset: -6
   oneShotVolume: -8
@@ -40,8 +48,10 @@
   planetType: PlanetMerak
   dayLoops:
   - path: /Audio/_WF/Planets/Worlds/merak/merak_ambience_day_loop_1.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/wind1.ogg
   nightLoops:
   - path: /Audio/_WF/Planets/Worlds/merak/merak_ambience_night_loop_1.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/wind1.ogg
   oneShots:
   - path: /Audio/Effects/break_stone.ogg
   - path: /Audio/Effects/rustle4.ogg
@@ -61,11 +71,15 @@
   - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_ambience_loop_2.ogg
   - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_ambience_loop_3.ogg
   - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_ambience_loop_4.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/xen_outdoor1_mix.ogg
   oneShots:
   - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_1.ogg
   - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_2.ogg
   - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_3.ogg
   - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_4.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/garg_xen_far01.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/boid_xen_medium01.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/towermantas_far01.ogg
   loopVolume: -8
   hullVolumeOffset: -6
   oneShotVolume: -9
@@ -79,9 +93,11 @@
   loops:
   - path: /Audio/_WF/Planets/Worlds/thrascias/thracias_ambience_loop_1.ogg
   - path: /Audio/_WF/Planets/Worlds/thrascias/thracias_ambience_loop_2.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/xen_nih_wind1_mix.ogg
   oneShots:
   - path: /Audio/Items/snap.ogg
   - path: /Audio/Effects/Weather/wind_5_1.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/wind_fall.ogg
   loopVolume: -8
   hullVolumeOffset: -6
   oneShotVolume: -10
@@ -94,6 +110,7 @@
   planetType: WFPlanetCarcinoma
   dayLoops:
   - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_ambience_day_loop_2.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/xen_swamp1_mix.ogg
   nightLoops:
   - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_ambience_night_loop_1.ogg
   - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_ambience_night_loop_2.ogg

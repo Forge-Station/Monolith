@@ -45,6 +45,9 @@ public sealed partial class WFPlanetWeatherSystem
         state.Current = weather;
         state.Phase = WFStormPhase.End;
         state.NextChange = _timing.CurTime + duration;
+        state.AdminHeld = true;
+        if (_proto.TryIndex(state.Profile, out var profile))
+            Reroll(state, profile);
         _nextUpdate = TimeSpan.Zero;
         return true;
     }

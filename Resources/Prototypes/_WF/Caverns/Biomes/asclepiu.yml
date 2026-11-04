@@ -1,5 +1,8 @@
-# Asclepiu: the Underkarst. Wet limestone tunnels lit by glowcaps, dirt chambers with plunge pools, glow-worms and
-# spider webs.
+# Asclepiu: the Underkarst. Wet limestone tunnels lit by glowcaps, joined by three kinds of cavern: dripstone halls
+# of pale flowstone, flooded grottos and mushroom hollows. One low-frequency noise picks the zone (halls are the
+# default, grottos where it runs high, hollows where it runs low), so each is a stretch of ground over a hundred
+# tiles across; a zone's own chamber noise is lowered to open its caverns wider. A cavern is ringed by the common
+# chamber dirt with its zone's floor inside it.
 # Layers run last to first and the first match wins. Walls only stand on the limestone substrate, so any other
 # floor is open ground.
 
@@ -22,17 +25,40 @@
     entities: [WFCavernGlowcaps]
     threshold: 0.925
     noise: { seed: 32, noiseType: OpenSimplex2, frequency: 1 }
+  # Whatever crawls the tunnels between the zones.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorLimestone]
+    entities: [WFCavernFaunaAsclepiu]
+    threshold: 0.975
+    noise: { seed: 38, noiseType: OpenSimplex2, frequency: 3 }
   # Rock wherever ridged noise is at most the tunnel threshold; the tunnels are the ridges.
   - !type:BiomeMetaLayer
     template: WFCavernRockAsclepiu
     invert: true
     threshold: -0.5
     noise: { seed: 17, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.035 }
-  # Chambers on the web.
+  # Dripstone halls, the default zone: chambers on the web.
   - !type:BiomeMetaLayer
     template: WFCavernChamberAsclepiu
-    threshold: 0.35
+    threshold: 0.3
     noise: { seed: 117, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.025 }
+  # Flooded grottos, where the zone noise runs high.
+  - !type:BiomeMetaLayer
+    template: WFCavernZoneGrottosAsclepiu
+    threshold: 0.18
+    noise: { seed: 411, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.005 }
+  # Mushroom hollows, where it runs low.
+  - !type:BiomeMetaLayer
+    template: WFCavernZoneHollowsAsclepiu
+    invert: true
+    threshold: 0.22
+    noise: { seed: 411, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.005 }
+  # Slime grottos (_WF/WildSlimes) under the surface's pond-jelly patches, over everything: the patch noise, its seed
+  # less the cavern's seed offset of 7901, at a lower threshold so each grotto is a little wider than its patch.
+  - !type:BiomeMetaLayer
+    template: WFCavernSlimeZoneAsclepiu
+    threshold: 0.79
+    noise: { seed: -7669, noiseType: OpenSimplex2, frequency: 0.005 }
 
 - type: biomeTemplate
   id: WFCavernRockAsclepiu
@@ -72,41 +98,61 @@
     threshold: 0.97
     noise: { seed: 205, noiseType: OpenSimplex2, frequency: 0.2 }
 
+# Dripstone halls: flowstone inside a rim of dirt, stalagmites, pale lichen to pick, roots that grab, bats and crabs.
 - type: biomeTemplate
   id: WFCavernChamberAsclepiu
   layers:
   - !type:BiomeTileLayer
     tile: FloorPlanetDirt
     threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorFlowstone
+    threshold: 0.36
+    noise: { seed: 117, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.025 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetDirt]
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorFlowstone]
     entities: [Cobweb1, Cobweb2]
     threshold: 0.98
     noise: { seed: 301, noiseType: OpenSimplex2, frequency: 1 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetDirt]
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorFlowstone]
     entities: [WFCavernGlowworms]
     threshold: 0.97
     noise: { seed: 302, noiseType: OpenSimplex2, frequency: 1 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetDirt]
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorFlowstone]
     entities: [WFCavernGlowcaps]
     threshold: 0.95
     noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
   # Web choke points.
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetDirt]
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorFlowstone]
     entities: [SpiderWeb]
     threshold: 0.985
     noise: { seed: 303, noiseType: OpenSimplex2, frequency: 1 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetDirt]
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorFlowstone]
     entities: [CrystalGreen, CrystalCyan]
     threshold: 0.99
     noise: { seed: 304, noiseType: OpenSimplex2, frequency: 1 }
   - !type:BiomeEntityLayer
-    allowedTiles: [FloorPlanetDirt]
-    entities: [WFCavernFaunaAsclepiu]
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorFlowstone]
+    entities: [FloraStalagmite, FloraGreyStalagmite]
+    threshold: 0.95
+    noise: { seed: 421, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorFlowstone]
+    entities: [WFCaveLichenPatch]
+    threshold: 0.93
+    noise: { seed: 422, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorFlowstone]
+    entities: [WFCaveGraspingRoot]
+    threshold: 0.99
+    noise: { seed: 423, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorFlowstone]
+    entities: [WFCavernFaunaAsclepiuHalls]
     threshold: 0.95
     noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
   # Plunge pools.
@@ -114,6 +160,129 @@
     template: WFCavernSignatureAsclepiu
     threshold: 0.45
     noise: { seed: 55, noiseType: OpenSimplex2, frequency: 0.06 }
+
+# The grotto zone: its caverns open at a lower chamber threshold than the halls'.
+- type: biomeTemplate
+  id: WFCavernZoneGrottosAsclepiu
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernChamberGrottosAsclepiu
+    threshold: 0.1
+    noise: { seed: 117, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.025 }
+
+# Flooded grottos: wet rock round big pools, reeds in the shallows, spitting pitchers, frogs and crabs.
+- type: biomeTemplate
+  id: WFCavernChamberGrottosAsclepiu
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorPlanetDirt
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorWetRock
+    threshold: 0.28
+    noise: { seed: 117, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.025 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorWetRock]
+    entities: [WFCavernGlowworms]
+    threshold: 0.97
+    noise: { seed: 302, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorWetRock]
+    entities: [WFCavernGlowcaps]
+    threshold: 0.95
+    noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorWetRock]
+    entities: [CrystalGreen, CrystalCyan]
+    threshold: 0.99
+    noise: { seed: 304, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorWetRock]
+    entities: [WFCavePaleReeds]
+    threshold: 0.92
+    noise: { seed: 431, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorWetRock]
+    entities: [WFCavePitcherPod]
+    threshold: 0.99
+    noise: { seed: 433, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorWetRock]
+    entities: [WFCavernFaunaAsclepiuGrottos]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  # The pools, on whatever floor.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorWetRock]
+    entities: [MonoFloorWaterEntity]
+    threshold: 0.3
+    noise: { seed: 434, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.045 }
+
+# The hollow zone.
+- type: biomeTemplate
+  id: WFCavernZoneHollowsAsclepiu
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernChamberHollowsAsclepiu
+    threshold: 0.2
+    noise: { seed: 117, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.025 }
+
+# Mushroom hollows: dark soil under cave caps and webs, puffballs, spiders and bats.
+- type: biomeTemplate
+  id: WFCavernChamberHollowsAsclepiu
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorPlanetDirt
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorCaveSoil
+    threshold: 0.3
+    noise: { seed: 117, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.025 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorCaveSoil]
+    entities: [WFCavernGlowworms]
+    threshold: 0.97
+    noise: { seed: 302, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorCaveSoil]
+    entities: [WFCavernGlowcaps]
+    threshold: 0.95
+    noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorCaveSoil]
+    entities: [CrystalGreen, CrystalCyan]
+    threshold: 0.99
+    noise: { seed: 304, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorCaveSoil]
+    entities: [GoonMushrooms, GoonMushroomsType3, GoonMushroomsType5]
+    threshold: 0.96
+    noise: { seed: 444, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorCaveSoil]
+    entities: [Cobweb1, Cobweb2]
+    threshold: 0.95
+    noise: { seed: 445, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorCaveSoil]
+    entities: [SpiderWeb]
+    threshold: 0.975
+    noise: { seed: 303, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorCaveSoil]
+    entities: [WFCaveCapPatch]
+    threshold: 0.92
+    noise: { seed: 441, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorCaveSoil]
+    entities: [WFCaveSporePuff]
+    threshold: 0.99
+    noise: { seed: 443, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetDirt, WFCavernFloorCaveSoil]
+    entities: [WFCavernFaunaAsclepiuHollows]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
 
 # The surface's water: its entity on dirt, as Asclepiu's own pools are, not the foam-edged FloorWater tile.
 - type: biomeTemplate

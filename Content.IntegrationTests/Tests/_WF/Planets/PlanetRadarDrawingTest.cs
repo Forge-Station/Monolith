@@ -6,6 +6,7 @@ using System.Reflection;
 using Content.Client.Shuttles.UI;
 using Content.IntegrationTests.Pair;
 using Content.Server._WF.Planets;
+using Content.Shared._WF.PlanetMap;
 using Content.Shared._WF.Planets;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Robust.Client.GameObjects;
@@ -20,7 +21,7 @@ namespace Content.IntegrationTests.Tests._WF.Planets;
 public sealed class PlanetRadarDrawingTest
 {
     [Test]
-    public async Task FervidusTerrainReachesTheDrawingHandle()
+    public async Task FervidusMapReachesTheDrawingHandle()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true, Dirty = true });
         await EnableFeature(pair);
@@ -49,7 +50,7 @@ public sealed class PlanetRadarDrawingTest
         await pair.Client.WaitAssertion(() =>
         {
             var orbit = pair.Client.EntMan.GetEntity(netOrbit);
-            Assert.That(pair.Client.EntMan.GetComponent<WFOrbitLayerComponent>(orbit).RadarLayers, Is.Not.Empty);
+            Assert.That(pair.Client.EntMan.GetComponent<WFPlanetMapComponent>(orbit).Terrain, Is.Not.Null, "The world's map did not reach the client.");
             using var radar = new ShuttleNavControl();
             radar.Measure(new Vector2(800));
             radar.Arrange(new UIBox2(Vector2.Zero, new Vector2(800)));
@@ -57,10 +58,10 @@ public sealed class PlanetRadarDrawingTest
             var matrix = Matrix3x2.CreateScale(0.3f, -0.3f) * Matrix3x2.CreateTranslation(400, 400);
             typeof(ShuttleNavControl).GetMethod("DrawWfTerrain", BindingFlags.Instance | BindingFlags.NonPublic)!
                 .Invoke(radar, new object?[] { handle, matrix, orbit });
-            Assert.That(handle.Vertices, Is.GreaterThan(0), "Terrain returned without submitting geometry.");
-            Assert.That(handle.VisibleVertices, Is.GreaterThan(0), "Terrain geometry is outside the viewport.");
-            Assert.That(handle.Colours.Count, Is.GreaterThan(1), "Basalt alone hides the planet: lava and formations must be sampled too.");
-            Assert.That(handle.Brightness, Is.GreaterThan(0.02f), "Terrain is effectively black after colour conversion.");
+            Assert.That(handle.Vertices, Is.GreaterThan(0), "The map returned without submitting geometry.");
+            Assert.That(handle.VisibleVertices, Is.GreaterThan(0), "The map is outside the viewport.");
+            Assert.That(handle.Colours.Count, Is.GreaterThan(1), "Basalt alone hides the planet: the lava must show on the map too.");
+            Assert.That(handle.Brightness, Is.GreaterThan(0.02f), "The map is effectively black after colour conversion.");
             // A fresh radar must draw from every altitude, without cached orbit geometry.
             foreach (var netMap in netLayers)
             {
@@ -70,7 +71,7 @@ public sealed class PlanetRadarDrawingTest
                 using var descendedHandle = new TerrainHandle();
                 typeof(ShuttleNavControl).GetMethod("DrawWfTerrain", BindingFlags.Instance | BindingFlags.NonPublic)!
                     .Invoke(descendedRadar, new object?[] { descendedHandle, matrix, pair.Client.EntMan.GetEntity(netMap) });
-                Assert.That(descendedHandle.VisibleVertices, Is.GreaterThan(0), $"No terrain on layer {netMap}.");
+                Assert.That(descendedHandle.VisibleVertices, Is.GreaterThan(0), $"No map on layer {netMap}.");
                 Assert.That(descendedHandle.Colours.Count, Is.GreaterThan(1));
             }
             // A client-side transit map, so the server cannot delete the empty gap before it renders.
@@ -82,7 +83,7 @@ public sealed class PlanetRadarDrawingTest
             using var gapHandle = new TerrainHandle();
             typeof(ShuttleNavControl).GetMethod("DrawWfTerrain", BindingFlags.Instance | BindingFlags.NonPublic)!
                 .Invoke(radar, new object?[] { gapHandle, matrix, gap });
-            Assert.That(gapHandle.VisibleVertices, Is.GreaterThan(0), "Transit gap lost its planet recipe.");
+            Assert.That(gapHandle.VisibleVertices, Is.GreaterThan(0), "Transit gap lost its planet map.");
             var flags = BindingFlags.Instance | BindingFlags.NonPublic;
             var air = pair.Client.EntMan.GetEntity(netAir);
             radar.SetMatrix(new Robust.Shared.Map.EntityCoordinates(air, Vector2.Zero), Angle.Zero);
@@ -108,8 +109,11 @@ public sealed class PlanetRadarDrawingTest
             Vertices += vertices.Length;
             foreach (var vertex in vertices)
             {
-                if (vertex.Position.X is >= 0 and <= 800 && vertex.Position.Y is >= 0 and <= 800)
+                // The map draws in world coordinates under the radar's transform.
+                var position = Vector2.Transform(vertex.Position, _transform);
+                if (position.X is >= 0 and <= 800 && position.Y is >= 0 and <= 800)
                     VisibleVertices++;
+                Colours.Add(vertex.Color);
                 Brightness = MathF.Max(Brightness, MathF.Max(vertex.Color.R, MathF.Max(vertex.Color.G, vertex.Color.B)));
             }
         }

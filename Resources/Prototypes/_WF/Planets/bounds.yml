@@ -1,0 +1,33 @@
+# The wall on the outermost ring of a bounded world's ground, laid once the ground is preloaded. Nothing mines,
+# damages or prys it; the chain boundary under it stops whatever gets past the gaps.
+
+- type: entity
+  parent: WallConcreteIndestructible
+  id: WFPlanetBoundaryWall
+  name: world's edge
+  description: Sheer rock, as far as anyone can see. There is nothing past it.
+  suffix: planet boundary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: Structures/Walls/rock.rsi
+    layers:
+    - state: rock
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_west
+  - type: Icon
+    sprite: Structures/Walls/rock.rsi
+    state: rock
+  - type: IconSmooth
+    key: rockwalls
+    mode: NoSprite
+  - type: SmoothEdge
+  - type: WFBiomeKeep

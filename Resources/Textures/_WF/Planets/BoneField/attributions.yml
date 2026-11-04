@@ -1,0 +1,36 @@
+# Every tile here is a Wolfgate recolour of the named source tile (flipped for variants where the source has one).
+
+- files: [ calcified_flesh.png ]
+  license: CC0-1.0
+  copyright: "Recoloured for Wolfgate from the flesh floor, _WF/Resprites/Wizden/Tiles/meat.png, by AftrLite (GitHub)."
+  source: "https://github.com/space-wizards/space-station-14"
+
+- files: [ bleached_bone.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Recoloured for Wolfgate from https://github.com/NebulaSS13/Nebula/blob/d7a668ec0268164d33a13481e2e5ce307996ff76/icons/turf/flooring/seafloor.dmi (state seafloor)."
+  source: "https://github.com/NebulaSS13/Nebula"
+
+- files: [ cartilage.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Recoloured for Wolfgate from https://github.com/NovaSector/NovaSector/blob/3754f28afedc5e20e1bc76dd6c5568c957a4a9de/modular_nova/modules/floors_and_walls/icons/floors.dmi (state meat_fresh)."
+  source: "https://github.com/NovaSector/NovaSector"
+
+- files: [ clotted_blood.png, marsh_mud.png ]
+  license: CC-BY-SA-4.0
+  copyright: "Recoloured for Wolfgate from the dirt tile created by .vladimirs (Resources/Textures/_Mono/Tiles/planet/WizDenRespritening/Dirt/dirt.png)."
+  source: "https://github.com/crystallpunk-14/crystall-punk-14/"
+
+- files: [ marsh_scab.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Recoloured for Wolfgate from https://github.com/PolarisSS13/Polaris/blob/6cd19fe0dec6b5f18b6b18c3eb36af7bf3359f25/icons/turf/outdoors.dmi (state dirt-dark)."
+  source: "https://github.com/PolarisSS13/Polaris"
+
+- files: [ dried_crust.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Recoloured for Wolfgate from https://github.com/CHOMPStation2/CHOMPStation2/blob/ca24d940aa4a6eb0d58d32b85ddc830f44459264/icons/turf/outdoors.dmi (state rock_brown)."
+  source: "https://github.com/CHOMPStation2/CHOMPStation2"
+
+- files: [ scab_shore.png ]
+  license: CC0-1.0
+  copyright: "Recoloured for Wolfgate from the flesh floor, _WF/Resprites/Wizden/Tiles/meat.png, by AftrLite (GitHub), by Tools/_WF/Planets/gen_carcinoma_scab.py."
+  source: "https://github.com/space-wizards/space-station-14"

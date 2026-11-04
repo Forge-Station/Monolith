@@ -1,7 +1,7 @@
 <DefaultWindow xmlns="https://spacestation14.io"
                Title="{Loc 'wf-planet-control-title'}"
                MinSize="620 380"
-               SetSize="680 420">
+               SetSize="680 470">
     <BoxContainer Orientation="Horizontal" Margin="4" SeparationOverride="8">
         <BoxContainer Orientation="Vertical" MinWidth="220" VerticalExpand="True">
             <ItemList Name="PlanetList" VerticalExpand="True" SelectMode="Single" />
@@ -11,6 +11,7 @@
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" SeparationOverride="8">
             <Label Name="PlanetLabel" StyleClasses="LabelHeading" />
             <Label Name="StatusLabel" StyleClasses="LabelSubText" />
+            <Label Name="ClimateLabel" StyleClasses="LabelSubText" />
 
             <!-- Clock -->
             <BoxContainer Orientation="Horizontal" SeparationOverride="4">
@@ -29,6 +30,13 @@
                 <OptionButton Name="WeatherOption" HorizontalExpand="True" />
                 <LineEdit Name="WeatherSecondsEdit" Text="600" MinWidth="60" ToolTip="{Loc 'wf-planet-control-weather-seconds'}" />
                 <Button Name="WeatherButton" Text="{Loc 'wf-planet-control-set'}" StyleClasses="ButtonSquare" />
+            </BoxContainer>
+
+            <!-- Season -->
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                <Label Text="{Loc 'wf-planet-control-season'}" StyleClasses="LabelKeyText" MinWidth="80" VerticalAlignment="Center" />
+                <OptionButton Name="SeasonOption" HorizontalExpand="True" />
+                <Button Name="SeasonButton" Text="{Loc 'wf-planet-control-set'}" StyleClasses="ButtonSquare" />
             </BoxContainer>
 
             <!-- Gravity -->

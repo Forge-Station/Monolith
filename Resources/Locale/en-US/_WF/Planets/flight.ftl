@@ -40,6 +40,7 @@ wf-flight-hint-air = Ascend and descend change altitude.
 wf-flight-hint-orbit = Hold descend to enter the atmosphere.
 
 ## Descent gates
+wf-flight-landing-blocked = Can't set down here. There's something solid under the hull.
 wf-flight-busy = This hull is already under way.
 wf-flight-descent-refused = Atmospheric entry refused.
 wf-flight-lift-warning = Lift is only { $percent }%. Use Enter atmosphere on the console to descend anyway.

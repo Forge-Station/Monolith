@@ -1,0 +1,146 @@
+# What the military outfitter and the station counter sell (VehicleShop catalogues). `licence: true` listings need a
+# heavy vehicle licence on the buyer. Every price sits above what the thing appraises for, fitted parts included, so
+# nothing bought here sells at a profit (MilitaryCatalogueTest).
+
+# Bare chassis, delivered to the outfitter's pad.
+- type: wfVehicleCatalog
+  id: WFMilitaryCatalogChassis
+  vehicles:
+  - vehicle: WFMilitaryChassisHumvee
+    price: 38000
+    licence: true
+  - vehicle: VehicleAPC
+    price: 60000
+    licence: true
+  - vehicle: VehicleAPCPMC
+    price: 62000
+    licence: true
+  - vehicle: VehicleAPCMed
+    price: 65000
+    licence: true
+  - vehicle: VehicleAev
+    price: 95000
+    licence: true
+  - vehicle: VehicleTankTWE
+    price: 120000
+    licence: true
+  - vehicle: WFMilitaryChassisTank
+    price: 135000
+    licence: true
+  - vehicle: WFMilitaryChassisTankPMC
+    price: 145000
+    licence: true
+
+# Hardpoint parts and ammunition, handed over the counter. Weapons and turrets need the licence; armour, wheels,
+# utility parts and ammunition don't.
+- type: wfVehicleCatalog
+  id: WFMilitaryCatalogParts
+  vehicles:
+  # Tank: turret and guns.
+  - vehicle: VehicleTankTurret
+    price: 15000
+    licence: true
+  - vehicle: VehicleTankLTBCannon
+    price: 40000
+    licence: true
+  - vehicle: VehicleTankAceAutocannon
+    price: 32000
+    licence: true
+  - vehicle: VehicleTankLTAAAPMinigun
+    price: 30000
+    licence: true
+  - vehicle: VehicleTankTowLauncher
+    price: 28000
+    licence: true
+  - vehicle: VehicleTankGrenadeLauncher
+    price: 20000
+    licence: true
+  - vehicle: VehicleTankM56Cupola
+    price: 14000
+    licence: true
+  - vehicle: VehicleTankRocketLauncher
+    price: 10000
+    licence: true
+  - vehicle: VehicleTankFlareModule
+    price: 10000
+    licence: true
+  # FV150 light tank guns (its turret takes only these).
+  - vehicle: VehicleTankAutocannonTWE
+    price: 32000
+    licence: true
+  - vehicle: VehicleTankCupolaTWE
+    price: 14000
+    licence: true
+  - vehicle: VehicleTankRocketLauncherTWE
+    price: 10000
+    licence: true
+  # APC guns.
+  - vehicle: RMCAPCDualCannon
+    price: 30000
+    licence: true
+  - vehicle: RMCAPCFrontCannon
+    price: 22000
+    licence: true
+  - vehicle: RMCAPCFlareLauncher
+    price: 10000
+    licence: true
+  # Humvee turret and guns.
+  - vehicle: VehicleHumveeTurret
+    price: 10000
+    licence: true
+  - vehicle: VehicleHumveeCannon
+    price: 18000
+    licence: true
+  - vehicle: VehicleHumveeLauncher
+    price: 12000
+    licence: true
+  # Armour, running gear and utility.
+  - vehicle: VehicleTankArmorBallistic
+    price: 8000
+  - vehicle: VehicleTankArmorConcussive
+    price: 9000
+  - vehicle: VehicleTankArmorCaustic
+    price: 9000
+  - vehicle: VehicleTankArmorPaladin
+    price: 14000
+  - vehicle: VehicleTankTreads
+    price: 5000
+  - vehicle: VehicleTankReinforcedTreads
+    price: 9000
+  - vehicle: VehicleTankWarningArray
+    price: 6000
+  - vehicle: VehicleTankOverdriveEnhancer
+    price: 7000
+  - vehicle: RMCAPCWheel
+    price: 3000
+  - vehicle: RMCAPCFreightStorage
+    price: 4000
+  # Ammunition crates.
+  - vehicle: VehicleAmmoBoxLTBCannon
+    price: 3000
+  - vehicle: VehicleAmmoBoxAceAutocannon
+    price: 2500
+  - vehicle: VehicleAmmoBoxLTAA
+    price: 2500
+  - vehicle: VehicleAmmoBoxRocketLauncher
+    price: 3000
+  - vehicle: VehicleAmmoBoxGrenadeLauncher
+    price: 2500
+  - vehicle: VehicleAmmoBoxCupola
+    price: 1500
+  - vehicle: VehicleAmmoBoxFrontal
+    price: 2000
+  - vehicle: VehicleAmmoBoxRERotaryCannon
+    price: 2000
+  - vehicle: VehicleAmmoBoxSmokeLauncher
+    price: 1000
+  - vehicle: VehicleAmmoBoxFlareLauncher
+    price: 1000
+
+# The station counter's own goods: the licence. The counter also lists the parts (terminals.yml); V2's drop beacons
+# go in their own catalogue, added to the counter's extraCatalogs.
+- type: wfVehicleCatalog
+  id: WFMilitaryCatalogCounter
+  vehicles:
+  - vehicle: WFHeavyVehicleLicence
+    price: 25000

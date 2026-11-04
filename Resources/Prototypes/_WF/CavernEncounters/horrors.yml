@@ -1,0 +1,159 @@
+# The things in the dark (WFCavernEncounterSystem lays them out). Sprites are the repo's own, recoloured in the
+# prototype: the blind crawler is the aberrant flesh clamp (Mobs/Aliens/flesh.rsi), the Lamplighter the revenant
+# (Mobs/Ghosts/revenant.rsi) and the Echo the shade (_NF/Mobs/BloodCult/shade.rsi). Sounds are the owner's Black Mesa
+# set (Audio/_WF/CavernEncounters, Tools/_WF/LivingWorld/import_bms.py --encounters). Names are in
+# Locale/en-US/_WF/CavernEncounters/encounters.ftl.
+
+- type: entity
+  abstract: true
+  parent: SimpleSpaceMobBase
+  id: WFCavernHorrorBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavSmash: !type:Bool
+        false
+  - type: NPCRetaliation
+    attackMemoryLength: 15
+  - type: InputMover
+  - type: MobMover
+  - type: MovementAlwaysTouching
+  - type: CombatMode
+  - type: BreathingImmunity
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+
+# Blind crawlers hunt by sound (WFCavernCrawler): walk past them and they never notice; run and the nest comes for you.
+- type: entity
+  parent: WFCavernHorrorBase
+  id: WFMobBlindCrawler
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/flesh.rsi
+    color: "#d8cfc0"
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: clamp
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: clamp
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 4.2
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcClaw
+    soundHit:
+      collection: WFCavernEncounterCrawlerBite
+    damage:
+      types:
+        Slash: 6
+  - type: WFCavernCrawler
+    alertSound:
+      collection: WFCavernEncounterCrawlerAlert
+  - type: WFCavernTelegraph
+    sound:
+      collection: WFCavernEncounterCrawlerClick
+    minInterval: 6
+    maxInterval: 14
+
+# The Lamplighter (WFLamplighter): it puts your lights out one by one and can't move or strike while one is on it.
+- type: entity
+  parent: WFCavernHorrorBase
+  id: WFMobLamplighter
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Ghosts/revenant.rsi
+    color: "#4a4658"
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: idle
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: idle
+      Dead:
+        Base: ectoplasm
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      120: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 3.6
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcClaw
+    soundHit:
+      collection: WFCavernEncounterLamplighterStrike
+    damage:
+      types:
+        Slash: 12
+  - type: WFLamplighter
+    douseSound:
+      collection: WFCavernEncounterLamplighterDouse
+
+# The Echo (WFCavernEcho): it says back what it heard in the speaker's voice, and goes for whoever comes to look.
+- type: entity
+  parent: WFCavernHorrorBase
+  id: WFMobCavernEcho
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _NF/Mobs/BloodCult/shade.rsi
+    color: "#9fb2c4"
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: shade
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: shade
+      Dead:
+        Base: dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 4
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcClaw
+    soundHit:
+      collection: WFCavernEncounterEchoStrike
+    damage:
+      types:
+        Slash: 10
+  - type: ActiveListener
+    range: 12
+  - type: WFCavernEcho
+    lungeSound:
+      collection: WFCavernEncounterEchoLunge
+  - type: WFCavernTelegraph
+    sound:
+      collection: WFCavernEncounterEchoWhisper
+    minInterval: 20
+    maxInterval: 30
+    volume: -2

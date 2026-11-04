@@ -1,0 +1,234 @@
+# Merak's sand maws (WFSandMawSystem): a buried throat that lashes a tentacle round whoever comes near, reels them in
+# and swallows them into a belly of meat, acid and the loot of earlier meals. Slash the tentacle to get free; break a
+# belly wall to get out: under the maw, into the rock of the layer below.
+
+- type: entity
+  id: WFMerakSandMaw
+  name: sand maw
+  description: The sand here sinks into a slow, churning funnel. Something at the bottom is breathing.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _WF/SandMaw/leviathan.rsi
+    state: running
+    drawdepth: FloorObjects
+    noRot: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WFSandMaw
+    loot: !type:NestedSelector
+      tableId: WFSandMawLoot
+  - type: AmbientSound
+    enabled: true
+    volume: -6
+    range: 8
+    sound:
+      path: /Audio/Ambience/Objects/gravity_gen_hum.ogg
+
+- type: entity
+  id: WFSandMawBellyWall
+  parent: WallMeat
+  name: belly wall
+  description: Wet, ridged muscle. It gives a little under a fist.
+  categories: [ HideSpawnMenu ]
+  components:
+  # Muscle, not a ship's bulkhead: no wall armour, so a pickaxe, a knife or fists get through it.
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: WFSandMawBelly
+  - type: ArmorThickness
+    thickness: 0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/gib1.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  id: WFSandMawExit
+  name: torn gut
+  description: A ragged tear in the belly, and daylight somewhere above it. Walk into it to climb out.
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Structures/Decoration/flesh_decoration.rsi
+    state: open
+    drawdepth: FloorObjects
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      exit:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+
+- type: entity
+  id: WFSandMawAcid
+  name: digestive acid
+  description: A sizzling pool of stomach acid. Don't stand in it.
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Fluids/puddle.rsi
+    state: splat3
+    color: "#9fd85a"
+    drawdepth: FloorObjects
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      acid:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+  - type: DamageContacts
+    damage:
+      types:
+        Caustic: 2
+
+- type: entity
+  id: WFSandMawGlow
+  name: bioluminescent growth
+  description: A pale, glowing nodule on the belly floor.
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Structures/Specific/Anomalies/Cores/flesh_core.rsi
+    state: core
+    drawdepth: FloorObjects
+  - type: PointLight
+    radius: 3
+    energy: 1.2
+    color: "#e88f7a"
+
+- type: ropeType
+  id: WFSandMawTentacle
+  name: wf-sand-maw-tentacle
+  stiffness: 30000
+  dampingRatio: 1
+  maxStretch: 0.1
+  breakForce: 0
+  maxLength: 12
+  color: "#7a1f2a"
+  tautColor: "#c2353f"
+  width: 0.4
+  segmentTexture: /Textures/_WF/SandMaw/tentacle.png
+  taper: 0.35
+  segmentsPerMetre: 3
+  breakSound:
+    path: /Audio/Effects/gib1.ogg
+
+- type: entity
+  id: WFSandMawTentacleGrip
+  name: tentacle
+  description: A barbed tentacle coiled tight. Slash it apart before it drags you under.
+  categories: [ HideSpawnMenu ]
+  save: false
+  components:
+  - type: Sprite
+    sprite: Mobs/Aliens/Asteroid/goliath.rsi
+    state: goliath_tentacle_wiggle
+    color: "#c2353f"
+    drawdepth: OverMobs
+    scale: 0.7, 0.7
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: WFSandMawTentacle
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/gib1.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# Only an edge gets through it.
+- type: damageModifierSet
+  id: WFSandMawTentacle
+  coefficients:
+    Slash: 1
+    Piercing: 0.3
+    Heat: 0.5
+    Blunt: 0.1
+
+- type: entityTable
+  id: WFSandMawLoot
+  table: !type:AllSelector
+    children:
+    - id: MaterialBones1
+      amount: !type:RangeNumberSelector
+        range: 2, 4
+    # Someone came down with one; the rock round the belly is the way out.
+    - id: Pickaxe
+    - !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 5, 8
+      children:
+      - id: MaterialDiamond1
+        weight: 3
+      - id: GoldRingDiamond
+      - id: IngotGold1
+        weight: 2
+      - id: SpaceCash1000
+        weight: 2
+      - id: SpaceCash5000
+        weight: 0.5
+      - id: SpawnDungeonLootMaterialsValuableSingle
+        weight: 2
+      - id: SpawnDungeonLootGunT2
+        weight: 2
+      - id: SpawnDungeonLootGunT3
+      - id: SpawnDungeonLootGunT4
+        weight: 0.3
+      - id: SalvageSpawnerTreasureValuable
+
+# The belly's muscle takes blades and blows alike, and burns well.
+- type: damageModifierSet
+  id: WFSandMawBelly
+  coefficients:
+    Blunt: 1
+    Slash: 1.2
+    Piercing: 1
+    Heat: 1.5

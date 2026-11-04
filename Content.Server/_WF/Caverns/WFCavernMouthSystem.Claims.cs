@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using Content.Shared._WF.Caverns;
+using Content.Shared._WF.Planets;
 using Content.Shared.Maps;
 using Content.Shared.Parallax.Biomes;
 using Robust.Shared.Map;
@@ -388,7 +389,22 @@ public sealed partial class WFCavernMouthSystem
             return false;
 
         site = new WFCavernSite(origin, shape);
-        return CavernAllows(context, site) && GroundAllows(context, site);
+        return InBounds(context, site) && CavernAllows(context, site) && GroundAllows(context, site);
+    }
+
+    /// <summary>On a bounded world, the whole footprint and pad lie inside its circle.</summary>
+    private bool InBounds(MouthContext context, WFCavernSite site)
+    {
+        if (!TryComp<WFPlanetBoundsComponent>(context.Ground, out var bounds) || bounds.Radius <= 0f)
+            return true;
+
+        foreach (var offset in site.Shape.Pad(context.Spec.PadRadius))
+        {
+            if (!bounds.ContainsTile(site.Origin + offset))
+                return false;
+        }
+
+        return true;
     }
 
     /// <summary>Anchors a candidate: the gate candidate where it is, the others spread by their fractions over the spots whose whole pad stays <see cref="CellMargin"/> inside the cell.</summary>
@@ -529,14 +545,13 @@ public sealed partial class WFCavernMouthSystem
         return grids.Count == 0 ? Block.None : Block.Waiting;
     }
 
-    /// <summary>Cuts the mouth: ring and hole on the ground, the pad in the cavern, then shades, rim and climb point.</summary>
+    /// <summary>Cuts the mouth: ring and hole on the ground, the pad in the cavern, then shades, rim and stairs.</summary>
     // One SetTiles per map. Pinned tiles skip tile, entity and decal generation, so this holds on unloaded chunks too.
     private WFCavernMouth Stamp(Entity<WFCavernGroundComponent> ground, MouthContext context, WFCavernSite site, WFCavernMouthKind kind)
     {
         var spec = context.Spec;
         var mouth = new WFCavernMouth(site.Origin, site.Shape, kind);
         var groundGrid = (context.Ground.Owner, context.Ground.Comp2);
-        var levelGrid = (context.Level.Owner, context.Level.Comp2);
         var groundBiome = context.Ground.Comp1;
         var levelBiome = context.Level.Comp1;
         var pad = mouth.Pad(spec.PadRadius);
@@ -602,7 +617,8 @@ public sealed partial class WFCavernMouthSystem
             }
         }
 
-        SpawnClimb(ground, context, levelGrid, mouth.ClimbTile);
+        // Up from the hole's edge to the lip: the stairs sit under the hole tile beside the stairs top.
+        SpawnStairs(ground, context, mouth.ClimbTile - spec.StairsSide.ToIntVec(), spec.StairsSide);
 
         ground.Comp.Mouths.Add(mouth);
         return mouth;
@@ -632,8 +648,11 @@ public sealed partial class WFCavernMouthSystem
         }
     }
 
-    /// <summary>Spawns the shade over a hole tile unless it has one: the cavern, its air and the landing it reports.</summary>
-    private void SpawnShade(Entity<WFCavernGroundComponent> ground, MouthContext context, Vector2i index, float landingMultiplier)
+    /// <summary>
+    /// Spawns the shade over a hole tile unless it has one: the cavern, its air and the landing it reports. A plain
+    /// shade, over stairs, draws no lip.
+    /// </summary>
+    private void SpawnShade(Entity<WFCavernGroundComponent> ground, MouthContext context, Vector2i index, float landingMultiplier, bool plain = false)
     {
         if (ground.Comp.Shades.ContainsKey(index))
             return;
@@ -643,21 +662,48 @@ public sealed partial class WFCavernMouthSystem
         shaft.Cavern = context.Cavern.ID;
         shaft.Air = WFCavernAirClassifier.Classify(_proto.Index(context.Cavern.Level).Atmosphere);
         shaft.LandingMultiplier = landingMultiplier;
+        shaft.Plain = plain;
         Dirty(shade, shaft);
         ground.Comp.Shades[index] = shade;
     }
 
-    /// <summary>Anchors a climb point in the cavern under a ground tile unless one is there, its delay scaled by the surface's gravity.</summary>
-    private void SpawnClimb(Entity<WFCavernGroundComponent> ground, MouthContext context, Entity<MapGridComponent> levelGrid, Vector2i index)
+    /// <summary>
+    /// Cuts the world's stairs in the cavern under a hole tile, coming out on the ground tile beside it on a side,
+    /// unless some stand there. The landing's own entity, such as a pool's water, is taken off the tile.
+    /// </summary>
+    private void SpawnStairs(Entity<WFCavernGroundComponent> ground, MouthContext context, Vector2i index, Direction side)
     {
-        if (ground.Comp.ClimbPoints.ContainsKey(index))
+        if (ground.Comp.Stairways.ContainsKey(index))
             return;
 
-        var climb = SpawnAnchored(context.Spec.ClimbPoint, levelGrid, index);
-        var climbComp = EnsureComp<WFCavernClimbComponent>(climb);
-        climbComp.Delay = context.Spec.ClimbSeconds * Math.Clamp(context.Surface.Gravity, 1f, 2.5f);
-        Dirty(climb, climbComp);
-        ground.Comp.ClimbPoints[index] = climb;
+        var levelGrid = (context.Level.Owner, context.Level.Comp2);
+
+        if (context.Spec.LandingEntity is { } landing)
+        {
+            var doomed = new List<EntityUid>();
+            var anchored = _map.GetAnchoredEntities(levelGrid.Owner, levelGrid.Item2, index);
+
+            while (anchored.MoveNext(out var uid))
+            {
+                if (MetaData(uid.Value).EntityPrototype?.ID == landing.Id)
+                    doomed.Add(uid.Value);
+            }
+
+            foreach (var uid in doomed)
+            {
+                Del(uid);
+            }
+        }
+
+        // The stairs face away from the side they come out on.
+        var stairs = SpawnAttachedTo(context.Spec.Stairs, _map.GridTileToLocal(levelGrid.Owner, levelGrid.Item2, index),
+            rotation: side.GetOpposite().ToAngle());
+        var xform = Transform(stairs);
+
+        if (!xform.Anchored && !_transform.AnchorEntity((stairs, xform), levelGrid, index))
+            Log.Error($"Could not anchor {ToPrettyString(stairs)} on {ToPrettyString(levelGrid.Owner)} at {index}.");
+
+        ground.Comp.Stairways[index] = stairs;
     }
 
     /// <summary>

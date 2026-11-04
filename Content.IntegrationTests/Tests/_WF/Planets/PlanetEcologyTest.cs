@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Content.IntegrationTests.Pair;
 using Content.Server._WF.Planets;
 using Content.Server.Parallax;
 using Content.Server.Body.Components;
 using Content.Server.Temperature.Components;
+using Content.Shared._Shitmed.Body.Components;
 using Content.Shared._WF.Planets;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -36,6 +38,8 @@ public sealed class PlanetEcologyTest
         var layers = new List<EntityUid>();
         var wildlifeTile = (Vector2i?) null;
         var wildlifeChunk = Vector2i.Zero;
+        // Spawners in distinct chunks: a region's table may roll nothing, so several are tried.
+        var wildlifeTiles = new List<Vector2i>();
         var mobs = new List<EntityUid>();
         await server.WaitAssertion(() =>
         {
@@ -67,7 +71,7 @@ public sealed class PlanetEcologyTest
                 Assert.That(tile.HasValue && !tile.Value.IsEmpty, Is.True, "Natural terrain has a hole.");
                 generator.TryGetEntity(pos, biome.Layers, tile!.Value, biome.Seed,
                     (Entity<MapGridComponent>?) null, out var feature);
-                if (feature is "FloorLavaEntity" or "FloorLiquidPlasmaEntity" or "MonoFloorWaterEntity" or "WFBloodRiver")
+                if (feature is "FloorLavaEntity" or "FloorLiquidPlasmaEntity" or "MonoFloorWaterEntity" or "WFBloodOcean")
                     rivers++;
                 if (feature is "WFFleshTree" or "WFFleshPustuleTree" or "WFFleshPolyp")
                     fleshFlora++;
@@ -85,6 +89,8 @@ public sealed class PlanetEcologyTest
                 {
                     wildlife++;
                     wildlifeTile ??= pos;
+                    if (wildlifeTiles.Count < 8 && wildlifeTiles.All(other => SharedMapSystem.GetChunkIndices(other, 8) != SharedMapSystem.GetChunkIndices(pos, 8)))
+                        wildlifeTiles.Add(pos);
                 }
             }
             TestContext.Out.WriteLine($"{name}: open {open}/{count}, ore walls {rocks}/{count}, fauna {wildlife}/{count}");
@@ -109,17 +115,34 @@ public sealed class PlanetEcologyTest
             }
             Assert.That(wildlife, Is.GreaterThan(0), "No ambient wildlife was reachable through the terrain layers.");
             Assert.That((double) wildlife / count, Is.LessThan(0.02), "Wildlife must not flood loaded regions.");
-
-            wildlifeChunk = SharedMapSystem.GetChunkIndices(wildlifeTile!.Value, 8) * 8;
-            server.System<BiomeSystem>().WfLoadChunk(
-                (layers[0], em.GetComponent<BiomeComponent>(layers[0]), em.GetComponent<MapGridComponent>(layers[0])),
-                wildlifeChunk);
         });
-        await server.WaitRunTicks(2);
+        // Load one spawner's chunk and let it roll; a table that rolled nothing hands over to the next spawner.
+        foreach (var candidate in wildlifeTiles)
+        {
+            wildlifeTile = candidate;
+            wildlifeChunk = SharedMapSystem.GetChunkIndices(candidate, 8) * 8;
+            await server.WaitPost(() => server.System<BiomeSystem>().WfLoadChunk(
+                (layers[0], em.GetComponent<BiomeComponent>(layers[0]), em.GetComponent<MapGridComponent>(layers[0])),
+                wildlifeChunk));
+            await server.WaitRunTicks(2);
+            var any = false;
+            await server.WaitPost(() =>
+            {
+                server.System<WFPlanetFaunaSystem>().RefreshPopulation(new[] {
+                    new EntityCoordinates(layers[0], (Vector2) candidate + new Vector2(30, 0)) });
+                var probe = em.EntityQueryEnumerator<MobStateComponent, TransformComponent>();
+                while (probe.MoveNext(out _, out _, out var probeXform))
+                    any |= probeXform.MapUid == layers[0];
+            });
+            if (any)
+                break;
+            await server.WaitPost(() => server.System<BiomeSystem>().WfUnloadChunk(
+                (layers[0], em.GetComponent<BiomeComponent>(layers[0]), em.GetComponent<MapGridComponent>(layers[0])),
+                wildlifeChunk));
+            await server.WaitRunTicks(1);
+        }
         await server.WaitAssertion(() =>
         {
-            server.System<WFPlanetFaunaSystem>().RefreshPopulation(new[] {
-                new EntityCoordinates(layers[0], (Vector2)wildlifeTile!.Value + new Vector2(30, 0)) });
             var query = em.EntityQueryEnumerator<MobStateComponent, TransformComponent>();
             while (query.MoveNext(out var uid, out var mob, out var xform))
             {
@@ -129,14 +152,15 @@ public sealed class PlanetEcologyTest
                 Assert.That(xform.Anchored, Is.False, "Biome wildlife must be able to roam.");
                 Assert.That(mob.CurrentState, Is.EqualTo(MobState.Alive));
                 if (name is "Fervidus" or "Aerumna" or "Thrascias")
-                    Assert.That(em.HasComponent<RespiratorComponent>(uid), Is.False,
+                    // An air-breathing mob keeps its Respirator but may be immune to needing air.
+                    Assert.That(!em.HasComponent<RespiratorComponent>(uid) || em.HasComponent<BreathingImmunityComponent>(uid), Is.True,
                         "Low-oxygen planets need wildlife that does not suffocate in its native atmosphere.");
                 if (em.TryGetComponent<TemperatureComponent>(uid, out var temperature))
                 {
                     var ambient = name switch
                     {
                         "Fervidus" => 373.15f,
-                        "Merak" => 318.15f,
+                        "Merak" => 305.15f,
                         "Aerumna" => 285.15f,
                         "Thrascias" => 180f,
                         "Carcinoma" => 310.15f,
@@ -146,7 +170,7 @@ public sealed class PlanetEcologyTest
                         "Wildlife cannot tolerate its native temperature.");
                 }
             }
-            Assert.That(mobs, Is.Not.Empty, "The sampled fauna spawner did not create a mob.");
+            Assert.That(mobs, Is.Not.Empty, $"None of {wildlifeTiles.Count} sampled fauna spawners created a mob.");
             var biomes = server.System<BiomeSystem>();
             Entity<BiomeComponent, MapGridComponent> ground =
                 (layers[0], em.GetComponent<BiomeComponent>(layers[0]), em.GetComponent<MapGridComponent>(layers[0]));

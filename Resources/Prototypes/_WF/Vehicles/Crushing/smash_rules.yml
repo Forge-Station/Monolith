@@ -1,0 +1,388 @@
+# What a grid vehicle smashes instead of being stopped by, on Wolfgate's own prototypes. The settings are RMC-14's
+# VehicleSmashable settings for the same kind of thing, with the weight classes Weak < Light < Medium < Heavy. A rule
+# gives them to every entity prototype it matches without a VehicleSmashable component on the prototype (a component
+# still wins); see Docs/_WF/Vehicles/crushing.md.
+#
+# A rule only ever matches a prototype that has both Damageable and Destructible, and never a wall or anything
+# built on an indestructible base (VehicleSmashRuleSystem.NeverParents). VehicleSmashRuleTest checks every entity
+# prototype: no wall, nothing indestructible, no safe, deposit box,
+# shuttle console, thruster, gyroscope, generator, shield or bank and shipyard machine, and no two rules at one priority for the
+# same prototype. Keep the selectors narrow: list the base prototype of a family, not a component half the game has.
+#
+# Ship hull (the windows and airlocks ships are built from) is broken by tanks only: its rules set minDestroyWeightClass
+# to Medium, the tank class, and every lighter vehicle is stopped by it and leaves it undamaged. Owner decision of
+# 2026-10-11. The hull rules and the plain rules below name their prototypes so that no prototype is in both; the data
+# test checks that all the hull is behind a rule only a tank can use.
+#
+# The economy is no hull and no vehicle breaks it: the lockers, crates and vending machines below leave out the secure,
+# access-locked, trade and trade-station ones, and the data test checks that none of them is behind any rule.
+
+# Tables and racks. RMC: smashed, the vehicle goes on.
+- type: vehicleSmashRule
+  id: WFVehicleSmashTables
+  parents:
+  - TableBase
+  - N14FreeTableBase
+  - Rack
+
+# Lockers and wardrobes. The gun safes are safes, and the N14 closets include its safes. A locker with a Lock or an
+# AccessReader is access-locked and keeps someone's property (personal, evidence, armoury and trade lockers), so no
+# vehicle breaks it open: owner decision of 2026-10-11, economy fixtures are not hull.
+- type: vehicleSmashRule
+  id: WFVehicleSmashLockers
+  parents:
+  - ClosetBase
+  excludeParents:
+  - GunSafe
+  - N14ClosetBase
+  blacklist:
+    components:
+    - Lock
+    - AccessReader
+  # Owner, 2026-10-17: small things never stop a vehicle; a light one only slows down.
+  slowdownBelowWeightClass: Medium
+  slowdownMultiplier: 0.5
+  slowdownDuration: 0.4
+
+# Crates. A secure or locked crate (Lock, AccessReader: armoury, ammunition, security and encounter loot) and a trade crate
+# (cargo someone is paid for) are economy fixtures, and a store crate is a purchase: no vehicle breaks them open.
+- type: vehicleSmashRule
+  id: WFVehicleSmashCrates
+  parents:
+  - CrateGeneric
+  blacklist:
+    components:
+    - Lock
+    - AccessReader
+    - TradeCrate
+    - Store
+
+- type: vehicleSmashRule
+  id: WFVehicleSmashBarrels
+  parents:
+  - BaseBarrel
+  - N14BaseBarrel
+
+# Beds and couches. An operating table is a machine.
+- type: vehicleSmashRule
+  id: WFVehicleSmashBeds
+  parents:
+  - Bed
+  excludeParents:
+  - OperatingTable
+
+- type: vehicleSmashRule
+  id: WFVehicleSmashSofas
+  parents:
+  - BenchSofaMiddle
+  - BenchSofaCorpMiddle
+  - BenchSofaCorner
+  - BenchSofaCorpCorner
+  - BenchComfy
+
+# Vending machines, but not the ones fixed to a wall, and not the economy's: a vendor that cannot be unanchored
+# (BaseStructureDisableAnchoring) is a fixture of a station, outpost or point of interest, which takes in the trade
+# station vendors, the traders' stock and the weapon and faction vendors; the bounty vendors, access-locked vendors
+# (AccessReader, CompanyAccessReader) and the uplinks and stores (Store) are economy too. Owner decision of 2026-10-11.
+- type: vehicleSmashRule
+  id: WFVehicleSmashVendingMachines
+  whitelist:
+    components:
+    - VendingMachine
+  excludeParents:
+  - BaseStructureDisableAnchoring
+  - VendingMachineBountyVend
+  - VendingMachineBountyVendPunk
+  blacklist:
+    components:
+    - WallMount
+    - AccessReader
+    - CompanyAccessReader
+    - Store
+
+# Machines and computers: a vehicle drives through one as through a table (owner, 2026-10-13: vehicles were getting
+# stuck on computers and fax machines). Left alone are the parts a ship cannot fly, fight, power or pay without and the
+# machines that hold a person or a hazard (the components below), wall-mounted and access-locked machines, vending
+# machines (their own rule above) and the fixtures of a station, outpost or point of interest.
+- type: vehicleSmashRule
+  id: WFVehicleSmashMachines
+  parents:
+  - BaseMachine
+  - BaseStructureComputer
+  # Besides the fixtures: the disposal units (their own rule below), and the machines that are built not to break
+  # (research servers, the economy's lathes and furnaces, ammunition loaders and the like).
+  excludeParents:
+  - BaseStructureDisableAnchoring
+  - DisposalUnit
+  - MailingUnit
+  - AmmoLoader
+  - AmmoLoaderSmall
+  - BaseRdServerFaction
+  - CentrifugeLathe
+  - DataChitStorageServer
+  - IndustrialFurnaceEconomy
+  - PrecisionAssemblerEconomy
+  - TechDiskPrinter
+  - MachineAnomalyGenerator
+  - MachineHeavyFTLDriveConsole
+  - ReagentGrinderIndustrial
+  - Recycler
+  blacklist:
+    components:
+    - Item
+    - ResearchServer
+    - Thruster
+    - WFLandingThruster
+    - ShuttleConsole
+    - FTLDrive
+    - FTLBeacon
+    - StationAnchor
+    - ShipShield
+    - ShipShieldEmitter
+    - Gun
+    - Smes
+    - PowerNetworkBattery
+    - PowerSupplier
+    - PortableGenerator
+    - FuelGenerator
+    - NuclearReactor
+    - TegGenerator
+    - GravityGenerator
+    - SingularityGenerator
+    - ContainmentFieldGenerator
+    - Emitter
+    - AmeController
+    - ParticleAcceleratorControlBox
+    - ParticleAcceleratorEmitter
+    - ParticleAcceleratorEndCap
+    - ParticleAcceleratorFuelChamber
+    - ParticleAcceleratorPowerBox
+    - RadiationCollector
+    - StationAiCore
+    - CryoSleep
+    - CryoPod
+    - CloningPod
+    - MedicalScanner
+    - SafetyDepositBox
+    - SafetyDepositConsole
+    - BankATM
+    - StationBankATM
+    - ShipyardConsole
+    - VendingMachine
+    - WallMount
+    - AccessReader
+    - CompanyAccessReader
+    - Store
+
+# Fences are knocked down and the vehicle goes on; a light one slows down.
+- type: vehicleSmashRule
+  id: WFVehicleSmashFences
+  parents:
+  - BaseFenceMetal
+  - BaseFenceWood
+  slowdownBelowWeightClass: Medium
+  slowdownMultiplier: 0.5
+  slowdownDuration: 0.4
+
+# The wooden wall frame is a girder, which no rule names, and only inherits from a barricade.
+- type: vehicleSmashRule
+  id: WFVehicleSmashBarricades
+  parents:
+  - BaseBarricade
+  - InflatableWall
+  excludeParents:
+  - N14WallWoodFrame
+  slowdownBelowWeightClass: Medium
+  slowdownMultiplier: 0.5
+  slowdownDuration: 0.4
+
+# Plain windows are smashed through. Reinforced, shuttle and plastitanium windows are hull, in the rule below.
+- type: vehicleSmashRule
+  id: WFVehicleSmashWindows
+  parents:
+  - Window
+  - WindowDirectional
+  excludeParents:
+  - ReinforcedWindow
+  - ReinforcedPlasmaWindow
+  - ReinforcedUraniumWindow
+  - WindowReinforcedDirectional
+  - PlasmaReinforcedWindowDirectional
+  - UraniumReinforcedWindowDirectional
+  - ShuttleWindow
+
+# Hull windows: what ships are built from. A tank breaks one in a hit, through its own thresholds, and drives on; a
+# lighter vehicle is stopped and does nothing to it. The outposts' own windows are 10 to 100 times tougher on purpose
+# (OUTPOST ONLY) and are no ship, so no vehicle breaks them.
+- type: vehicleSmashRule
+  id: WFVehicleSmashHullWindows
+  parents:
+  - ReinforcedWindow
+  - ReinforcedPlasmaWindow
+  - ReinforcedUraniumWindow
+  - WindowReinforcedDirectional
+  - PlasmaReinforcedWindowDirectional
+  - UraniumReinforcedWindowDirectional
+  - ShuttleWindow
+  - PlastitaniumWindowBase
+  excludeParents:
+  - ReinforcedWindowOutpost
+  - ReinforcedWindowDiagonalOutpost
+  - PlastitaniumWindowOutpost
+  - PlastitaniumWindowDiagonalOutpost
+  damageOnHit: 10000
+  minDestroyWeightClass: Medium
+
+# Wolfgate has no window frames; the grille a window is set on is the nearest thing, and RMC's frame settings fit it.
+- type: vehicleSmashRule
+  id: WFVehicleSmashWindowFrames
+  parents:
+  - Grille
+
+# Doors open for a driver who has access. A powered door the driver cannot open holds; an unpowered one is smashed, and
+# only a heavy vehicle goes on through it.
+- type: vehicleSmashRule
+  id: WFVehicleSmashWindoors
+  parents:
+  - BaseWindoor
+  requiresDoorUnpowered: true
+  minContinueWeightClass: Heavy
+
+# Airlocks and firelocks, not the windoors above. Left alone: external and docking airlocks (a ship's hull, in the rule
+# below), heavy glass airlocks, vault doors and secret doors (which are walls).
+- type: vehicleSmashRule
+  id: WFVehicleSmashDoors
+  whitelist:
+    components:
+    - Airlock
+    - Firelock
+  excludeParents:
+  - BaseWindoor
+  - AirlockExternal
+  - AirlockShuttle
+  - AirlockHeavyGlass
+  blacklist:
+    components:
+    - Docking
+    tags:
+    - HighSecDoor
+    - Wall
+  requiresDoorUnpowered: true
+  minContinueWeightClass: Heavy
+  smashSound:
+    collection: MetalCrunch
+
+# Hull doors: the external and docking airlocks of a ship. They open for a driver with access like any door; an unpowered
+# one is broken by a tank, which stops where it breaks it, and is a wall to anything lighter. A powered one that the
+# driver cannot open holds a tank too. The outposts' docking airlocks are 10 times tougher on purpose (OUTPOST ONLY).
+- type: vehicleSmashRule
+  id: WFVehicleSmashHullDoors
+  parents:
+  - AirlockExternal
+  - AirlockShuttle
+  excludeParents:
+  - AirlockExternalGlassShuttleMieyoLockedOutpost
+  - AirlockExternalShuttleMieyoLockedOutpost
+  - AirlockGlassShuttleNfsdOutpost
+  - AirlockGlassShuttleOutpost
+  - AirlockGlassShuttleUSSPOutpostLocked
+  - AirlockShuttleNfsdOutpost
+  - AirlockShuttleOutpost
+  - AirlockShuttleUSSPOutpostLocked
+  damageOnHit: 10000
+  requiresDoorUnpowered: true
+  minDestroyWeightClass: Medium
+  minContinueWeightClass: Heavy
+  smashSound:
+    collection: MetalCrunch
+
+# Shutters. Blast doors are armour.
+- type: vehicleSmashRule
+  id: WFVehicleSmashShutters
+  parents:
+  - BaseShutter
+  excludeParents:
+  - BlastDoor
+  minContinueWeightClass: Heavy
+  smashSound:
+    collection: MetalCrunch
+
+# Trees: a light vehicle slows down, a weak one cannot knock one over.
+- type: vehicleSmashRule
+  id: WFVehicleSmashTrees
+  parents:
+  - BaseTree
+  - BaseTreeCrocus
+  - CrocusStrippedTree
+  minDestroyWeightClass: Light
+  slowdownBelowWeightClass: Medium
+  slowdownMultiplier: 0.5
+  slowdownDuration: 0.4
+
+# Stumps, including the one a Crocus tree leaves where it fell, under the vehicle that knocked it down.
+- type: vehicleSmashRule
+  id: WFVehicleSmashStumps
+  # Ahead of the tree rule the plain stumps inherit: a stump is no tree, and any vehicle drives over it.
+  priority: 1
+  parents:
+  - CrocusStump
+  - FloraTreeStump
+  - FloraTreeStumpConifer
+
+- type: vehicleSmashRule
+  id: WFVehicleSmashBoulders
+  parents:
+  - BaseRock
+  - N14DecorStalagmite1
+  minDestroyWeightClass: Medium
+
+# Sandbags and the like (owner, 2026-10-17: a tank getting stuck on sandbags feels bad). A tank trap is built to stop
+# vehicles and still does.
+- type: vehicleSmashRule
+  id: WFVehicleSmashSandbags
+  parents:
+  - N14BarricadeSandbagSingle
+  - N14BarricadeWindow
+  excludeParents:
+  - N14BarricadeTanktrap
+  slowdownBelowWeightClass: Medium
+  slowdownMultiplier: 0.5
+  slowdownDuration: 0.4
+
+# Clutter and junk furniture: driven through like a table, a light vehicle slows down.
+- type: vehicleSmashRule
+  id: WFVehicleSmashClutter
+  parents:
+  - N14DecorFloorPalletStack
+  - N14JunkWoodBase
+  - N14ShelfWood1
+  - Dresser
+  - BaseRailing
+  - RMCFenceBroken
+  - BaseScrapLarge
+  - BaseShowcaseRobot
+  - BaseTarget
+  - TargetDarts
+  - BasePlaceableInstrument
+  - WoodenKeg
+  - PlasticFlapsClear
+  - PlasticFlapsOpaque
+  - AirlockAssembly
+  - AirlockHeavyAssembly
+  # Built to take a beating.
+  excludeParents:
+  - TargetStrange
+  slowdownBelowWeightClass: Medium
+  slowdownMultiplier: 0.5
+  slowdownDuration: 0.4
+
+- type: vehicleSmashRule
+  id: WFVehicleSmashHydroponicsTrays
+  parents:
+  - hydroponicsTray
+
+- type: vehicleSmashRule
+  id: WFVehicleSmashDisposalUnits
+  parents:
+  - DisposalUnit
+  - MailingUnit

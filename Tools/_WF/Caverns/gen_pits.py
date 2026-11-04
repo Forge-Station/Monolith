@@ -1,15 +1,19 @@
-"""Builds the cavern mouth RSIs: one per world, the crumbling lip of a hole drawn over the hole's own tiles.
+"""Builds the cavern mouth art: one neutral RSI for every world, the crumbling lip of a hole drawn over its own tiles.
 
 A hole in the ground is empty tiles, and the z-level renderer draws the cavern below through them; the lip tiles around
 it are solid ground the cavern never shows through. So this art only ever paints the hole's own tiles, and leaves their
 middle clear. It is drawn on the dual grid: each piece is centred on a corner of the hole's tiles and covers a quarter
 of each of the four tiles around it, painting only the quarters that are hole.
 
-Over those quarters the ground overhangs the opening by a few wandering pixels, in the world's ground texture so it
-reads as the lip itself, and ends in a dark broken edge. A hole's corners are rounded off and a corner of ground poking
-into the hole gets the lip wrapped round it, so no square corner shows. Inside the opening: a suggestion of shaft wall
-under a north rim, a sliver of side wall inside east and west rims and a soft shadow along every rim, all fading out
-before the middle of a tile, and the world's own touch hanging off the lip now and then.
+Over those quarters the ground overhangs the opening by a few wandering pixels and ends in a dark broken edge. The art
+carries no ground of its own there, only the edge's shading over it: the client lays the real floor round the hole
+under the overhang, cut to each piece's lip mask from `pit_lips.png`, so the lip matches whatever the hole was cut in.
+A hole's corners are rounded off and a corner of ground poking into the hole gets the lip wrapped round it, so no square
+corner shows. Inside the opening: a suggestion of shaft wall under a north rim, a sliver of side wall inside east and
+west rims and a soft shadow along every rim, all fading out before the middle of a tile.
+
+`pit_lips.png` holds every piece's lip mask, white where the lip overhangs, in 32-pixel cells left to right and then
+down, `LIP_COLUMNS` to a row, in the order of the RSI's piece states (every state but `pit`).
 
 States (WFCavernShadeVisualsSystem picks them; the names must match its own):
 - `v<mask>_<labels>_<variant>`: `mask` says which of the four tiles are hole (1 NW, 2 NE, 4 SW, 8 SE), 1 to 14; a
@@ -56,47 +60,16 @@ SHADOW_ALPHA = 0.6
 REACH = (12.0, 16.0)  # everything in the opening fades out between these distances from the lip tiles
 MARGIN = 2  # details keep this far from a piece's borders
 
-TG = ("CC-BY-SA-3.0", "tgstation")
+LIP_COLUMNS = 16  # cells per row of the lip mask sheet
+EDGE_ALPHA = 0.8  # how dark the broken edge lies over the floor
+LIP_SHADE = 0.2  # how much the overhang darkens the floor just behind its lit rim, fading out over 3 pixels
+ICON_GROUND = (112, 102, 90)  # the lip of the placement icon, which has no floor under it
 
-# The ground a mouth cuts, which the lip continues, and its licence; then the look: the shaft wall's top and foot
-# colours, rubble, the lip's lit edge (colour and strength) and the world's own touch.
-WORLDS = {
-    "asclepiu": {
-        "ground": "Resources/Textures/_CE/Tiles/Grass/grass.png",
-        "license": ("CC-BY-SA-3.0", "TheShuEd, CrystallPunk-14 #290"),
-        "wall": (112, 84, 54), "deep": (40, 34, 28), "rubble": (98, 88, 72),
-        "edge": ((255, 255, 230), 0.12), "touch": "roots",
-    },
-    "fervidus": {
-        "ground": "Resources/Textures/Tiles/Planet/basalt.png",
-        "license": TG,
-        "wall": (104, 80, 68), "deep": (40, 22, 18), "rubble": (70, 60, 58),
-        "edge": ((255, 200, 160), 0.14), "touch": "embers",
-    },
-    "merak": {
-        "ground": "Resources/Textures/Tiles/Asteroid/asteroid.png",
-        "license": TG,
-        "wall": (182, 132, 82), "deep": (70, 46, 30), "rubble": (140, 104, 70),
-        "edge": ((255, 240, 200), 0.18), "touch": "sand",
-    },
-    "aerumna": {
-        "ground": "Resources/Textures/Tiles/chromite.png",
-        "license": ("CC-BY-NC-SA-3.0", "Mojave-Sun, recoloured by TheShuEd"),
-        "wall": (112, 98, 156), "deep": (16, 12, 26), "rubble": (74, 66, 100),
-        "edge": ((214, 190, 255), 0.42), "touch": "glints",
-    },
-    "thrascias": {
-        "ground": "Resources/Textures/Tiles/Planet/Snow/snow.png",
-        "license": TG,
-        "wall": (184, 214, 236), "deep": (40, 62, 96), "rubble": (150, 176, 200),
-        "edge": ((255, 255, 255), 0.0), "touch": "ice",
-    },
-    "carcinoma": {
-        "ground": "Resources/Textures/Tiles/meat.png",
-        "license": ("CC0-1.0", "EmoGarbage404, space-station-14 #13766"),
-        "wall": (156, 48, 64), "deep": (42, 8, 16), "rubble": (110, 40, 52),
-        "edge": ((255, 170, 180), 0.16), "touch": "sinew",
-    },
+# The look, the same on every world: the shaft wall's top and foot colours, rubble, the lip's lit edge (colour and
+# strength) and the world's own touch (none: every world shares this art).
+LOOK = {
+    "wall": (124, 108, 92), "deep": (34, 30, 28), "rubble": (96, 88, 80),
+    "edge": ((255, 250, 235), 0.15), "touch": None,
 }
 
 # The four tiles around a piece's corner: which way each lies (x, y up) and its mask bit.
@@ -263,8 +236,9 @@ def border_distance(px, py):
     return min(HALF - abs(px), HALF - abs(py))
 
 
-def draw_piece(world, look, ground, mask, labels, variant):
-    piece = Piece(world, mask, labels, variant)
+def draw_piece(look, mask, labels, variant):
+    """A piece's drawing and its lip mask: white where the lip overhangs the hole and the floor shows under it."""
+    piece = Piece("neutral", mask, labels, variant)
     rng = piece.rng
     salt = rng.randrange(1 << 20)
     smooth, field, reach, inside = {}, {}, {}, {}
@@ -281,6 +255,7 @@ def draw_piece(world, look, ground, mask, labels, variant):
             inside[(x, y)] = piece.inside_tiles(px, py)
 
     image = Image.new("RGBA", (TILE, TILE), (0, 0, 0, 0))
+    lip = Image.new("RGBA", (TILE, TILE), (0, 0, 0, 0))
     kinds = {}
     under = {}
 
@@ -293,7 +268,10 @@ def draw_piece(world, look, ground, mask, labels, variant):
             f = field[(x, y)]
             n = noise(x, y, salt + 1)
             if f > 0:
-                image.putpixel((x, y), overhang_colour(look, ground, x, y, f, n) + (255,))
+                lip.putpixel((x, y), (255, 255, 255, 255))
+                colour, alpha = overhang_shade(look, f, n)
+                if alpha > 0.004:
+                    image.putpixel((x, y), colour + (round(255 * alpha),))
                 kinds[(x, y)] = "edge" if f <= EDGE else "overhang"
                 continue
 
@@ -324,7 +302,7 @@ def draw_piece(world, look, ground, mask, labels, variant):
                 image.putpixel((x, y), tuple(int(c) for c in colour) + (round(255 * alpha),))
 
     details(look, piece, rng, image, kinds, under, smooth, reach)
-    return image
+    return image, lip
 
 
 def over(top, top_alpha, bottom, bottom_alpha):
@@ -336,15 +314,14 @@ def over(top, top_alpha, bottom, bottom_alpha):
     return colour, alpha
 
 
-def overhang_colour(look, ground, x, y, f, n):
-    """The lip over the hole: the ground itself, darkening towards a broken edge, with a lit rim just behind it."""
-    texture = ground.getpixel(((x + HALF) % TILE, (y + HALF) % TILE))[:3]
+def overhang_shade(look, f, n):
+    """The shading laid over the floor on the lip: a dark broken edge, a lit rim just behind it, then a fading shadow."""
     if f <= EDGE:
-        return scale(mix(texture, look["deep"], 0.35), 0.5 * (1.0 + 0.08 * n))
+        return scale(look["deep"], 0.5 * (1.0 + 0.08 * n)), EDGE_ALPHA
     colour, strength = look["edge"]
     if f <= EDGE + 1.0 and strength > 0:
-        return tuple(round(c) for c in mix(texture, colour, strength))
-    return scale(texture, lerp(0.8, 1.0, (f - EDGE - 1.0) / 3.0))
+        return colour, strength
+    return (0, 0, 0), LIP_SHADE * (1.0 - smoothstep((f - EDGE - 1.0) / 3.0))
 
 
 def facing(smooth, x, y):
@@ -544,47 +521,60 @@ def icicle(image, kinds, reach, under, rng, x):
             put(image, kinds, reach, x + 1, y + i, (170, 214, 238), OPENING)
 
 
-def draw_icon(world, look, ground):
-    """A lone hole tile over black: each quarter from the corner piece whose only hole tile it is."""
+def draw_icon(look):
+    """A lone hole tile over black, its lip on a plain ground: each quarter from the corner piece whose only hole tile it is."""
     icon = Image.new("RGBA", (TILE, TILE), (0, 0, 0, 255))
+    ground = Image.new("RGBA", (TILE, TILE), ICON_GROUND + (255,))
     # Quarter of the tile (left, top) and the corner piece that holds it, whose own quarter sits opposite.
     quarters = {(HALF, 0): 4, (0, 0): 8, (HALF, HALF): 1, (0, HALF): 2}
     for (left, top), mask in quarters.items():
-        piece = draw_piece(world, look, ground, mask, 0, 0)
-        region = piece.crop((HALF - left, HALF - top, TILE - left, TILE - top))
-        icon.alpha_composite(region, (left, top))
+        piece, lip = draw_piece(look, mask, 0, 0)
+        box = (HALF - left, HALF - top, TILE - left, TILE - top)
+        floor = Image.new("RGBA", (TILE, TILE), (0, 0, 0, 0))
+        floor.paste(ground, (0, 0), lip)
+        icon.alpha_composite(floor.crop(box), (left, top))
+        icon.alpha_composite(piece.crop(box), (left, top))
     return icon
 
 
-def build(world, look):
-    source = look["ground"]
-    license_id, author = look["license"]
-    ground = Image.open(source).convert("RGBA").crop((0, 0, TILE, TILE))
-    rsi = f"{OUT}/{world}_pit.rsi"
+def piece_states():
+    """Every piece state as (mask, labels, variant), in the client's order (WFCavernShadeVisualsSystem.AllStates)."""
+    for mask in MASKS:
+        crossed = sum(BORDERS[name][1] for name in crossings(mask))
+        for labels in range(16):
+            if labels & ~crossed:
+                continue
+            for variant in range(variants(mask)):
+                yield mask, labels, variant
+
+
+def build():
+    rsi = f"{OUT}/pit.rsi"
     os.makedirs(rsi, exist_ok=True)
     for name in os.listdir(rsi):
         if name.endswith(".png"):
             os.remove(f"{rsi}/{name}")
 
     states = []
-    draw_icon(world, look, ground).save(f"{rsi}/pit.png")
+    draw_icon(LOOK).save(f"{rsi}/pit.png")
     states.append({"name": "pit"})
 
-    for mask in MASKS:
-        crossed = crossings(mask)
-        bits = [BORDERS[name][1] for name in crossed]
-        for combo in range(1 << len(bits)):
-            labels = sum(bit for i, bit in enumerate(bits) if combo & (1 << i))
-            for variant in range(variants(mask)):
-                name = f"v{mask}_{labels}_{variant}"
-                draw_piece(world, look, ground, mask, labels, variant).save(f"{rsi}/{name}.png")
-                states.append({"name": name})
+    pieces = list(piece_states())
+    rows = (len(pieces) + LIP_COLUMNS - 1) // LIP_COLUMNS
+    sheet = Image.new("RGBA", (LIP_COLUMNS * TILE, rows * TILE), (0, 0, 0, 0))
+    for index, (mask, labels, variant) in enumerate(pieces):
+        name = f"v{mask}_{labels}_{variant}"
+        image, lip = draw_piece(LOOK, mask, labels, variant)
+        image.save(f"{rsi}/{name}.png")
+        sheet.paste(lip, ((index % LIP_COLUMNS) * TILE, (index // LIP_COLUMNS) * TILE))
+        states.append({"name": name})
+    sheet.save(f"{OUT}/pit_lips.png")
 
     meta = {
         "version": 1,
-        "license": license_id,
-        "copyright": f"Lip cut from {source.removeprefix('Resources/')} ({author}), with its broken edge, shaft wall, "
-                     f"shadows and rubble drawn over it, for Wolfgate cavern mouths by Tools/_WF/Caverns/gen_pits.py.",
+        "license": "CC-BY-SA-3.0",
+        "copyright": "A hole's broken edge, shaft wall, shadows and rubble, with no ground of its own, for Wolfgate "
+                     "cavern mouths by Tools/_WF/Caverns/gen_pits.py.",
         "size": {"x": TILE, "y": TILE},
         "states": states,
     }
@@ -595,6 +585,4 @@ def build(world, look):
 
 
 if __name__ == "__main__":
-    for world, look in WORLDS.items():
-        count = build(world, look)
-        print(f"{world}: {count} states, {look['license'][0]}")
+    print(f"pit: {build()} states")

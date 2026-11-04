@@ -1,5 +1,9 @@
 # Caverns: design
 
+Note: the climb points, the climb verbs and `WFCavernClimbSystem` described below were replaced by walkable stairs cut under
+every hole (`WFCavernGroundComponent.Stairways`, `stairs` and `stairsSide` in the mouth spec). The sections on climbing are
+history; see `Content.Server/_WF/Caverns/README.md` for what stands.
+
 Design for the `Caverns` module on `planet-caverns`. It starts from the traversal design (the judges' pick), grafts the
 best ideas of the geology and ecology designs onto it, and fixes every flaw the judges found. Engine claims were
 re-checked against this branch; section 2.1 lists them with file references. Where this document and a candidate
@@ -928,9 +932,8 @@ Use *Climb up* on a climb point, by verb or by activating it. It needs no equipm
   counts damage raised with `interruptsDoAfters`. Air, heat, cold, suffocation, pressure and poison from metabolism
   (`RespiratorSystem`, `TemperatureSystem`, `BarotraumaSystem`, `HealthChange`) all pass `false`, so a player who fell
   into hostile air unprepared can always climb out. Blows, bites, falling rock and falls do break it.
-  `CavernClimbTest.UnequippedClimberEscapesHostileAir` proves it on Aerumna, Fervidus and Thrascias, whose air hurt an
-  unequipped human within a minute. Carcinoma's ammonia did not hurt one within a minute at F2b, so nothing there can
-  break the climb either.
+  `CavernClimbTest.UnequippedClimberEscapesHostileAir` proves it on Aerumna, Carcinoma, Fervidus and Thrascias, whose air
+  hurts an unequipped human within a minute.
 - **Exit tile.** When the climb finishes, the server (`FindExit`) takes the ground tiles within 2 tiles of the climb
   point in either axis (a 5×5 square), nearest first, and picks the first that meets all of these:
   - it is non-empty and not a hole in the registry;
@@ -1025,8 +1028,9 @@ The tests below are the gates.
     does);
   - deep table `WFCavernDeep<World>` (F5), unstable rock `WFCavernUnstable<World>` (F5), vent wall
     `WFCavernVent<World>`, ore `WFCavernOreGas<World>` and smoke `WFCavernGasPocket<World>` (F5).
-- **Shades** (`WFCavernShadeBase`): unanchored, no physics and no `CEZPhysics`, so they never fall. They use the
-  world's `_WF/Caverns/Mouths/<world>_pit.rsi`, draw depth `LowFloors`, drawn lit so the ground's light falls on the
+- **Shades** (`WFCavernShadeBase`): unanchored, no physics and no `CEZPhysics`, so they never fall. They all use
+  `_WF/Caverns/Mouths/pit.rsi`, which has no ground of its own (each piece gets a layer of the most common floor among
+  the shade's eight neighbours under it, cut to the piece's lip mask in `pit_lips.png`), draw depth `LowFloors`, drawn lit so the ground's light falls on the
   lip, and have `Clickable` (bounds over the whole tile) and `WFCavernShaft`. A hole's tiles are empty, so the cavern
   pass (2.7) shows the cavern through them; a shade only frames that view, and paints only its hole's own tiles, since
   the lip tiles are solid ground the cavern never shows through. The client's `WFCavernShadeVisualsSystem` draws a
@@ -1201,12 +1205,12 @@ and some throats are choked with tendons.
 
 | | |
 |---|---|
-| Level | `WFCavernCarcinomaLevel`: `mapLight: "#5a1a22"`, atmosphere `[21.824879, 76, 0, 0, 0, 0, 1]` at 310.15 K (Foul: breathable, with ammonia) |
+| Level | `WFCavernCarcinomaLevel`: `mapLight: "#5a1a22"`, atmosphere `[2.908408, 11.633631, 87.252232]` at 310.15 K, the surface's own carbon dioxide (Toxic) |
 | Tiles | T `WFCavernFloorFlesh`; C `WFCavernFloorGut`; landing `WFCavernFloorGut`; acid pools `WFCavernDigestiveAcid` on C |
 | Skeleton | Throats: ridged, 2 octaves with gain 0.3 for wiggle, frequency 0.06, ≤ 0.40 (tuned in F3 from 0.62: two octaves at the default gain 0.5 compress the ridged range, so 0.62 left 32% open and 7% of it connected, and 0.30 kept them connected only by widening them into broad ground; the lower gain keeps them narrow and joined). Stomachs: FBm frequency 0.03, ≥ 0.25 (from 0.35, making up the open share the narrower throats give up). Signature: digestive channels, `WFBloodRiver` placed straight on T (ridged frequency 0.012, ≥ 0.94, highest priority). Stomachs hold `WFCarcinomaAssimilationSack` (≥ 0.985), `WFFleshPustule` (≥ 0.985), `WFFleshPolyp` (≥ 0.98) and `WFCavernGutGlow` (≥ 0.975). Acid pools: a meta layer in the stomach template, highest there (`WFCavernAcidCarcinoma`, FBm 2 octaves, frequency 0.06, seed 60, ≥ 0.48), placing `WFCavernDigestiveAcid` on C, ringed on the same noise at ≥ 0.3 by `WFCavernPoolEdgeCarcinoma`: bile (`WFCavernBile1`–`4`, decals of `Fluids/vomit_toxin.rsi`, ≥ 0.2) and bones (the `Remains` decal, ≥ 0.8). Choked throats: `WFCavernOvergrowthCarcinoma` (OpenSimplex2 frequency 0.03, seed 61, ≥ 0.3), the lowest-priority layer on T, fills its stretches with `WFCavernTendons` (frequency 0.6, ≥ −0.45, about three tiles in four). In 192² around the gate the pools cover 4.4% of all tiles, 8.6% of the open floor and 14% of the stomach floor, the tendons 18% of the open throat floor, and 96% of the walkable tiles in 128² stay connected. Open band 0.35–0.55 |
 | Rock and ore | `WallMeat`, as on the surface. It can't be mined: cut it down like any wall. The rock template has a calcified-node meta layer (FBm frequency 0.05, ≥ 0.6) of `WallRockAndesite`, with `…Salt`, `…Silver`, `…Gold`, `…Plasma` and `…Uranium` veins (F3 tiers: common salt and plasma, uncommon silver and uranium, rare gold). The flesh grew over a mineral world |
 | Light | Roof `#140306`, `shaftLight` 0.4. `WFCavernNerveCluster` (the flora anomaly's bulb recoloured red, `#ff4d72`) along the throats (≥ 0.93) and in the stomachs (≥ 0.95). `WFCavernGutGlow`: no sprite, `PointLight` `#ff4a5a`, radius 3 |
-| Hazards | Digestive acid (`WFDigestiveAcid`, `Content.Shared/_WF/Caverns`): 5 Caustic a second to any mob wading in, with no fire or air needed, through the contact damage `DamageContactsSystem` ticks, and wading at 0.6 speed. It spares the Gut's own creatures by faction, since they share no tag: `AberrantFleshExpeditionNF` (the aberrant flesh, their newborns and the assimilated miners) and `Chimera` (the ticks and the Letoferol). Like lava it spares anyone on a catwalk over it. It digests the dead too, so a body left in it is soon past saving, and leaves items alone. Whoever it burns hisses: `WFDigestiveAcidHissSystem` loops the pool's `burnSound` (the deep fryer sizzle, `/Audio/Nyanotrasen/Ambience/Objects/deepfryer_sizzling.ogg`, −4 dB, 8 tiles) on them, positional, while they take its damage and are alive; leaving, dying or a catwalk stops it, and spared natives never start one. One stream per burning mob keeps the client's audio budget (`WFAudioBudgetSystem`, 96 network streams) safe, and a body in the acid falls silent. It holds no reagent, so it spills nothing and leaves the floor whole. Choked throats slow you to 0.65 (`WFCavernTendons`: `WFCarcinomaTendons`, the surface forest's non-hard tendons and the art of the climb point, drawn at `FloorObjects` under the mobs so a click on someone standing in them reaches them, with `SpeedModifierContacts`; cut them down at 40 damage). Ammonia (masks). Ticks. Pustules. Bile pockets `WFCavernVentCarcinoma` (`Ammonia` smoke, F5). No cave-ins: flesh doesn't collapse |
+| Hazards | Digestive acid (`WFDigestiveAcid`, `Content.Shared/_WF/Caverns`): 5 Caustic a second to any mob wading in, with no fire or air needed, through the contact damage `DamageContactsSystem` ticks, and wading at 0.6 speed. It spares the Gut's own creatures by faction, since they share no tag: `AberrantFleshExpeditionNF` (the aberrant flesh, their newborns and the assimilated miners) and `Chimera` (the ticks and the Letoferol). Like lava it spares anyone on a catwalk over it. It digests the dead too, so a body left in it is soon past saving, and leaves items alone. Whoever it burns hisses: `WFDigestiveAcidHissSystem` loops the pool's `burnSound` (the deep fryer sizzle, `/Audio/Nyanotrasen/Ambience/Objects/deepfryer_sizzling.ogg`, −4 dB, 8 tiles) on them, positional, while they take its damage and are alive; leaving, dying or a catwalk stops it, and spared natives never start one. One stream per burning mob keeps the client's audio budget (`WFAudioBudgetSystem`, 96 network streams) safe, and a body in the acid falls silent. It holds no reagent, so it spills nothing and leaves the floor whole. Choked throats slow you to 0.65 (`WFCavernTendons`: `WFCarcinomaTendons`, the surface forest's non-hard tendons and the art of the climb point, drawn at `FloorObjects` under the mobs so a click on someone standing in them reaches them, with `SpeedModifierContacts`; cut them down at 40 damage). Carbon dioxide air (internals). Ticks. Pustules. Bile pockets `WFCavernVentCarcinoma` (`Ammonia` smoke, F5). No cave-ins: flesh doesn't collapse |
 | Decor | Bile and bones around the acid pools, as decals |
 | Fauna | `WFCavernFaunaCarcinoma`: nested `WFFaunaCarcinoma` 3, `WFMobFleshTick` 4, `MobFleshAssimilatedMiner` 1 |
 | Deep (F5) | `MobLetoferolHorror` |
@@ -1223,7 +1227,7 @@ and some throats are choked with tendons.
 | Merak | Breathable | Safe; cooler than the surface |
 | Aerumna | Toxic | CO₂ poisoning; internals required |
 | Thrascias | Freezing | Cold and no O₂; hardsuit required |
-| Carcinoma | Foul | Breathable, with slow ammonia poisoning; a gas mask helps |
+| Carcinoma | Toxic | The surface's carbon dioxide: internals needed; the Gut's own life breathes it (`WFPlanetNatives`) |
 
 ## 5. Player and admin surface
 
@@ -1349,6 +1353,7 @@ Tests live in `Content.IntegrationTests/Tests/_WF/Caverns` and, for pure logic, 
 | `CavernWildlifeTest.WildlifeThroughLoadedHoleIsKept` | A wildlife mob over a tile emptied on a loaded chunk falls into the cavern and is kept, resting on the landing (`LocalPosition` above −0.1); the hole queue has pinned the hole and shaded it (F2c: before it, the hole stayed unpinned and the loaded check decided) | F1, F2c |
 | `CavernMouthTest.GateExists` [6] | The gate is claimed at build. Its hole tiles are pinned and empty with a shade each. Its ring is pinned and solid. The pad is pinned, with the landing tile under the hole and no rock after its chunks load; the test loads them with `WfLoadChunk`, as a cavern viewer's loader would, rather than attaching a viewer. The climb point is anchored under the climb tile, with the section 3.6 delay. The hole is inside the world's size range, the climb tile is on the lip beside the hole, each rim spot has its decor and nothing stands on the climb tile | F2 |
 | `CavernMouthTest.ShapesStayInRange` | Over 400 seeds per world: the hole is inside its size range, holds the anchor, is joined edge to edge, has no tile hanging on by one edge (a rift may have its two ends), no two tiles touching only at a corner and no enclosed ground; the ring is every tile touching it; the climb tile is on the ring, beside a hole tile on `climbSide` and past the whole hole on that side; rim spots are on the ring, clear of the climb tile and no more than `rimCount` scaled by the hole's size; the same seed gives the same hole and rim. At most 5% of non-rift holes are plain rectangles and at most 5% fall back, the holes take at least half the sizes in range, and the seeds give at least 80 different holes. The specs are the worlds' prototypes, so it runs on a pair | F2 |
+| `CavernPitFloorTest.LipTakesTheFloorRoundIt` | On the client, a shade cut into asphalt lays asphalt under its lip on all four corners, and sand once the tiles round it are retiled to sand | F2, cavern view |
 | `CavernMouthTest.PitStatesExist` | On the client, every world's pit RSI holds every state `WFCavernShadeVisualsSystem.AllStates` lists (`pit` and the pieces for masks 1 to 14), and no other | F2, cavern view |
 | `CavernMouthTest.PinnedSiteIsEmpty` | Merak: with the cavern pinned under a whole cell, a cell that has a site claims Empty, and stays Empty | F2 |
 | `CavernMouthTest.PadKeepsPools` | Asclepiu: of admin mouths cut 3 tiles from a pool's edge, one whose pad crosses the pool holds exactly one `MonoFloorWaterEntity` on every pad tile off the hole where the cavern grows one; `GateExists` checks the same on every gate | F4 |

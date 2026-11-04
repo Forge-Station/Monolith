@@ -59,16 +59,20 @@ public sealed class PlanetTimepieceTest
         await client.WaitAssertion(() =>
         {
             var panel = new WFPlanetTimepieceHud(client.ResolveDependency<IResourceCache>());
-            panel.SetReadout("Asclepiu", "08:00", "Clear");
+            panel.SetReadout("Asclepiu", "08:00", "Clear", "Spring · 14°C");
             panel.Measure(new Vector2(164, 90));
             panel.Arrange(UIBox2.FromDimensions(Vector2.Zero, new Vector2(164, 90)));
             var labels = panel.Children.Single().Children.OfType<Label>().ToArray();
-            Assert.That(labels.Length, Is.EqualTo(3));
+            Assert.That(labels.Length, Is.EqualTo(4));
             Assert.That(labels.All(label => label.Width > 100 && label.Height > 0), Is.True,
                 "Clipped labels must receive real layout width, not just contain text.");
         });
         await client.WaitAssertion(() =>
-            Assert.That(hud.HudVisible, Is.False, "Holding the timepiece must not show its HUD."));
+        {
+            Assert.That(hud.HudVisible, Is.True, "Anyone on a planet should see its time and weather.");
+            Assert.That(hud.DisplayedPlanet, Is.EqualTo("Asclepiu"));
+            Assert.That(hud.HudWidth, Is.LessThanOrEqualTo(180f), "The HUD should remain unobtrusive.");
+        });
         await client.WaitPost(popups.Received.Clear);
         await server.WaitAssertion(() =>
             Assert.That(server.System<SharedInteractionSystem>().UseInHandInteraction(user, timepiece), Is.True));
@@ -98,22 +102,8 @@ public sealed class PlanetTimepieceTest
         await server.WaitAssertion(() =>
             Assert.That(Examine(server.EntMan, timepiece, user), Does.Contain("No planetary signal.")));
 
-        await server.WaitAssertion(() =>
-            Assert.That(server.System<InventorySystem>().TryEquip(user, timepiece, "leftarmband", silent: true, force: true),
-                Is.True, "The timepiece could not be worn in its declared arm slot."));
-        await pair.RunTicksSync(pair.SecondsToTicks(1f));
-
-        await client.WaitAssertion(() =>
-        {
-            Assert.Multiple(() =>
-            {
-                Assert.That(hud.HudVisible, Is.True, "Wearing the timepiece must show its HUD.");
-                Assert.That(hud.DisplayedPlanet, Is.EqualTo("No planetary signal."));
-                Assert.That(hud.DisplayedTime, Is.EqualTo("--:--"));
-                Assert.That(hud.DisplayedWeather, Is.Empty);
-                Assert.That(hud.HudWidth, Is.LessThanOrEqualTo(180f), "The worn HUD should remain unobtrusive.");
-            });
-        });
+        // Off the planet the panel goes away; the timepiece is a plain watch now.
+        await client.WaitAssertion(() => Assert.That(hud.HudVisible, Is.False, "There is no planet to report off it."));
 
         await server.WaitPost(() => server.System<SharedTransformSystem>()
             .SetCoordinates(user, new EntityCoordinates(layers[0], Vector2.Zero)));
@@ -129,17 +119,6 @@ public sealed class PlanetTimepieceTest
                 Assert.That(hud.DisplayedWeather, Is.EqualTo("Clear"));
             });
         });
-
-        await server.WaitAssertion(() =>
-        {
-            var inventory = server.System<InventorySystem>();
-            Assert.That(inventory.TryUnequip(user, "leftarmband", out var removed, silent: true, force: true), Is.True);
-            Assert.That(removed, Is.EqualTo(timepiece));
-            Assert.That(server.System<SharedHandsSystem>().TryPickupAnyHand(user, timepiece), Is.True);
-        });
-        await pair.RunTicksSync(pair.SecondsToTicks(1f));
-        await client.WaitAssertion(() =>
-            Assert.That(hud.HudVisible, Is.False, "Removing the timepiece must hide its HUD."));
 
         await Teardown(pair, layers);
         await pair.CleanReturnAsync();

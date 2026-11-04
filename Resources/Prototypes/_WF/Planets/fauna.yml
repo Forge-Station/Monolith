@@ -27,6 +27,9 @@
   id: WFFaunaFervidus
   table: !type:GroupSelector
     children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdAshHawk
+      weight: 2
     - id: WFMobArgocyteSlurvaBasalt
       weight: 6
     - id: WFMobArgocyteCrawlerBasalt
@@ -43,17 +46,7 @@
   - type: WFPlanetFaunaSpawner
     table: WFFaunaFervidus
 
-- type: entityTable
-  id: WFFaunaAerumna
-  table: !type:GroupSelector
-    children:
-    - id: MobArgocyteSlurva
-      weight: 6
-    - id: MobXenoRunner
-      weight: 1
-    - id: MobXenoDrone
-      weight: 1
-
+# The table is in Life/aerumna.yml, with the other regions'.
 - type: entity
   id: WFFaunaAerumna
   parent: MarkerBase
@@ -63,15 +56,41 @@
   - type: WFPlanetFaunaSpawner
     table: WFFaunaAerumna
 
+# The hive's own: nothing but xenos, thick on the hive ground.
+- type: entityTable
+  id: WFFaunaAerumnaHive
+  table: !type:GroupSelector
+    children:
+    - id: MobXenoRunner
+      weight: 5
+    - id: MobXenoDrone
+      weight: 4
+    - id: MobXenoSpitter
+      weight: 1
+
+- type: entity
+  id: WFFaunaAerumnaHive
+  parent: MarkerBase
+  name: aerumna hive spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaAerumnaHive
+
+# The planet-wide mix wrecks use; the biome places the per-region spawners in Life/thrascias.yml.
 - type: entityTable
   id: WFFaunaThrascias
   table: !type:GroupSelector
     children:
     - id: MobArgocyteSlurva
-      weight: 7
+      weight: 4
+    - id: WFMobThrasciasPenguin
+      weight: 3
+    - id: WFMobThrasciasSnowFox
+      weight: 2
     - id: MobArgocyteBarrier
       weight: 2
-    - id: MobBearSpace
+    - id: WFMobThrasciasFrostBear
       weight: 1
 
 - type: entity

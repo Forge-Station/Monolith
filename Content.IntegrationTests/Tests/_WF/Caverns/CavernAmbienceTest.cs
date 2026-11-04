@@ -49,6 +49,9 @@ public sealed class CavernAmbienceTest
         var client = pair.Client;
         var entMan = server.EntMan;
         var cavern = CavernOf(pair, Surface);
+        // The cavern's own soundscape is set aside, so what it hears is the surface's.
+        var own = cavern.Ambience;
+        cavern.Ambience = null;
 
         await EnableCaverns(pair);
         await DisableClaims(pair);
@@ -136,7 +139,7 @@ public sealed class CavernAmbienceTest
         }
         finally
         {
-            cavern.Ambience = null;
+            cavern.Ambience = own;
             await client.WaitPost(() => cfg.SetCVar(CCVars.AmbienceVolume, oldGain));
             await Teardown(pair, world);
         }

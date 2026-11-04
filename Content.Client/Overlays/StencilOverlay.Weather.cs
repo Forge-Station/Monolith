@@ -23,6 +23,7 @@ public sealed partial class StencilOverlay
         var worldAABB = args.WorldAABB;
         var worldBounds = args.WorldBounds;
         var position = args.Viewport.Eye?.Position.Position ?? Vector2.Zero;
+        var wfEyeRotation = args.Viewport.Eye?.Rotation ?? Angle.Zero; // WOLFGATE(Planets)
 
         // Cut out the irrelevant bits via stencil
         // This is why we don't just use parallax; we might want specific tiles to get drawn over
@@ -56,6 +57,8 @@ public sealed partial class StencilOverlay
                     worldHandle.DrawRect(gridTile, Color.White);
                 }
             }
+
+            WfMaskCoveredBelow(worldHandle, mapId, worldAABB, wfEyeRotation, invMatrix); // WOLFGATE(Planets): no rain down a stairwell onto an indoor floor
 
         }, Color.Transparent);
 

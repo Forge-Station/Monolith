@@ -1,0 +1,97 @@
+# Vehicle delivery beacons: use one in hand to set it down, and ten seconds later it opens into its vehicle where it
+# lies, if nothing solid is in the way, with the key handed to whoever set it off. Each sells at its catalogue's listing
+# (WFVehicleBeaconSystem) and resells for what the vehicle would fetch at a terminal's pad.
+
+- type: entity
+  parent: BaseItem
+  id: WFVehicleBeaconBase
+  abstract: true
+  name: vehicle delivery beacon
+  description: A vehicle packed down into a crate-sized beacon. Set it down somewhere open and stand back.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Tools/thief_beacon.rsi
+    noRot: true
+    layers:
+    - state: folded_extraction
+      map: [ "beacon" ]
+    - state: extraction_point_light
+      map: [ "light" ]
+      shader: unshaded
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFVehicleBeaconVisuals.Armed:
+        beacon:
+          True: { state: extraction_point }
+          False: { state: folded_extraction }
+        light:
+          True: { visible: true }
+          False: { visible: false }
+
+- type: entity
+  parent: WFVehicleBeaconBase
+  id: WFVehicleBeaconATV
+  name: vehicle delivery beacon (ATV)
+  components:
+  - type: WFVehicleBeacon
+    vehicle: VehicleATVNF
+    catalog: WFVehicleCatalogMechanic
+    key: VehicleKeyATV
+
+- type: entity
+  parent: WFVehicleBeaconBase
+  id: WFVehicleBeaconCivTruck1
+  name: vehicle delivery beacon (small truck)
+  components:
+  - type: WFVehicleBeacon
+    vehicle: AU14VehicleCivCivTruck1
+    catalog: WFVehicleCatalogMechanic
+
+- type: entity
+  parent: WFVehicleBeaconBase
+  id: WFVehicleBeaconCivTruck
+  name: vehicle delivery beacon (civilian truck)
+  components:
+  - type: WFVehicleBeacon
+    vehicle: AU14VehicleCivTruck
+    catalog: WFVehicleCatalogMechanic
+
+- type: entity
+  parent: WFVehicleBeaconBase
+  id: WFVehicleBeaconCivVan
+  name: vehicle delivery beacon (civilian van)
+  components:
+  - type: WFVehicleBeacon
+    vehicle: AU14VehicleCivVan
+    catalog: WFVehicleCatalogMechanic
+
+- type: entity
+  parent: WFVehicleBeaconBase
+  id: WFVehicleBeaconVan
+  name: vehicle delivery beacon (van)
+  components:
+  - type: WFVehicleBeacon
+    vehicle: VehicleVan
+    catalog: WFVehicleCatalogMechanic
+
+# One use: the frame and every fitted part of a civilian vehicle made whole.
+- type: entity
+  parent: BaseItem
+  id: WFVehicleRepairKit
+  name: vehicle repair box
+  description: Parts, plates, sealant and a manual. Enough to put one civilian vehicle right, once.
+  components:
+  - type: Item
+    size: Normal
+    sprite: Objects/Tools/Toolboxes/toolbox_yellow.rsi
+  - type: Sprite
+    sprite: Objects/Tools/Toolboxes/toolbox_yellow.rsi
+    state: icon
+  - type: WFVehicleRepairKit
+  - type: StaticPrice
+    price: 400
+    vendPrice: 3000

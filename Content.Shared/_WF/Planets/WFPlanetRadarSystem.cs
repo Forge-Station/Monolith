@@ -33,6 +33,9 @@ public sealed partial class WFPlanetRadarSystem : EntitySystem
 
     public Tile? Sample(WFOrbitLayerComponent orbit, Vector2 world)
     {
+        if (orbit.BoundsRadius > 0f && Vector2.DistanceSquared(world, orbit.BoundsCentre) > orbit.BoundsRadius * orbit.BoundsRadius)
+            return Tile.Empty;
+
         foreach (var scar in orbit.RadarScars)
         {
             if (Vector2.DistanceSquared(world, new Vector2(scar.X, scar.Y)) <= scar.Z * scar.Z)

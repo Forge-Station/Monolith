@@ -1,0 +1,194 @@
+# The turret bodies of the tank, the SPP tank and the SPP APC. A turret turns toward the gunner's cursor and carries the
+# guns on its own nested slots. The tank turret starts empty; the SPP turrets start with their guns (Hardpoints/spp_weapons.yml).
+# The tank turret is heavy: it goes in with the slot's long insert delay and comes out the same way with a prying tool.
+
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankTurret
+  name: tank turret
+  description: A tank turret hardpoint.
+  components:
+  - type: StaticPrice
+    price: 10500
+  - type: WFTurretTraverseAudio
+    startSound:
+      collection: WFRcsmElectricTurretStart
+    loopSound: /Audio/_WF/Vehicles/RCSM/turret/electric_loop.ogg
+    stopSound:
+      collection: WFRcsmElectricTurretStop
+  - type: Sprite
+    sprite: _WF/Vehicles/tank.rsi
+    state: tank_turret_0
+  - type: HardpointItem
+    hardpointType: HardpointTypeTurret
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeTurret
+    damageMultiplier: 0.05
+    repairRate: 0.008
+  - type: HardpointIntegrity
+    maxIntegrity: 450
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: true
+    rotationSpeed: 60
+    showOverlay: true
+    overlayRsi: _WF/Vehicles/tank.rsi
+    overlayState: tank_turret_0
+    overlayDamagedState: tank_turret_1
+    useDirectionalOffsets: false
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      turret-launcher:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+  - type: ContainerContainer
+    containers:
+      turret-cannon: !type:ContainerSlot
+        showEnts: false
+        occludes: true
+        ent: null
+      turret-launcher: !type:ContainerSlot
+        showEnts: false
+        occludes: true
+        ent: null
+  - type: HardpointState
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyTank
+    slots:
+    - id: turret-cannon
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      required: false
+      insertDelay: 2.0
+    - id: turret-launcher
+      hardpointType: HardpointTypeLauncher
+      slotType: HardpointSlotTypeLauncher
+      required: false
+      insertDelay: 2.0
+
+# Its rotary cannon and cupola start in the two nested slots, as in RMC.
+- type: entity
+  parent: VehicleTankTurret
+  id: VehicleSPPTankTurret
+  name: SPP tank turret
+  description: A tank turret configured for SPP armor.
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/spptank.rsi
+    state: tank_turret_0
+  - type: HardpointItem
+    compatibilityId: HardpointCompatibilitySPPTank
+    repairRate: 0.01
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 60
+    showOverlay: true
+    overlayRsi: _WF/Vehicles/spptank.rsi
+    overlayState: tank_turret_0
+    overlayDamagedState: tank_turret_1
+    useDirectionalOffsets: false
+    pixelOffsetNorth: "0,6"
+    pixelOffsetEast: "-5,0"
+    pixelOffsetSouth: "0,0"
+    pixelOffsetWest: "5,0"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: VehicleSPPTankP17702
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      turret-launcher:
+        startingItem: VehicleSPPTankCupola
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyTank
+    slots:
+    - id: turret-cannon
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      compatibilityId: HardpointCompatibilitySPPTank
+      required: false
+      insertDelay: 2.0
+    - id: turret-launcher
+      hardpointType: HardpointTypeLauncher
+      slotType: HardpointSlotTypeLauncher
+      compatibilityId: HardpointCompatibilitySPPTank
+      required: false
+      insertDelay: 2.0
+
+# Its minigun starts in the nested slot, as in RMC.
+- type: entity
+  parent: VehicleSPPAPCHardpointBase
+  id: VehicleSPPAPCTurret
+  name: SPP APC turret
+  description: A rotating turret mount for an SPP APC.
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/sppapc.rsi
+    state: apc_turret_0
+  - type: HardpointItem
+    hardpointType: HardpointTypeTurret
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeTurret
+    compatibilityId: HardpointCompatibilitySPPAPC
+    damageMultiplier: 0.2
+    repairRate: 0.008
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 80
+    showOverlay: true
+    useDirectionalOffsets: true
+    overlayRsi: _WF/Vehicles/sppapc.rsi
+    overlayState: apc_turret_0
+    overlayDamagedState: apc_turret_1
+    pixelOffsetNorth: "0,4"
+    pixelOffsetEast: "-1,28"
+    pixelOffsetSouth: "0,6"
+    pixelOffsetWest: "-1,28"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: VehicleSPPAPCMinigun
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+  - type: ContainerContainer
+    containers:
+      turret-cannon: !type:ContainerSlot
+        showEnts: false
+        occludes: true
+        ent: null
+  - type: HardpointState
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slots:
+    - id: turret-cannon
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      compatibilityId: HardpointCompatibilitySPPAPCTurret
+      required: false
+      insertDelay: 2.0
+  - type: HardpointVisual
+    vehicleState: apc_turret_0
+    damagedVehicleState: apc_turret_1

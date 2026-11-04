@@ -1,0 +1,85 @@
+# CM-SS13
+
+- type: entity
+  parent: BaseStructure
+  id: CMBrazier
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Lighting/ancientbrazier_cm.rsi
+    state: brazier_frame_filled
+    noRot: true
+  - type: InteractionOutline
+  - type: Appearance
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+  - type: ExtinguishOnInteract
+    extinguishAttemptSound:
+      path: /Audio/Items/candle_blowing.ogg
+      params:
+        variation: 0.05
+        volume: 10
+  - type: UseDelay
+  - type: Flammable
+    fireSpread: false
+    canResistFire: false
+    alwaysCombustible: true
+    canExtinguish: true
+    firestacksOnIgnite: 3.0
+    firestackFade: 0
+    damage:
+      types:
+        Heat: 0
+  - type: FireVisuals
+    sprite: _WF/DecorImport/Structures/Lighting/ancientbrazier_cm.rsi
+    normalState: brazier
+    lightColor: "#c75fcb"
+    maxLightRadius: 6
+  - type: EntityRadiusHeater
+    requireActivation: true
+    radius: 2.5
+    thermalEnergy: 20000
+    limit: 311
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Rock
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+
+- type: entity
+  parent: CMBrazier
+  id: CMBrazierAlt
+  components:
+  - type: Sprite
+    state: brazier_alt_frame_filled
+  - type: FireVisuals
+    normalState: brazier_alt
+
+- type: entity
+  parent: CMBrazier
+  id: CMBrazierTall
+  components:
+  - type: Sprite
+    state: tall_small_brazier_frame_filled
+  - type: FireVisuals
+    normalState: tall_small_brazier
+
+- type: entity
+  parent: CMBrazier
+  id: CMBrazierTorch
+  components:
+  - type: Sprite
+    state: torch_frame
+  - type: FireVisuals
+    normalState: torch
+    lightColor: "#ff0000"
+    maxLightRadius: 1
+  - type: Physics
+    canCollide: false

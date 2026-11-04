@@ -1,5 +1,10 @@
 # Each world alternates phased storms with 3-7 minutes of clear skies. A storm telegraphs with a light overlay, runs,
-# and winds down through a light overlay again, after /tg/station's weather; thunder drops real bolts on open ground.
+# and winds down through a light overlay again, after /tg/station's weather. The scheduler picks these stock weathers,
+# which say what the weather is; wolfWeathers says how each looks, sounds and blows on this world (_WF/WolfWeather),
+# and a wolfWeather with lightning drops real bolts on open ground.
+# Seasons loop in order (a world with one has it for good, none has no seasons); each can weight the storms, bring its
+# own, stretch clear spells and shift the temperature. The outdoor air is the ground's air plus the season, the weather
+# (weatherTemperature) and the hour (dayTemperatureSwing either side, warmest at 15:00, coldest at 05:00), in kelvin.
 - type: wfPlanetWeather
   id: WFPlanetWeatherAsclepiu
   planetType: PlanetAsclepiu
@@ -11,8 +16,77 @@
   - telegraph: WFRainLow
     main: WFRainHigh
     end: WFRainEnd
-    thunder: true
+  wolfWeathers:
+    WFRainLow: WFRainLight
+    WFRainEnd: WFRainLight
+    WFRainMed: WFRainModerate
+    WFRainHigh: WFThunderstorm
+    WFSnowLight: WFSnow
+    WFSnowStorm: WFBlizzard
+    WFFogMist: WFFogWisps
+    WFFog: WFFogBank
   initialHour: 8
+  dayTemperatureSwing: 5
+  weatherTemperature:
+    WFRainLow: -1
+    WFRainEnd: -1
+    WFRainMed: -2
+    WFRainHigh: -4
+    WFSnowLight: -3
+    WFSnowStorm: -8
+    WFFogMist: -1
+    WFFog: -2
+  # A year is six local days: four seasons of 90 minutes.
+  seasons:
+  - id: Spring
+    name: wf-planet-season-spring
+    color: "#9ad48a"
+    temperature: -1
+    clearScale: 0.8
+    stormWeights:
+      WFRainLow: 2
+      WFRainMed: 2
+      WFRainHigh: 0.5
+  - id: Summer
+    name: wf-planet-season-summer
+    color: "#f2c95c"
+    temperature: 8
+    clearDayTemperature: 3
+    clearScale: 1.2
+    stormWeights:
+      WFRainLow: 0.5
+      WFRainHigh: 2.5
+  - id: Autumn
+    name: wf-planet-season-autumn
+    color: "#d8894a"
+    temperature: -5
+    storms:
+    - main: WFRainLow
+    - telegraph: WFRainLow
+      main: WFRainMed
+      end: WFRainEnd
+    - telegraph: WFFogMist
+      main: WFFog
+      end: WFFogMist
+      telegraphSeconds: 45
+      endSeconds: 45
+  - id: Winter
+    name: wf-planet-season-winter
+    color: "#a8d0f0"
+    temperature: -18
+    storms:
+    - main: WFSnowLight
+    - telegraph: WFSnowLight
+      main: WFSnowStorm
+      end: WFSnowLight
+    - telegraph: WFFogMist
+      main: WFFog
+      end: WFFogMist
+      telegraphSeconds: 45
+      endSeconds: 45
+    stormWeights:
+      WFSnowLight: 2
+      WFFog: 0.5
 
 - type: wfPlanetWeather
   id: WFPlanetWeatherFervidus
@@ -22,7 +96,15 @@
   - telegraph: WFAshLight
     main: WFAshStorm
     end: WFAshLight
+  wolfWeathers:
+    WFAshLight: WFAshfall
+    WFAshStorm: WFAshStorm
   initialHour: 12
+  # Thick volcanic air holds its heat; ash smothers the ground warmer still. No seasons.
+  dayTemperatureSwing: 2
+  weatherTemperature:
+    WFAshLight: 2
+    WFAshStorm: 4
 
 - type: wfPlanetWeather
   id: WFPlanetWeatherMerak
@@ -34,9 +116,35 @@
   - telegraph: WFDustLow
     main: WFDustHigh
     end: WFDustLow
+  wolfWeathers:
+    WFDustLow: WFDustLight
+    WFDustMed: WFSandstorm
+    WFDustHigh: WFSandstormHeavy
   initialHour: 15
   clearMinSeconds: 300
   clearMaxSeconds: 600
+  # Desert: scorching afternoons, cold nights; sand on the wind is hot.
+  dayTemperatureSwing: 12
+  weatherTemperature:
+    WFDustLow: 1
+    WFDustMed: 2
+    WFDustHigh: 3
+  seasons:
+  - id: Dry
+    name: wf-planet-season-dry
+    color: "#e8c890"
+    clearDayTemperature: 2
+    clearScale: 1.3
+    stormWeights:
+      WFDustHigh: 0.3
+  - id: Dust
+    name: wf-planet-season-dust
+    color: "#c8955a"
+    temperature: 3
+    clearScale: 0.6
+    stormWeights:
+      WFDustMed: 1.5
+      WFDustHigh: 2.5
 
 - type: wfPlanetWeather
   id: WFPlanetWeatherAerumna
@@ -46,7 +154,34 @@
   - telegraph: WFRainLow
     main: WFRainMed
     end: WFRainEnd
+  wolfWeathers:
+    WFRainLow: WFRainLight
+    WFRainEnd: WFRainLight
+    WFRainMed: WFRainHeavy
   initialHour: 18
+  # Thick humid air: little swing between day and night.
+  dayTemperatureSwing: 2.5
+  weatherTemperature:
+    WFRainLow: -1
+    WFRainEnd: -1
+    WFRainMed: -2
+  seasons:
+  - id: Dry
+    name: wf-planet-season-dry
+    color: "#d8c890"
+    temperature: 3
+    clearScale: 1.6
+    stormWeights:
+      WFRainMed: 0.3
+  - id: Monsoon
+    name: wf-planet-season-monsoon
+    color: "#6aa0c8"
+    temperature: -2
+    clearScale: 0.35
+    weatherScale: 1.5
+    stormWeights:
+      WFRainLow: 0.5
+      WFRainMed: 3
 
 - type: wfPlanetWeather
   id: WFPlanetWeatherThrascias
@@ -56,18 +191,44 @@
   - telegraph: WFSnowLight
     main: WFSnowStorm
     end: WFSnowLight
+  wolfWeathers:
+    WFSnowLight: WFSnow
+    WFSnowStorm: WFBlizzard
   initialHour: 6
+  dayTemperatureSwing: 6
+  weatherTemperature:
+    WFSnowLight: -3
+    WFSnowStorm: -12
+  seasons:
+  - id: DeepWinter
+    name: wf-planet-season-deep-winter
+    color: "#c8e4ff"
 
+# Carcinoma's red haze and fog came from WolfWeather's first schedule.
 - type: wfPlanetWeather
   id: WFPlanetWeatherCarcinoma
   planetType: WFPlanetCarcinoma
   storms:
   - main: WFBloodRain
+  - main: WFBloodHaze
+  - telegraph: WFBloodHaze
+    main: WFBloodFog
+    end: WFBloodHaze
   - telegraph: WFBloodRain
     main: WFBloodStorm
     end: WFBloodRain
-    thunder: true
+  wolfWeathers:
+    WFBloodRain: WFBloodRainModerate
+    WFBloodStorm: WFBloodStorm
+    WFBloodHaze: WFBloodHaze
+    WFBloodFog: WFBloodFog
   initialHour: 21
+  # Body-warm and nearly steady; no seasons.
+  dayTemperatureSwing: 1
+  weatherTemperature:
+    WFBloodRain: -1
+    WFBloodStorm: -2
+    WFBloodFog: -1
 
 # Overlays and rain loops from /tg/station (weather_effects.dmi, sound/ambience/weather/rain).
 - type: weather
@@ -216,6 +377,36 @@
       loop: true
       volume: -2
 
+# Red murk for Carcinoma; on a planet WolfWeather draws it, this sprite only shows where a stock overlay is used.
+- type: weather
+  id: WFBloodHaze
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: dust_low
+  color: "#b83c46"
+
+- type: weather
+  id: WFBloodFog
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: dust_med
+  color: "#b83c46"
+
+# Fog for Asclepiu's autumn and winter; on a planet WolfWeather draws it.
+- type: weather
+  id: WFFogMist
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: dust_low
+  color: "#c8d0d8"
+
+- type: weather
+  id: WFFog
+  sprite:
+    sprite: /Textures/_WF/Planets/Effects/weather_tg.rsi
+    state: dust_med
+  color: "#c8d0d8"
+
 # A thunderbolt: one flash, one crack, gone.
 - type: entity
   id: WFThunderbolt
@@ -236,6 +427,26 @@
     netsync: false
   - type: TimedDespawn
     lifetime: 0.6
+
+# A far flash's bolt, drawn by the client somewhere in view; the server never spawns it.
+- type: entity
+  parent: WFThunderbolt
+  id: WFThunderboltFar
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_WF/Planets/Effects/thunderbolt.rsi
+    state: thunderbolt
+    offset: 0, 1
+    drawdepth: Effects
+    noRot: true
+    shader: unshaded
+    color: "#dfe8ffcc"
+  - type: PointLight
+    radius: 10
+    energy: 6
+    color: "#cfe4ff"
+    netsync: false
 
 # The thunder is played by the strike itself, at the spot: it outlasts the bolt by seconds.
 - type: soundCollection

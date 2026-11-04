@@ -39,7 +39,7 @@ public sealed class TractorBeamStationKeepingSystem : VirtualController
             if (Paused(uid) || !beam.Active || beam.Target == null || beam.SourceGrid is not { } source ||
                 !xform.Anchored || xform.GridUid != source || power.ReceivedPower < beam.HoldingPower ||
                 !TryComp<ShuttleComponent>(source, out var shuttle) || !shuttle.Enabled ||
-                HasComp<FTLComponent>(source) || !TryComp<PhysicsComponent>(source, out var body) ||
+                HasComp<FTLComponent>(source) || HasComp<Content.Server._WF.Planets.Hop.WFPlanetHopComponent>(source) || !TryComp<PhysicsComponent>(source, out var body) ||
                 body.BodyType != BodyType.Dynamic)
                 continue;
 

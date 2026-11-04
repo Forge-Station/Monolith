@@ -37,6 +37,7 @@ public sealed class CavernOrbitalFallTest
         try
         {
             var gate = await Gate(pair, world);
+            var drop = DropTile(gate, CavernOf(pair, "WFSurfaceFervidus").Mouths);
             var orbit = world.Layers[^1];
             var mob = EntityUid.Invalid;
             var landed = false;
@@ -44,9 +45,9 @@ public sealed class CavernOrbitalFallTest
             // As OrbitalMobFallTest drops its faller: spawned beside the drop, then moved over it and pushed down.
             await server.WaitPost(() =>
             {
-                mob = entMan.SpawnEntity("MobHuman", new EntityCoordinates(orbit, TileCentre(gate.Origin - new Vector2i(4, 4))));
+                mob = entMan.SpawnEntity("MobHuman", new EntityCoordinates(orbit, TileCentre(drop - new Vector2i(4, 4))));
                 entMan.RunMapInit(mob, entMan.GetComponent<MetaDataComponent>(mob));
-                server.System<SharedTransformSystem>().SetCoordinates(mob, new EntityCoordinates(orbit, TileCentre(gate.Origin)));
+                server.System<SharedTransformSystem>().SetCoordinates(mob, new EntityCoordinates(orbit, TileCentre(drop)));
                 server.System<CESharedZLevelsSystem>().SetZVelocity(mob, -2);
             });
 

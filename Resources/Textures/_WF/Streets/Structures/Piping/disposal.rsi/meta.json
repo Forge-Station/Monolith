@@ -1,0 +1,20 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/icons/obj/pipes/disposal.dmi, https://github.com/cmss13-devs/cmss13/blob/icons/obj/structures/props/hybrisa/trash_bins.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "trashcan"
+        },
+        {
+            "name": "trashgreen"
+        },
+        {
+            "name": "trashblue"
+        }
+    ]
+}

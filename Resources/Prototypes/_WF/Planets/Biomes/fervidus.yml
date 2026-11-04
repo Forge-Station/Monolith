@@ -1,0 +1,217 @@
+# Fervidus: hot basalt, lava channels and ash. The ground is drawn from imported lavaland and Baystation tiles.
+# The imported tiles are indoor floors with no weather, so each one used outdoors gets a weather child here.
+# Natural ground: unbreakable. Names steer the orbit map: ash and tar read as rock, ash dirt as dry ground (WFPlanetMapSystem).
+# Every kind of flora has a layer of its own: a layer picks from its list by a noise value that bunches, so a list shows one or two kinds.
+
+# Ash flats.
+- type: tile
+  parent: ChompFloorOutdoorsLavalandAsh
+  id: WFFloorFervidusAshDust
+  isSubfloor: true
+  deconstructTools: []
+  indestructible: true
+  weather: true
+
+# Cooled crust: gray rock round the lava channels and in the ashfields.
+- type: tile
+  parent: ChompFloorOutdoorsLavalandAshrock
+  id: WFFloorFervidusAshRock
+  isSubfloor: true
+  deconstructTools: []
+  indestructible: true
+  weather: true
+
+# Ash-choked scrub ground.
+- type: tile
+  parent: NovaFloorGrassLavaland
+  id: WFFloorFervidusAshDirt
+  isSubfloor: true
+  deconstructTools: []
+  indestructible: true
+  weather: true
+
+# Small pools of tar. Cosmetic: they are tiles, so roads and POIs still count them as dry ground.
+- type: tile
+  parent: BayFloorWaterShallowTar
+  id: WFFloorFervidusTarPool
+  isSubfloor: true
+  deconstructTools: []
+  indestructible: true
+  weather: true
+
+# Small pale pools of sulfur.
+- type: tile
+  parent: BayFloorWaterShallowChlorineLiquid
+  id: WFFloorFervidusSulfurPool
+  isSubfloor: true
+  deconstructTools: []
+  indestructible: true
+  weather: true
+
+# Where the ashfields lie; tiles and flora both. Tar and sulfur pools are kept to ash ground.
+- type: biomeTemplate
+  id: WFFervidusAshFields
+  layers:
+  # Cooled rock at the field's edge, fine dust inside it (the field's own noise, a little higher), then bare ash dirt.
+  - !type:BiomeTileLayer
+    tile: WFFloorFervidusAshRock
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFFloorFervidusAshDust
+    threshold: 0.3
+    noise: { seed: 51, noiseType: OpenSimplex2, frequency: 0.007, fractalType: FBm, octaves: 2 }
+  - !type:BiomeTileLayer
+    tile: WFFloorFervidusAshDirt
+    threshold: 0.42
+    noise: { seed: 53, noiseType: OpenSimplex2, frequency: 0.012 }
+  - !type:BiomeTileLayer
+    tile: WFFloorFervidusTarPool
+    threshold: 0.95
+    noise: { seed: 54, noiseType: OpenSimplex2, frequency: 0.05 }
+  - !type:BiomeTileLayer
+    tile: WFFloorFervidusSulfurPool
+    threshold: 0.96
+    noise: { seed: 55, noiseType: OpenSimplex2, frequency: 0.05 }
+  # Ashfield wildlife: laser raptors and ash golems.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [WFFaunaFervidusAshfields]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  # Ash grass in stands on the scrub.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDirt]
+    entities: [ShiptestFloraGrassBrown]
+    threshold: 0.3
+    noise: { seed: 101, noiseType: OpenSimplex2, frequency: 3 }
+  # Ash grass in stands on the scrub.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDirt]
+    entities: [CMGrassTallgrassDesert]
+    threshold: 0.38
+    noise: { seed: 102, noiseType: OpenSimplex2, frequency: 3 }
+  # Dead scrub.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [CoyoteFloraBurnedbush3]
+    threshold: 0.96
+    noise: { seed: 103, noiseType: OpenSimplex2, frequency: 3 }
+  # Dead scrub.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [CoyoteFloraBurnedbush5]
+    threshold: 0.96
+    noise: { seed: 104, noiseType: OpenSimplex2, frequency: 3 }
+  # Dead scrub.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [GoonShrubDead]
+    threshold: 0.96
+    noise: { seed: 105, noiseType: OpenSimplex2, frequency: 3 }
+  # Ash cacti.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDirt]
+    entities: [WFFloraCoolCactus]
+    threshold: 0.9
+    noise: { seed: 106, noiseType: OpenSimplex2, frequency: 3 }
+  # Ash shrooms.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt, WFFloorFervidusAshRock]
+    entities: [NovaAshCapShroomColored]
+    threshold: 0.96
+    noise: { seed: 107, noiseType: OpenSimplex2, frequency: 3 }
+  # Ash shrooms.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt, WFFloorFervidusAshRock]
+    entities: [NovaAshLeafShroomColored]
+    threshold: 0.96
+    noise: { seed: 108, noiseType: OpenSimplex2, frequency: 3 }
+  # Ash shrooms.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt, WFFloorFervidusAshRock]
+    entities: [NovaAshTallShroomColored]
+    threshold: 0.96
+    noise: { seed: 109, noiseType: OpenSimplex2, frequency: 3 }
+  # Ash shrooms.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt, WFFloorFervidusAshRock]
+    entities: [WFFloraAshCapShroom]
+    threshold: 0.93
+    noise: { seed: 110, noiseType: OpenSimplex2, frequency: 3 }
+  # Ash shrooms.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt, WFFloorFervidusAshRock]
+    entities: [WFFloraAshLeafShroom]
+    threshold: 0.93
+    noise: { seed: 111, noiseType: OpenSimplex2, frequency: 3 }
+  # Ash flowers.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [TgFloraAshPlasmaFlower]
+    threshold: 0.95
+    noise: { seed: 112, noiseType: OpenSimplex2, frequency: 4 }
+  # Ash flowers.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [WFFloraFireBlossom]
+    threshold: 0.95
+    noise: { seed: 113, noiseType: OpenSimplex2, frequency: 4 }
+  # Ash flowers.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [TgFloraAshPodsneyzka]
+    threshold: 0.95
+    noise: { seed: 114, noiseType: OpenSimplex2, frequency: 4 }
+  # Ash flowers.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [WFFloraAshLung]
+    threshold: 0.97
+    noise: { seed: 115, noiseType: OpenSimplex2, frequency: 4 }
+  # Burnt trees, solid and rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [CoyoteFloraBurnedtree1]
+    threshold: 0.985
+    noise: { seed: 116, noiseType: OpenSimplex2, frequency: 2 }
+  # Burnt trees, solid and rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [CoyoteFloraBurnedtree2]
+    threshold: 0.985
+    noise: { seed: 117, noiseType: OpenSimplex2, frequency: 2 }
+  # Burnt trees, solid and rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [CoyoteFloraBurnedtree3]
+    threshold: 0.985
+    noise: { seed: 118, noiseType: OpenSimplex2, frequency: 2 }
+  # Burnt trees, solid and rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [CoyoteFloraBurnedtree5]
+    threshold: 0.985
+    noise: { seed: 119, noiseType: OpenSimplex2, frequency: 2 }
+  # Rarest of all, a lit dead tree.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshDust, WFFloorFervidusAshDirt]
+    entities: [ShiptestTreeDeadHell]
+    threshold: 0.99
+    noise: { seed: 120, noiseType: OpenSimplex2, frequency: 2 }
+
+# The crust of cooled rock round the lava channels (laid by WFOpenBasalt on the same noise as the crust tiles):
+# cinder slimes and the rare hellspawn, and ember flowers.
+- type: biomeTemplate
+  id: WFFervidusLavaCrust
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshRock]
+    entities: [WFFaunaFervidusCrust]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  # Spitting flowers.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFervidusAshRock]
+    entities: [WFFloraPlasmaSpitter]
+    threshold: 0.95
+    noise: { seed: 131, noiseType: OpenSimplex2, frequency: 3 }

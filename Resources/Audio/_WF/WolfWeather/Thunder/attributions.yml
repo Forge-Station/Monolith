@@ -1,0 +1,54 @@
+- files: ["thunder_near_inspectorj_3.ogg"]
+  license: "Custom"
+  copyright: '"THUN_InsJ_Thunder_Extremely-Close_03" from Sonniss GDC Game Audio Bundle 2023 - InspectorJ - Essentials 01 Thunder, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["thunder_near_mixkit1300.ogg"]
+  license: "Custom"
+  copyright: '"Strong close thunder explosion" from Mixkit (Mixkit Sound Effects Free License: free for commercial use including games, no attribution required, no standalone redistribution). Mixkit asset 1300.'
+  source: "https://mixkit.co/free-sound-effects/"
+
+- files: ["thunder_near_soundrangers_clap_4.ogg"]
+  license: "Custom"
+  copyright: '"thunder_clap_04" from Sonniss GDC Game Audio Bundle 2018 - Soundrangers - Thunder, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["thunder_near_soundrangers_strike_3.ogg"]
+  license: "Custom"
+  copyright: '"thunder_strike_03" from Sonniss GDC Game Audio Bundle 2018 - Soundrangers - Thunder, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["thunder_far_inspectorj_1.ogg"]
+  license: "Custom"
+  copyright: '"THUN_InsJ_Thunder_Distant_01_EQ" from Sonniss GDC Game Audio Bundle 2023 - InspectorJ - Essentials 01 Thunder, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["thunder_far_mixkit1278.ogg"]
+  license: "Custom"
+  copyright: '"Distant thunder explosion" from Mixkit (Mixkit Sound Effects Free License: free for commercial use including games, no attribution required, no standalone redistribution). Mixkit asset 1278.'
+  source: "https://mixkit.co/free-sound-effects/"
+
+- files: ["thunder_far_soundopolis_3.ogg"]
+  license: "Custom"
+  copyright: '"Thunder_Rumble_Deep_Fienup_003" from Sonniss GDC Game Audio Bundle 2015 - Soundopolis - Natures Fury_Thunder, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["thunder_far_soundrangers_3.ogg"]
+  license: "Custom"
+  copyright: '"thunder_mountainous_distant_03" from Sonniss GDC Game Audio Bundle 2018 - Soundrangers - Thunder, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["thunder_far_summers_1.ogg"]
+  license: "Custom"
+  copyright: '"Thunder_Rumble_Distant_Long_01" from SummersSound - Thunder Sound Effects Pack by SummersSound (royalty-free for commercial projects, no attribution required, no redistribution of the raw files).'
+  source: "https://summerssounds.itch.io/thunder-sound-effects-pack-rumbles-claps-distant-ambience"
+
+- files: ["thunder_far_summers_2.ogg"]
+  license: "Custom"
+  copyright: '"Thunder_Rumble_Distant_Long_02" from SummersSound - Thunder Sound Effects Pack by SummersSound (royalty-free for commercial projects, no attribution required, no redistribution of the raw files).'
+  source: "https://summerssounds.itch.io/thunder-sound-effects-pack-rumbles-claps-distant-ambience"
+
+- files: ["thunder_far_summers_3.ogg"]
+  license: "Custom"
+  copyright: '"Thunder_Rumble_Distant_Long_03" from SummersSound - Thunder Sound Effects Pack by SummersSound (royalty-free for commercial projects, no attribution required, no redistribution of the raw files).'
+  source: "https://summerssounds.itch.io/thunder-sound-effects-pack-rumbles-claps-distant-ambience"

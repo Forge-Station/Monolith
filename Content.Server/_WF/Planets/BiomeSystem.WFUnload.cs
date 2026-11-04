@@ -1,5 +1,7 @@
 using Content.Server._WF.Planets;
+using Content.Server._WF.Planets.Bounds;
 using Content.Shared._WF.CCVar;
+using Content.Shared._WF.GroundCover;
 using Content.Shared._WF.Planets;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Parallax.Biomes;
@@ -21,6 +23,7 @@ namespace Content.Server.Parallax;
 public sealed partial class BiomeSystem
 {
     [Dependency] private IGameTiming _wfTiming = default!;
+    [Dependency] private WFPlanetPreloadSystem _wfPreload = default!;
 
     /// <summary>How many chunks past the loaded area stay loaded, so its edge doesn't reload at every step back.</summary>
     public const int WfKeepRing = 2;
@@ -72,6 +75,9 @@ public sealed partial class BiomeSystem
 
         /// <summary>Chunks whose unload threw; they are left alone.</summary>
         public readonly HashSet<Vector2i> Broken = new();
+
+        /// <summary>Chunks of a preloaded ground whose biome entities are put away (BiomeSystem.WFStash).</summary>
+        public readonly HashSet<Vector2i> Stashed = new();
 
         /// <summary>What this layer's spawner rolls are salted with, drawn the first time one is made.</summary>
         public int? RollSalt;
@@ -130,6 +136,14 @@ public sealed partial class BiomeSystem
         if (!_wfUnloadEnabled || !HasComp<WFPlanetLayerComponent>(map))
             return false;
 
+        // One still generating keeps everything. A preloaded ground keeps its tiles and only stashes its entities.
+        if (_wfPreload.IsPreloading(map))
+            return true;
+
+        var preloaded = HasComp<WFPlanetPreloadedComponent>(map);
+        if (preloaded && !WfStashEnabled)
+            return true;
+
         var layer = _wfLayers.GetOrNew(map);
         var now = _wfTiming.CurTime;
 
@@ -142,7 +156,7 @@ public sealed partial class BiomeSystem
             }
 
             if (map == _wfTurnLayer)
-                WfUnloadDue(biome, map, grid, layer);
+                WfUnloadDue(biome, map, grid, layer, preloaded);
         }
         catch (Exception e)
         {
@@ -175,6 +189,10 @@ public sealed partial class BiomeSystem
 
         foreach (var chunk in loaded)
         {
+            // Already put away: there is nothing more to let go of.
+            if (layer.Stashed.Contains(chunk))
+                continue;
+
             if (_wfKeep.Contains(chunk) || layer.Broken.Contains(chunk))
             {
                 // Out of the queue as well: its entry there is skipped when its turn comes.
@@ -194,7 +212,7 @@ public sealed partial class BiomeSystem
         }
 
         // Chunks something else unloaded leave their clocks behind.
-        if (layer.IdleSince.Count <= loaded.Count)
+        if (layer.IdleSince.Count <= loaded.Count - layer.Stashed.Count)
             return;
 
         _wfStale.Clear();
@@ -252,7 +270,7 @@ public sealed partial class BiomeSystem
     }
 
     /// <summary>Unloads a layer's due chunks, oldest first, until the pass's time is spent; one always goes.</summary>
-    private void WfUnloadDue(BiomeComponent biome, EntityUid map, MapGridComponent grid, WfLayerUnload layer)
+    private void WfUnloadDue(BiomeComponent biome, EntityUid map, MapGridComponent grid, WfLayerUnload layer, bool stash)
     {
         var active = _activeChunks[biome];
         _wfWatch.Restart();
@@ -283,7 +301,10 @@ public sealed partial class BiomeSystem
 
             try
             {
-                WfUnloadChunkPristine(biome, map, grid, chunk);
+                if (stash)
+                    WfStashChunk(biome, map, grid, chunk);
+                else
+                    WfUnloadChunkPristine(biome, map, grid, chunk);
             }
             catch (Exception e)
             {
@@ -323,6 +344,8 @@ public sealed partial class BiomeSystem
         // Not loaded from here on, whatever is reached: z-physics reads each tile as it empties, and one emptied on a
         // loaded chunk is a hole.
         biome.LoadedChunks.Remove(chunk);
+        if (_wfLayers.TryGetValue(map, out var state))
+            state.Stashed.Remove(chunk);
 
         try
         {
@@ -411,7 +434,7 @@ public sealed partial class BiomeSystem
         if (HasComp<WFBiomeKeepComponent>(uid) || WfIsStandingSpawner(uid))
             return false;
 
-        if (!WfIsUntouched(uid))
+        if (!WfIsUntouched(uid) && !WfOnlyFroze(uid))
             return false;
 
         // Water keeps its pool as an entity inside it; drawing from the pool marks the pool, not the water.
@@ -438,6 +461,13 @@ public sealed partial class BiomeSystem
         }
 
         return true;
+    }
+
+    /// <summary>Water whose last change was freezing or thawing, which its next load takes again from the lake's ice.</summary>
+    private bool WfOnlyFroze(EntityUid uid)
+    {
+        return TryComp<WFFreezableWaterComponent>(uid, out var water)
+               && MetaData(uid).EntityLastModifiedTick.Value <= water.IceTick.Value + WfPristineSlack;
     }
 
     /// <summary>Whether nothing has marked an entity changed since the tick it spawned in, or the one after.</summary>

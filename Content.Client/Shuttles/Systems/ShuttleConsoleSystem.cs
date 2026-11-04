@@ -1,3 +1,4 @@
+using Content.Shared._WF.LandingGuide; // WOLFGATE(LandingGuide)
 using Content.Shared.Input;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Events;
@@ -30,6 +31,7 @@ namespace Content.Client.Shuttles.Systems
             shuttle.AddFunction(ContentKeyFunctions.ShuttleBrake);
             shuttle.AddFunction(ContentKeyFunctions.ShuttleAscend); // Mono
             shuttle.AddFunction(ContentKeyFunctions.ShuttleDescend); // Mono
+            shuttle.AddFunction(WFLandingGuideKeys.WFToggleLandingGuide); // WOLFGATE(LandingGuide): the landing guide toggle works while piloting
         }
 
         public override void Shutdown()

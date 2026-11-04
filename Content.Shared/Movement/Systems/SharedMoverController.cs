@@ -680,6 +680,16 @@ public abstract partial class SharedMoverController : VirtualController
         }
         // End Delta V NoShoesSilentFootsteps
 
+        // WOLFGATE(GroundCover) START: snow cover crunches underfoot over the floor's own sound
+        var snowStep = new Content.Shared._WF.GroundCover.WFSnowFootstepEvent(uid, xform.GridUid.Value, position);
+        RaiseLocalEvent(ref snowStep);
+        if (snowStep.Sound != null)
+        {
+            sound = snowStep.Sound;
+            return true;
+        }
+        // WOLFGATE END
+
         // Walking on a tile.
         // Tile def might have been passed in already from previous methods, so use that
         // if we have it

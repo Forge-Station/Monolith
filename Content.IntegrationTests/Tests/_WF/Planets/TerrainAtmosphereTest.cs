@@ -221,6 +221,9 @@ public sealed class TerrainAtmosphereTest
             ground = entMan.GetComponent<WFPlanetNetworkComponent>(network!.Value).GroundMap;
         });
 
+        // The climate sets the world's outdoor air on its first pass; a room sealed before then keeps the old air.
+        await server.WaitRunTicks(pair.SecondsToTicks(2.5f));
+
         // One tile walled in on all four sides, and two side by side walled in together.
         var alone = new Vector2i(2, 2);
         var first = new Vector2i(6, 2);

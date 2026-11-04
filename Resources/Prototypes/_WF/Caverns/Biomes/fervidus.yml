@@ -1,5 +1,8 @@
-# Fervidus: the Cinder Vaults. Basalt cut by lava tubes with ash banks, and ash chambers holding magma lakes, all lit
-# by ember lichen.
+# Fervidus: the Cinder Vaults. Basalt tunnels lit by ember lichen, cut by lava tubes with ash banks, and three kinds of
+# vault on the web: ash chambers holding magma lakes, obsidian galleries and sulphur vents. One low-frequency noise
+# picks the zone (the ash chambers are the default, the galleries where it runs high, the vents where it runs low), so
+# each is a stretch of ground over a hundred tiles across; a zone's chambers open at their own threshold. A vault is
+# ringed by the common chamber ash with its zone's floor inside it.
 # Layers run last to first and the first match wins. Walls only stand on basalt, so any other floor is open ground.
 
 - type: biomeTemplate
@@ -21,22 +24,45 @@
     entities: [WFCavernEmberLichen]
     threshold: 0.92
     noise: { seed: 32, noiseType: OpenSimplex2, frequency: 1 }
+  # Whatever crawls the tunnels between the zones.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorBasalt]
+    entities: [WFCavernFaunaFervidus]
+    threshold: 0.975
+    noise: { seed: 38, noiseType: OpenSimplex2, frequency: 3 }
   # Rock wherever ridged noise is at most the tunnel threshold; the tunnels are the ridges.
   - !type:BiomeMetaLayer
     template: WFCavernRockFervidus
     invert: true
     threshold: -0.64
     noise: { seed: 7, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.04 }
-  # Ash chambers on the web.
+  # Ash chambers on the web, the default zone.
   - !type:BiomeMetaLayer
     template: WFCavernChamberFervidus
-    threshold: 0.42
+    threshold: 0.4
     noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.028 }
+  # Obsidian galleries, where the zone noise runs high.
+  - !type:BiomeMetaLayer
+    template: WFCavernZoneGalleriesFervidus
+    threshold: 0.18
+    noise: { seed: 511, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.005 }
+  # Sulphur vents, where it runs low.
+  - !type:BiomeMetaLayer
+    template: WFCavernZoneVentsFervidus
+    invert: true
+    threshold: 0.22
+    noise: { seed: 511, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.005 }
   # Lava tubes, highest priority.
   - !type:BiomeMetaLayer
     template: WFCavernSignatureFervidus
     threshold: 0.86
     noise: { seed: 55, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.009 }
+  # Slime vaults (_WF/WildSlimes) under the surface's obsidian glass patches, over everything: the patch noise, its seed
+  # less the cavern's seed offset of 7919, at a lower threshold so each vault is a little wider than its patch.
+  - !type:BiomeMetaLayer
+    template: WFCavernSlimeZoneFervidus
+    threshold: 0.65
+    noise: { seed: -7687, noiseType: OpenSimplex2, frequency: 0.005 }
 
 - type: biomeTemplate
   id: WFCavernRockFervidus
@@ -82,6 +108,7 @@
     threshold: 0.97
     noise: { seed: 205, noiseType: OpenSimplex2, frequency: 0.2 }
 
+# Ash chambers: the original vault floor, with magma lakes.
 - type: biomeTemplate
   id: WFCavernChamberFervidus
   layers:
@@ -114,6 +141,110 @@
     entities: [FloorLavaEntity]
     threshold: 0.55
     noise: { seed: 305, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.05 }
+
+# The gallery zone: its vaults open at a lower chamber threshold than the ash chambers'.
+- type: biomeTemplate
+  id: WFCavernZoneGalleriesFervidus
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernChamberGalleriesFervidus
+    threshold: 0.3
+    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.028 }
+
+# Obsidian galleries: black glass in a rim of ash, orange crystals, shelf fungus to pick, fire pods, spiders and vipers.
+- type: biomeTemplate
+  id: WFCavernChamberGalleriesFervidus
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorAsh
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorObsidian
+    threshold: 0.45
+    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.028 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorObsidian]
+    entities: [BasaltOne, BasaltThree]
+    threshold: 0.98
+    noise: { seed: 301, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorObsidian]
+    entities: [CrystalOrange]
+    threshold: 0.985
+    noise: { seed: 304, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorObsidian]
+    entities: [WFCavernEmberLichen]
+    threshold: 0.94
+    noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorObsidian]
+    entities: [WFCaveHeatShelf]
+    threshold: 0.93
+    noise: { seed: 541, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorObsidian]
+    entities: [WFCaveFirePod]
+    threshold: 0.99
+    noise: { seed: 542, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorObsidian]
+    entities: [WFCavernFaunaFervidusGalleries]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  # A few magma pools.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorObsidian]
+    entities: [FloorLavaEntity]
+    threshold: 0.72
+    noise: { seed: 305, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.05 }
+
+# The vent zone.
+- type: biomeTemplate
+  id: WFCavernZoneVentsFervidus
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernChamberVentsFervidus
+    threshold: 0.26
+    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.028 }
+
+# Sulphur vents: yellow crust in a rim of ash, with no magma; sulphur blooms to scrape, vent caps that breathe poison,
+# ticks and carp.
+- type: biomeTemplate
+  id: WFCavernChamberVentsFervidus
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorAsh
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorSulphur
+    threshold: 0.4
+    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.028 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorSulphur]
+    entities: [FloraGreyStalagmite, BasaltTwo]
+    threshold: 0.98
+    noise: { seed: 301, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorSulphur]
+    entities: [WFCavernEmberLichen]
+    threshold: 0.94
+    noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorSulphur]
+    entities: [WFCaveSulphurBloom]
+    threshold: 0.92
+    noise: { seed: 551, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorSulphur]
+    entities: [WFCaveVentPuff]
+    threshold: 0.99
+    noise: { seed: 552, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAsh, WFCavernFloorSulphur]
+    entities: [WFCavernFaunaFervidusVents]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
 
 # A lava tube: an ash bank either side of a lava core on the same noise.
 - type: biomeTemplate

@@ -1,0 +1,182 @@
+# CMU's unarmed tank parts, under their CMU ids: the PMC and TWE turret bodies, the TWE treads, snowplow and artillery module,
+# and the mounted flag. A turret body has nested cannon and launcher slots that start empty; the guns that fill them
+# (VehicleTankAutocannonTWE, VehicleTankCupolaTWE, VehicleTankHeavyElectrolaserTWE, VehicleTankRocketLauncherTWE and the PMC
+# tank's VehicleTankRERE700) are in military_weapons.yml.
+#
+# Every TWE part carries HardpointCompatibilityTWETank, as does every slot of the FV150: a TWE part fits only the TWE tank, and
+# the TWE tank takes nothing else. The Longstreet and AEV take the rest of the tank parts.
+#
+# The parts drawn as an overlay (plow, artillery module, flag) name their damaged overlay state too: CMU gave each a damaged
+# vehicle state, which an overlay part never shows, so the overlay carries it.
+
+- type: entity
+  id: HardpointCompatibilityTWETank
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: HardpointCompatibility
+
+# The Longstreet turret in the PMC skin, with the standard tank turret's handling.
+- type: entity
+  parent: VehicleTankTurret
+  id: VehicleTankTurretPMC
+  suffix: PMC
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/wytank.rsi
+    state: tank_turret_0
+  - type: VehicleTurret
+    overlayRsi: _WF/Vehicles/wytank.rsi
+  - type: WFTurretTraverseAudio
+    startSound:
+      collection: WFRcsmTurretStart
+    loopSound: /Audio/_WF/Vehicles/RCSM/turret/loop.ogg
+    stopSound:
+      collection: WFRcsmTurretStop
+
+# The FV150's turret turns faster than the Longstreet's and does not hold its aim while the hull turns. Its nested slots take
+# only TWE guns.
+- type: entity
+  parent: VehicleTankTurret
+  id: VehicleTankTurretTWE
+  name: Improper TBA3 'Vandeleur' Turret
+  description: The TBA3 'Vandeleur' Turret, developed by Weyland Yutani as part of the 'B' upgrade package for the FV150 'Hobelar' Light Cavalry Tank. The Vandeleur is a direct evolution of the original FV150-A turret, with improvements to the internal systems and modularity. It can mount a wide array of weapon systems both quickly and easily, and features an inbuilt flare deployment system.
+  suffix: TWE
+  components:
+  - type: WFTurretTraverseAudio
+    startSound:
+      collection: WFRcsmHydraulicTurretStart
+    loopSound: /Audio/_WF/Vehicles/RCSM/turret/hydraulic_loop.ogg
+    stopSound:
+      collection: WFRcsmHydraulicTurretStop
+  - type: Sprite
+    sprite: _WF/Vehicles/CMU/fv150/exterior.rsi
+    state: tank_turret_0
+  - type: HardpointItem
+    compatibilityId: HardpointCompatibilityTWETank
+  - type: VehicleTurret
+    stabilizedRotation: false
+    rotationSpeed: 95
+    overlayRsi: _WF/Vehicles/CMU/fv150/exterior.rsi
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyTank
+    slots:
+    - id: turret-cannon
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      compatibilityId: HardpointCompatibilityTWETank
+      required: false
+      insertDelay: 2.0
+    - id: turret-launcher
+      hardpointType: HardpointTypeLauncher
+      slotType: HardpointSlotTypeLauncher
+      compatibilityId: HardpointCompatibilityTWETank
+      required: false
+      insertDelay: 2.0
+
+- type: entity
+  parent: VehicleTankTreads
+  id: VehicleTankTreadsTWE
+  suffix: TWE
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/CMU/fv150/icons.rsi
+    state: treads
+  - type: HardpointItem
+    compatibilityId: HardpointCompatibilityTWETank
+
+# The plow is a support part on the FV150: it slows the tank a little and does nothing else (plows are deferred).
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankSnowplowTWE
+  name: Improper tank snowplow
+  description: A reinforced snowplow attachment for a tank.
+  suffix: TWE
+  components:
+  - type: VehiclePlow
+    structureDamageMultiplier: 1.5
+  - type: Sprite
+    state: snowplow
+  - type: HardpointItem
+    compatibilityId: HardpointCompatibilityTWETank
+    hardpointType: HardpointTypeSupport
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.5
+    repairRate: 0.007
+  - type: HardpointIntegrity
+    maxIntegrity: 250
+  - type: VehicleSpeedModifierAttachment
+    speedMultiplier: 0.7
+  - type: VehicleTurret
+    showOverlay: true
+    overlayRsi: _WF/Vehicles/CMU/fv150/exterior.rsi
+    overlayState: twesnowplow_0
+    overlayDamagedState: twesnowplow_1
+  - type: HardpointVisual
+    vehicleState: twesnowplow_0
+    damagedVehicleState: twesnowplow_1
+
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: TWEVehicleTankArtilleryModule
+  name: Improper artillery module
+  description: An artillery support module for a tank.
+  suffix: TWE
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/CMU/fv150/icons.rsi
+    state: tweartillery
+  - type: HardpointItem
+    compatibilityId: HardpointCompatibilityTWETank
+    hardpointType: HardpointTypeSupport
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.075
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 250
+  - type: VehicleTurret
+    showOverlay: true
+    overlayRsi: _WF/Vehicles/CMU/fv150/exterior.rsi
+    overlayState: tweartillerymod_0
+    overlayDamagedState: tweartillerymod_1
+  - type: VehicleGunnerViewAttachment
+    pvsScale: 0.5
+    cursorMaxOffset: 2.8
+    cursorPvsIncrease: 0.5
+  - type: HardpointVisual
+    vehicleState: tweartillerymod_0
+    damagedVehicleState: tweartillerymod_1
+
+# Rides on the turret and turns with it. CMU named mountedflag_2 as its damaged state, which does not exist; it is mountedflag_1.
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankMountedFlag
+  name: Mounted UA Flag
+  description: A United Americas flag on a mounting support for the M34A2-A Multipurpose Turret. You feel a burst of energy by its mere sight.
+  components:
+  - type: Sprite
+    state: mounted_flag
+  - type: HardpointItem
+    hardpointType: HardpointTypeSupport
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeSupportAttachment
+    damageMultiplier: 0.0
+    repairRate: 0.0125
+  - type: HardpointIntegrity
+    maxIntegrity: 350
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "8,-51"
+    pixelOffsetEast: "-56,5"
+    pixelOffsetSouth: "7,46"
+    pixelOffsetWest: "42,5"
+    showOverlay: true
+    overlayRsi: _WF/Vehicles/tank.rsi
+    overlayState: mountedflag_0
+    overlayDamagedState: mountedflag_1
+  - type: HardpointVisual
+    vehicleState: mountedflag_0
+    damagedVehicleState: mountedflag_1

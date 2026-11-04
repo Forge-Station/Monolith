@@ -30,6 +30,13 @@ public sealed class CavernBiomeTest
     /// Section 6: what each world's signature feature leaves in the noise. A named template must place the entity by
     /// itself, and every tile where it does must carry it in the cavern too, so another layer can't stand in for it.
     /// </summary>
+    /// <summary>Wild slime grotto floors (_WF/WildSlimes), laid last over every cavern biome.</summary>
+    internal static readonly HashSet<string> WildSlimeGrottoTiles = new()
+    {
+        "WFCavernFloorVerdaWaterJelly", "WFCavernFloorMerakGlassSand", "WFCavernFloorThrasciasRimeIce",
+        "WFCavernFloorFleshJelly", "WFCavernFloorFervidusObsidianGlass", "WFCavernFloorAerumnaPinkCrystal",
+    };
+
     private static readonly Dictionary<string, Signature[]> Signatures = new()
     {
         {
@@ -214,7 +221,8 @@ public sealed class CavernBiomeTest
 
                     var alone = world.Templates[template];
                     var placed = Enumerable.Range(0, alone.Count).Where(i => signature.Matches(alone, i)).ToList();
-                    var missing = placed.Where(i => !signature.Matches(sample, i)).ToList();
+                    // Wild slime grottos (_WF/WildSlimes) are laid over everything, the signature included.
+                    var missing = placed.Where(i => !signature.Matches(sample, i) && !WildSlimeGrottoTiles.Contains(sample.Tiles[i] ?? string.Empty)).ToList();
                     TestContext.Out.WriteLine($"{world.Surface}: {placed.Count} samples of {signature.What} from {template}, {missing.Count} missing in the cavern.");
 
                     Assert.That(placed, Is.Not.Empty, $"{world.Surface}: {template} places no {signature.What} in {SignatureSize}² around the gate.");

@@ -1,0 +1,172 @@
+# Vehicle crew rosters. Engage range / standoff in tiles: tank 18/10, APC 16/8, humvee 14/6. Only the humvee and APC fire
+# on the move. A Hold crew guards its post and never pursues; a Patrol crew may. The civilian vehicles are unarmed: they
+# patrol, never engage, and the server switches them to Flee when hit.
+
+- type: wfVehicleCrew
+  id: WFVehicleCrewPirateHumvee
+  name: wf-vehicle-crew-name-pirate-humvee
+  vehicle: VehicleHumvee
+  driver: WFVehicleDriver
+  gunner: WFVehicleGunner
+  troopers: [ WFVehicleTrooper, WFVehicleTrooper ]
+  profile: WFVehicleCrewProfilePirate
+  faction: PirateNF
+  behaviour: Patrol
+  engagement: OnSight
+  engageRange: 14
+  standoff: 6
+  fireOnTheMove: true
+  skill: Green
+
+- type: wfVehicleCrew
+  id: WFVehicleCrewPirateTank
+  name: wf-vehicle-crew-name-pirate-tank
+  vehicle: WFVehicleTankArmed
+  driver: WFVehicleDriver
+  gunner: WFVehicleGunner
+  profile: WFVehicleCrewProfilePirate
+  faction: PirateNF
+  behaviour: Patrol
+  engagement: OnSight
+  engageRange: 18
+  standoff: 10
+  fireOnTheMove: false
+  skill: Green
+
+- type: wfVehicleCrew
+  id: WFVehicleCrewPirateApc
+  name: wf-vehicle-crew-name-pirate-apc
+  vehicle: WFVehicleAPCArmed
+  driver: WFVehicleDriver
+  gunner: WFVehicleGunner
+  troopers: [ WFVehicleTrooper, WFVehicleTrooper, WFVehicleTrooper, WFVehicleTrooper ]
+  profile: WFVehicleCrewProfilePirate
+  faction: PirateNF
+  behaviour: Patrol
+  engagement: OnSight
+  engageRange: 16
+  standoff: 8
+  fireOnTheMove: true
+  skill: Green
+
+# MercenariesExpeditionNF is hostile to everyone, so mercenaries use the neutral crew faction.
+- type: wfVehicleCrew
+  id: WFVehicleCrewMercenaryTank
+  name: wf-vehicle-crew-name-mercenary-tank
+  vehicle: WFVehicleTankPMCArmed
+  driver: WFVehicleDriver
+  gunner: WFVehicleGunner
+  profile: WFVehicleCrewProfileMercenary
+  faction: WFCrew
+  behaviour: Hold
+  engagement: WhenAttacked
+  engageRange: 18
+  standoff: 10
+  fireOnTheMove: false
+  guardRadius: 12
+  skill: Veteran
+
+- type: wfVehicleCrew
+  id: WFVehicleCrewTsfTank
+  name: wf-vehicle-crew-name-tsf-tank
+  vehicle: WFVehicleTankTWEArmed
+  driver: WFVehicleDriver
+  gunner: WFVehicleGunner
+  profile: WFVehicleCrewProfileTsf
+  faction: TSFMC
+  behaviour: Hold
+  engagement: OnSight
+  engageRange: 18
+  standoff: 10
+  fireOnTheMove: false
+  guardRadius: 12
+  skill: Veteran
+
+- type: wfVehicleCrew
+  id: WFVehicleCrewTsfApc
+  name: wf-vehicle-crew-name-tsf-apc
+  vehicle: WFVehicleAPCArmed
+  driver: WFVehicleDriver
+  gunner: WFVehicleGunner
+  troopers: [ WFVehicleTrooper, WFVehicleTrooper, WFVehicleTrooper, WFVehicleTrooper ]
+  profile: WFVehicleCrewProfileTsf
+  faction: TSFMC
+  behaviour: Patrol
+  engagement: OnSight
+  engageRange: 16
+  standoff: 8
+  fireOnTheMove: true
+  skill: Veteran
+
+- type: wfVehicleCrew
+  id: WFVehicleCrewUsspApc
+  name: wf-vehicle-crew-name-ussp-apc
+  vehicle: VehicleSPPAPC
+  driver: WFVehicleDriver
+  gunner: WFVehicleGunner
+  troopers: [ WFVehicleTrooper, WFVehicleTrooper, WFVehicleTrooper, WFVehicleTrooper ]
+  profile: WFVehicleCrewProfileUssp
+  faction: USSP
+  behaviour: Patrol
+  engagement: OnSight
+  engageRange: 16
+  standoff: 8
+  fireOnTheMove: true
+  skill: Regular
+
+- type: wfVehicleCrew
+  id: WFVehicleCrewUsspTank
+  name: wf-vehicle-crew-name-ussp-tank
+  vehicle: VehicleSPPTank
+  driver: WFVehicleDriver
+  gunner: WFVehicleGunner
+  profile: WFVehicleCrewProfileUssp
+  faction: USSP
+  behaviour: Hold
+  engagement: OnSight
+  engageRange: 18
+  standoff: 10
+  fireOnTheMove: false
+  skill: Regular
+
+- type: wfVehicleCrew
+  id: WFVehicleCrewCivilianTruck
+  name: wf-vehicle-crew-name-civilian-truck
+  vehicle: AU14VehicleCivTruck
+  driver: WFVehicleDriver
+  profile: WFVehicleCrewProfileCivilian
+  faction: WFCrew
+  behaviour: Patrol
+  engagement: WhenAttacked
+  skill: Green
+
+- type: wfVehicleCrew
+  id: WFVehicleCrewCivilianVan
+  name: wf-vehicle-crew-name-civilian-van
+  vehicle: AU14VehicleCivVan
+  driver: WFVehicleDriver
+  profile: WFVehicleCrewProfileCivilian
+  faction: WFCrew
+  behaviour: Patrol
+  engagement: WhenAttacked
+  skill: Green
+
+# Ashfall Reavers driving the roads of every world in an old APC (a POI table's `roadPatrols`): they leave people be
+# unless shot at, and barely stop on their way up and down the road.
+- type: wfVehicleCrew
+  id: WFVehicleCrewReaverRoadPatrol
+  name: wf-vehicle-crew-name-reaver-road-patrol
+  vehicle: WFVehicleAPCArmed
+  driver: WFVehicleDriver
+  gunner: WFVehicleGunner
+  troopers: [ WFVehicleTrooper, WFVehicleTrooper ]
+  profile: WFVehicleCrewProfilePirate
+  faction: PirateNF
+  behaviour: Patrol
+  engagement: WhenAttacked
+  engageRange: 16
+  standoff: 8
+  fireOnTheMove: true
+  skill: Green
+  patrolPauseMin: 0
+  patrolPauseMax: 2

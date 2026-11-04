@@ -1,0 +1,23 @@
+- files:
+  - gore_splat1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/object_physics/gore_splat1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - gore_splat2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/object_physics/gore_splat2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - gore1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/object_physics/gore1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - gibbing1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/physics/gibbing/gibbing1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

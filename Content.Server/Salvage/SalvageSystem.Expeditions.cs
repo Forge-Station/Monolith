@@ -176,7 +176,11 @@ public sealed partial class SalvageSystem
                 comp.Cooldown = false;
             //comp.NextOffer += TimeSpan.FromSeconds(_cooldown); // Frontier
             comp.NextOffer = currentTime + TimeSpan.FromSeconds(_cooldown); // Frontier
-            GenerateMissions(comp);
+            // WOLFGATE(PlanetExpeditions) START: sites on the sector's worlds are offered in place of generated maps
+            // GenerateMissions(comp);
+            if (!WfTryOfferPlanetMissions(uid, comp))
+                GenerateMissions(comp);
+            // WOLFGATE END
             UpdateConsoles(uid, comp);
         }
     }

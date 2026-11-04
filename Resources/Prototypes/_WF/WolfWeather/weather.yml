@@ -1,0 +1,331 @@
+# Example weather:
+#
+# - type: wolfWeather
+#   id: WFMyRain
+#   wind: 0.6, 0
+#   sounds: # All of these play at once.
+#   - files: # One is picked at random.
+#     - /Audio/_WF/WolfWeather/Rain/rain_moderate_helton_1.ogg
+#     - /Audio/_WF/WolfWeather/Rain/rain_moderate_helton_2.ogg
+#     volume: 0.5 # 1 is normal.
+#   ambientTint: "#d3d8e0"
+#   layers:
+#   - kind: Rain
+#     spacing: 0.45
+#     density: 0.5
+#     fallSpeed: 13
+#     color: "#9fb4d066"
+#
+# A sound can name a soundCollection instead of files; the loops shared by several weathers are collections below.
+
+- type: shader
+  id: WFWolfWeather
+  kind: source
+  path: "/Textures/_WF/WolfWeather/Shaders/wolf_weather.swsl"
+
+- type: shader
+  id: WFWolfWeatherBlur
+  kind: source
+  path: "/Textures/_WF/WolfWeather/Shaders/wolf_weather_blur.swsl"
+
+- type: wolfWeatherSettings
+  id: WFDefault
+  calmWindResponse: 6
+  indoorSearch: 16
+  indoorNear: 2
+  indoorNearLevel: 0.4
+  pushEnabled: true
+  pushInterval: 0.5
+  pushThreshold: 3
+  pushRadius: 12
+  pushMaxWeight: 2
+  pushChance: 0.35
+  pushStrength: 0.3
+  pushMaxPerTick: 64
+
+- type: wolfWeather
+  id: WFRainLight
+  groundWetness: 0.5
+  wind: 0.4, 0
+  sounds:
+  - files:
+    - /Audio/_WF/WolfWeather/Rain/rain_light_helton_5.ogg
+    - /Audio/_WF/WolfWeather/Rain/rain_light_helton_10.ogg
+    volume: 0.4
+  ambientTint: "#e8ebf0"
+  layers:
+  - kind: Rain
+    windScale: 4.8
+    spacing: 0.6
+    density: 0.35
+    fallSpeed: 11
+    length: 4
+    color: "#9fb4d04d"
+  - kind: Splash
+    spacing: 0.6
+    density: 0.4
+    rate: 1
+    color: "#c8d6ea80"
+    minQuality: 2
+
+- type: wolfWeather
+  id: WFRainModerate
+  groundWetness: 0.8
+  wind: 0.6, 0
+  sounds:
+  - files:
+    - /Audio/_WF/WolfWeather/Rain/rain_moderate_helton_1.ogg
+    - /Audio/_WF/WolfWeather/Rain/rain_moderate_helton_2.ogg
+    - /Audio/_WF/WolfWeather/Rain/rain_moderate_helton_7.ogg
+    volume: 0.55
+  - collection: WFWolfRainLayer
+    volume: 0.22
+  ambientTint: "#d3d8e0"
+  layers:
+  - kind: Rain
+    windScale: 5.8
+    spacing: 0.45
+    density: 0.5
+    fallSpeed: 13
+    length: 5
+    color: "#9fb4d059"
+  - kind: Rain
+    windScale: 7.6
+    spacing: 0.7
+    density: 0.45
+    fallSpeed: 17
+    length: 9
+    color: "#c8d6ea8c"
+  - kind: Splash
+    spacing: 0.5
+    density: 0.55
+    rate: 1.5
+    color: "#c8d6ea99"
+    minQuality: 2
+
+- type: wolfWeather
+  id: WFRainHeavy
+  groundWetness: 1
+  wind: 1, 0
+  sounds:
+  - collection: WFWolfRainHeavy
+    volume: 0.8
+  - collection: WFWolfWindLight
+    volume: 0.2
+  ambientTint: "#bcc3ce"
+  lightning:
+    interval: 30, 90
+    farSound:
+      collection: WFWolfThunderFar
+      params:
+        volume: 0
+        variation: 0.05
+  layers:
+  - kind: Rain
+    windScale: 5.5
+    spacing: 0.38
+    density: 0.6
+    fallSpeed: 15
+    length: 6
+    color: "#9fb4d066"
+  - kind: Rain
+    windScale: 6.9
+    spacing: 0.55
+    density: 0.55
+    fallSpeed: 19
+    length: 10
+    color: "#c8d6ea99"
+  - kind: Rain
+    windScale: 8.4
+    spacing: 0.9
+    density: 0.4
+    fallSpeed: 23
+    length: 13
+    color: "#d6e1f0a6"
+    minQuality: 2
+  - kind: Splash
+    spacing: 0.42
+    density: 0.65
+    rate: 2
+    color: "#c8d6eaa6"
+    minQuality: 2
+
+- type: wolfWeather
+  id: WFStorm
+  groundWetness: 1
+  wind: 2.5, 0
+  gust: 0.25
+  gustPeriod: 15
+  sounds:
+  - collection: WFWolfRainHeavy
+    volume: 0.63
+  - collection: WFWolfWindStrong
+    volume: 0.32
+  ambientTint: "#a0a9b8"
+  lightning:
+    interval: 8, 25
+    strikeChance: 0.3
+    nearSound:
+      collection: WFWolfThunderNear
+      params:
+        maxDistance: 120
+        referenceDistance: 10
+        rolloffFactor: 0.3
+        variation: 0.05
+    farSound:
+      collection: WFWolfThunderFar
+      params:
+        volume: 0
+        variation: 0.05
+  layers:
+  - kind: Rain
+    windScale: 3.5
+    spacing: 0.35
+    density: 0.6
+    fallSpeed: 15
+    length: 6
+    color: "#8ea3c066"
+  - kind: Rain
+    windScale: 4.4
+    spacing: 0.5
+    density: 0.55
+    fallSpeed: 19
+    length: 10
+    color: "#b9c8de99"
+  - kind: Rain
+    windScale: 5.5
+    spacing: 0.9
+    density: 0.4
+    fallSpeed: 24
+    length: 14
+    color: "#d6e1f0b3"
+    minQuality: 2
+  - kind: Splash
+    spacing: 0.4
+    density: 0.7
+    rate: 2.2
+    color: "#c8d6eab3"
+    minQuality: 2
+
+- type: wolfWeather
+  id: WFSnow
+  snowfall: 0.5
+  wind: 0.4, 0
+  sounds:
+  - files:
+    - /Audio/Effects/Weather/snowstorm_weak.ogg
+    volume: 0.3
+  ambientTint: "#f0f3f8"
+  layers:
+  - kind: Snow
+    windScale: 0.35
+    spacing: 0.4
+    density: 0.45
+    fallSpeed: 1.1
+    width: 1
+    wobble: 1.5
+    color: "#ffffffa6"
+  - kind: Snow
+    windScale: 0.35
+    spacing: 0.7
+    density: 0.4
+    fallSpeed: 1.8
+    width: 2
+    wobble: 2.5
+    color: "#ffffffd9"
+    minQuality: 2
+
+- type: wolfWeather
+  id: WFBlizzard
+  snowfall: 1.5
+  wind: 6, -0.5
+  gust: 0.3
+  gustPeriod: 12
+  windResponse: 4
+  sounds:
+  - files:
+    - /Audio/Effects/Weather/snowstorm.ogg
+    volume: 0.4
+  - files:
+    - /Audio/_WF/WolfWeather/oga_wind_whoosh_loop.ogg
+    volume: 0.2
+  - collection: WFWolfWindStrong
+    volume: 0.4
+  ambientTint: "#cdd4de"
+  layers:
+  - kind: Snow
+    windScale: 0.35
+    spacing: 0.3
+    density: 0.6
+    fallSpeed: 2
+    width: 1
+    wobble: 1
+    color: "#ffffffb3"
+  - kind: Snow
+    windScale: 0.35
+    spacing: 0.5
+    density: 0.55
+    fallSpeed: 2.5
+    width: 2
+    wobble: 1.5
+    color: "#ffffffd9"
+  - kind: Snow
+    windScale: 0.45
+    spacing: 0.9
+    density: 0.4
+    fallSpeed: 3
+    width: 3
+    wobble: 2
+    color: "#ffffffe6"
+    minQuality: 2
+
+- type: soundCollection
+  id: WFWolfRainLayer
+  files:
+  - /Audio/_WF/WolfWeather/Rain/rain_layer_mixkit2474.ogg
+
+- type: soundCollection
+  id: WFWolfRainHeavy
+  files:
+  - /Audio/_WF/WolfWeather/Rain/rain_heavy_helton_3.ogg
+  - /Audio/_WF/WolfWeather/Rain/rain_heavy_helton_7.ogg
+  - /Audio/_WF/WolfWeather/Rain/rain_heavy_helton_8.ogg
+  - /Audio/_WF/WolfWeather/Rain/rain_heavy_helton_9.ogg
+  - /Audio/_WF/WolfWeather/Rain/rain_heavy_mixkit1262_1.ogg
+  - /Audio/_WF/WolfWeather/Rain/rain_heavy_mixkit1262_2.ogg
+
+- type: soundCollection
+  id: WFWolfWindLight
+  files:
+  - /Audio/_WF/WolfWeather/Wind/wind_light_helton_10.ogg
+  - /Audio/_WF/WolfWeather/Wind/wind_light_mixkit2658.ogg
+
+- type: soundCollection
+  id: WFWolfWindStrong
+  files:
+  - /Audio/_WF/WolfWeather/Wind/wind_strong_344_1.ogg
+  - /Audio/_WF/WolfWeather/Wind/wind_strong_344_2.ogg
+  - /Audio/_WF/WolfWeather/Wind/wind_strong_helton_2.ogg
+  - /Audio/_WF/WolfWeather/Wind/wind_strong_helton_4.ogg
+  - /Audio/_WF/WolfWeather/Wind/wind_strong_helton_8.ogg
+  - /Audio/_WF/WolfWeather/Wind/wind_strong_helton_10.ogg
+  - /Audio/_WF/WolfWeather/Wind/wind_strong_synth.ogg
+
+- type: soundCollection
+  id: WFWolfThunderNear
+  files:
+  - /Audio/_WF/WolfWeather/Thunder/thunder_near_inspectorj_3.ogg
+  - /Audio/_WF/WolfWeather/Thunder/thunder_near_mixkit1300.ogg
+  - /Audio/_WF/WolfWeather/Thunder/thunder_near_soundrangers_clap_4.ogg
+  - /Audio/_WF/WolfWeather/Thunder/thunder_near_soundrangers_strike_3.ogg
+
+- type: soundCollection
+  id: WFWolfThunderFar
+  files:
+  - /Audio/_WF/WolfWeather/Thunder/thunder_far_inspectorj_1.ogg
+  - /Audio/_WF/WolfWeather/Thunder/thunder_far_mixkit1278.ogg
+  - /Audio/_WF/WolfWeather/Thunder/thunder_far_soundopolis_3.ogg
+  - /Audio/_WF/WolfWeather/Thunder/thunder_far_soundrangers_3.ogg
+  - /Audio/_WF/WolfWeather/Thunder/thunder_far_summers_1.ogg
+  - /Audio/_WF/WolfWeather/Thunder/thunder_far_summers_2.ogg
+  - /Audio/_WF/WolfWeather/Thunder/thunder_far_summers_3.ogg

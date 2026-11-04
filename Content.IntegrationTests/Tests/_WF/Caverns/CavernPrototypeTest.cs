@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.Server._WF.Caverns;
+using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._DV.Planet;
 using Content.Shared._WF.Caverns;
 using Content.Shared._WF.Planets;
 using Content.Shared.Burial.Components;
+using Content.Server.Construction.Components;
 using Content.Shared.Lathe;
 using Content.Shared.Maps;
 using Content.Shared.Parallax.Biomes;
@@ -24,7 +26,9 @@ namespace Content.IntegrationTests.Tests._WF.Caverns;
 [TestOf(typeof(WFCavernPrototype))]
 public sealed class CavernPrototypeTest
 {
-    /// <summary>The self-deleting markers a cavern template may place: loot, and fauna through the planet caps.</summary>
+    private static readonly EntProtoId AutolatheProto = "Autolathe";
+
+    /// <summary>The self-deleting markers a cavern template may place: loot, and fauna through the planet caps (every <c>WFCavernFauna*</c> marker).</summary>
     private static readonly HashSet<string> AllowedSpawners = new()
     {
         "WFCavernFaunaAsclepiu",
@@ -87,7 +91,7 @@ public sealed class CavernPrototypeTest
                     entities.UnionWith(spec.Avoid.Select(entity => entity.Id));
                     entities.UnionWith(spec.Rim.Select(entity => entity.Id));
                     entities.Add(spec.Shade);
-                    entities.Add(spec.ClimbPoint);
+                    entities.Add(spec.Stairs);
 
                     foreach (var tile in tiles)
                     {
@@ -101,8 +105,12 @@ public sealed class CavernPrototypeTest
 
                     Assert.That(proto.Index<EntityPrototype>(spec.Shade).HasComponent<WFCavernShaftComponent>(factory), Is.True,
                         $"{cavern.ID}'s shade {spec.Shade} is not a shaft.");
-                    Assert.That(proto.Index<EntityPrototype>(spec.ClimbPoint).HasComponent<WFCavernClimbComponent>(factory), Is.True,
-                        $"{cavern.ID}'s climb point {spec.ClimbPoint} can't be climbed.");
+                    Assert.That(proto.Index<EntityPrototype>(spec.Stairs).HasComponent<WFCavernStairsComponent>(factory), Is.True,
+                        $"{cavern.ID}'s stairs {spec.Stairs} are not cavern stairs.");
+                    Assert.That(proto.Index<EntityPrototype>(spec.Stairs).HasComponent<CEZLevelHighGroundComponent>(factory), Is.True,
+                        $"{cavern.ID}'s stairs {spec.Stairs} can't be walked.");
+                    Assert.That(proto.Index<EntityPrototype>(spec.Stairs).HasComponent<ConstructionComponent>(factory), Is.False,
+                        $"{cavern.ID}'s stairs {spec.Stairs} can be taken apart.");
                 }
             }
         });
@@ -163,7 +171,7 @@ public sealed class CavernPrototypeTest
 
                     foreach (var id in entities)
                     {
-                        if (AllowedSpawners.Contains(id))
+                        if (AllowedSpawners.Contains(id) || id.StartsWith("WFCavernFauna"))
                             continue;
 
                         Assert.That(id, Does.Not.StartWith("MonoPlanetmap"), $"{cavern.ID} places the outcrop spawner {id}.");
@@ -191,7 +199,7 @@ public sealed class CavernPrototypeTest
 
         await server.WaitAssertion(() =>
         {
-            Assert.That(proto.Index<EntityPrototype>("Autolathe").TryGetComponent<LatheComponent>(out var lathe, factory));
+            Assert.That(proto.Index(AutolatheProto).TryComp<LatheComponent>(out var lathe, factory));
             var shovels = lathe!.StaticPacks
                 .SelectMany(pack => proto.Index(pack).Recipes)
                 .Select(recipe => proto.Index<LatheRecipePrototype>(recipe).Result)
@@ -203,7 +211,7 @@ public sealed class CavernPrototypeTest
 
         bool DigsShafts(EntityPrototype item)
         {
-            if (!item.HasComponent<ShovelComponent>(factory) || !item.TryGetComponent<ToolComponent>(out var tool, factory))
+            if (!item.HasComponent<ShovelComponent>(factory) || !item.TryComp<ToolComponent>(out var tool, factory))
                 return false;
             var qualities = tool.Qualities;
             return qualities.Contains(WFCavernDigSystem.DiggingQuality);

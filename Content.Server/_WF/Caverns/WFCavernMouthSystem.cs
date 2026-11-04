@@ -47,6 +47,7 @@ public sealed partial class WFCavernMouthSystem : EntitySystem
         base.Initialize();
 
         InitializeHoles();
+        InitializePreclaim();
         Subs.CVar(_cfg, CavernCVars.CavernClaims, enabled => _claimsEnabled = enabled, true);
     }
 
@@ -132,7 +133,7 @@ public sealed partial class WFCavernMouthSystem : EntitySystem
     }
 
     /// <summary>Carves an admin mouth anchored at a ground tile, its shape seeded by that tile, clearing biome entities from loaded terrain.</summary>
-    /// <param name="refusal">Why it was refused: cavern (either map is gone), grid, built, mob or mouth.</param>
+    /// <param name="refusal">Why it was refused: cavern (either map is gone), bounds, grid, built, mob or mouth.</param>
     /// <param name="ignore">A mob allowed to stand in the hole, such as the admin carving it.</param>
     public bool TryOpenMouth(
         Entity<WFCavernGroundComponent> ground,
@@ -152,10 +153,18 @@ public sealed partial class WFCavernMouthSystem : EntitySystem
         var mapId = Comp<MapComponent>(ground).MapId;
         var hole = Offset(origin, shape.Hole);
 
-        // Another mouth's hole or climb point in the footprint, or its pinned pad under ours, which the stamp would overwrite.
+        // The whole pad stays inside the world's circle, as a claimed mouth's does.
+        if (TryComp<WFPlanetBoundsComponent>(ground, out var worldBounds) && worldBounds.Radius > 0f
+            && Offset(origin, shape.Pad(context.Spec.PadRadius)).Any(index => !worldBounds.ContainsTile(index)))
+        {
+            refusal = "bounds";
+            return false;
+        }
+
+        // Another mouth's hole or stairs in the footprint, or its pinned pad under ours, which the stamp would overwrite.
         var levelBiome = (context.Level.Owner, context.Level.Comp1);
         if (Offset(origin, shape.Hole.Concat(shape.Ring))
-                .Any(index => ground.Comp.Shades.ContainsKey(index) || ground.Comp.ClimbPoints.ContainsKey(index))
+                .Any(index => ground.Comp.Shades.ContainsKey(index) || ground.Comp.Stairways.ContainsKey(index))
             || Offset(origin, shape.Pad(context.Spec.PadRadius)).Any(index => _biome.WfIsPinned(levelBiome, index)))
         {
             refusal = "mouth";

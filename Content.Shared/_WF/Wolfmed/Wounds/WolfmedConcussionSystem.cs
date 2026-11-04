@@ -7,6 +7,7 @@ using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Eye.Blinding.Systems;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Speech.EntitySystems;
@@ -98,7 +99,7 @@ public sealed class WolfmedConcussionSystem : EntitySystem
             if (!Deleted(body) && body.Comp.Drop)
             {
                 _slur.DoSlur(body, TimeSpan.FromSeconds(elapsed * 2f + 2f));
-                if (_random.Prob(Math.Clamp(body.Comp.DropChance * elapsed, 0f, 1f)))
+                if (HasComp<HandsComponent>(body) && _random.Prob(Math.Clamp(body.Comp.DropChance * elapsed, 0f, 1f)))
                     _hands.TryDrop(body.Owner, checkActionBlocker: false);
             }
 

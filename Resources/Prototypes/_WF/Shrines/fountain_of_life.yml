@@ -1,0 +1,97 @@
+# Carcinoma's shrine. Vitae can't be made or bought: each round the fountain holds three doses, and a dose heals
+# everything at once.
+
+- type: reagent
+  id: WFVitae
+  name: reagent-name-wf-vitae
+  group: Medicine
+  desc: reagent-desc-wf-vitae
+  physicalDesc: reagent-physical-desc-wf-vitae
+  flavor: sweet
+  color: "#ffd678"
+  metabolisms:
+    Medicine:
+      # Slow, so a dose builds up as it is absorbed; less than a dose waits for more.
+      metabolismRate: 0.1
+      effects:
+      - !type:WFLifeSurge
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+        type: Local
+        visualType: Large
+        messages: [ "wf-vitae-surge" ]
+        probability: 1
+      # Last: the conditions above read the amount still in the blood.
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+        reagent: WFVitae
+        amount: -10
+
+- type: entity
+  id: WFFountainOfLife
+  parent: BaseStructure
+  name: fountain of life
+  description: A bowl of living flesh around a heart that will not stop. What it bleeds heals any wound, and it bleeds very little.
+  components:
+  - type: Sprite
+    sprite: _WF/Shrines/fountain_of_life.rsi
+    offset: 0, 0.4
+    noRot: true
+    layers:
+    - state: basin
+    - state: fill-3
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+      shader: unshaded
+      visible: false
+    - state: spire
+      map: [ "spire" ]
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: fill-
+    changeColor: false
+    solutionName: fountain
+  - type: GenericVisualizer
+    visuals:
+      enum.WFFountainVisuals.Dry:
+        spire:
+          True: { state: spire-dry }
+          False: { state: spire }
+  - type: PointLight
+    radius: 4
+    energy: 1.6
+    color: "#ffcf7a"
+  - type: SolutionContainerManager
+    solutions:
+      fountain:
+        maxVol: 30
+        reagents:
+        - ReagentId: WFVitae
+          Quantity: 30
+  - type: DrainableSolution
+    solution: fountain
+  - type: ExaminableSolution
+    solution: fountain
+  - type: ReagentTank
+  - type: WFFountain
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.85,-0.45,0.85,0.4"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Transform
+    anchored: true
+    noRot: true

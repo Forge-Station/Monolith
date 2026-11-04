@@ -1,0 +1,14 @@
+# Given to whoever operates a vehicle that has VehicleOvercharge, and taken back when they stop.
+- type: entity
+  id: WFActionVehicleOvercharge
+  categories: [ WFVehicles ]
+  components:
+  - type: InstantAction
+    autoPopulate: false
+    icon:
+      sprite: Interface/Actions/actions_mecha.rsi
+      state: mech_overload_off
+    event: !type:VehicleOverchargeActionEvent
+    checkCanInteract: false
+    raiseOnUser: true
+    itemIconStyle: NoItem

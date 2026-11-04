@@ -1,5 +1,6 @@
-# Thrascias: the Rime Galleries. Dug-snow tunnels and snowdrift chambers lit by rime thistles, crossed by long ice
-# galleries with ice columns, blue crystals and plasma lakes at their cores.
+# Thrascias: the Rime Galleries. Dug-snow tunnels web the rock; in the snowdrift hollows frost fungus and hearth lichen
+# grow round the thistles that light the way. Where the cold is deepest the hollows turn to frozen falls, ice in three
+# shades hung with icicles, and long ice galleries run round plasma lakes with a dark shore.
 # Layers run last to first and the first match wins. Walls only stand on dug snow, so any other floor is open ground.
 
 - type: biomeTemplate
@@ -15,22 +16,69 @@
     entities: [WFCavernRimeThistle]
     threshold: 0.945
     noise: { seed: 32, noiseType: OpenSimplex2, frequency: 1 }
+  # The tunnels' own wildlife, sparse.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WFCavernFaunaThrascias]
+    threshold: 0.985
+    noise: { seed: 38, noiseType: OpenSimplex2, frequency: 3 }
+  # Tunnel plants in the stretches where the rock has kept some warmth.
+  - !type:BiomeMetaLayer
+    template: WFCavernTunnelsThrascias
+    threshold: 0
+    noise: { seed: 411, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.007 }
   # Rock wherever ridged noise is at most the tunnel threshold; the tunnels are the ridges.
   - !type:BiomeMetaLayer
     template: WFCavernRockThrascias
     invert: true
     threshold: -0.6
     noise: { seed: 7, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.045 }
-  # Snowdrift chambers on the web.
+  # Snowdrift hollows on the web, with frozen falls where the cold is deepest.
   - !type:BiomeMetaLayer
     template: WFCavernChamberThrascias
-    threshold: 0.35
-    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.025 }
+    threshold: 0.52
+    noise: { seed: 101, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.018 }
+  # Frozen falls: a few big halls.
+  - !type:BiomeMetaLayer
+    template: WFCavernFallsThrascias
+    threshold: 0.46
+    noise: { seed: 421, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.008 }
+  # The dark shore round the galleries.
+  - !type:BiomeMetaLayer
+    template: WFCavernShoreThrascias
+    threshold: 0.58
+    noise: { seed: 55, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.018 }
   # Ice galleries, highest priority.
   - !type:BiomeMetaLayer
     template: WFCavernSignatureThrascias
     threshold: 0.65
     noise: { seed: 55, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.018 }
+  # Slime grottos (_WF/WildSlimes) under the surface's rime patches, over everything: the plasma pools' noise, its seed
+  # less the cavern's seed offset of 7937, at a lower threshold so each grotto is a little wider than its patch.
+  - !type:BiomeMetaLayer
+    template: WFCavernSlimeZoneThrascias
+    threshold: 0.81
+    noise: { seed: -7934, noiseType: OpenSimplex2, frequency: 0.004, fractalType: Ridged, octaves: 1 }
+
+- type: biomeTemplate
+  id: WFCavernTunnelsThrascias
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WFCavernRimeCapPlant]
+    threshold: 0.93
+    noise: { seed: 451, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WFCavernHearthLichenPlant]
+    threshold: 0.94
+    noise: { seed: 452, noiseType: OpenSimplex2, frequency: 1 }
+  # Rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorSnowDug]
+    entities: [WFCavernHangingIcicle]
+    threshold: 0.985
+    noise: { seed: 453, noiseType: OpenSimplex2, frequency: 1 }
 
 - type: biomeTemplate
   id: WFCavernRockThrascias
@@ -64,6 +112,7 @@
     threshold: 0.95
     noise: { seed: 204, noiseType: OpenSimplex2, frequency: 0.2 }
 
+# The drift hollows: snowdrift floor, fungus gardens and lichen, with the frozen falls nested where the cold is deepest.
 - type: biomeTemplate
   id: WFCavernChamberThrascias
   layers:
@@ -72,7 +121,7 @@
     threshold: -1
   - !type:BiomeEntityLayer
     allowedTiles: [WFCavernFloorSnowdrift]
-    entities: [WFCavernFaunaThrascias]
+    entities: [WFCavernFaunaThrasciasHollows]
     threshold: 0.95
     noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
   - !type:BiomeEntityLayer
@@ -80,12 +129,114 @@
     entities: [WFCavernRimeThistle]
     threshold: 0.96
     noise: { seed: 317, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorSnowdrift]
+    entities: [WFCavernRimeCapPlant]
+    threshold: 0.9
+    noise: { seed: 431, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorSnowdrift]
+    entities: [WFCavernHearthLichenPlant]
+    threshold: 0.92
+    noise: { seed: 432, noiseType: OpenSimplex2, frequency: 1 }
   # Frozen caches.
   - !type:BiomeEntityLayer
     allowedTiles: [WFCavernFloorSnowdrift]
     entities: [SalvageSpawnerTreasureValuable]
     threshold: 0.997
     noise: { seed: 311, noiseType: OpenSimplex2, frequency: 1 }
+
+# Frozen falls: pale cyan ice at the rim, deep blue ice inside, dark pack ice at the core, with ice curtains and
+# icicles hanging over it.
+- type: biomeTemplate
+  id: WFCavernFallsThrascias
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorRimeFall
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimeFall, WFCavernFloorRimeBlue, WFCavernFloorRimePack]
+    entities: [WFCavernFaunaThrasciasFalls]
+    threshold: 0.95
+    noise: { seed: 441, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimeFall, WFCavernFloorRimeBlue, WFCavernFloorRimePack]
+    entities: [WFCavernFrostBulb]
+    threshold: 0.975
+    noise: { seed: 442, noiseType: OpenSimplex2, frequency: 1 }
+  # Rare.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimeFall, WFCavernFloorRimeBlue, WFCavernFloorRimePack]
+    entities: [WFCavernHangingIcicle]
+    threshold: 0.985
+    noise: { seed: 443, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimeFall, WFCavernFloorRimeBlue, WFCavernFloorRimePack]
+    entities: [WFCavernRimeCapPlant]
+    threshold: 0.94
+    noise: { seed: 444, noiseType: OpenSimplex2, frequency: 1 }
+  # Ice curtains: thin walls of ice hung along the falls.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimeFall, WFCavernFloorRimeBlue]
+    entities: [WallIce]
+    threshold: 0.8
+    noise: { seed: 446, noiseType: OpenSimplex2, fractalType: Ridged, octaves: 1, frequency: 0.06 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimeFall, WFCavernFloorRimeBlue, WFCavernFloorRimePack]
+    entities: [CrystalCyan]
+    threshold: 0.95
+    noise: { seed: 447, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeMetaLayer
+    template: WFCavernPoolsThrascias
+    threshold: 0.58
+    noise: { seed: 421, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.008 }
+
+- type: biomeTemplate
+  id: WFCavernPoolsThrascias
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorRimeBlue
+    threshold: -1
+  - !type:BiomeMetaLayer
+    template: WFCavernPoolCoreThrascias
+    threshold: 0.70
+    noise: { seed: 421, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, frequency: 0.008 }
+
+- type: biomeTemplate
+  id: WFCavernPoolCoreThrascias
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorRimePack
+    threshold: -1
+  # Ice columns standing in the dark ice of the core.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimePack]
+    entities: [WallIce]
+    threshold: 0.78
+    noise: { seed: 448, noiseType: OpenSimplex2, frequency: 0.3 }
+
+# The dark shore round an ice gallery, where the plasma seeps up and the blooms that drink it grow.
+- type: biomeTemplate
+  id: WFCavernShoreThrascias
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorRimeDark
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimeDark]
+    entities: [WFCavernFaunaThrasciasLake]
+    threshold: 0.95
+    noise: { seed: 461, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimeDark]
+    entities: [WFCavernPlasmaBloom]
+    threshold: 0.96
+    noise: { seed: 462, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorRimeDark]
+    entities: [CrystalBlue, CrystalCyan]
+    threshold: 0.93
+    noise: { seed: 463, noiseType: OpenSimplex2, frequency: 1 }
 
 # An ice gallery: an ice floor with columns and crystals around a plasma lake on the same noise.
 - type: biomeTemplate

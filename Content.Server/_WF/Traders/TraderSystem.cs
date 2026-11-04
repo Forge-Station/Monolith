@@ -1,15 +1,27 @@
 using System.Linq;
+using System.Collections.Generic;
+using Content.Shared._Mono.Detection;
+using Content.Shared.Temperature.Components;
+using Content.Shared.Gravity;
+using Content.Shared.Damage.Components;
+using Content.Shared.Chemistry.Reaction;
+using Content.Shared.Atmos.Rotting;
+using Content.Shared.Atmos.Components;
+using Content.Server.Temperature.Components;
+using Content.Server.Movement.Components;
+using Content.Server.Body.Components;
+using Content.Shared.Body.Components;
+using Content.Server.Atmos.Components;
 using System.Numerics;
 using Content.Server._NF.Bank;
 using Content.Server._NF.Shipyard.Components;
-using Content.Server._WF.Access;
+using Content.Server.Cargo.Systems;
 using Content.Server.Carrying;
 using Content.Server.Chat.Systems;
 using Content.Server.Stack;
 using Content.Shared.Chat;
 using Content.Shared.Climbing.Components;
 using Content.Shared._NF.Bank;
-using Content.Shared._WF.Access;
 using Content.Shared._WF.Traders;
 using Content.Shared.Access.Components;
 using Content.Shared.Body.Systems;
@@ -29,10 +41,12 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nyanotrasen.Item.PseudoItem;
 using Content.Shared.Paper;
 using Content.Shared.Placeable;
+using Content.Shared.Popups;
 using Content.Shared.SSDIndicator;
 using Content.Shared.Stacks;
 using Content.Shared.Strip.Components;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -49,7 +63,7 @@ namespace Content.Server._WF.Traders;
 /// <summary>
 /// Runs a trader's conversation: the dialogue menu, the barter zone, payment and receipts.
 /// </summary>
-public sealed class TraderSystem : EntitySystem
+public sealed partial class TraderSystem : EntitySystem
 {
     [Dependency] private BankSystem _bank = default!;
     [Dependency] private ChatSystem _chat = default!;
@@ -61,13 +75,16 @@ public sealed class TraderSystem : EntitySystem
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private PricingSystem _pricing = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedGodmodeSystem _godmode = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private StackSystem _stack = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
     /// <summary>
     /// Stack type traders accept as cash.
@@ -96,6 +113,7 @@ public sealed class TraderSystem : EntitySystem
         {
             subs.Event<TraderDialogueSelectMessage>(OnDialogueSelect);
             subs.Event<TraderConfirmMessage>(OnConfirm);
+            subs.Event<TraderTextMessage>(OnText);
         });
     }
 
@@ -109,11 +127,14 @@ public sealed class TraderSystem : EntitySystem
     }
 
     /// <summary>
-    /// Strips everything that would let a player move, drag, strip or starve the trader.
+    /// Strips everything that would let a player move, drag, strip or starve the trader. A killable
+    /// trader keeps its working body: wounds only kill through blood, breath and the organs, and it
+    /// has to be able to run.
     /// </summary>
     private void MakeInert(Entity<TraderComponent> ent)
     {
-        _godmode.EnableGodmode(ent);
+        if (!ent.Comp.Killable)
+            _godmode.EnableGodmode(ent);
 
         RemComp<PullableComponent>(ent);
         RemComp<StrippableComponent>(ent);
@@ -125,13 +146,64 @@ public sealed class TraderSystem : EntitySystem
         RemComp<SSDIndicatorComponent>(ent);
         RemComp<CarriableComponent>(ent);
         RemComp<PseudoItemComponent>(ent);
-        RemComp<InputMoverComponent>(ent);
-        RemComp<MobMoverComponent>(ent);
         RemComp<InteractionPopupComponent>(ent);
         RemComp<ClimbingComponent>(ent); // no dragging them onto their own table
 
+        if (ent.Comp.Killable)
+            return;
+
+        RemComp<InputMoverComponent>(ent);
+        RemComp<MobMoverComponent>(ent);
+
+        // Nothing that ticks: no breathing, blood, metabolism, temperature, pressure, fire, rot,
+        // chemistry, stamina or lag compensation on a body that never moves or takes damage.
+        RemComp<RespiratorComponent>(ent);
+        RemComp<BloodstreamComponent>(ent);
+        RemComp<MetabolizerComponent>(ent);
+        RemComp<TemperatureComponent>(ent);
+        RemComp<TemperatureSpeedComponent>(ent);
+        RemComp<BarotraumaComponent>(ent);
+        RemComp<AtmosExposedComponent>(ent);
+        RemComp<FlammableComponent>(ent);
+        RemComp<PerishableComponent>(ent);
+        RemComp<ReactiveComponent>(ent);
+        RemComp<StaminaComponent>(ent);
+        RemComp<LagCompensationComponent>(ent);
+        RemComp<ThermalSignatureComponent>(ent);
+        RemComp<GravityAffectedComponent>(ent);
+
+        // Organs metabolise on their own; the lungs breathe.
+        foreach (var part in Descendants(ent))
+        {
+            RemComp<MetabolizerComponent>(part);
+            RemComp<LungComponent>(part);
+            RemComp<StomachComponent>(part);
+        }
+
         if (TryComp<PhysicsComponent>(ent, out var physics))
             _physics.SetBodyType(ent, BodyType.Static, body: physics);
+    }
+
+    /// <summary>
+    /// Everything parented under an entity, containers included.
+    /// </summary>
+    private List<EntityUid> Descendants(EntityUid root)
+    {
+        var found = new List<EntityUid>();
+        var pending = new Queue<EntityUid>();
+        pending.Enqueue(root);
+
+        while (pending.TryDequeue(out var uid))
+        {
+            var children = Transform(uid).ChildEnumerator;
+            while (children.MoveNext(out var child))
+            {
+                found.Add(child);
+                pending.Enqueue(child);
+            }
+        }
+
+        return found;
     }
 
     private void OnTerminating(Entity<TraderComponent> ent, ref EntityTerminatingEvent args)
@@ -386,6 +458,16 @@ public sealed class TraderSystem : EntitySystem
         if (!_proto.TryIndex(ent.Comp.Dialogue, out var dialogue))
             return false;
 
+        if (ent.Comp.Killable && _mobState.IsIncapacitated(ent))
+            return false;
+
+        // Whoever hurt the trader is not served again.
+        if (TryComp<TraderFleeComponent>(ent, out var fled) && fled.Attackers.Contains(customer))
+        {
+            _popup.PopupEntity(Loc.GetString("trader-wont-trade"), ent.Owner, customer);
+            return false;
+        }
+
         if (ent.Comp.Customer is { } current && current != customer)
         {
             Say(ent, Loc.GetString("trader-busy"));
@@ -417,6 +499,7 @@ public sealed class TraderSystem : EntitySystem
 
         ent.Comp.Customer = null;
         ent.Comp.Confirming = false;
+        ent.Comp.TextPrompt = null;
         ent.Comp.PendingOption = null;
         ent.Comp.ReplyAt = null;
         ent.Comp.ReplyLine = null;
@@ -483,9 +566,22 @@ public sealed class TraderSystem : EntitySystem
     public void AskConfirmation(Entity<TraderComponent> ent, string line)
     {
         ent.Comp.Confirming = true;
+        ent.Comp.TextPrompt = null;
         ent.Comp.CurrentLine = line;
         ent.Comp.LastInput = _timing.CurTime;
-        Say(ent, line);
+        UpdateDialogueState(ent);
+    }
+
+    /// <summary>
+    /// Asks the customer to type an answer. The reply comes back as a <see cref="TraderTextEnteredEvent"/>.
+    /// </summary>
+    public void AskText(Entity<TraderComponent> ent, string line, string placeholder, int maxLength)
+    {
+        ent.Comp.Confirming = false;
+        ent.Comp.TextPrompt = placeholder;
+        ent.Comp.TextMaxLength = maxLength;
+        ent.Comp.CurrentLine = line;
+        ent.Comp.LastInput = _timing.CurTime;
         UpdateDialogueState(ent);
     }
 
@@ -516,14 +612,15 @@ public sealed class TraderSystem : EntitySystem
             return;
 
         var options = new List<string>();
-        if (!ent.Comp.Confirming && _proto.TryIndex(ent.Comp.Dialogue, out var dialogue))
+        if (!ent.Comp.Confirming && ent.Comp.TextPrompt == null && _proto.TryIndex(ent.Comp.Dialogue, out var dialogue))
         {
             foreach (var option in dialogue.Options)
                 options.Add(Loc.GetString(option.Prompt));
         }
 
         _ui.SetUiState(ent.Owner, TraderUiKey.Dialogue,
-            new TraderDialogueState(ent.Comp.CurrentLine, options, ent.Comp.Confirming));
+            new TraderDialogueState(ent.Comp.CurrentLine, options, ent.Comp.Confirming,
+                ent.Comp.TextPrompt, ent.Comp.TextMaxLength));
     }
 
     #endregion
@@ -681,6 +778,25 @@ public sealed class TraderSystem : EntitySystem
         UpdateDialogueState(ent);
     }
 
+    private void OnText(Entity<TraderComponent> ent, ref TraderTextMessage args)
+    {
+        if (ent.Comp.Customer != args.Actor || ent.Comp.TextPrompt == null)
+            return;
+
+        NoteInput(ent);
+        ent.Comp.TextPrompt = null;
+        ent.Comp.PendingOption = null;
+
+        var text = args.Text?.Trim();
+        if (text != null && text.Length > ent.Comp.TextMaxLength)
+            text = text[..ent.Comp.TextMaxLength];
+
+        var ev = new TraderTextEnteredEvent(ent.Owner, args.Actor, string.IsNullOrEmpty(text) ? null : text);
+        RaiseLocalEvent(ent.Owner, ref ev);
+
+        UpdateDialogueState(ent);
+    }
+
     #endregion
 
     #region Requirements
@@ -707,7 +823,7 @@ public sealed class TraderSystem : EntitySystem
                         return true;
                 }
 
-                return false;
+                return GetZoneGoods(ent).Count > 0;
 
             // Only the customer's own card counts, so a stranger's card on the table does not
             // satisfy the check and then get refused by the service a moment later.
@@ -746,7 +862,8 @@ public sealed class TraderSystem : EntitySystem
     {
         stack = default!;
 
-        if (!HasComp<CashComponent>(uid))
+        // Cash already taken this tick lies on the table until the tick ends.
+        if (EntityManager.IsQueuedForDeletion(uid) || !HasComp<CashComponent>(uid))
             return false;
 
         if (!TryComp(uid, out StackComponent? stackComp) || stackComp.StackTypeId != CashStackType.Id)
@@ -857,18 +974,42 @@ public sealed class TraderSystem : EntitySystem
             return true;
         }
 
+        // Goods he takes in trade cover what the cash leaves, the cheapest first, and the rest comes back as change.
+        var goods = GetZoneGoods(ent);
+        var goodsTotal = goods.Sum(good => good.Value);
+        if (goods.Count > 0 && cashTotal + goodsTotal >= price)
+        {
+            var taken = 0;
+            foreach (var (good, value) in goods)
+            {
+                if (cashTotal + taken >= price)
+                    break;
+
+                QueueDel(good);
+                taken += value;
+            }
+
+            foreach (var item in cash)
+                QueueDel(item);
+
+            tendered = cashTotal + taken;
+            change = tendered - price;
+            GiveChange(ent, change);
+            return true;
+        }
+
         if (!TryGetZoneId(ent, customer, out _, out var wrongOwner))
         {
             if (wrongOwner)
                 SayAndShow(ent, Loc.GetString("trader-not-your-id"));
             else
                 SayAndShow(ent, Loc.GetString("trader-short",
-                    ("amount", BankSystemExtensions.ToSpesoString(price - cashTotal))));
+                    ("amount", BankSystemExtensions.ToSpesoString(price - cashTotal - goodsTotal))));
 
             return false;
         }
 
-        var remainder = price - cashTotal;
+        var remainder = price - cashTotal - goodsTotal;
         if (!_bank.TryBankWithdraw(customer, remainder))
         {
             _bank.TryGetBalance(customer, out var balance);
@@ -880,8 +1021,37 @@ public sealed class TraderSystem : EntitySystem
         foreach (var item in cash)
             QueueDel(item);
 
+        foreach (var (good, _) in goods)
+            QueueDel(good);
+
         tendered = price;
         return true;
+    }
+
+    /// <summary>
+    /// Goods in the barter zone this trader takes in trade, with what each counts for, cheapest first. None unless he
+    /// has <see cref="TraderGoodsPaymentComponent"/>.
+    /// </summary>
+    public List<(EntityUid Item, int Value)> GetZoneGoods(Entity<TraderComponent> ent)
+    {
+        var goods = new List<(EntityUid, int)>();
+        if (!TryComp<TraderGoodsPaymentComponent>(ent, out var payment))
+            return goods;
+
+        foreach (var item in GetZoneItems(ent))
+        {
+            if (EntityManager.IsQueuedForDeletion(item)
+                || !_whitelist.IsWhitelistPass(payment.Whitelist, item)
+                || _whitelist.IsWhitelistPass(payment.Blacklist, item))
+                continue;
+
+            var value = (int) Math.Floor(_pricing.GetPrice(item) * payment.Rate);
+            if (value > 0)
+                goods.Add((item, value));
+        }
+
+        goods.Sort((a, b) => a.Item2.CompareTo(b.Item2));
+        return goods;
     }
 
     /// <summary>
@@ -897,6 +1067,15 @@ public sealed class TraderSystem : EntitySystem
         }
 
         return total;
+    }
+
+    /// <summary>
+    /// Takes an amount the cash in the barter zone covers and hands the rest back as change. Never
+    /// touches the bank; false, with nothing taken, when the cash falls short.
+    /// </summary>
+    public bool TryTakeZoneCash(Entity<TraderComponent> ent, EntityUid customer, int amount)
+    {
+        return amount <= 0 || GetZoneCash(ent) >= amount && TryTakePayment(ent, customer, amount);
     }
 
     /// <summary>

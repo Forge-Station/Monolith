@@ -2,6 +2,7 @@ using System;
 using System.Numerics;
 using Content.Client._WF.Caverns;
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
+using Content.Shared._WF.Planets;
 using NUnit.Framework;
 using Robust.Shared.Graphics;
 using Robust.Shared.Map;
@@ -50,6 +51,7 @@ public sealed class CavernPassTest
     [TestCase(-1f, 0f, 0.0, 0.85f)]
     [TestCase(-3.3f, -0.3f, 0.0, 0.85f)]
     [TestCase(-1.6f, -0.6f, 1.2, 0.85f)]
+    [TestCase(-5f, 0f, 0.4, 0.85f)]
     public void LevelViewMatchesThePassEye(float depth, float ownDepth, double turn, float shrink)
     {
         var rotation = new Angle(turn);
@@ -68,7 +70,7 @@ public sealed class CavernPassTest
             Position = observer.Position,
             Offset = observer.Offset + turned.ToWorldVec() * CESharedZLevelsSystem.ZLevelOffset * (depth - ownDepth),
             Rotation = rotation,
-            Scale = observer.Scale * MathF.Pow(shrink, -depth),
+            Scale = observer.Scale * WFPlanetView.LayerScale(shrink, depth),
         };
 
         var box = WFCavernViewSystem.LevelViewBox(Shows(observer), rotation, depth, ownDepth, shrink);

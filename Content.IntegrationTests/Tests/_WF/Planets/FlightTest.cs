@@ -126,6 +126,34 @@ public sealed class FlightTest
         await pair.CleanReturnAsync();
     }
 
+    /// <summary>A wall or rock under a hull's deck refuses a gentle set-down; one beside it doesn't.</summary>
+    [Test]
+    public async Task SolidGroundUnderTheDeckRefusesASetDown()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var em = server.EntMan;
+        await EnableFeature(pair);
+        var layers = await BuildStandalone(pair);
+        var ground = layers[0];
+        await LayTiles(pair, ground, new Vector2i(-32, -32), new Vector2i(64, 64));
+        var hull = await BuildHull(pair, await MapIdOf(pair, ground));
+        await MapInitHull(pair, hull);
+        var zLevels = server.System<CEZLevelsSystem>();
+        await server.WaitAssertion(() =>
+        {
+            var matrix = server.System<SharedTransformSystem>().GetWorldMatrix(hull);
+            Assert.That(zLevels.WfObstacleUnder(hull, ground), Is.False, "Bare ground refused a landing.");
+            var beside = em.SpawnEntity("WallSolid", new EntityCoordinates(ground, Vector2.Transform(new Vector2(-4.5f, 7.5f), matrix)));
+            Assert.That(zLevels.WfObstacleUnder(hull, ground), Is.False, "A wall beside the hull refused its landing.");
+            em.DeleteEntity(beside);
+            em.SpawnEntity("WallSolid", new EntityCoordinates(ground, Vector2.Transform(new Vector2(4.5f, 4.5f), matrix)));
+            Assert.That(zLevels.WfObstacleUnder(hull, ground), Is.True, "The hull would set down on a wall.");
+        });
+        await Teardown(pair, layers);
+        await pair.CleanReturnAsync();
+    }
+
     [TestCase(0)]
     [TestCase(45)]
     public async Task LandingClearanceRemovesNearbyWallsButPreservesDistantAndOnboardWalls(int degrees)

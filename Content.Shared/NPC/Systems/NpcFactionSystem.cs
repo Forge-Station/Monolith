@@ -185,13 +185,14 @@ public sealed partial class NpcFactionSystem : EntitySystem
             // otherwise having multiple factions is strictly negative
             .Where(target => !IsEntityFriendly((ent, ent.Comp1), target));
         if (!Resolve(ent, ref ent.Comp2, false))
-            return hostiles;
+            return hostiles.Where(target => !WfNativeTruce(ent, target)); // WOLFGATE(PlanetNatives): planet NPCs leave each other alone.
 
         // ignore anything from enemy faction that we are explicitly friendly towards
         var faction = (ent.Owner, ent.Comp2);
         return hostiles
             .Union(GetHostiles(faction))
-            .Where(target => !IsIgnored(faction, target));
+            .Where(target => !IsIgnored(faction, target))
+            .Where(target => !WfNativeTruce(ent, target)); // WOLFGATE(PlanetNatives): planet NPCs leave each other alone, even after a stray hit.
     }
 
     public IEnumerable<EntityUid> GetNearbyFriendlies(Entity<NpcFactionMemberComponent?> ent, float range)

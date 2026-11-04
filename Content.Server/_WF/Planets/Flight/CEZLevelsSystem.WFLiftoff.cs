@@ -85,10 +85,17 @@ public sealed partial class CEZLevelsSystem
         if (eventReason is not null)
             return eventReason;
 
+        // A camp's or wreck's hull is part of the world now: its helm still opens, but it never leaves.
+        foreach (var member in transitSet)
+        {
+            if (HasComp<Content.Shared._WF.PlanetCities.WFPlanetCityGridComponent>(member))
+                return Loc.GetString("wf-liftoff-settled");
+        }
+
         if (!WfIsPlanetFlight(grid))
             return Loc.GetString("wf-liftoff-not-planet");
 
-        if (HasComp<FTLComponent>(grid))
+        if (HasComp<FTLComponent>(grid) || HasComp<Content.Server._WF.Planets.Hop.WFPlanetHopComponent>(grid))
             return Loc.GetString("wf-flight-busy");
 
         foreach (var member in transitSet)

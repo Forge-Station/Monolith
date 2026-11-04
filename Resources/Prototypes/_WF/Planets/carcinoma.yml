@@ -35,16 +35,39 @@
   orbitRange: 2000
   buildAtRoundStart: true
   sanctioned: false
+  climate: wf-planet-scan-climate-carcinoma
+  hazards:
+  - wf-planet-scan-hazard-blood-storms
+  - wf-planet-scan-hazard-biohazard
+  - wf-planet-scan-hazard-wildlife
   gravity: 1
+  radius: 192
+  pois: WFPoisCarcinoma
   seed: 20260918
   networkComponents:
+  # The planet breathes out carbon dioxide (_WF/PlanetVents): 3 kPa oxygen, 12 kPa nitrogen and 90 kPa carbon dioxide at
+  # 37 °C, 105 kPa in all. Nobody breathes it without internals but the world's own life.
   - type: MapAtmosphere
     space: false
     mixture:
       volume: 2500
       immutable: true
       temperature: 310.15
-      moles: [21.824879, 82.10312]
+      moles: [2.908408, 11.633631, 87.252232]
+  - type: WFPlanetNatives
+    tables:
+    - WFFaunaCarcinoma
+    - WFFaunaCarcinomaBone
+    - WFFaunaCarcinomaMarsh
+    - WFFaunaCarcinomaHive
+    - WFFaunaCarcinomaShore
+    - WFCavernFaunaCarcinoma
+    - WFCavernFaunaCarcinomaStomach
+    - WFCavernFaunaCarcinomaNerve
+    - WFCavernFaunaCarcinomaOssuary
+    - WFCavernFaunaCarcinomaBlood
+    - WFTunnelLurkersCarcinoma
+    breeds: [WFCarcinomaMutation, WFMetastaticMutation]
   groundComponents:
   - type: CEZLevelRoof
   - type: CEZGroundLayer
@@ -67,7 +90,7 @@
     volume: 2500
     immutable: true
     temperature: 310.15
-    moles: [21.824879, 82.10312]
+    moles: [2.908408, 11.633631, 87.252232]
 
 - type: biomeTemplate
   id: WFBiomeCarcinoma
@@ -76,12 +99,12 @@
     threshold: -1
     tile: WFFloorFlesh
   - !type:BiomeEntityLayer
-    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    allowedTiles: [WFFloorFlesh, FloorFlesh, WFFloorFleshScab, WFFloorFleshBoneMeaty, WFFloorFleshBoneSpine, WFFloorFleshBoneStraight, WFFloorFleshCrust, WFFloorFleshMarshMud, WFFloorFleshMarshDirt]
     entities: [WFFaunaCarcinoma]
     threshold: 0.97
     noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
   - !type:BiomeEntityLayer
-    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    allowedTiles: [WFFloorFlesh, FloorFlesh, WFFloorFleshScab, WFFloorFleshBoneMeaty, WFFloorFleshBoneSpine, WFFloorFleshBoneStraight, WFFloorFleshCrust, WFFloorFleshMarshMud, WFFloorFleshMarshDirt]
     entities: [FleshBlocker]
     threshold: 0.98
     noise: { seed: 2, noiseType: OpenSimplex2, frequency: 1 }
@@ -90,6 +113,11 @@
     entities: [WallMeat]
     threshold: 0.72
     noise: { seed: 11, noiseType: OpenSimplex2, frequency: 0.025 }
+  # Dried crust ring just outside each grove; the grove layer after it wins inside.
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaScabEdge
+    threshold: 0.3
+    noise: { seed: 16, noiseType: OpenSimplex2, frequency: 0.018 }
   - !type:BiomeMetaLayer
     template: WFCarcinomaGrove
     threshold: 0.4
@@ -98,33 +126,67 @@
     template: WFCarcinomaTendonForest
     threshold: 0.45
     noise: { seed: 51, noiseType: OpenSimplex2, frequency: 0.012 }
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaBoneField
+    threshold: 0.84
+    noise: { seed: 89, noiseType: OpenSimplex2, frequency: 0.012 }
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaMarsh
+    threshold: 0.8
+    noise: { seed: 87, noiseType: OpenSimplex2, frequency: 0.014 }
+  # Wild slime patches (_WF/WildSlimes) over the ground regions, under the shores, rivers and lakes: a few sparse zones,
+  # each with a patch or two. The Gut's grotto layer shares both noises.
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaSlimeZone
+    threshold: 0.55
+    noise: { seed: 132, noiseType: OpenSimplex2, frequency: 0.005 }
   - !type:BiomeEntityLayer
-    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    allowedTiles: [WFFloorFlesh, FloorFlesh, WFFloorFleshScab, WFFloorFleshBoneMeaty, WFFloorFleshBoneSpine, WFFloorFleshBoneStraight, WFFloorFleshCrust, WFFloorFleshMarshMud, WFFloorFleshMarshDirt]
     entities: [WFCarcinomaAssimilationSack]
     threshold: 0.985
     noise: { seed: 57, noiseType: OpenSimplex2, frequency: 0.6 }
   # One-shot nests stay sparse. The later river layer wins on overlapping cells, keeping them out of blood channels.
   - !type:BiomeEntityLayer
-    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    allowedTiles: [WFFloorFlesh, FloorFlesh, WFFloorFleshScab, WFFloorFleshBoneMeaty, WFFloorFleshBoneSpine, WFFloorFleshBoneStraight, WFFloorFleshCrust, WFFloorFleshMarshMud, WFFloorFleshMarshDirt]
     entities: [WFFleshPustule]
     threshold: 0.985
     noise: { seed: 43, noiseType: OpenSimplex2, frequency: 0.35 }
-  # Rivers win over walls/trees/fauna; they are static water effects, not spreading reagent puddles.
+  # Bursting pimples (_WF/LivingWorld), sparse and short of the blood channels.
   - !type:BiomeEntityLayer
-    allowedTiles: [WFFloorFlesh, FloorFlesh]
-    entities: [WFBloodRiver]
-    threshold: 0.94
-    noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.008, fractalType: Ridged, octaves: 1 }
+    allowedTiles: [WFFloorFlesh, FloorFlesh, WFFloorFleshScab, WFFloorFleshBoneMeaty, WFFloorFleshBoneSpine, WFFloorFleshBoneStraight, WFFloorFleshCrust, WFFloorFleshMarshMud, WFFloorFleshMarshDirt]
+    entities: [WFCarcinomaPimple]
+    threshold: 0.985
+    noise: { seed: 97, noiseType: OpenSimplex2, frequency: 0.5 }
+  # Breathing vents (_WF/PlanetVents) in wide fields over a share of the ground, under the rivers and lakes.
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaVentField
+    threshold: 0.3
+    noise: { seed: 141, noiseType: OpenSimplex2, frequency: 0.008 }
+  # Scabbed band round each lake: the lake's own noise, a lower threshold.
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaScabShore
+    threshold: 0.58
+    noise: { seed: 61, frequency: 0.012, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, lacunarity: 2 }
 
-  # Broad seas override all terrestrial features, as on Asclepiu.
+  # Blood lakes override all terrestrial features, as Asclepiu's lakes do. They took over from the old rivers: still
+  # water laid like every other world's, not square channels.
   - !type:BiomeMetaLayer
     template: WFCarcinomaBloodOcean
-    threshold: 0.45
-    noise: { seed: 61, frequency: 0.002, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, lacunarity: 2 }
+    threshold: 0.72
+    noise: { seed: 61, frequency: 0.012, noiseType: OpenSimplex2, fractalType: FBm, octaves: 2, lacunarity: 2 }
 
 - type: biomeTemplate
   id: WFCarcinomaGrove
   layers:
+  # The ground inside a grove stays plain flesh, so the crust ring only shows outside it.
+  - !type:BiomeTileLayer
+    tile: WFFloorFlesh
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh]
+    entities: [WFCarcinomaMeatFruitBush]
+    threshold: 0.93
+    noise: { seed: 113, noiseType: OpenSimplex2, frequency: 1 }
   - !type:BiomeEntityLayer
     allowedTiles: [WFFloorFlesh, FloorFlesh]
     entities: [WFFleshTree]
@@ -193,8 +255,9 @@
   name: blood river
   description: A slow current of dark blood runs through the planet's flesh.
   components:
+  # Recoloured art, as the blood lake's: a red tint over the blue water sprite read as near black.
   - type: Sprite
-    color: "#b81e24"
+    sprite: _WF/Planets/BloodWater/blood-river.rsi
   - type: SolutionContainerManager
     solutions:
       pool:
@@ -213,6 +276,9 @@
   id: WFFaunaCarcinoma
   table: !type:GroupSelector
     children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdFleshKite
+      weight: 4
     - !type:NestedSelector
       tableId: WFCarcinomaAberrantFlesh
       weight: 5

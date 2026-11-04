@@ -1,5 +1,6 @@
 using Content.Shared._DV.Planet;
 using Content.Shared._FarHorizons.StarSystem.Prototypes;
+using Content.Shared._WF.PlanetPois;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -27,6 +28,25 @@ public sealed partial class WFPlanetSurfacePrototype : IPrototype
     /// <summary>Optional hand-made grid loaded onto the ground layer at the planet centre.</summary>
     [DataField]
     public ResPath? GroundGrid;
+
+    /// <summary>
+    /// Radius in tiles of the world's circle round its centre; terrain outside it never exists. Zero leaves the world
+    /// unbounded. The cvar wf.planet_radius overrides it when set.
+    /// </summary>
+    [DataField]
+    public int Radius = 256;
+
+    /// <summary>Whether the whole ground inside the circle is generated when the network is built, over the ticks after.</summary>
+    [DataField]
+    public bool Preload = true;
+
+    /// <summary>The wall laid on the outermost ring of ground tiles once the world is preloaded; null lays none.</summary>
+    [DataField]
+    public EntProtoId? BoundaryWall = "WFPlanetBoundaryWall";
+
+    /// <summary>The points of interest rolled onto the world each round before its preload; null places none.</summary>
+    [DataField]
+    public ProtoId<WFPlanetPoiTablePrototype>? Pois;
 
     /// <summary>How many bare fall-through air layers sit between the ground and the cloud layer.</summary>
     [DataField]
@@ -99,4 +119,12 @@ public sealed partial class WFPlanetSurfacePrototype : IPrototype
     /// <summary>Name given to the orbit layer's centre marker; a warp point and radar label, not an FTL beacon.</summary>
     [DataField]
     public LocId OrbitMarkerName = "wf-planet-orbit-marker-name";
+
+    /// <summary>The world's climate and ground in a few words, for the radar's planet scan.</summary>
+    [DataField]
+    public LocId? Climate;
+
+    /// <summary>Known dangers beyond what the air, heat and gravity give away, for the radar's planet scan.</summary>
+    [DataField]
+    public List<LocId> Hazards = new();
 }

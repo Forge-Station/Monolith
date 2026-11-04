@@ -14,7 +14,7 @@ public sealed partial class PlanetControlCommand : LocalizedEntityCommands
 {
     [Dependency] private PlanetControlSystem _planets = default!;
 
-    private static readonly string[] Fields = { "time", "weather", "gravity", "sanctioned" };
+    private static readonly string[] Fields = { "time", "weather", "season", "gravity", "sanctioned" };
 
     public override string Command => WolfgateAdminCommands.PlanetControl;
 
@@ -33,6 +33,15 @@ public sealed partial class PlanetControlCommand : LocalizedEntityCommands
                         ("weather", info.Weather.Length == 0
                             ? Loc.GetString("cmd-planetcontrol-weather-clear")
                             : info.Weather),
+                        ("wolf", info.WolfWeather.Length == 0
+                            ? Loc.GetString("cmd-planetcontrol-weather-clear")
+                            : info.WolfWeather),
+                        ("season", info.Season.Length == 0
+                            ? Loc.GetString("cmd-planetcontrol-season-none")
+                            : info.Season),
+                        ("temperature", float.IsNaN(info.Temperature)
+                            ? "-"
+                            : Loc.GetString("wf-planet-temperature", ("celsius", MathF.Round(info.Temperature - 273.15f)))),
                         ("gravity", $"{info.Gravity:F2}"),
                         ("sanctioned", info.Sanctioned.ToString()))
                     : Loc.GetString("cmd-planetcontrol-row-unbuilt",
@@ -75,6 +84,9 @@ public sealed partial class PlanetControlCommand : LocalizedEntityCommands
                 if (args.Length > 3 && float.TryParse(args[3], NumberStyles.Float, CultureInfo.InvariantCulture, out var seconds))
                     request.WeatherSeconds = seconds;
                 return true;
+            case "season":
+                request.Season = args[2];
+                return true;
             case "gravity":
                 if (!float.TryParse(args[2], NumberStyles.Float, CultureInfo.InvariantCulture, out var gravity))
                     return false;
@@ -96,6 +108,8 @@ public sealed partial class PlanetControlCommand : LocalizedEntityCommands
         {
             1 => CompletionResult.FromOptions(_planets.BuildList().Select(p => p.Name)),
             2 => CompletionResult.FromOptions(Fields),
+            3 when args[1] == "season" => CompletionResult.FromOptions(_planets.BuildList()
+                .FirstOrDefault(p => p.Name.Equals(args[0], StringComparison.OrdinalIgnoreCase))?.SeasonIds ?? new List<string>()),
             _ => CompletionResult.Empty,
         };
     }

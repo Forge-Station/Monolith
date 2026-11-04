@@ -10,6 +10,7 @@ using Content.Server.Parallax;
 using Content.Shared._WF.CCVar;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Fluids.Components;
 using Content.Shared.Damage;
 using Content.Shared.Maps;
 using Content.Shared.Parallax.Biomes;
@@ -72,6 +73,7 @@ public sealed class TerrainUnloadTest
 
             var homeChunk = ChunkOf(Home);
             var first = await Count(pair, world.Ground, Home);
+            var firstThings = await Describe(pair, world.Ground, Home);
             Assert.That(first.Loaded, Is.True, "Precondition: the ground under the viewer did not load.");
             Assert.That(first.Tiles, Is.GreaterThan(0));
 
@@ -108,11 +110,13 @@ public sealed class TerrainUnloadTest
             await pair.RunTicksSync(pair.SecondsToTicks(2f));
 
             var back = await Count(pair, world.Ground, Home);
+            var after = await Describe(pair, world.Ground, Home);
             Assert.Multiple(() =>
             {
                 Assert.That(back.Loaded, Is.True, "The ground did not load again when the viewer came back.");
                 Assert.That(back.Tiles, Is.EqualTo(first.Tiles), "The ground came back with different tiles.");
-                Assert.That(back.Entities, Is.EqualTo(first.Entities), "The ground came back with different things on it.");
+                Assert.That(back.Entities, Is.EqualTo(first.Entities),
+                    $"The ground came back with different things on it. Before: {firstThings}. After: {after}.");
             });
         }
         finally
@@ -535,6 +539,23 @@ public sealed class TerrainUnloadTest
         await pair.CleanReturnAsync();
     }
 
+    /// <summary>The ground a mouth's stairs come out on stays, with nothing standing on it.</summary>
+    private static bool IsStairsLip(IEntityManager entMan, Vector2i index)
+    {
+        var query = entMan.AllEntityQueryEnumerator<Content.Server._WF.Caverns.WFCavernGroundComponent>();
+
+        while (query.MoveNext(out var ground))
+        {
+            foreach (var stairs in ground.Stairways.Keys)
+            {
+                if (Math.Abs(stairs.X - index.X) + Math.Abs(stairs.Y - index.Y) <= 1)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// Loading and unloading the same ground over and over leaves no more lying about than the first time did, on any
     /// world: a spawner that stays where it is must not lay its corpse or its loot again. And on the surface an
@@ -600,8 +621,11 @@ public sealed class TerrainUnloadTest
                             var index = new Vector2i(x, y);
 
                             if (maps.TryGetTileRef(map, grid, index, out var tile) && !tile.Tile.IsEmpty
-                                && !maps.GetAnchoredEntities(map, grid, index).Any())
+                                && !maps.GetAnchoredEntities(map, grid, index).Any()
+                                && !IsStairsLip(entMan, index))
+                            {
                                 bare++;
+                            }
                         }
 
                         Assert.That(bare, Is.Zero, $"{surface}: unloading the surface left {bare} bare floor tiles behind.");
@@ -713,6 +737,31 @@ public sealed class TerrainUnloadTest
     }
 
     /// <summary>Whether a tile's chunk is loaded, and the tiles and anchored entities in the 24 tiles square round it.</summary>
+    /// <summary>The anchored things in the counted square, as prototype ids with their tiles, for a failure message.</summary>
+    private static async Task<string> Describe(TestPair pair, EntityUid map, Vector2i centre)
+    {
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var maps = server.System<SharedMapSystem>();
+        var result = "";
+        await server.WaitPost(() =>
+        {
+            var grid = entMan.GetComponent<MapGridComponent>(map);
+            var names = new List<string>();
+            for (var x = -12; x < 12; x++)
+            for (var y = -12; y < 12; y++)
+            {
+                var index = centre + new Vector2i(x, y);
+                foreach (var uid in maps.GetAnchoredEntities(map, grid, index))
+                    if (!entMan.HasComponent<PuddleComponent>(uid))
+                        names.Add($"{entMan.GetComponent<MetaDataComponent>(uid).EntityPrototype?.ID}@{index}");
+            }
+            names.Sort();
+            result = string.Join(" ", names);
+        });
+        return result;
+    }
+
     private static async Task<(bool Loaded, int Tiles, int Entities)> Count(TestPair pair, EntityUid map, Vector2i centre)
     {
         var server = pair.Server;
@@ -735,7 +784,8 @@ public sealed class TerrainUnloadTest
                 if (maps.TryGetTileRef(map, grid, index, out var tile) && !tile.Tile.IsEmpty)
                     tiles++;
 
-                entities += maps.GetAnchoredEntities(map, grid, index).Count();
+                // Spills left by the viewer or the wildlife it met are not the ground's own.
+                entities += maps.GetAnchoredEntities(map, grid, index).Count(uid => !entMan.HasComponent<PuddleComponent>(uid));
             }
 
             result = (server.System<BiomeSystem>().WfIsChunkLoaded(biome, centre), tiles, entities);

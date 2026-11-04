@@ -373,6 +373,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
+        // WOLFGATE(PlanetComms) START: sessions on a world with no mass transceiver up miss it
+        if (WFDispatchGlobalReachable(message, sender, wrappedMessage, playSound, announcementSound, colorOverride))
+            return;
+        // WOLFGATE END
         _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
         if (playSound)
         {
@@ -401,6 +405,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         Color? colorOverride = null)
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
+        filter = _wfPlanetComms.Reachable(filter, source); // WOLFGATE(PlanetComms): off-world sources miss dark worlds
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source ?? default, false, true, colorOverride);
@@ -441,6 +446,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (!EntityManager.TryGetComponent<StationDataComponent>(station, out var stationDataComp)) return;
 
         var filter = _stationSystem.GetInStation(stationDataComp);
+        filter = _wfPlanetComms.Reachable(filter, source); // WOLFGATE(PlanetComms): off-world sources miss dark worlds
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
 

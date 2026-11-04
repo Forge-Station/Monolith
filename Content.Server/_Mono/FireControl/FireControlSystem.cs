@@ -424,6 +424,7 @@ public sealed partial class FireControlSystem : EntitySystem
     {
         if (TerminatingOrDeleted(grid)
             || HasComp<FTLComponent>(grid)
+            || HasComp<Content.Server._WF.Planets.Hop.WFPlanetHopComponent>(grid) // WOLFGATE(Planets): no firing mid-hop
             || HasComp<SpaceArtilleryDisabledGridComponent>(grid)
         )
             return false;

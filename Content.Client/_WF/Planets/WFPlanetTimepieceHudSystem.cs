@@ -1,9 +1,7 @@
 using System.Numerics;
-using Content.Client._Shitmed.UserInterface.Systems.Targeting.Widgets;
 using Content.Client._WF.Cockpit;
+using Content.Shared._WF.Warmth;
 using Content.Shared.GameTicking;
-using Content.Shared.Inventory;
-using Content.Shared.Inventory.Events;
 using Content.Shared._WF.Planets;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
@@ -13,13 +11,12 @@ using Robust.Shared.Player;
 
 namespace Content.Client._WF.Planets;
 
-/// <summary>Shows planetary environment data only while the local player wears a marked timepiece.</summary>
+/// <summary>Shows the planet's local time and weather to anyone standing on a planet.</summary>
 public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
 {
     private const float RefreshInterval = 0.25f;
 
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private IUserInterfaceManager _ui = default!;
     [Dependency] private IResourceCache _resources = default!;
 
@@ -31,7 +28,11 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
     public string DisplayedPlanet => _hud.PlanetText;
     public string DisplayedTime => _hud.TimeText;
     public string DisplayedWeather => _hud.WeatherText;
-    public float HudWidth => WFPlanetTimepieceHud.PanelWidth;
+    public string DisplayedClimate => _hud.ClimateText;
+    public string DisplayedHere => _hud.HereText;
+    public string DisplayedFeel => _hud.FeelText;
+    public float HudWidth => MathF.Max(_hud.Width, WFPlanetTimepieceHud.PanelWidth);
+    public Control Hud => _hud;
 
     public override void Initialize()
     {
@@ -45,10 +46,6 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
         _ui.PopupRoot.AddChild(_hud);
         LayoutContainer.SetAnchorPreset(_hud, LayoutContainer.LayoutPreset.TopLeft);
 
-        SubscribeLocalEvent<InventoryComponent, DidEquipEvent>(OnEquipmentChanged);
-        SubscribeLocalEvent<InventoryComponent, DidUnequipEvent>(OnEquipmentChanged);
-        SubscribeLocalEvent<WFPlanetTimepieceComponent, ComponentStartup>(OnMarkerStartup);
-        SubscribeLocalEvent<WFPlanetTimepieceComponent, ComponentRemove>(OnMarkerRemove);
         SubscribeLocalEvent<WFPlanetEnvironmentComponent, AfterAutoHandleStateEvent>(OnEnvironmentState);
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnPlayerDetached);
@@ -75,33 +72,13 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
         if (!_active)
             return;
         PositionHud();
-        if (_player.LocalEntity is not { } player || !IsWorn(player))
+        if (_player.LocalEntity is not { } player || !IsOnPlanet(player))
         {
             SetActive(false);
             return;
         }
 
         RefreshReadout();
-    }
-
-    private void OnEquipmentChanged(EntityUid uid, InventoryComponent component, DidEquipEvent args)
-    {
-        RefreshVisibility(uid);
-    }
-
-    private void OnEquipmentChanged(EntityUid uid, InventoryComponent component, DidUnequipEvent args)
-    {
-        RefreshVisibility(uid);
-    }
-
-    private void OnMarkerStartup(Entity<WFPlanetTimepieceComponent> ent, ref ComponentStartup args)
-    {
-        RefreshLocalVisibility();
-    }
-
-    private void OnMarkerRemove(Entity<WFPlanetTimepieceComponent> ent, ref ComponentRemove args)
-    {
-        RefreshLocalVisibility();
     }
 
     private void OnEnvironmentState(Entity<WFPlanetEnvironmentComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -145,19 +122,12 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
         if (player != _player.LocalEntity)
             return;
 
-        SetActive(IsWorn(player));
+        SetActive(IsOnPlanet(player));
     }
 
-    private bool IsWorn(EntityUid player)
+    private bool IsOnPlanet(EntityUid player)
     {
-        var slots = _inventory.GetSlotEnumerator(player, SlotFlags.ARMBANDLEFT | SlotFlags.ARMBANDRIGHT);
-        while (slots.NextItem(out var item))
-        {
-            if (HasComp<WFPlanetTimepieceComponent>(item))
-                return true;
-        }
-
-        return false;
+        return TryComp(player, out TransformComponent? xform) && HasComp<WFPlanetEnvironmentComponent>(xform.MapUid);
     }
 
     private void SetActive(bool active)
@@ -172,7 +142,7 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
             RefreshReadout();
     }
 
-    /// <summary>Shows the panel while worn, except under the cockpit, which has no HUD corner for it.</summary>
+    /// <summary>Shows the panel on a planet, except under the cockpit, which has no HUD corner for it.</summary>
     private void ApplyVisibility()
     {
         _hud.Visible = _active && !_ui.GetUIController<WFCockpitUIController>().Active;
@@ -180,18 +150,10 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
 
     private void PositionHud()
     {
-        var target = _ui.GetActiveUIWidgetOrNull<TargetingControl>();
-        var right = _ui.PopupRoot.Width - 12;
-        var bottom = _ui.PopupRoot.Height - 150;
-        if (target is { Visible: true } && target.Width > 0)
-        {
-            var position = target.GlobalPosition - _ui.PopupRoot.GlobalPosition;
-            right = position.X + target.Width;
-            bottom = position.Y - 8;
-        }
-        LayoutContainer.SetPosition(_hud, new Vector2(
-            MathF.Max(0, right - WFPlanetTimepieceHud.PanelWidth),
-            MathF.Max(0, bottom - MathF.Max(72, _hud.Height))));
+        var size = new Vector2(
+            MathF.Max(_hud.Width, WFPlanetTimepieceHud.PanelWidth),
+            MathF.Max(_hud.Height, WFPlanetTimepieceHud.PanelHeight));
+        LayoutContainer.SetPosition(_hud, WFHudPlacement.Place(_ui, size));
     }
 
     private void RefreshReadout()
@@ -203,11 +165,38 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
             !TryComp<WFPlanetEnvironmentComponent>(map, out var environment))
         {
             _hud.SetReadout(Loc.GetString("wf-planet-timepiece-no-signal"), "--:--", string.Empty);
+            _hud.SetThermal(string.Empty, string.Empty, Color.White);
+            _hud.SetGauge(false, 50, WFWarmthTrend.Steady, false);
             return;
+        }
+
+        if (TryComp(player, out WFWarmthComponent? warmth))
+        {
+            _hud.SetThermal(SharedWFWarmthSystem.HereText(warmth),
+                Loc.GetString(SharedWFWarmthSystem.FeelLoc(warmth.Feel)), SharedWFWarmthSystem.FeelColor(warmth.Feel));
+            _hud.SetGauge(true, warmth.Gauge, warmth.Trend, warmth.NearWarmth);
+        }
+        else
+        {
+            _hud.SetThermal(string.Empty, string.Empty, Color.White);
+            _hud.SetGauge(false, 50, WFWarmthTrend.Steady, false);
         }
 
         var hours = environment.MinuteOfDay / 60;
         var minutes = environment.MinuteOfDay % 60;
-        _hud.SetReadout(environment.PlanetName, $"{hours:00}:{minutes:00}", environment.Weather);
+        _hud.SetReadout(environment.PlanetName, $"{hours:00}:{minutes:00}", environment.Weather,
+            ClimateText(environment), environment.Season != null ? environment.SeasonColor : null);
+    }
+
+    /// <summary>The season and outdoor temperature line; either half is left out when the world has none.</summary>
+    public string ClimateText(WFPlanetEnvironmentComponent environment)
+    {
+        var temperature = environment.TemperatureCelsius is { } celsius
+            ? Loc.GetString("wf-planet-temperature-outside", ("celsius", celsius))
+            : null;
+        var season = environment.Season is { } name ? Loc.GetString(name) : null;
+        if (season != null && temperature != null)
+            return Loc.GetString("wf-planet-timepiece-climate", ("season", season), ("temperature", temperature));
+        return season ?? temperature ?? string.Empty;
     }
 }

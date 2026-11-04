@@ -1,0 +1,18 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      MinSize="520 480"
+                      SetSize="560 620">
+    <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="8">
+        <Label Name="BalanceLabel" />
+        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+            <BoxContainer Name="Listings" Orientation="Vertical" SeparationOverride="4" />
+        </ScrollContainer>
+        <PanelContainer Name="PadPanel" StyleClasses="AngleRect">
+            <BoxContainer Orientation="Horizontal" Margin="8 6" SeparationOverride="8">
+                <Label Name="PadLabel" HorizontalExpand="True" ClipText="True" VerticalAlignment="Center" />
+                <Button Name="RepairButton" />
+                <Button Name="SellButton" StyleClasses="ButtonCaution" />
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</controls:FancyWindow>

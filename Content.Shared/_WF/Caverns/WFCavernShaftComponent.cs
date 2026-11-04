@@ -18,4 +18,8 @@ public sealed partial class WFCavernShaftComponent : Component
     /// <summary>The fall damage multiplier of the cavern tile under the hole.</summary>
     [DataField, AutoNetworkedField]
     public float LandingMultiplier = 1f;
+
+    /// <summary>A stairwell rather than a sinkhole: the shade draws no lip, so a mapped or built opening keeps its own look.</summary>
+    [DataField, AutoNetworkedField]
+    public bool Plain;
 }

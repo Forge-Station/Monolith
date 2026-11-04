@@ -1,0 +1,27 @@
+# Aerumna's wild hive (WFAerumnaHive, Planets/Biomes/aerumna.yml): what the world lays by itself, as opposed to what a
+# xeno builds. Names and descriptions are in Locale/en-US/_WF/Xenonids/wild-hive.ftl.
+
+# Weeds that came with the ground. They never spread, grow level 0 so any hive's weeds replace them, and slow outsiders
+# less than a hive's own would, so the region can be crossed on foot.
+- type: entity
+  parent: WFXenoWeedsBase
+  id: WFXenoWeedsWild
+  components:
+  - type: XenoWeeds
+    isSource: false
+    level: 0
+    speedMultiplierOutsider: 0.7
+    speedMultiplierOutsiderArmor: 0.75
+
+# An egg that was never planted by anyone: grown, dormant, and opens for whatever walks up to it, as any egg does.
+- type: entity
+  parent: XenoEgg
+  id: WFXenoEggWild
+  components:
+  - type: Transform
+    anchored: true
+  # Anchored from the start, so it is static from the start too (the prototype checks want them to agree).
+  - type: Physics
+    bodyType: Static
+  - type: XenoEgg
+    planted: true

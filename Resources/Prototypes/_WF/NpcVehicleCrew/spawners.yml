@@ -1,0 +1,161 @@
+# Markers that spawn a crewed ground vehicle when the map loads, for mappers and planet sites. Each names its wfVehicleCrew.
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerPirateHumvee
+  name: pirate humvee crew spawner
+  description: A pirate humvee with its crew aboard.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/humvee.rsi
+      state: humvee_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewPirateHumvee
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerPirateTank
+  name: pirate tank crew spawner
+  description: A pirate tank with its crew aboard.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/tank.rsi
+      state: tank_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewPirateTank
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerPirateApc
+  name: pirate APC crew spawner
+  description: A pirate APC with its crew and troopers aboard.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/apc.rsi
+      state: apc_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewPirateApc
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerMercenaryTank
+  name: mercenary tank crew spawner
+  description: A mercenary tank with its crew aboard, holding its post.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/tank.rsi
+      state: tank_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewMercenaryTank
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerTsfTank
+  name: TSF tank crew spawner
+  description: A TSF tank with its crew aboard, holding its post.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/tank.rsi
+      state: tank_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewTsfTank
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerTsfApc
+  name: TSF APC crew spawner
+  description: A TSF APC with its crew and troopers aboard.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/apc.rsi
+      state: apc_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewTsfApc
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerUsspApc
+  name: USSP APC crew spawner
+  description: A USSP APC with its crew and troopers aboard.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/sppapc.rsi
+      state: sppapc_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewUsspApc
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerUsspTank
+  name: USSP tank crew spawner
+  description: A USSP tank with its crew aboard, holding its post.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/spptank.rsi
+      state: tank_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewUsspTank
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerCivilianTruck
+  name: civilian truck driver spawner
+  description: A civilian truck with its driver aboard.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/van.rsi
+      state: van_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewCivilianTruck
+
+- type: entity
+  parent: MarkerBase
+  id: WFVehicleCrewSpawnerCivilianVan
+  name: civilian van driver spawner
+  description: A civilian van with its driver aboard.
+  categories: [ WFVehicles ]
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _WF/Vehicles/van.rsi
+      state: van_base
+      scale: 0.25, 0.25
+  - type: WFVehicleCrewSpawner
+    crew: WFVehicleCrewCivilianVan

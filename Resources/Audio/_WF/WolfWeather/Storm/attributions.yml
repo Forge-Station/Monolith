@@ -1,0 +1,14 @@
+- files: ["storm_soundopolis.ogg"]
+  license: "Custom"
+  copyright: '"Thunderstorm_Distant_Fienup_001" from Sonniss GDC Game Audio Bundle 2015 - Soundopolis - Natures Fury_Thunder, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["storm_mechwave.ogg"]
+  license: "Custom"
+  copyright: '"Rain Thunder So Far_MB 06" from Sonniss GDC Game Audio Bundle 2015 - Mechanical Wave - Ambience and Weather, Sonniss #GameAudioGDC bundle (royalty-free, no attribution required, may not be redistributed as sound effects).'
+  source: "https://sonniss.com/gameaudiogdc/"
+
+- files: ["storm_soundrack.ogg"]
+  license: "CC-BY-4.0"
+  copyright: '"Thunder and Rain Ambience 01" by Leonardo Calvo, from The Sound Rack - Storm and Rain Ambience.'
+  source: "https://thesoundrack.itch.io/storm-rain-ambience"

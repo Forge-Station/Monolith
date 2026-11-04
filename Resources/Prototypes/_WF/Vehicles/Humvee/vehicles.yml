@@ -1,0 +1,378 @@
+# The humvee family. The plain humvee starts with its armed turret; the other turret slots are empty (Humvee/armed.yml has the
+# armed ARC). The ARC is a plain variant here, without its deployable auto turret and sensor.
+
+- type: entity
+  parent: RMCVehicleBase
+  id: VehicleHumveeBase
+  abstract: true
+  name: humvee
+  description: A fast armored utility vehicle outfitted for patrols and support.
+  components:
+  - type: WFVehicleEngineAudio
+    startSound: /Audio/_WF/Vehicles/RCSM/engines/centauro/start.ogg
+    stopSound: /Audio/_WF/Vehicles/RCSM/engines/centauro/stop.ogg
+    idleLoop: /Audio/_WF/Vehicles/RCSM/engines/centauro/idle.ogg
+    driveLoop: /Audio/_WF/Vehicles/RCSM/engines/centauro/drive.ogg
+    highLoop: /Audio/_WF/Vehicles/RCSM/engines/centauro/high.ogg
+    revSound:
+      collection: WFRcsmEngineRev
+    gears: 4
+    idlePitch: 1, 1.3
+    drivePitch: 0.75, 1.4
+    highPitch: 0.95, 1.25
+    shiftSound:
+      collection: WFRcsmEngineShift
+    throttleResponse: 5
+    tracksLoop: /Audio/_WF/Vehicles/RCSM/wheels/road.ogg
+    startDelay: 2
+    tracksPitch: 0.9, 1.25
+  - type: WFVehicleHitSound
+    lightHitSound:
+      collection: WFRcsmHitBullet
+    lightRicochetSound:
+      collection: WFRcsmRicochet
+    heavyHitSound:
+      collection: WFRcsmHitShell
+    heavyRicochetSound:
+      collection: WFRcsmShellRicochet
+  - type: WFVehicleDestroyedSound
+    sequence:
+    - sound:
+        collection: WFRcsmVehicleBlast
+        params:
+          volume: 4
+          maxDistance: 32
+    - delay: 0.4
+      sound:
+        collection: WFRcsmVehicleDebris
+    - delay: 2.5
+      sound:
+        collection: WFRcsmVehicleFire
+        params:
+          maxDistance: 14
+    - delay: 6
+      sound:
+        collection: WFRcsmVehicleFireStress
+        params:
+          maxDistance: 12
+  - type: WarpPoint
+    follow: true
+    location: Humvee
+  - type: GridVehicleMover
+    plowRamMinSpeed: 10
+    maxRotationSpeedDegrees: 120
+    rotationAccelerationDegrees: 240
+    rotationDecelerationDegrees: 300
+    alignmentAssistDegrees: 8
+    maxSpeed: 14
+    acceleration: 8
+    deceleration: 14
+    turnDelay: 0.25
+    weightClass: Light
+  - type: VehicleOvercharge
+    speedMultiplier: 1.5
+    duration: 3
+    cooldown: 15
+    overchargeSound: /Audio/_WF/Vehicles/overdrive_activate.ogg
+  - type: VehicleSound
+    runningSound: null
+    collisionSound:
+      collection: WFRcsmCollide
+    crashSound:
+      collection: WFRcsmCrash
+    runningSoundCooldown: 2
+    hornSound: /Audio/_WF/Vehicles/sound_vehicles_humvee_horn.ogg # This uses a unique horn
+    hornCooldown: 1
+#    collisionSound: /Audio/_WF/Vehicles/effects/metalhit.ogg
+    mobCollisionSound: /Audio/_WF/Vehicles/effects/alien_claw_block.ogg
+  - type: VehicleSpotlight
+    radius: 6
+    energy: 2.5
+    softness: 2
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.65,-1.2,0.65,1.2
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        - Vehicle
+        layer:
+        - LargeMobLayer
+        - Vehicle
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.65,-1.2,0.65,1.2
+        density: 1000
+        mask:
+        - MidImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _WF/Vehicles/humvee.rsi
+    layers:
+    - map: [ base ]
+      state: humvee_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: ATTACH
+      visible: false
+    - map: [ support-2 ]
+      state: ATTACH
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: VehicleHardpointVisuals
+  - type: ItemSlots
+    slots:
+      wheel-1:
+        startingItem: VehicleHumveeWheel
+        whitelist:
+          components:
+          - VehicleWheelItem
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slots:
+    - id: turret
+      hardpointType: HardpointTypeTurret
+      slotType: HardpointSlotTypeTurret
+      visualLayer: primary
+      insertDelay: 2.0
+      required: false
+    - id: roof
+      hardpointType: HardpointTypeRoofAttachment
+      slotType: HardpointSlotTypeRoofAttachment
+      visualLayer: support
+      insertDelay: 1.5
+      required: false
+    - id: front
+      hardpointType: HardpointTypeFrontAttachment
+      slotType: HardpointSlotTypeFrontAttachment
+      visualLayer: support-2
+      insertDelay: 1.5
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/humvee_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 4
+    entryPoints:
+    - offset: -1,0.8
+      radius: 0.45
+      interiorCoords: 1.61, -2.15
+    - offset: -1,-0.1
+      radius: 0.45
+      interiorCoords: 2.47, -2.15
+    - offset: 1,0.8
+      radius: 0.45
+      interiorCoords: 1.6, -1.35
+    - offset: 1,-0.1
+      radius: 0.45
+      interiorCoords: 2.41,-1.35
+  - type: StaticPrice
+    price: 25000
+
+- type: entity
+  parent: VehicleHumveeBase
+  id: VehicleHumvee
+  suffix: Drivable, Humvee, Base, Tracked
+  components:
+  - type: WFMilitaryVehicle
+  - type: ItemSlots
+    slots:
+      turret:
+        startingItem: VehicleHumveeTurretArmed
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleHumveeWheel
+        whitelist:
+          components:
+          - VehicleWheelItem
+
+- type: entity
+  parent: VehicleHumveeBase
+  id: VehicleHumveeMedical
+  name: humvee (medical)
+  description: A medical-configured humvee outfitted for field triage.
+  suffix: Drivable, Humvee, Base, Medical, Tracked
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/humvee_medical.rsi
+    layers:
+    - map: [ base ]
+      state: humvee_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ support ]
+      state: ATTACH
+      visible: false
+    - map: [ support-2 ]
+      state: ATTACH
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slots:
+    # The roof takes the overlight only: the hatch's overlay state is in humvee.rsi alone, not in this body's.
+    - id: roof
+      hardpointType: HardpointTypeRoofAttachment
+      slotType: HardpointSlotTypeRoofAttachment
+      visualLayer: support
+      insertDelay: 1.5
+      required: false
+      whitelist:
+        components:
+        - VehicleSpotlightModifier
+    - id: front
+      hardpointType: HardpointTypeFrontAttachment
+      slotType: HardpointSlotTypeFrontAttachment
+      visualLayer: support-2
+      insertDelay: 1.5
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/humvee_medical_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 4
+    entryPoints:
+    - offset: 0.45,1.6
+      radius: 0.5
+      interiorCoords: 0.89, -0.57
+    - offset: -0.45,1.6
+      radius: 0.5
+      interiorCoords: 0.89,-1.35
+    - offset: -1,-0.2
+      radius: 0.5
+      interiorCoords: 3.01, -1.23
+    - offset: 1,-0.2
+      radius: 0.5
+      interiorCoords: 2.94, -0.44
+
+- type: entity
+  parent: VehicleHumveeBase
+  id: VehicleHumveeTransport
+  name: humvee (transport)
+  description: A transport humvee configured for passenger movement.
+  suffix: Drivable, Humvee, Base, Transport, Tracked
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/humvee_transport.rsi
+    layers:
+    - map: [ base ]
+      state: humvee_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ support ]
+      state: ATTACH
+      visible: false
+    - map: [ support-2 ]
+      state: ATTACH
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slots:
+    # The roof takes the overlight only: the hatch's overlay state is in humvee.rsi alone, not in this body's.
+    - id: roof
+      hardpointType: HardpointTypeRoofAttachment
+      slotType: HardpointSlotTypeRoofAttachment
+      visualLayer: support
+      insertDelay: 1.5
+      required: false
+      whitelist:
+        components:
+        - VehicleSpotlightModifier
+    - id: front
+      hardpointType: HardpointTypeFrontAttachment
+      slotType: HardpointSlotTypeFrontAttachment
+      visualLayer: support-2
+      insertDelay: 1.5
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/humvee_transport_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 6
+    entryPoints:
+    - offset: 0.45,1.6
+      radius: 0.5
+      interiorCoords: 1.48, -0.35
+    - offset: -0.45,1.6
+      radius: 0.5
+      interiorCoords: 1.48,-1.17
+    - offset: -1,-0.1
+      radius: 0.45
+      interiorCoords: 3.55, -1.36
+    - offset: 1,-0.1
+      radius: 0.45
+      interiorCoords: 3.56,-0.36
+
+- type: entity
+  parent: VehicleHumveeBase
+  id: VehicleHumveeARC
+  name: humvee (arc)
+  description: A humvee configured for ARC interior layout.
+  suffix: Drivable, Humvee, Base, ARC, Tracked
+  components:
+  - type: WFMilitaryVehicle
+  - type: GridVehicleMover
+    weightClass: Light
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: VehicleFrameARC # ARC damage modifier
+  - type: HardpointIntegrity
+    maxIntegrity: 800
+    bypassEntryOnZero: true
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/humvee_arc_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 5
+    entryPoints:
+    - offset: -1,-0.1
+      radius: 0.5
+      interiorCoords: 3.56,-1.42
+    - offset: 1,-0.1
+      radius: 0.5
+      interiorCoords: 3.56, -0.42

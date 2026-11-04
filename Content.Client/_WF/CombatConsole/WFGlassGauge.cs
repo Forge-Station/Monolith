@@ -46,6 +46,9 @@ public sealed class WFGlassGauge : Control
     /// <summary>Uses a horizontal scale with a marked midpoint for linear telemetry.</summary>
     public bool Strip { get; }
 
+    /// <summary>Unpowered instruments retain their dial and parked needle while suppressing readout text.</summary>
+    public bool Powered { get; set; } = true;
+
     /// <summary>Fits the caption, exact reading and linear scale into a 44-unit cockpit strip.</summary>
     public bool CompactStrip { get; set; }
 
@@ -135,7 +138,8 @@ public sealed class WFGlassGauge : Control
             handle.DrawLine(center + direction * (face - (i % 5 == 0 ? 8 : 4) * UIScale),
                 center + direction * face, i % 5 == 0 ? WFInstrumentTheme.Cream : WFInstrumentTheme.Muted);
         }
-        Text(handle, _small, _middleText,
+        if (Powered)
+            Text(handle, _small, _middleText,
             center + new Vector2(0, -face * 0.65f + 3 * UIScale), face * 0.65f, WFInstrumentTheme.Muted);
         if (_needle is { } needle)
         {
@@ -156,10 +160,13 @@ public sealed class WFGlassGauge : Control
         var readoutTop = MathF.Min(center.Y + face * 0.17f, minimum.Top - 3 * UIScale - readoutHeight);
         var readout = UIBox2.FromDimensions(new Vector2(center.X - face * 0.73f, readoutTop), new Vector2(face * 1.46f, readoutHeight));
         handle.DrawRect(readout, WFInstrumentTheme.Skin.Ink);
-        WFInstrumentText.DrawFitted(handle, _dialDigits, _reading.Text,
+        if (Powered)
+            WFInstrumentText.DrawFitted(handle, _dialDigits, _reading.Text,
             new UIBox2(readout.TopLeft + new Vector2(UIScale), readout.BottomRight - new Vector2(UIScale)), UIScale, color);
-        TextInBox(handle, _small, _minimumText, minimum, WFInstrumentTheme.Muted);
-        TextInBox(handle, _small, _maximumText, maximum, WFInstrumentTheme.Muted);
+        if (Powered)
+            TextInBox(handle, _small, _minimumText, minimum, WFInstrumentTheme.Muted);
+        if (Powered)
+            TextInBox(handle, _small, _maximumText, maximum, WFInstrumentTheme.Muted);
         WFInstrumentGlass.Round(handle, center, face + 2 * UIScale, UIScale);
         Text(handle, _small, _caption, new Vector2(center.X, layout.CaptionBaseline), PixelWidth - 2 * CaptionInset * UIScale, WFInstrumentTheme.Cream);
     }
@@ -167,6 +174,8 @@ public sealed class WFGlassGauge : Control
     /// <summary>Draws the reading as a figure with a smaller unit, or its whole text when it is not a measurement.</summary>
     private void Readout(DrawingHandleScreen handle, UIBox2 box, Color color)
     {
+        if (!Powered)
+            return;
         if (_reading.Digits.Length > 0)
             WFInstrumentText.DrawReading(handle, _stripDigits, _reading.Digits, _reading.Unit, box, UIScale, color,
                 WFInstrumentTheme.Skin.TextMuted);
@@ -243,10 +252,13 @@ public sealed class WFGlassGauge : Control
 
         var labelsTop = top + tall + 2 * UIScale;
         var labelsBottom = y + content - 3 * UIScale;
-        TextInBox(handle, _small, _minimumText, new UIBox2(inset, labelsTop, PixelWidth * 0.32f, labelsBottom), skin.TextMuted, true);
-        TextInBox(handle, _small, _middleText, new UIBox2(PixelWidth * 0.34f, labelsTop, PixelWidth * 0.66f, labelsBottom),
+        if (Powered)
+            TextInBox(handle, _small, _minimumText, new UIBox2(inset, labelsTop, PixelWidth * 0.32f, labelsBottom), skin.TextMuted, true);
+        if (Powered)
+            TextInBox(handle, _small, _middleText, new UIBox2(PixelWidth * 0.34f, labelsTop, PixelWidth * 0.66f, labelsBottom),
             digital ? skin.TextMuted : skin.Text, true);
-        TextInBox(handle, _small, _maximumText, new UIBox2(PixelWidth * 0.68f, labelsTop, PixelWidth - inset, labelsBottom), skin.TextMuted, true);
+        if (Powered)
+            TextInBox(handle, _small, _maximumText, new UIBox2(PixelWidth * 0.68f, labelsTop, PixelWidth - inset, labelsBottom), skin.TextMuted, true);
         if (!digital)
             WFInstrumentGlass.Window(handle, bounds, UIScale);
     }
@@ -272,16 +284,18 @@ public sealed class WFGlassGauge : Control
             WFConsoleDigital.Dot(handle, center + direction * (radius - 7 * UIScale), 3 * UIScale, color, ref _digitalVertices);
         }
         var (figure, unit) = WFGaugeScale.RingReadout(center, radius, UIScale);
-        if (_reading.Digits.Length > 0)
+        if (Powered && _reading.Digits.Length > 0)
         {
             WFInstrumentText.DrawFitted(handle, _digits, _reading.Digits, figure, UIScale, color);
             WFInstrumentText.DrawFitted(handle, _digits, _reading.Unit, unit, UIScale * WFInstrumentText.TagScale, skin.TextMuted);
         }
-        else
+        else if (Powered)
             WFInstrumentText.DrawFitted(handle, _digits, _reading.Text, UIBox2.FromDimensions(figure.TopLeft,
                 new Vector2(figure.Width, unit.Bottom - figure.Top)), UIScale, color);
-        Text(handle, _small, _minimumText, center + new Vector2(-radius * 0.57f, radius * 0.86f), radius * 0.8f, skin.TextMuted);
-        Text(handle, _small, _maximumText, center + new Vector2(radius * 0.57f, radius * 0.86f), radius * 0.8f, skin.TextMuted);
+        if (Powered)
+            Text(handle, _small, _minimumText, center + new Vector2(-radius * 0.57f, radius * 0.86f), radius * 0.8f, skin.TextMuted);
+        if (Powered)
+            Text(handle, _small, _maximumText, center + new Vector2(radius * 0.57f, radius * 0.86f), radius * 0.8f, skin.TextMuted);
         Text(handle, _small, _caption, new Vector2(center.X, layout.CaptionBaseline), PixelWidth - 2 * CaptionInset * UIScale, skin.Text);
     }
 

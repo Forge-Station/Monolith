@@ -1,153 +1,189 @@
-using System.Numerics;
-using Content.Server.Electrocution;
+using Content.Shared._WF.CCVar;
 using Content.Shared._WF.Planets;
-using Content.Shared.Mobs.Components;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
-using Robust.Shared.Player;
+using Content.Shared.Weather;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server._WF.Planets;
 
-/// <summary>Phased storms (telegraph, main, end) and lightning strikes near players on the surface.</summary>
+/// <summary>
+/// Phased storms: telegraph, main, end. The phases are rolled ahead into a queue, so the forecast is what will happen.
+/// Lightning comes from the world's WolfWeather for the phase.
+/// </summary>
 public sealed partial class WFPlanetWeatherSystem
 {
-    [Dependency] private ElectrocutionSystem _electrocution = default!;
-    [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private SharedMapSystem _maps = default!;
-    [Dependency] private ISharedPlayerManager _players = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
+    /// <summary>How far ahead each world's weather is rolled.</summary>
+    public static readonly TimeSpan ForecastHorizon = TimeSpan.FromHours(3);
 
-    /// <summary>Lightning bolt entity spawned at a strike.</summary>
-    public static readonly EntProtoId Thunderbolt = "WFThunderbolt";
+    private const int MaxUpcoming = 256;
 
-    /// <summary>Thunder at the strike, sent to the whole map and left to fall off with distance.</summary>
-    public static readonly SoundSpecifier ThunderSound = new SoundCollectionSpecifier("WFThunder",
-        AudioParams.Default.WithMaxDistance(120f).WithRolloffFactor(0.4f).WithVariation(0.05f));
-
-    // Seconds between bolts in a thunderstorm's main phase.
-    private const float ThunderMinSeconds = 6f;
-    private const float ThunderMaxSeconds = 22f;
-
-    // Tiles from a player a bolt lands.
-    private const float ThunderMinRange = 4f;
-    private const float ThunderMaxRange = 20f;
-
-    private const int ThunderShockDamage = 25;
-    private static readonly TimeSpan ThunderShockTime = TimeSpan.FromSeconds(3);
-
-    private readonly List<EntityUid> _thunderTargets = new();
-    private readonly HashSet<Entity<MobStateComponent>> _struck = new();
-
-    /// <summary>Moves a world's storm on one phase: clear, telegraph, main, end, clear.</summary>
-    private void AdvanceStorm(WFPlanetWeatherComponent state, WFPlanetWeatherPrototype profile)
+    /// <summary>Moves a world on to its next rolled phase.</summary>
+    private void Advance(WFPlanetWeatherComponent state, WFPlanetWeatherPrototype profile)
     {
-        var storm = state.Storm >= 0 && state.Storm < profile.Storms.Count ? profile.Storms[state.Storm] : null;
+        if (state.Upcoming.Count == 0)
+            Fill(state, profile);
 
-        switch (state.Phase)
+        if (state.Upcoming.Count == 0)
         {
-            case WFStormPhase.None when profile.Storms.Count > 0:
-                state.Storm = _random.Next(profile.Storms.Count);
-                storm = profile.Storms[state.Storm];
+            Enter(state, WFStormPhase.None, null, _random.NextFloat(profile.ClearMinSeconds, profile.ClearMaxSeconds));
+            return;
+        }
 
-                if (storm.Telegraph is { } telegraph)
-                {
-                    Enter(state, WFStormPhase.Telegraph, telegraph, storm.TelegraphSeconds);
-                    return;
-                }
+        var next = state.Upcoming[0];
+        state.Upcoming.RemoveAt(0);
+        Enter(state, next.Phase, next.Weather, next.Seconds);
+        Fill(state, profile);
+    }
 
-                EnterMain(state, storm, profile);
-                return;
+    /// <summary>Rolls phases onto the queue until it reaches past the forecast horizon.</summary>
+    private void Fill(WFPlanetWeatherComponent state, WFPlanetWeatherPrototype profile)
+    {
+        // With the cycle off nothing is coming: an admin's weather holds, then the world stays clear.
+        if (!_cfg.GetCVar(PlanetCVars.PlanetWeather))
+            return;
 
-            case WFStormPhase.Telegraph when storm != null:
-                EnterMain(state, storm, profile);
-                return;
+        var end = state.NextChange;
+        foreach (var phase in state.Upcoming)
+        {
+            end += TimeSpan.FromSeconds(phase.Seconds);
+        }
 
-            case WFStormPhase.Main when storm?.End is { } end:
-                Enter(state, WFStormPhase.End, end, storm.EndSeconds);
-                return;
+        var horizon = _timing.CurTime + ForecastHorizon;
+        while (end < horizon && state.Upcoming.Count < MaxUpcoming)
+        {
+            var clear = state.Upcoming.Count > 0
+                ? state.Upcoming[^1].Phase == WFStormPhase.None
+                : state.Phase == WFStormPhase.None && state.Current == null;
+            var season = GetSeason(state, profile, end);
+            var count = state.Upcoming.Count;
 
-            default:
-                Enter(state, WFStormPhase.None, null, _random.NextFloat(profile.ClearMinSeconds, profile.ClearMaxSeconds));
-                return;
+            if (!clear || !RollWeather(profile, season, state.Upcoming))
+            {
+                var seconds = _random.NextFloat(profile.ClearMinSeconds, profile.ClearMaxSeconds) * (season?.ClearScale ?? 1f);
+                state.Upcoming.Add(new WFWeatherPhase { Phase = WFStormPhase.None, Seconds = MathF.Max(1f, seconds) });
+            }
+
+            for (var i = count; i < state.Upcoming.Count; i++)
+            {
+                end += TimeSpan.FromSeconds(state.Upcoming[i].Seconds);
+            }
         }
     }
 
-    private void EnterMain(WFPlanetWeatherComponent state, WFPlanetStorm storm, WFPlanetWeatherPrototype profile)
+    /// <summary>Drops what was rolled and rolls again; a storm under way keeps its remaining phases.</summary>
+    public void Reroll(WFPlanetWeatherComponent state, WFPlanetWeatherPrototype profile)
     {
-        Enter(state, WFStormPhase.Main, storm.Main, _random.NextFloat(profile.WeatherMinSeconds, profile.WeatherMaxSeconds));
-        state.NextThunder = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(ThunderMinSeconds, ThunderMaxSeconds));
+        var keep = 0;
+        if (state.Phase is WFStormPhase.Telegraph or WFStormPhase.Main)
+        {
+            while (keep < state.Upcoming.Count && state.Upcoming[keep].Phase is WFStormPhase.Main or WFStormPhase.End)
+            {
+                keep++;
+            }
+        }
+
+        state.Upcoming.RemoveRange(keep, state.Upcoming.Count - keep);
+        Fill(state, profile);
     }
 
-    private void Enter(WFPlanetWeatherComponent state, WFStormPhase phase, ProtoId<Content.Shared.Weather.WeatherPrototype>? weather, float seconds)
+    /// <summary>Rolls the next storm of the season, or a single weather; false when the world has none.</summary>
+    private bool RollWeather(WFPlanetWeatherPrototype profile, WFPlanetSeason? season, List<WFWeatherPhase> into)
+    {
+        var storms = season?.Storms ?? profile.Storms;
+        var scale = season?.WeatherScale ?? 1f;
+        var main = MathF.Max(1f, _random.NextFloat(profile.WeatherMinSeconds, profile.WeatherMaxSeconds) * scale);
+
+        if (storms.Count == 0)
+        {
+            if (profile.Weather.Count == 0)
+                return false;
+            into.Add(new WFWeatherPhase { Weather = _random.Pick(profile.Weather), Phase = WFStormPhase.Main, Seconds = main });
+            return true;
+        }
+
+        var total = 0f;
+        foreach (var candidate in storms)
+        {
+            total += StormWeight(season, candidate);
+        }
+
+        var storm = storms[0];
+        if (total <= 0f)
+        {
+            storm = _random.Pick(storms);
+        }
+        else
+        {
+            var roll = _random.NextFloat(total);
+            foreach (var candidate in storms)
+            {
+                storm = candidate;
+                roll -= StormWeight(season, candidate);
+                if (roll < 0f)
+                    break;
+            }
+        }
+
+        if (storm.Telegraph is { } telegraph)
+            into.Add(new WFWeatherPhase { Weather = telegraph, Phase = WFStormPhase.Telegraph, Seconds = storm.TelegraphSeconds });
+        into.Add(new WFWeatherPhase { Weather = storm.Main, Phase = WFStormPhase.Main, Seconds = main });
+        if (storm.End is { } end)
+            into.Add(new WFWeatherPhase { Weather = end, Phase = WFStormPhase.End, Seconds = storm.EndSeconds });
+        return true;
+    }
+
+    private static float StormWeight(WFPlanetSeason? season, WFPlanetStorm storm)
+    {
+        return season != null && season.StormWeights.TryGetValue(storm.Main, out var weight) ? MathF.Max(0f, weight) : 1f;
+    }
+
+    private void Enter(WFPlanetWeatherComponent state, WFStormPhase phase, ProtoId<WeatherPrototype>? weather, float seconds)
     {
         state.Phase = phase;
         state.Current = weather;
         state.NextChange = _timing.CurTime + TimeSpan.FromSeconds(seconds);
     }
 
-    /// <summary>Strikes a bolt when one is due.</summary>
-    private void UpdateThunder(WFPlanetNetworkComponent network, WFPlanetWeatherComponent state, WFPlanetWeatherPrototype profile)
+    /// <summary>
+    /// A world's weather from now to the forecast horizon: the current phase first, then each rolled one with its start
+    /// and end. Empty while the cycle is off and nothing is held.
+    /// </summary>
+    public bool TryGetSchedule(EntityUid world, List<WFScheduledWeather> into)
     {
-        if (state.Phase != WFStormPhase.Main
-            || state.Storm < 0 || state.Storm >= profile.Storms.Count
-            || !profile.Storms[state.Storm].Thunder
-            || _timing.CurTime < state.NextThunder)
+        into.Clear();
+        if (!TryComp<WFPlanetWeatherComponent>(world, out var state))
+            return false;
+
+        var now = _timing.CurTime;
+        into.Add(new WFScheduledWeather(now, state.NextChange, state.Current, state.Phase));
+        var start = state.NextChange;
+        foreach (var phase in state.Upcoming)
         {
-            return;
+            var end = start + TimeSpan.FromSeconds(phase.Seconds);
+            into.Add(new WFScheduledWeather(start, end, phase.Weather, phase.Phase));
+            start = end;
         }
 
-        state.NextThunder = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(ThunderMinSeconds, ThunderMaxSeconds));
-        Strike(network.GroundMap);
+        return true;
     }
 
-    /// <summary>One bolt on weather-exposed ground near a random visitor; whoever stands on that tile is shocked.</summary>
-    public bool Strike(EntityUid ground)
+    /// <summary>The weather the schedule has falling at a time; the current weather for any time already past.</summary>
+    public ProtoId<WeatherPrototype>? GetWeatherAt(WFPlanetWeatherComponent state, TimeSpan at)
     {
-        if (!TryComp<MapGridComponent>(ground, out var grid))
-            return false;
+        if (at < state.NextChange)
+            return state.Current;
 
-        _thunderTargets.Clear();
-
-        foreach (var session in _players.Sessions)
+        var start = state.NextChange;
+        foreach (var phase in state.Upcoming)
         {
-            if (session.AttachedEntity is { } attached && Transform(attached).MapUid == ground)
-                _thunderTargets.Add(attached);
+            start += TimeSpan.FromSeconds(phase.Seconds);
+            if (at < start)
+                return phase.Weather;
         }
 
-        if (_thunderTargets.Count == 0)
-            return false;
-
-        var origin = _transform.GetWorldPosition(_random.Pick(_thunderTargets));
-
-        // A few tries: roofed tiles take no lightning, as they take no rain.
-        for (var attempt = 0; attempt < 8; attempt++)
-        {
-            var offset = _random.NextAngle().ToVec() * _random.NextFloat(ThunderMinRange, ThunderMaxRange);
-            var tile = _maps.GetTileRef(ground, grid, _maps.WorldToTile(ground, grid, origin + offset));
-
-            if (tile.Tile.IsEmpty || !_weather.CanWeatherAffect(ground, grid, tile))
-                continue;
-
-            var coords = _maps.GridTileToLocal(ground, grid, tile.GridIndices);
-            Spawn(Thunderbolt, coords);
-            _audio.PlayStatic(ThunderSound, Filter.BroadcastMap(Transform(ground).MapID), coords, true);
-
-            _struck.Clear();
-            _lookup.GetEntitiesInRange(coords, 0.7f, _struck);
-
-            foreach (var mob in _struck)
-            {
-                _electrocution.TryDoElectrocution(mob, null, ThunderShockDamage, ThunderShockTime, true, ignoreInsulation: true);
-            }
-
-            return true;
-        }
-
-        return false;
+        return null;
     }
 }
+
+/// <summary>One stretch of a world's scheduled weather.</summary>
+public readonly record struct WFScheduledWeather(TimeSpan Start, TimeSpan End, ProtoId<WeatherPrototype>? Weather, WFStormPhase Phase);

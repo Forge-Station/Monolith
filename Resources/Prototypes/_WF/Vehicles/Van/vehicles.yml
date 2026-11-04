@@ -1,0 +1,508 @@
+# The van family: the van itself, the CLF van, the box and pizza vans and the SPP vans. The wheels are fitted at spawn
+# (RMC leaves the van's wheel loose); the SPP armed van starts with its roof turret and the turret with its cannon.
+
+- type: entity
+  parent: RMCVehicleBase
+  id: VehicleVanBase
+  abstract: true
+  name: van
+  description: A rugged transport van.
+  components:
+  - type: VehicleSound
+    runningSound: null
+    collisionSound:
+      collection: WFRcsmCarCrash
+    mobCollisionSound:
+      collection: WFRcsmCrush
+    crashSound:
+      collection: WFRcsmCrash
+  - type: WFVehicleEngineAudio
+    startSound: /Audio/_WF/Vehicles/RCSM/engines/ural/start.ogg
+    stopSound: /Audio/_WF/Vehicles/RCSM/engines/ural/stop.ogg
+    idleLoop: /Audio/_WF/Vehicles/RCSM/engines/ural/idle.ogg
+    driveLoop: /Audio/_WF/Vehicles/RCSM/engines/ural/drive.ogg
+    highLoop: /Audio/_WF/Vehicles/RCSM/engines/ural/high.ogg
+    revSound:
+      collection: WFRcsmEngineRev
+    gears: 4
+    idlePitch: 1, 1.3
+    drivePitch: 0.75, 1.4
+    highPitch: 0.95, 1.25
+    shiftSound:
+      collection: WFRcsmEngineShift
+    throttleResponse: 5
+    tracksLoop: /Audio/_WF/Vehicles/RCSM/wheels/road.ogg
+    startDelay: 1.5
+    tracksPitch: 0.9, 1.25
+  - type: WFVehicleHitSound
+    lightHitSound:
+      collection: WFRcsmHitBullet
+    lightRicochetSound:
+      collection: WFRcsmRicochet
+    lightRicochetChance: 0.2
+  - type: WFVehicleDestroyedSound
+    sequence:
+    - sound:
+        collection: WFRcsmVehicleBlast
+        params:
+          volume: 4
+          maxDistance: 32
+    - delay: 0.4
+      sound:
+        collection: WFRcsmVehicleDebris
+    - delay: 2.5
+      sound:
+        collection: WFRcsmVehicleFire
+        params:
+          maxDistance: 14
+    - delay: 6
+      sound:
+        collection: WFRcsmVehicleFireStress
+        params:
+          maxDistance: 12
+  - type: WarpPoint
+    follow: true
+    location: Van
+  - type: GridVehicleMover
+    plowRamMinSpeed: 10
+    maxSpeed: 13
+    acceleration: 7
+    deceleration: 14
+    turnDelay: 0.25
+  - type: VehicleOvercharge
+    speedMultiplier: 1.6
+    duration: 3
+    cooldown: 15
+    overchargeSound: /Audio/_WF/Vehicles/overdrive_activate.ogg
+  - type: VehicleSpotlight
+    radius: 6
+    energy: 2.5
+    softness: 2
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.6,-1.2,0.6,1.5
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        - Vehicle
+        layer:
+        - LargeMobLayer
+        - Vehicle
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.6,-1.2,0.6,1.5
+        density: 1000
+        mask:
+        - MidImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _WF/Vehicles/van.rsi
+    layers:
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 6
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: ContainerContainer
+    containers:
+      wheel-1: !type:ContainerSlot
+        showEnts: false
+        occludes: true
+        ent: null
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyVan
+    slots:
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+      whitelist:
+        components:
+        - VehicleWheelItem
+  - type: HardpointState
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.5,-0.34
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1
+  - type: ItemSlots
+    slots:
+      wheel-1:
+        startingItem: RMCVanWheel
+        whitelist:
+          components:
+          - VehicleWheelItem
+  - type: StaticPrice
+    price: 15000
+
+- type: entity
+  parent: VehicleVanBase
+  id: VehicleVan
+  suffix: Drivable, Van, Base
+
+## CLF
+- type: entity
+  parent: VehicleVanBase # the CLF van keeps the van interior
+  id: VehicleCLFVan
+  name: CLF van
+  suffix: Drivable, Van, CLF
+  description: A rugged transport van painted in CLF colors.
+  components:
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: VehicleFrameCLFVan # CLF van modifiers
+  - type: Sprite
+    sprite: _WF/Vehicles/CLF_van.rsi
+    layers:
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    maxPassengers: 10
+
+## Box Vans
+- type: entity
+  parent: VehicleVanBase
+  id: VehicleBoxVanBase
+  abstract: true
+  name: box van
+  description: A rugged transport van fitted with a box body.
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Box Van
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.55,-0.35,0.55,1.4
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        - Vehicle
+        layer:
+        - LargeMobLayer
+        - Vehicle
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.55,-0.35,0.55,1.4
+        density: 1000
+        mask:
+        - MidImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Sprite
+    offset: "0,0.5"
+    drawdepth: Mobs
+    sprite: _WF/Vehicles/box_van.rsi
+    layers:
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/box_van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 1,-0.25
+      radius: 0.6
+      interiorCoords: -0.42,1.6
+    - offset: -1,-0.25
+      radius: 0.6
+      interiorCoords: -0.53,0.84
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: -1.74,1.22
+
+- type: entity
+  parent: VehicleBoxVanBase
+  id: VehicleBoxVan
+  suffix: Drivable, Box Van, Base
+
+- type: entity
+  parent: VehicleBoxVanBase
+  id: VehiclePizzaVan
+  name: pizza van
+  description: A van repurposed for pizza delivery, still sturdy enough for transport.
+  suffix: Drivable, Box Van, Pizza
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/pizza_van.rsi
+    offset: "0,0.5"
+    layers:
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/pizza_van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 1,-0.25
+      radius: 0.6
+      interiorCoords: 0.4,1.65
+    - offset: -1,-0.25
+      radius: 0.6
+      interiorCoords: 0.55,0.43
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: -0.75,1.2
+
+## SPP Vans
+- type: entity
+  parent: VehicleVanBase
+  id: VehicleSPPVan
+  name: SPP van
+  description: A rugged transport van painted in SPP colors.
+  suffix: Drivable, Van, SPP, Transport
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/sppvan.rsi
+    layers:
+    - map: [ base ]
+      state: sppvan_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/spp_van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 0,1.5
+      radius: 0.8
+      interiorCoords: 0.35,0.25
+    - offset: 1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,0.9
+    - offset: -1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,-0.2
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyVan
+    slots:
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      compatibilityId: HardpointCompatibilitySPPVan
+      insertDelay: 1.5
+  - type: ItemSlots
+    slots:
+      wheel-1:
+        startingItem: VehicleSPPVanWheel
+        whitelist:
+          components:
+          - VehicleWheelItem
+
+- type: entity
+  parent: VehicleSPPVan
+  id: VehicleSPPVanArmed
+  name: SPP van (armed)
+  description: An SPP van fitted with a roof-mounted weapon.
+  suffix: Drivable, Van, SPP, Armed
+  components:
+  - type: WFMilitaryVehicle
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: sppvant_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleHardpointVisuals
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyVan
+    slots:
+    - id: secondary
+      hardpointType: HardpointTypeSecondary
+      slotType: HardpointSlotTypeLauncher
+      compatibilityId: HardpointCompatibilitySPPVan
+      visualLayer: secondary
+      insertDelay: 2.0
+      required: false
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      compatibilityId: HardpointCompatibilitySPPVan
+      insertDelay: 1.5
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/spp_van_armed_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 0,1.5
+      radius: 0.8
+      interiorCoords: 0.35,0.25
+    - offset: 1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,0.9
+    - offset: -1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,-0.2
+  - type: ItemSlots
+    slots:
+      secondary:
+        startingItem: VehicleSPPVanTurret
+        whitelist:
+          components:
+          - HardpointItem
+      wheel-1:
+        startingItem: VehicleSPPVanWheel
+        whitelist:
+          components:
+          - VehicleWheelItem
+
+- type: entity
+  parent: VehicleSPPVan
+  id: VehicleSPPVanMedical
+  name: SPP van (medical)
+  description: An SPP van marked for casualty evacuation and field treatment.
+  suffix: Drivable, Van, SPP, Medical
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: sppvan_medical
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/spp_van_medical_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 0,1.5
+      radius: 0.8
+      interiorCoords: 0.35,0.25
+    - offset: 1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,0.9
+    - offset: -1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,-0.2
+
+- type: entity
+  parent: VehicleSPPVan
+  id: VehicleSPPVanPrisoner
+  name: SPP van (prisoner)
+  description: An SPP van refitted for prisoner transport.
+  suffix: Drivable, Van, SPP, Prisoner
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: sppvan_prisoner
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/spp_van_prisoner_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 0,1.5
+      radius: 0.8
+      interiorCoords: 0.35,0.25
+    - offset: 1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,0.9
+    - offset: -1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,-0.2
+
+- type: entity
+  parent: VehicleSPPVan
+  id: VehicleSPPVanLogistics
+  name: SPP van (logistics)
+  description: An SPP logistics van fitted with an enlarged cargo body.
+  suffix: Drivable, Van, SPP, Logistics
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/sppvan_logistics.rsi
+    layers:
+    - map: [ base ]
+      state: sppvan_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/spp_van_logistics_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 0,1.5
+      radius: 0.8
+      interiorCoords: 0.35,0.25
+    - offset: 1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,0.9
+    - offset: -1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,-0.2

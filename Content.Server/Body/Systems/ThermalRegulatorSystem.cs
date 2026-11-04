@@ -11,6 +11,7 @@ namespace Content.Server.Body.Systems;
 public sealed partial class ThermalRegulatorSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _wfDormancy = default!; // WOLFGATE(Dormancy): skips NPC bodies nobody is near
     [Dependency] private TemperatureSystem _tempSys = default!;
     [Dependency] private ActionBlockerSystem _actionBlockerSys = default!;
 
@@ -41,6 +42,7 @@ public sealed partial class ThermalRegulatorSystem : EntitySystem
                 continue;
 
             regulator.NextUpdate += regulator.UpdateInterval;
+            if (_wfDormancy.BodySleeps(uid)) continue; // WOLFGATE(Dormancy): an NPC body no player is near on a planet skips its upkeep
             ProcessThermalRegulation((uid, regulator));
         }
     }

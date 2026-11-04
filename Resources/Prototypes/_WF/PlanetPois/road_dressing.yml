@@ -1,0 +1,292 @@
+# What stands on the roads of the worlds that have them built properly. RMC's civilian vehicles are drawn from the
+# side only, so the sound ones go on roads running east to west, where they sit along a lane; wrecks go on any road,
+# slewed across a lane where it runs north to south. The army vehicles of road_props.yml are drawn from every side and
+# point along any road. Vehicles stand in the lane against the kerb; a wreck across a road takes the outer two.
+# `per100` is per hundred tiles of straight road; pieces that block are kept apart, so a road is never shut.
+
+# Asclepiu: a lived-in colony, a little run down.
+- type: wfRoadDressing
+  id: WFRoadDressingAsclepiu
+  kerbs:
+    North: RMCPlanetHybrisaSidewalkNorth
+    South: RMCPlanetHybrisaSidewalkSouth
+    East: RMCPlanetHybrisaSidewalkEast
+    West: RMCPlanetHybrisaSidewalkWest
+    NorthEast: RMCPlanetHybrisaSidewalkNorthEast
+    NorthWest: RMCPlanetHybrisaSidewalkNorthWest
+    SouthEast: RMCPlanetHybrisaSidewalkSouthEast
+    SouthWest: RMCPlanetHybrisaSidewalkSouthWest
+    InnerNorthEast: RMCPlanetHybrisaSidewalkCornerNorthEast
+    InnerNorthWest: RMCPlanetHybrisaSidewalkCornerNorthWest
+    InnerSouthEast: RMCPlanetHybrisaSidewalkCornerSouthEast
+    InnerSouthWest: RMCPlanetHybrisaSidewalkCornerSouthWest
+  lineNorthSouth: RMCDecalHybrisaZM2
+  lineEastWest: RMCDecalHybrisaZM1
+  lineEvery: 2
+  light: RMCStreetlight
+  brokenLight: RMCStreetlightBroken
+  brokenLightChance: 0.12
+  lightSpacing: 12
+  junctionLight: RMCTrafficLight
+  scatter:
+  # Parked cars.
+  - prototypes: [ RMCPropVehicleMonoSupronBlack, RMCPropVehicleMonoSupronBlackFlipped,
+      RMCPropVehicleMonoSupronBlue, RMCPropVehicleMonoSupronBlueFlipped, RMCPropVehicleMonoSupronBrown,
+      RMCPropVehicleMonoSupronBrownFlipped, RMCPropVehicleMonoSupronDesatBlue,
+      RMCPropVehicleMonoSupronDesatBlueFlipped, RMCPropVehicleMonoSupronGreen,
+      RMCPropVehicleMonoSupronGreenFlipped, RMCPropVehicleMonoSupronLightBlue,
+      RMCPropVehicleMonoSupronLightBlueFlipped, RMCPropVehicleMonoSupronOrange,
+      RMCPropVehicleMonoSupronOrangeFlipped, RMCPropVehicleMonoSupronPink,
+      RMCPropVehicleMonoSupronPinkFlipped, RMCPropVehicleMonoSupronPurple,
+      RMCPropVehicleMonoSupronPurpleFlipped, RMCPropVehicleMonoSupronRed,
+      RMCPropVehicleMonoSupronRedFlipped, RMCPropVehicleMonoSupronTaxi,
+      RMCPropVehicleMonoSupronTaxiFlipped, RMCPropVehicleMonoSupronTurquoise,
+      RMCPropVehicleMonoSupronTurquoiseFlipped ]
+    where: Kerb
+    axis: EastWest
+    per100: 1.6
+  - prototypes: [ RMCPropVehicleAmbulance, RMCPropVehicleAmbulanceF, RMCPropVehicleBoxVanBlueGrey,
+      RMCPropVehicleBoxVanBlueGreyF, RMCPropVehicleBoxVanWhite, RMCPropVehicleBoxVanWhiteF,
+      RMCPropVehicleBoxVanPizza, RMCPropVehicleBoxVanPizzaF, RMCPropVehicleSmallTruckBlue,
+      RMCPropVehicleSmallTruckBlueF, RMCPropVehicleSmallTruckGarbage, RMCPropVehicleSmallTruckGarbageF,
+      RMCPropVehicleSmallTruckGreen, RMCPropVehicleSmallTruckGreenF ]
+    where: Kerb
+    axis: EastWest
+    per100: 0.6
+  - prototypes: [ RMCPropVehicleTruck, RMCPropVehicleTruckCargo, RMCPropVehicleVan, RMCPropVehicleVanCandy,
+      RMCPropVehicleTractor ]
+    where: Kerb
+    axis: EastWest
+    align: true
+    per100: 0.8
+  # An army patrol, now and then.
+  - prototypes: [ WFRoadPropArmyTruck, WFRoadPropArmyTruckAlt, WFRoadPropHumvee ]
+    where: Kerb
+    align: true
+    per100: 0.5
+  # Wrecks.
+  - prototypes: [ RMCPropVehicleMonoSupronBlackDamaged1, RMCPropVehicleMonoSupronBlackDamaged1Flipped,
+      RMCPropVehicleMonoSupronBlackDamaged3, RMCPropVehicleMonoSupronBlackDamaged3Flipped,
+      RMCPropVehicleMonoSupronBlackDamaged5, RMCPropVehicleMonoSupronBlackDamaged5Flipped,
+      RMCPropVehicleMonoSupronBlackDestroyed, RMCPropVehicleMonoSupronBlackDestroyedFlipped,
+      RMCPropVehicleMonoSupronBlueDamaged1, RMCPropVehicleMonoSupronBlueDamaged1Flipped,
+      RMCPropVehicleMonoSupronBlueDamaged3, RMCPropVehicleMonoSupronBlueDamaged3Flipped,
+      RMCPropVehicleMonoSupronBlueDamaged5, RMCPropVehicleMonoSupronBlueDamaged5Flipped,
+      RMCPropVehicleMonoSupronBlueDestroyed, RMCPropVehicleMonoSupronBlueDestroyedFlipped,
+      RMCPropVehicleMonoSupronBrownDamaged1, RMCPropVehicleMonoSupronBrownDamaged1Flipped,
+      RMCPropVehicleMonoSupronBrownDamaged3, RMCPropVehicleMonoSupronBrownDamaged3Flipped,
+      RMCPropVehicleMonoSupronBrownDamaged5, RMCPropVehicleMonoSupronBrownDamaged5Flipped,
+      RMCPropVehicleMonoSupronBrownDestroyed, RMCPropVehicleMonoSupronBrownDestroyedFlipped,
+      RMCPropVehicleMonoSupronGreenDamaged1, RMCPropVehicleMonoSupronGreenDamaged1Flipped,
+      RMCPropVehicleMonoSupronGreenDamaged3, RMCPropVehicleMonoSupronGreenDamaged3Flipped,
+      RMCPropVehicleMonoSupronGreenDamaged5, RMCPropVehicleMonoSupronGreenDamaged5Flipped,
+      RMCPropVehicleMonoSupronGreenDestroyed, RMCPropVehicleMonoSupronGreenDestroyedFlipped,
+      RMCPropVehicleMonoSupronRedDamaged1, RMCPropVehicleMonoSupronRedDamaged1Flipped,
+      RMCPropVehicleMonoSupronRedDamaged3, RMCPropVehicleMonoSupronRedDamaged3Flipped,
+      RMCPropVehicleMonoSupronRedDamaged5, RMCPropVehicleMonoSupronRedDamaged5Flipped,
+      RMCPropVehicleMonoSupronRedDestroyed, RMCPropVehicleMonoSupronRedDestroyedFlipped ]
+    where: Kerb
+    per100: 0.6
+  - prototypes: [ RMCPropVehicleTruckBroken, RMCPropVehicleVanDamaged, RMCPropVehicleTractorDamaged ]
+    where: Kerb
+    axis: EastWest
+    align: true
+    per100: 0.3
+  - prototypes: [ WFRoadPropArmyTruckBroken, WFRoadPropHumveeDestroyed ]
+    where: Kerb
+    align: true
+    per100: 0.15
+  # Roadworks.
+  - prototypes: [ RMCBarricadeHybrisaPlasticRoadBarrier, RMCBarricadeHybrisaPlasticRoadBarrierBlue,
+      RMCBarricadeHybrisaPlasticRoadBarrierBlack ]
+    align: true
+    per100: 0.4
+  - prototypes: [ AU14PropTrafficDirector1, AU14PropTrafficDirector2, AU14PropTrafficDirector3,
+      AU14PropTrafficDirector4, AU14PropTrafficDirector5, AU14PropTrafficDirector6 ]
+    align: true
+    per100: 0.2
+  # Street furniture.
+  - prototypes: [ RMCPropFireHydrantRed, RMCPropFireHydrantBlue, RMCPropFireHydrantwhite, RMCPropFireHydrantGrey ]
+    where: Shoulder
+    per100: 1.2
+  - prototypes: [ WFStreetsTrashBin, WFStreetsTrashBinGreen, WFStreetsTrashBinBlue ]
+    where: Shoulder
+    per100: 1.5
+  - prototypes: [ RMCPhoneboxOff, RMCPhoneboxBroken ]
+    where: Shoulder
+    per100: 0.3
+  - prototypes: [ AU14DumpsterBlue, AU14DumpsterYellow, AU14DumpsterRed, AU14DumpsterGreen, AU14DumpsterOrange ]
+    where: Shoulder
+    align: true
+    per100: 0.5
+  - prototypes: [ RMCOverheadRoadsign, RMCOverheadRoadsign2, RMCOverheadRoadsign3, RMCOverheadRoadsign4,
+      RMCOverheadRoadsignAlt1, RMCOverheadRoadsignAlt2, RMCOverheadRoadsignAlt3,
+      RMCOverheadRoadsignAlt4 ]
+    where: Shoulder
+    blocks: false
+    per100: 0.8
+  - prototypes: [ RMCPropTrashFull ]
+    where: Shoulder
+    blocks: false
+    per100: 1.0
+  decals:
+  - decals: [ RMCDecalRoadTiremark1, RMCDecalRoadTiremark2 ]
+    axis: NorthSouth
+    per100: 2.5
+  - decals: [ RMCDecalRoadTiremark3, RMCDecalRoadTiremark4 ]
+    axis: EastWest
+    per100: 2.5
+  - decals: [ RMCDecalRoadTiremark5, RMCDecalRoadTiremark6, RMCDecalRoadTiremark7, RMCDecalRoadTiremark8 ]
+    per100: 1.0
+  - decals: [ RMCDecalHybrisaTrash1, RMCDecalHybrisaTrash2, RMCDecalHybrisaTrash3, RMCDecalHybrisaTrash4,
+      RMCDecalHybrisaTrash5, RMCDecalHybrisaTrash6, RMCDecalHybrisaTrash7, RMCDecalHybrisaTrash8,
+      RMCDecalHybrisaTrash9, RMCDecalHybrisaTrash10, RMCDecalHybrisaTrash11, RMCDecalHybrisaTrash12,
+      RMCDecalHybrisaTrash13, RMCDecalHybrisaTrash14, RMCDecalHybrisaTrash15, RMCDecalHybrisaTrash16,
+      RMCDecalHybrisaTrash17 ]
+    where: Shoulder
+    per100: 5
+  - decals: [ RMCDecalHybrisaTrash1, RMCDecalHybrisaTrash2, RMCDecalHybrisaTrash3, RMCDecalHybrisaTrash4,
+      RMCDecalHybrisaTrash5, RMCDecalHybrisaTrash6, RMCDecalHybrisaTrash7, RMCDecalHybrisaTrash8,
+      RMCDecalHybrisaTrash9, RMCDecalHybrisaTrash10, RMCDecalHybrisaTrash11, RMCDecalHybrisaTrash12,
+      RMCDecalHybrisaTrash13, RMCDecalHybrisaTrash14, RMCDecalHybrisaTrash15, RMCDecalHybrisaTrash16,
+      RMCDecalHybrisaTrash17 ]
+    per100: 2
+
+# Merak: a desert caravan route. Fewer lights and more of them dead, haulage instead of cars, more left to rust.
+- type: wfRoadDressing
+  id: WFRoadDressingMerak
+  kerbs:
+    North: RMCPlanetHybrisaSidewalkNorth
+    South: RMCPlanetHybrisaSidewalkSouth
+    East: RMCPlanetHybrisaSidewalkEast
+    West: RMCPlanetHybrisaSidewalkWest
+    NorthEast: RMCPlanetHybrisaSidewalkNorthEast
+    NorthWest: RMCPlanetHybrisaSidewalkNorthWest
+    SouthEast: RMCPlanetHybrisaSidewalkSouthEast
+    SouthWest: RMCPlanetHybrisaSidewalkSouthWest
+    InnerNorthEast: RMCPlanetHybrisaSidewalkCornerNorthEast
+    InnerNorthWest: RMCPlanetHybrisaSidewalkCornerNorthWest
+    InnerSouthEast: RMCPlanetHybrisaSidewalkCornerSouthEast
+    InnerSouthWest: RMCPlanetHybrisaSidewalkCornerSouthWest
+  lineNorthSouth: RMCDecalHybrisaZM2
+  lineEastWest: RMCDecalHybrisaZM1
+  lineEvery: 2
+  light: RMCStreetlight
+  brokenLight: RMCStreetlightBroken
+  brokenLightChance: 0.3
+  lightSpacing: 16
+  junctionLight: RMCTrafficLight
+  scatter:
+  # Haulage on the move and parked up.
+  - prototypes: [ RMCPropVehicleSmallTruckBrownCargo, RMCPropVehicleSmallTruckBrownCargoF,
+      RMCPropVehicleSmallTruckMining, RMCPropVehicleSmallTruckMiningF,
+      RMCPropVehicleLoaderTruckBlueFilled, RMCPropVehicleLoaderTruckBlueFilledF,
+      RMCPropVehicleLoaderTruckTealFilled, RMCPropVehicleLoaderTruckTealFilledF,
+      RMCPropVehicleBoxVanMining, RMCPropVehicleBoxVanMiningF, RMCPropVehicleLongTruckBrown,
+      RMCPropVehicleLongTruckBrownF, RMCPropVehicleLongTruckMining, RMCPropVehicleLongTruckMiningF ]
+    where: Kerb
+    axis: EastWest
+    per100: 1.2
+  - prototypes: [ RMCPropVehicleTruckMining, RMCPropVehicleTruckCargo, RMCPropVehicleCrawler,
+      RMCPropVehicleCrawlerCovered, RMCPropVehicleCrawlerCrate, RMCPropVehicleCrawlerFuel,
+      RMCPropVehicleCrawlerMining, RMCPropVehicleTractor ]
+    where: Kerb
+    axis: EastWest
+    align: true
+    per100: 1.0
+  - prototypes: [ RMCPropVehicleMonoSupronBlack, RMCPropVehicleMonoSupronBlackFlipped,
+      RMCPropVehicleMonoSupronBlue, RMCPropVehicleMonoSupronBlueFlipped, RMCPropVehicleMonoSupronBrown,
+      RMCPropVehicleMonoSupronBrownFlipped, RMCPropVehicleMonoSupronDesatBlue,
+      RMCPropVehicleMonoSupronDesatBlueFlipped ]
+    where: Kerb
+    axis: EastWest
+    per100: 0.4
+  # Convoy escorts.
+  - prototypes: [ WFRoadPropArmyTruck, WFRoadPropArmyTruckAlt, WFRoadPropHumvee ]
+    where: Kerb
+    align: true
+    per100: 0.8
+  # Wrecks.
+  - prototypes: [ RMCPropVehicleMonoSupronBlackDamaged1, RMCPropVehicleMonoSupronBlackDamaged1Flipped,
+      RMCPropVehicleMonoSupronBlackDamaged3, RMCPropVehicleMonoSupronBlackDamaged3Flipped,
+      RMCPropVehicleMonoSupronBlackDamaged5, RMCPropVehicleMonoSupronBlackDamaged5Flipped,
+      RMCPropVehicleMonoSupronBlackDestroyed, RMCPropVehicleMonoSupronBlackDestroyedFlipped,
+      RMCPropVehicleMonoSupronBlueDamaged1, RMCPropVehicleMonoSupronBlueDamaged1Flipped,
+      RMCPropVehicleMonoSupronBlueDamaged3, RMCPropVehicleMonoSupronBlueDamaged3Flipped,
+      RMCPropVehicleMonoSupronBlueDamaged5, RMCPropVehicleMonoSupronBlueDamaged5Flipped,
+      RMCPropVehicleMonoSupronBlueDestroyed, RMCPropVehicleMonoSupronBlueDestroyedFlipped,
+      RMCPropVehicleMonoSupronBrownDamaged1, RMCPropVehicleMonoSupronBrownDamaged1Flipped,
+      RMCPropVehicleMonoSupronBrownDamaged3, RMCPropVehicleMonoSupronBrownDamaged3Flipped,
+      RMCPropVehicleMonoSupronBrownDamaged5, RMCPropVehicleMonoSupronBrownDamaged5Flipped,
+      RMCPropVehicleMonoSupronBrownDestroyed, RMCPropVehicleMonoSupronBrownDestroyedFlipped,
+      RMCPropVehicleMonoSupronGreenDamaged1, RMCPropVehicleMonoSupronGreenDamaged1Flipped,
+      RMCPropVehicleMonoSupronGreenDamaged3, RMCPropVehicleMonoSupronGreenDamaged3Flipped,
+      RMCPropVehicleMonoSupronGreenDamaged5, RMCPropVehicleMonoSupronGreenDamaged5Flipped,
+      RMCPropVehicleMonoSupronGreenDestroyed, RMCPropVehicleMonoSupronGreenDestroyedFlipped,
+      RMCPropVehicleMonoSupronRedDamaged1, RMCPropVehicleMonoSupronRedDamaged1Flipped,
+      RMCPropVehicleMonoSupronRedDamaged3, RMCPropVehicleMonoSupronRedDamaged3Flipped,
+      RMCPropVehicleMonoSupronRedDamaged5, RMCPropVehicleMonoSupronRedDamaged5Flipped,
+      RMCPropVehicleMonoSupronRedDestroyed, RMCPropVehicleMonoSupronRedDestroyedFlipped ]
+    where: Kerb
+    per100: 0.9
+  - prototypes: [ RMCPropVehicleTruckBroken, RMCPropVehicleVanDamaged, RMCPropVehicleTractorDamaged ]
+    where: Kerb
+    axis: EastWest
+    align: true
+    per100: 0.6
+  - prototypes: [ WFRoadPropArmyTruckBroken, WFRoadPropHumveeDestroyed ]
+    where: Kerb
+    align: true
+    per100: 0.4
+  # Checkpoints and roadworks.
+  - prototypes: [ RMCBarricadeHybrisaPlasticRoadBarrier, RMCBarricadeHybrisaPlasticRoadBarrierBlue,
+      RMCBarricadeHybrisaPlasticRoadBarrierBlack, AU14JerseyBarricade ]
+    align: true
+    per100: 0.5
+  - prototypes: [ AU14PropTrafficDirector1, AU14PropTrafficDirector2, AU14PropTrafficDirector3,
+      AU14PropTrafficDirector4, AU14PropTrafficDirector5, AU14PropTrafficDirector6 ]
+    align: true
+    per100: 0.2
+  # Roadside clutter.
+  - prototypes: [ RMCBarrelBlue, RMCBarrelRed, RMCBarrelYellow, RMCBarrelGreen, RMCBarrelBrown ]
+    where: Shoulder
+    per100: 1.2
+  - prototypes: [ WFStreetsTrashBin, WFStreetsTrashBinGreen, WFStreetsTrashBinBlue ]
+    where: Shoulder
+    per100: 0.4
+  - prototypes: [ AU14DumpsterBlue, AU14DumpsterYellow, AU14DumpsterRed, AU14DumpsterGreen, AU14DumpsterOrange ]
+    where: Shoulder
+    align: true
+    per100: 0.3
+  - prototypes: [ RMCOverheadRoadsign, RMCOverheadRoadsign2, RMCOverheadRoadsign3, RMCOverheadRoadsign4,
+      RMCOverheadRoadsignAlt1, RMCOverheadRoadsignAlt2, RMCOverheadRoadsignAlt3,
+      RMCOverheadRoadsignAlt4 ]
+    where: Shoulder
+    blocks: false
+    per100: 0.6
+  - prototypes: [ RMCPropTrashFull ]
+    where: Shoulder
+    blocks: false
+    per100: 0.6
+  decals:
+  - decals: [ RMCDecalRoadTiremark1, RMCDecalRoadTiremark2 ]
+    axis: NorthSouth
+    per100: 3.5
+  - decals: [ RMCDecalRoadTiremark3, RMCDecalRoadTiremark4 ]
+    axis: EastWest
+    per100: 3.5
+  - decals: [ RMCDecalRoadTiremark5, RMCDecalRoadTiremark6, RMCDecalRoadTiremark7, RMCDecalRoadTiremark8 ]
+    per100: 1.5
+  - decals: [ RMCDecalHybrisaTrash1, RMCDecalHybrisaTrash2, RMCDecalHybrisaTrash3, RMCDecalHybrisaTrash4,
+      RMCDecalHybrisaTrash5, RMCDecalHybrisaTrash6, RMCDecalHybrisaTrash7, RMCDecalHybrisaTrash8,
+      RMCDecalHybrisaTrash9, RMCDecalHybrisaTrash10, RMCDecalHybrisaTrash11, RMCDecalHybrisaTrash12,
+      RMCDecalHybrisaTrash13, RMCDecalHybrisaTrash14, RMCDecalHybrisaTrash15, RMCDecalHybrisaTrash16,
+      RMCDecalHybrisaTrash17 ]
+    where: Shoulder
+    per100: 3
+  - decals: [ RMCDecalHybrisaTrash1, RMCDecalHybrisaTrash2, RMCDecalHybrisaTrash3, RMCDecalHybrisaTrash4,
+      RMCDecalHybrisaTrash5, RMCDecalHybrisaTrash6, RMCDecalHybrisaTrash7, RMCDecalHybrisaTrash8,
+      RMCDecalHybrisaTrash9, RMCDecalHybrisaTrash10, RMCDecalHybrisaTrash11, RMCDecalHybrisaTrash12,
+      RMCDecalHybrisaTrash13, RMCDecalHybrisaTrash14, RMCDecalHybrisaTrash15, RMCDecalHybrisaTrash16,
+      RMCDecalHybrisaTrash17 ]
+    per100: 2

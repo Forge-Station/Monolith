@@ -7,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._WF.Planets;
 
 /// <summary>
-/// Rides a hull through the hop into or out of orbit so its crew's clients draw the planet approach instead of hyperspace.
+/// Rides a hull through the hop into or out of orbit so its crew's clients draw the planet approach while it waits on the hold map.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause, UnsavedComponent]
 public sealed partial class WFPlanetApproachComponent : Component
@@ -27,14 +27,10 @@ public sealed partial class WFPlanetApproachComponent : Component
     [DataField, AutoNetworkedField]
     public bool Arriving;
 
-    /// <summary>The travel leg of the hop, which paces the animation; drawing spans the hull's whole stay on the FTL map.</summary>
+    /// <summary>The travel leg of the hop, which paces the animation; drawing spans the hull's whole stay on the hold map.</summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan Start;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan End;
-
-    /// <summary>The hull making the hop, whose arrival clears this mark; server-side only.</summary>
-    [ViewVariables]
-    public EntityUid Hull;
 }

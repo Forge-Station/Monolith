@@ -1,0 +1,69 @@
+# What each vehicle purchase terminal sells. Prices sit about a fifth over each vehicle's appraised value, so a vehicle
+# bought here and sold with a ship, or back at the pad (75% of the lower of the two), never makes money.
+
+- type: wfVehicleCatalog
+  id: WFVehicleCatalogExpeditionary
+  vehicles:
+  - vehicle: AU14VehicleCivturquiseCargo
+    price: 12000
+  - vehicle: AU14VehicleCivBlueCargoTruck
+    price: 12500
+  - vehicle: VehicleBoxVan
+    price: 18000
+  - vehicle: VehiclePizzaVan
+    price: 18000
+  - vehicle: AU14VehicleCivEMSAmbulance
+    price: 21500
+  - vehicle: VehicleHumveeTransport
+    price: 30000
+  - vehicle: VehicleHumveeMedical
+    price: 32000
+
+# What a vehicle bay's terminal hands over the counter: everything that needs no licence. Fit it with a crowbar on the
+# vehicle. Guns and turrets stay with the military outfitter and the station counter.
+- type: wfVehicleCatalog
+  id: WFVehicleCatalogBayParts
+  vehicles:
+  - vehicle: RMCVanWheel
+    price: 800
+  - vehicle: VehicleHumveeWheel
+    price: 1200
+  - vehicle: VehicleHumveeOverlight
+    price: 1500
+  - vehicle: VehicleHumveeSnowplow
+    price: 2500
+  - vehicle: RMCAPCWheel
+    price: 3000
+  - vehicle: RMCAPCFreightStorage
+    price: 4000
+  - vehicle: VehicleTankTreads
+    price: 5000
+  - vehicle: VehicleTankReinforcedTreads
+    price: 9000
+  - vehicle: VehicleTankWarningArray
+    price: 6000
+  - vehicle: VehicleTankOverdriveEnhancer
+    price: 7000
+  - vehicle: VehicleTankArmorBallistic
+    price: 8000
+  - vehicle: VehicleTankArmorConcussive
+    price: 9000
+  - vehicle: VehicleTankArmorCaustic
+    price: 9000
+  - vehicle: VehicleTankArmorPaladin
+    price: 14000
+
+# The roadside mechanic's delivery beacons (beacons.yml): an ATV, small trucks and two vans.
+- type: wfVehicleCatalog
+  id: WFVehicleCatalogMechanic
+  vehicles:
+  - vehicle: VehicleATVNF
+    price: 1500
+  - vehicle: AU14VehicleCivCivTruck1
+    price: 12000
+  - vehicle: AU14VehicleCivTruck
+    price: 14500
+  - vehicle: AU14VehicleCivVan
+    price: 14500
+  - vehicle: VehicleVan
+    price: 18000

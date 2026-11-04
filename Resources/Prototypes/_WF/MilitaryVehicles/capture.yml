@@ -1,0 +1,18 @@
+# One use (WFVehicleCaptureSystem): makes a vehicle of any size whole, frame and every part. Used on an NPC crew's
+# vehicle with no living crewman aboard, it also claims it, re-keyed to the user and marked salvaged.
+- type: entity
+  parent: BaseItem
+  id: WFMilitaryRepairKit
+  name: military vehicle repair kit
+  description: Armour patches, track links, a lock cylinder set and a field manual. Puts one vehicle of any size right, once, and re-keys an abandoned military one to you.
+  components:
+  - type: Item
+    size: Normal
+    sprite: Objects/Tools/Toolboxes/toolbox_green.rsi
+  - type: Sprite
+    sprite: Objects/Tools/Toolboxes/toolbox_green.rsi
+    state: icon
+  - type: WFMilitaryRepairKit
+  - type: StaticPrice
+    price: 1500
+    vendPrice: 9000

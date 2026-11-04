@@ -9,10 +9,11 @@ namespace Content.Shared._WF.CCVar;
 public sealed class CavernCVars
 {
     /// <summary>
-    /// Whether planet networks built from now on get a cavern below their ground.
+    /// Whether planet networks built from now on get a cavern below their ground. On by default, so caverns come with
+    /// planets (wf.planet_networks); set it false to build worlds without them.
     /// </summary>
     public static readonly CVarDef<bool> Caverns =
-        CVarDef.Create("wf.caverns", false, CVar.SERVERONLY);
+        CVarDef.Create("wf.caverns", true, CVar.SERVERONLY);
 
     /// <summary>
     /// Whether cavern mouths are claimed ahead of players as they explore; off leaves only the gate and admin mouths.

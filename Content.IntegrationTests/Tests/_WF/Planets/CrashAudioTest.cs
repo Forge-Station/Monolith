@@ -35,6 +35,15 @@ public sealed class CrashAudioTest
         var server = pair.Server;
         var entMan = server.EntMan;
 
+        // A pooled pair can still hold a clip from the test before it.
+        var seen = new HashSet<EntityUid>();
+        await server.WaitPost(() =>
+        {
+            var query = entMan.EntityQueryEnumerator<AudioComponent>();
+            while (query.MoveNext(out var uid, out _))
+                seen.Add(uid);
+        });
+
         await EnableFeature(pair);
         var layers = await BuildStandalone(pair);
         var ground = layers[0];
@@ -47,7 +56,6 @@ public sealed class CrashAudioTest
         var hull = await BuildHull(pair, lowAirMapId);
         await MapInitHull(pair, hull);
 
-        var seen = new HashSet<EntityUid>();
         var clips = new Dictionary<string, int>();
         var crashed = false;
         var peakAudio = 0;

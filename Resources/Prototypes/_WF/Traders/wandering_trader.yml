@@ -1,0 +1,952 @@
+# The wandering trader: a spacer selling a small, random, discounted stock out of a hold. Unlike the
+# station traders this one can be hurt and killed, and when the stock is gone it is gone.
+- type: startingGear
+  id: WFTraderWandererGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    outerClothing: ClothingOuterCoatJensen
+    shoes: ClothingShoesBootsJack
+    gloves: ClothingHandsGlovesFingerless
+
+- type: traderDialogue
+  id: WFTraderWandererDialogue
+  greeting: trader-wanderer-greeting
+  farewell: trader-wanderer-farewell
+  options:
+  - prompt: trader-wanderer-prompt-shop
+    response: trader-wanderer-response-shop
+    action: OpenShop
+  - prompt: trader-wanderer-prompt-who
+    response: trader-wanderer-response-who
+    action: None
+
+- type: entity
+  id: WFTraderWanderer
+  parent: WFBaseTrader
+  name: wandering trader
+  description: Sells tools, air and spare gear out of the hold, cheap, until it runs out.
+  suffix: Trader, Wandering
+  components:
+  - type: RandomHumanoidAppearance
+  - type: Loadout
+    prototypes: [ WFTraderWandererGear ]
+  # No weapon and no fighting: the brain only stands about, and runs when TraderFleeSystem names somewhere to run to.
+  - type: HTN
+    rootTask:
+      task: WFTraderCompound
+    blackboard:
+      NavInteract: !type:Bool
+        true
+  - type: Trader
+    dialogue: WFTraderWandererDialogue
+    killable: true
+  - type: WFCowardice
+  - type: TraderShop
+    vendors:
+    - WFTraderStockGeneral
+    priceMultiplier: 0.6
+    randomStock: 14
+    stockMin: 1
+    stockMax: 3
+    lootItems: 4
+
+# Every trader sells out of its own stock list, mirrored the way a vending machine is, and never out of a station
+# machine: those hold junk, and some of them give it away. The stock entities exist only to carry the lists and are
+# never placed. Each states its own MarketModifier and charges cash, so a line costs its appraised value times the
+# modifier, times the trader's priceMultiplier. Lists leave out faction, event and uplink gear and anything that
+# resells above what it costs here; the pack counts cap how many of a line a trader may roll.
+- type: vendingMachineInventory
+  id: WFTraderGeneralInventory
+  startingInventory:
+    Multitool: 3
+    WelderIndustrial: 2
+    PowerDrill: 1
+    Pickaxe: 2
+    WeaponProtoKineticAccelerator: 1
+    EmergencyOxygenTankFilled: 4
+    ExtendedEmergencyOxygenTankFilled: 3
+    ClothingMaskGas: 3
+    ClothingMaskBreath: 3
+    ClothingShoesBootsMag: 2
+    JetpackMiniFilled: 2
+    ClothingOuterEVASuitSalvage: 2
+    ClothingOuterEVASuitEngineer: 2
+    ClothingOuterHardsuitSpatio: 1
+    RadioHandheldNF: 3
+    HandHeldMassScanner: 1
+    GasAnalyzer: 1
+    HolofanProjector: 1
+    FireExtinguisher: 2
+    ClothingEyesGlassesMeson: 1
+    RCD: 1
+    RCDAmmo: 2
+    EmergencyMedipen: 4
+    Crowbar: 3
+    Wrench: 3
+    Screwdriver: 3
+    Wirecutter: 3
+    Welder: 3
+    WelderExperimental: 1
+    ClothingBeltUtilityFilled: 2
+    ClothingBeltUtility: 2
+    FlashlightSeclite: 2
+    Binoculars: 1
+    CableApcStack: 3
+    CableMVStack: 2
+    CableHVStack: 2
+    SheetSteel: 3
+    SheetGlass: 3
+    SheetPlasteel: 2
+    PartRodMetal: 3
+    DoubleEmergencyOxygenTankFilled: 2
+    OxygenTankFilled: 3
+    NitrogenTankFilled: 2
+    ClothingHandsGlovesColorYellow: 2
+    ClothingHeadHatWelding: 2
+    trayScanner: 2
+    NetworkConfigurator: 1
+    SprayPainter: 1
+    LightReplacer: 1
+    HandLabeler: 2
+    BoxMRE: 3
+    WeaponFlareGun: 2
+    BoxFlare: 2
+    ClothingOuterEVASuitPilot: 1
+    ClothingOuterEVASuitCargo: 1
+    ClothingOuterEVASuitMailman: 1
+    ClothingOuterHardsuitBasic: 1
+    JetpackBlueFilled: 1
+    HandheldGPSBasic: 2
+    ClothingBackpackDuffelEngineering: 2
+    ClothingBackpackDuffelSalvage: 2
+    ClothingHeadHelmetEVA: 2
+    ClothingHeadHelmetEVALarge: 1
+    ClothingEyesGlassesSunglasses: 1
+    Lighter: 3
+    BoxLightMixed: 2
+    AirAlarmElectronics: 2
+    DoorElectronics: 3
+    APCElectronics: 2
+    CrowbarRed: 2
+    Shovel: 2
+    SheetPlastic: 3
+    MaterialCloth: 2
+
+- type: vendingMachineInventory
+  id: WFTraderSurplusInventory
+  startingInventory:
+    WeaponPistolViper: 3
+    WeaponPistolMk58: 2
+    WeaponSubMachineGunWt550: 2
+    WeaponRifleGestio: 2
+    WeaponRifleNovaliteC1: 2
+    WeaponShotgunKammerer: 2
+    WeaponShotgunEnforcer: 1
+    WeaponSniperMosin: 1
+    Magazine9x19mmPistolFMJ: 6
+    Magazine9x19mmPistolHighCapacityEmpty: 3
+    Magazine45_ACPPistolFMJ: 4
+    Magazine46x30mmSubMachineGunTopMountedFMJ: 3
+    Magazine762x39mmFMJ: 4
+    MagazineNovaliteC1: 4
+    SpeedLoader762x54mmRFMJ: 3
+    AmmoBox12_gaugeBuckshot: 3
+    AmmoBox12_gaugeSlug: 3
+    ClothingHeadBPHelmetLight: 1
+    ClothingMaskGasSwat: 2
+    ClothingHandsGlovesCombat: 3
+    ClothingBeltMilitaryWebbing: 2
+    ClothingEyesNightVisionGoggles: 1
+    GrenadeFlashBang: 4
+    WeaponRevolverInspector: 2
+    WeaponRevolverPython: 1
+    WeaponRevolverArgenti: 1
+    WeaponRifleSVS: 1
+    WeaponRifleIroh: 1
+    WeaponRiflePrometheus: 1
+    WeaponSniperRepeater: 1
+    WeaponShotgunDoubleBarreled: 2
+    WeaponShotgunJack: 1
+    WeaponLaserCarbine: 1
+    WeaponLaserPistolNF: 2
+    WeaponDisabler: 2
+    ClothingOuterArmorBasic: 2
+    ClothingOuterArmorBasicSlim: 2
+    ClothingOuterArmorBulletproof: 1
+    ClothingOuterArmorBPVestLight: 2
+    ClothingOuterArmorBPVestMedium: 1
+    ClothingHeadHelmetBasic: 3
+    ClothingEyesBallisticGlassesGreen: 2
+    ClothingEyesBallisticGogglesGreen: 1
+    AmmoBox9x19mmFMJ: 3
+    AmmoBox45_ACPFMJ: 3
+    AmmoBox762x39mmFMJ: 2
+    AmmoBox556x45mmFMJ: 2
+    AmmoBox357_magnumFMJ: 2
+    AmmoBox762x54mmRFMJ: 2
+    Magazine556x45mmFMJ: 4
+    SpeedLoader357_magnumFMJ: 3
+    SpeedLoader556x45mmFMJ: 2
+    Magazine9x19mmSubMachineGunFMJ: 3
+    Magazine45_ACPSubMachineGunFMJ: 3
+    Magazine12_gaugeBuckshot: 2
+    Magazine4_gaugeBuckshot: 2
+    Binoculars: 2
+    ClothingBeltHolster: 2
+    ClothingBeltBandolier: 2
+    ClothingBackpackDuffelSecurity: 2
+    ClothingShoesBootsCombat: 3
+    ClothingHandsGlovesFingerless: 3
+    ClothingMaskGasMercenary: 1
+    ClothingUniformJumpsuitMercenary: 2
+    Zipties: 4
+    Handcuffs: 3
+    Flash: 2
+    Stunbaton: 1
+    RiotShield: 1
+    ClothingOuterVestWeb: 2
+    FlashlightSeclite: 3
+
+- type: vendingMachineInventory
+  id: WFTraderCuriosInventory
+  startingInventory:
+    Katana: 1
+    Claymore: 1
+    Musket: 1
+    WeaponPistolFlintlock: 1
+    WeaponSniperCeremonial: 1
+    WeaponRifleLeeEnfield: 1
+    Magazine762x51mmFMJ: 1
+    ClothingHeadHatTophat: 1
+    ClothingNeckCloakHerald: 1
+    ViolinInstrument: 1
+    TrumpetInstrument: 1
+    ElectricGuitarInstrument: 1
+    CelloInstrument: 1
+    SaxophoneInstrument: 1
+    AccordionInstrument: 1
+    BanjoInstrument: 1
+    DrinkGoldenCup: 1
+    CigarGoldCase: 1
+    ClothingOuterHardsuitLuxury: 1
+    ClothingOuterHardsuitMaximPrototype: 1
+    PianoInstrumentFlatpack: 1
+    HarpInstrumentFlatpack: 1
+    WeaponLaserGun: 1
+    ClothingOuterArmorGladiator: 1
+    ClothingOuterArmorKendoBogu: 1
+    ClothingOuterArmorBone: 1
+    ClothingHeadHelmetBone: 1
+    ClothingHeadHatPirate: 1
+    ClothingHeadHatFez: 1
+    ClothingHeadHatBowlerHat: 1
+    ClothingHeadHatWitch: 1
+    ClothingNeckCloakGoliathCloak: 1
+    ClothingNeckCloakMoth: 1
+    ClothingNeckCloakVoid: 1
+    ClothingEyesEyepatch: 1
+    ClothingEyesGlassesGar: 1
+    ClothingEyesGlassesGarGiga: 1
+    ClothingEyesGlassesGarOrange: 1
+    BagpipeInstrument: 1
+    OcarinaInstrument: 1
+    MusicBoxInstrument: 1
+    KalimbaInstrument: 1
+    FluteInstrument: 1
+    HarmonicaInstrument: 1
+    ClarinetInstrument: 1
+    EuphoniumInstrument: 1
+    FrenchHornInstrument: 1
+    PanFluteInstrument: 1
+    RecorderInstrument: 1
+    Rickenbacker4001Instrument: 1
+    ChurchOrganInstrumentFlatpack: 1
+    ContrabassInstrumentFlatpack: 1
+    DrinkChampagneBottleFull: 1
+    DrinkCognacBottleFull: 1
+    DrinkPremiumWhiskeyBottleFull: 1
+    DrinkPremiumRumBottleFull: 1
+    DrinkPremiumAbsintheBottleFull: 1
+    SmokingPipeFilledTobacco: 1
+    IngotGold1: 2
+    IngotSilver1: 2
+    MaterialDiamond1: 1
+    PlushieLizard: 1
+    PlushieCarp: 1
+    PlushieNar: 1
+    PlushieRatvar: 1
+    PlushieGhost: 1
+    PlushieMoth: 1
+    PlushieRouny: 1
+    PlushieSharkBlue: 1
+    PlushiePenguin: 1
+    PlushieHampter: 1
+    ToyNuke: 1
+    CrayonBox: 1
+    BookRandom: 2
+    ClothingNeckGoldmedal: 1
+    ClothingHandsGlovesColorWhite: 1
+    ClothingShoesBootsLaceup: 1
+    ClothingOuterCoatTrench: 1
+    ClothingOuterCoatBomber: 1
+    ClothingHeadHatBeret: 1
+
+- type: vendingMachineInventory
+  id: WFTraderMedicInventory
+  startingInventory:
+    MedicatedSuture: 3
+    RegenerativeMesh: 3
+    Brutepack: 4
+    Gauze: 4
+    Ointment: 4
+    Bloodpack: 3
+    Tourniquet: 4
+    WFWolfmedSplint: 3
+    WFWolfmedSuture: 4
+    WFWolfmedSkinGraft: 2
+    WFWolfmedAnalgesicPen: 3
+    WFWolfmedOpiatePen: 2
+    WFWolfmedStimPen: 2
+    WFWolfmedNaloxonePen: 2
+    WFWolfmedAnalgesicPillCanister: 2
+    WFWolfmedOsteogenPillCanister: 2
+    PillCanisterTricordrazine: 2
+    WFMedkitSyntheticFilled: 2
+    Cautery: 2
+    Hemostat: 2
+    Bonesetter: 2
+    BodyBagFolded: 2
+    Scalpel: 2
+    Retractor: 2
+    Saw: 1
+    Drill: 1
+    ClothingMaskSterile: 4
+    ClothingHandsGlovesLatex: 4
+    ClothingHandsGlovesNitrile: 2
+    BoxSterileMask: 1
+    BoxLatexGloves: 1
+    BoxSyringe: 1
+    BoxBodyBag: 1
+    BoxPillCanister: 1
+    BoxBottle: 1
+    RollerBedSpawnFolded: 1
+    CheapRollerBedSpawnFolded: 2
+    ClothingBeltMedicalFilled: 1
+    ClothingBeltMedical: 2
+    ClothingBackpackDuffelMedical: 2
+    EmergencyMedipen: 4
+    AntiPoisonMedipen: 2
+    BruteAutoInjector: 2
+    BurnAutoInjector: 2
+    RadAutoInjector: 1
+    PyraAutoInjector: 1
+    AirlossAutoInjector: 2
+    SpaceMedipen: 2
+    ClothingOuterEVASuitMedic: 1
+    ClothingUniformJumpsuitParamedic: 1
+
+# The medic's powered gear and flatpacks sit on a dearer entity than its consumables, so they stay above what the
+# station sells them for.
+- type: vendingMachineInventory
+  id: WFTraderMedicEquipmentInventory
+  startingInventory:
+    HandheldHealthAnalyzer: 2
+    Defibrillator: 1
+    ClothingEyesHudMedical: 1
+    HandheldCrewMonitor: 1
+    HypoMini: 1
+    WFWolfmedIvDripFlatpack: 1
+    WFWolfmedVentilatorFlatpack: 1
+    WFMachineAutodocFlatpack: 1
+    WFAutodocProgramDiskTransplant: 1
+    DefibrillatorCompact: 1
+    CryoPodFlatpack: 1
+    ChemMasterFlatpack: 1
+    ClothingOuterHardsuitMedical: 1
+    HandheldGPSBasic: 1
+    MedicalTechFabFlatpack: 1
+
+- type: vendingMachineInventory
+  id: WFTraderShipwrightInventory
+  startingInventory:
+    ThrusterFlatpack: 4
+    SmallThrusterFlatpack: 4
+    GyroscopeFlatpack: 2
+    SmallGyroscopeFlatpack: 2
+    ThrusterMachineCircuitboard: 3
+    SmallThrusterMachineCircuitboard: 3
+    GyroscopeMachineCircuitboard: 2
+    ShuttleConsoleCircuitboard: 2
+    RadarConsoleCircuitboard: 2
+    ComputerIFFFlatpack: 1
+    FTLDriveFlatpack: 1
+    PortableGeneratorPacmanFlatpack: 2
+    PortableGeneratorJrPacmanFlatpack: 2
+    PortableGeneratorSuperPacmanFlatpack: 1
+    SolarAssemblyFlatpack: 3
+    AirlockShuttleFlatpack: 3
+    AirlockGlassShuttleFlatpack: 2
+    GaslockFlatpack: 2
+    NFHolopadShipFlatpack: 1
+    SpaceHeaterFlatpack: 2
+    PowerCellRechargerFlatpack: 2
+    ShipRepairDevice: 1
+    ShipRepairDeviceAmmo: 2
+    FTLDrive25SFlatpack: 1
+    FTLDrive50Flatpack: 1
+    GasThermoMachineFreezerFlatpack: 1
+    GasThermoMachineHeaterFlatpack: 1
+    AutolatheFlatpack: 1
+    EngineeringTechFabFlatpack: 1
+    AirlockFlatpack: 3
+    AirlockGlassFlatpack: 2
+    AtmosDeviceFanDirectionalFlatpack: 3
+    CableApcStack: 4
+    CableMVStack: 3
+    CableHVStack: 3
+    SheetSteel: 5
+    SheetPlasteel: 3
+    SheetGlass: 4
+    SheetRGlass: 3
+    PartRodMetal: 4
+    SubstationMachineCircuitboard: 2
+    SMESMachineCircuitboard: 1
+    PortableGeneratorPacmanMachineCircuitboard: 2
+    PortableGeneratorSuperPacmanMachineCircuitboard: 1
+    ThermomachineFreezerMachineCircuitBoard: 1
+    CellRechargerCircuitboard: 2
+    AirAlarmElectronics: 3
+    DoorElectronics: 4
+    APCElectronics: 3
+    FireAlarmElectronics: 2
+    IntercomElectronics: 2
+    SolarControlComputerCircuitboard: 1
+    SolarTrackerElectronics: 2
+    ComputerIFFCircuitboard: 1
+    CrewMonitoringComputerCircuitboard: 1
+    PowerComputerCircuitboard: 1
+    WelderIndustrialAdvanced: 1
+    RCD: 1
+    RCDAmmo: 3
+    ClothingBeltUtilityEngineering: 1
+    Multitool: 3
+    NetworkConfigurator: 2
+    trayScanner: 2
+    SheetPlasma: 3
+    SheetUranium: 2
+    ClothingOuterHardsuitEngineering: 1
+    ClothingOuterEVASuitEngineer: 2
+    ClothingShoesBootsMag: 2
+    GeneratorRTGDamagedFlatpack: 1
+
+- type: vendingMachineInventory
+  id: WFTraderFenceInventory
+  startingInventory:
+    WeaponShotgunSawn: 2
+    WeaponShotgunDoubleBarreled: 2
+    WeaponPistolMk32: 2
+    WeaponPistolPollock: 2
+    WeaponSubMachineGunMalandro: 1
+    WeaponSubMachineGunC20r: 1
+    WeaponRifleAk: 1
+    WeaponRifleM90: 1
+    Magazine9x19mmPistolFMJ: 4
+    Magazine9x19mmSubMachineGunFMJ: 3
+    Magazine762x39mmFMJ: 3
+    Magazine762x51mmFMJ: 3
+    AmmoBox12_gaugeBuckshot: 3
+    AmmoBox12_gaugeSlug: 3
+    ClothingOuterCoatPirate: 2
+    ClothingHeadHatPirateTricord: 2
+    ClothingOuterHardsuitPirateEVA: 1
+    Cutlass: 2
+    ClothingBeltBandolier: 2
+    ClothingMaskNeckGaiter: 3
+    Zipties: 5
+    Handcuffs: 4
+    ClothingEyesGlassesThermal: 2
+    HoverbikePirateFlatpack: 1
+    DrinkRumBottleFull: 4
+    WeaponPistolCobra: 1
+    WeaponShotgunBulldog: 1
+    WeaponShotgunImprovised: 2
+    WeaponSubMachineGunAK220: 1
+    WeaponRifleAK410: 1
+    WeaponRevolverPython: 1
+    WeaponRifleJackdaw: 1
+    WeaponBrassKnuckles: 2
+    Stunprod: 1
+    ClothingOuterArmorMakeshiftVestLight: 2
+    ClothingOuterArmorMakeshiftVestHeavy: 1
+    ClothingOuterArmorPunkRandomized: 1
+    ClothingBeltPunkRandomizedFilled: 1
+    ClothingMaskBandBlack: 3
+    ClothingMaskBandSkull: 2
+    ClothingEyesEyepatch: 2
+    ClothingEyesGlassesCheapSunglasses: 2
+    ClothingHeadBandSkull: 2
+    Crowbar: 3
+    Multitool: 2
+    Wirecutter: 3
+    Screwdriver: 3
+    DrinkVodkaBottleFull: 3
+    DrinkWhiskeyBottleFull: 3
+    DrinkBeerBottleFull: 4
+    AmmoBox9x19mmFMJ: 3
+    AmmoBox45_ACPFMJ: 2
+    AmmoBox762x39mmFMJ: 2
+    AmmoBox357_magnumFMJ: 2
+    AmmoBox12_gaugeOOBuckshot: 2
+    Magazine12_gaugeBuckshot: 2
+    SpeedLoader357_magnumFMJ: 2
+    Magazine762x54mmRFMJ: 2
+    IngotGold1: 2
+    IngotSilver1: 2
+    MaterialDiamond1: 1
+    ClothingHandsGlovesColorBlack: 3
+    ClothingHandsGlovesFingerless: 3
+    ClothingShoesBootsJack: 2
+    ClothingOuterCoatJensen: 1
+    ClothingUniformJumpsuitPirate: 2
+    ClothingHeadBandRed: 2
+    FlashlightSeclite: 2
+    Binoculars: 1
+    Lighter: 3
+
+- type: entity
+  id: WFTraderStockGeneral
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderGeneralInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 10
+
+- type: entity
+  id: WFTraderStockSurplus
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderSurplusInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 10
+
+# Half the station's markup: the antiques are priced to sell, and still above what a pallet pays for them.
+- type: entity
+  id: WFTraderStockCurios
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderCuriosInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 5
+
+- type: entity
+  id: WFTraderStockMedic
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderMedicInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 3
+
+- type: entity
+  id: WFTraderStockMedicEquipment
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderMedicEquipmentInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 10
+
+- type: entity
+  id: WFTraderStockShipwright
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderShipwrightInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 15
+
+- type: entity
+  id: WFTraderStockFence
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderFenceInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 10
+
+- type: traderDialogue
+  id: WFTraderSurplusDialogue
+  greeting: trader-surplus-greeting
+  farewell: trader-surplus-farewell
+  options:
+  - prompt: trader-wanderer-prompt-shop
+    response: trader-surplus-response-shop
+    action: OpenShop
+  - prompt: trader-wanderer-prompt-who
+    response: trader-surplus-response-who
+    action: None
+
+- type: traderDialogue
+  id: WFTraderCuriosDialogue
+  greeting: trader-curios-greeting
+  farewell: trader-curios-farewell
+  options:
+  - prompt: trader-wanderer-prompt-shop
+    response: trader-curios-response-shop
+    action: OpenShop
+  - prompt: trader-wanderer-prompt-who
+    response: trader-curios-response-who
+    action: None
+
+- type: traderDialogue
+  id: WFTraderMedicDialogue
+  greeting: trader-medic-greeting
+  farewell: trader-medic-farewell
+  options:
+  - prompt: trader-wanderer-prompt-shop
+    response: trader-medic-response-shop
+    action: OpenShop
+  - prompt: trader-wanderer-prompt-who
+    response: trader-medic-response-who
+    action: None
+
+- type: traderDialogue
+  id: WFTraderShipwrightDialogue
+  greeting: trader-shipwright-greeting
+  farewell: trader-shipwright-farewell
+  options:
+  - prompt: trader-wanderer-prompt-shop
+    response: trader-shipwright-response-shop
+    action: OpenShop
+  - prompt: trader-wanderer-prompt-who
+    response: trader-shipwright-response-who
+    action: None
+
+- type: traderDialogue
+  id: WFTraderFenceDialogue
+  greeting: trader-fence-greeting
+  farewell: trader-fence-farewell
+  options:
+  - prompt: trader-wanderer-prompt-shop
+    response: trader-fence-response-shop
+    action: OpenShop
+  - prompt: trader-wanderer-prompt-who
+    response: trader-fence-response-who
+    action: None
+
+- type: entity
+  id: WFTraderSurplus
+  parent: WFTraderWanderer
+  name: surplus dealer
+  description: Sells what armies no longer want, to anyone who does.
+  suffix: Trader, Military Surplus
+  components:
+  - type: Trader
+    dialogue: WFTraderSurplusDialogue
+    killable: true
+  - type: TraderShop
+    vendors:
+    - WFTraderStockSurplus
+    priceMultiplier: 0.85
+    randomStock: 16
+    stockMin: 1
+    stockMax: 3
+    lootItems: 5
+
+- type: entity
+  id: WFTraderCurios
+  parent: WFTraderWanderer
+  name: curio dealer
+  description: Antiques, heirlooms and oddities, each with a story attached.
+  suffix: Trader, Curios
+  components:
+  - type: Trader
+    dialogue: WFTraderCuriosDialogue
+    killable: true
+  - type: TraderShop
+    vendors:
+    - WFTraderStockCurios
+    priceMultiplier: 1
+    randomStock: 16
+    stockMin: 1
+    stockMax: 1
+    lootItems: 3
+
+- type: entity
+  id: WFTraderMedic
+  parent: WFTraderWanderer
+  name: medical supplier
+  description: Clinic overstock, sold out of a hold.
+  suffix: Trader, Medical
+  components:
+  - type: Trader
+    dialogue: WFTraderMedicDialogue
+    killable: true
+  - type: TraderShop
+    vendors:
+    - WFTraderStockMedic
+    - WFTraderStockMedicEquipment
+    priceMultiplier: 0.9
+    randomStock: 16
+    stockMin: 1
+    stockMax: 3
+    lootItems: 4
+
+- type: entity
+  id: WFTraderShipwright
+  parent: WFTraderWanderer
+  name: shipwright
+  description: Thrusters, drives and hull fittings, hauled out to wherever the ships are.
+  suffix: Trader, Shipwright
+  components:
+  - type: Trader
+    dialogue: WFTraderShipwrightDialogue
+    killable: true
+  - type: TraderShop
+    vendors:
+    - WFTraderStockShipwright
+    priceMultiplier: 0.8
+    randomStock: 14
+    stockMin: 1
+    stockMax: 2
+    lootItems: 4
+
+- type: entity
+  id: WFTraderFence
+  parent: WFTraderWanderer
+  name: pirate fence
+  description: Moves goods nobody asks about, at prices nobody argues with.
+  suffix: Trader, Fence
+  components:
+  - type: Trader
+    dialogue: WFTraderFenceDialogue
+    killable: true
+  - type: TraderShop
+    vendors:
+    - WFTraderStockFence
+    priceMultiplier: 0.55
+    randomStock: 16
+    stockMin: 1
+    stockMax: 3
+    lootItems: 5
+
+# The exotic dealers travel together on one military hull under a mercenary escort. The armourer sells ship guns that
+# are otherwise only found fitted, the hardpoints they mount on and their ammunition; the systems broker sells shields, drives and the fittings a
+# shipyard won't. Both pick a few lines from a big pool each run, one of each gun or system.
+- type: vendingMachineInventory
+  id: WFTraderArmourerInventory
+  startingInventory:
+    WFFlatpackTurretDravon: 1
+    WFFlatpackTurretFang: 1
+    WFFlatpackTurretRAC30: 1
+    WFFlatpackTurretLongbow: 1
+    WFFlatpackTurretAk820: 1
+    WFFlatpackTurretBofors: 1
+    WFFlatpackTurretHydra: 1
+    WFFlatpackTurretEquinox: 1
+    WFFlatpackTurretTarnyx: 1
+    WFFlatpackTurretRubicon: 1
+    WFFlatpackTurretAdder: 1
+    WFFlatpackTurretType54: 1
+    WFFlatpackTurretCerberus: 1
+    WFFlatpackTurretScylla: 1
+    WFFlatpackTurretDymere: 1
+    WFFlatpackTurretPhalanx: 1
+    WFFlatpackTurretApollo: 1
+    WFFlatpackTurretPrometheus: 1
+    WFFlatpackTurretFlare: 1
+    WFFlatpackTurretVespera: 1
+    WFFlatpackTurretVanyk: 1
+    WFFlatpackTurretTovek: 1
+    WFFlatpackTurretPaladin: 1
+    WFShipHarpoonTurretFlatpack: 1
+    WeaponTurretPinholeFlatpack: 1
+    WeaponTurretShardFlatpack: 1
+    M381Flatpack: 1
+    Type35Flatpack: 1
+    AK570Flatpack: 1
+    L58Flatpack: 1
+    WFFlatpackHardpointBallisticSuperlight: 2
+    WFFlatpackHardpointBallisticLight: 2
+    WFFlatpackHardpointBallisticMedium: 2
+    WFFlatpackHardpointBallisticHeavy: 2
+    WFFlatpackHardpointBallisticSuperheavy: 2
+    WFFlatpackHardpointEnergySuperlight: 2
+    WFFlatpackHardpointEnergyLight: 2
+    WFFlatpackHardpointEnergyMedium: 2
+    WFFlatpackHardpointEnergyHeavy: 2
+    WFFlatpackHardpointEnergySuperheavy: 2
+    WFFlatpackHardpointMissileSuperlight: 2
+    WFFlatpackHardpointMissileLight: 2
+    WFFlatpackHardpointMissileMedium: 2
+    WFFlatpackHardpointMissileHeavy: 2
+    WFFlatpackHardpointMissileSuperheavy: 2
+    Magazine20mm: 2
+    Magazine20mmAS: 2
+    Magazine30mm: 2
+    Magazine30mmHE: 2
+    Magazine35mm: 2
+    Magazine35mmHE: 2
+    Magazine57mmHE: 2
+    Magazine57mmSmart: 2
+    Magazine57mmSACLOS: 2
+    90mmMagazineHE: 2
+    90mmMagazineAP: 2
+    90mmMagazineFlak: 2
+    90mmMagazineMinelayer: 2
+    Magazine140mm: 2
+    Magazine140mmSACLOS: 2
+    Box220mmAPHE: 2
+    Box220mmHECluster: 2
+    Box220mmSmartCluster: 2
+    Box255mmAPHE: 2
+    Box255mmEMP: 2
+    Box255mmMine: 2
+    VanykMagazine: 2
+    MissileMagazine50mmHE: 2
+    TovekCartridge: 2
+    PaladinMagazine: 2
+    PaladinMagazineEMPHE: 2
+    PaladinMagazineHV: 2
+    Asm220TorpedoHE: 2
+    Asm220TorpedoHESACLOS: 2
+    CharonSlugAmmo: 2
+    CharonApheSlugAmmo: 2
+    CharonEmpSlugAmmo: 2
+    R300ShellHE: 2
+
+- type: vendingMachineInventory
+  id: WFTraderSystemsBrokerInventory
+  startingInventory:
+    WFFlatpackShieldSentinel: 1
+    WFFlatpackShieldAegis: 1
+    WFFlatpackShieldTitan: 1
+    WFFlatpackGravityGeneratorMini: 1
+    WFFlatpackThrusterLarge: 1
+    WFFlatpackThrusterLargeT2: 1
+    WFFlatpackThrusterT2: 1
+    WFFlatpackThrusterStealth: 1
+    WFFlatpackThrusterNavy: 1
+    WFFlatpackGyroscopeNavy: 1
+    WFFlatpackSalvageMagnet: 1
+    WFFlatpackTractorBeam: 1
+    WFFlatpackTractorBeamSmall: 1
+    FTLDrive50Flatpack: 1
+    FTLDrive25SFlatpack: 1
+    AmeControllerUnanchoredFlatpack: 1
+    GeneratorRTGFlatpack: 1
+    TegCenterFlatpack: 1
+    TegCirculatorFlatpack: 2
+    SalvageRadarFlatpack: 1
+    MachineShieldMS100Circuitboard: 1
+    MachineShieldMS250Circuitboard: 1
+    MachineShieldMS500Circuitboard: 1
+    MiniGravityGeneratorCircuitboard: 1
+    SalvageMagnetMachineCircuitboard: 1
+    ThrusterSecurityMachineCircuitboard: 2
+    GyroscopeSecurityMachineCircuitboard: 2
+    WFTractorBeamComputerCircuitboard: 1
+    ComputerIFFFlatpack: 1
+    ShipRepairDevice: 1
+    ShipRepairDeviceAmmo: 3
+
+- type: entity
+  id: WFTraderStockArmourer
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderArmourerInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 1.5
+
+- type: entity
+  id: WFTraderStockSystemsBroker
+  parent: VendingMachineAmmo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: VendingMachine
+    pack: WFTraderSystemsBrokerInventory
+    requiresCash: true
+  - type: MarketModifier
+    mod: 1.5
+
+- type: traderDialogue
+  id: WFTraderArmourerDialogue
+  greeting: trader-armourer-greeting
+  farewell: trader-armourer-farewell
+  options:
+  - prompt: trader-wanderer-prompt-shop
+    response: trader-armourer-response-shop
+    action: OpenShop
+  - prompt: trader-wanderer-prompt-who
+    response: trader-armourer-response-who
+    action: None
+
+- type: traderDialogue
+  id: WFTraderSystemsBrokerDialogue
+  greeting: trader-systems-greeting
+  farewell: trader-systems-farewell
+  options:
+  - prompt: trader-wanderer-prompt-shop
+    response: trader-systems-response-shop
+    action: OpenShop
+  - prompt: trader-wanderer-prompt-who
+    response: trader-systems-response-who
+    action: None
+
+- type: entity
+  id: WFTraderArmourer
+  parent: WFTraderWanderer
+  name: armourer
+  description: Ship guns that never reach a shipyard catalogue, the hardpoints to mount them on and the rounds to feed them.
+  suffix: Trader, Armourer
+  components:
+  - type: Trader
+    dialogue: WFTraderArmourerDialogue
+    killable: true
+  - type: TraderShop
+    vendors:
+    - WFTraderStockArmourer
+    priceMultiplier: 1.0
+    randomStock: 14
+    stockMin: 1
+    stockMax: 2
+    lootItems: 3
+
+- type: entity
+  id: WFTraderSystemsBroker
+  parent: WFTraderWanderer
+  name: systems broker
+  description: Shield generators, drives and fittings from yards that don't sell to the public.
+  suffix: Trader, Systems broker
+  components:
+  - type: Trader
+    dialogue: WFTraderSystemsBrokerDialogue
+    killable: true
+  - type: TraderShop
+    vendors:
+    - WFTraderStockSystemsBroker
+    priceMultiplier: 1.0
+    randomStock: 10
+    stockMin: 1
+    stockMax: 1
+    lootItems: 3

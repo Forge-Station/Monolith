@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Recoloured for Wolfgate by Tools/_WF/Caverns/gen_life.py from Mobs/Animals/bat.rsi (Sprite by Cohnway)",
+  "states": [
+    {
+      "name": "bat",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "dead",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    }
+  ]
+}

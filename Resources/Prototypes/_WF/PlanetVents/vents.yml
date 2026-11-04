@@ -1,0 +1,122 @@
+# Carcinoma's ventricles: the planet breathes through them. A slow inhale, then a warm puff of carbon dioxide.
+- type: entity
+  id: WFCarcinomaVent
+  name: ventricle
+  description: A puckered mound of flesh round a ring of wet openings. It heaves slowly, drawing the air down, and sighs it back out warm.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _WF/PlanetVents/ventricle.rsi
+    drawdepth: FloorObjects
+    noRot: true
+    layers:
+    - state: idle
+      map: ["vent"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFPlanetVentVisuals.Phase:
+        vent:
+          Rest: { state: idle }
+          Inhale: { state: inhale }
+          Exhale: { state: exhale }
+  # Walked over, but it stops bullets.
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        hard: false
+        density: 100
+        layer:
+        - BulletImpassable
+  - type: Damageable
+    damageContainer: Biological
+  - type: SolutionContainerManager
+    solutions:
+      blood:
+        maxVol: 40
+        reagents:
+        - ReagentId: Blood
+          Quantity: 40
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WFFloraGore
+      - !type:SpillBehavior
+        solution: blood
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeat:
+            min: 1
+            max: 2
+          OrganAnimalLungs:
+            min: 0
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: WFPlanetVent
+    inhaleSound:
+      collection: WFVentInhale
+      params:
+        volume: -4
+        maxDistance: 12
+    exhaleSound:
+      collection: WFVentExhale
+      params:
+        volume: -2
+        maxDistance: 14
+    puff: WFCarcinomaVentPuff
+
+- type: entity
+  id: WFCarcinomaVentPuff
+  name: warm breath
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: _WF/PlanetVents/puff.rsi
+    state: puff
+    drawdepth: Effects
+    noRot: true
+    offset: 0,0.5
+  - type: TimedDespawn
+    lifetime: 1.6
+
+- type: soundCollection
+  id: WFVentInhale
+  files:
+  - /Audio/_WF/PlanetVents/inhale/gon_breath2.ogg
+  - /Audio/_WF/PlanetVents/inhale/gon_breath4.ogg
+
+- type: soundCollection
+  id: WFVentExhale
+  files:
+  - /Audio/_WF/PlanetVents/exhale/gas_hiss.ogg
+  - /Audio/_WF/PlanetVents/exhale/gon_breath1.ogg
+  - /Audio/_WF/PlanetVents/exhale/gon_breath3.ogg
+
+# A wide field of vents on the surface, a few to a screen; Carcinoma's biome picks where the fields lie.
+- type: biomeTemplate
+  id: WFCarcinomaVentField
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh, WFFloorFleshScab, WFFloorFleshBoneMeaty, WFFloorFleshBoneSpine, WFFloorFleshBoneStraight, WFFloorFleshCrust, WFFloorFleshMarshMud, WFFloorFleshMarshDirt]
+    entities: [WFCarcinomaVent]
+    threshold: 0.9
+    noise: { seed: 142, noiseType: OpenSimplex2, frequency: 0.6 }

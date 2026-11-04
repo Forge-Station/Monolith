@@ -41,11 +41,11 @@ public sealed class PlanetNetworkTest
     /// <summary>The network registry's mixture, which is stamped over every layer at MapInit.</summary>
     private const float RegistryTemperature = 293.15f;
 
-    /// <summary>Layer roles for WFSurfaceAsclepiu: 0 ground, 1-3 air, 4 orbit. No cloud layer.</summary>
-    private const int LayerCount = 5;
+    /// <summary>Layer roles for WFSurfaceAsclepiu: 0 ground, 1-4 air, 5 orbit. No cloud layer.</summary>
+    private const int LayerCount = 6;
 
-    /// <summary>The air layers of the Asclepiu stack, which airLayers 3 puts at depths 1, 2 and 3.</summary>
-    private const int AirLayerCount = 3;
+    /// <summary>The air layers of the Asclepiu stack, which airLayers 4 puts at depths 1 to 4.</summary>
+    private const int AirLayerCount = 4;
 
     /// <summary>Everything a built stack exposes to a test.</summary>
     private sealed class Stack
@@ -58,7 +58,7 @@ public sealed class PlanetNetworkTest
         public EntityUid Orbit => Layers[^1];
     }
 
-    /// <summary>Five maps at the right depths, linked both ways, with solid ground and a bare orbit.</summary>
+    /// <summary>Six maps at the right depths, linked both ways, with solid ground and a bare orbit.</summary>
     [Test]
     public async Task BuildsTheFullStack()
     {
@@ -72,7 +72,7 @@ public sealed class PlanetNetworkTest
 
         await server.WaitAssertion(() =>
         {
-            Assert.That(stack.Layers, Has.Count.EqualTo(LayerCount), "The Asclepiu stack should be five layers.");
+            Assert.That(stack.Layers, Has.Count.EqualTo(LayerCount), "The Asclepiu stack should be six layers.");
 
             using (Assert.EnterMultipleScope())
             {
@@ -152,8 +152,11 @@ public sealed class PlanetNetworkTest
             var ground = Mixture(atmos, stack.Ground);
             Assert.That(ground, Is.Not.Null, "The ground layer has no map mixture.");
 
-            // The mixtures differ only in temperature, which shows the fixup ran.
-            Assert.That(ground!.Temperature, Is.EqualTo(GroundTemperature).Within(0.01f),
+            // The mixtures differ only in temperature, which shows the fixup ran. Once the climate has read it, the
+            // ground's own air is the world's base temperature and the climate moves the air from there.
+            var climate = server.EntMan.GetComponent<WFPlanetWeatherComponent>(stack.Network);
+            Assert.That(float.IsNaN(climate.BaseTemperature) ? ground!.Temperature : climate.BaseTemperature,
+                Is.EqualTo(GroundTemperature).Within(0.01f),
                 $"The ground layer kept the network registry's {RegistryTemperature} K air instead of its own surface mixture.");
         });
 
@@ -198,7 +201,7 @@ public sealed class PlanetNetworkTest
                 }
 
                 Assert.That(entMan.GetComponent<CEZMapComponent>(stack.Orbit).Depth, Is.EqualTo(LayerCount - 1),
-                    "Orbit must stay at depth 4, because every fall duration is keyed to it.");
+                    "Orbit must stay at the top, over Asclepiu's four air layers.");
             }
         });
 

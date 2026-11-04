@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server._CE.ZLevels.Core;
 using Content.Server._CE.ZLevels.Core.Components;
+using Content.Server._WF.Planets.Bounds;
 using Content.Server._WF.Planets.Flight;
 using Content.Server.Shuttles.Components;
 using Content.Shared._WF.Planets.Flight;
@@ -15,6 +16,8 @@ public sealed partial class WFOrbitEntrySystem
 {
     [Dependency] private CEZLevelsSystem _zLevels = default!;
     [Dependency] private WFFlightSystem _flight = default!;
+    [Dependency] private WFPlanetBoundsSystem _bounds = default!;
+    [Dependency] private WFPlanetPreloadSystem _preload = default!;
 
     // The readout shows two decimals.
     private const float LiftRatioEpsilon = 0.01f;
@@ -66,7 +69,7 @@ public sealed partial class WFOrbitEntrySystem
             return false;
         }
 
-        if (HasComp<FTLComponent>(grid))
+        if (HasComp<FTLComponent>(grid) || _hop.IsHopping(grid))
         {
             reason = Loc.GetString("wf-flight-busy");
             return false;
@@ -75,6 +78,20 @@ public sealed partial class WFOrbitEntrySystem
         if (!TryComp<MapGridComponent>(grid, out var gridComp))
         {
             reason = Loc.GetString("wf-orbit-no-hull");
+            return false;
+        }
+
+        // A world still generating has nothing finished to land on.
+        if (Forming(mapUid, out var planetName))
+        {
+            reason = Loc.GetString("wf-orbit-world-forming", ("planet", planetName));
+            return false;
+        }
+
+        // The hull keeps its xy all the way down, and there is no ground outside the circle.
+        if (!_bounds.IsHullInside(grid))
+        {
+            reason = Loc.GetString("wf-orbit-outside-bounds");
             return false;
         }
 
@@ -101,6 +118,20 @@ public sealed partial class WFOrbitEntrySystem
 
         _nextRefresh = TimeSpan.Zero;
         reason = null;
+        return true;
+    }
+
+    /// <summary>Whether the ground under an orbit layer is still being generated, with the world's name.</summary>
+    private bool Forming(EntityUid orbitMap, out string planet)
+    {
+        planet = string.Empty;
+        if (!TryComp<WFOrbitLayerComponent>(orbitMap, out var orbit)
+            || !TryGetEntity(orbit.Network, out var network)
+            || !TryComp<WFPlanetNetworkComponent>(network, out var comp)
+            || !_preload.IsPreloading(comp.GroundMap))
+            return false;
+
+        planet = comp.Planet is { } body && !TerminatingOrDeleted(body) ? Name(body) : Name(comp.GroundMap);
         return true;
     }
 

@@ -1,0 +1,102 @@
+# The mast every world's comms ride on. 2x2 base with the entity on its lower-left tile; the sprite rises four tiles.
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: WFMassTransceiverBase
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Sprite
+    sprite: _WF/PlanetComms/mass_transceiver.rsi
+    drawdepth: Mobs
+    offset: 0.5, 1.5
+    noRot: true
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,1.45,1.45"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Corrodible
+    isCorrodible: false
+  - type: Construction
+    graph: WFMassTransceiverGraph
+    node: working
+    # Repairable, never taken apart: the graph has no start node to deconstruct to.
+    deconstructionTarget: null
+  - type: GuideHelp
+    guides:
+    - WFPlanetComms
+
+- type: entity
+  parent: WFMassTransceiverBase
+  id: WFMassTransceiver
+  components:
+  - type: Sprite
+    layers:
+    - state: static1_off
+    - state: static1
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ApcPowerReceiver
+    powerLoad: 3000
+  - type: ExtensionCableReceiver
+  - type: PointLight
+    radius: 2.5
+    energy: 0.8
+    color: "#7fe8a0"
+    offset: 0.5, 1.5
+    enabled: false
+  - type: LitOnPowered
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 5
+    enabled: false
+    sound:
+      path: /Audio/Ambience/Objects/server_fans.ogg
+  - type: WFMassTransceiver
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: broken
+
+- type: entity
+  parent: WFMassTransceiverBase
+  id: WFMassTransceiverBroken
+  components:
+  - type: Sprite
+    state: static1_broken
+  - type: WFMassTransceiver
+    broken: true
+  - type: Construction
+    graph: WFMassTransceiverGraph
+    node: broken
+    # Repairable, never taken apart: the graph has no start node to deconstruct to.
+    deconstructionTarget: null

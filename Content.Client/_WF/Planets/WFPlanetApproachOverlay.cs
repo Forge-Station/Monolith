@@ -4,7 +4,6 @@ using Content.Client.Parallax;
 using Content.Shared._FarHorizons.StarSystem;
 using Content.Shared._FarHorizons.StarSystem.Helpers;
 using Content.Shared._WF.Planets;
-using Content.Shared.Shuttles.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
@@ -13,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._WF.Planets;
 
-/// <summary>Replaces the FTL tunnel on an orbit hop with the sector's planet swelling to fill the sky, reversed on leaving.</summary>
+/// <summary>Fills the sky on an orbit hop with the sector's planet swelling as it closes, reversed on leaving.</summary>
 public sealed class WFPlanetApproachOverlay : Overlay
 {
     private readonly IEntityManager _entMan;
@@ -48,9 +47,9 @@ public sealed class WFPlanetApproachOverlay : Overlay
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
-        // Only the tunnel is replaced: the spool-up and the arrival are the sector and the orbit layer themselves.
-        // No time window: the hull leaves the FTL map a few ticks after the end time, so the last frame holds until then.
-        if (!_entMan.HasComponent<FTLMapComponent>(args.MapUid) || !TryGetApproach(out var approach))
+        // Only the stay on the hold map is drawn: the spool-up and the arrival are the sector and the orbit layer themselves.
+        // No time window: the hull leaves the hold map a few ticks after the end time, so the last frame holds until then.
+        if (!_entMan.HasComponent<WFPlanetHopMapComponent>(args.MapUid) || !TryGetApproach(out var approach))
             return false;
 
         return EnsureShader(approach);
@@ -79,7 +78,7 @@ public sealed class WFPlanetApproachOverlay : Overlay
 
         handle.DrawRect(bounds, Sky);
 
-        // The shader places the body in world space, and this is the FTL map: hand it a viewport in the sector's frame.
+        // The shader places the body in world space, and this is the hold map: hand it a viewport in the sector's frame.
         _shader.SetParameter("planetRadius", radius);
         _shader.SetParameter("parallaxCenter", _planet.Position);
         _shader.SetParameter("viewportMin", _planet.Position - offset - bounds.Size / 2f);

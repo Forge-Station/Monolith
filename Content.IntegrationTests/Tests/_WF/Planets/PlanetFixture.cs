@@ -66,6 +66,13 @@ public static class PlanetFixture
 
             // Tests wait a fixed time for terrain; the ones about the loading budget turn it back on.
             pair.Server.CfgMan.SetCVar(PlanetCVars.TerrainLoadBudget, 0f);
+
+            // Worlds are infinite and stream in as they always did; the bounds tests turn these back on.
+            pair.Server.CfgMan.SetCVar(PlanetCVars.Bounds, false);
+            pair.Server.CfgMan.SetCVar(PlanetCVars.Preload, false);
+
+            // Crocus on Asclepiu is a minute of loading; only the tests about fixed cities build it.
+            pair.Server.CfgMan.SetCVar(PlanetCVars.FixedCities, false);
         });
     }
 
@@ -179,6 +186,9 @@ public static class PlanetFixture
     public static async Task Teardown(TestPair pair, List<EntityUid> layers)
     {
         var server = pair.Server;
+        // Usually called from a finally: after a failed assertion the instance is not known to be idle, and resolving
+        // anything on it would throw and hide the assertion.
+        await server.WaitIdleAsync();
         var entMan = server.EntMan;
         var networks = server.System<WFPlanetNetworkSystem>();
 

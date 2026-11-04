@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Necromorph leviathan from an old, defunct Dead Space 13 repository (CC-BY-SA-3.0), per the Wolfgate owner; copied from space-station-14-soyuz (Resources/Textures/_DeadSpace/Necromorfs/leviathan.rsi), whose later restrictive licence does not cover it.",
+  "size": {
+    "x": 80,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "running",
+      "delays": [
+        [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ]
+      ]
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

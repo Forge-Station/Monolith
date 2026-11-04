@@ -1,0 +1,226 @@
+# Burnt-out military vehicles for mappers and the random scenery spawners: the drivable vehicles' own sprites,
+# darkened and broken, as static obstacles. None of them drives.
+
+- type: entity
+  abstract: true
+  parent: RMCPropVehicleBase
+  id: WFSceneryMilitaryWreckBase
+  description: What is left of a military vehicle after a fight it lost. Nothing on it works.
+  components:
+  - type: Sprite
+    offset: 0, 0
+    color: "#8a8580"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3000
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 5
+            max: 10
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: WFSceneryMilitaryWreckBase
+  id: WFSceneryTankWreck
+  name: tank wreck
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/tank.rsi
+    layers:
+    - state: tank_base
+    - state: wheels_0
+    - state: tank_turret_0
+    - state: ltb_cannon_1
+    - state: damaged_frame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.2,-1.6,1.2,1.6"
+        density: 1000
+        layer:
+        - MobMask
+
+- type: entity
+  parent: WFSceneryMilitaryWreckBase
+  id: WFSceneryWYTankWreck
+  name: tank wreck
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/wytank.rsi
+    layers:
+    - state: tank_base
+    - state: wheels_0
+    - state: tank_turret_0
+    - state: ltb_cannon_1
+    - state: damaged_frame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.2,-1.6,1.2,1.6"
+        density: 1000
+        layer:
+        - MobMask
+
+- type: entity
+  parent: WFSceneryMilitaryWreckBase
+  id: WFScenerySPPTankWreck
+  name: tank wreck
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/spptank.rsi
+    layers:
+    - state: tank_base
+    - state: wheels_0
+    - state: tank_turret_0
+    - state: railgun_1
+    - state: damaged_frame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.2,-1.6,1.2,1.6"
+        density: 1000
+        layer:
+        - MobMask
+
+- type: entity
+  parent: WFSceneryMilitaryWreckBase
+  id: WFSceneryHobelarWreck
+  name: light tank wreck
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/CMU/fv150/exterior.rsi
+    layers:
+    - state: tank_base
+    - state: wheels_0
+    - state: tank_turret_1
+    - state: damaged_frame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.8,-1.2,0.8,1.2"
+        density: 1000
+        layer:
+        - MobMask
+
+- type: entity
+  parent: WFSceneryMilitaryWreckBase
+  id: WFSceneryAPCWreck
+  name: APC wreck
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/apc.rsi
+    layers:
+    - state: apc_base
+    - state: wheels_0
+    - state: dualcannon_1
+    - state: damaged_frame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-1.7,1,1.7"
+        density: 1000
+        layer:
+        - MobMask
+
+- type: entity
+  parent: WFSceneryMilitaryWreckBase
+  id: WFSceneryWYAPCWreck
+  name: APC wreck
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/apc_pmc.rsi
+    layers:
+    - state: hull_wy
+    - state: wheels_wy_0
+    - state: dual_cannon_wy_1
+    - state: damaged_frame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-1.7,1,1.7"
+        density: 1000
+        layer:
+        - MobMask
+
+- type: entity
+  parent: WFSceneryMilitaryWreckBase
+  id: WFScenerySPPAPCWreck
+  name: APC wreck
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/sppapc.rsi
+    layers:
+    - state: sppapc_base
+    - state: wheels_0
+    - state: apc_turret_1
+    - state: damaged_turret
+    - state: damaged_frame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-1.7,1,1.7"
+        density: 1000
+        layer:
+        - MobMask
+
+- type: entity
+  parent: WFSceneryMilitaryWreckBase
+  id: WFSceneryHumveeWreck
+  name: humvee wreck
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/humvee.rsi
+    layers:
+    - state: humvee_base
+    - state: wheels_0
+    - state: humveeturret_1
+    - state: damaged_frame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.65,-1.2,0.65,1.2"
+        density: 1000
+        layer:
+        - MobMask
+
+- type: entity
+  parent: WFSceneryMilitaryWreckBase
+  id: WFScenerySPPVanWreck
+  name: military van wreck
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/sppvan.rsi
+    layers:
+    - state: sppvan_base
+    - state: wheels_0
+    - state: damaged_frame
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.6,-1.2,0.6,1.5"
+        density: 1000
+        layer:
+        - MobMask

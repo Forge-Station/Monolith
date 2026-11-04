@@ -7,13 +7,18 @@ play the same tracks (see ShipPa). Station, ambient and lobby music pause while 
 play (the admin window's Stealth Play button, or the commands' `stealth` flag) names nobody on the radio or in other
 admins' windows; only the admin logs record who played it.
 
+`WFToggleLoopStopSystem` (client) stops a toggled item's humming loop once the item is off. The loop is local to
+the client that turned it on, so when someone else turned it off the holder kept hearing it.
+
 Entry points: `InternetSoundSystem` (server fetch and playback; client mounting and the radio),
 `InternetSoundDownloader` (yt-dlp and ffmpeg, off the main thread), `InternetSoundDownloadProxy` (a per-download
 SOCKS5 tunnel that only connects to checked addresses), `InternetSoundReplaySystem` (keeps the audio in replays) and
 the `WolfgateMusicPause` partials. `WFAudioBudgetSystem` caps how many network sounds a client starts at once, so a
 burst of hundreds of clips (a large crash) can't exhaust audio sources. On the server, break, landing and impact
 sounds are each held to a handful a second (`WFSoundBudget`), counted per grid, or per map for things on no grid, so
-a crash on one ship never mutes another. The admin panel and the play command are in Administration; settings are in
+a crash on one ship never mutes another. `WFLoopDopplerSystem` takes Doppler off looping sounds on the client, which
+works around an OpenAL Soft 1.24.3 crash (a pitched-up loop overruns the mix buffer). `WFDetachedAudioSystem` mutes positional sounds left in
+nullspace, such as a loop on something out of view, which the lobby's listener would otherwise hear. The admin panel and the play command are in Administration; settings are in
 `InternetSoundCVars`.
 
 <!-- WOLFGATE-GENERATED START -->
@@ -46,6 +51,9 @@ a crash on one ship never mutes another. The admin panel and the play command ar
 - [`Content.Client/_WF/Audio/InternetSound/InternetSoundSystem.cs`](../../../Content.Client/_WF/Audio/InternetSound/InternetSoundSystem.cs)
 - [`Content.Client/_WF/Audio/InternetSound/InternetSoundSystem.Replay.cs`](../../../Content.Client/_WF/Audio/InternetSound/InternetSoundSystem.Replay.cs)
 - [`Content.Client/_WF/Audio/WFAudioBudgetSystem.cs`](../../../Content.Client/_WF/Audio/WFAudioBudgetSystem.cs)
+- [`Content.Client/_WF/Audio/WFDetachedAudioSystem.cs`](../../../Content.Client/_WF/Audio/WFDetachedAudioSystem.cs)
+- [`Content.Client/_WF/Audio/WFLoopDopplerSystem.cs`](../../../Content.Client/_WF/Audio/WFLoopDopplerSystem.cs)
+- [`Content.Client/_WF/Audio/WFToggleLoopStopSystem.cs`](../../../Content.Client/_WF/Audio/WFToggleLoopStopSystem.cs)
 
 ### Integration tests
 
@@ -66,6 +74,7 @@ a crash on one ship never mutes another. The admin panel and the play command ar
 
 ## Non-modular edits
 
+- [`Content.Client/Audio/AmbientSoundSystem.cs`](../../../Content.Client/Audio/AmbientSoundSystem.cs): Stop is refused during state application, orphaning a looping stream on server deletes
 - [`Content.Client/Audio/ContentAudioSystem.AmbientMusic.cs`](../../../Content.Client/Audio/ContentAudioSystem.AmbientMusic.cs): replay shutdown flushes audio entities before the UI leaves gameplay
 - [`Content.Client/Replay/ContentReplayPlaybackManager.cs`](../../../Content.Client/Replay/ContentReplayPlaybackManager.cs): indexed by the internet sound system when playback starts
 - [`Content.Server/Destructible/DestructibleSystem.cs`](../../Destructible/DestructibleSystem.cs)

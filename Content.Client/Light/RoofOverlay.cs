@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._WF.Roofs; // WOLFGATE(Roofs)
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Maps;
@@ -47,6 +48,11 @@ public sealed partial class RoofOverlay : Overlay
         if (args.Viewport.Eye == null || !_entManager.HasComponent<MapLightComponent>(args.MapUid))
             return;
 
+        // WOLFGATE(Roofs) START: a ghost sees no roof shade over buildings and ships, only underground.
+        var wfRoofs = _entManager.System<WFRoofSystem>();
+        var wfGhost = !wfRoofs.Enabled;
+        // WOLFGATE END
+
         var viewport = args.Viewport;
         var eye = args.Viewport.Eye;
 
@@ -88,6 +94,8 @@ public sealed partial class RoofOverlay : Overlay
                         if (_tileDefs[tileRef.Tile.TypeId] is ContentTileDefinition { MapAtmosphere: true })
                             continue;
                         // WOLFGATE END
+                        if (wfGhost) // WOLFGATE(Roofs): a ghost sees ships unshaded
+                            continue; // WOLFGATE(Roofs)
 
                         var local = _lookup.GetLocalBounds(tileRef, grid.Comp.TileSize);
                         worldHandle.DrawRect(local, color);
@@ -106,6 +114,8 @@ public sealed partial class RoofOverlay : Overlay
                 {
                     if (!_entManager.TryGetComponent(grid.Owner, out RoofComponent? roof))
                         continue;
+                    if (wfGhost && !wfRoofs.Underground(grid.Owner)) // WOLFGATE(Roofs): a ghost sees buildings unshaded
+                        continue; // WOLFGATE(Roofs)
 
                     var gridMatrix = _xformSystem.GetWorldMatrix(grid.Owner);
                     var matty = Matrix3x2.Multiply(gridMatrix, invMatrix);

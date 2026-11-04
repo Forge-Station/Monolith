@@ -19,6 +19,10 @@
     WFShipHarpoon: 8
     WFPartsSiloFlatpack: 2
     WFChemicalSiloFlatpack: 2
+    WFDoomArcadeFlatpack: 3
+    WFVehicleBayTerminalFlatpack: 4
+    WFVehicleDeliveryPadFlatpack: 4
+    WFFreedoom2ArcadeFlatpack: 3
     # Wolfmed field medicine.
     WFWolfmedSplint: 6
     WFWolfmedAntisepticSpray: 6
@@ -49,11 +53,18 @@
     BoneGel: 2
     WFMedkitSyntheticFilled: 3
     WFWolfmedIvDripFlatpack: 3
+    WFWolfmedVentilatorFlatpack: 3
     # The autodoc as a flatpack, for a ship without a medical lathe (its board is printed there), and its consumables.
-    WFMachineAutodocFlatpack: 2
-    WFAutodocProgramDiskTransplant: 2
-    WFAutodocProgramDiskLimb: 2
-    WFAutodocProgramDiskNeuro: 2
-    WFAutodocProgramDiskCavity: 2
-    WFAutodocDefibModule: 2
-    WFAutodocAutofixModule: 2
+    WFMachineAutodocFlatpack: 1
+    WFAutodocProgramDiskTransplant: 1
+    WFAutodocProgramDiskLimb: 1
+    WFAutodocProgramDiskNeuro: 1
+    WFAutodocProgramDiskCavity: 1
+    WFAutodocDefibModule: 1
+    WFAutodocAutofixModule: 1
+    # Xenobiology gear and starter slimes.
+    MobSlimeXenobioBabyGrey: 4
+    SlimeScannerXenobio: 4
+    ClothingBackpackXenoBioTankFilled: 3
+    WFSlimeGrinderFlatpack: 2
+    WFXenobiologyBountyConsoleFlatpack: 1

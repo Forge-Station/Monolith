@@ -2,7 +2,14 @@
 wf-planet-orbit-map-name = { $planet } orbit
 wf-planet-orbit-marker-name = { $planet } orbital marker
 wf-planet-network-name = { $planet } planet network
-wf-planet-asclepiu-surface = Asclepiu
+wf-planet-air-map-name = { $planet } airspace { $level }
+wf-planet-cloud-map-name = { $planet } cloud deck
+wf-planet-lower-map-name = { $planet } lower level { $level }
+wf-shuttle-map-surface = { $name } (surface)
+wf-shuttle-map-sector = { $name } (sector space)
+wf-shuttle-map-transit = Between levels
+wf-shuttle-map-level = Level { $level }
+wf-planet-asclepiu-surface = Verda
 
 ## FTL
 wf-shuttle-console-in-transit = Cannot engage FTL while changing altitude.
@@ -16,8 +23,18 @@ wf-orbit-no-network = { $planet } has no orbit layer to drop into.
 wf-orbit-no-sector = This orbit layer has no sector body to return to.
 wf-orbit-not-in-sector = { $planet } is not in this system.
 wf-orbit-not-in-orbit = This hull is not in planet orbit.
+wf-orbit-outside-bounds = Outside the world's edge; no ground to descend to here.
 wf-orbit-out-of-range = Too far from { $planet } for orbital insertion.
 wf-orbit-refused = Orbital insertion refused.
+wf-orbit-hopping = Already on the way.
+wf-orbit-in-ftl = Can't do this mid-jump.
+wf-orbit-protected = This ship can't be moved.
+wf-orbit-anchored = This ship is anchored in place.
+wf-orbit-world-forming = { $planet } is still forming. Try again in a moment.
+
+## Round-start hold
+wf-planet-round-hold = Worlds are still forming. The round starts as soon as they are done.
+wf-planet-round-hold-expired = Worlds are still forming, but the round is starting anyway.
 
 ## wfplanet command
 cmd-wfplanet-desc = Build, inspect and tear down Wolfgate planet networks.
@@ -60,7 +77,10 @@ wf-planet-control-title = Planet Control
 wf-planet-control-refresh = Refresh
 wf-planet-control-none = No worlds in this sector
 wf-planet-control-not-built = Not built yet: nobody has visited. Only the sanction can be set.
-wf-planet-control-status = { $time } local, { $weather } ({ $seconds } s to next change), { $gravity } g
+wf-planet-control-status = { $time } local, { $weather } shown as { $wolf } ({ $seconds } s to next change), { $gravity } g
+wf-planet-control-climate = { $season }, { $temperature } outside ({ $left } min of the season left)
+wf-planet-control-climate-none = No seasons, { $temperature } outside
+wf-planet-control-season = Season
 wf-planet-control-time = Time
 wf-planet-control-set = Set
 wf-planet-control-dawn = Dawn
@@ -72,11 +92,12 @@ wf-planet-control-weather-clear = Clear
 wf-planet-control-weather-seconds = Seconds the weather holds before the planet's own cycle resumes
 wf-planet-control-gravity = Gravity
 wf-planet-control-sanctioned = Sanctioned world
-cmd-planetcontrol-desc = Lists the sector's worlds, or sets one's time, weather, gravity or sanction.
-cmd-planetcontrol-help = Usage: planetcontrol [<planet> time <HH:MM> | weather <id|clear> [seconds] | gravity <g> | sanctioned <true|false>]
+cmd-planetcontrol-desc = Lists the sector's worlds, or sets one's time, weather, season, gravity or sanction.
+cmd-planetcontrol-help = Usage: planetcontrol [<planet> time <HH:MM> | weather <id|clear> [seconds] | season <id> | gravity <g> | sanctioned <true|false>]
 cmd-planetcontrol-invalid-args = Unknown planet, field or value.
 cmd-planetcontrol-no-change = Nothing changed.
-cmd-planetcontrol-row = { $planet }: { $time }, { $weather }, { $gravity }g, sanctioned={ $sanctioned }
+cmd-planetcontrol-row = { $planet }: { $time }, { $weather } shown as { $wolf }, season { $season }, { $temperature }, { $gravity }g, sanctioned={ $sanctioned }
+cmd-planetcontrol-season-none = none
 cmd-planetcontrol-row-unbuilt = { $planet }: not built, sanctioned={ $sanctioned }
 cmd-planetcontrol-weather-clear = clear
 cmd-planetcontrol-applied = { $planet }: { $changes }

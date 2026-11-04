@@ -1,0 +1,429 @@
+# Verda's wildlife, region by region. Names and descriptions are in Locale/_WF/Planets/life_verda.ftl.
+# Meadow and woods: mutated deer herds that bolt, foxes, bees by the wildflowers, snakes in the tall grass.
+# Lake and pond shores: frogs and crabs. Irradiated scars: a two-headed deer, irradiated rats, a rat king's pack.
+# Highlands: penguins and frost bears. The recoloured sprites are made by Tools/_WF/Planets/gen_verda_life_art.py.
+
+# ---- Skittish AI ----
+
+# Anything with hands nearby is a threat to a deer.
+- type: utilityQuery
+  id: WFVerdaNearbyThreats
+  query:
+  - !type:ComponentQuery
+    components:
+    - type: Hands
+  considerations:
+  - !type:TargetIsAliveCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+
+# Dashes off in short hops, one after another, while something with hands is within WFVerdaStartleRange; else it
+# wanders. The path search reaches only three or four tiles, so a hop is a random spot at least WFVerdaMinFleeRange away.
+- type: htnCompound
+  id: WFVerdaSkittishCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: WFVerdaNearbyThreats
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:TargetInRangePrecondition
+        targetKey: Target
+        rangeKey: WFVerdaStartleRange
+      operator: !type:PickAccessibleOperator
+        rangeKey: WFVerdaFleeRange
+    # Not a shuffle: the spot is at least WFVerdaMinFleeRange away.
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:CoordinatesNotInRangePrecondition
+        targetKey: TargetCoordinates
+        rangeKey: WFVerdaMinFleeRange
+      operator: !type:MoveToOperator
+        pathfindInPlanning: false
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
+
+# ---- Deer ----
+
+# The herd's buck and does: reindeer given a sickly glow, quick to run.
+- type: entity
+  parent: MobReindeerBuck
+  id: WFMobVerdaDeer
+  components:
+  - type: Sprite
+    color: "#d6f0b0"
+  - type: PointLight
+    radius: 1.6
+    energy: 0.5
+    color: "#a6d65a"
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 5.5
+  - type: HTN
+    rootTask:
+      task: WFVerdaSkittishCompound
+    blackboard:
+      WFVerdaStartleRange: !type:Single
+        8
+      WFVerdaFleeRange: !type:Single
+        14
+      WFVerdaMinFleeRange: !type:Single
+        2.5
+
+- type: entity
+  parent: MobReindeerDoe
+  id: WFMobVerdaDoe
+  components:
+  - type: Sprite
+    color: "#d6f0b0"
+  - type: PointLight
+    radius: 1.6
+    energy: 0.5
+    color: "#a6d65a"
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 5.5
+  - type: HTN
+    rootTask:
+      task: WFVerdaSkittishCompound
+    blackboard:
+      WFVerdaStartleRange: !type:Single
+        8
+      WFVerdaFleeRange: !type:Single
+        14
+      WFVerdaMinFleeRange: !type:Single
+        2.5
+
+# One deer in ten charges: it goes for anyone it sees, with a short gore.
+- type: entity
+  parent: MobReindeerBuck
+  id: WFMobVerdaDeerCharger
+  components:
+  - type: Sprite
+    color: "#e8c78a"
+  - type: PointLight
+    radius: 1.6
+    energy: 0.6
+    color: "#d6c24a"
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 6
+  - type: MeleeWeapon
+    attackRate: 1.5
+    animation: WeaponArcThrust
+    soundHit:
+      collection: WFFloraGore
+    damage:
+      types:
+        Piercing: 14
+        Blunt: 6
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+
+# The scars' own: a second head, a bigger frame and a hunting temper.
+- type: entity
+  parent: MobReindeerBuck
+  id: WFMobVerdaDeerTwoHeaded
+  components:
+  - type: Sprite
+    scale: 1.15, 1.15
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: reindeer_buck
+      sprite: _WF/Planets/Life/verda/mutant_deer_buck.rsi
+  - type: PointLight
+    radius: 2
+    energy: 0.8
+    color: "#7fd65a"
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      150: Dead
+  - type: Stamina
+    critThreshold: 180
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 6
+  - type: MeleeWeapon
+    attackRate: 1.5
+    animation: WeaponArcThrust
+    soundHit:
+      collection: WFFloraGore
+    damage:
+      types:
+        Piercing: 22
+        Blunt: 10
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 6
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+
+# ---- Scar vermin ----
+
+- type: entity
+  parent: MobMouse
+  id: WFMobVerdaScarRat
+  components:
+  - type: Sprite
+    color: "#b4d8a0"
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      20: Critical
+      35: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 5
+  - type: MeleeWeapon
+    attackRate: 1.2
+    damage:
+      types:
+        Piercing: 3
+        Slash: 3
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    constantlyReplan: true
+    rootTask:
+      task: SimpleHostileCompound
+
+- type: entity
+  parent: MobRatKing
+  id: WFMobVerdaRatKing
+  components:
+  - type: Sprite
+    color: "#b4d8a0"
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      250: Dead
+
+# ---- Highlands ----
+
+- type: entity
+  parent: MobBearSpace
+  id: WFMobVerdaFrostBear
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/Life/verda/frost_bear.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: bear
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      130: Dead
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 6
+        Slash: 12
+
+# ---- Fauna tables ----
+# Each has a spawner placed by its region's biome layer (HideSpawnMenu markers, like WFFaunaAsclepiu).
+
+# A herd is a buck and one or two does; one animal in ten is a charger.
+- type: entityTable
+  id: WFFaunaVerdaDeerHerd
+  table: !type:AllSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: WFMobVerdaDeer
+        weight: 9
+      - id: WFMobVerdaDeerCharger
+        weight: 1
+    - !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 2
+      children:
+      - id: WFMobVerdaDoe
+        weight: 9
+      - id: WFMobVerdaDeerCharger
+        weight: 1
+
+- type: entityTable
+  id: WFFaunaVerdaMeadow
+  table: !type:GroupSelector
+    children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdVerdaSongbird
+      weight: 3
+    - !type:NestedSelector
+      tableId: WFFaunaVerdaDeerHerd
+      weight: 4
+    - id: MobFox
+      weight: 3
+    - id: MobLizard
+      weight: 2
+
+- type: entityTable
+  id: WFFaunaVerdaWoods
+  table: !type:GroupSelector
+    children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdVerdaSongbird
+      weight: 3
+    - !type:NestedSelector
+      tableId: WFFaunaVerdaDeerHerd
+      weight: 4
+    - id: MobFox
+      weight: 4
+    - id: MobLizard
+      weight: 1
+
+# Bees hang about the wildflowers.
+- type: entityTable
+  id: WFFaunaVerdaBees
+  table: !type:AllSelector
+    children:
+    - id: MobBee
+      rolls: !type:RangeNumberSelector
+        range: 2, 3
+
+# Snakes lie up in the tall grass.
+- type: entityTable
+  id: WFFaunaVerdaGrass
+  table: !type:AllSelector
+    children:
+    - id: MobSnake
+
+- type: entityTable
+  id: WFFaunaVerdaShore
+  table: !type:GroupSelector
+    children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdAsclepiuGull
+      weight: 3
+    - id: MobFrog
+      weight: 5
+      rolls: !type:RangeNumberSelector
+        range: 1, 2
+    - id: MobCrab
+      weight: 3
+
+- type: entityTable
+  id: WFFaunaVerdaScar
+  table: !type:GroupSelector
+    children:
+    - id: WFMobVerdaDeerTwoHeaded
+      weight: 3
+    - id: WFMobVerdaScarRat
+      weight: 4
+      rolls: !type:RangeNumberSelector
+        range: 2, 3
+    - id: MobLizard
+      weight: 2
+    - id: MobSnake
+      weight: 1
+
+# The rat king and his pack: placed rarely, in the middle of a scar.
+- type: entityTable
+  id: WFFaunaVerdaRatKing
+  table: !type:AllSelector
+    children:
+    - id: WFMobVerdaRatKing
+    - id: WFMobVerdaScarRat
+      rolls: !type:ConstantNumberSelector
+        value: 3
+
+- type: entityTable
+  id: WFFaunaVerdaSnow
+  table: !type:GroupSelector
+    children:
+    - id: MobPenguin
+      weight: 5
+      rolls: !type:RangeNumberSelector
+        range: 2, 3
+    - id: WFMobVerdaFrostBear
+      weight: 2
+
+- type: entity
+  id: WFFaunaVerdaMeadow
+  parent: MarkerBase
+  name: verda meadow wildlife spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaVerdaMeadow
+
+- type: entity
+  id: WFFaunaVerdaWoods
+  parent: MarkerBase
+  name: verda woodland wildlife spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaVerdaWoods
+
+- type: entity
+  id: WFFaunaVerdaBees
+  parent: MarkerBase
+  name: verda bee spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaVerdaBees
+
+- type: entity
+  id: WFFaunaVerdaGrass
+  parent: MarkerBase
+  name: verda tall grass spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaVerdaGrass
+
+- type: entity
+  id: WFFaunaVerdaShore
+  parent: MarkerBase
+  name: verda shore wildlife spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaVerdaShore
+
+- type: entity
+  id: WFFaunaVerdaScar
+  parent: MarkerBase
+  name: verda scar wildlife spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaVerdaScar
+
+- type: entity
+  id: WFFaunaVerdaRatKing
+  parent: MarkerBase
+  name: verda rat king spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaVerdaRatKing
+
+- type: entity
+  id: WFFaunaVerdaSnow
+  parent: MarkerBase
+  name: verda highland wildlife spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaVerdaSnow

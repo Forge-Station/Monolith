@@ -89,7 +89,7 @@ public sealed class CavernCommandTest
 
                 Assert.That(xform.MapUid, Is.EqualTo(world.Cavern), $"tp did not move the caller into the cavern:\n{string.Join('\n', tp)}");
                 Assert.That(maps.TileIndicesFor(world.Cavern, grid, xform.Coordinates), Is.EqualTo(ClimbTile(gate)),
-                    "tp did not land the caller on the gate pad beside the climb point.");
+                    "tp did not land the caller on the gate pad under the stairs top.");
             });
 
             // stats samples the cavern under a caller on that planet, and around the gate from anywhere else.
@@ -175,7 +175,7 @@ public sealed class CavernCommandTest
             Assert.That(after.Count(line => line.Contains("Admin")), Is.EqualTo(1),
                 $"mouths does not list the carved mouth:\n{string.Join('\n', after)}");
 
-            // A second mouth clear of the first one's hole and climb point, but whose pad would overwrite its landing, is refused.
+            // A second mouth clear of the first one's hole and stairs top, but whose pad would overwrite its landing, is refused.
             await server.WaitAssertion(() =>
             {
                 var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);

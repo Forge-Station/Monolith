@@ -1,0 +1,123 @@
+# The people met in the caverns (WFCavernEncounterSystem lays them out). Names and descriptions are in
+# Locale/en-US/_WF/CavernEncounters/encounters.ftl; they are dressed for the cavern's air by PlanetNpcGear.
+
+- type: entity
+  abstract: true
+  parent: BaseMobHuman
+  id: WFCavernPersonBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+  - type: InputMover
+  - type: MobMover
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: HTN
+    rootTask:
+      task: WFCavernWalkerCompound
+    blackboard:
+      FollowCloseRange: !type:Single
+        1.5
+      FollowRange: !type:Single
+        3
+      IdleRange: !type:Single
+        2
+
+# Tunnel raiders: a weak gang of scavengers with shivs and pipe shotguns. They run once badly hurt.
+- type: entity
+  abstract: true
+  parent: WFCavernPersonBase
+  id: WFMobTunnelRaiderBase
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: HTN
+    rootTask:
+      task: WFCavernRaiderCompound
+  - type: NPCRetaliation
+    attackMemoryLength: 10
+  - type: WFNpcIntent
+    set: WFIntentsTunnelRaider
+    holds: true
+  - type: WFCavernRaider
+    loot:
+    - ScrapSteel
+    - PartRodMetal1
+  - type: WFCavernTelegraph
+    sound:
+      collection: WFCavernEncounterRaiderChatter
+    minInterval: 15
+    maxInterval: 35
+
+- type: entity
+  parent: WFMobTunnelRaiderBase
+  id: WFMobTunnelRaider
+  components:
+  - type: Loadout
+    prototypes: [ WFCavernGearRaiderShiv ]
+
+- type: entity
+  parent: WFMobTunnelRaiderBase
+  id: WFMobTunnelRaiderGunner
+  components:
+  - type: WFNpcIntent
+    set: WFIntentsBandit
+    holds: true
+  - type: Loadout
+    prototypes: [ WFCavernGearRaiderGunner ]
+
+- type: startingGear
+  id: WFCavernGearRaiderShiv
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    mask: ClothingMaskBandBlack
+    gloves: ClothingHandsGlovesFingerless
+    shoes: ClothingShoesBootsWork
+  inhand:
+  - Shiv
+
+- type: startingGear
+  id: WFCavernGearRaiderGunner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    head: ClothingHeadBandBlack
+    outerClothing: ClothingOuterCoatJensen
+    shoes: ClothingShoesBootsWork
+  inhand:
+  - WeaponShotgunImprovisedLoaded
+
+# A surveyor who lost his way: wounded, he follows whoever offers to lead him out and pays them on the surface.
+- type: entity
+  parent: WFCavernPersonBase
+  id: WFMobLostSurveyor
+  components:
+  - type: WFCavernSurveyor
+  - type: Loadout
+    prototypes: [ WFCavernGearSurveyor ]
+
+- type: startingGear
+  id: WFCavernGearSurveyor
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    head: ClothingHeadHatHardhatOrange
+    outerClothing: ClothingOuterVestHazard
+    shoes: ClothingShoesBootsWork
+
+# A miner walled in by a rock fall; dig him out and he pays and walks off.
+- type: entity
+  parent: WFCavernPersonBase
+  id: WFMobTrappedMiner
+  components:
+  - type: WFTrappedMiner
+  - type: Loadout
+    prototypes: [ WFCavernGearTrappedMiner ]
+
+- type: startingGear
+  id: WFCavernGearTrappedMiner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    head: ClothingHeadHatHardhatYellow
+    shoes: ClothingShoesBootsWork

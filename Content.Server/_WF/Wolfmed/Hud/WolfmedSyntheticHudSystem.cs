@@ -38,6 +38,8 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
     private static readonly TimeSpan Interval = TimeSpan.FromSeconds(0.5);
 
     [Dependency] private BloodstreamSystem _blood = default!;
+
+    [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _dormancy = default!;
     [Dependency] private BodyPartFunctionalitySystem _functionality = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
@@ -67,7 +69,7 @@ public sealed class WolfmedSyntheticHudSystem : EntitySystem
         var query = EntityQueryEnumerator<WoundHostComponent, BodyComponent>();
         while (query.MoveNext(out var body, out _, out _))
         {
-            if (TerminatingOrDeleted(body))
+            if (TerminatingOrDeleted(body) || _dormancy.BodySleeps(body))
                 continue;
 
             if (!IsMechanicalBody(body))

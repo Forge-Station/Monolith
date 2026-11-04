@@ -12,34 +12,61 @@ lines its tunnels and chambers as the main light below ground. The Gut also pool
 digests whoever wades in, air or not, but spares its own creatures and anyone on a catwalk (`WFDigestiveAcidSystem`);
 whoever it burns hisses with a looping sizzle until they leave it or die (`WFDigestiveAcidHissSystem`),
 and chokes some throats with tendons that slow you (`Entities/gut.yml`).
-Caverns are behind `wf.caverns` (`CavernCVars`), which
-is off by default and on in development builds, and apply to networks built after it is set. Ships never go below
+The Rime Galleries, Umbral Deeps and Gut are laid out as big halls of their own, each a family of floor tiles (`Tiles/<world>.yml`), life
+(`Entities/Life/<world>.yml`, `Locale/en-US/_WF/Caverns/life_<world>.ftl`, spawner tables `WFCavernFauna<World><Hall>`) and soundscape
+(`Ambience/<world>.yml`, named by the cavern's `ambience`): the Rime Galleries' snowdrift hollows (rime bats, frost weavers, rime caps,
+hearth lichen), frozen falls of cyan, blue and dark ice (ice slimes, crystal crabs, frost bulbs, hanging icicles that fall in shards) and
+dark-shored plasma galleries (plasma crabs, plasma blooms); the Umbral Deeps' chromite crawls and bedrock galleries, shadow groves of
+blue-black floor (deep bats, shadow cats, umbral caps), geode chambers (geode crabs, pickable geode clusters, bursting geodes, radiant
+crystal, acid spitters) and a deep xenonid nest of hive floor, wild weeds, resin walls and eggs; the Gut's stomachs (bile slugs, gastric
+moss, acid polyps), nerve tangles (antibodies, nerve whips that shock), an ossuary of calcified bone (bone burrowers, marrow caps, bone piles)
+and clotted blood banks with leeches. Harvestables are common and hazards rare; every hall keeps the world's open share and tunnels connected.
+Caverns come with planets: `wf.caverns` (`CavernCVars`) is on by default, so every network built while
+`wf.planet_networks` is on gets one; set it false to build worlds without them (it applies to networks built after it
+is set). Integration tests run with it off unless they turn it on. Ships never go below
 ground, and nobody on or above the ground loads the cavern under them except near a mouth, where it shows through the
 hole.
+
+The Underkarst, the Cinder Vaults and the Sandstone Galleries are split into zones, each a stretch of ground over a
+hundred tiles across picked by one low-frequency noise (halls by default, a second zone where it runs high, a third
+where it runs low). A zone opens its caverns wider than the default and floors them in its own tile inside a rim of
+the common chamber floor, and has its own plants (a harvestable and a rare hazard from the LivingWorld components),
+wildlife table and fauna marker (`WFCavernFauna<World><Zone>`), all in `Resources/Prototypes/_WF/Caverns/Life/`:
+the Underkarst's dripstone halls (flowstone, droplet lichen, grasping roots, pale bats and crabs), flooded grottos (wet
+rock, pools, reeds, acid pitchers, frogs and crabs) and mushroom hollows (cave soil, cave caps, spore puffballs, cave
+spiders); the Cinder Vaults' ash chambers (magma lakes, the argocytes), obsidian galleries (cinder shelves, fire pods,
+cinder spiders, ember vipers) and sulphur vents (sulphur blooms, vent caps, slag ticks, sulphur carp); the Sandstone
+Galleries' pillared halls (gallery aloe, sand snares, dust bats, crabs), fossil beds (marrow caps, brittle geodes,
+pallid sandvipers) and buried ruin quarter (gravebloom, dust pods, crypt ticks). Each of the three plays its own
+cavern soundscape (`ambience`) instead of the muffled surface one. The animals are recoloured by
+`Tools/_WF/Caverns/gen_life_karst_cinder_sandstone.py`.
 
 Every world has a gate mouth near its centre: a pinned hole in the ground, grown from its own seed to the world's shape
 and size (`WFCavernMouthShape`: a sinkhole, a skylight, a sand funnel, a rift, a moulin or a throat, never a plain
 rectangle), with a solid lip and rim decor in proportion to its size. Looking into a mouth you see the cavern below
-through it, drawn by CE's z-level renderer: the landing floor or plunge pool, the climb point and whatever stands down
+through it, drawn by CE's z-level renderer: the landing floor or plunge pool, the stairs and whatever stands down
 there, lit where daylight falls in. A shade over each hole tile only frames that view: on the dual grid it draws the
 lip crumbling over the hole's own tiles, so the hole shows no square corner, and leaves their middle clear
-(`WFCavernShadeVisualsSystem`, art from `Tools/_WF/Caverns/gen_pits.py`). In the cavern a pinned, rock-free pad holds
-the world's landing tile under the hole and a climb point under the lip. Players walk in and take a small fall whose damage depends on the landing tile;
-examining a shade tells them where it goes, what the air below is like and how hard the landing is. *Climb down* on a
-shade (3 s) lowers them unhurt onto the pad instead, and *Climb up* on a climb point (verb or activate; 4 s, longer in
-high gravity, up to 10 s on Aerumna) brings them out onto the nearest solid ground beside the hole, refused while a ship
-is parked over it. Whatever a climber is pulling comes with them, up or down. Admins use `wfcavern` to list caverns, teleport to a gate (`tp <planet> [pad|mouth]`), list mouths,
+(`WFCavernShadeVisualsSystem`, art from `Tools/_WF/Caverns/gen_pits.py`). The art is the same on every world and has
+no ground of its own: the client lays the most common floor round each shade under its lip, so a hole cut in a road or a
+jelly patch keeps that floor at its edge. In the cavern a pinned, rock-free pad holds
+the world's landing tile under the hole and, under the hole tile at the edge on the stairs side, walkable stairs up to the lip
+(rock-cut steps, ice steps or flesh ridges, CE's stone stairs recoloured per world). Players walk in and take a small fall whose damage depends on the landing tile;
+examining a shade tells them where it goes, what the air below is like and how hard the landing is. Falling is the way down;
+walking the stairs is the way back up, and down again without a fall. Whatever a walker is pulling comes with them, up or down. Admins use `wfcavern` to list caverns, teleport to a gate (`tp <planet> [pad|mouth]`), list mouths,
 carve one by hand (`open`) and measure the terrain around them (`stats <planet>`: open share, connectivity on foot,
 ore share and how much of the tunnel floor is within a short walk of a light, over a 192-tile square, read from noise
 by `WFCavernSampler`, the same sampler the cavern tests use).
 
-There are ways down everywhere, not only at the gate. The ground is split into cells about 96 tiles across, and each
+There are ways down everywhere, not only at the gate. On a world that preloads its ground (the Planets
+`WFPlanetPreloadStartingEvent`) every cell inside the circle is claimed first, in one go, since the lazy claims below
+only ever cut unloaded ground; a site must lie wholly inside the circle. The ground is split into cells about 96 tiles across, and each
 cell's mouth is claimed ahead of whoever loads terrain there (players, admin ghosts, and the eye on the ground of anyone
 flying above), never into loaded ground or ground about to load (`wf.cavern_claims`, on by default). Any ground tile
 that becomes a real hole, dug, blown, pried, cut or taken by an RCD, is fitted out within a tick by the hole queue:
 pinned, the world's landing tile under it in a cleared 3x3 of cavern floor (floor someone laid there is left as it
-is), a shade, and a climb point beside it unless
-one is a walk of 8 steps or less away; tiles a chunk unload empties are told apart by the pin and left alone. A shovel digs a 15 s
+is), a shade, and cut stairs under it, coming out on a solid neighbour, unless
+stairs are a walk of 8 steps or less away; tiles a chunk unload empties are told apart by the pin and left alone. A shovel digs a 15 s
 shaft through natural ground it can't otherwise dig (Fervidus basalt, the Asclepiu plains, Thrascias ice, Aerumna
 chromite, Carcinoma flesh, the bedrock under dug snow). Acid no longer opens ground over a cavern that no tool can dig,
 and nothing opens the cavern floor: it has no base turf, and a cavern tile emptied some other way is filled again.
@@ -47,31 +74,30 @@ Only someone standing on the ground sees down a hole; from the air it shows dark
 holds its own air, as on the surface (the Planets terrain atmosphere); the cavern floor and the pad under a mouth,
 named through `WFTerrainOpenTilesEvent`, are bare ground and keep the cavern's air.
 
-A way up that is walked rather than climbed is built. *Cavern stairs* (construction menu, Structures: 10 steel, 8 s,
+Stairs can be built too. *Cavern stairs* (construction menu, Structures: 10 steel, 8 s,
 unbolted with a wrench for the steel back) go on a cavern floor and open the ground tile above them, coming out on the
-side they climb towards; from the surface, dig a shaft, climb down and build them under it. They are CE high ground
+side they climb towards; from the surface, dig a shaft, drop down and build them under it. They are CE high ground
 under a hole, so a mob walks them up and down with one level change and no fall, and whatever it is pulling changes
 level with it. The recipe is refused, with the reason, under laid floor, under something built or a parked ship, and
 where the tile at their top is a hole or built on. Opening takes what the biome grew on the hole and the tile at the
 top and pins both, on ground that isn't loaded too, and stairs that could not open, such as under a ship that landed
-while they were built, try again every 5 s. The hole queue gives a hole over stairs no landing and no climb point, and
-both once the stairs are gone.
+while they were built, try again every 5 s. The hole queue gives a hole over stairs, these or a map's own stairway (any CE high ground), no landing and no
+cut stairs, and a plain shade that draws no lip: a stairwell, not a sinkhole. Once built stairs are gone the hole
+gets both, and the lip. The cut stairs are the caverns' own: they open the ground above them the same way, stand in the
+registry (`WFCavernGroundComponent.Stairways`), are not taken apart, and come back if something deletes them.
 
 Entry points: `WFCavernSystem` adds the cavern map through the Planets `WFPlanetLowerLayersEvent`, then fits it out on
 `WFPlanetNetworkBuiltEvent` (its own atmosphere, no day cycle, sun shadows or parallax, the roof colour), links the
 ground to it with `WFCavernGroundComponent` and asks `WFCavernMouthSystem` to claim the gate. `WFCavernMouthSystem`
 evaluates mouth cells from pure noise (`.Claims.cs`: seeded candidates, ground and cavern checks, stamping, and the
 polling that claims them within a small budget a tick), runs the hole queue (`.Holes.cs`) and keeps the registry of
-cells, mouths, shades and climb points on the ground; its API is `GetGate`, `TryClaimCell`, `EvaluateCell`,
+cells, mouths, shades and cut stairs on the ground; its API is `GetGate`, `TryClaimCell`, `EvaluateCell`,
 `TryOpenMouth` and `TryGetNearestMouth`, and for stairs (`.Stairs.cs`) `CheckStairs`, `TryOpenStairs`, `IsOpenAbove` and
 `RefitHole`. `WFCavernStairsSystem` opens the ground when stairs appear, answers the recipe's `WFCavernStairsSite`
 condition (a client only knows whether it stands in a cavern; the server checks the ground above and pops up why
-not), and hands a pull that ended on the stairs to the climb system. `WFCavernDigSystem` digs the shovel shafts and tells the marked block in
+not), and carries a pull that ended on the stairs across the level change. `WFCavernDigSystem` digs the shovel shafts and tells the marked block in
 `PryTileReaction` which ground acid leaves alone. The shaft examine is `SharedWFCavernShaftSystem`, fed by the air reading
-(`WFCavernAirClassifier`) each shade stores when it spawns. `SharedWFCavernClimbSystem` offers the climb verbs, starts
-the DoAfter with its predicted popups and examines climb points; the server's `WFCavernClimbSystem` does the move when
-it finishes (`ClimbUp`, `ClimbDown`, `FindExit`) and brings along what the climber, or a walker on stairs, was pulling
-(`BringPulled`): a level change clears every joint, so a tick later, once the hand that held the pull is free again,
+(`WFCavernAirClassifier`) each shade stores when it spawns. Whatever a walker on stairs was pulling is brought along by the stairs system (`BringPulled`): a level change clears every joint, so a tick later, once the hand that held the pull is free again,
 it puts what was pulled on its puller's spot on the new level and takes hold of it again with a tile of rope. `WFCavernSystem` also deletes surface wildlife that drops
 into a cavern because its ground chunk unloaded (`BiomeSystem.WfIsChunkLoaded`), and each second mirrors the ground's
 clock onto the cavern (watches read "Underground") along with its soundscape: the surface's day and night ambience,
@@ -98,7 +124,6 @@ and leaves anything airborne to the server. The design, including what is still 
 
 - [`Content.Server/_WF/Caverns/BiomeSystem.Caverns.cs`](BiomeSystem.Caverns.cs)
 - [`Content.Server/_WF/Caverns/CEZLevelsSystem.Caverns.cs`](CEZLevelsSystem.Caverns.cs)
-- [`Content.Server/_WF/Caverns/WFCavernClimbSystem.cs`](WFCavernClimbSystem.cs)
 - [`Content.Server/_WF/Caverns/WFCavernCommand.cs`](WFCavernCommand.cs)
 - [`Content.Server/_WF/Caverns/WFCavernDigSystem.cs`](WFCavernDigSystem.cs)
 - [`Content.Server/_WF/Caverns/WFCavernEyeSystem.cs`](WFCavernEyeSystem.cs)
@@ -107,9 +132,11 @@ and leaves anything airborne to the server. The design, including what is still 
 - [`Content.Server/_WF/Caverns/WFCavernMouthSystem.Claims.cs`](WFCavernMouthSystem.Claims.cs)
 - [`Content.Server/_WF/Caverns/WFCavernMouthSystem.cs`](WFCavernMouthSystem.cs)
 - [`Content.Server/_WF/Caverns/WFCavernMouthSystem.Holes.cs`](WFCavernMouthSystem.Holes.cs)
+- [`Content.Server/_WF/Caverns/WFCavernMouthSystem.Preclaim.cs`](WFCavernMouthSystem.Preclaim.cs)
 - [`Content.Server/_WF/Caverns/WFCavernMouthSystem.Stairs.cs`](WFCavernMouthSystem.Stairs.cs)
 - [`Content.Server/_WF/Caverns/WFCavernSampler.cs`](WFCavernSampler.cs)
 - [`Content.Server/_WF/Caverns/WFCavernStairsSystem.cs`](WFCavernStairsSystem.cs)
+- [`Content.Server/_WF/Caverns/WFCavernStairsSystem.Pulled.cs`](WFCavernStairsSystem.Pulled.cs)
 - [`Content.Server/_WF/Caverns/WFCavernSystem.cs`](WFCavernSystem.cs)
 - [`Content.Server/_WF/Caverns/WFCavernViewerComponent.cs`](WFCavernViewerComponent.cs)
 - [`Content.Server/_WF/Caverns/WFDigestiveAcidHissComponent.cs`](WFDigestiveAcidHissComponent.cs)
@@ -118,12 +145,9 @@ and leaves anything airborne to the server. The design, including what is still 
 ### Shared
 
 - [`Content.Shared/_WF/Caverns/CESharedZLevelsSystem.Caverns.cs`](../../../Content.Shared/_WF/Caverns/CESharedZLevelsSystem.Caverns.cs)
-- [`Content.Shared/_WF/Caverns/SharedWFCavernClimbSystem.cs`](../../../Content.Shared/_WF/Caverns/SharedWFCavernClimbSystem.cs)
 - [`Content.Shared/_WF/Caverns/SharedWFCavernShaftSystem.cs`](../../../Content.Shared/_WF/Caverns/SharedWFCavernShaftSystem.cs)
 - [`Content.Shared/_WF/Caverns/SharedWFCavernStairsSystem.cs`](../../../Content.Shared/_WF/Caverns/SharedWFCavernStairsSystem.cs)
 - [`Content.Shared/_WF/Caverns/WFCavernAir.cs`](../../../Content.Shared/_WF/Caverns/WFCavernAir.cs)
-- [`Content.Shared/_WF/Caverns/WFCavernClimbComponent.cs`](../../../Content.Shared/_WF/Caverns/WFCavernClimbComponent.cs)
-- [`Content.Shared/_WF/Caverns/WFCavernClimbDoAfterEvent.cs`](../../../Content.Shared/_WF/Caverns/WFCavernClimbDoAfterEvent.cs)
 - [`Content.Shared/_WF/Caverns/WFCavernLayerComponent.cs`](../../../Content.Shared/_WF/Caverns/WFCavernLayerComponent.cs)
 - [`Content.Shared/_WF/Caverns/WFCavernMouthSpec.cs`](../../../Content.Shared/_WF/Caverns/WFCavernMouthSpec.cs)
 - [`Content.Shared/_WF/Caverns/WFCavernPrototype.cs`](../../../Content.Shared/_WF/Caverns/WFCavernPrototype.cs)
@@ -138,8 +162,9 @@ and leaves anything airborne to the server. The design, including what is still 
 
 - [`Content.Client/_WF/Caverns/CEClientZLevelsSystem.Caverns.cs`](../../../Content.Client/_WF/Caverns/CEClientZLevelsSystem.Caverns.cs)
 - [`Content.Client/_WF/Caverns/ScalingViewport.Caverns.cs`](../../../Content.Client/_WF/Caverns/ScalingViewport.Caverns.cs)
-- [`Content.Client/_WF/Caverns/WFCavernClimbSystem.cs`](../../../Content.Client/_WF/Caverns/WFCavernClimbSystem.cs)
+- [`Content.Client/_WF/Caverns/WFCavernShadeVisualsSystem.Covered.cs`](../../../Content.Client/_WF/Caverns/WFCavernShadeVisualsSystem.Covered.cs)
 - [`Content.Client/_WF/Caverns/WFCavernShadeVisualsSystem.cs`](../../../Content.Client/_WF/Caverns/WFCavernShadeVisualsSystem.cs)
+- [`Content.Client/_WF/Caverns/WFCavernShadeVisualsSystem.Floors.cs`](../../../Content.Client/_WF/Caverns/WFCavernShadeVisualsSystem.Floors.cs)
 - [`Content.Client/_WF/Caverns/WFCavernStairsSystem.cs`](../../../Content.Client/_WF/Caverns/WFCavernStairsSystem.cs)
 - [`Content.Client/_WF/Caverns/WFCavernViewSystem.cs`](../../../Content.Client/_WF/Caverns/WFCavernViewSystem.cs)
 
@@ -147,7 +172,6 @@ and leaves anything airborne to the server. The design, including what is still 
 
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernAmbienceTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernAmbienceTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernBiomeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernBiomeTest.cs)
-- [`Content.IntegrationTests/Tests/_WF/Caverns/CavernClimbTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernClimbTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernCommandTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernCommandTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernFallTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernFallTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernFixture.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernFixture.cs)
@@ -156,12 +180,17 @@ and leaves anything airborne to the server. The design, including what is still 
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernGutTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernGutTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernHoleTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernHoleTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernHullTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernHullTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Caverns/CavernLifeKarstCinderSandstoneTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernLifeKarstCinderSandstoneTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Caverns/CavernLifeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernLifeTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernMouthTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernMouthTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernNetworkTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernNetworkTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernOrbitalFallTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernOrbitalFallTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Caverns/CavernPitFloorTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernPitFloorTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Caverns/CavernPreclaimTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernPreclaimTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernPrototypeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernPrototypeTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernRampTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernRampTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernRoofTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernRoofTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Caverns/CavernStairwayTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernStairwayTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernViewerEyeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernViewerEyeTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernViewTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernViewTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Caverns/CavernWildlifeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Caverns/CavernWildlifeTest.cs)
@@ -173,6 +202,9 @@ and leaves anything airborne to the server. The design, including what is still 
 
 ### Prototypes
 
+- [`Resources/Prototypes/_WF/Caverns/Ambience/aerumna.yml`](../../../Resources/Prototypes/_WF/Caverns/Ambience/aerumna.yml)
+- [`Resources/Prototypes/_WF/Caverns/Ambience/carcinoma.yml`](../../../Resources/Prototypes/_WF/Caverns/Ambience/carcinoma.yml)
+- [`Resources/Prototypes/_WF/Caverns/Ambience/thrascias.yml`](../../../Resources/Prototypes/_WF/Caverns/Ambience/thrascias.yml)
 - [`Resources/Prototypes/_WF/Caverns/Biomes/aerumna.yml`](../../../Resources/Prototypes/_WF/Caverns/Biomes/aerumna.yml)
 - [`Resources/Prototypes/_WF/Caverns/Biomes/asclepiu.yml`](../../../Resources/Prototypes/_WF/Caverns/Biomes/asclepiu.yml)
 - [`Resources/Prototypes/_WF/Caverns/Biomes/carcinoma.yml`](../../../Resources/Prototypes/_WF/Caverns/Biomes/carcinoma.yml)
@@ -184,33 +216,68 @@ and leaves anything airborne to the server. The design, including what is still 
 - [`Resources/Prototypes/_WF/Caverns/Entities/fauna.yml`](../../../Resources/Prototypes/_WF/Caverns/Entities/fauna.yml)
 - [`Resources/Prototypes/_WF/Caverns/Entities/flora.yml`](../../../Resources/Prototypes/_WF/Caverns/Entities/flora.yml)
 - [`Resources/Prototypes/_WF/Caverns/Entities/gut.yml`](../../../Resources/Prototypes/_WF/Caverns/Entities/gut.yml)
+- [`Resources/Prototypes/_WF/Caverns/Entities/Life/aerumna.yml`](../../../Resources/Prototypes/_WF/Caverns/Entities/Life/aerumna.yml)
+- [`Resources/Prototypes/_WF/Caverns/Entities/Life/carcinoma.yml`](../../../Resources/Prototypes/_WF/Caverns/Entities/Life/carcinoma.yml)
+- [`Resources/Prototypes/_WF/Caverns/Entities/Life/thrascias.yml`](../../../Resources/Prototypes/_WF/Caverns/Entities/Life/thrascias.yml)
 - [`Resources/Prototypes/_WF/Caverns/Entities/mouths.yml`](../../../Resources/Prototypes/_WF/Caverns/Entities/mouths.yml)
 - [`Resources/Prototypes/_WF/Caverns/Entities/stairs.yml`](../../../Resources/Prototypes/_WF/Caverns/Entities/stairs.yml)
 - [`Resources/Prototypes/_WF/Caverns/levels.yml`](../../../Resources/Prototypes/_WF/Caverns/levels.yml)
+- [`Resources/Prototypes/_WF/Caverns/Life/ambience_karst_cinder_sandstone.yml`](../../../Resources/Prototypes/_WF/Caverns/Life/ambience_karst_cinder_sandstone.yml)
+- [`Resources/Prototypes/_WF/Caverns/Life/asclepiu.yml`](../../../Resources/Prototypes/_WF/Caverns/Life/asclepiu.yml)
+- [`Resources/Prototypes/_WF/Caverns/Life/fervidus.yml`](../../../Resources/Prototypes/_WF/Caverns/Life/fervidus.yml)
+- [`Resources/Prototypes/_WF/Caverns/Life/merak.yml`](../../../Resources/Prototypes/_WF/Caverns/Life/merak.yml)
 - [`Resources/Prototypes/_WF/Caverns/Recipes/stairs.yml`](../../../Resources/Prototypes/_WF/Caverns/Recipes/stairs.yml)
 - [`Resources/Prototypes/_WF/Caverns/tiles.yml`](../../../Resources/Prototypes/_WF/Caverns/tiles.yml)
+- [`Resources/Prototypes/_WF/Caverns/Tiles/aerumna.yml`](../../../Resources/Prototypes/_WF/Caverns/Tiles/aerumna.yml)
+- [`Resources/Prototypes/_WF/Caverns/Tiles/asclepiu.yml`](../../../Resources/Prototypes/_WF/Caverns/Tiles/asclepiu.yml)
+- [`Resources/Prototypes/_WF/Caverns/Tiles/carcinoma.yml`](../../../Resources/Prototypes/_WF/Caverns/Tiles/carcinoma.yml)
+- [`Resources/Prototypes/_WF/Caverns/Tiles/fervidus.yml`](../../../Resources/Prototypes/_WF/Caverns/Tiles/fervidus.yml)
+- [`Resources/Prototypes/_WF/Caverns/Tiles/merak.yml`](../../../Resources/Prototypes/_WF/Caverns/Tiles/merak.yml)
+- [`Resources/Prototypes/_WF/Caverns/Tiles/thrascias.yml`](../../../Resources/Prototypes/_WF/Caverns/Tiles/thrascias.yml)
 
 ### Localization
 
 - [`Resources/Locale/en-US/_WF/Caverns/caverns.ftl`](../../../Resources/Locale/en-US/_WF/Caverns/caverns.ftl)
 - [`Resources/Locale/en-US/_WF/Caverns/commands.ftl`](../../../Resources/Locale/en-US/_WF/Caverns/commands.ftl)
 - [`Resources/Locale/en-US/_WF/Caverns/entities.ftl`](../../../Resources/Locale/en-US/_WF/Caverns/entities.ftl)
+- [`Resources/Locale/en-US/_WF/Caverns/life_aerumna.ftl`](../../../Resources/Locale/en-US/_WF/Caverns/life_aerumna.ftl)
+- [`Resources/Locale/en-US/_WF/Caverns/life_asclepiu.ftl`](../../../Resources/Locale/en-US/_WF/Caverns/life_asclepiu.ftl)
+- [`Resources/Locale/en-US/_WF/Caverns/life_carcinoma.ftl`](../../../Resources/Locale/en-US/_WF/Caverns/life_carcinoma.ftl)
+- [`Resources/Locale/en-US/_WF/Caverns/life_fervidus.ftl`](../../../Resources/Locale/en-US/_WF/Caverns/life_fervidus.ftl)
+- [`Resources/Locale/en-US/_WF/Caverns/life_merak.ftl`](../../../Resources/Locale/en-US/_WF/Caverns/life_merak.ftl)
+- [`Resources/Locale/en-US/_WF/Caverns/life_thrascias.ftl`](../../../Resources/Locale/en-US/_WF/Caverns/life_thrascias.ftl)
 
 ### Textures
 
 - [`Resources/Textures/_WF/Caverns/digestive_acid.rsi/`](../../../Resources/Textures/_WF/Caverns/digestive_acid.rsi/)
 - [`Resources/Textures/_WF/Caverns/glow_flora.rsi/`](../../../Resources/Textures/_WF/Caverns/glow_flora.rsi/)
-- [`Resources/Textures/_WF/Caverns/Mouths/aerumna_pit.rsi/`](../../../Resources/Textures/_WF/Caverns/Mouths/aerumna_pit.rsi/)
-- [`Resources/Textures/_WF/Caverns/Mouths/asclepiu_pit.rsi/`](../../../Resources/Textures/_WF/Caverns/Mouths/asclepiu_pit.rsi/)
-- [`Resources/Textures/_WF/Caverns/Mouths/carcinoma_pit.rsi/`](../../../Resources/Textures/_WF/Caverns/Mouths/carcinoma_pit.rsi/)
-- [`Resources/Textures/_WF/Caverns/Mouths/fervidus_pit.rsi/`](../../../Resources/Textures/_WF/Caverns/Mouths/fervidus_pit.rsi/)
-- [`Resources/Textures/_WF/Caverns/Mouths/merak_pit.rsi/`](../../../Resources/Textures/_WF/Caverns/Mouths/merak_pit.rsi/)
-- [`Resources/Textures/_WF/Caverns/Mouths/thrascias_pit.rsi/`](../../../Resources/Textures/_WF/Caverns/Mouths/thrascias_pit.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/antibody.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/antibody.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/asclepiu/cave_crab.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/asclepiu/cave_crab.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/asclepiu/cave_frog.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/asclepiu/cave_frog.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/asclepiu/cave_spider.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/asclepiu/cave_spider.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/asclepiu/pale_bat.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/asclepiu/pale_bat.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/bile_slug.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/bile_slug.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/deep_bat.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/deep_bat.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/fervidus/cinder_spider.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/fervidus/cinder_spider.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/fervidus/ember_viper.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/fervidus/ember_viper.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/fervidus/slag_tick.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/fervidus/slag_tick.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/fervidus/sulphur_carp.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/fervidus/sulphur_carp.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/merak/crypt_tick.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/merak/crypt_tick.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/merak/dust_bat.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/merak/dust_bat.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/merak/gallery_crab.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/merak/gallery_crab.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/merak/pallid_viper.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/merak/pallid_viper.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/rime_bat.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/rime_bat.rsi/)
+- [`Resources/Textures/_WF/Caverns/Life/rime_slime.rsi/`](../../../Resources/Textures/_WF/Caverns/Life/rime_slime.rsi/)
+- [`Resources/Textures/_WF/Caverns/Mouths/attributions.yml`](../../../Resources/Textures/_WF/Caverns/Mouths/attributions.yml)
+- [`Resources/Textures/_WF/Caverns/Mouths/pit.rsi/`](../../../Resources/Textures/_WF/Caverns/Mouths/pit.rsi/)
+- [`Resources/Textures/_WF/Caverns/Mouths/pit_lips.png`](../../../Resources/Textures/_WF/Caverns/Mouths/pit_lips.png)
 - [`Resources/Textures/_WF/Caverns/Stairs/steel.rsi/`](../../../Resources/Textures/_WF/Caverns/Stairs/steel.rsi/)
 
 ### Tools
 
 - [`Tools/_WF/Caverns/gen_flavour.py`](../../../Tools/_WF/Caverns/gen_flavour.py)
+- [`Tools/_WF/Caverns/gen_life.py`](../../../Tools/_WF/Caverns/gen_life.py)
+- [`Tools/_WF/Caverns/gen_life_karst_cinder_sandstone.py`](../../../Tools/_WF/Caverns/gen_life_karst_cinder_sandstone.py)
 - [`Tools/_WF/Caverns/gen_pits.py`](../../../Tools/_WF/Caverns/gen_pits.py)
 - [`Tools/_WF/Caverns/gen_stairs.py`](../../../Tools/_WF/Caverns/gen_stairs.py)
 
@@ -222,6 +289,7 @@ and leaves anything airborne to the server. The design, including what is still 
 
 - [`Content.Client/_CE/ZLevels/Core/ScalingViewport.CEZLevels.cs`](../../../Content.Client/_CE/ZLevels/Core/ScalingViewport.CEZLevels.cs): the cavern shows through the ground's holes.
 - [`Content.Client/Parallax/ParallaxOverlay.cs`](../../../Content.Client/Parallax/ParallaxOverlay.cs): no sky in a cavern or through a cavern mouth.
+- [`Content.IntegrationTests/PoolManager.Cvars.cs`](../../../Content.IntegrationTests/PoolManager.Cvars.cs): tests that want a cavern turn caverns on themselves
 - [`Content.Server/_CE/ZLevels/Core/CEZLevelsSystem.View.cs`](../../_CE/ZLevels/Core/CEZLevelsSystem.View.cs)
   - the level above the next eye, for the ground cap below.
   - under a ground layer, eyes only on its cavern and only while a hole is in view.
@@ -230,7 +298,6 @@ and leaves anything airborne to the server. The design, including what is still 
 - [`Content.Shared/_CE/ZLevels/Core/EntitySystems/CESharedZLevelsSystem.Update.cs`](../../../Content.Shared/_CE/ZLevels/Core/EntitySystems/CESharedZLevelsSystem.Update.cs)
   - stepping down onto stairs is not a fall
   - ground over a cavern is a ceiling even where it isn't loaded
-- [`Resources/ConfigPresets/Build/development.toml`](../../../Resources/ConfigPresets/Build/development.toml): caverns are on in development builds.
 - [`Resources/Prototypes/Recipes/Lathes/Packs/engineering.yml`](../../../Resources/Prototypes/Recipes/Lathes/Packs/engineering.yml): shovels dig cavern shafts on planets
 
 <!-- WOLFGATE-GENERATED END -->

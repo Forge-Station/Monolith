@@ -117,6 +117,24 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
                 Margin = new Thickness(0f, 0f, 0f, 5f),
             });
 
+            // WOLFGATE(PlanetExpeditions) START: a site mission names its site and world
+            if (missionParams.WfSite != null)
+            {
+                lBox.AddChild(new Label
+                {
+                    Text = Loc.GetString("wf-expedition-window-site")
+                });
+
+                lBox.AddChild(new Label
+                {
+                    Text = Loc.GetString("wf-expedition-window-site-value", ("site", Loc.GetString(missionParams.WfSite)), ("world", missionParams.WfWorld ?? string.Empty)),
+                    FontColorOverride = StyleNano.NanoGold,
+                    HorizontalAlignment = HAlignment.Left,
+                    Margin = new Thickness(0f, 0f, 0f, 5f),
+                });
+            }
+            // WOLFGATE END
+
             // Details
             var details = _salvage.GetMissionDescription(mission);
 
@@ -166,6 +184,10 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
                 Margin = new Thickness(0f, 0f, 0f, 5f),
             });
 
+            // WOLFGATE(PlanetExpeditions) START: a site has its world's biome and no modifiers to show
+            if (missionParams.WfSite == null)
+            {
+            // WOLFGATE END
             // Biome
             lBox.AddChild(new Label
             {
@@ -202,6 +224,9 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
                 HorizontalAlignment = HAlignment.Left,
                 Margin = new Thickness(0f, 0f, 0f, 5f),
             });
+            // WOLFGATE(PlanetExpeditions) START: end of the generated-map details
+            }
+            // WOLFGATE END
 
             // Frontier: only show rewards if enabled via cvar and not empty
             if (_cfgManager.GetCVar(NFCCVars.SalvageExpeditionRewardsEnabled) && mission.Rewards.Count > 0)

@@ -244,6 +244,11 @@ public abstract partial class CESharedZLevelsSystem
             }
 
             //No ZEntities found, check floor tiles
+            // WOLFGATE(Planets) START: a roof one layer down is something to stand on, not to drop through.
+            if (floor > 0 && !_gridQuery.HasComp(target) && WfRoofedBelow(gridUid, grid, gridTile))
+                return -floor + 1;
+            // WOLFGATE END
+
             if (_map.TryGetTileRef(gridUid, grid, gridTile, out var tileRef) &&
                 !tileRef.Tile.IsEmpty)
                 return -floor; // tile ground has groundY == 0 -> -floor

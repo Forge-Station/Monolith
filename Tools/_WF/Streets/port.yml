@@ -1,0 +1,305 @@
+# What port_streets.py brings over, and how each prototype is changed on the way. Sources are the checkouts the Vehicles
+# tools read (Tools/_WF/Vehicles/import_files.yml): `rmc` is RMC-14, `cmu` is Colonial Marines Universe.
+# A path under _RMC14 is taken from RMC-14's own copy where it has one, so its licence trail is RMC's.
+
+# The entity category every ported entity gets, for the spawn menu.
+category: WFStreets
+
+# A parent Wolfgate lacks -> the one that stands in for it.
+parents:
+  CMBaseStructureCorrodible: BaseStructure
+
+# Components dropped whole, with the reason the report prints. One clause each.
+drop_components:
+  Construction: no building recipes are ported; mappers and admins place these
+  Corrodible: no acid
+  RMCReactorPoweredLight: no colony reactor; the light is always on
+  ToggleableVisuals: nothing toggles the light; it is always on
+  PreventAttackLightOff: RMC light rule
+  RMCDropshipBlocked: no dropships
+  MinimapColor: no tactical map
+  DamageOnXenoScissors: no xenos
+  XenoToggleChargingDamage: no xenos
+  XenoCrusherChargable: no xenos
+  MeleeReceivedMultiplier: no xenos
+  InsertBlacklist: its blacklist names xenos
+  InteractedBlacklist: its blacklist names xenos
+  RMCMesonsNonviewable: no RMC mesons
+  PlacementReplacement: RMC construction rule
+  ImmuneToUnarmed: RMC damage rule
+  ProjectileDamageReceived: RMC damage rule
+  RMCWallExplosionDeletable: RMC wall rules
+  DeleteOnExplosion: RMC explosion rule
+  ExplosionResistance: RMC's explosion numbers do not fit Wolfgate's
+  CrateOpenable: RMC crate rule
+  SpawnOnTerminate: it spawns RMC loot
+  Flamability: RMC fire
+  BarricadeBlock: RMC barricade rule
+  CMUReconFurniture: CMU recon rule
+  BlockXenoConstruction: no xenos
+  ResinClearable: no xenos
+  RMCBreakLightOnAttack: RMC light rule
+  EvacuationPump: no evacuation
+  RMCPowerReceiver: no RMC power
+
+# Fields dropped from a component that stays.
+drop_fields:
+  PointLight:
+    netsync: the engine no longer has it
+  Sprite:
+    netsync: the engine no longer has it
+  VehicleSmashable:
+    selfDamageMultiplier: CMU-only field
+
+# Collision bits Wolfgate does not have, removed from fixture masks and layers.
+drop_list_values:
+  BarricadeImpassable: no such collision bit
+  DropshipImpassable: no such collision bit
+
+# Damage ids Wolfgate lacks -> the nearest it has.
+rename_values:
+  damageContainer:
+    StructuralMarine: StructuralInorganic
+  damageModifierSet:
+    StructuralMarine: Metallic
+
+# Light mask textures -> the lightMask prototype that draws them.
+light_masks:
+  /Textures/_WF/Streets/Effects/LightMasks/quad_cone.png: ConeQuad
+
+# Lit states drawn on an unshaded layer are full copies of the sprite. Each one is cut down to the pixels that differ from
+# its unlit state (the lamps), so the pole and housing stay shaded. RSI under the textures folder -> [unlit, lit] pairs.
+lamp_masks:
+  Objects/Misc/Lights/floodlightbig.rsi: [[bigflood, bigfloodon]]
+  Objects/Misc/Lights/streetlight.rsi: [[street_off, street_on]]
+  Objects/Misc/Lights/trafficlights.rsi: [[trafficlight, trafficlight_on], [trafficlight_alt, trafficlight_alt_on]]
+
+# Entities a destruction spawns that Wolfgate knows by another id.
+rename_entities:
+  CMSheetMetal1: SheetSteel1
+  CMSheetGlass1: SheetGlass1
+  CMRodMetal: PartRodMetal1
+
+# RMC's planet base gives every outdoor tile grass footsteps; only tiles with these names keep them.
+grass_footsteps: [dirt, unweedable dirt, dirt road, shale]
+
+# RMC breaks a light by moving it to a construction node; here it spawns the broken twin named below and is destroyed.
+break_into:
+  RMCTallFloodlight: RMCFloodlightBroken
+  RMCStreetlight: RMCStreetlightBroken
+  RMCTrafficLightBase: RMCTrafficLightBroken
+  RMCTrafficLightAlt: RMCTrafficLightBrokenAlt
+  AU14TallFloodlight: AU14FloodlightBroken
+  AU14Streetlight: AU14StreetlightBroken
+
+# Per-entity changes after translation: entity id -> component -> fields that replace the component's own. A component
+# missing from the entity is added; `null` removes it.
+set:
+  # Lit layers glow in the dark, since no reactor turns them on and off.
+  RMCTallFloodlight:
+    Sprite:
+      layers:
+      - state: bigflood
+      - state: bigfloodon
+        shader: unshaded
+    VehicleSmashable: {}
+  RMCStreetlight:
+    Sprite:
+      layers:
+      - state: street_off
+      - state: street_on
+        shader: unshaded
+  RMCTrafficLightBase:
+    Sprite:
+      layers:
+      - state: trafficlight
+      - state: trafficlight_on
+        shader: unshaded
+    VehicleSmashable: {}
+  RMCTrafficLightAlt:
+    Sprite:
+      layers:
+      - state: trafficlight_alt
+      - state: trafficlight_alt_on
+        shader: unshaded
+  # RMC's fuel pump is a ship machine that fills with fuel as an evacuation nears. Here it is a forecourt prop.
+  RMCFuelPump:
+    Sprite:
+      layers:
+      - state: fuelpump_100
+    ApcPowerReceiver: null
+    GenericVisualizer: null
+    AmbientOnPowered: null
+    AmbientSound: null
+    Appearance: null
+    VehicleSmashable:
+      minDestroyWeightClass: Medium
+
+  # Street furniture a vehicle drives through, breaking it (Docs/_WF/Vehicles/crushing.md). A light breaks into its
+  # broken twin, which goes next. Dumpsters and planters stop a car; the pump and the statue take a tank.
+  RMCFloodlightBroken:
+    VehicleSmashable: {}
+  RMCBenchLeft:
+    VehicleSmashable: {}
+  RMCPhoneboxBase:
+    VehicleSmashable: {}
+  RMCPhoneboxBrokenBase:
+    VehicleSmashable: {}
+  RMCPropSupermartFreezerLeft:
+    VehicleSmashable: {}
+  RMCPropSupermartShelfEmpty:
+    VehicleSmashable: {}
+  AU14TrafficDirectorProp:
+    VehicleSmashable: {}
+  AU14PropTents:
+    VehicleSmashable: {}
+  AU14Dumpster:
+    VehicleSmashable: {}
+  RMCPlanter:
+    VehicleSmashable: {}
+  RMCConcreteStatue:
+    VehicleSmashable:
+      minDestroyWeightClass: Medium
+
+  # A body with no fixture can't collide; saying so keeps the prototype as it spawns (PrototypeSaveTest).
+  RMCBasketballHoop:
+    Physics:
+      canCollide: false
+  RMCContainerMedicalEmptyRight:
+    Physics:
+      canCollide: false
+
+# Tile names that speak of xeno weeds -> the plain name.
+tile_names:
+  unweedable dirt: dirt
+  unweedable floor: floor
+
+# Names and descriptions that only make sense in RMC, replaced.
+texts:
+  RMCFuelPump:
+    description: It pumps fuel out of the tanks under the forecourt.
+
+# RSIs copied though no ported prototype names them: the hand-written prototypes of the module use them.
+extra_rsis:
+  - rsi: _RMC14/Structures/Piping/disposal.rsi
+    keep: [trashcan, trashgreen, trashblue]
+  - rsi: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    keep: [handrail_a_0, handrail_b_0, handrail_med, handrail_strata, hr_kutjevo, wire_rail, handrail_hybrisa,
+           centerroadbarrier1, centerroadbarrier2, plasticroadbarrierred, plasticroadbarrierblue, plasticroadbarrierblack]
+  - rsi: CMU14/Structures/concretebarrier.rsi
+    keep: [concrete]
+
+# Loose textures (tiles, light masks) carry no per-file record in the sources.
+loose_licence: CC-BY-SA-3.0
+loose_copyright: RMC-14 contributors, after cmss13 (https://github.com/cmss13-devs/cmss13); no per-file record upstream
+loose_source:
+  rmc: https://github.com/RMC-14/RMC-14
+  cmu: https://github.com/AU-14/ColonialMarinesUniverse
+
+entities:
+  # ---- Lights --------------------------------------------------------------------------------------------------
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Objects/Misc/floodlights.yml
+    out: Lighting/lights.yml
+    # Landing-zone lights belong to the dropship.
+    skip: [RMCLZFloodlight, LandingZoneLightBase, LandingZoneLightOne, LandingZoneLightTwo, LandingZoneLightThree,
+           LandingZoneLightFour, LandingZoneLightStanding, RMCEngineerShipLight]
+  - source: cmu
+    file: Content.CMU/Resources/Prototypes/CMU14/Entities/Objects/Items/Misc/floodlights.yml
+    out: Lighting/lights_cmu.yml
+
+  # ---- Signs ---------------------------------------------------------------------------------------------------
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/road_signs.yml
+    out: Signs/road_signs.yml
+  - source: cmu
+    file: Content.CMU/Resources/Prototypes/CMU14/Entities/Structures/Misc/trafficdirectors.yml
+    out: Signs/traffic_directors.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/Wallmounts/Signs/posters.yml
+    out: Signs/posters.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/Misc/wall_props.yml
+    out: Signs/graffiti.yml
+    # The pilot bodies are Hybrisa's story.
+    skip: [RMCWallPropDeadPilot, RMCWallPropDeadPilotAlt]
+
+  # ---- Furniture -----------------------------------------------------------------------------------------------
+  # The benches and planter came in with the decor import (_RMC14/Entities/Structures/Furniture), which carries the
+  # Streets category and VehicleSmashable for them.
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/Furniture/hybrisa_concrete_structure.yml
+    out: Furniture/statue.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/Props/basketball_hoop.yml
+    out: Furniture/basketball_hoop.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/Storage/phonebox.yml
+    out: Furniture/phoneboxes.yml
+    # The working booth needs RMC's phone network.
+    skip: [RMCPhoneboxOn]
+  - source: cmu
+    file: Content.CMU/Resources/Prototypes/CMU14/Entities/Structures/Misc/dumpsters.yml
+    out: Furniture/dumpsters.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Objects/Misc/prop_trash.yml
+    out: Furniture/trash.yml
+
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/Props/Hybrisa_misc_props.yml
+    out: Furniture/hybrisa_props.yml
+    # The egg, the specimen cell and the dropship wreckage are Hybrisa's story.
+    # DecorImport brought the slot machines in first; its copies are the ones used.
+    skip: [RMCPropInertEgg, RMCPropGiantXenoCryo, RMCPropDropshipdamage, RMCPropSlotmachinebroken, RMCPropSlotmachineIdle]
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/Props/supermart.yml
+    out: Furniture/supermart.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/rmc_fuel_pump.yml
+    out: Furniture/fuel_pump.yml
+
+  # ---- Buildings and yards -------------------------------------------------------------------------------------
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/hybrisa_machine_props.yml
+    out: Buildings/vents.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/fence.yml
+    out: Buildings/fences.yml
+    # DecorImport brought these in first; its copies are the ones used.
+    skip: [CMFence, RMCFenceBroken]
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/Platforms/platform.yml
+    out: Buildings/platforms.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/catwalk.yml
+    out: Buildings/catwalks.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/containers.yml
+    out: Yards/containers.yml
+  - source: cmu
+    file: Content.CMU/Resources/Prototypes/CMU14/Entities/Structures/Misc/containers.yml
+    out: Yards/containers_cmu.yml
+  - source: rmc
+    file: Resources/Prototypes/_RMC14/Entities/Structures/Storage/barrels.yml
+    out: Yards/barrels.yml
+  - source: cmu
+    file: Content.CMU/Resources/Prototypes/CMU14/Entities/Structures/Misc/tentprops.yml
+    out: Yards/tents.yml
+
+# `root` is the folder whose prototypes are read to resolve parents. A tile Wolfgate already has (the decor import
+# brought most of RMC's floors) is skipped, so the white tiles and the dirt road have nothing left to port.
+tiles:
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/asphalt.yml, out: Tiles/asphalt.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/Hybrisa/basic_tiles.yml, out: Tiles/hybrisa_basic.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/Hybrisa/beige_tiles.yml, out: Tiles/hybrisa_beige.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/Hybrisa/black_tiles.yml, out: Tiles/hybrisa_black.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/Hybrisa/blue_tiles.yml, out: Tiles/hybrisa_blue.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/Hybrisa/brown_tiles.yml, out: Tiles/hybrisa_brown.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/Hybrisa/green_tiles.yml, out: Tiles/hybrisa_green.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/Hybrisa/red_tiles.yml, out: Tiles/hybrisa_red.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/Hybrisa/wood_tiles.yml, out: Tiles/hybrisa_wood.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Tiles, file: Resources/Prototypes/_RMC14/Tiles/Hybrisa/yellow_tiles.yml, out: Tiles/hybrisa_yellow.yml}
+
+decals:
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Decals, file: Resources/Prototypes/_RMC14/Decals/hybrisa.yml, out: Decals/hybrisa.yml}
+  - {source: rmc, root: Resources/Prototypes/_RMC14/Decals, file: Resources/Prototypes/_RMC14/Decals/road.yml, out: Decals/road.yml}

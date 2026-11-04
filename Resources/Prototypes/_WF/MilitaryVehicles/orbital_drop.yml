@@ -1,0 +1,66 @@
+# Orbital drop beacons (WFOrbitalDropSystem): set off on a planet's open ground, outdoors, and twenty seconds later the
+# chassis drops from orbit onto the spot, with its key handed to whoever set it off. An unused beacon resells for 75% of
+# the lower of the vehicle's value and the beacon's listing.
+
+# The station counter's drops and the military repair kit (capture.yml), handed over the counter. Each drop costs more
+# than its chassis appraises for, parts included (OrbitalDropTest), so none sells at a profit.
+- type: wfVehicleCatalog
+  id: WFMilitaryCatalogDrops
+  vehicles:
+  - vehicle: WFOrbitalDropBeaconAPC
+    price: 65000
+    licence: true
+  - vehicle: WFOrbitalDropBeaconAev
+    price: 100000
+    licence: true
+  - vehicle: WFOrbitalDropBeaconTank
+    price: 140000
+    licence: true
+  - vehicle: WFMilitaryRepairKit
+    price: 9000
+
+- type: entity
+  parent: WFVehicleBeaconBase
+  id: WFOrbitalDropBeaconBase
+  abstract: true
+  name: orbital drop beacon
+  description: Calls a vehicle down from orbit. Set it off on open ground under the sky and stand well back.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/thief_beacon.rsi
+    noRot: true
+    color: "#ffb36b"
+    layers:
+    - state: folded_extraction
+      map: [ "beacon" ]
+    - state: extraction_point_light
+      map: [ "light" ]
+      shader: unshaded
+      visible: false
+
+- type: entity
+  parent: WFOrbitalDropBeaconBase
+  id: WFOrbitalDropBeaconAPC
+  name: orbital drop beacon (APC)
+  components:
+  - type: WFOrbitalDropBeacon
+    vehicle: VehicleAPC
+    catalog: WFMilitaryCatalogDrops
+
+- type: entity
+  parent: WFOrbitalDropBeaconBase
+  id: WFOrbitalDropBeaconTank
+  name: orbital drop beacon (tank)
+  components:
+  - type: WFOrbitalDropBeacon
+    vehicle: WFMilitaryChassisTank
+    catalog: WFMilitaryCatalogDrops
+
+- type: entity
+  parent: WFOrbitalDropBeaconBase
+  id: WFOrbitalDropBeaconAev
+  name: orbital drop beacon (AEV)
+  components:
+  - type: WFOrbitalDropBeacon
+    vehicle: VehicleAev
+    catalog: WFMilitaryCatalogDrops

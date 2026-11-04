@@ -62,8 +62,10 @@ public sealed partial class WFParachuteSystem : EntitySystem
 
     private bool TryStartAttach(Entity<WFParachuteComponent> ent, EntityUid user, EntityUid target)
     {
-        // Anything the z-levels can drop can wear one; a wall or a floor tile cannot fall in the first place.
-        if (!TryComp<CEZPhysicsComponent>(target, out var zPhysics) || !zPhysics.Fallable || Transform(target).Anchored)
+        var attempt = new WFParachuteAttachAttemptEvent(
+            TryComp<CEZPhysicsComponent>(target, out var zPhysics) && zPhysics.Fallable);
+        RaiseLocalEvent(target, ref attempt);
+        if (!attempt.Allowed || Transform(target).Anchored)
         {
             _popup.PopupClient(Loc.GetString("wf-parachute-cannot-attach"), target, user);
             return false;

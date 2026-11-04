@@ -74,6 +74,8 @@ public static class CavernFixture
         {
             pair.Server.CfgMan.SetCVar(PlanetCVars.PlanetNetworks, true);
             pair.Server.CfgMan.SetCVar(PlanetCVars.TerrainLoadBudget, 0f);
+            pair.Server.CfgMan.SetCVar(PlanetCVars.Bounds, false);
+            pair.Server.CfgMan.SetCVar(PlanetCVars.Preload, false);
             pair.Server.CfgMan.SetCVar(CavernCVars.Caverns, true);
         });
     }
@@ -117,7 +119,7 @@ public static class CavernFixture
         return PlanetFixture.Teardown(pair, world.Layers);
     }
 
-    /// <summary>Whether an entity is the one the mouth lays on its landing tiles, the only thing besides the climb point a pad may hold.</summary>
+    /// <summary>Whether an entity is the one the mouth lays on its landing tiles, the only thing besides the stairs a pad may hold.</summary>
     public static bool IsLandingEntity(IEntityManager entMan, EntityUid uid, WFCavernMouthSpec spec)
     {
         return spec.LandingEntity is { } landing && entMan.GetComponent<MetaDataComponent>(uid).EntityPrototype?.ID == landing.Id;
@@ -218,16 +220,35 @@ public static class CavernFixture
         return gate!;
     }
 
-    /// <summary>The lip tile over a mouth's climb point, the same index on the ground and in the cavern.</summary>
+    /// <summary>The lip tile at the top of a mouth's stairs, the same index on the ground and in the cavern.</summary>
     public static Vector2i ClimbTile(WFCavernMouth mouth)
     {
         return mouth.ClimbTile;
     }
 
-    /// <summary>The cavern tile a faller through the mouth's anchor, the hole tile nearest its centre, lands on.</summary>
-    public static Vector2i LandingIndex(WFCavernMouth mouth)
+    /// <summary>The hole tile, the same index on the ground and in the cavern, that a mouth's stairs stand under.</summary>
+    public static Vector2i StairsTile(WFCavernMouth mouth, WFCavernMouthSpec spec)
     {
-        return mouth.Origin;
+        return mouth.ClimbTile - spec.StairsSide.ToIntVec();
+    }
+
+    /// <summary>
+    /// The hole tile the fall tests drop through: the anchor, the one nearest the hole's centre, or, where the stairs
+    /// stand under the anchor, the hole tile farthest from them.
+    /// </summary>
+    public static Vector2i DropTile(WFCavernMouth mouth, WFCavernMouthSpec spec)
+    {
+        var stairs = StairsTile(mouth, spec);
+
+        return mouth.Origin != stairs
+            ? mouth.Origin
+            : mouth.Hole.OrderByDescending(tile => (tile - stairs).LengthSquared).ThenBy(tile => tile.X).ThenBy(tile => tile.Y).First();
+    }
+
+    /// <summary>The cavern tile a faller through <see cref="DropTile"/> lands on.</summary>
+    public static Vector2i LandingIndex(WFCavernMouth mouth, WFCavernMouthSpec spec)
+    {
+        return DropTile(mouth, spec);
     }
 
     /// <summary>The centre of a tile in map-local coordinates.</summary>

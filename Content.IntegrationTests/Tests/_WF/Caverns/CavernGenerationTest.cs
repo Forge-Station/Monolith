@@ -78,7 +78,7 @@ public sealed class CavernGenerationTest
                     var biomeComp = entMan.GetComponent<BiomeComponent>(world.Cavern);
                     var biome = (world.Cavern, biomeComp);
                     var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
-                    var climb = ground.ClimbPoints[gate.ClimbTile];
+                    var climb = ground.Stairways[StairsTile(gate, cavern.Mouths)];
                     var (substrate, chamber) = Floors[surfaceId];
 
                     for (var x = -LoadReach; x <= LoadReach; x++)

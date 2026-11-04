@@ -1,0 +1,17 @@
+- files:
+  - hawk2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/soundscape/hawk2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - hawk3.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/soundscape/hawk3.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - eagle2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_ambience/soundscape/eagle2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

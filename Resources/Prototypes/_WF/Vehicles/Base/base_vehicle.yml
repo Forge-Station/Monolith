@@ -1,0 +1,170 @@
+# The root of every ground vehicle: a grid-locked body that can be driven, entered and fitted with parts, with no weapons
+# seats. The sprite, parts and interior here are the van's; each family replaces them. RMCVehicleBase at the end of the file adds
+# the weapons component and window on top of this, which every family but the unarmed ones (the AEV) builds on. A child that
+# sets UserInterface adds its keys to the parent's (the interfaces dictionary merges, and the child's key wins), but one that
+# sets Fixtures, ItemSlots slots, HardpointSlots slots, VehicleEnter entryPoints or Sprite layers replaces the parent's whole
+# list, so it has to list all of it.
+- type: entity
+  id: WFVehicleUnarmedBase
+  categories: [ WFVehicles ]
+  abstract: true
+  save: false
+  name: abstract vehicle
+  description: An abstract vehicle. Make sure to replace this!
+  components:
+  - type: WFVehicleEngine
+  - type: RMCVehicle
+    movementKind: Grid
+  - type: LagCompensation
+  - type: Clickable
+  - type: WarpPoint
+    follow: true
+  # A vehicle outlives its owner's grid: no cleanup, no smashing by an arriving ship, not part of a ship sale or save.
+  - type: CleanupImmune
+  - type: FTLSmashImmune
+  - type: StaticPrice
+    price: 20000
+  - type: GridVehicleMover
+    plowRamDamage: 14
+    maxReverseSpeed: 5
+    freeSteering: true
+    maxRotationSpeedDegrees: 90
+    rotationAccelerationDegrees: 90
+    rotationDecelerationDegrees: 120
+    maxSpeed: 13
+    acceleration: 7
+    deceleration: 14
+    turnDelay: 0.25
+  - type: VehicleOvercharge
+    speedMultiplier: 1.6
+    duration: 3
+    cooldown: 15
+    overchargeSound: /Audio/_WF/Vehicles/overdrive_activate.ogg
+  # Driving off an edge with a z-level below, or losing the floor, drops the vehicle to that level (Docs/_WF/Vehicles/falling.md).
+  - type: VehicleFall
+  - type: VehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 2
+    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornCooldown: 1
+    collisionSound: /Audio/_WF/Vehicles/effects/metalhit.ogg
+    collisionSoundCooldown: 3
+    mobCollisionSound: /Audio/_WF/Vehicles/effects/alien_claw_block.ogg
+    crashSound: /Audio/_WF/Vehicles/effects/metal_crash.ogg
+  - type: VehicleSpotlight
+    radius: 6
+    energy: 2.5
+    softness: 2
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.425,-1.2,0.425,1.2
+        density: 1000
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        - Vehicle
+        layer:
+        - LargeMobLayer
+        - Vehicle
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -0.425,-1.2,0.425,1.2
+        density: 1000
+        mask:
+        - MidImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _WF/Vehicles/van.rsi
+    layers:
+    - map: [ base ]
+      state: van_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+  - type: PointLight
+    lightMask: ConeSingle
+    enabled: false
+    radius: 6
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.HardpointUiKey.Key:
+        type: HardpointBoundUserInterface
+  - type: InputMover
+  - type: ItemSlots
+  - type: HardpointSlots
+    vehicleFamily: HardpointVehicleFamilyVan
+    slots:
+    - id: wheel-1
+      hardpointType: HardpointTypeWheel
+      slotType: HardpointSlotTypeWheel
+      insertDelay: 1.5
+      whitelist:
+        components:
+        - VehicleWheelItem
+  - type: VehicleWheelSlots
+    slotCount: 1
+    slots:
+    - wheel-1
+  - type: HardpointIntegrity
+    maxIntegrity: 1000
+    integrity: 1000
+    bypassEntryOnZero: true
+  - type: VehicleDemolition
+  - type: Appearance
+  - type: VehicleEnter
+    interiorPath: /Maps/_WF/Vehicles/Interiors/van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    entryPoints:
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.5,-0.34
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1
+
+# The armed families' root: the unarmed base with the weapons component (the gunner seats attach to it) and its window.
+- type: entity
+  parent: WFVehicleUnarmedBase
+  id: RMCVehicleBase
+  abstract: true
+  components:
+  - type: UserInterface
+    interfaces:
+      enum.HardpointUiKey.Key:
+        type: HardpointBoundUserInterface
+      enum.VehicleWeaponsUiKey.Key:
+        type: VehicleWeaponsBoundUserInterface
+  - type: VehicleWeapons

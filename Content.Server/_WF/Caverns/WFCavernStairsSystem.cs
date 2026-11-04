@@ -12,8 +12,8 @@ using Robust.Shared.Timing;
 namespace Content.Server._WF.Caverns;
 
 /// <summary>
-/// Opens the ground over stairs built in a cavern, so they are walked up to the surface and back, refuses to start
-/// them where the ground can't open, and has whatever a walker is pulling follow it.
+/// Opens the ground over stairs in a cavern, built or cut by the caverns themselves, so they are walked up to the
+/// surface and back, refuses to start built ones where the ground can't open, and has whatever a walker is pulling follow it.
 /// </summary>
 // The walking is CE's: the stairs are high ground under a hole. The hole itself belongs to the hole queue.
 public sealed partial class WFCavernStairsSystem : SharedWFCavernStairsSystem
@@ -23,7 +23,6 @@ public sealed partial class WFCavernStairsSystem : SharedWFCavernStairsSystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private WFCavernClimbSystem _climb = default!;
     [Dependency] private WFCavernMouthSystem _mouths = default!;
 
     /// <summary>How often stairs that couldn't open the ground above try again, such as once a ship has left.</summary>
@@ -46,6 +45,8 @@ public sealed partial class WFCavernStairsSystem : SharedWFCavernStairsSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        UpdatePulled();
 
         if (_timing.CurTime < _nextRetry)
             return;
@@ -108,11 +109,14 @@ public sealed partial class WFCavernStairsSystem : SharedWFCavernStairsSystem
         TryOpen(ent);
     }
 
-    /// <summary>Leaves the hole to the hole queue, which gives it the landing and climb point the stairs stood in for.</summary>
+    /// <summary>Drops the stairs from the registry and leaves the hole to the hole queue, which gives it the landing and stairs these stood in for.</summary>
     private void OnTerminating(Entity<WFCavernStairsComponent> ent, ref EntityTerminatingEvent args)
     {
-        if (TryGetSite(Transform(ent), out var ground, out var index))
-            _mouths.RefitHole(ground, index);
+        if (!TryGetSite(Transform(ent), out var ground, out var index))
+            return;
+
+        _mouths.ForgetStairs(ent, ground, index);
+        _mouths.RefitHole(ground, index);
     }
 
     private void OnExamined(Entity<WFCavernStairsComponent> ent, ref ExaminedEvent args)
@@ -135,7 +139,7 @@ public sealed partial class WFCavernStairsSystem : SharedWFCavernStairsSystem
         var puller = Transform(uid);
 
         if (puller.MapUid != Transform(args.PulledUid).MapUid && OverStairs(puller))
-            _climb.BringPulledSoon(uid, args.PulledUid);
+            BringPulledSoon(uid, args.PulledUid);
     }
 
     /// <summary>Whether an entity is on stairs in a cavern, or over them on the ground above.</summary>

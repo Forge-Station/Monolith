@@ -222,6 +222,49 @@ public sealed class CrashScenarioTest
         await pair.CleanReturnAsync();
     }
 
+    /// <summary>On a bounded world the wreck waits inside the circle, so it is let down when its time is up.</summary>
+    [Test]
+    public async Task BoundedWorldStillLetsTheWreckDown()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var em = server.EntMan;
+        await EnableFeature(pair);
+        await server.WaitPost(() =>
+        {
+            server.CfgMan.SetCVar(Content.Shared._WF.CCVar.PlanetCVars.Bounds, true);
+            server.CfgMan.SetCVar(Content.Shared._WF.CCVar.PlanetCVars.Radius, 192);
+        });
+        var (layers, _, _) = await BuildOwnedStack(pair);
+        var system = server.System<WFCrashScenarioSystem>();
+        var hull = EntityUid.Invalid;
+        var station = EntityUid.Invalid;
+        const int lobby = 19004;
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(system.TryPrepare(lobby, out station, out var reason), Is.True, reason);
+            Assert.That(system.TryGetSpawn(lobby, out var spawn), Is.True);
+            hull = spawn.EntityId;
+            Assert.That(server.System<Content.Server._WF.Planets.Bounds.WFPlanetBoundsSystem>().IsHullInside(hull), Is.True,
+                "The wreck waits outside the world's circle, where it can't descend.");
+            var crash = em.GetComponent<WFCrashScenarioComponent>(hull);
+            crash.Started = true;
+            crash.DescendAt = server.ResolveDependency<IGameTiming>().CurTime;
+        });
+
+        await server.WaitRunTicks(pair.SecondsToTicks(2f));
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(em.GetComponent<WFCrashScenarioComponent>(hull).Descending, Is.True, "The wreck never began its descent.");
+            system.RemoveScenario(lobby);
+            em.DeleteEntity(station);
+        });
+
+        await Teardown(pair, layers);
+        await pair.CleanReturnAsync();
+    }
+
     /// <summary>Destroyed preparations cannot grant a replacement ship or borrow another lobby's spawn.</summary>
     [Test]
     public async Task FragmentsRemainOwnedAndDeletedStationFailsClosed()

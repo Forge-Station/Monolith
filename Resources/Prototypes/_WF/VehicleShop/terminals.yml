@@ -1,0 +1,112 @@
+# Vehicle purchase terminals. Each sells its catalogue onto the nearest delivery pad on its grid, within 16 metres.
+
+- type: entity
+  parent: BaseComputer
+  id: WFBaseComputerVehicleShop
+  abstract: true
+  name: expeditionary vehicle terminal
+  description: Sells ground vehicles and parts for expedition work. Park a vehicle on the pad nearby to repair or sell it. Fit parts with a crowbar on the vehicle.
+  components:
+  - type: Sprite
+    sprite: _NF/Structures/Machines/computers.rsi
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: computer
+    - map: [ "computerLayerKeyboard" ]
+      state: generic_keyboard
+    - map: [ "computerLayerScreen" ]
+      state: shipyard_expedition
+    - map: [ "computerLayerKeys" ]
+      state: telesci_key
+  - type: WFVehicleShop
+    catalog: WFVehicleCatalogExpeditionary
+    extraCatalogs:
+    - WFVehicleCatalogBayParts
+  - type: ActivatableUI
+    key: enum.WFVehicleShopUiKey.Key
+    singleUser: true
+  - type: UserInterface
+    interfaces:
+      enum.WFVehicleShopUiKey.Key:
+        type: WFVehicleShopBoundUserInterface
+
+- type: entity
+  parent: [ BaseStructureDisableToolUse, BaseStructureIndestructible, WFBaseComputerVehicleShop ]
+  id: WFComputerVehicleShopExpeditionary
+  components:
+  - type: Computer
+    board: Null
+
+# The same terminal for players to build: it comes apart like any computer.
+- type: entity
+  parent: WFBaseComputerVehicleShop
+  id: WFComputerVehicleBay
+  components:
+  - type: Computer
+    board: WFVehicleBayComputerCircuitboard
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: WFVehicleBayComputerCircuitboard
+  name: expeditionary vehicle terminal board
+  description: A computer printed circuit board for an expeditionary vehicle terminal.
+  components:
+  - type: ComputerBoard
+    prototype: WFComputerVehicleBay
+
+# Sold by John Wolfgate and the Wolfgate vendor.
+- type: entity
+  parent: BaseNFFlatpack
+  id: WFVehicleBayTerminalFlatpack
+  name: expeditionary vehicle terminal flatpack
+  description: A flatpack used for constructing an expeditionary vehicle terminal.
+  components:
+  - type: Flatpack
+    entity: WFComputerVehicleBay
+  - type: StaticPrice
+    price: 1500
+
+- type: entity
+  parent: BaseNFFlatpack
+  id: WFVehicleDeliveryPadFlatpack
+  name: vehicle delivery pad flatpack
+  description: A flatpack used for constructing a vehicle delivery pad.
+  components:
+  - type: Flatpack
+    entity: WFVehicleDeliveryPad
+  - type: StaticPrice
+    price: 800
+
+# Where a terminal's vehicles arrive, and where they're repaired and sold. Keep a five-metre square round it clear.
+- type: entity
+  id: WFVehicleDeliveryPad
+  name: vehicle delivery pad
+  description: Vehicles bought at a terminal nearby arrive here. Park one here to repair or sell it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Structures/cargo_telepad.rsi
+    state: display
+    drawdepth: FloorObjects
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WFVehicleDeliveryPad
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

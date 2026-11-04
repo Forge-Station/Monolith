@@ -8,6 +8,7 @@ using Content.Server._WF.Caverns;
 using Content.Server.Construction;
 using Content.Server.Parallax;
 using Content.Shared._CE.ZLevels.Core.Components;
+using Content.Shared._CE.ZLevels.Core.EntitySystems;
 using Content.Shared._WF.Caverns;
 using Content.Shared._WF.Planets.Parachute;
 using Content.Shared.Damage;
@@ -45,6 +46,11 @@ public sealed class CavernRampTest
     private const string BuiltFloor = "Plating";
     private const string Steel = "SheetSteel";
     private const string Crate = "CrateGeneric";
+
+    /// <summary>The stairway a map such as a house's basement brings: CE high ground, not the cavern's own stairs.</summary>
+    private const string MappedStairs = "CEZLevelLadderWooden";
+
+    private const string Ghost = "MobObserver";
 
     /// <summary>How far a walking mob is moved between looks, in tiles.</summary>
     private const float Stride = 0.05f;
@@ -386,15 +392,17 @@ public sealed class CavernRampTest
                 }
             });
 
-            // The same parachute does open over a drop.
-            await server.WaitPost(() => maps.SetTile(world.Ground, entMan.GetComponent<MapGridComponent>(world.Ground), hole, Tile.Empty));
+            // The same parachute does open over a drop: the second tile of a two-tile hole, whose first carries the cut stairs.
+            var drop = hole + new Vector2i(1, 0);
+            await server.WaitPost(() => maps.SetTiles(world.Ground, entMan.GetComponent<MapGridComponent>(world.Ground),
+                new List<(Vector2i, Tile)> { (hole, Tile.Empty), (drop, Tile.Empty) }));
             await server.WaitRunTicks(3);
 
-            var faller = await SpawnSettled(pair, world.Ground, TileCentre(hole + new Vector2i(0, 1)));
+            var faller = await SpawnSettled(pair, world.Ground, TileCentre(drop + new Vector2i(0, 1)));
             await server.WaitPost(() =>
             {
                 entMan.AddComponent<WFParachutedComponent>(faller);
-                transform.SetWorldPosition(faller, TileCentre(hole));
+                transform.SetWorldPosition(faller, TileCentre(drop));
             });
             await server.WaitRunTicks(pair.SecondsToTicks(3f));
 
@@ -489,10 +497,10 @@ public sealed class CavernRampTest
 
     /// <summary>
     /// On loaded ground the stairs' hole is pinned and shaded and takes what the biome grew at their top with it, but
-    /// gets no landing and no climb point: the rock beside the stairs stays. Once the stairs go, the hole gets both.
+    /// gets no landing and no cut stairs: the rock beside the stairs stays. Once the stairs go, the hole gets both.
     /// </summary>
     [Test]
-    public async Task StairsStandInForTheLandingAndClimb()
+    public async Task StairsStandInForTheLandingAndCutStairs()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -531,7 +539,7 @@ public sealed class CavernRampTest
 
                 rock = maps.GetAnchoredEntities(world.Cavern, levelGrid, rockAt).FirstOrDefault();
                 floor = maps.GetTileRef(world.Cavern, levelGrid, index).Tile;
-                climbs = entMan.GetComponent<WFCavernGroundComponent>(world.Ground).ClimbPoints.Count;
+                climbs = entMan.GetComponent<WFCavernGroundComponent>(world.Ground).Stairways.Count;
             });
 
             Assert.That(grown, Is.True, "Precondition: the biome grew nothing at the top of the stairs.");
@@ -550,7 +558,9 @@ public sealed class CavernRampTest
                 {
                     Assert.That(maps.GetAnchoredEntities(world.Ground, groundGrid, exit).Any(), Is.False,
                         "What the biome grew at the top of the stairs is still in the way.");
-                    Assert.That(ground.ClimbPoints, Has.Count.EqualTo(climbs), "The stairs' hole was given a climb point.");
+                    Assert.That(ground.Stairways, Has.Count.EqualTo(climbs), "The stairs' hole was given cut stairs.");
+                    Assert.That(ground.Shades.TryGetValue(index, out var shade) && entMan.GetComponent<WFCavernShaftComponent>(shade).Plain, Is.True,
+                        "The stairs' hole is dressed as a sinkhole.");
                     Assert.That(entMan.Deleted(rock), Is.False, "The rock beside the stairs was cleared for a landing.");
                     Assert.That(maps.GetTileRef(world.Cavern, levelGrid, index).Tile.TypeId, Is.EqualTo(floor.TypeId),
                         "The floor under the stairs was relaid as a landing.");
@@ -572,10 +582,12 @@ public sealed class CavernRampTest
                 {
                     Assert.That(IsEmpty(maps, world.Ground, groundGrid, index), Is.True, "The hole closed when its stairs went.");
                     Assert.That(ground.Shades.ContainsKey(index), Is.True, "The hole lost its shade with its stairs.");
+                    Assert.That(ground.Shades.TryGetValue(index, out var shade) && entMan.GetComponent<WFCavernShaftComponent>(shade).Plain, Is.False,
+                        "The hole kept its stairwell look once its stairs went.");
                     Assert.That(below.IsEmpty ? string.Empty : tileDefs[below.TypeId].ID, Is.EqualTo(landing),
                         "The hole got no landing once its stairs went.");
-                    Assert.That(ground.ClimbPoints.Keys.Any(climb => Chebyshev(climb, index) <= 1), Is.True,
-                        "The hole got no climb point once its stairs went.");
+                    Assert.That(ground.Stairways.Keys.Any(climb => Chebyshev(climb, index) <= 1), Is.True,
+                        "The hole got no cut stairs once its stairs went.");
                     Assert.That(biomes.WfIsPinned((world.Cavern, entMan.GetComponent<BiomeComponent>(world.Cavern)), index), Is.True,
                         "The landing under the hole is not pinned.");
                 }
@@ -587,6 +599,204 @@ public sealed class CavernRampTest
         }
 
         await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// A map's own stairway, a ladder in a basement under a gap in the floor above, is a stairwell: its hole gets a
+    /// plain shade and neither a landing nor cut stairs. A hole dug beside it is a sinkhole with both, turns plain
+    /// when stairs are built under it and is dressed again when they go.
+    /// </summary>
+    [Test]
+    public async Task AMappedStairwellIsNotASinkhole()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var maps = server.System<SharedMapSystem>();
+        var tileDefs = server.ResolveDependency<ITileDefinitionManager>();
+
+        await EnableCaverns(pair);
+        await DisableClaims(pair);
+        var world = await BuildWorld(pair, Surface);
+
+        try
+        {
+            var stairwell = Site + new Vector2i(40, 0);
+            var dug = stairwell + new Vector2i(8, 0);
+            await LoadBoth(pair, world, stairwell - new Vector2i(8, 8), dug + new Vector2i(8, 8));
+            await ClearSite(pair, world, stairwell, 2);
+            await ClearSite(pair, world, dug, 2);
+
+            var climbs = 0;
+            await server.WaitPost(() =>
+            {
+                var groundGrid = entMan.GetComponent<MapGridComponent>(world.Ground);
+                var levelGrid = entMan.GetComponent<MapGridComponent>(world.Cavern);
+                var floor = new Tile(tileDefs[BuiltFloor].TileId);
+                var house = new List<(Vector2i, Tile)>();
+
+                for (var x = -1; x <= 1; x++)
+                for (var y = -1; y <= 1; y++)
+                {
+                    house.Add((stairwell + new Vector2i(x, y), floor));
+                }
+
+                // The house above and its basement, as a site lays them; then the gap over the basement's stairs.
+                maps.SetTiles(world.Ground, groundGrid, house);
+                maps.SetTiles(world.Cavern, levelGrid, house);
+                entMan.SpawnAttachedTo(MappedStairs, new EntityCoordinates(world.Cavern, TileCentre(stairwell)));
+                climbs = entMan.GetComponent<WFCavernGroundComponent>(world.Ground).Stairways.Count;
+
+                maps.SetTile(world.Ground, groundGrid, stairwell, Tile.Empty);
+                maps.SetTile(world.Ground, groundGrid, dug, Tile.Empty);
+            });
+            await server.WaitRunTicks(3);
+
+            await server.WaitAssertion(() =>
+            {
+                var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
+                var levelGrid = entMan.GetComponent<MapGridComponent>(world.Cavern);
+
+                using (Assert.EnterMultipleScope())
+                {
+                    Assert.That(ground.Shades.TryGetValue(stairwell, out var shade) && entMan.GetComponent<WFCavernShaftComponent>(shade).Plain,
+                        Is.True, "The mapped stairwell has no shade, or a sinkhole's.");
+                    Assert.That(ground.Shades.TryGetValue(dug, out var dugShade) && !entMan.GetComponent<WFCavernShaftComponent>(dugShade).Plain,
+                        Is.True, "The dug hole has no shade, or a plain one.");
+                    Assert.That(ground.Stairways.Keys.Any(climb => Chebyshev(climb, stairwell) <= 1), Is.False,
+                        "The mapped stairwell was given cut stairs.");
+                    Assert.That(ground.Stairways, Has.Count.EqualTo(climbs + 1), "The dug hole got no cut stairs of its own.");
+                    Assert.That(tileDefs[maps.GetTileRef(world.Cavern, levelGrid, stairwell).Tile.TypeId].ID, Is.EqualTo(BuiltFloor),
+                        "The basement floor under the stairwell was relaid as a landing.");
+                }
+            });
+
+            var stairs = await SpawnStairs(pair, world, dug, Direction.South);
+            await server.WaitAssertion(() =>
+            {
+                var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
+                Assert.That(ground.Shades.TryGetValue(dug, out var shade) && entMan.GetComponent<WFCavernShaftComponent>(shade).Plain,
+                    Is.True, "Stairs built under a dug hole left it a sinkhole.");
+            });
+
+            await server.WaitPost(() => entMan.DeleteEntity(stairs));
+            await server.WaitRunTicks(3);
+            await server.WaitAssertion(() =>
+            {
+                var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
+                Assert.That(ground.Shades.TryGetValue(dug, out var shade) && !entMan.GetComponent<WFCavernShaftComponent>(shade).Plain,
+                    Is.True, "The dug hole stayed plain once its stairs went.");
+            });
+        }
+        finally
+        {
+            await Teardown(pair, world);
+        }
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>
+    /// A ghost floats over stairs: drifting across them on the cavern floor or over their hole on the ground it never
+    /// rises to their height or changes level, and a ghost left with some height between levels drops it.
+    /// </summary>
+    [Test]
+    public async Task GhostsAreNeverCaughtOnTheStairs()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var zLevels = server.System<CESharedZLevelsSystem>();
+
+        await EnableCaverns(pair);
+        await DisableClaims(pair);
+        var world = await BuildWorld(pair, Surface);
+
+        try
+        {
+            var index = Site + new Vector2i(60, 0);
+            await LoadBoth(pair, world, index - new Vector2i(8, 8), index + new Vector2i(8, 8));
+            await ClearSite(pair, world, index, 2);
+            await SpawnStairs(pair, world, index, Direction.South);
+
+            var foot = TileCentre(index - new Vector2i(0, 1));
+            var top = TileCentre(index + new Vector2i(0, 1));
+
+            foreach (var (map, what) in new[] { (world.Cavern, "on the cavern floor"), (world.Ground, "on the ground") })
+            {
+                var ghost = EntityUid.Invalid;
+                await server.WaitPost(() => ghost = entMan.SpawnEntity(Ghost, new EntityCoordinates(map, foot)));
+                await server.WaitRunTicks(2);
+
+                var (changes, height) = await Drift(pair, ghost, foot, top);
+                await server.WaitRunTicks(10);
+
+                await server.WaitAssertion(() =>
+                {
+                    using (Assert.EnterMultipleScope())
+                    {
+                        Assert.That(changes, Is.Zero, $"A ghost drifting over the stairs {what} changed level {changes} times.");
+                        Assert.That(height, Is.Zero.Within(0.001f), $"A ghost drifting over the stairs {what} rose to {height}.");
+                        Assert.That(entMan.GetComponent<TransformComponent>(ghost).MapUid, Is.EqualTo(map), $"The ghost {what} left its level.");
+                        Assert.That(entMan.GetComponent<CEZPhysicsComponent>(ghost).LocalPosition, Is.Zero.Within(0.001f),
+                            $"The ghost {what} was left between levels.");
+                    }
+                });
+
+                await server.WaitPost(() => entMan.DeleteEntity(ghost));
+            }
+
+            // Caught by anything else, a ghost lets go of the height once it moves.
+            var stuck = EntityUid.Invalid;
+            await server.WaitPost(() =>
+            {
+                stuck = entMan.SpawnEntity(Ghost, new EntityCoordinates(world.Cavern, foot - new Vector2(3f, 0f)));
+                zLevels.SetZPosition(stuck, 0.4f);
+            });
+            await server.WaitRunTicks(5);
+            await server.WaitAssertion(() =>
+                Assert.That(entMan.GetComponent<CEZPhysicsComponent>(stuck).LocalPosition, Is.Zero.Within(0.001f),
+                    "A ghost left between levels stayed there."));
+        }
+        finally
+        {
+            await Teardown(pair, world);
+        }
+
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>Moves a body from one spot to another a stride at a time, two ticks a stride; its map changes and greatest height.</summary>
+    private static async Task<(int Changes, float Height)> Drift(TestPair pair, EntityUid body, Vector2 from, Vector2 to)
+    {
+        var server = pair.Server;
+        var entMan = server.EntMan;
+        var transform = server.System<SharedTransformSystem>();
+        var strides = (int) MathF.Round((to - from).Length() / Stride);
+        var changes = 0;
+        var height = 0f;
+        EntityUid? map = null;
+
+        await server.WaitPost(() => map = entMan.GetComponent<TransformComponent>(body).MapUid);
+
+        for (var i = 0; i <= strides; i++)
+        {
+            var position = Vector2.Lerp(from, to, (float) i / strides);
+
+            await server.WaitPost(() => transform.SetWorldPosition(body, position));
+            await server.WaitRunTicks(2);
+            await server.WaitPost(() =>
+            {
+                var now = entMan.GetComponent<TransformComponent>(body).MapUid;
+                if (now != map)
+                    changes++;
+
+                map = now;
+                height = MathF.Max(height, MathF.Abs(entMan.GetComponent<CEZPhysicsComponent>(body).LocalPosition));
+            });
+        }
+
+        return (changes, height);
     }
 
     /// <summary>

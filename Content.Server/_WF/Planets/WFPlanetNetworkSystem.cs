@@ -84,8 +84,14 @@ public sealed partial class WFPlanetNetworkSystem : EntitySystem
         var centre = _transform.GetWorldPosition(planet.Owner);
         var displayName = MetaData(planet.Owner).EntityName;
 
-        if (BuildNetwork(surface, centre, displayName, planet.Owner) is not { } built)
-            return false;
+        // A network prebuilt in the lobby for this spot is taken over; otherwise one is built now.
+        if (!TryAdopt(planet.Owner, surface, centre, displayName, out var built))
+        {
+            if (BuildNetwork(surface, centre, displayName, planet.Owner) is not { } fresh)
+                return false;
+
+            built = fresh;
+        }
 
         network = built;
         planet.Comp.Network = GetNetEntity(built);

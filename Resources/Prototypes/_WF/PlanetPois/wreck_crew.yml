@@ -1,0 +1,139 @@
+# What's left of a crashed ship's crew (a wreck theme's `crew`): spacers dressed for the world they came down on, risen
+# as inert zombies (WFZombifyOnSpawn: bite only, no infection, no rising dead) and hostile to anyone who comes poking
+# through the hull.
+
+- type: entity
+  abstract: true
+  parent: BaseMobHuman
+  id: WFWreckZombieBase
+  name: wrecked crewmember
+  description: Whatever crashed here, they didn't walk away from it. Not properly, anyway.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: WFZombifyOnSpawn
+  # Zombies from any other source are friends, so the crew never goes for one.
+  - type: NpcFactionMember
+    addFriendlyFactions: [ Zombie ]
+  - type: InputMover
+  - type: MobMover
+  - type: WFVehicleBoarder
+
+- type: entity
+  parent: WFWreckZombieBase
+  id: WFWreckZombieVerda
+  components:
+  - type: Loadout
+    prototypes: [ WFWreckCrewGearVerdaFarmer, WFWreckCrewGearVerdaHauler ]
+
+- type: entity
+  parent: WFWreckZombieBase
+  id: WFWreckZombieMerak
+  components:
+  - type: Loadout
+    prototypes: [ WFWreckCrewGearMerakDrifter, WFWreckCrewGearMerakHauler ]
+
+- type: entity
+  parent: WFWreckZombieBase
+  id: WFWreckZombieFervidus
+  components:
+  - type: Loadout
+    prototypes: [ WFWreckCrewGearFervidus ]
+
+- type: entity
+  parent: WFWreckZombieBase
+  id: WFWreckZombieThrascias
+  components:
+  - type: Loadout
+    prototypes: [ WFWreckCrewGearThrascias ]
+
+- type: entity
+  parent: WFWreckZombieBase
+  id: WFWreckZombieAerumna
+  components:
+  - type: Loadout
+    prototypes: [ WFWreckCrewGearAerumnaMiner, WFWreckCrewGearAerumnaScientist ]
+
+- type: entity
+  parent: WFWreckZombieBase
+  id: WFWreckZombieCarcinoma
+  components:
+  - type: WFZombifyOnSpawn
+    factions: [ SimpleHostile, AberrantFleshExpeditionNF, Chimera ]
+  - type: Loadout
+    prototypes: [ WFWreckCrewGearCarcinoma ]
+
+- type: startingGear
+  id: WFWreckCrewGearVerdaFarmer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitHydroponics
+    outerClothing: ClothingOuterApronBotanist
+    shoes: ClothingShoesBootsWork
+
+- type: startingGear
+  id: WFWreckCrewGearVerdaHauler
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCargo
+    outerClothing: ClothingOuterVestHazard
+    head: ClothingHeadHatHardhatYellow
+    shoes: ClothingShoesBootsWork
+
+- type: startingGear
+  id: WFWreckCrewGearMerakDrifter
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    outerClothing: ClothingOuterCoatBomber
+    head: ClothingHeadHatCowboyBrown
+    eyes: ClothingEyesGlassesSunglasses
+    shoes: ClothingShoesBootsWork
+
+- type: startingGear
+  id: WFWreckCrewGearMerakHauler
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorOrange
+    neck: ClothingNeckScarfStripedRed
+    head: ClothingHeadBandRed
+    shoes: ClothingShoesBootsWork
+
+- type: startingGear
+  id: WFWreckCrewGearFervidus
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitAtmos
+    outerClothing: ClothingOuterSuitFire
+    head: ClothingHeadHelmetFire
+    mask: ClothingMaskGas
+    shoes: ClothingShoesBootsWork
+
+- type: startingGear
+  id: WFWreckCrewGearThrascias
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    outerClothing: ClothingOuterWinterMiner
+    head: ClothingHeadHatHoodWinterDefault
+    gloves: ClothingHandsGlovesColorBlack
+    shoes: ClothingShoesBootsWinter
+
+- type: startingGear
+  id: WFWreckCrewGearAerumnaMiner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    outerClothing: ClothingOuterHardsuitSalvage
+    mask: ClothingMaskBreath
+    shoes: ClothingShoesBootsWork
+
+- type: startingGear
+  id: WFWreckCrewGearAerumnaScientist
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitScientist
+    outerClothing: ClothingOuterCoatLab
+    mask: ClothingMaskBreath
+    shoes: ClothingShoesColorBlack
+
+- type: startingGear
+  id: WFWreckCrewGearCarcinoma
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMedicalDoctor
+    mask: ClothingMaskGas
+    gloves: ClothingHandsGlovesColorBlack
+    shoes: ClothingShoesColorBlack

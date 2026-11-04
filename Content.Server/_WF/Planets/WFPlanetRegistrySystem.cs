@@ -36,6 +36,7 @@ public sealed partial class WFPlanetRegistrySystem : EntitySystem
         }
 
         SubscribeLocalEvent<WFSectorPlanetComponent, ComponentShutdown>(OnSectorPlanetShutdown);
+        InitializeLobby();
     }
 
     /// <summary>Registers a freshly spawned sector body and builds its network if the surface asks for it.</summary>

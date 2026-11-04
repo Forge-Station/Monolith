@@ -61,6 +61,8 @@ public sealed class WolfmedLifeSystem : EntitySystem
     private static readonly TimeSpan TickInterval = TimeSpan.FromSeconds(1);
 
     [Dependency] private BloodstreamSystem _bloodstream = default!;
+
+    [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _dormancy = default!;
     [Dependency] private SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -259,7 +261,8 @@ public sealed class WolfmedLifeSystem : EntitySystem
 
         foreach (var body in _due)
         {
-            if (!TerminatingOrDeleted(body))
+            // An NPC on planet ground no player is near holds still until someone comes.
+            if (!TerminatingOrDeleted(body) && !_dormancy.BodySleeps(body))
                 Tick(body, (float) TickInterval.TotalSeconds);
         }
     }

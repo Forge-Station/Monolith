@@ -41,6 +41,6 @@ public sealed partial class ScalingViewport
         var view = new Box2(min, max);
 
         var rotation = _fallbackEye?.Rotation ?? Angle.Zero;
-        return WFCavernViewSystem.LevelViewBox(view, rotation, depth, ownDepth, WFPlanetView.Shrink(_entityManager, ground)).Enlarged(1f);
+        return WFCavernViewSystem.LevelViewBox(view, rotation, depth, ownDepth, WFPlanetView.Shrink(_entityManager, ground, _player.LocalEntity)).Enlarged(1f);
     }
 }

@@ -49,3 +49,8 @@
   - type: Construction # Frontier
     graph: FiresGraph # Frontier
     node: FireplaceNode # Frontier
+  # WOLFGATE(Warmth): a fireplace warms whoever sits by it
+  - type: EntityRadiusHeater
+    radius: 3
+    thermalEnergy: 25000
+    limit: 311

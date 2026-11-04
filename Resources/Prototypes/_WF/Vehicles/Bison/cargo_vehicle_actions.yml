@@ -1,0 +1,41 @@
+# Given to the carrier while someone drives it by remote, and taken back and deleted when the link ends. The names and
+# descriptions are in Resources/Locale/en-US/_WF/Vehicles/bison.ftl.
+- type: entity
+  id: CMUActionCargoVehicleReturn
+  categories: [ WFVehicles ]
+  components:
+  - type: InstantAction
+    autoPopulate: false
+    icon:
+      sprite: _WF/Vehicles/Objects/command_tablet.rsi
+      state: cotablet
+    event: !type:CMUCargoVehicleReturnActionEvent
+    checkCanInteract: false
+    itemIconStyle: BigItem
+
+- type: entity
+  id: CMUActionCargoVehicleToggleBay
+  categories: [ WFVehicles ]
+  components:
+  - type: InstantAction
+    autoPopulate: false
+    icon:
+      sprite: _WF/Vehicles/CMU/cargo_carrier.rsi
+      state: cargo_open
+    event: !type:CMUCargoVehicleToggleBayActionEvent
+    checkCanInteract: false
+    itemIconStyle: BigItem
+
+# CMU's icon is a 20mm grenade; Wolfgate's own grenade stands in for it.
+- type: entity
+  id: CMUActionCargoVehicleSelfDestruct
+  categories: [ WFVehicles ]
+  components:
+  - type: InstantAction
+    autoPopulate: false
+    icon:
+      sprite: Objects/Weapons/Grenades/grenade.rsi
+      state: icon
+    event: !type:CMUCargoVehicleSelfDestructActionEvent
+    checkCanInteract: false
+    itemIconStyle: BigItem

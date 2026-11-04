@@ -1,0 +1,520 @@
+# The rounds of the vehicle guns, on Wolfgate's bullet, cartridge and rocket bases. Damage numbers are RMC's. Every cartridge
+# leaves no casing (deleteOnSpawn): a casing arriving on a client trips a test-client assert, and a vehicle gun has no
+# floor to drop one on. The rounds that fly to a point and go off there (cannon shell, grenade, smoke, flare, rockets) carry
+# IgnorePredictionHide, so the shooter's client leaves them to the server (see ShootAtFixedPointSystem).
+#
+# RMC's accuracy, armour piercing, damage falloff, area damage, shrapnel and knock-out components are not ported. A round's
+# range limit is a TimedDespawn where RMC's falloff cut the damage off at a distance: the tiles of the range over the speed of
+# the gun that fires it (53 tiles a second for the RMC guns, 62 for CMU's, 50 for the ACE autocannon).
+
+- type: entity
+  parent: MuzzleFlashEffect
+  id: MuzzleFlashEffectVehicleOver
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    offset: 0, 0
+
+- type: entity
+  parent: MuzzleFlashEffectVehicleOver
+  id: MuzzleFlashEffectVehicleOverLarge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    offset: 0.2, 0
+    scale: "1.6, 1.6"
+
+## Kinetic rounds
+
+- type: entity
+  parent: BaseCartridge
+  id: VehicleCartridgeCannonBase
+  abstract: true
+  name: cartridge (10x50mm)
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+
+- type: entity
+  parent: BaseBullet
+  id: VehicleBulletCannonBase
+  abstract: true
+  name: bullet (10x50mm)
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: WFImpactRicochet
+    sound:
+      collection: WFRcsmRicochet
+      params:
+        maxDistance: 16
+    chance: 0.35
+  - type: Sprite
+    sprite: _WF/Vehicles/Projectiles/bullet_projectiles.rsi
+    drawdepth: Effects
+    layers:
+    - state: bullet
+      shader: unshaded
+
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: VehicleCartridgeAPCFrontalCannon10x50mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleBulletAPCFrontalCannon10x50mm
+
+- type: entity
+  parent: VehicleBulletCannonBase
+  id: VehicleBulletAPCFrontalCannon10x50mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 36
+
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: VehicleCartridgeBoyarsDualCannon10x50mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleBulletBoyarsDualCannon10x50mm
+
+- type: entity
+  parent: VehicleBulletCannonBase
+  id: VehicleBulletBoyarsDualCannon10x50mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: VehicleCartridgeRERotaryCannon10x50mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleBulletRERotaryCannon10x50mm
+
+- type: entity
+  parent: VehicleBulletCannonBase
+  id: VehicleBulletRERotaryCannon10x50mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+
+# The cupola's round: RMC cut its damage to nothing past 12 tiles, which at the gun's 53 tiles a second is 0.2264 seconds.
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: VehicleCartridgeSentry10x50mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleBulletSentry10x50mm
+
+- type: entity
+  parent: VehicleBulletCannonBase
+  id: VehicleBulletSentry10x50mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: TimedDespawn
+    lifetime: 0.2264
+
+# The minigun's round: RMC cut its damage to nothing past 22 tiles, which at the gun's 53 tiles a second is 0.4151 seconds.
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: VehicleCartridgeLTAAAP
+  name: cartridge (10x20mm-APC)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleBulletLTAAAP
+
+- type: entity
+  parent: VehicleBulletCannonBase
+  id: VehicleBulletLTAAAP
+  name: bullet (10x20mm-APC)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: TimedDespawn
+    lifetime: 0.4151
+
+# The ACE flak round: RMC cut its damage off at 32 tiles, which at the gun's 50 tiles a second is 0.64 seconds.
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: VehicleCartridgeAceAutocannon
+  name: cartridge (ACE autocannon)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: RMCProjectileAceAutocannonFlak
+
+- type: entity
+  parent: VehicleBulletCannonBase
+  id: RMCProjectileAceAutocannonFlak
+  name: ACE flak round
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 60
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: TimedDespawn
+    lifetime: 0.64
+
+## Cannon shells
+
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: VehicleCartridgeLTBCannon
+  name: cartridge (LTB cannon)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: RMCProjectileLTBCannon
+    muzzleFlash: MuzzleFlashEffectVehicleOverLarge
+
+# Goes off where it is aimed, or on the first hard thing it hits (not on another bullet's non-hard fly-by sensor). The blast has
+# RMC's intensity numbers and its explosion type (Weapons/explosions.yml), with RMC's damage per intensity.
+- type: entity
+  parent: BaseBulletTrigger
+  id: RMCProjectileLTBCannon
+  name: LTB cannon shell
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: WFImpactRicochet
+    sound:
+      collection: WFRcsmShellRicochet
+      params:
+        volume: 2
+        maxDistance: 24
+    chance: 0.45
+  - type: Sprite
+    sprite: _WF/Vehicles/Projectiles/projectiles.rsi
+    scale: "1.2, 1.2"
+    layers:
+    - state: ltb
+      shader: unshaded
+  - type: TriggerOnCollide
+    fixtureID: projectile
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Blunt: 12
+        Piercing: 8
+  - type: IgnorePredictionHide
+  - type: VehicleDamageMultiplier
+    multiplier: 10
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: RMCLTBCannon
+    maxIntensity: 40
+    intensitySlope: 18
+    totalIntensity: 650
+    tileBreakScale: 4
+    maxTileBreak: 12
+  - type: PointLight
+    radius: 3.5
+    color: orange
+    energy: 0.5
+
+## Rockets
+
+- type: entity
+  parent: BaseCartridge
+  id: VehicleRocket84mmAntiArmor
+  name: 84mm anti-armor rocket
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/rocket_shell.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: VehicleProjectileRocket84mmAntiArmor
+    deleteOnSpawn: true
+
+# The TOW rocket. RMC's direct-hit damage stands in for the warhead and the blast is small, RMC's own (explosion type RMC).
+- type: entity
+  parent: BulletRocket
+  id: VehicleProjectileRocket84mmAntiArmor
+  name: 84mm anti-armor rocket
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/Projectiles/m5spec_projectiles.rsi
+    layers:
+    - state: m5_84mm_ap
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Blunt: 160
+        Heat: 150
+  - type: IgnorePredictionHide
+  - type: VehicleDamageMultiplier
+    multiplier: 5
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 10
+    intensitySlope: 5
+    totalIntensity: 35
+    maxTileBreak: 0
+
+## Launcher rounds
+
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: WFVehicleCartridgeGrenadeHE
+  name: cartridge (30mm HEDP grenade)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: WFVehicleGrenadeHEShell
+    deleteOnSpawn: true
+
+# A grenade lobbed to the aimed point; it goes off a second and a half after it leaves the gun (OnShootTriggerAmmoTimer).
+- type: entity
+  parent: BaseBullet
+  id: WFVehicleGrenadeHEShell
+  name: 30mm HEDP grenade
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: grenade
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Blunt: 1
+  - type: IgnorePredictionHide
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 20
+    intensitySlope: 6
+    totalIntensity: 200
+    canCreateVacuum: false
+
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: WFVehicleCartridgeSmoke
+  name: cartridge (40mm smoke grenade)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: WFVehicleSmokeShell
+    deleteOnSpawn: true
+
+# Three shells a shot, as in RMC; they all fly to the aimed point, at most 9 tiles out as in RMC and CMU, and burst there or
+# where they meet a wall.
+- type: entity
+  parent: BaseBullet
+  id: WFVehicleSmokeShell
+  name: 40mm smoke grenade
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
+    layers:
+    - state: grenade
+  - type: Projectile
+    deleteOnCollide: false
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 30
+    soundHit:
+      path: /Audio/Effects/gen_hit.ogg
+  - type: IgnorePredictionHide
+  - type: ProjectileMaxFixedRange
+    maxFixedRange: 9
+  - type: ProjectileSpread
+    proto: WFVehicleSmokeShell
+    count: 3
+    spread: 45
+  - type: TimedDespawn
+    lifetime: 2
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: SmokeOnTrigger
+    duration: 20
+    spreadAmount: 25
+  - type: SoundOnTrigger
+    sound: /Audio/_Mono/Weapons/Grenades/smoke_bomb.ogg
+  - type: DeleteOnTrigger
+
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: WFVehicleCartridgeFlare
+  name: cartridge (flare)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: WFVehicleFlareRound
+    deleteOnSpawn: true
+
+# A flare shot to the aimed point; it stops there and burns for a while.
+- type: entity
+  parent: BaseBullet
+  id: WFVehicleFlareRound
+  name: flare
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/flare.rsi
+    layers:
+    - state: flare_base
+    - state: flare_burn
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Piercing: 0
+  - type: IgnorePredictionHide
+  - type: TimedDespawn
+    lifetime: 45
+  - type: PointLight
+    color: "#FF8080"
+    radius: 9
+    energy: 9
+    netsync: false
+
+## Port gun rounds
+
+- type: entity
+  parent: Cartridge762x39mmFMJ
+  id: WFVehicleCartridge762x39mmFMJ
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+
+# The L6 SAW's magazine box with rounds that leave no casing; the APC port guns start with it.
+- type: entity
+  parent: Magazine762x39mmBox
+  id: WFVehicleMagazine762x39mmBox
+  name: port gun magazine box (7.62x39mm FMJ)
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: BallisticAmmoProvider
+    proto: WFVehicleCartridge762x39mmFMJ
+    capacity: 100
+
+# The flamers' jets. A jet sets alight what it hits and bursts where it is aimed or at the first hard thing in its way;
+# the burst is the fire bomb's fire with heat for its only damage (Weapons/explosions.yml), small, and breaks no tiles and
+# opens no deck to space.
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: VehicleCartridgeDragonFlame
+  name: DRGN flame charge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleProjectileDragonFlame
+    deleteOnSpawn: true
+
+- type: entity
+  parent: VehicleCartridgeCannonBase
+  id: VehicleCartridgeTankFlamer
+  name: tank flamer charge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: VehicleProjectileTankFlamer
+    deleteOnSpawn: true
+
+- type: entity
+  abstract: true
+  parent: BaseBulletTrigger
+  id: WFVehicleFlameJetBase
+  categories: [ HideSpawnMenu, WFVehicles ]
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/Projectiles/firesentry_projectile.rsi
+    drawdepth: Effects
+    layers:
+    - state: pulse0
+      shader: unshaded
+  - type: PointLight
+    color: "#ff7a1a"
+    radius: 2.5
+    energy: 4
+  - type: IgnorePredictionHide
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: WFVehicleFlame
+    canCreateVacuum: false
+    tileBreakScale: 0
+    maxTileBreak: 0
+
+- type: entity
+  parent: WFVehicleFlameJetBase
+  id: VehicleProjectileDragonFlame
+  name: DRGN flame jet
+  components:
+  - type: Projectile
+    impactEffect: null
+    soundHit: null
+    damage:
+      types:
+        Heat: 30
+  - type: IgniteOnCollide
+    fireStacks: 3
+  - type: Explosive
+    maxIntensity: 6
+    intensitySlope: 3
+    totalIntensity: 30
+
+- type: entity
+  parent: WFVehicleFlameJetBase
+  id: VehicleProjectileTankFlamer
+  name: tank flamer jet
+  components:
+  - type: Projectile
+    impactEffect: null
+    soundHit: null
+    damage:
+      types:
+        Heat: 22
+  - type: IgniteOnCollide
+    fireStacks: 2
+  - type: Explosive
+    maxIntensity: 5
+    intensitySlope: 2
+    totalIntensity: 45

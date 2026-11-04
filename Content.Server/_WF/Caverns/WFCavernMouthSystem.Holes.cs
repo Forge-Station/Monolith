@@ -15,25 +15,24 @@ public sealed partial class WFCavernMouthSystem
     /// <summary>Most holes one ground fits out in a tick; the rest wait for the next.</summary>
     public const int OpenedPerTick = 256;
 
-    /// <summary>How far a hole looks for a climb point, in steps across open cavern floor, before it gets one of its own.</summary>
-    public const int ClimbReach = 8;
+    /// <summary>How far a hole looks for stairs, in steps across open cavern floor, before it gets some of its own.</summary>
+    public const int StairsReach = 8;
 
     /// <summary>How far past a hole's tile the landing below is cleared: a 3x3.</summary>
     public const int LandingReach = 1;
 
     private readonly HashSet<Entity<CEZPhysicsComponent>> _bodies = new();
 
-    /// <summary>Steps from cavern tiles to the nearest climb point, up to <see cref="ClimbReach"/>, for one batch of holes.</summary>
-    private readonly Dictionary<Vector2i, int> _climbSteps = new();
+    /// <summary>Steps from cavern tiles to the nearest stairs, up to <see cref="StairsReach"/>, for one batch of holes.</summary>
+    private readonly Dictionary<Vector2i, int> _stairSteps = new();
 
-    private readonly Queue<Vector2i> _climbFrontier = new();
+    private readonly Queue<Vector2i> _stairFrontier = new();
 
     private void InitializeHoles()
     {
         SubscribeLocalEvent<WFCavernGroundComponent, TileChangedEvent>(OnGroundTileChanged);
         SubscribeLocalEvent<WFCavernLayerComponent, TileChangedEvent>(OnCavernTileChanged);
         SubscribeLocalEvent<WFCavernShaftComponent, EntityTerminatingEvent>(OnShadeTerminating);
-        SubscribeLocalEvent<WFCavernClimbComponent, EntityTerminatingEvent>(OnClimbTerminating);
     }
 
     /// <summary>Notes ground tiles that emptied or filled; it runs inside SetTiles, the biome loader's too, so the work waits for the update.</summary>
@@ -82,19 +81,12 @@ public sealed partial class WFCavernMouthSystem
         _eyes.CheckSoon();
     }
 
-    /// <summary>Drops a climb point deleted by anything else from its ground's registry.</summary>
-    private void OnClimbTerminating(Entity<WFCavernClimbComponent> ent, ref EntityTerminatingEvent args)
+    /// <summary>Drops stairs deleted by anything else from their ground's registry.</summary>
+    // Called from the stairs system, which owns their terminating event.
+    public void ForgetStairs(EntityUid stairs, Entity<WFCavernGroundComponent> ground, Vector2i index)
     {
-        var xform = Transform(ent);
-        if (xform.MapUid is not { } map
-            || !TryComp<WFCavernLayerComponent>(map, out var layer)
-            || !TryComp<WFCavernGroundComponent>(layer.Ground, out var ground)
-            || !TryComp<MapGridComponent>(map, out var grid))
-            return;
-
-        var index = _map.TileIndicesFor(map, grid, xform.Coordinates);
-        if (ground.ClimbPoints.TryGetValue(index, out var climb) && climb == ent.Owner)
-            ground.ClimbPoints.Remove(index);
+        if (ground.Comp.Stairways.TryGetValue(index, out var known) && known == stairs)
+            ground.Comp.Stairways.Remove(index);
     }
 
     /// <summary>
@@ -127,7 +119,7 @@ public sealed partial class WFCavernMouthSystem
     }
 
     /// <summary>Deletes the shades of holes something filled, such as lattice or a floor laid over them.</summary>
-    // The ground stays pinned and the landing and climb point stay, so opening the hole again brings back only its shade.
+    // The ground stays pinned and the landing and stairs stay, so opening the hole again brings back only its shade.
     private void CloseHoles(Entity<WFCavernGroundComponent> ground, MouthContext context)
     {
         if (ground.Comp.Closed.Count == 0)
@@ -188,8 +180,8 @@ public sealed partial class WFCavernMouthSystem
     }
 
     /// <summary>
-    /// Fits out every ground tile that became a real hole: pinned, with a cleared landing below, a shade, and a climb
-    /// point near it. Tiles an unload emptied are dropped: they are unpinned, on a chunk no longer loaded.
+    /// Fits out every ground tile that became a real hole: pinned, with a cleared landing below, a shade, and stairs
+    /// near it. Tiles an unload emptied are dropped: they are unpinned, on a chunk no longer loaded.
     /// </summary>
     // A faller takes about 0.45 s to sink through the ground, so the landing is always there first. Every queued tile is
     // checked each tick, as the checks are cheap, so an unload's thousands of tiles never hold back a real hole.
@@ -231,8 +223,9 @@ public sealed partial class WFCavernMouthSystem
     }
 
     /// <summary>
-    /// Pins holes, lays their landings, spawns their shades, wakes what stood on them and gives each a climb point it
-    /// can reach. A hole over stairs gets no landing or climb point: the stairs are both.
+    /// Pins holes, lays their landings, spawns their shades, wakes what stood on them and gives each stairs it can
+    /// reach. A hole over stairs, built or mapped, gets no landing or cut stairs, the stairs being both, and a plain
+    /// shade: a stairwell, not a sinkhole.
     /// </summary>
     private void EnsureHoles(Entity<WFCavernGroundComponent> ground, MouthContext context, List<Vector2i> holes)
     {
@@ -248,26 +241,31 @@ public sealed partial class WFCavernMouthSystem
         }
 
         Entity<MapGridComponent> levelGrid = (context.Level.Owner, context.Level.Comp2);
-        var drops = holes.Where(hole => !HasStairs(levelGrid, hole)).ToList();
+        var stairwells = holes.Where(hole => HasStairs(ground, levelGrid, hole)).ToHashSet();
+        var drops = holes.Where(hole => !stairwells.Contains(hole)).ToList();
 
         if (drops.Count > 0)
             PrepareLandings(context, drops);
 
         foreach (var index in holes)
         {
-            var multiplier = _map.TryGetTileRef(context.Level.Owner, context.Level.Comp2, index, out var below) && !below.Tile.IsEmpty
-                ? ((ContentTileDefinition) _tileDefs[below.Tile.TypeId]).FallDamageMultiplier
-                : 1f;
-
-            SpawnShade(ground, context, index, multiplier);
+            SpawnShade(ground, context, index, LandingMultiplier(context, index), stairwells.Contains(index));
             WakeBodiesOn(context.Ground, index);
         }
 
         if (drops.Count > 0)
-            EnsureClimbs(ground, context, drops);
+            EnsureStairways(ground, context, drops);
 
         // Open the view below now rather than at the next check.
         _eyes.CheckSoon();
+    }
+
+    /// <summary>The fall damage multiplier of the cavern tile under a hole.</summary>
+    private float LandingMultiplier(MouthContext context, Vector2i index)
+    {
+        return _map.TryGetTileRef(context.Level.Owner, context.Level.Comp2, index, out var below) && !below.Tile.IsEmpty
+            ? ((ContentTileDefinition) _tileDefs[below.Tile.TypeId]).FallDamageMultiplier
+            : 1f;
     }
 
     /// <summary>
@@ -323,14 +321,14 @@ public sealed partial class WFCavernMouthSystem
     }
 
     /// <summary>
-    /// Gives each hole a climb point unless one lies within <see cref="ClimbReach"/> steps of its landing across cavern
-    /// floor free of hard anchored entities, so no hole drops anyone into a pocket with no way up.
+    /// Gives each hole stairs unless some lie within <see cref="StairsReach"/> steps of its landing across cavern floor
+    /// free of hard anchored entities, so no hole drops anyone into a pocket with no way up.
     /// </summary>
-    // Holes go in order and each new climb point spreads at once, so a crater's joined landings share one. A mouth's hole
-    // has its own. On an unloaded chunk only pinned tiles exist, and the biome grows nothing on them when it loads.
-    private void EnsureClimbs(Entity<WFCavernGroundComponent> ground, MouthContext context, List<Vector2i> holes)
+    // Holes go in order and each new stairs spreads at once, so a crater's joined landings share one. A mouth's hole
+    // gets its own when its stairs are cut. On an unloaded chunk only pinned tiles exist, and the biome grows nothing on them when it loads.
+    private void EnsureStairways(Entity<WFCavernGroundComponent> ground, MouthContext context, List<Vector2i> holes)
     {
-        _climbSteps.Clear();
+        _stairSteps.Clear();
 
         var min = holes[0];
         var max = holes[0];
@@ -340,51 +338,51 @@ public sealed partial class WFCavernMouthSystem
             max = Vector2i.ComponentMax(max, hole);
         }
 
-        foreach (var index in ground.Comp.ClimbPoints.Keys)
+        foreach (var index in ground.Comp.Stairways.Keys)
         {
-            if (index.X >= min.X - ClimbReach && index.X <= max.X + ClimbReach
-                && index.Y >= min.Y - ClimbReach && index.Y <= max.Y + ClimbReach)
-                SpreadClimb(context.Level, index);
+            if (index.X >= min.X - StairsReach && index.X <= max.X + StairsReach
+                && index.Y >= min.Y - StairsReach && index.Y <= max.Y + StairsReach)
+                SpreadStairs(context.Level, index);
         }
 
         foreach (var hole in holes)
         {
-            if (_climbSteps.ContainsKey(hole) || InMouthHole(ground, hole))
+            if (_stairSteps.ContainsKey(hole))
                 continue;
 
-            if (TrySpawnClimbNear(ground, context, hole, out var climb))
-                SpreadClimb(context.Level, climb);
+            if (TrySpawnStairsAt(ground, context, hole))
+                SpreadStairs(context.Level, hole);
         }
 
-        _climbSteps.Clear();
+        _stairSteps.Clear();
     }
 
-    /// <summary>Walks out from a climb point across open cavern floor, noting each tile's steps to its nearest climb point.</summary>
-    private void SpreadClimb(Entity<BiomeComponent, MapGridComponent> level, Vector2i climb)
+    /// <summary>Walks out from stairs across open cavern floor, noting each tile's steps to its nearest stairs.</summary>
+    private void SpreadStairs(Entity<BiomeComponent, MapGridComponent> level, Vector2i stairs)
     {
-        if (_climbSteps.TryGetValue(climb, out var known) && known == 0)
+        if (_stairSteps.TryGetValue(stairs, out var known) && known == 0)
             return;
 
         Entity<MapGridComponent> levelGrid = (level.Owner, level.Comp2);
-        _climbSteps[climb] = 0;
-        _climbFrontier.Enqueue(climb);
+        _stairSteps[stairs] = 0;
+        _stairFrontier.Enqueue(stairs);
 
-        while (_climbFrontier.TryDequeue(out var index))
+        while (_stairFrontier.TryDequeue(out var index))
         {
-            var steps = _climbSteps[index] + 1;
-            if (steps > ClimbReach)
+            var steps = _stairSteps[index] + 1;
+            if (steps > StairsReach)
                 continue;
 
             foreach (var side in Cardinals)
             {
                 var next = index + side;
-                if (_climbSteps.TryGetValue(next, out var seen) && seen <= steps
+                if (_stairSteps.TryGetValue(next, out var seen) && seen <= steps
                     || IsEmpty(level, next)
                     || HasHardAnchored(levelGrid, next))
                     continue;
 
-                _climbSteps[next] = steps;
-                _climbFrontier.Enqueue(next);
+                _stairSteps[next] = steps;
+                _stairFrontier.Enqueue(next);
             }
         }
     }
@@ -402,50 +400,51 @@ public sealed partial class WFCavernMouthSystem
     }
 
     /// <summary>
-    /// Anchors a climb point on a hole's first solid neighbour: the four sides first, the climb side leading, then the
-    /// corners. With none free the hole has no climb point of its own.
+    /// Cuts stairs under a hole tile, up to the first of its four neighbours that is solid, clear ground to come out on,
+    /// with a clear cavern tile at their foot. With none the hole has no stairs of its own.
     /// </summary>
     // The cleared landing joins every neighbour to the tile below the hole.
-    private bool TrySpawnClimbNear(Entity<WFCavernGroundComponent> ground, MouthContext context, Vector2i hole, out Vector2i climb)
+    private bool TrySpawnStairsAt(Entity<WFCavernGroundComponent> ground, MouthContext context, Vector2i hole)
     {
-        climb = default;
-        var mapId = Comp<MapComponent>(ground).MapId;
-        Entity<MapGridComponent> groundGrid = (context.Ground.Owner, context.Ground.Comp2);
         Entity<MapGridComponent> levelGrid = (context.Level.Owner, context.Level.Comp2);
 
-        foreach (var offset in ClimbOffsets(context.Spec.ClimbSide.ToIntVec()))
-        {
-            var index = hole + offset;
+        if (IsEmpty(context.Level, hole) || HasHardAnchored(levelGrid, hole))
+            return false;
 
-            if (IsEmpty(context.Ground, index)
-                || ground.Comp.Shades.ContainsKey(index)
-                || HasHardAnchored(groundGrid, index)
-                || UnderGrid(mapId, index)
-                || IsEmpty(context.Level, index)
-                || HasHardAnchored(levelGrid, index))
+        foreach (var side in ExitSides(context.Spec.StairsSide))
+        {
+            if (!StairsFit(ground, context, hole, side))
                 continue;
 
-            SpawnClimb(ground, context, levelGrid, index);
-            climb = index;
+            SpawnStairs(ground, context, hole, side);
             return true;
         }
 
         return false;
     }
 
-    /// <summary>A hole's neighbours in the order its climb point tries them: the climb side, the two beside it, the far side, then the corners.</summary>
-    private static IEnumerable<Vector2i> ClimbOffsets(Vector2i side)
+    /// <summary>Whether stairs under a hole tile could come out on the ground beside it on a side, and be walked up from the tile opposite.</summary>
+    private bool StairsFit(Entity<WFCavernGroundComponent> ground, MouthContext context, Vector2i hole, Direction side)
     {
-        var across = new Vector2i(-side.Y, side.X);
+        var exit = hole + side.ToIntVec();
+        var foot = hole - side.ToIntVec();
+        Entity<MapGridComponent> levelGrid = (context.Level.Owner, context.Level.Comp2);
+
+        return CheckStairs(ground, context, hole, exit) == WFCavernStairsRefusal.None
+               && !UnderGrid(Comp<MapComponent>(ground).MapId, exit)
+               && !IsEmpty(context.Level, foot)
+               && !HasHardAnchored(levelGrid, foot);
+    }
+
+    /// <summary>The sides stairs try coming out on: the world's stairs side, the two beside it, then the far side.</summary>
+    private static IEnumerable<Direction> ExitSides(Direction side)
+    {
+        var angle = side.ToAngle();
 
         yield return side;
-        yield return across;
-        yield return -across;
-        yield return -side;
-        yield return side + across;
-        yield return side - across;
-        yield return -side + across;
-        yield return -side - across;
+        yield return (angle + Angle.FromDegrees(90)).GetCardinalDir();
+        yield return (angle - Angle.FromDegrees(90)).GetCardinalDir();
+        yield return side.GetOpposite();
     }
 
     /// <summary>

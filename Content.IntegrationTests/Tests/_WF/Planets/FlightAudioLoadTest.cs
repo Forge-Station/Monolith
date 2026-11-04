@@ -5,7 +5,10 @@ using System.Numerics;
 using Content.IntegrationTests.Pair;
 using Content.Server._WF.Planets.Flight;
 using Content.Server._WF.ShipPa;
+using Content.Shared._WF.Planets.Flight;
 using Content.Shared.Power.EntitySystems;
+using Content.Shared.Throwing;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -29,8 +32,11 @@ public sealed class FlightAudioLoadTest
     /// <summary>Most audio entities allowed to exist at once at any point in the flight.</summary>
     private const int PeakBudget = 48;
 
-    /// <summary>Most audio entities allowed to still exist five seconds after the hull is down.</summary>
+    /// <summary>Most audio entities allowed to still exist once the wreck has lain still for <see cref="SettleSeconds"/>.</summary>
     private const int SettledBudget = 8;
+
+    /// <summary>Seconds the wreck has to lie still before the leftovers are counted.</summary>
+    private const int SettleSeconds = 5;
 
     /// <summary>A hull covered in air alarms falls and lands within the peak and settled audio budgets.</summary>
     [Test]
@@ -49,11 +55,14 @@ public sealed class FlightAudioLoadTest
         var orbit = layers[^1];
         var orbitMapId = await MapIdOf(pair, orbit);
 
-        // Solid tiles under the footprint, so it lands.
-        await LayTiles(pair, ground, new Vector2i(-24, -24), new Vector2i(48, 48));
+        // Solid tiles under the landing and the whole skid: the hull glides south as it falls and the wreck slides on
+        // as far as y = -46. A section that runs off the floor is over unloaded terrain and starts falling again.
+        await LayTiles(pair, ground, new Vector2i(-40, -80), new Vector2i(48, 24));
 
         var hull = await BuildHull(pair, orbitMapId);
         await MapInitHull(pair, hull);
+
+        var loose = new List<EntityUid>();
 
         // Rows 4 and 5 of the hull are clear: thirty tiles.
         await server.WaitPost(() =>
@@ -77,7 +86,7 @@ public sealed class FlightAudioLoadTest
 
             for (var i = 0; i < LooseItems; i++)
             {
-                entMan.SpawnEntity("Crowbar", new EntityCoordinates(hull, new Vector2(i + 0.5f, 6.5f)));
+                loose.Add(entMan.SpawnEntity("Crowbar", new EntityCoordinates(hull, new Vector2(i + 0.5f, 6.5f))));
             }
         });
 
@@ -104,29 +113,42 @@ public sealed class FlightAudioLoadTest
         var refusal = await EnterAtmosphere(pair, hull, settle: 0f);
         Assert.That(refusal, Is.Null, $"The confirmed descent was refused: {refusal}");
 
+        var grind = ((SoundPathSpecifier) WFFlightSystem.SkidSound).Path.ToString();
         var peak = 0;
         var peakClips = new Dictionary<string, int>();
         var samples = new List<string>();
         var final = new Dictionary<string, int>();
+        var finalLoops = new Dictionary<string, int>();
         var landed = false;
         var settle = 0;
+        var strayGrind = "";
 
-        // Ninety seconds covers a full plummet out of orbit.
-        for (var second = 0; second < 90; second++)
+        // Ninety seconds covers a full plummet out of orbit, the skid after it and the settle.
+        for (var second = 0; second < 90 && settle < SettleSeconds; second++)
         {
             await server.WaitRunTicks(pair.SecondsToTicks(1f));
 
             var clips = new Dictionary<string, int>();
+            var loops = new Dictionary<string, int>();
+            var skidding = 0;
+            var moving = false;
 
             await server.WaitPost(() =>
             {
-                CountAudio(entMan, clips, existing);
+                CountAudio(entMan, clips, existing, loops);
 
                 if (!entMan.Deleted(hull) && entMan.GetComponent<TransformComponent>(hull).MapUid == ground)
                     landed = true;
+
+                // Every wreck section skids on its own, and one that leaves the ground is lift-lost again.
+                skidding = entMan.Count<WFSkidComponent>();
+                moving = skidding > 0
+                    || entMan.Count<WFLiftLostComponent>() > 0
+                    || loose.Any(item => entMan.HasComponent<ThrownItemComponent>(item));
             });
 
             var total = clips.Values.Sum();
+            var grinding = loops.GetValueOrDefault(grind);
             samples.Add($"t+{second + 1}s: {total}");
 
             if (total > peak)
@@ -135,18 +157,22 @@ public sealed class FlightAudioLoadTest
                 peakClips = clips;
             }
 
+            // A section owns one scrape loop, so more loops than sections is one nobody is going to stop.
+            if (grinding > skidding && strayGrind.Length == 0)
+                strayGrind = $"{grinding} scrape loops for {skidding} skidding sections at t+{second + 1}s";
+
             if (!landed)
                 continue;
 
-            settle++;
+            // Counted from when the wreck last moved: the skid and what it breaks are noise, not leftovers.
+            settle = moving ? 0 : settle + 1;
             final = clips;
-
-            if (settle >= 5)
-                break;
+            finalLoops = loops;
         }
 
-        var peakBreakdown = string.Join(", ", peakClips.OrderByDescending(clip => clip.Value).Select(clip => $"{clip.Key} x{clip.Value}"));
-        var finalBreakdown = string.Join(", ", final.OrderByDescending(clip => clip.Value).Select(clip => $"{clip.Key} x{clip.Value}"));
+        var peakBreakdown = Breakdown(peakClips);
+        var finalBreakdown = Breakdown(final);
+        var loopBreakdown = Breakdown(finalLoops);
         var finalTotal = final.Values.Sum();
 
         TestContext.Out.WriteLine($"Flight audio: baseline {baseline}, peak {peak}, final {finalTotal}.");
@@ -159,12 +185,18 @@ public sealed class FlightAudioLoadTest
             using (Assert.EnterMultipleScope())
             {
                 Assert.That(landed, Is.True, "The hull never reached the ground, so no landing was measured at all.");
+                Assert.That(settle, Is.EqualTo(SettleSeconds),
+                    $"The wreck never lay still for {SettleSeconds} seconds, so nothing was counted at rest.");
                 Assert.That(peak, Is.LessThanOrEqualTo(PeakBudget),
                     $"A hull carrying {AlarmCount} air alarms held {peak} audio streams open at once on the way down. " +
                     $"Every one of those is an OpenAL source on every client aboard. Peak: {peakBreakdown}");
+                Assert.That(strayGrind, Is.Empty, "A scrape loop outlived the skid that started it.");
+                Assert.That(finalLoops, Is.Empty,
+                    $"Looping streams were still playing {SettleSeconds} seconds after the wreck stopped, and a loop " +
+                    $"never ends by itself. Still looping: {loopBreakdown}");
                 Assert.That(finalTotal, Is.LessThanOrEqualTo(SettledBudget),
-                    $"{finalTotal} audio streams were still alive five seconds after the hull was down, so the flight " +
-                    $"leaks them rather than merely making a lot of noise. Still playing: {finalBreakdown}");
+                    $"{finalTotal} audio streams were still alive {SettleSeconds} seconds after the wreck stopped, so the " +
+                    $"flight leaks them rather than merely making a lot of noise. Still playing: {finalBreakdown}");
             }
         });
 
@@ -172,9 +204,18 @@ public sealed class FlightAudioLoadTest
         await pair.CleanReturnAsync();
     }
 
-    /// <summary>Audio entities alive right now, tallied by clip into the given map when there is one.</summary>
-    /// <summary>Counts live audio streams; the first call fills <paramref name="existing"/>, later calls skip them.</summary>
-    private static int CountAudio(IEntityManager entMan, Dictionary<string, int>? clips, HashSet<EntityUid> existing)
+    /// <summary>Clips and how many of each, busiest first.</summary>
+    private static string Breakdown(Dictionary<string, int> clips)
+    {
+        return string.Join(", ", clips.OrderByDescending(clip => clip.Value).Select(clip => $"{clip.Key} x{clip.Value}"));
+    }
+
+    /// <summary>
+    /// Counts live audio streams, tallied by clip, with the looping ones tallied again on their own; the first call
+    /// fills <paramref name="existing"/>, later calls skip them.
+    /// </summary>
+    private static int CountAudio(IEntityManager entMan, Dictionary<string, int>? clips, HashSet<EntityUid> existing,
+        Dictionary<string, int>? loops = null)
     {
         var count = 0;
         var fill = existing.Count == 0 && clips == null;
@@ -191,6 +232,9 @@ public sealed class FlightAudioLoadTest
 
             if (clips != null)
                 clips[audio.FileName] = clips.GetValueOrDefault(audio.FileName) + 1;
+
+            if (loops != null && audio.Params.Loop)
+                loops[audio.FileName] = loops.GetValueOrDefault(audio.FileName) + 1;
         }
 
         return count;

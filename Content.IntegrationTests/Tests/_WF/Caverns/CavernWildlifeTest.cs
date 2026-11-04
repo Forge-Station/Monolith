@@ -1,4 +1,5 @@
 #nullable enable
+using System.Collections.Generic;
 using System.Numerics;
 using Content.IntegrationTests.Pair;
 using Content.Server._CE.ZLevels.Core;
@@ -105,7 +106,7 @@ public sealed class CavernWildlifeTest
 
         // Pinned, so the unload keeps its tile and the animal on it; the hole is opened by hand after.
         await server.WaitPost(() =>
-            biomes.WfPinTiles((world.Ground, entMan.GetComponent<BiomeComponent>(world.Ground)), new[] { Spot }));
+            biomes.WfPinTiles((world.Ground, entMan.GetComponent<BiomeComponent>(world.Ground)), new[] { Spot, Spot - new Vector2i(1, 0) }));
         await UnloadChunks(pair, world.Ground, From, To);
 
         await server.WaitAssertion(() =>
@@ -113,7 +114,9 @@ public sealed class CavernWildlifeTest
                 "Precondition: the animal on its pinned tile fell when the chunk unloaded."));
 
         await server.WaitPost(() =>
-            maps.SetTile(world.Ground, entMan.GetComponent<MapGridComponent>(world.Ground), Spot, Tile.Empty));
+            // Two tiles: the cut stairs go under the first, so the animal over Spot still falls.
+            maps.SetTiles(world.Ground, entMan.GetComponent<MapGridComponent>(world.Ground),
+                new List<(Vector2i, Tile)> { (Spot, Tile.Empty), (Spot - new Vector2i(1, 0), Tile.Empty) }));
         await Wake(pair, animal);
         await server.WaitRunTicks(pair.SecondsToTicks(2f));
 
@@ -152,7 +155,9 @@ public sealed class CavernWildlifeTest
                 "Precondition: the animal is not standing on the ground."));
 
         await server.WaitPost(() =>
-            maps.SetTile(world.Ground, entMan.GetComponent<MapGridComponent>(world.Ground), Spot, Tile.Empty));
+            // Two tiles: the cut stairs go under the first, so the animal over Spot still falls.
+            maps.SetTiles(world.Ground, entMan.GetComponent<MapGridComponent>(world.Ground),
+                new List<(Vector2i, Tile)> { (Spot, Tile.Empty), (Spot - new Vector2i(1, 0), Tile.Empty) }));
         await Wake(pair, animal);
         await server.WaitRunTicks(pair.SecondsToTicks(2f));
 
@@ -190,6 +195,26 @@ public sealed class CavernWildlifeTest
 
         await server.WaitPost(() =>
         {
+            // Bare ground: a tree or stone the biome grew here would shove the mob off its tile.
+            var maps = server.System<SharedMapSystem>();
+            var grid = entMan.GetComponent<MapGridComponent>(world.Ground);
+            var anchored = new List<EntityUid>();
+            for (var x = -1; x <= 1; x++)
+            for (var y = -1; y <= 1; y++)
+            {
+                var enumerator = maps.GetAnchoredEntitiesEnumerator(world.Ground, grid, tile + new Vector2i(x, y));
+                while (enumerator.MoveNext(out var uid))
+                    anchored.Add(uid.Value);
+            }
+            foreach (var uid in anchored)
+                entMan.DeleteEntity(uid);
+            // Deleting what the biome grew pins its tile; these must still unload like any other ground.
+            var cleared = new List<Vector2i>();
+            for (var x = -1; x <= 1; x++)
+            for (var y = -1; y <= 1; y++)
+                cleared.Add(tile + new Vector2i(x, y));
+            server.System<BiomeSystem>().WfUnpinTiles((world.Ground, entMan.GetComponent<BiomeComponent>(world.Ground)), cleared);
+
             mob = entMan.SpawnEntity(MobProto, new EntityCoordinates(world.Ground, new Vector2(tile.X + 0.5f, tile.Y + 0.5f)));
 
             if (!wildlife)

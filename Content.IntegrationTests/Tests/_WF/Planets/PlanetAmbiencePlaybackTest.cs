@@ -77,7 +77,7 @@ public sealed class PlanetAmbiencePlaybackTest
         await EnableFeature(pair);
         var server = pair.Server;
         var client = pair.Client;
-        var worlds = new List<(string Name, List<EntityUid> Layers)>();
+        var worlds = new List<(string Name, string PlanetType, List<EntityUid> Layers)>();
         await server.WaitPost(() =>
         {
             var prototypes = server.ResolveDependency<Robust.Shared.Prototypes.IPrototypeManager>();
@@ -88,7 +88,7 @@ public sealed class PlanetAmbiencePlaybackTest
                 Assert.That(network, Is.Not.Null);
                 var layers = server.EntMan.GetComponent<WFPlanetNetworkComponent>(network!.Value).Layers.ToList();
                 server.System<BiomeSystem>().SetEnabled((layers[0], server.EntMan.GetComponent<BiomeComponent>(layers[0])), false);
-                worlds.Add((name, layers));
+                worlds.Add((name, profile.PlanetType.ToString(), layers));
             }
         });
         var viewer = await AttachViewer(pair, worlds[0].Layers[0], Vector2.Zero);
@@ -96,6 +96,18 @@ public sealed class PlanetAmbiencePlaybackTest
         var cfg = client.ResolveDependency<IConfigurationManager>();
         var oldGain = 0f;
         await client.WaitPost(() => { oldGain = cfg.GetCVar(CCVars.AmbienceVolume); cfg.SetCVar(CCVars.AmbienceVolume, 1f); });
+        // Each world's beds and accents, from its profile: the files may live anywhere (the Black Mesa imports do).
+        var profiles = new Dictionary<string, (HashSet<string> Beds, HashSet<string> Accents)>();
+        foreach (var profile in client.ResolveDependency<Robust.Shared.Prototypes.IPrototypeManager>().EnumeratePrototypes<WFPlanetAmbiencePrototype>())
+        {
+            if (profile.PlanetType is not { } planetType)
+                continue;
+            static HashSet<string> Paths(params List<Robust.Shared.Audio.SoundSpecifier>[] lists) =>
+                lists.SelectMany(list => list).OfType<Robust.Shared.Audio.SoundPathSpecifier>().Select(sound => sound.Path.ToString()).ToHashSet();
+            profiles[planetType.Id] =
+                (Paths(profile.Loops, profile.DayLoops, profile.NightLoops), Paths(profile.OneShots, profile.DayOneShots, profile.NightOneShots));
+        }
+        var everything = profiles.Values.SelectMany(sets => sets.Beds.Concat(sets.Accents)).ToHashSet();
         List<string> PlanetFiles()
         {
             var files = new List<string>();
@@ -103,41 +115,39 @@ public sealed class PlanetAmbiencePlaybackTest
             while (query.MoveNext(out _, out var audio))
             {
                 var file = audio.FileName;
-                if (file.StartsWith("/Audio/_WF/Planets/Worlds/")) files.Add(file);
+                if (everything.Contains(file)) files.Add(file);
             }
             return files;
         }
-        foreach (var (name, layers) in worlds.Append(worlds[0]))
+        foreach (var (name, planetType, layers) in worlds.Append(worlds[0]))
         {
             await server.WaitPost(() => server.System<SharedTransformSystem>().SetCoordinates(viewer,
                 new EntityCoordinates(layers[0], Vector2.Zero)));
             await pair.RunTicksSync(pair.SecondsToTicks(1));
-            await client.WaitAssertion(() => Assert.That(PlanetFiles().All(file =>
-                file.Contains("/" + name.ToLowerInvariant() + "/")), Is.True,
+            var (beds, accents) = profiles[planetType];
+            await client.WaitAssertion(() => Assert.That(PlanetFiles().All(file => beds.Contains(file) || accents.Contains(file)), Is.True,
                 "Previous planet audio survived crossing to " + name));
             var sawAccent = false;
             for (var seconds = 0; seconds < 10; seconds++)
             {
                 await pair.RunTicksSync(pair.SecondsToTicks(1));
-                await client.WaitAssertion(() => sawAccent |= PlanetFiles().Any(file =>
-                    file.Contains("/" + name.ToLowerInvariant() + "/") && file.Contains("_random_sound_")));
+                await client.WaitAssertion(() => sawAccent |= PlanetFiles().Any(accents.Contains));
             }
             await client.WaitAssertion(() =>
             {
-                var beds = PlanetFiles().Where(file => file.Contains("_ambience_")).ToList();
-                Assert.That(beds, Has.Count.EqualTo(1), name);
-                Assert.That(beds[0], Does.Contain("/" + name.ToLowerInvariant() + "/"), name);
+                var playing = PlanetFiles().Where(beds.Contains).ToList();
+                Assert.That(playing, Has.Count.EqualTo(1), name);
             });
             if (name is not ("Aerumna" or "Carcinoma")) continue;
             for (var seconds = 0; seconds < 6 && !sawAccent; seconds++)
             {
                 await pair.RunTicksSync(pair.SecondsToTicks(1));
-                await client.WaitAssertion(() => sawAccent = PlanetFiles().Any(file => file.Contains("_random_sound_")));
+                await client.WaitAssertion(() => sawAccent = PlanetFiles().Any(accents.Contains));
             }
             Assert.That(sawAccent, Is.True, name + " did not play its supplied arrival accent within 16 seconds.");
         }
         await client.WaitPost(() => cfg.SetCVar(CCVars.AmbienceVolume, oldGain));
-        foreach (var (_, layers) in worlds) await Teardown(pair, layers);
+        foreach (var (_, _, layers) in worlds) await Teardown(pair, layers);
         await pair.CleanReturnAsync();
     }
 

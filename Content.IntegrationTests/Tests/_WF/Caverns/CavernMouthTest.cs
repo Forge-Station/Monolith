@@ -23,7 +23,7 @@ using static Content.IntegrationTests.Tests._WF.Caverns.CavernFixture;
 
 namespace Content.IntegrationTests.Tests._WF.Caverns;
 
-/// <summary>Every world gets a gate at build: a pinned hole with shades, a solid lip, a rock-free pad and a climb point.</summary>
+/// <summary>Every world gets a gate at build: a pinned hole with shades, a solid lip, a rock-free pad and stairs.</summary>
 [TestFixture]
 [TestOf(typeof(WFCavernMouthSystem))]
 public sealed class CavernMouthTest
@@ -36,7 +36,7 @@ public sealed class CavernMouthTest
         { "WFSurfaceMerak", WFCavernAir.Breathable },
         { "WFSurfaceAerumna", WFCavernAir.Toxic },
         { "WFSurfaceThrascias", WFCavernAir.Freezing },
-        { "WFSurfaceCarcinoma", WFCavernAir.Foul },
+        { "WFSurfaceCarcinoma", WFCavernAir.Toxic },
     };
 
     /// <summary>Section 3.5: each world's landing tile fall multiplier.</summary>
@@ -48,17 +48,6 @@ public sealed class CavernMouthTest
         { "WFSurfaceAerumna", 1.5f },
         { "WFSurfaceThrascias", 0.25f },
         { "WFSurfaceCarcinoma", 0.4f },
-    };
-
-    /// <summary>Section 3.6: each world's climb-up time in seconds.</summary>
-    private static readonly Dictionary<string, float> ExpectedClimb = new()
-    {
-        { "WFSurfaceAsclepiu", 4f },
-        { "WFSurfaceFervidus", 4f },
-        { "WFSurfaceMerak", 4.6f },
-        { "WFSurfaceAerumna", 10f },
-        { "WFSurfaceThrascias", 5f },
-        { "WFSurfaceCarcinoma", 4f },
     };
 
     /// <summary>Each world, built and torn down in turn, has a fully fitted gate as soon as it is built.</summary>
@@ -159,7 +148,7 @@ public sealed class CavernMouthTest
 
     /// <summary>
     /// Across many seeds, every world's holes stay in their size range, joined edge to edge without spurs, pinches or
-    /// islands, with the climb tile past the hole on the climb side and rim spots clear of it. They also vary: few plain
+    /// islands, with the stairs top past the hole on the stairs side and rim spots clear of it. They also vary: few plain
     /// rectangles (a rift aside) or fallbacks, most of the size range used and few repeats.
     /// </summary>
     // The shape is a pure function, but its specs are the worlds' prototypes, which only a server loads.
@@ -735,9 +724,8 @@ public sealed class CavernMouthTest
                     {
                         if (seas.TryGetValue(surfaceId, out var sea))
                         {
+                            // Water comes as lakes smaller than a cell, so there may be no all-water cell to check.
                             var seaCell = FindSeaCell(biomes, tileDefs, biome, spec, first, sea);
-                            Assert.That(seaCell, Is.Not.Null, $"Precondition: no {surfaceId} cell near the gate is all {sea}.");
-
                             if (seaCell is { } found)
                             {
                                 Assert.That(mouths.EvaluateCell(ground, found), Is.Null, $"{surfaceId}: sea cell {found} has a site.");
@@ -1116,7 +1104,7 @@ public sealed class CavernMouthTest
             }
         }
 
-        var step = spec.ClimbSide.ToIntVec();
+        var step = spec.StairsSide.ToIntVec();
         var climbReach = shape.Climb.X * step.X + shape.Climb.Y * step.Y;
         Assert.That(shape.Ring, Is.EquivalentTo(ring), $"{name}: the lip is not every tile touching the hole.");
         Assert.That(ring, Does.Contain(shape.Climb), $"{name}: the climb tile is off the lip.");
@@ -1136,7 +1124,7 @@ public sealed class CavernMouthTest
         }
     }
 
-    /// <summary>The gate's hole, lip, pad, shades and climb point are as section 3.3 stamps them.</summary>
+    /// <summary>The gate's hole, lip, pad, shades and stairs are as section 3.3 stamps them.</summary>
     private static async Task AssertGateFitted(TestPair pair, World world, WFCavernPrototype cavern, WFCavernMouth gate, string surfaceId)
     {
         var server = pair.Server;
@@ -1161,8 +1149,8 @@ public sealed class CavernMouthTest
                 Assert.That(ground.Mouths.Count(mouth => mouth.Kind == WFCavernMouthKind.Gate), Is.EqualTo(1),
                     $"{surfaceId}: the ground should have exactly one gate.");
                 Assert.That(gate.Ring, Does.Contain(gate.ClimbTile), $"{surfaceId}: the climb tile is not on the lip.");
-                Assert.That(gate.Hole, Does.Contain(gate.ClimbTile - spec.ClimbSide.ToIntVec()),
-                    $"{surfaceId}: the climb tile is not beside the hole on the climb side.");
+                Assert.That(gate.Hole, Does.Contain(gate.ClimbTile - spec.StairsSide.ToIntVec()),
+                    $"{surfaceId}: the stairs top is not beside the hole on the stairs side.");
 
                 foreach (var index in gate.Hole)
                 {
@@ -1190,8 +1178,9 @@ public sealed class CavernMouthTest
                     if (spec.LandingEntity is { } landingEntity)
                     {
                         Assert.That(maps.GetAnchoredEntities(world.Cavern, levelGrid, index)
-                                .Count(uid => entMan.GetComponent<MetaDataComponent>(uid).EntityPrototype?.ID == landingEntity.Id), Is.EqualTo(1),
-                            $"{surfaceId}: cavern tile {index} under the hole does not hold exactly one {landingEntity}.");
+                                .Count(uid => entMan.GetComponent<MetaDataComponent>(uid).EntityPrototype?.ID == landingEntity.Id),
+                            Is.EqualTo(index == StairsTile(gate, spec) ? 0 : 1),
+                            $"{surfaceId}: cavern tile {index} under the hole does not hold exactly one {landingEntity} (none under the stairs).");
                     }
                 }
 
@@ -1228,23 +1217,28 @@ public sealed class CavernMouthTest
                 Assert.That(maps.GetAnchoredEntities(world.Ground, groundGrid, gate.ClimbTile), Is.Empty,
                     $"{surfaceId}: something stands on the climb tile.");
 
-                Assert.That(ground.ClimbPoints.TryGetValue(gate.ClimbTile, out var climb), Is.True,
-                    $"{surfaceId}: the gate has no climb point.");
+                var stairsTile = StairsTile(gate, spec);
+                Assert.That(ground.Stairways.TryGetValue(stairsTile, out var climb), Is.True,
+                    $"{surfaceId}: the gate has no stairs.");
 
                 var climbXform = entMan.GetComponent<TransformComponent>(climb);
-                Assert.That(climbXform.MapUid, Is.EqualTo(world.Cavern), $"{surfaceId}: the climb point is not in the cavern.");
-                Assert.That(climbXform.Anchored, Is.True, $"{surfaceId}: the climb point is not anchored.");
-                Assert.That(maps.TileIndicesFor(world.Cavern, levelGrid, climbXform.Coordinates), Is.EqualTo(gate.ClimbTile),
-                    $"{surfaceId}: the climb point is not under the climb tile.");
-                Assert.That(entMan.GetComponent<WFCavernClimbComponent>(climb).Delay, Is.EqualTo(ExpectedClimb[surfaceId]).Within(0.01f),
-                    $"{surfaceId}: the climb point has the wrong climb time.");
-                Assert.That(entMan.GetComponent<MetaDataComponent>(climb).EntityPrototype?.ID, Is.EqualTo(spec.ClimbPoint.Id),
-                    $"{surfaceId}: the climb point is the wrong entity.");
+                Assert.That(climbXform.MapUid, Is.EqualTo(world.Cavern), $"{surfaceId}: the stairs are not in the cavern.");
+                Assert.That(climbXform.Anchored, Is.True, $"{surfaceId}: the stairs are not anchored.");
+                Assert.That(maps.TileIndicesFor(world.Cavern, levelGrid, climbXform.Coordinates), Is.EqualTo(stairsTile),
+                    $"{surfaceId}: the stairs are not under the hole tile beside the stairs top.");
+                Assert.That(climbXform.LocalRotation.GetCardinalDir(), Is.EqualTo(spec.StairsSide.GetOpposite()),
+                    $"{surfaceId}: the stairs do not climb towards the stairs top.");
+                Assert.That(entMan.GetComponent<WFCavernStairsComponent>(climb).Open, Is.True,
+                    $"{surfaceId}: the stairs did not open the ground above them.");
+                Assert.That(entMan.HasComponent<CEZLevelHighGroundComponent>(climb), Is.True, $"{surfaceId}: the stairs can't be walked.");
+                Assert.That(entMan.GetComponent<MetaDataComponent>(climb).EntityPrototype?.ID, Is.EqualTo(spec.Stairs.Id),
+                    $"{surfaceId}: the stairs are the wrong entity.");
+                Assert.That(ground.Shades.ContainsKey(stairsTile), Is.True, $"{surfaceId}: the stairs' hole tile has no shade.");
             }
         });
     }
 
-    /// <summary>Fails if anything but the climb point is anchored on the pad.</summary>
+    /// <summary>Fails if anything but the stairs is anchored on the pad.</summary>
     private static void AssertPadClear(TestPair pair, World world, WFCavernPrototype cavern, WFCavernMouth gate, string surfaceId)
     {
         var entMan = pair.Server.EntMan;
@@ -1252,7 +1246,7 @@ public sealed class CavernMouthTest
         var levelGrid = entMan.GetComponent<MapGridComponent>(world.Cavern);
         var levelBiome = (world.Cavern, entMan.GetComponent<BiomeComponent>(world.Cavern));
         var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
-        var climb = ground.ClimbPoints[gate.ClimbTile];
+        var climb = ground.Stairways[StairsTile(gate, cavern.Mouths)];
 
         Assert.That(pair.Server.System<BiomeSystem>().WfIsChunkLoaded(levelBiome, gate.Origin), Is.True,
             $"Precondition: {surfaceId}'s cavern chunk under the gate never loaded.");
@@ -1333,7 +1327,7 @@ public sealed class CavernMouthTest
             snapshot.Pad[index] = TileAt(maps, world.Cavern, levelGrid, index);
         }
 
-        foreach (var uid in ground.Shades.Values.Concat(ground.ClimbPoints.Values).Concat(snapshot.Rim))
+        foreach (var uid in ground.Shades.Values.Concat(ground.Stairways.Values).Concat(snapshot.Rim))
         {
             snapshot.Entities[uid] = entMan.EntityExists(uid)
                 ? entMan.GetComponent<TransformComponent>(uid).Coordinates
@@ -1361,7 +1355,7 @@ public sealed class CavernMouthTest
                 Assert.That(Ground, Is.EquivalentTo(before!.Ground), $"The gate's ground tiles changed {when}.");
                 Assert.That(Pad, Is.EquivalentTo(before.Pad), $"The gate's pad tiles changed {when}.");
                 Assert.That(Rim, Is.EquivalentTo(before.Rim), $"The gate's rim decor changed {when}.");
-                Assert.That(Entities, Is.EquivalentTo(before.Entities), $"The gate's shades, climb point or rim moved {when}.");
+                Assert.That(Entities, Is.EquivalentTo(before.Entities), $"The gate's shades, stairs or rim moved {when}.");
             }
         }
     }

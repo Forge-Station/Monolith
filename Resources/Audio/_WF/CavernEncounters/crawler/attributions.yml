@@ -1,0 +1,35 @@
+- files:
+  - alert1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/headcrab/alert1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - attack1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/headcrab/attack1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - attack2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/headcrab/attack2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - idle1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/headcrab/idle1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - idle2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/headcrab/idle2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - idle3.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/headcrab/idle3.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

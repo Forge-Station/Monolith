@@ -44,7 +44,7 @@ namespace Content.IntegrationTests.Tests._WF.Caverns;
 public sealed class CavernHoleTest
 {
     /// <summary>Merak ground a shovel empties in one dig.</summary>
-    private static readonly string[] MerakSand = { "FloorAsteroidSandPlanet", "FloorAsteroidSandUnvariantizedPlanet" };
+    private static readonly string[] MerakSand = { "WFFloorMerakDuneSand", "WFFloorMerakGoldSand", "WFFloorMerakPaleSand" };
 
     /// <summary>Where the tests look for ground: east of the planet centre, clear of the gate.</summary>
     private static readonly Vector2i SearchFrom = new(150, -120);
@@ -53,7 +53,7 @@ public sealed class CavernHoleTest
     private static readonly Entity<MapGridComponent>? NoGrid = null;
 
     /// <summary>
-    /// Unloading loaded ground empties its tiles but opens no hole: no shade, no climb point, no pins on either map. A
+    /// Unloading loaded ground empties its tiles but opens no hole: no shade, no stairs, no pins on either map. A
     /// hole dug in the same tick, east of the unload so it sorts after all its tiles, is fitted out on the next update.
     /// </summary>
     [Test]
@@ -97,7 +97,7 @@ public sealed class CavernHoleTest
             {
                 var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
                 shades = ground.Shades.Count;
-                climbs = ground.ClimbPoints.Keys.Count(index => Chebyshev(index, hole) > WFCavernMouthSystem.ClimbReach);
+                climbs = ground.Stairways.Keys.Count(index => Chebyshev(index, hole) > WFCavernMouthSystem.StairsReach);
             });
 
             await server.WaitPost(() =>
@@ -125,8 +125,8 @@ public sealed class CavernHoleTest
                 {
                     Assert.That(ground.Shades.ContainsKey(hole), Is.True, "The hole dug with the unload waited behind the unload's tiles.");
                     Assert.That(ground.Shades, Has.Count.EqualTo(shades + 1), "The unload gave shades to emptied ground.");
-                    Assert.That(ground.ClimbPoints.Keys.Count(index => Chebyshev(index, hole) > WFCavernMouthSystem.ClimbReach), Is.EqualTo(climbs),
-                        "The unload added climb points.");
+                    Assert.That(ground.Stairways.Keys.Count(index => Chebyshev(index, hole) > WFCavernMouthSystem.StairsReach), Is.EqualTo(climbs),
+                        "The unload added stairs.");
                     Assert.That(ground.Opened, Is.Empty, "The hole queue still holds the unload's tiles.");
 
                     for (var x = from.X; x <= to.X; x++)
@@ -157,11 +157,10 @@ public sealed class CavernHoleTest
 
     /// <summary>
     /// Merak sand dug out from under a human over solid rock: within two ticks the hole is pinned with a shade, a
-    /// cleared, pinned landing lies below and a climb point stands near it. The human lands unhurt enough on the
-    /// landing and climbs back out; a shovel used on nearby sand digs it itself, not as a shaft.
+    /// cleared, pinned landing lies below and walkable stairs stand under it, and the human standing there is caught by them; a shovel used on nearby sand digs it itself, not as a shaft.
     /// </summary>
     [Test]
-    public async Task DugHoleGetsLandingShadeAndClimb()
+    public async Task DugHoleGetsLandingShadeAndStairs()
     {
         const string surfaceId = "WFSurfaceMerak";
 
@@ -186,13 +185,12 @@ public sealed class CavernHoleTest
                 Assert.That(maps.GetAnchoredEntities(world.Cavern, entMan.GetComponent<MapGridComponent>(world.Cavern), spot), Is.Not.Empty,
                     "Precondition: no rock stands in the cavern under the spot."));
 
-            var mob = await SpawnAwake(pair, world.Ground, spot, "MobHuman");
-            var climbs = await ClimbCount(pair, world);
+            await SpawnAwake(pair, world.Ground, spot, "MobHuman");
+            var climbs = await StairsCount(pair, world);
 
             await Dig(pair, world, spot, "Shovel");
             await server.WaitRunTicks(2);
 
-            var climb = EntityUid.Invalid;
             await server.WaitAssertion(() =>
             {
                 var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
@@ -222,47 +220,27 @@ public sealed class CavernHoleTest
                         Assert.That(IsEmpty(maps, world.Cavern, levelGrid, index), Is.False, $"Landing tile {index} is empty.");
                         Assert.That(biomes.WfIsPinned(levelBiome, index), Is.True, $"Landing tile {index} is not pinned.");
                         Assert.That(maps.GetAnchoredEntities(world.Cavern, levelGrid, index)
-                                .Where(uid => !entMan.HasComponent<WFCavernClimbComponent>(uid)), Is.Empty,
+                                .Where(uid => !entMan.HasComponent<WFCavernStairsComponent>(uid)), Is.Empty,
                             $"Something still stands on landing tile {index}.");
                     }
 
-                    Assert.That(ground.ClimbPoints, Has.Count.EqualTo(climbs + 1), "The hole did not get exactly one climb point.");
+                    Assert.That(ground.Stairways, Has.Count.EqualTo(climbs + 1), "The hole did not get exactly one set of stairs.");
 
-                    var near = ground.ClimbPoints.Where(entry => Chebyshev(entry.Key, spot) <= WFCavernMouthSystem.ClimbReach).ToList();
-                    Assert.That(near, Has.Count.EqualTo(1), "No climb point lies near the hole.");
+                    var near = ground.Stairways.Where(entry => Chebyshev(entry.Key, spot) <= WFCavernMouthSystem.StairsReach).ToList();
+                    Assert.That(near, Has.Count.EqualTo(1), "No stairs lie near the hole.");
                     if (near.Count == 0)
                         return;
 
                     var (index2, uid2) = near[0];
-                    climb = uid2;
-                    Assert.That(entMan.GetComponent<TransformComponent>(uid2).Anchored, Is.True, "The climb point is not anchored.");
-                    Assert.That(IsEmpty(maps, world.Cavern, levelGrid, index2), Is.False, "The climb point stands on no floor.");
-                    Assert.That(biomes.WfIsPinned(levelBiome, index2), Is.True, "The climb point's floor is not pinned.");
-                    Assert.That(IsEmpty(maps, world.Ground, groundGrid, index2), Is.False, "The climb point lies under no ground.");
-                    Assert.That(ground.Shades.ContainsKey(index2), Is.False, "The climb point lies under a hole.");
+                    Assert.That(entMan.GetComponent<TransformComponent>(uid2).Anchored, Is.True, "The stairs are not anchored.");
+                    Assert.That(IsEmpty(maps, world.Cavern, levelGrid, index2), Is.False, "The stairs stand on no floor.");
+                    Assert.That(biomes.WfIsPinned(levelBiome, index2), Is.True, "The stairs' floor is not pinned.");
+                    Assert.That(index2, Is.EqualTo(spot), "The stairs of a one-tile hole stand elsewhere.");
+                    Assert.That(IsEmpty(maps, world.Ground, groundGrid, index2), Is.True, "The stairs lie under no hole.");
+                    Assert.That(ground.Shades.ContainsKey(index2), Is.True, "The stairs lie under a hole with no shade.");
+                    Assert.That(entMan.GetComponent<WFCavernStairsComponent>(uid2).Open, Is.True, "The stairs did not open the ground above them.");
+                    Assert.That(entMan.GetComponent<WFCavernShaftComponent>(shade).Plain, Is.False, "The cut stairs turned the hole into a stairwell.");
                 }
-            });
-
-            Assert.That(await WaitForLanding(pair, world, mob, 120), Is.True, "The human never landed in the cavern.");
-
-            await server.WaitAssertion(() =>
-            {
-                var physics = entMan.GetComponent<CEZPhysicsComponent>(mob);
-                var levelGrid = entMan.GetComponent<MapGridComponent>(world.Cavern);
-                var index = maps.TileIndicesFor(world.Cavern, levelGrid, entMan.GetComponent<TransformComponent>(mob).Coordinates);
-                var damage = entMan.GetComponent<DamageableComponent>(mob).Damage.DamageDict.Where(entry => entry.Value > 0);
-                TestContext.Out.WriteLine($"The fall dealt {string.Join(", ", damage.Select(entry => $"{entry.Value} {entry.Key}"))}.");
-
-                using (Assert.EnterMultipleScope())
-                {
-                    Assert.That(entMan.GetComponent<MobStateComponent>(mob).CurrentState, Is.EqualTo(MobState.Alive), "The fall hurt the human badly.");
-                    Assert.That(physics.LocalPosition, Is.GreaterThan(-0.1f), "The human sank into the cavern floor.");
-                    Assert.That(IsEmpty(maps, world.Cavern, levelGrid, index), Is.False, "The human came to rest over no floor.");
-                }
-
-                Assert.That(server.System<WFCavernClimbSystem>().ClimbUp(mob, climb), Is.EqualTo(WFCavernClimbResult.Climbed),
-                    "The human could not climb out.");
-                Assert.That(entMan.GetComponent<TransformComponent>(mob).MapUid, Is.EqualTo(world.Ground), "The climb left the human below.");
             });
 
             // The shovel on sand it digs anyway: its own dig, not a shaft, and the queue fits the hole out as any other.
@@ -278,7 +256,7 @@ public sealed class CavernHoleTest
                 var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
 
                 Assert.That(ground.Shades.ContainsKey(sand), Is.True, "The shovelled sand became no hole.");
-                Assert.That(ground.ClimbPoints, Has.Count.EqualTo(climbs + 1), "A hole beside a climb point got another.");
+                Assert.That(ground.Stairways, Has.Count.EqualTo(climbs + 1), "A hole beside stairs got another.");
             });
         }
         finally
@@ -290,12 +268,12 @@ public sealed class CavernHoleTest
     }
 
     /// <summary>
-    /// Two holes dug 4 tiles apart over solid rock on Merak land in separate pockets, so the second gets its own climb
-    /// point although the first's is within reach as the crow flies; each landing walks to one. A climb point or shade
+    /// Two holes dug 4 tiles apart over solid rock on Merak land in separate pockets, so the second gets its own stairs
+    /// although the first's are within reach as the crow flies; each landing walks to one. Stairs or a shade
     /// deleted by hand leaves the registry.
     /// </summary>
     [Test]
-    public async Task SealedLandingGetsItsOwnClimb()
+    public async Task SealedLandingGetsItsOwnStairs()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -338,7 +316,7 @@ public sealed class CavernHoleTest
             await LoadChunks(pair, world.Ground, first - new Vector2i(2, 2), second + new Vector2i(2, 2));
             await LoadChunks(pair, world.Cavern, first - new Vector2i(2, 2), second + new Vector2i(2, 2));
 
-            var climbs = await ClimbCount(pair, world);
+            var climbs = await StairsCount(pair, world);
             await Dig(pair, world, first, "Shovel");
             await server.WaitRunTicks(2);
             await Dig(pair, world, second, "Shovel");
@@ -352,25 +330,25 @@ public sealed class CavernHoleTest
             {
                 var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
                 shaded = ground.Shades.ContainsKey(first) && ground.Shades.ContainsKey(second);
-                climbsAfter = ground.ClimbPoints.Count;
-                firstSteps = StepsToClimb(entMan, maps, world, first, 64);
-                secondSteps = StepsToClimb(entMan, maps, world, second, 64);
+                climbsAfter = ground.Stairways.Count;
+                firstSteps = StepsToStairs(entMan, maps, world, first, 64);
+                secondSteps = StepsToStairs(entMan, maps, world, second, 64);
             });
 
             // Asserted here rather than on the server thread, so a failure is not hidden by the teardown.
             using (Assert.EnterMultipleScope())
             {
                 Assert.That(shaded, Is.True, "Precondition: a dug hole has no shade.");
-                Assert.That(climbsAfter, Is.EqualTo(climbs + 2), "The two sealed landings did not get a climb point each.");
-                Assert.That(firstSteps ?? int.MaxValue, Is.LessThanOrEqualTo(WFCavernMouthSystem.ClimbReach), "The first landing walks to no climb point.");
-                Assert.That(secondSteps ?? int.MaxValue, Is.LessThanOrEqualTo(WFCavernMouthSystem.ClimbReach), "The second landing walks to no climb point.");
+                Assert.That(climbsAfter, Is.EqualTo(climbs + 2), "The two sealed landings did not get stairs each.");
+                Assert.That(firstSteps ?? int.MaxValue, Is.LessThanOrEqualTo(WFCavernMouthSystem.StairsReach), "The first landing walks to no stairs.");
+                Assert.That(secondSteps ?? int.MaxValue, Is.LessThanOrEqualTo(WFCavernMouthSystem.StairsReach), "The second landing walks to no stairs.");
             }
 
-            // Registry upkeep: an admin deleting the second hole's climb point and shade.
+            // Registry upkeep: an admin deleting the second hole's stairs and shade.
             await server.WaitPost(() =>
             {
                 var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
-                var climb = ground.ClimbPoints.First(entry => Chebyshev(entry.Key, second) <= 1).Value;
+                var climb = ground.Stairways.First(entry => Chebyshev(entry.Key, second) <= 1).Value;
                 entMan.DeleteEntity(climb);
                 entMan.DeleteEntity(ground.Shades[second]);
             });
@@ -380,13 +358,13 @@ public sealed class CavernHoleTest
             await server.WaitPost(() =>
             {
                 var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
-                climbsAfter = ground.ClimbPoints.Count;
+                climbsAfter = ground.Stairways.Count;
                 shadeKept = ground.Shades.ContainsKey(second);
             });
 
             using (Assert.EnterMultipleScope())
             {
-                Assert.That(climbsAfter, Is.EqualTo(climbs + 1), "A deleted climb point stayed in the registry.");
+                Assert.That(climbsAfter, Is.EqualTo(climbs + 1), "Deleted stairs stayed in the registry.");
                 Assert.That(shadeKept, Is.False, "A deleted shade stayed in the registry.");
             }
         }
@@ -435,7 +413,7 @@ public sealed class CavernHoleTest
             await server.WaitAssertion(() =>
             {
                 var ground = entMan.GetComponent<WFCavernGroundComponent>(world.Ground);
-                climbs = ground.ClimbPoints.Count;
+                climbs = ground.Stairways.Count;
 
                 Assert.That(ground.Shades.TryGetValue(spot, out first), Is.True, "Precondition: the hole got no shade.");
                 Assert.That(entMan.GetComponent<WFPlanetBuiltTilesComponent>(world.Ground).Underlay.ContainsKey(spot), Is.False,
@@ -469,7 +447,7 @@ public sealed class CavernHoleTest
                     Assert.That(IsEmpty(maps, world.Ground, entMan.GetComponent<MapGridComponent>(world.Ground), spot), Is.True,
                         "Cutting the lattice plugged the hole with the ground once under it.");
                     Assert.That(ground.Shades.ContainsKey(spot), Is.True, "The reopened hole has no shade.");
-                    Assert.That(ground.ClimbPoints, Has.Count.EqualTo(climbs), "The reopened hole got another climb point.");
+                    Assert.That(ground.Stairways, Has.Count.EqualTo(climbs), "The reopened hole got other stairs.");
                 }
             });
         }
@@ -481,7 +459,7 @@ public sealed class CavernHoleTest
         await pair.CleanReturnAsync();
     }
 
-    /// <summary>A blast on Aerumna's chromite opens holes, and every one of them is pinned with a shade, a pinned floor below and a climb point near it.</summary>
+    /// <summary>A blast on Aerumna's chromite opens holes, and every one of them is pinned with a shade, a pinned floor below and stairs near it.</summary>
     [Test]
     public async Task ExplosionHolesAllGetLandings()
     {
@@ -537,8 +515,8 @@ public sealed class CavernHoleTest
                         Assert.That(ground.Shades.ContainsKey(index), Is.True, $"Blast hole {index} has no shade.");
                         Assert.That(IsEmpty(maps, world.Cavern, levelGrid, index), Is.False, $"Blast hole {index} has no floor below.");
                         Assert.That(biomes.WfIsPinned(levelBiome, index), Is.True, $"The floor under blast hole {index} is not pinned.");
-                        Assert.That(StepsToClimb(entMan, maps, world, index, 64) ?? int.MaxValue, Is.LessThanOrEqualTo(WFCavernMouthSystem.ClimbReach),
-                            $"The landing under blast hole {index} walks to no climb point.");
+                        Assert.That(StepsToStairs(entMan, maps, world, index, 64) ?? int.MaxValue, Is.LessThanOrEqualTo(WFCavernMouthSystem.StairsReach),
+                            $"The landing under blast hole {index} walks to no stairs.");
                     }
                 }
             });
@@ -551,7 +529,7 @@ public sealed class CavernHoleTest
         await pair.CleanReturnAsync();
     }
 
-    /// <summary>Carcinoma's flesh pried to plating, axed to lattice and cut away opens a hole with a shade and a climb point.</summary>
+    /// <summary>Carcinoma's flesh pried to plating, axed to lattice and cut away opens a hole with a shade and stairs.</summary>
     [Test]
     public async Task PriedFleshOpensHole()
     {
@@ -642,9 +620,9 @@ public sealed class CavernHoleTest
         await pair.CleanReturnAsync();
     }
 
-    /// <summary>An admin mouth cut into loaded Aerumna ground, a rift reaching past a hole's climb reach, adds only its own climb point.</summary>
+    /// <summary>An admin mouth cut into loaded Aerumna ground, a rift reaching past a hole's stairs reach, adds only its own stairs.</summary>
     [Test]
-    public async Task MouthStampAddsNoClimb()
+    public async Task MouthStampAddsOnlyItsOwnStairs()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -672,8 +650,8 @@ public sealed class CavernHoleTest
                     var candidate = new Vector2i(x, y);
                     var grown = mouths.AdminShape(ground, candidate)!;
 
-                    // A rift long enough that a hole at its far end is past the climb reach, on clear chromite.
-                    if (grown.Hole.Max(tile => Chebyshev(tile, grown.Climb)) <= WFCavernMouthSystem.ClimbReach
+                    // A rift long enough that a hole at its far end is past the stairs reach, on clear chromite.
+                    if (grown.Hole.Max(tile => Chebyshev(tile, grown.Climb)) <= WFCavernMouthSystem.StairsReach
                         || !grown.Hole.Concat(grown.Ring).All(offset => IsClearGround(biomes, tileDefs, groundBiome, candidate + offset, "FloorChromite")))
                         continue;
 
@@ -693,7 +671,7 @@ public sealed class CavernHoleTest
             await server.WaitPost(() =>
             {
                 var ground = (world.Ground, entMan.GetComponent<WFCavernGroundComponent>(world.Ground));
-                climbs = ground.Item2.ClimbPoints.Count;
+                climbs = ground.Item2.Stairways.Count;
                 shades = ground.Item2.Shades.Count;
 
                 if (mouths.TryOpenMouth(ground, at, out refused))
@@ -710,7 +688,7 @@ public sealed class CavernHoleTest
 
                 using (Assert.EnterMultipleScope())
                 {
-                    Assert.That(ground.ClimbPoints, Has.Count.EqualTo(climbs + 1), "The loaded mouth got climb points besides its own.");
+                    Assert.That(ground.Stairways, Has.Count.EqualTo(climbs + 1), "The loaded mouth got stairs besides its own.");
                     Assert.That(ground.Shades, Has.Count.EqualTo(shades + size), "The loaded mouth has a shade count other than its size.");
                 }
             });
@@ -812,6 +790,10 @@ public sealed class CavernHoleTest
             var floor = spot + new Vector2i(0, 1);
             await LoadChunks(pair, world.Ground, spot - Vector2i.One, spot + Vector2i.One);
             await SetTile(pair, world.Ground, floor, new Tile(tileDefs["FloorSteel"].TileId));
+
+            // A floor a player laid over the chromite, so it breaks down to plating rather than giving the ground back.
+            await server.WaitPost(() => entMan.EnsureComponent<WFPlanetBuiltTilesComponent>(world.Ground).Underlay[floor] =
+                maps.GetTileRef(world.Ground, entMan.GetComponent<MapGridComponent>(world.Ground), spot).Tile);
 
             await Spill(pair, world.Ground, spot);
             await Spill(pair, world.Ground, floor);
@@ -1144,15 +1126,15 @@ public sealed class CavernHoleTest
         await server.WaitRunTicks(1);
     }
 
-    /// <summary>How many climb points the ground has.</summary>
-    private static async Task<int> ClimbCount(TestPair pair, World world)
+    /// <summary>How many stairs the ground has.</summary>
+    private static async Task<int> StairsCount(TestPair pair, World world)
     {
         var count = 0;
-        await pair.Server.WaitPost(() => count = pair.Server.EntMan.GetComponent<WFCavernGroundComponent>(world.Ground).ClimbPoints.Count);
+        await pair.Server.WaitPost(() => count = pair.Server.EntMan.GetComponent<WFCavernGroundComponent>(world.Ground).Stairways.Count);
         return count;
     }
 
-    /// <summary>Fails unless a ground tile is an empty, pinned hole with a shade, the world's landing tile pinned below it and a climb point near it.</summary>
+    /// <summary>Fails unless a ground tile is an empty, pinned hole with a shade, the world's landing tile pinned below it and stairs near it.</summary>
     private static async Task AssertHoleFitted(TestPair pair, World world, Vector2i index, string surfaceId)
     {
         var server = pair.Server;
@@ -1179,8 +1161,8 @@ public sealed class CavernHoleTest
                     $"{surfaceId}: the cavern under hole {index} is not the landing tile.");
                 Assert.That(biomes.WfIsPinned((world.Cavern, entMan.GetComponent<BiomeComponent>(world.Cavern)), index), Is.True,
                     $"{surfaceId}: the landing under hole {index} is not pinned.");
-                Assert.That(StepsToClimb(entMan, maps, world, index, 64) ?? int.MaxValue, Is.LessThanOrEqualTo(WFCavernMouthSystem.ClimbReach),
-                    $"{surfaceId}: the landing under hole {index} walks to no climb point.");
+                Assert.That(StepsToStairs(entMan, maps, world, index, 64) ?? int.MaxValue, Is.LessThanOrEqualTo(WFCavernMouthSystem.StairsReach),
+                    $"{surfaceId}: the landing under hole {index} walks to no stairs.");
             }
         });
     }
@@ -1209,12 +1191,12 @@ public sealed class CavernHoleTest
     }
 
     /// <summary>
-    /// Steps across cavern floor with nothing hard anchored on it from the tile under a hole to the nearest climb point,
+    /// Steps across cavern floor with nothing hard anchored on it from the tile under a hole to the nearest stairs,
     /// or null if none is within the limit.
     /// </summary>
-    private static int? StepsToClimb(IEntityManager entMan, SharedMapSystem maps, World world, Vector2i from, int limit)
+    private static int? StepsToStairs(IEntityManager entMan, SharedMapSystem maps, World world, Vector2i from, int limit)
     {
-        var climbs = entMan.GetComponent<WFCavernGroundComponent>(world.Ground).ClimbPoints;
+        var climbs = entMan.GetComponent<WFCavernGroundComponent>(world.Ground).Stairways;
         var grid = entMan.GetComponent<MapGridComponent>(world.Cavern);
         var steps = new Dictionary<Vector2i, int> { [from] = 0 };
         var frontier = new Queue<Vector2i>();
@@ -1231,6 +1213,11 @@ public sealed class CavernHoleTest
             foreach (var side in new[] { new Vector2i(1, 0), new Vector2i(-1, 0), new Vector2i(0, 1), new Vector2i(0, -1) })
             {
                 var next = index + side;
+
+                // The stairs themselves are hard, but they are where the walk ends.
+                if (climbs.ContainsKey(next) && !steps.ContainsKey(next) && !IsEmpty(maps, world.Cavern, grid, next))
+                    return steps[index] + 1;
+
                 if (steps.ContainsKey(next)
                     || IsEmpty(maps, world.Cavern, grid, next)
                     || maps.GetAnchoredEntities(world.Cavern, grid, next)

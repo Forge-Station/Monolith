@@ -29,10 +29,35 @@ namespace Content.IntegrationTests.Tests._WF.Caverns;
 [TestOf(typeof(WFCavernSystem))]
 public sealed class CavernNetworkTest
 {
-    /// <summary>Layer roles for WFSurfaceAsclepiu: 0 ground, 1-3 air, 4 orbit.</summary>
-    private const int AsclepiuLayerCount = 5;
+    /// <summary>Layer roles for WFSurfaceAsclepiu: 0 ground, 1-4 air, 5 orbit.</summary>
+    private const int AsclepiuLayerCount = 6;
 
-    /// <summary>With the CVar at its default the network is exactly the Planets stack.</summary>
+    /// <summary>Caverns come with planets: with wf.caverns at its own default, a world is built with its cavern.</summary>
+    [Test]
+    public async Task CavernsComeWithPlanets()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+
+        await PlanetFixture.EnableFeature(pair);
+
+        // The test pool turns caverns off for every other test; put the cvar back to what a server starts with.
+        await server.WaitPost(() => server.CfgMan.SetCVar(CavernCVars.Caverns, CavernCVars.Caverns.DefaultValue));
+        Assert.That(CavernCVars.Caverns.DefaultValue, Is.True, "wf.caverns doesn't default to on.");
+
+        var world = await BuildWorld(pair, "WFSurfaceAsclepiu");
+
+        await server.WaitAssertion(() =>
+        {
+            Assert.That(world.LowerLayers, Has.Count.EqualTo(1), "A world built with planets on has no cavern.");
+            Assert.That(server.EntMan.HasComponent<WFCavernLayerComponent>(world.Cavern), Is.True, "The layer below isn't a cavern.");
+        });
+
+        await Teardown(pair, world);
+        await pair.CleanReturnAsync();
+    }
+
+    /// <summary>With the CVar forced off the network is exactly the Planets stack.</summary>
     [Test]
     public async Task CavernsOffLeavesNetworkUntouched()
     {
@@ -41,9 +66,7 @@ public sealed class CavernNetworkTest
         var entMan = server.EntMan;
 
         await PlanetFixture.EnableFeature(pair);
-
-        await server.WaitAssertion(() =>
-            Assert.That(server.CfgMan.GetCVar(CavernCVars.Caverns), Is.False, "Precondition: wf.caverns defaults to off."));
+        await server.WaitPost(() => server.CfgMan.SetCVar(CavernCVars.Caverns, false));
 
         var world = await BuildWorld(pair, "WFSurfaceAsclepiu");
 
@@ -105,7 +128,7 @@ public sealed class CavernNetworkTest
                         if (surfaceId == "WFSurfaceAsclepiu")
                         {
                             Assert.That(world.Layers, Has.Count.EqualTo(AsclepiuLayerCount),
-                                "PlanetNetworkTest's five-layer Asclepiu stack changed with caverns on.");
+                                "PlanetNetworkTest's six-layer Asclepiu stack changed with caverns on.");
                         }
 
                         var zMap = entMan.GetComponent<CEZMapComponent>(cavern);

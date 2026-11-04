@@ -31,6 +31,9 @@ public sealed class WolfmedBodyTemperatureSystem : EntitySystem
     [Dependency] private WolfmedShutdownSystem _shutdown = default!;
 
     private static readonly TimeSpan TickInterval = TimeSpan.FromSeconds(1);
+
+    /// <summary>Kelvin over its target at which a recovering core counts as arrived.</summary>
+    private const float CoreSnap = 0.01f;
     private readonly List<EntityUid> _due = new();
     private TimeSpan _nextTick;
 
@@ -142,7 +145,11 @@ public sealed class WolfmedBodyTemperatureSystem : EntitySystem
         if (core > normal)
         {
             var target = MathF.Max(surface, normal);
-            return core - (core - target) * Fraction(seconds, WolfmedCVars.CoreRecoverySeconds);
+            var next = core - (core - target) * Fraction(seconds, WolfmedCVars.CoreRecoverySeconds);
+
+            // A gap this small is under a float step of the shrinking, so it would never close and the core would
+            // stay just above normal, where the cooling below can't start.
+            return next - target < CoreSnap ? target : next;
         }
 
         if (held || surface >= core)

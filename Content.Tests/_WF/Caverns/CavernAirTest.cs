@@ -22,7 +22,7 @@ public sealed class CavernAirTest
         ("Merak", 294.15f, new[] { 21.824879f, 82.10312f }, WFCavernAir.Breathable),
         ("Aerumna", 277.15f, new[] { 4f, 72f, 24f }, WFCavernAir.Toxic),
         ("Thrascias", 235.15f, new[] { 0f, 100f }, WFCavernAir.Freezing),
-        ("Carcinoma", 310.15f, new[] { 21.824879f, 76f, 0f, 0f, 0f, 0f, 1f }, WFCavernAir.Foul),
+        ("Carcinoma", 310.15f, new[] { 2.908408f, 11.633631f, 87.252232f }, WFCavernAir.Toxic),
     };
 
     /// <summary>Plain station air at room temperature: breathable, and the base every edge case starts from.</summary>

@@ -1,0 +1,116 @@
+- type: entity
+  parent: BaseItem
+  id: RMCVanWheel
+  categories: [ WFVehicles ]
+  name: van wheel
+  description: A sturdy wheel for the van. Can be removed or replaced.
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/hardpoints/van.rsi
+    state: tires
+  - type: Item
+    size: Large
+  - type: HardpointItem
+    hardpointType: HardpointTypeWheel
+    vehicleFamily: HardpointVehicleFamilyVan
+    slotType: HardpointSlotTypeWheel
+    damageMultiplier: 0.15
+    repairRate: 0.0165
+  - type: HardpointIntegrity
+    maxIntegrity: 250
+  - type: VehicleWheelItem
+
+- type: entity
+  parent: RMCVanWheel
+  id: VehicleSPPVanWheel
+  name: SPP van wheel
+  description: A reinforced wheel for SPP vans.
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/hardpoints/sppvan.rsi
+    state: spp_tires
+  - type: HardpointItem
+    compatibilityId: HardpointCompatibilitySPPVan
+
+- type: entity
+  parent: VehicleHumveeHardpointBase
+  id: VehicleHumveeWheel
+  name: humvee wheel
+  description: A reinforced humvee wheel.
+  components:
+  - type: Sprite
+    state: tires
+  - type: HardpointItem
+    hardpointType: HardpointTypeWheel
+    vehicleFamily: HardpointVehicleFamilyHumvee
+    slotType: HardpointSlotTypeWheel
+    damageMultiplier: 0.15
+    repairRate: 0.0165
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: VehicleWheelItem
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCWheel
+  name: APC wheel
+  description: A reinforced APC wheel.
+  components:
+  - type: StaticPrice
+    price: 2100
+  - type: Sprite
+    state: tires
+  - type: HardpointItem
+    hardpointType: HardpointTypeWheel
+    vehicleFamily: HardpointVehicleFamilyAPC
+    slotType: HardpointSlotTypeWheel
+    damageMultiplier: 0.15
+    repairRate: 0.0165
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: VehicleWheelItem
+
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankTreads
+  name: tank treads
+  description: Heavy duty tank treads.
+  components:
+  - type: StaticPrice
+    price: 3500
+  - type: Sprite
+    state: treads
+  - type: HardpointItem
+    hardpointType: HardpointTypeWheel
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeTreads
+    damageMultiplier: 0.15
+    repairRate: 0.0165
+  - type: HardpointIntegrity
+    maxIntegrity: 300
+  - type: VehicleWheelItem
+
+- type: entity
+  parent: VehicleTankHardpointBase
+  id: VehicleTankReinforcedTreads
+  name: reinforced tank treads
+  description: Heavier tank treads with better durability and acid resistance at the cost of acceleration.
+  components:
+  - type: StaticPrice
+    price: 6300
+  - type: Sprite
+    state: treads
+  - type: HardpointItem
+    hardpointType: HardpointTypeWheel
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeTreads
+    damageMultiplier: 0.15
+    repairRate: 0.0165
+  - type: VehicleWheelItem
+  - type: HardpointIntegrity
+    maxIntegrity: 500
+  - type: HardpointDamageModifier
+    modifierSets:
+    - VehicleArmorCaustic
+  - type: VehicleAccelerationModifierAttachment
+    accelerationMultiplier: 0.6

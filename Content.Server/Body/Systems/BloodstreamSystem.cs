@@ -47,8 +47,7 @@ public sealed partial class BloodstreamSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BloodstreamComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<BloodstreamComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<BloodstreamComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedSolutionContainerSystem)]);
         SubscribeLocalEvent<BloodstreamComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<BloodstreamComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<BloodstreamComponent, HealthBeingExaminedEvent>(OnHealthBeingExamined);
@@ -63,6 +62,7 @@ public sealed partial class BloodstreamSystem : EntitySystem
     private void OnMapInit(Entity<BloodstreamComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.UpdateInterval;
+        EnsureBloodSolutions(ent);
     }
 
     private void OnUnpaused(Entity<BloodstreamComponent> ent, ref EntityUnpausedEvent args)
@@ -178,7 +178,7 @@ public sealed partial class BloodstreamSystem : EntitySystem
         }
     }
 
-    private void OnComponentInit(Entity<BloodstreamComponent> entity, ref ComponentInit args)
+    private void EnsureBloodSolutions(Entity<BloodstreamComponent> entity)
     {
         _solutionContainerSystem.EnsureSolution(entity.Owner,
             entity.Comp.ChemicalSolutionName,

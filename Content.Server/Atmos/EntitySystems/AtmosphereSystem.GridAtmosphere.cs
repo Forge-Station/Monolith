@@ -271,7 +271,18 @@ public sealed partial class AtmosphereSystem
     private void ShuntTileVolume(TileAtmosphere tile)
     {
         DebugTools.AssertNotNull(tile.Air);
-        DebugTools.Assert(tile.Air?.Immutable == false);
+
+        // Map/space air is a shared immutable mixture. Drop the reference instead of
+        // pushing it into neighbours; RemoveRatio would edit every tile using that mixture.
+        if (tile.Air!.Immutable)
+        {
+            tile.Air = null;
+            tile.AirArchived = null;
+            tile.ArchivedCycle = 0;
+            tile.LastShare = 0f;
+            tile.Hotspot = new Hotspot();
+            return;
+        }
 
         var count = 0;
         foreach (var adj in tile.AdjacentTiles)

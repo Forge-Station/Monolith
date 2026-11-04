@@ -704,6 +704,9 @@ public abstract partial class SharedDisposalUnitSystem : EntitySystem
     /// </summary>
     public void TryEjectContents(EntityUid uid, DisposalUnitComponent component)
     {
+        if (component?.Container == null)
+            return;
+
         foreach (var entity in component.Container.ContainedEntities.ToArray())
         {
             Remove(uid, component, entity);

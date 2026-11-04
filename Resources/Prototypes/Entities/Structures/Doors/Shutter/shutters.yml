@@ -80,8 +80,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: IconSmooth
-    key: walls
   - type: DoorSignalControl
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -111,11 +109,7 @@
   - type: PlacementReplacement
     key: shutters
   - type: IconSmooth
-    key: doors
-    states:
-    - !type:CornerSpriteSmoothing
-      mask: [ walls, windows, grilles, marble, doors ]
-      base: state
+    key: walls
   - type: StructureAligner
   - type: StructureAlignerPylon
 

@@ -41,10 +41,6 @@
         acts: ["Destruction"]
   - type: IconSmooth
     key: walls
-    states:
-    - !type:CornerSpriteSmoothing
-      mask: [ walls, windows, grilles, marble, doors ]
-      base: state
   - type: StaticPrice
     price: 100
   - type: ShipRepairable # Mono

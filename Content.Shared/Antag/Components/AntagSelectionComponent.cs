@@ -30,10 +30,11 @@ public sealed partial class AntagSelectionComponent : Component
     public bool LateJoinAdditional;
 
     /// <summary>
-    /// The antag specifiers for the antagonists
+    /// The antag specifiers for the antagonists.
+    /// Empty when a local game rule still uses the old definitions list.
     /// </summary>
-    [DataField(required: true)]
-    public AntagCountSelector[] Antags;
+    [DataField]
+    public AntagCountSelector[] Antags = [];
 
     /// <summary>
     /// Cached sessions of antag definitions and selected players.

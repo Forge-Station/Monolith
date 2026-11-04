@@ -36,8 +36,7 @@ namespace Content.Server.Body.Systems
             _organQuery = GetEntityQuery<OrganComponent>();
             _solutionQuery = GetEntityQuery<SolutionManagerComponent>();
 
-            SubscribeLocalEvent<MetabolizerComponent, ComponentInit>(OnMetabolizerInit);
-            SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedSolutionContainerSystem)]);
             SubscribeLocalEvent<MetabolizerComponent, EntityUnpausedEvent>(OnUnpaused);
             SubscribeLocalEvent<MetabolizerComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
         }
@@ -45,23 +44,20 @@ namespace Content.Server.Body.Systems
         private void OnMapInit(Entity<MetabolizerComponent> ent, ref MapInitEvent args)
         {
             ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.UpdateInterval;
+
+            if (!ent.Comp.SolutionOnBody)
+            {
+                _solutionContainerSystem.EnsureSolution(ent.Owner, ent.Comp.SolutionName, out _);
+            }
+            else if (_organQuery.CompOrNull(ent)?.Body is { } body)
+            {
+                _solutionContainerSystem.EnsureSolution(body, ent.Comp.SolutionName, out _);
+            }
         }
 
         private void OnUnpaused(Entity<MetabolizerComponent> ent, ref EntityUnpausedEvent args)
         {
             ent.Comp.NextUpdate += args.PausedTime;
-        }
-
-        private void OnMetabolizerInit(Entity<MetabolizerComponent> entity, ref ComponentInit args)
-        {
-            if (!entity.Comp.SolutionOnBody)
-            {
-                _solutionContainerSystem.EnsureSolution(entity.Owner, entity.Comp.SolutionName, out _);
-            }
-            else if (_organQuery.CompOrNull(entity)?.Body is { } body)
-            {
-                _solutionContainerSystem.EnsureSolution(body, entity.Comp.SolutionName, out _);
-            }
         }
 
         private void OnApplyMetabolicMultiplier(

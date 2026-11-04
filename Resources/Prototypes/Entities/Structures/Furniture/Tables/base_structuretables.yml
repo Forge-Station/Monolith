@@ -31,7 +31,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ table ]
-      base: state_
+      base: state_
+      swapOuterBits: false
   - type: Climbable
   - type: Bonkable
     bonkDamage:
@@ -75,3 +76,5 @@
     - !type:CornerSpriteSmoothing
       mask: [ counter ]
       base: state_
+
+      swapOuterBits: false

@@ -18,7 +18,6 @@
       drawdepth: Walls
       sprite: Structures/Walls/grille.rsi
       layers:
-        - state: grille
         - state: electrified
           sprite: Effects/electricity.rsi
           map: ["enum.ElectrifiedLayers.Sparks"]
@@ -26,7 +25,14 @@
           visible: false
     - type: Icon
       sprite: Structures/Walls/grille.rsi
-      state: grille
+      state: full
+    - type: IconSmooth
+      key: grilles
+      states:
+      - !type:CornerSpriteSmoothing
+        mask: [ grilles, walls, windows ]
+        base: grille
+        index: 0
     - type: Construction
       graph: Grille
       node: grille
@@ -119,10 +125,10 @@
   - type: Sprite
     drawdepth: Walls
     sprite: Structures/Walls/grille.rsi
-    state: grille_broken
+    state: broken
   - type: Icon
     sprite: Structures/Walls/grille.rsi
-    state: grille_broken
+    state: broken
   - type: RCDDeconstructable
     cost: 6
     delay: 4
@@ -176,17 +182,24 @@
   components:
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/grille.rsi
+    sprite: Structures/Walls/grille-diagonal.rsi
     layers:
-    - state: grille_diagonal
+    - state: state0
     - state: electrified_diagonal
       sprite: Effects/electricity.rsi
       map: ["enum.ElectrifiedLayers.Sparks"]
       shader: unshaded
       visible: false
   - type: Icon
-    sprite: Structures/Walls/grille.rsi
-    state: grille_diagonal
+    sprite: Structures/Walls/grille-diagonal.rsi
+    state: state0
+  - type: IconSmooth
+    key: grilles
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ grilles, walls, windows ]
+      base: state
+      index: 0
   - type: Tag
     tags:
     - Diagonal

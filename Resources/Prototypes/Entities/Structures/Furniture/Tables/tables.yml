@@ -30,6 +30,7 @@
     - !type:CornerSpriteSmoothing
       mask: [ state ]
       base: state_
+      swapOuterBits: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -91,6 +92,7 @@
     - !type:CornerSpriteSmoothing
       mask: [ state ]
       base: state_
+      swapOuterBits: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -139,6 +141,7 @@
     - !type:CornerSpriteSmoothing
       mask: [ state ]
       base: state_
+      swapOuterBits: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -210,6 +213,7 @@
     - !type:CornerSpriteSmoothing
       mask: [ metaltable ]
       base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: Table
@@ -256,7 +260,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ metalreinforcedtable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableReinforced
@@ -322,7 +327,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ glasstable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableGlass
@@ -387,7 +393,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ reinforcedglasstable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableReinforcedGlass
@@ -452,7 +459,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ plasmaglasstable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TablePlasmaGlass
@@ -502,7 +510,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ brasstable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableBrass
@@ -553,7 +562,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ woodtable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableWood
@@ -600,7 +610,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ woodgambletable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableCarpet
@@ -637,7 +648,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ stonetable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepFloor
@@ -672,7 +684,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ webtable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: WebStructures
     node: table
@@ -740,7 +753,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytable ]
-      base: state
+      base: state_
+      swapOuterBits: false
   - type: Tag
     tags:
     - Wooden
@@ -765,8 +779,9 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytableblue ]
-      base: state
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyCyan
   parent: TableFancyBase
@@ -784,8 +799,9 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytablecyan ]
-      base: state
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyBlack
   parent: TableFancyBase
@@ -803,8 +819,9 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytableblack ]
-      base: state
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyRed
   parent: TableFancyBase
@@ -822,8 +839,9 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytablered ]
-      base: state
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyPurple
   parent: TableFancyBase
@@ -841,8 +859,9 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytablepurple ]
-      base: state
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyPink
   parent: TableFancyBase
@@ -860,8 +879,9 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytablepink ]
-      base: state
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyGreen
   parent: TableFancyBase
@@ -879,8 +899,9 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytablegreen ]
-      base: state
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyOrange
   parent: TableFancyBase
@@ -898,8 +919,9 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytableorange ]
-      base: state
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyWhite
   parent: TableFancyBase
@@ -917,8 +939,9 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ fancytablewhite ]
-      base: state
+      base: state_
 
+      swapOuterBits: false
 #Debug
 
 - type: entity
@@ -992,6 +1015,7 @@
     - !type:CornerSpriteSmoothing
       mask: [ counterwood ]
       base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: CounterWood
@@ -1043,6 +1067,7 @@
     - !type:CornerSpriteSmoothing
       mask: [ countermetal ]
       base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: CounterMetal

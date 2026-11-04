@@ -14,6 +14,7 @@ using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -79,6 +80,13 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     [Dependency] protected readonly EntityQuery<SolutionComponent> SolutionQuery = default!;
     [Dependency] protected readonly EntityQuery<SolutionManagerComponent> SolutionManagerQuery = default!;
 
+    /// <summary>
+    /// Solutions created while a map is already initialized. Their MapInit runs chemical updates and
+    /// <see cref="SolutionChangedEvent"/>, which listeners on the parent are not ready for until the
+    /// parent's own MapInit handlers have finished. Flushed on the next tick.
+    /// </summary>
+    private readonly List<EntityUid> _pendingSolutionMapInits = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -99,6 +107,52 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         SubscribeLocalEvent<SolutionManagerComponent, ComponentShutdown>(OnManagerShutdown);
         SubscribeLocalEvent<SolutionManagerComponent, EntInsertedIntoContainerMessage>(OnSolutionAdded);
         SubscribeLocalEvent<SolutionManagerComponent, EntRemovedFromContainerMessage>(OnSolutionRemoved);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+        FlushPendingSolutionMapInits();
+    }
+
+    private void FlushPendingSolutionMapInits()
+    {
+        for (var i = 0; i < _pendingSolutionMapInits.Count; i++)
+        {
+            var uid = _pendingSolutionMapInits[i];
+            if (!TryComp<MetaDataComponent>(uid, out var meta)
+                || meta.EntityLifeStage != EntityLifeStage.Initialized)
+                continue;
+
+            EntityManager.RunMapInit(uid, meta);
+        }
+
+        _pendingSolutionMapInits.Clear();
+    }
+
+    /// <summary>
+    /// Initialize a freshly spawned solution without raising <see cref="SolutionChangedEvent"/> yet
+    /// when the parent is still inside its own MapInit.
+    /// </summary>
+    private void StartSolution(EntityUid solution)
+    {
+        var meta = MetaData(solution);
+        if (meta.EntityLifeStage < EntityLifeStage.Initialized)
+        {
+            EntityManager.InitializeEntity(solution, meta);
+            EntityManager.StartEntity(solution);
+        }
+
+        if (meta.EntityLifeStage != EntityLifeStage.Initialized)
+            return;
+
+        var xform = Transform(solution);
+        if (xform.MapUid is { Valid: true } mapUid
+            && TryComp<MapComponent>(mapUid, out var mapComp)
+            && !mapComp.MapInitialized)
+            return;
+
+        _pendingSolutionMapInits.Add(solution);
     }
 
     private void OnSolutionGetState(Entity<SolutionComponent> ent, ref ComponentGetState args)
@@ -1189,7 +1243,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         var solution = SpawnSolutionUninitialized(DefaultSolution);
         solution.Comp.Id = name;
         ContainerSystem.Insert(solution.Owner, container, force: true);
-        EntityManager.InitializeAndStartEntity(solution);
+        StartSolution(solution);
         return solution;
     }
 
@@ -1200,7 +1254,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         // TODO: Replace this with an engine bound method when e#6192 is merged.
         var solution = SpawnSolutionUninitialized(proto);
         ContainerSystem.Insert(solution.Owner, container, force: true);
-        EntityManager.InitializeAndStartEntity(solution);
+        StartSolution(solution);
         return solution;
     }
 

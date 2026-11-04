@@ -16,6 +16,7 @@
     - !type:CornerSpriteSmoothing
       mask: [ full ]
       base: carpet_
+      swapOuterBits: false
   - type: Tag
     tags:
     - Carpet

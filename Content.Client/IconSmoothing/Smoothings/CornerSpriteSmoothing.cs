@@ -28,6 +28,13 @@ public partial class CornerSpriteSmoothing : ISpriteSmoothState
     [DataField]
     public ProtoId<ShaderPrototype>? Shader { get; set; }
 
+    /// <summary>
+    /// Corvax/Baystation wall RSIs expect clockwise=4 / counter-clockwise=1 after the circular shift.
+    /// Upstream table/catwalk/carpet RSIs (base ends like state_) already match the unshifted bit order — leave this false for those.
+    /// </summary>
+    [DataField]
+    public bool SwapOuterBits { get; set; } = true;
+
     public virtual void InitializeStates(Entity<SpriteComponent> entity, SpriteSystem sprite)
     {
         // TODO: This should use Direction some day...
@@ -101,6 +108,13 @@ public partial class CornerSpriteSmoothing : ISpriteSmoothState
         // Need to shift these to the right so we only get the 3 relevant directions:tm:
         // Amazed that C# doesn't have a circular bitshift built in for bytes. Kinda fucked up.
         var appendix = Offset(directions, offset);
+
+        // Wall RSIs are still the Baystation corner set: counter-clockwise = 1, diagonal = 2, clockwise = 4.
+        // The shifted mask is clockwise, diagonal, counter-clockwise, so the outer bits have to be swapped
+        // or every straight wall renders the perpendicular cap.
+        // Tables/catwalks use the upstream (unswapped) order — see SwapOuterBits.
+        if (SwapOuterBits)
+            appendix = (byte)(((appendix & 4) >> 2) | (appendix & 2) | ((appendix & 1) << 2));
         DebugTools.Assert(appendix < 8, $"Calculated appendix of {appendix} went above the maximum of 8, directions: {directions}, offset {offset}");
         return appendix;
     }

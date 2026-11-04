@@ -33,7 +33,7 @@ public sealed partial class SliceableFoodSystem : EntitySystem
 
         SubscribeLocalEvent<SliceableFoodComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<SliceableFoodComponent, SliceFoodDoAfterEvent>(OnSlicedoAfter);
-        SubscribeLocalEvent<SliceableFoodComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SliceableFoodComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedSolutionContainerSystem)]);
     }
 
     private void OnInteractUsing(Entity<SliceableFoodComponent> entity, ref InteractUsingEvent args)

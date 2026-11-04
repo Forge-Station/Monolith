@@ -91,7 +91,7 @@ public sealed class TraitorRuleTest
             // Start the round
             ticker.StartRound();
             // Force traitor mode to start (skip the delay)
-            ticker.StartGameRule(gameRuleEnt!.Value);
+            ticker.StartGameRule(gameRuleEnt);
         });
         await pair.RunTicksSync(10);
 

@@ -24,7 +24,7 @@ public sealed partial class PacifiedRoundEnd : EntitySystem
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEnded);
     }
 
-    private void OnRoundEnded(RoundEndTextAppendEvent ev)
+    private void OnRoundEnded(ref RoundEndTextAppendEvent ev)
     {
         if (!_enabled)
             return;

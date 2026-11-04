@@ -335,7 +335,8 @@ ReinforcementRadioSyndicateMonkey: ReinforcementRadioSyndicateAncestor
 ReinforcementRadioSyndicateMonkeyNukeops: ReinforcementRadioSyndicateAncestorNukeops
 
 # 2024-05-01
-DrinkBottleGoldschlager: DrinkBottleGildlager
+DrinkBottleGoldschlager: DrinkGildlagerBottleFull
+DrinkBottleGildlager: DrinkGildlagerBottleFull
 
 # 2024-05-14
 soda_dispenser: SodaDispenser

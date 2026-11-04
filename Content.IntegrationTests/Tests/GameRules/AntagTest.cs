@@ -66,7 +66,7 @@ public abstract partial class AntagTest : GameTest
             {
                 foreach (var role in antag.MindRoles)
                 {
-                    Assert.That(mindComp!.MindRoleContainer.ContainedEntities,
+                    Assert.That(mindComp!.MindRoles,
                         Has.Exactly(1).Matches<EntityUid>(x => SComp<MetaDataComponent>(x).EntityPrototype?.ID == role),
                         $"{SToPrettyString(mindEnt)} owned by {session}, failed to acquire role {role} for antagonist {antag}");
                 }

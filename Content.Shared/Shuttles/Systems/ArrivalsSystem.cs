@@ -9,6 +9,7 @@ using Content.Shared.Station.Systems;
 using JetBrains.Annotations;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 namespace Content.Shared.Shuttles.Systems;
@@ -19,6 +20,7 @@ namespace Content.Shared.Shuttles.Systems;
 public abstract partial class ArrivalsSystem : EntitySystem
 {
     [Dependency] protected IConfigurationManager Cfg = default!;
+    [Dependency] private INetManager _net = default!;
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected IRobustRandom Random = default!;
     [Dependency] protected GameTicker Ticker = default!;
@@ -39,6 +41,10 @@ public abstract partial class ArrivalsSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ArrivalsShuttleComponent, ComponentStartup>(OnShuttleStartup);
+
+        // These cvars are server-only. The client keeps arrivals disabled.
+        if (!_net.IsServer)
+            return;
 
         // Don't invoke immediately as it will get set in the natural course of things.
         Enabled = Cfg.GetCVar(CCVars.ArrivalsShuttles);

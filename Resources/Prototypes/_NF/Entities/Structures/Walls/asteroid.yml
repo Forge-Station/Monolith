@@ -316,14 +316,24 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - state: rock_scrap
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+  - type: IconSmooth
+    key: walls
+    states:
+    - !type:EdgeSpriteSmoothing
+      mask: [ walls ]
+      base: scraprock_
   - type: RandomSprite
     available:
       - scraprock_variant:
@@ -358,12 +368,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -391,12 +405,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -424,12 +442,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -457,12 +479,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -490,12 +516,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -523,12 +553,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -556,12 +590,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -589,12 +627,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -622,12 +664,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_bananium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -655,12 +701,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -688,12 +738,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - sprite: Structures/Walls/rock.rsi
       state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
@@ -721,12 +775,16 @@
       map: [ "scraprock_variant" ]
     - map: [ "enum.EdgeLayer.South" ]
       state: scraprock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: scraprock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: scraprock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: scraprock_west
+      visible: false
     - state: rock_bluespace
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 

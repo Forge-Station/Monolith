@@ -72,7 +72,7 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
                 reaction);
             foreach (var product in reaction.Products.Keys)
             {
-                _reagentSources[product].Add(data);
+                AddReagentSource(product, data);
             }
         }
 
@@ -84,7 +84,7 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
             var data = new ReagentGasSourceData(
                 new () { DefaultCondenseCategory },
                 gas);
-            _reagentSources[gas.Reagent].Add(data);
+            AddReagentSource(gas.Reagent, data);
         }
 
         // store the names of the entities used so we don't get repeats in the guide.
@@ -113,7 +113,7 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
                     juiceSolution);
                 foreach (var (id, _) in juiceSolution.Contents)
                 {
-                    _reagentSources[id.Prototype].Add(data);
+                    AddReagentSource(id.Prototype, data);
                 }
 
                 usedNames.Add(entProto.Name);
@@ -130,11 +130,21 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
                     grindableSolution);
                 foreach (var (id, _) in grindableSolution.Contents)
                 {
-                    _reagentSources[id.Prototype].Add(data);
+                    AddReagentSource(id.Prototype, data);
                 }
                 usedNames.Add(entProto.Name);
             }
         }
+    }
+
+    /// <summary>
+    /// Joke and mod reagents can appear in grind or juice solutions without a <see cref="ReagentPrototype"/>.
+    /// Those sources are omitted from the guide instead of failing client startup.
+    /// </summary>
+    private void AddReagentSource(string reagentId, ReagentSourceData data)
+    {
+        if (_reagentSources.TryGetValue(reagentId, out var sources))
+            sources.Add(data);
     }
 
     public List<ReagentSourceData> GetReagentSources(string id)

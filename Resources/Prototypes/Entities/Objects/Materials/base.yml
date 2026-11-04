@@ -13,9 +13,10 @@
   - type: Material
   - type: Tag
     tags:
+    - DroneUsable
     - RawMaterial
+  - type: BulkMaterial # Forge-change
   - type: Damageable
-  - type: Injurable
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

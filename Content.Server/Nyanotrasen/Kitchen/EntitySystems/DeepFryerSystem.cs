@@ -102,7 +102,8 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
 
         _sawmill = Logger.GetSawmill("deepfryer");
 
-        SubscribeLocalEvent<DeepFryerComponent, ComponentInit>(OnInitDeepFryer);
+        SubscribeLocalEvent<DeepFryerComponent, ComponentInit>(OnInitDeepFryerStorage);
+        SubscribeLocalEvent<DeepFryerComponent, MapInitEvent>(OnMapInitDeepFryer, after: [typeof(SharedSolutionContainerSystem)]);
         SubscribeLocalEvent<DeepFryerComponent, PowerChangedEvent>(OnPowerChange);
         SubscribeLocalEvent<DeepFryerComponent, RefreshPartsEvent>(OnRefreshParts);
         SubscribeLocalEvent<DeepFryerComponent, MachineDeconstructedEvent>(OnDeconstruct);
@@ -153,6 +154,9 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
     /// </summary>
     public FixedPoint2 GetOilVolume(EntityUid uid, DeepFryerComponent component)
     {
+        if (component.Solution == null)
+            return FixedPoint2.Zero;
+
         var oilVolume = FixedPoint2.Zero;
 
         foreach (var reagent in component.Solution)
@@ -169,6 +173,9 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
     /// </summary>
     public FixedPoint2 GetWasteVolume(EntityUid uid, DeepFryerComponent component)
     {
+        if (component.Solution == null)
+            return FixedPoint2.Zero;
+
         var wasteVolume = FixedPoint2.Zero;
 
         foreach (var reagent in component.WasteReagents)
@@ -184,6 +191,9 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
     /// </summary>
     public FixedPoint2 GetOilPurity(EntityUid uid, DeepFryerComponent component)
     {
+        if (component.Solution == null)
+            return FixedPoint2.Zero;
+
         if (component.Solution.Volume > 0) // Frontier: ensure no negative division.
             return GetOilVolume(uid, component) / component.Solution.Volume;
         return FixedPoint2.Zero;
@@ -194,6 +204,9 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
     /// </summary>
     public FixedPoint2 GetOilLevel(EntityUid uid, DeepFryerComponent component)
     {
+        if (component.Solution == null)
+            return FixedPoint2.Zero;
+
         if (component.Solution.MaxVolume > 0) // Frontier: ensure no negative division or division by zero.
             return GetOilVolume(uid, component) / component.Solution.MaxVolume;
         return FixedPoint2.Zero;
@@ -420,7 +433,7 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
     }
     // End Frontier
 
-    private void OnInitDeepFryer(EntityUid uid, DeepFryerComponent component, ComponentInit args)
+    private void OnInitDeepFryerStorage(EntityUid uid, DeepFryerComponent component, ComponentInit args)
     {
         component.Storage =
             _containerSystem.EnsureContainer<Container>(uid, component.StorageName, out var containerExisted);
@@ -428,7 +441,10 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
         if (!containerExisted)
             _sawmill.Warning(
                 $"{ToPrettyString(uid)} did not have a {component.StorageName} container. It has been created.");
+    }
 
+    private void OnMapInitDeepFryer(EntityUid uid, DeepFryerComponent component, MapInitEvent args)
+    {
         var solutionExisted = _solutionContainerSystem.EnsureSolution(uid, component.SolutionName, out var solutionEnt);
         component.Solution = solutionEnt.Comp.Solution;
 
@@ -555,6 +571,9 @@ public sealed partial class DeepFryerSystem : SharedDeepfryerSystem
 
     private void OnSolutionChange(EntityUid uid, DeepFryerComponent component, SolutionChangedEvent args)
     {
+        if (component.Solution == null)
+            return;
+
         UpdateUserInterface(uid, component);
         UpdateAmbientSound(uid, component);
     }

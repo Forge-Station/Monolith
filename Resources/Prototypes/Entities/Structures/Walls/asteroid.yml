@@ -18,7 +18,10 @@
     noRot: true
   - type: IconSmooth
     key: walls
-  - type: SmoothEdge
+    states:
+    - !type:EdgeSpriteSmoothing
+      mask: [ walls ]
+      base: rock_asteroid_
   - type: Icon
     sprite: Structures/Walls/rock.rsi
     state: rock_asteroid
@@ -28,12 +31,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
   - type: MiningScannerViewable
   - type: Damageable
     damageContainer: Inorganic # Frontier: StructuralInorganic<Inorganic
@@ -87,12 +94,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -110,12 +121,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -133,12 +148,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -156,12 +175,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -179,12 +202,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -202,12 +229,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -225,12 +256,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -258,12 +293,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -290,12 +329,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -322,12 +365,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_bananium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -345,12 +392,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -368,12 +419,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -391,12 +446,16 @@
     - state: rock_asteroid
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_asteroid_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_asteroid_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_asteroid_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_asteroid_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -420,22 +479,29 @@
   components:
   - type: IconSmooth
     key: walls
+    states:
+    - !type:EdgeSpriteSmoothing
+      mask: [ walls ]
+      base: ironrock_
   - type: Icon
     sprite: Structures/Walls/rock.rsi
     state: ironrock
-  - type: SmoothEdge
   - type: Sprite
     sprite: Structures/Walls/rock.rsi
     layers:
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
 
 - type: entity
   id: IronRockMining
@@ -463,12 +529,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -486,12 +556,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -509,12 +583,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -532,12 +610,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -555,12 +637,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -578,12 +664,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -601,12 +691,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -624,12 +718,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_bananium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -647,12 +745,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -670,12 +772,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -693,12 +799,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -716,12 +826,16 @@
     - state: ironrock
     - map: [ "enum.EdgeLayer.South" ]
       state: ironrock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: ironrock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: ironrock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: ironrock_west
+      visible: false
     - state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -759,23 +873,30 @@
         acts: ["Destruction"]
   - type: IconSmooth
     key: walls
+    states:
+    - !type:EdgeSpriteSmoothing
+      mask: [ walls ]
+      base: rock_
   - type: Icon
     sprite: Structures/Walls/rock.rsi
     state: rock
   - type: MiningScannerViewable
-  - type: SmoothEdge
   - type: Sprite
     sprite: Structures/Walls/rock.rsi
     layers:
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
   - type: RequiresGrid
 
 # Ore veins
@@ -800,12 +921,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -830,12 +955,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -853,12 +982,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -883,12 +1016,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -913,12 +1050,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -943,12 +1084,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -974,12 +1119,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1004,12 +1153,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1035,12 +1188,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_bananium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1065,12 +1222,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1095,12 +1256,16 @@
     - state: rock
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+      visible: false
     - state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1119,12 +1284,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
 
 - type: entity
   id: WallRockBasaltCoal
@@ -1140,12 +1309,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1163,12 +1336,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1186,12 +1363,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1209,12 +1390,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1232,12 +1417,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1255,12 +1444,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1278,12 +1471,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1301,12 +1498,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1325,12 +1526,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_bananium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1348,12 +1553,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1371,12 +1580,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1394,12 +1607,16 @@
     - state: rock_wall
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_wall_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_wall_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_wall_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_wall_west
+      visible: false
     - state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1418,12 +1635,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
 
 - type: entity
   id: WallRockSnowCoal
@@ -1439,12 +1660,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1462,12 +1687,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1485,12 +1714,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1508,12 +1741,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1531,12 +1768,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1554,12 +1795,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1577,12 +1822,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1600,12 +1849,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1624,12 +1877,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_bananium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1647,12 +1904,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1670,12 +1931,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1693,12 +1958,16 @@
     - state: rock_snow
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_snow_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_snow_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_snow_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_snow_west
+      visible: false
     - state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1717,12 +1986,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
 
 - type: entity
   id: WallRockSandCoal
@@ -1738,12 +2011,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1761,12 +2038,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1784,12 +2065,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1807,12 +2092,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1830,12 +2119,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1853,12 +2146,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1876,12 +2173,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1899,12 +2200,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1922,12 +2227,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_bananium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1945,12 +2254,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1968,12 +2281,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -1991,12 +2308,16 @@
     - state: rock_sand
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_sand_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_sand_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_sand_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_sand_west
+      visible: false
     - state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2015,12 +2336,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
 
 - type: entity
   id: WallRockChromiteCoal
@@ -2036,12 +2361,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2059,12 +2388,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2082,12 +2415,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2105,12 +2442,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2128,12 +2469,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2151,12 +2496,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2174,12 +2523,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2197,12 +2550,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2221,12 +2578,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_bananium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2244,12 +2605,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2267,12 +2632,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2290,12 +2659,16 @@
     - state: rock_chromite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_chromite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_chromite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_chromite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_chromite_west
+      visible: false
     - state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2314,12 +2687,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
 
 - type: entity
   id: WallRockAndesiteCoal
@@ -2335,12 +2712,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_coal
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2358,12 +2739,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_gold
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2381,12 +2766,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_diamond
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2404,12 +2793,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_phoron
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2427,12 +2820,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_quartz
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2450,12 +2847,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_silver
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2473,12 +2874,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_tin
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2496,12 +2901,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_uranium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2520,12 +2929,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_bananium
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2543,12 +2956,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2566,12 +2983,16 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_artifact_fragment
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
@@ -2589,11 +3010,15 @@
     - state: rock_andesite
     - map: [ "enum.EdgeLayer.South" ]
       state: rock_andesite_south
+      visible: false
     - map: [ "enum.EdgeLayer.East" ]
       state: rock_andesite_east
+      visible: false
     - map: [ "enum.EdgeLayer.North" ]
       state: rock_andesite_north
+      visible: false
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_andesite_west
+      visible: false
     - state: rock_salt
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]

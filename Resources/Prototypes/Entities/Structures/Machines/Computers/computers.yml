@@ -578,7 +578,6 @@
     prefix: device-address-prefix-crew-monitor
 #  - type: WirelessNetwork
 #    range: 1200
-  - type: AmbientMusicMarkerMedical
   # Mono
   - type: ShipRepairable
     repairTime: 4

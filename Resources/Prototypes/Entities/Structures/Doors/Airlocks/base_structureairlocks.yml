@@ -52,11 +52,7 @@
       visible: false
     # Forge-Change-End
   - type: IconSmooth
-    key: doors
-    states:
-    - !type:CornerSpriteSmoothing
-      mask: [ walls, windows, grilles, marble, doors ]
-      base: state
+    key: walls
   - type: AnimationPlayer
   - type: Physics
   - type: Fixtures
@@ -175,8 +171,6 @@
     containers:
     - board
   - type: PlacementReplacement
-    key: walls
-  - type: IconSmooth
     key: walls
   # Forge-Change-Start
   # - type: PaintableAirlock

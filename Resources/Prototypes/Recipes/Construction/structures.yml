@@ -317,7 +317,7 @@
       failIfSpace: false
   icon:
     sprite: Structures/Walls/grille.rsi
-    state: grille
+    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
@@ -352,8 +352,8 @@
     - !type:TileNotBlocked
       failIfSpace: false
   icon:
-    sprite: Structures/Walls/grille.rsi
-    state: grille_diagonal
+    sprite: Structures/Walls/grille-diagonal.rsi
+    state: state0
   objectType: Structure
   placementMode: SnapgridCenter
 

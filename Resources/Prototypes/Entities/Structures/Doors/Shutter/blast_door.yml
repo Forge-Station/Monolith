@@ -61,11 +61,7 @@
     repairTime: 6
     repairCost: 8
   - type: IconSmooth
-    key: doors
-    states:
-    - !type:CornerSpriteSmoothing
-      mask: [ walls, windows, grilles, marble, doors ]
-      base: state
+    key: walls
   - type: PlacementReplacement
     key: blastdoors
 

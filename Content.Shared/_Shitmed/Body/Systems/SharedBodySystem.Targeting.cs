@@ -15,6 +15,7 @@ using Content.Shared._Shitmed.Targeting.Events;
 using Robust.Shared.CPUJob.JobQueues;
 using Robust.Shared.CPUJob.JobQueues.Queues;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -29,6 +30,7 @@ namespace Content.Shared.Body.Systems;
 public partial class SharedBodySystem
 {
     [Dependency] private INetManager _net = default!;
+    [Dependency] private ISharedPlayerManager _players = default!; // Forge-Change
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private IRobustRandom _random = default!;
 
@@ -325,9 +327,17 @@ public partial class SharedBodySystem
             }
             // Revival events are handled by the server, so we end up being locked to a network event.
             // I hope you like the _net.IsServer, Remuchi :)
-            if (_net.IsServer)
+            // Forge-Change: disconnect leaves the session on the body. Heat and cold keep changing
+            // integrity every tick, and sending to that channel logs a stack trace per part.
+            if (_net.IsServer && BodySessionConnected(partEnt.Comp.Body.Value))
                 RaiseNetworkEvent(new TargetIntegrityChangeEvent(GetNetEntity(partEnt.Comp.Body.Value)), partEnt.Comp.Body.Value);
         }
+    }
+
+    // Forge-Change: the body still exists after the player drops. Only a live channel should get the UI event.
+    private bool BodySessionConnected(EntityUid body)
+    {
+        return _players.TryGetSessionByEntity(body, out var session) && session.Channel is { IsConnected: true };
     }
 
     /// <summary>

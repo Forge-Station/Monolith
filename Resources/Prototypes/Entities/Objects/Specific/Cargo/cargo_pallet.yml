@@ -75,7 +75,6 @@
     - !type:CornerSpriteSmoothing
       mask: [ cargo_pallet_sell ]
       base: cargo_pallet_sell_
-
       swapOuterBits: false
 - type: entity
   id: CargoPalletBuy
@@ -97,5 +96,4 @@
     - !type:CornerSpriteSmoothing
       mask: [ cargo_pallet_buy ]
       base: cargo_pallet_buy_
-
       swapOuterBits: false

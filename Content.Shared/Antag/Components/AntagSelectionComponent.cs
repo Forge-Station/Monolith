@@ -1,6 +1,10 @@
 using Content.Shared.Antag.Selectors;
+using Content.Shared.Destructible.Thresholds;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Preferences.Loadouts;
+using Content.Shared.Roles;
+using Content.Shared.Whitelist;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -35,6 +39,13 @@ public sealed partial class AntagSelectionComponent : Component
     /// </summary>
     [DataField]
     public AntagCountSelector[] Antags = [];
+
+    /// <summary>
+    /// Legacy YAML field kept so unfinished local game rules still deserialize.
+    /// Runtime selection uses <see cref="Antags"/> after the specifier migration.
+    /// </summary>
+    [DataField]
+    public List<AntagSelectionDefinition> Definitions = new();
 
     /// <summary>
     /// Cached sessions of antag definitions and selected players.
@@ -98,4 +109,72 @@ public enum AntagSelectionTime : byte
     /// Antag roles are *never* selected. Instead, this definition only makes ghost roles.
     /// </summary>
     Never,
+}
+
+/// <summary>
+/// Legacy per-rule antag definition used by local YAML that has not yet migrated to
+/// <see cref="AntagSpecifierPrototype"/> / <see cref="AntagCountSelector"/>.
+/// </summary>
+[DataDefinition]
+public partial struct AntagSelectionDefinition()
+{
+    [DataField]
+    public List<ProtoId<AntagPrototype>> PrefRoles = new();
+
+    [DataField]
+    public List<ProtoId<AntagPrototype>> FallbackRoles = new();
+
+    [DataField]
+    public AntagAcceptability MultiAntagSetting = AntagAcceptability.None;
+
+    [DataField]
+    public int Min = 1;
+
+    [DataField]
+    public int Max = 1;
+
+    [DataField]
+    public MinMax? MinRange;
+
+    [DataField]
+    public MinMax? MaxRange;
+
+    [DataField]
+    public int PlayerRatio = 10;
+
+    [DataField]
+    public bool PickPlayer = true;
+
+    [DataField]
+    public bool LateJoinAdditional = false;
+
+    [DataField]
+    public bool AllowNonHumans = false;
+
+    [DataField]
+    public EntityWhitelist? Whitelist;
+
+    [DataField]
+    public EntityWhitelist? Blacklist;
+
+    [DataField]
+    public ComponentRegistry Components = new();
+
+    [DataField]
+    public ComponentRegistry MindComponents = new();
+
+    [DataField]
+    public List<EntProtoId>? MindRoles;
+
+    [DataField]
+    public ProtoId<StartingGearPrototype>? StartingGear;
+
+    [DataField]
+    public List<ProtoId<RoleLoadoutPrototype>>? RoleLoadout;
+
+    [DataField]
+    public BriefingData? Briefing;
+
+    [DataField]
+    public EntProtoId? SpawnerPrototype;
 }

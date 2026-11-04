@@ -19,8 +19,8 @@ public sealed partial class CodewordGeneratorPrototype : IPrototype
     [DataField]
     public List<ProtoId<LocalizedDatasetPrototype>> Words { get; private set; } = new(2)
         {
-            "Adjectives",
-            "Verbs",
+            "adjectives",
+            "verbs",
         };
 
     /// <summary>

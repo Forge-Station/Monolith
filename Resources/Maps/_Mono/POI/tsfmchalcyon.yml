@@ -50328,23 +50328,6 @@ entities:
     - type: Transform
       pos: 3.5,-26.5
       parent: 1
-      # Forge-Change-Start
-      anchored: true
-    - type: Physics
-      bodyType: Static
-    - type: DisableToolUse
-      anchoring: true
-      prying: true
-      screwing: true
-      cutting: true
-      welding: true
-      pulsing: true
-      slicing: true
-      sawing: true
-      honking: true
-      rolling: true
-      digging: true
-      # Forge-Change-End
 - proto: ShipBattlemap
   entities:
   - uid: 7639

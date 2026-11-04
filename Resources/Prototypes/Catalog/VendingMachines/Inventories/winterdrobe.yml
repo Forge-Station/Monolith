@@ -18,8 +18,17 @@
     ClothingOuterCoatBomber: 3
     ClothingHeadHatSantahat: 2
     ClothingHeadHatXmasCrown: 2
+#Forge-change-add-start
+    ClothingNeckScarfStripedWhite: 3
+    ClothingNeckScarfStripedYellow: 3
+    ClothingNeckScarfStripedSand: 3
+    ClothingNeckScarfStripedOliva: 3
+    ClothingNeckScarfStripedPink: 3
+    ClothingNeckScarfStripedGreenranger: 3
+#Forge-change-add-end
 
   emaggedInventory:
     ClothingNeckScarfStripedSyndieGreen: 3
     ClothingNeckScarfStripedSyndieRed: 3
     ClothingNeckScarfStripedCentcom: 3
+    ClothingNeckScarfStripedSpecialNT: 1 #Forge-change-add

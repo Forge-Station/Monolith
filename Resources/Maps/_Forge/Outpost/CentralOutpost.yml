@@ -67654,8 +67654,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -35.5,55.5
-    missingComponents:
-    - Anchorable
 - proto: MailBagCapsulePrimed
   entities:
   - uid: 7172

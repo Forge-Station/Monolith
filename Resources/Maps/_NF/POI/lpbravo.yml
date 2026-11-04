@@ -17511,10 +17511,18 @@ entities:
     - type: Transform
       pos: 35.5,8.5
       parent: 1
-    # Forge-Change-Start
-    missingComponents:
-    - Anchorable
-    # Forge-Change-End
+    - type: DisableToolUse
+      anchoring: true
+      prying: true
+      screwing: true
+      cutting: true
+      welding: true
+      pulsing: true
+      slicing: true
+      sawing: true
+      honking: true
+      rolling: true
+      digging: true
 - proto: Magazine556x45mmIncendiary
   entities:
   - uid: 1876

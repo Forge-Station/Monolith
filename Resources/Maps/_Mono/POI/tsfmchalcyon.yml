@@ -46479,8 +46479,6 @@ entities:
     - type: Transform
       pos: 3.5,-25.5
       parent: 1
-    missingComponents:
-    - Anchorable
   - uid: 7004
     components:
     - type: Transform

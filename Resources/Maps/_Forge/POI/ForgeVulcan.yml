@@ -14923,23 +14923,12 @@ entities:
     - type: Transform
       pos: 9.5,-4.5
       parent: 2
-      anchored: true
     - type: ThermalSignature
       storedHeat: 119999940
     - type: Battery
       startingCharge: 0
     - type: ApcPowerReceiver
       powerLoad: 100
-    - type: Damageable
-      damageContainer: Inorganic
-      damageModifierSet: Metallic
-    - type: Destructible
-      thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 0
-    - type: Physics
-      bodyType: Static
     - type: DisableToolUse
       anchoring: true
       prying: true
@@ -14952,7 +14941,6 @@ entities:
       honking: true
       rolling: true
       digging: true
-
 - proto: KitchenElectricGrill
   entities:
   - uid: 1220

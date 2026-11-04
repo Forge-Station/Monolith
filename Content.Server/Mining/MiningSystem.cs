@@ -83,12 +83,15 @@ public sealed partial class MiningSystem : EntitySystem
             return;
         }
 
-        // Forge-Change: ship drill gather → abstract buffer (never Dynamic ore piles).
+        // Forge-Change: ship drill / mining turret gather → abstract buffer (never Dynamic ore piles).
         if (gatherer != null && HasComp<OrePipeBufferComponent>(gatherer.Value))
         {
-            _orePipe.TryDepositOre(gatherer.Value, oreEntity, yield);
-            component.PreventSpawning = true;
-            return;
+            if (_orePipe.TryDepositOre(gatherer.Value, oreEntity, yield))
+            {
+                component.PreventSpawning = true;
+                return;
+            }
+            // Buffer full — fall through to world spawn at the gatherer (turret / drill).
         }
 
         // Forge-Change: destruction without gatherer (grid remove / RequiresGrid) near a drill.

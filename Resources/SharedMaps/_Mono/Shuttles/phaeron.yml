@@ -573,14 +573,6 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 5
-- proto: AlwaysPoweredLightSodium
-  entities:
-  - uid: 19
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.5,-3.5
-      parent: 1
 - proto: APCBasic
   entities:
   - uid: 20
@@ -2887,7 +2879,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: GasDepositLocatorUnpowered
+- proto: GasDepositLocator
   entities:
   - uid: 290
     components:
@@ -4133,6 +4125,12 @@ entities:
       parent: 1
 - proto: PoweredlightSodium
   entities:
+  - uid: 19
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-3.5
+      parent: 1
   - uid: 611
     components:
     - type: Transform

@@ -17,13 +17,13 @@
   - type: Gun
     minAngle: 30 # Forge-change 18->30
     maxAngle: 42 # Forge-change 35->42
-    angleIncrease: 1.25 # Forge-change 4->1.25
+    angleIncrease: 1 # Forge-change 4->1
     angleDecay: 10 # Forge-change 40->10
     projectileSpeed: 50 # Forge-change
     fireRate: 6 # Forge-change 11->6
-    shotsPerBurst: 3
-    burstFireRate: 11 # Forge-change
-    burstCooldown: 0.6 # Forge-change
+    shotsPerBurst: 4
+    burstFireRate: 13 # Forge-change
+    burstCooldown: 0.33 # Forge-change
     availableModes:
     - Burst
     - FullAuto

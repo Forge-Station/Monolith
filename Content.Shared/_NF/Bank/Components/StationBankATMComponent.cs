@@ -36,6 +36,10 @@ public enum SectorBankAccount : byte
     Frontier,
     Nfsd,
     Medical,
-    Mieyo,
-    BlackMarket,
+/// <summary>
+///    Mieyo, /// Forge-change-del
+/// </summary>
+///    BlackMarket, /// Forge-change-del
+    Imperial, /// Forge-change-start
+    Renegates, /// Forge-change-end
 }

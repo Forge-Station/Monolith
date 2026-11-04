@@ -3,22 +3,22 @@ ILLEGAL_MATCHES = [
     "DO NOT MAP",
     "DoNotMap",
     "DEBUG",
+    "Always Powered",
     "Admeme",
     "EncryptionKeyCommand",
     "SurveillanceCameraWireless",
-    "APCHighCapacity",
-    "APCSuperCapacity",
-    "APCHyperCapacity",
     "PDA",
-    "SpawnPointPassenger",
-    "SalvageShuttleMarker",
     "FTLPoint",
 ]
 # List of specific legal entities that override the above.  Does not check suffixes.
+# Match is a case-insensitive substring of the id, so do not add a shorter id that is a
+# prefix of an illegal one (StationAnchor matches StationAnchorIndestructible).
 LEGAL_OVERRIDES = [
     "ButtonFrameCautionSecurity", # red button
     "PosterLegitPDAAd",
-    "ShowcaseRobot" # decoration
+    "ShowcaseRobot", # decoration
+    "AlwaysPoweredStrobeLight", # decoration
+    "SmallLightDim", # decoration
 ]
 # List of matchers that are illegal to use, unless the map is a ship and the ship belongs to the keyed shipyard.
 CONDITIONALLY_ILLEGAL_MATCHES = {
@@ -50,5 +50,29 @@ CONDITIONALLY_ILLEGAL_MATCHES = {
         "PlastititaniumWindowDiagonalIndestructible",
         "ClosetMaintenanceFilledRandom",
         "ClosetWallMaintenanceFilledRandom",
+        "AirlockGlassShuttleShipyardOutpost",
+        "BaseWallOutpost",
+        "WallReinforcedOutpost",
+        "WallMiningOutpost",
+        "WallPlastitaniumOutpost",
+        "ReinforcedWindowOutpost",
+        "PlastitaniumWindowOutpost",
+        "AirlockShuttleNfsdOutpostLocked",
+        "AirlockGlassShuttleNfsdOutpostLocked",
+        "AirlockShuttleUSSPOutpostLocked",
+        "AirlockGlassShuttleUSSPOutpostLocked",
+        "AirlockGlassShuttleNfsdOutpost",
+        "AirlockShuttleNfsdOutpost",
+        "AirlockShuttleOutpost",
+        "AirlockGlassShuttleOutpost",
+        "AirlockExternalShuttleMieyoLockedOutpost",
+        "AirlockExternalGlassShuttleMieyoLockedOutpost",
+        "WallReinforcedDiagonalOutpost",
+        "WallMiningDiagonalOutpost",
+        "WallPlastitaniumDiagonalOutpost",
+        "ReinforcedWindowDiagonalOutpost",
+        "PlastitaniumWindowDiagonalOutpost",
+        "StationAnchorIndestructible",
+        "OUTPOST ONLY",
     ]
 }

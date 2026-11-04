@@ -155,7 +155,17 @@ public sealed partial class ShipSteeringSystem : EntitySystem
             FrameTime = args.FrameTime
         };
 
-        args.Input = ProcessMovement(ref context, config);
+        var input = ProcessMovement(ref context, config);
+
+        // Forge-Change: never feed NaN into shuttle physics, it spreads to the grid's velocity and position.
+        if (!float.IsFinite(input.Strafe.X) || !float.IsFinite(input.Strafe.Y)
+            || !float.IsFinite(input.Rotation) || !float.IsFinite(input.Brakes))
+        {
+            ent.Comp.RotationCompensation = 0f;
+            input = new ShuttleInput(Vector2.Zero, 0f, 1f);
+        }
+
+        args.Input = input;
     }
 
     /// <summary>
@@ -603,12 +613,22 @@ public sealed partial class ShipSteeringSystem : EntitySystem
             wishAngleActual = (ctx.DestMapPos.Position - ctx.ShipPos.Position).ToWorldAngle();
 
         wishAngleActual += config.TargetAngleOffset;
+
+        // Forge-Change: RotationCompensation persists on the component, so a single NaN would poison it forever.
+        if (!float.IsFinite(ctx.RotationCompensation))
+            ctx.RotationCompensation = 0f;
+
         var wishAngle = wishAngleActual + ctx.RotationCompensation;
 
         var angAccel = _mover.GetAngularAcceleration(ctx.Shuttle, ctx.ShipBody);
 
         // process the PID
         var wishRotateByActual = ShortestAngleDistance(ctx.ShipNorthAngle + new Angle(Math.PI), wishAngleActual);
+
+        // Forge-Change: bail out on non-finite input instead of throwing in Math.Sign and breaking physics every tick.
+        if (!double.IsFinite(wishRotateByActual.Theta) || !float.IsFinite(angAccel) || angAccel < 0f)
+            return new RotationResult(0f, 0f);
+
         ctx.RotationCompensation += (float)wishRotateByActual * config.RotationCompensationGain * ctx.FrameTime * MathF.Sqrt(angAccel);
 
         // process how we want to rotate

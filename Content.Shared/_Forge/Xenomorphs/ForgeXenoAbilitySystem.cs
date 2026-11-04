@@ -11,9 +11,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.Standing;
 using Content.Shared.Stealth;
-using Content.Shared._White.Standing;
 using Content.Shared.Stealth.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -44,8 +42,6 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
     [Dependency] private readonly SharedStealthSystem _stealth = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedLayingDownSystem _laying = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly ForgeXenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
@@ -61,7 +57,6 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ForgeXenoRestActionEvent>(OnRest);
         SubscribeLocalEvent<ForgeXenoHideActionEvent>(OnHide);
         SubscribeLocalEvent<ForgeXenoFortifyActionEvent>(OnFortify);
         SubscribeLocalEvent<ForgeXenoZoomActionEvent>(OnZoom);
@@ -83,25 +78,6 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
         SubscribeLocalEvent<ForgeXenoFortifyComponent, DamageModifyEvent>(OnFortifyDamage);
         SubscribeLocalEvent<ForgeXenoComponent, MeleeAttackEvent>(OnMeleeAttack);
         SubscribeLocalEvent<ForgeXenoComponent, ShotAttemptedEvent>(OnShotAttempted);
-    }
-
-    private void OnRest(ForgeXenoRestActionEvent args)
-    {
-        BreakStealth(args.Performer);
-        var uid = args.Performer;
-        if (HasComp<ForgeXenoRestingComponent>(uid))
-        {
-            RemComp<ForgeXenoRestingComponent>(uid);
-            _standing.Stand(uid);
-            _popup.PopupClient(Loc.GetString("forge-xeno-rest-up"), uid, uid);
-        }
-        else if (_laying.TryLieDown(uid))
-        {
-            EnsureComp<ForgeXenoRestingComponent>(uid);
-            _popup.PopupClient(Loc.GetString("forge-xeno-rest-down"), uid, uid);
-        }
-
-        args.Handled = true;
     }
 
     private void OnHide(ForgeXenoHideActionEvent args)

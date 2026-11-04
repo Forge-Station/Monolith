@@ -199,7 +199,7 @@ entities:
     - type: Transform
       pos: 5.5,2.5
       parent: 1
-- proto: AlwaysPoweredLightExterior
+- proto: PoweredLightExterior
   entities:
   - uid: 3
     components:
@@ -211,7 +211,7 @@ entities:
     - type: Transform
       pos: 7.5,3.5
       parent: 1
-- proto: AlwaysPoweredlightGreen
+- proto: PoweredlightGreen
   entities:
   - uid: 5
     components:
@@ -219,7 +219,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 10.5,7.5
       parent: 1
-- proto: AlwaysPoweredlightRed
+- proto: PoweredlightRed
   entities:
   - uid: 6
     components:

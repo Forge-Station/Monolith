@@ -1230,7 +1230,8 @@ entities:
       parent: 1
       rot: 1.5707963267948966 rad
       pos: -0.5,-5.5
-- proto: SuitStorageEmpire14m
+      parent: 1
+- proto: SuitStorageRI14
   entities:
   - uid: 91
     components:

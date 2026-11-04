@@ -27,10 +27,17 @@ public sealed partial class GunSystem
 
         EntityUid? ent = null;
 
-        // Forge-Change-start: drop stale ballistic entities before cycle (Drake seismic launcher).
-        while (component.Entities.Count > 0 && !Exists(component.Entities[^1]))
+        // Forge-Change-start: Entities is local-only — sync from container before cycle.
+        while (component.Entities.Count > 0 &&
+               (!Exists(component.Entities[^1]) || !component.Container.Contains(component.Entities[^1])))
         {
             component.Entities.RemoveAt(component.Entities.Count - 1);
+        }
+
+        foreach (var contained in component.Container.ContainedEntities)
+        {
+            if (!component.Entities.Contains(contained))
+                component.Entities.Add(contained);
         }
         // Forge-Change-end
 
@@ -46,7 +53,8 @@ public sealed partial class GunSystem
         else if (component.UnspawnedCount > 0 && !component.InfiniteUnspawned)
         {
             component.UnspawnedCount--;
-            ent = Spawn(component.Proto, coordinates);
+            // PredictedSpawn so chamber slot inserts don't warn in DEBUG.
+            ent = PredictedSpawn(component.Proto, coordinates);
             EnsureShootable(ent.Value);
         }
 

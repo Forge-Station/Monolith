@@ -472,7 +472,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: orange-vinyl-disk"
+    state: orange-vinyl-disk
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/july.ogg
@@ -901,7 +901,7 @@
 
 - type: entity
   name: "vinyl disk: GetThatAntag!" #бенгер
-  id: VinylDiskGetThatAntag!
+  id: VinylDiskGetThatAntag
   parent: BaseVinylDiskSyndi
   components:
   - type: Sprite

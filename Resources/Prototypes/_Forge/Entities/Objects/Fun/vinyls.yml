@@ -157,7 +157,7 @@
     state: blue-vinyl-disk
   - type: Vinyl
     song:
-      path: /Audio/_Goobstation/RadioStation/music/goonstation/a.ogg
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/april.ogg
 
 - type: entity
   name: "vinyl disk: atlas"

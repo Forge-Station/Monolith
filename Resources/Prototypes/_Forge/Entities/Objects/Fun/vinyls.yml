@@ -1,4 +1,5 @@
 #region Vinyls
+# кто разместит прототип пластинки не по алфавитному порядку и не в том региооне того лично выебу
 
 - type: entity
   abstract: true
@@ -10,7 +11,7 @@
   - type: Vinyl
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi
-    state: placeholder     
+    state: placeholder
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
   - type: Damageable
@@ -52,9 +53,31 @@
   components:
     - type: Sprite
       sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi
-      state: valid-vinyl-disk   
+      state: valid-vinyl-disk
 
 #region GOONSTATION
+
+- type: entity
+  name: "vinyl disk: adventure 1"
+  id: VinylDiskAdventure1
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/adventure_1.ogg
+
+- type: entity
+  name: "vinyl disk: adventure 2"
+  id: VinylDiskAdventure2
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/adventure_2.ogg
 
 - type: entity
   name: "vinyl disk: adventure 3"
@@ -62,7 +85,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/adventure_3.ogg
@@ -73,7 +96,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/adventure_4.ogg
@@ -84,10 +107,21 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/adventure_5.ogg
+
+- type: entity
+  name: "vinyl disk: adventure 6"
+  id: VinylDiskAdventure6
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/adventure_6.ogg
 
 - type: entity
   name: "vinyl disk: after party"
@@ -95,7 +129,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/after_party.ogg
@@ -106,10 +140,21 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/anonymous.ogg
+
+- type: entity
+  name: "vinyl disk: april"
+  id: VinylDiskApril
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/a.ogg
 
 - type: entity
   name: "vinyl disk: atlas"
@@ -117,7 +162,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/atlas.ogg
@@ -128,10 +173,21 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/atmosphere.ogg
+
+- type: entity
+  name: "vinyl disk: august"
+  id: VinylDiskAugust
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/august.ogg
 
 - type: entity
   name: "vinyl disk: Banjo"
@@ -139,7 +195,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/Banjo1.ogg
@@ -150,7 +206,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/beaches.ogg
@@ -161,7 +217,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/biodome.ogg
@@ -172,7 +228,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/black_wing_interface.ogg
@@ -183,7 +239,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/bumblebee.ogg
@@ -194,7 +250,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/chill_1.ogg
@@ -205,7 +261,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/chill_2.ogg
@@ -216,7 +272,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/chill_3.ogg
@@ -227,7 +283,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/chill_4.ogg
@@ -238,7 +294,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/christmassong.ogg
@@ -249,7 +305,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/cloudskymanguy.ogg
@@ -260,10 +316,21 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/dance_on_a_space_volcano.ogg
+
+- type: entity
+  name: "vinyl disk: december"
+  id: VinylDiskDecember
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/december.ogg
 
 - type: entity
   name: "vinyl disk: distant star"
@@ -271,7 +338,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/distant_star.ogg
@@ -282,10 +349,21 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/everyone_is_so_alive.ogg
+
+- type: entity
+  name: "vinyl disk: february"
+  id: VinylDiskFebruary
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/february.ogg
 
 - type: entity
   name: "vinyl disk: floaty"
@@ -293,7 +371,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/floaty.ogg
@@ -304,7 +382,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/funkadelic.ogg
@@ -315,7 +393,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/giga.ogg
@@ -326,7 +404,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/graveyard.ogg
@@ -337,7 +415,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/groovy.ogg
@@ -348,7 +426,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/high_technologic_beat.ogg
@@ -359,7 +437,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/honkmas.ogg
@@ -370,10 +448,43 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/it_feels_good_to_be_alive_too.ogg
+
+- type: entity
+  name: "vinyl disk: january"
+  id: VinylDiskJanuary
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/january.ogg
+
+- type: entity
+  name: "vinyl disk: july"
+  id: VinylDiskJuly
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/july.ogg
+
+- type: entity
+  name: "vinyl disk: june"
+  id: VinylDiskJune
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/june.ogg
 
 - type: entity
   name: "vinyl disk: key lime"
@@ -381,7 +492,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/key_lime.ogg
@@ -392,7 +503,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/lay_egg_is_true.ogg
@@ -403,10 +514,21 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/lunch.ogg
+
+- type: entity
+  name: "vinyl disk: march"
+  id: VinylDiskMarch
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/march.ogg
 
 - type: entity
   name: "vinyl disk: maxi"
@@ -414,10 +536,21 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/maxi.ogg
+
+- type: entity
+  name: "vinyl disk: may"
+  id: VinylDiskMay
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/may.ogg
 
 - type: entity
   name: "vinyl disk: monkey riot"
@@ -425,10 +558,32 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/monkey_riot.ogg
+
+- type: entity
+  name: "vinyl disk: november"
+  id: VinylDiskNovember
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/november.ogg
+
+- type: entity
+  name: "vinyl disk: october"
+  id: VinylDiskOctober
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/october.ogg
 
 - type: entity
   name: "vinyl disk: oh no evil star"
@@ -436,7 +591,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/oh_no_evil_star.ogg
@@ -447,7 +602,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/planets.ogg
@@ -458,7 +613,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/repose.ogg
@@ -469,10 +624,32 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/riverdancer.ogg
+
+- type: entity
+  name: "vinyl disk: second reality" # мортал комбат какой то
+  id: VinylDiskSecondReality
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/second_reality.ogg
+
+- type: entity
+  name: "vinyl disk: september"
+  id: VinylDiskSeptember
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: placeholder
+  - type: Vinyl
+    song:
+      path: /Audio/_Goobstation/RadioStation/music/goonstation/september.ogg
 
 - type: entity
   name: "vinyl disk: space gardener"
@@ -480,7 +657,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/space_gardener.ogg
@@ -491,7 +668,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/uguu.ogg
@@ -502,7 +679,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/upbeat_1.ogg
@@ -513,7 +690,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/upbeat_2.ogg
@@ -524,7 +701,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/warriors_honk.ogg
@@ -535,7 +712,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/waystations.ogg
@@ -546,7 +723,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/we_are_number_two.ogg
@@ -557,7 +734,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/goonstation/xtra.ogg
@@ -570,7 +747,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Also-Sprach-Zarathustra-PM-Music.ogg
@@ -581,7 +758,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Bach-Cello-Suite-PM-Music.ogg
@@ -592,51 +769,51 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Ride-of-the-Valkyries-PM-Music.ogg
 
 - type: entity
-  name: "vinyl disk: Romeo and Juliet" 
+  name: "vinyl disk: Romeo and Juliet"
   id: VinylDiskRomeoAndJuliet
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Romeo-and-Juliet-PM-Music.ogg
 
 - type: entity
-  name: "vinyl disk: Russian Dance" 
+  name: "vinyl disk: Russian Dance"
   id: VinylDiskRussianDance
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Russian-Dance-PM-Music.ogg
 
 - type: entity
-  name: "vinyl disk: The Flower Duet" 
+  name: "vinyl disk: The Flower Duet"
   id: VinylDiskTheFlowerDuet
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/The-Flower-Duet-PM-Music.ogg
 
 - type: entity
-  name: "vinyl disk: Winter Vivaldi" 
+  name: "vinyl disk: Winter Vivaldi"
   id: VinylDiskWinterVivaldi
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/PMMUSIC/Winter-Vivaldi-PM-Music.ogg
@@ -649,7 +826,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/AirportLounge.ogg
@@ -660,7 +837,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/BoogieParty.ogg
@@ -671,7 +848,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/BurnTheWorldWaltz.ogg
@@ -682,7 +859,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Corncob.ogg
@@ -693,7 +870,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/DeadlyRoulette.ogg
@@ -704,18 +881,18 @@
   parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    #state: placeholder  
+    #state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/EphedrineOverdose.ogg
 
 - type: entity
-  name: "vinyl disk: FeralAngelWaltz" 
+  name: "vinyl disk: FeralAngelWaltz"
   id: VinylDiskFeralAngelWaltz
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/FeralAngelWaltz.ogg
@@ -726,7 +903,7 @@
   parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/GetThatAntag!.ogg
@@ -737,7 +914,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/JingleBells.ogg
@@ -748,13 +925,13 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/LateNightRadio.ogg
 
 - type: entity
-  name: "vinyl disk: LAW2OPENARMORY" 
+  name: "vinyl disk: LAW2OPENARMORY"
   id: VinylDiskLAW2OPENARMORY
   parent: BaseVinylDiskSyndi
   components:
@@ -765,23 +942,23 @@
       path: /Audio/_Goobstation/RadioStation/music/LAW2OPENARMORY.ogg
 
 - type: entity
-  name: "vinyl disk: Mesmerizing Galaxy Loop" 
+  name: "vinyl disk: Mesmerizing Galaxy Loop"
   id: VinylDiskMesmerizingGalaxyLoop
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/MesmerizingGalaxyLoop.ogg
 
 - type: entity
-  name: "vinyl disk: Night In Venice" 
+  name: "vinyl disk: Night In Venice"
   id: VinylDiskNightInVenice
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/NightInVenice.ogg
@@ -792,7 +969,7 @@
   parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    #state: placeholder 
+    #state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/NUKIES_TRAP.ogg
@@ -803,7 +980,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/OpenTTDJourney.ogg
@@ -814,7 +991,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/peakasshole.ogg
@@ -825,7 +1002,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/RunningOutCover.ogg
@@ -836,7 +1013,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/SpaceJazz.ogg
@@ -847,7 +1024,7 @@
   parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    #state: placeholder  
+    #state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/TraitorousIntent.ogg
@@ -858,7 +1035,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/VibingOverVenus.ogg
@@ -869,7 +1046,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/violet.ogg
@@ -880,7 +1057,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/WantYouGone.ogg
@@ -897,7 +1074,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/constellations.ogg
@@ -908,7 +1085,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/flip-flap.ogg
@@ -919,7 +1096,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/sector11.ogg
@@ -930,7 +1107,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder  
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/starlight.ogg
@@ -941,7 +1118,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/sunset.ogg
@@ -952,7 +1129,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/title3.ogg
@@ -963,7 +1140,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/drifting.ogg
@@ -974,7 +1151,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/_DV/space_asshole-MONO.ogg
@@ -985,7 +1162,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/_NF/frontier-arrivals.ogg
@@ -996,7 +1173,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Jukebox/_NF/victory.ogg
@@ -1010,7 +1187,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/a_walk_in_the_woods.ogg
@@ -1021,18 +1198,18 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/absconditus.ogg
-  
+
 - type: entity
   name: "vinyl disk: across the void"
   id: VinylDiskAcrossTheVoid
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/across_the_void.ogg
@@ -1043,7 +1220,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/at_any_cost.ogg
@@ -1054,7 +1231,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/brothers_in_arms.ogg
@@ -1065,7 +1242,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/bucsi_singularity.ogg
@@ -1076,10 +1253,10 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
-      path: /Audio/_Goobstation/RadioStation/music/Lobby/in_amber_clad.ogg      
+      path: /Audio/_Goobstation/RadioStation/music/Lobby/in_amber_clad.ogg
 
 - type: entity
   name: "vinyl disk: lasers rip apart the bulkhead"
@@ -1087,7 +1264,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/lasers_rip_apart_the_bulkhead.ogg
@@ -1098,7 +1275,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/monument.ogg
@@ -1109,7 +1286,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/scp_isd.ogg
@@ -1120,7 +1297,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/Lobby/when_day_breaks.ogg
@@ -1132,7 +1309,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/A-Guy/Nothing-Wrong-With-Megacorpos.ogg
@@ -1143,7 +1320,7 @@
   parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    #state: placeholder 
+    #state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/A-Guy/nuclearoperations_remake_infil.ogg
@@ -1154,7 +1331,7 @@
   parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
-    #state: placeholder 
+    #state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/A-Guy/revolution.ogg
@@ -1165,7 +1342,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/A-Guy/thestation.ogg
@@ -1176,7 +1353,7 @@
   parent: BaseVinylDisk
   components:
   - type: Sprite
-    state: placeholder 
+    state: placeholder
   - type: Vinyl
     song:
       path: /Audio/_Goobstation/RadioStation/music/A-Guy/Tomfoolery-Required.ogg

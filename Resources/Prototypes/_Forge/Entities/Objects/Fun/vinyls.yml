@@ -48,7 +48,6 @@
   - type: StaticPrice
     price: 20
 
-
 - type: entity
   abstract: true
   parent: BaseVinylDisk

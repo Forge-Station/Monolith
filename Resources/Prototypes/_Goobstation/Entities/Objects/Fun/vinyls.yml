@@ -52,10 +52,10 @@
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/RadioStation/vinylsleeves.rsi
-  - type: EntityTableContainerFill
-    containers:
-      vinyl: !type:NestedSelector
-        tableId: RandomVinylDiskAll #Forge-Change
+  # - type: EntityTableContainerFill
+  #   containers:
+  #     vinyl: !type:NestedSelector
+  #       tableId: RandomVinylDiskAll #Forge-Change
   - type: ContainerContainer
     containers:
       vinyl: !type:ContainerSlot

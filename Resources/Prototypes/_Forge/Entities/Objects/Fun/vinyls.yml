@@ -1,5 +1,5 @@
 #region Vinyls
-# кто разместит прототип пластинки не по алфавитному порядку и не в том региооне того лично выебу
+# РАЗМЕЩАТЬ ПЛАСТИНКИ СТРОГО ПО АЛФАВИТНОМУ ПОРЯДКУ И В НУЖНОМ РЕГИОНЕ, РЕГИОНЫ СОЗДАВАТЬ ПО ПРОИСХОЖДЕНИЮ МУЗЫКИ(ТО ЕСТЬ В КАКОЙ ПАПКЕ ОНА ЛЕЖИТ В  /Audio/_Goobstation/RadioStation/music/)
 
 - type: entity
   abstract: true
@@ -45,6 +45,9 @@
   - type: Tag
     tags:
     - VinylSleeveFit
+  - type: StaticPrice
+    price: 20
+
 
 - type: entity
   abstract: true
@@ -964,8 +967,8 @@
       path: /Audio/_Goobstation/RadioStation/music/NightInVenice.ogg
 
 - type: entity
-  name: "vinyl disk: NUKIES_TRAP" #ебат басы
-  id: VinylDiskNUKIES_TRAP
+  name: "vinyl disk: NUKIES TRAP" #ебат басы
+  id: VinylDiskNUKIESTRAP
   parent: BaseVinylDiskSyndi
   components:
   - type: Sprite
@@ -975,7 +978,7 @@
       path: /Audio/_Goobstation/RadioStation/music/NUKIES_TRAP.ogg
 
 - type: entity
-  name: "vinyl disk: OpenTTDJourney"
+  name: "vinyl disk: Open TTD Journey"
   id: VinylDiskOpenTTDJourney
   parent: BaseVinylDisk
   components:
@@ -987,7 +990,7 @@
 
 - type: entity
   name: "vinyl disk: peakasshole"
-  id: VinylDiskpeakasshole
+  id: VinylDiskPeakasshole
   parent: BaseVinylDisk
   components:
   - type: Sprite
@@ -997,7 +1000,7 @@
       path: /Audio/_Goobstation/RadioStation/music/peakasshole.ogg
 
 - type: entity
-  name: "vinyl disk: RunningOutCover"
+  name: "vinyl disk: Running Out Cover"
   id: VinylDiskRunningOutCover
   parent: BaseVinylDisk
   components:
@@ -1008,7 +1011,7 @@
       path: /Audio/_Goobstation/RadioStation/music/RunningOutCover.ogg
 
 - type: entity
-  name: "vinyl disk: SpaceJazz"
+  name: "vinyl disk: Space Jazz"
   id: VinylDiskSpaceJazz
   parent: BaseVinylDisk
   components:
@@ -1019,7 +1022,7 @@
       path: /Audio/_Goobstation/RadioStation/music/SpaceJazz.ogg
 
 - type: entity
-  name: "vinyl disk: TraitorousIntent"
+  name: "vinyl disk: Traitorous Intent"
   id: VinylDiskTraitorousIntent
   parent: BaseVinylDiskSyndi
   components:
@@ -1030,7 +1033,7 @@
       path: /Audio/_Goobstation/RadioStation/music/TraitorousIntent.ogg
 
 - type: entity
-  name: "vinyl disk: VibingOverVenus"
+  name: "vinyl disk: Vibing Over Venus"
   id: VinylDiskVibingOverVenus
   parent: BaseVinylDisk
   components:
@@ -1052,7 +1055,7 @@
       path: /Audio/_Goobstation/RadioStation/music/violet.ogg
 
 - type: entity
-  name: "vinyl disk: WantYouGone"
+  name: "vinyl disk: Want You Gone"
   id: VinylDiskWantYouGone
   parent: BaseVinylDisk
   components:

@@ -4,8 +4,8 @@ meta:
   engineVersion: 291.0.0
   forkId: ""
   forkVersion: ""
-  time: 10/31/2026 13:58:32
-  entityCount: 10896
+  time: 11/04/2026 21:54:19
+  entityCount: 10911
 maps:
 - 10888
 grids:
@@ -8109,6 +8109,18 @@ entities:
       - 10367
       - 10362
       - 10365
+  - uid: 10079
+    components:
+    - type: Transform
+      parent: 1
+      rot: 3.141592653589793 rad
+      pos: -42.5,-18.5
+    - type: DeviceList
+      devices:
+      - 1196
+      - 7548
+      - 6344
+      - 7549
   - uid: 10310
     components:
     - type: Transform
@@ -8591,7 +8603,7 @@ entities:
       pos: 6.5,31.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -23714.75
+      secondsUntilStateChange: -23991.717
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -25526,6 +25538,10 @@ entities:
     - type: Transform
       parent: 1
       pos: -21.5,48.5
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
     - type: DeviceLinkSource
       linkedPorts:
         8915:
@@ -32005,13 +32021,6 @@ entities:
     - type: Transform
       parent: 1
       pos: -21.5,13.5
-- proto: WFComputerWeatherForecast
-  entities:
-  - uid: 10893
-    components:
-    - type: Transform
-      parent: 1
-      pos: -8.5,6.5
 - proto: filingCabinetDrawerRandom
   entities:
   - uid: 4174
@@ -33596,7 +33605,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -32.5,43.5
     - type: AtmosPipeColor
-      color: '#0055CCFF'
+      color: '#990000FF'
 - proto: GasFilterOxygenOn
   entities:
   - uid: 4346
@@ -33606,7 +33615,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -32.5,41.5
     - type: AtmosPipeColor
-      color: '#0055CCFF'
+      color: '#990000FF'
 - proto: GasFilterOxygenOnFlipped
   entities:
   - uid: 10169
@@ -33615,7 +33624,7 @@ entities:
       parent: 1
       pos: -23.5,43.5
     - type: AtmosPipeColor
-      color: '#947507FF'
+      color: '#990000FF'
 - proto: GasMinerNitrogenStationLarge
   entities:
   - uid: 4347
@@ -33646,16 +33655,6 @@ entities:
       inletOneConcentration: 0.78
 - proto: GasPassiveVent
   entities:
-  - uid: 1196
-    components:
-    - type: Transform
-      parent: 1
-      rot: -1.5707963267948966 rad
-      pos: -39.5,-19.5
-    - type: AtmosPipeColor
-      color: '#990000FF'
-    - type: AtmosPipeLayers
-      pipeLayer: Secondary
   - uid: 4350
     components:
     - type: Transform
@@ -33760,16 +33759,6 @@ entities:
       parent: 1
       rot: 3.141592653589793 rad
       pos: -15.5,9.5
-  - uid: 10740
-    components:
-    - type: Transform
-      parent: 1
-      rot: 3.141592653589793 rad
-      pos: -39.5,-17.5
-    - type: AtmosPipeColor
-      color: '#990000FF'
-    - type: AtmosPipeLayers
-      pipeLayer: Secondary
 - proto: GasPipeBend
   entities:
   - uid: 970
@@ -44363,7 +44352,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -23.5,45.5
     - type: AtmosPipeColor
-      color: '#947507FF'
+      color: '#0055CCFF'
 - proto: GasPressurePumpOnMax
   entities:
   - uid: 5550
@@ -44976,6 +44965,7 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 5
+      - 10079
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 7549
@@ -44987,6 +44977,7 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 5
+      - 10079
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 7798
@@ -45078,6 +45069,19 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 8030
+    - type: AtmosPipeLayers
+      pipeLayer: Secondary
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 1196
+    components:
+    - type: Transform
+      parent: 1
+      rot: -1.5707963267948966 rad
+      pos: -39.5,-19.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 10079
     - type: AtmosPipeLayers
       pipeLayer: Secondary
     - type: AtmosPipeColor
@@ -45617,6 +45621,19 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 25
+    - type: AtmosPipeLayers
+      pipeLayer: Secondary
+    - type: AtmosPipeColor
+      color: '#990000FF'
+  - uid: 6344
+    components:
+    - type: Transform
+      parent: 1
+      rot: 3.141592653589793 rad
+      pos: -39.5,-17.5
+    - type: DeviceNetwork
+      deviceLists:
+      - 10079
     - type: AtmosPipeLayers
       pipeLayer: Secondary
     - type: AtmosPipeColor
@@ -74302,13 +74319,48 @@ entities:
     - type: Transform
       parent: 1
       pos: -40.46031,-25.05595
-- proto: WFMeridianClothingHeadCostumeTvHead
+- proto: WFContractBoard
   entities:
-  - uid: 10351
+  - uid: 10899
     components:
     - type: Transform
       parent: 1
-      pos: 16.042,34.74635
+      pos: -1.5,15.5
+  - uid: 10901
+    components:
+    - type: Transform
+      pos: 39.5,29.5
+      parent: 1
+  - uid: 10903
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 37.5,1.5
+      parent: 1
+  - uid: 10905
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -4.5,-27.5
+      parent: 1
+  - uid: 10907
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -2.5,56.5
+      parent: 1
+  - uid: 10909
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -29.5,56.5
+      parent: 1
+  - uid: 10911
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -29.5,-31.5
+      parent: 1
 - proto: WFComputerMilitaryCounter
   entities:
   - uid: 10894
@@ -74316,22 +74368,356 @@ entities:
     - type: Transform
       parent: 1
       pos: -54.5,-15.5
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
+- proto: WFComputerWeatherForecast
+  entities:
+  - uid: 10893
+    components:
+    - type: Transform
+      parent: 1
+      pos: -8.5,6.5
+    - type: ApcPowerReceiver
+      powerLoad: 5
+    - type: Battery
+      startingCharge: 0
+- proto: WFMeridianClothingHeadCostumeTvHead
+  entities:
+  - uid: 10351
+    components:
+    - type: Transform
+      parent: 1
+      pos: 16.042,34.74635
 - proto: WFMinigameDealer
   entities:
   - uid: 10895
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       parent: 1
+      rot: -1.5707963267948966 rad
       pos: 9.5,26.5
+    - type: HumanoidAppearance
+      skinColor: '#D8A982FF'
+      sex: Female
+      markingSet:
+        points:
+          Special:
+            required: False
+            points: 0
+            defaultMarkings: []
+          Hair:
+            required: False
+            points: 0
+            defaultMarkings: []
+          FacialHair:
+            required: False
+            points: 1
+            defaultMarkings: []
+          Snout:
+            required: False
+            points: 1
+            defaultMarkings: []
+          Tail:
+            required: False
+            points: 1
+            defaultMarkings: []
+          HeadTop:
+            required: False
+            points: 1
+            defaultMarkings: []
+          Chest:
+            required: False
+            points: 4
+            defaultMarkings: []
+          Legs:
+            required: False
+            points: 8
+            defaultMarkings: []
+          Arms:
+            required: False
+            points: 8
+            defaultMarkings: []
+          UndergarmentTop:
+            required: False
+            points: 1
+            defaultMarkings: []
+          UndergarmentBottom:
+            required: False
+            points: 1
+            defaultMarkings: []
+        markings:
+          Hair:
+          - markingColor:
+            - '#2B1B14FF'
+            visible: True
+            markingId: HumanHairBun
+      gender: Female
+      eyeColor: '#4A6B3AFF'
+      biotype: Organic
+      age: 34
+    - type: SolutionContainerManager
+      solutions:
+        chemicals:
+          temperature: 293.15
+          name: chemicals
+          maxVol: 250
+          reagents: []
+          canReact: True
+        bloodstream:
+          temperature: 293.15
+          name: bloodstream
+          maxVol: 300
+          reagents:
+          - ReagentId: Blood
+            data:
+            - !type:DnaData
+              dNA: TGCCTAGAGGCACAAT
+            Quantity: 300
+          canReact: True
+        bloodstreamTemporary:
+          temperature: 293.15
+          name: bloodstreamTemporary
+          maxVol: 4
+          reagents: []
+          canReact: True
+    - type: FloatingVisuals
+      canFloat: True
+    - type: Dna
+      dna: TGCCTAGAGGCACAAT
+    - type: Grammar
+      attributes:
+        proper: true
+        gender: Female
+    - type: MobThresholds
+      triggersAlerts: False
+    - type: MobStateActions
+      actions: {}
+    - type: WFBiotype
+      biotype: Organic
+    - type: ContainerContainer
+      containers:
+        shoes: !type:ContainerSlot
+          occludes: False
+        jumpsuit: !type:ContainerSlot
+          occludes: False
+        outerClothing: !type:ContainerSlot
+          occludes: False
+        gloves: !type:ContainerSlot
+          occludes: False
+        neck: !type:ContainerSlot
+          occludes: False
+        neck2: !type:ContainerSlot
+          occludes: False
+        neck3: !type:ContainerSlot
+          occludes: False
+        mask: !type:ContainerSlot
+          occludes: False
+        eyes: !type:ContainerSlot
+          occludes: False
+        ears: !type:ContainerSlot
+          occludes: False
+        head: !type:ContainerSlot
+          occludes: False
+        pocket1: !type:ContainerSlot
+          occludes: False
+        pocket2: !type:ContainerSlot
+          occludes: False
+        suitstorage: !type:ContainerSlot
+          occludes: False
+        id: !type:ContainerSlot
+          occludes: False
+        belt: !type:ContainerSlot
+          occludes: False
+        back: !type:ContainerSlot
+          occludes: False
+        wallet: !type:ContainerSlot
+          occludes: False
+        balaclava: !type:ContainerSlot
+          occludes: False
+        leftarmband: !type:ContainerSlot
+          occludes: False
+        rightarmband: !type:ContainerSlot
+          occludes: False
+        helmetcover: !type:ContainerSlot
+          occludes: False
+        helmetattachment: !type:ContainerSlot
+          occludes: False
+        body_root_part: !type:ContainerSlot {}
+        identity: !type:ContainerSlot {}
+        Cuffable: !type:Container
+          ents: []
+        ensnare: !type:Container
+          ents: []
+    - type: WolfmedConsciousness
+    missingComponents:
+    - InteractionPopup
+    - MobCollision
 - proto: WFMinigameSage
   entities:
   - uid: 10896
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       parent: 1
+      rot: -1.5707963267948966 rad
       pos: 12.5,22.5
+    - type: HumanoidAppearance
+      skinColor: '#C79C7AFF'
+      sex: Female
+      markingSet:
+        points:
+          Special:
+            required: False
+            points: 0
+            defaultMarkings: []
+          Hair:
+            required: False
+            points: 0
+            defaultMarkings: []
+          FacialHair:
+            required: False
+            points: 1
+            defaultMarkings: []
+          Snout:
+            required: False
+            points: 1
+            defaultMarkings: []
+          Tail:
+            required: False
+            points: 1
+            defaultMarkings: []
+          HeadTop:
+            required: False
+            points: 1
+            defaultMarkings: []
+          Chest:
+            required: False
+            points: 4
+            defaultMarkings: []
+          Legs:
+            required: False
+            points: 8
+            defaultMarkings: []
+          Arms:
+            required: False
+            points: 8
+            defaultMarkings: []
+          UndergarmentTop:
+            required: False
+            points: 1
+            defaultMarkings: []
+          UndergarmentBottom:
+            required: False
+            points: 1
+            defaultMarkings: []
+        markings:
+          Hair:
+          - markingColor:
+            - '#B8B4AEFF'
+            visible: True
+            markingId: HumanHairLong2
+      gender: Female
+      eyeColor: '#5B6F7AFF'
+      biotype: Organic
+      age: 71
+    - type: SolutionContainerManager
+      solutions:
+        chemicals:
+          temperature: 293.15
+          name: chemicals
+          maxVol: 250
+          reagents: []
+          canReact: True
+        bloodstream:
+          temperature: 293.15
+          name: bloodstream
+          maxVol: 300
+          reagents:
+          - ReagentId: Blood
+            data:
+            - !type:DnaData
+              dNA: GCCACACAGCGCAGCG
+            Quantity: 300
+          canReact: True
+        bloodstreamTemporary:
+          temperature: 293.15
+          name: bloodstreamTemporary
+          maxVol: 4
+          reagents: []
+          canReact: True
+    - type: FloatingVisuals
+      canFloat: True
+    - type: Dna
+      dna: GCCACACAGCGCAGCG
+    - type: Grammar
+      attributes:
+        proper: true
+        gender: Female
+    - type: MobThresholds
+      triggersAlerts: False
+    - type: MobStateActions
+      actions: {}
+    - type: WFBiotype
+      biotype: Organic
+    - type: ContainerContainer
+      containers:
+        shoes: !type:ContainerSlot
+          occludes: False
+        jumpsuit: !type:ContainerSlot
+          occludes: False
+        outerClothing: !type:ContainerSlot
+          occludes: False
+        gloves: !type:ContainerSlot
+          occludes: False
+        neck: !type:ContainerSlot
+          occludes: False
+        neck2: !type:ContainerSlot
+          occludes: False
+        neck3: !type:ContainerSlot
+          occludes: False
+        mask: !type:ContainerSlot
+          occludes: False
+        eyes: !type:ContainerSlot
+          occludes: False
+        ears: !type:ContainerSlot
+          occludes: False
+        head: !type:ContainerSlot
+          occludes: False
+        pocket1: !type:ContainerSlot
+          occludes: False
+        pocket2: !type:ContainerSlot
+          occludes: False
+        suitstorage: !type:ContainerSlot
+          occludes: False
+        id: !type:ContainerSlot
+          occludes: False
+        belt: !type:ContainerSlot
+          occludes: False
+        back: !type:ContainerSlot
+          occludes: False
+        wallet: !type:ContainerSlot
+          occludes: False
+        balaclava: !type:ContainerSlot
+          occludes: False
+        leftarmband: !type:ContainerSlot
+          occludes: False
+        rightarmband: !type:ContainerSlot
+          occludes: False
+        helmetcover: !type:ContainerSlot
+          occludes: False
+        helmetattachment: !type:ContainerSlot
+          occludes: False
+        body_root_part: !type:ContainerSlot {}
+        identity: !type:ContainerSlot {}
+        Cuffable: !type:Container
+          ents: []
+        ensnare: !type:Container
+          ents: []
+    - type: WolfmedConsciousness
+    missingComponents:
+    - InteractionPopup
+    - MobCollision
 - proto: WFPlushieMedMoth
   entities:
   - uid: 10194
@@ -74433,16 +74819,16 @@ entities:
             points: 1
             defaultMarkings: []
         markings:
-          FacialHair:
-          - markingColor:
-            - '#9C9990FF'
-            visible: True
-            markingId: HumanFacialHairFullbeard
           Hair:
           - markingColor:
             - '#9C9990FF'
             visible: True
             markingId: HumanHairBalding
+          FacialHair:
+          - markingColor:
+            - '#9C9990FF'
+            visible: True
+            markingId: HumanFacialHairFullbeard
       gender: Male
       eyeColor: '#7C93A0FF'
       biotype: Organic
@@ -74601,16 +74987,16 @@ entities:
             points: 1
             defaultMarkings: []
         markings:
-          FacialHair:
-          - markingColor:
-            - '#2E2420FF'
-            visible: True
-            markingId: HumanFacialHairMoustache
           Hair:
           - markingColor:
             - '#2E2420FF'
             visible: True
             markingId: HumanHairCombover
+          FacialHair:
+          - markingColor:
+            - '#2E2420FF'
+            visible: True
+            markingId: HumanFacialHairMoustache
       gender: Male
       eyeColor: '#3D2B1FFF'
       biotype: Organic
@@ -75585,16 +75971,16 @@ entities:
             points: 1
             defaultMarkings: []
         markings:
-          FacialHair:
-          - markingColor:
-            - '#171310FF'
-            visible: True
-            markingId: HumanFacialHairMoustache
           Hair:
           - markingColor:
             - '#171310FF'
             visible: True
             markingId: HumanHairPompadour
+          FacialHair:
+          - markingColor:
+            - '#171310FF'
+            visible: True
+            markingId: HumanFacialHairMoustache
       gender: Male
       eyeColor: '#6B5340FF'
       biotype: Organic
@@ -75753,16 +76139,16 @@ entities:
             points: 1
             defaultMarkings: []
         markings:
-          FacialHair:
-          - markingColor:
-            - '#3B3128FF'
-            visible: True
-            markingId: HumanFacialHairFullbeard
           Hair:
           - markingColor:
             - '#3B3128FF'
             visible: True
             markingId: HumanHairCombover
+          FacialHair:
+          - markingColor:
+            - '#3B3128FF'
+            visible: True
+            markingId: HumanFacialHairFullbeard
       gender: Male
       eyeColor: '#6B7F8CFF'
       biotype: Organic
@@ -76647,4 +77033,41 @@ entities:
     - type: Transform
       parent: 1
       pos: -16.5,31.5
+- proto: WFContractCargoPad
+  entities:
+  - uid: 10900
+    components:
+    - type: Transform
+      pos: -0.5,15.5
+      parent: 1
+  - uid: 10902
+    components:
+    - type: Transform
+      pos: 40.5,29.5
+      parent: 1
+  - uid: 10904
+    components:
+    - type: Transform
+      pos: 38.5,1.5
+      parent: 1
+  - uid: 10906
+    components:
+    - type: Transform
+      pos: -4.5,-28.5
+      parent: 1
+  - uid: 10908
+    components:
+    - type: Transform
+      pos: -2.5,55.5
+      parent: 1
+  - uid: 10910
+    components:
+    - type: Transform
+      pos: -29.5,55.5
+      parent: 1
+  - uid: 10912
+    components:
+    - type: Transform
+      pos: -29.5,-32.5
+      parent: 1
 ...

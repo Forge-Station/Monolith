@@ -1,0 +1,119 @@
+# Contractors and their stations. Helios and the Underground post no station work.
+
+- type: wfContractor
+  id: WFContractorCaelPort
+  name: wf-contractor-cael-port
+  description: wf-contractor-cael-port-desc
+  employer: wf-contractor-cael-port-employer
+  color: "#37946e"
+  stations: [ Frontier ]
+  offers: 5
+  order: 0
+
+- type: wfContractor
+  id: WFContractorCaelMarshals
+  name: wf-contractor-cael-marshals
+  description: wf-contractor-cael-marshals-desc
+  employer: wf-contractor-cael-marshals-employer
+  color: "#4d8fd6"
+  stations: [ Frontier ]
+  offers: 3
+  order: 1
+
+- type: wfContractor
+  id: WFContractorMMC
+  name: wf-contractor-mmc
+  description: wf-contractor-mmc-desc
+  employer: wf-contractor-mmc-employer
+  color: "#d9d9d9"
+  stations: [ Hokkaido ]
+  offers: 4
+  order: 2
+
+- type: wfContractor
+  id: WFContractorSevastopol
+  name: wf-contractor-sevastopol
+  description: wf-contractor-sevastopol-desc
+  employer: wf-contractor-sevastopol-employer
+  color: "#009dff"
+  stations: [ Sevastopol ]
+  offers: 3
+  order: 3
+
+- type: wfContractor
+  id: WFContractorStellarBlessing
+  name: wf-contractor-stellar-blessing
+  description: wf-contractor-stellar-blessing-desc
+  employer: wf-contractor-stellar-blessing-employer
+  color: "#5fb0e0"
+  stations: [ TSFMCIndustry ]
+  offers: 3
+  order: 4
+
+- type: wfContractor
+  id: WFContractorHalcyon
+  name: wf-contractor-halcyon
+  description: wf-contractor-halcyon-desc
+  employer: wf-contractor-halcyon-employer
+  color: "#5b7fe0"
+  stations: [ TSFMCHalcyon ]
+  offers: 3
+  order: 5
+
+- type: wfContractor
+  id: WFContractorCamelot
+  name: wf-contractor-camelot
+  description: wf-contractor-camelot-desc
+  employer: wf-contractor-camelot-employer
+  color: "#d0573f"
+  stations: [ USSPCamelot ]
+  offers: 3
+  order: 6
+
+- type: wfContractor
+  id: WFContractorAnomalousLab
+  name: wf-contractor-anomalous-lab
+  description: wf-contractor-anomalous-lab-desc
+  employer: wf-contractor-anomalous-lab-employer
+  color: "#a07fff"
+  stations: [ AnomalousLab ]
+  offers: 3
+  order: 7
+
+# Faction boards: members only.
+
+- type: wfContractor
+  id: WFContractorTSFRequisitions
+  name: wf-contractor-tsf-requisitions
+  description: wf-contractor-tsf-requisitions-desc
+  employer: wf-contractor-tsf-requisitions-employer
+  color: "#6fb6ff"
+  stations: [ TSFMCHalcyon ]
+  board: TSF
+  companies: [ TSF, TSFCivilian, TSFHighComm ]
+  offers: 4
+  order: 10
+
+- type: wfContractor
+  id: WFContractorUSSPCommissariat
+  name: wf-contractor-ussp-commissariat
+  description: wf-contractor-ussp-commissariat-desc
+  employer: wf-contractor-ussp-commissariat-employer
+  color: "#d0573f"
+  stations: [ USSPCamelot ]
+  board: USSP
+  companies: [ USSP ]
+  offers: 4
+  order: 11
+
+- type: wfContractor
+  id: WFContractorPDVQuartermaster
+  name: wf-contractor-pdv-quartermaster
+  description: wf-contractor-pdv-quartermaster-desc
+  employer: wf-contractor-pdv-quartermaster-employer
+  color: "#d4a83a"
+  stations: [ HeliosFortress ]
+  board: PDV
+  companies: [ PDV, PDVCivilian, PDVHighComm ]
+  offers: 4
+  order: 12

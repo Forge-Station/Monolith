@@ -151,6 +151,9 @@
     size: Small
     storedRotation: -90
   - type: Clickable
+  - type: Tag
+    tags:
+    - WFTowRope
 
 - type: entity
   id: RopeHempCoil
@@ -307,3 +310,6 @@
   components:
   - type: Stack
     count: 1
+
+- type: Tag
+  id: WFTowRope

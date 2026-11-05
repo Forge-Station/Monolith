@@ -1,0 +1,258 @@
+# Freeport Camelot: provisions, fuel, exports, smugglers. Far out, so hauling pays by distance.
+
+- type: wfContract
+  id: WFContractCamelotProvisions
+  contractor: WFContractorCamelot
+  category: Supply
+  tier: 1
+  title: wf-contract-camelot-provisions
+  briefing: wf-contract-camelot-provisions-brief
+  reward: 8000, 11000
+  minutes: 55
+  weight: 2
+  objective: !type:WFContractSupply
+    pick: 2
+    premium: 1.5
+    perKilometre: 375
+    goods:
+    - entity: FoodBreadPlain
+      count: 6, 12
+    - entity: FoodMeat
+      count: 10, 20
+    - entity: DrinkWaterBottleFull
+      count: 10, 20
+    - entity: MedkitFilled
+      count: 2, 4
+
+- type: wfContract
+  id: WFContractCamelotFuel
+  contractor: WFContractorCamelot
+  category: Supply
+  tier: 2
+  title: wf-contract-camelot-fuel
+  briefing: wf-contract-camelot-fuel-brief
+  reward: 12500, 17500
+  deposit: 1500
+  minutes: 60
+  weight: 1.5
+  harms:
+    WFContractorHalcyon: 1
+  objective: !type:WFContractSupply
+    pick: 2
+    premium: 1.5
+    perKilometre: 500
+    goods:
+    - stack: Plasma
+      count: 20, 40
+    - stack: Uranium
+      count: 10, 20
+    - stack: Coal
+      count: 40, 60
+
+- type: wfContract
+  id: WFContractCamelotScrapStock
+  contractor: WFContractorCamelot
+  category: Supply
+  tier: 1
+  title: wf-contract-camelot-scrap-stock
+  briefing: wf-contract-camelot-scrap-stock-brief
+  reward: 7500, 10500
+  minutes: 55
+  weight: 1.5
+  objective: !type:WFContractSupply
+    pick: 2
+    premium: 1.5
+    perKilometre: 375
+    goods:
+    - stack: Steel
+      count: 40, 80
+    - stack: Glass
+      count: 40, 80
+    - stack: CableMV
+      count: 30, 50
+
+- type: wfContract
+  id: WFContractCamelotLongHaul
+  contractor: WFContractorCamelot
+  category: Hauling
+  tier: 3
+  title: wf-contract-camelot-long-haul
+  briefing: wf-contract-camelot-long-haul-brief
+  reward: 22500, 30000
+  deposit: 5000
+  minutes: 70
+  weight: 1.2
+  harms:
+    WFContractorHalcyon: 1
+  objective: !type:WFContractCourier
+    package: WFContractFreightSupplies
+    count: 4, 6
+    from: Board
+    to: Contractor
+    perPackage: 2500
+    perKilometre: 1500
+
+- type: wfContract
+  id: WFContractCamelotExports
+  contractor: WFContractorCamelot
+  category: Hauling
+  tier: 2
+  title: wf-contract-camelot-exports
+  briefing: wf-contract-camelot-exports-brief
+  reward: 12500, 16250
+  deposit: 2000
+  minutes: 60
+  weight: 1.2
+  objective: !type:WFContractCourier
+    package: WFContractFreightLuxury
+    count: 2, 4
+    from: Contractor
+    to: Other
+    perPackage: 2250
+    perKilometre: 1375
+
+- type: wfContract
+  id: WFContractCamelotParcel
+  contractor: WFContractorCamelot
+  category: Delivery
+  tier: 1
+  title: wf-contract-camelot-parcel
+  briefing: wf-contract-camelot-parcel-brief
+  reward: 5000, 7000
+  minutes: 50
+  weight: 1.5
+  objective: !type:WFContractCourier
+    package: WFContractParcel
+    count: 1, 2
+    from: Contractor
+    to: Other
+    perPackage: 750
+    perKilometre: 1000
+
+- type: wfContract
+  id: WFContractCamelotSmuggler
+  contractor: WFContractorCamelot
+  category: Bounty
+  tier: 2
+  title: wf-contract-camelot-smuggler
+  briefing: wf-contract-camelot-smuggler-brief
+  reward: 30000, 37500
+  deposit: 2000
+  minutes: 55
+  crewBonus: 0.25
+  weight: 1.2
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetSmuggler ]
+    minDistance: 3500
+    maxDistance: 5500
+
+- type: wfContract
+  id: WFContractCamelotManifest
+  contractor: WFContractorCamelot
+  category: Salvage
+  tier: 2
+  title: wf-contract-camelot-manifest
+  briefing: wf-contract-camelot-manifest-brief
+  reward: 17500, 22500
+  deposit: 1000
+  minutes: 55
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractRecovery
+    item: WFContractCargoManifest
+    minDistance: 3500
+    maxDistance: 5500
+    wrecks:
+    - /Maps/Salvage/cargo-1.yml
+    - /Maps/Salvage/small-cargo.yml
+    - /Maps/Salvage/hauling-shuttle.yml
+
+- type: wfContract
+  id: WFContractCamelotEscortTrader
+  contractor: WFContractorCamelot
+  category: Escort
+  tier: 2
+  title: wf-contract-camelot-escort-trader
+  briefing: wf-contract-camelot-escort-trader-brief
+  reward: 21250, 27500
+  deposit: 1500
+  minutes: 70
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractEscort
+    encounters: [ WFContractEscortLight ]
+    perKilometre: 1000
+
+- type: wfContract
+  id: WFContractCamelotPrizeHull
+  contractor: WFContractorCamelot
+  category: Salvage
+  tier: 3
+  title: wf-contract-camelot-prize-hull
+  briefing: wf-contract-camelot-prize-hull-brief
+  reward: 35000, 45000
+  deposit: 2500
+  minutes: 75
+  minCrew: 2
+  crewBonus: 0.25
+  weight: 1
+  requires:
+  - tag: WFTowRope
+    name: wf-contract-requires-rope
+  - entity: WFTetherInstaller
+    name: wf-contract-requires-tether-installer
+  objective: !type:WFContractTow
+    range: 150
+    minDistance: 3500
+    maxDistance: 5500
+    infestation:
+    - entity: MobFleshJaredSalvage
+      count: 2, 4
+    - entity: MobFleshGolemSalvage
+      count: 1, 2
+    wrecks:
+    - /Maps/Salvage/medium-pirate.yml
+    - /Maps/Salvage/security-chunk.yml
+    - /Maps/Salvage/medium-vault-1.yml
+
+# Second batch.
+
+- type: wfContract
+  id: WFContractCamelotPouch
+  contractor: WFContractorCamelot
+  category: Delivery
+  tier: 2
+  title: wf-contract-camelot-pouch
+  briefing: wf-contract-camelot-pouch-brief
+  reward: 12000, 15000
+  deposit: 2000
+  minutes: 45
+  weight: 0.8
+  harms:
+    WFContractorTSFRequisitions: 1
+  objective: !type:WFContractCourier
+    package: WFContractDiplomaticPouch
+    from: Contractor
+    to: Other
+    destinations: [ WFContractorHalcyon ]
+    perKilometre: 2000
+
+- type: wfContract
+  id: WFContractCamelotFuelRelay
+  contractor: WFContractorCamelot
+  category: Hauling
+  tier: 2
+  title: wf-contract-camelot-fuel-relay
+  briefing: wf-contract-camelot-fuel-relay-brief
+  reward: 15000, 19000
+  deposit: 2500
+  minutes: 60
+  weight: 1.2
+  objective: !type:WFContractCourier
+    package: WFContractFreightPlasma
+    count: 3, 5
+    from: Other
+    to: Contractor
+    destinations: [ WFContractorMMC ]
+    perPackage: 2500
+    perKilometre: 1500

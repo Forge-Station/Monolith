@@ -313,6 +313,18 @@ unmarked:
   - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
     module: null
     reason: Sector map entity gets its Parallax component and Colossus Sector name back after the #427 re-save dropped them.
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: Contracts
+    reason: Contract boards with pickup pads at the central plaza and beside each of the six dock arms.
+  - path: Resources/Maps/_Mono/POI/tsfmchalcyon.yml
+    module: Contracts
+    reason: TSF faction contract boards with pickup pads in the arrival hall, by both west public docks and the navy dock hall.
+  - path: Resources/Maps/_Mono/POI/camelot.yml
+    module: Contracts
+    reason: USSP faction contract boards with pickup pads off the warp corridor and by the north-west and south-west docks.
+  - path: Resources/Maps/_Mono/POI/pdvhelios.yml
+    module: Contracts
+    reason: PDV faction contract boards with pickup pads in the civilian arm by the west docks and in the cargo bay.
   - path: Resources/Maps/_Mono/POI/underground.yml
     module: LockableButtons
     reason: The two blast door buttons take Underground access; the station's crew has no Pirate access.

@@ -1,0 +1,13 @@
+# Sides that may help each other's contracts. A company in none is its own side.
+
+- type: wfContractFaction
+  id: WFContractFactionTSF
+  companies: [ TSF, TSFCivilian, TSFHighComm ]
+
+- type: wfContractFaction
+  id: WFContractFactionPDV
+  companies: [ PDV, PDVCivilian, PDVHighComm ]
+
+- type: wfContractFaction
+  id: WFContractFactionUSSP
+  companies: [ USSP ]

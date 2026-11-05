@@ -22,6 +22,10 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._WF.TradeGoods.Systems;
 
+/// <summary>Raised broadcast as a PDA sets up, for other modules to add apps every PDA gets.</summary>
+[ByRefEvent]
+public readonly record struct WFPdaProgramsEvent(List<EntProtoId> Programs);
+
 /// <summary>Marks the Market PDA app: live station prices and sector alerts.</summary>
 [RegisterComponent]
 public sealed partial class WFMarketCartridgeComponent : Component;
@@ -70,13 +74,22 @@ public sealed class WFMarketCartridgeSystem : EntitySystem
     }
 
     /// <summary>
-    /// Adds the Market app to every PDA's preinstalled programs just before they install at map init, since most PDA
-    /// prototypes replace the base list. Last in the list, so a full disk drops it rather than a job program.
+    /// Adds the Market app, then any apps other modules add through <see cref="WFPdaProgramsEvent"/>, to every PDA's
+    /// preinstalled programs just before they install at map init, since most PDA prototypes replace the base list.
+    /// Last in the list, so a full disk drops them rather than a job program.
     /// </summary>
     private void OnPdaMapInit(Entity<PdaComponent> ent, ref MapInitEvent args)
     {
-        if (TryComp<CartridgeLoaderComponent>(ent, out var loader) && !loader.PreinstalledPrograms.Contains(MarketCartridge))
-            loader.PreinstalledPrograms.Add(MarketCartridge);
+        if (!TryComp<CartridgeLoaderComponent>(ent, out var loader))
+            return;
+
+        var ev = new WFPdaProgramsEvent(new List<EntProtoId> { MarketCartridge });
+        RaiseLocalEvent(ref ev);
+        foreach (var program in ev.Programs)
+        {
+            if (!loader.PreinstalledPrograms.Contains(program))
+                loader.PreinstalledPrograms.Add(program);
+        }
     }
 
     private void OnUiReady(Entity<WFMarketCartridgeComponent> ent, ref CartridgeUiReadyEvent args)

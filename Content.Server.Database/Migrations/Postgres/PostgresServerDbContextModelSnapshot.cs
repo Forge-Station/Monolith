@@ -2150,6 +2150,52 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("wolfgate_company_rank", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.WolfgateContractStanding", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("wolfgate_contract_standing_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CharacterName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("character_name");
+
+                    b.Property<string>("Contractor")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("contractor");
+
+                    b.Property<int>("LastRound")
+                        .HasColumnType("integer")
+                        .HasColumnName("last_round");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("integer")
+                        .HasColumnName("points");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_contract_standing");
+
+                    b.HasIndex("PlayerUserId", "CharacterName", "Contractor")
+                        .IsUnique();
+
+                    b.ToTable("wolfgate_contract_standing", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.WolfgateCustomMarking", b =>
                 {
                     b.Property<int>("Id")

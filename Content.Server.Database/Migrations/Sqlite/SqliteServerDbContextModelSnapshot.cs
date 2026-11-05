@@ -2050,6 +2050,50 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("wolfgate_company_rank", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.WolfgateContractStanding", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("wolfgate_contract_standing_id");
+
+                    b.Property<string>("CharacterName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("character_name");
+
+                    b.Property<string>("Contractor")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("contractor");
+
+                    b.Property<int>("LastRound")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("last_round");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("points");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("updated");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_contract_standing");
+
+                    b.HasIndex("PlayerUserId", "CharacterName", "Contractor")
+                        .IsUnique();
+
+                    b.ToTable("wolfgate_contract_standing", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.WolfgateCustomMarking", b =>
                 {
                     b.Property<int>("Id")

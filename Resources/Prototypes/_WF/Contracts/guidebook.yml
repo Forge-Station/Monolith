@@ -1,0 +1,5 @@
+- type: guideEntry
+  id: WFContracts
+  name: guide-entry-wf-contracts
+  text: "/ServerInfo/_WF/Contracts/Guidebook/Contracts.xml"
+  priority: 6

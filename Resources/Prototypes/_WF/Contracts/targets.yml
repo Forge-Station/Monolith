@@ -1,0 +1,584 @@
+# Bounty targets: manual, no warrant (the contract pays), longer than the contract's clock.
+
+# T1: unarmed bail jumper.
+- type: wfEncounter
+  id: WFContractTargetSkip
+  name: wf-contract-target-skip
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4200
+  ships:
+  - key: target
+    navigation: WFCrewNavigationFreight
+    vessels: [ Piva, Twilight ]
+    side: target
+    profile: WFCrewProfileFugitive
+    roles: [ WFCrewCaptain, WFCrewPilot ]
+    deckhands: 0
+    skill: Green
+    distress: false
+    evades: false
+    flees: 1000
+    disengage: Deter
+    disengageRange: 700
+    wander: 8
+    wanderRadius: 1500
+    wanderPause: 25
+    objectives:
+    - kind: Hold
+
+# T2: unarmed courier with a guard.
+- type: wfEncounter
+  id: WFContractTargetDataThief
+  name: wf-contract-target-data-thief
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4200
+  ships:
+  - key: target
+    navigation: WFCrewNavigationFugitive
+    vessels: [ Piva, Twilight ]
+    side: target
+    profile: WFCrewProfileFugitive
+    deckhands: 0
+    guards: 1
+    skill: Green
+    distress: false
+    evades: false
+    flees: 1200
+    disengage: Deter
+    disengageRange: 900
+    wander: 8
+    wanderRadius: 2000
+    wanderPause: 20
+    objectives:
+    - kind: Hold
+
+# T2: light-retrofit claim jumpers; warn, then fire.
+- type: wfEncounter
+  id: WFContractTargetClaimJumper
+  name: wf-contract-target-claim-jumper
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4200
+  ships:
+  - key: target
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Pillbox, Takeaway ]
+    retrofit: WFPirateRetrofitLight
+    side: target
+    faction: PirateNF
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Green
+    distress: false
+    warnRange: 700
+    attackRange: 400
+    disengage: Deter
+    disengageRange: 900
+    wander: 6
+    wanderRadius: 900
+    wanderPause: 40
+    objectives:
+    - kind: Hold
+
+# T2: light-retrofit smuggler.
+- type: wfEncounter
+  id: WFContractTargetSmuggler
+  name: wf-contract-target-smuggler
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4200
+  ships:
+  - key: target
+    navigation: WFCrewNavigationFugitive
+    vessels: [ Noble, Caracara, Sakuratsu ]
+    retrofit: WFPirateRetrofitLight
+    side: target
+    faction: PirateNF
+    profile: WFCrewProfileFugitive
+    deckhands: 1
+    skill: Regular
+    distress: false
+    evades: false
+    flees: 1400
+    disengage: Deter
+    disengageRange: 1000
+    wander: 8
+    wanderRadius: 2500
+    wanderPause: 15
+    objectives:
+    - kind: Hold
+
+# T3: two light raiders.
+- type: wfEncounter
+  id: WFContractTargetRaiderPair
+  name: wf-contract-target-raider-pair
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4500
+  leash: 2500
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara ]
+    retrofit: WFPirateRetrofitLight
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    distress: false
+    warnRange: 900
+    attackRange: 600
+    disengage: Deter
+    disengageRange: 1200
+    wander: 6
+    wanderRadius: 1200
+    wanderPause: 30
+    objectives:
+    - kind: Hold
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara ]
+    retrofit: WFPirateRetrofitLight
+    offset: 120, 60
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Green
+    distress: false
+    warnRange: 900
+    attackRange: 600
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Escort
+      target: lead
+
+# T4: raider gunship.
+- type: wfEncounter
+  id: WFContractTargetGunship
+  name: wf-contract-target-gunship
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4500
+  leash: 2500
+  ships:
+  - key: target
+    navigation: WFCrewNavigationRaider
+    vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros ]
+    retrofit: WFPirateRetrofitMedium
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 2
+    guards: 2
+    skill: Regular
+    distress: false
+    warnRange: 1200
+    attackRange: 800
+    disengage: Deter
+    disengageRange: 1500
+    wander: 6
+    wanderRadius: 1500
+    wanderPause: 30
+    objectives:
+    - kind: Hold
+
+# T5: warlord flagship.
+- type: wfEncounter
+  id: WFContractTargetWarlord
+  name: wf-contract-target-warlord
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4800
+  leash: 3000
+  ships:
+  - key: target
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kalisto, Metis, Scallywag ]
+    retrofit: WFPirateRetrofitHeavy
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfileFugitiveArmed
+    deckhands: 3
+    guards: 3
+    skill: Veteran
+    distress: false
+    warnRange: 1500
+    attackRange: 1000
+    disengage: Deter
+    disengageRange: 1800
+    wander: 6
+    wanderRadius: 2000
+    wanderPause: 20
+    objectives:
+    - kind: Hold
+
+# Escort runs: the freighter waits for its escort, then flies to the contract's stop; raiders lurk, then attack.
+
+# T1: no raiders.
+- type: wfEncounter
+  id: WFContractEscortQuiet
+  name: wf-contract-escort-quiet
+  start: Manual
+  category: Traffic
+  cost: 0
+  weight: 0
+  duration: 4800
+  startRadius: 600
+  route:
+    minStops: 1
+    maxStops: 1
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels: [ Piva, Twilight, Hermes ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 1
+    captain: true
+    flyRoute: true
+    boarding: Warn
+    docking: Warn
+    disengage: Deter
+
+# T2: one light raider.
+- type: wfEncounter
+  id: WFContractEscortLight
+  name: wf-contract-escort-light
+  start: Manual
+  category: Traffic
+  cost: 0
+  weight: 0
+  duration: 4800
+  startRadius: 600
+  route:
+    minStops: 1
+    maxStops: 1
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels: [ Piva, Twilight, Hermes ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 1
+    captain: true
+    flyRoute: true
+    boarding: Warn
+    docking: Warn
+    disengage: Deter
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Pillbox, Takeaway, Noble ]
+    retrofit: WFPirateRetrofitLight
+    offset: 2200, 900
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Green
+    distress: false
+    lurks: true
+    objectives:
+    - kind: Hold
+      duration: 150
+    - kind: Attack
+      target: freighter
+
+# T3: two raiders, the second later.
+- type: wfEncounter
+  id: WFContractEscortHeavy
+  name: wf-contract-escort-heavy
+  start: Manual
+  category: Traffic
+  cost: 0
+  weight: 0
+  duration: 5400
+  startRadius: 700
+  route:
+    minStops: 1
+    maxStops: 1
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels: [ WFBrute, Zhuangzi, Argent ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 2
+    captain: true
+    flyRoute: true
+    boarding: Warn
+    docking: Warn
+    disengage: Deter
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara ]
+    retrofit: WFPirateRetrofitLight
+    offset: 2400, 800
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    distress: false
+    lurks: true
+    objectives:
+    - kind: Hold
+      duration: 150
+    - kind: Attack
+      target: freighter
+  - key: gunship
+    navigation: WFCrewNavigationRaider
+    vessels: [ Peregrine, Shuilian, Arribane, Autumn ]
+    retrofit: WFPirateRetrofitMedium
+    offset: -2600, 1200
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    guards: 1
+    skill: Regular
+    distress: false
+    lurks: true
+    objectives:
+    - kind: Hold
+      duration: 330
+    - kind: Attack
+      target: freighter
+
+# Second batch of bounty targets.
+
+# T3: two light smugglers flying together; the lead runs, the wing covers it.
+- type: wfEncounter
+  id: WFContractTargetSmugglerConvoy
+  name: wf-contract-target-smuggler-convoy
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4500
+  leash: 2500
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationFugitive
+    vessels: [ Noble, Caracara, Sakuratsu ]
+    retrofit: WFPirateRetrofitLight
+    side: target
+    faction: PirateNF
+    profile: WFCrewProfileFugitive
+    deckhands: 1
+    skill: Regular
+    distress: false
+    evades: true
+    flees: 1500
+    disengage: Deter
+    disengageRange: 1100
+    wander: 8
+    wanderRadius: 2500
+    wanderPause: 15
+    objectives:
+    - kind: Hold
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Pillbox ]
+    retrofit: WFPirateRetrofitLight
+    offset: 100, -80
+    side: target
+    faction: PirateNF
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    distress: false
+    warnRange: 800
+    attackRange: 500
+    disengage: Deter
+    disengageRange: 1100
+    objectives:
+    - kind: Escort
+      target: lead
+
+# T3: one veteran in a fast light ship that runs rather than fights.
+- type: wfEncounter
+  id: WFContractTargetAce
+  name: wf-contract-target-ace
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4500
+  leash: 3000
+  ships:
+  - key: target
+    navigation: WFCrewNavigationFugitive
+    vessels: [ Sakuratsu, Spessbite, Noble ]
+    retrofit: WFPirateRetrofitLight
+    side: target
+    faction: PirateNF
+    profile: WFCrewProfileFugitiveArmed
+    deckhands: 0
+    skill: Veteran
+    distress: false
+    evades: true
+    flees: 2000
+    disengage: Deter
+    disengageRange: 1500
+    wander: 10
+    wanderRadius: 3000
+    wanderPause: 10
+    objectives:
+    - kind: Hold
+
+# T2: a civilian ship flown off without paying; its crew are not fighters.
+- type: wfEncounter
+  id: WFContractTargetRepossession
+  name: wf-contract-target-repossession
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4200
+  ships:
+  - key: target
+    navigation: WFCrewNavigationFreight
+    vessels: [ Piva, Twilight, Hermes ]
+    side: target
+    profile: WFCrewProfileFugitive
+    roles: [ WFCrewCaptain, WFCrewPilot ]
+    deckhands: 1
+    skill: Green
+    distress: false
+    evades: false
+    flees: 1000
+    disengage: Deter
+    disengageRange: 800
+    wander: 8
+    wanderRadius: 1800
+    wanderPause: 25
+    objectives:
+    - kind: Hold
+
+# T3: four weak raiders spread over a wide patch of space.
+- type: wfEncounter
+  id: WFContractTargetPirateCull
+  name: wf-contract-target-pirate-cull
+  start: Manual
+  category: Threat
+  icon: Skull
+  cost: 0
+  weight: 0
+  duration: 4800
+  leash: 3000
+  ships:
+  - key: one
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Pillbox, Takeaway ]
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 0
+    skill: Green
+    distress: false
+    warnRange: 700
+    attackRange: 450
+    disengage: Deter
+    disengageRange: 900
+    wander: 6
+    wanderRadius: 700
+    wanderPause: 40
+    objectives:
+    - kind: Hold
+  - key: two
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Pillbox, Takeaway ]
+    offset: 900, 300
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 0
+    skill: Green
+    distress: false
+    warnRange: 700
+    attackRange: 450
+    disengage: Deter
+    disengageRange: 900
+    wander: 6
+    wanderRadius: 700
+    wanderPause: 40
+    objectives:
+    - kind: Hold
+  - key: three
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Pillbox, Takeaway ]
+    offset: -700, 800
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 0
+    skill: Green
+    distress: false
+    warnRange: 700
+    attackRange: 450
+    disengage: Deter
+    disengageRange: 900
+    wander: 6
+    wanderRadius: 700
+    wanderPause: 40
+    objectives:
+    - kind: Hold
+  - key: four
+    navigation: WFCrewNavigationRaider
+    vessels: [ Spessbite, Victoria, Pillbox, Takeaway ]
+    offset: 300, -1000
+    side: raiders
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 0
+    skill: Green
+    distress: false
+    warnRange: 700
+    attackRange: 450
+    disengage: Deter
+    disengageRange: 900
+    wander: 6
+    wanderRadius: 700
+    wanderPause: 40
+    objectives:
+    - kind: Hold

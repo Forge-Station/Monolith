@@ -67,6 +67,7 @@ Entry points: `WFRoundSetupSystem`, `GameTicker.RoundSetup`, `WFCrashScenarioSys
 - [`Content.Server/_WF/RoundSetup/WFPlayerCrewRadioComponent.cs`](WFPlayerCrewRadioComponent.cs)
 - [`Content.Server/_WF/RoundSetup/WFRoundSetupSystem.Broadcast.cs`](WFRoundSetupSystem.Broadcast.cs)
 - [`Content.Server/_WF/RoundSetup/WFRoundSetupSystem.Companies.cs`](WFRoundSetupSystem.Companies.cs)
+- [`Content.Server/_WF/RoundSetup/WFRoundSetupSystem.Contracts.cs`](WFRoundSetupSystem.Contracts.cs)
 - [`Content.Server/_WF/RoundSetup/WFRoundSetupSystem.cs`](WFRoundSetupSystem.cs)
 - [`Content.Server/_WF/RoundSetup/WFRoundSetupSystem.Demo.cs`](WFRoundSetupSystem.Demo.cs)
 - [`Content.Server/_WF/RoundSetup/WFRoundSetupSystem.Factions.cs`](WFRoundSetupSystem.Factions.cs)

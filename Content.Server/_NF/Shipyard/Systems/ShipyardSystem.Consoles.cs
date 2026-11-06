@@ -405,8 +405,11 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
                 _records.CreateGeneralRecord(shuttleStation.Value, targetId, profile.Name, profile.Age, profile.Species, profile.Gender, $"Captain", fingerprintComponent!.Fingerprint, dnaComponent!.DNA, profile, stationRec!);
             }
         }
-        _records.Synchronize(shuttleStation!.Value);
-        _records.Synchronize(station);
+        // Forge-Change: frontier outposts have no crew records. Synchronize logs a full stack when the component is absent.
+        if (shuttleStation is { } shuttleStationUid && HasComp<StationRecordsComponent>(shuttleStationUid))
+            _records.Synchronize(shuttleStationUid);
+        if (HasComp<StationRecordsComponent>(station))
+            _records.Synchronize(station);
 
         EntityManager.AddComponents(shuttleUid, vessel.AddComponents);
 
@@ -536,7 +539,9 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         {
             //_records.RemoveRecord(keyStorage.Key.Value);
             _records.AddRecordEntry(stationUid, record);
-            _records.Synchronize(stationUid);
+            // Forge-Change: the selling station may be an outpost without a records component.
+            if (HasComp<StationRecordsComponent>(stationUid))
+                _records.Synchronize(stationUid);
         }
 
         var shuttleName = ToPrettyString(shuttleUid); // Grab the name before it gets 1984'd

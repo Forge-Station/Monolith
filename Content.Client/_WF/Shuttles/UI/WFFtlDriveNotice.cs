@@ -46,6 +46,7 @@ public sealed class WFFtlDriveNotice : Control
     {
         WFFtlDriveStatus.Missing => Loc.GetString("shuttle-console-no-powered-ftl-drive"),
         WFFtlDriveStatus.Unpowered => Loc.GetString("shuttle-console-ftl-drive-unpowered"),
+        WFFtlDriveStatus.Unmoored => Loc.GetString("wf-lattice-ftl-dead"),
         _ => null,
     };
 

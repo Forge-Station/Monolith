@@ -14,4 +14,7 @@ public enum WFFtlDriveStatus : byte
 
     /// <summary>The ship has a powered FTL drive.</summary>
     Ready,
+
+    /// <summary>The ship is out where the Lattice doesn't hold, and FTL drives don't work there.</summary>
+    Unmoored,
 }

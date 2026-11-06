@@ -21,6 +21,7 @@ public readonly record struct WFCockpitStatusReading(WFCockpitLampState State, s
     {
         FTLState.Available when drive == WFFtlDriveStatus.Missing => new(WFCockpitLampState.Fault, "shuttle-console-no-powered-ftl-drive"),
         FTLState.Available when drive == WFFtlDriveStatus.Unpowered => new(WFCockpitLampState.Fault, "shuttle-console-ftl-drive-unpowered"),
+        FTLState.Available when drive == WFFtlDriveStatus.Unmoored => new(WFCockpitLampState.Fault, "wf-lattice-ftl-dead"),
         FTLState.Available => new(WFCockpitLampState.Good, "wf-cockpit-status-ftl-ready"),
         FTLState.Starting => new(WFCockpitLampState.Caution, "wf-cockpit-status-ftl-starting"),
         FTLState.Travelling => new(WFCockpitLampState.Active, "wf-cockpit-status-ftl-travelling"),

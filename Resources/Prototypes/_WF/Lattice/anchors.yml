@@ -1,0 +1,284 @@
+# A primary anchor's core, at the centre of its station: a glyph obelisk, a different one at each anchor, and a 500 kW
+# HV power source for the station. Its loss is a breach.
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: WFLatticeAnchorCoreBase
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.9,-0.45,0.9,1.4"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Decoration/statuelarge_nova.rsi
+    noRot: true
+    scale: 2,2
+    offset: 0,1.5
+    # Over the station's spire turrets, one of which stands inside the statue's footprint.
+    drawdepth: OverMobs
+  - type: PointLight
+    radius: 6
+    energy: 2.5
+    color: "#b040e0"
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20000
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          WFMaterialExoticMatter1:
+            min: 10
+            max: 20
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: WFLatticeAnchor
+    primary: true
+  # The anchor holds its station still, as a station anchor does.
+  - type: StationAnchor
+  # The anchor powers its own station: run HV cable from under it to a substation.
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      output:
+        !type:CableDeviceNode
+        nodeGroupID: HVPower
+  - type: PowerSupplier
+    supplyRate: 500000
+  - type: PowerMonitoringDevice
+    group: Generator
+    loadNode: output
+    sprite: _WF/DecorImport/Structures/Decoration/statuelarge_nova.rsi
+    state: obelisk_base
+
+- type: entity
+  parent: WFLatticeAnchorCoreBase
+  id: WFLatticeAnchorCoreAlpha
+  components:
+  - type: Sprite
+    layers:
+    - state: twins
+    - state: twins-emissive
+      shader: unshaded
+
+- type: entity
+  parent: WFLatticeAnchorCoreBase
+  id: WFLatticeAnchorCoreBeta
+  components:
+  - type: Sprite
+    layers:
+    - state: honour
+    - state: honour-emissive
+      shader: unshaded
+
+- type: entity
+  parent: WFLatticeAnchorCoreBase
+  id: WFLatticeAnchorCoreGamma
+  components:
+  - type: Sprite
+    layers:
+    - state: statue_love
+    - state: statue_love-emissive
+      shader: unshaded
+
+- type: entity
+  parent: WFLatticeAnchorCoreBase
+  id: WFLatticeAnchorCoreDelta
+  components:
+  - type: Sprite
+    layers:
+    - state: order
+    - state: order-emissive
+      shader: unshaded
+
+- type: entity
+  parent: WFLatticeAnchorCoreBase
+  id: WFLatticeAnchorCoreEpsilon
+  components:
+  - type: Sprite
+    layers:
+    - state: telekenesis
+    - state: telekenesis-emissive
+      shader: unshaded
+
+- type: entity
+  parent: WFLatticeAnchorCoreBase
+  id: WFLatticeAnchorCoreZeta
+  components:
+  - type: Sprite
+    layers:
+    - state: curiosity
+    - state: curiosity-emissive
+      shader: unshaded
+
+# The fortress shield round an anchor station; it runs on the anchor, not on power, and its field is drawn as a purple
+# rooted Ward.
+- type: entity
+  parent: ShieldGeneratorPOI
+  id: WFLatticeAnchorShield
+  suffix: Lattice
+  components:
+  - type: ShipShieldEmitter
+    damageLimit: 500000
+    healPerSecond: 2000
+    damageExp: 1
+    baseDraw: 80000
+    maxDraw: 150000
+    unpoweredBonus: 7
+    powerModifier: 0.1
+    damageOverloadTimePunishment: 30
+    shieldColor: "#B040E0"
+    collisionResistanceMultiplier: 0.0
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/fobshield.rsi
+    snapCardinals: true
+    layers:
+    - state: fobshield
+    - state: fobshield_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#B040E0"
+  - type: ApcPowerReceiver
+    needsPower: false
+    powerLoad: 80000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#B040E0"
+  # A one-node graph in place of the machine's: nothing takes it apart, and the component stays for the tests.
+  - type: Construction
+    graph: WFLatticeAnchorShield
+    node: shield
+    deconstructionTarget: null
+  - type: WFLatticeAnchorShield
+
+- type: constructionGraph
+  id: WFLatticeAnchorShield
+  start: shield
+  graph:
+  - node: shield
+
+# A relay anchor players build. Powered, anchored and parked for a minute, it holds a little of the field.
+- type: entity
+  parent: [ BaseStructure, BaseMachinePowered ]
+  id: WFLatticeRelayAnchor
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 300
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Structures/Machines/Anomaly/adv_anomaly_vessel.rsi
+    noRot: true
+    offset: 0,0.5
+    layers:
+    - state: base
+    - state: powered-3
+      shader: unshaded
+      color: "#d070ff"
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: PointLight
+    radius: 3
+    energy: 1.5
+    color: "#b040e0"
+  - type: ApcPowerReceiver
+    powerLoad: 30000
+  - type: Anchorable
+    delay: 4
+  - type: Pullable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          WFMaterialExoticMatter1:
+            min: 3
+            max: 6
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 25000
+  - type: WFLatticeAnchor
+    active: false
+    strength: 0.4
+  - type: WFLatticeRelay
+
+# A crewed station's own anchor, mapped onto stations that sit past anchored space (Helios, the Syndicate FOB). It holds the station
+# while it stands and has power; destroy it or starve it and the station drifts.
+- type: entity
+  parent: WFLatticeRelayAnchor
+  id: WFLatticeStationAnchor
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 15000
+  - type: WFLatticeRelay
+    strength: 0.3
+    settleSeconds: 5
+    needsFuel: false
+
+- type: entity
+  parent: BaseFlatpack
+  id: WFFlatpackLatticeRelay
+  components:
+  - type: Flatpack
+    entity: WFLatticeRelayAnchor
+  - type: StaticPrice
+    price: 25000
+
+- type: latheRecipe
+  id: WFFlatpackLatticeRelay
+  result: WFFlatpackLatticeRelay
+  categories:
+  - Tools
+  completetime: 30
+  materials:
+    Steel: 5000
+    Plasteel: 2000
+    Gold: 1000
+    WFExoticMatter: 2000

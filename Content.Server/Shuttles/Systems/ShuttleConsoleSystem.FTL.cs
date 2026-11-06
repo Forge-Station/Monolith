@@ -20,11 +20,7 @@ public sealed partial class ShuttleConsoleSystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
 
-    private readonly List<ShuttleBeaconObject> _beaconCache = new();
-    private readonly List<ShuttleExclusionObject> _exclusionCache = new();
-    private bool _beaconExclusionCacheDirty = true;
-
-    private const float ShuttleFTLRange = 512f;
+    private const float ShuttleFTLRange = 1536f; // Mono 512 -> 1536
     private const float ShuttleFTLMassThreshold = 100f; // Mono: now a soft limit, ships under the limit just stop you from shorter distance
 
     private const float MassConstant = 50f; // Arbitrary, at this value massMultiplier = 0.65
@@ -33,80 +29,24 @@ public sealed partial class ShuttleConsoleSystem
     private void InitializeFTL()
     {
         SubscribeLocalEvent<FTLBeaconComponent, ComponentStartup>(OnBeaconStartup);
-        SubscribeLocalEvent<FTLBeaconComponent, ComponentShutdown>(OnBeaconShutdown);
         SubscribeLocalEvent<FTLBeaconComponent, AnchorStateChangedEvent>(OnBeaconAnchorChanged);
 
         SubscribeLocalEvent<FTLExclusionComponent, ComponentStartup>(OnExclusionStartup);
-        SubscribeLocalEvent<FTLExclusionComponent, ComponentShutdown>(OnExclusionShutdown);
     }
 
     private void OnExclusionStartup(Entity<FTLExclusionComponent> ent, ref ComponentStartup args)
     {
-        InvalidateFtlBeaconExclusionCache();
-        RefreshShuttleConsoles();
-    }
-
-    private void OnExclusionShutdown(Entity<FTLExclusionComponent> ent, ref ComponentShutdown args)
-    {
-        InvalidateFtlBeaconExclusionCache();
         RefreshShuttleConsoles();
     }
 
     private void OnBeaconStartup(Entity<FTLBeaconComponent> ent, ref ComponentStartup args)
     {
-        InvalidateFtlBeaconExclusionCache();
-        RefreshShuttleConsoles();
-    }
-
-    private void OnBeaconShutdown(Entity<FTLBeaconComponent> ent, ref ComponentShutdown args)
-    {
-        InvalidateFtlBeaconExclusionCache();
         RefreshShuttleConsoles();
     }
 
     private void OnBeaconAnchorChanged(Entity<FTLBeaconComponent> ent, ref AnchorStateChangedEvent args)
     {
-        InvalidateFtlBeaconExclusionCache();
         RefreshShuttleConsoles();
-    }
-
-    private void InvalidateFtlBeaconExclusionCache()
-    {
-        _beaconExclusionCacheDirty = true;
-    }
-
-    private void EnsureFtlBeaconExclusionCache()
-    {
-        if (!_beaconExclusionCacheDirty)
-            return;
-
-        _beaconCache.Clear();
-        var beaconQuery = AllEntityQuery<FTLBeaconComponent>();
-
-        while (beaconQuery.MoveNext(out var destUid, out _))
-        {
-            var meta = _metaQuery.GetComponent(destUid);
-            var name = meta.EntityName;
-
-            if (string.IsNullOrEmpty(name))
-                name = Loc.GetString("shuttle-console-unknown");
-
-            var destXform = _xformQuery.GetComponent(destUid);
-            _beaconCache.Add(new ShuttleBeaconObject(GetNetEntity(destUid), GetNetCoordinates(destXform.Coordinates), name));
-        }
-
-        _exclusionCache.Clear();
-        var exclusionQuery = AllEntityQuery<FTLExclusionComponent, TransformComponent>();
-
-        while (exclusionQuery.MoveNext(out var comp, out var xform))
-        {
-            if (!comp.Enabled)
-                continue;
-
-            _exclusionCache.Add(new ShuttleExclusionObject(GetNetCoordinates(xform.Coordinates), comp.Range, Loc.GetString("shuttle-console-exclusion")));
-        }
-
-        _beaconExclusionCacheDirty = false;
     }
 
     private void OnBeaconFTLMessage(Entity<ShuttleConsoleComponent> ent, ref ShuttleConsoleFTLBeaconMessage args)
@@ -150,6 +90,39 @@ public sealed partial class ShuttleConsoleSystem
         ConsoleFTL(entity, targetCoordinates, angle, args.Coordinates.MapId, args.Actor); // WOLFGATE(Shuttles): the no-drive refusal goes only to the sender
     }
 
+    private void GetBeacons(ref List<ShuttleBeaconObject>? beacons)
+    {
+        var beaconQuery = AllEntityQuery<FTLBeaconComponent>();
+
+        while (beaconQuery.MoveNext(out var destUid, out _))
+        {
+            var meta = _metaQuery.GetComponent(destUid);
+            var name = meta.EntityName;
+
+            if (string.IsNullOrEmpty(name))
+                name = Loc.GetString("shuttle-console-unknown");
+
+            // Can't travel to same map (yet)
+            var destXform = _xformQuery.GetComponent(destUid);
+            beacons ??= new List<ShuttleBeaconObject>();
+            beacons.Add(new ShuttleBeaconObject(GetNetEntity(destUid), GetNetCoordinates(destXform.Coordinates), name));
+        }
+    }
+
+    private void GetExclusions(ref List<ShuttleExclusionObject>? exclusions)
+    {
+        var query = AllEntityQuery<FTLExclusionComponent, TransformComponent>();
+
+        while (query.MoveNext(out var comp, out var xform))
+        {
+            if (!comp.Enabled)
+                continue;
+
+            exclusions ??= new List<ShuttleExclusionObject>();
+            exclusions.Add(new ShuttleExclusionObject(GetNetCoordinates(xform.Coordinates), comp.Range, Loc.GetString("shuttle-console-exclusion")));
+        }
+    }
+
     /// <summary>
     /// Handles shuttle console FTLs.
     /// </summary>
@@ -166,6 +139,9 @@ public sealed partial class ShuttleConsoleSystem
             return;
 
         if (shuttleComp.Enabled == false)
+            return;
+
+        if (WfRefuseDisruptedFtl(shuttleUid.Value, ent.Owner, wfActor)) // WOLFGATE(BoardingAction): CanFTL's reason never reaches the pilot, so a held ship says why here.
             return;
 
         // Check shuttle can even FTL
@@ -185,17 +161,23 @@ public sealed partial class ShuttleConsoleSystem
         var wfDrive = _shuttle.GetFtlDriveStatus(shuttleUid.Value);
         if (wfDrive != WFFtlDriveStatus.Ready)
         {
-            _popup.PopupEntity(Loc.GetString(wfDrive == WFFtlDriveStatus.Missing
-                ? "shuttle-console-no-powered-ftl-drive"
-                : "shuttle-console-ftl-drive-unpowered"), ent.Owner, wfActor, PopupType.Medium);
+            _popup.PopupEntity(Loc.GetString(wfDrive switch
+            {
+                WFFtlDriveStatus.Missing => "shuttle-console-no-powered-ftl-drive",
+                WFFtlDriveStatus.Unmoored => "wf-lattice-ftl-dead", // WOLFGATE(Lattice): drives don't work past the Lattice's hold
+                _ => "shuttle-console-ftl-drive-unpowered",
+            }), ent.Owner, wfActor, PopupType.Medium);
             return;
         }
         // WOLFGATE END
 
         targetCoordinates = _shuttle.ClampCoordinatesToFTLRange(shuttleUid.Value, targetCoordinates);
 
-        EnsureFtlBeaconExclusionCache();
-        var exclusions = new List<ShuttleExclusionObject>(_exclusionCache);
+        if (WfRefuseLatticeTarget(targetCoordinates, ent.Owner, wfActor)) // WOLFGATE(Lattice): no jumping into a band where drives die
+            return;
+
+        List<ShuttleExclusionObject>? exclusions = null;
+        GetExclusions(ref exclusions);
 
         if (!_shuttle.FTLFree(shuttleUid.Value, targetCoordinates, targetAngle, exclusions))
         {
@@ -249,7 +231,7 @@ public sealed partial class ShuttleConsoleSystem
         RaiseLocalEvent(ref ev);
         if (_shuttle.TryGetFTLDrive(shuttleUid.Value, out _, out var drive)) // Mono Begin
         {
-            MassAdjustFTLStart(shuttlePhysics,
+            MassAdjustFTLStart(_shuttle.GetFtlGroupMass(shuttleUid.Value), // WOLFGATE(Shuttles): docked grids that jump along count toward the mass
                 drive,
                 out var massAdjustedStartupTime,
                 out var massAdjustedHyperSpaceTime);
@@ -259,7 +241,7 @@ public sealed partial class ShuttleConsoleSystem
     }
 
     // Mono Begin
-    private void MassAdjustFTLStart(PhysicsComponent shuttlePhysics, FTLDriveComponent drive, out float massAdjustedStartupTime, out float massAdjustedHyperSpaceTime)
+    private void MassAdjustFTLStart(float mass, FTLDriveComponent drive, out float massAdjustedStartupTime, out float massAdjustedHyperSpaceTime) // WOLFGATE(Shuttles): takes the jumping group's mass
     {
         if (drive.MassAffectedDrive == false)
         {
@@ -267,7 +249,7 @@ public sealed partial class ShuttleConsoleSystem
             massAdjustedStartupTime = drive.StartupTime;
             return;
         }
-        var adjustedMass = shuttlePhysics.Mass * drive.DriveMassMultiplier;
+        var adjustedMass = mass * drive.DriveMassMultiplier; // WOLFGATE(Shuttles)
         var massMultiplier = float.Log(float.Sqrt(adjustedMass / MassConstant + float.E));
         massMultiplier = float.Clamp(massMultiplier, MassMultiplierMin, MassMultiplierMax);
         massAdjustedStartupTime = drive.StartupTime * massMultiplier;

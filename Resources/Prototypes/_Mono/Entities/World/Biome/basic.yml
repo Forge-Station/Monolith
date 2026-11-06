@@ -691,7 +691,7 @@
   id: MonoWorldgenVeryFarT1
   parent: NFBiomeBase
   priority: -1
-  distanceRange: 18000, 22000
+  distanceRange: 18000, 24000 # WOLFGATE(Lattice): wider Lattice bands, Detune 18-24 km
   chunkComponents:
   - type: DebrisFeaturePlacerController
     densityNoiseChannel: DensityRare
@@ -819,7 +819,7 @@
   id: MonoWorldgenVeryFarT2Inner
   parent: MonoWorldgenVeryFarT1
   priority: -2
-  distanceRange: 22000, 25000
+  distanceRange: 24000, 31000 # WOLFGATE(Lattice): wider Lattice bands, Dissonance 24-31 km
   chunkComponents:
   - type: NoiseDrivenDebrisSelector
     noiseChannel: WreckRare
@@ -847,7 +847,7 @@
   id: MonoWorldgenVeryFarT2Middle
   parent: MonoWorldgenVeryFarT1
   priority: -3
-  distanceRange: 25000, 30000
+  distanceRange: 31000, 40000 # WOLFGATE(Lattice): wider Lattice bands, Feedback 31-40 km
   chunkComponents:
   - type: NoiseDrivenDebrisSelector
     noiseChannel: WreckRare

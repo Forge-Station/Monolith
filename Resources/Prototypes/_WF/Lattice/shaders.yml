@@ -1,0 +1,14 @@
+- type: shader
+  id: WFLatticeSky
+  kind: source
+  path: "/Textures/_WF/Lattice/Shaders/lattice_sky.swsl"
+
+- type: shader
+  id: WFDriftPulse
+  kind: source
+  path: "/Textures/_WF/Lattice/Shaders/drift_pulse.swsl"
+
+- type: shader
+  id: WFLatticeBeam
+  kind: source
+  path: "/Textures/_WF/Lattice/Shaders/lattice_beam.swsl"

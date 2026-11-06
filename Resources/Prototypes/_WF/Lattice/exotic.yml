@@ -1,0 +1,197 @@
+# Exotic matter: found only out past the Lattice's hold, in asteroid rock. It sells high and builds stabilisers,
+# charms and relay anchors.
+- type: material
+  id: WFExoticMatter
+  name: wf-material-exotic-matter
+  unit: materials-unit-crystal
+  icon: { sprite: /Textures/Nyanotrasen/Objects/Materials/materials.rsi, state: bluespace }
+  color: "#b040e0"
+  stackEntity: WFMaterialExoticMatter1
+  price: 30
+
+- type: stack
+  id: WFExoticMatter
+  name: wf-material-exotic-matter
+  icon: { sprite: Nyanotrasen/Objects/Materials/materials.rsi, state: bluespace }
+  spawn: WFMaterialExoticMatter1
+  maxCount: 10
+
+- type: entity
+  parent: MaterialBase
+  id: WFMaterialExoticMatter
+  suffix: Full
+  components:
+  - type: Sprite
+    sprite: Nyanotrasen/Objects/Materials/materials.rsi
+    color: "#d070ff"
+    layers:
+    - state: bluespace_3
+      map: ["base"]
+      shader: unshaded
+  - type: Appearance
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      WFExoticMatter: 100
+  - type: Tag
+    tags:
+    - RawMaterial
+  - type: Stack
+    stackType: WFExoticMatter
+    baseLayer: base
+    layerStates:
+    - bluespace
+    - bluespace_2
+    - bluespace_3
+    count: 10
+  - type: PointLight
+    radius: 1.2
+    energy: 0.8
+    color: "#b040e0"
+  - type: Item
+    size: Tiny
+  # Cuts the song out of a Choir member's head, a shard at a time.
+  - type: WFSongExcisionTool
+  # Matter from outside the Lattice's hold still carries a little of it.
+  - type: WFDriftSource
+    rate: 0.1
+    range: 2
+    carried: 0.15
+    touch: 1
+    cap: 30
+
+- type: entity
+  parent: WFMaterialExoticMatter
+  id: WFMaterialExoticMatter1
+  suffix: 1
+  components:
+  - type: Sprite
+    layers:
+    - state: bluespace
+      map: ["base"]
+      shader: unshaded
+  - type: Stack
+    count: 1
+
+# Keeps a little anchored space round the ship it stands on while it has power.
+- type: entity
+  parent: [ BaseStructure, BaseMachinePowered ]
+  id: WFLatticeStabiliser
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Structures/Machines/Anomaly/anomaly_vessel.rsi
+    noRot: true
+    layers:
+    - state: base
+    - state: powered-2
+      shader: unshaded
+      color: "#d070ff"
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: PointLight
+    radius: 2
+    energy: 1.2
+    color: "#b040e0"
+  - type: ApcPowerReceiver
+    powerLoad: 15000
+  - type: Anchorable
+    delay: 2
+  - type: Pullable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          WFMaterialExoticMatter1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 6000
+  - type: WFLatticeStabiliser
+
+- type: entity
+  parent: BaseFlatpack
+  id: WFFlatpackLatticeStabiliser
+  components:
+  - type: Flatpack
+    entity: WFLatticeStabiliser
+  - type: StaticPrice
+    price: 6000
+
+# Worn round the neck: Drift reaches its wearer more slowly.
+- type: entity
+  parent: ClothingNeckBase
+  id: WFLatticeCharm
+  components:
+  - type: Sprite
+    sprite: Clothing/Neck/Misc/dinkystar.rsi
+    color: "#d070ff"
+  - type: Clothing
+    sprite: Clothing/Neck/Misc/dinkystar.rsi
+  - type: PointLight
+    radius: 0.8
+    energy: 0.5
+    color: "#b040e0"
+  - type: StaticPrice
+    price: 3500
+  - type: WFLatticeCharm
+
+- type: latheRecipePack
+  id: WFLatticeStatic
+  recipes:
+  - WFFlatpackLatticeStabiliser
+  - WFLatticeCharm
+  - WFFlatpackLatticeRelay
+
+- type: latheRecipe
+  id: WFFlatpackLatticeStabiliser
+  result: WFFlatpackLatticeStabiliser
+  categories:
+  - Tools
+  completetime: 12
+  materials:
+    Steel: 2000
+    Plasteel: 500
+    Gold: 300
+    WFExoticMatter: 500
+
+- type: latheRecipe
+  id: WFLatticeCharm
+  result: WFLatticeCharm
+  categories:
+  - Tools
+  completetime: 4
+  materials:
+    Gold: 100
+    WFExoticMatter: 100

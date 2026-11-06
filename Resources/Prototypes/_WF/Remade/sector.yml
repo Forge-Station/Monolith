@@ -1,0 +1,276 @@
+# The Remade in the open sector: a Scion to find, the Choir who guard it, and a freighter already lost to it.
+
+# The Choir are friends of the Remade and hostile to everyone else. The Remade's own faction lists them back.
+- type: npcFaction
+  id: WFChoir
+  defaultHostile: true
+  friendly:
+  - WFRemade
+
+- type: entity
+  abstract: true
+  parent:
+  - MobNonHumanHostileBase
+  - MobHumanoidHostileAISimpleMelee
+  id: WFMobChoirBase
+  components:
+  - type: NpcFactionMember
+    factions:
+    - WFChoir
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      70: Critical
+      100: Dead
+  - type: DamageStateVisuals
+    rotate: true
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 3.5
+
+# A chorister left on a hulk to mind the Scion. It does not argue.
+- type: entity
+  parent: WFMobChoirBase
+  id: WFMobChoirist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - sprite: _NF/Mobs/Species/Templates/human.rsi
+      state: human
+    - sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      state: equipped-INNERCLOTHING
+      color: "#2b2b2b"
+    - sprite: Clothing/OuterClothing/Misc/cultrobes.rsi
+      state: equipped-OUTERCLOTHING
+    - sprite: Clothing/Head/Hoods/cult.rsi
+      state: equipped-HELMET
+    - sprite: Objects/Weapons/Melee/cleaver.rsi
+      state: inhand-right
+  - type: MeleeWeapon
+    attackRate: 1.0
+    altDisarm: false
+    animation: WeaponArcPunch
+    angle: 0
+    damage:
+      types:
+        Slash: 9
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+# What the Choir wear on a ship: robes over a black jumpsuit, and a sidearm.
+- type: startingGear
+  id: WFCrewChoirHand
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBlack
+    outerClothing: ClothingOuterRobesCult
+    head: ClothingHeadHatHoodCulthood
+    shoes: ClothingShoesColorBlack
+    gloves: ClothingHandsGlovesColorBlack
+    belt: WeaponPistolMk58
+    pocket1: Magazine45_ACPPistolFMJ
+    pocket2: Magazine45_ACPPistolFMJ
+    ears: WFCrewHeadset
+    id: PassengerIDCard
+
+- type: startingGear
+  id: WFCrewChoirLeader
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBlack
+    outerClothing: ClothingOuterRobesCult
+    shoes: ClothingShoesColorBlack
+    gloves: ClothingHandsGlovesColorBlack
+    belt: WeaponPistolMk58
+    pocket1: Magazine45_ACPPistolFMJ
+    pocket2: Magazine45_ACPPistolFMJ
+    ears: WFCrewHeadset
+    id: PassengerIDCard
+
+- type: wfCrewProfile
+  id: WFCrewProfileChoir
+  components:
+  - type: WFCrewSuitUp
+  - type: PressureImmunity
+  - type: BreathingImmunity
+  bodies:
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyReptilian
+  - WFMobCrewBodyDwarf
+  - WFMobCrewBodyVulpkanin
+  - WFMobCrewBodyTajaran
+  - WFMobCrewBodyMoth
+  skills: [ Green, Regular ]
+  titles:
+    WFCrewCaptain: wf-remade-choir-title-leader
+    WFCrewPilot: wf-remade-choir-title-leader
+    WFCrewRadioOperator: wf-remade-choir-title
+    WFCrewGunner: wf-remade-choir-title
+    WFCrewDeckhand: wf-remade-choir-title
+    WFCrewEngineer: wf-remade-choir-title
+    WFCrewMarine: wf-remade-choir-title
+  loadouts:
+    WFCrewDeckhand: [ WFCrewChoirHand ]
+    WFCrewEngineer: [ WFCrewChoirHand ]
+    WFCrewMarine: [ WFCrewChoirHand ]
+    WFCrewGunner: [ WFCrewChoirHand ]
+    WFCrewRadioOperator: [ WFCrewChoirLeader ]
+    WFCrewPilot: [ WFCrewChoirLeader ]
+    WFCrewCaptain: [ WFCrewChoirLeader ]
+
+# A dark hull far out, unlabelled on every scope, with a Scion wrenched to its deck and squatters minding it. Nothing says
+# where it is but a garbled line on the radio. It ends on its clock and the hull goes with whatever is still aboard.
+- type: wfEncounter
+  id: WFEncounterRemadeHulk
+  name: wf-remade-encounter-hulk-name
+  start: Manual
+  category: Distress
+  icon: Ghost
+  cost: 1
+  hidden: true
+  duration: 5400
+  # In the Deep only, measured from the sector's centre.
+  minDistance: 41000
+  maxDistance: 47000
+  latticeBand: 4
+  stationClearance: 3000
+  ships:
+  - key: hulk
+    vessels: [ Piva, Plutomkii, Twilight ]
+    side: hulk
+    distress: false
+    stealth: true
+    derelict:
+      dwellers: 3
+      dwellerPool: [ WFMobDweller, WFMobDweller, WFMobDwellerHooded ]
+      debris: 30
+      debrisPool: [ RandomSpawner, RandomSpawner, SalvageSpawnerScrapCommon, ShardGlass, PartRodMetal1, Cobweb1 ]
+      resale: 0.25
+
+# The same hulk with the Choir in attendance: choristers aboard and a ship holding off, which hails visitors and fires on
+# them. Whoever takes the Scion off the hulk is hunted by that ship.
+- type: wfEncounter
+  id: WFEncounterRemadeGuarded
+  name: wf-remade-encounter-hulk-name
+  start: Manual
+  category: Distress
+  icon: Ghost
+  cost: 2
+  hidden: true
+  duration: 5400
+  # In the Deep only, measured from the sector's centre.
+  minDistance: 41000
+  maxDistance: 47000
+  latticeBand: 4
+  stationClearance: 3000
+  ships:
+  - key: hulk
+    vessels: [ Piva, Plutomkii, Twilight ]
+    side: choir
+    distress: false
+    stealth: true
+    derelict:
+      dwellers: 3
+      dwellerPool: [ WFMobChoirist ]
+      debris: 20
+      debrisPool: [ RandomSpawner, RandomSpawner, SalvageSpawnerScrapCommon, ShardGlass, PartRodMetal1, Cobweb1 ]
+      resale: 0.25
+  - key: choir
+    navigation: WFCrewNavigationRaider
+    vessels: [ Hazel, Metis, Mudskipper ]
+    offset: 350, 250
+    side: choir
+    faction: WFChoir
+    profile: WFCrewProfileChoir
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    captain: false
+    deckhands: 1
+    guards: 1
+    skill: Regular
+    stealth: true
+    warnRange: 900
+    attackRange: 450
+    zoneLines: wf-remade-choir-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    boarding: Hostile
+    docking: Hostile
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Hold
+
+# A freighter dead in space, a hand or two still alive aboard, a Scion already deep into the hull. It calls for help and
+# pays nothing; the Scion is what makes anyone want to go aboard, and the trap.
+- type: wfEncounter
+  id: WFEncounterRemadeAdrift
+  name: wf-remade-encounter-adrift-name
+  announcement: wf-remade-encounter-adrift-announce
+  announceOnRadio: true
+  announcer: adrift
+  start: Scheduled
+  category: Distress
+  icon: Cross
+  cost: 2
+  weight: 0.3
+  minPlayers: 3
+  cooldown: 5400
+  duration: 3600
+  # In the Deep only, measured from the sector's centre.
+  minDistance: 41000
+  maxDistance: 47000
+  latticeBand: 4
+  stationClearance: 3000
+  manifests: [ WFManifestGeneral, WFManifestMedical, WFManifestSalvage ]
+  ships:
+  - key: adrift
+    navigation: WFCrewNavigationFreight
+    vessels: [ Plutomkii, Piva, Twilight ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 2
+    guards: 0
+    captain: false
+    cargo: 4
+    stranded: Fuel
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    deed: null
+    distress: true
+
+- type: wfRemadeSite
+  id: WFRemadeSiteHulk
+  encounter: WFEncounterRemadeHulk
+  ship: hulk
+  kind: Discovery
+  weight: 3
+  resonance: 1
+
+- type: wfRemadeSite
+  id: WFRemadeSiteGuarded
+  encounter: WFEncounterRemadeGuarded
+  ship: hulk
+  choir: choir
+  kind: Discovery
+  weight: 2
+  resonance: 1
+
+- type: wfRemadeSite
+  id: WFRemadeSiteAdrift
+  encounter: WFEncounterRemadeAdrift
+  ship: adrift
+  kind: Adrift
+  resonance: 60
+
+# While this rule runs a dormant Scion is now and then placed in the sector. The Contested Sector and Escalation presets carry it.
+- type: entity
+  id: WFRemadeDiscoveryRule
+  parent: BaseGameRule
+  components:
+  - type: WFRemadeDiscoveryRule

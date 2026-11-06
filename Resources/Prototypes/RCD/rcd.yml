@@ -832,6 +832,73 @@
   rotation: Fixed
   fx: EffectRCDConstruct2
 
+# Forge-Change-Start
+- type: rcd
+  id: WallShuttleInterior
+  name: ent-WallShuttleInterior
+  category: WallsAndFlooring
+  sprite: { entity: WallShuttleInterior }
+  mode: ConstructObject
+  prototype: WallShuttleInterior
+  cost: 4
+  delay: 2
+  collisionMask: FullTileMask
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: WallShuttle
+  name: ent-WallShuttle
+  category: WallsAndFlooring
+  sprite: { entity: WallShuttle }
+  mode: ConstructObject
+  prototype: WallShuttle
+  cost: 4
+  delay: 2
+  collisionMask: FullTileMask
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: WallShuttleDiagonal
+  name: ent-WallShuttleDiagonal
+  category: WallsAndFlooring
+  sprite: { entity: WallShuttleDiagonal }
+  mode: ConstructObject
+  prototype: WallShuttleDiagonal
+  cost: 4
+  delay: 2
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: WallMining
+  name: ent-WallMining
+  category: WallsAndFlooring
+  sprite: { entity: WallMining }
+  mode: ConstructObject
+  prototype: WallMining
+  cost: 4
+  delay: 2
+  collisionMask: FullTileMask
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: WallMiningDiagonal
+  name: ent-WallMiningDiagonal
+  category: WallsAndFlooring
+  sprite: { entity: WallMiningDiagonal }
+  mode: ConstructObject
+  prototype: WallMiningDiagonal
+  cost: 4
+  delay: 2
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct2
+
+# Forge-Change-End
 - type: rcd
   id: Grille
   category: WindowsAndGrilles
@@ -844,6 +911,47 @@
   rotation: Fixed
   fx: EffectRCDConstruct2
 
+# Forge-Change-Start
+- type: rcd
+  id: ClockworkGrille
+  name: ent-ClockworkGrille
+  category: WindowsAndGrilles
+  sprite: { entity: ClockworkGrille }
+  mode: ConstructObject
+  prototype: ClockworkGrille
+  cost: 4
+  delay: 2
+  collisionMask: Impassable
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: GrilleDiagonal
+  name: ent-GrilleDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: GrilleDiagonal }
+  mode: ConstructObject
+  prototype: GrilleDiagonal
+  cost: 4
+  delay: 2
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ClockworkGrilleDiagonal
+  name: ent-ClockworkGrilleDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: ClockworkGrilleDiagonal }
+  mode: ConstructObject
+  prototype: ClockworkGrilleDiagonal
+  cost: 4
+  delay: 2
+  collisionMask: Impassable
+  rotation: User
+  fx: EffectRCDConstruct2
+
+# Forge-Change-End
 # Windows
 - type: rcd
   id: Window
@@ -903,6 +1011,424 @@
   rotation: User
   fx: EffectRCDConstruct2
 
+# Forge-Change-Start
+# Additional windows
+- type: rcd
+  id: ShuttleWindow
+  name: ent-ShuttleWindow
+  category: WindowsAndGrilles
+  sprite: { entity: ShuttleWindow }
+  mode: ConstructObject
+  prototype: ShuttleWindow
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ShuttleWindowDiagonal
+  name: ent-ShuttleWindowDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: ShuttleWindowDiagonal }
+  mode: ConstructObject
+  prototype: ShuttleWindowDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: MiningWindowUran
+  name: ent-MiningWindowUran
+  category: WindowsAndGrilles
+  sprite: { entity: MiningWindowUran }
+  mode: ConstructObject
+  prototype: MiningWindowUran
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: MiningWindowUranDiagonal
+  name: ent-MiningWindowUranDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: MiningWindowUranDiagonal }
+  mode: ConstructObject
+  prototype: MiningWindowUranDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ShuttleWindowUranDiagonal
+  name: ent-ShuttleWindowUranDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: ShuttleWindowUranDiagonal }
+  mode: ConstructObject
+  prototype: ShuttleWindowUranDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ShuttleWindowUran
+  name: ent-ShuttleWindowUran
+  category: WindowsAndGrilles
+  sprite: { entity: ShuttleWindowUran }
+  mode: ConstructObject
+  prototype: ShuttleWindowUran
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: UraniumWindow
+  name: ent-UraniumWindow
+  category: WindowsAndGrilles
+  sprite: { entity: UraniumWindow }
+  mode: ConstructObject
+  prototype: UraniumWindow
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: UraniumWindowDiagonal
+  name: ent-UraniumWindowDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: UraniumWindowDiagonal }
+  mode: ConstructObject
+  prototype: UraniumWindowDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ShuttleWindowPlasma
+  name: ent-ShuttleWindowPlasma
+  category: WindowsAndGrilles
+  sprite: { entity: ShuttleWindowPlasma }
+  mode: ConstructObject
+  prototype: ShuttleWindowPlasma
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ShuttleWindowPlasmaDiagonal
+  name: ent-ShuttleWindowPlasmaDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: ShuttleWindowPlasmaDiagonal }
+  mode: ConstructObject
+  prototype: ShuttleWindowPlasmaDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: MiningWindowPlasma
+  name: ent-MiningWindowPlasma
+  category: WindowsAndGrilles
+  sprite: { entity: MiningWindowPlasma }
+  mode: ConstructObject
+  prototype: MiningWindowPlasma
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: MiningWindowPlasmaDiagonal
+  name: ent-MiningWindowPlasmaDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: MiningWindowPlasmaDiagonal }
+  mode: ConstructObject
+  prototype: MiningWindowPlasmaDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: UraniumWindowDirectional
+  name: ent-UraniumWindowDirectional
+  category: WindowsAndGrilles
+  sprite: { entity: UraniumWindowDirectional }
+  mode: ConstructObject
+  prototype: UraniumWindowDirectional
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: PlasmaWindowDirectional
+  name: ent-PlasmaWindowDirectional
+  category: WindowsAndGrilles
+  sprite: { entity: PlasmaWindowDirectional }
+  mode: ConstructObject
+  prototype: PlasmaWindowDirectional
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: PlasmaWindowDiagonal
+  name: ent-PlasmaWindowDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: PlasmaWindowDiagonal }
+  mode: ConstructObject
+  prototype: PlasmaWindowDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: PlasmaWindow
+  name: ent-PlasmaWindow
+  category: WindowsAndGrilles
+  sprite: { entity: PlasmaWindow }
+  mode: ConstructObject
+  prototype: PlasmaWindow
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ReinforcedUraniumWindowDiagonal
+  name: ent-ReinforcedUraniumWindowDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: ReinforcedUraniumWindowDiagonal }
+  mode: ConstructObject
+  prototype: ReinforcedUraniumWindowDiagonal
+  cost: 4
+  delay: 3
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct3
+
+- type: rcd
+  id: ReinforcedUraniumWindow
+  name: ent-ReinforcedUraniumWindow
+  category: WindowsAndGrilles
+  sprite: { entity: ReinforcedUraniumWindow }
+  mode: ConstructObject
+  prototype: ReinforcedUraniumWindow
+  cost: 4
+  delay: 3
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct3
+
+- type: rcd
+  id: UraniumReinforcedWindowDirectional
+  name: ent-UraniumReinforcedWindowDirectional
+  category: WindowsAndGrilles
+  sprite: { entity: UraniumReinforcedWindowDirectional }
+  mode: ConstructObject
+  prototype: UraniumReinforcedWindowDirectional
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: PlasmaReinforcedWindowDirectional
+  name: ent-PlasmaReinforcedWindowDirectional
+  category: WindowsAndGrilles
+  sprite: { entity: PlasmaReinforcedWindowDirectional }
+  mode: ConstructObject
+  prototype: PlasmaReinforcedWindowDirectional
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ReinforcedPlasmaWindow
+  name: ent-ReinforcedPlasmaWindow
+  category: WindowsAndGrilles
+  sprite: { entity: ReinforcedPlasmaWindow }
+  mode: ConstructObject
+  prototype: ReinforcedPlasmaWindow
+  cost: 4
+  delay: 3
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct3
+
+- type: rcd
+  id: ReinforcedPlasmaWindowDiagonal
+  name: ent-ReinforcedPlasmaWindowDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: ReinforcedPlasmaWindowDiagonal }
+  mode: ConstructObject
+  prototype: ReinforcedPlasmaWindowDiagonal
+  cost: 4
+  delay: 3
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct3
+
+# Forge-Change-End
+# Windoors
+# Forge-Change-Start
+- type: rcd
+  id: WindoorSecureUranium
+  name: ent-WindoorSecureUranium
+  category: Airlocks
+  sprite: { entity: WindoorSecureUranium }
+  mode: ConstructObject
+  prototype: WindoorSecureUranium
+  cost: 4
+  delay: 4
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct4
+
+- type: rcd
+  id: WindoorUranium
+  name: ent-WindoorUranium
+  category: Airlocks
+  sprite: { entity: WindoorUranium }
+  mode: ConstructObject
+  prototype: WindoorUranium
+  cost: 4
+  delay: 4
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct4
+
+- type: rcd
+  id: WindoorSecurePlasma
+  name: ent-WindoorSecurePlasma
+  category: Airlocks
+  sprite: { entity: WindoorSecurePlasma }
+  mode: ConstructObject
+  prototype: WindoorSecurePlasma
+  cost: 4
+  delay: 4
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct4
+
+- type: rcd
+  id: WindoorPlasma
+  name: ent-WindoorPlasma
+  category: Airlocks
+  sprite: { entity: WindoorPlasma }
+  mode: ConstructObject
+  prototype: WindoorPlasma
+  cost: 4
+  delay: 4
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct4
+
+- type: rcd
+  id: WindoorSecure
+  name: ent-WindoorSecure
+  category: Airlocks
+  sprite: { entity: WindoorSecure }
+  mode: ConstructObject
+  prototype: WindoorSecure
+  cost: 4
+  delay: 4
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct4
+
+- type: rcd
+  id: Windoor
+  name: ent-Windoor
+  category: Airlocks
+  sprite: { entity: Windoor }
+  mode: ConstructObject
+  prototype: Windoor
+  cost: 4
+  delay: 4
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct4
+
+# Forge-Change-End
 # Airlocks
 - type: rcd
   id: Airlock
@@ -1017,3 +1543,19 @@
   collisionMask: Impassable
   rotation: User
   fx: EffectRCDConstruct0
+# Forge-Change-Start
+
+- type: rcd
+  id: AirAlarm
+  name: ent-AirAlarm
+  category: Electrical
+  sprite: { entity: AirAlarm }
+  mode: ConstructObject
+  prototype: AirAlarm
+  cost: 2
+  delay: 1
+  collisionMask: TabletopMachineMask
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rotation: User
+  fx: EffectRCDConstruct1
+# Forge-Change-End

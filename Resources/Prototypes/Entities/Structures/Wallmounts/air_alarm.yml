@@ -94,6 +94,12 @@
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    cost: 2
+    delay: 1
+    fx: EffectRCDDeconstruct1
+  # Forge-Change-End
   - type: Destructible
     thresholds:
       - trigger:

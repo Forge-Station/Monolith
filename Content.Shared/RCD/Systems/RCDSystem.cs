@@ -70,6 +70,7 @@ public partial class RCDSystem : EntitySystem
     private readonly ProtoId<RCDPrototype> _deconstructTileProto = "DeconstructTile";
     private readonly ProtoId<RCDPrototype> _deconstructLatticeProto = "DeconstructLattice";
     private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
+    private static readonly ProtoId<TagPrototype> WindowTag = "Window"; // Forge-Change
 
     private HashSet<EntityUid> _intersectingEntities = new();
     private readonly List<EntityUid> _rpdDeconstructCandidates = new();
@@ -545,8 +546,11 @@ public partial class RCDSystem : EntitySystem
 
         foreach (var ent in _intersectingEntities)
         {
-            if (isWindow && HasComp<SharedCanBuildWindowOnTopComponent>(ent))
+            // Forge-Change-Start
+            // Allow build windows on grill or window
+            if (isWindow && (HasComp<SharedCanBuildWindowOnTopComponent>(ent) || _tags.HasTag(ent, WindowTag)))
                 continue;
+            // Forge-Change-End
 
             if (isCatwalk && _tags.HasTag(ent, CatwalkTag))
             {
@@ -693,6 +697,11 @@ public partial class RCDSystem : EntitySystem
                 if (string.IsNullOrEmpty(proto))
                     return;
 
+                // Forge-Change-Start
+                // If build window, delete old window
+                if (component.CachedPrototype.ConstructionRules.Contains(RcdConstructionRule.IsWindow))
+                    DeleteWindowAtTile(mapGridData);
+                // Forge-Change-End
                 var entityCoords = _mapSystem.GridTileToLocal(mapGridData.GridUid, mapGridData.Component, mapGridData.Position);
                 var ent = Spawn(proto, entityCoords);
 
@@ -791,6 +800,20 @@ public partial class RCDSystem : EntitySystem
 
         SanitizeRpdConstructionEntity(uid, component);
     }
+    // Forge-Change-Start
+    // Deleting old window before create new one
+    private void DeleteWindowAtTile(MapGridData mapGridData)
+    {
+        _intersectingEntities.Clear();
+        _lookup.GetLocalEntitiesIntersecting(mapGridData.GridUid, mapGridData.Position, _intersectingEntities, -0.05f, LookupFlags.Uncontained);
+
+        foreach (var entity in _intersectingEntities)
+        {
+            if (_tags.HasTag(entity, WindowTag))
+                QueueDel(entity);
+        }
+    }
+    // Forge-Change-End
 
     #region Forge-Change
 

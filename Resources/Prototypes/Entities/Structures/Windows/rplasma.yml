@@ -3,6 +3,13 @@
   name: reinforced plasma window
   parent: WindowRCDResistant
   components:
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    deconstructable: true
+    cost: 6
+    delay: 6
+    fx: EffectRCDDeconstruct6
+  # Forge-Change-End
   - type: Sprite
     drawdepth: WallTops
     sprite: Structures/Windows/reinforced_plasma_window.rsi
@@ -86,6 +93,13 @@
     snap:
     - Window
   components:
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    deconstructable: true
+    cost: 4
+    delay: 4
+    fx: EffectRCDDeconstruct4
+  # Forge-Change-End
   - type: Sprite
     sprite: Structures/Windows/directional.rsi
     state: plasma_reinforced_window

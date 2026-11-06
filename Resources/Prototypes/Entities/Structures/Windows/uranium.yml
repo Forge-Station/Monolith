@@ -3,6 +3,13 @@
   name: uranium window
   parent: WindowRCDResistant
   components:
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    deconstructable: true
+    cost: 6
+    delay: 4
+    fx: EffectRCDDeconstruct4
+  # Forge-Change-End
   - type: Sprite
     drawdepth: WallTops
     sprite: Structures/Windows/uranium_window.rsi

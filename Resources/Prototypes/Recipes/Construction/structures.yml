@@ -70,23 +70,23 @@
   conditions:
     - !type:TileNotBlocked
 
-- type: construction
-  name: brass wall
-  id: WallClock
-  graph: ClockworkGirder
-  startNode: start
-  targetNode: clockworkWall
-  category: construction-category-structures
-  description: Keeps the air in and the greytide out.
-  icon:
-    sprite: Structures/Walls/brass.rsi
-    state: full
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canRotate: false
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
+# - type: construction
+#   name: brass wall
+#   id: WallClock
+#   graph: ClockworkGirder
+#   startNode: start
+#   targetNode: clockworkWall
+#   category: construction-category-structures
+#   description: Keeps the air in and the greytide out.
+#   icon:
+#     sprite: Structures/Walls/brass.rsi
+#     state: full
+#   objectType: Structure
+#   placementMode: SnapgridCenter
+#   canRotate: false
+#   canBuildInImpassable: false
+#   conditions:
+#     - !type:TileNotBlocked
 
 - type: construction
   name: wood wall

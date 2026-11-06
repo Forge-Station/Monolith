@@ -186,7 +186,7 @@
   components:
     - type: StationAiWhitelist
     - type: Sprite
-      sprite: Structures/Doors/Misc/edge_door_hazard.rsi
+      sprite: Structures/Doors/edge_door_hazard.rsi
       snapCardinals: false
       layers:
       - state: closed

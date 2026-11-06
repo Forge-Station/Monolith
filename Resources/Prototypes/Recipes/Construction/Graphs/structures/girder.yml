@@ -87,16 +87,16 @@
             - tool: Welding
               doAfter: 20
 
-        - to: plasticWall
-          completed:
-            - !type:SnapToGrid
-              southRotation: true
-          conditions:
-            - !type:EntityAnchored {}
-          steps:
-            - material: Plastic
-              amount: 2
-              doAfter: 2
+        # - to: plasticWall
+        #   completed:
+        #     - !type:SnapToGrid
+        #       southRotation: true
+        #   conditions:
+        #     - !type:EntityAnchored {}
+        #   steps:
+        #     - material: Plastic
+        #       amount: 2
+        #       doAfter: 2
 
         - to: plasmaWall
           completed:
@@ -122,18 +122,18 @@
             - tool: Welding
               doAfter: 20
 
-        - to: bananiumWall
-          completed:
-            - !type:SnapToGrid
-              southRotation: true
-          conditions:
-            - !type:EntityAnchored {}
-          steps:
-            - material: Bananium
-              amount: 2
-              doAfter: 2
-            - tool: Welding
-              doAfter: 20
+        # - to: bananiumWall
+        #   completed:
+        #     - !type:SnapToGrid
+        #       southRotation: true
+        #   conditions:
+        #     - !type:EntityAnchored {}
+        #   steps:
+        #     - material: Bananium
+        #       amount: 2
+        #       doAfter: 2
+        #     - tool: Welding
+        #       doAfter: 20
 
         - to: meatWall
           completed:

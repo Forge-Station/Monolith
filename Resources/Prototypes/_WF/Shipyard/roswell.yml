@@ -2,7 +2,7 @@
   id: WFRoswell
   parent: BaseVesselAntag
   name: Judge Roswell
-  description: A compact arrestor and patrol vessel fitted with tractor beam equipment.
+  description: A compact arrestor and patrol vessel fitted with tractor beam equipment and a WRIT disabler harpoon.
   price: 174669
   purchasable: false
   category: Medium

@@ -1,0 +1,35 @@
+<!-- WOLFGATE(LoreBook) START: one origin for Caelestinus, which now holds the Bench; the upstream text is kept in the comment below -->
+<!--
+    # Caelestinus
+
+    Formerly a colony of [color=cyan]TSF contractors[/color] sent to assist the [color=cyan]Trans-Solarian Federation[/color] in introducing its civilians into the Colossus Sector, [color=#279659]Caelestinus[/color] (also known to some as "ColSec" or Colonial Security) went on strike after witnessing the at best apathetic behaviour displayed by some members of the [color=cyan]TSFMC[/color] in the midst of their bloody war against the at-the-time brazen and well-armed [color=tan]Phaethon Dynasty Vanguard[/color]. With the only forces they could get inside of Colossus having their hands full, the [color=cyan]TSF[/color] reluctantly accepted their demands to become an independent group.
+
+    [color=#279659]Caelestinus[/color] currently consists of two groups: Caelestinus Security, consisting of [color=#ff4242]Judges[/color] and led by the [color=navy]Overseer[/color], and Medical Dispatch, consisting of [color=#57b8f0]Emergency Responders[/color] and led by the [color=cornflowerblue]Director of Care[/color]. 
+    As a group, [color=#279659]Caelestinus[/color] has three primary objectives on which they refuse to compromise on:
+
+    > [bold][color=red]Protect and aid the civilian population of the Colossus sector.[/color][/bold]
+
+    > [bold][color=red]Bring down any threats to the well-being of the sector's inhabitants.[/color][/bold]
+
+    > [bold][color=red]Maintain your independence from the Trans-Solarian Federation.[/color][/bold]
+
+    [color=#279659]Caelestinus[/color] control the civilian population centre in the center of the Colossus Sector known as [color=#279659]Caelestinus Central[/color], working to keep it safe from any belligerents who may wish to endanger its inhabitants for whatever reason. 
+-->
+<Document>
+    # Caelestinus
+    Caelestinus Central was built forty years ago by a trade company, under TSF and USSP guns, as a harbour for the people pouring into Colossus. When the Federation tried to rule its trade, the company declared itself neutral. It has answered to no navy since.
+
+    During the reignited war, Federation contractors sent to secure the colonies watched how the TSFMC fought, laid down their contracts and came to Caelestinus. Some still call them ColSec. They became the station's guard, and since the Caelestinus Accord they are [textlink="the Bench" link="WFLoreJudges"].
+
+    Caelestinus is run in two halves:
+    - [bold]The Bench[/bold]: the [bold]Overseer[/bold] and the [bold]judges[/bold]. They hold the anchors, the station and the [textlink="Common Writ" link="WFCommonWrit"].
+    - [bold]Medical Dispatch[/bold]: the [bold]Director of Care[/bold] and the [bold]Emergency Responders[/bold]. They answer for everyone, the Bench's prisoners included.
+
+    Caelestinus keeps three oaths and does not compromise on them:
+    > Protect and aid the people of the Colossus sector.
+    > Bring down any threat to their well-being.
+    > Answer to no navy.
+
+    Caelestinus Central sits at the heart of the sector, in the middle of [textlink="the Lattice" link="WFLoreLattice"]. It is the one place in Colossus where the TSF and the Vanguard drink at the same bar, because the Writ forbids them anything else.
+<!-- WOLFGATE END -->
+</Document>

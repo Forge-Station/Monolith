@@ -1,0 +1,77 @@
+# A splinter: a small Monolith for an outbreak on one ship. It wakes on its own, climbs no further than the Harvest, and keeps
+# its dread, score and stings aboard its own grid. Breaking it ends the outbreak like breaking a Scion.
+- type: entity
+  id: WFMonolithSplinter
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Contraband
+    severity: WFUnlawful
+  - type: Transform
+    noRot: true
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.3,0.25,0.3"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    noRot: true
+    scale: 0.55,0.55
+    layers:
+    - map: [ "base" ]
+      sprite: _WF/Remade/Structures/scion.rsi
+      state: marker_normal_pulse
+      offset: 0,0.5
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFMonolithVisuals.Stage:
+        base:
+          Quiet: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_dormant, offset: "0,0.5" }
+          Hymn: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_pulse, offset: "0,0.5" }
+          Growth: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_pulse, offset: "0,0.5" }
+          Harvest: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_active, offset: "0,0.5" }
+          Rapture: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_active, offset: "0,0.5" }
+          Crescendo: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_active, offset: "0,0.5" }
+  - type: PointLight
+    enabled: false
+    radius: 3
+    energy: 1.5
+    color: "#EC3232"
+  - type: AmbientSound
+    range: 6
+    volume: -6
+    sound:
+      path: /Audio/_WF/Remade/monolith/throb.ogg
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 800
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: WFMonolith
+    resonance: 15
+    local: true
+    maxStage: Harvest
+    selfClimb: 0.06
+  - type: WFRemadeDirector
+    awakeRadius: 48

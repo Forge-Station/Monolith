@@ -69,8 +69,6 @@ the same level through `declaredWar` in `wfStanding` and `requiresWar` on its en
   - hail and warn off under the ceasefire; was "you may choose to hail or immediately open fire" at all times
   - conduct toward the Dynasty under the ceasefire and in a declared war
 - [`Resources/ServerInfo/_Mono/Guidebook/Factions/USSP_Remnants.xml`](../../../Resources/ServerInfo/_Mono/Guidebook/Factions/USSP_Remnants.xml): was "too burdened by their own conflict"
-- [`Resources/ServerInfo/_Mono/Guidebook/Lore/Primer.xml`](../../../Resources/ServerInfo/_Mono/Guidebook/Lore/Primer.xml): the factions are under a ceasefire; was "currently in armed conflict" and "a localized stalemate"
-- [`Resources/ServerInfo/_Mono/Guidebook/Lore/Timeline.xml`](../../../Resources/ServerInfo/_Mono/Guidebook/Lore/Timeline.xml): the fighting has cooled into a ceasefire
 - [`Resources/ServerInfo/_Mono/Guidebook/Rules/Conflict/Four_PortStriking.xml`](../../../Resources/ServerInfo/_Mono/Guidebook/Rules/Conflict/Four_PortStriking.xml)
   - the announcement is the war level going HOT
   - mobile bases are still covered by the ceasefire

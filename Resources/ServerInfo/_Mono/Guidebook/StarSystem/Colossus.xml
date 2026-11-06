@@ -1,0 +1,18 @@
+<!-- WOLFGATE(LoreBook) START: the star system page, before and after the Collapse; the upstream text is kept in the comment below -->
+<!--
+  # Star System
+  This entry contains basic information about the stellar system that the Colossus Sector currently exists around, tentatively known as the Kyphrus system due to its primary star.
+-->
+<Document>
+  # The Kyphrus System
+  The Colossus sector lies around Kyphrus, once a stable A-class star.
+
+  ## Before
+  Nanotrasen scouted the system for colonies and found two worlds in the habitable zone, [textlink="Verda" link="Asclepiu"] and [textlink="Merak" link="Merak"]. [textlink="Fervidus" link="Fervidus"] and [textlink="Thrascias" link="Thrascias"] were judged too hostile, and [textlink="Aerumna" link="Aerumna"] too alive. A ring of debris around the star blinded sensors and wrecked any ship that stayed in close orbit, so nobody ever built near it.
+
+  ## After
+  Last year [textlink="Kyphrus collapsed" link="WFLoreCollapse"]. A black hole hangs where the star was, ringed by a bright accretion disk that swallowed the old debris. The worlds kept their orbits but not their weather, and a fifth, [textlink="Carcinoma" link="WFLoreCarcinoma"], came out from behind the glare.
+
+  Around the sector's heart, [textlink="the Lattice" link="WFLoreLattice"] holds reality in place. Beyond it, [textlink="the Unmooring" link="WFLoreUnmooring"] begins, and past that is the edge nobody has crossed.
+<!-- WOLFGATE END -->
+</Document>

@@ -1,4 +1,5 @@
-<Document>
+<!-- WOLFGATE(LoreBook) START: the opening page, rewritten for the Collapse, the Lattice and the Bench; the upstream text is kept in the comment below -->
+<!--
   # Welcome to the Colossus Sector.
 
   You wake up... Somewhere. Maybe you're a marine from the local Federation flagship, maybe you're a vanguard who obeys only the Sultan, maybe you're just some lonely schmuck who's down on their luck throwing the dice in one last gambit.
@@ -29,8 +30,29 @@
 
   - The [color=orange]Phaethon Dynasty Vanguard (PDV)[/color], an old imperial house native to the Colossus sector that got boosted into galactic relevance with the discovery of the Monolith radius. They are aggressive and use effective tactics, but struggle for technological advancement.
 
-  <!-- WOLFGATE(ColdWar) START: the factions are under a ceasefire; was "currently in armed conflict" and "a localized stalemate" -->The TSF and the PDV are currently in a cold war. The TSF demand the Syndicate technology now integrated into most PDV equipment *and* the property the Dynasty now inhabit, while the Dynasty is defending their self-proclaimed holy land with questionable tactics.
+  The TSF and the PDV are currently in a cold war. The TSF demand the Syndicate technology now integrated into most PDV equipment *and* the property the Dynasty now inhabit, while the Dynasty is defending their self-proclaimed holy land with questionable tactics.
   Due to the anomalous interference at the fringes of the Colossus sector, the local Federation military is seperated from their main battalions, and the Dynasty is still a developing power. This has lead to an uneasy ceasefire. War only starts if both the Colonel and the Grand Vizier declare it. Your PDA shows the current war level.
-  <!-- WOLFGATE END -->No side is morally correct - Syndicate-originating technology is often unethical, and the TSF may be overstepping their bounds, but what is certain is that this conflict brings yet another danger to the already deadly sector.
+  No side is morally correct - Syndicate-originating technology is often unethical, and the TSF may be overstepping their bounds, but what is certain is that this conflict brings yet another danger to the already deadly sector.
+-->
+<Document>
+  # Welcome to Colossus
+  You came to Colossus for the same reason everyone does: the money, the mystery, or nowhere else to go.
 
+  [bold]You are not leaving.[/bold] Nobody does. No ship, no signal and no soul has ever made it out of the sector. Ships that fly for the edge come back with their instruments screaming, or they do not come back. You live here now.
+
+  ## What you need to know
+  - [bold]The sun is gone.[/bold] Kyphrus collapsed into a black hole. Its bent light hangs over every viewport. See [textlink="The Collapse" link="WFLoreCollapse"].
+  - [bold]Reality is held in place.[/bold] Six alien anchors around Caelestinus Central keep the world agreeing with itself. Past their reach, it stops. Stay inside unless you are paid well, and maybe even then. See [textlink="The Lattice" link="WFLoreLattice"] and [textlink="The Unmooring" link="WFLoreUnmooring"].
+  - [bold]There is law, and it has judges.[/bold] The Bench of Caelestinus upholds the [textlink="Common Writ" link="WFCommonWrit"] across the whole sector. Most of it is common sense. The part about things brought back from beyond the anchors is not negotiable.
+  - [bold]Two powers are one order from war.[/bold] The Trans-Solarian Federation and the Phaethon Dynasty Vanguard hold an uneasy ceasefire. War comes only when both the Colonel and the Grand Vizier declare it, and your PDA shows the war level. See [textlink="Factions" link="Factions"].
+  - [bold]The sector hunts back.[/bold] Reavers, old machines, flesh that walks and stones that sing. See [textlink="Things That Hunt" link="WFLoreThreats"].
+
+  ## Who you are
+  Nanotrasen is a ruin and the Syndicate a rumour. Nobody here is a corporate wage-slave any more. You might be a Federation marine cut off from the fleet, a Vanguard warrior who answers only to the Sultan, a trader, a salvager, a doctor, or someone throwing the dice one last time.
+
+  Out here you owe loyalty to your crew, your ship and yourself, in that order. Watch your back.
+
+  ## Read on
+  [textlink="A Short History" link="Timeline"] tells how the sector got this way, and [textlink="The Sector Today" link="WFLorePresentDay"] tells where it stands. Both are short. Read them before your first flight.
+<!-- WOLFGATE END -->
 </Document>

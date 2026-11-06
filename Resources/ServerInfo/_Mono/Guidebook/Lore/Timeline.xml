@@ -1,5 +1,5 @@
-<Document>
-
+<!-- WOLFGATE(LoreBook) START: the history, carried through the Collapse and the Caelestinus Accord; the upstream text is kept in the comment below -->
+<!--
   ## Quick History
 
 - Nanotrasen and the Syndicate engaged in a conflict now commonly known as the "Corporate War," which utterly destroyed Nanotrasen and crippled the Syndicate. A badly damaged Syndicate battle group fled into the region of space now known as the Colossus sector where they ultimately met their end. A local Imperial government discovered remnants of their technology and used it to advance their development.
@@ -12,7 +12,40 @@
 
 - The TSF attempted to exert control over Colossus, controlling imports and outlawing Syndicate technology that had spread through various interest groups. This led to CC's company cutting ties with TSF interests and declaring themselves neutral. Arguments between the TSF and USSP over how to govern the sector led to a communication breakdown, reigniting the civil war almost half a century later. This war gained the attention of the Phaethon Dynasty, who sponsored local insurgent cells to fight back against the governments bringing their outside conflict to Colossus and trying to control their lives.
 
-<!-- WOLFGATE(ColdWar): the fighting has cooled into a ceasefire -->- The TSF has in recent times succeeded in crushing both the insurgent cells and the bulk of USSP presence in the sector, forcing a retreat. This imbalance of power in the Colossus sector has now forced the PDV to step into the light, who vow to repel the invaders threatening their control over the sector. Neither side could win outright, and the fighting has cooled into a ceasefire. This is where you play, in the struggles across the Colossus sector.
+- The TSF has in recent times succeeded in crushing both the insurgent cells and the bulk of USSP presence in the sector, forcing a retreat. This imbalance of power in the Colossus sector has now forced the PDV to step into the light, who vow to repel the invaders threatening their control over the sector. Neither side could win outright, and the fighting has cooled into a ceasefire. This is where you play, in the struggles across the Colossus sector.
+-->
+<Document>
+  # A Short History
+  Times are rough and counted back from today, the way spacers tell them.
 
+  ## A century ago: the Corporate War
+  Nanotrasen and the Syndicate went to war, and the war ate them both. Nanotrasen was destroyed and the Syndicate broken. One badly damaged Syndicate battle group fled into an uncharted sector and died there. A local imperial house, the Phaethon Dynasty, found its wrecks and built a future out of them.
 
+  ## A century to fifty years ago: the Confederacy
+  In the vacuum Nanotrasen left, the Confederacy, a small government from Sol, seized corporate technology and built it into its fleets. Within fifty years it held more than half the galaxy, and it hunted down whatever the Syndicate had left behind.
+
+  ## Fifty years ago: the schism
+  Harsh laws drove the great workers' unions to break away as the United Soviet Socialist Planets. The Confederacy reformed as the [textlink="Trans-Solarian Federation" link="TSFMC_Entry"] and fought to bring them back. It won the civil war that followed.
+
+  ## Forty years ago: Colossus
+  In the peace, scouts reached the sector now called Colossus. They found worlds rich beyond reason, anomalies nobody could explain, and that they could not leave. Every ship that has tried since has turned back or been lost. People came anyway, and never stopped coming. A trade company built [textlink="Caelestinus Central" link="Caelestinus"] to shelter them, under the guns of TSF and USSP garrisons.
+
+  ## Thirty years ago: neutrality
+  The Federation tried to rule the sector's trade and ban the Syndicate technology that had spread through it. Caelestinus cut its ties with the TSF and declared itself neutral. It has stayed that way.
+
+  ## Five years ago: the war comes back
+  The TSF and the USSP fell out over who should govern Colossus, and the civil war reignited here, almost half a century after it ended. The [textlink="Phaethon Dynasty" link="PDV_Entry"], who call the sector their holy land, armed insurgents against both. Federation contractors sent to secure the colonies saw how the war was fought, laid down their contracts, and came to Caelestinus to guard it.
+
+  ## Two years ago: the ceasefire
+  The TSF crushed the insurgents and drove most of the [textlink="USSP" link="USSP_Entry"] out. The Dynasty stepped into the open as the Vanguard. Neither side could win, and the fighting cooled into a ceasefire that nobody trusts.
+
+  ## Last year: the Collapse
+  [textlink="Kyphrus collapsed" link="WFLoreCollapse"] into a black hole. Six pillars that Nanotrasen's first survey had logged and forgotten woke as [textlink="the Lattice" link="WFLoreLattice"], and [textlink="the Unmooring" link="WFLoreUnmooring"] stopped exactly at the edge of their reach.
+
+  ## Months ago: the Caelestinus Accord
+  Neither navy would let the other hold the anchors. Both signed the Caelestinus Accord, giving the anchors and the station to a third party sworn to neither. The station's guards became [textlink="the Bench" link="WFLoreJudges"], and the [textlink="Common Writ" link="WFCommonWrit"] became the sector's law.
+
+  ## Now
+  The [textlink="Reavers" link="WFLoreReavers"] rise from the people the sector broke. The [textlink="ADS" link="WFLoreAds"] wakes in the dark. Past the anchors, someone is singing. This is where you play.
+<!-- WOLFGATE END -->
 </Document>

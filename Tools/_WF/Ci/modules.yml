@@ -2995,3 +2995,6 @@ unmarked:
   - path: Resources/Audio/_CP14/Animals/
     module: Fauna
     reason: Dinosaur calls, ported from CrystallEdge.
+  - path: Resources/SharedMaps/_Mono/Shuttles/CSec/lightning.yml
+    module: Bench
+    reason: Bench refit swapped one TOVEK hardpoint for a SHRIKE ion disruptor.

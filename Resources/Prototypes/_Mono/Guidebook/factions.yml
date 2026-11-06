@@ -3,6 +3,7 @@
   name: Factions
   text: "/ServerInfo/_Mono/Guidebook/Factions/factions.xml"
   priority: 1
+  lore: true # WOLFGATE(LoreBook): the faction pages moved to the lore book
   children:
   - TSFMC_Entry
   - PDV_Entry
@@ -11,7 +12,10 @@
   - Viper_Group
   - MMC
   - WFAsf # WOLFGATE(Asf)
-  - WFAds # WOLFGATE(AdsIncursion)
+  # WOLFGATE(LoreBook): the ADS guide stays in the guidebook under WFFactionsGuide; its lore page is here
+  # - WFAds # WOLFGATE(AdsIncursion)
+  - WFLoreAds # WOLFGATE(LoreBook)
+  - WFLoreReavers # WOLFGATE(LoreBook)
 
 - type: guideEntry
   id: TSFMC_Entry
@@ -19,7 +23,8 @@
   text: "/ServerInfo/_Mono/Guidebook/Factions/TSFMC.xml"
   priority: 2
   children:
-  - Smuggling
+  # WOLFGATE(LoreBook): smuggling is a duty guide, kept in the guidebook under WFFactionsGuide
+  # - Smuggling
   - TSFMC_SOP
   - TSFMC_org
   - TSFMC_Culture
@@ -117,3 +122,8 @@
   name: Caelestinus
   text: "/ServerInfo/_Mono/Guidebook/Factions/caelestinus.xml"
   priority: 4
+  # WOLFGATE(LoreBook) START: the station's judges
+  children:
+  - WFLoreJudges
+  # WOLFGATE END
+  - WFCommonWrit # WOLFGATE(Bench): the Common Writ

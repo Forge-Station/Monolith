@@ -1,6 +1,6 @@
 #region Vinyls
 # РАЗМЕЩАТЬ ПЛАСТИНКИ СТРОГО ПО АЛФАВИТНОМУ ПОРЯДКУ И В НУЖНОМ РЕГИОНЕ, РЕГИОНЫ СОЗДАВАТЬ ПО ПРОИСХОЖДЕНИЮ МУЗЫКИ(ТО ЕСТЬ В КАКОЙ ПАПКЕ ОНА ЛЕЖИТ В  /Audio/_Goobstation/RadioStation/music/)
-# 118 пластинок
+# 117 пластинок
 - type: entity
   abstract: true
   parent: BaseItem

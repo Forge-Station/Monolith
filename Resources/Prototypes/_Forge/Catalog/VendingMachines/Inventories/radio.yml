@@ -4,9 +4,13 @@
     StationRadioServerFlatpack:       5
     StationRadioRigFlatpack:          2
     VinylPlayerFlatpack:              20
+    StationRadioServerPortable:       5
+    StationRadioRigPortable:          5
+    VinylPlayerPortable:              5
     StationRadioReceiverFlatpack:     4294967295 # Infinite
     StationRadioReceiverUwuFlatpack:  4294967295 # Infinite
     StationRadioReceiverHandheld:     4294967295 # Infinite
+    PouchVinylHolder:                 4294967295 # Infinite
     #Vinyls
     #region GOONSTATION
     VinylDiskAdventure1:            4294967295 # Infinite
@@ -87,7 +91,7 @@
     VinylDiskDeadlyRoulette:        4294967295 # Infinite
     #VinylDiskEphedrineOverdose:    4294967295 # Infinite #moved to contraband
     VinylDiskFeralAngelWaltz:       4294967295 # Infinite
-    #VinylDiskGetThatAntag!:        4294967295 # Infinite #moved to contraband
+    #VinylDiskGetThatAntag:         4294967295 # Infinite #moved to contraband
     VinylDiskJingleBells:           4294967295 # Infinite
     VinylDiskLateNightRadio:        4294967295 # Infinite
     #VinylDiskLAW2OPENARMORY:       4294967295 # Infinite #moved to contraband
@@ -148,7 +152,7 @@
   contrabandInventory:
     #Vinyls
     VinylDiskEphedrineOverdose:       20
-    VinylDiskGetThatAntag!:           20
+    VinylDiskGetThatAntag:            20
     VinylDiskLAW2OPENARMORY:          20
     VinylDiskNUKIESTRAP:              20
     VinylDiskTraitorousIntent:        20

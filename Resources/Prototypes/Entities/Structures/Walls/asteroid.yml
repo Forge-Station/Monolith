@@ -17,10 +17,10 @@
   - type: Transform
     noRot: true
   - type: IconSmooth
-    key: walls
+    key: rock
     states:
     - !type:EdgeSpriteSmoothing
-      mask: [ walls ]
+      mask: [ rock ]
       base: rock_asteroid_
   - type: Icon
     sprite: Structures/Walls/rock.rsi
@@ -478,10 +478,10 @@
   description: A rocky asteroid.
   components:
   - type: IconSmooth
-    key: walls
+    key: rock
     states:
     - !type:EdgeSpriteSmoothing
-      mask: [ walls ]
+      mask: [ rock ]
       base: ironrock_
   - type: Icon
     sprite: Structures/Walls/rock.rsi
@@ -872,10 +872,10 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: IconSmooth
-    key: walls
+    key: rock
     states:
     - !type:EdgeSpriteSmoothing
-      mask: [ walls ]
+      mask: [ rock ]
       base: rock_
   - type: Icon
     sprite: Structures/Walls/rock.rsi

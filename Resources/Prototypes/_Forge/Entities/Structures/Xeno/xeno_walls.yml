@@ -9,9 +9,9 @@
   suffix: Forge, Xeno, Chitin
   components:
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: Structures/Walls/exo.rsi
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: Structures/Walls/exo.rsi
   - type: IconSmooth
     key: chitin
     states:

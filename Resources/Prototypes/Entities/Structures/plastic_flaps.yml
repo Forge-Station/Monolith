@@ -50,6 +50,9 @@
     key: walls
   - type: StructureAligner
   - type: StructureAlignerPylon
+  - type: Tag # Mono
+    tags:
+    - DoorAutorotate
 
 - type: entity
   id: PlasticFlapsClear

@@ -17,9 +17,16 @@
   - type: Physics
     canCollide: false
   - type: Sprite
+    offset: 0, -0.25
     drawdepth: WallMountedItems
     sprite: Structures/Wallmounts/switch.rsi
-    state: dead
+    layers:
+    - state: base
+    - map: [ "shaded" ]
+      state: button
+    - map: [ "unshaded" ]
+      state: button-unshaded
+      shader: unshaded
   - type: CombinationLock
     code: "1234"
     maxLength: 8

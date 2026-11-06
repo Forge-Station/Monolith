@@ -61,7 +61,7 @@
     repairTime: 6
     repairCost: 8
   - type: IconSmooth
-    key: walls
+    key: doors
   - type: PlacementReplacement
     key: blastdoors
 

@@ -60,7 +60,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: IconSmooth
-    key: walls
+    key: doors
   - type: Occluder
   - type: BlockWeather
 

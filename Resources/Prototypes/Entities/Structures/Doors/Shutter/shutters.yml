@@ -80,6 +80,8 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: IconSmooth
+    key: doors
   - type: DoorSignalControl
   - type: DeviceNetwork
     deviceNetId: Wireless
@@ -108,8 +110,6 @@
     repairCost: 6
   - type: PlacementReplacement
     key: shutters
-  - type: IconSmooth
-    key: walls
   - type: StructureAligner
   - type: StructureAlignerPylon
 
@@ -218,7 +218,7 @@
   components:
   - type: Sprite
     sprite: Structures/Doors/Shutters/shutters.rsi
-    state: frame
+    state: assembly
   - type: Construction
     graph: Shutters
     node: frame1

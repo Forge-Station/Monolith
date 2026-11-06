@@ -3,7 +3,11 @@
 Anvilhold Drydock is a POI station (`WFDrydock`, `Resources/Maps/_WF/Drydock/drydock.yml`) that repairs and refits
 ships parked in its four berths, North, East, South and West. A pilot either pulls up to a berth console or hails the
 dockmaster from their helm (Hailing module) and books a berth. Any ship can also build a mobile drydock, which pays in
-materials instead of credits.
+materials instead of credits. A `WFDrydockRepairVoucher` on the payer, in hand or a worn slot, pays for one whole
+repair at a console that takes credits; it is used up when the work starts and handed back if the job aborts
+(`WFDrydockSystem.Vouchers.cs`). `IssueShipVouchers` (used by Reaver bounties) binds one to each helping ship, which it
+alone can repair, and skips a ship that still holds an unused one. A helper's ship is the deeded ship their player
+owns, or else the one they are aboard, and its owner holds the voucher when they are among the helpers.
 
 Entry points: `WFDrydockSystem` (berths, quotes, payment; `.Job.cs` for jobs and cranes, `.Booking.cs` for the hail
 service, bookings and guides, `.Materials.cs` for material bills), `WFShipRefitSystem` and `WFPartRefitSystem` (refit
@@ -42,15 +46,19 @@ A job restores missing hull tiles and entities and heals damage, from the ship's
 full power a repair takes at most 6 minutes (`maxDuration`) and a refit 2 (`maxRefitDuration`), crane deploy and
 travel included; longer work is sped up to fit, and lost power adds the time it costs. When a job ends, the console
 announces it at the console and to a payer elsewhere; it can also use a radio channel (`noticeChannel`), which no
-console sets.
+console sets. A rebuilt gun mounts on its hardpoint and rejoins the ship's fire control at the next hardpoint
+refresh, within a minute. A part whose spot now holds something else, such as a gun swapped onto its hardpoint, isn't
+rebuilt or charged, the same check the ship repair tool makes.
 
 ## Pricing
 
 A hull tile costs 120 cr. Rebuilding an entity costs 60 cr labor plus the more of twice its estimated price and 35% of
 its construction materials' value (`WFDrydockSystem.Construction.cs`), so a plastitanium wall, priced low but built
-from four 600 cr sheets, comes to about 960 cr. Healing costs the rebuild price times the share of health lost. Work
-is capped at 50% of the ship's shipyard price (`VesselComponent`), or 40% of its full rebuild price for ships not
-bought at one. A fee of 2.5% of that value (at least 1,500 cr) comes on top and is never refunded.
+from four 600 cr sheets, comes to about 960 cr. A machine's construction materials include its board's sheets, and a
+structure with no recipe can have a build-cost graph in `construction.yml`, as the Z-pinch reactor and IRE controller
+do; IRE shielding's cost is an edge on its own graph. Healing
+costs the rebuild price times the share of health lost. Work is capped at 50% of the ship's shipyard price
+(`VesselComponent`), or 40% of its full rebuild price for ships not bought at one. A fee of 2.5% of that value (at least 1,500 cr) comes on top and is never refunded.
 
 ## Refits
 
@@ -68,6 +76,11 @@ three times the power, so a fully converted ship hovers on the power it already 
 parts, so it stacks with the thruster line. A single-tier line can name its tier with `mark` (the keys' "to Mk II")
 and `lamp` (the lamp's numeral).
 
+The durasteel plating line is `WFHullPlatingRefit` (`WFHullPlatingRefitSystem`): one tier that replaces every
+plastitanium wall in place with its durasteel wall (ShipArmor module), at 1,000 cr per wall, or 15 plasteel and 5
+plastitanium units per wall at a mobile drydock (about 20 plastitanium sheets for a Luda). It is the only way to get durasteel. Each swap is recorded in the
+ship's repair snapshot, so the ship repair tool and drydock repairs rebuild durasteel, with no refit charge.
+
 A refit buys the next tier any unit falls short of, for every unit of the line, and is recorded once its job finishes
 with nothing skipped. A repair then brings each owned line back to tier, rebuilt machines included: units the ship paid
 for cost `refitRepairShare` (20%) of their tiers, and units past that coverage, such as machines added later, pay in
@@ -80,27 +93,53 @@ The console window is an instrument deck in the cockpit style (CombatConsole's i
 missing parts as red diamonds, damage amber) and each crane as the client animates it. A ship outside the plot gets
 an edge pointer with its range. Open consoles refresh once a second.
 
+## Chop-Shop
+
+Blackanvil Chop-Shop (`WFChopShop`, `Resources/Maps/_WF/Drydock/chopshop.yml`) is an illegal drydock on Anvilhold's
+layout, farther out (11 to 13 km). Its berth consoles (`WFComputerChopShop`, `chopshop.yml`) only break ships: they
+refuse repairs and refits, and nobody there books berths, so it's walk-in only. Its fence, Kord Blackanvil
+(`WFDrydockFence`), answers hails and explains the rules.
+
+A chop-shop console (`WFDrydockChopShopComponent`, `WFDrydockSystem.ChopShop.cs`) pays in thalers, not materials, and
+stores nothing in its cranes. When a break starts it fixes the payout at `valueShare` (80%) of the ship's value: its
+shipyard price, from the ship's `VesselComponent` or its vessel station, else what the grid appraises at. Each tile
+lifted prints its share by the console, weighted by its work time (what was stripped off it), onto the stack already
+lying there; the last tile of the hull prints whatever is left. An abort or a destroyed console keeps what was printed
+and pays no more. The console shows the payout before the break. Stripped boards, parts and guns land beside the
+cranes as usual.
+
+Breaking lawful property puts a warrant (`warrantReward`, 15,000) on the breaker, posted on the bounty board's warrant
+list (`WFShipbreakerWarrantSystem`). Lawful property is a ship registered to another player (`ShipOwnershipComponent`; an unregistered deed goes by
+the owner's name), or a live
+encounter ship whose faction isn't in `outlawFactions` (pirates, the ADS, the Reavers) and isn't a derelict. A ship
+freed from its encounter with its deed is anyone's. Each further lawful break adds its reward to the same warrant.
+When the breaker dies, the players who hurt them in person share it equally; if none did, it stands, and it comes off
+the board unpaid if their body is deleted. A warrant posted while the board was down is posted on the next break.
+
 ## Mobile drydock
 
 `WFComputerMobileDrydock` (board `WFComputerMobileDrydockCircuitboard`) and `WFMobileDrydockCrane` (board
 `WFMobileDrydockCraneMachineCircuitboard`, MV power, at stock parts a 26-tile berth starting 3 tiles past the machine, 13 tiles
-across). Both boards print at the circuit imprinter after Shuttlecraft research. To mirror a mobile crane, unbolt it,
+across). Both boards print at the circuit imprinter after Shuttlecraft research. The crane builds in a 2x2 machine
+frame, from 20 steel, 10 plasteel, 10 MV cable, 4 motors and 4 armor plates on top of its parts, and can be pulled
+while unbolted. To mirror a mobile crane, unbolt it,
 open its panel and cut with wirecutters for 2 s (`WFDrydockCraneMirrorSystem`). It works walk-in only and never on its
 own grid.
 
 The mobile console charges no fee and pays in materials (`WFDrydockMaterialPaymentComponent`), from its cranes' own
-storage or their linked material silo. Work is billed at material units per credit; refits use their tier's
-`materials` per part instead. Rates are pegged to a T2 ship voucher (100 steel, 50 plasteel, 50 glass and 10
-plastitanium sheets for a 150k to 500k ship): 25k cr of work takes about 14 steel sheets, and `maxBill` caps a repair
-at about 60% of the voucher for a 250k ship, scaled by ship price. A rebuild also takes 1% of any construction material
-the rates don't cover, so a plastitanium wall adds 4 units of plastitanium. Refunds go back into the job's first crane.
+storage or their linked material silo, with no work cap (`capFraction` 0). A wall (the `Wall` tag) or hull tile bills
+`structureRepairFactor` (1.3) times what breaking it pays: 2.6% of the wall's construction materials, 3 steel units
+a tile. Anything else bills `repairShare` (100%) of its construction materials, a heal that times the share of health
+lost, a refit its tier's `materials`, and work with no construction materials, such as a gun, its price times `rates`.
+Refunds go back into the job's first crane. A repair short of materials does what the stock covers, in work order; once a tile
+is left out, so are the parts. A refit is all or nothing.
 
 A mobile crane also links a parts silo and a chemical silo (Lathe module), from the silo's window like a lathe, and
-parts silos then take any machine part (`parts` on its `FabricationSiloClient`). A refit unit billed in full takes the
+parts silos then take any machine part and machine or computer board (`parts` on its `FabricationSiloClient`). A refit unit billed in full takes the
 stock part it installs from the parts silo, if there is one, instead of its tier materials
 (`WFDrydockSystem.Supplies.cs`). Only that exact prototype counts, so trade goods that are machine parts, such as
 `CapacitorEconomy2`, are never spent. Units restored at the repair share pay in materials, so a spare part isn't spent
-on a 20% bill. Unfinished work's parts go back to the silo, or onto the nearest free floor beside the crane. The console
+on a 20% bill. Unfinished work's parts go back to the silo, or onto the nearest free floor beside the crane, never past a wall. The console
 lists everything the parts silos hold and the chemicals in the chemical silos; nothing uses chemicals yet. Bills (the
 repair quote, the salvage preview and each refit's cost) list one row per material, red where the cranes hold too
 little.
@@ -108,10 +147,15 @@ little.
 ### Hull breaking
 
 A mobile console also breaks up the ship in its berth for materials (`WFDrydockSystem.Break.cs`), behind a confirm on
-its Break hull key. Anything but a station can be broken: outposts and POIs (station members with no `ShuttleDeed`) and
-the drydock's own grid are refused, while player ships, encounter and event ships are fair game. Breaking a crewed
+its Break hull key. Anything but a station can be broken: outposts and POIs (station members with no `ShuttleDeed` whose
+station isn't a vessel's, as `ExtraShuttleInformation` marks it) and the drydock's own grid are refused, and so is a
+grid with an indestructible wall, window or door, such as a vault or monolith fragment. The console says why in place
+of the salvage bill. Player ships, admin-spawned ships with or without an owner, encounter and event ships are fair
+game. Breaking a crewed
 ship is an attack on it, reported on start and with every tile through `WFCrewAlertSystem.ReportBreaking`, so its
-crew, escorts and allies respond. Nobody aboard stops the job.
+crew, escorts and allies respond. The attack is blamed on the breaker's vessel, the console's own grid when that is a
+ship, else the nearest ship registered to the breaker's player, else the ship on their ID's deed, and on the breaker in
+person, whom those crews turn hostile to. Nobody aboard stops the job.
 
 The hull is peeled tile by tile from its edges inward: each crane takes the nearest tile it reaches that has an open
 side and whose loss leaves the hull in one piece, so the grid never splits. Tiles out of reach are skipped, and only
@@ -122,21 +166,17 @@ go, mobs are taken out of stripped containers, and anything still aboard is set 
 takes the grid with it.
 
 Each finished tile credits the slot's crane silo or crane (`breakDefaultYield`, `breakYield` and `breakTileYield` on
-the payment component): 25% of every material in what it strips, but only 5% of the plastitanium and composite, plus 25
-steel units per tile, and 2 chunks of scrap per tile (`breakTileSalvage`, uncapped, and never billed to rebuild the
-tile). An abort pays nothing more. The caps grow with each tile the job lifts (`breakCap`: 1 plastitanium or composite
-sheet per 20 tiles, plasteel per 2, steel per tile), and yield past them waits for later tiles, so the outer walls that
-come off first are paid as the peel goes on. A hull broken whole or in parts, aborted and restarted, pays the same.
+the payment component): 50% of the materials in the parts it strips (5% of plastitanium and composite), 2% of a
+wall's (`structureYield`), and per tile 2 steel and 2 scrap chunks (`breakTileSalvage`). An abort pays nothing more.
 
 A stripped machine's board and parts, and a computer's board, go to the crane's parts silo, or onto the nearest free
-floor beside the crane when the silo doesn't take them. Guns on hardpoints come off whole as a `WFSalvagedFlatpack`, put
+floor beside the crane when the silo doesn't take them; its board's sheets are paid in the yield. Guns on hardpoints
+come off whole as a `WFSalvagedFlatpack`, put
 in the parts silo or left at the crane the same way. It unpacks at half the damage that would destroy the gun and sells
 for a quarter of its price.
 
-The hull keeps its repair snapshot, so a repair can rebuild what was broken, but `WFHulkComponent` records the broken
-tiles and rebuilding a tile or part on one bills its full materials, outside the repair's limits: a part's construction
-materials and a tile's plating. Breaking returns at most a share of that, so break and rebuild never pays. An encounter
-leaves a hull alone for 5 minutes after its last broken tile.
+The hull keeps its repair snapshot, so a repair can rebuild what was broken. An encounter leaves a hull alone for 5
+minutes after its last broken tile (`WFHulkComponent`).
 
 ### Crane upgrades
 
@@ -167,12 +207,15 @@ Mk IV manipulators on stock bins draw 30 kW.
 
 - [`Content.Server/_WF/Drydock/WFDrydockBerth.cs`](WFDrydockBerth.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockBookingComponent.cs`](WFDrydockBookingComponent.cs)
+- [`Content.Server/_WF/Drydock/WFDrydockChopShopComponent.cs`](WFDrydockChopShopComponent.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockCraneUpgradesComponent.cs`](WFDrydockCraneUpgradesComponent.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockJobComponent.cs`](WFDrydockJobComponent.cs)
+- [`Content.Server/_WF/Drydock/WFDrydockRepairVoucherComponent.cs`](WFDrydockRepairVoucherComponent.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.BerthLights.cs`](WFDrydockSystem.BerthLights.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.Blockers.cs`](WFDrydockSystem.Blockers.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.Booking.cs`](WFDrydockSystem.Booking.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.Break.cs`](WFDrydockSystem.Break.cs)
+- [`Content.Server/_WF/Drydock/WFDrydockSystem.ChopShop.cs`](WFDrydockSystem.ChopShop.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.Construction.cs`](WFDrydockSystem.Construction.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.cs`](WFDrydockSystem.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.Job.cs`](WFDrydockSystem.Job.cs)
@@ -181,11 +224,16 @@ Mk IV manipulators on stock bins draw 30 kW.
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.Refits.cs`](WFDrydockSystem.Refits.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.Supplies.cs`](WFDrydockSystem.Supplies.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockSystem.Upgrades.cs`](WFDrydockSystem.Upgrades.cs)
+- [`Content.Server/_WF/Drydock/WFDrydockSystem.Vouchers.cs`](WFDrydockSystem.Vouchers.cs)
+- [`Content.Server/_WF/Drydock/WFDrydockUnbreakableComponent.cs`](WFDrydockUnbreakableComponent.cs)
 - [`Content.Server/_WF/Drydock/WFDrydockWorkItem.cs`](WFDrydockWorkItem.cs)
 - [`Content.Server/_WF/Drydock/WFHulkComponent.cs`](WFHulkComponent.cs)
+- [`Content.Server/_WF/Drydock/WFHullPlatingRefitSystem.cs`](WFHullPlatingRefitSystem.cs)
 - [`Content.Server/_WF/Drydock/WFLandingThrusterRefitSystem.cs`](WFLandingThrusterRefitSystem.cs)
 - [`Content.Server/_WF/Drydock/WFPartRefitSystem.cs`](WFPartRefitSystem.cs)
 - [`Content.Server/_WF/Drydock/WFSalvagedHardwareComponent.cs`](WFSalvagedHardwareComponent.cs)
+- [`Content.Server/_WF/Drydock/WFShipbreakerWarrantComponent.cs`](WFShipbreakerWarrantComponent.cs)
+- [`Content.Server/_WF/Drydock/WFShipbreakerWarrantSystem.cs`](WFShipbreakerWarrantSystem.cs)
 - [`Content.Server/_WF/Drydock/WFShipRefitsComponent.cs`](WFShipRefitsComponent.cs)
 - [`Content.Server/_WF/Drydock/WFShipRefitSystem.cs`](WFShipRefitSystem.cs)
 
@@ -202,6 +250,7 @@ Mk IV manipulators on stock bins draw 30 kW.
 - [`Content.Shared/_WF/Drydock/WFDrydockMaterialPaymentComponent.cs`](../../../Content.Shared/_WF/Drydock/WFDrydockMaterialPaymentComponent.cs)
 - [`Content.Shared/_WF/Drydock/WFDrydockOperatorComponent.cs`](../../../Content.Shared/_WF/Drydock/WFDrydockOperatorComponent.cs)
 - [`Content.Shared/_WF/Drydock/WFFlatpackUnpackedEvent.cs`](../../../Content.Shared/_WF/Drydock/WFFlatpackUnpackedEvent.cs)
+- [`Content.Shared/_WF/Drydock/WFHullPlatingRefit.cs`](../../../Content.Shared/_WF/Drydock/WFHullPlatingRefit.cs)
 - [`Content.Shared/_WF/Drydock/WFLandingThrusterRefit.cs`](../../../Content.Shared/_WF/Drydock/WFLandingThrusterRefit.cs)
 - [`Content.Shared/_WF/Drydock/WFPartRatingRefit.cs`](../../../Content.Shared/_WF/Drydock/WFPartRatingRefit.cs)
 - [`Content.Shared/_WF/Drydock/WFShipRefitEffect.cs`](../../../Content.Shared/_WF/Drydock/WFShipRefitEffect.cs)
@@ -221,6 +270,8 @@ Mk IV manipulators on stock bins draw 30 kW.
 
 ### Integration tests
 
+- [`Content.IntegrationTests/Tests/_WF/Drydock/ChopShopTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Drydock/ChopShopTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Drydock/DrydockDurasteelTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Drydock/DrydockDurasteelTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Drydock/DrydockHailTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Drydock/DrydockHailTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Drydock/DrydockTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Drydock/DrydockTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Drydock/MobileDrydockBerthTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Drydock/MobileDrydockBerthTest.cs)
@@ -229,10 +280,13 @@ Mk IV manipulators on stock bins draw 30 kW.
 - [`Content.IntegrationTests/Tests/_WF/Drydock/MobileDrydockSiloTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Drydock/MobileDrydockSiloTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Drydock/MobileDrydockTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Drydock/MobileDrydockTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/Drydock/MobileDrydockUpgradeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Drydock/MobileDrydockUpgradeTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/Drydock/ShipbreakerWarrantTest.cs`](../../../Content.IntegrationTests/Tests/_WF/Drydock/ShipbreakerWarrantTest.cs)
 
 ### Prototypes
 
+- [`Resources/Prototypes/_WF/Drydock/chopshop.yml`](../../../Resources/Prototypes/_WF/Drydock/chopshop.yml)
 - [`Resources/Prototypes/_WF/Drydock/consoles.yml`](../../../Resources/Prototypes/_WF/Drydock/consoles.yml)
+- [`Resources/Prototypes/_WF/Drydock/construction.yml`](../../../Resources/Prototypes/_WF/Drydock/construction.yml)
 - [`Resources/Prototypes/_WF/Drydock/cranes.yml`](../../../Resources/Prototypes/_WF/Drydock/cranes.yml)
 - [`Resources/Prototypes/_WF/Drydock/dockmaster.yml`](../../../Resources/Prototypes/_WF/Drydock/dockmaster.yml)
 - [`Resources/Prototypes/_WF/Drydock/lathe_recipes.yml`](../../../Resources/Prototypes/_WF/Drydock/lathe_recipes.yml)
@@ -242,10 +296,12 @@ Mk IV manipulators on stock bins draw 30 kW.
 - [`Resources/Prototypes/_WF/Drydock/refits.yml`](../../../Resources/Prototypes/_WF/Drydock/refits.yml)
 - [`Resources/Prototypes/_WF/Drydock/salvage.yml`](../../../Resources/Prototypes/_WF/Drydock/salvage.yml)
 - [`Resources/Prototypes/_WF/Drydock/sounds.yml`](../../../Resources/Prototypes/_WF/Drydock/sounds.yml)
+- [`Resources/Prototypes/_WF/Drydock/vouchers.yml`](../../../Resources/Prototypes/_WF/Drydock/vouchers.yml)
 
 ### Localization
 
 - [`Resources/Locale/en-US/_WF/Drydock/drydock-booking.ftl`](../../../Resources/Locale/en-US/_WF/Drydock/drydock-booking.ftl)
+- [`Resources/Locale/en-US/_WF/Drydock/drydock-chopshop.ftl`](../../../Resources/Locale/en-US/_WF/Drydock/drydock-chopshop.ftl)
 - [`Resources/Locale/en-US/_WF/Drydock/drydock-console-ui.ftl`](../../../Resources/Locale/en-US/_WF/Drydock/drydock-console-ui.ftl)
 - [`Resources/Locale/en-US/_WF/Drydock/drydock-console.ftl`](../../../Resources/Locale/en-US/_WF/Drydock/drydock-console.ftl)
 - [`Resources/Locale/en-US/_WF/Drydock/drydock-crane.ftl`](../../../Resources/Locale/en-US/_WF/Drydock/drydock-crane.ftl)
@@ -258,12 +314,19 @@ Mk IV manipulators on stock bins draw 30 kW.
 
 ### Maps
 
+- [`Resources/Maps/_WF/Drydock/chopshop.yml`](../../../Resources/Maps/_WF/Drydock/chopshop.yml)
 - [`Resources/Maps/_WF/Drydock/drydock.yml`](../../../Resources/Maps/_WF/Drydock/drydock.yml)
 
 ## Non-modular edits
 
+- [`Content.Server/_Crescent/Hardpoint/HardpointSystem.cs`](../../_Crescent/Hardpoint/HardpointSystem.cs): a queued grid with no fire control (a station, debris) returned instead of skipping,
+- [`Content.Shared/_Crescent/Hardpoints/SharedHardpointSystem.cs`](../../../Content.Shared/_Crescent/Hardpoints/SharedHardpointSystem.cs): a destroyed gun leaves a dead entry behind, which blocked rebuilt guns
 - [`Content.Shared/Construction/SharedFlatpackSystem.cs`](../../../Content.Shared/Construction/SharedFlatpackSystem.cs): salvaged hardware unpacks damaged
 - [`Resources/Prototypes/_Mono/Entities/Objects/Devices/ship_vouchers.yml`](../../../Resources/Prototypes/_Mono/Entities/Objects/Devices/ship_vouchers.yml): single use, so a drydock repair undercuts printing another card
+- [`Resources/Prototypes/_Mono/Entities/Structures/Power/Generators/generators.yml`](../../../Resources/Prototypes/_Mono/Entities/Structures/Power/Generators/generators.yml): build cost the drydock prices the reactor's rebuild and salvage from
+- [`Resources/Prototypes/Catalog/Cargo/cargo_engines.yml`](../../../Resources/Prototypes/Catalog/Cargo/cargo_engines.yml): above the ~10k a drydock break pays for the controller, mostly its fissile; was 6000
+- [`Resources/Prototypes/Entities/Structures/Power/Generation/ame.yml`](../../../Resources/Prototypes/Entities/Structures/Power/Generation/ame.yml): build cost the drydock prices the controller's rebuild and salvage from
+- [`Resources/Prototypes/Recipes/Construction/Graphs/utilities/ame_shielding.yml`](../../../Resources/Prototypes/Recipes/Construction/Graphs/utilities/ame_shielding.yml): build cost the drydock prices the shielding's rebuild and salvage from; no recipe uses it
 - [`Resources/Prototypes/Recipes/Lathes/Packs/science.yml`](../../../Resources/Prototypes/Recipes/Lathes/Packs/science.yml): mobile drydock boards
 - [`Resources/Prototypes/Research/industrial.yml`](../../../Resources/Prototypes/Research/industrial.yml): mobile drydock boards
 

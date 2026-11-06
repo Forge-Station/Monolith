@@ -16,6 +16,30 @@ external:
 # Edits outside _WF that can't hold a WOLFGATE marker: JSON, images, audio, rich-text .txt and map files.
 # Each entry has a path (a file, a folder or a glob), the module it serves (null for a standalone edit) and a reason.
 unmarked:
+  - path: Resources/Maps/Shuttles/dart.yml
+    module: Cloning
+    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
+  - path: Resources/Maps/Shuttles/emergency_raven.yml
+    module: Cloning
+    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: Cloning
+    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
+  - path: Resources/Maps/_Mono/ShuttleEvent/asakim_medium.yml
+    module: Cloning
+    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
+  - path: Resources/Maps/_Mono/ShuttleEvent/asakim_small.yml
+    module: Cloning
+    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
+  - path: Resources/Maps/centcomm.yml
+    module: Cloning
+    reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.
+  - path: Resources/Maps/_Mono/POI/pdvhelios.yml
+    module: LiveFixes
+    reason: Removed saved configurator lists that held invalid entity references.
+  - path: Resources/Fonts/ComicNeue
+    module: Clown
+    reason: Comic Neue font and its OFL licence for the Clown trait speech.
   - path: .config/dotnet-tools.json
     module: null
     reason: dotnet-ef local tool manifest (pinned 10.0.12) for generating EF migrations.
@@ -66,7 +90,10 @@ unmarked:
     reason: Avali equipped states added (meta.json re-serialised).
   - path: Resources/Textures/Clothing/Head/Hardsuits/maxim.rsi/
     module: Species
-    reason: Avali equipped states added (meta.json re-serialised).
+    reason: Avali, Vulpkanin and Feroxi equipped states added.
+  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/maxim_prototype.rsi/
+    module: Species
+    reason: Vulpkanin and Feroxi equipped states added.
   - path: Resources/Textures/Clothing/Head/Hardsuits/medical.rsi/
     module: Species
     reason: Avali equipped states added (meta.json re-serialised).
@@ -208,6 +235,9 @@ unmarked:
   - path: Resources/Fonts/_Starlight/
     module: Species
     reason: Starlight fonts, ported in #14 (Customisation Update).
+  - path: Resources/Fonts/_DS13/
+    module: Remade
+    reason: DS13's Shage Marker-script font (CC-BY 3.0, BlueNexus) for the Monolith Tap's glyphs.
   - path: Resources/Maps/_Mono/ShuttleEvent/Xeno/
     module: Xenoborgs
     reason: Xenoborg shuttle event maps, ported from Monolith #4558.
@@ -271,9 +301,42 @@ unmarked:
   - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
     module: Traders
     reason: NPC traders, ATMs, deposit consoles and vents placed on the Central Command map.
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: MilitaryVehicles
+    reason: The military outfitter counter placed beside the ATMs on the Central Command map.
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: Minigames
+    reason: Two game hosts, the dealer and the riddle sage, seated at the bar lounge tables.
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: Planets
+    reason: A weather forecast computer beside the station radar console.
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: BritishFood
+    reason: Mrs. Luvvit's Pie & Mash in the trade hall kiosk row, in place of a potted plant and its front pane.
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: TradeGoods
+    reason: Both Exped chutes become CC chutes, so every chute on the station pays from one table.
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: null
+    reason: Sector map entity gets its Parallax component and Colossus Sector name back after the #427 re-save dropped them.
+  - path: Resources/Maps/_Mono/Outpost/caelestinus_central.yml
+    module: Contracts
+    reason: Contract boards with pickup pads at the central plaza and beside each of the six dock arms.
+  - path: Resources/Maps/_Mono/POI/tsfmchalcyon.yml
+    module: Contracts
+    reason: TSF faction contract boards with pickup pads in the arrival hall, by both west public docks and the navy dock hall.
+  - path: Resources/Maps/_Mono/POI/camelot.yml
+    module: Contracts
+    reason: USSP faction contract boards with pickup pads off the warp corridor and by the north-west and south-west docks.
+  - path: Resources/Maps/_Mono/POI/pdvhelios.yml
+    module: Contracts
+    reason: PDV faction contract boards with pickup pads in the civilian arm by the west docks and in the cargo bay.
   - path: Resources/Maps/_Mono/POI/underground.yml
     module: LockableButtons
     reason: The two blast door buttons take Underground access; the station's crew has no Pirate access.
+  - path: Resources/Maps/_Mono/POI/underground.yml
+    module: TradeGoods
+    reason: The fence chute and the smuggling-crate vendor in the cargo bay, beside the sell pallets.
   - path: Resources/Maps/_Mono/POI/tsfmc_industry.yml
     module: null
     reason: Stellar Blessing lighting, colour-coded distro, fire suit lockers and extinguishers.
@@ -283,6 +346,18 @@ unmarked:
   - path: Resources/Maps/_Mono/POI/Dungeons/zvezda.yml
     module: null
     reason: Zvezda lighting re-work and power generation.
+  - path: Resources/Maps/_Mono/POI/Dungeons/zvezda.yml
+    module: TradeGoods
+    reason: A trade-goods vendor in the cargo bay, beside the turn-in chute.
+  - path: Resources/Maps/_Mono/POI/tsfmchalcyon.yml
+    module: TradeGoods
+    reason: A trade-goods vendor in the reception lobby, by the turn-in chute.
+  - path: Resources/Maps/_Mono/POI/tsfmchalcyon_hw.yml
+    module: TradeGoods
+    reason: A trade-goods vendor in the reception lobby, by the turn-in chute.
+  - path: Resources/Maps/_Mono/POI/hokkaido.yml
+    module: TradeGoods
+    reason: A turn-in chute and a trade goods vendor in the north cargo room, so the station is a market.
   - path: Resources/Textures/Tiles/exoborg.png
     module: Xenoborgs
     reason: Exoborg floor tile redrawn.
@@ -2194,6 +2269,12 @@ unmarked:
   - path: Resources/Maps/_NF/POI/medical.yml
     module: Wolfmed
     reason: An autodoc pod placed in the medical POI.
+  - path: Resources/Maps/_NF/POI/cargodepot.yml
+    module: TradeGoods
+    reason: A market console and crate machine, so what a depot buys can be bought back there.
+  - path: Resources/Maps/_NF/POI/cargodepotalt.yml
+    module: TradeGoods
+    reason: A market console and crate machine, so what a depot buys can be bought back there.
   - path: Resources/Textures/Effects/fire.rsi/
     module: BetterFire
     reason: Object fire state (fire) replaced with TauCeti generic_overlay.
@@ -2209,60 +2290,54 @@ unmarked:
   - path: Resources/Audio/_Mono/RadioStation/
     module: null
     reason: Nulb vinyl tracks (Monolith#4835) re-encoded to mono Vorbis q0 to cut download size.
+  - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/guppy.yml
+    module: Shipyard
+    reason: Saved with its air filled in; the starter ship spawned as vacuum.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/MotleyAnne/inertia.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/MotleyAnne/mock.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/MotleyAnne/snakelet.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/bazalt.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/europa.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/gadfly.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/kortik_em.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/kortik_r.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/kresta.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/kynda.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
-  - path: Resources/SharedMaps/_Mono/Shuttles/PDV/layak.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
-  - path: Resources/SharedMaps/_Mono/Shuttles/PDV/motleyanne.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/neptune.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/ontos.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/osa.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
-  - path: Resources/SharedMaps/_Mono/Shuttles/PDV/saturn.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/scorpion.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/PDV/tethys.yml
-    module: ShipArmor
-    reason: PDV hull refit from plastitanium to adamantite walls.
+    module: null
+    reason: PDV pack hull, back to Monolith's plastitanium walls after the adamantite refit was reverted.
   - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/caracara.yml
     module: null
     reason: PDV pack, top-left thruster was mapped disabled.
@@ -2284,6 +2359,12 @@ unmarked:
   - path: Resources/SharedMaps/_Mono/Shuttles/CivilianExp/pelican.yml
     module: AsteroidMining
     reason: Its M25 mining pulsar is swapped for the M12 Prospector, the light asteroid mining laser.
+  - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/arribane.yml
+    module: AsteroidMining
+    reason: Its M25 mining pulsars are swapped for M12 Prospectors, the light asteroid mining laser.
+  - path: Resources/SharedMaps/_Mono/Shuttles/Civilian/rosetta.yml
+    module: AsteroidMining
+    reason: Its Apollo mining laser is swapped for the M40 Prospector, the heavy asteroid mining laser.
   - path: Resources/Maps/_Mono/Bluespace/prefracture.yml
     module: null
     reason: Hardpoints mapped under the Unidentified Vessel's Scythe, Sunder and Flayer guns so gunnery links them.
@@ -2383,6 +2464,9 @@ unmarked:
   - path: Resources/Textures/_NF/Objects/Tiles/woodtile.rsi/
     module: DecorImport
     reason: Floor tile item sprites, ported from Frontier.
+  - path: Resources/Textures/_NF/Structures/Wallmounts/trophies.rsi/
+    module: DecorImport
+    reason: Decor sprites, ported from Frontier.
   - path: Resources/Audio/_DV/CosmicCult/
     module: DecorImport
     reason: Door sounds, ported from Delta-V.
@@ -2533,6 +2617,9 @@ unmarked:
   - path: Resources/Textures/_RMC14/Objects/Medical/
     module: DecorImport
     reason: Decor sprites, ported from RMC-14.
+  - path: Resources/Textures/_RMC14/Objects/Misc/Janitorial/cart_wreck.rsi/
+    module: DecorImport
+    reason: Decor sprites, ported from RMC-14.
   - path: Resources/Textures/_RMC14/Structures/Flora/
     module: DecorImport
     reason: Decor sprites, ported from RMC-14.
@@ -2542,6 +2629,18 @@ unmarked:
   - path: Resources/Textures/_RMC14/Structures/Wallmounts/Lighting/
     module: DecorImport
     reason: Decor sprites, ported from RMC-14.
+  - path: Resources/Textures/_RMC14/Structures/hybrisa_misc_props/64x64.rsi/
+    module: DecorImport
+    reason: Decor sprites, ported from RMC-14.
+  - path: Resources/Textures/_RMC14/Structures/overhead_neon_signs.rsi/
+    module: DecorImport
+    reason: Neon sign sprites, ported from RMC-14.
+  - path: Resources/Textures/_RMC14/Structures/overhead_signs.rsi/
+    module: DecorImport
+    reason: Sign sprites, ported from RMC-14.
+  - path: Resources/Textures/_RMC14/Effects/LightMasks/
+    module: DecorImport
+    reason: Light mask for the neon signs, ported from RMC-14.
   - path: Resources/Textures/_RMC14/Structures/Doors/
     module: DecorImport
     reason: Door sprites, ported from RMC-14.
@@ -2569,6 +2668,9 @@ unmarked:
   - path: Resources/Textures/_RMC14/Structures/Machines/drop_pod.rsi/
     module: DecorImport
     reason: Drop pod sprites, ported from RMC-14.
+  - path: Resources/Textures/_RMC14/Structures/fences.rsi/
+    module: DecorImport
+    reason: Fence sprites, ported from RMC-14.
   - path: Resources/Textures/_RMC14/Tiles/almayer/
     module: DecorImport
     reason: Tile sprites, ported from RMC-14.
@@ -2737,3 +2839,159 @@ unmarked:
   - path: Resources/Maps/elkridge.yml
     module: Xenoarch
     reason: Removed the mapped artifact's BiasedArtifact component, which no longer exists.
+  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd.rsi/
+    module: null
+    reason: Licence and credit set as in HardLight 0fc067be74.
+  - path: Resources/Maps/Dungeon/haunted.yml
+    module: null
+    reason: Removed every chasm.
+  - path: Resources/Maps/Dungeon/mineshaft.yml
+    module: null
+    reason: Removed every chasm.
+  - path: Resources/Maps/_Mono/Crocus/jianghui_industrial_0.yml
+    module: null
+    reason: Removed every chasm.
+  - path: Resources/Maps/_Mono/Crocus/jianghui_industrial_1.yml
+    module: null
+    reason: Removed every chasm.
+  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd_combat.rsi/
+    module: null
+    reason: Licence and credit set as in HardLight 0fc067be74.
+  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd_command.rsi/
+    module: null
+    reason: Licence and credit set as in HardLight 0fc067be74.
+  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd_experimental.rsi/
+    module: null
+    reason: Licence and credit set as in HardLight 0fc067be74.
+  - path: Resources/Textures/_NF/Clothing/Head/Hardsuits/nfsd_sheriff.rsi/
+    module: null
+    reason: Licence and credit set as in HardLight 0fc067be74.
+  - path: LICENSES/MIT.txt
+    module: null
+    reason: Copyright lines for both holders of the MIT code, Space Wizards and New Frontiers.
+  - path: LICENSES/LicenseRef-Starlight.txt
+    module: null
+    reason: Starlight licence text, required by the Starlight-licensed code under _Starlight and _FarHorizons.
+  - path: Resources/Textures/Objects/Fun/rubber_hammer.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/Objects/Misc/chopstick.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/Structures/Power/Generation/Singularity/collector.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/Structures/Power/cell_recharger.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/nuclear_reactor.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_component_cap.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/turbine.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_Goobstation/Objects/Misc/RadioStation/vinyls.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_Goobstation/Objects/Misc/RadioStation/vinylsleeves.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_Goobstation/Objects/Weapons/Guns/Battery/lawbringer.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_Goobstation/Structures/Machines/StationRadio/radiostationrig.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_Goobstation/Structures/Machines/StationRadio/stationradioserver.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_Goobstation/Structures/Machines/StationRadio/tapedeck.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_Goobstation/Structures/Machines/StationRadio/vinylplayer.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_NF/Effects/mobspawn.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_NF/Structures/Machines/scrap_processor.rsi/
+    module: null
+    reason: Licence corrected to CC-BY-NC-SA-3.0, as the sprite is taken from Goonstation, whose assets are BY-NC-SA.
+  - path: Resources/Textures/_Lavaland/Mobs/
+    module: Fauna
+    reason: Lavaland mob sprites, ported from Goob Station.
+  - path: Resources/Textures/_Impstation/Mobs/Aliens/bigfish.rsi/
+    module: Fauna
+    reason: Fiend-fish sprite, ported from Impstation.
+  - path: Resources/Textures/_Impstation/Mobs/Animals/Magic/curse.rsi/
+    module: Fauna
+    reason: Bad omen and augury sprites, ported from Impstation.
+  - path: Resources/Textures/_Impstation/Magic/curse.rsi/
+    module: Fauna
+    reason: Augury tentacle sprites, ported from Impstation.
+  - path: Resources/Textures/_Impstation/Clothing/OuterClothing/Coats/vrex_fur_coat.rsi/
+    module: Fauna
+    reason: V-rex fur coat sprite, the v-rex butcher drop, ported from Impstation.
+  - path: Resources/Textures/_Funkystation/Mobs/
+    module: Fauna
+    reason: Meowl and zleeb sprites, ported from Starlight.
+  - path: Resources/Textures/_Starlight/Mobs/Animals/Hellmobs/
+    module: Fauna
+    reason: Mi-go sprite, ported from Starlight.
+  - path: Resources/Textures/_Goobstation/Wizard/Mobs/
+    module: Fauna
+    reason: Otherthing sprite, ported from Goob Station.
+  - path: Resources/Textures/Mobs/Aliens/hivebot.rsi/
+    module: Fauna
+    reason: Hivebot sprite, ported from Space Wizards.
+  - path: Resources/Textures/_Nuclear14/Mobs/
+    module: Fauna
+    reason: Sporeplant and cazador sprites, ported from Nuclear 14.
+  - path: Resources/Textures/_Starlight/Mobs/Abyss/
+    module: Fauna
+    reason: Elder and abyss worm sprites, ported from Starlight.
+  - path: Resources/Textures/_Goobstation/Mobs/Animals/
+    module: Fauna
+    reason: Abyss crawler sprite, ported from Goob Station.
+  - path: Resources/Textures/_Goobstation/Wraith/Mobs/
+    module: Fauna
+    reason: Mechanical monstrosity sprites, ported from Goob Station.
+  - path: Resources/Textures/ADT/Mobs/Aliens/
+    module: Fauna
+    reason: Spitter and space emperor sprites, ported from ADT.
+  - path: Resources/Textures/ADT/Interface/Actions/space_emperor.rsi/
+    module: Fauna
+    reason: Space emperor light action icons, ported from ADT.
+  - path: Resources/Textures/_Impstation/Mobs/Aliens/vrex.rsi/
+    module: Fauna
+    reason: V-rex sprite, ported from Impstation.
+  - path: Resources/Textures/_Impstation/Mobs/Aliens/weirdshrimp.rsi/
+    module: Fauna
+    reason: Weird shrimp sprite, ported from Impstation.
+  - path: Resources/Textures/_EinsteinEngines/Mobs/Animals/squackroach.rsi/
+    module: Fauna
+    reason: Squackroach sprite, ported from Einstein Engines.
+  - path: Resources/Audio/_Impstation/Animals/vrex_roar.ogg
+    module: Fauna
+    reason: V-rex roar, ported from Impstation.
+  - path: Resources/Audio/_Impstation/Voice/Dino/
+    module: Fauna
+    reason: Dinosaur voice sounds, ported from Impstation.
+  - path: Resources/Audio/_Impstation/Magic/cursespawn.ogg
+    module: Fauna
+    reason: Bad omen spawn sound, ported from Impstation.
+  - path: Resources/Audio/_Goobstation/Animals/breath1.ogg
+    module: Fauna
+    reason: Abyss crawler breathing, ported from Goob Station.
+  - path: Resources/Audio/_Goobstation/Wraith/
+    module: Fauna
+    reason: Mechanical monstrosity laugh and hit sounds, ported from Goob Station.
+  - path: Resources/Audio/_CP14/Animals/
+    module: Fauna
+    reason: Dinosaur calls, ported from CrystallEdge.

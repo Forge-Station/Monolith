@@ -20,7 +20,7 @@ Reavers running in the same round.
 - **It never touches population centres.** The ADS never claims, contests or blockades a cell that holds a station
   (Asset Preservation Directive; `blockades: false`), so every station stays a safe harbour and the front can never
   reach the core.
-- **It never fires first, and it never turns on itself.** Its crews are Veteran and its hulls are plated in adamantite
+- **It never fires first, and it never turns on itself.** Its crews are Veteran and its hulls are plated in durasteel
   (the profile swaps the plastitanium in), so what it does fight it outlasts; but nobody is shot at who has not said YES
   or opened fire, and ADS ships never count one another as attackers whatever fire passes between them (`forgivesOwn`).
 - **It stands still.** Nodes are gun platforms that never leave their cell. Sentinels circle the node and sweeps fly

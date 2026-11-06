@@ -53,7 +53,7 @@ public sealed partial class WFCrewProfilePrototype : IPrototype
     [DataField]
     public Dictionary<ProtoId<WFCrewRolePrototype>, LocId> Titles = new();
 
-    /// <summary>Hull parts swapped out when a ship is crewed with this profile: a pirate hull loses its adamantite for plastitanium.</summary>
+    /// <summary>Hull parts swapped out when a ship is crewed with this profile: a pirate hull loses its durasteel for plastitanium.</summary>
     [DataField]
     public Dictionary<EntProtoId, EntProtoId> HullSwaps = new();
 }

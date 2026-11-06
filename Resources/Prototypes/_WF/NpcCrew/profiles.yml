@@ -362,12 +362,12 @@
   id: WFCrewProfilePirate
   firstNames: WFNamesPirateFirst
   lastNames: WFNamesPirateLast
-  # Pirates never fly adamantite: the black-market hulls' armour is swapped for plain plastitanium when they crew one.
+  # Pirates never fly durasteel: any durasteel plating is swapped for plain plastitanium when they crew a hull.
   hullSwaps:
-    WFWallAdamantite: WallPlastitanium
-    WFWallAdamantiteDiagonal: WallPlastitaniumDiagonal
-    WFWallAdamantiteCapital: WallPlastitanium
-    WFWallAdamantiteDiagonalCapital: WallPlastitaniumDiagonal
+    WFWallDurasteel: WallPlastitanium
+    WFWallDurasteelDiagonal: WallPlastitaniumDiagonal
+    WFWallDurasteelCapital: WallPlastitaniumCapital
+    WFWallDurasteelDiagonalCapital: WallPlastitaniumDiagonalCapital
   components:
   - type: PirateAccent
   - type: WFCrewSuitUp

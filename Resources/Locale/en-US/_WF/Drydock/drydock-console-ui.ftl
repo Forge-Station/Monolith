@@ -99,6 +99,9 @@ drydock-upgrade-power = Power systems
 drydock-upgrade-landing-thrusters = Atmospheric thrusters
 drydock-upgrade-landing-thrusters-mark = for atmosphere
 drydock-upgrade-landing-thrusters-lamp = ATMO
+drydock-upgrade-durasteel = Durasteel plating
+drydock-upgrade-durasteel-mark = with durasteel
+drydock-upgrade-durasteel-lamp = DURA
 
 drydock-console-materials-none = none
 drydock-console-material-amount = { $name } { $sheets }

@@ -436,13 +436,14 @@ public sealed partial class WFDrydockSystem : EntitySystem
 
         var entity = Spawn(data.EntityPalette[spec.ProtoIndex].Id, new EntityCoordinates(ship, spec.LocalPosition));
         _transform.SetLocalRotation(entity, spec.Rotation);
-        // Rebuilds spawn stock; reapply the ship's owned refits, which the quote charged for.
+        spec.OriginalEntity = GetNetEntity(entity);
+        Dirty(ship, data);
+        // Rebuilds spawn stock; reapply the ship's owned refits, which the quote charged for. A refit that replaces the
+        // entity, as hull plating does, repoints the spec itself.
         foreach (var (refit, owned) in _refits.Owned(ship))
         {
             _refits.Apply(refit, entity, owned.Tier);
         }
-        spec.OriginalEntity = GetNetEntity(entity);
-        Dirty(ship, data);
     }
 
     private void ApplyHeal(WFDrydockWorkItem item)

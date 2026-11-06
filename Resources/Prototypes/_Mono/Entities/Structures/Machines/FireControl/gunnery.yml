@@ -48,6 +48,7 @@
     id: GunneryServer
   - type: StaticPrice
     price: 200
+  - type: TargetSeekingTarget # Forge-Change
 
 - type: entity
   id: GunneryServerLow

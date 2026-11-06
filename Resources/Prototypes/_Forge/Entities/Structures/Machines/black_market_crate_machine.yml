@@ -1,4 +1,5 @@
 - type: entity
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible]
   id: BlackMarketCrateMachine
   name: black market cargo lift
   description: Delivers contraband crates for the black market console.

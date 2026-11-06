@@ -43,6 +43,14 @@ public sealed partial class OrePipeSystem : EntitySystem
 
     private TimeSpan _nextFlush;
 
+    /// <summary>
+    /// CanDrillOperate used to BFS the whole disposal network every drill tick (0.25s).
+    /// Cache positive/negative results briefly — pipe layout does not change that often.
+    /// </summary>
+    private static readonly TimeSpan PipePathCacheDuration = TimeSpan.FromSeconds(2);
+
+    private readonly Dictionary<EntityUid, (TimeSpan Expiry, bool Ok)> _pipePathCache = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -51,6 +59,12 @@ public sealed partial class OrePipeSystem : EntitySystem
         SubscribeLocalEvent<OrePipeInletComponent, ExaminedEvent>(OnInletExamined);
         SubscribeLocalEvent<OrePipeBufferComponent, ExaminedEvent>(OnBufferExamined);
         SubscribeLocalEvent<OrePipeOutletComponent, ExaminedEvent>(OnOutletExamined);
+        SubscribeLocalEvent<OrePipeInletComponent, ComponentShutdown>(OnInletShutdown);
+    }
+
+    private void OnInletShutdown(EntityUid uid, OrePipeInletComponent component, ComponentShutdown args)
+    {
+        _pipePathCache.Remove(uid);
     }
 
     private void OnInletExamined(EntityUid uid, OrePipeInletComponent component, ExaminedEvent args)
@@ -115,11 +129,17 @@ public sealed partial class OrePipeSystem : EntitySystem
         if (buffer.TotalCount >= buffer.MaxTotalCount)
             return false;
 
-        // Forge-Change: Verify there's a valid closed pipe path from drill to an outlet/hold
-        if (!IsPipePathClosed(trunk))
-            return false;
+        // Forge-Change: Verify there's a valid closed pipe path from drill to an outlet/hold.
+        // Cached — full BFS every 0.25s per drill was a large server CPU cost during mining.
+        var now = _timing.CurTime;
+        if (_pipePathCache.TryGetValue(drill, out var cached) && cached.Expiry > now)
+            return cached.Ok;
 
-        return true;
+        var ok = IsPipePathClosed(trunk);
+        // Failures expire faster so reconnecting pipes starts the drill promptly.
+        var ttl = ok ? PipePathCacheDuration : TimeSpan.FromSeconds(0.5);
+        _pipePathCache[drill] = (now + ttl, ok);
+        return ok;
     }
 
     public bool TryDepositOre(EntityUid uid, EntProtoId oreProto, int count, OrePipeBufferComponent? buffer = null)

@@ -32,6 +32,11 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<BallisticAmmoProviderComponent, AfterInteractEvent>(OnBallisticAfterInteract);
         SubscribeLocalEvent<BallisticAmmoProviderComponent, AmmoFillDoAfterEvent>(OnBallisticAmmoFillDoAfter);
         SubscribeLocalEvent<BallisticAmmoProviderComponent, UseInHandEvent>(OnBallisticUse);
+
+        // Forge-Change-start: sync Entities with ballistic-ammo container (Entities is no longer AutoNetworked).
+        SubscribeLocalEvent<BallisticAmmoProviderComponent, EntInsertedIntoContainerMessage>(OnBallisticEntInserted);
+        SubscribeLocalEvent<BallisticAmmoProviderComponent, EntRemovedFromContainerMessage>(OnBallisticEntRemoved);
+        // Forge-Change-end
     }
 
     private void OnBallisticUse(EntityUid uid, BallisticAmmoProviderComponent component, UseInHandEvent args)
@@ -60,7 +65,7 @@ public abstract partial class SharedGunSystem
         Audio.PlayPredicted(component.SoundInsert, uid, args.User);
         args.Handled = true;
         UpdateBallisticAppearance(uid, component);
-        DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
+        // Forge-Change: Entities no longer AutoNetworked — container sync is enough.
     }
 
     private void OnBallisticAfterInteract(EntityUid uid, BallisticAmmoProviderComponent component, AfterInteractEvent args)
@@ -260,6 +265,11 @@ public abstract partial class SharedGunSystem
     private void OnBallisticInit(EntityUid uid, BallisticAmmoProviderComponent component, ComponentInit args)
     {
         component.Container = Containers.EnsureContainer<Container>(uid, "ballistic-ammo");
+
+        // Forge-Change-start: Entities is local-only; mirror ballistic-ammo container.
+        SyncBallisticEntitiesFromContainer(component);
+        // Forge-Change-end
+
         // TODO: This is called twice though we need to support loading appearance data (and we need to call it on MapInit
         // to ensure it's correct).
         UpdateBallisticAppearance(uid, component);
@@ -279,13 +289,15 @@ public abstract partial class SharedGunSystem
 
     protected int GetBallisticShots(BallisticAmmoProviderComponent component)
     {
+        // Forge-Change: Entities is not networked — keep it aligned with the container before counting.
+        SyncBallisticEntitiesFromContainer(component);
         return component.Entities.Count + (component.InfiniteUnspawned ? 0 : component.UnspawnedCount); // Mono
     }
 
     private void OnBallisticTakeAmmo(EntityUid uid, BallisticAmmoProviderComponent component, TakeAmmoEvent args)
     {
         // Forge-Change-start
-        PruneInvalidBallisticEntities(uid, component);
+        SyncBallisticEntitiesFromContainer(component);
         // Forge-Change-end
 
         for (var i = 0; i < args.Shots; i++)
@@ -294,12 +306,6 @@ public abstract partial class SharedGunSystem
 
             if (component.Entities.Count > 0)
             {
-                // Forge-Change-start
-                PruneInvalidBallisticEntities(uid, component);
-                if (component.Entities.Count == 0)
-                    continue;
-                // Forge-Change-end
-
                 entity = component.Entities[^1];
 
                 args.Ammo.Add((entity, EnsureShootable(entity)));
@@ -308,7 +314,6 @@ public abstract partial class SharedGunSystem
                     break;
 
                 component.Entities.RemoveAt(component.Entities.Count - 1);
-                DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
                 Containers.Remove(entity, component.Container);
             }
             else if (component.UnspawnedCount > 0
@@ -319,7 +324,8 @@ public abstract partial class SharedGunSystem
                     component.UnspawnedCount--;
                     DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.UnspawnedCount));
                 }
-                entity = Spawn(component.Proto, args.Coordinates);
+                // Forge-Change: PredictedSpawn so chamber ContainerSlot inserts don't warn / block the slot.
+                entity = PredictedSpawnAtPosition(component.Proto, args.Coordinates);
                 args.Ammo.Add((entity, EnsureShootable(entity)));
 
                 // Goobstation - put spent ammo back in the gun if it doesn't autocycle
@@ -327,7 +333,6 @@ public abstract partial class SharedGunSystem
                 {
                     component.Entities.Add(entity);
                     Containers.Insert(entity, component.Container);
-                    DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
                 }
                 // Goobstation - end
             }
@@ -340,7 +345,7 @@ public abstract partial class SharedGunSystem
     private void OnBallisticCheckProto(Entity<BallisticAmmoProviderComponent> ent, ref CheckShootPrototypeEvent args)
     {
         // Forge-Change-start
-        PruneInvalidBallisticEntities(ent, ent.Comp);
+        SyncBallisticEntitiesFromContainer(ent.Comp);
         // Forge-Change-end
 
         if (ent.Comp.Entities.Count > 0)
@@ -355,22 +360,71 @@ public abstract partial class SharedGunSystem
         }
     }
 
-    // Forge-Change-start: remove deleted entities from ballistic tubes (Drake seismic launcher).
-    private void PruneInvalidBallisticEntities(EntityUid uid, BallisticAmmoProviderComponent component)
+    // Forge-Change-start: keep Entities mirrored to ballistic-ammo container (not AutoNetworked).
+    private void OnBallisticEntInserted(EntityUid uid, BallisticAmmoProviderComponent component, EntInsertedIntoContainerMessage args)
     {
-        var changed = false;
+        if (args.Container != component.Container)
+            return;
+
+        if (component.Entities.Contains(args.Entity))
+            return;
+
+        component.Entities.Add(args.Entity);
+        UpdateBallisticAppearance(uid, component);
+    }
+
+    private void OnBallisticEntRemoved(EntityUid uid, BallisticAmmoProviderComponent component, EntRemovedFromContainerMessage args)
+    {
+        if (args.Container != component.Container)
+            return;
+
+        if (!component.Entities.Remove(args.Entity))
+            return;
+
+        UpdateBallisticAppearance(uid, component);
+    }
+
+    /// <summary>
+    /// Mirror <see cref="BallisticAmmoProviderComponent.Entities"/> to the ammo container.
+    /// Needed because Entities is no longer AutoNetworked (avoids PVS MetaData spam after grid wipe).
+    /// </summary>
+    private void SyncBallisticEntitiesFromContainer(BallisticAmmoProviderComponent component)
+    {
+        // Container.Contains asserts InContainer, which ContainerManager only sets on startup.
+        // Map load calls this from ComponentInit, while the shell is already listed in the container.
+        var contained = component.Container.ContainedEntities;
 
         for (var i = component.Entities.Count - 1; i >= 0; i--)
         {
-            if (Exists(component.Entities[i]))
+            var ent = component.Entities[i];
+            if (Exists(ent) && ContainsUid(contained, ent))
                 continue;
 
             component.Entities.RemoveAt(i);
-            changed = true;
         }
 
-        if (changed)
-            DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
+        foreach (var ent in contained)
+        {
+            if (!component.Entities.Contains(ent))
+                component.Entities.Add(ent);
+        }
+    }
+
+    private void PruneInvalidBallisticEntities(EntityUid uid, BallisticAmmoProviderComponent component)
+    {
+        SyncBallisticEntitiesFromContainer(component);
+        UpdateBallisticAppearance(uid, component);
+    }
+
+    private static bool ContainsUid(IReadOnlyList<EntityUid> entities, EntityUid uid)
+    {
+        for (var i = 0; i < entities.Count; i++)
+        {
+            if (entities[i] == uid)
+                return true;
+        }
+
+        return false;
     }
     // Forge-Change-end
 

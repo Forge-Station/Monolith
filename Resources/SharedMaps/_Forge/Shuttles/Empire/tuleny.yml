@@ -4252,7 +4252,7 @@ entities:
     - type: Transform
       pos: -0.5,-2.5
       parent: 1
-- proto: SuitStorageEmpire14m
+- proto: SuitStorageRI14
   entities:
   - uid: 586
     components:

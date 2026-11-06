@@ -1,0 +1,29 @@
+- type: construction    #Reactor-Fix
+  name: Small Nuclear Reactor
+  id: NuclearReactorSmallConstructableCraft
+  description: A small nuclear reactor.
+  icon:
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/small_nuclear_reactor.rsi
+    state: reactor
+  graph: NuclearReactorSmallConstructableGraph
+  startNode: start
+  targetNode: NuclearReactorSmall
+  category: construction-category-structures
+  canBuildInImpassable: true
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction    #Reactor-Fix
+  name: Small Turbine
+  id: TurbineSmallConstructableCraft
+  description: A small turbine.
+  icon:
+    sprite: _Forge/Structures/Power/Generation/FissionGenerator/small_turbine_icon.rsi
+    state: icon
+  graph: TurbineSmallConstructableGraph
+  startNode: start
+  targetNode: TurbineSmall
+  category: construction-category-structures
+  canBuildInImpassable: true
+  objectType: Structure
+  placementMode: SnapgridCenter

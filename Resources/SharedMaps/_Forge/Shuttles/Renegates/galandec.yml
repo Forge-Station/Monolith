@@ -2113,7 +2113,7 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 17
-- proto: AlwaysPoweredlightGreen
+- proto: PoweredlightGreen
   entities:
   - uid: 77
     components:
@@ -2139,7 +2139,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -10.5,-12.5
       parent: 1
-- proto: AlwaysPoweredlightRed
+- proto: PoweredlightRed
   entities:
   - uid: 83
     components:
@@ -2201,7 +2201,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -7.5,13.5
       parent: 1
-- proto: AlwaysPoweredLightSodium
+- proto: PoweredLightSodium
   entities:
   - uid: 95
     components:

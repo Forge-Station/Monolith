@@ -4,9 +4,25 @@
     neck: ClothingNeckIFFOrange
 
 - type: loadout
+  id: ClothingNeckCloakShoulderEmpire
+  equipment:
+    neck: ClothingNeckCloakShoulderEmpire
+
+- type: loadout
+  id: ClothingNeckCloakTrenchEmpire
+  equipment:
+    neck: ClothingNeckCloakTrenchEmpire
+
+- type: loadout
   id: EmpireIFFPurple
   equipment:
     neck: ClothingNeckIFFPurple
+
+- type: loadout
+  id: ClothingNeckCloakVulpcaninCloakEmpire
+  price: 30000
+  equipment:
+    neck: ClothingNeckCloakVulpcaninCloakEmpire
 
 #region Preafect
 - type: loadout
@@ -15,7 +31,6 @@
   # description:
   previewEntity: ClothingNeckCloakEmpirePreafect
   equipment:
-    head: ClothingHeadHatEmpirePreafect
     neck: ClothingNeckCloakEmpirePreafect
 
 - type: loadout
@@ -25,7 +40,6 @@
   previewEntity: ClothingNeckCloakEmpirePreafectOrange
   price: 500
   equipment:
-    head: ClothingHeadHatEmpirePreafectOrange
     neck: ClothingNeckCloakEmpirePreafectOrange
 
 - type: loadout
@@ -35,7 +49,6 @@
   previewEntity: ClothingNeckCloakEmpirePreafectViolet
   price: 500
   equipment:
-    head: ClothingHeadHatEmpirePreafectViolet
     neck: ClothingNeckCloakEmpirePreafectViolet
 
 - type: loadout

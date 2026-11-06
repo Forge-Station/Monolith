@@ -35,6 +35,10 @@ namespace Content.Server.Atmos.Portable
             Gas.BZ, //Funky/Goob
             Gas.Healium, //Funky/Goob
 			Gas.Nitrium, //Funky/Goob
+            Gas.N611, //Forge-change
+            Gas.N611P, //Forge-change
+            Gas.A517, //Forge-change
+            Gas.V903, //Forge-change
         };
 
         [ViewVariables(VVAccess.ReadWrite)]

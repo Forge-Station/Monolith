@@ -44,7 +44,7 @@ public sealed partial class NFAdventureRuleSystem : GameRuleSystem<NFAdventureRu
 
     private readonly HttpClient _httpClient = new();
 
-    private readonly ProtoId<GamePresetPrototype> _fallbackPresetID = "NFPirates";
+    private readonly ProtoId<GamePresetPrototype> _fallbackPresetID = "MonoMixed"; // Forge
 
     private const int LeaderboardLimit = 20;
 

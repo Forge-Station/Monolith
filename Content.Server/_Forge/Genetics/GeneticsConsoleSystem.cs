@@ -146,6 +146,8 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             case GeneticsConsoleAction.Irradiate:
                 if (!hasOccupant || ent.Comp.Scanner is not { } irradiateScanner)
                     break;
+                if (!_genetics.TryEnsureCanModifyGenes(occupant))
+                    break;
                 if (!TryComp<DnaModifierScannerComponent>(irradiateScanner, out var irradiateComp) ||
                     !_scanner.TryConsumeMutagen(irradiateScanner, irradiateComp.IrradiateCost, irradiateComp))
                 {
@@ -156,7 +158,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
                 _genetics.IrradiateSubject(occupant);
                 break;
             case GeneticsConsoleAction.Activate:
-                if (!hasOccupant)
+                if (!hasOccupant || !_genetics.TryEnsureCanModifyGenes(occupant))
                     break;
                 if (args.GeneId != null && Enum.TryParse(args.GeneId, out GeneBranch expressBranch))
                     _genetics.TryExpressBranch(occupant, expressBranch);
@@ -164,7 +166,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
                     _genetics.TryActivateGene(occupant, args.GeneId);
                 break;
             case GeneticsConsoleAction.Deactivate:
-                if (!hasOccupant)
+                if (!hasOccupant || !_genetics.TryEnsureCanModifyGenes(occupant))
                     break;
                 if (args.GeneId != null && Enum.TryParse(args.GeneId, out GeneBranch dropBranch))
                     _genetics.TryDeactivateBranch(occupant, dropBranch, requireAssembled: true);
@@ -191,6 +193,8 @@ public sealed class GeneticsConsoleSystem : EntitySystem
                 break;
             case GeneticsConsoleAction.PulseBlock:
                 if (!hasOccupant || args.GeneId == null || args.BlockIndex is not { } block)
+                    break;
+                if (!_genetics.TryEnsureCanModifyGenes(occupant))
                     break;
                 if (ent.Comp.Scanner is not { } pulseScanner ||
                     !TryComp<DnaModifierScannerComponent>(pulseScanner, out var pulseComp) ||
@@ -310,7 +314,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (TryGetOccupant((uid, console), out var occupant))
         {
             state.OccupantPresent = true;
-            state.OccupantCritical = _genetics.CanIrradiate(occupant) == false;
+            state.OccupantCritical = !_genetics.CanModifyGenes(occupant);
             state.OccupantName = Identity.Name(occupant, EntityManager);
             state.UniqueDna = _genetics.GetUniqueDna(occupant);
 

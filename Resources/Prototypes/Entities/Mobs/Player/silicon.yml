@@ -1,12 +1,14 @@
 # Be careful with these as they get removed on shutdown too!
 - type: entity
   id: AiHeld
+  #save: false # DeltaV - AI PDAs
   description: Components added / removed from an entity that gets inserted into an AI core.
   categories: [ HideSpawnMenu ]
   components:
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
+    - Handheld # Forge - change
     - Common
     - Command
     - Engineering
@@ -17,6 +19,7 @@
     - Supply
   - type: ActiveRadio
     channels:
+    - Handheld # Forge - change
     - Common
     - Command
     - Engineering
@@ -40,6 +43,7 @@
     - ActionAIViewLaws
     - ActionOpenRemoteDevicesMenu # Corvax-Next-AiRemoteControl
     - ActionCustomizeStationAi # Forge-Change
+    - ActionOpenCartridges # DeltaV - AI PDA
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -56,6 +60,12 @@
         type: RemoteDevicesBoundUserInterface
       enum.StationAiCustomizationUiKey.Key: # Forge-Change
         type: StationAiCustomizationBoundUserInterface
+      # Begin DeltaV - AI PDAs
+      enum.PdaUiKey.Key:
+        type: PdaBoundUserInterface
+      enum.RingerUiKey.Key:
+        type: RingerBoundUserInterface
+      # End DeltaV - AI PDAs
   - type: IntrinsicUI
     uis:
       enum.RadarConsoleUiKey.Key:
@@ -447,6 +457,18 @@
     needsPower: false # Mono
   - type: StationAiCore
   - type: StationAiScreen # Forge-Change
+  - type: EncryptionKeyHolder # Forge - change
+    keysUnlocked: false
+    keySlots: 1
+  - type: ContainerContainer # Forge - change
+    containers:
+      station_ai_mind_slot: !type:ContainerSlot
+        showEnts: true
+      key_slots: !type:Container
+  - type: ContainerFill # Forge - change
+    containers:
+      key_slots:
+      - EncryptionKeyCustom
   - type: StationAiVision
   - type: InteractionOutline
   - type: Sprite
@@ -482,6 +504,8 @@
     interfaces:
         enum.HolopadUiKey.AiRequestWindow:
           type: HolopadBoundUserInterface
+        enum.ConfigurableEncryptionKeyUiKey.Key: # Forge - change
+          type: ConfigurableEncryptionKeyBoundUserInterface
         enum.HolopadUiKey.AiActionWindow:
           type: HolopadBoundUserInterface   
 
@@ -520,6 +544,7 @@
       machine_board: !type:Container
         showEnts: false
         occludes: true
+      key_slots: !type:Container # Forge - change
       machine_parts: !type:Container
         showEnts: false
         occludes: true
@@ -604,6 +629,7 @@
 # The actual brain inside the core
 - type: entity
   id: StationAiBrain
+  #save: false # DeltaV - AI PDAs
   parent: PositronicBrain
   categories: [ HideSpawnMenu, DoNotMap ]
   components:
@@ -648,6 +674,9 @@
     mindRole: "MindRoleSiliconBrain"
     silent: true
   - type: StationAiPersonality # Forge-Change
+  - type: TTS # Forge - change
+    voice: Glados
+    fixedVoice: true
   - type: GhostRole # Forge-Change
     name: ghost-role-information-station-ai-name
     description: ghost-role-information-station-ai-description
@@ -660,6 +689,45 @@
     - !type:OverallPlaytimeRequirement
       time: 10800
   - type: GhostTakeoverAvailable
+  # Begin DeltaV - AI PDAs
+  - type: Pda
+    idSlot:
+      locked: true
+    penSlot:
+      locked: true
+    paiSlot:
+      locked: true
+  - type: Ringer
+  - type: NanoChatCard
+  - type: CartridgeLoader
+    uiKey: enum.PdaUiKey.Key
+    preinstalled:
+    - NewsReaderCartridge
+    - CrewManifestCartridge
+    - BountyContractsCartridge # Frontier
+    - AstroNavCartridge # Frontier
+    - NanoChatCartridge # DeltaV
+    cartridgeSlot:
+      locked: true
+      priority: -1
+      name: device-pda-slot-component-slot-name-cartridge
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Machines/id_insert.ogg
+      whitelist:
+        components:
+        - Cartridge
+  - type: ContainerContainer
+    containers:
+      program-container: !type:Container
+      Cartridge-Slot: !type:ContainerSlot {}
+      PDA-id: !type:ContainerSlot {}
+      PDA-pen: !type:ContainerSlot {}
+      PDA-pai: !type:ContainerSlot {}
+  - type: ItemSlots
+  - type: PdaBorderColor
+    borderColor: "#45453f"
+    accentVColor: "#447987"
+  # End DeltaV - AI PDAs
 
 # Hologram projection that the AI's eye tracks.
 - type: entity

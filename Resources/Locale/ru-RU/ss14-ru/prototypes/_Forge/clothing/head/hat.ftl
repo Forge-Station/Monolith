@@ -20,7 +20,12 @@ ent-ClothingHeadHatEmpirePreafectOrange = фуражка лорда
     .desc = Фуражка лорда, символизирует верность имперской гвардии.
 ent-ClothingHeadHatEmpirePreafectViolet = шляпа экклезиарха
     .desc = Шляпа экклезиарха, символизирует верность церкви и вере в императора!
-
+ent-ClothingHeadHatEmpireTricorne = имперская двууголка
+    .desc = Роскошная двууголка, которую носят высокопоставленные чины в СИВ
+ent-ClothingHeadHatEmpireCap = имперская кепка
+    .desc = Головной убор солдат Империи
+ent-ClothingHeadHatEmpireBeret = имперский берет
+    .desc = Головной убор офицерского состава Империи
 ent-ClothingHeadHatCapUI = кепка U.I.
     .desc = Обычная чёрная бейсболка с фиолетовым черепом.
 ent-ClothingHeadHatBeretUI = берет U.I.

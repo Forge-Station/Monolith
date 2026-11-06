@@ -34,7 +34,10 @@
   branch: Vision
   sequenceLength: 7
   components:
-  - type: ThermalSight
+  # ThermalVision (IsEquipment: false) grants ToggleThermalVision action via SwitchableOverlaySystem.
+  - type: ThermalVision
+    isEquipment: false
+    isActive: false
 
 - type: gene
   id: GeneNightVision

@@ -1,0 +1,10 @@
+- type: latheRecipe
+  parent: BaseSurgicalRecipe
+  id: ClothingHandsGlovesSurgical
+  result: ClothingHandsGlovesSurgical
+  completetime: 2
+  materials:
+    Plastic: 2000
+    Durathread: 1000
+    Cloth: 800
+    Bluespace: 100

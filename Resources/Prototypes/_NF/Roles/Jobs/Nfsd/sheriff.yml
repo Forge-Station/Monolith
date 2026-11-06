@@ -63,8 +63,10 @@
     back:
     - Multitool
     - DoorRemoteNfsd
-    - BaseSecurityUplinkRadioSheriff
+    - FederationMilitaryCredit
+    - FederationMilitaryCredit25
+  # - BaseSecurityUplinkRadioSheriff # Forge-Change
     - PhoneInstrumentHigh
     - RubberStampTSFColonel #Mono. Look, it had comments on the Bailiff/Captain file.
     - TSFHandheldOverwatchConsole
-#    - BookTSFSOP # Forge-change delete
+#   - BookTSFSOP # Forge-change delete

@@ -2,19 +2,6 @@
 # Icons taken from RMC-14.
 
 - type: entity
-  id: ActionForgeXenoRest
-  name: Rest
-  description: Lie down to recover plasma and wounds faster. Use again to stand.
-  components:
-  - type: InstantAction
-    itemIconStyle: NoItem
-    icon:
-      sprite: _CM/Interface/Actions/xeno_actions.rsi
-      state: resting
-    event: !type:ForgeXenoRestActionEvent
-    useDelay: 1
-
-- type: entity
   id: ActionForgeXenoTailStab
   name: Tail stab
   description: Impale a nearby target with your tail.
@@ -108,6 +95,24 @@
       projectile: BulletXenoAcidHeavy
       speed: 18
     useDelay: 3.5
+
+- type: entity
+  id: ActionForgeXenoStaminaSpit
+  name: Neurotoxin spit
+  description: Spit a sticky neurotoxin that drains stamina.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CM/Interface/Actions/xeno_actions.rsi
+      state: xeno_spit
+    event: !type:ForgeXenoSpitActionEvent
+      plasmaCost: 30
+      projectile: BulletXenoStamina
+      speed: 20
+    useDelay: 2.5
+    range: 9
+    checkCanAccess: false
 
 - type: entity
   id: ActionForgeXenoPlantWeeds

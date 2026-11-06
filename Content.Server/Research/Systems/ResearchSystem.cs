@@ -7,6 +7,8 @@ using Content.Shared.Access.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Systems;
+using Content.Server.Shuttles.Systems;
+using Content.Shared.Shuttles.Components;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
@@ -24,6 +26,7 @@ namespace Content.Server.Research.Systems
         [Dependency] private RadioSystem _radio = default!;
         [Dependency] private StationSystem _station = default!;
         [Dependency] private EntityLookupSystem _lookup = default!;
+        [Dependency] private ShuttleConsoleLockSystem _shuttleLock = default!;
 
         public override void Initialize()
         {
@@ -32,8 +35,38 @@ namespace Content.Server.Research.Systems
             InitializeConsole();
             InitializeSource();
             InitializeServer();
+            InitializeLink(); // Forge-change
 
             SubscribeLocalEvent<TechnologyDatabaseComponent, ResearchRegistrationChangedEvent>(OnDatabaseRegistrationChanged);
+        }
+
+        /// <summary>
+        /// Whether a research client is allowed to connect to a research server.
+        /// Requires the same owning station (or same grid if neither has a station),
+        /// and an explicit authorization on the server when restriction is enabled.
+        /// </summary>
+        public bool CanClientAccessServer(EntityUid client, EntityUid server, bool checkAuthorization = true)
+        {
+            var clientStation = _station.GetOwningStation(client);
+            var serverStation = _station.GetOwningStation(server);
+
+            if (clientStation != null || serverStation != null)
+            {
+                if (clientStation != serverStation)
+                    return false;
+            }
+            else
+            {
+                var clientGrid = Transform(client).GridUid;
+                var serverGrid = Transform(server).GridUid;
+                if (clientGrid == null || clientGrid != serverGrid)
+                    return false;
+            }
+
+            if (checkAuthorization && !IsClientAuthorized(server, client))
+                return false;
+
+            return true;
         }
 
         /// <summary>

@@ -1,7 +1,7 @@
 ent-BaseSpeedLoader45_magnum = спидлоадер (.45 магнум)
 ent-SpeedLoader45_magnumFMJ = спидлоадер (.45 магнум)
 ent-SpeedLoader45_magnumEmpty = спидлоадер (.45 магнум)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой
 ent-SpeedLoader45_magnumAP = спидлоадер (.45 магнум экспансивно-бронебойные)
 ent-SpeedLoader45_magnumHP = спидлоадер (.45 магнум экспансивные)

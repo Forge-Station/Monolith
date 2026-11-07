@@ -39,3 +39,31 @@ ent-WeaponTurretScythe = нейтронный репитер «Коса»
 ent-WeaponLaserTurretFlayer = кинетическая установка «Флаер»
     .desc = Уникальное орудие Предтеч. Флаер выпускает шквал вольфрамовых дротиков почти на скорости света, разрывая цели в клочья.
     .suffix = ТОЛЬКО АДС, Т1+
+
+ent-WeaponTurretType35Portable = { ent-WeaponTurretType35 }
+    .desc = { ent-WeaponTurretType35.desc }
+    .suffix = Портативное, Среднее, Т2, НЕ МАППИТЬ
+
+ent-WeaponTurretCerberusPortable = { ent-WeaponTurretCerberus }
+    .desc = { ent-WeaponTurretCerberus.desc }
+    .suffix = Портативное, Среднее, Т2, НЕ МАППИТЬ
+
+ent-WeaponTurretM25Portable = { ent-WeaponTurretM25 }
+    .desc = { ent-WeaponTurretM25.desc }
+    .suffix = Портативное, НЕ МАППИТЬ
+
+ent-WeaponTurretM220Portable = { ent-WeaponTurretM220 }
+    .desc = { ent-WeaponTurretM220.desc }
+    .suffix = Портативное, Среднее, Т2, НЕ МАППИТЬ
+
+ent-WeaponLaserTurretL1PhalanxPortable = { ent-WeaponLaserTurretL1Phalanx }
+    .desc = { ent-WeaponLaserTurretL1Phalanx.desc }
+    .suffix = Портативное, НЕ МАППИТЬ
+
+ent-WeaponLaserTurretPrometheusPortable = { ent-WeaponLaserTurretPrometheus }
+    .desc = { ent-WeaponLaserTurretPrometheus.desc }
+    .suffix = Портативное, Среднее, Т2, НЕ МАППИТЬ
+
+ent-WeaponLaserTurretApolloPortable = { ent-WeaponLaserTurretApollo }
+    .desc = { ent-WeaponLaserTurretApollo.desc }
+    .suffix = Портативное, НЕ МАППИТЬ

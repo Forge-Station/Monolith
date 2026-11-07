@@ -51,24 +51,25 @@
   components:
   - type: GeneticStrongStomach
 
-- type: gene
-  id: GeneUnstableDna
-  name: gene-unstable-dna-name
-  description: gene-unstable-dna-desc
-  quality: Neutral
-  instability: 32
-  sequenceLength: 7
-  branch: Morphology
-  lockBranch: true
-  glowColor: "#40FF88"
-  glowEnergy: 1.4
-  visualFlicker: true
-  speciesTarget: SlimePerson
-  conflicts:
-  - GeneStabilizedDna
-  components:
-  - type: GeneticSlimeForm
-    transformSlash: 5
+# TEMP DISABLED: нестабильная ДНК / слизняк — вернуть после доработки
+#- type: gene
+#  id: GeneUnstableDna
+#  name: gene-unstable-dna-name
+#  description: gene-unstable-dna-desc
+#  quality: Neutral
+#  instability: 32
+#  sequenceLength: 7
+#  branch: Morphology
+#  lockBranch: true
+#  glowColor: "#40FF88"
+#  glowEnergy: 1.4
+#  visualFlicker: true
+#  speciesTarget: SlimePerson
+#  conflicts:
+#  - GeneStabilizedDna
+#  components:
+#  - type: GeneticSlimeForm
+#    transformSlash: 5
 
 - type: gene
   id: GeneStabilizedDna
@@ -84,10 +85,10 @@
   - GeneTelekinesis
   - GeneTelepathy
   - GeneStrongStomach
-  - GeneUnstableDna
-  - GeneBoneWeapon
+  # - GeneUnstableDna  # TEMP DISABLED
+  # - GeneBoneWeapon   # TEMP DISABLED
   - GeneAtomicMetabolism
-  - GeneOrganAdapt
+  # - GeneOrganAdapt   # TEMP DISABLED
   - GeneRegen
   - GeneHulk
   - GeneHaste
@@ -96,21 +97,22 @@
     healPerTick: 5
     interval: 1s
 
-- type: gene
-  id: GeneBoneWeapon
-  name: gene-bone-weapon-name
-  description: gene-bone-weapon-desc
-  quality: Good
-  instability: 22
-  branch: Physical
-  sequenceLength: 5
-  glowColor: "#E8D8C0"
-  glowEnergy: 0.6
-  conflicts:
-  - GeneStabilizedDna
-  components:
-  - type: GeneticBoneWeapon
-    growSlash: 15
+# TEMP DISABLED: боевой скелет / костный клинок — вернуть после доработки
+#- type: gene
+#  id: GeneBoneWeapon
+#  name: gene-bone-weapon-name
+#  description: gene-bone-weapon-desc
+#  quality: Good
+#  instability: 22
+#  branch: Physical
+#  sequenceLength: 5
+#  glowColor: "#E8D8C0"
+#  glowEnergy: 0.6
+#  conflicts:
+#  - GeneStabilizedDna
+#  components:
+#  - type: GeneticBoneWeapon
+#    growSlash: 15
 
 - type: gene
   id: GeneAtomicMetabolism
@@ -132,20 +134,21 @@
     radiationIntensity: 0.35
     radiationSlope: 1.2
 
-- type: gene
-  id: GeneOrganAdapt
-  name: gene-organ-adapt-name
-  description: gene-organ-adapt-desc
-  quality: Good
-  instability: 30
-  branch: Adaptation
-  sequenceLength: 7
-  glowColor: "#A0C8FF"
-  glowEnergy: 1.0
-  conflicts:
-  - GeneStabilizedDna
-  - GeneSpaceAdapt
-  - GeneNoBreath
-  components:
-  - type: GeneticOrganAdapt
-    bloodVolumeFactor: 0.5
+# TEMP DISABLED: адаптация органов — вернуть после доработки
+#- type: gene
+#  id: GeneOrganAdapt
+#  name: gene-organ-adapt-name
+#  description: gene-organ-adapt-desc
+#  quality: Good
+#  instability: 30
+#  branch: Adaptation
+#  sequenceLength: 7
+#  glowColor: "#A0C8FF"
+#  glowEnergy: 1.0
+#  conflicts:
+#  - GeneStabilizedDna
+#  - GeneSpaceAdapt
+#  - GeneNoBreath
+#  components:
+#  - type: GeneticOrganAdapt
+#    bloodVolumeFactor: 0.5

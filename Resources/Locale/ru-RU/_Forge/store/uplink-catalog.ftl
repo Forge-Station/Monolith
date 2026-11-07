@@ -132,12 +132,30 @@ uplink-tti-clothingheadhatarmoredtraumashooter-desc = Усиленная вер�
 uplink-tti-clothingouterarmorbodytrauma-desc = Фирменный бронежилет и для врачей, и для стрелков - универсальная защита без лишнего веса. Партия ограничена.
 uplink-tti-clothingouterhardsuittrauma-desc = Фирменный скафандр для врачей. Лёгкий и манёвренный - важнее вовремя добежать до пациента, чем выдержать прямое попадание. Партия ограничена.
 uplink-tti-clothingouterhardsuittraumashooter-desc = Фирменный скафандр для стрелков. Тяжелее и медленнее, зато держит то, от чего врачебная версия не спасёт. Партия ограничена.
+uplink-tti-clothingeyeshudtrauma-desc = Фирменный визор сотрудников TTI. Способен показывать большую часть необходимой для работы информации.
+uplink-tti-clothinghandsglovescombattrauma-desc = Фирменные перчатки сотрудников TTI. Имеют изоляцию, но при том крайне удобные как для сражения, так и для ведения операциий в полевых условиях.
 
 # Blueprints
 uplink-tti-blueprinttechmed-name = Продвинутые медикаменты
 uplink-tti-blueprinttechmed-desc = Рецепт продвинутых медикаментов. Включает в себя регенеративную сеть и медицинскую нить. Вставляется в медицинский техфаб.
 uplink-tti-blueprinttticlothing-name = Униформа
 uplink-tti-blueprinttticlothing-desc = Чертёж униформы. Включает в себя... Да много чего он в себя включает. Вставляется в медицинский техфаб.
+uplink-tti-blueprintcyberneticeyes-name = чертёж протезов глаз
+uplink-tti-blueprintcyberneticeyes-desc = содержит в себя различные вариации кибернетических глаз
+uplink-tti-blueprintcybernetichands-name = чертёж протезов ладоней
+uplink-tti-blueprintcybernetichands-desc = содержит в себе различные вариации кибернетических ладоней
+uplink-tti-blueprintcyberneticlegs-name = чертёж протезов ног
+uplink-tti-blueprintcyberneticlegs-desc = содержит в себе различные вариации кибернетических ног
+uplink-tti-blueprintcyberneticorgans-name = чертёж искусственных органов
+uplink-tti-blueprintcyberneticorgans-desc = содержит в себе различные искусственные органы
+uplink-tti-blueprintcyberneticarms-name = чертёж протезов рук
+uplink-tti-blueprintcyberneticarms-desc = содержит в себе различные вариации кибернетических рук
+uplink-tti-blueprintsubdermalimplants-name = чертёж подкожных имплантов
+uplink-tti-blueprintsubdermalimplants-desc = содержит в себе различные вариации подкожных имплантов
+uplink-tti-blueprintadvancedtools-name = чертёж продвинутых инструментов
+uplink-tti-blueprintadvancedtools-desc = содержит в себе различные продвинутые инженерные инструменты
+uplink-tti-blueprintadvancedshiprepairtools-name = чертёж средств для ремонта корабля
+uplink-tti-blueprintadvancedshiprepairtools-desc = содержит в себе рецепты УРКа и заряды для него
 
 # Bundle
 uplink-tti-SurgeryBundle-name = хирургический набор

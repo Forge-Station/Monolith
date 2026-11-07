@@ -1,0 +1,14 @@
+- type: entity
+  id: TableReinforcedForerunner
+  parent: TableBase
+  name: reinforced table
+  description: A square piece of metal standing on four metal legs. Extra robust.
+  suffix: Forerunner
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Furniture/Tables/forerunner.rsi
+  - type: Icon
+    sprite: _Forge/Structures/Furniture/Tables/forerunner.rsi
+  - type: IconSmooth
+    key: metaltable
+    base: state_

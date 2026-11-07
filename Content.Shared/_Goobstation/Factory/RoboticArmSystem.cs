@@ -63,10 +63,10 @@ public sealed partial class RoboticArmSystem : EntitySystem
         base.Update(frameTime);
 
         var now = _timing.CurTime;
-        if (now < _nextUpdate)
+        if (now < _nextUpdate) //Forge-Change
             return;
 
-        _nextUpdate = now + _updateDelay;
+        _nextUpdate = now + _updateDelay;//Forge-Change
 
         var query = EntityQueryEnumerator<RoboticArmComponent>();
         while (query.MoveNext(out var uid, out var comp))

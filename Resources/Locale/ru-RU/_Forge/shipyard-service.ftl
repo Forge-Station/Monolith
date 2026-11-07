@@ -1,7 +1,8 @@
+docking-port-name-drydock = ТЕХ-ДОК
 shipyard-service-window-title = Консоль верфи
 shipyard-service-no-bank = Нет банковского счёта
 shipyard-service-no-shuttle = Нет пристыкованного шаттла
-shipyard-service-no-shuttle-desc = Пристыкуйте шаттл к ремонтному шлюзу аванпоста (DRYDOCK), чтобы обслуживать его здесь.
+shipyard-service-no-shuttle-desc = Пристыкуйте шаттл к ремонтному шлюзу аванпоста ({ docking-port-name-drydock }), чтобы обслуживать его здесь.
 shipyard-service-shuttle-label = Шаттл:{" "}
 shipyard-service-shuttle-info = [color=#c8c8c8]{ $name }[/color] ([color=#9a9a9a]{ $class }[/color]) · прайс { $price }
 shipyard-service-class-unknown = неизвестный класс

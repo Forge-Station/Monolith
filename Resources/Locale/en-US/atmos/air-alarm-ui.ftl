@@ -1,3 +1,4 @@
+air-alarm-ui-window-title = Air Alarm
 # UI
 
 ## Window

@@ -10,5 +10,5 @@ ent-ClothingEyesBallisticGogglesOrange = баллистические очки (
     .desc = Баллистические очки с оранжевыми линзами и чипом сканирования состояния.
 ent-ClothingEyesBallisticGlassesOrange = баллистические очки-линзы (оранжевые)
     .desc = Баллистические очки с оранжевыми линзами и чипом сканирования состояния.
-ent-ClothingEyesTSFOfficerGlasses = очки командира TSF
+ent-ClothingEyesTSFOfficerGlasses = офицерские очки ТСФ
     .desc = Высокотехнологичный головной дисплей для офицеров Федерации. Обычно выдаются командиру роты.

@@ -37,7 +37,7 @@
       steps:
       - tag: AirAlarmElectronics
         store: board
-        name: "air alarm electronics"
+        name: construction-required-air-alarm-electronics # Forge-change
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: "door_electronics" # /tg/ uses the same sprite, right?
@@ -116,7 +116,7 @@
       steps:
       - tag: FireAlarmElectronics
         store: board
-        name: "fire alarm electronics"
+        name: construction-required-fire-alarm-electronics # Forge-change
         icon:
           sprite: "Objects/Misc/module.rsi"
           state: "door_electronics" # /tg/ uses the same sprite, right?

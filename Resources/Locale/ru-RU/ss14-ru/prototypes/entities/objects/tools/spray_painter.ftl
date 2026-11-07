@@ -1,4 +1,10 @@
 ent-SprayPainter = краскопульт
-    .desc = Краскопульт для окрашивания шлюзов и труб.
+    .desc = Распылитель для покраски шлюзов, труб и других предметов.
 ent-SprayPainterAmmo = сжатая краска
     .desc = Картридж с сильно сжатой краской, обычно используемой в краскопультах.
+ent-SprayPainterBorg = экспериментальный краскопульт
+    .desc = Экспериментальный перезаряжаемый краскопульт, способный бесконечно воспроизводить сжатую краску.
+ent-SprayPainterEmpty = { ent-SprayPainter }
+    .desc = { ent-SprayPainter.desc }
+ent-SprayPainterRecharging = { ent-SprayPainter }
+    .desc = { ent-SprayPainter.desc }

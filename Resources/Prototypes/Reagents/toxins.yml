@@ -117,6 +117,8 @@
           - !type:OrganType # Goobstation - Yowie
             type: Yowie
             shouldHave: false
+          - !type:HasGeneticStrongStomach # Forge - strong stomach gene
+            shouldHave: false
           damage:
             types:
               Poison: 2
@@ -124,6 +126,8 @@
           conditions:
           - !type:OrganType # Goobstation - Yowie
             type: Yowie
+            shouldHave: false
+          - !type:HasGeneticStrongStomach # Forge - strong stomach gene
             shouldHave: false
           - !type:ReagentThreshold
             min: 2

@@ -1,4 +1,5 @@
 using Robust.Shared.Prototypes;
+using Content.Shared._Goobstation.Parallax; // Forge-Change "Goob - background meteors"
 
 namespace Content.Client.Parallax.Data;
 
@@ -29,4 +30,11 @@ public sealed partial class ParallaxPrototype : IPrototype
     /// </summary>
     [DataField("layersLQUseHQ")]
     public bool LayersLQUseHQ { get; private set; } = true;
+
+    // Forge-Change "Goob - background meteors"
+    /// <summary>
+    /// Optional cosmetic meteor/asteroid field drawn over this parallax.
+    /// </summary>
+    [DataField]
+    public MeteorParallaxConfig? Meteors { get; private set; }
 }

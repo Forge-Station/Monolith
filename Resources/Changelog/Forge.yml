@@ -186,3 +186,10 @@ Entries:
   id: 17
   time: '2026-11-07T14:15:58.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/545
+- author: percent-temp-percent
+  changes:
+    - type: Tweak
+      message: 'Космос на заднем фоне стал более живым: Чето блестит, чето летает....'
+  id: 18
+  time: '2026-11-07T14:27:23.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/547

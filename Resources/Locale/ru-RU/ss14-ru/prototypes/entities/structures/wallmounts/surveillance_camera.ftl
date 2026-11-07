@@ -32,3 +32,6 @@ ent-SurveillanceCameraAssembly = камера
 ent-SurveillanceCameraTSF = камера
     .suffix = TSF
     .desc = { ent-SurveillanceCameraBase.desc }
+ent-Xenoborgs = { ent-SurveillanceCameraBase }
+    .desc = { ent-SurveillanceCameraBase.desc }
+    .suffix = Ксеноборги

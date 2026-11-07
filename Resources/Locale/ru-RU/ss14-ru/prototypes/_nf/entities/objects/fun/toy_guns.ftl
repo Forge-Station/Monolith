@@ -1,1 +1,3 @@
-ent-WeaponRifleBBEmpty = WeaponRifleBBEmpty
+ent-WeaponRifleBBEmpty = { ent-WeaponRifleBB }
+    .desc = { ent-WeaponRifleBB.desc }
+    .suffix = Пустая

@@ -4,6 +4,7 @@ using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Body.Systems;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -17,6 +18,7 @@ namespace Content.Server._Mono.Body.Systems;
 public sealed partial class BodyRejuvenateSystem : EntitySystem
 {
     [Dependency] private SharedBodySystem _bodySystem = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
@@ -201,17 +203,9 @@ public sealed partial class BodyRejuvenateSystem : EntitySystem
     /// </summary>
     private void EnsureProperMobState(Entity<BodyComponent> bodyEntity)
     {
-        // The rejuvenate event should have already handled damage and mob state,
-        // but we need to make sure the body is properly recognized as complete
-
-        // Force a body update to recalculate mob state based on new parts
-        var rootPart = _bodySystem.GetRootPartOrNull(bodyEntity, bodyEntity.Comp);
-        if (rootPart != null)
-        {
-            // Trigger a recursive body update to ensure all new parts are properly registered
-            var updateEvent = new BodyPartAddedEvent("rejuvenate_update", rootPart.Value);
-            RaiseLocalEvent(bodyEntity, ref updateEvent);
-        }
+        // Restored parts already raise BodyPartAddedEvent when attached. Raising it again
+        // for the existing root reapplies cached markings, duplicating animated tails.
+        _mobStateSystem.UpdateMobState(bodyEntity.Owner);
     }
 
     /// <summary>

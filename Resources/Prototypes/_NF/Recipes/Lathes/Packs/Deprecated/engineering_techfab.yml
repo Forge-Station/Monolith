@@ -92,6 +92,13 @@
     - GyroscopeMachineCircuitboard
     - MiniGravityGeneratorCircuitboard
     - MiniStationAnchorCircuitboard
+    # Forge-Change-Start
+    - PowerComputerCircuitboard
+    - AlertsComputerCircuitboard
+    - AtmosMonitoringComputerCircuitboard
+    - LargeAPCLightElectronics
+    - LargeAPCMediumElectronics
+    # Forge-Change-End
   ## Clothing
     - UtilityBelt
     - ConstructionBag

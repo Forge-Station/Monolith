@@ -368,6 +368,45 @@
     - WindowDirectional
     - WindowReinforcedDirectional
     - ReinforcedWindow
+    # Forge-Change-Start
+    - ShuttleWindow
+    - ShuttleWindowDiagonal
+    - MiningWindowUran
+    - MiningWindowUranDiagonal
+    - ShuttleWindowUranDiagonal
+    - ShuttleWindowUran
+    - ReinforcedUraniumWindowDiagonal
+    - ReinforcedUraniumWindow
+    - UraniumWindow
+    - UraniumWindowDiagonal
+    - ShuttleWindowPlasma
+    - ShuttleWindowPlasmaDiagonal
+    - UraniumReinforcedWindowDirectional
+    - UraniumWindowDirectional
+    - WindoorSecureUranium
+    - WindoorUranium
+    - MiningWindowPlasma
+    - MiningWindowPlasmaDiagonal
+    - PlasmaReinforcedWindowDirectional
+    - PlasmaWindowDirectional
+    - WindoorSecurePlasma
+    - WindoorPlasma
+    - ReinforcedPlasmaWindow
+    - ReinforcedPlasmaWindowDiagonal
+    - WindoorSecure
+    - Windoor
+    - PlasmaWindowDiagonal
+    - PlasmaWindow
+    - WallShuttleInterior
+    - WallShuttle
+    - WallShuttleDiagonal
+    - ClockworkGrilleDiagonal
+    - GrilleDiagonal
+    - ClockworkGrille
+    - WallMining
+    - WallMiningDiagonal
+    - AirAlarm
+    # Forge-Change-End
     - Airlock
     - AirlockGlass
     - Firelock

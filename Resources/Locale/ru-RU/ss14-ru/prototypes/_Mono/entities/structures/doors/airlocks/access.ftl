@@ -13,3 +13,21 @@ ent-AirlockGlassShuttleNfsdCapitalLocked = { ent-AirlockGlassShuttleNfsdCapital 
 ent-HighSecTSFMCLocked = { ent-HighSecArmoryLocked }
     .suffix = ТСФ, Закрыт
     .desc = { ent-HighSecArmoryLocked.desc }
+
+ent-AirlockMaintMieyoLocked = { ent-AirlockMaint }
+    .desc = { ent-AirlockMaint.desc }
+
+ent-AirlockMaintMieyoSecurityLocked = { ent-AirlockMaint }
+    .desc = { ent-AirlockMaint.desc }
+
+ent-AirlockMaintMieyoLiasonLocked = { ent-AirlockMaint }
+    .desc = { ent-AirlockMaint.desc }
+
+ent-AirlockMieyoLocked = { ent-AirlockMieyo }
+    .desc = { ent-AirlockMieyo.desc }
+
+ent-AirlockMieyoLockedSecurity = { ent-AirlockMieyo }
+    .desc = { ent-AirlockMieyo.desc }
+
+ent-AirlockMieyoLockedLiason = { ent-AirlockMieyo }
+    .desc = { ent-AirlockMieyo.desc }

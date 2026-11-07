@@ -1,10 +1,13 @@
-ent-ClothingModsuitGauntletsUSSPVaryag = Ruki Varyaga
-    .desc = Герметичные ударопрочные рукавицы.
-ent-ClothingModsuitGauntletsUSSPZastavnik = Kuvshiny Zastavnika
-    .desc = Увеличенные рукавицы с усиленными костяшками и встроенными амортизаторами.
-ent-ClothingModsuitGauntletsRogue = RX-01 modsuit gauntlets
-    .desc = Нетокопроводящая сетка, герметичные швы. Удивительно легально. С гордостью произведено в Секторе Ullman Industries.
-ent-ClothingModsuitGauntletsVolta = Volta Modsuit Gauntlets
-    .desc = Замасленные перчатки модульного костюма — удобно жать кнопки на RCD.
+ent-ClothingModsuitGauntletsUSSPVaryag = перчатки скафандра MOD СССП «Варяг»
+    .desc = Герметичные ударопрочные перчатки.
+ent-ClothingModsuitGauntletsUSSPZastavnik = перчатки скафандра MOD СССП «Заставник»
+    .desc = Массивные перчатки с усиленными костяшками и встроенной защитой от сдавливания.
+ent-ClothingModsuitGauntletsRogue = перчатки скафандра MOD RX-01
+    .desc = Нетокопроводящая сетка и герметичные швы. На удивление легальны. С гордостью произведены в секторе компанией Ullman Industries.
+ent-ClothingModsuitGauntletsVolta = перчатки скафандра MOD ТСФ «Вольта»
+    .desc = Замасленные перчатки модульного скафандра, в которых удобно нажимать кнопки РСУ.
 ent-ClothingModsuitGauntletsGalloglass = перчатки модкостюма «Галлоглас»
     .desc = Накладки на костяшках светятся при герметизации костюма... без видимой причины.
+
+ent-ClothingModsuitGauntletsMercenary = перчатки скафандра MOD «Галлоглас»
+    .desc = Накладки на костяшках светятся при герметизации скафандра... без видимой причины. Пальцы также служат настоящими пистолетами под .45, так что эти перчатки буквально бьют наповал.

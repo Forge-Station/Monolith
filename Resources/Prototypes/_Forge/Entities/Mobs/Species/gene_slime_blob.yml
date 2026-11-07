@@ -1,0 +1,15 @@
+- type: entity
+  name: flesh slime blob
+  id: MobGeneSlimeBlob
+  parent: MobAdultSlimesBlue
+  description: An unstable clot of living slime. It can reshape into a slimeperson body.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: HTN
+    rootTask:
+      task: IdleCompound
+  - type: Grammar
+    attributes:
+      proper: true

@@ -648,3 +648,18 @@
   - type: StaticPrice
     price: 0
     vendPrice: 1150
+
+# USSP(k) company
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitVdvtyelnyazhka
+  name: VDV tyelnyazhka
+  description: An old piece of the uniform of the Airborne Troops of the USSP. Unfortunately, in space there is no sky and no air.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/vdv_tyelnyazhka.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/vdv_tyelnyazhka.rsi
+  - type: StaticPrice
+    price: 10
+    vendPrice: 250

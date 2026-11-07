@@ -261,6 +261,11 @@
       params:
         volume: -5
         variation: 0.2
+  - !type:GiveItemSpecial
+    prototype:
+    - HiveInjector
+
+
 
 # Black Market Companies
 

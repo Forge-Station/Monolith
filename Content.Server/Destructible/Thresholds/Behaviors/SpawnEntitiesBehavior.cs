@@ -1,6 +1,8 @@
 using System.Numerics;
+using Content.Server._Forge.OrePipe;
 using Content.Server.Forensics;
 using Content.Server.Stack;
+using Content.Shared._Forge.OrePipe;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Prototypes;
 using Content.Shared.Stacks;
@@ -31,6 +33,10 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
 
         public void Execute(EntityUid owner, DestructibleSystem system, EntityUid? cause = null)
         {
+            // Forge-Change: ore crabs/golems killed by ship drills → abstract buffer, no Dynamic piles.
+            if (TryDepositOreToDrillBuffer(owner, system, cause))
+                return;
+
             var tSys = system.EntityManager.System<TransformSystem>();
             var position = tSys.GetMapCoordinates(owner);
 
@@ -75,6 +81,49 @@ namespace Content.Server.Destructible.Thresholds.Behaviors
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Forge-Change: when an ore crab/golem is finished by a ship drill, deposit spawn table into the drill buffer.
+        /// </summary>
+        private bool TryDepositOreToDrillBuffer(EntityUid owner, DestructibleSystem system, EntityUid? cause)
+        {
+            var entMan = system.EntityManager;
+            if (!entMan.TryGetComponent(owner, out OreDrillHarvestTargetComponent? harvest))
+                return false;
+
+            EntityUid? drill = null;
+            if (harvest.LastDrill is { } last && entMan.EntityExists(last) && entMan.HasComponent<OrePipeBufferComponent>(last))
+                drill = last;
+            else if (cause is { } c && entMan.HasComponent<OrePipeBufferComponent>(c))
+                drill = c;
+
+            if (drill == null)
+                return false;
+
+            var orePipe = entMan.System<OrePipeSystem>();
+
+            var executions = 1;
+            if (entMan.TryGetComponent<StackComponent>(owner, out var ownerStack))
+                executions = ownerStack.Count;
+
+            foreach (var (entityId, minMax) in Spawn)
+            {
+                for (var execution = 0; execution < executions; execution++)
+                {
+                    var count = minMax.Min >= minMax.Max
+                        ? minMax.Min
+                        : system.Random.Next(minMax.Min, minMax.Max + 1);
+
+                    if (count <= 0)
+                        continue;
+
+                    orePipe.TryDepositOre(drill.Value, entityId, count);
+                }
+            }
+
+            // Always suppress world spawn when a drill is responsible — full buffer still must not drop Dynamic ore.
+            return true;
         }
 
         public void TransferForensics(EntityUid spawned, DestructibleSystem system, EntityUid owner)

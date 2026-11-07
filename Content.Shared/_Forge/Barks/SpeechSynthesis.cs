@@ -1,5 +1,5 @@
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Forge.Barks;
 
@@ -13,7 +13,7 @@ public sealed partial class SpeechSynthesisComponent : Component
     /// A voice prototype for barks.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("voice", customTypeSerializer: typeof(PrototypeIdSerializer<BarkPrototype>))]
+    [DataField("voice", customTypeSerializer: typeof(ProtoId<BarkPrototype>))]
     public string? VoicePrototypeId { get; set; }
 
     /// <summary>

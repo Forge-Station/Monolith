@@ -28,7 +28,6 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IInputManager _inputs = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IEntityManager _entManager = default!; // Frontier
     private readonly DetectionSystem _detection; // Mono
     private readonly ShuttleSystem _shuttles;
@@ -136,7 +135,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         {
             if (args.Function == EngineKeyFunctions.UIClick)
             {
-                var mapUid = _mapManager.GetMapEntityId(ViewingMap);
+                var mapUid = Maps.GetMap(ViewingMap);
 
                 var beaconsOnly = EntManager.TryGetComponent(mapUid, out FTLDestinationComponent? destComp) &&
                                   destComp.BeaconsOnly;
@@ -277,7 +276,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
 
         DrawParallax(handle);
 
-        var viewedMapUid = _mapManager.GetMapEntityId(ViewingMap);
+        var viewedMapUid = Maps.GetMap(ViewingMap);
         var matty = Matrix3Helpers.CreateInverseTransform(Offset, Angle.Zero);
         var realTime = _timing.RealTime;
         var viewBox = new Box2(Offset - WorldRangeVector, Offset + WorldRangeVector);
@@ -626,6 +625,15 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
                 uiPos + new Vector2(-size, 0f),
             };
 
+            var unknownMassLabelStr = string.Empty;
+            var hideLabel = false;
+            if (EntManager.GetEntity(marker.Target) is { } targetUid && targetUid.IsValid())
+            {
+                unknownMassLabelStr = _detection.HandleUnknownMassLabel(targetUid);
+                if (EntManager.TryGetComponent<IFFComponent>(targetUid, out var iff))
+                    hideLabel = (iff.Flags & IFFFlags.HideLabel) != 0x0;
+            }
+
             handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts, color.WithAlpha(0.3f));
             handle.DrawLine(verts[0], verts[1], color);
             handle.DrawLine(verts[1], verts[2], color);
@@ -634,7 +642,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
             handle.DrawCircle(uiPos, 3f * UIScale, color, true);
 
             var labelPos = uiPos + new Vector2(8f, -6f);
-            handle.DrawString(_font, labelPos, marker.Name, color);
+            handle.DrawString(_font, labelPos, hideLabel ? unknownMassLabelStr : marker.Name, color);
         }
     }
 

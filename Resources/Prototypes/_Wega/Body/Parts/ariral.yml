@@ -31,12 +31,6 @@
         Quantity: 10
       - ReagentId: AriralBlood
         Quantity: 20
-  #Forge-Change-Start
-  - type: MovementBodyPartModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
-    group: torso
-  #Forge-Change-end
 
 - type: entity
   id: HeadAriral

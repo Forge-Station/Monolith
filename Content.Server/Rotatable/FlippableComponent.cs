@@ -1,5 +1,5 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Rotatable
 {
@@ -9,7 +9,7 @@ namespace Content.Server.Rotatable
         /// <summary>
         ///     Entity to replace this entity with when the current one is 'flipped'.
         /// </summary>
-        [DataField("mirrorEntity", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("mirrorEntity", required: true, customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string MirrorEntity = default!;
     }
 }

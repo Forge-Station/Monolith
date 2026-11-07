@@ -101,6 +101,10 @@
   - type: NpcFactionMember
     factions:
     - NanoTrasen
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: NT
+  # Forge-Change-end
   - type: Construction
     deconstructionTarget: null
     graph: WeaponTurretLaserNanoTrasenPackingGraph
@@ -195,12 +199,15 @@
   - BaseWeaponTurretMagazineFed
   components:
   - type: NPCImprintingOnSpawnBehaviour
-    whitelist:
-      components:
-      - HumanoidAppearance
+    spawnFriendsSearchRadius: -1 # Forge-Change
   - type: NpcFactionMember
     factions:
     - NanoTrasen
+  # Forge-Change-start
+  - type: TurretCommandLink
+    faction: NT
+    bindAny: true
+  # Forge-Change-end
   - type: Sprite
     sprite: _NF/Objects/Weapons/Guns/Turrets/magazinefed.rsi
     drawdepth: Mobs
@@ -290,12 +297,15 @@
   - WeaponTurretAsmgtNtDeployed
   components:
   - type: NPCImprintingOnSpawnBehaviour
-    whitelist:
-      components:
-      - HumanoidAppearance
+    spawnFriendsSearchRadius: -1 # Forge-Change
   - type: NpcFactionMember
     factions:
     - HostileUniversally
+  # Forge-Change-start
+  - type: TurretCommandLink
+    managed: true
+    bindAny: true
+  # Forge-Change-end
   - type: Construction
     deconstructionTarget: null
     graph: WeaponTurretAsmgtHostileUniversallyPackingGraph
@@ -319,8 +329,8 @@
   id: WeaponTurretAsmgtHostileUniversallyPacked
   name: packed Civilian ASMGT
   suffix: Hostile, Packed, Imprint
-  description: |-
-   A disassembled and packed Civilian-model Autonomous Sentry Machine Gun Turret (ASMGT). WARNING! Unpacked turret will be hostile towards anyone who wasn't in close proximity (within 3 m) after unpacking!
+  description: |- # Forge-Change
+   A disassembled and packed Civilian-model Autonomous Sentry Machine Gun Turret (ASMGT). Once deployed it obeys the turret command console on this grid.
   parent:
   - WeaponTurretAsmgtNtPacked
   components:

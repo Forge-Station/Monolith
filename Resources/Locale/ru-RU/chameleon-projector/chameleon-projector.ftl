@@ -2,3 +2,5 @@ chameleon-projector-invalid = Вы не можете так замаскиров
 chameleon-projector-success = Новая маскировка спроецирована.
 chameleon-projector-inside-container = Слишком мало места для проекции!
 chameleon-projector-set-disguise = Установить маскировку
+
+chameleon-projector-norot-needs-anchor = Для этого необходимо закрепиться!

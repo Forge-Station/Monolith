@@ -28,7 +28,6 @@ public sealed partial class CargoSystem
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private NameIdentifierSystem _nameIdentifier = default!;
 
-    [ValidatePrototypeId<NameIdentifierGroupPrototype>]
     private const string BountyNameIdentifierGroup = "Bounty";
 
     private EntityQuery<StackComponent> _stackQuery;

@@ -137,11 +137,11 @@
  #     maxAmount: 6 # Forge-change
     # Parts
 #    - id: SuperCapacitorStockPart   Forge-Change
-#      amount: 3 
+#      amount: 3
 #    - id: SuperMatterBinStockPart   Forge-Change
-#      amount: 3 
+#      amount: 3
 #    - id: PicoManipulatorStockPart   Forge-Change
-#      amount: 3 
+#      amount: 3
     # rare t4 parts
     - id: QuadraticCapacitorStockPart
       amount: 1 # Forge-Change
@@ -172,6 +172,8 @@
       prob: 0.2
     - id: TechDiskOmegaGunnery # Forge-Change
       prob: 0.03 # Forge-Change: 3%
+    - id: TechDiskCloaking # Forge-Change - Cloaking
+      prob: 0.01 # Forge-Change: ~1% from T2-2 blackbox
     # Tier-4 bluespace boarding teleport (0.005%)
     - id: DisciplinesDiskBoardingTeleportTier4
       prob: 0.05

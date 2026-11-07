@@ -28,6 +28,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Tag # Forge-change
+    tags:
+      - NoGridGodmode
 
 - type: entity
   id: Cobweb2
@@ -39,3 +42,6 @@
   - type: Icon
     sprite: Structures/Decoration/cobweb.rsi
     state: cobweb2
+  - type: Tag # Forge-change
+    tags:
+      - NoGridGodmode

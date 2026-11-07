@@ -71,7 +71,14 @@ public sealed partial class SalvageSystem
     /// </summary>
     private void Announce(EntityUid mapUid, string text)
     {
-        var mapId = Comp<MapComponent>(mapUid).MapId;
+        // FinishExpedition runs from ComponentShutdown while the expedition map is already
+        // tearing down. MapComponent / Maps[] may already be gone — that is expected, not an error.
+        if (!TryComp<MapComponent>(mapUid, out var map))
+            return;
+
+        var mapId = map.MapId;
+        if (!_mapSystem.TryGetMap(mapId, out _))
+            return;
 
         // I love TComms and chat!!!
         _chat.ChatMessageToManyFiltered(
@@ -79,7 +86,7 @@ public sealed partial class SalvageSystem
             ChatChannel.Radio,
             text,
             text,
-            _mapManager.GetMapEntityId(mapId),
+            mapUid,
             false,
             true,
             null);
@@ -130,7 +137,7 @@ public sealed partial class SalvageSystem
     {
         // Started a mining mission so work out exempt entities
         if (TryComp<SalvageMiningExpeditionComponent>(
-                _mapManager.GetMapEntityId(ev.TargetCoordinates.ToMap(EntityManager, _transform).MapId),
+                _mapSystem.GetMap(ev.TargetCoordinates.ToMap(EntityManager, _transform).MapId),
                 out var mining))
         {
             var ents = new List<EntityUid>();

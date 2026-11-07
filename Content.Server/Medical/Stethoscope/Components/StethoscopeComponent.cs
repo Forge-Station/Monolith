@@ -1,5 +1,5 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Medical.Stethoscope.Components
 {
@@ -14,7 +14,7 @@ namespace Content.Server.Medical.Stethoscope.Components
         [DataField("delay")]
         public float Delay = 2.5f;
 
-        [DataField("action", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("action", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string Action = "ActionStethoscope";
 
         [DataField("actionEntity")] public EntityUid? ActionEntity;

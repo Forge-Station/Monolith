@@ -43,15 +43,8 @@ public sealed class ContractsSystem : EntitySystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly StoreSystem _store = default!;
 
-    // Validation in case of changes
-//    [ValidatePrototypeId<NpcFactionPrototype>]
-//    private const string Pirate = " ";
-//    [ValidatePrototypeId<NpcFactionPrototype>]
-//    private const string Syndicate = " ";
 
-    [ValidatePrototypeId<StackPrototype>]
     private const string Credit = "Credit";
-    [ValidatePrototypeId<StackPrototype>]
     private const string Telecrystal = "Telecrystal";
 
     public override void Initialize()

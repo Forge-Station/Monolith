@@ -3,8 +3,8 @@ using Content.Shared.Access.Components;
 using System.Text;
 namespace Content.Shared.Cargo
 {
-    [NetSerializable, Serializable]
-    public sealed class CargoOrderData
+    [NetSerializable, Serializable, DataDefinition]
+    public sealed partial class CargoOrderData
     {
         /// <summary>
         /// Price when the order was added.

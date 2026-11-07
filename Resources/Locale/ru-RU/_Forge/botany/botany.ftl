@@ -117,13 +117,20 @@ hydroponics-console-field-ideal-light = Идеальный свет
 hydroponics-console-save-ok = Сохранена линия «{$name}».
 hydroponics-console-save-empty = В лотке нет растения.
 hydroponics-console-journal-full = Журнал полон (24 линии). Удалите одну.
-hydroponics-console-print-packet-ok = Напечатан пакет семян «{$name}».
+hydroponics-console-print-packet-ok = Напечатан пакет семян «{$name}». Осталось печатей: {$remaining}.
+hydroponics-console-print-limit = Для этой линии исчерпан лимит в 5 печатей семян.
+hydroponics-console-print-remaining = Печать семян
+hydroponics-console-print-remaining-value = использовано {$used} / 5 (осталось {$remaining})
+hydroponics-console-save-already-archived = Данные этого растения уже сохранены в журнал.
+hydroponics-console-save-printed-seeds = Напечатанные семена нельзя добавить в журнал — для обмена генами используйте палочку с пыльцой.
+hydroponics-console-save-unavailable = Это растение нельзя сохранить в журнал.
 hydroponics-console-eject-disk-ok = «{$name}» записана на дискету.
 hydroponics-console-disk-blank = Дискета пустая.
 hydroponics-console-disk-imported = Импортирована линия «{$name}».
 
 botany-cultivar-disk-blank = Дискета пустая.
 botany-cultivar-disk-contents = Линия: [color=lightgreen]{$name}[/color] ({$plant})
+botany-cultivar-disk-prints = Печать семян: {$used} / 5 (осталось {$remaining})
 
 plant-holder-light-ambient = обычный
 plant-holder-light-day = день
@@ -152,6 +159,13 @@ ent-AloeCream1 = крем из алоэ
 ent-BotanyDriedProduce = сушёный урожай
     .desc = Высушенная зелень. Цвет и вкус как у сорта, с которого сняли.
 
+plant-holder-harvest-container-slot = ёмкость для урожая
+plant-holder-harvest-container-filled = Урожай налит в ёмкость: {$name}.
+plant-holder-harvest-container-examine = Ёмкость для урожая: [color=lightgreen]{$container}[/color]
+plant-holder-harvest-container-empty-examine = [color=gray]Ёмкость не вставлена — вставьте мензурку или стакан для сбора сока.[/color]
+plant-holder-harvest-container-missing = В лотке нет ёмкости — сок не собран.
+plant-holder-harvest-container-full = Ёмкость полная — сок не собран.
+
 hydroponics-console-rename-tray = Переименовать лоток
 hydroponics-console-tray-name-placeholder = пшеница-рад-3
 hydroponics-console-rename-tray-ok = Лоток переименован: «{$name}».
@@ -159,14 +173,51 @@ hydroponics-console-warn-pest-eater = санитар
 hydroponics-console-warn-locked = гены закреплены
 
 plant-holder-component-pest-eater-warning = [color=lightgreen]Растение жрёт сорняки и жуков в лотке.[/color]
-plant-holder-component-gene-locked-warning = [color=cyan]Гены этой линии закреплены. Мутаген её не крутит.[/color]
+plant-holder-component-gene-locked-warning = [color=cyan]Закреплённые гены: {$traits}. Мутаген эту линию не крутит.[/color]
 plant-analyzer-mutation-pest-eater = Санитар
 plant-analyzer-mutation-gene-locked = Гены закреплены
+
+hydroponics-console-warn-locked-detail = закреплены: {$traits}
+
+plant-mutation-name-change-water-consumption = Изменение потребления воды
+plant-mutation-name-change-nutrient-consumption = Изменение потребления питательных веществ
+plant-mutation-name-change-ideal-heat = Изменение идеальной температуры
+plant-mutation-name-change-heat-tolerance = Изменение термостойкости
+plant-mutation-name-change-toxins-tolerance = Изменение токсиностойкости
+plant-mutation-name-change-low-pressure-tolerance = Изменение низкого давления
+plant-mutation-name-change-high-pressure-tolerance = Изменение высокого давления
+plant-mutation-name-change-pest-tolerance = Изменение устойчивости к вредителям
+plant-mutation-name-change-weed-tolerance = Изменение устойчивости к сорнякам
+plant-mutation-name-change-endurance = Изменение выносливости
+plant-mutation-name-change-yield = Изменение урожайности
+plant-mutation-name-change-lifespan = Изменение продолжительности жизни
+plant-mutation-name-change-maturation = Изменение созревания
+plant-mutation-name-change-production = Изменение производства
+plant-mutation-name-change-potency = Изменение крепости
+plant-mutation-name-change-ideal-light = Изменение идеального света
+plant-mutation-name-change-chemicals = Изменение химикатов
+plant-mutation-name-change-exude-gasses = Изменение выделяемых газов
+plant-mutation-name-change-consume-gasses = Изменение потребляемых газов
+plant-mutation-name-change-harvest = Изменение сбора урожая
+plant-mutation-name-change-species = Смена вида
+plant-mutation-name-carbon-filter = Углеродный фильтр
+plant-mutation-name-antirad-fruit = Антирад-плод
+plant-mutation-name-drought-tolerant = Засухоустойчивость
+plant-mutation-name-nitrogen-fixer = Азотофиксатор
+plant-mutation-name-shade-adapted = Тенелюбивость
+plant-mutation-name-sun-lover = Солнцелюб
+plant-mutation-name-perennial = Многолетник
+plant-mutation-name-pest-ward = Защита от вредителей
+plant-mutation-name-thin-air = Разреженный воздух
+plant-mutation-name-oxygen-bloom = Кислородный цвет
+plant-mutation-name-aloe-sap = Алоэ-сок
+plant-mutation-name-bitter-antidote = Горький антидот
 
 botany-swab-from-packet = Вы снимаете пыльцу с пакета семян.
 botany-swab-graft-packet = Пыльца привита: мутации перешли на пакет {$name}.
 
-seed-component-gene-locked = [color=cyan]Гены закреплены — мутаген эту линию не крутит.[/color]
+seed-component-gene-locked = [color=cyan]Закреплённые гены: {$traits}. Мутаген эту линию не крутит.[/color]
+seed-component-cultivar-journal-locked = [color=gray]Напечатанная линия — нельзя добавить в журнал гидропоники.[/color]
 
 botany-plant-cloth-name = волокно ({$name})
 botany-plant-juice-name = сок ({$name})

@@ -147,7 +147,7 @@ namespace Content.Shared.Chemistry.Reagent
         /// </summary>
         [DataField]
         public bool WorksOnTheDead;
-        
+
         /// <summary>
         /// How likely is this reagent to set on fire?
         /// </summary>
@@ -171,6 +171,11 @@ namespace Content.Shared.Chemistry.Reagent
 
         [DataField]
         public SoundSpecifier FootstepSound = new SoundCollectionSpecifier("FootstepWater", AudioParams.Default.WithVolume(6));
+
+        // Forge-change-start
+        [DataField]
+        public float DecayRate { get; private set; } = 0.001f;
+        // Forge-change-end
 
         public FixedPoint2 ReactionTile(TileRef tile, FixedPoint2 reactVolume, IEntityManager entityManager, List<ReagentData>? data)
         {

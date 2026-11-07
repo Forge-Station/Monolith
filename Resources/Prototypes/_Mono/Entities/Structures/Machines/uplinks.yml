@@ -41,7 +41,7 @@
     - UplinkSecurityBundles
     - UplinkSecurityVouchers # Mono
     balance:
-      FederationMilitaryCredit: 25
+      FederationMilitaryCredit: 0 #Forge-change
   - type: AccessReader
     access: [["Security"]]
   - type: CompanyAccessReader

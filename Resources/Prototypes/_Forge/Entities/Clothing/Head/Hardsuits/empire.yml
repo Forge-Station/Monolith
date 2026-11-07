@@ -1,9 +1,9 @@
-# костюм облегчённого джаггернаута HV-2
+# light weight jagernaut hardsuit HV-2
 - type: entity
   parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision2Empire, ShowMedicalIcons]
   id: ClothingHeadHelmetHardsuitHV2
-  name: шлем костюма HV-2 # HV-2 helmet
-  description: Шлем облегчённого джаггернаута HV-2. Иммет встроенные визоры для удобства. # A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  name: HV-2 helmet
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -26,12 +26,12 @@
     - HeadTop
     - HeadSide
 
-# костюм облегчённого джаггернаута HV-2c
+# light weight jagernaut hardsuit HV-2c
 - type: entity
-  parent: ClothingHeadHelmetHardsuitHV2
+  parent: [ClothingHeadHelmetHardsuitHV2, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitHV2Com
-  name: шлем костюма HV-2c # HV-2c helmet
-  description: Шлем облегчённого джаггернаута HV-2c. Имеет встроенные визоры для удобства. # A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  name: HV-2c helmet
+  description: A hardsuit issued to Imperial guardian operating in low-pressure and high-risk environments. Specialized in bullet protection.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -42,14 +42,14 @@
     isEquipment: true
     toggleAction: PulseThermalVision
   - type: Clothing
-    sprite: Forge/Clothing/Head/Hardsuits/empirelight_commander.rsi
+    sprite: _Forge/Clothing/Head/Hardsuits/empirelight_commander.rsi
 
-# костюм облегчённого джаггернаута HV-2i
+# light weight jagernaut hardsuit HV-2i
 - type: entity
   parent: ClothingHeadHelmetHardsuitHV2
   id: ClothingHeadHelmetHardsuitHV2Inq
-  name: шлем костюма HV-2i # HV-2i helmet
-  description: Шлем облегчённого джаггернаута HV-2i. Имеет встроенные визоры для удобства. # A hardsuit issued to Imperial Inquisitor operating in low-pressure and high-risk environments. Specialized in bullet protection.
+  name: HV-2i helmet
+  description: A hardsuit issued to Imperial Inquisitor operating in low-pressure and high-risk environments. Specialized in bullet protection.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -129,7 +129,7 @@
 
 # RI-22c lord-commander battle hardsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Empire]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Empire, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitRI22c
   name: RI-22c helmet
   description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
@@ -192,7 +192,7 @@
 
 # HV-7 heavy battle hardsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Empire]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ClothingNightVision4Empire, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitHV7
   name: HV-7 helmet
   description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
@@ -220,7 +220,7 @@
 
 # HV-7 commander heavy battle hardsuit
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Empire]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Empire, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitHV7c
   name: HV-7 helmet
   description: The interchangeable helmet system for the majority of HVE-14m hardsuits.
@@ -253,7 +253,7 @@
 
 # HV MP 9 «Vigilance»
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Empire, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Empire, ShowMedicalIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitHVReflectElite
   name: helmet HV MP 9 «Vigilance»
   description: Higaris Victories' military prototype 9, codenamed «Vigilance». A high-tech reflect suit developed by Higaris Victories for special operations. Partial reflect capabilities against laser weapons.
@@ -288,7 +288,7 @@
 
 # HV MP 0-4 «Militant»
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Empire]
+  parent: [ClothingHeadHardsuitBaseMilitary, ShowMedicalIcons, ShowSecurityIcons, ClothingNightVision4Empire, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitHVMilitant
   name: HV MP 0-4 «Militant» helmet
   description: Higaris Victories' military prototype 0-4, codenamed «Militant».
@@ -317,7 +317,7 @@
 
 # HV MP-33R «Imperceptible»
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Empire, ShowMedicalIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Empire, ShowMedicalIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitHVStealh
   name: HV MP-33R «Imperceptible» helmet
   description: Higaris Victories' military prototype 33R, codenamed «Imperceptible».
@@ -355,26 +355,30 @@
     parent: true
     components:
     - type: Stealth
-      minVisibility: 0.01
+      minVisibility: -1.5
       maxVisibility: 1
-      damageVisibilityModifier: 1
-      attackVisibilityModifier: 1
+      damageVisibilityModifier: 0.5
+      attackVisibilityModifier: 1.5
     - type: StealthOnMove
-      passiveVisibilityRate: -0.2
-      movementVisibilityRate: 0
+      passiveVisibilityRate: -0.33
+      movementVisibilityRate: 0.17
   - type: UseDelay
     delay: 2
   - type: PowerCellDraw
-    drawRate: 2
+    drawRate: 0.5
   - type: ToggleCellDraw
+  - type: ClothingBatteryAlert
   - type: ItemSlots
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellInternalHardsuit
+        disableEject: true
+        swap: false
 
 # advanced light hardsuit RI-32m
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Empire, ShowMedicalIcons, ShowSecurityIcons]
+  parent: [ClothingHeadHardsuitBaseMilitary, ClothingNightVision4Empire, ShowMedicalIcons, ShowSecurityIcons, BaseClothingHelmetMassScanner]
   id: ClothingHeadHelmetHardsuitRI32m
   name: шлем RI-32m # RI-32m helmet
   description: Шлем для скафандра RI-32m. # The interchangeable helmet system for the majority of HVE-14m hardsuits.

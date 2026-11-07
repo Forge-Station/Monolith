@@ -11,7 +11,7 @@ namespace Content.Server._Mono.Drill;
 public sealed partial class ShipDrillComponent : Component
 {
     [DataField]
-    public Vector2 DrillOffsets = new(0, 1f);
+    public Vector2 DrillOffsets = new(0, 1.3f);
 
     [DataField]
     public Vector2 DrillSize = new(2f, 2f);

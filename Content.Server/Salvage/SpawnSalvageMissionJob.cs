@@ -38,7 +38,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.GameObjects;
-using Content.Shared._Crescent.SpaceBiomes;
 
 namespace Content.Server.Salvage;
 
@@ -46,7 +45,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
 {
     private readonly IEntityManager _entManager;
     private readonly IGameTiming _timing;
-    private readonly IMapManager _mapManager;
+    private readonly SharedMapSystem _mapManager;
     private readonly IPrototypeManager _prototypeManager;
     private readonly AnchorableSystem _anchorable;
     private readonly BiomeSystem _biome;
@@ -57,7 +56,6 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
     private readonly StationSystem _stationSystem;
     private readonly SalvageSystem _salvage;
     private readonly SharedTransformSystem _xforms;
-    private readonly SharedMapSystem _map;
 
     public readonly EntityUid Station;
     public readonly EntityUid? CoordinatesDisk;
@@ -80,7 +78,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         double maxTime,
         IEntityManager entManager,
         IGameTiming timing,
-        IMapManager mapManager,
+        SharedMapSystem mapManager,
         IPrototypeManager protoManager,
         AnchorableSystem anchorable,
         BiomeSystem biome,
@@ -91,7 +89,6 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         MetaDataSystem metaData,
         SalvageSystem salvage,
         SharedTransformSystem xform,
-        SharedMapSystem map,
         EntityUid station,
         EntityUid? coordinatesDisk,
         SalvageMissionParams missionParams,
@@ -110,7 +107,6 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         _metaData = metaData;
         _salvage = salvage;
         _xforms = xform;
-        _map = map;
         Station = station;
         CoordinatesDisk = coordinatesDisk;
         _missionParams = missionParams;
@@ -119,11 +115,25 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
     protected override async Task<bool> Process()
     {
         // Frontier: gracefully handle expedition failures
-        bool success = true;
+        bool success = false;
         string? errorStackTrace = null;
         try
         {
-            await InternalProcess().ContinueWith((t) => { success = false; errorStackTrace = t.Exception?.InnerException?.StackTrace; }, TaskContinuationOptions.OnlyOnFaulted);
+            // Do NOT use ContinueWith(OnlyOnFaulted): awaiting that after a successful
+            // InternalProcess cancels the continuation and throws TaskCanceledException,
+            // which used to make every "successful" expedition look failed / flake out.
+            success = await InternalProcess();
+        }
+        catch (OperationCanceledException)
+        {
+            // Job was cancelled (round restart, etc.) — clean up in finally.
+            success = false;
+            throw;
+        }
+        catch (Exception e)
+        {
+            success = false;
+            errorStackTrace = e.ToString();
         }
         finally
         {
@@ -137,7 +147,8 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                 if (_entManager.TryGetComponent<SalvageExpeditionComponent>(mapUid, out var salvage))
                     salvage.Station = EntityUid.Invalid;
 
-                _entManager.QueueDeleteEntity(mapUid);
+                if (mapUid.IsValid())
+                    _entManager.QueueDeleteEntity(mapUid);
             }
         }
         return success;
@@ -148,7 +159,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
     {
         Logger.DebugS("salvage", $"Spawning salvage mission with seed {_missionParams.Seed}");
         var config = _missionParams.MissionType;
-        mapUid = _map.CreateMap(out var mapId, runMapInit: false); // Frontier: remove "var"
+        mapUid = _mapManager.CreateMap(out var mapId, runMapInit: false); // Frontier: remove "var"
         MetaDataComponent? metadata = null;
         var grid = _entManager.EnsureComponent<MapGridComponent>(mapUid);
         var random = new Random(_missionParams.Seed);
@@ -216,8 +227,8 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
             }
         }
 
-        _mapManager.DoMapInitialize(mapId);
-        _mapManager.SetMapPaused(mapId, true);
+        _mapManager.InitializeMap(mapId);
+        _mapManager.SetPaused(mapId, true);
 
         // Setup expedition
         var expedition = _entManager.AddComponent<SalvageExpeditionComponent>(mapUid);
@@ -271,6 +282,10 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
             }
 
             expedition.DungeonLocation = dungeonOffset;
+
+            // Forge-Change: carve a resin-door tunnel from the dungeon out into the hive caves.
+            if (biome != null)
+                _biome.ConnectXenoHive(mapUid, grid, biome, dungeon);
         }
 
         // Frontier: get map bounding box
@@ -278,6 +293,15 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         foreach (var tile in dungeon.AllTiles)
         {
             dungeonBox = dungeonBox.ExtendToContain(tile);
+        }
+
+        // Forge-Change: dungeon floors, structures and room fills are not biome content.
+        // Without this, a chunk unload treats matching tiles as untouched and wipes them.
+        if (biome != null)
+        {
+            var reserved = new List<(Vector2i Index, Tile Tile)>();
+            var reserveBox = new Box2(dungeonBox.Left - 1, dungeonBox.Bottom - 1, dungeonBox.Right + 1, dungeonBox.Top + 1);
+            _biome.ReserveTiles(mapUid, reserveBox, reserved, biome, grid);
         }
 
         var stationData = _entManager.GetComponent<StationDataComponent>(Station);
@@ -318,7 +342,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         //     clearBoxCenter.X + clearBoxHalfWidth,
         //     clearBoxCenter.Y + clearBoxHalfHeight);
 
-        // foreach (var tile in _map.GetTilesIntersecting(mapUid, grid, new Circle(Vector2.Zero, landingPadRadius), false))
+        // foreach (var tile in _mapManager.GetTilesIntersecting(mapUid, grid, new Circle(Vector2.Zero, landingPadRadius), false))
         // {
         //     if (!_biome.TryGetBiomeTile(mapUid, grid, tile.GridIndices, out _))
         //         continue;
@@ -448,7 +472,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                     continue;
                 }
 
-                var spawnPosition = _map.GridTileToLocal(mapUid, grid, spawnTile);
+                var spawnPosition = _mapManager.GridTileToLocal(mapUid, grid, spawnTile);
                 var uid = _entManager.SpawnEntity(shaggy, spawnPosition);
                 _entManager.AddComponent<SalvageStructureComponent>(uid);
                 structureComp.Structures.Add(uid);
@@ -468,7 +492,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         var roomIndex = random.Next(dungeon.Rooms.Count);
         var room = dungeon.Rooms[roomIndex];
         var tile = room.Tiles.ElementAt(random.Next(room.Tiles.Count));
-        var position = _map.GridTileToLocal(mapUid, grid, tile);
+        var position = _mapManager.GridTileToLocal(mapUid, grid, tile);
 
         var faction = _prototypeManager.Index<SalvageFactionPrototype>(mission.Faction);
         var prototype = faction.Configs["Megafauna"];
@@ -487,6 +511,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         var groupSpawns = _salvage.GetSpawnCount(mission.Difficulty) * scale;
         var groupSum = faction.MobGroups.Sum(o => o.Prob);
         var validSpawns = new List<Vector2i>();
+        var roomCounts = new Dictionary<int, int>(); // Forge-Change
 
         for (var i = 0; i < groupSpawns; i++)
         {
@@ -503,14 +528,17 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                 var mobGroupIndex = random.Next(faction.MobGroups.Count);
                 var mobGroup = faction.MobGroups[mobGroupIndex];
 
-                var spawnRoomIndex = random.Next(dungeon.Rooms.Count);
-                var spawnRoom = dungeon.Rooms[spawnRoomIndex];
-                validSpawns.Clear();
-                validSpawns.AddRange(spawnRoom.Tiles);
-                random.Shuffle(validSpawns);
-
                 foreach (var entry in EntitySpawnCollection.GetSpawns(mobGroup.Entries, random))
                 {
+                    // Forge-Change: spread mobs so one room cannot absorb every group.
+                    if (!TryPickSpawnRoom(dungeon, faction.MaxMobsPerRoom, roomCounts, random, out var spawnRoomIndex))
+                        continue;
+
+                    var spawnRoom = dungeon.Rooms[spawnRoomIndex];
+                    validSpawns.Clear();
+                    validSpawns.AddRange(spawnRoom.Tiles);
+                    random.Shuffle(validSpawns);
+
                     while (validSpawns.Count > 0)
                     {
                         var spawnTile = validSpawns[^1];
@@ -522,12 +550,13 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                             continue;
                         }
 
-                        var spawnPosition = _map.GridTileToLocal(mapUid, grid, spawnTile); // Frontier: grid<_map
+                        var spawnPosition = _mapManager.GridTileToLocal(mapUid, grid, spawnTile); // Frontier: grid<_mapManager
 
                         var uid = _entManager.CreateEntityUninitialized(entry, spawnPosition);
                         _entManager.RemoveComponent<GhostTakeoverAvailableComponent>(uid);
                         _entManager.RemoveComponent<GhostRoleComponent>(uid);
                         _entManager.InitializeAndStartEntity(uid);
+                        roomCounts[spawnRoomIndex] = roomCounts.GetValueOrDefault(spawnRoomIndex) + 1;
 
                         break;
                     }
@@ -537,6 +566,41 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// Forge-Change: pick a room that still has space under <paramref name="maxPerRoom"/>.
+    /// A non-positive cap keeps the old fully random pick.
+    /// </summary>
+    private static bool TryPickSpawnRoom(
+        Dungeon dungeon,
+        int maxPerRoom,
+        Dictionary<int, int> roomCounts,
+        Random random,
+        out int roomIndex)
+    {
+        roomIndex = 0;
+        if (dungeon.Rooms.Count == 0)
+            return false;
+
+        if (maxPerRoom <= 0)
+        {
+            roomIndex = random.Next(dungeon.Rooms.Count);
+            return true;
+        }
+
+        var open = new List<int>();
+        for (var i = 0; i < dungeon.Rooms.Count; i++)
+        {
+            if (roomCounts.GetValueOrDefault(i) < maxPerRoom)
+                open.Add(i);
+        }
+
+        if (open.Count == 0)
+            return false;
+
+        roomIndex = open[random.Next(open.Count)];
+        return true;
     }
 
     #endregion

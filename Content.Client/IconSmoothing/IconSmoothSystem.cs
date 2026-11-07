@@ -94,9 +94,19 @@ namespace Content.Client.IconSmoothing
         private void SetCornerLayerState(SpriteComponent sprite, CornerLayers corner, DirectionOffset offset, string state)
         {
             if (sprite.LayerMapTryGet(corner, out var layer))
+            {
                 sprite.LayerSetState(layer, state);
+            }
             else
-                sprite.LayerMapSet(corner, sprite.AddLayerState(state));
+            {
+                // Forge-Change: bare AddLayerState inherits RSI from BaseRSI; if neither is set
+                // (common during client-side shipyard preview loads) SpriteSystem logs and errors.
+                if (sprite.BaseRSI == null)
+                    return;
+
+                sprite.LayerMapSet(corner, sprite.AddLayerState(state, sprite.BaseRSI));
+            }
+
             sprite.LayerSetDirOffset(corner, offset);
         }
         // End Frontier: set layer function to remove redundancy
@@ -307,7 +317,7 @@ namespace Content.Client.IconSmoothing
         {
             if (gridEntity == null)
             {
-                sprite.Comp.LayerSetState(0, $"{smooth.StateBase}0");
+                TrySetLayerState(sprite, 0, $"{smooth.StateBase}0");
                 return;
             }
 
@@ -331,14 +341,23 @@ namespace Content.Client.IconSmoothing
                 matching = matching && MatchingEntity(smooth, _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, pos + neighbor), smoothQuery, neighbor); // Frontier: add neighbor
             }
 
-            if (matching)
-            {
-                sprite.Comp.LayerSetState(0, $"{smooth.StateBase}1");
-            }
-            else
-            {
-                sprite.Comp.LayerSetState(0, $"{smooth.StateBase}0");
-            }
+            TrySetLayerState(sprite, 0, matching ? $"{smooth.StateBase}1" : $"{smooth.StateBase}0");
+        }
+
+        /// <summary>
+        /// Sets a layer state only when the layer exists and its RSI actually contains the state.
+        /// Avoids ERRO spam when layer 0 is a damage overlay (e.g. cracks_diagonal.rsi).
+        /// </summary>
+        private static void TrySetLayerState(Entity<SpriteComponent> sprite, int layer, string state)
+        {
+            if (!sprite.Comp.TryGetLayer(layer, out var spriteLayer, false))
+                return;
+
+            var rsi = spriteLayer.ActualRsi;
+            if (rsi == null || !rsi.TryGetState(state, out _))
+                return;
+
+            sprite.Comp.LayerSetState(layer, state);
         }
 
         // New Frontiers - Better icon smoothing - icon smoothing that supports more diagonal window states
@@ -351,7 +370,7 @@ namespace Content.Client.IconSmoothing
         {
             if (gridEntity == null)
             {
-                sprite.Comp.LayerSetState(0, $"{smooth.StateBase}0");
+                TrySetLayerState(sprite, 0, $"{smooth.StateBase}0");
                 return;
             }
 
@@ -383,7 +402,7 @@ namespace Content.Client.IconSmoothing
                     value = 4;
             }
 
-            sprite.Comp.LayerSetState(0, $"{smooth.StateBase}{value}");
+            TrySetLayerState(sprite, 0, $"{smooth.StateBase}{value}");
         }
 
         // Check if a particular window/wall allows smoothing on a given edge
@@ -473,10 +492,15 @@ namespace Content.Client.IconSmoothing
             // At the very least each event currently only queues a sprite for updating.
             // Oh god sprite component is a mess.
             var sprite = spriteEnt.Comp;
-            sprite.LayerSetState(CornerLayers.NE, $"{smooth.StateBase}{(int)cornerNE}");
-            sprite.LayerSetState(CornerLayers.SE, $"{smooth.StateBase}{(int)cornerSE}");
-            sprite.LayerSetState(CornerLayers.SW, $"{smooth.StateBase}{(int)cornerSW}");
-            sprite.LayerSetState(CornerLayers.NW, $"{smooth.StateBase}{(int)cornerNW}");
+            // Preview / incomplete sprites may lack corner layers — skip instead of spamming errors.
+            if (sprite.LayerMapTryGet(CornerLayers.NE, out _))
+                sprite.LayerSetState(CornerLayers.NE, $"{smooth.StateBase}{(int)cornerNE}");
+            if (sprite.LayerMapTryGet(CornerLayers.SE, out _))
+                sprite.LayerSetState(CornerLayers.SE, $"{smooth.StateBase}{(int)cornerSE}");
+            if (sprite.LayerMapTryGet(CornerLayers.SW, out _))
+                sprite.LayerSetState(CornerLayers.SW, $"{smooth.StateBase}{(int)cornerSW}");
+            if (sprite.LayerMapTryGet(CornerLayers.NW, out _))
+                sprite.LayerSetState(CornerLayers.NW, $"{smooth.StateBase}{(int)cornerNW}");
 
             var directions = DirectionFlag.None;
 

@@ -1,0 +1,5 @@
+- type: collectiveMind
+  id: RootMind
+  name: collective-mind-root-mind
+  keycode: 'd'
+  color: "#8f2d00"

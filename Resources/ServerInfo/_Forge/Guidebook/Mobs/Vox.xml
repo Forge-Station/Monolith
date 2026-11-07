@@ -1,6 +1,6 @@
 <Document>
   # Воксы
-
+  [bold](Может содержать неактуальную или устаревшую информацию)[/bold]
   <Box>
     <GuideEntityEmbed Entity="MobVox" Caption=""/>
   </Box>

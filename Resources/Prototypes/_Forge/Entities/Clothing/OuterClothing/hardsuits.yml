@@ -403,7 +403,8 @@
         Piercing: 0.475
         Heat: 0.5
         Radiation: 0.5
-        Caustic: 0.6
+        Shock: 0.8
+        Caustic: 0.2
   - type: StaminaDamageResistance
     coefficient: 0.25
   - type: ClothingSpeedModifier
@@ -421,3 +422,11 @@
   - type: StaticPrice
     price: 2800
     vendPrice: 20000
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+    - TTIEquip
+  - type: Engraveable # Forge-change
+    engravedMessage: Trauma Team International
+    hasEngravingText: forge-engraving-generic-has-message

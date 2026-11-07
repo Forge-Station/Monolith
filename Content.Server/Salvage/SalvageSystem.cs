@@ -26,7 +26,7 @@ namespace Content.Server.Salvage
     {
         [Dependency] private IChatManager _chat = default!;
         [Dependency] private IGameTiming _timing = default!;
-        [Dependency] private IMapManager _mapManager = default!;
+        [Dependency] private SharedMapSystem _mapSystem = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private IRobustRandom _random = default!;
         [Dependency] private AnchorableSystem _anchorable = default!;
@@ -39,7 +39,6 @@ namespace Content.Server.Salvage
         [Dependency] private RadioSystem _radioSystem = default!;
         [Dependency] private SharedAudioSystem _audio = default!;
         [Dependency] private SharedTransformSystem _transform = default!;
-        [Dependency] private SharedMapSystem _mapSystem = default!;
         [Dependency] private ShuttleSystem _shuttle = default!;
         [Dependency] private ShuttleConsoleSystem _shuttleConsoles = default!;
         [Dependency] private StationSystem _station = default!;

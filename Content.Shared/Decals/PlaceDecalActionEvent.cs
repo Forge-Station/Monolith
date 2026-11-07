@@ -1,11 +1,12 @@
-﻿using Content.Shared.Actions;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Content.Shared.Actions;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Decals;
 
 public sealed partial class PlaceDecalActionEvent : WorldTargetActionEvent
 {
-    [DataField("decalId", customTypeSerializer:typeof(PrototypeIdSerializer<DecalPrototype>), required:true)]
+    [DataField("decalId", customTypeSerializer:typeof(ProtoId<DecalPrototype>), required:true)]
     public string DecalId = string.Empty;
 
     [DataField("color")]

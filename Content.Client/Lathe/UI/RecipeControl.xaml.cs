@@ -18,6 +18,7 @@ public sealed partial class RecipeControl : Control
         RecipeName.Text = latheSystem.GetRecipeName(recipe);
         RecipeDisplayContainer.AddChild(displayControl);
         Button.Disabled = !canProduce;
+        Button.MinHeight = 36;
         TooltipTextSupplier = tooltipTextSupplier;
         Button.TooltipSupplier = SupplyTooltip;
 
@@ -25,6 +26,11 @@ public sealed partial class RecipeControl : Control
         {
             OnButtonPressed?.Invoke(recipe.ID);
         };
+    }
+
+    public void SetCanProduce(bool canProduce)
+    {
+        Button.Disabled = !canProduce;
     }
 
     private Control? SupplyTooltip(Control sender)

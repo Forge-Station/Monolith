@@ -111,3 +111,5 @@
     tags:
     - Trash
     - BorgTorso
+  - type: Item # Forge-change
+    size: Normal # Forge-change

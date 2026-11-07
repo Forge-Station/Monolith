@@ -12,7 +12,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.EntityEffects.Effects;
 
@@ -36,7 +36,7 @@ public sealed partial class AreaReactionEffect : EntityEffect
     /// <summary>
     /// The entity prototype that will be spawned as the effect.
     /// </summary>
-    [DataField("prototypeId", required: true, customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("prototypeId", required: true, customTypeSerializer:typeof(ProtoId<EntityPrototype>))]
     private string _prototypeId = default!;
 
     /// <summary>
@@ -63,7 +63,7 @@ public sealed partial class AreaReactionEffect : EntityEffect
             var spreadAmount = (int) Math.Max(0, Math.Ceiling((reagentArgs.Quantity / OverflowThreshold).Float()));
             var splitSolution = reagentArgs.Source.SplitSolution(reagentArgs.Source.Volume);
             var transform = reagentArgs.EntityManager.GetComponent<TransformComponent>(reagentArgs.TargetEntity);
-            var mapManager = IoCManager.Resolve<IMapManager>();
+            var mapManager = reagentArgs.EntityManager.System<SharedMapSystem>();
             var mapSys = reagentArgs.EntityManager.System<MapSystem>();
             var turf = reagentArgs.EntityManager.System<TurfSystem>();
             var spreaderSys = args.EntityManager.System<SpreaderSystem>();

@@ -14,7 +14,6 @@ public sealed partial class ShowJobIconsSystem : EquipmentHudSystem<ShowJobIcons
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private AccessReaderSystem _accessReader = default!;
 
-    [ValidatePrototypeId<JobIconPrototype>]
     private const string JobIconForNoId = "JobIconNoId";
 
     public override void Initialize()

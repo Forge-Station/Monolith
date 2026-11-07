@@ -4,9 +4,9 @@ using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Shared._Shitmed.Autodoc.Systems;
 
-public sealed partial class HandsFillSystem : EntitySystem
+public sealed class HandsFillSystem : EntitySystem
 {
-    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -29,7 +29,7 @@ public sealed partial class HandsFillSystem : EntitySystem
                 continue;
 
             var uid = Spawn(id, coords);
-            if (!_hands.TryPickup(ent, uid, name, animate: false, handsComp: hands))
+            if (!_hands.TryPickup(ent, uid, name, checkActionBlocker: false, animate: false, handsComp: hands))
             {
                 Log.Error($"Entity {ToPrettyString(ent)} couldn't pick up item {id} into its '{name}' hand!");
                 Del(uid);

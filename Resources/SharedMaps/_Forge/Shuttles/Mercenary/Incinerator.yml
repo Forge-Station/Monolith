@@ -841,7 +841,7 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 529
-- proto: AlwaysPoweredlightCyan
+- proto: PoweredlightCyan
   entities:
   - uid: 129
     components:

@@ -17,6 +17,6 @@
 - type: accessGroup
   id: Medical
   tags:
-  - ChiefMedicalOfficer
+  # - ChiefMedicalOfficer # Forge-change: wtf paramedic have CMO access?
   - Medical
   - Chemistry

@@ -68,6 +68,7 @@ public sealed partial class BiomeSystem
         LoadDecals(component, gridUid, grid, chunk, seed, modified);
 
         FinalizeChunk(component, chunk, modified);
+        PlaceXenoCavePassages(component, gridUid, grid, chunk); // Forge-Change
     }
 
     private void LoadTiles(

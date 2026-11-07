@@ -14,6 +14,8 @@
   - MineralScannerEmpty
   - OreProcessorIndustrialMachineCircuitboard
   - OreMagnetMachineCircuitboard
+  - OrePipeStorageMachineCircuitboard # Forge-Change: ore hold hub
+  - OreHoldModuleMachineCircuitboard # Forge-Change: expandable capacity
   - ClothingMaskWeldingGas
   - ClothingShoesBootsJump
   - MechEquipmentDrill # Goobstation

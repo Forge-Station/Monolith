@@ -2,7 +2,7 @@ using Content.Server.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Chemistry.Components;
 
@@ -22,7 +22,7 @@ public sealed partial class SolutionPurgeComponent : Component
     /// <summary>
     /// The reagent(s) to be ignored when purging the solution
     /// </summary>
-    [DataField("preserve", customTypeSerializer: typeof(PrototypeIdListSerializer<ReagentPrototype>))]
+    [DataField("preserve", customTypeSerializer: typeof(ProtoId<ReagentPrototype>))]
     [ViewVariables(VVAccess.ReadWrite)]
     public List<string> Preserve = new();
 

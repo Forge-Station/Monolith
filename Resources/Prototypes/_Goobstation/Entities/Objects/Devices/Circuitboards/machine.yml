@@ -137,3 +137,15 @@
       Steel: 1 #Forge-Change
       Cable: 2
 
+#Forge-Change-UwU-start
+- type: entity
+  parent: StationRadioCircuitboard
+  id: StationRadioUwUCircuitboard
+  name: station UwU radio machine board
+  components:
+    - type: MachineBoard
+      prototype: StationRadioReceiverUwU
+      stackRequirements:
+        Steel: 1 #Forge-Change
+        Cable: 2
+ #Forge-Change-UwU-end

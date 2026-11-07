@@ -68,16 +68,22 @@
   parent: ForgeUniversalSuitT1CompanyRecipe
   id: ClothingOuterHardsuitNexusMilT1
   result: ClothingOuterHardsuitNexusMilT1
+  categories:
+  - NSC
 
 - type: latheRecipe
   parent: ForgeUniversalSuitT2CompanyRecipe
   id: ClothingOuterHardsuitNexusMilT2
   result: ClothingOuterHardsuitNexusMilT2
+  categories:
+  - NSC
 
 - type: latheRecipe
   parent: ForgeEnergyShieldSuitT3CompanyRecipe
   id: ClothingOuterHardsuitNexusMilT3
   result: ClothingOuterHardsuitNexusMilT3
+  categories:
+  - NSC
 
 - type: latheRecipe
   parent: NSCRecipe
@@ -254,6 +260,63 @@
   completetime: 6
   materials:
     Cloth: 800
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingBackpackDuffelNexus
+  result: ClothingBackpackDuffelNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingBackpackSatchelNexus
+  result: ClothingBackpackSatchelNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingBackpackNexus
+  result: ClothingBackpackNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingHeadsetNexus
+  result: ClothingHeadsetNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+    Steel: 500
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingNeckCloakNexus
+  result: ClothingNeckCloakNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingBackpackMessengerNexus
+  result: ClothingBackpackMessengerNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
+
+- type: latheRecipe
+  parent: NSCApparelRecipe
+  id: ClothingNeckMantleNexus
+  result: ClothingNeckMantleNexus
+  completetime: 5
+  materials:
+    Cloth: 1000
 
 - type: latheRecipe
   parent: NSCApparelRecipe

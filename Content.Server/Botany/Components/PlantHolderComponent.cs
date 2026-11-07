@@ -8,6 +8,8 @@ namespace Content.Server.Botany.Components;
 [RegisterComponent]
 public sealed partial class PlantHolderComponent : Component
 {
+    public const string HarvestContainerSlotId = "harvestContainer"; // Forge-Change
+
     /// <summary>
     /// Game time for the next plant reagent update.
     /// </summary>
@@ -53,6 +55,14 @@ public sealed partial class PlantHolderComponent : Component
     /// </summary>
     [DataField]
     public bool DrawWarnings = false;
+
+    // Forge-Change-start
+    /// <summary>
+    ///     Set after this plant's data has been saved to a hydroponics console journal.
+    /// </summary>
+    [DataField]
+    public bool CultivarArchived;
+    // Forge-Change-end
 
     [DataField]
     public float WaterLevel = 100f;

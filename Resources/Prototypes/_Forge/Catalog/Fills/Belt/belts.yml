@@ -1,0 +1,31 @@
+﻿- type: entity
+  parent: ClothingBeltWebbingsNormalTrauma
+  suffix: Filled
+  id: ClothingBeltWebbingsNormalTraumaFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: HandheldCrewMonitor
+    - id: MedicatedSuture
+    - id: RegenerativeMesh
+    - id: Gauze
+    - id: Bloodpack
+    - id: HypoMini
+    - id: EpinephrineChemistryBottle
+    - id: EpinephrineChemistryBottle
+
+- type: entity
+  parent: ClothingBeltTrauma
+  suffix: Filled
+  id: ClothingBeltTraumaFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: HandheldCrewMonitor
+    - id: MedicatedSuture
+    - id: RegenerativeMesh
+    - id: Gauze
+    - id: Bloodpack
+    - id: HypoMini
+    - id: EpinephrineChemistryBottle
+    - id: EpinephrineChemistryBottle

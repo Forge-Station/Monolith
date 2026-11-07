@@ -180,13 +180,13 @@
   - type: MiningGatheringHard
   - type: DrakeHitscanGathering
     collectToGun: true
-    teleportOffset: 0, 0
+    teleportOre: false
 
 - type: entity
   id: WeaponTurretDrakeApolloMk2
   name: D-20 Apollo MK2 mining laser cannon
   suffix: Drake, НЕ МАППИТЬ
-  description: A Drake Industries rework of the Apollo mining laser. Slower, heavier beams shatter asteroid and supercompacted rock, teleporting mined ore to a point just below the turret.
+  description: Drake Industries Apollo rework. Heavier beams shatter rock; mined ore deposits into the turret and travels through disposal pipes underneath — same as ship drills.
   parent: WeaponLaserTurretApollo
   components:
   - type: StaticPrice
@@ -207,6 +207,8 @@
   - type: HitscanBatteryAmmoProvider
     proto: DrakeApolloMk2Laser
     fireCost: 150
+  - type: OrePipeBuffer
+    maxTotalCount: 300
   - type: Rotatable
     rotateWhilePulling: false
     rotateWhileAnchored: true
@@ -217,7 +219,7 @@
   parent: WeaponLaserTurretApolloPortable
   name: D-20 Apollo MK2 mining laser cannon
   suffix: Drake, НЕ МАППИТЬ
-  description: A Drake Industries rework of the Apollo mining laser. Slower, heavier beams shatter asteroid and supercompacted rock, teleporting mined ore to a point just below the turret.
+  description: Drake Industries Apollo rework. Heavier beams shatter rock; mined ore deposits into the turret and travels through disposal pipes underneath — same as ship drills.
   components:
   - type: StaticPrice
     price: 22000
@@ -237,3 +239,5 @@
   - type: HitscanBatteryAmmoProvider
     proto: DrakeApolloMk2Laser
     fireCost: 150
+  - type: OrePipeBuffer
+    maxTotalCount: 300

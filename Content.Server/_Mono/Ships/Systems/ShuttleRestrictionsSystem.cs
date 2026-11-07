@@ -1,3 +1,4 @@
+using Content.Server._Forge.Shipyard.Systems; // Forge-change
 using Content.Server._Mono.GameRule.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Shuttles.Components;
@@ -18,6 +19,7 @@ public sealed partial class ShuttleRestrictionsSystem : EntitySystem
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private ShuttleDeedSystem _shuttleDeed = default!;
     [Dependency] private HyperwarRuleSystem _hyperwar = default!;
+    [Dependency] private ShipyardVesselLimitSystem _vesselLimit = default!; // Forge-change
 
     private TimeSpan _lastUpdate = TimeSpan.Zero;
     private readonly TimeSpan _interval = TimeSpan.FromMinutes(1);
@@ -83,31 +85,13 @@ public sealed partial class ShuttleRestrictionsSystem : EntitySystem
             return;
         }
 
-        var limitActive = _hyperwar.HyperwarActive ? ev.Vessel.HyperwarLimitActive : ev.Vessel.LimitActive;
-
-        var query = EntityQueryEnumerator<VesselComponent>();
-        var shuttleCount = 0;
-
-        if (limitActive <= 0)
-            return;
-
-        while (query.MoveNext(out var uid, out var targetVessel))
-        {
-            if (targetVessel.VesselId != ev.Vessel.ID)
-                continue;
-
-            // InactiveShipComponent isn't like a tag, it's more like ApcPowerReceiver. You need to check if it's inactive.
-            if (!TryComp<ShipActivityComponent>(uid, out var inactivity) || inactivity.InactivePastThreshold)
-                continue;
-
-            shuttleCount++;
-        }
-
-        if (shuttleCount >= limitActive)
+        // Forge-change-start: count all tagged vessels immediately; exclude the shuttle being purchased.
+        if (_vesselLimit.IsLimitBlockingPurchase(ev.Vessel, ev.Shuttle))
         {
             ev.CancelReason = "shipyard-console-limited";
             ev.Cancel();
         }
+        // Forge-change-end
     }
 
     private bool IsActive(Entity<VesselComponent?> vessel)

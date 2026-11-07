@@ -272,39 +272,11 @@
     - !type:EntSelector
       id: DiamondOre1
       amount: !type:ConstantNumberSelector
-        value: 2
-    - !type:EntSelector
-      id: LithiumOre1
-      amount: !type:ConstantNumberSelector
         value: 5
     - !type:EntSelector
-      id: BananiumOre1
+      id: BluespaceOre1
       amount: !type:ConstantNumberSelector
-        value: 20
-    - !type:EntSelector
-      id: SteelOre1
-      amount: !type:ConstantNumberSelector
-        value: 25
-    - !type:EntSelector
-      id: PlasmaOre1
-      amount: !type:ConstantNumberSelector
-        value: 20
-    - !type:EntSelector
-      id: SpaceQuartz1
-      amount: !type:ConstantNumberSelector
-        value: 20
-    - !type:EntSelector
-      id: UraniumOre1
-      amount: !type:ConstantNumberSelector
-        value: 20
-    - !type:EntSelector
-      id: SilverOre1
-      amount: !type:ConstantNumberSelector
-        value: 20
-    - !type:EntSelector
-      id: GoldOre1
-      amount: !type:ConstantNumberSelector
-        value: 20
+        value: 2
 
 # Research loot 
 - type: entityTable

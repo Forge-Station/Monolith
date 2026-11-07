@@ -19,6 +19,9 @@
     stateDoorClosed: renegate_com_door
   - type: AccessReader
     access: [["RenegateOfficer"]]
+  - type: StorageFill
+    contents:
+    - id: ClothingOuterHardsuitRenegateCommander
 
 - type: entity
   id: LockerRenRnd

@@ -107,6 +107,9 @@ namespace Content.Server.Shuttles.Components
 
         [ViewVariables]
         public TimeSpan NextSpeedSetTime = TimeSpan.Zero;
+
+        [ViewVariables]
+        public ShuttleConsoleMapScreenMode MapScreenMode = ShuttleConsoleMapScreenMode.BioScan; // Forge-Change - Cloaking
         // Forge-Change-end
         // </Mono>
 

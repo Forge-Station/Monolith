@@ -16,7 +16,8 @@ namespace Content.Client._Forge.BoardingTeleport;
 public sealed class BoardingTeleportSectorMapControl : BoxContainer
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
+
+    private readonly SharedMapSystem _mapSystem;
 
     private readonly SharedAudioSystem _audio;
     private readonly DetectionSystem _detection;
@@ -43,6 +44,7 @@ public sealed class BoardingTeleportSectorMapControl : BoxContainer
     {
         IoCManager.InjectDependencies(this);
 
+        _mapSystem = _entManager.System<SharedMapSystem>();
         _audio = _entManager.System<SharedAudioSystem>();
         _detection = _entManager.System<DetectionSystem>();
         _shuttles = _entManager.System<ShuttleSystem>();
@@ -192,7 +194,7 @@ public sealed class BoardingTeleportSectorMapControl : BoxContainer
             return;
         }
 
-        foreach (var grid in _mapManager.GetAllGrids(shuttleMapId))
+        foreach (var grid in _mapSystem.GetAllGrids(shuttleMapId))
         {
             var gridUid = grid.Owner;
             if (gridUid == _shuttle)

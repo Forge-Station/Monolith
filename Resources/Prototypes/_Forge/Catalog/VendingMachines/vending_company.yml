@@ -35,18 +35,24 @@
 - type: vendingMachineInventory
   id: CompanyVendInventoryUllman
   startingInventory:
-    ClothingOuterHardsuitUIPilot: 2
-    ClothingOuterHardsuitUllmanEngineer: 2
-    ClothingUniformJumpsuitSalvageSpecialist: 4294967295
+    ClothingOuterHardsuitUIPilot: 4
+    ClothingOuterHardsuitUllmanEngineer: 3
+    ClothingHeadHatBeretUI: 4294967295
+    ClothingHeadHatCapUI: 4294967295
+    ClothingUniformJumpsuitUI: 4294967295
+    ClothingUniformShirtUI: 4294967295
+    ClothingEyesUIGoogles: 4294967295
     ClothingNeckUllimanOvercoat: 4294967295
-    ClothingNeckHeavyUllimanOvercoat: 2
+    ClothingNeckCloakUllmanPoncho: 4294967295
+    ClothingNeckHeavyUllimanOvercoat: 4294967295
+    ClothingNeckMantleUI: 4294967295
+    ClothingBeltWebbingsNormalUi: 4294967295
+    ClothingBeltWebbingsBigUi: 4294967295
     WeaponPistolUllmanSmartMagnumMK5: 1
     TelecomServerFlatpack: 1
     EncryptionKeyUllmanIndustries: 2
     DisciplinesDiskUllman: 4
-    ClothingUniformJumpsuitUI: 4294967295
-    ClothingEyesUIGoogles: 4294967295
-    ClothingNeckCloakUllmanPoncho: 4
+    
 
 #region USSP
 - type: vendingMachineInventory
@@ -76,10 +82,12 @@
     WeaponRifleSVS: 3 # Infinite
     CombatKnife: 6 # Infinite
     SurvivalKnife: 6 # Infinite
+    ClothingHeadHatBeretVdv: 4294967295
+    ClothingUniformJumpsuitVdvtyelnyazhka: 4294967295
     ClothingUniformUSSP: 6 # Infinite
     ClothingHeadsetUSSP: 6 # Infinite
     EncryptionKeyUssp: 6
-    ClothingOuterHardsuitUsspL27: 4 # Infinite
+    # ClothingOuterHardsuitUsspL27: 4 # Infinite # Forge-change remove L27 hardsuit
     ClothingOuterHardsuitUsspL10: 4 # Infinite
     ClothingOuterHardsuitUsspM10: 4 # Infinite
     ClothingOuterCoatUSSP: 4 # Infinite
@@ -145,10 +153,18 @@
     ClothingUniformJumpsuitNexusTurtleneck: 5
     ClothingUniformJumpsuitNexusWorker: 5
     ClothingUniformJumpsuitNexusSecurity: 5
+    ClothingShoesBootsMagNexus: 5
     ClothingHandsGlovesCombatNexus: 5
+    ClothingBackpackDuffelNexus: 5
+    ClothingBackpackSatchelNexus: 5
+    ClothingBackpackNexus: 5
+    ClothingHeadsetNexus: 5
+    ClothingNeckCloakNexus: 5
+    ClothingBackpackMessengerNexus: 5
+    ClothingNeckMantleNexus: 5
     EncryptionKeyNexus: 2
     TelecomServerFlatpack: 1
-    DisciplinesDiskNSC: 2
+    DisciplinesDiskNSC: 3
 
 #region Chun Logistics
 - type: vendingMachineInventory

@@ -762,3 +762,15 @@
       seedId: anomalyBerry
     - type: Sprite
       sprite: Objects/Specific/Hydroponics/anomaly_berry.rsi
+
+# Forge-Change-start
+- type: entity
+  parent: SeedBase
+  name: packet of bluespace tomato seeds
+  id: BluespaceTomatoSeeds
+  components:
+  - type: Seed
+    seedId: bluespaceTomato # Forge-Change
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/bluespace_tomato.rsi
+# Forge-Change-end

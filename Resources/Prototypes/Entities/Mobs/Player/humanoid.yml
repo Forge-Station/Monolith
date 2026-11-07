@@ -14,7 +14,7 @@
 
 - type: randomHumanoidSettings
   id: EventHumanoidMindShielded
-  parent: EventHumanoid
+  parent: [ EventHumanoid ]
   components:
     - type: MindShield
     - type: AntagImmune
@@ -38,7 +38,7 @@
 
 - type: randomHumanoidSettings
   id: DeathSquad
-  parent: EventHumanoidMindShielded
+  parent: [ EventHumanoidMindShielded ]
   randomizeName: false
   components:
     - type: GhostRole
@@ -77,7 +77,7 @@
 
 - type: randomHumanoidSettings
   id: ERTLeader
-  parent: EventHumanoidMindShielded
+  parent: [ EventHumanoidMindShielded ]
   randomizeName: false
   components:
     - type: GhostRole
@@ -109,7 +109,7 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVA
-  parent: ERTLeader
+  parent: [ ERTLeader ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
@@ -132,7 +132,7 @@
 
 - type: randomHumanoidSettings
   id: ERTLeaderEVALecter
-  parent: ERTLeaderEVA
+  parent: [ ERTLeaderEVA ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
@@ -165,7 +165,7 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplain
-  parent: ERTLeader
+  parent: [ ERTLeader ]
   components:
     - type: BibleUser
     - type: GhostRole
@@ -197,7 +197,7 @@
 
 - type: randomHumanoidSettings
   id: ERTChaplainEVA
-  parent: ERTChaplain
+  parent: [ ERTChaplain ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-chaplain-name
@@ -231,7 +231,7 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitor
-  parent: ERTLeader
+  parent: [ ERTLeader ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
@@ -262,7 +262,7 @@
 
 - type: randomHumanoidSettings
   id: ERTJanitorEVA
-  parent: ERTJanitor
+  parent: [ ERTJanitor ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-janitor-name
@@ -295,7 +295,7 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineer
-  parent: ERTLeader
+  parent: [ ERTLeader ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
@@ -326,7 +326,7 @@
 
 - type: randomHumanoidSettings
   id: ERTEngineerEVA
-  parent: ERTEngineer
+  parent: [ ERTEngineer ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-engineer-name
@@ -359,7 +359,7 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurity
-  parent: ERTLeader
+  parent: [ ERTLeader ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-security-name
@@ -390,7 +390,7 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVA
-  parent: ERTSecurity
+  parent: [ ERTSecurity ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-security-name
@@ -413,7 +413,7 @@
 
 - type: randomHumanoidSettings
   id: ERTSecurityEVALecter
-  parent: ERTSecurityEVA
+  parent: [ ERTSecurityEVA ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-security-name
@@ -446,7 +446,7 @@
 
 - type: randomHumanoidSettings
   id: ERTMedical
-  parent: ERTLeader
+  parent: [ ERTLeader ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
@@ -477,7 +477,7 @@
 
 - type: randomHumanoidSettings
   id: ERTMedicalEVA
-  parent: ERTMedical
+  parent: [ ERTMedical ]
   components:
     - type: GhostRole
       name: ghost-role-information-ert-medical-name
@@ -505,7 +505,7 @@
 
 - type: randomHumanoidSettings
   id: CBURNAgent
-  parent: EventHumanoidMindShielded
+  parent: [ EventHumanoidMindShielded ]
   components:
     - type: Loadout
       prototypes: [CBURNGear]
@@ -535,7 +535,7 @@
 
 - type: randomHumanoidSettings
   id: CentcomOfficial
-  parent: EventHumanoidMindShielded
+  parent: [ EventHumanoidMindShielded ]
   components:
     - type: GhostRole
       name: ghost-role-information-centcom-official-name
@@ -604,7 +604,7 @@
 
 - type: randomHumanoidSettings
   id: Cluwne
-  parent: EventHumanoid
+  parent: [ EventHumanoid ]
   randomizeName: false
   components:
     - type: GhostRole

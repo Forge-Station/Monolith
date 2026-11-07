@@ -35,7 +35,6 @@ public sealed partial class EscapeInventorySystem : EntitySystem
     [Dependency] private  EntityManager _entityManager = default!;
 
     // Frontier - cancel inventory escape
-    [ValidatePrototypeId<EntityPrototype>]
     private readonly string _escapeCancelAction = "ActionCancelEscape";
 
     /// <summary>

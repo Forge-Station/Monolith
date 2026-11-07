@@ -359,10 +359,10 @@
         - !type:SuppressEffect
           # hidden: true
           syndrome: NicotineAddiction
-          duration: 220
+          duration: 300
         - !type:RemoveSyndromeEffect
           syndrome: NicotineAddiction
-          severity: 0.001
+          severity: 0.02
         - !type:GenericDescEffect
           description: forge-reagent-effect-tabex
 
@@ -413,9 +413,9 @@
             - !type:ToleranceCondition
               reagent: Clonidine
               source: Brain
-              min: 0.3
+              min: 0.5
               max: 1.0
           syndrome: SedativeAddiction
-          severity: 1.1
+          severity: 0.3
         - !type:GenericDescEffect
           description: forge-reagent-tolerance-addiction

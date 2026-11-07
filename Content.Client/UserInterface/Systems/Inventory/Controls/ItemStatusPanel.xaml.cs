@@ -102,7 +102,7 @@ public sealed partial class ItemStatusPanel : Control
 
         if (entity == null)
         {
-            ItemNameLabel.Text = "";
+            SetItemName("");
             ClearOldStatus();
             _entity = null;
             return;
@@ -137,12 +137,22 @@ public sealed partial class ItemStatusPanel : Control
             && _entityManager.EntityExists(virtualItem.BlockingEntity))
         {
             // Uses identity because we can be blocked by pulling someone
-            ItemNameLabel.Text = Identity.Name(virtualItem.BlockingEntity, _entityManager);
+            SetItemName(Identity.Name(virtualItem.BlockingEntity, _entityManager));
         }
         else
         {
-            ItemNameLabel.Text = Identity.Name(_entity.Value, _entityManager);
+            SetItemName(Identity.Name(_entity.Value, _entityManager));
         }
+    }
+
+    // Label.Text always invalidates measure, even when the string did not change.
+    // This panel runs every frame for both hands, so an unconditional assign dirties the whole HUD.
+    private void SetItemName(string name)
+    {
+        if (ItemNameLabel.Text == name)
+            return;
+
+        ItemNameLabel.Text = name;
     }
 
     private void ClearOldStatus()

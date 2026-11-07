@@ -170,6 +170,10 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             return;
         }
 
+        // Forge-change: tag shuttle before the sector limit check so purchases count immediately.
+        var vesselStore = EnsureComp<VesselComponent>(shuttleUid);
+        vesselStore.VesselId = vessel.ID;
+
         var ev = new AttemptShipyardShuttlePurchaseEvent(shuttleUid, args.Actor, vessel);
         RaiseLocalEvent(ref ev);
 
@@ -401,8 +405,11 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
                 _records.CreateGeneralRecord(shuttleStation.Value, targetId, profile.Name, profile.Age, profile.Species, profile.Gender, $"Captain", fingerprintComponent!.Fingerprint, dnaComponent!.DNA, profile, stationRec!);
             }
         }
-        _records.Synchronize(shuttleStation!.Value);
-        _records.Synchronize(station);
+        // Forge-Change: frontier outposts have no crew records. Synchronize logs a full stack when the component is absent.
+        if (shuttleStation is { } shuttleStationUid && HasComp<StationRecordsComponent>(shuttleStationUid))
+            _records.Synchronize(shuttleStationUid);
+        if (HasComp<StationRecordsComponent>(station))
+            _records.Synchronize(station);
 
         EntityManager.AddComponents(shuttleUid, vessel.AddComponents);
 
@@ -412,36 +419,32 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         // Ensure cleanup on ship sale
         EnsureComp<LinkedLifecycleGridParentComponent>(shuttleUid);
 
-        var sellValue = 0;
-        if (!voucherUsed)
-        {
-            // Get the price of the ship
-            if (TryComp<ShuttleDeedComponent>(targetId, out var deed))
-                sellValue = (int)_pricing.AppraiseGrid((EntityUid)(deed?.ShuttleUid!), LacksPreserveOnSaleComp);
-
-            // Adjust for taxes
-            sellValue = CalculateShipResaleValue((shipyardConsoleUid, component), sellValue);
-        }
-
         SendPurchaseMessage(shipyardConsoleUid, player, name, component.ShipyardChannel, secret: false);
         if (component.SecretShipyardChannel is { } secretChannel)
             SendPurchaseMessage(shipyardConsoleUid, player, name, secretChannel, secret: true);
 
-        var vesselStore = EnsureComp<VesselComponent>(shuttleUid);
-        vesselStore.VesselId = vessel.ID;
-
-        // Mono
         _entityManager.System<ShipyardDirectionSystem>().SendShipDirectionMessage(player, shuttleUid);
 
         EnsureComp<TagComponent>(shuttleUid);
         _tagSystem.TryAddTags(shuttleUid, vessel.Tags);
 
         if (vessel.Classes.Contains(VesselClass.Capital) || _tagSystem.HasTag(shuttleUid, CrewedShuttleTag))
-            vessel.RequireCrew = true;
+            vessel.RequireCrew = false;
 
         if (vessel.RequireCrew)
             EnsureComp<CrewedShuttleComponent>(shuttleUid);
+        // Forge-change-start
+        if (voucherUsed)
+        {
+            // Forge-change: snapshot spawn appraisal for voucher resale baseline.
+            var spawnAppraisal = (int)_pricing.AppraiseGrid(shuttleUid, LacksPreserveOnSaleComp);
+            deedID.SpawnAppraisalValue = spawnAppraisal;
+            deedShuttle.SpawnAppraisalValue = spawnAppraisal;
+        }
 
+        var sellValue = CalculateDisplayedSellValue(shipyardConsoleUid, component, deedID);
+        var freeListings = HasComp<ShipyardVoucherComponent>(targetId);
+        // Forge-change-end
         PlayConfirmSound(player, shipyardConsoleUid, component);
         if (voucherUsed)
             _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to purchase shuttle {ToPrettyString(shuttleUid)} with a voucher via {ToPrettyString(shipyardConsoleUid)}");
@@ -459,14 +462,15 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
                     ownerName: shuttleOwner,
                     entityUid: _entityManager.GetNetEntity(shuttleUid),
                     purchasedWithVoucher: voucherUsed,
-                    purchasePrice: (uint)vessel.Price
+                    purchasePrice: (uint)vessel.Price, // Forge-change
+                    spawnAppraisalValue: (uint)deedShuttle.SpawnAppraisalValue // Forge-change
                 )
             );
         }
 
         var purchaseEv = new ShipyardShuttlePurchaseEvent(shuttleUid, player); // Mono: half of this shit could be an event.
         RaiseLocalEvent(purchaseEv);
-        RefreshState(shipyardConsoleUid, bank.Balance, true, name, sellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, voucherUsed);
+        RefreshState(shipyardConsoleUid, bank.Balance, true, name, sellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, freeListings, voucherUsed); // Forge-change: pass purchasedWithVoucher separately
     }
 
     private void TryParseShuttleName(ShuttleDeedComponent deed, string name)
@@ -511,6 +515,8 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         bool voucherUsed = deed.PurchasedWithVoucher;
 
+        var spawnAppraisal = voucherUsed ? GetSpawnAppraisalBaseline(deed, shuttleUid) : 0; // Forge-change
+
         if (!TryComp<BankAccountComponent>(player, out var bank))
         {
             ConsolePopup(player, Loc.GetString("shipyard-console-no-bank"));
@@ -533,7 +539,9 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         {
             //_records.RemoveRecord(keyStorage.Key.Value);
             _records.AddRecordEntry(stationUid, record);
-            _records.Synchronize(stationUid);
+            // Forge-Change: the selling station may be an outpost without a records component.
+            if (HasComp<StationRecordsComponent>(stationUid))
+                _records.Synchronize(stationUid);
         }
 
         var shuttleName = ToPrettyString(shuttleUid); // Grab the name before it gets 1984'd
@@ -573,23 +581,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         RemComp<ShuttleDeedComponent>(targetId);
 
-        if (!voucherUsed)
-        {
-            if (!component.IgnoreBaseSaleRate)
-                bill = (int)(bill * _baseSaleRate);
-
-            int originalBill = bill;
-            foreach (var (account, taxCoeff) in component.TaxAccounts)
-            {
-                var tax = CalculateSalesTax(originalBill, taxCoeff);
-                _bank.TrySectorDeposit(account, tax, LedgerEntryType.ShipyardTax); // BlackMarketShipyardTax->ShipyardTAx
-                bill -= tax;
-            }
-            bill = int.Max(0, bill);
-
-            _bank.TryBankDeposit(player, bill);
-            PlayConfirmSound(player, uid, component);
-        }
+        bill = ApplyShuttleSalePayout(player, uid, component, bill, spawnAppraisal); // Forge-change: voucher ships pay out only added value above spawn appraisal.
 
         var name = GetFullName(deed);
         SendSellMessage(uid, deed.ShuttleOwner!, name, component.ShipyardChannel, player, secret: false);
@@ -599,7 +591,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         EntityUid? refreshId = targetId;
 
         if (voucherUsed)
-            _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to sell {shuttleName} (purchased with voucher) via {ToPrettyString(uid)}");
+            _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to sell {shuttleName} (purchased with voucher) for {bill} credits via {ToPrettyString(uid)}"); // Forge-change
         else
             _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to sell {shuttleName} for {bill} credits via {ToPrettyString(uid)}");
 
@@ -612,7 +604,8 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             refreshId = null;
         }
 
-        RefreshState(uid, bank.Balance, true, null, 0, refreshId, (ShipyardConsoleUiKey)args.UiKey, voucherUsed);
+        var freeListings = refreshId != null && HasComp<ShipyardVoucherComponent>(refreshId.Value); // Forge-change
+        RefreshState(uid, bank.Balance, true, null, 0, refreshId, (ShipyardConsoleUiKey)args.UiKey, freeListings, false); // Forge-change
     }
 
     /// <summary>
@@ -659,14 +652,10 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             }
         }
 
-        var voucherUsed = HasComp<ShipyardVoucherComponent>(targetId);
+        var freeListings = HasComp<ShipyardVoucherComponent>(targetId); // Forge-change
+        var purchasedWithVoucher = deed?.PurchasedWithVoucher ?? false; // Forge-change
 
-        int sellValue = 0;
-        if (deed?.ShuttleUid != null)
-        {
-            sellValue = (int)_pricing.AppraiseGrid((EntityUid)(deed?.ShuttleUid!), LacksPreserveOnSaleComp);
-            sellValue = CalculateShipResaleValue((uid, component), sellValue);
-        }
+        var sellValue = CalculateDisplayedSellValue(uid, component, deed); // Forge-change
 
         var fullName = deed != null ? GetFullName(deed) : null;
 
@@ -678,7 +667,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             // For now we'll just let them see the cooldown message when they try to use it
         }
 
-        RefreshState(uid, bank.Balance, true, fullName, sellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, voucherUsed);
+        RefreshState(uid, bank.Balance, true, fullName, sellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, freeListings, purchasedWithVoucher); // Forge-change
     }
 
     private void ConsolePopup(EntityUid uid, string text)
@@ -759,14 +748,10 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
                 }
             }
 
-            var voucherUsed = HasComp<ShipyardVoucherComponent>(targetId);
+            var freeListings = HasComp<ShipyardVoucherComponent>(targetId); // Forge-change
+            var purchasedWithVoucher = deed?.PurchasedWithVoucher ?? false; // Forge-change
 
-            int sellValue = 0;
-            if (deed?.ShuttleUid != null)
-            {
-                sellValue = (int)_pricing.AppraiseGrid(deed.ShuttleUid.Value, LacksPreserveOnSaleComp);
-                sellValue = CalculateShipResaleValue((uid, component), sellValue);
-            }
+            var sellValue = CalculateDisplayedSellValue(uid, component, deed); // Forge-change
 
             var fullName = deed != null ? GetFullName(deed) : null;
             RefreshState(uid,
@@ -776,7 +761,8 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
                 sellValue,
                 targetId,
                 (ShipyardConsoleUiKey)uiComp.Key,
-                voucherUsed);
+                freeListings, // Forge-change
+                purchasedWithVoucher); // Forge-change
 
         }
     }
@@ -950,7 +936,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         return (available, unavailable);
     }
 
-    private void RefreshState(EntityUid uid, int balance, bool access, string? shipDeed, int shipSellValue, EntityUid? targetId, ShipyardConsoleUiKey uiKey, bool freeListings)
+    private void RefreshState(EntityUid uid, int balance, bool access, string? shipDeed, int shipSellValue, EntityUid? targetId, ShipyardConsoleUiKey uiKey, bool freeListings, bool purchasedWithVoucher) // Forge-change: purchasedWithVoucher drives voucher resale UI.
     {
         var newState = new ShipyardConsoleInterfaceState(
             balance,
@@ -962,19 +948,21 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             GetAvailableShuttles(uid, uiKey, targetId: targetId),
             uiKey.ToString(),
             freeListings,
+            purchasedWithVoucher, // Forge-change
             CalculateSellRate(uid));
 
         _ui.SetUiState(uid, uiKey, newState);
     }
 
     #region Deed Assignment
-    void AssignShuttleDeedProperties(ShuttleDeedComponent deed, EntityUid? shuttleUid, string? shuttleName, string? shuttleOwner, bool purchasedWithVoucher, string? purchaseVoucherUid = null)
+    void AssignShuttleDeedProperties(ShuttleDeedComponent deed, EntityUid? shuttleUid, string? shuttleName, string? shuttleOwner, bool purchasedWithVoucher, string? purchaseVoucherUid = null, int spawnAppraisalValue = 0) // Forge-change
     {
         deed.ShuttleUid = shuttleUid;
         TryParseShuttleName(deed, shuttleName!);
         deed.ShuttleOwner = shuttleOwner;
         deed.PurchasedWithVoucher = purchasedWithVoucher;
         deed.PurchaseVoucherUid = purchaseVoucherUid;
+        deed.SpawnAppraisalValue = spawnAppraisalValue; // Forge-change
     }
 
     private void OnInitDeedSpawner(EntityUid uid, StationDeedSpawnerComponent component, MapInitEvent args)
@@ -993,7 +981,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         _idSystem.TryChangeFullName(uid, output); // Update the card with owner name
 
         var deedID = EnsureComp<ShuttleDeedComponent>(uid);
-        AssignShuttleDeedProperties(deedID, shuttleDeed.ShuttleUid, shuttleDeed.ShuttleName, shuttleDeed.ShuttleOwner, shuttleDeed.PurchasedWithVoucher, shuttleDeed.PurchaseVoucherUid);
+        AssignShuttleDeedProperties(deedID, shuttleDeed.ShuttleUid, shuttleDeed.ShuttleName, shuttleDeed.ShuttleOwner, shuttleDeed.PurchasedWithVoucher, shuttleDeed.PurchaseVoucherUid, shuttleDeed.SpawnAppraisalValue); // Forge-change
     }
     #endregion
 
@@ -1085,13 +1073,6 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         // Get the old name for logging
         var oldName = GetFullName(deed);
 
-        // Preserve the original sell value from the current UI state
-        int originalSellValue = 0;
-        if (_ui.TryGetUiState<ShipyardConsoleInterfaceState>(uid, (ShipyardConsoleUiKey)args.UiKey, out var currentState))
-        {
-            originalSellValue = currentState.ShipSellValue;
-        }
-
         // Rename the ship using the existing method
         if (TryRenameShuttle(targetId, deed, newName, deed.ShuttleNameSuffix))
         {
@@ -1103,9 +1084,11 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             if (TryComp<BankAccountComponent>(player, out var bank))
                 balance = bank.Balance;
 
-            // Update the UI with the new ship name, preserving the original sell value
+            // Forge-change Update the UI with the new ship name
             var fullName = GetFullName(deed);
-            RefreshState(uid, balance, true, fullName, originalSellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, false);
+            var freeListings = HasComp<ShipyardVoucherComponent>(targetId); // Forge-change
+            var sellValue = CalculateDisplayedSellValue(uid, component, deed); // Forge-change
+            RefreshState(uid, balance, true, fullName, sellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, freeListings, deed.PurchasedWithVoucher); // Forge-change
 
             _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low,
                 $"{ToPrettyString(player):actor} renamed ship from '{oldName}' to '{GetFullName(deed)}' via {ToPrettyString(uid)}");
@@ -1183,7 +1166,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             balance = bank.Balance;
 
         // Update the UI
-        RefreshState(uid, balance, true, null, 0, targetId, (ShipyardConsoleUiKey)args.UiKey, false);
+        RefreshState(uid, balance, true, null, 0, targetId, (ShipyardConsoleUiKey)args.UiKey, HasComp<ShipyardVoucherComponent>(targetId), false); // Forge-change
 
         _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low,
             $"{ToPrettyString(player):actor} unassigned deed for ship '{shipName}' from {ToPrettyString(targetId)} via {ToPrettyString(uid)}");

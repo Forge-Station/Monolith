@@ -19,7 +19,6 @@ namespace Content.Server.Salvage;
 
 public sealed partial class SalvageSystem
 {
-    [ValidatePrototypeId<EntityPrototype>]
     public const string CoordinatesDisk = "CoordinatesDisk";
     private const float ShuttleFTLRange = 256f;
     private const float ShuttleFTLMassThreshold = 100f;
@@ -115,7 +114,11 @@ public sealed partial class SalvageSystem
                 }
             }
 
-            foreach (var other in _mapManager.FindGridsIntersecting(xform.MapID, bounds))
+            var nearbyGrids = new List<Entity<MapGridComponent>>();
+            // includeMap: false — after IMapManager removal, map-as-grid entities would
+            // otherwise always fail the proximity check on some maps.
+            _mapSystem.FindGridsIntersecting(xform.MapID, bounds, ref nearbyGrids, includeMap: false);
+            foreach (var other in nearbyGrids)
             {
                 if (other.Owner == grid ||
                     dockedGrids.Contains(other.Owner) || // Skip grids that are docked to us or to the same parent grid

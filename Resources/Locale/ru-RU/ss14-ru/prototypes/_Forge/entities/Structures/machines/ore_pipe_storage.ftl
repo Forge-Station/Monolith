@@ -1,0 +1,13 @@
+﻿ent-MachineOrePipeStorage = Рудохранилище
+    .desc = Принимает руду с буров по трубам. Нужен приёмный ствол на этой клетке. Активация — выгрузка запасов.
+ent-OrePipeStorageMachineCircuitboard = Плата рудохранилища
+    .desc = Печатная плата рудохранилища.
+ent-MachineOreHoldModule = Модуль рудохранилища
+    .desc = Расширяет ёмкость соседних рудохранилищ, если стоит у трубы.
+ent-OreHoldModuleMachineCircuitboard = Плата модуля рудохранилища
+    .desc = Печатная плата модуля ёмкости рудохранилища.
+ent-OreDisposalFilter = Рудный фильтр
+    .desc = Разделяет поток руды: отмеченные сорта уходят вбок, остальные — прямо.
+ent-OreDisposalFilterFlipped = { ent-OreDisposalFilter }
+    .desc = { ent-OreDisposalFilter.desc }
+    .suffix = перевёрнутый

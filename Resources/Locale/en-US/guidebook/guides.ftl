@@ -39,6 +39,7 @@ guide-entry-fires = Fires
 guide-entry-spacing = Spacing
 guide-entry-atmostools = Atmos Tools
 guide-entry-gasses = Gasses
+guide-entry-neurotoxins = Neurotoxins
 guide-entry-botany = Botany
 guide-entry-shuttle-craft = Shuttle-craft
 guide-entry-networking = Networking
@@ -71,6 +72,8 @@ guide-entry-chemist = Chemist
 guide-entry-brute = Advanced Brute Medication
 guide-entry-botanicals = Botanicals
 guide-entry-cloning = Cloning
+guide-entry-genetics = Genetics
+guide-entry-genetics-genes = Genes
 guide-entry-cryogenics = Cryogenics
 guide-entry-science = Science
 guide-entry-technologies = Technologies
@@ -201,9 +204,3 @@ guide-entry-rules-ban-durations = Ban Durations
 
 guide-entry-writing = Writing
 guide-entry-glossary = Glossary
-
-## Shitmed Change
-guide-entry-surgery = Surgery
-guide-entry-partmanipulation = Part Manipulation
-guide-entry-organmanipulation = Organ Manipulation
-guide-entry-utilitysurgeries = Utility Surgeries

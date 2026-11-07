@@ -30,11 +30,12 @@ public partial class ShipShieldsSystem
 
     private void OnRemoved(Entity<ShipShieldEmitterComponent> owner, ref ComponentRemove remove)
     {
+        // Forge-Change: do not require a live GridUid — deconstruct/FTL can null it before ComponentRemove.
+        DropEmitterShield(owner.Owner, owner.Comp);
+
         var parent = Transform(owner.Owner).GridUid;
-        if (parent is null)
-            return;
-        if (TryComp<ShipShieldedComponent>(parent.Value, out var shielded) && shielded.Source == owner.Owner)
-            UnshieldEntity(parent.Value, null);
+        if (parent != null)
+            RefreshGridShieldState(parent.Value);
     }
 
     /// <summary>

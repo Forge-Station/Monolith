@@ -2,6 +2,8 @@ using Content.Server.Cargo.Systems;
 using Content.Server.NPC.HTN;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Mono.CCVar;
+using Content.Shared.Body.Organ;
+using Content.Shared.Body.Part;
 using Content.Shared.Mind.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -36,6 +38,8 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
     private EntityQuery<MapGridComponent> _gridQuery;
     private EntityQuery<MindContainerComponent> _mindQuery;
     private EntityQuery<TransformComponent> _xformQuery;
+    private EntityQuery<OrganComponent> _organQuery;
+    private EntityQuery<BodyPartComponent> _bodyPartQuery;
 
     private List<(EntityCoordinates Coord, TimeSpan Time, float Radius, float Aggression)> _sweepQueue = new();
     private HashSet<Entity<PhysicsComponent>> _sweepEnts = new();
@@ -52,6 +56,8 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
         _gridQuery = GetEntityQuery<MapGridComponent>();
         _mindQuery = GetEntityQuery<MindContainerComponent>();
         _xformQuery = GetEntityQuery<TransformComponent>();
+        _organQuery = GetEntityQuery<OrganComponent>();
+        _bodyPartQuery = GetEntityQuery<BodyPartComponent>();
 
         Subs.CVar(_cfg, MonoCVars.CleanupMaxGridDistance, val => _maxGridDistance = val, true);
         Subs.CVar(_cfg, MonoCVars.SpaceCleanupDistance, val => _maxDistance = val, true);
@@ -68,7 +74,16 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
         if (_gridQuery.HasComp(uid) || _htnQuery.HasComp(uid) || _immuneQuery.HasComp(uid) || _mindQuery.HasComp(uid))
             return false;
 
+        // Organs / body parts (carp tails, brains, etc.) must not be vacuum-swept.
+        if (_organQuery.HasComp(uid) || _bodyPartQuery.HasComp(uid))
+            return false;
+
         if (!_xformQuery.TryGetComponent(uid, out var xform) || xform.MapUid == null)
+            return false;
+
+        // Forge-Change: expedition planets are the map grid. Rivers, structures and room
+        // fills parented to that grid are not space debris, even when no shuttle is nearby.
+        if (xform.GridUid != null)
             return false;
 
         return xform.ParentUid == xform.MapUid;
@@ -81,10 +96,15 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
 
     private bool ShouldEntityCleanup(EntityUid uid, float aggression)
     {
+        if (_immuneQuery.HasComp(uid) || _mindQuery.HasComp(uid)
+            || _organQuery.HasComp(uid) || _bodyPartQuery.HasComp(uid))
+            return false;
+
         if (!_xformQuery.TryGetComponent(uid, out var xform))
             return false;
 
-        var inSpace = xform.ParentUid == xform.MapUid;
+        // Forge-Change: only true vacuum counts as space. A planet map is its own grid.
+        var inSpace = xform.GridUid == null && xform.ParentUid == xform.MapUid;
         if (!inSpace && !GetWallStuck((uid, xform)))
             return false;
 

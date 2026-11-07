@@ -1,5 +1,4 @@
 using Content.Client.Interactable.Components;
-using Content.Client.StatusIcon;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 using Robust.Client.GameObjects;
@@ -10,8 +9,11 @@ namespace Content.Client.Stealth;
 
 public sealed partial class StealthSystem : SharedStealthSystem
 {
-    [Dependency] private IPrototypeManager _protoMan = default!;
-    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    private const string StealthPostShaderId = "Stealth";
+
+    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private ShaderInstance _shader = default!;
 
@@ -40,10 +42,23 @@ public sealed partial class StealthSystem : SharedStealthSystem
         if (!Resolve(uid, ref component, ref sprite, false))
             return;
 
-        sprite.Color = Color.White;
-        sprite.PostShader = enabled ? _shader : null;
-        sprite.GetScreenTexture = enabled;
-        sprite.RaiseShaderEvent = enabled;
+        _sprite.SetColor((uid, sprite), Color.White);
+
+        // After multi-post-shader support, GetScreenTexture / RaiseShaderEvent must be set on the
+        // PostShaderEntry. Setting the obsolete SpriteComponent fields does nothing for Clyde,
+        // which left SCREEN_TEXTURE unbound → solid black silhouettes.
+        if (enabled)
+        {
+            _sprite.SetPostShader((uid, sprite), new SpriteComponent.PostShaderArgs(StealthPostShaderId, _shader)
+            {
+                GetScreenTexture = true,
+                RaiseShaderEvent = true,
+            });
+        }
+        else
+        {
+            _sprite.RemovePostShader((uid, sprite), StealthPostShaderId);
+        }
 
         if (!enabled)
         {
@@ -70,7 +85,7 @@ public sealed partial class StealthSystem : SharedStealthSystem
             SetShader(uid, false, component);
     }
 
-    private void OnShaderRender(EntityUid uid, StealthComponent component, BeforePostShaderRenderEvent args)
+    private void OnShaderRender(EntityUid uid, StealthComponent component, ref BeforePostShaderRenderEvent args)
     {
         // Distortion effect uses screen coordinates. If a player moves, the entities appear to move on screen. this
         // makes the distortion very noticeable.
@@ -90,10 +105,11 @@ public sealed partial class StealthSystem : SharedStealthSystem
         // actual visual visibility effect is limited to -1.5 to 1.
         visibility = Math.Clamp(visibility, -1.5f, 1f);
 
-        _shader.SetParameter("reference", reference);
-        _shader.SetParameter("visibility", visibility);
+        args.Shader.SetParameter("reference", reference);
+        args.Shader.SetParameter("visibility", visibility);
+        args.Shader.SetParameter("shimmer_frequency", component.ShimmerFrequency);
 
         visibility = MathF.Max(0, visibility);
-        args.Sprite.Color = new Color(visibility, visibility, 1, 1);
+        _sprite.SetColor((uid, args.Sprite), new Color(visibility, visibility, 1, 1));
     }
 }

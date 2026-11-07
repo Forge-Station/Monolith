@@ -25,7 +25,7 @@
       path: /Audio/Effects/hit_kick.ogg
   - type: Damageable
     damageContainer: Silicon
-    damageModifierSet: ForgeIPC #forge-Change
+    damageModifierSet: IPC
   - type: InteractionOutline
   - type: MovementSpeedModifier
     baseWalkSpeed: 4

@@ -547,7 +547,7 @@ public partial class BaseShuttleControl : MapGridControl
                     {
                         var idxVec = dirFlag.AsDir().ToIntVec();
                         var arrIdx = GetDirIndex(idxVec);
-                        _gridDirEdges[index][arrIdx] = new Box2(wasPrev, vert);
+                        _gridDirEdges[index][arrIdx] = Box2.FromTwoPoints(wasPrev, vert);
                     }
                 }
             }

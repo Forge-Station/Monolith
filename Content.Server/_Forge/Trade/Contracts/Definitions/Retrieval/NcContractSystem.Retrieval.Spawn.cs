@@ -216,7 +216,7 @@ public sealed partial class NcContractSystem : EntitySystem
         var bounds = Box2.CenteredAround(coords.Position, new Vector2(diameter, diameter));
 
         _retrievalSpaceSpawnGridScratch.Clear();
-        _mapManager.FindGridsIntersecting(
+        _map.FindGridsIntersecting(
             coords.MapId,
             bounds,
             ref _retrievalSpaceSpawnGridScratch,

@@ -250,6 +250,8 @@
     - ScienceWeapons
     - Mining
     - ForgeEngineeringTools # Forge-Change: handheld monitors
+    - ForgeTurretAdventurer # Forge-Change
+    - ForgeTurretKits # Forge-Change
     - ResearchedExplosives # Mono
     # - EngineeringWeapons # Frontier
     - Chemistry
@@ -352,6 +354,7 @@
     - ForgeShipWeaponsDynamic # Forge-Change
     - ForgeAdvancedShuttleComponents # Forge-Change
     - ForgeBoardingTeleportRecipes # Forge-Change
+    - CloakingShuttleCircuitsPack # Forge-Change
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
@@ -405,6 +408,7 @@
     - EngineeringBoardsGoob #Goob Factorio port
     - NanotrasenCircuitBoard # Forge-change
     - DrakeIndustriesCircuitBoards # Forge-change
+    - CloakingShuttleCircuitsADSPack # Forge-change
     - ReactorCircuitboards # FH edit
     - ForgeHyperConvectionFSGTier4Boards # Forge — FSG T4 boards (disk-unlocked), hyper imprinter only
 
@@ -541,6 +545,8 @@
     dynamicPacks:
     - NanotrasenWeapon # Forge-change
     - NanotrasenEquipment # Forge-change
+    - ForgeTurretNT # Forge-Change
+    - ForgeTurretKits # Forge-Change
     - SecurityEquipment
     - SecurityExplosives
     - DynamicAmmoRecipePack
@@ -813,6 +819,9 @@
   - type: PlaceableSurface # DeltaV: Allow ore bags to dump into it directly
     isPlaceable: false # but not place on it if you just click it with a random item
   - type: OreSiloClient #Gives silo access to ore holding
+  # Forge-Change: accept ore from disposal trunks into MaterialStorage.
+  - type: OrePipeOutlet
+    maxInsertPerFlush: 40
 
 - type: entity
   parent: OreProcessor

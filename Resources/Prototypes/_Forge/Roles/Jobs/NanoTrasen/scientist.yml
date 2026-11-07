@@ -22,6 +22,7 @@
   - Captain
   - Frontier
   - Research
+  - TurretCommandNTShuttle
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, NanotrasenTrackingImplant ]

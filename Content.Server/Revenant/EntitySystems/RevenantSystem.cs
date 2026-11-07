@@ -47,7 +47,6 @@ public sealed partial class RevenantSystem : EntitySystem
     [Dependency] private VisibilitySystem _visibility = default!;
     [Dependency] private TurfSystem _turf = default!;
 
-    [ValidatePrototypeId<EntityPrototype>]
     private const string RevenantShopId = "ActionRevenantShop";
 
     public override void Initialize()

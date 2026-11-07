@@ -1,4 +1,5 @@
 using Content.Server.Maps;
+using Content.Server.Salvage.Expeditions; // Forge-Change
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Construction.Components; // Mono
@@ -22,6 +23,14 @@ public sealed partial class PryTileReaction : ITileReaction
     {
         var sys = entityManager.System<TileSystem>();
         var mapSys = entityManager.System<SharedMapSystem>(); // Mono
+
+        // Forge-Change-Start: xeno blood is this acid. On an expedition it deconstructs cave floor straight to space.
+        if (reagent.ID == "FluorosulfuricAcid" &&
+            entityManager.HasComponent<SalvageExpeditionComponent>(tile.GridUid))
+        {
+            return FixedPoint2.Zero;
+        }
+        // Forge-Change-End
 
         // Mono
         var grid = tile.GridUid;

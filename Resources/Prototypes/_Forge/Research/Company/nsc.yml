@@ -15,6 +15,13 @@
   - ClothingHeadHatNexusCap
   - ClothingHeadHatNexusStarBeret
   - ClothingHeadHatNexusGarrisonCap
+  - ClothingBackpackDuffelNexus
+  - ClothingBackpackSatchelNexus
+  - ClothingBackpackNexus
+  - ClothingHeadsetNexus
+  - ClothingNeckCloakNexus
+  - ClothingBackpackMessengerNexus
+  - ClothingNeckMantleNexus
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 0, 0

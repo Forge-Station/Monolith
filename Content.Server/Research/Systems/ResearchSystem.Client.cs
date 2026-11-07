@@ -1,6 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading.Tasks;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Research.Components;
 
@@ -27,6 +25,14 @@ public sealed partial class ResearchSystem
     {
         if (!TryGetServerById(args.ServerId, out var serveruid, out var serverComponent))
             return;
+
+        // Forge-change-start: only allow linking to authorized servers
+        if (!CanClientAccessServer(uid, serveruid.Value))
+        {
+            _popup.PopupEntity(Loc.GetString("research-client-server-selection-access-denied"), uid, args.Actor);
+            return;
+        }
+        // Forge-change-end
 
         UnregisterClient(uid, component);
         RegisterClient(uid, serveruid.Value, component, serverComponent);
@@ -59,20 +65,32 @@ public sealed partial class ResearchSystem
     private void OnClientMapInit(EntityUid uid, ResearchClientComponent component, MapInitEvent args)
     {
         var maybeGrid = Transform(uid).GridUid;
-        if (maybeGrid is { } grid)
-        {
-            var servers = new HashSet<Entity<ResearchServerComponent>>();
-            _lookup.GetChildEntities(grid, servers);
+        if (maybeGrid is not { } grid)
+            return;
 
-            foreach (var server in servers)
-            {
-                RegisterClient(uid, server, component);
-            }
+        var servers = new HashSet<Entity<ResearchServerComponent>>();
+        _lookup.GetChildEntities(grid, servers);
+
+        foreach (var server in servers)
+        {
+            // Forge-change: newly built equipment is not authorized until granted on the research server UI
+            if (!CanClientAccessServer(uid, server))
+                continue;
+
+            RegisterClient(uid, server, component);
         }
     }
 
     private void OnClientShutdown(EntityUid uid, ResearchClientComponent component, ComponentShutdown args)
     {
+        // Forge-change-start: drop authorization entries when equipment is destroyed
+        var query = EntityQueryEnumerator<ResearchServerComponent>();
+        while (query.MoveNext(out _, out var server))
+        {
+            server.AuthorizedClients.Remove(uid);
+        }
+        // Forge-change-end
+
         UnregisterClient(uid, component);
     }
 
@@ -88,9 +106,26 @@ public sealed partial class ResearchSystem
 
         TryGetClientServer(uid, out _, out var serverComponent, component);
 
+        // Forge-change-start: only list servers this client is authorized to use
+        var ids = GetNFServerIds(uid);
         var names = GetNFServerNames(uid);
-        var state = new ResearchClientBoundInterfaceState(names.Length, names,
-            GetNFServerIds(uid), serverComponent?.Id ?? -1);
+        var filteredNames = new List<string>();
+        var filteredIds = new List<int>();
+        for (var i = 0; i < ids.Length; i++)
+        {
+            if (!TryGetServerById(ids[i], out var serverUid, out _))
+                continue;
+
+            if (!CanClientAccessServer(uid, serverUid.Value))
+                continue;
+
+            filteredIds.Add(ids[i]);
+            filteredNames.Add(i < names.Length ? names[i] : Name(serverUid.Value));
+        }
+        // Forge-change-end
+
+        var state = new ResearchClientBoundInterfaceState(filteredNames.Count, filteredNames.ToArray(),
+            filteredIds.ToArray(), serverComponent?.Id ?? -1);
 
         _uiSystem.SetUiState(uid, ResearchClientUiKey.Key, state);
     }

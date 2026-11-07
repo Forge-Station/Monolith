@@ -3,6 +3,7 @@
   recipes:
 #  - ShieldControlComputerCircuitboard
   - GunneryControlComputerCircuitboard
+  - TurretCommandShipCircuitboard # Forge-Change
 #  - MachineShieldMS225Circuitboard
   - MachineDriveCTLA25Circuitboard
   - MachineDriveCTLA25sCircuitboard

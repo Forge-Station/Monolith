@@ -784,10 +784,11 @@ namespace Content.Server.Ghost
             // Forge-Change: an AI brain has no MobState and is otherwise treated as dead.
             // Ghosting from an occupied core must remove its mind so the takeover role can reopen.
             GhostRoleComponent? stationAiRole = null;
-            var stationAiBrain = playerEntity != null &&
-                                 _tag.HasTag(playerEntity.Value, StationAiTag) &&
-                                 TryComp(playerEntity.Value, out stationAiRole)
-                ? playerEntity
+            var ownedEntity = mind.OwnedEntity ?? playerEntity; // Forge - change: also release an AI visiting a borg.
+            var stationAiBrain = ownedEntity != null &&
+                                 _tag.HasTag(ownedEntity.Value, StationAiTag) &&
+                                 TryComp(ownedEntity.Value, out stationAiRole)
+                ? ownedEntity
                 : null;
             if (stationAiBrain != null)
                 canReturn = false;

@@ -1,7 +1,7 @@
 <Document>
-  # Расы
+  # Разновидности расс
 
-  На фронтире можно встретить множество различных рас
+  Система Икар населена следующими рассами:
 
   <Box>
     <GuideEntityEmbed Entity="MobArachnid" Caption="Арахнид"/>
@@ -12,35 +12,41 @@
   <Box>
     <GuideEntityEmbed Entity="MobMoth" Caption="Ниан"/>
     <GuideEntityEmbed Entity="MobReptilian" Caption="Унатх"/>
-    <GuideEntityEmbed Entity="MobSlimePerson" Caption="Слайм"/>
+    <GuideEntityEmbed Entity="MobSlimePerson" Caption="Слаймолюд"/>
     <GuideEntityEmbed Entity="MobVox" Caption="Вокс"/>
     <GuideEntityEmbed Entity="MobResomi" Caption="Резоми"/>
-    <GuideEntityEmbed Entity="MobIPCDummy" Caption="КПБ"/>
+    <GuideEntityEmbed Entity="MobIPCDummy" Caption="К.П.Б."/>
   </Box>
 
-  # Расы с New-Frontier 
+  # Виды характерные именно для Икара.
   <Box>
     <GuideEntityEmbed Entity="MobGoblin" Caption="Гоблин"/>
+    <GuideEntityEmbed Entity="MobHydrakin" Caption="Гидракин"/>
   </Box>
-  # Расы с Delta-V
+
+  # Специфичные виды
   <Box>
     <GuideEntityEmbed Entity="MobVulpkanin" Caption="Вульпканин"/>
+    <!-- <GuideEntityEmbed Entity="MobFelinid" Caption="Felinid"/> #Forge-change-del-->
     <GuideEntityEmbed Entity="MobHarpy" Caption="Гарпия"/>
     <GuideEntityEmbed Entity="MobOni" Caption="Они"/>
     <GuideEntityEmbed Entity="MobChitinid" Caption="Хитинид"/>
+    <GuideEntityEmbed Entity="MobTajaran" Caption="Таяран"/>
     <GuideEntityEmbed Entity="MobRodentia" Caption="Раткин"/>
   </Box>
-
-  # Расы с Goobstation 
   <Box>
-    <GuideEntityEmbed Entity="MobTajaran" Caption="Таяран"/>
-  </Box>
-
-  #Расы с Wega
-  <Box>
-    <GuideEntityEmbed Entity="MobAriral" Caption="Арирал"/>
     <GuideEntityEmbed Entity="MobDemon" Caption="Аркана"/>
+    <GuideEntityEmbed Entity="MobAriral" Caption="Арирал"/>
     <GuideEntityEmbed Entity="MobSkrell" Caption="Скрелл"/>
   </Box>
+  <!-- # Monolith specific species #Forge-change-del
+  <Box>
+    <GuideEntityEmbed Entity="MobProtogen" Caption="Protogen"/>
+  </Box>
+
+  # Виды приезжающие с других станций.
+  <Box>
+    <GuideEntityEmbed Entity="MobYowie" Caption="Yowie"/>
+  </Box> -->
 
 </Document>

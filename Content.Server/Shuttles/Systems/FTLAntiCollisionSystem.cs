@@ -23,7 +23,7 @@ namespace Content.Server.Shuttles.Systems;
 /// </summary>
 public sealed partial class FTLAntiCollisionSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
@@ -88,12 +88,17 @@ public sealed partial class FTLAntiCollisionSystem : EntitySystem
 
         // Find nearby grids
         var nearbyGrids = new List<(EntityUid Entity, float Distance)>();
-        foreach (var otherGrid in _mapManager.FindGridsIntersecting(mapId, new Box2(
+        var intersectingGrids = new List<Entity<MapGridComponent>>();
+        _mapManager.FindGridsIntersecting(mapId, new Box2(
             shuttlePosition - new Vector2(range, range),
-            shuttlePosition + new Vector2(range, range))))
+            shuttlePosition + new Vector2(range, range)), ref intersectingGrids, includeMap: false);
+        foreach (var otherGrid in intersectingGrids)
         {
             // Skip self
             if (otherGrid.Owner == shuttle)
+                continue;
+            // Skip map-as-grid entities (planets after IMapManager removal).
+            if (HasComp<MapComponent>(otherGrid.Owner))
                 continue;
 
             // Skip ships that are docked to this shuttle
@@ -205,12 +210,17 @@ public sealed partial class FTLAntiCollisionSystem : EntitySystem
         var checkSize = shipSize + MinimumSafeDistance;
 
         // Check for grids in the area
-        foreach (var otherGrid in _mapManager.FindGridsIntersecting(mapId, new Box2(
+        var nearbyGrids = new List<Entity<MapGridComponent>>();
+        _mapManager.FindGridsIntersecting(mapId, new Box2(
             position - new Vector2(checkSize, checkSize),
-            position + new Vector2(checkSize, checkSize))))
+            position + new Vector2(checkSize, checkSize)), ref nearbyGrids, includeMap: false);
+        foreach (var otherGrid in nearbyGrids)
         {
             // Skip self
             if (otherGrid.Owner == shuttle)
+                continue;
+
+            if (HasComp<MapComponent>(otherGrid.Owner))
                 continue;
 
             // Skip ships that are docked to this shuttle

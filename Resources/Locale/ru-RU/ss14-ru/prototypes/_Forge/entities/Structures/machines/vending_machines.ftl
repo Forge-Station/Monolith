@@ -31,3 +31,6 @@ ent-VendingMachineFlatpackVendRadio = Популярный Упак-О-Мат
 ent-VendingMachineCompanyCL = вендомат Chun Logistics
     .desc = Продаёт различные вещи компании Chun Logistics.
     .suffix = Chun Logistics
+
+ent-VendingMachineMedicalTTI = ТТИ-Мед
+    .desc = Медицинский вендор компании «Trauma Team I.». Снабжает проверенными медицинскими препаратами и имплантами.

@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 using Content.Shared.Tools;
 using Content.Shared.Atmos;
 using Content.Shared.DeviceLinking;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 using System.Numerics;
 
 namespace Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
@@ -223,31 +223,31 @@ public sealed partial class TurbineComponent : Component
     /// <summary>
     /// The proto ID of the "Speed: High" source port
     /// </summary>
-    [DataField("speedHighPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
+    [DataField("speedHighPort", customTypeSerializer: typeof(ProtoId<SourcePortPrototype>))]
     public string SpeedHighPort = "TurbineSpeedHigh";
 
     /// <summary>
     /// The proto ID of the "Speed: Low" source port
     /// </summary>
-    [DataField("speedLowPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
+    [DataField("speedLowPort", customTypeSerializer: typeof(ProtoId<SourcePortPrototype>))]
     public string SpeedLowPort = "TurbineSpeedLow";
 
     /// <summary>
     /// The proto ID of the "Turbine Data" source port
     /// </summary>
-    [DataField("turbineDataPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
+    [DataField("turbineDataPort", customTypeSerializer: typeof(ProtoId<SourcePortPrototype>))]
     public string TurbineDataPort = "GasTurbineDataSender";
 
     /// <summary>
     /// The proto ID of the "Increase Stator Load" sink port
     /// </summary>
-    [DataField("statorLoadIncreasePort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
+    [DataField("statorLoadIncreasePort", customTypeSerializer: typeof(ProtoId<SinkPortPrototype>))]
     public string StatorLoadIncreasePort = "IncreaseStatorLoad";
 
     /// <summary>
     /// The proto ID of the "Decrease Stator Load" sink port
     /// </summary>
-    [DataField("statorLoadDecreasePort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
+    [DataField("statorLoadDecreasePort", customTypeSerializer: typeof(ProtoId<SinkPortPrototype>))]
     public string StatorLoadDecreasePort = "DecreaseStatorLoad";
 
     /// <summary>

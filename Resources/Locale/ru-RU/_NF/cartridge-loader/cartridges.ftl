@@ -13,14 +13,18 @@ ledger-no-expenses = Нет
 ledger-balance = Баланс:
 ledger-no-balance = N/A
 
-ledger-tab-Frontier = Аванпост Фронтира
+ledger-tab-Frontier = Центральный Аванпост
 ledger-tab-Nfsd = ТСФ
+ledger-tab-Imperial = СИВ
+ledger-tab-Renegates = ВКР
+
+
 ledger-tab-Medical = Медицинский Аванпост
 Expensesledger-tab-Edison = Электростанция Эдиссона
 # Fallback, if this displays, something's wrong.
 ledger-tab-Unknown = Неизвестно
 
-ledger-entry-type-TickingIncome = NT Субсидии
+ledger-entry-type-TickingIncome = Субсидии
 ledger-entry-type-VendorTax = Налоги с продаж
 ledger-entry-type-CargoTax = Налоги с Карго
 ledger-entry-type-MailDelivered = Почтовые выплаты

@@ -1,0 +1,14 @@
+- type: technology
+  id: GeneticManipulation
+  name: research-technology-genetic-manipulation
+  entityIcon: ComputerGeneticsConsole
+  discipline: CivilianServices
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - DnaModifierScannerMachineCircuitboard
+  - GeneticsConsoleComputerCircuitboard
+  - GeneticsServerMachineCircuitboard
+  technologyPrerequisites:
+  - BiochemicalStasis
+  position: -5, 12

@@ -173,6 +173,7 @@
   - type: SSDIndicator
   - type: StandingState
   - type: Dna
+  - type: Genome
   - type: MindContainer
     showExamineInfo: true
   - type: CanEnterCryostorage

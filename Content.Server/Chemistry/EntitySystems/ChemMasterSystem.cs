@@ -40,7 +40,6 @@ namespace Content.Server.Chemistry.EntitySystems
         [Dependency] private LabelSystem _labelSystem = default!;
         [Dependency] private ISharedAdminLogManager _adminLogger = default!;
 
-        [ValidatePrototypeId<EntityPrototype>]
         private const string PillPrototypeId = "Pill";
 
         public override void Initialize()

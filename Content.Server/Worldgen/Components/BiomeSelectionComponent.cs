@@ -1,6 +1,6 @@
-﻿using Content.Server.Worldgen.Systems.Biomes;
+using Content.Server.Worldgen.Systems.Biomes;
 using Content.Server.Worldgen.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Worldgen.Components;
 
@@ -16,6 +16,6 @@ public sealed partial class BiomeSelectionComponent : Component
     /// </summary>
     /// <remarks>This is always sorted by priority after ComponentStartup.</remarks>
     [DataField("biomes", required: true,
-        customTypeSerializer: typeof(PrototypeIdListSerializer<BiomePrototype>))] public List<string> Biomes = new();
+        customTypeSerializer: typeof(ProtoId<BiomePrototype>))] public List<string> Biomes = new();
 }
 

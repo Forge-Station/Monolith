@@ -318,7 +318,7 @@ public sealed partial class NcContractSystem : EntitySystem
             .Enlarged(Math.Max(0f, safetyRadius));
 
         _droneHuntPlacementGridScratch.Clear();
-        _mapManager.FindGridsIntersecting(
+        _map.FindGridsIntersecting(
             xform.MapID,
             bounds,
             ref _droneHuntPlacementGridScratch,

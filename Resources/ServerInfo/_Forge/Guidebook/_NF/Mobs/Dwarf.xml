@@ -1,0 +1,18 @@
+<Document>
+  # Dwarves
+
+  <Box>
+    <GuideEntityEmbed Entity="MobDwarf" Caption=""/>
+  </Box>
+
+  Трудолюбивая раса, дварфы схожи с людьми в большинстве аспектов, но лучше переносят алкоголь, и он их исцеляет.
+
+  <Box>
+    <GuideEntityEmbed Entity="WallRockChromiteDiamond" Caption=""/>
+    <GuideEntityEmbed Entity="WallRockBasaltBananium" Caption=""/>
+    <GuideEntityEmbed Entity="NFWallRockBluespace" Caption=""/>
+  </Box>
+
+  Дварф инстинктивно знает, где находятся богатые рудные жилы в любой породе, и может чувствовать присутствие руды на расстоянии до 5 метров.
+
+</Document>

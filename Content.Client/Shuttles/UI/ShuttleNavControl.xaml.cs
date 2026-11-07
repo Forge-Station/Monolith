@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Client._Mono.Radar;
 using Content.Client.Station; // Frontier
 using Content.Shared._Crescent.ShipShields;
+using Content.Shared._Forge.CloakingShuttle; // Forge-Change - Cloaking
 using Content.Shared._Forge.LetoferolAnnihilator; // Forge-Change
 using Content.Shared._Forge.Shuttles.Components; // Forge-Change: nav markers
 using Content.Shared._Mono.Company;
@@ -32,7 +33,6 @@ namespace Content.Client.Shuttles.UI;
 [Virtual]
 public partial class ShuttleNavControl : BaseShuttleControl // Mono
 {
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IUserInterfaceManager _uiManager = default!;
     private readonly DetectionSystem _detection; // Mono
     private readonly StationSystem _station; // Frontier
@@ -634,7 +634,14 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
             var ourGridToWorld = _transform.GetWorldMatrix(ourGridId.Value);
             var ourGridToShuttle = Matrix3x2.Multiply(ourGridToWorld, worldToShuttle);
             var ourGridToView = ourGridToShuttle * shuttleToView;
-            var color = _shuttles.GetIFFColor(ourGridId.Value, self: true);
+
+            // Forge-Change-start - Cloaking
+            Color color;
+            if (ourGridId is { } gridId && EntManager.TryGetComponent<CloakingShuttleComponent>(gridId, out var cloak) && cloak.Active)
+                color = CloakingShuttleComponent.StealthColor;
+            else
+                color = _shuttles.GetIFFColor(ourGridId.Value, self: true);
+            // Forge-Change-end - Cloaking
 
             DrawGrid(handle, ourGridToView, (ourGridId.Value, ourGrid), color);
             DrawDocks(handle, ourGridId.Value, ourGridToView);
@@ -654,7 +661,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         var viewAABB = viewBounds.CalcBoundingBox();
 
         _grids.Clear();
-        _mapManager.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - MaxRadarRangeVector, mapPos.Position + MaxRadarRangeVector), ref _grids, approx: true, includeMap: false);
+        Maps.FindGridsIntersecting(xform.MapID, new Box2(mapPos.Position - MaxRadarRangeVector, mapPos.Position + MaxRadarRangeVector), ref _grids, approx: true, includeMap: false);
 
         DrawPoiCaptureZones(handle, worldToView, ourGridId, _grids, bodyQuery);
 
@@ -1067,7 +1074,16 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
             var distance = Vector2.Distance(worldPos, radarMap.Position);
             var displayedDistance = distance < 50f ? $"{distance:0.0}" : distance < 1000 ? $"{distance:0}" : $"{distance / 1000:0.0}k";
-            var label = Loc.GetString("shuttle-console-iff-label", ("name", marker.Name), ("distance", displayedDistance));
+            var unknownMassLabelStr = string.Empty;
+            var hideLabel = false;
+            if (EntManager.GetEntity(marker.Target) is { } targetUid && targetUid.IsValid())
+            {
+                unknownMassLabelStr = _detection.HandleUnknownMassLabel(targetUid);
+                if (EntManager.TryGetComponent<IFFComponent>(targetUid, out var iff))
+                    hideLabel = (iff.Flags & IFFFlags.HideLabel) != 0x0;
+            }
+
+            var label = Loc.GetString("shuttle-console-iff-label", ("name", hideLabel ? unknownMassLabelStr : marker.Name), ("distance", displayedDistance));
             var labelSize = handle.GetDimensions(Font, label, 0.8f);
             var labelPos = (uiPosition + new Vector2(-labelSize.X * 0.5f, 10f)) * UIScale;
             handle.DrawString(Font, labelPos, label, UIScale * 0.8f, color);
@@ -1428,6 +1444,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
             if (EntManager.HasComponent<FTLComponent>(gridUid))
                 continue;
 
+            if (EntManager.TryGetComponent<IFFComponent>(gridUid, out var iff) && (iff.Flags & IFFFlags.Hide) != 0 && consoleXform.GridUid != gridUid)
+                continue;
+
             var detectionLevel = _consoleEntity == null ? DetectionLevel.Detected : GetGridDetected(gridUid);
             if (detectionLevel == DetectionLevel.Undetected)
                 continue;
@@ -1448,7 +1467,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         var viewBounds = new Box2(mapPos.Position - MaxRadarRangeVector, mapPos.Position + MaxRadarRangeVector);
 
         _grids.Clear();
-        _mapManager.FindGridsIntersecting(consoleXform.MapID, viewBounds, ref _grids, approx: true, includeMap: false);
+        Maps.FindGridsIntersecting(consoleXform.MapID, viewBounds, ref _grids, approx: true, includeMap: false);
 
         foreach (var grid in _grids)
         {
@@ -1471,6 +1490,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 continue;
 
             if (!EntManager.TryGetComponent<TransformComponent>(gUid, out var parentXform))
+                continue;
+
+            if (EntManager.TryGetComponent<IFFComponent>(gUid, out var iff) && (iff.Flags & IFFFlags.Hide) != 0 && consoleXform.GridUid != gUid)
                 continue;
 
             var outline = ShipShieldOutline.GetVertices(grid.Comp, shieldState.Padding);

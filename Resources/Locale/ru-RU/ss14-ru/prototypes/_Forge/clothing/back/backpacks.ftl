@@ -6,3 +6,7 @@ ent-ClothingBackpackContractorForge = рюкзак DCN™
     .desc = Удобный рюкзак для ваших предательских вещей. Выглядит стильно и оригинально.
 ent-ClothingBackpackRenegade = рюкзак ренегатов
     .desc = Удобный и стильный рюкзак.
+
+ent-ClothingBackpackNexus = рюкзак Nexus
+    .desc = Фирменный рюкзак Nexus.
+    .suffix = Nexus

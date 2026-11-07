@@ -73,22 +73,21 @@ public sealed class BotanyUiStyles
 
     public Control KeyValue(string key, string value, Color? valueColor = null)
     {
-        var row = new BoxContainer
+        var container = new BoxContainer
         {
-            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalExpand = true,
-            Margin = new Thickness(0, 1, 0, 1)
+            Margin = new Thickness(0, 2, 0, 2)
         };
 
-        row.AddChild(new Label
+        container.AddChild(new Label
         {
             Text = key,
-            MinWidth = 180,
             FontOverride = GetRegularFont(12),
             FontColorOverride = BotanyUiTheme.SubText
         });
 
-        row.AddChild(new Label
+        container.AddChild(new Label
         {
             Text = value,
             HorizontalExpand = true,
@@ -96,7 +95,13 @@ public sealed class BotanyUiStyles
             FontColorOverride = valueColor ?? BotanyUiTheme.Text
         });
 
-        return row;
+        return container;
+    }
+
+    public void AddBulletList(BoxContainer parent, IEnumerable<string> items, Color? color = null)
+    {
+        foreach (var item in items)
+            parent.AddChild(Body("·  " + item, 12, color ?? BotanyUiTheme.Text));
     }
 
     public Label Section(string text)

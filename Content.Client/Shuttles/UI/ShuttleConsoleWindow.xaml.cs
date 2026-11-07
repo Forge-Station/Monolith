@@ -27,6 +27,8 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
     // Mono
     public event Action<MapCoordinates, Angle>? RequestAutopilot;
     public event Action<MapCoordinates>? RequestBioScan; // Forge-Change - BioScan
+    public event Action? OnCloaking; // Forge-Change - Cloaking
+    public event Action? OnMapToggleMod; // Forge-Change - Cloaking
 
     public event Action<NetEntity, NetEntity, bool>? DockRequest; // Forge-Change
     public event Action<NetEntity>? UndockRequest;
@@ -68,6 +70,18 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         {
             RequestAutopilot?.Invoke(coords, angle);
         };
+
+        // Forge-Change-start - Cloaking
+        MapContainer.OnCloaking += () =>
+        {
+            OnCloaking?.Invoke();
+        };
+
+        MapContainer.OnMapToggleMod += () =>
+        {
+            OnMapToggleMod?.Invoke();
+        };
+        // Forge-Change-end - Cloaking
 
         MapContainer.RequestBioScan += coords => // Forge-Change - BioScan
         {

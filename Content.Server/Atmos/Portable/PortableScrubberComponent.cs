@@ -1,7 +1,7 @@
 using Content.Shared.Atmos;
 using Content.Shared.Guidebook;
 using Content.Shared.Construction.Prototypes; // Frontier
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype; // Frontier
+using Robust.Shared.Prototypes; // Frontier
 
 namespace Content.Server.Atmos.Portable
 {
@@ -35,6 +35,10 @@ namespace Content.Server.Atmos.Portable
             Gas.BZ, //Funky/Goob
             Gas.Healium, //Funky/Goob
 			Gas.Nitrium, //Funky/Goob
+            Gas.N611, //Forge-change
+            Gas.N611P, //Forge-change
+            Gas.A517, //Forge-change
+            Gas.V903, //Forge-change
         };
 
         [ViewVariables(VVAccess.ReadWrite)]
@@ -55,7 +59,7 @@ namespace Content.Server.Atmos.Portable
         /// <summary>
         /// The machine part that modifies the maximum internal pressure
         /// </summary>
-        [DataField("machinePartMaxPressure", customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
+        [DataField("machinePartMaxPressure", customTypeSerializer: typeof(ProtoId<MachinePartPrototype>))]
         public string MachinePartMaxPressure = "MatterBin";
 
         /// <summary>
@@ -88,7 +92,7 @@ namespace Content.Server.Atmos.Portable
         /// <summary>
         /// The machine part which modifies the speed of <see cref="TransferRate"/>
         /// </summary>
-        [DataField("machinePartTransferRate", customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
+        [DataField("machinePartTransferRate", customTypeSerializer: typeof(ProtoId<MachinePartPrototype>))]
         public string MachinePartTransferRate = "Manipulator";
 
         /// <summary>

@@ -23,7 +23,7 @@
   - type: SolutionScanner
   - type: Damageable
     damageContainer: Biological
-    damageModifierSet: ForgeSkrell #Forge-Change
+    damageModifierSet: Skrell
   - type: Bloodstream
     bloodReagent: SkrellBlood
   - type: Reactive

@@ -101,6 +101,7 @@
       - SimpleHostile
   - type: Damageable
     damageContainer: StructuralInorganic
+  - type: OreDrillHarvestTarget # Forge-Change: drill kills feed ore into pipe buffer
 
 - type: entity
   parent: MobOreCrab

@@ -11,6 +11,7 @@
   - type: Item
     size: Huge
   - type: MeleeWeapon
+    wideAnimationRotation: -135 # Forge-Change
     attackRate: 0.5
     range: 1.70
     damage:

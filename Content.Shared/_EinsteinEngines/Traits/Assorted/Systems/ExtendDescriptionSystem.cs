@@ -12,11 +12,11 @@ using Robust.Shared.Player; // Forge-Change
 
 namespace Content.Shared.Traits.Assorted.Systems;
 
-public sealed class ExtendDescriptionSystem : EntitySystem
+public sealed partial class ExtendDescriptionSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedStationSpawningSystem _stationSpawning = default!;
-    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!; // Forge-Change
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedStationSpawningSystem _stationSpawning = default!;
+    [Dependency] private ISharedPlaytimeManager _playtime = default!; // Forge-Change
 
     public override void Initialize()
     {

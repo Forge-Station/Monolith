@@ -18,11 +18,11 @@ namespace Content.Server._Forge.AutoKick;
 /// </summary>
 public sealed class AutoKickSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IServerNetManager _net = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IServerNetManager _net = default!;
+    [Dependency] private IPlayerManager _players = default!;
 
     private readonly Dictionary<NetUserId, TimeSpan> _pendingClockInSinceReal = new();
     private readonly Dictionary<NetUserId, TimeSpan> _lastInputTimes = new();

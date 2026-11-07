@@ -5,9 +5,9 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._DV.Silicon;
 
-public sealed class SiliconPdaScreenSystem : EntitySystem
+public sealed partial class SiliconPdaScreenSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
 
     public override void Initialize()
     {

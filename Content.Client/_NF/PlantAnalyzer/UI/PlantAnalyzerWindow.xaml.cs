@@ -17,8 +17,8 @@ namespace Content.Client._NF.PlantAnalyzer.UI;
 [GenerateTypedNameReferences]
 public sealed partial class PlantAnalyzerWindow : BaseWindow
 {
-    [Dependency] private readonly IResourceCache _resCache = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!; // Forge-Change
+    [Dependency] private IResourceCache _resCache = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!; // Forge-Change
 
     private readonly BotanyUiStyles _styles;
     private readonly BotanyChipButton _printLabel;

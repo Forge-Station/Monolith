@@ -14,9 +14,9 @@ namespace Content.Client.Decals
 {
     public sealed partial class DecalSystem : SharedDecalSystem
     {
-        [Dependency] private readonly IOverlayManager _overlayManager = default!;
-        [Dependency] private readonly SpriteSystem _sprites = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IOverlayManager _overlayManager = default!;
+        [Dependency] private SpriteSystem _sprites = default!;
+        [Dependency] private  IConfigurationManager _cfg = default!;
 
         private DecalOverlay? _overlay;
 

@@ -19,10 +19,10 @@ namespace Content.Client._Forge.Access.UI;
 [GenerateTypedNameReferences]
 public sealed partial class JobPresetConsoleWindow : DefaultWindow
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private ILogManager _logManager = default!;
 
     private static readonly IReadOnlyDictionary<string, TimeSpan> EmptyPlaytimes =
         new Dictionary<string, TimeSpan>();

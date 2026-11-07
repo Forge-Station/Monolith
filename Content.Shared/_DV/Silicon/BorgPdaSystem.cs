@@ -4,9 +4,9 @@ using Content.Shared.Verbs;
 
 namespace Content.Shared._DV.Silicon;
 
-public sealed class BorgPdaSystem : EntitySystem
+public sealed partial class BorgPdaSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
 
     public override void Initialize()
     {

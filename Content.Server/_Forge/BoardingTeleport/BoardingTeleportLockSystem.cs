@@ -10,15 +10,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.BoardingTeleport;
 
-public sealed class BoardingTeleportLockSystem : EntitySystem
+public sealed partial class BoardingTeleportLockSystem : EntitySystem
 {
     private readonly HashSet<Entity<BoardingBluespaceScramblerComponent>> _scramblerScratch = new();
 
-    [Dependency] private readonly DeviceListSystem _deviceList = default!;
-    [Dependency] private readonly DockingSystem _docking = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private DeviceListSystem _deviceList = default!;
+    [Dependency] private DockingSystem _docking = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public void GetLockPenalties(
         BoardingTeleportConsoleComponent console,

@@ -4,12 +4,12 @@ using Robust.Shared.Log;
 
 namespace Content.Shared._Forge.Access.Systems;
 
-public abstract class SharedJobPresetIdCardConsoleSystem : EntitySystem
+public abstract partial class SharedJobPresetIdCardConsoleSystem : EntitySystem
 {
     public const string Sawmill = "job-preset-id-card-console";
 
-    [Dependency] protected readonly ItemSlotsSystem ItemSlotsSystem = default!;
-    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] protected ItemSlotsSystem ItemSlotsSystem = default!;
+    [Dependency] private ILogManager _logManager = default!;
 
     protected ISawmill Log = default!;
 

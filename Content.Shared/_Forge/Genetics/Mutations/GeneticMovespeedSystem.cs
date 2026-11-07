@@ -2,9 +2,9 @@ using Content.Shared.Movement.Systems;
 
 namespace Content.Shared._Forge.Genetics.Mutations;
 
-public sealed class GeneticMovespeedSystem : EntitySystem
+public sealed partial class GeneticMovespeedSystem : EntitySystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _movespeed = default!;
+    [Dependency] private MovementSpeedModifierSystem _movespeed = default!;
 
     public override void Initialize()
     {

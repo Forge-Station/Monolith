@@ -14,17 +14,17 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.BsEnergy;
 
-public sealed class BsTransmitterEnergySystem : EntitySystem
+public sealed partial class BsTransmitterEnergySystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly StackSystem _stackSystem = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private StackSystem _stackSystem = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IAdminLogManager _adminLogger = default!;
 
     private const int KvtConst = BsEnergySettings.KvtConst;
     private const int PassiveIncome = BsEnergySettings.PassiveIncome;

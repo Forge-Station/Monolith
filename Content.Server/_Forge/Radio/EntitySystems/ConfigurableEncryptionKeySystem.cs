@@ -12,11 +12,11 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Forge.Radio.EntitySystems;
 
-public sealed class ConfigurableEncryptionKeySystem : EntitySystem
+public sealed partial class ConfigurableEncryptionKeySystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedStationAiSystem _stationAi = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedStationAiSystem _stationAi = default!;
 
     public override void Initialize()
     {

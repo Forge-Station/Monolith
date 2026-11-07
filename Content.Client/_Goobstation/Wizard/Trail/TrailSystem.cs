@@ -13,13 +13,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._Goobstation.Wizard.Trail;
 
-public sealed class TrailSystem : EntitySystem
+public sealed partial class TrailSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlay = default!;
-    [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private IOverlayManager _overlay = default!;
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private TransformSystem _transform = default!;
 
     private TrailOverlay? _trailOverlay; // Forge-Change: keep a handle so shaders can be disposed on shutdown
 

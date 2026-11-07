@@ -15,12 +15,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.CloakingShuttle;
 
-public sealed class CloakingShuttleSystem : EntitySystem
+public sealed partial class CloakingShuttleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedShuttleSystem _sharedShuttleSystem = default!;
-    [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedShuttleSystem _sharedShuttleSystem = default!;
+    [Dependency] private PowerReceiverSystem _powerReceiverSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

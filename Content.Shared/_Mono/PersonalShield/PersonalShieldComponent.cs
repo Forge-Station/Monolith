@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Mono.PersonalShield;
@@ -146,6 +145,12 @@ public sealed partial class PersonalShieldSettings
     /// </summary>
     [DataField]
     public float PowerDraw = 1.5f;
+
+    /// <summary>
+    /// The charge recovery ratio—the percentage of the maximum charge that will be restored after a fracture range: [0; 1]
+    /// </summary>
+    [DataField] // Forge-Change
+    public float ChargeAfterFracture = 0.5f; // Forge-Change
 }
 
 
@@ -153,20 +158,27 @@ public sealed partial class PersonalShieldSettings
 public struct PersonalShieldRuntime
 {
     /// <summary>Damage capacity remaining.</summary>
+    [ViewVariables] // Forge-Change
     public float Charge;
 
     /// <summary>
     /// How far the field has crawled in.
     /// </summary>
+    [ViewVariables] // Forge-Change
     public float Form;
 
     /// <summary>
     /// Progress of the destruction fadeout.
     /// </summary>
+    [ViewVariables] // Forge-Change
     public float Shatter;
 
     /// <summary>
     /// Seconds left before a fractured shield may start spinning up again.
     /// </summary>
+    [ViewVariables] // Forge-Change
     public float Offline;
+
+    [ViewVariables] // Forge-Change
+    public bool WasFracture; // Forge-Change
 }

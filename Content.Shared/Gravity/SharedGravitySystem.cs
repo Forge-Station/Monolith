@@ -89,7 +89,8 @@ public abstract partial class SharedGravitySystem : EntitySystem
     /// <param name="entity">The entity we are updating the weightless status of</param>
     public void RefreshWeightless(Entity<GravityAffectedComponent?> entity)
     {
-        if (!_weightlessQuery.Resolve(entity, ref entity.Comp))
+        // Forge-Change: lobby dummies wear magboots too but have no GravityAffectedComponent, don't log an error.
+        if (!_weightlessQuery.Resolve(entity, ref entity.Comp, false))
             return;
 
         UpdateWeightless(entity!);

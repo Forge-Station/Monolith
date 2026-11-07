@@ -1074,7 +1074,16 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
             var distance = Vector2.Distance(worldPos, radarMap.Position);
             var displayedDistance = distance < 50f ? $"{distance:0.0}" : distance < 1000 ? $"{distance:0}" : $"{distance / 1000:0.0}k";
-            var label = Loc.GetString("shuttle-console-iff-label", ("name", marker.Name), ("distance", displayedDistance));
+            var unknownMassLabelStr = string.Empty;
+            var hideLabel = false;
+            if (EntManager.GetEntity(marker.Target) is { } targetUid && targetUid.IsValid())
+            {
+                unknownMassLabelStr = _detection.HandleUnknownMassLabel(targetUid);
+                if (EntManager.TryGetComponent<IFFComponent>(targetUid, out var iff))
+                    hideLabel = (iff.Flags & IFFFlags.HideLabel) != 0x0;
+            }
+
+            var label = Loc.GetString("shuttle-console-iff-label", ("name", hideLabel ? unknownMassLabelStr : marker.Name), ("distance", displayedDistance));
             var labelSize = handle.GetDimensions(Font, label, 0.8f);
             var labelPos = (uiPosition + new Vector2(-labelSize.X * 0.5f, 10f)) * UIScale;
             handle.DrawString(Font, labelPos, label, UIScale * 0.8f, color);

@@ -49,7 +49,7 @@ public sealed partial class CCVars
     ///     Controls the default game preset.
     /// </summary>
     public static readonly CVarDef<string>
-        GameLobbyDefaultPreset = CVarDef.Create("game.defaultpreset", "nfpirate", CVar.ARCHIVE); // Frontier: secret<nfpirate
+        GameLobbyDefaultPreset = CVarDef.Create("game.defaultpreset", "MonoMixed", CVar.ARCHIVE); // Forge
 
     /// <summary>
     ///     Controls if the game can force a different preset if the current preset's criteria are not met.

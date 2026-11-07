@@ -138,6 +138,9 @@ public sealed class ShuttleNavMarkerSystem : EntitySystem
         if (!TryGetEntity(args.Target, out var target) || !Exists(target.Value))
             return;
 
+        if (TryComp<IFFComponent>(GetEntity(args.Target), out var iffComp) && (iffComp.Flags & IFFFlags.Hide) != 0x0)
+            return;
+
         var markers = EnsureComp<ShuttleNavMarkerComponent>(grid);
         var existing = markers.Markers.FindIndex(m => m.Kind == ShuttleNavMarkerKind.Entity && m.Target == args.Target);
         if (existing >= 0)

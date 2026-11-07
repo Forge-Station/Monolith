@@ -275,3 +275,29 @@
     - Hammerhead
   - type: StaticPrice
     vendPrice: 264616
+
+# Region Rodger
+- type: entity
+  parent: BaseShipLPCRenewable
+  id: ShipVoucherHaimit
+  name: haimit LPC
+  description: A small card that contains the data for the procurement of a Haimit pirate ship.
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/lpcnew.rsi
+    layers:
+    - state: icon
+    - state: screen
+      color: "#eb0023"
+    - state: screen5
+      color: "#eb0023"
+      shader: unshaded
+  - type: ShipyardVoucher
+    destroyOnEmpty: false
+    cooldown: 3600 # one hour
+    consoleType: Sr
+    # companyName: Colonial # Forge-change
+    vessels:
+    - Haimit
+  - type: StaticPrice
+    vendPrice: 325000

@@ -8,7 +8,7 @@
     - to: shell-core
       steps:
       - tag: ModsuitCore
-        name: MOD core
+        name: construction-required-mod-core # Forge-change
         store: core-container
         completed:
         - !type:PlaySound
@@ -36,7 +36,7 @@
     - to: shell-helmet
       steps:
       - tag: ModsuitHelmet
-        name: MOD helmet
+        name: construction-required-mod-helmet # Forge-change
         doAfter: 1
         completed:
         - !type:PlaySound
@@ -49,7 +49,7 @@
     - to: shell-chestplate
       steps:
       - tag: ModsuitChestplate
-        name: MOD chestplate
+        name: construction-required-mod-chestplate # Forge-change
         doAfter: 1
         completed:
         - !type:PlaySound
@@ -62,7 +62,7 @@
     - to: shell-gauntlets
       steps:
       - tag: ModsuitGauntlets
-        name: MOD gauntlets
+        name: construction-required-mod-gauntlets # Forge-change
         doAfter: 1
         completed:
         - !type:PlaySound
@@ -75,7 +75,7 @@
     - to: shell-boots
       steps:
       - tag: ModsuitBoots
-        name: MOD boots
+        name: construction-required-mod-boots # Forge-change
         doAfter: 1
         completed:
         - !type:PlaySound
@@ -100,7 +100,7 @@
     - to: standard
       steps:
         - tag: ModsuitPlatingExternal
-          name: any MOD plating
+          name: construction-required-any-mod-plating # Forge-change
           doAfter: 1
           completed:
           - !type:PlaySound

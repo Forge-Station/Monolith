@@ -197,6 +197,17 @@
     repairCost: 125
 
 - type: entity
+  parent: BaseFlatpack
+  id: ShieldGeneratorFSG100Flatpack
+  name: Shield Generator FSG100 flatpack
+  description: A flatpack for assembling a Shield Generator FSG100.
+  components:
+  - type: Flatpack
+    entity: ShieldGeneratorFSG100
+  - type: StaticPrice
+    price: 2666
+
+- type: entity
   id: ShieldGeneratorFSG110P
   parent: ShieldGeneratorFSG
   name: FSG-110P "Halo" Shield Generator

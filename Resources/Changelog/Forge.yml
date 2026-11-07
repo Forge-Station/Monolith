@@ -146,3 +146,59 @@ Entries:
   id: 14
   time: '2026-11-07T13:59:05.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/529
+- author: artur-001
+  changes:
+    - type: Fix
+      message: Отображение волос при активном мод скафандре.
+  id: 15
+  time: '2026-11-07T14:02:36.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/542
+- author: KoT-Corvax
+  changes:
+    - type: Add
+      message: >-
+        Новая система взаимодействия с одеждой, теперь её при наличии стейтов
+        более 2, можно задавать в один прототип. Ваш персонаж запоминает в каком
+        состоянии вы любите её носить.
+    - type: Add
+      message: >-
+        Переключение стейтов одежды на Alt+M1 или по кнопке взаимодействия (Пока
+        что только для новых шарфиков!).
+    - type: Tweak
+      message: >-
+        Изменены старые виды одноцветных шарфиков на новые! Шарфики имеют три
+        вида! Поблагодарим @Hurtsay !
+    - type: Add
+      message: Все новые шарфики добавлены в ЗимнеШкаф.
+    - type: Add
+      message: Уникальный шарфик ПНТ, найти можно в Вендомате НТ и шкафчике ПНТ.
+    - type: Fix
+      message: ЗимнеШкаф теперь платный!
+  id: 16
+  time: '2026-11-07T14:05:56.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/544
+- author: artur-001
+  changes:
+    - type: Tweak
+      message: Поведение заряда персональных щитов.
+    - type: Fix
+      message: Отображение персональных щитов.
+  id: 17
+  time: '2026-11-07T14:15:58.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/545
+- author: percent-temp-percent
+  changes:
+    - type: Tweak
+      message: 'Космос на заднем фоне стал более живым: Чето блестит, чето летает....'
+  id: 18
+  time: '2026-11-07T14:27:23.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/547
+- author:
+  changes:
+    - type: add 
+      message: Добавлено в описание VG: "Транс-Солнечная Федерация и компания Viper Group являются врагами за пределами Безопасной Зоны. Учитывайте это.". "По поводу вопросов - обращаться к текущему Старшему модератору - mersen
+    - type: remove
+      message: Строчка старых отношений ТСФ и VG.
+  id: 19
+  time: '2026-11-07T14:28:23.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/546

@@ -129,7 +129,7 @@ public sealed partial class GhostGui : UIWidget
             disabled = true;
         }
 
-        // This runs every frame while ghosted. An unchanged label still invalidates the whole HUD.
+        // Forge-Change: this runs every frame while ghosted. An unchanged label still invalidates the whole HUD.
         if (GhostRespawnButton.Text != text)
             GhostRespawnButton.Text = text;
 

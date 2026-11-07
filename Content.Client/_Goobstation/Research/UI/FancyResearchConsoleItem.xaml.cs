@@ -54,6 +54,54 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
         }
     }
 
+    private bool _isOnPath;
+    /// <summary>
+    /// Technology is on the prerequisite chain of the focused research.
+    /// </summary>
+    public bool IsOnPath
+    {
+        get => _isOnPath;
+        set
+        {
+            if (_isOnPath == value)
+                return;
+
+            _isOnPath = value;
+            UpdateVisuals();
+        }
+    }
+
+    private bool _isDimmed;
+    /// <summary>
+    /// Faded out because another technology's path is being shown.
+    /// </summary>
+    public bool IsDimmed
+    {
+        get => _isDimmed;
+        set
+        {
+            if (_isDimmed == value)
+                return;
+
+            _isDimmed = value;
+            UpdateVisuals();
+        }
+    }
+
+    private bool _isSearchMatch;
+    public bool IsSearchMatch
+    {
+        get => _isSearchMatch;
+        set
+        {
+            if (_isSearchMatch == value)
+                return;
+
+            _isSearchMatch = value;
+            UpdateVisuals();
+        }
+    }
+
     private Color _backgroundColor;
     private Color _hoveredColor;
     private Color _selectedColor;
@@ -70,15 +118,45 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
+        Prototype = proto;
+        ToolTip = Loc.GetString(proto.Name);
+
+        if (proto.EntityIcon.HasValue)
+            ResearchDisplay.SetPrototype(proto.EntityIcon.Value);
+        else
+            ResearchDisplay.SetPrototype(null);
+
+        Button.OnPressed += Selected;
+        Button.OnDrawModeChanged += UpdateVisuals;
+
+        Panel.PanelOverride = new RoundedStyleBoxFlat
+        {
+            CornerRadius = 8f,
+        };
+
+        LockOverlay.PanelOverride = new StyleBoxFlat();
+        StatusBar.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = new Color(0f, 0f, 0f, 0.72f),
+        };
+
+        RefreshState(availability, unlockProgress);
+    }
+
+    /// <summary>
+    /// Updates unlock progress without recreating the control, so the tree does not jump.
+    /// </summary>
+    public void RefreshState(ResearchAvailability availability, byte unlockProgress)
+    {
         Availability = availability;
         UnlockProgress = unlockProgress;
-        Prototype = proto;
 
-        var discipline = _prototype.Index<TechDisciplinePrototype>(proto.Discipline);
+        var discipline = _prototype.Index<TechDisciplinePrototype>(Prototype.Discipline);
         var disciplineColor = discipline.Color;
         var scheme = ResearchColorScheme.GetTechItemColors(availability);
         var blend = ResearchColorScheme.GetBackgroundInterpolationFactor(availability);
 
+        _borderThickness = 2.5f;
         _backgroundColor = Color.InterpolateBetween(disciplineColor, scheme.Background, blend);
         _hoveredColor = Color.InterpolateBetween(_backgroundColor, scheme.Hover, 0.35f);
         _selectedColor = Color.InterpolateBetween(_backgroundColor, scheme.Selected, 0.55f);
@@ -96,32 +174,8 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
             _backgroundColor = Color.InterpolateBetween(_backgroundColor, scheme.Background, 0.15f);
         }
 
-        if (proto.EntityIcon.HasValue)
-            ResearchDisplay.SetPrototype(proto.EntityIcon.Value);
-        else
-            ResearchDisplay.SetPrototype(null);
-
-        Button.OnPressed += Selected;
-        Button.OnDrawModeChanged += UpdateVisuals;
-
-        var roundedStyle = new RoundedStyleBoxFlat
-        {
-            BorderColor = _borderColor,
-            BorderThickness = new Thickness(_borderThickness),
-            CornerRadius = 8f,
-        };
-
-        Panel.PanelOverride = roundedStyle;
-
-        LockOverlay.PanelOverride = new StyleBoxFlat
-        {
-            BackgroundColor = new Color(0f, 0f, 0f, availability == ResearchAvailability.Unavailable ? 0.55f : 0f),
-        };
-
-        StatusBar.PanelOverride = new StyleBoxFlat
-        {
-            BackgroundColor = new Color(0f, 0f, 0f, 0.72f),
-        };
+        if (LockOverlay.PanelOverride is StyleBoxFlat lockOverlay)
+            lockOverlay.BackgroundColor = new Color(0f, 0f, 0f, availability == ResearchAvailability.Unavailable ? 0.55f : 0f);
 
         ApplyProgressLabel();
         UpdateVisuals();
@@ -179,8 +233,14 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
         else
             panel.BackgroundColor = _backgroundColor;
 
-        panel.BorderColor = _borderColor;
-        panel.BorderThickness = new Thickness(_borderThickness);
+        if (IsSearchMatch)
+            panel.BorderColor = Color.FromHex("#F2C14E");
+        else if (IsOnPath)
+            panel.BorderColor = Color.FromHex("#7AD7FF");
+        else
+            panel.BorderColor = _borderColor;
+
+        panel.BorderThickness = new Thickness(IsOnPath || IsSearchMatch ? 3.5f : _borderThickness);
 
         var iconAlpha = Availability switch
         {
@@ -198,10 +258,11 @@ public sealed partial class FancyResearchConsoleItem : LayoutContainer
 
         LockOverlay.Visible = Availability == ResearchAvailability.Unavailable && !IsPreviewTarget;
 
+        var alpha = IsDimmed ? 0.28f : 1f;
         if (IsGhostPreview)
-            ModulateSelfOverride = new Color(1f, 1f, 1f, 0.7f);
-        else
-            ModulateSelfOverride = Color.White;
+            alpha *= 0.7f;
+
+        ModulateSelfOverride = new Color(1f, 1f, 1f, alpha);
     }
 
     protected override void ExitedTree()

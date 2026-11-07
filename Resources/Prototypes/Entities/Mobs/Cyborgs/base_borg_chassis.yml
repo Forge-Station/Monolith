@@ -77,6 +77,12 @@
       # Only used for NT borgs that can switch type, defined here to avoid copy-pasting the rest of this component.
       enum.BorgSwitchableTypeUiKey.SelectBorgType:
         type: BorgSelectTypeUserInterface
+      # Begin DeltaV - borg PDAs
+      enum.PdaUiKey.Key:
+        type: PdaBoundUserInterface
+      enum.RingerUiKey.Key:
+        type: RingerBoundUserInterface
+      # End DeltaV - borg PDAs
       enum.RadarConsoleUiKey.Key: # Mono
         type: RadarConsoleBoundUserInterface
   - type: ActivatableUI
@@ -131,6 +137,8 @@
       cell_slot: !type:ContainerSlot { }
       borg_module: !type:Container
       part-container: !type:Container
+      program-container: !type:Container # DeltaV - Borg PDAs
+      Cartridge-Slot: !type:ContainerSlot # DeltaV - Borg PDAs
   - type: PowerCellSlot
     cellSlotId: cell_slot
     fitsInCharger: true

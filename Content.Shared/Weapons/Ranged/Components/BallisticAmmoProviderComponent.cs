@@ -35,7 +35,9 @@ public sealed partial class BallisticAmmoProviderComponent : Component
 
     // TODO: Make this use stacks when the typeserializer is done.
     // Realistically just point to the container.
-    [DataField, AutoNetworkedField]
+    // Forge-Change: not AutoNetworked — networking deleted ammo UIDs after nuke/grid wipe
+    // spammed MetaDataComponent resolve errors in PVS. Keep in sync via the ballistic-ammo container.
+    [DataField]
     public List<EntityUid> Entities = new();
 
     /// <summary>

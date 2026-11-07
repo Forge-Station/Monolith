@@ -8,10 +8,12 @@ using Content.Shared.Destructible;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
+using Content.Shared.Interaction;
 using Content.Shared.MedicalScanner;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Power;
@@ -46,13 +48,17 @@ public sealed class DnaModifierScannerSystem : EntitySystem
         SubscribeLocalEvent<DnaModifierScannerComponent, GetVerbsEvent<InteractionVerb>>(OnInsertVerb);
         SubscribeLocalEvent<DnaModifierScannerComponent, GetVerbsEvent<AlternativeVerb>>(OnAltVerbs);
         SubscribeLocalEvent<DnaModifierScannerComponent, DestructionEventArgs>(OnDestroyed);
-        SubscribeLocalEvent<DnaModifierScannerComponent, DragDropTargetEvent>(OnDragDrop);
-        SubscribeLocalEvent<DnaModifierScannerComponent, CanDropTargetEvent>(OnCanDrop);
+        // Insert must win over Climbable vaulting when dropping a body onto the scanner.
+        SubscribeLocalEvent<DnaModifierScannerComponent, DragDropTargetEvent>(OnDragDrop, before: [typeof(ClimbSystem)]);
+        SubscribeLocalEvent<DnaModifierScannerComponent, CanDropTargetEvent>(OnCanDrop, before: [typeof(ClimbSystem)]);
+        SubscribeLocalEvent<DnaModifierScannerComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<DnaModifierScannerComponent, PortDisconnectedEvent>(OnPortDisconnected);
         SubscribeLocalEvent<DnaModifierScannerComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<DnaModifierScannerComponent, SolutionTransferAttemptEvent>(OnTransferAttempt);
         SubscribeLocalEvent<DnaModifierScannerComponent, SolutionTransferredEvent>(OnTransferred);
         SubscribeLocalEvent<DnaModifierScannerComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<DnaModifierScannerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+        SubscribeLocalEvent<DnaModifierScannerComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
     }
 
     private void OnInit(Entity<DnaModifierScannerComponent> ent, ref ComponentInit args)
@@ -63,8 +69,11 @@ public sealed class DnaModifierScannerSystem : EntitySystem
 
     private void OnCanDrop(Entity<DnaModifierScannerComponent> ent, ref CanDropTargetEvent args)
     {
+        if (IsOccupied(ent.Comp) || !CanInsert(args.Dragged))
+            return;
+
+        args.CanDrop = true;
         args.Handled = true;
-        args.CanDrop |= CanInsert(args.Dragged);
     }
 
     public bool CanInsert(EntityUid target)
@@ -82,14 +91,25 @@ public sealed class DnaModifierScannerSystem : EntitySystem
 
     private void OnInsertVerb(Entity<DnaModifierScannerComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
-        if (args.Using == null || !args.CanAccess || !args.CanInteract || IsOccupied(ent.Comp) || !CanInsert(args.Using.Value))
+        if (!args.CanAccess || !args.CanInteract || IsOccupied(ent.Comp))
             return;
 
-        var toInsert = args.Using.Value;
-        var name = MetaData(toInsert).EntityName;
+        EntityUid? toInsert = null;
+        if (args.Using != null && CanInsert(args.Using.Value))
+            toInsert = args.Using.Value;
+        else if (TryComp<PullerComponent>(args.User, out var puller)
+                 && puller.Pulling is { } pulled
+                 && CanInsert(pulled))
+            toInsert = pulled;
+
+        if (toInsert == null)
+            return;
+
+        var insertUid = toInsert.Value;
+        var name = MetaData(insertUid).EntityName;
         args.Verbs.Add(new InteractionVerb
         {
-            Act = () => InsertBody(ent, toInsert),
+            Act = () => InsertBody(ent, insertUid),
             Category = VerbCategory.Insert,
             Text = name,
         });
@@ -129,7 +149,40 @@ public sealed class DnaModifierScannerSystem : EntitySystem
 
     private void OnDragDrop(Entity<DnaModifierScannerComponent> ent, ref DragDropTargetEvent args)
     {
+        if (args.Handled || IsOccupied(ent.Comp) || !CanInsert(args.Dragged))
+            return;
+
         InsertBody(ent, args.Dragged);
+        args.Handled = true;
+    }
+
+    private void OnInteractUsing(Entity<DnaModifierScannerComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled || IsOccupied(ent.Comp) || !CanInsert(args.Used))
+            return;
+
+        InsertBody(ent, args.Used);
+        args.Handled = true;
+    }
+
+    private void OnEntInserted(Entity<DnaModifierScannerComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (args.Container.ID != DnaModifierScannerComponent.ContainerId)
+            return;
+
+        UpdateAppearance(ent);
+        if (ent.Comp.ConnectedConsole != null)
+            _console.UpdateUserInterface(ent.Comp.ConnectedConsole.Value);
+    }
+
+    private void OnEntRemoved(Entity<DnaModifierScannerComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (args.Container.ID != DnaModifierScannerComponent.ContainerId)
+            return;
+
+        UpdateAppearance(ent);
+        if (ent.Comp.ConnectedConsole != null)
+            _console.UpdateUserInterface(ent.Comp.ConnectedConsole.Value);
     }
 
     private void OnPortDisconnected(Entity<DnaModifierScannerComponent> ent, ref PortDisconnectedEvent args)

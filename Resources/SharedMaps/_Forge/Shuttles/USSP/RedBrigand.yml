@@ -1137,7 +1137,7 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 10
-- proto: AlwaysPoweredlightRed
+- proto: PoweredlightRed
   entities:
   - uid: 33
     components:

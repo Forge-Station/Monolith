@@ -123,7 +123,12 @@ public abstract partial class SharedShuttleSystem : EntitySystem
             if (beacon.Entity == NetEntity.Invalid)
                 continue;
 
-            var beaconCoords = XformSystem.ToMapCoordinates(GetCoordinates(beacon.Coordinates));
+            // Forge-Change: the beacon's parent may not be known to the client yet, skip instead of logging an error.
+            var coordinates = GetCoordinates(beacon.Coordinates);
+            if (!coordinates.EntityId.IsValid())
+                continue;
+
+            var beaconCoords = XformSystem.ToMapCoordinates(coordinates);
 
             if (beaconCoords.MapId != mapId)
                 continue;

@@ -137,3 +137,12 @@ Entries:
   id: 13
   time: '2026-11-07T13:35:39.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/550
+- author: mersen-tyn
+  changes:
+    - type: Add
+      message: >-
+        Добавлены гены способностей: телекинез, телепатия, крепкий желудок,
+        стабилизированная ДНК и атомный метаболизм.
+  id: 14
+  time: '2026-11-07T13:59:05.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/529

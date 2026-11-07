@@ -17,8 +17,9 @@
   result: StationRadioServerPortable
   completetime: 4
   materials:
-    Steel: 500
-    Plastic: 100
+    Steel: 4000
+    Plastic: 1000
+    Plasma: 500
 
 - type: latheRecipe
   id: StationRadioRigPortableRecipe
@@ -28,8 +29,9 @@
   result: StationRadioRigPortable
   completetime: 4
   materials:
-    Steel: 500
-    Plastic: 100
+    Steel: 3000
+    Plastic: 1000
+    Glass: 2000
 
 - type: latheRecipe
   id: VinylPlayerPortableRecipe
@@ -39,5 +41,5 @@
   result: VinylPlayerPortable
   completetime: 4
   materials:
-    Steel: 500
-    Plastic: 100
+    Steel: 1000
+    Plastic: 1500

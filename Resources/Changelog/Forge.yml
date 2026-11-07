@@ -193,3 +193,12 @@ Entries:
   id: 18
   time: '2026-11-07T14:27:23.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/547
+- author:
+  changes:
+    - type: add 
+      message: Добавлено в описание VG: "Транс-Солнечная Федерация и компания Viper Group являются врагами за пределами Безопасной Зоны. Учитывайте это.". "По поводу вопросов - обращаться к текущему Старшему модератору - mersen
+    - type: remove
+      message: Строчка старых отношений ТСФ и VG.
+  id: 19
+  time: '2026-11-07T14:28:23.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/546

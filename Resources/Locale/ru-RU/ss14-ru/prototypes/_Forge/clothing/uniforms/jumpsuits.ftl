@@ -14,3 +14,5 @@ ent-ClothingUniformShirtUI = футболка U.I.
     .desc = Удобная дышащая футболка с принтом корпорации Ullman Industries в комплекте с тактическими штанами. Обычно к ней прилагается умный пистолет, но вам хватит и этого.
 ent-ClothingUniformJumpsuitViperGroupTankTop = безрукавка Viper Group
     .desc = Безрукавка в цветах Viper Group. Это то, что нужно для тяжелого физического труда.
+ent-ClothingUniformJumpsuitVdvtyelnyazhka = Тельняшка ВДВ
+    .desc = Старая часть формы воздушно десантных войск СССП. К сожалению в космосе нет неба и воздуха.

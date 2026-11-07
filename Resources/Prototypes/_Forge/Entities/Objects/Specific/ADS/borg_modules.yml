@@ -13,7 +13,7 @@
     moduleId: Security
     items:
     - WeaponPhaseBladeForge
-    - WeaponRifleAsakimAutopulserADM
+    - WeaponRifleADMAutopulserForge
   - type: BorgModuleIcon
     icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: advanced-weapon-module }
 
@@ -31,6 +31,95 @@
     moduleId: Security
     items:
     - WeaponPhaseBladeForge
+    - WeaponRifleADMPistolForge
+  - type: BorgModuleIcon
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+
+- type: entity
+  id: BorgModuleForerunnerSMGWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module(CQC)
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseBladeForge
+    - WeaponRifleADMsmgForge
+  - type: BorgModuleIcon
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+
+- type: entity
+  id: BorgModuleForerunnerMachinegunWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module(Support)
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseBladeForge
+    - WeaponRifleADMMachinepulserForge
+  - type: BorgModuleIcon
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+
+- type: entity
+  id: BorgModuleForerunnerRifleWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module(Long range)
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseBladeForge
+    - WeaponRifleADMRifleForge
+  - type: BorgModuleIcon
+    icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }
+
+- type: entity
+  id: BorgModuleForerunnerDevastatorExplosive
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module(Long range)
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - ADMDevastatorExplosive
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: syndicate-martyr-module }
+
+- type: entity
+  id: BorgModuleForerunnerDevastatorWeapon
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: pre-fracture advanced weapon cyborg module(Long range)
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: forerunner
+    - state: icon-forerunner
+  - type: ItemBorgModule
+    moduleId: Security
+    items:
+    - WeaponPhaseDoubleBladeForge
     - WeaponRifleADMPistolForge
   - type: BorgModuleIcon
     icon: { sprite: _Forge/Interface/Action/actions_borg.rsi, state: standard-weapon-module }

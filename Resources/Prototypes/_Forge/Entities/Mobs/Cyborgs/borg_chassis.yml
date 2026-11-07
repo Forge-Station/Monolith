@@ -29,8 +29,12 @@
     interactSuccessSound:
       path: /Audio/Ambience/Objects/periodic_beep.ogg
   - type: BorgSwitchableType
-    typeWhitelist: 
+    typeWhitelist:
     - ForerunnerAssault
+    - ForerunnerAssaultDevastator
+    - ForerunnerAssaultRifle
+    - ForerunnerAssaultMachinegun
+    - ForerunnerAssaultSMG
     - ForerunnerEngineer
     inherentRadioChannels:
     - Common
@@ -60,6 +64,58 @@
     damageModifierSet: FactionBorgChassisAssault
 
 - type: entity
+  id: ForerunnerBorgChassisAssaultDevastator
+  parent: BorgChassisSelectable
+  name: Forerunner assault devastation cyborg
+  components:
+  - type: BorgSwitchableType
+    selectedBorgType: ForerunnerAssaultDevastator
+  - type: BorgSwitchableSubtype
+    borgSubtype: ForerunnerAssaultDevastator_default
+  - type: Damageable
+    damageContainer: Silicon
+    damageModifierSet: FactionBorgChassisAssault
+
+- type: entity
+  id: ForerunnerBorgChassisAssaultRifle
+  parent: BorgChassisSelectable
+  name: Forerunner assault long range cyborg
+  components:
+  - type: BorgSwitchableType
+    selectedBorgType: ForerunnerAssaultRifle
+  - type: BorgSwitchableSubtype
+    borgSubtype: ForerunnerAssaultRifle_default
+  - type: Damageable
+    damageContainer: Silicon
+    damageModifierSet: FactionBorgChassisAssault
+
+- type: entity
+  id: ForerunnerBorgChassisAssaultMachinegun
+  parent: BorgChassisSelectable
+  name: Forerunner assault support cyborg
+  components:
+  - type: BorgSwitchableType
+    selectedBorgType: ForerunnerAssaultMachinegun
+  - type: BorgSwitchableSubtype
+    borgSubtype: ForerunnerAssaultMachinegun_default
+  - type: Damageable
+    damageContainer: Silicon
+    damageModifierSet: FactionBorgChassisAssault
+
+- type: entity
+  id: ForerunnerBorgChassisAssaultSMG
+  parent: BorgChassisSelectable
+  name: Forerunner assault CQC cyborg
+  components:
+  - type: BorgSwitchableType
+    selectedBorgType: ForerunnerAssaultSMG
+  - type: BorgSwitchableSubtype
+    borgSubtype: ForerunnerAssaultSMG_default
+  - type: Damageable
+    damageContainer: Silicon
+    damageModifierSet: FactionBorgChassisAssault
+
+- type: entity
   id: ForerunnerBorgChassisEngineer
   parent: BorgChassisSelectable
   name: Forerunner engineer cyborg
@@ -76,6 +132,30 @@
   id: ForerunnerAssault_default
   spritePath: Mobs/Silicon/chassis.rsi
   dummyPrototype: ForerunnerBorgChassisAssault
+
+- type: borgSubtype
+  parentBorgType: ForerunnerAssaultDevastator
+  id: ForerunnerAssaultDevastator_default
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: ForerunnerBorgChassisAssaultDevastator
+
+- type: borgSubtype
+  parentBorgType: ForerunnerAssaultRifle
+  id: ForerunnerAssaultRifle_default
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: ForerunnerBorgChassisAssaultRifle
+
+- type: borgSubtype
+  parentBorgType: ForerunnerAssaultMachinegun
+  id: ForerunnerAssaultMachinegun_default
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: ForerunnerBorgChassisAssaultMachinegun
+
+- type: borgSubtype
+  parentBorgType: ForerunnerAssaultSMG
+  id: ForerunnerAssaultSMG_default
+  spritePath: Mobs/Silicon/chassis.rsi
+  dummyPrototype: ForerunnerBorgChassisAssaultSMG
 
 - type: borgSubtype
   parentBorgType: ForerunnerEngineer
@@ -96,6 +176,264 @@
     - BorgModuleSyndicateAssault
   defaultModules:
     - BorgModuleForerunnerWeaponHeavy
+    - BorgModuleJetpackADM
+    - BorgModuleTool
+  addComponents:
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      550: Critical
+      600: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      475: 0.8
+      550: 0.6
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 475
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+         damage: 650
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:EmptyContainersBehaviour
+        containers:
+        - borg_brain
+        - borg_module
+        - cell_slot
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  inventoryTemplateId: borgShort
+  spriteBodyState: synd_sec
+  spriteHasMindState: synd_sec_e
+  spriteNoMindState: synd_sec_e
+  spriteToggleLightState: synd_sec_l
+  petSuccessString: petting-success-syndicate-cyborg
+  petFailureString: petting-failure-station-ai
+
+- type: borgType
+  id: ForerunnerAssaultDevastator
+  dummyPrototype: ForerunnerBorgChassisAssaultDevastator
+  extraModuleCount: 4
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleSyndicate
+    - BorgModuleSyndicateAssault
+  defaultModules:
+    - BorgModuleForerunnerDevastatorWeapon
+    - BorgModuleForerunnerDevastatorExplosive
+    - BorgModuleJetpackADM
+    - BorgModuleTool
+  addComponents:
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: OnUseTimerTrigger
+    delay: 15
+    examinable: false
+    beepSound:
+      path: /Audio/Effects/beep1.ogg
+      params:
+        volume: 15
+    initialBeepDelay: 0
+    beepInterval: 0.5
+  - type: Explosive
+    explosionType: Default
+    deleteAfterExplosion: true
+    totalIntensity: 1500
+    intensitySlope: 10
+    maxIntensity: 50
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      600: Critical
+      700: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      375: 0.7
+      600: 0.4
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 650
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+        damage: 700
+      behaviors:
+      - !type:TimerStartBehavior
+    - trigger:
+        !type:DamageTrigger
+        damage: 800
+      behaviors:
+      - !type:TriggerBehavior
+  inventoryTemplateId: borgShort
+  spriteBodyState: synd_sec
+  spriteHasMindState: synd_sec_e
+  spriteNoMindState: synd_sec_e
+  spriteToggleLightState: synd_sec_l
+  petSuccessString: petting-success-syndicate-cyborg
+  petFailureString: petting-failure-station-ai
+
+- type: borgType
+  id: ForerunnerAssaultRifle
+  dummyPrototype: ForerunnerBorgChassisAssaultRifle
+  extraModuleCount: 3
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleSyndicate
+    - BorgModuleSyndicateAssault
+  defaultModules:
+    - BorgModuleForerunnerRifleWeapon
+    - BorgModuleJetpackADM
+    - BorgModuleTool
+  addComponents:
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      550: Critical
+      600: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      475: 0.8
+      550: 0.6
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 475
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+         damage: 650
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:EmptyContainersBehaviour
+        containers:
+        - borg_brain
+        - borg_module
+        - cell_slot
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  inventoryTemplateId: borgShort
+  spriteBodyState: synd_sec
+  spriteHasMindState: synd_sec_e
+  spriteNoMindState: synd_sec_e
+  spriteToggleLightState: synd_sec_l
+  petSuccessString: petting-success-syndicate-cyborg
+  petFailureString: petting-failure-station-ai
+
+- type: borgType
+  id: ForerunnerAssaultMachinegun
+  dummyPrototype: ForerunnerBorgChassisAssaultMachinegun
+  extraModuleCount: 3
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleSyndicate
+    - BorgModuleSyndicateAssault
+  defaultModules:
+    - BorgModuleForerunnerMachinegunWeapon
+    - BorgModuleJetpackADM
+    - BorgModuleTool
+  addComponents:
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+  - type: ExplosionResistance
+    damageCoefficient: 0.2
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      550: Critical
+      600: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      475: 0.8
+      550: 0.6
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 475
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+         damage: 650
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:EmptyContainersBehaviour
+        containers:
+        - borg_brain
+        - borg_module
+        - cell_slot
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  inventoryTemplateId: borgShort
+  spriteBodyState: synd_sec
+  spriteHasMindState: synd_sec_e
+  spriteNoMindState: synd_sec_e
+  spriteToggleLightState: synd_sec_l
+  petSuccessString: petting-success-syndicate-cyborg
+  petFailureString: petting-failure-station-ai
+
+- type: borgType
+  id: ForerunnerAssaultSMG
+  dummyPrototype: ForerunnerBorgChassisAssaultSMG
+  extraModuleCount: 3
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleSyndicate
+    - BorgModuleSyndicateAssault
+  defaultModules:
+    - BorgModuleForerunnerSMGWeapon
     - BorgModuleJetpackADM
     - BorgModuleTool
   addComponents:

@@ -1,0 +1,32 @@
+- type: entity
+  name: devastator explosive device
+  description: This button activates the relic explosive device embedded in the casing.
+  parent: GrenadeBase
+  id: ADMDevastatorExplosive
+  components:
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 500
+    intensitySlope: 100
+    totalIntensity: 500
+    maxTileBreak: 0
+    canCreateVacuum: false
+  - type: OnUseTimerTrigger
+    delay: 5
+    beepSound:
+      path: /Audio/Effects/beep1.ogg
+      params:
+        volume: 15
+    initialBeepDelay: 0
+    beepInterval: 1
+  - type: SoundOnTrigger
+    sound:
+      path: /Audio/Effects/Grenades/SelfDestruct/SDS_Charge.ogg
+      params:
+        volume: 15
+  - type: TwoStageTrigger
+    triggerDelay: 4
+    components:
+    - type: SoundOnTrigger
+      sound: null
+    - type: ExplodeOnTrigger

@@ -1,0 +1,378 @@
+- type: entity
+  id: MobForerunnerSiliconAISimpleMelee
+  abstract: true
+  components:
+  - type: HTN
+    rootTask:
+       task: SimpleHostileCompound
+    blackboard:
+      NavClimb: !type:Bool
+        false
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+
+- type: entity
+  id: MobForerunnerSiliconAISimpleRanged
+  abstract: true
+  components:
+  - type: HTN
+    rootTask:
+       task: SimpleRangedHostileCompound
+    blackboard:
+      NavClimb: !type:Bool
+        false
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+
+# Strong AI remnant/forerunner borgs. Frendly to Forerunner
+# These are not player chassis — they do not take ghost roles or modules.
+
+- type: entity
+  parent:
+  - BaseC3MobConstruct
+  - MobNonHumanHostileBase
+  - MobForerunnerSiliconAISimpleRanged
+  - NFMobRestrictionsSilicon
+  id: MobForerunnerSiliconBase
+  name: forerunner base
+  abstract: true
+  components:
+  - type: Damageable
+    damageContainer: Silicon
+    damageModifierSet: FactionBorgChassis
+  - type: NpcFactionMember
+    factions:
+    - SyndicateNF
+    - SiliconsExpeditionNF
+  - type: NameIdentifier
+    group: Silicon
+  - type: Bloodstream
+    bloodReagent: NaniteFuel
+    bloodMaxVolume: 60
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Critical: BorgCrit
+      Dead: BorgDead
+  - type: Access
+    tags:
+    - Remnant
+  - type: DamageStateVisuals
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      150: Critical
+      200: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      75: 0.7
+      125: 0.5
+    showOverlays: false
+    allowRevives: true
+  - type: HealthExaminable
+    examinableTypes:
+      - Blunt
+      - Slash
+      - Piercing
+      - Heat
+      - Shock
+    locPrefix: silicon
+  - type: Repairable
+    doAfterDelay: 10
+    allowSelfRepair: true
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 25
+  - type: Battery
+    maxCharge: 300
+    startingCharge: 300
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 1.5
+    rechargeSound:
+      path: /Audio/_NF/Effects/silence.ogg
+  - type: Speech
+    speechSounds: SyndieBorg
+  - type: Vocal
+    sounds:
+      Unsexed: UnisexSiliconSyndicate
+  - type: AutoWakeUp
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepBorg
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.2
+    baseSprintSpeed : 2.5
+  - type: MeleeWeapon
+    attackRate: 1.25
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcPunch
+    damage:
+      types:
+        Slash: 45
+        Structural: 100
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  parent:
+  - MobForerunnerSiliconBase
+  id: MobForerunnerEngiSilicon
+  name: ADS unit
+  description: This ancient unit was created for auxiliary tasks, but don't be fooled—with its relic technologies, it is highly dangerous.
+  suffix: AI, Forerunner, Forge
+  components:
+  - type: Sprite
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: synd_engi
+    - state: synd_engi_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+    - state: synd_engi_l
+      shader: unshaded
+      map: ["light"]
+  - type: Gun
+    showExamineText: false
+    minAngle: 3
+    maxAngle: 15
+    angleIncrease: 1.2
+    angleDecay: 3.8
+    fireRate: 1
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_svalinn.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: HandheldAutopulserProjectile
+    fireCost: 25
+
+- type: entity
+  parent:
+  - MobForerunnerSiliconBase
+  id: MobForerunnerAssaultSilicon
+  name: Assault ADS unit
+  description: These units come from ancient times, and are designed to be the ultimate combat units. They are extremely dangerous, and should be avoided at all costs.
+  suffix: AI, Forerunner, Forge
+  components:
+  - type: Sprite
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: synd_sec
+    - state: synd_sec_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+    - state: synd_sec_l
+      shader: unshaded
+      map: ["light"]
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      250: Critical
+      300: Dead
+  - type: Damageable
+    damageContainer: Silicon
+    damageModifierSet: FactionBorgChassisAssault
+  - type: Gun
+    projectileSpeed: 50
+    minAngle: 18
+    maxAngle: 26
+    fireRate: 6
+    burstFireRate: 15
+    shotsPerBurst: 5
+    burstCooldown: 2
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_svalinn.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: HandheldAutopulserProjectile
+    fireCost: 25
+
+# Weaker AI remnant/forerunner cyborgs for mapped ruins and containment.
+# These are not player chassis — they do not take ghost roles or modules.
+
+- type: entity
+  parent: MobForerunnerSiliconBase
+  id: MobForerunnerBorg
+  name: remnant cyborg
+  description: A scavenged precursor chassis running on leftover directives. Weaker than a living tender, still happy to cave a skull in.
+  suffix: Forge, Remnant, AI
+
+- type: entity
+  parent: MobForerunnerSiliconBase
+  id: MobForerunnerBorgEngineer
+  name: remnant engineer cyborg
+  description: An ancient engineering chassis. Its tools are crude now, but it still knows how to take a wall apart.
+  suffix: Forge, Remnant, AI, Engineer
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: synd_engi
+      map: ["enum.DamageStateVisualLayers.Base", "movement"]
+    - state: synd_engi_e
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: synd_engi
+      Dead:
+        Base: synd_engi
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Dead: BorgDead
+    showOverlays: false
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      50: 0.7
+      75: 0.5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 2.8
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcPunch
+    attackRate: 0.8
+    damage:
+      types:
+        Blunt: 8
+        Heat: 4
+        Structural: 18
+    soundHit:
+      collection: MetalThud
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 1.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+- type: entity
+  parent: MobForerunnerSiliconBase
+  id: MobForerunnerBorgAssault
+  name: remnant assault cyborg
+  description: A stripped assault chassis. Its gun still works. Barely.
+  suffix: Forge, Remnant, AI, Assault
+  components:
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+    blackboard:
+      NavClimb: !type:Bool
+        false
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    sprite: Mobs/Silicon/chassis.rsi
+    layers:
+    - state: synd_sec
+      map: ["enum.DamageStateVisualLayers.Base", "movement"]
+    - state: synd_sec_e
+      shader: unshaded
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: synd_sec
+      Dead:
+        Base: synd_sec
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      120: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Dead: BorgDead
+    showOverlays: false
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      60: 0.7
+      90: 0.5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.3
+    baseSprintSpeed: 3.0
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcPunch
+    attackRate: 0.85
+    damage:
+      types:
+        Blunt: 8
+        Heat: 6
+        Structural: 10
+    soundHit:
+      collection: MetalThud
+  - type: Gun
+    showExamineText: false
+    useKey: false
+    fireRate: 0.45
+    minAngle: 4
+    maxAngle: 18
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: RedMediumLaser
+    fireCost: 80
+  - type: Battery
+    maxCharge: 800
+    startingCharge: 800
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 40
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 120
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak

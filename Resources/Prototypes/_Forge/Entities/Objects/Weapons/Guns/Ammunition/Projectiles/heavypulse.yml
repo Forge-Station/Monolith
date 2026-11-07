@@ -1,0 +1,27 @@
+- type: entity
+  id: HeavyPulseProjectile
+  name: plasma projectile
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 40
+        Radiation: 15
+        Structural: 250
+    ignoreResistances: true
+    penetrationThreshold: 400
+    penetrationDamageTypeRequirement:
+    - Structural
+  - type: StaminaDamageOnCollide
+    damage: 40
+  - type: Sprite
+    sprite: _Mono/Objects/SpaceArtillery/plasmashot.rsi
+    scale: 0.7, 0.7
+    layers:
+    - state: plasmashot
+  - type: Ammo
+    muzzleFlash: MuzzleFlashEffectPlasmaPulser
+  - type: PointLight
+    color: "#ff4bae"

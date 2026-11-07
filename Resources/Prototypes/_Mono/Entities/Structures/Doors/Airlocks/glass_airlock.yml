@@ -61,12 +61,11 @@
   components:
   - type: Sprite
     sprite: _Mono/Structures/Doors/Airlocks/Glass/mieyo.rsi
+    # Forge-Change-End
   # - type: PaintableAirlock  # Forge-Change-Del
   #   department: Civilian    # Forge-Change-Del
   - type: Wires
     layoutId: AirlockSecurity
-  - type: Airlock # Forge-change
-    openUnlitVisible: false
 
 - type: entity
   parent: AirlockMieyoGlass

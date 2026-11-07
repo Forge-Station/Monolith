@@ -42,3 +42,5 @@ ent-NFWeaponRevolverLucky = Счастливчик
 ent-WeaponRevolverMatebaAP = NT { ent-NFWeaponRevolverWard45 }
     .desc = { ent-NFWeaponRevolverWard45.desc }
     .suffix = .357 магнум, бронебойные
+ent-WeaponRevolverInspector = Гартер (.357 магнум)
+    .desc = Надёжный и простой револьвер, эффективный даже в космосе. Использует патроны .357 магнум.

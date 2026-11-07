@@ -1,1 +1,9 @@
-ent-LockableButtonUSSP = USSP
+ent-LockableButtonUSSP = { ent-LockableButton }
+    .desc = { ent-LockableButton.desc }
+    .suffix = USSP
+ent-LockableButtonViper = { ent-LockableButton }
+    .desc = { ent-LockableButton.desc }
+    .suffix = Viper Group
+ent-LockableButtonMieyo = { ent-LockableButton }
+    .desc = { ent-LockableButton.desc }
+    .suffix = Mieyo

@@ -1,9 +1,12 @@
 ent-ThrusterRogue = ракетный двигатель
     .desc = { ent-Thruster }
     .suffix = Rogue
-ent-DebugThrusterRogue = ракетный двигатель
+ent-DebugThrusterRogue = { ent-ThrusterRogue }
     .desc = { ent-Thruster }
     .suffix = DEBUG, Rogue
 ent-ThrusterLargeRogue = большой ракетный двигатель
     .desc = { ent-Thruster }
+    .suffix = Rogue
+ent-ThrusterRogueStealth = малозаметный ракетный двигатель
+    .desc = Двигатель с уменьшенным факелом и тепловым излучением, но значительно меньшей тягой.
     .suffix = Rogue

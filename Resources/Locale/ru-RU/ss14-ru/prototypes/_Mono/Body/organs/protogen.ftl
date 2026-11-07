@@ -7,6 +7,7 @@ ent-OrganProtogenEyes = глаза
 ent-OrganProtogenTongue = язык
     .desc = Мясистая мышца, расположенная во рту протогена, где бы он ни находился.
 ent-OrganProtogenAppendix = аппендикс
+    .desc = { "" }
 ent-OrganProtogenEars = уши
     .desc = Позволяет протогену обрабатывать аудио. И слушать свои любимые техно-хиты.
 ent-OrganProtogenLungs = легкие

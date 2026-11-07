@@ -7,6 +7,11 @@ using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization; // Einstein Engines - Language
 using Robust.Shared.Utility;
+using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EinsteinEngines.Language.Systems;
+using Robust.Shared.Console;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 
 namespace Content.Shared.Chat;
 
@@ -38,6 +43,8 @@ public abstract partial class SharedChatSystem : EntitySystem
 
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedLanguageSystem _language = default!; // Einstein Engines - Language
+    [Dependency] private readonly INetManager _net = default!;
 
     /// <summary>
     /// Cache of the keycodes for faster lookup.
@@ -362,6 +369,85 @@ public abstract partial class SharedChatSystem : EntitySystem
         tagStart += tag.Length + 2;
         return rawmsg.Substring(tagStart, tagEnd - tagStart);
     }
+
+    /// <summary>
+    /// Sends an in-character chat message to relevant clients.
+    /// </summary>
+    /// <param name="source">The entity that is speaking.</param>
+    /// <param name="message">The message being spoken or emoted.</param>
+    /// <param name="desiredType">The chat type.</param>
+    /// <param name="hideChat">Whether or not this message should appear in the chat window.</param>
+    /// <param name="hideLog">Whether or not this message should appear in the adminlog window.</param>
+    /// <param name="shell"></param>
+    /// <param name="player">The player doing the speaking.</param>
+    /// <param name="nameOverride">The name to use for the speaking entity. Usually this should just be modified via <see cref="TransformSpeakerNameEvent"/>. If this is set, the event will not get raised.</param>
+    /// <param name="checkRadioPrefix">Whether or not <paramref name="message"/> should be parsed with consideration of radio channel prefix text at start the start.</param>
+    /// <param name="ignoreActionBlocker">If set to true, action blocker will not be considered for whether an entity can send this message.</param>
+    public virtual void TrySendInGameICMessage(
+        EntityUid source,
+        string message,
+        InGameICChatType desiredType,
+        bool hideChat,
+        bool hideLog = false,
+        IConsoleShell? shell = null,
+        ICommonSession? player = null,
+        string? nameOverride = null,
+        bool checkRadioPrefix = true,
+        bool ignoreActionBlocker = false
+        //Color? colorOverride = null, // Goobstation
+        //LanguagePrototype? languageOverride = null, // Einstein Engines - Language
+        //bool forced = false // goobstation
+        )
+
+    { }
+
+    /// <summary>
+    /// Sends an in-character chat message to relevant clients.
+    /// </summary>
+    /// <param name="source">The entity that is speaking.</param>
+    /// <param name="message">The message being spoken or emoted.</param>
+    /// <param name="desiredType">The chat type.</param>
+    /// <param name="range">Conceptual range of transmission, if it shows in the chat window, if it shows to far-away ghosts or ghosts at all...</param>
+    /// <param name="hideLog">Disables the admin log for this message if true. Used for entities that are not players, like vendors, cloning, etc.</param>
+    /// <param name="shell"></param>
+    /// <param name="player">The player doing the speaking.</param>
+    /// <param name="nameOverride">The name to use for the speaking entity. Usually this should just be modified via <see cref="TransformSpeakerNameEvent"/>. If this is set, the event will not get raised.</param>
+    /// <param name="ignoreActionBlocker">If set to true, action blocker will not be considered for whether an entity can send this message.</param>
+    public virtual void TrySendInGameICMessage(
+        EntityUid source,
+        string message,
+        InGameICChatType desiredType,
+        ChatTransmitRange range,
+        bool hideLog = false,
+        IConsoleShell? shell = null,
+        ICommonSession? player = null,
+        string? nameOverride = null,
+        bool checkRadioPrefix = true,
+        bool ignoreActionBlocker = false,
+        //Color? colorOverride = null, // Goobstation
+        LanguagePrototype? languageOverride = null // Einstein Engines - Language
+        //bool forced = false // goobstation
+        )
+    { }
+
+    /// <summary>
+    /// Sends an out-of-character chat message to relevant clients.
+    /// </summary>
+    /// <param name="source">The entity that is speaking.</param>
+    /// <param name="message">The message being spoken or emoted.</param>
+    /// <param name="type">The chat type.</param>
+    /// <param name="hideChat">Whether or not to show the message in the chat window.</param>
+    /// <param name="shell"></param>
+    /// <param name="player">The player doing the speaking.</param>
+    public virtual void TrySendInGameOOCMessage(
+        EntityUid source,
+        string message,
+        InGameOOCChatType type,
+        bool hideChat,
+        IConsoleShell? shell = null,
+        ICommonSession? player = null
+        )
+    { }
 }
 
 // Einstein Engines - Language begin (moves chat types to shared)
@@ -402,4 +488,4 @@ public enum ChatTransmitRange : byte
     /// Frontier: Normal, ghosts are still range-limited, and won't spam admins
     GhostRangeLimitNoAdminCheck,
 }
-// Einstein Engines - Language end
+// Einstein Engines - Language end  

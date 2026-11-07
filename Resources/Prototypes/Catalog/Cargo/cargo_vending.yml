@@ -18,7 +18,7 @@
 
 - type: cargoProduct
   id: CrateVendingMachineRestockChefvend
-  name: ChefVend restock crate
+  # Forge-change: use the localized product name instead of an English override.
   icon:
     sprite: Objects/Specific/Service/vending_machine_restock.rsi
     state: base
@@ -59,7 +59,7 @@
 
 - type: cargoProduct
   id: CrateVendingMachineRestockCondimentStation
-  name: condiment station restock crate
+  # Forge-change: use the localized product name instead of an English override.
   icon:
     sprite: Objects/Specific/Service/vending_machine_restock.rsi
     state: base

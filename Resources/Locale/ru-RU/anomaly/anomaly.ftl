@@ -91,3 +91,7 @@ anomaly-behavior-inconstancy = [color=crimson]Обнаружено непост�
 anomaly-behavior-fast = [color=crimson]Частота импульсов значительно повышена.[/color]
 anomaly-behavior-strenght = [color=crimson]Мощность импульсов значительно повышена.[/color]
 anomaly-behavior-moving = [color=crimson]Обнаружена координатная нестабильность.[/color]
+
+# Дополнение Frontier: полученные очки аномалии.
+anomaly-scanner-point-earned = { "\u000A" }Получено очков: [color=gray]{$point}[/color]
+anomaly-scanner-point-earned-unknown = { "\u000A" }Получено очков: [color=red]ОШИБКА[/color]

@@ -10,8 +10,7 @@
 
 - type: cargoProduct
   id: AtmosphericsTEGCrate
-  name: "TEG Crate"
-  description: "A full set of flatpacked Thermoelectric Generator components, ready to use"
+  # Forge-change: use the localized product name and description.
   icon:
     sprite: Structures/Power/Generation/teg.rsi
     state: teg

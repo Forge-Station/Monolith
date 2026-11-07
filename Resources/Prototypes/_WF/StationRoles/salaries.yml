@@ -1,0 +1,170 @@
+# Hourly wages of station roles. The ID is the job's ID. Jobs left out earn nothing: free agents with no assigned
+# work (Contractor, TsfCivilian, WFAsfColonist, Fugitive, Godfather) and borgs, which have no bank.
+# Wages come out of the sector account leaders draw on, so keep a faction's roster within its income
+# (SectorBank in Resources/Prototypes/_NF/SectorServices/services.yml). No account means nothing is drawn.
+
+# Caelestinus, Frontier account: 50K an hour.
+- type: wfStationSalary
+  id: StationRepresentative
+  wage: 8000
+  account: Frontier
+
+- type: wfStationSalary
+  id: SecurityGuard
+  wage: 6000
+  account: Frontier
+
+- type: wfStationSalary
+  id: CCServiceWorker
+  wage: 5000
+  account: Frontier
+
+- type: wfStationSalary
+  id: NFJanitor
+  wage: 4500
+  account: Frontier
+
+# Caelestinus medical, Medical account: 65K an hour.
+- type: wfStationSalary
+  id: DirectorOfCare
+  wage: 8000
+  account: Medical
+
+- type: wfStationSalary
+  id: MdMedic
+  wage: 6000
+  account: Medical
+
+# TSF, Nfsd account: 234K an hour.
+- type: wfStationSalary
+  id: Sheriff
+  wage: 10000
+  account: Nfsd
+
+- type: wfStationSalary
+  id: Bailiff
+  wage: 8000
+  account: Nfsd
+
+- type: wfStationSalary
+  id: TsfMarsoc
+  wage: 7000
+  account: Nfsd
+
+- type: wfStationSalary
+  id: SeniorOfficer
+  wage: 7000
+  account: Nfsd
+
+- type: wfStationSalary
+  id: Brigmedic
+  wage: 7000
+  account: Nfsd
+
+- type: wfStationSalary
+  id: TsfEngineer
+  wage: 6000
+  account: Nfsd
+
+- type: wfStationSalary
+  id: Deputy
+  wage: 5000
+  account: Nfsd
+
+- type: wfStationSalary
+  id: TsfInfantry
+  wage: 5000
+  account: Nfsd
+
+# PDV, BlackMarket account: 432K an hour.
+- type: wfStationSalary
+  id: PirateCaptain
+  wage: 10000
+  account: BlackMarket
+
+- type: wfStationSalary
+  id: PDVTarkhan
+  wage: 8000
+  account: BlackMarket
+
+- type: wfStationSalary
+  id: PirateFirstMate
+  wage: 8000
+  account: BlackMarket
+
+- type: wfStationSalary
+  id: PDVDenasvar
+  wage: 7000
+  account: BlackMarket
+
+- type: wfStationSalary
+  id: WFPdvJarrah
+  wage: 6000
+  account: BlackMarket
+
+- type: wfStationSalary
+  id: Pirate
+  wage: 5000
+  account: BlackMarket
+
+- type: wfStationSalary
+  id: PdvInfantry
+  wage: 5000
+  account: BlackMarket
+
+# Mieyo, Mieyo account: 108K an hour.
+- type: wfStationSalary
+  id: MMCLiason
+  wage: 8000
+  account: Mieyo
+
+- type: wfStationSalary
+  id: MMCSecurity
+  wage: 6000
+  account: Mieyo
+
+- type: wfStationSalary
+  id: MMCEmployee
+  wage: 4000
+  account: Mieyo
+
+# Factions without a sector account.
+- type: wfStationSalary
+  id: USSPCommissar
+  wage: 10000
+
+- type: wfStationSalary
+  id: USSPSergeant
+  wage: 7000
+
+- type: wfStationSalary
+  id: USSPRifleman
+  wage: 5000
+
+- type: wfStationSalary
+  id: VGCommander
+  wage: 10000
+
+- type: wfStationSalary
+  id: VGLieutenant
+  wage: 7000
+
+- type: wfStationSalary
+  id: VGInfanteer
+  wage: 5000
+
+- type: wfStationSalary
+  id: WFAsfEnvoy
+  wage: 8000
+
+- type: wfStationSalary
+  id: WFAsfEnforcer
+  wage: 6000
+
+- type: wfStationSalary
+  id: WFAsfFieldResearcher
+  wage: 6000
+
+- type: wfStationSalary
+  id: CrocusDockworker
+  wage: 4000

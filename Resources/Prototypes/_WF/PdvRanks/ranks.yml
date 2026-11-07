@@ -1,0 +1,316 @@
+# PDV chat ranks after the Ottoman army, gated by playtime on the job like the TSF ladder.
+
+# Enlisted (Rakhshan)
+- type: loadout
+  id: WFPdvRankNefer
+  name: wf-pdv-rank-name-nefer
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-nefer
+
+- type: loadout
+  id: WFPdvRankOnbasi
+  name: wf-pdv-rank-name-onbasi
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvRakhshan10h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-onbasi
+
+- type: loadout
+  id: WFPdvRankCavus
+  name: wf-pdv-rank-name-cavus
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvRakhshan30h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-cavus
+
+- type: loadout
+  id: WFPdvRankBascavus
+  name: wf-pdv-rank-name-bascavus
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvRakhshan75h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-bascavus
+
+# Denasvar
+- type: loadout
+  id: WFPdvRankCavusDenasvar
+  name: wf-pdv-rank-name-cavus
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-cavus
+
+- type: loadout
+  id: WFPdvRankBascavusDenasvar
+  name: wf-pdv-rank-name-bascavus
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvDenasvar50h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-bascavus
+
+- type: loadout
+  id: WFPdvRankMulazimSani
+  name: wf-pdv-rank-name-mulazim-i-sani
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvDenasvar50h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-mulazim-sani
+
+- type: loadout
+  id: WFPdvRankMulazimEvvelDenasvar
+  name: wf-pdv-rank-name-mulazim-i-evvel
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvDenasvar100h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-mulazim-evvel
+
+# Asvaran
+- type: loadout
+  id: WFPdvRankMulazimEvvel
+  name: wf-pdv-rank-name-mulazim-i-evvel
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-mulazim-evvel
+
+- type: loadout
+  id: WFPdvRankYuzbasi
+  name: wf-pdv-rank-name-yuzbasi
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-yuzbasi
+
+- type: loadout
+  id: WFPdvRankKolagasi
+  name: wf-pdv-rank-name-kolagasi
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvAsvaran100h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-kolagasi
+
+# Grand Vizier
+- type: loadout
+  id: WFPdvRankGrandVizier
+  name: wf-pdv-rank-name-grand-vizier
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-vizier
+
+- type: loadout
+  id: WFPdvRankBinbasi
+  name: wf-pdv-rank-name-binbasi
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-binbasi
+
+- type: loadout
+  id: WFPdvRankKaymakam
+  name: wf-pdv-rank-name-kaymakam
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-kaymakam
+
+- type: loadout
+  id: WFPdvRankMiralay
+  name: wf-pdv-rank-name-miralay
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-miralay
+
+# Field medics (Jarrah), the Ottoman medical corps
+- type: loadout
+  id: WFPdvRankSihhiyeNeferi
+  name: wf-pdv-rank-name-sihhiye-neferi
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-sihhiye-neferi
+
+- type: loadout
+  id: WFPdvRankSihhiyeOnbasi
+  name: wf-pdv-rank-name-sihhiye-onbasisi
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvJarrah10h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-sihhiye-onbasi
+
+- type: loadout
+  id: WFPdvRankSihhiyeCavus
+  name: wf-pdv-rank-name-sihhiye-cavusu
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvJarrah30h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-sihhiye-cavus
+
+- type: loadout
+  id: WFPdvRankTabipMulazim
+  name: wf-pdv-rank-name-tabip-mulazim
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: WFPdvJarrah75h
+  components:
+  - type: ChatRank
+    rank: wf-pdv-rank-tabip-mulazim
+
+# Playtime gates
+- type: loadoutEffectGroup
+  id: WFPdvRakhshan10h
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPirate
+      time: 36000 # 10hr
+
+- type: loadoutEffectGroup
+  id: WFPdvRakhshan30h
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPirate
+      time: 108000 # 30hr
+
+- type: loadoutEffectGroup
+  id: WFPdvRakhshan75h
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPirate
+      time: 270000 # 75hr
+
+- type: loadoutEffectGroup
+  id: WFPdvDenasvar50h
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPDVDenasvar
+      time: 180000 # 50hr
+
+- type: loadoutEffectGroup
+  id: WFPdvDenasvar100h
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPDVDenasvar
+      time: 360000 # 100hr
+
+- type: loadoutEffectGroup
+  id: WFPdvAsvaran100h
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobPirateFirstMate
+      time: 360000 # 100hr
+
+- type: loadoutEffectGroup
+  id: WFPdvJarrah10h
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobWFPdvJarrah
+      time: 36000 # 10hr
+
+- type: loadoutEffectGroup
+  id: WFPdvJarrah30h
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobWFPdvJarrah
+      time: 108000 # 30hr
+
+- type: loadoutEffectGroup
+  id: WFPdvJarrah75h
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobWFPdvJarrah
+      time: 270000 # 75hr
+
+# Groups
+- type: loadoutGroup
+  id: WFPdvRanksRakhshan
+  name: loadout-group-chatrank
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - WFPdvRankNefer
+  - WFPdvRankOnbasi
+  - WFPdvRankCavus
+  - WFPdvRankBascavus
+  fallbacks:
+  - WFPdvRankNefer
+
+- type: loadoutGroup
+  id: WFPdvRanksDenasvar
+  name: loadout-group-chatrank
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - WFPdvRankCavusDenasvar
+  - WFPdvRankBascavusDenasvar
+  - WFPdvRankMulazimSani
+  - WFPdvRankMulazimEvvelDenasvar
+  fallbacks:
+  - WFPdvRankCavusDenasvar
+
+- type: loadoutGroup
+  id: WFPdvRanksAsvaran
+  name: loadout-group-chatrank
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - WFPdvRankMulazimEvvel
+  - WFPdvRankYuzbasi
+  - WFPdvRankKolagasi
+  fallbacks:
+  - WFPdvRankYuzbasi
+
+- type: loadoutGroup
+  id: WFPdvRanksGrandVizier
+  name: loadout-group-chatrank
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - WFPdvRankGrandVizier
+  - WFPdvRankBinbasi
+  - WFPdvRankKaymakam
+  - WFPdvRankMiralay
+  fallbacks:
+  - WFPdvRankGrandVizier
+
+- type: loadoutGroup
+  id: WFPdvRanksJarrah
+  name: loadout-group-chatrank
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - WFPdvRankSihhiyeNeferi
+  - WFPdvRankSihhiyeOnbasi
+  - WFPdvRankSihhiyeCavus
+  - WFPdvRankTabipMulazim
+  fallbacks:
+  - WFPdvRankSihhiyeNeferi

@@ -1,0 +1,999 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckScarfAlpha
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/alpha.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/alpha.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckScarfBlack
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/black.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckScarfBravo
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/bravo.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/bravo.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckScarfCharlie
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/charlie.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/charlie.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckScarfDelta
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/delta.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/delta.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckScarfEcho
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/echo.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/echo.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckScarfGray
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/gray.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/gray.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckScarfGreen
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/green.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/green.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckScarfTan
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/tan.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/scarf/tan.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefAlpha
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/alpha.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/alpha.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefBlack
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/black.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefBravo
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/bravo.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/bravo.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefCharlie
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/charlie.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/charlie.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefDelta
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/delta.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/delta.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefEcho
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/echo.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/echo.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefGray
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/gray.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/gray.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefGreen
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/green.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/green.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefTan
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/tan.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/tan.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckNeckerchiefWhite
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/white.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/neckerchief/white.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckSmock
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/black.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: black
+      look: WFRMCLookSmockBlack
+    - name: classic
+      look: WFRMCLookSmockClassic
+    - name: desert
+      look: WFRMCLookSmockDesert
+    - name: jungle
+      look: WFRMCLookSmockJungle
+    - name: snow
+      look: WFRMCLookSmockSnow
+    - name: urban
+      look: WFRMCLookSmockUrban
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckTornScarfBlack
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/black.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckTornScarfDesert
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/desert.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckTornScarfGreen
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/green.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/green.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckTornScarfGrey
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/grey.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/grey.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckTornScarfSnow
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/snow.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckTornScarfUrban
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/torn_scarf/urban.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPoncho
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookPonchoJungle
+    - name: desert
+      look: WFRMCLookPonchoDesert
+    - name: snow
+      look: WFRMCLookPonchoSnow
+    - name: urban
+      look: WFRMCLookPonchoUrban
+    - name: classic
+      look: WFRMCLookPonchoClassic
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCNeckGuard
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookNeckGuardJungle
+    - name: desert
+      look: WFRMCLookNeckGuardDesert
+    - name: snow
+      look: WFRMCLookNeckGuardSnow
+    - name: urban
+      look: WFRMCLookNeckGuardUrban
+    - name: classic
+      look: WFRMCLookNeckGuardClassic
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCTieBlack
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/black.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCTieBlue
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/blue.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/blue.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCTieGold
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/gold.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/gold.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCTieGreen
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/green.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/green.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCTieHorrible
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/horrible.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/horrible.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCTiePurple
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/purple.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/purple.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCTieRed
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/red.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/tie/red.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandRedArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/red_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/red_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandAlphaArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/alpha_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/alpha_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandBravoArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/bravo_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/bravo_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandCharlieArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/charlie_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/charlie_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandDeltaArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/delta_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/delta_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandEchoArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/echo_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/echo_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandFoxtrotArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/foxtrot_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/foxtrot_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandSquadArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/squad_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/squad_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandMedArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/med_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/med_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandMedGreenArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/med_green_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/med_green_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandEngiArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/engi_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/engi_armband.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmbandMpArmband
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/mp_armband.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armband/mp_armband.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCDropPouchDropPouch
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/drop_pouch.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/drop_pouch.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCDropPouchDropPouchBlack
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/drop_pouch_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/drop_pouch_black.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCDropPouchDropPouchRcm
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/drop_pouch_rcm.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/drop_pouch_rcm.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCDropPouchGrenadePouch
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/grenade_pouch.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/grenade_pouch.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCDropPouchMl66aPouch
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/ml66a_pouch.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/drop_pouch/ml66a_pouch.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCLegPouch
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/black.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: black
+      look: WFRMCLookLegPouchBlack
+    - name: classic
+      look: WFRMCLookLegPouchClassic
+    - name: desert
+      look: WFRMCLookLegPouchDesert
+    - name: jungle
+      look: WFRMCLookLegPouchJungle
+    - name: snow
+      look: WFRMCLookLegPouchSnow
+    - name: urban
+      look: WFRMCLookLegPouchUrban
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCArmorPouchesMag
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/mag.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/mag.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCArmorPouchesDrum
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/drum.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/drum.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCArmorPouchesNade
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/nade.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/nade.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCArmorPouchesShell
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/shell.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/shell.rsi
+
+- type: entity
+  parent: WFRMCNeckPouchBase
+  id: WFRMCArmorPouchesPouch
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/pouch.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_pouches/pouch.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCShoulderPads
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookShoulderPadsJungle
+    - name: desert
+      look: WFRMCLookShoulderPadsDesert
+    - name: snow
+      look: WFRMCLookShoulderPadsSnow
+    - name: urban
+      look: WFRMCLookShoulderPadsUrban
+    - name: classic
+      look: WFRMCLookShoulderPadsClassic
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCBracers
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookBracersJungle
+    - name: desert
+      look: WFRMCLookBracersDesert
+    - name: snow
+      look: WFRMCLookBracersSnow
+    - name: urban
+      look: WFRMCLookBracersUrban
+    - name: classic
+      look: WFRMCLookBracersClassic
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCThighGuards
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookThighGuardsJungle
+    - name: desert
+      look: WFRMCLookThighGuardsDesert
+    - name: snow
+      look: WFRMCLookThighGuardsSnow
+    - name: urban
+      look: WFRMCLookThighGuardsUrban
+    - name: classic
+      look: WFRMCLookThighGuardsClassic
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCShinGuards
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookShinGuardsJungle
+    - name: desert
+      look: WFRMCLookShinGuardsDesert
+    - name: snow
+      look: WFRMCLookShinGuardsSnow
+    - name: urban
+      look: WFRMCLookShinGuardsUrban
+    - name: classic
+      look: WFRMCLookShinGuardsClassic
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCGroinPlate
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/jungle.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: jungle
+      look: WFRMCLookGroinPlateJungle
+    - name: desert
+      look: WFRMCLookGroinPlateDesert
+    - name: snow
+      look: WFRMCLookGroinPlateSnow
+    - name: classic
+      look: WFRMCLookGroinPlateClassic
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmorPaintSkull
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/skull.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/skull.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmorPaintCross
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/cross.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/cross.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmorPaintHeart
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/heart.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/heart.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmorPaintMedic
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/medic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/medic.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmorPaintTarget
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/target.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/target.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmorPaintSmiley
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/smiley.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/smiley.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmorPaintMixtape
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/mixtape.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/mixtape.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmorPaintInscription
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/inscription.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/inscription.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCArmorPaintNeutral
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/neutral.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/armor_paint/neutral.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchTSFMC
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmc.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmc.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchTSFMCRecon
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcrecon.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcrecon.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchPDV
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_pdv.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_pdv.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchPDVAlt
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_pdvalt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_pdvalt.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchTSFFlag
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfflag.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfflag.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchTSFFlagSquare
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfflag_square.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfflag_square.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchTSFMCSenior
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcsenior.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcsenior.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchTSFMCDevils
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcdevils.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcdevils.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchTSFMCFalcons
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcfalcons.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcfalcons.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchTSFMCFalconsLarge
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcfalcons_large.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_tsfmcfalcons_large.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchPDVMedical
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_pdvmedical.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_pdvmedical.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchMerc
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_merc.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_merc.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchMercAlt
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_merc_alt.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_merc_alt.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchMedic
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_medic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_medic.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchOlive
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_olive.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_olive.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCPatchPeace
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_peace.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/patch_peace.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFRMCCloakGeneral
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/cloak_general.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/cloak_general.rsi

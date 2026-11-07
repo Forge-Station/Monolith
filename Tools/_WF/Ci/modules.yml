@@ -16,6 +16,33 @@ external:
 # Edits outside _WF that can't hold a WOLFGATE marker: JSON, images, audio, rich-text .txt and map files.
 # Each entry has a path (a file, a folder or a glob), the module it serves (null for a standalone edit) and a reason.
 unmarked:
+  - path: Resources/Maps/_Mono/POI/pdvhelios.yml
+    module: Lattice
+    reason: Mapped a station anchor beside an APC so Helios stays anchored space past the Lattice's hold.
+  - path: Resources/Maps/_Mono/POI/underground.yml
+    module: Lattice
+    reason: Mapped a station anchor beside an APC so the Syndicate FOB stays anchored space past the Lattice's hold.
+  - path: Resources/Maps/_Mono/POI/pdvhelios.yml
+    module: PdvMedic
+    reason: Mapped Jarrah spawn markers by the other PDV spawns.
+  - path: Resources/Maps/_Mono/POI/pdvhelios_hw.yml
+    module: PdvMedic
+    reason: Mapped Jarrah spawn markers by the other PDV spawns.
+  - path: Resources/Maps/_Mono/Supercapitals/jupiter_hw.yml
+    module: PdvMedic
+    reason: Mapped Jarrah spawn markers by the other PDV spawns.
+  - path: Resources/Maps/_Mono/POI/tsfmchalcyon.yml
+    module: RMCClothing
+    reason: Mapped the TSFMC field outfitter in the marine ready room.
+  - path: Resources/Maps/_Mono/POI/tsfmchalcyon_hw.yml
+    module: RMCClothing
+    reason: Mapped the TSFMC field outfitter in the marine ready room.
+  - path: Resources/Maps/_Mono/POI/pdvhelios.yml
+    module: RMCClothing
+    reason: Mapped two Vanguard field outfitters in the spawn hall.
+  - path: Resources/Maps/_Mono/POI/pdvhelios_hw.yml
+    module: RMCClothing
+    reason: Mapped two Vanguard field outfitters in the spawn hall.
   - path: Resources/Maps/Shuttles/dart.yml
     module: Cloning
     reason: Mapped a genetic database and a body scanner console, linked to the scanner and pod.

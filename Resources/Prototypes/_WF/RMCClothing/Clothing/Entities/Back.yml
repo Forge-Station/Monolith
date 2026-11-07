@@ -1,0 +1,379 @@
+- type: entity
+  parent: ClothingBackpackTsfmc
+  id: WFRMCBackpackMarineMedic
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_medic/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_medic/jungle-desert-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: field
+      look: WFRMCLookBackpackMarineMedicJungleDesertClassic
+    - name: winter
+      look: WFRMCLookBackpackMarineMedicSnowUrban
+
+- type: entity
+  parent: ClothingBackpackTsfmc
+  id: WFRMCBackpackMarineTech
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_tech/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_tech/jungle-desert-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: field
+      look: WFRMCLookBackpackMarineTechJungleDesertClassic
+    - name: winter
+      look: WFRMCLookBackpackMarineTechSnowUrban
+
+- type: entity
+  parent: ClothingBackpackTsfmc
+  id: WFRMCBackpackMarineWelder
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_welder/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_welder/jungle-desert-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: field
+      look: WFRMCLookBackpackMarineWelderJungleDesertClassic
+    - name: winter
+      look: WFRMCLookBackpackMarineWelderSnowUrban
+
+- type: entity
+  parent: ClothingBackpackTsfmc
+  id: WFRMCBackpackMarineRadio
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_radio/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_radio/jungle-desert-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: field
+      look: WFRMCLookBackpackMarineRadioJungleDesertClassic
+    - name: winter
+      look: WFRMCLookBackpackMarineRadioSnowUrban
+
+- type: entity
+  parent: ClothingBackpackTsfmc
+  id: WFRMCBackpackMarineMortar
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_mortar/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_mortar/jungle-desert-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: field
+      look: WFRMCLookBackpackMarineMortarJungleDesertClassic
+    - name: winter
+      look: WFRMCLookBackpackMarineMortarSnowUrban
+
+- type: entity
+  parent: ClothingBackpackTsfmc
+  id: WFRMCBackpackMarineMolle
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_molle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_molle.rsi
+
+- type: entity
+  parent: ClothingBackpackTsfmc
+  id: WFRMCBackpackMarinePhone
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_phone.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_phone.rsi
+
+- type: entity
+  parent: NFClothingBackpack
+  id: WFRMCBackpackSmockPlain
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock_plain.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock_plain.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCSatchelMarineLarge
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_large/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_large/jungle-desert-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: field
+      look: WFRMCLookSatchelMarineLargeJungleDesertClassic
+    - name: winter
+      look: WFRMCLookSatchelMarineLargeSnowUrban
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCSatchelMarineMedic
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_medic/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_medic/jungle-desert-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: field
+      look: WFRMCLookSatchelMarineMedicJungleDesertClassic
+    - name: winter
+      look: WFRMCLookSatchelMarineMedicSnowUrban
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCSatchelMarineTech
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_tech.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_tech.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCSatchelMarineIntel
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_intel.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_intel.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCSatchelMarineMolle
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_molle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_molle.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCSatchelMarineGrenade
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_grenade.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_grenade.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCSatchelMarineRocket
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_rocket.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_rocket.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCChestRigIntel
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_intel/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_intel/desert.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: desert
+      look: WFRMCLookChestRigIntelDesert
+    - name: winter
+      look: WFRMCLookChestRigIntelSnowUrban
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCChestRigTechSnowUrban
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_tech/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_tech/snow-urban.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: WFRMCLightPackLightpack
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/light_pack/lightpack.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/light_pack/lightpack.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: WFRMCLightPackLightpackBlack
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/light_pack/lightpack_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/light_pack/lightpack_black.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: WFRMCLightPackLightpackMedic
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/light_pack/lightpack_medic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/light_pack/lightpack_medic.rsi
+
+- type: entity
+  parent: ClothingBackpackPDV
+  id: WFRMCBackpackPDVRadio
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_pdvradio.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_pdvradio.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchelPDV
+  id: WFRMCSatchelPDVWelder
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_pdvwelder.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_pdvwelder.rsi
+
+- type: entity
+  parent: ClothingBackpackPDV
+  id: WFRMCBackpackBlack
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_black.rsi
+
+- type: entity
+  parent: ClothingBackpackPDV
+  id: WFRMCBackpackCommando
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_commando.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_commando.rsi
+
+- type: entity
+  parent: ClothingBackpackPDV
+  id: WFRMCBackpackBlackRadio
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_black_radio.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_black_radio.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCCloakM68
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/cloak_m68.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/cloak_m68.rsi
+  - type: WFGhillieSuit
+
+- type: entity
+  parent: ClothingBackpackSatchelPDV
+  id: WFRMCCloakV86
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/cloak_v86.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/cloak_v86.rsi
+  - type: WFGhillieSuit
+
+- type: entity
+  parent: ClothingBackpackTsfmc
+  id: WFRMCBackpackMarine
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine/jungle-desert-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: field
+      look: WFRMCLookBackpackMarineJungleDesertClassic
+    - name: winter
+      look: WFRMCLookBackpackMarineSnowUrban
+
+- type: entity
+  parent: ClothingBackpackSatchelTsfmc
+  id: WFRMCSatchelMarine
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine/jungle-desert-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: field
+      look: WFRMCLookSatchelMarineJungleDesertClassic
+    - name: winter
+      look: WFRMCLookSatchelMarineSnowUrban
+
+- type: entity
+  parent: NFClothingBackpack
+  id: WFRMCBackpackSmock
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/jungle-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/jungle-classic.rsi
+  - type: WFCamoPattern
+    patterns:
+    - name: woodland
+      look: WFRMCLookBackpackSmockJungleClassic
+    - name: snow
+      look: WFRMCLookBackpackSmockSnow
+    - name: arid
+      look: WFRMCLookBackpackSmockUrbanDesert
+
+- type: entity
+  parent: ClothingBackpackSatchelPDV
+  id: WFRMCSatchelPDV
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_pdv.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_pdv.rsi

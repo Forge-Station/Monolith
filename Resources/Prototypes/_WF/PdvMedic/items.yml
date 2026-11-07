@@ -1,0 +1,33 @@
+- type: entity
+  parent: PirateIDCard
+  id: WFPdvJarrahIDCard
+  components:
+  - type: PresetIdCard
+    job: WFPdvJarrah
+  - type: Sprite
+    sprite: _Mono/Objects/Misc/id_cards.rsi
+    layers:
+    - state: base
+    - state: id_rakhshan
+
+- type: entity
+  parent: BasePDVPDA
+  id: WFPdvJarrahPDA
+  components:
+  - type: Pda
+    id: WFPdvJarrahIDCard
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-rakhshan
+  - type: Geiger
+    showExamine: true
+    showControl: true
+    isEnabled: true
+    attachedToSuit: true
+  - type: PdaBorderColor
+    borderColor: "#9c8245"
+  - type: StealTarget
+    stealGroup:
+    - PDVPDAs

@@ -12,6 +12,7 @@
   - PirateFace
   - ContractorBoxSurvival
   - RakhshanPDA
+  - ContractorCartridge # WOLFGATE: PDV roles had no PDA cartridges
   - ContractorWallet
   - NFSpeciesSpecific
   - PirateTrinkets
@@ -21,7 +22,8 @@
   - RogueSidearm
   - RogueMag
   - RoguePistolMag
-  - FactionArmorPlates
+  - WFPdvRanksRakhshan # WOLFGATE(PdvRanks): Ottoman chat rank ladder
+  #- FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -38,6 +40,7 @@
   - PDVFace
   - ContractorBoxSurvival
   - AsvaranPDA
+  - ContractorCartridge # WOLFGATE: PDV roles had no PDA cartridges
   - NFSpeciesSpecific
   - ContractorWallet
   - PirateTrinkets
@@ -47,7 +50,8 @@
   - RogueSidearm
   - RogueCommandMag
   - RoguePistolMag
-  - FactionArmorPlates
+  - WFPdvRanksAsvaran # WOLFGATE(PdvRanks): Ottoman chat rank ladder
+  #- FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -56,14 +60,15 @@
   - PDVCommanderHead
   - PDVJumpsuit
   - PDVGloves
-  - PDVOuterClothing
+  - PDVOuterClothingVizier
   - PDVHud
   - PDVBackpack
-  - PDVShoes
+  - PDVShoesVizier
   - PDVFace
   - PDVCommanderNeck
   - ContractorBoxSurvival
   - GrandVizierPDA
+  - ContractorCartridge # WOLFGATE: PDV roles had no PDA cartridges
   - NFSpeciesSpecific
   - ContractorWallet
   - PirateCaptainTrinkets
@@ -72,8 +77,8 @@
   - RogueFirearmCommander
   - RogueSidearm
   - RogueCommandMag
-  - RoguePistolMag
-  - FactionArmorPlates
+  - WFPdvRanksGrandVizier # WOLFGATE(PdvRanks): Ottoman chat rank ladder
+  #- FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -90,6 +95,7 @@
   - PDVNeck
   - ContractorBoxSurvival
   - PDVInfiltratorPDA
+  - ContractorCartridge # WOLFGATE: PDV roles had no PDA cartridges
   - NFSpeciesSpecific
   - ContractorWallet
   - PirateTrinkets
@@ -97,7 +103,7 @@
   - ContractorEncryptionKey
   - RogueFirearm
   - RogueMag
-  - FactionArmorPlates
+  #- FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -114,6 +120,7 @@
   - PirateFace
   - ContractorBoxSurvival
   - PDVDenasvarPDA
+  - ContractorCartridge # WOLFGATE: PDV roles had no PDA cartridges
   - ContractorWallet
   - NFSpeciesSpecific
   - PirateTrinkets
@@ -123,7 +130,8 @@
   - RogueSidearm
   - RogueCommandMag
   - RoguePistolMag
-  - FactionArmorPlates
+  - WFPdvRanksDenasvar # WOLFGATE(PdvRanks): Ottoman chat rank ladder
+  #- FactionArmorPlates
   canCustomizeName: true
 
 - type: roleLoadout
@@ -137,5 +145,52 @@
   - ContractorEncryptionKey
   - RogueSidearm
   - RoguePistolMag
-  - FactionArmorPlates
+  #- FactionArmorPlates
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobPdvCivilian # Civvie
+  groups:
+  - MercenaryHead
+  - ContractorNeck
+  - MercenaryJumpsuit
+  - MercenaryGloves
+  - MercenaryBackpack
+  - ContractorOuterClothing
+  - MercenaryShoes
+  - MercenaryFace
+  - MercenaryGlasses
+  - MercenaryBelt
+  - MercenaryEars
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific
+  - MercenaryBalaclava # Mono
+  - CivGunCaseSpecial # Mono
+  - RogueSidearm
+  - RoguePistolMag
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobPdvInfantry
+  groups:
+  - PDVInfantryHead
+  - PDVInfantryJumpsuit
+  - PDVGloves
+  - PDVInfantryOuterClothing
+  - PDVInfantryBackpack
+  - PDVShoes
+  - TsfmcBalaclava
+  - RakhshanPDA
+  - ContractorCartridge # WOLFGATE: PDV roles had no PDA cartridges
+  - NFSpeciesSpecific
+  - PDVInfantryBelt
   canCustomizeName: true

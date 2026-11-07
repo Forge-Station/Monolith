@@ -64,6 +64,7 @@
             PirateCaptain: [ 1, 1 ]
             PirateFirstMate: [ 1, 1 ]
             PDVDenasvar: [ 3, 3 ]
+            WFPdvJarrah: [ 2, 2 ] # WOLFGATE(PdvMedic): PDV field medic slots
             # PDVInfiltrator: [ 2, 2 ]
             Pirate: [ -1, -1 ]
             PdvBorg: [ 2, 2 ]
@@ -120,6 +121,7 @@
             PDVTarkhan: [ 3, 3 ]
             PirateFirstMate: [ 3, 3 ]
             PDVDenasvar: [ 6, 6 ]
+            WFPdvJarrah: [ 4, 4 ] # WOLFGATE(PdvMedic): PDV field medic slots
             # PDVInfiltrator: [ 2, 2 ]
             Pirate: [ -1, -1 ]
             PdvBorg: [ 2, 2 ]

@@ -1,0 +1,19 @@
+# Base for the neck slot pouches: a small 3x2 grid for small items.
+- type: entity
+  abstract: true
+  parent: ClothingNeckBase
+  id: WFRMCNeckPouchBase
+  components:
+  - type: Item
+    size: Normal
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,2,1
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface

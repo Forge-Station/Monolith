@@ -1,0 +1,3769 @@
+- type: entity
+  parent: WFRMCArmorM3
+  id: WFRMCLookArmorM3Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM3
+  id: WFRMCLookArmorM3Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorM3
+  id: WFRMCLookArmorM3Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM3
+  id: WFRMCLookArmorM3Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM3
+  id: WFRMCLookArmorM3Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorM3L
+  id: WFRMCLookArmorM3LJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM3L
+  id: WFRMCLookArmorM3LDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorM3L
+  id: WFRMCLookArmorM3LSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM3L
+  id: WFRMCLookArmorM3LUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM3L
+  id: WFRMCLookArmorM3LClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_l/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorM3EOD
+  id: WFRMCLookArmorM3EODJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM3EOD
+  id: WFRMCLookArmorM3EODDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorM3EOD
+  id: WFRMCLookArmorM3EODSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM3EOD
+  id: WFRMCLookArmorM3EODUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM3EOD
+  id: WFRMCLookArmorM3EODClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_eod/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorM3T
+  id: WFRMCLookArmorM3TJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM3T
+  id: WFRMCLookArmorM3TDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorM3T
+  id: WFRMCLookArmorM3TSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM3T
+  id: WFRMCLookArmorM3TUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM3T
+  id: WFRMCLookArmorM3TClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_t/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorB12
+  id: WFRMCLookArmorB12Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorB12
+  id: WFRMCLookArmorB12Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorB12
+  id: WFRMCLookArmorB12Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorB12
+  id: WFRMCLookArmorB12Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorB12
+  id: WFRMCLookArmorB12Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_b12/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorM3G4
+  id: WFRMCLookArmorM3G4Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM3G4
+  id: WFRMCLookArmorM3G4Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorM3G4
+  id: WFRMCLookArmorM3G4Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM3G4
+  id: WFRMCLookArmorM3G4Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM3G4
+  id: WFRMCLookArmorM3G4Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_g4/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorM35
+  id: WFRMCLookArmorM35Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM35
+  id: WFRMCLookArmorM35Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorM35
+  id: WFRMCLookArmorM35Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM35
+  id: WFRMCLookArmorM35Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM35
+  id: WFRMCLookArmorM35Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m35/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorML66A
+  id: WFRMCLookArmorML66AJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorML66A
+  id: WFRMCLookArmorML66ADesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorML66A
+  id: WFRMCLookArmorML66ASnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorML66A
+  id: WFRMCLookArmorML66AUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorML66A
+  id: WFRMCLookArmorML66AClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_ml66_a/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorXM4
+  id: WFRMCLookArmorXM4Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorXM4
+  id: WFRMCLookArmorXM4Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorXM4
+  id: WFRMCLookArmorXM4Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorXM4
+  id: WFRMCLookArmorXM4Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorXM4
+  id: WFRMCLookArmorXM4Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_xm4/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorM3CO
+  id: WFRMCLookArmorM3COJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM3CO
+  id: WFRMCLookArmorM3CODesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorM3CO
+  id: WFRMCLookArmorM3COSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM3CO
+  id: WFRMCLookArmorM3COUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM3CO
+  id: WFRMCLookArmorM3COClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_co/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorM3XL
+  id: WFRMCLookArmorM3XLJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM3XL
+  id: WFRMCLookArmorM3XLDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorM3XL
+  id: WFRMCLookArmorM3XLSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM3XL
+  id: WFRMCLookArmorM3XLUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM3XL
+  id: WFRMCLookArmorM3XLClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_xl/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorM3Scout
+  id: WFRMCLookArmorM3ScoutJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM3Scout
+  id: WFRMCLookArmorM3ScoutDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/desert.rsi
+
+- type: entity
+  parent: WFRMCArmorM3Scout
+  id: WFRMCLookArmorM3ScoutSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM3Scout
+  id: WFRMCLookArmorM3ScoutUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM3Scout
+  id: WFRMCLookArmorM3ScoutClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_scout/classic.rsi
+
+- type: entity
+  parent: WFRMCArmorM70Flak
+  id: WFRMCLookArmorM70FlakJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM70Flak
+  id: WFRMCLookArmorM70FlakSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/snow.rsi
+
+- type: entity
+  parent: WFRMCArmorM70Flak
+  id: WFRMCLookArmorM70FlakUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m70_flak/urban.rsi
+
+- type: entity
+  parent: WFRMCArmorM3Officer
+  id: WFRMCLookArmorM3OfficerJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_officer/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_officer/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_officer/jungle.rsi
+
+- type: entity
+  parent: WFRMCArmorM3Officer
+  id: WFRMCLookArmorM3OfficerDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_officer/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_officer/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/armor_m3_officer/desert.rsi
+
+- type: entity
+  parent: WFRMCCoatService
+  id: WFRMCLookCoatServiceJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/jungle.rsi
+
+- type: entity
+  parent: WFRMCCoatService
+  id: WFRMCLookCoatServiceDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/desert.rsi
+
+- type: entity
+  parent: WFRMCCoatService
+  id: WFRMCLookCoatServiceSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/snow.rsi
+
+- type: entity
+  parent: WFRMCCoatService
+  id: WFRMCLookCoatServiceClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/coat_service/classic.rsi
+
+- type: entity
+  parent: WFRMCGhillie
+  id: WFRMCLookGhillieJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/jungle.rsi
+
+- type: entity
+  parent: WFRMCGhillie
+  id: WFRMCLookGhillieDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/desert.rsi
+
+- type: entity
+  parent: WFRMCGhillie
+  id: WFRMCLookGhillieSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/snow.rsi
+
+- type: entity
+  parent: WFRMCGhillie
+  id: WFRMCLookGhillieUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/urban.rsi
+
+- type: entity
+  parent: WFRMCGhillie
+  id: WFRMCLookGhillieClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/OuterClothing/ghillie/classic.rsi
+
+- type: entity
+  parent: WFRMCUniformMarine
+  id: WFRMCLookUniformMarineJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/jungle.rsi
+
+- type: entity
+  parent: WFRMCUniformMarine
+  id: WFRMCLookUniformMarineDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/desert.rsi
+
+- type: entity
+  parent: WFRMCUniformMarine
+  id: WFRMCLookUniformMarineSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/snow.rsi
+
+- type: entity
+  parent: WFRMCUniformMarine
+  id: WFRMCLookUniformMarineUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/urban.rsi
+
+- type: entity
+  parent: WFRMCUniformMarine
+  id: WFRMCLookUniformMarineClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine/classic.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineEngineer
+  id: WFRMCLookUniformMarineEngineerJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/jungle.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineEngineer
+  id: WFRMCLookUniformMarineEngineerDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/desert.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineEngineer
+  id: WFRMCLookUniformMarineEngineerSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/snow.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineEngineer
+  id: WFRMCLookUniformMarineEngineerUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/urban.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineEngineer
+  id: WFRMCLookUniformMarineEngineerClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_engineer/classic.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineMedic
+  id: WFRMCLookUniformMarineMedicJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/jungle.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineMedic
+  id: WFRMCLookUniformMarineMedicDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/desert.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineMedic
+  id: WFRMCLookUniformMarineMedicSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/snow.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineMedic
+  id: WFRMCLookUniformMarineMedicUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/urban.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineMedic
+  id: WFRMCLookUniformMarineMedicClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_medic/classic.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineRTO
+  id: WFRMCLookUniformMarineRTOJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/jungle.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineRTO
+  id: WFRMCLookUniformMarineRTODesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/desert.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineRTO
+  id: WFRMCLookUniformMarineRTOSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/snow.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineRTO
+  id: WFRMCLookUniformMarineRTOUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/urban.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineRTO
+  id: WFRMCLookUniformMarineRTOClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_rto/classic.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineTanker
+  id: WFRMCLookUniformMarineTankerJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/jungle.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineTanker
+  id: WFRMCLookUniformMarineTankerDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/desert.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineTanker
+  id: WFRMCLookUniformMarineTankerSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/snow.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineTanker
+  id: WFRMCLookUniformMarineTankerUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/urban.rsi
+
+- type: entity
+  parent: WFRMCUniformMarineTanker
+  id: WFRMCLookUniformMarineTankerClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_marine_tanker/classic.rsi
+
+- type: entity
+  parent: WFRMCUniformIntel
+  id: WFRMCLookUniformIntelJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_intel/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_intel/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_intel/jungle.rsi
+
+- type: entity
+  parent: WFRMCUniformIntel
+  id: WFRMCLookUniformIntelSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_intel/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_intel/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_intel/snow.rsi
+
+- type: entity
+  parent: WFRMCUniformIntel
+  id: WFRMCLookUniformIntelUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_intel/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_intel/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_intel/urban.rsi
+
+- type: entity
+  parent: WFRMCUniformBoiler
+  id: WFRMCLookUniformBoilerJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_boiler/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_boiler/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_boiler/jungle.rsi
+
+- type: entity
+  parent: WFRMCUniformBoiler
+  id: WFRMCLookUniformBoilerDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_boiler/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_boiler/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_boiler/desert.rsi
+
+- type: entity
+  parent: WFRMCUniformBoiler
+  id: WFRMCLookUniformBoilerSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_boiler/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_boiler/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_boiler/snow.rsi
+
+- type: entity
+  parent: WFRMCUniformMP
+  id: WFRMCLookUniformMPJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/jungle.rsi
+
+- type: entity
+  parent: WFRMCUniformMP
+  id: WFRMCLookUniformMPDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/desert.rsi
+
+- type: entity
+  parent: WFRMCUniformMP
+  id: WFRMCLookUniformMPSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/snow.rsi
+
+- type: entity
+  parent: WFRMCUniformMP
+  id: WFRMCLookUniformMPUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/urban.rsi
+
+- type: entity
+  parent: WFRMCUniformMP
+  id: WFRMCLookUniformMPClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Uniforms/uniform_mp/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10
+  id: WFRMCLookHelmetM10Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10
+  id: WFRMCLookHelmetM10Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10
+  id: WFRMCLookHelmetM10Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10
+  id: WFRMCLookHelmetM10Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10
+  id: WFRMCLookHelmetM10Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Medic
+  id: WFRMCLookHelmetM10MedicJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Medic
+  id: WFRMCLookHelmetM10MedicDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Medic
+  id: WFRMCLookHelmetM10MedicSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Medic
+  id: WFRMCLookHelmetM10MedicUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Medic
+  id: WFRMCLookHelmetM10MedicClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_medic/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Tech
+  id: WFRMCLookHelmetM10TechJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Tech
+  id: WFRMCLookHelmetM10TechDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Tech
+  id: WFRMCLookHelmetM10TechSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Tech
+  id: WFRMCLookHelmetM10TechUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Tech
+  id: WFRMCLookHelmetM10TechClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_tech/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Officer
+  id: WFRMCLookHelmetM10OfficerJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_officer/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_officer/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_officer/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM10Officer
+  id: WFRMCLookHelmetM10OfficerDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_officer/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_officer/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m10_officer/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM11
+  id: WFRMCLookHelmetM11Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM11
+  id: WFRMCLookHelmetM11Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM11
+  id: WFRMCLookHelmetM11Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM11
+  id: WFRMCLookHelmetM11Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM11
+  id: WFRMCLookHelmetM11Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m11/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM12
+  id: WFRMCLookHelmetM12Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM12
+  id: WFRMCLookHelmetM12Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM12
+  id: WFRMCLookHelmetM12Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM12
+  id: WFRMCLookHelmetM12Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM12
+  id: WFRMCLookHelmetM12Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m12/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM30
+  id: WFRMCLookHelmetM30Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM30
+  id: WFRMCLookHelmetM30Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM30
+  id: WFRMCLookHelmetM30Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM30
+  id: WFRMCLookHelmetM30Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM30
+  id: WFRMCLookHelmetM30Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m30/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM35
+  id: WFRMCLookHelmetM35Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM35
+  id: WFRMCLookHelmetM35Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM35
+  id: WFRMCLookHelmetM35Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM35
+  id: WFRMCLookHelmetM35Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM35
+  id: WFRMCLookHelmetM35Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m35/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Demo
+  id: WFRMCLookHelmetM3DemoJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Demo
+  id: WFRMCLookHelmetM3DemoDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Demo
+  id: WFRMCLookHelmetM3DemoSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Demo
+  id: WFRMCLookHelmetM3DemoUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Demo
+  id: WFRMCLookHelmetM3DemoClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_demo/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3G4
+  id: WFRMCLookHelmetM3G4Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3G4
+  id: WFRMCLookHelmetM3G4Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3G4
+  id: WFRMCLookHelmetM3G4Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3G4
+  id: WFRMCLookHelmetM3G4Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3G4
+  id: WFRMCLookHelmetM3G4Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_g4/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Scout
+  id: WFRMCLookHelmetM3ScoutJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Scout
+  id: WFRMCLookHelmetM3ScoutDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Scout
+  id: WFRMCLookHelmetM3ScoutSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Scout
+  id: WFRMCLookHelmetM3ScoutUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM3Scout
+  id: WFRMCLookHelmetM3ScoutClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m3_scout/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM50
+  id: WFRMCLookHelmetM50Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM50
+  id: WFRMCLookHelmetM50Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM50
+  id: WFRMCLookHelmetM50Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM50
+  id: WFRMCLookHelmetM50Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM50
+  id: WFRMCLookHelmetM50Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m50/classic.rsi
+
+- type: entity
+  parent: WFRMCHelmetM45
+  id: WFRMCLookHelmetM45Jungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/jungle.rsi
+
+- type: entity
+  parent: WFRMCHelmetM45
+  id: WFRMCLookHelmetM45Desert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/desert.rsi
+
+- type: entity
+  parent: WFRMCHelmetM45
+  id: WFRMCLookHelmetM45Snow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/snow.rsi
+
+- type: entity
+  parent: WFRMCHelmetM45
+  id: WFRMCLookHelmetM45Urban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/urban.rsi
+
+- type: entity
+  parent: WFRMCHelmetM45
+  id: WFRMCLookHelmetM45Classic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/helmet_m45/classic.rsi
+
+- type: entity
+  parent: WFRMCHatBeret
+  id: WFRMCLookHatBeretJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/jungle.rsi
+
+- type: entity
+  parent: WFRMCHatBeret
+  id: WFRMCLookHatBeretDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/desert.rsi
+
+- type: entity
+  parent: WFRMCHatBeret
+  id: WFRMCLookHatBeretSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/snow.rsi
+
+- type: entity
+  parent: WFRMCHatBeret
+  id: WFRMCLookHatBeretUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/urban.rsi
+
+- type: entity
+  parent: WFRMCHatBeret
+  id: WFRMCLookHatBeretClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret/classic.rsi
+
+- type: entity
+  parent: WFRMCHatBeretTan
+  id: WFRMCLookHatBeretTanJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/jungle.rsi
+
+- type: entity
+  parent: WFRMCHatBeretTan
+  id: WFRMCLookHatBeretTanDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/desert.rsi
+
+- type: entity
+  parent: WFRMCHatBeretTan
+  id: WFRMCLookHatBeretTanSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/snow.rsi
+
+- type: entity
+  parent: WFRMCHatBeretTan
+  id: WFRMCLookHatBeretTanUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_beret_tan/urban.rsi
+
+- type: entity
+  parent: WFRMCHatCap
+  id: WFRMCLookHatCapJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/jungle.rsi
+
+- type: entity
+  parent: WFRMCHatCap
+  id: WFRMCLookHatCapDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/desert.rsi
+
+- type: entity
+  parent: WFRMCHatCap
+  id: WFRMCLookHatCapSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/snow.rsi
+
+- type: entity
+  parent: WFRMCHatCap
+  id: WFRMCLookHatCapUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/urban.rsi
+
+- type: entity
+  parent: WFRMCHatCap
+  id: WFRMCLookHatCapClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap/classic.rsi
+
+- type: entity
+  parent: WFRMCHatCapOfficer
+  id: WFRMCLookHatCapOfficerJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/jungle.rsi
+
+- type: entity
+  parent: WFRMCHatCapOfficer
+  id: WFRMCLookHatCapOfficerDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/desert.rsi
+
+- type: entity
+  parent: WFRMCHatCapOfficer
+  id: WFRMCLookHatCapOfficerSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/snow.rsi
+
+- type: entity
+  parent: WFRMCHatCapOfficer
+  id: WFRMCLookHatCapOfficerUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/urban.rsi
+
+- type: entity
+  parent: WFRMCHatCapOfficer
+  id: WFRMCLookHatCapOfficerClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_cap_officer/classic.rsi
+
+- type: entity
+  parent: WFRMCHatFlapCap
+  id: WFRMCLookHatFlapCapJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/jungle.rsi
+
+- type: entity
+  parent: WFRMCHatFlapCap
+  id: WFRMCLookHatFlapCapDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/desert.rsi
+
+- type: entity
+  parent: WFRMCHatFlapCap
+  id: WFRMCLookHatFlapCapUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/urban.rsi
+
+- type: entity
+  parent: WFRMCHatFlapCap
+  id: WFRMCLookHatFlapCapClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_flap_cap/classic.rsi
+
+- type: entity
+  parent: WFRMCHatBoonie
+  id: WFRMCLookHatBoonieJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/jungle.rsi
+
+- type: entity
+  parent: WFRMCHatBoonie
+  id: WFRMCLookHatBoonieDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/desert.rsi
+
+- type: entity
+  parent: WFRMCHatBoonie
+  id: WFRMCLookHatBoonieSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/snow.rsi
+
+- type: entity
+  parent: WFRMCHatBoonie
+  id: WFRMCLookHatBoonieUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/urban.rsi
+
+- type: entity
+  parent: WFRMCHatBoonie
+  id: WFRMCLookHatBoonieClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie/classic.rsi
+
+- type: entity
+  parent: WFRMCHatBoonieTan
+  id: WFRMCLookHatBoonieTanJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie_tan/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie_tan/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie_tan/jungle.rsi
+
+- type: entity
+  parent: WFRMCHatBoonieTan
+  id: WFRMCLookHatBoonieTanUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie_tan/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie_tan/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Head/hat_boonie_tan/urban.rsi
+
+- type: entity
+  parent: WFRMCSmock
+  id: WFRMCLookSmockBlack
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/black.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/black.rsi
+
+- type: entity
+  parent: WFRMCSmock
+  id: WFRMCLookSmockClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/classic.rsi
+
+- type: entity
+  parent: WFRMCSmock
+  id: WFRMCLookSmockDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/desert.rsi
+
+- type: entity
+  parent: WFRMCSmock
+  id: WFRMCLookSmockJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/jungle.rsi
+
+- type: entity
+  parent: WFRMCSmock
+  id: WFRMCLookSmockSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/snow.rsi
+
+- type: entity
+  parent: WFRMCSmock
+  id: WFRMCLookSmockUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Mask/smock/urban.rsi
+
+- type: entity
+  parent: WFRMCPoncho
+  id: WFRMCLookPonchoJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/jungle.rsi
+
+- type: entity
+  parent: WFRMCPoncho
+  id: WFRMCLookPonchoDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/desert.rsi
+
+- type: entity
+  parent: WFRMCPoncho
+  id: WFRMCLookPonchoSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/snow.rsi
+
+- type: entity
+  parent: WFRMCPoncho
+  id: WFRMCLookPonchoUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/urban.rsi
+
+- type: entity
+  parent: WFRMCPoncho
+  id: WFRMCLookPonchoClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/poncho/classic.rsi
+
+- type: entity
+  parent: WFRMCNeckGuard
+  id: WFRMCLookNeckGuardJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/jungle.rsi
+
+- type: entity
+  parent: WFRMCNeckGuard
+  id: WFRMCLookNeckGuardDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/desert.rsi
+
+- type: entity
+  parent: WFRMCNeckGuard
+  id: WFRMCLookNeckGuardSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/snow.rsi
+
+- type: entity
+  parent: WFRMCNeckGuard
+  id: WFRMCLookNeckGuardUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/urban.rsi
+
+- type: entity
+  parent: WFRMCNeckGuard
+  id: WFRMCLookNeckGuardClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/neck_guard/classic.rsi
+
+- type: entity
+  parent: WFRMCLegPouch
+  id: WFRMCLookLegPouchBlack
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/black.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/black.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/black.rsi
+
+- type: entity
+  parent: WFRMCLegPouch
+  id: WFRMCLookLegPouchClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/classic.rsi
+
+- type: entity
+  parent: WFRMCLegPouch
+  id: WFRMCLookLegPouchDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/desert.rsi
+
+- type: entity
+  parent: WFRMCLegPouch
+  id: WFRMCLookLegPouchJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/jungle.rsi
+
+- type: entity
+  parent: WFRMCLegPouch
+  id: WFRMCLookLegPouchSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/snow.rsi
+
+- type: entity
+  parent: WFRMCLegPouch
+  id: WFRMCLookLegPouchUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/leg_pouch/urban.rsi
+
+- type: entity
+  parent: WFRMCShoulderPads
+  id: WFRMCLookShoulderPadsJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/jungle.rsi
+
+- type: entity
+  parent: WFRMCShoulderPads
+  id: WFRMCLookShoulderPadsDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/desert.rsi
+
+- type: entity
+  parent: WFRMCShoulderPads
+  id: WFRMCLookShoulderPadsSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/snow.rsi
+
+- type: entity
+  parent: WFRMCShoulderPads
+  id: WFRMCLookShoulderPadsUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/urban.rsi
+
+- type: entity
+  parent: WFRMCShoulderPads
+  id: WFRMCLookShoulderPadsClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shoulder_pads/classic.rsi
+
+- type: entity
+  parent: WFRMCBracers
+  id: WFRMCLookBracersJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/jungle.rsi
+
+- type: entity
+  parent: WFRMCBracers
+  id: WFRMCLookBracersDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/desert.rsi
+
+- type: entity
+  parent: WFRMCBracers
+  id: WFRMCLookBracersSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/snow.rsi
+
+- type: entity
+  parent: WFRMCBracers
+  id: WFRMCLookBracersUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/urban.rsi
+
+- type: entity
+  parent: WFRMCBracers
+  id: WFRMCLookBracersClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/bracers/classic.rsi
+
+- type: entity
+  parent: WFRMCThighGuards
+  id: WFRMCLookThighGuardsJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/jungle.rsi
+
+- type: entity
+  parent: WFRMCThighGuards
+  id: WFRMCLookThighGuardsDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/desert.rsi
+
+- type: entity
+  parent: WFRMCThighGuards
+  id: WFRMCLookThighGuardsSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/snow.rsi
+
+- type: entity
+  parent: WFRMCThighGuards
+  id: WFRMCLookThighGuardsUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/urban.rsi
+
+- type: entity
+  parent: WFRMCThighGuards
+  id: WFRMCLookThighGuardsClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/thigh_guards/classic.rsi
+
+- type: entity
+  parent: WFRMCShinGuards
+  id: WFRMCLookShinGuardsJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/jungle.rsi
+
+- type: entity
+  parent: WFRMCShinGuards
+  id: WFRMCLookShinGuardsDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/desert.rsi
+
+- type: entity
+  parent: WFRMCShinGuards
+  id: WFRMCLookShinGuardsSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/snow.rsi
+
+- type: entity
+  parent: WFRMCShinGuards
+  id: WFRMCLookShinGuardsUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/urban.rsi
+
+- type: entity
+  parent: WFRMCShinGuards
+  id: WFRMCLookShinGuardsClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/shin_guards/classic.rsi
+
+- type: entity
+  parent: WFRMCGroinPlate
+  id: WFRMCLookGroinPlateJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/jungle.rsi
+
+- type: entity
+  parent: WFRMCGroinPlate
+  id: WFRMCLookGroinPlateDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/desert.rsi
+
+- type: entity
+  parent: WFRMCGroinPlate
+  id: WFRMCLookGroinPlateSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/snow.rsi
+
+- type: entity
+  parent: WFRMCGroinPlate
+  id: WFRMCLookGroinPlateClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Neck/groin_plate/classic.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineMedic
+  id: WFRMCLookBackpackMarineMedicJungleDesertClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_medic/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_medic/jungle-desert-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_medic/jungle-desert-classic.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineMedic
+  id: WFRMCLookBackpackMarineMedicSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_medic/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_medic/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_medic/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineTech
+  id: WFRMCLookBackpackMarineTechJungleDesertClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_tech/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_tech/jungle-desert-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_tech/jungle-desert-classic.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineTech
+  id: WFRMCLookBackpackMarineTechSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_tech/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_tech/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_tech/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineWelder
+  id: WFRMCLookBackpackMarineWelderJungleDesertClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_welder/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_welder/jungle-desert-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_welder/jungle-desert-classic.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineWelder
+  id: WFRMCLookBackpackMarineWelderSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_welder/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_welder/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_welder/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineRadio
+  id: WFRMCLookBackpackMarineRadioJungleDesertClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_radio/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_radio/jungle-desert-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_radio/jungle-desert-classic.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineRadio
+  id: WFRMCLookBackpackMarineRadioSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_radio/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_radio/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_radio/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineMortar
+  id: WFRMCLookBackpackMarineMortarJungleDesertClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_mortar/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_mortar/jungle-desert-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_mortar/jungle-desert-classic.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarineMortar
+  id: WFRMCLookBackpackMarineMortarSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_mortar/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_mortar/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine_mortar/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCSatchelMarineLarge
+  id: WFRMCLookSatchelMarineLargeJungleDesertClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_large/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_large/jungle-desert-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_large/jungle-desert-classic.rsi
+
+- type: entity
+  parent: WFRMCSatchelMarineLarge
+  id: WFRMCLookSatchelMarineLargeSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_large/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_large/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_large/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCSatchelMarineMedic
+  id: WFRMCLookSatchelMarineMedicJungleDesertClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_medic/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_medic/jungle-desert-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_medic/jungle-desert-classic.rsi
+
+- type: entity
+  parent: WFRMCSatchelMarineMedic
+  id: WFRMCLookSatchelMarineMedicSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_medic/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_medic/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine_medic/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCChestRigIntel
+  id: WFRMCLookChestRigIntelDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_intel/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_intel/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_intel/desert.rsi
+
+- type: entity
+  parent: WFRMCChestRigIntel
+  id: WFRMCLookChestRigIntelSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_intel/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_intel/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/chest_rig_intel/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarine
+  id: WFRMCLookBackpackMarineJungleDesertClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine/jungle-desert-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine/jungle-desert-classic.rsi
+
+- type: entity
+  parent: WFRMCBackpackMarine
+  id: WFRMCLookBackpackMarineSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_marine/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCSatchelMarine
+  id: WFRMCLookSatchelMarineJungleDesertClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine/jungle-desert-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine/jungle-desert-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine/jungle-desert-classic.rsi
+
+- type: entity
+  parent: WFRMCSatchelMarine
+  id: WFRMCLookSatchelMarineSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/satchel_marine/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBackpackSmock
+  id: WFRMCLookBackpackSmockJungleClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/jungle-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/jungle-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/jungle-classic.rsi
+
+- type: entity
+  parent: WFRMCBackpackSmock
+  id: WFRMCLookBackpackSmockSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/snow.rsi
+
+- type: entity
+  parent: WFRMCBackpackSmock
+  id: WFRMCLookBackpackSmockUrbanDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/urban-desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/urban-desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Back/backpack_smock/urban-desert.rsi
+
+- type: entity
+  parent: WFRMCBeltMarine
+  id: WFRMCLookBeltMarineDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_marine/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_marine/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_marine/desert.rsi
+
+- type: entity
+  parent: WFRMCBeltMarine
+  id: WFRMCLookBeltMarineJungleClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_marine/jungle-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_marine/jungle-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_marine/jungle-classic.rsi
+
+- type: entity
+  parent: WFRMCBeltMarine
+  id: WFRMCLookBeltMarineSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_marine/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_marine/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_marine/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBeltSparePouch
+  id: WFRMCLookBeltSparePouchDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_spare_pouch/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_spare_pouch/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_spare_pouch/desert.rsi
+
+- type: entity
+  parent: WFRMCBeltSparePouch
+  id: WFRMCLookBeltSparePouchJungleClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_spare_pouch/jungle-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_spare_pouch/jungle-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_spare_pouch/jungle-classic.rsi
+
+- type: entity
+  parent: WFRMCBeltSparePouch
+  id: WFRMCLookBeltSparePouchSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_spare_pouch/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_spare_pouch/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_spare_pouch/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBeltMedicBag
+  id: WFRMCLookBeltMedicBagDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_medic_bag/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_medic_bag/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_medic_bag/desert.rsi
+
+- type: entity
+  parent: WFRMCBeltMedicBag
+  id: WFRMCLookBeltMedicBagJungleClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_medic_bag/jungle-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_medic_bag/jungle-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_medic_bag/jungle-classic.rsi
+
+- type: entity
+  parent: WFRMCBeltMedicBag
+  id: WFRMCLookBeltMedicBagSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_medic_bag/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_medic_bag/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_medic_bag/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBeltMortar
+  id: WFRMCLookBeltMortarDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_mortar/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_mortar/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_mortar/desert.rsi
+
+- type: entity
+  parent: WFRMCBeltMortar
+  id: WFRMCLookBeltMortarJungleClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_mortar/jungle-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_mortar/jungle-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_mortar/jungle-classic.rsi
+
+- type: entity
+  parent: WFRMCBeltMortar
+  id: WFRMCLookBeltMortarSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_mortar/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_mortar/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_mortar/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBeltHeavyGunner
+  id: WFRMCLookBeltHeavyGunnerDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_heavy_gunner/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_heavy_gunner/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_heavy_gunner/desert.rsi
+
+- type: entity
+  parent: WFRMCBeltHeavyGunner
+  id: WFRMCLookBeltHeavyGunnerJungleClassic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_heavy_gunner/jungle-classic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_heavy_gunner/jungle-classic.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_heavy_gunner/jungle-classic.rsi
+
+- type: entity
+  parent: WFRMCBeltHeavyGunner
+  id: WFRMCLookBeltHeavyGunnerSnowUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_heavy_gunner/snow-urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_heavy_gunner/snow-urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_heavy_gunner/snow-urban.rsi
+
+- type: entity
+  parent: WFRMCBeltHolster
+  id: WFRMCLookBeltHolsterClassicJungle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/classic-jungle.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/classic-jungle.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/classic-jungle.rsi
+
+- type: entity
+  parent: WFRMCBeltHolster
+  id: WFRMCLookBeltHolsterDesert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/desert.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/desert.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/desert.rsi
+
+- type: entity
+  parent: WFRMCBeltHolster
+  id: WFRMCLookBeltHolsterSnow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/snow.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/snow.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/snow.rsi
+
+- type: entity
+  parent: WFRMCBeltHolster
+  id: WFRMCLookBeltHolsterUrban
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/urban.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/urban.rsi
+  - type: Item
+    sprite: _WF/RMCClothing/Clothing/Belt/belt_holster/urban.rsi

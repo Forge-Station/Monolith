@@ -110,13 +110,10 @@ public sealed partial class NcContractSystem : EntitySystem
             maxUnits <= 0)
             return 0;
 
-        if (!TryComp(candidateEntity, out SolutionContainerManagerComponent? manager))
-            return 0;
-
         if (IsAnySolutionName(solutionName))
         {
             var available = FixedPoint2.Zero;
-            foreach (var (_, solutionEnt) in _solutions.EnumerateSolutions((candidateEntity, manager), false))
+            foreach (var (_, solutionEnt) in _solutions.EnumerateSolutions(candidateEntity, false))
             {
                 available += solutionEnt.Comp.Solution.GetTotalPrototypeQuantity(reagentId);
                 if (CountReagentUnits(available, requiredAmount) >= maxUnits)
@@ -126,7 +123,7 @@ public sealed partial class NcContractSystem : EntitySystem
             return CountReagentUnits(available, requiredAmount);
         }
 
-        if (!_solutions.TryGetSolution((candidateEntity, manager), solutionName, out _, out var solution))
+        if (!_solutions.TryGetSolution(candidateEntity, solutionName, out _, out var solution))
             return 0;
 
         return Math.Min(

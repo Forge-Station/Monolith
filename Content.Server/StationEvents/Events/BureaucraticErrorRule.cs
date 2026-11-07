@@ -1,3 +1,4 @@
+using Content.Shared.Station.Components;
 using System.Linq;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -12,7 +13,7 @@ namespace Content.Server.StationEvents.Events;
 [UsedImplicitly]
 public sealed partial class BureaucraticErrorRule : StationEventSystem<BureaucraticErrorRuleComponent>
 {
-    [Dependency] private StationJobsSystem _stationJobs = default!;
+    [Dependency] private ServerStationJobsSystem _stationJobs = default!;
 
     protected override void Started(EntityUid uid, BureaucraticErrorRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {

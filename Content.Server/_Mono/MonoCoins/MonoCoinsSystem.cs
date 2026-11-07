@@ -23,7 +23,7 @@ public sealed class MonoCoinsSystem : EntitySystem
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private readonly ServerStationSystem _stationSystem = default!;
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
 
     private const int RoundEndReward = 10;

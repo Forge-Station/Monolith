@@ -1,6 +1,8 @@
+using Content.Shared.GameTicking;
 using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._Forge.CCVars;
 using Content.Shared.Ghost;
 using Robust.Server.Player;
@@ -19,7 +21,7 @@ namespace Content.Server._Forge.AutoKick;
 public sealed class AutoKickSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly ServerGameTicker _gameTicker = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IServerNetManager _net = default!;
     [Dependency] private readonly IPlayerManager _players = default!;

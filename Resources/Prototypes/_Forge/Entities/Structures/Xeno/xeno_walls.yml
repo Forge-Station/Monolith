@@ -9,12 +9,15 @@
   suffix: Forge, Xeno, Chitin
   components:
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: Structures/Walls/exo.rsi
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: Structures/Walls/exo.rsi
   - type: IconSmooth
     key: chitin
-    base: solid
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ chitin ]
+      base: solid
   - type: RangedDamageSound
     soundGroups:
       Brute:
@@ -44,7 +47,10 @@
     state: resin
   - type: IconSmooth
     key: xeno_resin
-    base: resin
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ xeno_resin ]
+      base: resin
   - type: Destructible
     thresholds:
     - trigger:
@@ -80,7 +86,10 @@
     state: thickresin
   - type: IconSmooth
     key: xeno_resin
-    base: thickresin
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ xeno_resin ]
+      base: thickresin
   - type: Destructible
     thresholds:
     - trigger:
@@ -109,7 +118,10 @@
     state: membrane
   - type: IconSmooth
     key: xeno_resin
-    base: membrane
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ xeno_resin ]
+      base: membrane
   - type: Occluder
     enabled: false
   - type: Fixtures
@@ -149,7 +161,10 @@
     state: thickmembrane
   - type: IconSmooth
     key: xeno_resin
-    base: thickmembrane
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ xeno_resin ]
+      base: thickmembrane
   - type: Destructible
     thresholds:
     - trigger:

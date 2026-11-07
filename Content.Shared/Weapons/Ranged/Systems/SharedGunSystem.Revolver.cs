@@ -618,7 +618,7 @@ public partial class SharedGunSystem
                 if (ent.Comp.FillPrototype == null)
                     return;
 
-                ProtoManager.TryIndex(ent.Comp.FillPrototype, out var proto);
+                ProtoMan.TryIndex(ent.Comp.FillPrototype, out var proto);
                 args.ShootPrototype = proto;
                 return;
             }

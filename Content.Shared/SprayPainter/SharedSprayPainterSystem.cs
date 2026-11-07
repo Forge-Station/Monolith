@@ -44,7 +44,6 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
     [Dependency] protected SharedChargesSystem Charges = default!;
     [Dependency] protected SharedDoAfterSystem DoAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedSolutionContainerSystem _solutions = default!;
 
     public override void Initialize()
@@ -76,7 +75,7 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
     private void OnMapInit(Entity<SprayPainterComponent> ent, ref MapInitEvent args)
     {
         bool stylesByGroupPopulated = false;
-        foreach (var groupProto in _protoMan.EnumeratePrototypes<PaintableGroupPrototype>())
+        foreach (var groupProto in ProtoMan.EnumeratePrototypes<PaintableGroupPrototype>())
         {
             ent.Comp.StylesByGroup[groupProto.ID] = groupProto.DefaultStyle;
             stylesByGroupPopulated = true;
@@ -209,7 +208,7 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
 
         if (ent.Comp.Group is not { } group
             || !painter.StylesByGroup.TryGetValue(group, out var selectedStyle)
-            || !_protoMan.Resolve(group, out PaintableGroupPrototype? targetGroup))
+            || !ProtoMan.Resolve(group, out PaintableGroupPrototype? targetGroup))
             return;
 
         // Valid paint target.
@@ -299,7 +298,7 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
             return;
         }
 
-        if (!_solutions.RemoveReagent(soln.Value, washReagent, WashCost))
+        if (_solutions.RemoveReagent(soln.Value, washReagent, WashCost) <= FixedPoint2.Zero)
             return;
 
         // Force visualizers to re-apply the entity's own prototype so the painted RSI is undone.

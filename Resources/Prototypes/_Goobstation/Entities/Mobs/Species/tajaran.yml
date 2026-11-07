@@ -4,9 +4,12 @@
   id: BaseMobTajaran
   abstract: true
   components:
-  - type: Hunger
-    baseDecayRate: 0.02083333332 # 25% more than default #Mono its not actually 25% but about 15.74%, 0.0225 would be 25% more than base
-  - type: Thirst
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: TajaranHunger
+      Thirst:
+        prototype: NormalSatiationThirst
   - type: Sprite
     scale: 0.8, 0.8
   - type: HumanoidAppearance

@@ -1,3 +1,7 @@
+using Content.Shared.GameTicking;
+using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
@@ -17,7 +21,7 @@ public sealed partial class SurvivorRuleSystem : GameRuleSystem<SurvivorRuleComp
 {
     [Dependency] private RoleSystem _role = default!;
     [Dependency] private MindSystem _mind = default!;
-    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private ServerAntagSelectionSystem _antag = default!;
     [Dependency] private TransformSystem _xform = default!;
     [Dependency] private EmergencyShuttleSystem _eShuttle = default!;
     [Dependency] private TagSystem _tag = default!;
@@ -61,12 +65,10 @@ public sealed partial class SurvivorRuleSystem : GameRuleSystem<SurvivorRuleComp
         args.Append(Loc.GetString("survivor-role-greeting"));
     }
 
-    protected override void AppendRoundEndText(EntityUid uid,
-        SurvivorRuleComponent component,
-        GameRuleComponent gameRule,
+    protected override void AppendRoundEndText(Entity<SurvivorRuleComponent> rule,
         ref RoundEndTextAppendEvent args)
     {
-        base.AppendRoundEndText(uid, component, gameRule, ref args);
+        base.AppendRoundEndText(rule, ref args);
 
         // Using this instead of alive antagonists to make checking for shuttle & if the ent is alive easier
         var existingSurvivors = AllEntityQuery<SurvivorComponent, MindComponent>();

@@ -167,7 +167,8 @@
     deviceNetId: Wired
     receiveFrequencyId: MailingUnit
     transmitFrequencyId: MailingUnit
-  - type: WiredNetworkConnection
+  - type: WiredNetwork
+  - type: DeviceNetworkRequiresPower
   - type: Configuration
     config:
       tag:

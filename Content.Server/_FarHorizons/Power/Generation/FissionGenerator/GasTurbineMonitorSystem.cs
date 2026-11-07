@@ -162,7 +162,7 @@ public sealed partial class GasTurbineMonitorSystem : EntitySystem
 
         _uiSystem.CloseUi(uid, TurbineUiKey.Key);
         comp.turbine = null;
-        _signal.RemoveSinkFromSource(uidTurbine.Value, uid, source, sink);
+        _signal.RemoveSinkFromSource(uidTurbine.Value, uid);
         Dirty(uid, comp);
     }
 }

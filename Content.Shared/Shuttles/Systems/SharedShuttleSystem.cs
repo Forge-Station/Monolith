@@ -29,18 +29,14 @@ public abstract partial class SharedShuttleSystem : EntitySystem
     public const float FTLBufferRange = 20f;
     public const float TileDensityMultiplier = 0.5f; /// Forge-Change
 
-    private EntityQuery<MapGridComponent> _gridQuery;
-    private EntityQuery<PhysicsComponent> _physicsQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
-
+    [Dependency] private readonly EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
     private List<Entity<MapGridComponent>> _grids = new();
 
     public override void Initialize()
     {
         base.Initialize();
-        _gridQuery = GetEntityQuery<MapGridComponent>();
-        _physicsQuery = GetEntityQuery<PhysicsComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
     }
 
     /// <summary>
@@ -252,6 +248,12 @@ public abstract partial class SharedShuttleSystem : EntitySystem
         if (!_physicsQuery.TryGetComponent(shuttleUid, out var shuttlePhysics) ||
             !_xformQuery.TryGetComponent(shuttleUid, out var shuttleXform))
         {
+            return false;
+        }
+
+        if (!coordinates.IsValid(EntityManager) || !double.IsFinite(angle.Theta))
+        {
+            Log.Error($"Found invalid FTL destination with coordinates {coordinates} and angle {angle} for shuttle {shuttleUid}");
             return false;
         }
 

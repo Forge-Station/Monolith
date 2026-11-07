@@ -50,6 +50,7 @@ public sealed partial class ClientClothingSystem : ClothingSystem
     };
 
     [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private ISerializationManager _seriMan = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private DisplacementMapSystem _displacement = default!;
 
@@ -130,7 +131,11 @@ public sealed partial class ClientClothingSystem : ClothingSystem
             }
 
             item.MappedLayer = key;
-            args.Layers.Add((key, layer));
+
+            // Copy the layer so later species/slot edits do not mutate the prototype data.
+            PrototypeLayerData newLayer = new();
+            _seriMan.CopyTo(layer, ref newLayer, notNullableOverride: true);
+            args.Layers.Add((key, newLayer));
         }
     }
 

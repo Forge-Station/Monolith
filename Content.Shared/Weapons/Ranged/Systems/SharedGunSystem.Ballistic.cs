@@ -355,7 +355,7 @@ public abstract partial class SharedGunSystem
         }
         else if (ent.Comp.UnspawnedCount > 0 || ent.Comp.InfiniteUnspawned)
         {
-            ProtoManager.TryIndex(ent.Comp.Proto, out var proto);
+            ProtoMan.TryIndex(ent.Comp.Proto, out var proto);
             args.ShootPrototype = proto;
         }
     }

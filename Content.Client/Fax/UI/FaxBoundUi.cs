@@ -1,8 +1,7 @@
 using System.IO;
-using System.Threading.Tasks;
+using Content.Shared.DeviceNetwork;
 using Content.Shared.Fax;
 using JetBrains.Annotations;
-using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 
 namespace Content.Client.Fax.UI;
@@ -30,9 +29,19 @@ public sealed partial class FaxBoundUi : BoundUserInterface
         _window.CopyButtonPressed += OnCopyButtonPressed;
         _window.SendButtonPressed += OnSendButtonPressed;
         _window.RefreshButtonPressed += OnRefreshButtonPressed;
+        _window.PeerSelected += OnPeerSelected;
         _window.TakeNormalPaperPressed += OnTakeNormalPaperPressed;
         _window.TakeOfficePaperPressed += OnTakeOfficePaperPressed;
-        _window.PeerSelected += OnPeerSelected;
+    }
+
+    private void OnTakeNormalPaperPressed()
+    {
+        SendMessage(new FaxTakeNormalPaperMessage());
+    }
+
+    private void OnTakeOfficePaperPressed()
+    {
+        SendMessage(new FaxTakeOfficePaperMessage());
     }
 
     private async void OnFileButtonPressed()
@@ -42,7 +51,7 @@ public sealed partial class FaxBoundUi : BoundUserInterface
 
         _dialogIsOpen = true;
         var filters = new FileDialogFilters(new FileDialogFilters.Group("txt"));
-        await using var file = await _fileDialogManager.OpenFile(filters);
+        await using var file = await _fileDialogManager.OpenFile(filters, FileAccess.Read);
         _dialogIsOpen = false;
 
         if (_window == null || _window.Disposed || file == null)
@@ -89,17 +98,7 @@ public sealed partial class FaxBoundUi : BoundUserInterface
         SendMessage(new FaxRefreshMessage());
     }
 
-    private void OnTakeNormalPaperPressed()
-    {
-        SendMessage(new FaxTakeNormalPaperMessage());
-    }
-
-    private void OnTakeOfficePaperPressed()
-    {
-        SendMessage(new FaxTakeOfficePaperMessage());
-    }
-
-    private void OnPeerSelected(string address)
+    private void OnPeerSelected(DeviceAddress address)
     {
         SendMessage(new FaxDestinationMessage(address));
     }

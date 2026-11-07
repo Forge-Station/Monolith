@@ -11,7 +11,7 @@ public sealed partial class StationBiomeSystem : EntitySystem
     [Dependency] private BiomeSystem _biome = default!;
     [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
 
     public override void Initialize()
     {

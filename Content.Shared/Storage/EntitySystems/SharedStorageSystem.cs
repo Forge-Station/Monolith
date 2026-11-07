@@ -23,7 +23,8 @@ using Content.Shared.Placeable;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Storage.Components;
-using Content.Shared.Timing;
+using Content.Shared.Tag;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Storage.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
@@ -40,6 +41,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.Timing.Components;
 
 namespace Content.Shared.Storage.EntitySystems;
 
@@ -47,7 +49,6 @@ public abstract partial class SharedStorageSystem : EntitySystem
 {
     [Dependency] private   IConfigurationManager _cfg = default!;
     [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] private   IPrototypeManager _prototype = default!;
     [Dependency] protected IRobustRandom Random = default!;
     [Dependency] private   ISharedAdminLogManager _adminLog = default!;
 
@@ -69,10 +70,10 @@ public abstract partial class SharedStorageSystem : EntitySystem
     [Dependency] protected SharedUserInterfaceSystem UI = default!;
     [Dependency] protected UseDelaySystem UseDelay = default!;
 
-    private EntityQuery<ItemComponent> _itemQuery;
-    private EntityQuery<StackComponent> _stackQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
-    private EntityQuery<UserInterfaceUserComponent> _userQuery;
+    [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
+    [Dependency] private readonly EntityQuery<StackComponent> _stackQuery = default!;
+    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
+    [Dependency] private readonly EntityQuery<UserInterfaceUserComponent> _userQuery = default!;
 
     /// <summary>
     /// Whether we're allowed to go up-down storage via UI.
@@ -116,11 +117,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
     {
         base.Initialize();
 
-        _itemQuery = GetEntityQuery<ItemComponent>();
-        _stackQuery = GetEntityQuery<StackComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
-        _userQuery = GetEntityQuery<UserInterfaceUserComponent>();
-        _prototype.PrototypesReloaded += OnPrototypesReloaded;
+        ProtoMan.PrototypesReloaded += OnPrototypesReloaded;
 
         Subs.CVar(_cfg, CCVars.StorageLimit, OnStorageLimitChanged, true);
 
@@ -220,7 +217,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
 
     public override void Shutdown()
     {
-        _prototype.PrototypesReloaded -= OnPrototypesReloaded;
+        ProtoMan.PrototypesReloaded -= OnPrototypesReloaded;
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
@@ -234,9 +231,9 @@ public abstract partial class SharedStorageSystem : EntitySystem
 
     private void UpdatePrototypeCache()
     {
-        _defaultStorageMaxItemSize = _prototype.Index<ItemSizePrototype>(DefaultStorageMaxItemSize);
+        _defaultStorageMaxItemSize = ProtoMan.Index<ItemSizePrototype>(DefaultStorageMaxItemSize);
         _sortedSizes.Clear();
-        _sortedSizes.AddRange(_prototype.EnumeratePrototypes<ItemSizePrototype>());
+        _sortedSizes.AddRange(ProtoMan.EnumeratePrototypes<ItemSizePrototype>());
         _sortedSizes.Sort();
 
         var nextSmallest = new KeyValuePair<string, ItemSizePrototype>[_sortedSizes.Count];
@@ -538,7 +535,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
             {
                 if (entity == args.User
                     || !_itemQuery.TryGetComponent(entity, out var itemComp) // Need comp to get item size to get weight
-                    || !_prototype.TryIndex(itemComp.Size, out var itemSize)
+                    || !ProtoMan.TryIndex(itemComp.Size, out var itemSize)
                     || !CanInsert(uid, entity, out _, storageComp, item: itemComp)
                     || !_interactionSystem.InRangeUnobstructed(args.User, entity))
                 {
@@ -1583,7 +1580,7 @@ public abstract partial class SharedStorageSystem : EntitySystem
         // If we specify a max item size, use that
         if (uid.Comp.MaxItemSize != null)
         {
-            if (_prototype.TryIndex(uid.Comp.MaxItemSize.Value, out var proto))
+            if (ProtoMan.TryIndex(uid.Comp.MaxItemSize.Value, out var proto))
                 return proto;
 
             Log.Error($"{ToPrettyString(uid.Owner)} tried to get invalid item size prototype: {uid.Comp.MaxItemSize.Value}. Stack trace:\\n{Environment.StackTrace}");

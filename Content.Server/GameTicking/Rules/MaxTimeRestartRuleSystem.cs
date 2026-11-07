@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using System.Threading;
 using Content.Server.Chat.Managers;
 using Content.Server.RoundEnd; // Forge-Change
@@ -26,13 +27,14 @@ public sealed partial class MaxTimeRestartRuleSystem : GameRuleSystem<MaxTimeRes
     {
         base.Started(uid, component, gameRule, args);
 
-        if(GameTicker.RunLevel == GameRunLevel.InRound)
+        if(ServerGameTicker.RunLevel == GameRunLevel.InRound)
             RestartTimer(component);
     }
 
-    protected override void Ended(EntityUid uid, MaxTimeRestartRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    protected override void Ended(Entity<MaxTimeRestartRuleComponent> rule, ref GameRuleEndedEvent args)
     {
-        base.Ended(uid, component, gameRule, args);
+        base.Ended(rule, ref args);
+        var component = rule.Comp;
 
         StopTimer(component);
     }
@@ -65,7 +67,7 @@ public sealed partial class MaxTimeRestartRuleSystem : GameRuleSystem<MaxTimeRes
     // Forge-Change-start
     private void TimerFired(MaxTimeRestartRuleComponent component)
     {
-        if (GameTicker.RunLevel != GameRunLevel.InRound)
+        if (ServerGameTicker.RunLevel != GameRunLevel.InRound)
         {
             RestartTimer(component);
             return;
@@ -79,7 +81,7 @@ public sealed partial class MaxTimeRestartRuleSystem : GameRuleSystem<MaxTimeRes
 
     private void BeginPostRound(MaxTimeRestartRuleComponent component)
     {
-        if (GameTicker.RunLevel != GameRunLevel.InRound)
+        if (ServerGameTicker.RunLevel != GameRunLevel.InRound)
             return;
 
         _roundEnd.EndRound(component.PostRoundDuration);
@@ -87,14 +89,14 @@ public sealed partial class MaxTimeRestartRuleSystem : GameRuleSystem<MaxTimeRes
 
     private void LegacyTimerFired(MaxTimeRestartRuleComponent component)
     {
-        if (GameTicker.RunLevel != GameRunLevel.InRound)
+        if (ServerGameTicker.RunLevel != GameRunLevel.InRound)
             return;
 
-        GameTicker.EndRound(Loc.GetString("rule-time-has-run-out"));
+        ServerGameTicker.EndRound(Loc.GetString("rule-time-has-run-out"));
         var delay = component.RoundEndDelay == TimeSpan.Zero ? component.PostRoundDuration : component.RoundEndDelay;
         _chatManager.DispatchServerAnnouncement(Loc.GetString("rule-restarting-in-seconds", ("seconds", (int) delay.TotalSeconds)));
         // Do not pass TimerCancel: RunLevelChanged(PostRound) calls StopTimer and would cancel RestartRound.
-        Timer.Spawn(delay, () => GameTicker.RestartRound());
+        Timer.Spawn(delay, () => ServerGameTicker.RestartRound());
     }
 
     /// <summary>
@@ -147,7 +149,7 @@ public sealed partial class MaxTimeRestartRuleSystem : GameRuleSystem<MaxTimeRes
         var query = EntityQueryEnumerator<MaxTimeRestartRuleComponent, GameRuleComponent>();
         while (query.MoveNext(out var uid, out var timer, out var gameRule))
         {
-            if (!GameTicker.IsGameRuleActive(uid, gameRule))
+            if (!ServerGameTicker.IsGameRuleActive(uid, gameRule))
                 continue; // Forge-Change
 
             switch (args.New)

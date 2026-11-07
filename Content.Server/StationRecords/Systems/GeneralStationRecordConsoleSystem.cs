@@ -1,3 +1,4 @@
+using Content.Shared.Station.Components;
 using System.Linq;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords.Components;
@@ -17,9 +18,9 @@ namespace Content.Server.StationRecords.Systems;
 public sealed partial class GeneralStationRecordConsoleSystem : EntitySystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private StationRecordsSystem _stationRecords = default!;
-    [Dependency] private StationJobsSystem _stationJobsSystem = default!; // Frontier
+    [Dependency] private ServerStationJobsSystem _stationJobsSystem = default!; // Frontier
     [Dependency] private AccessReaderSystem _access = default!; // Frontier
     [Dependency] private IPrototypeManager _proto = default!; // Frontier
     [Dependency] private IAdminLogManager _adminLog = default!; // Frontier

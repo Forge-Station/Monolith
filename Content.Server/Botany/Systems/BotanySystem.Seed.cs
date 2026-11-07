@@ -453,10 +453,8 @@ public sealed partial class BotanySystem : EntitySystem
 
     private void FillHarvestSolution(EntityUid uid, string solutionName, SeedData proto, int maxVol)
     {
-        if (!_solutionContainerSystem.EnsureSolutionEntity(uid, solutionName, out var solEnt) || solEnt == null)
-            return;
-
-        var sol = solEnt.Value.Comp.Solution;
+        _solutionContainerSystem.EnsureSolution(uid, solutionName, out var solEnt);
+        var sol = solEnt.Comp.Solution;
         sol.RemoveAllSolution();
         sol.MaxVolume = maxVol;
         var remaining = FixedPoint2.New(maxVol);
@@ -473,7 +471,7 @@ public sealed partial class BotanySystem : EntitySystem
             remaining -= amount;
         }
 
-        _solutionContainerSystem.UpdateChemicals(solEnt.Value);
+        _solutionContainerSystem.UpdateChemicals(solEnt);
     }
 
     private static Color GetPlantTint(SeedData seed)

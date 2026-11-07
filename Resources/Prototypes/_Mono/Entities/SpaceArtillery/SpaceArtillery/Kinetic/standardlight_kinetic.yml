@@ -20,7 +20,7 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
@@ -108,7 +108,7 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
@@ -195,7 +195,7 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
@@ -263,7 +263,7 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:

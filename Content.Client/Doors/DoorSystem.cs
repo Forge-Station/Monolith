@@ -1,38 +1,65 @@
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
-using Content.Shared.SprayPainter.Prototypes; /// Forge-Chane
+using Content.Shared.SprayPainter.Prototypes;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
-using Robust.Shared.Prototypes; /// Forge-Chane
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Doors;
 
 public sealed partial class DoorSystem : SharedDoorSystem
 {
     [Dependency] private AnimationPlayerSystem _animationSystem = default!;
-    // [Dependency] private IResourceCache _resourceCache = default!; /// Forge-Chane-Del
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SpriteSystem _sprite = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!; /// Forge-Chane
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<DoorComponent, AppearanceChangeEvent>(OnAppearanceChange);
-        SubscribeLocalEvent<DoorComponent, AnimationCompletedEvent>(OnAnimationCompleted); /// Forge-Chane
+        SubscribeLocalEvent<DoorComponent, AnimationCompletedEvent>(OnAnimationCompleted);
+    }
+
+    private void OnAnimationCompleted(Entity<DoorComponent> entity, ref AnimationCompletedEvent args)
+    {
+        if (args.Key != DoorComponent.OpenKey && args.Key != DoorComponent.CloseKey)
+            return;
+
+        if (!TryComp<SpriteComponent>(entity, out var sprite)) // Starlight
+            return;
+
+        switch (entity.Comp.State)
+        {
+            case DoorState.Open:
+                foreach (var (layer, layerState) in entity.Comp.OpenSpriteStates)
+                {
+                    _sprite.LayerSetRsiState((entity.Owner, sprite), layer, layerState);
+                }
+
+                break;
+            case DoorState.Closed:
+                foreach (var (layer, layerState) in entity.Comp.ClosedSpriteStates)
+                {
+                    _sprite.LayerSetRsiState((entity.Owner, sprite), layer, layerState);
+                }
+
+                break;
+        }
     }
 
     protected override void OnComponentInit(Entity<DoorComponent> ent, ref ComponentInit args)
     {
         var comp = ent.Comp;
-        comp.OpenSpriteStates = new List<(Enum, string)>(2);    /// Forge-Chane
-        comp.ClosedSpriteStates = new List<(Enum, string)>(2);  /// Forge-Chane
+        comp.OpenSpriteStates = new List<(Enum, string)>(2);    /// Forge-Change
+        comp.ClosedSpriteStates = new List<(Enum, string)>(2);  /// Forge-Change
 
         comp.OpenSpriteStates.Add((DoorVisualLayers.Base, comp.OpenSpriteState));
         comp.ClosedSpriteStates.Add((DoorVisualLayers.Base, comp.ClosedSpriteState));
 
         comp.OpeningAnimation = new Animation
         {
-            Length = comp.OpeningAnimationTime, /// Forge-Chane
+            Length = comp.OpeningAnimationTime, /// Forge-Change
             AnimationTracks =
             {
                 new AnimationTrackSpriteFlick
@@ -48,7 +75,7 @@ public sealed partial class DoorSystem : SharedDoorSystem
 
         comp.ClosingAnimation = new Animation
         {
-            Length = comp.ClosingAnimationTime, /// Forge-Chane
+            Length = comp.ClosingAnimationTime, /// Forge-Change
             AnimationTracks =
             {
                 new AnimationTrackSpriteFlick
@@ -64,7 +91,7 @@ public sealed partial class DoorSystem : SharedDoorSystem
 
         comp.EmaggingAnimation = new Animation
         {
-            Length = comp.EmaggingAnimationTime, /// Forge-Chane
+            Length = comp.EmaggingAnimationTime, /// Forge-Change
             AnimationTracks =
             {
                 new AnimationTrackSpriteFlick
@@ -79,41 +106,6 @@ public sealed partial class DoorSystem : SharedDoorSystem
         };
     }
 
-    /// Forge-Chane-Start
-    private void OnAnimationCompleted(Entity<DoorComponent> ent, ref AnimationCompletedEvent args)
-    {
-        if (args.Key != DoorComponent.OpenKey && args.Key != DoorComponent.CloseKey)
-            return;
-
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        switch (ent.Comp.State)
-        {
-            case DoorState.Open:
-                foreach (var (layer, layerState) in ent.Comp.OpenSpriteStates)
-                {
-                    if (!_sprite.TryGetLayer(ent.Owner, layer, out _, false))
-                        continue;
-
-                    _sprite.LayerSetRsiState((ent.Owner, sprite), layer, layerState);
-                }
-
-                break;
-            case DoorState.Closed:
-                foreach (var (layer, layerState) in ent.Comp.ClosedSpriteStates)
-                {
-                    if (!_sprite.TryGetLayer(ent.Owner, layer, out _, false))
-                        continue;
-
-                    _sprite.LayerSetRsiState((ent.Owner, sprite), layer, layerState);
-                }
-
-                break;
-        }
-    }
-    /// Forge-Chane-End
-
     private void OnAppearanceChange(Entity<DoorComponent> entity, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
@@ -122,8 +114,14 @@ public sealed partial class DoorSystem : SharedDoorSystem
         if (!AppearanceSystem.TryGetData<DoorState>(entity, DoorVisuals.State, out var state, args.Component))
             state = DoorState.Closed;
 
-        if (AppearanceSystem.TryGetData<string>(entity, PaintableVisuals.Prototype, out var prototype, args.Component)) /// Forge-Chane
-            UpdateSpriteLayers((entity.Owner, args.Sprite), prototype);                                                 /// Forge-Chane
+        if (AppearanceSystem.TryGetData<string>(entity, PaintableVisuals.Prototype, out var prototype, args.Component))
+            UpdateSpriteLayers((entity.Owner, args.Sprite), prototype);
+
+        // ES START
+        // dont stop all animations for no reason
+        //if (_animationSystem.HasRunningAnimation(entity, DoorComponent.AnimationKey))
+        //    _animationSystem.Stop(entity.Owner, DoorComponent.AnimationKey);
+        // ES END
 
         // We are checking beforehand since some doors may not have an emagging visual layer, and we don't want LayerSetVisible to throw an error.
         if (_sprite.TryGetLayer(entity.Owner, DoorVisualLayers.BaseEmagging, out var _, false))
@@ -139,15 +137,17 @@ public sealed partial class DoorSystem : SharedDoorSystem
         switch (state)
         {
             case DoorState.Open:
-                /// Forge-Chane-Start
                 if (_animationSystem.HasRunningAnimation(entity, DoorComponent.OpenKey))
                     return;
 
+                // Moffstation - Start - Don't stop animations
+                /*
                 if (_animationSystem.HasRunningAnimation(entity, DoorComponent.CloseKey))
                 {
                     _animationSystem.Stop(entity, null, DoorComponent.CloseKey);
                     _animationSystem.Play(entity, (Animation)entity.Comp.OpeningAnimation, DoorComponent.OpenKey);
                 }
+                */ // Moffstation - End
 
                 foreach (var (layer, layerState) in entity.Comp.OpenSpriteStates)
                 {
@@ -163,16 +163,18 @@ public sealed partial class DoorSystem : SharedDoorSystem
 
                 return;
             case DoorState.Closed:
-            /// Forge-Chane-Start
                 if (_animationSystem.HasRunningAnimation(entity, DoorComponent.CloseKey))
                     return;
 
+                // Moffstation - Start - Don't stop animations
+                /*
                 if (_animationSystem.HasRunningAnimation(entity, DoorComponent.OpenKey))
                 {
                     _animationSystem.Stop(entity, null, DoorComponent.OpenKey);
-                    _animationSystem.Play(entity, (Animation)entity.Comp.ClosingAnimation, DoorComponent.CloseKey);
+                    _animationSystem.Play(entity, (Animation)entity.Comp.OpeningAnimation, DoorComponent.OpenKey);
                 }
-            /// Forge-Chane-End
+                */ // Moffstation - End
+
                 foreach (var (layer, layerState) in entity.Comp.ClosedSpriteStates)
                 {
                     if (!_sprite.TryGetLayer(entity.Owner, layer, out _, false))
@@ -189,10 +191,9 @@ public sealed partial class DoorSystem : SharedDoorSystem
                     return;
 
                 if (_animationSystem.HasRunningAnimation(entity, DoorComponent.OpenKey))
-            /// Forge-Chane-End
                     return;
 
-                _animationSystem.Play(entity, (Animation)entity.Comp.OpeningAnimation, DoorComponent.OpenKey); /// Forge-Chane
+                _animationSystem.Play(entity, (Animation)entity.Comp.OpeningAnimation, DoorComponent.OpenKey);
 
                 return;
             case DoorState.Closing:
@@ -204,26 +205,24 @@ public sealed partial class DoorSystem : SharedDoorSystem
             /// Forge-Chane-End
                     return;
 
-                _animationSystem.Play(entity, (Animation)entity.Comp.ClosingAnimation, DoorComponent.CloseKey); /// Forge-Chane
+                if (_animationSystem.HasRunningAnimation(entity, DoorComponent.CloseKey))
+                    return;
+
+                _animationSystem.Play(entity, (Animation)entity.Comp.ClosingAnimation, DoorComponent.CloseKey);
 
                 return;
             case DoorState.Denying:
-            /// Forge-Chane-Start
                 if (_animationSystem.HasRunningAnimation(entity, DoorComponent.DenyKey))
                     return;
 
                 _animationSystem.Play(entity, (Animation)entity.Comp.DenyingAnimation, DoorComponent.DenyKey);
-            /// Forge-Chane-End
 
                 return;
             case DoorState.Emagging:
-            /// Forge-Chane-Start
                 if (_animationSystem.HasRunningAnimation(entity, DoorComponent.EmagKey))
                     return;
-            /// Forge-Chane-End
-                // We are checking beforehand since some doors may not have an emagging visual layer.
-                if (_sprite.TryGetLayer(entity.Owner, DoorVisualLayers.BaseEmagging, out var _, false))
-                    _animationSystem.Play(entity, (Animation)entity.Comp.EmaggingAnimation, DoorComponent.EmagKey); /// Forge-Chane
+
+                _animationSystem.Play(entity, (Animation)entity.Comp.EmaggingAnimation, DoorComponent.EmagKey);
 
                 return;
         }

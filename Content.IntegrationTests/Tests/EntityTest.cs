@@ -254,6 +254,18 @@ namespace Content.IntegrationTests.Tests
 
                 // makes an announcement on mapInit.
                 "AnnounceOnSpawn",
+
+                // Starlight start
+                "ReplaceOnInit",
+                // Most of the filled xenobiology slime cores intentionally spawn an entity
+                "FilledSlimeExtract",
+                "Loadout",
+                // Starlight end
+                // ES start
+                "ESTimedDespawn",
+                "ESSparkOnTrigger",
+                // ES end
+                "BluespaceLocker", // Moff Station
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);

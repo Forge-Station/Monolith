@@ -13,6 +13,7 @@ public sealed partial class ColorFlashEffectSystem : SharedColorFlashEffectSyste
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private AnimationPlayerSystem _animation = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     /// <summary>
     /// It's a little on the long side but given we use multiple colours denoting what happened it makes it easier to register.
@@ -44,7 +45,7 @@ public sealed partial class ColorFlashEffectSystem : SharedColorFlashEffectSyste
 
         if (TryComp<SpriteComponent>(uid, out var sprite))
         {
-            sprite.Color = component.Color;
+            _sprite.SetColor((uid, sprite), component.Color);
         }
     }
 

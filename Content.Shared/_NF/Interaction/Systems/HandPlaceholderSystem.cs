@@ -153,6 +153,6 @@ public sealed partial class HandPlaceholderSystem : EntitySystem
 
         _hands.DoPickup(user, hand, target, hands); // Force pickup - empty hands are not okay
         SetEnabled(target, true);
-        _interaction.DoContactInteraction(user, target); // allow for forensics and other systems to work (why does hands system not do this???)
+        _interaction.DoContactInteraction(user, target, null, true); // allow for forensics and other systems to work (why does hands system not do this???)
     }
 }

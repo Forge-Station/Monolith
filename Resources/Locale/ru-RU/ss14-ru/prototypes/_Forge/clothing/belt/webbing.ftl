@@ -20,3 +20,7 @@ ent-ClothingBeltWebbingsNormalViperGroup = РПС Viper Group
     .desc = Ременно-плечевая система тактических ремней.
 ent-ClothingBeltWebbingsBigViperGroup = большая РПС Viper Group
     .desc = Ременно-плечевая система тактических ремней в более крупном размере. 
+ent-ClothingBeltWebbingsNormalUi = РПС UI
+    .desc = Простая разгрузка для хранения снаряжение в быстром доступе. сделана в цветах Ullman Industries
+ent-ClothingBeltWebbingsBigUi = Большая РПС UI
+    .desc = Большая разгрузочная система сделанная в цветах Ullman Industries. В неё вместиться всё против федералов

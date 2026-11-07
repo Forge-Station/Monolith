@@ -412,6 +412,7 @@
   components:
   - type: VendingMachine
     pack: WinterDrobeInventory
+    requiresCash: true # Forge-change
     offState: off
     brokenState: broken
     normalState: normal-unshaded

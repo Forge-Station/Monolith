@@ -213,3 +213,10 @@ Entries:
   id: 20
   time: '2026-11-07T15:03:34.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/552
+- author: KoT-Corvax
+  changes:
+    - type: Add
+      message: Добавлен FSG100 - "Киль" в продажу вендомата БС приводов.
+  id: 21
+  time: '2026-11-07T15:07:10.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/560

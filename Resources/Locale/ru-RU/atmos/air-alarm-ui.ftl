@@ -1,3 +1,4 @@
+air-alarm-ui-window-title = Воздушная сигнализация
 # UI
 
 ## Window
@@ -15,8 +16,8 @@ air-alarm-ui-window-pressure = { $pressure } кПа
 air-alarm-ui-window-pressure-indicator = Давление: [color={ $color }]{ $pressure } кПа[/color]
 air-alarm-ui-window-temperature = { $tempC } °C ({ $temperature } К)
 air-alarm-ui-window-temperature-indicator = Температура: [color={ $color }]{ $tempC } °C ({ $temperature } К)[/color]
-air-alarm-ui-window-alarm-state = [color={ $color }]{ $state }[/color]
-air-alarm-ui-window-alarm-state-indicator = Статус: [color={ $color }]{ $state }[/color]
+air-alarm-ui-window-alarm-state = [color={ $color }]{ air-alarm-ui-state-name }[/color]
+air-alarm-ui-window-alarm-state-indicator = Статус: [color={ $color }]{ air-alarm-ui-state-name }[/color]
 air-alarm-ui-window-tab-vents = Вентиляции
 air-alarm-ui-window-tab-scrubbers = Скрубберы
 air-alarm-ui-window-tab-sensors = Сенсоры
@@ -62,13 +63,13 @@ air-alarm-ui-thresholds-upper-bound = Верхняя аварийная гран
 air-alarm-ui-thresholds-lower-bound = Нижняя аварийная граница
 air-alarm-ui-thresholds-upper-warning-bound = Верхняя тревожная граница
 air-alarm-ui-thresholds-lower-warning-bound = Нижняя тревожная граница
--air-alarm-state-name = { $state ->
-    [normal] Норма
-    [warning] Внимание
-    [danger] Опасно
-    [emagged] ВЗ#ОМА%Н0
-   *[invalid] Ошибка
+air-alarm-ui-state-name = { $state ->
+    [Normal] Норма
+    [Warning] Внимание
+    [Danger] Опасно
+    [Emagged] ВЗ#ОМА%Н0
+   *[other] Ошибка
 }
-air-alarm-ui-window-listing-title = {$address} : {-air-alarm-state-name(state:$state)}
+air-alarm-ui-window-listing-title = {$address} : { air-alarm-ui-state-name }
 air-alarm-ui-thresholds-copy = Копировать пороги на все устройства
 air-alarm-ui-thresholds-copy-tooltip = Копирует пороги сенсоров этого устройства на все устройства в этой вкладке сигнализации воздуха.

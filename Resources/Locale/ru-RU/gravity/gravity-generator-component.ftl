@@ -28,3 +28,6 @@ gravity-generator-window-power-label = { $draw } / { $max } Вт
 
 gravity-generator-window-eta-none = Н/Д
 gravity-generator-window-eta-value = { TOSTRING($left, "m\\:ss") }
+gravity-generator-examine-max-mass = Рассчитан на поддержание гравитации на шаттле массой до [color=yellow]{ $mass }[/color] т.
+gravity-generator-examine-load = Нагрузка генератора составляет [color={ $color }]{ $percent }%[/color] от его мощности.
+gravity-generator-examine-load-unlimited = Похоже, генератор не работает.

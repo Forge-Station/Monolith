@@ -53,6 +53,7 @@
       - id: WeaponCaseShortBombCollar # Mono
       - id: ClothingEyesNTGlasses # Forge-change
       - id: SecurityTechFabCircuitboard # Forge-change
+      - id: ClothingNeckScarfStripedSpecialNT # Forge-change
 
 - type: entity
   id: LockerNfsdSheriffFilled

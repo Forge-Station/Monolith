@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   Label:
-    if: false # Temporarily disabled
+    if: ( github.event.pull_request.draft == false )
     runs-on: ubuntu-latest
     steps:
       - name: Check for Merge Conflicts
@@ -22,4 +22,4 @@ jobs:
         with:
           dirtyLabel: "S: Merge Conflict"
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          commentOnDirty: "This pull request has conflicts, please resolve those before we can evaluate the pull request."
+          commentOnDirty: "В этом пулл-реквесте есть конфликты. Пожалуйста решите их, иначе мы не сможем рассмотреть этот пулл-реквест."

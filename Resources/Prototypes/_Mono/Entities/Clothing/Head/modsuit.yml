@@ -1,5 +1,5 @@
 - type: entity
-  parent: [BaseClothingModsuitHelmet, ShowSecurityIcons, ClothingNightVision2Normal] # Forge-change add ClothingNightVision
+  parent: [BaseClothingModsuitHelmetHideIdentity, ShowSecurityIcons, ClothingNightVision2Normal] # Forge-change add ClothingNightVision
   id: ClothingModsuitHelmetUSSPVaryag
   name: Shlem Varyaga
   description: Sealed, reinforced, and intimidating.
@@ -52,7 +52,7 @@
         isLooped: true
 
 - type: entity
-  parent: [BaseClothingModsuitHelmet, ShowMedicalIcons, ClothingNightVision4Normal, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision, add BaseClothingHelmetMassScanner
+  parent: [BaseClothingModsuitHelmetHideIdentity, ShowMedicalIcons, ClothingNightVision4Normal, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision, add BaseClothingHelmetMassScanner
   id: ClothingModsuitHelmetUSSPZastavnik
   name: Shlem Zastavnik
   description: A reinforced helmet with deep armor plating and visor shielding. Favored by serzhants for frontline presence.
@@ -84,14 +84,6 @@
     - type: TemperatureProtection
       heatingCoefficient: 0.01
       coolingCoefficient: 0.01
-    - type: IdentityBlocker
-    - type: IngestionBlocker
-    - type: HideLayerClothing
-      slots:
-      - Hair
-      - Snout
-      - HeadTop
-      - HeadSide
     #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: ToggleableVisuals
     spriteLayer: light
@@ -126,7 +118,7 @@
         isLooped: true
 
 - type: entity
-  parent: [BaseClothingModsuitHelmet, ShowMedicalIcons, ClothingNightVision2Ullman] # Forge-change
+  parent: [BaseClothingModsuitHelmetHideIdentity, ShowMedicalIcons, ClothingNightVision2Ullman] # Forge-change
   id: ClothingModsuitHelmetRogue
   name: RX-01 modsuit helmet
   description: Does not currently feature an AI companion- note to self, sell helmet AI as separate purchase.
@@ -144,24 +136,16 @@
         # Radiation: 0.95 # Forge-change
   - type: ComponentToggler
     components:
+    - type: BreathMask
     - type: FlashImmunity
     - type: EyeProtection
       protectionTime: 5
-    - type: BreathMask
     - type: PressureProtection
       highPressureMultiplier: 0.3
       lowPressureMultiplier: 1000
     - type: TemperatureProtection
       heatingCoefficient: 0.01
       coolingCoefficient: 0.01
-    - type: IdentityBlocker
-    - type: IngestionBlocker
-    - type: HideLayerClothing
-      slots:
-      - Hair
-      - Snout
-      - HeadTop
-      - HeadSide
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: ToggleableVisuals
     spriteLayer: light
@@ -197,7 +181,7 @@
 
 # Volta
 - type: entity
-  parent: [BaseClothingModsuitHelmet, ShowSecurityIcons]
+  parent: [BaseClothingModsuitHelmetHideIdentity, ShowSecurityIcons]
   id: ClothingModsuitHelmetVolta
   name: Volta Modsuit Helmet
   description: A reinforced sapper's plate, reimburced with higher quality CCTV and military-grade flashlight, doesn't make you look any better though.
@@ -223,14 +207,6 @@
     - type: TemperatureProtection
       heatingCoefficient: 0.01
       coolingCoefficient: 0.01
-    - type: IdentityBlocker
-    - type: IngestionBlocker
-    - type: HideLayerClothing
-      slots:
-      - Hair
-      - Snout
-      - HeadTop
-      - HeadSide
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: ToggleableVisuals
     spriteLayer: light
@@ -295,6 +271,22 @@
         Piercing: 0.9
         Heat: 0.9
         # Radiation: 0.5 # Forge-change
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+  - type: ComponentToggler
+    components:
+    - type: BreathMask
+    - type: PressureProtection
+      highPressureMultiplier: 0.3
+      lowPressureMultiplier: 1000
+    - type: TemperatureProtection
+      heatingCoefficient: 0.01
+      coolingCoefficient: 0.01
+    - type: IdentityBlocker
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: ToggleableVisuals
     spriteLayer: light

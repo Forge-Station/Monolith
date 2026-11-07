@@ -1,33 +1,17 @@
 # Harmony Medical Enterprises
 
 - type: entity
-  parent: [BaseClothingModsuitHelmet, ClothingFlightProfileEasy, ClothingNightVision2Normal]
+  parent: [BaseClothingModsuitHelmetHideIdentity, ClothingFlightProfileEasy, ClothingNightVision2Normal]
   id: ClothingModsuitHelmetHMELightSuit
   name: HME light hardsuit "Preserver" helmet
   description: light-HME-modsuit-helmet-desc
   categories: [ HideSpawnMenu ]
   components:
-  - type: Appearance
   - type: Sprite
     sprite: _Forge/Clothing/Head/Modsuits/hme_lightmod.rsi
-    layers:
-    - state: helmet
-    - state: helmet-sealed
-      visible: false
-      map: [ "sealed" ]
-  - type: HideLayerClothing
-    slots:
-    - Snout
   - type: SealableClothing
     sealUpPopup: sealable-clothing-seal-up-helmet
     sealDownPopup: sealable-clothing-seal-down-helmet
-  - type: SealableClothingVisuals
-    spriteLayer: sealed
-    clothingVisuals:
-      head:
-      - state: equipped-HEAD-sealed
-      head-vox:
-      - state: equipped-HEAD-sealed-vox
   - type: ShowHealthBars
     damageContainers:
     - Inorganic
@@ -61,23 +45,6 @@
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
-  - type: ComponentToggler
-    components:
-    - type: BreathMask
-    - type: PressureProtection
-      highPressureMultiplier: 0.3
-      lowPressureMultiplier: 1000
-    - type: TemperatureProtection
-      heatingCoefficient: 0.01
-      coolingCoefficient: 0.01
-    - type: IdentityBlocker
-    - type: IngestionBlocker
-    - type: HideLayerClothing
-      slots:
-      - Hair
-      - Snout
-      - HeadTop
-      - HeadSide
   #THIS WILL BE REPLACED WITH MODULE ↓↓
   - type: ToggleableVisuals
     spriteLayer: light
@@ -251,7 +218,7 @@
 # ARS Omnissia
 
 - type: entity
-  parent: BaseClothingModsuitHelmet
+  parent: BaseClothingModsuitHelmetHideIdentity
   id: ClothingModsuitHelmetOmnissia
   name: ARS Omnissia modsuit helmet
   description: Sealed helmet with night vision and diagnostic readouts for synthetic crew.
@@ -259,18 +226,6 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/Head/Modsuits/omnissiamod.rsi
-    layers:
-    - state: helmet
-    - state: helmet-sealed
-      visible: false
-      map: [ "sealed" ]
-  - type: SealableClothingVisuals
-    spriteLayer: sealed
-    clothingVisuals:
-      head:
-      - state: equipped-HEAD-sealed
-      head-vox:
-      - state: equipped-HEAD-sealed-vox
   - type: Armor
     modifiers:
       coefficients:
@@ -289,7 +244,6 @@
     phosphorColor: "#c2ffc2" # Forge-Change #00FF00 to #c2ffc2 // сам фосфорный цвет, он так же может давать пересвет
     lightingColor: "#0EFFFFFF" # Forge-Change #FFFFFF32 to #0EFFFFFF // Это главный рычаг яркости в темноте
     amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
-
   - type: ShowHealthBars
     damageContainers:
     - Inorganic

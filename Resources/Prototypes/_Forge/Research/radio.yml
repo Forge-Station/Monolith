@@ -13,6 +13,9 @@
   - StationRadioUwUCircuitboard #Forge-Change-UwU
   - StationRadioReceiverHandheldRecipe
   - SmartVinylCircuitboard
+  - StationRadioServerPortableRecipe
+  - StationRadioRigPortableRecipe
+  - VinylPlayerPortableRecipe
   position: -2, 14
   technologyPrerequisites:
   - AudioVisualCommunication

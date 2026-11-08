@@ -1,6 +1,0 @@
-- type: latheRecipePack
-  id: BSparts
-  recipes:
-  - BluespaceMatterBinStockPart
-  - QuadraticCapacitorStockPart
-  - FemtoManipulatorStockPart

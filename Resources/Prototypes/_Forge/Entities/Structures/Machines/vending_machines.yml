@@ -89,7 +89,7 @@
 #  - type: Advertise
 #    pack: FlatpackVendAds
   - type: Sprite
-    sprite: _NF/Structures/Machines/VendingMachines/flatpackvend.rsi
+    sprite: _Forge/Structures/Machines/VendingMachines/plate_vend.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]

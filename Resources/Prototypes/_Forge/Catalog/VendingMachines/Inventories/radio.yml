@@ -1,9 +1,176 @@
 - type: vendingMachineInventory
   id: FlatpackVendRadioInventory
   startingInventory:
-    StationRadioServerFlatpack: 5
-    StationRadioRigFlatpack: 2
-    VinylPlayerFlatpack: 20
-    StationRadioReceiverFlatpack: 4294967295 # Infinite
-    StationRadioReceiverUwuFlatpack: 4294967295 # Infinite
-    StationRadioReceiverHandheld: 4294967295 # Infinite
+    StationRadioServerFlatpack:       5
+    StationRadioRigFlatpack:          2
+    VinylPlayerFlatpack:              20
+    StationRadioServerPortable:       5
+    StationRadioRigPortable:          5
+    VinylPlayerPortable:              5
+    StationRadioReceiverFlatpack:     4294967295 # Infinite
+    StationRadioReceiverUwuFlatpack:  4294967295 # Infinite
+    StationRadioReceiverHandheld:     4294967295 # Infinite
+    PouchVinylHolder:                 4294967295 # Infinite
+    #Vinyls
+    #region GOONSTATION
+    VinylDiskAdventure1:            4294967295 # Infinite
+    VinylDiskAdventure2:            4294967295 # Infinite
+    VinylDiskAdventure3:            4294967295 # Infinite
+    VinylDiskAdventure4:            4294967295 # Infinite
+    VinylDiskAdventure5:            4294967295 # Infinite
+    VinylDiskAdventure6:            4294967295 # Infinite
+    VinylDiskAfterParty:            4294967295 # Infinite
+    VinylDiskAnonymous:             4294967295 # Infinite
+    VinylDiskApril:                 4294967295 # Infinite
+    VinylDiskAtlas:                 4294967295 # Infinite
+    VinylDiskAtmosphere:            4294967295 # Infinite
+    VinylDiskAugust:                4294967295 # Infinite
+    VinylDiskBanjo1:                4294967295 # Infinite
+    VinylDiskBeaches:               4294967295 # Infinite
+    VinylDiskBiodome:               4294967295 # Infinite
+    VinylDiskBlackWingInterface:    4294967295 # Infinite
+    VinylDiskBumblebee:             4294967295 # Infinite
+    VinylDiskChill1:                4294967295 # Infinite
+    VinylDiskChill2:                4294967295 # Infinite
+    VinylDiskChill3:                4294967295 # Infinite
+    VinylDiskChill4:                4294967295 # Infinite
+    VinylDiskChristmasSong:         4294967295 # Infinite
+    VinylDiskCloudSkyManGuy:        4294967295 # Infinite
+    VinylDiskDanceOnASpaceVolcano:  4294967295 # Infinite
+    VinylDiskDecember:              4294967295 # Infinite
+    VinylDiskDistantStar:           4294967295 # Infinite
+    VinylDiskEveryoneIsSoAlive:     4294967295 # Infinite
+    VinylDiskFebruary:              4294967295 # Infinite
+    VinylDiskFloaty:                4294967295 # Infinite
+    VinylDiskFunkadelic:            4294967295 # Infinite
+    VinylDiskGiga:                  4294967295 # Infinite
+    VinylDiskGraveyard:             4294967295 # Infinite
+    VinylDiskGroovy:                4294967295 # Infinite
+    VinylDiskHighTechnologicBeat:   4294967295 # Infinite
+    VinylDiskHonkmas:               4294967295 # Infinite
+    VinylDiskItFeelsGoodToBeAliveToo:   4294967295 # Infinite
+    VinylDiskJanuary:               4294967295 # Infinite
+    VinylDiskJuly:                  4294967295 # Infinite
+    VinylDiskJune:                  4294967295 # Infinite
+    VinylDiskKeyLime:               4294967295 # Infinite
+    VinylDiskLayEggIsTrue:          4294967295 # Infinite
+    VinylDiskLunch:                 4294967295 # Infinite
+    VinylDiskMarch:                 4294967295 # Infinite
+    VinylDiskMaxi:                  4294967295 # Infinite
+    VinylDiskMay:                   4294967295 # Infinite
+    VinylDiskMonkeyRiot:            4294967295 # Infinite
+    VinylDiskNovember:              4294967295 # Infinite
+    VinylDiskOctober:               4294967295 # Infinite
+    VinylDiskOhNoEvilStar:          4294967295 # Infinite
+    VinylDiskPlanets:               4294967295 # Infinite
+    VinylDiskRepose:                4294967295 # Infinite
+    VinylDiskRiverdancer:           4294967295 # Infinite
+    VinylDiskSecondReality:         4294967295 # Infinite
+    VinylDiskSeptember:             4294967295 # Infinite
+    VinylDiskSpaceGardener:         4294967295 # Infinite
+    VinylDiskUguu:                  4294967295 # Infinite
+    VinylDiskUpbeat1:               4294967295 # Infinite
+    VinylDiskUpbeat2:               4294967295 # Infinite
+    VinylDiskWarriorsHonk:          4294967295 # Infinite
+    VinylDiskWaystations:           4294967295 # Infinite
+    VinylDiskWeAreNumberTwo:        4294967295 # Infinite
+    VinylDiskXtra:                  4294967295 # Infinite
+    #region PM MUSIC
+    VinylDiskAlsoSprachZarathustra: 4294967295 # Infinite
+    VinylDiskBachCelloSuite:        4294967295 # Infinite
+    VinylDiskRideOfTheValkyries:    4294967295 # Infinite
+    VinylDiskRomeoAndJuliet:        4294967295 # Infinite
+    VinylDiskRussianDance:          4294967295 # Infinite
+    VinylDiskTheFlowerDuet:         4294967295 # Infinite
+    VinylDiskWinterVivaldi:         4294967295 # Infinite
+    #region GOOBSTATION
+    VinylDiskAirportLounge:         4294967295 # Infinite
+    VinylDiskBoogieParty:           4294967295 # Infinite
+    VinylDiskBurnTheWorldWaltz:     4294967295 # Infinite
+    VinylDiskCorncob:               4294967295 # Infinite
+    VinylDiskDeadlyRoulette:        4294967295 # Infinite
+    #VinylDiskEphedrineOverdose:    4294967295 # Infinite #moved to contraband
+    VinylDiskFeralAngelWaltz:       4294967295 # Infinite
+    #VinylDiskGetThatAntag:         4294967295 # Infinite #moved to contraband
+    VinylDiskJingleBells:           4294967295 # Infinite
+    VinylDiskLateNightRadio:        4294967295 # Infinite
+    #VinylDiskLAW2OPENARMORY:       4294967295 # Infinite #moved to contraband
+    VinylDiskMesmerizingGalaxyLoop: 4294967295 # Infinite
+    VinylDiskNightInVenice:         4294967295 # Infinite
+    #VinylDiskNUKIESTRAP:           4294967295 # Infinite #moved to contraband
+    VinylDiskOpenTTDJourney:        4294967295 # Infinite
+    VinylDiskPeakasshole:           4294967295 # Infinite
+    VinylDiskRunningOutCover:       4294967295 # Infinite
+    VinylDiskSpaceJazz:             4294967295 # Infinite
+    #VinylDiskTraitorousIntent:     4294967295 # Infinite #moved to contraband
+    VinylDiskVibingOverVenus:       4294967295 # Infinite
+    VinylDiskViolet:                4294967295 # Infinite
+    VinylDiskWantYouGone:           4294967295 # Infinite
+    #region JUKEBOX
+    VinylDiskConstellations:        4294967295 # Infinite
+    VinylDiskFlipFlap:              4294967295 # Infinite
+    VinylDiskSector11:              4294967295 # Infinite
+    VinylDiskStarlight:             4294967295 # Infinite
+    VinylDiskSunset:                4294967295 # Infinite
+    VinylDiskTitle3:                4294967295 # Infinite
+    VinylDiskDrifting:              4294967295 # Infinite
+    VinylDiskSpaceAsshole:          4294967295 # Infinite
+    VinylDiskFrontierArrivals:      4294967295 # Infinite
+    VinylDiskVictory:               4294967295 # Infinite
+    #region LOBBY
+    VinylDiskAWalkInTheWoods:       4294967295 # Infinite
+    VinylDiskAbsconditus:           4294967295 # Infinite
+    VinylDiskAcrossTheVoid:         4294967295 # Infinite
+    VinylDiskAtAnyCost:             4294967295 # Infinite
+    VinylDiskBrothersInArms:        4294967295 # Infinite
+    VinylDiskBucsiSingularity:      4294967295 # Infinite
+    VinylDiskInAmberClad:           4294967295 # Infinite
+    VinylDiskLasersRipApartTheBulkhead:   4294967295 # Infinite
+    VinylDiskMonument:              4294967295 # Infinite
+    VinylDiskScpIsd:                4294967295 # Infinite
+    VinylDiskWhenDayBreaks:         4294967295 # Infinite
+    #region A-Guy
+    VinylDiskNothingWrongWithMegacorpos:  4294967295 # Infinite
+    #VinylDiskNuclearOperationsInfil:     4294967295 # Infinite  #moved to contraband
+    #VinylDiskRevolution:                 4294967295 # Infinite  #moved to contraband
+    VinylDiskTheStation:                  4294967295 # Infinite
+    VinylDiskTomfooleryRequired:          4294967295 # Infinite
+    #region CDS
+    CdDiskDanitosBurritos:    4294967295 # Infinite
+    CdDiskBillMovie:          4294967295 # Infinite
+    CdDiskCapTraining:        4294967295 # Infinite
+    CdDiskCargonia:           4294967295 # Infinite
+    CdDiskChemistry:          4294967295 # Infinite
+    CdDiskCloningPsa:         4294967295 # Infinite
+    CdDiskDansTickets:        4294967295 # Infinite
+    CdDiskGrones:             4294967295 # Infinite
+    CdDiskPopeCrunchCereal:   4294967295 # Infinite
+    CdDiskQuikNoodles:        4294967295 # Infinite
+    CdDiskRobotics:           4294967295 # Infinite
+    CdDiskSecurityPsa:        4294967295 # Infinite
+  #region EMAGGED STUFF
+  contrabandInventory:
+    #Vinyls
+    VinylDiskEphedrineOverdose:       20
+    VinylDiskGetThatAntag:            20
+    VinylDiskLAW2OPENARMORY:          20
+    VinylDiskNUKIESTRAP:              20
+    VinylDiskTraitorousIntent:        20
+    VinylDiskNuclearOperationsInfil:  20
+    VinylDiskRevolution:              20
+    #Cds
+    CdDiskCommanderAnnouncement:      20
+    CdDiskCommanderFigurines:         20
+    CdDiskCommanderResignation:       20
+    CdDiskCommanderSupport:           20
+    CdDiskHeisenbeeTrial:             20
+    CdDiskXgOnboarding1:              20
+    CdDiskXgOnboarding2:              20
+    CdDiskXgOnboarding3:              20
+    CdDiskXgOnboarding4:              20
+    JVNECdDiskCapstien:               20
+    JVNECdDiskNinja:                  20
+    JVNECdDiskNextUp:                 20
+    JVNECdDiskJNE:                    20
+    JVNECdDiskNumber:                 20
+    JVNECdDiskSyndicate:              20

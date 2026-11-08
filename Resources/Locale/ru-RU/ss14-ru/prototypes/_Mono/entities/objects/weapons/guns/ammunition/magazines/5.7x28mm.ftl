@@ -1,7 +1,7 @@
 ent-BaseMagazine57x28mm = пистолетный магазин (5.7x28мм FMJ)
 ent-Magazine57x28mmPistolFMJ = { ent-BaseMagazine57x28mm }
 ent-Magazine57x28mmPistolEmpty = пистолетный магазин (5.7x28мм)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой
 ent-Magazine57x28mmPistolHP = пистолетный магазин (5.7x28мм экспансивные)
 ent-Magazine57x28mmPistolPractice = пистолетный магазин (5.7x28мм учебные)
@@ -17,7 +17,7 @@ ent-Magazine57x28mmSubMachineGunUranium = магазин ПП (5.7x28мм ура
 
 ent-Magazine57x28mmSubMachineGunFMJ = магазин ПП (5.7x28мм FMJ)
 ent-Magazine57x28mmSubMachineGunEmpty = магазин ПП (5.7x28мм)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой
 ent-Magazine57x28mmSubMachineGunEmp = магазин ПП (5.7x28мм ЭМИ)
 ent-Magazine57x28mmSubMachineGunHP = магазин ПП (5.7x28мм экспансивные)
@@ -26,7 +26,13 @@ ent-Magazine57x28mmSubMachineGunRubber = магазин ПП (5.7x28мм рез�
 
 ent-Magazine57x28mmPistolHighCapacityFMJ = большой пистолетный магазин (5.7x28мм FMJ)
 ent-Magazine57x28mmPistolHighCapacityEmpty = большой пистолетный магазин (5.7x28мм)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой
 ent-Magazine57x28mmPistolHighCapacityPractice = большой пистолетный магазин (5.7x28мм учебные)
 ent-Magazine57x28mmPistolHighCapacityRubber = большой пистолетный магазин (5.7x28мм резиновые)
+
+ent-Magazine57x28mmSubMachineGunTopMountedFMJ = магазин (5.7x28 мм, оболочечные)
+
+ent-Magazine57x28mmSubMachineGunTopMountedEmpty = магазин (5.7x28 мм)
+    .desc = { ent-BaseItem.desc }
+    .suffix = Пустой

@@ -4,3 +4,5 @@ ent-CrateNanotrasen = ящик Nanotrasen
     .desc = Бело-синий ящик с символом Nanotrasen.
 ent-CrateNanotrasenDS = зловещий ящик Nanotrasen
     .desc = Красно-чёрный ящик с пугающей аурой - от одного взгляда по спине пробегает холод.
+ent-CratePDVEquippment = ящик снаряжения ПДВ
+    .desc = Чёрно-коричневый ящик авангарда для хранения различного снаряжения.

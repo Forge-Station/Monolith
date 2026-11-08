@@ -1,0 +1,37 @@
+- type: vessel
+  id: Haimit
+  parent: BaseVessel
+  name: RG-PIR Haimit
+  description: A multipurpose pirate ship.
+  price: 184600
+  category: Small
+  group: Custom
+  access: Pirate
+  purchasable: false
+  shuttlePath: /Maps/_Forge/Shuttles/Rodger/haimit.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  - Patrol
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: Haimit
+  mapName: 'RG-PIR Haimit'
+  mapPath: /Maps/_Forge/Shuttles/Rodger/haimit.yml
+  minPlayers: 0
+  stations:
+    Hamit:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'RG-PIR Haimit MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

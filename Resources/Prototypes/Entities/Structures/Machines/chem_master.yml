@@ -94,10 +94,6 @@
       input: AutomationSlotBeaker
       output: AutomationSlotBeaker
       slotId: beakerSlot
-    - !type:AutomatedItemSlot # not very useful because you can't tell it to make pills
-      input: AutomationSlotBottles
-      output: AutomationSlotBottles
-      slotId: outputSlot
   - type: SolutionContainerManager
     solutions:
       buffer: {}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -23,6 +24,12 @@ namespace Content.IntegrationTests.Tests
     {
         private static readonly HashSet<ProtoId<EntityCategoryPrototype>> IgnoredCategories = ["Spawner", "Debug", "GameRules"];
 
+        /// <summary>
+        /// Prototypes per slice for spawn-all tests. Holding every prototype at once (especially after the
+        /// Solutions refactor, which adds child solution entities) pushes Debug test hosts into multi‑GB OOM.
+        /// </summary>
+        private const int SpawnAllSlice = 1500;
+
         public override PoolSettings PoolSettings => new()
         {
             Connected = true,
@@ -33,6 +40,36 @@ namespace Content.IntegrationTests.Tests
         {
             Dirty = true,
         };
+
+        /// <summary>
+        /// Delete maps first (parent-first, like round end), then leftovers, then force a GC so the next slice
+        /// does not pile onto unreclaimed garbage from the previous one.
+        /// </summary>
+        private static void DeleteEverything(IEntityManager entityMan, SharedMapSystem mapSystem)
+        {
+            foreach (var mapId in mapSystem.GetAllMapIds().ToList())
+            {
+                mapSystem.DeleteMap(mapId);
+            }
+
+            var entityMetas = new List<(EntityUid, MetaDataComponent)>();
+            var query = entityMan.AllEntityQueryEnumerator<MetaDataComponent>();
+            while (query.MoveNext(out var uid, out var meta))
+            {
+                entityMetas.Add((uid, meta));
+            }
+
+            foreach (var (uid, meta) in entityMetas)
+            {
+                if (!meta.EntityDeleted)
+                    entityMan.DeleteEntity(uid);
+            }
+
+            Assert.That(entityMan.EntityCount, Is.Zero);
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
 
         [Test]
         [PairConfig(nameof(Disconnected))]
@@ -45,9 +82,10 @@ namespace Content.IntegrationTests.Tests
             var prototypeMan = server.ResolveDependency<IPrototypeManager>();
             var mapSystem = entityMan.System<SharedMapSystem>();
 
+            var protoIds = new List<string>();
             await server.WaitPost(() =>
             {
-                var protoIds = prototypeMan
+                protoIds = prototypeMan
                     .EnumeratePrototypes<EntityPrototype>()
                     .Where(p => !p.Abstract)
                     .Where(p => !pair.IsTestPrototype(p))
@@ -56,42 +94,27 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => p.Categories.All(x => !IgnoredCategories.Contains(x.ID)))
                     .Select(p => p.ID)
                     .ToList();
-
-                foreach (var protoId in protoIds)
-                {
-                    mapSystem.CreateMap(out var mapId);
-                    var grid = mapSystem.CreateGridEntity(mapId);
-                    mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
-                    var coord = new EntityCoordinates(grid.Owner, 0, 0);
-                    SpawnEntity(entityMan, protoId, coord); // Mono
-
-                    mapSystem.DeleteMap(mapId); // Forge-change: Out Of Memory. OOM. OOM.
-                }
             });
 
-            await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
-
-            await server.WaitPost(() =>
+            // Slice so we still run update loops on every proto without holding the whole set in memory.
+            for (var first = 0; first < protoIds.Count; first += SpawnAllSlice)
             {
-                static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
-                    where TComp : Component
+                var slice = protoIds.Skip(first).Take(SpawnAllSlice).ToList();
+                await server.WaitPost(() =>
                 {
-                    var query = entityMan.AllEntityQueryEnumerator<TComp>();
-                    while (query.MoveNext(out var uid, out var meta))
+                    foreach (var protoId in slice)
                     {
-                        yield return (uid, meta);
+                        mapSystem.CreateMap(out var mapId);
+                        var grid = mapSystem.CreateGridEntity(mapId);
+                        mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
+                        var coord = new EntityCoordinates(grid.Owner, 0, 0);
+                        SpawnEntity(entityMan, protoId, coord); // Mono
                     }
-                }
+                });
 
-                var entityMetas = Query<MetaDataComponent>(entityMan).ToList();
-                foreach (var (uid, meta) in entityMetas)
-                {
-                    if (!meta.EntityDeleted)
-                        entityMan.DeleteEntity(uid);
-                }
-
-                Assert.That(entityMan.EntityCount, Is.Zero);
-            });
+                await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
+                await server.WaitPost(() => DeleteEverything(entityMan, mapSystem));
+            }
         }
 
         [Test]
@@ -101,52 +124,53 @@ namespace Content.IntegrationTests.Tests
             var pair = Pair;
             Assert.That(pair.Client.Session, Is.Null);
             var server = pair.Server;
-            var map = await pair.CreateTestMap();
 
             var entityMan = server.ResolveDependency<IEntityManager>();
             var prototypeMan = server.ResolveDependency<IPrototypeManager>();
+            var mapSystem = entityMan.System<SharedMapSystem>();
 
+            var protoIds = new List<string>();
             await server.WaitPost(() =>
             {
+                // Same-spot stacks everything on one tile for hundreds of ticks. Explosives / anomalies /
+                // meteors chain-react and gib body parts (actions without physics, container mutation, etc.).
+                var sameSpotExcluded = new[]
+                {
+                    "MapGrid",
+                    "RoomFill",
+                    "GridSpawner", // Mono
+                    "Meteor", // Mono
+                    "Explosive",
+                    "ExplodeOnTrigger",
+                    "Anomaly",
+                };
 
-                var protoIds = prototypeMan
+                protoIds = prototypeMan
                     .EnumeratePrototypes<EntityPrototype>()
                     .Where(p => !p.Abstract)
                     .Where(p => !pair.IsTestPrototype(p))
-                    .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
-                    .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
-                    .Where(p => !p.Components.ContainsKey("GridSpawner")) // Mono - We shouldn't spawn grids.
-                    .Where(p => !p.Components.ContainsKey("Meteor")) // Mono
+                    .Where(p => !sameSpotExcluded.Any(p.Components.ContainsKey))
                     .Where(p => p.Categories.All(x => !IgnoredCategories.Contains(x.ID))) // Forge-change: just believe.
                     .Select(p => p.ID)
                     .ToList();
-                foreach (var protoId in protoIds)
-                {
-                    SpawnEntity(entityMan, protoId, map.GridCoords); // Monolith
-                }
             });
-            await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
-            await server.WaitPost(() =>
+
+            for (var first = 0; first < protoIds.Count; first += SpawnAllSlice)
             {
-                static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
-                    where TComp : Component
+                var slice = protoIds.Skip(first).Take(SpawnAllSlice).ToList();
+                var map = await pair.CreateTestMap();
+
+                await server.WaitPost(() =>
                 {
-                    var query = entityMan.AllEntityQueryEnumerator<TComp>();
-                    while (query.MoveNext(out var uid, out var meta))
+                    foreach (var protoId in slice)
                     {
-                        yield return (uid, meta);
+                        SpawnEntity(entityMan, protoId, map.GridCoords); // Monolith
                     }
-                }
+                });
 
-                var entityMetas = Query<MetaDataComponent>(entityMan).ToList();
-                foreach (var (uid, meta) in entityMetas)
-                {
-                    if (!meta.EntityDeleted)
-                        entityMan.DeleteEntity(uid);
-                }
-
-                Assert.That(entityMan.EntityCount, Is.Zero);
-            });
+                await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
+                await server.WaitPost(() => DeleteEverything(entityMan, mapSystem));
+            }
         }
 
         /// <summary>

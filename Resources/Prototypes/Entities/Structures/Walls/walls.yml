@@ -1435,10 +1435,6 @@
       - grilles
       - doors
       base: mining
-  - type: RandomIconSmooth
-    randomStates:
-    - mining
-    - miningB
   - type: Appearance
   # Forge-Change-Start
   - type: Construction

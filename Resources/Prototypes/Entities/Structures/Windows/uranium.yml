@@ -161,7 +161,7 @@
       - walls
       - windows
       - grilles
-      - marble
+      - walls-marble
       - doors
       base: state
   - type: Icon

@@ -150,7 +150,7 @@
       - walls
       - windows
       - grilles
-      - marble
+      - walls-marble
       - doors
       base: state
       index: 0

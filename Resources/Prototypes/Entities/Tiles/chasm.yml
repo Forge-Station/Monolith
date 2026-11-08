@@ -31,8 +31,8 @@
     - !type:CornerSpriteSmoothing
       mask: [ chasm, walls ]
       base: chasm_
-
       swapOuterBits: false
+
   - type: Physics
     bodyType: Static
   - type: Fixtures

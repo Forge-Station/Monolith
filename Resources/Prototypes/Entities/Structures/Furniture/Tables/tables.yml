@@ -775,13 +775,13 @@
     graph: Table
     node: TableFancyBlue
   - type: IconSmooth
-    key: fancytableblue
+    key: fancytable
     states:
     - !type:CornerSpriteSmoothing
-      mask: [ fancytableblue ]
+      mask: [ fancytable ]
       base: state_
-
       swapOuterBits: false
+
 - type: entity
   id: TableFancyCyan
   parent: TableFancyBase
@@ -795,13 +795,13 @@
     graph: Table
     node: TableFancyCyan
   - type: IconSmooth
-    key: fancytablecyan
+    key: fancytable
     states:
     - !type:CornerSpriteSmoothing
-      mask: [ fancytablecyan ]
+      mask: [ fancytable ]
       base: state_
-
       swapOuterBits: false
+
 - type: entity
   id: TableFancyBlack
   parent: TableFancyBase
@@ -815,13 +815,13 @@
     graph: Table
     node: TableFancyBlack
   - type: IconSmooth
-    key: fancytableblack
+    key: fancytable
     states:
     - !type:CornerSpriteSmoothing
-      mask: [ fancytableblack ]
+      mask: [ fancytable ]
       base: state_
-
       swapOuterBits: false
+
 - type: entity
   id: TableFancyRed
   parent: TableFancyBase
@@ -835,13 +835,13 @@
     graph: Table
     node: TableFancyRed
   - type: IconSmooth
-    key: fancytablered
+    key: fancytable
     states:
     - !type:CornerSpriteSmoothing
-      mask: [ fancytablered ]
+      mask: [ fancytable ]
       base: state_
-
       swapOuterBits: false
+
 - type: entity
   id: TableFancyPurple
   parent: TableFancyBase
@@ -855,13 +855,13 @@
     graph: Table
     node: TableFancyPurple
   - type: IconSmooth
-    key: fancytablepurple
+    key: fancytable
     states:
     - !type:CornerSpriteSmoothing
-      mask: [ fancytablepurple ]
+      mask: [ fancytable ]
       base: state_
-
       swapOuterBits: false
+
 - type: entity
   id: TableFancyPink
   parent: TableFancyBase
@@ -875,13 +875,13 @@
     graph: Table
     node: TableFancyPink
   - type: IconSmooth
-    key: fancytablepink
+    key: fancytable
     states:
     - !type:CornerSpriteSmoothing
-      mask: [ fancytablepink ]
+      mask: [ fancytable ]
       base: state_
-
       swapOuterBits: false
+
 - type: entity
   id: TableFancyGreen
   parent: TableFancyBase
@@ -895,13 +895,13 @@
     graph: Table
     node: TableFancyGreen
   - type: IconSmooth
-    key: fancytablegreen
+    key: fancytable
     states:
     - !type:CornerSpriteSmoothing
-      mask: [ fancytablegreen ]
+      mask: [ fancytable ]
       base: state_
-
       swapOuterBits: false
+
 - type: entity
   id: TableFancyOrange
   parent: TableFancyBase
@@ -915,13 +915,13 @@
     graph: Table
     node: TableFancyOrange
   - type: IconSmooth
-    key: fancytableorange
+    key: fancytable
     states:
     - !type:CornerSpriteSmoothing
-      mask: [ fancytableorange ]
+      mask: [ fancytable ]
       base: state_
-
       swapOuterBits: false
+
 - type: entity
   id: TableFancyWhite
   parent: TableFancyBase
@@ -935,13 +935,13 @@
     graph: Table
     node: TableFancyWhite
   - type: IconSmooth
-    key: fancytablewhite
+    key: fancytable
     states:
     - !type:CornerSpriteSmoothing
-      mask: [ fancytablewhite ]
+      mask: [ fancytable ]
       base: state_
-
       swapOuterBits: false
+
 #Debug
 
 - type: entity

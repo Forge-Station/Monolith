@@ -78,8 +78,22 @@
       mask:
       - walls
       - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
       - grilles
-      - marble
       - doors
       base: state
   - type: Airtight
@@ -254,7 +268,7 @@
       - walls
       - windows
       - grilles
-      - marble
+      - walls-marble
       - doors
       base: debug
 
@@ -409,7 +423,8 @@
     key: walls-plastitanium
     states:
     - !type:CardinalCornerSpriteSmoothing
-      mask: [ walls-plastitanium ]
+      # Include walls so plastitanium fully smooths with reinforced/solid (not just alt blend).
+      mask: [ walls-plastitanium, walls ]
       altMask:
       - windows
       - windows-reinf
@@ -426,7 +441,6 @@
       - walls-shuttle
       - walls-material
       - walls-marble
-      - walls
       - grilles
       - doors
       base: wall
@@ -536,6 +550,32 @@
   - type: Icon
     sprite: Structures/Walls/plastitanium-diagonal.rsi
     state: state0
+  - type: IconSmooth
+    key: walls-plastitanium
+    states:
+    - !type:DiagonalSpriteSmoothing
+      edgeKeys: [ walls ]
+      mask:
+      - walls-plastitanium
+      - walls
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-material
+      - walls-marble
+      - grilles
+      - doors
+      base: state
   - type: RadiationBlocker
     resistance: 5
 
@@ -556,7 +596,8 @@
     key: walls
     states:
     - !type:CardinalCornerSpriteSmoothing
-      mask: [ walls ]
+      # Include walls-plastitanium so reinforced fully smooths with plastitanium.
+      mask: [ walls, walls-plastitanium ]
       altMask:
       - windows
       - windows-reinf
@@ -571,10 +612,8 @@
       - windows-regal
       - walls-exo
       - walls-shuttle
-      - walls-plastitanium
       - walls-material
       - walls-marble
-      - walls
       - grilles
       - doors
       base: wall
@@ -630,7 +669,7 @@
     key: walls
     states:
     - !type:CardinalCornerSpriteSmoothing
-      mask: [ walls ]
+      mask: [ walls, walls-plastitanium ]
       altMask:
       - windows
       - windows-reinf
@@ -645,19 +684,18 @@
       - windows-regal
       - walls-exo
       - walls-shuttle
-      - walls-plastitanium
       - walls-material
       - walls-marble
-      - walls
       - grilles
       - doors
       base: wall
     # Rusted walls should be made weaker through a damage mod status effect.
 
 - type: entity
-  parent: [ BaseWallTierTwo ] # Forge-change: add BaseWallTierTwo
+  parent: [ WallDiagonalBase, BaseWallTierTwo ] # Forge-change: restore WallDiagonalBase for IconSmooth
   id: WallReinforcedDiagonal
   name: reinforced wall
+  suffix: diagonal
   components:
   - type: Sprite
     drawdepth: Walls
@@ -665,44 +703,39 @@
   - type: Icon
     sprite: Structures/Walls/reinforced-diagonal.rsi
     state: state0
+  - type: IconSmooth
+    key: walls
+    states:
+    - !type:DiagonalSpriteSmoothing
+      edgeKeys: [ walls-plastitanium ]
+      mask:
+      - walls
+      - walls-plastitanium
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-material
+      - walls-marble
+      - grilles
+      - doors
+      base: state
   - type: RadiationBlocker
     resistance: 5
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: WallDefense2
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 2750
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
-    - trigger:
-        !type:DamageTrigger
-        damage: 3250
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
-      - !type:ChangeConstructionNodeBehavior
-        node: girder
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: StaticPrice
-    price: 25
-  - type: ArmorThickness
-    thickness: 5
-  - type: ShipRepairable
-    repairTime: 3
-    repairCost: 6
   - type: Tag
     tags:
     - Wall
     - WallT2
+    - Diagonal
 
 - type: entity
   parent: BaseWall
@@ -994,14 +1027,10 @@
       base: wall
 
 - type: entity
-  parent: BaseWallTierOne
+  parent: [ WallDiagonalBase, BaseWallTierOne ]
   id: WallSolidDiagonal
   name: solid wall
   suffix: diagonal
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
   - type: Sprite
     drawdepth: Walls
@@ -1009,33 +1038,16 @@
   - type: Icon
     sprite: Structures/Walls/solid-diagonal.rsi
     state: state0
-  - type: Destructible # Mono - override HP stats from parent: WallShuttleDiagonal
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 600 # Mono
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
-    - trigger:
-        !type:DamageTrigger
-        damage: 500 # Mono
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalSlam
-      - !type:ChangeConstructionNodeBehavior
-        node: girder
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
   - type: ShipRepairable
     repairTime: 2
     repairCost: 2
   - type: StaticPrice
     price: 95
+  - type: Tag
+    tags:
+    - Wall
+    - WallT1
+    - Diagonal
 
 - type: entity
   parent: WallSolid # Mono: Parents damage thresholds from WallSolid
@@ -1050,32 +1062,32 @@
   - type: Construction
     graph: Girder
     node: wallrust
-#  - type: IconSmooth
-#    key: walls
-#    states:
-#    - !type:CardinalCornerSpriteSmoothing
-#      mask: [ walls ]
-#      altMask:
-#      - windows
-#      - windows-reinf
-#      - windows-tinted
-#      - windows-plasma
-#      - windows-plasma-reinf
-#      - windows-uranium
-#      - windows-uranium-reinf
-#      - windows-exo
-#      - windows-shuttle
-#      - windows-plastitanium
-#      - windows-regal
-#      - walls-exo
-#      - walls-shuttle
-#      - walls-plastitanium
-#      - walls-material
-#      - walls-marble
-#      - walls
-#      - grilles
-#      - doors
-#      base: wall
+  - type: IconSmooth
+    key: walls
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
   # Rusted walls should be made weaker through a damage mod status effect.
 
 - type: entity
@@ -1435,6 +1447,8 @@
       - grilles
       - doors
       base: mining
+      # mining.rsi uses upstream corner bit order, not Baystation/Corvax.
+      swapOuterBits: false
   - type: Appearance
   # Forge-Change-Start
   - type: Construction

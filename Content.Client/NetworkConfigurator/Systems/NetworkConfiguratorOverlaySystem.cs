@@ -1,6 +1,7 @@
 using Content.Client.Actions;
 using Content.Client.Items;
 using Content.Client.Message;
+using Content.Client.NetworkConfigurator;
 using Content.Client.Stylesheets;
 using Content.Shared.DeviceConfigurator;
 using Content.Shared.DeviceConfigurator.Components;
@@ -37,14 +38,19 @@ public sealed partial class NetworkConfiguratorOverlaySystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnConfiguratorState(Entity<NetworkConfiguratorComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (_ui.TryGetOpenUi<NetworkConfiguratorBoundUserInterface>(ent.Owner, NetworkConfiguratorUiKey.Configure, out var configure))
-            configure.Update();
+        // TryGetOpenUi<T> throws if the open window is a different type. A mismatch
+        // here aborts state application and forces a full resync, which freezes the client.
+        if (_ui.TryGetOpenUi(ent.Owner, NetworkConfiguratorUiKey.Configure, out var configure)
+            && configure is NetworkConfiguratorBoundUserInterface configureUi)
+            configureUi.Update();
 
-        if (_ui.TryGetOpenUi<NetworkConfiguratorListBoundUserInterface>(ent.Owner, NetworkConfiguratorUiKey.List, out var list))
-            list.Update();
+        if (_ui.TryGetOpenUi(ent.Owner, NetworkConfiguratorUiKey.List, out var list)
+            && list is NetworkConfiguratorListBoundUserInterface listUi)
+            listUi.Update();
 
-        if (_ui.TryGetOpenUi<NetworkConfiguratorLinkBoundUserInterface>(ent.Owner, NetworkConfiguratorUiKey.Link, out var link))
-            link.Update();
+        if (_ui.TryGetOpenUi(ent.Owner, NetworkConfiguratorUiKey.Link, out var link)
+            && link is NetworkConfiguratorLinkBoundUserInterface linkUi)
+            linkUi.Update();
     }
 
     private Control OnCollectItemStatus(Entity<NetworkConfiguratorComponent> entity)

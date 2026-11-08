@@ -54,7 +54,10 @@ public abstract partial class BaseSatiationEffectSystem<TComp, T> : EntitySystem
         {
             foreach (var (type, thresholds) in GetThresholds(comp))
             {
-                if (_timing.CurTime < thresholds.ProjectedThresholdChangeTime)
+                // null = no upcoming threshold; without this check we re-run
+                // UpdateSatiation every tick for every satiated mob.
+                if (thresholds.ProjectedThresholdChangeTime == null ||
+                    _timing.CurTime < thresholds.ProjectedThresholdChangeTime)
                     continue;
 
                 UpdateSatiation((ent, comp), satiation, type);

@@ -169,14 +169,13 @@ public sealed partial class ServerGameTicker
             _allPreviousGameRules.Add((currentTime, id));
         }
 
-        _sawmill.Info($"Started game rule {ToPrettyString(ruleEntity)}");
-        _adminLogger.Add(LogType.EventStarted, $"Started game rule {ToPrettyString(ruleEntity)}");
-
-        EnsureComp<ActiveGameRuleComponent>(ruleEntity);
         ruleData.ActivatedAt = _gameTiming.CurTime;
 
-        var ev = new GameRuleStartedEvent((ruleEntity, ruleData), id);
-        RaiseLocalEvent(ruleEntity, ref ev, true);
+        // GameRuleStartedEvent is raised by Shared GameTicker when ActiveGameRuleComponent
+        // is map-initialized. On an already initialized rule entity, EnsureComp replays
+        // MapInit immediately. Raising the event again here starts the rule twice
+        // (NFAdventure spawns every POI a second time).
+        EnsureComp<ActiveGameRuleComponent>(ruleEntity);
         return true;
     }
 

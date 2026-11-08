@@ -21,6 +21,11 @@ public sealed partial class NetworkConfiguratorSystem
     [SubscribeLocalEvent]
     private void AfterInteract(Entity<NetworkConfiguratorComponent> ent, ref AfterInteractEvent args)
     {
+        // The click is applied once right away and again when that tick is predicted.
+        // The second pass sees the link already started and cancels it.
+        if (!_gameTiming.IsFirstTimePredicted)
+            return;
+
         OnUsed(ent, args.Target, args.User, args.CanReach);
     }
 

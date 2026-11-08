@@ -409,12 +409,27 @@ namespace Content.Server.Ghost
 
         private IEnumerable<GhostWarp> GetLocationWarps(bool isAdmin) // Frontier: add isAdmin
         {
+            var warps = new List<(EntityUid Uid, WarpPointComponent Warp)>();
+            var publicLocations = new HashSet<string>();
             var allQuery = AllEntityQuery<WarpPointComponent>();
 
             while (allQuery.MoveNext(out var uid, out var warp))
             {
                 if (warp.AdminOnly && !isAdmin) // Frontier: skip admin-only warp points if not an admin
                     continue; // Frontier
+
+                warps.Add((uid, warp));
+                if (!warp.AdminOnly && !string.IsNullOrEmpty(warp.Location))
+                    publicLocations.Add(warp.Location);
+            }
+
+            foreach (var (uid, warp) in warps)
+            {
+                // Admin marker on the same POI is renamed to the station, so it shows up as a second identical teleport.
+                if (warp.AdminOnly
+                    && !string.IsNullOrEmpty(warp.Location)
+                    && publicLocations.Contains(warp.Location))
+                    continue;
 
                 yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), true);
             }

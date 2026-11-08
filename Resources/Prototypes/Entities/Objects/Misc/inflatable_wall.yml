@@ -36,6 +36,9 @@
   - type: Airtight
   - type: Transform
     anchored: true
+  # Neighbor-only: walls/windows can smooth toward this barricade (no corner RSI for self-smoothing).
+  - type: IconSmooth
+    key: walls
   placement:
     mode: SnapgridCenter
 
@@ -83,3 +86,5 @@
     doAfter: 3
   - type: Occluder
     enabled: false
+  - type: IconSmooth
+    key: doors

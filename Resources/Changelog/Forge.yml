@@ -349,3 +349,24 @@ Entries:
   id: 27
   time: '2026-11-08T12:06:52.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/567
+- author: mersen-tyn
+  changes:
+    - type: Fix
+      message: >-
+        Порт пачки багфиксов с upstream (крио, экипировка, атмос, FTL, UI
+        админки, микроволновка, гриндер, замки, телепад, джетпаки и др.)
+    - type: Fix
+      message: Сглаживание стен/окон после рефактора IconSmooth (спрайты и YAML)
+    - type: Fix
+      message: Joint/Blunt больше не роняют клиент дублем solution при старте раунда
+    - type: Fix
+      message: ChemMasterFilled без конфликта buffer solution
+    - type: Fix
+      message: >-
+        Точка спавна Contractor на empty-станции; Secret без двойного
+        GameRuleAdded
+    - type: Tweak
+      message: Обновлены текстуры стен/шлюзов под новый IconSmooth
+  id: 28
+  time: '2026-11-08T14:43:51.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/559

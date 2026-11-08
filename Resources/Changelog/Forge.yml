@@ -342,3 +342,10 @@ Entries:
   id: 26
   time: '2026-11-08T11:52:23.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/470
+- author: charlottenobot-art
+  changes:
+    - type: Add
+      message: Шаттлы VG верфи перенесены в общую верфь.
+  id: 27
+  time: '2026-11-08T12:06:52.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/567

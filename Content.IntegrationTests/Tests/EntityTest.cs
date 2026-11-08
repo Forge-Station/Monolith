@@ -24,12 +24,6 @@ namespace Content.IntegrationTests.Tests
     {
         private static readonly HashSet<ProtoId<EntityCategoryPrototype>> IgnoredCategories = ["Spawner", "Debug", "GameRules"];
 
-        /// <summary>
-        /// Prototypes per slice for spawn-all tests. Holding every prototype at once (especially after the
-        /// Solutions refactor, which adds child solution entities) pushes Debug test hosts into multi‑GB OOM.
-        /// </summary>
-        private const int SpawnAllSlice = 1500;
-
         public override PoolSettings PoolSettings => new()
         {
             Connected = true,
@@ -42,16 +36,10 @@ namespace Content.IntegrationTests.Tests
         };
 
         /// <summary>
-        /// Delete maps first (parent-first, like round end), then leftovers, then force a GC so the next slice
-        /// does not pile onto unreclaimed garbage from the previous one.
+        /// Delete remaining entities after spawn-all tests, then force a GC.
         /// </summary>
-        private static void DeleteEverything(IEntityManager entityMan, SharedMapSystem mapSystem)
+        private static void DeleteRemainingEntities(IEntityManager entityMan)
         {
-            foreach (var mapId in mapSystem.GetAllMapIds().ToList())
-            {
-                mapSystem.DeleteMap(mapId);
-            }
-
             var entityMetas = new List<(EntityUid, MetaDataComponent)>();
             var query = entityMan.AllEntityQueryEnumerator<MetaDataComponent>();
             while (query.MoveNext(out var uid, out var meta))
@@ -82,10 +70,9 @@ namespace Content.IntegrationTests.Tests
             var prototypeMan = server.ResolveDependency<IPrototypeManager>();
             var mapSystem = entityMan.System<SharedMapSystem>();
 
-            var protoIds = new List<string>();
             await server.WaitPost(() =>
             {
-                protoIds = prototypeMan
+                var protoIds = prototypeMan
                     .EnumeratePrototypes<EntityPrototype>()
                     .Where(p => !p.Abstract)
                     .Where(p => !pair.IsTestPrototype(p))
@@ -94,27 +81,22 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => p.Categories.All(x => !IgnoredCategories.Contains(x.ID)))
                     .Select(p => p.ID)
                     .ToList();
+
+                foreach (var protoId in protoIds)
+                {
+                    mapSystem.CreateMap(out var mapId);
+                    var grid = mapSystem.CreateGridEntity(mapId);
+                    mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
+                    var coord = new EntityCoordinates(grid.Owner, 0, 0);
+                    SpawnEntity(entityMan, protoId, coord); // Mono
+
+                    // Forge-change: delete each map immediately so Solutions child entities do not accumulate → OOM.
+                    mapSystem.DeleteMap(mapId);
+                }
             });
 
-            // Slice so we still run update loops on every proto without holding the whole set in memory.
-            for (var first = 0; first < protoIds.Count; first += SpawnAllSlice)
-            {
-                var slice = protoIds.Skip(first).Take(SpawnAllSlice).ToList();
-                await server.WaitPost(() =>
-                {
-                    foreach (var protoId in slice)
-                    {
-                        mapSystem.CreateMap(out var mapId);
-                        var grid = mapSystem.CreateGridEntity(mapId);
-                        mapSystem.SetTile(grid.Owner, grid.Comp, Vector2i.Zero, new Tile(1));
-                        var coord = new EntityCoordinates(grid.Owner, 0, 0);
-                        SpawnEntity(entityMan, protoId, coord); // Mono
-                    }
-                });
-
-                await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
-                await server.WaitPost(() => DeleteEverything(entityMan, mapSystem));
-            }
+            await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
+            await server.WaitPost(() => DeleteRemainingEntities(entityMan));
         }
 
         [Test]
@@ -124,12 +106,11 @@ namespace Content.IntegrationTests.Tests
             var pair = Pair;
             Assert.That(pair.Client.Session, Is.Null);
             var server = pair.Server;
+            var map = await pair.CreateTestMap();
 
             var entityMan = server.ResolveDependency<IEntityManager>();
             var prototypeMan = server.ResolveDependency<IPrototypeManager>();
-            var mapSystem = entityMan.System<SharedMapSystem>();
 
-            var protoIds = new List<string>();
             await server.WaitPost(() =>
             {
                 // Same-spot stacks everything on one tile for hundreds of ticks. Explosives / anomalies /
@@ -145,7 +126,7 @@ namespace Content.IntegrationTests.Tests
                     "Anomaly",
                 };
 
-                protoIds = prototypeMan
+                var protoIds = prototypeMan
                     .EnumeratePrototypes<EntityPrototype>()
                     .Where(p => !p.Abstract)
                     .Where(p => !pair.IsTestPrototype(p))
@@ -153,24 +134,15 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => p.Categories.All(x => !IgnoredCategories.Contains(x.ID))) // Forge-change: just believe.
                     .Select(p => p.ID)
                     .ToList();
+
+                foreach (var protoId in protoIds)
+                {
+                    SpawnEntity(entityMan, protoId, map.GridCoords); // Monolith
+                }
             });
 
-            for (var first = 0; first < protoIds.Count; first += SpawnAllSlice)
-            {
-                var slice = protoIds.Skip(first).Take(SpawnAllSlice).ToList();
-                var map = await pair.CreateTestMap();
-
-                await server.WaitPost(() =>
-                {
-                    foreach (var protoId in slice)
-                    {
-                        SpawnEntity(entityMan, protoId, map.GridCoords); // Monolith
-                    }
-                });
-
-                await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
-                await server.WaitPost(() => DeleteEverything(entityMan, mapSystem));
-            }
+            await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
+            await server.WaitPost(() => DeleteRemainingEntities(entityMan));
         }
 
         /// <summary>

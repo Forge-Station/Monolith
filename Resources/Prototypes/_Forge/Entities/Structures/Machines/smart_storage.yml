@@ -16,7 +16,6 @@
       map: ["enum.StorageVisualLayers.Door"]
       shader: unshaded
     - state: screen_open
-      map: ["enum.StorageVisualLayers.Door"]
       shader: unshaded
   - type: PointLight
     color: "#4feffd"

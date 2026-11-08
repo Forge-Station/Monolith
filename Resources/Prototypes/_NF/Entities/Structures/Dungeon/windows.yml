@@ -37,6 +37,7 @@
 #        - WallLayer # Blocks lasers, but not LoS
 
 # Common window
+# IconSmooth 2.0 needs window0-13 from the parent RSI; old _NF RSI only had 0-7.
 - type: entity
   id: WindowDungeon
   parent:
@@ -46,11 +47,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _NF/Structures/Windows/window.rsi # Frontier
     color: "#ffd38c"
-  - type: Icon
-    sprite: _NF/Structures/Windows/window.rsi # Frontier
-    state: full
 
 # Reinforced window
 - type: entity
@@ -62,11 +59,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _NF/Structures/Windows/reinforced_window.rsi # Frontier
     color: "#ffd38c"
-  - type: Icon
-    sprite: _NF/Structures/Windows/reinforced_window.rsi # Frontier
-    state: full
 
 ## Mining window
 #- type: entity
@@ -110,11 +103,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _NF/Structures/Windows/plasma_window.rsi # Frontier
     color: "#ffd38c"
-  - type: Icon
-    sprite: _NF/Structures/Windows/plasma_window.rsi # Frontier
-    state: full
 
 # Plasma reinforced window
 - type: entity
@@ -126,11 +115,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _NF/Structures/Windows/reinforced_plasma_window.rsi # Frontier
     color: "#ffd38c"
-  - type: Icon
-    sprite: _NF/Structures/Windows/reinforced_plasma_window.rsi # Frontier
-    state: full
 
 # Uranium reinforced window
 - type: entity
@@ -142,11 +127,7 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _NF/Structures/Windows/reinforced_uranium_window.rsi # Frontier
     color: "#ffd38c"
-  - type: Icon
-    sprite: _NF/Structures/Windows/reinforced_uranium_window.rsi # Frontier
-    state: full
 
 # Directional
 - type: entity

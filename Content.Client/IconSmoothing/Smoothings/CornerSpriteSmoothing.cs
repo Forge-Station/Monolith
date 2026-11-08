@@ -29,8 +29,15 @@ public partial class CornerSpriteSmoothing : ISpriteSmoothState
     public ProtoId<ShaderPrototype>? Shader { get; set; }
 
     /// <summary>
+    /// RSI that holds the corner states. Defaults to the entity sprite.
+    /// Secret doors keep their door RSI for the open animation and pull wall corners from here.
+    /// </summary>
+    [DataField]
+    public ResPath? Rsi { get; set; }
+
+    /// <summary>
     /// Corvax/Baystation wall RSIs expect clockwise=4 / counter-clockwise=1 after the circular shift.
-    /// Upstream table/catwalk/carpet RSIs (base ends like state_) already match the unshifted bit order — leave this false for those.
+    /// Upstream table, catwalk, carpet and chasm RSIs (base ends like state_) already match the unshifted bit order — leave this false for those.
     /// </summary>
     [DataField]
     public bool SwapOuterBits { get; set; } = true;
@@ -47,7 +54,11 @@ public partial class CornerSpriteSmoothing : ISpriteSmoothState
     protected virtual void InitializeOffset(Entity<SpriteComponent> entity, SpriteSystem sprite, DirectionOffset offset)
     {
         var key = GetCornerLayerKey(offset);
-        sprite.LayerMapSet(entity.AsNullable(), key, sprite.AddRsiLayer(entity.AsNullable(), GetState(0, 0), index: Index));
+        var state = GetState(0, 0);
+        var layer = Rsi is { } path
+            ? sprite.AddRsiLayer(entity.AsNullable(), state, path, Index)
+            : sprite.AddRsiLayer(entity.AsNullable(), state, index: Index);
+        sprite.LayerMapSet(entity.AsNullable(), key, layer);
         sprite.LayerSetDirOffset(entity.AsNullable(), key, offset);
     }
 
@@ -109,10 +120,9 @@ public partial class CornerSpriteSmoothing : ISpriteSmoothState
         // Amazed that C# doesn't have a circular bitshift built in for bytes. Kinda fucked up.
         var appendix = Offset(directions, offset);
 
-        // Wall RSIs are still the Baystation corner set: counter-clockwise = 1, diagonal = 2, clockwise = 4.
-        // The shifted mask is clockwise, diagonal, counter-clockwise, so the outer bits have to be swapped
-        // or every straight wall renders the perpendicular cap.
-        // Tables/catwalks use the upstream (unswapped) order — see SwapOuterBits.
+        // The shifted mask is clockwise, diagonal, counter-clockwise.
+        // These RSIs store counter-clockwise = 1 and clockwise = 4, so the outer bits are swapped
+        // or a straight run draws the perpendicular cap. See SwapOuterBits.
         if (SwapOuterBits)
             appendix = (byte)(((appendix & 4) >> 2) | (appendix & 2) | ((appendix & 1) << 2));
         DebugTools.Assert(appendix < 8, $"Calculated appendix of {appendix} went above the maximum of 8, directions: {directions}, offset {offset}");

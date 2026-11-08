@@ -208,8 +208,9 @@ public sealed partial class NetworkConfiguratorSystem : EntitySystem
 
         if (configurator.Comp.ActiveDeviceLink == target)
         {
-            _popupSystem.PopupEntity(Loc.GetString("network-configurator-link-mode-stopped"), target.Value, user);
+            _popupSystem.PopupPredicted(Loc.GetString("network-configurator-link-mode-stopped"), target.Value, user);
             configurator.Comp.ActiveDeviceLink = null;
+            DirtyField(configurator.AsNullable(), nameof(NetworkConfiguratorComponent.ActiveDeviceLink));
             return;
         }
 
@@ -227,7 +228,7 @@ public sealed partial class NetworkConfiguratorSystem : EntitySystem
             || _deviceLinkSinkQuery.HasComp(target) && _deviceLinkSinkQuery.HasComp(configurator.Comp.ActiveDeviceLink))
             return;
 
-        _popupSystem.PopupEntity(Loc.GetString("network-configurator-link-mode-started", ("device", Name(target.Value))), target.Value, user);
+        _popupSystem.PopupPredicted(Loc.GetString("network-configurator-link-mode-started", ("device", Name(target.Value))), target.Value, user);
         configurator.Comp.ActiveDeviceLink = target;
         DirtyField(configurator.AsNullable(), nameof(NetworkConfiguratorComponent.ActiveDeviceLink));
     }

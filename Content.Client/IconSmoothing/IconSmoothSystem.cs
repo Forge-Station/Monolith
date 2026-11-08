@@ -292,6 +292,9 @@ public sealed partial class IconSmoothSystem : EntitySystem
                     exposed = true;
             }
 
+            // No diagonal limiter (including a key-only smoother such as a secret door)
+            // connects on every side. The check has to be outside the state loop: an
+            // empty state list never enters it.
             if (!limited)
                 return true;
         }

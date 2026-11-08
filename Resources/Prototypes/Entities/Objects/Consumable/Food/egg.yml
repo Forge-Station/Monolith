@@ -19,6 +19,7 @@
     sprite: Objects/Consumable/Food/egg.rsi
     size: Tiny
   - type: Solution
+    id: food
     solution:
       reagents:
       - ReagentId: Egg

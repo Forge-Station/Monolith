@@ -73,7 +73,7 @@ public sealed partial class NetworkConfiguratorLinkMenu : FancyWindow
         _links.Links.AddRange(links);
         _defaults = defaults;
 
-        ButtonLinkDefault.Disabled = _defaults == null;
+        ButtonLinkDefault.Disabled = _defaults == null || _defaults.Count == 0;
         FromAddressLabel.Text = sourceAddress;
         ToAddressLabel.Text = sinkAddress;
 

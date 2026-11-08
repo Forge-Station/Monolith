@@ -150,9 +150,8 @@
   - type: Sprite
     drawdepth: Walls
     sprite: Structures/Power/Generation/ame.rsi
-    state: shield_0
+    # shield_* layer is created by IconSmooth DirectionSpriteSmoothing (key: direction)
     layers:
-    - state: shield_0
     - state: core
       map: ["core"]
       visible: false
@@ -220,6 +219,7 @@
     - !type:DirectionSpriteSmoothing
       mask: [ ame_shield ]
       base: shield_
+      index: 0 # keep shield under core overlays
   - type: AmeShield
   - type: NodeContainer
     nodes:

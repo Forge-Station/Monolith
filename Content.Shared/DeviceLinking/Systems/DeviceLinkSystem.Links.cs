@@ -44,7 +44,7 @@ public sealed partial class DeviceLinkSystem
         {
             var proto = ProtoMan.Index(source);
             if (proto.DefaultLinks == null)
-                return [];
+                continue;
 
             foreach (var defaultLink in proto.DefaultLinks)
             {

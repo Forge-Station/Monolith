@@ -8,7 +8,7 @@ namespace Content.Server._NF.Station.Systems;
 
 public sealed partial class StationRenameHolopadsSystem : EntitySystem
 {
-    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private ServerStationSystem _stationSystem = default!;
     [Dependency] private LabelSystem _label = default!; // TODO: use LabelSystem directly instead of this.
 
     public override void Initialize()

@@ -6,7 +6,9 @@ using Content.Shared.Shuttles.BUIStates; // Forge-Change - BioScan
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Content.Shared.Timing; // Forge-Change - BioScan
+using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems; // Forge-Change - BioScan
 
 // Mono
 using Robust.Shared.Audio;

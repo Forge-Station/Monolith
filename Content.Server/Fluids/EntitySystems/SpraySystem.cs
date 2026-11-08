@@ -6,7 +6,8 @@ using Content.Server.Popups;
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Interaction;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Vapor;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.CCVar; /// Forge-Change
@@ -192,7 +193,6 @@ public sealed partial class SpraySystem : EntitySystem
 
         _audio.PlayPvs(entity.Comp.SpraySound, entity, entity.Comp.SpraySound.Params.WithVariation(0.125f));
 
-        if (useDelay != null)
-            _useDelay.TryResetDelay((entity, useDelay));
+        _useDelay.TryResetDelay(entity.Owner);
     }
 }

@@ -15,7 +15,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: GunSignalControl
   - type: Gun

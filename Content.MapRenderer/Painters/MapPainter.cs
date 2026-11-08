@@ -72,7 +72,7 @@ namespace Content.MapRenderer.Painters
 
             await server.WaitPost(() =>
             {
-                var mapId = sEntityManager.System<GameTicker>().DefaultMap;
+                var mapId = sEntityManager.System<ServerGameTicker>().DefaultMap;
 
                 foreach (var grid in sMapManager.GetAllGrids(mapId))
                     sEntityManager.QueueDeleteEntity(grid);
@@ -83,7 +83,7 @@ namespace Content.MapRenderer.Painters
 
             await server.WaitPost(() =>
             {
-                var mapId = sEntityManager.System<GameTicker>().DefaultMap;
+                var mapId = sEntityManager.System<ServerGameTicker>().DefaultMap;
 
                 try
                 {
@@ -147,7 +147,7 @@ namespace Content.MapRenderer.Painters
                     sEntityManager.DeleteEntity(playerEntity.Value);
                 }
 
-                var mapId = sEntityManager.System<GameTicker>().DefaultMap;
+                var mapId = sEntityManager.System<ServerGameTicker>().DefaultMap;
                 grids = sMapManager.GetAllGrids(mapId).ToArray();
 
                 foreach (var (uid, _) in grids)

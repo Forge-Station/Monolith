@@ -146,7 +146,7 @@ public sealed partial class NuclearReactorMonitorSystem : EntitySystem
 
         _uiSystem.CloseUi(uid, NuclearReactorUiKey.Key);
         comp.reactor = null;
-        _signal.RemoveSinkFromSource(uidReactor.Value, uid, source, sink);
+        _signal.RemoveSinkFromSource(uidReactor.Value, uid);
         Dirty(uid, comp);
     }
 }

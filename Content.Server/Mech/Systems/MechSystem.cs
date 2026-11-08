@@ -32,6 +32,7 @@ using Content.Shared.NPC.Components; // Frontier
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Systems;
 using Content.Shared.PowerCell.Components; // Frontier
+using Content.Shared.Atmos;
 
 namespace Content.Server.Mech.Systems;
 

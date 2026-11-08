@@ -37,6 +37,12 @@ public sealed partial class DepartmentPrototype : IPrototype
     public bool Primary = true;
 
     /// <summary>
+    /// Departments that should not be used when filling an empty minimum job from the same department.
+    /// </summary>
+    [DataField]
+    public bool IgnoreForDepartmentFallback;
+
+    /// <summary>
     /// Departments with a higher weight sorted before other departments in UI.
     /// </summary>
     [DataField]

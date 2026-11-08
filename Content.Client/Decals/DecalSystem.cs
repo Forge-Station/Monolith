@@ -27,7 +27,7 @@ namespace Content.Client.Decals
         {
             base.Initialize();
 
-            _overlay = new DecalOverlay(_sprites, EntityManager, PrototypeManager);
+            _overlay = new DecalOverlay(_sprites, EntityManager, ProtoMan);
             _overlay.MaxPerTileDraw = _cfg.GetCVar(CCVars.DecalsMaxPerTile);
             _overlay.RemoveIdenticalDuplicates = _cfg.GetCVar(CCVars.DecalsClientDeduplicateIdentical);
             _overlayManager.AddOverlay(_overlay);

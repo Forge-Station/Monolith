@@ -35,7 +35,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     transmitFrequencyId: DroneControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 100000
   - type: DeviceList
     deviceLimit: 2

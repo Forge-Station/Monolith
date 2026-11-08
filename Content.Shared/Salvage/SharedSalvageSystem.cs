@@ -13,7 +13,6 @@ namespace Content.Shared.Salvage;
 public abstract partial class SharedSalvageSystem : EntitySystem
 {
     [Dependency] private ILocalizationManager _loc = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
 
     #region Descriptions
 
@@ -26,7 +25,7 @@ public abstract partial class SharedSalvageSystem : EntitySystem
                 // Taxation: , ("tax", $"{GetMiningTax(mission.Difficulty) * 100f:0}")
                 return Loc.GetString("salvage-expedition-desc-mining");
             case SalvageMissionType.Destruction:
-                var proto = _proto.Index<SalvageFactionPrototype>(mission.Faction).Configs["DefenseStructure"];
+                var proto = ProtoMan.Index<SalvageFactionPrototype>(mission.Faction).Configs["DefenseStructure"];
 
                 return Loc.GetString("salvage-expedition-desc-structure",
                     ("count", GetStructureCount(mission.Difficulty)),
@@ -188,7 +187,7 @@ public abstract partial class SharedSalvageSystem : EntitySystem
 
     public T GetBiomeMod<T>(string biome, System.Random rand, ref float rating) where T : class, IPrototype, IBiomeSpecificMod
     {
-        var mods = _proto.EnumeratePrototypes<T>().ToList();
+        var mods = ProtoMan.EnumeratePrototypes<T>().ToList();
         mods.Sort((x, y) => string.Compare(x.ID, y.ID, StringComparison.Ordinal));
         rand.Shuffle(mods);
 
@@ -207,7 +206,7 @@ public abstract partial class SharedSalvageSystem : EntitySystem
 
     public T GetMod<T>(System.Random rand, ref float rating) where T : class, IPrototype, ISalvageMod
     {
-        var mods = _proto.EnumeratePrototypes<T>().ToList();
+        var mods = ProtoMan.EnumeratePrototypes<T>().ToList();
         mods.Sort((x, y) => string.Compare(x.ID, y.ID, StringComparison.Ordinal));
         rand.Shuffle(mods);
 
@@ -232,7 +231,7 @@ public abstract partial class SharedSalvageSystem : EntitySystem
         foreach (var id in ids)
         {
             // pick a random reward to give
-            var weights = _proto.Index<WeightedRandomEntityPrototype>(id);
+            var weights = ProtoMan.Index<WeightedRandomEntityPrototype>(id);
             rewards.Add(weights.Pick(rand));
         }
 

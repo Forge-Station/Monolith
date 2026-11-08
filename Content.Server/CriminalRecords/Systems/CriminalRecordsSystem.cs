@@ -24,9 +24,9 @@ namespace Content.Server.CriminalRecords.Systems;
 /// </summary>
 public sealed partial class CriminalRecordsSystem : SharedCriminalRecordsSystem
 {
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private StationRecordsSystem _records = default!;
-    // [Dependency] private StationSystem _station = default!; // Frontier
+    // [Dependency] private ServerStationSystem _station = default!; // Frontier
     [Dependency] private CartridgeLoaderSystem _cartridge = default!;
     [Dependency] private SectorServiceSystem _sectorService = default!; // Frontier
 

@@ -3,6 +3,8 @@ using Content.Server.Xenoarchaeology.Equipment.Components;
 using Content.Server.Xenoarchaeology.XenoArtifacts;
 using Content.Shared.Interaction;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Verbs;
 
 namespace Content.Server.Xenoarchaeology.Equipment.Systems;

@@ -41,9 +41,7 @@ namespace Content.Server.Chemistry.EntitySystems
 
         private void HandleCollide(Entity<VaporComponent> entity, ref StartCollideEvent args)
         {
-            if (!EntityManager.TryGetComponent(entity.Owner, out SolutionContainerManagerComponent? contents)) return;
-
-            foreach (var (_, soln) in _solutionContainerSystem.EnumerateSolutions((entity.Owner, contents)))
+            foreach (var (_, soln) in _solutionContainerSystem.EnumerateSolutions(entity.Owner))
             {
                 var solution = soln.Comp.Solution;
                 _reactive.DoEntityReaction(args.OtherEntity, solution, ReactionMethod.Touch);
@@ -93,7 +91,9 @@ namespace Content.Server.Chemistry.EntitySystems
 
         public override void Update(float frameTime)
         {
-            var query = EntityQueryEnumerator<VaporComponent, SolutionContainerManagerComponent, TransformComponent>();
+            base.Update(frameTime);
+
+            var query = EntityQueryEnumerator<VaporComponent, SolutionManagerComponent, TransformComponent>();
             while (query.MoveNext(out var uid, out var vaporComp, out var container, out var xform))
             {
                 foreach (var (_, soln) in _solutionContainerSystem.EnumerateSolutions((uid, container)))

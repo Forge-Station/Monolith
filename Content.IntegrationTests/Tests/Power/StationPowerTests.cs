@@ -53,7 +53,7 @@ public sealed class StationPowerTests
 
         var entMan = server.EntMan;
         var protoMan = server.ProtoMan;
-        var ticker = entMan.System<GameTicker>();
+        var ticker = entMan.System<ServerGameTicker>();
 
         // Load the map
         await server.WaitAssertion(() =>

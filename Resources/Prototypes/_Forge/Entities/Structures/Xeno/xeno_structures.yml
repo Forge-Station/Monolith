@@ -31,7 +31,6 @@
       path: /Audio/Effects/gib2.ogg
   - type: IconSmooth
     key: xeno_resin
-    mode: NoSprite
   - type: Destructible
     thresholds:
     - trigger:
@@ -291,8 +290,10 @@
     state: weednode
   - type: IconSmooth
     key: xeno_weeds
-    base: weed
-    mode: CardinalFlags
+    states:
+    - !type:DirectionSpriteSmoothing
+      mask: [ xeno_weeds ]
+      base: weed
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -342,8 +343,10 @@
     state: hive_weed0
   - type: IconSmooth
     key: xeno_weeds_choke
-    base: hive_weed
-    mode: CardinalFlags
+    states:
+    - !type:DirectionSpriteSmoothing
+      mask: [ xeno_weeds_choke ]
+      base: hive_weed
   - type: Fixtures
     fixtures:
       slips:
@@ -410,7 +413,7 @@
     state: sticky
   - type: IconSmooth
     key: xeno_sticky
-    mode: NoSprite
+    states: [] # single-frame floor resin; do not inherit weed DirectionSpriteSmoothing
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.35
     sprintSpeedModifier: 0.35
@@ -437,7 +440,7 @@
     state: fast
   - type: IconSmooth
     key: xeno_fast
-    mode: NoSprite
+    states: [] # single-frame floor resin; do not inherit weed DirectionSpriteSmoothing
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.85
     sprintSpeedModifier: 0.85
@@ -464,7 +467,7 @@
     state: resin_spike
   - type: IconSmooth
     key: xeno_spikes
-    mode: NoSprite
+    states: [] # single-frame; do not inherit weed DirectionSpriteSmoothing
   - type: DamageContacts
     damage:
       types:

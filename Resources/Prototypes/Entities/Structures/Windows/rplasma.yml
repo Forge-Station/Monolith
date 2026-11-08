@@ -4,10 +4,10 @@
   parent: WindowRCDResistant
   components:
   - type: Sprite
-    drawdepth: WallTops
-    sprite: Structures/Windows/reinforced_plasma_window.rsi
+    sprite: Structures/Windows/window-plasma-reinf.rsi
   - type: Icon
-    sprite: Structures/Windows/reinforced_plasma_window.rsi
+    sprite: Structures/Windows/window-plasma-reinf.rsi
+    state: full
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: RGlass
@@ -42,7 +42,30 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    base: rpwindow
+    key: windows-plasma-reinf
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ windows-plasma-reinf ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: window
   - type: Construction
     graph: Window
     node: reinforcedPlasmaWindow
@@ -151,17 +174,23 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: Structures/Windows/reinforced_plasma_diagonal.rsi
-    state: state0
+    sprite: Structures/Windows/window-diagonal-plasma-reinf.rsi
   - type: Tag
     tags:
     - Diagonal
+    - Window
   - type: IconSmooth
-    mode: Diagonal
-    key: walls # Frontier: windows<walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask:
+      - walls
+      - windows
+      - grilles
+      - marble
+      - doors
+      base: state
   - type: Icon
-    sprite: Structures/Windows/plasma_diagonal.rsi
+    sprite: Structures/Windows/window-diagonal-plasma-reinf.rsi
     state: state0
   - type: Fixtures
     fixtures:
@@ -184,7 +213,7 @@
     - East
   - type: DamageVisuals
     damageOverlay:
-      sprite: Structures/Windows/cracks_diagonal.rsi
+      sprite: Structures/Windows/cracks-diagonal.rsi
   - type: Construction
     graph: WindowDiagonal
     node: reinforcedPlasmaWindowDiagonal

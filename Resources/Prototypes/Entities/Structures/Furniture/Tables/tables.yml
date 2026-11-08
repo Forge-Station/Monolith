@@ -26,7 +26,11 @@
     damageModifierSet: Metallic
   - type: IconSmooth
     key: state
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ state ]
+      base: state_
+      swapOuterBits: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -84,7 +88,11 @@
     damageModifierSet: Wood
   - type: IconSmooth
     key: state
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ state ]
+      base: state_
+      swapOuterBits: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -129,7 +137,11 @@
     damageModifierSet: Metallic
   - type: IconSmooth
     key: state
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ state ]
+      base: state_
+      swapOuterBits: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -197,7 +209,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: metaltable
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ metaltable ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: Table
@@ -232,12 +248,20 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           SheetSteel1:
-            min: 2
-            max: 2
+            min: 0
+            max: 1
+          SheetPlasteel1:
+            min: 0
+            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: metalreinforcedtable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ metalreinforcedtable ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableReinforced
@@ -300,6 +324,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: glasstable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ glasstable ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableGlass
@@ -361,6 +390,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: reinforcedglasstable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ reinforcedglasstable ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableReinforcedGlass
@@ -422,6 +456,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: plasmaglasstable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ plasmaglasstable ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TablePlasmaGlass
@@ -468,6 +507,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: brasstable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ brasstable ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableBrass
@@ -515,6 +559,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: woodtable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ woodtable ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableWood
@@ -558,6 +607,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: woodgambletable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ woodgambletable ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: TableCarpet
@@ -591,6 +645,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: stonetable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ stonetable ]
+      base: state_
+      swapOuterBits: false
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepFloor
@@ -622,6 +681,11 @@
           "/Audio/Weapons/slash.ogg"
   - type: IconSmooth
     key: webtable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ webtable ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: WebStructures
     node: table
@@ -686,6 +750,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: fancytable
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytable ]
+      base: state_
+      swapOuterBits: false
   - type: Tag
     tags:
     - Wooden
@@ -707,7 +776,12 @@
     node: TableFancyBlue
   - type: IconSmooth
     key: fancytableblue
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytableblue ]
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyCyan
   parent: TableFancyBase
@@ -722,7 +796,12 @@
     node: TableFancyCyan
   - type: IconSmooth
     key: fancytablecyan
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablecyan ]
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyBlack
   parent: TableFancyBase
@@ -737,7 +816,12 @@
     node: TableFancyBlack
   - type: IconSmooth
     key: fancytableblack
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytableblack ]
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyRed
   parent: TableFancyBase
@@ -752,7 +836,12 @@
     node: TableFancyRed
   - type: IconSmooth
     key: fancytablered
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablered ]
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyPurple
   parent: TableFancyBase
@@ -767,7 +856,12 @@
     node: TableFancyPurple
   - type: IconSmooth
     key: fancytablepurple
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablepurple ]
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyPink
   parent: TableFancyBase
@@ -782,7 +876,12 @@
     node: TableFancyPink
   - type: IconSmooth
     key: fancytablepink
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablepink ]
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyGreen
   parent: TableFancyBase
@@ -797,7 +896,12 @@
     node: TableFancyGreen
   - type: IconSmooth
     key: fancytablegreen
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablegreen ]
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyOrange
   parent: TableFancyBase
@@ -812,7 +916,12 @@
     node: TableFancyOrange
   - type: IconSmooth
     key: fancytableorange
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytableorange ]
+      base: state_
 
+      swapOuterBits: false
 - type: entity
   id: TableFancyWhite
   parent: TableFancyBase
@@ -827,7 +936,12 @@
     node: TableFancyWhite
   - type: IconSmooth
     key: fancytablewhite
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ fancytablewhite ]
+      base: state_
 
+      swapOuterBits: false
 #Debug
 
 - type: entity
@@ -897,7 +1011,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: counterwood
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ counterwood ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: CounterWood
@@ -945,7 +1063,11 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: countermetal
-    base: state_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ countermetal ]
+      base: state_
+      swapOuterBits: false
   - type: Construction
     graph: Table
     node: CounterMetal

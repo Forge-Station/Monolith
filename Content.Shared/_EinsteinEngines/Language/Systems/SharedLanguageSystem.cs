@@ -33,7 +33,7 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     public static LanguagePrototype Universal { get; private set; } = default!;
 
     [Dependency] protected IPrototypeManager _prototype = default!;
-    [Dependency] protected SharedGameTicker _ticker = default!;
+    [Dependency] protected GameTicker _ticker = default!;
 
     public override void Initialize()
     {

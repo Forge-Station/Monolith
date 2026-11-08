@@ -11,7 +11,7 @@ public sealed class DamageOnActionSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
+    [Dependency] private readonly SatiationSystem _satiation = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
@@ -30,20 +30,20 @@ public sealed class DamageOnActionSystem : EntitySystem
 
     private void OnAction(Entity<DamageOnActionComponent> ent, ref DamageOnActionEvent args)
     {
-        if (!TryComp<HungerComponent>(ent.Owner, out var hunger))
+        if (!TryComp<SatiationComponent>(ent.Owner, out var satiation))
             return;
 
         if (!TryComp<DamageableComponent>(ent.Owner, out var damageable))
             return;
 
-        if (_hunger.GetHunger(hunger) < ent.Comp.HungerPerUse)
+        if (_satiation.GetValueOrNull((ent.Owner, satiation), SatiationSystem.Hunger) < ent.Comp.HungerPerUse)
         {
             _popup.PopupEntity(Loc.GetString("damage-action-too-hungry"), ent.Owner, ent.Owner);
             args.Handled = true;
             return;
         }
 
-        _hunger.ModifyHunger(ent.Owner, -ent.Comp.HungerPerUse, hunger);
+        _satiation.ModifyValue((ent.Owner, satiation), SatiationSystem.Hunger, -ent.Comp.HungerPerUse);
         _damageable.TryChangeDamage(ent.Owner, ent.Comp.Damage, true, false, damageable);
         args.Handled = true;
     }

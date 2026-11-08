@@ -31,13 +31,11 @@ public sealed partial class ItemToggleSystem : EntitySystem
     [Dependency] private SharedBodySystem _body = default!; // Forge-Change
     [Dependency] private readonly IGameTiming _gameTiming = default!; // Forge-Change
 
-    private EntityQuery<ItemToggleComponent> _query;
+    [Dependency] private readonly EntityQuery<ItemToggleComponent> _itemToggleQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _query = GetEntityQuery<ItemToggleComponent>();
 
         SubscribeLocalEvent<ItemToggleComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ItemToggleComponent, MapInitEvent>(OnMapInit);
@@ -130,7 +128,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// <returns>Same as <see cref="TrySetActive"/></returns>
     public bool Toggle(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return false;
 
         return TrySetActive(ent, !ent.Comp.Activated, user, predicted);
@@ -153,7 +151,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     public bool TryActivate(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return false;
 
         var uid = ent.Owner;
@@ -199,7 +197,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     public bool TryDeactivate(Entity<ItemToggleComponent?> ent, EntityUid? user = null, bool predicted = true)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return false;
 
         var uid = ent.Owner;
@@ -284,7 +282,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
 
     public bool IsActivated(Entity<ItemToggleComponent?> ent)
     {
-        if (!_query.Resolve(ent, ref ent.Comp, false))
+        if (!_itemToggleQuery.Resolve(ent, ref ent.Comp, false))
             return true; // assume always activated if no component
 
         return ent.Comp.Activated;

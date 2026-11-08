@@ -22,7 +22,7 @@ public sealed partial class GeneticAtomicMetabolismSystem : EntitySystem
     private static readonly TimeSpan MetabolizeInterval = TimeSpan.FromSeconds(1);
 
     [Dependency] private DamageableSystem _damageable = default!;
-    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private IGameTiming _timing = default!;
 
@@ -126,8 +126,8 @@ public sealed partial class GeneticAtomicMetabolismSystem : EntitySystem
 
             _damageable.TryChangeDamage(uid, heal, ignoreResistances: true, interruptsDoAfters: false);
 
-            if (HasComp<HungerComponent>(uid))
-                _hunger.ModifyHunger(uid, (float) radSpent * meta.NutritionPerRad);
+            if (TryComp<SatiationComponent>(uid, out var satiation))
+                _satiation.ModifyValue((uid, satiation), SatiationSystem.Hunger, (float) radSpent * meta.NutritionPerRad);
         }
     }
 }

@@ -47,8 +47,7 @@ public sealed partial class BloodstreamSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<BloodstreamComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<BloodstreamComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<BloodstreamComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedSolutionContainerSystem)]);
         SubscribeLocalEvent<BloodstreamComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<BloodstreamComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<BloodstreamComponent, HealthBeingExaminedEvent>(OnHealthBeingExamined);
@@ -63,6 +62,7 @@ public sealed partial class BloodstreamSystem : EntitySystem
     private void OnMapInit(Entity<BloodstreamComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.UpdateInterval;
+        EnsureBloodSolutions(ent);
     }
 
     private void OnUnpaused(Entity<BloodstreamComponent> ent, ref EntityUnpausedEvent args)
@@ -97,9 +97,10 @@ public sealed partial class BloodstreamSystem : EntitySystem
 
     private void OnReactionAttempt(Entity<BloodstreamComponent> entity, ref SolutionRelayEvent<ReactionAttemptEvent> args)
     {
-        if (args.Name != entity.Comp.BloodSolutionName
-            && args.Name != entity.Comp.ChemicalSolutionName
-            && args.Name != entity.Comp.BloodTemporarySolutionName)
+        var solutionName = args.Solution.Comp.Id;
+        if (solutionName != entity.Comp.BloodSolutionName
+            && solutionName != entity.Comp.ChemicalSolutionName
+            && solutionName != entity.Comp.BloodTemporarySolutionName)
         {
             return;
         }
@@ -177,22 +178,21 @@ public sealed partial class BloodstreamSystem : EntitySystem
         }
     }
 
-    private void OnComponentInit(Entity<BloodstreamComponent> entity, ref ComponentInit args)
+    private void EnsureBloodSolutions(Entity<BloodstreamComponent> entity)
     {
-        if (!_solutionContainerSystem.EnsureSolution(entity.Owner,
-                entity.Comp.ChemicalSolutionName,
-                out var chemicalSolution) ||
-            !_solutionContainerSystem.EnsureSolution(entity.Owner,
-                entity.Comp.BloodSolutionName,
-                out var bloodSolution) ||
-            !_solutionContainerSystem.EnsureSolution(entity.Owner,
-                entity.Comp.BloodTemporarySolutionName,
-                out var tempSolution))
-            return;
+        _solutionContainerSystem.EnsureSolution(entity.Owner,
+            entity.Comp.ChemicalSolutionName,
+            out var chemicalSolution);
+        _solutionContainerSystem.EnsureSolution(entity.Owner,
+            entity.Comp.BloodSolutionName,
+            out var bloodSolution);
+        _solutionContainerSystem.EnsureSolution(entity.Owner,
+            entity.Comp.BloodTemporarySolutionName,
+            out var tempSolution);
 
-        chemicalSolution.MaxVolume = entity.Comp.ChemicalMaxVolume;
-        bloodSolution.MaxVolume = entity.Comp.BloodMaxVolume;
-        tempSolution.MaxVolume = entity.Comp.BleedPuddleThreshold * 4; // give some leeway, for chemstream as well
+        chemicalSolution.Comp.Solution.MaxVolume = entity.Comp.ChemicalMaxVolume;
+        bloodSolution.Comp.Solution.MaxVolume = entity.Comp.BloodMaxVolume;
+        tempSolution.Comp.Solution.MaxVolume = entity.Comp.BleedPuddleThreshold * 4; // give some leeway, for chemstream as well
 
         // Ensure blood that should have DNA has it; must be run here, in case DnaComponent has not yet been initialized
 
@@ -205,7 +205,7 @@ public sealed partial class BloodstreamSystem : EntitySystem
         }
 
         // Fill blood solution with BLOOD
-        bloodSolution.AddReagent(new ReagentId(entity.Comp.BloodReagent, GetEntityBloodData(entity.Owner)), entity.Comp.BloodMaxVolume - bloodSolution.Volume);
+        bloodSolution.Comp.Solution.AddReagent(new ReagentId(entity.Comp.BloodReagent, GetEntityBloodData(entity.Owner)), entity.Comp.BloodMaxVolume - bloodSolution.Comp.Solution.Volume);
     }
 
     private void OnDamageChanged(Entity<BloodstreamComponent> ent, ref DamageChangedEvent args)

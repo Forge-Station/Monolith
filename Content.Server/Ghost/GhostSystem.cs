@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using System.Linq;
 using System.Numerics;
 using Content.Server._Forge.Sponsor; // Forge-Change
@@ -71,7 +72,7 @@ namespace Content.Server.Ghost
         [Dependency] private IConfigurationManager _configurationManager = default!;
         [Dependency] private IChatManager _chatManager = default!;
         [Dependency] private SharedMindSystem _mind = default!;
-        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private ServerGameTicker _gameTicker = default!;
         [Dependency] private DamageableSystem _damageable = default!;
         [Dependency] private SharedPopupSystem _popup = default!;
         [Dependency] private IRobustRandom _random = default!;
@@ -128,7 +129,7 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
             SubscribeLocalEvent<GhostComponent, PriceCalculationEvent>(OnPriceCalculation); // Frontier
 
-            SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
+            SubscribeLocalEvent<RoundEndTextAppendEvent>((ref RoundEndTextAppendEvent _) => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
 
             SubscribeLocalEvent<GhostComponent, MindAddedMessage>(OnMindAdded);
@@ -614,11 +615,11 @@ namespace Content.Server.Ghost
                     else if (_sponsors.TryGetSponsorGhost(level, out var sponsorGhost))
                         ghost = Spawn(sponsorGhost, spawnPosition.Value);
                     else
-                        ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
+                        ghost = SpawnAtPosition(ServerGameTicker.ObserverPrototypeName, spawnPosition.Value);
                 }
                 else
                 {
-                    ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
+                    ghost = SpawnAtPosition(ServerGameTicker.ObserverPrototypeName, spawnPosition.Value);
                 }
 
                 if (!HasComp<GhostComponent>(ghost))
@@ -689,8 +690,8 @@ namespace Content.Server.Ghost
             // Only the default observer prototypes may be recolored.
             if (TryComp<MetaDataComponent>(ghostEntity, out var meta)
                 && meta.EntityPrototype != null
-                && meta.EntityPrototype.ID != GameTicker.ObserverPrototypeName
-                && meta.EntityPrototype.ID != GameTicker.AdminObserverPrototypeName)
+                && meta.EntityPrototype.ID != ServerGameTicker.ObserverPrototypeName
+                && meta.EntityPrototype.ID != ServerGameTicker.AdminObserverPrototypeName)
                 return;
 
             if (!_preferencesManager.TryGetCachedPreferences(session.UserId, out var prefs))

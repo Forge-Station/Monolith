@@ -61,10 +61,10 @@ public sealed partial class MicrowaveSystem : EntitySystem
                 solidsDict.Add(solidID, amountToAdd);
             }
 
-            if (!TryComp<SolutionContainerManagerComponent>(item, out var solMan))
+            if (!TryComp<SolutionManagerComponent>(item, out _))
                 continue;
 
-            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((item, solMan)))
+            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions(item))
             {
                 var solution = soln.Comp.Solution;
                 foreach (var (reagent, quantity) in solution.Contents)

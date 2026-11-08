@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Server.Administration.Commands;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Rules.Components;
@@ -15,7 +16,7 @@ namespace Content.Server.Administration.Systems;
 
 public sealed partial class AdminVerbSystem
 {
-    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private ServerAntagSelectionSystem _antag = default!;
     [Dependency] private ZombieSystem _zombie = default!;
 
     private const string DefaultTraitorRule = "Traitor";

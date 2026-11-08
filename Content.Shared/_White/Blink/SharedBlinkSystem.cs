@@ -5,6 +5,8 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;

@@ -18,22 +18,12 @@
   - type: MobPrice
     price: 2000
   - type: Perishable
-  - type: Hunger
-    thresholds: # Mono
-      Overfed: 200
-      Okay: 100
-      Peckish: 50
-      Starving: 25
-      Dead: 0
-    baseDecayRate: 0.00925925925926 # Guy needs to eat and drink
-  - type: Thirst
-    thresholds:
-      OverHydrated: 200
-      Okay: 150
-      Thirsty: 100
-      Parched: 50
-      Dead: 0
-    baseDecayRate: 0.04
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: DragonPetHunger
+      Thirst:
+        prototype: SimpleMobBaseThirst
   - type: StatusEffects
     allowed:
       - Stun

@@ -22,9 +22,10 @@ public sealed partial class SatiateThirst : EntityEffect
     /// Satiate thirst if a ThirstComponent can be found
     public override void Effect(EntityEffectBaseArgs args)
     {
-        var uid = args.TargetEntity;
-        if (args.EntityManager.TryGetComponent(uid, out ThirstComponent? thirst))
-            args.EntityManager.System<ThirstSystem>().ModifyThirst(uid, thirst, HydrationFactor);
+        if (!args.EntityManager.TryGetComponent(args.TargetEntity, out SatiationComponent? satiation))
+            return;
+
+        args.EntityManager.System<SatiationSystem>().ModifyValue((args.TargetEntity, satiation), SatiationSystem.Thirst, HydrationFactor);
     }
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)

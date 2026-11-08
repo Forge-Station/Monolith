@@ -22,6 +22,7 @@
       Heat:
         collection:
           MetalLaserImpact
+  # - type: Wall
   - type: Tag
     tags:
     - Wall
@@ -59,6 +60,51 @@
   - type: SunShadowCast
   - type: ArmorThickness
     thickness: 3
+  - type: TrayScanReveal
+
+- type: entity
+  abstract: true
+  parent: BaseWall
+  id: WallDiagonalBase
+  suffix: Diagonal
+  components:
+  - type: Tag
+    tags:
+    - Diagonal
+  - type: IconSmooth
+    key: walls
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask:
+      - walls
+      - windows
+      - grilles
+      - marble
+      - doors
+      base: state
+  - type: Airtight
+    noAirWhenFullyAirBlocked: false
+    airBlockedDirection:
+    - South
+    - East
+  - type: Occluder
+    polygon:
+    - "-0.5,-0.5"
+    - "0.5,0.5"
+    - "0.5,-0.5"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PolygonShape
+          vertices:
+          - "-0.5,-0.5"
+          - "0.5,0.5"
+          - "0.5,-0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -78,67 +124,68 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: bricks
-    base: brick
+    key: walls-material
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: brick
 
 - type: entity
   parent: BaseWallTierTwo # Mono
-  id: WallClock
-  name: clock wall
+  id: WallBrass
+  name: brass wall
   components:
-  - type: Tag
-    tags:
-    - Wall
   - type: Sprite
-    sprite: Structures/Walls/clock.rsi
+    sprite: Structures/Walls/brass.rsi
   - type: Icon
-    sprite: Structures/Walls/clock.rsi
-  - type: Construction
-    graph: ClockworkGirder
-    node: clockworkWall
-  - type: IconSmooth
-    key: walls
-    base: clock
-  - type: RCDDeconstructable # Frontier
-    cost: 6 # Frontier
-    delay: 8 # Frontier
-    fx: EffectRCDDeconstruct8 # Frontier
-  - type: StaticPrice # Frontier 60
-    price: 60 # Frontier 60
-
-- type: entity
-  parent: BaseWallTierOne # Mono
-  id: WallClown
-  name: bananium wall
-  components:
-  - type: Tag
-    tags:
-    - Wall
-  - type: Sprite
-    sprite: Structures/Walls/clown.rsi
-  - type: Icon
-    sprite: Structures/Walls/clown.rsi
+    sprite: Structures/Walls/brass.rsi
   - type: Construction
     graph: Girder
-    node: bananiumWall
-  - type: RCDDeconstructable
-    cost: 6
-    delay: 8
-    fx: EffectRCDDeconstruct8
+    node: brassWall
   - type: IconSmooth
-    key: walls
-    base: clown
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
-        mask:
-        - FullTileMask
-        layer:
-        - WallLayer
-        density: 8000 # really good ramming wall, bananium is rare so it's probably fine
+    key: walls-material
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: brass
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -149,6 +196,7 @@
   - type: Tag
     tags:
     - Wall
+    - WallT1
     - Structure
   - type: Sprite
     sprite: Structures/Walls/meat.rsi
@@ -158,24 +206,30 @@
     graph: Girder
     node: meatWall
   - type: IconSmooth
-    key: walls
-    base: meat
-
-- type: entity
-  parent: BaseWallTierTwo # Mono
-  id: WallCult
-  name: cult wall
-  components:
-  - type: Tag
-    tags:
-    - Wall
-  - type: Sprite
-    sprite: Structures/Walls/cult.rsi
-  - type: Icon
-    sprite: Structures/Walls/cult.rsi
-  - type: IconSmooth
-    key: walls
-    base: cult
+    key: walls-material
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: meat
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -186,6 +240,7 @@
   - type: Tag
     tags:
     - Wall
+    - WallT1
     - Debug
   - type: Sprite
     sprite: Structures/Walls/debug.rsi
@@ -193,36 +248,59 @@
     sprite: Structures/Walls/debug.rsi
   - type: IconSmooth
     key: walls
-    base: debug
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - walls
+      - windows
+      - grilles
+      - marble
+      - doors
+      base: debug
 
 - type: entity
-  parent: BaseWallTierThree # Mono - surely its fine since diamonds are so rare
-  id: WallDiamond
-  name: diamond wall
+  parent: WallDebug
+  id: WallDebugA
+  name: debug wall
+  suffix: DEBUG, AltA
   components:
-  - type: Tag
-    tags:
-    - Wall
   - type: Sprite
-    sprite: Structures/Walls/diamond.rsi
+    sprite: Structures/Walls/debugalt.rsi
   - type: Icon
-    sprite: Structures/Walls/diamond.rsi
-  - type: RCDDeconstructable
-    cost: 6
-    delay: 8
-    fx: EffectRCDDeconstruct8
+    sprite: Structures/Walls/debugalt.rsi
   - type: IconSmooth
     key: walls
-    base: diamond
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls ]
+      altMask: [
+        windows,
+        walls-marble,
+      ]
+      base: debug
+
+- type: entity
+  parent: WallDebugA
+  id: WallDebugB
+  name: debug wall
+  suffix: DEBUG, AltB
+  components:
+  - type: IconSmooth
+    key: walls-marble
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls-marble ]
+      altMask: [
+        windows,
+        walls,
+      ]
+      base: debug
 
 - type: entity
   parent: BaseWallTierOne # Mono
   id: WallGold
   name: gold wall
   components:
-  - type: Tag
-    tags:
-    - Wall
   - type: Sprite
     sprite: Structures/Walls/gold.rsi
   - type: Icon
@@ -246,41 +324,36 @@
         - WallLayer
         density: 4000
   - type: IconSmooth
-    key: walls
-    base: gold
-
-- type: entity
-  parent: BaseWallTierOne # Mono
-  id: WallIce
-  name: ice wall
-  components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactIce
-  - type: Tag
-    tags:
-    - Wall
-  - type: Sprite
-    sprite: Structures/Walls/ice.rsi
-  - type: Icon
-    sprite: Structures/Walls/ice.rsi
-  - type: IconSmooth
-    key: walls
-    base: ice
+    key: walls-material
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: gold
 
 - type: entity
   parent: BaseWallTierOne # Mono
   id: WallPlasma
   name: plasma wall
   components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactGlass
-  - type: Tag
-    tags:
-    - Wall
   - type: Sprite
     sprite: Structures/Walls/plasma.rsi
   - type: Icon
@@ -293,33 +366,32 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: walls
-    base: plasma
+    key: walls-material
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: plasma
   - type: RadiationBlocker
     resistance: 5
-
-- type: entity
-  parent: BaseWallTierOne
-  id: WallPlastic
-  name: plastic wall
-  components:
-  - type: Tag
-    tags:
-    - Wall
-  - type: Sprite
-    sprite: Structures/Walls/plastic.rsi
-  - type: Icon
-    sprite: Structures/Walls/plastic.rsi
-  - type: Construction
-    graph: Girder
-    node: plasticWall
-  - type: RCDDeconstructable
-    cost: 6
-    delay: 8
-    fx: EffectRCDDeconstruct8
-  - type: IconSmooth
-    key: walls
-    base: plastic
 
 - type: entity
   parent: BaseWall
@@ -328,17 +400,36 @@
   description: Skub knows this wall is too hard to destroy. # Frontier
   suffix: indestructible
   components:
-  - type: Tag
-    tags:
-    - Wall
   - type: Sprite
     sprite: Structures/Walls/plastitanium.rsi
   - type: PaintableWall # Forge-Change
   - type: Icon
     sprite: Structures/Walls/plastitanium.rsi
   - type: IconSmooth
-    key: walls
-    base: plastitanium
+    key: walls-plastitanium
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls-plastitanium ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
   - type: Fixtures
     fixtures:
       fix1:
@@ -376,15 +467,11 @@
     - WallT3
 
 - type: entity
-  parent: [ WallPlastitaniumDiagonalIndestructible, BaseWallTierTwo ] # Mono
+  parent: [ WallPlastitaniumDiagonalIndestructible ]
   id: WallPlastitaniumDiagonal
   name: plastitanium wall
   description: Keeps the air in and the chimera out. #Mono
   suffix: diagonal
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
   - type: RCDDeconstructable # Frontier
     deconstructable: false # Frontier
@@ -393,16 +480,48 @@
   - type: Construction # Mono
     graph: Girder
     node: wallPlastitaniumDiagonal
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: WallDefense2
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 2750
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+    - trigger:
+        !type:DamageTrigger
+        damage: 3250
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ArmorThickness
+    thickness: 5
+  - type: ShipRepairable
+    repairTime: 3
+    repairCost: 6
+  - type: Tag
+    tags:
+    - Wall
+    - WallT2
+  - type: RadiationBlocker
+    resistance: 3
 
 - type: entity
+  parent: WallDiagonalBase
   id: WallPlastitaniumDiagonalIndestructible
   name: plastitanium wall
   suffix: diagonal, indestructible
-  description: Skub knows this wall is too hard to destroy. # Frontier
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
   - type: Transform
     anchored: true
@@ -413,40 +532,12 @@
     - Diagonal
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/plastitanium_diagonal.rsi
-    state: state0
-  - type: PaintableWall # Forge-Change
-  - type: IconSmooth
-    mode: Diagonal
-    key: walls
-    base: state
+    sprite: Structures/Walls/plastitanium-diagonal.rsi
   - type: Icon
-    sprite: Structures/Walls/plastitanium_diagonal.rsi
+    sprite: Structures/Walls/plastitanium-diagonal.rsi
     state: state0
-  - type: Physics
-    bodyType: Static
-  - type: Airtight
-    noAirWhenFullyAirBlocked: false
-    airBlockedDirection:
-    - South
-    - East
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PolygonShape
-          vertices:
-          - "-0.5,-0.5"
-          - "0.5,0.5"
-          - "0.5,-0.5"
-        mask:
-        - FullTileMask
-        layer:
-        - DiagonalWallLayer # Mono WallLayer->DiagonalWallLayer
-  - type: StaticPrice
-    price: 50 # Mono
-  - type: ArmorThickness
-    canBePierced: false
+  - type: RadiationBlocker
+    resistance: 5
 
 - type: entity
   parent: BaseWallTierTwo # Mono
@@ -454,17 +545,39 @@
   name: reinforced wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/solid.rsi
-  - type: PaintableWall # Forge-Change
+    sprite: Structures/Walls/solid-reinforced.rsi
   - type: Icon
-    sprite: Structures/Walls/solid.rsi
-    state: rgeneric
+    sprite: Structures/Walls/solid-reinforced.rsi
+    state: full
   - type: Construction
     graph: Girder
     node: reinforcedWall
   - type: IconSmooth
     key: walls
-    base: reinf_over
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -506,60 +619,71 @@
   suffix: rusted
   components:
   - type: Sprite
-    sprite: Structures/Walls/solid_rust.rsi
+    sprite: Structures/Walls/solid-reinforced-rust.rsi
   - type: Icon
-    sprite: Structures/Walls/solid_rust.rsi
-    state: rgeneric
+    sprite: Structures/Walls/solid-reinforced-rust.rsi
+    state: full
   - type: Construction
     graph: Girder
     node: reinforcedWallRust
   - type: IconSmooth
     key: walls
-    base: reinf_over
-  - type: RCDDeconstructable #Frontier
-    cost: 6 #Frontier
-    delay: 8 #Frontier
-    fx: EffectRCDDeconstruct8 #Frontier
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
+    # Rusted walls should be made weaker through a damage mod status effect.
 
 - type: entity
-  parent: WallShuttleDiagonal
+  parent: [ BaseWallTierTwo ] # Forge-change: add BaseWallTierTwo
   id: WallReinforcedDiagonal
   name: reinforced wall
-  suffix: diagonal
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
-  - type: Tag
-    tags:
-    - Diagonal
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/reinforced_diagonal.rsi
-    state: state0
-  - type: PaintableWall # Forge-Change
-  - type: IconSmooth
-    mode: Diagonal
-    key: walls
-    base: state
+    sprite: Structures/Walls/reinforced-diagonal.rsi
   - type: Icon
-    sprite: Structures/Walls/reinforced_diagonal.rsi
+    sprite: Structures/Walls/reinforced-diagonal.rsi
     state: state0
-  - type: Destructible # Mono - override HP stats from parent: WallShuttleDiagonal, matches reinforced wall
+  - type: RadiationBlocker
+    resistance: 5
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: WallDefense2
+  - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 1100 # Mono
+        damage: 2750
       behaviors:
       - !type:DoActsBehavior
-        acts: ["Destruction"]
+        acts: [ "Destruction" ]
       - !type:PlaySoundBehavior
         sound:
           collection: MetalSlam
     - trigger:
         !type:DamageTrigger
-        damage: 1000 # Mono
+        damage: 3250
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -567,67 +691,84 @@
       - !type:ChangeConstructionNodeBehavior
         node: girder
       - !type:DoActsBehavior
-        acts: ["Destruction"]
-  - type: ShipRepairable
-    repairTime: 2
-    repairCost: 3
-
-# Riveting
-- type: entity
-  parent: BaseWallOutpost # Mono
-  id: WallRiveted
-  name: riveted wall
-  suffix: OUTPOST ONLY
-  components:
-  - type: Tag
-    tags:
-    - Wall
-  - type: Sprite
-    sprite: Structures/Walls/riveted.rsi
-  - type: Icon
-    sprite: Structures/Walls/riveted.rsi
-  - type: IconSmooth
-    key: walls
-    base: riveted
+        acts: [ "Destruction" ]
   - type: StaticPrice
-    price: 70 # Frontier: 150<115
-  - type: RCDDeconstructable #Frontier
-    cost: 6 #Frontier
-    delay: 8 #Frontier
-    fx: EffectRCDDeconstruct8 #Frontier
-
-- type: entity
-  parent: BaseWallTierOne # Mono
-  id: WallSandstone
-  name: sandstone wall
-  components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactConcrete
+    price: 25
+  - type: ArmorThickness
+    thickness: 5
+  - type: ShipRepairable
+    repairTime: 3
+    repairCost: 6
   - type: Tag
     tags:
     - Wall
+    - WallT2
+
+- type: entity
+  parent: BaseWall
+  id: WallMarbleIndestructible
+  name: marble wall
+  suffix: indestructible
+  components:
   - type: Sprite
-    sprite: Structures/Walls/sandstone.rsi
+    sprite: Structures/Walls/marble.rsi
   - type: Icon
-    sprite: Structures/Walls/sandstone.rsi
-  - type: RCDDeconstructable
-    cost: 6
-    delay: 8
-    fx: EffectRCDDeconstruct8
+    sprite: Structures/Walls/marble.rsi
   - type: IconSmooth
-    key: walls
-    base: sandstone
+    key: walls-marble
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls-marble ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls
+      - grilles
+      - doors
+      base: wall
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 4000
+  - type: RadiationBlocker
+    resistance: 5
+
+- type: entity
+  parent: [ WallMarbleIndestructible, BaseWallOutpost ]
+  id: WallMarble
+  name: marble wall
+  suffix: ""
+  components:
+  # - type: Injurable
+  #   damageContainer: StructuralInorganic
+  - type: StaticPrice
+    price: 150
 
 - type: entity
   parent: BaseWallTierOne # Mono
   id: WallSilver
   name: silver wall
   components:
-  - type: Tag
-    tags:
-    - Wall
   - type: Sprite
     sprite: Structures/Walls/silver.rsi
   - type: Icon
@@ -640,39 +781,42 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: walls
-    base: silver
+    key: walls-material
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: silver
 
 #shuttle walls
 - type: entity
+  parent: [ WallDiagonalBase ]
   id: WallShuttleDiagonal
   name: shuttle wall
-  parent: BaseWallTierOne
-  suffix: Diagonal
-  description: Keeps the air in and the greytide out.
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
-  - type: Transform
-    anchored: true
-  - type: Clickable
-  - type: Tag
-    tags:
-    - Wall
-    - Diagonal
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/shuttle_diagonal.rsi
-    state: state0
-  - type: PaintableWall # Forge-Change
-  - type: IconSmooth
-    mode: Diagonal
-    key: walls
-    base: state
+    sprite: Structures/Walls/shuttle-diagonal.rsi
   - type: Icon
-    sprite: Structures/Walls/shuttle_diagonal.rsi
+    sprite: Structures/Walls/shuttle-diagonal.rsi
     state: state0
 #  - type: Reflect - Mono
 #    reflectProb: 1
@@ -694,19 +838,40 @@
         mask:
         - FullTileMask
         layer:
-        - DiagonalWallLayer # Mono WallLayer->DiagonalWallLayer
+        - DiagonalWallLayer
         density: 2000
-  - type: Physics
-    bodyType: Static
   - type: Construction
     graph: Girder
     node: diagonalshuttleWall
-  - type: RCDDeconstructable #Frontier
-    cost: 6 #Frontier
-    delay: 8 #Frontier
-    fx: EffectRCDDeconstruct8 #Frontier
+  - type: RadiationBlocker
+    resistance: 5
   - type: StaticPrice
     price: 115 # This shit is decorative anyways # Forge-Change
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: WallDefense1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+    - trigger:
+        !type:DamageTrigger
+        damage: 1800
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: BaseWallTierTwo # Mono
@@ -728,8 +893,30 @@
     graph: Girder
     node: shuttleWall
   - type: IconSmooth
-    key: walls
-    base: state
+    key: walls-shuttle
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls-shuttle ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -763,37 +950,10 @@
 #    reflectProb: 1 # Frontier
 
 - type: entity
-  parent: BaseWallTierOne # Mono
-  id: WallShuttleInterior
-  name: shuttle wall
-  suffix: Interior
-  components:
-  - type: RCDDeconstructable
-    cost: 6
-    delay: 8
-    fx: EffectRCDDeconstruct8
-  - type: Sprite
-    sprite: Structures/Walls/shuttleinterior.rsi
-  - type: PaintableWall # Forge-Change
-  - type: Icon
-    sprite: Structures/Walls/shuttleinterior.rsi
-  - type: Construction
-    graph: Girder
-    node: shuttleInteriorWall
-  - type: IconSmooth
-    key: walls
-    base: state
-#  - type: Reflect # Frontier
-#    reflectProb: 1 # Frontier
-
-- type: entity
   parent: BaseWallTierOne
   id: WallSolid
   name: solid wall
   components:
-  - type: Tag
-    tags:
-    - Wall
   - type: Sprite
     sprite: Structures/Walls/solid.rsi
   - type: WallReplacementMarker
@@ -808,10 +968,33 @@
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
     key: walls
-    base: solid
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
 
 - type: entity
-  parent: WallShuttleDiagonal
+  parent: BaseWallTierOne
   id: WallSolidDiagonal
   name: solid wall
   suffix: diagonal
@@ -822,14 +1005,9 @@
   components:
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/solid_diagonal.rsi
-    state: state0
-  - type: IconSmooth
-    mode: Diagonal
-    key: walls
-    base: state
+    sprite: Structures/Walls/solid-diagonal.rsi
   - type: Icon
-    sprite: Structures/Walls/solid_diagonal.rsi
+    sprite: Structures/Walls/solid-diagonal.rsi
     state: state0
   - type: Destructible # Mono - override HP stats from parent: WallShuttleDiagonal
     thresholds:
@@ -865,32 +1043,75 @@
   suffix: rusted
   components:
   - type: Sprite
-    sprite: Structures/Walls/solid_rust.rsi
+    sprite: Structures/Walls/solid-rust.rsi
   - type: Icon
-    sprite: Structures/Walls/solid_rust.rsi
+    sprite: Structures/Walls/solid-rust.rsi
     state: full
   - type: Construction
     graph: Girder
     node: wallrust
-  - type: IconSmooth
-    key: walls
-    base: solid
+#  - type: IconSmooth
+#    key: walls
+#    states:
+#    - !type:CardinalCornerSpriteSmoothing
+#      mask: [ walls ]
+#      altMask:
+#      - windows
+#      - windows-reinf
+#      - windows-tinted
+#      - windows-plasma
+#      - windows-plasma-reinf
+#      - windows-uranium
+#      - windows-uranium-reinf
+#      - windows-exo
+#      - windows-shuttle
+#      - windows-plastitanium
+#      - windows-regal
+#      - walls-exo
+#      - walls-shuttle
+#      - walls-plastitanium
+#      - walls-material
+#      - walls-marble
+#      - walls
+#      - grilles
+#      - doors
+#      base: wall
+  # Rusted walls should be made weaker through a damage mod status effect.
 
 - type: entity
   parent: BaseWallTierOne # Mono
   id: WallSolidChitin
-  name: solid chitin
+  name: exodermis wall
   components:
-  - type: Tag
-    tags:
-      - Wall
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: Structures/Walls/exo.rsi
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: Structures/Walls/exo.rsi
   - type: IconSmooth
-    key: chitin
-    base: solid
+    key: walls-exo
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls-exo ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
   - type: Construction
     graph: Girder
     node: wallChitin
@@ -902,16 +1123,13 @@
 - type: entity
   parent: BaseWallTierTwo # Mono
   id: WallReinforcedChitin
-  name: reinforced chitin
+  name: reinforced exodermis
   components:
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: Structures/Walls/exo-reinforced.rsi
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
-    state: rgeneric
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: StructuralMetallicStrong
+    sprite: Structures/Walls/exo-reinforced.rsi
+    state: full
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -929,8 +1147,30 @@
   - type: RadiationBlocker
     resistance: 5
   - type: IconSmooth
-    key: chitin
-    base: reinf_over
+    key: walls-exo
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls-exo ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
   - type: Construction
     graph: Girder
     node: reinforcedWallChitin
@@ -942,12 +1182,19 @@
   name: xenoborg wall
   components:
   - type: Sprite
-    sprite: Structures/Walls/xenoborg.rsi
+    sprite: Structures/Walls/exo-borg.rsi
   - type: Icon
-    sprite: Structures/Walls/xenoborg.rsi
+    sprite: Structures/Walls/exo-borg.rsi
   - type: IconSmooth
-    key: walls
-    base: xenoborg
+    key: walls-exo-borg
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls-exo-borg ]
+      altMask:
+      - windows-exo-borg
+      - grilles
+      - doors
+      base: wall
 
 - type: entity
   parent: WallPlastitaniumDiagonal
@@ -957,11 +1204,21 @@
   components:
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/xenoborg_diagonal.rsi
+    sprite: Structures/Walls/exo-borg-diagonal.rsi
     state: state0
   - type: Icon
-    sprite: Structures/Walls/xenoborg_diagonal.rsi
+    sprite: Structures/Walls/exo-borg-diagonal.rsi
     state: state0
+  - type: IconSmooth
+    key: walls-exo-borg
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask:
+      - walls-exo-borg
+      - windows-exo-borg
+      - grilles
+      - doors
+      base: state
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -987,8 +1244,30 @@
         - WallLayer
         density: 6000
   - type: IconSmooth
-    key: walls
-    base: uranium
+    key: walls-material
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: uranium
   - type: RadiationBlocker
     resistance: 6
   - type: RCDDeconstructable #Frontier
@@ -1014,8 +1293,30 @@
     graph: Barricade
     node: woodWall
   - type: IconSmooth
-    key: woods
-    base: wood
+    key: walls-material
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wood
   - type: RCDDeconstructable #Frontier
     cost: 6 #Frontier
     delay: 8 #Frontier
@@ -1063,8 +1364,30 @@
         sound:
           collection: WoodDestroy
   - type: IconSmooth
-    key: webs
-    base: wall
+    key: walls-material
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
   - type: Construction
     graph: WebStructures
     node: wall
@@ -1074,25 +1397,6 @@
     fx: EffectRCDDeconstruct8 #Frontier
   - type: ArmorThickness
     thickness: 1
-
-
-# Lavalend Walls
-
-- type: entity
-  parent: BaseWallTierOne # Mono
-  id: WallNecropolis
-  name: stone wall
-  components:
-  - type: Tag
-    tags:
-    - Wall
-  - type: Sprite
-    sprite: Structures/Walls/necropolis.rsi
-  - type: Icon
-    sprite: Structures/Walls/necropolis.rsi
-  - type: IconSmooth
-    key: walls
-    base: necropolis
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -1108,11 +1412,29 @@
     sprite: Structures/Walls/mining.rsi
   - type: IconSmooth
     key: walls
-    base: mining
-  - type: RandomIconSmooth
-    randomStates:
-    - mining
-    - miningB
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: mining
   - type: Appearance
   # Forge-Change-Start
   - type: Construction
@@ -1123,81 +1445,49 @@
   # Forge-Change-End
 
 - type: entity
-  parent: WallShuttleDiagonal
+  parent: WallDiagonalBase
   id: WallMiningDiagonal
   name: mining wall
   suffix: diagonal
-  placement:
-    mode: SnapgridCenter
-    snap:
-    - Wall
   components:
   - type: Sprite
     drawdepth: Walls
-    sprite: Structures/Walls/mining_diagonal.rsi
-    state: state0
-  - type: IconSmooth
-    mode: Diagonal
-    key: walls
-    base: state
+    sprite: Structures/Walls/mining-diagonal.rsi
   - type: Icon
-    sprite: Structures/Walls/mining_diagonal.rsi
+    sprite: Structures/Walls/mining-diagonal.rsi
     state: state0
   - type: RCDDeconstructable # Frontier
     deconstructable: false # Frontier
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: WallDefense1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+    - trigger:
+        !type:DamageTrigger
+        damage: 1800
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   # Forge-Change-Start
   - type: Construction
     graph: Girder
     node: wallMiningDiagonal
   # Forge-Change-End
-
-
-# Vault Walls
-
-- type: entity
-  parent: BaseWallTierThree # Mono
-  id: WallVaultAlien
-  name: alien vault wall
-  description: A mysterious ornate looking wall. There may be ancient dangers inside.
-  components:
-  - type: Sprite
-    sprite: Structures/Walls/vault.rsi
-    state: alienvault
-  - type: Icon
-    sprite: Structures/Walls/vault.rsi
-    state: alienvault
-
-- type: entity
-  parent: WallVaultAlien
-  id: WallVaultRock
-  name: rock vault wall
-  components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactConcrete
-  - type: Sprite
-    sprite: Structures/Walls/vault.rsi
-    state: rockvault
-  - type: Icon
-    sprite: Structures/Walls/vault.rsi
-    state: rockvault
-
-- type: entity
-  parent: WallVaultAlien
-  id: WallVaultSandstone
-  name: sandstone vault wall
-  components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
-    soundGroups:
-      Brute:
-        collection: WolfgateBulletImpactConcrete
-  - type: Sprite
-    sprite: Structures/Walls/vault.rsi
-    state: sandstonevault
-  - type: Icon
-    sprite: Structures/Walls/vault.rsi
-    state: sandstonevault
 
 # Mime
 
@@ -1210,6 +1500,7 @@
   - type: Tag
     tags:
     - Wall
+  # - type: Wall
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -1233,6 +1524,7 @@
   - type: Tag
     tags:
     - Wall
+  # - type: Wall
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -1254,107 +1546,110 @@
     state: forcewall
 
 - type: entity
-  parent: BaseWallTierOne # Mono
-  id: WallCobblebrick
-  name: cobblestone brick wall
-  description: Stone by stone, perfectly fitted together to form a wall.
+  parent: BaseWallTierOne
+  id: WallConcrete
+  name: concrete wall
   components:
-  - type: Tag
-    tags:
-    - Wall
   - type: Sprite
-    sprite: Structures/Walls/cobblebrick.rsi
+    sprite: Structures/Walls/concrete.rsi
   - type: Icon
-    sprite: Structures/Walls/cobblebrick.rsi
+    sprite: Structures/Walls/concrete.rsi
   - type: RCDDeconstructable
     cost: 6
     delay: 8
     fx: EffectRCDDeconstruct8
   - type: IconSmooth
-    key: cobblebricks
-    base: cobblebrick
-  - type: ArmorThickness
-    thickness: 2
+    key: walls
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: concrete
+
+# Cardboard
 
 - type: entity
-  parent: WallCobblebrick
-  id: WallBasaltCobblebrick
-  name: basalt brick wall
+  parent: BaseWallTierOne
+  id: Cardwall
+  name: cardboard wall
+  description: Budget cuts are hitting hard.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
   components:
-  - type: Sprite
-    sprite: Structures/Walls/cobblebrick_basalt.rsi
-  - type: Icon
-    sprite: Structures/Walls/cobblebrick_basalt.rsi
-  - type: IconSmooth
-    key: cobblebricks
-    base: cobblebrick
-
-- type: entity
-  parent: WallCobblebrick
-  id: WallSnowCobblebrick
-  name: snow brick wall
-  description: A cold, not-so-impenetrable wall.
-  components:
-  - type: RangedDamageSound # WOLFGATE - material bullet impacts
+  - type: MeleeSound
     soundGroups:
       Brute:
-        collection: WolfgateBulletImpactIce
+        path:
+          "/Audio/Weapons/pierce.ogg"
+  # - type: Wall
+  - type: Tag
+    tags:
+    - Wall
   - type: Sprite
-    sprite: Structures/Walls/cobblebrick_snow.rsi
+    drawdepth: SmallObjects #so bullets pass 'through'
+    sprite: Structures/Walls/card.rsi
   - type: Icon
-    sprite: Structures/Walls/cobblebrick_snow.rsi
+    sprite: Structures/Walls/card.rsi
+    state: full
+  # - type: Construction
+  #   graph: Cardwall
+  #   node: cardwall
+  #   deconstructionTarget: start
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialCardboard1:
+            min: 1
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/poster_broken.ogg
   - type: IconSmooth
-    key: cobblebricks
-    base: cobblebrick
-
-- type: entity
-  parent: WallCobblebrick
-  id: WallAsteroidCobblebrick
-  name: asteroid stone brick wall
-  components:
-  - type: Sprite
-    sprite: Structures/Walls/cobblebrick_asteroid.rsi
-  - type: Icon
-    sprite: Structures/Walls/cobblebrick_asteroid.rsi
-  - type: IconSmooth
-    key: cobblebricks
-    base: cobblebrick
-
-- type: entity
-  parent: WallCobblebrick
-  id: WallSandCobblebrick
-  name: sandstone brick wall
-  components:
-  - type: Sprite
-    sprite: Structures/Walls/cobblebrick_sand.rsi
-  - type: Icon
-    sprite: Structures/Walls/cobblebrick_sand.rsi
-  - type: IconSmooth
-    key: cobblebricks
-    base: cobblebrick
-
-- type: entity
-  parent: WallCobblebrick
-  id: WallChromiteCobblebrick
-  name: chromite brick wall
-  components:
-  - type: Sprite
-    sprite: Structures/Walls/cobblebrick_chromite.rsi
-  - type: Icon
-    sprite: Structures/Walls/cobblebrick_chromite.rsi
-  - type: IconSmooth
-    key: cobblebricks
-    base: cobblebrick
-
-- type: entity
-  parent: WallCobblebrick
-  id: WallAndesiteCobblebrick
-  name: andesite brick wall
-  components:
-  - type: Sprite
-    sprite: Structures/Walls/cobblebrick_andesite.rsi
-  - type: Icon
-    sprite: Structures/Walls/cobblebrick_andesite.rsi
-  - type: IconSmooth
-    key: cobblebricks
-    base: cobblebrick
+    key: cards
+    states:
+    - !type:CornerSpriteSmoothing
+      mask:
+      - cards
+      - grilles
+      - doors
+      base: card
+  - type: Occluder
+  - type: BlockWeather
+  - type: SunShadowCast

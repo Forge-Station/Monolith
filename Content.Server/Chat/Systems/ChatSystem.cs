@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
@@ -65,7 +66,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private ServerStationSystem _stationSystem = default!;
     [Dependency] private MobStateSystem _mobStateSystem = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ReplacementAccentSystem _wordreplacement = default!;

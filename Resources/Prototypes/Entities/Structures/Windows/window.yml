@@ -27,10 +27,9 @@
       - ForceFixRotations
       - Window
   - type: Sprite
-    drawdepth: WallTops
-    sprite: Structures/Windows/window.rsi
+    sprite: Structures/Windows/window-base.rsi
   - type: Icon
-    sprite: Structures/Windows/window.rsi
+    sprite: Structures/Windows/window-base.rsi
     state: full
   - type: Physics
     bodyType: Static
@@ -82,14 +81,31 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Airtight
-  - type: DeltaPressure
-    minPressure: 1000
-    minPressureDelta: 750
-    scalingType: Linear
-    scalingPower: 0.0005
   - type: IconSmooth
-    key: walls
-    base: window
+    key: windows
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ windows ]
+      altMask:
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: window
   - type: InteractionPopup
     interactSuccessString: comp-window-knock
     messagePerceivedByOthers: comp-window-knock
@@ -111,6 +127,10 @@
   - type: ShipRepairable
     repairTime: 3
     repairCost: 3
+  - type: StructureAlignerPylon
+    pylons:
+    - Door
+    - Firelock
 
 - type: entity
   parent: Window
@@ -118,12 +138,34 @@
   name: tinted window
   components:
   - type: Sprite
-    drawdepth: WallTops
-    sprite: Structures/Windows/tinted_window.rsi
+    sprite: Structures/Windows/window-tinted.rsi
   - type: Icon
-    sprite: Structures/Windows/tinted_window.rsi
+    sprite: Structures/Windows/window-tinted.rsi
   - type: IconSmooth
-    base: twindow
+    key: windows-tinted
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ windows-tinted ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-exo
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: window
   - type: Construction
     graph: Window
     node: tintedWindow
@@ -284,18 +326,23 @@
     - Window
   components:
   - type: Sprite
-    drawdepth: WallTops
-    sprite: Structures/Windows/window_diagonal.rsi
-    state: state0
+    sprite: Structures/Windows/window-base-diagonal.rsi
   - type: Tag
     tags:
     - Diagonal
     - Window
   - type: IconSmooth
-    mode: Diagonal
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask:
+      - walls
+      - windows
+      - grilles
+      - marble
+      - doors
+      base: state
   - type: Icon
-    sprite: Structures/Windows/window_diagonal.rsi
+    sprite: Structures/Windows/window-base-diagonal.rsi
     state: state0
   - type: Fixtures
     fixtures:
@@ -317,7 +364,7 @@
     - East
   - type: DamageVisuals
     damageOverlay:
-      sprite: Structures/Windows/cracks_diagonal.rsi
+      sprite: Structures/Windows/cracks-diagonal.rsi
   - type: Construction
     graph: WindowDiagonal
     node: windowDiagonal

@@ -11,8 +11,8 @@
   description: A small heavy support craft, comissioned by the Viper Group for fleet support. Magboots suggested.
   price: 68714
   category: Small
-  group: Viper
-  access: Viper
+  group: Shipyard
+  access: Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/Viper/talonuran.yml
   guidebookPage: Null
   class:

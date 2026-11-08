@@ -69,6 +69,10 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
 
         foreach (var extra in component.AdditionalGameRules)
         {
+            // Children may already be gone during FlushEntities / round reset.
+            if (TerminatingOrDeleted(extra))
+                continue;
+
             ServerGameTicker.EndGameRule(extra);
         }
     }

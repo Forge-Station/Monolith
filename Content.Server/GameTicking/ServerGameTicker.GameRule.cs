@@ -85,9 +85,10 @@ public sealed partial class ServerGameTicker
 #endif
         Log.Info(str);
 
-        var ruleComp = EnsureComp<GameRuleComponent>(ruleEntity);
-        var ev = new GameRuleAddedEvent((ruleEntity, ruleComp));
-        RaiseLocalEvent(ruleEntity, ref ev, true);
+        // GameRuleAddedEvent is raised by Shared GameTicker on MapInit during Spawn above.
+        // Raising it again here would re-run SecretRuleSystem/RoundstartStationVariationRuleSystem.Added
+        // and double-spawn every nested rule (breaks TestAllGamemodesCanStart("Secret")).
+        EnsureComp<GameRuleComponent>(ruleEntity);
 
         var currentTime = RunLevel == GameRunLevel.PreRoundLobby ? TimeSpan.Zero : RoundDuration();
         if (!HasComp<RoundstartStationVariationRuleComponent>(ruleEntity) && !HasComp<StationVariationPassRuleComponent>(ruleEntity))

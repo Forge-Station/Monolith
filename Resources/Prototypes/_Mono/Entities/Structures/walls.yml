@@ -249,12 +249,7 @@
   id: WallReinforcedOutpost
   suffix: OUTPOST ONLY
   components:
-  - type: IconSmooth
-    key: walls
-    states:
-    - !type:CornerSpriteSmoothing
-      mask: [ walls, windows, grilles, marble, doors ]
-      base: reinf_over
+  # IconSmooth inherited from WallReinforced (base: wall on solid-reinforced.rsi)
   - type: Destructible
     thresholds:
     - trigger:
@@ -529,11 +524,30 @@
   - type: Icon
     sprite: Structures/Walls/exo.rsi
   - type: IconSmooth
-    key: chitin
+    key: walls-exo
     states:
-    - !type:CornerSpriteSmoothing
-      mask: [ chitin ]
-      base: solid
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls-exo ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
   - type: Destructible
     thresholds:
     - trigger:

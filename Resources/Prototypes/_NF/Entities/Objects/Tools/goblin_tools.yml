@@ -471,7 +471,7 @@
   components:
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents: []
         maxVol: 100
   - type: Construction

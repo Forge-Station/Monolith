@@ -46,7 +46,7 @@
 
 - type: entity
   name: spaceshroom
-  parent: [SolutionSmall, FoodProduceBase]
+  parent: [SolutionFood, SolutionSmall, FoodProduceBase]
   id: FoodSpaceshroom
   description: A wild mushroom. There's no telling what effect it could have...
   components:

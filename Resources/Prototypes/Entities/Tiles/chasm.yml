@@ -30,7 +30,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ chasm, walls ]
-      base: chasm_
+      base: chasm_
+
       swapOuterBits: false
   - type: Physics
     bodyType: Static

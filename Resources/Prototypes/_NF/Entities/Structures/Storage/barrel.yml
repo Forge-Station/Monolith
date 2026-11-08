@@ -15,10 +15,9 @@
     - state: paper
       map: ["enum.PaperLabelVisuals.Layer"]
       visible: false
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        maxVol: 1000
+  - type: Solution
+    solution:
+      maxVol: 1000
   - type: ExaminableSolution
     solution: tank
   - type: UserInterface
@@ -166,12 +165,11 @@
   parent: ChemicalBarrelExplosiveEmpty
   suffix: Filled
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: WeldingFuel
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 1000
   - type: DamageOnToolInteract
     tools: Welding
     weldingDamage:
@@ -199,12 +197,11 @@
   id: ChemicalBarrelCarbon
   suffix: Carbon
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Carbon
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Carbon
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -223,12 +220,11 @@
   id: ChemicalBarrelIodine
   suffix: Iodine
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Iodine
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Iodine
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -247,12 +243,11 @@
   id: ChemicalBarrelFluorine
   suffix: Fluorine
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Fluorine
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Fluorine
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -271,12 +266,11 @@
   id: ChemicalBarrelChlorine
   suffix: Chlorine
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Chlorine
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Chlorine
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -295,12 +289,11 @@
   id: ChemicalBarrelAluminium
   suffix: Aluminium
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Aluminium
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Aluminium
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -319,12 +312,11 @@
   id: ChemicalBarrelPhosphorus
   suffix: Phosphorus
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Phosphorus
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Phosphorus
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -343,12 +335,11 @@
   id: ChemicalBarrelSulfur
   suffix: Sulfur
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Sulfur
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -367,12 +358,11 @@
   id: ChemicalBarrelSilicon
   suffix: Silicon
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Silicon
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Silicon
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -391,12 +381,11 @@
   id: ChemicalBarrelHydrogen
   suffix: Hydrogen
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Hydrogen
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Hydrogen
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -415,12 +404,11 @@
   id: ChemicalBarrelLithium
   suffix: Lithium
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Lithium
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Lithium
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -439,12 +427,11 @@
   id: ChemicalBarrelSodium
   suffix: Sodium
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Sodium
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sodium
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -463,12 +450,11 @@
   id: ChemicalBarrelPotassium
   suffix: Potassium
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Potassium
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Potassium
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -487,12 +473,11 @@
   id: ChemicalBarrelRadium
   suffix: Radium
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Radium
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Radium
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -511,12 +496,11 @@
   id: ChemicalBarrelIron
   suffix: Iron
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Iron
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Iron
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -535,12 +519,11 @@
   id: ChemicalBarrelCopper
   suffix: Copper
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Copper
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Copper
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -559,12 +542,11 @@
   id: ChemicalBarrelGold
   suffix: Gold
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Gold
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Gold
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -583,12 +565,11 @@
   id: ChemicalBarrelMercury
   suffix: Mercury
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Mercury
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Mercury
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -607,12 +588,11 @@
   id: ChemicalBarrelSilver
   suffix: Silver
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Silver
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Silver
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -631,12 +611,11 @@
   id: ChemicalBarrelEthanol
   suffix: Ethanol
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Ethanol
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Ethanol
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -655,12 +634,11 @@
   id: ChemicalBarrelSugar
   suffix: Sugar
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Sugar
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Sugar
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -679,12 +657,11 @@
   id: ChemicalBarrelNitrogen
   suffix: Nitrogen
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Nitrogen
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nitrogen
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -703,12 +680,11 @@
   id: ChemicalBarrelOxygen
   suffix: Oxygen
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Oxygen
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Oxygen
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -727,12 +703,11 @@
   id: ChemicalBarrelOil
   suffix: Oil
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Oil
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Oil
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -751,12 +726,11 @@
   id: ChemicalBarrelDiethylamine
   suffix: Diethylamine
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Diethylamine
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Diethylamine
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -775,12 +749,11 @@
   id: ChemicalBarrelMustard
   suffix: Mustard
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Mustard
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Mustard
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -799,12 +772,11 @@
   id: ChemicalBarrelKetchup
   suffix: Ketchup
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Ketchup
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Ketchup
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -823,12 +795,11 @@
   id: ChemicalBarrelMayo
   suffix: Mayo
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Mayo
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Mayo
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -847,12 +818,11 @@
   id: ChemicalBarrelCornoil
   suffix: Cornoil
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Cornoil
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Cornoil
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -871,12 +841,11 @@
   id: ChemicalBarrelOliveoil
   suffix: Olive Oil
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: OilOlive
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: OilOlive
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -895,12 +864,11 @@
   id: ChemicalBarrelSpaceLube
   suffix: Space Lube
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: SpaceLube
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SpaceLube
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -919,12 +887,11 @@
   id: ChemicalBarrelSpaceCleaner
   suffix: Space Cleaner
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: SpaceCleaner
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: SpaceCleaner
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -943,12 +910,11 @@
   id: ChemicalBarrelWater
   suffix: Water
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Water
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -967,12 +933,11 @@
   id: ChemicalBarrelWhiskey
   suffix: Whiskey
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Whiskey
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Whiskey
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -991,12 +956,11 @@
   id: ChemicalBarrelVodka
   suffix: Vodka
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Vodka
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Vodka
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1015,12 +979,11 @@
   id: ChemicalBarrelTequila
   suffix: Tequila
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Tequila
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Tequila
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1039,12 +1002,11 @@
   id: ChemicalBarrelRum
   suffix: Rum
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Rum
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Rum
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1063,12 +1025,11 @@
   id: ChemicalBarrelGin
   suffix: Gin
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Gin
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Gin
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1087,12 +1048,11 @@
   id: ChemicalBarrelCoffeeLiqueur
   suffix: Coffee Liqeueur
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: CoffeeLiqueur
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: CoffeeLiqueur
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1111,12 +1071,11 @@
   id: ChemicalBarrelAbsinthe
   suffix: Absinthe
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Absinthe
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Absinthe
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1135,12 +1094,11 @@
   id: ChemicalBarrelAle
   suffix: Ale
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Ale
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Ale
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1159,12 +1117,11 @@
   id: ChemicalBarrelVermouth
   suffix: Vermouth
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Vermouth
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Vermouth
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1183,12 +1140,11 @@
   id: ChemicalBarrelWine
   suffix: Wine
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Wine
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Wine
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1207,12 +1163,11 @@
   id: ChemicalBarrelBeer
   suffix: Beer
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Beer
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Beer
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1231,12 +1186,11 @@
   id: ChemicalBarrelCognac
   suffix: Cognac
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Cognac
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Cognac
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:
@@ -1255,12 +1209,11 @@
   id: ChemicalBarrelMead
   suffix: Mead
   components:
-  - type: SolutionContainerManager
-    solutions:
-      tank:
-        reagents:
-          - ReagentId: Mead
-            Quantity: 1000
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Mead
+        Quantity: 1000
   - type: ContainerFill
     containers:
       paper_label:

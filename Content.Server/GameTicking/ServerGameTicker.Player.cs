@@ -107,14 +107,23 @@ namespace Content.Server.GameTicking
                     }
                     else
                     {
-                        if (_playerManager.SetAttachedEntity(session, mind.CurrentEntity))
+                        // Forge-Change: force=true so reconnect kicks a stale ActorComponent left after
+                        // abrupt disconnects / rapid reconnect races instead of dumping the player into observer.
+                        if (_playerManager.SetAttachedEntity(session, mind.CurrentEntity, force: true))
                         {
                             PlayerJoinGame(session);
                         }
                         else
                         {
+                            var entity = mind.CurrentEntity.Value;
+                            var reason = !TryComp(entity, out MetaDataComponent? meta)
+                                ? "missing MetaData"
+                                : meta.EntityLifeStage >= EntityLifeStage.Terminating
+                                    ? $"entity life stage {meta.EntityLifeStage}"
+                                    : "unknown";
+
                             Log.Error(
-                                $"Failed to attach player {session} with mind {ToPrettyString(mindId)} to its current entity {ToPrettyString(mind.CurrentEntity)}");
+                                $"Failed to attach player {session} with mind {ToPrettyString(mindId)} to its current entity {ToPrettyString(entity)} ({reason})");
                             SpawnObserverWaitDb();
                         }
                     }

@@ -24,7 +24,8 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ catwalk ]
-      base: catwalk_
+      base: catwalk_
+
       swapOuterBits: false
   - type: FootstepModifier
     footstepSoundCollection:

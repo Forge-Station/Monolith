@@ -44,7 +44,7 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ walls, windows, grilles, marble, doors ]
-      base: swindow
+      base: window
   - type: Appearance
   - type: DamageVisuals
     thresholds: [5, 10, 20]
@@ -158,7 +158,7 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ walls, windows, grilles, marble, doors ]
-      base: swindow
+      base: window
   - type: Appearance
   - type: DamageVisuals
     thresholds: [5, 10, 20]

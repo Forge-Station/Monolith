@@ -5,5 +5,6 @@ MiningWindowPlasma: ReinforcedPlasmaWindow
 MiningWindowPlasmaDiagonal: ReinforcedPlasmaWindowDiagonal
 MiningWindowDungeon: ReinforcedWindow
 MiningWindow: ReinforcedWindow
+MiningWindowDiagonal: ReinforcedWindowDiagonal
 ReinforcedWindowDungeon: ReinforcedWindow # wizards dont have Dungeon-version now. We too
 NoticeBoard: NoticeBoardNF

@@ -38,20 +38,11 @@
 - type: accessGroup
   id: GeneralEmpireAccess
   tags:
-  - Maintenance
-  - External
   - Empire
-  - Mercenary
-  - Captain
 
 - type: accessGroup
   id: SpecialEmpireAccess
   tags:
-  - Maintenance
-  - External
-  - Command
-  - Mercenary
-  - Captain
   - Empire
   - EmpireOperator
   - EmpireOfficer
@@ -59,15 +50,10 @@
 - type: accessGroup
   id: CommandEmpireAccess
   tags:
-  - Maintenance
-  - External
-  - Command
-  - Armory
-  - Mercenary
-  - Captain
   - Empire
   - EmpireOperator
   - EmpireOfficer
+  - EmpireCommander
 
 - type: accessGroup
   id: EmpireAllAccess

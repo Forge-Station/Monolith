@@ -12,10 +12,10 @@
   weight: 3 # Prioritize station & department jobs
   displayWeight: 20 # Second from the bottom
   setPreference: true
-  access:
-  - Mercenary
-  accessGroups: # Frontier
-  - GeneralAccess
+  accessGroups:
+  - BaseAccess #Forge-Change
+  - BaseAccessSecurity #Forge-Change
+  - MercenaryAccess #Forge-Change
   special:
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday

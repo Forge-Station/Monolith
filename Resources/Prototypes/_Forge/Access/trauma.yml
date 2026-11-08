@@ -1,0 +1,19 @@
+- type: accessLevel
+  id: Trauma
+  name: id-card-access-level-trauma
+
+- type: accessLevel
+  id: TraumaPilot
+  name: id-card-access-level-trauma-pilot
+
+- type: accessLevel
+  id: TraumaMedic
+  name: id-card-access-level-trauma-medic
+
+- type: accessLevel
+  id: TraumaParamedic
+  name: id-card-access-level-trauma-paramedic
+
+- type: accessLevel
+  id: TraumaDirector
+  name: id-card-access-level-trauma-director

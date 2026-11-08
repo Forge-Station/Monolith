@@ -11,7 +11,7 @@
   weight: 2 # Prioritize station & department jobs
   displayWeight: 30 # Second from the top
   accessGroups: # Frontier
-  - GeneralAccess
+  - BaseAccess #Forge-Change
   special:
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday

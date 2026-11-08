@@ -7,7 +7,7 @@
   supervisors: job-supervisors-hire
   displayWeight: 40 # Top
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess # Forge-Change
   special:
   - !type:GiveItemOnHolidaySpecial
     holiday: FrontierBirthday

@@ -1,0 +1,6 @@
+- type: accessGroup
+  id: MercenaryAccess
+  tags:
+    - Mercenary
+
+

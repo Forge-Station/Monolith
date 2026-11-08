@@ -9,3 +9,7 @@ ent-Asm220TorpedoLOSAT = ракета ASM-220 LOSAT
 ent-ShipMissileASM220ECM = торпеда ASM-220 (РЭБ)
 ent-Asm220TorpedoECM = торпеда ASM-220 РЭБ
     .desc = По сравнению со стандартной ОФ-торпедой наносит значительно больший урон электронике за счёт ЭМИ-боеголовки, при этом почти не повреждает корпус.
+ent-Asm220TorpedoHESACLOS = фугасная торпеда ASM-220 с наведением SACLOS
+    .desc = Оснащена мощной фугасной боеголовкой и системой наведения SACLOS. Требует ручного наведения на цель, но развивает большую скорость, чем стандартная фугасная торпеда.
+ent-ShipMissileASM220HESACLOS = { ent-Asm220TorpedoHESACLOS }
+    .desc = { ent-Asm220TorpedoHESACLOS.desc }

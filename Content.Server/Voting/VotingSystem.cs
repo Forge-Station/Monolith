@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -26,7 +27,7 @@ public sealed partial class VotingSystem : EntitySystem
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private JobSystem _jobs = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private ISharedPlaytimeManager _playtimeManager = default!;
 
     public override void Initialize()

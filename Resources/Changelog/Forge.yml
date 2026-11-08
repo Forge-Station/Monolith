@@ -119,3 +119,254 @@ Entries:
   id: 11
   time: '2026-10-26T17:44:20.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/548
+- author: Cirneishaia
+  changes:
+    - type: Add
+      message: 2 новых вида РПС
+    - type: Tweak
+      message: Изменён ассортимент вендомата Ullman Industries
+  id: 12
+  time: '2026-11-07T12:44:48.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/531
+- author: teasum
+  changes:
+    - type: Fix
+      message: исправлена работа workflow close-master-pr
+    - type: Fix
+      message: workflow labeler-conflict снова работает
+  id: 13
+  time: '2026-11-07T13:35:39.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/550
+- author: mersen-tyn
+  changes:
+    - type: Add
+      message: >-
+        Добавлены гены способностей: телекинез, телепатия, крепкий желудок,
+        стабилизированная ДНК и атомный метаболизм.
+  id: 14
+  time: '2026-11-07T13:59:05.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/529
+- author: artur-001
+  changes:
+    - type: Fix
+      message: Отображение волос при активном мод скафандре.
+  id: 15
+  time: '2026-11-07T14:02:36.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/542
+- author: KoT-Corvax
+  changes:
+    - type: Add
+      message: >-
+        Новая система взаимодействия с одеждой, теперь её при наличии стейтов
+        более 2, можно задавать в один прототип. Ваш персонаж запоминает в каком
+        состоянии вы любите её носить.
+    - type: Add
+      message: >-
+        Переключение стейтов одежды на Alt+M1 или по кнопке взаимодействия (Пока
+        что только для новых шарфиков!).
+    - type: Tweak
+      message: >-
+        Изменены старые виды одноцветных шарфиков на новые! Шарфики имеют три
+        вида! Поблагодарим @Hurtsay !
+    - type: Add
+      message: Все новые шарфики добавлены в ЗимнеШкаф.
+    - type: Add
+      message: Уникальный шарфик ПНТ, найти можно в Вендомате НТ и шкафчике ПНТ.
+    - type: Fix
+      message: ЗимнеШкаф теперь платный!
+  id: 16
+  time: '2026-11-07T14:05:56.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/544
+- author: artur-001
+  changes:
+    - type: Tweak
+      message: Поведение заряда персональных щитов.
+    - type: Fix
+      message: Отображение персональных щитов.
+  id: 17
+  time: '2026-11-07T14:15:58.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/545
+- author: percent-temp-percent
+  changes:
+    - type: Tweak
+      message: 'Космос на заднем фоне стал более живым: Чето блестит, чето летает....'
+  id: 18
+  time: '2026-11-07T14:27:23.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/547
+- author: Roasan
+  changes:
+    - type: Add
+      message: >-
+        Добавлено в описание VG: "Транс-Солнечная Федерация и компания Viper
+        Group являются врагами за пределами Безопасной Зоны. Учитывайте это.".
+        "По поводу вопросов - обращаться к текущему Старшему модератору -
+        mersen"
+    - type: Remove
+      message: Строчка старых отношений ТСФ и VG.
+  id: 19
+  time: '2026-11-07T14:28:23.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/546
+- author: Stonedch
+  changes:
+    - type: Fix
+      message: поправил проблему с дубликатом хвоста при обновлении состояния
+  id: 20
+  time: '2026-11-07T15:03:34.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/552
+- author: KoT-Corvax
+  changes:
+    - type: Add
+      message: Добавлен FSG100 - "Киль" в продажу вендомата БС приводов.
+  id: 21
+  time: '2026-11-07T15:07:10.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/560
+- author: teasum
+  changes:
+    - type: Tweak
+      message: >-
+        мехи теперь имеют обратную совместимость между друг другом(на S4 мех
+        теперь можно ставить любое вооружение)
+    - type: Tweak
+      message: S4 мехи получили бафф в виде +30% к хп
+  id: 22
+  time: '2026-11-07T15:09:15.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/562
+- author: der.n.e
+  changes:
+    - type: Tweak
+      message: Перенос спрайтов людей с Corvax Vanilla.
+  id: 23
+  time: '2026-11-07T14:34:44.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/549
+- author: Oksi
+  changes:
+    - type: Add
+      message: >-
+        Большое пополнение русской локализации: оружие, боеприпасы, экипировка,
+        импланты, органы, мехи, киборги, ИИ и многое другое!
+    - type: Add
+      message: >-
+        Дополнен перевод аплинков, их товаров и предметов внутри покупаемых
+        наборов.
+    - type: Add
+      message: >-
+        Переведены недостающие названия и подсказки способностей, включая
+        персональные щиты, ночное зрение, виляние хвостом и герметизацию
+        MOD-скафандров.
+    - type: Add
+      message: >-
+        Переведены недостающие названия и описания частей MOD-скафандров,
+        кубиков различных видов и блюд из резоми.
+    - type: Fix
+      message: >-
+        Дополнен перевод меню крафта, рецептов и необходимых для строительства
+        предметов и материалов.
+    - type: Fix
+      message: >-
+        Переведены интерфейсы подстанции, СМЭСа и генератора гравитации.
+        Исправлено наложение подписей в интерфейсе ЛКП.
+    - type: Fix
+      message: >-
+        Дополнен перевод воздушной сигнализации, консоли мониторинга атмосферной
+        сети и консоли утилизаторских экспедиций, включая погодные модификаторы
+        и биомы.
+    - type: Fix
+      message: >-
+        Дополнены переводы научного оборудования, газодобытчиков и устройств
+        автоматизации.
+    - type: Fix
+      message: >-
+        Переведены недостающие кнопки и заголовки интерфейсов, включая
+        повторение очереди и пропуск при нехватке материалов в фабрикаторах.
+    - type: Fix
+      message: >-
+        Названия экипировки ТСФ согласованы с текущими должностями, а названия
+        оружейных плат и портативных орудий - с основными моделями пушек.
+    - type: Fix
+      message: >-
+        Названия покрытий и напольных решёток в РСУ согласованы с названиями
+        тайлов.
+    - type: Fix
+      message: Дополнены переводы химер и мозгового червя.
+    - type: Fix
+      message: >-
+        Исправлены отсутствующие описания, некорректные ссылки и названия,
+        отображавшиеся как технические обозначения прототипов.
+  id: 24
+  time: '2026-11-07T14:51:58.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/554
+- author: cotofish
+  changes:
+    - type: Fix
+      message: >-
+        адс эхо: исправление питание щита, бафф орудий с заменой т1 на т2,
+        получил камеры поэтому он больше не слепой.
+    - type: Fix
+      message: 'адс цепень: немного доп орудий,получил щит мс100.'
+    - type: Fix
+      message: >-
+        адс небула: замена питания на энергомодуль, установка мс250, доп гост
+        роль щасси, доп пушки, турель на входе, изменения внутреннего
+        пространства.
+    - type: Fix
+      message: >-
+        адс выжигатель, замена генераторов на уране на плазменый реактор,
+        стабилизация питания щита, доп орудия.
+    - type: Fix
+      message: >-
+        адс защитник: пару доп орудий, т4 абордаж на 2 платформы, бс глушитель
+        абордажа.
+    - type: Fix
+      message: 'адс зенит: более мощные пушки, исправление проблемы с питанием щита.'
+  id: 25
+  time: '2026-11-07T15:21:42.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/566
+- author: teasum
+  changes:
+    - type: Add
+      message: Добавил около 80 пластинок(всего их теперь 117)
+    - type: Add
+      message: >-
+        Добавил: Портативный радио сервер, к которому можно привязать, а после
+        запихнуть внутрь Портативный виниловый проигрыватель и Портативный радио
+        риг (за их текстурки спасибо aelout)
+    - type: Add
+      message: Добавил Умное хранилище пластинок(за его текстурки спасибо hinzomnia)
+    - type: Add
+      message: Добавил Подсумок для пластинок
+    - type: Tweak
+      message: >-
+        Обновил радио-венд(ранее популярный упакомат): Обновил ему текстурки(за
+        них спасибо Egor17777), добавил ему в асортимент пластинки и портативные
+        штуки
+  id: 26
+  time: '2026-11-08T11:52:23.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/470
+- author: charlottenobot-art
+  changes:
+    - type: Add
+      message: Шаттлы VG верфи перенесены в общую верфь.
+  id: 27
+  time: '2026-11-08T12:06:52.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/567
+- author: mersen-tyn
+  changes:
+    - type: Fix
+      message: >-
+        Порт пачки багфиксов с upstream (крио, экипировка, атмос, FTL, UI
+        админки, микроволновка, гриндер, замки, телепад, джетпаки и др.)
+    - type: Fix
+      message: Сглаживание стен/окон после рефактора IconSmooth (спрайты и YAML)
+    - type: Fix
+      message: Joint/Blunt больше не роняют клиент дублем solution при старте раунда
+    - type: Fix
+      message: ChemMasterFilled без конфликта buffer solution
+    - type: Fix
+      message: >-
+        Точка спавна Contractor на empty-станции; Secret без двойного
+        GameRuleAdded
+    - type: Tweak
+      message: Обновлены текстуры стен/шлюзов под новый IconSmooth
+  id: 28
+  time: '2026-11-08T14:43:51.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/559

@@ -1,5 +1,6 @@
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Presets;
+using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Prototypes;
 using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.GameTicking.Components;
@@ -22,7 +23,7 @@ namespace Content.IntegrationTests.Tests.GameRules
             Assert.That(server.EntMan.Count<ActiveGameRuleComponent>(), Is.Zero);
 
             var entityManager = server.ResolveDependency<IEntityManager>();
-            var sGameTicker = server.ResolveDependency<IEntitySystemManager>().GetEntitySystem<GameTicker>();
+            var sGameTicker = server.ResolveDependency<IEntitySystemManager>().GetEntitySystem<ServerGameTicker>();
             var sGameTiming = server.ResolveDependency<IGameTiming>();
 
             MaxTimeRestartRuleComponent maxTime = null;

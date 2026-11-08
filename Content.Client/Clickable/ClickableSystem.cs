@@ -3,6 +3,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Utility;
 using Robust.Shared.Graphics;
+using Robust.Shared.Graphics.RSI;
 
 namespace Content.Client.Clickable;
 
@@ -118,11 +119,19 @@ public sealed partial class ClickableSystem : EntitySystem
 
             // Next, to get the right click map we need the "direction" of this layer that is actually being used to draw the sprite on the screen.
             // This **can** differ from the dir defined before, but can also just be the same.
-            if (sprite.EnableDirectionOverride)
-                dir = sprite.DirectionOverride.Convert(rsiState.RsiDirections);
-            dir = dir.OffsetRsiDir(layer.DirOffset);
+            // Dir1 RSIs only expose South — DirOffset would IndexOutOfRange in click maps / GetAtlasFrame.
+            if (rsiState.RsiDirections != RsiDirectionType.Dir1)
+            {
+                if (sprite.EnableDirectionOverride)
+                    dir = sprite.DirectionOverride.Convert(rsiState.RsiDirections);
+                dir = dir.OffsetRsiDir(layer.DirOffset);
+            }
 
-            if (_clickMapManager.IsOccluding(layer.ActualRsi!, layer.State, dir, layer.AnimationFrame, layerImagePos))
+            var animFrame = layer.AnimationFrame;
+            if (rsiState.DelayCount > 0 && animFrame >= rsiState.DelayCount)
+                animFrame = 0;
+
+            if (_clickMapManager.IsOccluding(layer.ActualRsi!, layer.State, dir, animFrame, layerImagePos))
                 return true;
         }
 

@@ -73,7 +73,7 @@
     receiveFrequencyId: PDA
     prefix: device-address-prefix-console
     savableAddress: false
-#  - type: WirelessNetworkConnection # Frontier
+#  - type: WirelessNetwork # Frontier
 #    range: 500 # Frontier
   - type: CartridgeLoader
     uiKey: enum.PdaUiKey.Key

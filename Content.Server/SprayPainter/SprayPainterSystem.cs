@@ -40,7 +40,6 @@ public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private ChargesSystem _charges = default!;
     [Dependency] private TransformSystem _transform = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -152,7 +151,7 @@ public sealed partial class SprayPainterSystem : SharedSprayPainterSystem
     /// </summary>
     private bool IsDecalValid(Decal decal)
     {
-        if (!_prototypeManager.TryIndex<DecalPrototype>(decal.Id, out var decalProto))
+        if (!ProtoMan.TryIndex<DecalPrototype>(decal.Id, out var decalProto))
             return false;
 
         return (decalProto.Tags.Contains("station")

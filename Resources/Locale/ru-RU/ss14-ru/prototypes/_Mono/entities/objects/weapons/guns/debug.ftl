@@ -1,11 +1,11 @@
-﻿ent-WeaponPistolDebugFast = бах, зум
+ent-WeaponPistolDebugFast = бах, зум
     .desc = зум
 ent-MagazinePistolDebugZoom = пистолетный магазин
-    .desc = " "
+    .desc = { "" }
     .suffix = DEBUG
 ent-BulletDebugZoom = пуля
-    .desc = " "
+    .desc = { ent-BaseBullet.desc }
     .suffix = DEBUG
 ent-CartridgeDebugZoom = патрон
-    .desc = " "
+    .desc = { ent-BaseCartridge9x19mm.desc }
     .suffix = DEBUG

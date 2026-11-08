@@ -28,10 +28,10 @@
     fuelReagent: NaniteFuel
     onlyDisplayFuel: true
   - type: RefillableSolution
-    solution: Welder
+    solution: welder
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: NaniteFuel
           Quantity: 50
@@ -69,7 +69,7 @@
     layers:
     - state: icon
   - type: SolutionRegeneration
-    solution: Welder
+    solution: welder
     generated:
       reagents:
       - ReagentId: NaniteFuel
@@ -87,13 +87,13 @@
     - state: icon
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: NaniteFuel
           Quantity: 200
         maxVol: 200
   - type: SolutionRegeneration
-    solution: Welder
+    solution: welder
     generated:
       reagents:
       - ReagentId: NaniteFuel

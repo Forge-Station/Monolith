@@ -1,6 +1,9 @@
-using Content.Shared.Popups;
-using Content.Shared.Database;
+using Content.Shared._NF.Interaction.Systems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Database;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Popups;
+using Content.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
@@ -12,6 +15,8 @@ public abstract partial class SharedNuclearReactorSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private EntityManager _entityManager = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private HandPlaceholderSystem _handPlaceholder = default!;
 
     public override void Initialize()
     {
@@ -25,6 +30,20 @@ public abstract partial class SharedNuclearReactorSystem : EntitySystem
     {
         if (component.PartSlot.Item == null)
             return;
+
+        // Borg hands are usually occupied by HandPlaceholders, so TryEjectToHands would only dump the rod on the floor.
+        // Eject first, then prefer swapping into a matching placeholder grip before falling back to normal pickup/drop.
+        if (HasComp<BorgChassisComponent>(args.Actor))
+        {
+            if (!_slotsSystem.TryEject(uid, component.PartSlot, args.Actor, out var item) || item is not { } ejected)
+                return;
+
+            if (_handPlaceholder.TryPickUpWithPlaceholder(args.Actor, ejected))
+                return;
+
+            _hands.PickupOrDrop(args.Actor, ejected, dropNear: true);
+            return;
+        }
 
         _slotsSystem.TryEjectToHands(uid, component.PartSlot, args.Actor);
     }

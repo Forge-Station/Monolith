@@ -1,4 +1,5 @@
 using Content.Server._Forge.CloakingShuttle; // Forge-Change - Cloaking
+using Content.Shared.Station.Components;
 using Content.Server._Mono.Ships.Systems;
 using Content.Server._Mono.Shuttles.Components;
 using Content.Server.Power.EntitySystems;
@@ -19,6 +20,8 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Power;
 using Content.Shared.Shuttles.UI.MapObjects;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Collections;
 using Robust.Shared.GameStates;
@@ -49,13 +52,13 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private TagSystem _tags = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private SharedContentEyeSystem _eyeSystem = default!;
     [Dependency] private AccessReaderSystem _access = default!;
     [Dependency] private RadioSystem _radioSystem = default!;
-    [Dependency] private StationJobsSystem _stationJobs = default!;
+    [Dependency] private ServerStationJobsSystem _stationJobs = default!;
     [Dependency] private ILogManager _log = default!;
     [Dependency] private CrewedShuttleSystem _crewedShuttle = default!;
 

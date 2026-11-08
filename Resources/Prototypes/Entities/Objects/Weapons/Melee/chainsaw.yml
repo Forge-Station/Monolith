@@ -34,18 +34,11 @@
         Slash: 6
         Structural: 6 # Mono increased damage from 4 to 6 for an even 10 struct, keep in mind a breaching hammer does 300 in one hit and that would be about 30 attacks from this
   - type: Item
-    size: Normal
+    size: Large
+    shape:
+    - 0,0,2,2
     sprite: Objects/Weapons/Melee/chainsaw.rsi
   - type: DisarmMalus
-  - type: RefillableSolution
-    solution: Welder
-  - type: SolutionContainerManager
-    solutions:
-      Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 300
-        maxVol: 300
   - type: UseDelay
     delay: 1
   - type: BoneSaw # Shitmed

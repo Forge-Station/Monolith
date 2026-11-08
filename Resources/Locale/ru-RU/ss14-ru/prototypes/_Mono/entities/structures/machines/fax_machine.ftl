@@ -1,3 +1,9 @@
-ent-FaxMachineUSSP = POI, USSP
-ent-FaxMachineUSSPCommisar = POI, USSP Commisar
-ent-FaxMachinePDVJupiter = POI, PDV Jupiter
+ent-FaxMachineUSSP = { ent-FaxMachineBase }
+    .desc = { ent-FaxMachineBase.desc }
+    .suffix = Объект, СССП
+ent-FaxMachineUSSPCommisar = { ent-FaxMachineBase }
+    .desc = { ent-FaxMachineBase.desc }
+    .suffix = Объект, Комиссар СССП
+ent-FaxMachinePDVJupiter = { ent-FaxMachineBase }
+    .desc = { ent-FaxMachineBase.desc }
+    .suffix = Объект, ПДВ «Юпитер»

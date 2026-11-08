@@ -249,9 +249,7 @@
   id: WallReinforcedOutpost
   suffix: OUTPOST ONLY
   components:
-  - type: IconSmooth
-    key: walls
-    base: reinf_over
+  # IconSmooth inherited from WallReinforced (base: wall on solid-reinforced.rsi)
   - type: Destructible
     thresholds:
     - trigger:
@@ -276,7 +274,7 @@
         acts: ["Destruction"]
 
 - type: entity
-  parent: WallShuttleDiagonal
+  parent: WallReinforcedDiagonal
   id: WallReinforcedDiagonalOutpost
   name: reinforced wall
   suffix: diagonal, OUTPOST ONLY
@@ -288,10 +286,10 @@
   - type: Tag
     tags:
     - Diagonal
-  - type: Sprite
-    drawdepth: Walls
-    sprite: Structures/Walls/reinforced_diagonal.rsi
-    state: state0
+  # - type: Sprite
+  #   drawdepth: Walls
+  #   sprite: Structures/Walls/reinforced_diagonal.rsi
+    # state: state0
   - type: Destructible
     thresholds:
     - trigger:
@@ -314,13 +312,15 @@
           collection: MetalSlam
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: IconSmooth
-    mode: Diagonal
-    key: walls
-    base: state
-  - type: Icon
-    sprite: Structures/Walls/reinforced_diagonal.rsi
-    state: state0
+  # - type: IconSmooth
+  #   key: walls
+  #   states:
+  #   - !type:DiagonalSpriteSmoothing
+  #     mask: [ walls, windows, grilles, marble, doors ]
+  #     base: state
+  # - type: Icon
+  #   sprite: Structures/Walls/reinforced_diagonal.rsi
+  #   state: state0
   - type: ShipRepairable
     repairTime: 10
     repairCost: 20
@@ -469,10 +469,10 @@
         layer:
         - WallLayer
         density: 9000 # No ram-meta
-  - type: Sprite
-    sprite: _Mono/Structures/Walls/rplas.rsi
-  - type: Icon
-    sprite: _Mono/Structures/Walls/rplas.rsi
+  # - type: Sprite
+  #   sprite: _Mono/Structures/Walls/rplas.rsi
+  # - type: Icon
+  #   sprite: _Mono/Structures/Walls/rplas.rsi
 
 - type: entity
   parent: WallPlastitaniumDiagonal
@@ -484,10 +484,10 @@
     snap:
     - Wall
   components:
-  - type: Sprite
-    drawdepth: Walls
-    sprite: _Mono/Structures/Walls/rplas_diagonal.rsi
-    state: state0
+  # - type: Sprite
+  #   drawdepth: Walls
+  #   sprite: _Mono/Structures/Walls/rplas_diagonal.rsi
+  #   state: state0
   - type: Destructible
     thresholds:
     - trigger:
@@ -520,12 +520,34 @@
     tags:
     - Wall
   - type: Sprite
-    sprite: Structures/Walls/xeno.rsi
+    sprite: Structures/Walls/exo.rsi
   - type: Icon
-    sprite: Structures/Walls/xeno.rsi
+    sprite: Structures/Walls/exo.rsi
   - type: IconSmooth
-    key: chitin
-    base: solid
+    key: walls-exo
+    states:
+    - !type:CardinalCornerSpriteSmoothing
+      mask: [ walls-exo ]
+      altMask:
+      - windows
+      - windows-reinf
+      - windows-tinted
+      - windows-plasma
+      - windows-plasma-reinf
+      - windows-uranium
+      - windows-uranium-reinf
+      - windows-exo
+      - windows-shuttle
+      - windows-plastitanium
+      - windows-regal
+      - walls-shuttle
+      - walls-plastitanium
+      - walls-material
+      - walls-marble
+      - walls
+      - grilles
+      - doors
+      base: wall
   - type: Destructible
     thresholds:
     - trigger:
@@ -547,7 +569,10 @@
     state: rgeneric
   - type: IconSmooth
     key: chitin
-    base: reinf_over
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ chitin ]
+      base: reinf_over
   - type: GenericVisualizer
     visuals:
       enum.ReinforcedWallVisuals.DeconstructionStage:

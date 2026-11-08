@@ -1,6 +1,5 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Atmos.Piping.Components;
 using Content.Server.Atmos.Piping.Unary.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
@@ -11,6 +10,7 @@ using Content.Server.NodeContainer.Nodes;
 using Content.Server.Temperature.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.UserInterface;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
@@ -18,6 +18,7 @@ using Content.Shared.Chemistry.Reagent; // Forge-Change
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -86,7 +87,6 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
         var metaDataQuery = GetEntityQuery<MetaDataComponent>();
         var itemSlotsQuery = GetEntityQuery<ItemSlotsComponent>();
         var fitsInDispenserQuery = GetEntityQuery<FitsInDispenserComponent>();
-        var solutionContainerManagerQuery = GetEntityQuery<SolutionContainerManagerComponent>();
         var query = EntityQueryEnumerator<ActiveCryoPodComponent, CryoPodComponent>();
 
         while (query.MoveNext(out var uid, out _, out var cryoPod))
@@ -106,9 +106,7 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
                 && container.Value.Valid
                 && patient != null
                 && fitsInDispenserQuery.TryGetComponent(container, out var fitsInDispenserComponent)
-                && solutionContainerManagerQuery.TryGetComponent(container,
-                    out var solutionContainerManagerComponent)
-                && _solutionContainerSystem.TryGetFitsInDispenser((container.Value, fitsInDispenserComponent, solutionContainerManagerComponent),
+                && _solutionContainerSystem.TryGetFitsInDispenser((container.Value, fitsInDispenserComponent),
                     out var containerSolution, out _))
             {
                 if (!bloodStreamQuery.TryGetComponent(patient, out var bloodstream))

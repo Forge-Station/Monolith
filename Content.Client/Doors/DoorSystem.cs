@@ -13,6 +13,8 @@ public sealed partial class DoorSystem : SharedDoorSystem
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!; /// Forge-Chane
+    [Dependency] private SecretDoorSmoothingSystem _secretSmoothing = default!;
 
     public override void Initialize()
     {
@@ -128,6 +130,7 @@ public sealed partial class DoorSystem : SharedDoorSystem
             _sprite.LayerSetVisible(entity.Owner, DoorVisualLayers.BaseEmagging, state == DoorState.Emagging);
 
         UpdateAppearanceForDoorState(entity, args.Sprite, state);
+        _secretSmoothing.OnDoorAppearance(entity, args.Component);
     }
 
     private void UpdateAppearanceForDoorState(Entity<DoorComponent> entity, SpriteComponent sprite, DoorState state)

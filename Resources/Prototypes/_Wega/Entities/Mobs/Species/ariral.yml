@@ -12,10 +12,8 @@
     - HeadTop
     - HeadSide
   - type: Carriable
-  - type: Hunger
   - type: Puller
     needsHands: false
-  - type: Thirst
   - type: Body
     prototype: Ariral
     requiredLegs: 2

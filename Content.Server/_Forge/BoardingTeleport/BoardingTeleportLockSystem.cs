@@ -159,7 +159,7 @@ public sealed class BoardingTeleportLockSystem : EntitySystem
             return 0;
 
         var index = 0;
-        foreach (var device in _deviceList.GetAllDevices(consoleUid, deviceList))
+        foreach (var device in _deviceList.GetAllDevices((consoleUid, deviceList)))
         {
             if (device == platformUid)
                 return index;
@@ -177,7 +177,7 @@ public sealed class BoardingTeleportLockSystem : EntitySystem
         if (!TryComp<DeviceListComponent>(consoleUid, out var deviceList))
             return list;
 
-        foreach (var device in _deviceList.GetAllDevices(consoleUid, deviceList))
+        foreach (var device in _deviceList.GetAllDevices((consoleUid, deviceList)))
         {
             if (HasComp<BoardingTeleportPlatformComponent>(device))
                 list.Add(device);

@@ -1,9 +1,9 @@
 #nullable enable
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Presets;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Prototypes;
 using Robust.Shared.GameObjects;
 
 namespace Content.IntegrationTests.Tests.GameRules;
@@ -69,7 +69,7 @@ public sealed class FailAndStartPresetTest
         var server = pair.Server;
         var client = pair.Client;
         var entMan = server.EntMan;
-        var ticker = server.System<GameTicker>();
+        var ticker = server.System<ServerGameTicker>();
         server.System<TestRuleSystem>().Run = true;
 
         Assert.That(server.CfgMan.GetCVar(CCVars.GridFill), Is.False);

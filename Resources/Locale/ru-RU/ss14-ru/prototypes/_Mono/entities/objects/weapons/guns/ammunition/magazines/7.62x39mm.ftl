@@ -1,7 +1,7 @@
 ent-BaseMagazine762x39mm = магазин (7.62x39мм FMJ)
 ent-Magazine762x39mmFMJ = { ent-BaseMagazine762x39mm }
 ent-Magazine762x39mmEmpty = магазин (7.62x39мм)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой
 ent-Magazine762x39mmPlasteelAP = магазин (7.62x39мм бронебойные)
 ent-Magazine762x39mmRubber = магазин (7.62x39мм резиновые)
@@ -18,7 +18,7 @@ ent-Magazine762x39mmMaxim = дисковый магазин (7.62x39мм FMJ)
 
 ent-Magazine762x39mmLowCapacityFMJ = короткий магазин (7.62х39мм FMJ)
 ent-Magazine762x39mmLowCapacityEmpty = короткий магазин (7.62х39мм)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой
 ent-Magazine762x39mmLowCapacityIncendiary = короткий магазин (7.62х39мм зажигательные)
 ent-Magazine762x39mmLowCapacityPractice = короткий магазин (7.62х39мм учебные)

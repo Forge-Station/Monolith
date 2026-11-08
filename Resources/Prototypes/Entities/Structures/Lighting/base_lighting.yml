@@ -24,6 +24,7 @@
     node: tubeLight
   - type: Sprite
     sprite: Structures/Wallmounts/Lighting/light_tube.rsi
+    offset: 0, 1
     drawdepth: WallMountedItems
     layers:
     - map: ["enum.PoweredLightLayers.Base"]
@@ -105,9 +106,11 @@
   components:
   - type: Sprite
     sprite: Structures/Wallmounts/Lighting/light_tube.rsi
+    offset: 0, 1
     state: empty
   - type: PointLight
     enabled: false
+    offset: "0, 0.495"
   - type: PoweredLight
     bulb: Tube
   - type: ContainerContainer
@@ -118,7 +121,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: SmartLight
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 200
   - type: DeviceLinkSink
     ports:
@@ -342,7 +345,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: SmartLight
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 200
   - type: Appearance
   - type: PoweredLightVisuals
@@ -455,7 +458,7 @@
     enabled: false
     radius: 5
     energy: 0.6
-    offset: "0, 0.4"
+    offset: "0, 0.25"
     color: "#7CFC00"
     mask: /Textures/Effects/LightMasks/double_cone.png
   - type: ApcPowerReceiver
@@ -468,6 +471,7 @@
     speed: 40
   - type: Sprite
     sprite: Structures/Wallmounts/Lighting/emergency_light.rsi
+    offset: 0, 1
     layers:
     - state: base
       map: [ "enum.EmergencyLightVisualLayers.Base" ]

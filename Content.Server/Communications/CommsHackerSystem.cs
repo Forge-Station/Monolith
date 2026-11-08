@@ -1,8 +1,9 @@
-using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
+using Content.Server.Chat.Systems;
 using Content.Server.Ninja.Systems;
 using Content.Shared.Communications;
 using Content.Shared.DoAfter;
+using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
@@ -15,7 +16,7 @@ namespace Content.Server.Communications;
 public sealed partial class CommsHackerSystem : SharedCommsHackerSystem
 {
     [Dependency] private ChatSystem _chat = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     // TODO: remove when generic check event is used

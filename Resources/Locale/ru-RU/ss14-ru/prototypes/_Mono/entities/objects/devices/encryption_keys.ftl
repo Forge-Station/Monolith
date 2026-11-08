@@ -1,4 +1,4 @@
-﻿ent-EncryptionKeyUssp = ключ шифрования СССП
+ent-EncryptionKeyUssp = ключ шифрования СССП
     .desc = Ключ шифрования для тактического канала связи СССП.
 ent-EncryptionKeyUsspCommand = командный ключ шифрования USSP
     .desc = Ключ шифрования для командного канала USSP. Из-за неработоспособности высокоуровневой сети USSP вместо этого предоставляет доступ к тактическому командованию.
@@ -9,3 +9,8 @@ ent-EncryptionKeyDiplomacy = дипломатический ключ шифро�
 # mono
 ent-EncryptionKeyVanguardCommand = ключ шифрования командования Vanguard
     .desc = Ключ шифрования, используемый офицерами Vanguard.
+
+ent-EncryptionKeyMieyo = ключ шифрования ММС
+    .desc = Ключ шифрования корпоративной связи ММС.
+ent-EncryptionKeyMieyoCommand = командный ключ шифрования ММС
+    .desc = Ключ шифрования командной связи ММС.

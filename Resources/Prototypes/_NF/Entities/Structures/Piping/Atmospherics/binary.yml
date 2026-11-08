@@ -185,7 +185,6 @@
     key: walls # For construction if this eventually supports it.
   - type: IconSmooth
     key: walls
-    mode: NoSprite
   # Mono
   - type: Construction
     graph: AirlockShuttle

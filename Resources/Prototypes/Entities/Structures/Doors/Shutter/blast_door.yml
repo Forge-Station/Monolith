@@ -60,6 +60,10 @@
   - type: ShipRepairable
     repairTime: 6
     repairCost: 8
+  - type: IconSmooth
+    key: doors
+  - type: PlacementReplacement
+    key: blastdoors
 
 - type: entity
   id: BlastDoorOpen
@@ -144,7 +148,6 @@
         Blunt: 25 # yowch
   - type: IconSmooth
     key: chitin
-    mode: NoSprite
 
 - type: entity
   parent: BlastDoorXeno

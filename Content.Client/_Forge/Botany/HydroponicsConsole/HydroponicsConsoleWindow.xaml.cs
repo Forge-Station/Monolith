@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client._Forge.Botany.UI;
-using Content.Client.GameTicking.Managers;
+using Content.Client.GameTicking;
 using Content.Shared._Forge.Botany;
 using Content.Shared._Forge.Botany.HydroponicsConsole;
 using Content.Shared.Atmos;

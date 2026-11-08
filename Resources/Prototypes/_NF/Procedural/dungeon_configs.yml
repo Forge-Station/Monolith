@@ -508,7 +508,7 @@
   id: NFMiningWindow
   entries:
     - id: GrilleDungeon
-    - id: MiningWindowDungeon
+    - id: ReinforcedWindowDungeon
 
 # Mercenary
 - type: entitySpawnEntry

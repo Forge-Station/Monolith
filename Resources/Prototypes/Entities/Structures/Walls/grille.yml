@@ -14,19 +14,51 @@
       delay: 4
       fx: EffectRCDDeconstruct4
     - type: CanBuildWindowOnTop
+    - type: Anchorable
+      flags:
+      - Anchorable
     - type: Sprite
       drawdepth: Walls
       sprite: Structures/Walls/grille.rsi
       layers:
-        - state: grille
-        - state: electrified
-          sprite: Effects/electricity.rsi
-          map: ["enum.ElectrifiedLayers.Sparks"]
-          shader: unshaded
-          visible: false
+      - state: electrified
+        sprite: Effects/electricity.rsi
+        map: ["enum.ElectrifiedLayers.Sparks"]
+        shader: unshaded
+        visible: false
     - type: Icon
       sprite: Structures/Walls/grille.rsi
-      state: grille
+      state: full
+    - type: PlacementReplacement
+      key: grilles
+    - type: IconSmooth
+      key: grilles
+      states:
+      - !type:CornerSpriteSmoothing
+        mask:
+        - windows
+        - windows-reinf
+        - windows-tinted
+        - windows-plasma
+        - windows-plasma-reinf
+        - windows-uranium
+        - windows-uranium-reinf
+        - windows-exo
+        - windows-exo-borg
+        - windows-shuttle
+        - windows-plastitanium
+        - windows-regal
+        - walls-exo
+        - walls-exo-borg
+        - walls-shuttle
+        - walls-plastitanium
+        - walls-material
+        - walls-marble
+        - walls
+        - grilles
+        - doors
+        base: grille
+        index: 0
     - type: Construction
       graph: Grille
       node: grille
@@ -59,6 +91,8 @@
           shape:
             !type:PhysShapeAabb
             bounds: "-0.5,-0.5,0.5,0.5"
+          mask:
+          - FullTileMask
           layer:
           - GlassLayer
     - type: Destructible
@@ -85,31 +119,59 @@
             True: { visible: True }
             False: { visible: False }
     - type: AnimationPlayer
+    - type: TrayScanReveal
     # Mono
     - type: ShipRepairable
       repairTime: 2
       repairCost: 2
 
+### Diagonal
 - type: entity
-  id: ClockworkGrille
   parent: Grille
-  name: clockwork grille
-  description: A flimsy framework of iron rods assembled in traditional Ratvarian fashion.
+  id: GrilleDiagonal
+  name: diagonal grille
   components:
   - type: Sprite
-    drawdepth: Walls
-    sprite: Structures/Walls/clockwork_grille.rsi
-    state: ratvargrille
+    sprite: Structures/Walls/grille-diagonal.rsi
     layers:
-      - state: ratvargrille
+    - state: electrified_diagonal
+      sprite: Effects/electricity.rsi
+      map: ["enum.ElectrifiedLayers.Sparks"]
+      shader: unshaded
+      visible: false
   - type: Icon
-    sprite: Structures/Walls/clockwork_grille.rsi
-    state: ratvargrille
+    sprite: Structures/Walls/grille-diagonal.rsi
+    state: state0
+  - type: IconSmooth
+    key: grilles
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask:
+      - walls
+      - windows
+      - grilles
+      - marble
+      - doors
+      base: state
+      index: 0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PolygonShape
+          vertices:
+          - "-0.5,-0.5"
+          - "0.5,0.5"
+          - "0.5,-0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
   - type: Construction
-    graph: ClockGrille
-    node: clockGrille
-    deconstructionTarget: start
+    graph: GrilleDiagonal
+    node: grilleDiagonal
 
+### Broken state
 - type: entity
   id: GrilleBroken
   parent: BaseStructure
@@ -119,10 +181,10 @@
   - type: Sprite
     drawdepth: Walls
     sprite: Structures/Walls/grille.rsi
-    state: grille_broken
+    state: broken
   - type: Icon
     sprite: Structures/Walls/grille.rsi
-    state: grille_broken
+    state: broken
   - type: RCDDeconstructable
     cost: 6
     delay: 4
@@ -131,7 +193,17 @@
     graph: Grille
     node: grilleBroken
     deconstructionTarget: start
-  - type: Fixtures # overwrite BaseStructure parent.
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,-0.28125"
+        density: 5
+        mask:
+        - DoorPassable
+        layer:
+        - DoorPassable
   - type: Physics
     bodyType: Static
     canCollide: false
@@ -151,97 +223,3 @@
         node: start
       - !type:DoActsBehavior
         acts: ["Destruction"]
-
-- type: entity
-  id: ClockworkGrilleBroken
-  parent: GrilleBroken
-  name: clockwork grille
-  description: A flimsy framework of iron rods assembled in traditional Ratvarian fashion. It has seen better days.
-  components:
-  - type: Sprite
-    drawdepth: Walls
-    sprite: Structures/Walls/clockwork_grille.rsi
-    state: brokenratvargrille
-  - type: Icon
-    sprite: Structures/Walls/clockwork_grille.rsi
-    state: brokenratvargrille
-  - type: Construction
-    graph: ClockGrille
-    node: clockGrilleBroken
-
-- type: entity
-  id: GrilleDiagonal
-  parent: Grille
-  name: diagonal grille
-  components:
-  - type: Sprite
-    drawdepth: Walls
-    sprite: Structures/Walls/grille.rsi
-    layers:
-    - state: grille_diagonal
-    - state: electrified_diagonal
-      sprite: Effects/electricity.rsi
-      map: ["enum.ElectrifiedLayers.Sparks"]
-      shader: unshaded
-      visible: false
-  - type: Icon
-    sprite: Structures/Walls/grille.rsi
-    state: grille_diagonal
-  - type: Tag
-    tags:
-    - Diagonal
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PolygonShape
-            vertices:
-            - "-0.5,-0.5"
-            - "0.5,0.5"
-            - "0.5,-0.5"
-        # mask: # Frontier
-        # - FullTileMask # Frontier
-        layer:
-        - DiagonalGlassLayer # Mono: WallLayer<DiagonalGlassLayer
-  - type: Construction
-    graph: GrilleDiagonal
-    node: grilleDiagonal
-
-- type: entity
-  id: ClockworkGrilleDiagonal
-  parent: ClockworkGrille
-  name: diagonal clockwork grille
-  components:
-  - type: Sprite
-    drawdepth: Walls
-    sprite: Structures/Walls/clockwork_grille.rsi
-    layers:
-    - state: ratvargrille_diagonal
-    - state: electrified_diagonal
-      sprite: Effects/electricity.rsi
-      map: ["enum.ElectrifiedLayers.Sparks"]
-      shader: unshaded
-      visible: false
-  - type: Icon
-    sprite: Structures/Walls/clockwork_grille.rsi
-    state: ratvargrille_diagonal
-  - type: Tag
-    tags:
-    - Diagonal
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PolygonShape
-            vertices:
-            - "-0.5,-0.5"
-            - "0.5,0.5"
-            - "0.5,-0.5"
-        # mask: # Frontier
-        # - FullTileMask # Frontier
-        layer:
-        - DiagonalGlassLayer # Mono: WallLayer<DiagonalGlassLayer
-  - type: Construction
-    graph: GrilleDiagonal
-    node: clockworkGrilleDiagonal
-

@@ -335,7 +335,8 @@ ReinforcementRadioSyndicateMonkey: ReinforcementRadioSyndicateAncestor
 ReinforcementRadioSyndicateMonkeyNukeops: ReinforcementRadioSyndicateAncestorNukeops
 
 # 2024-05-01
-DrinkBottleGoldschlager: DrinkBottleGildlager
+DrinkBottleGoldschlager: DrinkGildlagerBottleFull
+DrinkBottleGildlager: DrinkGildlagerBottleFull
 
 # 2024-05-14
 soda_dispenser: SodaDispenser
@@ -571,3 +572,38 @@ ComputerBlackMarketBankATM: null # Forge-change-del - delet all notice with Ledg
 # 2026-10-14
 PoweredLightSodium: PoweredlightSodium
 PoweredLightExterior: PoweredlightExterior
+
+# 2026-07-16
+WallNecropolis: WallSolid
+WallVaultAlien: WallSolid
+WallVaultRock: WallSolid
+WallVaultSandstone: WallSolid
+WallSandstone: WallSolid
+WallDiamond: WallReinforced
+WallCult: WallBrick
+WallClown: WallGold
+WallClock: WallBrass
+WallPlastic: WallSolid
+ClockworkGrille: Grille
+ClockworkGrilleBroken: GrilleBroken
+ClockworkGrilleDiagonal: GrilleDiagonal
+ClockworkWindow: Window
+ClockworkWindowDiagonal: WindowDiagonal
+WindowClockworkDirectional: WindowDirectional
+WindoorClockwork: Windoor
+WindoorAssemblyClockwork: WindoorAssembly
+PinionAirlock: Airlock
+PinionAirlockGlass: AirlockGlass
+PinionAirlockAssembly: AirlockAssembly
+BananiumDoor: GoldDoor
+EncrustedIronstoneDoor: SilverDoor
+IronstoneDoor: SilverDoor
+WallSnowCobblebrick: WallBrick
+WallSandCobblebrick: WallBrick
+WallChromiteCobblebrick: WallBrick
+WallAndesiteCobblebrick: WallBrick
+WallIronsandCobblebrick: WallBrick
+WallCobblebrick: WallConcrete
+WallAsteroidCobblebrick: WallConcrete
+WallBasaltCobblebrick: WallConcrete
+WallIce: WallRockSnow

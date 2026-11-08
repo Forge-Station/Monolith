@@ -1,3 +1,5 @@
+using Content.Shared.Shuttles.Components;
+using Content.Shared.Station.Systems;
 using Content.Server._Mono.ShipRepair;
 using Content.Server._NF.Bank;
 using Content.Server.Cargo.Systems;
@@ -48,7 +50,7 @@ public sealed partial class ShipyardServiceSystem : EntitySystem
     [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ShipRepairSystem _shipRepair = default!;
     [Dependency] private StackSystem _stacks = default!;

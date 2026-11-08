@@ -141,7 +141,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         if (!TryComp<DeviceListComponent>(ent, out var deviceList))
             return;
 
-        foreach (var device in _deviceList.GetAllDevices(ent.Owner, deviceList))
+        foreach (var device in _deviceList.GetAllDevices((ent.Owner, deviceList)))
 
         {
 
@@ -1101,7 +1101,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
             return;
 
-        foreach (var device in _deviceList.GetAllDevices(ent.Owner, deviceList))
+        foreach (var device in _deviceList.GetAllDevices((ent.Owner, deviceList)))
 
         {
 
@@ -1163,7 +1163,7 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
         }
 
-        foreach (var device in _deviceList.GetAllDevices(consoleUid, deviceList))
+        foreach (var device in _deviceList.GetAllDevices((consoleUid, deviceList)))
 
         {
 

@@ -1,5 +1,6 @@
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Storage;
 
 namespace Content.Server.GameTicking.Rules;
@@ -12,7 +13,7 @@ public sealed class SubGamemodesSystem : GameRuleSystem<SubGamemodesComponent>
         foreach (var id in picked)
         {
             Log.Info($"Starting gamerule {id} as a subgamemode of {ToPrettyString(uid):rule}");
-            GameTicker.AddGameRule(id);
+            ServerGameTicker.AddGameRule(id);
         }
     }
 }

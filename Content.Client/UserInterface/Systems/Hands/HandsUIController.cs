@@ -6,7 +6,8 @@ using Content.Client.UserInterface.Systems.Hotbar.Widgets;
 using Content.Shared.Hands.Components;
 using Content.Shared.Input;
 using Content.Shared.Inventory.VirtualItem;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -470,7 +471,6 @@ public sealed partial class HandsUIController : UIController, IOnStateEntered<Ga
         {
             foreach (var hand in container.GetButtons())
             {
-
                 if (!_entities.TryGetComponent(hand.Entity, out UseDelayComponent? useDelay))
                 {
                     hand.CooldownDisplay.Visible = false;

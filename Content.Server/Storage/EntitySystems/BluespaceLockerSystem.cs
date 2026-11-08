@@ -8,6 +8,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Lock;
 using Content.Shared.Mind.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Station.Components;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;

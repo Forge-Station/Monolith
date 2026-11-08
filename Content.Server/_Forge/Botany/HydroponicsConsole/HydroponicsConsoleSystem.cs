@@ -8,6 +8,7 @@ using Content.Server.Popups;
 using Content.Shared._Forge.Botany;
 using Content.Shared._Forge.Botany.HydroponicsConsole;
 using Content.Shared.Atmos;
+using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Systems;
 using Content.Shared.Examine;
@@ -298,7 +299,7 @@ public sealed partial class HydroponicsConsoleSystem : EntitySystem
         var entry = new HydroponicsConsoleTrayEntry
         {
             Entity = GetNetEntity(tray),
-            Address = net?.Address ?? string.Empty,
+            Address = net == null ? string.Empty : DeviceLocalizationHelpers.GetAddressFromId(net),
             TrayName = meta?.EntityName ?? Name(tray),
             HasPlant = holder.Seed != null,
             Dead = holder.Dead,

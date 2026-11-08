@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: FloorChasmEntity
   name: chasm
   description: You can't even see the bottom.
@@ -27,7 +27,12 @@
     state: full
   - type: IconSmooth
     key: chasm
-    base: chasm
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ chasm, walls ]
+      base: chasm_
+
+      swapOuterBits: false
   - type: Physics
     bodyType: Static
   - type: Fixtures

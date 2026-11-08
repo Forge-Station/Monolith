@@ -23,7 +23,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: BasicDevice
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 90 # Mono 15->90
   # Goobstation edit start
   - type: EmitSoundOnPickup
@@ -57,7 +57,7 @@
       - state: advanced-inhand-left
       right:
       - state: advanced-inhand-right
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 600 # Mono 50->600
   - type: StaticPrice
     price: 30

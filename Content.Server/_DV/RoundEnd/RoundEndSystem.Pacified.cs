@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using Content.Server.Explosion.Components;
 using Content.Server.GameTicking;
 using Content.Shared.CombatMode;
@@ -23,7 +24,7 @@ public sealed partial class PacifiedRoundEnd : EntitySystem
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEnded);
     }
 
-    private void OnRoundEnded(RoundEndTextAppendEvent ev)
+    private void OnRoundEnded(ref RoundEndTextAppendEvent ev)
     {
         if (!_enabled)
             return;

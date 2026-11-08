@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client._Wega.Stylesheets;
-using Content.Client.GameTicking.Managers;
+using Content.Client.GameTicking;
 using Content.Client.Resources;
 using Content.Shared.Roles;
 using Content.Shared.SecApartment;

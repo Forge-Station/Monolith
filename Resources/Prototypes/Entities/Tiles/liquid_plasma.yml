@@ -36,7 +36,10 @@
     state: full
   - type: IconSmooth
     key: floor
-    base: plasma
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ floor ]
+      base: plasma
   - type: Physics
     bodyType: Static
   - type: Fixtures

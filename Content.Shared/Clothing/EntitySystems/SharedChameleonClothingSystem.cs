@@ -13,7 +13,6 @@ namespace Content.Shared.Clothing.EntitySystems;
 
 public abstract class SharedChameleonClothingSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ClothingSystem _clothingSystem = default!;
     [Dependency] private ContrabandSystem _contraband = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
@@ -47,7 +46,7 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
     protected void UpdateVisuals(EntityUid uid, ChameleonClothingComponent component)
     {
         if (string.IsNullOrEmpty(component.Default) ||
-            !_proto.TryIndex(component.Default, out EntityPrototype? proto))
+            !ProtoMan.TryIndex(component.Default, out EntityPrototype? proto))
             return;
 
         // world sprite icon

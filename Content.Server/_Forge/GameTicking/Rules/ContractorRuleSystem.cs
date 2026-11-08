@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using System.Threading.Tasks;
 using Content.Server.Antag;
 using Content.Server.GameTicking.Events;
@@ -37,7 +38,7 @@ namespace Content.Server.GameTicking.Rules
     /// </summary>
     public sealed partial class ContractorRuleSystem : GameRuleSystem<ContractorRuleComponent>
     {
-        [Dependency] private AntagSelectionSystem _antag = default!;
+        [Dependency] private ServerAntagSelectionSystem _antag = default!;
         [Dependency] private AudioSystem _audio = default!;
         [Dependency] private EuiManager _euiMan = default!;
         [Dependency] private ISharedPlayerManager _player = default!;
@@ -60,9 +61,7 @@ namespace Content.Server.GameTicking.Rules
             SubscribeLocalEvent<ContractorRuleComponent, ComponentStartup>(OnRuleStart);
         }
 
-        protected override void AppendRoundEndText(EntityUid uid,
-            ContractorRuleComponent component,
-            GameRuleComponent gameRule,
+        protected override void AppendRoundEndText(Entity<ContractorRuleComponent> rule,
             ref RoundEndTextAppendEvent args)
         {
             var contractors = new List<(string Name, string Username, int Contracts)>();

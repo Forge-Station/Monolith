@@ -1,20 +1,3 @@
-- type: entity
-  abstract: true
-  parent: BaseItem
-  id: MaterialBase
-  description: A raw material.
-  components:
-  - type: Sprite
-    sprite: Objects/Materials/materials.rsi
-  - type: Item
-    sprite: Objects/Materials/materials.rsi
-    size: Normal
-  - type: BulkMaterial # Forge-change
-  - type: Tag
-    tags:
-      - DroneUsable
-      - RawMaterial
-
 # Mono - extract from MaterialBase
 - type: entity
   abstract: true

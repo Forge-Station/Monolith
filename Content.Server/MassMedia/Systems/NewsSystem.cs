@@ -32,8 +32,8 @@ public sealed partial class NewsSystem : SharedNewsSystem
     [Dependency] private CartridgeLoaderSystem _cartridgeLoaderSystem = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private PopupSystem _popup = default!;
-    [Dependency] private StationSystem _station = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerStationSystem _station = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private IChatManager _chatManager = default!;
 
     public override void Initialize()

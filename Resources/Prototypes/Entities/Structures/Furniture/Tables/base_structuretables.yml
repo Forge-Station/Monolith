@@ -27,8 +27,13 @@
   - type: Icon
     state: full
   - type: IconSmooth
-    key: state
-    base: state_
+    key: table
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ table ]
+      base: state_
+
+      swapOuterBits: false
   - type: Climbable
   - type: Bonkable
     bonkDamage:
@@ -66,3 +71,11 @@
         layer:
         - TableLayer
         - BulletImpassable # Goobstation - Crawling
+  - type: IconSmooth
+    key: counter
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ counter ]
+      base: state_
+
+      swapOuterBits: false

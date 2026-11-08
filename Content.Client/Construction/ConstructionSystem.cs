@@ -25,7 +25,6 @@ namespace Content.Client.Construction
     public sealed partial class ConstructionSystem : SharedConstructionSystem
     {
         [Dependency] private IPlayerManager _playerManager = default!;
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private ExamineSystemShared _examineSystem = default!;
         [Dependency] private SharedTransformSystem _transformSystem = default!;
         [Dependency] private PopupSystem _popupSystem = default!;
@@ -97,7 +96,7 @@ namespace Content.Client.Construction
                     "construction-ghost-examine-message",
                     ("name", component.Prototype.Name)));
 
-                if (!_prototypeManager.TryIndex(component.Prototype.Graph, out ConstructionGraphPrototype? graph))
+                if (!ProtoMan.TryIndex(component.Prototype.Graph, out ConstructionGraphPrototype? graph))
                     return;
 
                 var startNode = graph.Nodes[component.Prototype.StartNode];

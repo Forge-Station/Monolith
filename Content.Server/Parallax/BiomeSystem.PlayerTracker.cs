@@ -34,7 +34,7 @@ public sealed partial class BiomeSystem
 
                 foreach (var layer in biome.MarkerLayers)
                 {
-                    var layerProto = ProtoManager.Index(layer);
+                    var layerProto = ProtoMan.Index(layer);
                     AddMarkerChunksInRange(biome, worldPos, layerProto);
                 }
             }
@@ -55,7 +55,7 @@ public sealed partial class BiomeSystem
 
                 foreach (var layer in biome.MarkerLayers)
                 {
-                    var layerProto = ProtoManager.Index(layer);
+                    var layerProto = ProtoMan.Index(layer);
                     AddMarkerChunksInRange(biome, worldPos, layerProto);
                 }
             }

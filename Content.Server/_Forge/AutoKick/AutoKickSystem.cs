@@ -1,6 +1,8 @@
+using Content.Shared.GameTicking;
 using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._Forge.CCVars;
 using Content.Shared.Ghost;
 using Robust.Server.Player;
@@ -16,10 +18,10 @@ namespace Content.Server._Forge.AutoKick;
 /// <summary>
 /// Forge-Change: disconnects latejoin players that never clock in and inactive players by input timeout.
 /// </summary>
-public sealed class AutoKickSystem : EntitySystem
+public sealed partial class AutoKickSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IServerNetManager _net = default!;
     [Dependency] private IPlayerManager _players = default!;

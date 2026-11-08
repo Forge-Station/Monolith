@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
 using Robust.Server.Player;

@@ -28,6 +28,7 @@
     GlockenspielInstrument: 2
     BikeHornInstrument: 1 # Not actully bad as you might think
     MusicBoxInstrument: 1
+    WFBoombox: 2 # WOLFGATE(Boombox): sold beside the instruments
     XylophoneInstrument: 1
     MicrophoneInstrument: 1
     MusicalLungInstrument: 1 # This actully sound ok somehow

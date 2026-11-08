@@ -3,7 +3,8 @@
 Internet sounds. An admin gives a YouTube, SoundCloud or other yt-dlp supported link; the server fetches it, converts
 it to Ogg and sends it to the clients, and both ends mount it as an ordinary resource, so it plays like any shipped
 sound. Played to everyone, it shows a small radio at the top of each screen with volume and stop. Ship PA speakers
-play the same tracks (see ShipPa). Station, ambient and lobby music pause while one plays and resume after. A stealth
+play the same tracks (see ShipPa), and so can an item with `InternetSoundSourceComponent` (see Boombox): only
+players near it get the audio, and the client `InternetSoundSourceSystem` plays it from the item. Station, ambient and lobby music pause while one plays and resume after. A stealth
 play (the admin window's Stealth Play button, or the commands' `stealth` flag) names nobody on the radio or in other
 admins' windows; only the admin logs record who played it.
 
@@ -32,6 +33,7 @@ nullspace, such as a loop on something out of view, which the lobby's listener w
 - [`Content.Server/_WF/Audio/InternetSound/InternetSoundDownloadProxy.cs`](InternetSound/InternetSoundDownloadProxy.cs)
 - [`Content.Server/_WF/Audio/InternetSound/InternetSoundSystem.Audience.cs`](InternetSound/InternetSoundSystem.Audience.cs)
 - [`Content.Server/_WF/Audio/InternetSound/InternetSoundSystem.cs`](InternetSound/InternetSoundSystem.cs)
+- [`Content.Server/_WF/Audio/InternetSound/InternetSoundSystem.Source.cs`](InternetSound/InternetSoundSystem.Source.cs)
 - [`Content.Server/_WF/Audio/InternetSound/InternetSoundTransfer.cs`](InternetSound/InternetSoundTransfer.cs)
 
 ### Shared
@@ -40,6 +42,7 @@ nullspace, such as a loop on something out of view, which the lobby's listener w
 - [`Content.Shared/_WF/Audio/InternetSound/InternetSoundProtocol.cs`](../../../Content.Shared/_WF/Audio/InternetSound/InternetSoundProtocol.cs)
 - [`Content.Shared/_WF/Audio/InternetSound/InternetSoundReplaySystem.cs`](../../../Content.Shared/_WF/Audio/InternetSound/InternetSoundReplaySystem.cs)
 - [`Content.Shared/_WF/Audio/InternetSound/InternetSoundResources.cs`](../../../Content.Shared/_WF/Audio/InternetSound/InternetSoundResources.cs)
+- [`Content.Shared/_WF/Audio/InternetSound/InternetSoundSourceComponent.cs`](../../../Content.Shared/_WF/Audio/InternetSound/InternetSoundSourceComponent.cs)
 - [`Content.Shared/_WF/Audio/WFSoundBudget.cs`](../../../Content.Shared/_WF/Audio/WFSoundBudget.cs)
 
 ### Client
@@ -48,6 +51,7 @@ nullspace, such as a loop on something out of view, which the lobby's listener w
 - [`Content.Client/_WF/Audio/ContentAudioSystem.WolfgateMusicPause.cs`](../../../Content.Client/_WF/Audio/ContentAudioSystem.WolfgateMusicPause.cs)
 - [`Content.Client/_WF/Audio/InternetSound/InternetSoundPopup.xaml`](../../../Content.Client/_WF/Audio/InternetSound/InternetSoundPopup.xaml)
 - [`Content.Client/_WF/Audio/InternetSound/InternetSoundPopup.xaml.cs`](../../../Content.Client/_WF/Audio/InternetSound/InternetSoundPopup.xaml.cs)
+- [`Content.Client/_WF/Audio/InternetSound/InternetSoundSourceSystem.cs`](../../../Content.Client/_WF/Audio/InternetSound/InternetSoundSourceSystem.cs)
 - [`Content.Client/_WF/Audio/InternetSound/InternetSoundSystem.cs`](../../../Content.Client/_WF/Audio/InternetSound/InternetSoundSystem.cs)
 - [`Content.Client/_WF/Audio/InternetSound/InternetSoundSystem.Replay.cs`](../../../Content.Client/_WF/Audio/InternetSound/InternetSoundSystem.Replay.cs)
 - [`Content.Client/_WF/Audio/WFAudioBudgetSystem.cs`](../../../Content.Client/_WF/Audio/WFAudioBudgetSystem.cs)

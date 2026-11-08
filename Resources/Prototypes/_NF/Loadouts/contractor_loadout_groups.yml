@@ -837,6 +837,7 @@
   - ContractorHarmonicaInstrument
   - ContractorSaxophoneInstrument
   - ContractorAcousticGuitarInstrument
+  - WFBoombox # WOLFGATE(Boombox): portable internet speaker.
   - ContractorCane
   - ContractorLGBTQHandyFlag
   #- ContractorNTHandyFlag

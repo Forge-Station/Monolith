@@ -1,0 +1,80 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:ui="clr-namespace:Content.Client._WF.Boombox.UI"
+                      Title="{Loc 'wf-boombox-window-title'}"
+                      SetSize="600 560"
+                      MinSize="520 480">
+    <PanelContainer Margin="4">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="#26252b" BorderColor="#9a9aa3" BorderThickness="3" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="10">
+            <!-- Handle and brand plate -->
+            <PanelContainer HorizontalAlignment="Center" MinWidth="240">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="#3a3940" BorderColor="#c8c8d0" BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <Label Name="BrandLabel" Text="{Loc 'wf-boombox-brand'}" Align="Center" Margin="8 2"
+                       FontColorOverride="#e8c25a" />
+            </PanelContainer>
+
+            <!-- Deck: speaker, display and keys, speaker -->
+            <BoxContainer Orientation="Horizontal" Margin="0 8" SeparationOverride="10">
+                <ui:WFBoomboxSpeaker Name="LeftSpeaker" VerticalAlignment="Center" />
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" SeparationOverride="6">
+                    <PanelContainer>
+                        <PanelContainer.PanelOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="#0c1a10" BorderColor="#2f5a3a" BorderThickness="2" />
+                        </PanelContainer.PanelOverride>
+                        <BoxContainer Orientation="Vertical" Margin="8 6">
+                            <Label Name="TitleLabel" ClipText="True" FontColorOverride="#7dff9b" />
+                            <Label Name="TimeLabel" FontColorOverride="#3fae5c" />
+                            <ProgressBar Name="TrackProgress" MinValue="0" MaxValue="1" MinHeight="6" Margin="0 4 0 0">
+                                <ProgressBar.BackgroundStyleBoxOverride>
+                                    <gfx:StyleBoxFlat BackgroundColor="#16301d" />
+                                </ProgressBar.BackgroundStyleBoxOverride>
+                                <ProgressBar.ForegroundStyleBoxOverride>
+                                    <gfx:StyleBoxFlat BackgroundColor="#7dff9b" />
+                                </ProgressBar.ForegroundStyleBoxOverride>
+                            </ProgressBar>
+                        </BoxContainer>
+                    </PanelContainer>
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                        <Button Name="SkipButton" Text="{Loc 'wf-boombox-skip'}" HorizontalExpand="True" StyleClasses="ButtonSquare" />
+                        <Button Name="StopButton" Text="{Loc 'wf-boombox-stop-button'}" HorizontalExpand="True" StyleClasses="ButtonSquare" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                        <Button Name="ShuffleButton" Text="{Loc 'wf-boombox-shuffle'}" HorizontalExpand="True" StyleClasses="ButtonSquare" />
+                        <Button Name="RepeatButton" Text="{Loc 'wf-boombox-repeat'}" HorizontalExpand="True" StyleClasses="ButtonSquare" ToggleMode="True" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                        <Label Text="{Loc 'wf-boombox-volume'}" FontColorOverride="#e8c25a" />
+                        <Slider Name="VolumeSlider" HorizontalExpand="True" MinValue="0" MaxValue="1" VerticalAlignment="Center" />
+                    </BoxContainer>
+                </BoxContainer>
+                <ui:WFBoomboxSpeaker Name="RightSpeaker" VerticalAlignment="Center" />
+            </BoxContainer>
+
+            <!-- Tape slot -->
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                <LineEdit Name="LinkEdit" HorizontalExpand="True" PlaceHolder="{Loc 'wf-boombox-link-placeholder'}" />
+                <Button Name="AddButton" Text="{Loc 'wf-boombox-add'}" StyleClasses="ButtonSquare" MinWidth="70" />
+            </BoxContainer>
+
+            <!-- Queue -->
+            <BoxContainer Orientation="Horizontal" Margin="0 8 0 2">
+                <Label Name="QueueLabel" HorizontalExpand="True" FontColorOverride="#e8c25a" />
+                <Button Name="ClearButton" Text="{Loc 'wf-boombox-clear'}" StyleClasses="ButtonSquare" />
+            </BoxContainer>
+            <PanelContainer VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="#18171b" BorderColor="#3a3940" BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <ScrollContainer HScrollEnabled="False" VerticalExpand="True" MinHeight="120">
+                    <BoxContainer Name="QueueList" Orientation="Vertical" Margin="4" SeparationOverride="2" />
+                </ScrollContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:FancyWindow>

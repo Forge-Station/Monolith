@@ -23,6 +23,8 @@
     WFVehicleBayTerminalFlatpack: 4
     WFVehicleDeliveryPadFlatpack: 4
     WFFreedoom2ArcadeFlatpack: 3
+    WFMameArcadeFlatpack: 3
+    WFBoombox: 4
     # Wolfmed field medicine.
     WFWolfmedSplint: 6
     WFWolfmedAntisepticSpray: 6

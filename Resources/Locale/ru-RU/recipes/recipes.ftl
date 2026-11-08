@@ -48,7 +48,7 @@ construction-recipe-plastitanium-window-uran-diagonal = { ent-PlastitaniumWindow
 construction-recipe-plastitanium-window-uran-diagonal-desc = { ent-PlastitaniumWindowUranDiagonal.desc }
 
 
-# huttlemWalls
+# ShuttlemWalls
 construction-recipe-shuttle-wall = { ent-WallShuttle }
 construction-recipe-shuttle-wall-desc = { ent-WallShuttle.desc }
 construction-recipe-shuttle-secret-door-construction = стена шаттла (секретная дверь)

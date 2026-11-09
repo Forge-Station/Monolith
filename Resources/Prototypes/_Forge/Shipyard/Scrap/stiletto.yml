@@ -1,0 +1,33 @@
+- type: vessel
+  id: Stiletto
+  parent: BaseVessel
+  name: GSI «Стилетто»
+  description: Торпедный истребитель, собранный на свалке.
+  price: 79000
+  category: Medium
+  group: Scrap
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Scrap/stiletto.yml
+  guidebookPage: Null
+  class:
+  - Scrapyard
+  - Pursuit
+
+- type: gameMap
+  id: Stiletto
+  mapName: 'GSI Стилетто'
+  mapPath: /SharedMaps/_Forge/Shuttles/Scrap/stiletto.yml
+  minPlayers: 0
+  stations:
+    Stiletto:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'GSI Бескрылый SRP-MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            Contractor: [ 0, 0 ]
+            Pilot: [ 0, 0 ]
+            Mercenary: [ 0, 0 ]

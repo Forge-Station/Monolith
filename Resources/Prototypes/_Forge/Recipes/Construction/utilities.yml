@@ -11,3 +11,5 @@
   icon:
     sprite: Objects/Specific/Janitorial/drain.rsi
     state: icon
+  conditions:
+    - !type:NoUnstackableInTile

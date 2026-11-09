@@ -21,6 +21,9 @@
       bodyType: Static
       canCollide: false
     #Forge-change-start
+    - type: Tag
+      tags:
+        - Unstackable
     - type: Construction
       graph: FloorDrain
       node: drain

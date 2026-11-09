@@ -1,3 +1,5 @@
+using Content.Shared.Station.Components;
+using Content.Shared.GameTicking;
 using Content.Server.Access.Components;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
@@ -14,7 +16,7 @@ public sealed partial class PresetIdCardSystem : EntitySystem
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IdCardSystem _cardSystem = default!;
     [Dependency] private SharedAccessSystem _accessSystem = default!;
-    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private ServerStationSystem _stationSystem = default!;
 
     public override void Initialize()
     {

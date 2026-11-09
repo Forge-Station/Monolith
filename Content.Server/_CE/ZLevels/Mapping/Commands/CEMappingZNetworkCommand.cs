@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is sublicensed under MIT License
  * https://github.com/space-wizards/space-station-14/blob/master/LICENSE.TXT
  */
@@ -118,7 +118,7 @@ public sealed partial class CEMappingZNetworkCommand : LocalizedEntityCommands
 
         // map successfully created. run misc helpful mapping commands
         if (player.AttachedEntity is { Valid: true } playerEntity &&
-            EntityManager.GetComponent<MetaDataComponent>(playerEntity).EntityPrototype?.ID != GameTicker.AdminObserverPrototypeName)
+            EntityManager.GetComponent<MetaDataComponent>(playerEntity).EntityPrototype?.ID != ServerGameTicker.AdminObserverPrototypeName)
         {
             shell.ExecuteCommand("aghost");
         }

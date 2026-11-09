@@ -1,3 +1,4 @@
+using Content.Shared.Shuttles.Components;
 using Content.Server._Mono.Projectiles.TargetSeeking;
 using Content.Server.Emp;
 using Content.Server.Physics.Controllers;

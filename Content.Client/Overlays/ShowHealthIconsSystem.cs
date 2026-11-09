@@ -32,6 +32,7 @@ public sealed partial class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealt
     {
         base.UpdateInternal(component);
 
+        DamageContainers.Clear();
         foreach (var damageContainerId in component.Components.SelectMany(x => x.DamageContainers))
         {
             DamageContainers.Add(damageContainerId);

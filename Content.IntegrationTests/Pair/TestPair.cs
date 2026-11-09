@@ -59,7 +59,7 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair, IAsyncDis
         var settings = (PoolSettings)Settings;
         if (!settings.DummyTicker)
         {
-            var gameTicker = Server.System<GameTicker>();
+            var gameTicker = Server.System<ServerGameTicker>();
             await Server.WaitPost(() => gameTicker.RestartRound());
         }
     }

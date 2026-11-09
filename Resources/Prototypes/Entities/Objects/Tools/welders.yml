@@ -86,10 +86,10 @@
     soundHit:
       collection: MetalThud
   - type: RefillableSolution
-    solution: Welder
+    solution: welder
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 100
@@ -163,7 +163,7 @@
     sprite: _Forge/Objects/Tools/Standart/welder_industrial.rsi
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 250
@@ -184,7 +184,7 @@
     sprite: _Forge/Objects/Tools/Standart/welder_industrialadv.rsi
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 350
@@ -204,7 +204,7 @@
     sprite: _Forge/Objects/Tools/Standart/welder_experimental.rsi
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 2500
@@ -214,7 +214,7 @@
     radius: 1.5
     color: lightblue
   - type: SolutionRegeneration
-    solution: Welder
+    solution: welder
     generated:
       reagents:
       - ReagentId: WeldingFuel
@@ -239,10 +239,10 @@
     size: Tiny
     sprite: _Forge/Objects/Tools/Standart/welder_mini.rsi
   - type: RefillableSolution
-    solution: Welder
+    solution: welder
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 60

@@ -33,7 +33,7 @@ public sealed partial class SliceableFoodSystem : EntitySystem
 
         SubscribeLocalEvent<SliceableFoodComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<SliceableFoodComponent, SliceFoodDoAfterEvent>(OnSlicedoAfter);
-        SubscribeLocalEvent<SliceableFoodComponent, ComponentStartup>(OnComponentStartup);
+        SubscribeLocalEvent<SliceableFoodComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedSolutionContainerSystem)]);
     }
 
     private void OnInteractUsing(Entity<SliceableFoodComponent> entity, ref InteractUsingEvent args)
@@ -175,7 +175,7 @@ public sealed partial class SliceableFoodSystem : EntitySystem
         }
     }
 
-    private void OnComponentStartup(Entity<SliceableFoodComponent> entity, ref ComponentStartup args)
+    private void OnMapInit(Entity<SliceableFoodComponent> entity, ref MapInitEvent args)
     {
         var foodComp = EnsureComp<FoodComponent>(entity);
         _solutionContainer.EnsureSolution(entity.Owner, foodComp.Solution, out _);

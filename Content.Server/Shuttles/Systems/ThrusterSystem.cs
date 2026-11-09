@@ -366,6 +366,9 @@ public sealed partial class ThrusterSystem : EntitySystem
     /// </summary>
     public void EnableThruster(EntityUid uid, ThrusterComponent component, TransformComponent? xform = null)
     {
+        if (TerminatingOrDeleted(uid))
+            return;
+
         if (component.IsOn ||
             !Resolve(uid, ref xform))
         {
@@ -533,7 +536,9 @@ public sealed partial class ThrusterSystem : EntitySystem
         if (WfCooling(uid)) // WOLFGATE(Planets): atmospheric overload recovery must survive power-change callbacks.
             return false;
 
-        if (component.LifeStage > ComponentLifeStage.Running)
+        // ComponentLifeStage can still be Running while the entity is Terminating
+        // (e.g. map wipe). Creating fixtures in that state asserts in FixtureSystem.
+        if (component.LifeStage > ComponentLifeStage.Running || TerminatingOrDeleted(uid))
             return false;
 
         var xform = Transform(uid);
@@ -770,7 +775,7 @@ public sealed partial class ThrusterSystem : EntitySystem
                     if (other.Value == uid || !TryComp<ThrusterComponent>(other.Value, out var thruster))
                         continue;
 
-                    if (thruster.LifeStage > ComponentLifeStage.Running)
+                    if (thruster.LifeStage > ComponentLifeStage.Running || TerminatingOrDeleted(other.Value))
                         continue;
 
                     var otherXform = Transform(other.Value);

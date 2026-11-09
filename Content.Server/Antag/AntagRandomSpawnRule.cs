@@ -1,3 +1,4 @@
+using Content.Shared.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking.Rules;
 

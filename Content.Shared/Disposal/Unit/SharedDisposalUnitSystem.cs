@@ -6,6 +6,8 @@ using Content.Shared.Climbing.Systems;
 using Content.Shared.Containers;
 using Content.Shared.Database;
 using Content.Shared.DeviceLinking; // Goobstation
+using Content.Shared.DeviceLinking.Components;
+using Content.Shared.DeviceLinking.Systems;
 using Content.Shared.Disposal.Components;
 using Content.Shared.Disposal.Unit.Events;
 using Content.Shared.DoAfter;
@@ -62,7 +64,7 @@ public abstract partial class SharedDisposalUnitSystem : EntitySystem
     [Dependency] protected SharedTransformSystem TransformSystem = default!;
     [Dependency] private   SharedUserInterfaceSystem _ui = default!;
     [Dependency] private   SharedMapSystem _map = default!;
-    [Dependency] private SharedDeviceLinkSystem _device = default!; // Goobstation
+    [Dependency] private DeviceLinkSystem _device = default!; // Goobstation
     public static readonly ProtoId<SourcePortPrototype> ReadyPort = "DisposalReady"; // Goobstation
 
     protected static TimeSpan ExitAttemptDelay = TimeSpan.FromSeconds(0.5);
@@ -702,6 +704,9 @@ public abstract partial class SharedDisposalUnitSystem : EntitySystem
     /// </summary>
     public void TryEjectContents(EntityUid uid, DisposalUnitComponent component)
     {
+        if (component?.Container == null)
+            return;
+
         foreach (var entity in component.Container.ContainedEntities.ToArray())
         {
             Remove(uid, component, entity);

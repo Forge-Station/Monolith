@@ -1,3 +1,4 @@
+using Content.Shared.Station.Components;
 using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.RoundEnd;
@@ -21,9 +22,9 @@ public sealed partial class EventManagerSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private EntityTableSystem _entityTable = default!;
-    [Dependency] public GameTicker GameTicker = default!;
+    [Dependency] public ServerGameTicker ServerGameTicker = default!;
     [Dependency] private RoundEndSystem _roundEnd = default!;
-    [Dependency] private StationJobsSystem _stationJobs = default!; // Frontier
+    [Dependency] private ServerStationJobsSystem _stationJobs = default!; // Frontier
 
     public bool EventsEnabled { get; private set; }
     private void SetEnabled(bool value) => EventsEnabled = value;
@@ -50,7 +51,7 @@ public sealed partial class EventManagerSystem : EntitySystem
             return;
         }
 
-        GameTicker.AddGameRule(randomEvent);
+        ServerGameTicker.AddGameRule(randomEvent);
     }
 
     /// <summary>
@@ -80,7 +81,7 @@ public sealed partial class EventManagerSystem : EntitySystem
             return;
         }
 
-        GameTicker.AddGameRule(randomLimitedEvent);
+        ServerGameTicker.AddGameRule(randomLimitedEvent);
     }
 
     /// <summary>
@@ -194,7 +195,7 @@ public sealed partial class EventManagerSystem : EntitySystem
 
         // playerCount does a lock so we'll just keep the variable here
         var currentTime = currentTimeOverride ?? (!ignoreEarliestStart
-            ? GameTicker.RoundDuration()
+            ? ServerGameTicker.RoundDuration()
             : TimeSpan.Zero);
 
         var result = new Dictionary<EntityPrototype, StationEventComponent>();
@@ -234,12 +235,12 @@ public sealed partial class EventManagerSystem : EntitySystem
 
     private int GetOccurrences(string stationEvent)
     {
-        return GameTicker.AllPreviousGameRules.Count(p => p.Item2 == stationEvent);
+        return ServerGameTicker.AllPreviousGameRules.Count(p => p.Item2 == stationEvent);
     }
 
     public TimeSpan TimeSinceLastEvent(EntityPrototype stationEvent)
     {
-        foreach (var (time, rule) in GameTicker.AllPreviousGameRules.Reverse())
+        foreach (var (time, rule) in ServerGameTicker.AllPreviousGameRules.Reverse())
         {
             if (rule == stationEvent.ID)
                 return time;
@@ -250,7 +251,7 @@ public sealed partial class EventManagerSystem : EntitySystem
 
     private bool CanRun(EntityPrototype prototype, StationEventComponent stationEvent, int playerCount, TimeSpan currentTime)
     {
-        if (GameTicker.IsGameRuleActive(prototype.ID))
+        if (ServerGameTicker.IsGameRuleActive(prototype.ID))
             return false;
 
         if (stationEvent.MaxOccurrences.HasValue && GetOccurrences(prototype) >= stationEvent.MaxOccurrences.Value)

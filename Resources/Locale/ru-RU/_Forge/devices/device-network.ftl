@@ -1,0 +1,8 @@
+device-frequency-prototype-name-suit-sensors-renegade = Датчики костюма (Ренегаты)
+device-frequency-prototype-name-suit-sensors-tsfmc = Датчики костюма (TSFMC)
+device-frequency-prototype-name-suit-sensors-nt = Датчики костюма (NanoTrasen)
+device-frequency-prototype-name-suit-sensors-empire = Датчики костюма (Империя)
+device-frequency-prototype-name-crew-monitor-renegade = Монитор экипажа (Ренегаты)
+device-frequency-prototype-name-crew-monitor-tsfmc = Монитор экипажа (TSFMC)
+device-frequency-prototype-name-crew-monitor-nt = Монитор экипажа (NanoTrasen)
+device-frequency-prototype-name-crew-monitor-empire = Монитор экипажа (Империя)

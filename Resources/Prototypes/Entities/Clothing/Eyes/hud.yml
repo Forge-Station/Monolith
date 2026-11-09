@@ -92,7 +92,9 @@
     sprite: Clothing/Eyes/Hud/beergoggles.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/beergoggles.rsi
-  - type: ShowThirstIcons
+  - type: ShowSatiationIcons
+    shownTypes:
+    - Thirst
   - type: StealTarget
     stealGroup: ClothingEyesHudBeer
   - type: SolutionScanner
@@ -110,7 +112,9 @@
     sprite: Clothing/Eyes/Hud/friedonion.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/friedonion.rsi
-  - type: ShowHungerIcons
+  - type: ShowSatiationIcons
+    shownTypes:
+    - Hunger
   - type: Food
   - type: SolutionContainerManager
     solutions:
@@ -143,6 +147,11 @@
     tags:
     - PetWearable
     
+  - type: ShowSatiationIcons
+    shownTypes:
+    - Hunger
+    - Thirst
+
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]
   id: ClothingEyesHudMedOnion
@@ -157,7 +166,10 @@
   - type: Tag
     tags:
     - PetWearable
-    
+  - type: ShowSatiationIcons
+    shownTypes:
+    - Hunger
+
 - type: entity
   parent: [ClothingEyesBase, ShowMedicalIcons]
   id: ClothingEyesHudMedOnionBeer
@@ -173,7 +185,11 @@
   - type: Tag
     tags:
     - PetWearable
-    
+  - type: ShowSatiationIcons
+    shownTypes:
+    - Hunger
+    - Thirst
+
 - type: entity
   parent: [ClothingEyesBase, ShowSecurityIcons, ShowMedicalIcons]
   id: ClothingEyesHudMedSec
@@ -230,6 +246,10 @@
     - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
   - type: ShowHungerIcons
   - type: ShowThirstIcons
+  - type: ShowSatiationIcons
+    shownTypes:
+    - Hunger
+    - Thirst
   - type: ShowSyndicateIcons
   - type: Tag
     tags:

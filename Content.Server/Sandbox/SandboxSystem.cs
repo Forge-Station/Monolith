@@ -4,6 +4,7 @@ using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -28,7 +29,7 @@ namespace Content.Server.Sandbox
         [Dependency] private SharedAccessSystem _access = default!;
         [Dependency] private InventorySystem _inventory = default!;
         [Dependency] private ItemSlotsSystem _slots = default!;
-        [Dependency] private GameTicker _ticker = default!;
+        [Dependency] private ServerGameTicker _ticker = default!;
         [Dependency] private SharedHandsSystem _handsSystem = default!;
 
         private bool _isSandboxEnabled;
@@ -121,7 +122,7 @@ namespace Content.Server.Sandbox
                 return;
             }
 
-            var allAccess = PrototypeManager
+            var allAccess = ProtoMan
                 .EnumeratePrototypes<AccessLevelPrototype>()
                 .Where(p => p.ID != WFShipAccessServerSystem.LockedAccess) // WOLFGATE(ShipAccess): all access is not a key to every locked ship
                 .Select(p => new ProtoId<AccessLevelPrototype>(p.ID)).ToList();

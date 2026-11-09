@@ -9,3 +9,5 @@ smart-fridge-request-generic = Freshness not guaranteed
 # Mono
 smart-fridge-request-chemistry = Request refills from your chemist
 smart-fridge-request-armory = Equipment not guaranteed
+
+smart-fridge-request-vinyl = Vinyls, vinyls, vinyls...

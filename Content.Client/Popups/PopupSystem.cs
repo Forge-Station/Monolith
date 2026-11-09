@@ -97,7 +97,7 @@ namespace Content.Client.Popups
 
         private void PopupMessage(string? message, PopupType type, EntityCoordinates coordinates, EntityUid? entity, bool recordReplay)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             // Filter out specific messages
@@ -170,7 +170,7 @@ namespace Content.Client.Popups
 
         private void PopupCursorInternal(string? message, PopupType type, bool recordReplay)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             if (recordReplay && _replayRecording.IsRecording)

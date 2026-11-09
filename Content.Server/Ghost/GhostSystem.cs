@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Logs;
@@ -65,7 +66,7 @@ namespace Content.Server.Ghost
         [Dependency] private IConfigurationManager _configurationManager = default!;
         [Dependency] private IChatManager _chatManager = default!;
         [Dependency] private SharedMindSystem _mind = default!;
-        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private ServerGameTicker _gameTicker = default!;
         [Dependency] private DamageableSystem _damageable = default!;
         [Dependency] private SharedPopupSystem _popup = default!;
         [Dependency] private IRobustRandom _random = default!;
@@ -109,7 +110,7 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, InsertIntoEntityStorageAttemptEvent>(OnEntityStorageInsertAttempt);
             SubscribeLocalEvent<GhostComponent, PriceCalculationEvent>(OnPriceCalculation); // Frontier
 
-            SubscribeLocalEvent<RoundEndTextAppendEvent>(_ => MakeVisible(true));
+            SubscribeLocalEvent<RoundEndTextAppendEvent>((ref RoundEndTextAppendEvent _) => MakeVisible(true));
             SubscribeLocalEvent<ToggleGhostVisibilityToAllEvent>(OnToggleGhostVisibilityToAll);
 
             SubscribeLocalEvent<GhostComponent, MindAddedMessage>(OnMindAdded);
@@ -389,12 +390,27 @@ namespace Content.Server.Ghost
 
         private IEnumerable<GhostWarp> GetLocationWarps(bool isAdmin) // Frontier: add isAdmin
         {
+            var warps = new List<(EntityUid Uid, WarpPointComponent Warp)>();
+            var publicLocations = new HashSet<string>();
             var allQuery = AllEntityQuery<WarpPointComponent>();
 
             while (allQuery.MoveNext(out var uid, out var warp))
             {
                 if (warp.AdminOnly && !isAdmin) // Frontier: skip admin-only warp points if not an admin
                     continue; // Frontier
+
+                warps.Add((uid, warp));
+                if (!warp.AdminOnly && !string.IsNullOrEmpty(warp.Location))
+                    publicLocations.Add(warp.Location);
+            }
+
+            foreach (var (uid, warp) in warps)
+            {
+                // Admin marker on the same POI is renamed to the station, so it shows up as a second identical teleport.
+                if (warp.AdminOnly
+                    && !string.IsNullOrEmpty(warp.Location)
+                    && publicLocations.Contains(warp.Location))
+                    continue;
 
                 yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), true);
             }
@@ -560,7 +576,41 @@ namespace Content.Server.Ghost
                 return null;
             }
 
-            var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
+            // Forge-Change: spawn exactly one observer — do not call SpawnAtPosition here and then Spawn again
+            // (that leaked a MobObserver on every ghost/latejoin observer, stacking dozens at the spawn point).
+            EntityUid ghost;
+            var user = mind.Comp.UserId;
+            try
+            {
+                if (user != null && _sponsors.TryGetSponsor(user.Value, out var level))
+                {
+                    // Forge-Change: prefer the sponsor's explicitly chosen ghost skin (validated against their level),
+                    // then fall back to the default skin tied to their level, then to the normal observer.
+                    var chosenSkin = _preferencesManager.GetPreferencesOrNull(user.Value)?.SponsorGhostSkin;
+                    if (!string.IsNullOrEmpty(chosenSkin) && SponsorData.IsGhostSkinAllowed(level, chosenSkin))
+                        ghost = Spawn(chosenSkin, spawnPosition.Value);
+                    else if (_sponsors.TryGetSponsorGhost(level, out var sponsorGhost))
+                        ghost = Spawn(sponsorGhost, spawnPosition.Value);
+                    else
+                        ghost = SpawnAtPosition(ServerGameTicker.ObserverPrototypeName, spawnPosition.Value);
+                }
+                else
+                {
+                    ghost = SpawnAtPosition(ServerGameTicker.ObserverPrototypeName, spawnPosition.Value);
+                }
+
+                if (!HasComp<GhostComponent>(ghost))
+                {
+                    AddComp<GhostComponent>(ghost);
+                    Log.Warning($"Added missing GhostComponent to {ToPrettyString(ghost)}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Failed to spawn ghost: {ex}");
+                return null;
+            }
+
             var ghostComponent = Comp<GhostComponent>(ghost);
 
             if (TryComp<GhostSpriteStateComponent>(ghost, out var state))  // If more TryComps are added this should be turned into an event
@@ -607,6 +657,14 @@ namespace Content.Server.Ghost
 
             // Only apply admin OOC color if the player is actually an admin
             if (!_admin.IsAdmin(session))
+                return;
+
+            // Never tint custom ghost skins (e.g. sponsor skins) — keep their original sprite colors.
+            // Only the default observer prototypes may be recolored.
+            if (TryComp<MetaDataComponent>(ghostEntity, out var meta)
+                && meta.EntityPrototype != null
+                && meta.EntityPrototype.ID != ServerGameTicker.ObserverPrototypeName
+                && meta.EntityPrototype.ID != ServerGameTicker.AdminObserverPrototypeName)
                 return;
 
             if (!_preferencesManager.TryGetCachedPreferences(session.UserId, out var prefs))

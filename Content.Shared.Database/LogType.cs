@@ -506,4 +506,10 @@ public enum LogType
     /// Anatomy organs and settings.
     /// </summary>
     WFAnatomy = 12490, // WOLFGATE - anatomy organs and settings
+    Paper = 300, // Forge
+
+    /// <summary>
+    /// An antagonist was selected or assigned.
+    /// </summary>
+    AntagSelection = 301,
 }

@@ -1,4 +1,4 @@
-using System; // WOLFGATE(Wolfmed)
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -22,6 +22,30 @@ namespace Content.IntegrationTests.Tests
     public sealed class EntityTest
     {
         private static readonly ProtoId<EntityCategoryPrototype> SpawnerCategory = "Spawner";
+
+        /// <summary>
+        /// Delete remaining entities after spawn-all tests, then force a GC.
+        /// </summary>
+        private static void DeleteRemainingEntities(IEntityManager entityMan)
+        {
+            var entityMetas = new List<(EntityUid, MetaDataComponent)>();
+            var query = entityMan.AllEntityQueryEnumerator<MetaDataComponent>();
+            while (query.MoveNext(out var uid, out var meta))
+            {
+                entityMetas.Add((uid, meta));
+            }
+
+            foreach (var (uid, meta) in entityMetas)
+            {
+                if (!meta.EntityDeleted)
+                    entityMan.DeleteEntity(uid);
+            }
+
+            Assert.That(entityMan.EntityCount, Is.Zero);
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
 
         [Test]
         public async Task SpawnAndDeleteAllEntitiesOnDifferentMaps()
@@ -94,6 +118,18 @@ namespace Content.IntegrationTests.Tests
 
             await server.WaitPost(() =>
             {
+                // Same-spot stacks everything on one tile for hundreds of ticks. Explosives / anomalies /
+                // meteors chain-react and gib body parts (actions without physics, container mutation, etc.).
+                var sameSpotExcluded = new[]
+                {
+                    "MapGrid",
+                    "RoomFill",
+                    "GridSpawner", // Mono
+                    "Meteor", // Mono
+                    "Explosive",
+                    "ExplodeOnTrigger",
+                    "Anomaly",
+                };
 
                 var protoIds = prototypeMan
                     .EnumeratePrototypes<EntityPrototype>()
@@ -106,11 +142,13 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => p.Categories.All(x => x.ID != SpawnerCategory)) // mono
                     .Select(p => p.ID)
                     .ToList();
+
                 foreach (var protoId in protoIds)
                 {
                     SpawnEntity(entityMan, protoId, map.GridCoords); // Monolith
                 }
             });
+
             await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
             await server.WaitPost(() =>
             {

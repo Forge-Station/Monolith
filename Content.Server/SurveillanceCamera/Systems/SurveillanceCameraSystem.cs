@@ -2,6 +2,9 @@ using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Chat; // Einstein Engines - Languages
 using Content.Shared.DeviceNetwork;
+using Content.Server.Administration.Logs;
+using Content.Shared.Database;
+using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Power;
 using Content.Shared.Silicons.StationAi;
@@ -12,6 +15,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.DeviceNetwork.Systems;
 
 namespace Content.Server.SurveillanceCamera;
 
@@ -21,6 +25,9 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private ViewSubscriberSystem _viewSubscriberSystem = default!;
     [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private DeviceNetworkRouterSystem _deviceNetworkRouter = default!;
+
+    private EntityQuery<SurveillanceCameraRouterComponent> _routerQuery;
     [Dependency] private UserInterfaceSystem _userInterface = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedStationAiSystem _stationAi = default!;
@@ -60,72 +67,48 @@ public sealed partial class SurveillanceCameraSystem : SharedSurveillanceCameraS
 
         SubscribeLocalEvent<SurveillanceCameraComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<SurveillanceCameraComponent, PowerChangedEvent>(OnPowerChanged);
-        SubscribeLocalEvent<SurveillanceCameraComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
+        SubscribeLocalEvent<SurveillanceCameraComponent, DeviceNetworkPacketEvent<SurveillanceCameraConnectRequestPayload>>(OnConnect);
+        SubscribeLocalEvent<SurveillanceCameraComponent, DeviceNetworkPacketEvent<SurveillanceCameraHeartbeatRequestPayload>>(OnHeartbeat);
+        SubscribeLocalEvent<SurveillanceCameraComponent, DeviceNetworkPacketEvent<SurveillanceCameraPingPayload>>(OnPing);
+
+        _routerQuery = GetEntityQuery<SurveillanceCameraRouterComponent>();
         SubscribeLocalEvent<SurveillanceCameraComponent, SurveillanceCameraSetupSetName>(OnSetName);
         SubscribeLocalEvent<SurveillanceCameraComponent, SurveillanceCameraSetupSetNetwork>(OnSetNetwork);
     }
 
-    private void OnPacketReceived(EntityUid uid, SurveillanceCameraComponent component, DeviceNetworkPacketEvent args)
+    private void OnConnect(Entity<SurveillanceCameraComponent> ent, ref DeviceNetworkPacketEvent<SurveillanceCameraConnectRequestPayload> args)
     {
-        if (!component.Active)
-        {
+        if (!ent.Comp.Active)
             return;
-        }
 
-        if (!TryComp(uid, out DeviceNetworkComponent? deviceNet))
-        {
+        var response = new SurveillanceCameraConnectPayload();
+        _deviceNetworkRouter.SendPacketRouted(ent.Owner, ref response, args.SenderAddress, args.Data.SenderAddress);
+    }
+
+    private void OnHeartbeat(Entity<SurveillanceCameraComponent> ent, ref DeviceNetworkPacketEvent<SurveillanceCameraHeartbeatRequestPayload> args)
+    {
+        if (!ent.Comp.Active)
             return;
-        }
 
-        if (args.Data.TryGetValue(DeviceNetworkConstants.Command, out string? command))
+        var response = new SurveillanceCameraHeartbeatPayload();
+        _deviceNetworkRouter.SendPacketRouted(ent.Owner, ref response, args.SenderAddress, args.Data.SenderAddress);
+    }
+
+    private void OnPing(Entity<SurveillanceCameraComponent> ent, ref DeviceNetworkPacketEvent<SurveillanceCameraPingPayload> args)
+    {
+        if (!ent.Comp.Active)
+            return;
+
+        if (!_routerQuery.TryComp(args.Sender, out var routerComp) || routerComp.SubnetName != args.Data.Subnet)
+            return;
+
+        var name = ent.Comp.UseEntityNameAsCameraId ? MetaData(ent).EntityName : ent.Comp.CameraId;
+        var response = new SurveillanceCameraDataPayload
         {
-            var payload = new NetworkPayload()
-            {
-                { DeviceNetworkConstants.Command, string.Empty },
-                { CameraAddressData, deviceNet.Address },
-                { CameraNameData, component.UseEntityNameAsCameraId ? MetaData(uid).EntityName : component.CameraId },
-                { CameraSubnetData, string.Empty }
-            };
-
-            var dest = string.Empty;
-
-            switch (command)
-            {
-                case CameraConnectMessage:
-                    if (!args.Data.TryGetValue(CameraAddressData, out dest)
-                        || string.IsNullOrEmpty(args.Address))
-                    {
-                        return;
-                    }
-
-                    payload[DeviceNetworkConstants.Command] = CameraConnectMessage;
-                    break;
-                case CameraHeartbeatMessage:
-                    if (!args.Data.TryGetValue(CameraAddressData, out dest)
-                        || string.IsNullOrEmpty(args.Address))
-                    {
-                        return;
-                    }
-
-                    payload[DeviceNetworkConstants.Command] = CameraHeartbeatMessage;
-                    break;
-                case CameraPingMessage:
-                    if (!args.Data.TryGetValue(CameraSubnetData, out string? subnet))
-                    {
-                        return;
-                    }
-
-                    dest = args.SenderAddress;
-                    payload[CameraSubnetData] = subnet;
-                    payload[DeviceNetworkConstants.Command] = CameraDataMessage;
-                    break;
-            }
-
-            _deviceNetworkSystem.QueuePacket(
-                uid,
-                dest,
-                payload);
-        }
+            Name = name,
+            Subnet = args.Data.Subnet,
+        };
+        _deviceNetworkRouter.SendPacketRouted(ent.Owner, ref response, args.SenderAddress, args.Data.SenderAddress);
     }
 
     private void OnPowerChanged(EntityUid camera, SurveillanceCameraComponent component, ref PowerChangedEvent args)

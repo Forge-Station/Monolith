@@ -109,7 +109,7 @@ public sealed partial class NcContractSystem : EntitySystem
         return false;
     }
 
-    private void OnGhostRoleRoundEndText(RoundEndTextAppendEvent ev)
+    private void OnGhostRoleRoundEndText(ref RoundEndTextAppendEvent ev)
     {
         RefreshActiveGhostRoleRoundEndRecords();
         if (_ghostRoleRoundEndRecords.Count == 0)

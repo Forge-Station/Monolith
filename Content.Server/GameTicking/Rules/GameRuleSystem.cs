@@ -1,32 +1,32 @@
-using Content.Server.Atmos.EntitySystems;
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Chat.Managers;
+using Content.Server.GameTicking;
+using Content.Server.Station.Systems;
 using Content.Shared.GameTicking.Components;
-using Robust.Server.GameObjects;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
+using Content.Shared.Station.Components;
+using Robust.Shared.Collections;
+using Robust.Shared.Map;
 
 namespace Content.Server.GameTicking.Rules;
 
-public abstract partial class GameRuleSystem<T> : EntitySystem where T : IComponent
+/// <summary>
+/// Server half of <see cref="Content.Shared.GameTicking.Rules.GameRuleSystem{T}"/>.
+/// Keeps the local minimum-player check that cancels a preset or ends the rule.
+/// </summary>
+public abstract partial class GameRuleSystem<T> : Content.Shared.GameTicking.Rules.GameRuleSystem<T>
+    where T : IComponent
 {
-    [Dependency] protected IRobustRandom RobustRandom = default!;
     [Dependency] protected IChatManager ChatManager = default!;
-    [Dependency] protected GameTicker GameTicker = default!;
-    [Dependency] protected IGameTiming Timing = default!;
 
-    // Not protected, just to be used in utility methods
-    [Dependency] private AtmosphereSystem _atmosphere = default!;
-    [Dependency] private MapSystem _map = default!;
+    /// <summary>
+    /// Server ticker. Shared rules only see <see cref="GameTicker"/>.
+    /// </summary>
+    [Dependency] protected ServerGameTicker ServerGameTicker = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
         SubscribeLocalEvent<RoundStartAttemptEvent>(OnStartAttempt);
-        SubscribeLocalEvent<T, GameRuleAddedEvent>(OnGameRuleAdded);
-        SubscribeLocalEvent<T, GameRuleStartedEvent>(OnGameRuleStarted);
-        SubscribeLocalEvent<T, GameRuleEndedEvent>(OnGameRuleEnded);
-        SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend);
     }
 
     private void OnStartAttempt(RoundStartAttemptEvent args)
@@ -50,7 +50,6 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
                     ("minimumPlayers", minPlayers),
                     ("presetName", name)));
                 args.Cancel();
-                //TODO remove this once announcements are logged
                 Log.Info($"Rule '{name}' requires {minPlayers} players, but only {args.Players.Length} are ready.");
             }
             else
@@ -60,90 +59,79 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
         }
     }
 
-    private void OnGameRuleAdded(EntityUid uid, T component, ref GameRuleAddedEvent args)
+    /// <summary>
+    /// Local helper kept for event rules that still pick a station by uid.
+    /// </summary>
+    protected bool TryGetRandomStation([NotNullWhen(true)] out EntityUid? station, Func<EntityUid, bool>? filter = null)
     {
-        if (!TryComp<GameRuleComponent>(uid, out var ruleData))
-            return;
-        Added(uid, component, ruleData, args);
-    }
+        var stations = new ValueList<EntityUid>(Count<StationEventEligibleComponent>());
 
-    private void OnGameRuleStarted(EntityUid uid, T component, ref GameRuleStartedEvent args)
-    {
-        if (!TryComp<GameRuleComponent>(uid, out var ruleData))
-            return;
-        Started(uid, component, ruleData, args);
-    }
-
-    private void OnGameRuleEnded(EntityUid uid, T component, ref GameRuleEndedEvent args)
-    {
-        if (!TryComp<GameRuleComponent>(uid, out var ruleData))
-            return;
-        Ended(uid, component, ruleData, args);
-    }
-
-    private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
-    {
-        var query = AllEntityQuery<T>();
-        while (query.MoveNext(out var uid, out var comp))
+        filter ??= _ => true;
+        var query = AllEntityQuery<StationEventEligibleComponent>();
+        while (query.MoveNext(out var uid, out _))
         {
-            if (!TryComp<GameRuleComponent>(uid, out var ruleData))
+            if (!filter(uid))
                 continue;
 
-            AppendRoundEndText(uid, comp, ruleData, ref ev);
+            stations.Add(uid);
         }
-    }
 
-    /// <summary>
-    /// Called when the gamerule is added
-    /// </summary>
-    protected virtual void Added(EntityUid uid, T component, GameRuleComponent gameRule, GameRuleAddedEvent args)
-    {
-
-    }
-
-    /// <summary>
-    /// Called when the gamerule begins
-    /// </summary>
-    protected virtual void Started(EntityUid uid, T component, GameRuleComponent gameRule, GameRuleStartedEvent args)
-    {
-
-    }
-
-    /// <summary>
-    /// Called when the gamerule ends
-    /// </summary>
-    protected virtual void Ended(EntityUid uid, T component, GameRuleComponent gameRule, GameRuleEndedEvent args)
-    {
-
-    }
-
-    /// <summary>
-    /// Called at the end of a round when text needs to be added for a game rule.
-    /// </summary>
-    protected virtual void AppendRoundEndText(EntityUid uid, T component, GameRuleComponent gameRule, ref RoundEndTextAppendEvent args)
-    {
-
-    }
-
-    /// <summary>
-    /// Called on an active gamerule entity in the Update function
-    /// </summary>
-    protected virtual void ActiveTick(EntityUid uid, T component, GameRuleComponent gameRule, float frameTime)
-    {
-
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<T, GameRuleComponent>();
-        while (query.MoveNext(out var uid, out var comp1, out var comp2))
+        if (stations.Count == 0)
         {
-            if (!GameTicker.IsGameRuleActive(uid, comp2))
+            station = null;
+            return false;
+        }
+
+        station = stations[RobustRandom.Next(stations.Count)];
+        return true;
+    }
+
+    /// <summary>
+    /// Mono: pick several event-eligible stations.
+    /// </summary>
+    protected bool TryGetRandomStations(int min, int max, [NotNullWhen(true)] out List<EntityUid>? station, Func<EntityUid, bool>? filter = null)
+    {
+        var stations = new ValueList<EntityUid>(Count<StationEventEligibleComponent>());
+
+        filter ??= _ => true;
+        var query = AllEntityQuery<StationEventEligibleComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (!filter(uid))
                 continue;
 
-            ActiveTick(uid, comp1, comp2, frameTime);
+            stations.Add(uid);
         }
+
+        if (stations.Count == 0)
+        {
+            station = null;
+            return false;
+        }
+
+        var numStations = Math.Min(RobustRandom.Next(min, max + 1), stations.Count);
+        station = new List<EntityUid>();
+        while (numStations > 0)
+        {
+            var randomStation = stations[RobustRandom.Next(stations.Count)];
+            station.Add(randomStation);
+            stations.Remove(randomStation);
+            numStations--;
+        }
+
+        return true;
     }
+
+    protected bool TryFindRandomTile(out Vector2i tile,
+        [NotNullWhen(true)] out EntityUid? targetStation,
+        out EntityUid targetGrid,
+        out EntityCoordinates targetCoords)
+    {
+        var found = ServerStationSystem.TryFindRandomTile(out tile, out var station, out var grid, out targetCoords);
+        targetStation = station?.Owner;
+        targetGrid = grid?.Owner ?? EntityUid.Invalid;
+        return found && targetStation != null;
+    }
+
+    [Dependency] private ServerStationSystem ServerStationSystem = default!;
 }

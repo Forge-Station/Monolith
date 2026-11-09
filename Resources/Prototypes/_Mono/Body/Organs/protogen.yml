@@ -42,7 +42,6 @@
   description: "The source of incredible, unending intelligence. 01001000 01101111 01101110 01101011 00101110"
   components:
   - type: MindContainer
-    showExamineInfo: true
   - type: Speech
     enabled: false
   - type: TypingIndicator

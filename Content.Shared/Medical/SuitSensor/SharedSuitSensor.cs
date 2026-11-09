@@ -1,11 +1,21 @@
+using Content.Shared.DeviceNetwork;
 using Content.Shared.DoAfter;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Medical.SuitSensor;
+namespace Content.Shared.Medical.SuitSensors;
 
-[Serializable, NetSerializable]
-public sealed class SuitSensorStatus
+/// <summary>
+/// A network payload that contains <see cref="SuitSensorStatus"/>.
+/// </summary>
+public partial record struct SuitSensorStatusPayload : INetworkPayload
+{
+    [DataField]
+    public SuitSensorStatus Data;
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public partial struct SuitSensorStatus : IEquatable<SuitSensorStatus>
 {
     public SuitSensorStatus(NetEntity suitSensorUid, string name, string job, string jobIcon, List<string> jobDepartments, string locationName)
     {

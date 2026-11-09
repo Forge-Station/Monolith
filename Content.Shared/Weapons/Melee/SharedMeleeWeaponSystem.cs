@@ -47,7 +47,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private   InventorySystem         _inventory       = default!;
     [Dependency] private   MeleeSoundSystem        _meleeSound      = default!;
     [Dependency] private   SharedPhysicsSystem     _physics         = default!;
-    [Dependency] private   IPrototypeManager       _protoManager    = default!;
     [Dependency] private   StaminaSystem           _stamina         = default!;
     [Dependency] private   WolfmedOrganicSoundSystem _wolfmedSounds = default!; // WOLFGATE(Wolfmed): Bob's stab and melee hit sounds on flesh
 

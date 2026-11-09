@@ -2,7 +2,7 @@ using Content.Shared.Examine;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Humanoid;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using Content.Shared._EE.Contractors.Components; // Forge-Change
 using Robust.Shared.Prototypes;
 using Content.Shared.Traits.Assorted.Components;
@@ -15,7 +15,7 @@ namespace Content.Shared.Traits.Assorted.Systems;
 public sealed class ExtendDescriptionSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedStationSpawningSystem _stationSpawning = default!;
+    [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly ISharedPlaytimeManager _playtime = default!; // Forge-Change
 
     public override void Initialize()

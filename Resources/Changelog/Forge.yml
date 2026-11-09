@@ -321,3 +321,52 @@ Entries:
   id: 25
   time: '2026-11-07T15:21:42.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/566
+- author: teasum
+  changes:
+    - type: Add
+      message: Добавил около 80 пластинок(всего их теперь 117)
+    - type: Add
+      message: >-
+        Добавил: Портативный радио сервер, к которому можно привязать, а после
+        запихнуть внутрь Портативный виниловый проигрыватель и Портативный радио
+        риг (за их текстурки спасибо aelout)
+    - type: Add
+      message: Добавил Умное хранилище пластинок(за его текстурки спасибо hinzomnia)
+    - type: Add
+      message: Добавил Подсумок для пластинок
+    - type: Tweak
+      message: >-
+        Обновил радио-венд(ранее популярный упакомат): Обновил ему текстурки(за
+        них спасибо Egor17777), добавил ему в асортимент пластинки и портативные
+        штуки
+  id: 26
+  time: '2026-11-08T11:52:23.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/470
+- author: charlottenobot-art
+  changes:
+    - type: Add
+      message: Шаттлы VG верфи перенесены в общую верфь.
+  id: 27
+  time: '2026-11-08T12:06:52.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/567
+- author: mersen-tyn
+  changes:
+    - type: Fix
+      message: >-
+        Порт пачки багфиксов с upstream (крио, экипировка, атмос, FTL, UI
+        админки, микроволновка, гриндер, замки, телепад, джетпаки и др.)
+    - type: Fix
+      message: Сглаживание стен/окон после рефактора IconSmooth (спрайты и YAML)
+    - type: Fix
+      message: Joint/Blunt больше не роняют клиент дублем solution при старте раунда
+    - type: Fix
+      message: ChemMasterFilled без конфликта buffer solution
+    - type: Fix
+      message: >-
+        Точка спавна Contractor на empty-станции; Secret без двойного
+        GameRuleAdded
+    - type: Tweak
+      message: Обновлены текстуры стен/шлюзов под новый IconSmooth
+  id: 28
+  time: '2026-11-08T14:43:51.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/559

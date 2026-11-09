@@ -15,6 +15,11 @@ namespace Content.Shared.Atmos
         public const float R = 8.314462618f;
 
         /// <summary>
+        ///     Minimum mole count treated as present when checking fuel and oxidizer.
+        /// </summary>
+        public const float Epsilon = 0.001f;
+
+        /// <summary>
         ///     1 ATM in kPA.
         /// </summary>
         public const float OneAtmosphere = 101.325f;
@@ -130,7 +135,10 @@ namespace Content.Shared.Atmos
         /// </summary>
         public const float MinimumAirToSuspend = (MolesCellStandard * MinimumAirRatioToSuspend);
 
-        public const float MinimumTemperatureToMove = (T20C + 100f);
+        /// <summary>
+        /// Minimum temperature difference, in kelvin, before LINDA reports a pressure difference for space wind.
+        /// </summary>
+        public const float MinimumTemperatureToMove = 5f;
 
         public const float MinimumMolesDeltaToMove = (MolesCellStandard * MinimumAirRatioToMove);
 

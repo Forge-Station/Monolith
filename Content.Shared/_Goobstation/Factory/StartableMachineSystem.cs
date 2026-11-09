@@ -1,12 +1,14 @@
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
+using Content.Shared.DeviceLinking.Payloads;
+using Content.Shared.DeviceLinking.Systems;
 using Content.Shared.Power.EntitySystems;
 
 namespace Content.Shared._Goobstation.Factory;
 
 public sealed partial class StartableMachineSystem : EntitySystem
 {
-    [Dependency] private SharedDeviceLinkSystem _device = default!;
+    [Dependency] private DeviceLinkSystem _device = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
 
     private EntityQuery<StartableMachineComponent> _query;
@@ -19,6 +21,7 @@ public sealed partial class StartableMachineSystem : EntitySystem
 
         SubscribeLocalEvent<StartableMachineComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<StartableMachineComponent, SignalReceivedEvent>(OnSignalReceived);
+        SubscribeLocalEvent<StartableMachineComponent, SignalReceivedEvent<LogicStatePayload>>(OnLogicSignalReceived);
     }
 
     public override void Update(float frameTime)
@@ -43,20 +46,23 @@ public sealed partial class StartableMachineSystem : EntitySystem
     private void OnSignalReceived(Entity<StartableMachineComponent> ent, ref SignalReceivedEvent args)
     {
         if (args.Port == ent.Comp.StartPort)
-        {
             TryStart((ent, ent.Comp));
-        }
         else if (args.Port == ent.Comp.AutoStartPort)
+            ent.Comp.AutoStart = !ent.Comp.AutoStart;
+    }
+
+    private void OnLogicSignalReceived(Entity<StartableMachineComponent> ent, ref SignalReceivedEvent<LogicStatePayload> args)
+    {
+        if (args.Port != ent.Comp.AutoStartPort)
+            return;
+
+        ent.Comp.AutoStart = args.Data.State switch
         {
-            var state = SignalState.Momentary;
-            args.Data?.TryGetValue<SignalState>("logic_state", out state);
-            ent.Comp.AutoStart = state switch
-            {
-                SignalState.Momentary => !ent.Comp.AutoStart,
-                SignalState.High => true,
-                SignalState.Low => false
-            };
-        }
+            SignalState.Momentary => !ent.Comp.AutoStart,
+            SignalState.High => true,
+            SignalState.Low => false,
+            _ => ent.Comp.AutoStart
+        };
     }
 
     #region Public API

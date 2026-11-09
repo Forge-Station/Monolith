@@ -216,7 +216,13 @@ public abstract partial class SharedEnsnareableSystem : EntitySystem
 
     private void OnComponentRemove(EntityUid uid, EnsnaringComponent component, ComponentRemove args)
     {
-        if (!TryComp<EnsnareableComponent>(component.Ensnared, out var ensnared))
+        if (component.Ensnared is not { } target || TerminatingOrDeleted(target))
+        {
+            component.Ensnared = null;
+            return;
+        }
+
+        if (!TryComp<EnsnareableComponent>(target, out var ensnared))
             return;
 
         if (ensnared.IsEnsnared)
@@ -252,6 +258,9 @@ public abstract partial class SharedEnsnareableSystem : EntitySystem
     /// <param name="component">The ensnaring component</param>
     public bool TryEnsnare(EntityUid target, EntityUid ensnare, EnsnaringComponent component)
     {
+        if (TerminatingOrDeleted(target) || TerminatingOrDeleted(ensnare))
+            return false;
+
         //Don't do anything if they don't have the ensnareable component.
         if (!TryComp<EnsnareableComponent>(target, out var ensnareable))
             return false;
@@ -289,18 +298,32 @@ public abstract partial class SharedEnsnareableSystem : EntitySystem
             return;
 
         if (!TryComp<EnsnareableComponent>(component.Ensnared, out var ensnareable))
+        {
+            component.Ensnared = null;
             return;
+        }
 
         var target = component.Ensnared.Value;
-
-        Container.Remove(ensnare, ensnareable.Container, force: true);
-        ensnareable.IsEnsnared = ensnareable.Container.ContainedEntities.Count > 0;
-        Dirty(component.Ensnared.Value, ensnareable);
         component.Ensnared = null;
 
+        // Deletion may already have pulled the snare out of the container. Force-removing again
+        // asserts in SharedContainerSystem. Also skip reparent while terminating.
+        if (ensnareable.Container.Contains(ensnare))
+        {
+            Container.Remove(ensnare, ensnareable.Container,
+                reparent: !TerminatingOrDeleted(ensnare),
+                force: true);
+        }
+
+        ensnareable.IsEnsnared = ensnareable.Container.ContainedEntities.Count > 0;
+
+        if (TerminatingOrDeleted(target))
+            return;
+
+        Dirty(target, ensnareable);
         UpdateAlert(target, ensnareable);
         var ev = new EnsnareRemoveEvent(component.WalkSpeed, component.SprintSpeed);
-        RaiseLocalEvent(ensnare, ev);
+        RaiseLocalEvent(target, ev);
     }
 
     /// <summary>

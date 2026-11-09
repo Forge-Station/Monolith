@@ -123,6 +123,30 @@ public sealed partial class HandPlaceholderSystem : EntitySystem
             args.Cancel();
     }
 
+    /// <summary>
+    /// Tries to put <paramref name="target"/> into any HandPlaceholder the user is holding that accepts it.
+    /// Used when ejecting items into borg hands that are occupied by placeholders rather than empty.
+    /// </summary>
+    public bool TryPickUpWithPlaceholder(EntityUid user, EntityUid target)
+    {
+        if (!TryComp<HandsComponent>(user, out var hands))
+            return false;
+
+        foreach (var hand in hands.Hands.Values)
+        {
+            if (hand.HeldEntity is not { } held || !TryComp<HandPlaceholderComponent>(held, out var placeholder))
+                continue;
+
+            if (!HasComp<ItemComponent>(target) || _whitelist.IsWhitelistFail(placeholder.Whitelist, target))
+                continue;
+
+            TryToPickUpTarget((held, placeholder), target, user);
+            return _hands.IsHolding(user, target, out _, hands);
+        }
+
+        return false;
+    }
+
     private void TryToPickUpTarget(Entity<HandPlaceholderComponent> ent, EntityUid target, EntityUid user)
     {
         // require items regardless of the whitelist

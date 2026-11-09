@@ -5,9 +5,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Forge/Structures/Windows/shuttle_uran_window.rsi
+    sprite: _Forge/Structures/Windows/window-shuttle-uran.rsi
   - type: Icon
-    sprite: _Forge/Structures/Windows/shuttle_uran_window.rsi
+    sprite: _Forge/Structures/Windows/window-shuttle-uran.rsi
   - type: Repairable
     fuelCost: 15
     doAfterDelay: 3
@@ -40,7 +40,11 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    base: swindow
+    key: walls
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: window
   - type: Appearance
   - type: DamageVisuals
     thresholds: [5, 10, 20]
@@ -67,17 +71,19 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Forge/Structures/Windows/shuttle_uran_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/window-diagonal-shuttle-uran.rsi
     state: state0
   - type: Tag
     tags:
     - Diagonal
   - type: IconSmooth
-    mode: Diagonal
     key: walls # Frontier: windows<walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
-    sprite: _Forge/Structures/Windows/shuttle_uran_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/window-diagonal-shuttle-uran.rsi
     state: state0
   - type: Fixtures
     fixtures:
@@ -99,7 +105,7 @@
     - East
   - type: DamageVisuals
     damageOverlay:
-      sprite: Structures/Windows/cracks_diagonal.rsi
+      sprite: Structures/Windows/cracks-diagonal.rsi
   - type: RadiationBlocker
     resistance: 4
   - type: Construction
@@ -113,9 +119,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Forge/Structures/Windows/shuttle_plasma_window.rsi
+    sprite: _Forge/Structures/Windows/window-shuttle-plasma.rsi
   - type: Icon
-    sprite: _Forge/Structures/Windows/shuttle_plasma_window.rsi
+    sprite: _Forge/Structures/Windows/window-shuttle-plasma.rsi
   - type: Repairable
     fuelCost: 15
     doAfterDelay: 3
@@ -148,7 +154,11 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: IconSmooth
-    base: swindow
+    key: walls
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: window
   - type: Appearance
   - type: DamageVisuals
     thresholds: [5, 10, 20]
@@ -175,17 +185,19 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Forge/Structures/Windows/shuttle_plasma_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/window-diagonal-shuttle-plasma.rsi
     state: state0
   - type: Tag
     tags:
     - Diagonal
   - type: IconSmooth
-    mode: Diagonal
     key: walls # Frontier: windows<walls
-    base: state
+    states:
+    - !type:DiagonalSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: state
   - type: Icon
-    sprite: _Forge/Structures/Windows/shuttle_plasma_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/window-diagonal-shuttle-plasma.rsi
     state: state0
   - type: Fixtures
     fixtures:
@@ -207,7 +219,7 @@
     - East
   - type: DamageVisuals
     damageOverlay:
-      sprite: Structures/Windows/cracks_diagonal.rsi
+      sprite: Structures/Windows/cracks-diagonal.rsi
   - type: RadiationBlocker
     resistance: 3
   - type: Construction

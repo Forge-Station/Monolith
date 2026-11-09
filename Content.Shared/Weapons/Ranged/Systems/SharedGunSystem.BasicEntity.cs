@@ -1,4 +1,4 @@
-﻿using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.GameStates;
 
@@ -49,7 +49,7 @@ public abstract partial class SharedGunSystem
     // Mono
     private void OnBasicEntityCheckProto(Entity<BasicEntityAmmoProviderComponent> ent, ref CheckShootPrototypeEvent args)
     {
-        ProtoManager.TryIndex(ent.Comp.Proto, out var proto);
+        ProtoMan.TryIndex(ent.Comp.Proto, out var proto);
         args.ShootPrototype = proto;
     }
 

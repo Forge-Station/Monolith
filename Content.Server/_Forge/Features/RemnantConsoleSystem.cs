@@ -1,6 +1,7 @@
 using Content.Shared._Forge.Features;
 using Content.Shared._Forge.Features.Components;
 using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Systems;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -14,7 +15,7 @@ namespace Content.Server._Forge.Features;
 public sealed class RemnantConsoleSystem : SharedRemnantConsoleSystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
+    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 

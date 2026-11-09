@@ -4,6 +4,7 @@ using Content.IntegrationTests.Tests._NF;
 using Content.Server.Maps;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Station.Components;
 using Content.Shared.Maps;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -16,7 +17,7 @@ using Robust.Shared.Timing;
 namespace Content.IntegrationTests.Tests.Station;
 
 [TestFixture]
-[TestOf(typeof(StationJobsSystem))]
+[TestOf(typeof(ServerStationJobsSystem))]
 public sealed class StationJobsTest
 {
     private const string StationMapId = "FooStation";
@@ -93,8 +94,8 @@ public sealed class StationJobsTest
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
         var fooStationProto = prototypeManager.Index<GameMapPrototype>(StationMapId);
         var entSysMan = server.ResolveDependency<IEntityManager>().EntitySysManager;
-        var stationJobs = entSysMan.GetEntitySystem<StationJobsSystem>();
-        var stationSystem = entSysMan.GetEntitySystem<StationSystem>();
+        var stationJobs = entSysMan.GetEntitySystem<ServerStationJobsSystem>();
+        var stationSystem = entSysMan.GetEntitySystem<ServerStationSystem>();
         var logmill = server.ResolveDependency<ILogManager>().RootSawmill;
 
         List<EntityUid> stations = new();
@@ -167,8 +168,8 @@ public sealed class StationJobsTest
         var prototypeManager = server.ResolveDependency<IPrototypeManager>();
         var fooStationProto = prototypeManager.Index<GameMapPrototype>(StationMapId);
         var entSysMan = server.ResolveDependency<IEntityManager>().EntitySysManager;
-        var stationJobs = entSysMan.GetEntitySystem<StationJobsSystem>();
-        var stationSystem = entSysMan.GetEntitySystem<StationSystem>();
+        var stationJobs = entSysMan.GetEntitySystem<ServerStationJobsSystem>();
+        var stationSystem = entSysMan.GetEntitySystem<ServerStationSystem>();
 
         var station = EntityUid.Invalid;
         await server.WaitPost(() =>

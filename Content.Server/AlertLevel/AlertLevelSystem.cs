@@ -18,8 +18,8 @@ public sealed partial class AlertLevelSystem : EntitySystem
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private ChatSystem _chatSystem = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private StationSystem _stationSystem = default!;
-    [Dependency] private GameTicker _ticker = default!; // Frontier
+    [Dependency] private ServerStationSystem _stationSystem = default!;
+    [Dependency] private ServerGameTicker _ticker = default!; // Frontier
     [Dependency] private SectorServiceSystem _sectorService = default!;
 
     // Until stations are a prototype, this is how it's going to have to be.

@@ -33,7 +33,7 @@ public sealed partial class ResearchSystem
         if (!this.IsPowered(uid, EntityManager))
             return;
 
-        if (!PrototypeManager.TryIndex<TechnologyPrototype>(args.Id, out var technologyPrototype))
+        if (!ProtoMan.TryIndex<TechnologyPrototype>(args.Id, out var technologyPrototype))
             return;
 
         if (TryComp<AccessReaderComponent>(uid, out var access) && !_accessReader.IsAllowed(act, uid, access))
@@ -60,7 +60,7 @@ public sealed partial class ResearchSystem
             return;
 
         // R&D Console Rework Start
-        var allTechs = PrototypeManager.EnumeratePrototypes<TechnologyPrototype>(); // Mono
+        var allTechs = ProtoMan.EnumeratePrototypes<TechnologyPrototype>(); // Mono
         Dictionary<string, ResearchAvailability> techList;
         Dictionary<string, byte> progress;
         var points = 0;

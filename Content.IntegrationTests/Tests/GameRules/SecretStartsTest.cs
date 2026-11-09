@@ -17,8 +17,7 @@ public sealed class SecretStartsTest
 
         var server = pair.Server;
         await server.WaitIdleAsync();
-        var entMan = server.ResolveDependency<IEntityManager>();
-        var gameTicker = server.ResolveDependency<IEntitySystemManager>().GetEntitySystem<GameTicker>();
+        var gameTicker = server.System<ServerGameTicker>();
 
         await server.WaitAssertion(() =>
         {

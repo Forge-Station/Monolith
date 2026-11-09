@@ -11648,7 +11648,7 @@ entities:
     - type: Transform
       pos: 15.5,15.5
       parent: 1
-- proto: WallShuttleInterior
+- proto: WallShuttle
   entities:
   - uid: 3
     components:

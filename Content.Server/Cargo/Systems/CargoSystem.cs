@@ -1,5 +1,4 @@
 using Content.Server.Cargo.Components;
-using Content.Server.DeviceLinking.Systems;
 using Content.Server.Popups;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Stack;
@@ -10,6 +9,9 @@ using Content.Server.Radio.EntitySystems;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.DeviceLinking.Systems;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Labels.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Paper;
 using JetBrains.Annotations;
@@ -44,7 +46,7 @@ public sealed partial class CargoSystem : SharedCargoSystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private ShuttleConsoleSystem _console = default!;
     [Dependency] private StackSystem _stack = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private MetaDataSystem _metaSystem = default!;
     [Dependency] private SectorServiceSystem _sectorService = default!; // Frontier

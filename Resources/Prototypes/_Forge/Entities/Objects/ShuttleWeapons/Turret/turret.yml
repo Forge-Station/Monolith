@@ -17,7 +17,7 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
@@ -93,7 +93,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Fixtures

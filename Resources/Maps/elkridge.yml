@@ -52661,7 +52661,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: HoP's Office
-      destinationAddress: HoP's Office
   - uid: 4025
     components:
     - type: Transform
@@ -52669,7 +52668,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Medical
-      destinationAddress: Medical
   - uid: 4072
     components:
     - type: Transform
@@ -52677,7 +52675,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: CE's Office
-      destinationAddress: CE's Office
   - uid: 4123
     components:
     - type: Transform
@@ -52685,7 +52682,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: HoS's Office
-      destinationAddress: HoS's Office
   - uid: 4126
     components:
     - type: Transform
@@ -52693,7 +52689,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Security
-      destinationAddress: Security
   - uid: 4589
     components:
     - type: Transform
@@ -52701,7 +52696,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Engineering
-      destinationAddress: Engineering
   - uid: 4947
     components:
     - type: Transform
@@ -52709,7 +52703,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Service
-      destinationAddress: Service
   - uid: 6607
     components:
     - type: Transform
@@ -52717,7 +52710,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Science
-      destinationAddress: Science
   - uid: 7129
     components:
     - type: Transform
@@ -52725,7 +52717,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: CMO's Office
-      destinationAddress: CMO's Office
   - uid: 9398
     components:
     - type: Transform
@@ -52733,7 +52724,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: QM's Office
-      destinationAddress: QM's Office
   - uid: 9399
     components:
     - type: Transform
@@ -52741,7 +52731,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Cargo
-      destinationAddress: Cargo
   - uid: 9403
     components:
     - type: Transform
@@ -52749,7 +52738,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Bridge
-      destinationAddress: Bridge
   - uid: 12855
     components:
     - type: Transform
@@ -52757,7 +52745,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Library
-      destinationAddress: Library
 - proto: FaxMachineCaptain
   entities:
   - uid: 4528
@@ -52766,7 +52753,6 @@ entities:
       pos: -26.5,-5.5
       parent: 2
     - type: FaxMachine
-      destinationAddress: Captain's Office
 - proto: filingCabinetDrawerRandom
   entities:
   - uid: 2032

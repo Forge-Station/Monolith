@@ -22,12 +22,11 @@ namespace Content.Server.Medical
         [Dependency] private IPrototypeManager _proto = default!;
         [Dependency] private AudioSystem _audio = default!;
         [Dependency] private BodySystem _body = default!;
-        [Dependency] private HungerSystem _hunger = default!;
         [Dependency] private PopupSystem _popup = default!;
         [Dependency] private PuddleSystem _puddle = default!;
+        [Dependency] private SatiationSystem _satiation = default!;
         [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
         [Dependency] private StunSystem _stun = default!;
-        [Dependency] private ThirstSystem _thirst = default!;
         [Dependency] private ForensicsSystem _forensics = default!;
         [Dependency] private BloodstreamSystem _bloodstream = default!;
 
@@ -47,11 +46,11 @@ namespace Content.Server.Medical
                 return;
 
             // Vomiting makes you hungrier and thirstier
-            if (TryComp<HungerComponent>(uid, out var hunger))
-                _hunger.ModifyHunger(uid, hungerAdded, hunger);
-
-            if (TryComp<ThirstComponent>(uid, out var thirst))
-                _thirst.ModifyThirst(uid, thirst, thirstAdded);
+            if (TryComp<SatiationComponent>(uid, out var satiation))
+            {
+                _satiation.ModifyValue((uid, satiation), SatiationSystem.Hunger, hungerAdded);
+                _satiation.ModifyValue((uid, satiation), SatiationSystem.Thirst, thirstAdded);
+            }
 
             // It fully empties the stomach, this amount from the chem stream is relatively small
             var solutionSize = (MathF.Abs(thirstAdded) + MathF.Abs(hungerAdded)) / 6;

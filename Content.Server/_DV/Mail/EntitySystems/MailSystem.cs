@@ -1,3 +1,5 @@
+using Content.Shared.Spawners.EntitySystems;
+using Content.Shared.Station.Systems;
 using Content.Server.Access.Systems;
 using Content.Server.Damage.Components;
 using Content.Server._DV.Cargo.Components;
@@ -72,7 +74,7 @@ namespace Content.Server._DV.Mail.EntitySystems
         [Dependency] private SharedContainerSystem _containerSystem = default!;
         [Dependency] private SharedHandsSystem _handsSystem = default!;
         [Dependency] private SharedSolutionContainerSystem _solution = default!;
-        [Dependency] private StationSystem _stationSystem = default!;
+        [Dependency] private ServerStationSystem _stationSystem = default!;
         [Dependency] private TagSystem _tagSystem = default!;
         [Dependency] private LogisticStatsSystem _logisticsStatsSystem = default!;
         [Dependency] private EmagSystem _emag = default!;

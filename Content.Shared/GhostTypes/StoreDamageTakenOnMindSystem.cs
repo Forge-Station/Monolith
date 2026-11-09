@@ -12,7 +12,6 @@ namespace Content.Shared.GhostTypes;
 
 public sealed partial class StoreDamageTakenOnMindSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<StoreDamageTakenOnMindComponent, DestructionEventArgs>(SaveBodyOnGib);
@@ -59,7 +58,7 @@ public sealed partial class StoreDamageTakenOnMindSystem : EntitySystem
         var protoDict = new Dictionary<ProtoId<DamageGroupPrototype>, FixedPoint2>();
         foreach (var stringDict in damageable.DamagePerGroup)  // Translates the strings into ProtoId's before saving the Dictionary
         {
-            if (!_proto.TryIndex(stringDict.Key, out DamageGroupPrototype? proto))
+            if (!ProtoMan.TryIndex(stringDict.Key, out DamageGroupPrototype? proto))
                 continue;
             protoDict.TryAdd(proto, stringDict.Value);
         }

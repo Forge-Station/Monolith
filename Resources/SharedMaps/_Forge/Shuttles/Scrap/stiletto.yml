@@ -374,8 +374,6 @@ entities:
       pos: 0.5,-1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 3
 - proto: AmmoLoaderSmall
@@ -1336,8 +1334,6 @@ entities:
       pos: 0.5,-0.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 3
   - uid: 115

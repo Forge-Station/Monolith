@@ -20,6 +20,11 @@
     - type: Physics
       bodyType: Static
       canCollide: false
+    #Forge-change-start
+    - type: Construction
+      graph: FloorDrain
+      node: drain
+    #Forge-change-end
     - type: AmbientSound
       enabled: false
       volume: -8

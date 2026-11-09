@@ -15,7 +15,7 @@ namespace Content.Server._NF.ShuttleRecords;
 
 public sealed partial class ShuttleRecordsSystem : SharedShuttleRecordsSystem
 {
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private SectorServiceSystem _sectorService = default!;
     [Dependency] private AccessReaderSystem _access = default!;
@@ -23,7 +23,7 @@ public sealed partial class ShuttleRecordsSystem : SharedShuttleRecordsSystem
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
 
 
     public override void Initialize()

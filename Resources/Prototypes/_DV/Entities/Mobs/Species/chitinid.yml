@@ -11,9 +11,12 @@
     hideLayersOnEquip:
     - HeadTop
 
-  - type: Hunger
-    baseDecayRate: 0.024 #needs to eat more to survive #Mono 0.0467 > 0.024(rounded from 0.02394) 33% more than base 0.018
-  - type: Thirst
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: RodentiaHunger
+      Thirst:
+        prototype: NormalSatiationThirst
 
   - type: UnpoweredFlashlight
   - type: PointLight

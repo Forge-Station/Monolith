@@ -23,7 +23,7 @@ using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Stunnable;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
@@ -617,10 +617,7 @@ namespace Content.Shared.Cuffs
 
             if (isOwner)
             {
-                if (!TryComp(cuffsToRemove.Value, out UseDelayComponent? useDelay))
-                    return;
-
-                if (!_delay.TryResetDelay((cuffsToRemove.Value, useDelay), true))
+                if (!_delay.TryResetDelay(cuffsToRemove.Value, true))
                 {
                     return;
                 }

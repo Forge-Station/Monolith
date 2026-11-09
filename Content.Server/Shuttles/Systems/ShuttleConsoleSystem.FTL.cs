@@ -1,4 +1,5 @@
 using Content.Server.Power.EntitySystems; // Mono
+using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Shared._Mono.Ships;

@@ -1,4 +1,4 @@
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
@@ -15,7 +15,6 @@ public sealed partial class UseDelayOnShootSystem : EntitySystem
 
     private void OnUseShoot(EntityUid uid, UseDelayOnShootComponent component, ref GunShotEvent args)
     {
-        if (TryComp(uid, out UseDelayComponent? useDelay))
-            _delay.TryResetDelay((uid, useDelay));
+        _delay.TryResetDelay(uid);
     }
 }

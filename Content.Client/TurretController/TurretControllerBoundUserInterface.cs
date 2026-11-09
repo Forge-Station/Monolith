@@ -47,20 +47,6 @@ public sealed class TurretControllerBoundUserInterface : BoundUserInterface
     /// <summary>
     /// ReceiveMessage is for live turret data to be updated continuously to the client UI.
     /// </summary>
-    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
-    {
-        base.ReceiveMessage(message);
-
-        if (_window == null)
-            return;
-
-        if (message is not DeployableTurretControllerBoundInterfaceMessage { } cast)
-            return;
-
-        // Update the turret states
-        _window.UpdateMessage(cast);
-    }
-
     /// <summary>
     /// When changed access level in UI send message to shared.
     /// </summary>

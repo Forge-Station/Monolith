@@ -1086,16 +1086,6 @@ public sealed class BoardingTeleportPlatformSystem : EntitySystem
 
     private bool TryResolveSignalUser(SignalReceivedEvent args, out EntityUid user)
     {
-        if (args.Data?.TryGetValue(BoardingTeleportRemoteSystem.UserPayloadKey, out var rawUser) == true &&
-            rawUser is NetEntity netUser &&
-            TryGetEntity(netUser, out var payloadUser) &&
-            payloadUser is { } resolvedUser &&
-            HasComp<MobStateComponent>(resolvedUser))
-        {
-            user = resolvedUser;
-            return true;
-        }
-
         if (args.Trigger is { } trigger && TryGetSignalUser(trigger, out user))
             return true;
 

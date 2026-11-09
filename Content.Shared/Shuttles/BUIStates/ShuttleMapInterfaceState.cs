@@ -1,6 +1,8 @@
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Shuttles.UI.MapObjects;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Shuttles.BUIStates;

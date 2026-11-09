@@ -16,7 +16,6 @@ namespace Content.Shared.Research.TechnologyDisk.Systems;
 public sealed partial class TechnologyDiskSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
-    [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedResearchSystem _research = default!;
@@ -36,12 +35,12 @@ public sealed partial class TechnologyDiskSystem : EntitySystem
         if (ent.Comp.Recipes != null)
             return;
 
-        var weightedRandom = _protoMan.Index(ent.Comp.TierWeightPrototype);
+        var weightedRandom = ProtoMan.Index(ent.Comp.TierWeightPrototype);
         var tier = int.Parse(weightedRandom.Pick(_random));
 
         //get a list of every distinct recipe in all the technologies.
         var techs = new HashSet<ProtoId<LatheRecipePrototype>>();
-        foreach (var tech in _protoMan.EnumeratePrototypes<TechnologyPrototype>())
+        foreach (var tech in ProtoMan.EnumeratePrototypes<TechnologyPrototype>())
         {
             if (tech.Tier != tier)
                 continue;
@@ -83,7 +82,7 @@ public sealed partial class TechnologyDiskSystem : EntitySystem
         var message = Loc.GetString("tech-disk-examine-none");
         if (ent.Comp.Recipes != null && ent.Comp.Recipes.Count > 0)
         {
-            var prototype = _protoMan.Index(ent.Comp.Recipes[0]);
+            var prototype = ProtoMan.Index(ent.Comp.Recipes[0]);
             message = Loc.GetString("tech-disk-examine", ("result", _lathe.GetRecipeName(prototype)));
 
             if (ent.Comp.Recipes.Count > 1) //idk how to do this well. sue me.

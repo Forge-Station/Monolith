@@ -6,7 +6,6 @@ namespace Content.Shared.BarSign;
 
 public sealed partial class BarSignSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
 
@@ -25,13 +24,13 @@ public sealed partial class BarSignSystem : EntitySystem
         if (ent.Comp.Current != null)
             return;
 
-        var newPrototype = _random.Pick(GetAllBarSigns(_prototypeManager));
+        var newPrototype = _random.Pick(GetAllBarSigns(ProtoMan));
         SetBarSign(ent, newPrototype);
     }
 
     private void OnSetBarSignMessage(Entity<BarSignComponent> ent, ref SetBarSignMessage args)
     {
-        if (!_prototypeManager.TryIndex(args.Sign, out var signPrototype))
+        if (!ProtoMan.TryIndex(args.Sign, out var signPrototype))
             return;
 
         SetBarSign(ent, signPrototype);

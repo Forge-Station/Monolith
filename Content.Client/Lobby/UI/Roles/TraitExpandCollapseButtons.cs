@@ -4,6 +4,7 @@ using System;
 using System.Numerics;
 using Robust.Client.Graphics;
 using Robust.Shared.Maths;
+using Robust.Shared.Localization; // Forge-change
 
 namespace Content.Client.Lobby.UI.Roles;
 
@@ -24,7 +25,7 @@ public sealed class TraitExpandCollapseButtons : PanelContainer
         // Create the expand all button
         var expandAllButton = new Button
         {
-            Text = "Expand All",
+            Text = Loc.GetString("trait-selection-expand-all"), // Forge-change
             StyleClasses = { "OpenRight" },
             HorizontalExpand = true,
             VerticalExpand = true,
@@ -35,7 +36,7 @@ public sealed class TraitExpandCollapseButtons : PanelContainer
         // Create the collapse all button
         var collapseAllButton = new Button
         {
-            Text = "Collapse All",
+            Text = Loc.GetString("trait-selection-collapse-all"), // Forge-change
             StyleClasses = { "OpenLeft" },
             HorizontalExpand = true,
             VerticalExpand = true,

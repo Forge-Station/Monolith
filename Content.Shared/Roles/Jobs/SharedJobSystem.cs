@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
@@ -14,7 +14,6 @@ namespace Content.Shared.Roles.Jobs;
 public abstract partial class SharedJobSystem : EntitySystem
 {
     [Dependency] private SharedPlayerSystem _playerSystem = default!;
-    [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private SharedRoleSystem _roles = default!;
 
     private readonly Dictionary<string, string> _inverseTrackerLookup = new();
@@ -37,7 +36,7 @@ public abstract partial class SharedJobSystem : EntitySystem
         _inverseTrackerLookup.Clear();
 
         // This breaks if you have N trackers to 1 JobId but future concern.
-        foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
+        foreach (var job in ProtoMan.EnumeratePrototypes<JobPrototype>())
         {
             _inverseTrackerLookup.Add(job.PlayTimeTracker, job.ID);
         }
@@ -50,7 +49,7 @@ public abstract partial class SharedJobSystem : EntitySystem
     /// <returns></returns>
     public string GetJobPrototype(string trackerProto)
     {
-        DebugTools.Assert(_prototypes.HasIndex<PlayTimeTrackerPrototype>(trackerProto));
+        DebugTools.Assert(ProtoMan.HasIndex<PlayTimeTrackerPrototype>(trackerProto));
         return _inverseTrackerLookup[trackerProto];
     }
 
@@ -60,7 +59,7 @@ public abstract partial class SharedJobSystem : EntitySystem
     public bool TryGetDepartment(string jobProto, [NotNullWhen(true)] out DepartmentPrototype? departmentPrototype)
     {
         // Not that many departments so we can just eat the cost instead of storing the inverse lookup.
-        var departmentProtos = _prototypes.EnumeratePrototypes<DepartmentPrototype>().ToList();
+        var departmentProtos = ProtoMan.EnumeratePrototypes<DepartmentPrototype>().ToList();
         departmentProtos.Sort((x, y) => string.Compare(x.ID, y.ID, StringComparison.Ordinal));
 
         foreach (var department in departmentProtos)
@@ -85,7 +84,7 @@ public abstract partial class SharedJobSystem : EntitySystem
     {
         // not sorting it since there should only be 1 primary department for a job.
         // this is enforced by the job tests.
-        var departmentProtos = _prototypes.EnumeratePrototypes<DepartmentPrototype>();
+        var departmentProtos = ProtoMan.EnumeratePrototypes<DepartmentPrototype>();
 
         foreach (var department in departmentProtos)
         {
@@ -121,7 +120,7 @@ public abstract partial class SharedJobSystem : EntitySystem
         prototype = null;
         MindTryGetJobId(mindId, out var protoId);
 
-        return _prototypes.TryIndex(protoId, out prototype) || prototype is not null;
+        return ProtoMan.TryIndex(protoId, out prototype) || prototype is not null;
     }
 
     public bool MindTryGetJobId(

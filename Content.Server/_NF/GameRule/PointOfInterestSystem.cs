@@ -24,11 +24,11 @@ public sealed partial class PointOfInterestSystem : EntitySystem
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private MapLoaderSystem _map = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private StationRenameWarpsSystems _renameWarps = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
 
     private readonly List<PoiPlacement> _stationPlacements = new();
 

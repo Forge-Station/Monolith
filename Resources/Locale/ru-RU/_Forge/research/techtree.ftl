@@ -2,7 +2,6 @@ research-technology-forge-turret-command = Управление турелями
 research-technology-forge-turret-adventurer = Турели авантюристов
 research-technology-forge-turret-mercenary = Турель наёмников
 research-technology-forge-turret-nt = Турели NanoTrasen
-research-technology-forge-turret-cc = Турели Колосса
 research-technology-forge-turret-empire = Турели Империи
 research-technology-forge-turret-tsf = Турели ТСФ
 research-technology-forge-turret-ussp = Турели СССП

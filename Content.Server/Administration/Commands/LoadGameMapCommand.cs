@@ -22,7 +22,7 @@ namespace Content.Server.Administration.Commands
         {
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var entityManager = IoCManager.Resolve<IEntityManager>();
-            var gameTicker = entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
+            var gameTicker = entityManager.EntitySysManager.GetEntitySystem<ServerGameTicker>();
             var mapSys = entityManager.EntitySysManager.GetEntitySystem<SharedMapSystem>();
 
             if (args.Length is not (2 or 4 or 5))
@@ -91,7 +91,7 @@ namespace Content.Server.Administration.Commands
         {
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var entityManager = IoCManager.Resolve<IEntityManager>();
-            var gameTicker = entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
+            var gameTicker = entityManager.EntitySysManager.GetEntitySystem<ServerGameTicker>();
 
             if (args.Length != 0)
             {

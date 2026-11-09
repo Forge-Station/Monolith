@@ -21,7 +21,7 @@ public sealed partial class WelderComponent : Component
     ///     Name of <see cref="FuelSolution"/>.
     /// </summary>
     [DataField]
-    public string FuelSolutionName = "Welder";
+    public string FuelSolutionName = "welder";
 
     /// <summary>
     ///     Reagent that will be used as fuel for welding.

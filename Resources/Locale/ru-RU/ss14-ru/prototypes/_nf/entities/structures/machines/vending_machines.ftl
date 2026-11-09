@@ -39,7 +39,7 @@ ent-VendingMachineBountyVendPunk = БонанзоМат
     .desc = Весь набор для бунтаря! Этот автомат предлагает контракты и снаряжение для тех, кто готов взорвать мир своим стилем и решимостью.
 ent-VendingMachineFuelVend = ТоплиМат
     .desc = Торговый автомат с топливом для двигателей вашего корабля. Пахнет, как будто в воздухе зависла сама молния!
-ent-VendingMachineCiviMedVend = МедВенд
+ent-VendingMachineCiviMedVend = { ent-BaseCiviMedVend }
     .desc = МедВенд: аптечка на колесах, которая лечит быстрее, чем вы успеете расколоть камень! Шахтёры, берегите себя!
 ent-VendingMachineAstroVendPOI = { ent-VendingMachineAstroVend }
     .desc = { ent-VendingMachineAstroVend.desc }
@@ -79,3 +79,6 @@ ent-VendingMachineCigsPOI = { ent-VendingMachineCigs }
 ent-NFVendingMachineCartNfsd = ТредсЧум
     .desc = Испорченный ОдежМаг.
 ent-NFVendingMachineCart = тележка вендингового автомата
+
+ent-MonoVendingMachineCartMieyo = ПТех ММС
+    .desc = { ent-VendingMachineCart.desc }

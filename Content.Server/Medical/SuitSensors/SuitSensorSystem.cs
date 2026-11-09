@@ -420,10 +420,6 @@ public sealed partial class SuitSensorSystem : EntitySystem
         // finally, form suit sensor status
         // will additonally check the grid and name if it exists, as well if its expedition
         var status = new SuitSensorStatus(GetNetEntity(uid), userName, userJob, userJobIcon, userJobDepartments, userLocationName);
-        // WOLFGATE(Companies) START: the company rank on the ID, for its custom job icon
-        if (card.Owner.Valid && TryComp<Content.Shared._WF.Companies.WFCompanyRankIconComponent>(card, out var wfRankIcon))
-            status.WFCompanyRank = wfRankIcon.RankId;
-        // WOLFGATE END
         switch (sensor.Mode)
         {
             case SuitSensorMode.SensorBinary:

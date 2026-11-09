@@ -180,10 +180,6 @@ public sealed partial class WFDrydockSystem
         if (IsOutpost(ship))
             return Loc.GetString("drydock-console-break-station");
 
-        // A company hangar ship is relaunched free each round, so breaking it would print money.
-        if (HasComp<Content.Server._WF.Companies.WFCompanyHangarShipComponent>(ship))
-            return Loc.GetString("wf-company-break-refused");
-
         if (HasIndestructibleBarrier(ship))
             return Loc.GetString("drydock-console-break-indestructible");
 

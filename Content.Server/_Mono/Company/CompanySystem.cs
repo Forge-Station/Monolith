@@ -53,10 +53,7 @@ public sealed partial class CompanySystem : EntitySystem
 
         var forcedCompany = false; // Forge-change
         var playerId = args.Player.UserId.ToString();
-        // WOLFGATE(Companies) START: player companies replace the profile company; jobs still set factions
-        // var profileCompany = args.Profile.Company;
-        var profileCompany = "None";
-        // WOLFGATE END
+        var profileCompany = args.Profile.Company;
 
         // Store the player's original company preference if not already stored
         if (!_playerOriginalCompanies.ContainsKey(playerId))

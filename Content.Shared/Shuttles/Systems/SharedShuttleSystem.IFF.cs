@@ -68,14 +68,6 @@ public abstract partial class SharedShuttleSystem
             }
         }
 
-        // WOLFGATE(Companies) START: a player company's ship shows its tag and name
-        if (TryComp<Content.Shared._WF.Companies.WFCompanyShipComponent>(gridUid, out var playerCompany))
-        {
-            companyName = $"[{playerCompany.Tag}] {playerCompany.Name}";
-            companyColor = playerCompany.Colour;
-        }
-        // WOLFGATE END
-
         var labelText = string.IsNullOrEmpty(entName) ? Loc.GetString("shuttle-console-unknown") : entName;
         labelText = EntityManager.System<Content.Shared._WF.Newbie.WFNewbieSystem>().TagShipName(gridUid, labelText); // WOLFGATE(Newbie): tag a new player's ship
 

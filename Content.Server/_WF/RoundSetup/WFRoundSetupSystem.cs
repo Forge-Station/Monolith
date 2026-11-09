@@ -247,8 +247,6 @@ public sealed partial class WFRoundSetupSystem : EntitySystem
                     break;
                 }
                 success = CreateFormed(session, formedTitle, formedDescription);
-                if (success && FindLobby(user) is { } formed && msg.CompanyId is { } formedCompany && _companies.CanFieldCrew(session, formedCompany))
-                    formed.CompanyId = formedCompany;
                 break;
             case WFRoundSetupAction.Create when own == null && CanEnter(session):
                 if (!IsScenarioAvailable(msg.Scenario) || _lobbies.Count >= 64)
@@ -273,8 +271,6 @@ public sealed partial class WFRoundSetupSystem : EntitySystem
                     Code = NewCode(), Title = title, Description = description };
                 _lobbies.Add(created.Id, created);
                 RegisterMember(created, session, new Member { Name = session.Name });
-                if (msg.CompanyId is { } createdCompany && _companies.CanFieldCrew(session, createdCompany))
-                    created.CompanyId = createdCompany;
                 success = true;
                 break;
             case WFRoundSetupAction.Join when own == null && target != null && (CanEnter(session) || CanJoinLive(session)):
@@ -502,8 +498,6 @@ public sealed partial class WFRoundSetupSystem : EntitySystem
                     !WFRoundSetupPolicy.TryNormalizeTitle(msg.ShipName, out var shipName))
                     return false;
                 lobby.ShipName = shipName;
-                if (lobby.HangarLicence is { } namedLicence)
-                    _companies.RememberShipName(namedLicence, shipName);
                 return true;
             case WFRoundSetupAction.SelectShipStart:
                 if (lobby.Started || !WFRoundSetupPolicy.IsShip(lobby.Scenario) || !WFRoundSetupPolicy.IsShipStartAllowed(msg.ShipStart, lobby.Faction))
@@ -614,8 +608,6 @@ public sealed partial class WFRoundSetupSystem : EntitySystem
         {
             if (lobby.NextPosting != null)
                 RaiseNetworkEvent(new WFCrewPostingRevokedEvent(lobby.Id));
-            if (lobby.HangarLicence is { } licence && !lobby.Started)
-                _companies.ReleaseLicence(licence);
             _lobbies.Remove(lobby.Id);
             _crash.RemoveScenario(lobby.Id);
             _doomed.RemoveScenario(lobby.Id);
@@ -752,8 +744,8 @@ public sealed partial class WFRoundSetupSystem : EntitySystem
             InRound = _ticker.RunLevel != GameRunLevel.PreRoundLobby,
             JoinConfirmed = joinConfirmed,
             CanJoin = canEnter, CanJoinLive = canJoinLive, RecruitingStations = RecruitingStations(),
-            OwnCompany = _companies.CompanyIdOf(session),
-            CompanyRank = _companies.RankFor(session)?.Title,
+            OwnCompany = null,
+            CompanyRank = null,
             FieldCompanies = own == null || own.Host == session.UserId ? FieldCompanies(session) : Array.Empty<WFRoundSetupCompany>(), CrashlandedAvailable = _crash.IsAvailable, DoomedAvailable = _doomed.IsAvailable, OwnLobby = own?.Id,
             // A launched crew whose members are all dead, gone or in cryosleep drops off everyone else's list.
             Lobbies = _lobbies.Values.Where(lobby => lobby == own || !lobby.Started || HasActiveMembers(lobby)).Select(ForRecipient).ToArray(),

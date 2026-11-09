@@ -1,7 +1,8 @@
 # "None" - DO NOT REMOVE!
 - type: company
   id: None
-  name: None
+  form: Neutral # Do NOT apply "Neutral" to anywhere outside "None"
+  name: Безработный
   color: "#FFFFFF"
 
 # ====DO NOT TOUCH - ADMIN COMPANIES====
@@ -10,180 +11,212 @@
 
 - type: company
   id: TSF
-  name: TSFMC
+  form: Protagonist
+  name: Транс-Солнечная Федерация # Forge-change: locale
+  description: solarfed-company-description # Forge-change
   color: "#047ABD"
-  disabled: true
-  companyUplinkCurrency: FederationMilitaryCredit
-
-- type: company
-  id: TSFCivilian
-  name: Trans-Solarian Federation
-  color: "#047ABD"
-  disabled: true
+  whitelisted: true
   companyUplinkCurrency: FederationMilitaryCredit
 
 - type: company
   id: PDV
   name: PDV
   color: "#D2B48C"
-  disabled: true
-  companyUplinkCurrency: Doubloon
-
-- type: company
-  id: PDVCivilian
-  name: Phaethon Dynasty
-  color: "#D2B48C"
-  disabled: true
+  whitelisted: true
+  hidden: true # Forge-change: hide
   companyUplinkCurrency: Doubloon
 
 - type: company
   id: MD
-  name: Caelestinus Medical
-  color: "#3B8EEA"
-  disabled: true
+  form: Protagonist
+  name: Trauma Team International # Forge-change
+  color: "#00d1a0" # Forge-change
+  whitelisted: true
+  hidden: true # Forge-change: hide cauz' i dont have description and im lazy to create it. If u add the desc: please switch to false
+  companyUplinkCurrency: TTIMedicalCredit # Forge-change
 
 - type: company
   id: Colonial
-  name: Caelestinus
-  color: "#279659"
-  disabled: true
+  form: Protagonist
+  name: NanoTrasen # Forge-change
+  color: "#334e6d" # Forge-change
+  whitelisted: true
+  hidden: true # Forge-change: hide cauz' i dont have description and im lazy to create it. If u add the desc: please switch to false
 
 - type: company
   id: TSFHighComm
   name: Winter Solstice
   description: winter-solstice-description
   color: "#008CE3"
-  disabled: true
   whitelisted: true
-
-- type: company
-  id: PDVHighComm
-  name: Dynasty High Command
-  description: pdv-highcomm-description
-  color: "#D2B48C"
-  disabled: true
-  whitelisted: true
-# DO NOT TOUCH
+  hidden: true # Forge-change
 
 # ====TSF / Protag. Companies====
 
 # Core companies
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: DrakeIndustries
-#  name: Drake Industries
-#  description: drake-industries-description
-#  color: "#C97D7D"
-#  image: /Textures/_Mono/Companies/drake_industries.png
-# WOLFGATE END
+- type: company
+  id: DrakeIndustries
+  name: Drake Industries
+  description: drake-industries-description
+  color: "#C97D7D"
+  image: /Textures/_Mono/Companies/drake_industries.png
+  # Forge-change: add icon & note
+  icon: Drake
+  note: drake-industries-company-note
+  # Forge-Change: company spawn encryption key
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyDrakeIndustries
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: SteelHammerManufacturing
-#  name: Steel Hammer Manufacturing
-#  description: steel-hammer-description
-#  color: "#92a2a1"
-#  image: /Textures/_Mono/Companies/steel_hammer.png
-# WOLFGATE END
+- type: company
+  id: SteelHammerManufacturing
+  name: Steel Hammer Manufacturing
+  description: steel-hammer-description
+  color: "#92a2a1"
+  image: /Textures/_Mono/Companies/steel_hammer.png
+  # Forge-change: add icon & note
+  note: steel-hammer-company-note
+  icon: SteelHammerManufacturing
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: HarmonyMedicalEnterprises
-#  name: Harmony Medical Enterprises
-#  description: harmony-medical-enterprises-description
-#  color: "#FC7303"
-#  image: /Textures/_Mono/Companies/HME.png
-# WOLFGATE END
+- type: company
+  id: HarmonyMedicalEnterprises
+  name: Harmony Medical Enterprises
+  description: harmony-medical-enterprises-description
+  color: "#FC7303"
+  image: /Textures/_Mono/Companies/HME.png
+  # Forge-change: add icon, note & special's
+  icon: HarmonyMedicalEnterprises
+  note: harmony-medical-enterprises-note
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyHarmony
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: MidnightArmsCo
-#  name: Midnight Arms Co.
-#  description: midnight-arms-co-description
-#  color: "#FF2E2E"
-#  image: /Textures/_Mono/Companies/MACo.png
-# WOLFGATE END
+- type: company
+  id: MidnightArmsCo
+  name: Midnight Arms Co.
+  description: midnight-arms-co-description
+  color: "#FF2E2E"
+  image: /Textures/_Mono/Companies/MACo.png
+  # Forge-change: add icon & special's
+  icon: MidnightArmsCo
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyMidnightArmsCo
 
 - type: company
   id: USSP
-  name: USSP
+  form: Antagonist
+  name: СССП(К) # Forge-change: locale and small rename: К = Кораблей
   color: "#B01340"
-  disabled: true # USSP are now USSP-pilled.
+  whitelisted: false # Mercs are now USSP-pilled.
   description: ussp-description
+  # Forge-change: add icon, note & special's
+  note: ussp-company-note
+  icon: USSP
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyUssp
+  - !type:AddAccessSpecial
+    tags:
+    - USSP
+  - !type:PlaySpawnSoundSpecial
+    sound:
+      path: /Audio/Ambience/Antag/headrev_start.ogg
+      params:
+        volume: -5
+        variation: 0.2
   image: /Textures/_Mono/Companies/USSP.png
 
 - type: company
   id: MMC
   name: Mieyo Manufacturing Concern
   color: "#EEEEEE"
-  disabled: true
+  hidden: true
 
 # Major companies
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: DarkMatterEnterprises
-#  name: Dark Matter Enterprises
-#  description: dark-matter-enterprises-description
-#  color: "#BF00B9"
-#  image: /Textures/_Mono/Companies/dme.png #DME Logo
-# WOLFGATE END
+- type: company
+  id: DarkMatterEnterprises
+  name: Dark Matter Enterprises
+  description: dark-matter-enterprises-description
+  color: "#BF00B9"
+  image: /Textures/_Mono/Companies/dme.png #DME Logo
+  icon: DarkMatterEnterprises # Forge-change
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: AetherionDynamics
-#  name: Aetherion Dynamics
-#  description: aetherion-dynamics-description
-#  color: "#7E72B2"
-# WOLFGATE END
+- type: company
+  id: AetherionDynamics
+  name: Aetherion Dynamics
+  description: aetherion-dynamics-description
+  color: "#7E72B2"
+  icon: AetherionDynamics # Forge-change
+  note: aetherion-dynamics-note # Forge-change
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: HorizonEnergy
-#  name: Horizon Energy
-#  description: horizon-energy-description
-#  color: "#69E37F"
-#  image: /Textures/_Mono/Companies/horizon_energy.png
-#
-#
-## Minor companies
-# WOLFGATE END
+- type: company
+  id: HorizonEnergy
+  name: Horizon Energy
+  description: horizon-energy-description
+  color: "#69E37F"
+  image: /Textures/_Mono/Companies/horizon_energy.png
+  icon: HorizonEnergy # Forge-change
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: UniversalStatesOfAmerica
-#  name: Universal States of America
-#  description: universal-states-of-america-description
-#  color: "#0A3161"
-#  image: /Textures/_Mono/Companies/UNSA.png
-# WOLFGATE END
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: CivilDefenseMilita
-#  name: Civil Defense Militia
-#  description: civil-defense-milita-description
-#  color: "#666600"
-# WOLFGATE END
+# Minor companies
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: UllmanIndustries
-#  name: Ullman Industries
-#  description: ullman-industries-description
-#  color: "#52326A"
-#  image: /Textures/_Mono/Companies/ullman_industries.png
-# WOLFGATE END
+- type: company
+  id: UniversalStatesOfAmerica
+  name: Universal States of America
+  description: universal-states-of-america-description
+  color: "#0A3161"
+  image: /Textures/_Mono/Companies/UNSA.png
+  # Forge-change: add icon & special's
+  note: universal-states-of-america-note
+  icon: UniversalStatesOfAmerica
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyUNSA
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: NosskeEienResearchandDevelopment
-#  name: Nosske-Eien Research and Development
-#  description: nosske-eien-rnd-description
-#  color: "#9573AF"
-#  image: /Textures/_Mono/Companies/ne_rd.png
-# WOLFGATE END
+- type: company
+  id: CivilDefenseMilita
+  name: Civil Defense Militia
+  description: civil-defense-milita-description
+  color: "#666600"
+  whitelisted: true
+  hidden: true # Forge-change: hide
+
+- type: company
+  id: UllmanIndustries
+  name: Ullman Industries
+  description: ullman-industries-description
+  color: "#52326A"
+  image: /Textures/_Mono/Companies/ullman_industries.png
+  # Forge-change: add icon & special's
+  whitelisted: true
+  icon: UllmanIndustries
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyUllmanIndustries
+  - !type:PlaySpawnSoundSpecial
+    sound:
+      path: /Audio/Ambience/Antag/pirate_start.ogg
+      params:
+        volume: -5
+        variation: 0.2
+
+- type: company
+  id: NosskeEienResearchandDevelopment
+  name: Nosske-Eien Research and Development
+  description: nosske-eien-rnd-description
+  color: "#9573AF"
+  image: /Textures/_Mono/Companies/ne_rd.png
+  icon: Nosske # Forge-change
+  note: nosske-eien-rnd-note # Forge-change
 
 - type: company
   id: blackhawkpmc
@@ -191,7 +224,12 @@
   description: blackhawkpmc-description
   color: "#419E23"
   image: /Textures/_Mono/Companies/BMC.png
-
+  # Forge-change: add icon & special's
+  icon: Blackhawk
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyBlackhawk
 
 # Religious groups
 
@@ -208,31 +246,45 @@
 #  color: "#DEBC50"
 #   image: /Textures/_Mono/Companies/CMG.png
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: TheHive
-#  name: The Hive
-#  description: The-Hive-description
-#  color: "#5918a8"
-#
-## Black Market Companies
-# WOLFGATE END
+- type: company
+  id: TheHive
+  form: Protagonist
+  name: Улей # Forge-change: locale The Hive
+  description: The-Hive-description
+  color: "#5918a8"
+  # Forge-change: add icon, note & special's
+  icon: TheHive # Forge-change
+  special:
+  - !type:PlaySpawnSoundSpecial
+    sound:
+      path: /Audio/Ambience/ambimystery.ogg
+      params:
+        volume: -5
+        variation: 0.2
+
+# Black Market Companies
 
 - type: company
   id: paycheckbratva
   name: Paycheck Bratva
   description: paycheck-bratva-description
-  color: "#7a0303"
+  color: "#971f47"
+  # Forge-change: add icon, note & special's
+  note: paycheck-bratva-company-note
+  icon: Paycheck
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyPaycheckBratva
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: CerberusSurplusProvisions
-#  name: Cerberus Surplus Provisions
-#  description: cerberus-surplus-provisions
-#  color: "#aa1010"
-#  image: /Textures/_Mono/Companies/CSP.png
-#  whitelisted: true
-# WOLFGATE END
+- type: company
+  id: CerberusSurplusProvisions
+  name: Cerberus Surplus Provisions
+  description: cerberus-surplus-provisions
+  color: "#aa1010"
+  image: /Textures/_Mono/Companies/CSP.png
+  whitelisted: true
+  hidden: true # Forge-change: hide
 
 - type: company
   id: TheViperGroup
@@ -241,21 +293,38 @@
   color: "#B82121"
   image: /Textures/_Mono/Companies/thevipergroup.png # Example
   whitelisted: true
+  # Forge-change: delete logins, add icon, note & special's
+  note: viper-group-company-note
+  icon: ViperGroup
+  special:
+  - !type:GiveItemSpecial
+    prototype:
+    - EncryptionKeyViperGroup
+  - !type:AddAccessSpecial
+    tags:
+    - Viper
+  - !type:PlaySpawnSoundSpecial
+    sound:
+      path: /Audio/_Forge/Ambience/Antag/cut_reaper_spawn.ogg
+      params:
+        volume: -5
+        variation: 0.2
 
 - type: company
   id: RedSailCorsairs
+  form: Antagonist
   name: RedSail Corsairs
   description: redsail-corsairs-description
   color: "#930000"
   image: /Textures/_Mono/Companies/redsailcorsairs.png
   whitelisted: true
+  hidden: true # Forge-change: hide
 
-# WOLFGATE(Companies) START: flavour companies replaced by player companies
-#- type: company
-#  id: PLXCOR
-#  name: PLXCOR
-#  description: plxcor-description
-#  color: "#B500B5"
-#  image: /Textures/_Mono/Companies/PLXCOR.png
-#  whitelisted: true
-# WOLFGATE END
+- type: company
+  id: PLXCOR
+  name: PLXCOR
+  description: plxcor-description
+  color: "#B500B5"
+  image: /Textures/_Mono/Companies/PLXCOR.png
+  whitelisted: true
+  hidden: true # Forge-change: hide

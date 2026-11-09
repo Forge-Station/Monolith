@@ -19,7 +19,6 @@ public sealed partial class ExamineCardSystem : SharedExamineCardSystem
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private GenitalConsentSystem _genitalConsent = default!;
-    [Dependency] private Content.Server._WF.Companies.WFCompanySystem _companies = default!;
 
     /// <summary>The same examiner looking again within this time doesn't tell the character twice.</summary>
     private static readonly TimeSpan NoticeCooldown = TimeSpan.FromSeconds(20);
@@ -33,10 +32,7 @@ public sealed partial class ExamineCardSystem : SharedExamineCardSystem
     {
         var card = BuildCard(target, examiner, detailed);
         if (detailed)
-        {
             card.NsfwText = NsfwTextFor(target, examiner);
-            _companies.FillExamineCard(target, card);
-        }
 
         RaiseNetworkEvent(card, session);
         NotifyExamined(target, examiner, detailed);

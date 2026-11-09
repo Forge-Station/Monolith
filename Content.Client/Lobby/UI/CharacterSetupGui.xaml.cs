@@ -113,7 +113,6 @@ namespace Content.Client.Lobby.UI
                 }
                 // End WOLFGATE
 
-                characterPickerButton.ShowCompany(slot); // WOLFGATE(Companies): the character list names their company
                 Characters.AddChild(characterPickerButton);
 
                 characterPickerButton.OnPressed += args =>

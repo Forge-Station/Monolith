@@ -618,7 +618,6 @@ namespace Content.Client.Lobby.UI
             RefreshFlavorText();
             InitializeHeadshot(); // WOLFGATE(Headshot)
             InitializeCustomMarkings(); // WOLFGATE(CustomMarkings)
-            InitializeCompanyCard(); // WOLFGATE(Companies)
             InitializeMismatchedParts(); // WOLFGATE(Species)
             InitializeBiotype(); // WOLFGATE(Biotype)
             InitializeChatFont(); // WOLFGATE(ChatFont)
@@ -1349,7 +1348,6 @@ namespace Content.Client.Lobby.UI
             UpdateFlavorTextEdit();
             UpdateHeadshot(); // WOLFGATE(Headshot)
             UpdateCustomMarkings(); // WOLFGATE(CustomMarkings)
-            UpdateCompanyCard(); // WOLFGATE(Companies)
             UpdateMismatchedParts(); // WOLFGATE(Species)
             UpdateBiotype(); // WOLFGATE(Biotype)
             UpdateLegStyle(); // WOLFGATE(LegStyle)

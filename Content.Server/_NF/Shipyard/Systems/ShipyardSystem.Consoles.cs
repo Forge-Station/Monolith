@@ -277,7 +277,6 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             shipCompany.CompanyName = companyName;
             Dirty(shuttleUid, shipCompany);
         }
-        EntityManager.System<Content.Server._WF.Companies.WFCompanySystem>().MarkBoughtShip(shuttleUid, targetId); // WOLFGATE(Companies): a member's ship flies under their company
 
         EntityUid? shuttleStation = null;
         // setting up any stations if we have a matching game map prototype to allow late joins directly onto the vessel

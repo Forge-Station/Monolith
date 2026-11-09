@@ -246,8 +246,6 @@ public sealed partial class GhostOrbitWindow : FancyWindow
     /// </summary>
     private Texture? GetIcon(GhostOrbitTarget target, SpriteSystem sprite)
     {
-        if (Content.Client._WF.Companies.WFCompanyRankIcons.Get(target.CompanyRank) is { } rankIcon)
-            return rankIcon;
         if (target.JobIcon is { } job && _proto.TryIndex(job, out var jobIcon))
             return sprite.Frame0(jobIcon.Icon);
 

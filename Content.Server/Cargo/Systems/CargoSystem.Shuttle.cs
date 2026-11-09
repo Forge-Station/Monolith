@@ -646,7 +646,6 @@ public sealed partial class CargoSystem
         if (injectionCompany != null && currencyInjections != null)
             _currencyInjection.InjectCurrency(injectionCompany ?? "PDV", currencyInjections); // the "if null" case should never actually be used here, but my IDE apparently thinks an explicit check of "is this not null" isn't good enough
         // Mono End
-        price = EntityManager.System<Content.Server._WF.Companies.WFCompanySystem>().TakeCut(args.Actor, (int) price, "cargo"); // WOLFGATE(Companies): the seller's company takes its cut
         var stackPrototype = _protoMan.Index<StackPrototype>(component.CashType);
         _stack.Spawn((int)price, stackPrototype, xform.Coordinates);
         _audio.PlayPvs(ApproveSound, uid);

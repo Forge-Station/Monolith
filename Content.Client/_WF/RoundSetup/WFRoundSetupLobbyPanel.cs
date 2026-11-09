@@ -25,7 +25,6 @@ public sealed partial class WFRoundSetupLobbyPanel : PanelContainer
         HorizontalExpand = true;
         var content = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, SeparationOverride = 4 };
         AddChild(content);
-        content.AddChild(new Companies.WFCompanyQuickJoin());
         content.AddChild(new Label { Text = Text("title"), StyleClasses = { "LabelSubText" } });
         _empty = Wrapped(Text("loading"));
         _empty.ToolTip = Text("empty-help");

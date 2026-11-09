@@ -47,7 +47,6 @@ public sealed partial class WFEncounterRewardSystem : EntitySystem
     [Dependency] private WFCrewShipStatusSystem _status = default!;
     [Dependency] private WFCrewAlertSystem _alerts = default!;
     [Dependency] private BankSystem _bank = default!;
-    [Dependency] private Content.Server._WF.Companies.WFCompanySystem _companies = default!;
     [Dependency] private StackSystem _stack = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private MobStateSystem _mobs = default!;
@@ -181,13 +180,11 @@ public sealed partial class WFEncounterRewardSystem : EntitySystem
             return;
 
         // A deposit that fails, with no bank account or deposits off, pays nothing and keeps the allowance.
-        var cut = _companies.CutFor(session, paid);
-        if (!_bank.TryBankDeposit(mob, paid - cut, false))
+        if (!_bank.TryBankDeposit(mob, paid, false))
         {
             Refund(session.UserId, paid);
             return;
         }
-        _companies.PayCut(session, cut, "bounty");
 
         _chat.DispatchServerMessage(session, Loc.GetString("wf-encounter-kill-bounty-paid", ("amount", paid), ("company", company)));
         _adminLog.Add(LogType.Action, LogImpact.Medium,
@@ -650,14 +647,11 @@ public sealed partial class WFEncounterRewardSystem : EntitySystem
             }
 
             // A deposit that fails, with no bank account or deposits off, pays nothing and keeps the allowance.
-            var cut = _companies.CutFor(session, paid);
-            if (paid > 0 && !_bank.TryBankDeposit(mob, paid - cut, false))
+            if (paid > 0 && !_bank.TryBankDeposit(mob, paid, false))
             {
                 Refund(session.UserId, paid);
                 paid = 0;
             }
-            else
-                _companies.PayCut(session, cut, "reward");
 
             var credits = GiveCredits(reward, mob);
             if (extraCredits != null)

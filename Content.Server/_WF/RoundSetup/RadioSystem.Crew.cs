@@ -9,5 +9,5 @@ public sealed partial class RadioSystem
     /// <summary>Preserves normal channel labels while naming each isolated crew channel.</summary>
     private string WFCrewChannelName(EntityUid source, RadioChannelPrototype channel) => channel.ID == WFRoundSetupSystem.CrewChannel
         ? FormattedMessage.EscapeText(EntityManager.System<WFRoundSetupSystem>().CrewRadioName(source))
-        : WFCompanyChannelName(source, channel);
+        : channel.LocalizedName;
 }

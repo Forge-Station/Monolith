@@ -6,7 +6,6 @@ using Content.Shared.StatusIcon;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Client._WF.RoundSetup;
 
@@ -70,25 +69,11 @@ public sealed class WFRoundSetupCrewRow : Button
         OnPressed += _ => open();
     }
 
-    /// <summary>A job icon that becomes its company rank's icon as soon as the client has it.</summary>
-    private sealed class RankedJobIcon(int rankId) : TextureRect
-    {
-        private bool _waiting = true;
-
-        protected override void FrameUpdate(FrameEventArgs args)
-        {
-            base.FrameUpdate(args);
-            if (!_waiting || Companies.WFCompanyRankIcons.Get(rankId) is not { } rank)
-                return;
-            Texture = rank;
-            _waiting = false;
-        }
-    }
-
-    /// <summary>Uses the job's existing status sprite for roles and crew identities, or the company rank's icon if it has one.</summary>
+    /// <summary>Uses the job's existing status sprite for roles and crew identities.</summary>
     public static TextureRect JobIcon(string? job, int rankId = 0)
     {
-        var icon = rankId != 0 ? new RankedJobIcon(rankId) : new TextureRect();
+        _ = rankId;
+        var icon = new TextureRect();
         icon.SetSize = new Vector2(24);
         icon.Stretch = TextureRect.StretchMode.Scale;
         icon.VerticalAlignment = VAlignment.Center;

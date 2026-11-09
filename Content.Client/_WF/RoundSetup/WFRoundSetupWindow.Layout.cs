@@ -71,9 +71,6 @@ public sealed partial class WFRoundSetupWindow
             StyleClasses = { "WFRoundSetupSurface" },
             Children = { layout },
         });
-        var company = new Button { Text = Text("company-open"), HorizontalAlignment = HAlignment.Right, ToolTip = Text("company-open-help") };
-        company.OnPressed += _ => _entities.System<Content.Client._WF.Companies.WFCompanyClientSystem>().OpenWindow();
-        layout.AddChild(company);
         layout.AddChild(_navigation);
         layout.AddChild(_message);
         _pageScroll.AddChild(_body);
@@ -218,7 +215,6 @@ public sealed partial class WFRoundSetupWindow
         else
         {
             _focusedLobby = null;
-            _body.AddChild(new Companies.WFCompanyQuickJoin(true));
             _body.AddChild(Description(lobbies.Length == 0 ? "empty" : "browse-help"));
             foreach (var lobby in lobbies)
                 _body.AddChild(LobbyListing(lobby, state.Invitations.Any(invitation => invitation.Id == lobby.Id)));

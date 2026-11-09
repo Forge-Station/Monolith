@@ -353,11 +353,7 @@ public sealed partial class WFRoundSetupWindow : DefaultWindow
                 _preferences.SelectCharacter(args.Id);
                 SetReady(lobby.Id, false);
                 // After the rate limit and the server's handling of the switch, so both states describe the new character.
-                Robust.Shared.Timing.Timer.Spawn(300, () =>
-                {
-                    Send(WFRoundSetupAction.Refresh);
-                    _entities.System<Companies.WFCompanyClientSystem>().Send(new Shared._WF.Companies.WFCompanyRequest(Shared._WF.Companies.WFCompanyAction.Refresh));
-                });
+                Robust.Shared.Timing.Timer.Spawn(300, () => Send(WFRoundSetupAction.Refresh));
                 UserInterfaceManager.GetUIController<LobbyUIController>().ReloadCharacterSetup();
             };
             _body.AddChild(characters);

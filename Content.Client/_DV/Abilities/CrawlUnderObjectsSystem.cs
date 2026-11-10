@@ -29,16 +29,16 @@ public sealed partial class HideUnderTableAbilitySystem : SharedCrawlUnderObject
             if (ent.Comp.OriginalDrawDepth != null)
                 return;
 
-            component.OriginalDrawDepth = sprite.DrawDepth;
-            sprite.DrawDepth = (int)DrawDepth.SmallMobs;
+            ent.Comp.OriginalDrawDepth = sprite.DrawDepth;
+            _sprite.SetDrawDepth((ent, sprite), (int)DrawDepth.SmallMobs);
         }
         else
         {
             if (ent.Comp.OriginalDrawDepth is not { } original)
                 return;
 
-            sprite.DrawDepth = (int)component.OriginalDrawDepth;
-            component.OriginalDrawDepth = null;
+            _sprite.SetDrawDepth((ent, sprite), original);
+            ent.Comp.OriginalDrawDepth = null;
         }
     }
 }

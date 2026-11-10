@@ -15,6 +15,8 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events; // Mono
 using Content.Shared.Movement.Pulling.Events;
+using Content.Shared._Mono.Company; // Forge-Change
+using Content.Shared.Humanoid; // Forge-Change
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -488,6 +490,27 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     //ported from civ14
     private void PreventCollision(EntityUid uid, ProjectileComponent component, ref PreventCollideEvent args)
     {
+        // Forge-Change-Start
+        if (component.IgnoreEntities.Contains(args.OtherEntity) ||
+            component.IgnoreHumanoids &&
+            HasComp<MobStateComponent>(args.OtherEntity) &&
+            HasComp<HumanoidAppearanceComponent>(args.OtherEntity))
+        {
+            args.Cancelled = true;
+        }
+        // Forge-Change-End
+
+        if (component.IgnoreSameCompany &&
+            component.Shooter is { } shooter &&
+            HasComp<MobStateComponent>(args.OtherEntity) &&
+            TryComp<CompanyComponent>(shooter, out var shooterCompany) &&
+            shooterCompany.CompanyName != "None" &&
+            TryComp<CompanyComponent>(args.OtherEntity, out var targetCompany) &&
+            shooterCompany.CompanyName == targetCompany.CompanyName)
+        {
+            args.Cancelled = true;
+        }
+
         if (component.IgnoreShooter && (args.OtherEntity == component.Shooter || args.OtherEntity == component.Weapon))
         {
             args.Cancelled = true;

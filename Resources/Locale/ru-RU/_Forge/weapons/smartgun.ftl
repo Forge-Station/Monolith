@@ -1,0 +1,9 @@
+smartgun-mode-disabled = Без умной стрельбы
+smartgun-mode-company = Сквозь членов компании
+smartgun-mode-humanoids = Сквозь гуманоидов
+smartgun-mode-selected = Сквозь выбранных существ
+smartgun-mode-examine = Режим умной стрельбы: {$mode}
+smartgun-mode-verb = Переключить режим умной стрельбы (сейчас: {$mode})
+smartgun-mode-switched = Режим умной стрельбы: {$mode}
+smartgun-target-added = Умные пули теперь пролетают сквозь {$target}.
+smartgun-target-removed = Умные пули больше не пролетают сквозь {$target}.

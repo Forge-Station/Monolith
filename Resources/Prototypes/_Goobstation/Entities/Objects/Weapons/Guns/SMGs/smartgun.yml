@@ -2,7 +2,7 @@
   name: MMC Abielle Smart-SMG (.160 smart) # Mono
   parent: BaseWeaponSubMachineGun
   id: WeaponSubMachineSmart
-  description: An experiment in smart-weapon technology that guides bullets towards the target the gun was aimed at when fired. While the tracking functions work fine, the gun is prone to insanely wide spread thanks to its practically non-existant barrel.
+  description: An experiment in smart-weapon technology that can guide rounds toward the target and configure them to pass through company members, humanoids, or selected creatures. While the tracking functions work fine, the gun is prone to insanely wide spread thanks to its practically non-existant barrel. # Forge-Change
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Guns/SMGs/smartgun.rsi
@@ -73,6 +73,10 @@
   - type: Appearance
   - type: SmartGun
     requiresWield: true
+    # Forge-Change-Start
+    mode: Company
+    targetSelectionDelay: 1
+    # Forge-Change-End
   - type: LaserPointer
   - type: StaticPrice
     price: 1000

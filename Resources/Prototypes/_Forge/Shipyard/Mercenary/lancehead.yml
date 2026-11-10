@@ -1,0 +1,36 @@
+- type: vessel
+  id: Lancehead
+  parent: BaseVessel
+  name: VG Lancehead
+  description: Тяжёлый артиллерийский крейсер Viper Group. На борту имеет две 120-мм пушки и рельсатрон "Чарон".
+  price: 210000
+  purchasable: false # Voucher only
+  category: Large
+  group: Shipyard
+  access: Mercenary
+  shuttlePath: SharedMaps\_Forge\Shuttles\Mercenary\lancehead.yml
+  guidebookPage: Null
+  class:
+  - Fighter
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: Lancehead
+  mapName: 'VG Lancehead'
+  mapPath: SharedMaps\_Forge\Shuttles\Mercenary\lancehead.yml
+  minPlayers: 0
+  stations:
+    Lancehead:
+      stationProto: StandardFrontierVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Lancehead MIL{1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            VGInfanteer: [ 0, 0 ]
+            VGLieutenant: [ 0, 0 ]
+            VGCommander: [ 0, 0 ]

@@ -11,6 +11,7 @@
   - ClothingOuterHardsuitViperGroupJuggernaut
   - ClothingShoesBootsMagViperGroup # Forge-change
   - ShipVoucherVGWolf
+  - ShipVoucherVGLance # Forge-change
 
 - type: latheRecipePack
   id: MonoViperGroupStatic

@@ -8,7 +8,7 @@
   category: Large
   group: Shipyard
   access: Mercenary
-  shuttlePath: SharedMaps\_Forge\Shuttles\Mercenary\lancehead.yml
+  shuttlePath: /SharedMaps/_Forge/Shuttles/Mercenary/lancehead.yml
   guidebookPage: Null
   class:
   - Fighter
@@ -18,7 +18,7 @@
 - type: gameMap
   id: Lancehead
   mapName: 'VG Lancehead'
-  mapPath: SharedMaps\_Forge\Shuttles\Mercenary\lancehead.yml
+  mapPath: /SharedMaps/_Forge/Shuttles/Mercenary/lancehead.yml
   minPlayers: 0
   stations:
     Lancehead:

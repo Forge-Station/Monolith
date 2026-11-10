@@ -12,14 +12,14 @@ using Content.Shared.NPC.Systems;
 
 namespace Content.Server._Forge.LetoferolAnnihilator
 {
-    public sealed class LetoferolAnnihilatorZoneSystem : EntitySystem
+    public sealed partial class LetoferolAnnihilatorZoneSystem : EntitySystem
     {
-        [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-        [Dependency] private readonly EntityLookupSystem _lookup = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly NpcFactionSystem _factionSystem = default!;
-        [Dependency] private readonly DamageableSystem _damageable = default!;
-        [Dependency] private readonly PvsOverrideSystem _pvsSys = default!;
+        [Dependency] private SharedTransformSystem _transformSystem = default!;
+        [Dependency] private EntityLookupSystem _lookup = default!;
+        [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private NpcFactionSystem _factionSystem = default!;
+        [Dependency] private DamageableSystem _damageable = default!;
+        [Dependency] private PvsOverrideSystem _pvsSys = default!;
 
         private const string ZonePrototype = "AnnihilatorZone";
         private readonly List<EntityUid> _toDeleteBuffer = new();

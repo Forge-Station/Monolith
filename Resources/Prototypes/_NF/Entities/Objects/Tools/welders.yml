@@ -5,7 +5,7 @@
   components:
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents: []
         maxVol: 100
 
@@ -16,7 +16,7 @@
   components:
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents: []
         maxVol: 250
 
@@ -27,7 +27,7 @@
   components:
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents: []
         maxVol: 350
 
@@ -38,6 +38,6 @@
   components:
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents: []
         maxVol: 2500

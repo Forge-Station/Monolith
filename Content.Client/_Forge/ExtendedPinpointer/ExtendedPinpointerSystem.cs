@@ -5,10 +5,10 @@ using Content.Shared.Pinpointer;
 
 namespace Content.Client._Forge.ExtendedPinpointer;
 
-public sealed class ExtendedPinpointerSystem : SharedExtendedPinpointerSystem
+public sealed partial class ExtendedPinpointerSystem : SharedExtendedPinpointerSystem
 {
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Update(float frameTime)
     {

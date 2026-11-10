@@ -20,9 +20,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.Markdown;
 using Robust.Shared.Utility;
-using System.IO;
-using System.Linq;
-using System.Numerics;
 using YamlDotNet.RepresentationModel;
 using Content.Shared._EE.Contractors.Prototypes; // Forge-change: _EE nationality
 using Content.Shared._Shitmed.Humanoid.Events; // Shitmed Change

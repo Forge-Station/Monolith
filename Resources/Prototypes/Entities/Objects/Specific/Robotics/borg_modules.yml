@@ -376,6 +376,11 @@
       whitelist:
         tags:
         - GlassBeaker
+    # Forge: let engineering borgs insert/remove fission reactor rods
+    - id: BaseReactorPart
+      whitelist:
+        components:
+        - ReactorPart
   # End Frontier: droppable borg items
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: construction-module }

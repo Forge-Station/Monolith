@@ -21,18 +21,18 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._Forge.Access;
 
 [UsedImplicitly]
-public sealed class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleSystem
+public sealed partial class JobPresetIdCardConsoleSystem : SharedJobPresetIdCardConsoleSystem
 {
     private const string InjectorPrototypeId = "JobReassignmentInjector";
 
-    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly JobReassignmentSystem _reassignment = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly StationRecordsSystem _record = default!;
-    [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
+    [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private JobReassignmentSystem _reassignment = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private StationRecordsSystem _record = default!;
+    [Dependency] private UserInterfaceSystem _userInterface = default!;
 
     public override void Initialize()
     {

@@ -471,7 +471,7 @@
   components:
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents: []
         maxVol: 100
   - type: Construction
@@ -665,7 +665,7 @@
         shader: unshaded
   - type: Clothing
     sprite: _NF/Objects/Tools/goblin_tools/signaller.rsi
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 10
   - type: Construction
     graph: NFGoblinMadeRemoteSignaller

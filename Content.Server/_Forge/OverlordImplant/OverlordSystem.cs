@@ -12,11 +12,11 @@ namespace Content.Server._Forge.Overlord;
 /// <summary>
 /// System used for adding or removing components with a overlord implant
 /// </summary>
-public sealed class OverlordSystem : EntitySystem
+public sealed partial class OverlordSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private IAdminLogManager _adminLogManager = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
 
     public override void Initialize()
     {

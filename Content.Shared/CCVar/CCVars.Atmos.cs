@@ -154,7 +154,7 @@ public sealed partial class CCVars
     ///     gases heat up and cool down 64x faster than real life.
     /// </summary>
     public static readonly CVarDef<float> AtmosHeatScale =
-        CVarDef.Create("atmos.heat_scale", 2f, CVar.SERVERONLY); // Frontier 8f<2f
+        CVarDef.Create("atmos.heat_scale", 2f, CVar.SERVER | CVar.REPLICATED); // Frontier 8f<2f
 
     /// <summary>
     ///     Maximum explosion radius for explosions caused by bursting a gas tank ("max caps").

@@ -16,6 +16,7 @@ using Content.Shared._NF.Atmos.Prototypes;
 using Content.Shared._NF.Atmos.Systems;
 using Content.Shared._NF.Atmos.Visuals;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.Piping.Binary.Components;
 using Content.Shared._NF.Bank.Components;
 using Content.Shared.Database;

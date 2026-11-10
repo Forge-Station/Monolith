@@ -14,7 +14,7 @@ namespace Content.Client._Forge.Mapping.UI;
 [GenerateTypedNameReferences]
 public sealed partial class MappingPaletteWindow : DefaultWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public DecalPlacementSystem DecalSystem = default!;
 

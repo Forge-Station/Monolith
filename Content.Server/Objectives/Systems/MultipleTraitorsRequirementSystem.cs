@@ -1,5 +1,6 @@
 using Content.Server.GameTicking.Rules;
 using Content.Server.Objectives.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Objectives.Components;
 
 namespace Content.Server.Objectives.Systems;
@@ -9,7 +10,7 @@ namespace Content.Server.Objectives.Systems;
 /// </summary>
 public sealed partial class MultipleTraitorsRequirementSystem : EntitySystem
 {
-    [Dependency] private TraitorRuleSystem _traitorRule = default!;
+    [Dependency] private ServerTraitorRuleSystem _traitorRule = default!;
 
     public override void Initialize()
     {

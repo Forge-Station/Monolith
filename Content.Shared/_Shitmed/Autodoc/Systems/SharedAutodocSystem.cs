@@ -23,18 +23,18 @@ using System.Linq;
 
 namespace Content.Shared._Shitmed.Autodoc.Systems;
 
-public abstract class SharedAutodocSystem : EntitySystem
+public abstract partial class SharedAutodocSystem : EntitySystem
 {
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedLabelSystem _label = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly SharedSurgerySystem _surgery = default!;
-    [Dependency] private readonly SleepingSystem _sleeping = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedBodySystem _body = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedLabelSystem _label = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private SharedSurgerySystem _surgery = default!;
+    [Dependency] private SleepingSystem _sleeping = default!;
 
     public override void Initialize()
     {

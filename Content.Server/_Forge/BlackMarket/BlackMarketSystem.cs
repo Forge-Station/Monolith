@@ -45,16 +45,16 @@ public sealed partial class BlackMarketSystem : EntitySystem
         AllowSameContract = OtherCategorySlots | PurchaseLimit,
     }
 
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly BankSystem _bank = default!;
-    [Dependency] private readonly CrateMachineSystem _crateMachine = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private BankSystem _bank = default!;
+    [Dependency] private CrateMachineSystem _crateMachine = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
 
     private float _uiRefreshAccumulator;
 

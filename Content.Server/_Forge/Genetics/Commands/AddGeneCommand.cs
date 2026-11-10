@@ -9,10 +9,10 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._Forge.Genetics.Commands;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class AddGeneCommand : IConsoleCommand
+public sealed partial class AddGeneCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     public string Command => "addgene";
     public string Description => "Activate a genetics gene on a target with a GenomeComponent.";

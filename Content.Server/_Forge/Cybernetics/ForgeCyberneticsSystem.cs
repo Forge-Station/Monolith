@@ -26,15 +26,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.Cybernetics;
 
-public sealed class ForgeCyberneticsSystem : EntitySystem
+public sealed partial class ForgeCyberneticsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedBodySystem _body = default!; // Forge-Change
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedBodySystem _body = default!; // Forge-Change
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private static readonly string[] MechanicalDamageTypes = { "Blunt", "Slash", "Piercing" };
 

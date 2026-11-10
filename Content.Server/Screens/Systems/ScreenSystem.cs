@@ -1,9 +1,8 @@
 using Content.Shared.TextScreen;
 using Content.Server.Screens.Components;
-using Content.Server.DeviceNetwork.Components;
-using Content.Server.DeviceNetwork.Systems;
-using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
+using Content.Shared.RoundEnd;
+using Content.Shared.Screens;
 using Robust.Shared.Timing;
 
 
@@ -21,25 +20,14 @@ public sealed partial class ScreenSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ScreenComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
-    }
-
-    /// <summary>
-    ///     Calls either a normal screen text update or shuttle timer update based on the presence of
-    ///     <see cref="ShuttleTimerMasks.ShuttleMap"/> in <see cref="args.Data"/>
-    /// </summary>
-    private void OnPacketReceived(EntityUid uid, ScreenComponent component, DeviceNetworkPacketEvent args)
-    {
-        if (args.Data.TryGetValue(ShuttleTimerMasks.ShuttleMap, out _))
-            ShuttleTimer(uid, component, args);
-        else
-            ScreenText(uid, component, args);
+        SubscribeLocalEvent<ScreenComponent, DeviceNetworkPacketEvent<ScreenTextPayload>>(OnScreenText);
+        SubscribeLocalEvent<ScreenComponent, DeviceNetworkPacketEvent<ScreenShuttlePayload>>(OnShuttleTimer);
     }
 
     /// <summary>
     ///     Send a text update to every screen on the same MapUid as the originating comms console.
     /// </summary>
-    private void ScreenText(EntityUid uid, ScreenComponent component, DeviceNetworkPacketEvent args)
+    private void OnScreenText(EntityUid uid, ScreenComponent component, ref DeviceNetworkPacketEvent<ScreenTextPayload> args)
     {
         // don't allow text updates if there's an active timer
         // (and just check here so the server doesn't have to track them)
@@ -53,12 +41,10 @@ public sealed partial class ScreenSystem : EntitySystem
         if (screenMap != null
             && argsMap != null
             && screenMap == argsMap
-            && args.Data.TryGetValue(ScreenMasks.Text, out string? text)
-            && text != null
-            )
+            && args.Data.Text != null)
         {
-            _appearanceSystem.SetData(uid, TextScreenVisuals.DefaultText, text);
-            _appearanceSystem.SetData(uid, TextScreenVisuals.ScreenText, text);
+            _appearanceSystem.SetData(uid, TextScreenVisuals.DefaultText, args.Data.Text);
+            _appearanceSystem.SetData(uid, TextScreenVisuals.ScreenText, args.Data.Text);
         }
     }
 
@@ -70,48 +56,42 @@ public sealed partial class ScreenSystem : EntitySystem
     /// Subnets are the shuttle, source, and dest. Source/dest change each jump.
     /// This is required to send different timers to the shuttle/terminal/station.
     /// </summary>
-    private void ShuttleTimer(EntityUid uid, ScreenComponent component, DeviceNetworkPacketEvent args)
+    private void OnShuttleTimer(EntityUid uid, ScreenComponent component, ref DeviceNetworkPacketEvent<ScreenShuttlePayload> args)
     {
         var timerXform = Transform(uid);
 
-        // no false positives.
         if (timerXform.MapUid == null)
             return;
 
-        string key;
-        args.Data.TryGetValue(ShuttleTimerMasks.ShuttleMap, out EntityUid? shuttleMap);
-        args.Data.TryGetValue(ShuttleTimerMasks.SourceMap, out EntityUid? source);
-        args.Data.TryGetValue(ShuttleTimerMasks.DestMap, out EntityUid? dest);
-        args.Data.TryGetValue(ShuttleTimerMasks.Docked, out bool docked);
-        string text = docked ? ShuttleTimerMasks.ETD : ShuttleTimerMasks.ETA;
+        var shuttleMap = args.Data.Shuttle;
+        var source = args.Data.SourceMap;
+        var dest = args.Data.DestinationMap;
+        var text = args.Data.Docked ? ShuttleTimerMasks.ETD : ShuttleTimerMasks.ETA;
+        TimeSpan duration;
 
         switch (timerXform.MapUid)
         {
-            // sometimes the timer transforms on FTL shuttles have a hyperspace mapuid, so matching by grid works as a fallback.
             case var local when local == shuttleMap || timerXform.GridUid == shuttleMap:
-                key = ShuttleTimerMasks.ShuttleTime;
+                duration = args.Data.ShuttleTime;
                 break;
             case var origin when origin == source:
-                key = ShuttleTimerMasks.SourceTime;
+                duration = args.Data.SourceTime;
                 break;
             case var remote when remote == dest:
-                key = ShuttleTimerMasks.DestTime;
+                duration = args.Data.DestinationTime;
                 text = ShuttleTimerMasks.ETA;
                 break;
             default:
                 return;
         }
 
-        if (!args.Data.TryGetValue(key, out TimeSpan duration))
-            return;
-
-        if (args.Data.TryGetValue(ScreenMasks.Text, out string? label) && label != null)
-            text = label;
+        if (args.Data.OverrideText != null)
+            text = args.Data.OverrideText;
 
         _appearanceSystem.SetData(uid, TextScreenVisuals.ScreenText, text);
         _appearanceSystem.SetData(uid, TextScreenVisuals.TargetTime, _gameTiming.CurTime + duration);
 
-        if (args.Data.TryGetValue(ScreenMasks.Color, out Color color))
-            _appearanceSystem.SetData(uid, TextScreenVisuals.Color, color);
+        if (args.Data.OverrideColor != null)
+            _appearanceSystem.SetData(uid, TextScreenVisuals.Color, args.Data.OverrideColor);
     }
 }

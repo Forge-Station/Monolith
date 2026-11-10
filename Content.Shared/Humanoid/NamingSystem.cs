@@ -12,15 +12,14 @@ namespace Content.Shared.Humanoid
     public sealed partial class NamingSystem : EntitySystem
     {
         [Dependency] private IRobustRandom _random = default!;
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
 
         public string GetName(string species, Gender? gender = null)
         {
             // if they have an old species or whatever just fall back to human I guess?
             // Some downstream is probably gonna have this eventually but then they can deal with fallbacks.
-            if (!_prototypeManager.TryIndex(species, out SpeciesPrototype? speciesProto))
+            if (!ProtoMan.TryIndex(species, out SpeciesPrototype? speciesProto))
             {
-                speciesProto = _prototypeManager.Index<SpeciesPrototype>("Human");
+                speciesProto = ProtoMan.Index<SpeciesPrototype>("Human");
                 Log.Warning($"Unable to find species {species} for name, falling back to Human");
             }
 
@@ -76,10 +75,10 @@ namespace Content.Shared.Humanoid
 
         private string PickLocalizedDatasetValue(string datasetId)
         {
-            if (_prototypeManager.TryIndex<LocalizedDatasetPrototype>(datasetId, out var localizedDataset))
+            if (ProtoMan.TryIndex<LocalizedDatasetPrototype>(datasetId, out var localizedDataset))
                 return Loc.GetString(_random.Pick(localizedDataset.Values));
 
-            var value = _random.Pick(_prototypeManager.Index<DatasetPrototype>(datasetId).Values);
+            var value = _random.Pick(ProtoMan.Index<DatasetPrototype>(datasetId).Values);
             return Loc.TryGetString(value, out var localizedValue) ? localizedValue : value;
         }
     }

@@ -18,9 +18,9 @@ namespace Content.Client._Forge.Features;
 /// </summary>
 public sealed partial class PaperLanguageVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private LanguageSystem _language = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     public bool TryFormatForReader(EntityUid paper, PaperBoundUserInterfaceState state, out PaperBoundUserInterfaceState filtered)
     {

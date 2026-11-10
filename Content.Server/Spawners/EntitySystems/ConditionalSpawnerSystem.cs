@@ -13,7 +13,7 @@ namespace Content.Server.Spawners.EntitySystems
     public sealed partial class ConditionalSpawnerSystem : EntitySystem
     {
         [Dependency] private IRobustRandom _robustRandom = default!;
-        [Dependency] private GameTicker _ticker = default!;
+        [Dependency] private ServerGameTicker _ticker = default!;
         [Dependency] private EntityTableSystem _entityTable = default!;
 
         public override void Initialize()
@@ -56,7 +56,7 @@ namespace Content.Server.Spawners.EntitySystems
 
         public void RuleStarted(EntityUid uid, ConditionalSpawnerComponent component, GameRuleStartedEvent obj)
         {
-            if (component.GameRules.Contains(obj.RuleId))
+            if (obj.RuleId is { } ruleId && component.GameRules.Contains(ruleId))
                 Spawn(uid, component);
         }
 

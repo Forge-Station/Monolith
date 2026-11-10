@@ -571,7 +571,7 @@ public sealed class PlanetNetworkTest
     {
         var server = pair.Server;
         var entMan = server.EntMan;
-        var mapMan = server.ResolveDependency<IMapManager>();
+        var mapMan = server.System<SharedMapSystem>();
         var maps = server.System<SharedMapSystem>();
         var shuttles = server.System<ShuttleSystem>();
         var ship = EntityUid.Invalid;

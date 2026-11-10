@@ -1,3 +1,6 @@
+ui-lobby-customize-nav-button = Character
+ui-lobby-ahelp-nav-button = Admin Help
+ui-lobby-leave-nav-button = Leave Server
 ui-lobby-title = Lobby: {$serverName}
 ui-lobby-ahelp-button = AHelp
 ui-lobby-options-button = Options

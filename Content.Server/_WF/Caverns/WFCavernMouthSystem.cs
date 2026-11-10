@@ -28,7 +28,6 @@ public sealed partial class WFCavernMouthSystem : EntitySystem
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ISharedPlayerManager _players = default!;
     [Dependency] private ITileDefinitionManager _tileDefs = default!;
@@ -175,7 +174,7 @@ public sealed partial class WFCavernMouthSystem : EntitySystem
         foreach (var index in hole)
         {
             grids.Clear();
-            _mapManager.FindGridsIntersecting(mapId, TileBox(index), ref grids, approx: true, includeMap: false);
+            _map.FindGridsIntersecting(mapId, TileBox(index), ref grids, approx: true, includeMap: false);
             if (grids.Count == 0)
                 continue;
 

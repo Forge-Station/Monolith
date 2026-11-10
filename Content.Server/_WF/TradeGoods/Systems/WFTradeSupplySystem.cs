@@ -19,9 +19,9 @@ public readonly record struct WFSupplyReport(string Station, bool Blockaded, boo
 public sealed partial class WFTradeSupplySystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private MarketSystem _stock = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private WFTradeMarketSystem _market = default!;
     [Dependency] private WFTradeSectorSystem _sector = default!;
     [Dependency] private WFTradeShortageSystem _shortages = default!;

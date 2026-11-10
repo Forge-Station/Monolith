@@ -171,7 +171,7 @@ public sealed partial class AutodocSystem
         if (given <= 0f || _bloodstream.GetBloodLevelPercentage(patient) >= _bloodTo - 0.001f)
             blood.Active = false;
 
-        if (!blood.Active || _ui.IsUiOpen(ent.Owner, AutodocUiKey.Key))
+        if (!blood.Active || _ui.IsUiOpen(ent.Owner, WolfmedAutodocUiKey.Key))
             UpdateUi(ent);
     }
 

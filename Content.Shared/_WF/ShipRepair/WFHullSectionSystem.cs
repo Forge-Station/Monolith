@@ -3,8 +3,12 @@ using System.Numerics;
 using Content.Shared._Mono.ShipRepair.Components;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
+using Content.Shared.Construction.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Prototypes;
 using Content.Shared.Whitelist;
 using Robust.Shared;
 using Robust.Shared.Audio.Systems;
@@ -19,8 +23,9 @@ namespace Content.Shared._WF.ShipRepair;
 public sealed partial class WFHullSectionSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private IComponentFactory _factory = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
@@ -62,7 +67,7 @@ public sealed partial class WFHullSectionSystem : EntitySystem
     public Entity<MapGridComponent>? PickTarget(TransformComponent toolXform, Vector2 clickWorld)
     {
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(toolXform.MapID, Box2.CenteredAround(clickWorld, new Vector2(0.1f, 0.1f)), ref grids, true, false);
+        _map.FindGridsIntersecting(toolXform.MapID, Box2.CenteredAround(clickWorld, new Vector2(0.1f, 0.1f)), ref grids, true, false);
 
         Entity<MapGridComponent>? section = null, hull = null, other = null;
         foreach (var grid in grids)
@@ -90,7 +95,7 @@ public sealed partial class WFHullSectionSystem : EntitySystem
             return ship;
 
         grids.Clear();
-        _mapMan.FindGridsIntersecting(toolXform.MapID, Box2.CenteredAround(clickWorld, new Vector2(1.5f, 1.5f)), ref grids, false, false);
+        _map.FindGridsIntersecting(toolXform.MapID, Box2.CenteredAround(clickWorld, new Vector2(1.5f, 1.5f)), ref grids, false, false);
 
         Entity<MapGridComponent>? near = null;
         foreach (var grid in grids)
@@ -144,6 +149,60 @@ public sealed partial class WFHullSectionSystem : EntitySystem
     public bool IsDebrisOf(EntityUid? grid, EntityUid hull)
     {
         return grid is { } on && (IsGround(on) || TryGetHull(on, out var owner) && owner.Owner == hull);
+    }
+
+    /// <summary>
+    /// Whether something anchored on the tile since would stop a wrench anchoring an entity of this prototype there.
+    /// What the snapshot holds on this tile was built to share it, so only something else blocks.
+    /// </summary>
+    public bool IsSpotTaken(Entity<MapGridComponent> hull, EntProtoId proto, Vector2i index, ShipRepairDataComponent data, ShipRepairChunk chunk)
+    {
+        if (!_proto.TryIndex(proto, out var entProto) ||
+            !entProto.TryComp<AnchorableComponent>(out _, _factory) ||
+            !entProto.TryComp<FixturesComponent>(out var fixtures, _factory))
+            return false;
+
+        var layer = 0;
+        var mask = 0;
+        foreach (var fixture in fixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+            layer |= fixture.CollisionLayer;
+            mask |= fixture.CollisionMask;
+        }
+
+        if ((layer | mask) == 0)
+            return false;
+
+        var anchored = _map.GetAnchoredEntitiesEnumerator(hull, hull.Comp, index);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (!TryComp<PhysicsComponent>(uid, out var body) || !body.CanCollide || !body.Hard)
+                continue;
+
+            if ((body.CollisionMask & layer) == 0 && (body.CollisionLayer & mask) == 0)
+                continue;
+
+            if (Prototype(uid.Value)?.ID is { } other && other != proto.Id && InSnapshot(hull, data, chunk, uid.Value, other, index))
+                continue;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool InSnapshot(EntityUid hull, ShipRepairDataComponent data, ShipRepairChunk chunk, EntityUid entity, string proto, Vector2i index)
+    {
+        var net = GetNetEntity(entity);
+        foreach (var spec in chunk.Entities.Values)
+        {
+            if ((spec.OriginalEntity == net || data.EntityPalette[spec.ProtoIndex].Id == proto) && TileOf(hull, spec.LocalPosition) == index)
+                return true;
+        }
+
+        return false;
     }
 
     /// <summary>The tile index a hull-local position falls in.</summary>
@@ -211,7 +270,7 @@ public sealed partial class WFHullSectionSystem : EntitySystem
         var xform = Transform(hull);
         var centre = Vector2.Transform(_map.TileCenterToVector(hull, index), _transform.GetWorldMatrix(xform));
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(xform.MapID, Box2.CenteredAround(centre, new Vector2(OccupancyHalfExtent * 2)), ref grids, false, false);
+        _map.FindGridsIntersecting(xform.MapID, Box2.CenteredAround(centre, new Vector2(OccupancyHalfExtent * 2)), ref grids, false, false);
 
         foreach (var grid in grids)
         {
@@ -263,7 +322,7 @@ public sealed partial class WFHullSectionSystem : EntitySystem
         var xform = Transform(hull);
         var home = _transform.GetWorldMatrix(xform).TransformBox(section.Comp.LocalAABB);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapMan.FindGridsIntersecting(xform.MapID, home, ref grids, true, false);
+        _map.FindGridsIntersecting(xform.MapID, home, ref grids, true, false);
         var crowded = grids.Any(grid => grid.Owner != hull.Owner && grid.Owner != section.Owner && !IsGround(grid));
 
         var tiles = _map.GetAllTilesEnumerator(section, section.Comp);

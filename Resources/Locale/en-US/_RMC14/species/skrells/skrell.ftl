@@ -1,5 +1,3 @@
-species-name-skrell = Skrell
-
 marking-RMCHairSkrellLong = Long Skrell Hair
 marking-RMCHairSkrellShort = Short Skrell Hair
 marking-RMCHairSkrellLonger = Longer Skrell Hair

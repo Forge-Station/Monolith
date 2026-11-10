@@ -20,7 +20,7 @@ namespace Content.Server._WF.Traders;
 /// </summary>
 public sealed partial class TraderShipyardSystem : EntitySystem
 {
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ShipyardSystem _shipyard = default!;
     [Dependency] private TraderSystem _trader = default!;

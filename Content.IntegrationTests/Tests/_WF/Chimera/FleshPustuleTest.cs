@@ -28,7 +28,7 @@ public sealed class FleshPustuleTest
         await server.WaitAssertion(() =>
         {
             maps.CreateMap(out var mapId);
-            var grid = server.ResolveDependency<IMapManager>().CreateGridEntity(mapId);
+            var grid = server.System<SharedMapSystem>().CreateGridEntity(mapId);
             gridUid = grid;
             var floor = server.ResolveDependency<ITileDefinitionManager>()["FloorFlesh"];
             maps.SetTile(grid, Vector2i.Zero, new Tile(floor.TileId));
@@ -72,7 +72,7 @@ public sealed class FleshPustuleTest
         await server.WaitAssertion(() =>
         {
             maps.CreateMap(out var mapId);
-            var grid = server.ResolveDependency<IMapManager>().CreateGridEntity(mapId);
+            var grid = server.System<SharedMapSystem>().CreateGridEntity(mapId);
             gridUid = grid;
             var floor = server.ResolveDependency<ITileDefinitionManager>()["FloorFlesh"];
             maps.SetTile(grid, Vector2i.Zero, new Tile(floor.TileId));

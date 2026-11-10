@@ -34,6 +34,8 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
 
     public DockingInterfaceState? DockState = null;
 
+    private const float MinDisplaySize = 256f;
+
     private List<Entity<MapGridComponent>> _grids = new();
 
     private readonly HashSet<DockingPortState> _drawnDocks = new();

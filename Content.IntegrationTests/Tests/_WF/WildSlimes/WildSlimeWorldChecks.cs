@@ -326,7 +326,7 @@ public static class WildSlimeWorldChecks
         var entMan = server.EntMan;
         var protos = server.ResolveDependency<IPrototypeManager>();
         var xeno = server.System<XenobiologySystem>();
-        var hunger = server.System<HungerSystem>();
+        var hunger = server.System<SatiationSystem>();
         var climate = server.System<WFSlimeClimateSystem>();
         var habitat = protos.Index<WFWildSlimeHabitatPrototype>(habitatId);
         var outMap = await pair.CreateTestMap();

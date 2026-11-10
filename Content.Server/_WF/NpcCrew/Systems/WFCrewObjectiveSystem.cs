@@ -84,6 +84,19 @@ public sealed partial class WFCrewObjectiveSystem : EntitySystem
         return _queues.TryGetValue((grid, group), out var state) ? state.Status : null;
     }
 
+    /// <summary>A copy of one crew's remaining objectives, without building the whole crew snapshot; false without a queue.</summary>
+    public bool TryGetQueue(EntityUid grid, string group, out List<WFCrewObjective> items)
+    {
+        if (_queues.TryGetValue((grid, group), out var state))
+        {
+            items = state.Items.ToList();
+            return true;
+        }
+
+        items = new List<WFCrewObjective>();
+        return false;
+    }
+
     /// <summary>Pauses, resumes or skips the current task without changing later tasks.</summary>
     public void Control(EntityUid grid, string group, WFCrewSetupAction action)
     {

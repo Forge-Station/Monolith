@@ -230,7 +230,7 @@ public sealed class GenitalConsentGateTest
         // The mind moves to a ghost: ConsentSystem clears the body's toggles.
         await server.WaitAssertion(() =>
         {
-            var ghost = entMan.SpawnEntity(GameTicker.ObserverPrototypeName, entMan.GetComponent<TransformComponent>(body).Coordinates);
+            var ghost = entMan.SpawnEntity(ServerGameTicker.ObserverPrototypeName, entMan.GetComponent<TransformComponent>(body).Coordinates);
             mindSys.TransferTo(player.Mind, ghost);
             Assert.Multiple(() =>
             {
@@ -443,7 +443,7 @@ public sealed class GenitalConsentGateTest
         EntityUid ghost = default;
         await server.WaitPost(() =>
         {
-            ghost = sEntMan.SpawnEntity(GameTicker.ObserverPrototypeName, player.Map.GridCoords);
+            ghost = sEntMan.SpawnEntity(ServerGameTicker.ObserverPrototypeName, player.Map.GridCoords);
             sEntMan.System<SharedMindSystem>().Visit(player.Mind, ghost);
         });
         await pair.RunTicksSync(5);

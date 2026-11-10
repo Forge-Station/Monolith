@@ -31,7 +31,7 @@
         - MachineMask
         layer:
         - MachineLayer
-  - type: Autodoc
+  - type: WolfmedAutodoc
     tools:
     - Scalpel
     - Retractor
@@ -128,10 +128,10 @@
           - Bloodpack
   - type: UserInterface
     interfaces:
-      enum.AutodocUiKey.Key:
-        type: AutodocBoundUserInterface
+      enum.WolfmedAutodocUiKey.Key:
+        type: WolfmedAutodocBoundUserInterface
   - type: ActivatableUI
-    key: enum.AutodocUiKey.Key
+    key: enum.WolfmedAutodocUiKey.Key
     requiresComplex: false
   - type: ActivatableUIRequiresPower
   - type: Machine

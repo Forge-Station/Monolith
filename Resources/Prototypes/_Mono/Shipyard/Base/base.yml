@@ -19,3 +19,12 @@
   addComponents:
   - type: IFF
     flags: [IsPlayerShuttle, HideLabel]
+
+# Ships that should not broadcast a player IFF: ADS hulls and a few escorts.
+- type: vessel
+  id: BaseVesselIFFDisabled
+  abstract: true
+  parent: BaseVessel
+  addComponents:
+  - type: IFF
+    flags: None

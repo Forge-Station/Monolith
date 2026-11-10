@@ -9,7 +9,8 @@
     gender: Female
     appearance:
       hair: HumanHairBraid
-      hairColor: "#3B2A1E"
+      hairColor:
+        - "#3B2A1E"
       facialHair: FacialHairShaved
       facialHairColor: "#3B2A1E"
       eyeColor: "#4B3B2C"

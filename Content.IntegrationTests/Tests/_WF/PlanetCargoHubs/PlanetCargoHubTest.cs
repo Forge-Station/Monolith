@@ -27,7 +27,7 @@ using Content.Shared._WF.Planets;
 using Content.Server.Cargo.Components;
 using Content.Shared.Cargo.Events;
 using Content.Shared.CCVar;
-using Content.Server.GameTicking.Presets;
+using Content.Shared.GameTicking.Prototypes;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Stacks;
@@ -197,8 +197,8 @@ public sealed class PlanetCargoHubTest
         await server.WaitAssertion(() =>
         {
             // The space depots only spawn under a preset; a pooled server between rounds may have none.
-            var ticker = server.System<GameTicker>();
-            var preset = typeof(GameTicker).GetProperty(nameof(GameTicker.CurrentPreset))!;
+            var ticker = server.System<ServerGameTicker>();
+            var preset = typeof(ServerGameTicker).GetProperty(nameof(ServerGameTicker.CurrentPreset))!;
             var oldPreset = ticker.CurrentPreset;
             preset.SetValue(ticker, server.ProtoMan.Index<GamePresetPrototype>("NFAdventure"));
             var depotProtos = server.ProtoMan.EnumeratePrototypes<PointOfInterestPrototype>().Where(poi => poi.SpawnGroup == "CargoDepot").ToList();

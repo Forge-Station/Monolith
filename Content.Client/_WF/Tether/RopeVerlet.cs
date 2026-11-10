@@ -106,6 +106,15 @@ public static class RopeVerlet
         }
     }
 
+    /// <summary>
+    /// How far along a rope one of its running sparks is, in metres from the first end.
+    /// </summary>
+    public static float SparkDistance(float time, int index, float speed, float spacing, float offset)
+    {
+        var phase = time * speed / spacing + offset;
+        return (phase - MathF.Floor(phase) + index) * spacing;
+    }
+
     /// <summary>True when either pinned end moved far enough that the chain must be laid out afresh.</summary>
     public static bool NeedsReseed(Vector2 previousEndA, Vector2 previousEndB, Vector2 endA, Vector2 endB)
     {

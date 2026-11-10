@@ -49,6 +49,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private   SharedPhysicsSystem     _physics         = default!;
     [Dependency] private   StaminaSystem           _stamina         = default!;
     [Dependency] private   WolfmedOrganicSoundSystem _wolfmedSounds = default!; // WOLFGATE(Wolfmed): Bob's stab and melee hit sounds on flesh
+    [Dependency] private   IPrototypeManager        _protoManager    = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 

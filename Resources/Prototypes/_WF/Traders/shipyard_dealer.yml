@@ -9,7 +9,8 @@
     gender: Male
     appearance:
       hair: HumanHairBusiness
-      hairColor: "#2E2A26"
+      hairColor:
+        - "#2E2A26"
       facialHair: FacialHairShaved
       facialHairColor: "#2E2A26"
       eyeColor: "#4A6B7C"

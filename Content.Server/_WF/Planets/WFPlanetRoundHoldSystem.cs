@@ -17,7 +17,7 @@ public sealed class WFPlanetRoundHoldSystem : EntitySystem
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private WFPlanetNetworkSystem _networks = default!;
     [Dependency] private WFPlanetPreloadSystem _preload = default!;
 

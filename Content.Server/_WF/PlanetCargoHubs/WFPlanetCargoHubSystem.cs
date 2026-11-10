@@ -29,7 +29,7 @@ public sealed partial class WFPlanetCargoHubSystem : EntitySystem
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MetaDataSystem _meta = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private WFPlanetPoiSystem _pois = default!;
 
     /// <summary>Depots that may go planetside: A and B.</summary>

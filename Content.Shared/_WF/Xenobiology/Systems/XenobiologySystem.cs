@@ -8,6 +8,7 @@ using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -23,7 +24,7 @@ public sealed partial class XenobiologySystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SatiationSystem _hunger = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private MobGrowthSystem _growth = default!;
     [Dependency] private MobStateSystem _mob = default!;
@@ -47,10 +48,10 @@ public sealed partial class XenobiologySystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<SlimeComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<SlimeComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(HungerSystem) });
+        SubscribeLocalEvent<SlimeComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(SatiationSystem) });
         SubscribeLocalEvent<SlimeComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<SlimeComponent, InteractHandEvent>(OnInteractHand);
-        SubscribeLocalEvent<PendingSlimeSpawnComponent, MapInitEvent>(OnPendingMapInit, after: new[] { typeof(HungerSystem) });
+        SubscribeLocalEvent<PendingSlimeSpawnComponent, MapInitEvent>(OnPendingMapInit, after: new[] { typeof(SatiationSystem) });
     }
 
     private void OnInit(Entity<SlimeComponent> ent, ref ComponentInit args)
@@ -61,8 +62,8 @@ public sealed partial class XenobiologySystem : EntitySystem
     private void OnMapInit(Entity<SlimeComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.NextUpdateTime = _timing.CurTime + ent.Comp.UpdateInterval;
-        if (TryComp<HungerComponent>(ent, out var hunger))
-            _hunger.SetHunger(ent, StartingHunger, hunger);
+        if (TryComp<SatiationComponent>(ent, out var hunger))
+            _hunger.SetValue((ent.Owner, hunger), SatiationSystem.Hunger, StartingHunger);
     }
 
     private void OnExamined(Entity<SlimeComponent> ent, ref ExaminedEvent args)
@@ -111,15 +112,7 @@ public sealed partial class XenobiologySystem : EntitySystem
             return;
 
         if (SpawnSlime(ent, ent.Comp.BasePrototype, ent.Comp.Breed) is { } slime)
-        {
-            // Every spawned slime gets its own spread of stats; offspring inherit them.
-            var s = slime.Comp;
-            s.MutationChance *= _random.NextFloat(0.5f, 1.5f);
-            s.MaxOffspring += _random.Next(-1, 2);
-            s.ExtractsProduced += _random.Next(0, 2);
-            s.MitosisHunger *= _random.NextFloat(0.75f, 1.2f);
-            Dirty(slime);
-        }
+            RandomizeStats(slime);
 
         QueueDel(ent);
     }
@@ -139,7 +132,7 @@ public sealed partial class XenobiologySystem : EntitySystem
 
         var now = _timing.CurTime;
         _splitting.Clear();
-        var query = EntityQueryEnumerator<SlimeComponent, MobGrowthComponent, HungerComponent>();
+        var query = EntityQueryEnumerator<SlimeComponent, MobGrowthComponent, SatiationComponent>();
         while (query.MoveNext(out var uid, out var slime, out var growth, out var hunger))
         {
             if (now < slime.NextUpdateTime)
@@ -149,7 +142,7 @@ public sealed partial class XenobiologySystem : EntitySystem
             if (_mob.IsDead(uid) || growth.IsFirstStage)
                 continue;
 
-            var value = _hunger.GetHunger(hunger);
+            var value = _hunger.GetValueOrNull((uid, hunger), SatiationSystem.Hunger) ?? 0f;
             if (value > slime.MitosisHunger - slime.JitterDifference)
                 _jitter.DoJitter(uid, TimeSpan.FromSeconds(1), true);
 
@@ -200,6 +193,41 @@ public sealed partial class XenobiologySystem : EntitySystem
             return null;
 
         var uid = SpawnNextToOrDrop(proto, parent, null, breed.Components);
+        if (!TryComp<SlimeComponent>(uid, out var slime))
+            return null;
+
+        if (slime.ShouldHaveShader && slime.Shader != null)
+            _appearance.SetData(uid, XenoSlimeVisuals.Shader, slime.Shader);
+        _appearance.SetData(uid, XenoSlimeVisuals.Color, slime.SlimeColor);
+        _meta.SetEntityName(uid, breed.BreedName);
+
+        if (TryComp<MobGrowthComponent>(uid, out var growth))
+        {
+            growth.BaseEntityName = breed.BreedName;
+            _growth.UpdateAppearance((uid, growth));
+        }
+
+        return (uid, slime);
+    }
+
+    /// <summary>Gives a newly spawned slime its own spread of stats; offspring inherit them.</summary>
+    public void RandomizeStats(Entity<SlimeComponent> slime)
+    {
+        var s = slime.Comp;
+        s.MutationChance *= _random.NextFloat(0.5f, 1.5f);
+        s.MaxOffspring += _random.Next(-1, 2);
+        s.ExtractsProduced += _random.Next(0, 2);
+        s.MitosisHunger *= _random.NextFloat(0.75f, 1.2f);
+        Dirty(slime);
+    }
+
+    /// <summary>Spawns <paramref name="proto"/> at <paramref name="coordinates"/> as a slime of <paramref name="breedId"/>.</summary>
+    public Entity<SlimeComponent>? SpawnSlimeAt(EntityCoordinates coordinates, EntProtoId proto, ProtoId<BreedPrototype> breedId)
+    {
+        if (!ProtoMan.TryIndex(breedId, out var breed))
+            return null;
+
+        var uid = SpawnAtPosition(proto, coordinates, breed.Components);
         if (!TryComp<SlimeComponent>(uid, out var slime))
             return null;
 

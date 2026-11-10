@@ -20,7 +20,7 @@ public sealed partial class WFSectorTerritorySystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private WFEncounterSchedulerSystem _scheduler = default!;
     [Dependency] private WFSectorActivitySystem _activity = default!;
 

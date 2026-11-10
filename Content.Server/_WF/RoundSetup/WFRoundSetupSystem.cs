@@ -20,7 +20,7 @@ public sealed partial class WFRoundSetupSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _players = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private UserDbDataManager _userDb = default!;
     [Dependency] private IServerPreferencesManager _preferences = default!;
     [Dependency] private WFCrashScenarioSystem _crash = default!;

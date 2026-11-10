@@ -25,6 +25,32 @@ public sealed partial class TraderShopComponent : Component
     [DataField(required: true)]
     public List<EntProtoId> Vendors = new();
 
+    /// <summary>Multiplies every price. Below one is a discount.</summary>
+    [DataField]
+    public float PriceMultiplier = 1f;
+
+    /// <summary>How many items a trader picks at random. Zero keeps the full mirrored stock.</summary>
+    [DataField]
+    public int RandomStock;
+
+    [DataField]
+    public int StockMin = 1;
+
+    [DataField]
+    public int StockMax = 4;
+
+    [ViewVariables]
+    public Dictionary<string, int>? Limited;
+
+    [DataField]
+    public int LootItems = 4;
+
+    [DataField]
+    public EntProtoId LootCrate = "CrateGenericSteel";
+
+    [ViewVariables]
+    public bool LootDropped;
+
     /// <summary>
     /// Carton an order is packed into when it runs to more than one item.
     /// </summary>

@@ -188,4 +188,33 @@ public sealed class WFShipAccessSystem : EntitySystem
         card = default;
         return false;
     }
+
+    /// <summary>The ID card in an item the user holds in hand, directly or in a PDA.</summary>
+    public bool TryGetHeldCard(EntityUid user, EntityUid item, out EntityUid card)
+    {
+        if (_hands.IsHolding(user, item) && _idCard.TryGetIdCard(item, out var idCard))
+        {
+            card = idCard.Owner;
+            return true;
+        }
+
+        card = default;
+        return false;
+    }
+
+    /// <summary>The name printed on a card, else the card's own name.</summary>
+    public string CardHolderName(EntityUid card)
+    {
+        return TryComp<IdCardComponent>(card, out var idCard) && !string.IsNullOrEmpty(idCard.FullName) ? idCard.FullName : Name(card);
+    }
+
+    /// <summary>Cards in the person's hands, including a card sitting inside a held PDA.</summary>
+    public IEnumerable<(EntityUid Item, EntityUid Card)> HeldCards(EntityUid user)
+    {
+        foreach (var item in _hands.EnumerateHeld(user))
+        {
+            if (_idCard.TryGetIdCard(item, out var idCard))
+                yield return (item, idCard.Owner);
+        }
+    }
 }

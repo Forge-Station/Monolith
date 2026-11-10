@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Client._WF.Stylesheets;
 using Content.Client._WF.UserInterface.Controls;
 using Content.Shared.Humanoid.Markings;
+using Content.Shared.Humanoid.Prototypes;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.Utility;
@@ -125,12 +126,12 @@ public sealed class WolfgateSlotMarkingPicker : BoxContainer
         AddChild(_colors);
     }
 
-    public void UpdateData(List<Marking> markings, string species, int totalPoints)
+    public void UpdateData(List<Marking> markings, string species, int totalPoints, IReadOnlyDictionary<string, MarkingPrototype>? styles = null)
     {
         _markings = markings;
         _species = species;
         _totalPoints = totalPoints;
-        _prototypes = _markingManager.MarkingsByCategoryAndSpecies(Category, _species);
+        _prototypes = styles ?? _markingManager.MarkingsByCategoryAndSpecies(Category, _species);
 
         Visible = _prototypes.Count != 0;
         if (!Visible)

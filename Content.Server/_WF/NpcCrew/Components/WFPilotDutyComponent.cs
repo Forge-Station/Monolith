@@ -36,6 +36,10 @@ public sealed partial class WFPilotDutyComponent : Component
     [DataField]
     public bool ReactToAttacks = true;
 
+    /// <summary>Runs from attacking ships instead of circling them.</summary>
+    [DataField]
+    public bool FleeAttackers;
+
     /// <summary>Hold: turns the hull in place to put its guns on attackers or zone intruders; never chases.</summary>
     [DataField]
     public bool FaceThreats;

@@ -35,6 +35,10 @@ public sealed partial class CEZPhysicsComponent : Component
     [DataField, AutoNetworkedField]
     public float LaunchCountdown;
 
+    /// <summary>True while this grid's footprint is over solid terrain.</summary>
+    [DataField, AutoNetworkedField]
+    public bool GroundContact;
+
     /// Optimization Caches
     /// <summary>
     /// Cached value of the current z-level map height

@@ -33,7 +33,7 @@ namespace Content.Server._WF.PlanetPois;
 public sealed partial class WFPlanetPoiSystem
 {
     [Dependency] private IComponentFactory _factory = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
 
     /// <summary>What a level's map entity keeps when it is loaded as a plain grid; the rest is the map's own.</summary>

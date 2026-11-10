@@ -368,7 +368,7 @@ public sealed partial class WFEncounterBountySystem : EntitySystem
     }
 
     /// <summary>Whether a helper has an account to be paid into: their body's, or as a ghost their character's.</summary>
-    private bool Payable(ICommonSession session)
+    public bool Payable(ICommonSession session)
     {
         if (session.AttachedEntity is { } mob && !HasComp<GhostComponent>(mob))
             return HasComp<BankAccountComponent>(mob);
@@ -376,7 +376,7 @@ public sealed partial class WFEncounterBountySystem : EntitySystem
         return _prefs.TryGetCachedPreferences(session.UserId, out var prefs) && prefs.SelectedCharacter is HumanoidCharacterProfile;
     }
 
-    private bool Deposit(ICommonSession session, int amount)
+    public bool Deposit(ICommonSession session, int amount)
     {
         return DepositAll(session, amount);
     }

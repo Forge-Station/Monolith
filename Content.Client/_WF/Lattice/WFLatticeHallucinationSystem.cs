@@ -28,7 +28,7 @@ public sealed partial class WFLatticeHallucinationSystem : EntitySystem
     private const float VanishRange = 3f;
 
     private readonly List<(EntityUid Figure, TimeSpan Ends, bool Vanishes)> _figures = new();
-    private WFDriftPulseOverlay _pulse = default!;
+    private WFDriftPulseOverlay? _pulse;
 
     /// <summary>Radar contacts that aren't there: where, until when, and a seed for their garbled label.</summary>
     public readonly List<(MapCoordinates Position, TimeSpan Ends, int Seed)> Blips = new();
@@ -41,7 +41,11 @@ public sealed partial class WFLatticeHallucinationSystem : EntitySystem
         _overlays.AddOverlay(new WFDriftOverlay());
         _pulse = new WFDriftPulseOverlay();
         _overlays.AddOverlay(_pulse);
-        Subs.CVar(_config, CCVars.ReducedMotion, still => _pulse.Still = still, true);
+        Subs.CVar(_config, CCVars.ReducedMotion, still =>
+        {
+            if (_pulse != null)
+                _pulse.Still = still;
+        }, true);
     }
 
     public override void Shutdown()
@@ -49,7 +53,8 @@ public sealed partial class WFLatticeHallucinationSystem : EntitySystem
         base.Shutdown();
 
         _overlays.RemoveOverlay<WFDriftOverlay>();
-        _overlays.RemoveOverlay(_pulse);
+        if (_pulse != null)
+            _overlays.RemoveOverlay(_pulse);
         Clear();
     }
 
@@ -88,7 +93,7 @@ public sealed partial class WFLatticeHallucinationSystem : EntitySystem
         switch (ev.Kind)
         {
             case WFLatticeHallucinationKind.Pulse:
-                _pulse.Start(ev.Seconds, ev.Seed);
+                _pulse?.Start(ev.Seconds, ev.Seed);
                 break;
             case WFLatticeHallucinationKind.Blip:
                 Blips.Add((_transform.ToMapCoordinates(coordinates), ends, ev.Seed));

@@ -45,4 +45,8 @@ public sealed partial class GamePresetPrototype : IPrototype
     /// </summary>
     [DataField]
     public float Weight = 1f;
+
+    /// <summary>Whether the round balances TSF and PDV crew counts.</summary>
+    [DataField]
+    public bool AutobalancerEnabled = false;
 }

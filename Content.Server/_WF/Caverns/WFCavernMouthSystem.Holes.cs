@@ -501,7 +501,7 @@ public sealed partial class WFCavernMouthSystem
     private bool UnderGrid(MapId mapId, Vector2i index)
     {
         var grids = new List<Entity<MapGridComponent>>();
-        _mapManager.FindGridsIntersecting(mapId, TileBox(index), ref grids, approx: true, includeMap: false);
+        _map.FindGridsIntersecting(mapId, TileBox(index), ref grids, approx: true, includeMap: false);
         return grids.Count > 0;
     }
 }

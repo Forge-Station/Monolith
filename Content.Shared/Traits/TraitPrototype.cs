@@ -68,6 +68,10 @@ public sealed partial class TraitPrototype : IPrototype
         [DataField]
         public HashSet<ProtoId<TraitPrototype>> MutuallyExclusiveTraits { get; private set; } = new();
 
+        /// <summary>Stays visible and greyed out when another selected trait excludes it.</summary>
+        [DataField]
+        public bool GreyOutWhenExcluded { get; private set; }
+
         /// <summary>
         ///     List of species that can't have this trait.
         /// </summary>

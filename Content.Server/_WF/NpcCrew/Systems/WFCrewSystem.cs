@@ -6,7 +6,7 @@ using Content.Shared.Damage;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Inventory;
-using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Roles;
 using Content.Server.NPC.Systems;
 using Content.Server.Medical.SuitSensors;

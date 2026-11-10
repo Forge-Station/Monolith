@@ -158,7 +158,7 @@ namespace Content.Client.Examine
 
             OpenTooltip(player.Value, entity, ev.CenterAtCursor, ev.OpenAtOldTooltip, ev.KnowTarget);
             UpdateTooltipInfo(player.Value, entity, ev.Message, ev.Verbs);
-            RaiseServerInfoShown(entity); // WOLFGATE(Headshot): lets the headshot join the tooltip
+            RaiseServerInfoShown(entity, ev.Message, ev.KnowTarget); // WOLFGATE(Headshot): lets the headshot join the tooltip
         }
 
         public override void SendExamineTooltip(EntityUid player, EntityUid target, FormattedMessage message, bool getVerbs, bool centerAtCursor)

@@ -20,7 +20,7 @@ public sealed partial class AutodocSystem
         SubscribeLocalEvent<AutodocComponent, AutodocPryDoAfterEvent>(OnPried);
         SubscribeLocalEvent<AutodocComponent, InteractHandEvent>(OnInteractHand);
 
-        Subs.BuiEvents<AutodocComponent>(AutodocUiKey.Key, subs =>
+        Subs.BuiEvents<AutodocComponent>(WolfmedAutodocUiKey.Key, subs =>
         {
             subs.Event<BoundUIOpenedEvent>(OnUiOpened);
             subs.Event<AutodocQueueAddMessage>(OnQueueAdd);
@@ -223,7 +223,7 @@ public sealed partial class AutodocSystem
     /// <summary>Builds and sends the window state, if the pod has a UI.</summary>
     public void UpdateUi(Entity<AutodocComponent> ent)
     {
-        if (!_ui.HasUi(ent.Owner, AutodocUiKey.Key))
+        if (!_ui.HasUi(ent.Owner, WolfmedAutodocUiKey.Key))
             return;
 
         var occupant = GetOccupant(ent);
@@ -277,7 +277,7 @@ public sealed partial class AutodocSystem
             state.Queue.Add(new AutodocQueueEntry(queued.Surgery, queued.Part, lines));
         }
 
-        _ui.SetUiState(ent.Owner, AutodocUiKey.Key, state);
+        _ui.SetUiState(ent.Owner, WolfmedAutodocUiKey.Key, state);
     }
 
     /// <summary>

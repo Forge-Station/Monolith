@@ -1,0 +1,6 @@
+# DEFCON alarm and level callouts from the White Dream SS13 server, edited for Wolfgate. Each DEFCON change plays the
+# alarm, then the level's callout.
+- files: ["defcon_alarm.ogg", "defcon_1.ogg", "defcon_2.ogg", "defcon_3.ogg", "defcon_4.ogg", "defcon_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from the White Dream SS13 server, edited for Wolfgate."
+  source: "https://github.com/VanguardControl/Wolfgate"

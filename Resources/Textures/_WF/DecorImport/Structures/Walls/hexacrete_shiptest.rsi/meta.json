@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hexacrete-0"
+    },
+    {
+      "name": "hexacrete-1"
+    },
+    {
+      "name": "hexacrete-2"
+    },
+    {
+      "name": "hexacrete-3"
+    },
+    {
+      "name": "hexacrete-4"
+    },
+    {
+      "name": "hexacrete-5"
+    },
+    {
+      "name": "hexacrete-6"
+    },
+    {
+      "name": "hexacrete-7"
+    },
+    {
+      "name": "hexacrete-8"
+    },
+    {
+      "name": "hexacrete-9"
+    },
+    {
+      "name": "hexacrete-10"
+    },
+    {
+      "name": "hexacrete-11"
+    },
+    {
+      "name": "hexacrete-12"
+    },
+    {
+      "name": "hexacrete-13"
+    },
+    {
+      "name": "hexacrete-14"
+    },
+    {
+      "name": "hexacrete-15"
+    },
+    {
+      "name": "hexacrete-21"
+    },
+    {
+      "name": "hexacrete-23"
+    },
+    {
+      "name": "hexacrete-29"
+    },
+    {
+      "name": "hexacrete-31"
+    },
+    {
+      "name": "hexacrete-38"
+    },
+    {
+      "name": "hexacrete-39"
+    },
+    {
+      "name": "hexacrete-46"
+    },
+    {
+      "name": "hexacrete-47"
+    },
+    {
+      "name": "hexacrete-55"
+    },
+    {
+      "name": "hexacrete-63"
+    },
+    {
+      "name": "hexacrete-74"
+    },
+    {
+      "name": "hexacrete-75"
+    },
+    {
+      "name": "hexacrete-78"
+    },
+    {
+      "name": "hexacrete-79"
+    },
+    {
+      "name": "hexacrete-95"
+    },
+    {
+      "name": "hexacrete-110"
+    },
+    {
+      "name": "hexacrete-111"
+    },
+    {
+      "name": "hexacrete-127"
+    },
+    {
+      "name": "hexacrete-137"
+    },
+    {
+      "name": "hexacrete-139"
+    },
+    {
+      "name": "hexacrete-141"
+    },
+    {
+      "name": "hexacrete-143"
+    },
+    {
+      "name": "hexacrete-157"
+    },
+    {
+      "name": "hexacrete-159"
+    },
+    {
+      "name": "hexacrete-175"
+    },
+    {
+      "name": "hexacrete-191"
+    },
+    {
+      "name": "hexacrete-203"
+    },
+    {
+      "name": "hexacrete-207"
+    },
+    {
+      "name": "hexacrete-223"
+    },
+    {
+      "name": "hexacrete-239"
+    },
+    {
+      "name": "hexacrete-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

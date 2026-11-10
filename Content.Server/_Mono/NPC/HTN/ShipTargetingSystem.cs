@@ -91,7 +91,7 @@ public sealed partial class ShipTargetingSystem : EntitySystem
         }
     }
 
-    private void FireWeapons(EntityUid shipUid, List<EntityUid> cannons, MapCoordinates destMapPos, Vector2 ourVel, Vector2 otherVel)
+    public void FireWeapons(EntityUid shipUid, List<EntityUid> cannons, MapCoordinates destMapPos, Vector2 ourVel, Vector2 otherVel, EntityUid? user = null)
     {
         var shipXform = Transform(shipUid);
         if (!_physQuery.TryComp(shipUid, out var shipBody))
@@ -168,7 +168,7 @@ public sealed partial class ShipTargetingSystem : EntitySystem
 
             var targetMapPos = destMapPos.Offset(leadBy * hitTime);
 
-            _cannon.AttemptFire(uid, uid, _transform.ToCoordinates(targetMapPos), noServer: true);
+            _cannon.AttemptFire(uid, user ?? uid, _transform.ToCoordinates(targetMapPos), noServer: true);
         }
     }
 

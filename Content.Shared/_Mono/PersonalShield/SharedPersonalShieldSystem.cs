@@ -71,6 +71,9 @@ public sealed partial class SharedPersonalShieldSystem : EntitySystem
 
     private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
     {
+        var noticed = new ProjectileHitNoticedEvent();
+        RaiseLocalEvent(ent.Owner, ref noticed);
+
         if (!_net.IsClient || !_timing.IsFirstTimePredicted ||
             args.Shooter is not { } shooter || !HasComp<ActorComponent>(shooter) ||
             !args.Damage.AnyPositive())

@@ -35,7 +35,7 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private SharedMapSystem _maps = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private WFEncounterSystem _encounters = default!;
     [Dependency] private MobStateSystem _mobs = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

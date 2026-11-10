@@ -39,6 +39,22 @@ public sealed partial class WFDriftComponent : Component
     /// <summary>What last put Drift in their head.</summary>
     [DataField, AutoNetworkedField]
     public WFDriftFlavour Flavour;
+
+    /// <summary>Drift this person feels from where they are, after charm, grounding, sleep and company. Server only.</summary>
+    [DataField]
+    public float Felt;
+
+    /// <summary><see cref="Felt"/> in steps of <see cref="LevelStep"/>.</summary>
+    [DataField, AutoNetworkedField]
+    public int FeltLevel;
+
+    /// <summary>When <see cref="Felt"/> was last worked out. Server only.</summary>
+    [DataField]
+    public TimeSpan FeltAt;
+
+    /// <summary>Drift soaked into a ship's hull. Drift never falls below it until a drydock cleans it.</summary>
+    [DataField]
+    public float Residue;
 }
 
 /// <summary>Where a person's Drift came from, for how it feels.</summary>

@@ -16,7 +16,7 @@ public sealed class WFTradeCrateMarketSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private WFTradeMarketSystem _market = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
 
     /// <summary>Crates priced this tick and their place in line at their grid and good.</summary>
     private readonly Dictionary<EntityUid, int> _priced = new();

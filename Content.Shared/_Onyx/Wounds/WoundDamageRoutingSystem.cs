@@ -42,6 +42,9 @@ public sealed partial class WoundDamageRoutingSystem : EntitySystem
     [Dependency] private IPrototypeManager _prototypes = default!;
 
     private readonly HashSet<EntityUid> _routing = new();
+
+    /// <summary>Whether damage on this body is already being routed, so crew scaling skips the inner pass.</summary>
+    public bool IsRouting(EntityUid body) => _routing.Contains(body);
     private readonly Dictionary<EntityUid, EntityUid> _requestedParts = new();
     private readonly HashSet<EntityUid> _applied = new();
     private readonly HashSet<EntityUid> _skipWoundHealing = new();

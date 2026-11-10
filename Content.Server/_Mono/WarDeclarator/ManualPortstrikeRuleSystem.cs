@@ -14,7 +14,7 @@ namespace Content.Server._Mono.WarDeclarator;
 public sealed partial class ManualPortstrikeRuleSystem : GameRuleSystem<ManualPortstrikeRuleComponent>
 {
     [Dependency] private CompanyManager _companyManager = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private RadioSystem _radio = default!;

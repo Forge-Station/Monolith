@@ -32,7 +32,7 @@ public sealed class WFAdsNodeTest : WFAdsTestBase
         await Server.WaitAssertion(() =>
         {
             var config = Server.ResolveDependency<IConfigurationManager>();
-            var ticker = Server.System<GameTicker>();
+            var ticker = Server.System<ServerGameTicker>();
             var ads = Server.System<WFAdsCampaignSystem>();
             Assert.That(ads.Campaign?.ID, Is.EqualTo(AdsCampaign));
             Assert.That(ads.Running, Is.True);

@@ -429,3 +429,24 @@
       groups:
         Brute: -1.5
         Burn: -2
+
+- type: trait
+  id: Heretic
+  name: trait-heretic-name
+  description: trait-heretic-desc
+  category: Physical
+  cost: 0
+  newbieBlocked: true
+  blacklist:
+    components:
+    - BorgChassis
+  components:
+  - type: AddComponentsAfterTime
+    excludedCompanies:
+    - PDV
+    addComponentsOnSelection:
+    - type: Contraband
+      hideValues: true
+      turnInValues:
+        Doubloon: 250
+    - type: Heretic

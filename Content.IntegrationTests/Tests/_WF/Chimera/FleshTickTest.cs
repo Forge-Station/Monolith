@@ -107,7 +107,7 @@ public sealed class FleshTickTest
         {
             var maps = server.System<SharedMapSystem>();
             map = maps.CreateMap(out var mapId);
-            var grid = server.ResolveDependency<IMapManager>().CreateGridEntity(mapId);
+            var grid = server.System<SharedMapSystem>().CreateGridEntity(mapId);
             var floor = server.ResolveDependency<ITileDefinitionManager>()["FloorFlesh"];
             for (var x = -4; x <= 4; x++)
             for (var y = -4; y <= 4; y++)

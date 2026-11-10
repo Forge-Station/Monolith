@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._WF.Tether;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -16,6 +17,7 @@ namespace Content.Client._WF.Tether;
 public sealed class RopeVisualizerSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlays = default!;
+    [Dependency] private IResourceCache _resources = default!;
     [Dependency] private IPrototypeManager _protos = default!;
     [Dependency] private IEyeManager _eye = default!;
     [Dependency] private IGameTiming _timing = default!;

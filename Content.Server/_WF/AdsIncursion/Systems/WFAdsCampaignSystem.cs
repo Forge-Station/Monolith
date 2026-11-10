@@ -49,7 +49,7 @@ public sealed partial class WFAdsCampaignSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private MetaDataSystem _meta = default!;
@@ -448,7 +448,7 @@ public sealed partial class WFAdsCampaignSystem : EntitySystem
             StrongholdResolved(args.Encounter, args.Resolution);
     }
 
-    private void OnRoundEndText(RoundEndTextAppendEvent args)
+    private void OnRoundEndText(ref RoundEndTextAppendEvent args)
     {
         if (State() is not { Founded: > 0 } state)
             return;

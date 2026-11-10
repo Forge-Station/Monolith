@@ -87,12 +87,20 @@
   - type: Uncloneable
   - type: HumanoidAppearance
     species: Synth
-  - type: Hunger
-    baseDecayRate: 0.0085
-    starvingSlowdownModifier: 0.75
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: SynthHunger
+      Thirst:
+        prototype: NormalSatiationThirst
+  - type: SatiationSpeedModifier
+    satiations:
+      Hunger:
+        Starving: 0.75
+      Thirst:
+        Parched: 0.75
   - type: Puller
     needsHands: false
-  - type: Thirst
   - type: Body
     prototype: Synth
     requiredLegs: 2

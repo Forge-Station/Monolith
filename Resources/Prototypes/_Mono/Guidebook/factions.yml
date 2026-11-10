@@ -40,18 +40,6 @@
   # WOLFGATE END
 
 - type: guideEntry
-  id: Smuggling
-  name: Smuggling
-  text: "/ServerInfo/_NF/Guidebook/NFSD/Smuggling.xml"
-  priority: 4
-
-- type: guideEntry
-  id: Defusal
-  name: Defusal
-  text: "/ServerInfo/Guidebook/Security/Defusal.xml"
-  priority: 5
-
-- type: guideEntry
   id: TSFMC_SOP
   name: S.O.P.
   text: "/ServerInfo/_Mono/Guidebook/Factions/TSFMC_SOP.xml"

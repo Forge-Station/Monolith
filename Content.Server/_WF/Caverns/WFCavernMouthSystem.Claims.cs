@@ -539,7 +539,7 @@ public sealed partial class WFCavernMouthSystem
             return Block.Waiting;
 
         var grids = new List<Entity<MapGridComponent>>();
-        _mapManager.FindGridsIntersecting(mapId, footprint.Enlarged(GridClearance), ref grids,
+        _map.FindGridsIntersecting(mapId, footprint.Enlarged(GridClearance), ref grids,
             approx: true, includeMap: false);
 
         return grids.Count == 0 ? Block.None : Block.Waiting;

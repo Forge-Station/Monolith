@@ -104,7 +104,7 @@ public sealed class PodBloodTest : GameTest
     }
 
     private AutodocBuiState? Readout(EntityUid pod) =>
-        SEntMan.System<SharedUserInterfaceSystem>().TryGetUiState<AutodocBuiState>(pod, AutodocUiKey.Key, out var bui)
+        SEntMan.System<SharedUserInterfaceSystem>().TryGetUiState<AutodocBuiState>(pod, WolfmedAutodocUiKey.Key, out var bui)
             ? bui
             : null;
 

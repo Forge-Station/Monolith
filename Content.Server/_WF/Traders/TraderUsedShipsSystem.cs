@@ -28,7 +28,7 @@ public sealed partial class TraderUsedShipsSystem : EntitySystem
     [Dependency] private ShipyardDirectionSystem _direction = default!;
     [Dependency] private SharedIdCardSystem _idCard = default!;
     [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private ShipyardSystem _shipyard = default!;
     [Dependency] private TraderSystem _trader = default!;

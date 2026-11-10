@@ -153,7 +153,7 @@ public sealed class GenitalExamineTest
             var far = SpawnExaminer(entMan, farCoords);
             AssertNoAnatomy(Examine(examine, target, far), "A living examiner out of details range.");
 
-            var ghost = entMan.SpawnEntity(GameTicker.ObserverPrototypeName, farCoords);
+            var ghost = entMan.SpawnEntity(ServerGameTicker.ObserverPrototypeName, farCoords);
             AssertNoAnatomy(Examine(examine, target, ghost), "A ghost without adult content.");
 
             GrantConsent(entMan, ghost);

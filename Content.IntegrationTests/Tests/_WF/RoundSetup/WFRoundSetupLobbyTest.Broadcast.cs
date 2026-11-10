@@ -41,7 +41,7 @@ public sealed partial class WFRoundSetupLobbyTest
         var server = pair.Server;
         await server.WaitPost(() =>
         {
-            var ticker = server.System<GameTicker>();
+            var ticker = server.System<ServerGameTicker>();
             ticker.StartRound(force: true);
             ticker.JoinAsObserver(pair.Player!);
         });
@@ -53,7 +53,7 @@ public sealed partial class WFRoundSetupLobbyTest
         await pair.Client.WaitPost(() =>
             pair.Client.System<WFRoundSetupClientSystem>().Send(new WFRoundSetupRequest(WFRoundSetupAction.Watch)));
         Assert.That(await CountSnapshots(pair, 32), Is.Positive, "Renewing the lease resumes live snapshots.");
-        await server.WaitPost(() => server.System<GameTicker>().RestartRound());
+        await server.WaitPost(() => server.System<ServerGameTicker>().RestartRound());
         await pair.RunTicksSync(2);
         await pair.CleanReturnAsync();
     }

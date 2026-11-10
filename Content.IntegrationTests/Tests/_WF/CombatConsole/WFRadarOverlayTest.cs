@@ -31,12 +31,12 @@ public sealed class WFRadarOverlayTest
         await pair.Client.WaitAssertion(() =>
         {
             var em = pair.Client.EntMan;
-            var maps = pair.Client.ResolveDependency<IMapManager>();
+            var maps = pair.Client.System<SharedMapSystem>();
             var ui = pair.Client.ResolveDependency<IUserInterfaceManager>();
             var settings = pair.Client.ResolveDependency<IConfigurationManager>();
             var originalSkin = settings.GetCVar(WolfgateCVars.UiStyle);
-            var map = maps.CreateMap();
-            var grid = maps.CreateGrid(map);
+            maps.CreateMap(out var map);
+            var grid = maps.CreateGridEntity(map);
             var console = em.SpawnEntity(null, new EntityCoordinates(grid.Owner, new Vector2(2, 3)));
             var defaults = em.AddComponent<RadarConsoleComponent>(console);
 #pragma warning disable RA0002 // Configure the fixture's grid-following radar default.

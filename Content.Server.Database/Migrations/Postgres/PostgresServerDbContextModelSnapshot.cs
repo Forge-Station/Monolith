@@ -1062,11 +1062,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
 
-                    b.Property<string>("MessageSound")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("message_sound");
-
                     b.Property<bool>("MismatchedParts")
                         .HasColumnType("boolean")
                         .HasColumnName("mismatched_parts");
@@ -1195,11 +1190,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnName("profile_loadout_id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("GagsColors")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("gags_colors");
 
                     b.Property<string>("LoadoutName")
                         .IsRequired()
@@ -1790,366 +1780,6 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("whitelist", (string)null);
                 });
 
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompany", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("wolfgate_company_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("ArtLocked")
-                        .HasColumnType("boolean")
-                        .HasColumnName("art_locked");
-
-                    b.Property<long>("Balance")
-                        .HasColumnType("bigint")
-                        .HasColumnName("balance");
-
-                    b.Property<string>("Colour")
-                        .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("character varying(9)")
-                        .HasColumnName("colour");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<int>("Cut")
-                        .HasColumnType("integer")
-                        .HasColumnName("cut");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1024)
-                        .HasColumnType("character varying(1024)")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("Frozen")
-                        .HasColumnType("boolean")
-                        .HasColumnName("frozen");
-
-                    b.Property<int>("LaunchFee")
-                        .HasColumnType("integer")
-                        .HasColumnName("launch_fee");
-
-                    b.Property<byte[]>("Logo")
-                        .HasColumnType("bytea")
-                        .HasColumnName("logo");
-
-                    b.Property<int>("LogoVersion")
-                        .HasColumnType("integer")
-                        .HasColumnName("logo_version");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasColumnName("name");
-
-                    b.Property<int?>("OpenRankId")
-                        .HasColumnType("integer")
-                        .HasColumnName("open_rank_id");
-
-                    b.Property<byte[]>("OwnerIcon")
-                        .HasColumnType("bytea")
-                        .HasColumnName("owner_icon");
-
-                    b.Property<int>("OwnerIconVersion")
-                        .HasColumnType("integer")
-                        .HasColumnName("owner_icon_version");
-
-                    b.Property<string>("OwnerJob")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasColumnName("owner_job");
-
-                    b.Property<string>("OwnerLoadout")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("character varying(2048)")
-                        .HasColumnName("owner_loadout");
-
-                    b.Property<int>("OwnerProfileId")
-                        .HasColumnType("integer")
-                        .HasColumnName("owner_profile_id");
-
-                    b.Property<string>("OwnerTitle")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasColumnName("owner_title");
-
-                    b.Property<bool>("Private")
-                        .HasColumnType("boolean")
-                        .HasColumnName("private");
-
-                    b.Property<bool>("Recruiting")
-                        .HasColumnType("boolean")
-                        .HasColumnName("recruiting");
-
-                    b.Property<string>("Tag")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)")
-                        .HasColumnName("tag");
-
-                    b.HasKey("Id")
-                        .HasName("PK_wolfgate_company");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.HasIndex("Tag")
-                        .IsUnique();
-
-                    b.ToTable("wolfgate_company", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyApplication", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("wolfgate_company_application_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("integer")
-                        .HasColumnName("company_id");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
-                        .HasColumnName("message");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("integer")
-                        .HasColumnName("profile_id");
-
-                    b.Property<int?>("RankId")
-                        .HasColumnType("integer")
-                        .HasColumnName("rank_id");
-
-                    b.HasKey("Id")
-                        .HasName("PK_wolfgate_company_application");
-
-                    b.HasIndex("ProfileId")
-                        .HasDatabaseName("IX_wolfgate_company_application_profile_id");
-
-                    b.HasIndex("CompanyId", "ProfileId")
-                        .IsUnique();
-
-                    b.ToTable("wolfgate_company_application", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyLedger", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("wolfgate_company_ledger_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ActorName")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasColumnName("actor_name");
-
-                    b.Property<int?>("ActorProfileId")
-                        .HasColumnType("integer")
-                        .HasColumnName("actor_profile_id");
-
-                    b.Property<long>("Amount")
-                        .HasColumnType("bigint")
-                        .HasColumnName("amount");
-
-                    b.Property<long>("BalanceAfter")
-                        .HasColumnType("bigint")
-                        .HasColumnName("balance_after");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("integer")
-                        .HasColumnName("company_id");
-
-                    b.Property<int>("Kind")
-                        .HasColumnType("integer")
-                        .HasColumnName("kind");
-
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasColumnName("note");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("time");
-
-                    b.HasKey("Id")
-                        .HasName("PK_wolfgate_company_ledger");
-
-                    b.HasIndex("CompanyId", "Time");
-
-                    b.ToTable("wolfgate_company_ledger", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyLicence", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("wolfgate_company_licence_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("BoughtAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("bought_at");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("integer")
-                        .HasColumnName("company_id");
-
-                    b.Property<long>("PricePaid")
-                        .HasColumnType("bigint")
-                        .HasColumnName("price_paid");
-
-                    b.Property<string>("ShipName")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasColumnName("ship_name");
-
-                    b.Property<string>("Vessel")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasColumnName("vessel");
-
-                    b.HasKey("Id")
-                        .HasName("PK_wolfgate_company_licence");
-
-                    b.HasIndex("CompanyId")
-                        .HasDatabaseName("IX_wolfgate_company_licence_company_id");
-
-                    b.ToTable("wolfgate_company_licence", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyMember", b =>
-                {
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("integer")
-                        .HasColumnName("profile_id");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("integer")
-                        .HasColumnName("company_id");
-
-                    b.Property<DateTime>("JoinedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("joined_at");
-
-                    b.Property<int?>("RankId")
-                        .HasColumnType("integer")
-                        .HasColumnName("rank_id");
-
-                    b.Property<int>("UnpaidSeconds")
-                        .HasColumnType("integer")
-                        .HasColumnName("unpaid_seconds");
-
-                    b.Property<DateTime>("WithdrawDay")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("withdraw_day");
-
-                    b.Property<int>("WithdrawnToday")
-                        .HasColumnType("integer")
-                        .HasColumnName("withdrawn_today");
-
-                    b.HasKey("ProfileId")
-                        .HasName("PK_wolfgate_company_member");
-
-                    b.HasIndex("CompanyId")
-                        .HasDatabaseName("IX_wolfgate_company_member_company_id");
-
-                    b.ToTable("wolfgate_company_member", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyRank", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("wolfgate_company_rank_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BaseJob")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)")
-                        .HasColumnName("base_job");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("integer")
-                        .HasColumnName("company_id");
-
-                    b.Property<byte[]>("Icon")
-                        .HasColumnType("bytea")
-                        .HasColumnName("icon");
-
-                    b.Property<int>("IconVersion")
-                        .HasColumnType("integer")
-                        .HasColumnName("icon_version");
-
-                    b.Property<string>("Loadout")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("character varying(2048)")
-                        .HasColumnName("loadout");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("integer")
-                        .HasColumnName("order");
-
-                    b.Property<int>("Permissions")
-                        .HasColumnType("integer")
-                        .HasColumnName("permissions");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
-                        .HasColumnName("title");
-
-                    b.Property<int>("Wage")
-                        .HasColumnType("integer")
-                        .HasColumnName("wage");
-
-                    b.Property<int>("WithdrawCap")
-                        .HasColumnType("integer")
-                        .HasColumnName("withdraw_cap");
-
-                    b.HasKey("Id")
-                        .HasName("PK_wolfgate_company_rank");
-
-                    b.HasIndex("CompanyId")
-                        .HasDatabaseName("IX_wolfgate_company_rank_company_id");
-
-                    b.ToTable("wolfgate_company_rank", (string)null);
-                });
-
             modelBuilder.Entity("Content.Server.Database.WolfgateContractStanding", b =>
                 {
                     b.Property<int>("Id")
@@ -2401,6 +2031,54 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.HasIndex("PlayerUserId", "CreatedAt");
 
                     b.ToTable("wolfgate_feedback_report", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateGameScore", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("wolfgate_game_score_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Game")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("game");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("integer")
+                        .HasColumnName("level");
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("player_name");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("integer")
+                        .HasColumnName("score");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("time");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_game_score");
+
+                    b.HasIndex("Game");
+
+                    b.HasIndex("PlayerUserId", "Game", "Level")
+                        .IsUnique();
+
+                    b.ToTable("wolfgate_game_score", (string)null);
                 });
 
             modelBuilder.Entity("PlayerRound", b =>
@@ -3049,84 +2727,6 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Box");
                 });
 
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyApplication", b =>
-                {
-                    b.HasOne("Content.Server.Database.WolfgateCompany", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_wolfgate_company_application_wolfgate_company_company_id");
-
-                    b.HasOne("Content.Server.Database.Profile", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_wolfgate_company_application_profile_profile_id");
-
-                    b.Navigation("Company");
-
-                    b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyLedger", b =>
-                {
-                    b.HasOne("Content.Server.Database.WolfgateCompany", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_wolfgate_company_ledger_wolfgate_company_company_id");
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyLicence", b =>
-                {
-                    b.HasOne("Content.Server.Database.WolfgateCompany", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_wolfgate_company_licence_wolfgate_company_company_id");
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyMember", b =>
-                {
-                    b.HasOne("Content.Server.Database.WolfgateCompany", "Company")
-                        .WithMany("Members")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_wolfgate_company_member_wolfgate_company_company_id");
-
-                    b.HasOne("Content.Server.Database.Profile", "Profile")
-                        .WithOne()
-                        .HasForeignKey("Content.Server.Database.WolfgateCompanyMember", "ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_wolfgate_company_member_profile_profile_id");
-
-                    b.Navigation("Company");
-
-                    b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompanyRank", b =>
-                {
-                    b.HasOne("Content.Server.Database.WolfgateCompany", "Company")
-                        .WithMany("Ranks")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_wolfgate_company_rank_wolfgate_company_company_id");
-
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("Content.Server.Database.WolfgateCustomMarking", b =>
                 {
                     b.HasOne("Content.Server.Database.WolfgateCustomMarkingArt", "Art")
@@ -3285,13 +2885,6 @@ namespace Content.Server.Database.Migrations.Postgres
             modelBuilder.Entity("Content.Server.Database.WayfarerSafetyDepositBox", b =>
                 {
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.WolfgateCompany", b =>
-                {
-                    b.Navigation("Members");
-
-                    b.Navigation("Ranks");
                 });
 #pragma warning restore 612, 618
         }

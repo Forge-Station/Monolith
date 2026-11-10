@@ -1,7 +1,7 @@
 using Content.Server._Mono.ShipShields.Components;
 using Content.Server._NF.Power.Components;
 using Content.Server._WF.ShipPa;
-using Content.Server.DeviceNetwork.Systems;
+using Content.Shared.DeviceNetwork.Systems;
 using Content.Server.Pinpointer;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;

@@ -2,10 +2,6 @@
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    xmlns:vessel="clr-namespace:Content.Client._WF.Administration.UI.VesselSpawn"
-    xmlns:internet="clr-namespace:Content.Client._WF.Administration.UI.InternetSound"
-    xmlns:power="clr-namespace:Content.Client._WF.Administration.UI.GridPower"
-    xmlns:ert="clr-namespace:Content.Client._WF.Administration.UI.Ert"
     xmlns:crew="clr-namespace:Content.Client._WF.NpcCrew"
     xmlns:vehiclecrew="clr-namespace:Content.Client._WF.NpcVehicleCrew"
     xmlns:encounters="clr-namespace:Content.Client._WF.Encounters"
@@ -17,11 +13,7 @@
             <cc:UICommandButton Command="wf_crew" Text="{Loc wf-crew-setup-title}" WindowType="{x:Type crew:WFCrewSetupWindow}" />
             <cc:UICommandButton Command="wf_vehiclecrew" Text="{Loc wf-vehiclecrew-panel-title}" WindowType="{x:Type vehiclecrew:WFVehicleCrewPanel}" />
             <cc:UICommandButton Command="wf_encounter" Text="{Loc wf-encounter-admin-title}" WindowType="{x:Type encounters:WFEncounterWindow}" />
-            <cc:UICommandButton Command="spawnvessel" Text="{Loc wf-admin-tab-spawn-vessel}" WindowType="{x:Type vessel:VesselSpawnWindow}" />
-            <cc:UICommandButton Command="playinternetsound" Text="{Loc wf-admin-tab-internet-sound}" WindowType="{x:Type internet:InternetSoundAdminWindow}" />
             <cc:CommandButton Command="rpannounce" Text="{Loc wf-announce-button}" />
-            <cc:UICommandButton Command="gridpower" Text="{Loc wf-admin-tab-grid-power}" WindowType="{x:Type power:GridPowerWindow}" />
-            <cc:UICommandButton Command="ertbuilder" Text="{Loc wf-admin-tab-ert}" WindowType="{x:Type ert:ErtBuilderWindow}" />
             <cc:UICommandButton Command="planetcontrol" Text="{Loc wf-admin-tab-planet-control}" WindowType="{x:Type planets:PlanetControlWindow}" />
         </GridContainer>
     </BoxContainer>

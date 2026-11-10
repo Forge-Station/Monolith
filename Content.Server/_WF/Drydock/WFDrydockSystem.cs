@@ -1,35 +1,67 @@
 using System.Linq;
+using Content.Shared.Shuttles.Components;
 using System.Numerics;
+using Content.Shared.Shuttles.Components;
 using Content.Server._NF.Bank;
+using Content.Shared.Shuttles.Components;
 using Content.Server._WF.TradeGoods.Systems;
+using Content.Shared.Shuttles.Components;
 using Content.Server.Cargo.Systems;
+using Content.Shared.Shuttles.Components;
 using Content.Server.Destructible;
+using Content.Shared.Shuttles.Components;
 using Content.Server.Popups;
+using Content.Shared.Shuttles.Components;
 using Content.Server.Preferences.Managers;
+using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._Crescent.Hardpoints;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._Mono.ShipRepair.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._Mono.Ships.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._NF.Shipyard.Prototypes;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._NF.Bank.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._WF.Drydock;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._WF.ShipRepair;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Damage;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Materials;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Preferences;
+using Content.Shared.Shuttles.Components;
 using Robust.Server.GameObjects;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Audio.Systems;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.GameObjects;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Localization;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map.Components;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Maths;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Physics.Systems;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Player;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Timing;
+using Content.Shared.Shuttles.Components;
 
 namespace Content.Server._WF.Drydock;
 
@@ -590,7 +622,7 @@ public sealed partial class WFDrydockSystem : EntitySystem
             {
                 if (pay != null)
                 {
-                    AssignMaterials(pay, items, working);
+                    AssignMaterials(berthed, comp, pay, items, working);
                     state.RepairMaterials = SumBills(items);
                     state.RepairParts = SumParts(items);
                 }
@@ -719,7 +751,7 @@ public sealed partial class WFDrydockSystem : EntitySystem
         var pay = booked ? null : CompOrNull<WFDrydockMaterialPaymentComponent>(console);
         if (pay != null)
         {
-            AssignMaterials(pay, items, cranes);
+            AssignMaterials(ship, comp, pay, items, cranes);
 
             // A short repair does what the stock covers; a refit is all or nothing.
             if (upgrade == null && Affordable(items, Availability(cranes)) is { Count: > 0 } doable)

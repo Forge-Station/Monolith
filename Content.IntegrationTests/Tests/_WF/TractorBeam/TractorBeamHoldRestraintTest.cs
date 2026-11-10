@@ -22,7 +22,7 @@ public sealed class TractorBeamHoldRestraintTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -83,7 +83,7 @@ public sealed class TractorBeamHoldRestraintTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -158,7 +158,7 @@ public sealed class TractorBeamHoldRestraintTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -207,7 +207,7 @@ public sealed class TractorBeamHoldRestraintTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);

@@ -27,6 +27,10 @@ public sealed partial class LanguagePrototype : IPrototype
     [DataField("speech")]
     public SpeechOverrideInfo SpeechOverride = new();
 
+    /// <summary>Three-character chat prefix that selects this language, such as ^sol.</summary>
+    [DataField]
+    public string? ChatPrefix;
+
     #region utility
     /// <summary>
     ///     The in-world name of this language, localized.

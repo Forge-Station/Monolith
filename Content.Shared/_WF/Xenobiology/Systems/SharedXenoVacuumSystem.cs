@@ -12,6 +12,8 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -123,15 +125,15 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
     {
         if (args.Handled
             || !TryComp<UseDelayComponent>(ent, out var delay)
-            || _useDelay.IsDelayed((ent, delay), SuctionDelayId)
-            || _useDelay.IsDelayed((ent, delay), ReleaseDelayId))
+            || _useDelay.IsDelayed((ent.Owner, delay), SuctionDelayId)
+            || _useDelay.IsDelayed((ent.Owner, delay), ReleaseDelayId))
             return;
 
         if (args.CanReach && args.Target is { } target && HasComp<MobStateComponent>(target))
         {
             args.Handled = true;
             TryDoSuction(args.User, target, ent);
-            _useDelay.TryResetDelay((ent, delay), false, SuctionDelayId);
+            _useDelay.TryResetDelay((ent.Owner, delay), false, SuctionDelayId);
             return;
         }
 
@@ -149,7 +151,7 @@ public abstract partial class SharedXenoVacuumSystem : EntitySystem
             SetHTNEnabled(removed, true, 2f);
         }
 
-        _useDelay.TryResetDelay((ent, delay), false, ReleaseDelayId);
+        _useDelay.TryResetDelay((ent.Owner, delay), false, ReleaseDelayId);
         _audio.PlayPredicted(ent.Comp.ClearSound, ent, args.User, AudioParams.Default.WithVolume(-2f));
     }
 

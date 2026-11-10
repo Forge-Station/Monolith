@@ -4,12 +4,12 @@ using Robust.Client.UserInterface;
 namespace Content.Client._WF.Wolfmed.Autodoc;
 
 /// <summary>Opens the autodoc window and relays its buttons to the server as messages.</summary>
-public sealed class AutodocBoundUserInterface : BoundUserInterface
+public sealed class WolfmedAutodocBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private AutodocWindow? _window;
 
-    public AutodocBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public WolfmedAutodocBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
 

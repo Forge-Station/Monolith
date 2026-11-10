@@ -30,7 +30,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
 
     public void SetSummaryText(string value)
     {
-        Summary.Text = value;
+        Summary.SetMessage(FormattedMessage.FromUnformatted(value));
     }
 
     // Frontier: show bank balance on character selection.

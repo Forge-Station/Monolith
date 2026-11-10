@@ -9,7 +9,8 @@
     gender: Male
     appearance:
       hair: HumanHairBalding
-      hairColor: "#9C9990"
+      hairColor:
+        - "#9C9990"
       facialHair: HumanFacialHairFullbeard
       facialHairColor: "#9C9990"
       eyeColor: "#7C93A0"

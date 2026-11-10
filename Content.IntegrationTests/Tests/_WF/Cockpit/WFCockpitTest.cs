@@ -1586,7 +1586,7 @@ public sealed class WFCockpitTest : InteractionTest
                 MapSystem.SetTile(MapData.Grid, new Vector2i(x, 0), MapData.Tile.Tile);
             mount = SEntMan.SpawnEntity(null, new EntityCoordinates(MapData.Grid.Owner, weaponAt));
             ownWall = SEntMan.SpawnEntity("WFCockpitTestWall", new EntityCoordinates(MapData.Grid.Owner, new Vector2(3.5f, 0.5f)));
-            var foreign = MapMan.CreateGridEntity(MapId);
+            var foreign = MapSystem.CreateGridEntity(MapId);
             Transform.SetLocalPosition(foreign.Owner, new Vector2(0, 5));
             MapSystem.SetTile(foreign.Owner, foreign.Comp, Vector2i.Zero, MapData.Tile.Tile);
             foreignGrid = foreign.Owner;

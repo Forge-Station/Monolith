@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 using Content.Shared._WF.CCVar;
 using Robust.Shared.Timing;
 

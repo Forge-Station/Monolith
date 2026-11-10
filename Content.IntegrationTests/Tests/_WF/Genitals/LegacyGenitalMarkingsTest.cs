@@ -500,7 +500,7 @@ public sealed class LegacyGenitalMarkingsTest
 
     private static HumanoidCharacterAppearance Appearance(params Marking[] markings)
     {
-        return new HumanoidCharacterAppearance(HairStyles.DefaultHairStyle, Color.Black, HairStyles.DefaultFacialHairStyle,
+        return new HumanoidCharacterAppearance(HairStyles.DefaultHairStyle, new List<Color> { Color.Black }, HairStyles.DefaultFacialHairStyle,
             Color.Black, Color.Black, Skin, markings.ToList());
     }
 

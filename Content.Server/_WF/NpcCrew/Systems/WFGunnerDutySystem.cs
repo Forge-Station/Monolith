@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._Mono.FireControl;
 using Content.Server._Mono.NPC.HTN;
+using Content.Server._WF.NpcCrew;
 using Content.Server._WF.NpcCrew.Components;
 using Content.Server._WF.Cockpit;
 using Content.Server._WF.NpcCrew.HTN;
@@ -154,6 +155,16 @@ public sealed partial class WFGunnerDutySystem : EntitySystem
         duty.AtConsole = false;
         if (duty.Console is { } console && _occupants.TryGetValue(console, out var holder) && holder == mob)
             _occupants.Remove(console);
+    }
+
+    /// <summary>Drops the kept target choice of a crew's gunners so a changed security policy is acted on next tick.</summary>
+    public void Reselect(EntityUid grid, string group)
+    {
+        foreach (var uid in _selections.Keys.ToArray())
+        {
+            if (TryComp<WFCrewComponent>(uid, out var crew) && crew.Group == group && Transform(uid).GridUid == grid)
+                _selections.Remove(uid);
+        }
     }
 
     public override void Update(float frameTime)

@@ -15,19 +15,15 @@
     sprite: Structures/Walls/rock.rsi
     layers:
     - state: rock
-    - map: [ "enum.EdgeLayer.South" ]
-      state: rock_south
-    - map: [ "enum.EdgeLayer.East" ]
-      state: rock_east
-    - map: [ "enum.EdgeLayer.North" ]
-      state: rock_north
-    - map: [ "enum.EdgeLayer.West" ]
-      state: rock_west
   - type: Icon
     sprite: Structures/Walls/rock.rsi
     state: rock
   - type: IconSmooth
     key: rockwalls
     mode: NoSprite
-  - type: SmoothEdge
+    states:
+    - !type:EdgeSpriteSmoothing
+      mask:
+      - rockwalls
+      base: rock_
   - type: WFBiomeKeep

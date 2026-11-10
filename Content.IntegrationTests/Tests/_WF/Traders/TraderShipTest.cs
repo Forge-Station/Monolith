@@ -650,7 +650,7 @@ public sealed class TraderShipTest
             var deviceSys = entMan.System<DeviceNetworkSystem>();
             var connected = Descendants(entMan, bought).Count(uid =>
                 entMan.TryGetComponent<DeviceNetworkComponent>(uid, out var device)
-                && deviceSys.IsDeviceConnected(uid, device));
+                && deviceSys.IsDeviceConnected((uid, device)));
             Assert.That(connected, Is.GreaterThan(0), "The hull's devices should be back on a device net.");
 
             var wired = Descendants(entMan, bought).Count(uid =>

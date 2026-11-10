@@ -141,8 +141,6 @@
     sprite: Clothing/Eyes/Hud/onionbeer.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/onionbeer.rsi
-  - type: ShowHungerIcons
-  - type: ShowThirstIcons
   - type: Tag
     tags:
     - PetWearable
@@ -162,7 +160,6 @@
     sprite: Clothing/Eyes/Hud/medonion.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/medonion.rsi
-  - type: ShowHungerIcons
   - type: Tag
     tags:
     - PetWearable
@@ -180,8 +177,6 @@
     sprite: Clothing/Eyes/Hud/medonionbeer.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/medonionbeer.rsi
-  - type: ShowHungerIcons
-  - type: ShowThirstIcons
   - type: Tag
     tags:
     - PetWearable
@@ -244,8 +239,6 @@
     - Inorganic
     - WFSiliconWolfmed # WOLFGATE(Wolfmed): playtest 3: the IPC's container, so its bar shows
     - Synth # WOLFGATE(Wolfmed): the HardLight Synth's container, so its bar shows
-  - type: ShowHungerIcons
-  - type: ShowThirstIcons
   - type: ShowSatiationIcons
     shownTypes:
     - Hunger

@@ -3,6 +3,7 @@ using Content.Server._WF.NpcCrew.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Shuttles.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._WF.NpcCrew;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Map.Components;

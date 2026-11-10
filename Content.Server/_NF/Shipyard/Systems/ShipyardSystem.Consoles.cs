@@ -971,6 +971,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             GetAvailableShuttles(uid, uiKey, targetId: targetId),
             uiKey.ToString(),
             freeListings,
+            false,
             CalculateSellRate(uid));
 
         _ui.SetUiState(uid, uiKey, newState);

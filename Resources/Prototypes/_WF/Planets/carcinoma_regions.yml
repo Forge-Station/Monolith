@@ -74,6 +74,9 @@
   # Recoloured art: a tint only multiplies, and the water sprite is dark blue, so tinting it red read as black.
   - type: Sprite
     sprite: _WF/Planets/BloodWater/blood-lake.rsi
+    drawdepth: BelowFloor
+    layers:
+    - state: full
   - type: Icon
     sprite: _WF/Planets/BloodWater/blood-lake.rsi
   # Blood isn't water: it never freezes into lake ice.

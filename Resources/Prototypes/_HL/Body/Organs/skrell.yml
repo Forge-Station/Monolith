@@ -32,7 +32,7 @@
   - type: Metabolizer
     # mm yummy
     maxReagents: 3
-    metabolizerTypes: [Animal]
+    metabolizerTypes: [Animal, Skrell]
     groups:
     - id: Food
     - id: Drink
@@ -65,7 +65,7 @@
     removeEmpty: true
     solutionOnBody: false
     solution: "Lung"
-    metabolizerTypes: [Human]
+    metabolizerTypes: [Human, Skrell]
     groups:
     - id: Gas
       rateModifier: 100.0
@@ -105,7 +105,7 @@
   # You're technically 'immune to poison' without a heart, but.. uhh, you'll have bigger problems on your hands.
   - type: Metabolizer
     maxReagents: 2
-    metabolizerTypes: [Arachnid]
+    metabolizerTypes: [Arachnid, Skrell]
     groups:
     - id: Medicine
     - id: Cryogenic # Frontier
@@ -136,7 +136,7 @@
     heldPrefix: liver
   - type: Metabolizer # The liver metabolizes certain chemicals only, like alcohol.
     maxReagents: 1
-    metabolizerTypes: [Animal]
+    metabolizerTypes: [Animal, Skrell]
     groups:
     - id: Alcohol
       rateModifier: 0.1 # removes alcohol very slowly along with the stomach removing it as a drink
@@ -167,7 +167,7 @@
   - type: Metabolizer
     updateInterval: 1.5
     maxReagents: 5
-    metabolizerTypes: [Animal]
+    metabolizerTypes: [Animal, Skrell]
     removeEmpty: true
 
 - type: entity

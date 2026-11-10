@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server.Shuttles.Components;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Physics.Components;
 
 namespace Content.Server.Physics.Controllers;

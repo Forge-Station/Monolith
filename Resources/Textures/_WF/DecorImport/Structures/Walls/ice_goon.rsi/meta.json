@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ice-0"
+    },
+    {
+      "name": "ice-1"
+    },
+    {
+      "name": "ice-2"
+    },
+    {
+      "name": "ice-3"
+    },
+    {
+      "name": "ice-4"
+    },
+    {
+      "name": "ice-5"
+    },
+    {
+      "name": "ice-6"
+    },
+    {
+      "name": "ice-7"
+    },
+    {
+      "name": "ice-8"
+    },
+    {
+      "name": "ice-9"
+    },
+    {
+      "name": "ice-10"
+    },
+    {
+      "name": "ice-11"
+    },
+    {
+      "name": "ice-12"
+    },
+    {
+      "name": "ice-13"
+    },
+    {
+      "name": "ice-14"
+    },
+    {
+      "name": "ice-15"
+    },
+    {
+      "name": "ice-21"
+    },
+    {
+      "name": "ice-23"
+    },
+    {
+      "name": "ice-29"
+    },
+    {
+      "name": "ice-31"
+    },
+    {
+      "name": "ice-38"
+    },
+    {
+      "name": "ice-39"
+    },
+    {
+      "name": "ice-46"
+    },
+    {
+      "name": "ice-47"
+    },
+    {
+      "name": "ice-55"
+    },
+    {
+      "name": "ice-63"
+    },
+    {
+      "name": "ice-74"
+    },
+    {
+      "name": "ice-75"
+    },
+    {
+      "name": "ice-78"
+    },
+    {
+      "name": "ice-79"
+    },
+    {
+      "name": "ice-95"
+    },
+    {
+      "name": "ice-110"
+    },
+    {
+      "name": "ice-111"
+    },
+    {
+      "name": "ice-127"
+    },
+    {
+      "name": "ice-137"
+    },
+    {
+      "name": "ice-139"
+    },
+    {
+      "name": "ice-141"
+    },
+    {
+      "name": "ice-143"
+    },
+    {
+      "name": "ice-157"
+    },
+    {
+      "name": "ice-159"
+    },
+    {
+      "name": "ice-175"
+    },
+    {
+      "name": "ice-191"
+    },
+    {
+      "name": "ice-203"
+    },
+    {
+      "name": "ice-207"
+    },
+    {
+      "name": "ice-223"
+    },
+    {
+      "name": "ice-239"
+    },
+    {
+      "name": "ice-255"
+    }
+  ]
+}

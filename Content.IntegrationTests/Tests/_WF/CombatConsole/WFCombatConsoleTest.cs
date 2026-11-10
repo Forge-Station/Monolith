@@ -157,11 +157,11 @@ public sealed class WFCombatConsoleTest
             var travel = navigation.FindControl<Label>("GridTravelState").Parent!;
             Assert.That(altitude.Visible || climb.Visible || travel.Visible, Is.False,
                 "A console without altitude data must not show vertical-flight instruments.");
-            var clientMaps = pair.Client.ResolveDependency<IMapManager>();
-            var flightMap = clientMaps.CreateMap();
-            var flightGrid = clientMaps.CreateGrid(flightMap);
+            var clientMaps = pair.Client.System<SharedMapSystem>();
+            clientMaps.CreateMap(out var flightMap);
+            var flightGrid = clientMaps.CreateGridEntity(flightMap);
             var clientEntities = pair.Client.EntMan;
-            var flightMapUid = clientMaps.GetMapEntityId(flightMap);
+            var flightMapUid = clientMaps.GetMapOrInvalid(flightMap);
             var flightTransform = clientEntities.GetComponent<TransformComponent>(flightGrid.Owner);
             clientEntities.EnsureComponent<CEZPhysicsComponent>(flightGrid.Owner).Velocity = 3f;
             navigation.SetShuttle(flightGrid.Owner);

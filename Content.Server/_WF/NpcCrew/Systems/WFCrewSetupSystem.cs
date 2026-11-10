@@ -342,6 +342,9 @@ public sealed partial class WFCrewSetupSystem : EntitySystem
         return swaps.Count;
     }
 
+    /// <summary>Hull parts still waiting to be swapped. Forge applies swaps immediately.</summary>
+    public bool HullSwapsPending => false;
+
     public bool TryApplyMission(EntityUid grid, WFCrewMission mission)
     {
         if (!ValidateMission(grid, mission))

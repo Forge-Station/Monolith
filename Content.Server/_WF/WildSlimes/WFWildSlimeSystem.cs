@@ -32,12 +32,11 @@ public sealed partial class WFWildSlimeSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ITileDefinitionManager _tileDefs = default!;
     [Dependency] private HTNSystem _htn = default!;
-    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SatiationSystem _hunger = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private NpcFactionSystem _faction = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private ThirstSystem _thirst = default!;
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private WFDormancySystem _dormancy = default!;
     [Dependency] private XenobiologySystem _xeno = default!;
@@ -270,18 +269,18 @@ public sealed partial class WFWildSlimeSystem : EntitySystem
         }
 
         // Wild slimes neither starve nor grow fat enough to split.
-        if (TryComp<HungerComponent>(ent, out var hunger))
+        if (TryComp<SatiationComponent>(ent, out var satiation))
         {
-            var value = _hunger.GetHunger(hunger);
+            var value = _hunger.GetValueOrNull((ent, satiation), SatiationSystem.Hunger) ?? 0f;
             if (value < MinWildHunger || value > MaxWildHunger)
-                _hunger.SetHunger(ent, XenobiologySystem.StartingHunger, hunger);
-        }
+                _hunger.SetValue((ent, satiation), SatiationSystem.Hunger, XenobiologySystem.StartingHunger);
 
-        if (TryComp<ThirstComponent>(ent, out var thirst))
-        {
-            var thresholds = thirst.ThirstThresholds;
-            if (thresholds.TryGetValue(ThirstThreshold.Okay, out var okay) && thirst.CurrentThirst < okay)
-                _thirst.SetThirst(ent, thirst, okay + 25f);
+            if (_hunger.GetValueOrNull((ent, satiation), SatiationSystem.Thirst) is { } thirst
+                && !_hunger.IsValueInRange((ent, satiation), SatiationSystem.Thirst, above: "Okay"))
+            {
+                _hunger.SetValue((ent, satiation), SatiationSystem.Thirst, "Okay");
+                _hunger.ModifyValue((ent, satiation), SatiationSystem.Thirst, 25f);
+            }
         }
     }
 }

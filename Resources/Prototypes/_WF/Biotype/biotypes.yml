@@ -335,8 +335,18 @@
         maxDistance: 3
         rolloffFactor: 2
         volume: -10
-  - type: Hunger
-  - type: Thirst
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+      Thirst:
+        prototype: NormalSatiationThirst
+  - type: SatiationSpeedModifier
+    satiations:
+      Hunger:
+        Starving: 0.75
+      Thirst:
+        Parched: 0.75
   - type: SleepEmitSound
   - type: EmoteOnDamage
     emotesThreshold:

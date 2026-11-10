@@ -395,7 +395,7 @@ public sealed class UndergarmentStripTest : InteractionTest
             Assert.That(genitals.Undergarments, Is.EqualTo(UndergarmentFlags.BottomRemoved | UndergarmentFlags.BottomByOther),
                 "Precondition: the player removed the bottom.");
 
-            var ghost = SEntMan.SpawnEntity(GameTicker.ObserverPrototypeName, SEntMan.GetComponent<TransformComponent>(target).Coordinates);
+            var ghost = SEntMan.SpawnEntity(ServerGameTicker.ObserverPrototypeName, SEntMan.GetComponent<TransformComponent>(target).Coordinates);
             minds.TransferTo(mind, ghost);
             AssertVerbs(actor, target, "ghosted target (toggles cleared)");
         });

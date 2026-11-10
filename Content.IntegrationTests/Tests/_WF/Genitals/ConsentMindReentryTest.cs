@@ -49,7 +49,7 @@ public sealed class ConsentMindReentryTest
         await server.WaitAssertion(() =>
         {
             probe.Clear();
-            var ghost = entMan.SpawnEntity(GameTicker.ObserverPrototypeName, entMan.GetComponent<TransformComponent>(body).Coordinates);
+            var ghost = entMan.SpawnEntity(ServerGameTicker.ObserverPrototypeName, entMan.GetComponent<TransformComponent>(body).Coordinates);
             mindSys.TransferTo(player.Mind, ghost);
 
             Assert.Multiple(() =>
@@ -152,7 +152,7 @@ public sealed class ConsentMindReentryTest
         EntityUid ghost = default;
         await server.WaitPost(() =>
         {
-            ghost = entMan.SpawnEntity(GameTicker.ObserverPrototypeName, entMan.GetComponent<TransformComponent>(body).Coordinates);
+            ghost = entMan.SpawnEntity(ServerGameTicker.ObserverPrototypeName, entMan.GetComponent<TransformComponent>(body).Coordinates);
 
             // A visited entity never gets a ConsentComponent, and ConsentSystem warns (failing the test) when it is missing.
             entMan.EnsureComponent<ConsentComponent>(ghost);

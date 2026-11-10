@@ -60,7 +60,7 @@ public sealed class PowerCordTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         EntityUid gridA = default, gridB = default, clampA = default, clampB = default, rope = default;
         PowerConsumerComponent consumer = default!;
@@ -140,7 +140,7 @@ public sealed class PowerCordTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -181,7 +181,7 @@ public sealed class PowerCordTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -224,7 +224,7 @@ public sealed class PowerCordTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         EntityUid gridA = default, gridB = default;
 
@@ -294,7 +294,7 @@ public sealed class PowerCordTest
     }
 
     /// <summary>Two floating 3x3 hulls on one map, ten metres apart.</summary>
-    private static (EntityUid GridA, EntityUid GridB) CreatePair(IEntityManager entities, IMapManager maps, MapId map)
+    private static (EntityUid GridA, EntityUid GridB) CreatePair(IEntityManager entities, SharedMapSystem maps, MapId map)
     {
         var mapSystem = entities.System<SharedMapSystem>();
         var physics = entities.System<SharedPhysicsSystem>();

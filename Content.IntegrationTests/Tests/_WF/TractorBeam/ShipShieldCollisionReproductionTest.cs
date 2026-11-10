@@ -31,7 +31,7 @@ public sealed partial class ShipShieldCollisionReproductionTest
     }
 
     private static async Task ReproduceShieldContact(string prototype, bool alreadySpent,
-        Func<IEntityManager, IMapManager, MapId, EntityUid, EntityUid>? addActiveTractor = null)
+        Func<IEntityManager, SharedMapSystem, MapId, EntityUid, EntityUid>? addActiveTractor = null)
     {
         var engine = typeof(SharedPhysicsSystem).Assembly;
         TestContext.Out.WriteLine($"Physics engine: {engine.Location}; configuration: " +
@@ -40,7 +40,7 @@ public sealed partial class ShipShieldCollisionReproductionTest
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Destructive = true });
         var map = await pair.CreateTestMap();
         var entities = pair.Server.ResolveDependency<IEntityManager>();
-        var maps = pair.Server.ResolveDependency<IMapManager>();
+        var maps = pair.Server.System<SharedMapSystem>();
         await pair.Server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);

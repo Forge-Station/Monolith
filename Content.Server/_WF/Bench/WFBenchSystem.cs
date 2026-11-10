@@ -52,7 +52,7 @@ public sealed partial class WFBenchSystem : EntitySystem
     [Dependency] private StationRecordsSystem _records = default!;
     [Dependency] private SectorServiceSystem _sectorService = default!;
     [Dependency] private WFShipbreakerWarrantSystem _warrants = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedJobSystem _jobs = default!;
     [Dependency] private InventorySystem _inventory = default!;

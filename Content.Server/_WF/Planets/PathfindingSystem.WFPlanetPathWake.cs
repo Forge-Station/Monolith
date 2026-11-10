@@ -40,7 +40,7 @@ public sealed partial class PathfindingSystem
     private void WfHoldForGround(int amount)
     {
         _wfHeld.Clear();
-        if (!_wfCfg.GetCVar(PlanetCVars.PathfindingLazy))
+        if (!_configManager.GetCVar(PlanetCVars.PathfindingLazy))
         {
             _wfWaiting.Clear();
             return;

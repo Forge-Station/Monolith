@@ -14,7 +14,7 @@ namespace Content.Shared._WF.Lathe;
 /// <summary>
 /// Derives what the silos accept from the recipes of every machine that can link to them.
 /// </summary>
-public abstract partial class SharedFabricationSiloSystem
+public abstract partial class SharedFabricationSiloSystem : EntitySystem
 {
     [Dependency] private IComponentFactory _factory = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

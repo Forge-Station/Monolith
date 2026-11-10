@@ -537,6 +537,54 @@ public sealed partial class WFDrydockSystem
         return cranes.Count == 0 ? 0f : longest + DeploySettle;
     }
 
+    /// <summary>A crane's reach from a ship's frame, or null for a missing crane, which reaches everything.</summary>
+    private CraneReach? ReachOf(EntityUid ship, EntityUid? crane)
+    {
+        if (crane is not { } craneUid || !TryGetCrane(craneUid, out var craneComp))
+            return null;
+
+        return new CraneReach(craneUid, craneComp, _transform.GetWorldMatrix(ship) * _transform.GetInvWorldMatrix(craneUid));
+    }
+
+    /// <summary>The reach of every slot's crane in a job.</summary>
+    private List<CraneReach?> JobReach(WFDrydockJobComponent job)
+    {
+        return job.Slots.Select(slot => ReachOf(job.Ship, slot.Crane)).ToList();
+    }
+
+    /// <summary>Fills a list with the reach of every slot's crane in a job.</summary>
+    private void JobReach(WFDrydockJobComponent job, List<CraneReach?> reaches)
+    {
+        reaches.Clear();
+        foreach (var slot in job.Slots)
+            reaches.Add(ReachOf(job.Ship, slot.Crane));
+    }
+
+    /// <summary>Whether a resolved crane reach covers a ship-local point.</summary>
+    private bool Reaches(WFDrydockConsoleComponent comp, CraneReach? reach, Vector2 shipLocal)
+    {
+        if (reach is not { } resolved)
+            return true;
+
+        var arm = resolved.Crane.LocalToArm(Vector2.Transform(shipLocal, resolved.ShipToCrane));
+        var tol = comp.ReachTolerance;
+        return arm.Y >= resolved.Crane.BerthGap - tol && arm.Y <= resolved.Crane.MaxArm + tol
+            && arm.X >= -tol && arm.X <= resolved.Crane.MaxExtension + tol
+            && arm.X < BoomBlockAt(resolved.Uid, resolved.Crane, arm.Y) - 0.5f;
+    }
+
+    /// <summary>Whether any of a job's resolved crane reaches covers a ship-local point.</summary>
+    private bool ReachableByAny(WFDrydockConsoleComponent comp, List<CraneReach?> reaches, Vector2 shipLocal)
+    {
+        foreach (var reach in reaches)
+        {
+            if (Reaches(comp, reach, shipLocal))
+                return true;
+        }
+
+        return false;
+    }
+
     /// <summary>Whether a crane's envelope, with the reach tolerance, covers a ship-local point. A missing crane reaches everything.</summary>
     public bool CanReach(WFDrydockConsoleComponent comp, EntityUid ship, EntityUid? crane, Vector2 shipLocal)
     {

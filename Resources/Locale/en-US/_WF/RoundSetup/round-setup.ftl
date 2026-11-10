@@ -1,3 +1,4 @@
+wf-round-setup-toolbar-tooltip = Crew setup
 wf-round-setup-title = Crew Setup
 wf-round-setup-button = Set up lobby
 wf-round-setup-subtitle = Choose your start. Bring your crew.

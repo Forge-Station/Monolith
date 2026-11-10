@@ -88,7 +88,7 @@ public sealed class ShipFuelTelemetryTest
             Assert.That(lightweight.Summary.Fuel.Fraction, Is.EqualTo(combined.Fraction));
             Assert.That(lightweight.Tiles, Is.Empty);
 
-            var other = pair.Server.ResolveDependency<IMapManager>().CreateGridEntity(map.MapId);
+            var other = pair.Server.System<SharedMapSystem>().CreateGridEntity(map.MapId);
             maps.SetTile(other.Owner, other.Comp, Vector2i.Zero, map.Tile.Tile);
             em.SpawnEntity("AmeController", new EntityCoordinates(other.Owner, new Vector2(0.5f, 0.5f)));
             Assert.That(Read().Sources, Is.EqualTo(3), "An adjacent grid must not change this ship's reserves.");

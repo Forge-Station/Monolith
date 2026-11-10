@@ -7,6 +7,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Tools;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -376,7 +377,7 @@ public sealed class ShipHarpoonTurretSystem : SharedShipHarpoonTurretSystem
             return;
 
         args.Handled = _tools.UseTool(args.Used, args.User, uid, component.PryTime,
-            new[] { PryingQuality }, new HarpoonPryDoAfterEvent(), out _);
+            new ProtoId<ToolQualityPrototype>[] { PryingQuality }, new HarpoonPryDoAfterEvent(), out _);
     }
 
     private void OnHarpoonExamined(EntityUid uid, ShipHarpoonComponent component, ExaminedEvent args)
@@ -396,7 +397,7 @@ public sealed class ShipHarpoonTurretSystem : SharedShipHarpoonTurretSystem
         args.Verbs.Add(new AlternativeVerb
         {
             Text = Loc.GetString("wf-harpoon-verb-pry"),
-            Act = () => _tools.UseTool(used, user, uid, component.PryTime, new[] { PryingQuality },
+            Act = () => _tools.UseTool(used, user, uid, component.PryTime, new ProtoId<ToolQualityPrototype>[] { PryingQuality },
                 new HarpoonPryDoAfterEvent(), out _),
         });
     }

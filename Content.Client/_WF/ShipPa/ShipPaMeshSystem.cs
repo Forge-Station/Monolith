@@ -5,6 +5,7 @@ using Robust.Client.Audio;
 using Robust.Client.Graphics;
 using Robust.Client.Replays.Playback;
 using Robust.Client.Player;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -35,7 +36,7 @@ public sealed partial class ShipPaMeshSystem : EntitySystem
     [Dependency] private SharedPhysicsSystem _physics = default!;
 
     [Dependency] private IPlayerManager _players = default!;
-    [Dependency] private IMapManager _maps = default!;
+    [Dependency] private SharedMapSystem _maps = default!;
 
     private EntityUid? _subtitleGrid;
     private readonly List<Voice> _voices = new();

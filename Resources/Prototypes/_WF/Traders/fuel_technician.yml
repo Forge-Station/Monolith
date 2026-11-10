@@ -28,7 +28,8 @@
     gender: Female
     appearance:
       hair: HumanHairPixie
-      hairColor: "#5A5248"
+      hairColor:
+        - "#5A5248"
       facialHair: FacialHairShaved
       facialHairColor: "#5A5248"
       eyeColor: "#7C8B96"

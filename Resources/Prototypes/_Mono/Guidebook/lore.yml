@@ -1,9 +1,9 @@
+# The guidebook page BasicLore is the Forge lore in Guidebook/lore.yml.
+# This primer stays in the lore book under its own id, so it does not replace that page.
 - type: guideEntry
-  id: BasicLore
-  # WOLFGATE(LoreBook) START: the first chapter of the lore book; was name: Lore
+  id: WFLorePrimer
   name: wf-lore-entry-primer
   lore: true
-  # WOLFGATE END
   text: "/ServerInfo/_Mono/Guidebook/Lore/Primer.xml"
   children:
   - Timeline

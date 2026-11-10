@@ -15,7 +15,6 @@ namespace Content.Client.Light;
 public sealed partial class RoofOverlay : Overlay
 {
     private readonly IEntityManager _entManager;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private ITileDefinitionManager _tileDefs = default!; // WOLFGATE(Planets): the open-grating check below reads tile definitions.
     [Dependency] private IOverlayManager _overlay = default!;
 
@@ -62,7 +61,7 @@ public sealed partial class RoofOverlay : Overlay
         var target = lightoverlay.GetCachedForViewport(viewport).EnlargedLightTarget;
 
         _grids.Clear();
-        _mapManager.FindGridsIntersecting(args.MapId, bounds, ref _grids, approx: true, includeMap: true);
+        _mapSystem.FindGridsIntersecting(args.MapId, bounds, ref _grids, approx: true, includeMap: true);
         var lightScale = viewport.LightRenderTarget.Size / (Vector2) viewport.Size;
         var scale = viewport.RenderScale / (Vector2.One / lightScale);
 

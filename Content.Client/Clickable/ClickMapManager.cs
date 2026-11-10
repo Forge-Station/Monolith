@@ -122,6 +122,21 @@ namespace Content.Client.Clickable
             return result;
         }
 
+        /// <summary>Whether one pixel of a frame is opaque. Unlike IsOccluding, pixels near it don't count.</summary>
+        public bool IsOpaque(RSI rsi, RSI.StateId state, RsiDirection dir, int frame, Vector2i pos)
+        {
+            if (pos.X < 0 || pos.Y < 0 || pos.X >= rsi.Size.X || pos.Y >= rsi.Size.Y
+                || !_rsiMaps.TryGetValue(rsi, out var rsiData)
+                || !rsiData.Offsets.TryGetValue(state, out var stateDat)
+                || stateDat.Length <= (int) dir
+                || stateDat[(int) dir].Length <= frame)
+                return false;
+
+            var (x, y) = pos + stateDat[(int) dir][frame];
+            return x >= 0 && y >= 0 && x < rsiData.ClickMap.Width && y < rsiData.ClickMap.Height
+                   && rsiData.ClickMap.IsOccluded(x, y);
+        }
+
         private static bool AnyOccluded(ClickMap map, Vector2i size, Vector2i offset)
         {
             var (width, height) = size;
@@ -263,5 +278,7 @@ namespace Content.Client.Clickable
 
         // WOLFGATE: see ClickMapManager.HasOpaquePixels.
         public bool HasOpaquePixels(RSI rsi, RSI.StateId state, RsiDirection dir, int frame);
+
+        public bool IsOpaque(RSI rsi, RSI.StateId state, RsiDirection dir, int frame, Vector2i pos);
     }
 }

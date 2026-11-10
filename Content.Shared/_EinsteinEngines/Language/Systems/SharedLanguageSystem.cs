@@ -7,6 +7,8 @@ namespace Content.Shared._EinsteinEngines.Language.Systems;
 
 public abstract partial class SharedLanguageSystem : EntitySystem
 {
+    public static readonly char ChatPrefixChar = '^';
+
     /// <summary>
     ///     The language used as a fallback in cases where an entity suddenly becomes a Language Speaker (e.g. the usage of make-sentient).
     /// </summary>

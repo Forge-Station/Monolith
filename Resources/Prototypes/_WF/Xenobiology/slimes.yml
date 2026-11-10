@@ -1,5 +1,5 @@
-# Ported from Goobstation via Trauma Station (slimebase.yml, slimes_baby.yml, spawners.yml). Hunger replaces Goob's
-# satiation with the same thresholds.
+# Ported from Goobstation via Trauma Station (slimebase.yml, slimes_baby.yml, spawners.yml). The hunger satiation
+# keeps Goob's thresholds.
 
 - type: entity
   abstract: true
@@ -13,20 +13,12 @@
   components:
   - type: Appearance
   - type: ZombieImmune
-  - type: Hunger
-    baseDecayRate: 0.3
-    thresholds:
-      Overfed: 150
-      Okay: 75
-      Peckish: 25
-      Starving: 10
-      Dead: 0
-    hungerThresholdDecayModifiers:
-      Overfed: 1.5
-      Okay: 1.5
-      Peckish: 0.4
-      Starving: 0.2
-      Dead: 0.1
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: XenobioSlimeHunger
+      Thirst:
+        prototype: SimpleMobBaseThirst
   - type: MobPrice
     price: 500
   - type: Sprite

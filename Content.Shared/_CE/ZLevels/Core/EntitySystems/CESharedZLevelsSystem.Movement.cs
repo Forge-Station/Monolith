@@ -350,6 +350,17 @@ public abstract partial class CESharedZLevelsSystem
         DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.LaunchCountdown));
     }
 
+    /// <summary>Sets whether the grid currently has solid terrain under its footprint.</summary>
+    [PublicAPI]
+    public void SetGroundContact(Entity<CEZPhysicsComponent?> ent, bool contact)
+    {
+        if (!Resolve(ent.Owner, ref ent.Comp, false) || ent.Comp.GroundContact == contact)
+            return;
+
+        ent.Comp.GroundContact = contact;
+        DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.GroundContact));
+    }
+
     [PublicAPI]
     public void UpdateGravityState(Entity<CEZPhysicsComponent?> ent)
     {

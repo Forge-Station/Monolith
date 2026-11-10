@@ -20,6 +20,7 @@ using Robust.Shared.Localization;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Network.Transfer;
 
 namespace Content.IntegrationTests.Tests._WF.ShipPa;
@@ -220,13 +221,14 @@ public sealed class ShipPaAudienceTest : InteractionTest
         await Server.WaitAssertion(() => Assert.That(Recipients(track), Does.Not.Contain(oldChannel)));
         await Client.WaitAssertion(() => Assert.That(Resources().Has(id), Is.False));
         await Pair.Connect();
-        await Server.WaitPost(() => ServerSession = Server.PlayerMan.GetSessionById(Client.Session!.UserId));
+        ICommonSession session = default!;
+        await Server.WaitPost(() => session = Server.PlayerMan.GetSessionById(Client.Session!.UserId));
         await InitializeTransfer();
-        await Server.WaitPost(() => Server.PlayerMan.SetAttachedEntity(ServerSession, SPlayer));
+        await Server.WaitPost(() => Server.PlayerMan.SetAttachedEntity(session, SPlayer));
         await WaitForAsset(id);
         await Server.WaitAssertion(() =>
         {
-            Assert.That(ServerSession.Channel, Is.Not.SameAs(oldChannel));
+            Assert.That(session.Channel, Is.Not.SameAs(oldChannel));
             Assert.That(_startedTransfers, Is.EqualTo(2), "A new connection must not inherit the previous connection's sent marker.");
             Server.System<InternetSoundSystem>().StopForGrid(MapData.Grid.Owner);
         });

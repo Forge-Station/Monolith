@@ -4,6 +4,7 @@ using Content.Shared.DeviceLinking;
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.Shuttles.BUIStates; // Forge-Change - BioScan
 using Content.Shared.Timing;
 using Content.Shared.Timing.Components;
 using Content.Shared.Timing.Systems; // Forge-Change - BioScan
@@ -87,5 +88,39 @@ namespace Content.Server.Shuttles.Components
             "device-button-7",
             "device-button-8"
         };
+
+        // Forge-Change - BioScan
+        [DataField]
+        public bool BioScanActive;
+
+        [DataField]
+        public EntityUid? BioScanTarget;
+
+        [DataField]
+        public StartEndTime BioScanTime;
+
+        [DataField]
+        public float BioScanDuration = 5f;
+
+        [DataField]
+        public float BioScanRange = 500f;
+
+        [DataField]
+        public float BioScanMaxVelocity = 0.5f;
+
+        [DataField]
+        public float BioScanMaxAngularVelocity = 0.1f;
+
+        [DataField]
+        public ShuttleBioScanStatus BioScanStatus;
+
+        [DataField]
+        public TimeSpan NextSpeedSetTime;
+
+        [DataField]
+        public float SpeedSetRateLimit = 1f;
+
+        [DataField]
+        public float MaxPilotSetSpeed = 100f;
     }
 }

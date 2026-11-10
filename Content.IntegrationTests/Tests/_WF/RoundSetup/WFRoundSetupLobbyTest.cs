@@ -186,7 +186,7 @@ public sealed partial class WFRoundSetupLobbyTest
     public async Task JobsAndReadinessUseValidatedScenarioChoices()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { InLobby = true });
-        var ticker = pair.Server.System<GameTicker>();
+        var ticker = pair.Server.System<ServerGameTicker>();
         var player = pair.Client.User!.Value;
         var originalNetworks = false;
         await pair.Server.WaitPost(() =>
@@ -420,7 +420,7 @@ public sealed partial class WFRoundSetupLobbyTest
             LobbyId = lobbyId, Job = "Contractor",
         });
         Assert.That(OwnLobby(state).Roles, Is.Empty);
-        await pair.Server.WaitPost(() => pair.Server.System<GameTicker>().ToggleReady(pair.Player!, true));
+        await pair.Server.WaitPost(() => pair.Server.System<ServerGameTicker>().ToggleReady(pair.Player!, true));
         state = await Request(pair, new WFRoundSetupRequest(WFRoundSetupAction.Refresh));
         Assert.That(OwnLobby(state).Members.Single().Ready, Is.False, "The global Ready button cannot imply ship-purchase consent.");
         state = await Request(pair, new WFRoundSetupRequest(WFRoundSetupAction.SetReady) { LobbyId = lobbyId, Ready = true });
@@ -454,7 +454,7 @@ public sealed partial class WFRoundSetupLobbyTest
         await server.WaitAssertion(() =>
         {
             server.CfgMan.SetCVar(CCVars.GameRoleTimers, false);
-            var ticker = server.System<GameTicker>();
+            var ticker = server.System<ServerGameTicker>();
             if (!pregame)
                 ticker.StartRound(force: true);
             Assert.That(ticker.RunLevel, Is.EqualTo(pregame ? GameRunLevel.PreRoundLobby : GameRunLevel.InRound));
@@ -496,7 +496,7 @@ public sealed partial class WFRoundSetupLobbyTest
             {
                 await server.WaitAssertion(() =>
                 {
-                    var ticker = server.System<GameTicker>();
+                    var ticker = server.System<ServerGameTicker>();
                     ticker.StartRound(force: true);
                     Assert.That(ticker.RunLevel, Is.EqualTo(GameRunLevel.InRound));
                 });
@@ -566,7 +566,7 @@ public sealed partial class WFRoundSetupLobbyTest
                 LobbyId = lobbyId, ShipStart = WFShipStartLocation.CentralDock,
             });
             Assert.That(OwnLobby(state).ShipStart, Is.EqualTo(WFShipStartLocation.RandomSpace));
-            await server.WaitPost(() => server.System<GameTicker>().Respawn(player));
+            await server.WaitPost(() => server.System<ServerGameTicker>().Respawn(player));
             state = await Request(pair, new WFRoundSetupRequest(WFRoundSetupAction.Refresh));
             Assert.That(state.OwnLobby, Is.Null, "Respawning must leave the previous crew.");
             await server.WaitAssertion(() =>
@@ -588,7 +588,7 @@ public sealed partial class WFRoundSetupLobbyTest
         {
             await server.WaitPost(() => server.CfgMan.SetCVar(CCVars.GameRoleTimers, timers));
             await server.WaitPost(() => preferences.SetProfile(player.UserId, slot, original).Wait());
-            await server.WaitPost(() => server.System<GameTicker>().RestartRound());
+            await server.WaitPost(() => server.System<ServerGameTicker>().RestartRound());
             await pair.RunTicksSync(2);
         }
         await pair.CleanReturnAsync();
@@ -780,7 +780,7 @@ public sealed partial class WFRoundSetupLobbyTest
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { InLobby = true });
         var server = pair.Server;
-        var ticker = server.System<GameTicker>();
+        var ticker = server.System<ServerGameTicker>();
         var originalName = pair.Player!.Name;
         var net = pair.Client.ResolveDependency<IClientNetManager>();
         await EnableFeature(pair);
@@ -1006,7 +1006,7 @@ public sealed partial class WFRoundSetupLobbyTest
                 recorder.DenyContractor = false;
                 recorder.Calls.Clear();
                 server.CfgMan.SetCVar(PlanetCVars.PlanetNetworks, enabled);
-                server.System<GameTicker>().RestartRound();
+                server.System<ServerGameTicker>().RestartRound();
             });
             await pair.RunTicksSync(2);
             await pair.Client.WaitPost(() => net.ClientDisconnect("Restore test player"));
@@ -1105,7 +1105,7 @@ public sealed partial class WFRoundSetupLobbyTest
             LobbyId = id, SaveName = "medical rescue",
         });
         Assert.That(state.SavedSetups.Length, Is.EqualTo(1), "A matching name updates the saved scenario.");
-        await pair.Server.WaitPost(() => pair.Server.System<GameTicker>().RestartRound());
+        await pair.Server.WaitPost(() => pair.Server.System<ServerGameTicker>().RestartRound());
         await pair.RunTicksSync(2);
         state = await Request(pair, new WFRoundSetupRequest(WFRoundSetupAction.Refresh));
         Assert.That(state.OwnLobby, Is.Null);
@@ -1189,7 +1189,7 @@ public sealed partial class WFRoundSetupLobbyTest
         var scenario = EntityUid.Invalid;
         await server.WaitAssertion(() =>
         {
-            server.System<GameTicker>().StartRound(force: true);
+            server.System<ServerGameTicker>().StartRound(force: true);
             ship = server.EntMan.SpawnEntity("WFRoundSetupQuotaTestStation", MapCoordinates.Nullspace);
             server.EntMan.AddComponent<ExtraShuttleInformationComponent>(ship);
             scenario = server.EntMan.SpawnEntity("WFRoundSetupQuotaTestStation", MapCoordinates.Nullspace);
@@ -1209,7 +1209,7 @@ public sealed partial class WFRoundSetupLobbyTest
             Assert.That(jobs.ContainsKey(shipNet), Is.True, "Player ships must still advertise crew jobs.");
             Assert.That(jobs.ContainsKey(scenarioNet), Is.False);
         });
-        await server.WaitPost(() => server.System<GameTicker>().RestartRound());
+        await server.WaitPost(() => server.System<ServerGameTicker>().RestartRound());
         await pair.RunTicksSync(2);
         await pair.CleanReturnAsync();
     }
@@ -1230,7 +1230,7 @@ public sealed partial class WFRoundSetupLobbyTest
         await server.WaitAssertion(() =>
         {
             server.CfgMan.SetCVar(CCVars.GameRoleTimers, false);
-            server.System<GameTicker>().StartRound(force: true);
+            server.System<ServerGameTicker>().StartRound(force: true);
             if (!server.System<SectorServiceSystem>().GetServiceEntity().Valid)
             {
                 var host = server.EntMan.SpawnEntity(null, MapCoordinates.Nullspace);
@@ -1262,7 +1262,7 @@ public sealed partial class WFRoundSetupLobbyTest
         {
             await server.WaitPost(() => server.CfgMan.SetCVar(CCVars.GameRoleTimers, timers));
             await server.WaitPost(() => preferences.SetProfile(player.UserId, slot, original).Wait());
-            await server.WaitPost(() => server.System<GameTicker>().RestartRound());
+            await server.WaitPost(() => server.System<ServerGameTicker>().RestartRound());
             await pair.RunTicksSync(2);
         }
         await pair.CleanReturnAsync();

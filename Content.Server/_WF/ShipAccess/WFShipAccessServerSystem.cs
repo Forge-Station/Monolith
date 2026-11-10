@@ -29,6 +29,9 @@ public sealed partial class WFShipAccessServerSystem : EntitySystem
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
+    /// <summary>Registered ships left unlocked at setup for want of an owner key; each locks once it has one.</summary>
+    private readonly HashSet<EntityUid> _lockWhenKeyed = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -118,6 +121,18 @@ public sealed partial class WFShipAccessServerSystem : EntitySystem
         return true;
     }
 
+    /// <summary>Locks a registered ship that was waiting for an owner key, once a card can be keyed to it.</summary>
+    private bool TryLockWhenKeyed(Entity<WFShipAccessComponent> ship)
+    {
+        if (!_lockWhenKeyed.Contains(ship) || !CanLock(ship))
+            return false;
+
+        SetLocked(ship, true);
+        _adminLog.Add(LogType.Action, LogImpact.Low,
+            $"{ToPrettyString(ship.Owner):grid} locked itself now that an owner's card can open it");
+        return true;
+    }
+
     /// <summary>Console verb bridge: whether the user holds the ship's deed, a voucher with it included, or the ship is registered to them.</summary>
     public bool IsOwner(EntityUid user, EntityUid grid)
     {
@@ -127,6 +142,7 @@ public sealed partial class WFShipAccessServerSystem : EntitySystem
     /// <summary>Sets the lock and rewrites every door and locker reader on the grid to match.</summary>
     public void SetLocked(Entity<WFShipAccessComponent> ship, bool locked)
     {
+        _lockWhenKeyed.Remove(ship);
         ship.Comp.Locked = locked;
         Dirty(ship);
         RefreshShip(ship);

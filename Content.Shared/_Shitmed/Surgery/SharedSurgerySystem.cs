@@ -33,6 +33,8 @@ namespace Content.Shared._Shitmed.Medical.Surgery;
 
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
+    /// <summary>Surgery prototype ids the autodoc can offer. The server list replaces this.</summary>
+    public virtual IReadOnlyList<EntProtoId> AllSurgeries => Array.Empty<EntProtoId>();
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;

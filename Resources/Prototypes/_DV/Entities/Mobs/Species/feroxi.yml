@@ -9,12 +9,15 @@
     species: Feroxi
     hideLayersOnEquip:
     - Snout
-  - type: Hunger
   # - type: Carriable # ShibaStation - disabled because broken, for now.
   - type: Inventory
     speciesId: feroxi
-  - type: Thirst
-    baseDecayRate: 0.2
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+      Thirst:
+        prototype: FeroxiThirst
   - type: Icon
     sprite: _DV/Mobs/Species/Feroxi/parts.rsi
     state: full
@@ -105,10 +108,6 @@
     damageModifierSet: Feroxi
   - type: TypingIndicator
     proto: feroxi
-  - type: FeroxiDehydrate
-    hydratedMetabolizer: Feroxi
-    dehydratedMetabolizer: FeroxiDehydrated
-    dehydrationThreshold: 150
   - type: LanguageKnowledge # The Den, give Feroxi their own language.
     speaks:
     - TauCetiBasic

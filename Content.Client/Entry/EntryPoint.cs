@@ -45,6 +45,7 @@ using Content.Client._Forge.JoinQueue; // Forge-Change
 using Content.Client._Forge.Sponsor; // Forge-Change
 using Content.Client._Mono.Company; // Mono
 using Content.Client.Corvax.ExportSprites; // Corvax-Wiki
+using Content.Client._WF.GameHub;
 
 namespace Content.Client.Entry
 {
@@ -185,6 +186,7 @@ namespace Content.Client.Entry
             _chatManager.Initialize();
             _clientPreferencesManager.Initialize();
             _clientConsentManager.Initialize(); // WOLFGATE - consent system
+            IoCManager.Resolve<WFGameDataManager>().Initialize();
             _euiManager.Initialize();
             _voteManager.Initialize();
             _userInterfaceManager.SetDefaultTheme("SS14DefaultTheme");

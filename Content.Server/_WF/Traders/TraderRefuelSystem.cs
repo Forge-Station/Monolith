@@ -41,7 +41,7 @@ public record struct TraderRefuelLine(
 public sealed partial class TraderRefuelSystem : EntitySystem
 {
     [Dependency] private AmeControllerSystem _ame = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private IPrototypeManager _proto = default!;

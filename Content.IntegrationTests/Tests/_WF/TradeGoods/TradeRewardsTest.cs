@@ -36,7 +36,7 @@ public sealed class TradeRewardsTest
         var entMan = server.EntMan;
         var market = entMan.System<WFTradeMarketSystem>();
         var rushes = entMan.System<WFTradeRushSystem>();
-        var ticker = entMan.System<GameTicker>();
+        var ticker = entMan.System<ServerGameTicker>();
         var timing = server.ResolveDependency<IGameTiming>();
 
         EntityUid chute = default;

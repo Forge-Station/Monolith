@@ -77,7 +77,7 @@ public sealed class RopeTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         EntityUid gridA = default, gridB = default, pointA = default, pointB = default, rope = default;
         const float length = 9f;
@@ -133,7 +133,7 @@ public sealed class RopeTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         EntityUid gridA = default, gridB = default, rope = default;
 
@@ -174,7 +174,7 @@ public sealed class RopeTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         EntityUid gridA = default, gridB = default, pointA = default, pointB = default, rope = default;
 
@@ -208,7 +208,7 @@ public sealed class RopeTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -239,7 +239,7 @@ public sealed class RopeTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -304,7 +304,7 @@ public sealed class RopeTest
 
     /// <summary>Two free-floating square grids with one anchored attach point facing each other.</summary>
     private static (EntityUid GridA, EntityUid GridB, EntityUid PointA, EntityUid PointB) CreatePair(
-        IEntityManager entities, IMapManager maps, MapId map)
+        IEntityManager entities, SharedMapSystem maps, MapId map)
     {
         var mapSystem = entities.System<SharedMapSystem>();
         var physics = entities.System<SharedPhysicsSystem>();

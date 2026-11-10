@@ -115,7 +115,7 @@ public sealed class WFCockpitDockingTest
             Assert.That(plot.HighlightedDock, Is.Null);
             var requests = new List<(NetEntity From, NetEntity To)>();
             var undocks = new List<NetEntity>();
-            plot.DockRequest += (from, to) => requests.Add((from, to));
+            plot.DockRequest += (from, to, _) => requests.Add((from, to));
             plot.UndockRequest += undocks.Add;
             Press(buttons.Single(button => button.Text == Loc.GetString("shuttle-console-view")));
             Assert.That(plot.ViewedDock, Is.EqualTo(own.Entity));

@@ -26,7 +26,7 @@ public sealed partial class XenoEggRoleSystem : EntitySystem
     [Dependency] private GhostRoleSystem _ghostRole = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private ContainerSystem _container = default!;

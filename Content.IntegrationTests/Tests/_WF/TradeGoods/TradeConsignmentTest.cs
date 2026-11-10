@@ -29,9 +29,9 @@ public sealed class TradeConsignmentTest
     private const string Ammo = "TradeGoodAmmo";
 
     /// <summary>Puts the dummy ticker in a round, so the timed consignment checks run, as the sector tests do.</summary>
-    private static void StartRound(GameTicker ticker)
+    private static void StartRound(ServerGameTicker ticker)
     {
-        typeof(GameTicker).GetProperty(nameof(GameTicker.RunLevel), BindingFlags.Public | BindingFlags.Instance)!
+        typeof(ServerGameTicker).GetProperty(nameof(ServerGameTicker.RunLevel), BindingFlags.Public | BindingFlags.Instance)!
             .GetSetMethod(true)!.Invoke(ticker, new object[] { GameRunLevel.InRound });
     }
 
@@ -50,7 +50,7 @@ public sealed class TradeConsignmentTest
         EntityUid first = default, second = default;
         await server.WaitAssertion(() =>
         {
-            StartRound(entMan.System<GameTicker>());
+            StartRound(entMan.System<ServerGameTicker>());
             TradeTestWorld.MarketChute(entMan, map);
             TradeTestWorld.Station(entMan, map, new Vector2(5000f, 0f), "WF consignment far depot");
             var merchant = TradeTestWorld.Station(entMan, map, new Vector2(-5000f, 0f), "WF consignment merchant").Grid;

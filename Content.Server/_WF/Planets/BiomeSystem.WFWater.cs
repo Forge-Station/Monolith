@@ -79,7 +79,7 @@ public sealed partial class BiomeSystem
                 case BiomeEntityLayer entities when entities.Entities.Exists(WfIsWaterProto):
                     paths.Add([..chain, gate]);
                     break;
-                case BiomeMetaLayer meta when ProtoManager.TryIndex<BiomeTemplatePrototype>(meta.Template, out var template):
+                case BiomeMetaLayer meta when ProtoMan.TryIndex<BiomeTemplatePrototype>(meta.Template, out var template):
                     chain.Add(gate);
                     WfCollectWaterGates(template.Layers, chain, paths, depth + 1);
                     chain.RemoveAt(chain.Count - 1);
@@ -93,7 +93,7 @@ public sealed partial class BiomeSystem
     {
         if (_wfWaterProtos.TryGetValue(id, out var water))
             return water;
-        water = ProtoManager.TryIndex<EntityPrototype>(id, out var proto)
+        water = ProtoMan.TryIndex<EntityPrototype>(id, out var proto)
                 && proto.Components.ContainsKey(Factory.GetComponentName<FloorOccluderComponent>());
         _wfWaterProtos[id] = water;
         return water;

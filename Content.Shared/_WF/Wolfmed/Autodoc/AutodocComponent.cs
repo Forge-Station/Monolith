@@ -14,7 +14,9 @@ namespace Content.Shared._WF.Wolfmed.Autodoc;
 /// internal toolset. Every runtime field below is written on the server only; the component is networked so
 /// the shared surgery system can see that an occupant is lying on an operating platform.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+// Wolfmed's surgical pod and Shitmed's robotic surgeon are both AutodocComponent. The prototype name has to
+// differ or component registration aborts on startup with "Autodoc is already registered".
+[RegisterComponent, NetworkedComponent, ComponentProtoName("WolfmedAutodoc")]
 public sealed partial class AutodocComponent : Component
 {
     public const string BodyContainerId = "autodoc_body";

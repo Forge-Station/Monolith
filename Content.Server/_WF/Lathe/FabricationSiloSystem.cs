@@ -47,7 +47,7 @@ public sealed partial class FabricationSiloSystem : SharedFabricationSiloSystem
     {
         base.Initialize();
         SubscribeLocalEvent<FabricationSiloComponent, PowerChangedEvent>(OnPowerChanged);
-        SubscribeLocalEvent<FabricationSiloComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<FabricationSiloComponent, SolutionChangedEvent>(OnSolutionChanged);
         SubscribeLocalEvent<FabricationSiloComponent, EjectFabricationSiloPartMessage>(OnEjectPart);
         InitializeChemicals();
     }
@@ -233,10 +233,9 @@ public sealed partial class FabricationSiloSystem : SharedFabricationSiloSystem
         RefreshClients(ent.Comp);
     }
 
-    private void OnSolutionChanged(Entity<FabricationSiloComponent> ent, ref SolutionContainerChangedEvent args)
+    private void OnSolutionChanged(Entity<FabricationSiloComponent> ent, ref SolutionChangedEvent args)
     {
-        if (args.SolutionId == ent.Comp.SolutionName)
-            RefreshClients(ent.Comp);
+        RefreshClients(ent.Comp);
     }
 
     private void OnEjectPart(Entity<FabricationSiloComponent> ent, ref EjectFabricationSiloPartMessage args)

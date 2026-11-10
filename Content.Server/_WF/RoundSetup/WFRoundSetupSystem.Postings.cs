@@ -16,7 +16,7 @@ public sealed partial class WFRoundSetupSystem
 {
     [Dependency] private IAdminLogManager _postingLog = default!;
     [Dependency] private INetConfigurationManager _postingConfig = default!;
-    [Dependency] private StationSystem _crewStations = default!;
+    [Dependency] private ServerStationSystem _crewStations = default!;
 
     private static readonly Color PostingColor = Color.FromHex("#7FD3C4");
 

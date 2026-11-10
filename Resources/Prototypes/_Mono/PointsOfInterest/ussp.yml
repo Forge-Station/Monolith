@@ -11,16 +11,19 @@
 - type: pointOfInterest
   id: USSPCamelot
   parent: [BasePOI, BaseRepairablePOI]
-  name: 'Freeport Camelot'
+  name: 'Станция «Камелот»'
   minimumDistance: 10650
   maximumDistance: 12400
   # WOLFGATE(ReaverCampaign): the Contested Sector game mode spawns the same sector as Standard
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, WFContestedSector, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsf, MonoChimeraPdv ]
   spawnGroup: Required
-  gridPath: /Maps/_Mono/POI/camelot.yml
+  # Forge map: spawns removed and the bluespace reactor replaced with an AME. Mono presets stay.
+  gridPath: /Maps/_Forge/POI/camelotForge.yml
   addComponents:
   - type: IFF
     color: "#ccaa55"
+  - type: ProtectedGrid
+    preventTeleportation: true
   - type: WorldGenDistanceCarver
     distanceThresholds:
     # Dead zone
@@ -31,8 +34,8 @@
 
 - type: gameMap
   id: USSPCamelot
-  mapName: 'Freeport Camelot'
-  mapPath: /Maps/_Mono/POI/camelot.yml
+  mapName: 'Станция «Камелот»'
+  mapPath: /Maps/_Forge/POI/camelotForge.yml
   minPlayers: 0
   stations:
     USSPCamelot:
@@ -41,11 +44,11 @@
         - type: VesselMusic
           ambientMusicPrototype: CamelotMusic
         - type: VesselInfo
-          description: "A rickety old station that has been cobbled together over many many cycles..."
+          description: "Хлипкая старая станция, когда-то принадлежавшая межзвёздной державе. Холодно и темно."
         - type: DeleteNearbyDrones
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'Freeport Camelot'
+          mapNameTemplate: 'Станция «Камелот»'
         - type: ExtraStationInformation
           icon:
             sprite: _NF/Structures/Storage/Crates/secure_ammo.rsi

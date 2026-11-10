@@ -193,7 +193,7 @@ public sealed class WFRadCollectorSystem : EntitySystem
             return;
         }
 
-        args.Handled = _tools.UseTool(args.Used, args.User, ent, ent.Comp.WeldTime, new[] { "Welding" },
+        args.Handled = _tools.UseTool(args.Used, args.User, ent, ent.Comp.WeldTime, "Welding",
             new WFRadCollectorWeldDoAfterEvent(), fuel: 2f);
     }
 

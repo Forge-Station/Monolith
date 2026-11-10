@@ -11,6 +11,7 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction AltActivateItemInWorld = "AltActivateItemInWorld";
         public static readonly BoundKeyFunction Drop = "Drop";
         public static readonly BoundKeyFunction ExamineEntity = "ExamineEntity";
+        public static readonly BoundKeyFunction WFOfferItem = "WFOfferItem";
         public static readonly BoundKeyFunction FocusChat = "FocusChatInputWindow";
         public static readonly BoundKeyFunction FocusLocalChat = "FocusLocalChatWindow";
         public static readonly BoundKeyFunction FocusEmote = "FocusEmote";
@@ -162,6 +163,9 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction MappingRemoveDecal = "MappingRemoveDecal";
         public static readonly BoundKeyFunction MappingCancelEraseDecal = "MappingCancelEraseDecal";
         public static readonly BoundKeyFunction MappingOpenContextMenu = "MappingOpenContextMenu";
+        public static readonly BoundKeyFunction MappingEyedropper = "MappingEyedropper";
+        public static readonly BoundKeyFunction MappingEyedropperTile = "MappingEyedropperTile";
+        public static readonly BoundKeyFunction MappingEyedropperDecal = "MappingEyedropperDecal";
         // WOLFGATE(MappingTools) START: Select tool, clipboard and undo keys for the mapping tools
         public static readonly BoundKeyFunction WFMappingEnableSelect = "WFMappingEnableSelect";
         public static readonly BoundKeyFunction WFMappingSelect = "WFMappingSelect";
@@ -176,5 +180,10 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction WFMappingUndo = "WFMappingUndo";
         public static readonly BoundKeyFunction WFMappingRedo = "WFMappingRedo";
         // WOLFGATE END
+
+        public static readonly BoundKeyFunction NanoChatNavigateUpUnread = "NanoChatNavigateUpUnread";
+        public static readonly BoundKeyFunction NanoChatNavigateDownUnread = "NanoChatNavigateDownUnread";
+        public static readonly BoundKeyFunction NanoChatNavigateUp = "NanoChatNavigateUp";
+        public static readonly BoundKeyFunction NanoChatNavigateDown = "NanoChatNavigateDown";
     }
 }

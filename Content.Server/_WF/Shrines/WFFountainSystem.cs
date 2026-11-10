@@ -11,12 +11,11 @@ public sealed class WFFountainSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<WFFountainComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<WFFountainComponent, SolutionChangedEvent>(OnSolutionChanged);
     }
 
-    private void OnSolutionChanged(Entity<WFFountainComponent> ent, ref SolutionContainerChangedEvent args)
+    private void OnSolutionChanged(Entity<WFFountainComponent> ent, ref SolutionChangedEvent args)
     {
-        if (args.SolutionId == ent.Comp.Solution)
-            _appearance.SetData(ent, WFFountainVisuals.Dry, args.Solution.Volume <= 0);
+        _appearance.SetData(ent, WFFountainVisuals.Dry, args.Solution.Comp.Solution.Volume <= 0);
     }
 }

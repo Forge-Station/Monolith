@@ -6,7 +6,6 @@ using Content.Client._WF.Genitals; // WOLFGATE(Genitals)
 using Content.Client._WF.Genitals.UI; // WOLFGATE(Genitals)
 using Content.Client._WF.Humanoid; // WOLFGATE(Humanoid)
 using Content.Shared._WF.Genitals; // WOLFGATE(Genitals)
-using Content.Shared._WF.Genitals.Profile; // WOLFGATE(Genitals)
 using Content.Shared._WF.Biotype; // WOLFGATE(Biotype)
 using Content.Shared._WF.Species; // WOLFGATE(Species)
 using Content.Client.Lobby.UI.Loadouts;
@@ -336,7 +335,7 @@ namespace Content.Client.Lobby.UI
                 if (Profile is null)
                     return;
                 Profile = Profile.WithCharacterAppearance(
-                    Profile.Appearance.WithHairColor(newColor.marking.MarkingColors[0]));
+                    Profile.Appearance.WithHairColor(new List<Color> { newColor.marking.MarkingColors[0] }));
                 UpdateCMarkingsHair();
                 ReloadPreview();
             };
@@ -2485,7 +2484,7 @@ namespace Content.Client.Lobby.UI
             var hairMarking = Profile.Appearance.HairStyleId switch
             {
                 HairStyles.DefaultHairStyle => new List<Marking>(),
-                _ => new() { new(Profile.Appearance.HairStyleId, new List<Color>() { Profile.Appearance.HairColor }) },
+                _ => new() { new(Profile.Appearance.HairStyleId, Profile.Appearance.HairColor) },
             };
 
             var facialHairMarking = Profile.Appearance.FacialHairStyleId switch
@@ -2515,16 +2514,16 @@ namespace Content.Client.Lobby.UI
             }
 
             // hair color
-            Color? hairColor = null;
+            List<Color>? hairColor = null;
             if ( Profile.Appearance.HairStyleId != HairStyles.DefaultHairStyle &&
                 _markingManager.Markings.TryGetValue(Profile.Appearance.HairStyleId, out var hairProto)
             )
             {
                 if (_markingManager.CanBeApplied(Profile.Species, Profile.Sex, hairProto, _prototypeManager))
                 {
-                    if (_markingManager.MustMatchSkin(Profile.Species, HumanoidVisualLayers.Hair, out var _, _prototypeManager))
+                    if (_markingManager.MustMatchSkin(Profile.Species, HumanoidVisualLayers.Hair, out var hairAlpha, _prototypeManager))
                     {
-                        hairColor = Profile.Appearance.SkinColor;
+                        hairColor = new List<Color> { Profile.Appearance.SkinColor.WithAlpha(hairAlpha) };
                     }
                     else
                     {
@@ -2534,7 +2533,7 @@ namespace Content.Client.Lobby.UI
             }
             if (hairColor != null)
             {
-                Markings.HairMarking = new (Profile.Appearance.HairStyleId, new List<Color>() { hairColor.Value });
+                Markings.HairMarking = new (Profile.Appearance.HairStyleId, hairColor);
             }
             else
             {

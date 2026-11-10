@@ -27,6 +27,7 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
     [Dependency] private IGameTiming _timing = default!;
     private object _manifold = default!;
     private MethodInfo _testOverlap = default!;
+    private object?[] _testOverlapArgs = [];
     [Dependency] private PricingSystem _pricing = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
@@ -71,6 +72,8 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
             var testOverlapMethod = manifoldType.GetMethod("TestOverlap");
             if (testOverlapMethod != null)
                 _testOverlap = testOverlapMethod.MakeGenericMethod(typeof(IPhysShape), typeof(PhysShapeCircle));
+            if (_testOverlap != null)
+                _testOverlapArgs = Array.ConvertAll(_testOverlap.GetParameters(), p => p.HasDefaultValue ? p.DefaultValue : null);
         }
     }
 
@@ -143,7 +146,16 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
             var xf = _physics.GetLocalPhysicsTransform(anch, xform);
             var shape = fix.Shape;
 
-            if ((bool?)_testOverlap.Invoke(_manifold, [shape, 0, shapeB, 0, xf, xfB]) ?? false)
+            if (_testOverlap == null || _testOverlapArgs.Length < 6)
+                return false;
+
+            _testOverlapArgs[0] = shape;
+            _testOverlapArgs[1] = 0;
+            _testOverlapArgs[2] = shapeB;
+            _testOverlapArgs[3] = 0;
+            _testOverlapArgs[4] = xf;
+            _testOverlapArgs[5] = xfB;
+            if ((bool?)_testOverlap.Invoke(_manifold, _testOverlapArgs) ?? false)
                 return true;
         }
 

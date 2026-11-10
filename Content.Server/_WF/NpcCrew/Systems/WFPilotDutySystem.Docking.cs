@@ -31,7 +31,7 @@ public readonly record struct WFDockPlan(
 public sealed partial class WFPilotDutySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private DockingSystem _docking = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
 

@@ -12,7 +12,7 @@ namespace Content.Server._WF.Contracts;
 public sealed partial class WFContractSystem
 {
     [Dependency] private IServerDbManager _db = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
 
     /// <summary>Characters whose stored standing has been read this round.</summary>
     private readonly HashSet<WFContractHolder> _loaded = new();

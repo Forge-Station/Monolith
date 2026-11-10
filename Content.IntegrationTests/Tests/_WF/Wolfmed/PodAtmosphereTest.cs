@@ -170,7 +170,7 @@ public sealed class PodAtmosphereTest : GameTest
 
     /// <summary>What the pod's window was last told about the seal.</summary>
     private WolfmedAutodocSeal? Readout(EntityUid pod) =>
-        SEntMan.System<SharedUserInterfaceSystem>().TryGetUiState<AutodocBuiState>(pod, AutodocUiKey.Key, out var bui)
+        SEntMan.System<SharedUserInterfaceSystem>().TryGetUiState<AutodocBuiState>(pod, WolfmedAutodocUiKey.Key, out var bui)
             ? bui.Seal
             : null;
 

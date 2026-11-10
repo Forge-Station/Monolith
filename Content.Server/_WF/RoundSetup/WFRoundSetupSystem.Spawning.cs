@@ -1,22 +1,44 @@
 using System.Linq;
+using Content.Shared.Station.Components;
 using Content.Server._NF.Station.Components;
+using Content.Shared.Station.Components;
 using Content.Server.Administration.Managers;
+using Content.Shared.Station.Components;
 using Content.Server.GameTicking;
+using Content.Shared.Station.Components;
 using Content.Server.GameTicking.Events;
+using Content.Shared.Station.Components;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Shared.Station.Components;
 using Content.Server.Antag;
+using Content.Shared.Station.Components;
 using Content.Server.Maps;
+using Content.Shared.Station.Components;
 using Content.Server.Spawners.EntitySystems;
+using Content.Shared.Spawners.EntitySystems;
+using Content.Shared.Station.Components;
 using Content.Server.Station.Components;
+using Content.Shared.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
+using Content.Shared.Station.Components;
 using Content.Shared._WF.RoundSetup;
+using Content.Shared.Station.Components;
 using Content.Shared.GameTicking;
+using Content.Shared.Station.Components;
 using Content.Shared.Roles;
+using Content.Shared.Station.Components;
 using Content.Shared.Preferences;
+using Content.Shared.Station.Components;
 using Robust.Shared.Map;
+using Content.Shared.Station.Components;
 using Robust.Shared.Network;
+using Content.Shared.Station.Components;
 using Robust.Shared.Player;
+using Content.Shared.Station.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared.Station.Components;
 
 namespace Content.Server._WF.RoundSetup;
 
@@ -26,7 +48,7 @@ public sealed partial class WFRoundSetupSystem
     [Dependency] private IComponentFactory _components = default!;
     [Dependency] private IBanManager _bans = default!;
     [Dependency] private IGameMapManager _gameMaps = default!;
-    [Dependency] private StationJobsSystem _jobs = default!;
+    [Dependency] private ServerStationJobsSystem _jobs = default!;
     [Dependency] private StationSpawningSystem _spawning = default!;
 
     private readonly Dictionary<NetUserId, (EntityUid Station, EntityCoordinates? Coordinates)> _pendingSpawns = new();
@@ -34,7 +56,7 @@ public sealed partial class WFRoundSetupSystem
     /// <summary>Reserves scenario players before ordinary allocation and chooses their spawn coordinates.</summary>
     private void InitializeSpawning()
     {
-        SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRoundSpawning, before: new[] { typeof(AntagSelectionSystem) });
+        SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRoundSpawning, before: new[] { typeof(ServerAntagSelectionSystem) });
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
             before: new[] { typeof(ContainerSpawnPointSystem), typeof(SpawnPointSystem) });
     }

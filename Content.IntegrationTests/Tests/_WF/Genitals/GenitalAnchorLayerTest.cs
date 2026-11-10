@@ -108,7 +108,10 @@ public sealed class GenitalAnchorLayerTest
                         || !entity.Components.TryGetValue(spriteName, out var sprite))
                         continue;
 
-                    var keys = ReadLayerKeys(sprite.Mapping);
+                    if (!proto.GetPrototypeData(entity).TryGetValue(spriteName, out var spriteMapping))
+                        continue;
+
+                    var keys = ReadLayerKeys(spriteMapping);
                     if (IndexOf(keys, HumanoidLayer + "Chest") < 0)
                         continue;
 

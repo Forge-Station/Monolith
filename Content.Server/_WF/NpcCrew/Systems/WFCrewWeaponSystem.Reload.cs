@@ -1,3 +1,4 @@
+using Content.Server._WF.NpcCrew;
 using Content.Server._WF.NpcCrew.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
@@ -17,7 +18,7 @@ using System.Linq;
 namespace Content.Server._WF.NpcCrew.Systems;
 
 /// <summary>Reloads from real equipment slots and falls back to another weapon when ammunition is exhausted.</summary>
-public sealed partial class WFCrewWeaponSystem
+public sealed partial class WFCrewWeaponSystem : EntitySystem
 {
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
@@ -28,6 +29,7 @@ public sealed partial class WFCrewWeaponSystem
     [Dependency] private SharedMapSystem _maps = default!;
     [Dependency] private WFCrewEvaSystem _eva = default!;
     [Dependency] private Robust.Shared.Timing.IGameTiming _timing = default!;
+    [Dependency] private WFCrewStealthSystem _stealth = default!;
 
     private const string MagazineSlot = "gun_magazine";
     private const float LookupRange = 10f;
@@ -278,7 +280,8 @@ public sealed partial class WFCrewWeaponSystem
     /// Walls and closed opaque doors conceal boarders; radio awareness does not extend eyesight. Only what is built
     /// into the ship blocks the view: a crewmate, a body, a crate or a locker in between does not.
     /// </summary>
-    public bool CanSee(EntityUid uid, EntityUid target) => !TerminatingOrDeleted(target)
+    public bool CanSee(EntityUid uid, EntityUid target, bool ignoreStealth = false) => !TerminatingOrDeleted(target)
+        && (ignoreStealth || !_stealth.Unseen(target))
         && _interaction.InRangeUnobstructed(uid, target, 10f, Content.Shared.Physics.CollisionGroup.Opaque,
             predicate: blocker => !Transform(blocker).Anchored);
 

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Polaris at commit https://github.com/PolarisSS13/Polaris/commit/6cd19fe0dec6b5f18b6b18c3eb36af7bf3359f25.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rbrick0",
+      "directions": 4
+    },
+    {
+      "name": "rbrick1",
+      "directions": 4
+    },
+    {
+      "name": "rbrick2",
+      "directions": 4
+    },
+    {
+      "name": "rbrick3",
+      "directions": 4
+    },
+    {
+      "name": "rbrick4",
+      "directions": 4
+    },
+    {
+      "name": "rbrick5",
+      "directions": 4
+    },
+    {
+      "name": "rbrick6",
+      "directions": 4
+    },
+    {
+      "name": "rbrick7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

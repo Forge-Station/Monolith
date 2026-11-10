@@ -567,57 +567,57 @@ GunneryServer: GunneryServerMedium # Mono
 
 # WOLFGATE(Prototypes) START: WF prototype id prefix
 # 2026-09-23
-ActionWFHarpoonPayOut: WFActionHarpoonPayOut
-ActionWFHarpoonReelIn: WFActionHarpoonReelIn
-ActionWFHarpoonRelease: WFActionHarpoonRelease
-MobCanine: WFMobCanine
-MobCanineDummy: WFMobCanineDummy
-OrganWFBreasts: WFOrganBreasts
-OrganWFPenis: WFOrganPenis
-OrganWFTesticles: WFOrganTesticles
-OrganWFVagina: WFOrganVagina
-OrganWFWomb: WFOrganWomb
-PowerCordClampHV: WFPowerCordClampHV
-PowerCordClampLV: WFPowerCordClampLV
-PowerCordClampMV: WFPowerCordClampMV
-PowerCordCoilHV: WFPowerCordCoilHV
-PowerCordCoilHV1: WFPowerCordCoilHV1
-PowerCordCoilLV: WFPowerCordCoilLV
-PowerCordCoilLV1: WFPowerCordCoilLV1
-PowerCordCoilMV: WFPowerCordCoilMV
-PowerCordCoilMV1: WFPowerCordCoilMV1
-RopeAttachPointDebug: WFRopeAttachPointDebug
-RopeBungeeCoil: WFRopeBungeeCoil
-RopeBungeeCoil1: WFRopeBungeeCoil1
-RopeCoilDebug: WFRopeCoilDebug
-RopeCoilDebug1: WFRopeCoilDebug1
-RopeHempCoil: WFRopeHempCoil
-RopeHempCoil1: WFRopeHempCoil1
-RopeSteelCableCoil: WFRopeSteelCableCoil
-RopeSteelCableCoil1: WFRopeSteelCableCoil1
-RopeSyntheticCoil: WFRopeSyntheticCoil
-RopeSyntheticCoil1: WFRopeSyntheticCoil1
-RopeTowCableCoil: WFRopeTowCableCoil
-RopeTowCableCoil1: WFRopeTowCableCoil1
-ShipHarpoon: WFShipHarpoon
-ShipHarpoonTurret: WFShipHarpoonTurret
-ShipHarpoonTurretFlatpack: WFShipHarpoonTurretFlatpack
-ShipVoucherMedicalResponder: WFShipVoucherMedicalResponder
-SurgeryWFInsertBreasts: WFSurgeryInsertBreasts
-SurgeryWFInsertPenis: WFSurgeryInsertPenis
-SurgeryWFInsertTesticles: WFSurgeryInsertTesticles
-SurgeryWFInsertVagina: WFSurgeryInsertVagina
-SurgeryWFInsertWomb: WFSurgeryInsertWomb
-SurgeryWFRemoveBreasts: WFSurgeryRemoveBreasts
-SurgeryWFRemovePenis: WFSurgeryRemovePenis
-SurgeryWFRemoveTesticles: WFSurgeryRemoveTesticles
-SurgeryWFRemoveVagina: WFSurgeryRemoveVagina
-SurgeryWFRemoveWomb: WFSurgeryRemoveWomb
-TetherAnchorEye: WFTetherAnchorEye
-TetherInstaller: WFTetherInstaller
-VendingMachineWolfgate: WFVendingMachineWolfgate
-WallmountShipPaSpeaker: WFWallmountShipPaSpeaker
-WolfgateErtSpawner: WFErtSpawner
+# ActionWFHarpoonPayOut: WFActionHarpoonPayOut  # still spawned as ActionWFHarpoonPayOut; WFActionHarpoonPayOut is not an entity
+# ActionWFHarpoonReelIn: WFActionHarpoonReelIn  # still spawned as ActionWFHarpoonReelIn; WFActionHarpoonReelIn is not an entity
+# ActionWFHarpoonRelease: WFActionHarpoonRelease  # still spawned as ActionWFHarpoonRelease; WFActionHarpoonRelease is not an entity
+# MobCanine: WFMobCanine  # still spawned as MobCanine; WFMobCanine is not an entity
+# MobCanineDummy: WFMobCanineDummy  # still spawned as MobCanineDummy; WFMobCanineDummy is not an entity
+# OrganWFBreasts: WFOrganBreasts  # still spawned as OrganWFBreasts; WFOrganBreasts is not an entity
+# OrganWFPenis: WFOrganPenis  # still spawned as OrganWFPenis; WFOrganPenis is not an entity
+# OrganWFTesticles: WFOrganTesticles  # still spawned as OrganWFTesticles; WFOrganTesticles is not an entity
+# OrganWFVagina: WFOrganVagina  # still spawned as OrganWFVagina; WFOrganVagina is not an entity
+# OrganWFWomb: WFOrganWomb  # still spawned as OrganWFWomb; WFOrganWomb is not an entity
+# PowerCordClampHV: WFPowerCordClampHV  # still spawned as PowerCordClampHV; WFPowerCordClampHV is not an entity
+# PowerCordClampLV: WFPowerCordClampLV  # still spawned as PowerCordClampLV; WFPowerCordClampLV is not an entity
+# PowerCordClampMV: WFPowerCordClampMV  # still spawned as PowerCordClampMV; WFPowerCordClampMV is not an entity
+# PowerCordCoilHV: WFPowerCordCoilHV  # still spawned as PowerCordCoilHV; WFPowerCordCoilHV is not an entity
+# PowerCordCoilHV1: WFPowerCordCoilHV1  # still spawned as PowerCordCoilHV1; WFPowerCordCoilHV1 is not an entity
+# PowerCordCoilLV: WFPowerCordCoilLV  # still spawned as PowerCordCoilLV; WFPowerCordCoilLV is not an entity
+# PowerCordCoilLV1: WFPowerCordCoilLV1  # still spawned as PowerCordCoilLV1; WFPowerCordCoilLV1 is not an entity
+# PowerCordCoilMV: WFPowerCordCoilMV  # still spawned as PowerCordCoilMV; WFPowerCordCoilMV is not an entity
+# PowerCordCoilMV1: WFPowerCordCoilMV1  # still spawned as PowerCordCoilMV1; WFPowerCordCoilMV1 is not an entity
+# RopeAttachPointDebug: WFRopeAttachPointDebug  # still spawned as RopeAttachPointDebug; WFRopeAttachPointDebug is not an entity
+# RopeBungeeCoil: WFRopeBungeeCoil  # still spawned as RopeBungeeCoil; WFRopeBungeeCoil is not an entity
+# RopeBungeeCoil1: WFRopeBungeeCoil1  # still spawned as RopeBungeeCoil1; WFRopeBungeeCoil1 is not an entity
+# RopeCoilDebug: WFRopeCoilDebug  # still spawned as RopeCoilDebug; WFRopeCoilDebug is not an entity
+# RopeCoilDebug1: WFRopeCoilDebug1  # still spawned as RopeCoilDebug1; WFRopeCoilDebug1 is not an entity
+# RopeHempCoil: WFRopeHempCoil  # still spawned as RopeHempCoil; WFRopeHempCoil is not an entity
+# RopeHempCoil1: WFRopeHempCoil1  # still spawned as RopeHempCoil1; WFRopeHempCoil1 is not an entity
+# RopeSteelCableCoil: WFRopeSteelCableCoil  # still spawned as RopeSteelCableCoil; WFRopeSteelCableCoil is not an entity
+# RopeSteelCableCoil1: WFRopeSteelCableCoil1  # still spawned as RopeSteelCableCoil1; WFRopeSteelCableCoil1 is not an entity
+# RopeSyntheticCoil: WFRopeSyntheticCoil  # still spawned as RopeSyntheticCoil; WFRopeSyntheticCoil is not an entity
+# RopeSyntheticCoil1: WFRopeSyntheticCoil1  # still spawned as RopeSyntheticCoil1; WFRopeSyntheticCoil1 is not an entity
+# RopeTowCableCoil: WFRopeTowCableCoil  # still spawned as RopeTowCableCoil; WFRopeTowCableCoil is not an entity
+# RopeTowCableCoil1: WFRopeTowCableCoil1  # still spawned as RopeTowCableCoil1; WFRopeTowCableCoil1 is not an entity
+# ShipHarpoon: WFShipHarpoon  # still spawned as ShipHarpoon; WFShipHarpoon is not an entity
+# ShipHarpoonTurret: WFShipHarpoonTurret  # still spawned as ShipHarpoonTurret; WFShipHarpoonTurret is not an entity
+# ShipHarpoonTurretFlatpack: WFShipHarpoonTurretFlatpack  # still spawned as ShipHarpoonTurretFlatpack; WFShipHarpoonTurretFlatpack is not an entity
+ShipVoucherMedicalResponder: null  # WFShipVoucherMedicalResponder is not an entity prototype
+# SurgeryWFInsertBreasts: WFSurgeryInsertBreasts  # still spawned as SurgeryWFInsertBreasts; WFSurgeryInsertBreasts is not an entity
+# SurgeryWFInsertPenis: WFSurgeryInsertPenis  # still spawned as SurgeryWFInsertPenis; WFSurgeryInsertPenis is not an entity
+# SurgeryWFInsertTesticles: WFSurgeryInsertTesticles  # still spawned as SurgeryWFInsertTesticles; WFSurgeryInsertTesticles is not an entity
+# SurgeryWFInsertVagina: WFSurgeryInsertVagina  # still spawned as SurgeryWFInsertVagina; WFSurgeryInsertVagina is not an entity
+# SurgeryWFInsertWomb: WFSurgeryInsertWomb  # still spawned as SurgeryWFInsertWomb; WFSurgeryInsertWomb is not an entity
+# SurgeryWFRemoveBreasts: WFSurgeryRemoveBreasts  # still spawned as SurgeryWFRemoveBreasts; WFSurgeryRemoveBreasts is not an entity
+# SurgeryWFRemovePenis: WFSurgeryRemovePenis  # still spawned as SurgeryWFRemovePenis; WFSurgeryRemovePenis is not an entity
+# SurgeryWFRemoveTesticles: WFSurgeryRemoveTesticles  # still spawned as SurgeryWFRemoveTesticles; WFSurgeryRemoveTesticles is not an entity
+# SurgeryWFRemoveVagina: WFSurgeryRemoveVagina  # still spawned as SurgeryWFRemoveVagina; WFSurgeryRemoveVagina is not an entity
+# SurgeryWFRemoveWomb: WFSurgeryRemoveWomb  # still spawned as SurgeryWFRemoveWomb; WFSurgeryRemoveWomb is not an entity
+# TetherAnchorEye: WFTetherAnchorEye  # still spawned as TetherAnchorEye; WFTetherAnchorEye is not an entity
+# TetherInstaller: WFTetherInstaller  # still spawned as TetherInstaller; WFTetherInstaller is not an entity
+# VendingMachineWolfgate: WFVendingMachineWolfgate  # still spawned as VendingMachineWolfgate; WFVendingMachineWolfgate is not an entity
+WallmountShipPaSpeaker: null  # WFWallmountShipPaSpeaker is not an entity prototype
+WolfgateErtSpawner: null  # WFErtSpawner is not an entity prototype
 # 2026-09-25 Wolfmed
 ActionWolfmedCallForHelp: WFActionWolfmedCallForHelp
 ActionWolfmedCheckYourself: WFActionWolfmedCheckYourself
@@ -728,60 +728,60 @@ WFWindreignCarrierComputer: null
 # WOLFGATE START: Monolith#4816 renamed the WL-01 suit and helmet without a migration
 # 2026-10-08
 ClothingOuterHardsuitMercenaryWarlord: ClothingOuterHardsuitWarlord
-ClothingHelmetHardsuitMercenaryWarlord: ClothingHelmetHardsuitWarlord
+# ClothingHelmetHardsuitMercenaryWarlord: ClothingHelmetHardsuitWarlord  # still spawned as ClothingHelmetHardsuitMercenaryWarlord; ClothingHelmetHardsuitWarlord is not an entity
 # WOLFGATE END
 
 
 # WOLFGATE(Avali) START: WF prefix on the Avali brain and bio-synthetic limbs
 # 2026-10-09
-OrganAvaliBrain: WFOrganAvaliBrain
-BioSynthAvaliHeadEmpty: WFBioSynthAvaliHeadEmpty
-BioSynthAvaliLeftArm: WFBioSynthAvaliLeftArm
-BioSynthAvaliRightArm: WFBioSynthAvaliRightArm
-BioSynthAvaliLeftHand: WFBioSynthAvaliLeftHand
-BioSynthAvaliRightHand: WFBioSynthAvaliRightHand
-BioSynthAvaliLeftLeg: WFBioSynthAvaliLeftLeg
-BioSynthAvaliRightLeg: WFBioSynthAvaliRightLeg
-BioSynthAvaliLeftFoot: WFBioSynthAvaliLeftFoot
-BioSynthAvaliRightFoot: WFBioSynthAvaliRightFoot
+OrganAvaliBrain: null  # WFOrganAvaliBrain is not an entity prototype
+BioSynthAvaliHeadEmpty: null  # WFBioSynthAvaliHeadEmpty is not an entity prototype
+BioSynthAvaliLeftArm: null  # WFBioSynthAvaliLeftArm is not an entity prototype
+BioSynthAvaliRightArm: null  # WFBioSynthAvaliRightArm is not an entity prototype
+BioSynthAvaliLeftHand: null  # WFBioSynthAvaliLeftHand is not an entity prototype
+BioSynthAvaliRightHand: null  # WFBioSynthAvaliRightHand is not an entity prototype
+BioSynthAvaliLeftLeg: null  # WFBioSynthAvaliLeftLeg is not an entity prototype
+BioSynthAvaliRightLeg: null  # WFBioSynthAvaliRightLeg is not an entity prototype
+BioSynthAvaliLeftFoot: null  # WFBioSynthAvaliLeftFoot is not an entity prototype
+BioSynthAvaliRightFoot: null  # WFBioSynthAvaliRightFoot is not an entity prototype
 # WOLFGATE END
 
 # WOLFGATE(ClownCosmetics) START: WF prefix on the ported clown and mime clothing
-ClothingHeadHatCircusClown: WFClothingHeadHatCircusClown
-ClothingUniformCircusClown: WFClothingUniformCircusClown
-ClothingUniformJokester: WFClothingUniformJokester
-ClothingOuterCoatJokester: WFClothingOuterCoatJokester
-ClothingUniformJesterEvil: WFClothingUniformJesterEvil
-ClothingHeadJesterEvilHat: WFClothingHeadJesterEvilHat
-ClothingNeckRuffle: WFClothingNeckRuffle
-ClothingMaskClownNose: WFClothingMaskClownNose
-ClothingShoesCircus: WFClothingShoesCircus
-ClothingShoesJokester: WFClothingShoesJokester
-ClothingShoesJesterEvilJanglers: WFClothingShoesJesterEvilJanglers
-ClothingHeadHatMimeBowler: WFClothingHeadHatMimeBowler
-ClothingOuterCoatPufferMime: WFClothingOuterCoatPufferMime
-ClothingUniformJumpsuitMimeCropped: WFClothingUniformJumpsuitMimeCropped
-ClothingUniformJumpskirtMimeCropped: WFClothingUniformJumpskirtMimeCropped
-ClothingUniformJumpsuitMimeNouveau: WFClothingUniformJumpsuitMimeNouveau
-ClothingUniformJumpskirtMimeNouveau: WFClothingUniformJumpskirtMimeNouveau
-ClothingShoesMimeBoots: WFClothingShoesMimeBoots
-CandyClownUniformSuit: WFCandyClownUniformSuit
-StripedClownUniformSuit: WFStripedClownUniformSuit
-SpottedClownUniformSuit: WFSpottedClownUniformSuit
-ClothingUniformJumpsuitPerformerClown: WFClothingUniformJumpsuitPerformerClown
-ClothingUniformJumpskirtPerformerClown: WFClothingUniformJumpskirtPerformerClown
-ClothingUniformJumpsuitClownFormal: WFClothingUniformJumpsuitClownFormal
-ClothingUniformJumpskirtClownFormal: WFClothingUniformJumpskirtClownFormal
-ClothingUniformJumpsuitPerformerMime: WFClothingUniformJumpsuitPerformerMime
-ClothingUniformJumpskirtPerformerMime: WFClothingUniformJumpskirtPerformerMime
-ClothingUniformJumpsuitMimeSuaveWhite: WFClothingUniformJumpsuitMimeSuaveWhite
-ClothingUniformJumpsuitMimeSuaveBlack: WFClothingUniformJumpsuitMimeSuaveBlack
-MimeFrillsUniformSuit: WFMimeFrillsUniformSuit
-ClothingMaskSusMime: WFClothingMaskSusMime
-ClothingUnderSocksMime: WFClothingUnderSocksMime
-ClothingMaskMimeSecurity: WFClothingMaskMimeSecurity
-CoolCoyoteClothesSexyclown: WFCoolCoyoteClothesSexyclown
-CoolCoyoteClothesSexymime: WFCoolCoyoteClothesSexymime
+ClothingHeadHatCircusClown: null  # WFClothingHeadHatCircusClown is not an entity prototype
+ClothingUniformCircusClown: null  # WFClothingUniformCircusClown is not an entity prototype
+ClothingUniformJokester: null  # WFClothingUniformJokester is not an entity prototype
+ClothingOuterCoatJokester: null  # WFClothingOuterCoatJokester is not an entity prototype
+ClothingUniformJesterEvil: null  # WFClothingUniformJesterEvil is not an entity prototype
+ClothingHeadJesterEvilHat: null  # WFClothingHeadJesterEvilHat is not an entity prototype
+ClothingNeckRuffle: null  # WFClothingNeckRuffle is not an entity prototype
+ClothingMaskClownNose: null  # WFClothingMaskClownNose is not an entity prototype
+ClothingShoesCircus: null  # WFClothingShoesCircus is not an entity prototype
+ClothingShoesJokester: null  # WFClothingShoesJokester is not an entity prototype
+ClothingShoesJesterEvilJanglers: null  # WFClothingShoesJesterEvilJanglers is not an entity prototype
+ClothingHeadHatMimeBowler: null  # WFClothingHeadHatMimeBowler is not an entity prototype
+ClothingOuterCoatPufferMime: null  # WFClothingOuterCoatPufferMime is not an entity prototype
+ClothingUniformJumpsuitMimeCropped: null  # WFClothingUniformJumpsuitMimeCropped is not an entity prototype
+ClothingUniformJumpskirtMimeCropped: null  # WFClothingUniformJumpskirtMimeCropped is not an entity prototype
+ClothingUniformJumpsuitMimeNouveau: null  # WFClothingUniformJumpsuitMimeNouveau is not an entity prototype
+ClothingUniformJumpskirtMimeNouveau: null  # WFClothingUniformJumpskirtMimeNouveau is not an entity prototype
+ClothingShoesMimeBoots: null  # WFClothingShoesMimeBoots is not an entity prototype
+CandyClownUniformSuit: null  # WFCandyClownUniformSuit is not an entity prototype
+StripedClownUniformSuit: null  # WFStripedClownUniformSuit is not an entity prototype
+SpottedClownUniformSuit: null  # WFSpottedClownUniformSuit is not an entity prototype
+ClothingUniformJumpsuitPerformerClown: null  # WFClothingUniformJumpsuitPerformerClown is not an entity prototype
+ClothingUniformJumpskirtPerformerClown: null  # WFClothingUniformJumpskirtPerformerClown is not an entity prototype
+ClothingUniformJumpsuitClownFormal: null  # WFClothingUniformJumpsuitClownFormal is not an entity prototype
+ClothingUniformJumpskirtClownFormal: null  # WFClothingUniformJumpskirtClownFormal is not an entity prototype
+ClothingUniformJumpsuitPerformerMime: null  # WFClothingUniformJumpsuitPerformerMime is not an entity prototype
+ClothingUniformJumpskirtPerformerMime: null  # WFClothingUniformJumpskirtPerformerMime is not an entity prototype
+ClothingUniformJumpsuitMimeSuaveWhite: null  # WFClothingUniformJumpsuitMimeSuaveWhite is not an entity prototype
+ClothingUniformJumpsuitMimeSuaveBlack: null  # WFClothingUniformJumpsuitMimeSuaveBlack is not an entity prototype
+MimeFrillsUniformSuit: null  # WFMimeFrillsUniformSuit is not an entity prototype
+ClothingMaskSusMime: null  # WFClothingMaskSusMime is not an entity prototype
+ClothingUnderSocksMime: null  # WFClothingUnderSocksMime is not an entity prototype
+ClothingMaskMimeSecurity: null  # WFClothingMaskMimeSecurity is not an entity prototype
+CoolCoyoteClothesSexyclown: null  # WFCoolCoyoteClothesSexyclown is not an entity prototype
+CoolCoyoteClothesSexymime: null  # WFCoolCoyoteClothesSexymime is not an entity prototype
 # WOLFGATE END
 
 # WOLFGATE(Xenoarch) START: wizden xenoarch rework replaced the old artifact types
@@ -794,7 +794,7 @@ VariedXenoArtifactItem: ComplexXenoArtifactItem
 
 # WOLFGATE(DecorImport) START: duplicate flesh wall art merged into the TauCeti meatland wall
 # 2026-10-26
-GoonSetpiecesBloodwall: TauCetiMeatlandWall
+GoonSetpiecesBloodwall: null  # TauCetiMeatlandWall is not an entity prototype
 # WOLFGATE END
 
 # WOLFGATE(DecorImport) START: bamboo wall cut from the import

@@ -7,7 +7,7 @@ namespace Content.Shared._WF.Wolfmed.Autodoc;
 
 /// <summary>The autodoc window's UI key.</summary>
 [Serializable, NetSerializable]
-public enum AutodocUiKey : byte
+public enum WolfmedAutodocUiKey : byte
 {
     Key,
 }

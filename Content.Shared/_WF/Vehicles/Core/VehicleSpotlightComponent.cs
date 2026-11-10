@@ -1,0 +1,32 @@
+using Robust.Shared.GameStates;
+
+namespace Content.Shared._WF.Vehicles.Core;
+
+/// <summary>A vehicle headlight the operator toggles; the light itself is the vehicle's point light.</summary>
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class VehicleSpotlightComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public bool Enabled;
+
+    [DataField, AutoNetworkedField]
+    public float Radius = 12f;
+
+    [DataField, AutoNetworkedField]
+    public float Energy = 2.5f;
+
+    [DataField, AutoNetworkedField]
+    public float Softness = 2f;
+
+    [NonSerialized]
+    public bool BaseInitialized;
+
+    [NonSerialized]
+    public float BaseRadius;
+
+    [NonSerialized]
+    public float BaseEnergy;
+
+    [NonSerialized]
+    public float BaseSoftness;
+}

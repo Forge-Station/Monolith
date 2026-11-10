@@ -33,7 +33,8 @@
     gender: Male
     appearance:
       hair: HumanHairBalding
-      hairColor: "#3B3026"
+      hairColor:
+        - "#3B3026"
       facialHair: HumanFacialHairFullbeard
       facialHairColor: "#3B3026"
       eyeColor: "#5B6F7A"
@@ -125,7 +126,8 @@
     gender: Male
     appearance:
       hair: HumanHairCombover
-      hairColor: "#8A8580"
+      hairColor:
+        - "#8A8580"
       facialHair: HumanFacialHairSelleck
       facialHairColor: "#8A8580"
       eyeColor: "#6B4E2E"

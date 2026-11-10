@@ -13,9 +13,9 @@ public sealed class WFReaverCampaignRuleSystem : GameRuleSystem<WFReaverCampaign
         Log.Info("Contested Sector game mode started: the Reaver campaign is on.");
     }
 
-    protected override void Ended(EntityUid uid, WFReaverCampaignRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    protected override void Ended(Entity<WFReaverCampaignRuleComponent> rule, ref GameRuleEndedEvent args)
     {
-        base.Ended(uid, component, gameRule, args);
+        base.Ended(rule, ref args);
         Log.Info("Contested Sector game mode ended: the Reaver campaign is off.");
     }
 }

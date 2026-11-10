@@ -144,6 +144,14 @@ public sealed partial class WFTradeMarketSystem
         return distance < Profile(chuteXform.GridUid).MinHaulDistance ? "wf-trade-refuse-too-close" : null;
     }
 
+    /// <summary>Why a sealed-only chute refuses a crate without a manifest seal, or null if the chute takes it.</summary>
+    public LocId? CheckSeal(EntityUid chute, EntityUid crate)
+    {
+        return TryComp<WFTradeOriginComponent>(crate, out var origin) && origin.Run == null && IsSealedOnly(chute)
+            ? "wf-trade-refuse-unsealed"
+            : null;
+    }
+
     /// <summary>Whether a chute takes only freight with a manifest seal, such as the Underground fence.</summary>
     public bool IsSealedOnly(EntityUid chute)
     {

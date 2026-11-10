@@ -37,10 +37,10 @@ public sealed class WFCockpitFireInputTest
         await pair.Client.WaitAssertion(() =>
         {
             var ui = pair.Client.ResolveDependency<IUserInterfaceManager>();
-            var maps = pair.Client.ResolveDependency<IMapManager>();
+            var maps = pair.Client.System<SharedMapSystem>();
             var input = pair.Client.ResolveDependency<IInputManager>();
-            var map = maps.CreateMap();
-            var mapEntity = maps.GetMapEntityId(map);
+            maps.CreateMap(out var map);
+            var mapEntity = maps.GetMapOrInvalid(map);
             using var host = new Control { MouseFilter = Control.MouseFilterMode.Ignore };
             using var world = new MainViewport();
             using var nav = new ShuttleNavControl { WfFitInstrument = true, SetSize = new Vector2(float.NaN) };
@@ -229,9 +229,9 @@ public sealed class WFCockpitFireInputTest
         await pair.Client.WaitAssertion(() =>
         {
             var entities = pair.Client.EntMan;
-            var maps = pair.Client.ResolveDependency<IMapManager>();
+            var maps = pair.Client.System<SharedMapSystem>();
             var transforms = entities.System<SharedTransformSystem>();
-            var map = maps.CreateMap();
+            maps.CreateMap(out var map);
             var ship = maps.CreateGridEntity(map);
             entities.System<SharedMapSystem>().SetTile(ship.Owner, ship.Comp, new Vector2i(1, 1), new Tile(1));
             transforms.SetWorldPosition(ship.Owner, new Vector2(100, 40));
@@ -266,10 +266,10 @@ public sealed class WFCockpitFireInputTest
             Assert.That(pair.Client.ResolveDependency<IResourceManager>().ContentFileExists(WFCockpitFireInput.ReticlePath), Is.True);
             var ui = pair.Client.ResolveDependency<IUserInterfaceManager>();
             var input = pair.Client.ResolveDependency<IInputManager>();
-            var maps = pair.Client.ResolveDependency<IMapManager>();
+            var maps = pair.Client.System<SharedMapSystem>();
             var clyde = pair.Client.ResolveDependency<IClyde>();
-            var map = maps.CreateMap();
-            var origin = new EntityCoordinates(maps.GetMapEntityId(map), Vector2.Zero);
+            maps.CreateMap(out var map);
+            var origin = new EntityCoordinates(maps.GetMapOrInvalid(map), Vector2.Zero);
             using var host = new Control { MouseFilter = Control.MouseFilterMode.Ignore };
             using var world = new MainViewport();
             using var nav = new ShuttleNavControl { WfFitInstrument = true, SetSize = new Vector2(float.NaN) };
@@ -388,9 +388,9 @@ public sealed class WFCockpitFireInputTest
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
         await pair.Client.WaitAssertion(() =>
         {
-            var maps = pair.Client.ResolveDependency<IMapManager>();
-            var map = maps.CreateMap();
-            var mapEntity = maps.GetMapEntityId(map);
+            var maps = pair.Client.System<SharedMapSystem>();
+            maps.CreateMap(out var map);
+            var mapEntity = maps.GetMapOrInvalid(map);
             using var nav = new ShuttleNavControl { WfFitInstrument = true, SetSize = new Vector2(float.NaN), WorldRange = 40 };
             nav.SetMatrix(new EntityCoordinates(mapEntity, new Vector2(10, 20)), Angle.Zero);
             typeof(ShuttleNavControl).GetField("_rotation", BindingFlags.Instance | BindingFlags.NonPublic)!
@@ -419,11 +419,11 @@ public sealed class WFCockpitFireInputTest
         await pair.Client.WaitAssertion(() =>
         {
             var ui = pair.Client.ResolveDependency<IUserInterfaceManager>();
-            var maps = pair.Client.ResolveDependency<IMapManager>();
+            var maps = pair.Client.System<SharedMapSystem>();
             var entities = pair.Client.EntMan;
-            var map = maps.CreateMap();
-            var otherMap = maps.CreateMap();
-            var mapEntity = maps.GetMapEntityId(map);
+            maps.CreateMap(out var map);
+            maps.CreateMap(out var otherMap);
+            var mapEntity = maps.GetMapOrInvalid(map);
             var gunA = UnknownWeapon(11);
             var gunB = UnknownWeapon(12);
             var selection = new HashSet<NetEntity> { gunA };
@@ -504,7 +504,7 @@ public sealed class WFCockpitFireInputTest
             Assert.That(overlay.TryGetSegments(eye, map, out cam), Is.True);
             Assert.That(cam, Has.Count.EqualTo(1));
 
-            nav.SetMatrix(new EntityCoordinates(maps.GetMapEntityId(otherMap), Vector2.Zero), Angle.Zero);
+            nav.SetMatrix(new EntityCoordinates(maps.GetMapOrInvalid(otherMap), Vector2.Zero), Angle.Zero);
             Assert.That(lines.Lines(), Is.Empty, "A plot of another map has no line to draw.");
 
             maps.DeleteMap(map);
@@ -519,11 +519,11 @@ public sealed class WFCockpitFireInputTest
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
         await pair.Client.WaitAssertion(() =>
         {
-            var maps = pair.Client.ResolveDependency<IMapManager>();
+            var maps = pair.Client.System<SharedMapSystem>();
             var timing = pair.Client.ResolveDependency<IGameTiming>();
             var entities = pair.Client.EntMan;
-            var map = maps.CreateMap();
-            var mapEntity = maps.GetMapEntityId(map);
+            maps.CreateMap(out var map);
+            var mapEntity = maps.GetMapOrInvalid(map);
             var coloured = UnknownWeapon(21);
             var plain = UnknownWeapon(22);
             var at = entities.GetNetCoordinates(new EntityCoordinates(mapEntity, new Vector2(2, 2)));

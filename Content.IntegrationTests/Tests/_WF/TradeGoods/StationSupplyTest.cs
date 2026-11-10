@@ -260,7 +260,7 @@ public sealed class StationSupplyTest
 
         await server.WaitAssertion(() =>
         {
-            SetPrivate(entMan.System<GameTicker>(), nameof(GameTicker.DefaultMap), map.MapId);
+            SetPrivate(entMan.System<ServerGameTicker>(), nameof(ServerGameTicker.DefaultMap), map.MapId);
             foreach (var (x, name) in new[] { (0f, "WF test a"), (9000f, "WF test b"), (18000f, "WF test c") })
             {
                 var (grid, _) = Station(entMan, map, new Vector2(x, 0f), name);
@@ -351,8 +351,8 @@ public sealed class StationSupplyTest
         return (grid, station);
     }
 
-    private static void SetPrivate(GameTicker ticker, string property, object value)
+    private static void SetPrivate(ServerGameTicker ticker, string property, object value)
     {
-        typeof(GameTicker).GetProperty(property, BindingFlags.Public | BindingFlags.Instance)!.GetSetMethod(true)!.Invoke(ticker, new[] { value });
+        typeof(ServerGameTicker).GetProperty(property, BindingFlags.Public | BindingFlags.Instance)!.GetSetMethod(true)!.Invoke(ticker, new[] { value });
     }
 }

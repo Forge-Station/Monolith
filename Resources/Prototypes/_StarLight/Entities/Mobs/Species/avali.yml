@@ -24,15 +24,12 @@
       action: ActionToggleAvaliWagging # Hardlight
     - type: HumanoidAppearance
       species: Avali
-    - type: Hunger # on 2x more
-      thresholds:
-        Overfed: 250
-        Okay: 200
-        Peckish: 150
-        Starving: 100
-        Dead: 0
-      baseDecayRate: 0.03
-    - type: Thirst
+    - type: Satiation # on 2x more
+      satiations:
+        Hunger:
+          prototype: AvaliHunger
+        Thirst:
+          prototype: NormalSatiationThirst
     - type: PseudoItem
       storedOffset: 0,17
       shape:

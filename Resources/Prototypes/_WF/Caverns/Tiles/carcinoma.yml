@@ -5,9 +5,6 @@
 - type: tile
   id: WFCavernFloorNerve
   parent: WFFloorFleshScab
-  sprite: /Textures/_WF/DecorImport/Tiles/nova/meat_fresh.png
-  variants: 1
-  placementVariants: [1]
   indestructible: true
   deconstructTools: []
   baseTurf: ""

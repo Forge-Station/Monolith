@@ -26,7 +26,7 @@ public sealed partial class WFRoundSetupLobbyTest
         var server = pair.Server;
         var em = server.EntMan;
         var client = pair.Player!;
-        var ticker = server.System<GameTicker>();
+        var ticker = server.System<ServerGameTicker>();
         var setup = server.System<WFRoundSetupSystem>();
         var preferences = server.ResolveDependency<IServerPreferencesManager>();
         var timers = server.CfgMan.GetCVar(CCVars.GameRoleTimers);

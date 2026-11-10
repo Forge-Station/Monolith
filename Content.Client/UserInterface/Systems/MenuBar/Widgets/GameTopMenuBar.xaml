@@ -33,6 +33,15 @@
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
         />
+    <ui:MenuButton
+        Name="LoreBookButton"
+        Access="Internal"
+        Icon="{xe:Tex '/Textures/_WF/LoreBook/lorebook.svg.192dpi.png'}"
+        ToolTip="{Loc 'wf-lore-book-button-tooltip'}"
+        MinSize="42 64"
+        HorizontalExpand="True"
+        AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
+        />
     <!-- WOLFGATE(SectorControl) START: sector map button beside the guidebook; its icon is set in code from menu.rsi -->
     <ui:MenuButton
         Name="SectorMapButton"
@@ -50,6 +59,15 @@
         Icon="{xe:Tex '/Textures/Interface/character.svg.192dpi.png'}"
         ToolTip="{Loc 'game-hud-open-character-menu-button-tooltip'}"
         BoundKey = "{x:Static is:ContentKeyFunctions.OpenCharacterMenu}"
+        MinSize="42 64"
+        HorizontalExpand="True"
+        AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
+        />
+    <ui:MenuButton
+        Name="CrewSetupButton"
+        Access="Internal"
+        Icon="{xe:Tex '/Textures/Interface/VerbIcons/group.svg.192dpi.png'}"
+        ToolTip="{Loc 'wf-round-setup-toolbar-tooltip'}"
         MinSize="42 64"
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"

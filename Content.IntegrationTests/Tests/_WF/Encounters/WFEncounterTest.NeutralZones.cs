@@ -26,7 +26,7 @@ public sealed partial class WFEncounterTest
             Assert.That(Server.System<WFEncounterSystem>().TrySpawn(prototype, new MapCoordinates(new Vector2(23000, 23000), MapData.MapId), out encounter), Is.True);
             SEntMan.GetComponent<WFEncounterComponent>(encounter).Ships["guarded"].NeutralCompanies.Add("WFUnderground");
 
-            var grid = Server.ResolveDependency<IMapManager>().CreateGridEntity(MapData.MapId);
+            var grid = Server.System<SharedMapSystem>().CreateGridEntity(MapData.MapId);
             intruder = grid.Owner;
             Server.System<SharedMapSystem>().SetTile(grid, Vector2i.Zero, new Tile(1));
             var transform = Server.System<SharedTransformSystem>();

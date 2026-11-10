@@ -1,0 +1,334 @@
+using System;
+using Content.Shared._WF.Vehicles.Base;
+using Content.Shared._WF.Vehicles.Grid;
+using Content.Shared._WF.Vehicles.Hardpoint;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Tools.Components;
+using Content.Shared.Interaction;
+using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Localization;
+
+namespace Content.Shared._WF.Vehicles.Core;
+
+/// <summary>Keeps a vehicle's wheel slots and visuals current, and damages the wheels when the vehicle hits something.</summary>
+public sealed partial class VehicleWheelSystem : EntitySystem
+{
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private HardpointSystem _hardpoints = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private RMCVehicleSystem _vehicles = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<VehicleWheelSlotsComponent, ComponentInit>(OnWheelInit);
+        SubscribeLocalEvent<VehicleWheelSlotsComponent, MapInitEvent>(OnWheelMapInit);
+        SubscribeLocalEvent<VehicleWheelSlotsComponent, EntInsertedIntoContainerMessage>(OnWheelInserted);
+        SubscribeLocalEvent<VehicleWheelSlotsComponent, EntRemovedFromContainerMessage>(OnWheelRemoved);
+        SubscribeLocalEvent<VehicleWheelSlotsComponent, VehicleCanRunEvent>(OnVehicleCanRun);
+        SubscribeLocalEvent<VehicleWheelSlotsComponent, VehicleCollisionEvent>(OnVehicleCollision);
+    }
+
+    private void OnVehicleCollision(Entity<VehicleWheelSlotsComponent> ent, ref VehicleCollisionEvent args)
+    {
+        if (args.Kind != VehicleCollisionKind.Impact)
+            return;
+
+        var speed = MathF.Abs(args.Speed);
+        if (speed <= 0f)
+            return;
+
+        var damage = speed * ent.Comp.CollisionDamagePerSpeed;
+        if (ent.Comp.MinCollisionDamage > 0f)
+            damage = MathF.Max(ent.Comp.MinCollisionDamage, damage);
+
+        DamageWheels(ent.Owner, damage);
+    }
+
+    private void OnWheelInit(Entity<VehicleWheelSlotsComponent> ent, ref ComponentInit args)
+    {
+        EnsureSlots(ent.Owner, ent.Comp);
+        UpdateAppearance(ent.Owner, ent.Comp);
+    }
+
+    private void OnWheelMapInit(Entity<VehicleWheelSlotsComponent> ent, ref MapInitEvent args)
+    {
+        EnsureSlots(ent.Owner, ent.Comp);
+        UpdateAppearance(ent.Owner, ent.Comp);
+    }
+
+    private void OnWheelInserted(Entity<VehicleWheelSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!IsWheelSlot(ent.Comp, args.Container.ID))
+            return;
+
+        UpdateAppearance(ent.Owner, ent.Comp);
+        RefreshCanRun(ent.Owner);
+    }
+
+    private void OnWheelRemoved(Entity<VehicleWheelSlotsComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (!IsWheelSlot(ent.Comp, args.Container.ID))
+            return;
+
+        UpdateAppearance(ent.Owner, ent.Comp);
+        RefreshCanRun(ent.Owner);
+    }
+
+    private void OnVehicleCanRun(Entity<VehicleWheelSlotsComponent> ent, ref VehicleCanRunEvent args)
+    {
+        if (!args.CanRun)
+            return;
+
+        if (!HasAllWheels(ent.Owner, ent.Comp))
+            args.CanRun = false;
+    }
+
+    private void EnsureSlots(EntityUid uid, VehicleWheelSlotsComponent component, ItemSlotsComponent? itemSlots = null)
+    {
+        itemSlots ??= EnsureComp<ItemSlotsComponent>(uid);
+
+        if (component.Slots.Count == 0 && TryComp<HardpointSlotsComponent>(uid, out var hardpoints))
+        {
+            foreach (var slot in hardpoints.Slots)
+            {
+                if (slot.HardpointType == VehicleWheelSlotsComponent.HardpointTypeId)
+                    component.Slots.Add(slot.Id);
+            }
+        }
+
+        if (component.Slots.Count == 0)
+        {
+            for (var i = 0; i < component.SlotCount; i++)
+            {
+                component.Slots.Add($"{component.SlotPrefix}-{i + 1}");
+            }
+        }
+
+        if (component.WheelWhitelist.Components == null || component.WheelWhitelist.Components.Length == 0)
+            component.WheelWhitelist.Components = new[] { VehicleWheelSlotsComponent.WheelComponentId };
+
+        foreach (var slotId in component.Slots)
+        {
+            if (_itemSlots.TryGetSlot(uid, slotId, out _, itemSlots))
+                continue;
+
+            var slot = new ItemSlot
+            {
+                Whitelist = component.WheelWhitelist,
+            };
+
+            _itemSlots.AddItemSlot(uid, slotId, slot, itemSlots);
+        }
+    }
+
+    private bool IsWheelSlot(VehicleWheelSlotsComponent component, string? id)
+    {
+        return id != null && component.Slots.Contains(id);
+    }
+
+    private bool HasAllWheels(EntityUid uid, VehicleWheelSlotsComponent? component = null, ItemSlotsComponent? itemSlots = null)
+    {
+        if (!Resolve(uid, ref component, false) || !Resolve(uid, ref itemSlots, false))
+            return false;
+
+        if (component.Slots.Count == 0)
+            return false;
+
+        foreach (var slotId in component.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) || !slot.HasItem)
+                return false;
+
+            if (slot.Item is not { } wheel || !IsWheelFunctional(wheel))
+                return false;
+        }
+
+        return true;
+    }
+
+    private int GetWheelCount(EntityUid uid, VehicleWheelSlotsComponent component, ItemSlotsComponent? itemSlots = null)
+    {
+        var count = 0;
+
+        if (!Resolve(uid, ref itemSlots, false))
+            return count;
+
+        foreach (var slotId in component.Slots)
+        {
+            if (_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) &&
+                slot.HasItem)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private int GetFunctionalWheelCount(EntityUid uid, VehicleWheelSlotsComponent component, ItemSlotsComponent? itemSlots = null)
+    {
+        var count = 0;
+
+        if (!Resolve(uid, ref itemSlots, false))
+            return count;
+
+        foreach (var slotId in component.Slots)
+        {
+            if (_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) &&
+                slot.HasItem &&
+                slot.Item is { } wheel &&
+                IsWheelFunctional(wheel))
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private float GetAverageWheelIntegrityFraction(EntityUid uid, VehicleWheelSlotsComponent component, ItemSlotsComponent? itemSlots = null)
+    {
+        if (!Resolve(uid, ref itemSlots, false))
+            return 1f;
+
+        var total = 0f;
+        var installed = 0;
+
+        foreach (var slotId in component.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(uid, slotId, out var slot, itemSlots) || !slot.HasItem)
+                continue;
+
+            installed++;
+
+            var fraction = 1f;
+            if (slot.Item is { } wheel && TryComp(wheel, out HardpointIntegrityComponent? integrity))
+            {
+                var max = integrity.MaxIntegrity > 0f ? integrity.MaxIntegrity : 1f;
+                fraction = Math.Clamp(integrity.Integrity / max, 0f, 1f);
+            }
+
+            total += fraction;
+        }
+
+        if (installed == 0)
+            return 1f;
+
+        return Math.Clamp(total / installed, 0f, 1f);
+    }
+
+    private void UpdateAppearance(EntityUid uid, VehicleWheelSlotsComponent component)
+    {
+        if (!TryComp<AppearanceComponent>(uid, out var appearance))
+            return;
+
+        var hasAll = HasAllWheels(uid, component);
+        _appearance.SetData(uid, VehicleWheelVisuals.HasAllWheels, hasAll, appearance);
+
+        var count = GetWheelCount(uid, component);
+        _appearance.SetData(uid, VehicleWheelVisuals.WheelCount, count, appearance);
+
+        var functional = GetFunctionalWheelCount(uid, component);
+        _appearance.SetData(uid, VehicleWheelVisuals.WheelFunctionalCount, functional, appearance);
+
+        var averageIntegrity = GetAverageWheelIntegrityFraction(uid, component);
+        _appearance.SetData(uid, VehicleWheelVisuals.WheelIntegrityFraction, averageIntegrity, appearance);
+    }
+
+    private bool IsWheelFunctional(EntityUid wheel, HardpointIntegrityComponent? integrity = null)
+    {
+        if (!Resolve(wheel, ref integrity, logMissing: false))
+            return true;
+
+        return integrity.Integrity > 0f;
+    }
+
+    /// <summary>Whether the vehicle has a wheel that is not worn out.</summary>
+    public bool HasAnyFunctionalWheel(EntityUid vehicle)
+    {
+        if (!TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))
+            return false;
+
+        return GetFunctionalWheelCount(vehicle, wheels) > 0;
+    }
+
+    /// <summary>Wears every wheel by an amount.</summary>
+    public void DamageWheels(EntityUid vehicle, float amount)
+    {
+        if (amount <= 0f || !TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))
+            return;
+
+        if (!TryComp(vehicle, out ItemSlotsComponent? itemSlots))
+            return;
+
+        var changed = false;
+
+        foreach (var slotId in wheels.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(vehicle, slotId, out var slot, itemSlots) ||
+                slot.Item is not { } wheel)
+                continue;
+
+            if (_hardpoints.DamageHardpoint(vehicle, wheel, amount, skipWheelUpdate: true))
+                changed = true;
+        }
+
+        if (!changed)
+            return;
+
+        UpdateAppearance(vehicle, wheels);
+        RefreshCanRun(vehicle);
+    }
+
+    /// <summary>Wears every wheel by an amount, acid-resistant ones by less.</summary>
+    public void DamageWheelsCorrosive(EntityUid vehicle, float amount, float acidResistantMultiplier)
+    {
+        if (amount <= 0f || !TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))
+            return;
+
+        if (!TryComp(vehicle, out ItemSlotsComponent? itemSlots))
+            return;
+
+        var changed = false;
+
+        foreach (var slotId in wheels.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(vehicle, slotId, out var slot, itemSlots) ||
+                slot.Item is not { } wheel)
+                continue;
+
+            var wheelAmount = amount;
+            if (TryComp(wheel, out VehicleWheelItemComponent? wheelItem) && wheelItem.AcidResistant)
+                wheelAmount *= acidResistantMultiplier;
+
+            if (_hardpoints.DamageHardpoint(vehicle, wheel, wheelAmount, skipWheelUpdate: true))
+                changed = true;
+        }
+
+        if (!changed)
+            return;
+
+        UpdateAppearance(vehicle, wheels);
+        RefreshCanRun(vehicle);
+    }
+
+    /// <summary>Updates the wheel appearance and the movement check after a wheel wore.</summary>
+    public void OnWheelDamaged(EntityUid vehicle)
+    {
+        if (!TryComp(vehicle, out VehicleWheelSlotsComponent? wheels))
+            return;
+
+        UpdateAppearance(vehicle, wheels);
+        RefreshCanRun(vehicle);
+    }
+
+    private void RefreshCanRun(EntityUid uid)
+    {
+        if (!TryComp<RMCVehicleComponent>(uid, out var vehicle))
+            return;
+
+        _vehicles.RefreshCanRun((uid, vehicle));
+    }
+}

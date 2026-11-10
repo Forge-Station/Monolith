@@ -16,7 +16,7 @@ namespace Content.Server._WF.PlanetCargoHubs;
 public sealed partial class WFPlanetCargoHubSystem
 {
     [Dependency] private ChatSystem _chat = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
     private static readonly EntProtoId BeaconProto = "WFCargoHubFtlBeacon";

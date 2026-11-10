@@ -26,7 +26,7 @@ public sealed class TractorBeamConsoleTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -62,7 +62,7 @@ public sealed class TractorBeamConsoleTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -121,7 +121,7 @@ public sealed class TractorBeamConsoleTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -162,7 +162,7 @@ public sealed class TractorBeamConsoleTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -206,7 +206,7 @@ public sealed class TractorBeamConsoleTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -255,7 +255,7 @@ public sealed class TractorBeamConsoleTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -300,7 +300,7 @@ public sealed class TractorBeamConsoleTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -352,7 +352,7 @@ public sealed class TractorBeamConsoleTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -425,7 +425,7 @@ public sealed class TractorBeamConsoleTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -517,7 +517,7 @@ public sealed class TractorBeamConsoleTest
     }
 
     internal static (EntityUid Source, EntityUid Target, EntityUid Emitter, EntityUid Console, EntityUid Actor, EntityUid ForeignEmitter)
-        CreateConsole(IEntityManager entities, IMapManager maps, MapId map)
+        CreateConsole(IEntityManager entities, SharedMapSystem maps, MapId map)
     {
         var mapSystem = entities.System<SharedMapSystem>();
         var transform = entities.System<SharedTransformSystem>();

@@ -21,7 +21,7 @@ public sealed partial class SynthBloodstreamSystem : EntitySystem
 
     [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private DamageableSystem _damageable = default!;
-    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SatiationSystem _hunger = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IGameTiming _timing = default!;
 
@@ -36,7 +36,7 @@ public sealed partial class SynthBloodstreamSystem : EntitySystem
 
         _nextUpdate = _timing.CurTime + UpdateRate;
 
-        var query = EntityQueryEnumerator<SynthBloodstreamComponent, HungerComponent, BloodstreamComponent>();
+        var query = EntityQueryEnumerator<SynthBloodstreamComponent, SatiationComponent, BloodstreamComponent>();
         while (query.MoveNext(out var uid, out var synthBloodstream, out var hunger, out var bloodstream))
         {
             if (!TryComp(uid, out DamageableComponent? damageable) ||
@@ -48,9 +48,9 @@ public sealed partial class SynthBloodstreamSystem : EntitySystem
         }
     }
 
-    private void UpdateSynthBloodstream(Entity<SynthBloodstreamComponent, HungerComponent, BloodstreamComponent, DamageableComponent> ent)
+    private void UpdateSynthBloodstream(Entity<SynthBloodstreamComponent, SatiationComponent, BloodstreamComponent, DamageableComponent> ent)
     {
-        var hunger = _hunger.GetHunger(ent.Comp2);
+        var hunger = _hunger.GetValueOrNull((ent.Owner, ent.Comp2), SatiationSystem.Hunger) ?? 0f;
         if (hunger <= ent.Comp1.MinHunger)
             return;
 
@@ -63,11 +63,11 @@ public sealed partial class SynthBloodstreamSystem : EntitySystem
         if (hungerCost <= 0f)
             return;
 
-        _hunger.ModifyHunger(ent.Owner, -MathF.Min(hungerCost, availableHunger), ent.Comp2);
+        _hunger.ModifyValue((ent.Owner, ent.Comp2), SatiationSystem.Hunger, -MathF.Min(hungerCost, availableHunger));
     }
 
     private void UpdatePassiveRepair(
-        Entity<SynthBloodstreamComponent, HungerComponent, BloodstreamComponent, DamageableComponent> ent,
+        Entity<SynthBloodstreamComponent, SatiationComponent, BloodstreamComponent, DamageableComponent> ent,
         ref float hungerCost,
         float availableHunger)
     {
@@ -106,7 +106,7 @@ public sealed partial class SynthBloodstreamSystem : EntitySystem
     }
 
     private void UpdateBloodRegeneration(
-        Entity<SynthBloodstreamComponent, HungerComponent, BloodstreamComponent, DamageableComponent> ent,
+        Entity<SynthBloodstreamComponent, SatiationComponent, BloodstreamComponent, DamageableComponent> ent,
         ref float hungerCost,
         float availableHunger)
     {

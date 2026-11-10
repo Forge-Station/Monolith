@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise at commit https://github.com/ParadiseSS13/Paradise/commit/7cd73f80152a5e234249d99cace75ce2b5c1c54b.",
+  "size": {
+    "x": 32,
+    "y": 40
+  },
+  "states": [
+    {
+      "name": "survival_pod_walls-0"
+    },
+    {
+      "name": "survival_pod_walls-1"
+    },
+    {
+      "name": "survival_pod_walls-2"
+    },
+    {
+      "name": "survival_pod_walls-3"
+    },
+    {
+      "name": "survival_pod_walls-4"
+    },
+    {
+      "name": "survival_pod_walls-5"
+    },
+    {
+      "name": "survival_pod_walls-6"
+    },
+    {
+      "name": "survival_pod_walls-7"
+    },
+    {
+      "name": "survival_pod_walls-8"
+    },
+    {
+      "name": "survival_pod_walls-9"
+    },
+    {
+      "name": "survival_pod_walls-10"
+    },
+    {
+      "name": "survival_pod_walls-11"
+    },
+    {
+      "name": "survival_pod_walls-12"
+    },
+    {
+      "name": "survival_pod_walls-13"
+    },
+    {
+      "name": "survival_pod_walls-14"
+    },
+    {
+      "name": "survival_pod_walls-15"
+    },
+    {
+      "name": "survival_pod_walls-21"
+    },
+    {
+      "name": "survival_pod_walls-23"
+    },
+    {
+      "name": "survival_pod_walls-29"
+    },
+    {
+      "name": "survival_pod_walls-31"
+    },
+    {
+      "name": "survival_pod_walls-38"
+    },
+    {
+      "name": "survival_pod_walls-39"
+    },
+    {
+      "name": "survival_pod_walls-46"
+    },
+    {
+      "name": "survival_pod_walls-47"
+    },
+    {
+      "name": "survival_pod_walls-55"
+    },
+    {
+      "name": "survival_pod_walls-63"
+    },
+    {
+      "name": "survival_pod_walls-74"
+    },
+    {
+      "name": "survival_pod_walls-75"
+    },
+    {
+      "name": "survival_pod_walls-78"
+    },
+    {
+      "name": "survival_pod_walls-79"
+    },
+    {
+      "name": "survival_pod_walls-95"
+    },
+    {
+      "name": "survival_pod_walls-110"
+    },
+    {
+      "name": "survival_pod_walls-111"
+    },
+    {
+      "name": "survival_pod_walls-127"
+    },
+    {
+      "name": "survival_pod_walls-137"
+    },
+    {
+      "name": "survival_pod_walls-139"
+    },
+    {
+      "name": "survival_pod_walls-141"
+    },
+    {
+      "name": "survival_pod_walls-143"
+    },
+    {
+      "name": "survival_pod_walls-157"
+    },
+    {
+      "name": "survival_pod_walls-159"
+    },
+    {
+      "name": "survival_pod_walls-175"
+    },
+    {
+      "name": "survival_pod_walls-191"
+    },
+    {
+      "name": "survival_pod_walls-203"
+    },
+    {
+      "name": "survival_pod_walls-207"
+    },
+    {
+      "name": "survival_pod_walls-223"
+    },
+    {
+      "name": "survival_pod_walls-239"
+    },
+    {
+      "name": "survival_pod_walls-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

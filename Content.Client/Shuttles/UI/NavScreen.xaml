@@ -4,6 +4,7 @@
               xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
               xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls"
               xmlns:wf="clr-namespace:Content.Client._WF.Planets"
+              xmlns:shields="clr-namespace:Content.Client._Crescent.ShipShields.UI"
               xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
                 <!-- Mono - wrap -->
                 <controls:LayoutContainer Margin="5 4 10 5">
@@ -298,6 +299,29 @@
                     </controls:BoxContainer>
                 </controls:PanelContainer>
                     <!-- End Network Port Buttons -->
+                    <controls:PanelContainer Name="ShieldPanel" VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4" Visible="False">
+                        <controls:PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                        </controls:PanelContainer.PanelOverride>
+                        <shields:ShipShieldBar Name="ShieldBar" HorizontalExpand="True" Margin="4"/>
+                    </controls:PanelContainer>
+                    <controls:PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
+                        <controls:PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+                        </controls:PanelContainer.PanelOverride>
+                        <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4" SeparationOverride="4">
+                            <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                <controls:Label Text="{controls:Loc 'shuttle-console-markers-label'}" HorizontalExpand="True"/>
+                                <controls:Label Name="MarkerCountLabel" Text="0/5" Align="Right"/>
+                            </controls:BoxContainer>
+                            <controls:BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="4">
+                                <controls:LineEdit Name="MarkerXEdit" PlaceHolder="X" HorizontalExpand="True"/>
+                                <controls:LineEdit Name="MarkerYEdit" PlaceHolder="Y" HorizontalExpand="True"/>
+                                <controls:Button Name="MarkerTrackButton" Text="{controls:Loc 'shuttle-console-marker-track'}" StyleClasses="ButtonSquare"/>
+                            </controls:BoxContainer>
+                            <controls:BoxContainer Name="MarkerList" Orientation="Vertical" HorizontalExpand="True" SeparationOverride="2"/>
+                        </controls:BoxContainer>
+                    </controls:PanelContainer>
                     </controls:BoxContainer>
                     </controls:PanelContainer>
                 </controls:PanelContainer>

@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 40,
+    "y": 40
+  },
+  "states": [
+    {
+      "name": "shrouded-0"
+    },
+    {
+      "name": "shrouded-1"
+    },
+    {
+      "name": "shrouded-2"
+    },
+    {
+      "name": "shrouded-3"
+    },
+    {
+      "name": "shrouded-4"
+    },
+    {
+      "name": "shrouded-5"
+    },
+    {
+      "name": "shrouded-6"
+    },
+    {
+      "name": "shrouded-7"
+    },
+    {
+      "name": "shrouded-8"
+    },
+    {
+      "name": "shrouded-9"
+    },
+    {
+      "name": "shrouded-10"
+    },
+    {
+      "name": "shrouded-11"
+    },
+    {
+      "name": "shrouded-12"
+    },
+    {
+      "name": "shrouded-13"
+    },
+    {
+      "name": "shrouded-14"
+    },
+    {
+      "name": "shrouded-15"
+    },
+    {
+      "name": "shrouded-21"
+    },
+    {
+      "name": "shrouded-23"
+    },
+    {
+      "name": "shrouded-29"
+    },
+    {
+      "name": "shrouded-31"
+    },
+    {
+      "name": "shrouded-38"
+    },
+    {
+      "name": "shrouded-39"
+    },
+    {
+      "name": "shrouded-46"
+    },
+    {
+      "name": "shrouded-47"
+    },
+    {
+      "name": "shrouded-55"
+    },
+    {
+      "name": "shrouded-63"
+    },
+    {
+      "name": "shrouded-74"
+    },
+    {
+      "name": "shrouded-75"
+    },
+    {
+      "name": "shrouded-78"
+    },
+    {
+      "name": "shrouded-79"
+    },
+    {
+      "name": "shrouded-95"
+    },
+    {
+      "name": "shrouded-110"
+    },
+    {
+      "name": "shrouded-111"
+    },
+    {
+      "name": "shrouded-127"
+    },
+    {
+      "name": "shrouded-137"
+    },
+    {
+      "name": "shrouded-139"
+    },
+    {
+      "name": "shrouded-141"
+    },
+    {
+      "name": "shrouded-143"
+    },
+    {
+      "name": "shrouded-157"
+    },
+    {
+      "name": "shrouded-159"
+    },
+    {
+      "name": "shrouded-175"
+    },
+    {
+      "name": "shrouded-191"
+    },
+    {
+      "name": "shrouded-203"
+    },
+    {
+      "name": "shrouded-207"
+    },
+    {
+      "name": "shrouded-223"
+    },
+    {
+      "name": "shrouded-239"
+    },
+    {
+      "name": "shrouded-255"
+    }
+  ]
+}

@@ -349,6 +349,9 @@
     heldPrefix: coal
   - type: Flammable # Monolith
     fireSpread: true
+    damage:
+      types:
+        Heat: 1.5
     alwaysCombustible: true
     firestacksOnIgnite: 5
     firestackFade: 0
@@ -358,7 +361,6 @@
     firestackVisualDivisor: 5
     fireEnergyMultiplier: 12500
     maxFireTemperature: 2100
-  - type: MaterialFuel # Monolith
   - type: FireVisuals # Monolith
     sprite: Effects/fire.rsi
     normalState: fire

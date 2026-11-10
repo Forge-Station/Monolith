@@ -211,7 +211,7 @@ public sealed class MarkingColorPaddingTest
         {
             var appearance = new HumanoidCharacterAppearance(
                 HairStyles.DefaultHairStyle,
-                Color.Black,
+                new List<Color> { Color.Black },
                 HairStyles.DefaultFacialHairStyle,
                 Color.Black,
                 Color.Black,

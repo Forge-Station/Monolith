@@ -31,6 +31,10 @@ public sealed partial class StyleWolfgate
     /// <summary>Card title: the heading font at card scale, keeping the accent colour.</summary>
     public const string StyleClassCreatorCardTitle = "CreatorCardTitle";
 
+    public const string StyleClassCreatorIconButton = "CreatorIconButton";
+    public const string StyleClassCreatorIcon = "CreatorIcon";
+    public const string StyleClassCreatorIconDisabled = "CreatorIconDisabled";
+
     /// <summary>Sex selector glyphs. The texture comes from the skin, the tint from the on/off class.</summary>
     public const string StyleClassSexIconMale = "SexIconMale";
     public const string StyleClassSexIconFemale = "SexIconFemale";

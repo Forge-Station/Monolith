@@ -16,4 +16,10 @@ public sealed partial class WFHulkComponent : Component
     /// <summary>Last time a crane broke part of the hull.</summary>
     [ViewVariables]
     public TimeSpan LastWork;
+
+    /// <summary>Thalers a chop shop pays for this hull, fixed the first time it is priced.</summary>
+    public int? ChopTotal;
+
+    /// <summary>Thalers already printed for breaking this hull.</summary>
+    public int ChopPaid;
 }

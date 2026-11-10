@@ -25,7 +25,7 @@ public sealed class TractorBeamCollectionAccelerationTest
         await using var pair = await PoolManager.GetServerClient();
         var map = await pair.CreateTestMap();
         var entities = pair.Server.ResolveDependency<IEntityManager>();
-        var maps = pair.Server.ResolveDependency<IMapManager>();
+        var maps = pair.Server.System<SharedMapSystem>();
         await pair.Server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -70,7 +70,7 @@ public sealed class TractorBeamCollectionAccelerationTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -126,7 +126,7 @@ public sealed class TractorBeamCollectionAccelerationTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -166,7 +166,7 @@ public sealed class TractorBeamCollectionAccelerationTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -257,7 +257,7 @@ public sealed class TractorBeamCollectionAccelerationTest
         await pair.CleanReturnAsync();
     }
 
-    private static EntityUid CreateCaughtObject(IEntityManager entities, IMapManager maps, MapId map, bool grid, Vector2 position)
+    private static EntityUid CreateCaughtObject(IEntityManager entities, SharedMapSystem maps, MapId map, bool grid, Vector2 position)
     {
         EntityUid uid;
         var physics = entities.System<SharedPhysicsSystem>();

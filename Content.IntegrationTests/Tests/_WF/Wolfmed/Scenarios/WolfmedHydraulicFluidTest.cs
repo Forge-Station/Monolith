@@ -428,7 +428,7 @@ public sealed class WolfmedHydraulicFluidTest : GameTest
     public async Task DryChassisShutsDownTest()
     {
         await OverrideCVar(Side.Server, WolfmedCVars.Consciousness, true);
-        var map = await CreateTestMap();
+        var map = await Pair.CreateTestMap();
         EntityUid ipc = default;
 
         await Server.WaitAssertion(() =>

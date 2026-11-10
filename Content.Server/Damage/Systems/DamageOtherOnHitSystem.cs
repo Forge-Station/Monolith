@@ -13,6 +13,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Wires;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Damage.Systems
 {
@@ -38,7 +39,9 @@ namespace Content.Server.Damage.Systems
                 return;
 
             // WOLFGATE(Wolfmed): W1: tool = the thrown item, so Wolfmed's wound rules can tell a thrown spear from a swung one.
-            var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower, tool: uid);
+            var modifier = new GetThrowDamageModifierEvent();
+            RaiseLocalEvent(uid, ref modifier);
+            var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier * modifier.Multiplier, component.IgnoreResistances, origin: args.Component.Thrower, tool: uid);
 
             // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
             if (dmg != null && HasComp<MobStateComponent>(args.Target))
@@ -66,6 +69,41 @@ namespace Content.Server.Damage.Systems
         /// Prevent players with the Pacified status effect from throwing things that deal damage.
         /// </summary>
         private void OnAttemptPacifiedThrow(Entity<DamageOtherOnHitComponent> ent, ref AttemptPacifiedThrowEvent args)
+        {
+            CancelPacifiedThrow(ref args);
+        }
+
+        public DamageSpecifier GetThrowDamage(EntityUid uid, DamageSpecifier damage, bool consumeModifiers = false)
+        {
+            var modifier = new GetThrowDamageModifierEvent(Consume: consumeModifiers);
+            RaiseLocalEvent(uid, ref modifier);
+            return damage * _damageable.UniversalThrownDamageModifier * modifier.Multiplier;
+        }
+
+        public void DoThrowDamage(EntityUid uid, EntityUid target, EntityUid? thrower, DamageSpecifier damage, bool ignoreResistances)
+        {
+            if (TerminatingOrDeleted(target))
+                return;
+
+            var dmg = _damageable.TryChangeDamage(target, damage, ignoreResistances, origin: thrower, tool: uid);
+
+            if (dmg != null && HasComp<MobStateComponent>(target))
+                _adminLogger.Add(LogType.ThrowHit, $"{ToPrettyString(target):target} received {dmg.GetTotal():damage} damage from collision");
+
+            if (dmg is { Empty: false })
+                _color.RaiseEffect(Color.Red, new List<EntityUid>() { target }, Filter.Pvs(target, entityManager: EntityManager));
+
+            _guns.PlayImpactSound(target, dmg, null, false, null, null);
+            if (TryComp<PhysicsComponent>(uid, out var body) && body.LinearVelocity.LengthSquared() > 0f)
+                _sharedCameraRecoil.KickCamera(target, body.LinearVelocity.Normalized());
+        }
+
+        public void AddThrowDamageExamine(FormattedMessage message, DamageSpecifier damage)
+        {
+            _damageExamine.AddDamageExamine(message, damage, Loc.GetString("damage-throw"));
+        }
+
+        public static void CancelPacifiedThrow(ref AttemptPacifiedThrowEvent args)
         {
             args.Cancel("pacified-cannot-throw");
         }

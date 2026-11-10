@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "martian-0"
+    },
+    {
+      "name": "martian-1"
+    },
+    {
+      "name": "martian-2"
+    },
+    {
+      "name": "martian-3"
+    },
+    {
+      "name": "martian-4"
+    },
+    {
+      "name": "martian-5"
+    },
+    {
+      "name": "martian-6"
+    },
+    {
+      "name": "martian-7"
+    },
+    {
+      "name": "martian-8"
+    },
+    {
+      "name": "martian-9"
+    },
+    {
+      "name": "martian-10"
+    },
+    {
+      "name": "martian-11"
+    },
+    {
+      "name": "martian-12"
+    },
+    {
+      "name": "martian-13"
+    },
+    {
+      "name": "martian-14"
+    },
+    {
+      "name": "martian-15"
+    },
+    {
+      "name": "martian-21"
+    },
+    {
+      "name": "martian-23"
+    },
+    {
+      "name": "martian-29"
+    },
+    {
+      "name": "martian-31"
+    },
+    {
+      "name": "martian-38"
+    },
+    {
+      "name": "martian-39"
+    },
+    {
+      "name": "martian-46"
+    },
+    {
+      "name": "martian-47"
+    },
+    {
+      "name": "martian-55"
+    },
+    {
+      "name": "martian-63"
+    },
+    {
+      "name": "martian-74"
+    },
+    {
+      "name": "martian-75"
+    },
+    {
+      "name": "martian-78"
+    },
+    {
+      "name": "martian-79"
+    },
+    {
+      "name": "martian-95"
+    },
+    {
+      "name": "martian-110"
+    },
+    {
+      "name": "martian-111"
+    },
+    {
+      "name": "martian-127"
+    },
+    {
+      "name": "martian-137"
+    },
+    {
+      "name": "martian-139"
+    },
+    {
+      "name": "martian-141"
+    },
+    {
+      "name": "martian-143"
+    },
+    {
+      "name": "martian-157"
+    },
+    {
+      "name": "martian-159"
+    },
+    {
+      "name": "martian-175"
+    },
+    {
+      "name": "martian-191"
+    },
+    {
+      "name": "martian-203"
+    },
+    {
+      "name": "martian-207"
+    },
+    {
+      "name": "martian-223"
+    },
+    {
+      "name": "martian-239"
+    },
+    {
+      "name": "martian-255"
+    }
+  ]
+}

@@ -64,7 +64,7 @@ public sealed partial class WFNpcIntentSystem
     }
 
     /// <summary>Whether a player holds a gun with their weapon hand up.</summary>
-    private bool Armed(EntityUid target) => _combat.IsInCombatMode(target) && _gun.TryGetGun(target, out _);
+    private bool Armed(EntityUid target) => _combat.IsInCombatMode(target) && _gun.TryGetGun(target, out _, out _);
 
     /// <summary>Takes thrown-down cash near the holder toward what is owed.</summary>
     private bool PickUpDropped(Entity<WFNpcIntentComponent> ent)
@@ -248,7 +248,7 @@ public sealed partial class WFNpcIntentSystem
     /// <summary>Fires a held gun at a spot beside the target, to be seen and not to hit.</summary>
     private void FireWarning(Entity<WFNpcIntentComponent> ent, EntityUid target)
     {
-        if (!_gun.TryGetGun(ent, out var gun))
+        if (!_gun.TryGetGun(ent, out var gun, out var gunComp) || gunComp == null)
             return;
 
         var here = _transform.GetMapCoordinates(ent);
@@ -261,6 +261,6 @@ public sealed partial class WFNpcIntentSystem
             return;
 
         var aside = Vector2.Normalize(new Vector2(-line.Y, line.X)) * (_random.Prob(0.5f) ? MissBy : -MissBy);
-        _gun.AttemptShoot(ent, gun, gun.Comp, new EntityCoordinates(map, there.Position + aside));
+        _gun.AttemptShoot(ent, gun, gunComp, new EntityCoordinates(map, there.Position + aside));
     }
 }

@@ -13,9 +13,9 @@ public sealed class WFAdsCampaignRuleSystem : GameRuleSystem<WFAdsCampaignRuleCo
         Log.Info("ADS incursion rule started: the campaign is on.");
     }
 
-    protected override void Ended(EntityUid uid, WFAdsCampaignRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    protected override void Ended(Entity<WFAdsCampaignRuleComponent> rule, ref GameRuleEndedEvent args)
     {
-        base.Ended(uid, component, gameRule, args);
+        base.Ended(rule, ref args);
         Log.Info("ADS incursion rule ended: the campaign is off.");
     }
 }

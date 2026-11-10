@@ -20,6 +20,10 @@ public sealed partial class WFDrydockMaterialPaymentComponent : Component
     [DataField]
     public float InKindFactor = 0.01f;
 
+    /// <summary>Share of a wall's construction materials a hull break recovers.</summary>
+    [DataField]
+    public float StructureYield = 0.02f;
+
     /// <summary>
     /// Most units of each material one repair of a <see cref="ReferenceValue"/> ship may bill, scaled by the ship's
     /// price. Refits are not limited.

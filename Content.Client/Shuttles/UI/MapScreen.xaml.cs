@@ -33,7 +33,6 @@ public sealed partial class MapScreen : BoxContainer
 {
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     private readonly DetectionSystem _detection; // Mono
     private readonly SharedAudioSystem _audio;
@@ -67,6 +66,7 @@ public sealed partial class MapScreen : BoxContainer
 
     // Mono
     public event Action<MapCoordinates, Angle>? RequestAutopilot;
+    public event Action<NetEntity>? OnTrackEntity;
 
     private readonly Dictionary<MapId, BoxContainer> _mapHeadings = new();
     private readonly Dictionary<MapId, List<IMapObject>> _mapObjects = new();
@@ -83,6 +83,7 @@ public sealed partial class MapScreen : BoxContainer
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        WfInitDestinationSearch();
 
         _detection = _entManager.System<DetectionSystem>(); // Mono
         _audio = _entManager.System<SharedAudioSystem>();
@@ -391,7 +392,7 @@ public sealed partial class MapScreen : BoxContainer
             };
 
             _mapHeadings.Add(mapComp.MapId, gridContents);
-            foreach (var grid in _mapManager.GetAllGrids(mapComp.MapId))
+            foreach (var grid in _maps.GetAllGrids(mapComp.MapId))
             {
                 _entManager.TryGetComponent(grid.Owner, out IFFComponent? iffComp);
 

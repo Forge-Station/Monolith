@@ -68,7 +68,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
             RequestAutopilot?.Invoke(coords, angle);
         };
 
-        DockContainer.DockRequest += (entity, netEntity) =>
+        DockContainer.DockRequest += (entity, netEntity, _) =>
         {
             DockRequest?.Invoke(entity, netEntity);
         };

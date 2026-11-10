@@ -254,7 +254,7 @@ public sealed class WildSlimesTest
         var xeno = server.System<XenobiologySystem>();
         var wildSlimes = server.System<WFWildSlimeSystem>();
         var factions = server.System<NpcFactionSystem>();
-        var hunger = server.System<HungerSystem>();
+        var hunger = server.System<SatiationSystem>();
         var mobs = server.System<MobStateSystem>();
         var habitat = protos.Index<WFWildSlimeHabitatPrototype>(Habitat);
 
@@ -297,7 +297,7 @@ public sealed class WildSlimesTest
                     Assert.That(mobs.IsAlive(slime), Is.True, "A wild slime died.");
                     Assert.That(factions.GetNearbyHostiles(slime, 5f), Is.Empty, "A wild slime takes someone for an enemy.");
                     Assert.That(entMan.GetComponent<SlimeComponent>(slime).LatchedTarget, Is.Null, "A wild slime latched on.");
-                    var value = hunger.GetHunger(entMan.GetComponent<HungerComponent>(slime));
+                    var value = hunger.GetHunger(slime);
                     Assert.That(value, Is.InRange(WFWildSlimeSystem.MinWildHunger, WFWildSlimeSystem.MaxWildHunger), "A wild slime's hunger ran away.");
                 }
 

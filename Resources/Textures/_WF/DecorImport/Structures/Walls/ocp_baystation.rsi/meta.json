@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Baystation 12 at commit https://github.com/Baystation12/Baystation12/commit/64fcc7090fbf1d9255446154730a57586cec3355.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "r_ocp0",
+      "directions": 4
+    },
+    {
+      "name": "r_ocp1",
+      "directions": 4
+    },
+    {
+      "name": "r_ocp2",
+      "directions": 4
+    },
+    {
+      "name": "r_ocp3",
+      "directions": 4
+    },
+    {
+      "name": "r_ocp4",
+      "directions": 4
+    },
+    {
+      "name": "r_ocp5",
+      "directions": 4
+    },
+    {
+      "name": "r_ocp6",
+      "directions": 4
+    },
+    {
+      "name": "r_ocp7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

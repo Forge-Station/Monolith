@@ -27,4 +27,7 @@ public sealed class DockingPortState
     public DockType DockType;
     public bool ShipyardService; // Forge-Change
     // End Frontier
+
+    /// <summary>The raider grid whose docking clamps hold this port's joint.</summary>
+    public NetEntity? WfClampedBy;
 }

@@ -324,7 +324,7 @@ public sealed class WFCockpitGunneryTest
             flareControl.IgnoreLos = true;
             server.Controlled.Add(flare);
             // Owned by this server and able to fire, but mounted on a second grid.
-            var otherGrid = pair.Server.ResolveDependency<IMapManager>().CreateGridEntity(map.MapId);
+            var otherGrid = pair.Server.System<SharedMapSystem>().CreateGridEntity(map.MapId);
             transforms.SetLocalPosition(otherGrid.Owner, new Vector2(40, 0));
             var elsewhere = em.SpawnEntity(null, new EntityCoordinates(otherGrid.Owner, new Vector2(0.5f, 0.5f)));
             var elsewhereControl = em.AddComponent<FireControllableComponent>(elsewhere);

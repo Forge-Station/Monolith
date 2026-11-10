@@ -32,6 +32,12 @@ public sealed partial class TraderComponent : Component
     public float TableReachBonus = 1f;
 
     /// <summary>
+    /// A killable trader is not made invulnerable. Dead, it trades with nobody.
+    /// </summary>
+    [DataField]
+    public bool Killable;
+
+    /// <summary>
     /// Table the trader trades over, if any. Networked so reach is predicted.
     /// </summary>
     [ViewVariables, AutoNetworkedField]
@@ -116,6 +122,18 @@ public sealed partial class TraderComponent : Component
     /// </summary>
     [ViewVariables]
     public bool Confirming;
+
+    /// <summary>
+    /// Placeholder for a free-text answer the menu is waiting on, or null when it is not asking for one.
+    /// </summary>
+    [ViewVariables]
+    public string? TextPrompt;
+
+    /// <summary>
+    /// Longest answer the text prompt accepts.
+    /// </summary>
+    [ViewVariables]
+    public int TextMaxLength = 30;
 
     /// <summary>
     /// When the customer last did anything.

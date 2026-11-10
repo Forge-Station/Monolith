@@ -20,6 +20,7 @@ using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Follower;
 using Content.Shared.Ghost;
+using Content.Shared._Forge.Sponsor;
 using Content.Shared.GhostTypes;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -73,6 +74,7 @@ namespace Content.Server.Ghost
         [Dependency] private TagSystem _tag = default!;
         [Dependency] private IAdminManager _admin = default!; // Frontier
         [Dependency] private IServerPreferencesManager _preferencesManager = default!;
+        [Dependency] private Content.Server._Forge.Sponsor.SponsorManager _sponsors = default!;
         [Dependency] private GhostSpriteStateSystem _ghostState = default!;
         [Dependency] private Content.Server._WF.Wolfmed.Life.WolfmedDyingActionsSystem _wolfmedEndings = default!; // WOLFGATE(Wolfmed): M1a: honest endings
 
@@ -582,11 +584,11 @@ namespace Content.Server.Ghost
             var user = mind.Comp.UserId;
             try
             {
-                if (user != null && _sponsors.TryGetSponsor(user.Value, out var level))
+                if (user is { } sponsorUser && _sponsors.TryGetSponsor(sponsorUser, out var level))
                 {
                     // Forge-Change: prefer the sponsor's explicitly chosen ghost skin (validated against their level),
                     // then fall back to the default skin tied to their level, then to the normal observer.
-                    var chosenSkin = _preferencesManager.GetPreferencesOrNull(user.Value)?.SponsorGhostSkin;
+                    var chosenSkin = _preferencesManager.GetPreferencesOrNull(sponsorUser)?.SponsorGhostSkin;
                     if (!string.IsNullOrEmpty(chosenSkin) && SponsorData.IsGhostSkinAllowed(level, chosenSkin))
                         ghost = Spawn(chosenSkin, spawnPosition.Value);
                     else if (_sponsors.TryGetSponsorGhost(level, out var sponsorGhost))

@@ -82,7 +82,7 @@ public abstract partial class CESharedZLevelsSystem
 
         if (zPhysicsComponent.VelocityRaiseEvent)
         {
-            var velocityEvent = new CEGetZVelocityEvent((entity, zPhysicsComponent), frameTime);
+            var velocityEvent = new CEGetZVelocityEvent((entity, zPhysicsComponent));
             RaiseLocalEvent(entity, ref velocityEvent);
 
             zPhysicsComponent.Velocity += velocityEvent.VelocityDelta * frameTime;

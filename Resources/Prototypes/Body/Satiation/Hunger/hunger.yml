@@ -117,6 +117,52 @@
     Starving: 25
     Dead: 0
 
+- type: satiation
+  id: AvaliHunger
+  parent: NormalSatiationHunger
+  baseDecayRate: 0.03
+  maximumValue: 250
+  thresholds:
+    Overfed: 250
+    Okay: 200
+    Peckish: 150
+    Starving: 100
+    Dead: 0
+
+- type: satiation
+  id: ProtoVulpHunger
+  parent: NormalSatiationHunger
+  maximumValue: 250
+  thresholds:
+    Overfed: 250
+    Okay: 200
+    Peckish: 150
+    Starving: 100
+    Dead: 0
+
+- type: satiation
+  id: SynthHunger
+  parent: NormalSatiationHunger
+  baseDecayRate: 0.0085
+
+- type: satiation
+  id: XenobioSlimeHunger
+  parent: SimpleMobBaseHunger
+  baseDecayRate: 0.3
+  maximumValue: 150
+  thresholds:
+    Overfed: 150
+    Okay: 75
+    Peckish: 25
+    Starving: 10
+    Dead: 0
+  decayModifiers:
+    Overfed: 1.5
+    Okay: 1.5
+    Peckish: 0.4
+    Starving: 0.2
+    Dead: 0.1
+
 - type: entity
   abstract: true
   id: BaseHungerSlowdown

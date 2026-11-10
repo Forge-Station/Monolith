@@ -27,7 +27,7 @@ public sealed class FleshPustuleTreeTest
         {
             var maps = server.System<SharedMapSystem>();
             maps.CreateMap(out var mapId);
-            var grid = server.ResolveDependency<IMapManager>().CreateGridEntity(mapId);
+            var grid = server.System<SharedMapSystem>().CreateGridEntity(mapId);
             var floor = server.ResolveDependency<ITileDefinitionManager>()["FloorFlesh"];
             for (var x = -2; x <= 3; x++)
             for (var y = -2; y <= 3; y++)
@@ -67,7 +67,7 @@ public sealed class FleshPustuleTreeTest
         {
             var maps = server.System<SharedMapSystem>();
             maps.CreateMap(out var mapId);
-            var grid = server.ResolveDependency<IMapManager>().CreateGridEntity(mapId);
+            var grid = server.System<SharedMapSystem>().CreateGridEntity(mapId);
             maps.SetTile(grid, Vector2i.Zero, new Tile(server.ResolveDependency<ITileDefinitionManager>()["FloorFlesh"].TileId));
             var coords = new EntityCoordinates(grid, new Vector2(0.5f));
             var system = server.System<WFFleshPustuleTreeSystem>();

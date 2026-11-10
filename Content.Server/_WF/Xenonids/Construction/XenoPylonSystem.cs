@@ -36,7 +36,7 @@ public sealed partial class XenoPylonSystem : SharedXenoPylonSystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private RMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;
     [Dependency] private TagSystem _tagSystem = default!;
 

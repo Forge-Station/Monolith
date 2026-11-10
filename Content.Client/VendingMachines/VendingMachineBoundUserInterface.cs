@@ -98,8 +98,10 @@ namespace Content.Client.VendingMachines
             }
             // End Frontier
 
-            _menu?.Populate(_cachedInventory, _mod, _balance, _cashSlotBalance, _requiresCash); // Frontier: add _balance, mono: add _cashSlotBalance and _requiresCash (for ironman characters)
+            _menu?.Populate(_cachedInventory, true, _mod, _balance, _cashSlotBalance, _requiresCash);
         }
+
+        public void Refresh() => Update();
 
         private void OnItemSelected(GUIBoundKeyEventArgs args, ListData data)
         {

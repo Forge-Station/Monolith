@@ -75,7 +75,7 @@ public sealed class WolfmedRangeMapGenerator
         var entMan = server.EntMan;
         var protos = server.ResolveDependency<IPrototypeManager>();
         var tileDefs = server.ResolveDependency<ITileDefinitionManager>();
-        var mapMan = server.ResolveDependency<IMapManager>();
+        var mapMan = server.System<SharedMapSystem>();
         var console = server.ResolveDependency<IConsoleHost>();
         var mapSys = entMan.System<SharedMapSystem>();
         var transform = entMan.System<SharedTransformSystem>();

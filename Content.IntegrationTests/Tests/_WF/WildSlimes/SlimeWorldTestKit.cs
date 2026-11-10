@@ -352,7 +352,7 @@ public static class SlimeWorldTestKit
         var map = await pair.CreateTestMap();
         var maps = server.System<SharedMapSystem>();
         var xeno = server.System<XenobiologySystem>();
-        var hunger = server.System<HungerSystem>();
+        var hunger = server.System<SatiationSystem>();
         var climate = server.System<WFSlimeClimateSystem>();
         var habitat = protos.Index<WFWildSlimeHabitatPrototype>(spec.Habitat);
 
@@ -394,7 +394,7 @@ public static class SlimeWorldTestKit
             }
 
             // Without a grid atmosphere the floor takes the map's air.
-            entMan.RemoveComponent<Content.Server.Atmos.Components.GridAtmosphereComponent>(map.Grid);
+            entMan.RemoveComponent<GridAtmosphereComponent>(map.Grid);
             server.System<AtmosphereSystem>().SetMapAtmosphere(map.MapUid, false, air);
         });
 

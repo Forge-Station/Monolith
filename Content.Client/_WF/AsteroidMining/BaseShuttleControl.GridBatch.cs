@@ -35,7 +35,7 @@ public partial class BaseShuttleControl
         }
     }
 
-    private void WfQueue(DrawingHandleScreen handle, DrawPrimitiveTopology topology, List<Vector2> vertices, int start,
+    protected void WfQueue(DrawingHandleScreen handle, DrawPrimitiveTopology topology, List<Vector2> vertices, int start,
         int end, Matrix3x2 gridToView, Color color)
     {
         if (_wfGridBatchCount > 0 && topology != _wfGridBatchTopology)

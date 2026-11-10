@@ -1,6 +1,7 @@
 using Content.Server._WF.SectorControl;
 using Content.Server.GameTicking;
 using Content.Shared._WF.SectorControl;
+using Content.Shared.GameTicking;
 
 namespace Content.Server._WF.AdsIncursion.Systems;
 

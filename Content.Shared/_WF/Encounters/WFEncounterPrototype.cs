@@ -149,6 +149,13 @@ public sealed partial class WFEncounterPrototype : IPrototype
     [DataField]
     public float MaxDistance = 4000f;
 
+    /// <summary>
+    /// Least Lattice band the origin must lie in. Above zero, the distances are from the sector's centre instead of
+    /// from a player ship.
+    /// </summary>
+    [DataField]
+    public int LatticeBand;
+
     /// <summary>Open space: no station may be within this distance of the origin. Keeps raiders away from ports.</summary>
     [DataField]
     public float StationClearance;
@@ -221,6 +228,19 @@ public sealed partial class WFEncounterShip
     /// </summary>
     [DataField]
     public WFEncounterExtort? Extort;
+
+    /// <summary>
+    /// Set, the ship is an abductor: it roams, now and then docks with a lightly crewed player ship, takes someone off
+    /// it alive and holds them in its cell for a ransom. Its hull needs a cell chair.
+    /// </summary>
+    [DataField]
+    public WFEncounterAbduct? Abduct;
+
+    /// <summary>
+    /// Guns mounted on its hardpoints at spawn to stop a ship before it boards. The encounter fires them itself.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId> Disablers = new();
 
     /// <summary>Only these roles of the planned crew are spawned. Empty spawns the whole plan.</summary>
     [DataField]
@@ -438,6 +458,42 @@ public sealed partial class WFEncounterExtort
     /// </summary>
     [DataField]
     public string Lines = "wf-encounter-extort";
+}
+
+/// <summary>Who an abductor goes for, how it takes them and what it asks to give them back.</summary>
+[DataDefinition]
+public sealed partial class WFEncounterAbduct
+{
+    /// <summary>Spesos it asks for a prisoner. Added to the encounter's warrant when someone is taken.</summary>
+    [DataField]
+    public int Ransom = 15000;
+
+    /// <summary>How far off a player ship may be for it to go after it.</summary>
+    [DataField]
+    public float Reach = 4000f;
+
+    /// <summary>The most living players a ship may have aboard and still be a mark.</summary>
+    [DataField]
+    public int MaxCrew = 2;
+
+    /// <summary>How many of its deckhands go after the prisoner. Its guards hold the port.</summary>
+    [DataField]
+    public int Grabbers = 2;
+
+    /// <summary>Seconds it holds a prisoner before it gives up on the ransom and sends them home.</summary>
+    [DataField]
+    public float HoldTime = 600f;
+
+    /// <summary>Seconds between one run and the next, picked between the two each time.</summary>
+    [DataField]
+    public float MarkMin = 300f;
+
+    [DataField]
+    public float MarkMax = 720f;
+
+    /// <summary>Fluent prefix of what it says: see abductors.ftl.</summary>
+    [DataField]
+    public string Lines = "wf-encounter-abduct";
 }
 
 /// <summary>A warrant for an encounter's target, posted on the sector bounty board when it starts.</summary>

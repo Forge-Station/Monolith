@@ -57,7 +57,9 @@ namespace Content.Server.Database
         public DbSet<WolfgateCustomMarkingArt> WolfgateCustomMarkingArt { get; set; } = null!;
         public DbSet<WolfgateCustomMarking> WolfgateCustomMarking { get; set; } = null!;
         // WOLFGATE END
+        public DbSet<WolfgateContractStanding> WolfgateContractStanding { get; set; } = null!;
         public DbSet<WolfgateFeedbackReport> WolfgateFeedbackReport { get; set; } = null!; // WOLFGATE(Feedback): player bug reports and suggestions
+        public DbSet<WolfgateGameScore> WolfgateGameScore { get; set; } = null!; // WOLFGATE(GameHub): best level scores
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -478,6 +480,19 @@ namespace Content.Server.Database
             modelBuilder.Entity<WolfgateFeedbackReport>()
                 .HasIndex(r => r.Status);
             // WOLFGATE END
+
+            // One standing row per player, character and contractor. Lookups use SingleOrDefault.
+            modelBuilder.Entity<WolfgateContractStanding>()
+                .HasIndex(s => new { s.PlayerUserId, s.CharacterName, s.Contractor })
+                .IsUnique();
+
+            // WOLFGATE(GameHub): one best score per player, game and level
+            modelBuilder.Entity<WolfgateGameScore>()
+                .HasIndex(s => new { s.PlayerUserId, s.Game, s.Level })
+                .IsUnique();
+
+            modelBuilder.Entity<WolfgateGameScore>()
+                .HasIndex(s => s.Game);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -1821,4 +1836,46 @@ namespace Content.Server.Database
         public bool NotifyPlayer { get; set; }
     }
     // WOLFGATE END
+
+    public class WolfgateContractStanding
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public Guid PlayerUserId { get; set; }
+
+        [Required, MaxLength(64)]
+        public string CharacterName { get; set; } = "";
+
+        [Required, MaxLength(64)]
+        public string Contractor { get; set; } = "";
+
+        public int Points { get; set; }
+
+        /// <summary>The last round its drift toward neutral was applied in.</summary>
+        public int LastRound { get; set; }
+
+        public DateTime Updated { get; set; }
+    }
+
+    // WOLFGATE(GameHub): a player's best score on one level of a hub game
+    public class WolfgateGameScore
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public Guid PlayerUserId { get; set; }
+
+        [Required, MaxLength(64)]
+        public string PlayerName { get; set; } = "";
+
+        [Required, MaxLength(64)]
+        public string Game { get; set; } = "";
+
+        public int Level { get; set; }
+
+        public int Score { get; set; }
+
+        public DateTime Time { get; set; }
+    }
 }

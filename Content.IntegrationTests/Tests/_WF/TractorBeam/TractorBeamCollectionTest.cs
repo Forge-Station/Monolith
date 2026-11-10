@@ -25,7 +25,7 @@ public sealed class TractorBeamCollectionTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -65,7 +65,7 @@ public sealed class TractorBeamCollectionTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -105,7 +105,7 @@ public sealed class TractorBeamCollectionTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -158,7 +158,7 @@ public sealed class TractorBeamCollectionTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -201,7 +201,7 @@ public sealed class TractorBeamCollectionTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -237,7 +237,7 @@ public sealed class TractorBeamCollectionTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -295,13 +295,13 @@ public sealed class TractorBeamCollectionTest
     }
 
     private static (EntityUid Source, EntityUid Target, EntityUid Emitter) CreateLock(
-        IEntityManager entities, IMapManager maps, MapId map)
+        IEntityManager entities, SharedMapSystem maps, MapId map)
     {
         var (source, target, emitter, _) = TractorBeamTest.CreateLock(entities, maps, map);
         return (source, target, emitter);
     }
 
-    private static EntityUid MakeGrid(IEntityManager entities, IMapManager maps, MapId map, int side, Vector2 position)
+    private static EntityUid MakeGrid(IEntityManager entities, SharedMapSystem maps, MapId map, int side, Vector2 position)
     {
         var grid = maps.CreateGridEntity(map);
         var tiles = new List<(Vector2i GridIndices, Tile Tile)>();

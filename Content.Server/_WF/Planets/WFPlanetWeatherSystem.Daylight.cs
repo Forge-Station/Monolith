@@ -8,7 +8,7 @@ namespace Content.Server._WF.Planets;
 
 public sealed partial class WFPlanetWeatherSystem
 {
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private SharedLightCycleSystem _lightCycles = default!;
     [Dependency] private MetaDataSystem _metadata = default!;
 

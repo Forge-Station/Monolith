@@ -3495,8 +3495,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_junk_alt.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallMetalAlt
@@ -3516,8 +3514,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_metal_alt.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierTwo, BaseWallBitmask ]
   id: DarkPackVampwallMetalReinforced
@@ -3538,8 +3534,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_metal_reinforced.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallRichOld
@@ -3555,8 +3549,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_rich_old.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallBar
@@ -3573,8 +3565,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_bar.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallDirtywood
@@ -3595,8 +3585,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_dirtywood.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallGreen
@@ -3616,8 +3604,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_green.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallMarket
@@ -3633,8 +3619,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_market.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallOld
@@ -3651,8 +3635,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_old.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallPainted
@@ -3668,8 +3650,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_painted.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallRich
@@ -3685,8 +3665,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_rich.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallRock
@@ -3705,8 +3683,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_rock.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallRust
@@ -3726,8 +3702,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_rust.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: DarkPackVampwallWood
@@ -3748,8 +3722,6 @@
     sprite: _WF/DecorImport/Structures/Walls/vampwall_wood.rsi
   - type: IconSmooth
     base: wall-
-  - type: WallFrill
-
 - type: entity
   parent: [ BaseWallTierOne, BaseWallBitmask ]
   id: ParaMineralBananium

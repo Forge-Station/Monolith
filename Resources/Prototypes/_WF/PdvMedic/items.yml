@@ -29,5 +29,4 @@
   - type: PdaBorderColor
     borderColor: "#9c8245"
   - type: StealTarget
-    stealGroup:
-    - PDVPDAs
+    stealGroup: PDVPDAs

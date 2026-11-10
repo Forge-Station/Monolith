@@ -16,6 +16,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Inventory;
 using Content.Shared._Starlight.Shadekin;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Shared.Timing;
 using Content.Server._Starlight.Shadekin;
 using Content.Shared.Sprite;

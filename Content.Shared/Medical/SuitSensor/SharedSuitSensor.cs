@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DoAfter;
 using Robust.Shared.Map;
@@ -40,6 +41,61 @@ public partial struct SuitSensorStatus : IEquatable<SuitSensorStatus>
     public NetCoordinates? Coordinates;
 	public string LocationName;
     public int WFCompanyRank; // WOLFGATE(Companies): rank whose custom icon replaces JobIcon
+
+    public bool Equals(SuitSensorStatus other)
+    {
+        return Timestamp.Equals(other.Timestamp)
+               && SuitSensorUid.Equals(other.SuitSensorUid)
+               && Name == other.Name
+               && Job == other.Job
+               && JobIcon == other.JobIcon
+               && (JobDepartments == other.JobDepartments
+                   || JobDepartments != null && other.JobDepartments != null && JobDepartments.SequenceEqual(other.JobDepartments))
+               && IsAlive == other.IsAlive
+               && TotalDamage == other.TotalDamage
+               && TotalDamageThreshold == other.TotalDamageThreshold
+               && Nullable.Equals(Coordinates, other.Coordinates)
+               && LocationName == other.LocationName
+               && WFCompanyRank == other.WFCompanyRank;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is SuitSensorStatus other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        var hashCode = new HashCode();
+        hashCode.Add(Timestamp);
+        hashCode.Add(SuitSensorUid);
+        hashCode.Add(Name);
+        hashCode.Add(Job);
+        hashCode.Add(JobIcon);
+        if (JobDepartments != null)
+        {
+            hashCode.Add(JobDepartments.Count);
+            foreach (var department in JobDepartments)
+                hashCode.Add(department);
+        }
+        hashCode.Add(IsAlive);
+        hashCode.Add(TotalDamage);
+        hashCode.Add(TotalDamageThreshold);
+        hashCode.Add(Coordinates);
+        hashCode.Add(LocationName);
+        hashCode.Add(WFCompanyRank);
+        return hashCode.ToHashCode();
+    }
+
+    public static bool operator ==(SuitSensorStatus left, SuitSensorStatus right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(SuitSensorStatus left, SuitSensorStatus right)
+    {
+        return !left.Equals(right);
+    }
 }
 
 [Serializable, NetSerializable]

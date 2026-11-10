@@ -36,6 +36,9 @@ public sealed class WolfgateMarkingPicker : BoxContainer
     public Marking? FacialHairMarking;
     public bool Forced { get; set; }
 
+    /// <summary>When set, markings from other species stay available on this body.</summary>
+    public bool MismatchedParts { get; set; }
+
     /// <summary>Body parts in the order they are offered, head to tail; anything else follows in enum order.</summary>
     private static readonly HumanoidVisualLayers[] PartOrder =
     {

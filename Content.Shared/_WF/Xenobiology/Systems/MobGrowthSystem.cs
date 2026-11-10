@@ -14,7 +14,7 @@ public sealed partial class MobGrowthSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SatiationSystem _hunger = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
@@ -47,7 +47,7 @@ public sealed partial class MobGrowthSystem : EntitySystem
             return;
 
         var now = _timing.CurTime;
-        var query = EntityQueryEnumerator<MobGrowthComponent, HungerComponent>();
+        var query = EntityQueryEnumerator<MobGrowthComponent, SatiationComponent>();
         while (query.MoveNext(out var uid, out var growth, out var hunger))
         {
             if (now < growth.NextGrowthTime)
@@ -55,13 +55,13 @@ public sealed partial class MobGrowthSystem : EntitySystem
 
             growth.NextGrowthTime = now + growth.GrowthInterval;
             if (_mobState.IsDead(uid)
-                || _hunger.GetHunger(hunger) < growth.HungerRequired
+                || (_hunger.GetValueOrNull((uid, hunger), SatiationSystem.Hunger) ?? 0f) < growth.HungerRequired
                 || !growth.Stages.TryGetValue(growth.CurrentStage, out var stage)
                 || string.IsNullOrEmpty(stage.NextStage)
                 || !growth.Stages.ContainsKey(stage.NextStage))
                 continue;
 
-            _hunger.ModifyHunger(uid, growth.GrowthCost, hunger);
+            _hunger.ModifyValue((uid, hunger), SatiationSystem.Hunger, growth.GrowthCost);
             growth.CurrentStage = stage.NextStage;
             Dirty(uid, growth);
             UpdateAppearance((uid, growth));

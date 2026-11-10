@@ -14,7 +14,7 @@ public sealed partial class WFSectorNoticeSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private ShipPaSystem _shipPa = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

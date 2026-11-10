@@ -780,3 +780,7 @@
 # Map migration tags for door autorotation thing.
 - type: Tag
   id: DoorAutorotate
+
+# Items a safety deposit box will not accept.
+- type: Tag
+  id: SafetyDepositBlacklist

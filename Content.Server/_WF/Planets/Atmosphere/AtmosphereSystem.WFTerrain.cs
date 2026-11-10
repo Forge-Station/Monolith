@@ -1,6 +1,7 @@
 using Content.Server._WF.Planets.Atmosphere;
 using Content.Server.Atmos.Components;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Atmos.Components;
 using Content.Shared._WF.Planets;
 using Robust.Shared.Map;
@@ -69,8 +70,6 @@ public sealed partial class AtmosphereSystem
 
         if (air.GetMoles(Gas.Oxygen) < oxygen)
             air.SetMoles(Gas.Oxygen, oxygen);
-
-        air.SetMoles(Gas.Smoke, MathF.Min(air.GetMoles(Gas.Smoke), map.Mixture.GetMoles(Gas.Smoke) * scale));
 
         if (air.Temperature > map.Mixture.Temperature)
             air.Temperature = map.Mixture.Temperature;

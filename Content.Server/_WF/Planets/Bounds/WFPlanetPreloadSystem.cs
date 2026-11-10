@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Threading.Tasks;
 using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 using Content.Server.Parallax;
 using Content.Shared._WF.CCVar;
 using Content.Shared._WF.Planets;
@@ -22,7 +23,7 @@ public sealed partial class WFPlanetPreloadSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private BiomeSystem _biome = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private WFPlanetBoundsSystem _bounds = default!;
 

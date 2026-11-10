@@ -34,6 +34,8 @@ namespace Content.Server._WF.Drydock;
 /// </summary>
 public sealed partial class WFDrydockSystem
 {
+    private readonly record struct CraneReach(EntityUid Uid, WFDrydockCraneComponent Crane, Matrix3x2 ShipToCrane);
+
     [Dependency] private WFCrewAlertSystem _crewAlert = default!;
     [Dependency] private FlatpackSystem _flatpack = default!;
     [Dependency] private MaterialStorageSystem _sheets = default!;

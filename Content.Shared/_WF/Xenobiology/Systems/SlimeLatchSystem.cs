@@ -27,7 +27,7 @@ public sealed partial class SlimeLatchSystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private DamageableSystem _damageable = default!;
-    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SatiationSystem _hunger = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -79,8 +79,8 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
             _damageable.TryChangeDamage(uid, comp.Damage, ignoreResistances: true, origin: source,
                 targetPart: TargetBodyPart.All);
-            if (TryComp<HungerComponent>(source, out var hunger))
-                _hunger.ModifyHunger(source, comp.Damage.GetTotal().Float(), hunger);
+            if (TryComp<SatiationComponent>(source, out var hunger))
+                _hunger.ModifyValue((source, hunger), SatiationSystem.Hunger, comp.Damage.GetTotal().Float());
         }
     }
 

@@ -127,7 +127,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         EntityUid user,
         EntityUid? target,
         float doAfterDelay,
-        IEnumerable<string> toolQualitiesNeeded,
+        IEnumerable<ProtoId<ToolQualityPrototype>> toolQualitiesNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
         ToolComponent? toolComponent = null)
@@ -165,7 +165,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         EntityUid user,
         EntityUid? target,
         TimeSpan delay,
-        IEnumerable<string> toolQualitiesNeeded,
+        IEnumerable<ProtoId<ToolQualityPrototype>> toolQualitiesNeeded,
         DoAfterEvent doAfterEv,
         out DoAfterId? id,
         float fuel = 0,
@@ -232,7 +232,7 @@ public abstract partial class SharedToolSystem : EntitySystem
             user,
             target,
             TimeSpan.FromSeconds(doAfterDelay),
-            new[] { toolQualityNeeded },
+            new ProtoId<ToolQualityPrototype>[] { toolQualityNeeded },
             doAfterEv,
             out _,
             fuel,
@@ -251,18 +251,18 @@ public abstract partial class SharedToolSystem : EntitySystem
     ///     Whether a tool entity has all specified qualities or not.
     /// </summary>
     [PublicAPI]
-    public bool HasAllQualities(EntityUid uid, IEnumerable<string> qualities, ToolComponent? tool = null)
+    public bool HasAllQualities(EntityUid uid, IEnumerable<ProtoId<ToolQualityPrototype>> qualities, ToolComponent? tool = null)
     {
-        return Resolve(uid, ref tool, false) && tool.Qualities.ContainsAll(qualities);
+        return Resolve(uid, ref tool, false) && tool.Qualities.IsSupersetOf(qualities);
     }
 
-    private bool CanStartToolUse(EntityUid tool, EntityUid user, EntityUid? target, float fuel, IEnumerable<string> toolQualitiesNeeded, ToolComponent? toolComponent = null)
+    private bool CanStartToolUse(EntityUid tool, EntityUid user, EntityUid? target, float fuel, IEnumerable<ProtoId<ToolQualityPrototype>> toolQualitiesNeeded, ToolComponent? toolComponent = null)
     {
         if (!Resolve(tool, ref toolComponent))
             return false;
 
         // check if the tool can do what's required
-        if (!toolComponent.Qualities.ContainsAll(toolQualitiesNeeded))
+        if (!toolComponent.Qualities.IsSupersetOf(toolQualitiesNeeded))
             return false;
 
         // check if the user allows using the tool

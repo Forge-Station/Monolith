@@ -34,7 +34,7 @@ public sealed class PlanetRoundHoldTest
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { DummyTicker = false, InLobby = true, Dirty = true });
         var server = pair.Server;
-        var ticker = server.System<GameTicker>();
+        var ticker = server.System<ServerGameTicker>();
         var hold = server.System<WFPlanetRoundHoldSystem>();
 
         await EnableSlowWorlds(pair, cap: 600f);
@@ -77,7 +77,7 @@ public sealed class PlanetRoundHoldTest
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings { DummyTicker = false, InLobby = true, Dirty = true });
         var server = pair.Server;
-        var ticker = server.System<GameTicker>();
+        var ticker = server.System<ServerGameTicker>();
         var hold = server.System<WFPlanetRoundHoldSystem>();
         var preload = server.System<WFPlanetPreloadSystem>();
 

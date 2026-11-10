@@ -9,7 +9,6 @@ using Content.Shared._WF.BloodColour; // WOLFGATE(BloodColour)
 using Content.Shared._WF.EmoteVoices; // WOLFGATE(EmoteVoices)
 using Content.Shared._WF.Genitals; // WOLFGATE(Genitals)
 using Content.Shared._WF.Genitals.Migration; // WOLFGATE(Genitals)
-using Content.Shared._WF.Genitals.Profile; // WOLFGATE(Genitals)
 using Content.Shared._WF.LegStyle; // WOLFGATE(LegStyle)
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -259,6 +258,9 @@ namespace Content.Shared.Preferences
             ChatFont = other.ChatFont; // WOLFGATE(ChatFont)
             TypingIndicator = other.TypingIndicator; // WOLFGATE(TypingBubble)
             BloodColor = other.BloodColor; // WOLFGATE(BloodColour)
+            Nationality = other.Nationality;
+            Voice = other.Voice;
+            BarkVoice = other.BarkVoice;
         }
 
         /// <summary>Copy constructor</summary>
@@ -297,6 +299,9 @@ namespace Content.Shared.Preferences
             ChatFont = other.ChatFont; // WOLFGATE(ChatFont)
             TypingIndicator = other.TypingIndicator; // WOLFGATE(TypingBubble)
             BloodColor = other.BloodColor; // WOLFGATE(BloodColour)
+            Nationality = other.Nationality;
+            Voice = other.Voice;
+            BarkVoice = other.BarkVoice;
         }
 
         /// <summary>
@@ -631,6 +636,7 @@ namespace Content.Shared.Preferences
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
             if (Species != other.Species) return false;
+            if (Nationality != other.Nationality) return false;
             if (Company != other.Company) return false;
             if (CustomSpeciesName != other.CustomSpeciesName) return false; // WOLFGATE(Humanoid)
             if (!Genitals.MemberwiseEquals(other.Genitals)) return false; // WOLFGATE(Genitals)
@@ -974,6 +980,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(Name);
             hashCode.Add(FlavorText);
             hashCode.Add(Species);
+            hashCode.Add(Nationality);
             hashCode.Add(Age);
             hashCode.Add((int)Sex);
             hashCode.Add((int)Gender);

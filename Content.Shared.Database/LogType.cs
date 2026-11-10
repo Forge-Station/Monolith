@@ -506,6 +506,11 @@ public enum LogType
     /// Anatomy organs and settings.
     /// </summary>
     WFAnatomy = 12490, // WOLFGATE - anatomy organs and settings
+
+    /// <summary>
+    /// A rotary phone call was started, answered or hung up.
+    /// </summary>
+    RMCTelephone = 12491,
     Paper = 300, // Forge
 
     /// <summary>

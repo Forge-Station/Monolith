@@ -283,7 +283,7 @@ public static class PlanetFixture
     {
         var server = pair.Server;
         var tileDefs = server.ResolveDependency<ITileDefinitionManager>();
-        var grid = server.ResolveDependency<IMapManager>().CreateGridEntity(map);
+        var grid = server.System<SharedMapSystem>().CreateGridEntity(map);
         server.System<SharedTransformSystem>().SetLocalPosition(grid.Owner, offset);
 
         var floor = new Tile(tileDefs[FloorTile].TileId);
@@ -329,7 +329,7 @@ public static class PlanetFixture
     public static async Task<EntityUid> BuildDebris(TestPair pair, MapId map, int size = 3, Vector2? offset = null)
     {
         var server = pair.Server;
-        var mapMan = server.ResolveDependency<IMapManager>();
+        var mapMan = server.System<SharedMapSystem>();
         var tileDefs = server.ResolveDependency<ITileDefinitionManager>();
         var maps = server.System<SharedMapSystem>();
         var transform = server.System<SharedTransformSystem>();

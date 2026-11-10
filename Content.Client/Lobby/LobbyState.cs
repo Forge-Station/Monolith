@@ -1,4 +1,4 @@
-using Content.Client._NF.LateJoin;
+using Content.Client._WF.RoundSetup;
 using Content.Client.Audio;
 using Content.Client.Eui;
 using Content.Client.GameTicking;
@@ -14,7 +14,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
-using PickerWindow = Content.Client._NF.LateJoin.Windows.PickerWindow;
+using Robust.Shared.Utility;
 
 namespace Content.Client.Lobby
 {
@@ -34,9 +34,6 @@ namespace Content.Client.Lobby
 
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
-
-        // Frontier - save pickerwindow so it opens only once
-        private PickerWindow? _pickerWindow = null;
 
         protected override void Startup()
         {
@@ -60,18 +57,15 @@ namespace Content.Client.Lobby
             var lobbyNameCvar = _cfg.GetCVar(CCVars.ServerLobbyName);
             var serverName = _baseClient.GameInfo?.ServerName ?? string.Empty;
 
-            Lobby.ServerName.Text = string.IsNullOrEmpty(lobbyNameCvar)
-                ? Loc.GetString("ui-lobby-title", ("serverName", serverName))
-                : lobbyNameCvar;
+            Lobby.ServerName.SetMessage(FormattedMessage.FromUnformatted(string.IsNullOrEmpty(lobbyNameCvar)
+                ? serverName
+                : lobbyNameCvar));
 
-            var width = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
-            Lobby.RightSide.SetWidth = width;
-
+            InitializeRoundSetupHome();
             UpdateLobbyUi();
 
             Lobby.CharacterPreview.CharacterSetupButton.OnPressed += OnSetupPressed;
             Lobby.ReadyButton.OnPressed += OnReadyPressed;
-            Lobby.ReadyButton.OnToggled += OnReadyToggled;
 
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
@@ -91,8 +85,8 @@ namespace Content.Client.Lobby
 
             Lobby!.CharacterPreview.CharacterSetupButton.OnPressed -= OnSetupPressed;
             Lobby!.ReadyButton.OnPressed -= OnReadyPressed;
-            Lobby!.ReadyButton.OnToggled -= OnReadyToggled;
 
+            ShutdownRoundSetupHome();
             Lobby = null;
         }
 
@@ -110,19 +104,7 @@ namespace Content.Client.Lobby
 
         private void OnReadyPressed(BaseButton.ButtonEventArgs args)
         {
-            if (!_gameTicker.IsGameStarted)
-            {
-                return;
-            }
-            // Frontier to downstream: if you want to skip the first window and go straight to station picker,
-            // simply change the enum to station or crew in the PickerWindow constructor.
-            _pickerWindow ??= new PickerWindow();
-            _pickerWindow.OpenCentered();
-        }
-
-        private void OnReadyToggled(BaseButton.ButtonToggledEventArgs args)
-        {
-            SetReady(args.Pressed);
+            JoinFromRoundSetupHome();
         }
 
         public override void FrameUpdate(FrameEventArgs e)
@@ -176,7 +158,7 @@ namespace Content.Client.Lobby
 
         private void LobbyLateJoinStatusUpdated()
         {
-            Lobby!.ReadyButton.Disabled = _gameTicker.DisallowedLateJoin;
+            UpdateRoundSetupHome();
         }
 
         private void UpdateLobbyUi()
@@ -197,6 +179,8 @@ namespace Content.Client.Lobby
                 Lobby!.ReadyButton.Pressed = _gameTicker.AreWeReady;
                 Lobby!.ObserveButton.Disabled = true;
             }
+
+            UpdateRoundSetupHome();
 
             if (_gameTicker.ServerInfoBlob != null)
             {
@@ -237,13 +221,17 @@ namespace Content.Client.Lobby
         {
             if (_gameTicker.LobbyBackground != null)
             {
-                Lobby!.Background.Texture = _resourceCache.GetResource<TextureResource>(_gameTicker.LobbyBackground );
+                var path = _gameTicker.LobbyBackground;
+                Robust.Client.Graphics.Texture sheet = _resourceCache.GetResource<TextureResource>(path);
+                var animated = SymphonyAnimatedBackground.IsAnimated(path);
+                Lobby!.Background.Texture = animated ? null : sheet;
+                Lobby.AnimatedBackground.Play(animated ? sheet : null, animated ? path : null);
             }
             else
             {
                 Lobby!.Background.Texture = null;
+                Lobby.AnimatedBackground.Play(null, null);
             }
-
         }
 
         private void SetReady(bool newReady)

@@ -165,7 +165,7 @@ public sealed partial class ShadekinSystem : EntitySystem
             var attenuation = 1 - (denom * denom);
             var calculatedLight = 0f;
 
-            if (light.Comp.MaskPath is not null && lightMasks.TryGetValue(light.Comp.MaskPath, out var cones))
+            if (light.Comp.LightMask is { } mask && lightMasks.TryGetValue(ProtoMan.Index(mask).MaskPath.ToString(), out var cones))
             {
                 var angleToTarget = GetAngle(light, light.Comp, uid);
                 foreach (var cone in cones)

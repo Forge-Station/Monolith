@@ -1,7 +1,7 @@
 #nullable enable
 using System.Linq;
 using System.Threading.Tasks;
-using Content.Server.GameTicking.Presets;
+using Content.Shared.GameTicking.Prototypes;
 using Content.Shared._Mono.Company;
 using Content.Shared._WF.AdsIncursion;
 using Content.Shared._WF.Encounters;

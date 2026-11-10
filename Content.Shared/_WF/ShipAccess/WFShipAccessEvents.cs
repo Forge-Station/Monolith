@@ -2,6 +2,13 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._WF.ShipAccess;
 
+/// <summary>The owner selects the ship-wide access mode.</summary>
+[Serializable, NetSerializable]
+public sealed class WFShipAccessSetModeMessage(WFShipAccessMode mode) : BoundUserInterfaceMessage
+{
+    public WFShipAccessMode Mode = mode;
+}
+
 /// <summary>The owner flips the ship lock from the console's access tab.</summary>
 [Serializable, NetSerializable]
 public sealed class WFShipAccessSetLockedMessage : BoundUserInterfaceMessage
@@ -62,6 +69,18 @@ public sealed class WFShipAccessSetDoorRuleMessage : BoundUserInterfaceMessage
     public WFShipAccessSetDoorRuleMessage(NetEntity door, WFDoorAccessRule rule)
     {
         Door = door;
+        Rule = rule;
+    }
+}
+
+/// <summary>The owner sets every door on the ship to one rule.</summary>
+[Serializable, NetSerializable]
+public sealed class WFShipAccessSetAllDoorRulesMessage : BoundUserInterfaceMessage
+{
+    public WFDoorAccessRule Rule;
+
+    public WFShipAccessSetAllDoorRulesMessage(WFDoorAccessRule rule)
+    {
         Rule = rule;
     }
 }

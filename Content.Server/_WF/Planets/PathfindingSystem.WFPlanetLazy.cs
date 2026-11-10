@@ -13,7 +13,6 @@ namespace Content.Server.NPC.Pathfinding;
 // What isn't built stays dirty and is built when someone comes near, or a path is asked for across it (WFPlanetPathWake).
 public sealed partial class PathfindingSystem
 {
-    [Dependency] private IConfigurationManager _wfCfg = default!;
 
     /// <summary>Seconds before an unbuilt planet chunk with nobody near is looked at again.</summary>
     private static readonly TimeSpan WfIdleRecheck = TimeSpan.FromSeconds(1);
@@ -31,14 +30,14 @@ public sealed partial class PathfindingSystem
     {
         _wfBuild.Clear();
 
-        if (!WfOnPlanet(grid) || !_wfCfg.GetCVar(PlanetCVars.PathfindingLazy))
+        if (!WfOnPlanet(grid) || !_configManager.GetCVar(PlanetCVars.PathfindingLazy))
         {
             _wfBuild.AddRange(comp.DirtyChunks);
             return _wfBuild;
         }
 
         WfInterest(grid);
-        var range = _wfCfg.GetCVar(PlanetCVars.PathfindingRange);
+        var range = _configManager.GetCVar(PlanetCVars.PathfindingRange);
         var rangeSq = range * range;
         _wfNear.Clear();
         _wfPicked.Clear();
@@ -72,7 +71,7 @@ public sealed partial class PathfindingSystem
         }
 
         _wfNear.Sort(static (a, b) => a.Distance.CompareTo(b.Distance));
-        var budget = Math.Max(1, _wfCfg.GetCVar(PlanetCVars.PathfindingChunkBudget));
+        var budget = Math.Max(1, _configManager.GetCVar(PlanetCVars.PathfindingChunkBudget));
         for (var i = 0; i < _wfNear.Count && i < budget; i++)
         {
             _wfBuild.Add(_wfNear[i].Origin);

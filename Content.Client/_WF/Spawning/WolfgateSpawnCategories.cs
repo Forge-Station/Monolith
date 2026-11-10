@@ -25,6 +25,7 @@ public enum WfSpawnGroup : byte
     Effects,
     Mapping,
     Misc,
+    Streets,
 }
 
 /// <summary>
@@ -51,6 +52,13 @@ public enum WfSpawnCategory : byte
     VehicleParts,
     VehicleInteriors,
     VehicleScenery,
+
+    // Streets
+    StreetFurniture,
+    StreetSigns,
+    StreetLighting,
+    StreetBuildings,
+    StreetYards,
 
     // Xenonids
     XenoCastes,
@@ -156,6 +164,12 @@ public static class WfSpawnCategories
         (WfSpawnCategory.VehicleInteriors, WfSpawnGroup.Vehicles),
         (WfSpawnCategory.VehicleScenery, WfSpawnGroup.Vehicles),
 
+        (WfSpawnCategory.StreetFurniture, WfSpawnGroup.Streets),
+        (WfSpawnCategory.StreetSigns, WfSpawnGroup.Streets),
+        (WfSpawnCategory.StreetLighting, WfSpawnGroup.Streets),
+        (WfSpawnCategory.StreetBuildings, WfSpawnGroup.Streets),
+        (WfSpawnCategory.StreetYards, WfSpawnGroup.Streets),
+
         (WfSpawnCategory.XenoCastes, WfSpawnGroup.Xenonids),
         (WfSpawnCategory.XenoHive, WfSpawnGroup.Xenonids),
 
@@ -254,6 +268,7 @@ public static class WfSpawnCategories
             WfSpawnGroup.Mobs => Color.FromHex("#6FD98A"),
             WfSpawnGroup.Weapons => skin.Danger,
             WfSpawnGroup.Vehicles => Color.FromHex("#8FA86B"),
+            WfSpawnGroup.Streets => Color.FromHex("#C9B48A"),
             WfSpawnGroup.Xenonids => Color.FromHex("#A2D94B"),
             WfSpawnGroup.Clothing => Color.FromHex("#C79BFF"),
             WfSpawnGroup.Engineering => Color.FromHex("#FFC14D"),

@@ -228,7 +228,7 @@ public sealed class AutodocWindow : DefaultWindow
         var controls = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal, HorizontalExpand = true, SeparationOverride = 6 };
         _controls = controls;
         _anaesthesia = new CheckBox { Text = Loc.GetString("wolfmed-autodoc-ui-anaesthesia"), Pressed = true, HorizontalExpand = true };
-        _anaesthesia.Label.FontOverride = Mono(11);
+        _anaesthesia.Label.FontOverride = AutodocStyle.Mono(11);
         _anaesthesia.Label.FontColorOverride = Amber;
         _anaesthesia.OnToggled += args => OnAnaesthesia?.Invoke(args.Pressed);
         controls.AddChild(_anaesthesia);

@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518.",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "red_rock-0"
+    },
+    {
+      "name": "red_rock-1"
+    },
+    {
+      "name": "red_rock-2"
+    },
+    {
+      "name": "red_rock-3"
+    },
+    {
+      "name": "red_rock-4"
+    },
+    {
+      "name": "red_rock-5"
+    },
+    {
+      "name": "red_rock-6"
+    },
+    {
+      "name": "red_rock-7"
+    },
+    {
+      "name": "red_rock-8"
+    },
+    {
+      "name": "red_rock-9"
+    },
+    {
+      "name": "red_rock-10"
+    },
+    {
+      "name": "red_rock-11"
+    },
+    {
+      "name": "red_rock-12"
+    },
+    {
+      "name": "red_rock-13"
+    },
+    {
+      "name": "red_rock-14"
+    },
+    {
+      "name": "red_rock-15"
+    },
+    {
+      "name": "red_rock-21"
+    },
+    {
+      "name": "red_rock-23"
+    },
+    {
+      "name": "red_rock-29"
+    },
+    {
+      "name": "red_rock-31"
+    },
+    {
+      "name": "red_rock-38"
+    },
+    {
+      "name": "red_rock-39"
+    },
+    {
+      "name": "red_rock-46"
+    },
+    {
+      "name": "red_rock-47"
+    },
+    {
+      "name": "red_rock-55"
+    },
+    {
+      "name": "red_rock-63"
+    },
+    {
+      "name": "red_rock-74"
+    },
+    {
+      "name": "red_rock-75"
+    },
+    {
+      "name": "red_rock-78"
+    },
+    {
+      "name": "red_rock-79"
+    },
+    {
+      "name": "red_rock-95"
+    },
+    {
+      "name": "red_rock-110"
+    },
+    {
+      "name": "red_rock-111"
+    },
+    {
+      "name": "red_rock-127"
+    },
+    {
+      "name": "red_rock-137"
+    },
+    {
+      "name": "red_rock-139"
+    },
+    {
+      "name": "red_rock-141"
+    },
+    {
+      "name": "red_rock-143"
+    },
+    {
+      "name": "red_rock-157"
+    },
+    {
+      "name": "red_rock-159"
+    },
+    {
+      "name": "red_rock-175"
+    },
+    {
+      "name": "red_rock-191"
+    },
+    {
+      "name": "red_rock-203"
+    },
+    {
+      "name": "red_rock-207"
+    },
+    {
+      "name": "red_rock-223"
+    },
+    {
+      "name": "red_rock-239"
+    },
+    {
+      "name": "red_rock-255"
+    }
+  ]
+}

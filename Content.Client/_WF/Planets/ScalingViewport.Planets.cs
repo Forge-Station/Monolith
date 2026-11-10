@@ -22,8 +22,11 @@ public sealed partial class ScalingViewport
 
         var view = WfLevelView(map, depth, ownDepth);
 
+        if (_mapSystem is not { } maps)
+            return false;
+
         _wfLayerGrids.Clear();
-        _mapManager.FindGridsIntersecting(mapComp.MapId, view, ref _wfLayerGrids);
+        maps.FindGridsIntersecting(mapComp.MapId, view, ref _wfLayerGrids);
         if (_wfLayerGrids.Count > 0)
             return false;
 

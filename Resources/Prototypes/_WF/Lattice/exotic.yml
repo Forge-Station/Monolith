@@ -138,7 +138,9 @@
         acts: [ "Destruction" ]
   - type: StaticPrice
     price: 6000
-  - type: WFLatticeStabiliser
+  - type: WFLatticeShelter
+    shelter: 0.8
+    stopsTaking: true
 
 - type: entity
   parent: BaseFlatpack
@@ -165,7 +167,9 @@
     color: "#b040e0"
   - type: StaticPrice
     price: 3500
-  - type: WFLatticeCharm
+  - type: WFLatticeShelter
+    shelter: 0.5
+    stopsTaking: false
 
 - type: latheRecipePack
   id: WFLatticeStatic

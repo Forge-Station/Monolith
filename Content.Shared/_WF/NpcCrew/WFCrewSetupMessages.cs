@@ -97,6 +97,9 @@ public sealed class WFCrewMission
     public string AlertChannel = "Common";
     public bool HeaveTo = true;
 
+    /// <summary>Whether the pilot runs from attacking ships instead of circling them; kept as set, not edited in the form.</summary>
+    public bool FleeAttackers;
+
     /// <summary>Whether the ship holding station turns its guns on threats; kept as set, not edited in the form.</summary>
     public bool FaceThreats;
 

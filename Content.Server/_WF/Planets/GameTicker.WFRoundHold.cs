@@ -2,7 +2,7 @@ using Content.Server._WF.Planets;
 
 namespace Content.Server.GameTicking;
 
-public sealed partial class GameTicker
+public sealed partial class ServerGameTicker
 {
     /// <summary>True while something, such as a round-start world still forming, holds the round start back.</summary>
     private bool WFRoundStartHeld(bool force)

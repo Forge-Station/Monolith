@@ -51,6 +51,8 @@
   id: WFFloorFleshMarshMud
   parent: FloorPlanetDirtCrocus
   sprite: /Textures/_WF/Planets/BoneField/marsh_mud.png
+  variants: 5
+  placementVariants: [1, 1, 1, 1, 1]
   weather: true
 
 - type: tile

@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from NovaSector at commit https://github.com/NovaSector/NovaSector/commit/3754f28afedc5e20e1bc76dd6c5568c957a4a9de.",
+  "size": {
+    "x": 32,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "obelisk_base"
+    },
+    {
+      "name": "obelisk_base_dark"
+    },
+    {
+      "name": "statue_love"
+    },
+    {
+      "name": "statue_love-emissive"
+    },
+    {
+      "name": "telekenesis"
+    },
+    {
+      "name": "telekenesis-emissive"
+    },
+    {
+      "name": "twins"
+    },
+    {
+      "name": "twins-emissive",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "twins_light"
+    },
+    {
+      "name": "twins_light-emissive",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "light_statue"
+    },
+    {
+      "name": "light_statue-emissive"
+    },
+    {
+      "name": "order"
+    },
+    {
+      "name": "order-emissive"
+    },
+    {
+      "name": "honour"
+    },
+    {
+      "name": "honour-emissive"
+    },
+    {
+      "name": "honour_light"
+    },
+    {
+      "name": "honour_light-emissive"
+    },
+    {
+      "name": "curiosity"
+    },
+    {
+      "name": "curiosity-emissive"
+    }
+  ]
+}

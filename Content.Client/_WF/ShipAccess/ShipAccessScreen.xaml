@@ -43,7 +43,10 @@
                             <Label Text="{Loc 'ship-access-owner'}" FontColorOverride="#00ff2a"/>
                             <Label Name="OwnerLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a"/>
                             <Label Text="{Loc 'ship-access-mode'}" FontColorOverride="#00ff2a"/>
-                            <Label Name="ModeLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a"/>
+                            <BoxContainer HorizontalExpand="True">
+                                <Label Name="ModeLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a"/>
+                                <OptionButton Name="ShipModeButton" HorizontalExpand="True" Visible="False" ToolTip="{Loc 'ship-access-mode-hint'}"/>
+                            </BoxContainer>
                             <Label Text="{Loc 'ship-access-lock'}" FontColorOverride="#00ff2a" VerticalAlignment="Center"/>
                             <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                                 <Label Name="LockedLabel" Text="-" HorizontalExpand="True" Align="Right" FontColorOverride="#00ff2a"/>
@@ -91,6 +94,19 @@
                                StyleClasses="LabelSecondaryColor"
                                HorizontalAlignment="Center"
                                Margin="4 4 4 4"/>
+                    </BoxContainer>
+                    <BoxContainer Name="AllDoorsBox" Orientation="Vertical" Visible="False">
+                        <controls:StripeBack MinSize="48 48" Margin="0 8 0 0">
+                            <Label Text="{Loc 'ship-access-all-doors'}" VerticalExpand="True" HorizontalAlignment="Center"/>
+                        </controls:StripeBack>
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 4 8 0">
+                            <OptionButton Name="AllDoorsRuleButton" HorizontalExpand="True"/>
+                            <controls:ConfirmButton Name="AllDoorsApplyButton"
+                                                    Text="{Loc 'ship-access-all-doors-apply'}"
+                                                    ConfirmationText="{Loc 'ship-access-all-doors-confirm'}"
+                                                    MinWidth="100"/>
+                        </BoxContainer>
+                        <RichTextLabel Name="AllDoorsHint" HorizontalExpand="True" Margin="8 4 8 4"/>
                     </BoxContainer>
                     <controls:StripeBack MinSize="48 48" Margin="0 8 0 0">
                         <Label Text="{Loc 'ship-access-door'}" VerticalExpand="True" HorizontalAlignment="Center"/>

@@ -670,7 +670,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en")); // Einstein Engines - Language
 
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ChatChannel.Whisper))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -765,7 +765,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en")); // Einstein Engines - Language
 
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ChatChannel.Whisper))
         {
             if (session.AttachedEntity is not { Valid: true } listener)
                 continue;
@@ -967,7 +967,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         var language = languageOverride ?? _language.GetLanguage(source); // Einstein Engines - Language
 
-        foreach (var (session, data) in GetRecipients(source, VoiceRange))
+        foreach (var (session, data) in GetRecipients(source, VoiceRange, channel))
         {
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
@@ -1152,7 +1152,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
     /// </summary>
-    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange)
+    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange, ChatChannel channel = ChatChannel.Local)
     {
         // TODO proper speech occlusion
 
@@ -1187,11 +1187,15 @@ public sealed partial class ChatSystem : SharedChatSystem
                 recipients.Add(player, new ICChatRecipientData(-1, true));
         }
 
-        RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, voiceGetRange, recipients));
+        RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, voiceGetRange, recipients)
+        {
+            SpeechOrigin = source,
+            Channel = channel,
+        });
         return recipients;
     }
 
-    public readonly record struct ICChatRecipientData(float Range, bool Observer, bool? HideChatOverride = null, EntityUid? BubbleSource = null) // WOLFGATE(Vehicles): BubbleSource, the entity this listener sees the bubble on
+    public readonly record struct ICChatRecipientData(float Range, bool Observer, bool? HideChatOverride = null, EntityUid? BubbleSource = null, EntityUid? HearingEntity = null) // WOLFGATE(Vehicles): BubbleSource, the entity this listener sees the bubble on
     {
     }
 
@@ -1234,6 +1238,20 @@ public sealed partial class ChatSystem : SharedChatSystem
 /// </summary>
 public record ExpandICChatRecipientsEvent(EntityUid Source, float VoiceRange, Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> Recipients)
 {
+    public EntityUid SpeechOrigin { get; init; } = Source;
+    public ChatChannel Channel { get; init; }
+
+    public ExpandICChatRecipientsEvent(
+        EntityUid source,
+        EntityUid speechOrigin,
+        ChatChannel channel,
+        float voiceRange,
+        Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> recipients)
+        : this(source, voiceRange, recipients)
+    {
+        SpeechOrigin = speechOrigin;
+        Channel = channel;
+    }
 }
 
 /// <summary>
@@ -1284,6 +1302,8 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     ///     message gets sent on this channel, this should be set to null to prevent duplicate messages.
     /// </summary>
     public RadioChannelPrototype? Channel;
+
+    public Dictionary<ICommonSession, ChatSystem.ICChatRecipientData>? Recipients { get; set; }
 
     public EntitySpokeEvent(EntityUid source, string message, RadioChannelPrototype? channel, bool isWhisper, LanguagePrototype language) // Einstein Engines - Language
     {

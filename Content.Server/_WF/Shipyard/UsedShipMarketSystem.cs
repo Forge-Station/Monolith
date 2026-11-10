@@ -76,7 +76,7 @@ public sealed class UsedShipMarketSystem : EntitySystem
     [Dependency] private DockingSystem _docking = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ShipyardSystem _shipyard = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private UsedShipReinitSystem _reinit = default!;
 
     private readonly List<UsedShipListing> _listings = new();

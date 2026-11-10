@@ -84,6 +84,9 @@ public sealed partial class WFDrydockJobComponent : Component
     [ViewVariables]
     public bool PaidInMaterials;
 
+    /// <summary>Repair voucher paying this job, if one is.</summary>
+    public string? Voucher;
+
     /// <summary>Refit lines the job's refit items bring up, to the highest tier among them.</summary>
     public Dictionary<string, int> Refits = new();
 
@@ -137,8 +140,28 @@ public sealed partial class WFDrydockJobComponent : Component
     /// <summary>Ship's name, kept for the notice once a broken hull is gone.</summary>
     public string ShipName = string.Empty;
 
-    /// <summary>Grid the drydock works from, reported as attacking a ship it breaks.</summary>
+    /// <summary>Vessel a break is blamed on: the breaker's, or null when they have none.</summary>
     public EntityUid? Attacker;
+
+    /// <summary>Who started a break, reported as attacking the ship in person.</summary>
+    public EntityUid? Breaker;
+
+    /// <summary>Thalers a chop-shop break pays for the whole hull, fixed when it starts.</summary>
+    [ViewVariables]
+    public int CashTotal;
+
+    /// <summary>Thalers a chop-shop break has printed so far.</summary>
+    [ViewVariables]
+    public int CashPaid;
+
+    /// <summary>Work time of every tile in a chop-shop break, which its payout is shared out by.</summary>
+    public float CashWeight;
+
+    /// <summary>Work time of the tiles broken so far.</summary>
+    public float CashWeightDone;
+
+    /// <summary>Stack the latest bills went on, topped up while it lies by the console.</summary>
+    public EntityUid? CashStack;
 
     /// <summary>Materials a break job has recovered so far, before its caps.</summary>
     public Dictionary<string, int> Recovered = new();
@@ -153,4 +176,20 @@ public sealed partial class WFDrydockJobComponent : Component
     /// <summary>Whether a break job lifted the ship's last tile.</summary>
     [ViewVariables]
     public bool HullGone;
+
+    /// <summary>Tiles a break has finished but not yet lifted. They come off together.</summary>
+    [ViewVariables]
+    public HashSet<Vector2i> Lifting = new();
+
+    /// <summary>Time the tiles in <see cref="Lifting"/> come off.</summary>
+    public TimeSpan LiftAt;
+
+    /// <summary>Pending break tiles found to split the hull, until the next tile is taken or given back.</summary>
+    public HashSet<Vector2i> Unliftable = new();
+
+    /// <summary>Tile lookups the hull connectivity checks have left this tick.</summary>
+    public int LiftCheckBudget;
+
+    /// <summary>Whether this tick's connectivity checks ran out before every candidate was tried.</summary>
+    public bool LiftChecksDeferred;
 }

@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server._FarHorizons.StarSystem;
 using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 using Content.Shared._FarHorizons.StarSystem.Prototypes;
 using Content.Shared._WF.CCVar;
 using Robust.Shared.Prototypes;
@@ -17,7 +18,7 @@ public sealed partial class WFPlanetRegistrySystem
 {
     [Dependency] private IComponentFactory _factory = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
 
     /// <summary>How long after the round starts unadopted prebuilt networks are deleted: the star system spawns on the first tick.</summary>
     private static readonly TimeSpan OrphanGrace = TimeSpan.FromSeconds(5);

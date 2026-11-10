@@ -181,7 +181,7 @@
     - NFServiceStatic # Frontier
     - MonoRestraintsStatic # Mono
     - ReportingStatic # DeltaV
-    - WFTetherStatic # WOLFGATE(Tether)
+    - TetherStatic # WOLFGATE(Tether)
   - type: EmagLatheRecipes
     emagStaticPacks:
     - StaticAmmoRecipePack
@@ -635,8 +635,7 @@
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: StealTarget
-    stealGroup:
-    - MedicalTechFabCircuitboard
+    stealGroup: MedicalTechFabCircuitboard
   - type: PirateBountyItem # Mono
     id: Techfab
 

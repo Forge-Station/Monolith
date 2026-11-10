@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server._Mono.VendingMachine;
 using Content.Server._WF.TradeGoods.Components;
 using Content.Server.Cargo.Systems;
 using Content.Shared._Crescent.Dispenser;
@@ -23,6 +24,7 @@ public readonly record struct WFTradeBuyQuote(int Base, int Amount, float Factor
 public sealed partial class WFTradeMarketSystem
 {
     [Dependency] private PricingSystem _pricing = default!;
+    [Dependency] private VendingMachinePurchaseSystem _purchases = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private WFTradeRushSystem _rush = default!;
 
@@ -133,6 +135,7 @@ public sealed partial class WFTradeMarketSystem
     /// <summary>A trade good bought from a vendor comes off its station's shelf now and reaches its price later; contraband does neither.</summary>
     private void OnPurchased(Entity<VendingMachinePurchaseComponent> ent, ref ComponentStartup args)
     {
+        _purchases.OnPurchaseStartup(ent);
         if (!HasComp<WFTradeOriginComponent>(ent)
             || Transform(ent).GridUid is not { } grid
             || MetaData(ent).EntityPrototype?.ID is not { } good

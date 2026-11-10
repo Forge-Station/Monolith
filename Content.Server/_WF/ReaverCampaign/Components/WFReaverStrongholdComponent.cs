@@ -70,6 +70,14 @@ public sealed partial class WFReaverStrongholdComponent : Component
     [ViewVariables]
     public EntityUid? Inbound;
 
+    /// <summary>Whether the hub has been left standing while out of power with no attack on it, so it is logged once.</summary>
+    [ViewVariables]
+    public bool Starved;
+
+    /// <summary>When the hub was first found out of power this spell; past the grace it is broken like any other.</summary>
+    [ViewVariables]
+    public TimeSpan StarvedSince;
+
     /// <summary>Whether its reinforcements have broken away to fight an attacker and not yet come back.</summary>
     [ViewVariables]
     public bool Scattered;

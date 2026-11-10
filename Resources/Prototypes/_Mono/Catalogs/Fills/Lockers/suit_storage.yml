@@ -227,8 +227,10 @@
     - id: NitrogenTankFilled
     - id: ClothingOuterHardsuitTraumaLeader
     - id: ClothingMaskBreath
+    - id: ClothingMaskSterileTrauma
     - id: JetpackMiniFilled
     - id: ClothingShoesBootsMagVoidTraumaLeader
+    - id: ClothingShoesBootsMagTrauma
   - type: AccessReader
     access: [["Command"]]
 

@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "brick0"
+    },
+    {
+      "name": "brick1"
+    },
+    {
+      "name": "brick2"
+    },
+    {
+      "name": "brick3"
+    },
+    {
+      "name": "brick4"
+    },
+    {
+      "name": "brick5"
+    },
+    {
+      "name": "brick6"
+    },
+    {
+      "name": "brick7"
+    },
+    {
+      "name": "brick8"
+    },
+    {
+      "name": "brick9"
+    },
+    {
+      "name": "brick10"
+    },
+    {
+      "name": "brick11"
+    },
+    {
+      "name": "brick12"
+    },
+    {
+      "name": "brick13"
+    },
+    {
+      "name": "brick14"
+    },
+    {
+      "name": "brick15"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

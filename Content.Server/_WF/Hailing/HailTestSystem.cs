@@ -24,7 +24,6 @@ namespace Content.Server._WF.Hailing;
 public sealed class HailTestSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ITileDefinitionManager _tiles = default!;
     [Dependency] private SharedMapSystem _map = default!;
@@ -240,13 +239,13 @@ public sealed class HailTestSystem : EntitySystem
         {
             position = around + _random.NextAngle().ToVec() * reach;
             _grids.Clear();
-            _mapManager.FindGridsIntersecting(map, Box2.CenteredAround(position, new Vector2(Clearance)), ref _grids, false, false);
+            _map.FindGridsIntersecting(map, Box2.CenteredAround(position, new Vector2(Clearance)), ref _grids, false, false);
 
             if (_grids.Count == 0)
                 break;
         }
 
-        var grid = _mapManager.CreateGridEntity(map);
+        var grid = _map.CreateGridEntity(map);
         var tile = new Tile(_tiles[Floor].TileId);
         var tiles = new List<(Vector2i GridIndices, Tile Tile)>();
 

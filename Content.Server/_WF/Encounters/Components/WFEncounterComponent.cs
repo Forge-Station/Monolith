@@ -124,6 +124,9 @@ public sealed partial class WFEncounterComponent : Component
     /// <summary>Ship weapon hits by each player's ship on the ships of each side.</summary>
     public Dictionary<Robust.Shared.Network.NetUserId, Dictionary<string, int>> Hits = new();
 
+    /// <summary>Crewmen of each side each player downed in person, kills and assists.</summary>
+    public Dictionary<Robust.Shared.Network.NetUserId, Dictionary<string, int>> Kills = new();
+
     /// <summary>The same count per attacking ship.</summary>
     public Dictionary<(EntityUid Attacker, string Side), int> ShipHits = new();
 
@@ -250,6 +253,13 @@ public sealed partial class WFEncounterShipState
     [DataField]
     public bool Lurking;
 
+    /// <summary>Whether it flies unlabelled for good and keeps its encounter off the sector markers.</summary>
+    [DataField]
+    public bool Stealth;
+
+    /// <summary>When its fuel stores are next checked, for a persistent ship.</summary>
+    public TimeSpan NextStock;
+
     [DataField]
     public float WarnRange;
 
@@ -262,12 +272,26 @@ public sealed partial class WFEncounterShipState
     [DataField]
     public WFEncounterZoneTargets ZoneTargets;
 
+    /// <summary>Whether its zones leave player ships with hidden or unlabelled IFF alone until they fire.</summary>
+    [DataField]
+    public bool KnownThreatsOnly;
+
+    /// <summary>Whether its zones take on only NPC ships, leaving every player ship alone until it fires.</summary>
+    [DataField]
+    public bool NpcTargetsOnly;
+
     /// <summary>Companies its zones and hunt leave alone: never warned, fired on or boarded, though a shot at it is still answered.</summary>
     [DataField]
     public List<string> NeutralCompanies = new();
 
     /// <summary>Since when no player has been near it, while resolved.</summary>
     public TimeSpan? Quiet;
+
+    /// <summary>When players were last aboard it or docked with it, while resolved.</summary>
+    public TimeSpan? LastVisited;
+
+    /// <summary>When it last fought players: its crew raised the alarm, a player ship hit it or a player downed one of its crew.</summary>
+    public TimeSpan? LastFought;
 
     /// <summary>Whether it hunts player ships to dock with and board.</summary>
     [DataField]
@@ -276,6 +300,36 @@ public sealed partial class WFEncounterShipState
     /// <summary>The ship it is trying to dock with.</summary>
     [DataField]
     public EntityUid? Prey;
+
+    /// <summary>Guns mounted at spawn to stop the ship it means to board.</summary>
+    [DataField]
+    public List<EntProtoId> Disablers = new();
+
+    /// <summary>Set on an extorter: where it is in its round of tolls.</summary>
+    public WFExtortState? Extort;
+
+    /// <summary>Set on an abductor: its run at a mark and whoever it holds.</summary>
+    public WFAbductState? Abduct;
+
+    /// <summary>Whether it answers an attack by turning on the attacker.</summary>
+    [DataField]
+    public bool Evades = true;
+
+    /// <summary>How near a player ship may come before it runs; zero for never.</summary>
+    [DataField]
+    public float Flees;
+
+    /// <summary>Whether it is flying a run from a player ship, not its own route.</summary>
+    public bool Fleeing;
+
+    /// <summary>The direction of the run it is on.</summary>
+    public System.Numerics.Vector2 FleeHeading;
+
+    /// <summary>Where the run ends.</summary>
+    public System.Numerics.Vector2 FleeGoal;
+
+    /// <summary>The ship was taken out of the encounter by cleanup or an admin, not destroyed.</summary>
+    public bool Removed;
 
     /// <summary>Whether it calls for help when adrift.</summary>
     [DataField]
@@ -308,6 +362,9 @@ public sealed partial class WFEncounterShipState
 
     /// <summary>Whether its orders are paused while players are aboard or docked with it.</summary>
     public bool Serving;
+
+    /// <summary>Until when it holds position for a ship that hailed it to stop, so that ship can come alongside.</summary>
+    public TimeSpan? HeldUntil;
 
     /// <summary>The ship a hunter's raid went aboard.</summary>
     public EntityUid? Boarded;

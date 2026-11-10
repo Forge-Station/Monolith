@@ -45,7 +45,7 @@ public static class WFTypingBubbleRules
     {
         return proto.EnumeratePrototypes<TypingIndicatorPrototype>()
             .Where(p => !Hidden.Contains(p.ID))
-            .OrderBy(p => p.ID != SharedTypingIndicatorSystem.InitialIndicatorId.Id)
+            .OrderBy(p => p.ID != SharedTypingIndicatorSystem.InitialIndicatorId)
             .ThenBy(p => p.ID, StringComparer.Ordinal)
             .ToList();
     }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Content.Server._WF.ReaverCampaign.Components;
 using Content.Server._WF.ReaverCampaign.Systems;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Presets;
+using Content.Shared.GameTicking.Prototypes;
 using Content.Shared._WF.CCVar;
 using Content.Shared._WF.ReaverCampaign;
 using Robust.Shared.Configuration;
@@ -43,7 +43,7 @@ public sealed class WFReaverGameModeTest : WFReaverTestBase
         await Server.WaitAssertion(() =>
         {
             var config = Server.ResolveDependency<IConfigurationManager>();
-            var ticker = Server.System<GameTicker>();
+            var ticker = Server.System<ServerGameTicker>();
             var campaign = Server.System<WFReaverCampaignSystem>();
             config.SetCVar(ReaverCampaignCVars.Enabled, false);
             config.SetCVar(EncountersCVars.Enabled, true);

@@ -9,7 +9,8 @@
     gender: Male
     appearance:
       hair: HumanHairCombover
-      hairColor: "#3B3128"
+      hairColor:
+        - "#3B3128"
       facialHair: HumanFacialHairFullbeard
       facialHairColor: "#3B3128"
       eyeColor: "#6B7F8C"

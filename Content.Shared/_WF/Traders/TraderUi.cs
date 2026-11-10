@@ -90,11 +90,37 @@ public sealed class TraderDialogueState : BoundUserInterfaceState
     /// </summary>
     public bool Confirming;
 
-    public TraderDialogueState(string line, List<string> options, bool confirming)
+    /// <summary>
+    /// Show a text box with this placeholder instead of the option list.
+    /// </summary>
+    public string? TextPrompt;
+
+    /// <summary>
+    /// Longest answer the text box takes.
+    /// </summary>
+    public int TextMaxLength;
+
+    public TraderDialogueState(string line, List<string> options, bool confirming, string? textPrompt = null, int textMaxLength = 0)
     {
         Line = line;
         Options = options;
         Confirming = confirming;
+        TextPrompt = textPrompt;
+        TextMaxLength = textMaxLength;
+    }
+}
+
+/// <summary>
+/// The customer's answer to a text prompt; null when they backed out.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class TraderTextMessage : BoundUserInterfaceMessage
+{
+    public string? Text;
+
+    public TraderTextMessage(string? text)
+    {
+        Text = text;
     }
 }
 

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._CE.ZLevels.Core;
 using Content.Shared._CE.ZLevels.Core.Components; // Mono
 using Content.Shared._Mono.Company;
 using Content.Shared.Shuttles.BUIStates;
@@ -20,6 +21,7 @@ public sealed partial class NavScreen : BoxContainer
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     private SharedTransformSystem _xformSystem;
+    private CEClientZLevelsSystem _zLevels = default!;
 
     private EntityUid? _consoleEntity; // Entity of controlling console
     private EntityUid? _shuttleEntity;
@@ -29,6 +31,7 @@ public sealed partial class NavScreen : BoxContainer
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         _xformSystem = _entManager.System<SharedTransformSystem>();
+        _zLevels = _entManager.System<CEClientZLevelsSystem>();
         LayoutContainer.SetAnchorPreset(NavRadar, LayoutContainer.LayoutPreset.Wide); // Forge-Change
 
         IFFToggle.OnToggled += OnIFFTogglePressed;

@@ -4,7 +4,7 @@ using System.Linq;
 using Content.Server._WF.Contracts;
 using Content.Shared._WF.Contracts;
 using Content.Shared._WF.Encounters;
-using Content.Server.GameTicking.Presets;
+using Content.Shared.GameTicking.Prototypes;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Repairable;

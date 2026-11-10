@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared.Damage;
+using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -25,6 +26,10 @@ public sealed partial class PersonalShieldComponent : Component
 
     /// <summary>Is the shield actually on?</summary>
     public bool IsUp => Runtime.Form >= 1f && Runtime.Shatter <= 0f;
+
+    /// <summary>Rendering parameters the shield system reads for flares and the shatter.</summary>
+    [DataField, AutoNetworkedField]
+    public PersonalShieldVisuals Visuals = new();
 
     #region Appearance
 
@@ -114,6 +119,9 @@ public sealed partial class PersonalShieldComponent : Component
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class PersonalShieldSettings
 {
+    [DataField]
+    public SlotFlags RequiredSlot = SlotFlags.OUTERCLOTHING;
+
     /// <summary>How much damage the shield can take before it blows up.</summary>
     [DataField]
     public float MaxCharge = 60f;
@@ -181,4 +189,14 @@ public struct PersonalShieldRuntime
 
     [ViewVariables] // Forge-Change
     public bool WasFracture; // Forge-Change
+
+    /// <summary>Time at which the current damage flare finishes settling.</summary>
+    public TimeSpan DamageFlareUntil;
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class PersonalShieldVisuals
+{
+    [DataField] public float DamageFlareTime = 0.5f;
+    [DataField] public float ShatterTime = 1.0f;
 }

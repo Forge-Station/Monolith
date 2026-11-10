@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server.Atmos.Components;
+using Content.Shared.Atmos.Components;
 using Content.Server.Destructible;
 using Content.Server.Power.Components;
 using Content.Server.Shuttles.Components;

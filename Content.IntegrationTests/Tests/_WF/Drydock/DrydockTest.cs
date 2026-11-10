@@ -671,7 +671,7 @@ public sealed class DrydockTest
     public static EntityUid CreateShip(TestPair pair, MapId map, Vector2? worldPos = null)
     {
         var server = pair.Server;
-        var grid = server.ResolveDependency<IMapManager>().CreateGridEntity(map).Owner;
+        var grid = server.System<SharedMapSystem>().CreateGridEntity(map).Owner;
         server.System<SharedTransformSystem>().SetWorldPosition(grid, worldPos ?? BerthAHull);
         return grid;
     }

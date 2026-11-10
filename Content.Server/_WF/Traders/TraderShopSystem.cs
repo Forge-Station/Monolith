@@ -21,7 +21,7 @@ namespace Content.Server._WF.Traders;
 public sealed class TraderShopSystem : EntitySystem
 {
     [Dependency] private BankSystem _bank = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private IComponentFactory _componentFactory = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private PricingSystem _pricing = default!;

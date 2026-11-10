@@ -88,4 +88,16 @@ public sealed partial class WFLatticeAnchorStationComponent : Component
     /// <summary>Whether the station is fighting back now, its shield down.</summary>
     [ViewVariables]
     public bool Engaged;
+
+    /// <summary>Until when the station fights back whether or not its shield holds: something hit it directly.</summary>
+    [ViewVariables]
+    public TimeSpan ProvokedUntil;
+
+    /// <summary>When the station next marks what is on it, so a hit on any of it is noticed.</summary>
+    [ViewVariables]
+    public TimeSpan NextMark;
 }
+
+/// <summary>A mapped part of an anchor station that defence must not treat as a loose obstacle.</summary>
+[RegisterComponent]
+public sealed partial class WFLatticeStationPartComponent : Component;

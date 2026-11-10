@@ -27,7 +27,7 @@ public sealed class WFTradeShortageSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private WFTradeMarketSystem _market = default!;
     [Dependency] private WFTradeSectorSystem _sector = default!;
 

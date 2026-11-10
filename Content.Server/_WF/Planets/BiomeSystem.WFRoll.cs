@@ -106,7 +106,7 @@ public sealed partial class BiomeSystem
     {
         if (!_wfRollTables.TryGetValue(prototype, out table))
         {
-            if (ProtoManager.TryIndex<EntityPrototype>(prototype, out var proto)
+            if (ProtoMan.TryIndex<EntityPrototype>(prototype, out var proto)
                 && proto.TryGetComponent<EntityTableSpawnerComponent>(out var spawner, Factory)
                 && spawner is { Offset: 0f, DeleteSpawnerAfterSpawn: true })
             {
@@ -125,7 +125,7 @@ public sealed partial class BiomeSystem
         if (_wfPassingMarkers.TryGetValue(prototype, out var passing))
             return passing;
 
-        passing = ProtoManager.TryIndex<EntityPrototype>(prototype, out var proto)
+        passing = ProtoMan.TryIndex<EntityPrototype>(prototype, out var proto)
                   && proto.TryGetComponent<WFPlanetFaunaSpawnerComponent>(out var marker, Factory)
                   && !marker.KeepEntity;
 
@@ -139,7 +139,7 @@ public sealed partial class BiomeSystem
         if (_wfRollResults.TryGetValue(prototype, out var fixedStructure))
             return fixedStructure;
 
-        fixedStructure = ProtoManager.TryIndex<EntityPrototype>(prototype, out var proto)
+        fixedStructure = ProtoMan.TryIndex<EntityPrototype>(prototype, out var proto)
                          && proto.TryGetComponent<TransformComponent>(out var xform, Factory)
                          && xform.Anchored
                          && !proto.TryGetComponent<EntityTableSpawnerComponent>(out _, Factory)

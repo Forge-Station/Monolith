@@ -205,7 +205,7 @@ public sealed class TetherContentTest
     private static EntityUid MakeFloorGrid(RobustIntegrationTest.ServerIntegrationInstance server, MapId map)
     {
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         var mapSystem = entities.System<SharedMapSystem>();
         var tileDefs = server.ResolveDependency<ITileDefinitionManager>();
         tileDefs.TryGetDefinition("Plating", out var platingDef);

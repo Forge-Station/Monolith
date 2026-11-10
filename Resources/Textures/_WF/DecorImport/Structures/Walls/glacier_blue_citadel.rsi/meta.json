@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Citadel Station at commit https://github.com/Citadel-Station-13/Citadel-Station-13/commit/31b47497ab7e3b1c15c67657931ce480f14caed1.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ice0"
+    },
+    {
+      "name": "ice1"
+    },
+    {
+      "name": "ice2"
+    },
+    {
+      "name": "ice3"
+    },
+    {
+      "name": "ice4"
+    },
+    {
+      "name": "ice5"
+    },
+    {
+      "name": "ice6"
+    },
+    {
+      "name": "ice7"
+    },
+    {
+      "name": "ice8"
+    },
+    {
+      "name": "ice9"
+    },
+    {
+      "name": "ice10"
+    },
+    {
+      "name": "ice11"
+    },
+    {
+      "name": "ice12"
+    },
+    {
+      "name": "ice13"
+    },
+    {
+      "name": "ice14"
+    },
+    {
+      "name": "ice15"
+    }
+  ]
+}

@@ -28,6 +28,7 @@ using Content.Shared.Popups;
 using Content.Shared.Power;
 
 using Content.Shared.Shuttles.BUIStates;
+using Content.Shared._WF.Shuttles;
 
 using Content.Shared.Shuttles.Components;
 
@@ -433,24 +434,11 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
         var navState = GetNavState(ent.Owner);
 
         var mapState = new ShuttleMapInterfaceState(
-
             FTLState.Available,
-
             default,
-
             new List<ShuttleBeaconObject>(),
-
             new List<ShuttleExclusionObject>(),
-
-            default,
-
-            ShuttleBioScanStatus.None,
-
-            true,
-            default, // Forge-Change - Cloaking
-            default, // Forge-Change - Cloaking
-            ShuttleCloakingStatus.None, // Forge-Change - Cloaking
-            ShuttleConsoleMapScreenMode.BioScan); // Forge-Change - Cloaking
+            WFFtlDriveStatus.Missing);
 
 
 

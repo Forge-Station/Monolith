@@ -38,7 +38,7 @@ public sealed partial class WFTradeMarketSystem : EntitySystem
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private WFCargoLoadSystem _cargo = default!;
 
     public static readonly ProtoId<WFTradeMarketPrototype> DefaultProfile = "WFTradeMarketDefault";

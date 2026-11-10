@@ -57,7 +57,7 @@ public sealed class XenobiologyTest
                 Assert.That(entities.GetComponent<MobGrowthComponent>(slime).IsFirstStage, Is.True);
             });
 
-            entities.System<HungerSystem>().SetHunger(slime, 100f);
+            entities.System<SatiationSystem>().SetValue((slime, entities.GetComponent<SatiationComponent>(slime)), SatiationSystem.Hunger, 100f);
         });
 
         await server.WaitRunTicks(120);
@@ -187,13 +187,13 @@ public sealed class XenobiologyTest
             slime = SpawnGrey(entities, map.GridCoords);
             target = entities.SpawnEntity("MobMonkey", map.GridCoords.Offset(new Vector2(0.5f, 0)));
             entities.System<SlimeLatchSystem>().Latch((slime, entities.GetComponent<SlimeComponent>(slime)), target);
-            startHunger = entities.System<HungerSystem>().GetHunger(entities.GetComponent<HungerComponent>(slime));
+            startHunger = entities.System<SatiationSystem>().GetValueOrNull((slime, entities.GetComponent<SatiationComponent>(slime)), SatiationSystem.Hunger) ?? 0f;
         });
 
         await server.WaitRunTicks(120);
         await server.WaitAssertion(() =>
         {
-            var hunger = entities.System<HungerSystem>().GetHunger(entities.GetComponent<HungerComponent>(slime));
+            var hunger = entities.System<SatiationSystem>().GetValueOrNull((slime, entities.GetComponent<SatiationComponent>(slime)), SatiationSystem.Hunger) ?? 0f;
             Assert.Multiple(() =>
             {
                 Assert.That(entities.GetComponent<DamageableComponent>(target).TotalDamage, Is.GreaterThan(FixedPoint2.Zero));

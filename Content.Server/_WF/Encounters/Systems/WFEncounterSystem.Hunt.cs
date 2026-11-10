@@ -45,35 +45,42 @@ public sealed partial class WFEncounterSystem
     /// the prey shakes it off. Docked, its hands go aboard, fight whoever they see, carry a few things back,
     /// and the ship casts off and leaves.
     /// </summary>
-    private void Hunt(WFEncounterShipState ship)
+    private bool Hunt(WFEncounterShipState ship, bool free = true)
     {
         if (ship.Raided)
-            return;
+            return true;
 
         var status = _objectives.QueueStatus(ship.Grid, ship.Group);
+        // A prey that berthed at a station is out of reach, and the run at it is called off. Never mid-raid.
+        if (ship.Prey is { } berthed && ship.RaidEnds == null && ship.Boarded != berthed && !TerminatingOrDeleted(berthed)
+            && !_docking.AreGridsDocked(ship.Grid, berthed) && DockedAtStation(berthed))
+        {
+            Log.Info($"Encounter ship {ToPrettyString(ship.Grid)} lets {ToPrettyString(berthed)} go: it is berthed at a station.");
+            ship.Prey = null;
+            if (!free)
+                return false;
+
+            HuntRecordFor(ship.Grid).Misses = 0;
+            _objectives.SetQueue(ship.Grid, ship.Group, new List<WFCrewObjective> { new() { Kind = WFCrewObjectiveKind.Hold } });
+            status = _objectives.QueueStatus(ship.Grid, ship.Group);
+        }
+
         if (ship.Prey is { } docked && !TerminatingOrDeleted(docked) && _docking.AreGridsDocked(ship.Grid, docked))
         {
             Raid(ship, docked);
-            // The raid's own orders run until it casts off.
             if (status != null)
-                return;
+                return true;
         }
         else if (ship.RaidEnds != null)
         {
-            // Off the prey with the raid under way: it cast off, or the prey broke away.
-            var looting = CurrentOrder(ship) == WFCrewObjectiveKind.Loot;
+            var looting = CurrentOrder(ship) is WFCrewObjectiveKind.Loot or WFCrewObjectiveKind.Hold;
             ship.RaidEnds = null;
-            // Shaken off with the boarding party still aboard the prey: the ship goes straight back for them and takes
-            // the raid up again where it docks. They are only given up once it can't get a port on the prey again, or
-            // the prey has jumped out of reach with them.
             if (PartyAboard(ship))
             {
-                if (!PreyReachable(ship) && AbandonParty(ship))
-                    return;
+                if (!PreyReachable(ship) && AbandonParty(ship, free))
+                    return free;
                 status = null;
             }
-            // Broken off before the loot was in and with nobody left aboard: the raid starts over and the ship goes
-            // after its prey again. The new orders cancel the old raid's work.
             else if (looting)
             {
                 ship.Boarded = null;
@@ -81,34 +88,35 @@ public sealed partial class WFEncounterSystem
             }
         }
 
-        // Only the whole queue flown counts: the loot finishing reads "complete" for a moment too.
         if (status == "complete" && CurrentOrder(ship) == null)
         {
-            // The raid's orders are flown; the encounter completes and the ship jumps out.
+            if (!free)
+                return false;
+
             ship.Raided = true;
             ship.HasOrders = true;
             ship.Flown = true;
             _huntRecords.Remove(ship.Grid);
-            return;
+            return true;
         }
 
-        // The way out can't be flown: the raid is over all the same, and the encounter skips the leg and completes.
         if (status == "target-lost" && CurrentOrder(ship) is WFCrewObjectiveKind.GoTo or WFCrewObjectiveKind.Undock)
         {
+            if (!free)
+                return false;
+
             ship.Raided = true;
             ship.HasOrders = true;
             ship.Flown = false;
             _huntRecords.Remove(ship.Grid);
-            return;
+            return true;
         }
 
         var hunt = HuntRecordFor(ship.Grid);
-        // A ship it cannot get a port on is left alone; the hunt moves on to the next nearest.
         if (status == "dock-failed" && ship.Prey is { } missed && ++hunt.Misses >= HuntDockMisses)
         {
-            // Whoever is still aboard the prey fights on there, and the ship gives them up and runs.
-            if (missed == ship.Boarded && AbandonParty(ship))
-                return;
+            if (missed == ship.Boarded && AbandonParty(ship, free))
+                return free;
 
             Log.Info($"Encounter ship {ToPrettyString(ship.Grid)} gives up on docking with {ToPrettyString(missed)}.");
             hunt.Shunned.Add(missed);
@@ -117,28 +125,34 @@ public sealed partial class WFEncounterSystem
 
         if (ship.Prey is not { } prey || TerminatingOrDeleted(prey) || Transform(prey).MapID != Transform(ship.Grid).MapID)
         {
-            // A party left aboard a prey that is gone is given up before the hunt turns to another ship.
-            if (!PreyReachable(ship) && PartyAboard(ship) && AbandonParty(ship))
-                return;
+            if (!PreyReachable(ship) && PartyAboard(ship) && AbandonParty(ship, free))
+                return free;
+
+            if (!free)
+                return false;
 
             hunt.Misses = 0;
             ship.Prey = NearestCrewedShip(ship.Grid, neutral: ship.NeutralCompanies);
             if (ship.Prey is not { } found)
-                return;
+                return true;
 
             prey = found;
             status = null;
         }
 
-        // No orders yet, or the last run at the prey failed or lost it: go again.
-        if (status is not (null or "dock-failed" or "target-lost"))
-            return;
+        if (status is null or "dock-failed" or "target-lost" && !IssueRaid(ship, prey) && !free)
+            return false;
 
+        return true;
+    }
+
+    /// <summary>Orders a raid on a ship: dock and loot it, stay a while, cast off and fly clear.</summary>
+    private bool IssueRaid(WFEncounterShipState ship, EntityUid prey)
+    {
         var away = _transform.GetMapCoordinates(prey).Position + _random.NextAngle().ToVec() * RaidExit;
-        _objectives.SetQueue(ship.Grid, ship.Group, new List<WFCrewObjective>
+        return _objectives.SetQueue(ship.Grid, ship.Group, new List<WFCrewObjective>
         {
             new() { Kind = WFCrewObjectiveKind.Loot, Target = GetNetEntity(prey) },
-            // Even with nothing worth taking they stay a while: the boarding party is aboard looking for a fight.
             new() { Kind = WFCrewObjectiveKind.Hold, Duration = (float) RaidTime.TotalSeconds },
             new() { Kind = WFCrewObjectiveKind.Undock },
             new() { Kind = WFCrewObjectiveKind.GoTo, Position = away, Range = 200f },
@@ -212,12 +226,15 @@ public sealed partial class WFEncounterSystem
     /// Leaves the boarding party to the prey and runs: the raid is over, the encounter completes and the ship jumps out.
     /// False, and nothing changed, when nobody living was aboard to leave.
     /// </summary>
-    private bool AbandonParty(WFEncounterShipState ship)
+    private bool AbandonParty(WFEncounterShipState ship, bool free = true)
     {
         if (!Strand(ship))
             return false;
 
         Log.Info($"Encounter ship {ToPrettyString(ship.Grid)} cannot get back aboard {ToPrettyString(ship.Boarded)} and leaves its party.");
+        if (!free)
+            return true;
+
         ship.Raided = true;
         ship.HasOrders = true;
         ship.Flown = false;
@@ -373,7 +390,8 @@ public sealed partial class WFEncounterSystem
     /// The nearest ship on the same map with a living player aboard, within <paramref name="range"/>: not part of an
     /// encounter, not a station or outpost, and not one this hunter has given up on.
     /// </summary>
-    private EntityUid? NearestCrewedShip(EntityUid hunter, float range = float.MaxValue, List<string>? neutral = null)
+    private EntityUid? NearestCrewedShip(EntityUid hunter, float range = float.MaxValue, ICollection<EntityUid>? except = null,
+        List<string>? neutral = null)
     {
         var shunned = _huntRecords.TryGetValue(hunter, out var hunt) ? hunt.Shunned : null;
         var here = _transform.GetMapCoordinates(hunter);
@@ -386,7 +404,11 @@ public sealed partial class WFEncounterSystem
                 || HasComp<GhostComponent>(uid) || _mobs.IsDead(uid) || HasComp<WFEncounterGridComponent>(grid)
                 || HasComp<Content.Shared.Station.Components.StationMemberComponent>(grid)
                 && !HasComp<Content.Shared._NF.Shipyard.Components.ShuttleDeedComponent>(grid)
-                || shunned != null && shunned.Contains(grid) || neutral is { Count: > 0 } && IsNeutralPlayer(uid, grid, neutral))
+                || DockedAtStation(grid)
+                || _stealth.ShipUnseen(grid)
+                || shunned != null && shunned.Contains(grid)
+                || except != null && except.Contains(grid)
+                || neutral is { Count: > 0 } && IsNeutralPlayer(uid, grid, neutral))
                 continue;
 
             var distance = (_transform.GetWorldPosition(grid) - here.Position).LengthSquared();
@@ -408,6 +430,29 @@ public sealed partial class WFEncounterSystem
             company = CompOrNull<CompanyComponent>(player)?.CompanyName.Id;
 
         return company != null && neutral.Contains(company) || IsBerthedAtNeutral(grid, neutral);
+    }
+
+    /// <summary>Whether a ship is docked to a station: a station member without a deed, or a grid that becomes one.</summary>
+    public bool DockedAtStation(EntityUid grid)
+    {
+        foreach (var dock in _docking.GetDocks(grid))
+        {
+            if (dock.Comp.DockedWith is not { } other || Transform(other).GridUid is not { } alongside || alongside == grid)
+                continue;
+
+            if (IsStationGrid(alongside))
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>Whether a grid is a station: a station member without a deed, or a grid that becomes one.</summary>
+    private bool IsStationGrid(EntityUid grid)
+    {
+        return HasComp<Content.Shared.Station.Components.StationMemberComponent>(grid)
+               && !HasComp<Content.Shared._NF.Shipyard.Components.ShuttleDeedComponent>(grid)
+               || HasComp<Content.Server.Station.Components.BecomesStationComponent>(grid);
     }
 
     /// <summary>Whether a grid is docked to a station that flies one of the neutral companies' flags.</summary>

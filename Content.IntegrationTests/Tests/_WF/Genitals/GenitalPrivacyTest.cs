@@ -154,7 +154,7 @@ public sealed class GenitalPrivacyTest
         EntityUid ghost = default;
         await server.WaitPost(() =>
         {
-            ghost = sEntMan.SpawnEntity(GameTicker.ObserverPrototypeName, player.Map.GridCoords);
+            ghost = sEntMan.SpawnEntity(ServerGameTicker.ObserverPrototypeName, player.Map.GridCoords);
             sEntMan.System<SharedMindSystem>().Visit(player.Mind, ghost);
         });
         await pair.RunTicksSync(5);
@@ -212,7 +212,7 @@ public sealed class GenitalPrivacyTest
         // Leaving the minor body for a ghost makes the player a viewer; the resend delivers the target's current state.
         await server.WaitPost(() =>
         {
-            var ghost = sEntMan.SpawnEntity(GameTicker.ObserverPrototypeName, player.Map.GridCoords);
+            var ghost = sEntMan.SpawnEntity(ServerGameTicker.ObserverPrototypeName, player.Map.GridCoords);
             sEntMan.System<SharedMindSystem>().Visit(player.Mind, ghost);
         });
         await GenitalConsentTestHelpers.WaitFor(pair,

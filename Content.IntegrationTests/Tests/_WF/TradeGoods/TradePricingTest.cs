@@ -93,17 +93,17 @@ public sealed class TradePricingTest
     }
 
     /// <summary>Puts the dummy ticker in a round, optionally on a map as the sector map, as the sector tests do.</summary>
-    private static void StartRound(GameTicker ticker, MapId? sectorMap)
+    private static void StartRound(ServerGameTicker ticker, MapId? sectorMap)
     {
         if (sectorMap is { } map)
-            SetPrivate(ticker, nameof(GameTicker.DefaultMap), map);
+            SetPrivate(ticker, nameof(ServerGameTicker.DefaultMap), map);
 
-        SetPrivate(ticker, nameof(GameTicker.RunLevel), GameRunLevel.InRound);
+        SetPrivate(ticker, nameof(ServerGameTicker.RunLevel), GameRunLevel.InRound);
     }
 
-    private static void SetPrivate(GameTicker ticker, string property, object value)
+    private static void SetPrivate(ServerGameTicker ticker, string property, object value)
     {
-        typeof(GameTicker).GetProperty(property, BindingFlags.Public | BindingFlags.Instance)!.GetSetMethod(true)!.Invoke(ticker, new[] { value });
+        typeof(ServerGameTicker).GetProperty(property, BindingFlags.Public | BindingFlags.Instance)!.GetSetMethod(true)!.Invoke(ticker, new[] { value });
     }
 
     [Test]
@@ -392,7 +392,7 @@ public sealed class TradePricingTest
         await server.WaitAssertion(() =>
         {
             // Shortages only expire while a round runs.
-            StartRound(entMan.System<GameTicker>(), null);
+            StartRound(entMan.System<ServerGameTicker>(), null);
             entMan.EnsureComponent<WFTradeMarketMapComponent>(map.MapUid);
             chute = entMan.SpawnEntity(ChuteProto, map.GridCoords);
             basePrice = market.Quote(chute, CrateProto)!.Value.Amount;
@@ -439,7 +439,7 @@ public sealed class TradePricingTest
         await server.WaitAssertion(() =>
         {
             // The blockade runs on the sector map: make the test map it, in a round.
-            StartRound(entMan.System<GameTicker>(), map.MapId);
+            StartRound(entMan.System<ServerGameTicker>(), map.MapId);
             Assert.That(territory.Enabled, Is.True, "Sector control is off.");
             Assert.That(territory.SectorMap, Is.EqualTo(map.MapId));
 

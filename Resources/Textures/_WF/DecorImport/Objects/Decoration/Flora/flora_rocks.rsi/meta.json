@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7, CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/d5306e2724d6006e69439d9cf64a2b166fe4ed15, DarkPack at commit https://github.com/DarkPack13/SecondCity/commit/2a1e8fd0ccf64a5fd40504b20b1e1f76774f5ecc, Paradise at commit https://github.com/ParadiseSS13/Paradise/commit/7cd73f80152a5e234249d99cace75ce2b5c1c54b, Polaris at commit https://github.com/PolarisSS13/Polaris/commit/6cd19fe0dec6b5f18b6b18c3eb36af7bf3359f25, Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3, tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518, VOREStation at commit https://github.com/VOREStation/VOREStation/commit/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "basalt4"
+    },
+    {
+      "name": "basalt_water1",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "basalt_water2",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "bigboulder1"
+    },
+    {
+      "name": "bigboulder2"
+    },
+    {
+      "name": "black_ground_alt",
+      "directions": 4
+    },
+    {
+      "name": "boulder1"
+    },
+    {
+      "name": "boulder3"
+    },
+    {
+      "name": "bouldersmalldark1"
+    },
+    {
+      "name": "bouldersmalldark3"
+    },
+    {
+      "name": "bsc",
+      "delays": [
+        [
+          2.0,
+          0.1,
+          0.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "bsc_dust"
+    },
+    {
+      "name": "desert_rock"
+    },
+    {
+      "name": "educated_rock"
+    },
+    {
+      "name": "lavarocks2"
+    },
+    {
+      "name": "moss"
+    },
+    {
+      "name": "pebble"
+    },
+    {
+      "name": "rock1_aurora"
+    },
+    {
+      "name": "rock1_darkpack"
+    },
+    {
+      "name": "rock_1"
+    },
+    {
+      "name": "rock_aurora"
+    },
+    {
+      "name": "rock_cmss13"
+    },
+    {
+      "name": "rock_water"
+    },
+    {
+      "name": "rocklarge1"
+    },
+    {
+      "name": "rockpile1"
+    },
+    {
+      "name": "smallerboulder"
+    },
+    {
+      "name": "snowrock_1"
+    },
+    {
+      "name": "snowrock_4"
+    },
+    {
+      "name": "volcano_1"
+    },
+    {
+      "name": "waterrocks1",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    }
+  ]
+}

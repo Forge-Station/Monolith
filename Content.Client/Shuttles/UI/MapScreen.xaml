@@ -185,10 +185,15 @@
                     <controls:PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
                     </controls:PanelContainer.PanelOverride>
-                    <controls:BoxContainer Name="HyperspaceDestinations"
-                                  Orientation="Vertical"
-                                  HorizontalExpand="True"
-                                  Margin="4"/>
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="4">
+                        <controls:LineEdit Name="DestinationSearch"
+                                           PlaceHolder="{controls:Loc 'wf-shuttle-destination-search'}"
+                                           HorizontalExpand="True"
+                                           Margin="0 0 0 4"/>
+                        <controls:BoxContainer Name="HyperspaceDestinations"
+                                      Orientation="Vertical"
+                                      HorizontalExpand="True"/>
+                    </controls:BoxContainer>
                 </controls:PanelContainer>
             </controls:BoxContainer>
         </controls:BoxContainer>

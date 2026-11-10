@@ -11,9 +11,11 @@
     speaks:
     - TauCetiBasic # Wolfgate: HardLight's GalacticCommon is TauCetiBasic here
     - Bubblish
+    - Qwila # Wega
     understands:
     - TauCetiBasic
     - Bubblish
+    - Qwila
   # HardLight end
   - type: HumanoidAppearance
     species: Skrell
@@ -39,9 +41,12 @@
     shiveringHeatRegulation: 500
     normalBodyTemperature: 310.15
     thermalRegulationTemperatureThreshold: 2
-  - type: Hunger
-  - type: Thirst
-    baseDecayRate: 0.2
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+      Thirst:
+        prototype: RMCSkrellThirst
   - type: Carriable
   - type: Inventory
     speciesId: skrell
@@ -64,6 +69,30 @@
     proto: feroxi
   - type: Bloodstream # Hardlight: Added to match server lore
     bloodReagent: CopperBlood # Hardlight: Added to match server lore
+  - type: Reactive # Wega: water soothes a skrell, cleaner washes them
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+      Acidic: [ Touch, Ingestion ]
+    reactions:
+    - reagents: [ Water, SpaceCleaner ]
+      methods: [ Touch ]
+      effects:
+      - !type:WashReaction
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Heat: -1
+            Blunt: -1
+            Poison: -0.75
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatSkrell
+      amount: 5
   - type: Internals
   - type: Respirator
     damage:

@@ -45,7 +45,7 @@ public sealed class WFReagentBathHealSystem : EntitySystem
         _physics.GetContactingEntities(ent.Owner, _contacts);
         foreach (var contact in _contacts)
         {
-            if (!TryComp<SolutionContainerManagerComponent>(contact, out var manager))
+            if (!TryComp<SolutionManagerComponent>(contact, out var manager))
                 continue;
 
             foreach (var (_, solution) in _solutions.EnumerateSolutions((contact, manager)))

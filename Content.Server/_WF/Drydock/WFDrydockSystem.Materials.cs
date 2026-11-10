@@ -49,6 +49,46 @@ public sealed partial class WFDrydockSystem
         AssignParts(cranes, items);
     }
 
+    /// <summary>A stripped tile or part is billed at its full construction materials, not the usual share.</summary>
+    private void BillBroken(WFDrydockMaterialPaymentComponent pay, WFDrydockWorkItem item)
+    {
+        if (item.Prototype is not { } protoId || !_prototype.TryIndex(protoId, out var proto))
+            return;
+
+        var construction = ConstructionMaterials(proto);
+        if (construction.Count == 0)
+            return;
+
+        item.Materials = new Dictionary<string, int>(construction);
+    }
+
+    /// <summary>
+    /// The items a stock of materials pays for, in work order. Once a tile is left out so are the parts, which might
+    /// stand on it.
+    /// </summary>
+    private static List<WFDrydockWorkItem> Affordable(List<WFDrydockWorkItem> items, Dictionary<string, int> stock)
+    {
+        var left = new Dictionary<string, int>(stock);
+        var tileLeftOut = false;
+        var affordable = new List<WFDrydockWorkItem>();
+        foreach (var item in items.OrderBy(Rank))
+        {
+            var bill = item.Materials ?? new Dictionary<string, int>();
+            if ((tileLeftOut && item.Kind == WFDrydockWorkKind.Entity) || bill.Any(m => left.GetValueOrDefault(m.Key) < m.Value))
+            {
+                tileLeftOut |= item.Kind == WFDrydockWorkKind.Tile;
+                continue;
+            }
+
+            foreach (var (id, amount) in bill)
+                left[id] = left.GetValueOrDefault(id) - amount;
+
+            affordable.Add(item);
+        }
+
+        return affordable;
+    }
+
     /// <summary>A refit item's bill: its tiers' own materials, or the rates on its cost when they list none.</summary>
     private static Dictionary<string, int> RefitBill(WFDrydockMaterialPaymentComponent pay, WFDrydockWorkItem item)
     {

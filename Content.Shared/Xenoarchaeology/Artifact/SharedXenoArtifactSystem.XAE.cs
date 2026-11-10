@@ -4,6 +4,8 @@ using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Xenoarchaeology.Artifact.Components;
 using Robust.Shared.Map;
 
@@ -74,7 +76,7 @@ public abstract partial class SharedXenoArtifactSystem
         }
         // End Frontier: Disable activations on protected grids
 
-        if (TryComp<UseDelayComponent>(artifact, out var delay) && !_useDelay.TryResetDelay((artifact, delay), true))
+        if (TryComp<UseDelayComponent>(artifact, out var delay) && !_useDelay.TryResetDelay((artifact.Owner, delay), true))
             return false;
 
         var success = false;

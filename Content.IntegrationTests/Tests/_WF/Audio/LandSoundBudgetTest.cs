@@ -60,7 +60,7 @@ public sealed class LandSoundBudgetTest
 
         await server.WaitPost(() =>
         {
-            var other = server.ResolveDependency<IMapManager>().CreateGridEntity(map.MapId);
+            var other = server.System<SharedMapSystem>().CreateGridEntity(map.MapId);
             server.System<SharedTransformSystem>().SetLocalPosition(other.Owner, new Vector2(40f, 0f));
             server.System<SharedMapSystem>().SetTile(other.Owner, other.Comp, Vector2i.Zero, map.Tile.Tile);
 

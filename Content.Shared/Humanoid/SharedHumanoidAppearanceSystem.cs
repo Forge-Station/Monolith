@@ -42,8 +42,17 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
     [Dependency] private MarkingManager _markingManager = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 
-    [ValidatePrototypeId<SpeciesPrototype>]
     public const string DefaultSpecies = "Human";
+    public const string DefaultNationality = "TransSolarFederation";
+    public const string DefaultBarkVoice = "BarksGoonSpeak1";
+    public const string DefaultVoice = "Papich";
+
+    public static readonly Dictionary<Sex, string> DefaultSexVoice = new()
+    {
+        [Sex.Male] = DefaultVoice,
+        [Sex.Female] = DefaultVoice,
+        [Sex.Unsexed] = DefaultVoice,
+    };
 
     public override void Initialize()
     {
@@ -379,6 +388,16 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         }
     }
 
+    public void SetTTSVoice(EntityUid uid, string voice, HumanoidAppearanceComponent? humanoid = null)
+    {
+        if (!Resolve(uid, ref humanoid))
+            return;
+
+        humanoid.Voice = voice;
+        if (TryComp<Content.Shared._Forge.TTS.TTSComponent>(uid, out var tts))
+            tts.VoicePrototypeId = voice;
+    }
+
     /// <summary>
     ///     Loads a humanoid character profile directly onto this humanoid mob.
     /// </summary>
@@ -397,6 +416,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
 
         SetSpecies(uid, profile.Species, false, humanoid);
         SetSex(uid, profile.Sex, false, humanoid);
+        SetTTSVoice(uid, profile.Voice, humanoid);
 
         // WOLFGATE - ported from HardLight/Starlight: constrain eye colour per species.
         var eyeColor = profile.Appearance.EyeColor;
@@ -434,7 +454,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         // Hair/facial hair - this may eventually be deprecated.
         // We need to ensure hair before applying it or coloring can try depend on markings that can be invalid
         var hairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.Hair, out var hairAlpha, _proto)
-            ? profile.Appearance.SkinColor.WithAlpha(hairAlpha) : profile.Appearance.HairColor;
+            ? new List<Color> { profile.Appearance.SkinColor.WithAlpha(hairAlpha) } : profile.Appearance.HairColor;
         var facialHairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.FacialHair, out var facialHairAlpha, _proto)
             ? profile.Appearance.SkinColor.WithAlpha(facialHairAlpha) : profile.Appearance.FacialHairColor;
 

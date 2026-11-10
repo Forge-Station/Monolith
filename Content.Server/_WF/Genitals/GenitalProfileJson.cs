@@ -292,7 +292,7 @@ public static class GenitalProfileJson
             return true;
         }
 
-        if (Color.TryFromHex(hex) is { } parsed)
+        if (Color.TryFromHex(hex, out var parsed))
         {
             color = parsed;
             return true;

@@ -47,3 +47,36 @@ public sealed class ShuttleMapInterfaceState
         FtlDrive = ftlDrive; // WOLFGATE(Shuttles)
     }
 }
+
+// Forge-Change-start - BioScan
+[Serializable, NetSerializable]
+public enum ShuttleBioScanStatus : byte
+{
+    None,
+    InProgress,
+    Clean,
+    ThreatDetected,
+    InvalidTarget,
+    TargetTooFar,
+    TargetMoving,
+    NoAccess,
+}
+// Forge-Change-end - BioScan
+
+// Forge-Change-start - Cloaking
+[Serializable, NetSerializable]
+public enum ShuttleCloakingStatus : byte
+{
+    None,
+    Ready,
+    Active,
+    Cooldown,
+}
+
+[Serializable, NetSerializable]
+public enum ShuttleConsoleMapScreenMode : byte
+{
+    BioScan,
+    Cloaking,
+}
+// Forge-Change-end - Cloaking

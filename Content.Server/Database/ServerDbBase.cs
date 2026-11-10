@@ -20,7 +20,6 @@ using Content.Shared._WF.TypingBubble; // WOLFGATE(TypingBubble)
 using Content.Shared._WF.EmoteVoices; // WOLFGATE(EmoteVoices)
 using Content.Shared._WF.CustomMarkings; // WOLFGATE(CustomMarkings)
 using Content.Shared._WF.Genitals; // WOLFGATE(Genitals)
-using Content.Shared._WF.Genitals.Profile; // WOLFGATE(Genitals)
 using Content.Shared._WF.LegStyle; // WOLFGATE(LegStyle)
 using Content.Shared._WF.Prototypes; // WOLFGATE(Prototypes)
 using Content.Shared.Administration.Logs;
@@ -298,11 +297,11 @@ namespace Content.Server.Database
                 new HumanoidCharacterAppearance
                 (
                     profile.HairName,
-                    Color.FromHex(profile.HairColor),
+                    ParseHairColors(profile.HairColor),
                     profile.FacialHairName,
-                    Color.FromHex(profile.FacialHairColor),
-                    Color.FromHex(profile.EyeColor),
-                    Color.FromHex(profile.SkinColor),
+                    ParseProfileColor(profile.FacialHairColor),
+                    ParseProfileColor(profile.EyeColor),
+                    ParseProfileColor(profile.SkinColor),
                     markings,
                     height,
                     width
@@ -341,6 +340,62 @@ namespace Content.Server.Database
             };
         }
 
+        private static List<Color> ParseHairColors(string stored)
+        {
+            var colors = new List<Color>();
+            foreach (var part in HairColorParts(stored))
+                colors.Add(ParseProfileColor(part));
+
+            if (colors.Count == 0)
+                colors.Add(Color.Black);
+
+            return colors;
+        }
+
+        /// <summary>
+        /// Older rows stored a hair colour list as a JSON array (<c>["#RRGGBBAA"]</c>).
+        /// Current rows are comma-separated hex. A bad value stays black instead of dropping the player.
+        /// </summary>
+        private static IEnumerable<string> HairColorParts(string stored)
+        {
+            if (string.IsNullOrWhiteSpace(stored))
+                yield break;
+
+            var trimmed = stored.Trim();
+            if (trimmed.StartsWith('['))
+            {
+                List<string>? parsed = null;
+                try
+                {
+                    parsed = JsonSerializer.Deserialize<List<string>>(trimmed);
+                }
+                catch (JsonException)
+                {
+                    parsed = null;
+                }
+
+                if (parsed != null)
+                {
+                    foreach (var part in parsed)
+                        yield return part;
+
+                    yield break;
+                }
+            }
+
+            foreach (var part in trimmed.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                yield return part;
+        }
+
+        private static Color ParseProfileColor(string stored)
+        {
+            var hex = stored.Trim().Trim('"');
+            if (hex.Length == 0)
+                return Color.Black;
+
+            return Color.FromHex(hex, Color.Black);
+        }
+
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)
         {
             var existingRow = profile != null; // WOLFGATE(Genitals)
@@ -361,7 +416,7 @@ namespace Content.Server.Database
             profile.Gender = humanoid.Gender.ToString();
             profile.BankBalance = humanoid.BankBalance;
             profile.HairName = appearance.HairStyleId;
-            profile.HairColor = appearance.HairColor.ToHex();
+            profile.HairColor = string.Join(",", appearance.HairColor.Select(color => color.ToHex()));
             profile.FacialHairName = appearance.FacialHairStyleId;
             profile.FacialHairColor = appearance.FacialHairColor.ToHex();
             profile.EyeColor = appearance.EyeColor.ToHex();

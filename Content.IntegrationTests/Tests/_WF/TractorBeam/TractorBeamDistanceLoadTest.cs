@@ -20,7 +20,7 @@ public sealed class TractorBeamDistanceLoadTest
         await using var pair = await PoolManager.GetServerClient();
         var map = await pair.CreateTestMap();
         var entities = pair.Server.ResolveDependency<IEntityManager>();
-        var maps = pair.Server.ResolveDependency<IMapManager>();
+        var maps = pair.Server.System<SharedMapSystem>();
         await pair.Server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -78,7 +78,7 @@ public sealed class TractorBeamDistanceLoadTest
         await using var pair = await PoolManager.GetServerClient();
         var map = await pair.CreateTestMap();
         var entities = pair.Server.ResolveDependency<IEntityManager>();
-        var maps = pair.Server.ResolveDependency<IMapManager>();
+        var maps = pair.Server.System<SharedMapSystem>();
         await pair.Server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -160,7 +160,7 @@ public sealed class TractorBeamDistanceLoadTest
         await using var pair = await PoolManager.GetServerClient();
         var map = await pair.CreateTestMap();
         var entities = pair.Server.ResolveDependency<IEntityManager>();
-        var maps = pair.Server.ResolveDependency<IMapManager>();
+        var maps = pair.Server.System<SharedMapSystem>();
         await pair.Server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);

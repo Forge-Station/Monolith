@@ -50,7 +50,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 {
     [Dependency] private   ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] protected IMapManager MapManager = default!;
+    [Dependency] protected SharedMapSystem MapManager = default!;
     [Dependency] private   INetManager _netManager = default!;
     [Dependency] protected IRobustRandom Random = default!;
     [Dependency] protected ISharedAdminLogManager Logs = default!;
@@ -504,7 +504,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         EntityUid? user = null,
         bool throwItems = false);
 
-    public virtual void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid gunUid, EntityUid? user = null, float speed = 20f,
+    public virtual void ShootProjectile(EntityUid uid, Vector2 direction, Vector2 gunVelocity, EntityUid? gunUid, EntityUid? user = null, float speed = 20f,
                                         float offset = 0f) // Mono - add offset
     {
         var physics = _physQuery.CompOrNull(uid) ?? EnsureComp<PhysicsComponent>(uid);
@@ -522,7 +522,9 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
 
         var projectile = _projQuery.CompOrNull(uid) ?? EnsureComp<ProjectileComponent>(uid);
-        Projectiles.SetShooter(uid, projectile, user ?? gunUid);
+        var shooter = user ?? gunUid;
+        if (shooter != null)
+            Projectiles.SetShooter(uid, projectile, shooter.Value);
         projectile.Weapon = gunUid;
 
         TransformSystem.SetWorldRotation(uid, direction.ToWorldAngle() + projectile.Angle);
@@ -603,7 +605,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// </summary>
     protected virtual void UpdateAmmoCount(EntityUid uid, bool prediction = true) {}
 
-    protected void SetCartridgeSpent(EntityUid uid, CartridgeAmmoComponent cartridge, bool spent)
+    protected void SetCartridgeSpent(EntityUid uid, CartridgeAmmoComponent cartridge, bool spent, bool despawn = true)
     {
         if (cartridge.Spent != spent)
             DirtyField(uid, cartridge, nameof(CartridgeAmmoComponent.Spent));
@@ -613,7 +615,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (cartridge.DeleteOnSpawn) // Mono - No need to update appearance if cartridge is getting deleted anyways
             return;
 
-        if (cartridge.AutoTimedDespawn != 0)
+        if (despawn && cartridge.AutoTimedDespawn != 0)
             EnsureComp<TimedDespawnComponent>(uid).Lifetime = cartridge.AutoTimedDespawn;
         // End mono
 
@@ -831,6 +833,28 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     public bool GunPrediction => _gunPrediction?.GunPrediction ?? false;
 
+    public List<int>? ShootRequested(NetEntity gun, NetCoordinates coordinates, NetEntity? target, List<int>? shot, ICommonSession session, bool predicted = false)
+    {
+        var user = session.AttachedEntity;
+        if (user == null || !_combatMode.IsInCombatMode(user))
+            return null;
+
+        if (TryComp<MechPilotComponent>(user.Value, out var mechPilot))
+            user = mechPilot.Mech;
+
+        if (!TryGetGun(user.Value, out var gunEnt, out var gunComp) || gunEnt != GetEntity(gun))
+            return null;
+
+        gunComp.ShootCoordinates = GetCoordinates(coordinates);
+        if (gunComp.Target == null || !gunComp.BurstActivated || !gunComp.LockOnTargetBurst)
+            gunComp.Target = GetEntity(target);
+
+        AttemptShoot(user.Value, gunEnt, gunComp);
+        return null;
+    }
+
+    protected bool IsPredictedHitscan(EntityUid gunUid) => false;
+
     public abstract void PlayImpactSound(EntityUid otherEntity, DamageSpecifier? modifiedDamage, SoundSpecifier? weaponSound, bool forceWeaponSound, Robust.Shared.Player.Filter? filter = null, Entity<ProjectileComponent, PhysicsComponent>? projectile = null);
 
     /// <summary>
@@ -858,7 +882,8 @@ public record struct BoltStateChangedEvent(EntityUid User, bool Closed); //Mono
 /// <param name="Cancelled">Set this to true if the shot should be cancelled.</param>
 /// <param name="ThrowItems">Set this to true if the ammo shouldn't actually be fired, just thrown.</param>
 [ByRefEvent]
-public record struct AttemptShootEvent(EntityUid User, string? Message, bool Cancelled = false, bool ThrowItems = false);
+public record struct AttemptShootEvent(EntityUid User, string? Message, bool Cancelled = false, bool ThrowItems = false,
+    EntityCoordinates FromCoordinates = default, EntityCoordinates? ToCoordinates = null, bool ResetCooldown = false);
 
 /// <summary>
 ///     Raised directed on the gun after firing.

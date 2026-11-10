@@ -30,7 +30,6 @@ public sealed partial class WFCavernDigSystem : EntitySystem
     [Dependency] private BiomeSystem _biome = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private ITileDefinitionManager _tileDefs = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
@@ -66,7 +65,7 @@ public sealed partial class WFCavernDigSystem : EntitySystem
             return;
 
         var click = _transform.ToMapCoordinates(args.ClickLocation);
-        if (!_mapManager.TryFindGridAt(click, out var gridUid, out var grid)
+        if (!_map.TryFindGridAt(click, out var gridUid, out var grid)
             || !TryComp<WFCavernGroundComponent>(gridUid, out var ground))
             return;
 
@@ -146,7 +145,7 @@ public sealed partial class WFCavernDigSystem : EntitySystem
 
         var box = new Box2(index, index + Vector2i.One).Enlarged(-0.05f);
         var grids = new List<Entity<MapGridComponent>>();
-        _mapManager.FindGridsIntersecting(Transform(ground).MapID, box, ref grids, approx: true, includeMap: false);
+        _map.FindGridsIntersecting(Transform(ground).MapID, box, ref grids, approx: true, includeMap: false);
         if (grids.Count > 0)
             return false;
 

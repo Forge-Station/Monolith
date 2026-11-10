@@ -22,6 +22,12 @@ public record struct TraderActionEvent(EntityUid Trader, EntityUid Customer, Tra
 public record struct TraderConfirmedEvent(EntityUid Trader, EntityUid Customer, bool Accepted);
 
 /// <summary>
+/// Raised on a trader when the customer answers a text prompt. Text is null when they backed out.
+/// </summary>
+[ByRefEvent]
+public record struct TraderTextEnteredEvent(EntityUid Trader, EntityUid Customer, string? Text);
+
+/// <summary>
 /// Raised on a trader once a conversation has ended and everything held has been handed back, so a
 /// service can tear down whatever it set up for that customer.
 /// </summary>

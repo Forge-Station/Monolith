@@ -30,6 +30,7 @@ using Content.Shared.Chat;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
 using Content.Client._Mono.Company; // Mono
+using Content.Client._WF.GameHub;
 // using Content.Client._Mono.MonoCoins; // Forge-Change: MonoCoins disabled
 using Content.Client.Corvax.ExportSprites; // Corvax-Wiki
 
@@ -73,6 +74,7 @@ namespace Content.Client.IoC
             collection.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
             collection.Register<TitleWindowManager>();
             collection.Register<CompanyManager>(); // Mono
+            collection.Register<WFGameDataManager>(); // WOLFGATE(GameHub)
 
             // Forge-Change: register sponsor manager on client like in Frontier1
             collection.Register<JoinQueueManager>();

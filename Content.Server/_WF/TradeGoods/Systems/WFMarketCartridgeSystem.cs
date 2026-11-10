@@ -54,7 +54,7 @@ public sealed class WFMarketCartridgeSystem : EntitySystem
     [Dependency] private PopupSystem _popup = default!;
     [Dependency] private VendingMachinePurchaseSystem _vendingPurchase = default!;
     [Dependency] private MarketSystem _stock = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
 
     public static readonly EntProtoId MarketCartridge = "WFMarketCartridge";
 

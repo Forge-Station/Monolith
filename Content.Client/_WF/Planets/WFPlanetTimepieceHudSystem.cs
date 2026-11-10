@@ -54,7 +54,7 @@ public sealed partial class WFPlanetTimepieceHudSystem : EntitySystem
 
     public override void Shutdown()
     {
-        _hud.Orphan();
+        _hud?.Orphan();
         base.Shutdown();
     }
 

@@ -624,4 +624,6 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         return chain;
     }
 
+    [ByRefEvent]
+    public record struct ShieldDeflectedEvent(EntityUid Deflected, ProjectileComponent Projectile);
 }

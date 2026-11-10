@@ -73,6 +73,7 @@ public sealed partial class WFEncounterSystem
         SubscribeLocalEvent<HailAnsweredEvent>(OnExtortAnswered);
         SubscribeLocalEvent<HailOptionChosenEvent>(OnExtortChosen);
         SubscribeLocalEvent<HailCallEndedEvent>(OnExtortCallEnded);
+        InitializeAbduct();
     }
 
     private WFExtortState NewExtort(WFEncounterExtort config)

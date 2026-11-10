@@ -1,6 +1,8 @@
 // WOLFGATE(Xenoarch) START: wizden's xenoarch rework
 using Content.Shared.Interaction;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Xenoarchaeology.Artifact;
 using Content.Shared.Xenoarchaeology.Artifact.Components;
@@ -109,7 +111,7 @@ public sealed class NodeScannerSystem : EntitySystem
             return;
 
         if (TryComp(device, out UseDelayComponent? useDelay)
-            && !_useDelay.TryResetDelay((device, useDelay), true))
+            && !_useDelay.TryResetDelay((device.Owner, useDelay), true))
             return;
 
         var connected = EnsureComp<NodeScannerConnectedComponent>(device);

@@ -1,15 +1,27 @@
 using Content.Server.Shuttles.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Server.StationRecords;
+using Content.Shared.Shuttles.Components;
 using Content.Server.StationRecords.Systems;
+using Content.Shared.Shuttles.Components;
 using Content.Server._WF.NpcCrew.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Server._WF.ShipAccess;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._WF.NpcCrew;
+using Content.Shared.Shuttles.Components;
 using Content.Shared._WF.ShipAccess;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Station.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.StationRecords;
+using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared.Shuttles.Components;
 
 namespace Content.Server._WF.NpcCrew.Systems;
 

@@ -9,13 +9,12 @@
   abstract: true
   components:
   - type: Wagging
-  - type: Hunger
-    thresholds:
-      Overfed: 250
-      Okay: 200
-      Peckish: 150
-      Starving: 100
-      Dead: 0
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: ProtoVulpHunger
+      Thirst:
+        prototype: NormalSatiationThirst
   - type: Icon
     sprite: _FarHorizons/Mobs/Species/Proto-Vulp/parts.rsi
     state: full
@@ -588,7 +587,6 @@
           32:
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
-  - type: ShowThirstIcons
   - type: SolutionScanner
   - type: Wagging
   - type: Tag
@@ -639,8 +637,18 @@
       damage:
         groups:
           Brute: -30 # 5 for each type with reduction applied
-    - type: Hunger
-    - type: Thirst
+    - type: Satiation
+      satiations:
+        Hunger:
+          prototype: NormalSatiationHunger
+        Thirst:
+          prototype: NormalSatiationThirst
+    - type: SatiationSpeedModifier
+      satiations:
+        Hunger:
+          Starving: 0.75
+        Thirst:
+          Parched: 0.75
     - type: HumanoidAppearance
       species: ProtoKin
       hideLayersOnEquip:
@@ -2005,10 +2013,12 @@
     - Breasts
     # HL end
     species: ProtoDionae
-  - type: Hunger
-    baseDecayRate: 0.0083
-  - type: Thirst
-    baseDecayRate: 0.0083
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: DionaHunger
+      Thirst:
+        prototype: DionaThirst
   - type: Icon
     sprite: _FarHorizons/Mobs/Species/Proto-Dionae/parts.rsi
     state: full
@@ -2194,14 +2204,12 @@
         sprite: Objects/Misc/handcuffs.rsi
         state: body-overlay-2
         visible: false
-    - type: Hunger
-      thresholds:
-        Overfed: 250
-        Okay: 200
-        Peckish: 150
-        Starving: 100
-        Dead: 0
-      baseDecayRate: 0.03
+    - type: Satiation
+      satiations:
+        Hunger:
+          prototype: AvaliHunger
+        Thirst:
+          prototype: NormalSatiationThirst
     - type: Icon
       sprite: _FarHorizons/Mobs/Species/Proto-Avali/parts.rsi
       state: full

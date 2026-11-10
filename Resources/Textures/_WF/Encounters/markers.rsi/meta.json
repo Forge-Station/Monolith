@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "license": "CC0-1.0",
+    "copyright": "Radar marker glyphs drawn in code for Wolfgate.",
+    "size": {
+        "x": 16,
+        "y": 16
+    },
+    "states": [
+        {
+            "name": "skull"
+        },
+        {
+            "name": "shield"
+        },
+        {
+            "name": "crate"
+        },
+        {
+            "name": "cross"
+        },
+        {
+            "name": "coins"
+        },
+        {
+            "name": "flag"
+        },
+        {
+            "name": "swords"
+        },
+        {
+            "name": "ghost"
+        },
+        {
+            "name": "drone"
+        }
+    ]
+}

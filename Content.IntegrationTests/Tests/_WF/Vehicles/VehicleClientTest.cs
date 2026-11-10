@@ -310,7 +310,7 @@ public sealed class VehicleClientTest
                     !proto.TryComp<RMCVehicleComponent>(out _, factory) ||
                     proto.TryComp<VehicleEnterComponent>(out _, factory) ||
                     !proto.TryComp<VehicleSoundComponent>(out var sound, factory) ||
-                    sound.HornSound == null)
+                    sound?.HornSound == null)
                 {
                     continue;
                 }

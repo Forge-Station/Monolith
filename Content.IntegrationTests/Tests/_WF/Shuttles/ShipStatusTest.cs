@@ -37,7 +37,7 @@ public sealed class ShipStatusTest
         var map = await pair.CreateTestMap();
 
         var entManager = server.ResolveDependency<IEntityManager>();
-        var mapManager = server.ResolveDependency<IMapManager>();
+        var mapManager = server.System<SharedMapSystem>();
         var protoManager = server.ResolveDependency<IPrototypeManager>();
         var mapSystem = entManager.System<SharedMapSystem>();
         var damageSystem = entManager.System<DamageableSystem>();

@@ -1,4 +1,5 @@
 using Content.Shared.Atmos;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Light.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Shuttles.Systems;
@@ -94,6 +95,10 @@ namespace Content.Shared.Maps
 
         [DataField("thermalConductivity")] public float ThermalConductivity = 0.04f;
 
+        /// <summary>How readily a tile fire spreads onto this turf. Higher scores are chosen first. Zero never burns.</summary>
+        [DataField]
+        public float Flammability = 1f;
+
         // Heat capacity is opt-in, not opt-out.
         [DataField("heatCapacity")] public float HeatCapacity = Atmospherics.MinimumHeatCapacity;
 
@@ -167,5 +172,13 @@ namespace Content.Shared.Maps
         /// </summary>
         [DataField]
         public ResPath? IconSmoothSprite { get; private set; }
+
+        /// <summary>Multiplier on damage taken by anything that falls onto this tile.</summary>
+        [DataField]
+        public float FallDamageMultiplier { get; private set; } = 1f;
+
+        /// <summary>Liquid this tile is made of, when standing on it means wading.</summary>
+        [DataField]
+        public ProtoId<ReagentPrototype>? Reagent { get; private set; }
     }
 }

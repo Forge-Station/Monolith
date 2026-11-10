@@ -16,7 +16,6 @@ namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class ShuttleConsoleSystem
 {
-    [Dependency] private IGameTiming _wfCockpitTiming = default!;
 
     private float _wfCockpitStatusAccumulator;
     private readonly Dictionary<EntityUid, bool?> _wfCockpitAutopilotStates = new();
@@ -27,7 +26,7 @@ public sealed partial class ShuttleConsoleSystem
     {
         if (!_wfCockpitStatusViewers.TryGetValue(console, out var viewers))
             _wfCockpitStatusViewers[console] = viewers = new Dictionary<EntityUid, GameTick>();
-        viewers[actor] = _wfCockpitTiming.CurTick;
+        viewers[actor] = _timing.CurTick;
         _wfShieldHelmStates.Remove(console);
         // The cached helm state can predate a drive change made while the helm was closed.
         if (TryComp<ShuttleConsoleComponent>(console, out var helm))
@@ -57,7 +56,7 @@ public sealed partial class ShuttleConsoleSystem
         if (_wfCockpitStatusAccumulator < 0.25f)
             return;
         _wfCockpitStatusAccumulator = 0;
-        var tick = _wfCockpitTiming.CurTick;
+        var tick = _timing.CurTick;
         var open = new HashSet<EntityUid>();
         var query = EntityQueryEnumerator<ShuttleConsoleComponent>();
         while (query.MoveNext(out var uid, out _))

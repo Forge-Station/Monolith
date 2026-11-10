@@ -9,7 +9,8 @@
     gender: Male
     appearance:
       hair: HumanHairCombover
-      hairColor: "#2E2420"
+      hairColor:
+        - "#2E2420"
       facialHair: HumanFacialHairMoustache
       facialHairColor: "#2E2420"
       eyeColor: "#3D2B1F"

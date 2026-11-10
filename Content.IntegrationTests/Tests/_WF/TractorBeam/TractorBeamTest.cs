@@ -26,7 +26,7 @@ public sealed class TractorBeamTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -97,7 +97,7 @@ public sealed class TractorBeamTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
         await server.WaitAssertion(() =>
         {
             entities.DeleteEntity(map.Grid);
@@ -142,7 +142,7 @@ public sealed class TractorBeamTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -188,7 +188,7 @@ public sealed class TractorBeamTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -264,7 +264,7 @@ public sealed class TractorBeamTest
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
-        var maps = server.ResolveDependency<IMapManager>();
+        var maps = server.System<SharedMapSystem>();
 
         await server.WaitAssertion(() =>
         {
@@ -375,7 +375,7 @@ public sealed class TractorBeamTest
     }
 
     internal static (EntityUid Source, EntityUid Target, EntityUid Emitter, EntityUid Console) CreateLock(
-        IEntityManager entities, IMapManager maps, MapId map, EntityUid? existingTarget = null, Vector2 sourcePosition = default,
+        IEntityManager entities, SharedMapSystem maps, MapId map, EntityUid? existingTarget = null, Vector2 sourcePosition = default,
         string emitterPrototype = "WFTractorBeamEmitter")
     {
         var mapSystem = entities.System<SharedMapSystem>();

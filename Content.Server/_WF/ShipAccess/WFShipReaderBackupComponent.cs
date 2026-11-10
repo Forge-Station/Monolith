@@ -30,6 +30,10 @@ public sealed partial class WFShipReaderBackupComponent : Component
     /// </summary>
     [DataField]
     public bool Released;
+
+    /// <summary>The reader keeps the lists it had before the ship wrote them.</summary>
+    [DataField]
+    public bool OwnLists;
 }
 
 /// <summary>

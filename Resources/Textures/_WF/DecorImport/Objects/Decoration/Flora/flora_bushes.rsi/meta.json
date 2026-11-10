@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7, CHOMPStation at commit https://github.com/CHOMPStation2/CHOMPStation2/commit/ca24d940aa4a6eb0d58d32b85ddc830f44459264, CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/d5306e2724d6006e69439d9cf64a2b166fe4ed15, Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bush0"
+    },
+    {
+      "name": "bush1_aurora"
+    },
+    {
+      "name": "bush1_coyote"
+    },
+    {
+      "name": "bush2"
+    },
+    {
+      "name": "bush3"
+    },
+    {
+      "name": "bush5"
+    },
+    {
+      "name": "bush_1",
+      "directions": 4
+    },
+    {
+      "name": "fernybush_1"
+    },
+    {
+      "name": "grass4"
+    },
+    {
+      "name": "grove_bush1"
+    },
+    {
+      "name": "palmy0"
+    },
+    {
+      "name": "palmy1"
+    },
+    {
+      "name": "palmy2"
+    },
+    {
+      "name": "plant_1"
+    },
+    {
+      "name": "shrub0"
+    },
+    {
+      "name": "shrub1"
+    },
+    {
+      "name": "shrub2"
+    },
+    {
+      "name": "shrub3"
+    },
+    {
+      "name": "shrub4"
+    },
+    {
+      "name": "shrub5"
+    },
+    {
+      "name": "shrubber0"
+    },
+    {
+      "name": "shrubber1"
+    },
+    {
+      "name": "stalks"
+    },
+    {
+      "name": "thicket0"
+    },
+    {
+      "name": "thicket1"
+    },
+    {
+      "name": "thicket2"
+    },
+    {
+      "name": "thicket3"
+    },
+    {
+      "name": "thicket4"
+    },
+    {
+      "name": "thicket5"
+    },
+    {
+      "name": "thicket6"
+    },
+    {
+      "name": "tree_1"
+    }
+  ]
+}

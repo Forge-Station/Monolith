@@ -6,6 +6,7 @@ using Content.Server.Station.Systems;
 using Content.Shared._WF.Biotype;
 using Content.Shared.Body.Systems;
 using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Preferences;
 using Robust.Shared.GameObjects;
 
@@ -33,8 +34,10 @@ public sealed class WFSynthNeedsTest
 
             Assert.Multiple(() =>
             {
-                Assert.That(entMan.HasComponent<HungerComponent>(synth), Is.False, "a synthetic gets hungry.");
-                Assert.That(entMan.HasComponent<ThirstComponent>(synth), Is.False, "a synthetic gets thirsty.");
+                var satiation = entMan.System<SatiationSystem>();
+                var hasNeeds = entMan.TryGetComponent<SatiationComponent>(synth, out var needs);
+                Assert.That(hasNeeds && satiation.GetValueOrNull((synth, needs), SatiationSystem.Hunger) != null, Is.False, "a synthetic gets hungry.");
+                Assert.That(hasNeeds && satiation.GetValueOrNull((synth, needs!), SatiationSystem.Thirst) != null, Is.False, "a synthetic gets thirsty.");
                 Assert.That(entMan.System<SharedBodySystem>().TryGetBodyOrganEntityComps<StomachComponent>(synth, out _), Is.False,
                     "a synthetic has a stomach, so it can eat and drink.");
                 var (fed, _) = entMan.System<FoodSystem>().TryFeed(synth, synth, food, entMan.GetComponent<FoodComponent>(food));

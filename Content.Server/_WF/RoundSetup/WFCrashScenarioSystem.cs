@@ -51,7 +51,7 @@ public sealed partial class WFCrashScenarioSystem : EntitySystem
     [Dependency] private ShuttleSystem _shuttle = default!;
     [Dependency] private ShuttleConsoleSystem _consoles = default!;
     [Dependency] private ThrusterSystem _thrusters = default!;
-    [Dependency] private StationSystem _stations = default!;
+    [Dependency] private ServerStationSystem _stations = default!;
     [Dependency] private ShipPaSystem _pa = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private ShipRepairSystem _repair = default!;

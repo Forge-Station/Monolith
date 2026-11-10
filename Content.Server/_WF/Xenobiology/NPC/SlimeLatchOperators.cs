@@ -21,7 +21,7 @@ public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
 {
     [Dependency] private IEntityManager _ent = default!;
 
-    private HungerSystem _hunger = default!;
+    private SatiationSystem _hunger = default!;
     private MobStateSystem _mobState = default!;
     private NpcFactionSystem _factions = default!;
     private PathfindingSystem _pathfinding = default!;
@@ -48,7 +48,7 @@ public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
     public override void Initialize(IEntitySystemManager sysManager)
     {
         base.Initialize(sysManager);
-        _hunger = sysManager.GetEntitySystem<HungerSystem>();
+        _hunger = sysManager.GetEntitySystem<SatiationSystem>();
         _mobState = sysManager.GetEntitySystem<MobStateSystem>();
         _factions = sysManager.GetEntitySystem<NpcFactionSystem>();
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
@@ -62,11 +62,11 @@ public sealed partial class PickSlimeLatchTargetOperator : HTNOperator
         if (!blackboard.TryGetValue<float>(RangeKey, out var range, _ent)
             || !_ent.TryGetComponent<SlimeComponent>(owner, out var slime)
             || !_ent.TryGetComponent<MobGrowthComponent>(owner, out var growth)
-            || !_ent.TryGetComponent<HungerComponent>(owner, out var hunger)
+            || !_ent.TryGetComponent<SatiationComponent>(owner, out var hunger)
             || _latch.IsLatched((owner, slime)))
             return (false, null);
 
-        var full = _hunger.GetHunger(hunger) > Peckish;
+        var full = (_hunger.GetValueOrNull((owner, hunger), SatiationSystem.Hunger) ?? 0f) > Peckish;
         if (growth.IsFirstStage && full)
             return (false, null);
 

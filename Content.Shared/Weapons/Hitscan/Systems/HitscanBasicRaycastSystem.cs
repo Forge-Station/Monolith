@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Shared._Mono.Weapons.Hitscan.Components; // WOLFGATE(Weapons)
+using Content.Shared._Mono.Weapons.Hitscan.Components;
 using Content.Shared._WF.ShipShields; // WOLFGATE(ShipShields)
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
@@ -68,6 +68,7 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem
 
         if (result?.HitEntity != null) // Mono
         {
+            trace.HitEntity = result.Value.HitEntity;
             trace.HitEntities.Add(result.Value.HitEntity);
 
             // WOLFGATE(ShipShields) START: log only the target remaining after shield interception

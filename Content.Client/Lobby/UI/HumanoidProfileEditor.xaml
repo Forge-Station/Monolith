@@ -3,6 +3,7 @@
          xmlns:humanoid="clr-namespace:Content.Client.Humanoid"
          xmlns:wfh="clr-namespace:Content.Client._WF.Humanoid"
          xmlns:wfg="clr-namespace:Content.Client._WF.Genitals.UI"
+         xmlns:wfa="clr-namespace:Content.Client._WF.Augments.UI"
          HorizontalExpand="True"
          SeparationOverride="0">
     <!-- WOLFGATE(Stylesheets) START: creator rebuilt as cards with a preview column (also covers the root tag above, which
@@ -275,11 +276,15 @@
                                     <BoxContainer HorizontalExpand="True" SeparationOverride="6">
                                         <Label Text="{Loc 'humanoid-profile-editor-height-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="60" />
                                         <Slider Name="HeightSlider" MinValue="0.8" MaxValue="1.2" Value="1.0" HorizontalExpand="True" VerticalAlignment="Center" />
+                                        <LineEdit Name="HeightPercent" MinWidth="44" VerticalAlignment="Center" />
+                                        <Label Text="%" VAlign="Center" />
                                         <Button Name="HeightResetButton" Text="{Loc 'humanoid-profile-editor-reset-button'}" StyleClasses="LinkButton" />
                                     </BoxContainer>
                                     <BoxContainer HorizontalExpand="True" SeparationOverride="6">
                                         <Label Text="{Loc 'humanoid-profile-editor-width-label'}" StyleClasses="CreatorFieldLabel" VAlign="Center" MinWidth="60" />
                                         <Slider Name="WidthSlider" MinValue="0.8" MaxValue="1.2" Value="1.0" HorizontalExpand="True" VerticalAlignment="Center" />
+                                        <LineEdit Name="WidthPercent" MinWidth="44" VerticalAlignment="Center" />
+                                        <Label Text="%" VAlign="Center" />
                                         <Button Name="WidthResetButton" Text="{Loc 'humanoid-profile-editor-reset-button'}" StyleClasses="LinkButton" />
                                     </BoxContainer>
                                     <Label Text="{Loc 'humanoid-profile-editor-skin-color-label'}" StyleClasses="CreatorFieldLabel" Margin="0 6 0 0" />
@@ -395,6 +400,16 @@
                     <wfg:WolfgateGenitalEditor Name="GenitalEditor" HorizontalExpand="True" />
                 </ScrollContainer>
             </BoxContainer>
+            <BoxContainer Name="AugmentsTab" Orientation="Vertical" Margin="8">
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                    <wfa:WFAugmentEditor Name="AugmentEditor" HorizontalExpand="True" />
+                </ScrollContainer>
+            </BoxContainer>
+            <BoxContainer Name="VoiceTab" Orientation="Vertical" Margin="8">
+                <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                    <BoxContainer Name="SpeechVoiceContainer" Orientation="Vertical" HorizontalExpand="True" />
+                </ScrollContainer>
+            </BoxContainer>
         </TabContainer>
     </BoxContainer>
     <!-- Preview column -->
@@ -436,6 +451,10 @@
             </BoxContainer>
             <!-- WOLFGATE(Headshot): opens the headshot URL editor -->
             <Button Name="HeadshotButton" StyleClasses="LinkButton" HorizontalAlignment="Left" />
+            <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+                <OptionButton Name="BarkVoiceButton" HorizontalExpand="True" />
+                <Button Name="BarkVoicePlayButton" Text="▶" />
+            </BoxContainer>
             <Control VerticalExpand="True" />
             <Button Name="SaveButton" Text="{Loc 'humanoid-profile-editor-save-button'}" StyleClasses="CreatorPrimary" />
             <Button Name="ResetButton" Disabled="True" Text="{Loc 'humanoid-profile-editor-reset-button'}" />

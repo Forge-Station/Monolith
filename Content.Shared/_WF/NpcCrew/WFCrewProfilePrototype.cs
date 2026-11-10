@@ -49,6 +49,10 @@ public sealed partial class WFCrewProfilePrototype : IPrototype
     [DataField]
     public bool ForgivesOwn;
 
+    /// <summary>Whether this crew leaves player ships that still have a living crew alone.</summary>
+    [DataField]
+    public bool SparesCrewedShips;
+
     /// <summary>Titles its crews carry in place of a role's own, by role: an automaton is a Helm Unit, not a First Officer.</summary>
     [DataField]
     public Dictionary<ProtoId<WFCrewRolePrototype>, LocId> Titles = new();

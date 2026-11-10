@@ -1,3 +1,6 @@
+ui-lobby-customize-nav-button = Персонаж
+ui-lobby-ahelp-nav-button = Помощь администратора
+ui-lobby-leave-nav-button = Покинуть сервер
 ui-lobby-title = Лобби
 ui-lobby-ahelp-button = AHelp
 ui-lobby-options-button = Настройки

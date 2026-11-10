@@ -1,0 +1,43 @@
+<lore:WFLoreBookWindow xmlns="https://spacestation14.io"
+                      xmlns:lore="clr-namespace:Content.Client._WF.LoreBook"
+                      MouseFilter="Stop"
+                      MinSize="700 440"
+                      SetSize="1120 740">
+    <PanelContainer Name="Cover" />
+    <BoxContainer Orientation="Vertical" Margin="16 6 16 16">
+        <BoxContainer Orientation="Horizontal" Margin="8 0 2 6">
+            <TextureRect Name="TitleIcon" Stretch="KeepAspectCentered" SetSize="26 26" VerticalAlignment="Center" Margin="0 0 10 0" />
+            <Label Name="BookTitle" Text="{Loc 'wf-lore-book-title'}" VAlign="Center" />
+            <Label Name="BookSubtitle" Text="{Loc 'wf-lore-book-subtitle'}" VAlign="Center" HorizontalExpand="True" Margin="14 4 0 0" />
+            <TextureButton Name="CloseBookButton" StyleClasses="windowCloseButton" VerticalAlignment="Center" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" VerticalExpand="True">
+            <PanelContainer Name="LeftPage" MinWidth="310">
+                <BoxContainer Orientation="Vertical" Margin="20 16 16 12">
+                    <Label Name="ContentsHeading" Text="{Loc 'wf-lore-book-contents'}" HorizontalAlignment="Center" />
+                    <PanelContainer Name="ContentsRule" MinHeight="1" Margin="24 6 24 10" />
+                    <LineEdit Name="SearchBar" PlaceHolder="{Loc 'wf-lore-book-search'}" Margin="0 0 0 8" />
+                    <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+                        <BoxContainer Name="Contents" Orientation="Vertical" Margin="0 0 8 0" />
+                    </ScrollContainer>
+                    <Label Name="LeftFolio" HorizontalAlignment="Center" Margin="0 8 0 0" />
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer Name="Spine" MinWidth="18" />
+            <PanelContainer Name="RightPage" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" Margin="26 16 20 12">
+                    <Label Name="ChapterTrail" HorizontalAlignment="Center" ClipText="True" />
+                    <PanelContainer Name="PageRule" MinHeight="1" Margin="40 6 40 6" />
+                    <ScrollContainer Name="PageScroll" HScrollEnabled="False" VerticalExpand="True">
+                        <BoxContainer Name="PageBody" Orientation="Vertical" Margin="4 4 10 4" />
+                    </ScrollContainer>
+                    <BoxContainer Orientation="Horizontal" Margin="0 8 0 0">
+                        <BoxContainer Name="PrevSlot" MinWidth="160" />
+                        <Label Name="Folio" HorizontalExpand="True" Align="Center" />
+                        <BoxContainer Name="NextSlot" MinWidth="160" />
+                    </BoxContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </BoxContainer>
+</lore:WFLoreBookWindow>

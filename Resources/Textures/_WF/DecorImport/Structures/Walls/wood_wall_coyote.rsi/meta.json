@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wall-0"
+    },
+    {
+      "name": "wall-1"
+    },
+    {
+      "name": "wall-2"
+    },
+    {
+      "name": "wall-3"
+    },
+    {
+      "name": "wall-4"
+    },
+    {
+      "name": "wall-5"
+    },
+    {
+      "name": "wall-6"
+    },
+    {
+      "name": "wall-7"
+    },
+    {
+      "name": "wall-8"
+    },
+    {
+      "name": "wall-9"
+    },
+    {
+      "name": "wall-10"
+    },
+    {
+      "name": "wall-11"
+    },
+    {
+      "name": "wall-12"
+    },
+    {
+      "name": "wall-13"
+    },
+    {
+      "name": "wall-14"
+    },
+    {
+      "name": "wall-15"
+    },
+    {
+      "name": "wall-21"
+    },
+    {
+      "name": "wall-23"
+    },
+    {
+      "name": "wall-29"
+    },
+    {
+      "name": "wall-31"
+    },
+    {
+      "name": "wall-38"
+    },
+    {
+      "name": "wall-39"
+    },
+    {
+      "name": "wall-46"
+    },
+    {
+      "name": "wall-47"
+    },
+    {
+      "name": "wall-55"
+    },
+    {
+      "name": "wall-63"
+    },
+    {
+      "name": "wall-74"
+    },
+    {
+      "name": "wall-75"
+    },
+    {
+      "name": "wall-78"
+    },
+    {
+      "name": "wall-79"
+    },
+    {
+      "name": "wall-95"
+    },
+    {
+      "name": "wall-110"
+    },
+    {
+      "name": "wall-111"
+    },
+    {
+      "name": "wall-127"
+    },
+    {
+      "name": "wall-137"
+    },
+    {
+      "name": "wall-139"
+    },
+    {
+      "name": "wall-141"
+    },
+    {
+      "name": "wall-143"
+    },
+    {
+      "name": "wall-157"
+    },
+    {
+      "name": "wall-159"
+    },
+    {
+      "name": "wall-175"
+    },
+    {
+      "name": "wall-191"
+    },
+    {
+      "name": "wall-203"
+    },
+    {
+      "name": "wall-207"
+    },
+    {
+      "name": "wall-223"
+    },
+    {
+      "name": "wall-239"
+    },
+    {
+      "name": "wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

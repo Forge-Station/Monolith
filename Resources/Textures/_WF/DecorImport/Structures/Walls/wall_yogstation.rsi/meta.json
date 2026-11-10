@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Yogstation at commit https://github.com/yogstation13/Yogstation/commit/ae2886be95c234202212a3090ee7637173ea2c1d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wall0",
+      "directions": 4
+    },
+    {
+      "name": "wall1",
+      "directions": 4
+    },
+    {
+      "name": "wall2",
+      "directions": 4
+    },
+    {
+      "name": "wall3",
+      "directions": 4
+    },
+    {
+      "name": "wall4",
+      "directions": 4
+    },
+    {
+      "name": "wall5",
+      "directions": 4
+    },
+    {
+      "name": "wall6",
+      "directions": 4
+    },
+    {
+      "name": "wall7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

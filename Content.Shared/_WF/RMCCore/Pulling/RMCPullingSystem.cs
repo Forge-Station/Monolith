@@ -443,6 +443,9 @@ public sealed partial class RMCPullingSystem : EntitySystem
 
     private void OnPullAnimation(Entity<PullableComponent> ent, ref PullStartedMessage args)
     {
+        // PullStartedMessage on PullableComponent has one subscriber. Contracts retarget from the follow-up.
+        RaiseLocalEvent(ent.Owner, new PullStartedAfterEvent(args.PullerUid));
+
         if (args.PulledUid != ent.Owner)
             return;
 

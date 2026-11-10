@@ -35,7 +35,7 @@ public sealed partial class ShipyardSystem
     /// </summary>
     /// <param name="vessel">Design the ship was built from, if it is still known.</param>
     /// <param name="shipName">Name to keep, for a ship that already had one. Null takes the design's.</param>
-    public bool TryAssignDeed(EntityUid shuttleUid, EntityUid idCard, ICommonSession owner, VesselPrototype? vessel, string? shipName = null)
+    public bool TryAssignDeed(EntityUid shuttleUid, EntityUid idCard, ICommonSession owner, VesselPrototype? vessel, string? shipName = null, EntityUid? existingStation = null)
     {
         if (!HasComp<ShuttleComponent>(shuttleUid) || !TryComp<IdCardComponent>(idCard, out var card))
             return false;
@@ -51,9 +51,11 @@ public sealed partial class ShipyardSystem
             Dirty(shuttleUid, company);
         }
 
-        // Ships with a matching game map get a station so players can late-join onto them.
-        EntityUid? shuttleStation = null;
-        if (vessel != null
+        // A caller-owned station is reused. Otherwise a ship with a matching game map gets one so players can late-join.
+        EntityUid? shuttleStation = existingStation;
+        if (shuttleStation != null)
+            name = Name(shuttleStation.Value);
+        else if (vessel != null
             && _prototypeManager.TryIndex<GameMapPrototype>(vessel.ID, out var stationProto)
             && stationProto.Stations.TryGetValue(vessel.ID, out var stationConfig))
         {

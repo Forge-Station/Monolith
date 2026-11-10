@@ -147,7 +147,7 @@ public sealed class WolfmedPlaytestThreeSamTest : GameTest
 
             autodoc.UpdateUi(pod);
             Assert.That(SEntMan.System<UserInterfaceSystem>()
-                    .TryGetUiState<AutodocBuiState>(pod.Owner, AutodocUiKey.Key, out var state), Is.True);
+                    .TryGetUiState<AutodocBuiState>(pod.Owner, WolfmedAutodocUiKey.Key, out var state), Is.True);
             Assert.That(state!.Diagnostics?.TargetEntity, Is.EqualTo(SEntMan.GetNetEntity(b)),
                 "the patient panel is not showing B.");
         });
@@ -495,7 +495,7 @@ public sealed class WolfmedPlaytestThreeSamTest : GameTest
                 if (pod.Comp!.GarmentStuck && status == null)
                 {
                     SEntMan.System<AutodocSystem>().UpdateUi(pod);
-                    if (SEntMan.System<UserInterfaceSystem>().TryGetUiState<AutodocBuiState>(pod.Owner, AutodocUiKey.Key, out var state))
+                    if (SEntMan.System<UserInterfaceSystem>().TryGetUiState<AutodocBuiState>(pod.Owner, WolfmedAutodocUiKey.Key, out var state))
                         status = state.Status;
                 }
 

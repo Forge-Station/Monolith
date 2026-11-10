@@ -12,9 +12,9 @@ namespace Content.Shared._Forge.Physics;
 /// The id is removed when that entity is deleted. Scanning every tree every tick costs as much
 /// as a slice of physics on a full map, and the server never has this PVS bug.
 /// </summary>
-public sealed class StaleBroadphaseSystem : EntitySystem
+public sealed partial class StaleBroadphaseSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {

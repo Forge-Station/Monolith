@@ -12,7 +12,7 @@ namespace Content.Client._Forge.BsEnergy;
 [GenerateTypedNameReferences]
 public sealed partial class BsTransmitterWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private readonly string _minuteLocStr = Loc.GetString("ui-bs-energy-time-minute");
     private readonly string _balanceLocStr = Loc.GetString("ui-bs-transmitter-money-label");

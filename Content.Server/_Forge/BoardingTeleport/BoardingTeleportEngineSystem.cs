@@ -4,10 +4,10 @@ using Content.Shared.Shuttles.Systems;
 
 namespace Content.Server._Forge.BoardingTeleport;
 
-public sealed class BoardingTeleportEngineSystem : EntitySystem
+public sealed partial class BoardingTeleportEngineSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedRadarConsoleSystem _radar = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedRadarConsoleSystem _radar = default!;
 
     public override void Initialize()
     {

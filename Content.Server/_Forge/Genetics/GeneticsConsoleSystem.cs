@@ -16,16 +16,16 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.Genetics;
 
-public sealed class GeneticsConsoleSystem : EntitySystem
+public sealed partial class GeneticsConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly DnaModifierScannerSystem _scanner = default!;
-    [Dependency] private readonly GeneticsSystem _genetics = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly PowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private DnaModifierScannerSystem _scanner = default!;
+    [Dependency] private GeneticsSystem _genetics = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private PowerReceiverSystem _power = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

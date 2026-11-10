@@ -24,18 +24,18 @@ using static Content.Shared.MedicalScanner.SharedMedicalScannerComponent;
 
 namespace Content.Server._Forge.Genetics;
 
-public sealed class DnaModifierScannerSystem : EntitySystem
+public sealed partial class DnaModifierScannerSystem : EntitySystem
 {
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly ClimbSystem _climb = default!;
-    [Dependency] private readonly ContainerSystem _containers = default!;
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly GeneticsConsoleSystem _console = default!;
-    [Dependency] private readonly GeneticsSystem _genetics = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private ClimbSystem _climb = default!;
+    [Dependency] private ContainerSystem _containers = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private GeneticsConsoleSystem _console = default!;
+    [Dependency] private GeneticsSystem _genetics = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private const float UpdateRate = 1f;
     private float _updateDif;

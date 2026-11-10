@@ -8,13 +8,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.BoardingTeleport;
 
-public sealed class BoardingTeleportAnchorSystem : EntitySystem
+public sealed partial class BoardingTeleportAnchorSystem : EntitySystem
 {
     private static readonly ProtoId<AlertPrototype> ReturnAlert = "BoardingTeleportReturn";
 
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly BoardingTeleportPlatformSystem _platform = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private BoardingTeleportPlatformSystem _platform = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

@@ -5,9 +5,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Forge.Features;
 
-public sealed class InscriptionSystem : EntitySystem
+public sealed partial class InscriptionSystem : EntitySystem
 {
-    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private LanguageSystem _language = default!;
 
     public override void Initialize()
     {

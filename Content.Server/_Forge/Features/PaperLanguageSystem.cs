@@ -13,7 +13,7 @@ namespace Content.Server._Forge.Features;
 
 public sealed partial class PaperLanguageSystem : EntitySystem
 {
-    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private LanguageSystem _language = default!;
 
     public override void Initialize()
     {

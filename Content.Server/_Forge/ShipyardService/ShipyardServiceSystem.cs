@@ -37,26 +37,26 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._Forge.ShipyardService;
 
-public sealed class ShipyardServiceSystem : EntitySystem
+public sealed partial class ShipyardServiceSystem : EntitySystem
 {
-    [Dependency] private readonly BankSystem _bank = default!;
-    [Dependency] private readonly ConstructionSystem _construction = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PricingSystem _pricing = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ShipRepairSystem _shipRepair = default!;
-    [Dependency] private readonly StackSystem _stacks = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ITileDefinitionManager _tiles = default!;
+    [Dependency] private BankSystem _bank = default!;
+    [Dependency] private ConstructionSystem _construction = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private PricingSystem _pricing = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StationSystem _station = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ShipRepairSystem _shipRepair = default!;
+    [Dependency] private StackSystem _stacks = default!;
+    [Dependency] private TagSystem _tags = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private ITileDefinitionManager _tiles = default!;
 
     private static readonly ProtoId<TagPrototype> WallT1Tag = "WallT1";
     private static readonly ProtoId<TagPrototype> WallT2Tag = "WallT2";

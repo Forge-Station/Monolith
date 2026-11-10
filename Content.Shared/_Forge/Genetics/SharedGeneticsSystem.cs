@@ -3,9 +3,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Forge.Genetics;
 
-public abstract class SharedGeneticsSystem : EntitySystem
+public abstract partial class SharedGeneticsSystem : EntitySystem
 {
-    [Dependency] protected readonly IPrototypeManager Prototypes = default!;
+    [Dependency] protected IPrototypeManager Prototypes = default!;
 
     public bool TryGetGene(EntityUid uid, string geneId, out GeneState state, GenomeComponent? genome = null)
     {

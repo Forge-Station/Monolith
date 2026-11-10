@@ -13,7 +13,7 @@ namespace Content.Client._Forge.Company.UI;
 [GenerateTypedNameReferences]
 public sealed partial class CompanySelectControl : BoxContainer
 {
-    [Dependency] private readonly CompanyManager _companyManager = default!;
+    [Dependency] private CompanyManager _companyManager = default!;
     public event Action<string>? OnCompanySelected;
 
     private List<CompanyPrototype> _companies = new();

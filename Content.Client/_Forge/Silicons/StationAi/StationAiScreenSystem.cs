@@ -9,9 +9,9 @@ namespace Content.Client._Forge.Silicons.StationAi;
 
 public sealed class StationAiScreenSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IResourceCache _resources = default!;
-    [Dependency] private readonly SpriteSystem _sprites = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IResourceCache _resources = default!;
+    [Dependency] private SpriteSystem _sprites = default!;
 
     public override void Initialize()
     {

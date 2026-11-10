@@ -33,17 +33,17 @@ public readonly record struct JobReassignmentData(
     HashSet<ProtoId<AccessLevelPrototype>> AccessTags,
     HashSet<ProtoId<DepartmentPrototype>> Departments);
 
-public sealed class JobReassignmentSystem : EntitySystem
+public sealed partial class JobReassignmentSystem : EntitySystem
 {
-    [Dependency] private readonly AccessSystem _access = default!;
-    [Dependency] private readonly IdCardSystem _idCard = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playtime = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly JobSystem _jobs = default!;
-    [Dependency] private readonly StationRecordsSystem _record = default!;
-    [Dependency] private readonly SharedSubdermalImplantSystem _implant = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private AccessSystem _access = default!;
+    [Dependency] private IdCardSystem _idCard = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private PlayTimeTrackingManager _playtime = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private JobSystem _jobs = default!;
+    [Dependency] private StationRecordsSystem _record = default!;
+    [Dependency] private SharedSubdermalImplantSystem _implant = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
 
     public bool TryResolveJobData(ProtoId<JobPrototype> jobId, out JobReassignmentData data)
     {

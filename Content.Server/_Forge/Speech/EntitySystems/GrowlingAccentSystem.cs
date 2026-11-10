@@ -6,9 +6,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Forge.Speech.EntitySystems;
 
-public sealed class GrowlingAccentSystem : EntitySystem
+public sealed partial class GrowlingAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

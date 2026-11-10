@@ -6,11 +6,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._Forge.Genetics;
 
-public sealed class GeneticVisualsOverlay : Robust.Client.Graphics.Overlay
+public sealed partial class GeneticVisualsOverlay : Robust.Client.Graphics.Overlay
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entities = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
 

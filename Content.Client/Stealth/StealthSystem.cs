@@ -10,9 +10,11 @@ namespace Content.Client.Stealth;
 
 public sealed partial class StealthSystem : SharedStealthSystem
 {
+    private const string StealthPostShaderId = "Stealth";
+
     [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
-    [Dependency] private SpriteSystem _sprite = default!; // WOLFGATE: post-shader flags are set through SpriteSystem since engine 291
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private ShaderInstance _shader = default!;
 

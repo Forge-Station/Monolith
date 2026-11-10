@@ -7,11 +7,11 @@ using System.Numerics;
 
 namespace Content.Client._Forge.Genetics;
 
-public sealed class GeneticVisualsSystem : EntitySystem
+public sealed partial class GeneticVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlays = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly SpriteSystem _sprites = default!;
+    [Dependency] private IOverlayManager _overlays = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private SpriteSystem _sprites = default!;
 
     private GeneticVisualsOverlay _overlay = default!;
 

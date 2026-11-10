@@ -23,16 +23,16 @@ namespace Content.Client.RCD;
 /// <summary>
 /// System for handling structure ghost placement in places where RCD can create objects.
 /// </summary>
-public sealed class RCDConstructionGhostSystem : EntitySystem
+public sealed partial class RCDConstructionGhostSystem : EntitySystem
 {
     private const string PlacementMode = nameof(AlignRCDConstruction);
     private const string AtmosPipePlacementMode = nameof(AlignAtmosPipeLayers);
 
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPlacementManager _placementManager = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
-    [Dependency] private readonly RCDSystem _rcdSystem = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPlacementManager _placementManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
+    [Dependency] private RCDSystem _rcdSystem = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
 
     private Direction _placementDirection;
     private bool _useMirrorPrototype;

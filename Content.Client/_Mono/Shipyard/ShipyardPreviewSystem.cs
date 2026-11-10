@@ -18,15 +18,15 @@ namespace Content.Client._Mono.Shipyard;
 /// <summary>
 /// This handles spawning client-side grid and getting data from it.
 /// </summary>
-public sealed class ShipyardPreviewSystem : SharedShipyardPreviewSystem
+public sealed partial class ShipyardPreviewSystem : SharedShipyardPreviewSystem
 {
-    [Dependency] private readonly MapSystem _map = default!;
-    [Dependency] private readonly MapLoaderSystem _loader = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
-    [Dependency] private readonly TransformSystem _xform = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly IconSmoothSystem _iconSmooth = default!;
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private MapLoaderSystem _loader = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private TransformSystem _xform = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private IconSmoothSystem _iconSmooth = default!;
+    [Dependency] private AppearanceSystem _appearance = default!;
 
     public Entity<MapGridComponent>? CurrentGrid;
 

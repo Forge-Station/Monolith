@@ -197,6 +197,20 @@ public struct PersonalShieldRuntime
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class PersonalShieldVisuals
 {
+    [DataField] public Color Color = Color.FromHex("#00AAFF").WithAlpha(0.95f);
+    [DataField] public float Brightness = 1.0f;
+    [DataField] public float MinimumBrightness = 0.25f;
+    [DataField] public float PixelGrid = 96f;
+    [DataField] public float HexDensity = 4.0f;
+    [DataField] public float Scale = 2.2f;
+    [DataField] public float CoreFade = 0.85f;
+    [DataField] public float FillLevel = 0.08f;
+    [DataField] public float LineLevel = 0.50f;
+    [DataField] public float RimLevel = 0.75f;
+    [DataField] public float AlphaBands = 6f;
+    [DataField] public float BreathDepth = 0.08f;
+    [DataField] public Vector2 FormOrigin = new(0f, 0f);
     [DataField] public float DamageFlareTime = 0.5f;
+    [DataField] public float ShardScale = 5f;
     [DataField] public float ShatterTime = 1.0f;
 }

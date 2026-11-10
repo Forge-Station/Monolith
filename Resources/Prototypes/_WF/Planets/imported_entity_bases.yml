@@ -500,6 +500,20 @@
 
 - type: entity
   parent: BaseFlora
+  id: GoonMushrooms
+  suffix: mushrooms
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms_goonstation.rsi
+    state: mushroom7
+    offset: "0,0"
+    layers:
+    - state: mushroom7
+
+- type: entity
+  parent: BaseFlora
   id: GoonMushroomsType1
   abstract: true
   categories: [ HideSpawnMenu ]

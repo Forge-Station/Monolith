@@ -31,6 +31,14 @@ public static class BoundKeyHelper
 
     public static bool TryGetShortKeyName(BoundKeyFunction keyFunction, [NotNullWhen(true)] out string? name)
     {
+        // A menu button with no key (lore book, crew setup) still receives input-mode changes.
+        // Looking up a default function hashes a null name and crashes.
+        if (string.IsNullOrEmpty(keyFunction.FunctionName))
+        {
+            name = null;
+            return false;
+        }
+
         if (IoCManager.Resolve<IInputManager>().TryGetKeyBinding(keyFunction, out var binding))
         {
             // can't possibly fit a modifier key in the top button, so omit it

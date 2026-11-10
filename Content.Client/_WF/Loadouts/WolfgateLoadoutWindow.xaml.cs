@@ -1,7 +1,6 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Numerics;
-using Content.Client._Mono.MonoCoins;
 using Content.Client._WF.Gags;
 using Content.Client._WF.Stylesheets;
 using Content.Client.UserInterface.Controls;
@@ -37,8 +36,6 @@ public sealed partial class WolfgateLoadoutWindow : FancyWindow
 
     /// <summary>Group last open for each role, so reopening the window lands where the player left it.</summary>
     private static readonly ConcurrentDictionary<string, string> LastGroup = new();
-
-    [Dependency] private MonoCoinsManager _coins = default!;
 
     public event Action<string>? OnNameChanged;
     public event Action<ProtoId<LoadoutGroupPrototype>, ProtoId<LoadoutPrototype>>? OnLoadoutPressed;
@@ -129,7 +126,6 @@ public sealed partial class WolfgateLoadoutWindow : FancyWindow
         GridScroll.OnResized += UpdateGrid;
         Grid.OnResized += UpdateGrid;
 
-        _coins.BalanceUpdated += OnBalanceUpdated;
         OnClose += Cleanup;
 
         if (Catalog.Groups.Count == 0)
@@ -225,15 +221,10 @@ public sealed partial class WolfgateLoadoutWindow : FancyWindow
         UpdateDetail();
     }
 
-    /// <summary>What the server pays from at spawn: the character's balance plus account savings.</summary>
+    /// <summary>What the server pays from at spawn: the character's bank balance. MonoCoins are disabled.</summary>
     private long Balance()
     {
-        return Profile.BankBalance + Math.Max(0, _coins.GetLastKnownBalance());
-    }
-
-    private void OnBalanceUpdated(long balance)
-    {
-        Sync();
+        return Profile.BankBalance;
     }
 
     #region Selecting
@@ -554,8 +545,7 @@ public sealed partial class WolfgateLoadoutWindow : FancyWindow
         }
 
         var breakdown = Loc.GetString("frontier-loadout-balance",
-            ("balance", BankSystemExtensions.ToSpesoString(Profile.BankBalance)),
-            ("savings", BankSystemExtensions.ToSpesoString(Math.Max(0, _coins.GetLastKnownBalance()))));
+            ("balance", BankSystemExtensions.ToSpesoString(Profile.BankBalance)));
         BudgetBox.ToolTip = $"{Loc.GetString("wf-loadout-budget-tooltip")}\n{breakdown}";
 
         PickLink.Visible = needs > 0;
@@ -708,7 +698,6 @@ public sealed partial class WolfgateLoadoutWindow : FancyWindow
             return;
 
         _cleaned = true;
-        _coins.BalanceUpdated -= OnBalanceUpdated;
         _icons.Clear();
     }
 

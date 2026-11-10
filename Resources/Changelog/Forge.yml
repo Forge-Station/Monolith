@@ -370,3 +370,12 @@ Entries:
   id: 28
   time: '2026-11-08T14:43:51.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/559
+- author: teasum
+  changes:
+    - type: Fix
+      message: портировал чистку варнингов от SpriteComponent от Tayrtahn
+    - type: Fix
+      message: почистил другие варнинги
+  id: 29
+  time: '2026-11-10T10:53:19.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/558

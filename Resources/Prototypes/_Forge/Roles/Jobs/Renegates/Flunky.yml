@@ -17,10 +17,10 @@
   assignedNationality: FreeColonies
   canBeAntag: false
   setPreference: true
-  access:
-  - Renegate
   accessGroups:
-  - GeneralRenegateAccess
+    - BaseAccess
+    - BaseAccessSecurity
+    - GeneralRenegateAccess
   special:
   - !type:AddImplantSpecial
     implants: [ RenegadeTrackingImplant ]

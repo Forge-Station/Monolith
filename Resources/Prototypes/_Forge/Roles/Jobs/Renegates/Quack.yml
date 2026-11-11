@@ -20,9 +20,9 @@
   assignedNationality: FreeColonies
   canBeAntag: false
   setPreference: true
-  access:
-  - Renegate
   accessGroups:
+  - BaseAccess
+  - BaseAccessSecurity
   - GeneralRenegateAccess
   special:
   - !type:AddImplantSpecial

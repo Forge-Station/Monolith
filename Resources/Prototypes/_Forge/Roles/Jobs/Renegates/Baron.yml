@@ -26,10 +26,10 @@
   assignedNationality: FreeColonies
   canBeAntag: false
   setPreference: true
-  access:
-  - RenegateOfficer
-  - RenegateSecApartment
   accessGroups:
+  - BaseAccess
+  - BaseAccessSecurity
+  - GeneralRenegateAccess
   - CommandRenegateAccess
   special:
   - !type:AddImplantSpecial

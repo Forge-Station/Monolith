@@ -25,5 +25,6 @@
 - type: accessGroup
   id: CommandRenegateAccess
   tags:
-  - Renegate
   - RenegateOfficer
+  - RenegateSecApartment
+  - TurretCommandRenegate

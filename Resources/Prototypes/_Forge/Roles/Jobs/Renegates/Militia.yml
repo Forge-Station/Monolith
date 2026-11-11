@@ -17,10 +17,10 @@
   displayWeight: 10
   assignedCompany: Renegates
   canBeAntag: false
-  access:
-  - Renegate
   accessGroups:
-  - GeneralRenegateAccess
+    - BaseAccess
+    - BaseAccessSecurity
+    - GeneralRenegateAccess
   special:
   - !type:AddImplantSpecial
     implants: [ RenegadeTrackingImplant ]

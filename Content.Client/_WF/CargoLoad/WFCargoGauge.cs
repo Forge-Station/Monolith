@@ -9,7 +9,7 @@ namespace Content.Client._WF.CargoLoad;
 /// Helm strip showing the tonnes aboard against the load where thrust bottoms out, coloured by how much thrust is lost.
 /// The tooltip gives the thrust cut, FTL spool and stored materials. Hidden while the ship carries nothing.
 /// </summary>
-public sealed class WFCargoGauge : BoxContainer
+public sealed partial class WFCargoGauge : BoxContainer
 {
     [Dependency] private IEntityManager _entities = default!;
 

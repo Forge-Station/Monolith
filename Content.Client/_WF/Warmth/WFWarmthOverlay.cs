@@ -8,7 +8,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._WF.Warmth;
 
 /// <summary>Frost creeping in from the screen's edges while the cold warns the local body, a heat shimmer while heat does.</summary>
-public sealed class WFWarmthOverlay : Overlay
+public sealed partial class WFWarmthOverlay : Overlay
 {
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private IPlayerManager _player = default!;

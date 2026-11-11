@@ -6,7 +6,7 @@ namespace Content.Shared._HL.Silicons.Synths.Battery;
 
 public sealed partial class SharedSynthBatteryAlertSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
 
     public override void Initialize()
     {

@@ -12,7 +12,7 @@ namespace Content.Shared._WF.Wolfmed.Consciousness;
 /// <summary>The Wolfmed half of Onyx's <see cref="PainSystem"/>: one pain number per body.</summary>
 // A body's pain is min(soft cap, Σ parts), suppression is shared out once across the parts, and the pain shock reads
 // its lines from CVars. Adrenaline does not lower pain; it speeds the crawl and lifts the Downed do-after penalty.
-public sealed class WolfmedBodyPainSystem : EntitySystem
+public sealed partial class WolfmedBodyPainSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _timing = default!;

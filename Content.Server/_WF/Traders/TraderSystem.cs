@@ -39,7 +39,6 @@ using Content.Shared.Item;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Nutrition.Components;
 using Content.Shared.Nyanotrasen.Item.PseudoItem;
 using Content.Shared.Paper;
 using Content.Shared.Placeable;

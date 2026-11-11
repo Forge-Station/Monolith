@@ -25,7 +25,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// Shared rather than server-only because the blur is contributed through <see cref="GetBlurEvent"/>, which
 /// the client re-raises whenever eyewear changes; the state changes themselves are server-gated.
 /// </remarks>
-public sealed class WolfmedConcussionSystem : EntitySystem
+public sealed partial class WolfmedConcussionSystem : EntitySystem
 {
     /// <summary>Recovery is applied on a slow tick; nothing here needs frame resolution.</summary>
     private const float TickSeconds = 1f;

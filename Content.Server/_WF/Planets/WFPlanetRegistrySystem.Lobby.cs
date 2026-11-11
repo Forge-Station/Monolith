@@ -83,7 +83,7 @@ public sealed partial class WFPlanetRegistrySystem
         foreach (var ruleId in preset.Rules)
         {
             if (!_proto.TryIndex<EntityPrototype>(ruleId, out var rule)
-                || !rule.TryGetComponent<StarSystemRuleComponent>(out var starSystem, _factory)
+                || !rule.TryComp<StarSystemRuleComponent>(out var starSystem, _factory)
                 || !_proto.TryIndex(starSystem.System, out var system))
                 continue;
 

@@ -279,7 +279,7 @@ public sealed class WFCodaHazardSystem : EntitySystem
         for (var attempt = 0; attempt < targets * 6 && hit < targets; attempt++)
         {
             var tile = _random.Pick(tiles);
-            var anchored = _maps.GetAnchoredEntitiesEnumerator(grid.Owner, grid.Comp, tile.GridIndices);
+            var anchored = _maps.GetAnchoredEntities(grid.Owner, grid.Comp, tile.GridIndices);
             while (anchored.MoveNext(out var uid))
             {
                 if (HasComp<MobStateComponent>(uid) || HasComp<WFLatticeAnchorComponent>(uid) || !HasComp<DamageableComponent>(uid))

@@ -15,7 +15,7 @@ namespace Content.Client._WF.GroundCover;
 /// Tread marks in snow cover, laid on this client from the vehicles it sees move: two lines along the hull's path. They
 /// fade with time, fill in under fresh snow, and go when the snow under them is pressed flat, shoveled or melted.
 /// </summary>
-public sealed class WFSnowTracksSystem : EntitySystem
+public sealed partial class WFSnowTracksSystem : EntitySystem
 {
     [Dependency] private WFGroundCoverSystem _cover = default!;
     [Dependency] private SharedMapSystem _map = default!;

@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._WF.Wolfmed.Wounds;
 
 /// <summary>Bookkeeping for objects stuck in wounds: what is in a part, and refusing treatment until it is out.</summary>
-public sealed class WolfmedEmbeddedObjectSystem : EntitySystem
+public sealed partial class WolfmedEmbeddedObjectSystem : EntitySystem
 {
     [Dependency] private WoundSystem _wounds = default!;
 

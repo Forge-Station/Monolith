@@ -25,7 +25,7 @@ namespace Content.Shared._WF.ArmorSpecialization;
 /// assist, rad sink, wildlife padding, haul frame, blast liner, the mime's vow, suit thrusters, EMP hardening and
 /// decon coating.
 /// </summary>
-public sealed class WFCivilianSpecializationSystem : EntitySystem
+public sealed partial class WFCivilianSpecializationSystem : EntitySystem
 {
     private const string Radiation = "Radiation";
 

@@ -211,7 +211,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
         // WOLFGATE END
 
-        if (modifiedDamage is not null && (EntityManager.EntityExists(component.Shooter) || EntityManager.EntityExists(component.Weapon)))
+        if (modifiedDamage is not null && (Exists(component.Shooter) || Exists(component.Weapon)))
         {
             if (modifiedDamage.AnyPositive() && !deleted)
             {
@@ -219,7 +219,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
                 _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, damageFilter);
             }
 
-            var shooterOrWeapon = EntityManager.EntityExists(component.Shooter) ? component.Shooter!.Value : component.Weapon!.Value;
+            var shooterOrWeapon = Exists(component.Shooter) ? component.Shooter!.Value : component.Weapon!.Value;
 
             var projectileName = ToPrettyString(uid);
             var shooterName = ToPrettyString(shooterOrWeapon);
@@ -302,7 +302,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
                 continue;
 
             // Check if entities still exist
-            if (!EntityManager.EntityExists(check.Uid) || !EntityManager.EntityExists(check.Target))
+            if (!Exists(check.Uid) || !Exists(check.Target))
                 continue;
 
             collisionChecks.Add(check);
@@ -362,7 +362,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     public bool CheckShieldCollision(EntityUid uid, ProjectileComponent component, EntityUid target)
     {
         // Check if projectile entity still exists (might have been deleted during processing)
-        if (!EntityManager.EntityExists(uid) || !EntityManager.EntityExists(target))
+        if (!Exists(uid) || !Exists(target))
             return false;
 
         // Raise event to check if any shield system wants to prevent collision

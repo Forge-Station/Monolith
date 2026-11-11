@@ -80,7 +80,7 @@ public sealed partial class WFPlanetPoiSystem
             for (var y = -VehicleClearance; y <= VehicleClearance; y++)
             {
                 var near = tile + new Vector2i(x, y);
-                if (_maps.GetTileRef(ground, grid, near).Tile.IsEmpty || _maps.GetAnchoredEntitiesEnumerator(ground, grid, near).MoveNext(out _))
+                if (_maps.GetTileRef(ground, grid, near).Tile.IsEmpty || _maps.GetAnchoredEntities(ground, grid, near).MoveNext(out _))
                     return false;
             }
             return true;

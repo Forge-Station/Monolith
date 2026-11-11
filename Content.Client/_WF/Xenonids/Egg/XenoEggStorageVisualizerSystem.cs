@@ -13,7 +13,7 @@ public sealed partial class XenoEggStorageVisualizerSystem : VisualizerSystem<Xe
         if (sprite == null || !AppearanceSystem.TryGetData(uid, XenoEggStorageVisuals.Number, out int eggs))
             return;
 
-        if (!sprite.LayerMapTryGet(XenoEggStorageVisualLayers.Base, out var layer))
+        if (!SpriteSystem.LayerMapTryGet((uid, sprite), XenoEggStorageVisualLayers.Base, out var layer, false))
             return;
 
         string layerState = "eggsac_";
@@ -29,11 +29,11 @@ public sealed partial class XenoEggStorageVisualizerSystem : VisualizerSystem<Xe
         if (AppearanceSystem.TryGetData(uid, XenoEggStorageVisuals.Active, out bool active) && active)
             layerState += "_active";
 
-        sprite.LayerSetState(layer, layerState);
+        SpriteSystem.LayerSetRsiState((uid, sprite), layer, layerState);
 
         if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Dead, out bool dead) && dead)
-            sprite.LayerSetVisible(layer, false);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, false);
         else
-            sprite.LayerSetVisible(layer, true);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, true);
     }
 }

@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._WF.Wolfmed.Compat;
 
 /// <summary>Onyx-shaped DamageableSystem API over Wolfgate's older one. Vendored _Onyx files depend on this, never on DamageableSystem directly.</summary>
-public sealed class WolfmedDamageableSystem : EntitySystem
+public sealed partial class WolfmedDamageableSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

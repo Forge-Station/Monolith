@@ -8,6 +8,8 @@ using System.Numerics;
 using Content.Shared._Mono.Traits.Physical;
 using Robust.Shared.Map;
 using Content.Shared.Standing;
+using Content.Server._WF.Augments; // WOLFGATE(Augments)
+using Content.Shared._WF.Augments; // WOLFGATE(Augments)
 
 namespace Content.Server._Mono.Traits.Physical;
 
@@ -17,6 +19,7 @@ public sealed partial class BionicLegsSystem : EntitySystem
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private WFAugmentSystem _wfAugments = default!; // WOLFGATE(Augments)
 
     public override void Initialize()
     {
@@ -64,6 +67,8 @@ public sealed partial class BionicLegsSystem : EntitySystem
                     SpawnAndReplace("SpeedRightLeg", torso, "right leg");
             }
         }
+
+        _wfAugments.StyleTraitLimbs(ent, WFAugmentSlot.LeftLeg, WFAugmentSlot.RightLeg); // WOLFGATE(Augments): drawn to the species' own leg shape
     }
 
     private void SpawnAndReplace(string partProtoId, EntityUid parentEntity, string slotId)

@@ -1,0 +1,181 @@
+# Frontier map machines and placed objects.
+# Genetic database, thermobath and the safety-deposit console have no gameplay
+# components in this repo, so they are visual stand-ins of the Wolfgate sprites.
+# Luvvits food prototypes are not ported, so the vendor starts empty.
+
+- type: entity
+  id: GeneticDatabaseServer
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: genetic database
+  description: Stores genetic scans of the crew so they can be cloned, wherever they fell.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/server.rsi
+    layers:
+    - state: server
+    - state: variant-crew
+    - state: server_o
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+
+- type: entity
+  parent: [ BaseMachinePowered, SmallConstructibleMachine ]
+  id: MachineThermobath
+  name: thermobath
+  description: A precision-controlled oil bath capable of both heating and cooling beakers.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/thermobath.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    state: base
+
+- type: entity
+  id: SafetyDepositConsole
+  name: safety deposit box console
+  description: A console for purchasing and managing safety deposit boxes.
+  parent: BaseStructure
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _WF/SafetyDepositBox/Structures/Machines/atm/depositatm.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: icon
+    - map: ["computerLayerScreen"]
+      state: unshaded
+
+- type: entity
+  id: ShieldGeneratorPOIBio
+  parent: ShieldGeneratorPOI
+  name: S-243 "Biodome" Biological Molecular Accelerator
+  description: A very expensive, bulky and specialized device that detects and excites foreign DNA molecules caught inside its radius. In addition to its biological defense, this device has also been retrofitted with a regular shield generator.
+  suffix: POI ONLY
+  components:
+  - type: ShipShieldEmitter
+    damageLimit: 150000
+    healPerSecond: 650
+    damageExp: 1
+    baseDraw: 80000
+    maxDraw: 150000
+    unpoweredBonus: 7
+    powerModifier: 0.25
+    damageOverloadTimePunishment: 65
+    shieldColor: "#50C878"
+    collisionResistanceMultiplier: 0.0
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/fobshield.rsi
+    snapCardinals: true
+    layers:
+    - state: fobshield
+    - state: fobshield_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#50C878"
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#50C878"
+  - type: FixtureDamageDealer
+    collisionMask: 65
+    damage:
+      types:
+        Heat: 25
+    whitelist:
+      tags:
+        - Chimera
+      components:
+        - Xeno
+
+- type: entity
+  parent: SecurityTechFab
+  id: SecurityTechFabCaelestinus
+  name: caelestinus security techfab
+  description: A techfab used by members of the Caelestinus Security Detachment.
+
+- type: entity
+  parent: LockerParamedic
+  id: LockerATU
+  name: ATU wardrobe locker
+  components:
+  - type: AccessReader
+    access: [["Medical"]]
+  - type: StorageFill
+    contents:
+    - id: ClothingUniformJumpsuitATU
+      amount: 2
+    - id: ClothingShoesColorBlack
+    - id: ClothingBeltMedicalEMTFilled
+    - id: ClothingBeltMedicalFilled
+    - id: ClothingHeadHatBeretMedic
+      amount: 2
+    - id: ClothingUniformJumpskirtTAF
+    - id: ClothingShoesColorWhite
+
+- type: vendingMachineInventory
+  id: WFLuvvitsInventory
+  startingInventory: {}
+
+- type: entity
+  parent: VendingMachine
+  id: WFVendingMachineLuvvits
+  components:
+  - type: VendingMachine
+    pack: WFLuvvitsInventory
+    dispenseOnHitChance: 0.25
+    dispenseOnHitThreshold: 2
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: Sprite
+    sprite: _WF/BritishFood/luvvits.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#FA9632"
+
+- type: entity
+  parent: BasePlushieMoff
+  id: WFPlushieMedMoth
+  name: med moth plushie
+  description: One of the most legendary doctors this side of the milky way. Now in plushie form to watch over you and your medbay.
+  components:
+  - type: Sprite
+    sprite: _WF/Plushies/Objects/Fun/toys.rsi
+    state: plushie_medmoth
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFMeridianClothingAccessoryDogtag
+  components:
+  - type: Sprite
+    sprite: _WF/MeridianClothing/Neck/dogtag.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/MeridianClothing/Neck/dogtag.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: WFMeridianClothingHeadCostumeTvHead
+  components:
+  - type: Sprite
+    sprite: _WF/MeridianClothing/Head/costume_tv_head.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/MeridianClothing/Head/costume_tv_head.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: Head
+      FacialHair: Head
+      Snout: Head
+  - type: IdentityBlocker

@@ -2,7 +2,6 @@ using System.Threading;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Storage;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Medical.BiomassReclaimer
 {

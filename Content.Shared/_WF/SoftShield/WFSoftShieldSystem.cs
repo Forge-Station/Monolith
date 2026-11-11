@@ -17,7 +17,7 @@ namespace Content.Shared._WF.SoftShield;
 /// Soft shields: dampens the shield's damage group at the armour step, so a hit lands once and burns reach the
 /// suit's armour untouched, and refuses bleeds while the field is up.
 /// </summary>
-public sealed class WFSoftShieldSystem : EntitySystem
+public sealed partial class WFSoftShieldSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private InventorySystem _inventory = default!;

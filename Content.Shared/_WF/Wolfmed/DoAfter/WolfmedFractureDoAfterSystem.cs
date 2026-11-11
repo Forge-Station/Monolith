@@ -4,7 +4,7 @@ using Content.Shared._Onyx.Wounds;
 namespace Content.Shared._WF.Wolfmed.DoAfter;
 
 /// <summary>Feeds Onyx's fracture manipulation multiplier into Wolfgate's do-after delay event.</summary>
-public sealed class WolfmedFractureDoAfterSystem : EntitySystem
+public sealed partial class WolfmedFractureDoAfterSystem : EntitySystem
 {
     [Dependency] private FractureEffectSystem _fractureEffects = default!;
 

@@ -50,7 +50,7 @@ public sealed partial class SalvageExpeditionWindow : FancyWindow,
         _claimed = state.Claimed;
         _cooldown = state.Cooldown;
         _nextOffer = state.NextOffer;
-        Container.DisposeAllChildren();
+        Container.RemoveAllChildren();
 
         for (var i = 0; i < state.Missions.Count; i++)
         {

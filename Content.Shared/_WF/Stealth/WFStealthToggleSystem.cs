@@ -15,7 +15,7 @@ namespace Content.Shared._WF.Stealth;
 /// Switches the stealth a worn item grants on and off from an action, and keeps it in that state on re-equip.
 /// Switching off fades the wearer back into view; switching on fades them out from fully visible.
 /// </summary>
-public sealed class WFStealthToggleSystem : EntitySystem
+public sealed partial class WFStealthToggleSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private InventorySystem _inventory = default!;

@@ -33,7 +33,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
     {
         var protoMan = collection.Resolve<IPrototypeManager>();
         var loadoutSystem = collection.Resolve<IEntityManager>().System<LoadoutSystem>();
-        RestrictionsContainer.DisposeAllChildren();
+        RestrictionsContainer.RemoveAllChildren();
 
         if (_groupProto.MinLimit > 0)
         {
@@ -62,7 +62,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
             });
         }
 
-        LoadoutsContainer.DisposeAllChildren();
+        LoadoutsContainer.RemoveAllChildren();
         // Didn't use options because this is more robust in future.
 
         var selected = loadout.SelectedLoadouts[_groupProto.ID];

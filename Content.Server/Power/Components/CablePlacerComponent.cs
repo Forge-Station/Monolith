@@ -1,5 +1,4 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 using Content.Shared.Power;
 
 namespace Content.Server.Power.Components

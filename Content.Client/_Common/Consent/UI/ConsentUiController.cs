@@ -20,9 +20,9 @@ namespace Content.Client._Common.Consent.UI;
 /// button and the keybind both just open Options there.
 /// </summary>
 [UsedImplicitly]
-public sealed class ConsentUiController : UIController, IOnStateChanged<GameplayState>
+public sealed partial class ConsentUiController : UIController, IOnStateChanged<GameplayState>
 {
-    [Dependency] private readonly IInputManager _input = default!;
+    [Dependency] private IInputManager _input = default!;
 
     private MenuButton? ConsentButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.ConsentButton;
 

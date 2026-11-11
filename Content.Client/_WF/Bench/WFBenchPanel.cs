@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._WF.Bench;
 
 /// <summary>The Bench's tools, shared by the PDA app and the terminal: write a ticket, read the ledger, read and post laws.</summary>
-public sealed class WFBenchPanel : BoxContainer
+public sealed partial class WFBenchPanel : BoxContainer
 {
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;

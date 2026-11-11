@@ -250,7 +250,7 @@ public sealed partial class XenoConstructionGhostSystem : EntitySystem
 
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, snapped);
 
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
             if (TryComp(uid, out XenoStructureUpgradeableComponent? comp) && comp.To != null)

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bookcase",
+      "directions": 4
+    },
+    {
+      "name": "bookcase_empty_alone"
+    },
+    {
+      "name": "bookcase_empty_wall",
+      "directions": 8
+    },
+    {
+      "name": "bookcase_full_alone_button"
+    },
+    {
+      "name": "bookcase_full_wall",
+      "directions": 8
+    }
+  ]
+}

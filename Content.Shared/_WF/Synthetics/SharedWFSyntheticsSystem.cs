@@ -11,7 +11,7 @@ namespace Content.Shared._WF.Synthetics;
 /// it natively; any other species gets it from the character's profile. Everything in this module gates on this and
 /// never on a species or mob prototype.
 /// </summary>
-public abstract class SharedWFSyntheticsSystem : EntitySystem
+public abstract partial class SharedWFSyntheticsSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
 

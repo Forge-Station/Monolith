@@ -38,8 +38,8 @@ public abstract partial class SharedFlashSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
 
-    [Dependency] private readonly EntityQuery<StatusEffectsComponent> _statusEffectsQuery = default!;
-    [Dependency] private readonly EntityQuery<DamagedByFlashingComponent> _damagedByFlashingQuery = default!;
+    [Dependency] private EntityQuery<StatusEffectsComponent> _statusEffectsQuery = default!;
+    [Dependency] private EntityQuery<DamagedByFlashingComponent> _damagedByFlashingQuery = default!;
 
     private HashSet<EntityUid> _entSet = new();
 

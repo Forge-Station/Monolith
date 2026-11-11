@@ -9,7 +9,7 @@ namespace Content.Client._WF.Wolfmed.Overlays;
 /// The screen pass under the synthetic readout: the red phosphor edge tint, the occasional torn slice and the
 /// standby drain. <see cref="WolfmedSyntheticHudSystem"/> owns every value.
 /// </summary>
-public sealed class WolfmedSyntheticScreenOverlay : Overlay
+public sealed partial class WolfmedSyntheticScreenOverlay : Overlay
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IPlayerManager _player = default!;

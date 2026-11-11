@@ -254,7 +254,7 @@ public sealed partial class ExecutionSystem : EntitySystem
 
                 // Get the damage value
                 var prototype = _prototypeManager.Index<EntityPrototype>(cartridge.Prototype);
-                prototype.TryGetComponent<ProjectileComponent>(out var projectileA, _componentFactory); // sloth forgive me
+                prototype.TryComp<ProjectileComponent>(out var projectileA, _componentFactory); // sloth forgive me
                 if (projectileA != null)
                     damage = projectileA.Damage;
 

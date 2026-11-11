@@ -28,7 +28,7 @@ public abstract partial class SharedImplanterSystem : EntitySystem
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
 
-    [Dependency] private readonly EntityQuery<SubdermalImplantComponent> _implantCompQuery = default!;
+    [Dependency] private EntityQuery<SubdermalImplantComponent> _implantCompQuery = default!;
 
     public override void Initialize()
     {
@@ -57,7 +57,7 @@ public abstract partial class SharedImplanterSystem : EntitySystem
 
     private void OnEntInserted(EntityUid uid, ImplanterComponent component, EntInsertedIntoContainerMessage args)
     {
-        var implantData = EntityManager.GetComponent<MetaDataComponent>(args.Entity);
+        var implantData = Comp<MetaDataComponent>(args.Entity);
         component.ImplantData = (implantData.EntityName, implantData.EntityDescription);
     }
 

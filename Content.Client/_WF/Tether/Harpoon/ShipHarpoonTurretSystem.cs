@@ -10,7 +10,7 @@ namespace Content.Client._WF.Tether.Harpoon;
 /// Client half of the harpoon turret. It tells the server where the operator is pointing, throttled, so the
 /// turret swings with the cursor instead of only when it fires.
 /// </summary>
-public sealed class ShipHarpoonTurretSystem : SharedShipHarpoonTurretSystem
+public sealed partial class ShipHarpoonTurretSystem : SharedShipHarpoonTurretSystem
 {
     [Dependency] private IEyeManager _eye = default!;
     [Dependency] private IInputManager _input = default!;

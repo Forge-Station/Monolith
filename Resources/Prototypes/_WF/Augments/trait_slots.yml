@@ -1,0 +1,9 @@
+# Traits that put their own limbs on the body at spawn. A character with one can't take augments in these slots.
+
+- type: wfAugmentTraitSlots
+  id: PrybarProsthetics
+  slots: [ LeftArm, RightArm ]
+
+- type: wfAugmentTraitSlots
+  id: BionicLegs
+  slots: [ LeftLeg, RightLeg ]

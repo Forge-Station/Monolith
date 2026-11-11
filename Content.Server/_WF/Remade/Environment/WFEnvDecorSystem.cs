@@ -237,7 +237,7 @@ public sealed class WFEnvDecorSystem : EntitySystem
             return;
 
         var index = _map.TileIndicesFor(gridUid, grid, tile.Comp.Coordinates);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, index);
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, index);
         while (anchored.MoveNext(out var found))
         {
             if (found is not { } uid)
@@ -271,7 +271,7 @@ public sealed class WFEnvDecorSystem : EntitySystem
         for (var i = 0; i < Cardinals.Length; i++)
         {
             var step = Cardinals[(start + i) % Cardinals.Length];
-            var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, index + step);
+            var anchored = _map.GetAnchoredEntities(gridUid, grid, index + step);
             while (anchored.MoveNext(out var found))
             {
                 if (found is { } uid && _tag.HasTag(uid, WallTag))

@@ -9,7 +9,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// <summary>Maps a hit to a wound other than the default Onyx wound for its damage type.</summary>
 // Rules run in descending Priority; the first whose filters and chance roll pass wins, and evaluation stops there
 // unless it sets Continue. An empty filter matches everything.
-[Prototype("wolfmedWoundRule")]
+[Prototype]
 public sealed partial class WolfmedWoundRulePrototype : IPrototype
 {
     [IdDataField]

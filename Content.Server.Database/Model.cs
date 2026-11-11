@@ -581,11 +581,18 @@ namespace Content.Server.Database
         // WOLFGATE(Biotype): organic or synthetic body, 0 for the species' own.
         [Column("biotype")] public int Biotype { get; set; }
 
+        // WOLFGATE(Augments): augments picked per slot (slot:augment[:style] entries) and priced ones paid for.
+        [Column("augments")] public string Augments { get; set; } = "";
+        [Column("augment_unlocks")] public string AugmentUnlocks { get; set; } = "";
+
         // WOLFGATE(BloodColour): blood and flesh colour as hex, null for the species' own.
         [Column("blood_color")] public string? BloodColor { get; set; }
 
         // WOLFGATE(ChatFont): the wfChatFont prototype id, empty for the default.
         [Column("chat_font")] public string ChatFont { get; set; } = "";
+
+        // WOLFGATE(Voice): the voice settings as JSON, null in rows saved before voices existed.
+        [Column("speech_voice")] public string? SpeechVoice { get; set; }
 
         // WOLFGATE(TypingBubble): the typingIndicator prototype id, null for the species' own.
         [Column("typing_indicator")] public string? TypingIndicator { get; set; }

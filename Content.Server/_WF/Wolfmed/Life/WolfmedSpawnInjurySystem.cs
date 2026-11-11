@@ -82,7 +82,7 @@ public sealed class WolfmedSpawnInjurySystem : EntitySystem
     {
         var damage = new DamageSpecifier();
         if (MetaData(body).EntityPrototype is { } prototype &&
-            prototype.TryGetComponent(out DamageableComponent? preset, _factory))
+            prototype.TryComp(out DamageableComponent? preset, _factory))
             damage += preset.Damage;
 
         if (TryComp(body, out WolfmedSpawnInjuryComponent? pending))

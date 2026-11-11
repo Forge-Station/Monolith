@@ -178,7 +178,7 @@ public sealed partial class FireControlWindow
         var body = Column(header, instruments, footer);
         body.Margin = new Thickness(10);
         body.HorizontalExpand = body.VerticalExpand = true;
-        ContentsContainer.DisposeAllChildren();
+        ContentsContainer.RemoveAllChildren();
         ContentsContainer.AddChild(body);
         Install(this);
         OnWeaponSelectionChanged += WfUpdateSelection;

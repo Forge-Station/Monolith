@@ -139,6 +139,16 @@ namespace Content.Server.Preferences.Managers
                     profile = humanoid.WithBankBalance(HumanoidCharacterProfile.DefaultBalance);
             }
 
+            // WOLFGATE(Augments) START: a client save can't unlock augments; new priced ones are bought from the bank here
+            var wfAugmentsSettled = false;
+            if (!authoritative && profile is HumanoidCharacterProfile wfAugmented)
+            {
+                wfAugmentsSettled = SettleAugments(userId, ref wfAugmented,
+                    curPrefs.Characters.GetValueOrDefault(slot) as HumanoidCharacterProfile);
+                profile = wfAugmented;
+            }
+            // WOLFGATE END
+
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
 
             {
@@ -149,6 +159,10 @@ namespace Content.Server.Preferences.Managers
 
             if (ShouldStorePrefs(session.Channel.AuthType))
                 await _db.SaveCharacterSlotAsync(userId, profile, slot);
+
+            // WOLFGATE(Augments): the creator shows the balance, unlocks and dropped augments the save left
+            if (wfAugmentsSettled)
+                ResendPreferences(userId, prefsData.Prefs);
         }
 
         private async void HandleDeleteCharacterMessage(MsgDeleteCharacter message)

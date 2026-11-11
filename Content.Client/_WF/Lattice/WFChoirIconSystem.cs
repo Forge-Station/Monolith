@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._WF.Lattice;
 
 /// <summary>Puts the Choir's mark over a member's head; the icon's own rules decide who sees it.</summary>
-public sealed class WFChoirIconSystem : EntitySystem
+public sealed partial class WFChoirIconSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
 

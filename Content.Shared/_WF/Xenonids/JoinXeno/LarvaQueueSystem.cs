@@ -264,7 +264,7 @@ public sealed partial class LarvaQueueSystem : EntitySystem
         {
             _reservedBurstLarva.Remove(larvaEnt);
 
-            if (!EntityManager.EntityExists(larvaEnt) || _mobState.IsDead(larvaEnt))
+            if (!Exists(larvaEnt) || _mobState.IsDead(larvaEnt))
             {
                 SendOfferExpired(args.SenderSession, larvaDied: true);
                 TryOfferToQueue(offer.Hive.Owner);
@@ -301,7 +301,7 @@ public sealed partial class LarvaQueueSystem : EntitySystem
         if (ghost == null || !HasComp<GhostComponent>(ghost.Value))
             return;
 
-        if (EntityManager.EntityExists(offer.TargetLarva.Value))
+        if (Exists(offer.TargetLarva.Value))
             _follower.StartFollowingEntity(ghost.Value, offer.TargetLarva.Value);
     }
 
@@ -768,7 +768,7 @@ public sealed partial class LarvaQueueSystem : EntitySystem
             }
 
             if (offer.TargetLarva is { } larvaEnt
-                && (!EntityManager.EntityExists(larvaEnt) || _mobState.IsDead(larvaEnt) || !HasComp<LarvaQueuedComponent>(larvaEnt)))
+                && (!Exists(larvaEnt) || _mobState.IsDead(larvaEnt) || !HasComp<LarvaQueuedComponent>(larvaEnt)))
             {
                 entityDiedOffers.Add((userId, larvaEnt));
             }

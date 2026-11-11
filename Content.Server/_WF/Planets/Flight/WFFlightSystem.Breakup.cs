@@ -127,7 +127,7 @@ public sealed partial class WFFlightSystem
         _crashThrusters.WfCaptureCrashThrust(hull);
         BeginSkid(hull);
         var tiles = new HashSet<Vector2i>();
-        var all = _map.GetAllTilesEnumerator(hull, hull.Comp);
+        var all = _map.GetAllTiles(hull, hull.Comp);
         while (all.MoveNext(out var tile))
             tiles.Add(tile.Value.GridIndices);
         var speed = TryComp<PhysicsComponent>(hull, out var body) ? body.LinearVelocity.Length() : 0f;
@@ -159,7 +159,7 @@ public sealed partial class WFFlightSystem
         var machinery = new HashSet<EntityUid>();
         foreach (var index in cut)
         {
-            var anchored = _map.GetAnchoredEntitiesEnumerator(hull, hull.Comp, index);
+            var anchored = _map.GetAnchoredEntities(hull, hull.Comp, index);
             while (anchored.MoveNext(out var uid))
                 if (!HasComp<MobStateComponent>(uid))
                     machinery.Add(uid.Value);

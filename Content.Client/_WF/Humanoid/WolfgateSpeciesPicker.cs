@@ -17,7 +17,7 @@ namespace Content.Client._WF.Humanoid;
 /// its name, a short summary and a link to its guidebook page. Species that vary another species are grouped
 /// on their own translucent panel under the species they vary.
 /// </summary>
-public sealed class WolfgateSpeciesPicker : BoxContainer
+public sealed partial class WolfgateSpeciesPicker : BoxContainer
 {
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;

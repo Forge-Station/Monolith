@@ -7,9 +7,9 @@ using Robust.Shared.Network;
 
 namespace Content.Client._Common.Consent;
 
-public sealed class ClientConsentManager : IClientConsentManager
+public sealed partial class ClientConsentManager : IClientConsentManager
 {
-    [Dependency] private readonly IClientNetManager _netManager = default!;
+    [Dependency] private IClientNetManager _netManager = default!;
 
     private PlayerConsentSettings? _consent;
 

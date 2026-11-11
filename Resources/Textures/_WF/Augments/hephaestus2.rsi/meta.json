@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Meridian Rift at https://github.com/Aphelion-Moon/Meridian-Rift/tree/fdcdc313c1305968dbb344f1e0330cbf4c3e20e3 (modular_nova/master_files/icons/mob/augmentation/hi2ipc.dmi), which carries the art of NovaSector, Skyrat-tg and tgstation. Each leg is cut into a leg and a foot. The digitigrade legs are these legs refit to the outline of robotic_*_leg_digi in modular_nova/modules/digitigrade_cybernetics/icons/digitigrade_parts.dmi. Each layer is trimmed to the outline of Mobs/Species/Human/parts.rsi (_WF/LegStyle/digitigrade_human.rsi for digitigrade legs) so clothing covers it. Each limb is also redrawn onto the outline of every species' and leg style's own limb that differs.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "head",
+      "directions": 4
+    },
+    {
+      "name": "l_arm",
+      "directions": 4
+    },
+    {
+      "name": "l_arm_dionalarm",
+      "directions": 4
+    },
+    {
+      "name": "l_arm_resomilarm",
+      "directions": 4
+    },
+    {
+      "name": "l_arm_synthlarm",
+      "directions": 4
+    },
+    {
+      "name": "l_foot",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_avalilfoot",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_chitinidlfoot",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_digi",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_dionalfoot",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_mothlfoot",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_resomilfoot",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_rodentialfootdigi",
+      "directions": 4
+    },
+    {
+      "name": "l_hand",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_avalilhand",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_chitinidlhand",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_dionalhand",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_felionoidlhand",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_mothlhand",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_resomilhand",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_shadekinlhand",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_thavenlhand",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_voxlhand",
+      "directions": 4
+    },
+    {
+      "name": "l_leg",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_avalilleg",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_digi",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_dionalleg",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_harpylleg",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_protogenlleg",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_resomilleg",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_rodentiallegdigi",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_tajaranllegdigi",
+      "directions": 4
+    },
+    {
+      "name": "r_arm",
+      "directions": 4
+    },
+    {
+      "name": "r_arm_dionararm",
+      "directions": 4
+    },
+    {
+      "name": "r_arm_resomirarm",
+      "directions": 4
+    },
+    {
+      "name": "r_arm_synthrarm",
+      "directions": 4
+    },
+    {
+      "name": "r_foot",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_avalirfoot",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_chitinidrfoot",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_digi",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_dionarfoot",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_mothrfoot",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_resomirfoot",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_rodentiarfootdigi",
+      "directions": 4
+    },
+    {
+      "name": "r_hand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_avalirhand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_chitinidrhand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_dionarhand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_felionoidrhand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_mothrhand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_resomirhand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_shadekinrhand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_thavenrhand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_voxrhand",
+      "directions": 4
+    },
+    {
+      "name": "r_leg",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_avalirleg",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_digi",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_dionarleg",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_harpyrleg",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_protogenrleg",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_resomirleg",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_rodentiarlegdigi",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_tajaranrlegdigi",
+      "directions": 4
+    },
+    {
+      "name": "torso",
+      "directions": 4
+    }
+  ]
+}

@@ -47,7 +47,6 @@ using Content.Shared.Chemistry.Components;
 using static Content.Shared.Configurable.ConfigurationComponent;
 using Robust.Shared.Containers;
 using Content.Shared.Storage.EntitySystems;
-using Content.Shared.Hands.Components;
 using Content.Shared.PDA;
 
 namespace Content.Server.Administration.Systems

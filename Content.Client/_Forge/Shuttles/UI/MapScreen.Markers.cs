@@ -19,7 +19,7 @@ public sealed partial class MapScreen
         {
             if (_lastMapMarkerSignature != 0)
             {
-                MapMarkerList.DisposeAllChildren();
+                MapMarkerList.RemoveAllChildren();
                 MapMarkerCountLabel.Text = Loc.GetString("shuttle-console-marker-count",
                     ("current", 0),
                     ("max", ShuttleNavMarkerComponent.MaxMarkers));
@@ -39,7 +39,7 @@ public sealed partial class MapScreen
             return;
 
         _lastMapMarkerSignature = signature;
-        MapMarkerList.DisposeAllChildren();
+        MapMarkerList.RemoveAllChildren();
         MapMarkerCountLabel.Text = Loc.GetString("shuttle-console-marker-count",
             ("current", markers.Markers.Count),
             ("max", ShuttleNavMarkerComponent.MaxMarkers));

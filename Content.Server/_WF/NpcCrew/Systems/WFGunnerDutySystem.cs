@@ -417,15 +417,15 @@ public sealed partial class WFGunnerDutySystem : EntitySystem
                 continue;
 
             float distance;
-            if (proto.TryGetComponent<HitscanAmmoComponent>(out _, _factory))
+            if (proto.TryComp<HitscanAmmoComponent>(out _, _factory))
             {
-                distance = proto.TryGetComponent<HitscanBasicRaycastComponent>(out var raycast, _factory)
+                distance = proto.TryComp<HitscanBasicRaycastComponent>(out var raycast, _factory)
                     ? raycast.MaxDistance
                     : float.MaxValue;
             }
             else
             {
-                distance = _guns.GetBulletPrototype(proto).TryGetComponent<TimedDespawnComponent>(out var despawn, _factory)
+                distance = _guns.GetBulletPrototype(proto).TryComp<TimedDespawnComponent>(out var despawn, _factory)
                     ? gun.ProjectileSpeedModified * despawn.Lifetime
                     : float.MaxValue;
             }

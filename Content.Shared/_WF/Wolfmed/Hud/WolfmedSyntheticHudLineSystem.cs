@@ -9,7 +9,7 @@ namespace Content.Shared._WF.Wolfmed.Hud;
 /// The data side of the synthetic HUD: the wound-to-readout table, and the escalation tiers the readout
 /// draws at. Both sides of the wire need it, so it lives in shared.
 /// </summary>
-public sealed class WolfmedSyntheticHudLineSystem : EntitySystem
+public sealed partial class WolfmedSyntheticHudLineSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
 

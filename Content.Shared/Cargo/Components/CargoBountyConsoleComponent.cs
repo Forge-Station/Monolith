@@ -2,7 +2,6 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Cargo.Components;
 

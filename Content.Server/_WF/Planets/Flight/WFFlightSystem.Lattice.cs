@@ -27,7 +27,7 @@ public sealed partial class WFFlightSystem
         {
             occupied[uid] = new();
             additions[uid] = new();
-            var tiles = _map.GetAllTilesEnumerator(uid, Comp<MapGridComponent>(uid));
+            var tiles = _map.GetAllTiles(uid, Comp<MapGridComponent>(uid));
             while (tiles.MoveNext(out var tile))
                 occupied[uid].Add(tile.Value.GridIndices);
         }

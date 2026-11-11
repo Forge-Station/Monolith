@@ -9,7 +9,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// (<see cref="WolfmedInfectionSystem.DefaultProfile"/>); the CVars scale what is written here rather than
 /// replacing it, so an admin tunes speed and a downstream server tunes shape.
 /// </summary>
-[Prototype("wolfmedInfectionProfile")]
+[Prototype]
 public sealed partial class WolfmedInfectionProfilePrototype : IPrototype
 {
     [IdDataField]

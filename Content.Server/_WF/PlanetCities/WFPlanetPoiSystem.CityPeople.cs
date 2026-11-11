@@ -1,25 +1,15 @@
 using System.Linq;
 using Content.Shared.Spawners.Components;
 using System.Numerics;
-using Content.Shared.Spawners.Components;
 using System.Threading.Tasks;
-using Content.Shared.Spawners.Components;
 using Content.Server.Spawners.Components;
-using Content.Shared.Spawners.Components;
 using Content.Shared.Doors.Components;
-using Content.Shared.Spawners.Components;
 using Content.Shared._WF.PlanetCities;
-using Content.Shared.Spawners.Components;
 using Robust.Shared.GameObjects;
-using Content.Shared.Spawners.Components;
 using Robust.Shared.Map;
-using Content.Shared.Spawners.Components;
 using Robust.Shared.Map.Components;
-using Content.Shared.Spawners.Components;
 using Robust.Shared.Physics.Components;
-using Content.Shared.Spawners.Components;
 using Robust.Shared.Random;
-using Content.Shared.Spawners.Components;
 
 namespace Content.Server._WF.PlanetPois;
 
@@ -156,7 +146,7 @@ public sealed partial class WFPlanetPoiSystem
         if (_maps.GetTileRef(grid.Owner, grid.Comp, tile).Tile.IsEmpty)
             return true;
 
-        var anchored = _maps.GetAnchoredEntitiesEnumerator(grid.Owner, grid.Comp, tile);
+        var anchored = _maps.GetAnchoredEntities(grid.Owner, grid.Comp, tile);
         while (anchored.MoveNext(out var uid))
         {
             if (TryComp<PhysicsComponent>(uid, out var body) && body.Hard && body.CanCollide || HasComp<DoorComponent>(uid))

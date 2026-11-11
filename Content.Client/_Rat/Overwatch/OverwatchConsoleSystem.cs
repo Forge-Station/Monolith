@@ -14,7 +14,7 @@ namespace Content.Client._Rat.Overwatch;
 /// <summary>
 /// Клиентская система для ретрансляции звуков при наблюдении через камеру Overwatch.
 /// </summary>
-public sealed class OverwatchConsoleSystem : EntitySystem
+public sealed partial class OverwatchConsoleSystem : EntitySystem
 {
     /// <summary>
     /// Максимальное расстояние для проверки звуков (оптимизация производительности).

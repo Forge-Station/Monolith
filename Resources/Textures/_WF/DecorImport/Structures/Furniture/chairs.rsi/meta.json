@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7, Baystation 12 at commit https://github.com/Baystation12/Baystation12/commit/64fcc7090fbf1d9255446154730a57586cec3355, BeeStation at commit https://github.com/BeeStation/BeeStation-Hornet/commit/c10d715d09ebbc501f8c127c55db9cee7f7b9c8d, Citadel Station at commit https://github.com/Citadel-Station-13/Citadel-Station-13/commit/31b47497ab7e3b1c15c67657931ce480f14caed1, CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/d5306e2724d6006e69439d9cf64a2b166fe4ed15, Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22, Nebula at commit https://github.com/NebulaSS13/Nebula/commit/d7a668ec0268164d33a13481e2e5ce307996ff76, Polaris at commit https://github.com/PolarisSS13/Polaris/commit/6cd19fe0dec6b5f18b6b18c3eb36af7bf3359f25, Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3, tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518, VOREStation at commit https://github.com/VOREStation/VOREStation/commit/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88, Yogstation at commit https://github.com/yogstation13/Yogstation/commit/ae2886be95c234202212a3090ee7637173ea2c1d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bay_chair_preview_green",
+      "directions": 4
+    },
+    {
+      "name": "bay_chair_preview_red",
+      "directions": 4
+    },
+    {
+      "name": "bay_chair_preview_teal",
+      "directions": 4
+    },
+    {
+      "name": "bay_chair_preview_yellow",
+      "directions": 4
+    },
+    {
+      "name": "chair_backed",
+      "directions": 4
+    },
+    {
+      "name": "chair_citadel",
+      "directions": 4
+    },
+    {
+      "name": "chair_cmss13",
+      "directions": 4
+    },
+    {
+      "name": "chair_coyote",
+      "directions": 4
+    },
+    {
+      "name": "chair_greyscale",
+      "directions": 4
+    },
+    {
+      "name": "chair_nebula",
+      "directions": 4
+    },
+    {
+      "name": "chair_padding_beige",
+      "directions": 4
+    },
+    {
+      "name": "chair_padding_blue",
+      "directions": 4
+    },
+    {
+      "name": "chair_padding_lime",
+      "directions": 4
+    },
+    {
+      "name": "chair_padding_red",
+      "directions": 4
+    },
+    {
+      "name": "chair_preview_bed",
+      "directions": 4
+    },
+    {
+      "name": "chair_preview_padded_red",
+      "directions": 4
+    },
+    {
+      "name": "chair_preview_padded_teal",
+      "directions": 4
+    },
+    {
+      "name": "chair_preview_padded_yellow",
+      "directions": 4
+    },
+    {
+      "name": "chair_preview_polaris",
+      "directions": 4
+    },
+    {
+      "name": "chair_preview_vore",
+      "directions": 4
+    },
+    {
+      "name": "chair_shiptest",
+      "directions": 4
+    },
+    {
+      "name": "chair_slatted",
+      "directions": 4
+    },
+    {
+      "name": "modern_chair",
+      "directions": 4
+    },
+    {
+      "name": "onestar_chair_grey",
+      "directions": 4
+    },
+    {
+      "name": "onestar_chair_red",
+      "directions": 4
+    },
+    {
+      "name": "plastic_chair_beestation",
+      "directions": 4
+    },
+    {
+      "name": "plastic_chair_shiptest",
+      "directions": 4
+    },
+    {
+      "name": "plastic_chair_tgstation",
+      "directions": 4
+    },
+    {
+      "name": "plastic_chair_yogstation",
+      "directions": 4
+    },
+    {
+      "name": "plywood_chair",
+      "directions": 4
+    }
+  ]
+}

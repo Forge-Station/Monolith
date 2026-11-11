@@ -19,7 +19,7 @@ public sealed partial class WFPlanetPoiSystem
     {
         var chunks = new Dictionary<Vector2i, List<(Vector2i Indices, Tile Tile)>>();
         var count = 0;
-        var tiles = _maps.GetAllTilesEnumerator(source.Owner, source.Comp);
+        var tiles = _maps.GetAllTiles(source.Owner, source.Comp);
 
         while (tiles.MoveNext(out var tileRef))
         {

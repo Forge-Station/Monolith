@@ -58,7 +58,7 @@ public sealed partial class NcStoreLogicSystem
         stackTypeId = null;
         maxCount = 1;
 
-        if (!proto.TryGetComponent<StackComponent>(out var stackComp, _compFactory))
+        if (!proto.TryComp<StackComponent>(out var stackComp, _compFactory))
             return false;
 
         stackTypeId = stackComp.StackTypeId;

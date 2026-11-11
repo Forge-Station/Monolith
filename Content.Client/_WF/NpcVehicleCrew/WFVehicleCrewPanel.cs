@@ -14,7 +14,7 @@ namespace Content.Client._WF.NpcVehicleCrew;
 /// visit or delete the ones already out.
 /// </summary>
 [UsedImplicitly]
-public sealed class WFVehicleCrewPanel : DefaultWindow
+public sealed partial class WFVehicleCrewPanel : DefaultWindow
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

@@ -124,7 +124,7 @@ public sealed class WFVehicleSalvageSystem : EntitySystem
 
         var value = _pricing.GetEstimatedPrice(proto);
         if (TryComp<StackComponent>(uid, out var stack)
-            && proto.TryGetComponent<StackComponent>(out var protoStack, EntityManager.ComponentFactory)
+            && proto.TryComp<StackComponent>(out var protoStack, EntityManager.ComponentFactory)
             && protoStack.Count > 0)
             value *= (double) stack.Count / protoStack.Count;
 

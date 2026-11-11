@@ -728,7 +728,7 @@ WFWindreignCarrierComputer: null
 # WOLFGATE START: Monolith#4816 renamed the WL-01 suit and helmet without a migration
 # 2026-10-08
 ClothingOuterHardsuitMercenaryWarlord: ClothingOuterHardsuitWarlord
-# ClothingHelmetHardsuitMercenaryWarlord: ClothingHelmetHardsuitWarlord  # still spawned as ClothingHelmetHardsuitMercenaryWarlord; ClothingHelmetHardsuitWarlord is not an entity
+ClothingHelmetHardsuitMercenaryWarlord: ClothingHelmetHardsuitWarlord
 # WOLFGATE END
 
 

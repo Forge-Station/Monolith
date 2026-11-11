@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._WF.MilitaryVehicles;
 
 /// <summary>Weapon and turret hardpoints fit military chassis only.</summary>
-public sealed class WFMilitaryHardpointSystem : EntitySystem
+public sealed partial class WFMilitaryHardpointSystem : EntitySystem
 {
     /// <summary>The hardpoint type of turrets, which count as weapons whether or not they carry a gun.</summary>
     public static readonly EntProtoId TurretType = "HardpointTypeTurret";

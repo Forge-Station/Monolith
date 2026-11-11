@@ -14,7 +14,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// <see cref="WolfmedTreatmentAdvice"/> owns the derivation and the coverage test iterates every wound
 /// prototype, so a wound shipped without a procedure fails rather than showing an empty window.
 /// </remarks>
-[Prototype("wolfmedTreatmentProcedure")]
+[Prototype]
 public sealed partial class WolfmedTreatmentProcedurePrototype : IPrototype
 {
     [IdDataField]

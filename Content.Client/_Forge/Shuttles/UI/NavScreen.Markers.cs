@@ -34,7 +34,7 @@ public sealed partial class NavScreen
         {
             if (_lastMarkerSignature != 0)
             {
-                MarkerList.DisposeAllChildren();
+                MarkerList.RemoveAllChildren();
                 MarkerCountLabel.Text = Loc.GetString("shuttle-console-marker-count",
                     ("current", 0),
                     ("max", ShuttleNavMarkerComponent.MaxMarkers));
@@ -54,7 +54,7 @@ public sealed partial class NavScreen
             return;
 
         _lastMarkerSignature = signature;
-        MarkerList.DisposeAllChildren();
+        MarkerList.RemoveAllChildren();
         MarkerCountLabel.Text = Loc.GetString("shuttle-console-marker-count",
             ("current", markers.Markers.Count),
             ("max", ShuttleNavMarkerComponent.MaxMarkers));

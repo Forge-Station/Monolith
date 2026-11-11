@@ -18,7 +18,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// server-gated, because wound severity is. Parts carry <see cref="WolfmedOverheatingComponent"/> as the
 /// index, following <see cref="WolfmedChemicalBurnSystem"/>.
 /// </remarks>
-public sealed class WolfmedOverheatingSystem : EntitySystem
+public sealed partial class WolfmedOverheatingSystem : EntitySystem
 {
     /// <summary>Seconds between cooling steps. Cooling is measured in minutes; this only has to be smooth.</summary>
     private const float TickSeconds = 2f;

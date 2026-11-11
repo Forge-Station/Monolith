@@ -14,7 +14,7 @@ namespace Content.Client._WF.Lattice;
 /// Regrades the space background by how far out of the Lattice's hold the view is: the Slack drains it, Adrift turns
 /// it sick and swimming, Untethered red and dark, and the Deep nearly black, with veins, a heartbeat and things looking back.
 /// </summary>
-public sealed class WFLatticeSkyOverlay : Overlay
+public sealed partial class WFLatticeSkyOverlay : Overlay
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IEntityManager _ent = default!;

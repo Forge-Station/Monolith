@@ -24,6 +24,16 @@ source)` raises a cancellable `WFSectorClaimAttemptEvent` first, so protection r
 `Release(source)` frees every cell that source alone supported; `Free(map, cell)` frees one. A claim on a cell with
 another owner fails (drivers contest explicitly).
 
+**Beacons.** `WFSectorBeaconSystem` is a driver. A beacon anchored on a grid in the sector claims the one cell it
+stands in for the activator's company (`wfSectorFaction` with `playerBeacons`, one per company, colour and name taken
+from the company). The flatpack is the `WFSectorBeacons` technology, printed at a protolathe or an engineering
+techfab. A cell that already contains an anchored beacon refuses another until that beacon is gone. A player beacon
+also refuses a cell another faction holds, so NPC campaign territory and admin beacons are not repainted. Player
+beacons cancel damage unless a non-admin player dealt it (a carried gun resolves to its holder; a mounted gun counts
+when a living non-admin player is aboard its grid). `WFSectorBeaconImmortal` cancels all damage and only an admin, or
+`autoActivate` with a `company` set, can switch it on. The beacon is the claim's source, so destroying it frees the
+cell and the fill goes; flying it into another cell does the same. Retakes are vetoed while it still holds the cell.
+
 **Protected cells.** `WFSectorProtectionSystem` vetoes claims on the origin cell and its ring, and on any cell that
 holds a station whose name matches `wf.sector.protected_stations` (default `Halcyon`: the TSF flagship). Hidden
 stations are not protected: an unclaimable hole in held space would give them away. A station is hidden when its name
@@ -160,7 +170,8 @@ after being switched off or resized, so drivers can claim what they still hold a
 - `Content.Shared/_WF/SectorControl`: `WFSectorHex.cs`, `WFSectorCell.cs` (the `(q, r)` struct), `WFSectorFactionPrototype.cs`,
   `WFSectorNetEvents.cs`, `SectorControlCVars.cs`.
 - `Content.Server/_WF/SectorControl`: `README.md`, `WFSectorEvents.cs`, `Components/WFSectorTerritoryComponent.cs`,
-  `Systems/WFSectorTerritorySystem.cs`, `Systems/WFSectorActivitySystem.cs`, `Systems/WFSectorProtectionSystem.cs`,
+  `Components/WFSectorBeaconComponent.cs`, `Systems/WFSectorTerritorySystem.cs`, `Systems/WFSectorBeaconSystem.cs`,
+  `Systems/WFSectorActivitySystem.cs`, `Systems/WFSectorProtectionSystem.cs`,
   `Systems/WFSectorSyncSystem.cs`, `Systems/WFSectorNoticeSystem.cs`, `Commands/WFSectorCommand.cs`.
 - `Content.Client/_WF/SectorControl`: `WFSectorClientSystem.cs`, `WFSectorOverlay.cs`, `ShuttleMapControl.SectorControl.cs`,
   `ShuttleNavControl.SectorControl.cs`, `WFSectorMapControl.cs`, `WFSectorMapPanel.cs`, `WFSectorMapWindow.cs`,

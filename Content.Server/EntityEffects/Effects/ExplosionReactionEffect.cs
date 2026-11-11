@@ -3,7 +3,6 @@ using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 using Content.Shared.Explosion;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 using System.Text.Json.Serialization;
 
 namespace Content.Server.EntityEffects.Effects;

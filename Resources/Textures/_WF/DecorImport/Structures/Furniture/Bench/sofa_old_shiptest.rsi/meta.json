@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blue_oldsofa_corner",
+      "directions": 4
+    },
+    {
+      "name": "blue_oldsofa_end_left",
+      "directions": 4
+    },
+    {
+      "name": "blue_oldsofa_end_right",
+      "directions": 4
+    },
+    {
+      "name": "blue_oldsofa_internalcorner",
+      "directions": 4
+    },
+    {
+      "name": "blue_oldsofa_middle",
+      "directions": 4
+    },
+    {
+      "name": "grey_oldsofa_corner",
+      "directions": 4
+    },
+    {
+      "name": "grey_oldsofa_end_left",
+      "directions": 4
+    },
+    {
+      "name": "grey_oldsofa_end_right",
+      "directions": 4
+    },
+    {
+      "name": "grey_oldsofa_internalcorner",
+      "directions": 4
+    },
+    {
+      "name": "grey_oldsofa_middle",
+      "directions": 4
+    },
+    {
+      "name": "red_oldsofa_corner",
+      "directions": 4
+    },
+    {
+      "name": "red_oldsofa_end_left",
+      "directions": 4
+    },
+    {
+      "name": "red_oldsofa_end_right",
+      "directions": 4
+    },
+    {
+      "name": "red_oldsofa_internalcorner",
+      "directions": 4
+    },
+    {
+      "name": "red_oldsofa_middle",
+      "directions": 4
+    },
+    {
+      "name": "white_oldsofa_corner",
+      "directions": 4
+    },
+    {
+      "name": "white_oldsofa_end_left",
+      "directions": 4
+    },
+    {
+      "name": "white_oldsofa_end_right",
+      "directions": 4
+    },
+    {
+      "name": "white_oldsofa_internalcorner",
+      "directions": 4
+    },
+    {
+      "name": "white_oldsofa_middle",
+      "directions": 4
+    }
+  ]
+}

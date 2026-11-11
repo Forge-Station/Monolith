@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._WF.RMCClothing.Patterns;
 
 /// <summary>Switches camouflage clothing between its patterns by copying the visuals of a pattern prototype.</summary>
-public sealed class WFCamoPatternSystem : EntitySystem
+public sealed partial class WFCamoPatternSystem : EntitySystem
 {
     [Dependency] private ClothingSystem _clothing = default!;
     [Dependency] private SharedItemSystem _item = default!;

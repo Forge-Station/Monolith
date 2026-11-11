@@ -35,7 +35,7 @@ public sealed partial class WFPlanetPoiSystem
             for (var y = site.Bounds.Bottom; y < site.Bounds.Top; y++)
             {
                 var tile = new Vector2i(x, y);
-                if (!_maps.GetTileRef(ground, grid, tile).Tile.IsEmpty && !_maps.GetAnchoredEntitiesEnumerator(ground, grid, tile).MoveNext(out _)
+                if (!_maps.GetTileRef(ground, grid, tile).Tile.IsEmpty && !_maps.GetAnchoredEntities(ground, grid, tile).MoveNext(out _)
                     && TryComp<Content.Shared.Light.Components.RoofComponent>(ground, out var roof) && _roof.IsRooved((ground, grid, roof), tile))
                     floor.Add(tile);
             }
@@ -97,7 +97,7 @@ public sealed partial class WFPlanetPoiSystem
                     var tile = spot.Floored();
                     // Open ground: no site, road or anything standing there.
                     if (_biome.WfIsPinned((ground, biome), tile) || _biome.WfIsWater((ground, biome), tile) || _maps.GetTileRef(ground, grid, tile).Tile.IsEmpty
-                        || _maps.GetAnchoredEntitiesEnumerator(ground, grid, tile).MoveNext(out _))
+                        || _maps.GetAnchoredEntities(ground, grid, tile).MoveNext(out _))
                         continue;
 
                     Spawn(roamer.Id, new EntityCoordinates(ground, (Vector2) tile + new Vector2(0.5f)));

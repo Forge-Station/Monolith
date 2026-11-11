@@ -50,7 +50,7 @@ public sealed partial class JobPresetConsoleWindow : DefaultWindow
 
     private void PopulatePresets(List<ProtoId<JobPrototype>> rankPresets)
     {
-        RankPresetContainer.DisposeAllChildren();
+        RankPresetContainer.RemoveAllChildren();
         _presetButtons.Clear();
 
         var buttonGroup = new ButtonGroup();

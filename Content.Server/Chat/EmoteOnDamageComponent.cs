@@ -4,7 +4,6 @@ using Content.Server.Chat.Systems;
 using Content.Shared.Chat.Prototypes;
 using Robust.Shared.Prototypes; // WOLFGATE(Wolfmed): HOOK 17, ProtoId<> for the Wolfmed pain-sound thresholds.
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Prototypes;
 
 /// <summary>
 /// Causes an entity to automatically emote when taking damage.

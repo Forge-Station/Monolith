@@ -13,7 +13,7 @@ namespace Content.Client._WF.Wolfmed.Overlays;
 /// faint's white-out while the cause is a faint. A machine's own readout already says all of it, so a body whose
 /// synthetic HUD owns the view gets neither.
 /// </summary>
-public sealed class WolfmedExplanationCardSystem : EntitySystem
+public sealed partial class WolfmedExplanationCardSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IOverlayManager _overlays = default!;

@@ -14,16 +14,16 @@ public sealed class XenoSalveVisualsSystem : VisualizerSystem<XenoSalveVisualsCo
         if (sprite == null || !AppearanceSystem.TryGetData(uid, XenoHealerVisuals.Gooped, out bool goop))
             return;
 
-        if (!sprite.LayerMapTryGet(XenoHealerVisualLayers.Goop, out var layer))
+        if (!SpriteSystem.LayerMapTryGet((uid, sprite), XenoHealerVisualLayers.Goop, out var layer, false))
             return;
 
         if (!goop)
         {
-            sprite.LayerSetVisible(layer, false);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, false);
             return;
         }
 
-        sprite.LayerSetVisible(layer, true);
+        SpriteSystem.LayerSetVisible((uid, sprite), layer, true);
 
         string layerState = "salved";
 
@@ -32,6 +32,6 @@ public sealed class XenoSalveVisualsSystem : VisualizerSystem<XenoSalveVisualsCo
         else if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
             layerState += "_rest";
 
-        sprite.LayerSetState(layer, layerState);
+        SpriteSystem.LayerSetRsiState((uid, sprite), layer, layerState);
     }
 }

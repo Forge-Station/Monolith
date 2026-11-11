@@ -190,7 +190,7 @@ public sealed class WFCrewEvaSystem : EntitySystem
         var here = _transform.GetWorldPosition(mob);
         if (!safe)
         {
-            var tiles = _maps.GetAllTilesEnumerator(home, map);
+            var tiles = _maps.GetAllTiles(home, map);
             while (tiles.MoveNext(out var tile))
             {
                 if (!_planner.IsSafePost(home, tile.Value.GridIndices, map))

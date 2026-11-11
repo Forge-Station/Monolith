@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client._WF.Wolfmed.Overlays;
 
 /// <summary>Fullscreen pass for <see cref="WolfmedDyingEffectsSystem"/>; the system owns every value it draws with.</summary>
-public sealed class WolfmedDyingOverlay : Overlay
+public sealed partial class WolfmedDyingOverlay : Overlay
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IPlayerManager _player = default!;

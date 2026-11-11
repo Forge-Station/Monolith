@@ -8,7 +8,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Forge.Trade;
 
 
-[Prototype("ncGhostRolePreset")]
+[Prototype]
 public sealed partial class NcGhostRolePresetPrototype : IPrototype
 {
     [DataField("entityPrototype", required: true)]
@@ -35,7 +35,7 @@ public sealed partial class NcGhostRolePresetPrototype : IPrototype
     [IdDataField] public string ID { get; private set; } = default!;
 }
 
-[Prototype("ncGhostRolePerk")]
+[Prototype]
 public sealed partial class NcGhostRolePerkPrototype : IPrototype
 {
     [DataField("name", required: true)]
@@ -144,7 +144,7 @@ public enum NcGhostRoleCompletionMode : byte
     AliveCuffedTurnIn = 1
 }
 
-[Prototype("ncGhostRoleContract")]
+[Prototype]
 public sealed partial class NcGhostRoleContractPrototype : IPrototype
 {
     [DataField("role", required: true)]

@@ -29,9 +29,9 @@ public abstract partial class SharedShuttleSystem : EntitySystem
     public const float FTLBufferRange = 20f;
     public const float TileDensityMultiplier = 0.5f; /// Forge-Change
 
-    [Dependency] private readonly EntityQuery<MapGridComponent> _gridQuery = default!;
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
-    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
     private List<Entity<MapGridComponent>> _grids = new();
 
     public override void Initialize()

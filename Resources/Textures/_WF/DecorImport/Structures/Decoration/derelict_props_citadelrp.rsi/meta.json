@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CitadelRP at commit https://github.com/citadel-station/citadel-rp/commit/db254a45e84676b7d1f32e3386c65453253bc6c5.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "jarshelf"
+    },
+    {
+      "name": "overgrown_pod"
+    },
+    {
+      "name": "active_pod"
+    },
+    {
+      "name": "active_pod2"
+    },
+    {
+      "name": "active_pod3"
+    },
+    {
+      "name": "empty_pod"
+    },
+    {
+      "name": "broken_pod"
+    },
+    {
+      "name": "flesh_pod"
+    },
+    {
+      "name": "terminal1"
+    },
+    {
+      "name": "terminal2"
+    },
+    {
+      "name": "terminal3"
+    },
+    {
+      "name": "terminal4"
+    },
+    {
+      "name": "terminal5"
+    },
+    {
+      "name": "terminal6"
+    },
+    {
+      "name": "monitor1"
+    },
+    {
+      "name": "monitor2",
+      "directions": 4
+    },
+    {
+      "name": "monitor3",
+      "directions": 4
+    },
+    {
+      "name": "monitor_broken"
+    },
+    {
+      "name": "processor1"
+    },
+    {
+      "name": "processor2"
+    },
+    {
+      "name": "server1"
+    },
+    {
+      "name": "server2"
+    },
+    {
+      "name": "tube1"
+    },
+    {
+      "name": "tube2"
+    },
+    {
+      "name": "cryofeed",
+      "directions": 4
+    },
+    {
+      "name": "machine1"
+    },
+    {
+      "name": "machine2"
+    },
+    {
+      "name": "hub1"
+    },
+    {
+      "name": "chair",
+      "directions": 4
+    },
+    {
+      "name": "light2",
+      "delays": [
+        [
+          12.0,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "light3",
+      "delays": [
+        [
+          12.0,
+          0.1,
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

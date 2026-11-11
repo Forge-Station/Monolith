@@ -10,7 +10,7 @@ namespace Content.Shared.Xenoarchaeology.Artifact.XAE;
 /// <summary>
 /// System for xeno artifact effect that damages entities from whitelist in area.
 /// </summary>
-public sealed class XAEDamageInAreaSystem : BaseXAESystem<XAEDamageInAreaComponent>
+public sealed partial class XAEDamageInAreaSystem : BaseXAESystem<XAEDamageInAreaComponent>
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private DamageableSystem _damageable = default!;

@@ -38,7 +38,7 @@ public enum WolfmedPartDegradation : byte
 /// (<see cref="WolfmedDegradationVisualsComponent.DefaultProfile"/>); the prototype exists so the
 /// thresholds and the RSI can be retuned or replaced without a code change.
 /// </summary>
-[Prototype("wolfmedDegradationProfile")]
+[Prototype]
 public sealed partial class WolfmedDegradationProfilePrototype : IPrototype
 {
     [IdDataField]

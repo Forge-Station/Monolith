@@ -219,7 +219,7 @@ public sealed partial class MarketSystem
     private string? WfStackId(string good)
     {
         return _prototypeManager.TryIndex<EntityPrototype>(good, out var proto)
-               && proto.TryGetComponent<StackComponent>(out var stack, EntityManager.ComponentFactory)
+               && proto.TryComp<StackComponent>(out var stack, EntityManager.ComponentFactory)
             ? stack.StackTypeId
             : null;
     }

@@ -1,0 +1,4 @@
+- files: [ derelict_floor_1.png, derelict_floor_2.png, derelict_floor_3.png, derelict_floor_4.png, derelict_floor_5.png, derelict_floor_6.png, derelict_floor_7.png, derelict_light.png, derelict_wall_floor.png, derelict_plating.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/citadel-station/citadel-rp/blob/db254a45e84676b7d1f32e3386c65453253bc6c5/code/game/content/factions/derelict/derelict.dmi/derelict_tiles.dmi (states derelict_floor_1, derelict_floor_2, derelict_floor_3, derelict_floor_4, derelict_floor_5, derelict_floor_6, derelict_floor_7, derelict_light, derelict_wall_floor, derelict_plating, first direction)."
+  source: "https://github.com/citadel-station/citadel-rp"

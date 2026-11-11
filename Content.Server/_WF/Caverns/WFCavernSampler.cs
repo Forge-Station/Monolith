@@ -137,7 +137,7 @@ public sealed partial class WFCavernSampler : EntitySystem
     {
         if (!_solid.TryGetValue(entity, out var solid))
         {
-            solid = _proto.Index<EntityPrototype>(entity).TryGetComponent<AirtightComponent>(out _, _factory);
+            solid = _proto.Index<EntityPrototype>(entity).TryComp<AirtightComponent>(out _, _factory);
             _solid[entity] = solid;
         }
 
@@ -149,7 +149,7 @@ public sealed partial class WFCavernSampler : EntitySystem
     {
         if (!_veins.TryGetValue(entity, out var vein))
         {
-            vein = _proto.Index<EntityPrototype>(entity).TryGetComponent<OreVeinComponent>(out var ore, _factory)
+            vein = _proto.Index<EntityPrototype>(entity).TryComp<OreVeinComponent>(out var ore, _factory)
                    && ore.CurrentOre != null;
             _veins[entity] = vein;
         }
@@ -163,10 +163,10 @@ public sealed partial class WFCavernSampler : EntitySystem
         if (!_hazards.TryGetValue(entity, out var hazard))
         {
             var proto = _proto.Index<EntityPrototype>(entity);
-            hazard = proto.TryGetComponent<TileEntityEffectComponent>(out var effects, _factory)
+            hazard = proto.TryComp<TileEntityEffectComponent>(out var effects, _factory)
                      && effects.Effects.Any(effect => effect is Ignite)
-                     || proto.TryGetComponent<DamageContactsComponent>(out _, _factory)
-                     || proto.TryGetComponent<WFDigestiveAcidComponent>(out _, _factory);
+                     || proto.TryComp<DamageContactsComponent>(out _, _factory)
+                     || proto.TryComp<WFDigestiveAcidComponent>(out _, _factory);
             _hazards[entity] = hazard;
         }
 
@@ -184,7 +184,7 @@ public sealed partial class WFCavernSampler : EntitySystem
     {
         if (!_lights.TryGetValue(entity, out var light))
         {
-            light = _proto.Index<EntityPrototype>(entity).TryGetComponent<PointLightComponent>(out _, _factory);
+            light = _proto.Index<EntityPrototype>(entity).TryComp<PointLightComponent>(out _, _factory);
             _lights[entity] = light;
         }
 

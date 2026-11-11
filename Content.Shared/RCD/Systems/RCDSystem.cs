@@ -272,7 +272,7 @@ public partial class RCDSystem : EntitySystem
             component.ConstructionDirection,
             component.ProtoId,
             cost,
-            EntityManager.GetNetEntity(effect),
+            GetNetEntity(effect),
             rpdConstructionEntity,
             isRpdDeconstruct ? GetNetEntity(deconstructTarget) : null,
             component.ConstructionPipeLayer);
@@ -327,7 +327,7 @@ public partial class RCDSystem : EntitySystem
     private void OnDoAfter(EntityUid uid, RCDComponent component, RCDDoAfterEvent args)
     {
         if (args.Cancelled && _net.IsServer)
-            QueueDel(EntityManager.GetEntity(args.Effect));
+            QueueDel(GetEntity(args.Effect));
 
         if (args.Handled || args.Cancelled || !_timing.IsFirstTimePredicted)
             return;

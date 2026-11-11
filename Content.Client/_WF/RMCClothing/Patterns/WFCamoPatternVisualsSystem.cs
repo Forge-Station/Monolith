@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Client._WF.RMCClothing.Patterns;
 
 /// <summary>Redraws camouflage clothing when its pattern changes.</summary>
-public sealed class WFCamoPatternVisualsSystem : EntitySystem
+public sealed partial class WFCamoPatternVisualsSystem : EntitySystem
 {
     [Dependency] private WFCamoPatternSystem _patterns = default!;
     [Dependency] private SpriteSystem _sprite = default!;

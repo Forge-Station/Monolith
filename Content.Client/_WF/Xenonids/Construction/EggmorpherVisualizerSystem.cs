@@ -10,8 +10,8 @@ public sealed class EggmorpherVisualizerSystem : VisualizerSystem<EggMorpherComp
         var sprite = args.Sprite;
 
         if (sprite == null || !AppearanceSystem.TryGetData(uid, EggmorpherOverlayVisuals.Number, out int number) ||
-            !sprite.LayerMapTryGet(EggmorpherOverlayLayers.Overlay, out var layer) ||
-            !sprite.LayerMapTryGet(EggmorpherOverlayLayers.Base, out var layer2))
+            !SpriteSystem.LayerMapTryGet((uid, sprite), EggmorpherOverlayLayers.Overlay, out var layer, false) ||
+            !SpriteSystem.LayerMapTryGet((uid, sprite), EggmorpherOverlayLayers.Base, out var layer2, false))
             return;
 
         //Same as parasite number calc
@@ -19,7 +19,7 @@ public sealed class EggmorpherVisualizerSystem : VisualizerSystem<EggMorpherComp
 
         if (level == 0)
         {
-            sprite.LayerSetVisible(layer, false);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, false);
             return;
         }
 
@@ -27,18 +27,18 @@ public sealed class EggmorpherVisualizerSystem : VisualizerSystem<EggMorpherComp
 
         if (!sprite[layer].Visible)
         {
-            sprite.LayerSetVisible(layer, true);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, true);
             wasVisible = false;
         }
 
         string state = component.OverlayPrefix + "_" + (level - 1);
 
-        if (state != sprite.LayerGetState(layer) || !wasVisible)
+        if (state != SpriteSystem.LayerGetRsiState((uid, sprite), layer) || !wasVisible)
         {
-            sprite.LayerSetState(layer, state);
-            var stat = sprite.LayerGetState(layer2);
-            sprite.LayerSetState(layer2, state);
-            sprite.LayerSetState(layer2, stat);
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer, state);
+            var stat = SpriteSystem.LayerGetRsiState((uid, sprite), layer2);
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer2, state);
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer2, stat);
         }
     }
 }

@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._WF.Wolfmed.Body;
 
 /// <summary>Strips WoundHost from synthetic species that inherit it via BaseMobSpeciesOrganic (D21/D32). RT has no YAML-level component removal, so this is a code-side opt-out instead of a prototype edit.</summary>
-public sealed class WolfmedWoundHostExclusionSystem : EntitySystem
+public sealed partial class WolfmedWoundHostExclusionSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _proto = default!;
 

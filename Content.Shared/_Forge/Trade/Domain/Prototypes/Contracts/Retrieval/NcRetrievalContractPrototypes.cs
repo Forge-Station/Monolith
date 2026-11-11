@@ -9,7 +9,7 @@ namespace Content.Shared._Forge.Trade;
 ///     Retrieval is spawned cargo delivery: the contract creates cargo, then the player moves that cargo along a route.
 ///     Existing-world item turn-in belongs to Supply, not Retrieval.
 /// </summary>
-[Prototype("ncRetrievalContract")]
+[Prototype]
 public sealed partial class NcRetrievalContractPrototype : IPrototype
 {
     [DataField("name", required: true)]

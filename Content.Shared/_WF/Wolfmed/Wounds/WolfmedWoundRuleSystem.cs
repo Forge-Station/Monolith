@@ -20,7 +20,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// To add a wound: write the wound prototype with <c>ruleOnly: true</c>, list it in the part profile's
 /// <c>supportedWounds</c>, and add a <c>wolfmedWoundRule</c> naming it. No C# is needed.
 /// </remarks>
-public sealed class WolfmedWoundRuleSystem : EntitySystem
+public sealed partial class WolfmedWoundRuleSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private IRobustRandom _random = default!;

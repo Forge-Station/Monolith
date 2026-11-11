@@ -464,7 +464,7 @@ public sealed partial class WFVehicleCrewSystem
     /// <summary>Something anchored on a tile that a vehicle would hit: a wall, tree, rock, barrier or the like.</summary>
     private bool Blocked(EntityUid vehicle, EntityUid grid, MapGridComponent gridComp, Vector2i tile)
     {
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, gridComp, tile);
+        var anchored = _map.GetAnchoredEntities(grid, gridComp, tile);
         while (anchored.MoveNext(out var other))
         {
             if (other != vehicle && TryComp<PhysicsComponent>(other, out var body) && body.CanCollide && body.Hard

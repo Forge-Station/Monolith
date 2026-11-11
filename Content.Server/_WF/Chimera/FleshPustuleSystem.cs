@@ -152,7 +152,7 @@ public sealed partial class WFFleshPustuleSystem : EntitySystem
         var tile = _map.TileIndicesFor(grid, mapGrid, target);
         var center = _map.GridTileToLocal(grid, mapGrid, tile);
         EntityUid? biomass = null;
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, mapGrid, tile);
+        var anchored = _map.GetAnchoredEntities(grid, mapGrid, tile);
         while (anchored.MoveNext(out var maybeCandidate))
         {
             if (maybeCandidate is not { } candidate)

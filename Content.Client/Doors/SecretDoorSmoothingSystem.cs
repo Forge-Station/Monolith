@@ -9,7 +9,7 @@ namespace Content.Client.Doors;
 /// animation while moving or open. Both sets of layers stay on the sprite, so the
 /// unused set has to be hidden or the old wall sprite sits on top of the doorway.
 /// </summary>
-public sealed class SecretDoorSmoothingSystem : EntitySystem
+public sealed partial class SecretDoorSmoothingSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private IconSmoothSystem _smooth = default!;

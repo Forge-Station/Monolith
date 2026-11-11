@@ -522,7 +522,7 @@ public sealed partial class WFCavernMouthSystem
             var index = site.Origin + offset;
 
             if (_biome.WfIsChunkLoaded(groundBiome, index)
-                || _map.GetAnchoredEntitiesEnumerator(context.Ground.Owner, context.Ground.Comp2, index).MoveNext(out _))
+                || _map.GetAnchoredEntities(context.Ground.Owner, context.Ground.Comp2, index).MoveNext(out _))
                 return Block.Waiting;
         }
 
@@ -732,7 +732,7 @@ public sealed partial class WFCavernMouthSystem
     /// <summary>Whether an entity of this prototype is already anchored on a tile.</summary>
     private bool HasAnchored(Entity<MapGridComponent> grid, Vector2i index, EntProtoId proto)
     {
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid.Comp, index);
+        var anchored = _map.GetAnchoredEntities(grid, grid.Comp, index);
 
         while (anchored.MoveNext(out var uid))
         {

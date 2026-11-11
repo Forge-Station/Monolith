@@ -830,7 +830,7 @@ public sealed partial class WFCrewWorkSystem : EntitySystem
         Vector2i? best = null;
         var bestDistance = -1;
         var bestSafe = false;
-        var tiles = _maps.GetAllTilesEnumerator(grid, map);
+        var tiles = _maps.GetAllTiles(grid, map);
         while (tiles.MoveNext(out var tile))
         {
             var at = tile.Value.GridIndices;

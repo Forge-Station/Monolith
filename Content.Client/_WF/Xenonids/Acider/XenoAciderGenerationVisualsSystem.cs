@@ -13,16 +13,16 @@ public sealed class XenoAciderGenerationVisualsSystem : VisualizerSystem<XenoAci
         if (sprite == null || !AppearanceSystem.TryGetData(uid, XenoAcidGeneratingVisuals.Generating, out bool gening))
             return;
 
-        if (!sprite.LayerMapTryGet(XenoAcidGeneratingVisualLayers.Base, out var layer))
+        if (!SpriteSystem.LayerMapTryGet((uid, sprite), XenoAcidGeneratingVisualLayers.Base, out var layer, false))
             return;
 
         if (!gening)
         {
-            sprite.LayerSetVisible(layer, false);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, false);
             return;
         }
 
-        sprite.LayerSetVisible(layer, true);
+        SpriteSystem.LayerSetVisible((uid, sprite), layer, true);
 
         string layerState = "acid";
 
@@ -31,6 +31,6 @@ public sealed class XenoAciderGenerationVisualsSystem : VisualizerSystem<XenoAci
         else if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
             layerState += "_rest";
 
-        sprite.LayerSetState(layer, layerState);
+        SpriteSystem.LayerSetRsiState((uid, sprite), layer, layerState);
     }
 }

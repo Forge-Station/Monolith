@@ -14,7 +14,7 @@ namespace Content.Shared._Forge.Xenomorphs;
 /// <summary>
 /// Surgical install and remove for harvested xenomorph glands. Two slots on the torso, no click-to-graft.
 /// </summary>
-public sealed class ForgeXenoGraftSurgerySystem : EntitySystem
+public sealed partial class ForgeXenoGraftSurgerySystem : EntitySystem
 {
     [Dependency] private SharedBodySystem _body = default!;
     [Dependency] private SharedContainerSystem _containers = default!;

@@ -16,7 +16,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// effect on the humanoid base's existing water touch reaction, so every way water already reaches a mob
 /// works without a second code path. Shared for that effect's sake; every write is server-gated.
 /// </remarks>
-public sealed class WolfmedChemicalBurnSystem : EntitySystem
+public sealed partial class WolfmedChemicalBurnSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

@@ -13,7 +13,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._WF.Cockpit;
 
 /// <summary>A compact fuel warning lens beside the cockpit's remaining-fuel scale.</summary>
-public sealed class WFCockpitFuelLamp : Control
+public sealed partial class WFCockpitFuelLamp : Control
 {
     private const long FlashTicks = TimeSpan.TicksPerSecond;
 

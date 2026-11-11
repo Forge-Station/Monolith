@@ -79,7 +79,7 @@ public sealed partial class XenoVisualizerSystem : VisualizerSystem<XenoComponen
             state = MobState.Critical;
 
         if (sprite is not { BaseRSI: { } rsi } ||
-            !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
+            !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer, false))
         {
             return;
         }
@@ -163,7 +163,7 @@ public sealed partial class XenoVisualizerSystem : VisualizerSystem<XenoComponen
                 break;
         }
 
-        if (!sprite.LayerMapTryGet(XenoVisualLayers.Ovipositor, out var oviLayer))
+        if (!sprite.LayerMapTryGet(XenoVisualLayers.Ovipositor, out var oviLayer, false))
             return;
 
         if (oviState == null)

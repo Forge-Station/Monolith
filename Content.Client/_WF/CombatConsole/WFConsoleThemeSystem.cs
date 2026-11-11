@@ -5,7 +5,7 @@ using Robust.Shared.Configuration;
 namespace Content.Client._WF.CombatConsole;
 
 /// <summary>Caches the active instrument palette for drawing without per-frame configuration lookups.</summary>
-public sealed class WFConsoleThemeSystem : EntitySystem
+public sealed partial class WFConsoleThemeSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _configuration = default!;
 

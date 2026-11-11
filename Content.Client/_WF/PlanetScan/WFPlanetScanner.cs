@@ -19,7 +19,7 @@ namespace Content.Client._WF.PlanetScan;
 /// The planet scan over a radar plot, built like the cockpit's asteroid scanner: pointing at a world locks brackets
 /// onto it and types out a callout with its climate, gravity, air, hazards, known sites, landing zone and range.
 /// </summary>
-public sealed class WFPlanetScanner : Control
+public sealed partial class WFPlanetScanner : Control
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

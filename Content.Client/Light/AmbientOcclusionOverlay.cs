@@ -113,7 +113,7 @@ public sealed partial class AmbientOcclusionOverlay : Overlay
                 {
                     var transform = xformSystem.GetWorldMatrix(grid.Owner);
                     var worldToTextureMatrix = Matrix3x2.Multiply(transform, invMatrix);
-                    var tiles = _mapSystem.GetTilesEnumerator(grid.Owner, grid, worldBounds);
+                    var tiles = _mapSystem.GetTilesIntersecting(grid.Owner, grid, worldBounds);
                     worldHandle.SetTransform(worldToTextureMatrix);
                     while (tiles.MoveNext(out var tileRef))
                     {

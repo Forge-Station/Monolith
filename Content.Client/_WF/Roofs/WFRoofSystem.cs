@@ -144,7 +144,7 @@ public sealed partial class WFRoofSystem : EntitySystem
             return known;
 
         var structure = false;
-        var anchored = _maps.GetAnchoredEntitiesEnumerator(grid, gridComp, index);
+        var anchored = _maps.GetAnchoredEntities(grid, gridComp, index);
         while (anchored.MoveNext(out var uid))
         {
             if (HasComp<DoorComponent>(uid) || TryComp(uid, out PhysicsComponent? body) && WallLike(body))

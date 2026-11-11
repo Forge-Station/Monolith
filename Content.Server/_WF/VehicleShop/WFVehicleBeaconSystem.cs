@@ -171,7 +171,7 @@ public sealed class WFVehicleBeaconSystem : EntitySystem
     /// <summary>A beacon's stock price, what a trader sells it for, is its catalogue listing.</summary>
     private void OnEstimatedPrice(ref EstimatedPriceCalculationEvent args)
     {
-        if (args.Handled || !args.Prototype.TryGetComponent<WFVehicleBeaconComponent>(out var beacon, EntityManager.ComponentFactory))
+        if (args.Handled || !args.Prototype.TryComp<WFVehicleBeaconComponent>(out var beacon, EntityManager.ComponentFactory))
             return;
 
         if (ListingPrice(beacon) is not { } listing)

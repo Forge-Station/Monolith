@@ -327,7 +327,7 @@ public sealed partial class TraderRefuelSystem : EntitySystem
         if (entry == null || !_proto.TryIndex(entry.Item, out var jarProto))
             return false;
 
-        if (!jarProto.TryGetComponent<AmeFuelContainerComponent>(out var fullJar, _componentFactory) || fullJar.FuelCapacity <= 0)
+        if (!jarProto.TryComp<AmeFuelContainerComponent>(out var fullJar, _componentFactory) || fullJar.FuelCapacity <= 0)
             return false;
 
         var price = _shop.GetPrice(jarProto, vend, modifier);
@@ -388,7 +388,7 @@ public sealed partial class TraderRefuelSystem : EntitySystem
         if (MetaData(generator).EntityPrototype is not { } proto)
             return 0;
 
-        if (!proto.TryGetComponent<MaterialStorageComponent>(out var storage, _componentFactory))
+        if (!proto.TryComp<MaterialStorageComponent>(out var storage, _componentFactory))
             return 0;
 
         return storage.Storage.GetValueOrDefault(material);
@@ -399,14 +399,14 @@ public sealed partial class TraderRefuelSystem : EntitySystem
     /// </summary>
     private int GetMaterialUnits(EntityPrototype proto, string material)
     {
-        if (!proto.TryGetComponent<PhysicalCompositionComponent>(out var composition, _componentFactory))
+        if (!proto.TryComp<PhysicalCompositionComponent>(out var composition, _componentFactory))
             return 0;
 
         if (!composition.MaterialComposition.TryGetValue(material, out var per))
             return 0;
 
         var count = 1;
-        if (proto.TryGetComponent<StackComponent>(out var stack, _componentFactory))
+        if (proto.TryComp<StackComponent>(out var stack, _componentFactory))
             count = stack.Count;
 
         return per * count;
@@ -417,7 +417,7 @@ public sealed partial class TraderRefuelSystem : EntitySystem
     /// </summary>
     private int GetReagentUnits(EntityPrototype proto, string reagent)
     {
-        if (!proto.TryGetComponent<SolutionContainerManagerComponent>(out var manager, _componentFactory))
+        if (!proto.TryComp<SolutionContainerManagerComponent>(out var manager, _componentFactory))
             return 0;
 
         if (manager.Solutions is not { } solutions)

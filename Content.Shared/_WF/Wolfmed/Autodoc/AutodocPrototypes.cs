@@ -8,7 +8,7 @@ namespace Content.Shared._WF.Wolfmed.Autodoc;
 /// One S.A.M. voice. Every line has exactly one ogg and exactly one transcript, so the audio and the chat
 /// line can never disagree; <see cref="Events"/> names the variants an event may pick between.
 /// </summary>
-[Prototype("autodocVoice")]
+[Prototype]
 public sealed partial class AutodocVoicePrototype : IPrototype
 {
     [IdDataField]
@@ -176,7 +176,7 @@ public enum AutodocVoiceEvent : byte
 /// categories, or the cardiac module; the planner walks the steps in order and queues everything the
 /// occupant's condition currently allows. Nothing here does anything an operator could not queue by hand.
 /// </summary>
-[Prototype("autodocTriage")]
+[Prototype]
 public sealed partial class AutodocTriagePrototype : IPrototype
 {
     [IdDataField]
@@ -240,7 +240,7 @@ public enum AutodocTriageCondition : byte
 }
 
 /// <summary>A block of surgeries the pod can perform. The base library ships on the machine; the rest need a disk.</summary>
-[Prototype("autodocProgram")]
+[Prototype]
 public sealed partial class AutodocProgramPrototype : IPrototype
 {
     [IdDataField]
@@ -258,7 +258,7 @@ public sealed partial class AutodocProgramPrototype : IPrototype
 /// Per-surgery autodoc overrides. The prototype id is the surgery's own id; a surgery with no entry uses the
 /// pod's defaults.
 /// </summary>
-[Prototype("autodocProcedure")]
+[Prototype]
 public sealed partial class AutodocProcedurePrototype : IPrototype
 {
     [IdDataField]
@@ -277,7 +277,7 @@ public sealed partial class AutodocProcedurePrototype : IPrototype
 /// The whole list of reagents the pod will draw out of a beaker. Nothing outside this list is administrable,
 /// which keeps the rule in one Wolfmed-side file instead of a flag on every reagent prototype.
 /// </summary>
-[Prototype("autodocReagents")]
+[Prototype]
 public sealed partial class AutodocReagentsPrototype : IPrototype
 {
     [IdDataField]

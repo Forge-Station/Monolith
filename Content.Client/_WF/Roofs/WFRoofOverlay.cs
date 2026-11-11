@@ -17,7 +17,7 @@ namespace Content.Client._WF.Roofs;
 /// eye of its own, offset and scaled for its depth, and this overlay with it, so the roof sits on that level's tiles.
 /// Drawn over the world after lighting, so it isn't darkened as the sunless indoors below it is.
 /// </summary>
-public sealed class WFRoofOverlay : Overlay
+public sealed partial class WFRoofOverlay : Overlay
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IResourceCache _resources = default!;
@@ -80,7 +80,7 @@ public sealed class WFRoofOverlay : Overlay
             var shade = light.WithAlpha(1f);
             var eaves = new Color(light.R * 0.45f, light.G * 0.45f, light.B * 0.45f);
             var size = grid.Comp.TileSize;
-            var tiles = _maps.GetTilesEnumerator(grid, grid.Comp, args.WorldAABB, ignoreEmpty: implicitRoof);
+            var tiles = _maps.GetTilesIntersecting(grid, grid.Comp, args.WorldAABB, ignoreEmpty: implicitRoof);
             while (tiles.MoveNext(out var tileRef))
             {
                 var index = tileRef.GridIndices;

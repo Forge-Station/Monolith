@@ -17,7 +17,7 @@ namespace Content.Client._WF.Wolfmed.Effects;
 /// slid by hand each frame instead of being given physics: it is a picture, not an object, and there are
 /// only ever a handful in the air.
 /// </remarks>
-public sealed class WolfmedGoreEffectSystem : EntitySystem
+public sealed partial class WolfmedGoreEffectSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SpriteSystem _sprite = default!;

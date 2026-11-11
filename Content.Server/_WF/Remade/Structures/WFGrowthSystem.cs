@@ -202,7 +202,7 @@ public sealed partial class WFGrowthSystem : EntitySystem
         var walls = new List<Vector2i>();
         foreach (var direction in new[] { Vector2i.Up, Vector2i.Down, Vector2i.Left, Vector2i.Right })
         {
-            var next = _map.GetAnchoredEntitiesEnumerator(gridUid.Value, grid, tile + direction);
+            var next = _map.GetAnchoredEntities(gridUid.Value, grid, tile + direction);
             while (next.MoveNext(out var uid))
             {
                 if (HasComp<DoorComponent>(uid))
@@ -230,7 +230,7 @@ public sealed partial class WFGrowthSystem : EntitySystem
             return false;
         }
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid.Value, grid, tile);
+        var anchored = _map.GetAnchoredEntities(gridUid.Value, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
             if (HasComp<WFGrowthComponent>(uid))

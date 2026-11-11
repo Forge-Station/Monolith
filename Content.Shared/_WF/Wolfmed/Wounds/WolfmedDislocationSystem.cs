@@ -14,7 +14,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// <summary>Wrenching a dislocated joint back into place, the only thing that fixes a dislocation.</summary>
 // The penalty is ordinary WolfmedLimbPenaltyBehavior data; no dressing, suture, bone gel or time heals it. It hurts,
 // twice as much when the patient does it to themselves.
-public sealed class WolfmedDislocationSystem : EntitySystem
+public sealed partial class WolfmedDislocationSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

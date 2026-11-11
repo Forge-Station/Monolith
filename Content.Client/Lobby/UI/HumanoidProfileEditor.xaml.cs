@@ -259,6 +259,7 @@ namespace Content.Client.Lobby.UI
             // WOLFGATE END
 
             InitializeEmoteVoices(); // WOLFGATE(EmoteVoices)
+            InitializeSpeechVoice(); // WOLFGATE(Voice)
             InitializeSizePercent(); // WOLFGATE(Humanoid): typed percentages for height and width
             InitializeBloodColour(); // WOLFGATE(BloodColour)
 
@@ -622,6 +623,7 @@ namespace Content.Client.Lobby.UI
             InitializeChatFont(); // WOLFGATE(ChatFont)
             InitializeTypingBubble(); // WOLFGATE(TypingBubble)
             InitializeLegStyle(); // WOLFGATE(LegStyle)
+            InitializeAugments(); // WOLFGATE(Augments)
 
             #region Dummy
 
@@ -692,7 +694,7 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshTraits()
         {
-            TraitsList.DisposeAllChildren();
+            TraitsList.RemoveAllChildren();
 
             EnforceSpeciesTraitRestrictions();
 
@@ -725,6 +727,7 @@ namespace Content.Client.Lobby.UI
 
                 Profile = Profile.WithoutAllTraitPreferences();
                 SetDirty();
+                UpdateAugments(); // WOLFGATE(Augments): clearing a limb trait frees its slots
                 RefreshTraits();
             };
             TraitsList.AddChild(clearAllButton);
@@ -906,6 +909,7 @@ namespace Content.Client.Lobby.UI
                         }
 
                         SetDirty();
+                        UpdateAugments(); // WOLFGATE(Augments): a trait with its own limbs takes those slots
 
                         UpdateTraitIncompatibilityVisibility(allSelectors);
 
@@ -1181,7 +1185,7 @@ namespace Content.Client.Lobby.UI
         {
             // Frontier: no antags
             /*
-            AntagList.DisposeAllChildren();
+            AntagList.RemoveAllChildren();
             var items = new[]
             {
                 ("humanoid-profile-editor-antag-preference-yes-button", 0),
@@ -1350,6 +1354,7 @@ namespace Content.Client.Lobby.UI
             UpdateMismatchedParts(); // WOLFGATE(Species)
             UpdateBiotype(); // WOLFGATE(Biotype)
             UpdateLegStyle(); // WOLFGATE(LegStyle)
+            UpdateAugments(); // WOLFGATE(Augments)
             UpdateChatFont(); // WOLFGATE(ChatFont)
             UpdateTypingBubble(); // WOLFGATE(TypingBubble)
             UpdateSexControls();
@@ -1361,6 +1366,7 @@ namespace Content.Client.Lobby.UI
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateEmoteVoiceControls(); // WOLFGATE(EmoteVoices)
+            UpdateSpeechVoiceControls(); // WOLFGATE(Voice)
             UpdateBloodColour(); // WOLFGATE(BloodColour)
             UpdateSaveButton();
             UpdateMarkings();
@@ -1396,7 +1402,7 @@ namespace Content.Client.Lobby.UI
                 _entManager.DeleteEntity(entity);
 
             _savedItemEntities.Clear();
-            _savedItemsList.DisposeAllChildren();
+            _savedItemsList.RemoveAllChildren();
 
             var previews = new List<(PersistentProfileItem Item, EntityUid Entity)>();
             foreach (var item in Profile?.Items ?? [])
@@ -1527,7 +1533,7 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshJobs()
         {
-            JobList.DisposeAllChildren();
+            JobList.RemoveAllChildren();
             _jobCategories.Clear();
             _jobPriorities.Clear();
             var firstCategory = true;
@@ -2041,6 +2047,7 @@ namespace Content.Client.Lobby.UI
             Profile = Profile?.WithBiotype(WFBiotype.Default); // WOLFGATE(Biotype): a new species starts on its own biotype
             UpdateBiotype(); // WOLFGATE(Biotype)
             UpdateLegStyle(); // WOLFGATE(LegStyle): legs the new species lacks fall back to its own
+            UpdateAugments(); // WOLFGATE(Augments): augments the new species can't take are dropped
             UpdateTypingBubble(); // WOLFGATE(TypingBubble): the species' own bubble changes with it
             // WOLFGATE(Humanoid) START: keep the species picker and dropdown in step, drop hair the new species lacks
             EnforceSpeciesHair();

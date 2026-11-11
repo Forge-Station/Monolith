@@ -108,7 +108,7 @@ public sealed partial class WFPlanetPoiSystem
                     continue;
                 under.Add(tile);
                 anchored.Clear();
-                var enumerator = _maps.GetAnchoredEntitiesEnumerator(ground, grid, tile);
+                var enumerator = _maps.GetAnchoredEntities(ground, grid, tile);
                 while (enumerator.MoveNext(out var uid))
                     anchored.Add(uid.Value);
                 foreach (var uid in anchored)

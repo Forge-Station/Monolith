@@ -204,11 +204,11 @@ public sealed class TraderShopSystem : EntitySystem
         if (!_proto.TryIndex(vendor, out var vendorProto))
             return false;
 
-        if (!vendorProto.TryGetComponent<VendingMachineComponent>(out var vendComp, _componentFactory))
+        if (!vendorProto.TryComp<VendingMachineComponent>(out var vendComp, _componentFactory))
             return false;
 
         vend = vendComp;
-        vendorProto.TryGetComponent<MarketModifierComponent>(out modifier, _componentFactory);
+        vendorProto.TryComp<MarketModifierComponent>(out modifier, _componentFactory);
         return true;
     }
 

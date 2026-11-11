@@ -32,7 +32,7 @@ public enum WolfmedPartTreatment : byte
 /// <summary>Art and state mapping for the treatment overlays.</summary>
 // Which bleeding states count as a dressing and the per-limb state suffixes are data here, so a species with a
 // different leg shape ships a second profile instead of new code. One profile ships, the component's DefaultProfile.
-[Prototype("wolfmedTreatmentOverlayProfile")]
+[Prototype]
 public sealed partial class WolfmedTreatmentOverlayProfilePrototype : IPrototype
 {
     [IdDataField]

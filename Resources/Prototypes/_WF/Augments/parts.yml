@@ -1,0 +1,26 @@
+# Limbs the creator's Augments tab puts on a character. A limb's look comes from the style picked
+# with it (styles.yml); the sprite here is only what it shows as an item.
+
+- type: entity
+  parent: LeftArmCyberneticBase
+  id: WFAugmentLeftArm
+  name: cybernetic left arm
+  description: A plain cybernetic left arm, built to replace the one its owner lost or gave up.
+
+- type: entity
+  parent: RightArmCyberneticBase
+  id: WFAugmentRightArm
+  name: cybernetic right arm
+  description: A plain cybernetic right arm, built to replace the one its owner lost or gave up.
+
+- type: entity
+  parent: LeftLegCyberneticBase
+  id: WFAugmentLeftLeg
+  name: cybernetic left leg
+  description: A plain cybernetic left leg, built to replace the one its owner lost or gave up.
+
+- type: entity
+  parent: RightLegCyberneticBase
+  id: WFAugmentRightLeg
+  name: cybernetic right leg
+  description: A plain cybernetic right leg, built to replace the one its owner lost or gave up.

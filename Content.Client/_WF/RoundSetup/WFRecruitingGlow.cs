@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._WF.RoundSetup;
 
 /// <summary>A slow pulsing border drawn over a crew entry that is recruiting.</summary>
-public sealed class WFRecruitingGlow : Control
+public sealed partial class WFRecruitingGlow : Control
 {
     /// <summary>The recruiting accent, shared with the posting card and chat line.</summary>
     public static readonly Color Accent = Color.FromHex("#7FD3C4");

@@ -1,65 +1,35 @@
 using System.Linq;
 using Content.Shared.Shuttles.Components;
 using System.Numerics;
-using Content.Shared.Shuttles.Components;
 using Content.Server._NF.Bank;
-using Content.Shared.Shuttles.Components;
 using Content.Server._WF.Cowardice;
-using Content.Shared.Shuttles.Components;
 using Content.Server._WF.Planets.Bounds;
-using Content.Shared.Shuttles.Components;
 using Content.Server._WF.Vehicles.Npc;
-using Content.Shared.Shuttles.Components;
 using Content.Server.Chat.Systems;
-using Content.Shared.Shuttles.Components;
 using Content.Server.NPC.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Server.NPC.HTN;
-using Content.Shared.Shuttles.Components;
 using Content.Server.NPC.Systems;
-using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Shared._WF.Strangers;
-using Content.Shared.Shuttles.Components;
 using Content.Shared._WF.Vehicles.Core;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Chat;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Damage;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Examine;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Humanoid;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Mobs;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.NPC.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.NPC.Systems;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Stacks;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Verbs;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map.Components;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Player;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Random;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Timing;
-using Content.Shared.Shuttles.Components;
 
 namespace Content.Server._WF.Strangers;
 
@@ -676,7 +646,7 @@ public sealed partial class WFStrangerSystem : EntitySystem
         var markTile = _maps.TileIndicesFor(ship, grid, Transform(mark).Coordinates);
         var floor = _maps.GetAllTiles(ship, grid)
             .Select(tile => tile.GridIndices)
-            .Where(tile => !_maps.GetAnchoredEntitiesEnumerator(ship, grid, tile).MoveNext(out _))
+            .Where(tile => !_maps.GetAnchoredEntities(ship, grid, tile).MoveNext(out _))
             .OrderByDescending(tile => (tile - markTile).LengthSquared)
             .Take(8)
             .ToList();

@@ -55,7 +55,7 @@ public sealed partial class WFFlightSystem
             return;
         var lattice = new Tile(_scarTiles["Lattice"].TileId);
         var indices = new List<Vector2i>();
-        var tiles = _map.GetAllTilesEnumerator(hull, hull.Comp);
+        var tiles = _map.GetAllTiles(hull, hull.Comp);
         while (tiles.MoveNext(out var tile))
             if (tile.Value.Tile.TypeId != lattice.TypeId)
                 indices.Add(tile.Value.GridIndices);
@@ -77,7 +77,7 @@ public sealed partial class WFFlightSystem
                 floors.Add((index, lattice));
                 skid.TileDamage.Remove(index);
             }
-            var anchored = _map.GetAnchoredEntitiesEnumerator(hull, hull.Comp, index);
+            var anchored = _map.GetAnchoredEntities(hull, hull.Comp, index);
             while (anchored.MoveNext(out var entity))
                 if (!HasComp<MobStateComponent>(entity) && HasComp<DamageableComponent>(entity))
                     damaged.Add(entity.Value);

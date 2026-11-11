@@ -16,7 +16,7 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 namespace Content.Client._WF.SectorControl;
 
 /// <summary>Opens and closes the sector map window from the top-bar button, its key, the game menu and wf_sectormap; it closes when the player leaves the game.</summary>
-public sealed class WFSectorMapUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
+public sealed partial class WFSectorMapUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IInputManager _input = default!;

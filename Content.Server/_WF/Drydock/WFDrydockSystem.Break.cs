@@ -218,12 +218,12 @@ public sealed partial class WFDrydockSystem
         if (!TryComp<MapGridComponent>(ship, out var grid))
             return items;
 
-        var tiles = _map.GetAllTilesEnumerator(ship, grid);
+        var tiles = _map.GetAllTiles(ship, grid);
         while (tiles.MoveNext(out var tile))
         {
             var index = tile.Value.GridIndices;
             var strip = 0;
-            var anchored = _map.GetAnchoredEntitiesEnumerator(ship, grid, index);
+            var anchored = _map.GetAnchoredEntities(ship, grid, index);
             while (anchored.MoveNext(out var uid))
             {
                 if (HasComp<ShipRepairableComponent>(uid))
@@ -491,7 +491,7 @@ public sealed partial class WFDrydockSystem
         if (!TryComp<MapGridComponent>(ship, out var grid))
             return total;
 
-        var tiles = _map.GetAllTilesEnumerator(ship, grid);
+        var tiles = _map.GetAllTiles(ship, grid);
         while (tiles.MoveNext(out var tile))
         {
             AddTileYield(ship, grid, tile.Value.GridIndices, pay, total);
@@ -507,7 +507,7 @@ public sealed partial class WFDrydockSystem
     private void AddTileYield(EntityUid ship, MapGridComponent grid, Vector2i index, WFDrydockMaterialPaymentComponent pay,
         Dictionary<string, int> yield)
     {
-        var anchored = _map.GetAnchoredEntitiesEnumerator(ship, grid, index);
+        var anchored = _map.GetAnchoredEntities(ship, grid, index);
         while (anchored.MoveNext(out var uid))
         {
             if (!IsSalvagedWhole(uid.Value) && MetaData(uid.Value).EntityPrototype is { } proto)
@@ -653,7 +653,7 @@ public sealed partial class WFDrydockSystem
     /// <summary>Whether a grid has one tile left, or none, not counting tiles waiting to lift.</summary>
     private bool IsLastTile(WFDrydockJobComponent job, MapGridComponent grid)
     {
-        var tiles = _map.GetAllTilesEnumerator(job.Ship, grid);
+        var tiles = _map.GetAllTiles(job.Ship, grid);
         var count = 0;
         while (count < 2 && tiles.MoveNext(out var tile))
         {

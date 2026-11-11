@@ -22,7 +22,6 @@ using Robust.Shared.Prototypes;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Linq;
 using Content.Shared.Verbs;
@@ -187,7 +186,7 @@ public sealed partial class SurgerySystem : SharedSurgerySystem
     {
         _surgeries.Clear();
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
-            if (entity.TryGetComponent<SurgeryComponent>(out _))
+            if (entity.TryComp<SurgeryComponent>(out _, EntityManager.ComponentFactory))
                 _surgeries.Add(new EntProtoId(entity.ID));
     }
 }

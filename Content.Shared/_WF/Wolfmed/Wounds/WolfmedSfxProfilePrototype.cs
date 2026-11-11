@@ -12,7 +12,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// body. One shipped profile (<see cref="WolfmedWoundSfxSystem.DefaultProfile"/>); the prototype exists so
 /// the whole feedback layer can be retuned or swapped for other audio without a code change.
 /// </summary>
-[Prototype("wolfmedSfxProfile")]
+[Prototype]
 public sealed partial class WolfmedSfxProfilePrototype : IPrototype
 {
     [IdDataField]

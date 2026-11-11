@@ -17,7 +17,7 @@ using Robust.Shared.Random;
 namespace Content.Client._WF.Wolfmed.Overlays;
 
 /// <summary>Drives the fading-out view of a body close to death: the shader overlay and a slow camera sway.</summary>
-public sealed class WolfmedDyingEffectsSystem : EntitySystem
+public sealed partial class WolfmedDyingEffectsSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IOverlayManager _overlays = default!;

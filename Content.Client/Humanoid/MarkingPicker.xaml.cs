@@ -422,7 +422,7 @@ public sealed partial class MarkingPicker : Control
 
         var stateNames = GetMarkingStateNames(prototype);
         _currentMarkingColors.Clear();
-        CMarkingColors.DisposeAllChildren();
+        CMarkingColors.RemoveAllChildren();
         List<WolfgateColorPicker> colorSliders = new(); // WOLFGATE: swatches + sliders
         for (int i = 0; i < prototype.Sprites.Count; i++)
         {

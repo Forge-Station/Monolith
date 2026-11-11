@@ -12,7 +12,7 @@ namespace Content.Client._WF.Wolfmed.Overlays;
 /// M2 (OD8 (b)): a body stable but helpless for long enough is flagged in distress on medical HUDs, with the Call for
 /// help flag's icon (placeholder art). A body already flagged by its own call shows it once.
 /// </summary>
-public sealed class WolfmedDistressIconSystem : EntitySystem
+public sealed partial class WolfmedDistressIconSystem : EntitySystem
 {
     private static readonly ProtoId<HealthIconPrototype> Icon = "WFHealthIconWolfmedCallForHelp";
 

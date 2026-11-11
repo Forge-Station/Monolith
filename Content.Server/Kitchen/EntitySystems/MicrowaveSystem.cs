@@ -29,7 +29,6 @@ using Robust.Shared.Audio;
 using Content.Server.Lightning;
 using Content.Shared.Item;
 using Content.Shared.Kitchen;
-using Content.Shared.Kitchen.Components;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Tag;

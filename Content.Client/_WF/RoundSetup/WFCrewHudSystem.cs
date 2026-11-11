@@ -19,7 +19,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._WF.RoundSetup;
 
 /// <summary>Maintains a personal leader compass and non-modal captain approval cards.</summary>
-public sealed class WFCrewHudSystem : EntitySystem
+public sealed partial class WFCrewHudSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private IUserInterfaceManager _ui = default!;

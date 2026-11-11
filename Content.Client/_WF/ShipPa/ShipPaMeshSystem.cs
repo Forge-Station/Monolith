@@ -466,7 +466,7 @@ public sealed partial class ShipPaMeshSystem : EntitySystem
         if (TryComp(voice.Entity, out AudioComponent? audio))
             audio.StopPlaying();
         // Dispose the source before an internet sound buffer becomes eligible for release.
-        EntityManager.DeleteEntity(voice.Entity);
+        Del(voice.Entity);
     }
 
     private void StopVoices()

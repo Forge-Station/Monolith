@@ -37,7 +37,7 @@ namespace Content.Shared._WF.Wolfmed.Examine;
 /// so it reads wound state directly and networks nothing new. What each wound looks like is data
 /// (<see cref="WolfmedWoundLookPrototype"/>), not a switch: no wound id appears in this file.
 /// </remarks>
-public sealed class WolfmedVisualInspectionSystem : EntitySystem
+public sealed partial class WolfmedVisualInspectionSystem : EntitySystem
 {
     /// <summary>Appended to a finding's locale key for its row label.</summary>
     private const string LabelSuffix = "-short";

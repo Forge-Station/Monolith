@@ -14,7 +14,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._WF.RoundSetup;
 
 /// <summary>Shows crew postings as a non-modal card for players who belong to no crew.</summary>
-public sealed class WFCrewPostingCardSystem : EntitySystem
+public sealed partial class WFCrewPostingCardSystem : EntitySystem
 {
     [Dependency] private IUserInterfaceManager _ui = default!;
     [Dependency] private IConfigurationManager _config = default!;

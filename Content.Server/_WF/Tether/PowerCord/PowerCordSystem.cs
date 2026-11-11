@@ -305,7 +305,7 @@ public sealed class PowerCordSystem : EntitySystem
         _clamps = new Dictionary<string, (EntProtoId, NodeGroupID)>();
         foreach (var proto in _protos.EnumeratePrototypes<EntityPrototype>())
         {
-            if (proto.Abstract || !proto.TryGetComponent<PowerCordClampComponent>(out var clamp, EntityManager.ComponentFactory))
+            if (proto.Abstract || !proto.TryComp<PowerCordClampComponent>(out var clamp, EntityManager.ComponentFactory))
                 continue;
 
             // The first clamp prototype for a cord type wins, so a mapper's variant cannot shadow it.

@@ -3,7 +3,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Wires.Visualizers
 {
-    public sealed class WiresVisualizerSystem : VisualizerSystem<WiresVisualsComponent>
+    public sealed partial class WiresVisualizerSystem : VisualizerSystem<WiresVisualsComponent>
     {
         [Dependency] private SpriteSystem _sprite = default!;
 

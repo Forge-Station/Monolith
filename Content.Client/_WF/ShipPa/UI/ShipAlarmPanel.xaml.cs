@@ -256,7 +256,7 @@ public sealed partial class ShipAlarmPanel : BoxContainer
             if (_shownQueue.Count > 0)
             {
                 _shownQueue.Clear();
-                QueueList.DisposeAllChildren();
+                QueueList.RemoveAllChildren();
             }
 
             return;
@@ -282,7 +282,7 @@ public sealed partial class ShipAlarmPanel : BoxContainer
     /// <summary>One row per waiting link, each with a button to take it out.</summary>
     private void RebuildQueue()
     {
-        QueueList.DisposeAllChildren();
+        QueueList.RemoveAllChildren();
 
         for (var i = 0; i < _shownQueue.Count; i++)
         {

@@ -91,7 +91,7 @@ public sealed partial class WFVehicleHudSystem
             return false;
         var content = menu.ContentsContainer;
         content.Orphan();
-        menu.DisposeAllChildren();
+        menu.RemoveAllChildren();
         menu.AddChild(content);
         menu.MinSize = Vector2.Zero;
         menu.SetSize = new Vector2(float.NaN, float.NaN);
@@ -174,7 +174,7 @@ public sealed partial class WFVehicleHudSystem
         if (_statusElapsed > 0f)
             return;
         _statusElapsed = 0.25f;
-        _parts.DisposeAllChildren();
+        _parts.RemoveAllChildren();
         _frameHealth.Text = string.Empty;
         if (!TryComp(vehicle, out HardpointSlotsComponent? slots))
             return;

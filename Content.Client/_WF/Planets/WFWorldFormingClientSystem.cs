@@ -14,7 +14,7 @@ namespace Content.Client._WF.Planets;
 /// Keeps the server's world-forming state: a bar in the lobby while worlds form or the round start is held for them,
 /// and a small one in the round for a player on a world still forming.
 /// </summary>
-public sealed class WFWorldFormingClientSystem : EntitySystem
+public sealed partial class WFWorldFormingClientSystem : EntitySystem
 {
     [Dependency] private IClientNetManager _net = default!;
     [Dependency] private IPlayerManager _player = default!;

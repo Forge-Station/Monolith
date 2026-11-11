@@ -6,7 +6,7 @@ using Robust.Shared.Network;
 namespace Content.Shared._WF.Xenonids.Parasite.Surgery;
 
 /// <summary>Wires the larva removal surgery's condition and steps to the parasite system.</summary>
-public sealed class XenoLarvaSurgerySystem : EntitySystem
+public sealed partial class XenoLarvaSurgerySystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedXenoParasiteSystem _parasite = default!;

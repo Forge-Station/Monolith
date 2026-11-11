@@ -97,7 +97,7 @@ public sealed partial class MappingPrototypeList : Control
 
     public void RefreshRecents(IReadOnlyList<MappingPrototype> recents)
     {
-        RecentsBar.DisposeAllChildren();
+        RecentsBar.RemoveAllChildren();
 
         foreach (var mapping in recents)
         {
@@ -138,7 +138,7 @@ public sealed partial class MappingPrototypeList : Control
 
     public void PopulateGrid(List<MappingPrototype> prototypes)
     {
-        PaletteGrid.DisposeAllChildren();
+        PaletteGrid.RemoveAllChildren();
         PrototypeList.Visible = false;
         SearchList.Visible = false;
         PaletteGrid.Visible = true;
@@ -178,7 +178,7 @@ public sealed partial class MappingPrototypeList : Control
         _prototypes.Clear();
         _nestedLists.Clear();
 
-        PrototypeList.DisposeAllChildren();
+        PrototypeList.RemoveAllChildren();
 
         _prototypes.AddRange(prototypes);
 
@@ -305,7 +305,7 @@ public sealed partial class MappingPrototypeList : Control
     public void Search(List<MappingPrototype> prototypes)
     {
         _search.Clear();
-        SearchList.DisposeAllChildren();
+        SearchList.RemoveAllChildren();
         _lastIndices = (0, -1);
 
         _search.AddRange(prototypes);
@@ -382,7 +382,7 @@ public sealed partial class MappingPrototypeList : Control
         var expected = prevEnd >= prevStart ? prevEnd - prevStart + 1 : 0;
         if (list.ChildCount != expected)
         {
-            list.DisposeAllChildren();
+            list.RemoveAllChildren();
             prevStart = 0;
             prevEnd = -1;
         }

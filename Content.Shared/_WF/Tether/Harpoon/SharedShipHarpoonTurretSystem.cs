@@ -14,7 +14,7 @@ namespace Content.Shared._WF.Tether.Harpoon;
 /// Manning a harpoon turret: who is buckled in, where the turret is pointing, and whether a shot is allowed.
 /// Everything here runs on both sides so the operator's shot is predicted like any other gun.
 /// </summary>
-public abstract class SharedShipHarpoonTurretSystem : EntitySystem
+public abstract partial class SharedShipHarpoonTurretSystem : EntitySystem
 {
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] private SharedBuckleSystem _buckle = default!;

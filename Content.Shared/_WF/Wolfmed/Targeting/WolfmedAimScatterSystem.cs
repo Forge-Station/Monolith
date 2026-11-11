@@ -14,7 +14,7 @@ namespace Content.Shared._WF.Wolfmed.Targeting;
 /// The gun's current spread cone is projected out to the target: the wider the cone is there compared to the part's
 /// size, the likelier the round strays to a neighbouring part. Melee and thrown items are not touched.
 /// </remarks>
-public sealed class WolfmedAimScatterSystem : EntitySystem
+public sealed partial class WolfmedAimScatterSystem : EntitySystem
 {
     [Dependency] private SharedBodySystem _body = default!;
     [Dependency] private IConfigurationManager _cfg = default!;

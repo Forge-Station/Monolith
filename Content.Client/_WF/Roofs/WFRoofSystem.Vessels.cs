@@ -80,7 +80,7 @@ public sealed partial class WFRoofSystem
         _stale.Remove(grid);
 
         var floor = new HashSet<Vector2i>();
-        var tiles = _maps.GetAllTilesEnumerator(grid, grid.Comp);
+        var tiles = _maps.GetAllTiles(grid, grid.Comp);
         while (tiles.MoveNext(out var tile))
             floor.Add(tile.Value.GridIndices);
 

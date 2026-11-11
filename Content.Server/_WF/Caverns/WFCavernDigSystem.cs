@@ -149,7 +149,7 @@ public sealed partial class WFCavernDigSystem : EntitySystem
         if (grids.Count > 0)
             return false;
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(ground, ground.Comp2, index);
+        var anchored = _map.GetAnchoredEntities(ground, ground.Comp2, index);
         while (anchored.MoveNext(out var uid))
         {
             if (TryComp<PhysicsComponent>(uid, out var body) && body.CanCollide && body.Hard)

@@ -107,7 +107,7 @@ public sealed partial class BiomeSystem
         if (!_wfRollTables.TryGetValue(prototype, out table))
         {
             if (ProtoMan.TryIndex<EntityPrototype>(prototype, out var proto)
-                && proto.TryGetComponent<EntityTableSpawnerComponent>(out var spawner, Factory)
+                && proto.TryComp<EntityTableSpawnerComponent>(out var spawner, Factory)
                 && spawner is { Offset: 0f, DeleteSpawnerAfterSpawn: true })
             {
                 table = spawner.Table;
@@ -126,7 +126,7 @@ public sealed partial class BiomeSystem
             return passing;
 
         passing = ProtoMan.TryIndex<EntityPrototype>(prototype, out var proto)
-                  && proto.TryGetComponent<WFPlanetFaunaSpawnerComponent>(out var marker, Factory)
+                  && proto.TryComp<WFPlanetFaunaSpawnerComponent>(out var marker, Factory)
                   && !marker.KeepEntity;
 
         _wfPassingMarkers[prototype] = passing;
@@ -140,12 +140,12 @@ public sealed partial class BiomeSystem
             return fixedStructure;
 
         fixedStructure = ProtoMan.TryIndex<EntityPrototype>(prototype, out var proto)
-                         && proto.TryGetComponent<TransformComponent>(out var xform, Factory)
+                         && proto.TryComp<TransformComponent>(out var xform, Factory)
                          && xform.Anchored
-                         && !proto.TryGetComponent<EntityTableSpawnerComponent>(out _, Factory)
-                         && !proto.TryGetComponent<ConditionalSpawnerComponent>(out _, Factory)
-                         && !proto.TryGetComponent<RandomSpawnerComponent>(out _, Factory)
-                         && !proto.TryGetComponent<WFPlanetFaunaSpawnerComponent>(out _, Factory);
+                         && !proto.TryComp<EntityTableSpawnerComponent>(out _, Factory)
+                         && !proto.TryComp<ConditionalSpawnerComponent>(out _, Factory)
+                         && !proto.TryComp<RandomSpawnerComponent>(out _, Factory)
+                         && !proto.TryComp<WFPlanetFaunaSpawnerComponent>(out _, Factory);
 
         _wfRollResults[prototype] = fixedStructure;
         return fixedStructure;

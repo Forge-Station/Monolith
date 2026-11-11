@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._WF.SectorControl;
 
 /// <summary>Keeps the latest sector territory and legend the server sent, as vertices the shuttle map, radar and sector map draw, and finds the grids the sector map names.</summary>
-public sealed class WFSectorClientSystem : EntitySystem
+public sealed partial class WFSectorClientSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

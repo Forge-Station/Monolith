@@ -28,6 +28,3 @@
         nameGenerator:
           !type:NanotrasenNameGenerator
           prefixCreator: '14'
-      - type: StationJobs
-        availableJobs:
-          MMCEmployee: [ 0, 0 ]

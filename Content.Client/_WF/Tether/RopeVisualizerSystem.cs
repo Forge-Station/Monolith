@@ -14,7 +14,7 @@ namespace Content.Client._WF.Tether;
 /// The chains live here, not on the networked component, so nothing about the simulation can
 /// desynchronise or be mispredicted.
 /// </summary>
-public sealed class RopeVisualizerSystem : EntitySystem
+public sealed partial class RopeVisualizerSystem : EntitySystem
 {
     [Dependency] private IOverlayManager _overlays = default!;
     [Dependency] private IResourceCache _resources = default!;

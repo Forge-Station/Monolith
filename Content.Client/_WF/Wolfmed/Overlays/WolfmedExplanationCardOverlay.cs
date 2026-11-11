@@ -27,7 +27,7 @@ namespace Content.Client._WF.Wolfmed.Overlays;
 /// the brain bar while Dying; then the help, the blockers after their icons, the symptom, the felt states and the
 /// rescue lines.
 /// </remarks>
-public sealed class WolfmedExplanationCardOverlay : Overlay
+public sealed partial class WolfmedExplanationCardOverlay : Overlay
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IPlayerManager _player = default!;

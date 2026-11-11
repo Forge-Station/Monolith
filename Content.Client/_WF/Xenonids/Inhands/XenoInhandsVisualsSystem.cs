@@ -40,16 +40,16 @@ public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsCompo
 
             }
 
-            if (!sprite.LayerMapTryGet(layerDef, out var layer))
+            if (!SpriteSystem.LayerMapTryGet((uid, sprite), layerDef, out var layer, false))
                 continue;
 
             if (name == string.Empty)
             {
-                sprite.LayerSetVisible(layer, false);
+                SpriteSystem.LayerSetVisible((uid, sprite), layer, false);
             }
             else
             {
-                sprite.LayerSetVisible(layer, true);
+                SpriteSystem.LayerSetVisible((uid, sprite), layer, true);
 
                 string stateString = $"{component.Prefix}_{name}_{layerDef.ToString().ToLower()}";
 
@@ -70,10 +70,10 @@ public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsCompo
 
                 if (state != null)
                 {
-                    sprite.LayerSetState(layer, stateString);
+                    SpriteSystem.LayerSetRsiState((uid, sprite), layer, stateString);
                 }
                 else
-                    sprite.LayerSetVisible(layer, false);
+                    SpriteSystem.LayerSetVisible((uid, sprite), layer, false);
             }
         }
     }

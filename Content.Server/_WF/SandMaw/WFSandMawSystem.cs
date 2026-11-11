@@ -427,7 +427,7 @@ public sealed class WFSandMawSystem : EntitySystem
             var anchored = new List<EntityUid>();
             foreach (var (tile, _) in tiles)
             {
-                var enumerator = _maps.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+                var enumerator = _maps.GetAnchoredEntities(gridUid, grid, tile);
                 while (enumerator.MoveNext(out var uid))
                     anchored.Add(uid.Value);
             }

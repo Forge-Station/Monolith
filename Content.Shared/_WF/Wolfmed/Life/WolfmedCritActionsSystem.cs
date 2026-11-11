@@ -14,7 +14,7 @@ namespace Content.Shared._WF.Wolfmed.Life;
 /// every state change, so the list is edited on both sides at startup. That runs after the mob state's own
 /// init grant, while the body is still Alive, so nothing Critical has been granted yet.
 /// </remarks>
-public sealed class WolfmedCritActionsSystem : EntitySystem
+public sealed partial class WolfmedCritActionsSystem : EntitySystem
 {
     [Dependency] private SharedWolfmedConsciousnessSystem _consciousness = default!;
 

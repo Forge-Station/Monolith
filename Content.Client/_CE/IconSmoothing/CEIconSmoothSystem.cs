@@ -44,7 +44,7 @@ public sealed partial class CEIconSmoothSystem : EntitySystem
             {
                 for (var dy = -1; dy <= 1; dy++)
                 {
-                    DirtyEntities(_mapSystem.GetAnchoredEntitiesEnumerator(
+                    DirtyEntities(_mapSystem.GetAnchoredEntities(
                         gridEntity.Owner, gridEntity.Comp, pos + new Vector2i(dx, dy)));
                 }
             }
@@ -157,14 +157,14 @@ public sealed partial class CEIconSmoothSystem : EntitySystem
         }
 
         // Dirty all neighbours including diagonals.
-        DirtyEntities(_mapSystem.GetAnchoredEntitiesEnumerator(entityUid, grid, pos + new Vector2i(1, 0)));
-        DirtyEntities(_mapSystem.GetAnchoredEntitiesEnumerator(entityUid, grid, pos + new Vector2i(-1, 0)));
-        DirtyEntities(_mapSystem.GetAnchoredEntitiesEnumerator(entityUid, grid, pos + new Vector2i(0, 1)));
-        DirtyEntities(_mapSystem.GetAnchoredEntitiesEnumerator(entityUid, grid, pos + new Vector2i(0, -1)));
-        DirtyEntities(_mapSystem.GetAnchoredEntitiesEnumerator(entityUid, grid, pos + new Vector2i(1, 1)));
-        DirtyEntities(_mapSystem.GetAnchoredEntitiesEnumerator(entityUid, grid, pos + new Vector2i(-1, -1)));
-        DirtyEntities(_mapSystem.GetAnchoredEntitiesEnumerator(entityUid, grid, pos + new Vector2i(-1, 1)));
-        DirtyEntities(_mapSystem.GetAnchoredEntitiesEnumerator(entityUid, grid, pos + new Vector2i(1, -1)));
+        DirtyEntities(_mapSystem.GetAnchoredEntities(entityUid, grid, pos + new Vector2i(1, 0)));
+        DirtyEntities(_mapSystem.GetAnchoredEntities(entityUid, grid, pos + new Vector2i(-1, 0)));
+        DirtyEntities(_mapSystem.GetAnchoredEntities(entityUid, grid, pos + new Vector2i(0, 1)));
+        DirtyEntities(_mapSystem.GetAnchoredEntities(entityUid, grid, pos + new Vector2i(0, -1)));
+        DirtyEntities(_mapSystem.GetAnchoredEntities(entityUid, grid, pos + new Vector2i(1, 1)));
+        DirtyEntities(_mapSystem.GetAnchoredEntities(entityUid, grid, pos + new Vector2i(-1, -1)));
+        DirtyEntities(_mapSystem.GetAnchoredEntities(entityUid, grid, pos + new Vector2i(-1, 1)));
+        DirtyEntities(_mapSystem.GetAnchoredEntities(entityUid, grid, pos + new Vector2i(1, -1)));
     }
 
     private void DirtyEntities(AnchoredEntitiesEnumerator entities)
@@ -278,21 +278,21 @@ public sealed partial class CEIconSmoothSystem : EntitySystem
 
         // Calculate corner fills — identical to the original Corners mode.
         var n = MatchingEntity(smooth,
-            _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, pos.Offset(Direction.North)), smoothQuery, vanillaQuery);
+            _mapSystem.GetAnchoredEntities(gridUid, grid, pos.Offset(Direction.North)), smoothQuery, vanillaQuery);
         var ne = MatchingEntity(smooth,
-            _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, pos.Offset(Direction.NorthEast)), smoothQuery, vanillaQuery);
+            _mapSystem.GetAnchoredEntities(gridUid, grid, pos.Offset(Direction.NorthEast)), smoothQuery, vanillaQuery);
         var e = MatchingEntity(smooth,
-            _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, pos.Offset(Direction.East)), smoothQuery, vanillaQuery);
+            _mapSystem.GetAnchoredEntities(gridUid, grid, pos.Offset(Direction.East)), smoothQuery, vanillaQuery);
         var se = MatchingEntity(smooth,
-            _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, pos.Offset(Direction.SouthEast)), smoothQuery, vanillaQuery);
+            _mapSystem.GetAnchoredEntities(gridUid, grid, pos.Offset(Direction.SouthEast)), smoothQuery, vanillaQuery);
         var s = MatchingEntity(smooth,
-            _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, pos.Offset(Direction.South)), smoothQuery, vanillaQuery);
+            _mapSystem.GetAnchoredEntities(gridUid, grid, pos.Offset(Direction.South)), smoothQuery, vanillaQuery);
         var sw = MatchingEntity(smooth,
-            _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, pos.Offset(Direction.SouthWest)), smoothQuery, vanillaQuery);
+            _mapSystem.GetAnchoredEntities(gridUid, grid, pos.Offset(Direction.SouthWest)), smoothQuery, vanillaQuery);
         var w = MatchingEntity(smooth,
-            _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, pos.Offset(Direction.West)), smoothQuery, vanillaQuery);
+            _mapSystem.GetAnchoredEntities(gridUid, grid, pos.Offset(Direction.West)), smoothQuery, vanillaQuery);
         var nw = MatchingEntity(smooth,
-            _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, pos.Offset(Direction.NorthWest)), smoothQuery, vanillaQuery);
+            _mapSystem.GetAnchoredEntities(gridUid, grid, pos.Offset(Direction.NorthWest)), smoothQuery, vanillaQuery);
 
         var cornerNE = CornerFill.None;
         var cornerSE = CornerFill.None;

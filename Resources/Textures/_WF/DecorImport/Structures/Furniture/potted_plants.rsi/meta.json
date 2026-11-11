@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7, Baystation 12 at commit https://github.com/Baystation12/Baystation12/commit/64fcc7090fbf1d9255446154730a57586cec3355, CHOMPStation at commit https://github.com/CHOMPStation2/CHOMPStation2/commit/ca24d940aa4a6eb0d58d32b85ddc830f44459264, Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22, DarkPack at commit https://github.com/DarkPack13/SecondCity/commit/2a1e8fd0ccf64a5fd40504b20b1e1f76774f5ecc, Nebula at commit https://github.com/NebulaSS13/Nebula/commit/d7a668ec0268164d33a13481e2e5ce307996ff76, NovaSector at commit https://github.com/NovaSector/NovaSector/commit/3754f28afedc5e20e1bc76dd6c5568c957a4a9de, Paradise at commit https://github.com/ParadiseSS13/Paradise/commit/7cd73f80152a5e234249d99cace75ce2b5c1c54b, Polaris at commit https://github.com/PolarisSS13/Polaris/commit/6cd19fe0dec6b5f18b6b18c3eb36af7bf3359f25, tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "alien-8"
+    },
+    {
+      "name": "bonsai_1"
+    },
+    {
+      "name": "bonsai_2"
+    },
+    {
+      "name": "bonsai_3"
+    },
+    {
+      "name": "bonsai_4"
+    },
+    {
+      "name": "fern"
+    },
+    {
+      "name": "monkeyplant",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "plant-04"
+    },
+    {
+      "name": "plant-06"
+    },
+    {
+      "name": "plant-07"
+    },
+    {
+      "name": "plant-10"
+    },
+    {
+      "name": "plant-11"
+    },
+    {
+      "name": "plant-12"
+    },
+    {
+      "name": "plant-13_aurora"
+    },
+    {
+      "name": "plant-13_paradise"
+    },
+    {
+      "name": "plant-15_aurora"
+    },
+    {
+      "name": "plant-15_paradise"
+    },
+    {
+      "name": "plant-17"
+    },
+    {
+      "name": "plant-2"
+    },
+    {
+      "name": "plant-22"
+    },
+    {
+      "name": "plant-23"
+    },
+    {
+      "name": "plant-26"
+    },
+    {
+      "name": "plant-28",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "plant-3"
+    },
+    {
+      "name": "plant-30_aurora"
+    },
+    {
+      "name": "plant-30_nebula",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "plant-36",
+      "delays": [
+        [
+          2.3,
+          0.2,
+          0.2,
+          0.1,
+          0.1,
+          0.1,
+          5.4,
+          0.1,
+          0.1,
+          1.4,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "plant-5"
+    },
+    {
+      "name": "plant-6"
+    },
+    {
+      "name": "plant-7"
+    },
+    {
+      "name": "plant-empty"
+    },
+    {
+      "name": "plant-luce-vine"
+    },
+    {
+      "name": "plant-tc-01"
+    },
+    {
+      "name": "plant-tc-02"
+    },
+    {
+      "name": "plant-tc-03"
+    },
+    {
+      "name": "plant-xmas",
+      "delays": [
+        [
+          0.8,
+          0.8,
+          0.8,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "plant1"
+    },
+    {
+      "name": "plant2"
+    },
+    {
+      "name": "plant3"
+    },
+    {
+      "name": "plant4"
+    },
+    {
+      "name": "plant5"
+    },
+    {
+      "name": "potplant0"
+    },
+    {
+      "name": "potplant1"
+    },
+    {
+      "name": "potplant2"
+    }
+  ]
+}

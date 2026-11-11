@@ -13,7 +13,7 @@ namespace Content.Shared._WF.Wolfmed.Autodoc;
 /// this instead of looking for a buckle and an operating table, so a pod occupant satisfies every surgery
 /// that wants a table.
 /// </summary>
-public sealed class SharedAutodocSystem : EntitySystem
+public sealed partial class SharedAutodocSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedPopupSystem _popup = default!; // Playtest 3 SAM

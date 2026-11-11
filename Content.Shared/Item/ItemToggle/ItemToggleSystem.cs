@@ -31,7 +31,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     [Dependency] private SharedBodySystem _body = default!; // Forge-Change
     [Dependency] private IGameTiming _gameTiming = default!; // Forge-Change
 
-    [Dependency] private readonly EntityQuery<ItemToggleComponent> _itemToggleQuery = default!;
+    [Dependency] private EntityQuery<ItemToggleComponent> _itemToggleQuery = default!;
 
     public override void Initialize()
     {

@@ -38,13 +38,6 @@
           icon: /Textures/_Mono/Interface/Misc/LateJoin/lathe.png
           stationSubtext: 'frontier-lobby-hokkaido-subtext'
           stationDescription: 'frontier-lobby-hokkaido-description'
-        - type: StationJobs
-          availableJobs:
-            MMCLiason: [ 1, 1 ]
-            MMCSecurity: [ 5, 5 ]
-            MMCEmployee: [ -1, -1 ]
-          tags:
-          - MieyoLiason
         - type: StationDeadDropHintExempt
         - type: StationCargoBountyDatabase
           availableBounties:

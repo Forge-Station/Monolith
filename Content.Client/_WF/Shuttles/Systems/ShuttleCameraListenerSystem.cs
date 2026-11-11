@@ -15,7 +15,7 @@ namespace Content.Client._WF.Shuttles.Systems;
 /// Keeps positional sound centred on the pilot's body while a ship camera view carries their eye away.
 /// The engine listens from the eye, so each sound is judged from the body and placed to match.
 /// </summary>
-public sealed class ShuttleCameraListenerSystem : EntitySystem
+public sealed partial class ShuttleCameraListenerSystem : EntitySystem
 {
     [Dependency] private IEyeManager _eye = default!;
     [Dependency] private IPlayerManager _player = default!;

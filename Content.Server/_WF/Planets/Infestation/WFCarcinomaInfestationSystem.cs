@@ -151,7 +151,7 @@ public sealed partial class WFCarcinomaInfestationSystem : EntitySystem
         for (var x = -1; x <= 1; x++)
         for (var y = -1; y <= 1; y++)
         {
-            var anchored = _map.GetAnchoredEntitiesEnumerator(hull, grid, centre + new Vector2i(x, y));
+            var anchored = _map.GetAnchoredEntities(hull, grid, centre + new Vector2i(x, y));
             while (anchored.MoveNext(out var entity))
             {
                 if (entity is { } wall && _tags.HasTag(wall, WallTag) && !HasComp<DoorComponent>(wall)
@@ -176,7 +176,7 @@ public sealed partial class WFCarcinomaInfestationSystem : EntitySystem
         _random.Shuffle(perimeter);
         foreach (var tile in perimeter)
         {
-            var anchored = _map.GetAnchoredEntitiesEnumerator(hull, grid, tile.GridIndices);
+            var anchored = _map.GetAnchoredEntities(hull, grid, tile.GridIndices);
             var occupied = false;
             while (anchored.MoveNext(out var entity)) occupied |= HasComp<WFCarcinomaTendrilComponent>(entity);
             if (occupied || state.Tendrils.Count >= MaxTendrils) continue;
@@ -199,7 +199,7 @@ public sealed partial class WFCarcinomaInfestationSystem : EntitySystem
         foreach (var tile in perimeter)
         {
             if (_biomass.HullCount(hull) >= WFPlanetBiomassSystem.MaxHullBiomass) break;
-            var anchored = _map.GetAnchoredEntitiesEnumerator(hull, grid, tile.GridIndices);
+            var anchored = _map.GetAnchoredEntities(hull, grid, tile.GridIndices);
             var blocked = false;
             while (anchored.MoveNext(out var entity))
                 blocked |= HasComp<WFPlanetBiomassRestrictionComponent>(entity)

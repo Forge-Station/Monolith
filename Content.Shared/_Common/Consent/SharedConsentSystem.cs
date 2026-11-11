@@ -11,8 +11,8 @@ namespace Content.Shared._Common.Consent;
 
 public abstract partial class SharedConsentSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedMindSystem _mindSystem = default!;
-    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
+    [Dependency] protected SharedMindSystem _mindSystem = default!;
+    [Dependency] private ExamineSystemShared _examineSystem = default!;
 
     protected virtual bool ConsentTextUpdatedSinceLastRead(Entity<ConsentComponent> targetEnt, EntityUid readerUid)
     {

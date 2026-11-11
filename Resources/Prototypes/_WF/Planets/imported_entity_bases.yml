@@ -176,11 +176,15 @@
 - type: entity
   parent: BaseFlora
   id: TgFloraAshVahrezjia
-  abstract: true
-  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Sprite
     sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+    state: flowerpod1
+    offset: "0,0"
+    layers:
+    - state: flowerpod1
 
 - type: entity
   parent: BaseFlora

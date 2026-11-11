@@ -305,7 +305,7 @@ public sealed partial class OrePipeSystem : EntitySystem
                 continue;
 
             var bound = 1;
-            if (entProto.TryGetComponent(out StackComponent? stackTemplate, _factory))
+            if (entProto.TryComp(out StackComponent? stackTemplate, _factory))
                 bound = _stack.GetMaxCount(stackTemplate);
 
             var toInsert = new List<EntityUid>();
@@ -408,7 +408,7 @@ public sealed partial class OrePipeSystem : EntitySystem
         if (protoId == null || !_proto.TryIndex(protoId, out EntityPrototype? entProto))
             return false;
 
-        if (!entProto.TryGetComponent(out PhysicalCompositionComponent? composition, _factory))
+        if (!entProto.TryComp(out PhysicalCompositionComponent? composition, _factory))
             return false;
 
         if (!PrototypePassesStorageWhitelist(storage.Whitelist, entProto))
@@ -457,7 +457,7 @@ public sealed partial class OrePipeSystem : EntitySystem
         if (whitelist?.Tags is not { Count: > 0 })
             return true;
 
-        if (!proto.TryGetComponent(out TagComponent? tags, _factory))
+        if (!proto.TryComp(out TagComponent? tags, _factory))
             return false;
 
         return whitelist.RequireAll

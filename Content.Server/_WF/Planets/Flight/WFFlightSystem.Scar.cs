@@ -36,7 +36,7 @@ public sealed partial class WFFlightSystem
         var reserved = new List<(Vector2i, Tile)>();
         var matrix = _transform.GetWorldMatrix(hull);
         var scar = new Tile(_scarTiles[ScarTile].TileId);
-        var tiles = _map.GetAllTilesEnumerator(hull, hull.Comp);
+        var tiles = _map.GetAllTiles(hull, hull.Comp);
         while (tiles.MoveNext(out var tile))
         {
             var centre = ((Vector2) tile.Value.GridIndices + new Vector2(0.5f)) * hull.Comp.TileSize;
@@ -50,7 +50,7 @@ public sealed partial class WFFlightSystem
                 continue;
 
             var liquid = false;
-            var anchored = _map.GetAnchoredEntitiesEnumerator(ground, groundGrid, index);
+            var anchored = _map.GetAnchoredEntities(ground, groundGrid, index);
             while (anchored.MoveNext(out var entity))
                 liquid |= HasComp<TileEntityEffectComponent>(entity);
             if (liquid)

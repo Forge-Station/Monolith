@@ -7,6 +7,15 @@ Reaver campaign. Every cell has a callsign (`WFSectorHex.Callsign`, such as `N-1
 announcements and the map. The sector is the cells whose centre lies within `WFSectorHex.SectorRadius` (30 km)
 of the origin, the grid the map outlines; a cell past it can't be claimed or contested.
 
+A company claims one cell with a beacon (`WFSectorBeacon`). The flatpack is unlocked by the universal technology
+`WFSectorBeacons` and printed at a protolathe or an engineering techfab. Anchored on a grid in the sector and
+activated, it claims that cell for the activator's company: the map fills it in the company's colour and names the
+company. A second beacon cannot be activated in a cell that already has one, and a player beacon cannot paint a cell
+an NPC faction or an admin beacon already holds. Player beacons take damage only from a non-admin player; admin and
+NPC beacons (`WFSectorBeaconImmortal`, or `immortal: true` with `autoActivate` and a `company`) take none. Destroying
+a beacon, or flying it out of its cell, frees the cell and the colour goes. A parked ship does not retake a cell a
+beacon still holds.
+
 Players see held cells, borders and contested cells with their countdown on the map, and a legend line per faction
 that the driver writes. A crewed player ship that has been inside a faction's space for ten seconds is told "WARNING:
 entering ... controlled space" (at most once every two minutes), and one back outside for thirty seconds that it has
@@ -68,8 +77,10 @@ Admins use `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest 
 ### Server
 
 - [`Content.Server/_WF/SectorControl/Commands/WFSectorCommand.cs`](Commands/WFSectorCommand.cs)
+- [`Content.Server/_WF/SectorControl/Components/WFSectorBeaconComponent.cs`](Components/WFSectorBeaconComponent.cs)
 - [`Content.Server/_WF/SectorControl/Components/WFSectorTerritoryComponent.cs`](Components/WFSectorTerritoryComponent.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorActivitySystem.cs`](Systems/WFSectorActivitySystem.cs)
+- [`Content.Server/_WF/SectorControl/Systems/WFSectorBeaconSystem.cs`](Systems/WFSectorBeaconSystem.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorNoticeSystem.cs`](Systems/WFSectorNoticeSystem.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorProtectionSystem.cs`](Systems/WFSectorProtectionSystem.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorSyncSystem.cs`](Systems/WFSectorSyncSystem.cs)
@@ -99,6 +110,7 @@ Admins use `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest 
 ### Integration tests
 
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorActivityTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorActivityTest.cs)
+- [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorBeaconTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorBeaconTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorChallengeTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorChallengeTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorClearingTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorClearingTest.cs)
 - [`Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorControlTest.cs`](../../../Content.IntegrationTests/Tests/_WF/SectorControl/WFSectorControlTest.cs)
@@ -119,6 +131,7 @@ Admins use `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest 
 ### Localization
 
 - [`Resources/Locale/en-US/_WF/SectorControl/sectorcontrol.ftl`](../../../Resources/Locale/en-US/_WF/SectorControl/sectorcontrol.ftl)
+- [`Resources/Locale/ru-RU/_WF/SectorControl/sectorcontrol.ftl`](../../../Resources/Locale/ru-RU/_WF/SectorControl/sectorcontrol.ftl)
 
 ### Textures
 
@@ -141,5 +154,7 @@ Admins use `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest 
 - [`Content.Shared/Input/ContentKeyFunctions.cs`](../../../Content.Shared/Input/ContentKeyFunctions.cs): sector map
 - [`Resources/clientCommandPerms.yml`](../../../Resources/clientCommandPerms.yml): client-only command that opens the sector map window
 - [`Resources/keybinds.yml`](../../../Resources/keybinds.yml): sector map key
+- [`Resources/Prototypes/Entities/Structures/Machines/lathe.yml`](../../../Resources/Prototypes/Entities/Structures/Machines/lathe.yml): claim beacon recipe pack on the protolathe
+- [`Resources/Prototypes/_NF/Entities/Structures/Machines/lathe.yml`](../../../Resources/Prototypes/_NF/Entities/Structures/Machines/lathe.yml): claim beacon recipe pack on the engineering techfab
 
 <!-- WOLFGATE-GENERATED END -->

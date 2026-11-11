@@ -953,7 +953,7 @@ public sealed partial class WolfgateGenitalEditor : BoxContainer
         // Disposed rather than removed: a ButtonGroup only lets go of disposed buttons.
         foreach (var grid in ShapeGrids())
         {
-            grid.DisposeAllChildren();
+            grid.RemoveAllChildren();
         }
 
         _tilesBuilt = false;

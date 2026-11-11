@@ -22,6 +22,13 @@ public sealed partial class WFSectorFactionPrototype : IPrototype
     [DataField]
     public ProtoId<CompanyPrototype>? Company;
 
+    /// <summary>
+    /// Players may claim cells for this faction with a sector beacon. NPC campaign factions leave it unset, so a
+    /// player beacon cannot paint their cells or join their claims.
+    /// </summary>
+    [DataField]
+    public bool PlayerBeacons;
+
     /// <summary>Whether a station in a cell it holds is cut off from NPC freight and traders.</summary>
     [DataField]
     public bool Blockades;

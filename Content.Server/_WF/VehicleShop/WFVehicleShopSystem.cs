@@ -339,7 +339,7 @@ public sealed class WFVehicleShopSystem : EntitySystem
         Box2? bounds = null;
         foreach (var vehicle in vehicles)
         {
-            if (!_proto.Index(vehicle).TryGetComponent<Robust.Shared.Physics.FixturesComponent>(out var fixtures, EntityManager.ComponentFactory))
+            if (!_proto.Index(vehicle).TryComp<Robust.Shared.Physics.FixturesComponent>(out var fixtures, EntityManager.ComponentFactory))
                 continue;
 
             foreach (var fixture in fixtures.Fixtures.Values)

@@ -20,7 +20,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._WF.SectorControl;
 
 /// <summary>The sector from above, zoomable out to 60 km either side of centre: the cell grid, territory, the grids and encounters a shuttle console's MAP tab lists as blips, and the player's own ship.</summary>
-public sealed class WFSectorMapControl : Control
+public sealed partial class WFSectorMapControl : Control
 {
     [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private IPlayerManager _player = default!;

@@ -30,7 +30,7 @@ public sealed class WFCockpitLease
             root.RemoveChild(child);
         Remember(() =>
         {
-            root.DisposeAllChildren();
+            root.RemoveAllChildren();
             foreach (var child in children)
                 root.AddChild(child);
         });

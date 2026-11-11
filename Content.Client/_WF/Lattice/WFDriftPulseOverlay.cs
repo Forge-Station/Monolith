@@ -13,7 +13,7 @@ namespace Content.Client._WF.Lattice;
 /// A Drift pulse: vision closes to a tunnel that throbs in time with the bass, and red glyphs crawl round its edge,
 /// for a few seconds. Drawn over the viewport only, so the HUD stays usable.
 /// </summary>
-public sealed class WFDriftPulseOverlay : Overlay
+public sealed partial class WFDriftPulseOverlay : Overlay
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _proto = default!;

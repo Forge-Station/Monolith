@@ -13,7 +13,7 @@ namespace Content.Client._WF.Planets;
 /// Keeps weather loops in hand: stopped while the local player has no body, as in the lobby, where the weather
 /// system leaves them playing, and scaled by the ambience slider.
 /// </summary>
-public sealed class WFWeatherAudioSystem : EntitySystem
+public sealed partial class WFWeatherAudioSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _timing = default!;

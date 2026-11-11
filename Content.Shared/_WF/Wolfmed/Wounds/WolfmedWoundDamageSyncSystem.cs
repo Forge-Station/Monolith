@@ -21,7 +21,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// hurt, and a body total only a brute pack could clear. This lowers each wound-backed damage type to the
 /// damage its remaining wounds represent, and never raises one, so damage nothing models is left alone.
 /// </remarks>
-public sealed class WolfmedWoundDamageSyncSystem : EntitySystem
+public sealed partial class WolfmedWoundDamageSyncSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private IPrototypeManager _protos = default!;

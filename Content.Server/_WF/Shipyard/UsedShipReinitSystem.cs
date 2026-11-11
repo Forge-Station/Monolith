@@ -103,7 +103,7 @@ public sealed class UsedShipReinitSystem : EntitySystem
         emitter.Shielded = null;
 
         if (MetaData(uid).EntityPrototype is { } proto
-            && proto.TryGetComponent<ShipShieldEmitterComponent>(out var original, _compFactory))
+            && proto.TryComp<ShipShieldEmitterComponent>(out var original, _compFactory))
         {
             emitter.BaseDraw = original.BaseDraw;
             emitter.MaxDraw = original.MaxDraw;

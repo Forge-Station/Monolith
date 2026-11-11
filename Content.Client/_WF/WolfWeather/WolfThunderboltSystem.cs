@@ -12,7 +12,7 @@ namespace Content.Client._WF.WolfWeather;
 /// Draws a bolt somewhere in view for a far flash, so the player sees what flashed. A strike near a player spawns its
 /// own bolt on the server.
 /// </summary>
-public sealed class WolfThunderboltSystem : EntitySystem
+public sealed partial class WolfThunderboltSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IPrototypeManager _proto = default!;

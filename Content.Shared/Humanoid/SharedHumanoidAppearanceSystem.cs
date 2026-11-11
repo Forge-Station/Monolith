@@ -504,6 +504,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
             _appearance.SetData(uid, ScaleVisuals.Scale, new Vector2(profile.Appearance.Width, profile.Appearance.Height), appearance);
         }
 
+        ApplyAugments(uid, profile, humanoid); // WOLFGATE(Augments): swaps in the augmented parts and draws their styles
         RaiseLocalEvent(uid, new ProfileLoadFinishedEvent { Profile = profile }); // Shitmed Change, WOLFGATE - pass profile
         Dirty(uid, humanoid);
     }

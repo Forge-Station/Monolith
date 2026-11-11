@@ -12,7 +12,7 @@ using Robust.Shared.Physics.Systems;
 namespace Content.Shared._Mono.Weapons.Hitscan.Systems;
 
 /// <summary>Resolves a piercing hitscan the same way the basic raycast does, then hands the hits to damage and shields.</summary>
-public sealed class HitscanMultiRaycastSystem : EntitySystem
+public sealed partial class HitscanMultiRaycastSystem : EntitySystem
 {
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private ISharedAdminLogManager _log = default!;

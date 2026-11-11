@@ -31,7 +31,7 @@ public record struct WolfmedSpeedFloorEvent(float BaseWalk, float BaseSprint, fl
 /// move it. The marked line in <c>SharedBodySystem.UpdateMovementSpeed</c> gives a wound host
 /// <see cref="LeglessBase"/> instead, and this system sets the actual speed.
 /// </remarks>
-public sealed class WolfmedCrawlSystem : EntitySystem
+public sealed partial class WolfmedCrawlSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private SharedBodySystem _body = default!;

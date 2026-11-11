@@ -14,6 +14,7 @@ namespace Content.Client.Humanoid;
 
 public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private MarkingManager _markingManager = default!;
     [Dependency] private GenitalsVisualizerSystem _genitalsVisuals = default!; // WOLFGATE - anatomy undergarment hiding
@@ -35,7 +36,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         UpdateLayers(component, sprite);
         ApplyMarkingSet(uid, component, sprite); // WOLFGATE
 
-        sprite[sprite.LayerMapReserveBlank(HumanoidVisualLayers.Eyes)].Color = component.EyeColor;
+        sprite[_sprite.LayerMapReserve((uid, sprite), HumanoidVisualLayers.Eyes)].Color = component.EyeColor;
 
         // WOLFGATE - anatomy visuals follow marking rebuilds (GenitalsVisualizerSystem).
         RaiseLocalEvent(uid, new HumanoidMarkingsAppliedEvent());
@@ -80,7 +81,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         // TODO maybe just remove them altogether?
         foreach (var key in oldLayers)
         {
-            if (sprite.LayerMapTryGet(key, out var index))
+            if (sprite.LayerMapTryGet(key, out var index, false))
                 sprite[index].Visible = false;
         }
     }
@@ -215,6 +216,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         humanoid.Species = profile.Species;
         humanoid.SkinColor = profile.Appearance.SkinColor;
         humanoid.EyeColor = profile.Appearance.EyeColor;
+        ApplyAugmentVisuals(uid, profile, humanoid); // WOLFGATE(Augments): the doll shows the picked augments, client-side only
         humanoid.Height = profile.Appearance.Height;
         humanoid.Width = profile.Appearance.Width;
 
@@ -301,7 +303,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         HumanoidAppearanceComponent humanoid,
         SpriteComponent sprite)
     {
-        if (!sprite.LayerMapTryGet(markingPrototype.BodyPart, out int _))
+        if (!_sprite.LayerMapTryGet((uid, sprite), markingPrototype.BodyPart, out int _, false))
         {
             return;
         }
@@ -342,7 +344,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
                 layerSlot = parsedSlot;
             }
 
-            if (!sprite.LayerMapTryGet(layerSlot, out var targetLayer))
+            if (!_sprite.LayerMapTryGet((uid, sprite), layerSlot, out var targetLayer, false))
             {
                 continue;
             }
@@ -351,11 +353,11 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             slotOffsets[layerSlot] = slotOffset + 1;
             // End WOLFGATE
 
-            if (!sprite.LayerMapTryGet(layerId, out _))
+            if (!_sprite.LayerMapTryGet((uid, sprite), layerId, out _, false))
             {
                 var layer = sprite.AddLayer(markingSprite, targetLayer + slotOffset + 1);
-                sprite.LayerMapSet(layerId, layer);
-                sprite.LayerSetSprite(layerId, rsi);
+                _sprite.LayerMapSet((uid, sprite), layerId, layer);
+                _sprite.LayerSetSprite((uid, sprite), layerId, rsi);
             }
 		    // impstation edit begin - check if there's a shader defined in the markingPrototype's shader datafield, and if there is...
 			if (markingPrototype.Shader != null)
@@ -364,7 +366,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
 				sprite.LayerSetShader(layerId, markingPrototype.Shader);
 			}
 			// impstation edit end
-            sprite.LayerSetVisible(layerId, visible);
+            _sprite.LayerSetVisible((uid, sprite), layerId, visible);
 
             if (!visible || setting == null) // this is kinda implied
             {
@@ -377,11 +379,11 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             // WOLFGATE - colours come from the colorLinks-resolved list rather than straight from colors.
             if (linkedColors != null && j < linkedColors.Count)
             {
-                sprite.LayerSetColor(layerId, linkedColors[j]);
+                _sprite.LayerSetColor((uid, sprite), layerId, linkedColors[j]);
             }
             else
             {
-                sprite.LayerSetColor(layerId, Color.White);
+                _sprite.LayerSetColor((uid, sprite), layerId, Color.White);
             }
             // End WOLFGATE
         }
@@ -415,7 +417,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             if (!spriteInfo.MatchSkin)
                 continue;
 
-            var index = sprite.LayerMapReserveBlank(layer);
+            var index = _sprite.LayerMapReserve((uid, sprite), layer);
             sprite[index].Color = skinColor.WithAlpha(spriteInfo.LayerAlpha);
         }
     }
@@ -430,7 +432,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         base.SetLayerVisibility(ent, layer, visible, slot, ref dirty);
 
         var sprite = Comp<SpriteComponent>(ent);
-        if (!sprite.LayerMapTryGet(layer, out var index))
+        if (!sprite.LayerMapTryGet(layer, out var index, false))
         {
             if (!visible)
                 return;

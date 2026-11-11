@@ -59,7 +59,7 @@ public sealed partial class WFShipShieldShuntScreen
         var resultPanel = InstrumentTheme.Panel("wf-console-shield-coverage",
             InstrumentTheme.Column(new WFGlassReadout(_previewStatus), InstrumentTheme.Row(actual, sector),
                 InstrumentTheme.Row(strength, outside), _strength, _outside, new WFGlassReadout(_unprotected)), false, 8, 4);
-        _settings.DisposeAllChildren();
+        _settings.RemoveAllChildren();
         _settings.SeparationOverride = 6;
         _settings.AddChild(directionPanel);
         _settings.AddChild(powerPanel);

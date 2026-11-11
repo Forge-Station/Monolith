@@ -119,10 +119,10 @@ public sealed partial class ShipTargetingSystem : EntitySystem
             {
                 var gunToDestVec = destMapPos.Position - _transform.GetWorldPosition(gXform);
 
-                if (proto.TryGetComponent<HitscanAmmoComponent>(out var hitscan, Factory))
+                if (proto.TryComp<HitscanAmmoComponent>(out var hitscan, Factory))
                 {
                     // check if too far
-                    if (proto.TryGetComponent<HitscanBasicRaycastComponent>(out var raycast, Factory)
+                    if (proto.TryComp<HitscanBasicRaycastComponent>(out var raycast, Factory)
                         && raycast.MaxDistance < gunToDestVec.Length()
                     )
                         continue;
@@ -139,7 +139,7 @@ public sealed partial class ShipTargetingSystem : EntitySystem
 
                     var bulletProto = _gun.GetBulletPrototype(proto);
                     var projVel = gun.ProjectileSpeedModified;
-                    if (bulletProto.TryGetComponent<TargetSeekingComponent>(out var seeking, Factory))
+                    if (bulletProto.TryComp<TargetSeekingComponent>(out var seeking, Factory))
                     {
                         hitTime = _seeking.CalculateAdvancedTrackingTime(gunToDestVec, leadBy, seeking.Acceleration);
                     }
@@ -161,7 +161,7 @@ public sealed partial class ShipTargetingSystem : EntitySystem
                     }
 
                     // might take too long to hit
-                    if (bulletProto.TryGetComponent<TimedDespawnComponent>(out var despawn, Factory) && hitTime > despawn.Lifetime)
+                    if (bulletProto.TryComp<TimedDespawnComponent>(out var despawn, Factory) && hitTime > despawn.Lifetime)
                         continue;
                 }
             }

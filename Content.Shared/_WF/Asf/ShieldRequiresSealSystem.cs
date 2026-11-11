@@ -8,7 +8,7 @@ namespace Content.Shared._WF.Asf;
 /// <summary>
 /// Ties a modsuit's personal shield to its seal: no shield on an unsealed suit, and unsealing drops it.
 /// </summary>
-public sealed class ShieldRequiresSealSystem : EntitySystem
+public sealed partial class ShieldRequiresSealSystem : EntitySystem
 {
     [Dependency] private ItemToggleSystem _toggle = default!;
 

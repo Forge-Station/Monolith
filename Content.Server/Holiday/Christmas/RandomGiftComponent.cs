@@ -1,7 +1,6 @@
 ﻿using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Holiday.Christmas;
 

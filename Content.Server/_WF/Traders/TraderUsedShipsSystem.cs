@@ -322,7 +322,7 @@ public sealed partial class TraderUsedShipsSystem : EntitySystem
     private void GrantConsolePerks(Entity<TraderUsedShipsComponent> ent, EntityUid idCard, EntityUid buyer)
     {
         if (!_proto.TryIndex(ent.Comp.Console, out var consoleProto)
-            || !consoleProto.TryGetComponent<ShipyardConsoleComponent>(out var console, EntityManager.ComponentFactory))
+            || !consoleProto.TryComp<ShipyardConsoleComponent>(out var console, EntityManager.ComponentFactory))
         {
             return;
         }

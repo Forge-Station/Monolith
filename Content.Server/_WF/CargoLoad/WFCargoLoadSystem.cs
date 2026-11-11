@@ -1,37 +1,21 @@
 using System.Linq;
 using Content.Shared.Shuttles.Components;
 using Content.Server._NF.Shuttles.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Server._WF.Encounters.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Server._WF.Planets.Flight;
-using Content.Shared.Shuttles.Components;
 using Content.Server.Popups;
-using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
-using Content.Shared.Shuttles.Components;
 using Content.Shared._WF.CargoLoad;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Examine;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Materials;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Stacks;
-using Content.Shared.Shuttles.Components;
 using Content.Shared._Mono.Ships;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map.Components;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Physics;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Physics.Components;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Timing;
-using Content.Shared.Shuttles.Components;
 
 namespace Content.Server._WF.CargoLoad;
 
@@ -130,9 +114,9 @@ public sealed class WFCargoLoadSystem : EntitySystem
         if (_proto.TryIndex<MaterialPrototype>(material, out var proto)
             && proto.StackEntity is { } stack
             && _proto.TryIndex(stack, out var item)
-            && item.TryGetComponent<WFCargoMassComponent>(out var cargo, _factory)
+            && item.TryComp<WFCargoMassComponent>(out var cargo, _factory)
             && cargo.PerUnit > 0f
-            && item.TryGetComponent<PhysicalCompositionComponent>(out var composition, _factory)
+            && item.TryComp<PhysicalCompositionComponent>(out var composition, _factory)
             && composition.MaterialComposition.TryGetValue(material, out var units)
             && units > 0)
             weight = cargo.PerUnit / units;

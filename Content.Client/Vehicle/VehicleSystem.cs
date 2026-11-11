@@ -7,6 +7,7 @@ namespace Content.Client.Vehicle;
 
 public sealed partial class VehicleSystem : SharedVehicleSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private EyeSystem _eye = default!;
 
     public override void Initialize()
@@ -69,7 +70,7 @@ public sealed partial class VehicleSystem : SharedVehicleSystem
         // Set vehicle layer to animated or not (i.e. are the wheels turning or not)
         if (component.AutoAnimate
             && Appearance.TryGetData<bool>(uid, VehicleVisuals.AutoAnimate, out var autoAnimate, args.Component))
-            args.Sprite.LayerSetAutoAnimated(VehicleVisualLayers.AutoAnimate, autoAnimate);
+            _sprite.LayerSetAutoAnimated((uid, args.Sprite), VehicleVisualLayers.AutoAnimate, autoAnimate);
     }
 }
 

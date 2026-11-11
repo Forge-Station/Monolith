@@ -4,7 +4,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared._WF.Warmth;
 
 /// <summary>The slowdown the cold and heat warnings bring, and how a body feel reads and colours.</summary>
-public abstract class SharedWFWarmthSystem : EntitySystem
+public abstract partial class SharedWFWarmthSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;

@@ -8,8 +8,9 @@ namespace Content.Client._EstacaoPirata.Cards.Card;
 /// <summary>
 /// This handles...
 /// </summary>
-public sealed class CardSystem : EntitySystem
+public sealed partial class CardSystem : EntitySystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -25,7 +26,7 @@ public sealed class CardSystem : EntitySystem
         for (var i = 0; i < spriteComponent.AllLayers.Count(); i++)
         {
             //Log.Debug($"Layer {i}");
-            if (!spriteComponent.TryGetLayer(i, out var layer) || layer.State.Name == null)
+            if (!_sprite.TryGetLayer((uid, spriteComponent), i, out var layer, false) || layer.State.Name == null)
                 continue;
 
             var rsi = layer.RSI ?? spriteComponent.BaseRSI;
@@ -63,12 +64,12 @@ public sealed class CardSystem : EntitySystem
         //Removes extra layers
         else if (spriteComponent.AllLayers.Count() > layerCount)
             for (var i = spriteComponent.AllLayers.Count() - 1; i >= layerCount; i--)
-                spriteComponent.RemoveLayer(i);
+                _sprite.RemoveLayer((uid, spriteComponent), i);
 
         for (var i = 0; i < newSprite.Count(); i++)
         {
             var layer = newSprite[i];
-            spriteComponent.LayerSetSprite(i, layer);
+            _sprite.LayerSetSprite((uid, spriteComponent), i, layer);
         }
     }
 }

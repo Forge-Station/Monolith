@@ -7,7 +7,7 @@ using Robust.Shared.Configuration;
 namespace Content.Shared._WF.Wolfmed.Body;
 
 /// <summary>Reads Wolfmed part data off Shitmed body parts, with a no-wounds default.</summary>
-public sealed class WolfmedBodyPartSystem : EntitySystem
+public sealed partial class WolfmedBodyPartSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private MobStateSystem _mobState = default!;

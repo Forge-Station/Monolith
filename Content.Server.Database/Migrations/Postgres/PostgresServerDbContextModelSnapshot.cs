@@ -958,6 +958,16 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("age");
 
+                    b.Property<string>("AugmentUnlocks")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("augment_unlocks");
+
+                    b.Property<string>("Augments")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("augments");
+
                     b.Property<int>("BankBalance")
                         .HasColumnType("integer")
                         .HasColumnName("bank_balance");
@@ -1101,6 +1111,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("species");
+
+                    b.Property<string>("SpeechVoice")
+                        .HasColumnType("text")
+                        .HasColumnName("speech_voice");
 
                     b.Property<string>("TypingIndicator")
                         .HasColumnType("text")

@@ -3,7 +3,6 @@ using Content.Shared.Examine;
 using Content.Shared.Localizations; // Forge-Change
 using Content.Shared.Stacks;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction.Steps
 {

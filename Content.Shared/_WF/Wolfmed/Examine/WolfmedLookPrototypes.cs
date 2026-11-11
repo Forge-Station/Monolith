@@ -106,7 +106,7 @@ public sealed partial class WolfmedLookStage
 /// edit, and stage-keyed so a cut reads shallow, deep or gaping off its own severity bands rather than
 /// off a number the examiner could not possibly judge.
 /// </remarks>
-[Prototype("wolfmedWoundLook")]
+[Prototype]
 public sealed partial class WolfmedWoundLookPrototype : IPrototype
 {
     [IdDataField]
@@ -198,7 +198,7 @@ public sealed partial class WolfmedLookCoverage
 /// The tuning the visual inspection reads: what clothing hides, where the bleeding bands sit and how far
 /// a sepsis flush has to go before it shows on the face.
 /// </summary>
-[Prototype("wolfmedLookProfile")]
+[Prototype]
 public sealed partial class WolfmedLookProfilePrototype : IPrototype
 {
     public const string Default = "WFWolfmedLookDefault";

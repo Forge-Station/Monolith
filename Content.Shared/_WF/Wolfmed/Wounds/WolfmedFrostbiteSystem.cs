@@ -13,7 +13,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// Shared so the component and its flag are networked; every write is server-gated, because pain
 /// suppression is.
 /// </remarks>
-public sealed class WolfmedFrostbiteSystem : EntitySystem
+public sealed partial class WolfmedFrostbiteSystem : EntitySystem
 {
     /// <summary>Suppression key, so frostbite numbness stacks beside a painkiller rather than over it.</summary>
     public const string SuppressionKey = "WolfmedFrostbite";

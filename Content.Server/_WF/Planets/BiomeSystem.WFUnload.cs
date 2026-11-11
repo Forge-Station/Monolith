@@ -451,7 +451,7 @@ public sealed partial class BiomeSystem
         }
 
         // A light on a rock wall or a cable run under it stays where it is, so the rock has to as well.
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(map, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(map, grid, tile);
         var count = 0;
 
         while (anchored.MoveNext(out _))

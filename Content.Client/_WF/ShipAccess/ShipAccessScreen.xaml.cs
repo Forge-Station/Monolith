@@ -443,7 +443,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
         LockedLabel.Text = comp == null ? "-" : Loc.GetString(comp.Locked ? "ship-access-locked-yes" : "ship-access-locked-no");
 
         _builderChecks.Clear();
-        AllowListContainer.DisposeAllChildren();
+        AllowListContainer.RemoveAllChildren();
         if (comp != null)
         {
             foreach (var entry in comp.AllowList)
@@ -456,7 +456,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
     private void RebuildNearby(bool isOwner, List<NearbyPerson> nearby)
     {
         NearbyBox.Visible = isOwner;
-        NearbyContainer.DisposeAllChildren();
+        NearbyContainer.RemoveAllChildren();
         foreach (var person in nearby)
             NearbyContainer.AddChild(NearbyRow(person));
 
@@ -469,7 +469,7 @@ public sealed partial class ShipAccessScreen : BoxContainer
         DoorNoneLabel.Visible = selected == null;
         DoorBox.Visible = selected != null;
         _doorPlayerChecks.Clear();
-        DoorPlayersContainer.DisposeAllChildren();
+        DoorPlayersContainer.RemoveAllChildren();
         if (selected == null)
             return;
 

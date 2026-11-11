@@ -11,7 +11,7 @@ namespace Content.Client._WF.Lattice;
 /// The Lattice made visible: a living beam of alien light between each pair of neighbouring primary anchors, leaving
 /// each from the edge of its shield. A lost anchor breaks the two beams that ran to it.
 /// </summary>
-public sealed class WFLatticeBeamOverlay : Overlay
+public sealed partial class WFLatticeBeamOverlay : Overlay
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IGameTiming _timing = default!;

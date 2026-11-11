@@ -5,7 +5,7 @@ using Content.Shared.UserInterface;
 namespace Content.Shared._WF.Xenonids.Sensor;
 
 /// <summary>Keeps a resin sensor's mass scanner closed to anyone but xenos of its hive.</summary>
-public sealed class XenoSensorSystem : EntitySystem
+public sealed partial class XenoSensorSystem : EntitySystem
 {
     [Dependency] private SharedXenoHiveSystem _hive = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

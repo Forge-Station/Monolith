@@ -37,7 +37,7 @@ public sealed partial class NcSupplyRewardEntry
 ///     Old id/amount/prob/chance/options aliases are intentionally not represented.
 ///     The audit rejects them so reward YAML stays on the strict type + id + count shape.
 /// </summary>
-[Prototype("ncSupplyRewardPool")]
+[Prototype]
 public sealed partial class NcSupplyRewardPoolPrototype : IPrototype
 {
     [DataField("entries", required: true)]

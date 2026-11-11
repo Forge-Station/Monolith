@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._WF.Cockpit;
 
 /// <summary>Four permanent collision lamps with independent alert flash rates and full target details on hover.</summary>
-public sealed class WFCockpitTcasPanel : Control
+public sealed partial class WFCockpitTcasPanel : Control
 {
     [Dependency] private IGameTiming _timing = default!;
     private readonly Func<WFCockpitTcasReading> _read;

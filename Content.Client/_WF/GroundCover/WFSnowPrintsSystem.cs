@@ -14,7 +14,7 @@ namespace Content.Client._WF.GroundCover;
 /// time, with the snow under them as it thins, fill in as fresh snow lands on them, and go when their tile is shoveled
 /// or melts bare.
 /// </summary>
-public sealed class WFSnowPrintsSystem : EntitySystem
+public sealed partial class WFSnowPrintsSystem : EntitySystem
 {
     [Dependency] private WFGroundCoverSystem _cover = default!;
     [Dependency] private SharedGravitySystem _gravity = default!;

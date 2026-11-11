@@ -329,7 +329,7 @@ public sealed partial class WolfmedIvDripSystem : EntitySystem
         if (pack is { } held)
             TryComp(held, out healing);
         else if (_protos.TryIndex(PackPrototype, out var proto))
-            proto.TryGetComponent(out healing, _factory);
+            proto.TryComp(out healing, _factory);
 
         if (healing?.DamageContainers is not { } containers)
             return HasComp<BloodstreamComponent>(body);

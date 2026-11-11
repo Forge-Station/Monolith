@@ -40,7 +40,7 @@ public sealed partial class ShuttleConsoleWindow
         var body = Column(CollisionBanner, CaptureBanner, ModeButtons, CameraBar, Contents);
         body.Margin = new Thickness(10);
         body.HorizontalExpand = body.VerticalExpand = true;
-        ContentsContainer.DisposeAllChildren();
+        ContentsContainer.RemoveAllChildren();
         ContentsContainer.AddChild(body);
         Install(this);
     }

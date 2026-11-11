@@ -12,32 +12,32 @@ public sealed class XenoFruitPlanterVisualsSystem : VisualizerSystem<XenoFruitPl
 
         if (sprite == null ||
             !AppearanceSystem.TryGetData(uid, XenoFruitPlanterVisuals.Color, out Color color) ||
-            !sprite.LayerMapTryGet(XenoFruitVisualLayers.Base, out var layer))
+            !SpriteSystem.LayerMapTryGet((uid, sprite), XenoFruitVisualLayers.Base, out var layer, false))
         {
             return;
         }
 
         if (color == null)
         {
-            sprite.LayerSetVisible(layer, false);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, false);
             return;
         }
 
-        sprite.LayerSetVisible(layer, true);
-        sprite.LayerSetColor(layer, color);
+        SpriteSystem.LayerSetVisible((uid, sprite), layer, true);
+        SpriteSystem.LayerSetColor((uid, sprite), layer, color);
 
         if (AppearanceSystem.TryGetData(uid, XenoFruitPlanterVisuals.Downed, out bool downed) && downed)
         {
-            sprite.LayerSetState(layer, $"{component.Prefix}_downed");
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer, $"{component.Prefix}_downed");
             return;
         }
 
         if (AppearanceSystem.TryGetData(uid, XenoFruitPlanterVisuals.Resting, out bool resting) && resting)
         {
-            sprite.LayerSetState(layer, $"{component.Prefix}_rest");
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer, $"{component.Prefix}_rest");
             return;
         }
 
-        sprite.LayerSetState(layer, $"{component.Prefix}_walk");
+        SpriteSystem.LayerSetRsiState((uid, sprite), layer, $"{component.Prefix}_walk");
     }
 }

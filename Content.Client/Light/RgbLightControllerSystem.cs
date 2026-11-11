@@ -16,6 +16,7 @@ namespace Content.Client.Light
 {
     public sealed partial class RgbLightControllerSystem : SharedRgbLightControllerSystem
     {
+        [Dependency] private readonly SpriteSystem _sprite = default!;
         [Dependency] private IGameTiming _gameTiming = default!;
         [Dependency] private ItemSystem _itemSystem = default!;
         [Dependency] private SharedPointLightSystem _lights = default!;
@@ -76,7 +77,7 @@ namespace Content.Client.Light
 
             foreach (var key in args.RevealedLayers)
             {
-                if (!sprite.LayerMapTryGet(key, out var index) || sprite[index] is not Layer layer)
+                if (!_sprite.LayerMapTryGet((uid, sprite), key, out var index, false) || sprite[index] is not Layer layer)
                     continue;
 
                 if (layer.ShaderPrototype == "unshaded")
@@ -94,7 +95,7 @@ namespace Content.Client.Light
 
             foreach (var key in args.RevealedLayers)
             {
-                if (!sprite.LayerMapTryGet(key, out var index) || sprite[index] is not Layer layer)
+                if (!_sprite.LayerMapTryGet((uid, sprite), key, out var index, false) || sprite[index] is not Layer layer)
                     continue;
 
                 if (layer.ShaderPrototype == "unshaded")
@@ -165,7 +166,7 @@ namespace Content.Client.Light
 
             foreach (var (layer, color) in rgb.OriginalLayerColors)
             {
-                sprite.LayerSetColor(layer, color);
+                _sprite.LayerSetColor((uid, sprite), layer, color);
             }
         }
 
@@ -182,7 +183,7 @@ namespace Content.Client.Light
                 {
                     foreach (var index in rgb.Layers)
                     {
-                        if (sprite.TryGetLayer(index, out var layer))
+                        if (_sprite.TryGetLayer((uid, sprite), index, out var layer, false))
                             layer.Color = color;
                     }
                 }

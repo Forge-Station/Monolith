@@ -252,7 +252,7 @@ public sealed partial class WFPlanetPoiSystem
     private Box2 BoundsOf(EntProtoId proto, Angle angle)
     {
         Box2? bounds = null;
-        if (_proto.Index(proto).TryGetComponent<FixturesComponent>(out var fixtures, EntityManager.ComponentFactory))
+        if (_proto.Index(proto).TryComp<FixturesComponent>(out var fixtures, EntityManager.ComponentFactory))
         {
             var transform = new Transform(Vector2.Zero, angle);
             foreach (var fixture in fixtures.Fixtures.Values)

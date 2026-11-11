@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._WF.Wolfmed.Autodoc;
 
 /// <summary>A heading in the pod's procedure list. A surgery in no category falls under the last one by order.</summary>
-[Prototype("autodocCategory")]
+[Prototype]
 public sealed partial class AutodocCategoryPrototype : IPrototype
 {
     [IdDataField]

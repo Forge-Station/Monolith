@@ -13,7 +13,7 @@ namespace Content.Shared._WF.Wolfmed.Consciousness;
 // A climb is refused when the body is Downed or out and is the one climbing; a medic lifting it on still works.
 // Lying down strips the tables' layer from a body's masks (StandingStateSystem); while Downed the layer stays, and
 // a body lifted onto a table by somebody else keeps the climb's own masks.
-public sealed class WolfmedDownedClimbSystem : EntitySystem
+public sealed partial class WolfmedDownedClimbSystem : EntitySystem
 {
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

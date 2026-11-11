@@ -45,7 +45,7 @@ public sealed partial class BiomeSystem
 
     private bool HasAnchoredEntity(EntityUid gridUid, MapGridComponent grid, Vector2i indices)
     {
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, indices);
+        var anchored = _mapSystem.GetAnchoredEntities(gridUid, grid, indices);
         return anchored.MoveNext(out _);
     }
 

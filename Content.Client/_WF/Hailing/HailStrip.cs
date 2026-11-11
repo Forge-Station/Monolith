@@ -11,7 +11,7 @@ namespace Content.Client._WF.Hailing;
 /// keys for whatever the console's hail needs next. The row had nothing beside its caption, and the strip
 /// asks for no height of its own, so the chat underneath keeps every pixel it had.
 /// </summary>
-public sealed class HailStrip : BoxContainer
+public sealed partial class HailStrip : BoxContainer
 {
     [Dependency] private IEntityManager _entManager = default!;
 

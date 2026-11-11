@@ -80,7 +80,7 @@ public sealed partial class WolfgateConsentTab : Control
             return;
         }
 
-        ConsentSettings.DisposeAllChildren();
+        ConsentSettings.RemoveAllChildren();
         _toggles.Clear();
 
         foreach (var toggle in wanted)

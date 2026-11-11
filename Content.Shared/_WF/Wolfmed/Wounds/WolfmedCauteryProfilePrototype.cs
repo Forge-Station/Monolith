@@ -10,7 +10,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// (<see cref="WolfmedCauterySystem.DefaultProfile"/>); the prototype exists so a downstream server can
 /// retune searing without a code change.
 /// </summary>
-[Prototype("wolfmedCauteryProfile")]
+[Prototype]
 public sealed partial class WolfmedCauteryProfilePrototype : IPrototype
 {
     [IdDataField]

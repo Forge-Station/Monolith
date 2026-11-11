@@ -16,7 +16,7 @@ namespace Content.Shared._WF.ArmorSpecialization;
 /// The worn-armour specializations that answer Wolfmed: wound wards, limb locks and pain dampeners, plus the ablative
 /// coat that soaks burns at the armour step.
 /// </summary>
-public sealed class WFArmorSpecializationSystem : EntitySystem
+public sealed partial class WFArmorSpecializationSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private InventorySystem _inventory = default!;

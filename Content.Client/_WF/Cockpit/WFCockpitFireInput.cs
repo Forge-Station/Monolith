@@ -17,7 +17,7 @@ using SixLabors.ImageSharp.Processing;
 namespace Content.Client._WF.Cockpit;
 
 /// <summary>Routes cockpit aiming and held fire from the world view and navigation plot.</summary>
-public sealed class WFCockpitFireInput : Control
+public sealed partial class WFCockpitFireInput : Control
 {
     [Dependency] private IInputManager _input = default!;
     [Dependency] private IClyde _clyde = default!;

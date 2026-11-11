@@ -8,7 +8,7 @@ namespace Content.Shared._Mono.Traits.Physical;
 /// <summary>
 /// Cancels step triggers for entities that have TrapAvoiderComponent, unless the owner of the trigger has the UnavoidableTrap tag.
 /// </summary>
-public sealed class TrapAvoiderSystem : EntitySystem
+public sealed partial class TrapAvoiderSystem : EntitySystem
 {
     [Dependency] private TagSystem _tag = default!;
 

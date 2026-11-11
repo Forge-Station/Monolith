@@ -153,7 +153,7 @@ public sealed partial class WFCavernStairsSystem : SharedWFCavernStairsSystem
         if (cavern is not { } level || !HasComp<WFCavernLayerComponent>(level) || !TryComp<MapGridComponent>(level, out var grid))
             return false;
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(level, grid, _map.WorldToTile(level, grid, _transform.GetWorldPosition(xform)));
+        var anchored = _map.GetAnchoredEntities(level, grid, _map.WorldToTile(level, grid, _transform.GetWorldPosition(xform)));
 
         while (anchored.MoveNext(out var uid))
         {

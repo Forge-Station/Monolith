@@ -9,7 +9,7 @@ namespace Content.Client._WF.Hailing;
 /// its own, so a hail never moves the console's layout. The console can sit hidden behind the cockpit, where
 /// the engine stops ticking it, so <see cref="HailKeySystem"/> ticks the key instead.
 /// </summary>
-public sealed class HailKey : Button
+public sealed partial class HailKey : Button
 {
     [Dependency] private IEntityManager _entManager = default!;
 

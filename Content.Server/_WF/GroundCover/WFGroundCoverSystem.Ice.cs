@@ -1,23 +1,14 @@
 using Content.Server._WF.Planets;
 using Content.Shared.Atmos.Components;
 using Content.Server.Atmos.Components;
-using Content.Shared.Atmos.Components;
 using Content.Shared._WF.GroundCover;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Movement.Components;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Atmos.Components;
 using Content.Shared.StepTrigger.Components;
-using Content.Shared.Atmos.Components;
 using Content.Shared.StepTrigger.Systems;
-using Content.Shared.Atmos.Components;
 using Robust.Shared.Map.Components;
-using Content.Shared.Atmos.Components;
 using Robust.Shared.Physics.Systems;
-using Content.Shared.Atmos.Components;
 
 namespace Content.Server._WF.GroundCover;
 
@@ -487,7 +478,7 @@ public sealed partial class WFGroundCoverSystem
 
     private EntityUid? WaterAt(Entity<MapGridComponent> grid, Vector2i tile)
     {
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(grid, grid, tile);
         while (anchored.MoveNext(out var ent))
         {
             if (HasComp<WFFreezableWaterComponent>(ent.Value))

@@ -14,7 +14,7 @@ namespace Content.Client._WF.Warmth;
 /// The local body's warmth: the frost or heat screen effect, the slowdown once the server says so, and off a planet a
 /// small readout of the air here and how the body feels, shown while either is worth knowing.
 /// </summary>
-public sealed class WFWarmthSystem : SharedWFWarmthSystem
+public sealed partial class WFWarmthSystem : SharedWFWarmthSystem
 {
     [Dependency] private IOverlayManager _overlays = default!;
     [Dependency] private IPlayerManager _player = default!;

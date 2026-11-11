@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._WF.CombatConsole;
 
 /// <summary>Plays local mechanical control cues through the player's normal audio mixer.</summary>
-public sealed class WFConsoleAudio : EntitySystem
+public sealed partial class WFConsoleAudio : EntitySystem
 {
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IGameTiming _timing = default!;

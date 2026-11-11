@@ -47,9 +47,9 @@ public sealed partial class ThrowingSystem : EntitySystem
     [Dependency] private IConfigurationManager _configManager = default!;
     [Dependency] private AnchorableSystem _anchorable = default!;
 
-    [Dependency] private readonly EntityQuery<AnchorableComponent> _anchorableQuery = default!;
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
-    [Dependency] private readonly EntityQuery<ProjectileComponent> _projectileQuery = default!;
+    [Dependency] private EntityQuery<AnchorableComponent> _anchorableQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<ProjectileComponent> _projectileQuery = default!;
 
     public override void Initialize()
     {

@@ -74,7 +74,7 @@ public sealed partial class SharedXenoGutSystem : EntitySystem
 
         var xenoMsg = Loc.GetString("rmc-gut-start-xenos", ("user", xeno.Owner));
         var xenoFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<XenoComponent>(uid));
+            .RemoveWhereAttachedEntity(uid => !HasComp<XenoComponent>(uid));
         if (_net.IsServer)
             _popup.PopupEntity(xenoMsg, xeno.Owner, xenoFilter, true, PopupType.LargeCaution);
 
@@ -119,7 +119,7 @@ public sealed partial class SharedXenoGutSystem : EntitySystem
 
         var xenoMsg = Loc.GetString("rmc-gut-finish-xenos", ("user", xeno.Owner));
         var xenoFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<XenoComponent>(uid));
+            .RemoveWhereAttachedEntity(uid => !HasComp<XenoComponent>(uid));
         if (_net.IsServer)
             _popup.PopupEntity(xenoMsg, xeno.Owner, xenoFilter, true, PopupType.LargeCaution);
 

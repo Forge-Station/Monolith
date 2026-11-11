@@ -11,7 +11,7 @@ namespace Content.Shared._WF.Wolfmed.Wounds;
 /// <see cref="WolfmedInfectionRiskBehavior"/>) off a live wound, and enforces the one rule that belongs
 /// nowhere else: an arterial bleed refuses treatment until the bleeding itself has been stopped.
 /// </summary>
-public sealed class WolfmedWoundTraitSystem : EntitySystem
+public sealed partial class WolfmedWoundTraitSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private Content.Shared.Body.Systems.SharedBodySystem _body = default!;

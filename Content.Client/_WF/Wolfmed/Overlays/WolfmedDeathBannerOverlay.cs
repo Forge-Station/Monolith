@@ -7,7 +7,7 @@ using Robust.Shared.Enums;
 namespace Content.Client._WF.Wolfmed.Overlays;
 
 /// <summary>The band across the screen that tells a player their body has died. Values come from the dying effects system.</summary>
-public sealed class WolfmedDeathBannerOverlay : Overlay
+public sealed partial class WolfmedDeathBannerOverlay : Overlay
 {
     [Dependency] private IResourceCache _cache = default!;
 

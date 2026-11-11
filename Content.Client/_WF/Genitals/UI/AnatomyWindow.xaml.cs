@@ -124,7 +124,7 @@ public sealed partial class AnatomyWindow : FancyWindow
     /// <summary>Drops the organ rows, e.g. when the master switch turns off.</summary>
     public void Clear()
     {
-        OrganRows.DisposeAllChildren();
+        OrganRows.RemoveAllChildren();
         _rows.Clear();
         _rowSlots.Clear();
     }

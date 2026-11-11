@@ -22,12 +22,12 @@ public sealed class XenoParasitesVisualSystem : VisualizerSystem<XenoParasiteThr
 
         foreach(var layer in Enum.GetValues<ParasiteOverlayLayers>())
         {
-            if (!sprite.LayerMapTryGet(layer, out var paraLayer))
+            if (!SpriteSystem.LayerMapTryGet((uid, sprite), layer, out var paraLayer, false))
                 continue;
 
-            sprite.LayerSetVisible(layer, states[(int)layer]);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, states[(int)layer]);
 
-            sprite.LayerSetState(layer, $"{layerState}{(int)layer}");
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer, $"{layerState}{(int)layer}");
         }
     }
 }

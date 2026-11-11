@@ -31,7 +31,7 @@ namespace Content.Shared._WF.Wolfmed.Consciousness;
 /// Every restriction is an existing ActionBlocker attempt event, so no item, door or gun needed changing.
 /// The floor itself is Wolfgate's standing state, the same one knockdown uses.
 /// </remarks>
-public sealed class WolfmedDownedSystem : EntitySystem
+public sealed partial class WolfmedDownedSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private WolfmedBodyPainSystem _bodyPain = default!;

@@ -21,7 +21,7 @@ public sealed partial class AtmosphereSystem
 
         // Startup queued every loaded tile; only what is already built needs a look.
         atmos.InvalidatedCoords.Clear();
-        var tiles = _map.GetAllTilesEnumerator(ground, ground.Comp);
+        var tiles = _map.GetAllTiles(ground, ground.Comp);
 
         while (tiles.MoveNext(out var tile))
         {

@@ -76,3 +76,28 @@ cmd-wf_sector-bad-position = Not a position: {$x} {$y}
 cmd-wf_sector-callsign = {$callsign} is cell ({$q}, {$r}), centre at {$x} {$y}.
 cmd-wf_sector-unknown-faction = Unknown faction: {$faction}
 cmd-wf_sector-bad-cell = Not a cell: {$q} {$r}
+
+# Company claim beacons. A researched flatpack, anchored in the sector, paints one hex until it is destroyed.
+wf-sector-beacon-name = claim beacon
+wf-sector-beacon-desc = Anchor it on a hull or lattice in the sector and activate it. The hex turns your company's colour until the beacon is destroyed.
+wf-sector-beacon-immortal-desc = An admin or NPC claim beacon. It ignores damage, and a player beacon cannot paint its hex.
+wf-sector-beacon-flatpack-name = claim beacon flatpack
+wf-sector-beacon-flatpack-desc = Unpack it with a wrench on a hull or lattice in the sector, then activate the beacon.
+wf-sector-beacon-named = {$company} beacon
+wf-sector-beacon-verb-activate = Activate
+wf-sector-beacon-activated = {$callsign} is held by {$company}.
+wf-sector-beacon-occupied = A beacon is already in this hex. Remove it first.
+wf-sector-beacon-held = This hex is already held.
+wf-sector-beacon-not-in-space = Anchor the beacon on a grid in the sector.
+wf-sector-beacon-no-company = You need a company to claim a hex.
+wf-sector-beacon-no-faction = That company cannot claim hexes.
+wf-sector-beacon-refused = This hex cannot be claimed.
+wf-sector-beacon-admin-only = Only an admin can activate this beacon.
+wf-sector-beacon-already-on = This beacon is already on.
+wf-sector-beacon-examine-on = Holding {$callsign} for {$company}.
+wf-sector-beacon-examine-off = Off. Activate it in the sector to claim the hex.
+wf-sector-beacon-legend = {$faction}: {$count} {$count ->
+    [one] beacon
+    *[other] beacons
+}
+research-technology-sector-beacon = Claim beacons

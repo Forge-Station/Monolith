@@ -446,7 +446,7 @@ public sealed partial class CEZLevelsSystem
         // WOLFGATE END
 
         var tileCount = 0;
-        var tiles = _map.GetAllTilesEnumerator(ent, ent.Comp1);
+        var tiles = _map.GetAllTiles(ent, ent.Comp1);
         while (tiles.MoveNext(out var tileRef))
         {
             tileCount++;

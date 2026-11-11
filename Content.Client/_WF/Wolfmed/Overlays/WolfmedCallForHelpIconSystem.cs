@@ -11,7 +11,7 @@ namespace Content.Client._WF.Wolfmed.Overlays;
 /// Flags a patient who called for help on medical HUDs until the call runs out (M1a, plan §5.3). A HUD flag
 /// rather than a radio ping: the medic sees who is asking among everyone lying on the floor.
 /// </summary>
-public sealed class WolfmedCallForHelpIconSystem : EntitySystem
+public sealed partial class WolfmedCallForHelpIconSystem : EntitySystem
 {
     private static readonly ProtoId<HealthIconPrototype> Icon = "WFHealthIconWolfmedCallForHelp";
 

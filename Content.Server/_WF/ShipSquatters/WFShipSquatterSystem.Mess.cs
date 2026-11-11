@@ -70,7 +70,7 @@ public sealed partial class WFShipSquatterSystem
     private bool IsBare(WFShipSquatterComponent comp, MapGridComponent grid, Vector2i tile)
     {
         // Puddles are anchored too, but they are his own and mop off.
-        var anchored = _maps.GetAnchoredEntitiesEnumerator(comp.Ship, grid, tile);
+        var anchored = _maps.GetAnchoredEntities(comp.Ship, grid, tile);
         while (anchored.MoveNext(out var thing))
         {
             if (!HasComp<PuddleComponent>(thing))

@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 namespace Content.Client._WF.SectorControl;
 
 /// <summary>Opens or closes the sector map window. Client-side, for everyone.</summary>
-public sealed class WFSectorMapCommand : LocalizedCommands
+public sealed partial class WFSectorMapCommand : LocalizedCommands
 {
     [Dependency] private IUserInterfaceManager _ui = default!;
 

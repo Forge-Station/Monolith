@@ -1,6 +1,5 @@
 using Content.Shared.Physics;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Lightning.Components;
 /// <summary>

@@ -6,7 +6,7 @@ namespace Content.Shared._WF.StationRoles;
 /// Hourly wage for a station job. The id is the job id. A sector account, when it is a real
 /// <c>SectorBankAccount</c>, is drawn before the player is paid.
 /// </summary>
-[Prototype("wfStationSalary")]
+[Prototype]
 public sealed partial class WfStationSalaryPrototype : IPrototype
 {
     [IdDataField]

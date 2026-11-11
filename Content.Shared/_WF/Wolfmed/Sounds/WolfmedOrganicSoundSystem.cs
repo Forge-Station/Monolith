@@ -21,7 +21,7 @@ namespace Content.Shared._WF.Wolfmed.Sounds;
 /// Which bodies are flesh for the Bobmed sounds, and which of Bob's sounds a melee hit on flesh makes. Shared so
 /// the attacker's client predicts the same hit sound the server plays.
 /// </summary>
-public sealed class WolfmedOrganicSoundSystem : EntitySystem
+public sealed partial class WolfmedOrganicSoundSystem : EntitySystem
 {
     /// <summary>A held weapon's hit that is mostly Piercing.</summary>
     public static readonly ProtoId<SoundCollectionPrototype> StabCollection = "WFWolfmedStab";

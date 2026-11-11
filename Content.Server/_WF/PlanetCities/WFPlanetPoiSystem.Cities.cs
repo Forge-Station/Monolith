@@ -361,7 +361,7 @@ public sealed partial class WFPlanetPoiSystem
         {
             var swaps = city.ReplaceTiles.ToDictionary(pair => (int) _tiles[pair.Key].TileId, pair => (int) _tiles[pair.Value].TileId);
             var swapped = new List<(Vector2i, Tile)>();
-            var all = _maps.GetAllTilesEnumerator(grid.Owner, grid.Comp);
+            var all = _maps.GetAllTiles(grid.Owner, grid.Comp);
             while (all.MoveNext(out var tileRef))
             {
                 if (swaps.TryGetValue(tileRef.Value.Tile.TypeId, out var swap))
@@ -455,7 +455,7 @@ public sealed partial class WFPlanetPoiSystem
                 var cell = position + side * offset;
                 cells.Add((cell, tile));
                 paved.Add(cell);
-                var anchored = _maps.GetAnchoredEntitiesEnumerator(grid.Owner, grid.Comp, cell);
+                var anchored = _maps.GetAnchoredEntities(grid.Owner, grid.Comp, cell);
                 while (anchored.MoveNext(out var uid))
                 {
                     if (TryComp<Robust.Shared.Physics.Components.PhysicsComponent>(uid, out var body) && body.Hard && body.CanCollide)
@@ -649,7 +649,7 @@ public sealed partial class WFPlanetPoiSystem
             if (street.Tiles.Contains(tile))
                 continue;
 
-            var anchored = _maps.GetAnchoredEntitiesEnumerator(under.Grid.Owner, under.Grid.Comp, tile);
+            var anchored = _maps.GetAnchoredEntities(under.Grid.Owner, under.Grid.Comp, tile);
             while (anchored.MoveNext(out var uid))
             {
                 if (!HasComp<CEZLevelHighGroundComponent>(uid))
@@ -723,7 +723,7 @@ public sealed partial class WFPlanetPoiSystem
         var doomed = new List<EntityUid>();
         foreach (var tile in tiles)
         {
-            var anchored = _maps.GetAnchoredEntitiesEnumerator(target, grid, tile);
+            var anchored = _maps.GetAnchoredEntities(target, grid, tile);
             while (anchored.MoveNext(out var uid))
             {
                 doomed.Add(uid.Value);
@@ -739,7 +739,7 @@ public sealed partial class WFPlanetPoiSystem
     private HashSet<Vector2i> LevelTiles(Entity<MapGridComponent> grid)
     {
         var tiles = new HashSet<Vector2i>();
-        var enumerator = _maps.GetAllTilesEnumerator(grid.Owner, grid.Comp);
+        var enumerator = _maps.GetAllTiles(grid.Owner, grid.Comp);
         while (enumerator.MoveNext(out var tile))
         {
             tiles.Add(tile.Value.GridIndices);

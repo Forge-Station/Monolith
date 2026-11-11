@@ -486,7 +486,7 @@ public sealed partial class WFCavernMouthSystem
     /// <summary>Whether anything anchored on a tile would stop a mob standing there.</summary>
     private bool HasHardAnchored(Entity<MapGridComponent> grid, Vector2i index)
     {
-        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid.Comp, index);
+        var anchored = _map.GetAnchoredEntities(grid, grid.Comp, index);
 
         while (anchored.MoveNext(out var uid))
         {

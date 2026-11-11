@@ -27,12 +27,12 @@ public sealed class VictimBurstVisualizerSystem : VisualizerSystem<VictimBurstCo
         if (string.IsNullOrWhiteSpace(spriteState))
             return;
 
-        if (!args.Sprite.LayerMapTryGet(BurstLayer.Base, out var layer))
+        if (!SpriteSystem.LayerMapTryGet((uid, args.Sprite), BurstLayer.Base, out var layer, false))
         {
-            layer = args.Sprite.LayerMapReserveBlank(BurstLayer.Base);
-            args.Sprite.LayerSetRSI(layer, rsiPath);
+            layer = SpriteSystem.LayerMapReserve((uid, args.Sprite), BurstLayer.Base);
+            SpriteSystem.LayerSetRsi((uid, args.Sprite), layer, rsiPath);
         }
 
-        args.Sprite.LayerSetState(layer, spriteState);
+        SpriteSystem.LayerSetRsiState((uid, args.Sprite), layer, spriteState);
     }
 }

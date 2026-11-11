@@ -8,7 +8,6 @@ using Content.Shared.Clothing.Components; // Forge-Change
 using Content.Shared._Goobstation.Construction;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Clothing;
-using Content.Shared.Clothing.Components;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Construction.Steps;

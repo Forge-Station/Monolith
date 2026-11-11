@@ -17,7 +17,7 @@ namespace Content.Shared._WF.ShipAccess;
 /// which record key a card carries, and the ship's faction. The doors themselves decide through their normal
 /// airlock access readers, which the server keeps in step.
 /// </summary>
-public sealed class WFShipAccessSystem : EntitySystem
+public sealed partial class WFShipAccessSystem : EntitySystem
 {
     /// <summary>Tiles from the console within which a person's card can be added to the allow list.</summary>
     public const float AddRange = 3f;

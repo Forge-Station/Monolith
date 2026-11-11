@@ -8,7 +8,7 @@ using Robust.Shared.Network;
 namespace Content.Shared._WF.Vehicles.Scanner;
 
 /// <summary>Gives whoever sits in a scanner seat the action that opens it, and points the scanner out from the vehicle.</summary>
-public sealed class WFVehicleScannerSystem : EntitySystem
+public sealed partial class WFVehicleScannerSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private INetManager _net = default!;

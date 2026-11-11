@@ -24,7 +24,7 @@ namespace Content.Client._WF.Wolfmed.Overlays;
 /// decides how loud the readout is, keeps the fault list animating and makes the noise.
 /// </summary>
 [UsedImplicitly]
-public sealed class WolfmedSyntheticHudOverlaySystem : EntitySystem
+public sealed partial class WolfmedSyntheticHudOverlaySystem : EntitySystem
 {
     /// <summary>The blip a new fault line announces itself with. Quiet, local, and rate limited.</summary>
     private const string FaultSound = "/Audio/Machines/beep.ogg";

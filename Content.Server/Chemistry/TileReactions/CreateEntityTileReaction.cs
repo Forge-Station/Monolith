@@ -6,7 +6,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Prototypes;
 using System.Numerics;
 
 namespace Content.Server.Chemistry.TileReactions;

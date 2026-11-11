@@ -7,7 +7,7 @@ namespace Content.Shared._Forge.Genetics.Mutations;
 /// Lets telekinesis treat in-LOS targets within <see cref="GeneticTelekinesisComponent.Range"/> as accessible,
 /// so RMB verbs (rack, unload, etc.) work. Shooting still requires a held gun.
 /// </summary>
-public sealed class SharedGeneticTelekinesisSystem : EntitySystem
+public sealed partial class SharedGeneticTelekinesisSystem : EntitySystem
 {
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedContainerSystem _containers = default!;

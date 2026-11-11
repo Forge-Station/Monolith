@@ -26,7 +26,7 @@ public readonly struct WFCockpitAimSegment
 }
 
 /// <summary>The aim lines the NAV plot and the ship cam share, in world space, kept by the server's line-of-sight rule.</summary>
-public sealed class WFCockpitAimPreview
+public sealed partial class WFCockpitAimPreview
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IGameTiming _timing = default!;

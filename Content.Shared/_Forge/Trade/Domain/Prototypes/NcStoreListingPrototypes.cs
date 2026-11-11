@@ -17,7 +17,7 @@ public sealed partial class StoreCatalogEntry
     [DataField("amount")] public int Amount { get; set; } = 1;
 }
 
-[Prototype("storeCategoryStructured")]
+[Prototype]
 public sealed partial class StoreCategoryStructuredPrototype : IPrototype
 {
     [DataField("name", required: true)]
@@ -30,7 +30,7 @@ public sealed partial class StoreCategoryStructuredPrototype : IPrototype
     public string ID { get; private set; } = default!;
 }
 
-[Prototype("storePresetStructured")]
+[Prototype]
 public sealed partial class StorePresetStructuredPrototype : IPrototype
 {
     [DataField("currency", required: true)]
@@ -53,7 +53,7 @@ public sealed partial class StoreUiThemePrototype : IPrototype
     public string ID { get; private set; } = default!;
 }
 
-[Prototype("ncStoreProfile")]
+[Prototype]
 public sealed partial class NcStoreProfilePrototype : IPrototype
 {
     [DataField("buy")]
@@ -121,7 +121,7 @@ public enum ContractPointSelectorType : byte
     Weighted = 3
 }
 
-[Prototype("storeContractsPreset")]
+[Prototype]
 public sealed partial class StoreContractsPresetPrototype : IPrototype
 {
     [DataField("contractOffers", required: true)]
@@ -136,7 +136,7 @@ public sealed partial class StoreContractsPresetPrototype : IPrototype
     [IdDataField] public string ID { get; private set; } = default!;
 }
 
-[Prototype("ncContractOfferPool")]
+[Prototype]
 public sealed partial class NcContractOfferPoolPrototype : IPrototype
 {
     [DataField("name", required: true)]
@@ -213,7 +213,7 @@ public enum NcContractOfferType : byte
 ///     existing turn-in items. They must not be used for spawning or reward generation unless the
 ///     caller explicitly resolves one of the contained prototypes.
 /// </summary>
-[Prototype("ncItemGroup")]
+[Prototype]
 public sealed partial class NcItemGroupPrototype : IPrototype
 {
     [DataField("name", required: true)]
@@ -236,7 +236,7 @@ public sealed partial class NcItemGroupPrototype : IPrototype
 ///     Trade-visible wrapper around a raw TagPrototype. Store/listing/contract YAML references this
 ///     prototype instead of referencing engine tags directly, so tag targets can carry UI metadata.
 /// </summary>
-[Prototype("ncTradeTag")]
+[Prototype]
 public sealed partial class NcTradeTagPrototype : IPrototype
 {
     [DataField("name", required: true)]

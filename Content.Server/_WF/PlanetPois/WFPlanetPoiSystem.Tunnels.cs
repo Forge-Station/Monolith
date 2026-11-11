@@ -92,7 +92,7 @@ public sealed partial class WFPlanetPoiSystem
         foreach (var cell in rock)
         {
             anchored.Clear();
-            var enumerator = _maps.GetAnchoredEntitiesEnumerator(ground, grid, cell);
+            var enumerator = _maps.GetAnchoredEntities(ground, grid, cell);
             while (enumerator.MoveNext(out var uid))
                 anchored.Add(uid.Value);
             foreach (var uid in anchored)

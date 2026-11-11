@@ -200,7 +200,7 @@ public static class WolfmedCauses
 /// name as its id. Nothing here promises waking or standing unconditionally: <see cref="HelpBlocked"/> is
 /// the form shown while something else also holds the body.
 /// </summary>
-[Prototype("wolfmedConsciousnessCause")]
+[Prototype]
 public sealed partial class WolfmedConsciousnessCausePrototype : IPrototype
 {
     [IdDataField]

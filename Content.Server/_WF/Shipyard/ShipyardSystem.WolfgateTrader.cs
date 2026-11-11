@@ -59,7 +59,7 @@ public sealed partial class ShipyardSystem
         if (!_prototypeManager.TryIndex(consoleProto, out var proto))
             return false;
 
-        if (!proto.TryGetComponent<ActivatableUIComponent>(out var activatable, _wfComponentFactory)
+        if (!proto.TryComp<ActivatableUIComponent>(out var activatable, _wfComponentFactory)
             || activatable.Key is not ShipyardConsoleUiKey key)
         {
             Log.Error($"{consoleProto} is not a shipyard console: no ActivatableUI shipyard key.");

@@ -7,6 +7,7 @@ namespace Content.Client.VendingMachines;
 
 public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
     [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
@@ -130,7 +131,7 @@ public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
         if (!_animationPlayer.HasRunningAnimation(uid, state))
         {
             var animation = GetAnimation(layer, state, animationTime);
-            sprite.LayerSetVisible(layer, true);
+            _sprite.LayerSetVisible((uid, sprite), layer, true);
             _animationPlayer.Play(uid, animation, state);
         }
     }
@@ -162,7 +163,7 @@ public sealed partial class VendingMachineSystem : SharedVendingMachineSystem
 
     private static void HideLayer(VendingMachineVisualLayers layer, SpriteComponent sprite)
     {
-        if (!sprite.LayerMapTryGet(layer, out var actualLayer))
+        if (!sprite.LayerMapTryGet(layer, out var actualLayer, false))
             return;
 
         sprite.LayerSetVisible(actualLayer, false);

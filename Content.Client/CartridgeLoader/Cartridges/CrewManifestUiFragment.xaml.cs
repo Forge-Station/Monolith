@@ -21,7 +21,7 @@ public sealed partial class CrewManifestUiFragment : BoxContainer
 
     public void UpdateState(string stationName, CrewManifestEntries? entries)
     {
-        CrewManifestListing.DisposeAllChildren();
+        CrewManifestListing.RemoveAllChildren();
         CrewManifestListing.RemoveAllChildren();
 
         StationNameContainer.Visible = entries != null;

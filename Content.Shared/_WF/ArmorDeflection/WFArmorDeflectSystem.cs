@@ -16,7 +16,7 @@ namespace Content.Shared._WF.ArmorDeflection;
 /// Ricochets light projectiles off <see cref="WFArmorDeflectComponent"/> armour. The round turns back the way it
 /// came within a spread and becomes the wearer's, so it can hit anyone but them.
 /// </summary>
-public sealed class WFArmorDeflectSystem : EntitySystem
+public sealed partial class WFArmorDeflectSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private InventorySystem _inventory = default!;

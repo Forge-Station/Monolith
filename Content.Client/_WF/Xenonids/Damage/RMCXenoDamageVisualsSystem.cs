@@ -11,38 +11,38 @@ public sealed class RMCXenoDamageVisualsSystem : VisualizerSystem<RMCXenoDamageV
         var sprite = args.Sprite;
         if (sprite == null ||
             !AppearanceSystem.TryGetData(uid, RMCDamageVisuals.State, out int level) ||
-            !sprite.LayerMapTryGet(RMCDamageVisualLayers.Base, out var layer))
+            !SpriteSystem.LayerMapTryGet((uid, sprite), RMCDamageVisualLayers.Base, out var layer, false))
         {
             return;
         }
 
         if (level == 0)
         {
-            sprite.LayerSetVisible(layer, false);
+            SpriteSystem.LayerSetVisible((uid, sprite), layer, false);
             return;
         }
 
-        sprite.LayerSetVisible(layer, true);
+        SpriteSystem.LayerSetVisible((uid, sprite), layer, true);
 
         var state = component.States - level + 1;
         if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out bool downed) && downed)
         {
-            sprite.LayerSetState(layer, $"{component.Prefix}_downed_{state}");
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer, $"{component.Prefix}_downed_{state}");
             return;
         }
 
         if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Fortified, out bool fortified) && fortified)
         {
-            sprite.LayerSetState(layer, $"{component.Prefix}_fortify_{state}");
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer, $"{component.Prefix}_fortify_{state}");
             return;
         }
 
         if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
         {
-            sprite.LayerSetState(layer, $"{component.Prefix}_rest_{state}");
+            SpriteSystem.LayerSetRsiState((uid, sprite), layer, $"{component.Prefix}_rest_{state}");
             return;
         }
 
-        sprite.LayerSetState(layer, $"{component.Prefix}_walk_{state}");
+        SpriteSystem.LayerSetRsiState((uid, sprite), layer, $"{component.Prefix}_walk_{state}");
     }
 }

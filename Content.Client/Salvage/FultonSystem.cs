@@ -14,6 +14,7 @@ namespace Content.Client.Salvage;
 
 public sealed partial class FultonSystem : SharedFultonSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private ISerializationManager _serManager = default!;
     [Dependency] private AnimationPlayerSystem _player = default!;
 

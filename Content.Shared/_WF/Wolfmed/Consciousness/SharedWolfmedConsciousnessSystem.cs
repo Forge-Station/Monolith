@@ -8,7 +8,7 @@ namespace Content.Shared._WF.Wolfmed.Consciousness;
 /// The half of consciousness both sides need: who owns mob state, and the seam other systems push a level
 /// through. The evaluation itself is server-side (pain, blood and the brain all are).
 /// </summary>
-public abstract class SharedWolfmedConsciousnessSystem : EntitySystem
+public abstract partial class SharedWolfmedConsciousnessSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _configuration = default!;
 

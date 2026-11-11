@@ -1,17 +1,11 @@
 using System.Numerics;
 using Content.Shared.Shuttles.Components;
 using Content.Server.NPC.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Components;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Chat;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Map.Components;
-using Content.Shared.Shuttles.Components;
 using Robust.Shared.Random;
-using Content.Shared.Shuttles.Components;
 
 namespace Content.Server._WF.Strangers;
 
@@ -156,7 +150,7 @@ public sealed partial class WFStrangerSystem
             if (bounded && Vector2.Distance(spot, boundsCentre) > boundsRadius * 0.9f)
                 continue;
             var tile = Vector2.Transform(spot, inverse).Floored();
-            if (_maps.GetTileRef(grid, gridComp, tile).Tile.IsEmpty || _maps.GetAnchoredEntitiesEnumerator(grid, gridComp, tile).MoveNext(out _))
+            if (_maps.GetTileRef(grid, gridComp, tile).Tile.IsEmpty || _maps.GetAnchoredEntities(grid, gridComp, tile).MoveNext(out _))
                 continue;
             Walk(ent, new EntityCoordinates(grid, (Vector2) tile + new Vector2(0.5f)));
             ent.Comp.WanderUntil = now + WanderPatience;

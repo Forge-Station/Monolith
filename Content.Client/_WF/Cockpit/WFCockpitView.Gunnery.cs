@@ -92,7 +92,7 @@ public sealed partial class WFCockpitView
         if (_gunneryConsole != console)
         {
             _gunneryInput.Cancel();
-            _gunneryContents.DisposeAllChildren();
+            _gunneryContents.RemoveAllChildren();
             _gunneryPanel = null;
             _gunneryConsole = console;
         }

@@ -306,7 +306,7 @@ public sealed partial class WFRemadeDirectorSystem
             {
                 if (mob.MinStage > stage
                     || !_proto.TryIndex(mob.Entity, out var entity)
-                    || !entity.TryGetComponent<WFRemadeVoiceComponent>(out var voice, _factory))
+                    || !entity.TryComp<WFRemadeVoiceComponent>(out var voice, _factory))
                 {
                     continue;
                 }

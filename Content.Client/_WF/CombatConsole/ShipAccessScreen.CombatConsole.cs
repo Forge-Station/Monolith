@@ -35,7 +35,7 @@ public sealed partial class ShipAccessScreen
         var nearby = new WFAccessListRegion(NearbyContainer) { Name = "WfAccessNearbyList" };
         var nearbyContents = ConsoleTheme.Column(nearbyCaption, nearby, NearbyEmptyLabel);
         nearbyContents.VerticalExpand = true;
-        NearbyBox.DisposeAllChildren();
+        NearbyBox.RemoveAllChildren();
         NearbyBox.AddChild(nearbyContents);
         NearbyBox.VerticalExpand = true;
         var peopleContents = ConsoleTheme.Column(allowed, AllowListEmptyLabel, NearbyBox);
@@ -45,7 +45,7 @@ public sealed partial class ShipAccessScreen
 
         var allDoorControls = ConsoleTheme.Column(AllDoorsRuleButton, AllDoorsApplyButton);
         ConsoleTheme.Detach(AllDoorsHint);
-        AllDoorsBox.DisposeAllChildren();
+        AllDoorsBox.RemoveAllChildren();
         AllDoorsBox.AddChild(ConsoleTheme.Label("ship-access-all-doors"));
         AllDoorsBox.AddChild(allDoorControls);
         AllDoorsBox.AddChild(AllDoorsHint);
@@ -56,14 +56,14 @@ public sealed partial class ShipAccessScreen
         var players = new WFAccessListRegion(DoorPlayersContainer) { Name = "WfAccessDoorList" };
         var playerContents = ConsoleTheme.Column(playersCaption, players, DoorPlayersEmptyLabel);
         playerContents.VerticalExpand = true;
-        DoorPlayersBox.DisposeAllChildren();
+        DoorPlayersBox.RemoveAllChildren();
         DoorPlayersBox.AddChild(playerContents);
         DoorPlayersBox.VerticalExpand = true;
         WfRefitCodeBox(DoorCodeBox, DoorCodeLabel, DoorCodeRevealButton, DoorCodeEdit,
             DoorCodeSetButton, DoorCodeClearButton, DoorCodeHint);
         var selected = ConsoleTheme.Column(doorStatus, DoorRuleButton, DoorRuleHint, DoorCodeBox, DoorPlayersBox);
         selected.VerticalExpand = true;
-        DoorBox.DisposeAllChildren();
+        DoorBox.RemoveAllChildren();
         DoorBox.AddChild(selected);
         DoorBox.VerticalExpand = true;
         var doorContents = ConsoleTheme.Column(AllDoorsBox, DoorNoneLabel, DoorBox);
@@ -98,7 +98,7 @@ public sealed partial class ShipAccessScreen
         var input = ConsoleTheme.Row(edit, set, clear);
         ConsoleTheme.Detach(hint);
         if (alert != null) ConsoleTheme.Detach(alert);
-        box.DisposeAllChildren();
+        box.RemoveAllChildren();
         box.AddChild(readout);
         box.AddChild(input);
         box.AddChild(hint);
@@ -155,7 +155,7 @@ public sealed partial class ShipAccessScreen
         var text = ConsoleTheme.Row(labels);
         var contents = actions.Length == 0 ? text : ConsoleTheme.Column(text, ConsoleTheme.Row(actions));
         contents.SeparationOverride = 4;
-        row.DisposeAllChildren();
+        row.RemoveAllChildren();
         row.AddChild(contents);
         row.Orientation = LayoutOrientation.Vertical;
         WfStyleAccess(row);

@@ -528,7 +528,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         // WOLFGATE(RMCCore) START: RMC puts some actions on cooldown when their entity target misses (RMCCooldownOnMiss)
         if (!target.IsValid() || Deleted(target))
         {
-            EntityManager.RaisePredictiveEvent(new RMCMissedTargetActionEvent(GetNetEntity(actionEnt)));
+            RaisePredictiveEvent(new RMCMissedTargetActionEvent(GetNetEntity(actionEnt)));
             return false;
         }
         // WOLFGATE END

@@ -24,9 +24,9 @@ public sealed partial class SealableClothingVisualizerSystem : VisualizerSystem<
         if (!AppearanceSystem.TryGetData<bool>(uid, SealableClothingVisuals.Sealed, out var isSealed, args.Component))
             return;
 
-        if (args.Sprite != null && component.SpriteLayer != null && args.Sprite.LayerMapTryGet(component.SpriteLayer, out var layer))
+        if (args.Sprite != null && component.SpriteLayer != null && SpriteSystem.LayerMapTryGet((uid, args.Sprite), component.SpriteLayer, out var layer, false))
         {
-            args.Sprite.LayerSetVisible(layer, isSealed);
+            SpriteSystem.LayerSetVisible((uid, args.Sprite), layer, isSealed);
         }
 
         _itemSystem.VisualsChanged(uid);

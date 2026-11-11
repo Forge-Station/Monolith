@@ -15,7 +15,7 @@ namespace Content.Client._WF.Vehicles.Audio;
 /// you again, quieter and dulled, its volume following how far it is from the hull. Someone looking out (the driver,
 /// a gunner, a viewport) already hears the outside as it is.
 /// </summary>
-public sealed class WFVehicleCabinAudioSystem : EntitySystem
+public sealed partial class WFVehicleCabinAudioSystem : EntitySystem
 {
     [Dependency] private AudioEffectSystem _effects = default!;
     [Dependency] private IEyeManager _eye = default!;

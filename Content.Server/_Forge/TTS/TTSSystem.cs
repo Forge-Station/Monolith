@@ -17,7 +17,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.Radio.Components;
 
 namespace Content.Server._Forge.TTS;
 

@@ -21,7 +21,7 @@ public abstract partial class SharedWeatherSystem : EntitySystem
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private SharedRoofSystem _roof = default!;
 
-    [Dependency] private readonly EntityQuery<BlockWeatherComponent> _blockQuery = default!;
+    [Dependency] private EntityQuery<BlockWeatherComponent> _blockQuery = default!;
     public override void Initialize()
     {
         base.Initialize();

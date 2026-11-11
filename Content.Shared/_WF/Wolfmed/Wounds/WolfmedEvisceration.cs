@@ -50,7 +50,7 @@ public sealed partial class WolfmedEviscerationComponent : Component
 /// <see cref="Content.Shared._WF.Wolfmed.Body.WolfmedBodyPartComponent.EviscerationProfile"/>, so a part
 /// that names no profile can never be eviscerated and every number is retuned in YAML.
 /// </summary>
-[Prototype("wolfmedEviscerationProfile")]
+[Prototype]
 public sealed partial class WolfmedEviscerationProfilePrototype : IPrototype
 {
     [IdDataField]

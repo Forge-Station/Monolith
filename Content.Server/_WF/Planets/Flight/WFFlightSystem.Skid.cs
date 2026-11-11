@@ -168,7 +168,7 @@ public sealed partial class WFFlightSystem
         _skidEdge.Clear();
         var best = float.MinValue;
 
-        var tiles = _map.GetAllTilesEnumerator(grid.Owner, grid.Comp);
+        var tiles = _map.GetAllTiles(grid.Owner, grid.Comp);
         while (tiles.MoveNext(out var tileRef))
         {
             var indices = tileRef.Value.GridIndices;

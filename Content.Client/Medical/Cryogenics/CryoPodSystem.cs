@@ -9,6 +9,7 @@ namespace Content.Client.Medical.Cryogenics;
 
 public sealed partial class CryoPodSystem: SharedCryoPodSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
@@ -62,16 +63,16 @@ public sealed partial class CryoPodSystem: SharedCryoPodSystem
 
         if (isOpen)
         {
-            args.Sprite.LayerSetState(CryoPodVisualLayers.Base, "pod-open");
-            args.Sprite.LayerSetVisible(CryoPodVisualLayers.Cover, false);
+            _sprite.LayerSetRsiState((uid, args.Sprite), CryoPodVisualLayers.Base, "pod-open");
+            _sprite.LayerSetVisible((uid, args.Sprite), CryoPodVisualLayers.Cover, false);
             args.Sprite.DrawDepth = (int) DrawDepth.Mobs; //Mono: Objects >> Mobs: Fix sprite for collisions
         }
         else
         {
             args.Sprite.DrawDepth = (int) DrawDepth.Mobs;
-            args.Sprite.LayerSetState(CryoPodVisualLayers.Base, isOn ? "pod-on" : "pod-off");
-            args.Sprite.LayerSetState(CryoPodVisualLayers.Cover, isOn ? "cover-on" : "cover-off");
-            args.Sprite.LayerSetVisible(CryoPodVisualLayers.Cover, true);
+            _sprite.LayerSetRsiState((uid, args.Sprite), CryoPodVisualLayers.Base, isOn ? "pod-on" : "pod-off");
+            _sprite.LayerSetRsiState((uid, args.Sprite), CryoPodVisualLayers.Cover, isOn ? "cover-on" : "cover-off");
+            _sprite.LayerSetVisible((uid, args.Sprite), CryoPodVisualLayers.Cover, true);
         }
     }
 }

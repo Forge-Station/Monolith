@@ -57,7 +57,7 @@ public sealed class LightSensitivitySystem : EntitySystem
                 return _thresholds;
 
             if (_proto.TryIndex(ShadekinProto, out var proto)
-                && proto.TryGetComponent<ShadekinComponent>(out var shadekin, _compFactory))
+                && proto.TryComp<ShadekinComponent>(out var shadekin, _compFactory))
             {
                 _thresholds = shadekin.Thresholds;
             }

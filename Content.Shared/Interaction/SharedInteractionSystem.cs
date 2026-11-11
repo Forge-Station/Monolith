@@ -76,16 +76,16 @@ namespace Content.Shared.Interaction
 
         [Dependency] private INetManager _net = default!; // Mono
 
-        [Dependency] private readonly EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery = default!;
-        [Dependency] private readonly EntityQuery<FixturesComponent> _fixtureQuery = default!;
-        [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
-        [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
-        [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
-        [Dependency] private readonly EntityQuery<InteractionRelayComponent> _relayQuery = default!;
-        [Dependency] private readonly EntityQuery<CombatModeComponent> _combatQuery = default!;
-        [Dependency] private readonly EntityQuery<WallMountComponent> _wallMountQuery = default!;
-        [Dependency] private readonly EntityQuery<UseDelayComponent> _delayQuery = default!;
-        [Dependency] private readonly EntityQuery<ActivatableUIComponent> _uiQuery = default!;
+        [Dependency] private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery = default!;
+        [Dependency] private EntityQuery<FixturesComponent> _fixtureQuery = default!;
+        [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
+        [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+        [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
+        [Dependency] private EntityQuery<InteractionRelayComponent> _relayQuery = default!;
+        [Dependency] private EntityQuery<CombatModeComponent> _combatQuery = default!;
+        [Dependency] private EntityQuery<WallMountComponent> _wallMountQuery = default!;
+        [Dependency] private EntityQuery<UseDelayComponent> _delayQuery = default!;
+        [Dependency] private EntityQuery<ActivatableUIComponent> _uiQuery = default!;
 
         private const CollisionGroup InRangeUnobstructedMask = CollisionGroup.Impassable | CollisionGroup.InteractImpassable;
 

@@ -1,7 +1,6 @@
 using Robust.Shared.Serialization.Manager.Attributes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Forge.Body.Syndromes;
 

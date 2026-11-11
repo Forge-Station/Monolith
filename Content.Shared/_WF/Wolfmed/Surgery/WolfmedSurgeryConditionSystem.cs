@@ -22,7 +22,7 @@ namespace Content.Shared._WF.Wolfmed.Surgery;
 /// The mutating SurgeryStepEvent half lives in Content.Server (WolfmedWoundSurgerySystem) because
 /// WoundBleedingSystem and OrganHealthSystem are server-assembly classes (D13).
 /// </remarks>
-public sealed class WolfmedSurgeryConditionSystem : EntitySystem
+public sealed partial class WolfmedSurgeryConditionSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private INetManager _net = default!;

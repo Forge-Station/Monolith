@@ -7,7 +7,7 @@ using Content.Shared.Gibbing.Events;
 namespace Content.Shared._WF.Wolfmed.Compat;
 
 /// <summary>Onyx-shaped body helpers mapped onto Wolfgate's Shitmed body system.</summary>
-public sealed class WolfmedBodySystem : EntitySystem
+public sealed partial class WolfmedBodySystem : EntitySystem
 {
     [Dependency] private SharedBodySystem _body = default!;
 

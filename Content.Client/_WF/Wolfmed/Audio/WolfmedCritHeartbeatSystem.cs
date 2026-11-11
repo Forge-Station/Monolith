@@ -20,7 +20,7 @@ namespace Content.Client._WF.Wolfmed.Audio;
 /// anyone else's mob and works for any entity with MobStateComponent, not only wound hosts.
 /// </summary>
 [UsedImplicitly]
-public sealed class WolfmedCritHeartbeatSystem : EntitySystem
+public sealed partial class WolfmedCritHeartbeatSystem : EntitySystem
 {
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IConfigurationManager _cfg = default!;

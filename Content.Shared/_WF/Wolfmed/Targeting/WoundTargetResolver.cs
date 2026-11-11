@@ -13,7 +13,7 @@ namespace Content.Shared._WF.Wolfmed.Targeting;
 /// resolves the requested part exactly: Wolfgate's combat code rolls its own inaccuracy before calling in,
 /// so Onyx's anatomical-odds scatter is deliberately not reproduced.
 /// </remarks>
-public sealed class WoundTargetResolver : EntitySystem
+public sealed partial class WoundTargetResolver : EntitySystem
 {
     [Dependency] private SharedBodySystem _body = default!;
     [Dependency] private IConfigurationManager _configuration = default!;

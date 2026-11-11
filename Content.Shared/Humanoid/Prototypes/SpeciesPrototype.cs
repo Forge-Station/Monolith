@@ -1,6 +1,5 @@
 using Content.Shared._Forge.Sponsor; // Forge-Change
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Humanoid.Prototypes;
 

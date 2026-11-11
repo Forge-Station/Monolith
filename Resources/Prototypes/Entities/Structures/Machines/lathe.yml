@@ -283,6 +283,7 @@
     - Translators
     - RCD # Mono!
     - WFXenobiologyTools # WOLFGATE(Xenobiology): slime scanner and xenovac
+    - WFSectorBeaconPack # WOLFGATE(SectorControl): company claim beacons
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - DynamicAmmoRecipePack

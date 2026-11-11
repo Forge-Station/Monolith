@@ -200,7 +200,7 @@ public sealed partial class CEZLevelsSystem
         var total = 0;
         var contact = false;
 
-        var shipTiles = _map.GetAllTilesEnumerator(grid, gridComp);
+        var shipTiles = _map.GetAllTiles(grid, gridComp);
         while (shipTiles.MoveNext(out var shipTile))
         {
             total++;

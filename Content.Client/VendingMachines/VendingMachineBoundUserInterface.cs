@@ -16,7 +16,7 @@ using Content.Shared.Stacks; // Frontier
 
 namespace Content.Client.VendingMachines
 {
-    public sealed class VendingMachineBoundUserInterface : BoundUserInterface
+    public sealed partial class VendingMachineBoundUserInterface : BoundUserInterface
     {
         [Dependency] private CreditReceiverSystem _credit = default!; // Mono
 

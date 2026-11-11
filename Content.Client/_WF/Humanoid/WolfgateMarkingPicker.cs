@@ -20,7 +20,7 @@ namespace Content.Client._WF.Humanoid;
 /// their body part rather than their points category, so left and right limbs, snout, tail and so on each get their
 /// own view while points are still tracked per category. Same surface as MarkingPicker.
 /// </summary>
-public sealed class WolfgateMarkingPicker : BoxContainer
+public sealed partial class WolfgateMarkingPicker : BoxContainer
 {
     [Dependency] private MarkingManager _markingManager = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
@@ -354,7 +354,7 @@ public sealed class WolfgateMarkingPicker : BoxContainer
             _part = valid.Count > 0 ? valid[0] : HumanoidVisualLayers.Chest;
         if (!valid.SequenceEqual(_partButtons.Keys))
         {
-            _parts.DisposeAllChildren();
+            _parts.RemoveAllChildren();
             _partButtons.Clear();
             foreach (var part in valid)
             {
@@ -387,7 +387,7 @@ public sealed class WolfgateMarkingPicker : BoxContainer
     {
         SetClearConfirmVisible(false);
         SetupPartButtons();
-        _grid.DisposeAllChildren();
+        _grid.RemoveAllChildren();
 
         var sorted = PartMarkings(_part).Where(m =>
                 m.ID.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
@@ -548,7 +548,7 @@ public sealed class WolfgateMarkingPicker : BoxContainer
     /// <summary>One card per applied marking on the selected body part; within a category the top card draws on top.</summary>
     public void PopulateUsed()
     {
-        _applied.DisposeAllChildren();
+        _applied.RemoveAllChildren();
         _appliedIcons.Clear();
         if (!IgnoreSpecies)
             _current.EnsureSpecies(_species, null, _markingManager);

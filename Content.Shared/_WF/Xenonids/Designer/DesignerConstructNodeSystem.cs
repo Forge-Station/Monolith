@@ -246,7 +246,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         // Weeds must still exist for the weedbound structure to be built.
         if (nodeComp.BoundWeed is not { } boundWeed || !Exists(boundWeed) || !HasComp<Content.Shared._WF.Xenonids.Weeds.XenoWeedsComponent>(boundWeed))
         {
-            EntityManager.DeleteEntity(nodeUid);
+            Del(nodeUid);
             return;
         }
 
@@ -263,14 +263,14 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
             isThickVariant |= _weeds.IsOnHiveWeeds((gridUid, gridComp!), coords);
 
         var proto = isThickVariant ? nodeComp.ConstructWeedboundThick : nodeComp.ConstructWeedbound;
-        var spawned = EntityManager.SpawnEntity(proto, coords);
+        var spawned = Spawn(proto, coords);
 
         var weedbound = EnsureComp<WeedboundWallComponent>(spawned);
         weedbound.IsThickVariant = isThickVariant;
 
         _weedbound.RegisterWeedboundStructure(spawned, boundWeed);
 
-        EntityManager.DeleteEntity(nodeUid);
+        Del(nodeUid);
         _popup.PopupClient(Loc.GetString("rmc-xeno-designer-infuse-node"), user, user, PopupType.Small);
     }
 

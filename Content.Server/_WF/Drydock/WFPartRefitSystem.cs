@@ -134,9 +134,9 @@ public sealed class WFPartRefitSystem : EntitySystem
     private IEnumerable<(string Type, int Rating, int Count)> StockParts(EntProtoId prototype, WFPartRatingRefit effect)
     {
         if (!_prototype.TryIndex(prototype, out var proto) || !Covers(proto, effect) ||
-            !proto.TryGetComponent<MachineComponent>(out var machine, Factory) || machine.Board is not { } boardId ||
+            !proto.TryComp<MachineComponent>(out var machine, Factory) || machine.Board is not { } boardId ||
             !_prototype.TryIndex<EntityPrototype>(boardId.Id, out var boardProto) ||
-            !boardProto.TryGetComponent<MachineBoardComponent>(out var board, Factory))
+            !boardProto.TryComp<MachineBoardComponent>(out var board, Factory))
         {
             yield break;
         }
@@ -147,7 +147,7 @@ public sealed class WFPartRefitSystem : EntitySystem
                 ? overridden
                 : _prototype.Index<MachinePartPrototype>(partType).StockPartPrototype;
             if (_prototype.TryIndex(stock, out var stockProto) &&
-                stockProto.TryGetComponent<MachinePartComponent>(out var part, Factory))
+                stockProto.TryComp<MachinePartComponent>(out var part, Factory))
                 yield return (partType.Id, part.Rating, amount);
         }
     }
@@ -261,11 +261,11 @@ public sealed class WFPartRefitSystem : EntitySystem
     {
         return effect.Target switch
         {
-            WFPartRefitTarget.LinearThruster => proto.TryGetComponent<ThrusterComponent>(out var linear, Factory) && linear.Type == ThrusterType.Linear,
-            WFPartRefitTarget.Gyroscope => proto.TryGetComponent<ThrusterComponent>(out var angular, Factory) && angular.Type == ThrusterType.Angular,
-            WFPartRefitTarget.Power => proto.TryGetComponent<UpgradeBatteryComponent>(out _, Factory)
-                                       || proto.TryGetComponent<UpgradePowerSupplierComponent>(out _, Factory)
-                                       || proto.TryGetComponent<UpgradePowerSupplyRampingComponent>(out _, Factory),
+            WFPartRefitTarget.LinearThruster => proto.TryComp<ThrusterComponent>(out var linear, Factory) && linear.Type == ThrusterType.Linear,
+            WFPartRefitTarget.Gyroscope => proto.TryComp<ThrusterComponent>(out var angular, Factory) && angular.Type == ThrusterType.Angular,
+            WFPartRefitTarget.Power => proto.TryComp<UpgradeBatteryComponent>(out _, Factory)
+                                       || proto.TryComp<UpgradePowerSupplierComponent>(out _, Factory)
+                                       || proto.TryComp<UpgradePowerSupplyRampingComponent>(out _, Factory),
             _ => false,
         };
     }

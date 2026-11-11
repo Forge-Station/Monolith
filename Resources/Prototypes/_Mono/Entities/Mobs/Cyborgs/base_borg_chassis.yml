@@ -57,21 +57,11 @@
     - TSFMC
   - type: Access
     tags:
-    - Security
-    - Armory
-    - Sergeant
-    - Bailiff
-    - Medical
-    - Chemistry
-    - TsfmcEngineering
-    - Maintenance
-    - External
-    - Command
-    - Brig
-    - Mercenary
-    - Captain
+      - BaseAccess #Forge-Change
+      - BaseAccessSecurity #Forge-Change
+      - TsfGeneralAccess #Forge-Change
   - type: AccessReader
-    access: [["Security"], ["Armory"], ["Sergeant"], ["Bailiff"], ["TsfmcEngineering"], ["Brig"]]
+    access: [["Tsf"], ["TurretCommandTSF"]] #Forge-Change
   - type: IntrinsicRadioTransmitter
     channels:
     - Common

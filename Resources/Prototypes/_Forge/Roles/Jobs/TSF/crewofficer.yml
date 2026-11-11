@@ -20,15 +20,9 @@
   assignedNationality: TransSolarFederation
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
-  access:
-  - Armory
-  - Sergeant
-  - Bailiff
-  - Medical
-  - Chemistry
-  - TsfmcEngineering
-  - TurretCommandTSF
   accessGroups:
+  - BaseAccess
+  - BaseAccessSecurity
   - TsfGeneralAccess
   special:
   - !type:AddComponentSpecial

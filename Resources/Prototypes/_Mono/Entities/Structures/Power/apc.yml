@@ -10,7 +10,7 @@
   - type: BatteryDrinkerSource # EE IPCs
     maxAmount: 5000
   - type: AccessReader
-    access: [["TsfmcEngineering"]]
+    access: [["Tsf"]] #Forge-Change
 
 # LAPC line — HV→APC bulk substations for shuttles. maxSupply tiers:
 # Light 100 kW · Medium 180 kW · Large 300 kW (one heavy shield bus) · Capital 500 kW

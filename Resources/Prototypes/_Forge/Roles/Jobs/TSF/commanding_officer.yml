@@ -27,12 +27,12 @@
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   accessGroups:
-  - AllAccess
+  - BaseAccess
+  - BaseAccessSecurity
+  - TsfGeneralAccess
+  - TsfCommandAccess
   access:
-  - TsfmcEngineering
-  - TsfSecApartment
-  - TurretCommandTSF
-  - TurretCommandTSFShuttle
+  - TsfCommandingOfficer
   special:
   - !type:AddComponentSpecial
     components:

@@ -16,7 +16,9 @@
   canBeAntag: false
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   accessGroups:
-  - TsfCadetAccess
+  - BaseAccess
+  - BaseAccessSecurity
+  - TsfGeneralAccess
   special:
   - !type:AddComponentSpecial
     components:

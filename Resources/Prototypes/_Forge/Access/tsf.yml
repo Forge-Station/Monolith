@@ -1,3 +1,17 @@
+#region ACCESS LEVELS
+
+- type: accessLevel
+  id: Tsf
+  name: id-card-access-level-tsf
+
+- type: accessLevel
+  id: TsfCommand
+  name: id-card-access-level-tsf
+
+- type: accessLevel
+  id: TsfCommandingOfficer
+  name: id-card-access-level-tsf
+
 - type: accessLevel
   id: TsfDiplomacy
   name: id-card-access-level-tsf-diplomacy
@@ -6,28 +20,6 @@
   id: TsfSecApartment
   name: id-card-access-level-tsf-sec-apartment
 
-- type: accessGroup
-  id: TsfCadetAccess
-  tags:
-  - Maintenance
-  - External
-  - Security
-  - Brig
-  - Captain
-  - TurretCommandTSFShuttle
-
-- type: accessGroup
-  id: TsfGeneralAccess
-  tags:
-  - Maintenance
-  - External
-  - Command
-  - Brig
-  - Security
-  - Mercenary
-  - Captain
-  - TurretCommandTSFShuttle
-
 - type: accessLevel
   id: TurretCommandTSF
   name: id-card-access-level-turret-command-tsf
@@ -35,6 +27,23 @@
 - type: accessLevel
   id: TurretCommandTSFShuttle
   name: id-card-access-level-turret-command-tsf-shuttle
+
+#region ACCESS GROUPS
+
+- type: accessGroup
+  id: TsfGeneralAccess
+  tags:
+  - Mercenary
+  - Tsf
+  - TurretCommandTSFShuttle
+  - TsfmcEngineering
+
+- type: accessGroup
+  id: TsfCommandAccess
+  tags:
+  - TsfCommand
+  - TsfSecApartment
+  - TurretCommandTSF
 
 #region Provost
 - type: accessLevel

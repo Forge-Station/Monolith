@@ -28,7 +28,7 @@
   suffix: TSF Engineering, Locked
   components:
   - type: AccessReader
-    access: [["TsfmcEngineering"]]
+    access: [["Tsf"]] #Forge-Change
 
 - type: entity
   parent: DoorElectronics

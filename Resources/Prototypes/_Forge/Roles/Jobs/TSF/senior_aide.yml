@@ -19,6 +19,8 @@
   assignedCompany: TSF
   assignedNationality: TransSolarFederation
   accessGroups:
+  - BaseAccess
+  - BaseAccessSecurity
   - TsfGeneralAccess
   special:
   - !type:AddComponentSpecial

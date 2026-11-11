@@ -1,60 +1,61 @@
-- type: job
-  id: DirectorOfCare
-  name: job-name-doc
-  description: job-description-doc
-  playTimeTracker: JobDirectorOfCare
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 144000 # forge - 40 hours
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 72000 # forge - 20 hours
-    - !type:RoleTimeRequirement
-      role: MdMedic
-      time: 18000 # forge - 5 hours
-  startingGear: DocGear
-  alwaysUseSpawner: true
-  assignedCompany: MD
-  icon: "JobIconDoc" # Forge
-  requireAdminNotify: true
-  supervisors: job-supervisors-sr # Mono
-  weight: 170
-  displayWeight: 40 # Forge
-  canBeAntag: false
-  accessGroups:
-  - AllAccessMono #Mono
-  access:
-  - ChiefMedicalOfficer #Mono
-  - NtSecApartment
-  special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change
-  - !type:AddComponentSpecial
-    components:
-      - type: CommandStaff
-      - type: NpcFactionMember
-        factions:
-        - MD # mono faction
-      - type: SurgerySpeedModifier
-        SpeedModifier: 2
-      - type: ChatRank
-        rank: md-doc
-  - !type:GiveItemOnHolidaySpecial
-    holiday: FrontierBirthday
-    prototype: FrontierBirthdayGift
+#Forge-Change: moved to _Forge
+# - type: job
+#   id: DirectorOfCare
+#   name: job-name-doc
+#   description: job-description-doc
+#   playTimeTracker: JobDirectorOfCare
+#   requirements:
+#     - !type:OverallPlaytimeRequirement
+#       time: 144000 # forge - 40 hours
+#     - !type:DepartmentTimeRequirement
+#       department: Medical
+#       time: 72000 # forge - 20 hours
+#     - !type:RoleTimeRequirement
+#       role: MdMedic
+#       time: 18000 # forge - 5 hours
+#   startingGear: DocGear
+#   alwaysUseSpawner: true
+#   assignedCompany: MD
+#   icon: "JobIconDoc" # Forge
+#   requireAdminNotify: true
+#   supervisors: job-supervisors-sr # Mono
+#   weight: 170
+#   displayWeight: 40 # Forge
+#   canBeAntag: false
+#   accessGroups:
+#   - AllAccessMono #Mono
+#   access:
+#   - ChiefMedicalOfficer #Mono
+#   - NtSecApartment
+#   special:
+#   - !type:AddImplantSpecial
+#     implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change
+#   - !type:AddComponentSpecial
+#     components:
+#       - type: CommandStaff
+#       - type: NpcFactionMember
+#         factions:
+#         - MD # mono faction
+#       - type: SurgerySpeedModifier
+#         SpeedModifier: 2
+#       - type: ChatRank
+#         rank: md-doc
+#   - !type:GiveItemOnHolidaySpecial
+#     holiday: FrontierBirthday
+#     prototype: FrontierBirthdayGift
 
-- type: startingGear
-  id: DocGear
-  equipment:
-    pocket1: Hypospray # Forge
-    pocket2: OmnimedTool # Forge
-  storage:
-    back:
-    - RubberStampDoc
-    - BoxFolderMedicalDoctor
-    - StationAdministrationConsoleFlatpack
-    # Forge-Change
-    - NTSecApartmentTablet
-    - PhoneInstrumentHigh
-    - WeaponCaseShortMk58Expedition # Forge
-    - MDHandheldOverwatchConsole
+# - type: startingGear
+#   id: DocGear
+#   equipment:
+#     pocket1: Hypospray # Forge
+#     pocket2: OmnimedTool # Forge
+#   storage:
+#     back:
+#     - RubberStampDoc
+#     - BoxFolderMedicalDoctor
+#     - StationAdministrationConsoleFlatpack
+#     # Forge-Change
+#     - NTSecApartmentTablet
+#     - PhoneInstrumentHigh
+#     - WeaponCaseShortMk58Expedition # Forge
+#     - MDHandheldOverwatchConsole

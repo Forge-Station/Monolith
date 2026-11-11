@@ -17,8 +17,8 @@
   assignedCompany: MD
   canBeAntag: false
   accessGroups:
-  - GeneralAccess
-  - Medical
+  - BaseAccess
+  - GeneralTraumaAccess
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TTITrackingImplant ]

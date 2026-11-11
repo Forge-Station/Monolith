@@ -1,0 +1,49 @@
+- type: job
+  id: ViceDirectorTrauma
+  name: job-name-doc
+  description: job-description-doc
+  playTimeTracker: JobViceDirectorTrauma
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 144000 # forge - 40 hours
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 72000 # forge - 20 hours
+    - !type:RoleTimeRequirement
+      role: MdMedic
+      time: 18000 # forge - 5 hours
+  startingGear: ViceDirectorTraumaGear
+  alwaysUseSpawner: true
+  assignedCompany: MD
+  icon: "JobIconDoc"
+  requireAdminNotify: true
+  supervisors: job-supervisors-sr # Mono
+  weight: 170
+  displayWeight: 40 # Forge
+  canBeAntag: false
+  accessGroups:
+  - BaseAccess
+  - BaseAccessSecurity
+  - GeneralTraumaAccess
+  - CommandTraumaAccess
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+      - type: NpcFactionMember
+        factions:
+        - MD # mono faction
+      - type: SurgerySpeedModifier
+        SpeedModifier: 2
+      - type: ChatRank
+        rank: md-doc
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: ViceDirectorTraumaGear
+  equipment:
+    pocket1: NTSecApartmentTablet

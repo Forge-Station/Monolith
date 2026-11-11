@@ -1,5 +1,5 @@
 - type: job
-  id: NtMedic
+  id: NtMedic #TO-DO: rename it to trauma medic
   name: job-name-nt-medic
   description: job-description-nt-medic
   playTimeTracker: NtMedic
@@ -15,8 +15,8 @@
   assignedCompany: MD
   canBeAntag: false
   accessGroups:
-  - GeneralAccess
-  - Medical
+  - BaseAccess
+  - GeneralTraumaAccess
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TTITrackingImplant ]

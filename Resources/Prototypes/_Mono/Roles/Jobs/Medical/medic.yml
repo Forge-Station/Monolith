@@ -1,47 +1,53 @@
-- type: job
-  id: MdMedic
-  name: job-name-md-medic
-  description: job-description-md-medic
-  playTimeTracker: MdMedic
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 108000 # 30 hrs
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 36000 # Forge - 10 hours
-  startingGear: MdMedicGear
-  alwaysUseSpawner: true
-  icon: "JobIconParamedic" # Forge
-  supervisors: job-supervisors-doc
-  weight: 170
-  displayWeight: 39 # Forge
-  assignedCompany: MD
-  canBeAntag: false
-  accessGroups:
-  - GeneralAccess
-  - Medical
-  special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change
-  - !type:AddComponentSpecial
-    components:
-      - type: NpcFactionMember
-        factions:
-        - MD
-      - type: SurgerySpeedModifier
-        SpeedModifier: 1.75
-      - type: ChatRank
-        rank: md-medic
-  - !type:GiveItemOnHolidaySpecial
-    holiday: FrontierBirthday
-    prototype: FrontierBirthdayGift
+#Forge-Change: Moved to _Forge
+# - type: job
+#   id: MdMedic #TO-DO: rename it to trauma paramedic
+#   name: job-name-md-medic
+#   description: job-description-md-medic
+#   playTimeTracker: MdMedic
+#   requirements:
+#     - !type:OverallPlaytimeRequirement
+#       time: 108000 # 30 hrs
+#     - !type:DepartmentTimeRequirement
+#       department: Medical
+#       time: 36000 # Forge - 10 hours
+#   startingGear: MdMedicGear
+#   alwaysUseSpawner: true
+#   icon: "JobIconParamedic" # Forge
+#   supervisors: job-supervisors-doc
+#   weight: 170
+#   displayWeight: 39 # Forge
+#   assignedCompany: MD
+#   canBeAntag: false
+#   access:
+#     - TraumaParamedic
+#   accessGroups:
+#   #Forge-Change-start
+#   - BaseAccess
+#   - BaseAccessSecurity
+#   - GeneralTraumaAccess
+#   #Forge-Change-end
+#   special:
+#   - !type:AddImplantSpecial
+#     implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change
+#   - !type:AddComponentSpecial
+#     components:
+#       - type: NpcFactionMember
+#         factions:
+#         - MD
+#       - type: SurgerySpeedModifier
+#         SpeedModifier: 1.75
+#       - type: ChatRank
+#         rank: md-medic
+#   - !type:GiveItemOnHolidaySpecial
+#     holiday: FrontierBirthday
+#     prototype: FrontierBirthdayGift
 
-- type: startingGear
-  id: MdMedicGear
-  equipment:
-    pocket1: TTIHandheldCrewMonitor # Forge-change
-    pocket2: MedicalAppraisalTool
-  storage:
-    back:
-    - EncryptionKeyService # Forge-change
-    - BoxFolderMedicalDoctor
+# - type: startingGear
+#   id: MdMedicGear
+#   equipment:
+#     pocket1: TTIHandheldCrewMonitor # Forge-change
+#     pocket2: MedicalAppraisalTool
+#   storage:
+#     back:
+#     - EncryptionKeyService # Forge-change
+#     - BoxFolderMedicalDoctor

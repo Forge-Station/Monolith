@@ -97,15 +97,6 @@
 
 # region NanoTrasen
 - type: playTimeTracker
-  id: NtMedic
-
-- type: playTimeTracker
-  id: NtMedicPilot
-
-- type: playTimeTracker
-  id: NtMedicGunner
-
-- type: playTimeTracker
   id: JobNtScientist
 
 - type: playTimeTracker
@@ -116,3 +107,16 @@
 
 - type: playTimeTracker
   id: JobNtCook
+
+#region TRAUMA
+- type: playTimeTracker
+  id: NtMedic
+
+- type: playTimeTracker
+  id: NtMedicPilot
+
+- type: playTimeTracker
+  id: NtMedicGunner
+
+- type: playTimeTracker
+  id: JobViceDirectorTrauma

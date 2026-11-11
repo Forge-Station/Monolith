@@ -1,0 +1,18 @@
+#region ACCESS LEVELS
+- type: accessLevel
+  id: Frontier
+  name: id-card-access-level-frontier
+
+- type: accessLevel
+  id: Mail
+  name: id-card-access-level-mail
+
+- type: accessLevel
+  id: TurretCommandNT
+  name: id-card-access-level-turret-command-nt
+
+- type: accessLevel
+  id: TurretCommandNTShuttle
+  name: id-card-access-level-turret-command-nt-shuttle
+
+#region ACCESS GROUPS

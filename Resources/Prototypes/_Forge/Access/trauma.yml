@@ -1,19 +1,33 @@
+#region ACCESS LEVELS
 - type: accessLevel
   id: Trauma
   name: id-card-access-level-trauma
-
-- type: accessLevel
-  id: TraumaPilot
-  name: id-card-access-level-trauma-pilot
-
-- type: accessLevel
-  id: TraumaMedic
-  name: id-card-access-level-trauma-medic
 
 - type: accessLevel
   id: TraumaParamedic
   name: id-card-access-level-trauma-paramedic
 
 - type: accessLevel
+  id: TraumaCommand
+  name: id-card-access-level-trauma-command
+
+- type: accessLevel
+  id: TraumaSecApartment
+  name: id-card-access-level-trauma-sec-apartment
+
+- type: accessLevel
   id: TraumaDirector
   name: id-card-access-level-trauma-director
+
+#region ACCESS GROUPS
+- type: accessGroup
+  id: GeneralTraumaAccess
+  tags:
+    - Trauma
+    - Mercenary
+
+- type: accessGroup
+  id: CommandTraumaAccess
+  tags:
+    - TraumaCommand
+    - TraumaSecApartment

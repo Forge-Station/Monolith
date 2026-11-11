@@ -1,15 +1,15 @@
-- type: accessLevel
-  id: Mercenary
-  name: id-card-access-level-mercenary
+# - type: accessLevel
+#   id: Mercenary
+#   name: id-card-access-level-mercenary
 
 - type: accessLevel
   id: Sergeant
   name: id-card-access-level-sergeant
-  
+
 - type: accessLevel
   id: Bailiff
   name: id-card-access-level-bailiff
-  
+
 - type: accessGroup
   id: CadetNfsdAccess
   tags:
@@ -17,7 +17,7 @@
   - External
   - Security
   - Brig
-  
+
 - type: accessGroup
   id: GeneralNfsdAccess
   tags:
@@ -35,7 +35,7 @@
   - Maintenance
   - External
   - Brig
-  
+
 - type: accessGroup
   id: GeneralNfsdBrigmedicAccess
   tags:

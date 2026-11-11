@@ -1,6 +1,11 @@
-- type: accessGroup
-  id: MercenaryAccess
-  tags:
-    - Mercenary
+#region ACCESS LEVELS
+- type: accessLevel
+  id: Mercenary
+  name: id-card-access-level-mercenary
 
+- type: accessLevel
+  id: Pilot
+  name: id-card-access-level-pilot
+
+#region ACCESS GROUPS
 

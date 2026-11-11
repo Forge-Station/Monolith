@@ -28,6 +28,14 @@
   - Captain
   - TurretCommandTSFShuttle
 
+- type: accessLevel
+  id: TurretCommandTSF
+  name: id-card-access-level-turret-command-tsf
+
+- type: accessLevel
+  id: TurretCommandTSFShuttle
+  name: id-card-access-level-turret-command-tsf-shuttle
+
 #region Provost
 - type: accessLevel
   id: Provost

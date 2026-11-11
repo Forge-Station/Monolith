@@ -1,3 +1,4 @@
+#region ACCESS LEVELS
 - type: accessLevel
   id: Renegate
   name: id-card-access-level-renegate
@@ -10,19 +11,19 @@
   id: RenegateSecApartment
   name: id-card-access-level-renegate-sec-apartment
 
+- type: accessLevel
+  id: TurretCommandRenegate
+  name: id-card-access-level-turret-command-renegate
+
+#region ACCESS GROUPS
 - type: accessGroup
   id: GeneralRenegateAccess
   tags:
-  - Maintenance
-  - External
   - Renegate
-  - Captain
+  - Mercenary
 
 - type: accessGroup
   id: CommandRenegateAccess
   tags:
-  - Maintenance
-  - External
   - Renegate
   - RenegateOfficer
-  - Captain

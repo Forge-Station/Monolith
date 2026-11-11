@@ -33,5 +33,5 @@
     languagesUnderstood:
     - NovaCygniBasic
   accessGroups:
-  - GeneralAccess
+  - BaseAccess #Forge-Change
   - ViperHigh

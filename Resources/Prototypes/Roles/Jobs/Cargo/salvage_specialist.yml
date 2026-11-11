@@ -11,7 +11,7 @@
   startingGear: SalvageSpecialistGear
   supervisors: job-supervisors-hire # Frontier
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
 
 - type: startingGear
   id: SalvageSpecialistGear

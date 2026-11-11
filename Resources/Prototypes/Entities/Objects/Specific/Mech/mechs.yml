@@ -379,7 +379,7 @@
     baseWeightlessModifier: 7.5
   - type: Access
     groups: # Frontier: contractor access
-    - GeneralAccess # Frontier
+    - BaseAccess #Forge-Change
     # tags: # Frontier
     # - Maintenance # Frontier
   # TOOD: buzz / chime actions

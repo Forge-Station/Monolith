@@ -8,7 +8,7 @@
   setPreference: false
 #  overrideConsoleVisibility: true # Frontier
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   # access: # Frontier
   # - Maintenance # Frontier
   # extendedAccess: # Frontier

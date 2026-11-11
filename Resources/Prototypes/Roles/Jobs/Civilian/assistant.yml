@@ -8,7 +8,7 @@
   icon: "JobIconPassenger"
 #  supervisors: job-supervisors-everyone
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
 
 - type: startingGear
   id: PassengerGear

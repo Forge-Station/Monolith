@@ -30,7 +30,7 @@
   #     - type: CommandStaff
   ## End Frontier: commented everything above out
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
 
 - type: startingGear
   id: ChiefEngineerGear

@@ -15,7 +15,7 @@
   supervisors: job-supervisors-hire # Frontier
   canBeAntag: false
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   setPreference: false # Frontier
 
 - type: startingGear

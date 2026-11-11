@@ -11,7 +11,7 @@
   icon: "JobIconServiceWorker"
   supervisors: job-supervisors-service
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   # access: # Frontier
   # - Service # Frontier
   # - Maintenance # Frontier

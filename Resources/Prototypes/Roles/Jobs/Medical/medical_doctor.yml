@@ -11,7 +11,7 @@
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-hire # Frontier
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   # special: # Frontier
   # - !type:GiveItemOnHolidaySpecial # Frontier
   #   holiday: DoctorDay # Frontier

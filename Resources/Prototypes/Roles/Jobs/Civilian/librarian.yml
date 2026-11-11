@@ -11,7 +11,7 @@
   icon: "JobIconLibrarian"
   supervisors: job-supervisors-hire # Frontier
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
 
 - type: startingGear
   id: LibrarianGear

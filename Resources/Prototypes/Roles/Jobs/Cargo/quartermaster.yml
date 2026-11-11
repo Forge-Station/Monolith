@@ -22,7 +22,7 @@
   # - Brig # Frontier
   # - Cryogenics # Frontier
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]

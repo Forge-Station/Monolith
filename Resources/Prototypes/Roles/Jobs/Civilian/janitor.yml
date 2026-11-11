@@ -12,7 +12,7 @@
   # - Janitor # Frontier
   # - Maintenance # Frontier
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   special:
   - !type:GiveItemOnHolidaySpecial
     holiday: GarbageDay

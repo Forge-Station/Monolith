@@ -41,7 +41,7 @@
   ## Frontier: commented out stuff above
   setPreference: false # Frontier
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
 
 - type: startingGear
   id: HoSGear

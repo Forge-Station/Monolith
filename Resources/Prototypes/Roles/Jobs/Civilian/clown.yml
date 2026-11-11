@@ -11,7 +11,7 @@
   icon: "JobIconClown"
   supervisors: job-supervisors-hire # Frontier
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   special:
   - !type:AddComponentSpecial
     components:

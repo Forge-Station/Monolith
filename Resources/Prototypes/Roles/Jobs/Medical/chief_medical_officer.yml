@@ -31,7 +31,7 @@
   #     - type: CommandStaff
   ## Frontier: commented everything above out
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   special:
   # Shitmed Change
   - !type:AddComponentSpecial

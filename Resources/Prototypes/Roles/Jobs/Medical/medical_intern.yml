@@ -19,7 +19,7 @@
   # - Maintenance # Frontier
   setPreference: false # Frontier
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   special:
   - !type:AddComponentSpecial
     components:

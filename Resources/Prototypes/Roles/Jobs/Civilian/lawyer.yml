@@ -12,7 +12,7 @@
   supervisors: job-supervisors-hire
   canBeAntag: false
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
 
 - type: startingGear
   id: LawyerGear

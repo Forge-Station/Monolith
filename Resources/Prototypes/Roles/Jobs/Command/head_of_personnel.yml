@@ -50,7 +50,7 @@
   # - Atmospherics
   # - Medical
   accessGroups: # Frontier
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   # End Frontier
   special:
   - !type:AddImplantSpecial

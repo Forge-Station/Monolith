@@ -28,7 +28,7 @@
   access:
   - Captain # Just making sure in the case of any error that this role cannot be used for any bad doing.
   accessGroups:
-  - GeneralAccess # Frontier
+  - BaseAccess #Forge-Change # Frontier
   # - AllAccess
   # special:
   # - !type:AddImplantSpecial

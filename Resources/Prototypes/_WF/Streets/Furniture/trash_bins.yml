@@ -16,7 +16,7 @@
   - type: Physics
     bodyType: Static
   - type: Anchorable
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
   - type: Sprite
     noRot: true
     sprite: _WF/Streets/Structures/Piping/disposal.rsi

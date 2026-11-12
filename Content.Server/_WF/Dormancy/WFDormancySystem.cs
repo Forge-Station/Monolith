@@ -4,7 +4,7 @@ using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared.Body.Organ;
 using Content.Shared.Mind.Components;
 using Content.Shared._WF.Planets;
-using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Core;
 using Robust.Shared.Enums;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
@@ -41,7 +41,7 @@ public sealed class WFDormancySystem : EntitySystem
     private EntityQuery<WFPlanetNetworkComponent> _networkQuery;
     private EntityQuery<WFOrbitLayerComponent> _orbitQuery;
     private EntityQuery<TransformComponent> _xformQuery;
-    private EntityQuery<VehicleInteriorOccupantComponent> _occupantQuery;
+    //private EntityQuery<VehicleInteriorOccupantComponent> _occupantQuery;
     private EntityQuery<OrganComponent> _organQuery;
     private EntityQuery<MindContainerComponent> _mindQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -54,7 +54,7 @@ public sealed class WFDormancySystem : EntitySystem
         _networkQuery = GetEntityQuery<WFPlanetNetworkComponent>();
         _orbitQuery = GetEntityQuery<WFOrbitLayerComponent>();
         _xformQuery = GetEntityQuery<TransformComponent>();
-        _occupantQuery = GetEntityQuery<VehicleInteriorOccupantComponent>();
+        //_occupantQuery = GetEntityQuery<VehicleInteriorOccupantComponent>();
         _organQuery = GetEntityQuery<OrganComponent>();
         _mindQuery = GetEntityQuery<MindContainerComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
@@ -174,8 +174,8 @@ public sealed class WFDormancySystem : EntitySystem
             AddEyes(session);
 
             // In a vehicle's cabin a player is wherever the vehicle is.
-            if (_occupantQuery.TryComp(body, out var occupant) && Exists(occupant.Vehicle))
-                body = occupant.Vehicle;
+            // if (_occupantQuery.TryComp(body, out var occupant) && Exists(occupant.Vehicle))
+            //     body = occupant.Vehicle;
 
             if (!_xformQuery.TryComp(body, out var xform) || xform.MapUid is not { } map || NetworkOf(map) is not { } network)
                 continue;

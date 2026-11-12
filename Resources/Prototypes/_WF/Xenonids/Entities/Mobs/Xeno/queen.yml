@@ -123,8 +123,8 @@
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
-  - type: VehicleDamageMultiplier
-    multiplier: 3
+  #- type: VehicleDamageMultiplier
+  #  multiplier: 3
   - type: XenoPsychicCommunication
   # WOLFGATE: cut InnateCommandSpeech (RMC command speech)
   # WOLFGATE: cut RMCInnateRadioTextIncrease (RMC radio text)

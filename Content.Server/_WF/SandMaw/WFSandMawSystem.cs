@@ -5,7 +5,7 @@ using Content.Server._WF.Tether;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Parallax;
 using Content.Shared._WF.Tether;
-using Content.Shared._WF.Vehicles.Base;
+//using Content.Shared._WF.Vehicles.Base;
 using Content.Shared.Atmos;
 using Content.Shared.Destructible;
 using Content.Shared.EntityTable;
@@ -306,7 +306,7 @@ public sealed class WFSandMawSystem : EntitySystem
     {
         if (!HasComp<MobStateComponent>(uid) && !HasComp<ItemComponent>(uid))
             return false;
-        if (HasComp<GhostComponent>(uid) || HasComp<RMCVehicleComponent>(uid) || Transform(uid).Anchored)
+        if (HasComp<GhostComponent>(uid) || Transform(uid).Anchored)
             return false;
         return !_containers.IsEntityInContainer(uid);
     }

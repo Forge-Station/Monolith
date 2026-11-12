@@ -7,8 +7,8 @@
   name: small floodlight
   description: A small bit of light in the darkness.
   components:
-  - type: VehicleSmashable
-    minDestroyWeightClass: Light
+  #- type: VehicleSmashable
+  #  minDestroyWeightClass: Light
   - type: Transform
     anchored: true
   - type: Physics
@@ -137,7 +137,7 @@
         layer: [ MachineLayer ]
   - type: Appearance
   - type: RequireProjectileTarget
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
 
 - type: entity
   parent: BaseStructure
@@ -168,7 +168,7 @@
         density: 155
         mask: [ MachineMask ]
         layer: [ MachineLayer ]
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
 
 - type: entity
   parent: RMCTallFloodlight
@@ -292,7 +292,7 @@
   - type: Repairable
   - type: Appearance
   - type: RequireProjectileTarget
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
 
 - type: entity
   parent: RMCTrafficLightBase

@@ -18,17 +18,17 @@
       state: shipyard_expedition
     - map: [ "computerLayerKeys" ]
       state: telesci_key
-  - type: WFVehicleShop
-    catalog: WFVehicleCatalogExpeditionary
-    extraCatalogs:
-    - WFVehicleCatalogBayParts
-  - type: ActivatableUI
-    key: enum.WFVehicleShopUiKey.Key
-    singleUser: true
-  - type: UserInterface
-    interfaces:
-      enum.WFVehicleShopUiKey.Key:
-        type: WFVehicleShopBoundUserInterface
+  # - type: WFVehicleShop
+  #   catalog: WFVehicleCatalogExpeditionary
+  #   extraCatalogs:
+  #   - WFVehicleCatalogBayParts
+  # - type: ActivatableUI
+  #   key: enum.WFVehicleShopUiKey.Key
+  #   singleUser: true
+  # - type: UserInterface
+  #   interfaces:
+  #     enum.WFVehicleShopUiKey.Key:
+  #       type: WFVehicleShopBoundUserInterface
 
 - type: entity
   parent: [ BaseStructureDisableToolUse, BaseStructureIndestructible, WFBaseComputerVehicleShop ]
@@ -93,7 +93,7 @@
     drawdepth: FloorObjects
   - type: Clickable
   - type: InteractionOutline
-  - type: WFVehicleDeliveryPad
+  #- type: WFVehicleDeliveryPad
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: Metallic

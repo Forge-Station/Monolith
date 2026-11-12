@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.Server._WF.Vehicles.Core;
+//using Content.Server._WF.Vehicles.Core;
 using Content.Shared._WF.GroundCover;
 
 namespace Content.Server._WF.GroundCover;
@@ -13,34 +13,34 @@ public sealed partial class WFGroundCoverSystem
 
     private void InitializeTracks()
     {
-        SubscribeLocalEvent<WFVehicleTreadsEvent>(OnTreads);
+        //SubscribeLocalEvent<WFVehicleTreadsEvent>(OnTreads);
     }
 
     /// <summary>Presses a level of snow flat under each tread, once for each tile a tread enters.</summary>
-    private void OnTreads(ref WFVehicleTreadsEvent args)
-    {
-        if (!HasComp<WFSnowCoverComponent>(args.Grid))
-            return;
+    // private void OnTreads(ref WFVehicleTreadsEvent args)
+    // {
+    //     if (!HasComp<WFSnowCoverComponent>(args.Grid))
+    //         return;
 
-        var left = TileOf(args.Left);
-        var right = TileOf(args.Right);
-        var seen = _treads.TryGetValue(args.Vehicle, out var last);
-        if (!seen || last.Left != left)
-            Compress(args.Grid, left);
+    //     var left = TileOf(args.Left);
+    //     var right = TileOf(args.Right);
+    //     var seen = _treads.TryGetValue(args.Vehicle, out var last);
+    //     if (!seen || last.Left != left)
+    //         Compress(args.Grid, left);
 
-        if (!seen || last.Right != right)
-            Compress(args.Grid, right);
+    //     if (!seen || last.Right != right)
+    //         Compress(args.Grid, right);
 
-        _treads[args.Vehicle] = (left, right);
-        if (_treads.Count <= 64)
-            return;
+    //     _treads[args.Vehicle] = (left, right);
+    //     if (_treads.Count <= 64)
+    //         return;
 
-        foreach (var vehicle in new List<EntityUid>(_treads.Keys))
-        {
-            if (TerminatingOrDeleted(vehicle))
-                _treads.Remove(vehicle);
-        }
-    }
+    //     foreach (var vehicle in new List<EntityUid>(_treads.Keys))
+    //     {
+    //         if (TerminatingOrDeleted(vehicle))
+    //             _treads.Remove(vehicle);
+    //     }
+    // }
 
     private void Compress(EntityUid grid, Vector2i tile)
     {

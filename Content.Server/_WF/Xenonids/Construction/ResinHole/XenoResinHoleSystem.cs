@@ -12,7 +12,7 @@ using Content.Shared._WF.Xenonids.Energy;
 using Content.Shared._WF.Xenonids.Parasite;
 using Content.Shared._WF.Xenonids.Plasma;
 using Content.Shared._WF.Xenonids.Weeds;
-using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Core;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
@@ -61,7 +61,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private DestructibleSystem _destructible = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedContainerSystem _containers = default!;
-    [Dependency] private VehicleWheelSystem _wheels = default!;
+    //[Dependency] private VehicleWheelSystem _wheels = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -392,12 +392,12 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         if (_mobState.IsDead(args.Tripper))
             return;
 
-        if (resinHole.Comp.TrapPrototype is { } trap &&
-            IsAcidPrototype(trap, out var trapLevel) &&
-            TryGetVehicleForTrap(args.Tripper, out var vehicle))
-        {
-            _wheels.DamageWheels(vehicle, GetVehicleWheelDamageForTrapLevel(trapLevel));
-        }
+        // if (resinHole.Comp.TrapPrototype is { } trap &&
+        //     IsAcidPrototype(trap, out var trapLevel) &&
+        //     TryGetVehicleForTrap(args.Tripper, out var vehicle))
+        // {
+        //     _wheels.DamageWheels(vehicle, GetVehicleWheelDamageForTrapLevel(trapLevel));
+        // }
 
         if (resinHole.Comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
         {
@@ -430,12 +430,12 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return false;
         }
 
-        if (HasComp<VehicleInteriorOccupantComponent>(user))
-        {
-            var msg = Loc.GetString("rmc-xeno-construction-failed-cant-build-resin-hole");
-            _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
-            return false;
-        }
+        // if (HasComp<VehicleInteriorOccupantComponent>(user))
+        // {
+        //     var msg = Loc.GetString("rmc-xeno-construction-failed-cant-build-resin-hole");
+        //     _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
+        //     return false;
+        // }
 
         var neighborAnchoredEntities = _mapSystem.GetCellsInSquareArea(gridId, grid, coords, 1);
 

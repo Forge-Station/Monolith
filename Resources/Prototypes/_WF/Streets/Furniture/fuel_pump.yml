@@ -28,5 +28,5 @@
     offset: "-0.5,0"
     layers:
     - state: fuelpump_100
-  - type: VehicleSmashable
-    minDestroyWeightClass: Medium
+  #- type: VehicleSmashable
+  #  minDestroyWeightClass: Medium

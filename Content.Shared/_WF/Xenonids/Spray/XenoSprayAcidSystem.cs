@@ -3,7 +3,7 @@ using Content.Shared._WF.Barricades;
 using Content.Shared._WF.RMCCore.Line;
 using Content.Shared._WF.RMCCore.Map;
 using Content.Shared._WF.RMCCore.OnCollide;
-using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Core;
 using Content.Shared._WF.Xenonids.Hive;
 using Content.Shared._WF.Xenonids.Plasma;
 using Content.Shared.Actions;
@@ -34,7 +34,7 @@ public sealed partial class XenoSprayAcidSystem : EntitySystem
     [Dependency] private RMCMapSystem _rmcMap = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private VehicleWheelSystem _vehicleWheels = default!;
+    //[Dependency] private VehicleWheelSystem _vehicleWheels = default!;
     [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
@@ -135,24 +135,24 @@ public sealed partial class XenoSprayAcidSystem : EntitySystem
         Dirty(target, comp);
     }
 
-    private void TryAcidVehicleWheels(EntityUid splatter)
-    {
-        if (!TryComp(splatter, out DamageOnCollideComponent? onCollide))
-            return;
+    // private void TryAcidVehicleWheels(EntityUid splatter)
+    // {
+    //     if (!TryComp(splatter, out DamageOnCollideComponent? onCollide))
+    //         return;
 
-        var damage = _onCollide.GetCollideDamage((splatter, onCollide)).GetTotal().Float();
-        if (damage <= 0f)
-            return;
+    //     var damage = _onCollide.GetCollideDamage((splatter, onCollide)).GetTotal().Float();
+    //     if (damage <= 0f)
+    //         return;
 
-        var splatterMap = _transform.GetMapId(splatter);
-        var splatterAabb = _lookup.GetWorldAABB(splatter);
-        var vehicles = new HashSet<Entity<VehicleWheelSlotsComponent>>();
-        _lookup.GetEntitiesIntersecting(splatterMap, splatterAabb, vehicles);
-        foreach (var vehicle in vehicles)
-        {
-            _vehicleWheels.DamageWheels(vehicle, damage);
-        }
-    }
+    //     var splatterMap = _transform.GetMapId(splatter);
+    //     var splatterAabb = _lookup.GetWorldAABB(splatter);
+    //     var vehicles = new HashSet<Entity<VehicleWheelSlotsComponent>>();
+    //     _lookup.GetEntitiesIntersecting(splatterMap, splatterAabb, vehicles);
+    //     foreach (var vehicle in vehicles)
+    //     {
+    //         _vehicleWheels.DamageWheels(vehicle, damage);
+    //     }
+    // }
 
     public void CreateLine(EntityUid user, EntityCoordinates start, EntityCoordinates end, TimeSpan delay, float range, EntProtoId acid, bool ignoreBlocker = true)
     {
@@ -189,7 +189,7 @@ public sealed partial class XenoSprayAcidSystem : EntitySystem
                 splatter.Xeno = uid;
                 Dirty(spawned, splatter);
 
-                TryAcidVehicleWheels(spawned);
+                //TryAcidVehicleWheels(spawned);
 
                 if (_xenoSprayAcidQuery.TryComp(uid, out var xenoSprayAcid))
                 {

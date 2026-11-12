@@ -12,8 +12,8 @@ using Content.Shared._WF.Xenonids.Construction.Tunnel;
 using Content.Shared._WF.Xenonids.Egg;
 using Content.Shared._WF.Xenonids.Evolution;
 using Content.Shared._WF.Xenonids.Eye;
-using Content.Shared._WF.Vehicles.Core;
-using Content.Shared._WF.Vehicles.Grid.Components;
+//using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Grid.Components;
 using Content.Shared._WF.Xenonids.Hive;
 using Content.Shared._WF.Xenonids.Plasma;
 using Content.Shared._WF.Xenonids.Designer;
@@ -74,7 +74,7 @@ public sealed partial class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private QueenEyeSystem _queenEye = default!;
     [Dependency] private RMCMapSystem _rmcMap = default!;
     [Dependency] private IConfigurationManager _config = default!;
-    [Dependency] private VehicleInteriorSystem _vehicle = default!;
+    //[Dependency] private VehicleInteriorSystem _vehicle = default!;
     [Dependency] private XenoSystem _xeno = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -1307,21 +1307,21 @@ public sealed partial class SharedXenoConstructionSystem : EntitySystem
     {
         target = OnGrid(target); // WOLFGATE: map-relative clicks build on the grid under them
 
-        if (HasComp<VehicleInteriorOccupantComponent>(xeno.Owner))
-        {
-            if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+        // if (HasComp<VehicleInteriorOccupantComponent>(xeno.Owner))
+        // {
+        //     if (popup)
+        //         _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
 
-            return false;
-        }
+        //     return false;
+        // }
 
-        if (_vehicle.TryGetVehicleFromInterior(target.EntityId, out _))
-        {
-            if (popup)
-                _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+        // if (_vehicle.TryGetVehicleFromInterior(target.EntityId, out _))
+        // {
+        //     if (popup)
+        //         _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
 
-            return false;
-        }
+        //     return false;
+        // }
 
         if (checkStructureSelected && buildChoice == null)
         {
@@ -1790,12 +1790,13 @@ public sealed partial class SharedXenoConstructionSystem : EntitySystem
 
     private bool IsNearVehicle(MapCoordinates mapCoords)
     {
-        if (mapCoords.MapId == MapId.Nullspace)
-            return false;
+        // if (mapCoords.MapId == MapId.Nullspace)
+        //     return false;
 
-        var size = new Vector2(VehicleConstructionBlockRange * 2f, VehicleConstructionBlockRange * 2f);
-        var aabb = Box2.CenteredAround(mapCoords.Position, size);
-        return _entityLookup.AnyComponentsIntersecting(typeof(GridVehicleMoverComponent), mapCoords.MapId, aabb);
+        // var size = new Vector2(VehicleConstructionBlockRange * 2f, VehicleConstructionBlockRange * 2f);
+        // var aabb = Box2.CenteredAround(mapCoords.Position, size);
+        // return _entityLookup.AnyComponentsIntersecting(typeof(GridVehicleMoverComponent), mapCoords.MapId, aabb);
+        return false;
     }
 
     public void GiveQueenBoost(EntityUid queen, float speedMultiplier, float remoteRange)

@@ -7,7 +7,7 @@
   name: platform
   description: A square metal surface resting on four legs.
   components:
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
   - type: Transform
     anchored: true
   - type: Sprite

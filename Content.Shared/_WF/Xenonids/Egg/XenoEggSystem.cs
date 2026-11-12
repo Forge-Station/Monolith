@@ -5,7 +5,7 @@ using Content.Shared._WF.RMCCore.Hands;
 using Content.Shared._WF.Xenonids.Construction;
 using Content.Shared._WF.Xenonids.Construction.Tunnel;
 using Content.Shared._WF.Xenonids.Egg.EggRetriever;
-using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Core;
 using Content.Shared._WF.Xenonids.Hive;
 using Content.Shared._WF.Xenonids.Parasite;
 using Content.Shared._WF.Xenonids.Plasma;
@@ -134,11 +134,11 @@ public sealed partial class XenoEggSystem : EntitySystem
             return;
 
         var hasOvipositor = HasComp<XenoAttachedOvipositorComponent>(xeno);
-        if (!hasOvipositor && HasComp<VehicleInteriorOccupantComponent>(xeno.Owner))
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-ovipositor-vehicle"), xeno, xeno, PopupType.SmallCaution);
-            return;
-        }
+        // if (!hasOvipositor && HasComp<VehicleInteriorOccupantComponent>(xeno.Owner))
+        // {
+        //     _popup.PopupClient(Loc.GetString("cm-xeno-ovipositor-vehicle"), xeno, xeno, PopupType.SmallCaution);
+        //     return;
+        // }
 
         if (!hasOvipositor &&
             !_plasma.HasPlasmaPopup(xeno.Owner, args.AttachPlasmaCost))
@@ -259,12 +259,12 @@ public sealed partial class XenoEggSystem : EntitySystem
             return;
         }
 
-        if (HasComp<VehicleInteriorOccupantComponent>(args.User))
-        {
-            var failMessage = Loc.GetString("rmc-xeno-egg-blocked-vehicle");
-            _popup.PopupClient(failMessage, args.User, args.User, PopupType.SmallCaution);
-            return;
-        }
+        // if (HasComp<VehicleInteriorOccupantComponent>(args.User))
+        // {
+        //     var failMessage = Loc.GetString("rmc-xeno-egg-blocked-vehicle");
+        //     _popup.PopupClient(failMessage, args.User, args.User, PopupType.SmallCaution);
+        //     return;
+        // }
 
         if (!CanPlaceEggPopup(args.User, egg, args.ClickLocation, args.Handled, out _))
         {

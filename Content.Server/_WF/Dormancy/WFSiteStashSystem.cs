@@ -3,7 +3,7 @@ using Content.Server.Atmos.Components;
 using Content.Server.Power.Components;
 using System.Linq;
 using Content.Shared._WF.CCVar;
-using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Core;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Parallax.Biomes;
@@ -392,9 +392,9 @@ public sealed partial class WFSiteStashSystem : EntitySystem
     private bool Blocks(EntityUid uid)
     {
         return HasComp<ActorComponent>(uid)
-               || TryComp<MindContainerComponent>(uid, out var mind) && mind.HasMind
-               || HasComp<VehicleInteriorComponent>(uid)
-               || HasComp<VehicleEnterComponent>(uid);
+               || TryComp<MindContainerComponent>(uid, out var mind) && mind.HasMind;
+            //    || HasComp<VehicleInteriorComponent>(uid)
+            //    || HasComp<VehicleEnterComponent>(uid);
     }
 
     /// <summary>An anchored wall, window, door or cable: nothing to pause, as it does nothing a tick.</summary>

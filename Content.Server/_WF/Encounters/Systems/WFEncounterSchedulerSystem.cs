@@ -664,7 +664,7 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
     private bool IsSector(MapId map, EntityUid? mapUid)
     {
         if (mapUid is not { } uid || HasComp<Content.Shared.Shuttles.Components.FTLMapComponent>(uid)
-            || HasComp<Content.Shared._WF.Vehicles.Core.VehicleInteriorLinkComponent>(uid)
+            //|| HasComp<Content.Shared._WF.Vehicles.Core.VehicleInteriorLinkComponent>(uid)
             || HasComp<Content.Server.Salvage.Expeditions.SalvageExpeditionComponent>(uid)
             || EntityManager.System<Content.Server._NF.Shipyard.Systems.ShipyardSystem>().ShipyardMap == map)
             return false;
@@ -737,12 +737,12 @@ public sealed partial class WFEncounterSchedulerSystem : EntitySystem
 
             // Inside a vehicle a player is on the interior's own map; the vehicle outside is where they are.
             var where = _transform.GetMapCoordinates(uid, xform);
-            if (TryComp<Content.Shared._WF.Vehicles.Core.VehicleInteriorLinkComponent>(xform.MapUid, out var link))
-            {
-                if (TerminatingOrDeleted(link.Vehicle))
-                    continue;
-                where = _transform.GetMapCoordinates(link.Vehicle);
-            }
+            // if (TryComp<Content.Shared._WF.Vehicles.Core.VehicleInteriorLinkComponent>(xform.MapUid, out var link))
+            // {
+            //     if (TerminatingOrDeleted(link.Vehicle))
+            //         continue;
+            //     where = _transform.GetMapCoordinates(link.Vehicle);
+            // }
 
             // A body without a mob state still counts; ghosts and the dead don't. Only the sector is open space:
             // a player on a planet, in its orbit or in a cavern is no place to put ships beside.

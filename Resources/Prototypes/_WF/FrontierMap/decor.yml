@@ -299,7 +299,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/Tables/reinforced.rsi
     snapCardinals: false
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
   - type: Damageable
     damageModifierSet: null
   - type: Destructible
@@ -327,7 +327,7 @@
     sprite: _RMC14/Structures/Furniture/bed.rsi
     state: bunk_blue
     snapCardinals: false
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
   - type: Transform
     anchored: true
     noRot: false
@@ -359,7 +359,7 @@
     sprite: _RMC14/Structures/Furniture/bed.rsi
     state: bunk_brown
     snapCardinals: false
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
   - type: Transform
     anchored: true
     noRot: false

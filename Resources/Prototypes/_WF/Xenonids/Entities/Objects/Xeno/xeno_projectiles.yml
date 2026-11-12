@@ -276,7 +276,7 @@
   - type: Ammo
     muzzleFlash: null
   - type: IgnorePredictionHide
-  - type: TriggerOnFixedDistanceStop
+  #- type: TriggerOnFixedDistanceStop
     delay: 0
   - type: DeleteOnTrigger
 
@@ -336,7 +336,7 @@
   - type: Ammo
     muzzleFlash: null
   - type: IgnorePredictionHide
-  - type: TriggerOnFixedDistanceStop
+  #- type: TriggerOnFixedDistanceStop
     delay: 0
   - type: DeleteOnTrigger
 
@@ -446,8 +446,8 @@
   - type: Projectile
     deleteOnCollide: false
     damage: { }
-  - type: TriggerOnFixedDistanceStop
-    delay: 1
+  #- type: TriggerOnFixedDistanceStop
+  #  delay: 1
   - type: ProjectileGrenade
     fillPrototype: XenoAcidBallSpitProjectile
     capacity: 14

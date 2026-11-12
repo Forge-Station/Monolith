@@ -22,8 +22,8 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Physics;
-using Content.Shared._WF.Vehicles;
-using Content.Shared._WF.Vehicles.Hardpoint;
+//using Content.Shared._WF.Vehicles;
+//using Content.Shared._WF.Vehicles.Hardpoint;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Audio;
 
@@ -39,7 +39,7 @@ public abstract partial class SharedXenoAcidSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private FixtureSystem _fixtures = default!;
-    [Dependency] private HardpointSystem _hardpoints = default!;
+    //[Dependency] private HardpointSystem _hardpoints = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -155,23 +155,23 @@ public abstract partial class SharedXenoAcidSystem : EntitySystem
         if (!xeno.Comp.CanMeltStructures && corrodible.Structure)
             return;
 
-        if (HasComp<HardpointSlotsComponent>(target))
-        {
-            if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
-                return;
+        // if (HasComp<HardpointSlotsComponent>(target))
+        // {
+        //     if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+        //         return;
 
-            if (args.EnergyCost != 0 && !_xenoEnergy.TryRemoveEnergyPopup(xeno.Owner, args.EnergyCost))
-                return;
+        //     if (args.EnergyCost != 0 && !_xenoEnergy.TryRemoveEnergyPopup(xeno.Owner, args.EnergyCost))
+        //         return;
 
-            if (_net.IsClient)
-                return;
+        //     if (_net.IsClient)
+        //         return;
 
-            args.Handled = true;
+        //     args.Handled = true;
 
-            var vehicleDamage = args.VehicleDamage ?? GetDefaultVehicleAcidDamage(args.Strength);
-            _hardpoints.DamageHardpoint(target, target, vehicleDamage);
-            return;
-        }
+        //     var vehicleDamage = args.VehicleDamage ?? GetDefaultVehicleAcidDamage(args.Strength);
+        //     _hardpoints.DamageHardpoint(target, target, vehicleDamage);
+        //     return;
+        // }
 
         // Re-check if acid can be replaced at DoAfter end to prevent race conditions
         // (e.g., weak acid downgrading strong acid if both DoAfters were started before any completed)

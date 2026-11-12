@@ -10,7 +10,7 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
   - type: Transform
     anchored: true
   - type: Physics

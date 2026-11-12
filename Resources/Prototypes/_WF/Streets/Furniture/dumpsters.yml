@@ -51,7 +51,7 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
 
 - type: entity
   parent: AU14Dumpster

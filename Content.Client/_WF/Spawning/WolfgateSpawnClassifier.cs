@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Shared._WF.Vehicles.Base;
+//using Content.Shared._WF.Vehicles.Base;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Blocking.Components;
@@ -147,7 +147,7 @@ public sealed class WolfgateSpawnClassifier
         _strap = Name<StrapComponent>(factory);
         _poweredLight = Name<PoweredLightComponent>(factory);
         _lightBulb = Name<LightBulbComponent>(factory);
-        _vehicle = Name<RMCVehicleComponent>(factory);
+        //_vehicle = Name<RMCVehicleComponent>(factory);
     }
 
     /// <summary>The spawn menu category a prototype belongs in, judged from its components and parents.</summary>
@@ -175,15 +175,15 @@ public sealed class WolfgateSpawnClassifier
             return WfSpawnCategory.Debug;
 
         // Everything the vehicles module adds, apart from its rounds and effects.
-        if (HasCategory(proto, "WFVehicles") && !Has(comps, _projectile) && !Lineage("Effect"))
-        {
-            if (Has(comps, _vehicle) || id == "CMUCargoCarrier")
-                return WfSpawnCategory.VehiclesDrivable;
-            if (Lineage("RMCProp") || id == "RMCCarPileup")
-                return WfSpawnCategory.VehicleScenery;
+        // if (HasCategory(proto, "WFVehicles") && !Has(comps, _projectile) && !Lineage("Effect"))
+        // {
+        //     if (Has(comps, _vehicle) || id == "CMUCargoCarrier")
+        //         return WfSpawnCategory.VehiclesDrivable;
+        //     if (Lineage("RMCProp") || id == "RMCCarPileup")
+        //         return WfSpawnCategory.VehicleScenery;
 
-            return Has(comps, _item) ? WfSpawnCategory.VehicleParts : WfSpawnCategory.VehicleInteriors;
-        }
+        //     return Has(comps, _item) ? WfSpawnCategory.VehicleParts : WfSpawnCategory.VehicleInteriors;
+        // }
 
         // Everything the xenonids module adds, apart from its rounds and effects.
         if (HasCategory(proto, "WFXenonids") && !Has(comps, _projectile) && !Lineage("Effect"))

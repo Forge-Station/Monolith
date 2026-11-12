@@ -4,7 +4,7 @@ using System.Numerics;
 using Content.Server._CE.ZLevels.Core;
 using Content.Server._CE.ZLevels.Core.Components;
 using Content.Server._WF.Dormancy;
-using Content.Server._WF.NpcVehicleCrew;
+//using Content.Server._WF.NpcVehicleCrew;
 using Content.Server.Chemistry.Components;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._WF.LivingWorld;
@@ -143,7 +143,7 @@ public sealed class DormancyTest
         var server = pair.Server;
         var entMan = server.EntMan;
         var xforms = server.System<SharedTransformSystem>();
-        var crews = server.System<WFVehicleCrewSystem>();
+        //var crews = server.System<WFVehicleCrewSystem>();
 
         await EnableFeature(pair);
         var layers = await BuildStandalone(pair);
@@ -154,12 +154,12 @@ public sealed class DormancyTest
         try
         {
             await LayTiles(pair, ground, new Vector2i(-8, -6), new Vector2i(48, 10));
-            await server.WaitPost(() =>
-            {
-                Assert.That(crews.TrySpawn("WFVehicleCrewCivilianTruck", new EntityCoordinates(ground, 2.5f, 0.5f), out vehicle,
-                    WFVehicleBehaviour.Hold), Is.True);
-                crews.SetHome(vehicle, xforms.ToMapCoordinates(new EntityCoordinates(ground, 40.5f, 0.5f)));
-            });
+            // await server.WaitPost(() =>
+            // {
+            //     Assert.That(crews.TrySpawn("WFVehicleCrewCivilianTruck", new EntityCoordinates(ground, 2.5f, 0.5f), out vehicle,
+            //         WFVehicleBehaviour.Hold), Is.True);
+            //     crews.SetHome(vehicle, xforms.ToMapCoordinates(new EntityCoordinates(ground, 40.5f, 0.5f)));
+            // });
 
             await pair.RunSeconds(6f);
             await server.WaitAssertion(() =>

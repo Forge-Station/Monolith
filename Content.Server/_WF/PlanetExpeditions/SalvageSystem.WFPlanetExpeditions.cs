@@ -3,7 +3,7 @@ using System.Numerics;
 using Content.Server._WF.PlanetExpeditions;
 using Content.Server._WF.PlanetPois;
 using Content.Shared._WF.Planets;
-using Content.Shared._WF.Vehicles.Base;
+//using Content.Shared._WF.Vehicles.Base;
 using Content.Shared.Mobs.Components;
 using Robust.Server.Player;
 using Content.Server.Ghost.Roles.Components;
@@ -405,12 +405,12 @@ public sealed partial class SalvageSystem
             }
         }
 
-        var vehicles = EntityQueryEnumerator<RMCVehicleComponent>();
-        while (vehicles.MoveNext(out var vehicle, out var comp))
-        {
-            if (comp.Operator != null && At(vehicle, false))
-                return true;
-        }
+        // var vehicles = EntityQueryEnumerator<RMCVehicleComponent>();
+        // while (vehicles.MoveNext(out var vehicle, out var comp))
+        // {
+        //     if (comp.Operator != null && At(vehicle, false))
+        //         return true;
+        // }
 
         foreach (var session in _wfPlayers.Sessions)
         {

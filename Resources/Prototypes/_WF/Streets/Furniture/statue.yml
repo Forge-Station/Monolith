@@ -23,7 +23,7 @@
         density: 75
         mask: [ MachineMask ]
         layer: [ MachineLayer ]
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
     minDestroyWeightClass: Medium
 
 - type: entity

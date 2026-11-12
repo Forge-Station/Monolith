@@ -41,7 +41,7 @@
   name: barrel
   description: A storage barrel.
   components:
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
   - type: Sprite
     sprite: _WF/Streets/Structures/barrels.rsi
     noRot: true

@@ -1,6 +1,6 @@
 using System.Numerics;
 using Content.Shared._WF.GroundCover;
-using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Core;
 using Robust.Client.Graphics;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -95,70 +95,70 @@ public sealed partial class WFSnowTracksSystem : EntitySystem
             Remove(oldest);
         }
 
-        Drive();
+        //Drive();
     }
 
     /// <summary>Lays a pair of marks for every vehicle that moved a step on snow cover since it last did.</summary>
-    private void Drive()
-    {
-        var query = EntityQueryEnumerator<WFVehicleEngineComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out _, out var xform))
-        {
-            if (xform.GridUid is not { } grid || xform.ParentUid != grid || !_cover.HasSnow(grid))
-            {
-                _last.Remove(uid);
-                continue;
-            }
+    // private void Drive()
+    // {
+    //     var query = EntityQueryEnumerator<WFVehicleEngineComponent, TransformComponent>();
+    //     while (query.MoveNext(out var uid, out _, out var xform))
+    //     {
+    //         if (xform.GridUid is not { } grid || xform.ParentUid != grid || !_cover.HasSnow(grid))
+    //         {
+    //             _last.Remove(uid);
+    //             continue;
+    //         }
 
-            var position = xform.LocalPosition;
-            if (!_last.TryGetValue(uid, out var last) || last.Grid != grid)
-            {
-                _last[uid] = (grid, position);
-                continue;
-            }
+    //         var position = xform.LocalPosition;
+    //         if (!_last.TryGetValue(uid, out var last) || last.Grid != grid)
+    //         {
+    //             _last[uid] = (grid, position);
+    //             continue;
+    //         }
 
-            var delta = position - last.Position;
-            var distance = delta.Length();
-            if (distance < StepSize)
-                continue;
+    //         var delta = position - last.Position;
+    //         var distance = delta.Length();
+    //         if (distance < StepSize)
+    //             continue;
 
-            _last[uid] = (grid, position);
-            if (distance > MaxStep || !TryComp<MapGridComponent>(grid, out var gridComp))
-                continue;
+    //         _last[uid] = (grid, position);
+    //         if (distance > MaxStep || !TryComp<MapGridComponent>(grid, out var gridComp))
+    //             continue;
 
-            var hull = HullBounds(uid);
-            var along = delta / distance;
-            var across = new Vector2(-along.Y, along.X);
-            var rotation = xform.LocalRotation;
-            var halfWidth = MathF.Abs(Vector2.Dot(across, rotation.RotateVec(Vector2.UnitX))) * hull.Width / 2f
-                + MathF.Abs(Vector2.Dot(across, rotation.RotateVec(Vector2.UnitY))) * hull.Height / 2f;
-            var middle = position + rotation.RotateVec(hull.Center);
-            var side = across * MathF.Max(0.3f, halfWidth - TrackInset);
-            var facing = delta.ToWorldAngle();
-            foreach (var at in new[] { middle + side, middle - side })
-            {
-                var tile = _map.LocalToTile(grid, gridComp, new EntityCoordinates(grid, at));
-                var depth = _cover.GetDepth(grid, tile);
-                if (depth >= WFSnowCover.CoverFrom)
-                    Lay(grid, tile, at, facing, depth);
-            }
-        }
+    //         var hull = HullBounds(uid);
+    //         var along = delta / distance;
+    //         var across = new Vector2(-along.Y, along.X);
+    //         var rotation = xform.LocalRotation;
+    //         var halfWidth = MathF.Abs(Vector2.Dot(across, rotation.RotateVec(Vector2.UnitX))) * hull.Width / 2f
+    //             + MathF.Abs(Vector2.Dot(across, rotation.RotateVec(Vector2.UnitY))) * hull.Height / 2f;
+    //         var middle = position + rotation.RotateVec(hull.Center);
+    //         var side = across * MathF.Max(0.3f, halfWidth - TrackInset);
+    //         var facing = delta.ToWorldAngle();
+    //         foreach (var at in new[] { middle + side, middle - side })
+    //         {
+    //             var tile = _map.LocalToTile(grid, gridComp, new EntityCoordinates(grid, at));
+    //             var depth = _cover.GetDepth(grid, tile);
+    //             if (depth >= WFSnowCover.CoverFrom)
+    //                 Lay(grid, tile, at, facing, depth);
+    //         }
+    //     }
 
-        if (_last.Count == 0 || _timing.CurFrame % 600 != 0)
-            return;
+    //     if (_last.Count == 0 || _timing.CurFrame % 600 != 0)
+    //         return;
 
-        _stale.Clear();
-        foreach (var uid in _last.Keys)
-        {
-            if (TerminatingOrDeleted(uid))
-                _stale.Add(uid);
-        }
+    //     _stale.Clear();
+    //     foreach (var uid in _last.Keys)
+    //     {
+    //         if (TerminatingOrDeleted(uid))
+    //             _stale.Add(uid);
+    //     }
 
-        foreach (var uid in _stale)
-        {
-            _last.Remove(uid);
-        }
-    }
+    //     foreach (var uid in _stale)
+    //     {
+    //         _last.Remove(uid);
+    //     }
+    // }
 
     /// <summary>Lays one tread mark on a tile.</summary>
     public WFSnowTread Lay(EntityUid grid, Vector2i tile, Vector2 position, Angle rotation, int depth)

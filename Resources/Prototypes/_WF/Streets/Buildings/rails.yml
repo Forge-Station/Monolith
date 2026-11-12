@@ -18,7 +18,7 @@
   - type: InteractionOutline
   - type: Repairable
   - type: Climbable
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: FlimsyMetallic
@@ -55,7 +55,7 @@
   - type: Sprite
     sprite: _WF/Streets/CMU/Structures/concretebarrier.rsi
     state: concrete
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
     minDestroyWeightClass: Heavy
   - type: Damageable
     damageModifierSet: StructuralMetallic

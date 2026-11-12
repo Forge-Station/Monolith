@@ -523,7 +523,7 @@ public sealed partial class XenoProjectileSystem : EntitySystem
 
             if (stopAtDistance != null)
             {
-                var fixedDistanceComp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
+                var fixedDistanceComp = EnsureComp<ProjectileFixedDistanceComponent>(projectile); //по хорошему это надо переписать используя другой компач, я его вернул но без системы для него
                 fixedDistanceComp.FlyEndTime = _timing.CurTime + TimeSpan.FromSeconds(stopAtDistance.Value / speed);
                 Dirty(projectile, fixedDistanceComp);
             }

@@ -20,7 +20,7 @@
   - type: HTN
     rootTask:
       task: SimpleHumanoidHostileCompound
-  - type: WFVehicleBoarder
+  #- type: WFVehicleBoarder
 
 - type: entity
   parent: WFStrangerBase
@@ -116,8 +116,8 @@
     dialogue: WFStrangerDialogueSquatter
     behaviour: Squat
     sightRange: 9
-  - type: WFVehicleBoarder
-    leaves: false
+  #- type: WFVehicleBoarder
+  #  leaves: false
   - type: Loadout
     prototypes: [ WFStrangerGearSquatter ]
 

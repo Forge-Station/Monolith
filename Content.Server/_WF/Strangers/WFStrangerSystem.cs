@@ -4,14 +4,14 @@ using System.Numerics;
 using Content.Server._NF.Bank;
 using Content.Server._WF.Cowardice;
 using Content.Server._WF.Planets.Bounds;
-using Content.Server._WF.Vehicles.Npc;
+//using Content.Server._WF.Vehicles.Npc;
 using Content.Server.Chat.Systems;
 using Content.Server.NPC.Components;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Shuttles.Components;
 using Content.Shared._WF.Strangers;
-using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Core;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -128,7 +128,7 @@ public sealed partial class WFStrangerSystem : EntitySystem
         var current = origin;
         for (var i = 0; i < 6 && current.IsValid(); i++)
         {
-            if (HasComp<MobStateComponent>(current) || HasComp<VehicleInteriorComponent>(current))
+            if (HasComp<MobStateComponent>(current)) //|| HasComp<VehicleInteriorComponent>(current))
                 return current;
             current = Transform(current).ParentUid;
         }
@@ -483,8 +483,8 @@ public sealed partial class WFStrangerSystem : EntitySystem
         ent.Comp.Hostile = true;
         ent.Comp.CalmAt = null;
         _factions.AggroEntity(ent.Owner, user);
-        if (TryComp(user, out VehicleInteriorOccupantComponent? occupant) && Exists(occupant.Vehicle))
-            _factions.AggroEntity(ent.Owner, occupant.Vehicle);
+        // if (TryComp(user, out VehicleInteriorOccupantComponent? occupant) && Exists(occupant.Vehicle))
+        //     _factions.AggroEntity(ent.Owner, occupant.Vehicle);
         if (TryComp(ent, out HTNComponent? htn))
             _htn.SetHTNEnabled((ent, htn), true);
 
@@ -548,7 +548,7 @@ public sealed partial class WFStrangerSystem : EntitySystem
         var here = _transform.GetMapCoordinates(ent, xform);
         foreach (var enemy in exceptions.Hostiles)
         {
-            if (TerminatingOrDeleted(enemy) || !_mobs.IsAlive(enemy) && !HasComp<WFOccupiedVehicleComponent>(enemy))
+            if (TerminatingOrDeleted(enemy) || !_mobs.IsAlive(enemy)) //&& !HasComp<WFOccupiedVehicleComponent>(enemy))
                 continue;
             var there = _transform.GetMapCoordinates(enemy);
             if (there.MapId == here.MapId && _examine.InRangeUnOccluded(here, there, ent.Comp.SightRange, null))

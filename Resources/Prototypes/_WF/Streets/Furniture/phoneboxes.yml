@@ -64,7 +64,7 @@
           collection: MetalBreak
           params:
             volume: -6
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
 
 - type: entity
   abstract: true
@@ -115,7 +115,7 @@
           collection: MetalBreak
           params:
             volume: -6
-  - type: VehicleSmashable
+  #- type: VehicleSmashable
 
 - type: entity
   parent: RMCPhoneboxBase

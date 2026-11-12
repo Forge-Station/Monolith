@@ -140,8 +140,8 @@ public sealed class SnowMarksTest
                     cover.SetDepth(map.Grid, new Vector2i(x, y), 100);
             }
 
-            vehicle = server.EntMan.SpawnEntity(null, new EntityCoordinates(map.Grid, new Vector2(-5.5f, 0.5f)));
-            server.EntMan.AddComponent<Content.Shared._WF.Vehicles.Core.WFVehicleEngineComponent>(vehicle);
+            //vehicle = server.EntMan.SpawnEntity(null, new EntityCoordinates(map.Grid, new Vector2(-5.5f, 0.5f)));
+            //server.EntMan.AddComponent<Content.Shared._WF.Vehicles.Core.WFVehicleEngineComponent>(vehicle);
         });
 
         await pair.RunTicksSync(pair.SecondsToTicks(2));

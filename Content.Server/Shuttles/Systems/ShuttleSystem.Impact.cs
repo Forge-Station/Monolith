@@ -610,7 +610,7 @@ public sealed partial class ShuttleSystem
                 if (_dmgQuery.TryComp(localEnt, out var damageable))
                 {
                     // Apply damage scaled by distance but capped to prevent gibbing
-                    var scaledDamage = tileData.Energy * _damageMultiplier * VehicleHullMultiplier(localEnt); // WOLFGATE(Vehicles): a hull hitting a vehicle hurts it more
+                    var scaledDamage = tileData.Energy * _damageMultiplier;
                     damageSpec.DamageDict["Blunt"] = scaledDamage;
                     damageSpec.DamageDict["Structural"] = scaledDamage * _structuralDamage;
 

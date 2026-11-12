@@ -671,7 +671,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         DrawCircles(handle);
 
         DrawWfPlanetSignals(handle, worldToView, xform); // WOLFGATE(PlanetSignals): sites and other layers' vessels on a world's radar.
-        DrawWfVehicleScanner(handle, worldToView); // WOLFGATE(Vehicles): a vehicle scanner marks the vehicle and its position.
+        //DrawWfVehicleScanner(handle, worldToView); // WOLFGATE(Vehicles): a vehicle scanner marks the vehicle and its position.
         DrawIFFBeacons(handle, worldToView, mapPos, xform.MapUid); // Far Horizons
 
         // Draw shields

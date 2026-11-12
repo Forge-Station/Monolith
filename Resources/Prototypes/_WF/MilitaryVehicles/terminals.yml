@@ -16,10 +16,10 @@
       state: shipyard_security
     - map: [ "computerLayerKeys" ]
       state: generic_keys
-  - type: WFVehicleShop
-    catalog: WFMilitaryCatalogChassis
-    extraCatalogs:
-    - WFMilitaryCatalogParts
+  # - type: WFVehicleShop
+  #   catalog: WFMilitaryCatalogChassis
+  #   extraCatalogs:
+  #   - WFMilitaryCatalogParts
 
 - type: entity
   parent: WFComputerVehicleShopExpeditionary
@@ -36,8 +36,8 @@
       state: shipyard_security
     - map: [ "computerLayerKeys" ]
       state: generic_keys
-  - type: WFVehicleShop
-    catalog: WFMilitaryCatalogCounter
-    extraCatalogs:
-    - WFMilitaryCatalogParts
-    - WFMilitaryCatalogDrops
+  # - type: WFVehicleShop
+  #   catalog: WFMilitaryCatalogCounter
+  #   extraCatalogs:
+  #   - WFMilitaryCatalogParts
+  #   - WFMilitaryCatalogDrops

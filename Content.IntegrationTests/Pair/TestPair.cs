@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading; // WOLFGATE: AsyncLocal for the returned-pair guard
 using Content.Client.IoC;
 using Content.Client.Parallax.Managers;
-using Content.IntegrationTests.Tests._WF.Vehicles;
+//using Content.IntegrationTests.Tests._WF.Vehicles;
 using Content.IntegrationTests.Tests.Destructible;
 using Content.IntegrationTests.Tests.DeviceNetwork;
 using Content.Server.GameTicking;
@@ -140,7 +140,7 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair, IAsyncDis
             // There's probably a better way to do this.
             var entSysMan = IoCManager.Resolve<IEntitySystemManager>();
             entSysMan.LoadExtraSystemType<DeviceNetworkTestSystem>();
-            entSysMan.LoadExtraSystemType<VehicleEventProbeSystem>();
+            //entSysMan.LoadExtraSystemType<VehicleEventProbeSystem>();
             entSysMan.LoadExtraSystemType<TestDestructibleListenerSystem>();
         };
         return opts;

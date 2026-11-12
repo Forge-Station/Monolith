@@ -6,7 +6,7 @@ using Content.Server._WF.PlanetPois;
 using Content.Server._WF.Planets;
 using Content.Shared._WF.Planets;
 using Content.Shared._WF.PlanetSignals;
-using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Core;
 using Content.Shared.Implants.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -147,10 +147,10 @@ public sealed class WFPlanetSignalsSystem : EntitySystem
 
             // Someone inside a vehicle is wherever the vehicle is.
             var where = xform;
-            if (xform.MapUid is { } inside && !_layers.ContainsKey(inside)
-                && TryComp<VehicleInteriorOccupantComponent>(mob, out var occupant)
-                && TryComp<TransformComponent>(occupant.Vehicle, out var vehicleXform))
-                where = vehicleXform;
+            //if (xform.MapUid is { } inside && !_layers.ContainsKey(inside)
+                //&& TryComp<VehicleInteriorOccupantComponent>(mob, out var occupant)
+                //&& TryComp<TransformComponent>(occupant.Vehicle, out var vehicleXform))
+                //where = vehicleXform;
 
             if (where.MapUid is not { } map || !_layers.TryGetValue(map, out var at))
                 continue;

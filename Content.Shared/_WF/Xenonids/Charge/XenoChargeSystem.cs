@@ -3,9 +3,9 @@ using Content.Shared._WF.RMCCore.Damage.ObstacleSlamming;
 using Content.Shared._WF.RMCCore.Pulling;
 using Content.Shared._WF.RMCCore.Slow;
 using Content.Shared._WF.RMCCore.Stun;
-using Content.Shared._WF.Vehicles.Core;
-using Content.Shared._WF.Vehicles.Grid.Components;
-using Content.Shared._WF.Vehicles.Hardpoint;
+//using Content.Shared._WF.Vehicles.Core;
+//using Content.Shared._WF.Vehicles.Grid.Components;
+//using Content.Shared._WF.Vehicles.Hardpoint;
 using Content.Shared._WF.Xenonids.Animation;
 using Content.Shared._WF.Xenonids.Hive;
 using Content.Shared._WF.Xenonids.Plasma;
@@ -42,7 +42,7 @@ public sealed partial class XenoChargeSystem : EntitySystem
     [Dependency] private SharedDestructibleSystem _destruct = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
-    [Dependency] private HardpointSystem _hardpoints = default!;
+    //[Dependency] private HardpointSystem _hardpoints = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private MobStateSystem _mobState = default!;
@@ -52,7 +52,7 @@ public sealed partial class XenoChargeSystem : EntitySystem
     [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private VehicleInteriorSystem _rmcVehicles = default!;
+    //[Dependency] private VehicleInteriorSystem _rmcVehicles = default!;
     [Dependency] private RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private RMCSlowSystem _slow = default!;
     [Dependency] private SharedStunSystem _stun = default!;
@@ -192,7 +192,7 @@ public sealed partial class XenoChargeSystem : EntitySystem
                 return;
         }
 
-        var isVehicle = HasComp<VehicleWheelSlotsComponent>(targetId);
+        //var isVehicle = HasComp<VehicleWheelSlotsComponent>(targetId);
 
         StopCrusherCharge(xeno);
 
@@ -208,28 +208,26 @@ public sealed partial class XenoChargeSystem : EntitySystem
         }
 
         DamageSpecifier? damage;
-        if (isVehicle)
-        {
-            damage = _hardpoints.DamageHardpoint(targetId, targetId, xeno.Comp.VehicleDamage.GetTotal().Float())
-                ? xeno.Comp.VehicleDamage
-                : null;
-        }
-        else
-        {
-            //var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
-            damage = _damageable.TryChangeDamage(
-                targetId,
-                structDamage,
-                origin: xeno); // WOLFGATE: no tool so claw sharpness rules skip charge damage
-        }
+        // if (isVehicle)
+        // {
+        //     damage = _hardpoints.DamageHardpoint(targetId, targetId, xeno.Comp.VehicleDamage.GetTotal().Float())
+        //         ? xeno.Comp.VehicleDamage
+        //         : null;
+        // }
+        //else
+        //var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
+        damage = _damageable.TryChangeDamage(
+            targetId,
+            structDamage,
+            origin: xeno); // WOLFGATE: no tool so claw sharpness rules skip charge damage
 
-        if (_net.IsServer && isVehicle)
-        {
-            // WOLFGATE: Wolfgate's vehicle port has no shove; a charge only damages and shakes the vehicle
+        // if (_net.IsServer && isVehicle)
+        // {
+        //     // WOLFGATE: Wolfgate's vehicle port has no shove; a charge only damages and shakes the vehicle
 
-            if (TryComp(targetId, out GridVehicleMoverComponent? targetMover))
-                _rmcVehicles.DoInteriorCrashEffect(targetId, targetMover.MaxSpeed, targetMover.MaxSpeed);
-        }
+        //     if (TryComp(targetId, out GridVehicleMoverComponent? targetMover))
+        //         _rmcVehicles.DoInteriorCrashEffect(targetId, targetMover.MaxSpeed, targetMover.MaxSpeed);
+        // }
 
         if (damage?.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(targetId))
         {

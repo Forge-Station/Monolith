@@ -69,10 +69,10 @@ public sealed partial class WFPlanetPoiSystem
         await SpawnResidentsAsync(ground, grid, record);
         if (TerminatingOrDeleted(ground))
             return;
-        await SpawnVehiclesAsync((ground, biome), grid, record);
+        //await SpawnVehiclesAsync((ground, biome), grid, record);
         if (TerminatingOrDeleted(ground))
             return;
-        await SpawnRoadPatrolsAsync(ground, grid, record);
+        //await SpawnRoadPatrolsAsync(ground, grid, record);
         if (TerminatingOrDeleted(ground) || record.PendingRoamers.Count == 0)
             return;
 

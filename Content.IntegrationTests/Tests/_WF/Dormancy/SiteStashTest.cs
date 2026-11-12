@@ -375,7 +375,7 @@ public sealed class SiteStashTest
                 var xform = entMan.GetComponent<TransformComponent>(uid);
                 if (xform.ParentUid != parent || !region.Box.Contains(xform.LocalPosition) || entMan.HasComponent<Robust.Shared.Map.Components.MapGridComponent>(uid)
                     || entMan.HasComponent<Robust.Shared.Player.ActorComponent>(uid)
-                    || skipInert && (Inert(entMan, uid) || entMan.HasComponent<Shared._WF.Vehicles.Core.VehicleEnterComponent>(uid)
+                    || skipInert && (Inert(entMan, uid) //|| entMan.HasComponent<Shared._WF.Vehicles.Core.VehicleEnterComponent>(uid)
                         // A passing sound (wind, a hiss) is a short-lived cue, not something the site keeps.
                         || entMan.HasComponent<Robust.Shared.Audio.Components.AudioComponent>(uid)))
                     continue;

@@ -22,7 +22,6 @@
  # guides: [ BasicLore, TransSolarFederation ] # Forge-Change-delete
   accessGroups:
   - BaseAccess
-  - BaseAccessSecurity
   - TsfGeneralAccess
   special:
   - !type:AddComponentSpecial

@@ -20,7 +20,6 @@
   - TsfDiplomacy
   accessGroups:
   - BaseAccess
-  - BaseAccessSecurity
   - TsfGeneralAccess
   special:
   - !type:AddComponentSpecial

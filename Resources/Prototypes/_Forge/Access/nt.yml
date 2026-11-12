@@ -1,11 +1,15 @@
 #region ACCESS LEVELS
 - type: accessLevel
-  id: Frontier
-  name: id-card-access-level-frontier
+  id: NtAccess
+  name: id-card-access-level-nt
 
 - type: accessLevel
   id: Mail
   name: id-card-access-level-mail
+
+- type: accessLevel
+  id: StationTrafficController
+  name: id-card-access-level-stc
 
 - type: accessLevel
   id: TurretCommandNT
@@ -16,3 +20,65 @@
   name: id-card-access-level-turret-command-nt-shuttle
 
 #region ACCESS GROUPS
+
+- type: accessGroup
+  id: GeneralNtAccess
+  tags:
+    - NtAccess
+    - TurretCommandNTShuttle
+
+- type: accessGroup
+  id: NtSecurityAccess
+  tags:
+    - Security
+    - Brig
+    - Mercenary
+
+- type: accessGroup
+  id: NtCommandAccess
+  tags:
+  - NtSecApartment
+  - TurretCommandNT
+
+- type: accessGroup
+  id: NtAllBaseAccess
+  tags:
+  - Service
+  - Engineering
+  - Medical
+  - StationTrafficController
+  - Mail
+
+- type: accessGroup
+  id: AllAccessSrVanilla
+  tags:
+  - Captain
+  - HeadOfPersonnel
+  - ChiefEngineer
+  - ChiefMedicalOfficer
+  - HeadOfSecurity
+  - ResearchDirector
+  - Command
+  - Cryogenics
+  - Security
+  - Detective
+  - Armory
+  - Brig
+  - Lawyer
+  - Engineering
+  - Medical
+  - Quartermaster
+  - Salvage
+  - Cargo
+  - Research
+  - Service
+  - Maintenance
+  - External
+  - Janitor
+  - Theatre
+  - Bar
+  - Chemistry
+  - Kitchen
+  - Chapel
+  - Hydroponics
+  - Atmospherics

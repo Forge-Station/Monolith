@@ -18,10 +18,9 @@
   canBeAntag: false
   access:
   - Service
-  - External
-  - Captain
-  - Frontier
-  - TurretCommandNTShuttle
+  accessgroups:
+  - BaseAccess
+  - GeneralNtAccess
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, NanotrasenTrackingImplant ]

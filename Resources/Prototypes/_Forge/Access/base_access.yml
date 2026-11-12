@@ -6,36 +6,10 @@
   id: BaseAccess
   tags:
     - Captain
-    - HeadOfPersonnel
-    - ChiefEngineer
-    - ChiefMedicalOfficer
-    - HeadOfSecurity
-    - ResearchDirector
-    - Command
-    - Cryogenics
-    - Engineering
-    - Medical
-    - Quartermaster
-    - Salvage
-    - Cargo
-    - Research
-    - Service
     - Maintenance
     - External
-    - Janitor
-    - Theatre
-    - Bar
-    - Chemistry
-    - Kitchen
-    - Chapel
-    - Hydroponics
-    - Atmospherics
 
 - type: accessGroup
-  id: BaseAccessSecurity
+  id: BaseAccessFactionCommand
   tags:
-    - Security
-    - Detective
-    - Armory
-    - Brig
-    - Lawyer
+    - Command

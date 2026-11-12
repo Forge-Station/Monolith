@@ -27,12 +27,18 @@
   weight: 170
   displayWeight: 60 # Forge
   canBeAntag: false
+  #Forge-Change-start
   access:
-  - NtSecApartment
-  - TurretCommandNT # Forge-Change
-  - TurretCommandNTShuttle # Forge-Change
+  - Pilot
   accessGroups:
-  - AllAccessSR # Forge-Change
+  - BaseAccess
+  - BaseAccessFactionCommand
+  - GeneralNtAccess
+  - NtCommandAccess
+  - NtSecurityAccess
+  - NtAllBaseAccess
+  - AllAccessSrVanilla
+  #Forge-Change-end
   special:
   - !type:AddComponentSpecial
     components:

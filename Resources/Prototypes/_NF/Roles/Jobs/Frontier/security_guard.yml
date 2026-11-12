@@ -14,15 +14,13 @@
   weight: 80
   displayWeight: 20 # Second from the bottom
   canBeAntag: false
-  access:
-  - Security
-  - Brig
-  - Maintenance
-  - Service
-  - External
-  - Mercenary
-  - Captain
-  - Frontier
+  #Forge-Change-start
+  accessgroups:
+  - BaseAccess
+  - GeneralNtAccess
+  - NtSecurityAccess
+  - NtAllBaseAccess
+  #Forge-Change-end
   special:
   - !type:AddComponentSpecial
     components:

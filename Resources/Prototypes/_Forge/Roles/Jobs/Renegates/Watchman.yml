@@ -19,7 +19,6 @@
   canBeAntag: false
   accessGroups:
   - BaseAccess
-  - BaseAccessSecurity
   - GeneralRenegateAccess
   special:
   - !type:AddImplantSpecial

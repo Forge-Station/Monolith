@@ -17,12 +17,10 @@
   displayWeight: 20
   canBeAntag: false
   access:
-  - Service
-  - External
-  - Captain
-  - Frontier
   - Research
-  - TurretCommandNTShuttle
+  accessgroups:
+  - BaseAccess
+  - GeneralNtAccess
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, NanotrasenTrackingImplant ]

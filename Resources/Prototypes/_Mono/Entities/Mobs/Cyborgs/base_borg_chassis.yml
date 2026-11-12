@@ -58,7 +58,6 @@
   - type: Access
     tags:
       - BaseAccess #Forge-Change
-      - BaseAccessSecurity #Forge-Change
       - TsfGeneralAccess #Forge-Change
   - type: AccessReader
     access: [["Tsf"], ["TurretCommandTSF"]] #Forge-Change

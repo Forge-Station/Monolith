@@ -28,7 +28,7 @@
   setPreference: true
   accessGroups:
   - BaseAccess
-  - BaseAccessSecurity
+  - BaseAccessFactionCommand
   - GeneralRenegateAccess
   - CommandRenegateAccess
   special:

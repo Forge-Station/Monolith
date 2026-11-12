@@ -18,12 +18,14 @@
   weight: 160
   displayWeight: 50 # Second from the top, Forge
   setPreference: true
+  #Forge-Change-start
   access:
   - Service
-  - Maintenance
-  - External
-  - Frontier
   - StationTrafficController
+  accessgroups:
+  - BaseAccess
+  - GeneralNtAccess
+  #Forge-Change-end
   special:
   - !type:AddImplantSpecial # Forge
     implants: [ MindShieldImplant, NanotrasenTrackingImplant ] # Forge-change

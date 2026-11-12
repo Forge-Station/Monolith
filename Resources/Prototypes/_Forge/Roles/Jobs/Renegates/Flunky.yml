@@ -19,7 +19,6 @@
   setPreference: true
   accessGroups:
     - BaseAccess
-    - BaseAccessSecurity
     - GeneralRenegateAccess
   special:
   - !type:AddImplantSpecial

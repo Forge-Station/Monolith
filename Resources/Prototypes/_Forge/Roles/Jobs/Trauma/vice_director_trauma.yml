@@ -23,7 +23,7 @@
   canBeAntag: false
   accessGroups:
   - BaseAccess
-  - BaseAccessSecurity
+  - BaseAccessFactionCommand
   - GeneralTraumaAccess
   - CommandTraumaAccess
   special:

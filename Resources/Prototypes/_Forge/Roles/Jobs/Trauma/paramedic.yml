@@ -21,7 +21,6 @@
     - TraumaParamedic
   accessGroups:
   - BaseAccess
-  - BaseAccessSecurity
   - GeneralTraumaAccess
   special:
   - !type:AddImplantSpecial

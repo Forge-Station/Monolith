@@ -18,8 +18,7 @@
   shuttlePath: /SharedMaps/_Mono/Shuttles/Viper/wolfsnake.yml
   guidebookPage: Null
   class:
-  - Scrapyard
-  - Pursuit
+  - Fighter # Forge changes
   engine:
   - Bananium
 

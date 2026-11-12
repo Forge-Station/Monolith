@@ -40,9 +40,6 @@
     UndergarmentBottom: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
     Chest: MobThavenTorso
-    Genital: MobHumanoidAnyMarking
-    Penis: MobHumanoidAnyMarking
-    Breasts: MobHumanoidAnyMarking
     LArm: MobThavenLArm
     RArm: MobThavenRArm
     LHand: MobThavenLHand
@@ -67,7 +64,6 @@
       points: 1
       required: true
       defaultMarkings: [ ThavenEars1 ]
-    # Wolfgate: Genital marking points removed with the legacy genital markings (replaced by organ-based anatomy).
     Head:
       points: 5 # 4 < 5, Funky, makes it so that you can have even more customization options on your thaven, sickeningly many even
       required: false

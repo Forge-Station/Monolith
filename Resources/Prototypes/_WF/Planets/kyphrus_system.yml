@@ -1,0 +1,53 @@
+# Kyphrus, the sector's collapsed sun, and the six worlds inside Monolith's drone belt (18 km).
+# Distances are metres. The two outer worlds share an orbit and sit on opposite sides of the star.
+
+- type: starType
+  id: StarKyphrus
+  name: Kyphrus
+  shader: WFBlackHole
+  solarMass: 2
+  color: "#ffb060"
+
+- type: starSystem
+  id: SystemKyphrus
+  star: StarKyphrus
+  planets:
+  - planet: PlanetFervidus
+    distance: 6200 # 6.2 km
+    angle: 0.2
+  - planet: PlanetMerak
+    distance: 9400 # 9.4 km
+    angle: 1.5
+  - planet: PlanetAsclepiu
+    distance: 11500 # 11.5 km
+    angle: 2.7
+  - planet: PlanetAerumna
+    distance: 14000 # 14 km
+    angle: 3.9
+  - planet: PlanetThrascias
+    distance: 14500 # 14.5 km
+    angle: 5.1
+  - planet: WFPlanetCarcinoma
+    distance: 14500 # 14.5 km, opposite Thrascias
+    angle: 1.9584
+
+# The star-system spawner looks these up by id. The registry names them and pins them to the sector map.
+- type: entity
+  id: StarEntity
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+
+- type: entity
+  id: PlanetEntity
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+
+- type: entity
+  id: StarSystemKyphrus
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StarSystemRule
+    system: SystemKyphrus

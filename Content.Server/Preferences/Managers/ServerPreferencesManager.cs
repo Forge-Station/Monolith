@@ -119,17 +119,6 @@ namespace Content.Server.Preferences.Managers
 
             profile.EnsureValid(session, _dependencies);
 
-            // WOLFGATE - an unreadable anatomy column is kept only for the anatomy the server loaded from it, unchanged; a
-            // client's LoadFailed flag alone keeps nothing.
-            if (profile is HumanoidCharacterProfile { Genitals.LoadFailed: true } wfProfile
-                && !(curPrefs.Characters.TryGetValue(slot, out var wfOld)
-                     && wfOld is HumanoidCharacterProfile { Genitals.LoadFailed: true } wfOldProfile
-                     && wfOldProfile.Genitals.MemberwiseEquals(wfProfile.Genitals)))
-            {
-                profile = wfProfile.WithGenitals(wfProfile.Genitals.WithoutLoadFailed());
-            }
-            // End WOLFGATE
-
             // Mono
             if (!authoritative && profile is HumanoidCharacterProfile humanoid)
             {

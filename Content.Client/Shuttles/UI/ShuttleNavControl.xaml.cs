@@ -611,6 +611,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         // No data
         if (_coordinates == null || _rotation == null)
         {
+            WfDrawIdleScope(handle); // Forge-Change: a reticle instead of a black panel
             return;
         }
 

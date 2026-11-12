@@ -41,6 +41,8 @@ namespace Content.Client.Options.UI
             AudioTab.Control.ReloadValues();
             AdminOptionsTab.Control.ReloadValues();
             ConsentTab.Refresh(); // WOLFGATE
+            // Forge-Change: no consent toggle is left in this build, so the tab is hidden until one is defined
+            Tabs.SetTabVisible(ConsentTabIndex, UserInterfaceManager.GetUIController<Content.Client._Common.Consent.UI.ConsentUiController>().HasToggles);
         }
     }
 }

@@ -12,6 +12,7 @@ public sealed partial class WFRoundSetupLobbyPanel : PanelContainer
     [Dependency] private IEntityManager _entities = default!;
 
     private WFRoundSetupClientSystem? _system;
+    private readonly Label _title;
     private readonly BoxContainer _cards;
     private readonly RichTextLabel _empty;
     private WFRoundSetupLobby[] _shown = Array.Empty<WFRoundSetupLobby>();
@@ -25,9 +26,10 @@ public sealed partial class WFRoundSetupLobbyPanel : PanelContainer
         HorizontalExpand = true;
         var content = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, SeparationOverride = 4 };
         AddChild(content);
-        content.AddChild(new Label { Text = Text("title"), StyleClasses = { "LabelSubText" } });
-        _empty = Wrapped(Text("loading"));
-        _empty.ToolTip = Text("empty-help");
+        // Forge-Change: Loc is not always ready in the constructor; the title is filled in EnteredTree.
+        _title = new Label { StyleClasses = { "LobbyCaption" } };
+        content.AddChild(_title);
+        _empty = Wrapped(string.Empty);
         content.AddChild(_empty);
         _cards = new BoxContainer
         {
@@ -40,6 +42,12 @@ public sealed partial class WFRoundSetupLobbyPanel : PanelContainer
     protected override void EnteredTree()
     {
         base.EnteredTree();
+        // Forge-Change-Start: fill the strings once Loc is available (raw keys used to stick on the lobby)
+        _title.Text = Text("title");
+        _empty.ToolTip = Text("empty-help");
+        if (_shown.Length == 0)
+            _empty.SetMessage(FormattedMessage.FromUnformatted(Text("loading")));
+        // Forge-Change-End
         SetListening(VisibleInTree);
     }
 

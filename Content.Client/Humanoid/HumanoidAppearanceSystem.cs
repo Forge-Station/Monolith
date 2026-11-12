@@ -1,6 +1,5 @@
 using System.Numerics;
-using Content.Client._WF.Genitals; // WOLFGATE
-using Content.Shared._WF.Genitals; // WOLFGATE
+using Content.Shared._WF.CustomMarkings; // Forge-Change: HumanoidMarkingsAppliedEvent lives here since the anatomy module was removed
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
@@ -17,7 +16,6 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private MarkingManager _markingManager = default!;
-    [Dependency] private GenitalsVisualizerSystem _genitalsVisuals = default!; // WOLFGATE - anatomy undergarment hiding
 
     public override void Initialize()
     {
@@ -38,7 +36,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
 
         sprite[_sprite.LayerMapReserve((uid, sprite), HumanoidVisualLayers.Eyes)].Color = component.EyeColor;
 
-        // WOLFGATE - anatomy visuals follow marking rebuilds (GenitalsVisualizerSystem).
+        // WOLFGATE - custom markings follow marking rebuilds. Forge-Change: the anatomy module that also listened is removed
         RaiseLocalEvent(uid, new HumanoidMarkingsAppliedEvent());
     }
 
@@ -229,8 +227,6 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
 
         UpdateSprite(uid, humanoid, Comp<SpriteComponent>(uid)); // WOLFGATE
 
-        // WOLFGATE - lets GenitalPreviewSystem fill the doll's anatomy from the profile.
-        RaiseLocalEvent(uid, new GenitalPreviewProfileLoadedEvent(profile));
     }
 
     private void ApplyMarkingSet(EntityUid uid, HumanoidAppearanceComponent humanoid, SpriteComponent sprite) // WOLFGATE - entity id for the anatomy hooks
@@ -311,10 +307,6 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         visible &= !IsHidden(humanoid, markingPrototype.BodyPart);
         visible &= humanoid.BaseLayers.TryGetValue(markingPrototype.BodyPart, out var setting)
            && setting.AllowsMarkings;
-
-        // WOLFGATE - anatomy: a removed undergarment is not drawn for viewers who pass the anatomy gate.
-        if (_genitalsVisuals.IsUndergarmentHidden(uid, markingPrototype.MarkingCategory))
-            visible = false;
 
         // WOLFGATE - ported from HardLight/Floof: resolve per-sprite colours through colorLinks so a
         // multi-sprite marking (e.g. a tail split across two layers) is coloured as one unit.

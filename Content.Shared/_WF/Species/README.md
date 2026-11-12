@@ -621,7 +621,6 @@ and its own sprite.
 - [`Resources/Prototypes/Entities/Mobs/Customization/Markings/earrings.yml`](../../../Resources/Prototypes/Entities/Mobs/Customization/Markings/earrings.yml): ported from HardLight
 - [`Resources/Prototypes/Entities/Mobs/Customization/Markings/face.yml`](../../../Resources/Prototypes/Entities/Mobs/Customization/Markings/face.yml): ported from HardLight
 - [`Resources/Prototypes/Entities/Mobs/Customization/Markings/gauze.yml`](../../../Resources/Prototypes/Entities/Mobs/Customization/Markings/gauze.yml): added Canine
-- [`Resources/Prototypes/Entities/Mobs/Customization/Markings/genitals.yml`](../../../Resources/Prototypes/Entities/Mobs/Customization/Markings/genitals.yml): Wolfgate species in the list
 - [`Resources/Prototypes/Entities/Mobs/Customization/Markings/human_noses.yml`](../../../Resources/Prototypes/Entities/Mobs/Customization/Markings/human_noses.yml): added Canine
 - [`Resources/Prototypes/Entities/Mobs/Customization/Markings/tattoos.yml`](../../../Resources/Prototypes/Entities/Mobs/Customization/Markings/tattoos.yml)
   - eye markings get their own points (was Head)

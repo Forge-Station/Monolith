@@ -86,9 +86,6 @@ public sealed class ExamineCardEvent : EntityEventArgs
     /// <summary>The character's own description, when their face shows and they are close enough.</summary>
     public string? Description;
 
-    /// <summary>The character's adult description; only sent to examiners who may read anatomy.</summary>
-    public string? NsfwText;
-
     /// <summary>Age and build, such as "young woman".</summary>
     public string? Appearance;
 

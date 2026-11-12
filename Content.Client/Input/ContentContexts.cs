@@ -29,7 +29,6 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.ExamineEntity);
             common.AddFunction(ContentKeyFunctions.OpenAHelp);
             common.AddFunction(ContentKeyFunctions.OpenConsentWindow); // WOLFGATE(Genitals): consent system
-            common.AddFunction(ContentKeyFunctions.OpenAnatomyPanel); // WOLFGATE(Genitals): anatomy panel
             common.AddFunction(ContentKeyFunctions.OpenSectorMap); // WOLFGATE(SectorControl): sector map
             common.AddFunction(ContentKeyFunctions.TakeScreenshot);
             common.AddFunction(ContentKeyFunctions.TakeScreenshotNoUI);

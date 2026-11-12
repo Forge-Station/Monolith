@@ -592,6 +592,8 @@ public sealed partial class MapScreen : BoxContainer
     {
         base.FrameUpdate(args);
 
+        ForgeUpdateMapMarkers(); // Forge-Change: the marker register is rebuilt only when the ship's markers change
+
         var curTime = _timing.CurTime;
 
         // Skip the gradual reveal of map objects - they're already added in PingMap

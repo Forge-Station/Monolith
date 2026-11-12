@@ -15,6 +15,8 @@ public static class WFInstrumentGlass
     /// <summary>Adds a convex lens reflection contained within a circular dial.</summary>
     public static void Round(DrawingHandleScreen handle, Vector2 center, float radius, float scale)
     {
+        if (WFInstrumentTheme.Simplified) // Forge-Change: a lens reflection is decoration, the simplified interface leaves it out
+            return;
         var index = 0;
         for (var i = 0; i < 18; i++)
         {
@@ -49,6 +51,13 @@ public static class WFInstrumentGlass
             handle.DrawLine(box.TopLeft, new Vector2(box.Right, box.Top), WFInstrumentTheme.Skin.EdgeLight.WithAlpha(0.5f));
             return;
         }
+        // Forge-Change-Start: the simplified interface keeps the window outline and skips the reflection
+        if (WFInstrumentTheme.Simplified)
+        {
+            handle.DrawRect(box, WFInstrumentTheme.Skin.EdgeLight.WithAlpha(0.6f), false);
+            return;
+        }
+        // Forge-Change-End
         var top = box.TopLeft;
         var bottom = box.Top + box.Height * 0.45f;
         var light = Color.FromSrgb(WFInstrumentTheme.Cream.WithAlpha(0.025f) * handle.Modulate);

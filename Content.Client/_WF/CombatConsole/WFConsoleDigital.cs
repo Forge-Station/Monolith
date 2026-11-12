@@ -12,6 +12,19 @@ public static class WFConsoleDigital
     public static void Panel(DrawingHandleScreen handle, UIBox2 box, float scale, Color fill, Color edge,
         bool brackets = true, float corner = 8)
     {
+        // Forge-Change-Start: the simplified interface draws a square panel from quads alone. A chamfered panel is a
+        // triangle fan plus a line list, two draw commands that never merge with their neighbours; quads on the white
+        // texture share one batch for as long as nothing else is drawn between them.
+        if (WFInstrumentTheme.Simplified)
+        {
+            handle.DrawRect(box, fill);
+            handle.DrawRect(new UIBox2(box.Left, box.Top, box.Right, box.Top + 1), edge);
+            handle.DrawRect(new UIBox2(box.Left, box.Bottom - 1, box.Right, box.Bottom), edge);
+            handle.DrawRect(new UIBox2(box.Left, box.Top + 1, box.Left + 1, box.Bottom - 1), edge);
+            handle.DrawRect(new UIBox2(box.Right - 1, box.Top + 1, box.Right, box.Bottom - 1), edge);
+            return;
+        }
+        // Forge-Change-End
         var cut = MathF.Min(corner * scale, MathF.Min(box.Width, box.Height) / 4);
         var a = box.TopLeft + new Vector2(cut, 0);
         var b = new Vector2(box.Right - cut, box.Top);

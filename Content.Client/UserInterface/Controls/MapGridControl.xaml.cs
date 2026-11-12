@@ -252,8 +252,7 @@ public partial class MapGridControl : LayoutContainer
 
     protected void DrawBacking(DrawingHandleScreen handle)
     {
-        var backing = BackingColor;
-        handle.DrawRect(PixelSizeBox, backing);
+        handle.DrawRect(PixelSizeBox, RadarBackingColor);
     }
 
     protected void DrawNoSignal(DrawingHandleScreen handle)

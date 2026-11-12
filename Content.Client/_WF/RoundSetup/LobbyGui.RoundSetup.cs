@@ -9,7 +9,8 @@ public sealed partial class LobbyGui
     /// <summary>Keeps the repository hero and menu, with a single character-edit action.</summary>
     private void InitializeRoundSetupHome()
     {
-        CharacterPreview.CharacterSetupButton.Visible = false;
+        // Forge-Change: the character card keeps its own edit button; it clears crew readiness like the menu entry
+        CharacterPreview.CharacterSetupButton.OnPressed += _ => ClearRoundSetupReadiness();
         foreach (var button in new[] { ReadyButton, RoundSetupButton, CustomizeButton })
             button.Label.ClipText = false;
         foreach (var banner in new[] { LinkBanner, (BoxContainer) DevInfoBanner })

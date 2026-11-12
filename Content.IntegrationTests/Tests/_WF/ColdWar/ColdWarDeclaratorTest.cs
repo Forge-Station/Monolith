@@ -11,6 +11,7 @@ using Content.Shared._WF.NpcCrew;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests._WF.ColdWar;
 
@@ -22,8 +23,6 @@ namespace Content.IntegrationTests.Tests._WF.ColdWar;
 [TestOf(typeof(ManualPortstrikeRuleSystem))]
 public sealed class ColdWarDeclaratorTest
 {
-    private const string Rule = "ManualPortstrikeTsfPdv";
-
     [Test]
     public async Task DeclaratorsRaiseAndLowerTheWarLevel()
     {
@@ -39,7 +38,7 @@ public sealed class ColdWarDeclaratorTest
             entMan.AddComponent<StationSectorServiceHostComponent>(host);
             Assert.That(entMan.HasComponent<WarLevelComponent>(entMan.System<SectorServiceSystem>().GetServiceEntity()));
 
-            var rule = entMan.SpawnEntity(Rule, MapCoordinates.Nullspace);
+            var rule = OpenRule();
             var status = entMan.GetComponent<ManualPortstrikeRuleComponent>(rule).SectorStatus;
             var state = entMan.EnsureComponent<WFColdWarComponent>(rule);
             var cooldown = state.Cooldown;
@@ -88,7 +87,7 @@ public sealed class ColdWarDeclaratorTest
             Assert.That(Hot(), Is.False);
 
             // A second rule for the same factions follows the first: one use is one change of stance in each.
-            var second = entMan.SpawnEntity(Rule, MapCoordinates.Nullspace);
+            var second = OpenRule();
             var other = entMan.GetComponent<ManualPortstrikeRuleComponent>(second).SectorStatus;
             entMan.EnsureComponent<WFColdWarComponent>(second).Cooldown = TimeSpan.Zero;
             Use(tsf, marine);
@@ -122,6 +121,17 @@ public sealed class ColdWarDeclaratorTest
             {
                 var uid = entMan.SpawnEntity(null, MapCoordinates.Nullspace);
                 entMan.EnsureComponent<CompanyComponent>(uid).CompanyName = company;
+                return uid;
+            }
+
+            EntityUid OpenRule()
+            {
+                var uid = entMan.SpawnEntity(null, MapCoordinates.Nullspace);
+                entMan.AddComponent<ManualPortstrikeRuleComponent>(uid).SectorStatus = new Dictionary<ProtoId<CompanyPrototype>, bool>
+                {
+                    ["TSF"] = false,
+                    ["PDV"] = false,
+                };
                 return uid;
             }
         });

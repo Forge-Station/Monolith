@@ -45,6 +45,11 @@ public sealed partial class HealthAnalyzerComponent : Component
     public EntityUid? ScannedEntity;
 
     /// <summary>
+    /// Continuous scanning is paused until the scanned entity returns within range.
+    /// </summary>
+    public bool ScanPausedForRange;
+
+    /// <summary>
     /// Shitmed Change: The body part that is currently being scanned.
     /// </summary>
     [DataField]

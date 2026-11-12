@@ -74,6 +74,28 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
                 continue;
             }
 
+            component.NextUpdate = _timing.CurTime + component.UpdateInterval;
+
+            // Keep the last patient linked while out of range so scanning can resume.
+            var patientCoordinates = Transform(patient).Coordinates;
+            if (!_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange))
+            {
+                if (!component.ScanPausedForRange)
+                {
+                    component.ScanPausedForRange = true;
+                    _toggle.TryDeactivate(uid);
+                    UpdateScannedUser(uid, patient, false, component.CurrentBodyPart);
+                }
+
+                continue;
+            }
+
+            if (component.ScanPausedForRange)
+            {
+                component.ScanPausedForRange = false;
+                _toggle.TryActivate(uid);
+            }
+
             // Shitmed Change Start
             if (component.CurrentBodyPart != null
                 && (Deleted(component.CurrentBodyPart)
@@ -84,17 +106,6 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
                 continue;
             }
             // Shitmed Change End
-
-            component.NextUpdate = _timing.CurTime + component.UpdateInterval;
-
-            //Get distance between health analyzer and the scanned entity
-            var patientCoordinates = Transform(patient).Coordinates;
-            if (!_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange))
-            {
-                //Range too far, disable updates
-                StopAnalyzingEntity((uid, component), patient);
-                continue;
-            }
 
             UpdateScannedUser(uid, patient, true, component.CurrentBodyPart); // Shitmed Change
         }
@@ -142,7 +153,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     private void OnInsertedIntoContainer(Entity<HealthAnalyzerComponent> uid, ref EntGotInsertedIntoContainerMessage args)
     {
         if (uid.Comp.ScannedEntity is { } patient)
-            _toggle.TryDeactivate(uid.Owner);
+            StopAnalyzingEntity(uid, patient);
     }
 
     /// <summary>
@@ -150,7 +161,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     /// </summary>
     private void OnToggled(Entity<HealthAnalyzerComponent> ent, ref ItemToggledEvent args)
     {
-        if (!args.Activated && ent.Comp.ScannedEntity is { } patient)
+        if (!args.Activated && !ent.Comp.ScanPausedForRange && ent.Comp.ScannedEntity is { } patient)
             StopAnalyzingEntity(ent, patient);
     }
 
@@ -160,7 +171,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     private void OnDropped(Entity<HealthAnalyzerComponent> uid, ref DroppedEvent args)
     {
         if (uid.Comp.ScannedEntity is { } patient)
-            _toggle.TryDeactivate(uid.Owner);
+            StopAnalyzingEntity(uid, patient);
     }
 
     private void OpenUserInterface(EntityUid user, EntityUid analyzer)
@@ -181,6 +192,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     {
         //Link the health analyzer to the scanned entity
         healthAnalyzer.Comp.ScannedEntity = target;
+        healthAnalyzer.Comp.ScanPausedForRange = false;
         healthAnalyzer.Comp.CurrentBodyPart = part; // Shitmed Change
 
         _toggle.TryActivate(healthAnalyzer.Owner);
@@ -197,6 +209,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     {
         //Unlink the analyzer
         healthAnalyzer.Comp.ScannedEntity = null;
+        healthAnalyzer.Comp.ScanPausedForRange = false;
         healthAnalyzer.Comp.CurrentBodyPart = null; // Shitmed Change
 
         _toggle.TryDeactivate(healthAnalyzer.Owner);

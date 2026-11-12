@@ -50,6 +50,8 @@
   - type: ContainerContainer
     containers:
       ammo_loader: !type:Container
+      machine_board: !type:Container # Forge-change
+      machine_parts: !type:Container # Forge-change
   - type: ThrowInsertContainer
     containerId: ammo_loader
   - type: AmmoLoader
@@ -78,7 +80,7 @@
 
 - type: entity
   id: AmmoLoaderSmall
-  parent: [AmmoLoader, ConstructibleMachine] #Forge-change
+  parent: AmmoLoader
   name: small ammo loader
   description: A pneumatic ammunition loading system manufactured by Erebus HI. Link it to ship artillery with a multitool to transfer ammunition. This model supports only 2 guns, but is more durable.
   components:

@@ -407,6 +407,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         if (!CombatMode.IsInCombatMode(user))
             return false;
 
+        if (!GetCoordinates(attack.Coordinates).IsValid(EntityManager)) // Forge-Change
+            return false;
+
         var attacker = attackerOverride ?? user; // Mono
         EntityUid? target = null;
         switch (attack)
@@ -459,6 +462,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             swings++;
         }
 
+        if (weapon.SwingBeverage) // Forge-Change
+            weapon.SwingLeft = !weapon.SwingLeft; // Forge-Change
+
         Dirty(weaponUid, weapon);
 
         // Do this AFTER attack so it doesn't spam every tick
@@ -484,12 +490,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             {
                 case LightAttackEvent light:
                     DoLightAttack(attacker, light, weaponUid, weapon, session, user);
-                    animation = weapon.Animation;
+                    animation = GetLightAnimation(user, attacker, weaponUid, weapon); // Forge-Change: weapon.Animation > GetLightAnimation
                     break;
                 case DisarmAttackEvent disarm:
                     DoDisarm(user, disarm, weaponUid, weapon, session); // Goob edit
 
-                    animation = weapon.Animation;
+                    animation = GetLightAnimation(user, attacker, weaponUid, weapon); // Forge-Change: weapon.Animation > GetLightAnimation
                     break;
                 case HeavyAttackEvent heavy:
                     if (!DoHeavyAttack(attacker, heavy, weaponUid, weapon, session, user))
@@ -614,6 +620,16 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     }
 
     protected abstract void DoDamageEffect(List<EntityUid> targets, EntityUid? user,  TransformComponent targetXform);
+
+    // Forge-Change-Start
+    private static EntProtoId GetLightAnimation(EntityUid user, EntityUid attacker, EntityUid weaponUid, MeleeWeaponComponent weapon)
+    {
+        if (weapon.Animation == MeleeWeaponComponent.ItemLightAnimation && (weaponUid == user || weaponUid == attacker))
+            return MeleeWeaponComponent.UnarmedLightAnimation;
+
+        return weapon.Animation;
+    }
+    // Forge-Change-End
 
     private bool DoHeavyAttack(EntityUid user, HeavyAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session,
         EntityUid? realUser = null) // Mono

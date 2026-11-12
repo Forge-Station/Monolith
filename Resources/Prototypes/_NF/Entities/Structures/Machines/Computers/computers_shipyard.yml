@@ -49,7 +49,7 @@
   id: ComputerShipyard
   components:
   - type: ShipyardConsole
-    newJobTitle: Captain
+    #newJobTitle: Captain   # Forge-change
   - type: CompanyAccessReader
     requiredCompanies:
     - TSF

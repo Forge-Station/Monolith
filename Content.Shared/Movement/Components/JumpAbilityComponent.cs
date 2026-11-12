@@ -23,13 +23,20 @@ public sealed partial class JumpAbilityComponent : Component
     /// Basic “throwing” speed for TryThrow method.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float JumpThrowSpeed = 10f;
+    public float JumpThrowSpeed = 120f; //Forge-Change 10 >> 120
 
     /// <summary>
     /// This gets played whenever the jump action is used.
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? JumpSound;
+
+    //Forge-change
+    /// <summary>
+    /// How far you will jump (in tiles).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool RequireItemActivation = false;
 }
 
 public sealed partial class GravityJumpEvent : InstantActionEvent;

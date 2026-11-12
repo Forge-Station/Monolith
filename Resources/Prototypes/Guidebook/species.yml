@@ -14,7 +14,7 @@
   - Goblin # Frontier
   - Vulpkanin # DeltaV
   - Harpy # DeltaV
-  - Felinid # DeltaV
+ # - Felinid # DeltaV #Forge-change-del
   - Oni # DeltaV
   - Chitinid # DeltaV
   - Resomi # Floof
@@ -25,7 +25,8 @@
   - Hydrakin # Monolith/Obelisk
   - Demon # Wega
   - Skrell # Wega
-  - Flight # CE
+  - Ariral # Wega
+ # - Flight # CE #Forge-change-del
 
 - type: guideEntry
   id: Arachnid
@@ -35,7 +36,7 @@
 - type: guideEntry
   id: Diona
   name: species-name-diona
-  text: "/ServerInfo/_Forge/Guidebook/_NF/Mobs/Diona.xml" # Forge-change
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/Diona.xml" # Forge-change
 
 - type: guideEntry
   id: Dwarf
@@ -91,3 +92,8 @@
   id: Hydrakin
   name: species-name-hydrakin
   text: "/ServerInfo/_Forge/Guidebook/Mobs/Hydrakin.xml" # Forge-change
+
+- type: guideEntry
+  id: Ariral
+  name: species-name-ariral
+  text: "/ServerInfo/_Forge/Guidebook/Mobs/_Wega/Ariral.xml" # Forge-change

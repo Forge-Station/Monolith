@@ -35,11 +35,8 @@
     TailOversuit: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
     Hair: MobHumanoidMarkingMatchSkin
     Chest: MobIPCTorso
-    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
-    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
-    Genital: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
-    Penis: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
-    Breasts: MobHumanoidAnyMarking # WOLFGATE - underwear/genital layers ported from HardLight
+    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
+    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
     LArm: MobIPCLArm
     RArm: MobIPCRArm
     LHand: MobIPCLHand

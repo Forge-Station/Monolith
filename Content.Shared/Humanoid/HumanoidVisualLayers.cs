@@ -7,10 +7,7 @@ namespace Content.Shared.Humanoid
     public enum HumanoidVisualLayers : byte
     {
         Special, // for the cat ears
-        // WOLFGATE - ported from HardLight: underwear and genital layers.
-        Genital,
-        Penis,
-        Breasts,
+        // WOLFGATE - ported from HardLight: underwear layers. Forge-Change: the Genital, Penis and Breasts layers are removed
         UndergarmentTop,
         UndergarmentBottom,
         // End WOLFGATE

@@ -123,18 +123,6 @@
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
         />
-    <!-- WOLFGATE: anatomy panel; shares the consent cog's slot, and only one of the two is visible -->
-    <ui:MenuButton
-        Name="AnatomyButton"
-        Access="Internal"
-        Icon="{xe:Tex '/Textures/_WF/Interface/anatomy.svg.192dpi.png'}"
-        BoundKey = "{x:Static is:ContentKeyFunctions.OpenAnatomyPanel}"
-        ToolTip="{Loc 'wf-anatomy-button-tooltip'}"
-        MinSize="42 64"
-        HorizontalExpand="True"
-        Visible="False"
-        AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
-        />
     <ui:MenuButton
         Name="AdminButton"
         Access="Internal"

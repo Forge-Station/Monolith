@@ -25,6 +25,13 @@ public sealed partial class StyleWolfgate
     public const string StyleClassLobbyBarText = "LobbyBarText";
     public const string StyleClassLobbyScanlines = "LobbyScanlines";
     public const string StyleClassLobbyTitleRule = "LobbyTitleRule";
+    // Forge-Change-Start: the menu and the character card share the chat dock's glass
+    public const string StyleClassLobbyGlass = "LobbyGlass";
+    public const string StyleClassLobbyCard = "LobbyCard";
+    public const string StyleClassLobbyDivider = "LobbyDivider";
+    public const string StyleClassLobbyCaption = "LobbyCaption";
+    public const string StyleClassLobbyHeroValue = "LobbyHeroValue";
+    // Forge-Change-End
 
     /// <summary>Rules for the game-menu lobby: title block, menu entries, link row, hero frame, chat dock and info strip.</summary>
     private StyleRule[] LobbyRules()
@@ -50,6 +57,14 @@ public sealed partial class StyleWolfgate
         chatPanel.Modulate = Color.White.WithAlpha(0.72f);
         var heroPanel = Box("window_panel.png", 9);
         heroPanel.Modulate = Color.White.WithAlpha(0.65f);
+        // Forge-Change-Start: the left menu sits on busy art, so its glass is denser than the chat dock;
+        // the character card is denser still because it floats over the brightest part of the background
+        var divider = new StyleBoxFlat { BackgroundColor = EdgeSoft };
+        var menuGlass = Box("window_panel.png", 9);
+        menuGlass.Modulate = Color.White.WithAlpha(0.88f);
+        var cardPanel = Box("window_panel.png", 9);
+        cardPanel.Modulate = Color.White.WithAlpha(0.94f);
+        // Forge-Change-End
         var bar = new StyleBoxFlat
         {
             BackgroundColor = Ink.WithAlpha(0.75f),
@@ -110,11 +125,25 @@ public sealed partial class StyleWolfgate
                 .Prop(PanelContainer.StylePropertyPanel, chatPanel),
             Element<PanelContainer>().Class(StyleClassLobbyHero)
                 .Prop(PanelContainer.StylePropertyPanel, heroPanel),
+            // Forge-Change-Start: glass for the menu and the character card, section dividers, captions and card values
+            Element<PanelContainer>().Class(StyleClassLobbyGlass)
+                .Prop(PanelContainer.StylePropertyPanel, menuGlass),
+            Element<PanelContainer>().Class(StyleClassLobbyCard)
+                .Prop(PanelContainer.StylePropertyPanel, cardPanel),
+            Element<PanelContainer>().Class(StyleClassLobbyDivider)
+                .Prop(PanelContainer.StylePropertyPanel, divider),
+            Element<Label>().Class(StyleClassLobbyCaption)
+                .Prop(Label.StylePropertyFont, Display(12))
+                .Prop(Label.StylePropertyFontColor, TextMuted),
+            Element<Label>().Class(StyleClassLobbyHeroValue)
+                .Prop(Label.StylePropertyFont, _resCache.NotoStack(variation: "Bold", size: 12))
+                .Prop(Label.StylePropertyFontColor, Text),
+            // Forge-Change-End
             Element<Label>().Class(StyleClassLobbyHeroName)
-                .Prop(Label.StylePropertyFont, _resCache.NotoStack(variation: "Bold", size: 14))
+                .Prop(Label.StylePropertyFont, _resCache.NotoStack(variation: "Bold", size: 18)) // Forge-Change: was 14
                 .Prop(Label.StylePropertyFontColor, Text),
             Element<RichTextLabel>().Class(StyleClassLobbyHeroName)
-                .Prop(Label.StylePropertyFont, _resCache.NotoStack(variation: "Bold", size: 14))
+                .Prop(Label.StylePropertyFont, _resCache.NotoStack(variation: "Bold", size: 18)) // Forge-Change: was 14
                 .Prop(Label.StylePropertyFontColor, Text),
             Element<Label>().Class(StyleClassLobbyHeroText)
                 .Prop(Label.StylePropertyFontColor, TextMuted),

@@ -23,7 +23,6 @@
   - type: Sprite
     layers:
     - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - moved first so the tail back half is drawn behind the body
-    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -32,9 +31,6 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - map: [ "enum.HumanoidVisualLayers.Genital" ] # WOLFGATE - moved below undergarments and clothing (anatomy layer order)
-    - map: [ "enum.HumanoidVisualLayers.Penis" ] # WOLFGATE - moved below undergarments and clothing (anatomy layer order)
-    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # WOLFGATE - moved below undergarments and clothing (anatomy layer order)
     - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
     - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: [ "jumpsuit" ]
@@ -43,12 +39,10 @@
     - map: [ "enum.HumanoidVisualLayers.LHand" ]
     - map: [ "enum.HumanoidVisualLayers.RHand" ]
     - map: [ "gloves" ]
-    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "eyes" ]
     - map: [ "outerClothing" ]
-    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
     - map: [ "belt" ]
     - map: [ "id" ]
     - map: [ "back" ]
@@ -58,7 +52,7 @@
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
-    # WOLFGATE - TailBehind and the Genital/Penis/Breasts bookmarks moved lower in the draw order (see above)
+    # WOLFGATE - TailBehind moved lower in the draw order (see above)
     - map: [ "enum.HumanoidVisualLayers.TailOversuit" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]

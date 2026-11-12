@@ -6,10 +6,12 @@ using Content.Client.Options.UI;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
+using Content.Shared._Common.Consent; // Forge-Change
 using Content.Shared.Input;
 using Robust.Client.Input;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Prototypes; // Forge-Change
 using JetBrains.Annotations;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 
@@ -23,6 +25,13 @@ namespace Content.Client._Common.Consent.UI;
 public sealed partial class ConsentUiController : UIController, IOnStateChanged<GameplayState>
 {
     [Dependency] private IInputManager _input = default!;
+    [Dependency] private IPrototypeManager _prototype = default!; // Forge-Change
+
+    // Forge-Change-Start: every consent toggle went with the anatomy module. While the build defines none there is
+    // nothing to consent to, so the HUD button, the keybind and the options tab stay out of the way.
+    /// <summary>Whether this build defines any consent toggle at all.</summary>
+    public bool HasToggles => _prototype.Count<ConsentTogglePrototype>() > 0;
+    // Forge-Change-End
 
     private MenuButton? ConsentButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.ConsentButton;
 
@@ -51,6 +60,7 @@ public sealed partial class ConsentUiController : UIController, IOnStateChanged<
             return;
 
         ConsentButton.OnPressed += ConsentButtonPressed;
+        ConsentButton.Visible = HasToggles; // Forge-Change
     }
 
     private void ConsentButtonPressed(ButtonEventArgs args)
@@ -60,6 +70,9 @@ public sealed partial class ConsentUiController : UIController, IOnStateChanged<
 
     private void OpenConsentOptions()
     {
+        if (!HasToggles) // Forge-Change
+            return;
+
         UIManager.ClickSound();
         UIManager.GetUIController<OptionsUIController>().OpenWindow(OptionsMenu.ConsentTabIndex);
 

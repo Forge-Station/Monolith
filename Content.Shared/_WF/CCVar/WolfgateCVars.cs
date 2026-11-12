@@ -9,12 +9,13 @@ namespace Content.Shared._WF.CCVar;
 public sealed class WolfgateCVars
 {
     /// <summary>
-    /// Which Wolfgate UI skin the client draws. Matches a <c>WolfgateSkin</c> id: "WolfgateRetro", the default, is the
-    /// Aphelion cassette-futurism look and "Wolfgate" the hyper-futurist one. Changing it restyles the client
-    /// immediately. Keep the default in step with <c>WolfgateSkins.Default</c>.
+    /// Which Wolfgate UI skin the client draws. Matches a <c>WolfgateSkin</c> id: "Wolfgate", the default, is the
+    /// hyper-futurist digital look and "WolfgateRetro" the Aphelion cassette-futurism one. Changing it restyles the
+    /// client immediately. Keep the default in step with <c>WolfgateSkins.Default</c>.
+    /// Forge-Change: the default is the digital skin, was "WolfgateRetro".
     /// </summary>
     public static readonly CVarDef<string> UiStyle =
-        CVarDef.Create("wf.ui_style", "WolfgateRetro", CVar.CLIENTONLY | CVar.ARCHIVE);
+        CVarDef.Create("wf.ui_style", "Wolfgate", CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// Enters the cockpit by itself when the shuttle console is opened while buckled into a seat.
@@ -53,18 +54,6 @@ public sealed class WolfgateCVars
     /// <summary>Radar heading offset, in degrees, so a tilted console still reads north at the top.</summary>
     public static readonly CVarDef<int> RadarAzimuth =
         CVarDef.Create("wf.radar_azimuth", 0, CVar.CLIENTONLY | CVar.ARCHIVE);
-
-    /// <summary>
-    /// Kill switch for the anatomy system. When false every anatomy gate fails and every anatomy UI is hidden.
-    /// </summary>
-    public static readonly CVarDef<bool> AnatomyEnabled =
-        CVarDef.Create("wf.anatomy_enabled", true, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
-    /// Version of the adult content notice this client has acknowledged; 0 means never.
-    /// </summary>
-    public static readonly CVarDef<int> AnatomyNoticeSeen =
-        CVarDef.Create("wf.anatomy_notice_seen", 0, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
     /// Shows the title bar button that pops in-game windows out into their own OS window.

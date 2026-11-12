@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Client.Shuttles.UI;
 using Content.Client._WF.Stylesheets;
 using Content.Client.Resources;
+using Content.Shared._Forge.CCVars; // Forge-Change
 using Content.Shared._WF.CCVar;
 using Robust.Shared.Configuration;
 using Content.Client.UserInterface.Controls;
@@ -24,6 +25,12 @@ public static class WFInstrumentTheme
         : WolfgateSkins.Get(IoCManager.Resolve<IConfigurationManager>().GetCVar(WolfgateCVars.UiStyle));
     /// <summary>Futurist instruments replace physical chrome with luminous digital geometry.</summary>
     public static bool Digital => Skin == WolfgateSkins.Futurist;
+    // Forge-Change-Start
+    /// <summary>The simplified interface keeps every reading and control but drops decoration that costs draw calls.</summary>
+    public static bool Simplified => IoCManager.Resolve<IEntityManager>().TrySystem(out WFConsoleThemeSystem? theme)
+        ? theme.Simplified
+        : IoCManager.Resolve<IConfigurationManager>().GetCVar(ForgeCCVars.UiSimplified);
+    // Forge-Change-End
     public static Color Accent => Skin.Accent;
     public static Color Ink => Skin.Ink;
     public static Color Cream => Skin.Text;
@@ -341,6 +348,13 @@ public sealed class WFCrtGlass : Control
             handle.DrawRect(new UIBox2(Vector2.Zero, size), skin.EdgeLight, false);
             return;
         }
+        // Forge-Change-Start: the simplified interface keeps only the screen outline
+        if (WFInstrumentTheme.Simplified)
+        {
+            handle.DrawRect(new UIBox2(Vector2.Zero, size), WFInstrumentTheme.Accent.WithAlpha(0.3f), false);
+            return;
+        }
+        // Forge-Change-End
         handle.DrawRect(new UIBox2(Vector2.Zero, size), WFInstrumentTheme.Accent.WithAlpha(0.004f));
         for (var x = 12; x < size.X - 12; x += 20)
             handle.DrawLine(new Vector2(x, 0), new Vector2(x, 4), WFInstrumentTheme.Accent.WithAlpha(0.4f));

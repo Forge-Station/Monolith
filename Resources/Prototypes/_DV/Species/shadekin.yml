@@ -27,9 +27,6 @@
     Snout: MobShadekinAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
-    Genital: MobHumanoidAnyMarking
-    Penis: MobHumanoidAnyMarking
-    Breasts: MobHumanoidAnyMarking
     Chest: MobShadekinTorso
     HeadTop: MobShadekinAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -68,7 +65,6 @@
     UndergarmentBottom:
       points: 3
       required: false
-    # Wolfgate: Genital marking points removed with the legacy genital markings (replaced by organ-based anatomy).
     Chest:
       points: 10
       required: false

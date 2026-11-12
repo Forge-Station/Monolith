@@ -30,6 +30,9 @@ public static class WFConsoleMetal
         Bevel(handle, box, scale, fill, WFInstrumentTheme.Skin.EdgeLight);
         if (box.Width <= 6 * scale || box.Height <= 6 * scale)
             return;
+        // Forge-Change: the simplified interface keeps the bevelled face and skips brushing and wear, up to 64 rects and 38 lines a panel
+        if (WFInstrumentTheme.Simplified)
+            return;
         var inner = new UIBox2(box.TopLeft + new Vector2(2 * scale), box.BottomRight - new Vector2(2 * scale));
         var bands = Math.Clamp((int) (inner.Height / (2 * scale)), 8, 64);
         for (var i = 0; i < bands; i++)
@@ -58,7 +61,7 @@ public static class WFConsoleMetal
     /// <summary>Draws a recessed slotted fastener with a lit metal shoulder.</summary>
     public static void Screw(DrawingHandleScreen handle, Vector2 center, float radius, Color metal)
     {
-        if (radius <= 0)
+        if (radius <= 0 || WFInstrumentTheme.Simplified) // Forge-Change: fasteners are decoration, the simplified interface leaves them out
             return;
         handle.DrawCircle(center, radius, WFInstrumentTheme.Ink);
         handle.DrawCircle(center - new Vector2(radius * 0.1f), radius * 0.73f, metal);

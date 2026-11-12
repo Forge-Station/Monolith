@@ -11,7 +11,7 @@ public sealed class WolfgateSkinDefaultTest
     [Test]
     public void StyleCVarDefaultIsTheDefaultSkin()
     {
-        Assert.That(WolfgateSkins.Default, Is.SameAs(WolfgateSkins.Retro));
+        Assert.That(WolfgateSkins.Default, Is.SameAs(WolfgateSkins.Futurist)); // Forge-Change: was Retro
         Assert.That(WolfgateCVars.UiStyle.DefaultValue, Is.EqualTo(WolfgateSkins.Default.Id));
         Assert.That(WolfgateSkins.Get("no such skin"), Is.SameAs(WolfgateSkins.Default));
         Assert.That(WolfgateSkins.All[0], Is.SameAs(WolfgateSkins.Default));

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._WF.CombatConsole; // Forge-Change
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Shared.Timing;
@@ -31,7 +32,10 @@ public sealed partial class WFRecruitingGlow : Control
     protected override void Draw(DrawingHandleScreen handle)
     {
         base.Draw(handle);
-        var pulse = 0.5f + 0.5f * MathF.Sin((float) _timing.RealTime.TotalSeconds * MathF.Tau / Period);
+        // Forge-Change: the simplified interface shows a steady border instead of a pulse
+        var pulse = WFInstrumentTheme.Simplified
+            ? 0.5f
+            : 0.5f + 0.5f * MathF.Sin((float) _timing.RealTime.TotalSeconds * MathF.Tau / Period);
         // A button lays its children out inside its padding, so cover the parent's whole box instead of this control's.
         var origin = Parent == null ? Vector2.Zero : -(Vector2) PixelPosition;
         var size = Parent?.PixelSize ?? PixelSize;

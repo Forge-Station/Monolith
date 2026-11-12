@@ -15,20 +15,23 @@
         <roundSetup:WFLobbyLayout Name="LobbyColumns" DockChat="True" HorizontalExpand="True" VerticalExpand="True" Margin="24 24 24 16">
             <BoxContainer Name="LeftSide" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="0">
                 <roundSetup:WFLobbyLayout Name="DefaultState" HeroLayout="True" HorizontalExpand="True" VerticalExpand="True">
-                    <BoxContainer Name="LobbyMenu" Orientation="Vertical" SeparationOverride="0" Margin="16 8 0 8">
+                    <!-- Forge-Change: the menu sits in the same glass panel as the chat dock, split into sections by dividers -->
+                    <PanelContainer Name="LobbyMenuPanel" StyleClasses="LobbyGlass" VerticalExpand="True" RectClipContent="True">
+                    <BoxContainer Name="LobbyMenu" Orientation="Vertical" SeparationOverride="0" Margin="12 8 12 8">
                         <BoxContainer Name="HeaderContainer" Access="Public" Orientation="Vertical" SeparationOverride="0">
                             <RichTextLabel Name="ServerName" Access="Public" StyleClasses="LobbyTitle" />
-                            <PanelContainer StyleClasses="LobbyTitleRule" MinHeight="4" Margin="0 2 0 4" />
+                            <!-- Forge-Change: wider margins, the rule used to run through the status line -->
+                            <PanelContainer StyleClasses="LobbyTitleRule" MinHeight="4" Margin="0 6 0 10" />
                             <Label Name="StartTime" Access="Public" StyleClasses="LobbyStatus" />
                         </BoxContainer>
-                        <Control MinHeight="20" />
+                        <PanelContainer StyleClasses="LobbyDivider" MinHeight="1" Margin="0 14 0 14" />
                         <BoxContainer Orientation="Vertical" SeparationOverride="6">
                             <Button Name="RoundSetupButton" Access="Public" TextAlign="Left" MinHeight="52"
                                     Text="{Loc 'wf-round-setup-home-setup'}" StyleClasses="WFLobbyCrewAction" />
                             <Button Name="ReadyButton" Access="Public" TextAlign="Left" MinHeight="52"
                                     Text="{Loc 'wf-round-setup-home-ready'}" StyleClasses="LobbyNavPrimary" />
                         </BoxContainer>
-                        <Control MinHeight="12" />
+                        <PanelContainer StyleClasses="LobbyDivider" MinHeight="1" Margin="0 14 0 8" />
                         <ScrollContainer Name="LobbyMenuScroll" HScrollEnabled="False" VerticalExpand="True" HorizontalExpand="True">
                             <BoxContainer Orientation="Vertical" SeparationOverride="0">
                                 <Button Name="CustomizeButton" Access="Public" TextAlign="Left"
@@ -48,18 +51,20 @@
                                         Text="{Loc 'ui-lobby-ahelp-nav-button'}" StyleClasses="LobbyNav" />
                                 <Button Name="LeaveButton" Access="Public" TextAlign="Left"
                                         Text="{Loc 'ui-lobby-leave-nav-button'}" StyleClasses="LobbyNav" />
-                                <roundSetup:WFRoundSetupLobbyPanel Name="ActiveCrews" Margin="0 12 0 0" VerticalExpand="True" />
+                                <PanelContainer StyleClasses="LobbyDivider" MinHeight="1" Margin="0 10 0 10" />
+                                <roundSetup:WFRoundSetupLobbyPanel Name="ActiveCrews" VerticalExpand="True" />
                             </BoxContainer>
                         </ScrollContainer>
                         <ScrollContainer HScrollEnabled="False" ReturnMeasure="True" MaxHeight="120" Margin="0 12 0 0">
                             <info:ServerInfo Name="ServerInfo" Access="Public" StyleClasses="LobbyInfo" />
                         </ScrollContainer>
                     </BoxContainer>
-                    <BoxContainer Name="CharacterHero" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="0 16" SeparationOverride="8">
+                    </PanelContainer>
+                    <!-- Forge-Change: the column stays empty for the lobby art; the card sits on the bottom edge and can fold away -->
+                    <BoxContainer Name="CharacterHero" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
                         <Control VerticalExpand="True" />
                         <lobbyUi:LobbyCharacterPreviewPanel Name="CharacterPreview" Access="Public"
-                                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        <Control VerticalExpand="True" />
+                                                           HorizontalAlignment="Center" Margin="0 0 0 4" />
                     </BoxContainer>
                 </roundSetup:WFLobbyLayout>
                 <Control Name="CharacterSetupState" Access="Public" Visible="False" HorizontalExpand="True" VerticalExpand="True" />

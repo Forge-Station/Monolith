@@ -110,7 +110,20 @@ public sealed partial class NavScreen
             control.SetWidth = 110;
             control.HorizontalExpand = true;
         }
-        var right = Column(motion, sensors, Panel("wf-console-auxiliary", NetworkPortsBox, padding: WfPanelPadding, gap: 2));
+        // Forge-Change-Start: the Forge nav markers and shield bar move onto the deck as well. Every control left in the
+        // old tree is disposed below, and NavScreen still fills the marker list and reads the shield bar each frame;
+        // touching the disposed list threw "Control has been disposed" as soon as the helm opened.
+        MarkerCountLabel.HorizontalExpand = false;
+        MarkerTrackButton.HorizontalExpand = true;
+        var markerControls = Column(Row(MarkerXEdit, MarkerYEdit, MarkerCountLabel), MarkerTrackButton, MarkerList);
+        markerControls.SeparationOverride = WfPanelGap;
+        var markerBank = Panel("shuttle-console-markers-label", markerControls, padding: WfPanelPadding, gap: 2);
+        markerBank.Name = "ForgeNavMarkers";
+        ShieldPanel.PanelOverride = null; // the instrument theme gives it the deck's frame in place of the stock grey box
+        ShieldPanel.Margin = new Thickness(0);
+        var right = Column(motion, sensors, Panel("wf-console-auxiliary", NetworkPortsBox, padding: WfPanelPadding, gap: 2),
+            markerBank, ShieldPanel);
+        // Forge-Change-End
         right.SeparationOverride = WfPanelGap;
         right.MinWidth = right.MaxWidth = 260;
         var radar = Scope("wf-console-navigation-scope", NavRadar);

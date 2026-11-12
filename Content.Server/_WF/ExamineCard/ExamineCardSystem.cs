@@ -1,7 +1,5 @@
-using Content.Server._WF.Genitals;
 using Content.Server.Chat.Managers;
 using Content.Shared._WF.ExamineCard;
-using Content.Shared._WF.Genitals.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement;
@@ -18,7 +16,6 @@ public sealed partial class ExamineCardSystem : SharedExamineCardSystem
     [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private GenitalConsentSystem _genitalConsent = default!;
 
     /// <summary>The same examiner looking again within this time doesn't tell the character twice.</summary>
     private static readonly TimeSpan NoticeCooldown = TimeSpan.FromSeconds(20);
@@ -31,25 +28,9 @@ public sealed partial class ExamineCardSystem : SharedExamineCardSystem
     public void SendCard(EntityUid target, EntityUid examiner, ICommonSession session, bool detailed = true)
     {
         var card = BuildCard(target, examiner, detailed);
-        if (detailed)
-            card.NsfwText = NsfwTextFor(target, examiner);
 
         RaiseNetworkEvent(card, session);
         NotifyExamined(target, examiner, detailed);
-    }
-
-    /// <summary>
-    /// The target's adult description if the examiner may read it: the anatomy rules apply, and like the normal
-    /// description it needs the face to show. Null otherwise.
-    /// </summary>
-    public string? NsfwTextFor(EntityUid target, EntityUid examiner)
-    {
-        if (!TryComp<NsfwDescriptionComponent>(target, out var nsfw)
-            || Identity.Name(target, EntityManager) != Name(target)
-            || !_genitalConsent.CanExamine(examiner, target))
-            return null;
-
-        return nsfw.Text;
     }
 
     /// <summary>Tells a player, in chat, that someone looked them over or glanced at them.</summary>

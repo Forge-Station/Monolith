@@ -10,39 +10,6 @@ public static class WFLegacyPrototypeIds
     /// <summary>consentToggle ids stored in consent_toggle rows.</summary>
     public static readonly IReadOnlyDictionary<string, string> ConsentToggles = new Dictionary<string, string>
     {
-        ["AnatomySurgery"] = "WFAnatomySurgery",
-        ["UndergarmentStrip"] = "WFUndergarmentStrip",
-    };
-
-    /// <summary>genitalShape ids stored in the profile anatomy JSON and in character exports.</summary>
-    public static readonly IReadOnlyDictionary<string, string> GenitalShapes = new Dictionary<string, string>
-    {
-        ["GenitalShapeBreastsPair"] = "WFGenitalShapeBreastsPair",
-        ["GenitalShapeBreastsPairRound"] = "WFGenitalShapeBreastsPairRound",
-        ["GenitalShapeBreastsQuad"] = "WFGenitalShapeBreastsQuad",
-        ["GenitalShapeBreastsQuadLite"] = "WFGenitalShapeBreastsQuadLite",
-        ["GenitalShapeBreastsQuadPlus"] = "WFGenitalShapeBreastsQuadPlus",
-        ["GenitalShapeBreastsSextuple"] = "WFGenitalShapeBreastsSextuple",
-        ["GenitalShapeBreastsUdders"] = "WFGenitalShapeBreastsUdders",
-        ["GenitalShapePenisBarbKnot"] = "WFGenitalShapePenisBarbKnot",
-        ["GenitalShapePenisFlared"] = "WFGenitalShapePenisFlared",
-        ["GenitalShapePenisHemi"] = "WFGenitalShapePenisHemi",
-        ["GenitalShapePenisHemiKnot"] = "WFGenitalShapePenisHemiKnot",
-        ["GenitalShapePenisHuman"] = "WFGenitalShapePenisHuman",
-        ["GenitalShapePenisKnotted"] = "WFGenitalShapePenisKnotted",
-        ["GenitalShapePenisNondescript"] = "WFGenitalShapePenisNondescript",
-        ["GenitalShapePenisTapered"] = "WFGenitalShapePenisTapered",
-        ["GenitalShapePenisTentacle"] = "WFGenitalShapePenisTentacle",
-        ["GenitalShapePenisTipKnotted"] = "WFGenitalShapePenisTipKnotted",
-        ["GenitalShapeTesticlesPair"] = "WFGenitalShapeTesticlesPair",
-        ["GenitalShapeVaginaDentate"] = "WFGenitalShapeVaginaDentate",
-        ["GenitalShapeVaginaFurred"] = "WFGenitalShapeVaginaFurred",
-        ["GenitalShapeVaginaHaired"] = "WFGenitalShapeVaginaHaired",
-        ["GenitalShapeVaginaHuman"] = "WFGenitalShapeVaginaHuman",
-        ["GenitalShapeVaginaOpen"] = "WFGenitalShapeVaginaOpen",
-        ["GenitalShapeVaginaSlit"] = "WFGenitalShapeVaginaSlit",
-        ["GenitalShapeVaginaSpade"] = "WFGenitalShapeVaginaSpade",
-        ["GenitalShapeVaginaTentacle"] = "WFGenitalShapeVaginaTentacle",
     };
 
     /// <summary>hudTheme and uiTheme ids (they share one) stored in the interface.theme client CVar.</summary>

@@ -22,11 +22,6 @@
     hideLayersOnEquip: # Frontier
     - Hair # Frontier
     - HeadTop # Frontier
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Fixtures
     fixtures:
       fix1:

@@ -1,3 +1,4 @@
+using Content.Client._WF.CombatConsole;
 using Content.Shared._Forge.Shuttles.Components;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Map;
@@ -84,6 +85,7 @@ public sealed partial class MapScreen
             row.AddChild(focus);
             row.AddChild(autopilot);
             row.AddChild(remove);
+            WFInstrumentTheme.Apply(row); // rows are built after the helm was themed, so they are styled as they are added
             MapMarkerList.AddChild(row);
         }
     }

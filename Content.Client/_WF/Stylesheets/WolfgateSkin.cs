@@ -76,7 +76,10 @@ public static class WolfgateSkins
         "/Fonts/NotoSans/NotoSansSC-Regular.ttf",
     };
 
-    /// <summary>Hyper-futurist glass and cyan: the original Wolfgate retheme.</summary>
+    /// <summary>
+    /// Hyper-futurist digital glass: cyan on blue-grey, the original Wolfgate retheme.
+    /// Forge-Change: the violet pass read as a black screen on open, so Futurist is back on the blue glass.
+    /// </summary>
     public static readonly WolfgateSkin Futurist = new()
     {
         Id = "Wolfgate",
@@ -175,11 +178,14 @@ public static class WolfgateSkins
         Selection = Color.FromHex("#5A4320"),
     };
 
-    /// <summary>The skin of a player who never picked one. Its id is the default of the <c>wf.ui_style</c> CVar.</summary>
-    public static readonly WolfgateSkin Default = Retro;
+    /// <summary>
+    /// The skin of a player who never picked one. Its id is the default of the <c>wf.ui_style</c> CVar.
+    /// Forge-Change: the digital Futurist skin, was Retro.
+    /// </summary>
+    public static readonly WolfgateSkin Default = Futurist;
 
     /// <summary>Every skin, the default first, in the order the options menu lists them.</summary>
-    public static readonly WolfgateSkin[] All = { Retro, Futurist };
+    public static readonly WolfgateSkin[] All = { Futurist, Retro };
 
     /// <summary>The skin with the given id, or the default skin for anything unknown.</summary>
     public static WolfgateSkin Get(string id)

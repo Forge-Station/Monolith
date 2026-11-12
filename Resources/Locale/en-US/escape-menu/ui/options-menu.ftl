@@ -80,6 +80,7 @@ ui-options-examine-font-size = Examine text size:
 ui-options-examine-font-size-value = { $size } px
 ui-options-hud-scale = HUD scale (hotbar, slots, actions):
 ui-options-storage-scale = Storage slot scale (bags, belts):
+ui-options-forge-ui-simplified = Simplified interface for weak computers: no animated lobby background or decorative console effects
 # Forge-Change-End
 ui-options-scale-auto = Automatic ({ TOSTRING($scale, "P0") })
 ui-options-scale-75 = 75%

@@ -3,7 +3,7 @@
     "license": "CC-BY-SA-3.0",
     "copyright": "Made by Hurtsay",
     "size": {
-        "x": 32,
+        "x": 64,
         "y": 32
     },
     "states": [
@@ -14,28 +14,7 @@
             "name": "base"
         },
         {
-            "name": "inhand-left",
-            "directions": 4
-        },
-        {
-            "name": "inhand-right",
-            "directions": 4
-        },
-        {
-            "name": "wielded-inhand-left",
-            "directions": 4
-        },
-        {
-            "name": "wielded-inhand-right",
-            "directions": 4
-        },
-        {
-            "name": "equipped-BACKPACK",
-            "directions": 4
-        },
-        {
-            "name": "equipped-SUITSTORAGE",
-            "directions": 4
+            "name": "mag-0"
         }
     ]
 }

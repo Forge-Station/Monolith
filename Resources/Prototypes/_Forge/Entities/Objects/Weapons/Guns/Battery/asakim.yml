@@ -196,6 +196,11 @@
   components:
   - type: Sprite
     sprite: _Forge/Objects/Weapons/Guns/Battery/asakimsmg.rsi
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -0
+    angleDecay: +10
   - type: Gun
     minAngle: 3
     maxAngle: 25
@@ -245,6 +250,98 @@
   components:
   - type: Sprite
     sprite: _Forge/Objects/Weapons/Guns/Battery/asakimsniper.rsi
+  - type: Clothing
+    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimsniper_inhand.rsi
+  - type: Item
+    size: Large
+    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimsniper_inhand.rsi
+  - type: Gun
+    fireRate: 0.4
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/Gunshots/bigshot.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: HeavyPulseProjectile
+    fireCost: 300
+  - type: Wieldable
+    freeHandsRequired: 0
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 4.5
+    pvsIncrease: 0.7
+  - type: BatterySelfRecharger
+    autoRechargeRate: 60
+
+- type: entity
+  name: kunisa-pattern plasma machine pistol
+  parent: WeaponRifleAsakimPistolForge
+  id: WeaponRifleAsakimsmgForge
+  description: An advanced handheld plasma SMG. It utilizes high-output magnetic coils to achieve a blistering fire rate, at the cost of rapid overheating and heavy recoil.
+  suffix: Forge, Asakim, Biocode
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimsmg.rsi
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -0
+    angleDecay: +10
+  - type: Gun
+    minAngle: 3
+    maxAngle: 25
+    angleIncrease: 3.5
+    angleDecay: 10.0
+    fireRate: 5
+    burstFireRate: 15
+    shotsPerBurst: 10
+    burstCooldown: 2
+    selectedMode: Burst
+    availableModes:
+    - FullAuto
+    - Burst
+  - type: ProjectileBatteryAmmoProvider
+    fireCost: 20
+
+- type: entity
+  name: kunisa-pattern plasma machinegun
+  parent: WeaponRifleAsakimAutopulserForge
+  id: WeaponRifleAsakimmachinegunForge
+  description: An advanced handheld plasma machinegun. It fires physically solid, razor-sharp shards of plasma that slice through targets on a monomolecular level.
+  suffix: Forge, Asakim, Biocode
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimmachinegun.rsi
+  - type: Gun
+    minAngle: 8
+    maxAngle: 60
+    angleIncrease: 3
+    angleDecay: 4.5
+    fireRate: 12
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_friendship.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: PlasmaShardProjectile
+    fireCost: 15
+
+- type: entity
+  name: kunisa-pattern plasma rifle
+  parent: WeaponRifleAsakimAutopulserForge
+  id: WeaponRifleAsakimRifleForge
+  description: An advanced handheld plasma rifle. It punches through any defense, tearing targets apart and leaving searing, white-hot burn holes.
+  suffix: Forge, Asakim, Biocode
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimsniper.rsi
+  - type: Clothing
+    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimsniper_inhand.rsi
+  - type: Item
+    size: Large
+    sprite: _Forge/Objects/Weapons/Guns/Battery/asakimsniper_inhand.rsi
   - type: Gun
     fireRate: 0.4
     selectedMode: SemiAuto

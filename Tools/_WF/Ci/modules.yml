@@ -73,20 +73,17 @@ unmarked:
   - path: Resources/ServerInfo/Rules.txt
     module: null
     reason: Monolith renamed to Wolfgate in the intro and section headings (#19); the file is unused (server.rules_file is MonolithRuleset).
-  - path: Resources/Textures/Mobs/Customization/Markings/Genital/
-    module: Genitals
-    reason: Genital shape and pregnant belly sprites; Wolfgate-only RSIs at an upstream path.
   - path: Resources/Textures/Mobs/Customization/undergarments.rsi/
-    module: Genitals
+    module: null
     reason: Undergarment marking sprites; Wolfgate-only RSI at an upstream path.
   - path: Resources/Textures/_RMC14/Mobs/Customization/undershirt.rsi/
-    module: Genitals
+    module: null
     reason: Undergarment marking sprites, ported from HardLight.
   - path: Resources/Textures/_RMC14/Mobs/Customization/underwear.rsi/
-    module: Genitals
+    module: null
     reason: Undergarment marking sprites, ported from HardLight.
   - path: Resources/Textures/_Common/Interface/VerbIcons/consent_examine_with_red_dot.svg.192dpi.png
-    module: Genitals
+    module: null
     reason: Consent examine verb icon, ported from HardLight.
   - path: "Resources/Audio/Machines/robotscream_*.ogg"
     module: Species

@@ -28,11 +28,6 @@
     species: ProtoVulp
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Inventory
     speciesId: protovulp #to be replaced with proto[species] when new sprites are made
     templateId: protogen
@@ -156,7 +151,6 @@
   - type: Sprite # Need to redefine the whole order to draw the tail over their gas tank
     layers:
     - map: [ "enum.HumanoidVisualLayers.TailBehind" ]  # HL Modification
-    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -165,10 +159,7 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - map: [ "enum.HumanoidVisualLayers.Genital" ] # HL Modification
-    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # HL Modification
     - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
-    - map: [ "enum.HumanoidVisualLayers.Penis" ] # HL Modification
     - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.LFoot" ]
@@ -176,12 +167,10 @@
     - map: [ "enum.HumanoidVisualLayers.LHand" ]
     - map: [ "enum.HumanoidVisualLayers.RHand" ]
     - map: [ "gloves" ]
-    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "eyes" ]
     - map: [ "outerClothing" ]
-    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
     - map: [ "belt" ]
     - map: [ "id" ]
     - map: [ "back" ]
@@ -210,11 +199,6 @@
     species: ProtoVox
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Inventory
     speciesId: vox #to be replaced with proto[species] when new sprites are made
     templateId: protogen
@@ -373,11 +357,6 @@
     species: ProtoThaven
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: MeleeWeapon
     attackRate: 0.55
     soundHit:
@@ -483,11 +462,6 @@
     species: ProtoSlimePerson
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -653,11 +627,6 @@
       species: ProtoKin
       hideLayersOnEquip:
       - Hair
-      # HL start: Hide genital markings on equip
-      - Genital
-      - Penis
-      - Breasts
-      # HL end
     - type: Icon
       sprite: _FarHorizons/Mobs/Species/Proto-Kin/parts.rsi
       state: full
@@ -857,7 +826,6 @@
   - type: Sprite # Need to redefine the whole order to draw the tail over their gas tank
     layers:
     - map: [ "enum.HumanoidVisualLayers.TailBehind" ]  # HL Modification
-    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -866,10 +834,7 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - map: [ "enum.HumanoidVisualLayers.Genital" ] # HL Modification
-    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # HL Modification
     - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
-    - map: [ "enum.HumanoidVisualLayers.Penis" ] # HL Modification
     - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.LFoot" ]
@@ -877,12 +842,10 @@
     - map: [ "enum.HumanoidVisualLayers.LHand" ]
     - map: [ "enum.HumanoidVisualLayers.RHand" ]
     - map: [ "gloves" ]
-    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "eyes" ]
     - map: [ "outerClothing" ]
-    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
     - map: [ "belt" ]
     - map: [ "id" ]
     - map: [ "back" ]
@@ -944,11 +907,6 @@
     species: ProtoResomi
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Fixtures
     fixtures:
       fix1:
@@ -1273,11 +1231,6 @@
     species: ProtoReptile
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Puller
     needsHands: false
   - type: Icon
@@ -1408,11 +1361,6 @@
     species: ProtoMoth
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Icon
     sprite: _FarHorizons/Mobs/Species/Proto-Moth/parts.rsi
     state: full
@@ -1473,7 +1421,6 @@
     drawdepth: Mobs
     layers:
     - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
-    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -1482,23 +1429,18 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - map: [ "enum.HumanoidVisualLayers.Genital" ] # WOLFGATE - underwear/genital layers ported from HardLight
-    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # WOLFGATE - underwear/genital layers ported from HardLight
-    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear/genital layers ported from HardLight
-    - map: [ "enum.HumanoidVisualLayers.Penis" ] # WOLFGATE - underwear/genital layers ported from HardLight
-    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear layers ported from HardLight
     - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
     - map: ["enum.HumanoidVisualLayers.LHand"]
     - map: ["enum.HumanoidVisualLayers.RHand"]
     - map: [ "gloves" ]
-    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "id" ] # Mono - move from between belt and back
     - map: [ "outerClothing" ] # mono - i hate you upstream
-    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "back" ]
@@ -1688,11 +1630,6 @@
     species: ProtoHumie
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Inventory
     templateId: protogen
     femaleDisplacements:
@@ -1743,11 +1680,6 @@
     species: ProtoFeline
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Icon
     sprite: _FarHorizons/Mobs/Species/Proto-Feline/parts.rsi
     state: fullcat
@@ -1949,11 +1881,6 @@
     species: ProtoDawi
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Inventory
     templateId: protogen
     femaleDisplacements:
@@ -2007,11 +1934,6 @@
   - type: HumanoidAppearance
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
     species: ProtoDionae
   - type: Satiation
     satiations:
@@ -2151,15 +2073,9 @@
       species: ProtoAvali
       hideLayersOnEquip:
       - Hair
-      # HL start: Hide genital markings on equip
-      - Genital
-      - Penis
-      - Breasts
-      # HL end
     - type: Sprite
       layers:
       - map: [ "enum.HumanoidVisualLayers.TailBehind" ]  # HL Modification
-      - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
       - map: [ "enum.HumanoidVisualLayers.Head" ]
       - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -2168,10 +2084,7 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-      - map: [ "enum.HumanoidVisualLayers.Genital" ] # HL Modification
-      - map: [ "enum.HumanoidVisualLayers.Breasts" ] # HL Modification
       - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
-      - map: [ "enum.HumanoidVisualLayers.Penis" ] # HL Modification
       - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
       - map: ["jumpsuit"]
       - map: ["enum.HumanoidVisualLayers.LFoot"]
@@ -2179,10 +2092,8 @@
       - map: ["enum.HumanoidVisualLayers.LHand"]
       - map: ["enum.HumanoidVisualLayers.RHand"]
       - map: [ "gloves" ]
-      - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
       - map: [ "shoes" ]
       - map: [ "outerClothing" ]
-      - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
       - map: [ "belt" ]
       - map: [ "id" ]
       - map: [ "back" ]
@@ -2372,11 +2283,6 @@
     species: ProtoArachnid
     hideLayersOnEquip:
     - Hair
-    # HL start: Hide genital markings on equip
-    - Genital
-    - Penis
-    - Breasts
-    # HL end
   - type: Tag
     tags:
     - CanPilot
@@ -2431,7 +2337,6 @@
   - type: Sprite
     layers:
     - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
-    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE - anatomy anchor
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -2440,23 +2345,18 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - map: [ "enum.HumanoidVisualLayers.Genital" ] # WOLFGATE - underwear/genital layers ported from HardLight
-    - map: [ "enum.HumanoidVisualLayers.Breasts" ] # WOLFGATE - underwear/genital layers ported from HardLight
-    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear/genital layers ported from HardLight
-    - map: [ "enum.HumanoidVisualLayers.Penis" ] # WOLFGATE - underwear/genital layers ported from HardLight
-    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear/genital layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear layers ported from HardLight
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear layers ported from HardLight
     - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
     - map: ["enum.HumanoidVisualLayers.LHand"]
     - map: ["enum.HumanoidVisualLayers.RHand"]
     - map: [ "gloves" ]
-    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE - anatomy anchor, directly after gloves: exposed anatomy draws over the arms, hands and gloves but under shoes, belts, bags, hair, neckwear, outer clothing and tails
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "id" ] # Mono - move from between belt and back
     - map: [ "outerClothing" ] # mono - i hate you upstream
-    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE - anatomy anchor, directly after outerClothing: the show-through-clothing set, still under the neck slots, hair and tails
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "back" ]

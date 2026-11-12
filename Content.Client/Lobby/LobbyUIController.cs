@@ -230,7 +230,7 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
         if (character is not HumanoidCharacterProfile humanoid)
         {
             PreviewPanel.SetSprite(EntityUid.Invalid);
-            PreviewPanel.SetSummaryText(string.Empty);
+            PreviewPanel.SetIdentity(string.Empty, string.Empty); // Forge-Change
             PreviewPanel.SetBankBalanceText(string.Empty); // Frontier
             PreviewPanel.SetCompanyText(string.Empty); // Company Display
             // PreviewPanel.SetMonoCoinsText("MonoCoins: -1"); // MonoCoins Display
@@ -254,19 +254,30 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
         var dummy = LoadProfileEntity(humanoid, null, true);
         PreviewPanel.SetSprite(dummy);
-        PreviewPanel.SetSummaryText(humanoid.Summary);
+        // Forge-Change-Start: name and a short details line for the lobby card
+        var speciesName = _prototypeManager.TryIndex(humanoid.Species, out var speciesProto)
+            ? Loc.GetString(speciesProto.Name)
+            : humanoid.Species.Id;
+        PreviewPanel.SetIdentity(humanoid.Name,
+            Loc.GetString("forge-lobby-hero-details", ("species", speciesName), ("age", humanoid.Age)));
+        // Forge-Change-End
         PreviewPanel.SetBankBalanceText(humanoid.BankBalanceText); // Frontier
 
         // Company Display
         var companyId = humanoid.Company;
-        var companyLabel = Loc.GetString("lobby-character-preview-panel-company-label"); // Forge-Change
         if (_prototypeManager.TryIndex<CompanyPrototype>(companyId, out var company))
         {
-            PreviewPanel.SetCompanyText($"[color=white]{companyLabel}[/color] [color={company.Color.ToHex()}]{company.Name}[/color]"); // Forge-Change
+            // Forge-Change-Start: the card has its own caption; dark company colours are lifted so the name stays readable
+            var companyColor = company.Color;
+            var luminance = 0.2126f * companyColor.R + 0.7152f * companyColor.G + 0.0722f * companyColor.B;
+            if (luminance < 0.45f)
+                companyColor = Color.InterpolateBetween(companyColor, Color.White, 0.55f);
+            PreviewPanel.SetCompanyText($"[color={companyColor.WithAlpha(1f).ToHex()}]{company.Name}[/color]");
+            // Forge-Change-End
         }
         else
         {
-            PreviewPanel.SetCompanyText($"[color=white]{companyLabel}[/color] [color=yellow]{companyId}[/color]"); // Forge-Change
+            PreviewPanel.SetCompanyText($"[color=yellow]{companyId}[/color]"); // Forge-Change: the card has its own caption
         }
 
         // MonoCoins Display - Request balance from server and update display
@@ -325,19 +336,6 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
         _savePanel.SaveButton.OnPressed += _ =>
         {
-            // WOLFGATE - the editor's anatomy confirmation guards this save too; Cancel returns to the editor unsaved.
-            if (_profileEditor != null && _profileEditor.AnatomyClearedOnSave())
-            {
-                _savePanel.Close();
-                _profileEditor.OpenAnatomySaveConfirm(() =>
-                {
-                    SaveProfile();
-                    onContinue();
-                });
-                return;
-            }
-            // End WOLFGATE
-
             SaveProfile();
 
             _savePanel.Close();

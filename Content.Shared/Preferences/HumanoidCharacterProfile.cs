@@ -8,8 +8,6 @@ using Content.Shared._WF.TypingBubble; // WOLFGATE(TypingBubble)
 using Content.Shared._WF.Voice; // WOLFGATE(Voice)
 using Content.Shared._WF.BloodColour; // WOLFGATE(BloodColour)
 using Content.Shared._WF.EmoteVoices; // WOLFGATE(EmoteVoices)
-using Content.Shared._WF.Genitals; // WOLFGATE(Genitals)
-using Content.Shared._WF.Genitals.Migration; // WOLFGATE(Genitals)
 using Content.Shared._WF.LegStyle; // WOLFGATE(LegStyle)
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -163,14 +161,6 @@ namespace Content.Shared.Preferences
         public const int MaxCustomSpeciesNameLength = 32;
         // WOLFGATE END
 
-        // WOLFGATE(Genitals) START: creator anatomy
-        /// <summary>
-        /// Creator anatomy. Absent data (old exports, old code paths) means not yet migrated.
-        /// </summary>
-        [DataField]
-        public GenitalProfile Genitals { get; private set; } = GenitalProfile.Unmigrated;
-        // WOLFGATE END
-
         // Mono start
         [DataField]
         public List<string> Flags { get; private set; } = [];
@@ -199,7 +189,6 @@ namespace Content.Shared.Preferences
             Dictionary<string, RoleLoadout> loadouts,
             string company = "None", // WOLFGATE: the company is passed through the constructor
             string customSpeciesName = "", // WOLFGATE(Humanoid)
-            GenitalProfile? genitals = null, // WOLFGATE(Genitals)
             IEnumerable<string>? flags = null, // Mono
             IEnumerable<PersistentProfileComponent>? components = null, // Mono
             // WOLFGATE(EmoteVoices) START: the chosen voices follow the Mono data
@@ -225,7 +214,6 @@ namespace Content.Shared.Preferences
             _loadouts = loadouts;
             Company = company;
             CustomSpeciesName = customSpeciesName; // WOLFGATE(Humanoid)
-            Genitals = genitals ?? GenitalProfile.Unmigrated; // WOLFGATE(Genitals)
             // Mono start
             Flags = flags is null ? [] : [..flags];
             Components = components is null ? [] : [..components];
@@ -244,7 +232,6 @@ namespace Content.Shared.Preferences
             Dictionary<string, RoleLoadout> loadouts)
             : this(other.Name, other.FlavorText, other.Species, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
                 jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company, other.CustomSpeciesName, // WOLFGATE(Humanoid)
-                other.Genitals, // WOLFGATE(Genitals): GenitalProfile is immutable, so copies share it
                 // WOLFGATE(EmoteVoices) START: copies keep the chosen voices
                 // other.Flags, other.Components, other.Items) // Mono
                 other.Flags, other.Components, other.Items, // Mono
@@ -285,7 +272,6 @@ namespace Content.Shared.Preferences
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
                 other.Company, // WOLFGATE: copies keep the company
                 other.CustomSpeciesName, // WOLFGATE(Humanoid)
-                other.Genitals.Clone(), // WOLFGATE(Genitals)
                 other.Flags, // Mono
                 other.Components, // Mono
                 // WOLFGATE(EmoteVoices) START: copies keep the chosen voices
@@ -330,7 +316,6 @@ namespace Content.Shared.Preferences
             return new()
             {
                 Species = species,
-                Genitals = GenitalProfile.Empty, // WOLFGATE(Genitals): nothing to migrate
             };
         }
 
@@ -383,7 +368,6 @@ namespace Content.Shared.Preferences
                 Gender = gender,
                 Species = species,
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
-                Genitals = GenitalProfile.Empty, // WOLFGATE(Genitals): random profiles have no anatomy
             };
         }
 
@@ -497,14 +481,6 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithCustomSpeciesName(string customSpeciesName)
         {
             return new(this) { CustomSpeciesName = customSpeciesName };
-        }
-        // WOLFGATE END
-
-        // WOLFGATE(Genitals) START: replaces the creator anatomy
-        /// <summary>Copy of this profile with the creator anatomy replaced.</summary>
-        public HumanoidCharacterProfile WithGenitals(GenitalProfile genitals)
-        {
-            return new(this) { Genitals = genitals };
         }
         // WOLFGATE END
 
@@ -646,7 +622,6 @@ namespace Content.Shared.Preferences
             if (Nationality != other.Nationality) return false;
             if (Company != other.Company) return false;
             if (CustomSpeciesName != other.CustomSpeciesName) return false; // WOLFGATE(Humanoid)
-            if (!Genitals.MemberwiseEquals(other.Genitals)) return false; // WOLFGATE(Genitals)
             if (HeadshotUrl != other.HeadshotUrl) return false; // WOLFGATE(Headshot)
             if (MismatchedParts != other.MismatchedParts) return false; // WOLFGATE(Species)
             if (!CustomMarkingsEqual(other)) return false; // WOLFGATE(CustomMarkings)
@@ -707,17 +682,6 @@ namespace Content.Shared.Preferences
                 sex = speciesPrototype.Sexes[0];
 
             var age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
-
-            // WOLFGATE(Genitals) START: converts legacy genital markings and applies the anatomy rules
-            // Adult-only markings are dropped below the adult age, then the adult gate and organ rules apply. This
-            // runs before marking validation, which would keep or drop the old ids.
-            var wfContext = LegacyGenitalMarkings.ContextFor(Species, Appearance.SkinColor, prototypeManager);
-            var (wfAppearance, wfGenitals) = LegacyGenitalMarkings.Migrate(Appearance,
-                Genitals ?? GenitalProfile.Unmigrated, // crafted network data can deliver null
-                wfContext);
-            wfAppearance = GenitalAdultMarkings.StripIfMinor(wfAppearance, age, prototypeManager);
-            wfGenitals = GenitalProfileValidator.EnsureValid(wfGenitals, age, Species, prototypeManager);
-            // WOLFGATE END
 
             var gender = Gender switch
             {
@@ -795,7 +759,7 @@ namespace Content.Shared.Preferences
             // End Frontier
 
             // WOLFGATE(Species): the option widens the hair check
-            var appearance = HumanoidCharacterAppearance.EnsureValid(wfAppearance, Species, Sex, MismatchedParts); // WOLFGATE(Genitals): validates the appearance after legacy genital markings were migrated
+            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, MismatchedParts);
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
@@ -848,7 +812,6 @@ namespace Content.Shared.Preferences
             Gender = gender;
             BankBalance = bankBalance;
             Appearance = appearance;
-            Genitals = wfGenitals; // WOLFGATE(Genitals)
             SpawnPriority = spawnPriority;
 
             // WOLFGATE(Humanoid) START: the custom species name is sanitized like the character name

@@ -9,7 +9,7 @@ same thing. Each use goes out on the common channel and has a two-minute cooldow
 announced a minute into the round, and admins can force it with `setwarlevel`.
 
 Entry points: `ManualPortstrikeRuleSystem.WfUseDeclarator`, a partial hooked into Monolith's declarator handler, and
-`WFColdWarComponent` on the `ManualPortstrikeTsfPdv` rule for the cooldown and announcement timings. Encounters reads
+`WFColdWarComponent` on the manual portstrike rule for the cooldown and announcement timings. Encounters reads
 the same level through `declaredWar` in `wfStanding` and `requiresWar` on its encounters.
 
 <!-- WOLFGATE-GENERATED START -->

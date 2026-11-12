@@ -1,10 +1,11 @@
-# Wolfgate HUD theme, paired with the Wolfgate (Futurist) UI skin.
+# Wolfgate HUD theme, paired with the Wolfgate (Futurist) UI skin. Listed first and used as the client default. # Forge-Change: Futurist is the default skin
 - type: hudTheme
   id: WFTheme
   name: ui-options-hud-theme-wolfgate
   path: /Textures/_WF/Stylesheets/Interface/Wolfgate/
-  order: -1
+  order: -2 # Forge-Change: was -1
 
+# Forge-Change: cyan on blue-grey glass, mirrors WolfgateSkins.Futurist
 - type: uiTheme
   id: WFTheme
   path: /Textures/_WF/Stylesheets/Interface/Wolfgate/
@@ -19,12 +20,12 @@
     concerningOrangeFore: "#FFB547"
     dangerousRedFore: "#FF4D5E"
 
-# Aphelion cassette-futurism theme, paired with the WolfgateRetro UI skin. Listed first and used as the client default.
+# Aphelion cassette-futurism theme, paired with the WolfgateRetro UI skin.
 - type: hudTheme
   id: WFRetroTheme
   name: ui-options-hud-theme-wolfgate-retro
   path: /Textures/_WF/Stylesheets/Interface/WolfgateRetro/
-  order: -2
+  order: -1 # Forge-Change: was -2
 
 - type: uiTheme
   id: WFRetroTheme

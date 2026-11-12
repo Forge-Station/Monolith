@@ -28,7 +28,6 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction EscapeContext = "EscapeContext";
         public static readonly BoundKeyFunction OpenCharacterMenu = "OpenCharacterMenu";
         public static readonly BoundKeyFunction OpenConsentWindow = "OpenConsentWindow"; // WOLFGATE(Genitals): consent system
-        public static readonly BoundKeyFunction OpenAnatomyPanel = "OpenAnatomyPanel"; // WOLFGATE(Genitals): anatomy panel
         public static readonly BoundKeyFunction OpenSectorMap = "OpenSectorMap"; // WOLFGATE(SectorControl): sector map
         public static readonly BoundKeyFunction OpenEmotesMenu = "OpenEmotesMenu";
         public static readonly BoundKeyFunction OpenCraftingMenu = "OpenCraftingMenu";

@@ -7,7 +7,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._Mono.Company;
-using Content.Server._WF.Genitals; // WOLFGATE(Genitals)
 using Content.Server._WF.Voice; // WOLFGATE(Voice)
 using Content.Server._WF.Prototypes; // WOLFGATE(Prototypes)
 using Content.Server.Administration.Logs;
@@ -21,7 +20,6 @@ using Content.Shared._WF.ChatFont; // WOLFGATE(ChatFont)
 using Content.Shared._WF.TypingBubble; // WOLFGATE(TypingBubble)
 using Content.Shared._WF.EmoteVoices; // WOLFGATE(EmoteVoices)
 using Content.Shared._WF.CustomMarkings; // WOLFGATE(CustomMarkings)
-using Content.Shared._WF.Genitals; // WOLFGATE(Genitals)
 using Content.Shared._WF.LegStyle; // WOLFGATE(LegStyle)
 using Content.Shared._WF.Prototypes; // WOLFGATE(Prototypes)
 using Content.Shared.Administration.Logs;
@@ -91,7 +89,7 @@ namespace Content.Server.Database
             var profiles = new Dictionary<int, ICharacterProfile>(maxSlot);
             foreach (var profile in prefs.Profiles)
             {
-                profiles[profile.Slot] = ConvertProfiles(profile, _opsLog); // WOLFGATE(Genitals): anatomy read problems go to the ops log
+                profiles[profile.Slot] = ConvertProfiles(profile);
             }
 
             return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor));
@@ -215,7 +213,7 @@ namespace Content.Server.Database
             prefs.SelectedCharacterSlot = newSlot;
         }
 
-        private static HumanoidCharacterProfile ConvertProfiles(Profile profile, ISawmill? log = null) // WOLFGATE(Genitals): log
+        private static HumanoidCharacterProfile ConvertProfiles(Profile profile)
         {
             var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
@@ -283,11 +281,6 @@ namespace Content.Server.Database
             var height = profile.Height <= 0.005f ? 1.0f : profile.Height;
             var width = profile.Width <= 0.005f ? 1.0f : profile.Width;
 
-            // WOLFGATE(Genitals) START: anatomy JSON; an empty column means the profile is not migrated yet.
-            var genitals = GenitalProfileJson.Deserialize(profile.Genitals, log ?? Logger.GetSawmill("db.genitals"), profile.Id)
-                           ?? GenitalProfile.Unmigrated;
-            // WOLFGATE END
-
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
@@ -316,7 +309,6 @@ namespace Content.Server.Database
                 loadouts,
                 company,
                 profile.CustomSpeciesName ?? string.Empty, // WOLFGATE(Humanoid)
-                genitals, // WOLFGATE(Genitals)
                 // Mono start
                 profile.Flags,
                 profile.Components.Select(component => new PersistentProfileComponent(
@@ -403,7 +395,6 @@ namespace Content.Server.Database
 
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)
         {
-            var existingRow = profile != null; // WOLFGATE(Genitals)
             profile ??= new Profile();
             var appearance = (HumanoidCharacterAppearance) humanoid.CharacterAppearance;
             List<string> markingStrings = new();
@@ -447,11 +438,6 @@ namespace Content.Server.Database
             profile.ScreamVoice = EmoteVoiceRules.ToStored(humanoid.ScreamVoice); // WOLFGATE(EmoteVoices)
             profile.LaughVoice = EmoteVoiceRules.ToStored(humanoid.LaughVoice); // WOLFGATE(EmoteVoices)
             profile.SpeechVoice = SpeechVoiceJson.ToStored(humanoid.SpeechVoice); // WOLFGATE(Voice)
-
-            // WOLFGATE(Genitals) START: anatomy JSON; an unreadable column is kept as it is until the player edits anatomy.
-            if (!(existingRow && humanoid.Genitals.LoadFailed))
-                profile.Genitals = GenitalProfileJson.Serialize(humanoid.Genitals);
-            // WOLFGATE END
 
             // Mono start
             profile.Flags = [..humanoid.Flags];

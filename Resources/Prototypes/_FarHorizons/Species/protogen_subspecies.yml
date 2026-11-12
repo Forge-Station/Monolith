@@ -28,9 +28,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobProtoVulpTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -200,9 +197,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobVoxTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -287,9 +281,6 @@
     Head: MobThavenHead
     Eyes: MobHumanoidAnyMarking # Wolfgate: blank, LED face markings replace eyes
     Snout: MobHumanoidAnyMarking
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobThavenTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -366,9 +357,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobSlimeTorso
     HeadTop: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
@@ -449,9 +437,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobShadekinTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -539,9 +524,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobResomiTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -619,9 +601,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobReptilianTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -700,9 +679,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobMothTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -778,9 +754,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobHumanTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -857,9 +830,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     Chest: MobFelionoidTorso
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
@@ -988,9 +958,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
@@ -1076,9 +1043,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Chest: MobAvaliTorso
@@ -1163,9 +1127,6 @@
     Snout: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking #HL modifcation
     UndergarmentBottom: MobHumanoidAnyMarking #HL modifcation
-    Genital: MobHumanoidAnyMarking #HL modifcation
-    Penis: MobHumanoidAnyMarking #HL modifcation
-    Breasts: MobHumanoidAnyMarking #HL modifcation
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Chest: MobArachnidTorso

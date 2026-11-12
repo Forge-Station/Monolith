@@ -71,6 +71,7 @@ ui-options-examine-font-size-value = { $size } пикс.
 ui-options-hud-scale = Масштаб HUD (хотбар, слоты, действия):
 ui-options-storage-scale = Масштаб слотов сумок и поясов:
 ui-options-hud-theme-pickme = ПикМи
+ui-options-forge-ui-simplified = Упрощённый интерфейс для слабых ПК: без анимированного фона лобби и декоративных эффектов консолей
 # Forge-Change-End
 ui-options-scale-auto = Автоматическое ({ TOSTRING($scale, "P0") })
 ui-options-scale-75 = 75%

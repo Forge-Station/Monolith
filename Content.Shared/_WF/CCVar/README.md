@@ -1,7 +1,7 @@
 # CCVar
 
 Wolfgate's CVar definitions, kept out of upstream `CCVars`. `WolfgateCVars` holds the general ones (`wf.ui_style`,
-`wf.anatomy_enabled`, `wf.anatomy_notice_seen`, `wf.ui_window_popout`, `wf.spawn_favourites`);
+`wf.ui_window_popout`, `wf.spawn_favourites`);
 `CollisionWarningCVars`, `FeedbackCVars`, `HeatHazeCVars`, `InternetSoundCVars`, `SoundtrackMuteCVars`, `NpcCrewCVars`,
 `ShipAccessCVars` and `ShockwaveCVars` tune the collision warning, player bug reports and suggestions, heat haze,
 internet sounds, soundtrack mute, NPC crew docking, ship access locking and explosion shockwaves;

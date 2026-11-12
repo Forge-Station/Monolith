@@ -1,8 +1,6 @@
-using Content.Client._Common.Consent; // WOLFGATE
 using Content.Client._Shitmed.Xenonids.UI;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared._Shitmed.Medical.Surgery;
-using Content.Shared._WF.Genitals.Systems; // WOLFGATE
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using JetBrains.Annotations;
@@ -18,10 +16,8 @@ public sealed partial class SurgeryBui : BoundUserInterface
 {
     [Dependency] private IEntityManager _entities = default!;
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private IClientConsentManager _consentManager = default!; // WOLFGATE
 
     private readonly SurgerySystem _system;
-    private readonly GenitalConsentSystem _genitalConsent; // WOLFGATE
     [ViewVariables]
     private SurgeryWindow? _window;
     private EntityUid? _part;
@@ -29,28 +25,12 @@ public sealed partial class SurgeryBui : BoundUserInterface
     private (EntityUid Ent, EntProtoId Proto)? _surgery;
     private readonly List<EntProtoId> _previousSurgeries = new();
 
-    // WOLFGATE - the last state's choices without anatomy surgeries for viewers who lack adult content; every read uses this.
+    // WOLFGATE - the last state's choices; every read uses this.
     private Dictionary<NetEntity, List<EntProtoId>> _choices = new();
 
-    // WOLFGATE - block body so the anatomy consent system is resolved too
     public SurgeryBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _system = _entities.System<SurgerySystem>();
-        _genitalConsent = _entities.System<GenitalConsentSystem>(); // WOLFGATE
-    }
-
-    // WOLFGATE - refilter when the viewer's consent settings arrive or change
-    protected override void Open()
-    {
-        base.Open();
-        _consentManager.OnServerDataLoaded += Refilter;
-    }
-
-    // WOLFGATE - re-runs Update with the stored state so the anatomy filter follows the viewer's consent
-    private void Refilter()
-    {
-        if (State is SurgeryBuiState state)
-            Update(state);
     }
 
     protected override void ReceiveMessage(BoundUserInterfaceMessage message)
@@ -75,14 +55,13 @@ public sealed partial class SurgeryBui : BoundUserInterface
         base.Dispose(disposing);
         if (disposing)
         {
-            _consentManager.OnServerDataLoaded -= Refilter; // WOLFGATE
             _window?.Dispose();
         }
     }
 
     private void Update(SurgeryBuiState state)
     {
-        _choices = _genitalConsent.FilterSurgeryChoices(state.Choices); // WOLFGATE - hide anatomy surgeries from viewers without adult content
+        _choices = state.Choices; // Forge-Change: the anatomy filter is removed with the anatomy module
 
         if (!_entities.TryGetComponent(_player.LocalEntity, out SurgeryTargetComponent? surgeryTargetComp)
             || !surgeryTargetComp.CanOperate)

@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._WF.CustomMarkings;
-using Content.Shared._WF.Genitals.Events;
 using Content.Shared.Humanoid;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -63,7 +62,6 @@ public sealed partial class CustomMarkingSystem : EntitySystem
         _resources = CustomMarkingResources.For(_resCache);
 
         SubscribeNetworkEvent<CustomMarkingArtEvent>(OnArt);
-        // GenitalsVisualizerSystem owns (GenitalsComponent, HumanoidMarkingsAppliedEvent); this pair is ours alone.
         SubscribeLocalEvent<HumanoidAppearanceComponent, HumanoidMarkingsAppliedEvent>(OnMarkingsApplied);
         Subs.CVar(_cfg, CustomMarkingCVars.EraseBody, _ => RefreshAll());
         Subs.CVar(_cfg, CustomMarkingCVars.BodyReach, _ =>
@@ -308,7 +306,8 @@ public sealed partial class CustomMarkingSystem : EntitySystem
             case CustomMarkingPlacement.Behind:
                 return _sprite.LayerMapTryGet(sprite, HumanoidVisualLayers.Chest, out index, false) ? index : 0;
             case CustomMarkingPlacement.Skin:
-                if (_sprite.LayerMapTryGet(sprite, HumanoidVisualLayers.Genital, out index, false)
+                // Forge-Change: was the removed Genital layer; the undergarments are now the first layer over the skin
+                if (_sprite.LayerMapTryGet(sprite, HumanoidVisualLayers.UndergarmentTop, out index, false)
                     || _sprite.LayerMapTryGet(sprite, "jumpsuit", out index, false))
                     return index;
 

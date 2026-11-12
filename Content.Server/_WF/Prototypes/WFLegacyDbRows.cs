@@ -1,6 +1,4 @@
-using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Nodes;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
@@ -12,9 +10,7 @@ namespace Content.Server._WF.Prototypes;
 /// <summary>Rewrites renamed Wolfgate prototype ids in loaded DB rows, so the load that finds them also saves them.</summary>
 public static class WFLegacyDbRows
 {
-    private static readonly string[] ShapedOrgans = { "penis", "vagina", "breasts" };
-
-    /// <summary>Moves a profile row's species, loadouts and anatomy shapes onto current ids; true if anything changed.</summary>
+    /// <summary>Moves a profile row's species and loadouts onto current ids; true if anything changed.</summary>
     public static bool Update(Profile profile)
     {
         var changed = false;
@@ -33,12 +29,6 @@ public static class WFLegacyDbRows
                 continue;
 
             loadout.LoadoutName = name;
-            changed = true;
-        }
-
-        if (UpdateGenitals(profile.Genitals) is { } genitals)
-        {
-            profile.Genitals = genitals;
             changed = true;
         }
 
@@ -76,44 +66,6 @@ public static class WFLegacyDbRows
         catch (DbUpdateException e)
         {
             log.Warning($"Could not save rows moved off renamed prototype ids; they are remapped on each load instead. {e.Message}");
-        }
-    }
-
-    /// <summary>The anatomy JSON with legacy shape ids replaced, or null when nothing needs changing or it cannot be read.</summary>
-    /// <remarks>Only the shape values are touched, so an unreadable or unmigrated column stays exactly as it is.</remarks>
-    private static string? UpdateGenitals(string json)
-    {
-        if (string.IsNullOrWhiteSpace(json))
-            return null;
-
-        try
-        {
-            if (JsonNode.Parse(json) is not JsonObject root)
-                return null;
-
-            var changed = false;
-            foreach (var organ in ShapedOrgans)
-            {
-                if (root[organ] is not JsonObject part
-                    || part["shape"] is not JsonValue value
-                    || !value.TryGetValue<string>(out var shape))
-                {
-                    continue;
-                }
-
-                var current = WFLegacyPrototypeIds.Resolve(WFLegacyPrototypeIds.GenitalShapes, shape);
-                if (current == shape)
-                    continue;
-
-                part["shape"] = current;
-                changed = true;
-            }
-
-            return changed ? root.ToJsonString() : null;
-        }
-        catch (JsonException)
-        {
-            return null;
         }
     }
 }

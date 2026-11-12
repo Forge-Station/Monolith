@@ -229,6 +229,19 @@ public sealed class ForgeCCVars
     /// </summary>
     public static readonly CVarDef<float> StorageScale =
         CVarDef.Create("forge.ui.storage_scale", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Simplified interface for weak computers: the lobby does not load or play an animated background and
+    ///     console instruments drop their decorative drawing (brushed metal, fasteners, glass reflections, chamfers).
+    /// </summary>
+    public static readonly CVarDef<bool> UiSimplified =
+        CVarDef.Create("forge.ui.simplified", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    ///     Whether the lobby character card is open. Closed by default, so the centre stays clear for the lobby art.
+    /// </summary>
+    public static readonly CVarDef<bool> LobbyCharacterOpen =
+        CVarDef.Create("forge.lobby.character_open", false, CVar.CLIENTONLY | CVar.ARCHIVE);
     #endregion
 
     #region Other

@@ -1,3 +1,4 @@
+using Content.Client._WF.CombatConsole;
 using Content.Shared._Forge.Shuttles.Components;
 using Robust.Client.UserInterface.Controls;
 
@@ -87,6 +88,7 @@ public sealed partial class NavScreen
 
             row.AddChild(label);
             row.AddChild(remove);
+            WFInstrumentTheme.Apply(row); // rows are built after the helm was themed, so they are styled as they are added
             MarkerList.AddChild(row);
         }
     }

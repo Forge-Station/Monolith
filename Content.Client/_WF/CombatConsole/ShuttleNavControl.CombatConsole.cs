@@ -11,6 +11,19 @@ public partial class ShuttleNavControl
 {
     private bool _wfInstrumentRadar;
 
+    /// <summary>Keeps an empty scope from reading as a black screen before telemetry arrives.</summary>
+    public void WfDrawIdleScope(DrawingHandleScreen handle)
+    {
+        if (!_wfInstrumentRadar || PixelWidth < 8 || PixelHeight < 8)
+            return;
+        var center = new Vector2(PixelWidth / 2f, PixelHeight / 2f);
+        var radius = MathF.Min(PixelWidth, PixelHeight) * 0.28f;
+        var color = ConsoleTheme.Accent.WithAlpha(0.35f);
+        handle.DrawCircle(center, radius, color, false);
+        handle.DrawLine(center - new Vector2(radius, 0), center + new Vector2(radius, 0), color);
+        handle.DrawLine(center - new Vector2(0, radius), center + new Vector2(0, radius), color);
+    }
+
     /// <summary>Retains the radar's original mode controls above the instrument glass.</summary>
     public void WfAttachRadarControls(LayoutContainer parent)
     {

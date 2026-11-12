@@ -39,9 +39,6 @@
     Tail: MobHumanoidAnyMarking
     UndergarmentTop: MobHumanoidAnyMarking # Hardlight
     UndergarmentBottom: MobHumanoidAnyMarking # Hardlight
-    Genital: MobHumanoidAnyMarking # Hardlight
-    Penis: MobHumanoidAnyMarking # Hardlight
-    Breasts: MobHumanoidAnyMarking # Hardlight
 
 - type: markingPoints
   id: MobFelionoidMarkingLimits
@@ -73,7 +70,6 @@
       required: true
       defaultMarkings: [ FelionoidTailAnimated ]
     # Hardlight Add:
-    # Wolfgate: Genital marking points removed with the legacy genital markings (replaced by organ-based anatomy).
     UndergarmentTop:
       points: 3
       required: false

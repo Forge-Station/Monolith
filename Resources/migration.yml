@@ -572,11 +572,6 @@ GunneryServer: GunneryServerMedium # Mono
 # ActionWFHarpoonRelease: WFActionHarpoonRelease  # still spawned as ActionWFHarpoonRelease; WFActionHarpoonRelease is not an entity
 # MobCanine: WFMobCanine  # still spawned as MobCanine; WFMobCanine is not an entity
 # MobCanineDummy: WFMobCanineDummy  # still spawned as MobCanineDummy; WFMobCanineDummy is not an entity
-# OrganWFBreasts: WFOrganBreasts  # still spawned as OrganWFBreasts; WFOrganBreasts is not an entity
-# OrganWFPenis: WFOrganPenis  # still spawned as OrganWFPenis; WFOrganPenis is not an entity
-# OrganWFTesticles: WFOrganTesticles  # still spawned as OrganWFTesticles; WFOrganTesticles is not an entity
-# OrganWFVagina: WFOrganVagina  # still spawned as OrganWFVagina; WFOrganVagina is not an entity
-# OrganWFWomb: WFOrganWomb  # still spawned as OrganWFWomb; WFOrganWomb is not an entity
 # PowerCordClampHV: WFPowerCordClampHV  # still spawned as PowerCordClampHV; WFPowerCordClampHV is not an entity
 # PowerCordClampLV: WFPowerCordClampLV  # still spawned as PowerCordClampLV; WFPowerCordClampLV is not an entity
 # PowerCordClampMV: WFPowerCordClampMV  # still spawned as PowerCordClampMV; WFPowerCordClampMV is not an entity
@@ -603,16 +598,6 @@ GunneryServer: GunneryServerMedium # Mono
 # ShipHarpoonTurret: WFShipHarpoonTurret  # still spawned as ShipHarpoonTurret; WFShipHarpoonTurret is not an entity
 # ShipHarpoonTurretFlatpack: WFShipHarpoonTurretFlatpack  # still spawned as ShipHarpoonTurretFlatpack; WFShipHarpoonTurretFlatpack is not an entity
 ShipVoucherMedicalResponder: null  # WFShipVoucherMedicalResponder is not an entity prototype
-# SurgeryWFInsertBreasts: WFSurgeryInsertBreasts  # still spawned as SurgeryWFInsertBreasts; WFSurgeryInsertBreasts is not an entity
-# SurgeryWFInsertPenis: WFSurgeryInsertPenis  # still spawned as SurgeryWFInsertPenis; WFSurgeryInsertPenis is not an entity
-# SurgeryWFInsertTesticles: WFSurgeryInsertTesticles  # still spawned as SurgeryWFInsertTesticles; WFSurgeryInsertTesticles is not an entity
-# SurgeryWFInsertVagina: WFSurgeryInsertVagina  # still spawned as SurgeryWFInsertVagina; WFSurgeryInsertVagina is not an entity
-# SurgeryWFInsertWomb: WFSurgeryInsertWomb  # still spawned as SurgeryWFInsertWomb; WFSurgeryInsertWomb is not an entity
-# SurgeryWFRemoveBreasts: WFSurgeryRemoveBreasts  # still spawned as SurgeryWFRemoveBreasts; WFSurgeryRemoveBreasts is not an entity
-# SurgeryWFRemovePenis: WFSurgeryRemovePenis  # still spawned as SurgeryWFRemovePenis; WFSurgeryRemovePenis is not an entity
-# SurgeryWFRemoveTesticles: WFSurgeryRemoveTesticles  # still spawned as SurgeryWFRemoveTesticles; WFSurgeryRemoveTesticles is not an entity
-# SurgeryWFRemoveVagina: WFSurgeryRemoveVagina  # still spawned as SurgeryWFRemoveVagina; WFSurgeryRemoveVagina is not an entity
-# SurgeryWFRemoveWomb: WFSurgeryRemoveWomb  # still spawned as SurgeryWFRemoveWomb; WFSurgeryRemoveWomb is not an entity
 # TetherAnchorEye: WFTetherAnchorEye  # still spawned as TetherAnchorEye; WFTetherAnchorEye is not an entity
 # TetherInstaller: WFTetherInstaller  # still spawned as TetherInstaller; WFTetherInstaller is not an entity
 # VendingMachineWolfgate: WFVendingMachineWolfgate  # still spawned as VendingMachineWolfgate; WFVendingMachineWolfgate is not an entity

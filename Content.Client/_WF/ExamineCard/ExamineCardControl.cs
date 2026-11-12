@@ -485,25 +485,16 @@ public sealed class ExamineCardControl : PanelContainer
     }
 
     /// <summary>Shows the start of the character's description, with a toggle for the rest beside the card.</summary>
-    public void SetDescription(string? markup, bool open, Action<bool> toggled, bool hasNsfw = false,
-        bool nsfwOpen = false, Action<bool>? nsfwToggled = null)
+    public void SetDescription(string? markup, bool open, Action<bool> toggled)
     {
         _description.RemoveAllChildren();
         var hasText = !string.IsNullOrWhiteSpace(markup);
-        _description.Visible = hasText || hasNsfw;
+        _description.Visible = hasText;
         if (!_description.Visible)
             return;
 
         _description.AddChild(Rule(InkFaded.WithAlpha(0.5f), new Thickness(0, 0, 0, 5)));
         var header = SectionHeader("wf-examine-card-description", hasText, open, toggled);
-        if (hasNsfw)
-        {
-            var heart = new ExamineCardHeartToggle(nsfwOpen) { VerticalAlignment = VAlignment.Center };
-            if (nsfwToggled != null)
-                heart.Toggled += nsfwToggled;
-            header.AddChild(heart);
-            heart.SetPositionInParent(1);
-        }
         _description.AddChild(header);
 
         if (!hasText)

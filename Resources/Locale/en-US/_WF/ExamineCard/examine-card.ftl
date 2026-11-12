@@ -103,5 +103,3 @@ wf-examine-card-status-none = nothing of note
 
 wf-examine-card-notice-close = {$examiner} looks you over.
 wf-examine-card-notice-distant = {$examiner} glances your way.
-wf-examine-card-nsfw-title = Adult description
-wf-examine-card-nsfw-tooltip = Adult description

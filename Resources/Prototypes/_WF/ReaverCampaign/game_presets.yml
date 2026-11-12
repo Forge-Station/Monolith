@@ -13,11 +13,10 @@
   - BasicStationEventScheduler
   - BluespaceEventScheduler
   - BluespaceDungeonEventScheduler
-  - BluespaceSalvageEventScheduler
+#  - BluespaceSalvageEventScheduler # prototype disabled with the salvage event
   - SmugglingEventScheduler
   - FrontierRoundstartVariation
   - MonoMonolithicEventsScheduler
-  - ManualPortstrikeTsfPdv
   - StarSystemKyphrus
   - WFReaverCampaignRule
   - WFAdsCampaignRule

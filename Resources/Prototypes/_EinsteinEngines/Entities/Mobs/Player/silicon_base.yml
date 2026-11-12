@@ -102,8 +102,7 @@
     noRot: true
     drawdepth: Mobs
     layers:
-    - map: ["enum.HumanoidVisualLayers.TailBehind"] # WOLFGATE(Genitals): split tail layers, back half behind the body
-    - map: [ "enum.GenitalVisualLayers.Behind" ] # WOLFGATE(Genitals): anatomy anchor
+    - map: ["enum.HumanoidVisualLayers.TailBehind"] # WOLFGATE - split tail layers, back half behind the body
     - map: ["enum.HumanoidVisualLayers.Chest"]
     - map: ["enum.HumanoidVisualLayers.Head"]
     - map: ["enum.HumanoidVisualLayers.Snout"]
@@ -135,11 +134,9 @@
       visible: false
     - map: ["id"]
     - map: ["gloves"]
-    - map: [ "enum.GenitalVisualLayers.Under" ] # WOLFGATE(Genitals): anatomy anchor, over gloves, under shoes and outer clothing
     - map: ["shoes"]
     - map: ["ears"]
     - map: ["outerClothing"]
-    - map: [ "enum.GenitalVisualLayers.Over" ] # WOLFGATE(Genitals): anatomy anchor, show-through-clothing set over outer clothing
     - map: ["eyes"]
     - map: ["belt"]
     - map: ["neck"]
@@ -152,7 +149,7 @@
     - map: ["head"]
     - map: ["pocket1"]
     - map: ["pocket2"]
-    - map: ["enum.HumanoidVisualLayers.TailOversuit"] # WOLFGATE(Genitals): split tail layers, front half above clothing and cloaks
+    - map: ["enum.HumanoidVisualLayers.TailOversuit"] # WOLFGATE - split tail layers, front half above clothing and cloaks
     - map: ["enum.HumanoidVisualLayers.Tail"]
     - map: ["clownedon"] # Dynamically generated
       sprite: "Effects/creampie.rsi"

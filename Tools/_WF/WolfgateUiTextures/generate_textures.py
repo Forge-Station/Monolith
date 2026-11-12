@@ -1,10 +1,8 @@
-"""Generates the Wolfgate UI textures for every skin under Resources/Textures/_WF/Interface/<skin>.
+"""Generates the Wolfgate UI textures for every skin under Resources/Textures/_WF/Stylesheets/Interface/<skin>.
 
 Run from the repository root:  python Tools/_WF/WolfgateUiTextures/generate_textures.py
 Requires Pillow. Slot and storage icons are recoloured copies of the stock Default theme.
 Palettes mirror Content.Client/_WF/Stylesheets/WolfgateSkin.cs; keep the two in sync.
-The Anatomy top-bar icon is white and tinted by the menu button, so one copy under
-Resources/Textures/_WF/Interface serves every skin.
 """
 import math
 import os
@@ -23,10 +21,11 @@ RAINBOW = [
 ]
 
 SKINS = {
-    # Hyper-futurist glass and cyan, chamfered corners
+    # Forge-Change: cyan on blue-grey glass, chamfered corners
     "Wolfgate": dict(
         rounded=False,
         accent=(70, 215, 255, 255), accent_dim=(42, 143, 176, 255), danger=(255, 77, 94, 255),
+        spark=(70, 215, 255),
         glass=(14, 20, 27, 250), glass_inner=(20, 29, 38, 255),
         edge=(42, 59, 77, 255), edge_soft=(35, 48, 62, 255), edge_dim=(28, 38, 47, 255),
         ink=(8, 12, 17, 245), field=(7, 11, 16, 235), header=(18, 27, 37, 252),
@@ -273,11 +272,21 @@ def style_textures():
 
 
 def overlay_textures():
-    """Lobby overlays: scanlines and a rainbow title rule. The futurist skin gets clear placeholders of the
-    same sizes so the shared rules can reference them without drawing anything."""
+    """Lobby overlays: scanlines and a title rule. The futurist skin gets a clear scanline placeholder of the
+    same size so the shared rules can reference it without drawing anything."""
     if not P["rounded"]:
         save(Image.new("RGBA", (4, 4), CLEAR), STYLE, "scanlines.png")
-        save(Image.new("RGBA", (256, 4), CLEAR), STYLE, "title_rule.png")
+        # Forge-Change: holographic rule under the lobby title, accent running into the spark colour and
+        # fading out to the right (was a clear placeholder). Two bright rows over two faint ones.
+        im = Image.new("RGBA", (256, 4), CLEAR)
+        px = im.load()
+        for x in range(256):
+            t = x / 255
+            r, g, b = lerp(P["accent"][:3], P["spark"], min(1.0, t * 1.6))
+            a = int(255 * (1 - t) ** 1.5)
+            for y in range(4):
+                px[x, y] = (r, g, b, a if y < 2 else a // 3)
+        save(im, STYLE, "title_rule.png")
         return
 
     # Scanlines: one dark line every four rows, a fainter one in between
@@ -387,60 +396,6 @@ def attributions():
         f.write("\n".join(lines))
 
 
-def anatomy_icon():
-    """Neutral outline figure for the Anatomy top-bar button: ring head, hollow torso, plain limbs.
-
-    Drawn white at 4x and downsampled to 64px like the stock svg.192dpi icons. The menu button tints it,
-    so one copy serves every skin. Writes the texture, its filtering sidecar and the folder's attributions.yml.
-    """
-    size, scale = 64, 4
-    big = size * scale
-
-    def u(v):
-        return int(round(v * scale))
-
-    mask = Image.new("L", (big, big), 0)
-    draw = ImageDraw.Draw(mask)
-
-    def capsule(x0, y0, x1, y1, width):
-        draw.line((u(x0), u(y0), u(x1), u(y1)), fill=255, width=u(width))
-        r = u(width) / 2
-        for x, y in ((x0, y0), (x1, y1)):
-            draw.ellipse((u(x) - r, u(y) - r, u(x) + r, u(y) + r), fill=255)
-
-    # Standing figure with a 4px pen: ring head and outlined torso, then limbs that stay clear of both holes
-    draw.ellipse((u(25), u(3), u(39), u(17)), fill=255)
-    draw.ellipse((u(29), u(7), u(35), u(13)), fill=0)
-    draw.rounded_rectangle((u(23), u(20), u(41), u(40)), radius=u(5), fill=255)
-    draw.rounded_rectangle((u(27), u(24), u(37), u(36)), radius=u(2), fill=0)
-    capsule(22, 23, 17, 40, 5)
-    capsule(42, 23, 47, 40, 5)
-    capsule(28, 40, 26, 59, 6)
-    capsule(36, 40, 38, 59, 6)
-
-    resample = getattr(Image, "Resampling", Image).LANCZOS
-    alpha = mask.resize((size, size), resample)
-
-    im = Image.new("RGBA", (size, size), (255, 255, 255, 0))
-    im.putalpha(alpha)
-
-    out_dir = os.path.join(ROOT, "Resources", "Textures", "_WF", "Interface")
-    os.makedirs(out_dir, exist_ok=True)
-    path = os.path.join(out_dir, "anatomy.svg.192dpi.png")
-    im.save(path)
-    with open(path + ".yml", "w", encoding="utf-8", newline="\n") as f:
-        f.write("sample:\n  filter: true\n")
-    lines = [
-        '- files: ["anatomy.svg.192dpi.png"]',
-        '  license: "CC-BY-SA-3.0"',
-        '  copyright: "Generated for Wolfgate by Tools/_WF/WolfgateUiTextures/generate_textures.py"',
-        '  source: "https://github.com/Aphelion-Moon/Wolfgate"',
-        "",
-    ]
-    with open(os.path.join(out_dir, "attributions.yml"), "w", encoding="utf-8", newline="\n") as f:
-        f.write("\n".join(lines))
-    print("Anatomy icon written to %s" % path)
-
 def window_icons():
     """White title bar icons for the window pop-out button, tinted by the stylesheet, so one set serves every skin.
     Drawn 4x and downsampled to match the 22px stock close cross."""
@@ -475,7 +430,8 @@ def main():
     global P, OUT, STYLE, written
     for skin, palette in SKINS.items():
         P = palette
-        OUT = os.path.join(ROOT, "Resources", "Textures", "_WF", "Interface", skin)
+        # Forge-Change: the skins live under _WF/Stylesheets/Interface, where WolfgateSkin.cs and hud.yml read them
+        OUT = os.path.join(ROOT, "Resources", "Textures", "_WF", "Stylesheets", "Interface", skin)
         STYLE = os.path.join(OUT, "Style")
         written = []
         style_textures()
@@ -485,7 +441,6 @@ def main():
         recolour_storage()
         attributions()
         print("%s textures written to %s (%d files)" % (skin, OUT, len(written)))
-    anatomy_icon()
     window_icons()
 
 

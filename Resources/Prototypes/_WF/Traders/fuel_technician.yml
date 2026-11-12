@@ -17,7 +17,6 @@
 #      preference sets (_jobPriorities, _antagPreferences, _traitPreferences, _loadouts). None of
 #      these fail to load - HumanoidCharacterProfile happily deserializes them - they're just
 #      never read for a mob whose look comes from a humanoidProfile instead of a player session.
-#   4. genitals is optional: keep it if you set it deliberately, otherwise leave it out.
 - type: humanoidProfile
   id: WFTraderFuelTechnicianProfile
   profile:

@@ -1,12 +1,12 @@
 - type: entity
   name: ancient stasis sleep unit
-  id: CryogenicSleepUnitADS
+  id: CryogenicSleepUnitForerunner
   parent: BaseMachinePowered
   description: This is used to lie in, sleep in or strap on. Resting here provides slow healing.
   components:
   - type: StasisBed
     baseMultiplier: 10.0
-  - type: HealOnBuckle # Mono: Adjusted types to be more broad
+  - type: HealOnBuckle
     damage:
       types:
         Poison: -0.1
@@ -32,7 +32,7 @@
         mask:
         - LowImpassable
   - type: Sprite
-    sprite: _Forge/Structures/Machines/stasisbed_ads.rsi
+    sprite: _Forge/Structures/Machines/stasisbed_forerunner.rsi
     layers:
     - state: icon
     - state: unlit

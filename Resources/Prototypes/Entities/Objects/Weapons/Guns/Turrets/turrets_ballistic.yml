@@ -162,4 +162,11 @@
     - state: base
     - state: unlit
       shader: unshaded
+  - type: Gun
+    fireRate: 4
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_svalinn.ogg
+  - type: ProjectileBatteryAmmoProvider
+    proto: HandheldAutopulserProjectile
+    fireCost: 25
 #Forge-Change-End

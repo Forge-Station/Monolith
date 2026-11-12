@@ -1,11 +1,11 @@
 - type: entity
   parent: BaseStructure
-  id: CryoPodAsakimADS
+  id: CryoPodAsakimForerunner
   name: asakim cryo pod
   description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Decoration/cryogenics.rsi
+    sprite: _Forge/Structures/Decoration/cryogenics_forerunner.rsi
     drawdepth: Mobs
     noRot: true
     offset: 0, 0.5
@@ -65,12 +65,12 @@
 
 - type: entity
   parent: BaseStructure
-  id: CryoPodBiomassADS
+  id: CryoPodBiomassForerunner
   name: biomass cryo pod
   description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Decoration/cryogenics.rsi
+    sprite: _Forge/Structures/Decoration/cryogenics_forerunner.rsi
     drawdepth: Mobs
     noRot: true
     offset: 0, 0.5
@@ -134,7 +134,7 @@
   description: A cryo pod that has seen better days. It's entirely inoperable; not good for anything but scrap.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Decoration/cryogenics.rsi
+    sprite: _Forge/Structures/Decoration/cryogenics_forerunner.rsi
     drawdepth: Mobs
     noRot: true
     offset: 0, 0.5
@@ -179,7 +179,7 @@
   description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Decoration/cryogenics.rsi
+    sprite: _Forge/Structures/Decoration/cryogenics_forerunner.rsi
     drawdepth: Mobs
     noRot: true
     offset: 0, 0.5

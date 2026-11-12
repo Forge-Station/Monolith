@@ -1,11 +1,11 @@
 - type: entity
-  id: AdsMachineryDataFilter
+  id: ForerunnerMachineryDataFilter
   parent: BaseMachinePowered
   name: ancient data filter
   description: Various data keep popping up on the screen of this strange machine.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Decoration/machinery_ads.rsi
+    sprite: _Forge/Structures/Decoration/machinery_forerunner.rsi
     snapCardinals: true
     layers:
     - state: datafilter
@@ -25,13 +25,13 @@
   - type: Pullable
 
 - type: entity
-  id: AdsMachineryDataServer
+  id: ForerunnerMachineryDataServer
   parent: BaseMachinePowered
   name: ancient data server
   description: A large and bulky server. It is noisy.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Decoration/machinery_ads.rsi
+    sprite: _Forge/Structures/Decoration/machinery_forerunner.rsi
     snapCardinals: true
     layers:
     - state: dataserver
@@ -57,13 +57,13 @@
   - type: Pullable
 
 - type: entity
-  id: AdsMachineryDataValidator
+  id: ForerunnerMachineryDataValidator
   parent: BaseMachinePowered
   name: ancient data validator
   description: An old-looking machine. You have no idea what it does.
   components:
   - type: Sprite
-    sprite: _Forge/Structures/Decoration/machinery_ads.rsi
+    sprite: _Forge/Structures/Decoration/machinery_forerunner.rsi
     snapCardinals: true
     layers:
     - state: datavalidator

@@ -10,6 +10,18 @@ ent-WeaponTurretNTSniperPacked = упакованная снайперская �
 ent-WeaponTurretNTMachinegunPacked = упакованная пулемётная турель NanoTrasen
     .desc = { ent-WeaponTurretNanoTrasenPacked.desc }
 
+ent-WeaponTurretTraumaPacked = упакованная баллистическая турель TTI
+    .desc = Разобранная турель. Разверните её и загрузите комплект боеприпасов. Внутри нет патронов.
+
+ent-WeaponTurretTraumaShotgunPacked = упакованная дробовая турель TTI
+    .desc = { ent-WeaponTurretNanoTrasenPacked.desc }
+
+ent-WeaponTurretTraumaSniperPacked = упакованная снайперская турель TTI
+    .desc = { ent-WeaponTurretNanoTrasenPacked.desc }
+
+ent-WeaponTurretTraumaMachinegunPacked = упакованная пулемётная турель TTI
+    .desc = { ent-WeaponTurretNanoTrasenPacked.desc }
+
 ent-WeaponTurretTSFMCPacked = упакованная баллистическая турель ТСФ
     .desc = Разобранная турель. Разверните её и загрузите комплект боеприпасов. Внутри нет патронов.
 

@@ -82,3 +82,25 @@
     providedRecipes:
     - BrutepackAdvanced1
     - OintmentAdvanced1
+
+- type: entity
+  parent: NFBaseBlueprintMedical
+  id: BlueprintTurretTTI
+  name: TTI turret blueprint
+  description: A blueprint with a schematic of a tti turrets. It can be inserted into an autolathe or a techfab.
+  components:
+  - type: Blueprint
+    providedRecipes:
+    - WeaponTurretTraumaPacked
+    - WeaponTurretTraumaShotgunPacked
+    - WeaponTurretTraumaSniperPacked
+    - WeaponTurretTraumaMachinegunPacked
+    - ComputerTurretCommandTTIShuttle
+    - MagazineTurretBallistic
+    - MagazineTurretShotgun
+    - MagazineTurretSniper
+    - MagazineTurretMachinegun
+    - MagazineTurretBallisticEmpty
+    - MagazineTurretShotgunEmpty
+    - MagazineTurretSniperEmpty
+    - MagazineTurretMachinegunEmpty

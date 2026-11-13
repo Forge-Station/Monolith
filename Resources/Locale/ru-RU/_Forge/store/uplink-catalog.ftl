@@ -138,6 +138,8 @@ uplink-tti-blueprinttechmed-name = Продвинутые медикаменты
 uplink-tti-blueprinttechmed-desc = Рецепт продвинутых медикаментов. Включает в себя регенеративную сеть и медицинскую нить. Вставляется в медицинский техфаб.
 uplink-tti-blueprinttticlothing-name = Униформа
 uplink-tti-blueprinttticlothing-desc = Чертёж униформы. Включает в себя... Да много чего он в себя включает. Вставляется в медицинский техфаб.
+uplink-tti-blueprint-turret-name = Турели
+uplink-tti-blueprint-turret-desc = Чертеж турелей. Включает в себя турели, магазины к ним и консоль контроля турелей.
 
 # Bundle
 uplink-tti-SurgeryBundle-name = хирургический набор

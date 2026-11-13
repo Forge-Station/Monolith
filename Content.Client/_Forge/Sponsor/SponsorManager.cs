@@ -5,9 +5,9 @@ using Robust.Shared.Network;
 namespace Content.Client._Forge.Sponsor;
 
 [UsedImplicitly]
-public sealed class SponsorManager : ISharedSponsorManager
+public sealed partial class SponsorManager : ISharedSponsorManager
 {
-    [Dependency] private readonly IClientNetManager _netMgr = default!;
+    [Dependency] private IClientNetManager _netMgr = default!;
     private Dictionary<NetUserId, SponsorLevel> _sponsors = new();
     public void Initialize()
     {

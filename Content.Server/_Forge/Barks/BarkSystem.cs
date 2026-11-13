@@ -11,12 +11,12 @@ namespace Content.Server._Forge.Speech.Synthesis.System;
 /// <summary>
 /// Handles barks for entities.
 /// </summary>
-public sealed class BarkSystem : EntitySystem
+public sealed partial class BarkSystem : EntitySystem
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IConfigurationManager _configurationManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public override void Initialize()
     {

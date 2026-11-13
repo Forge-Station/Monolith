@@ -12,7 +12,7 @@ namespace Content.Server._Forge.Shipyard.Systems;
 /// <summary>
 /// Shipyard vouchers can always be recycled. Unused vouchers return 100% lathe recipe materials.
 /// </summary>
-public sealed class ShipyardVoucherReclaimSystem : EntitySystem
+public sealed partial class ShipyardVoucherReclaimSystem : EntitySystem
 {
     [Dependency] private SharedLatheSystem _lathe = default!;
     [Dependency] private PopupSystem _popup = default!;

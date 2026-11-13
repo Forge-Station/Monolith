@@ -6,7 +6,6 @@ using Content.Server._NF.Salvage; // Frontier: job complete event
 using Content.Server.Atmos;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
-using Robust.Shared.CPUJob.JobQueues;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Parallax;
 using Content.Server.Procedural;
@@ -16,6 +15,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Dataset;
 using Content.Shared.Gravity;
@@ -32,12 +32,15 @@ using Content.Shared.Storage;
 using Content.Server.Weather;
 using Content.Shared.Weather;
 using Robust.Shared.Map;
+using Robust.Shared.Collections;
+using Robust.Shared.CPUJob.JobQueues;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Salvage;
 
@@ -53,7 +56,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
     private readonly DungeonSystem _dungeon;
     private readonly MetaDataSystem _metaData;
     private readonly ShuttleSystem _shuttle;
-    private readonly StationSystem _stationSystem;
+    private readonly ServerStationSystem _stationSystem;
     private readonly SalvageSystem _salvage;
     private readonly SharedTransformSystem _xforms;
 
@@ -85,7 +88,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         WeatherSystem weather,
         DungeonSystem dungeon,
         ShuttleSystem shuttle,
-        StationSystem stationSystem,
+        ServerStationSystem stationSystem,
         MetaDataSystem metaData,
         SalvageSystem salvage,
         SharedTransformSystem xform,

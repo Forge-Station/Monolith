@@ -15,16 +15,16 @@ using System.Linq;
 
 namespace Content.Server._Forge.Crypto.Systems;
 
-public sealed class CryptoSellConsoleSystem : SharedCryptoSellConsoleSystem
+public sealed partial class CryptoSellConsoleSystem : SharedCryptoSellConsoleSystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly CryptoMarketSystem _market = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly BankSystem _bank = default!;
-    [Dependency] private readonly HandsSystem _hands = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private CryptoMarketSystem _market = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private BankSystem _bank = default!;
+    [Dependency] private HandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     private float _uiRefreshAccumulator;
     private const float UiRefreshInterval = 30f; // Forge-Change: keep opened console UI live.
     private static readonly CoinMarketProfile[] DefaultMarketProfiles =

@@ -18,6 +18,7 @@
   - type: Mech
     equipmentWhitelist:
       tags:
+      - LightMechMount
       - MediumMechMount
       - IFFMechMount
 
@@ -41,6 +42,8 @@
   - type: Mech
     equipmentWhitelist:
       tags:
+      - LightMechMount
+      - MediumMechMount
       - HeavyMechMount
       - IFFMechMount
 
@@ -443,7 +446,7 @@
     criticalPowerStateSpeedPenalty: 0.85
     maxEquipmentAmount: 3
     airtight: true
-    maxIntegrity: 3000
+    maxIntegrity: 3900 #Forge-Change 3900 << 3000
     pilotWhitelist:
       components:
         - HumanoidAppearance
@@ -460,7 +463,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 6000
+        damage: 7800 #Forge-Change 7800 << 6000
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -570,7 +573,7 @@
     criticalPowerStateSpeedPenalty: 0.85
     maxEquipmentAmount: 3
     airtight: true
-    maxIntegrity: 4000
+    maxIntegrity: 5200 #Forge-Change 5200 << 4000
     pilotWhitelist:
       components:
         - HumanoidAppearance
@@ -579,7 +582,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 8000
+        damage: 10400 #Forge-Change 10400 << 8000
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -651,7 +654,7 @@
     criticalPowerStateSpeedPenalty: 0.95
     maxEquipmentAmount: 1
     airtight: true
-    maxIntegrity: 2000
+    maxIntegrity: 2600 #Forge-change 2600 << 2000
     pilotWhitelist:
       components:
         - HumanoidAppearance
@@ -660,7 +663,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 4000
+        damage: 5200 #Forge-Change 5200 << 4000
       behaviors:
       - !type:PlaySoundBehavior
         sound:

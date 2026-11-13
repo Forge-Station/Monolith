@@ -86,21 +86,20 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
     private void OnInteractUsing(Entity<MaterialReclaimerComponent> entity, ref InteractUsingEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || entity.Comp.SolutionContainerId == null)
             return;
 
         // if we're trying to get a solution out of the reclaimer, don't destroy it
         // if (_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.SolutionContainerId, out _, out var outputSolution) && outputSolution.Contents.Any()) // Frontier: previous implementation
         if (_solutionContainer.TryGetSolution(entity.Owner, entity.Comp.SolutionContainerId, out _, out var outputSolution)) // Frontier: do not trash solution containers if the reclaimer is empty
         {
-            if (TryComp<SolutionContainerManagerComponent>(args.Used, out var managerComponent) &&
-                _solutionContainer.EnumerateSolutions((args.Used, managerComponent)).Any(s => s.Solution.Comp.Solution.AvailableVolume > 0))
+            if (_solutionContainer.EnumerateSolutions(args.Used).Any(s => s.Solution.Comp.Solution.AvailableVolume > 0))
             {
                 if (_openable.IsClosed(args.Used))
                     return;
 
                 if (TryComp<SolutionTransferComponent>(args.Used, out var transfer) &&
-                    transfer.CanReceive)
+                    transfer.CanSend)
                     return;
             }
         }
@@ -235,6 +234,9 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         float completion = 1f,
         MaterialReclaimerComponent? component = null)
     {
+        if (EntityManager.IsQueuedForDeletion(item))
+            return;
+
         if (!Resolve(uid, ref component))
             return;
 
@@ -304,7 +306,7 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         TransformComponent? xform = null,
         PhysicalCompositionComponent? composition = null)
     {
-        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform))
+        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform) || reclaimerComponent.SolutionContainerId == null)
             return;
 
         efficiency *= reclaimerComponent.Efficiency;
@@ -324,9 +326,9 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
         // Frontier: use old material reclaimer code
         if (reclaimerComponent.UseOldSolutionLogic &&
-            TryComp<SolutionContainerManagerComponent>(item, out var solutionContainer))
+            TryComp<SolutionManagerComponent>(item, out _))
         {
-            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions((item, solutionContainer)))
+            foreach (var (_, soln) in _solutionContainer.EnumerateSolutions(item))
             {
                 var solution = soln.Comp.Solution;
                 foreach (var quantity in solution.Contents)

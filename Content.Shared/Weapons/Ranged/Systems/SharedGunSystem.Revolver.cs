@@ -606,25 +606,31 @@ public partial class SharedGunSystem
     // Mono
     private void OnRevolverCheckProto(Entity<RevolverAmmoProviderComponent> ent, ref CheckShootPrototypeEvent args)
     {
-        var currentIndex = ent.Comp.CurrentIndex;
+        // Match OnRevolverTakeAmmo: CurrentIndex is the next chamber to fire.
+        // (CurrentIndex - 1) % Capacity is -1 in C# when CurrentIndex is 0.
+        if (ent.Comp.Capacity <= 0)
+            return;
 
-        var index = (currentIndex - 1) % ent.Comp.Capacity;
+        var index = ent.Comp.CurrentIndex % ent.Comp.Capacity;
+        if (index >= ent.Comp.Chambers.Length || index >= ent.Comp.AmmoSlots.Count)
+            return;
+
         var chamber = ent.Comp.Chambers[index];
-        if (chamber == true)
+        if (chamber != true)
+            return;
+
+        var ammo = ent.Comp.AmmoSlots[index];
+        if (ammo == null)
         {
-            var ammo = ent.Comp.AmmoSlots[index]!;
-            if (ammo == null)
-            {
-                if (ent.Comp.FillPrototype == null)
-                    return;
-
-                ProtoManager.TryIndex(ent.Comp.FillPrototype, out var proto);
-                args.ShootPrototype = proto;
+            if (ent.Comp.FillPrototype == null)
                 return;
-            }
 
-            args.ShootPrototype = MetaData(ammo.Value).EntityPrototype;
+            ProtoMan.TryIndex(ent.Comp.FillPrototype, out var proto);
+            args.ShootPrototype = proto;
+            return;
         }
+
+        args.ShootPrototype = MetaData(ammo.Value).EntityPrototype;
     }
 
     private void Cycle(RevolverAmmoProviderComponent component, int count = 1)

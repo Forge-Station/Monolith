@@ -77,7 +77,7 @@ public sealed class AddTests
         var sSystems = server.ResolveDependency<IEntitySystemManager>();
 
         var sAdminLogSystem = server.ResolveDependency<IAdminLogManager>();
-        var sGamerTicker = sSystems.GetEntitySystem<GameTicker>();
+        var sGamerTicker = sSystems.GetEntitySystem<ServerGameTicker>();
 
         var guid = Guid.NewGuid();
 
@@ -215,7 +215,7 @@ public sealed class AddTests
         var sSystems = server.ResolveDependency<IEntitySystemManager>();
 
         var sAdminLogSystem = server.ResolveDependency<IAdminLogManager>();
-        var sGamerTicker = sSystems.GetEntitySystem<GameTicker>();
+        var sGamerTicker = sSystems.GetEntitySystem<ServerGameTicker>();
 
         var guid = Guid.NewGuid();
 

@@ -6,7 +6,7 @@ using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
-using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Components;
 using Content.Shared.Power;
 using Content.Shared.Station.Components;
 using Robust.Shared.Audio;
@@ -41,8 +41,6 @@ public sealed partial class CargoSystem
 
             if (comp.CurrentState == CargoTelepadState.Unpowered)
             {
-                comp.CurrentState = CargoTelepadState.Idle;
-                _appearance.SetData(uid, CargoTelepadVisuals.State, CargoTelepadState.Idle, appearance);
                 comp.Accumulator = comp.Delay;
                 continue;
             }
@@ -117,7 +115,7 @@ public sealed partial class CargoSystem
 
         if (_station.GetOwningStation(ent) is not { } station)
         {
-            station = _random.Pick(_station.GetStations().Where(HasComp<StationCargoOrderDatabaseComponent>).ToList());
+            station = _random.Pick(_station.GetStations().Where(x => HasComp<StationCargoOrderDatabaseComponent>(x.Owner)).ToList());
         }
 
         if (!TryComp<StationCargoOrderDatabaseComponent>(station, out var db) ||
@@ -139,13 +137,15 @@ public sealed partial class CargoSystem
 
         var disabled = !receiver.Powered || !xform.Anchored;
 
-        // Setting idle state should be handled by Update();
+        // Turn off if disabled
+        // Only change to Idle if off
+        // don't overwrite teleporting state
         if (disabled)
-            return;
+            component.CurrentState = CargoTelepadState.Unpowered;
+        else if (component.CurrentState == CargoTelepadState.Unpowered)
+            component.CurrentState = CargoTelepadState.Idle;
 
-        TryComp<AppearanceComponent>(uid, out var appearance);
-        component.CurrentState = CargoTelepadState.Unpowered;
-        _appearance.SetData(uid, CargoTelepadVisuals.State, CargoTelepadState.Unpowered, appearance);
+        _appearance.SetData(uid, CargoTelepadVisuals.State, component.CurrentState);
     }
 
     private void OnTelepadPowerChange(EntityUid uid, CargoTelepadComponent component, ref PowerChangedEvent args)

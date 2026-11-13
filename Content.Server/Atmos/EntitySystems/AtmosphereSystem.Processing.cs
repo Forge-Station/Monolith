@@ -1,7 +1,8 @@
 using Content.Server.Atmos.Components;
-using Content.Server.Atmos.Piping.Components;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
+using Content.Shared.Atmos.EntitySystems;
+using Content.Shared.Atmos.Piping.Components;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -260,11 +261,7 @@ namespace Content.Server.Atmos.EntitySystems
                 if (tile.Air == null)
                     return;
 
-                tile.Air = null;
-                tile.AirArchived = null;
-                tile.ArchivedCycle = 0;
-                tile.LastShare = 0f;
-                tile.Hotspot = new Hotspot();
+                ShuntTileVolume(tile);
                 return;
             }
 
@@ -786,20 +783,5 @@ namespace Content.Server.Atmos.EntitySystems
             // We finished processing all atmospheres successfully, therefore we won't be paused next tick.
             _simulationPaused = false;
         }
-    }
-
-    public enum AtmosphereProcessingState : byte
-    {
-        Revalidate,
-        TileEqualize,
-        ActiveTiles,
-        ExcitedGroups,
-        HighPressureDelta,
-        DeltaPressure,
-        Hotspots,
-        Superconductivity,
-        PipeNet,
-        AtmosDevices,
-        NumStates
     }
 }

@@ -24,7 +24,7 @@ namespace Content.Server.Research.Systems
         [Dependency] private UserInterfaceSystem _uiSystem = default!;
         [Dependency] private SharedPopupSystem _popup = default!;
         [Dependency] private RadioSystem _radio = default!;
-        [Dependency] private StationSystem _station = default!;
+        [Dependency] private ServerStationSystem _station = default!;
         [Dependency] private EntityLookupSystem _lookup = default!;
         [Dependency] private ShuttleConsoleLockSystem _shuttleLock = default!;
 

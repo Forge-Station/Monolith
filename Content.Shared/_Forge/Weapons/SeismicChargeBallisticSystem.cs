@@ -13,9 +13,9 @@ namespace Content.Shared._Forge.Weapons;
 /// </summary>
 public sealed partial class SeismicChargeBallisticSystem : EntitySystem
 {
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private static readonly EntProtoId SeismicBulletProto = "BulletSeismicCharge";
     private static readonly EntProtoId SeismicChargeProto = "SeismicCharge";

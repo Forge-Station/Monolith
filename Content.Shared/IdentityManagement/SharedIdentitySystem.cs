@@ -30,6 +30,10 @@ public abstract partial class SharedIdentitySystem : EntitySystem
         }
     }
 
+    public virtual void QueueIdentityUpdate(EntityUid uid)
+    {
+    }
+
     protected virtual void OnComponentInit(EntityUid uid, IdentityComponent component, ComponentInit args)
     {
         component.IdentityEntitySlot = _container.EnsureContainer<ContainerSlot>(uid, SlotName);

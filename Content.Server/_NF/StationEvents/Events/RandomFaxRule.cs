@@ -13,7 +13,7 @@ public sealed partial class RandomFaxRule : StationEventSystem<RandomFaxRuleComp
 {
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private FaxSystem _faxSystem = default!;
-    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private ServerStationSystem _stationSystem = default!;
     [Dependency] private IRobustRandom _random = default!;
 
     private const int MaxRetries = 10;
@@ -64,7 +64,7 @@ public sealed partial class RandomFaxRule : StationEventSystem<RandomFaxRuleComp
                 continue;
             }
 
-            var grid = StationSystem.GetLargestGrid((chosenStation.Value, stationData));
+            var grid = ServerStationSystem.GetLargestGrid((chosenStation.Value, stationData));
 
             if (grid is null)
             {
@@ -118,7 +118,7 @@ public sealed partial class RandomFaxRule : StationEventSystem<RandomFaxRuleComp
                     locked: recipientPrintout.Locked,
                     stampProtected: recipientPrintout.StampProtected
                     );
-                _faxSystem.Receive(faxUid, printout, recipientAddress, faxComp);
+                _faxSystem.Receive(faxUid, printout, null, faxComp);
                 break;
             }
             stations.Add(chosenStation.Value);

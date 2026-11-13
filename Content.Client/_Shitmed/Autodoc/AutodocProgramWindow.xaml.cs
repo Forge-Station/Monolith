@@ -14,10 +14,10 @@ namespace Content.Client._Shitmed.Autodoc;
 [GenerateTypedNameReferences]
 public sealed partial class AutodocProgramWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IFileDialogManager _dialogManager = default!;
-    [Dependency] private readonly ILogManager _logMan = default!;
-    [Dependency] private readonly ISerializationManager _serMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IFileDialogManager _dialogManager = default!;
+    [Dependency] private ILogManager _logMan = default!;
+    [Dependency] private ISerializationManager _serMan = default!;
     private SharedAutodocSystem _autodoc = default!;
 
     public event Action? OnToggleSafety;

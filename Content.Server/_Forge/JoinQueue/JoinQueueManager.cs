@@ -20,7 +20,7 @@ namespace Content.Server._Forge.JoinQueue;
 /// <summary>
 ///     Manages new player connections when the server is full and queues them up, granting access when a slot becomes free
 /// </summary>
-public sealed class JoinQueueManager
+public sealed partial class JoinQueueManager
 {
     private static readonly Gauge QueueCount = Metrics.CreateGauge(
         "join_queue_count",
@@ -40,12 +40,12 @@ public sealed class JoinQueueManager
         });
 
 
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IConnectionManager _connection = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IServerNetManager _net = default!;
-    [Dependency] private readonly DiscordAuthManager _discordAuth = default!;
-    [Dependency] private readonly IPrototypeManager _protoMan = default!; // Forge-Change
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IConnectionManager _connection = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IServerNetManager _net = default!;
+    [Dependency] private DiscordAuthManager _discordAuth = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!; // Forge-Change
 
 
     /// <summary>

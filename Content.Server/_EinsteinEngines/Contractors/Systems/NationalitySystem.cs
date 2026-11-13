@@ -13,13 +13,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._EE.Contractors.Systems;
 
-public sealed class NationalitySystem : EntitySystem
+public sealed partial class NationalitySystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ISerializationManager _serialization = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private ISerializationManager _serialization = default!;
+    [Dependency] private PlayTimeTrackingManager _playTimeTracking = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
     private ISawmill _sawmill = default!;
 
     public override void Initialize()

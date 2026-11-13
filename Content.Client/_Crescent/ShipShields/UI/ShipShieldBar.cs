@@ -15,10 +15,10 @@ namespace Content.Client._Crescent.ShipShields.UI;
 /// Forge-Change: reads <see cref="ShipShieldGridStateComponent"/> on the configured grid so the HUD
 /// works even when the emitter or bubble are outside the client's PVS (e.g. another room on the same ship).
 /// </remarks>
-public sealed class ShipShieldBar : Control
+public sealed partial class ShipShieldBar : Control
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IEntityManager _entManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly Font _font;
 

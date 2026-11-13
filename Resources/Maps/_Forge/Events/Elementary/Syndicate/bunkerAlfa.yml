@@ -1313,7 +1313,7 @@ entities:
     missingComponents:
     - Construction
     - Weldable
-    - WirelessNetworkConnection
+    - WirelessNetwork
     - UserInterface
     - Destructible
   - uid: 1528
@@ -1345,7 +1345,7 @@ entities:
     missingComponents:
     - Construction
     - Weldable
-    - WirelessNetworkConnection
+    - WirelessNetwork
     - UserInterface
     - Destructible
   - uid: 1531
@@ -1377,7 +1377,7 @@ entities:
     missingComponents:
     - Construction
     - Weldable
-    - WirelessNetworkConnection
+    - WirelessNetwork
     - UserInterface
     - Destructible
   - uid: 1693
@@ -1423,7 +1423,7 @@ entities:
     missingComponents:
     - Construction
     - Weldable
-    - WirelessNetworkConnection
+    - WirelessNetwork
     - UserInterface
     - Destructible
 - proto: AmbrosiaDeusSeeds

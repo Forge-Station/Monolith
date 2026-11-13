@@ -1,6 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Server._Mono.Cleanup; // Forge-Change
+using Content.Server._NF.PublicTransit.Components; // Forge-Change
+using Content.Server._NF.Shuttles.Components; // Forge-Change
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
@@ -12,9 +15,12 @@ using Content.Shared.Ghost;
 using Content.Shared.Maps;
 using Content.Shared.Parallax;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Station.Components; // Forge-Change
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Whitelist;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
@@ -37,6 +43,7 @@ namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class ShuttleSystem
 {
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     /*
      * This is a way to move a shuttle from one location to another, via an intermediate map for fanciness.
      */
@@ -300,6 +307,12 @@ public sealed partial class ShuttleSystem
         float? hyperspaceTime = null,
         string? priorityTag = null)
     {
+        if (!coordinates.IsValid(EntityManager) || !double.IsFinite(angle.Theta))
+        {
+            Log.Error($"Found invalid FTL destination with coordinates {coordinates} and angle {angle} for shuttle {shuttleUid}");
+            return;
+        }
+
         // Check if destination is an expedition map
         bool isExpedition = IsTargetExpedition(coordinates);
 
@@ -410,15 +423,27 @@ public sealed partial class ShuttleSystem
         }
 
         var hyperspace = EnsureComp<FTLComponent>(shuttleUid);
+        // Forge-Change: EnsureComp leaves the default Available state. UpdateHyperspace treats that as
+        // invalid, logs, and deletes the component when the startup timer ends, so the jump never happens.
+        var beginStartup = hyperspace.State == FTLState.Available;
         SetupFTL(hyperspace, startupTime, hyperspaceTime, priorityTag);
+
+        if (beginStartup)
+        {
+            hyperspace.State = FTLState.Starting;
+            var audio = _audio.PlayPvs(_startupSound, shuttleUid);
+            _audio.SetGridAudio(audio);
+            hyperspace.StartupStream = audio?.Entity;
+        }
 
         if (TryComp<DockingComponent>(target, out var dock) && dock.Docked && dock.DockedWith != null)
         {
             hyperspace.TargetCoordinates = new EntityCoordinates(dock.DockedWith.Value, Vector2.Zero);
             hyperspace.TargetAngle = _transform.GetWorldRotation(dock.DockedWith.Value) + Math.PI;
         }
-        else if (TryFTLDock(shuttleUid, component, target, out var config))
+        else if (_dockSystem.GetDockingConfig(shuttleUid, target, priorityTag) is { } config)
         {
+            // Forge-Change: remember the dock for arrival. TryFTLDock would move the shuttle there immediately.
             hyperspace.TargetCoordinates = config.Coordinates;
             hyperspace.TargetAngle = config.Angle;
         }
@@ -454,6 +479,23 @@ public sealed partial class ShuttleSystem
     }
 
     /// <summary>
+    /// Forge-Change: only a shuttle that explicitly enabled its FTL lock rides along.
+    /// Stations, transit stops and POI grids stay put even if the dock button wrote a lock onto them.
+    /// </summary>
+    private bool CanJoinFtlGroup(EntityUid grid)
+    {
+        // The console lock button sets this flag on every docked grid, including a POI.
+        // These grids are world landmarks and must not be taken on someone else's jump.
+        if (HasComp<StationMemberComponent>(grid)
+            || HasComp<StationTransitComponent>(grid)
+            || HasComp<ForceAnchorComponent>(grid)
+            || HasComp<CleanupImmuneComponent>(grid))
+            return false;
+
+        return TryComp<FTLLockComponent>(grid, out var ftlLock) && ftlLock.Enabled;
+    }
+
+    /// <summary>
     /// Recursively gets all docked shuttles to the target shuttle.
     /// </summary>
     public void GetAllDockedShuttles(EntityUid shuttleUid, HashSet<EntityUid> dockedShuttles)
@@ -472,10 +514,9 @@ public sealed partial class ShuttleSystem
             if (dockedGridUid == EntityUid.Invalid || !HasComp<ShuttleComponent>(dockedGridUid))
                 continue;
 
-            // If the docked shuttle has no FTLLockComponent or has it but it's disabled, skip adding it
-            // to the FTL travel group, but still check its connections for potential conflicts
-            EnsureComp<FTLLockComponent>(dockedGridUid, out var ftlLock);
-            if (!ftlLock.Enabled)
+            // Forge-Change: a grid with no FTL lock stays where it is. EnsureComp used to create the lock
+            // already enabled, so a docked station was taken on the jump and spun apart.
+            if (!CanJoinFtlGroup(dockedGridUid))
             {
                 // Still check this shuttle's connections without adding it to dockedShuttles
                 var nestedDocks = _dockSystem.GetDocks(dockedGridUid);
@@ -493,9 +534,8 @@ public sealed partial class ShuttleSystem
                         !HasComp<ShuttleComponent>(nestedDockedGridUid))
                         continue;
 
-                    // Check if this grid should be added to the FTL travel group
-                    EnsureComp<FTLLockComponent>(nestedDockedGridUid, out var nestedFtlLock);
-                    if (nestedFtlLock.Enabled)
+                    // Forge-Change: same lock check as the parent dock. A station must not join from here either.
+                    if (CanJoinFtlGroup(nestedDockedGridUid))
                     {
                         GetAllDockedShuttles(nestedDockedGridUid, dockedShuttles);
                     }
@@ -669,8 +709,9 @@ public sealed partial class ShuttleSystem
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, DefaultArrivalTime);
         comp.State = FTLState.Arriving;
 
-        // Create visualizer if it doesn't exist
-        if (comp.VisualizerProto != null && comp.VisualizerEntity == null)
+        // Forge-Change: a shuttle that undocked mid-jump can still be Travelling with the default
+        // coordinates. SpawnAttachedTo throws on those and aborts the rest of the shuttle update.
+        if (comp.VisualizerProto != null && comp.VisualizerEntity == null && comp.TargetCoordinates.IsValid(EntityManager))
         {
             comp.VisualizerEntity = SpawnAttachedTo(entity.Comp1.VisualizerProto, entity.Comp1.TargetCoordinates);
             DebugTools.Assert(Transform(comp.VisualizerEntity.Value).ParentUid == entity.Comp1.TargetCoordinates.EntityId);
@@ -761,12 +802,27 @@ public sealed partial class ShuttleSystem
 
         if (!Exists(comp.TargetCoordinates.EntityId))
         {
-            // Uhh good luck
-            // Pick earliest map?
-            var maps = EntityQuery<MapComponent>().Select(o => o.MapId).ToList();
-            var map = maps.Min(o => o.GetHashCode());
-            mapId = new MapId(map);
-            TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            // Prefer a map that actually allows this shuttle, instead of whichever map id hashes lowest.
+            var allowed = EntityQuery<MapComponent, FTLDestinationComponent>()
+                .Where(o => _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, uid))
+                .OrderBy(o => o.Item1.MapId.GetHashCode())
+                .FirstOrDefault();
+
+            if (allowed.Item1 != null)
+            {
+                mapId = allowed.Item1.MapId;
+                TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            }
+            else
+            {
+                var maps = EntityQuery<MapComponent>().Select(o => o.MapId).ToList();
+                if (maps.Count == 0)
+                    return;
+
+                var map = maps.Min(o => o.GetHashCode());
+                mapId = new MapId(map);
+                TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            }
         }
         // Docking FTL
         else if (HasComp<MapGridComponent>(target.EntityId) && !HasComp<MapComponent>(target.EntityId))
@@ -929,10 +985,14 @@ public sealed partial class ShuttleSystem
         // Create a list to store entities that need to be processed to avoid collection modification issues
         var entitiesToProcess = new List<(EntityUid Uid, FTLComponent Comp, ShuttleComponent Shuttle)>();
 
-        // First, gather all entities to process
+        // Forge-Change: linked shuttles are moved by the shuttle that owns the jump.
+        // First, gather all entities to process.
         var query = EntityQueryEnumerator<FTLComponent, ShuttleComponent>();
         while (query.MoveNext(out var uid, out var comp, out var shuttle))
         {
+            if (comp.LinkedShuttle != null)
+                continue;
+
             if (curTime >= comp.StateTime.End)
             {
                 entitiesToProcess.Add((uid, comp, shuttle));
@@ -1548,6 +1608,22 @@ public sealed partial class ShuttleSystem
         // Get all docked shuttles
         var dockedShuttles = new HashSet<EntityUid>();
         GetAllDockedShuttles(uid, dockedShuttles);
+        // Forge-Change: release docks onto grids that are not coming along, before anyone is moved.
+        foreach (var member in dockedShuttles)
+        {
+            foreach (var dock in _dockSystem.GetDocks(member))
+            {
+                if (!TryComp<DockingComponent>(dock, out var dockComp) || !dockComp.Docked || dockComp.DockedWith == null)
+                    continue;
+
+                var otherGrid = _transform.GetParentUid(dockComp.DockedWith.Value);
+                if (otherGrid == EntityUid.Invalid || dockedShuttles.Contains(otherGrid))
+                    continue;
+
+                _dockSystem.Undock((dock, dockComp));
+            }
+        }
+
         // For docked shuttles, we want to move them as a single unit
         // So we'll store their relative transforms to the main shuttle before moving
         var relativeTransforms = new Dictionary<EntityUid, (Vector2 Position, Angle Rotation)>();
@@ -1623,11 +1699,14 @@ public sealed partial class ShuttleSystem
             _transform.SetWorldPosition(dockedUid, newPos);
             LeaveNoFTLBehind((dockedUid, dockedXform), dockedOldGridMatrix, dockedOldMapUid);
 
-            // Add FTL component to the docked shuttle and link it to the main shuttle
+            // Forge-Change: copy the destination. If this shuttle undocks mid-jump it finishes the trip on its own.
+            // Add FTL component to the docked shuttle and link it to the main shuttle.
             var dockedComp = EnsureComp<FTLComponent>(dockedUid);
             dockedComp.LinkedShuttle = uid;
             dockedComp.State = FTLState.Travelling;
+            dockedComp.TargetCoordinates = comp.TargetCoordinates;
             dockedComp.TargetAngle = comp.TargetAngle + relativeRot;
+            dockedComp.StateTime = StartEndTime.FromCurTime(_gameTiming, comp.TravelTime - DefaultArrivalTime);
 
             if (TryComp<PhysicsComponent>(dockedUid, out var dockedBody))
             {

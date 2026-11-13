@@ -5,10 +5,10 @@ using Content.Shared.Interaction;
 
 namespace Content.Server._Forge.ShuttleBinder;
 
-public sealed class ShuttleBeaconSystem : EntitySystem
+public sealed partial class ShuttleBeaconSystem : EntitySystem
 {
-    [Dependency] private readonly ShuttleTransmitterSystem _transmitterSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ShuttleTransmitterSystem _transmitterSystem = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

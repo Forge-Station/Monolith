@@ -19,6 +19,13 @@ ent-NTSecApartmentTabletEmpty = { ent-NTSecApartmentTablet }
     .desc = { ent-NTSecApartmentTablet.desc }
     .suffix = Пустой
 
+ent-TTISecApartmentTablet = портативный контроль персонала
+    .desc = Портативное устройство для контроля персонала, организации отрядов и координации действий.
+    .suffix = Заряженный
+ent-TTISecApartmentTabletEmpty = { ent-NTSecApartmentTablet }
+    .desc = { ent-NTSecApartmentTablet.desc }
+    .suffix = Пустой
+
 ent-EmpireSecApartmentTablet = портативный контроль персонала
     .desc = Портативное устройство для контроля персонала, организации отрядов и координации действий.
     .suffix = НЕ СПАВНИТЬ

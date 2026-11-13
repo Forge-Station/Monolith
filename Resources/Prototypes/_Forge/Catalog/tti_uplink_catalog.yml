@@ -406,6 +406,22 @@
           - FactionStaticUplinkTTI
 
 - type: listing
+  id: UplinkTTIBlueprintTurret
+  name:  uplink-tti-blueprint-turret-name
+  description: uplink-tti-blueprint-turret-desc
+  productEntity: BlueprintTurretTTI
+  icon: { sprite: Objects/Weapons/Guns/Turrets/turrets.rsi, state: syndie_lethal }
+  cost:
+    TTIMedicalCredit: 50
+  categories:
+    - UplinkTTIBlueprints
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - FactionStaticUplinkTTI
+
+- type: listing
   id: UplinkTTIBlueprintTTIClothing
   name:  uplink-tti-blueprinttticlothing-name
   description: uplink-tti-blueprinttticlothing-desc

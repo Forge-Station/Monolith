@@ -30,7 +30,7 @@
   - type: CrewMonitoringConsole
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: CrewNanotrasenMonitor
+    receiveFrequencyId: CrewTTIMonitor
   - type: HealthAnalyzer
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"

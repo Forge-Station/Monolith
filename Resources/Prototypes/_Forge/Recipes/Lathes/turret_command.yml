@@ -409,3 +409,48 @@
     Glass: 500
     Plastic: 500
 
+#region TTI
+- type: latheRecipe
+  id: WeaponTurretTraumaPacked
+  result: WeaponTurretTraumaPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretTraumaShotgunPacked
+  result: WeaponTurretTraumaShotgunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretTraumaSniperPacked
+  result: WeaponTurretTraumaSniperPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+
+- type: latheRecipe
+  id: WeaponTurretTraumaMachinegunPacked
+  result: WeaponTurretNTMachinegunPacked
+  categories:
+  - Turrets
+  completetime: 10
+  materials:
+    Steel: 2000
+    Glass: 500
+    Plastic: 500
+

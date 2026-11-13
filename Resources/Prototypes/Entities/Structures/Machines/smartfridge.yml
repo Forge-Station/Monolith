@@ -48,6 +48,8 @@
       - Pill
       - Produce
       - Seed
+      - Organ #Forge-Change
+      - BodyPart #Forge-Change
       tags:
       - PillCanister
       - Bottle
@@ -121,9 +123,9 @@
 - type: entity
   parent: SmartFridge
   id: SmartFridgeMedical
-  suffix: Medical, Locked # Mono
+  suffix: TTI, Locked # Mono #Forge
   components:
   - type: SmartFridge
     flavorText: smart-fridge-request-chemistry
   - type: AccessReader
-    access: [["Medical"]]
+    access: [["Trauma"]] #Forge-Change

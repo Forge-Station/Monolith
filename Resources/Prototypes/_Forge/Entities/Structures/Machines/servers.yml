@@ -99,7 +99,7 @@
   parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
   suffix: NT
   name: crew NT monitoring server
-  description: Receives and relays the status of all active NT and TTI implant sensors.
+  description: Receives and relays the status of all active NT implant sensors.
   components:
     - type: Sprite
       sprite: _Forge/Structures/Machines/server.rsi
@@ -110,6 +110,24 @@
       deviceNetId: Wireless
       transmitFrequencyId: CrewNanotrasenMonitor
       receiveFrequencyId: SuitNanotrasenSensor
+      autoConnect: false
+
+- type: entity
+  id: CrewMonitoringTTIServer
+  parent: [CrewMonitoringServer, BaseStructureDisableToolUse]
+  suffix: TTI
+  name: crew TTI monitoring server
+  description: Receives and relays the status of all active TTI implant sensors.
+  components:
+    - type: Sprite
+      sprite: _Forge/Structures/Machines/server.rsi
+      layers:
+        - state: server-crew
+        - state: variant-crew-nt
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: CrewTTIMonitor
+      receiveFrequencyId: SuitTTISensor
       autoConnect: false
 
 - type: entity

@@ -89,3 +89,20 @@
   components:
   - type: AccessReader
     access: [["Remnant"]]
+
+#region TTI
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsTrauma
+  suffix: TTI, Locked
+  components:
+  - type: AccessReader
+    access: [["Trauma"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsTraumaCommand
+  suffix: TTI, Command, Locked
+  components:
+  - type: AccessReader
+    access: [["TraumaCommand"]]

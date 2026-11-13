@@ -16,6 +16,7 @@ station-ai-customization-applied = Личность ИИ обновлена.
 station-ai-default-name = Станционный ИИ
 station-ai-core-default-name = Ядро ИИ
 station-ai-screen-default = Стандартный
+station-ai-screen-default = Предтеч
 station-ai-screen-face = Парящее лицо
 
 station-ai-screen-ipc-static = Статика

@@ -67,10 +67,6 @@
     - Alive
     - Critical
     - Dead
-    stateAlertDict:
-      Alive: BorgHealth
-      Critical: BorgCrit
-      Dead: BorgDead
   - type: Access
     tags:
     - Remnant
@@ -83,12 +79,16 @@
       0: Alive
       150: Critical
       200: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Critical: BorgCrit
+      Dead: BorgDead
+    showOverlays: false
+    allowRevives: true
   - type: SlowOnDamage
     speedModifierThresholds:
       75: 0.7
       125: 0.5
-    showOverlays: false
-    allowRevives: true
   - type: HealthExaminable
     examinableTypes:
       - Blunt
@@ -213,7 +213,7 @@
 
 - type: entity
   parent: MobForerunnerSiliconBase
-  id: MobForerunnerBorgEngineer
+  id: MobForerunnerEngiSiliconWeak
   name: remnant engineer cyborg
   description: An ancient engineering chassis. Its tools are crude now, but it still knows how to take a wall apart.
   suffix: Forge, Remnant, AI, Engineer
@@ -278,7 +278,7 @@
 
 - type: entity
   parent: MobForerunnerSiliconBase
-  id: MobForerunnerBorgAssault
+  id: MobForerunnerAssaultSiliconWeak
   name: remnant assault cyborg
   description: A stripped assault chassis. Its gun still works. Barely.
   suffix: Forge, Remnant, AI, Assault

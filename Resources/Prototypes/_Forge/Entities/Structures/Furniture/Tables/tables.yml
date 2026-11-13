@@ -11,4 +11,3 @@
     sprite: _Forge/Structures/Furniture/Tables/forerunner.rsi
   - type: IconSmooth
     key: metaltable
-    base: state_

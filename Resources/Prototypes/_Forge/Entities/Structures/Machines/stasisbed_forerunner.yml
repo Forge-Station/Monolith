@@ -32,6 +32,7 @@
         mask:
         - LowImpassable
   - type: Sprite
+    noRot: true
     sprite: _Forge/Structures/Machines/stasisbed_forerunner.rsi
     layers:
     - state: icon
@@ -39,7 +40,6 @@
       shader: unshaded
       map: ["enum.StasisBedVisualLayers.IsOn"]
   - type: StasisBedVisuals
-    noRot: true
   - type: Strap
     position: Down
     rotation: -90

@@ -682,7 +682,7 @@
     - MobLaserRaptor
     rarePrototypes:
     - MobXenoCMWarrior
-    - MobForerunnerBorg
+    - MobForerunnerEngiSiliconWeak
     - MobArgocytePouncer
     rareChance: 0.15
     chance: 1

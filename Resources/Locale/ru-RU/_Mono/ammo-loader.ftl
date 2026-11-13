@@ -6,10 +6,10 @@ ammo-loader-flushed = Боеприпасы поданы!
 ammo-loader-no-artillery = К загрузчику не привязана корабельная артиллерия.
 ammo-loader-transfer-failed = Не удалось передать боеприпасы связанной артиллерии.
 ammo-loader-insert-fail = Загрузчик полон.
-ammo-loader-turret-locked = Боеприпасы этой турели нельзя заменить.
-ammo-loader-incompatible-ammo = Эти боеприпасы несовместимы с выбранной турелью.
-ammo-loader-load-failed = Не удалось зарядить турель.
-ammo-loader-unload-failed = Не удалось выгрузить боеприпасы из турели.
+ammo-loader-turret-locked = Боеприпасы этого орудия нельзя заменить.
+ammo-loader-incompatible-ammo = Эти боеприпасы несовместимы с выбранным орудием.
+ammo-loader-load-failed = Не удалось зарядить орудие.
+ammo-loader-unload-failed = Не удалось выгрузить боеприпасы из орудия.
 
 ammo-loader-flush-to-artillery-with-ammo-and-id = Подать в { $artillery } ({ $ammo }/{ $capacity }) [{ $id }]
 ammo-loader-flushed-to-artillery = Боеприпасы поданы в { $artillery }!

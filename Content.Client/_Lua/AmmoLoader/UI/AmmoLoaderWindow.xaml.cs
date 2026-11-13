@@ -75,6 +75,7 @@ public sealed partial class AmmoLoaderWindow : FancyWindow
     public event Action<EntProtoId, bool>? OnUnloadOne;
     public event Action<NetEntity, EntProtoId>? OnLoadTurret;
     public event Action<NetEntity>? OnUnloadTurret;
+    public event Action? OnReplenish; // Forge-Change
 
     public AmmoLoaderWindow()
     {
@@ -91,6 +92,7 @@ public sealed partial class AmmoLoaderWindow : FancyWindow
         };
         ConfigurePrototypeIcon(_dragShadow);
         EjectAllButton.OnPressed += _ => EjectQuickUnloadQueue();
+        ReplenishButton.OnPressed += _ => OnReplenish?.Invoke(); // Forge-Change
         UnloadOneButton.OnPressed += _ => OnUnloadPressed();
         ConfigurePrototypeIcon(SelectedIcon);
         LayoutContainer.SetAnchorAndMarginPreset(SelectedIcon, LayoutContainer.LayoutPreset.Wide, margin: 34);
@@ -192,7 +194,8 @@ public sealed partial class AmmoLoaderWindow : FancyWindow
         _linkedTurrets.Clear();
         if (state.LinkedTurrets != null) _linkedTurrets.AddRange(state.LinkedTurrets);
         _maxConnections = Math.Max(1, state.MaxConnections > 0 ? state.MaxConnections : DefaultTurretColumns);
-        TurretGrid.Columns = _maxConnections;
+        // Forge-Change: a ship can have more guns than the old link cap, so the row stays wide enough to scan.
+        TurretGrid.Columns = Math.Max(8, Math.Min(12, Math.Max(_maxConnections, _linkedTurrets.Count)));
         _slotPanels.Clear();
         _slotTitles.Clear();
         _turretPanels.Clear();

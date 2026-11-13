@@ -23,6 +23,26 @@ public sealed class AmmoLoaderUiSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
+    private float _uiAccumulator;
+
+    public override void Update(float frameTime)
+    {
+        // Forge-Change: keep an open loader window on the guns of this ship.
+        _uiAccumulator += frameTime;
+        if (_uiAccumulator < 1f)
+            return;
+
+        _uiAccumulator = 0f;
+        var query = EntityQueryEnumerator<AmmoLoaderComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (!_ui.IsUiOpen(uid, AmmoLoaderUiKey.Key))
+                continue;
+
+            UpdateUi((uid, comp));
+        }
+    }
+
     public override void Initialize()
     {
         base.Initialize();
@@ -40,11 +60,13 @@ public sealed class AmmoLoaderUiSystem : EntitySystem
             subs.Event<AmmoLoaderEjectAllMessage>(OnEjectAll);
             subs.Event<AmmoLoaderLoadTurretMessage>(OnLoadTurret);
             subs.Event<AmmoLoaderUnloadTurretMessage>(OnUnloadTurret);
+            subs.Event<AmmoLoaderReplenishMessage>(OnReplenish); // Forge-Change
         });
     }
 
     private void OnUiOpened(Entity<AmmoLoaderComponent> ent, ref BoundUIOpenedEvent args)
     {
+        _ammoLoader.RefreshGridGuns(ent); // Forge-Change
         _ammoLoader.EjectEmptyContainers(ent, args.Actor);
         UpdateUi(ent);
     }
@@ -157,6 +179,14 @@ public sealed class AmmoLoaderUiSystem : EntitySystem
 
         if (_ammoLoader.TryLoadAmmoToTurret(ent, turret.Value, args.AmmoPrototypeId, args.Actor))
             UpdateUi(ent);
+    }
+
+    // Forge-Change
+    private void OnReplenish(Entity<AmmoLoaderComponent> ent, ref AmmoLoaderReplenishMessage args)
+    {
+        _ammoLoader.RefreshGridGuns(ent);
+        _ammoLoader.TryReplenish(ent, args.Actor);
+        UpdateUi(ent);
     }
 
     private void OnUnloadTurret(Entity<AmmoLoaderComponent> ent, ref AmmoLoaderUnloadTurretMessage args)

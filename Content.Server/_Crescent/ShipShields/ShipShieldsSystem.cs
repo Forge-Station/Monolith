@@ -139,7 +139,10 @@ public sealed partial class ShipShieldsSystem : EntitySystem
                 emitter.OverloadAccumulator = pun;
             }
 
-            if (!operational || disabledGrid || emitter.Recharging || emitter.OverloadAccumulator > 0)
+            // Forge-Change: a helm or generator switch stays off. The next emitter tick used to raise the field again.
+            var manuallyOff = !IsWolfgateShieldEnabled(parent.Value);
+
+            if (!operational || disabledGrid || manuallyOff || emitter.Recharging || emitter.OverloadAccumulator > 0)
             {
                 if (emitter.Shield is not null || emitter.Shielded is not null
                     || (TryComp<ShipShieldedComponent>(parent.Value, out var shielded) && shielded.Source == uid))
@@ -526,33 +529,9 @@ public sealed partial class ShipShieldsSystem : EntitySystem
             Dirty(shield, shieldVisuals);
         }
 
-        var gridCenter = new EntityCoordinates(entity, mapGrid.LocalAABB.Center);
-        _transformSystem.SetCoordinates(shield, gridCenter);
-        _transformSystem.SetWorldRotation(shield, _transformSystem.GetWorldRotation(entity));
-
-        var chain = GenerateOvalFixture(shield, "shield", shieldPhysics, mapGrid, shieldVisuals.Padding);
-
-        List<Vector2> roughPoly = new();
-
-        var interval = chain.Count / PhysicsConstants.MaxPolygonVertices;
-
-        int i = 0;
-
-        while (i < PhysicsConstants.MaxPolygonVertices)
-        {
-            roughPoly.Add(chain.Vertices[i * interval]);
-            i++;
-        }
-
-        var internalPoly = new PolygonShape();
-        internalPoly.Set(roughPoly);
-
-        _fixtureSystem.TryCreateFixture(shield, internalPoly, "internalShield",
-            hard: true,
-            collisionLayer: (int)CollisionGroup.BulletImpassable, // Mono - Only try to block bullets
-            body: shieldPhysics);
-
-        _physicsSystem.WakeBody(shield, body: shieldPhysics);
+        // Forge-Change: raise the hull perimeter immediately. The bounding-box oval and its filled interior
+        // stayed up until a tile change, and the interior kept blocking a fully shunted gap.
+        CreateWolfgateShieldHull(shield, entity, mapGrid, shieldPhysics);
         _physicsSystem.SetSleepingAllowed(shield, shieldPhysics, false);
 
         // Forge-Change: removed _pvsSys.AddGlobalOverride(shield); the bubble is a regular grid-anchored
@@ -577,51 +556,6 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         TryQueueDel(component.Shield);
         RemComp<ShipShieldedComponent>(uid);
         return true;
-    }
-
-    private ChainShape GenerateOvalFixture(EntityUid uid, string name, PhysicsComponent physics, MapGridComponent mapGrid, float padding)
-    {
-        float radius;
-        float scale;
-        var scaleX = true;
-
-        var height = mapGrid.LocalAABB.Height + padding;
-        var width = mapGrid.LocalAABB.Width + padding;
-
-        if (width > height)
-        {
-            radius = 0.5f * height;
-            scale = width / height;
-        }
-        else
-        {
-            radius = 0.5f * width;
-            scale = height / width;
-            scaleX = false;
-        }
-
-        var chain = new ChainShape();
-
-        chain.CreateLoop(Vector2.Zero, radius);
-
-        for (int i = 0; i < chain.Vertices.Length; i++)
-        {
-            if (scaleX)
-            {
-                chain.Vertices[i].X *= scale;
-            }
-            else
-            {
-                chain.Vertices[i].Y *= scale;
-            }
-        }
-
-        _fixtureSystem.TryCreateFixture(uid, chain, name,
-            hard: false,
-            collisionLayer: (int)CollisionGroup.BulletImpassable, // Mono - Only blocks bullets
-            body: physics);
-
-        return chain;
     }
 
     [ByRefEvent]

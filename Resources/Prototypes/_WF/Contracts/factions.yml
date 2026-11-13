@@ -11,3 +11,12 @@
 - type: wfContractFaction
   id: WFContractFactionUSSP
   companies: [ USSP ]
+
+# Forge-Change: the sides that actually spawn.
+- type: wfContractFaction
+  id: WFContractFactionRenegate
+  companies: [ Renegates ]
+
+- type: wfContractFaction
+  id: WFContractFactionSIV
+  companies: [ Imperial ]

@@ -12,10 +12,14 @@ ammo-loader-window-empty = EMPTY
 ammo-loader-window-empty-count = EMPTY x{ $count }
 ammo-loader-window-unload = UNLOAD
 ammo-loader-window-unload-one = UNLOAD ONE
-ammo-loader-window-unload-turret = UNLOAD FROM TURRET
+ammo-loader-window-unload-turret = UNLOAD FROM GUN
 ammo-loader-window-eject-all = UNLOAD ALL
-ammo-loader-window-linked-turrets = LINKED TURRETS
-ammo-loader-window-turret-info = TURRET INFO
+ammo-loader-window-linked-turrets = SHIP GUNS
+ammo-loader-window-replenish = Replenish
+ammo-loader-replenished = Guns replenished: { $count }
+ammo-loader-replenish-none = Nothing to replenish.
+ammo-loader-examine-auto = Feeds the ship guns on this grid ({ $count }) from its storage. A multitool can still link a gun on another grid.
+ammo-loader-window-turret-info = GUN INFO
 ammo-loader-window-turret-loaded = LOADED
 ammo-loader-window-turret-ammo = { $current }/{ $max }
 

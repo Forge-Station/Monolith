@@ -69,6 +69,12 @@ public static class WolfgateSkins
         "/Fonts/NotoSans/NotoSansSC-Regular.ttf",
     };
 
+    // Forge-Change: Iceberg has no Cyrillic, so Russian letters are drawn with Tektur before Noto is reached.
+    private static readonly string[] CyrillicFallback =
+    {
+        "/Fonts/Tektur/Tektur-Regular.ttf",
+    };
+
     private static readonly string[] MonoStack =
     {
         "/Fonts/RobotoMono/RobotoMono-Bold.ttf",
@@ -86,8 +92,8 @@ public static class WolfgateSkins
         Name = "wf-ui-style-wolfgate",
         TexturePath = "/Textures/_WF/Stylesheets/Interface/Wolfgate/Style/",
         HudTheme = "WFTheme",
-        DisplayFonts = new[] { "/Fonts/Iceberg/Iceberg-Regular.ttf" }.Concat(NotoFallback).ToArray(),
-        MenuFonts = new[] { "/Fonts/Iceberg/Iceberg-Regular.ttf" }.Concat(NotoFallback).ToArray(),
+        DisplayFonts = new[] { "/Fonts/Iceberg/Iceberg-Regular.ttf" }.Concat(CyrillicFallback).Concat(NotoFallback).ToArray(),
+        MenuFonts = new[] { "/Fonts/Iceberg/Iceberg-Regular.ttf" }.Concat(CyrillicFallback).Concat(NotoFallback).ToArray(),
         MonoFonts = MonoStack,
 
         Accent = Color.FromHex("#46D7FF"),

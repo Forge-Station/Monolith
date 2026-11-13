@@ -298,10 +298,10 @@ wf-contract-tsf-escort-supply-brief = A Marine Corps supply freighter is bound f
 
 wf-contractor-tsf-requisitions = TSF Naval Requisitions
 wf-contractor-tsf-requisitions-desc = Federation work for Federation people, paid in thalers and Federation credits.
-wf-contractor-ussp-commissariat = USSP Commissariat
-wf-contractor-ussp-commissariat-desc = The freeport's own needs, posted for its own citizens at good rates.
-wf-contractor-pdv-quartermaster = PDV Quartermaster
-wf-contractor-pdv-quartermaster-desc = Prizes and stores wanted at Helios, paid in thalers and doubloons.
+wf-contractor-ussp-commissariat = Renegade Commissariat
+wf-contractor-ussp-commissariat-desc = The outpost's own work, posted for Renegades only.
+wf-contractor-pdv-quartermaster = SIV Quartermaster
+wf-contractor-pdv-quartermaster-desc = The Empire's own work, posted for its garrison only.
 
 wf-contract-tsf-faction-patrol = Lane patrol near the Halcyon
 wf-contract-tsf-faction-patrol-brief = Naval Requisitions wants {$target} cleared off a Federation lane about {$km} km from the Halcyon. Federation personnel and civilians only. Paid in thalers and Federation credits.
@@ -412,8 +412,8 @@ wf-contractor-halcyon-employer = the Trans-Solar Federation Marine Corps
 wf-contractor-camelot-employer = Freeport Camelot, a USSP port
 wf-contractor-anomalous-lab-employer = the Anomalous Lab, an independent research station
 wf-contractor-tsf-requisitions-employer = the Trans-Solar Federation Navy (TSF members only)
-wf-contractor-ussp-commissariat-employer = the USSP (USSP citizens only)
-wf-contractor-pdv-quartermaster-employer = the PDV (PDV members only)
+wf-contractor-ussp-commissariat-employer = the Renegade Colonies (Renegades only)
+wf-contractor-pdv-quartermaster-employer = the Vermillion Empire (SIV only)
 
 ## Second batch.
 

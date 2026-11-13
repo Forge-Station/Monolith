@@ -64,7 +64,7 @@
 #    - EncryptionKeyCentCom # Forge-Change-Remove
     - EncryptionKeyStationMasterSR #Mono start
     - EncryptionKeyDiplomacy
-    - EncryptionKeyHospital # Forge
+    #- EncryptionKeyHospital # Forge-change-remove
     - ShipVoucherFrontierGuard
     - PhoneInstrumentHigh
     #- CCHandheldOverwatchConsole #Forge-Change-Remove

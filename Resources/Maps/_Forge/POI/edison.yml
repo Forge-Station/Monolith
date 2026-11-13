@@ -7228,15 +7228,13 @@ entities:
     - type: Transform
       parent: 1
       pos: 11.850059,8.696488
-- proto: BsTransmitterStationaryT3
+- proto: BsTransmitterStationaryPOI
   entities:
   - uid: 863
     components:
     - type: Transform
       parent: 1
       pos: 12.5,28.5
-    missingComponents:
-    - Anchorable
 - proto: BunkBottom
   entities:
   - uid: 864

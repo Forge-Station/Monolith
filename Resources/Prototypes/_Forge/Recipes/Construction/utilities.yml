@@ -1,0 +1,15 @@
+- type: construction
+  name: drain
+  description: Drains puddles around it. Useful for dumping mop buckets or keeping certain rooms clean.
+  id: FloorDrain
+  graph: FloorDrain
+  startNode: start
+  targetNode: drain
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: Objects/Specific/Janitorial/drain.rsi
+    state: icon
+  conditions:
+    - !type:NoUnstackableInTile

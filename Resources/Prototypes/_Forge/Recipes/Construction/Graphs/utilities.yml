@@ -1,0 +1,28 @@
+- type: constructionGraph
+  id: FloorDrain
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: drain
+          steps:
+            - material: Steel
+              amount: 30
+            - material: Plasteel
+              amount: 10
+              doAfter: 5
+    - node: drain
+      entity: FloorDrain
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 30
+            - !type:SpawnPrototype
+              prototype: SheetPlasteel1
+              amount: 10
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Anchoring
+              doAfter: 4

@@ -22,7 +22,7 @@
       stationProto: StandardFrontierVessel
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'GSI Бескрылый SRP-MIL{1}'
+          mapNameTemplate: 'GSI Стилетто SRP-MIL{1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: '14'

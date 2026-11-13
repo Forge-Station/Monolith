@@ -2,6 +2,7 @@
   name: asakim corpse
   id: SpawnAsakimCorpse
   parent: MarkerBasePlaceFree
+  description: I think they're dead.
   suffix: Dead
   components:
   - type: Sprite

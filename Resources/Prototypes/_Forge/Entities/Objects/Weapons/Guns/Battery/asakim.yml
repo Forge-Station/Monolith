@@ -3,7 +3,7 @@
   parent: [BaseWeaponBattery, BaseGunWieldable, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: WeaponRifleADMAutopulserForge
   description: An advanced handheld plasma rifle. The design bears similarities to pre-fracture plasma weapons.
-  suffix: Forge
+  suffix: Forge, ADM
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Battery/asakimrifle.rsi
@@ -54,7 +54,7 @@
   parent: [BaseWeaponBattery, BaseGunWieldable, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   id: WeaponRifleAsakimAutopulserForge
   description: An advanced handheld plasma rifle. The design bears similarities to pre-fracture plasma weapons.
-  suffix: Forge
+  suffix: Forge, Asakim, Biocode
   components:
   - type: Sprite
     sprite: _Mono/Objects/Weapons/Guns/Battery/asakimrifle.rsi

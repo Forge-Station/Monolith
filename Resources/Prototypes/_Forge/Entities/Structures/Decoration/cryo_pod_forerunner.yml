@@ -2,7 +2,7 @@
   parent: BaseStructure
   id: CryoPodAsakimForerunner
   name: asakim cryo pod
-  description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
+  description: A monolithic forerunner sarcophagus that slows entropy and molecular motion within itself for the safe application of exotic catalysts.
   components:
   - type: Sprite
     sprite: _Forge/Structures/Decoration/cryogenics_forerunner.rsi
@@ -53,9 +53,6 @@
             ShardGlass:
              min: 1
              max: 3
-            CryoPodDestroyedADS:
-             min: 1
-             max: 1
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
   - type: PointLight
@@ -67,7 +64,7 @@
   parent: BaseStructure
   id: CryoPodBiomassForerunner
   name: biomass cryo pod
-  description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
+  description: A Forerunner containment cryo-sarcophagus intended to completely suppress the metabolism and anomalous activity of entities sealed within.
   components:
   - type: Sprite
     sprite: _Forge/Structures/Decoration/cryogenics_forerunner.rsi
@@ -115,9 +112,6 @@
             ShardGlass:
              min: 1
              max: 3
-            CryoPodDestroyedADS:
-             min: 1
-             max: 1
         - !type:SpillBehavior
           solution: pod
         - !type:DoActsBehavior
@@ -174,7 +168,7 @@
 
 - type: entity
   parent: BaseStructure
-  id: CryoPodEmptyADS
+  id: CryoPodEmptyForerunner
   name: empty cryo pod
   description: A special machine intended to create a safe environment for the use of chemicals that react in cold environments.
   components:
@@ -215,8 +209,5 @@
             ShardGlass:
              min: 1
              max: 3
-            CryoPodDestroyedADS:
-             min: 1
-             max: 1
         - !type:DoActsBehavior
           acts: [ "Destruction" ]

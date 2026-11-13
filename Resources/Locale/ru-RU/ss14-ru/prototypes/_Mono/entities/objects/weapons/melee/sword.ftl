@@ -5,7 +5,7 @@ ent-WeaponVT7 = VT-7 высокочастотный клинок
 ent-WeaponMurasama = VT-7 HF меч "Мурамаса"
     .desc = Ты здесь главный.
 ent-WeaponPhaseBlade = нано-ламинатный фазовый клинок
-    .desc = Тяжёлое клинковое оружие с злобным лезвием, часто в руках доколлапсных воинов. Можно активировать под бой.
+    .desc = .desc = Тяжёлое клинковое оружие с зазубренным лезвием, частое оружие в руках воинов существовавших до разлома. Можно активировать.
 ent-WeaponPhaseBladeForge = { ent-WeaponPhaseBlade }
     .desc = { ent-WeaponPhaseBlade.desc }
     .suffix = Forge

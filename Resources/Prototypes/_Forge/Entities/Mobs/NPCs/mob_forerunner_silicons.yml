@@ -54,6 +54,7 @@
     damageModifierSet: FactionBorgChassis
   - type: NpcFactionMember
     factions:
+    - Syndicate
     - SyndicateNF
     - SiliconsExpeditionNF
   - type: NameIdentifier
@@ -137,9 +138,9 @@
   parent:
   - MobForerunnerSiliconBase
   id: MobForerunnerEngiSilicon
-  name: ADS unit
+  name: ADM unit
   description: This ancient unit was created for auxiliary tasks, but don't be fooled—with its relic technologies, it is highly dangerous.
-  suffix: AI, Forerunner, Forge
+  suffix: AI, Forerunner, Forge, Engineer
   components:
   - type: Sprite
     sprite: Mobs/Silicon/chassis.rsi
@@ -168,9 +169,9 @@
   parent:
   - MobForerunnerSiliconBase
   id: MobForerunnerAssaultSilicon
-  name: Assault ADS unit
+  name: Assault ADM unit
   description: These units come from ancient times, and are designed to be the ultimate combat units. They are extremely dangerous, and should be avoided at all costs.
-  suffix: AI, Forerunner, Forge
+  suffix: AI, Forerunner, Forge, Assault
   components:
   - type: Sprite
     sprite: Mobs/Silicon/chassis.rsi
@@ -209,13 +210,6 @@
 
 # Weaker AI remnant/forerunner cyborgs for mapped ruins and containment.
 # These are not player chassis — they do not take ghost roles or modules.
-
-- type: entity
-  parent: MobForerunnerSiliconBase
-  id: MobForerunnerBorg
-  name: remnant cyborg
-  description: A scavenged precursor chassis running on leftover directives. Weaker than a living tender, still happy to cave a skull in.
-  suffix: Forge, Remnant, AI
 
 - type: entity
   parent: MobForerunnerSiliconBase

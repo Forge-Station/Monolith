@@ -255,6 +255,7 @@
         volume: 15
     initialBeepDelay: 0
     beepInterval: 0.5
+  - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
     deleteAfterExplosion: true

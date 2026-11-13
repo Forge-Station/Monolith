@@ -213,7 +213,7 @@
   parent: WeaponPhaseBladeForge
   id: WeaponPhaseDoubleBladeForge
   name: nano-laminate double phaseblade
-  description: A heavy bladed weapon with a wicked edge, commonly seen in the hands of pre-fracture warriors. Can be activated to adjust to combat needs
+  description: A heavy double bladed weapon with a wicked edge, commonly seen in the hands of pre-fracture warriors. Can be activated to adjust to combat needs
   suffix: Forge
   components:
   - type: ComponentToggler
@@ -228,3 +228,13 @@
       reflectProb: 0.5
     - type: DisarmMalus
       malus: 0.7
+  - type: Item
+    sprite: _Forge/Objects/Weapons/Melee/double_phaseblade.rsi
+    size: Huge
+  - type: Clothing
+    sprite: _Forge/Objects/Weapons/Melee/double_phaseblade.rsi
+    slots:
+    - Back
+    - SuitStorage
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Melee/double_phaseblade.rsi

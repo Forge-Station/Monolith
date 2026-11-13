@@ -1,9 +1,11 @@
 - type: entity
   name: devastator explosive device
-  description: This button activates the relic explosive device embedded in the casing.
+  description: This button activates the relic explosive device embedded in the casing. Your choice will be final.
   parent: GrenadeBase
   id: ADMDevastatorExplosive
   components:
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Bombs/breaching.rsi
   - type: Explosive
     explosionType: Default
     maxIntensity: 500
@@ -12,7 +14,7 @@
     maxTileBreak: 0
     canCreateVacuum: false
   - type: OnUseTimerTrigger
-    delay: 5
+    delay: 15
     beepSound:
       path: /Audio/Effects/beep1.ogg
       params:

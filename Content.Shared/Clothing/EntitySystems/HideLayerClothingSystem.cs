@@ -10,6 +10,7 @@ public sealed partial class HideLayerClothingSystem : EntitySystem
 {
     [Dependency] private SharedHumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

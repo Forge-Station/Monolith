@@ -88,32 +88,32 @@
   description: wf-contractor-tsf-requisitions-desc
   employer: wf-contractor-tsf-requisitions-employer
   color: "#6fb6ff"
-  stations: [ TSFMCHalcyon ]
+  stations: [ TSFMCHalcyon ] # Forge-Change: Forge Halcyon, map TSFChalcyonForge
   board: TSF
   companies: [ TSF, TSFHighComm ]
   offers: 4
   order: 10
 
-# - type: wfContractor
-#   id: WFContractorUSSPCommissariat
-#   name: wf-contractor-ussp-commissariat
-#   description: wf-contractor-ussp-commissariat-desc
-#   employer: wf-contractor-ussp-commissariat-employer
-#   color: "#d0573f"
-#   stations: [ USSPCamelot ]
-#   board: USSP
-#   companies: [ USSP ]
-#   offers: 4
-#   order: 11
+- type: wfContractor
+  id: WFContractorUSSPCommissariat
+  name: wf-contractor-ussp-commissariat
+  description: wf-contractor-ussp-commissariat-desc
+  employer: wf-contractor-ussp-commissariat-employer
+  color: "#d0573f"
+  stations: [ RenegateFortress ] # Forge-Change: ВКР, not Camelot
+  board: Renegate
+  companies: [ Renegates ]
+  offers: 4
+  order: 11
 
-# - type: wfContractor
-#   id: WFContractorPDVQuartermaster
-#   name: wf-contractor-pdv-quartermaster
-#   description: wf-contractor-pdv-quartermaster-desc
-#   employer: wf-contractor-pdv-quartermaster-employer
-#   color: "#d4a83a"
-#   stations: [ HeliosFortress ]
-#   board: PDV
-#   companies: [ PDV ]
-#   offers: 4
-#   order: 12
+- type: wfContractor
+  id: WFContractorPDVQuartermaster
+  name: wf-contractor-pdv-quartermaster
+  description: wf-contractor-pdv-quartermaster-desc
+  employer: wf-contractor-pdv-quartermaster-employer
+  color: "#d4a83a"
+  stations: [ EmpireOutpost ] # Forge-Change: СИВ, not Helios
+  board: SIV
+  companies: [ Imperial ]
+  offers: 4
+  order: 12

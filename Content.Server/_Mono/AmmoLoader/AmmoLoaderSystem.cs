@@ -9,6 +9,7 @@ using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged;
@@ -37,6 +38,7 @@ public sealed partial class AmmoLoaderSystem : EntitySystem
         SubscribeLocalEvent<AmmoLoaderComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<AmmoLoaderComponent, AfterInteractUsingEvent>(OnAfterInteractUsing);
         SubscribeLocalEvent<AmmoLoaderComponent, LinkAttemptEvent>(OnLinkAttempt);
+        SubscribeLocalEvent<AmmoLoaderComponent, ExaminedEvent>(OnExamined); // Forge-Change
     }
 
     private void OnLinkAttempt(Entity<AmmoLoaderComponent> ent, ref LinkAttemptEvent args)
@@ -145,6 +147,18 @@ public sealed partial class AmmoLoaderSystem : EntitySystem
     public IReadOnlyList<EntityUid> GetLinkedArtillery(Entity<AmmoLoaderComponent> loader)
     {
         var linkedArtillery = new List<EntityUid>();
+
+        // Forge-Change: guns on this ship are assigned without a multitool.
+        if (loader.Comp.AutoAssign)
+        {
+            foreach (var gun in loader.Comp.GridGuns)
+            {
+                if (!Exists(gun) || linkedArtillery.Contains(gun))
+                    continue;
+
+                linkedArtillery.Add(gun);
+            }
+        }
 
         if (!TryComp<DeviceLinkSourceComponent>(loader, out var sourceComponent))
             return linkedArtillery;

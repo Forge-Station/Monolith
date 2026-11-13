@@ -1,7 +1,7 @@
 - type: entity
   id: Magazine140mm
   name: "140mm APHE ammo loader"
-  description: "An ammunition loader containing infinite 140mm APHE rounds. Usable by vessel-mounted artillery pieces."
+  description: "An ammunition loader containing 120 140mm APHE rounds. Usable by vessel-mounted artillery pieces."
   parent: [BaseItem, RecyclableItemSteelTiny]
   components:
   - type: Tag
@@ -10,9 +10,9 @@
   - type: Item
     size: Normal
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     proto: 140mmCartridge
-    capacity: 1 # normally should hold 120
+    capacity: 120 # Forge-Change: was 1 while infinite
     mayTransfer: true
     whitelist:
       tags:

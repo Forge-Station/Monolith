@@ -1,7 +1,7 @@
 - type: entity
   id: 90mmMagazineHE
   name: "90mm HE ammo loader"
-  description: "An ammunition loader containing infinite 90mm high-explosive rounds. Usable by 90mm vessel-mounted artillery pieces."
+  description: "An ammunition loader containing 400 90mm high-explosive rounds. Usable by 90mm vessel-mounted artillery pieces."
   parent: [BaseItem, RecyclableItemSteelTiny]
   components:
   - type: Tag
@@ -10,9 +10,9 @@
   - type: Item
     size: Small
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     proto: 90mmCartridgeHE
-    capacity: 1 # normally should hold 400
+    capacity: 400 # Forge-Change: was 1 while infinite
     mayTransfer: true
     whitelist:
       tags:
@@ -61,7 +61,7 @@
 - type: entity
   id: 90mmMagazineAP
   name: "90mm AP ammo loader"
-  description: "An ammunition loader containing infinite 90mm armor-piercing rounds. Usable by 90mm vessel-mounted artillery pieces."
+  description: "An ammunition loader containing 400 90mm armor-piercing rounds. Usable by 90mm vessel-mounted artillery pieces."
   parent: [BaseItem, RecyclableItemSteelTiny]
   components:
   - type: Tag
@@ -70,9 +70,9 @@
   - type: Item
     size: Small
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     proto: 90mmCartridgeAP
-    capacity: 1 # normally should hold 400
+    capacity: 400 # Forge-Change: was 1 while infinite
     mayTransfer: true
     whitelist:
       tags:
@@ -121,7 +121,7 @@
 - type: entity
   id: 90mmMagazineFlak
   name: "90mm flak ammo loader"
-  description: "An ammunition loader containing infinite 90mm flak rounds. Usable by 90mm vessel-mounted artillery pieces."
+  description: "An ammunition loader containing 400 90mm flak rounds. Usable by 90mm vessel-mounted artillery pieces."
   parent: [BaseItem, RecyclableItemSteelTiny]
   components:
   - type: Tag
@@ -130,9 +130,9 @@
   - type: Item
     size: Small
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     proto: 90mmCartridgeFlak
-    capacity: 1 # normally should hold 400
+    capacity: 400 # Forge-Change: was 1 while infinite
     mayTransfer: true
     whitelist:
       tags:

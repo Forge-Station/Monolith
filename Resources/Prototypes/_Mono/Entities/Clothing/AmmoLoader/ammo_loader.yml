@@ -2,7 +2,7 @@
   id: AmmoLoader
   parent: [BaseMachinePowered, ConstructibleMachine] #Forge-change
   name: ammo loader
-  description: A pneumatic ammunition loading system manufactured by Erebus HI. Link it to ship artillery with a multitool to transfer ammunition. This model supports 8 guns.
+  description: A pneumatic ammunition loading system manufactured by Erebus HI. Anchored on a ship, it takes every ship gun on that grid and keeps them supplied. A multitool can still link a gun on another grid.
   placement:
     mode: SnapgridCenter
   components:
@@ -82,7 +82,7 @@
   id: AmmoLoaderSmall
   parent: AmmoLoader
   name: small ammo loader
-  description: A pneumatic ammunition loading system manufactured by Erebus HI. Link it to ship artillery with a multitool to transfer ammunition. This model supports only 2 guns, but is more durable.
+  description: A pneumatic ammunition loading system manufactured by Erebus HI. Anchored on a ship, it takes every ship gun on that grid and keeps them supplied. Smaller and tougher than the full loader.
   components:
   - type: Sprite
     sprite: _Mono/Objects/AmmoLoader/payloadgate_sealed.rsi

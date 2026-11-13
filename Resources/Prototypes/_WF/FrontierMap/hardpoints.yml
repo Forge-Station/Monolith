@@ -199,3 +199,124 @@
   - type: ShipRepairable
     repairTime: 100
     repairCost: 30
+
+# Forge-Change: sizes the wreck-hold flatpacks unpack into.
+
+- type: entity
+  id: HardpointBallisticSuperlight
+  parent: BaseHardpoint
+  name: superlight ballistic hardpoint
+  components:
+  - type: Hardpoint
+    class: Ballistic
+    size: Superlight
+  - type: ApcPowerReceiver
+    powerLoad: 10000
+  - type: Sprite
+    sprite: _Crescent/Structures/hardpoints.rsi
+    state: medium
+  - type: ShipRepairable
+    repairTime: 20
+    repairCost: 10
+
+- type: entity
+  id: HardpointEnergySuperlight
+  parent: BaseHardpoint
+  name: superlight energy hardpoint
+  components:
+  - type: Hardpoint
+    class: Energy
+    size: Superlight
+  - type: ApcPowerReceiver
+    powerLoad: 10000
+  - type: Sprite
+    sprite: _Crescent/Structures/hardpoints.rsi
+    state: medium
+  - type: ShipRepairable
+    repairTime: 20
+    repairCost: 10
+
+- type: entity
+  id: HardpointMissileSuperlight
+  parent: BaseHardpoint
+  name: superlight missile hardpoint
+  components:
+  - type: Hardpoint
+    class: Missile
+    size: Superlight
+  - type: ApcPowerReceiver
+    powerLoad: 10000
+  - type: Sprite
+    sprite: _Crescent/Structures/hardpoints.rsi
+    state: medium
+  - type: ShipRepairable
+    repairTime: 20
+    repairCost: 10
+
+- type: entity
+  id: HardpointMissileLight
+  parent: BaseHardpoint
+  name: light missile hardpoint
+  components:
+  - type: Hardpoint
+    class: Missile
+    size: Light
+  - type: ApcPowerReceiver
+    powerLoad: 10000
+  - type: Sprite
+    sprite: _Crescent/Structures/hardpoints.rsi
+    state: medium
+  - type: ShipRepairable
+    repairTime: 40
+    repairCost: 15
+
+- type: entity
+  id: HardpointMissileMedium
+  parent: BaseHardpoint
+  name: medium missile hardpoint
+  components:
+  - type: Hardpoint
+    class: Missile
+    size: Medium
+  - type: ApcPowerReceiver
+    powerLoad: 10000
+  - type: Sprite
+    sprite: _Crescent/Structures/hardpoints.rsi
+    state: medium
+  - type: ShipRepairable
+    repairTime: 60
+    repairCost: 20
+
+- type: entity
+  id: HardpointMissileHeavy
+  parent: BaseHardpoint
+  name: heavy missile hardpoint
+  components:
+  - type: Hardpoint
+    class: Missile
+    size: Heavy
+  - type: ApcPowerReceiver
+    powerLoad: 10000
+  - type: Sprite
+    sprite: _Crescent/Structures/hardpoints.rsi
+    state: medium
+  - type: ShipRepairable
+    repairTime: 80
+    repairCost: 25
+
+- type: entity
+  id: HardpointMissileSuperheavy
+  parent: BaseHardpoint
+  name: superheavy missile hardpoint
+  components:
+  - type: Hardpoint
+    class: Missile
+    size: Superheavy
+  - type: ApcPowerReceiver
+    powerLoad: 10000
+  - type: Sprite
+    sprite: _Crescent/Structures/hardpoints.rsi
+    state: medium
+  - type: ShipRepairable
+    repairTime: 100
+    repairCost: 30

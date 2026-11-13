@@ -1,7 +1,7 @@
 - type: entity
   id: Magazine40mm
   name: "40mm solid ammo loader"
-  description: "An ammunition loader containing infinite 25mm solid rounds. Usable by vessel-mounted artillery pieces."
+  description: "An ammunition loader containing 1250 25mm solid rounds. Usable by vessel-mounted artillery pieces."
   parent: [BaseItem, RecyclableItemSteelTiny]
   components:
   - type: Tag
@@ -10,9 +10,9 @@
   - type: Item
     size: Small
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     proto: 40mmCartridge
-    capacity: 2 # normally should hold 1250
+    capacity: 1250 # Forge-Change: was 1 while infinite
     mayTransfer: true
     whitelist:
       tags:

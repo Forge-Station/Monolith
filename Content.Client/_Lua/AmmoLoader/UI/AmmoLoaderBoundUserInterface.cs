@@ -25,6 +25,7 @@ public sealed class AmmoLoaderBoundUserInterface : BoundUserInterface
         _window.OnUnloadOne += (protoId, emptyOnly) => SendMessage(new AmmoLoaderUnloadOneMessage(protoId, emptyOnly));
         _window.OnLoadTurret += (turret, protoId) => SendMessage(new AmmoLoaderLoadTurretMessage(turret, protoId));
         _window.OnUnloadTurret += turret => SendMessage(new AmmoLoaderUnloadTurretMessage(turret));
+        _window.OnReplenish += () => SendMessage(new AmmoLoaderReplenishMessage()); // Forge-Change
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

@@ -136,18 +136,20 @@ public sealed partial class StyleWolfgate
                 .Prop(Label.StylePropertyFont, Display(12))
                 .Prop(Label.StylePropertyFontColor, TextMuted),
             Element<Label>().Class(StyleClassLobbyHeroValue)
-                .Prop(Label.StylePropertyFont, _resCache.NotoStack(variation: "Bold", size: 12))
+                .Prop(Label.StylePropertyFont, Menu(12)) // Forge-Change: Tektur for the Russian figures on the card
                 .Prop(Label.StylePropertyFontColor, Text),
             // Forge-Change-End
             Element<Label>().Class(StyleClassLobbyHeroName)
-                .Prop(Label.StylePropertyFont, _resCache.NotoStack(variation: "Bold", size: 18)) // Forge-Change: was 14
+                .Prop(Label.StylePropertyFont, Menu(18)) // Forge-Change: Iceberg for Latin, Tektur for Cyrillic
                 .Prop(Label.StylePropertyFontColor, Text),
             Element<RichTextLabel>().Class(StyleClassLobbyHeroName)
-                .Prop(Label.StylePropertyFont, _resCache.NotoStack(variation: "Bold", size: 18)) // Forge-Change: was 14
+                .Prop(Label.StylePropertyFont, Menu(18)) // Forge-Change: Iceberg for Latin, Tektur for Cyrillic
                 .Prop(Label.StylePropertyFontColor, Text),
             Element<Label>().Class(StyleClassLobbyHeroText)
+                .Prop(Label.StylePropertyFont, Menu(14))
                 .Prop(Label.StylePropertyFontColor, TextMuted),
             Element<RichTextLabel>().Class(StyleClassLobbyHeroText)
+                .Prop(Label.StylePropertyFont, Menu(14))
                 .Prop(Label.StylePropertyFontColor, TextMuted),
             Element<PanelContainer>().Class(StyleClassLobbyBar)
                 .Prop(PanelContainer.StylePropertyPanel, bar),

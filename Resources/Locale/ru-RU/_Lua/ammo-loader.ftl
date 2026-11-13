@@ -12,10 +12,14 @@ ammo-loader-window-empty = пустой
 ammo-loader-window-empty-count = пустой x{ $count }
 ammo-loader-window-unload = Выгрузить
 ammo-loader-window-unload-one = Выгрузить один
-ammo-loader-window-unload-turret = Выгрузить из турели
+ammo-loader-window-unload-turret = Выгрузить из орудия
 ammo-loader-window-eject-all = Выгрузить всё
-ammo-loader-window-linked-turrets = ПРИВЯЗАННЫЕ ТУРЕЛИ
-ammo-loader-window-turret-info = ИНФО ТУРЕЛИ
+ammo-loader-window-linked-turrets = ОРУДИЯ КОРАБЛЯ
+ammo-loader-window-replenish = Пополнить
+ammo-loader-replenished = Пополнено орудий: { $count }
+ammo-loader-replenish-none = Нечего пополнять.
+ammo-loader-examine-auto = Сам берёт орудия этого корабля ({ $count }) и пополняет их из хранилища. Мультитулом можно привязать орудие с соседнего грида.
+ammo-loader-window-turret-info = ИНФО ОРУДИЯ
 ammo-loader-window-turret-loaded = Заряжено
 ammo-loader-window-turret-ammo = { $current }/{ $max }
 

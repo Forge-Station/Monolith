@@ -30,6 +30,7 @@ public sealed partial class WFRoundSetupLobbyPanel : PanelContainer
         _title = new Label { StyleClasses = { "LobbyCaption" } };
         content.AddChild(_title);
         _empty = Wrapped(string.Empty);
+        _empty.StyleClasses.Add("LobbyHeroText"); // Forge-Change: Tektur for the Russian crew lines
         content.AddChild(_empty);
         _cards = new BoxContainer
         {

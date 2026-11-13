@@ -135,7 +135,7 @@
 
 - type: entity
   parent: Airlock
-  id: AirlockTrauma
+  id: AirlockTraumaCommand
   suffix: TTI, Command, Locked
   components:
   - type: Sprite

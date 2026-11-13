@@ -382,7 +382,7 @@
     squadIconPrefix: NanoTrasenSquadIcon
     uiTheme: SecApUiThemeNanoTrasen
   - type: AccessReader
-    access: [["MdSecApartment"]]
+    access: [["TraumaSecApartment"]]
   - type: ActivatableUIRequiresAccess
   - type: CrewMonitoringConsole
   - type: DeviceNetwork

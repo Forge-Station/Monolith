@@ -192,7 +192,7 @@
   description: Sets the doctrine and friend or foe list for TTI turrets on this shuttle. Any TTI crew member can open it.
   components:
   - type: AccessReader
-    access: [["TurretCommandTTIShuttle"]]
+    access: [["TurretCommandTraumaShuttle"]]
 
 - type: entity
   parent: ComputerTurretCommandUSSP

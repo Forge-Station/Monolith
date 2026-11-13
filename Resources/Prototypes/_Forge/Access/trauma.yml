@@ -18,6 +18,7 @@
   - Trauma
   - TurretCommandTraumaShuttle
   - Captain
+  - Mercenary
 
 - type: accessGroup
   id: CommandTraumaAccess
@@ -30,3 +31,4 @@
   - TurretCommandTraumaShuttle
   - TurretCommandTrauma
   - Captain
+  - Mercenary

@@ -328,7 +328,7 @@ public sealed class WolfmedCVars
     /// instead of through the damage routing's healing multiplier.
     /// </summary>
     public static readonly CVarDef<float> SurgeryTendStrength =
-        CVarDef.Create("wolfmed.surgery_tend_strength", 15f, CVar.SERVERONLY);
+        CVarDef.Create("wolfmed.surgery_tend_strength", 15f, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>Shocks the autodoc gives one patient before it says it cannot restart the heart.</summary>
     public static readonly CVarDef<int> AutodocDefibAttempts =

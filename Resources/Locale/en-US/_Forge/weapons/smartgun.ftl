@@ -1,0 +1,9 @@
+smartgun-mode-disabled = No smart firing
+smartgun-mode-company = Through company members
+smartgun-mode-humanoids = Through humanoids
+smartgun-mode-selected = Through selected creatures
+smartgun-mode-examine = Smart firing mode: {$mode}
+smartgun-mode-verb = Cycle smart firing mode (currently: {$mode})
+smartgun-mode-switched = Smart firing mode: {$mode}
+smartgun-target-added = Smart rounds will now pass through {$target}.
+smartgun-target-removed = Smart rounds will no longer pass through {$target}.

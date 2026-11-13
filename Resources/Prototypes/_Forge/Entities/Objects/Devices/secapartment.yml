@@ -401,7 +401,7 @@
 
 - type: entity
   id: TTISecApartmentTabletEmpty
-  parent: MdSecApartmentTablet
+  parent: TTISecApartmentTablet
   suffix: Empty
   components:
   - type: Sprite

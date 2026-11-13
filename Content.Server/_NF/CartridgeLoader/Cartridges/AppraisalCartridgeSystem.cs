@@ -5,6 +5,8 @@ using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Cargo.Components;
 
 namespace Content.Server.CartridgeLoader.Cartridges;

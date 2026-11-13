@@ -1,4 +1,5 @@
-﻿using Content.Server.Administration;
+using Content.Shared.GameTicking;
+using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 
@@ -15,7 +16,7 @@ namespace Content.Server.GameTicking.Commands
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            var ticker = _e.System<GameTicker>();
+            var ticker = _e.System<ServerGameTicker>();
             if (ticker.RunLevel != GameRunLevel.PreRoundLobby)
             {
                 shell.WriteLine("This can only be executed while the game is in the pre-round lobby.");

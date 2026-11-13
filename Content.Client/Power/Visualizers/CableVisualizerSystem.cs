@@ -7,6 +7,7 @@ namespace Content.Client.Power.Visualizers;
 public sealed partial class CableVisualizerSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearanceSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {
@@ -30,6 +31,6 @@ public sealed partial class CableVisualizerSystem : EntitySystem
         if (!_appearanceSystem.TryGetData<WireVisDirFlags>(uid, WireVisVisuals.ConnectedMask, out var mask, args.Component))
             mask = WireVisDirFlags.None;
 
-        args.Sprite.LayerSetState(0, $"{component.StatePrefix}{(int) mask}");
+        _sprite.LayerSetRsiState((uid, args.Sprite), 0, $"{component.StatePrefix}{(int)mask}");
     }
 }

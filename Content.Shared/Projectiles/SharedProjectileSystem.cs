@@ -81,6 +81,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     {
         base.Initialize();
 
+        EntityManager.EntityDeleted += OnEntityDeleted; // Forge-Change
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<ProjectileComponent, PreventCollideEvent>(PreventCollision);
         SubscribeLocalEvent<ProjectileComponent, EntGotInsertedIntoContainerMessage>(OnProjectileInserted);
@@ -101,6 +102,48 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         Subs.CVar(_cfg, CVars.TargetMinimumTickrate, value => _physicsTickrate = value, true);
         // Mono End
     }
+
+    // Forge-Change-Start
+    public override void Shutdown()
+    {
+        EntityManager.EntityDeleted -= OnEntityDeleted;
+        base.Shutdown();
+    }
+
+    /// <summary>
+    /// A deleted shooter or gun still sits on the projectile. The generated networked state is the
+    /// only allowed <c>ComponentGetState</c> handler, and it calls <c>GetNetEntity</c>, which logs
+    /// for every viewer. Deletion finishes before the game state is sent, so clear the ids here.
+    /// A shot that only collides once a weapon is set must keep some weapon id, or it turns back
+    /// into dormant ammo in mid-air.
+    /// </summary>
+    private void OnEntityDeleted(Entity<MetaDataComponent> entity)
+    {
+        var deleted = entity.Owner;
+        var query = EntityQueryEnumerator<ProjectileComponent>();
+        while (query.MoveNext(out var uid, out var component))
+        {
+            if (uid == deleted || TerminatingOrDeleted(uid))
+                continue;
+
+            var changed = false;
+            if (component.Shooter == deleted)
+            {
+                component.Shooter = null;
+                changed = true;
+            }
+
+            if (component.Weapon == deleted)
+            {
+                component.Weapon = component.OnlyCollideWhenShot ? uid : null;
+                changed = true;
+            }
+
+            if (changed)
+                Dirty(uid, component);
+        }
+    }
+    // Forge-Change-End
 
     /// <summary>
     /// Mono: Handles whether a projectile is raycasted based off projectile speed.

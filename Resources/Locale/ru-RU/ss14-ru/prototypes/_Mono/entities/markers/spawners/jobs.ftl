@@ -1,4 +1,4 @@
-ent-SpawnPointPDVDenasvar = Денасвар ФДА
+ent-SpawnPointPDVDenasvar = спаунер Денасвара ФДА
 ent-SpawnPointPDVInfiltrator = спаунер инфильтратора ФДА
 ent-SpawnPointPDVBorg = спаунер киборга ФДА
 ent-SpawnPointUSSPRifleman = спаунер стрелка USSP
@@ -9,3 +9,5 @@ ent-SpawnPointUSSPCommissar = спаунер комиссара USSP
 ent-SpawnPointMdMedic = спаунер экстренного реагирования
 ent-SpawnPointTsfEngi = спаунер инженера TSF
 ent-SpawnPointTSFBorg = спаунер киборга TSF
+# Спецназ ТСФ
+ent-SpawnPointTsfMarsoc = спаунер MARSOC ТСФ

@@ -4,7 +4,6 @@ using Content.Shared.Atmos.Prototypes;
 using Content.Shared.Body.Part;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Kitchen.Components;
@@ -32,7 +31,7 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
 
         SubscribeNetworkEvent<ReagentGuideRegistryChangedEvent>(OnReceiveRegistryUpdate);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        OnPrototypesReloaded(null);
+        LoadPrototypes(null);
     }
 
     private void OnReceiveRegistryUpdate(ReagentGuideRegistryChangedEvent message)
@@ -49,16 +48,21 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
         }
     }
 
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs? ev)
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
+    {
+        LoadPrototypes(ev);
+    }
+
+    private void LoadPrototypes(PrototypesReloadedEventArgs? args)
     {
         // this doesn't check what prototypes are being reloaded because, to be frank, we use a lot of them.
         _reagentSources.Clear();
-        foreach (var reagent in PrototypeManager.EnumeratePrototypes<ReagentPrototype>())
+        foreach (var reagent in ProtoMan.EnumeratePrototypes<ReagentPrototype>())
         {
             _reagentSources.Add(reagent.ID, new());
         }
 
-        foreach (var reaction in PrototypeManager.EnumeratePrototypes<ReactionPrototype>())
+        foreach (var reaction in ProtoMan.EnumeratePrototypes<ReactionPrototype>())
         {
             if (!reaction.Source)
                 continue;
@@ -68,11 +72,11 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
                 reaction);
             foreach (var product in reaction.Products.Keys)
             {
-                _reagentSources[product].Add(data);
+                AddReagentSource(product, data);
             }
         }
 
-        foreach (var gas in PrototypeManager.EnumeratePrototypes<GasPrototype>())
+        foreach (var gas in ProtoMan.EnumeratePrototypes<GasPrototype>())
         {
             if (gas.Reagent == null)
                 continue;
@@ -80,12 +84,12 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
             var data = new ReagentGasSourceData(
                 new () { DefaultCondenseCategory },
                 gas);
-            _reagentSources[gas.Reagent].Add(data);
+            AddReagentSource(gas.Reagent, data);
         }
 
         // store the names of the entities used so we don't get repeats in the guide.
         var usedNames = new List<string>();
-        foreach (var entProto in PrototypeManager.EnumeratePrototypes<EntityPrototype>())
+        foreach (var entProto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
             if (entProto.Abstract || usedNames.Contains(entProto.Name))
                 continue;
@@ -109,16 +113,16 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
                     juiceSolution);
                 foreach (var (id, _) in juiceSolution.Contents)
                 {
-                    _reagentSources[id.Prototype].Add(data);
+                    AddReagentSource(id.Prototype, data);
                 }
 
                 usedNames.Add(entProto.Name);
             }
 
 
+            Solution? grindableSolution = null;
             if (extractableComponent.GrindableSolution is { } grindableSolutionId &&
-                entProto.TryGetComponent<SolutionContainerManagerComponent>(out var manager, EntityManager.ComponentFactory) &&
-                _solutionContainer.TryGetSolution(manager, grindableSolutionId, out var grindableSolution))
+                _solutionContainer.TryGetSolution(entProto, grindableSolutionId, out grindableSolution))
             {
                 var data = new ReagentEntitySourceData(
                     new() { DefaultGrindCategory },
@@ -126,11 +130,21 @@ public sealed partial class ChemistryGuideDataSystem : SharedChemistryGuideDataS
                     grindableSolution);
                 foreach (var (id, _) in grindableSolution.Contents)
                 {
-                    _reagentSources[id.Prototype].Add(data);
+                    AddReagentSource(id.Prototype, data);
                 }
                 usedNames.Add(entProto.Name);
             }
         }
+    }
+
+    /// <summary>
+    /// Joke and mod reagents can appear in grind or juice solutions without a <see cref="ReagentPrototype"/>.
+    /// Those sources are omitted from the guide instead of failing client startup.
+    /// </summary>
+    private void AddReagentSource(string reagentId, ReagentSourceData data)
+    {
+        if (_reagentSources.TryGetValue(reagentId, out var sources))
+            sources.Add(data);
     }
 
     public List<ReagentSourceData> GetReagentSources(string id)

@@ -1,8 +1,9 @@
+using Content.Shared.GameTicking;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking.Presets;
+using Content.Shared.GameTicking.Prototypes;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Random;
@@ -52,29 +53,34 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
             // if we're pre-round (i.e. will only be added)
             // then just add rules. if we're added in the middle of the round (or at any other point really)
             // then we want to start them as well
-            if (GameTicker.RunLevel <= GameRunLevel.InRound)
-                ruleEnt = GameTicker.AddGameRule(rule);
+            if (ServerGameTicker.RunLevel <= GameRunLevel.InRound)
+                ruleEnt = ServerGameTicker.AddGameRule(rule);
             else
-                GameTicker.StartGameRule(rule, out ruleEnt);
+                ServerGameTicker.StartGameRule(rule, out ruleEnt);
 
             component.AdditionalGameRules.Add(ruleEnt);
         }
     }
 
-    protected override void Ended(EntityUid uid, SecretRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    protected override void Ended(Entity<SecretRuleComponent> rule, ref GameRuleEndedEvent args)
     {
-        base.Ended(uid, component, gameRule, args);
+        base.Ended(rule, ref args);
+        var component = rule.Comp;
 
-        foreach (var rule in component.AdditionalGameRules)
+        foreach (var extra in component.AdditionalGameRules)
         {
-            GameTicker.EndGameRule(rule);
+            // Children may already be gone during FlushEntities / round reset.
+            if (TerminatingOrDeleted(extra))
+                continue;
+
+            ServerGameTicker.EndGameRule(extra);
         }
     }
 
     private bool TryPickPreset(ProtoId<WeightedRandomPrototype> weights, [NotNullWhen(true)] out GamePresetPrototype? preset)
     {
         var options = _prototypeManager.Index(weights).Weights.ShallowClone();
-        var players = GameTicker.ReadyPlayerCount();
+        var players = ServerGameTicker.ReadyPlayerCount();
 
         GamePresetPrototype? selectedPreset = null;
         var sum = options.Values.Sum();
@@ -132,7 +138,7 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
     /// </summary>
     public bool CanPickAny(IEnumerable<ProtoId<GamePresetPrototype>> protos)
     {
-        var players = GameTicker.ReadyPlayerCount();
+        var players = ServerGameTicker.ReadyPlayerCount();
         foreach (var id in protos)
         {
             if (!_prototypeManager.TryIndex(id, out var selectedPreset))

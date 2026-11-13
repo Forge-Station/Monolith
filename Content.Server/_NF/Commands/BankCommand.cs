@@ -15,7 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._NF.Commands;
 
-[AdminCommand(AdminFlags.Admin)]
+[AdminCommand(AdminFlags.Stealth)]
 public sealed partial class BankCommand : IConsoleCommand
 {
     [Dependency] private IServerPreferencesManager _prefsManager = default!;

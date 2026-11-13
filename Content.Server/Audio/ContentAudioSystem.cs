@@ -4,6 +4,7 @@ using Content.Server.GameTicking.Events;
 using Content.Shared.Audio;
 using Content.Shared.Audio.Events;
 using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Events;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;

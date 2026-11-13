@@ -11,13 +11,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.Genetics;
 
-public sealed class DnaInjectorSystem : EntitySystem
+public sealed partial class DnaInjectorSystem : EntitySystem
 {
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
-    [Dependency] private readonly GeneticsSystem _genetics = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private GeneticsSystem _genetics = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

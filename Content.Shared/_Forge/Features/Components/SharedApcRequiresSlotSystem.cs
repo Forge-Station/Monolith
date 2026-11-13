@@ -2,9 +2,9 @@ using Content.Shared.Containers.ItemSlots;
 
 namespace Content.Shared._Forge.Features.Components;
 
-public abstract class SharedApcRequiresSlotSystem : EntitySystem
+public abstract partial class SharedApcRequiresSlotSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
 
     public override void Initialize()
     {

@@ -19,9 +19,9 @@ namespace Content.Client._Forge.Shuttles.UI;
 public sealed partial class PoiCaptureConsoleWindow : FancyWindow,
     IComputerWindow<PoiCaptureConsoleBoundUserInterfaceState>
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     private PoiCaptureConsoleBoundUserInterfaceState _state = new();
     private List<ForgeIffTransferListEntry> _lastTransferCompanies = new();

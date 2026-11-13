@@ -16,6 +16,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Audio;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -102,12 +103,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
             }
         }
 
-        // should this door have collision and the like enabled?
-        var collidable = door.State == DoorState.Closed
-            || door.State == DoorState.Closing && door.Partial
-            || door.State == DoorState.Opening && !door.Partial;
-
-        SetCollidable(ent, collidable, door);
+        SetCollidable(ent, IsDoorSolid(door), door);
         AppearanceSystem.SetData(ent, DoorVisuals.State, door.State);
     }
 
@@ -173,11 +169,8 @@ public abstract partial class SharedDoorSystem : EntitySystem
 
         // Keep fixtures, occluder and sprite state in sync with replicated DoorComponent (e.g. after reconnect).
         // Without this, Appearance can lag behind or mismatch, and Update can advance transitions on stale visuals.
-        var collidable = door.State == DoorState.Closed
-                         || door.State == DoorState.Closing && door.Partial
-                         || door.State == DoorState.Opening && !door.Partial;
-
-        SetCollidable(ent, collidable, door);
+        // Denying/welded/emagging stay solid: the panel is still shut, so dropping the occluder lets you see through.
+        SetCollidable(ent, IsDoorSolid(door), door);
         AppearanceSystem.SetData(ent, DoorVisuals.State, door.State);
 
         RaiseLocalEvent(ent, new DoorStateChangedEvent(door.State));
@@ -530,6 +523,21 @@ public abstract partial class SharedDoorSystem : EntitySystem
 
     #region Collisions
 
+    /// <summary>
+    /// True while the panel still blocks movement, air and sight.
+    /// Access-denied, welded and emag sparks do not open the door.
+    /// </summary>
+    private static bool IsDoorSolid(DoorComponent door)
+    {
+        return door.State switch
+        {
+            DoorState.Closed or DoorState.Denying or DoorState.Welded or DoorState.Emagging => true,
+            DoorState.Closing => door.Partial,
+            DoorState.Opening => !door.Partial,
+            _ => false,
+        };
+    }
+
     protected virtual void SetCollidable(
         EntityUid uid,
         bool collidable,
@@ -608,6 +616,20 @@ public abstract partial class SharedDoorSystem : EntitySystem
 
             if (!otherPhysics.Comp.CanCollide)
                 continue;
+
+            // Skip anchored static entities on adjacent tiles.
+            // The fixture-based AABB lookup may slightly overlap neighboring tiles
+            // due to PolygonRadius enlargement, picking up walls and other structures.
+            if (otherPhysics.Comp.BodyType == BodyType.Static)
+            {
+                var otherXform = Transform(otherPhysics.Owner);
+                if (otherXform.Anchored)
+                {
+                    var otherTile = _mapSystem.GetTileRef(xform.GridUid.Value, mapGridComp, otherXform.Coordinates);
+                    if (otherTile.GridIndices != tileRef.GridIndices)
+                        continue;
+                }
+            }
 
             //TODO: Make only shutters ignore these objects upon colliding instead of all airlocks
             // Excludes Glasslayer for windows, GlassAirlockLayer for windoors, TableLayer for tables

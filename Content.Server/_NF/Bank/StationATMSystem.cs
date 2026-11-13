@@ -21,7 +21,7 @@ namespace Content.Server._NF.Bank;
 
 public sealed partial class BankSystem
 {
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private CargoSystem _cargo = default!;
     [Dependency] private AccessReaderSystem _access = default!;
 

@@ -11,7 +11,7 @@
     - BasicStationEventScheduler
     - BluespaceEventScheduler
     - BluespaceDungeonEventScheduler
-    - BluespaceSalvageEventScheduler
+#    - BluespaceSalvageEventScheduler
     - SmugglingEventScheduler
     - FrontierRoundstartVariation
     - MonoAISTCShuttleSpawnerScheduler # Mono
@@ -29,7 +29,7 @@
     - BasicStationEventScheduler
     - BluespaceEventScheduler
     - BluespaceDungeonEventScheduler
-    - BluespaceSalvageEventScheduler
+#    - BluespaceSalvageEventScheduler
     - SmugglingEventScheduler
     - FrontierRoundstartVariation
     - MonoAISTCShuttleSpawnerScheduler # Mono

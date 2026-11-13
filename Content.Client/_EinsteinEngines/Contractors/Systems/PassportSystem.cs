@@ -6,9 +6,9 @@ using Robust.Shared.GameStates;
 namespace Content.Client._EE.Contractors.Systems;
 
 // Forge-change-start
-public sealed class PassportSystem : EntitySystem
+public sealed partial class PassportSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public override void Initialize()
     {

@@ -40,11 +40,10 @@ public sealed partial class VocalSystem : EntitySystem
 
     private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
     {
-        // remove scream action when component removed
+        // Use the action-id overload: ActionsComponent may already have detached the action
+        // during its own shutdown, and RemoveAction(performer, ...) would log an error.
         if (component.ScreamActionEntity != null)
-        {
-            _actions.RemoveAction(uid, component.ScreamActionEntity);
-        }
+            _actions.RemoveAction(component.ScreamActionEntity);
     }
 
     private void OnSexChanged(EntityUid uid, VocalComponent component, SexChangedEvent args)

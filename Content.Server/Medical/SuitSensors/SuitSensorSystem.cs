@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Server.Access.Systems;
 using Content.Server.DeviceNetwork.Systems;
+using Content.Shared.DeviceNetwork.Systems;
 using Content.Server.Medical.CrewMonitoring;
 using Content.Server.Popups;
 //using Content.Server.Station.Systems; //Frontier Modification
@@ -13,7 +14,7 @@ using Content.Shared.Emp;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
-using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -23,7 +24,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.DeviceNetwork.Components;
-using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Robust.Shared.Timing;
 using System.Numerics; //Frontier modification
 using Content.Server.Salvage.Expeditions;
@@ -44,7 +45,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
     [Dependency] private MobStateSystem _mobStateSystem = default!;
     [Dependency] private PopupSystem _popupSystem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    // [Dependency] private StationSystem _stationSystem = default!; // Frontier
+    // [Dependency] private ServerStationSystem _stationSystem = default!; // Frontier
     [Dependency] private MetaDataSystem _metaData = default!; // Frontier
     [Dependency] private SingletonDeviceNetServerSystem _singletonServerSystem = default!;
     [Dependency] private MobThresholdSystem _mobThresholdSystem = default!;
@@ -112,9 +113,6 @@ public sealed partial class SuitSensorSystem : EntitySystem
                 sensor.ConnectedServer = address;
             }
 
-            // Send it to the connected server
-            var payload = SuitSensorToPacket(status);
-
             // Clear the connected server if its address isn't on the network
             if (!_deviceNetworkSystem.IsAddressPresent(device.DeviceNetId, sensor.ConnectedServer))
             {
@@ -122,7 +120,11 @@ public sealed partial class SuitSensorSystem : EntitySystem
                 continue;
             }
 
-            _deviceNetworkSystem.QueuePacket(uid, sensor.ConnectedServer, payload, device: device);
+            var payload = new SuitSensorStatusPayload
+            {
+                Data = status.Value,
+            };
+            _deviceNetworkSystem.SendPacket((uid, device), sensor.ConnectedServer, ref payload);
         }
     }
 
@@ -479,69 +481,6 @@ public sealed partial class SuitSensorSystem : EntitySystem
         return status;
     }
 
-    /// <summary>
-    ///     Serialize create a device network package from the suit sensors status.
-    /// </summary>
-    public NetworkPayload SuitSensorToPacket(SuitSensorStatus status)
-    {
-        var payload = new NetworkPayload()
-        {
-            [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdUpdatedState,
-            [SuitSensorConstants.NET_NAME] = status.Name,
-            [SuitSensorConstants.NET_JOB] = status.Job,
-            [SuitSensorConstants.NET_JOB_ICON] = status.JobIcon,
-            [SuitSensorConstants.NET_JOB_DEPARTMENTS] = status.JobDepartments,
-            [SuitSensorConstants.NET_IS_ALIVE] = status.IsAlive,
-            [SuitSensorConstants.NET_SUIT_SENSOR_UID] = status.SuitSensorUid,
-        };
-
-        if (status.TotalDamage != null)
-            payload.Add(SuitSensorConstants.NET_TOTAL_DAMAGE, status.TotalDamage);
-        if (status.TotalDamageThreshold != null)
-            payload.Add(SuitSensorConstants.NET_TOTAL_DAMAGE_THRESHOLD, status.TotalDamageThreshold);
-        if (status.Coordinates != null)
-            payload.Add(SuitSensorConstants.NET_COORDINATES, status.Coordinates);
-        if (status.LocationName != null) //Frontier modification
-            payload.Add(SuitSensorConstants.NET_LOCATION_NAME, status.LocationName); //Frontier modification
-
-        return payload;
-    }
-
-    /// <summary>
-    ///     Try to create the suit sensors status from the device network message
-    /// </summary>
-    public SuitSensorStatus? PacketToSuitSensor(NetworkPayload payload)
-    {
-        // check command
-        if (!payload.TryGetValue(DeviceNetworkConstants.Command, out string? command))
-            return null;
-        if (command != DeviceNetworkConstants.CmdUpdatedState)
-            return null;
-
-        // check name, job and alive
-        if (!payload.TryGetValue(SuitSensorConstants.NET_NAME, out string? name)) return null;
-        if (!payload.TryGetValue(SuitSensorConstants.NET_JOB, out string? job)) return null;
-        if (!payload.TryGetValue(SuitSensorConstants.NET_JOB_ICON, out string? jobIcon)) return null;
-        if (!payload.TryGetValue(SuitSensorConstants.NET_JOB_DEPARTMENTS, out List<string>? jobDepartments)) return null;
-        if (!payload.TryGetValue(SuitSensorConstants.NET_IS_ALIVE, out bool? isAlive)) return null;
-        if (!payload.TryGetValue(SuitSensorConstants.NET_SUIT_SENSOR_UID, out NetEntity suitSensorUid)) return null;
-        if (!payload.TryGetValue(SuitSensorConstants.NET_LOCATION_NAME, out string? location)) return null; // Frontier modification
-
-        // try get total damage and cords and location name (optionals)
-        payload.TryGetValue(SuitSensorConstants.NET_TOTAL_DAMAGE, out int? totalDamage);
-        payload.TryGetValue(SuitSensorConstants.NET_TOTAL_DAMAGE_THRESHOLD, out int? totalDamageThreshold);
-        payload.TryGetValue(SuitSensorConstants.NET_COORDINATES, out NetCoordinates? coords);
-
-        var status = new SuitSensorStatus(suitSensorUid, name, job, jobIcon, jobDepartments, location)
-        {
-            IsAlive = isAlive.Value,
-            TotalDamage = totalDamage,
-            TotalDamageThreshold = totalDamageThreshold,
-            Coordinates = coords,
-        };
-        return status;
-    }
-
     // Forge-Change-start
     /// <summary>
     /// When a singleton device network server is disconnected (e.g. because a duplicate arrived via FTL/BSS jump),
@@ -551,7 +490,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
     private void OnServerDisconnected(EntityUid uid, SingletonDeviceNetServerComponent _server, ref DeviceNetServerDisconnectedEvent args)
     {
         if (!TryComp<DeviceNetworkComponent>(uid, out var serverDevice)
-            || string.IsNullOrEmpty(serverDevice.Address))
+            || serverDevice.Address == DeviceAddress.Invalid)
             return;
 
         var addr = serverDevice.Address;

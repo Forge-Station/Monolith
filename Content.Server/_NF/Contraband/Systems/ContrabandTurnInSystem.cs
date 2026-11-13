@@ -25,7 +25,7 @@ public sealed partial class ContrabandTurnInSystem : SharedContrabandTurnInSyste
     [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private StackSystem _stack = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
 
     private EntityQuery<MobStateComponent> _mobQuery;

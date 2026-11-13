@@ -31,7 +31,7 @@ using Content.Shared._NF.Bank.Components; // Frontier
 using Content.Server._NF.Bank; // Frontier
 using Content.Shared._NF.Bank.BUI; // Frontier
 
-using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Server.Chemistry.EntitySystems;
 using Robust.Shared.Prototypes;
 // todo: remove this stinky LINQy
 

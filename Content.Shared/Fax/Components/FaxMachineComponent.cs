@@ -1,10 +1,11 @@
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.DeviceNetwork;
 using Content.Shared.Paper;
 using Content.Shared.Research.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Fax.Components;
 
@@ -30,7 +31,7 @@ public sealed partial class FaxMachineComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("destinationAddress")]
-    public string? DestinationFaxAddress { get; set; }
+    public DeviceAddress? DestinationFaxAddress { get; set; }
 
     /// <summary>
     /// Contains the item to be sent, assumes it's paper...
@@ -90,7 +91,7 @@ public sealed partial class FaxMachineComponent : Component
     /// Known faxes in network by address with fax names
     /// </summary>
     [ViewVariables]
-    public Dictionary<string, string> KnownFaxes { get; } = new();
+    public Dictionary<DeviceAddress, string> KnownFaxes { get; } = new();
 
     /// <summary>
     /// Print queue of the incoming message
@@ -188,6 +189,7 @@ public sealed partial class FaxMachineComponent : Component
 }
 
 [DataDefinition]
+[Serializable, NetSerializable]
 public sealed partial class FaxPrintout
 {
     [DataField(required: true)]

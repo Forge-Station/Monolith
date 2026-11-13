@@ -6,7 +6,7 @@ namespace Content.Server._Forge.Genetics;
 
 public sealed partial class GeneticsSystem
 {
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
 
     public void RefreshVisuals(EntityUid uid, GenomeComponent? genome = null)
     {

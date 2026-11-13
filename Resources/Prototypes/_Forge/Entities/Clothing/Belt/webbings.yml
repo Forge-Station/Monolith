@@ -158,3 +158,40 @@
   - type: Storage
     grid:
     - 0,0,10,1
+
+- type: entity
+  parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
+  id: ClothingBeltWebbingsNormalUi
+  name: ui chest rig
+  description: A simple chest rig for storing gear with quick access. Made in Ullman Industries colors.
+  components:
+  - type: StaticPrice
+    price: 10
+    vendPrice: 1500
+  - type: Sprite
+    sprite: _Forge/Clothing/Belt/ui_webbing.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Belt/ui_webbing.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+
+- type: entity
+  parent: [NFClothingBeltStorageBase, ContentsExplosionResistanceBase]
+  id: ClothingBeltWebbingsBigUi
+  name: ui big chest rig
+  description: A large chest rig system made in Ullman Industries colors. It can hold everything needed to go against the feds.
+  components:
+  - type: StaticPrice
+    price: 10
+    vendPrice: 2500
+  - type: Sprite
+    sprite: _Forge/Clothing/Belt/ui_webbingbig.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Belt/ui_webbingbig.rsi
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Storage
+    grid:
+    - 0,0,11,1
+  - type: ClothingSpeedModifier
+    sprintModifier: 0.95

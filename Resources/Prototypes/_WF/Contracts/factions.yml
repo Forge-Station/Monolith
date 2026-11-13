@@ -2,12 +2,12 @@
 
 - type: wfContractFaction
   id: WFContractFactionTSF
-  companies: [ TSF, TSFCivilian, TSFHighComm ]
+  companies: [ TSF, TSFHighComm ]
 
-- type: wfContractFaction
-  id: WFContractFactionPDV
-  companies: [ PDV, PDVCivilian, PDVHighComm ]
+# - type: wfContractFaction
+#   id: WFContractFactionPDV
+#   companies: [ PDV, PDVCivilian, PDVHighComm ]
 
-- type: wfContractFaction
-  id: WFContractFactionUSSP
-  companies: [ USSP ]
+# - type: wfContractFaction
+#   id: WFContractFactionUSSP
+#   companies: [ USSP ]

@@ -15,7 +15,7 @@
   minimumDistance: 10650
   maximumDistance: 12400
   # WOLFGATE(ReaverCampaign): the Contested Sector game mode spawns the same sector as Standard
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, WFContestedSector, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce, MonoChimeraTsf, MonoChimeraPdv ]
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, WFContestedSector, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed   ]
   spawnGroup: Required
   # Forge map: spawns removed and the bluespace reactor replaced with an AME. Mono presets stay.
   gridPath: /Maps/_Forge/POI/camelotForge.yml

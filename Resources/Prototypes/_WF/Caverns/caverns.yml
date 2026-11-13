@@ -48,16 +48,16 @@
     - FloorLavaEntity
     - MonoPlanetmapOreBasalt
     - CoyoteFloraBurnedtree1
-    - CoyoteFloraBurnedtree2
+    #- CoyoteFloraBurnedtree2
     - CoyoteFloraBurnedtree3
-    - CoyoteFloraBurnedtree5
-    - ShiptestTreeDeadHell
-    - GoonFakeobjectRockpile
-    - GoonFakeobjectRockpileBig
-    - CMRockBlackGroundDense
-    - CMRockBlackGroundDense3
-    - TgFloraRockVolcano
-    - TgFloraRockSideriteGrowth
+    #- CoyoteFloraBurnedtree5
+    #- ShiptestTreeDeadHell
+    #- GoonFakeobjectRockpile
+    #- GoonFakeobjectRockpileBig
+    #- CMRockBlackGroundDense
+    #- CMRockBlackGroundDense3
+    #- TgFloraRockVolcano
+    #- TgFloraRockSideriteGrowth
     landingTile: WFCavernFloorAsh
     shade: WFCavernShadeFervidus
     stairs: WFCavernStairsFervidus
@@ -80,7 +80,7 @@
     roughness: 0.1
     cellSize: 96
     groundTiles: [WFFloorMerakDuneSand, WFFloorMerakGoldSand, WFFloorMerakPaleSand, WFFloorMerakDarkSand, WFFloorMerakRedDesertSand, WFFloorMerakDesertGravel]
-    avoid: [MonoFloorWaterEntity, MonoPlanetmapOreSandRich, CMRockOrange, WFMerakSpittingCactus]
+    avoid: [MonoFloorWaterEntity, MonoPlanetmapOreSandRich, WFMerakSpittingCactus]
     landingTile: WFCavernFloorSandDrift
     shade: WFCavernShadeMerak
     stairs: WFCavernStairsMerak
@@ -103,7 +103,7 @@
     riftWidth: 2
     cellSize: 128
     groundTiles: [FloorChromite, WFFloorAerumnaClay, WFFloorAerumnaClayRock, WFFloorAerumnaDusk, WFFloorAerumnaShroud, WFFloorAerumnaHive]
-    avoid: [MonoFloorWaterEntity, MonoPlanetmapOreChromite, GoonSetpiecesRootwall, WallXenoResin, DoorXenoResin, WFXenoEggWild]
+    avoid: [MonoFloorWaterEntity, MonoPlanetmapOreChromite, GoonSetpiecesRootwall, WallXenoResin, DoorXenoResin]
     landingTile: WFCavernFloorChromiteScree
     shade: WFCavernShadeAerumna
     stairs: WFCavernStairsAerumna
@@ -133,7 +133,7 @@
     - WFFloorThrasciasPackIce
     - WFFloorThrasciasRoughIce
     - WFFloorThrasciasClearIce
-    avoid: [FloorLiquidPlasmaEntity, MonoPlanetmapOreSnow, CMRockIce, BayCrystal, ChompQuartz]
+    avoid: [FloorLiquidPlasmaEntity, MonoPlanetmapOreSnow, BayCrystal, ChompQuartz]
     landingTile: WFCavernFloorSnowdrift
     shade: WFCavernShadeThrascias
     stairs: WFCavernStairsThrascias
@@ -156,7 +156,7 @@
     roughness: 0.45
     cellSize: 80
     groundTiles: [WFFloorFlesh]
-    avoid: [WFBloodRiver, WallMeat, GoonSetpiecesHive, ChompResin, PolarisResin, TauCetiMeatlandWall, WFCarcinomaBoneLumpOne, WFCarcinomaBoneLumpTwo, WFCarcinomaBoneLumpThree, WFCarcinomaPimple, WFCarcinomaTendonVine, WFCarcinomaWeepingPolyp]
+    avoid: [WFBloodRiver, WallMeat, GoonSetpiecesHive, ChompResin, PolarisResin, WFCarcinomaBoneLumpOne, WFCarcinomaBoneLumpTwo, WFCarcinomaBoneLumpThree, WFCarcinomaPimple, WFCarcinomaTendonVine, WFCarcinomaWeepingPolyp]
     landingTile: WFCavernFloorGut
     shade: WFCavernShadeCarcinoma
     stairs: WFCavernStairsCarcinoma

@@ -1,0 +1,11 @@
+# Multitool links between a drydock console and its cranes. A console's berth is its linked cranes.
+
+- type: sourcePort
+  id: WFDrydockCraneSender
+  name: drydock-port-name-crane-sender
+  description: drydock-port-description-crane-sender
+
+- type: sinkPort
+  id: WFDrydockCraneReceiver
+  name: drydock-port-name-crane-receiver
+  description: drydock-port-description-crane-receiver

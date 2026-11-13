@@ -1,0 +1,22 @@
+# The default faction for NPC crew: fights the sector's monsters and nobody else. Encounters and the setup tool give
+# a crew a real faction when one applies.
+- type: npcFaction
+  id: WFCrew
+  hostile:
+  - SimpleHostile
+  - Zombie
+  - Xeno
+
+# The Phaethon Dynasty's navy crews, set up as TSFMC is: hostile to every faction that is not friendly or neutral to it.
+# Dynasty players, cyborgs and guardsmen carry PirateNF, which is neutral so the navy's on-sight crew don't shoot them;
+# not friendly, or corsair crews of the same faction would be sheltered from the navy's guns.
+- type: npcFaction
+  id: WFPdvNavy
+  neutral:
+  - PirateNF
+  - Cat
+  - PetsNT
+  - MD
+  - Mouse
+  - SimpleNeutral
+  defaultHostile: true

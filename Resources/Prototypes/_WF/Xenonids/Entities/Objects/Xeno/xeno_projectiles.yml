@@ -277,7 +277,7 @@
     muzzleFlash: null
   - type: IgnorePredictionHide
   #- type: TriggerOnFixedDistanceStop
-    delay: 0
+  #  delay: 0
   - type: DeleteOnTrigger
 
 - type: entity
@@ -337,7 +337,7 @@
     muzzleFlash: null
   - type: IgnorePredictionHide
   #- type: TriggerOnFixedDistanceStop
-    delay: 0
+  #  delay: 0
   - type: DeleteOnTrigger
 
 - type: entity
@@ -470,7 +470,7 @@
   - type: Sprite
     sprite: _WF/Xenonids/Effects/beam.rsi
     state: oppressor_tail_hook
-    drawDepth: Effects # Draws above mobs
+    #drawDepth: Effects # Draws above mobs
   - type: ProjectileMaxRange
     max: 3.5
   - type: PreventCollideWithDead

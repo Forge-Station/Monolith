@@ -21,8 +21,9 @@
     - id: WFWolfmedHydraulicFluidPack
     - id: CableApcStack10
     - id: Flare
-    - id: SignalFlareGreen
-    - id: SignalFlareWhite
+    #- id: SignalFlareGreen
+    #- id: SignalFlareWhite
+    - id: Flare
     - id: WeaponFlareGun
     - id: CrowbarPocket
     - id: HandHeldMassScanner
@@ -42,8 +43,8 @@
       - DrainableSolution
       tags:
       - SurvivalBox
-      - SignalFlareLaunchable
-      - SignalFlareLauncher
+      #- SignalFlareLaunchable
+      #- SignalFlareLauncher
   - type: Sprite
     layers:
     - state: internals

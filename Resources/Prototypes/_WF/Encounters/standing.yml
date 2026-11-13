@@ -6,19 +6,19 @@
 - type: wfStanding
   id: TSF
   atWar: [ RedSailCorsairs ]
-  declaredWar: [ PDV, PDVCivilian, PDVHighComm ]
+  declaredWar: [ PDV ]
 
 - type: wfStanding
   id: TSFCivilian
   atWar: [ RedSailCorsairs ]
-  declaredWar: [ PDV, PDVHighComm ]
+  declaredWar: [ PDV ]
 
 - type: wfStanding
   id: TSFHighComm
   atWar: [ RedSailCorsairs ]
-  declaredWar: [ PDV, PDVCivilian, PDVHighComm ]
+  declaredWar: [ PDV ]
 
 # The encounter pirates: at war with both navies and their civilians.
 - type: wfStanding
   id: WFAshfallReavers
-  atWar: [ TSF, TSFCivilian, TSFHighComm, PDV, PDVCivilian, PDVHighComm ]
+  atWar: [ TSF, TSFHighComm, PDV ]

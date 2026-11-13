@@ -1,0 +1,620 @@
+- type: npcFaction
+  id: WFRemade
+  defaultHostile: true
+  friendly:
+  - WFChoir
+
+# Armour numbers from DS13-2.0's slasher.
+- type: damageModifierSet
+  id: WFRemadeFlesh
+  coefficients:
+    Blunt: 0.6
+    Piercing: 0.55
+    Slash: 0.8
+    Heat: 1.2
+    Cold: 0
+    Poison: 0
+    Radiation: 0
+    Asphyxiation: 0
+    Bloodloss: 0
+
+- type: entity
+  abstract: true
+  parent: SimpleSpaceMobBase
+  id: WFRemadeBase
+  components:
+  - type: Insulated
+  - type: CombatMode
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: WFRemadeHuntCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      VisionRadius: !type:Single
+        14
+      AggroVisionRadius: !type:Single
+        20
+  - type: NPCRetaliation
+    attackMemoryLength: 20
+  - type: Prying
+    pryPowered: true
+    force: true
+    speedModifier: 3
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: UseDelay
+    delay: 1
+  - type: NpcFactionMember
+    factions:
+    - WFRemade
+  # Breaks what is in its way when it has made no headway; the Monolith and its growths are its own.
+  - type: WFStuckBreaker
+    spare:
+      components:
+      - WFMonolith
+      - WFMonolithTap
+      - WFGrowth
+  - type: Hands
+  - type: ComplexInteraction
+  # No hands to pull with: a Remade drags a corpse to a vent by its grip all the same.
+  - type: Puller
+    needsHands: false
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: WFRemadeFlesh
+  - type: WolfmedDamageCause
+    cause: Unarmed
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 150
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: SlowOnDamage
+    speedModifierThresholds: {}
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: full
+      Dead:
+        Base: dead
+  - type: Temperature
+    heatDamageThreshold: 400
+    coldDamageThreshold: -150
+    currentTemperature: 310.15
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+    - FootstepSound
+    - WFRemade
+  - type: NoSlip
+  - type: MovementIgnoreGravity
+  - type: ProtectedFromStepTriggers
+  - type: ZombieImmune
+  - type: Speech
+    enabled: false
+
+- type: entity
+  parent: BaseItem
+  id: WFRemadeSeveredLimb
+  components:
+  - type: Sprite
+    sprite: _WF/Remade/Mobs/slasher.rsi
+    layers:
+    - state: l_arm_lying
+  - type: Item
+    size: Large
+  - type: TimedDespawn
+    lifetime: 600
+  # Burn a severed limb to ash, or blow it apart: a mender can't take back what is gone.
+  - type: Damageable
+    damageContainer: Biological
+  - type: Flammable
+    fireSpread: true
+    alwaysCombustible: true
+    canExtinguish: true
+    damage:
+      types:
+        Heat: 4
+  - type: Appearance
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: fire
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 20
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: WFRemadeBase
+  id: WFRemadeSlasher
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _WF/Remade/Mobs/slasher.rsi
+    noRot: true
+    offset: 0,0.25
+    layers:
+    - map: [ "l_leg" ]
+      state: slasher_l_leg
+    - map: [ "r_leg" ]
+      state: slasher_r_leg
+    - map: [ "chest" ]
+      state: slasher_chest
+    - map: [ "l_arm" ]
+      state: slasher_l_arm
+    - map: [ "r_arm" ]
+      state: slasher_r_arm
+    - map: [ "head" ]
+      state: slasher_head
+    - map: [ "dead" ]
+      state: dead
+      visible: false
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.2
+    baseSprintSpeed: 3.2
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    attackRate: 0.8
+    animation: WeaponArcClaw
+    soundSwing:
+      collection: WFRemadeSlasherAttack
+    soundHit:
+      path: /Audio/Weapons/slash.ogg
+    damage:
+      types:
+        Slash: 13
+  - type: WFRemadeVoice
+    speech:
+      collection: WFRemadeSlasherSpeech
+    pain:
+      collection: WFRemadeSlasherPain
+    death:
+      collection: WFRemadeSlasherDeath
+    shout:
+      collection: WFRemadeSlasherShoutLong
+  - type: WFRemadeLimbs
+    rsi: _WF/Remade/Mobs/slasher.rsi
+    floors: { Melee: 0.2, Speed: 0.12, Sight: 0.4 }
+    limbs:
+    - id: l_leg
+      name: wf-remade-limb-leg-left
+      health: 30
+      weight: 1.5
+      loss: 18
+      zones: [ LeftLeg, LeftFoot ]
+      provides: { Speed: 0.5 }
+      lying: l_leg_lying
+    - id: r_leg
+      name: wf-remade-limb-leg-right
+      health: 30
+      weight: 1.5
+      loss: 18
+      zones: [ RightLeg, RightFoot ]
+      provides: { Speed: 0.5 }
+      lying: r_leg_lying
+    - id: chest
+      health: 200
+      weight: 3
+      scale: 0.3
+      severable: false
+      zones: [ Torso, Groin ]
+      lying: torso_lying
+    - id: l_arm
+      name: wf-remade-limb-blade-left
+      health: 25
+      weight: 1.5
+      loss: 12
+      zones: [ LeftArm, LeftHand ]
+      provides: { Melee: 0.5 }
+      lying: l_arm_lying
+    - id: r_arm
+      name: wf-remade-limb-blade-right
+      health: 25
+      weight: 1.5
+      loss: 12
+      zones: [ RightArm, RightHand ]
+      provides: { Melee: 0.5 }
+      lying: r_arm_lying
+    - id: head
+      name: wf-remade-limb-head
+      health: 30
+      weight: 1
+      loss: 30
+      zones: [ Head ]
+      provides: { Voice: 1, Sight: 1 }
+      lying: head_lying
+  - type: WFRemadeAbilities
+    abilities:
+    - !type:WFShoutAbility
+      cooldown: 8
+      range: 20
+      sound:
+        collection: WFRemadeSlasherShout
+    - !type:WFChargeAbility
+      cooldown: 12
+      minRange: 3.5
+      range: 12
+      windUp: 1
+      duration: 4
+      speed: 2.2
+      sound:
+        collection: WFRemadeSlasherShoutLong
+      hitSound:
+        path: /Audio/Effects/hit_kick.ogg
+    - !type:WFDodgeAbility
+      cooldown: 20
+      sound:
+        collection: WFRemadeSlasherSpeech
+
+- type: entity
+  parent: WFRemadeBase
+  id: WFRemadeSlasherEnhanced
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _WF/Remade/Mobs/slasher_enhanced.rsi
+    noRot: true
+    offset: 0,0.25
+    layers:
+    - map: [ "l_leg" ]
+      state: enhanced_slasher_l_leg
+    - map: [ "r_leg" ]
+      state: enhanced_slasher_r_leg
+    - map: [ "chest" ]
+      state: enhanced_slasher_chest
+    - map: [ "l_arm" ]
+      state: enhanced_slasher_l_arm
+    - map: [ "r_arm" ]
+      state: enhanced_slasher_r_arm
+    - map: [ "head" ]
+      state: enhanced_slasher_head
+    - map: [ "eyes" ]
+      state: eyes
+      shader: unshaded
+    - map: [ "dead" ]
+      state: dead
+      visible: false
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      215: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.4
+    baseSprintSpeed: 3.4
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    attackRate: 0.8
+    animation: WeaponArcClaw
+    soundSwing:
+      collection: WFRemadeSlasherEnhancedAttack
+    soundHit:
+      path: /Audio/Weapons/slash.ogg
+    damage:
+      types:
+        Slash: 20
+  - type: WFRemadeVoice
+    speech:
+      collection: WFRemadeSlasherEnhancedSpeech
+    pain:
+      collection: WFRemadeSlasherEnhancedPain
+    death:
+      collection: WFRemadeSlasherEnhancedDeath
+    shout:
+      collection: WFRemadeSlasherEnhancedShoutLong
+  - type: WFRemadeLimbs
+    rsi: _WF/Remade/Mobs/slasher_enhanced.rsi
+    floors: { Melee: 0.2, Speed: 0.12, Sight: 0.4 }
+    limbs:
+    - id: l_leg
+      name: wf-remade-limb-leg-left
+      health: 30
+      weight: 1.5
+      loss: 18
+      zones: [ LeftLeg, LeftFoot ]
+      provides: { Speed: 0.5 }
+      lying: enhanced_slasher_l_leg_lying
+    - id: r_leg
+      name: wf-remade-limb-leg-right
+      health: 30
+      weight: 1.5
+      loss: 18
+      zones: [ RightLeg, RightFoot ]
+      provides: { Speed: 0.5 }
+      lying: enhanced_slasher_r_leg_lying
+    - id: chest
+      health: 200
+      weight: 3
+      scale: 0.3
+      severable: false
+      zones: [ Torso, Groin ]
+      lying: enhanced_slasher_chest_lying
+    - id: l_arm
+      name: wf-remade-limb-blade-left
+      health: 25
+      weight: 1.5
+      loss: 12
+      zones: [ LeftArm, LeftHand ]
+      provides: { Melee: 0.5 }
+      lying: enhanced_slasher_l_arm_lying
+    - id: r_arm
+      name: wf-remade-limb-blade-right
+      health: 25
+      weight: 1.5
+      loss: 12
+      zones: [ RightArm, RightHand ]
+      provides: { Melee: 0.5 }
+      lying: enhanced_slasher_r_arm_lying
+    - id: head
+      name: wf-remade-limb-head
+      layers: [ head, eyes ]
+      health: 30
+      weight: 1
+      loss: 30
+      zones: [ Head ]
+      provides: { Voice: 1, Sight: 1 }
+      lying: enhanced_slasher_head_lying
+  - type: WFRemadeAbilities
+    abilities:
+    - !type:WFShoutAbility
+      cooldown: 8
+      range: 20
+      sound:
+        collection: WFRemadeSlasherEnhancedShout
+    - !type:WFChargeAbility
+      cooldown: 20
+      minRange: 3.5
+      range: 12
+      windUp: 0.75
+      duration: 4
+      speed: 2.2
+      sound:
+        collection: WFRemadeSlasherEnhancedShoutLong
+      hitSound:
+        path: /Audio/Effects/hit_kick.ogg
+    - !type:WFDodgeAbility
+      cooldown: 6
+      sound:
+        collection: WFRemadeSlasherEnhancedSpeech
+
+- type: entity
+  parent: WFRemadeBase
+  id: WFRemadeInfector
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _WF/Remade/Mobs/infector.rsi
+    noRot: true
+    offset: 0,0.25
+    layers:
+    - map: [ "l_leg" ]
+      state: infector_l_leg
+    - map: [ "r_leg" ]
+      state: infector_r_leg
+    - map: [ "chest" ]
+      state: infector_chest
+    - map: [ "l_arm" ]
+      state: infector_l_arm
+    - map: [ "r_arm" ]
+      state: infector_r_arm
+    - map: [ "head" ]
+      state: infector_head
+    - map: [ "proboscis" ]
+      state: infector_proboscis
+    - map: [ "dead" ]
+      state: dead
+      visible: false
+  - type: HTN
+    rootTask:
+      task: WFRemadeInfectorCompound
+    blackboard:
+      NavClimb: !type:Bool
+        true
+      NavInteract: !type:Bool
+        true
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+      VisionRadius: !type:Single
+        14
+      AggroVisionRadius: !type:Single
+        20
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      90: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.4
+    baseSprintSpeed: 2.4
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    attackRate: 0.6
+    animation: WeaponArcThrust
+    soundSwing:
+      collection: WFRemadeInfectorAttack
+    soundHit:
+      path: /Audio/Weapons/pierce.ogg
+    damage:
+      types:
+        Piercing: 13
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: WFRemadeInfectorFootstep
+  - type: WFRemadeVoice
+    speech:
+      collection: WFRemadeInfectorSpeech
+    pain:
+      collection: WFRemadeInfectorPain
+    death:
+      collection: WFRemadeInfectorDeath
+    shout:
+      collection: WFRemadeInfectorShoutLong
+  - type: WFRemadeLimbs
+    rsi: _WF/Remade/Mobs/infector.rsi
+    floors: { Melee: 0.2, Speed: 0.15, Sight: 0.4 }
+    limbs:
+    - id: l_leg
+      name: wf-remade-limb-leg-left
+      health: 40
+      weight: 1
+      loss: 12
+      zones: [ LeftLeg, LeftFoot ]
+      provides: { Speed: 0.25 }
+    - id: r_leg
+      name: wf-remade-limb-leg-right
+      health: 40
+      weight: 1
+      loss: 12
+      zones: [ RightLeg, RightFoot ]
+      provides: { Speed: 0.25 }
+    - id: chest
+      health: 200
+      weight: 3
+      scale: 0.3
+      severable: false
+      zones: [ Torso, Groin ]
+      lying: infector_chest_lying
+    - id: l_wing
+      name: wf-remade-limb-wing-left
+      layers: [ l_arm ]
+      health: 40
+      weight: 1.5
+      loss: 15
+      zones: [ LeftArm, LeftHand ]
+      provides: { Speed: 0.25 }
+      lying: infector_r_wing_lying
+    - id: r_wing
+      name: wf-remade-limb-wing-right
+      layers: [ r_arm ]
+      health: 40
+      weight: 1.5
+      loss: 15
+      zones: [ RightArm, RightHand ]
+      provides: { Speed: 0.25 }
+      lying: infector_r_wing_lying
+    - id: head
+      name: wf-remade-limb-head
+      health: 60
+      weight: 1
+      loss: 30
+      zones: [ Head ]
+      provides: { Voice: 1, Sight: 1 }
+      lying: infector_head_lying
+    - id: proboscis
+      name: wf-remade-limb-proboscis
+      health: 30
+      weight: 1.5
+      loss: 30
+      zones: [  ]
+      provides: { Melee: 1, Reanimate: 1 }
+      lying: infector_proboscis_lying
+- type: wfRemadeMob
+  id: WFRemadeSlasher
+  entity: WFRemadeSlasher
+  cost: 50
+  minStage: Growth
+  # DS13 picks a slasher's look at 8 to 2 to 0.1 (plain, desiccated, carrion); the others are in variants.yml.
+  spawnWeight: 4.75
+  conversionWeight: 7.5
+  compatibilityPower: -1
+
+- type: wfRemadeMob
+  id: WFRemadeSlasherEnhanced
+  entity: WFRemadeSlasherEnhanced
+  cost: 125
+  minStage: Rapture
+  spawnWeight: 2
+  conversionWeight: 1
+
+- type: wfRemadeMob
+  id: WFRemadeInfector
+  entity: WFRemadeInfector
+  cost: 100
+  minStage: Harvest
+  spawnWeight: 1
+  maxAlive: 1
+  needsCorpses: true
+
+- type: htnCompound
+  id: WFRemadeHuntCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: MeleeCombatCompound
+  - preconditions:
+    - !type:KeyExistsPrecondition
+      key: WFRemadeHunt
+    tasks:
+    - !type:HTNPrimitiveTask
+      # The Director owns this key and clears it when the Remade gets there. Letting the move drop it when the plan ended,
+      # which a one-task plan does at once, left a Remade that took a single step towards what it heard and then wandered.
+      operator: !type:MoveToOperator
+        pathfindInPlanning: false
+        targetKey: WFRemadeHunt
+        removeKeyOnFinish: false
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
+
+- type: htnCompound
+  id: WFRemadeInfectorCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFPickCorpseOperator
+        targetKey: WFRemadeCorpse
+        coordinatesKey: WFRemadeCorpseCoordinates
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        pathfindInPlanning: false
+        targetKey: WFRemadeCorpseCoordinates
+        rangeKey: MeleeRange
+    - !type:HTNPrimitiveTask
+      operator: !type:WFReanimateOperator
+        targetKey: WFRemadeCorpse
+  - tasks:
+    - !type:HTNCompoundTask
+      task: WFRemadeHuntCompound

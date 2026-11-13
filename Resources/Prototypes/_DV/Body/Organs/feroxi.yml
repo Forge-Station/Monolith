@@ -19,7 +19,8 @@
       - Crayon
       - Paper
   - type: Metabolizer
-    metabolizerTypes: [ Feroxi, Animal ]
+    #metabolizerTypes: [ Feroxi, Animal ]
+    metabolizerTypes: [ Animal ]
   - type: SolutionContainerManager
     solutions:
       stomach:
@@ -52,7 +53,8 @@
     removeEmpty: true
     solutionOnBody: false
     solution: "Lung"
-    metabolizerTypes: [ Feroxi ]
+    #metabolizerTypes: [ Feroxi ]
+    metabolizerTypes: [ Animal ]
     groups:
     - id: Gas
       rateModifier: 100.0

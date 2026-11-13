@@ -30,8 +30,8 @@
   - CrateEmergencyInternalsLarge
   - CrateServiceSmokeables
   - CrateFunInstrumentsVariety
-  - WFCrateLotTools
-  - WFCrateLotSurvival
+  #- WFCrateLotTools
+  #- WFCrateLotSurvival
 
 - type: wfEncounterManifest
   id: WFManifestFood
@@ -77,7 +77,7 @@
   - CrateEmergencyToxinKit
   - CrateMedicalSurgery
   - CrateVendingMachineRestockMedicalFilled
-  - WFCrateLotMedical
+  #- WFCrateLotMedical
 
 - type: wfEncounterManifest
   id: WFManifestIndustrial
@@ -103,7 +103,7 @@
   - WeldingFuelTankFull
   - NFMagnetBoxOre
   - WFCrateLotTools
-  - WFCrateOreCommon
+  #- WFCrateOreCommon
 
 - type: wfEncounterManifest
   id: WFManifestParts
@@ -127,8 +127,8 @@
   - PortableGeneratorSuperPacmanFlatpack
   - CrateEngineeringAMEJar
   - CrateAirlockKit
-  - WFCrateShipSystems
-  - WFCrateLotParts
+  #- WFCrateShipSystems
+  #- WFCrateLotParts
 
 - type: wfEncounterManifest
   id: WFManifestLuxury

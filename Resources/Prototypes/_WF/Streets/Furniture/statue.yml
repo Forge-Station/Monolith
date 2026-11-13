@@ -24,7 +24,7 @@
         mask: [ MachineMask ]
         layer: [ MachineLayer ]
   #- type: VehicleSmashable
-    minDestroyWeightClass: Medium
+  #  minDestroyWeightClass: Medium
 
 - type: entity
   parent: RMCConcreteStatue

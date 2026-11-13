@@ -2,4 +2,4 @@
 # at war with it too.
 - type: wfStanding
   id: WFAds
-  atWar: [ TSF, TSFCivilian, TSFHighComm, PDV, PDVCivilian, PDVHighComm, WFAshfallReavers ]
+  atWar: [ TSF, TSFHighComm, PDV ]

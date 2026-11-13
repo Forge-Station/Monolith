@@ -379,13 +379,14 @@
   id: GasSaleConsoleHigh
   components:
   # WOLFGATE(Mining) START: the Hokkaido console pays MMC industrial credits, 1 MIC per ~715 cr of gas
-  - type: GasSaleConsole
-    cashType: MMCIndustrialCredit
-  - type: MarketModifier
-    mod: 0.0014
-    hideExamine: true
-#   mod: 1.25
+  # - type: GasSaleConsole
+  #   cashType: MMCIndustrialCredit #MMC кредитов в сборке нет, и я хз будем ли мы их использовать
+  # - type: MarketModifier
+  #   mod: 0.0014
+  #   hideExamine: true
   # WOLFGATE END
+  - type: MarketModifier
+    mod: 1.25
 
 - type: entity
   parent: GasSaleConsole

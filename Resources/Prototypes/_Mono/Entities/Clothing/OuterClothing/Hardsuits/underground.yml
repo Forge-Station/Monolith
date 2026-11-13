@@ -1,37 +1,4 @@
 - type: entity
-  parent: ClothingOuterHardsuitSyndie # to-do: give a better sprite.
-  id: ClothingOuterHardsuitGodfather
-  name: BR-238 Godfather hardsuit # WOLFGATE(ArmorBalance): grammar pass.
-  description: A heavily reinforced hardsuit and a true symbol of wealth and power, however fleeting.
-  components: 
-  # WOLFGATE(ArmorSpecialization): ablative coat.
-  - type: WFAblativeCoat
-  - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
-    requiredSlot: outerclothing
-    blockUnequipWhenAttached: false
-    replaceCurrentClothing: true
-    clothingPrototypes:
-      head:  ClothingHeadHelmetHardsuitGodfather
-      helmetcover: ClothingHeadHelmetCoverBlock
-      helmetattachment: ClothingHeadHelmetAttachmentBlock
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.6
-        Slash: 0.6
-        Piercing: 0.4
-        Heat: 0.25
-        Radiation: 0.25
-        Caustic: 0.75
-  - type: Sprite
-    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
-  - type: Clothing
-    sprite: Clothing/OuterClothing/Hardsuits/syndiecommander.rsi
-  - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
-
-- type: entity
   parent: [ ClothingOuterHardsuitBase, BaseC3SyndicateContraband ]
   id: ClothingOuterHardsuitWarlord
   name: UGR WL-01

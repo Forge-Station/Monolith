@@ -48,6 +48,8 @@
       - Pill
       - Produce
       - Seed
+      - Organ #Forge-Change
+      - BodyPart #Forge-Change
       tags:
       - PillCanister
       - Bottle

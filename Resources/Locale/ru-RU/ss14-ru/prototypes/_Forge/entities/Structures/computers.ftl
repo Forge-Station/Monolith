@@ -29,3 +29,13 @@ ent-ComputerShuttleMedicalHospitalRemote = Консоль трафика Гос�
 
 ent-ComputerShuttleGoblin = консоль управления шаттлом "Путеводитель"
     .desc = Новая видеоигра с иммерсивным управлением вашего шаттла у вас дома! Протараньте как можно больше точек на экране, чтобы выиграть приз.
+
+ent-HoloComputerForerunner = голокомпьютер
+    .desc = Эта высокотехнологичая консоль служит для неведомых вам целей… Она — реликт ушедшей эпохи.
+    .suffix = Forge, Предтеч
+ent-BaseComputerForerunner = древняя консоль
+    .desc = Древнее устройство. Старое, потрёпанное, всё в царапинах, но при запуске издаёт приятный звук.
+    .suffix = Forge, Предтеч
+ent-ComputerForerunnerError = { ent-BaseComputerForerunner }
+    .desc = { ent-BaseComputerForerunner.desc }
+    .suffix = { ent-BaseComputerForerunner.suffix }

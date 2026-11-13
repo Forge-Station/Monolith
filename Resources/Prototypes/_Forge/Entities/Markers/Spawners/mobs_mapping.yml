@@ -16,23 +16,60 @@
 
 - type: entity
   parent: ForgeMappingSpawnerBase
-  id: SpawnMobForerunnerBorg
-  name: remnant cyborg spawner
-  suffix: Forge, Mapping, AI
+  id: SpawnMobForerunnerSiliconEngineer
+  name: forerunner engineer cyborg spawner
+  suffix: Forge, Mapping, AI, Engineer
   components:
   - type: Sprite
     layers:
     - state: red
     - state: ai
     - sprite: Mobs/Silicon/chassis.rsi
-      state: robot
+      state: synd_engi
   - type: ConditionalSpawner
     prototypes:
-    - MobForerunnerBorg
+    - MobForerunnerEngiSilicon
 
 - type: entity
   parent: ForgeMappingSpawnerBase
-  id: SpawnMobForerunnerBorgEngineer
+  id: SpawnMobForerunnerSiliconAssault
+  name: forerunner assault cyborg spawner
+  suffix: Forge, Mapping, AI, Assault
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Silicon/chassis.rsi
+      state: synd_sec
+  - type: ConditionalSpawner
+    prototypes:
+    - MobForerunnerAssaultSilicon
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobForerunnerSiliconRandom
+  name: forerunner cyborg spawner
+  suffix: Forge, Mapping, AI, Random
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: ai
+    - sprite: Mobs/Silicon/chassis.rsi
+      state: synd_engi
+  - type: RandomSpawner
+    prototypes:
+    - MobForerunnerEngiSilicon
+    rarePrototypes:
+    - MobForerunnerAssaultSilicon
+    rareChance: 0.25
+    chance: 1
+    offset: 0.0
+
+- type: entity
+  parent: ForgeMappingSpawnerBase
+  id: SpawnMobForerunnerSiliconEngiWeak
   name: remnant engineer cyborg spawner
   suffix: Forge, Mapping, AI, Engineer
   components:
@@ -44,11 +81,11 @@
       state: synd_engi
   - type: ConditionalSpawner
     prototypes:
-    - MobForerunnerBorgEngineer
+    - MobForerunnerEngiSiliconWeak
 
 - type: entity
   parent: ForgeMappingSpawnerBase
-  id: SpawnMobForerunnerBorgAssault
+  id: SpawnMobForerunnerSiliconAssaultWeak
   name: remnant assault cyborg spawner
   suffix: Forge, Mapping, AI, Assault
   components:
@@ -60,11 +97,11 @@
       state: synd_sec
   - type: ConditionalSpawner
     prototypes:
-    - MobForerunnerBorgAssault
+    - MobForerunnerAssaultSiliconWeak
 
 - type: entity
   parent: ForgeMappingSpawnerBase
-  id: SpawnMobForerunnerBorgRandom
+  id: SpawnMobForerunnerSiliconWeakRandom
   name: remnant cyborg spawner
   suffix: Forge, Mapping, AI, Random
   components:
@@ -76,10 +113,9 @@
       state: synd_engi
   - type: RandomSpawner
     prototypes:
-    - MobForerunnerBorg
-    - MobForerunnerBorgEngineer
+    - MobForerunnerEngiSiliconWeak
     rarePrototypes:
-    - MobForerunnerBorgAssault
+    - MobForerunnerAssaultSiliconWeak
     rareChance: 0.25
     chance: 1
     offset: 0.0
@@ -646,7 +682,7 @@
     - MobLaserRaptor
     rarePrototypes:
     - MobXenoCMWarrior
-    - MobForerunnerBorg
+    - MobForerunnerEngiSiliconWeak
     - MobArgocytePouncer
     rareChance: 0.15
     chance: 1

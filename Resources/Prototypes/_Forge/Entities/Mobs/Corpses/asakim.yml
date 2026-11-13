@@ -1,0 +1,30 @@
+# Base
+- type: entity
+  parent: BaseMobAsakim
+  id: AsakimCorpse
+  suffix: Dead
+  name: unidentified asakim corpse
+  description: I think they're dead.
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Carriable # Carrying system from nyanotrasen.
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatRotten
+      amount: 5
+  - type: Damageable
+    damage:
+      types:
+        Bloodloss: 49
+        Asphyxiation: 76
+        Slash: 56
+        Blunt: 19
+  - type: Inventory
+    templateId: corpse
+
+

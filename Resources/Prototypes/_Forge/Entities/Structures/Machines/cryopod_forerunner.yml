@@ -1,0 +1,20 @@
+- type: entity
+  id: MachineCryoSleepPodForerunner
+  parent: MachineCryoSleepPod
+  name: ancient cryo sleep chamber
+  description: Cold pillow, guaranteed.
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Machines/cryopod_forerunner.rsi
+
+- type: entity
+  id: MachineCryoSleepPodOpenForerunner
+  parent: [BaseStructureDisableToolUse, BaseMachine]
+  name: open ancient cryo sleep chamber
+  description: Cold pillow, guaranteed.
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _Forge/Structures/Machines/cryopod_forerunner.rsi
+    layers:
+    - state: open

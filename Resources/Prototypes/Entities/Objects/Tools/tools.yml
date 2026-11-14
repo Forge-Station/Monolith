@@ -373,8 +373,6 @@
     - WindowDiagonal
     - ShuttleWindow
     - ShuttleWindowDiagonal
-    - MiningWindowUran
-    - MiningWindowUranDiagonal
     - ShuttleWindowUranDiagonal
     - ShuttleWindowUran
     - ReinforcedUraniumWindowDiagonal
@@ -387,8 +385,6 @@
     - UraniumWindowDirectional
     - WindoorSecureUranium
     - WindoorUranium
-    - MiningWindowPlasma
-    - MiningWindowPlasmaDiagonal
     - PlasmaReinforcedWindowDirectional
     - PlasmaWindowDirectional
     - WindoorSecurePlasma
@@ -399,15 +395,15 @@
     - Windoor
     - PlasmaWindowDiagonal
     - PlasmaWindow
-    - WallShuttleInterior
     - WallShuttle
     - WallShuttleDiagonal
-    - ClockworkGrilleDiagonal
     - GrilleDiagonal
-    - ClockworkGrille
     - WallMining
     - WallMiningDiagonal
     - AirAlarm
+    - ShuttersNormal
+    - PlasticFlapsAirtightClear
+    - BlastDoor
     # Forge-Change-End
     - Airlock
     - AirlockGlass

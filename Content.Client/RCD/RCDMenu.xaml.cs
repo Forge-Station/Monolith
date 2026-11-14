@@ -96,12 +96,17 @@ public sealed partial class RCDMenu : RadialMenu
 
             // Ensure that the button that transitions the menu to the associated category layer
             // is visible in the main radial container (as these all start with Visible = false)
+            // Forge-Change-Start
+            var targetCategory = proto.Category is "DiagonalWindows" or "WholeWindows" or "DirectionalWindows"
+                ? "WindowsAndGrilles"
+                : proto.Category;
+            // Forge-Change-End
             foreach (var child in main.Children)
             {
                 if (child is not RadialMenuTextureButton castChild)
                     continue;
 
-                if (castChild.TargetLayer == proto.Category)
+                if (castChild.TargetLayer == targetCategory)
                 {
                     castChild.Visible = true;
                     break;

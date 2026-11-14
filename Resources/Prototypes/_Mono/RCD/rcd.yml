@@ -11,6 +11,40 @@
   rotation: Fixed
   fx: EffectRCDConstruct2
 
+# Forge-Change-Start
+# Directional windows
+- type: rcd
+  id: UraniumWindowDirectional
+  name: ent-UraniumWindowDirectional
+  category: DirectionalWindows
+  sprite: { entity: UraniumWindowDirectional }
+  mode: ConstructObject
+  prototype: UraniumWindowDirectional
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct1
+
+- type: rcd
+  id: PlasmaWindowDirectional
+  name: ent-PlasmaWindowDirectional
+  category: DirectionalWindows
+  sprite: { entity: PlasmaWindowDirectional }
+  mode: ConstructObject
+  prototype: PlasmaWindowDirectional
+  cost: 2
+  delay: 1
+  collisionMask: Impassable
+  collisionBounds: "-0.23,-0.49,0.23,-0.36"
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct1
+# Forge-Change-End
 # Docking
 
 - type: rcd

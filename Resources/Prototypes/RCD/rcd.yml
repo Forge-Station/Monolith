@@ -885,6 +885,19 @@
   rotation: User
   fx: EffectRCDConstruct2
 
+- type: rcd
+  id: PlasticFlapsAirtightClear
+  name: ent-PlasticFlapsAirtightClear
+  category: WallsAndFlooring
+  sprite: { entity: PlasticFlapsAirtightClear }
+  mode: ConstructObject
+  prototype: PlasticFlapsAirtightClear
+  cost: 16
+  delay: 6
+  collisionMask: FullTileMask
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
 # Forge-Change-End
 - type: rcd
   id: Grille
@@ -916,7 +929,7 @@
 # Windows
 - type: rcd
   id: Window
-  category: WindowsAndGrilles
+  category: WholeWindows # Forge-Change
   sprite: { entity: Window } # Forge-Change
   mode: ConstructObject
   prototype: Window
@@ -930,8 +943,8 @@
 
 - type: rcd
   id: WindowDirectional
-  category: WindowsAndGrilles
-  sprite: /Textures/Interface/Radial/RCD/directional.png
+  category: DirectionalWindows          # Forge-Change
+  sprite: { entity: WindowDirectional } # Forge-Change
   mode: ConstructObject
   prototype: WindowDirectional
   cost: 2
@@ -945,7 +958,7 @@
 
 - type: rcd
   id: ReinforcedWindow
-  category: WindowsAndGrilles
+  category: WholeWindows # Forge-Change
   sprite: { entity: ReinforcedWindow } # Forge-Change
   mode: ConstructObject
   prototype: ReinforcedWindow
@@ -959,8 +972,8 @@
 
 - type: rcd
   id: WindowReinforcedDirectional
-  category: WindowsAndGrilles
-  sprite: /Textures/Interface/Radial/RCD/directional_reinforced.png
+  category: DirectionalWindows                    # Forge-Change
+  sprite: { entity: WindowReinforcedDirectional } # Forge-Change
   mode: ConstructObject
   prototype: WindowReinforcedDirectional
   cost: 3
@@ -977,7 +990,7 @@
 - type: rcd
   id: ShuttleWindow
   name: ent-ShuttleWindow
-  category: WindowsAndGrilles
+  category: WholeWindows # Forge-Change
   sprite: { entity: ShuttleWindow }
   mode: ConstructObject
   prototype: ShuttleWindow
@@ -989,10 +1002,27 @@
   rotation: Fixed
   fx: EffectRCDConstruct2
 
+# Forge-Change-Start
+- type: rcd
+  id: ShuttleWindowUran
+  name: ent-ShuttleWindowUran
+  category: WholeWindows
+  sprite: { entity: ShuttleWindowUran }
+  mode: ConstructObject
+  prototype: ShuttleWindowUran
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: Fixed
+  fx: EffectRCDConstruct2
+
+# Forge-Change-End
 - type: rcd
   id: WindowDiagonal
   name: ent-WindowDiagonal
-  category: WindowsAndGrilles
+  category: DiagonalWindows # Forge-Change
   sprite: { entity: WindowDiagonal }
   mode: ConstructObject
   prototype: WindowDiagonal
@@ -1007,7 +1037,7 @@
 - type: rcd
   id: ReinforcedWindowDiagonal
   name: ent-ReinforcedWindowDiagonal
-  category: WindowsAndGrilles
+  category: DiagonalWindows # Forge-Change
   sprite: { entity: ReinforcedWindowDiagonal }
   mode: ConstructObject
   prototype: ReinforcedWindowDiagonal
@@ -1022,7 +1052,7 @@
 - type: rcd
   id: ShuttleWindowDiagonal
   name: ent-ShuttleWindowDiagonal
-  category: WindowsAndGrilles
+  category: DiagonalWindows # Forge-Change
   sprite: { entity: ShuttleWindowDiagonal }
   mode: ConstructObject
   prototype: ShuttleWindowDiagonal
@@ -1034,10 +1064,27 @@
   rotation: User
   fx: EffectRCDConstruct2
 
+# Forge-Change-Start
+- type: rcd
+  id: ShuttleWindowUranDiagonal
+  name: ent-ShuttleWindowUranDiagonal
+  category: DiagonalWindows
+  sprite: { entity: ShuttleWindowUranDiagonal }
+  mode: ConstructObject
+  prototype: ShuttleWindowUranDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+# Forge-Change-End
 - type: rcd
   id: UraniumWindow
   name: ent-UraniumWindow
-  category: WindowsAndGrilles
+  category: WholeWindows # Forge-Change
   sprite: { entity: UraniumWindow }
   mode: ConstructObject
   prototype: UraniumWindow
@@ -1052,7 +1099,7 @@
 - type: rcd
   id: UraniumWindowDiagonal
   name: ent-UraniumWindowDiagonal
-  category: WindowsAndGrilles
+  category: DiagonalWindows # Forge-Change
   sprite: { entity: UraniumWindowDiagonal }
   mode: ConstructObject
   prototype: UraniumWindowDiagonal
@@ -1067,7 +1114,7 @@
 - type: rcd
   id: ShuttleWindowPlasma
   name: ent-ShuttleWindowPlasma
-  category: WindowsAndGrilles
+  category: WholeWindows # Forge-Change
   sprite: { entity: ShuttleWindowPlasma }
   mode: ConstructObject
   prototype: ShuttleWindowPlasma
@@ -1082,7 +1129,7 @@
 - type: rcd
   id: ShuttleWindowPlasmaDiagonal
   name: ent-ShuttleWindowPlasmaDiagonal
-  category: WindowsAndGrilles
+  category: DiagonalWindows # Forge-Change
   sprite: { entity: ShuttleWindowPlasmaDiagonal }
   mode: ConstructObject
   prototype: ShuttleWindowPlasmaDiagonal
@@ -1097,7 +1144,7 @@
 - type: rcd
   id: PlasmaWindow
   name: ent-PlasmaWindow
-  category: WindowsAndGrilles
+  category: WholeWindows # Forge-Change
   sprite: { entity: PlasmaWindow }
   mode: ConstructObject
   prototype: PlasmaWindow
@@ -1112,7 +1159,7 @@
 - type: rcd
   id: ReinforcedUraniumWindowDiagonal
   name: ent-ReinforcedUraniumWindowDiagonal
-  category: WindowsAndGrilles
+  category: DiagonalWindows # Forge-Change
   sprite: { entity: ReinforcedUraniumWindowDiagonal }
   mode: ConstructObject
   prototype: ReinforcedUraniumWindowDiagonal
@@ -1127,7 +1174,7 @@
 - type: rcd
   id: ReinforcedUraniumWindow
   name: ent-ReinforcedUraniumWindow
-  category: WindowsAndGrilles
+  category: WholeWindows # Forge-Change
   sprite: { entity: ReinforcedUraniumWindow }
   mode: ConstructObject
   prototype: ReinforcedUraniumWindow
@@ -1142,7 +1189,7 @@
 - type: rcd
   id: UraniumReinforcedWindowDirectional
   name: ent-UraniumReinforcedWindowDirectional
-  category: WindowsAndGrilles
+  category: DirectionalWindows # Forge-Change
   sprite: { entity: UraniumReinforcedWindowDirectional }
   mode: ConstructObject
   prototype: UraniumReinforcedWindowDirectional
@@ -1158,7 +1205,7 @@
 - type: rcd
   id: PlasmaReinforcedWindowDirectional
   name: ent-PlasmaReinforcedWindowDirectional
-  category: WindowsAndGrilles
+  category: DirectionalWindows # Forge-Change
   sprite: { entity: PlasmaReinforcedWindowDirectional }
   mode: ConstructObject
   prototype: PlasmaReinforcedWindowDirectional
@@ -1174,7 +1221,7 @@
 - type: rcd
   id: ReinforcedPlasmaWindow
   name: ent-ReinforcedPlasmaWindow
-  category: WindowsAndGrilles
+  category: WholeWindows # Forge-Change
   sprite: { entity: ReinforcedPlasmaWindow }
   mode: ConstructObject
   prototype: ReinforcedPlasmaWindow
@@ -1189,7 +1236,7 @@
 - type: rcd
   id: ReinforcedPlasmaWindowDiagonal
   name: ent-ReinforcedPlasmaWindowDiagonal
-  category: WindowsAndGrilles
+  category: DiagonalWindows # Forge-Change
   sprite: { entity: ReinforcedPlasmaWindowDiagonal }
   mode: ConstructObject
   prototype: ReinforcedPlasmaWindowDiagonal
@@ -1201,9 +1248,22 @@
   rotation: User
   fx: EffectRCDConstruct3
 
-# Forge-Change-End
+- type: rcd
+  id: PlasmaWindowDiagonal
+  name: ent-PlasmaWindowDiagonal
+  category: DiagonalWindows # Forge-Change
+  sprite: { entity: PlasmaWindowDiagonal }
+  mode: ConstructObject
+  prototype: PlasmaWindowDiagonal
+  cost: 4
+  delay: 3
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct3
+
 # Windoors
-# Forge-Change-Start
 - type: rcd
   id: WindoorSecureUranium
   name: ent-WindoorSecureUranium
@@ -1320,6 +1380,34 @@
   rotation: User #Forge-Change
   fx: EffectRCDConstruct3
 
+# Forge-Change-Start
+- type: rcd
+  id: ShuttersNormal
+  name: ent-ShuttersNormal
+  category: Airlocks
+  sprite: { entity: ShuttersNormal }
+  mode: ConstructObject
+  prototype: ShuttersNormal
+  cost: 4
+  delay: 4
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct4
+
+- type: rcd
+  id: BlastDoor
+  name: ent-BlastDoor
+  category: Airlocks
+  sprite: { entity: BlastDoor }
+  mode: ConstructObject
+  prototype: BlastDoor
+  cost: 25
+  delay: 8
+  collisionMask: FullTileMask
+  rotation: User
+  fx: EffectRCDConstruct4
+
+# Forge-Change-End
 # Lighting
 - type: rcd
   id: TubeLight

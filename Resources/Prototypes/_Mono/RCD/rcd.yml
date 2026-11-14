@@ -2,7 +2,7 @@
 - type: rcd
   id: WallReinforced
   category: WallsAndFlooring
-  sprite: /Textures/Interface/Radial/RCD/reinforced_wall.png
+  sprite: { entity: WallReinforced }
   mode: ConstructObject
   prototype: WallReinforced
   cost: 6

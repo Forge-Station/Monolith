@@ -369,6 +369,8 @@
     - WindowReinforcedDirectional
     - ReinforcedWindow
     # Forge-Change-Start
+    - ReinforcedWindowDiagonal
+    - WindowDiagonal
     - ShuttleWindow
     - ShuttleWindowDiagonal
     - MiningWindowUran

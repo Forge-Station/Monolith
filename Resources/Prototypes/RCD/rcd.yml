@@ -823,7 +823,7 @@
 - type: rcd
   id: WallSolid
   category: WallsAndFlooring
-  sprite: /Textures/Interface/Radial/RCD/solid_wall.png
+  sprite: { entity: WallSolid } # Forge-Change
   mode: ConstructObject
   prototype: WallSolid
   cost: 4
@@ -889,7 +889,7 @@
 - type: rcd
   id: Grille
   category: WindowsAndGrilles
-  sprite: /Textures/Interface/Radial/RCD/grille.png
+  sprite: { entity: Grille } # Forge-Change
   mode: ConstructObject
   prototype: Grille
   cost: 4
@@ -917,7 +917,7 @@
 - type: rcd
   id: Window
   category: WindowsAndGrilles
-  sprite: /Textures/Interface/Radial/RCD/window.png
+  sprite: { entity: Window } # Forge-Change
   mode: ConstructObject
   prototype: Window
   cost: 3
@@ -946,7 +946,7 @@
 - type: rcd
   id: ReinforcedWindow
   category: WindowsAndGrilles
-  sprite: /Textures/Interface/Radial/RCD/window_reinforced.png
+  sprite: { entity: ReinforcedWindow } # Forge-Change
   mode: ConstructObject
   prototype: ReinforcedWindow
   cost: 4
@@ -987,6 +987,36 @@
   rules:
     - IsWindow
   rotation: Fixed
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: WindowDiagonal
+  name: ent-WindowDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: WindowDiagonal }
+  mode: ConstructObject
+  prototype: WindowDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
+  fx: EffectRCDConstruct2
+
+- type: rcd
+  id: ReinforcedWindowDiagonal
+  name: ent-ReinforcedWindowDiagonal
+  category: WindowsAndGrilles
+  sprite: { entity: ReinforcedWindowDiagonal }
+  mode: ConstructObject
+  prototype: ReinforcedWindowDiagonal
+  cost: 3
+  delay: 2
+  collisionMask: Impassable
+  rules:
+    - IsWindow
+  rotation: User
   fx: EffectRCDConstruct2
 
 - type: rcd

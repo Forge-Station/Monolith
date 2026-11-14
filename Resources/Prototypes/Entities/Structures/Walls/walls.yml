@@ -736,6 +736,12 @@
     - Wall
     - WallT2
     - Diagonal
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  # Forge-Change-End
 
 - type: entity
   parent: BaseWall
@@ -905,6 +911,12 @@
         node: girder
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  # Forge-Change-End
 
 - type: entity
   parent: BaseWallTierTwo # Mono
@@ -1482,7 +1494,7 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   # Forge-Change-End
-    deconstructable: false # Frontier
+  #   deconstructable: false # Frontier # Forge-Delete
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: WallDefense1

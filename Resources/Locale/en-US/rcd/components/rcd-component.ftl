@@ -40,11 +40,9 @@ rcd-component-windows-and-grilles = Windows and grilles
 rcd-component-airlocks = Airlocks
 rcd-component-electrical = Electrical
 rcd-component-lighting = Lighting
-# Forge-Change-Start
 rcd-component-diagonal-windows = Diagonal Windows
 rcd-component-whole-windows = Whole Windows
 rcd-component-directional-windows = Directional Windows
-# Forge-Change-End
 # Forge-Change: RPD radial categories (Goob-Station/Goob-Station#1203)
 rcd-component-piping = Piping
 rcd-component-pumpsvalves = Pumps and valves

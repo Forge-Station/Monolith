@@ -404,6 +404,8 @@
     - ShuttersNormal
     - PlasticFlapsAirtightClear
     - BlastDoor
+    - WallSolidDiagonal
+    - WallReinforcedDiagonal
     # Forge-Change-End
     - Airlock
     - AirlockGlass

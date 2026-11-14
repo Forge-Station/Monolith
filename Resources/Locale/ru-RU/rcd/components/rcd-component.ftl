@@ -37,12 +37,9 @@ rcd-component-windows-and-grilles = Окна и решётки
 rcd-component-airlocks = Шлюзы
 rcd-component-electrical = Электроприборы
 rcd-component-lighting = Освещение
-# Forge-Change-Start
 rcd-component-diagonal-windows = Диагональные окна
 rcd-component-whole-windows = Цельные окна
 rcd-component-directional-windows = Направленные окна
-# Forge-Change-End
-# Forge-Change: категории РФУ (Goob-Station/Goob-Station#1203)
 rcd-component-piping = Трубопровод
 rcd-component-pumpsvalves = Насосы и клапаны
 rcd-component-vents = Вентиляция

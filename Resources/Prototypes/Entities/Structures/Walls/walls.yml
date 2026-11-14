@@ -1478,12 +1478,10 @@
     state: state0
   # Forge-Change-Start
   - type: RCDDeconstructable # Frontier
-<<<<<<< HEAD
     cost: 6
     delay: 8
     fx: EffectRCDDeconstruct8
   # Forge-Change-End
-=======
     deconstructable: false # Frontier
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -1510,7 +1508,6 @@
         node: girder
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
->>>>>>> 2f3983873eb53cf331b34dc821608a1b9cada623
   # Forge-Change-Start
   - type: Construction
     graph: Girder

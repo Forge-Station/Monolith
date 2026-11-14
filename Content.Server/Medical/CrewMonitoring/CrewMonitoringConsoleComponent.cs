@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 using Content.Shared.DeviceNetwork;
 using Content.Shared.Medical.SuitSensors;
+=======
+using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.CrewMonitoring;
+>>>>>>> 031dfc2490 (test)
 
 namespace Content.Server.Medical.CrewMonitoring;
 
@@ -16,7 +21,16 @@ public sealed partial class CrewMonitoringConsoleComponent : Component
     public Dictionary<DeviceAddress, SuitSensorStatus> ConnectedSensors = new();
 
     /// <summary>
+<<<<<<< HEAD
     /// How long without an update before a sensor is considered lost, in seconds.
+=======
+    ///     SOS signals received by this console during the current round.
+    /// </summary>
+    public List<CrewMonitoringSosSignal> SosSignals = new();
+
+    /// <summary>
+    ///     After what time sensor consider to be lost.
+>>>>>>> 031dfc2490 (test)
     /// </summary>
     [DataField]
     public float SensorTimeout = 10f;

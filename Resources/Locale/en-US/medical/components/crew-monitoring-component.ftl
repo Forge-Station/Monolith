@@ -1,6 +1,9 @@
 ﻿## UI
 
 crew-monitoring-user-interface-title = Crew Monitoring Console
+crew-monitoring-user-interface-crew-tab = Crew
+crew-monitoring-user-interface-sos-tab = SOS signals
+crew-monitoring-user-interface-no-sos = No SOS signals received
 
 crew-monitor-filter-line-placeholder = Filter
 

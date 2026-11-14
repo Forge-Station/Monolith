@@ -107,6 +107,12 @@
   - type: Airtight
   - type: StaticPrice
     price: 100
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  # Forge-Change-End
 
 - type: entity
   id: PlasticFlapsAirtightOpaque

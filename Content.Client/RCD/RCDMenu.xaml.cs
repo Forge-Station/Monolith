@@ -62,13 +62,7 @@ public sealed partial class RCDMenu : RadialMenu
                 continue;
 
             var parent = FindControl<RadialContainer>(proto.Category);
-            var tooltip = Loc.GetString(proto.SetName);
-
-            if ((proto.Mode == RcdMode.ConstructTile || proto.Mode == RcdMode.ConstructObject) &&
-                proto.Prototype != null && _protoManager.TryIndex(proto.Prototype, out var entProto))
-            {
-                tooltip = Loc.GetString(entProto.Name);
-            }
+            var tooltip = GetPrototypeDisplayName(proto); /// Forge-Change
 
             tooltip = OopsConcat(char.ToUpper(tooltip[0]).ToString(), tooltip.Remove(0, 1));
 
@@ -96,12 +90,20 @@ public sealed partial class RCDMenu : RadialMenu
 
             // Ensure that the button that transitions the menu to the associated category layer
             // is visible in the main radial container (as these all start with Visible = false)
+            // Forge-Change-Start
+            var targetCategory = proto.Category switch
+            {
+                "DiagonalWindows" or "WholeWindows" or "DirectionalWindows" => "WindowsAndGrilles",
+                "AirlockTypes" or "Windoor" => "Airlocks",
+                _ => proto.Category,
+            };
+            // Forge-Change-End
             foreach (var child in main.Children)
             {
                 if (child is not RadialMenuTextureButton castChild)
                     continue;
 
-                if (castChild.TargetLayer == proto.Category)
+                if (castChild.TargetLayer == targetCategory) // Forge-Change
                 {
                     castChild.Visible = true;
                     break;
@@ -115,6 +117,19 @@ public sealed partial class RCDMenu : RadialMenu
             AddRCDMenuButtonOnClickActions(child);
         }
     }
+    /// Forge-Change-Start
+
+    private string GetPrototypeDisplayName(RCDPrototype proto)
+    {
+        if ((proto.Mode == RcdMode.ConstructTile || proto.Mode == RcdMode.ConstructObject) &&
+            proto.Prototype != null && _protoManager.TryIndex(proto.Prototype, out var entProto))
+        {
+            return entProto.Name;
+        }
+
+        return proto.SetName == "Unknown" ? proto.ID : Loc.GetString(proto.SetName);
+    }
+    /// Forge-Change-End
 
     private static string OopsConcat(string a, string b)
     {
@@ -143,15 +158,16 @@ public sealed partial class RCDMenu : RadialMenu
                 if (_playerManager.LocalSession?.AttachedEntity != null &&
                     _protoManager.TryIndex(castChild.ProtoId, out var proto))
                 {
-                    var msg = Loc.GetString("rcd-component-change-mode", ("mode", Loc.GetString(proto.SetName)));
+                    var name = GetPrototypeDisplayName(proto); /// Forge-Change
+                    var msg = Loc.GetString("rcd-component-change-mode", ("mode", name)); /// Forge-Change
 
                     if (proto.Mode == RcdMode.ConstructTile || proto.Mode == RcdMode.ConstructObject)
                     {
-                        var name = Loc.GetString(proto.SetName);
+                        // var name = Loc.GetString(proto.SetName); /// Forge-Change-Delete
 
-                        if (proto.Prototype != null &&
-                            _protoManager.TryIndex(proto.Prototype, out var entProto))
-                            name = entProto.Name;
+                        // if (proto.Prototype != null && /// Forge-Change-Delete
+                        //     _protoManager.TryIndex(proto.Prototype, out var entProto)) /// Forge-Change-Delete
+                        //     name = entProto.Name; /// Forge-Change-Delete
 
                         msg = Loc.GetString("rcd-component-change-build-mode", ("name", name));
                     }

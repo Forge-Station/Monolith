@@ -38,8 +38,12 @@ rcd-component-latticetiles = Lattice tiles
 rcd-component-platingtiles = Plating tiles
 rcd-component-windows-and-grilles = Windows and grilles
 rcd-component-airlocks = Airlocks
+rcd-component-windoor = Windoor
 rcd-component-electrical = Electrical
 rcd-component-lighting = Lighting
+rcd-component-diagonal-windows = Diagonal Windows
+rcd-component-whole-windows = Whole Windows
+rcd-component-directional-windows = Directional Windows
 # Forge-Change: RPD radial categories (Goob-Station/Goob-Station#1203)
 rcd-component-piping = Piping
 rcd-component-pumpsvalves = Pumps and valves

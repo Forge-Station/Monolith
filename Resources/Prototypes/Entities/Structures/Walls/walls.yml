@@ -736,6 +736,12 @@
     - Wall
     - WallT2
     - Diagonal
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  # Forge-Change-End
 
 - type: entity
   parent: BaseWall
@@ -905,6 +911,12 @@
         node: girder
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  # Forge-Change-End
 
 - type: entity
   parent: BaseWallTierTwo # Mono
@@ -1415,6 +1427,12 @@
   id: WallMining
   name: mining wall
   components:
+  # Forge-Change-Start
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  # Forge-Change-End
   - type: Tag
     tags:
     - Wall
@@ -1470,8 +1488,13 @@
   - type: Icon
     sprite: Structures/Walls/mining-diagonal.rsi
     state: state0
+  # Forge-Change-Start
   - type: RCDDeconstructable # Frontier
-    deconstructable: false # Frontier
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  # Forge-Change-End
+  #   deconstructable: false # Frontier # Forge-Change-Delete
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: WallDefense1

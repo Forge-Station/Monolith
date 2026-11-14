@@ -1,5 +1,5 @@
 - type: entity
-  parent: AirlockRCDResistant
+  parent: Airlock # Forge-Change
   id: AirlockShuttle
   suffix: Docking
   name: external airlock

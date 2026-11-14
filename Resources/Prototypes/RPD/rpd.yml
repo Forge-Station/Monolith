@@ -233,3 +233,16 @@
   collisionMask: Impassable
   rotation: User
   fx: EffectRCDConstruct0
+# Forge-Change-Start
+- type: rcd
+  id: AirAlarmRPD
+  name: ent-AirAlarm
+  category: Vents
+  sprite: { entity: AirAlarm }
+  mode: ConstructObject
+  prototype: AirAlarm
+  cost: 2
+  delay: 1
+  rotation: User
+  fx: EffectRCDConstruct0
+# Forge-Change-End

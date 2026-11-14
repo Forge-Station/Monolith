@@ -1523,5 +1523,5 @@
   cost: 2
   delay: 1
   rotation: User
-  fix: EffectRCDConstruct0
+  fx: EffectRCDConstruct0
 # Forge-Change-End

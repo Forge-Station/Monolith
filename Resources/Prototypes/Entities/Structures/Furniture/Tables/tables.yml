@@ -703,6 +703,13 @@
     sprite: Structures/Furniture/Tables/xeno.rsi
   - type: Icon
     sprite: Structures/Furniture/Tables/xeno.rsi
+  - type: IconSmooth
+    key: table
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ table ]
+      base: state_
+      swapOuterBits: true
   - type: Destructible
     thresholds:
     - trigger:

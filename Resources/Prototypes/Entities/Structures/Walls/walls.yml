@@ -140,8 +140,10 @@
   - type: IconSmooth
     key: walls-material
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls-material
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -156,12 +158,11 @@
       - walls-exo
       - walls-shuttle
       - walls-plastitanium
-      - walls-material
       - walls-marble
       - walls
       - grilles
       - doors
-      base: brick
+      base: wall
 
 - type: entity
   parent: BaseWallTierTwo # Mono
@@ -178,8 +179,10 @@
   - type: IconSmooth
     key: walls-material
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls-material
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -194,12 +197,11 @@
       - walls-exo
       - walls-shuttle
       - walls-plastitanium
-      - walls-material
       - walls-marble
       - walls
       - grilles
       - doors
-      base: brass
+      base: wall
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -222,8 +224,10 @@
   - type: IconSmooth
     key: walls-material
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls-material
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -238,12 +242,11 @@
       - walls-exo
       - walls-shuttle
       - walls-plastitanium
-      - walls-material
       - walls-marble
       - walls
       - grilles
       - doors
-      base: meat
+      base: wall
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -340,8 +343,10 @@
   - type: IconSmooth
     key: walls-material
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls-material
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -356,12 +361,11 @@
       - walls-exo
       - walls-shuttle
       - walls-plastitanium
-      - walls-material
       - walls-marble
       - walls
       - grilles
       - doors
-      base: gold
+      base: wall
 
 - type: entity
   parent: BaseWallTierOne # Mono
@@ -382,8 +386,10 @@
   - type: IconSmooth
     key: walls-material
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls-material
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -398,12 +404,11 @@
       - walls-exo
       - walls-shuttle
       - walls-plastitanium
-      - walls-material
       - walls-marble
       - walls
       - grilles
       - doors
-      base: plasma
+      base: wall
   - type: RadiationBlocker
     resistance: 5
 
@@ -816,8 +821,10 @@
   - type: IconSmooth
     key: walls-material
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls-material
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -832,12 +839,11 @@
       - walls-exo
       - walls-shuttle
       - walls-plastitanium
-      - walls-material
       - walls-marble
       - walls
       - grilles
       - doors
-      base: silver
+      base: wall
 
 #shuttle walls
 - type: entity
@@ -1258,8 +1264,10 @@
   - type: IconSmooth
     key: walls-material
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls-material
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -1274,12 +1282,11 @@
       - walls-exo
       - walls-shuttle
       - walls-plastitanium
-      - walls-material
       - walls-marble
       - walls
       - grilles
       - doors
-      base: uranium
+      base: wall
   - type: RadiationBlocker
     resistance: 6
   - type: RCDDeconstructable #Frontier
@@ -1307,8 +1314,10 @@
   - type: IconSmooth
     key: walls-material
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls-material
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -1323,12 +1332,11 @@
       - walls-exo
       - walls-shuttle
       - walls-plastitanium
-      - walls-material
       - walls-marble
       - walls
       - grilles
       - doors
-      base: wood
+      base: wall
   - type: RCDDeconstructable #Frontier
     cost: 6 #Frontier
     delay: 8 #Frontier
@@ -1378,8 +1386,10 @@
   - type: IconSmooth
     key: walls-material
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls-material
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -1394,7 +1404,6 @@
       - walls-exo
       - walls-shuttle
       - walls-plastitanium
-      - walls-material
       - walls-marble
       - walls
       - grilles
@@ -1425,8 +1434,10 @@
   - type: IconSmooth
     key: walls
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -1446,9 +1457,7 @@
       - walls
       - grilles
       - doors
-      base: mining
-      # mining.rsi uses upstream corner bit order, not Baystation/Corvax.
-      swapOuterBits: false
+      base: wall
   - type: Appearance
   # Forge-Change-Start
   - type: Construction
@@ -1575,8 +1584,10 @@
   - type: IconSmooth
     key: walls
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
+      - walls
+      altMask:
       - windows
       - windows-reinf
       - windows-tinted
@@ -1596,7 +1607,7 @@
       - walls
       - grilles
       - doors
-      base: concrete
+      base: wall
 
 # Cardboard
 
@@ -1658,12 +1669,13 @@
   - type: IconSmooth
     key: cards
     states:
-    - !type:CornerSpriteSmoothing
+    - !type:CardinalCornerSpriteSmoothing
       mask:
       - cards
+      altMask:
       - grilles
       - doors
-      base: card
+      base: wall
   - type: Occluder
   - type: BlockWeather
   - type: SunShadowCast

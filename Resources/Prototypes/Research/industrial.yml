@@ -9,19 +9,17 @@
   cost: 10000 # Mono
   recipeUnlocks:
   - MiningDrill
-  - ShipDrillMachineCircuitboard # Forge-change
   - WeaponGrapplingGun # Frontier
   - MineralScannerEmpty
   - OreProcessorIndustrialMachineCircuitboard
   - OreMagnetMachineCircuitboard
-  - OrePipeStorageMachineCircuitboard # Forge-Change: ore hold hub
-  - OreHoldModuleMachineCircuitboard # Forge-Change: expandable capacity
   - ClothingMaskWeldingGas
   - ClothingShoesBootsJump
   - MechEquipmentDrill # Goobstation
   - WeaponProtoKineticAccelerator
   - ShuttleGunKineticCircuitboard
-  # - WeaponTurretM25Circuitboard # Forge-Change-Delete
+  - WeaponTurretM25Circuitboard # Mono
+  - WFWeaponTurretMiningLaserSmallCircuitboard # WOLFGATE(AsteroidMining): light mining laser board
   # These are roundstart but not replenishable for salvage
   - WeaponCrusher
   - WeaponCrusherDagger
@@ -86,7 +84,7 @@
 - type: technology
   id: IndustrialEngineering
   name: research-technology-industrial-engineering
-  entityIcon: LatheUpgradeKitHyper
+  entityIcon: IndustrialPressEconomyElectronics
   discipline: Industrial
   tier: 1
   cost: 22500
@@ -147,7 +145,9 @@
 - type: technology
   id: AtmosphericTech
   name: research-technology-atmospheric-tech
-  entityIcon: GasThermoMachineFreezerEnabled
+  icon:
+    sprite: _Impstation/Structures/Piping/Atmospherics/thermomachine.rsi # WOLFGATE(Resprites): Imp Sprite Ports
+    state: freezerOff
   discipline: Industrial
   tier: 1
   cost: 8500
@@ -178,9 +178,13 @@
   - MiniStationAnchorCircuitboard # Frontier
   - SmallThrusterMachineCircuitboard # Frontier
   - SmallGyroscopeMachineCircuitboard # Frontier
+  # WOLFGATE(Drydock) START: mobile drydock boards
+  - WFComputerMobileDrydockCircuitboard
+  - WFMobileDrydockCraneMachineCircuitboard
+  # WOLFGATE END
   technologyPrerequisites:
   - AdvancedParts
-  position: -3, 5
+  position: -5, 7
 
 - type: technology
   id: AdvancedAtmospherics
@@ -214,8 +218,8 @@
   - UtilityBeltChiefEngineer
   - BorgModuleAdvancedTool
   - ExperimentalNaniteApplicator # Monolith
-  # - Fulton # Frontier
-  # - FultonBeacon # Frontier
+  - Fulton
+  - FultonBeacon
   - BorgModuleJetpack # Frontier
   #- NFBlueprintPowerDrill # Frontier
   #- NFBlueprintJawsOfLife # Frontier
@@ -224,15 +228,10 @@
   - RCD
   - RPD
   - RCDAmmo
-  - RPD # Forge-Change
-  - HandheldForgeAtmosMonitoring # Forge-Change
-  - HandheldForgePowerMonitoring # Forge-Change
   - ShipRepairDevice
   - ShipRepairDeviceAmmo
   - NFBlueprintRCDAmmo
   # Mono edit end
-  - ForgeBlueprintAdvancedTools # Forge-change
-  - ForgeBlueprintAdvancedShipRepairTools # Forge-change
   technologyPrerequisites:
   - SuperParts
   position: -1, 18
@@ -247,7 +246,8 @@
   recipeUnlocks:
   - OreBagOfHolding
   - MiningDrillDiamond
-  - ShipDrillDiamondMachineCircuitboard #Forge-change
+  - ShipDrillMachineCircuitboard
+  - WFWeaponTurretMiningBeamCircuitboard # WOLFGATE(AsteroidMining): mining laser board
   - AdvancedMineralScannerEmpty
   - NFBlueprintOreBagOfHolding # Frontier
   - NFBlueprintMiningDrillDiamond # Frontier
@@ -307,6 +307,10 @@
   cost: 50000
   recipeUnlocks:
   - MaterialSiloMachineCircuitboard
+  # WOLFGATE(Lathe) START: fabrication silos
+  - WFPartsSiloMachineCircuitboard
+  - WFChemicalSiloMachineCircuitboard
+  # WOLFGATE END
   technologyPrerequisites:
   - SuperParts
   position: -1, 6

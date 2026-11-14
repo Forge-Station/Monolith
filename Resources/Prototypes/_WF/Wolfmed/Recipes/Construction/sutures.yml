@@ -1,0 +1,15 @@
+# Playtest 5: a suture for when there is no medbay. A rod and a cloth make five stitches, which close a cut and leave
+# it dirty.
+
+- type: construction
+  name: makeshift suture
+  id: WFWolfmedMakeshiftSuture
+  graph: WFWolfmedMakeshiftSuture
+  startNode: start
+  targetNode: suture
+  category: construction-category-tools
+  description: A rod filed to a needle and thread pulled from cloth. Closes cuts slowly and leaves them dirty; clean them after.
+  icon:
+    sprite: _WF/Wolfmed/Medical/sutures.rsi
+    state: suture_tar_2
+  objectType: Item

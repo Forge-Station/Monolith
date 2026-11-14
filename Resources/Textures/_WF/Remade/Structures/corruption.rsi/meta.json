@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/effects/new_corruption.dmi)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "corruption-0"
+    },
+    {
+      "name": "corruption-1"
+    },
+    {
+      "name": "corruption-2"
+    },
+    {
+      "name": "corruption-3"
+    },
+    {
+      "name": "corruption-4"
+    },
+    {
+      "name": "corruption-5"
+    },
+    {
+      "name": "corruption-6"
+    },
+    {
+      "name": "corruption-7"
+    },
+    {
+      "name": "corruption-8"
+    },
+    {
+      "name": "corruption-9"
+    },
+    {
+      "name": "corruption-10"
+    },
+    {
+      "name": "corruption-11"
+    },
+    {
+      "name": "corruption-12"
+    },
+    {
+      "name": "corruption-13"
+    },
+    {
+      "name": "corruption-14"
+    },
+    {
+      "name": "corruption-15"
+    },
+    {
+      "name": "corruption-21"
+    },
+    {
+      "name": "corruption-23"
+    },
+    {
+      "name": "corruption-29"
+    },
+    {
+      "name": "corruption-31"
+    },
+    {
+      "name": "corruption-38"
+    },
+    {
+      "name": "corruption-39"
+    },
+    {
+      "name": "corruption-46"
+    },
+    {
+      "name": "corruption-47"
+    },
+    {
+      "name": "corruption-55"
+    },
+    {
+      "name": "corruption-63"
+    },
+    {
+      "name": "corruption-74"
+    },
+    {
+      "name": "corruption-75"
+    },
+    {
+      "name": "corruption-78"
+    },
+    {
+      "name": "corruption-79"
+    },
+    {
+      "name": "corruption-95"
+    },
+    {
+      "name": "corruption-110"
+    },
+    {
+      "name": "corruption-111"
+    },
+    {
+      "name": "corruption-127"
+    },
+    {
+      "name": "corruption-137"
+    },
+    {
+      "name": "corruption-139"
+    },
+    {
+      "name": "corruption-141"
+    },
+    {
+      "name": "corruption-143"
+    },
+    {
+      "name": "corruption-157"
+    },
+    {
+      "name": "corruption-159"
+    },
+    {
+      "name": "corruption-175"
+    },
+    {
+      "name": "corruption-191"
+    },
+    {
+      "name": "corruption-203"
+    },
+    {
+      "name": "corruption-207"
+    },
+    {
+      "name": "corruption-223"
+    },
+    {
+      "name": "corruption-239"
+    },
+    {
+      "name": "corruption-255"
+    },
+    {
+      "name": "split"
+    },
+    {
+      "name": "long"
+    },
+    {
+      "name": "expand"
+    },
+    {
+      "name": "t-piece"
+    },
+    {
+      "name": "bend"
+    },
+    {
+      "name": "corner"
+    },
+    {
+      "name": "edge"
+    },
+    {
+      "name": "full-1"
+    },
+    {
+      "name": "full-2"
+    },
+    {
+      "name": "full-3"
+    }
+  ]
+}

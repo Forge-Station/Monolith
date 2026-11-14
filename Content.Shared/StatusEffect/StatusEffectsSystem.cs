@@ -4,6 +4,8 @@ using Content.Shared.Rejuvenate;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+using Content.Shared._WF.RMCCore.StatusEffect; // WOLFGATE(RMCCore)
 
 namespace Content.Shared.StatusEffect
 {
@@ -118,7 +120,7 @@ namespace Content.Shared.StatusEffect
             if (HasComp<T>(uid))
                 return true;
 
-            EntityManager.AddComponent<T>(uid);
+            AddComp<T>(uid);
             status.ActiveEffects[key].RelevantComponent = Factory.GetComponentName<T>();
             return true;
 
@@ -133,10 +135,10 @@ namespace Content.Shared.StatusEffect
             if (TryAddStatusEffect(uid, key, time, refresh, status))
             {
                 // If they already have the comp, we just won't bother updating anything.
-                if (!EntityManager.HasComponent(uid, Factory.GetRegistration(component).Type))
+                if (!HasComp(uid, Factory.GetRegistration(component).Type))
                 {
                     var newComponent = (Component) Factory.GetComponent(component);
-                    EntityManager.AddComponent(uid, newComponent);
+                    AddComp(uid, newComponent);
                     status.ActiveEffects[key].RelevantComponent = component;
                 }
                 return true;
@@ -174,6 +176,12 @@ namespace Content.Shared.StatusEffect
                 return false;
             if (!CanApplyEffect(uid, key, status))
                 return false;
+
+            // WOLFGATE(RMCCore) START: RMC scales stun, knockdown and unconscious durations (xenos take two thirds)
+            var rmcTimeEv = new RMCStatusEffectTimeEvent(key, time);
+            RaiseLocalEvent(uid, ref rmcTimeEv);
+            time = rmcTimeEv.Duration;
+            // WOLFGATE END
 
             // we already checked if it has the index in CanApplyEffect so a straight index and not tryindex here
             // is fine
@@ -274,7 +282,7 @@ namespace Content.Shared.StatusEffect
                 && Factory.TryGetRegistration(state.RelevantComponent, out var registration))
             {
                 var type = registration.Type;
-                EntityManager.RemoveComponent(uid, type);
+                RemComp(uid, type);
             }
 
             if (proto.Alert != null)

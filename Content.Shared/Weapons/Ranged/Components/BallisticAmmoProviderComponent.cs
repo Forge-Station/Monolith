@@ -67,6 +67,10 @@ public sealed partial class BallisticAmmoProviderComponent : Component
     [DataField]
     public bool AutoCycle = true;
 
+    /// <summary>Fire entity ammunition in the same order it was inserted.</summary>
+    [DataField]
+    public bool FireInLoadOrder;
+
     /// <summary>
     /// Monolith - whether to ignore UnspawnedCount and be able to fire infinitely
     /// Will prioritise and fire/spend entity ammo if loaded

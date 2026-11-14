@@ -92,6 +92,7 @@
   categories:
   - Weapons
   materials:
+    WFGunParts: 5000 # WOLFGATE(TradeGoods): turrets use gun parts from weapon part crates
     Steel: 2000
     Plasteel: 3000
     Plastic: 2500

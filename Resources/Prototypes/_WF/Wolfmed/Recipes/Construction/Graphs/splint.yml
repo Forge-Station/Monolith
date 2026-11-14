@@ -1,0 +1,17 @@
+- type: constructionGraph
+  id: WFWolfmedSplintImprovised
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: splint
+      steps:
+      - material: MetalRod
+        amount: 2
+        doAfter: 1
+      - material: Cloth
+        amount: 2
+        doAfter: 1
+
+  - node: splint
+    entity: WFWolfmedSplintImprovised

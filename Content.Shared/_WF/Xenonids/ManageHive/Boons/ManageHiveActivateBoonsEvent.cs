@@ -1,0 +1,7 @@
+using Robust.Shared.Serialization;
+
+namespace Content.Shared._WF.Xenonids.ManageHive.Boons;
+
+[ByRefEvent]
+[Serializable, NetSerializable]
+public sealed class ManageHiveActivateBoonsEvent;

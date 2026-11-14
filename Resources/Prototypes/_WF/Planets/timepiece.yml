@@ -1,0 +1,41 @@
+- type: entity
+  id: WFPlanetTimepiece
+  parent: BaseItem
+  name: Planet Timepiece
+  description: A rugged watch synchronized to planetary time and weather networks.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/wristwatch.rsi
+    state: wristwatch
+  - type: Item
+    sprite: Objects/Devices/wristwatch.rsi
+    size: Small
+  - type: Clothing
+    sprite: Objects/Devices/wristwatch.rsi
+    quickEquip: false
+    slots:
+    - ARMBANDLEFT
+    - ARMBANDRIGHT
+  - type: WFPlanetTimepiece
+  - type: UseDelay
+    delay: 1
+  - type: StaticPrice
+    price: 50
+
+- type: cargoProduct
+  id: WFPlanetTimepiece
+  icon:
+    sprite: Objects/Devices/wristwatch.rsi
+    state: wristwatch
+  product: WFPlanetTimepiece
+  cost: 100
+  category: cargoproduct-category-name-engineering
+  group: market
+
+# Available alongside the ordinary wristwatch in the shared contractor trinket group.
+- type: loadout
+  id: WFPlanetTimepiece
+  price: 0
+  storage:
+    back:
+    - WFPlanetTimepiece

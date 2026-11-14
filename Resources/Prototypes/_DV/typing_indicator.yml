@@ -18,3 +18,18 @@
   typingState: chitinid0
   idleState: chitinid3 #Mono
   offset: -0.2, 0.1 # 0625
+
+- type: typingIndicator
+  id: feroxi
+  spritePath: /Textures/_DV/Effects/speech.rsi
+  typingState: feroxi0
+  idleState: feroxi0
+  offset: 0, 0.2 # 0625
+
+# Wolfgate: ported from HardLight. The port brought no thaven sprites, so this uses the default speech
+# art and keeps only the offset; thaven0 does not exist and made the typing indicator throw.
+- type: typingIndicator
+  id: thaven
+  typingState: default0
+  idleState: default3
+  offset: -0.2, 0.1 # 0625

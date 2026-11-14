@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By GitHub Mspaintwizard Discord 426969028796350485 South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "xeno_curl_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "xeno_curl_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "xeno_spike_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "xeno_spike_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "xeno_spined_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "xeno_spined_FRONT",
+      "directions": 4
+    }
+  ]
+}

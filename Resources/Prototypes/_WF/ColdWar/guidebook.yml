@@ -1,0 +1,10 @@
+- type: guideEntry
+  id: WFRuleConflictFiveDeclaringWar
+  name: guide-entry-wf-rule-conflict-five-declaring-war
+  text: "/ServerInfo/_WF/ColdWar/Guidebook/Rules/Conflict/Five_DeclaringWar.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: WFPdvStandingOrders
+  name: guide-entry-wf-pdv-standing-orders
+  text: "/ServerInfo/_WF/ColdWar/Guidebook/Factions/PDV_StandingOrders.xml"

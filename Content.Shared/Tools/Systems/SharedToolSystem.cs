@@ -1,3 +1,4 @@
+using Content.Shared._Goobstation.Tools;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
@@ -11,6 +12,7 @@ using Content.Shared.Timing.Components;
 using Content.Shared.Timing.Systems;
 using Content.Shared.Tools.Components;
 using JetBrains.Annotations;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -59,7 +61,7 @@ public abstract partial class SharedToolSystem : EntitySystem
             RaiseLocalEvent(GetEntity(args.OriginalTarget.Value), (object) ev);
         else
             RaiseLocalEvent((object) ev);
-            
+
         if (TryComp(uid, out UseDelayComponent? delay)) // Goobstation
             _delay.TryResetDelay((uid, delay));
     }
@@ -97,12 +99,12 @@ public abstract partial class SharedToolSystem : EntitySystem
         args.PushMessage(message);
     }
 
-    public void PlayToolSound(EntityUid uid, ToolComponent tool, EntityUid? user)
+    public void PlayToolSound(EntityUid uid, ToolComponent tool, EntityUid? user, AudioParams? audioParams = null) // Goob - audioParams
     {
         if (tool.UseSound == null)
             return;
 
-        _audioSystem.PlayPredicted(tool.UseSound, uid, user);
+        _audioSystem.PlayPredicted(tool.UseSound, uid, user, audioParams); // also goob - audioParams
     }
 
     /// <summary>
@@ -177,7 +179,13 @@ public abstract partial class SharedToolSystem : EntitySystem
             return false;
 
         var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target));
-        var doAfterArgs = new DoAfterArgs(EntityManager, user, delay / toolComponent.SpeedModifier, toolEvent, tool, target: target, used: tool)
+        var doAfterLength = delay / toolComponent.SpeedModifier; // Goob - doAfterLength var
+        // WOLFGATE(ArmorSpecialization) START: worn gear (servo assist) may speed the user's tool work.
+        var wfSpeed = new Content.Shared._WF.ArmorSpecialization.WFToolSpeedEvent();
+        RaiseLocalEvent(user, ref wfSpeed);
+        doAfterLength /= MathF.Max(wfSpeed.Multiplier, 0.1f);
+        // WOLFGATE END
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, doAfterLength, toolEvent, tool, target: target, used: tool)
         {
             BreakOnDamage = true,
             BreakOnMove = true,
@@ -187,7 +195,11 @@ public abstract partial class SharedToolSystem : EntitySystem
             AttemptFrequency = fuel > 0 ? AttemptFrequency.EveryTick : AttemptFrequency.Never
         };
 
-        _doAfterSystem.TryStartDoAfter(doAfterArgs, out id);
+        // Goobstation - Moved `TryStartDoAfter` into a check and added `UseToolEvent`.
+        if (_doAfterSystem.TryStartDoAfter(doAfterArgs, out id))
+        {
+            RaiseLocalEvent(tool, new UseToolEvent(user, target, id.Value.Index, doAfterLength));
+        }
         return true;
     }
 
@@ -211,7 +223,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         EntityUid user,
         EntityUid? target,
         float doAfterDelay,
-        ProtoId<ToolQualityPrototype> toolQualityNeeded,
+        string toolQualityNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
         ToolComponent? toolComponent = null)
@@ -220,7 +232,7 @@ public abstract partial class SharedToolSystem : EntitySystem
             user,
             target,
             TimeSpan.FromSeconds(doAfterDelay),
-            new[] { toolQualityNeeded },
+            new ProtoId<ToolQualityPrototype>[] { toolQualityNeeded },
             doAfterEv,
             out _,
             fuel,
@@ -277,7 +289,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     #region DoAfterEvents
 
     [Serializable, NetSerializable]
-    protected sealed partial class ToolDoAfterEvent : DoAfterEvent
+    public sealed partial class ToolDoAfterEvent : DoAfterEvent // Goob - Protected -> Public
     {
         [DataField]
         public float Fuel;

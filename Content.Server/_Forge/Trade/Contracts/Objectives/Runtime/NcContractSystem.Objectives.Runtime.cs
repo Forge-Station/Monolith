@@ -60,7 +60,7 @@ public sealed partial class NcContractSystem : EntitySystem
         SubscribeLocalEvent<NcContractGhostRoleSurvivalObjectiveComponent, ObjectiveGetProgressEvent>(
             OnGhostRoleSurvivalObjectiveGetProgress);
         SubscribeLocalEvent<EntParentChangedMessage>(OnObjectiveTrackedEntityParentChanged);
-        SubscribeLocalEvent<PullableComponent, PullStartedMessage>(OnObjectiveTrackedEntityPullStarted);
+        SubscribeLocalEvent<PullableComponent, PullStartedAfterEvent>(OnObjectiveTrackedEntityPullStarted);
         SubscribeLocalEvent<PullableComponent, PullStoppedMessage>(OnObjectiveTrackedEntityPullStopped);
         SubscribeLocalEvent<DamageableComponent, DamageChangedEvent>(OnObjectiveTrackedDamageChanged);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnGhostRoleRoundEndText);
@@ -166,7 +166,7 @@ public sealed partial class NcContractSystem : EntitySystem
     private void OnObjectiveTrackedEntityPullStarted(
         EntityUid uid,
         PullableComponent component,
-        PullStartedMessage args
+        PullStartedAfterEvent args
     )
     {
         RetargetRetrievalPulledCargoPinpointersForUser(uid, args.PullerUid);

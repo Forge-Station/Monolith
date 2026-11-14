@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/20/2025 20:52:36
-  entityCount: 3330
+  entityCount: 3346
 maps: []
 grids:
 - 1
@@ -15615,6 +15615,103 @@ entities:
       rot: 3.141592653589793 rad
       pos: 4.5,20.5
       parent: 1
+- proto: HardpointBallisticLight
+  entities:
+  - uid: 3336
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,8.5
+      parent: 1
+  - uid: 3337
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,20.5
+      parent: 1
+  - uid: 3338
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,-8.5
+      parent: 1
+  - uid: 3339
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,23.5
+      parent: 1
+  - uid: 3340
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,8.5
+      parent: 1
+  - uid: 3341
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,33.5
+      parent: 1
+  - uid: 3342
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,20.5
+      parent: 1
+  - uid: 3343
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,23.5
+      parent: 1
+  - uid: 3344
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,-8.5
+      parent: 1
+  - uid: 3345
+    components:
+    - type: Transform
+      pos: -11.5,-31.5
+      parent: 1
+  - uid: 3346
+    components:
+    - type: Transform
+      pos: 0.5,-33.5
+      parent: 1
+  - uid: 3347
+    components:
+    - type: Transform
+      pos: 12.5,-31.5
+      parent: 1
+  - uid: 3348
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 13.5,-30.5
+      parent: 1
+  - uid: 3349
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -12.5,-30.5
+      parent: 1
+- proto: HardpointEnergyLight
+  entities:
+  - uid: 3350
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 12.5,-23.5
+      parent: 1
+  - uid: 3351
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 12.5,-17.5
+      parent: 1
 - proto: HospitalCurtains
   entities:
   - uid: 1806
@@ -17502,7 +17599,7 @@ entities:
           - 1224
           - 1225
           - 1223
-- proto: ShieldGeneratorFSG100
+- proto: ShieldGeneratorSmall
   entities:
   - uid: 2004
     components:
@@ -22300,7 +22397,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -12.5,-30.5
       parent: 1
-- proto: WeaponTurretM25
+- proto: WFWeaponTurretMiningLaserSmall
   entities:
   - uid: 2631
     components:

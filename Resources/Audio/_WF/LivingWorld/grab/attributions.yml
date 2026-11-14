@@ -1,0 +1,29 @@
+- files:
+  - barnacle_tongue_pull1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/barnacle/barnacle_tongue_pull1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - barnacle_pull1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/barnacle/barnacle_pull1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - barnacle_pull2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/barnacle/barnacle_pull2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - barnacle_gulp1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/barnacle/barnacle_gulp1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - barnacle_bark1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/barnacle/barnacle_bark1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

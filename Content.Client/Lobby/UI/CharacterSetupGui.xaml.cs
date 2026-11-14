@@ -25,10 +25,14 @@ namespace Content.Client.Lobby.UI
         [Dependency] private IPrototypeManager _protomanager = default!;
         [Dependency] private IResourceCache _resourceCache = default!;
         [Dependency] private IConfigurationManager _cfg = default!;
+        [Dependency] private ILogManager _logManager = default!; // WOLFGATE
 
         private readonly Button _createNewCharacterButton;
 
         public event Action<int>? SelectCharacter;
+
+        /// <summary>WOLFGATE: raised instead of creating straight away, so unsaved edits can be confirmed first.</summary>
+        public event Action? NewCharacter;
         public event Action<int>? DeleteCharacter;
 
         public CharacterSetupGui(HumanoidProfileEditor profileEditor)
@@ -53,8 +57,7 @@ namespace Content.Client.Lobby.UI
 
             _createNewCharacterButton.OnPressed += args =>
             {
-                _preferencesManager.CreateCharacter(HumanoidCharacterProfile.Random());
-                ReloadCharacterPickers();
+                NewCharacter?.Invoke(); // WOLFGATE: was CreateCharacter + ReloadCharacterPickers here
                 args.Event.Handle();
             };
 
@@ -72,7 +75,7 @@ namespace Content.Client.Lobby.UI
         public void ReloadCharacterPickers()
         {
             _createNewCharacterButton.Orphan();
-            Characters.DisposeAllChildren();
+            Characters.RemoveAllChildren();
 
             var numberOfFullSlots = 0;
             var characterButtonsGroup = new ButtonGroup();
@@ -91,11 +94,24 @@ namespace Content.Client.Lobby.UI
             foreach (var (slot, character) in _preferencesManager.Preferences!.Characters)
             {
                 numberOfFullSlots++;
-                var characterPickerButton = new CharacterPickerButton(_entManager,
-                    _protomanager,
-                    characterButtonsGroup,
-                    character,
-                    slot == selectedSlot);
+
+                // WOLFGATE: a character this build cannot preview is skipped instead of aborting the loop, which used
+                // to leave the player without the rest of their characters and without the create-character button.
+                CharacterPickerButton characterPickerButton;
+                try
+                {
+                    characterPickerButton = new CharacterPickerButton(_entManager,
+                        _protomanager,
+                        characterButtonsGroup,
+                        character,
+                        slot == selectedSlot);
+                }
+                catch (Exception e)
+                {
+                    _logManager.GetSawmill("lobby").Error($"Could not show character in slot {slot}: {e}");
+                    continue;
+                }
+                // End WOLFGATE
 
                 Characters.AddChild(characterPickerButton);
 

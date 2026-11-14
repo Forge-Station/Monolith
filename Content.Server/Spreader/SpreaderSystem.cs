@@ -220,7 +220,7 @@ public sealed partial class SpreaderSystem : EntitySystem
         var neighborTiles = new ValueList<(EntityUid entity, MapGridComponent grid, Vector2i Indices, AtmosDirection OtherDir, AtmosDirection OurDir)>();
 
         // Check if anything on our own tile blocking that direction.
-        var ourEnts = _map.GetAnchoredEntitiesEnumerator(grid, grid, tile);
+        var ourEnts = _map.GetAnchoredEntities(grid, grid, tile);
         while (ourEnts.MoveNext(out var anchUid))
         {
             // Spread via docks in a special-case.
@@ -269,7 +269,7 @@ public sealed partial class SpreaderSystem : EntitySystem
             if (!spreadSpaced && _turf.IsSpace(tileRef))
                 continue;
 
-            var directionEnumerator = _map.GetAnchoredEntitiesEnumerator(neighborEnt, neighborGrid, neighborPos);
+            var directionEnumerator = _map.GetAnchoredEntities(neighborEnt, neighborGrid, neighborPos);
             var occupied = false;
 
             while (directionEnumerator.MoveNext(out var anchEnt))
@@ -322,7 +322,7 @@ public sealed partial class SpreaderSystem : EntitySystem
             (gridUid, tile) = position.Value;
         }
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+        var anchored = _map.GetAnchoredEntities(gridUid, grid, tile);
         while (anchored.MoveNext(out var entity))
         {
             DebugTools.Assert(Transform(entity.Value).Anchored);
@@ -333,7 +333,7 @@ public sealed partial class SpreaderSystem : EntitySystem
         foreach (var direction in _atmosDirections)
         {
             var adjacentTile = SharedMapSystem.GetDirection(tile, direction.ToDirection());
-            anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, adjacentTile);
+            anchored = _map.GetAnchoredEntities(gridUid, grid, adjacentTile);
 
             while (anchored.MoveNext(out var entity))
             {
@@ -346,7 +346,7 @@ public sealed partial class SpreaderSystem : EntitySystem
 
     public bool RequiresFloorToSpread(EntProtoId<EdgeSpreaderComponent> spreader)
     {
-        if (!_prototype.Index(spreader).TryGetComponent<EdgeSpreaderComponent>(out var spreaderComp, EntityManager.ComponentFactory))
+        if (!_prototype.Index(spreader).TryComp<EdgeSpreaderComponent>(out var spreaderComp, EntityManager.ComponentFactory))
             return false;
 
         return _prototype.Index(spreaderComp.Id).PreventSpreadOnSpaced;

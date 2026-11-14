@@ -1,0 +1,40 @@
+- files: ["metalhit.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 via RMC-14"
+  source: "https://github.com/cmss13-devs/cmss13/blob/41109aa6eebf87892e41b61418b7b06b279d04b6/sound/effects/metalhit.ogg"
+
+- files: ["barbed_wire_movement.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 via RMC-14"
+  source: "https://github.com/cmss13-devs/cmss13/blob/60b198fcf9cb01b0dd65f9078a73a7b276179c8a/sound/effects/barbed_wire_movement.ogg"
+
+- files: ["rustle1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 via RMC-14"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/rustle1.ogg"
+
+- files: ["rustle2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 via RMC-14"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/rustle2.ogg"
+
+- files: ["rustle3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 via RMC-14"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/rustle3.ogg"
+
+- files: ["rustle4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 via RMC-14"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/rustle4.ogg"
+
+- files: ["rustle5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 via RMC-14"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/rustle5.ogg"
+
+- files: ["thud.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13 via RMC-14"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/thud.ogg"
+

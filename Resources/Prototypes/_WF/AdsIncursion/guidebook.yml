@@ -1,0 +1,5 @@
+- type: guideEntry
+  id: WFAds
+  name: guide-entry-wf-ads
+  text: "/ServerInfo/_WF/AdsIncursion/Guidebook/Ads.xml"
+  priority: 14

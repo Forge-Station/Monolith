@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made for Wolfgate (Wolfmed) by Tools/_WF/Wolfmed/gen_wolfmed_overlays.py: two arrows down on the Crescent health alerts' backing",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "downed"
+    }
+  ]
+}

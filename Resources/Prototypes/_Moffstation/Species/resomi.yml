@@ -20,6 +20,8 @@
     HeadSide: MobHumanoidAnyMarking
     Hair: MobResomiHair
     Chest: MobResomiTorso
+    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
+    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
     Eyes: MobResomiEyes
     LArm: MobResomiLArm
     RArm: MobResomiRArm
@@ -32,6 +34,8 @@
     Special: MobHumanoidAnyMarking
     TailExtras: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
+    TailBehind: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
+    TailOversuit: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
 
 - type: markingPoints
   id: MobResomiMarkingLimits

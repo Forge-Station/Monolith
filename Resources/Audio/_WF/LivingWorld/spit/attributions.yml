@@ -1,0 +1,17 @@
+- files:
+  - goo_attack1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/bullsquid/goo_attack1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - goo_attack2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/bullsquid/goo_attack2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - splat1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/bullsquid/splat1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

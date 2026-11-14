@@ -1,0 +1,35 @@
+- type: vessel
+  id: Lightning
+  parent: BaseVessel
+  name: CASC Lightning
+  # WOLFGATE(Bench): Bench refit swaps a TOVEK for a SHRIKE ion disruptor
+  description: A fast-moving fast-strafing support craft. Armed with 3 TOVEKs, a SHRIKE ion disruptor to stop a fleeing ship, and 2 chainguns. Really more of a heavy fighter than a proper ship.
+  price: 71000
+  category: Small
+  group: Sr
+  access: Brig
+  mapchecker_group_override: Security
+  shuttlePath: /SharedMaps/_Mono/Shuttles/CSec/lightning.yml
+  guidebookPage: Null
+  class:
+  - Pursuit
+  - Fighter
+  - Brawler
+  - MissileCarrier
+  engine:
+  - Plasma
+
+- type: gameMap
+  id: Lightning
+  mapName: 'Lightning'
+  mapPath: /SharedMaps/_Mono/Shuttles/CSec/lightning.yml
+  minPlayers: 0
+  stations:
+    Lightning:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Lightning CSEC{1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: '14'

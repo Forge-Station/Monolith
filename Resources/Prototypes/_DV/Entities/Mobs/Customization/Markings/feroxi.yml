@@ -1,0 +1,668 @@
+# Default
+- type: marking
+  id: FeroxiEars
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/ear_markings.rsi
+    state: feroxi-ears
+  - sprite: _DV/Mobs/Customization/Feroxi/ear_markings.rsi
+    state: feroxi-ears-inner
+
+- type: marking
+  id: FeroxiTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+
+- type: marking
+  id: FeroxiSnout
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout
+
+# Ears Markings
+- type: marking
+  id: FeroxiEarsTips
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/ear_markings.rsi
+    state: feroxi-ears
+  - sprite: _DV/Mobs/Customization/Feroxi/ear_markings.rsi
+    state: feroxi-ears-inner
+  - sprite: _DV/Mobs/Customization/Feroxi/ear_markings.rsi
+    state: feroxi-ears-tips
+
+# Snout Markings
+- type: marking
+  id: FeroxiSnoutStripe
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout-stripe
+
+- type: marking
+  id: FeroxiSnoutCountershading
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout-countershading
+
+- type: marking
+  id: FeroxiSnoutCountershadingStripe
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout-countershading
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout-stripe
+
+- type: marking
+  id: FeroxiSnoutNurse
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout-nurse
+
+- type: marking
+  id: FeroxiSnoutNurseCountershading
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout-countershading
+  - sprite: _DV/Mobs/Customization/Feroxi/snout_markings.rsi
+    state: feroxi-snout-nurse
+
+# Tail Markings
+- type: marking
+  id: FeroxiTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+
+- type: marking
+  id: FeroxiStripedTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-stripes_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-stripes_BEHIND: feroxi-tail-stripes_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-stripes_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-stripes_BEHIND
+
+- type: marking
+  id: FeroxiStripedTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-stripes_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-stripes_BEHIND: feroxi-tail-stripes_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-stripes_FRONT
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-stripes
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-stripes_BEHIND
+
+- type: marking
+  id: FeroxiTipTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-top-tip_BEHIND: TailBehind
+    feroxi-tail-bottom-tip_BEHIND: TailBehind
+    feroxi-tail-second-dorsal-tip_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-top-tip_BEHIND: feroxi-tail-top-tip_FRONT
+    feroxi-tail-bottom-tip_BEHIND: feroxi-tail-bottom-tip_FRONT
+    feroxi-tail-second-dorsal-tip_BEHIND: feroxi-tail-second-dorsal-tip_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-top-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-bottom-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-second-dorsal-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-top-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-bottom-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-second-dorsal-tip_BEHIND
+
+- type: marking
+  id: FeroxiTipTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-top-tip_BEHIND: TailBehind
+    feroxi-tail-bottom-tip_BEHIND: TailBehind
+    feroxi-tail-second-dorsal-tip_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-top-tip_BEHIND: feroxi-tail-top-tip_FRONT
+    feroxi-tail-bottom-tip_BEHIND: feroxi-tail-bottom-tip_FRONT
+    feroxi-tail-second-dorsal-tip_BEHIND: feroxi-tail-second-dorsal-tip_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-top-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-bottom-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-second-dorsal-tip_FRONT
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-tip
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-top-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-bottom-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-second-dorsal-tip_BEHIND
+
+- type: marking
+  id: FeroxiTailBlitz
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-stripes_BEHIND: TailBehind
+    feroxi-tail-top-tip_BEHIND: TailBehind
+    feroxi-tail-bottom-tip_BEHIND: TailBehind
+    feroxi-tail-under_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-stripes_BEHIND: feroxi-tail-stripes_FRONT
+    feroxi-tail-top-tip_BEHIND: feroxi-tail-top-tip_FRONT
+    feroxi-tail-bottom-tip_BEHIND: feroxi-tail-bottom-tip_FRONT
+    feroxi-tail-under_BEHIND: feroxi-tail-under_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-stripes_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-top-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-bottom-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-under_FRONT
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-stripes
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-stripes_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-top-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-bottom-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-under_BEHIND
+
+- type: marking
+  id: FeroxiTailBlitzNoDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-stripes_BEHIND: TailBehind
+    feroxi-tail-top-tip_BEHIND: TailBehind
+    feroxi-tail-bottom-tip_BEHIND: TailBehind
+    feroxi-tail-under_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-stripes_BEHIND: feroxi-tail-stripes_FRONT
+    feroxi-tail-top-tip_BEHIND: feroxi-tail-top-tip_FRONT
+    feroxi-tail-bottom-tip_BEHIND: feroxi-tail-bottom-tip_FRONT
+    feroxi-tail-under_BEHIND: feroxi-tail-under_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-stripes_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-top-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-bottom-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-under_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-stripes_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-top-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-bottom-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-under_BEHIND
+
+- type: marking
+  id: FeroxiTwoToneTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-under_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-under_BEHIND: feroxi-tail-under_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-under_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-under_BEHIND
+
+- type: marking
+  id: FeroxiTwoToneTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-under_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-under_BEHIND: feroxi-tail-under_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-under_FRONT
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-under_BEHIND
+
+- type: marking
+  id: FeroxiStripeTwoToneTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-stripes_BEHIND: TailBehind
+    feroxi-tail-under_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-stripes_BEHIND: feroxi-tail-stripes_FRONT
+    feroxi-tail-under_BEHIND: feroxi-tail-under_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-stripes_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-under_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-stripes_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-under_BEHIND
+
+- type: marking
+  id: FeroxiStripeTwoToneTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-stripes_BEHIND: TailBehind
+    feroxi-tail-under_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-stripes_BEHIND: feroxi-tail-stripes_FRONT
+    feroxi-tail-under_BEHIND: feroxi-tail-under_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-stripes_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-under_FRONT
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-stripes
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-stripes_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-under_BEHIND
+
+- type: marking
+  id: FeroxiTipTwoToneTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-top-tip_BEHIND: TailBehind
+    feroxi-tail-bottom-tip_BEHIND: TailBehind
+    feroxi-tail-second-dorsal-tip_BEHIND: TailBehind
+    feroxi-tail-under_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-top-tip_BEHIND: feroxi-tail-top-tip_FRONT
+    feroxi-tail-bottom-tip_BEHIND: feroxi-tail-bottom-tip_FRONT
+    feroxi-tail-second-dorsal-tip_BEHIND: feroxi-tail-second-dorsal-tip_FRONT
+    feroxi-tail-under_BEHIND: feroxi-tail-under_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-top-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-bottom-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-second-dorsal-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-under_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-top-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-bottom-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-second-dorsal-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-under_BEHIND
+
+- type: marking
+  id: FeroxiTipTwoToneTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    feroxi-tail_BEHIND: TailBehind
+    feroxi-tail-top-tip_BEHIND: TailBehind
+    feroxi-tail-bottom-tip_BEHIND: TailBehind
+    feroxi-tail-second-dorsal-tip_BEHIND: TailBehind
+    feroxi-tail-under_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    feroxi-tail_BEHIND: feroxi-tail_FRONT
+    feroxi-tail-top-tip_BEHIND: feroxi-tail-top-tip_FRONT
+    feroxi-tail-bottom-tip_BEHIND: feroxi-tail-bottom-tip_FRONT
+    feroxi-tail-second-dorsal-tip_BEHIND: feroxi-tail-second-dorsal-tip_FRONT
+    feroxi-tail-under_BEHIND: feroxi-tail-under_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-top-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-bottom-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-second-dorsal-tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - split art
+    state: feroxi-tail-under_FRONT
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _DV/Mobs/Customization/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-tip
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-top-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-bottom-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-second-dorsal-tip_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Feroxi/tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: feroxi-tail-under_BEHIND
+
+# Body Markings
+- type: marking
+  id: FeroxiHeadStripesTiger
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-head-stripes-tiger
+
+- type: marking
+  id: FeroxiTorsoStripesBlitz
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-torso-stripes-blitz
+
+- type: marking
+  id: FeroxiTorsoCountershadingF
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-torso-countershading-f
+
+- type: marking
+  id: FeroxiTorsoCountershadingM
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-torso-countershading-m
+
+- type: marking
+  id: FeroxiTorsoStripesTiger
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-torso-stripes-tiger
+
+# Leg Markings
+- type: marking
+  id: FeroxiLegStripesBlitz
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-leg-stripes-blitz
+
+- type: marking
+  id: FeroxiLegStripesTiger
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-leg-stripes-tiger
+
+# Arm Markings
+- type: marking
+  id: FeroxiArmStripesBlitz
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-arm-stripes-blitz
+
+- type: marking
+  id: FeroxiArmStripesTiger
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-arm-stripes-tiger
+
+# Wolfgate: ported from HardLight
+- type: marking
+  id: FeroxiLeftLegStripesBlitz
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  sprites:
+  - sprite: DeltaV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-left-leg-stripes-blitz
+
+- type: marking
+  id: FeroxiRightLegStripesBlitz
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  sprites:
+   - sprite: DeltaV/Mobs/Customization/Feroxi/body_markings.rsi
+     state: feroxi-right-leg-stripes-blitz
+
+- type: marking
+  id: FeroxiLeftLegStripesTiger
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  sprites:
+  - sprite: DeltaV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-left-leg-stripes-tiger
+
+- type: marking
+  id: FeroxiRightLegStripesTiger
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  sprites:
+  - sprite: DeltaV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-right-leg-stripes-tiger
+
+# Arm Markings
+
+- type: marking
+  id: FeroxiLeftArmStripesBlitz
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  sprites:
+  - sprite: DeltaV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-left-arm-stripes-blitz
+
+- type: marking
+  id: FeroxiRightArmStripesBlitz
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  sprites:
+  - sprite: DeltaV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-right-arm-stripes-blitz
+
+- type: marking
+  id: FeroxiLeftArmStripesTiger
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  sprites:
+  - sprite: DeltaV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-left-arm-stripes-tiger
+
+- type: marking
+  id: FeroxiRightArmStripesTiger
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Shadekin, Canine]
+  sprites:
+  - sprite: DeltaV/Mobs/Customization/Feroxi/body_markings.rsi
+    state: feroxi-right-arm-stripes-tiger

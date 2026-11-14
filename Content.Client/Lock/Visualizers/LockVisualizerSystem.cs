@@ -11,7 +11,7 @@ public sealed partial class LockVisualizerSystem : VisualizerSystem<LockVisualsC
     protected override void OnAppearanceChange(EntityUid uid, LockVisualsComponent comp, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null
-            || !args.Sprite.LayerMapTryGet(LockVisualLayers.Lock, out _)
+            || !SpriteSystem.LayerMapTryGet((uid, args.Sprite), LockVisualLayers.Lock, out _, false)
             || !AppearanceSystem.TryGetData<bool>(uid, LockVisuals.Locked, out var locked, args.Component))
             return;
 

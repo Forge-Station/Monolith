@@ -110,7 +110,7 @@ namespace Content.Client.VendingMachines.UI
                 var itemName = GetVendingItemDisplayName(prototype);
                 var cost = 0; // mono
                 if (requiresCash) // frontier
-                    cost = GetPrice(entry, prototype, priceModifier);
+                    cost = WfLivePrice(entry.ID, GetPrice(entry, prototype, priceModifier)); // WOLFGATE(TradeGoods): trade vendors show the station's live price
 
                 string itemText;
 

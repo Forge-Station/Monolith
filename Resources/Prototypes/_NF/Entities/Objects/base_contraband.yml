@@ -181,6 +181,24 @@
       nfsd: -0.2
 
 - type: entity
+  parent: BaseC3SyndicateContraband
+  id: BaseC3SyndicateContrabandT2
+  abstract: true
+  components:
+  - type: Contraband
+    turnInValues:
+      FederationMilitaryCredit: 20
+
+- type: entity
+  parent: BaseC3SyndicateContraband
+  id: BaseC3SyndicateContrabandT3
+  abstract: true
+  components:
+  - type: Contraband
+    turnInValues:
+      FederationMilitaryCredit: 45
+
+- type: entity
   parent: BaseC3ContrabandUnredeemable
   id: BaseC3WizardContrabandUnredeemable
   abstract: true

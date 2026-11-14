@@ -30,6 +30,7 @@ namespace Content.Server.Body.Systems;
 public sealed partial class RespiratorSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _wfDormancy = default!; // WOLFGATE(Dormancy): skips NPC bodies nobody is near
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private AlertsSystem _alertsSystem = default!;
     [Dependency] private AtmosphereSystem _atmosSys = default!;
@@ -40,6 +41,8 @@ public sealed partial class RespiratorSystem : EntitySystem
     [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private Content.Server._WF.Wolfmed.Life.WolfmedBreathingSystem _wolfmedBreathing = default!; // WOLFGATE(Wolfmed): M1a
+    [Dependency] private Content.Server._WF.Wolfmed.Life.WolfmedBreathingAlertSystem _wolfmedBreathingAlert = default!; // WOLFGATE(Wolfmed): M2
 
     private static readonly ProtoId<MetabolismGroupPrototype> GasId = new("Gas");
 
@@ -75,13 +78,16 @@ public sealed partial class RespiratorSystem : EntitySystem
                 continue;
 
             respirator.NextUpdate += respirator.UpdateInterval;
+            if (_wfDormancy.BodySleeps(uid)) continue; // WOLFGATE(Dormancy): an NPC body no player is near on a planet skips its upkeep
 
             if (_mobState.IsDead(uid) || HasComp<BreathingImmunityComponent>(uid)) // Shitmed: BreathingImmunity
                 continue;
 
             UpdateSaturation(uid, -(float) respirator.UpdateInterval.TotalSeconds, respirator);
 
-            if (!_mobState.IsIncapacitated(uid) && !HasComp<DebrainedComponent>(uid) && !HasComp<BlockedBreathingComponent>(uid)) // Forge-change add BlockedBreathingComponent: I forbid you to breathe // Shitmed Change - Cannot breathe in crit or when no brain.
+            // WOLFGATE(Wolfmed): M1a: a wound host breathes while unconscious; only arrest and death stop it there.
+            // Everything else keeps the incapacitated rule (WolfmedBreathingSystem).
+            if (!_wolfmedBreathing.BreathingSuppressed(uid) && !HasComp<DebrainedComponent>(uid)) // Shitmed Change - Cannot breathe in crit or when no brain.
             {
                 switch (respirator.Status)
                 {
@@ -98,7 +104,10 @@ public sealed partial class RespiratorSystem : EntitySystem
 
             if (respirator.Saturation < respirator.SuffocationThreshold)
             {
-                if (_gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)
+                // WOLFGATE(Wolfmed): ARREST: a body whose heart has stopped looks dead, so it does not gasp. It still
+                // suffocates; the gasp is the only part of it anyone can see or hear.
+                if (!HasComp<Content.Shared._WF.Wolfmed.Life.WolfmedCardiacArrestComponent>(uid) &&
+                    _gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)
                 {
                     respirator.LastGaspEmoteTime = _gameTiming.CurTime;
                     _chat.TryEmoteWithChat(uid, respirator.GaspEmote, ChatTransmitRange.HideChat, ignoreActionBlocker: true);
@@ -184,7 +193,8 @@ public sealed partial class RespiratorSystem : EntitySystem
     /// </summary>
     public bool CanMetabolizeInhaledAir(Entity<RespiratorComponent?> ent)
     {
-        if (!Resolve(ent, ref ent.Comp))
+        // WOLFGATE: entities without a respirator cannot metabolize inhaled gases; absence is valid.
+        if (!Resolve(ent, ref ent.Comp, false))
             return false;
 
         var ev = new InhaleLocationEvent();
@@ -203,7 +213,8 @@ public sealed partial class RespiratorSystem : EntitySystem
     /// </summary>
     public bool CanMetabolizeGas(Entity<RespiratorComponent?> ent, GasMixture gas)
     {
-        if (!Resolve(ent, ref ent.Comp))
+        // WOLFGATE: entities without a respirator cannot metabolize inhaled gases; absence is valid.
+        if (!Resolve(ent, ref ent.Comp, false))
             return false;
 
         var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((ent, null));
@@ -295,7 +306,7 @@ public sealed partial class RespiratorSystem : EntitySystem
             var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((ent, null));
             foreach (var entity in organs)
             {
-                _alertsSystem.ShowAlert(ent, entity.Comp1.Alert);
+                _alertsSystem.ShowAlert(ent, _wolfmedBreathingAlert.SuffocationAlert(ent, entity.Comp1.Alert)); // WOLFGATE(Wolfmed): M2: "Can't breathe: no air" on a wound host
             }
         }
 

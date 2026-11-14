@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
+using Content.Server._Battlefield14.FactionTracking;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.GameTicking.Events;
@@ -26,6 +27,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server._Corvax.Respawn; // Frontier
+using Content.Shared._WF.Roles; // WOLFGATE(Roles)
 
 namespace Content.Server.GameTicking
 {
@@ -36,7 +38,7 @@ namespace Content.Server.GameTicking
         [Dependency] private AdminSystem _admin = default!;
         [Dependency] private RespawnSystem _respawn = default!; // Frontier
 
-        public const string ObserverPrototypeName = "MobObserver";
+        public static readonly EntProtoId ObserverPrototypeName = "MobObserver";
 
         public const string AdminObserverPrototypeName = "AdminObserver";
 
@@ -53,13 +55,14 @@ namespace Content.Server.GameTicking
         {
             var spawnableStations = new List<EntityUid>();
             var query = EntityQueryEnumerator<StationJobsComponent, StationSpawningComponent>();
-            while (query.MoveNext(out var uid, out var jobs, out _))
+            while (query.MoveNext(out var uid, out _, out _))
             {
-                // Frontier/POI stations inherit BaseStationJobsSpawning with an empty job list.
-                // Late-join used to pick those at random and then fall back to observer.
-                if (jobs.JobList.Count == 0)
+                // WOLFGATE(RoundSetup) START: ordinary joining excludes private scenario stations
+                // if (HasComp<Content.Server._WF.RoundSetup.WFCrashScenarioStationComponent>(uid) ||
+                //     HasComp<Content.Server._WF.RoundSetup.WFShipScenarioStationComponent>(uid))
+                if (!EntityManager.System<Content.Server._WF.RoundSetup.WFRoundSetupSystem>().IsStandardStation(uid))
                     continue;
-
+                // WOLFGATE END
                 spawnableStations.Add(uid);
             }
 
@@ -96,9 +99,11 @@ namespace Content.Server.GameTicking
             }
 
             var spawnableStations = GetSpawnableStations();
-            var assignedJobs = _stationJobs.AssignJobs(profiles, spawnableStations);
-
-            _stationJobs.AssignOverflowJobs(ref assignedJobs, playerNetIds, profiles, spawnableStations);
+            // WOLFGATE(RoundSetup) START: explicit Normal choices share the regular job allocation
+            // var assignedJobs = _stationJobs.AssignJobs(profiles, spawnableStations);
+            // _stationJobs.AssignOverflowJobs(ref assignedJobs, playerNetIds, profiles, spawnableStations);
+            var assignedJobs = WFAssignRoundSetupJobs(profiles, spawnableStations, playerNetIds);
+            // WOLFGATE END
 
             // Calculate extended access for stations.
             var stationJobCounts = spawnableStations.ToDictionary(e => e, _ => 0);
@@ -123,7 +128,10 @@ namespace Content.Server.GameTicking
                 if (job == null)
                     continue;
 
-                SpawnPlayer(_playerManager.GetSessionById(player), profiles[player], station, job, false);
+                // WOLFGATE(RoundSetup) START: authorize the assigned group member while preserving the saved profile
+                // SpawnPlayer(_playerManager.GetSessionById(player), profiles[player], station, job, false);
+                WFSpawnAssignedPlayer(_playerManager.GetSessionById(player), profiles[player], station, job);
+                // WOLFGATE END
             }
 
             RefreshLateJoinAllowed();
@@ -169,41 +177,25 @@ namespace Content.Server.GameTicking
             if (DummyTicker)
                 return;
 
-            if (lateJoin && DisallowLateJoin)
-            {
-                JoinAsObserver(player);
-                return;
-            }
-
-            // Figure out job restrictions before picking a station so we skip jobless POIs.
-            var restrictedRoles = new HashSet<ProtoId<JobPrototype>>();
-            var disallowedEv = new GetDisallowedJobsEvent(player, restrictedRoles);
-            RaiseLocalEvent(ref disallowedEv);
-
-            var jobBans = _banManager.GetJobBans(player.UserId);
-            if (jobBans != null)
-                restrictedRoles.UnionWith(jobBans);
-
             if (station == EntityUid.Invalid)
             {
                 var stations = GetSpawnableStations();
                 _robustRandom.Shuffle(stations);
+                if (stations.Count == 0)
+                    station = EntityUid.Invalid;
+                else
+                    station = stations[0];
+            }
 
-                foreach (var candidate in stations)
-                {
-                    var candidateJob = jobId ?? _stationJobs.PickBestAvailableJobWithPriority(
-                        candidate,
-                        character.JobPriorities,
-                        true,
-                        restrictedRoles);
+            // WOLFGATE(RoundSetup) START: require authenticated scenario membership on every spawn path
+            if (!EntityManager.System<Content.Server._WF.RoundSetup.WFRoundSetupSystem>().CanSpawnOnStation(player, station))
+                return;
+            // WOLFGATE END
 
-                    if (candidateJob is null)
-                        continue;
-
-                    station = candidate;
-                    jobId = candidateJob;
-                    break;
-                }
+            if (lateJoin && DisallowLateJoin)
+            {
+                JoinAsObserver(player);
+                return;
             }
 
             // We raise this event to allow other systems to handle spawning this player themselves. (e.g. late-join wizard, etc)
@@ -217,7 +209,16 @@ namespace Content.Server.GameTicking
                 return;
             }
 
-            // Pick best job based on prefs if a specific station was already provided.
+            // Figure out job restrictions
+            var restrictedRoles = new HashSet<ProtoId<JobPrototype>>();
+            var ev = new GetDisallowedJobsEvent(player, restrictedRoles);
+            RaiseLocalEvent(ref ev);
+
+            var jobBans = _banManager.GetJobBans(player.UserId);
+            if (jobBans != null)
+                restrictedRoles.UnionWith(jobBans);
+
+            // Pick best job best on prefs.
             jobId ??= _stationJobs.PickBestAvailableJobWithPriority(station,
                 character.JobPriorities,
                 true,
@@ -267,6 +268,7 @@ namespace Content.Server.GameTicking
 
             _roles.MindAddJobRole(newMind, silent: silent, jobPrototype:jobId);
             var jobName = _jobs.MindTryGetJobName(newMind);
+            var customJobTitle = CustomJobTitleRules.GetTitle(character, jobId, _prototypeManager); // WOLFGATE(Roles)
             _admin.UpdatePlayerList(player);
 
             if (lateJoin && !silent)
@@ -277,7 +279,7 @@ namespace Content.Server.GameTicking
                         Loc.GetString("latejoin-arrival-announcement-special",
                             ("character", MetaData(mob).EntityName),
                             ("entity", mob),
-                            ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
+                            ("job", customJobTitle ?? CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))), // WOLFGATE(Roles): custom title
                         Loc.GetString("latejoin-arrival-sender"),
                         playDefaultSound: false,
                         colorOverride: Color.Gold);
@@ -288,7 +290,7 @@ namespace Content.Server.GameTicking
                         Loc.GetString("latejoin-arrival-announcement",
                             ("character", MetaData(mob).EntityName),
                             ("entity", mob),
-                            ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
+                            ("job", customJobTitle ?? CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))), // WOLFGATE(Roles): custom title
                         Loc.GetString("latejoin-arrival-sender"),
                         playDefaultSound: false);
                 }
@@ -368,7 +370,26 @@ namespace Content.Server.GameTicking
 
             if (!_userDb.IsLoadComplete(player))
                 return;
+            // Mono/BF14 start
+            if (jobId != null)
+            {
+                var factionTracking = EntityManager.System<FactionTrackingSystem>();
+                if (CurrentPreset != null && CurrentPreset.AutobalancerEnabled && _jobs.TryGetDepartment(jobId, out var dept))
+                {
+                    string? faction = null;
+                    if (FactionTrackingSystem.BluforDepartments.Contains(dept.ID))
+                        faction = "blufor";
+                    else if (FactionTrackingSystem.RedforDepartments.Contains(dept.ID))
+                        faction = "redfor";
 
+                    if (faction != null && factionTracking.IsFactionOverpopulated(faction, this))
+                    {
+                        _chatManager.DispatchServerMessage(player, Loc.GetString("autobalance-team-full"));
+                        return;
+                    }
+                }
+            }
+            // Mono/BF14 end
             SpawnPlayer(player, station, jobId, silent: silent);
         }
 
@@ -485,7 +506,7 @@ namespace Content.Server.GameTicking
 
             if (_map.MapExists(DefaultMap))
             {
-                var mapUid = _map.GetMap(DefaultMap);
+                var mapUid = _map.GetMapOrInvalid(DefaultMap);
                 if (!TerminatingOrDeleted(mapUid))
                     return new EntityCoordinates(mapUid, Vector2.Zero);
             }
@@ -493,7 +514,7 @@ namespace Content.Server.GameTicking
             // Just pick a point at this point I guess.
             foreach (var map in _map.GetAllMapIds())
             {
-                var mapUid = _map.GetMap(map);
+                var mapUid = _map.GetMapOrInvalid(map);
 
                 if (!metaQuery.TryGetComponent(mapUid, out var meta)
                     || meta.EntityPaused

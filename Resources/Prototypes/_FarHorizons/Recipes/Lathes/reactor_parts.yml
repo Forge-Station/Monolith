@@ -25,6 +25,7 @@
   id: UraniumReactorFuelRod
   result: UraniumReactorFuelRod
   materials:
+    WFReactorFuel: 1000 # WOLFGATE(TradeGoods): fuel rods use reactor fuel from fission crates
     Steel: 500
     UraniumFissile: 30
 

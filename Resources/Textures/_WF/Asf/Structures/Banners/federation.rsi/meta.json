@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "banner taken from Paradise Station, https://github.com/ParadiseSS13/Paradise/commit/0deaf46e1a080baabf1753662051c8f3fbf1be0a (via _NF/Structures/Decoration/banner.rsi); recoloured to ASF purple with silver trim for Wolfgate, with the ring-and-cross emblem redrawn after the original ASF emblem by sciamach (Aphelion community).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "asf-federation-banner"
+    }
+  ]
+}

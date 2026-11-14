@@ -9,6 +9,7 @@ namespace Content.Client.Disposal.Unit;
 
 public sealed partial class DisposalUnitSystem : SharedDisposalUnitSystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private AppearanceSystem _appearanceSystem = default!;
     [Dependency] private AnimationPlayerSystem _animationSystem = default!;
     [Dependency] private SharedAudioSystem _audioSystem = default!;
@@ -71,7 +72,7 @@ public sealed partial class DisposalUnitSystem : SharedDisposalUnitSystem
         sprite.LayerSetVisible(DisposalUnitVisualLayers.Base, state == DisposalUnitComponent.VisualState.Anchored);
         sprite.LayerSetVisible(DisposalUnitVisualLayers.OverlayFlush, state is DisposalUnitComponent.VisualState.OverlayFlushing or DisposalUnitComponent.VisualState.OverlayCharging);
 
-        var chargingState = sprite.LayerMapTryGet(DisposalUnitVisualLayers.BaseCharging, out var chargingLayer)
+        var chargingState = sprite.LayerMapTryGet(DisposalUnitVisualLayers.BaseCharging, out var chargingLayer, false)
             ? sprite.LayerGetState(chargingLayer)
             : new RSI.StateId(DefaultChargeState);
 
@@ -80,7 +81,7 @@ public sealed partial class DisposalUnitSystem : SharedDisposalUnitSystem
         {
             if (!_animationSystem.HasRunningAnimation(ent, AnimationKey))
             {
-                var flushState = sprite.LayerMapTryGet(DisposalUnitVisualLayers.OverlayFlush, out var flushLayer)
+                var flushState = sprite.LayerMapTryGet(DisposalUnitVisualLayers.OverlayFlush, out var flushLayer, false)
                     ? sprite.LayerGetState(flushLayer)
                     : new RSI.StateId(DefaultFlushState);
 

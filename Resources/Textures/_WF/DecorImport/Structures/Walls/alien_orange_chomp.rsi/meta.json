@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CHOMPStation at commit https://github.com/CHOMPStation2/CHOMPStation2/commit/ca24d940aa4a6eb0d58d32b85ddc830f44459264.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "full"
+    },
+    {
+      "name": "alien0"
+    },
+    {
+      "name": "alien1"
+    },
+    {
+      "name": "alien2"
+    },
+    {
+      "name": "alien3"
+    },
+    {
+      "name": "alien4"
+    },
+    {
+      "name": "alien5"
+    },
+    {
+      "name": "alien6"
+    },
+    {
+      "name": "alien7"
+    },
+    {
+      "name": "alien8"
+    },
+    {
+      "name": "alien9"
+    },
+    {
+      "name": "alien10"
+    },
+    {
+      "name": "alien11"
+    },
+    {
+      "name": "alien12"
+    },
+    {
+      "name": "alien13"
+    },
+    {
+      "name": "alien14"
+    },
+    {
+      "name": "alien15"
+    }
+  ]
+}

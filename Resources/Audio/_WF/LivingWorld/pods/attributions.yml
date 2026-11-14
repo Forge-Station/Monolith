@@ -1,0 +1,47 @@
+- files:
+  - explode01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/barrelcactus/explode01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - explode02.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/barrelcactus/explode02.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - flinch01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/barrelcactus/flinch01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - flinch02.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/barrelcactus/flinch02.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - moldcyst_pop.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/xen_moldcyst/moldcyst_pop.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - moldcyst_idle.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/xen_moldcyst/moldcyst_idle.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - xen_podbreak.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/object/xen_podbreak.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - xen_podbreak2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/object/xen_podbreak2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

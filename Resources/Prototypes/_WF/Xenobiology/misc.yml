@@ -1,0 +1,110 @@
+# Ported from Goobstation via Trauma Station (shaders.yml, tags.yml, mob_actions.yml).
+
+- type: shader
+  id: XenoMetallic
+  kind: source
+  path: /Textures/_WF/Xenobiology/Shaders/xeno_metallic.swsl
+
+- type: shader
+  id: XenoSepia
+  kind: source
+  path: /Textures/_WF/Xenobiology/Shaders/xeno_sepia.swsl
+
+- type: shader
+  id: XenoBluespace
+  kind: source
+  path: /Textures/_WF/Xenobiology/Shaders/xeno_bluespace.swsl
+
+- type: Tag
+  id: XenobiologyAdamantineExtract
+
+- type: Tag
+  id: XenobiologyBlackExtract
+
+- type: Tag
+  id: XenobiologyBlueExtract
+
+- type: Tag
+  id: XenobiologyBluespaceExtract
+
+- type: Tag
+  id: XenobiologyCeruleanExtract
+
+- type: Tag
+  id: XenobiologyDarkBlueExtract
+
+- type: Tag
+  id: XenobiologyDarkPurpleExtract
+
+- type: Tag
+  id: XenobiologyGoldExtract
+
+- type: Tag
+  id: XenobiologyGreenExtract
+
+- type: Tag
+  id: XenobiologyGreyExtract
+
+- type: Tag
+  id: XenobiologyLightPinkExtract
+
+- type: Tag
+  id: XenobiologyMetalExtract
+
+- type: Tag
+  id: XenobiologyOilExtract
+
+- type: Tag
+  id: XenobiologyOrangeExtract
+
+- type: Tag
+  id: XenobiologyPinkExtract
+
+- type: Tag
+  id: XenobiologyPurpleExtract
+
+- type: Tag
+  id: XenobiologyPyriteExtract
+
+- type: Tag
+  id: XenobiologyRedExtract
+
+- type: Tag
+  id: XenobiologySepiaExtract
+
+- type: Tag
+  id: XenobiologySilverExtract
+
+- type: Tag
+  id: XenobiologyYellowExtract
+
+- type: Tag
+  id: XenoSlime
+
+- type: Tag
+  id: XenoNozzleBackTank
+
+- type: Tag
+  id: XenoVacNozzle
+
+- type: entity
+  id: ActionSlimeLatch
+  name: Latch
+  description: Latch onto a target and start digesting it, or get off the one you're on.
+  components:
+  - type: EntityTargetAction
+    icon:
+      sprite: _WF/Xenobiology/Actions/actions_slime.rsi
+      state: slimeeat
+    itemIconStyle: NoItem
+    useDelay: 3
+    range: 1
+    whitelist:
+      components:
+      - MobState
+      - Body
+    blacklist:
+      components:
+      - Slime
+    canTargetSelf: false
+    event: !type:SlimeLatchEvent

@@ -1,0 +1,251 @@
+# ASF coilguns: magazine-fed, caseless ferrite slugs thrown by a coil barrel. No casings to eject and no bolt
+# to rack. Both guns share one slug; the rifle's longer coil hits harder (damageModifier).
+
+- type: entity
+  id: WFAsfBulletCoilSlug
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+    armorPenetration: 0.15 # twice the 6.8mm caseless; the slug is small and very fast
+
+- type: entity
+  id: WFAsfCartridgeCoilSlug
+  parent: BaseCartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - WFAsfCartridgeCoilSlug
+  - type: CartridgeAmmo
+    proto: WFAsfBulletCoilSlug
+    deleteOnSpawn: true
+  - type: Sprite
+    noRot: false
+    sprite: _WF/Asf/Objects/Weapons/Guns/Ammunition/coil_slug.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 1
+
+- type: entity
+  id: WFAsfMagazineRifleCoil
+  parent: [ BaseCartridge, RecyclableItemSteelTiny ]
+  components:
+  - type: Tag
+    tags:
+    - WFAsfMagazineRifleCoil
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - WFAsfCartridgeCoilSlug
+    proto: WFAsfCartridgeCoilSlug
+    capacity: 24
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Weapons/Guns/Ammunition/coil_rifle_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: WFAsfMagazinePistolCoil
+  parent: WFAsfMagazineRifleCoil
+  components:
+  - type: Tag
+    tags:
+    - WFAsfMagazinePistolCoil
+  - type: BallisticAmmoProvider
+    capacity: 15
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Weapons/Guns/Ammunition/coil_pistol_mag.rsi
+
+- type: entity
+  id: WFAsfWeaponRifleCoil
+  parent: [ BaseWeaponRifle, BaseGunWieldable, BaseFactionGearOtherFactionT2 ]
+  components:
+  - type: Contraband
+    allowedDepartments: [ WFAsf ]
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Weapons/Guns/coil_rifle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    sprite: _WF/Asf/Objects/Weapons/Guns/coil_rifle_inhands_32x.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Objects/Weapons/Guns/coil_rifle_inhands_32x.rsi
+  - type: GunWieldBonus
+    minAngle: -18
+    maxAngle: -20
+  - type: Gun
+    minAngle: 18
+    maxAngle: 30
+    angleIncrease: 2
+    angleDecay: 16
+    fireRate: 6
+    projectileSpeed: 70 # a coil throws the slug well past powder rifles (55)
+    damageModifier: 1.4 # 28 per slug
+    # 3 rounds at 12/s then 0.15 s: 7.5 rounds/s sustained, about 210 dps against the TSF Lecter's 192
+    shotsPerBurst: 3
+    burstFireRate: 12
+    burstCooldown: 0.15
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/chemrail.ogg
+  - type: ChamberMagazineAmmoProvider
+    boltClosed: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: WFAsfMagazineRifleCoil
+        insertSound: /Audio/_Mono/Weapons/Guns/SmallArms/MagIn/chemrail_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - WFAsfMagazineRifleCoil
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: WFAsfCartridgeCoilSlug
+        priority: 1
+        whitelist:
+          tags:
+          - WFAsfCartridgeCoilSlug
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: WFAsfWeaponPistolCoil
+  parent: [ BaseWeaponPistol, BaseFactionGearOtherFactionT1 ]
+  components:
+  - type: Contraband
+    allowedDepartments: [ WFAsf ]
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Weapons/Guns/coil_pistol.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Objects/Weapons/Guns/coil_pistol.rsi
+  - type: Gun
+    fireRate: 5
+    projectileSpeed: 55
+    damageModifier: 1.1 # 22 per slug at 5/s, about 110 dps against the TSF Mk58's 100
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_Mono/Weapons/Guns/SmallArms/Gunshots/chemrail.ogg
+      params:
+        pitch: 1.3
+        volume: -3
+  - type: ChamberMagazineAmmoProvider
+    boltClosed: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: WFAsfMagazinePistolCoil
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - WFAsfMagazinePistolCoil
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: WFAsfCartridgeCoilSlug
+        priority: 1
+        whitelist:
+          tags:
+          - WFAsfCartridgeCoilSlug
+  - type: StaticPrice
+    price: 800
+
+- type: Tag
+  id: WFAsfCartridgeCoilSlug
+
+- type: Tag
+  id: WFAsfMagazineRifleCoil
+
+- type: Tag
+  id: WFAsfMagazinePistolCoil
+
+- type: entity
+  id: WFAsfBoxCoilSlug
+  parent: [ BaseItem, RecyclableItemCardboard ]
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - WFAsfCartridgeCoilSlug
+    proto: WFAsfCartridgeCoilSlug
+    capacity: 60 # two and a half rifle magazines
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Weapons/Guns/Ammunition/coil_slug_box.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Appearance
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_drop.ogg
+
+- type: entity
+  id: WFAsfBoxMagazineRifleCoil
+  parent: BoxMagazine
+  components:
+  - type: StorageFill
+    contents:
+    - id: WFAsfMagazineRifleCoil
+      amount: 4
+
+- type: entity
+  id: WFAsfBoxMagazinePistolCoil
+  parent: BoxMagazine
+  components:
+  - type: StorageFill
+    contents:
+    - id: WFAsfMagazinePistolCoil
+      amount: 4

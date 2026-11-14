@@ -1,0 +1,78 @@
+- type: entity
+  id: WFMobFleshTick
+  parent: [BaseSimpleMob, MobBloodstream]
+  name: flesh tick
+  description: A pulsing parasite made from Chimera flesh. It coils its legs before hurling itself at living prey.
+  components:
+  - type: HTN
+    rootTask:
+      task: ChimeraHostileCompound
+  - type: CombatMode
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      collection: WFFleshTickBite
+    damage:
+      types:
+        Piercing: 2
+  - type: NpcFactionMember
+    factions:
+    - Chimera
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: Mobs/Aliens/Xenos/spacetick.rsi
+      state: alive
+      color: "#9f3038"
+      scale: 0.8, 0.8
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4
+    baseSprintSpeed: 6
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.20
+        density: 20
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      15: Dead
+  - type: Stamina
+    critThreshold: 15
+  - type: MovementAlwaysTouching
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: Body
+    prototype: Animal
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatXeno
+      amount: 1
+  - type: Bloodstream
+    bloodMaxVolume: 50
+  - type: EmbeddableProjectile
+    embedOnThrow: false
+    removalTime: null
+  - type: WFFleshTick
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - Chimera
+  - type: NonSpreaderZombie

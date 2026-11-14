@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Explosion.Components;
+using Content.Server._WF.Wolfmed.Explosion; // WOLFGATE(Wolfmed): HOOK 22
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -21,13 +22,15 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using System.Numerics;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
+using Content.Shared._WF.RMCCore.Explosion; // WOLFGATE(RMCCore)
 
 namespace Content.Server.Explosion.EntitySystems;
 
 public sealed partial class ExplosionSystem
 {
+    [Dependency] private WolfmedExplosionSystem _wolfmedExplosion = default!; // WOLFGATE(Wolfmed): HOOK 22
+
     /// <summary>
     ///     Used to limit explosion processing time. See <see cref="MaxProcessingTime"/>.
     /// </summary>
@@ -468,10 +471,15 @@ public sealed partial class ExplosionSystem
                 }
 
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
+                if (!_wolfmedExplosion.TryApplyExplosionDamage(entity, damage)) // WOLFGATE(Wolfmed): HOOK 22 - wound hosts split the blast across their limbs; everyone else falls through unchanged.
                 _damageableSystem.TryChangeDamage(entity, damage, ignoreResistances: true, ignoreGlobalModifiers: true,
                 // Mono: Explosion flag for plate protection
                 originFlag: DamageableSystem.DamageOriginFlag.Explosion);
 
+                // WOLFGATE(RMCCore) START: RMC explosion reactions (stun on explosion, destroyed or gibbed by explosion type)
+                var receivedEv = new ExplosionReceivedEvent(id, epicenter, damage);
+                RaiseLocalEvent(entity, ref receivedEv);
+                // WOLFGATE END
             }
         }
 
@@ -554,6 +562,15 @@ public sealed partial class ExplosionSystem
 
         if (tileDef.TileId == tileRef.Tile.TypeId)
             return;
+
+        // WOLFGATE(Planets) START: a blast leaves a planet's ground, not station plating, lattice or a hole under a player's floor.
+        if (_wfPlanetTileBreak.BlastTile(tileRef, tileDef) is { } ground)
+        {
+            if (ground != tileRef.Tile)
+                damagedTiles.Add((tileRef.GridIndices, ground));
+            return;
+        }
+        // WOLFGATE END
 
         damagedTiles.Add((tileRef.GridIndices, new Tile(tileDef.TileId)));
     }
@@ -943,4 +960,13 @@ public sealed class QueuedExplosion
     public int MaxTileBreak;
     public bool CanCreateVacuum;
     public EntityUid? Cause; // The entity that exploded, for logging purposes.
+
+    // WOLFGATE(Planets) START: silent flag, so a crash's storm of blasts makes one bang.
+    /// <summary>
+    /// No sound and no camera shake for this one. For storms of explosions queued as a single event, where
+    /// one bang is wanted and a hundred would exhaust the client's audio sources. Combining clears it: an explosion
+    /// merged with an audible one is audible.
+    /// </summary>
+    public bool Silent;
+    // WOLFGATE END
 }

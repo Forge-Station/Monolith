@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Baystation 12 at commit https://github.com/Baystation12/Baystation12/commit/64fcc7090fbf1d9255446154730a57586cec3355.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "generic0",
+      "directions": 4
+    },
+    {
+      "name": "generic1",
+      "directions": 4
+    },
+    {
+      "name": "generic2",
+      "directions": 4
+    },
+    {
+      "name": "generic3",
+      "directions": 4
+    },
+    {
+      "name": "generic4",
+      "directions": 4
+    },
+    {
+      "name": "generic5",
+      "directions": 4
+    },
+    {
+      "name": "generic6",
+      "directions": 4
+    },
+    {
+      "name": "generic7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

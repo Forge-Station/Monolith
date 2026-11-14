@@ -1090,7 +1090,7 @@ public sealed partial class ShipWeaponFabricatorSystem : EntitySystem
         var stack = _prototype.Index(stackType);
         var entity = _prototype.Index<EntityPrototype>(stack.Spawn);
 
-        if (entity.TryGetComponent<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory) &&
+        if (entity.TryComp<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory) &&
             composition.MaterialComposition.Count > 0)
         {
             materialId = composition.MaterialComposition.First().Key;

@@ -39,7 +39,8 @@ public static partial class GameDataScrounger
         return Directory.EnumerateFiles(path,
                 pattern ?? "*",
                 recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
-            .Select(x => new ResPath(x.Remove(0, resBasePath.Length).Replace('\\', '/')))
+            // WOLFGATE: Resource paths require forward slashes, including on Windows.
+            .Select(x => new ResPath(x.Remove(0, resBasePath.Length).Replace(Path.DirectorySeparatorChar, '/')))
             .ToArray();
     }
 

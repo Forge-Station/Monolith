@@ -1,0 +1,23 @@
+- files:
+  - chirp03.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/protozoan/chirp03.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - chirp05.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/protozoan/chirp05.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - lilypad_landing_soft01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/lilypad/lilypad_landing_soft01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - lilypad_sinking01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/lilypad/lilypad_sinking01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

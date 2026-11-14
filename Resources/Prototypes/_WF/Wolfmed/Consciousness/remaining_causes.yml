@@ -1,0 +1,84 @@
+# M5: the remaining causes (plan §3.8-3.10). Same shape as causes.yml; the id is the WolfmedCause name.
+
+# Systemic Poison past wolfmed.consc_toxin_down (Downed), then wolfmed.consc_toxin_out (a toxic coma that keeps
+# breathing and drains the brain). The liver clears it slowly; antitoxin clears it fast.
+- type: wolfmedConsciousnessCause
+  id: Toxin
+  alertDowned: WFWolfmedDownedToxin
+  alertOut: WFWolfmedOutToxin
+  blockerName: wolfmed-cause-toxin
+  titleDowned: wolfmed-cause-toxin-title
+  titleOut: wolfmed-cause-toxin-title-out
+  symptom: wolfmed-cause-toxin-symptom
+  help: wolfmed-cause-toxin-help
+  helpBlocked: wolfmed-cause-toxin-help-blocked
+  helpOut: wolfmed-cause-toxin-help-out
+  helpOutBlocked: wolfmed-cause-toxin-help-out-blocked
+  down: wolfmed-cause-toxin-down
+  out: wolfmed-cause-toxin-out
+  wake: wolfmed-cause-toxin-wake
+  stand: wolfmed-cause-toxin-stand
+
+# Radiation sickness: Downed past wolfmed.consc_rad_down. It never knocks out; it kills through the blood.
+- type: wolfmedConsciousnessCause
+  id: Radiation
+  alertDowned: WFWolfmedDownedRadiation
+  blockerName: wolfmed-cause-radiation
+  titleDowned: wolfmed-cause-radiation-title
+  symptom: wolfmed-cause-radiation-symptom
+  help: wolfmed-cause-radiation-help
+  helpBlocked: wolfmed-cause-radiation-help-blocked
+  down: wolfmed-cause-radiation-down
+  wake: wolfmed-cause-radiation-wake
+  stand: wolfmed-cause-radiation-stand
+
+# Hypothermia: a core under the species' cold lines. Downed, then Unconscious and breathing; the heart stopping from
+# cold is the Arrest cause with its own source.
+- type: wolfmedConsciousnessCause
+  id: Cold
+  alertDowned: WFWolfmedDownedCold
+  alertOut: WFWolfmedOutCold
+  blockerName: wolfmed-cause-cold
+  titleDowned: wolfmed-cause-cold-title
+  titleOut: wolfmed-cause-cold-title-out
+  symptom: wolfmed-cause-cold-symptom
+  help: wolfmed-cause-cold-help
+  helpBlocked: wolfmed-cause-cold-help-blocked
+  helpOut: wolfmed-cause-cold-help-out
+  helpOutBlocked: wolfmed-cause-cold-help-out-blocked
+  down: wolfmed-cause-cold-down
+  out: wolfmed-cause-cold-out
+  wake: wolfmed-cause-cold-wake
+  stand: wolfmed-cause-cold-stand
+
+# Heat exhaustion (Downed) and heat stroke (Unconscious, with its own brain drain). A fire's grace only delays it.
+- type: wolfmedConsciousnessCause
+  id: Heat
+  alertDowned: WFWolfmedDownedHeat
+  alertOut: WFWolfmedOutHeat
+  blockerName: wolfmed-cause-heat
+  titleDowned: wolfmed-cause-heat-title
+  titleOut: wolfmed-cause-heat-title-out
+  symptom: wolfmed-cause-heat-symptom
+  help: wolfmed-cause-heat-help
+  helpBlocked: wolfmed-cause-heat-help-blocked
+  helpOut: wolfmed-cause-heat-help-out
+  helpOutBlocked: wolfmed-cause-heat-help-out-blocked
+  down: wolfmed-cause-heat-down
+  out: wolfmed-cause-heat-out
+  wake: wolfmed-cause-heat-wake
+  stand: wolfmed-cause-heat-stand
+
+
+# Playtest 5: septic shock (sepsis past wolfmed.septic_shock_at). Unconscious, never Downed, until antibiotics pull the
+# sepsis under the line. Not Dying: only the organ damage that follows kills, through the failing lungs.
+- type: wolfmedConsciousnessCause
+  id: SepticShock
+  alertOut: WFWolfmedOutSepticShock
+  blockerName: wolfmed-cause-septicshock
+  titleOut: wolfmed-cause-septicshock-title-out
+  symptom: wolfmed-cause-septicshock-symptom
+  helpOut: wolfmed-cause-septicshock-help-out
+  helpOutBlocked: wolfmed-cause-septicshock-help-out-blocked
+  out: wolfmed-cause-septicshock-out
+  wake: wolfmed-cause-septicshock-wake

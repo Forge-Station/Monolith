@@ -8,6 +8,42 @@
   },
   "states": [
     {
+      "name": "equipped-HELMET-hydrakin",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-avali",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-light",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-light-avali",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-light-vox",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-light-vulpkanin",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-vox",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-vulpkanin",
+      "directions": 4
+    },
+    {
       "name": "icon"
     },
     {
@@ -17,39 +53,11 @@
       "name": "light-overlay"
     },
     {
-      "name": "equipped-head",
-      "directions": 4
-    },
-    {
-      "name": "equipped-head-light",
-      "directions": 4
-    },
-    {
-      "name": "equipped-head-vox",
-      "directions": 4
-    },
-    {
-      "name": "equipped-head-light-vox",
-      "directions": 4
-    },
-    {
-      "name": "equipped-head-vulpkanin",
-      "directions": 4
-    },
-    {
-      "name": "equipped-head-light-vulpkanin",
-      "directions": 4
-    },
-    {
       "name": "off-equipped-HELMET-hydrakin",
       "directions": 4
     },
     {
       "name": "on-equipped-HELMET-hydrakin",
-      "directions": 4
-    },
-    {
-      "name": "equipped-HELMET-hydrakin",
       "directions": 4
     }
   ]

@@ -1,0 +1,36 @@
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+# WOLFGATE: the pulses stand alone instead of inheriting RMCEffectXenoTelegraphGreen, which the retrieve code brings
+- type: entity
+  id: RMCEffectXenoTelegraphRedPulse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.2
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _WF/Xenonids/Effects/xeno_boiler_telegraph.rsi
+    state: boiler_telegraph
+    color: "#A50824"
+    noRot: true
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/green.yml
+- type: entity
+  id: RMCEffectXenoTelegraphYellowPulse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.2
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _WF/Xenonids/Effects/xeno_boiler_telegraph.rsi
+    state: boiler_telegraph
+    color: "#ffff00"
+    noRot: true
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu

@@ -1,0 +1,13 @@
+# Stairs a player builds on a cavern floor. They open the ground tile above them (WFCavernStairsSystem) and are
+# walked up and down: CE high ground under a hole. The top is the side they face away from.
+- type: entity
+  id: WFCavernStairs
+  parent: CEZLevelLadderBase
+  components:
+  - type: Sprite
+    sprite: _WF/Caverns/Stairs/steel.rsi
+  - type: InteractionOutline
+  - type: WFCavernStairs
+  - type: Construction
+    graph: WFCavernStairs
+    node: stairs

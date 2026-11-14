@@ -1,0 +1,264 @@
+# The Common Writ: the laws the Bench app tickets, grouped by article.
+
+- type: wfLawChapter
+  id: WFLawChapterReality
+  name: wf-law-chapter-reality
+  order: 1
+
+- type: wfLawChapter
+  id: WFLawChapterPersons
+  name: wf-law-chapter-persons
+  order: 2
+
+- type: wfLawChapter
+  id: WFLawChapterBench
+  name: wf-law-chapter-bench
+  order: 3
+
+- type: wfLawChapter
+  id: WFLawChapterCentral
+  name: wf-law-chapter-central
+  order: 4
+
+- type: wfLaw
+  id: WFLawAnchorBreach
+  chapter: WFLawChapterReality
+  order: 1
+  name: wf-law-anchor-breach
+  text: wf-law-anchor-breach-text
+  level: Outlawry
+
+- type: wfLaw
+  id: WFLawTrespass
+  chapter: WFLawChapterReality
+  order: 2
+  name: wf-law-trespass
+  text: wf-law-trespass-text
+  level: Citation
+  fine: 10000
+  minFine: 5000
+  maxFine: 20000
+
+- type: wfLaw
+  id: WFLawDeepTrespass
+  chapter: WFLawChapterReality
+  order: 3
+  name: wf-law-deep-trespass
+  text: wf-law-deep-trespass-text
+  level: Impound
+  fine: 60000
+  minFine: 50000
+  maxFine: 100000
+
+- type: wfLaw
+  id: WFLawUnsanctionedLanding
+  chapter: WFLawChapterReality
+  order: 4
+  name: wf-law-unsanctioned-landing
+  text: wf-law-unsanctioned-landing-text
+  level: Impound
+  fine: 50000
+  minFine: 30000
+  maxFine: 80000
+
+- type: wfLaw
+  id: WFLawQuarantineBreach
+  chapter: WFLawChapterReality
+  order: 5
+  name: wf-law-quarantine-breach
+  text: wf-law-quarantine-breach-text
+  level: Banishment
+  fine: 100000
+  minFine: 75000
+  maxFine: 150000
+
+- type: wfLaw
+  id: WFLawUnlawfulPossession
+  chapter: WFLawChapterReality
+  order: 6
+  name: wf-law-unlawful-possession
+  text: wf-law-unlawful-possession-text
+  level: Citation
+  fine: 15000
+  minFine: 10000
+  maxFine: 25000
+
+- type: wfLaw
+  id: WFLawUnlawfulTrafficking
+  chapter: WFLawChapterReality
+  order: 7
+  name: wf-law-unlawful-trafficking
+  text: wf-law-unlawful-trafficking-text
+  level: Impound
+  fine: 75000
+  minFine: 50000
+  maxFine: 120000
+
+- type: wfLaw
+  id: WFLawArtifact
+  chapter: WFLawChapterReality
+  order: 8
+  name: wf-law-artifact
+  text: wf-law-artifact-text
+  level: Outlawry
+
+- type: wfLaw
+  id: WFLawSedition
+  chapter: WFLawChapterReality
+  order: 9
+  name: wf-law-sedition
+  text: wf-law-sedition-text
+  level: Outlawry
+
+- type: wfLaw
+  id: WFLawMurder
+  chapter: WFLawChapterPersons
+  order: 1
+  name: wf-law-murder
+  text: wf-law-murder-text
+  level: Banishment
+  fine: 100000
+  minFine: 75000
+  maxFine: 150000
+
+- type: wfLaw
+  id: WFLawAssault
+  chapter: WFLawChapterPersons
+  order: 2
+  name: wf-law-assault
+  text: wf-law-assault-text
+  level: Citation
+  fine: 10000
+  minFine: 5000
+  maxFine: 25000
+
+- type: wfLaw
+  id: WFLawPiracy
+  chapter: WFLawChapterPersons
+  order: 3
+  name: wf-law-piracy
+  text: wf-law-piracy-text
+  level: Impound
+  fine: 75000
+  minFine: 50000
+  maxFine: 120000
+
+- type: wfLaw
+  id: WFLawHullTheft
+  chapter: WFLawChapterPersons
+  order: 4
+  name: wf-law-hull-theft
+  text: wf-law-hull-theft-text
+  level: Impound
+  fine: 75000
+  minFine: 50000
+  maxFine: 120000
+
+- type: wfLaw
+  id: WFLawHeaveTo
+  chapter: WFLawChapterBench
+  order: 1
+  name: wf-law-heave-to
+  text: wf-law-heave-to-text
+  level: Impound
+  fine: 50000
+  minFine: 30000
+  maxFine: 80000
+
+- type: wfLaw
+  id: WFLawContempt
+  chapter: WFLawChapterBench
+  order: 2
+  name: wf-law-contempt
+  text: wf-law-contempt-text
+  level: Outlawry
+
+- type: wfLaw
+  id: WFLawFalseDistress
+  chapter: WFLawChapterBench
+  order: 3
+  name: wf-law-false-distress
+  text: wf-law-false-distress-text
+  level: Citation
+  fine: 20000
+  minFine: 10000
+  maxFine: 30000
+
+- type: wfLaw
+  id: WFLawWarheads
+  chapter: WFLawChapterBench
+  order: 4
+  name: wf-law-warheads
+  text: wf-law-warheads-text
+  level: Outlawry
+
+- type: wfLaw
+  id: WFLawBrandishing
+  chapter: WFLawChapterCentral
+  order: 1
+  name: wf-law-brandishing
+  text: wf-law-brandishing-text
+  level: Citation
+  fine: 5000
+  minFine: 2000
+  maxFine: 10000
+
+- type: wfLaw
+  id: WFLawDischarge
+  chapter: WFLawChapterCentral
+  order: 2
+  name: wf-law-discharge
+  text: wf-law-discharge-text
+  level: Banishment
+  fine: 100000
+  minFine: 75000
+  maxFine: 150000
+
+- type: wfLaw
+  id: WFLawNeutralGround
+  chapter: WFLawChapterCentral
+  order: 3
+  name: wf-law-neutral-ground
+  text: wf-law-neutral-ground-text
+  level: Banishment
+  fine: 100000
+  minFine: 75000
+  maxFine: 150000
+
+- type: wfLaw
+  id: WFLawDocking
+  chapter: WFLawChapterCentral
+  order: 4
+  name: wf-law-docking
+  text: wf-law-docking-text
+  level: Citation
+  fine: 10000
+  minFine: 5000
+  maxFine: 20000
+
+- type: wfLaw
+  id: WFLawUndeclared
+  chapter: WFLawChapterCentral
+  order: 5
+  name: wf-law-undeclared
+  text: wf-law-undeclared-text
+  level: Citation
+  fine: 25000
+  minFine: 15000
+  maxFine: 40000
+
+- type: wfLaw
+  id: WFLawConcealment
+  chapter: WFLawChapterCentral
+  order: 6
+  name: wf-law-concealment
+  text: wf-law-concealment-text
+  level: Citation
+  fine: 5000
+  minFine: 2000
+  maxFine: 10000
+
+# Unlawful material under Article I of the Common Writ. Shown on examine like other contraband.
+- type: contrabandSeverity
+  id: WFUnlawful
+  examineText: contraband-examine-text-WFUnlawful

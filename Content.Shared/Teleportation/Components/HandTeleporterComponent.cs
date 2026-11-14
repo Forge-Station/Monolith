@@ -3,7 +3,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Teleportation.Components;
 

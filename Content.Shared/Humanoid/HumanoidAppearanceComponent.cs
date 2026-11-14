@@ -62,6 +62,12 @@ public sealed partial class HumanoidAppearanceComponent : Component
     public ProtoId<BarkPrototype> BarkVoice { get; set; } = SharedHumanoidAppearanceSystem.DefaultBarkVoice; // Corvax-Frontier-Barks
 
     /// <summary>
+    /// WOLFGATE - player-supplied name shown instead of the species name. Empty means use the species.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public string CustomSpeciesName { get; set; } = string.Empty;
+
+    /// <summary>
     ///     The initial profile and base layers to apply to this humanoid.
     /// </summary>
     [DataField]

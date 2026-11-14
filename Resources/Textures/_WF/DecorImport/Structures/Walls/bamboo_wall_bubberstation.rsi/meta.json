@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Bubberstation at commit https://github.com/Bubberstation/Bubberstation/commit/792301a70da075679790652676e6774e746df81d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bamboo_wall0",
+      "directions": 4
+    },
+    {
+      "name": "bamboo_wall1",
+      "directions": 4
+    },
+    {
+      "name": "bamboo_wall2",
+      "directions": 4
+    },
+    {
+      "name": "bamboo_wall3",
+      "directions": 4
+    },
+    {
+      "name": "bamboo_wall4",
+      "directions": 4
+    },
+    {
+      "name": "bamboo_wall5",
+      "directions": 4
+    },
+    {
+      "name": "bamboo_wall6",
+      "directions": 4
+    },
+    {
+      "name": "bamboo_wall7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

@@ -62,7 +62,10 @@ public sealed partial class DeviceListSystem : EntitySystem
                 ? DeviceLocalizationHelpers.GetAddressFromId(deviceNet)
                 : $"UID: {deviceUid.ToString()}";
 
-            devices.Add(new LocDeviceAddress(deviceNet.Address, deviceNet.Prefix), (deviceUid, address));
+            // Forge-Change: devices that have not been given a network address yet all share 0000-0000.
+            // The second insert threw and the atmos alerts computer died on every tick.
+            if (!devices.TryAdd(new LocDeviceAddress(deviceNet.Address, deviceNet.Prefix), (deviceUid, address)))
+                continue;
         }
 
         return devices;

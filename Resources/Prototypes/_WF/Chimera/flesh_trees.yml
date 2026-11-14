@@ -1,0 +1,63 @@
+- type: entity
+  id: WFFleshTree
+  parent: WFFleshTreeBase
+  components:
+  - type: RandomSprite
+    available:
+    - tree:
+        tree01: ""
+        tree02: ""
+        tree03: ""
+        tree04: ""
+        tree05: ""
+        tree06: ""
+        tree07: ""
+        tree08: ""
+        tree09: ""
+        tree10: ""
+        tree11: ""
+        tree12: ""
+
+- type: entity
+  id: WFFleshPustuleTree
+  parent: WFFleshTreeBase
+  name: pustule tree
+  description: A fleshy tree carrying swollen pustules. Pluck one with an empty hand.
+  components:
+  - type: Sprite
+    layers:
+    - state: pustules
+      map: ["tree"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFFleshTreeVisuals.Harvested:
+        tree:
+          True: { state: harvested }
+          False: { state: pustules }
+  - type: WFFleshPustuleTree
+
+- type: entity
+  id: WFFleshPustuleItem
+  parent: FoodBase
+  name: flesh pustule
+  description: A ripe, wriggling sac. Eat it, plant it on clear ground, or throw it to burst it on impact.
+  components:
+  - type: Sprite
+    sprite: _Mono/Mobs/Aliens/cortical_borer_egg.rsi
+    state: icon
+    color: "#d65f6d"
+  - type: Item
+    size: Small
+  - type: Food
+    transferAmount: 20
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: NaturalLetoferol
+          Quantity: 15
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: WFFleshPustuleItem

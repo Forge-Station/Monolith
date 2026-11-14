@@ -15,6 +15,7 @@ using Content.Shared.UserInterface;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent; // Forge-Change
+using Content.Shared._Onyx.Medical;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.Containers.ItemSlots;
@@ -203,7 +204,7 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
 
         // Forge-Change-Start
         var bloodLevel = 0f;
-        List<ReagentQuantity>? chemicalReagents = null;
+        List<HealthAnalyzerChemicalInfo>? chemicalReagents = null;
         if (bloodstream != null)
         {
             if (_solutionContainerSystem.ResolveSolution(entity.Comp.BodyContainer.ContainedEntity.Value,
@@ -215,7 +216,13 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
             if (_solutionContainerSystem.ResolveSolution(entity.Comp.BodyContainer.ContainedEntity.Value,
                     bloodstream.ChemicalSolutionName, ref bloodstream.ChemicalSolution, out var chemicalSolution))
             {
-                chemicalReagents = HealthAnalyzerSystem.GetChemicalReagents(chemicalSolution);
+                var reagents = new List<HealthAnalyzerReagentInfo>();
+                foreach (var reagent in chemicalSolution.Contents)
+                    reagents.Add(new HealthAnalyzerReagentInfo(reagent.Reagent.Prototype, reagent.Quantity));
+                chemicalReagents = new List<HealthAnalyzerChemicalInfo>
+                {
+                    new(HealthAnalyzerSolutionType.Metabolites, reagents),
+                };
             }
         }
         // Forge-Change-End
@@ -233,7 +240,7 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
             null, // Frontier
             null, // Shitmed
             null, // Shitmed
-            chemicalReagents // Forge-Change
+            chemicals: chemicalReagents // Forge-Change
         ));
     }
 

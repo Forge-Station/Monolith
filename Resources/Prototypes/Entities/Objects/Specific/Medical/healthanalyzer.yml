@@ -46,11 +46,13 @@
   id: HandheldHealthAnalyzer
   parent: [ HandheldHealthAnalyzerUnpowered, PowerCellSlotSmallItem]
   suffix: Powered
-  components:
-  - type: PowerCellDraw
-    drawRate: 1.2 #Calculated for 5 minutes on a small cell
-  - type: ToggleCellDraw
-  - type: ActivatableUIRequiresPowerCell
+  # WOLFGATE(Wolfmed): health analyzers no longer need a power cell. The slot stays so existing fills and maps load;
+  # the draw and the UI power gate are gone.
+  # components:
+  # - type: PowerCellDraw
+  #   drawRate: 1.2 #Calculated for 5 minutes on a small cell
+  # - type: ToggleCellDraw
+  # - type: ActivatableUIRequiresPowerCell
 
 - type: entity
   id: HandheldHealthAnalyzerEmpty

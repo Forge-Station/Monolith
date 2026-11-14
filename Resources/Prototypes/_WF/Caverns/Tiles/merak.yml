@@ -1,0 +1,18 @@
+# The Sandstone Galleries' zone floors, laid inside a rim of chamber sandstone. Like every cavern floor each is
+# indestructible, can't be dug and has no base turf.
+
+# Fossil beds: cracked, dried lake bed.
+- type: tile
+  id: WFCavernFloorFossilBed
+  parent: NebulaFloorDry
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+# Buried ruin quarter: laid sandstone brick.
+- type: tile
+  id: WFCavernFloorRuinStone
+  parent: TgFloorSandstone
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""

@@ -35,8 +35,12 @@ public sealed partial class HeldSpeedModifierSystem : EntitySystem
         var sprintMod = component.SprintModifier;
         if (component.MirrorClothingModifier && TryComp<ClothingSpeedModifierComponent>(uid, out var clothingSpeedModifier))
         {
-            walkMod = clothingSpeedModifier.WalkModifier;
-            sprintMod = clothingSpeedModifier.SprintModifier;
+            // WOLFGATE(ArmorBalance) START: carrying a fast suit must not speed you up; held suits stacked the buff.
+            // walkMod = clothingSpeedModifier.WalkModifier;
+            // sprintMod = clothingSpeedModifier.SprintModifier;
+            walkMod = MathF.Min(clothingSpeedModifier.WalkModifier, 1f);
+            sprintMod = MathF.Min(clothingSpeedModifier.SprintModifier, 1f);
+            // WOLFGATE END
         }
 
         return (walkMod, sprintMod);

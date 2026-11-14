@@ -1,4 +1,5 @@
 using Content.Shared._Forge.Weapons.ThrowingAmmoProvider;
+using Content.Shared.Damage.Events;
 using Content.Server.Damage.Systems;
 
 namespace Content.Server._Forge.Weapons.ThrowingAmmoProvider;

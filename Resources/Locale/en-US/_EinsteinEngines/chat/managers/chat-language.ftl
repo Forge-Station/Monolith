@@ -10,7 +10,6 @@ chat-language-NovuNederic-name = Novu-Nederic
 chat-language-NovaCygniBasic-name = Nova-Cygni Basic
 chat-language-TauCetiBasic-name = Basic
 chat-language-Tradeband-name = Tradeband
-chat-language-Ilasir-name = Ilasir
 chat-language-Freespeak-name = Freespeak
 chat-language-Elyran-name = Elyran
 chat-language-Canilunzt-name = Canilunzt
@@ -23,8 +22,6 @@ chat-language-Marish-name = Marish
 chat-language-Chittin-name = Chittin
 chat-language-Xeeplian-name = Xeeplian
 chat-language-Hydraspeak-name = Hy'drav'tha
-chat-language-Kelael-name = Kela'el
-chat-language-Qwila-name = Qwila
 
 # Ported from Floofstation:
 chat-language-NewKinPidgin-name = Ka'rakk
@@ -65,4 +62,8 @@ chat-language-DroneTalk-name = Drone
 # Added here by Mono
 chat-language-Blob-name = Blob
 
-chat-language-ForgeSibera-name = Sibera
+# Wolfgate: ported from HardLight/Starlight without chat names.
+chat-language-Thaveyan-name = Thaveyan
+chat-language-Carptongue-name = Carptongue
+chat-language-Scratch-name = Scratch
+chat-language-Machine-name = Encoded Audio

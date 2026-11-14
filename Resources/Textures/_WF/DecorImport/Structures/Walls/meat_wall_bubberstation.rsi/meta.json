@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Bubberstation at commit https://github.com/Bubberstation/Bubberstation/commit/792301a70da075679790652676e6774e746df81d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "meat_wall0"
+    },
+    {
+      "name": "meat_wall1"
+    },
+    {
+      "name": "meat_wall2"
+    },
+    {
+      "name": "meat_wall3"
+    },
+    {
+      "name": "meat_wall4"
+    },
+    {
+      "name": "meat_wall5"
+    },
+    {
+      "name": "meat_wall6"
+    },
+    {
+      "name": "meat_wall7"
+    },
+    {
+      "name": "meat_wall8"
+    },
+    {
+      "name": "meat_wall9"
+    },
+    {
+      "name": "meat_wall10"
+    },
+    {
+      "name": "meat_wall11"
+    },
+    {
+      "name": "meat_wall12"
+    },
+    {
+      "name": "meat_wall13"
+    },
+    {
+      "name": "meat_wall14"
+    },
+    {
+      "name": "meat_wall15"
+    }
+  ]
+}

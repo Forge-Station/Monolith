@@ -1,0 +1,139 @@
+# Dependency blocks for the growth lane (staging deps and RMC-14 effect prototypes the growth castes and abilities use).
+# RMC-14: Resources/Prototypes/_RMC14/Effects/emotes.yml
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectEmoteBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 20
+  - type: Sprite
+    offset: 0, 0.65
+    sprite: _WF/Xenonids/Effects/emotes.rsi
+    noRot: true
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectFistbump
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_fistbump
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectHighfive
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_highfive
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectTailswipe
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_tailswipe
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectHug
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_hug
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectHandshake
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_handshake
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/heal.yml
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectHeal
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _WF/Xenonids/Effects/heal.rsi
+    color: "#00B800"
+    noRot: true
+    state: heal_overlay
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealHealer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Sprite
+    color: "#00BE6F"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealSacrifice
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+  - type: Sprite
+    color: "#44253D"
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/tail.yml
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectTailHit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/attacks.rsi
+    noRot: true
+    state: tail
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# RMC-14: Resources/Prototypes/_RMC14/Effects/gib.yml
+- type: entity
+  parent: RMCBaseGibEffect
+  id: RMCGibEffectXenoLesserDrone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Xenonids/Effects/Gibs/lesser_drone_gib.rsi
+    state: lesser_gib
+  - type: TimedDespawn
+    lifetime: 0.8
+
+# RMC-14: Resources/Prototypes/_RMC14/Entities/Markers/Spawners/Random/Decals/gibs.yml
+- type: entity
+  parent: RMCDecalSpawnerGibsBase
+  id: RMCDecalSpawnerGibsLesserDrone
+  name: gibs spawner
+  suffix: RMC14, Lesser Drone
+  components:
+  - type: RandomDecalSpawner
+    decals:
+    - RMCDecalGibSplatterLesserDrone

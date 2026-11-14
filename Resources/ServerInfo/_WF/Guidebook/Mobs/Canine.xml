@@ -1,0 +1,14 @@
+<Document>
+  # Canine
+
+  Canines are Vulpkanin in everything but the face. Same build, same reflexes, same short temper about
+  cold weather.
+
+  Where a Vulpkanin's muzzle is part of the face they were born with, a Canine's is not: pick the snout you
+  want in character setup and change it whenever you like. Everything else - ears, tail, markings, the
+  Canilunzt they grew up speaking - is Vulpkanin.
+
+  <Box>
+    <GuideEntityEmbed Entity="MobCanine" Caption="Canine"/>
+  </Box>
+</Document>

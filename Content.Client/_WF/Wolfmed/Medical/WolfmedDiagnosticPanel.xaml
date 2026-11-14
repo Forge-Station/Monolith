@@ -1,0 +1,73 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              Orientation="Vertical"
+              HorizontalExpand="True"
+              VerticalExpand="True">
+    <!-- The right pane of the two-pane analyzer window. The Damage tab is gone: the window's own damage-group
+         breakdown is permanently on the left now, so a tab repeating it would be dead weight. -->
+    <!-- Root is a BoxContainer, not a window: none of these names share the window's
+         [GenerateTypedNameReferences] scope and none may be CloseButton/ContentsContainer/TitleLabel/WindowHeader. -->
+    <BoxContainer Orientation="Horizontal" Margin="4 0 4 2">
+        <Button Name="WoundsButton"
+                Text="{Loc 'health-analyzer-window-wounds-tab'}"
+                MinHeight="24"
+                HorizontalExpand="True"
+                StyleClasses="OpenRight" />
+        <Button Name="OrgansButton"
+                Text="{Loc 'health-analyzer-window-organs-tab'}"
+                MinHeight="24"
+                HorizontalExpand="True"
+                StyleClasses="OpenBoth" />
+        <Button Name="ChemicalsButton"
+                Text="{Loc 'health-analyzer-window-chemicals-tab'}"
+                MinHeight="24"
+                HorizontalExpand="True"
+                StyleClasses="OpenLeft" />
+    </BoxContainer>
+
+    <PanelContainer Name="TabBody" VerticalExpand="True" HorizontalExpand="True" Margin="4 0 4 4">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
+        </PanelContainer.PanelOverride>
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True" Margin="5 5 5 5">
+
+                <ScrollContainer Name="WoundsTab" VerticalExpand="True" HorizontalExpand="True" Visible="False" HScrollEnabled="False">
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                        <GridContainer Name="VitalDamageRow" Columns="2" Margin="0 0 0 2">
+                            <Label Text="{Loc 'health-analyzer-window-entity-vital-damage-text'}" />
+                            <Label Name="VitalDamageLabel" FontColorOverride="#ff9100" />
+                        </GridContainer>
+                        <Label Text="{Loc 'health-analyzer-wound-diagnostics-title'}"
+                               StyleClasses="LabelHeading" />
+                        <PanelContainer Margin="0 2 0 4" StyleClasses="LowDivider" />
+                        <!-- UI2: systemic banners, then the category filter strip, then one card per part. -->
+                        <BoxContainer Name="WoundAlertsContainer"
+                                      Orientation="Vertical"
+                                      HorizontalExpand="True" />
+                        <GridContainer Name="WoundCategoryStrip"
+                                       Columns="5"
+                                       HorizontalExpand="True"
+                                       Margin="0 2 0 4" />
+                        <RichTextLabel Name="WoundStateLabel" HorizontalAlignment="Left" HorizontalExpand="True" />
+                        <BoxContainer Name="WoundFindingsContainer"
+                                      Orientation="Vertical"
+                                      HorizontalExpand="True" />
+                    </BoxContainer>
+                </ScrollContainer>
+
+                <ScrollContainer Name="OrgansTab" VerticalExpand="True" HorizontalExpand="True" Visible="False" HScrollEnabled="False">
+                    <BoxContainer Name="OrgansContainer" Orientation="Vertical" HorizontalExpand="True" />
+                </ScrollContainer>
+
+                <ScrollContainer Name="ChemicalsTab" VerticalExpand="True" HorizontalExpand="True" Visible="False" HScrollEnabled="False">
+                    <BoxContainer Name="ChemicalsContainer" Orientation="Vertical" HorizontalExpand="True" />
+                </ScrollContainer>
+
+            </BoxContainer>
+        </PanelContainer>
+    </PanelContainer>
+</BoxContainer>

@@ -118,7 +118,7 @@ public sealed partial class GunSystem : SharedGunSystem
         // If the gun is being held, its parent will be a hand container, and the hand container's parent will be the holder
         EntityUid? holder = null;
 
-        if (EntityManager.TryGetComponent(gunUid, out TransformComponent? gunXform) && gunXform.ParentUid != EntityUid.Invalid)
+        if (TryComp(gunUid, out TransformComponent? gunXform) && gunXform.ParentUid != EntityUid.Invalid)
         {
             var parent = gunXform.ParentUid;
             // Check if the parent has HandsComponent (it's the holder)
@@ -224,7 +224,7 @@ public sealed partial class GunSystem : SharedGunSystem
         if (_inputSystem.CmdStates.GetState(useKey) != BoundKeyState.Down && !gun.BurstActivated)
         {
             if (gun.ShotCounter != 0)
-                EntityManager.RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
+                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
             return;
         }
 
@@ -236,7 +236,7 @@ public sealed partial class GunSystem : SharedGunSystem
         if (mousePos.MapId == MapId.Nullspace)
         {
             if (gun.ShotCounter != 0)
-                EntityManager.RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
+                RaisePredictiveEvent(new RequestStopShootEvent { Gun = GetNetEntity(gunUid) });
 
             return;
         }
@@ -257,9 +257,9 @@ public sealed partial class GunSystem : SharedGunSystem
 
         List<int>? shotIds = null;
         if (projectiles is { Count: > 0 })
-            shotIds = projectiles.Select(e => e.Entity.Id).ToList();
+            shotIds = projectiles;
 
-        EntityManager.RaisePredictiveEvent(new RequestShootEvent()
+        RaisePredictiveEvent(new RequestShootEvent()
         {
             Target = target,
             Coordinates = GetNetCoordinates(coordinates),
@@ -486,7 +486,7 @@ public sealed partial class GunSystem : SharedGunSystem
     public override void ShootProjectile(EntityUid uid,
         Vector2 direction,
         Vector2 gunVelocity,
-        EntityUid gunUid,
+        EntityUid? gunUid,
         EntityUid? user = null,
         float speed = 20f,
         float offset = 0f) // Mono

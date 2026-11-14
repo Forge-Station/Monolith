@@ -1,0 +1,365 @@
+# Market tuning. Every station keeps a ledger and one curve prices chutes and vendors from how full its shelf is: see
+# Docs/_WF/TradeGoods/DESIGN.md. Floors sit near each good's vendor price, so a glutted market still covers a bought crate.
+- type: wfTradeMarket
+  id: WFTradeMarketDefault
+  # Console trading crate demand halves on this, and a station outside the sector economy settles back to its target.
+  halfLife: 3000
+  floor: 0.2
+  floorPrices:
+    TradeGoodFertilizer: 1000
+    TradeGoodComponents: 1000
+    TradeGoodSupplies: 1000
+    TradeGoodMedicalSupplies: 1000
+    TradeGoodScrap: 1000
+    TradeGoodEquipment: 1000
+    TradeGoodFabric: 1000
+    TradeGoodMetals: 1000
+    TradeGoodChemicalSupplies: 1500
+    TradeGoodChemicalsVolatile: 1500
+    TradeGoodWeaponParts: 3000
+    TradeGoodShipComponents: 2400
+    TradeGoodLuxuries: 5000
+    TradeGoodAmmo: 2500
+    TradeGoodFissionFuel: 6000
+    TradeGoodFusionFuel: 3000
+  # Cargo-console trading crates share one demand per station; the floor still covers the console price.
+  tradeCratePerSale: 0.025
+  tradeCrateFloor: 0.3
+  # What a level does to a price: quadratic below 1, 1.24x at 0.6 and 2.5x at empty, then down to 0.4x at 1.5.
+  stockTarget: 120
+  scarcityPremium: 1.5
+  glutSlope: 1.2
+  glutSpan: 0.5
+  # The most the curve and events can reach together.
+  priceCap: 3
+  # Chutes pay this share of their table, since stations sit under target most of the time.
+  chuteTableRate: 0.9
+  # Prices close half the gap to stock in this many seconds.
+  priceSmoothing: 120
+  # Under this level a good is scarce: chutes take it off their table, and after the delay it can be reported as a shortage.
+  scarceLevel: 0.3
+  shortageClearLevel: 0.45
+  shortageDelay: 900
+  # The material prices of a station's console catch up this many seconds after a purchase or sale.
+  priceDelayMin: 180
+  priceDelayMax: 240
+  # Pallets pay and consoles charge by how much of a material a station holds. The tightest pallet and console pair on a station, 1.25 over 1.5, stays short
+  # of a profit on selling and buying back.
+  materialGoods:
+  - SheetSteel1
+  - SheetGlass1
+  - SheetPlastic1
+  - SheetPlasteel1
+  - SheetPlasma1
+  - SheetUranium1
+  - SheetCopper1
+  - SheetLithium1
+  - IngotGold1
+  - IngotSilver1
+  - MaterialDiamond1
+  - SteelOre1
+  - SpaceQuartz1
+  - PlasmaOre1
+  - UraniumOre1
+  - CopperOre1
+  - LithiumOre1
+  - GoldOre1
+  - SilverOre1
+  - DiamondOre1
+  - ScrapOre1
+  - Coal1
+  - Salt1
+  # What stations open with. What freighters bring is on their manifests.
+  supplyMaterials: [ SheetSteel1, SheetGlass1, SheetPlastic1 ]
+  # The most of a good a station can hold, and the share of target it rolls before the sector settles at round start.
+  vendorStock: 200
+  vendorStockStartMin: 0.25
+  vendorStockStartMax: 1
+  openingHours: 8
+  # The sector's tick. Rates are crates an hour: see economy.yml for who makes what.
+  economyInterval: 300
+  useRate: 2.4
+  inputUse: 0.5
+  minOutput: 0.25
+  exportRate: 1
+  outsideSupply: 14
+  # An industry with materials to work from makes half as much again, at this many spesos of material a crate.
+  materialBoost: 0.5
+  materialCrateValue: 1000
+  # A blockaded station's imports go off its shelves toward the floor, most of the way in half an hour.
+  blockadeFloor: 0.25
+  blockadeHalfLife: 900
+  # Each crate in a hold can deliver this many owed crates, and each stop adds half the target of its manifest's materials.
+  freightCrateStock: 25
+  freightRestock: 0.5
+  materialStockTarget: 10000
+  # Stations use up what they hold, so a glut clears and a station nobody supplies runs down.
+  materialHalfLife: 10800
+  materialGlut: 3
+  materialPayMax: 1.2
+  materialPayMin: 0.5
+  materialChargeMax: 1.5
+  materialChargeMin: 0.8
+  modifierCap: 2.5
+  minHaulDistance: 3000
+  highlight: 1.4
+  groups:
+    Medical: [ TradeGoodMedicalSupplies ]
+    Supplies: [ TradeGoodSupplies ]
+    Ammo: [ TradeGoodAmmo ]
+    WeaponParts: [ TradeGoodWeaponParts ]
+    ShipComponents: [ TradeGoodShipComponents ]
+    Chemicals: [ TradeGoodChemicalSupplies, TradeGoodChemicalsVolatile ]
+    Fuel: [ TradeGoodFissionFuel, TradeGoodFusionFuel ]
+    Luxuries: [ TradeGoodLuxuries ]
+    Industrial: [ TradeGoodMetals, TradeGoodScrap, TradeGoodComponents, TradeGoodEquipment ]
+    Agriculture: [ TradeGoodFertilizer ]
+    Textiles: [ TradeGoodFabric ]
+  hotCargoChutes: [ CargoChuteHideout, WFCargoChuteUnderground ]
+  # The Underground fence only fences freight taken off NPC haulers.
+  sealedOnlyChutes: [ WFCargoChuteUnderground ]
+  # Smuggling crates from the Underground: open chutes pay a fixed price that sales never glut, but customs flags some
+  # sellers with a warrant.
+  contrabandGoods: [ WFTradeGoodContraband ]
+  contrabandWarrantChance: 0.05
+  contrabandWarrant: 10000
+  contrabandWarrantCooldown: 1800
+  contrabandAlertChannel: Nfsd
+  # Off the books: the app lists these under its Underground tab, shown only to the companies below.
+  hiddenChutes: [ CargoChuteHideout, WFCargoChuteUnderground ]
+  undergroundCompanies: [ PDV, PDVCivilian, PDVHighComm, WFUnderground ]
+  # The app groups stations by faction, in this order; a chute listed nowhere is Independent.
+  marketFactions:
+  - name: wf-market-faction-caelestinus
+    color: "#5fa8d3"
+    chutes: [ CargoChuteTradeMall, CargoChuteDepot, CargoChuteDepotAlt, CargoChuteExped, CargoChuteMD ]
+  - name: wf-market-faction-tsf
+    color: "#5b7fe0"
+    chutes: [ CargoChuteTSFMC ]
+  - name: wf-market-faction-ussp
+    color: "#d0573f"
+    chutes: [ CargoChuteBaikal ]
+  - name: wf-market-faction-pdv
+    color: "#d4a83a"
+    chutes: [ CargoChuteJupiter, CargoChuteHideout ]
+  - name: wf-market-faction-underground
+    color: "#d84a4a"
+    chutes: [ WFCargoChuteUnderground ]
+  warDemandChutes: [ CargoChuteTSFMC, CargoChuteHideout ]
+  blockadeGroups: [ Medical, Supplies, Ammo, ShipComponents ]
+  # A flat premium on essentials from the first minute; the shelf does the rest.
+  blockadeFactor: 1.25
+  reliefFactor: 1.5
+  warGroups: [ Ammo, WeaponParts, Medical ]
+  warFactor: 1.5
+  raidGroups: [ ShipComponents, Medical ]
+  raidFactor: 1.5
+  raidWindow: 900
+  reliefBounty: 6000
+  hotCargoLawful: 0.6
+  salvageBonus: 1.25
+  shortageMinutes: 25,40
+  rushMinutes: 20,35
+  bulkMinutes: 30,60
+  consignmentMinutes: 30,45
+  consignments:
+    WFTradeConsignment: 0.7
+    WFTradeConsignmentHeavy: 0.3
+  # While the war is hot, a navy pays its own people faction credits for munitions and ship parts, and pays the enemy's
+  # people more for war goods. The TSF posts a warrant on its own who sell war goods to the PDV.
+  navies:
+  - name: wf-trade-navy-tsf
+    chutes: [ CargoChuteTSFMC ]
+    companies: [ TSF, TSFCivilian ]
+    enemies: [ PDV, PDVCivilian ]
+    creditEntity: FederationMilitaryCredit1
+    postsDefectorWarrants: true
+  - name: wf-trade-navy-pdv
+    chutes: [ CargoChuteHideout, CargoChuteJupiter ]
+    companies: [ PDV, PDVCivilian ]
+    enemies: [ TSF, TSFCivilian ]
+    creditEntity: Doubloon1
+  warEffortGroups: [ Ammo, WeaponParts, ShipComponents ]
+  warEffortCredits: 2
+  defectorFactor: 1.3
+  defectorWarrant: 10000
+
+# Shortages report the worst real gap in the ledgers, for a group of goods. Booms raise a group everywhere as outside
+# demand. An admin can force a shortage with no gap behind it, which then raises its group for its duration.
+- type: wfTradeShortage
+  id: WFTradeShortageMedical
+  group: Medical
+  goods: wf-trade-goods-medical
+  weight: 3
+
+- type: wfTradeShortage
+  id: WFTradeShortageSupplies
+  group: Supplies
+  goods: wf-trade-goods-supplies
+  weight: 3
+
+- type: wfTradeShortage
+  id: WFTradeShortageAmmo
+  group: Ammo
+  goods: wf-trade-goods-ammo
+  weight: 2
+
+- type: wfTradeShortage
+  id: WFTradeShortageShipComponents
+  group: ShipComponents
+  goods: wf-trade-goods-ship-components
+  weight: 2
+
+- type: wfTradeShortage
+  id: WFTradeShortageChemicals
+  group: Chemicals
+  goods: wf-trade-goods-chemicals
+  weight: 2
+
+- type: wfTradeShortage
+  id: WFTradeShortageFuel
+  group: Fuel
+  goods: wf-trade-goods-fuel
+  weight: 1.5
+
+- type: wfTradeShortage
+  id: WFTradeShortageIndustrial
+  group: Industrial
+  goods: wf-trade-goods-industrial
+  weight: 2
+
+- type: wfTradeShortage
+  id: WFTradeShortageAgriculture
+  group: Agriculture
+  goods: wf-trade-goods-agriculture
+  weight: 1.5
+
+- type: wfTradeShortage
+  id: WFTradeBoomLuxuries
+  group: Luxuries
+  goods: wf-trade-goods-luxuries
+  sectorWide: true
+  minFactor: 1.3
+  maxFactor: 1.5
+  duration: 1200
+  weight: 1.5
+
+- type: wfTradeShortage
+  id: WFTradeBoomFuel
+  group: Fuel
+  goods: wf-trade-goods-fuel
+  sectorWide: true
+  minFactor: 1.3
+  maxFactor: 1.5
+  duration: 1200
+  weight: 1
+
+- type: wfTradeShortage
+  id: WFTradeBoomTextiles
+  group: Textiles
+  goods: wf-trade-goods-textiles
+  sectorWide: true
+  minFactor: 1.3
+  maxFactor: 1.5
+  duration: 1200
+  weight: 1
+
+# Rush orders: a station wants a few crates fast.
+- type: wfTradeRush
+  id: WFTradeRushMedical
+  group: Medical
+  goods: wf-trade-goods-medical
+  weight: 3
+
+- type: wfTradeRush
+  id: WFTradeRushSupplies
+  group: Supplies
+  goods: wf-trade-goods-supplies
+  weight: 3
+
+- type: wfTradeRush
+  id: WFTradeRushAmmo
+  group: Ammo
+  goods: wf-trade-goods-ammo
+  weight: 2
+
+- type: wfTradeRush
+  id: WFTradeRushShipComponents
+  group: ShipComponents
+  goods: wf-trade-goods-ship-components
+  weight: 2
+
+- type: wfTradeRush
+  id: WFTradeRushIndustrial
+  group: Industrial
+  goods: wf-trade-goods-industrial
+  weight: 2
+
+- type: wfTradeRush
+  id: WFTradeRushLuxuries
+  group: Luxuries
+  goods: wf-trade-goods-luxuries
+  count: 2,4
+  weight: 1
+
+# Bulk orders: an open station wants a hold's worth over a long window, at a small premium and a flat price that ignores
+# its shelf, so the last pays what the first did. The count paces how much that adds to the faucet. Luxuries and fuel stay out: their prices are too high for an order this size.
+- type: wfTradeRush
+  id: WFTradeBulkMedical
+  group: Medical
+  goods: wf-trade-goods-medical
+  bulk: true
+  chutes: [ CargoChuteTradeMall, CargoChuteDepot, CargoChuteDepotAlt, CargoChuteBaikal, CargoChuteTSFMC, CargoChuteZvezda ]
+  count: 25,45
+  minutes: 45,60
+  minFactor: 1.15
+  maxFactor: 1.25
+  weight: 3
+
+- type: wfTradeRush
+  id: WFTradeBulkSupplies
+  group: Supplies
+  goods: wf-trade-goods-supplies
+  bulk: true
+  chutes: [ CargoChuteTradeMall, CargoChuteDepot, CargoChuteDepotAlt, CargoChuteBaikal, CargoChuteTSFMC, CargoChuteZvezda ]
+  count: 25,45
+  minutes: 45,60
+  minFactor: 1.15
+  maxFactor: 1.25
+  weight: 3
+
+- type: wfTradeRush
+  id: WFTradeBulkAmmo
+  group: Ammo
+  goods: wf-trade-goods-ammo
+  bulk: true
+  chutes: [ CargoChuteTradeMall, CargoChuteDepot, CargoChuteDepotAlt, CargoChuteBaikal, CargoChuteTSFMC, CargoChuteZvezda ]
+  count: 25,45
+  minutes: 45,60
+  minFactor: 1.15
+  maxFactor: 1.25
+  weight: 2
+
+- type: wfTradeRush
+  id: WFTradeBulkShipComponents
+  group: ShipComponents
+  goods: wf-trade-goods-ship-components
+  bulk: true
+  chutes: [ CargoChuteTradeMall, CargoChuteDepot, CargoChuteDepotAlt, CargoChuteBaikal, CargoChuteTSFMC, CargoChuteZvezda ]
+  count: 25,45
+  minutes: 45,60
+  minFactor: 1.15
+  maxFactor: 1.25
+  weight: 2
+
+- type: wfTradeRush
+  id: WFTradeBulkIndustrial
+  group: Industrial
+  goods: wf-trade-goods-industrial
+  bulk: true
+  chutes: [ CargoChuteTradeMall, CargoChuteDepot, CargoChuteDepotAlt, CargoChuteBaikal, CargoChuteTSFMC, CargoChuteZvezda ]
+  count: 25,45
+  minutes: 45,60
+  minFactor: 1.15
+  maxFactor: 1.25
+  weight: 2

@@ -1,0 +1,149 @@
+# One ADS campaign per votable storyteller preset. Lists by tier run 0 (dormant) to 5 (overrun). Credits use the Reaver
+# grant: its stronghold amount is paid for a node, its patrol amount for a sweep, sentinel, interdictor or picket.
+
+- type: wfAdsCampaign
+  id: WFAdsCampaignQuiet
+  preset: WFEncounterPresetQuiet
+  faction: WFSectorFactionAds
+  firstNodeDelay: 70m
+  regroupDelay: 45m
+  spreadInterval: 25m
+  quietMinutes: 15
+  deployInterval: 100m
+  cellsPerNode: 8
+  maxNodes: 2
+  supportRange: 2
+  sweeps: [ 0, 1, 1, 1, 1, 2 ]
+  sweepInterval: 18m
+  interdictDwell: 90s
+  interdictCooldown: 10m
+  interdicts: [ 0, 1, 1, 1, 1, 2 ]
+  sentinelInterval: 25m
+  maxSentinelsByTier: [ 0, 0, 1, 1, 1, 2 ]
+  challengeTier: 2
+  challengeInterval: 35m
+  challengeDeadline: 10m
+  maxChallenges: 1
+  tierThresholds: [ 10, 22, 40, 60, 80 ]
+  nodeBounty: [ 50000, 75000, 100000, 130000, 170000, 220000 ]
+  sweepBounty: 18000
+  interdictorBounty: 30000
+  retakeBounty: [ 8000, 10000, 12000, 14000, 16000, 20000 ]
+  credits:
+  - entity: FederationMilitaryCredit1
+    companies: [ TSF, TSFCivilian ]
+    stronghold: 30
+    patrol: 10
+  - entity: Doubloon1
+    companies: [ PDV, PDVCivilian ]
+    stronghold: 30
+    patrol: 10
+  dreadnought: WFAdsDreadnought
+  dreadnoughtDelay: 20m
+  dreadnoughtBounty: 400000
+  risingSound:
+    path: /Audio/_WF/AdsIncursion/aimalf.ogg
+  fallingSound:
+    path: /Audio/Misc/notice1.ogg
+  capitalSound:
+    path: /Audio/Misc/gamma.ogg
+  risingColor: "#9B4DFF"
+  fallingColor: "#3FB8AF"
+
+- type: wfAdsCampaign
+  id: WFAdsCampaignStandard
+  preset: WFEncounterPresetStandard
+  faction: WFSectorFactionAds
+  firstNodeDelay: 35m
+  regroupDelay: 30m
+  spreadInterval: 15m
+  quietMinutes: 10
+  deployInterval: 70m
+  cellsPerNode: 7
+  maxNodes: 3
+  supportRange: 2
+  sweeps: [ 0, 1, 1, 1, 2, 2 ]
+  sweepInterval: 12m
+  interdictDwell: 90s
+  interdictCooldown: 10m
+  interdicts: [ 0, 1, 1, 1, 2, 2 ]
+  sentinelInterval: 15m
+  maxSentinelsByTier: [ 0, 0, 1, 1, 2, 2 ]
+  challengeTier: 2
+  challengeInterval: 25m
+  challengeDeadline: 10m
+  maxChallenges: 1
+  tierThresholds: [ 10, 25, 45, 70, 95 ]
+  nodeBounty: [ 50000, 75000, 100000, 130000, 170000, 220000 ]
+  sweepBounty: 18000
+  interdictorBounty: 30000
+  retakeBounty: [ 10000, 12000, 14000, 17000, 20000, 25000 ]
+  credits:
+  - entity: FederationMilitaryCredit1
+    companies: [ TSF, TSFCivilian ]
+    stronghold: 30
+    patrol: 10
+  - entity: Doubloon1
+    companies: [ PDV, PDVCivilian ]
+    stronghold: 30
+    patrol: 10
+  dreadnought: WFAdsDreadnought
+  dreadnoughtDelay: 10m
+  dreadnoughtBounty: 400000
+  risingSound:
+    path: /Audio/_WF/AdsIncursion/aimalf.ogg
+  fallingSound:
+    path: /Audio/Misc/notice1.ogg
+  capitalSound:
+    path: /Audio/Misc/gamma.ogg
+  risingColor: "#9B4DFF"
+  fallingColor: "#3FB8AF"
+
+- type: wfAdsCampaign
+  id: WFAdsCampaignDangerous
+  preset: WFEncounterPresetDangerous
+  faction: WFSectorFactionAds
+  firstNodeDelay: 25m
+  regroupDelay: 20m
+  spreadInterval: 9m
+  quietMinutes: 6
+  deployInterval: 45m
+  cellsPerNode: 6
+  maxNodes: 4
+  supportRange: 3
+  sweeps: [ 0, 1, 1, 2, 2, 3 ]
+  sweepInterval: 8m
+  interdictDwell: 90s
+  interdictCooldown: 10m
+  interdicts: [ 0, 1, 1, 2, 2, 3 ]
+  sentinelInterval: 10m
+  maxSentinelsByTier: [ 0, 1, 1, 2, 2, 3 ]
+  challengeTier: 2
+  challengeInterval: 15m
+  challengeDeadline: 10m
+  maxChallenges: 2
+  tierThresholds: [ 12, 30, 55, 85, 115 ]
+  nodeBounty: [ 50000, 75000, 100000, 130000, 170000, 220000 ]
+  sweepBounty: 18000
+  interdictorBounty: 30000
+  retakeBounty: [ 12000, 15000, 18000, 22000, 26000, 30000 ]
+  credits:
+  - entity: FederationMilitaryCredit1
+    companies: [ TSF, TSFCivilian ]
+    stronghold: 30
+    patrol: 10
+  - entity: Doubloon1
+    companies: [ PDV, PDVCivilian ]
+    stronghold: 30
+    patrol: 10
+  dreadnought: WFAdsDreadnought
+  dreadnoughtDelay: 6m
+  dreadnoughtBounty: 400000
+  risingSound:
+    path: /Audio/_WF/AdsIncursion/aimalf.ogg
+  fallingSound:
+    path: /Audio/Misc/notice1.ogg
+  capitalSound:
+    path: /Audio/Misc/gamma.ogg
+  risingColor: "#9B4DFF"
+  fallingColor: "#3FB8AF"

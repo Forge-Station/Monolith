@@ -7,9 +7,9 @@ namespace Content.Client.Atmos.Visualizers;
 /// <summary>
 /// Controls client-side visuals for portable scrubbers.
 /// </summary>
-public sealed class PortableScrubberSystem : VisualizerSystem<PortableScrubberVisualsComponent>
+public sealed partial class PortableScrubberSystem : VisualizerSystem<PortableScrubberVisualsComponent>
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     protected override void OnAppearanceChange(EntityUid uid, PortableScrubberVisualsComponent component, ref AppearanceChangeEvent args)
     {

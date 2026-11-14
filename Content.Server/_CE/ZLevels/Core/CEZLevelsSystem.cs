@@ -136,6 +136,7 @@ public sealed partial class CEZLevelsSystem : CESharedZLevelsSystem
         base.Update(frameTime);
 
         UpdateGridGravity(frameTime);
+        UpdateWallCollision();
         UpdateView(frameTime);
         CleanupOrphanedTransitMaps();
     }

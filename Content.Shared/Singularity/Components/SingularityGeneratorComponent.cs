@@ -1,5 +1,4 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 using Content.Shared.Physics;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;

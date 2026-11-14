@@ -106,10 +106,18 @@ public sealed partial class PathfindingSystem
 
             // TODO: Often we invalidate the entire chunk when it might be something as simple as an airlock change
             // Would be better to handle that though this was safer and max it's taking is like 1-2ms every half-second.
-            var dirt = new GridPathfindingChunk[comp.DirtyChunks.Count];
+            // WOLFGATE(Planets) START: a planet layer builds only the dirty chunks near someone, a slice an update
+            // var dirt = new GridPathfindingChunk[comp.DirtyChunks.Count];
+            var building = WfChunksToBuild(uid, comp);
+            if (building.Count == 0)
+                continue;
+
+            var dirt = new GridPathfindingChunk[building.Count];
             var idx = 0;
 
-            foreach (var origin in comp.DirtyChunks)
+            // foreach (var origin in comp.DirtyChunks)
+            foreach (var origin in building)
+            // WOLFGATE END
             {
                 var chunk = GetChunk(origin, uid, pathfinding);
                 dirt[idx] = chunk;
@@ -214,7 +222,8 @@ public sealed partial class PathfindingSystem
                 AddNeighbors(polyA, polyB);
             }
 
-            comp.DirtyChunks.Clear();
+            // comp.DirtyChunks.Clear(); // WOLFGATE(Planets): what wasn't built this update stays dirty
+            WfClearBuilt(comp, building); // WOLFGATE(Planets)
         }
     }
 
@@ -292,6 +301,10 @@ public sealed partial class PathfindingSystem
         {
             var aabb = _lookup.GetAABBNoContainer(ev.Sender, ev.NewPosition.Position, ev.NewRotation);
             DirtyChunkArea(gridUid.Value, aabb);
+            // WOLFGATE(Vehicles) START: a vehicle leaving a chunk frees the tiles its hull blocked there
+            //if (oldGridUid == gridUid && WfCoversTiles(ev.Sender))
+            //    DirtyChunkArea(gridUid.Value, _lookup.GetAABBNoContainer(ev.Sender, ev.OldPosition.Position, ev.OldRotation));
+            // WOLFGATE END
         }
     }
 

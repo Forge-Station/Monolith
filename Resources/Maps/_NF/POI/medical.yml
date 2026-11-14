@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 03/27/2026 19:48:27
-  entityCount: 4338
+  entityCount: 4339
 maps: []
 grids:
 - 1
@@ -11356,7 +11356,16 @@ entities:
     - type: Transform
       pos: -15.5,35.5
       parent: 1
-- proto: ChemistryHotplate
+- proto: WFMachineAutodoc
+  entities:
+  - uid: 4339
+    components:
+    - type: Transform
+      pos: -6.5,40.5
+      parent: 1
+    - type: Physics
+      bodyType: Static
+- proto: MachineThermobath
   entities:
   - uid: 1395
     components:
@@ -11387,7 +11396,7 @@ entities:
     - type: Transform
       pos: -3.4545374,29.79673
       parent: 1
-- proto: ClockworkGrilleBroken
+- proto: GrilleBroken
   entities:
   - uid: 1400
     components:

@@ -99,7 +99,10 @@ public sealed partial class AccessReaderSystem : EntitySystem
         args.Handled = true;
         accessReader.Value.Comp.AccessLists.Clear();
         accessReader.Value.Comp.AccessLog.Clear();
-        Dirty(uid, reader);
+        // WOLFGATE(ShipAccess) START: dirty the reader whose lists were cleared (a door's electronics), or clients keep predicting its old access
+        // Dirty(uid, reader);
+        Dirty(accessReader.Value.Owner, accessReader.Value.Comp);
+        // WOLFGATE END
     }
 
     /// <summary>

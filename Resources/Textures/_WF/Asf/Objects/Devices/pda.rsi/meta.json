@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "aPDA retexture by ZweiHawke @ zweihawke.net (_NF/Objects/Devices/pda.rsi); recoloured to ASF purple with per-role trims for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "pda"
+    },
+    {
+      "name": "pda-envoy"
+    },
+    {
+      "name": "pda-enforcer"
+    },
+    {
+      "name": "pda-researcher"
+    },
+    {
+      "name": "pda-colonist"
+    },
+    {
+      "name": "light_overlay"
+    },
+    {
+      "name": "id_overlay"
+    },
+    {
+      "name": "insert_overlay"
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "equipped-IDCARD",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

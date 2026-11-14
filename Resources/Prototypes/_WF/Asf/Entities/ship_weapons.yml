@@ -1,0 +1,107 @@
+# ASF phaser arrays. They inherit mounting, health and repair from the guns they replace on ASF hulls
+# (L-1 Phalanx, Prometheus) and differ in how they fire.
+
+# Flutter: three heavy pulses, then a pause. Flat armour reduction takes far less off a pulse than off a Phalanx hit.
+
+- type: entity
+  id: WFAsfTurretFlutter
+  parent: WeaponLaserTurretL1Phalanx
+  components:
+  - type: StaticPrice
+    price: 3500
+  - type: Sprite
+    sprite: _WF/Asf/Objects/ShuttleWeapons/flutter.rsi
+    layers:
+    - state: space_artillery
+  - type: Battery
+    maxCharge: 9000
+    startingCharge: 9000
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 450
+  - type: Gun
+    fireRate: 12
+    burstFireRate: 12
+    shotsPerBurst: 3
+    burstCooldown: 2
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: WFAsfFlutterPulse
+    fireCost: 300
+
+- type: entity
+  parent: PhalanxLaser
+  id: WFAsfFlutterPulse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: muzzle_pulse
+    travelFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: beam_pulse
+    impactFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: impact_pulse
+  - type: HitscanRadarSignature
+    radarColor: "#a66be0"
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 70
+        Structural: 180
+
+# Hummingbird: a slow beam that cuts through up to three objects in a line (maxPierce counts hits after the first).
+
+- type: entity
+  id: WFAsfTurretHummingbird
+  parent: WeaponLaserTurretPrometheus
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/ShuttleWeapons/hummingbird.rsi
+    layers:
+    - state: space_artillery
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 4000
+  - type: Gun
+    fireRate: 0.4
+  - type: HitscanBatteryAmmoProvider
+    proto: WFAsfHummingbirdBeam
+    fireCost: 10000
+
+- type: entity
+  id: WFAsfHummingbirdBeam
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanAmmo
+  - type: HitscanMultiRaycast
+    maxDistance: 1000
+    maxPierce: 2
+    pierceCollisionMask:
+    - None
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: muzzle_cut
+    travelFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: beam_cut
+    impactFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: impact_cut
+  - type: HitscanRadarSignature
+    radarColor: "#c99cf5"
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 120
+        Structural: 450
+  - type: HitscanReflect
+    reflectiveType: None
+  - type: HitscanBasicEffects

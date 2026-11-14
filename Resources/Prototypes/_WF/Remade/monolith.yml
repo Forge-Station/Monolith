@@ -1,0 +1,233 @@
+- type: entity
+  id: WFMonolithScion
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Contraband
+    severity: WFUnlawful
+  - type: Transform
+    noRot: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.45,0.4,0.45"
+        density: 500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      sprite: _WF/Remade/Structures/scion.rsi
+      state: marker_normal_dormant
+      offset: 0,0.5
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFMonolithVisuals.Stage:
+        base:
+          Quiet: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_dormant, offset: "0,0.5" }
+          Hymn: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_pulse, offset: "0,0.5" }
+          Growth: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_pulse, offset: "0,0.5" }
+          Harvest: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_active, offset: "0,0.5" }
+          Rapture: { sprite: _WF/Remade/Structures/scion.rsi, state: marker_normal_active, offset: "0,0.5" }
+          Crescendo: { sprite: _WF/Remade/Structures/prime.rsi, state: marker_giant_active_anim, offset: "0,2.56" }
+  - type: PointLight
+    enabled: false
+    radius: 4
+    energy: 2
+    color: "#EC3232"
+  - type: AmbientSound
+    range: 8
+    volume: -2
+    sound:
+      path: /Audio/_WF/Remade/monolith/throb.ogg
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      output:
+        !type:CableDeviceNode
+        nodeGroupID: HVPower
+  - type: PowerSupplier
+    supplyRate: 0
+    supplyRampRate: 200000
+    supplyRampTolerance: 200000
+  - type: PowerMonitoringDevice
+    group: Generator
+    loadNode: output
+    sprite: _WF/Remade/Structures/scion.rsi
+    state: marker_normal_dormant
+  - type: ThermalSignature
+  - type: Anchorable
+    delay: 5
+  - type: Pullable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3000
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 5000000
+  - type: SoldAlert
+    threshold: 1
+    message: wf-monolith-sold-alert
+    channels:
+    - Common
+  - type: WFMonolith
+  - type: WFRemadeDirector
+  - type: WFWard
+
+- type: entity
+  parent: BaseStructure
+  id: WFMonolithTap
+  components:
+  - type: Contraband
+    severity: WFUnlawful
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    noRot: true
+    layers:
+    - state: computer
+    - state: generic
+      shader: unshaded
+      color: "#EC3232"
+    - state: generic_keys
+  - type: Anchorable
+    delay: 2
+  - type: Pullable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ActivatableUI
+    key: enum.WFMonolithTapUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.WFMonolithTapUiKey.Key:
+        type: WFMonolithTapBoundUserInterface
+  - type: WFMonolithTap
+
+# Tiles a hull may grow in a second. Stage pace and the hull share cap decide how fast it really goes.
+- type: edgeSpreader
+  id: WFCorruption
+  updatesPerSecond: 8
+
+- type: entity
+  id: WFCorruption
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Clickable
+  - type: Appearance
+  - type: Sprite
+    sprite: _WF/Remade/Structures/corruption.rsi
+    drawdepth: FloorObjects
+    layers:
+    - map: [ "base" ]
+      state: corruption-255
+  # The server works out which neighbours join up and the client picks the state: corruption-<mask>, or one of three full tiles.
+  - type: WFCorruptionVisuals
+    prefix: corruption-
+    fullStates:
+    - full-1
+    - full-2
+    - full-3
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        density: 7
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - MidImpassable
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.8
+    sprintSpeedModifier: 0.8
+    ignoreWhitelist:
+      tags:
+      - WFRemade
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Temperature
+    heatDamage:
+      types:
+        Heat: 5
+    coldDamage: {}
+    coldDamageThreshold: 0
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+  - type: ActiveEdgeSpreader
+  - type: EdgeSpreader
+    id: WFCorruption
+  - type: WFCorruption
+    drinks:
+    - Blood
+    - CopperBlood
+    - InsectBlood
+    - AmmoniaBlood
+    - ZombieBlood
+
+- type: Tag
+  id: WFRemade

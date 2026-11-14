@@ -111,7 +111,7 @@ namespace Content.Server.StationEvents
                 occurrences.Add(ev.Key.ID, 0);
             }
 
-            if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
+            if (!eventScheduler.TryComp<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
             {
                 return occurrences.Select(p => (p.Key, (float)p.Value)).OrderByDescending(p => p.Item2);
             }
@@ -155,7 +155,7 @@ namespace Content.Server.StationEvents
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
             _stationEvent ??= GetSys<EventManagerSystem>();
 
-            if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
+            if (!eventScheduler.TryComp<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
                 yield break;
 
             var available = _stationEvent.AvailableEvents();
@@ -178,7 +178,7 @@ namespace Content.Server.StationEvents
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
             _stationEvent ??= GetSys<EventManagerSystem>();
 
-            if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
+            if (!eventScheduler.TryComp<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
                 yield break;
 
             var timemins = time * 60;
@@ -205,7 +205,7 @@ namespace Content.Server.StationEvents
             _compFac ??= IoCManager.Resolve<IComponentFactory>();
             _stationEvent ??= GetSys<EventManagerSystem>();
 
-            if (!eventScheduler.TryGetComponent<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
+            if (!eventScheduler.TryComp<BasicStationEventSchedulerComponent>(out var basicScheduler, _compFac))
                 return 0f;
 
             var available = _stationEvent.AvailableEvents();

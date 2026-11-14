@@ -99,6 +99,10 @@
     - WallT2
   - type: RadiationBlocker
     resistance: 3
+  # WOLFGATE(Xenonids): RMC's reinforced wall rule, only very sharp xeno claws break it
+  - type: ReceiverXenoClaws
+    maxHealth: 2750
+    minimumClawStrength: VerySharp
 
 - type: entity
   abstract: true
@@ -149,6 +153,10 @@
     - WallT3
   - type: RadiationBlocker
     resistance: 4
+  # WOLFGATE(Xenonids): RMC's reinforced wall rule, only very sharp xeno claws break it
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
+    minimumClawStrength: VerySharp
 
 - type: entity
   abstract: true
@@ -199,6 +207,10 @@
     - WallT4
   - type: RadiationBlocker
     resistance: 5
+  # WOLFGATE(Xenonids): RMC's reinforced wall rule, only very sharp xeno claws break it
+  - type: ReceiverXenoClaws
+    maxHealth: 3500
+    minimumClawStrength: VerySharp
 
 - type: entity
   abstract: true
@@ -243,6 +255,10 @@
     thickness: 20
   - type: RadiationBlocker
     resistance: 5
+  # WOLFGATE(Xenonids): outpost walls can't be clawed down
+  - type: ReceiverXenoClaws
+    maxHealth: 15100
+    minimumClawStrength: ImpossiblySharp
 
 - type: entity
   parent: WallReinforced

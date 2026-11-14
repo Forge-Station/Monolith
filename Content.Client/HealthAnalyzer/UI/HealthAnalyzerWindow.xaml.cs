@@ -5,9 +5,6 @@ using Content.Shared.Atmos;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._Shitmed.Targeting; // Shitmed
 using Content.Shared.Alert;
-using Content.Shared._Forge.Genetics; // Forge-Change
-using Content.Shared._Forge.Genetics.Components; // Forge-Change
-using Content.Shared.Chemistry.Reagent; // Forge-Change
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -80,18 +77,25 @@ namespace Content.Client.HealthAnalyzer.UI
                 bodyPartButton.Value.MouseFilter = MouseFilterMode.Stop;
                 bodyPartButton.Value.OnPressed += _ => SetActiveBodyPart(bodyPartButton.Key, bodyPartButton.Value);
             }
-            ReturnButton.OnPressed += _ => ResetBodyPart();
+            // WOLFGATE(Wolfmed) START: UI3 - the return button is gone and the doll drives targeting.
+            // ReturnButton.OnPressed += _ => ResetBodyPart();
+            InitWolfmedTargeting();
+            // WOLFGATE END
             // Shitmed Change End
         }
 
         // Shitmed Change Start
         public void SetActiveBodyPart(TargetBodyPart part, TextureButton button)
         {
-            if (_target == null)
-                return;
-
-            // Bit of the ole shitcode until we have Groins in the prototypes.
-            OnBodyPartSelected?.Invoke(part == TargetBodyPart.Groin ? TargetBodyPart.Torso : part, _target.Value);
+            // WOLFGATE(Wolfmed) START: UI3 - the doll sets the local player's targeted part instead of rescanning one part.
+            // It now works exactly as the HUD doll and the targeting hotkeys do.
+            // if (_target == null)
+            //     return;
+            //
+            // // Bit of the ole shitcode until we have Groins in the prototypes.
+            // OnBodyPartSelected?.Invoke(part == TargetBodyPart.Groin ? TargetBodyPart.Torso : part, _target.Value);
+            SelectWolfmedTargetPart(part);
+            // WOLFGATE END
         }
 
         public void ResetBodyPart()
@@ -111,6 +115,7 @@ namespace Content.Client.HealthAnalyzer.UI
         // Not all of this function got messed with, but it was spread enough to warrant being covered entirely by a Shitmed Change
         public void Populate(HealthAnalyzerScannedUserMessage msg)
         {
+            PopulateWolfmed(msg); // WOLFGATE(Wolfmed): HOOK 26 - first statement; Populate early-returns below and a trailing call would leave the previous patient's rows on screen.
             // Start-Shitmed
             _target = _entityManager.GetEntity(msg.TargetEntity);
             EntityUid? part = msg.Part != null ? _entityManager.GetEntity(msg.Part.Value) : null;
@@ -120,14 +125,13 @@ namespace Content.Client.HealthAnalyzer.UI
                 || !_entityManager.TryGetComponent<DamageableComponent>(isPart ? part : _target, out var damageable))
             {
                 NoPatientDataText.Visible = true;
-                GenesPanel.Visible = false;
-                GenesDivider.Visible = false;
+                HideWolfmed(); // WOLFGATE(Wolfmed): HOOK 26 - a target outside client PVS can still carry non-null diagnostics.
                 return;
             }
 
             SetActiveButtons(_entityManager.HasComponent<TargetingComponent>(_target.Value));
 
-            ReturnButton.Visible = isPart;
+            // ReturnButton.Visible = isPart; // WOLFGATE(Wolfmed): UI3 - the return button and its frame are gone with the part-view path.
             PartNameLabel.Visible = isPart;
 
             if (part != null)
@@ -192,9 +196,10 @@ namespace Content.Client.HealthAnalyzer.UI
 
             AlertsDivider.Visible = showAlerts;
             AlertsContainer.Visible = showAlerts;
+            WolfmedAlertsPanel.Visible = showAlerts; // WOLFGATE(Wolfmed): HOOK 26 - the framed box around the alerts, so an empty one costs the overview pane no height.
 
             if (showAlerts)
-                AlertsContainer.DisposeAllChildren();
+                AlertsContainer.RemoveAllChildren();
 
             if (msg.Unrevivable == true)
                 AlertsContainer.AddChild(new RichTextLabel
@@ -231,109 +236,8 @@ namespace Content.Client.HealthAnalyzer.UI
             IReadOnlyDictionary<string, FixedPoint2> damagePerType = damageable.Damage.DamageDict;
 
             DrawDiagnosticGroups(damageSortedGroups, damagePerType);
-            DrawChemicalReagents(msg.ChemicalReagents); // Forge-Change
-            DrawActiveGenes(); // Forge-Change
         }
         // Shitmed Change End
-
-        // Forge-Change-Start
-        private void DrawChemicalReagents(List<ReagentQuantity>? reagents)
-        {
-            ChemicalsContainer.RemoveAllChildren();
-
-            if (reagents == null || reagents.Count == 0)
-            {
-                ChemicalsPanel.Visible = false;
-                ChemicalsDivider.Visible = false;
-                return;
-            }
-
-            var entries = new List<(string Name, FixedPoint2 Quantity)>();
-
-            foreach (var reagent in reagents)
-            {
-                if (reagent.Quantity <= FixedPoint2.Zero)
-                    continue;
-
-                _prototypes.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? proto);
-                var name = proto?.LocalizedName ?? Loc.GetString("chem-master-window-unknown-reagent-text");
-                entries.Add((name, reagent.Quantity));
-            }
-
-            if (entries.Count == 0)
-            {
-                ChemicalsPanel.Visible = false;
-                ChemicalsDivider.Visible = false;
-                return;
-            }
-
-            entries.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.CurrentCulture));
-
-            ChemicalsPanel.Visible = true;
-            ChemicalsDivider.Visible = true;
-
-            foreach (var entry in entries)
-            {
-                ChemicalsContainer.AddChild(new Label
-                {
-                    Text = Loc.GetString(
-                        "health-analyzer-window-chemical-reagent-text",
-                        ("reagent", entry.Name),
-                        ("amount", entry.Quantity)),
-                    FontColorOverride = Color.FromHex("#ff9100"),
-                    Margin = new Thickness(0, 2),
-                });
-            }
-        }
-
-        private void DrawActiveGenes()
-        {
-            GenesContainer.RemoveAllChildren();
-
-            if (_target == null
-                || !_entityManager.TryGetComponent<GenomeComponent>(_target.Value, out var genome)
-                || genome.Genes.Count == 0)
-            {
-                GenesPanel.Visible = false;
-                GenesDivider.Visible = false;
-                return;
-            }
-
-            var names = new List<string>();
-            foreach (var (id, state) in genome.Genes)
-            {
-                if (!state.Active)
-                    continue;
-
-                if (!_prototypes.TryIndex<GenePrototype>(id, out var proto))
-                    continue;
-
-                names.Add(Loc.GetString(proto.Name));
-            }
-
-            if (names.Count == 0)
-            {
-                GenesPanel.Visible = false;
-                GenesDivider.Visible = false;
-                return;
-            }
-
-            names.Sort(StringComparer.CurrentCulture);
-            GenesPanel.Visible = true;
-            GenesDivider.Visible = true;
-
-            foreach (var name in names)
-            {
-                GenesContainer.AddChild(new Label
-                {
-                    Text = Loc.GetString("health-analyzer-window-gene-text", ("gene", name)),
-                    FontColorOverride = Color.FromHex("#7DDE4A"),
-                    Margin = new Thickness(0, 2),
-                });
-            }
-        }
-        // Forge-Change-End
-
         private static string GetStatus(MobState mobState)
         {
             return mobState switch
@@ -458,11 +362,11 @@ namespace Content.Client.HealthAnalyzer.UI
                 int enumValue = (int) integrity;
                 var rsi = new SpriteSpecifier.Rsi(new ResPath($"/Textures/_Shitmed/Interface/Targeting/Status/{enumName.ToLowerInvariant()}.rsi"), $"{enumName.ToLowerInvariant()}_{enumValue}");
                 // Shitcode with love from Russia :)
-                if (!sprite.TryGetLayer(layer, out _))
+                if (!_spriteSystem.TryGetLayer((_spriteViewEntity, sprite), layer, out _, false))
                     sprite.AddLayer(_spriteSystem.Frame0(rsi));
                 else
-                    sprite.LayerSetTexture(layer, _spriteSystem.Frame0(rsi));
-                sprite.LayerSetScale(layer, new Vector2(3f, 3f));
+                    _spriteSystem.LayerSetTexture((_spriteViewEntity, sprite), layer, _spriteSystem.Frame0(rsi));
+                _spriteSystem.LayerSetScale((_spriteViewEntity, sprite), layer, new Vector2(3f, 3f));
                 layer++;
             }
             return _spriteViewEntity;

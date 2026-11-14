@@ -40,6 +40,7 @@
   #       type: RadarConsoleBoundUserInterface
   # Forge-change-end
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.95
@@ -100,6 +101,7 @@
   #      type: RadarConsoleBoundUserInterface
   # Forge-change-end
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.9

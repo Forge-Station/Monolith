@@ -1,6 +1,5 @@
 using Content.Shared.Parallax.Biomes;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Salvage.Expeditions.Modifiers;
 

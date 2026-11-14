@@ -12,7 +12,7 @@
     proto: SunnyCartridge
     capacity: 30
     mayTransfer: true
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     whitelist:
       tags:
       - SunnyCartridge

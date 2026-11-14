@@ -185,7 +185,7 @@ public sealed partial class MarketSystem
                 continue;
 
             var entProto = _prototypeManager.Index<EntityPrototype>(material.StackEntity);
-            if (!entProto.TryGetComponent<PhysicalCompositionComponent>(out var composition))
+            if (!entProto.TryComp<PhysicalCompositionComponent>(out var composition, EntityManager.ComponentFactory))
                 continue;
 
             var materialPerStack = composition.MaterialComposition[material.ID];

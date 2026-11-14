@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._EinsteinEngines.Language;
 
-[Prototype("language")]
+[Prototype]
 public sealed partial class LanguagePrototype : IPrototype
 {
     [IdDataField]
@@ -26,6 +26,10 @@ public sealed partial class LanguagePrototype : IPrototype
     /// </summary>
     [DataField("speech")]
     public SpeechOverrideInfo SpeechOverride = new();
+
+    /// <summary>Three-character chat prefix that selects this language, such as ^sol.</summary>
+    [DataField]
+    public string? ChatPrefix;
 
     #region utility
     /// <summary>

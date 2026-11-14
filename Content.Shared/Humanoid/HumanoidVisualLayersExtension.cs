@@ -63,6 +63,8 @@ namespace Content.Shared.Humanoid
                     yield return HumanoidVisualLayers.Chest;
                     yield return HumanoidVisualLayers.Wings; // for IPC wings port from SimpleStation
                     yield return HumanoidVisualLayers.Tail;
+                    yield return HumanoidVisualLayers.TailBehind; // WOLFGATE - split tail layers
+                    yield return HumanoidVisualLayers.TailOversuit; // WOLFGATE - split tail layers
                     break;
                 // Shitmed Change Start
                 case HumanoidVisualLayers.LHand:

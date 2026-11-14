@@ -3,8 +3,18 @@
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Felinid, Tajaran, Human] # Goobstation - Tajaran
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    base_fox_tail_BEHIND: TailBehind
+    base_fox_tail_tip_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    base_fox_tail_BEHIND: base_fox_tail_FRONT
+    base_fox_tail_tip_BEHIND: base_fox_tail_tip_FRONT
   sprites:
-  - sprite: _Goobstation/Mobs/Customization/Felinid/foxtail.rsi
-    state: base_fox_tail
-  - sprite: _Goobstation/Mobs/Customization/Felinid/foxtail.rsi
-    state: base_fox_tail_tip
+  - sprite: _WF/Mobs/Customization/TailSplit/_Goobstation/Mobs/Customization/Felinid/foxtail.rsi # WOLFGATE - split art
+    state: base_fox_tail_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Goobstation/Mobs/Customization/Felinid/foxtail.rsi # WOLFGATE - split art
+    state: base_fox_tail_tip_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Goobstation/Mobs/Customization/Felinid/foxtail.rsi # WOLFGATE - south frame on TailBehind
+    state: base_fox_tail_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_Goobstation/Mobs/Customization/Felinid/foxtail.rsi # WOLFGATE - south frame on TailBehind
+    state: base_fox_tail_tip_BEHIND

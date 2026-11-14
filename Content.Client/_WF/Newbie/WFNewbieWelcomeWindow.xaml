@@ -1,0 +1,15 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'wf-newbie-welcome-title'}"
+                      MinSize="440 200">
+    <!-- A set width, so the text wraps. -->
+    <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="12" SetWidth="460">
+        <RichTextLabel Name="WelcomeLabel" />
+        <CheckBox Name="DontShowAgainCheckBox" Text="{Loc 'wf-newbie-welcome-dont-show'}" />
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+            <Button Name="RulesButton" Text="{Loc 'wf-newbie-welcome-rules'}" />
+            <Control HorizontalExpand="True" />
+            <Button Name="OkButton" Text="{Loc 'wf-newbie-welcome-ok'}" MinWidth="80" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

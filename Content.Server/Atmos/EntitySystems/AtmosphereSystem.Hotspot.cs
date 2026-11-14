@@ -256,5 +256,35 @@ namespace Content.Server.Atmos.EntitySystems
         {
             return MathF.Max(temperature, MathF.Min(temperature + kelvinToAdd, clampTemperature));
         }
+
+        /// <summary>Adds burnt decals to a tile, stopping at four.</summary>
+        public void TryAddBurntDecalsToTile(EntityUid gridUid, Vector2i tilePos, int count = 1)
+        {
+            var tileDecals = _decalSystem.GetDecalsInRange(gridUid, tilePos);
+            var tileBurntDecals = 0;
+
+            foreach (var set in tileDecals)
+            {
+                if (Array.IndexOf(_burntDecals, set.Decal.Id) == -1)
+                    continue;
+
+                tileBurntDecals++;
+                if (tileBurntDecals > 4)
+                    break;
+            }
+
+            for (var i = 0; i < count; i++)
+            {
+                if (tileBurntDecals > 4)
+                    break;
+
+                _decalSystem.TryAddDecal(_burntDecals[_random.Next(_burntDecals.Length)],
+                    new EntityCoordinates(gridUid, tilePos),
+                    out _,
+                    cleanable: true);
+
+                tileBurntDecals += 1;
+            }
+        }
     }
 }

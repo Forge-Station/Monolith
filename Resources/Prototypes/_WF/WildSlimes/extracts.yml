@@ -1,0 +1,146 @@
+# Extracts of the wild breeds, and bounties for them.
+
+# Plasma grows a healing reagent, blood grows meat, and water wakes something of the flesh.
+- type: entity
+  id: WFCarcinomaSlimeExtract
+  parent: BaseSlimeExtract
+  name: carcinoma slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#d0505e"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: Tricordrazine
+          amount: 15
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: FoodMeat
+          number: 3
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSpawnEntity
+          entity: MobFleshClampExpeditions
+          number: 1
+  - type: Tag
+    tags:
+    - WFXenobiologyCarcinomaExtract
+
+# Plasma grows omnizine, blood knits the flesh of everyone close, and water births two flesh horrors.
+- type: entity
+  id: WFMetastaticSlimeExtract
+  parent: BaseSlimeExtract
+  name: metastatic slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#7a0e22"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: Omnizine
+          amount: 10
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: MobState
+          range: 4
+          effect: !type:HealthChange
+            damage:
+              groups:
+                Brute: -30
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSpawnEntity
+          entity: MobFleshGolemExpeditions
+          number: 1
+        - !type:XenobioSpawnEntity
+          entity: MobFleshClampExpeditions
+          number: 1
+  - type: Tag
+    tags:
+    - WFXenobiologyMetastaticExtract
+
+- type: Tag
+  id: WFXenobiologyCarcinomaExtract
+
+- type: Tag
+  id: WFXenobiologyMetastaticExtract
+
+- type: xenobiologyBounty
+  id: WFBountyCarcinomaExtract
+  pointsAwarded: 15000
+  entries:
+  - name: bounty-item-wf-carcinoma-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologyCarcinomaExtract
+
+- type: xenobiologyBounty
+  id: WFBountyMetastaticExtract
+  pointsAwarded: 40000
+  entries:
+  - name: bounty-item-wf-metastatic-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologyMetastaticExtract

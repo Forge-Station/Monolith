@@ -1,140 +1,27 @@
-using Content.Shared.Actions;
-using Content.Shared.Climbing.Components;
-using Content.Shared.Climbing.Events;
 using Content.Shared._DV.Abilities;
-using Content.Shared.Maps;
-using Content.Shared.Movement.Systems;
-using Content.Shared.Physics;
-using Robust.Server.GameObjects;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Systems;
+using Content.Shared.Actions;
 
 namespace Content.Server._DV.Abilities;
 
+/// <summary>
+/// Server half of sneaking: hands out the toggle action. Everything else lives in the shared system.
+/// </summary>
 public sealed partial class CrawlUnderObjectsSystem : SharedCrawlUnderObjectsSystem
 {
-    [Dependency] private AppearanceSystem _appearance = default!;
-    [Dependency] private SharedActionsSystem _actionsSystem = default!;
-    [Dependency] private MovementSpeedModifierSystem _movespeed = default!;
-    [Dependency] private SharedPhysicsSystem _physics = default!;
-    [Dependency] private TurfSystem _turf = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CrawlUnderObjectsComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<CrawlUnderObjectsComponent, ToggleCrawlingStateEvent>(OnAbilityToggle);
-        SubscribeLocalEvent<CrawlUnderObjectsComponent, AttemptClimbEvent>(OnAttemptClimb);
-        SubscribeLocalEvent<CrawlUnderObjectsComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
+        SubscribeLocalEvent<CrawlUnderObjectsComponent, MapInitEvent>(OnMapInit);
     }
 
-    private bool IsOnCollidingTile(EntityUid uid)
+    private void OnMapInit(Entity<CrawlUnderObjectsComponent> ent, ref MapInitEvent args)
     {
-        var xform = Transform(uid);
-        var tile = _turf.GetTileRef(xform.Coordinates);
-        if (tile == null)
-            return false;
-
-        return _turf.IsTileBlocked(tile.Value, CollisionGroup.MobMask);
-    }
-
-    private void OnInit(EntityUid uid, CrawlUnderObjectsComponent component, ComponentInit args)
-    {
-        if (component.ToggleHideAction != null)
+        if (ent.Comp.ToggleHideAction != null)
             return;
 
-        _actionsSystem.AddAction(uid, ref component.ToggleHideAction, component.ActionProto);
-    }
-
-    private bool EnableSneakMode(EntityUid uid, CrawlUnderObjectsComponent component)
-    {
-        if (component.Enabled
-            || (TryComp<ClimbingComponent>(uid, out var climbing)
-                && climbing.IsClimbing == true))
-            return false;
-
-        component.Enabled = true;
-        Dirty(uid, component);
-        RaiseLocalEvent(uid, new CrawlingUpdatedEvent(component.Enabled));
-
-        if (TryComp(uid, out FixturesComponent? fixtureComponent))
-        {
-            foreach (var (key, fixture) in fixtureComponent.Fixtures)
-            {
-                var newMask = (fixture.CollisionMask
-                    & (int)~CollisionGroup.HighImpassable
-                    & (int)~CollisionGroup.MidImpassable)
-                    | (int)CollisionGroup.InteractImpassable;
-                if (fixture.CollisionMask == newMask)
-                    continue;
-
-                component.ChangedFixtures.Add((key, fixture.CollisionMask));
-                _physics.SetCollisionMask(uid,
-                    key,
-                    fixture,
-                    newMask,
-                    manager: fixtureComponent);
-            }
-        }
-        return true;
-    }
-
-    private bool DisableSneakMode(EntityUid uid, CrawlUnderObjectsComponent component)
-    {
-        if (!component.Enabled
-            || IsOnCollidingTile(uid)
-            || (TryComp<ClimbingComponent>(uid, out var climbing)
-                && climbing.IsClimbing == true))
-            return false;
-
-        component.Enabled = false;
-        Dirty(uid, component);
-        RaiseLocalEvent(uid, new CrawlingUpdatedEvent(component.Enabled));
-
-        // Restore normal collision masks
-        if (TryComp(uid, out FixturesComponent? fixtureComponent))
-            foreach (var (key, originalMask) in component.ChangedFixtures)
-                if (fixtureComponent.Fixtures.TryGetValue(key, out var fixture))
-                    _physics.SetCollisionMask(uid, key, fixture, originalMask, fixtureComponent);
-
-        component.ChangedFixtures.Clear();
-        return true;
-    }
-
-    private void OnAbilityToggle(EntityUid uid,
-        CrawlUnderObjectsComponent component,
-        ToggleCrawlingStateEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        bool result;
-
-        if (component.Enabled)
-            result = DisableSneakMode(uid, component);
-        else
-            result = EnableSneakMode(uid, component);
-
-        if (TryComp<AppearanceComponent>(uid, out var app))
-            _appearance.SetData(uid, SneakMode.Enabled, component.Enabled, app);
-
-        _movespeed.RefreshMovementSpeedModifiers(uid);
-
-        args.Handled = result;
-    }
-
-    private void OnAttemptClimb(EntityUid uid,
-        CrawlUnderObjectsComponent component,
-        AttemptClimbEvent args)
-    {
-        if (component.Enabled == true)
-            args.Cancelled = true;
-    }
-
-    private void OnRefreshMovespeed(EntityUid uid, CrawlUnderObjectsComponent component, RefreshMovementSpeedModifiersEvent args)
-    {
-        if (component.Enabled)
-            args.ModifySpeed(component.SneakSpeedModifier, component.SneakSpeedModifier);
+        _actions.AddAction(ent, ref ent.Comp.ToggleHideAction, ent.Comp.ActionProto);
     }
 }

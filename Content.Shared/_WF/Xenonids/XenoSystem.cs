@@ -1,0 +1,594 @@
+using Content.Shared._WF.Xenonids;
+using Content.Shared._WF.RMCCore.Damage;
+using Content.Shared._WF.Barricades;
+using Content.Shared._WF.RMCCore.Tackle;
+using Content.Shared._RMC14.Vendors;
+using Content.Shared._WF.RMCCore.Melee;
+using Content.Shared._WF.Xenonids.Construction.Nest;
+using Content.Shared._WF.Xenonids.Devour;
+using Content.Shared._WF.Xenonids.Egg;
+using Content.Shared._WF.Xenonids.Evolution;
+using Content.Shared._WF.Xenonids.Fortify;
+using Content.Shared._WF.Xenonids.Hive;
+using Content.Shared._WF.Xenonids.HiveLeader;
+using Content.Shared._WF.Xenonids.Parasite;
+using Content.Shared._WF.Xenonids.Pheromones;
+using Content.Shared._WF.Xenonids.Plasma;
+using Content.Shared._WF.Xenonids.Rest;
+using Content.Shared._WF.Xenonids.ScissorCut;
+using Content.Shared._WF.Xenonids.Weeds;
+using Content.Shared.Access.Components;
+using Content.Shared.Actions;
+using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Body.Components;
+using Content.Shared.Humanoid;
+using Content.Shared.Body.Events;
+using Content.Shared.Buckle.Components;
+using Content.Shared.Chat;
+using Content.Shared.CombatMode;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
+using Content.Shared.DragDrop;
+using Content.Shared.FixedPoint;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Lathe;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
+using Content.Shared.Radio;
+using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Stunnable;
+using Content.Shared.Tools.Systems;
+using Content.Shared.UserInterface;
+using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Configuration;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using System.Linq;
+
+namespace Content.Shared._WF.Xenonids;
+
+public sealed partial class XenoSystem : EntitySystem
+{
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private SharedEyeSystem _eye = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private HiveLeaderSystem _hiveLeader = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MobThresholdSystem _mobThresholds = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private INetConfigurationManager _netConfig = default!;
+    [Dependency] private XenoRestSystem _rest = default!;
+    [Dependency] private SharedRMCDamageableSystem _rmcDamageable = default!;
+
+    [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private WeldableSystem _weldable = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private SharedXenoWeedsSystem _weeds = default!;
+
+    private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
+
+    private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
+    private EntityQuery<DamageableComponent> _damageableQuery;
+    private EntityQuery<MobStateComponent> _mobStateQuery;
+    private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
+    private EntityQuery<XenoFriendlyComponent> _xenoFriendlyQuery;
+    private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
+    private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
+    private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
+    private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
+
+    private float _xenoDamageDealtMultiplier;
+    private float _xenoDamageReceivedMultiplier;
+    private float _xenoSpeedMultiplier;
+    private TimeSpan _xenoSpawnMuteDuration;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        _affectableQuery = GetEntityQuery<AffectableByWeedsComponent>();
+        _damageableQuery = GetEntityQuery<DamageableComponent>();
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
+        _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
+        _xenoFriendlyQuery = GetEntityQuery<XenoFriendlyComponent>();
+        _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
+        _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
+        _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
+        _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
+
+        SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
+        SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
+        SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
+        // WOLFGATE: health scanner refusal cut with RMC medical; hive chat goes through XenoHiveChatSystem, not a radio channel
+        SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
+        SubscribeLocalEvent<XenoComponent, MeleeAttackAttemptEvent>(OnXenoMeleeAttackAttempt);
+        SubscribeLocalEvent<XenoComponent, XenoHealAttemptEvent>(OnHealAttempt);
+        SubscribeLocalEvent<XenoComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttempt);
+        SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
+        SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
+        SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
+        SubscribeLocalEvent<XenoComponent, MeleeHitEvent>(OnXenoMeleeHit);
+
+        SubscribeLocalEvent<XenoComponent, IgnitedEvent>(OnXenoIgnite);
+        SubscribeLocalEvent<XenoComponent, CanDragEvent>(OnXenoCanDrag);
+        SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
+        SubscribeLocalEvent<XenoComponent, GetVisMaskEvent>(OnXenoGetVisMask);
+        SubscribeLocalEvent<XenoComponent, CMDisarmEvent>(OnLeaderDisarmed,
+            before: [typeof(SharedHandsSystem), typeof(StaminaSystem)],
+            after: [typeof(TackleSystem)]);
+        SubscribeLocalEvent<XenoComponent, DisarmedEvent>(OnDisarmed, before: new[] { typeof(SharedHandsSystem) });
+        // WOLFGATE: gib records cut with commendations
+        SubscribeLocalEvent<XenoComponent, PlayerDetachedEvent>(OnXenoPlayerDetached);
+
+        SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
+        SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
+
+        //In XenoSystem.Visuals
+        SubscribeLocalEvent<XenoStateVisualsComponent, MobStateChangedEvent>(OnVisualsMobStateChanged);
+        SubscribeLocalEvent<XenoStateVisualsComponent, XenoFortifiedEvent>(OnVisualsFortified);
+        SubscribeLocalEvent<XenoStateVisualsComponent, XenoRestEvent>(OnVisualsRest);
+        SubscribeLocalEvent<XenoStateVisualsComponent, DownedEvent>(OnVisualsProne);
+        SubscribeLocalEvent<XenoStateVisualsComponent, StoodEvent>(OnVisualsStand);
+        SubscribeLocalEvent<XenoStateVisualsComponent, XenoOvipositorChangedEvent>(OnVisualsOvipositor);
+
+        Subs.CVar(_config, WFXenoCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
+        Subs.CVar(_config, WFXenoCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
+        Subs.CVar(_config, WFXenoCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
+        Subs.CVar(_config, WFXenoCVars.RMCXenoSpawnInitialMuteDurationSeconds, v => _xenoSpawnMuteDuration = TimeSpan.FromSeconds(v), true);
+
+        UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
+    }
+
+    private void OnXenoMapInit(Entity<XenoComponent> xeno, ref MapInitEvent args)
+    {
+        foreach (var actionId in xeno.Comp.ActionIds)
+        {
+            if (!xeno.Comp.Actions.ContainsKey(actionId) &&
+                _action.AddAction(xeno, actionId) is { } newAction)
+            {
+                xeno.Comp.Actions[actionId] = newAction;
+            }
+        }
+
+        if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
+            _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        if (xeno.Comp.MuteOnSpawn && _xenoSpawnMuteDuration > TimeSpan.Zero)
+            _status.TryAddStatusEffect(xeno, "Muted", _xenoSpawnMuteDuration, true, "Muted");
+
+        _eye.RefreshVisibilityMask(xeno.Owner);
+        Dirty(xeno);
+    }
+
+    private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
+    {
+        args.Tags.UnionWith(xeno.Comp.AccessLevels);
+    }
+
+    private void OnNewXenoEvolved(Entity<XenoComponent> newXeno, ref NewXenoEvolvedEvent args)
+    {
+        var oldRotation = _transform.GetWorldRotation(args.OldXeno);
+        _transform.SetWorldRotation(newXeno, oldRotation);
+    }
+
+    private void OnXenoDevolved(Entity<XenoComponent> newXeno, ref XenoDevolvedEvent args)
+    {
+        var oldRotation = _transform.GetWorldRotation(args.OldXeno);
+        _transform.SetWorldRotation(newXeno, oldRotation);
+    }
+
+    private void OnXenoAttackAttempt(Entity<XenoComponent> xeno, ref AttackAttemptEvent args)
+    {
+        if (args.Target is not { } target)
+            return;
+
+        // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
+        if ((_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target)) ||
+            _mobState.IsDead(target))
+        {
+            if (!args.Disarm)
+                args.Cancel();
+
+            return;
+        }
+
+        if (_xenoNestedQuery.HasComp(target) &&
+            _victimInfectedQuery.HasComp(target) && !args.Disarm)
+        {
+            args.Cancel();
+        }
+    }
+
+    private void OnXenoMeleeAttackAttempt(Entity<XenoComponent> xeno, ref MeleeAttackAttemptEvent args)
+    {
+        if (!TryComp<XenoNestComponent>(GetEntity(args.Target), out var nest) ||
+            nest.Nested == null ||
+            !_hive.FromSameHive(xeno.Owner, GetEntity(args.Target)))
+        {
+            return;
+        }
+
+        var attacker = GetNetEntity(xeno);
+        args.Target = GetNetEntity(nest.Nested.Value);
+
+        switch (args.Attack)
+        {
+            case LightAttackEvent attack:
+                args.Attack = new LightAttackEvent(args.Target, attacker, attack.Coordinates);
+                break;
+
+            case DisarmAttackEvent disarm:
+                args.Attack = new DisarmAttackEvent(args.Target, disarm.Coordinates);
+                break;
+        }
+    }
+
+    private void OnHealAttempt(Entity<XenoComponent> ent, ref XenoHealAttemptEvent args)
+    {
+        if (IsOnFire(ent.Owner))
+            args.Cancelled = true;
+    }
+
+    private void OnXenoOpenActivatableUIAttempt(Entity<XenoComponent> ent, ref UserOpenActivatableUIAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (HasComp<LatheComponent>(args.Target) ||
+            HasComp<CMAutomatedVendorComponent>(args.Target) ||
+            !CanXenoUseConsole(ent, args.Target))
+        {
+            args.Cancel();
+        }
+    }
+
+    private void OnXenoGetMeleeDamage(Entity<XenoComponent> ent, ref GetMeleeDamageEvent args)
+    {
+        if (MathHelper.CloseTo(_xenoDamageDealtMultiplier, 1))
+            return;
+
+        args.Damage *= _xenoDamageDealtMultiplier;
+    }
+
+    private void OnXenoDamageModify(Entity<XenoComponent> ent, ref DamageModifyEvent args)
+    {
+        if (MathHelper.CloseTo(_xenoDamageReceivedMultiplier, 1))
+            return;
+
+        args.Damage *= _xenoDamageReceivedMultiplier;
+    }
+
+    private void OnXenoRefreshSpeed(Entity<XenoComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
+            return;
+
+        args.ModifySpeed(_xenoSpeedMultiplier, _xenoSpeedMultiplier);
+    }
+
+    private void OnXenoMeleeHit(Entity<XenoComponent> xeno, ref MeleeHitEvent args)
+    {
+        foreach (var hit in args.HitEntities)
+        {
+            SharedEntityStorageComponent? storage = null;
+            if (!_entityStorage.ResolveStorage(hit, ref storage))
+                continue;
+
+            if (_weldable.IsWelded(hit))
+                _weldable.SetWeldedState(hit, false);
+
+            _entityStorage.TryOpenStorage(xeno, hit);
+        }
+    }
+
+
+    private void OnXenoIgnite(Entity<XenoComponent> ent, ref IgnitedEvent args)
+    {
+        foreach (var held in _hands.EnumerateHeld(ent.Owner).ToArray())
+        {
+            if (!HasComp<XenoParasiteComponent>(held))
+                continue;
+
+            var damage = new DamageSpecifier
+            {
+                DamageDict =
+                {
+                    [HeatDamage] = 100,
+                },
+            };
+
+            _damageable.TryChangeDamage(held, damage, true);
+            _hands.TryDrop(ent.Owner, held);
+        }
+    }
+
+    private void OnXenoCanDrag(Entity<XenoComponent> ent, ref CanDragEvent args)
+    {
+        if (_mobState.IsDead(ent))
+            args.Handled = true;
+    }
+
+    private void OnXenoBuckleAttempt(Entity<XenoComponent> ent, ref BuckleAttemptEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User) || !_mobState.IsDead(ent))
+            args.Cancelled = true;
+    }
+
+    private void OnXenoGetVisMask(Entity<XenoComponent> ent, ref GetVisMaskEvent args)
+    {
+        args.VisibilityMask |= (int) ent.Comp.Visibility;
+    }
+
+    private void OnLeaderDisarmed(Entity<XenoComponent> ent, ref CMDisarmEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!CanTackleOtherXeno(args.User, ent, out var time))
+            return;
+
+        _stun.TryParalyze(ent, time, true);
+    }
+
+    private void OnDisarmed(Entity<XenoComponent> ent, ref DisarmedEvent args)
+    {
+        args.PopupPrefix = "disarm-action-shove-";
+        args.Handled = true;
+    }
+
+    private void OnXenoPlayerDetached(Entity<XenoComponent> ent, ref PlayerDetachedEvent args)
+    {
+        if (TerminatingOrDeleted(ent) || _rest.IsResting(ent.Owner))
+            return;
+
+        _rest.TryRestAction(ent.AsNullable(), true, true);
+    }
+
+    private void OnXenoRegenMapInit(Entity<XenoRegenComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.NextRegenTime = _timing.CurTime + ent.Comp.RegenCooldown;
+        Dirty(ent);
+    }
+
+    private void OnXenoRegenBeforeCritDamage(Entity<XenoRegenComponent> ent, ref DamageStateCritBeforeDamageEvent args)
+    {
+        if (!IsOnFire(ent.Owner) && !ent.Comp.HealOffWeeds && !_weeds.IsOnFriendlyWeeds(ent.Owner))
+            return;
+
+        //Don't take bleedout damage on fire or on weeds
+        args.Damage.ClampMax(0);
+    }
+
+    private void UpdateXenoSpeedMultiplier(float speed)
+    {
+        _xenoSpeedMultiplier = speed;
+
+        var xenos = EntityQueryEnumerator<XenoComponent, MovementSpeedModifierComponent>();
+        while (xenos.MoveNext(out var uid, out _, out var comp))
+        {
+            _movementSpeed.RefreshMovementSpeedModifiers(uid, comp);
+        }
+    }
+
+    public void MakeXeno(Entity<XenoComponent?> xeno)
+    {
+        EnsureComp<XenoComponent>(xeno);
+    }
+
+    /// <summary>Whether the entity is burning (upstream flammable; RMC fire is not ported).</summary>
+    public bool IsOnFire(EntityUid uid)
+    {
+        return TryComp(uid, out FlammableComponent? flammable) && flammable.OnFire;
+    }
+
+    /// <summary>A living mob a xeno can infect or treat as an enemy: humanoid or bodied, not a xeno. Replaces RMC's MarineComponent test.</summary>
+    public bool IsHostCandidate(EntityUid uid)
+    {
+        if (HasComp<XenoComponent>(uid) || !_mobStateQuery.TryComp(uid, out var mobState) || _mobState.IsDead(uid, mobState))
+            return false;
+
+        return HasComp<HumanoidAppearanceComponent>(uid) || HasComp<BodyComponent>(uid);
+    }
+
+    private FixedPoint2 GetWeedsHealAmount(Entity<XenoRegenComponent> xeno)
+    {
+        if (!_mobThresholdsQuery.TryComp(xeno, out var thresholds) ||
+            !_mobThresholds.TryGetIncapThreshold(xeno, out var threshold, thresholds))
+        {
+            return FixedPoint2.Zero;
+        }
+
+        FixedPoint2 multiplier;
+        if (_mobState.IsCritical(xeno))
+            multiplier = xeno.Comp.CritHealMultiplier;
+        else if (_standing.IsDown(xeno) || HasComp<XenoRestingComponent>(xeno))
+            multiplier = xeno.Comp.RestHealMultiplier;
+        else
+            multiplier = xeno.Comp.StandHealingMultiplier;
+
+        var passiveHeal = threshold.Value / 65 + xeno.Comp.FlatHealing;
+        var recovery = CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0;
+        if (!CanHeal(xeno))
+            recovery = FixedPoint2.Zero;
+
+        var recoveryHeal = (threshold.Value / 65) * (recovery / 2);
+        return (passiveHeal + recoveryHeal) * multiplier / 2;
+    }
+
+    public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)
+    {
+        if (IsOnFire(xeno.Owner))
+            return;
+
+        if (!_damageableQuery.Resolve(xeno, ref xeno.Comp, false) ||
+            xeno.Comp.Damage.GetTotal() <= FixedPoint2.Zero)
+        {
+            return;
+        }
+
+        if (_mobStateQuery.TryGetComponent(xeno, out var mobState) &&
+            _mobState.IsDead(xeno, mobState))
+        {
+            return;
+        }
+
+        var heal = _rmcDamageable.DistributeTypes((xeno, xeno.Comp), -amount);
+
+        if (heal.GetTotal() > FixedPoint2.Zero)
+        {
+            Log.Error($"Tried to deal damage while healing xeno {ToPrettyString(xeno)}");
+            return;
+        }
+
+        _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
+    }
+
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool canAttackBarricades = false, bool canAttackWindows = false)
+    {
+        if (xeno == target)
+            return false;
+
+        // hiveless xenos can attack eachother
+        if (_hive.FromSameHive(xeno, target))
+            return false;
+
+        if (_mobState.IsDead(target))
+            return false;
+
+        if (HasComp<DevouredComponent>(target))
+            return false;
+
+        if (_xenoNestedQuery.HasComp(target))
+            return false;
+
+        if (canAttackBarricades && HasComp<BarricadeComponent>(target))
+            return true;
+
+        if (canAttackWindows && HasComp<DestroyOnXenoPierceScissorComponent>(target))
+            return true;
+
+        return IsHostCandidate(target) || HasComp<XenoComponent>(target); // WOLFGATE: host test replaces MarineComponent
+    }
+
+    public bool CanHeal(EntityUid xeno)
+    {
+        var ev = new XenoHealAttemptEvent();
+        RaiseLocalEvent(xeno, ref ev);
+        return !ev.Cancelled;
+    }
+
+    public int GetGroundXenosAlive()
+    {
+        var count = 0;
+        var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent, MobStateComponent>();
+        while (xenos.MoveNext(out _, out _, out var mobState))
+        {
+            if (mobState.CurrentState == MobState.Dead)
+                continue;
+
+            // WOLFGATE: no planet check; every living xeno counts
+            count++;
+        }
+
+        return count;
+    }
+
+    public bool CanTackleOtherXeno(EntityUid sourceXeno, EntityUid targetXeno, out TimeSpan time)
+    {
+        time = TimeSpan.Zero;
+
+        if (CompOrNull<ActorComponent>(sourceXeno)?.PlayerSession is not { } session ||
+            !_netConfig.GetClientCVar(session.Channel, WFXenoCVars.RMCHiveLeaderTackleXenos))
+        {
+            return false;
+        }
+
+        if (!_hive.FromSameHive(targetXeno, sourceXeno))
+            return false;
+
+        if (!_hiveLeader.IsLeader(sourceXeno, out var leader))
+            return false;
+
+        if (_hiveLeader.IsLeader(targetXeno, out _))
+            return false;
+
+        if (HasComp<XenoEvolutionGranterComponent>(targetXeno))
+            return false;
+
+        time = leader.FriendlyStunTime;
+        return true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var time = _timing.CurTime;
+        var query = EntityQueryEnumerator<XenoRegenComponent>();
+        while (query.MoveNext(out var uid, out var xeno))
+        {
+            if (time < xeno.NextRegenTime)
+                continue;
+
+            xeno.NextRegenTime = time + xeno.RegenCooldown;
+            DirtyField(uid, xeno, nameof(XenoRegenComponent.NextRegenTime));
+
+            if (!xeno.HealOffWeeds)
+            {
+                // Engine bug where entities that do not move do not process new contacts for anything newly
+                // spawned under them
+                if (Transform(uid).Anchored)
+                    _weeds.UpdateQueued(uid);
+
+                var affectable = _affectableQuery.CompOrNull(uid);
+                var onWeeds = affectable != null && affectable.OnXenoWeeds && affectable.OnFriendlyWeeds;
+
+                if (affectable == null || !onWeeds)
+                {
+                    if (_xenoPlasmaQuery.TryComp(uid, out var plasmaComp))
+                    {
+                        var amount = FixedPoint2.Max(plasmaComp.PlasmaRegenOffWeeds * plasmaComp.MaxPlasma / 100 / 2, 0.01);
+                        _xenoPlasma.RegenPlasma((uid, plasmaComp), amount);
+                    }
+
+                    continue;
+                }
+            }
+
+            var heal = GetWeedsHealAmount((uid, xeno));
+            if (heal > FixedPoint2.Zero)
+            {
+                HealDamage(uid, heal);
+
+                if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                {
+                    var plasmaRestored = plasma.PlasmaRegenOnWeeds * plasma.MaxPlasma / 100 / 2;
+                    _xenoPlasma.RegenPlasma((uid, plasma), plasmaRestored);
+
+                    if (_xenoRecoveryQuery.TryComp(uid, out var recovery))
+                    {
+                        var amount = plasmaRestored * recovery.Multiplier / 4;
+                        _xenoPlasma.RegenPlasma((uid, plasma), amount);
+                    }
+                }
+            }
+        }
+    }
+}

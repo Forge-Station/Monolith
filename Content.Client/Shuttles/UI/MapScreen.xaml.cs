@@ -3,6 +3,7 @@ using System.Numerics;
 using Content.Client.Shuttles.Systems;
 using Content.Shared._Mono.Detection;
 using Content.Shared._NF.Shuttles.Components;
+using Content.Shared._WF.Planets; // WOLFGATE(Planets)
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
@@ -54,21 +55,9 @@ public sealed partial class MapScreen : BoxContainer
 
     // Mono
     private bool _autopilotTargeting = false;
-    private bool _bioScanTargeting = false; // Forge-Change - BioScan
-    private StartEndTime _bioScanTime; // Forge-Change - BioScan
-    private ShuttleBioScanStatus _bioScanStatus = ShuttleBioScanStatus.None; // Forge-Change - BioScan
-    private ShuttleCloakingStatus _cloakingStatus = ShuttleCloakingStatus.None; // Forge-Change - Cloaking
-    private StartEndTime _cloakingTimeActive = default; // Forge-Change - Cloaking
-    private StartEndTime _cloakingTimeCooldown = default; // Forge-Change - Cloaking
 
     private float _minMapDequeue = 0.05f;
     private float _maxMapDequeue = 0.25f;
-
-    // Forge-Change-Start
-    private string _iffSearchFilter = "";
-    private readonly Dictionary<MapId, Collapsible> _mapSectorCollapsibles = new();
-    private readonly Dictionary<MapId, string> _mapSectorNames = new();
-    // Forge-Change-End
 
     private StyleBoxFlat _ftlStyle;
 
@@ -77,10 +66,7 @@ public sealed partial class MapScreen : BoxContainer
 
     // Mono
     public event Action<MapCoordinates, Angle>? RequestAutopilot;
-    public event Action<MapCoordinates>? RequestBioScan; // Forge-Change - BioScan
-    public event Action<NetEntity>? OnTrackEntity; // Forge-Change: nav markers
-    public event Action? OnCloaking; // Forge-Change: Cloaking
-    public event Action? OnMapToggleMod; // Forge-Change: Cloaking
+    public event Action<NetEntity>? OnTrackEntity;
 
     private readonly Dictionary<MapId, BoxContainer> _mapHeadings = new();
     private readonly Dictionary<MapId, List<IMapObject>> _mapObjects = new();
@@ -97,6 +83,7 @@ public sealed partial class MapScreen : BoxContainer
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        WfInitDestinationSearch();
 
         _detection = _entManager.System<DetectionSystem>(); // Mono
         _audio = _entManager.System<SharedAudioSystem>();
@@ -110,9 +97,6 @@ public sealed partial class MapScreen : BoxContainer
 
         MapFTLButton.OnToggled += FtlPreviewToggled;
         MapAutopilotButton.OnToggled += AutopilotPreviewToggled; // Mono
-        MapBioScanButton.OnToggled += BioScanPreviewToggled; // Forge-Change - BioScan
-        MapCloakButton.OnPressed += MapCloakPressed; // Forge-Change - Cloaking
-        MapToggleModButton.OnPressed += MapToggleModPressed; // Forge-Change - Cloaking
 
         _ftlStyle = new StyleBoxFlat(Color.LimeGreen);
         FTLBar.ForegroundStyleBoxOverride = _ftlStyle;
@@ -120,15 +104,10 @@ public sealed partial class MapScreen : BoxContainer
         // Just pass it on up.
         MapRadar.RequestFTL += (coords, angle) =>
         {
-            if (_bioScanTargeting)
-            {
-                RequestBioScan?.Invoke(coords); // Forge-Change - BioScan
-                SetTargeting(MapTargetingMode.None); // Forge-Change - BioScan
-            }
-            else if (_autopilotTargeting) // Mono
+            if (_autopilotTargeting) // Mono
             {
                 RequestAutopilot?.Invoke(coords, angle);
-                SetTargeting(MapTargetingMode.None); // Forge-Change - BioScan
+                SetTargeting(false, true);
             }
             else
             {
@@ -145,65 +124,19 @@ public sealed partial class MapScreen : BoxContainer
         {
             MapRadar.ShowBeacons = args.Pressed;
         };
-
-        // Forge-Change-Start
-        MapIffSearchCriteria.PlaceHolder = Loc.GetString("shuttle-console-map-search-placeholder");
-        MapIffSearchCriteria.OnTextChanged += args => OnMapIffSearchChanged(args.Text);
-        MapIffSearchCriteria.OnTextEntered += _ => GoToFirstSearchMatch();
-        // Forge-Change-End
     }
-
-    // Forge-Change-start - Cloaking
-    private void SetVisibleBioScanUiElements(bool visible)
-    {
-        BioScanBar.Visible = visible;
-        MapBioScanState.Visible = visible;
-        MapBioScanButton.Visible = visible;
-    }
-
-    private void SetVisibleCloakingUiElements(bool visible)
-    {
-        CloakingBar.Visible = visible;
-        MapCloakingState.Visible = visible;
-        MapCloakButton.Visible = visible;
-    }
-    // Forge-Change-end - Cloaking
 
     public void UpdateState(ShuttleMapInterfaceState state)
     {
         // Only network the accumulator due to ping making the thing fonky.
         // This should work better with predicting network states as they come in.
-        if (state.IncludeBeaconExclusionLists)
-        {
-            _beacons = state.Destinations;
-            _exclusions = state.Exclusions;
-        }
+        _beacons = state.Destinations;
+        _exclusions = state.Exclusions;
         _state = state.FTLState;
         _ftlTime = state.FTLTime;
-        _bioScanTime = state.BioScanTime; // Forge-Change - BioScan
-        _bioScanStatus = state.BioScanStatus; // Forge-Change - BioScan
-        _cloakingStatus = state.CloakingStatus; // Forge-Change - Cloaking
-        _cloakingTimeActive = state.CloakingTimeActive; // Forge-Change - Cloaking
-        _cloakingTimeCooldown = state.CloakingTimeCooldown; // Forge-Change - Cloaking
-        MapCloakButton.Disabled = state.CloakingStatus is not (ShuttleCloakingStatus.Ready or ShuttleCloakingStatus.Active); // Forge-Change - Cloaking
         MapRadar.InFtl = true;
         MapFTLState.Text = Loc.GetString($"shuttle-console-ftl-state-{_state.ToString()}");
-        MapBioScanState.Text = Loc.GetString($"shuttle-console-bioscan-status-{_bioScanStatus.ToString()}"); // Forge-Change - BioScan
-        MapBioScanButton.Disabled = _bioScanStatus == ShuttleBioScanStatus.InProgress || !state.BioScanAvailable; // Forge-Change - BioScan
-
-        // Forge-Change-start - Cloaking
-        if (state.MapScreenMapScreenMode == ShuttleConsoleMapScreenMode.BioScan)
-        {
-            SetVisibleBioScanUiElements(true);
-            SetVisibleCloakingUiElements(false);
-        }
-
-        if (state.MapScreenMapScreenMode == ShuttleConsoleMapScreenMode.Cloaking)
-        {
-            SetVisibleBioScanUiElements(false);
-            SetVisibleCloakingUiElements(true);
-        }
-        // Forge-Change-end - Cloaking
+        WfUpdateFtlDrive(state.FtlDrive); // WOLFGATE(Shuttles): the drive status decides whether the FTL button can be used
 
         //frontier - we only allow pre-approved vessels to FTL
         if (!_entManager.HasComponent<ShuttleFTLComponent>(_shuttleEntity))
@@ -263,6 +196,14 @@ public sealed partial class MapScreen : BoxContainer
 
     private void SetFTLAllowed(bool value)
     {
+        // WOLFGATE(Shuttles) START: without a powered drive the FTL button stays off and its preview is released
+        if (value && WfFtlDriveBlocked)
+        {
+            WfBlockFtl();
+            return;
+        }
+        // WOLFGATE END
+
         if (value)
         {
             MapFTLButton.Disabled = false;
@@ -279,177 +220,34 @@ public sealed partial class MapScreen : BoxContainer
 
     private void FtlPreviewToggled(BaseButton.ButtonToggledEventArgs obj)
     {
-        SetTargeting(obj.Pressed ? MapTargetingMode.Ftl : MapTargetingMode.None); // Forge-Change - BioScan
+        SetTargeting(obj.Pressed, false);
     }
 
     // Mono
     private void AutopilotPreviewToggled(BaseButton.ButtonToggledEventArgs obj)
     {
-        SetTargeting(obj.Pressed ? MapTargetingMode.Autopilot : MapTargetingMode.None); // Forge-Change
+        SetTargeting(obj.Pressed, true);
     }
 
-    // Forge-Change-Start
-    private void OnMapIffSearchChanged(string text)
+    // Mono
+    private void SetTargeting(bool pressed, bool isAutopilot)
     {
-        _iffSearchFilter = text.Trim();
-        ApplyMapIffFilter();
-    }
-
-    private static bool MapNameMatches(string name, string filter)
-    {
-        if (string.IsNullOrEmpty(filter))
-            return true;
-
-        if (name.Contains(filter, StringComparison.OrdinalIgnoreCase))
-            return true;
-
-        foreach (var line in name.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
-        {
-            if (line.Contains(filter, StringComparison.OrdinalIgnoreCase))
-                return true;
-        }
-
-        return false;
-    }
-
-    private bool RowMatchesFilter(MapId mapId, string rowName)
-    {
-        if (string.IsNullOrEmpty(_iffSearchFilter))
-            return true;
-
-        if (MapNameMatches(rowName, _iffSearchFilter))
-            return true;
-
-        if (_mapSectorNames.TryGetValue(mapId, out var sectorName) && MapNameMatches(sectorName, _iffSearchFilter))
-            return true;
-
-        return false;
-    }
-
-    private void ApplyMapIffFilter()
-    {
-        foreach (var (mapId, gridContents) in _mapHeadings)
-        {
-            foreach (var child in gridContents.Children)
-            {
-                if (_mapObjectControls.TryGetValue(child, out var rowName))
-                    child.Visible = RowMatchesFilter(mapId, rowName);
-            }
-
-            var anyChild = false;
-            foreach (var child in gridContents.Children)
-            {
-                if (child.Visible)
-                {
-                    anyChild = true;
-                    break;
-                }
-            }
-
-            if (_mapSectorCollapsibles.TryGetValue(mapId, out var col))
-                col.Visible = string.IsNullOrEmpty(_iffSearchFilter) || anyChild;
-        }
-    }
-
-    private void GoToFirstSearchMatch()
-    {
-        var filter = _iffSearchFilter;
-        if (string.IsNullOrEmpty(filter) || _shuttleEntity == null)
-            return;
-
-        var shuttlePos = _xformSystem.GetWorldPosition(_shuttleEntity.Value);
-        IMapObject? best = null;
-        MapId bestMap = default;
-        var bestDist = float.MaxValue;
-
-        foreach (var (mapId, list) in _mapObjects)
-        {
-            var sectorMatch = _mapSectorNames.TryGetValue(mapId, out var sectorName) && MapNameMatches(sectorName, filter);
-
-            foreach (var obj in list)
-            {
-                if (!MapNameMatches(obj.Name, filter) && !sectorMatch)
-                    continue;
-
-                var pos = _shuttles.GetMapCoordinates(obj).Position;
-                var d = (pos - shuttlePos).Length();
-                if (d < bestDist)
-                {
-                    bestDist = d;
-                    best = obj;
-                    bestMap = mapId;
-                }
-            }
-        }
-
-        if (best == null)
-            return;
-
-        if (_mapSectorCollapsibles.TryGetValue(bestMap, out var sectorCol))
-        {
-            HideOtherCollapsibles(sectorCol);
-            sectorCol.BodyVisible = true;
-        }
-
-        if (IsFTLBlocked())
-            return;
-
-        var coordinates = _shuttles.GetMapCoordinates(best);
-        MapRadar.SetMap(coordinates.MapId, coordinates.Position, recentering: true);
-    }
-    // Forge-Change-End
-
-    // Forge-Change-start - Cloaking
-    private void MapCloakPressed(BaseButton.ButtonEventArgs obj)
-    {
-        OnCloaking?.Invoke();
-    }
-
-    private void MapToggleModPressed(BaseButton.ButtonEventArgs obj)
-    {
-        OnMapToggleMod?.Invoke();
-    }
-    // Forge-Change-end - Cloaking
-
-    // Forge-Change-start - BioScan
-    private void BioScanPreviewToggled(BaseButton.ButtonToggledEventArgs obj)
-    {
-        SetTargeting(obj.Pressed ? MapTargetingMode.BioScan : MapTargetingMode.None);
-    }
-
-    private enum MapTargetingMode : byte
-    {
-        None,
-        Ftl,
-        Autopilot,
-        BioScan,
-    }
-
-    private void SetTargeting(MapTargetingMode mode)
-    {
-        if (mode != MapTargetingMode.None)
+        if (pressed)
         {
             MapRadar.FtlMode = true;
             MapRadar.ShowFTLRangeOnly = false;
-            MapRadar.ShowFTLRange = mode == MapTargetingMode.Ftl;
-            MapRadar.NoFTLRange = mode != MapTargetingMode.Ftl;
-            MapFTLButton.Pressed = mode == MapTargetingMode.Ftl;
-            MapAutopilotButton.Pressed = mode == MapTargetingMode.Autopilot;
-            MapBioScanButton.Pressed = mode == MapTargetingMode.BioScan;
-            _autopilotTargeting = mode == MapTargetingMode.Autopilot;
-            _bioScanTargeting = mode == MapTargetingMode.BioScan;
+            MapRadar.ShowFTLRange = !isAutopilot;
+            MapRadar.NoFTLRange = isAutopilot;
+            MapFTLButton.Pressed = !isAutopilot;
+            MapAutopilotButton.Pressed = isAutopilot;
+            _autopilotTargeting = isAutopilot;
         }
         else
         {
             MapRadar.FtlMode = false;
-            MapFTLButton.Pressed = false;
-            MapAutopilotButton.Pressed = false;
-            MapBioScanButton.Pressed = false;
-            _autopilotTargeting = false;
-            _bioScanTargeting = false;
         }
     }
-    // Forge-Change-end - BioScan
+
     public void SetConsole(EntityUid? console)
     {
         _console = console;
@@ -494,8 +292,6 @@ public sealed partial class MapScreen : BoxContainer
         }
         _pendingMapObjects.Clear();
 
-        ApplyMapIffFilter();
-
         _nextPing = _timing.CurTime + _pingCooldown;
         MapRebuildButton.Disabled = true;
     }
@@ -520,9 +316,7 @@ public sealed partial class MapScreen : BoxContainer
     private void ClearMapObjects()
     {
         _mapObjectControls.Clear();
-        _mapSectorCollapsibles.Clear();
-        _mapSectorNames.Clear();
-        HyperspaceDestinations.DisposeAllChildren();
+        HyperspaceDestinations.RemoveAllChildren();
         _pendingMapObjects.Clear();
         _mapObjects.Clear();
         _mapHeadings.Clear();
@@ -558,6 +352,8 @@ public sealed partial class MapScreen : BoxContainer
             {
                 mapName = Loc.GetString("shuttle-console-unknown");
             }
+
+            mapName = _entManager.System<WFMapLabelSystem>().Label(mapUid, mapMetadata.EntityName); // WOLFGATE(Planets): sector space, surfaces and levels say what they are
 
             var heading = new CollapsibleHeading(mapName);
 
@@ -595,8 +391,6 @@ public sealed partial class MapScreen : BoxContainer
                 }
             };
 
-            _mapSectorCollapsibles[mapComp.MapId] = mapButton;
-            _mapSectorNames[mapComp.MapId] = mapName;
             _mapHeadings.Add(mapComp.MapId, gridContents);
             foreach (var grid in _maps.GetAllGrids(mapComp.MapId))
             {
@@ -651,6 +445,8 @@ public sealed partial class MapScreen : BoxContainer
 
                 _pendingMapObjects.Add((mapComp.MapId, beacon));
             }
+
+            WfAddEncounters(mapComp.MapId, mapUid); // WOLFGATE(Encounters): list encounters among the sector objects
 
             HyperspaceDestinations.AddChild(mapButton);
 
@@ -708,16 +504,6 @@ public sealed partial class MapScreen : BoxContainer
         }
     }
 
-    //Forge-Change-start
-    private bool IsIFFHide(EntityUid uid)
-    {
-        if (!_entManager.TryGetComponent<IFFComponent>(uid, out var iffComp))
-            return false;
-
-        return (iffComp.Flags & IFFFlags.Hide) != 0x0;
-    }
-    //Forge-Change-End
-
     private void OnMapObjectPress(IMapObject mapObject)
     {
         if (IsFTLBlocked())
@@ -753,9 +539,6 @@ public sealed partial class MapScreen : BoxContainer
 
         var gridContainer = new BoxContainer()
         {
-            Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            HorizontalExpand = true,
-            SeparationOverride = 4,
             Children =
             {
                 new Control()
@@ -766,47 +549,12 @@ public sealed partial class MapScreen : BoxContainer
             }
         };
 
-        // Forge-Change: track button for shuttle/grid objects
-        if (mapObj is GridMapObject gridMap && gridMap.Entity != _shuttleEntity)
-        {
-            var trackButton = new Button
-            {
-                Text = Loc.GetString("shuttle-console-map-track"),
-                StyleClasses = { "OpenBoth", "ButtonSquare" },
-                MinWidth = 36f,
-                ToolTip = Loc.GetString("shuttle-console-marker-track"),
-                ToggleMode = true,
-            };
-
-            if (_shuttleEntity != null &&
-                _entManager.TryGetComponent(_shuttleEntity, out Content.Shared._Forge.Shuttles.Components.ShuttleNavMarkerComponent? markers) &&
-                _entManager.TryGetNetEntity(gridMap.Entity, out var netEnt))
-            {
-                trackButton.Pressed = markers.Markers.Any(m =>
-                    m.Kind == Content.Shared._Forge.Shuttles.Components.ShuttleNavMarkerKind.Entity &&
-                    m.Target == netEnt);
-            }
-
-            trackButton.OnPressed += _ =>
-            {
-                if (_entManager.TryGetNetEntity(gridMap.Entity, out var tracked))
-                    OnTrackEntity?.Invoke(tracked.Value);
-            };
-
-            gridContainer.AddChild(trackButton);
-        }
-
         _mapObjectControls.Add(gridContainer, mapObj.Name);
         gridContents.AddChild(gridContainer);
 
-        // Forge-Change-Start
-        gridContainer.Visible = RowMatchesFilter(mapId, mapObj.Name);
-        // Forge-Change-End
-
         gridButton.OnPressed += args =>
         {
-            if (mapObj is GridMapObject gridMapObject && !IsIFFHide(gridMapObject.Entity)) // Forge-Change
-                OnMapObjectPress(mapObj);
+            OnMapObjectPress(mapObj);
         };
 
         if (gridContents.ChildCount > 1)
@@ -844,6 +592,8 @@ public sealed partial class MapScreen : BoxContainer
     {
         base.FrameUpdate(args);
 
+        ForgeUpdateMapMarkers(); // Forge-Change: the marker register is rebuilt only when the ship's markers change
+
         var curTime = _timing.CurTime;
 
         // Skip the gradual reveal of map objects - they're already added in PingMap
@@ -862,48 +612,6 @@ public sealed partial class MapScreen : BoxContainer
 
         var progress = _ftlTime.ProgressAt(curTime);
         FTLBar.Value = float.IsFinite(progress) ? progress : 1;
-
-        // Forge-Change-start - BioScan
-        if (_bioScanStatus == ShuttleBioScanStatus.InProgress)
-        {
-            var scanProgress = _bioScanTime.ProgressAt(curTime);
-            BioScanBar.Value = float.IsFinite(scanProgress) ? scanProgress : 0;
-        }
-        else
-        {
-            BioScanBar.Value = _bioScanStatus == ShuttleBioScanStatus.Clean || _bioScanStatus == ShuttleBioScanStatus.ThreatDetected ? 1 : 0;
-        }
-        // Forge-Change-end - BioScan
-
-        // Forge-Change-start - Cloaking
-        var cloakingTimeActiveProgress = _cloakingTimeActive.ProgressAt(curTime);
-        var cloakingTimeCooldownProgress = _cloakingTimeCooldown.ProgressAt(curTime);
-
-        if (_cloakingStatus == ShuttleCloakingStatus.None)
-        {
-            CloakingBar.Value = 0;
-            MapCloakingState.Text = Loc.GetString("shuttle-console-cloak-none");
-        }
-
-        if (_cloakingStatus == ShuttleCloakingStatus.Ready)
-        {
-            CloakingBar.Value = 0;
-            MapCloakingState.Text = Loc.GetString("shuttle-console-cloak-ready");
-        }
-
-        if (_cloakingStatus == ShuttleCloakingStatus.Active)
-        {
-            CloakingBar.Value = float.IsFinite(cloakingTimeActiveProgress) ? 1 - cloakingTimeActiveProgress : 0;
-            MapCloakingState.Text = Loc.GetString("shuttle-console-cloak-active");
-        }
-
-        if (_cloakingStatus == ShuttleCloakingStatus.Cooldown)
-        {
-            CloakingBar.Value = float.IsFinite(cloakingTimeCooldownProgress) ? cloakingTimeCooldownProgress : 0;
-            MapCloakingState.Text = Loc.GetString("shuttle-console-cloak-cooldown");
-        }
-        // Forge-Change-end - Cloaking
-        ForgeUpdateMapMarkers();
     }
 
     protected override void Draw(DrawingHandleScreen handle)

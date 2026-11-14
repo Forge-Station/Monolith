@@ -225,5 +225,36 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         Dirty(ent);
     }
 
+    public LanguagePrototype GetLanguageFromPrefix(Entity<LanguageSpeakerComponent?> ent, ref string input, out bool parsed, bool modifyText = false)
+    {
+        parsed = false;
+        if (!Resolve(ent, ref ent.Comp, logMissing: false))
+            return Universal;
+
+        var proto = GetLanguage(ent);
+        var text = input;
+        if (text.Length < 4 || !text.StartsWith(ChatPrefixChar))
+            return proto;
+
+        text = text[1..];
+        var prefix = text[..3];
+        foreach (var langId in ent.Comp.SpokenLanguages)
+        {
+            if (!_prototype.TryIndex(langId, out var lang) || lang.ChatPrefix is not { Length: 3 } chatPrefix)
+                continue;
+
+            if (!chatPrefix.Equals(prefix, StringComparison.CurrentCultureIgnoreCase))
+                continue;
+
+            if (modifyText)
+                input = text[3..];
+
+            parsed = true;
+            return lang;
+        }
+
+        return proto;
+    }
+
     #endregion
 }

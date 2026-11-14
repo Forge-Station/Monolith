@@ -10,6 +10,7 @@
     sprite: _Mono/Clothing/Hands/Gloves/mopp.rsi
   - type: Insulated
   - type: Armor
+    coverage: [Hand] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Poison: 0.9

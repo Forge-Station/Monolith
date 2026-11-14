@@ -1,0 +1,62 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      MinSize="780 480"
+                      SetSize="840 560"
+                      Title="{Loc 'trader-shop-window-title'}">
+    <BoxContainer Orientation="Horizontal" Margin="12" SeparationOverride="10">
+        <!-- Catalogue -->
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" SeparationOverride="6">
+            <LineEdit Name="SearchBar"
+                      PlaceHolder="{Loc 'trader-shop-search'}"
+                      HorizontalExpand="True"/>
+
+            <PanelContainer StyleClasses="AngleRect"
+                            VerticalExpand="True"
+                            HorizontalExpand="True"
+                            ModulateSelfOverride="#0A0A0A">
+                <ScrollContainer VerticalExpand="True"
+                                 HorizontalExpand="True"
+                                 HScrollEnabled="False"
+                                 Margin="5">
+                    <BoxContainer Name="EntriesBox"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  SeparationOverride="2"/>
+                </ScrollContainer>
+            </PanelContainer>
+        </BoxContainer>
+
+        <!-- Basket -->
+        <BoxContainer Orientation="Vertical" MinWidth="340" MaxWidth="340" SeparationOverride="4">
+            <Label Text="{Loc 'trader-shop-basket-title'}" StyleClasses="LabelKeyText"/>
+
+            <PanelContainer StyleClasses="AngleRect"
+                            VerticalExpand="True"
+                            ModulateSelfOverride="#0A0A0A">
+                <ScrollContainer VerticalExpand="True"
+                                 HorizontalExpand="True"
+                                 HScrollEnabled="False"
+                                 Margin="5">
+                    <BoxContainer Name="BasketBox"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True"
+                                  SeparationOverride="2"/>
+                </ScrollContainer>
+            </PanelContainer>
+
+            <Label Name="TotalLabel" Align="Right" StyleClasses="LabelKeyText" Margin="0 4"/>
+
+            <!-- What the trader can see in front of them -->
+            <Label Name="ZoneLabel" StyleClasses="LabelSecondaryColor" ClipText="True"/>
+            <Label Name="BalanceLabel" StyleClasses="LabelSecondaryColor"/>
+
+            <BoxContainer Orientation="Horizontal" Margin="0 8 0 0" SeparationOverride="6">
+                <Button Name="ClearButton" Text="{Loc 'trader-shop-clear'}" MinWidth="80"/>
+                <Button Name="PurchaseButton"
+                        Text="{Loc 'trader-shop-purchase'}"
+                        HorizontalExpand="True"
+                        StyleClasses="ButtonColorGreen"/>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

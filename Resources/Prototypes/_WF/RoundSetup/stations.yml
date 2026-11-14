@@ -1,0 +1,48 @@
+# Private crew stations. The lobby decides who boards; the slots stay open so a spawn is not refused for a full quota.
+- type: entity
+  id: WFShipScenarioStation
+  parent:
+  - BaseStation
+  - BaseStationJobsSpawning
+  - BaseStationRecords
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationJobs
+    availableJobs:
+      Contractor: [ -1, -1 ]
+      Pilot: [ -1, -1 ]
+      Mercenary: [ -1, -1 ]
+      StationEngineer: [ -1, -1 ]
+      AtmosphericTechnician: [ -1, -1 ]
+      MedicalDoctor: [ -1, -1 ]
+      MdMedic: [ -1, -1 ]
+      Chemist: [ -1, -1 ]
+      Paramedic: [ -1, -1 ]
+      SalvageSpecialist: [ -1, -1 ]
+      Scientist: [ -1, -1 ]
+      CargoTechnician: [ -1, -1 ]
+      Botanist: [ -1, -1 ]
+      Chef: [ -1, -1 ]
+      Bartender: [ -1, -1 ]
+      Janitor: [ -1, -1 ]
+
+- type: entity
+  id: WFDoomedScenarioStation
+  parent: WFShipScenarioStation
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFCrashScenarioStation
+  parent:
+  - BaseStation
+  - BaseStationJobsSpawning
+  - BaseStationRecords
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationJobs
+    availableJobs:
+      Contractor: [ -1, -1 ]
+      Pilot: [ -1, -1 ]
+      Mercenary: [ -1, -1 ]
+      StationEngineer: [ -1, -1 ]
+      MedicalDoctor: [ -1, -1 ]

@@ -1,4 +1,6 @@
 using Content.Shared.Cargo;
+using Content.Shared.Cargo.Prototypes;
+using Content.Shared._WF.EngineCompat;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Cargo.Components;
@@ -14,6 +16,12 @@ public sealed partial class StationCargoBountyDatabaseComponent : Component
     /// </summary>
     [DataField]
     public int MaxBounties = 8; // Mono 6->8
+
+    /// <summary>
+    /// Bounty prototypes this station may offer.
+    /// </summary>
+    [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<CargoBountyPrototype>))]
+    public List<string> AvailableBounties = new();
 
     /// <summary>
     /// A list of all the bounties currently active for a station.

@@ -1,0 +1,9 @@
+- files: ["shower_start.ogg", "shower_end.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation via Meridian Rift (sound/machines/shower) at commit 5cec204da500c61fa94fdaf5c5a138764920e2c1"
+  source: "https://github.com/tgstation/tgstation"
+
+- files: ["shower_loop.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from tgstation via Meridian Rift (sound/machines/shower/shower_mid1-3.ogg) at commit 5cec204da500c61fa94fdaf5c5a138764920e2c1, joined into one loop"
+  source: "https://github.com/tgstation/tgstation"

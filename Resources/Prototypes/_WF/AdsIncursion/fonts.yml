@@ -1,0 +1,5 @@
+# The Automated Defense System's face: Minecraftia (already shipped under Resources/Fonts), a pixel font that reads as a
+# machine readout. The synth speech verb and the system's banners use it; size 10 sits at chat height.
+- type: font
+  id: WFAdsSynth
+  path: /Fonts/Minecraftia.ttf

@@ -25,6 +25,10 @@ public sealed partial class CompanyPrototype : IPrototype
     [DataField]
     public string Form { get; private set; } = "Neutral";
 
+    /// <summary>Hidden from character setup. Forge companies leave this unset.</summary>
+    [DataField]
+    public bool Disabled { get; private set; }
+
 
     /// <summary>
     /// The name of the company.

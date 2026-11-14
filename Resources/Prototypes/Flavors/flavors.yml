@@ -1349,3 +1349,10 @@
   flavorType: Base
   description: flavor-base-trashy
 
+
+# WOLFGATE(Xenoarch) START: artifact glue from the xenoarch rework
+- type: flavor
+  id: artifactglue
+  flavorType: Complex
+  description: flavor-complex-artifact-glue
+# WOLFGATE END

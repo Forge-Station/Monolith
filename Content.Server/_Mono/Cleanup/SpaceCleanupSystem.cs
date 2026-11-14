@@ -2,16 +2,17 @@ using Content.Server.Cargo.Systems;
 using Content.Server.NPC.HTN;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Mono.CCVar;
-using Content.Shared.Body.Organ;
-using Content.Shared.Body.Part;
 using Content.Shared.Mind.Components;
+using Content.Shared.Physics;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
+using System.Reflection;
 
 namespace Content.Server._Mono.Cleanup;
 
@@ -24,6 +25,9 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _timing = default!;
+    private object _manifold = default!;
+    private MethodInfo _testOverlap = default!;
+    private object?[] _testOverlapArgs = [];
     [Dependency] private PricingSystem _pricing = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
@@ -34,12 +38,11 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
     private float _maxPrice;
 
     private EntityQuery<CleanupImmuneComponent> _immuneQuery;
+    private EntityQuery<FixturesComponent> _fixQuery;
     private EntityQuery<HTNComponent> _htnQuery;
     private EntityQuery<MapGridComponent> _gridQuery;
     private EntityQuery<MindContainerComponent> _mindQuery;
-    private EntityQuery<TransformComponent> _xformQuery;
-    private EntityQuery<OrganComponent> _organQuery;
-    private EntityQuery<BodyPartComponent> _bodyPartQuery;
+    private EntityQuery<PhysicsComponent> _physQuery;
 
     private List<(EntityCoordinates Coord, TimeSpan Time, float Radius, float Aggression)> _sweepQueue = new();
     private HashSet<Entity<PhysicsComponent>> _sweepEnts = new();
@@ -52,41 +55,26 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
         _cleanupInterval = TimeSpan.FromSeconds(600);
 
         _immuneQuery = GetEntityQuery<CleanupImmuneComponent>();
+        _fixQuery = GetEntityQuery<FixturesComponent>();
         _htnQuery = GetEntityQuery<HTNComponent>();
         _gridQuery = GetEntityQuery<MapGridComponent>();
         _mindQuery = GetEntityQuery<MindContainerComponent>();
-        _xformQuery = GetEntityQuery<TransformComponent>();
-        _organQuery = GetEntityQuery<OrganComponent>();
-        _bodyPartQuery = GetEntityQuery<BodyPartComponent>();
+        _physQuery = GetEntityQuery<PhysicsComponent>();
 
         Subs.CVar(_cfg, MonoCVars.CleanupMaxGridDistance, val => _maxGridDistance = val, true);
         Subs.CVar(_cfg, MonoCVars.SpaceCleanupDistance, val => _maxDistance = val, true);
         Subs.CVar(_cfg, MonoCVars.SpaceCleanupMaxValue, val => _maxPrice = val, true);
-    }
 
-    /// <summary>
-    ///     Pre-filter sanity check. The marker is supposed to guarantee these properties,
-    ///     but parent-change races or hot reloads can leave the marker stale for a tick;
-    ///     verify cheaply before paying the proximity/pricing cost.
-    /// </summary>
-    protected override bool ShouldEnqueue(EntityUid uid)
-    {
-        if (_gridQuery.HasComp(uid) || _htnQuery.HasComp(uid) || _immuneQuery.HasComp(uid) || _mindQuery.HasComp(uid))
-            return false;
-
-        // Organs / body parts (carp tails, brains, etc.) must not be vacuum-swept.
-        if (_organQuery.HasComp(uid) || _bodyPartQuery.HasComp(uid))
-            return false;
-
-        if (!_xformQuery.TryGetComponent(uid, out var xform) || xform.MapUid == null)
-            return false;
-
-        // Forge-Change: expedition planets are the map grid. Rivers, structures and room
-        // fills parented to that grid are not space debris, even when no shuttle is nearby.
-        if (xform.GridUid != null)
-            return false;
-
-        return xform.ParentUid == xform.MapUid;
+        var manifoldType = typeof(SharedMapSystem).Assembly.GetType("Robust.Shared.Physics.Collision.IManifoldManager");
+        if (manifoldType != null)
+        {
+            _manifold = IoCManager.ResolveType(manifoldType);
+            var testOverlapMethod = manifoldType.GetMethod("TestOverlap");
+            if (testOverlapMethod != null)
+                _testOverlap = testOverlapMethod.MakeGenericMethod(typeof(IPhysShape), typeof(PhysShapeCircle));
+            if (_testOverlap != null)
+                _testOverlapArgs = Array.ConvertAll(_testOverlap.GetParameters(), p => p.HasDefaultValue ? p.DefaultValue : null);
+        }
     }
 
     protected override bool ShouldEntityCleanup(EntityUid uid)
@@ -96,84 +84,81 @@ public sealed partial class SpaceCleanupSystem : BaseCleanupSystem<PhysicsCompon
 
     private bool ShouldEntityCleanup(EntityUid uid, float aggression)
     {
-        if (_immuneQuery.HasComp(uid) || _mindQuery.HasComp(uid)
-            || _organQuery.HasComp(uid) || _bodyPartQuery.HasComp(uid))
-            return false;
+        var xform = Transform(uid);
 
-        if (!_xformQuery.TryGetComponent(uid, out var xform))
-            return false;
+        var isStuck = false;
 
-        // Forge-Change: only true vacuum counts as space. A planet map is its own grid.
-        var inSpace = xform.GridUid == null && xform.ParentUid == xform.MapUid;
-        if (!inSpace && !GetWallStuck((uid, xform)))
-            return false;
+        var price = 0f;
 
-        // Late, expensive check: price first, then proximity scaled by sqrt(price/max).
-        var price = (float)_pricing.GetPrice(uid);
-        if (price > _maxPrice)
-            return false;
-
-        // Wall-stuck entities skip the proximity scaling - they're already known to be unreachable.
-        if (!inSpace)
-            return true;
-
-        var scale = aggression * MathF.Sqrt(price / MathF.Max(_maxPrice, 1f));
-        return !CleanupHelper.HasNearbyGrids(xform.Coordinates, _maxGridDistance * scale)
-            && !CleanupHelper.HasNearbyPlayers(xform.Coordinates, _maxDistance * scale);
+        return !_gridQuery.HasComp(uid)
+            && (xform.ParentUid == xform.MapUid // don't delete if on grid
+                || (isStuck |= GetWallStuck((uid, xform)))) // or wall-stuck
+            && !_htnQuery.HasComp(uid) // handled by MobCleanupSystem
+            && !_immuneQuery.HasComp(uid) // handled by GridCleanupSystem
+            && !_mindQuery.HasComp(uid) // no deleting anything that can have a mind - should be handled by MobCleanupSystem anyway
+            && (price = (float)_pricing.GetPrice(uid)) <= _maxPrice
+            // WOLFGATE(Cleanup) START: floor the lookup radius, since a zero-price entity's zero radius asserted the server down.
+            && (isStuck
+                || !_cleanup.HasNearbyGrids(xform.Coordinates, MathF.Max(0.5f, _maxGridDistance * aggression * MathF.Sqrt(price / _maxPrice)))
+                    && !_cleanup.HasNearbyPlayers(xform.Coordinates, MathF.Max(0.5f, _maxDistance * aggression * MathF.Sqrt(price / _maxPrice))));
+            // WOLFGATE END
     }
 
-    /// <summary>
-    ///     Returns true when the entity is wedged inside a wall - has a touching hard contact
-    ///     with a static body on its own grid, and the entity's world position is contained
-    ///     within that fixture's world AABB.
-    /// </summary>
-    /// <remarks>
-    ///     Forge-Change: replaces the previous reflection-based <c>IManifoldManager.TestOverlap</c>
-    ///     call with a public AABB-containment check. Slightly more permissive (AABB vs. exact shape)
-    ///     but dramatically cheaper and removes a hidden coupling to engine internals.
-    /// </remarks>
     private bool GetWallStuck(Entity<TransformComponent> ent)
     {
         if (ent.Comp.GridUid is not { } gridUid
             || ent.Comp.Anchored
-            || ent.Comp.ParentUid != gridUid)
+            || ent.Comp.ParentUid != gridUid // ignore if not directly parented to grid
+        )
             return false;
 
+        var xfB = new Transform(ent.Comp.LocalPosition, 0);
+        var shapeB = new PhysShapeCircle(0.001f);
+
         var contacts = _physics.GetContacts(ent.Owner);
+        // it dies without this for some reason
         if (contacts == ContactEnumerator.Empty)
             return false;
 
-        // Entity world position - used to test "is the entity center inside a wall fixture".
-        var entWorldPos = _transform.GetWorldPosition(ent.Comp);
-
         while (contacts.MoveNext(out var contact))
         {
-            if (!contact.IsTouching || !contact.Hard
-                || contact.FixtureA == null || contact.FixtureB == null
-                || contact.BodyA == null || contact.BodyB == null)
+            if (contact.FixtureA == null
+                || contact.FixtureB == null
+                || contact.BodyA == null
+                || contact.BodyB == null
+                || !contact.FixtureA.Hard
+                || !contact.FixtureB.Hard
+                || !contact.IsTouching
+            )
                 continue;
 
-            var weAreA = contact.EntityA == ent.Owner;
-            var otherBody = weAreA ? contact.BodyB : contact.BodyA;
-            if ((otherBody.BodyType & BodyType.Static) == 0)
+            var isA = contact.EntityB == ent.Owner;
+
+            var body = isA ? contact.BodyA : contact.BodyB;
+            // only trigger when the other entity is static
+            if ((body.BodyType & BodyType.Static) == 0)
                 continue;
 
-            var otherFix = weAreA ? contact.FixtureB : contact.FixtureA;
-            var otherXform = weAreA ? contact.XformB : contact.XformA;
-            var otherEnt = weAreA ? contact.EntityB : contact.EntityA;
-            if (otherFix == null || otherXform == null)
-                continue;
+            var fix = isA ? contact.FixtureA : contact.FixtureB;
+            var xform = isA ? contact.XformA : contact.XformB;
+            var anch = isA ? contact.EntityA : contact.EntityB;
 
-            var xf = _physics.GetLocalPhysicsTransform(otherEnt, otherXform);
-            var childIdx = weAreA ? contact.ChildIndexB : contact.ChildIndexA;
-            var aabb = otherFix.Shape.ComputeAABB(xf, childIdx);
+            var xf = _physics.GetLocalPhysicsTransform(anch, xform);
+            var shape = fix.Shape;
 
-            // ComputeAABB returns the AABB in the static body's grid-local frame; convert
-            // entity world position into that same frame for containment.
-            var localPos = System.Numerics.Vector2.Transform(entWorldPos, otherXform.InvWorldMatrix);
-            if (aabb.Contains(localPos))
+            if (_testOverlap == null || _testOverlapArgs.Length < 6)
+                return false;
+
+            _testOverlapArgs[0] = shape;
+            _testOverlapArgs[1] = 0;
+            _testOverlapArgs[2] = shapeB;
+            _testOverlapArgs[3] = 0;
+            _testOverlapArgs[4] = xf;
+            _testOverlapArgs[5] = xfB;
+            if ((bool?)_testOverlap.Invoke(_manifold, _testOverlapArgs) ?? false)
                 return true;
         }
+
         return false;
     }
 

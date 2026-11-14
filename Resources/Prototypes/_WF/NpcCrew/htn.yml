@@ -1,0 +1,217 @@
+# The crew root: fight, then work the duty the WFCrewDuty key names, then idle. The planner replans every half
+# second and swaps to an earlier branch as soon as it is valid. Station operators only fight their own attackers
+# and resume their job afterwards. Every duty starts by holstering; the fight starts by drawing.
+- type: htnCompound
+  id: WFCrewCompound
+  branches:
+  - preconditions:
+    - !type:WFCrewMayFightPrecondition
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFDrawWeaponOperator
+    - !type:HTNPrimitiveTask
+      operator: !type:WFReloadOperator
+    - !type:HTNCompoundTask
+      task: WFCrewFightCompound
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFCrewWorkOperator
+    - !type:HTNPrimitiveTask
+      operator: !type:WFHolsterWeaponOperator
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        targetKey: WFCrewWorkDestination
+        rangeKey: InteractRange
+        removeKeyOnFinish: false
+    - !type:HTNPrimitiveTask
+      operator: !type:WFCrewWorkOperator
+        perform: true
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFCrewReturnOperator
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        targetKey: WFCrewReturn
+        rangeKey: WFCrewPostRange
+  - preconditions:
+    - !type:KeyEqualsPrecondition
+      key: WFCrewDuty
+      value: Pilot
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFHolsterWeaponOperator
+    - !type:HTNCompoundTask
+      task: WFCrewPilotCompound
+  - preconditions:
+    - !type:KeyEqualsPrecondition
+      key: WFCrewDuty
+      value: Gunnery
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFHolsterWeaponOperator
+    - !type:HTNCompoundTask
+      task: WFCrewGunneryCompound
+  - preconditions:
+    - !type:KeyEqualsPrecondition
+      key: WFCrewDuty
+      value: Guard
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFHolsterWeaponOperator
+    - !type:HTNCompoundTask
+      task: WFCrewGuardCompound
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFHolsterWeaponOperator
+    - !type:HTNCompoundTask
+      task: WFCrewIdleCompound
+
+# Shoot while the gun in hand has ammo, otherwise close in. Both fail without a target, which fails the fight branch.
+- type: htnCompound
+  id: WFCrewFightCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: WFCrewRangedCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: WFCrewMeleeCompound
+
+# Gunnery: walk to an available console and operate it until interrupted.
+- type: htnCompound
+  id: WFCrewGunneryCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFPickGunneryOperator
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        targetKey: WFCrewGunneryCoordinates
+        rangeKey: InteractRange
+        removeKeyOnFinish: false
+    - !type:HTNPrimitiveTask
+      operator: !type:WFTakeGunneryOperator
+  - tasks:
+    - !type:HTNCompoundTask
+      task: WFCrewIdleCompound
+
+# Guard: return to the assigned post, then idle nearby.
+- type: htnCompound
+  id: WFCrewGuardCompound
+  branches:
+  - preconditions:
+    - !type:KeyExistsPrecondition
+      key: WFCrewPost
+    - !type:CoordinatesNotInRangePrecondition
+      targetKey: WFCrewPost
+      rangeKey: WFCrewPostRange
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        targetKey: WFCrewPost
+        rangeKey: WFCrewPostRange
+        removeKeyOnFinish: false
+  - tasks:
+    - !type:HTNCompoundTask
+      task: WFCrewIdleCompound
+
+# Pilot: walk to the helm and take it; WFPilotDutySystem flies the orders from there. No usable helm: idle, and take
+# one as soon as the planner finds it.
+- type: htnCompound
+  id: WFCrewPilotCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFPickHelmOperator
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        targetKey: WFCrewHelmCoords
+        rangeKey: InteractRange
+        removeKeyOnFinish: false
+    - !type:HTNPrimitiveTask
+      operator: !type:WFTakeHelmOperator
+  # No way to the square helm (a sealed cabin, a blocked passage): fly from the nearest one rather than not at all.
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFPickHelmOperator
+        anyHelm: true
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        targetKey: WFCrewHelmCoords
+        rangeKey: InteractRange
+        removeKeyOnFinish: false
+    - !type:HTNPrimitiveTask
+      operator: !type:WFTakeHelmOperator
+  - tasks:
+    - !type:HTNCompoundTask
+      task: WFCrewIdleCompound
+
+# Idle at the assigned station instead of wandering across connected docks.
+- type: htnCompound
+  id: WFCrewIdleCompound
+  branches:
+  - preconditions:
+    - !type:KeyExistsPrecondition
+      key: WFCrewPost
+    - !type:CoordinatesNotInRangePrecondition
+      targetKey: WFCrewPost
+      rangeKey: WFCrewPostRange
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        targetKey: WFCrewPost
+        rangeKey: WFCrewPostRange
+        removeKeyOnFinish: false
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:RandomOperator
+        targetKey: IdleTime
+        minKey: MinimumIdleTime
+        maxKey: MaximumIdleTime
+    - !type:HTNPrimitiveTask
+      operator: !type:WaitOperator
+        key: IdleTime
+
+# Inventory reload/fallback is handled by WFCrewWeaponSystem; no loose weapon scavenging.
+- type: htnCompound
+  id: WFCrewRangedCompound
+  branches:
+  - preconditions:
+    - !type:WFCrewLoadedGunPrecondition
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFCrewTargetOperator
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        shutdownState: PlanFinished
+        pathfindInPlanning: true
+        removeKeyOnFinish: false
+        targetKey: TargetCoordinates
+        pathfindKey: TargetPathfind
+        stopOnLineOfSight: true
+        rangeKey: MeleeRange
+    - !type:HTNPrimitiveTask
+      operator: !type:GunOperator
+        targetKey: Target
+
+- type: htnCompound
+  id: WFCrewMeleeCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFCrewTargetOperator
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        shutdownState: PlanFinished
+        pathfindInPlanning: true
+        removeKeyOnFinish: false
+        targetKey: TargetCoordinates
+        pathfindKey: TargetPathfind
+        rangeKey: MeleeRange
+    - !type:HTNPrimitiveTask
+      operator: !type:MeleeOperator
+        targetKey: Target
+      preconditions:
+      - !type:TargetInRangePrecondition
+        targetKey: Target
+        rangeKey: MeleeRange

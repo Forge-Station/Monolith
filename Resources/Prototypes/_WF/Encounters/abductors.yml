@@ -1,0 +1,165 @@
+# Abductors: Ashfall Reaver ships that take people for ransom. Now and then one docks with a lightly crewed player ship.
+# Its guards hold the port with stun batons, its hands stun, cuff and drag someone back to the chair in its cell, and it
+# casts off to wait. Word goes out to the sector and the ransom goes on its warrant. Only hulls with a WFAbductCellChair
+# work: AbductorHullsHaveACell fails any other. Before docking it stops the mark: an ion disruptor knocks out its engines
+# and an ARACHNE harpoon drops its FTL and parks it.
+
+- type: wfEncounter
+  id: WFEncounterAbductorLight
+  name: wf-encounter-name-abductor-light
+  start: Scheduled
+  lifetime: Persistent
+  hidden: true
+  category: Threat
+  icon: Skull
+  weight: 0.4
+  minPlayers: 3
+  cooldown: 3600
+  minDistance: 3000
+  maxDistance: 5000
+  stationClearance: 3000
+  bounty:
+    ship: abductor
+    target: Crew
+    spesos: 15000
+    title: wf-bounty-title-abductor-light
+    description: wf-bounty-desc-abductor-light
+  ships:
+  - key: abductor
+    stealth: true
+    disablers: [ WFIonDisruptor, WFHackHarpoonGunRaider ]
+    navigation: WFCrewNavigationHunter
+    vessels: [ Hazel ]
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfileAbductor
+    captain: false
+    deckhands: 2
+    guards: 1
+    skill: Green
+    evades: false
+    wander: 6
+    wanderRadius: 4000
+    wanderPause: 30
+    abduct:
+      ransom: 40000
+      maxCrew: 1
+      grabbers: 2
+
+- type: wfEncounter
+  id: WFEncounterAbductorMedium
+  name: wf-encounter-name-abductor-medium
+  start: Scheduled
+  lifetime: Persistent
+  hidden: true
+  category: Threat
+  icon: Skull
+  weight: 0.25
+  minPlayers: 5
+  cooldown: 5400
+  minDistance: 3000
+  maxDistance: 5000
+  stationClearance: 3000
+  bounty:
+    ship: abductor
+    target: Crew
+    spesos: 40000
+    title: wf-bounty-title-abductor-medium
+    description: wf-bounty-desc-abductor-medium
+  ships:
+  - key: abductor
+    stealth: true
+    disablers: [ WFIonDisruptor, WFHackHarpoonGunRaider ]
+    navigation: WFCrewNavigationHunter
+    vessels: [ Bastion ]
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfileAbductor
+    deckhands: 3
+    guards: 2
+    skill: Regular
+    evades: false
+    wander: 6
+    wanderRadius: 4000
+    wanderPause: 30
+    abduct:
+      ransom: 100000
+      maxCrew: 2
+      grabbers: 2
+
+# The chair a prisoner is strapped to. Bolted down, so nobody carries off the cell.
+- type: entity
+  parent: Chair
+  id: WFAbductCellChair
+  name: prisoner chair
+  description: A steel chair bolted to the deck, with worn straps. Someone has been kept here.
+  components:
+  - type: Transform
+    anchored: true
+  - type: WFAbductCell
+
+# Their batons come out switched on, an NPC doesn't stop to thumb the switch, and do no harm. WFCrewGrabberSystem keeps them charged in crew hands.
+- type: entity
+  parent: Stunbaton
+  id: WFCrewAbductorBaton
+  suffix: NPC crew
+  components:
+  - type: ItemToggle
+    activated: true
+  - type: MeleeWeapon
+    angle: 0
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 0
+    animation: WeaponArcSlash
+
+- type: startingGear
+  id: WFCrewAbductorGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+    ears: WFCrewHeadset
+    outerClothing: ClothingOuterHardsuitSpatio
+    head: ClothingHeadHelmetHardsuitSpatio
+    mask: ClothingMaskBreath
+    suitstorage: OxygenTankFilled
+    belt: WFCrewAbductorBaton
+    pocket1: Handcuffs
+    pocket2: Handcuffs
+
+# The Ashfall Reavers' pirate crew, armed to take people alive.
+- type: wfCrewProfile
+  id: WFCrewProfileAbductor
+  firstNames: WFNamesPirateFirst
+  lastNames: WFNamesPirateLast
+  hullSwaps:
+    WFWallDurasteel: WallPlastitanium
+    WFWallDurasteelDiagonal: WallPlastitaniumDiagonal
+    WFWallDurasteelCapital: WallPlastitaniumCapital
+    WFWallDurasteelDiagonalCapital: WallPlastitaniumDiagonalCapital
+  components:
+  - type: WFCrewNonLethal
+  - type: PirateAccent
+  - type: WFCrewSuitUp
+  - type: PressureImmunity
+  - type: BreathingImmunity
+  bodies:
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyReptilian
+  - WFMobCrewBodyDwarf
+  - WFMobCrewBodyVulpkanin
+  skills: [ Green, Regular, Regular, Veteran ]
+  loadouts:
+    WFCrewCaptain: [ WFCrewAbductorGear ]
+    WFCrewPilot: [ WFCrewAbductorGear ]
+    WFCrewGunner: [ WFCrewAbductorGear ]
+    WFCrewRadioOperator: [ WFCrewAbductorGear ]
+    WFCrewMarine: [ WFCrewAbductorGear ]
+    WFCrewEngineer: [ WFCrewAbductorGear ]
+    WFCrewDeckhand: [ WFCrewAbductorGear ]

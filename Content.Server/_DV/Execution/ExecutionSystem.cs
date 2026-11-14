@@ -1,6 +1,7 @@
 using Content.Server.Interaction;
 using Content.Server.Kitchen.Components;
 using Content.Server.Weapons.Ranged.Systems;
+using Content.Shared._Mono.Weapons.Ranged.Components;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Clumsy;
@@ -49,6 +50,7 @@ public sealed partial class ExecutionSystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private SharedAudioSystem _audioSystem = default!;
     [Dependency] private GunSystem _gunSystem = default!;
+    [Dependency] private Content.Server._WF.Wolfmed.Life.WolfmedExecutionSystem _wolfmedExecution = default!; // WOLFGATE(Wolfmed): the kill and the gore tiers on a wound host
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -108,6 +110,9 @@ public sealed partial class ExecutionSystem : EntitySystem
             return false;
 
         // The victim must be incapacitated to be executed
+        // WOLFGATE(Wolfmed) START: a Downed wound host is helpless enough to execute
+        if (!HasComp<Content.Shared._WF.Wolfmed.Consciousness.WolfmedDownedComponent>(victim))
+        // WOLFGATE END
         if (victim != attacker && _actionBlockerSystem.CanInteract(victim, null))
             return false;
 
@@ -134,12 +139,20 @@ public sealed partial class ExecutionSystem : EntitySystem
         if (!CanExecuteWithGun(weapon, victim, attacker))
             return;
 
+        // WOLFGATE(Wolfmed) START: a player is asked "are you sure?" first, and the do-after starts on a yes
+        if (!_wolfmedConfirmed && _wolfmedExecution.AskFirst(weapon, victim, attacker, true))
+            return;
+        // WOLFGATE END
+
         var executionTime = weapon.Comp.ExecutionTime; // Mono
 
         if (attacker == victim)
         {
-            ShowExecutionPopup("suicide-popup-gun-initial-internal", Filter.Entities(attacker), PopupType.Medium, attacker, victim, weapon);
-            ShowExecutionPopup("suicide-popup-gun-initial-external", Filter.PvsExcept(attacker), PopupType.MediumCaution, attacker, victim, weapon);
+            if (!HasComp<RouletteShotgunComponent>(weapon))
+            {
+                ShowExecutionPopup("suicide-popup-gun-initial-internal", Filter.Entities(attacker), PopupType.Medium, attacker, victim, weapon);
+                ShowExecutionPopup("suicide-popup-gun-initial-external", Filter.PvsExcept(attacker), PopupType.MediumCaution, attacker, victim, weapon);
+            }
             executionTime = weapon.Comp.SuicideTime; // Mono
         }
         else
@@ -229,15 +242,19 @@ public sealed partial class ExecutionSystem : EntitySystem
 
         // Information about the ammo like damage
         DamageSpecifier damage = new DamageSpecifier();
+        var shotSound = component.SoundGunshot;
 
         // Get some information from IShootable
         var ammoUid = ev.Ammo[0].Entity;
+        var wolfmedStrength = _wolfmedExecution.MeasureRound((weapon, component), ammoUid); // WOLFGATE(Wolfmed): read the round before the switch below spends or deletes it
         switch (ev.Ammo[0].Shootable)
         {
             case CartridgeAmmoComponent cartridge:
+                shotSound = cartridge.SoundGunshot ?? shotSound;
+
                 // Get the damage value
                 var prototype = _prototypeManager.Index<EntityPrototype>(cartridge.Prototype);
-                prototype.TryGetComponent<ProjectileComponent>(out var projectileA, _componentFactory); // sloth forgive me
+                prototype.TryComp<ProjectileComponent>(out var projectileA, _componentFactory); // sloth forgive me
                 if (projectileA != null)
                     damage = projectileA.Damage;
 
@@ -266,6 +283,9 @@ public sealed partial class ExecutionSystem : EntitySystem
                 throw new InvalidOperationException($"Unknown shootable type [{ev.Ammo[0].Shootable}]");
         }
 
+        var damageModifier = new GunDamageModifierEvent(component.DamageModifier);
+        RaiseLocalEvent(weapon, ref damageModifier);
+
         // Clumsy people have a chance to shoot themselves (not in the head)
         if (!component.ClumsyProof &&
             TryComp<ClumsyComponent>(attacker, out var clumsy) && _random.Prob(1f / 3f))
@@ -274,14 +294,20 @@ public sealed partial class ExecutionSystem : EntitySystem
             ShowExecutionPopup("execution-popup-gun-clumsy-external", Filter.PvsExcept(attacker), PopupType.MediumCaution, attacker, victim, weapon);
 
             // You shoot yourself with the gun (no damage multiplier)
-            _damageableSystem.TryChangeDamage(attacker, damage, origin: attacker);
-            _audioSystem.PlayEntity(component.SoundGunshot, Filter.Pvs(weapon), weapon, true, AudioParams.Default);
+            _damageableSystem.TryChangeDamage(attacker, damage * damageModifier.Modifier, origin: attacker);
+            _audioSystem.PlayEntity(shotSound, Filter.Pvs(weapon), weapon, true, AudioParams.Default);
+            RaiseLocalEvent(weapon, new AmmoShotEvent { FiredProjectiles = [] });
             return;
         }
 
         // Gun successfully fired, deal damage
-        _damageableSystem.TryChangeDamage(victim, damage * component.ExecutionModifier, true, targetPart: TargetBodyPart.Head); // Mono - ExecutionModifier
-        _audioSystem.PlayEntity(component.SoundGunshot, Filter.Pvs(weapon), weapon, false, AudioParams.Default);
+        // WOLFGATE(Wolfmed) START: a lethal round kills a wound host and leaves its tier's gore; anything else takes the old hit
+        // A shot at oneself is a suicide there: the ghost leaves first and cannot return.
+        if (!_wolfmedExecution.TryGunExecution(victim, attacker, weapon, wolfmedStrength))
+        // WOLFGATE END
+        _damageableSystem.TryChangeDamage(victim, damage * component.ExecutionModifier * damageModifier.Modifier, true, targetPart: TargetBodyPart.Head); // Mono - ExecutionModifier
+        _audioSystem.PlayEntity(shotSound, Filter.Pvs(weapon), weapon, false, AudioParams.Default);
+        RaiseLocalEvent(weapon, new AmmoShotEvent { FiredProjectiles = [] });
 
         // Popups
         if (attacker != victim)
@@ -289,7 +315,7 @@ public sealed partial class ExecutionSystem : EntitySystem
             ShowExecutionPopup("execution-popup-gun-complete-internal", Filter.Entities(attacker), PopupType.Medium, attacker, victim, weapon);
             ShowExecutionPopup("execution-popup-gun-complete-external", Filter.PvsExcept(attacker), PopupType.LargeCaution, attacker, victim, weapon);
         }
-        else
+        else if (!HasComp<RouletteShotgunComponent>(weapon))
         {
             ShowExecutionPopup("suicide-popup-gun-complete-internal", Filter.Entities(attacker), PopupType.LargeCaution, attacker, victim, weapon);
             ShowExecutionPopup("suicide-popup-gun-complete-external", Filter.PvsExcept(attacker), PopupType.LargeCaution, attacker, victim, weapon);

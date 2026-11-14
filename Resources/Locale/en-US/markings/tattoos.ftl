@@ -28,3 +28,9 @@ marking-TattooEyeRight = Right Eye
 
 marking-TattooEyeLeft-tattoo_eye_l = Left Eye
 marking-TattooEyeLeft = Left Eye
+
+# Wolfgate: ported from HardLight
+marking-TattooEyeMothLeft = Left Eye
+marking-TattooEyeMothLeft-tattoo_eye_moth_l = Left Eye
+marking-TattooEyeMothRight = Right Eye
+marking-TattooEyeMothRight-tattoo_eye_moth_r = Right Eye

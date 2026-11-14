@@ -1,0 +1,4 @@
+- files: ["pit_lips.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The lip masks of pit.rsi, for Wolfgate cavern mouths by Tools/_WF/Caverns/gen_pits.py."
+  source: "https://github.com/VanguardControl/Wolfgate"

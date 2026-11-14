@@ -13,6 +13,7 @@
 - type: emote
   id: Whirr
   name: chat-emote-name-whirr
+  icon: Interface/Emotes/vocal.png # Wolfgate: was the default scream icon
   category: Vocal
   chatMessages: [ whirrs ]
   whitelist: # Mono - IPC's, borgs, protogens
@@ -28,6 +29,7 @@
 - type: emote
   id: Boop
   name: chat-emote-name-boop
+  icon: Interface/Emotes/beep.png # Wolfgate: was the default scream icon
   category: Vocal
   chatMessages: [ boops ]
   whitelist: # Mono - IPC's, borgs, protogens

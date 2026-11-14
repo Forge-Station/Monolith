@@ -16,4 +16,8 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<string> WhitelistPrototypeList =
         CVarDef.Create("whitelist.prototype_list", "basicWhitelist", CVar.SERVERONLY);
+
+    /// <summary>Bank balance given to a new character when the player is whitelisted.</summary>
+    public static readonly CVarDef<int> GameWhitelistedStartingBalance =
+        CVarDef.Create("game.whitelisted_starting_balance", 75000, CVar.SERVER | CVar.REPLICATED);
 }

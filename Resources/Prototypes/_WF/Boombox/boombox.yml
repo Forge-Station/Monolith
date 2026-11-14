@@ -1,0 +1,31 @@
+- type: entity
+  parent: BaseItem
+  id: WFBoombox
+  name: boombox
+  description: A portable speaker with a tape deck that plays links. Load a song or a whole playlist and it plays out loud for everyone nearby.
+  components:
+  - type: Sprite
+    sprite: _WF/Boombox/boombox.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+  - type: Item
+    sprite: _WF/Boombox/boombox.rsi
+    size: Normal
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFBoomboxVisuals.Playing:
+        base:
+          True: { state: on }
+          False: { state: icon }
+  - type: InternetSoundSource
+  - type: ActivatableUI
+    key: enum.WFBoomboxUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.WFBoomboxUiKey.Key:
+        type: WFBoomboxBoundUserInterface
+  - type: WFBoombox
+  - type: StaticPrice
+    price: 250

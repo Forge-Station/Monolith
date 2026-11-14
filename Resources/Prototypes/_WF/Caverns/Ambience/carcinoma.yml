@@ -1,0 +1,19 @@
+# Inside the Gut: the planet's slow night beds, and wet gurgles and far-off movement now and then. Named by the Gut in
+# caverns.yml and played clear underground.
+
+- type: wfPlanetAmbience
+  id: WFPlanetAmbienceCarcinomaCavern
+  loops:
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_ambience_night_loop_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_ambience_night_loop_2.ogg
+  oneShots:
+  - path: /Audio/Effects/Fluids/slosh.ogg
+  - path: /Audio/Effects/Fluids/glug.ogg
+  - path: /Audio/Effects/Fluids/blood1.ogg
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_random_sound_night_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_random_sound_night_2.ogg
+  - path: /Audio/_WF/Planets/Worlds/carcinoma/carcinoma_random_sound_night_3.ogg
+  loopVolume: -9
+  oneShotVolume: -9
+  minInterval: 18
+  maxInterval: 55

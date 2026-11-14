@@ -244,9 +244,17 @@ public abstract partial class CESharedZLevelsSystem
             }
 
             //No ZEntities found, check floor tiles
+            // WOLFGATE(Planets) START: a roof one layer down is something to stand on, not to drop through.
+            if (floor > 0 && !_gridQuery.HasComp(target) && WfRoofedBelow(gridUid, grid, gridTile))
+                return -floor + 1;
+            // WOLFGATE END
+
             if (_map.TryGetTileRef(gridUid, grid, gridTile, out var tileRef) &&
                 !tileRef.Tile.IsEmpty)
                 return -floor; // tile ground has groundY == 0 -> -floor
+
+            if (WfUnloadedGround(gridUid, gridTile)) // WOLFGATE(Planets): planet terrain that isn't loaded is still ground
+                return -floor;
         }
 
         return -maxFloors;
@@ -340,6 +348,17 @@ public abstract partial class CESharedZLevelsSystem
 
         ent.Comp.LaunchCountdown = seconds;
         DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.LaunchCountdown));
+    }
+
+    /// <summary>Sets whether the grid currently has solid terrain under its footprint.</summary>
+    [PublicAPI]
+    public void SetGroundContact(Entity<CEZPhysicsComponent?> ent, bool contact)
+    {
+        if (!Resolve(ent.Owner, ref ent.Comp, false) || ent.Comp.GroundContact == contact)
+            return;
+
+        ent.Comp.GroundContact = contact;
+        DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.GroundContact));
     }
 
     [PublicAPI]

@@ -1,0 +1,19 @@
+# A wrecked mass transceiver comes back with steel, a screwdriver and a welder; damage sends it the other way.
+- type: constructionGraph
+  id: WFMassTransceiverGraph
+  start: broken
+  graph:
+  - node: broken
+    entity: WFMassTransceiverBroken
+    edges:
+    - to: working
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 2
+      - tool: Screwing
+        doAfter: 2
+      - tool: Welding
+        doAfter: 3
+  - node: working
+    entity: WFMassTransceiver

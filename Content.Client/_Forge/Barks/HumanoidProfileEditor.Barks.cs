@@ -55,6 +55,15 @@ public sealed partial class HumanoidProfileEditor
         }
     }
 
+    private void SetBarkVoice(string id)
+    {
+        if (Profile == null)
+            return;
+
+        Profile = Profile.WithBarkVoice(id);
+        SetDirty();
+    }
+
     private void PlayPreviewBark()
     {
         if (Profile is null)

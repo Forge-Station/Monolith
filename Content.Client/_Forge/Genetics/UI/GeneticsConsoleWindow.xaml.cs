@@ -125,7 +125,7 @@ public sealed partial class GeneticsConsoleWindow : DefaultWindow
         if (SelectedGeneId != null && !_branches.ContainsKey(SelectedGeneId))
             SelectedGeneId = null;
 
-        GeneList.DisposeAllChildren();
+        GeneList.RemoveAllChildren();
 
         var hasBranches = state.Branches.Count > 0;
         NoGenesLabel.Visible = !hasBranches;
@@ -166,7 +166,7 @@ public sealed partial class GeneticsConsoleWindow : DefaultWindow
 
     private void PopulateDiscoveries(GeneticsConsoleBoundUserInterfaceState state)
     {
-        DiscoveryList.DisposeAllChildren();
+        DiscoveryList.RemoveAllChildren();
         var has = state.Discoveries.Count > 0;
         NoDiscoveriesLabel.Visible = !has;
         DiscoveryScroll.Visible = has;
@@ -242,7 +242,7 @@ public sealed partial class GeneticsConsoleWindow : DefaultWindow
             SelectGeneLabel.Visible = true;
             GeneDetails.Visible = false;
             HintLegendLabel.Visible = false;
-            CodonBar.DisposeAllChildren();
+            CodonBar.RemoveAllChildren();
             return;
         }
 
@@ -292,7 +292,7 @@ public sealed partial class GeneticsConsoleWindow : DefaultWindow
 
     private void RebuildCodonBar(GeneticsConsoleBranchEntry branch)
     {
-        CodonBar.DisposeAllChildren();
+        CodonBar.RemoveAllChildren();
         for (var i = 0; i < branch.Sequence.Count; i++)
         {
             var codon = branch.Sequence[i];

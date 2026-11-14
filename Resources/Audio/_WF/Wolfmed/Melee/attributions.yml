@@ -1,0 +1,14 @@
+- files: ["melee1.ogg", "melee2.ogg", "melee3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Bobstation reignited (tgstation lineage), modular_septic/sound/effects, at commit 7850ebd9f86f8ba7cef23b34b60e309c39e156e9."
+  source: "https://gitgud.io/bobstation/bobstation-reignited/-/tree/7850ebd9f86f8ba7cef23b34b60e309c39e156e9/modular_septic/sound/effects"
+
+- files: ["stab1.ogg", "stab2.ogg", "stab3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Bobstation reignited (tgstation lineage), modular_septic/sound/gore, at commit 7850ebd9f86f8ba7cef23b34b60e309c39e156e9."
+  source: "https://gitgud.io/bobstation/bobstation-reignited/-/tree/7850ebd9f86f8ba7cef23b34b60e309c39e156e9/modular_septic/sound/gore"
+
+- files: ["punch1.ogg", "punch2.ogg", "punch3.ogg", "chop2.ogg", "chop4.ogg", "chop5.ogg", "crowbarhit1.ogg", "crowbarhit2.ogg"] # the chops and crowbar hits at 0.6 gain, the owner wanted them about 30 % quieter
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Bobstation reignited (tgstation lineage), modular_septic/sound/effects, at commit 7850ebd9f86f8ba7cef23b34b60e309c39e156e9; the punches converted from wav to mono ogg."
+  source: "https://gitgud.io/bobstation/bobstation-reignited/-/tree/7850ebd9f86f8ba7cef23b34b60e309c39e156e9/modular_septic/sound/effects"

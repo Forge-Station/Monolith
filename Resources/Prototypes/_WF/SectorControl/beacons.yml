@@ -1,0 +1,96 @@
+# A company claim beacon. Unpack the flatpack on a hull or lattice in the sector, anchor it, then activate it.
+# The hex it stands in is painted in the company's colour until the beacon is destroyed.
+
+- type: entity
+  parent: BaseStructure
+  id: WFSectorBeacon
+  name: wf-sector-beacon-name
+  description: wf-sector-beacon-desc
+  components:
+  - type: Sprite
+    sprite: _Mono/Structures/Machines/beacon.rsi
+    noRot: true
+    drawdepth: Mobs
+    layers:
+    - state: beacon
+    - state: beacon_lights
+      shader: unshaded
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Anchorable
+    flags:
+    - Anchorable
+  - type: RemoveComponents
+    components:
+    - type: Pullable
+    - type: Corrodible
+    - type: XenoSlashable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 250
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PointLight
+    enabled: false
+    radius: 3
+    energy: 2
+    color: "#ffffff"
+  - type: WFSectorBeacon
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  parent: WFSectorBeacon
+  id: WFSectorBeaconImmortal
+  suffix: Immortal
+  description: wf-sector-beacon-immortal-desc
+  components:
+  - type: WFSectorBeacon
+    immortal: true
+
+- type: entity
+  parent: BaseFlatpack
+  id: WFSectorBeaconFlatpack
+  name: wf-sector-beacon-flatpack-name
+  description: wf-sector-beacon-flatpack-desc
+  components:
+  - type: Flatpack
+    entity: WFSectorBeacon
+    qualityNeeded: Anchoring
+  - type: StaticPrice
+    price: 2500
+
+- type: latheRecipe
+  id: WFSectorBeaconFlatpack
+  result: WFSectorBeaconFlatpack
+  categories:
+  - Tools
+  completetime: 8
+  materials:
+    Steel: 2000
+    Glass: 800
+    Gold: 400
+    Silver: 200
+
+- type: latheRecipePack
+  id: WFSectorBeaconPack
+  recipes:
+  - WFSectorBeaconFlatpack

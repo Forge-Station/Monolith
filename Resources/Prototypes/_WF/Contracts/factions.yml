@@ -1,0 +1,22 @@
+# Sides that may help each other's contracts. A company in none is its own side.
+
+- type: wfContractFaction
+  id: WFContractFactionTSF
+  companies: [ TSF, TSFHighComm ]
+
+# - type: wfContractFaction
+#   id: WFContractFactionPDV
+#   companies: [ PDV, PDVCivilian, PDVHighComm ]
+
+- type: wfContractFaction
+  id: WFContractFactionUSSP
+  companies: [ USSP ]
+
+# Forge-Change: the sides that actually spawn.
+- type: wfContractFaction
+  id: WFContractFactionRenegate
+  companies: [ Renegates ]
+
+- type: wfContractFaction
+  id: WFContractFactionSIV
+  companies: [ Imperial ]

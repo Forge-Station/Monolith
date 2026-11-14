@@ -2,7 +2,9 @@ using Content.Server._NF.Bank;
 using Content.Server._NF.CryoSleep;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
+using Content.Shared._NF.Bank.BUI;
 using Content.Shared._NF.Bank.Components;
+using Content.Shared._WF.StationRoles;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Server.Popups;
@@ -29,8 +31,7 @@ public sealed partial class AutoSalarySystem : EntitySystem
         var query = EntityQueryEnumerator<BankAccountComponent>();
         while (query.MoveNext(out var uid, out _))
         {
-            if (!TryGetCurrentJob(uid, out var job)
-                || job.Salary <= 0)
+            if (!TryGetPay(uid, out var jobId, out var wage, out var interval, out var account))
             {
                 if (HasComp<AutoSalaryComponent>(uid))
                     RemCompDeferred<AutoSalaryComponent>(uid);
@@ -42,24 +43,24 @@ public sealed partial class AutoSalarySystem : EntitySystem
             {
                 comp = EnsureComp<AutoSalaryComponent>(uid);
                 comp.LastSalaryAt = _timing.CurTime;
-                comp.JobPrototype = job.ID;
+                comp.JobPrototype = jobId;
                 Dirty(uid, comp);
                 continue;
             }
 
-            if (comp.JobPrototype != job.ID)
+            if (comp.JobPrototype != jobId)
             {
                 comp.LastSalaryAt = _timing.CurTime;
-                comp.JobPrototype = job.ID;
+                comp.JobPrototype = jobId;
                 Dirty(uid, comp);
                 continue;
             }
 
-            if (comp.LastSalaryAt + job.SalaryInterval > _timing.CurTime)
+            if (comp.LastSalaryAt + interval > _timing.CurTime)
                 continue;
 
             if (!ShouldSkipEntity(uid))
-                TryPaySalary(uid, job.Salary);
+                TryPaySalary(uid, wage, account);
 
             comp.LastSalaryAt = _timing.CurTime;
             Dirty(uid, comp);
@@ -91,12 +92,47 @@ public sealed partial class AutoSalarySystem : EntitySystem
         return !TryComp<MobStateComponent>(body, out var mobState) || _mobState.IsDead(body, mobState);
     }
 
-    private void TryPaySalary(EntityUid body, int salary)
+    private void TryPaySalary(EntityUid body, int salary, SectorBankAccount? account)
     {
+        if (account is { } sector
+            && !_bank.TrySectorWithdraw(sector, salary, LedgerEntryType.StationWithdrawalPayroll))
+            return;
+
         if (_bank.TryBankDeposit(body, salary))
         {
             _popup.PopupEntity(Loc.GetString("auto-salary-popup", ("salary", salary)), body, body);
         }
+    }
+
+    /// <summary>
+    /// A <see cref="WfStationSalaryPrototype"/> keyed by the job id pays hourly and, when the account
+    /// name is a sector account, draws that wage first. Otherwise the job's own salary is used.
+    /// </summary>
+    private bool TryGetPay(EntityUid body, out string jobId, out int wage, out TimeSpan interval, out SectorBankAccount? account)
+    {
+        jobId = string.Empty;
+        wage = 0;
+        interval = TimeSpan.FromHours(1);
+        account = null;
+
+        if (!TryGetCurrentJob(body, out var job))
+            return false;
+
+        jobId = job.ID;
+        if (_proto.TryIndex<WfStationSalaryPrototype>(job.ID, out var salary))
+        {
+            wage = salary.Wage;
+            if (!string.IsNullOrWhiteSpace(salary.Account)
+                && Enum.TryParse(salary.Account, out SectorBankAccount parsed)
+                && parsed != SectorBankAccount.Invalid)
+                account = parsed;
+
+            return wage > 0;
+        }
+
+        wage = job.Salary;
+        interval = job.SalaryInterval;
+        return wage > 0;
     }
 
     private bool TryGetCurrentJob(EntityUid body, out JobPrototype job)

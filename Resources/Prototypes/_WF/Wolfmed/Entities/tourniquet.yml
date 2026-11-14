@@ -1,0 +1,21 @@
+# Playtest 5: a tourniquet torn from a jumpsuit. It clamps a limb like the real one, but takes six times as long to
+# tie, and one hit of 15 or more on the strapped limb knocks it loose and the bleeding starts again
+# (WolfmedTourniquetSlipSystem). Crafted by hand from any jumpsuit with suit sensors.
+
+- type: entity
+  parent: Tourniquet
+  id: WFWolfmedMakeshiftTourniquet
+  name: makeshift tourniquet
+  description: A strip torn from a jumpsuit and twisted tight around a stick. Stops a limb bleeding, until a hard knock shakes it loose.
+  components:
+  - type: Sprite
+    sprite: _WF/Wolfmed/Medical/makeshift_tourniquet.rsi
+  - type: Item
+    sprite: _WF/Wolfmed/Medical/makeshift_tourniquet.rsi
+  - type: Tourniquet
+    delay: 3
+  - type: WolfmedMakeshiftTourniquet
+    slipDamage: 15
+  - type: Construction
+    graph: WFWolfmedMakeshiftTourniquet
+    node: tourniquet

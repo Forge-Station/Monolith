@@ -191,6 +191,10 @@ public enum VesselClass : byte
     Destroyer,
     Cruiser,
     // i doubt we'll ever get to cruisers
+    // Wolfgate shipyard roles that the hull list already names.
+    MissileCarrier,
+    Brawler,
+    Escort,
 }
 
 public enum VesselEngine : byte

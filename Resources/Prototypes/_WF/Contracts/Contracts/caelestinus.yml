@@ -1,0 +1,591 @@
+# Caelestinus Central: Port Authority freight and mail, Marshals bounties.
+
+# --- Port Authority ---
+
+- type: wfContract
+  id: WFContractCaelParcelRun
+  contractor: WFContractorCaelPort
+  category: Delivery
+  tier: 1
+  title: wf-contract-cael-parcel-run
+  briefing: wf-contract-cael-parcel-run-brief
+  reward: 4500, 6500
+  minutes: 40
+  weight: 3
+  objective: !type:WFContractCourier
+    package: WFContractParcel
+    count: 1, 2
+    from: Board
+    to: Other
+    perPackage: 750
+    perKilometre: 1125
+
+- type: wfContract
+  id: WFContractCaelPriorityMail
+  contractor: WFContractorCaelPort
+  category: Delivery
+  tier: 2
+  title: wf-contract-cael-priority-mail
+  briefing: wf-contract-cael-priority-mail-brief
+  reward: 7500, 10500
+  deposit: 800
+  minutes: 35
+  weight: 2
+  objective: !type:WFContractCourier
+    package: WFContractParcelPriority
+    count: 2, 4
+    from: Board
+    to: Other
+    perPackage: 1000
+    perKilometre: 1375
+
+- type: wfContract
+  id: WFContractCaelFragile
+  contractor: WFContractorCaelPort
+  category: Delivery
+  tier: 2
+  title: wf-contract-cael-fragile
+  briefing: wf-contract-cael-fragile-brief
+  reward: 8000, 11250
+  deposit: 1000
+  minutes: 40
+  weight: 1.5
+  objective: !type:WFContractCourier
+    package: WFContractParcelFragile
+    count: 1, 3
+    from: Board
+    to: Other
+    perPackage: 1250
+    perKilometre: 1500
+
+- type: wfContract
+  id: WFContractCaelGeneralFreight
+  contractor: WFContractorCaelPort
+  category: Hauling
+  tier: 2
+  title: wf-contract-cael-general-freight
+  briefing: wf-contract-cael-general-freight-brief
+  reward: 13750, 18750
+  deposit: 2000
+  minutes: 50
+  weight: 2
+  objective: !type:WFContractCourier
+    package: WFContractFreightSupplies
+    count: 2, 4
+    from: Board
+    to: Other
+    perPackage: 2250
+    perKilometre: 1625
+
+- type: wfContract
+  id: WFContractCaelInboundFreight
+  contractor: WFContractorCaelPort
+  category: Hauling
+  tier: 2
+  title: wf-contract-cael-inbound-freight
+  briefing: wf-contract-cael-inbound-freight-brief
+  reward: 13750, 18750
+  deposit: 2000
+  minutes: 55
+  weight: 1.5
+  objective: !type:WFContractCourier
+    package: WFContractFreightComponents
+    count: 2, 4
+    from: Other
+    to: Board
+    perPackage: 2250
+    perKilometre: 1625
+
+- type: wfContract
+  id: WFContractCaelBulkFreight
+  contractor: WFContractorCaelPort
+  category: Hauling
+  tier: 3
+  title: wf-contract-cael-bulk-freight
+  briefing: wf-contract-cael-bulk-freight-brief
+  reward: 22500, 30000
+  deposit: 5000
+  minutes: 60
+  weight: 1
+  objective: !type:WFContractCourier
+    package: WFContractFreightEquipment
+    count: 4, 7
+    from: Board
+    to: Other
+    perPackage: 2750
+    perKilometre: 2125
+
+- type: wfContract
+  id: WFContractCaelLuxuryConvoy
+  contractor: WFContractorCaelPort
+  category: Hauling
+  tier: 4
+  title: wf-contract-cael-luxury-convoy
+  briefing: wf-contract-cael-luxury-convoy-brief
+  reward: 40000, 50000
+  deposit: 10000
+  minutes: 70
+  weight: 0.6
+  minPlayers: 4
+  objective: !type:WFContractCourier
+    package: WFContractFreightLuxury
+    count: 6, 10
+    from: Board
+    to: Other
+    perPackage: 3250
+    perKilometre: 2500
+
+- type: wfContract
+  id: WFContractCaelStationStores
+  contractor: WFContractorCaelPort
+  category: Supply
+  tier: 1
+  title: wf-contract-cael-station-stores
+  briefing: wf-contract-cael-station-stores-brief
+  reward: 6250, 8750
+  minutes: 45
+  weight: 1.5
+  objective: !type:WFContractSupply
+    pick: 2
+    premium: 1.5
+    goods:
+    - stack: Steel
+      count: 30, 60
+    - stack: Glass
+      count: 30, 60
+    - stack: Plastic
+      count: 20, 40
+    - stack: CableMV
+      count: 30, 60
+    - stack: CableHV
+      count: 20, 40
+
+- type: wfContract
+  id: WFContractCaelMedicalStock
+  contractor: WFContractorCaelPort
+  category: Supply
+  tier: 1
+  title: wf-contract-cael-medical-stock
+  briefing: wf-contract-cael-medical-stock-brief
+  reward: 6500, 9000
+  minutes: 45
+  weight: 1
+  objective: !type:WFContractSupply
+    pick: 2
+    premium: 1.5
+    goods:
+    - stack: Gauze
+      count: 20, 40
+    - stack: Ointment
+      count: 20, 40
+    - stack: Brutepack
+      count: 20, 40
+    - entity: MedkitFilled
+      count: 2, 4
+
+# --- Marshals ---
+
+- type: wfContract
+  id: WFContractMarshalSkip
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 1
+  title: wf-contract-marshal-skip
+  briefing: wf-contract-marshal-skip-brief
+  reward: 15000, 20000
+  deposit: 500
+  minutes: 50
+  crewBonus: 0.25
+  weight: 2
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetSkip ]
+    minDistance: 3000
+    maxDistance: 4500
+
+- type: wfContract
+  id: WFContractMarshalSmuggler
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 2
+  title: wf-contract-marshal-smuggler
+  briefing: wf-contract-marshal-smuggler-brief
+  reward: 30000, 37500
+  deposit: 2000
+  minutes: 55
+  crewBonus: 0.25
+  weight: 1.5
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetSmuggler ]
+    minDistance: 3500
+    maxDistance: 5500
+
+- type: wfContract
+  id: WFContractMarshalRaiders
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 3
+  title: wf-contract-marshal-raiders
+  briefing: wf-contract-marshal-raiders-brief
+  reward: 55000, 67500
+  deposit: 4000
+  minutes: 60
+  crewBonus: 0.25
+  weight: 1
+  minPlayers: 3
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetRaiderPair ]
+    minDistance: 4000
+    maxDistance: 6500
+
+- type: wfContract
+  id: WFContractMarshalGunship
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 4
+  title: wf-contract-marshal-gunship
+  briefing: wf-contract-marshal-gunship-brief
+  reward: 90000, 110000
+  deposit: 8000
+  minutes: 60
+  crewBonus: 0.25
+  weight: 0.6
+  minPlayers: 5
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetGunship ]
+    minDistance: 4500
+    maxDistance: 7000
+
+- type: wfContract
+  id: WFContractMarshalWarlord
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 5
+  title: wf-contract-marshal-warlord
+  briefing: wf-contract-marshal-warlord-brief
+  reward: 175000, 212500
+  deposit: 15000
+  minutes: 75
+  crewBonus: 0.25
+  weight: 0.3
+  minPlayers: 8
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetWarlord ]
+    minDistance: 5500
+    maxDistance: 8000
+
+- type: wfContract
+  id: WFContractMarshalEvidence
+  contractor: WFContractorCaelMarshals
+  category: Salvage
+  tier: 2
+  title: wf-contract-marshal-evidence
+  briefing: wf-contract-marshal-evidence-brief
+  reward: 17500, 22500
+  deposit: 1000
+  minutes: 50
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractRecovery
+    item: WFContractCargoManifest
+    to: Board
+    minDistance: 3500
+    maxDistance: 5500
+    wrecks:
+    - /Maps/Salvage/small-syndicate.yml
+    - /Maps/Salvage/medium-pirate.yml
+    - /Maps/Salvage/small-ship-1.yml
+
+- type: wfContract
+  id: WFContractCaelEscortTrader
+  contractor: WFContractorCaelPort
+  category: Escort
+  tier: 1
+  title: wf-contract-cael-escort-trader
+  briefing: wf-contract-cael-escort-trader-brief
+  reward: 7500, 10500
+  minutes: 50
+  crewBonus: 0.25
+  weight: 1.5
+  objective: !type:WFContractEscort
+    encounters: [ WFContractEscortQuiet ]
+    perKilometre: 875
+
+- type: wfContract
+  id: WFContractCaelEscortFreighter
+  contractor: WFContractorCaelPort
+  category: Escort
+  tier: 2
+  title: wf-contract-cael-escort-freighter
+  briefing: wf-contract-cael-escort-freighter-brief
+  reward: 20000, 27500
+  deposit: 1500
+  minutes: 60
+  crewBonus: 0.25
+  weight: 1.2
+  objective: !type:WFContractEscort
+    encounters: [ WFContractEscortLight ]
+    perKilometre: 1250
+
+- type: wfContract
+  id: WFContractCaelEscortConvoy
+  contractor: WFContractorCaelPort
+  category: Escort
+  tier: 3
+  title: wf-contract-cael-escort-convoy
+  briefing: wf-contract-cael-escort-convoy-brief
+  reward: 40000, 50000
+  deposit: 4000
+  minutes: 70
+  crewBonus: 0.25
+  weight: 0.8
+  minPlayers: 3
+  objective: !type:WFContractEscort
+    encounters: [ WFContractEscortHeavy ]
+    perKilometre: 1750
+
+- type: wfContract
+  id: WFContractCaelClearLane
+  contractor: WFContractorCaelPort
+  category: Salvage
+  tier: 1
+  title: wf-contract-cael-clear-lane
+  briefing: wf-contract-cael-clear-lane-brief
+  reward: 9000, 12000
+  minutes: 50
+  crewBonus: 0.25
+  weight: 1
+  requires:
+  - tag: WFTowRope
+    name: wf-contract-requires-rope
+  - entity: WFTetherInstaller
+    name: wf-contract-requires-tether-installer
+  objective: !type:WFContractTow
+    range: 150
+    minDistance: 2500
+    maxDistance: 4000
+    wrecks:
+    - /Maps/Salvage/small-cargo.yml
+    - /Maps/Salvage/small-ship-1.yml
+    - /Maps/Salvage/hauling-shuttle.yml
+    - /Maps/Salvage/small-ai-survey-drone.yml
+
+# Second batch.
+
+- type: wfContract
+  id: WFContractCaelRepossession
+  contractor: WFContractorCaelPort
+  category: Bounty
+  tier: 2
+  title: wf-contract-cael-repossession
+  briefing: wf-contract-cael-repossession-brief
+  reward: 22500, 28000
+  deposit: 1000
+  minutes: 55
+  crewBonus: 0.25
+  weight: 1
+  harms:
+    WFContractorCamelot: 1
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetRepossession ]
+    minDistance: 3000
+    maxDistance: 5000
+
+- type: wfContract
+  id: WFContractMarshalsSmugglerConvoy
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 3
+  title: wf-contract-marshals-smuggler-convoy
+  briefing: wf-contract-marshals-smuggler-convoy-brief
+  reward: 47500, 57500
+  deposit: 3000
+  minutes: 65
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetSmugglerConvoy ]
+    minDistance: 3500
+    maxDistance: 6000
+
+- type: wfContract
+  id: WFContractMarshalsAce
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 3
+  title: wf-contract-marshals-ace
+  briefing: wf-contract-marshals-ace-brief
+  reward: 45000, 55000
+  deposit: 3000
+  minutes: 60
+  crewBonus: 0.25
+  weight: 0.8
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetAce ]
+    minDistance: 4000
+    maxDistance: 6500
+
+- type: wfContract
+  id: WFContractMarshalsBlackBox
+  contractor: WFContractorCaelMarshals
+  category: Salvage
+  tier: 2
+  title: wf-contract-marshals-black-box
+  briefing: wf-contract-marshals-black-box-brief
+  reward: 22500, 28000
+  deposit: 1500
+  minutes: 55
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractRecovery
+    item: WFContractFlightRecorder
+    to: Board
+    minDistance: 3500
+    maxDistance: 5500
+    infestation:
+    - entity: MobFleshClampSalvage
+      count: 2, 3
+    - entity: MobFleshJaredSalvage
+      count: 1, 3
+    - entity: MobFleshGolemSalvage
+      count: 0, 1
+    wrecks:
+    - /Maps/Salvage/medium-crashed-shuttle.yml
+    - /Maps/Salvage/medium-ruined-emergency-shuttle.yml
+    - /Maps/Salvage/medium-1.yml
+    - /Maps/Salvage/engineering-chunk.yml
+
+# New objectives.
+
+- type: wfContract
+  id: WFContractCaelMailSweep
+  contractor: WFContractorCaelPort
+  category: Delivery
+  tier: 1
+  title: wf-contract-cael-mail-sweep
+  briefing: wf-contract-cael-mail-sweep-brief
+  reward: 6000, 8000
+  minutes: 60
+  weight: 1.5
+  objective: !type:WFContractMailRun
+    package: WFContractParcel
+    stops: 3, 4
+    perStop: 1500
+    perKilometre: 750
+
+- type: wfContract
+  id: WFContractCaelLaneSurvey
+  contractor: WFContractorCaelPort
+  category: Science
+  tier: 1
+  title: wf-contract-cael-lane-survey
+  briefing: wf-contract-cael-lane-survey-brief
+  reward: 5000, 7000
+  minutes: 45
+  weight: 1.5
+  objective: !type:WFContractSweep
+    points: 3, 4
+    perPoint: 1500
+    minDistance: 2000
+    maxDistance: 5000
+
+- type: wfContract
+  id: WFContractCaelBeacon
+  contractor: WFContractorCaelPort
+  category: Salvage
+  tier: 1
+  title: wf-contract-cael-beacon
+  briefing: wf-contract-cael-beacon-brief
+  reward: 10000, 14000
+  minutes: 50
+  crewBonus: 0.25
+  weight: 1.2
+  objective: !type:WFContractRepair
+    minDistance: 2500
+    maxDistance: 4500
+    stationClearance: 2000
+    wrecks:
+    - /Maps/Salvage/small-1.yml
+    - /Maps/Salvage/small-2.yml
+    - /Maps/Salvage/small-ai-survey-drone.yml
+
+- type: wfContract
+  id: WFContractMarshalsCarpNests
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 2
+  title: wf-contract-marshals-carp-nests
+  briefing: wf-contract-marshals-carp-nests-brief
+  reward: 20000, 26000
+  deposit: 1000
+  minutes: 55
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractClear
+    targets:
+      entity: WFContractCarpNest
+      count: 2, 3
+    infestation:
+    - entity: MobCarpSalvage
+      count: 2, 4
+    wrecks:
+    - /Maps/Salvage/medium-crashed-shuttle.yml
+    - /Maps/Salvage/medium-1.yml
+    - /Maps/Salvage/cargo-1.yml
+
+- type: wfContract
+  id: WFContractMarshalsInspection
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 2
+  title: wf-contract-marshals-inspection
+  briefing: wf-contract-marshals-inspection-brief
+  reward: 22000, 28000
+  deposit: 1000
+  minutes: 55
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractInspect
+    crew:
+    - entity: MobSyndicateFootsoldier
+      count: 2, 3
+    wrecks:
+    - /Maps/Salvage/small-ship-1.yml
+    - /Maps/Salvage/small-cargo.yml
+    - /Maps/Salvage/hauling-shuttle.yml
+
+- type: wfContract
+  id: WFContractMarshalsLieutenant
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 3
+  title: wf-contract-marshals-lieutenant
+  briefing: wf-contract-marshals-lieutenant-brief
+  reward: 45000, 55000
+  deposit: 2500
+  minutes: 60
+  crewBonus: 0.25
+  weight: 0.8
+  followUp: WFContractMarshalsWarlordChain
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetRaiderPair ]
+    minDistance: 4000
+    maxDistance: 6000
+
+# Second link of the lieutenant chain: posted only for the crew that took the lieutenant down.
+- type: wfContract
+  id: WFContractMarshalsWarlordChain
+  contractor: WFContractorCaelMarshals
+  category: Bounty
+  tier: 3
+  title: wf-contract-marshals-warlord-chain
+  briefing: wf-contract-marshals-warlord-chain-brief
+  reward: 95000, 115000
+  deposit: 5000
+  minutes: 75
+  minCrew: 2
+  crewBonus: 0.25
+  weight: 0
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetWarlord ]
+    minDistance: 5000
+    maxDistance: 7000

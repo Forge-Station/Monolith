@@ -1,0 +1,139 @@
+# Space dwellers: squatters gone strange in the hulks they live in. Hostile to everyone but each other.
+- type: npcFaction
+  id: WFDwellers
+  defaultHostile: true
+
+- type: entity
+  abstract: true
+  parent:
+  - MobNonHumanHostileBase
+  - MobHumanoidHostileAISimpleMelee
+  id: WFMobDwellerBase
+  components:
+  - type: NpcFactionMember
+    factions:
+    - WFDwellers
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      60: Critical
+      90: Dead
+  - type: DamageStateVisuals
+    rotate: true
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 3.5
+
+- type: entity
+  parent: WFMobDwellerBase
+  id: WFMobDweller
+  name: space dweller
+  description: Whoever this was came aboard a long time ago and never left. It does not want company.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - sprite: _NF/Mobs/Species/Templates/human.rsi
+      state: human
+    - sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      state: equipped-INNERCLOTHING
+      color: "#5b5346"
+    - sprite: Objects/Weapons/Melee/baseball_bat.rsi
+      state: inhand-right
+  - type: MeleeWeapon
+    attackRate: 0.8
+    altDisarm: false
+    animation: WeaponArcPunch
+    angle: 0
+    damage:
+      types:
+        Blunt: 7
+    soundHit:
+      collection: MetalThud
+
+- type: entity
+  parent: WFMobDwellerBase
+  id: WFMobDwellerHooded
+  name: hooded dweller
+  description: It has cut eyeholes in a sack and sharpened a kitchen cleaver. It has had time to practise.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - sprite: _NF/Mobs/Species/Templates/human.rsi
+      state: human
+    - sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      state: equipped-INNERCLOTHING
+      color: "#3f4a3c"
+    - sprite: Clothing/Head/Hats/papersack.rsi
+      state: equipped-HELMET
+    - sprite: Objects/Weapons/Melee/cleaver.rsi
+      state: inhand-right
+  - type: MeleeWeapon
+    attackRate: 1.1
+    altDisarm: false
+    animation: WeaponArcPunch
+    angle: 0
+    damage:
+      types:
+        Slash: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+- type: entity
+  parent: WFMobDwellerBase
+  id: WFMobDwellerKing
+  name: dweller king
+  description: The others made the crown, and the cloak was the last captain's. The ship's papers are still on him.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - sprite: _NF/Mobs/Species/Templates/human.rsi
+      state: human
+    - sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      state: equipped-INNERCLOTHING
+      color: "#4a2f2f"
+    - sprite: Clothing/Neck/Cloaks/cap.rsi
+      state: equipped-NECK
+    - sprite: Clothing/Head/Hats/xmascrown.rsi
+      state: equipped-HELMET
+    - sprite: Objects/Weapons/Melee/spear.rsi
+      state: wielded-inhand-right
+  - type: Damageable
+    damageModifierSet: MobHostileDamageModifierSetBoss
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      120: Critical
+      160: Dead
+  - type: MeleeWeapon
+    attackRate: 1.2
+    altDisarm: false
+    animation: WeaponArcPunch
+    angle: 0
+    damage:
+      types:
+        Piercing: 13
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+
+# Left where a hulk's chief dies. Used aboard the hulk, it registers the ship to the holder's ID card.
+- type: entity
+  parent: BaseItem
+  id: WFSalvageClaim
+  name: ship's papers
+  description: The registry papers of an unowned ship, greasy and much handled. Use them aboard her, with an ID card that holds no deed, and she is yours.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    state: envelope_closed
+  - type: Item
+    size: Small
+  - type: WFSalvageClaim

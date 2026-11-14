@@ -240,6 +240,10 @@ namespace Content.Server.Atmos.EntitySystems
                 if (totalDamage >= barotrauma.MaxDamage)
                     continue;
 
+                // WOLFGATE(Wolfmed): M3: P23, a wound host takes pressure damage with no origin, so it lands on a part by
+                // weight and under the ambient per-part ceiling like any environmental harm, not on its own doll's pick.
+                EntityUid? origin = HasComp<Content.Shared._Onyx.Wounds.WoundHostComponent>(uid) ? null : uid;
+
                 var pressure = 1f;
 
                 if (_atmosphereSystem.GetContainingMixture(uid) is {} mixture)
@@ -259,7 +263,7 @@ namespace Content.Server.Atmos.EntitySystems
                 {
                     // Deal damage and ignore resistances. Resistance to pressure damage should be done via pressure protection gear.
                     // Mono: DamageOriginFlag arg to stop armor plate system mitigation
-                    _damageableSystem.TryChangeDamage(uid, barotrauma.Damage * Atmospherics.LowPressureDamage, true, false, origin: uid, canSever: false, originFlag: DamageableSystem.DamageOriginFlag.Barotrauma);
+                    _damageableSystem.TryChangeDamage(uid, barotrauma.Damage * Atmospherics.LowPressureDamage, true, false, origin: origin, canSever: false, originFlag: DamageableSystem.DamageOriginFlag.Barotrauma); // WOLFGATE(Wolfmed): M3: origin
 
                     if (!barotrauma.TakingDamage)
                     {
@@ -275,7 +279,7 @@ namespace Content.Server.Atmos.EntitySystems
 
                     // Deal damage and ignore resistances. Resistance to pressure damage should be done via pressure protection gear.
                     // Mono: DamageOriginFlag arg
-                    _damageableSystem.TryChangeDamage(uid, barotrauma.Damage * damageScale, true, false, origin: uid, canSever: false, originFlag: DamageableSystem.DamageOriginFlag.Barotrauma);
+                    _damageableSystem.TryChangeDamage(uid, barotrauma.Damage * damageScale, true, false, origin: origin, canSever: false, originFlag: DamageableSystem.DamageOriginFlag.Barotrauma); // WOLFGATE(Wolfmed): M3: origin
 
                     if (!barotrauma.TakingDamage)
                     {

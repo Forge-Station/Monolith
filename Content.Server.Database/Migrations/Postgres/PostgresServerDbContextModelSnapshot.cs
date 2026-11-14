@@ -658,6 +658,110 @@ namespace Content.Server.Database.Migrations.Postgres
                         });
                 });
 
+            modelBuilder.Entity("Content.Server.Database.ConsentFreetextReadReceipt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("consent_freetext_read_receipt_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ReadAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("read_at");
+
+                    b.Property<int>("ReadConsentSettingsId")
+                        .HasColumnType("integer")
+                        .HasColumnName("read_consent_settings_id");
+
+                    b.Property<Guid>("ReaderUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("reader_user_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_consent_freetext_read_receipt");
+
+                    b.HasIndex("ReadConsentSettingsId")
+                        .HasDatabaseName("IX_consent_freetext_read_receipt_read_consent_settings_id");
+
+                    b.HasIndex("ReaderUserId", "ReadConsentSettingsId")
+                        .IsUnique();
+
+                    b.ToTable("consent_freetext_read_receipt", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("consent_settings_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConsentFreetext")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("consent_freetext");
+
+                    b.Property<DateTime>("ConsentFreetextUpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("consent_freetext_updated_at");
+
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_consent_settings");
+
+                    b.HasIndex("ProfileId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_consent_settings_profile_id");
+
+                    b.HasIndex("UserId", "ProfileId")
+                        .IsUnique();
+
+                    b.ToTable("consent_settings", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentToggle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("consent_toggle_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ConsentSettingsId")
+                        .HasColumnType("integer")
+                        .HasColumnName("consent_settings_id");
+
+                    b.Property<string>("ToggleProtoId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("toggle_proto_id");
+
+                    b.Property<string>("ToggleProtoState")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("toggle_proto_state");
+
+                    b.HasKey("Id")
+                        .HasName("PK_consent_toggle");
+
+                    b.HasIndex("ConsentSettingsId", "ToggleProtoId")
+                        .IsUnique();
+
+                    b.ToTable("consent_toggle", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
                 {
                     b.Property<int>("Id")
@@ -828,21 +932,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("selected_character_slot");
 
-                    b.Property<string>("SponsorGhostSkin")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("sponsor_ghost_skin");
-
-                    b.Property<string>("SponsorLOOCColor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("sponsor_looc_color");
-
-                    b.Property<string>("SponsorOOCColor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("sponsor_ooc_color");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
@@ -869,24 +958,52 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("age");
 
+                    b.Property<string>("AugmentUnlocks")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("augment_unlocks");
+
+                    b.Property<string>("Augments")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("augments");
+
                     b.Property<int>("BankBalance")
                         .HasColumnType("integer")
                         .HasColumnName("bank_balance");
 
-                    b.Property<string>("BarkVoice")
-                        .IsRequired()
+                    b.Property<int>("Biotype")
+                        .HasColumnType("integer")
+                        .HasColumnName("biotype");
+
+                    b.Property<string>("BloodColor")
                         .HasColumnType("text")
-                        .HasColumnName("bark_voice");
+                        .HasColumnName("blood_color");
 
                     b.Property<string>("CharacterName")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("char_name");
 
+                    b.Property<string>("ChatFont")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("chat_font");
+
                     b.Property<string>("Company")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("company");
+
+                    b.Property<string>("CustomMarkings")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("custom_markings");
+
+                    b.Property<string>("CustomSpeciesName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("custom_species_name");
 
                     b.Property<string>("EyeColor")
                         .IsRequired()
@@ -903,6 +1020,11 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("facial_hair_name");
 
+                    b.PrimitiveCollection<string[]>("Flags")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("flags");
+
                     b.Property<string>("FlavorText")
                         .IsRequired()
                         .HasColumnType("text")
@@ -912,6 +1034,11 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("gender");
+
+                    b.Property<string>("Genitals")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("genitals");
 
                     b.Property<string>("HairColor")
                         .IsRequired()
@@ -923,18 +1050,31 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("hair_name");
 
+                    b.Property<string>("HeadshotUrl")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("headshot_url");
+
                     b.Property<float>("Height")
                         .HasColumnType("real")
                         .HasColumnName("height");
+
+                    b.Property<string>("LaughVoice")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("laugh_voice");
+
+                    b.Property<int>("LegStance")
+                        .HasColumnType("integer")
+                        .HasColumnName("leg_stance");
 
                     b.Property<JsonDocument>("Markings")
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
 
-                    b.Property<string>("Nationality")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("nationality");
+                    b.Property<bool>("MismatchedParts")
+                        .HasColumnType("boolean")
+                        .HasColumnName("mismatched_parts");
 
                     b.Property<int>("PreferenceId")
                         .HasColumnType("integer")
@@ -943,6 +1083,11 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Property<int>("PreferenceUnavailable")
                         .HasColumnType("integer")
                         .HasColumnName("pref_unavailable");
+
+                    b.Property<string>("ScreamVoice")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("scream_voice");
 
                     b.Property<string>("Sex")
                         .IsRequired()
@@ -967,10 +1112,13 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("species");
 
-                    b.Property<string>("Voice")
-                        .IsRequired()
+                    b.Property<string>("SpeechVoice")
                         .HasColumnType("text")
-                        .HasColumnName("voice");
+                        .HasColumnName("speech_voice");
+
+                    b.Property<string>("TypingIndicator")
+                        .HasColumnType("text")
+                        .HasColumnName("typing_indicator");
 
                     b.Property<float>("Width")
                         .HasColumnType("real")
@@ -986,6 +1134,66 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsUnique();
 
                     b.ToTable("profile", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_component_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("data");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.Property<bool>("Sticky")
+                        .HasColumnType("boolean")
+                        .HasColumnName("sticky");
+
+                    b.HasKey("Id")
+                        .HasName("PK_profile_component");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("profile_component", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_item_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("data");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.Property<bool>("Sticky")
+                        .HasColumnType("boolean")
+                        .HasColumnName("sticky");
+
+                    b.HasKey("Id")
+                        .HasName("PK_profile_item");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("profile_item", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.ProfileLoadout", b =>
@@ -1048,6 +1256,11 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnName("profile_role_loadout_id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CustomJobTitle")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("custom_job_title");
 
                     b.Property<string>("EntityName")
                         .HasMaxLength(256)
@@ -1479,6 +1692,95 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("uploaded_resource_log", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.WayfarerSafetyDepositBox", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("wayfarer_safety_deposit_box_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("BoxId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("box_id");
+
+                    b.Property<int>("CharacterIndex")
+                        .HasColumnType("integer")
+                        .HasColumnName("character_index");
+
+                    b.Property<DateTime?>("LastWithdrawn")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_withdrawn");
+
+                    b.Property<int?>("LastWithdrawnRoundId")
+                        .HasColumnType("integer")
+                        .HasColumnName("last_withdrawn_round_id");
+
+                    b.Property<string>("Nickname")
+                        .HasColumnType("text")
+                        .HasColumnName("nickname");
+
+                    b.Property<string>("OwnerName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("owner_name");
+
+                    b.Property<Guid>("OwnerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("owner_user_id");
+
+                    b.Property<string>("ProtoId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("proto_id");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("purchase_date");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wayfarer_safety_deposit_box");
+
+                    b.HasIndex("BoxId")
+                        .IsUnique();
+
+                    b.HasIndex("OwnerUserId");
+
+                    b.ToTable("wayfarer_safety_deposit_box", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WayfarerSafetyDepositBoxItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("wayfarer_safety_deposit_box_item_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BoxId")
+                        .HasColumnType("integer")
+                        .HasColumnName("box_id");
+
+                    b.Property<DateTime>("DepositDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deposit_date");
+
+                    b.Property<string>("EntityData")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("entity_data");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wayfarer_safety_deposit_box_item");
+
+                    b.HasIndex("BoxId")
+                        .HasDatabaseName("IX_wayfarer_safety_deposit_box_item_box_id");
+
+                    b.ToTable("wayfarer_safety_deposit_box_item", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.Whitelist", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -1490,6 +1792,307 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasName("PK_whitelist");
 
                     b.ToTable("whitelist", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateContractStanding", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("wolfgate_contract_standing_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CharacterName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("character_name");
+
+                    b.Property<string>("Contractor")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("contractor");
+
+                    b.Property<int>("LastRound")
+                        .HasColumnType("integer")
+                        .HasColumnName("last_round");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("integer")
+                        .HasColumnName("points");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_contract_standing");
+
+                    b.HasIndex("PlayerUserId", "CharacterName", "Contractor")
+                        .IsUnique();
+
+                    b.ToTable("wolfgate_contract_standing", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateCustomMarking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("wolfgate_custom_marking_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ArtHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("art_hash");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Placement")
+                        .HasColumnType("integer")
+                        .HasColumnName("placement");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_custom_marking");
+
+                    b.HasIndex("ArtHash");
+
+                    b.HasIndex("PlayerUserId");
+
+                    b.ToTable("wolfgate_custom_marking", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateCustomMarkingArt", b =>
+                {
+                    b.Property<string>("Hash")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("hash");
+
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("boolean")
+                        .HasColumnName("blocked");
+
+                    b.Property<byte[]>("Erase")
+                        .HasColumnType("bytea")
+                        .HasColumnName("erase");
+
+                    b.Property<byte[]>("FrameTimes")
+                        .HasColumnType("bytea")
+                        .HasColumnName("frame_times");
+
+                    b.Property<byte[]>("Png")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("png");
+
+                    b.Property<DateTime?>("UnusedSince")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("unused_since");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("uploaded_at");
+
+                    b.Property<Guid>("UploaderUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("uploader_user_id");
+
+                    b.HasKey("Hash")
+                        .HasName("PK_wolfgate_custom_marking_art");
+
+                    b.HasIndex("UploaderUserId", "UploadedAt");
+
+                    b.ToTable("wolfgate_custom_marking_art", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateFeedbackReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("wolfgate_feedback_report_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BuildVersion")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("build_version");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("category");
+
+                    b.Property<string>("Context")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("context");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Expected")
+                        .HasColumnType("text")
+                        .HasColumnName("expected");
+
+                    b.Property<string>("Frustrations")
+                        .HasColumnType("text")
+                        .HasColumnName("frustrations");
+
+                    b.Property<string>("Kind")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("kind");
+
+                    b.Property<bool>("NotifyPlayer")
+                        .HasColumnType("boolean")
+                        .HasColumnName("notify_player");
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("player_name");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int?>("Rating")
+                        .HasColumnType("integer")
+                        .HasColumnName("rating");
+
+                    b.Property<int>("RoundId")
+                        .HasColumnType("integer")
+                        .HasColumnName("round_id");
+
+                    b.Property<byte[]>("Screenshot")
+                        .HasColumnType("bytea")
+                        .HasColumnName("screenshot");
+
+                    b.Property<string>("ServerName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("server_name");
+
+                    b.Property<string>("Severity")
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("severity");
+
+                    b.Property<string>("StaffMessage")
+                        .HasColumnType("text")
+                        .HasColumnName("staff_message");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("status");
+
+                    b.Property<DateTime?>("StatusChangedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("status_changed_at");
+
+                    b.Property<string>("Steps")
+                        .HasColumnType("text")
+                        .HasColumnName("steps");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_feedback_report");
+
+                    b.HasIndex("Status");
+
+                    b.HasIndex("PlayerUserId", "CreatedAt");
+
+                    b.ToTable("wolfgate_feedback_report", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateGameScore", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("wolfgate_game_score_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Game")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("game");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("integer")
+                        .HasColumnName("level");
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("player_name");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("integer")
+                        .HasColumnName("score");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("time");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_game_score");
+
+                    b.HasIndex("Game");
+
+                    b.HasIndex("PlayerUserId", "Game", "Level")
+                        .IsUnique();
+
+                    b.ToTable("wolfgate_game_score", (string)null);
                 });
 
             modelBuilder.Entity("PlayerRound", b =>
@@ -1783,6 +2386,40 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Server");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.ConsentFreetextReadReceipt", b =>
+                {
+                    b.HasOne("Content.Server.Database.ConsentSettings", "ReadConsentSettings")
+                        .WithMany("ReadReceipts")
+                        .HasForeignKey("ReadConsentSettingsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_consent_freetext_read_receipt_consent_settings_read_consent~");
+
+                    b.Navigation("ReadConsentSettings");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentSettings", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithOne("ConsentSettings")
+                        .HasForeignKey("Content.Server.Database.ConsentSettings", "ProfileId")
+                        .HasConstraintName("FK_consent_settings_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentToggle", b =>
+                {
+                    b.HasOne("Content.Server.Database.ConsentSettings", "ConsentSettings")
+                        .WithMany("ConsentToggles")
+                        .HasForeignKey("ConsentSettingsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_consent_toggle_consent_settings_consent_settings_id");
+
+                    b.Navigation("ConsentSettings");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Job", b =>
                 {
                     b.HasOne("Content.Server.Database.Profile", "Profile")
@@ -1836,6 +2473,30 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasConstraintName("FK_profile_preference_preference_id");
 
                     b.Navigation("Preference");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileComponent", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("Components")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_profile_component_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileItem", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("Items")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_profile_item_profile_profile_id");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Content.Server.Database.ProfileLoadout", b =>
@@ -2068,6 +2729,30 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.WayfarerSafetyDepositBoxItem", b =>
+                {
+                    b.HasOne("Content.Server.Database.WayfarerSafetyDepositBox", "Box")
+                        .WithMany("Items")
+                        .HasForeignKey("BoxId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_wayfarer_safety_deposit_box_item_wayfarer_safety_deposit_bo~");
+
+                    b.Navigation("Box");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateCustomMarking", b =>
+                {
+                    b.HasOne("Content.Server.Database.WolfgateCustomMarkingArt", "Art")
+                        .WithMany()
+                        .HasForeignKey("ArtHash")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_wolfgate_custom_marking_art");
+
+                    b.Navigation("Art");
+                });
+
             modelBuilder.Entity("PlayerRound", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", null)
@@ -2105,6 +2790,13 @@ namespace Content.Server.Database.Migrations.Postgres
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>
                 {
                     b.Navigation("BanHits");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentSettings", b =>
+                {
+                    b.Navigation("ConsentToggles");
+
+                    b.Navigation("ReadReceipts");
                 });
 
             modelBuilder.Entity("Content.Server.Database.Player", b =>
@@ -2157,6 +2849,12 @@ namespace Content.Server.Database.Migrations.Postgres
                 {
                     b.Navigation("Antags");
 
+                    b.Navigation("Components");
+
+                    b.Navigation("ConsentSettings");
+
+                    b.Navigation("Items");
+
                     b.Navigation("Jobs");
 
                     b.Navigation("Loadouts");
@@ -2196,6 +2894,11 @@ namespace Content.Server.Database.Migrations.Postgres
             modelBuilder.Entity("Content.Server.Database.ServerRoleBan", b =>
                 {
                     b.Navigation("Unban");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WayfarerSafetyDepositBox", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

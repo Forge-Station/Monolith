@@ -1,0 +1,57 @@
+- type: entity
+  parent: VendingMachineCredit
+  id: WFAsfDrobe
+  components:
+  - type: VendingMachine
+    pack: WFAsfDrobeInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+    requiresCash: true
+  - type: Advertise
+    pack: WFAsfDrobeAds
+  - type: Sprite
+    sprite: _WF/Asf/Structures/drobe.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: [["WFAsf"]]
+
+- type: vendingMachineInventory
+  id: WFAsfDrobeInventory
+  startingInventory:
+    WFAsfClothingBackpack: 10
+    WFAsfClothingBackpackSatchel: 10
+    WFAsfClothingBackpackDuffel: 10
+    WFAsfClothingUniformService: 20
+    WFAsfClothingUniformColonist: 20
+    WFAsfClothingUniformResearcher: 20
+    WFAsfClothingUniformCasual: 20
+    WFAsfClothingUniformMedic: 10
+    WFAsfClothingUniformFormal: 10
+    WFAsfClothingHeadBeret: 15
+    WFAsfClothingHeadCap: 15
+    WFAsfClothingHeadHat: 10
+    WFAsfClothingNeckCapelet: 10
+    WFAsfClothingNeckCape: 10
+    WFAsfClothingOuterGreatcoat: 10
+    WFAsfClothingOuterCoatLab: 10
+    WFAsfClothingOuterRobe: 10
+    WFAsfClothingOuterParade: 5
+    WFAsfClothingOuterEVA: 5
+    WFAsfClothingHeadEVA: 5
+    WFAsfClothingShoesBoots: 20
+    WFAsfClothingHandsGloves: 20
+    WFAsfClothingHeadset: 20
+
+- type: localizedDataset
+  id: WFAsfDrobeAds
+  values:
+    prefix: wf-asf-drobe-ad-
+    count: 4

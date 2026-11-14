@@ -1,12 +1,15 @@
-# Forge-change-delete
-#- type: guideEntry
-#  id: BasicLore
-#  name: Lore
-#  text: "/ServerInfo/Guidebook/Lore/Primer.xml"
-#  children:
-#  - Timeline
+# The guidebook page BasicLore is the Forge lore in Guidebook/lore.yml.
+# This primer stays in the lore book under its own id, so it does not replace that page.
+- type: guideEntry
+  id: WFLorePrimer
+  name: wf-lore-entry-primer
+  lore: true
+  text: "/ServerInfo/_Mono/Guidebook/Lore/Primer.xml"
+  children:
+  - Timeline
+  - WFLorePresentDay # WOLFGATE(LoreBook)
 
-#- type: guideEntry
-#  id: Timeline
-#  name: Quick Timeline
-#  text: "/ServerInfo/Guidebook/Lore/Timeline.xml"
+- type: guideEntry
+  id: Timeline
+  name: wf-lore-entry-history # WOLFGATE(LoreBook): was Quick Timeline
+  text: "/ServerInfo/_Mono/Guidebook/Lore/Timeline.xml"

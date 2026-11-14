@@ -1,0 +1,5 @@
+- type: guideEntry
+  id: WFRuleConflictSixNewPlayers
+  name: guide-entry-wf-rule-conflict-six-new-players
+  text: "/ServerInfo/_WF/Newbie/Guidebook/Rules/Conflict/Six_NewPlayers.xml"
+  ruleEntry: true

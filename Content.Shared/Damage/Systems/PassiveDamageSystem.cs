@@ -47,7 +47,8 @@ public sealed partial class PassiveDamageSystem : EntitySystem
             foreach (var allowedState in comp.AllowedStates)
             {
                 if(allowedState == mobState.CurrentState)
-                    _damageable.TryChangeDamage(uid, comp.Damage, true, false, damage);
+                    _damageable.TryChangeDamage(uid, comp.Damage, true, false, damage,
+                        originFlag: DamageableSystem.DamageOriginFlag.PassiveRecovery); // WOLFGATE(Wolfmed): passive recovery is tagged so the wound rules can tell it from a hit.
             }
         }
     }

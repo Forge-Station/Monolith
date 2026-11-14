@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at commits https://github.com/tgstation/tgstation/commit/b30e2934e7585bad901dd12a35d0635f1fc292c1 and https://github.com/tgstation/tgstation/commit/6b0af0febe578f47ae280781682ea7a3d77f508a, modified by https://github.com/PixelTheKermit & https://github.com/MilenVolf, Underwing is drawn by Ubaser South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "charred_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "charred_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "dbushy_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "dbushy_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "dbushy_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "dbushy_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "deathhead_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "deathhead_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "deathhead_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "deathhead_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "default_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "default_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "dfan_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "dfan_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "fan_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "fan_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "feathery_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "feathery_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "firewatch_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "gothic_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "gothic_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "jungle_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "jungle_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "ladybug_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "ladybug_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "maple_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "maple_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "maple_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "maple_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "moffra_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "moffra_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "moffra_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "moffra_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "oakworm_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "oakworm_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "plasmafire_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "pointy_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "pointy_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "royal_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "royal_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "royal_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "royal_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "stellar_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "stellar_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "striped_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "striped_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "swirly_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "swirly_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "underwing_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "underwing_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "underwing_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "underwing_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "whitefly_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "whitefly_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "witchwing_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "witchwing_FRONT",
+      "directions": 4
+    }
+  ]
+}

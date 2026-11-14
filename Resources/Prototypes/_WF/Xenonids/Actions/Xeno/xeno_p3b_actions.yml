@@ -1,0 +1,287 @@
+# Actions of the boiler, spitter, sentinel and burrower, the drone's resin surge, from RMC xeno_offense_actions.yml, xeno_self_actions.yml and xeno_utility_actions.yml.
+# WOLFGATE: RMC's guidebook action entities are not ported; RMC's Action/TargetAction pairs are one InstantAction/EntityTargetAction/WorldTargetAction/EntityWorldTargetAction here
+
+- type: entity
+  parent: ActionXenoTailStab
+  id: ActionXenoTailStabCorrosive
+  name: Corrosive Tail Stab
+  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
+  components:
+  - type: EntityWorldTargetAction
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: tail_attack_acid
+
+- type: entity
+  parent: ActionXenoTailStabCorrosive
+  id: ActionXenoTailStabBoiler
+  name: Corrosive Tail Stab
+  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid or neurotoxin into the target, dealing damage or stunning over time. Which type depends on current gas type.[/color]
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSprayAcid
+  name: Spray Acid (40)
+  description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid and significantly strengthen acid inflicted from Charge Spit![/color]
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: spray_acid
+    useDelay: 8
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoSprayAcidActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoSprayAcid
+  id: ActionXenoSprayAcidBoiler
+  description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid![/color]
+  components:
+  - type: WorldTargetAction
+    useDelay: 10
+  - type: ActionSharedCooldown
+    id: ActionXenoSprayAcidBoiler
+    ids:
+    - ActionXenoAcidShroud
+    activeIds:
+    - ActionXenoBombard
+
+- type: entity
+  id: ActionXenoParalyzingSlash
+  parent: ActionXenoBase
+  name: Paralyzing Slash (50) # TODO RMC14 proper plasma costs
+  description: Temporarily charge up a melee attack that will knockdown the first enemy it hits after a short delay.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: lurker_inject_neuro
+    useDelay: 12
+    event: !type:XenoParalyzingSlashActionEvent
+  - type: XenoActionPlasma
+    cost: 50
+
+- type: entity
+  id: ActionXenoStomp
+  parent: ActionXenoBase
+  name: Stomp (30)
+  description: Slam the ground with a 5x5 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: stomp
+    useDelay: 18
+    event: !type:XenoStompActionEvent
+
+- type: entity
+  id: ActionXenoTremor
+  parent: ActionXenoBase
+  name: Tremor (100)
+  description: Slam the ground with a 7x7 AOE, stunning all enemies in range for a short period of time.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: tremor
+    useDelay: 30
+    event: !type:XenoStompActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoBombard
+  name: Bombard (200)
+  description: Fire either an acidic or neurotoxic glob after a delay.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: bombard
+    useDelay: 1
+    range: 15 # the actual range is in XenoBombardComponent
+    checkCanAccess: false
+    event: !type:XenoBombardActionEvent
+  - type: ActionSharedCooldown
+    id: ActionXenoBombard
+    ids:
+    - ActionXenoAcidShroud
+    cooldown: 30
+    onPerform: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoToggleGasType
+  name: Toggle Gas Type
+  description: Toggle between Acid or Neurotoxic gas types. Your acidic globs will deal continual damage to anything caught in its radius, while neurotoxin will cause targets to suffocate, be slowed down and blinded, alongside eventually knocking them unconscious to be kidnapped.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: shift_spit_acid_glob
+    iconOn:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: shift_spit_neuro_glob
+    useDelay: 1
+    event: !type:XenoGasToggleActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAcidShroud
+  name: Acid Shroud
+  description: Create a small cloud of acidic or neurotoxic gas around you to cloak yourself. This will disable your other abilities for a short time to allow you to escape.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: acid_shroud
+    event: !type:XenoAcidShroudActionEvent
+  - type: ActionSharedCooldown
+    id: ActionXenoAcidShroud
+    ids:
+    - ActionXenoBombard
+    - ActionXenoAcidShroud
+    - ActionXenoSprayAcidBoiler
+    cooldown: 30
+    onPerform: false
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAcidMine
+  name: Acid Mine (40)
+  description: Cause an acid explosion at the targeted location. Each hit reduces Deploy Traps' cooldown. Empowered mines deal more damage and coat enemies in acid.
+  components:
+  # WOLFGATE: RMC also put an XenoAcidMine component on this action; the caste's own component holds the icons
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: acid_mine
+    useDelay: 5.5
+    deselectOnMiss: false
+    checkCanAccess: false
+    repeat: true
+    range: 14 # Actual range on the AcidMine component.
+    event: !type:XenoAcidMineActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoDeployTraps
+  parent: ActionXenoBase
+  name: Deploy Traps (60)
+  description: Deploys a line of snaring traps. Becomes empowered at 10 stacks of insight. Empowered traps snare longer and empower your Acid Mine.
+  components:
+  # WOLFGATE: RMC also put an XenoDeployTraps component on this action; the caste's own component holds the icons
+  - type: WorldTargetAction
+    useDelay: 20.5
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: gas_mine
+    checkCanAccess: false
+    deselectOnMiss: false
+    repeat: true
+    range: 14
+    event: !type:XenoDeployTrapsActionEvent
+  - type: XenoActionPlasma
+    cost: 60
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoBurrow
+  name: Burrow
+  description: Burrow underground preventing you from getting hit from all sources. Once burrowed click a tile to move to it and resurface after a doafter that depends on distance.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: burrow
+    checkCanInteract: false
+    range: 8
+    repeat: true
+    deselectOnMiss: false
+    checkCanAccess: false
+    event: !type:XenoBurrowActionEvent
+  - type: ActionBlockIfResting
+
+# WOLFGATE: the click can land on an entity or a tile, so this is an EntityWorldTargetAction (RMC combines two target components)
+- type: entity
+  id: ActionXenoResinSurge
+  parent: ActionXenoBase
+  name: Resin Surge (75)
+  description: Instantly grows a fruit when used (cooldown will be proprotial to growth time), creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. Targeting anything else creates a 3x3 patch of weak sticky resin after a small doafter.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: gardener_resin_surge
+    useDelay: 10
+    range: 7
+    checkCanAccess: false
+    whitelist:
+      components:
+      - XenoConstruct
+      - XenoFruit
+      - XenoWeeds
+    event: !type:XenoResinSurgeActionEvent
+  - type: XenoResinSurgeAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAidHeal
+  name: Aid Xenonid Healing (100 plasma, 100+ health reserves)
+  description: Heals a nearby ally Xeno. Healing another Xeno will also heal you, and half your remaining health reserves will be consumed for extra healing. [color=red]This can't heal ignited xenonids![/color]
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: warden_heal
+    useDelay: 10
+    range: 1.5
+    event: !type:XenoAidActionEvent
+  - type: XenoActionPlasma
+    cost: 100
+  - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoAidHeal
+    ids:
+    - ActionXenoAidRejuvenate
+    cooldown: 10
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAidRejuvenate
+  name: Aid Xenonid Rejuvenate (100 plasma, 100 health reserves)
+  description: Remove ailments and stuns from a far away ally Xeno.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: warden_rejuvenate
+    useDelay: 10
+    range: 8
+    event: !type:XenoAidActionEvent
+      aidType: Ailments
+  - type: XenoActionPlasma
+    cost: 100
+  - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoAidRejuvenate
+    ids:
+    - ActionXenoAidHeal
+    cooldown: 10

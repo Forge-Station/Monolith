@@ -126,14 +126,13 @@
     sprite: Objects/Tools/Hydroponics/spade.rsi
   - type: Shovel
     speedModifier: 0.75 # slower at digging than a full-sized shovel
-  #Forge-Change-Start
-  - type: Tool
+  - type: WFSnowShovel # WOLFGATE(GroundCover): clears snow cover
+  - type: Tool #Mono start: Shovel parity
     qualities:
     - Digging
-    speedModifier: 0.25 # slower at digging than a full-sized shovel
+    speedModifier: 0.5
     useSound:
-      path: /Audio/Nyanotrasen/Items/shovel_dig.ogg
-  #Forge-Change-End
+      path: /Audio/Nyanotrasen/Items/shovel_dig.ogg #Mono end
 
 - type: entity
   name: plant bag

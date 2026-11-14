@@ -1,0 +1,38 @@
+# Fonts a character can pick for their speech in the character creator. `font` is a client font prototype id.
+# Language fonts (Octatrax, Scratch, Thaveyan) are not offered; a language's own font still wins over the pick.
+
+- type: wfChatFont
+  id: WFChatFontDefault
+  name: wf-chat-font-default
+  font: Default
+  order: 0
+
+- type: wfChatFont
+  id: WFChatFontTerminal
+  name: wf-chat-font-terminal
+  font: WFRobotoMono
+  order: 1
+
+- type: wfChatFont
+  id: WFChatFontBoxfont
+  name: wf-chat-font-boxfont
+  font: BoxRound
+  order: 2
+
+- type: wfChatFont
+  id: WFChatFontIceberg
+  name: wf-chat-font-iceberg
+  font: WFIceberg
+  order: 3
+
+- type: wfChatFont
+  id: WFChatFontFondamento
+  name: wf-chat-font-fondamento
+  font: WFFondamento
+  order: 4
+
+- type: wfChatFont
+  id: WFChatFontMinecraftia
+  name: wf-chat-font-minecraftia
+  font: WFMinecraftia
+  order: 5

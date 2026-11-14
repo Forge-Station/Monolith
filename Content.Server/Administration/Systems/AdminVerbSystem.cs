@@ -11,8 +11,10 @@ using Content.Server.Mind;
 using Content.Server.Prayer;
 using Content.Server.Silicons.Laws;
 using Content.Server.Station.Systems;
-using Content.Server.Xenoarchaeology.XenoArtifacts;
-using Content.Server.Xenoarchaeology.XenoArtifacts.Triggers.Components;
+// WOLFGATE(Xenoarch) START: the old artifact system is gone
+// using Content.Server.Xenoarchaeology.XenoArtifacts;
+// using Content.Server.Xenoarchaeology.XenoArtifacts.Triggers.Components;
+// WOLFGATE END
 using Content.Shared.Administration;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -45,7 +47,6 @@ using Content.Shared.Chemistry.Components;
 using static Content.Shared.Configurable.ConfigurationComponent;
 using Robust.Shared.Containers;
 using Content.Shared.Storage.EntitySystems;
-using Content.Shared.Hands.Components;
 using Content.Shared.PDA;
 
 namespace Content.Server.Administration.Systems
@@ -66,7 +67,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private EuiManager _euiManager = default!;
         [Dependency] private ServerGameTicker _ticker = default!;
         [Dependency] private GhostRoleSystem _ghostRoleSystem = default!;
-        [Dependency] private ArtifactSystem _artifactSystem = default!;
+        // [Dependency] private ArtifactSystem _artifactSystem = default!; // WOLFGATE(Xenoarch): the old artifact system is gone
         [Dependency] private UserInterfaceSystem _uiSystem = default!;
         [Dependency] private PrayerSystem _prayerSystem = default!;
         [Dependency] private MindSystem _mindSystem = default!;
@@ -497,28 +498,30 @@ namespace Content.Server.Administration.Systems
                 args.Verbs.Add(verb);
             }
 
-            // XenoArcheology
-            if (_adminManager.IsAdmin(player) && TryComp<ArtifactComponent>(args.Target, out var artifact))
-            {
-                // make artifact always active (by adding timer trigger)
-                args.Verbs.Add(new Verb()
-                {
-                    Text = Loc.GetString("artifact-verb-make-always-active"),
-                    Category = VerbCategory.Debug,
-                    Act = () => EntityManager.AddComponent<ArtifactTimerTriggerComponent>(args.Target),
-                    Disabled = EntityManager.HasComponent<ArtifactTimerTriggerComponent>(args.Target),
-                    Impact = LogImpact.High
-                });
-
-                // force to activate artifact ignoring timeout
-                args.Verbs.Add(new Verb()
-                {
-                    Text = Loc.GetString("artifact-verb-activate"),
-                    Category = VerbCategory.Debug,
-                    Act = () => _artifactSystem.ForceActivateArtifact(args.Target, component: artifact),
-                    Impact = LogImpact.High
-                });
-            }
+            // WOLFGATE(Xenoarch) START: the reworked artifacts use the xenoartifact toolshed commands instead
+            // // XenoArcheology
+            // if (_adminManager.IsAdmin(player) && TryComp<ArtifactComponent>(args.Target, out var artifact))
+            // {
+            //     // make artifact always active (by adding timer trigger)
+            //     args.Verbs.Add(new Verb()
+            //     {
+            //         Text = Loc.GetString("artifact-verb-make-always-active"),
+            //         Category = VerbCategory.Debug,
+            //         Act = () => EntityManager.AddComponent<ArtifactTimerTriggerComponent>(args.Target),
+            //         Disabled = EntityManager.HasComponent<ArtifactTimerTriggerComponent>(args.Target),
+            //         Impact = LogImpact.High
+            //     });
+            //
+            //     // force to activate artifact ignoring timeout
+            //     args.Verbs.Add(new Verb()
+            //     {
+            //         Text = Loc.GetString("artifact-verb-activate"),
+            //         Category = VerbCategory.Debug,
+            //         Act = () => _artifactSystem.ForceActivateArtifact(args.Target, component: artifact),
+            //         Impact = LogImpact.High
+            //     });
+            // }
+            // WOLFGATE END
 
             // Make Sentient verb
             if (_groupController.CanCommand(player, "makesentient") &&

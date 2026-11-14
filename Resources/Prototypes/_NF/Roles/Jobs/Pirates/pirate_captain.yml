@@ -1,58 +1,77 @@
-# - type: job
-  # id: PirateCaptain
-  # name: job-name-pirate-captain
-  # description: job-description-pirate-captain
-  # playTimeTracker: JobPirateCaptain
-  # requirements:
-    # - !type:OverallPlaytimeRequirement # mono start
-      # time: 144000 # 40 hours
-    # - !type:RoleTimeRequirement
-      # role: JobPirateFirstMate
-      # time: 18000 # 5 hours - mono
-  # whitelisted: true
-  # startingGear: PirateCaptainNFGear
-  # alwaysUseSpawner: true
-  # hideConsoleVisibility: true
-  # canBeAntag: true
-  # icon: "JobIconPirateCaptain"
-  # supervisors: job-supervisors-nobody
-  # weight: 50
-  # displayWeight: 50
-  # setPreference: true
-  # guides: [ BasicLore, PhaethonDynasty ] # Mono
-  # access:
-  # - Pirate
-  # - GrandVizier
-  # - PDVCommand
-  # - Mercenary
-  # accessGroups:
-  # - GeneralAccess
-  # special:
-  # - !type:AddComponentSpecial
-    # components:
-    # - type: NpcFactionMember
-      # factions:
-      # - PirateNF
-  # - !type:AddImplantSpecial
-    # implants: [ FreelanceTrackingImplant ]
-  # - !type:AddLanguageSpecial # Monolith - Languages
-    # languagesSpoken:
-    # - Freespeak
-    # languagesUnderstood:
-    # - Freespeak
-  # - !type:GiveItemOnHolidaySpecial # Even pirates get a piece of cake.
-    # holiday: FrontierBirthday
-    # prototype: FrontierBirthdayGift
+- type: job
+  id: PirateCaptain
+  name: job-name-pirate-captain
+  description: job-description-pirate-captain
+  playTimeTracker: JobPirateCaptain
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 180000 # 50 hours # mono
+    - !type:RoleTimeRequirement
+      role: JobPDVDenasvar
+      time: 28800 # 8 hours # mono
+    - !type:TraitsRequirement # The trait doesn't do anything if you're PDV anyways, but this is 1 step closer to letting it actually give you points
+      inverted: true
+      traits:
+      - Heretic
+  enforcedPlayTime: true #Monolith
+  whitelisted: true
+  startingGear: PirateCaptainNFGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  canBeAntag: true
+  icon: "JobIconPirateCaptain"
+  supervisors: job-supervisors-nobody
+  weight: 50
+  displayWeight: 50
+  assignedCompany: PDV
+  setPreference: true
+  access:
+  - Pirate
+  - GrandVizier
+  - PDVCommand
+  - Mercenary
+  accessGroups:
+  - GeneralAccess
+  guides:
+  - PDV_Entry
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: FalseRecord
+    - type: NpcFactionMember
+      factions:
+      - PirateNF
+    # WOLFGATE(PdvRanks) START: the rank comes from the loadout ladder, whose default is Grand Vizier (Vzr.)
+    # - type: ChatRank
+    #   rank: pdv-vizier
+    # WOLFGATE END
+    - type: RadioOnCryosleep
+      radioChannel: Freelance # freelance = Vanguard
+  - !type:AddImplantSpecial
+    implants: [ FreelanceTrackingImplant, RadioImplant ]
+  - !type:AddLanguageSpecial # Monolith - Languages
+    languagesSpoken:
+    - Freespeak
+    languagesUnderstood:
+    - Freespeak
+  - !type:GiveItemOnHolidaySpecial # Even pirates get a piece of cake.
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
 
-# - type: startingGear
-  # id: PirateCaptainNFGear
-  # equipment:
-    # ears: ClothingHeadsetAltVanguardCommand
-    # #belt: ClothingBeltUtility # mono
-    # pocket1: BasePirateUplinkRadioPirateCaptain
-    # pocket2: EnergySword
-  # storage:
-    # back:
-    # - RadioHandheldNF # mono
-    # - ShipVoucherSaintie
-    # - PhoneInstrumentHigh
+- type: startingGear
+  id: PirateCaptainNFGear
+  equipment:
+    ears: ClothingHeadsetAltVanguardCommand
+    #belt: ClothingBeltUtility # mono
+    pocket1: BasePirateUplinkRadioPirateCaptain
+    pocket2: EnergySword
+  storage:
+    back:
+    - RadioHandheldNF # mono
+    - PDVHandheldOverwatchConsole
+    - RubberStampPDVVizier # mono
+    - PhoneInstrumentHigh
+    - WarDeclaratorPdv
+    - ClothingBeltSheathVizierFilled

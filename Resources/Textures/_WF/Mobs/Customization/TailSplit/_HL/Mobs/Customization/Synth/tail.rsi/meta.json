@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "by GitHub NotLivyathan / Discord livyathan (298907041198637067), xeno tails originally by GitHub Mspaintwizard / Discord 426969028796350485, modified by NotLivyathan South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "factory_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "factory_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "factory_composite_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "factory_composite_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "large_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "large_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "large_composite_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "large_composite_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "xeno_curl_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "xeno_curl_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "xeno_light_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "xeno_light_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "xeno_spike_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "xeno_spike_FRONT",
+      "directions": 4
+    }
+  ]
+}

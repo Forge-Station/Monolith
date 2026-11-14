@@ -1,0 +1,251 @@
+# Fugitives: outlaw ships with a warrant on the PDA bounty board. They run from player ships, never start a fight and
+# hit back when fired on or boarded. Kill the wanted man and the warrant is paid to the players who did it. Four tiers,
+# by hull, crew, skill and gear. The lower tiers (evades: false) keep running while their guns answer an attacker; the
+# top tier turns and fights.
+
+# Outlaw crews wear what the Reavers wear and fight only whoever attacks them, marines included.
+- type: wfCrewProfile
+  id: WFCrewProfileFugitive
+  bodies:
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyReptilian
+  - WFMobCrewBodyDwarf
+  - WFMobCrewBodyVulpkanin
+  - WFMobCrewBodyTajaran
+  - WFMobCrewBodyRodentia
+  - WFMobCrewBodyArachnid
+  - WFMobCrewBodyMoth
+  skills: [ Green, Regular ]
+  # Outlaws fly plastitanium as the Reavers do (WFCrewProfilePirate).
+  hullSwaps:
+    WFWallDurasteel: WallPlastitanium
+    WFWallDurasteelDiagonal: WallPlastitaniumDiagonal
+    WFWallDurasteelCapital: WallPlastitaniumCapital
+    WFWallDurasteelDiagonalCapital: WallPlastitaniumDiagonalCapital
+  engagement:
+    WFCrewDeckhand: WhenAttacked
+    WFCrewMarine: WhenAttacked
+  loadouts:
+    WFCrewDeckhand: [ WFCrewPirateHand, WFCrewPirateHand, WFCrewPirateBruiser ]
+    WFCrewEngineer: [ WFCrewPirateHand ]
+    WFCrewMarine: [ WFCrewPirateBruiser, WFCrewPirateHand ]
+    WFCrewPilot: [ WFCrewPirateOfficer ]
+    WFCrewRadioOperator: [ WFCrewPirateOfficer ]
+    WFCrewCaptain: [ WFCrewPirateOfficer ]
+    WFCrewGunner: [ WFCrewPirateHand, WFCrewPirateOfficer ]
+
+# The hard cases: armour and rifles on the hands as well as the guards.
+- type: wfCrewProfile
+  id: WFCrewProfileFugitiveArmed
+  bodies:
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyReptilian
+  - WFMobCrewBodyDwarf
+  - WFMobCrewBodyVulpkanin
+  - WFMobCrewBodyTajaran
+  skills: [ Veteran, Elite ]
+  hullSwaps:
+    WFWallDurasteel: WallPlastitanium
+    WFWallDurasteelDiagonal: WallPlastitaniumDiagonal
+    WFWallDurasteelCapital: WallPlastitaniumCapital
+    WFWallDurasteelDiagonalCapital: WallPlastitaniumDiagonalCapital
+  engagement:
+    WFCrewDeckhand: WhenAttacked
+    WFCrewMarine: WhenAttacked
+  loadouts:
+    WFCrewDeckhand: [ WFCrewPirateBruiser, WFCrewPirateRifle ]
+    WFCrewEngineer: [ WFCrewPirateBruiser ]
+    WFCrewMarine: [ WFCrewPirateRifle, WFCrewPirateRifle, WFCrewPirateBruiser ]
+    WFCrewPilot: [ WFCrewPirateOfficer ]
+    WFCrewRadioOperator: [ WFCrewPirateOfficer ]
+    WFCrewCaptain: [ WFCrewPirateOfficer ]
+    WFCrewGunner: [ WFCrewPirateBruiser, WFCrewPirateOfficer ]
+
+# Fast enough to keep ahead of a hull that is not trying hard; the pilots stay short of the ceiling the raiders fly at.
+- type: wfCrewNavigation
+  id: WFCrewNavigationFugitive
+  name: wf-crew-navigation-fugitive
+  settings:
+    cruiseSpeed: 20
+    followSpeed: 20
+    loiterSpeed: 12
+    circleSpeed: 10
+    attackSpeed: 14
+    nearTargetSpeed: 6
+    maximumTurnRate: 0.5
+    thrustMultiplier: 1
+    angularThrustMultiplier: 1
+    dockApproachSpeed: 8
+    dockCreepSpeed: 2.5
+    undockSpeed: 6
+    attackRange: 250
+
+# A bail jumper in a small unarmed hull with a pilot. The easiest warrant on the board.
+- type: wfEncounter
+  id: WFEncounterFugitivePetty
+  name: wf-encounter-name-fugitive-petty
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 1
+  weight: 2
+  minPlayers: 2
+  cooldown: 2400
+  duration: 2400
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 2500
+  bounty:
+    ship: fugitive
+    target: Captain
+    spesos: 12000
+    title: wf-bounty-title-fugitive-petty
+    description: wf-bounty-desc-fugitive-petty
+    broadcast: wf-bounty-broadcast-fugitive
+  ships:
+  - key: fugitive
+    navigation: WFCrewNavigationFreight
+    vessels: [ Piva, Twilight ]
+    side: fugitive
+    profile: WFCrewProfileFugitive
+    roles: [ WFCrewCaptain, WFCrewPilot ]
+    deckhands: 0
+    skill: Green
+    distress: false
+    evades: false
+    flees: 1200
+    disengage: Deter
+    disengageRange: 800
+    wander: 8
+    wanderRadius: 2500
+    wanderPause: 20
+    objectives:
+    - kind: Hold
+
+# A robber in a light armed hull with a couple of guards.
+- type: wfEncounter
+  id: WFEncounterFugitiveWanted
+  name: wf-encounter-name-fugitive-wanted
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 2
+  weight: 1.5
+  minPlayers: 3
+  cooldown: 3000
+  duration: 2700
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 2500
+  bounty:
+    ship: fugitive
+    target: Captain
+    spesos: 30000
+    title: wf-bounty-title-fugitive-wanted
+    description: wf-bounty-desc-fugitive-wanted
+    broadcast: wf-bounty-broadcast-fugitive
+  ships:
+  - key: fugitive
+    navigation: WFCrewNavigationFugitive
+    vessels: [ Hazel, Mudskipper ]
+    side: fugitive
+    profile: WFCrewProfileFugitive
+    deckhands: 1
+    guards: 2
+    skill: Regular
+    distress: false
+    evades: false
+    flees: 1500
+    disengage: Deter
+    disengageRange: 1000
+    wander: 8
+    wanderRadius: 2800
+    wanderPause: 15
+    objectives:
+    - kind: Hold
+
+# A killer in a gunship with a hard crew that shoots back as it runs.
+- type: wfEncounter
+  id: WFEncounterFugitiveDangerous
+  name: wf-encounter-name-fugitive-dangerous
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 3
+  weight: 0.8
+  minPlayers: 5
+  cooldown: 3600
+  duration: 3000
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  bounty:
+    ship: fugitive
+    target: Captain
+    spesos: 70000
+    title: wf-bounty-title-fugitive-dangerous
+    description: wf-bounty-desc-fugitive-dangerous
+    broadcast: wf-bounty-broadcast-fugitive
+  ships:
+  - key: fugitive
+    navigation: WFCrewNavigationFugitive
+    vessels: [ Kalisto, Metis, Scallywag ]
+    side: fugitive
+    profile: WFCrewProfileFugitiveArmed
+    deckhands: 2
+    guards: 3
+    skill: Veteran
+    distress: false
+    evades: false
+    flees: 1800
+    disengage: Deter
+    disengageRange: 1200
+    wander: 8
+    wanderRadius: 3000
+    wanderPause: 15
+    objectives:
+    - kind: Hold
+
+# The most wanted outlaw in the sector, in a warship with a full crew at the top of their trade. He runs until he is
+# fired on or boarded, then turns on whoever did it.
+- type: wfEncounter
+  id: WFEncounterFugitiveMostWanted
+  name: wf-encounter-name-fugitive-most-wanted
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 5
+  weight: 0.4
+  minPlayers: 8
+  cooldown: 5400
+  duration: 3600
+  minDistance: 3000
+  maxDistance: 5000
+  stationClearance: 3500
+  bounty:
+    ship: fugitive
+    target: Captain
+    spesos: 140000
+    title: wf-bounty-title-fugitive-most-wanted
+    description: wf-bounty-desc-fugitive-most-wanted
+    broadcast: wf-bounty-broadcast-fugitive
+  ships:
+  - key: fugitive
+    navigation: WFCrewNavigationWarship
+    vessels: [ Ganymede, Vulture, Kortik, Saintie ]
+    side: fugitive
+    profile: WFCrewProfileFugitiveArmed
+    deckhands: 4
+    guards: 4
+    skill: Elite
+    distress: false
+    flees: 2200
+    disengage: Deter
+    disengageRange: 1500
+    wander: 8
+    wanderRadius: 3500
+    wanderPause: 10
+    objectives:
+    - kind: Hold

@@ -51,39 +51,37 @@
   - type: Unremoveable
 
 # cybersun stealth
+
 - type: entity
-  parent: [ClothingOuterHardsuitBaseWithoutArmorPlates, ClothingFlightProfileMedium] # Forge-change add ClothingFlightProfile
+  parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitCybersunStealth
   suffix: stealth
-  name: cybersun stealth hardsuit
-  description: A hardsuit with stealth plating for operations, the shielding doesn't work while you're moving though! Needs the helmet on to finish the stealth field.
+  name: stealth hardsuit
+  description: A hardsuit with stealth plating for covert operations. The field can be switched on and off from the helmet, which it needs to work, and it fades while you're moving. # WOLFGATE(ArmorBalance): grammar pass.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/cybersunstealth.rsi # Forge-change
+    sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/cybersunstealth.rsi
   - type: Item
     size: Huge
   - type: Clothing
-    sprite: _Forge/Clothing/OuterClothing/Hardsuits/cybersunstealth.rsi # Forge-change
+    sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/cybersunstealth.rsi
   - type: PressureProtection
     highPressureMultiplier: 0.05
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.6 # Forge-change 0.65 -> 0.6
-  - type: StaminaDamageResistance # Forge-change
-    coefficient: 0.4 # Forge-change
+    damageCoefficient: 0.65
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6 # Forge-change 0.7 -> 0.6
-        Slash: 0.6 # Forge-change 0.7 -> 0.6
-        Piercing: 0.55 # Forge-change 0.75 -> 0.55
-        Heat: 0.6 # Forge-change 0.5 -> 0.6
-        Radiation: 0.6 # Forge-change 0.2 -> 0.6
-        Caustic: 0.6 # Forge-change 0.3 -> 0.6
-        Shock: 0.8 # Forge-change
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7 # WOLFGATE(Stealth): Monolith#4845's stealth suit piercing.
+        Heat: 0.5
+        Radiation: 0.2
+        Caustic: 0.3
   - type: ClothingSpeedModifier
-    walkModifier: 0.9 # Forge-change 0.95 -> 0.9
-    sprintModifier: 0.9 # Forge-change 0.95 -> 0.9
+    walkModifier: 0.95
+    sprintModifier: 0.95
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing

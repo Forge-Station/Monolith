@@ -47,7 +47,7 @@
 # this doesn't affect gibbing bodies as there is code to prevent torso gibbing while part of a body
 - type: entity
   abstract: true
-  parent: BaseTorsoInorganic
+  parent: [BaseTorsoInorganic, WFWolfmedBaseTorso] # WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/maxDamage data
   id: BaseTorso
   components:
   - type: Destructible

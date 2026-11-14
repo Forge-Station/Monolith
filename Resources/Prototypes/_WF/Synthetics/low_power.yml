@@ -1,0 +1,8 @@
+# The synthetic readout's line for low power: on the torso, and on each arm low power has cut (WFLowPowerSystem).
+
+- type: syntheticHudLine
+  id: WFSyntheticHudLowPower
+  condition: LowPower
+  line: wf-synthetic-line-low-power
+  severity: Warn
+  advice: wf-synthetic-advice-low-power

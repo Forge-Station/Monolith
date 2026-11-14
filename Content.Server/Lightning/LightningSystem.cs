@@ -54,7 +54,7 @@ public sealed partial class LightningSystem : SharedLightningSystem
         // Mono
         EntProtoId? spawnOnHit = null;
         var proto = _proto.Index(lightningPrototype);
-        if (proto.TryGetComponent<LightningComponent>(out var lightningComp, EntityManager.ComponentFactory))
+        if (proto.TryComp<LightningComponent>(out var lightningComp, EntityManager.ComponentFactory))
             spawnOnHit = lightningComp.SpawnOnHit;
 
         ShootLightning(user, target, lightningPrototype, triggerLightningEvents);
@@ -91,7 +91,7 @@ public sealed partial class LightningSystem : SharedLightningSystem
         // Mono
         EntProtoId? spawnOnHit = null;
         var proto = _proto.Index(lightningPrototype);
-        if (proto.TryGetComponent<LightningComponent>(out var lightningComp, EntityManager.ComponentFactory))
+        if (proto.TryComp<LightningComponent>(out var lightningComp, EntityManager.ComponentFactory))
             spawnOnHit = lightningComp.SpawnOnHit;
 
         ShootRandomLightnings(user, range, boltCount, spawnOnHit, lightningPrototype, arcDepth, triggerLightningEvents);

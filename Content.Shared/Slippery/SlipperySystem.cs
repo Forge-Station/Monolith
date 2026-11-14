@@ -150,7 +150,8 @@ public sealed class SlipAttemptEvent : EntityEventArgs, IInventoryRelayEvent
 
     public bool SlowOverSlippery;
 
-    public SlotFlags TargetSlots { get; } = SlotFlags.FEET;
+    // WOLFGATE(ArmorSpecialization): anti-slip treads can also be built into an outer suit.
+    public SlotFlags TargetSlots { get; } = SlotFlags.FEET | SlotFlags.OUTERCLOTHING;
 }
 
 /// <summary>

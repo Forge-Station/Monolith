@@ -72,6 +72,14 @@ public sealed partial class CEZLevelsSystem
     /// </summary>
     private const float ExitTransitMaxSpeed = 0.1f;
 
+    /// <summary>
+    /// Gap held between a convoy and the solid ceiling it's pinned against, as a fraction of the
+    /// gap. Flush at 1.0 the ceiling sits exactly at the ship's own z and stops drawing over it,
+    /// so the terrain you're pressed against appears to vanish; backing off a hair keeps it
+    /// rendering overhead where it belongs.
+    /// </summary>
+    private const float CeilingClearance = 0.05f;
+
     private readonly Dictionary<EntityUid, float> _pilotVerticalInput = new();
 
     private readonly HashSet<EntityUid> _spoolingGrids = new();
@@ -85,9 +93,12 @@ public sealed partial class CEZLevelsSystem
         _pilotVerticalInput.Clear();
 
         var query = EntityQueryEnumerator<PilotComponent>();
-        while (query.MoveNext(out _, out var pilot))
+        while (query.MoveNext(out var pilotUid, out var pilot)) // WOLFGATE(Planets): the liftoff latch needs the pilot.
         {
             if (pilot.Console is not { } console || TerminatingOrDeleted(console))
+                continue;
+
+            if (Transform(console).GridUid is not { } grid)
                 continue;
 
             var vertical = 0f;
@@ -99,12 +110,20 @@ public sealed partial class CEZLevelsSystem
             if (vertical == 0f)
                 continue;
 
-            if (Transform(console).GridUid is not { } grid)
+            // WOLFGATE(Planets) START: grounded ascend engages liftoff; airborne input keeps CE's normal control.
+            if (WfHandleLiftoffPilotInput(pilotUid, console, grid, vertical))
                 continue;
+
+            // WOLFGATE(Planets): descend from orbit enters the atmosphere only when no confirm is needed.
+            if (WfRefusesOrbitInput(pilotUid, console, grid, vertical))
+                continue;
+            // WOLFGATE END
 
             _pilotVerticalInput[grid] =
                 Math.Clamp(_pilotVerticalInput.GetValueOrDefault(grid) + vertical, -1f, 1f);
         }
+
+        WfCollectLiftoffInputs(); // WOLFGATE(Planets): a console latch feeds the same CE takeoff spool and flight integrator.
     }
 
     /// <summary>
@@ -126,6 +145,18 @@ public sealed partial class CEZLevelsSystem
     }
 
     /// <summary>
+    /// Net vertical input across every layer of a transit convoy.
+    /// </summary>
+    private float GetConvoyVerticalInput(List<EntityUid> convoyMaps)
+    {
+        var total = 0f;
+        foreach (var convoyMap in convoyMaps)
+            total += GetTransitVerticalInput(convoyMap);
+
+        return Math.Clamp(total, -1f, 1f);
+    }
+
+    /// <summary>
     /// Vertical acceleration available to a docked set, in levels/s²: the sum of
     /// every member's thrusters over the set's total mass.
     /// </summary>
@@ -134,7 +165,7 @@ public sealed partial class CEZLevelsSystem
         var thrust = 0f;
         var mass = 0f;
 
-        foreach (var member in CollectGridSet(grid))
+        foreach (var member in CollectTransitSet(grid))
         {
             if (TryComp<ShuttleComponent>(member, out var shuttle))
             {
@@ -149,7 +180,8 @@ public sealed partial class CEZLevelsSystem
         if (thrust <= 0f || mass <= 0f)
             return 0f;
 
-        return Math.Clamp(thrust / mass * VerticalThrustScale, 0f, MaxVerticalAccel);
+        return Math.Clamp(thrust / mass * VerticalThrustScale, 0f, MaxVerticalAccel) // WOLFGATE(Planets): the climb is scaled by the maneuvering factor below.
+            * WfManeuveringFactor(grid); // WOLFGATE(Planets): only thrust left after hovering can climb.
     }
 
     private void UpdateTakeoffSpool()
@@ -166,15 +198,23 @@ public sealed partial class CEZLevelsSystem
             if (mapUid == null || !HasComp<CEZMapComponent>(mapUid))
                 continue;
 
+            // WOLFGATE(Planets) START: planetary lift replaces, rather than supplements, the station gravgen gate.
             // No gravgen, dumbass.
-            if (!TryComp<GravityComponent>(gridUid, out var gravity) || !gravity.Enabled)
+            // if (!TryComp<GravityComponent>(gridUid, out var gravity) || !gravity.Enabled)
+            if (WfIsPlanetFlight(gridUid)
+                    ? !WfHasVerticalLift(gridUid)
+                    : !TryComp<GravityComponent>(gridUid, out var gravity) || !gravity.Enabled)
                 continue;
+            // WOLFGATE END
 
             var down = input < 0f;
-            var grounded = HasComp<CEZGroundLayerComponent>(mapUid);
+
+            // Sat on terrain, not hovering over open sky: needs the engines spooled to break
+            // free, and can't descend at all.
+            var grounded = HasGroundUnderFootprint((gridUid, grid), mapUid.Value);
 
             // You can't sink through the ground, and there has to be a gap below.
-            if (down && (grounded || !TryMapDown(mapUid.Value, out _)))
+            if (down && (grounded || !TryMapDown(mapUid.Value, out var wfBelow) || WfClosedToHulls(wfBelow))) // WOLFGATE(Planets): pilots can't descend below a planet's ground.
                 continue;
 
             // Going up needs SOME adjacent gap to become airborne in.

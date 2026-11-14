@@ -1,0 +1,446 @@
+# Thrascias: snowfields, tundra, pack ice and frozen lakes, boreal pine pockets, crystal fields round the plasma pools.
+# Every imported tile gets a weather child, so snow falls on it (the imported tiles are not weather tiles).
+# Tile ids carry "snow"/"ice"/"dirt" so the orbit map colours them right (WFPlanetMapSystem.TileGround).
+# A layer that lists several entities picks from a second noise, and at a whole-number frequency that pick never varies,
+# so such layers run at 0.7 or 2.5 and the common entries sit in the middle of the list.
+
+# Snow and tundra.
+- type: tile
+  id: WFFloorThrasciasSnowRough
+  parent: GoonFloorSnowrough
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+- type: tile
+  id: WFFloorThrasciasSnowCalm
+  parent: GoonFloorSnowcalm
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+# Bare frozen soil; the only brown ground on the planet.
+- type: tile
+  id: WFFloorThrasciasFrozenDirt
+  parent: FloorAsteroidSand
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+# Dug snow rings the frozen dirt, so the brown ground fades into white instead of meeting it.
+- type: tile
+  id: WFFloorThrasciasSnowDug
+  parent: FloorSnowDug
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+# Pack ice and frozen lakes. Cracked ice grips; the smooth and lake ice is as slippery as the old FloorIce.
+# The clear, lake and smooth ice are FloorIce, whose sprite is slightly see-through, so the layer below shows through.
+- type: tile
+  id: WFFloorThrasciasPackIce
+  parent: RMCPlanetIce0
+  weather: true
+
+- type: tile
+  id: WFFloorThrasciasRoughIce
+  parent: GoonFloorWaterIceRough
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+# Clear ice that grips, where the dark ice did.
+- type: tile
+  id: WFFloorThrasciasClearIce
+  parent: FloorIce
+  weather: true
+  indestructible: true
+  isSubfloor: true
+  friction: 1
+  mobAcceleration: 1
+
+- type: tile
+  id: WFFloorThrasciasClearIceSmooth
+  parent: FloorIce
+  weather: true
+  indestructible: true
+  isSubfloor: true
+  friction: 0.05
+  mobAcceleration: 0.1
+
+# The bed of a lake (WFThrasciasLakeWater): grippy, as the water over it gives the slide while frozen.
+- type: tile
+  id: WFFloorThrasciasLakeIce
+  parent: FloorIce
+  weather: true
+  indestructible: true
+  isSubfloor: true
+  friction: 1
+  mobAcceleration: 1
+
+# A lake of real water that freezes by the air, like every world's. Thrascias air is far below freezing, so it reads
+# as ice; its iceFriction and iceAcceleration are the old lake tile's.
+- type: entity
+  id: WFThrasciasLakeWater
+  parent: MonoFloorWaterEntity
+  name: lake water
+  components:
+  - type: WFFreezableWater
+    iceFriction: 0.05
+    iceAcceleration: 0.1
+
+# Frozen plasma growth: the ground round every plasma pool.
+- type: tile
+  id: WFFloorThrasciasCrystalIce
+  parent: AuroraFloorExoplanetCrystal
+  weather: true
+  indestructible: true
+  isSubfloor: true
+
+- type: biomeTemplate
+  id: WFThrasciasTerrain
+  layers:
+  - !type:BiomeTileLayer
+    tile: FloorSnow
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasSnowRough
+    threshold: 0.3
+    noise: { seed: 61, noiseType: OpenSimplex2, frequency: 0.012 }
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasSnowCalm
+    threshold: 0.3
+    noise: { seed: 62, noiseType: OpenSimplex2, frequency: 0.012 }
+  # Bare frozen soil inside a ring of dug snow: the same noise, a lower threshold.
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasSnowDug
+    threshold: 0.72
+    noise: { seed: 63, noiseType: OpenSimplex2, frequency: 0.012 }
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasFrozenDirt
+    threshold: 0.88
+    noise: { seed: 63, noiseType: OpenSimplex2, frequency: 0.012 }
+  # Grey snow rings every sheet of ice, so white ground never meets it directly: the ice noise, a lower threshold.
+  - !type:BiomeTileLayer
+    tile: FloorSnow
+    threshold: 0.45
+    noise: { seed: 4, noiseType: OpenSimplex2, frequency: 0.01 }
+  # Pack ice and frozen lakes, where the old ice patches were.
+  - !type:BiomeMetaLayer
+    template: WFThrasciasPackIce
+    threshold: 0.6
+    noise: { seed: 4, noiseType: OpenSimplex2, frequency: 0.01 }
+  # Frozen plasma: the same ridged noise as the pools, at a lower threshold, so each pool sits in a crystal field.
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasCrystalIce
+    threshold: 0.91
+    noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.004, fractalType: Ridged, octaves: 1 }
+  # Decals go first: a decal layer above an entity layer hides the entity.
+  - !type:BiomeDecalLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    threshold: 0.8
+    divisions: 1
+    noise: { seed: 201, noiseType: OpenSimplex2, frequency: 4 }
+    decals:
+    - AuroraDecalFloorDecalSnowdrift
+  - !type:BiomeDecalLayer
+    allowedTiles:
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    - WFFloorThrasciasSnowRough
+    threshold: 0.75
+    divisions: 1
+    noise: { seed: 202, noiseType: OpenSimplex2, frequency: 5 }
+    decals:
+    - AuroraDecalFloorDecalSnowrocks
+  - !type:BiomeDecalLayer
+    allowedTiles:
+    - WFFloorThrasciasPackIce
+    - WFFloorThrasciasRoughIce
+    - WFFloorThrasciasClearIce
+    threshold: 0.8
+    divisions: 1
+    noise: { seed: 203, noiseType: OpenSimplex2, frequency: 4 }
+    decals:
+    - CMDecalRocksIceIce1
+  # Tundra growth: tufts of frosted grass poking through the snow.
+  - !type:BiomeDecalLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    threshold: 0.7
+    divisions: 1
+    noise: { seed: 101, noiseType: OpenSimplex2, frequency: 3 }
+    decals:
+    - grasssnowa1
+    - grasssnowa2
+    - grasssnowa3
+    - grasssnowb1
+    - grasssnowb2
+    - grasssnowb3
+    - grasssnowc1
+    - grasssnowc2
+    - grasssnowc3
+  # Frozen fungus shows only inside the snowdrifts: the same noise as the drift decals, at a higher threshold.
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    entities: [WFFloraFrozenFungus]
+    threshold: 0.86
+    noise: { seed: 201, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    entities: [WFFloraFrostbelle]
+    threshold: 0.88
+    noise: { seed: 102, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    entities: [GoonShrubSnow, GoonShrubSnow2]
+    threshold: 0.85
+    noise: { seed: 103, noiseType: OpenSimplex2, frequency: 2.5 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    entities: [GoonStoneSnow, GoonStoneSnow3]
+    threshold: 0.93
+    noise: { seed: 104, noiseType: OpenSimplex2, frequency: 2.5 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    entities: [GoonStoneSnow2, GoonStoneSnow4]
+    threshold: 0.95
+    noise: { seed: 106, noiseType: OpenSimplex2, frequency: 2.5 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    entities: [AuroraFloraRockSnow]
+    threshold: 0.96
+    noise: { seed: 108, noiseType: OpenSimplex2, frequency: 3 }
+  # Ice rocks on the pack ice, none on the lake sheets.
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - WFFloorThrasciasPackIce
+    - WFFloorThrasciasRoughIce
+    - WFFloorThrasciasClearIce
+    entities: [ShiptestFloraRockIcy, AuroraFloraRockIce]
+    threshold: 0.8
+    noise: { seed: 105, noiseType: OpenSimplex2, frequency: 2.5 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - WFFloorThrasciasPackIce
+    - WFFloorThrasciasRoughIce
+    - WFFloorThrasciasClearIce
+    entities: [ShiptestRockPileIcy]
+    threshold: 0.9
+    noise: { seed: 109, noiseType: OpenSimplex2, frequency: 3 }
+  # Ice crystals to chip, on the pack ice.
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - WFFloorThrasciasPackIce
+    - WFFloorThrasciasRoughIce
+    - WFFloorThrasciasClearIce
+    entities: [WFFloraIceCrystal]
+    threshold: 0.93
+    noise: { seed: 111, noiseType: OpenSimplex2, frequency: 3 }
+  # Boreal pine pockets, a minority of the surface.
+  - !type:BiomeMetaLayer
+    template: WFThrasciasBorealPocket
+    threshold: 0.72
+    noise: { seed: 141, noiseType: OpenSimplex2, frequency: 0.012 }
+  # Short runs of ice cliff, only on pack ice.
+  - !type:BiomeMetaLayer
+    template: WFThrasciasIceCliffs
+    threshold: 0.3
+    noise: { seed: 131, noiseType: OpenSimplex2, frequency: 0.03 }
+  # Crystal field growth.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorThrasciasCrystalIce]
+    entities: [ShiptestFloraRockCrystal, VorePropRockCrystal, VorePropRockCrystalDust]
+    threshold: 0.55
+    noise: { seed: 151, noiseType: OpenSimplex2, frequency: 0.7 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorThrasciasCrystalIce]
+    entities: [AuroraFloraTreeCrystal]
+    threshold: 0.85
+    noise: { seed: 152, noiseType: OpenSimplex2, frequency: 2.5 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorThrasciasCrystalIce]
+    entities: [BayCrystal, ChompQuartz]
+    threshold: 0.9
+    noise: { seed: 153, noiseType: OpenSimplex2, frequency: 2.5 }
+  # Crystal field plants: glowing blooms to pick, and frost pods that burst on whoever comes near.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorThrasciasCrystalIce]
+    entities: [WFFloraCrystalBloom]
+    threshold: 0.88
+    noise: { seed: 122, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorThrasciasCrystalIce]
+    entities: [WFFloraFrostPod]
+    threshold: 0.94
+    noise: { seed: 121, noiseType: OpenSimplex2, frequency: 3 }
+  # Wildlife by region, on the same noise the one planet-wide spawner used.
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    entities: [WFFaunaThrasciasTundra]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - WFFloorThrasciasPackIce
+    - WFFloorThrasciasRoughIce
+    - WFFloorThrasciasClearIce
+    - WFFloorThrasciasClearIceSmooth
+    entities: [WFFaunaThrasciasIce]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorThrasciasCrystalIce]
+    entities: [WFFaunaThrasciasCrystal]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    entities: [MonoPlanetmapOreSnow]
+    threshold: 0.72
+    noise: { seed: 23, noiseType: OpenSimplex2, frequency: 0.012 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    - WFFloorThrasciasFrozenDirt
+    - WFFloorThrasciasSnowDug
+    - WFFloorThrasciasPackIce
+    - WFFloorThrasciasRoughIce
+    - WFFloorThrasciasClearIce
+    - WFFloorThrasciasClearIceSmooth
+    - WFFloorThrasciasLakeIce
+    - WFFloorThrasciasCrystalIce
+    entities: [FloorLiquidPlasmaEntity]
+    threshold: 0.95
+    noise: { seed: 3, noiseType: OpenSimplex2, frequency: 0.004, fractalType: Ridged, octaves: 1 }
+
+# Cracked pack ice, with rough and clear patches and lakes of water in the middle.
+- type: biomeTemplate
+  id: WFThrasciasPackIce
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasPackIce
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasRoughIce
+    threshold: 0.55
+    noise: { seed: 71, noiseType: OpenSimplex2, frequency: 0.03 }
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasClearIce
+    threshold: 0.55
+    noise: { seed: 72, noiseType: OpenSimplex2, frequency: 0.03 }
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasClearIceSmooth
+    threshold: 0.65
+    noise: { seed: 73, noiseType: OpenSimplex2, frequency: 0.04 }
+  - !type:BiomeTileLayer
+    tile: WFFloorThrasciasLakeIce
+    threshold: 0.6
+    noise: { seed: 74, noiseType: OpenSimplex2, frequency: 0.02 }
+  # The lakes are water over that bed, frozen while the air is.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorThrasciasLakeIce]
+    entities: [WFThrasciasLakeWater]
+    threshold: -1
+    noise: { seed: 0, noiseType: OpenSimplex2, frequency: 0.01 }
+
+# Pines on the snow, thick inside the pocket and nowhere outside it.
+- type: biomeTemplate
+  id: WFThrasciasBorealPocket
+  layers:
+  # Whipvines and snow spiders sit under the pines and shrubs: a later layer wins a tile.
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    entities: [WFFaunaThrasciasBoreal]
+    threshold: 0.93
+    noise: { seed: 39, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    entities: [WFFloraWhipvine]
+    threshold: 0.95
+    noise: { seed: 123, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    entities: [GoonShrubSnow, GoonShrubSnow2, WFFloraFrostbelle]
+    threshold: 0.5
+    noise: { seed: 143, noiseType: OpenSimplex2, frequency: 0.7 }
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - FloorSnow
+    - WFFloorThrasciasSnowRough
+    - WFFloorThrasciasSnowCalm
+    # A pick lands mostly on the middle entries, so the common pines sit there and the rare ones at the ends.
+    entities:
+    - DarkPackTreeVampPine
+    - VoreFloraTreeSif
+    - ShiptestFloraTreePine
+    - CoyoteFloraTreeMedPine
+    - ShiptestFloraTreePine
+    - CoyoteFloraTreeMedPine
+    threshold: 0.6
+    noise: { seed: 142, noiseType: OpenSimplex2, frequency: 0.7 }
+
+# Cliff lines are the ridges of a noise, cut into short runs by the template's own region noise.
+- type: biomeTemplate
+  id: WFThrasciasIceCliffs
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles:
+    - WFFloorThrasciasPackIce
+    - WFFloorThrasciasRoughIce
+    - WFFloorThrasciasClearIce
+    entities: [CMRockIce]
+    threshold: 0.9
+    noise: { seed: 132, noiseType: OpenSimplex2, frequency: 0.07, fractalType: Ridged, octaves: 1 }

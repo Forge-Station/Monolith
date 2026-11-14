@@ -5,6 +5,11 @@
   children:
   - DirectorOfCare # Frontier
   - MedicalDoctor
+  # WOLFGATE(Wolfmed): PROTO L (WP12-10) - wounds guidebook entries
+  - WFWounds
+  - WFWoundTreatment
+  - WFWolfmedAutodoc # WOLFGATE(Wolfmed): AUTODOC
+  - WFSynthsAndYou # WOLFGATE(Synthetics): guide for repairing synthetics
   - Chemist
   - Cloning
   - Genetics

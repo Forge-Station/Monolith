@@ -1,0 +1,18 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                HorizontalExpand="True">
+    <!-- The banner keeps itself visible so it still ticks; the contents are what comes and goes. -->
+    <BoxContainer Name="ContentBox"
+                  Orientation="Horizontal"
+                  HorizontalExpand="True"
+                  Visible="False"
+                  Margin="8 6 8 6">
+        <Label Name="WarningLabel"
+               Text="{Loc 'collision-warning-imminent'}"
+               StyleClasses="LabelHeading"
+               HorizontalExpand="True"
+               Align="Center"/>
+        <Label Name="DetailLabel"
+               Text=""
+               Align="Right"/>
+    </BoxContainer>
+</PanelContainer>

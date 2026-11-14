@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made for Wolfgate after the PDV job icons in _Mono/Interface/Misc/job_icons.rsi (colour swapped from the vgstation13 Station Engineer icon).",
+  "size": {
+    "x": 8,
+    "y": 8
+  },
+  "states": [
+    {
+      "name": "jarrah"
+    }
+  ]
+}

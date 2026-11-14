@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by Github MozarteanChaos / Discord mozarteanchaos (213813868282118144) and modified by Github Zeyria / Discord zeyria (232964236186353664) South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tail_avalibase_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_avalibase_FRONT",
+      "directions": 4
+    }
+  ]
+}

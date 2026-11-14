@@ -123,10 +123,10 @@ public sealed partial class GeneticsSystem : SharedGeneticsSystem
         if (!Prototypes.TryIndex<EntityPrototype>(species.Prototype, out var mob))
             return false;
 
-        if (mob.TryGetComponent<SiliconComponent>(out _, EntityManager.ComponentFactory))
+        if (mob.TryComp<SiliconComponent>(out _, EntityManager.ComponentFactory))
             return true;
 
-        return mob.TryGetComponent<DamageableComponent>(out var damage, EntityManager.ComponentFactory)
+        return mob.TryComp<DamageableComponent>(out var damage, EntityManager.ComponentFactory)
                && damage.DamageContainerID == SteelDamageContainer;
     }
 

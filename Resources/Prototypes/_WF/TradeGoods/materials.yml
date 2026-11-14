@@ -1,0 +1,42 @@
+# What trade crates break down into in a lathe. A crate is 10000 of its material, so recipes spend a share of one. They are
+# priced at zero because the crate carries the value, and a price would add to what a crate sells for. They have no stack
+# entity, so what goes into a lathe stays in it.
+- type: material
+  id: WFMunitions
+  name: materials-wf-munitions
+  unit: materials-unit-wf-crate-share
+  icon: { sprite: _Mono/Objects/TradeGoods/trade.rsi, state: ammo }
+  color: "#a8552f"
+  price: 0
+
+- type: material
+  id: WFReactorFuel
+  name: materials-wf-reactor-fuel
+  unit: materials-unit-wf-crate-share
+  icon: { sprite: _Mono/Objects/TradeGoods/trade.rsi, state: fission }
+  color: "#5fa84b"
+  price: 0
+
+- type: material
+  id: WFMedicalStock
+  name: materials-wf-medical-stock
+  unit: materials-unit-wf-crate-share
+  icon: { sprite: _Mono/Objects/TradeGoods/trade.rsi, state: supplies-med }
+  color: "#c9d6dc"
+  price: 0
+
+- type: material
+  id: WFGunParts
+  name: materials-wf-gun-parts
+  unit: materials-unit-wf-crate-share
+  icon: { sprite: _Mono/Objects/TradeGoods/trade.rsi, state: weapon-components }
+  color: "#6e7680"
+  price: 0
+
+- type: material
+  id: WFShipParts
+  name: materials-wf-ship-parts
+  unit: materials-unit-wf-crate-share
+  icon: { sprite: _Mono/Objects/TradeGoods/trade.rsi, state: ship-components }
+  color: "#8a7f5e"
+  price: 0

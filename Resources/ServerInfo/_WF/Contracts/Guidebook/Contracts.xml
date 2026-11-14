@@ -1,0 +1,87 @@
+<Document>
+  # Contracts
+
+  [color=#5fc3e4]Contract boards[/color] stand at the crossing of the central plaza on Caelestinus Central and beside each of its dock arms. Every station in the sector that pays for work posts there: deliveries, hauling, supply orders, mining quotas, bounties, salvage, science and escorts. Anyone can take a contract, Vagrants included, and the first tier asks for nothing but a shuttle.
+
+  <Box>
+    <GuideEntityEmbed Entity="WFContractBoard"/>
+    <GuideEntityEmbed Entity="WFContractCrate"/>
+    <GuideEntityEmbed Entity="WFContractParcel"/>
+    <GuideEntityEmbed Entity="WFContractFlightRecorder"/>
+  </Box>
+
+  ## Taking a contract
+
+  1. Open the board and pick an offer. Each one says who you are working for, on behalf of which faction or company, and shows the reward, any deposit, the time allowed and exactly what is asked: the stations, the counts, the goods.
+  2. Accept it. Any deposit comes out of your bank and is paid back with the reward. Cargo for the contract is left on the [color=#5fc3e4]pickup pad[/color] marked beside the board, or at the station named as the pickup. With no pad nearby, it goes on the nearest clear floor in front of the board.
+  3. Track it in the [color=#5fc3e4]Contracts[/color] app on your PDA: objectives, time left, where to go and coordinates for anything out in space. Type the coordinates into your helm's waypoint panel to fly there.
+  4. Finish before the clock runs out. The reward and deposit go straight to your bank.
+
+  Abandoning a contract, losing its cargo or running out of time forfeits the deposit.
+
+  ## Crews
+
+  Contracts belong to your crew from Crew Setup. A crew holds one contract at a time, and one more each time it doubles: two members hold two, four hold three, eight hold four, sixteen hold five. On your own you are a crew of one.
+
+  When a contract is done, the reward is split evenly between everyone in the crew who is in the round; the deposit goes back to whoever took it. Crewmates see each other's contracts in the Accepted tab and in the Contracts app. Only the one who took a contract can abandon it.
+
+  Work a crew does together pays more as the crew grows. Mining contracts add half their pay again for each crewmate after the first; bounties, salvage, escorts and surveys add a quarter or more. The bonus counts up to four extra crewmates. The board shows what your crew would be paid in all and each member's share before you take a contract.
+
+  Some contracts are [color=#e0b050]crew work[/color]: bulk quotas, strip claims, infested hulks. They need a crew of a given size in the sector to take, and they pay for that whole crew, so each share beats a solo contract.
+
+  ## Kinds of work
+
+  - [bold]Delivery[/bold]: sealed parcels, carried by hand. They count as delivered the moment you walk them aboard the destination station.
+  - [bold]Hauling[/bold]: contract crates that need a hold or a lot of dragging. Same rule: get them aboard the destination station.
+  - [bold]Supply[/bold] and [bold]Mining[/bold]: you get an empty manifest crate. Fill it with what the manifest asks for, bought, made, mined or found, and close it anywhere aboard the contractor's station. Examine the crate to see what is still missing.
+  - [bold]Bounty Hunting[/bold]: a target ship appears out in space and shows on the sector radar. Destroy it. The hull it leaves is yours to claim if you can.
+  - [bold]Salvage[/bold]: a wreck appears out in space with something worth recovering aboard. Find it and bring it to the station named.
+  - [bold]Escort[/bold]: a freighter waits for you at a rendezvous near the contractor's station. Once you arrive it sets off for its destination. Raiders may be waiting. The contract is done when it gets there.
+  - [bold]Science[/bold]: a derelict with anomalies aboard appears out in space. Scan every one with an anomaly scanner before any of them collapses. Scanners are in the contractor tool loadout and on any protolathe. Some derelicts are infested; bring weapons.
+  - [bold]Mail runs[/bold]: one parcel for each of several stations. Each counts only at the station it is addressed to.
+  - [bold]Sweeps[/bold]: fly within range of each survey point; the next one is on your waypoints.
+  - [bold]Clearing[/bold]: destroy every carp nest aboard a wreck. Nests keep spawning carp until they are gone.
+  - [bold]Beacon repairs[/bold]: weld a derelict beacon whole and fit a power cell. The derelict jumps away a while later.
+  - [bold]Downloads[/bold]: stay beside a derelict terminal while it downloads. It only runs with someone beside it, and hostiles come in waves.
+  - [bold]Inspections[/bold]: board a stopped smuggler and inspect its suspect cargo crate (right-click it). Its crew will fight.
+  - [bold]Salvage operations[/bold]: one battle wreck that needs its anomalies scanned, its flight recorder brought home and its hull towed.
+  - [bold]Chains[/bold]: some bounties turn up a lead. The next contract is posted for your crew alone, for a short while.
+  - [bold]Tows[/bold] (Salvage): a dead hull appears out in space. Tether it to within range of the contractor's station. You need to be carrying a rope coil and a tether installer to take one. It fails if the hull is destroyed.
+  - [bold]Planetary[/bold]: surface work, coming once survey licences are issued.
+
+  ## Risk tiers and standing
+
+  Every contract has a risk tier from 1 to 5. Tiers 1 and 2 suit a civilian shuttle and are open to everyone. Higher tiers want a real hold, a gunboat or a crewed warship, and need standing with whoever posts them.
+
+  Your standing with each contractor is kept between shifts, for each character. Finishing a contract raises it; failing or abandoning one lowers it. Some work for one side costs standing with its rival, and the contract says so before you take it. Each shift your standing drifts one point back toward neutral, so favour fades without work and grudges fade without trouble.
+
+  - [color=#e06060]Hostile[/color]: they won't deal with you at all.
+  - [color=#e0b050]Distrusted[/color]: tier 1 work only.
+  - Applicant (neutral): tiers 1 and 2.
+  - Junior Contractor opens tier 3, Contractor tier 4 and Experienced Contractor tier 5.
+
+  The board's Standing tab shows where you are with each.
+
+  ## Claimed work
+
+  Bounty targets and salvage wrecks show who holds the contract on every radar: [italic]claimed: their crew[/italic]. Your crew get a waypoint for your contract's target on the ships you are aboard, and it follows the target as it moves.
+
+  Leave other people's targets alone. If your ship fires on a claimed target and you are not in the holder's crew, you lose standing with the contractor when it ends. Members of the same side (the TSF and its civilians, the PDV and its civilians, the USSP, or the same company) can help each other freely.
+
+  ## Faction boards
+
+  Each faction keeps its own boards by its docks: the Federation on the Halcyon, the USSP Commissariat on Camelot and the Dynasty Quartermaster on Helios. They post work for their own members only, paid in thalers with Federation credits or doubloons on top: patrols, war materiel, convoys and salvage. Work for one faction costs standing with its rivals.
+
+  ## Who posts
+
+  - [color=#37946e]Caelestinus Port Authority[/color]: mail and freight out of Central.
+  - [color=#4d8fd6]Caelestinus Marshals[/color]: bounties near Central and evidence recovery.
+  - [color=#d9d9d9]Mieyo Manufacturing Concern[/color] (MMC Hokkaido): ore quotas, refined stock, claim jumpers.
+  - [color=#009dff]Sevastopol Data Storage[/color]: data couriers, hardware, lost cores, data thieves.
+  - [color=#5fb0e0]Stellar Blessing Colony Board[/color]: colony stores and building stock; a good first contractor, next door to Central.
+  - [color=#5b7fe0]TSFMC Logistics Command[/color] (Halcyon): munitions, reactor parts, dispatches, pirate hunting.
+  - [color=#d0573f]Camelot Harbourmaster[/color]: provisions and fuel for the far freeport, exports, smugglers.
+  - [color=#a07fff]Anomalous Lab Directorate[/color]: samples, instruments, anomaly cores, exotic ore.
+
+  A contractor whose station is not in the sector this shift posts nothing.
+</Document>

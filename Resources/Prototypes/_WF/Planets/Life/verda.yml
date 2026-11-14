@@ -1,0 +1,373 @@
+# Verda's living plants: things to pick, eat and cook, one that heals, one that whips and one that irradiates.
+# Each is a child of a Decor Import flora prototype, so it keeps that plant's sprite and is walk-through; only the
+# tints and the LivingWorld components are new. Names and descriptions are in Locale/_WF/Planets/life_verda.ftl.
+
+# ---- Produce ----
+
+# Forest mushrooms: cook two with water in a big bowl.
+- type: entity
+  parent: WFWildMushroomBase
+  id: WFVerdaMushroom
+  components:
+  - type: Sprite
+    color: "#c9a46a"
+
+- type: entity
+  parent: FoodSoupMushroom
+  id: WFFoodSoupVerdaMushroom
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+        - ReagentId: Vitamin
+          Quantity: 6
+        - ReagentId: Water
+          Quantity: 6
+
+- type: entity
+  parent: WFWildBerryBase
+  id: WFVerdaDuskberries
+  components:
+  - type: Sprite
+    color: "#8f8fd8"
+
+# Eat it for bicaridine and kelotane, or cut it into a poultice (WFHealingHerbBase).
+- type: entity
+  parent: WFHealingHerbBase
+  id: WFVerdaShoreSage
+  components:
+  - type: Sprite
+    color: "#9fdcc0"
+
+# Eaten, a lotus heals a little of everything.
+- type: entity
+  parent: WFWildProduceBase
+  id: WFVerdaLotusBlossom
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/lily.rsi
+    color: "#f2b6d8"
+  - type: FlavorProfile
+    flavors:
+    - sweet
+    - leafy
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Tricordrazine
+          Quantity: 3
+  - type: Tag
+    tags:
+    - Fruit
+
+# Pulled from a snapping bramble with a knife.
+- type: entity
+  parent: BaseItem
+  id: WFVerdaBrambleThorn
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: Objects/Materials/Shards/splinters.rsi
+    state: splinterssmall
+    color: "#8a6a3a"
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 2
+
+# A root that soaks up the soil: grind it for uranium, or eat it and regret it.
+- type: entity
+  parent: WFWildProduceBase
+  id: WFVerdaGlowroot
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/chilly.rsi
+    color: "#9dff8a"
+  - type: PointLight
+    radius: 1.2
+    energy: 0.8
+    color: "#8aff6a"
+  - type: FlavorProfile
+    flavors:
+    - metallic
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Uranium
+          Quantity: 3
+        - ReagentId: Nutriment
+          Quantity: 1
+
+- type: microwaveMealRecipe
+  id: RecipeWFVerdaMushroomSoup
+  name: forest mushroom soup recipe
+  result: WFFoodSoupVerdaMushroom
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    WFVerdaMushroom: 2
+  recipeType:
+  - Oven
+  - Microwave
+
+# ---- Plants ----
+
+# Not woody: nothing to log when one is trampled.
+- type: entity
+  abstract: true
+  id: WFVerdaSoftPlant
+  components:
+  - type: Appearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 12
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# Forest floor, 1 to 2 per cent of it: pick for mushrooms.
+- type: entity
+  parent: [ GoonMushroomsType1, WFVerdaSoftPlant ]
+  id: WFVerdaPlantMushroom
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms_goonstation.rsi
+    layers:
+    - state: mushroom1
+      map: [ "plant" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.55,0.55", color: "#9a8a78" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    regrowTime: 600
+    harvestTime: 1
+    table: !type:AllSelector
+      children:
+      - id: WFVerdaMushroom
+        amount: !type:RangeNumberSelector
+          range: 1, 3
+
+# Woodland, 1 per cent: ripe berries show on the bush; once picked it stands bare.
+- type: entity
+  parent: [ ChompFloraDesertPlanetShrubber, WFVerdaSoftPlant ]
+  id: WFVerdaPlantBerryBush
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_bushes.rsi
+    layers:
+    - state: shrubber0
+      map: [ "plant" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { state: shrubber1 }
+          False: { state: shrubber0 }
+  - type: WFRegrowingHarvest
+    regrowTime: 900
+    harvestTime: 1.5
+    table: !type:AllSelector
+      children:
+      - id: WFVerdaDuskberries
+        amount: !type:RangeNumberSelector
+          range: 2, 3
+
+# Lake and pond mud and sand: cut for plant fibre.
+- type: entity
+  parent: [ AuroraFloraBushKonyangReeds, WFVerdaSoftPlant ]
+  id: WFVerdaPlantReeds
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_water_plants.rsi
+    layers:
+    - state: water_stalks
+      map: [ "plant" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6" }
+          False: { scale: "1,1" }
+  - type: WFRegrowingHarvest
+    regrowTime: 480
+    harvestTime: 1.5
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFPlantFibre
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# At the waterline: pick for a healing herb.
+- type: entity
+  parent: [ DarkPackFloraDarkpackFlowerYerba, WFVerdaSoftPlant ]
+  id: WFVerdaPlantShoreSage
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+    layers:
+    - state: yerba_mansa
+      map: [ "plant" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6" }
+          False: { scale: "1,1" }
+  - type: WFRegrowingHarvest
+    regrowTime: 720
+    harvestTime: 1
+    table: !type:AllSelector
+      children:
+      - id: WFVerdaShoreSage
+
+# Pond and lake mud: a lotus to eat.
+- type: entity
+  parent: [ GoonFakeobjectLotus, WFVerdaSoftPlant ]
+  id: WFVerdaPlantLotus
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_water_plants_goonstation.rsi
+    layers:
+    - state: lotus_1
+      map: [ "plant" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.7,0.7", color: "#9fc99f" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    regrowTime: 900
+    harvestTime: 1
+    harvestSound:
+      collection: WFFloraLilypad
+    table: !type:AllSelector
+      children:
+      - id: WFVerdaLotusBlossom
+
+# Woodland, a few in a thousand: lashes whoever brushes past; cut with a knife for thorns. Reddens as it strikes.
+- type: entity
+  parent: [ CoyoteFloraWasteplantWildBuffalogourd, WFVerdaSoftPlant ]
+  id: WFVerdaPlantBramble
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+    layers:
+    - state: wild_gourd
+      map: [ "plant" ]
+      color: "#c9b89a"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        plant:
+          Idle: { color: "#c9b89a", scale: "1,1" }
+          Armed: { color: "#ff8f7a", scale: "1.12,1.12" }
+          Spent: { color: "#c9b89a", scale: "1,1" }
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { color: "#8a7f6a" }
+          False: { color: "#c9b89a" }
+  - type: WFReactiveFlora
+    behaviour: Lash
+    range: 1.1
+    cooldown: 3
+    checkInterval: 0.5
+    activeTime: 0.8
+    ignoreFactions: [ Passive, SimpleHostile, SimpleNeutral, Dragon ]
+    sound:
+      collection: WFFloraSwoosh
+    popup: wf-verda-bramble-lash
+    damage:
+      types:
+        Slash: 4
+  - type: WFRegrowingHarvest
+    tool: Slicing
+    regrowTime: 900
+    harvestTime: 2
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFVerdaBrambleThorn
+        amount: !type:RangeNumberSelector
+          range: 1, 3
+
+# Irradiated scars, rare: glows, and irradiates whoever stands within a tile and a half. Pick it for glowroot.
+- type: entity
+  parent: [ TgFloraAshChilly, WFVerdaSoftPlant ]
+  id: WFVerdaPlantGlowroot
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: chilly_pepper1
+      map: [ "plant" ]
+      color: "#9dff8a"
+      shader: unshaded
+  # The parent picks its look on a `base` layer this sprite doesn't have.
+  - type: RandomSprite
+    available:
+    - plant:
+        chilly_pepper1: ""
+        chilly_pepper2: ""
+  - type: PointLight
+    radius: 2
+    energy: 1
+    color: "#8aff6a"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        plant:
+          Idle: { color: "#9dff8a" }
+          Armed: { color: "#eaffdf" }
+          Spent: { color: "#9dff8a" }
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.7,0.7" }
+          False: { scale: "1,1" }
+  - type: WFReactiveFlora
+    behaviour: Irradiate
+    range: 1.5
+    cooldown: 2
+    checkInterval: 1
+    maxTargets: 0
+    requireLineOfSight: false
+    radsPerSecond: 1.5
+    ignoreFactions: [ Passive, SimpleHostile, SimpleNeutral, Dragon ]
+    sound:
+      collection: WFFloraCrystalHum
+  - type: WFRegrowingHarvest
+    regrowTime: 1200
+    harvestTime: 2
+    harvestSound:
+      collection: WFFloraCrystalCharge
+    table: !type:AllSelector
+      children:
+      - id: WFVerdaGlowroot

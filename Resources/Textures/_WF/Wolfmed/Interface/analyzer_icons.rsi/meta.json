@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made for Wolfgate (Wolfmed)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cut"
+    },
+    {
+      "name": "puncture"
+    },
+    {
+      "name": "ballistic"
+    },
+    {
+      "name": "blunt"
+    },
+    {
+      "name": "burn"
+    },
+    {
+      "name": "internal"
+    },
+    {
+      "name": "infection"
+    },
+    {
+      "name": "mechanical"
+    },
+    {
+      "name": "other"
+    },
+    {
+      "name": "fracture"
+    },
+    {
+      "name": "bleeding"
+    },
+    {
+      "name": "internal_bleeding"
+    },
+    {
+      "name": "embedded"
+    },
+    {
+      "name": "necrosis"
+    },
+    {
+      "name": "overheating"
+    },
+    {
+      "name": "scar"
+    },
+    {
+      "name": "pain"
+    },
+    {
+      "name": "impaired"
+    },
+    {
+      "name": "clotting"
+    },
+    {
+      "name": "sepsis"
+    },
+    {
+      "name": "blood_low"
+    },
+    {
+      "name": "surgery"
+    },
+    {
+      "name": "reagent"
+    },
+    {
+      "name": "warning"
+    },
+    {
+      "name": "done"
+    },
+    {
+      "name": "step"
+    },
+    {
+      "name": "dressing"
+    },
+    {
+      "name": "splint"
+    },
+    {
+      "name": "tourniquet"
+    }
+  ]
+}

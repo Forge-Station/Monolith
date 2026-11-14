@@ -190,7 +190,7 @@ public sealed partial class StorageWindow : BaseWindow
 
         _pieces.Clear();
         _controlGrid.Clear();
-        _pieceGrid.DisposeAllChildren();
+        _pieceGrid.RemoveAllChildren();
         _pieceGrid.Rows = 1;
         _pieceGrid.Columns = 1;
         BuildGridRepresentation();

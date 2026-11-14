@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "full"
+    },
+    {
+      "name": "state_0",
+      "directions": 4
+    },
+    {
+      "name": "state_1",
+      "directions": 4
+    },
+    {
+      "name": "state_2",
+      "directions": 4
+    },
+    {
+      "name": "state_3",
+      "directions": 4
+    },
+    {
+      "name": "state_4",
+      "directions": 4
+    },
+    {
+      "name": "state_5",
+      "directions": 4
+    },
+    {
+      "name": "state_6",
+      "directions": 4
+    },
+    {
+      "name": "state_7",
+      "directions": 4
+    }
+  ]
+}

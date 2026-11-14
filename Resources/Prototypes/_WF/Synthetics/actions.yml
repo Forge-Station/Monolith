@@ -1,0 +1,15 @@
+# The chassis panel: every synthetic-biotype body gets this action and opens its own panel with it.
+
+- type: entity
+  id: WFActionChassisPanel
+  name: Chassis panel
+  description: Open your chassis panel - every part and component, and the controls for them.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    checkCanInteract: false
+    checkConsciousness: false # a downed chassis still has its panel
+    icon:
+      sprite: Interface/Actions/actions_borg.rsi
+      state: diagnosis-module
+    event: !type:WFOpenChassisPanelActionEvent

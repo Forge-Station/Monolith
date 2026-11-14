@@ -1,0 +1,16 @@
+# M2 (OD8 (b), plan §5.4): offered after a long, stable, non-dying helplessness, and withdrawn the moment anything gets
+# worse. It opens a dialog with the exact terms; the ghost can always return.
+
+- type: entity
+  id: WFActionWolfmedWaitAsGhost
+  name: Wait as a ghost
+  description: Your body is stable for now. Leave it as a ghost that can come back; you are told if it gets worse.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    checkCanInteract: false
+    checkConsciousness: false
+    icon:
+      sprite: Mobs/Ghosts/ghost_human.rsi
+      state: icon
+    event: !type:WolfmedWaitAsGhostActionEvent

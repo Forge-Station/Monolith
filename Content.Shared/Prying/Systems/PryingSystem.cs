@@ -152,6 +152,15 @@ public sealed partial class PryingSystem : EntitySystem
         RaiseLocalEvent(user, ref modEv);
         // End DeltaV additions
 
+        // WOLFGATE(ArmorSpecialization) START: worn gear (servo assist) speeds prying with a tool, like other tool work.
+        if (tool != null && tool != user)
+        {
+            var wfSpeed = new Content.Shared._WF.ArmorSpecialization.WFToolSpeedEvent();
+            RaiseLocalEvent(user, ref wfSpeed);
+            toolModifier *= MathF.Max(wfSpeed.Multiplier, 0.1f);
+        }
+        // WOLFGATE END
+
         var doAfterArgs = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(modEv.BaseTime * modEv.PryTimeModifier / toolModifier), new DoorPryDoAfterEvent(), target, target, tool)
         {
             BreakOnDamage = true,

@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CHOMPStation at commit https://github.com/CHOMPStation2/CHOMPStation2/commit/ca24d940aa4a6eb0d58d32b85ddc830f44459264, Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22, DarkPack at commit https://github.com/DarkPack13/SecondCity/commit/2a1e8fd0ccf64a5fd40504b20b1e1f76774f5ecc, Paradise at commit https://github.com/ParadiseSS13/Paradise/commit/7cd73f80152a5e234249d99cace75ce2b5c1c54b, Polaris at commit https://github.com/PolarisSS13/Polaris/commit/6cd19fe0dec6b5f18b6b18c3eb36af7bf3359f25, Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3, tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "carrot"
+    },
+    {
+      "name": "cornstalk2"
+    },
+    {
+      "name": "cornstalk3"
+    },
+    {
+      "name": "evening_primrose"
+    },
+    {
+      "name": "fireblossom"
+    },
+    {
+      "name": "fireblossom1"
+    },
+    {
+      "name": "flower1"
+    },
+    {
+      "name": "flowerpod1"
+    },
+    {
+      "name": "forget_me_not"
+    },
+    {
+      "name": "frostbelle"
+    },
+    {
+      "name": "geranium"
+    },
+    {
+      "name": "grape"
+    },
+    {
+      "name": "indian_paintbrush"
+    },
+    {
+      "name": "lilly"
+    },
+    {
+      "name": "lily"
+    },
+    {
+      "name": "marigold"
+    },
+    {
+      "name": "plasma_flower1"
+    },
+    {
+      "name": "prairie_flax"
+    },
+    {
+      "name": "rose"
+    },
+    {
+      "name": "sunflower"
+    },
+    {
+      "name": "tomato"
+    },
+    {
+      "name": "velvet_turtleback"
+    },
+    {
+      "name": "wild_agave"
+    },
+    {
+      "name": "wild_blossom"
+    },
+    {
+      "name": "wild_broc"
+    },
+    {
+      "name": "wild_coyote"
+    },
+    {
+      "name": "wild_datura"
+    },
+    {
+      "name": "wild_feracactus"
+    },
+    {
+      "name": "wild_fungus"
+    },
+    {
+      "name": "wild_gourd"
+    },
+    {
+      "name": "wild_horsenettle"
+    },
+    {
+      "name": "wild_mesquite"
+    },
+    {
+      "name": "wild_mutfruit"
+    },
+    {
+      "name": "wild_pinyon"
+    },
+    {
+      "name": "wild_prickly"
+    },
+    {
+      "name": "wild_punga"
+    },
+    {
+      "name": "wild_tato"
+    },
+    {
+      "name": "wild_xander"
+    },
+    {
+      "name": "wild_yucca"
+    },
+    {
+      "name": "wooly_bluestar"
+    },
+    {
+      "name": "yerba_mansa"
+    }
+  ]
+}

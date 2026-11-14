@@ -655,7 +655,7 @@
       state: generic_panel_open
   - type: ResearchClient
   - type: AnalysisConsole
-    reportEntityId: PaperArtifactAnalyzer
+    # reportEntityId: PaperArtifactAnalyzer # WOLFGATE(Xenoarch): the xenoarch rework dropped printed reports
   - type: DeviceList
   - type: DeviceNetwork
     deviceNetId: Wired
@@ -664,10 +664,10 @@
     ports:
       - ArtifactAnalyzerSender
   - type: ActivatableUI
-    key: enum.ArtifactAnalzyerUiKey.Key
+    key: enum.ArtifactAnalyzerUiKey.Key # WOLFGATE(Xenoarch): the xenoarch rework fixed the key's spelling
   - type: UserInterface
     interfaces:
-      enum.ArtifactAnalzyerUiKey.Key:
+      enum.ArtifactAnalyzerUiKey.Key: # WOLFGATE(Xenoarch)
         type: AnalysisConsoleBoundUserInterface
       enum.ResearchClientUiKey.Key:
         type: ResearchClientBoundUserInterface
@@ -683,7 +683,7 @@
     color: "#b53ca1"
   - type: GuideHelp
     guides:
-    - Xenoarchaeology
+    - AnalysisConsole # WOLFGATE(Xenoarch): wizden's analysis console guidebook page
   # Mono
   - type: ShipRepairable
     repairTime: 4

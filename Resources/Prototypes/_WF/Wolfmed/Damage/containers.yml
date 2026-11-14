@@ -1,0 +1,43 @@
+# WOLFGATE (P5-2/P5-D5): Silicon + Bloodloss, for the IPC MOB. The stock Silicon container
+# (Resources/Prototypes/Damage/containers.yml:27-34) has no Bloodloss type, so an IPC's oil-loss damage -
+# and WolfmedBodyPartLifecycleSystem's P3-D1 vital-part charge, which is applied to the BODY
+# (WolfmedBodyPartLifecycleSystem.cs:92-93) - are silently discarded by DamageableSystem's type filter
+# (DamageableSystem.cs:270-277). A separate id keeps borgs, cyborg parts and every other
+# `damageContainer: Silicon` entity on the stock container (D2).
+#
+# Bloodloss is added as a TYPE, not via the Airloss group (P5-D5b), so the mob carries no Asphyxiation
+# surface. M6 correction: the tourniquet's `Asphyxiation: 5` is not applied to the part. Asphyxiation is not a
+# localized type, so the routing puts it in the body's systemic pool, which this container (no Airloss) drops on
+# an IPC. An IPC dies of its core, not of a projected total.
+- type: damageContainer
+  id: WFSiliconWolfmed
+  supportedGroups:
+  - Brute
+  supportedTypes:
+  - Heat
+  - Shock
+  - Radiation
+  # WOLFGATE: Bloodloss removed again. It sits in the Airloss group, so an IPC showed oxygen loss; a machine
+  # that does not breathe takes none, ever. The id stays because the welder and nanite applicator list it.
+
+# WOLFGATE (P5-2/P5-D20, U13'): Onyx parity for IPC and cybernetic PARTS. Onyx's SiliconIpc takes the whole
+# Burn group (Heat, Shock, Cold, Caustic - Resources/Prototypes/Damage/groups.yml:9-16); Wolfgate's
+# Inorganic (Brute + Heat/Shock, containers.yml:10-16) and Silicon (+ Radiation, :27-34) do not, so Cold and
+# Caustic are silently dropped and two of the seven acceptedDamageTypes on both mechanical profiles - and
+# two of the six damageTypes on both mechanical wounds - are dead.
+#
+# A PART container is the right lever: DamageableSystem raises the Wolfmed routing seam at :253-264, BEFORE
+# the body's own type filter at :270-277, so a Cold/Caustic hit on an IPC reaches routing even though the
+# mob container drops it; it is the part's container that discards it.
+#
+# This id is a superset of both stock containers it replaces (Inorganic on PartIPCBase, Silicon on
+# CyberneticPartBase), so neither part base loses a type. Only those two abstracts use it (D2).
+# Radiation is kept although it is not in WoundHostComponent.LocalizedDamageTypes and therefore never
+# routes - a directly-targeted part can still take it.
+- type: damageContainer
+  id: WFInorganicWolfmed
+  supportedGroups:
+  - Brute
+  - Burn
+  supportedTypes:
+  - Radiation

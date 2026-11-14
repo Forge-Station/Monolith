@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "silver_wall0",
+      "directions": 4
+    },
+    {
+      "name": "silver_wall1",
+      "directions": 4
+    },
+    {
+      "name": "silver_wall2",
+      "directions": 4
+    },
+    {
+      "name": "silver_wall3",
+      "directions": 4
+    },
+    {
+      "name": "silver_wall4",
+      "directions": 4
+    },
+    {
+      "name": "silver_wall5",
+      "directions": 4
+    },
+    {
+      "name": "silver_wall6",
+      "directions": 4
+    },
+    {
+      "name": "silver_wall7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

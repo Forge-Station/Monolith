@@ -80,8 +80,12 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
 
         private Control SupplyTooltip(Control? sender)
         {
-            var msg = FormattedMessage.FromMarkupOrThrow(Loc.GetString(Alert.Name));
-            var desc = FormattedMessage.FromMarkupOrThrow(Loc.GetString(Alert.Description));
+            // WOLFGATE(Wolfmed) START: INFECTION: the name gets the severity too, so the sepsis alert can say septic shock
+            // var msg = FormattedMessage.FromMarkupOrThrow(Loc.GetString(Alert.Name));
+            var msg = FormattedMessage.FromMarkupOrThrow(Loc.GetString(Alert.Name, ("severity", (int) (_severity ?? 0))));
+            // WOLFGATE END
+            // WOLFGATE(Wolfmed): VISUALS: the severity reaches the text, so the pain HUD's hover names its band
+            var desc = FormattedMessage.FromMarkupOrThrow(Loc.GetString(Alert.Description, ("severity", (int) (_severity ?? 0))));
             return new ActionAlertTooltip(msg, desc) { Cooldown = Cooldown };
         }
 

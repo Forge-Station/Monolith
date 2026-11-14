@@ -1,0 +1,6 @@
+# While this rule runs the ADS incursion is on. The Contested Sector preset carries it; addgamerule starts it in any other mode.
+- type: entity
+  id: WFAdsCampaignRule
+  parent: BaseGameRule
+  components:
+  - type: WFAdsCampaignRule

@@ -23,6 +23,8 @@
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Chest: MobGoblinTorso
+    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
+    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
     Eyes: MobGoblinEyes
     LArm: MobGoblinLArm
     RArm: MobGoblinRArm
@@ -33,6 +35,8 @@
     LFoot: MobGoblinLFoot
     RFoot: MobGoblinRFoot
     Tail: MobHumanoidAnyMarking
+    TailBehind: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
+    TailOversuit: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
 
 - type: markingPoints
   id: MobGoblinMarkingLimits

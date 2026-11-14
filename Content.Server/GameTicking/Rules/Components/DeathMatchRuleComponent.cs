@@ -3,7 +3,6 @@ using Content.Shared.Roles;
 using Content.Shared.Storage;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.GameTicking.Rules.Components;
 

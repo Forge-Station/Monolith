@@ -27,6 +27,12 @@ public sealed partial class MindContainerComponent : Component
     /// </summary>
     [DataField]
     public bool GhostOnShutdown = true;
+
+    /// <summary>
+    ///     When set, examine can say whether a player is in this body.
+    /// </summary>
+    [DataField("showExamineInfo")]
+    public bool ShowExamineInfo;
 }
 
 public abstract class MindEvent : EntityEventArgs

@@ -1,0 +1,75 @@
+# The resin sensor reuses the recovery node's sprite, tinted; it can get its own art later.
+- type: entity
+  id: HiveSensorXeno
+  parent: BaseHiveStructure
+  components:
+  - type: Sprite
+    color: '#b8e8ff'
+    sprite: _WF/Xenonids/Structures/Xenos/hive_structures.rsi
+    state: recovery
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 100
+  - type: XenoSensor
+  # The shuttle mass scanner's radar, centred on the structure; only xenos of the hive can open it.
+  - type: RadarConsole
+    followEntity: true
+    noRotate: true
+  - type: ActivatableUI
+    key: enum.RadarConsoleUiKey.Key
+    requiresComplex: false
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionLimited
+    id: HiveSensorXeno
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
+  - type: DoAfter
+  # WOLFGATE: cut XenoStructureMapTracked
+  # WOLFGATE: cut TacticalMapTracked
+  # WOLFGATE: cut TacticalMapIcon
+
+- type: entity
+  id: HiveSensorXenoConstructionNode
+  parent: BaseHiveStructureNode
+  suffix: Construction
+  components:
+  - type: Sprite
+    color: '#b8e8ffAA'
+    layers:
+    - sprite: _WF/Xenonids/Structures/Xenos/hive_structures.rsi
+      state: recovery
+    - sprite: _WF/Xenonids/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: HiveConstructionNode
+    initialPlasmaCost: 400
+    plasmaCost: 375
+    spawn: HiveSensorXeno
+  - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionLimited
+    id: HiveSensorXeno
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
+  - type: WarpPoint
+    location: resin sensor

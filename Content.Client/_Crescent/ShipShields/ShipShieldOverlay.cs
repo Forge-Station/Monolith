@@ -1,4 +1,5 @@
 using Content.Shared._Crescent.ShipShields;
+using Content.Shared._WF.ShipShields;
 using Robust.Client.ResourceManagement;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
@@ -11,6 +12,7 @@ using Robust.Client.Physics;
 using Robust.Shared.Prototypes;
 using System.Runtime.InteropServices;
 using Robust.Client.GameObjects;
+using Robust.Shared.GameObjects;
 
 namespace Content.Client._Crescent.ShipShields;
 
@@ -18,11 +20,15 @@ public sealed class ShipShieldOverlay : Overlay
 {
     private readonly FixtureSystem _fixture;
     private readonly SharedPhysicsSystem _physics;
+    private readonly SharedTransformSystem _transform;
     private readonly IResourceCache _resourceCache;
     private readonly IEntityManager _entManager;
     private readonly ShaderInstance _unshadedShader;
     private readonly List<DrawVertexUV2D> _verts = new(128); // Mono
+    private readonly List<DrawVertexUV2DColor> _hullVerts = new(256);
+    private readonly List<EntityUid> _staleHulls = new();
     private readonly Texture _shieldTexture;
+    private readonly Dictionary<EntityUid, WFShipShieldRadarGeometry> _hulls = new();
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowWorld;
 
@@ -32,6 +38,7 @@ public sealed class ShipShieldOverlay : Overlay
         _entManager = entityManager;
         _fixture = _entManager.EntitySysManager.GetEntitySystem<FixtureSystem>();
         _physics = _entManager.EntitySysManager.GetEntitySystem<Robust.Client.Physics.PhysicsSystem>();
+        _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
         _shieldTexture = _resourceCache.GetTexture("/Textures/_Crescent/ShipShields/shieldtex.png");
 
         _unshadedShader = prototypeManager.Index<ShaderPrototype>("unshaded").Instance();
@@ -44,12 +51,17 @@ public sealed class ShipShieldOverlay : Overlay
         var handle = args.WorldHandle;
 
         handle.UseShader(_unshadedShader);
+        PruneHulls();
 
         var enumerator = _entManager.AllEntityQueryEnumerator<ShipShieldVisualsComponent, FixturesComponent, TransformComponent>();
         while (enumerator.MoveNext(out var uid, out var visuals, out var fixtures, out var xform))
         {
 
             if (xform.MapID != args.MapId)
+                continue;
+
+            // Forge-Change: the live field is the hull contour. The old chain fixture is only a fallback.
+            if (DrawHull(handle, uid, visuals, xform))
                 continue;
 
             var fixture = _fixture.GetFixtureOrNull(uid, "shield", fixtures);
@@ -71,6 +83,77 @@ public sealed class ShipShieldOverlay : Overlay
             DrawShield(handle, chain, transform, _shieldTexture, visuals.ShieldColor, _verts);
             _verts.Clear(); // Clear for next shield - Mono
         }
+    }
+
+    /// <summary>Draws the padded hull, including a shunted gap, in the generator colour.</summary>
+    private bool DrawHull(DrawingHandleWorld handle, EntityUid uid, ShipShieldVisualsComponent generatorVisuals, TransformComponent xform)
+    {
+        if (!_entManager.TryGetComponent<WFShipShieldVisualsComponent>(uid, out var hull) || hull.Contours.Length == 0)
+            return false;
+        if (hull.Grid is not { } grid || !_entManager.TryGetComponent<TransformComponent>(grid, out var gridXform) ||
+            gridXform.MapID != xform.MapID)
+            return false;
+
+        if (!_hulls.TryGetValue(uid, out var outline))
+        {
+            outline = new WFShipShieldRadarGeometry();
+            _hulls.Add(uid, outline);
+        }
+
+        _entManager.TryGetComponent<WFShipShieldShuntComponent>(uid, out var allocation);
+        outline.Update(hull.Contours, allocation?.Center ?? Vector2.Zero,
+            allocation?.DirectionRadians ?? 0f, allocation?.Concentration ?? 0f,
+            allocation?.ArcRadians ?? MathF.Tau);
+        if (outline.Segments.Count == 0)
+            return false;
+
+        var world = _transform.GetWorldMatrix(gridXform);
+        var center = Vector2.Transform(allocation?.Center ?? Vector2.Zero, world);
+        var color = WFShipShieldEffects.HealthColor(hull.Health, generatorVisuals.ShieldColor);
+        foreach (var segment in outline.Segments)
+        {
+            var start = Vector2.Transform(segment.Start, world);
+            var end = Vector2.Transform(segment.End, world);
+            var strength = Math.Clamp(segment.Strength, 0.35f, 1f);
+            DrawRibbon(start, end, center, Color.FromSrgb(color.WithAlpha(0.55f + 0.35f * strength)));
+        }
+
+        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _shieldTexture, CollectionsMarshal.AsSpan(_hullVerts));
+        _hullVerts.Clear();
+        return true;
+    }
+
+    private void PruneHulls()
+    {
+        _staleHulls.Clear();
+        foreach (var uid in _hulls.Keys)
+        {
+            if (!_entManager.EntityExists(uid))
+                _staleHulls.Add(uid);
+        }
+
+        foreach (var uid in _staleHulls)
+            _hulls.Remove(uid);
+    }
+
+    private void DrawRibbon(Vector2 start, Vector2 end, Vector2 center, Color color)
+    {
+        var innerStart = Toward(start, center);
+        var innerEnd = Toward(end, center);
+        _hullVerts.Add(new DrawVertexUV2DColor(start, new Vector2(0, 1), color));
+        _hullVerts.Add(new DrawVertexUV2DColor(end, new Vector2(1, 1), color));
+        _hullVerts.Add(new DrawVertexUV2DColor(innerStart, Vector2.Zero, color));
+        _hullVerts.Add(new DrawVertexUV2DColor(end, new Vector2(1, 1), color));
+        _hullVerts.Add(new DrawVertexUV2DColor(innerStart, Vector2.Zero, color));
+        _hullVerts.Add(new DrawVertexUV2DColor(innerEnd, new Vector2(1, 0), color));
+    }
+
+    private static Vector2 Toward(Vector2 point, Vector2 center, float radius = 1.3f)
+    {
+        var inward = center - point;
+        if (inward.LengthSquared() < 0.0001f)
+            return point;
+        return point + Vector2.Normalize(inward) * radius;
     }
 
     private void DrawShield(

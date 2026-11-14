@@ -112,7 +112,7 @@ public sealed partial class PlantAnalyzerWindow : BaseWindow
 
     private void RebuildSectionList()
     {
-        ListContainer.DisposeAllChildren();
+        ListContainer.RemoveAllChildren();
 
         AddSectionButton(AnalyzerSection.Overview, Loc.GetString("plant-analyzer-section-overview"), Loc.GetString("plant-analyzer-section-overview-sub"));
         if (_scan?.IsTray == true)
@@ -138,7 +138,7 @@ public sealed partial class PlantAnalyzerWindow : BaseWindow
 
     private void ShowSection()
     {
-        DetailContainer.DisposeAllChildren();
+        DetailContainer.RemoveAllChildren();
 
         if (_scan == null)
         {
@@ -340,7 +340,7 @@ public sealed partial class PlantAnalyzerWindow : BaseWindow
     private void ShowNoData()
     {
         DetailHeader.Text = Loc.GetString("plant-analyzer-detail-header");
-        DetailContainer.DisposeAllChildren();
+        DetailContainer.RemoveAllChildren();
         DetailContainer.AddChild(_styles.Sub(Loc.GetString("plant-analyzer-window-no-seed-information-text")));
     }
 

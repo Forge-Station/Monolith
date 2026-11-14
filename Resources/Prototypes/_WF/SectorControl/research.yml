@@ -1,0 +1,14 @@
+# Unlocked on the universal discipline, then printed at a protolathe or an engineering techfab.
+
+- type: technology
+  id: WFSectorBeacons
+  name: research-technology-sector-beacon
+  entityIcon: WFSectorBeacon
+  discipline: FactionUniversal
+  tier: 1
+  cost: 10000
+  technologyPrerequisites:
+  - UniversalMaterialResearchT1
+  position: 12, 0
+  recipeUnlocks:
+  - WFSectorBeaconFlatpack

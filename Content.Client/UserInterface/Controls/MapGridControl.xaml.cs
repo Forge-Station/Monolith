@@ -6,6 +6,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Client.UserInterface.Controls;
@@ -19,6 +20,8 @@ public partial class MapGridControl : LayoutContainer
 {
     [Dependency] protected IEntityManager EntManager = default!;
     [Dependency] protected IGameTiming Timing = default!;
+    [Dependency] protected IPrototypeManager PrototypeManager = default!; // Mono
+    [Dependency] protected IClyde DisplayManager = default!; // Mono
 
     protected static readonly Color BackingColor = new Color(0.08f, 0.08f, 0.08f);
 
@@ -52,16 +55,15 @@ public partial class MapGridControl : LayoutContainer
     protected float RecenterMinimum = 0.05f;
 
     /// <summary>
-    /// Fallback UI pixel radius used as a minimum display size. Actual drawing uses the control's pixel size.
+    /// UI pixel radius.
     /// </summary>
     public const int UIDisplayRadius = 320;
     protected const int MinimapMargin = 4;
-    protected const int MinDisplaySize = 256; // Forge-Change
 
     protected float WorldMinRange;
     protected float WorldMaxRange;
     public float WorldRange;
-    public Vector2 WorldRangeVector => new Vector2(WorldRange, WorldRange);
+    public Vector2 WorldRangeVector => WfFitInstrument ? WfViewportHalfExtents : new Vector2(WorldRange, WorldRange); // WOLFGATE(CombatConsole): cull responsive plots against both viewport dimensions.
 
     /// <summary>
     /// We'll lerp between the radarrange and actual range
@@ -77,29 +79,18 @@ public partial class MapGridControl : LayoutContainer
 
     public Vector2 MaxRadarRangeVector => new Vector2(MaxRadarRange, MaxRadarRange);
 
-    // Forge-Change-Start: radar fills the resized window instead of a fixed 320px square.
-    protected Vector2 MidPointVector => PixelSize / 2f;
+    // WOLFGATE(CombatConsole): centre instrument plots in their available viewport.
+    protected virtual Vector2 MidPointVector => WfFitInstrument ? new Vector2(PixelWidth, PixelHeight) / 2f : new Vector2(MidPoint, MidPoint); // WOLFGATE(ShipAccess): virtual, so the door map can centre its drawing in a control of any size
 
     protected int MidPoint => SizeFull / 2;
-    protected int SizeFull
-    {
-        get
-        {
-            var width = PixelWidth;
-            var height = PixelHeight;
-            if (width <= 1)
-                return Math.Max(1, height);
-            if (height <= 1)
-                return Math.Max(1, width);
-
-            return Math.Max(1, (int) MathF.Min(width, height));
-        }
-    }
-    protected int ScaledMinimapRadius => Math.Max(1, SizeFull / 2 - (int) (MinimapMargin * UIScale));
-    // Forge-Change-End
+    protected int SizeFull => WfFitInstrument ? Math.Min(PixelWidth, PixelHeight) : (int)((UIDisplayRadius + MinimapMargin) * 2 * UIScale); // WOLFGATE(CombatConsole): fit scoped radar geometry to the shorter viewport edge.
+    // WOLFGATE(CombatConsole): keep plotting and mouse coordinates on the same responsive scale.
+    protected virtual int ScaledMinimapRadius => WfFitInstrument ? Math.Max(1, SizeFull / 2 - (int)(MinimapMargin * UIScale)) : (int)(UIDisplayRadius * UIScale); // WOLFGATE(ShipAccess): virtual, so the door map can fit the hull to its own shorter side
     protected float MinimapScale => WorldRange != 0 ? ScaledMinimapRadius / WorldRange : 0f;
 
     public event Action<float>? WorldRangeChanged;
+
+    private readonly ShaderInstance _circleMaskShader; // Mono
 
     public MapGridControl() : this(32f, 32f, 32f) { }
 
@@ -107,11 +98,7 @@ public partial class MapGridControl : LayoutContainer
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        // Forge-Change-Start
-        MinSize = new Vector2(MinDisplaySize, MinDisplaySize);
-        HorizontalExpand = true;
-        VerticalExpand = true;
-        // Forge-Change-End
+        SetSize = new Vector2(SizeFull, SizeFull);
         RectClipContent = true;
         MouseFilter = MouseFilterMode.Stop;
         ActualRadarRange = WorldRange;
@@ -122,7 +109,8 @@ public partial class MapGridControl : LayoutContainer
 
         var cache = IoCManager.Resolve<IResourceCache>();
         _largerFont = new VectorFont(cache.GetResource<FontResource>("/EngineFonts/NotoSans/NotoSans-Regular.ttf"), 16);
-        // Forge-Change: removed unused CircleAlphaMask InstanceUnique() that leaked a shader per map control.
+
+        _circleMaskShader = PrototypeManager.Index<ShaderPrototype>("CircleAlphaMask").InstanceUnique(); // Mono
     }
 
     public void ForceRecenter()
@@ -133,6 +121,10 @@ public partial class MapGridControl : LayoutContainer
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)
     {
         base.KeyBindDown(args);
+
+        // WOLFGATE(Cockpit): use the same right-mouse gesture on every cockpit plot.
+        if (WfCockpitControls)
+            return;
 
         if (!Draggable)
             return;
@@ -147,6 +139,15 @@ public partial class MapGridControl : LayoutContainer
 
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
+        // WOLFGATE(Cockpit) START: deliver releases to the borrowed plot's cockpit input handler.
+        if (WfCockpitControls)
+        {
+            base.KeyBindUp(args);
+            if (args.Handled)
+                return;
+        }
+        // WOLFGATE END
+
         if (!Draggable)
             return;
 
@@ -164,19 +165,17 @@ public partial class MapGridControl : LayoutContainer
         if (!_draggin)
             return;
 
-        // Forge-Change-Start
-        var radius = ScaledMinimapRadius;
-        if (radius <= 0)
-            return;
-
         Recentering = false;
-        Offset -= new Vector2(args.Relative.X, -args.Relative.Y) * UIScale / radius * WorldRange;
-        // Forge-Change-End
+        Offset -= new Vector2(args.Relative.X, -args.Relative.Y) / MidPoint * WorldRange;
     }
 
     protected override void MouseWheel(GUIMouseWheelEventArgs args)
     {
         base.MouseWheel(args);
+
+        // WOLFGATE(Cockpit): map zoom must not also scroll its containing panel.
+        if (WfCockpitControls)
+            args.Handle();
 
         // Use multiplicative zoom for consistent zoom steps
         // Positive delta = zoom in (divide), negative delta = zoom out (multiply)
@@ -253,8 +252,7 @@ public partial class MapGridControl : LayoutContainer
 
     protected void DrawBacking(DrawingHandleScreen handle)
     {
-        var backing = BackingColor;
-        handle.DrawRect(PixelSizeBox, backing);
+        handle.DrawRect(PixelSizeBox, RadarBackingColor);
     }
 
     protected void DrawNoSignal(DrawingHandleScreen handle)

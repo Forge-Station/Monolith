@@ -1,0 +1,30 @@
+# What gives an encounter away before it is in sight (WFCavernTelegraphSystem). Creatures carry their own
+# WFCavernTelegraph (horrors.yml, people.yml); these are the props.
+
+# A camp's fire: its glow carries down the tunnels and its crackle is heard well before the camp is in sight.
+- type: entity
+  parent: Bonfire
+  id: WFCavernCampfire
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 3
+    color: "#FFC90C"
+  - type: WFBonfireFuel
+    infinite: true
+  - type: WFCavernTelegraph
+    sound:
+      collection: WFCavernEncounterCampFire
+    minInterval: 13
+    maxInterval: 15
+    volume: -2
+
+# A lantern burning at the edge of the Lamplighter's lair, which dies with a fizzle as a player comes near.
+- type: entity
+  parent: GoonLantern
+  id: WFCavernOmenLantern
+  suffix: Lamplighter omen
+  components:
+  - type: WFCavernOmenLight
+    sound:
+      collection: WFCavernEncounterOmenFizzle

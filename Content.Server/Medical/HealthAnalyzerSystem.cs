@@ -3,10 +3,7 @@ using Content.Server.Medical.Components;
 using Content.Server.PowerCell;
 using Content.Server.Temperature.Components;
 using Content.Shared.Traits.Assorted;
-using Content.Shared.Chemistry.Components; // Forge-Change
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent; // Forge-Change
-using Content.Shared.FixedPoint; // Forge-Change
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
@@ -77,6 +74,28 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
                 continue;
             }
 
+            component.NextUpdate = _timing.CurTime + component.UpdateInterval;
+
+            // Keep the last patient linked while out of range so scanning can resume.
+            var patientCoordinates = Transform(patient).Coordinates;
+            if (!_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange))
+            {
+                if (!component.ScanPausedForRange)
+                {
+                    component.ScanPausedForRange = true;
+                    _toggle.TryDeactivate(uid);
+                    UpdateScannedUser(uid, patient, false, component.CurrentBodyPart);
+                }
+
+                continue;
+            }
+
+            if (component.ScanPausedForRange)
+            {
+                component.ScanPausedForRange = false;
+                _toggle.TryActivate(uid);
+            }
+
             // Shitmed Change Start
             if (component.CurrentBodyPart != null
                 && (Deleted(component.CurrentBodyPart)
@@ -88,18 +107,6 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             }
             // Shitmed Change End
 
-            component.NextUpdate = _timing.CurTime + component.UpdateInterval;
-
-            //Get distance between health analyzer and the scanned entity
-            var patientCoordinates = Transform(patient).Coordinates;
-            if (!_transformSystem.InRange(patientCoordinates, transform.Coordinates, component.MaxScanRange))
-            {
-                //Range too far, disable updates until they are back in range
-                PauseAnalyzingEntity((uid, component), patient);
-                continue;
-            }
-
-            component.IsAnalyzerActive = true;
             UpdateScannedUser(uid, patient, true, component.CurrentBodyPart); // Shitmed Change
         }
     }
@@ -146,7 +153,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     private void OnInsertedIntoContainer(Entity<HealthAnalyzerComponent> uid, ref EntGotInsertedIntoContainerMessage args)
     {
         if (uid.Comp.ScannedEntity is { } patient)
-            _toggle.TryDeactivate(uid.Owner);
+            StopAnalyzingEntity(uid, patient);
     }
 
     /// <summary>
@@ -154,7 +161,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     /// </summary>
     private void OnToggled(Entity<HealthAnalyzerComponent> ent, ref ItemToggledEvent args)
     {
-        if (!args.Activated && ent.Comp.ScannedEntity is { } patient)
+        if (!args.Activated && !ent.Comp.ScanPausedForRange && ent.Comp.ScannedEntity is { } patient)
             StopAnalyzingEntity(ent, patient);
     }
 
@@ -164,7 +171,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     private void OnDropped(Entity<HealthAnalyzerComponent> uid, ref DroppedEvent args)
     {
         if (uid.Comp.ScannedEntity is { } patient)
-            _toggle.TryDeactivate(uid.Owner);
+            StopAnalyzingEntity(uid, patient);
     }
 
     private void OpenUserInterface(EntityUid user, EntityUid analyzer)
@@ -185,25 +192,12 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     {
         //Link the health analyzer to the scanned entity
         healthAnalyzer.Comp.ScannedEntity = target;
+        healthAnalyzer.Comp.ScanPausedForRange = false;
         healthAnalyzer.Comp.CurrentBodyPart = part; // Shitmed Change
 
         _toggle.TryActivate(healthAnalyzer.Owner);
 
         UpdateScannedUser(healthAnalyzer, target, true, part); // Shitmed Change
-    }
-
-    /// <summary>
-    /// If the scanner is active, sends one last update and sets it to inactive.
-    /// </summary>
-    /// <param name="healthAnalyzer">The health analyzer that's receiving the updates</param>
-    /// <param name="target">The entity to analyze</param>
-    private void PauseAnalyzingEntity(Entity<HealthAnalyzerComponent> healthAnalyzer, EntityUid target)
-    {
-        if (!healthAnalyzer.Comp.IsAnalyzerActive)
-            return;
-
-        UpdateScannedUser(healthAnalyzer, target, false);
-        healthAnalyzer.Comp.IsAnalyzerActive = false;
     }
 
     /// <summary>
@@ -215,6 +209,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
     {
         //Unlink the analyzer
         healthAnalyzer.Comp.ScannedEntity = null;
+        healthAnalyzer.Comp.ScanPausedForRange = false;
         healthAnalyzer.Comp.CurrentBodyPart = null; // Shitmed Change
 
         _toggle.TryDeactivate(healthAnalyzer.Owner);
@@ -268,27 +263,16 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
 
         var bloodAmount = float.NaN;
         var bleeding = false;
-        List<ReagentQuantity>? chemicalReagents = null; // Forge-Change
         var unrevivable = false;
         var uncloneable = false; // Frontier
 
-        if (TryComp<BloodstreamComponent>(target, out var bloodstream))
+        if (TryComp<BloodstreamComponent>(target, out var bloodstream) &&
+            _solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
+                ref bloodstream.BloodSolution, out var bloodSolution))
         {
-            if (_solutionContainerSystem.ResolveSolution(target, bloodstream.BloodSolutionName,
-                    ref bloodstream.BloodSolution, out var bloodSolution))
-            {
-                bloodAmount = bloodSolution.FillFraction;
-                bleeding = bloodstream.BleedAmount > 0;
-            }
-
-            // Forge-Change-Start
-            if (_solutionContainerSystem.ResolveSolution(target, bloodstream.ChemicalSolutionName,
-                    ref bloodstream.ChemicalSolution, out var chemicalSolution))
-            {
-                chemicalReagents = GetChemicalReagents(chemicalSolution);
-            }
+            bloodAmount = bloodSolution.FillFraction;
+            bleeding = bloodstream.BleedAmount > 0;
         }
-            // Forge-Change-End
 
         // Shitmed Change Start
         Dictionary<TargetBodyPart, TargetIntegrity>? body = null;
@@ -313,25 +297,7 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
             // Shitmed Change
             body,
             part != null ? GetNetEntity(part) : null,
-            chemicalReagents // Forge-Change
+            BuildWoundDiagnostics(target), BuildOrganInfo(target), BuildChemicalInfo(target, bloodstream), BuildVitalDamage(target) // WOLFGATE(Wolfmed): HOOK 23
         ));
     }
-
-    // Forge-Change-Start
-    public static List<ReagentQuantity>? GetChemicalReagents(Solution chemicalSolution)
-    {
-        List<ReagentQuantity>? reagents = null;
-
-        foreach (var quantity in chemicalSolution.Contents)
-        {
-            if (quantity.Quantity <= FixedPoint2.Zero)
-                continue;
-
-            reagents ??= new();
-            reagents.Add(quantity);
-        }
-
-        return reagents;
-    }
-    // Forge-Change-End
 }

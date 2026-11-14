@@ -1,0 +1,72 @@
+# Everything added through Wolfgate is stocked here; John Wolfgate sells the same list.
+- type: vendingMachineInventory
+  id: WFWolfgateVendInventory
+  startingInventory:
+    WFPlanetTimepiece: 5
+    WFParachute: 10
+    WFJetpackAtmospheric: 3
+    WFLandingThrusterKit: 4
+    WFRopeHempCoil: 6
+    WFRopeSyntheticCoil: 6
+    WFRopeBungeeCoil: 4
+    WFRopeSteelCableCoil: 4
+    WFRopeTowCableCoil: 2
+    WFTetherInstaller: 3
+    WFPowerCordCoilLV: 4
+    WFPowerCordCoilMV: 4
+    WFPowerCordCoilHV: 4
+    WFShipHarpoonTurretFlatpack: 2
+    WFShipHarpoon: 8
+    WFPartsSiloFlatpack: 2
+    WFChemicalSiloFlatpack: 2
+    WFDoomArcadeFlatpack: 3
+    WFVehicleBayTerminalFlatpack: 4
+    WFVehicleDeliveryPadFlatpack: 4
+    WFFreedoom2ArcadeFlatpack: 3
+    WFMameArcadeFlatpack: 3
+    WFBoombox: 4
+    # Wolfmed field medicine.
+    WFWolfmedSplint: 6
+    WFWolfmedAntisepticSpray: 6
+    WFWolfmedSkinGraft: 4
+    WFWolfmedAnalgesicPill: 10
+    WFWolfmedOpiateChemistryBottle: 3
+    WFWolfmedStimPen: 4
+    WFWolfmedAnalgesicPen: 10
+    WFWolfmedOpiatePen: 6
+    WFWolfmedNaloxonePen: 4 # M2 (OD14): reverses an overdose.
+    WFWolfmedHydraulicFluidPack: 4 # Playtest 3 IPC 2: refills a chassis.
+    WFSpaceacillinChemistryBottle: 3
+    # Playtest 5 (ITEMS): the rest of the field kit, the pill forms and the surgical basics.
+    Tourniquet: 6
+    MedicatedSuture: 2
+    WFWolfmedSuture: 4 # Playtest 5: the plain suture.
+    RegenerativeMesh: 2
+    WFWolfmedAnalgesicPillCanister: 4
+    WFWolfmedIbuprofenPillCanister: 3
+    WFWolfmedKetorolacPillCanister: 3
+    WFWolfmedTramadolChemistryBottle: 3
+    WFWolfmedOxycodoneChemistryBottle: 2
+    WFWolfmedOsteogenPillCanister: 4
+    WFWolfmedOsteogenChemistryBottle: 3
+    Cautery: 2
+    Hemostat: 2
+    Bonesetter: 2
+    BoneGel: 2
+    WFMedkitSyntheticFilled: 3
+    WFWolfmedIvDripFlatpack: 3
+    WFWolfmedVentilatorFlatpack: 3
+    # The autodoc as a flatpack, for a ship without a medical lathe (its board is printed there), and its consumables.
+    WFMachineAutodocFlatpack: 1
+    WFAutodocProgramDiskTransplant: 1
+    WFAutodocProgramDiskLimb: 1
+    WFAutodocProgramDiskNeuro: 1
+    WFAutodocProgramDiskCavity: 1
+    WFAutodocDefibModule: 1
+    WFAutodocAutofixModule: 1
+    # Xenobiology gear and starter slimes.
+    MobSlimeXenobioBabyGrey: 4
+    SlimeScannerXenobio: 4
+    ClothingBackpackXenoBioTankFilled: 3
+    WFSlimeGrinderFlatpack: 2
+    WFXenobiologyBountyConsoleFlatpack: 1

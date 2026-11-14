@@ -1,0 +1,173 @@
+# Sprites ported from Hullrot: Eclipsion's Empire clothing (CC-BY-SA-3.0, Shiptest and tgstation derived);
+# prototypes, names and descriptions are Wolfgate's.
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformColonist
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/colonist.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/colonist.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformResearcher
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/researcher.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/researcher.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformCasual
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/casual.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/casual.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformMedic
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/medic.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/medic.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: WFAsfClothingUniformFormal
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Uniforms/formal.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Uniforms/formal.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: WFAsfClothingHeadBeretPlumed
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/beret_plumed.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Head/beret_plumed.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: WFAsfClothingHeadCap
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/cap.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Head/cap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: WFAsfClothingHeadHat
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/hat.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Head/hat.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFAsfClothingNeckCapelet
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Neck/capelet.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Neck/capelet.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFAsfClothingNeckCape
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Neck/cape.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Neck/cape.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFAsfClothingOuterParade
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/parade.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/parade.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFAsfClothingOuterRobe
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/robe.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/robe.rsi
+
+- type: entity
+  parent: ClothingOuterEVASuitBase
+  id: WFAsfClothingOuterEVA
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/eva.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/eva.rsi
+
+- type: entity
+  parent: ClothingHeadEVAHelmetBase
+  id: WFAsfClothingHeadEVA
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/eva.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Head/eva.rsi
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: WFAsfClothingShoesBoots
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Shoes/boots.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Shoes/boots.rsi
+
+- type: entity
+  parent: ClothingHandsButcherable
+  id: WFAsfClothingHandsGloves
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Hands/gloves.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Hands/gloves.rsi
+
+- type: entity
+  parent: ClothingBackpack
+  id: WFAsfClothingBackpack
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Back/backpack.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Back/backpack.rsi
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: WFAsfClothingBackpackSatchel
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Back/satchel.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Back/satchel.rsi
+
+- type: entity
+  parent: NFClothingDuffel
+  id: WFAsfClothingBackpackDuffel
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Back/duffel.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Back/duffel.rsi

@@ -10,7 +10,7 @@
   id: CargoBoardsStatic
   recipes:
   - OreProcessorMachineCircuitboard
-  #- SalvageMagnetMachineCircuitboard #Forge-Change-remove
+  - SalvageMagnetMachineCircuitboard
   - SmartArmoryCircuitboard # Mono
 
 ## Dynamic
@@ -28,12 +28,17 @@
   id: CargoBoards
   recipes:
   - OreProcessorIndustrialMachineCircuitboard
-  - ShipDrillMachineCircuitboard # Mono
-  - ShipDrillDiamondMachineCircuitboard # Froge-change-add
   - OreMagnetMachineCircuitboard # Mono
-  - OrePipeStorageMachineCircuitboard # Forge-Change
-  - OreHoldModuleMachineCircuitboard # Forge-Change
   - MaterialSiloMachineCircuitboard
+  # WOLFGATE(Lathe) START: fabrication silos
+  - WFPartsSiloMachineCircuitboard
+  - WFChemicalSiloMachineCircuitboard
+  # WOLFGATE END
   # - CargoTelepadMachineCircuitboard # Frontier
   - ShuttleGunKineticCircuitboard
-  # - WeaponTurretM25Circuitboard # Mono-Forge-Change-Delete
+  - WeaponTurretM25Circuitboard # Mono
+  - ShipDrillMachineCircuitboard # Mono
+  # WOLFGATE(AsteroidMining) START: heavy and light mining laser boards
+  - WFWeaponTurretMiningBeamCircuitboard
+  - WFWeaponTurretMiningLaserSmallCircuitboard
+  # WOLFGATE END

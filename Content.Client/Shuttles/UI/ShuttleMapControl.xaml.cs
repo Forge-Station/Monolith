@@ -1,7 +1,6 @@
 using System.Buffers;
 using System.Numerics;
 using Content.Client.Shuttles.Systems;
-using Content.Shared._Forge.Shuttles.Components;
 using Content.Shared._Mono.Company;
 using Content.Shared._Mono.Detection;
 using Content.Shared.Shuttles.Components;
@@ -14,6 +13,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Collections;
 using Robust.Shared.Input;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
@@ -166,6 +166,9 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         {
             _ftlAngle -= Angle.FromDegrees(15f) * args.Delta.Y; // Mono Edit: Subtract instead of add to preserve clockwise rotation when scrolling up. (positive angles are actually counter-clockwise)
             _ftlAngle = _ftlAngle.Reduced();
+            // WOLFGATE(Cockpit): rotating an FTL destination must not also scroll its MFD page.
+            if (WfCockpitControls)
+                args.Handle();
             return;
         }
 
@@ -282,6 +285,10 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         var viewBox = new Box2(Offset - WorldRangeVector, Offset + WorldRangeVector);
         var viewportObjects = GetViewportMapObjects(matty, mapObjects);
         _viewportExclusions.Clear();
+
+        DrawStarSystem(handle, matty);
+        DrawSectorTerritory(handle, matty); // WOLFGATE(SectorControl): faction territory fills, borders and legend on the sector map.
+        DrawDroneRings(handle, matty, viewedMapUid); // WOLFGATE(DroneRings): draw rings where drones start to spawn.
 
         // Draw our FTL range + no FTL zones
         // Do it up here because we want this layered below most things.
@@ -559,8 +566,6 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
             }
         }
 
-        DrawNavMarkers(handle, matty);
-
         // Draw the coordinates
         var mapOffset = MidPointVector;
 
@@ -584,66 +589,6 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         }
 
         DrawData(handle, coordsText, coordColor);
-    }
-
-    private void DrawNavMarkers(DrawingHandleScreen handle, Matrix3x2 matty)
-    {
-        if (_shuttleEntity is not { } shuttle ||
-            !EntManager.TryGetComponent(shuttle, out ShuttleNavMarkerComponent? markers) ||
-            markers.Markers.Count == 0)
-            return;
-
-        foreach (var marker in markers.Markers)
-        {
-            var worldPos = marker.Coordinates;
-            var mapId = new MapId(marker.MapId);
-
-            if (marker.Kind == ShuttleNavMarkerKind.Entity &&
-                marker.Target is { } net &&
-                EntManager.TryGetEntity(net, out var target))
-            {
-                var live = _xformSystem.GetMapCoordinates(target.Value);
-                if (live.MapId != MapId.Nullspace)
-                {
-                    worldPos = live.Position;
-                    mapId = live.MapId;
-                }
-            }
-
-            if (mapId != ViewingMap)
-                continue;
-
-            var adjustedPos = Vector2.Transform(worldPos, matty);
-            var uiPos = ScalePosition(adjustedPos with { Y = -adjustedPos.Y });
-            var color = marker.Color;
-            var size = 8f * UIScale;
-            var verts = new Vector2[]
-            {
-                uiPos + new Vector2(0f, -size),
-                uiPos + new Vector2(size, 0f),
-                uiPos + new Vector2(0f, size),
-                uiPos + new Vector2(-size, 0f),
-            };
-
-            var unknownMassLabelStr = string.Empty;
-            var hideLabel = false;
-            if (EntManager.GetEntity(marker.Target) is { } targetUid && targetUid.IsValid())
-            {
-                unknownMassLabelStr = _detection.HandleUnknownMassLabel(targetUid);
-                if (EntManager.TryGetComponent<IFFComponent>(targetUid, out var iff))
-                    hideLabel = (iff.Flags & IFFFlags.HideLabel) != 0x0;
-            }
-
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts, color.WithAlpha(0.3f));
-            handle.DrawLine(verts[0], verts[1], color);
-            handle.DrawLine(verts[1], verts[2], color);
-            handle.DrawLine(verts[2], verts[3], color);
-            handle.DrawLine(verts[3], verts[0], color);
-            handle.DrawCircle(uiPos, 3f * UIScale, color, true);
-
-            var labelPos = uiPos + new Vector2(8f, -6f);
-            handle.DrawString(_font, labelPos, hideLabel ? unknownMassLabelStr : marker.Name, color);
-        }
     }
 
     private void AddMapObject(List<Vector2> edges, List<Vector2> verts, ValueList<Vector2> mapObject)

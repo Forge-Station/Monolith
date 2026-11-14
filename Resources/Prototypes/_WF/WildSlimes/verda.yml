@@ -1,0 +1,408 @@
+# Verda's (Asclepiu's) wild slimes: the dew slime and the bloom slime bred from it. Clear pond-jelly patches ringed by
+# reeds, each over a flooded grotto in the Underkarst. The surface layers (from WFBiomeAsclepiu) and the cavern layers
+# (from WFCavernBiomeAsclepiu) share both noises: the cavern's seed is the surface's plus 7901, so each cavern noise seed
+# is the surface one less 7901, and lower thresholds make each grotto a little wider than its patch.
+
+- type: wfWildSlimeHabitat
+  id: WFWildSlimesVerda
+  surface: WFSurfaceAsclepiu
+  breed: WFDewMutation
+  babyPrototype: WFMobSlimeTranslucentBaby
+  adultPrototype: WFMobSlimeTranslucentAdult
+  adultChance: 0.3
+  patchTemplate: WFVerdaSlimeZone
+  patchTile: WFFloorVerdaWaterJelly
+  grottoTile: WFCavernFloorVerdaWaterJelly
+  minPatchTiles: 24
+  surfaceSlimes: 3
+  grottoSlimes: 2
+  respawnDelay: 600
+
+# Water doesn't hurt the dew slime: it heals it, splashed on or bathed in. It grows and splits only in mild air, and
+# only while it sits in water.
+- type: breed
+  breedName: dew slime
+  id: WFDewMutation
+  producedExtract: WFDewSlimeExtract
+  components:
+  - type: Slime
+    breed: WFDewMutation
+    slimeColor: "#5cc8b0"
+    defaultSlimeProto: WFMobSlimeTranslucentBaby
+    maxOffspring: 4
+    mutationChance: 0.1
+    potentialMutations:
+    - WFBloomMutation
+  - type: WFSlimeClimate
+    minTemperature: 283
+    maxTemperature: 303
+    underfoot:
+    - Water
+    unsettled: wf-wild-slime-unsettled-water
+  - type: Reactive
+    groups:
+      Flammable:
+      - Touch
+      Extinguish:
+      - Touch
+    reactions:
+    - reagents:
+      - Water
+      - SpaceCleaner
+      methods:
+      - Touch
+      effects:
+      - !type:WashCreamPieReaction {}
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -1
+            Burn: -1
+  - type: WFReagentBathHeal
+    reagents:
+    - Water
+    heal:
+      groups:
+        Brute: -0.5
+        Burn: -0.5
+
+# Bred only from dew slimes, a flower on its back; it breeds back to them.
+- type: breed
+  breedName: bloom slime
+  id: WFBloomMutation
+  producedExtract: WFBloomSlimeExtract
+  components:
+  - type: Slime
+    breed: WFBloomMutation
+    slimeColor: "#ee8cc8"
+    defaultSlimeProto: WFMobSlimeTranslucentBaby
+    maxOffspring: 3
+    mutationChance: 0.3
+    potentialMutations:
+    - WFDewMutation
+  - type: WFSlimeClimate
+    minTemperature: 283
+    maxTemperature: 303
+    underfoot:
+    - Water
+    unsettled: wf-wild-slime-unsettled-water
+  - type: Reactive
+    groups:
+      Flammable:
+      - Touch
+      Extinguish:
+      - Touch
+    reactions:
+    - reagents:
+      - Water
+      - SpaceCleaner
+      methods:
+      - Touch
+      effects:
+      - !type:WashCreamPieReaction {}
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -1
+            Burn: -1
+  - type: WFReagentBathHeal
+    reagents:
+    - Water
+    heal:
+      groups:
+        Brute: -0.5
+        Burn: -0.5
+
+# Admin and mapper spawners; neither is sold or bred from anything else.
+- type: entity
+  parent: MobSlimeXenobioBabyPending
+  id: WFMobSlimeBabyDew
+  name: dew slime
+  components:
+  - type: PendingSlimeSpawn
+    basePrototype: WFMobSlimeTranslucentBaby
+    breed: WFDewMutation
+
+- type: entity
+  parent: MobSlimeXenobioBabyPending
+  id: WFMobSlimeBabyBloom
+  name: bloom slime
+  components:
+  - type: PendingSlimeSpawn
+    basePrototype: WFMobSlimeTranslucentBaby
+    breed: WFBloomMutation
+
+# Plasma grows two healing reagents, blood grows produce, and water wakes the brambles.
+- type: entity
+  id: WFDewSlimeExtract
+  parent: BaseSlimeExtract
+  name: dew slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#5cc8b0"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: Bicaridine
+          amount: 10
+        - !type:XenobioAdjustSolution
+          reagent: Dermaline
+          amount: 10
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: RandomProduce
+          number: 3
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSpawnEntity
+          entity: WFVerdaPlantBramble
+          number: 3
+  - type: Tag
+    tags:
+    - WFXenobiologyDewExtract
+
+# Plasma grows a plant booster, blood perks up the plants round it, and water wakes a thicket of brambles.
+- type: entity
+  id: WFBloomSlimeExtract
+  parent: BaseSlimeExtract
+  name: bloom slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ee8cc8"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: RobustHarvest
+          amount: 15
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: PlantHolder
+          range: 5
+          effect: !type:PlantAdjustHealth
+            amount: 30
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSpawnEntity
+          entity: WFVerdaPlantBramble
+          number: 6
+  - type: Tag
+    tags:
+    - WFXenobiologyBloomExtract
+
+- type: Tag
+  id: WFXenobiologyDewExtract
+
+- type: Tag
+  id: WFXenobiologyBloomExtract
+
+- type: xenobiologyBounty
+  id: WFBountyDewExtract
+  pointsAwarded: 15000
+  entries:
+  - name: bounty-item-wf-dew-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologyDewExtract
+
+- type: xenobiologyBounty
+  id: WFBountyBloomExtract
+  pointsAwarded: 40000
+  entries:
+  - name: bounty-item-wf-bloom-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologyBloomExtract
+
+# The id says "water" so the planet map colours the pond jelly as water.
+- type: tile
+  id: WFFloorVerdaWaterJelly
+  parent: WFFloorVerdaPondMud
+  name: tiles-wf-verda-water-jelly
+  sprite: /Textures/_WF/WildSlimes/Verda/Tiles/water_jelly.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+  transparent: true
+  footstepSounds:
+    collection: FootstepWater
+
+# The grotto floor: the same jelly, solid, since nothing lies below the Underkarst.
+- type: tile
+  id: WFCavernFloorVerdaWaterJelly
+  parent: WFFloorVerdaWaterJelly
+  sprite: /Textures/_WF/WildSlimes/Verda/Tiles/water_jelly_cavern.png
+  transparent: false
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+- type: biomeTemplate
+  id: WFVerdaSlimeZone
+  layers:
+  # Reeds ring each patch: the patch noise a little under the patch's threshold.
+  - !type:BiomeMetaLayer
+    template: WFVerdaSlimeReeds
+    threshold: 0.83
+    noise: { seed: 231, noiseType: OpenSimplex2, frequency: 0.03 }
+  - !type:BiomeMetaLayer
+    template: WFVerdaSlimePatch
+    threshold: 0.89
+    noise: { seed: 231, noiseType: OpenSimplex2, frequency: 0.03 }
+
+- type: biomeTemplate
+  id: WFCavernSlimeZoneAsclepiu
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernSlimeGrottoAsclepiu
+    threshold: 0.88
+    noise: { seed: -7670, noiseType: OpenSimplex2, frequency: 0.03 }
+
+- type: biomeTemplate
+  id: WFVerdaSlimeReeds
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, FloorPlanetDirt, WFFloorVerdaMeadowGrass, WFFloorVerdaForestGrass, WFFloorVerdaPondMud, WFFloorVerdaMarshGrass, WFFloorVerdaMarshMud, WFFloorVerdaShoreSand]
+    entities: [AuroraFloraBushKonyangReeds, AuroraAssunzioneGrassAlt, CoyoteFloraTallgrass9]
+    threshold: -0.2
+    noise: { seed: 236, noiseType: OpenSimplex2, frequency: 2.5 }
+
+- type: biomeTemplate
+  id: WFVerdaSlimePatch
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaWaterJelly
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaWaterJelly]
+    entities: [VoreFloraLily1, VoreFloraLily2]
+    threshold: 0.9
+    noise: { seed: 237, noiseType: OpenSimplex2, frequency: 2.5 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaWaterJelly]
+    entities: [WFVerdaDewMound, WFVerdaDewMoundSmall]
+    threshold: 0.88
+    noise: { seed: 233, noiseType: OpenSimplex2, frequency: 1 }
+
+# A flooded grotto: jelly floor with pools of water and rock columns, glowcaps to light it and pale reeds in the shallows.
+- type: biomeTemplate
+  id: WFCavernSlimeGrottoAsclepiu
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorVerdaWaterJelly
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorVerdaWaterJelly]
+    entities: [WFCavernGlowcaps]
+    threshold: 0.9
+    noise: { seed: 235, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorVerdaWaterJelly]
+    entities: [WFCavePaleReeds]
+    threshold: 0.9
+    noise: { seed: 238, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorVerdaWaterJelly]
+    entities: [WFVerdaDewMound, WFVerdaDewMoundSmall]
+    threshold: 0.9
+    noise: { seed: 234, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorVerdaWaterJelly]
+    entities: [WallRockAndesite]
+    threshold: 0.35
+    noise: { seed: 240, noiseType: OpenSimplex2, frequency: 0.35 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorVerdaWaterJelly]
+    entities: [MonoFloorWaterEntity]
+    threshold: 0.45
+    noise: { seed: 239, noiseType: OpenSimplex2, frequency: 0.15 }
+
+- type: entity
+  parent: WFCarcinomaJellyMound
+  id: WFVerdaDewMound
+  name: dew mound
+  description: A clear, cool heap of jelly beaded with water. Something small moves inside it.
+  components:
+  - type: Sprite
+    sprite: _WF/WildSlimes/Verda/dew_mound.rsi
+    state: mound
+
+- type: entity
+  parent: WFVerdaDewMound
+  id: WFVerdaDewMoundSmall
+  name: dew blob
+  description: A small wobbling lump of clear jelly.
+  components:
+  - type: Sprite
+    state: blob

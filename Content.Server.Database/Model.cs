@@ -21,6 +21,10 @@ namespace Content.Server.Database
 
         public DbSet<Preference> Preference { get; set; } = null!;
         public DbSet<Profile> Profile { get; set; } = null!;
+        // WOLFGATE(Genitals) START: consent system ported from HardLight
+        public DbSet<ConsentSettings> ConsentSettings { get; set; } = null!;
+        public DbSet<ConsentFreetextReadReceipt> ConsentFreetextReadReceipt { get; set; } = null!;
+        // WOLFGATE END
         public DbSet<AssignedUserId> AssignedUserId { get; set; } = null!;
         public DbSet<Player> Player { get; set; } = default!;
         public DbSet<Admin> Admin { get; set; } = null!;
@@ -47,6 +51,15 @@ namespace Content.Server.Database
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
         public DbSet<CompanyMember> CompanyMembers { get; set; } = null!;
+        public DbSet<WayfarerSafetyDepositBox> WayfarerSafetyDepositBox { get; set; } = null!;
+        public DbSet<WayfarerSafetyDepositBoxItem> WayfarerSafetyDepositBoxItem { get; set; } = null!;
+        // WOLFGATE(CustomMarkings) START: player-drawn marking art and each player's library of it
+        public DbSet<WolfgateCustomMarkingArt> WolfgateCustomMarkingArt { get; set; } = null!;
+        public DbSet<WolfgateCustomMarking> WolfgateCustomMarking { get; set; } = null!;
+        // WOLFGATE END
+        public DbSet<WolfgateContractStanding> WolfgateContractStanding { get; set; } = null!;
+        public DbSet<WolfgateFeedbackReport> WolfgateFeedbackReport { get; set; } = null!; // WOLFGATE(Feedback): player bug reports and suggestions
+        public DbSet<WolfgateGameScore> WolfgateGameScore { get; set; } = null!; // WOLFGATE(GameHub): best level scores
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -57,6 +70,52 @@ namespace Content.Server.Database
             modelBuilder.Entity<Profile>()
                 .HasIndex(p => new {p.Slot, PrefsId = p.PreferenceId})
                 .IsUnique();
+
+            // WOLFGATE(Genitals) START: consent system ported from HardLight
+            modelBuilder.Entity<ConsentSettings>()
+                .HasIndex(c => new { c.UserId, c.ProfileId })
+                .IsUnique();
+
+            modelBuilder.Entity<ConsentSettings>()
+                .HasOne(c => c.Profile)
+                .WithOne(p => p.ConsentSettings)
+                .HasForeignKey<ConsentSettings>(c => c.ProfileId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<ConsentToggle>()
+                .HasIndex(c => new { c.ConsentSettingsId, c.ToggleProtoId })
+                .IsUnique();
+
+            modelBuilder.Entity<ConsentToggle>()
+                .HasOne(c => c.ConsentSettings)
+                .WithMany(c => c.ConsentToggles)
+                .HasForeignKey(c => c.ConsentSettingsId)
+                .IsRequired();
+
+            modelBuilder.Entity<ConsentFreetextReadReceipt>()
+                .HasIndex(c => new { c.ReaderUserId, c.ReadConsentSettingsId })
+                .IsUnique();
+
+            modelBuilder.Entity<ConsentFreetextReadReceipt>()
+                .HasOne(c => c.ReadConsentSettings)
+                .WithMany(c => c.ReadReceipts)
+                .HasForeignKey(c => c.ReadConsentSettingsId)
+                .IsRequired();
+            // WOLFGATE END
+
+            // Mono start
+            modelBuilder.Entity<ProfileComponent>()
+                .HasOne(e => e.Profile)
+                .WithMany(e => e.Components)
+                .HasForeignKey(e => e.ProfileId)
+                .IsRequired();
+
+            modelBuilder.Entity<ProfileItem>()
+                .HasOne(e => e.Profile)
+                .WithMany(e => e.Items)
+                .HasForeignKey(e => e.ProfileId)
+                .IsRequired();
+            // Mono end
 
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
@@ -380,6 +439,60 @@ namespace Content.Server.Database
                 .HasForeignKey(w => w.PlayerUserId)
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Wayfarer Safety Deposit Box configuration
+            modelBuilder.Entity<WayfarerSafetyDepositBox>()
+                .HasIndex(b => b.BoxId)
+                .IsUnique();
+
+            modelBuilder.Entity<WayfarerSafetyDepositBox>()
+                .HasIndex(b => b.OwnerUserId);
+
+            modelBuilder.Entity<WayfarerSafetyDepositBoxItem>()
+                .HasOne(i => i.Box)
+                .WithMany(b => b.Items)
+                .HasForeignKey(i => i.BoxId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<WayfarerSafetyDepositBoxItem>()
+                .HasIndex(i => i.BoxId);
+
+            // WOLFGATE(CustomMarkings) START: a library entry points at its art, which outlives it
+            modelBuilder.Entity<WolfgateCustomMarking>()
+                .HasIndex(m => m.PlayerUserId);
+
+            modelBuilder.Entity<WolfgateCustomMarking>()
+                .HasOne(m => m.Art)
+                .WithMany()
+                .HasForeignKey(m => m.ArtHash)
+                .HasConstraintName("FK_wolfgate_custom_marking_art")
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Counted by who saved it and when, to cap how much new art one player stores in a day.
+            modelBuilder.Entity<WolfgateCustomMarkingArt>()
+                .HasIndex(a => new { a.UploaderUserId, a.UploadedAt });
+            // WOLFGATE END
+
+            // WOLFGATE(Feedback) START: counted by who sent it and when for the daily limit, and listed by status
+            modelBuilder.Entity<WolfgateFeedbackReport>()
+                .HasIndex(r => new { r.PlayerUserId, r.CreatedAt });
+
+            modelBuilder.Entity<WolfgateFeedbackReport>()
+                .HasIndex(r => r.Status);
+            // WOLFGATE END
+
+            // One standing row per player, character and contractor. Lookups use SingleOrDefault.
+            modelBuilder.Entity<WolfgateContractStanding>()
+                .HasIndex(s => new { s.PlayerUserId, s.CharacterName, s.Contractor })
+                .IsUnique();
+
+            // WOLFGATE(GameHub): one best score per player, game and level
+            modelBuilder.Entity<WolfgateGameScore>()
+                .HasIndex(s => new { s.PlayerUserId, s.Game, s.Level })
+                .IsUnique();
+
+            modelBuilder.Entity<WolfgateGameScore>()
+                .HasIndex(s => s.Game);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -402,10 +515,6 @@ namespace Content.Server.Database
         public int SelectedCharacterSlot { get; set; }
         public string AdminOOCColor { get; set; } = null!;
         public long MonoCoins { get; set; } = 0;
-        // Forge-Change: sponsor cosmetics. Empty string means "not set, use defaults".
-        public string SponsorOOCColor { get; set; } = "";
-        public string SponsorLOOCColor { get; set; } = "";
-        public string SponsorGhostSkin { get; set; } = "";
         public List<Profile> Profiles { get; } = new();
     }
 
@@ -415,14 +524,11 @@ namespace Content.Server.Database
         public int Slot { get; set; }
         [Column("char_name")] public string CharacterName { get; set; } = null!;
         public string FlavorText { get; set; } = null!;
-        public string Nationality { get; set; } = null!; // Forge-change: take _EE nationality
         public int Age { get; set; }
         public int BankBalance { get; set; }
         public string Sex { get; set; } = null!;
         public string Gender { get; set; } = null!;
         public string Species { get; set; } = null!;
-        public string BarkVoice { get; set; } = null!; // Corvax-Frontier-Barks
-        public string Voice { get; set; } = null!; // Corvax-TTS
         [Column(TypeName = "jsonb")] public JsonDocument? Markings { get; set; } = null!;
         public string HairName { get; set; } = null!;
         public string HairColor { get; set; } = null!;
@@ -443,9 +549,140 @@ namespace Content.Server.Database
 
         public string Company { get; set; } = "None";
 
+        // WOLFGATE(Humanoid): player-set species name override, empty when unused.
+        [Column("custom_species_name")] public string CustomSpeciesName { get; set; } = "";
+
+        // WOLFGATE(Genitals): creator anatomy as versioned JSON; empty until the profile is migrated or saved.
+        [Column("genitals")] public string Genitals { get; set; } = "";
+
+        // WOLFGATE(EmoteVoices) START: scream and laugh chosen in the creator; empty keeps the species' own.
+        [Column("scream_voice")] public string ScreamVoice { get; set; } = "";
+        [Column("laugh_voice")] public string LaughVoice { get; set; } = "";
+        // WOLFGATE END
+
+        // Mono start
+        public string[] Flags { get; set; } = [];
+        public List<ProfileComponent> Components { get; } = [];
+        public List<ProfileItem> Items { get; } = [];
+        // Mono end
+
+        // WOLFGATE(Headshot): image URL shown on examine, empty when unused.
+        [Column("headshot_url")] public string HeadshotUrl { get; set; } = "";
+
+        // WOLFGATE(Species): saves the Mismatched parts option (every species' markings, hair and facial hair)
+        [Column("mismatched_parts")] public bool MismatchedParts { get; set; }
+
+        // WOLFGATE(CustomMarkings): the custom markings worn, as hash:placement pairs; empty for none.
+        [Column("custom_markings")] public string CustomMarkings { get; set; } = "";
+
+        // WOLFGATE(LegStyle): the legs picked in the creator, 0 for the species' own.
+        [Column("leg_stance")] public int LegStance { get; set; }
+
+        // WOLFGATE(Biotype): organic or synthetic body, 0 for the species' own.
+        [Column("biotype")] public int Biotype { get; set; }
+
+        // WOLFGATE(Augments): augments picked per slot (slot:augment[:style] entries) and priced ones paid for.
+        [Column("augments")] public string Augments { get; set; } = "";
+        [Column("augment_unlocks")] public string AugmentUnlocks { get; set; } = "";
+
+        // WOLFGATE(BloodColour): blood and flesh colour as hex, null for the species' own.
+        [Column("blood_color")] public string? BloodColor { get; set; }
+
+        // WOLFGATE(ChatFont): the wfChatFont prototype id, empty for the default.
+        [Column("chat_font")] public string ChatFont { get; set; } = "";
+
+        // WOLFGATE(Voice): the voice settings as JSON, null in rows saved before voices existed.
+        [Column("speech_voice")] public string? SpeechVoice { get; set; }
+
+        // WOLFGATE(TypingBubble): the typingIndicator prototype id, null for the species' own.
+        [Column("typing_indicator")] public string? TypingIndicator { get; set; }
+
         public int PreferenceId { get; set; }
         public Preference Preference { get; set; } = null!;
+
+        public ConsentSettings? ConsentSettings { get; set; } // WOLFGATE(Genitals): consent system
     }
+
+    // WOLFGATE(Genitals) START: consent system ported from HardLight
+    #region Consent Settings
+
+    public class ConsentSettings
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [ForeignKey("Player")]
+        public Guid UserId { get; set; }
+
+        // If this is non-null it means these settings are specific to that character rather than global.
+        [ForeignKey("Profile")]
+        public int? ProfileId { get; set; }
+
+        [Required]
+        public string ConsentFreetext { get; set; } = null!;
+
+        [Required]
+        public DateTime ConsentFreetextUpdatedAt { get; set; }
+
+        // Relations
+        public List<ConsentToggle> ConsentToggles { get; set; } = null!;
+        public List<ConsentFreetextReadReceipt> ReadReceipts { get; set; } = null!;
+        public Profile? Profile { get; set; }
+    }
+
+    public class ConsentToggle
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [ForeignKey("ConsentSettings")]
+        public int ConsentSettingsId { get; set; }
+
+        [Required]
+        public string ToggleProtoId { get; set; } = null!;
+
+        [Required]
+        public string ToggleProtoState { get; set; } = null!;
+
+        // Relations
+        public ConsentSettings ConsentSettings { get; set; } = null!;
+    }
+
+    public class ConsentFreetextReadReceipt
+    {
+        public int Id { get; set; }
+
+        public int ReadConsentSettingsId { get; set; }
+        public Guid ReaderUserId { get; set; }
+
+        public DateTime ReadAt { get; set; }
+
+        // Relations
+        public ConsentSettings ReadConsentSettings { get; set; } = null!;
+    }
+
+    #endregion
+    // WOLFGATE END
+
+    // Mono start
+    public class ProfileComponent
+    {
+        public int Id { get; set; }
+        public int ProfileId { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public string Data { get; set; } = null!;
+        public bool Sticky { get; set; }
+    }
+
+    public class ProfileItem
+    {
+        public int Id { get; set; }
+        public int ProfileId { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public string Data { get; set; } = null!;
+        public bool Sticky { get; set; }
+    }
+    // Mono end
 
     public class Job
     {
@@ -507,6 +744,14 @@ namespace Content.Server.Database
         /// </summary>
         [MaxLength(256)]
         public string? EntityName { get; set; }
+
+        // WOLFGATE(Roles) START: custom job title
+        /// <summary>
+        /// Player-written job title, for roles that allow one.
+        /// </summary>
+        [MaxLength(256)]
+        public string? CustomJobTitle { get; set; }
+        // WOLFGATE END
 
         /// <summary>
         /// Store the saved loadout groups. These may get validated and removed when loaded at runtime.
@@ -1368,4 +1613,276 @@ namespace Content.Server.Database
         public string CompanyId { get; set; } = default!;
     }
     // Mono-End
+
+    // Wayfarer Safety Deposit Box Tables
+    public class WayfarerSafetyDepositBox
+    {
+        [Key]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Unique identifier for this deposit box
+        /// </summary>
+        public Guid BoxId { get; set; }
+
+        /// <summary>
+        /// The user ID of the owner
+        /// </summary>
+        public Guid OwnerUserId { get; set; }
+
+        /// <summary>
+        /// The character profile index (slot number) of the owner
+        /// </summary>
+        public int CharacterIndex { get; set; }
+
+        /// <summary>
+        /// Display name of the owner when the box was created
+        /// </summary>
+        [Required]
+        public string OwnerName { get; set; } = null!;
+
+        /// <summary>
+        /// Optional nickname for the box (from label)
+        /// </summary>
+        public string? Nickname { get; set; }
+
+        /// <summary>
+        /// Entity prototype for the box.
+        /// </summary>
+        [Required]
+        public string ProtoId { get; set; } = null!;
+
+        /// <summary>
+        /// When the box was purchased
+        /// </summary>
+        public DateTime PurchaseDate { get; set; }
+
+        /// <summary>
+        /// When the box was last withdrawn from the console. Null if currently stored in database.
+        /// Used to track boxes that are "in the world" vs "safely stored".
+        /// </summary>
+        public DateTime? LastWithdrawn { get; set; }
+
+        /// <summary>
+        /// The round ID when the box was last withdrawn. Null if currently stored in database.
+        /// Used to detect if a box was lost (withdrawn in a previous round but never deposited back).
+        /// </summary>
+        public int? LastWithdrawnRoundId { get; set; }
+
+        /// <summary>
+        /// Items stored in this box
+        /// </summary>
+        public List<WayfarerSafetyDepositBoxItem> Items { get; set; } = new();
+    }
+
+    public class WayfarerSafetyDepositBoxItem
+    {
+        [Key]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Foreign key to the deposit box
+        /// </summary>
+        public int BoxId { get; set; }
+
+        public WayfarerSafetyDepositBox Box { get; set; } = null!;
+
+        /// <summary>
+        /// Serialized entity data (YAML format)
+        /// </summary>
+        [Required]
+        public string EntityData { get; set; } = null!;
+
+        /// <summary>
+        /// When this item was deposited
+        /// </summary>
+        public DateTime DepositDate { get; set; }
+    }
+
+    // WOLFGATE(CustomMarkings) START: player-drawn marking art and each player's library of it
+    /// <summary>
+    /// The art of a custom marking, stored once however many players and characters use it. A row outlives the
+    /// library entries that point at it, as saved characters refer to art by hash; the server's cleanup deletes
+    /// rows that nothing has used for long enough.
+    /// </summary>
+    public class WolfgateCustomMarkingArt
+    {
+        /// <summary>Hash of the art: its pixels, and its frame times and erase mask when it has them.</summary>
+        [Key, MaxLength(64)]
+        public string Hash { get; set; } = null!;
+
+        /// <summary>The four facings of every frame as one PNG sheet.</summary>
+        [Required]
+        public byte[] Png { get; set; } = null!;
+
+        /// <summary>
+        /// How long each frame of an animated marking shows: two bytes of milliseconds for each frame, low byte
+        /// first. Null for a still marking.
+        /// </summary>
+        public byte[]? FrameTimes { get; set; }
+
+        /// <summary>The pixels of the body the marking erases, a bit for each pixel of each facing. Null for none.</summary>
+        public byte[]? Erase { get; set; }
+
+        /// <summary>The player who first saved this art.</summary>
+        public Guid UploaderUserId { get; set; }
+
+        public DateTime UploadedAt { get; set; }
+
+        /// <summary>Set by an admin: the art is no longer sent to anyone, and can't be saved again.</summary>
+        public bool Blocked { get; set; }
+
+        /// <summary>
+        /// When the server's cleanup first found nothing using this art: no library holds it and no saved character
+        /// wears it. Null while it is in use, or not looked at yet.
+        /// </summary>
+        public DateTime? UnusedSince { get; set; }
+    }
+
+    /// <summary>One marking in a player's library.</summary>
+    public class WolfgateCustomMarking
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public Guid PlayerUserId { get; set; }
+
+        [Required, MaxLength(32)]
+        public string Name { get; set; } = null!;
+
+        [Required, MaxLength(64)]
+        public string ArtHash { get; set; } = null!;
+
+        public WolfgateCustomMarkingArt Art { get; set; } = null!;
+
+        /// <summary>Where the marking is drawn on a body (CustomMarkingPlacement).</summary>
+        public int Placement { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+    }
+    // WOLFGATE END
+
+    // WOLFGATE(Feedback) START: player bug reports and suggestions, read by the SSymphony panel
+    /// <summary>
+    /// A bug report or suggestion a player sent from the game, read by the SSymphony panel. Staff move
+    /// <see cref="Status"/> on, through /symphony/feedback/status or by writing the row, and the game tells the player.
+    /// </summary>
+    public class WolfgateFeedbackReport
+    {
+        [Key]
+        public int Id { get; set; }
+
+        /// <summary>"bug", "suggestion" or "survey" (the end of shift survey).</summary>
+        [Required, MaxLength(16)]
+        public string Kind { get; set; } = null!;
+
+        /// <summary>The area the player filed it under (FeedbackRules.Categories).</summary>
+        [Required, MaxLength(32)]
+        public string Category { get; set; } = null!;
+
+        /// <summary>"minor", "major" or "blocking" as the player rated a bug. Null for a suggestion.</summary>
+        [MaxLength(16)]
+        public string? Severity { get; set; }
+
+        [Required, MaxLength(100)]
+        public string Title { get; set; } = null!;
+
+        [Required]
+        public string Description { get; set; } = null!;
+
+        /// <summary>How to make a bug happen again, when the player said.</summary>
+        public string? Steps { get; set; }
+
+        /// <summary>What the player expected instead, when they said.</summary>
+        public string? Expected { get; set; }
+
+        /// <summary>Surveys: how much the player enjoyed the shift, 1 to 5. Null for other kinds.</summary>
+        public int? Rating { get; set; }
+
+        /// <summary>Surveys: what frustrated the player. Their answer on issues they hit is the description.</summary>
+        public string? Frustrations { get; set; }
+
+        public Guid PlayerUserId { get; set; }
+
+        /// <summary>The player's account name when they sent it.</summary>
+        [Required, MaxLength(64)]
+        public string PlayerName { get; set; } = null!;
+
+        public DateTime CreatedAt { get; set; }
+
+        /// <summary>The round it was sent in; 0 before the first round.</summary>
+        public int RoundId { get; set; }
+
+        [Required, MaxLength(128)]
+        public string ServerName { get; set; } = null!;
+
+        /// <summary>build.version of the server: the commit a published build was made from. Empty on a dev build.</summary>
+        [Required, MaxLength(128)]
+        public string BuildVersion { get; set; } = null!;
+
+        /// <summary>Everything the server and client could say about the moment, as JSON (see the module README).</summary>
+        [Required, Column(TypeName = "jsonb")]
+        public string Context { get; set; } = null!;
+
+        /// <summary>A JPEG or PNG of the player's screen, when they attached one.</summary>
+        public byte[]? Screenshot { get; set; }
+
+        /// <summary>"pending" when sent, then "checked", "fixed" or "non_issue" (FeedbackRules.Statuses).</summary>
+        [Required, MaxLength(16)]
+        public string Status { get; set; } = "pending";
+
+        /// <summary>What staff wrote to the player about it, shown with the status.</summary>
+        public string? StaffMessage { get; set; }
+
+        public DateTime? StatusChangedAt { get; set; }
+
+        /// <summary>
+        /// True while the player has yet to be told of the status. Whoever changes the status sets it; the game
+        /// shows the notice, at login if need be, and clears it once the player has closed it.
+        /// </summary>
+        public bool NotifyPlayer { get; set; }
+    }
+    // WOLFGATE END
+
+    public class WolfgateContractStanding
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public Guid PlayerUserId { get; set; }
+
+        [Required, MaxLength(64)]
+        public string CharacterName { get; set; } = "";
+
+        [Required, MaxLength(64)]
+        public string Contractor { get; set; } = "";
+
+        public int Points { get; set; }
+
+        /// <summary>The last round its drift toward neutral was applied in.</summary>
+        public int LastRound { get; set; }
+
+        public DateTime Updated { get; set; }
+    }
+
+    // WOLFGATE(GameHub): a player's best score on one level of a hub game
+    public class WolfgateGameScore
+    {
+        [Key]
+        public int Id { get; set; }
+
+        public Guid PlayerUserId { get; set; }
+
+        [Required, MaxLength(64)]
+        public string PlayerName { get; set; } = "";
+
+        [Required, MaxLength(64)]
+        public string Game { get; set; } = "";
+
+        public int Level { get; set; }
+
+        public int Score { get; set; }
+
+        public DateTime Time { get; set; }
+    }
 }

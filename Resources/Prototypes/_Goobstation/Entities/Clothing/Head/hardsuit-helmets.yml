@@ -22,6 +22,7 @@
   - type: SpeechSoundsReplacer
     speechSounds: Chrono
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.10
@@ -33,67 +34,56 @@
         Caustic: 0.10
 
 # cybersun stealth
+
 - type: entity
-  parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Normal, ShowSecurityIcons, BaseClothingHelmetMassScanner] # Forge-change add ClothingNightVision and replace ClothingHeadHardsuitBase by ClothingHeadHardsuitBaseMilitary, add BaseClothingHelmetMassScanner
+  parent: NFClothingHeadHardsuitWithLightBase # mono - stupid NF clothing parent.
   id: ClothingHeadHelmetHardsuitCybersunStealth
   suffix: stealth
-  name: cybersun stealth hardsuit helmet
+  name: stealth hardsuit helmet
   description: A helmet with plating for stealth operations.
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Head/Hardsuits/cybersunstealth.rsi # Forge-change
+    sprite: _Goobstation/Clothing/Head/Hardsuits/cybersunstealth.rsi
   - type: Clothing
-    sprite: _Goobstation/Clothing/Head/Hardsuits/cybersunstealth.rsi # Forge-change
-    equippedState: off-equipped-HELMET # Forge-change
+    sprite: _Goobstation/Clothing/Head/Hardsuits/cybersunstealth.rsi
+  - type: PointLight
+    color: green
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.95
         Slash: 0.95
         Piercing: 0.95
         Heat: 0.95
-  #Forge-change-start
+  - type: ClothingGrantComponent
+    component:
+    - type: Stealth
+      enabledOnDeath: false
+      enabledOnCrit: false
+      # WOLFGATE(Stealth) START: full invisibility, as Monolith#4845 had it.
+      # minVisibility: 0.15 # Mono: Changed to be not fully invisible
+      # maxVisibility: 0.6 # Mono: Changed to be partially invisible
+      # WOLFGATE END
+    - type: StealthOnMove
+      passiveVisibilityRate: -0.4
+      movementVisibilityRate: 0.4
+  # WOLFGATE(Stealth): stealth toggle, the CV-53 helmet's night vision and a thermal pulse.
+  - type: WFStealthToggle
+  - type: NightVision # Gen 4 quadtube
+    relayOverlay: true
+    goggleEffect: true
+    action: ActionToggleNightVision
+    viewCircleRadius: 400
+    viewCircleCount: 4
+    viewCircleSpacing: 260
+    phosphorColor: "#41D7D9"
+    lightingColor: "#FFFFFF32"
   - type: ThermalVision
-    flashDurationMultiplier: 2
-    pulseTime: 3
+    pulseTime: 1
     isEquipment: true
     toggleAction: PulseThermalVision
-  - type: ToggleClothing
-    action: ActionTogglePhaseCloak
-    disableOnUnequip: true
-  - type: ComponentToggler
-    parent: true
-    components:
-    - type: Stealth
-      minVisibility: -1.5
-      maxVisibility: 1
-      damageVisibilityModifier: 0.5
-      attackVisibilityModifier: 1.5
-    - type: StealthOnMove
-      passiveVisibilityRate: -0.33
-      movementVisibilityRate: 0.17
-  - type: UseDelay
-    delay: 2
-  - type: PowerCellDraw
-    drawRate: 0.5
-  - type: ToggleCellDraw
-  - type: ClothingBatteryAlert
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellInternalHardsuit
-        disableEject: true
-        swap: false
-  #Forge-change-end
-  #- type: ClothingGrantComponent # Forge-change
-  #  component: # Forge-change
-  #  - type: Stealth # Forge-change
-  #    minVisibility: 0.15 # Mono: Changed to be not fully invisible # Forge-change
-  #    maxVisibility: 0.6 # Mono: Changed to be partially invisible # Forge-change
-  #  - type: StealthOnMove # Forge-change
-  #    passiveVisibilityRate: -0.4 # Forge-change
-  #    movementVisibilityRate: 0.4 # Forge-change
+

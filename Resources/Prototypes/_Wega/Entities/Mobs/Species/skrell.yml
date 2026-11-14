@@ -77,23 +77,3 @@
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
 
-- type: entity
-  parent: MobHumanDummy
-  id: MobSkrellDummy
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: HumanoidAppearance
-    species: Skrell
-    hideLayersOnEquip:
-    - Hair
-  - type: Body
-    prototype: Skrell
-    requiredLegs: 2
-  - type: Inventory
-    templateId: skrell
-    femaleDisplacements:
-      jumpsuit:
-        sizeMaps:
-          32:
-            sprite: Mobs/Species/Human/displacement.rsi
-            state: jumpsuit-female

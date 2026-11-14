@@ -1,0 +1,10 @@
+# RMC-14: Resources/Prototypes/_RMC14/SoundCollections/alienclaw.yml
+- type: soundCollection
+  id: RCMXenoClaw
+  files:
+    - /Audio/_WF/Xenonids/Xeno/alien_claw_block.ogg
+    - /Audio/_WF/Xenonids/Xeno/alien_claw_flesh1.ogg
+    - /Audio/_WF/Xenonids/Xeno/alien_claw_flesh2.ogg
+    - /Audio/_WF/Xenonids/Xeno/alien_claw_flesh3.ogg
+    - /Audio/_WF/Xenonids/Xeno/alien_claw_flesh4.ogg
+    - /Audio/_WF/Xenonids/Xeno/alien_claw_flesh5.ogg

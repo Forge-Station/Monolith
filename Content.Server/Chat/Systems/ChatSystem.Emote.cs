@@ -57,7 +57,7 @@ public partial class ChatSystem
     /// <param name="range">Conceptual range of transmission, if it shows in the chat window, if it shows to far-away ghosts or ghosts at all...</param>
     /// <param name="nameOverride">The name to use for the speaking entity. Usually this should just be modified via <see cref="TransformSpeakerNameEvent"/>. If this is set, the event will not get raised.</param>
     /// <param name="forceEmote">Bypasses whitelist/blacklist/availibility checks for if the entity can use this emote</param>
-    public void TryEmoteWithChat(
+    public override void TryEmoteWithChat( // WOLFGATE(Wolfmed): HOOK 6, overrides SharedChatSystem's shared entry point (D25).
         EntityUid source,
         string emoteId,
         ChatTransmitRange range = ChatTransmitRange.Normal,

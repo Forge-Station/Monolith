@@ -1,0 +1,16 @@
+# Working vehicles left about the worlds (a table's `vehicles`): everyday trucks and vans, now and then a humvee.
+- type: entityTable
+  id: WFPlanetVehicles
+  table: !type:GroupSelector
+    children:
+    - id: AU14VehicleCivTruck
+    - id: AU14VehicleCivCivTruck1
+    - id: AU14VehicleCivCivTruck2
+    - id: AU14VehicleCivCivTruck3
+    - id: AU14VehicleCivBlueTruck
+    - id: AU14VehicleCivBrownCargoTruck
+    - id: AU14VehicleCivVan
+    - id: VehicleVan
+    - id: VehicleBoxVan
+    - id: VehicleHumvee
+      weight: 0.5

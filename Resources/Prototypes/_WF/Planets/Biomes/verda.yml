@@ -1,0 +1,330 @@
+# Verda (Asclepiu): the DI/RMC ground and scenery behind its biome (biomes.yml, open_biomes.yml).
+# Every outdoor tile is a weather child of an imported floor, set up as the planet's own ground is (FloorPlanetGrass):
+# open to the weather, bare ground to build on, not pried up or blown apart. The imports do none of that.
+# A tile's words classify it on the orbit map (WFPlanetMapSystem): sand|dirt|mud, then grass, then snow.
+
+- type: tile
+  id: WFFloorVerdaMeadowGrass
+  parent: FloorGrassLight
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+- type: tile
+  id: WFFloorVerdaForestGrass
+  parent: FloorGrassDark
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+# Lake shores: marsh grass, then mud, then wet sand at the waterline.
+- type: tile
+  id: WFFloorVerdaMarshGrass
+  parent: GoonFloorSwampgrass
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+- type: tile
+  id: WFFloorVerdaMarshMud
+  parent: PolarisFloorOutdoorsMud
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+- type: tile
+  id: WFFloorVerdaShoreSand
+  parent: RMCPlanetSandWet
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+# The mud ring round a pond, kept apart from the lake shore's so only ponds' rings take their reeds.
+- type: tile
+  id: WFFloorVerdaPondMud
+  parent: PolarisFloorOutdoorsMud
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+# The irradiated scars: dead ground in four tones.
+- type: tile
+  id: WFFloorVerdaScarDirt
+  parent: PolarisFloorOutdoorsDirt
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+- type: tile
+  id: WFFloorVerdaScarDirtPatch
+  parent: CitFloorSpooktimeDirtpatch
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+- type: tile
+  id: WFFloorVerdaScarWiltedGrass
+  parent: FloorPlanetGrassCrocus
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+- type: tile
+  id: WFFloorVerdaScarAshDirt
+  parent: ChompFloorOutdoorsLavalandAsh
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorPlanetDirt
+  deconstructTools: []
+
+- type: tile
+  id: WFFloorVerdaSnowRough
+  parent: GoonFloorSnowrough
+  weather: true
+  isSubfloor: true
+  indestructible: true
+  baseTurf: FloorDirt
+  deconstructTools: [ Digging ]
+
+# A conifer stand inside the woodland: pines and ferns, over the same dark grass.
+- type: biomeTemplate
+  id: WFVerdaPineGrove
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [AuroraAssunzioneBushFerny, CoyoteFloraTallgrass4]
+    threshold: 0.75
+    noise: { seed: 217, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [CoyoteFloraTreeMedPine, DarkPackTreeVampPine]
+    threshold: 0.58
+    noise: { seed: 218, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [FloorPlanetGrass, WFFloorVerdaForestGrass]
+    entities: [CoyoteFloraTreeCypressTree, DarkPackTreeVampPine]
+    threshold: 0.8
+    noise: { seed: 219, noiseType: OpenSimplex2, frequency: 2 }
+
+# Lake shores, laid over the plains where the lake's own noise (biomes.yml) runs just under the water's threshold.
+# The tile layers repeat that noise, so each ring follows the water: marsh, mud, wet sand.
+- type: biomeTemplate
+  id: WFVerdaShore
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaMarshGrass
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaMarshMud
+    threshold: 0.68
+    noise: { seed: 71, noiseType: OpenSimplex2, frequency: 0.012, fractalType: FBm, octaves: 2, lacunarity: 2 }
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaShoreSand
+    threshold: 0.73
+    noise: { seed: 71, noiseType: OpenSimplex2, frequency: 0.012, fractalType: FBm, octaves: 2, lacunarity: 2 }
+  # Frogs and crabs (Planets/Life/verda_mobs.yml).
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshGrass, WFFloorVerdaMarshMud, WFFloorVerdaShoreSand]
+    entities: [WFFaunaVerdaShore]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  # Marsh: tall grass and the odd bush and drowned tree.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshGrass]
+    entities: [CoyoteFloraTallgrass3, CoyoteFloraTallgrass9]
+    threshold: 0.62
+    noise: { seed: 220, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshGrass]
+    entities: [CoyoteFloraTallgrass4, CoyoteFloraTallgrass5]
+    threshold: 0.62
+    noise: { seed: 221, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshGrass]
+    entities: [GoonShrub, AuroraFloraBushGrove]
+    threshold: 0.85
+    noise: { seed: 222, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshGrass]
+    entities: [CoyoteFloraTreeCypressTree, NebulaTreeDeadYew]
+    threshold: 0.9
+    noise: { seed: 223, noiseType: OpenSimplex2, frequency: 2 }
+  # Reeds and lilies at the waterline.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshMud, WFFloorVerdaShoreSand]
+    entities: [AuroraFloraBushKonyangReeds, CoyoteFloraTallgrass9]
+    threshold: 0.5
+    noise: { seed: 224, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshMud, WFFloorVerdaShoreSand]
+    entities: [AuroraAssunzioneGrassAlt, AuroraFloraBushKonyangReeds]
+    threshold: 0.68
+    noise: { seed: 225, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshMud]
+    entities: [VoreFloraLily1, VoreFloraLily2]
+    threshold: 0.7
+    noise: { seed: 226, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshMud]
+    entities: [VoreFloraLily3, GoonFakeobjectLotus]
+    threshold: 0.8
+    noise: { seed: 227, noiseType: OpenSimplex2, frequency: 4 }
+  # Reeds to cut, a lotus to eat, shore sage to heal with (Planets/Life/verda.yml).
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshMud, WFFloorVerdaShoreSand]
+    entities: [WFVerdaPlantReeds]
+    threshold: 0.9
+    noise: { seed: 301, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshMud]
+    entities: [WFVerdaPlantLotus]
+    threshold: 0.91
+    noise: { seed: 302, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaMarshMud, WFFloorVerdaShoreSand]
+    entities: [WFVerdaPlantShoreSage]
+    threshold: 0.91
+    noise: { seed: 303, noiseType: OpenSimplex2, frequency: 4 }
+
+# An irradiated scar: dead ground, dead trees and scrub, a few bones.
+- type: biomeTemplate
+  id: WFVerdaScar
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaScarDirt
+    threshold: -1
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaScarWiltedGrass
+    threshold: 0.25
+    noise: { seed: 84, noiseType: OpenSimplex2, frequency: 0.02 }
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaScarAshDirt
+    threshold: 0.45
+    noise: { seed: 86, noiseType: OpenSimplex2, frequency: 0.015 }
+  - !type:BiomeTileLayer
+    tile: WFFloorVerdaScarDirtPatch
+    threshold: 0.55
+    noise: { seed: 85, noiseType: OpenSimplex2, frequency: 0.04 }
+  # Mutants and vermin (Planets/Life/verda_mobs.yml).
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [WFFaunaVerdaScar]
+    threshold: 0.95
+    noise: { seed: 37, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [MonoPlanetmapOreBase]
+    threshold: 0.72
+    noise: { seed: 11, noiseType: OpenSimplex2, frequency: 0.02 }
+  # Dead shrubs and the wasteland's own plants, stones, a few bones, dead and burnt trees.
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [GoonShrubDead, GoonShrubDead3]
+    threshold: 0.8
+    noise: { seed: 230, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [GoonShrubDead2, CoyoteFloraBurnedbush3]
+    threshold: 0.8
+    noise: { seed: 231, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [CoyoteFloraWasteplantWildMesquite, CoyoteFloraWasteplantWildYucca]
+    threshold: 0.8
+    noise: { seed: 232, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [CoyoteFloraWasteplantWildAgave, CoyoteFloraWasteplantWildHorsenettle]
+    threshold: 0.8
+    noise: { seed: 233, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [CoyoteFloraWasteplantWildDatura, CoyoteFloraWasteplantWildXander]
+    threshold: 0.8
+    noise: { seed: 234, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [CoyoteFloraWasteplantWildTato, CoyoteFloraWasteplantWildFungus]
+    threshold: 0.8
+    noise: { seed: 235, noiseType: OpenSimplex2, frequency: 4 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [GoonStone, VoreFloraSmallbould]
+    threshold: 0.93
+    noise: { seed: 236, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [GoonStone2, CoyoteFloraStump]
+    threshold: 0.93
+    noise: { seed: 237, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [CoyoteChompBonesLskullW, CoyoteChompBonesLbone]
+    threshold: 0.95
+    noise: { seed: 238, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [CoyoteChompBonesLribs, CoyoteChompBonesLribs1]
+    threshold: 0.95
+    noise: { seed: 239, noiseType: OpenSimplex2, frequency: 3 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [NebulaTreeDeadEbony, NebulaTreeDeadMaple]
+    threshold: 0.82
+    noise: { seed: 240, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [NebulaTreeDeadYew, CoyoteFloraBurnedtree1]
+    threshold: 0.82
+    noise: { seed: 241, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [CoyoteFloraBurnedtree2, CoyoteFloraBurnedtree3]
+    threshold: 0.82
+    noise: { seed: 242, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [CoyoteFloraBurnedtree5, ShiptestFloraTreeDeadPine]
+    threshold: 0.82
+    noise: { seed: 243, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [ShiptestDeadTallGrey, ShiptestTreeDeadBarren]
+    threshold: 0.82
+    noise: { seed: 244, noiseType: OpenSimplex2, frequency: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [YogTreeDeadJungle, CitFloraAshtree]
+    threshold: 0.82
+    noise: { seed: 245, noiseType: OpenSimplex2, frequency: 2 }
+  # A rat king's lair now and then, and a glowing weed that irradiates whoever gets close (Planets/Life).
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [WFFaunaVerdaRatKing]
+    threshold: 0.95
+    noise: { seed: 311, noiseType: OpenSimplex2, frequency: 0.02 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorVerdaScarDirt, WFFloorVerdaScarWiltedGrass, WFFloorVerdaScarAshDirt, WFFloorVerdaScarDirtPatch]
+    entities: [WFVerdaPlantGlowroot]
+    threshold: 0.98
+    noise: { seed: 312, noiseType: OpenSimplex2, frequency: 4 }

@@ -1,0 +1,165 @@
+# Planetside cargo hubs: depots A and B built on a world's ground some rounds. Maps are written by
+# Tools/_WF/PlanetCargoHubs/hubs.py, which prints each map's footprint and socket.
+
+- type: wfPlanetCargoHub
+  id: WFCargoHubTriple
+  site:
+    mapPath: /Maps/_WF/PlanetCargoHubs/cargo_hub_triple.yml
+    name: wf-planet-cargo-hub-a
+    footprint: -40,-29,40,29
+    connection: Roadside
+    sockets:
+    - offset: -14,-29
+      direction: South
+  surfaces:
+  - WFSurfaceAsclepiu
+  - WFSurfaceMerak
+  - WFSurfaceFervidus
+  - WFSurfaceThrascias
+  - WFSurfaceAerumna
+
+- type: wfPlanetCargoHub
+  id: WFCargoHubTwin
+  site:
+    mapPath: /Maps/_WF/PlanetCargoHubs/cargo_hub_twin.yml
+    name: wf-planet-cargo-hub-b
+    footprint: -27,-29,27,29
+    connection: Roadside
+    sockets:
+    - offset: 0,-29
+      direction: South
+  surfaces:
+  - WFSurfaceAsclepiu
+  - WFSurfaceMerak
+  - WFSurfaceFervidus
+  - WFSurfaceThrascias
+  - WFSurfaceAerumna
+
+- type: entity
+  id: WFCargoHubBerth
+  name: landing berth
+  description: Marks the corner of a cargo hub's landing berth.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: WFCargoHubBerth
+
+# The sector map's FTL beacon by a world with a planetside depot; named at spawn.
+- type: entity
+  id: WFCargoHubFtlBeacon
+  name: cargo depot beacon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: FTLBeacon
+
+# A tall mast at the hub with a strong green light that slowly pulses, seen from far across the ground.
+- type: entity
+  parent: BaseStructure
+  id: WFCargoHubBeacon
+  name: cargo depot beacon
+  description: A tall mast throwing green light over the depot's berths, so pilots can find them from the air.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _WF/Streets/Objects/Misc/Lights/floodlightbig.rsi
+    layers:
+    - state: bigflood
+    - state: bigfloodon
+      shader: unshaded
+      color: "#9CFF9C"
+    offset: "0.0,0.5"
+    drawdepth: Mobs
+  - type: InteractionOutline
+  - type: PointLight
+    enabled: true
+    radius: 16
+    energy: 4
+    softness: 1
+    offset: "0,0.5"
+    color: "#37C837"
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: beacon
+      property: Energy
+      interpolate: Linear
+      maxDuration: 2.5
+      startValue: 4.0
+      endValue: 1.5
+      isLooped: true
+      reverseWhenFinished: true
+      enabled: true
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3"
+        density: 100
+        mask: [ MachineMask ]
+        layer: [ MachineLayer ]
+
+# A blinking amber lamp at each corner of a berth's open end.
+- type: entity
+  parent: BaseStructure
+  id: WFCargoHubBerthStrobe
+  name: berth strobe
+  description: Blinks slowly to mark the mouth of a landing berth.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Mono/Structures/Machines/beacon.rsi
+    layers:
+    - state: beacon
+    - state: beacon_lights_active
+      shader: unshaded
+  - type: InteractionOutline
+  - type: PointLight
+    enabled: true
+    radius: 4
+    energy: 2
+    color: "#FFB000"
+  - type: LightBehaviour
+    behaviours:
+    - !type:PulseBehaviour
+      id: strobe
+      property: Energy
+      interpolate: Nearest
+      maxDuration: 1.6
+      minValue: 0.1
+      maxValue: 2.5
+      isLooped: true
+      enabled: true
+  - type: Damageable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ Destruction ]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 60
+        mask: [ MachineMask ]
+        layer: [ MachineLayer ]

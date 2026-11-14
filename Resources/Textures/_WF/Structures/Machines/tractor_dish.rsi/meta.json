@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Original tractor dish artwork created by the Wolfgate contributor and released under CC0-1.0 with their permission. Source: tractor dish.png.",
+  "size": { "x": 128, "y": 128 },
+  "states": [ { "name": "base" } ]
+}

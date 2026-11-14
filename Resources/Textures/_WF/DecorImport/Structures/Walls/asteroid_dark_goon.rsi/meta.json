@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "exterior-0"
+    },
+    {
+      "name": "exterior-1"
+    },
+    {
+      "name": "exterior-2"
+    },
+    {
+      "name": "exterior-3"
+    },
+    {
+      "name": "exterior-4"
+    },
+    {
+      "name": "exterior-5"
+    },
+    {
+      "name": "exterior-6"
+    },
+    {
+      "name": "exterior-7"
+    },
+    {
+      "name": "exterior-8"
+    },
+    {
+      "name": "exterior-9"
+    },
+    {
+      "name": "exterior-10"
+    },
+    {
+      "name": "exterior-11"
+    },
+    {
+      "name": "exterior-12"
+    },
+    {
+      "name": "exterior-13"
+    },
+    {
+      "name": "exterior-14"
+    },
+    {
+      "name": "exterior-15"
+    },
+    {
+      "name": "exterior-21"
+    },
+    {
+      "name": "exterior-23"
+    },
+    {
+      "name": "exterior-29"
+    },
+    {
+      "name": "exterior-31"
+    },
+    {
+      "name": "exterior-38"
+    },
+    {
+      "name": "exterior-39"
+    },
+    {
+      "name": "exterior-46"
+    },
+    {
+      "name": "exterior-47"
+    },
+    {
+      "name": "exterior-55"
+    },
+    {
+      "name": "exterior-63"
+    },
+    {
+      "name": "exterior-74"
+    },
+    {
+      "name": "exterior-75"
+    },
+    {
+      "name": "exterior-78"
+    },
+    {
+      "name": "exterior-79"
+    },
+    {
+      "name": "exterior-95"
+    },
+    {
+      "name": "exterior-110"
+    },
+    {
+      "name": "exterior-111"
+    },
+    {
+      "name": "exterior-127"
+    },
+    {
+      "name": "exterior-137"
+    },
+    {
+      "name": "exterior-139"
+    },
+    {
+      "name": "exterior-141"
+    },
+    {
+      "name": "exterior-143"
+    },
+    {
+      "name": "exterior-157"
+    },
+    {
+      "name": "exterior-159"
+    },
+    {
+      "name": "exterior-175"
+    },
+    {
+      "name": "exterior-191"
+    },
+    {
+      "name": "exterior-203"
+    },
+    {
+      "name": "exterior-207"
+    },
+    {
+      "name": "exterior-223"
+    },
+    {
+      "name": "exterior-239"
+    },
+    {
+      "name": "exterior-255"
+    }
+  ]
+}

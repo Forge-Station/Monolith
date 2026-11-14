@@ -1,0 +1,242 @@
+# Harpoon turret: the hardpoint, the harpoon it fires, the operator's controls and how it is built.
+# The tow cable rope type (RopeTowCable) is content, owned by the rope types file.
+
+- type: entity
+  id: ShipHarpoon
+  parent: BaseItem
+  name: ship harpoon
+  description: A barbed steel spike with a cable eye in its tail. Fired from a hardpoint launcher, it bites into a hull if it goes in straight and fast.
+  components:
+  - type: Sprite
+    sprite: _WF/Tether/harpoon_projectile.rsi
+    noRot: false
+    layers:
+    - state: harpoon
+  - type: Item
+    size: Huge
+  - type: ShipHarpoon
+  - type: Ammo
+    muzzleFlash: null
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Piercing: 20
+  - type: EmbeddableProjectile
+    embedOnThrow: false
+    deleteOnRemove: false
+    removalTime: null
+    sound: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0.5
+    angularDamping: 0.5
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.15,0.15,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: StaticPrice
+    price: 80
+
+- type: entity
+  id: BaseShipHarpoonTurret
+  abstract: true
+  name: harpoon turret
+  description: A deck-mounted harpoon launcher. Strap in, line up the shot and put a tow cable into whatever you are trying to keep.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _WF/Tether/harpoon_turret.rsi
+    drawdepth: OverMobs
+    noRot: false
+    layers:
+    - state: base
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 800
+        # Masked but on no layer, the way seats are: the operator has to be able to stand in the mount.
+        mask:
+        - MachineMask
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,0"
+    buckleOnInteractHand: true
+    unbuckleDistanceSquared: 0.09 # (30 cm)^2, as vehicles do: recoil must not throw the operator out of the seat
+  - type: ShipHarpoonTurret
+    ropeType: RopeTowCable
+    arc: 120
+    reelRate: 1.5
+    reelMaxTension: 120000
+  - type: RopeAttachPoint
+    maxRopes: 1
+  - type: Gun
+    fireRate: 0.4
+    projectileSpeed: 45
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/harpoon.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: BallisticAmmoProvider
+    capacity: 1
+    cycleable: false
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
+    whitelist:
+      components:
+      - ShipHarpoon
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: AmmoCounter
+  - type: Appearance
+  - type: Climbable
+
+- type: entity
+  id: ShipHarpoonTurret
+  parent: BaseShipHarpoonTurret
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 500
+  - type: ExtensionCableReceiver
+  - type: Construction
+    graph: WFShipHarpoonTurret
+    node: turret
+
+- type: entity
+  parent: BaseFlatpack
+  id: ShipHarpoonTurretFlatpack
+  name: harpoon turret flatpack
+  description: A flatpack used for constructing a ship harpoon turret.
+  components:
+  - type: Flatpack
+    entity: ShipHarpoonTurret
+  - type: Sprite
+    layers:
+    - state: base
+    - state: overlay
+      color: "#8a8f96"
+    - state: icon-default
+  - type: StaticPrice
+    price: 3000
+
+# Operator controls, granted while buckled in.
+
+- type: entity
+  id: ActionWFHarpoonReelIn
+  name: Reel in
+  description: Winds the tow cable in. Stalls if the load is too much for the winch.
+  components:
+  - type: InstantAction
+    icon: { sprite: _WF/Tether/harpoon_turret.rsi, state: icon-reel-in }
+    event: !type:HarpoonReelInActionEvent
+    checkCanInteract: false
+
+- type: entity
+  id: ActionWFHarpoonPayOut
+  name: Pay out
+  description: Lets the tow cable run out.
+  components:
+  - type: InstantAction
+    icon: { sprite: _WF/Tether/harpoon_turret.rsi, state: icon-pay-out }
+    event: !type:HarpoonPayOutActionEvent
+    checkCanInteract: false
+
+- type: entity
+  id: ActionWFHarpoonRelease
+  name: Release cable
+  description: Cuts the tow cable loose at the turret. The harpoon stays where it is.
+  components:
+  - type: InstantAction
+    icon: { sprite: _WF/Tether/harpoon_turret.rsi, state: icon-release }
+    event: !type:HarpoonReleaseActionEvent
+    checkCanInteract: false
+
+# Construction
+
+- type: constructionGraph
+  id: WFShipHarpoonTurret
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: turret
+      completed:
+      - !type:SnapToGrid { }
+      steps:
+      - material: Steel
+        amount: 10
+        doAfter: 4
+      - material: Plasteel
+        amount: 5
+        doAfter: 4
+      - material: MetalRod
+        amount: 4
+        doAfter: 2
+      - material: Cable
+        amount: 5
+        doAfter: 2
+      - tool: Welding
+        doAfter: 4
+  - node: turret
+    entity: ShipHarpoonTurret
+    actions:
+    - !type:SetAnchor
+      value: true
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 10
+      - !type:SpawnPrototype
+        prototype: SheetPlasteel1
+        amount: 5
+      - !type:DeleteEntity { }
+      steps:
+      - tool: Welding
+        doAfter: 5
+      - tool: Prying
+        doAfter: 3
+
+- type: construction
+  name: harpoon turret
+  id: ShipHarpoonTurret
+  graph: WFShipHarpoonTurret
+  startNode: start
+  targetNode: turret
+  category: construction-category-structures
+  description: A deck-mounted harpoon launcher for tow cables.
+  icon:
+    sprite: _WF/Tether/harpoon_turret.rsi
+    state: base
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked

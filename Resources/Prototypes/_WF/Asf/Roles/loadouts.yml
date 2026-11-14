@@ -1,0 +1,234 @@
+# Character-editor loadouts for the ASF roles. Each role's defaults (the group fallbacks) are the outfit it
+# started with before these existed; rank pieces (plumed beret, brimmed hat, cape,
+# greatcoat, robe, parade jacket) are the Envoy's.
+
+# Jumpsuits
+
+- type: loadout
+  id: WFAsfLoadoutUniformService
+  equipment:
+    jumpsuit: WFAsfClothingUniformService
+
+- type: loadout
+  id: WFAsfLoadoutUniformColonist
+  equipment:
+    jumpsuit: WFAsfClothingUniformColonist
+
+- type: loadout
+  id: WFAsfLoadoutUniformResearcher
+  equipment:
+    jumpsuit: WFAsfClothingUniformResearcher
+
+- type: loadout
+  id: WFAsfLoadoutUniformCasual
+  equipment:
+    jumpsuit: WFAsfClothingUniformCasual
+
+- type: loadout
+  id: WFAsfLoadoutUniformMedic
+  equipment:
+    jumpsuit: WFAsfClothingUniformMedic
+
+- type: loadout
+  id: WFAsfLoadoutUniformFormal
+  equipment:
+    jumpsuit: WFAsfClothingUniformFormal
+
+- type: loadoutGroup
+  id: WFAsfJumpsuitService
+  name: loadout-group-contractor-jumpsuit
+  loadouts:
+  - WFAsfLoadoutUniformService
+  - WFAsfLoadoutUniformFormal
+  - WFAsfLoadoutUniformCasual
+  - WFAsfLoadoutUniformColonist
+  - WFAsfLoadoutUniformResearcher
+  - WFAsfLoadoutUniformMedic
+  fallbacks:
+  - WFAsfLoadoutUniformService
+
+- type: loadoutGroup
+  id: WFAsfJumpsuitResearcher
+  name: loadout-group-contractor-jumpsuit
+  loadouts:
+  - WFAsfLoadoutUniformResearcher
+  - WFAsfLoadoutUniformMedic
+  - WFAsfLoadoutUniformService
+  - WFAsfLoadoutUniformFormal
+  - WFAsfLoadoutUniformCasual
+  - WFAsfLoadoutUniformColonist
+  fallbacks:
+  - WFAsfLoadoutUniformResearcher
+
+- type: loadoutGroup
+  id: WFAsfJumpsuitColonist
+  name: loadout-group-contractor-jumpsuit
+  loadouts:
+  - WFAsfLoadoutUniformColonist
+  - WFAsfLoadoutUniformService
+  - WFAsfLoadoutUniformCasual
+  - WFAsfLoadoutUniformFormal
+  - WFAsfLoadoutUniformResearcher
+  - WFAsfLoadoutUniformMedic
+  fallbacks:
+  - WFAsfLoadoutUniformColonist
+
+# Bags
+
+- type: loadout
+  id: WFAsfLoadoutBackpack
+  equipment:
+    back: WFAsfClothingBackpack
+
+- type: loadout
+  id: WFAsfLoadoutSatchel
+  equipment:
+    back: WFAsfClothingBackpackSatchel
+
+- type: loadout
+  id: WFAsfLoadoutDuffel
+  equipment:
+    back: WFAsfClothingBackpackDuffel
+
+- type: loadoutGroup
+  id: WFAsfBackpack
+  name: loadout-group-contractor-backpack
+  loadouts:
+  - WFAsfLoadoutBackpack
+  - WFAsfLoadoutSatchel
+  - WFAsfLoadoutDuffel
+  fallbacks:
+  - WFAsfLoadoutBackpack
+
+# Head
+
+- type: loadout
+  id: WFAsfLoadoutBeretPlumed
+  equipment:
+    head: WFAsfClothingHeadBeretPlumed
+
+- type: loadout
+  id: WFAsfLoadoutBeret
+  equipment:
+    head: WFAsfClothingHeadBeret
+
+- type: loadout
+  id: WFAsfLoadoutCap
+  equipment:
+    head: WFAsfClothingHeadCap
+
+- type: loadout
+  id: WFAsfLoadoutHat
+  equipment:
+    head: WFAsfClothingHeadHat
+
+- type: loadoutGroup
+  id: WFAsfHeadEnvoy
+  name: loadout-group-contractor-head
+  loadouts:
+  - WFAsfLoadoutBeretPlumed
+  - WFAsfLoadoutBeret
+  - WFAsfLoadoutCap
+  - WFAsfLoadoutHat
+  fallbacks:
+  - WFAsfLoadoutBeretPlumed
+
+- type: loadoutGroup
+  id: WFAsfHeadEnforcer
+  name: loadout-group-contractor-head
+  loadouts:
+  - WFAsfLoadoutBeret
+  - WFAsfLoadoutCap
+  fallbacks:
+  - WFAsfLoadoutBeret
+
+- type: loadoutGroup
+  id: WFAsfHead
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - WFAsfLoadoutBeret
+  - WFAsfLoadoutCap
+
+# Neck
+
+- type: loadout
+  id: WFAsfLoadoutCapelet
+  equipment:
+    neck: WFAsfClothingNeckCapelet
+
+- type: loadout
+  id: WFAsfLoadoutCape
+  equipment:
+    neck: WFAsfClothingNeckCape
+
+- type: loadoutGroup
+  id: WFAsfNeckEnvoy
+  name: loadout-group-contractor-neck
+  loadouts:
+  - WFAsfLoadoutCapelet
+  - WFAsfLoadoutCape
+  fallbacks:
+  - WFAsfLoadoutCapelet
+
+- type: loadoutGroup
+  id: WFAsfNeck
+  name: loadout-group-contractor-neck
+  minLimit: 0
+  loadouts:
+  - WFAsfLoadoutCapelet
+
+# Outer clothing
+
+- type: loadout
+  id: WFAsfLoadoutGreatcoat
+  equipment:
+    outerClothing: WFAsfClothingOuterGreatcoat
+
+- type: loadout
+  id: WFAsfLoadoutParade
+  equipment:
+    outerClothing: WFAsfClothingOuterParade
+
+- type: loadout
+  id: WFAsfLoadoutRobe
+  equipment:
+    outerClothing: WFAsfClothingOuterRobe
+
+- type: loadoutGroup
+  id: WFAsfOuterEnvoy
+  name: loadout-group-contractor-outerclothing
+  loadouts:
+  - WFAsfLoadoutGreatcoat
+  - WFAsfLoadoutParade
+  - WFAsfLoadoutRobe
+  fallbacks:
+  - WFAsfLoadoutGreatcoat
+
+# Gloves
+
+- type: loadout
+  id: WFAsfLoadoutGloves
+  equipment:
+    gloves: WFAsfClothingHandsGloves
+
+- type: loadout
+  id: WFAsfLoadoutGlovesInsulated
+  equipment:
+    gloves: ClothingHandsGlovesColorYellow
+
+- type: loadoutGroup
+  id: WFAsfGloves
+  name: loadout-group-contractor-gloves
+  minLimit: 0
+  loadouts:
+  - WFAsfLoadoutGloves
+
+- type: loadoutGroup
+  id: WFAsfGlovesColonist
+  name: loadout-group-contractor-gloves
+  loadouts:
+  - WFAsfLoadoutGlovesInsulated
+  - WFAsfLoadoutGloves
+  fallbacks:
+  - WFAsfLoadoutGlovesInsulated

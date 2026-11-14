@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "interior-map"
+    },
+    {
+      "name": "interior-0"
+    },
+    {
+      "name": "interior-1"
+    },
+    {
+      "name": "interior-2"
+    },
+    {
+      "name": "interior-3"
+    },
+    {
+      "name": "interior-4"
+    },
+    {
+      "name": "interior-5"
+    },
+    {
+      "name": "interior-6"
+    },
+    {
+      "name": "interior-7"
+    },
+    {
+      "name": "interior-8"
+    },
+    {
+      "name": "interior-9"
+    },
+    {
+      "name": "interior-10"
+    },
+    {
+      "name": "interior-11"
+    },
+    {
+      "name": "interior-12"
+    },
+    {
+      "name": "interior-13"
+    },
+    {
+      "name": "interior-14"
+    },
+    {
+      "name": "interior-15"
+    },
+    {
+      "name": "interior-21"
+    },
+    {
+      "name": "interior-23"
+    },
+    {
+      "name": "interior-29"
+    },
+    {
+      "name": "interior-31"
+    },
+    {
+      "name": "interior-38"
+    },
+    {
+      "name": "interior-39"
+    },
+    {
+      "name": "interior-46"
+    },
+    {
+      "name": "interior-47"
+    },
+    {
+      "name": "interior-55"
+    },
+    {
+      "name": "interior-63"
+    },
+    {
+      "name": "interior-74"
+    },
+    {
+      "name": "interior-75"
+    },
+    {
+      "name": "interior-78"
+    },
+    {
+      "name": "interior-79"
+    },
+    {
+      "name": "interior-95"
+    },
+    {
+      "name": "interior-110"
+    },
+    {
+      "name": "interior-111"
+    },
+    {
+      "name": "interior-127"
+    },
+    {
+      "name": "interior-137"
+    },
+    {
+      "name": "interior-139"
+    },
+    {
+      "name": "interior-141"
+    },
+    {
+      "name": "interior-143"
+    },
+    {
+      "name": "interior-157"
+    },
+    {
+      "name": "interior-159"
+    },
+    {
+      "name": "interior-175"
+    },
+    {
+      "name": "interior-191"
+    },
+    {
+      "name": "interior-203"
+    },
+    {
+      "name": "interior-207"
+    },
+    {
+      "name": "interior-223"
+    },
+    {
+      "name": "interior-239"
+    },
+    {
+      "name": "interior-255"
+    }
+  ]
+}

@@ -99,6 +99,7 @@
       head-vox:
       - state: equipped-HEAD-sealed-vox
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.90
@@ -162,6 +163,7 @@
       head-vox:
       - state: equipped-HEAD-sealed-vox
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -225,6 +227,7 @@
       head-vox:
       - state: equipped-HEAD-sealed-vox
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -275,6 +278,7 @@
   - type: Sprite
     sprite: _Goobstation/Clothing/Head/Modsuits/paramedic.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.90
@@ -325,6 +329,7 @@
   - type: Sprite
     sprite: _Goobstation/Clothing/Head/Modsuits/engineer.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.90
@@ -388,6 +393,7 @@
       head-vox:
       - state: equipped-HEAD-sealed-vox
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.90
@@ -438,6 +444,7 @@
   - type: Sprite
     sprite: _Goobstation/Clothing/Head/Modsuits/researchdirector.rsi
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.90
@@ -503,6 +510,7 @@
       head-vulpkanin:
       - state: equipped-HEAD-sealed-vulpkanin
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.95 # Forge-change 0.85 -> 0.95

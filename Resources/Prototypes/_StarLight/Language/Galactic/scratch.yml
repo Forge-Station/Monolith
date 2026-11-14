@@ -1,0 +1,9 @@
+# Wolfgate: Wolfgate's language system has no icons or obfuscation fonts, so those
+# fields are dropped.
+- type: language
+  id: Scratch
+  speech:
+    color: "#fc7921"
+    fontId: Scratch
+  obfuscation:
+    !type:RandomObfuscation

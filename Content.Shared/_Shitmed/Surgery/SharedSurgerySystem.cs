@@ -20,19 +20,20 @@ using Content.Shared.Humanoid.Markings;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
-using Content.Shared.Prototypes;
 using Content.Shared.Standing;
-using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.Body.Organ;
 
 namespace Content.Shared._Shitmed.Medical.Surgery;
 
 public abstract partial class SharedSurgerySystem : EntitySystem
 {
+    /// <summary>Surgery prototype ids the autodoc can offer. The server list replaces this.</summary>
+    public virtual IReadOnlyList<EntProtoId> AllSurgeries => Array.Empty<EntProtoId>();
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IComponentFactory _compFactory = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -51,20 +52,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedCorticalBorerSystem _corticalBorer = default!;
 
-
-    /// <summary>
-    /// Cache of all surgery prototypes' singleton entities.
-    /// Cleared after a prototype reload.
-    /// </summary>
     private readonly Dictionary<EntProtoId, EntityUid> _surgeries = new();
-    private readonly List<EntProtoId> _allSurgeries = new();
 
-    /// <summary>
-    /// Every surgery entity prototype id.
-    /// Kept in sync with prototype reloads.
-    /// </summary>
-    public IReadOnlyList<EntProtoId> AllSurgeries => _allSurgeries;
-    
     public override void Initialize()
     {
         base.Initialize();
@@ -75,7 +64,6 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SurgeryCloseIncisionConditionComponent, SurgeryValidEvent>(OnCloseIncisionValid);
         //SubscribeLocalEvent<SurgeryLarvaConditionComponent, SurgeryValidEvent>(OnLarvaValid);
         SubscribeLocalEvent<SurgeryCorticalBorerConditionComponent, SurgeryValidEvent>(OnCorticalBorerValid);
-        SubscribeLocalEvent<SurgeryHasBodyConditionComponent, SurgeryValidEvent>(OnHasBodyConditionValid);
         SubscribeLocalEvent<SurgeryPartConditionComponent, SurgeryValidEvent>(OnPartConditionValid);
         SubscribeLocalEvent<SurgeryOrganConditionComponent, SurgeryValidEvent>(OnOrganConditionValid);
         SubscribeLocalEvent<SurgeryWoundedConditionComponent, SurgeryValidEvent>(OnWoundedValid);
@@ -85,13 +73,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         SubscribeLocalEvent<SurgeryPartPresentConditionComponent, SurgeryValidEvent>(OnPartPresentConditionValid);
         SubscribeLocalEvent<SurgeryMarkingConditionComponent, SurgeryValidEvent>(OnMarkingPresentValid);
         SubscribeLocalEvent<SurgeryBodyComponentConditionComponent, SurgeryValidEvent>(OnBodyComponentConditionValid);
+        SubscribeLocalEvent<SurgeryPartComponentConditionComponent, SurgeryValidEvent>(OnPartComponentConditionValid);
         SubscribeLocalEvent<SurgeryOrganOnAddConditionComponent, SurgeryValidEvent>(OnOrganOnAddConditionValid);
         //SubscribeLocalEvent<SurgeryRemoveLarvaComponent, SurgeryCompletedEvent>(OnRemoveLarva);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         InitializeSteps();
-
-        LoadPrototypes();
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -104,14 +90,8 @@ public abstract partial class SharedSurgerySystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (args.Cancelled)
-        {
-            var failEv = new SurgeryStepFailedEvent(args.User, ent, args.Surgery, args.Step);
-            RaiseLocalEvent(args.User, ref failEv);
-            return;
-        }
-
-        if (args.Handled
+        if (args.Cancelled
+            || args.Handled
             || args.Target is not { } target
             || !IsSurgeryValid(ent, target, args.Surgery, args.Step, args.User, out var surgery, out var part, out var step)
             || !PreviousStepsComplete(ent, part, surgery, args.Step)
@@ -121,12 +101,10 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             return;
         }
 
-        var complete = IsStepComplete(ent, part, args.Step, surgery);
-        args.Repeat = HasComp<SurgeryRepeatableStepComponent>(step) && !complete;
-        //args.Repeat = (HasComp<SurgeryRepeatableStepComponent>(step) && !IsStepComplete(ent, part, args.Step, surgery));
-        var ev = new SurgeryStepEvent(args.User, ent, part, GetTools(args.User), surgery, step, complete);
+        args.Repeat = (HasComp<SurgeryRepeatableStepComponent>(step) && !IsStepComplete(ent, part, args.Step, surgery));
+        var ev = new SurgeryStepEvent(args.User, ent, part, GetTools(args.User), surgery);
         RaiseLocalEvent(step, ref ev);
-        RaiseLocalEvent(args.User, ref ev);
+        WolfmedStepDone(part, surgery, args.Step); // WOLFGATE(Wolfmed): playtest 5, a begun procedure stays open until its closing step
         RefreshUI(ent);
     }
 
@@ -148,9 +126,28 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             || !TryComp(args.Part, out DamageableComponent? partDamageable)
             || damageable.TotalDamage <= 0
             && partDamageable.TotalDamage <= 0
-            && !HasComp<IncisionOpenComponent>(args.Part))
+            // WOLFGATE(Wolfmed) START: playtest 3 SAM: a wound host lists by its wounds (HOOK 24)
+            // && !HasComp<IncisionOpenComponent>(args.Part))
+            && !HasComp<IncisionOpenComponent>(args.Part)
+            && !WolfmedJudgedByWounds(args.Body)) // WOLFGATE(Wolfmed): playtest 3 SAM: a wound host lists by its wounds (HOOK 24)
+            // WOLFGATE END
             args.Cancelled = true;
+
+        // WOLFGATE(Wolfmed) START: HOOK 24 - P4-D19 wound-severity window
+        if (WolfmedWoundWindowFails(ent, args.Body, args.Part))
+            args.Cancelled = true;
+        // WOLFGATE END
     }
+
+    /*private void OnLarvaValid(Entity<SurgeryLarvaConditionComponent> ent, ref SurgeryValidEvent args)
+    {
+        if (!TryComp(args.Body, out VictimInfectedComponent? infected))
+            args.Cancelled = true;
+
+        // The larva has fully developed and surgery is now impossible
+        if (infected != null && infected.SpawnedLarva != null)
+            args.Cancelled = true;
+    }*/
 
     private void OnCorticalBorerValid(Entity<SurgeryCorticalBorerConditionComponent> ent, ref SurgeryValidEvent args)
     {
@@ -173,9 +170,16 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnHasBodyConditionValid(Entity<SurgeryHasBodyConditionComponent> ent, ref SurgeryValidEvent args)
+    private void OnPartComponentConditionValid(Entity<SurgeryPartComponentConditionComponent> ent, ref SurgeryValidEvent args)
     {
-        if (CompOrNull<BodyPartComponent>(args.Part)?.Body == null)
+        var present = true;
+        foreach (var reg in ent.Comp.Components.Values)
+        {
+            var compType = reg.Component.GetType();
+            if (!HasComp(args.Part, compType))
+                present = false;
+        }
+        if (ent.Comp.Inverse ? present : !present)
             args.Cancelled = true;
     }
 
@@ -238,6 +242,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
                     || ent.Comp.Reattaching
                     && !organs.Any(organ => HasComp<OrganReattachedComponent>(organ.Id))))
                     args.Cancelled = true;
+                // Start of DeltaV Additions - Checks if any organ has the removable component set to true, hiding it from the surgery UI
+                if (!organs.Any(organ => !TryComp<OrganComponent>(organ.Id, out var organComp)
+                    || organComp.Removable))
+                    args.Cancelled = true;
+                // End of DeltaV Additions
             }
             else if (!ent.Comp.Inverse)
                 args.Cancelled = true;
@@ -263,6 +272,14 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             args.Cancelled = true;
             return;
         }
+
+        // WOLFGATE(Wolfmed) START: HOOK 25 - P4-D18 untreated amputation consequence
+        if (WolfmedStumpBlocksAttachment(args.Part))
+        {
+            args.Cancelled = true;
+            return;
+        }
+        // WOLFGATE END
 
         // Get any existing body parts of the specified type/symmetry
         var results = _body.GetBodyChildrenOfType(args.Body, ent.Comp.Part, symmetry: ent.Comp.Symmetry);
@@ -309,6 +326,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
             args.Cancelled = true;
         }
     }
+
+    /*private void OnRemoveLarva(Entity<SurgeryRemoveLarvaComponent> ent, ref SurgeryCompletedEvent args)
+    {
+        RemCompDeferred<VictimInfectedComponent>(ent);
+    }*/
 
     protected bool IsSurgeryValid(EntityUid body, EntityUid targetPart, EntProtoId surgery, EntProtoId stepId,
         EntityUid user, out Entity<SurgeryComponent> surgeryEnt, out EntityUid part, out EntityUid step)
@@ -363,6 +385,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     private List<EntityUid> GetTools(EntityUid surgeon)
     {
+        // WOLFGATE(Wolfmed) START: AUTODOC: a pod has no hands.
+        if (WolfmedInternalTools(surgeon) is { } internalTools)
+            return internalTools;
+        // WOLFGATE END
+
         return _hands.EnumerateHeld(surgeon).ToList();
     }
 
@@ -370,6 +397,11 @@ public abstract partial class SharedSurgerySystem : EntitySystem
     {
         if (_standing.IsDown(entity))
             return true;
+
+        // WOLFGATE(Wolfmed) START: AUTODOC: an occupant lies down inside the pod.
+        if (WolfmedOnOperatingPlatform(entity))
+            return true;
+        // WOLFGATE END
 
         if (TryComp(entity, out BuckleComponent? buckle) &&
             TryComp(buckle.BuckledTo, out StrapComponent? strap))
@@ -386,28 +418,5 @@ public abstract partial class SharedSurgerySystem : EntitySystem
 
     protected virtual void RefreshUI(EntityUid body)
     {
-    }
-
-     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (!args.WasModified<EntityPrototype>())
-            return;
-
-        LoadPrototypes();
-    }
-
-    private void LoadPrototypes()
-    {
-        // Cache is probably invalid so delete it
-        foreach (var uid in _surgeries.Values)
-        {
-            Del(uid);
-        }
-        _surgeries.Clear();
-
-        _allSurgeries.Clear();
-        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
-            if (entity.HasComponent<SurgeryComponent>())
-                _allSurgeries.Add(new EntProtoId(entity.ID));
     }
 }

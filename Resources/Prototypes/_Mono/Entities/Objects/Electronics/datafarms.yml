@@ -17,7 +17,7 @@
       CableHV: 5
     tagRequirements:
       ResearchDisk10000:
-        amount: 2
+        amount: 3 # WOLFGATE(Mining): datafarms cost 30k
         defaultPrototype: ResearchDisk10000
       MicroprocessorEconomy1:
         amount: 6

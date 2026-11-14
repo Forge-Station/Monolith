@@ -1,0 +1,205 @@
+- type: entity
+  save: false
+  name: Urist McShadow
+  parent: [MobBloodstream, MobAtmosStandard, MobFlammable, BaseMobSpecies]
+  id: BaseMobShadekin
+  abstract: true
+  components:
+    - type: LanguageKnowledge
+      speaks:
+      - TauCetiBasic # Wolfgate: HardLight's GalacticCommon is TauCetiBasic here
+      - Marish
+      understands:
+      - TauCetiBasic
+      - Marish
+    - type: Carriable
+    - type: Satiation
+      satiations:
+        Hunger:
+          prototype: NormalSatiationHunger
+        Thirst:
+          prototype: NormalSatiationThirst
+    - type: SatiationSpeedModifier
+      satiations:
+        Hunger:
+          Starving: 0.75
+        Thirst:
+          Parched: 0.75
+    - type: LayingDown
+    # WOLFGATE(Wolfmed) START: M4, OD16: shadekin is a wound host, so Wolfmed decides its state.
+    # Plan 9.2 group D. Not reparented to BaseMobSpeciesOrganic: that would add a respirator to a species with no
+    # lungs. Its organs carry Wolfmed data.
+    - type: WoundHost
+    - type: PainShockTarget
+    # WOLFGATE END
+    # - type: Genetics # Funkystation - Genetics
+    #   mutationSlots: 8
+    - type: Shadekin
+      thresholds:
+        0.8: Low
+        5: Annoying
+        10: High
+        15: Extreme
+    - type: HumanoidAppearance
+      species: Shadekin
+    - type: Icon
+      sprite: _Starlight/Mobs/Species/Shadekin/parts.rsi
+      state: full
+    - type: Body
+      prototype: Shadekin
+      requiredLegs: 2
+    - type: Speech
+      speechSounds: Shadowkin # HL: Added Shadekin speech - Antelino
+      speechVerb: Shadowkin # HL: Added Shadekin speech - Antelino
+      allowedEmotes: ["Marr", "Wurble", "Hiss", "Purr", "Growl"]
+    - type: Vocal
+      sounds:
+        Male: MaleShadekin
+        Female: FemaleShadekin
+        Unsexed: MaleShadekin
+    - type: MeleeWeapon
+      soundHit:
+        collection: AlienClaw
+      angle: 30
+      animation: WeaponArcClaw
+      damage:
+        types:
+          Slash: 5
+    - type: Damageable
+      damageContainer: Biological
+      damageModifierSet: Shadekin
+    - type: Reactive
+      groups:
+        Flammable: [Touch]
+        Extinguish: [Touch]
+      reactions:
+        - reagents: [Water, SpaceCleaner]
+          methods: [Touch]
+          effects:
+            - !type:WashCreamPieReaction
+            - !type:Emote
+              emote: Hiss
+              showInChat: false
+    - type: Bloodstream
+      bloodlossDamage:
+        types:
+          Bloodloss: 1
+      bloodlossHealDamage:
+        types:
+          Bloodloss: -0.25
+      bloodReagent: DarkBlood
+    - type: DamageVisuals
+      damageOverlayGroups:
+        Brute:
+          sprite: Mobs/Effects/brute_damage.rsi
+          color: "#1c1624"
+    - type: Flammable
+      damage:
+        types:
+          Heat: 1.5
+    - type: TypingIndicator
+      proto: alien
+    - type: PassiveDamage # Slight passive regen. Assuming one damage type, comes out to about 4 damage a minute.
+      allowedStates:
+        - Alive
+      damageCap: 20
+      # WOLFGATE(Wolfmed) START: M4, D29: passive regen is neutralised on a wound host, as BaseMobSpeciesOrganic's is.
+      # damage:
+      #   types:
+      #     Heat: -0.07
+      #   groups:
+      #     Brute: -0.07
+      damage: {}
+      # WOLFGATE END
+    # WOLFGATE(Wolfmed) START: M4, D22, OD12: the Blunt gib moves to 1500 and the Heat body ash is removed.
+    # A wound host's body damage is the sum of its parts, so Blunt 400 was reachable from routine limb damage;
+    # 1500 as BaseMobSpeciesOrganic. The Heat 1500 body ash is gone: the living per-part ceilings sum past it, so
+    # a long fire would have ashed the body, which OD12 rules out.
+    - type: Destructible
+      thresholds:
+        - trigger: !type:DamageTypeTrigger
+            damageType: Blunt
+            # damage: 400
+            damage: 1500
+          behaviors:
+            - !type:GibBehavior {}
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                ShadekinShadow:
+                  min: 1
+                  max: 1
+        # - trigger: !type:DamageTypeTrigger
+        #     damageType: Heat
+        #     damage: 1500
+        #   behaviors:
+        #     - !type:SpawnEntitiesBehavior
+        #       spawnInContainer: true
+        #       spawn:
+        #         Ash:
+        #           min: 1
+        #           max: 1
+        #         ShadekinShadow:
+        #           min: 1
+        #           max: 1
+        #     - !type:BurnBodyBehavior {}
+    # WOLFGATE END
+    - type: NpcFactionMember
+      factions:
+      - NanoTrasen
+      - Shadekin
+
+    # BaseMobSpeciesOrganic // Because we dont want respirator to be used.
+    - type: Barotrauma
+      damage:
+        types:
+          Blunt: 0.85 #per second, scales with pressure and other constants.
+          Heat: 0.1
+    - type: Fingerprint
+    - type: Blindable
+    # Removed DarkenedVision (unknown component). NightVision is toggled by ShadekinSystem.
+    # Other
+    - type: Temperature
+      heatDamageThreshold: 325
+      coldDamageThreshold: 260
+      currentTemperature: 310.15
+      specificHeat: 42
+      coldDamage:
+        types:
+          Cold: 0.1 #per second, scales with temperature & other constants
+      heatDamage:
+        types:
+          Heat: 1.5 #per second, scales with temperature & other constants
+    - type: TemperatureSpeed
+      thresholds:
+        293: 0.8
+        280: 0.6
+        260: 0.4
+    - type: ThermalRegulator
+      metabolismHeat: 800
+      radiatedHeat: 100
+      implicitHeatRegulation: 500
+      sweatHeatRegulation: 2000
+      shiveringHeatRegulation: 2000
+      normalBodyTemperature: 310.15
+      thermalRegulationTemperatureThreshold: 2
+    - type: Perishable
+    - type: Butcherable
+      butcheringType: Spike # TODO human.
+      spawned:
+        - id: FoodMeat
+          amount: 5
+    - type: FireVisuals
+      alternateState: Standing
+
+- type: entity
+  save: false
+  parent: BaseSpeciesDummy
+  id: MobShadekinDummy
+  categories: [HideSpawnMenu]
+  description: A dummy shadekin meant to be used in character setup.
+  components:
+    - type: HumanoidAppearance
+      species: Shadekin
+    - type: Shadekin # needed so whitelist: components: [Shadekin] works in the character editor
+      thresholds:
+        15: Low

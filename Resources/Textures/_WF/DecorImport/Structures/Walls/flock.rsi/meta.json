@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Paradise at commit https://github.com/ParadiseSS13/Paradise/commit/7cd73f80152a5e234249d99cace75ce2b5c1c54b.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "flock-0"
+    },
+    {
+      "name": "flock-1"
+    },
+    {
+      "name": "flock-2"
+    },
+    {
+      "name": "flock-3"
+    },
+    {
+      "name": "flock-4"
+    },
+    {
+      "name": "flock-5"
+    },
+    {
+      "name": "flock-6"
+    },
+    {
+      "name": "flock-7"
+    },
+    {
+      "name": "flock-8"
+    },
+    {
+      "name": "flock-9"
+    },
+    {
+      "name": "flock-10"
+    },
+    {
+      "name": "flock-11"
+    },
+    {
+      "name": "flock-12"
+    },
+    {
+      "name": "flock-13"
+    },
+    {
+      "name": "flock-14"
+    },
+    {
+      "name": "flock-15"
+    },
+    {
+      "name": "flock-21"
+    },
+    {
+      "name": "flock-23"
+    },
+    {
+      "name": "flock-29"
+    },
+    {
+      "name": "flock-31"
+    },
+    {
+      "name": "flock-38"
+    },
+    {
+      "name": "flock-39"
+    },
+    {
+      "name": "flock-46"
+    },
+    {
+      "name": "flock-47"
+    },
+    {
+      "name": "flock-55"
+    },
+    {
+      "name": "flock-63"
+    },
+    {
+      "name": "flock-74"
+    },
+    {
+      "name": "flock-75"
+    },
+    {
+      "name": "flock-78"
+    },
+    {
+      "name": "flock-79"
+    },
+    {
+      "name": "flock-95"
+    },
+    {
+      "name": "flock-110"
+    },
+    {
+      "name": "flock-111"
+    },
+    {
+      "name": "flock-127"
+    },
+    {
+      "name": "flock-137"
+    },
+    {
+      "name": "flock-139"
+    },
+    {
+      "name": "flock-141"
+    },
+    {
+      "name": "flock-143"
+    },
+    {
+      "name": "flock-157"
+    },
+    {
+      "name": "flock-159"
+    },
+    {
+      "name": "flock-175"
+    },
+    {
+      "name": "flock-191"
+    },
+    {
+      "name": "flock-203"
+    },
+    {
+      "name": "flock-207"
+    },
+    {
+      "name": "flock-223"
+    },
+    {
+      "name": "flock-239"
+    },
+    {
+      "name": "flock-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

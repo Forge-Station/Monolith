@@ -1,0 +1,226 @@
+# One player-beacon faction per company. The sector map paints a claimed cell in this colour
+# and names the company. NPC campaign factions stay separate, so a player beacon cannot join their claims.
+
+- type: wfSectorFaction
+  id: WFSectorBeaconAetherionDynamics
+  name: "Aetherion Dynamics"
+  color: "#7E72B2"
+  company: AetherionDynamics
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconCerberusSurplusProvisions
+  name: "Cerberus Surplus Provisions"
+  color: "#aa1010"
+  company: CerberusSurplusProvisions
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconCivilDefenseMilita
+  name: "Civil Defense Militia"
+  color: "#666600"
+  company: CivilDefenseMilita
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconColonial
+  name: "NanoTrasen"
+  color: "#334e6d"
+  company: Colonial
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconDarkMatterEnterprises
+  name: "Dark Matter Enterprises"
+  color: "#BF00B9"
+  company: DarkMatterEnterprises
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconDrakeIndustries
+  name: "Drake Industries"
+  color: "#C97D7D"
+  company: DrakeIndustries
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconHarmonyMedicalEnterprises
+  name: "Harmony Medical Enterprises"
+  color: "#FC7303"
+  company: HarmonyMedicalEnterprises
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconHorizonEnergy
+  name: "Horizon Energy"
+  color: "#69E37F"
+  company: HorizonEnergy
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconImperial
+  name: "Священная Империя Вермиллионов"
+  color: "#ab7a52"
+  company: Imperial
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconMD
+  name: "Trauma Team International"
+  color: "#00d1a0"
+  company: MD
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconMMC
+  name: "Mieyo Manufacturing Concern"
+  color: "#EEEEEE"
+  company: MMC
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconMidnightArmsCo
+  name: "Midnight Arms Co."
+  color: "#FF2E2E"
+  company: MidnightArmsCo
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconNexus
+  name: "Nexus Star Consortium"
+  color: "#0f3b62"
+  company: Nexus
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconNosskeEienResearchandDevelopment
+  name: "Nosske-Eien Research and Development"
+  color: "#9573AF"
+  company: NosskeEienResearchandDevelopment
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconPDV
+  name: "PDV"
+  color: "#D2B48C"
+  company: PDV
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconPLXCOR
+  name: "PLXCOR"
+  color: "#B500B5"
+  company: PLXCOR
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconRedSailCorsairs
+  name: "RedSail Corsairs"
+  color: "#930000"
+  company: RedSailCorsairs
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconRenegates
+  name: "Восставшие колонии Ренегатов"
+  color: "#6B2D2D"
+  company: Renegates
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconSteelHammerManufacturing
+  name: "Steel Hammer Manufacturing"
+  color: "#92a2a1"
+  company: SteelHammerManufacturing
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconTSF
+  name: "Транс-Солнечная Федерация"
+  color: "#047ABD"
+  company: TSF
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconTSFHighComm
+  name: "Winter Solstice"
+  color: "#008CE3"
+  company: TSFHighComm
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconTechnicLogistic
+  name: "TechnicLogistic"
+  color: "#83489d"
+  company: TechnicLogistic
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconTheHive
+  name: "Улей"
+  color: "#5918a8"
+  company: TheHive
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconTheViperGroup
+  name: "Viper Group"
+  color: "#B82121"
+  company: TheViperGroup
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconUSSP
+  name: "СССП(К)"
+  color: "#B01340"
+  company: USSP
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconUllmanIndustries
+  name: "Ullman Industries"
+  color: "#52326A"
+  company: UllmanIndustries
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconUniversalStatesOfAmerica
+  name: "Universal States of America"
+  color: "#0A3161"
+  company: UniversalStatesOfAmerica
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconWFAds
+  name: "Automated Defense System"
+  color: "#9B4DFF"
+  company: WFAds
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconWFAsf
+  name: "Astraeus Solar Federation"
+  color: "#A66BE0"
+  company: WFAsf
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconWFUnderground
+  name: "Underground"
+  color: "#991111"
+  company: WFUnderground
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconblackhawkpmc
+  name: "Blackhawk Military Contracting"
+  color: "#419E23"
+  company: blackhawkpmc
+  playerBeacons: true
+
+- type: wfSectorFaction
+  id: WFSectorBeaconpaycheckbratva
+  name: "Paycheck Bratva"
+  color: "#971f47"
+  company: paycheckbratva
+  playerBeacons: true

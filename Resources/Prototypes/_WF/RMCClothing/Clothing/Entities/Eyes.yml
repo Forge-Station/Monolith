@@ -1,0 +1,69 @@
+- type: entity
+  parent: ClothingEyesHudSecurity
+  id: WFRMCGogglesBallisticGoggles
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/ballistic_goggles.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/ballistic_goggles.rsi
+
+- type: entity
+  parent: ClothingEyesHudSecurity
+  id: WFRMCGogglesM1A1BallisticGoggles
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/m1a1_ballistic_goggles.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/m1a1_ballistic_goggles.rsi
+
+- type: entity
+  parent: ClothingEyesHudSecurity
+  id: WFRMCGogglesM1A1BallisticGogglesBlue
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/m1a1_ballistic_goggles_blue.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/m1a1_ballistic_goggles_blue.rsi
+
+- type: entity
+  parent: ClothingEyesHudSecurity
+  id: WFRMCGogglesBlackBallisticGoggles
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/black_ballistic_goggles.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/black_ballistic_goggles.rsi
+
+- type: entity
+  parent: ClothingEyesHudSecurity
+  id: WFRMCGogglesBallisticGogglesRcm
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/ballistic_goggles_rcm.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/ballistic_goggles_rcm.rsi
+
+- type: entity
+  parent: ClothingEyesHudSecurity
+  id: WFRMCGogglesBallisticGogglesRcmTint
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/ballistic_goggles_rcm_tint.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/ballistic_goggles_rcm_tint.rsi
+
+- type: entity
+  parent: ClothingEyesHudSecurity
+  id: WFRMCGogglesSwatgoggles
+  components:
+  - type: Sprite
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/swatgoggles.rsi
+    state: icon
+  - type: Clothing
+    sprite: _WF/RMCClothing/Clothing/Eyes/goggles/swatgoggles.rsi

@@ -13,6 +13,7 @@ using Content.Server.Administration.Managers;
 using Content.Server.Afk;
 using Content.Server.Chat.Managers;
 using Content.Server.Connection;
+using Content.Server._Common.Consent; // WOLFGATE
 using Content.Server.Database;
 using Content.Server.Discord.DiscordLink;
 using Content.Server.EUI;
@@ -114,6 +115,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<IConnectionManager>().Initialize();
                 _dbManager.Init();
                 IoCManager.Resolve<IServerPreferencesManager>().Init();
+                IoCManager.Resolve<IServerConsentManager>().Initialize(); // WOLFGATE - consent system
                 IoCManager.Resolve<INodeGroupFactory>().Initialize();
                 IoCManager.Resolve<ContentNetworkResourceManager>().Initialize();
                 IoCManager.Resolve<GhostKickManager>().Initialize();

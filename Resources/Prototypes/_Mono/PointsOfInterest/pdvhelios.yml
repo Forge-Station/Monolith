@@ -5,82 +5,92 @@
 # Maintainer Info
 # GitHub: ???
 # Discord: ???
-#- type: pointOfInterest
-#  id: HeliosFortress
-#  parent: [BasePOI, BaseRepairablePOI]
-#  name: 'Крепость ПДВ «Гелиос»'
-#  minimumDistance: 7500
-#  maximumDistance: 9500
-#  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoADS, MonoChimera, MonoMixed, MonoAllAtOnce ]
-#  spawnGroup: Required
-#  gridPath: /Maps/_Mono/POI/pdvhelios.yml
-#  addComponents:
-#  - type: IFF
-#    color: "#DE9E59"
-#    readOnly: true # mono
+# PDV Helios Fortress is not spawned as a point of interest.
+- type: gameMap
+  id: HeliosFortress
+  mapName: 'PDV Helios Fortress'
+  mapPath: /Maps/_Mono/POI/pdvhelios.yml
+  minPlayers: 0
+  stations:
+    HeliosFortress:
+      stationProto: RecordsFrontierOutpostCargo
+      gridComponents:
+      - type: VesselInfo
+        description: "An oppressive imperial aura lurks here. Glory to the Sultan."
+      - type: JamDeathrattles
+        exclusions:
+        - FreelanceTrackingImplant
+      - type: JamOverwatch
+        excludedFactions:
+        - PDV
+      - type: DeleteNearbyDrones
+        distance: 5000
+      - type: ApplyIFFFlagsToDockedShips
+        flags:
+        - HideLabelAlways # hide all docked ships
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'PDV Helio Fortress'
+        - type: ExtraStationInformation
+          icon: /Textures/_NF/Interface/Pirate/piratelogo.png
+          stationSubtext: 'frontier-lobby-pirate-subtext'
+          stationDescription: 'frontier-lobby-pirate-description'
+        - type: StationJobs
+          availableJobs:
+            # PdvCivilian: [ -1, -1 ]
+            PirateCaptain: [ 1, 1 ]
+            PirateFirstMate: [ 1, 1 ]
+            PDVDenasvar: [ 3, 3 ]
+            WFPdvJarrah: [ 2, 2 ] # WOLFGATE(PdvMedic): PDV field medic slots
+            # PDVInfiltrator: [ 2, 2 ]
+            Pirate: [ -1, -1 ]
+            PdvBorg: [ 2, 2 ]
+          tags:
+          - GrandVizier
+        - type: StationDeadDropReporting
+          messageSet: Pirate
+        - type: StationDeadDropHintExempt
 
-#- type: gameMap
-#  id: HeliosFortress
-#  mapName: 'Крепость ПДВ «Гелиос»'
-#  mapPath: /Maps/_Mono/POI/pdvhelios.yml
-#  minPlayers: 0
-#  stations:
-#    HeliosFortress:
-#      stationProto: RecordsFrontierOutpostCargo
-#      gridComponents:
-#      - type: VesselInfo
-#        description: "Здесь витает гнетущая имперская аура. Слава султану."
-#      components:
-#        - type: StationNameSetup
-#          mapNameTemplate: 'Крепость ПДВ «Гелиос»'
-#        - type: ExtraStationInformation
-#          iconPath: /Textures/_NF/Interface/Pirate/piratelogo.png
-#          stationSubtext: 'frontier-lobby-pirate-subtext'
-#          stationDescription: 'frontier-lobby-pirate-description'
-#        - type: StationJobs
-#          availableJobs:
-            # PirateCaptain: [ 1, 1 ] # Forge-Change-delete
-            # PirateFirstMate: [ 1, 1 ] # Forge-Change-delete
-            # PDVDenasvar: [ 3, 3 ] # Forge-Change-delete
-            # PDVInfiltrator: [ 2, 2 ] # Forge-Change-delete
-            # Pirate: [ -1, -1 ] # Forge-Change-delete
-#            PdvBorg: [ 2, 2 ]
-#          tags:
-#          - GrandVizier
-#        - type: StationDeadDropReporting
-#          messageSet: Pirate
-#        - type: StationDeadDropHintExempt
-#        - type: TradeCrateWildcardDestination
-#          valueMultiplier: 1.0 # Mono
+### Hyperwar
 
-# Hyperwar variant (disabled — PDVDenasvar spawn/job removed)
-#- type: pointOfInterest
-#  id: HeliosFortressHyperwar
-#  parent: [BasePOI, BaseRepairablePOI]
-#  name: 'Крепость ПДВ «Гелиос» (Hyperwar)'
-#  minimumDistance: 7500
-#  maximumDistance: 9500
-#  spawnGamePreset: [ MonoRogueTSFHyperwar ]
-#  spawnGroup: Required
-#  gridPath: /Maps/_Mono/POI/pdvhelios_hw.yml
-#  addComponents:
-#  - type: IFF
-#    color: "#DE9E59"
-#    readOnly: true
-#
-#- type: gameMap
-#  id: HeliosFortressHyperwar
-#  mapName: 'Крепость ПДВ «Гелиос» (Hyperwar)'
-#  mapPath: /Maps/_Mono/POI/pdvhelios_hw.yml
-#  minPlayers: 0
-#  stations:
-#    HeliosFortressHyperwar:
-#      stationProto: RecordsFrontierOutpostCargo
-#      gridComponents:
-#      - type: VesselInfo
-#        description: "Hyperwar variant of the PDV Helios fortress."
-#      components:
-#        - type: StationNameSetup
-#          mapNameTemplate: 'Крепость ПДВ «Гелиос»'
-#        - type: StationJobs
-#          availableJobs: {}
+# PDV Helios Fortress hyperwar variant is not spawned as a point of interest.
+- type: gameMap
+  id: HeliosFortressHyperwar
+  mapName: 'PDV Helios Fortress'
+  mapPath: /Maps/_Mono/POI/pdvhelios_hw.yml
+  minPlayers: 0
+  stations:
+    HeliosFortressHyperwar:
+      stationProto: RecordsFrontierOutpostCargo
+      gridComponents:
+      - type: VesselInfo
+        description: "An oppressive imperial aura lurks here. Glory to the Sultan."
+      - type: Tag
+        tags:
+        - PdvStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'PDV Helio Fortress'
+        - type: StationEventEligible
+        - type: NpcFactionMember
+          factions:
+          - PirateNF
+        - type: ExtraStationInformation
+          icon: /Textures/_NF/Interface/Pirate/piratelogo.png
+          stationSubtext: 'frontier-lobby-pirate-subtext'
+          stationDescription: 'frontier-lobby-pirate-description'
+        - type: StationJobs
+          availableJobs:
+            PirateCaptain: [ 1, 1 ]
+            PDVTarkhan: [ 3, 3 ]
+            PirateFirstMate: [ 3, 3 ]
+            PDVDenasvar: [ 6, 6 ]
+            WFPdvJarrah: [ 4, 4 ] # WOLFGATE(PdvMedic): PDV field medic slots
+            # PDVInfiltrator: [ 2, 2 ]
+            Pirate: [ -1, -1 ]
+            PdvBorg: [ 2, 2 ]
+          tags:
+          - CentralCommand
+        - type: StationDeadDropReporting
+          messageSet: Pirate
+        - type: StationDeadDropHintExempt

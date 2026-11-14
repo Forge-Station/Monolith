@@ -1,0 +1,59 @@
+# Debug content for the rope core. Stage 2A replaces all of this with the real eye, coils and
+# construction graphs; nothing here should be referenced by maps or cargo.
+- type: stack
+  id: WFRopeDebug
+  name: rope-name-debug
+  icon: { sprite: "/Textures/Objects/Tools/cable-coils.rsi", state: coillv-30 }
+  spawn: RopeCoilDebug1
+  maxCount: 30
+
+- type: entity
+  id: RopeAttachPointDebug
+  name: tether eye
+  suffix: Debug
+  description: A ring bolted to the hull. Rope can be tied to it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: Structures/Wallmounts/bell.rsi
+    state: bell
+  - type: RopeAttachPoint
+    maxRopes: 2
+
+- type: entity
+  id: RopeCoilDebug
+  parent: BaseItem
+  name: rope coil
+  suffix: Debug, Full
+  description: A coil of plain rope. Use it on one tether eye, then on another.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/cable-coils.rsi
+    state: coillv-30
+  - type: Item
+    sprite: Objects/Tools/cable-coils.rsi
+    heldPrefix: coillv
+    size: Small
+    storedRotation: -90
+  - type: Stack
+    stackType: WFRopeDebug
+    count: 30
+  - type: RopeCoil
+    ropeType: RopeDebug
+    metresPerUnit: 1
+    slack: 1.15
+
+- type: entity
+  id: RopeCoilDebug1
+  parent: RopeCoilDebug
+  suffix: Debug, 1
+  components:
+  - type: Sprite
+    state: coillv-10
+  - type: Stack
+    count: 1

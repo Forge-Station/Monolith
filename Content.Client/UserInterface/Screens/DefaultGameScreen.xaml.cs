@@ -34,13 +34,18 @@ public sealed partial class DefaultGameScreen : InGameScreen
     private void ResizeActionContainer()
     {
         float indent = Inventory.Size.Y + TopBar.Size.Y + 40;
-        Actions.ActionsContainer.MaxGridHeight = MainViewport.Size.Y - indent;
+        Actions.ActionsContainer.MaxGridHeight = Math.Max(MainViewport.Size.Y - indent, 1); // WOLFGATE(Cockpit): Small cockpit viewports must retain a positive action grid limit.
     }
 
     private void ResizeAlertsContainer()
     {
         float indent = Chat.Size.Y + Targeting.Size.Y + 120;
-        Alerts.AlertContainer.MaxGridHeight = Math.Max(MainViewport.Size.Y - indent, 1);
+        // WOLFGATE(Cockpit) START: Keep critical alerts in a compact bank beside the cockpit world view.
+        if (_wfCockpitAlertsWidth is { } width)
+            Alerts.AlertContainer.MaxGridWidth = width;
+        else
+            Alerts.AlertContainer.MaxGridHeight = Math.Max(MainViewport.Size.Y - indent, 1);
+        // WOLFGATE END
     }
 
     private void ChatOnResizeFinish(Vector2 _)

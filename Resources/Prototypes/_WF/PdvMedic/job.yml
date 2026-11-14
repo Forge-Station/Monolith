@@ -1,0 +1,89 @@
+# The PDV's field medic, the counterpart of the TSF brigmedic.
+
+- type: job
+  id: WFPdvJarrah
+  name: job-name-wf-pdv-jarrah
+  description: job-description-wf-pdv-jarrah
+  playTimeTracker: JobWFPdvJarrah
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 72000 # 20hr
+    - !type:RoleTimeRequirement
+      role: JobPirate
+      time: 7200 # 2hr
+    - !type:TraitsRequirement
+      inverted: true
+      traits:
+      - Heretic
+  startingGear: WFPdvJarrahGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  canBeAntag: true
+  icon: JobIconWFPdvJarrah
+  supervisors: job-supervisors-wf-pdv-jarrah
+  weight: 25
+  displayWeight: 25
+  assignedCompany: PDV
+  setPreference: true
+  access:
+  - Pirate
+  - Mercenary
+  accessGroups:
+  - GeneralAccess
+  guides:
+  - PDV_Entry
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: FalseRecord
+    - type: NpcFactionMember
+      factions:
+      - PirateNF
+    - type: SurgerySpeedModifier
+      SpeedModifier: 1.65
+    - type: RadioOnCryosleep
+      radioChannel: Freelance
+  - !type:AddImplantSpecial
+    implants: [ FreelanceTrackingImplant ]
+  - !type:AddLanguageSpecial
+    languagesSpoken:
+    - Freespeak
+    languagesUnderstood:
+    - Freespeak
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: WFPdvJarrahGear
+  equipment:
+    ears: ClothingHeadsetAltFreelancer
+    pocket1: BasePirateUplinkPirateCrew
+  storage:
+    back:
+    - EncryptionKeyMedical
+    - RadioHandheldNF
+
+- type: playTimeTracker
+  id: JobWFPdvJarrah
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWFPdvJarrah
+  icon:
+    sprite: /Textures/_WF/PdvMedic/job_icon.rsi
+    state: jarrah
+  jobName: job-name-wf-pdv-jarrah
+
+- type: entity
+  id: WFSpawnPointPdvJarrah
+  parent: SpawnPointJobBase
+  name: PDV Jarrah
+  components:
+  - type: SpawnPoint
+    job_id: WFPdvJarrah
+  - type: Sprite
+    sprite: Structures/Decoration/banner.rsi
+    state: banner-red

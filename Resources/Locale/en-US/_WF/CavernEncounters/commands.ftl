@@ -1,0 +1,13 @@
+cmd-cavernencounters-desc = List the cavern encounters planned on each world and where they are, or teleport to one.
+cmd-cavernencounters-help = Usage: { $command } [world] | { $command } goto <number>
+cmd-cavernencounters-invalid-args = Expected nothing, a world name, or goto <number>.
+cmd-cavernencounters-world = { $planet }: { $count } encounters, { $spawned } laid out, { $skipped } skipped
+cmd-cavernencounters-row = #{ $number } { $encounter } | { $state } | planned at { $planned } | room at { $centre }
+cmd-cavernencounters-none = not yet
+cmd-cavernencounters-empty = No world has cavern encounters.
+cmd-cavernencounters-unknown-world = No world named "{ $planet }" has cavern encounters.
+cmd-cavernencounters-bad-number = No encounter number { $number }. List them first.
+cmd-cavernencounters-no-entity = Attach to an entity first.
+cmd-cavernencounters-goto-done = Moved to #{ $number } { $encounter } on { $planet } ({ $state }).
+cmd-cavernencounters-hint-first = <world | goto>
+cmd-cavernencounters-hint-number = <encounter number>

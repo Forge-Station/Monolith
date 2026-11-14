@@ -11,6 +11,7 @@
   - type: Clothing
     sprite: _Goobstation/Clothing/Armor/covert_armor.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.50

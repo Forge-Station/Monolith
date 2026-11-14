@@ -1,0 +1,22 @@
+# Wolfgate: ported from HardLight
+marking-NFHumanHairBighawk = Mohawk (Big)
+marking-NFHumanHairChub = Chub
+marking-NFHumanHairHalfshavedEmo = Half-shaved Eno
+marking-NFHumanHairHalfshavedTrim = Half-shaved (Trim)
+marking-NFHumanHairJensen = Jensen
+marking-NFHumanHairLeftSide = Half-shaved (Long, Left)
+marking-NFHumanHairLeftSideTrim = Half-shaved (Trim, Left)
+marking-NFHumanHairMohawkNaomi = Mohawk (Naomi)
+marking-NFHumanHairMohawkShaved = Mohawk (Shaved)
+marking-NFHumanHairNebulaD = Mohawk (Short)
+marking-NFHumanHairRecedingFront = Receding (Front)
+marking-NFHumanHairRecedingRear = Receding (Rear)
+marking-NFHumanHairRightside = Half-shaved (Long, Right)
+marking-NFHumanHairRightsideTrim = Half-shaved (Trim, Right)
+marking-NFHumanHairShavedBun = Half-shaved Bun
+marking-NFHumanHairShavedpart = Partially Shaved
+marking-NFHumanHairSideswept = Sideswept
+marking-NFHumanHairSlick = Slick
+marking-NFHumanHairStreak = Streak
+marking-NFHumanHairSweepshaved = Sideswept (Shaved)
+marking-NFHumanHairUndercutTrim = Undercut (Trim)

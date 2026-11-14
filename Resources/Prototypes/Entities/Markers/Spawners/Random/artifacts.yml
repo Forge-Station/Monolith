@@ -10,17 +10,19 @@
           state: ano01
     - type: RandomSpawner
       prototypes:
-        - SimpleXenoArtifact
-        - MediumXenoArtifact
-        - MediumXenoArtifact
-        - MediumXenoArtifact
-        - MediumXenoArtifact
+        # WOLFGATE(Xenoarch) START: the xenoarch rework only has complex artifacts
+        # - SimpleXenoArtifact
+        # - MediumXenoArtifact
+        # - MediumXenoArtifact
+        # - MediumXenoArtifact
+        # - MediumXenoArtifact
         - ComplexXenoArtifact
         - ComplexXenoArtifact
-        - ComplexXenoArtifact
-        - SimpleXenoArtifactItem
-        - MediumXenoArtifactItem
+        # - ComplexXenoArtifact
+        # - SimpleXenoArtifactItem
+        # - MediumXenoArtifactItem
         - ComplexXenoArtifactItem
+        # WOLFGATE END
       chance: 1
 
 - type: entity

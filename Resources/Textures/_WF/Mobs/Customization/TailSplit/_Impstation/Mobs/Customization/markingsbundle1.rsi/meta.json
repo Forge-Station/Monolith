@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Drawn by Carousel for Impstation South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bee1_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "bee1_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "bee2_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "bee2_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "bee3_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "bee3_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "beetle1_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "beetle1_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "beetle2_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "beetle2_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "beetle3_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "beetle3_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "glasswing1_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "glasswing1_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "glasswing2_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "glasswing2_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "glasswing3_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "glasswing3_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "mothfirefly2_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "mothfirefly2_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "mothtruebutterfly1_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "mothtruebutterfly1_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "mothtruebutterfly2_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "mothtruebutterfly2_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "mothtruebutterfly3_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "mothtruebutterfly3_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "rhinobeetle1_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "rhinobeetle1_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "rhinobeetle2_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "rhinobeetle2_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "rhinobeetle3_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "rhinobeetle3_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "snoth1_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "snoth1_FRONT",
+      "directions": 4
+    }
+  ]
+}

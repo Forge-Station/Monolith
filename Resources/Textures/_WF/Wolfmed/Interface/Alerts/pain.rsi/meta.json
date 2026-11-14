@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Pain glyphs from modular_septic/icons/hud/screen_nigga.dmi, https://gitgud.io/bobstation/bobstation-reignited, composited onto the backing of Resources/Textures/_Crescent/Interface/Alerts/bleed.rsi (sprites provided by @_miket) by Tools/_WF/Wolfmed/gen_wolfmed_overlays.py for Wolfgate (Wolfmed)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "pain0",
+      "delays": [
+        [
+          3.5,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "pain1",
+      "delays": [
+        [
+          3.5,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "pain2",
+      "delays": [
+        [
+          3.5,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "pain3",
+      "delays": [
+        [
+          2.5,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "pain4",
+      "delays": [
+        [
+          1.6,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "pain5",
+      "delays": [
+        [
+          3.0,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "pain6",
+      "delays": [
+        [
+          0.8,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "pain7",
+      "delays": [
+        [
+          3.0,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.25,
+          0.25,
+          0.25,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "paindowned",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "paindd",
+      "delays": [
+        [
+          0.12,
+          0.12,
+          0.12,
+          0.12
+        ]
+      ]
+    }
+  ]
+}

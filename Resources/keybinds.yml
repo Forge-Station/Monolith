@@ -78,6 +78,10 @@ binds:
 - function: ShuttleDescend
   type: State
   key: F
+# WOLFGATE(LandingGuide): landing guide toggle while piloting
+- function: WFToggleLandingGuide
+  type: State
+  key: J
 - function: CameraRotateLeft
   type: State
   key: NumpadNum7
@@ -275,6 +279,11 @@ binds:
 - function: OpenGuidebook
   type: State
   key: NumpadNum0
+# WOLFGATE(SectorControl): sector map key
+- function: OpenSectorMap
+  type: State
+  key: N
+  mod1: Shift
 - function: OpenAHelp
   type: State
   key: F1
@@ -664,3 +673,15 @@ binds:
   key: X
   mod1: Shift
 # endregion Frontier
+# WOLFGATE(Xenonids) START: RMC's xeno wide swing, xeno rest and resist keys
+- function: CMXenoWideSwing
+  type: State
+  key: Space
+- function: RMCXenoRest
+  type: State
+  key: R
+  mod1: Shift
+- function: RMCResist
+  type: State
+  key: B
+# WOLFGATE END

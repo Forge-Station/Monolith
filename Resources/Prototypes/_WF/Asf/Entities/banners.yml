@@ -1,0 +1,15 @@
+- type: entity
+  parent: BannerBase
+  id: WFAsfBanner
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/federation.rsi
+    state: asf-federation-banner
+
+- type: entity
+  parent: BannerBase
+  id: WFAsfMarineBanner
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/marine.rsi
+    state: asf-marine-banner

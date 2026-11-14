@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._NF.LoggingExtensions;
+using Content.Shared._WF.Traders; // WOLFGATE(Traders)
+using Content.Shared._WF.Xenonids.Devour; // WOLFGATE(Xenonids)
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -32,11 +34,9 @@ using Content.Shared.Wall;
 using Content.Shared._Goobstation.DoAfter; // Goobstation
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
-using Robust.Shared.Configuration; // Forge-Change
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -73,20 +73,19 @@ namespace Content.Shared.Interaction
         [Dependency] private SharedStrippableSystem _strippable = default!;
         [Dependency] private SharedPlayerRateLimitManager _rateLimit = default!;
         [Dependency] private ISharedChatManager _chat = default!;
-        [Dependency] private IConfigurationManager _cfg = default!; // Forge-Change
 
         [Dependency] private INetManager _net = default!; // Mono
 
-        [Dependency] private readonly EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery = default!;
-        [Dependency] private readonly EntityQuery<FixturesComponent> _fixtureQuery = default!;
-        [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
-        [Dependency] private readonly EntityQuery<PhysicsComponent> _physicsQuery = default!;
-        [Dependency] private readonly EntityQuery<HandsComponent> _handsQuery = default!;
-        [Dependency] private readonly EntityQuery<InteractionRelayComponent> _relayQuery = default!;
-        [Dependency] private readonly EntityQuery<CombatModeComponent> _combatQuery = default!;
-        [Dependency] private readonly EntityQuery<WallMountComponent> _wallMountQuery = default!;
-        [Dependency] private readonly EntityQuery<UseDelayComponent> _delayQuery = default!;
-        [Dependency] private readonly EntityQuery<ActivatableUIComponent> _uiQuery = default!;
+        [Dependency] private EntityQuery<IgnoreUIRangeComponent> _ignoreUiRangeQuery = default!;
+        [Dependency] private EntityQuery<FixturesComponent> _fixtureQuery = default!;
+        [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
+        [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+        [Dependency] private EntityQuery<HandsComponent> _handsQuery = default!;
+        [Dependency] private EntityQuery<InteractionRelayComponent> _relayQuery = default!;
+        [Dependency] private EntityQuery<CombatModeComponent> _combatQuery = default!;
+        [Dependency] private EntityQuery<WallMountComponent> _wallMountQuery = default!;
+        [Dependency] private EntityQuery<UseDelayComponent> _delayQuery = default!;
+        [Dependency] private EntityQuery<ActivatableUIComponent> _uiQuery = default!;
 
         private const CollisionGroup InRangeUnobstructedMask = CollisionGroup.Impassable | CollisionGroup.InteractImpassable;
 
@@ -94,7 +93,6 @@ namespace Content.Shared.Interaction
         public const float InteractionRangeSquared = InteractionRange * InteractionRange;
         public const float MaxRaycastRange = 100f;
         public const string RateLimitKey = "Interaction";
-        public const string InvalidRateLimitKey = "InteractionInvalid"; // Forge-Change
 
         private static readonly ProtoId<TagPrototype> BypassInteractionRangeChecksTag = "BypassInteractionRangeChecks";
 
@@ -130,15 +128,7 @@ namespace Content.Shared.Interaction
                     CCVars.InteractionRateLimitAnnounceAdminsDelay,
                     RateLimitAlertAdmins)
             );
-            // Forge-Change-start
-            _rateLimit.Register(InvalidRateLimitKey,
-                new RateLimitRegistration(CCVars.InteractionInvalidRateLimitPeriod,
-                    CCVars.InteractionInvalidRateLimitCount,
-                    InvalidRateLimitPlayerLimited,
-                    CCVars.InteractionInvalidRateLimitAnnounceAdminsDelay,
-                    InvalidRateLimitAlertAdmins)
-            );
-            // Forge-Change-end
+
             InitializeBlocking();
         }
 
@@ -146,35 +136,7 @@ namespace Content.Shared.Interaction
         {
             _chat.SendAdminAlert(Loc.GetString("interaction-rate-limit-admin-announcement", ("player", session.Name)));
         }
-        // Forge-Change-start
-        private void InvalidRateLimitPlayerLimited(ICommonSession player)
-        {
-            if (_cfg.GetCVar(CCVars.InteractionInvalidRateLimitDisconnect))
-                player.Channel.Disconnect("Too many invalid interaction requests.");
-        }
 
-        private void InvalidRateLimitAlertAdmins(ICommonSession player)
-        {
-            _chat.SendAdminAlert($"Player {player.Name} is spamming invalid interaction requests.");
-        }
-
-        private void HandleClientInputFailure(ICommonSession? session, string action, ClientInputValidationResult failure)
-        {
-            if (failure == ClientInputValidationResult.RateLimited)
-                return;
-
-            if (session == null)
-            {
-                Log.Info($"{action} input validation failed: {failure}");
-                return;
-            }
-
-            if (_rateLimit.CountAction(session, InvalidRateLimitKey) != RateLimitStatus.Allowed)
-                return;
-
-            Log.Info($"{action} input validation failed: {failure}. Session={session}");
-        }
-        // Forge-Change-end
         public override void Shutdown()
         {
             CommandBinds.Unregister<SharedInteractionSystem>();
@@ -274,9 +236,9 @@ namespace Content.Shared.Interaction
 
         private bool HandleTryPullObject(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
-            if (!ValidateClientInput(session, coords, uid, out var userEntity, out var failure)) // Forge-Change
+            if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
-                HandleClientInputFailure(session, "TryPullObject", failure); // Forge-Change
+                Log.Info($"TryPullObject input validation failed");
                 return true;
             }
 
@@ -303,19 +265,11 @@ namespace Content.Shared.Interaction
             var item = GetEntity(msg.ItemUid);
 
             // client sanitization
-            // Forge-Change-start
-            if (!TryComp(item, out TransformComponent? itemXform))
+            if (!TryComp(item, out TransformComponent? itemXform) || !ValidateClientInput(args.SenderSession, itemXform.Coordinates, item, out var user))
             {
-                HandleClientInputFailure(args.SenderSession, "Inventory interaction", ClientInputValidationResult.InvalidTarget);
+                Log.Info($"Inventory interaction validation failed.  Session={args.SenderSession}");
                 return;
             }
-
-            if (!ValidateClientInput(args.SenderSession, itemXform.Coordinates, item, out var user, out var failure))
-            {
-                HandleClientInputFailure(args.SenderSession, "Inventory interaction", failure);
-                return;
-            }
-            // Forge-Change-end
 
             // We won't bother to check that the target item is ACTUALLY in an inventory slot. UserInteraction() and
             // InteractionActivate() should check that the item is accessible. So.. if a user wants to lie about an
@@ -332,14 +286,13 @@ namespace Content.Shared.Interaction
 
         public bool HandleAltUseInteraction(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
-            // Forge-Change-start
             // client sanitization
-            if (!ValidateClientInput(session, coords, uid, out var user, out var failure))
+            if (!ValidateClientInput(session, coords, uid, out var user))
             {
-                HandleClientInputFailure(session, "Alt-use", failure);
+                Log.Info($"Alt-use input validation failed");
                 return true;
             }
-            // Forge-Change-end
+
             UserInteraction(user.Value, coords, uid, altInteract: true, checkAccess: ShouldCheckAccess(user.Value));
 
             return false;
@@ -348,9 +301,9 @@ namespace Content.Shared.Interaction
         public bool HandleUseInteraction(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
             // client sanitization
-            if (!ValidateClientInput(session, coords, uid, out var userEntity, out var failure)) // Forge-Change
+            if (!ValidateClientInput(session, coords, uid, out var userEntity))
             {
-                HandleClientInputFailure(session, "Use", failure); // Forge-Change
+                Log.Info($"Use input validation failed");
                 return true;
             }
 
@@ -394,6 +347,13 @@ namespace Content.Shared.Interaction
         /// <returns></returns>
         public bool CombatModeCanHandInteract(EntityUid user, EntityUid? target)
         {
+            // WOLFGATE(Xenonids) START: devoured mobs and devouring xenos override combat-mode interaction
+            var overrideEv = new RMCCombatModeInteractOverrideUserEvent(target);
+            RaiseLocalEvent(user, ref overrideEv);
+            if (overrideEv.Handled)
+                return overrideEv.CanInteract;
+            // WOLFGATE END
+
             // Always allow attack in these cases
             if (target == null || !_handsQuery.TryComp(user, out var hands) || hands.ActiveHand?.HeldEntity is not null)
                 return false;
@@ -734,9 +694,7 @@ namespace Content.Shared.Interaction
             bool popup = false,
             bool overlapCheck = true)
         {
-            // Forge-Change: a deleted or not-yet-replicated target is a failed range check, not an error.
-            // Resolve() logs a full stack trace by default, and heavy attacks send one of these per swing.
-            if (!Resolve(other, ref other.Comp, false))
+            if (!Resolve(other, ref other.Comp))
                 return false;
 
             var ev = new InRangeOverrideEvent(origin, other);
@@ -746,6 +704,15 @@ namespace Content.Shared.Interaction
             {
                 return ev.InRange;
             }
+
+            // WOLFGATE(Traders) START: let the target extend the reach range (e.g. traders trading across a table)
+            if (range > 0f)
+            {
+                var bonusEv = new InteractionRangeBonusEvent(origin, other);
+                RaiseLocalEvent(other.Owner, ref bonusEv);
+                range += bonusEv.Bonus;
+            }
+            // WOLFGATE END
 
             return InRangeUnobstructed(origin,
                 other,
@@ -816,7 +783,7 @@ namespace Content.Shared.Interaction
                 fixtureA.FixtureCount > 0 &&
                 _fixtureQuery.TryComp(other, out var fixtureB) &&
                 fixtureB.FixtureCount > 0 &&
-                Resolve(origin, ref origin.Comp, false)) // Forge-Change
+                Resolve(origin, ref origin.Comp))
             {
                 var (worldPosA, worldRotA) = _transform.GetWorldPositionRotation(origin.Comp);
                 var xfA = new Transform(worldPosA, worldRotA);
@@ -862,17 +829,9 @@ namespace Content.Shared.Interaction
             // No fixtures, e.g. wallmounts.
             else
             {
-                // Forge-Change: a missing transform here used to throw and log once per swing.
-                var originXform = origin.Comp;
-                var otherXform = other.Comp;
-                if (!Resolve(origin, ref originXform, false) || !Resolve(other, ref otherXform, false))
-                    return false;
-
-                originPos = _transform.GetMapCoordinates(originXform);
-                var otherParent = otherXform.ParentUid;
-                targetRot = otherParent.IsValid() && TryComp(otherParent, out TransformComponent? parentXform)
-                    ? parentXform.LocalRotation + otherAngle
-                    : otherAngle;
+                originPos = _transform.GetMapCoordinates(origin, origin);
+                var otherParent = (other.Comp ?? Transform(other)).ParentUid;
+                targetRot = otherParent.IsValid() ? Transform(otherParent).LocalRotation + otherAngle : otherAngle;
             }
 
             // Do a raycast to check if relevant
@@ -1164,9 +1123,9 @@ namespace Content.Shared.Interaction
         #region ActivateItemInWorld
         private bool HandleActivateItemInWorld(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
         {
-            if (!ValidateClientInput(session, coords, uid, out var user, out var failure)) // Forge-Change
+            if (!ValidateClientInput(session, coords, uid, out var user))
             {
-                HandleClientInputFailure(session, "ActivateItemInWorld", failure); // Forge-Change
+                Log.Info($"ActivateItemInWorld input validation failed");
                 return false;
             }
 
@@ -1421,25 +1380,23 @@ namespace Content.Shared.Interaction
             return InRangeUnobstructed(user, wearer) && _containerSystem.IsInSameOrParentContainer(user, wearer);
         }
 
-        private bool ValidateClientInput( // Forge-Change: protected
+        protected bool ValidateClientInput(
             ICommonSession? session,
             EntityCoordinates coords,
             EntityUid uid,
-            [NotNullWhen(true)] out EntityUid? userEntity,
-            out ClientInputValidationResult failure) // Forge-Change
+            [NotNullWhen(true)] out EntityUid? userEntity)
         {
             userEntity = null;
-            failure = ClientInputValidationResult.None; // Forge-Change
 
             if (!coords.IsValid(EntityManager))
             {
-                failure = ClientInputValidationResult.InvalidCoordinates; // Forge-Change
+                Log.Info($"Invalid Coordinates: client={session}, coords={coords}");
                 return false;
             }
 
             if (IsClientSide(uid))
             {
-                failure = ClientInputValidationResult.ClientSideEntity; // Forge-Change
+                Log.Warning($"Client sent interaction with client-side entity. Session={session}, Uid={uid}");
                 return false;
             }
 
@@ -1447,25 +1404,17 @@ namespace Content.Shared.Interaction
 
             if (userEntity == null || !userEntity.Value.Valid)
             {
-                failure = ClientInputValidationResult.MissingAttachedEntity; // Forge-Change
+                Log.Warning($"Client sent interaction with no attached entity. Session={session}");
                 return false;
             }
 
             if (!Exists(userEntity))
             {
-                failure = ClientInputValidationResult.InvalidAttachedEntity; // Forge-Change
+                Log.Warning($"Client attempted interaction with a non-existent attached entity. Session={session},  entity={userEntity}");
                 return false;
             }
 
-            // Forge-Change-start
-            if (_rateLimit.CountAction(session!, RateLimitKey) != RateLimitStatus.Allowed)
-            {
-                failure = ClientInputValidationResult.RateLimited;
-                return false;
-            }
-
-            return true;
-            // Forge-Change-end
+            return _rateLimit.CountAction(session!, RateLimitKey) == RateLimitStatus.Allowed;
         }
 
         /// <summary>
@@ -1605,17 +1554,4 @@ namespace Content.Shared.Interaction
         public bool Handled;
         public bool InRange = false;
     }
-
 }
-// Forge-Change-start
-internal enum ClientInputValidationResult : byte
-{
-    None,
-    RateLimited,
-    InvalidCoordinates,
-    ClientSideEntity,
-    MissingAttachedEntity,
-    InvalidAttachedEntity,
-    InvalidTarget,
-}
-// Forge-Change-end

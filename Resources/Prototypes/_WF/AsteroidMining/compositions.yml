@@ -1,0 +1,384 @@
+# What each kind of asteroid holds. Every unit of rock mass is one vein of the picked ore, so yields follow the ore
+# prototypes that vein rocks use. Ore weights and the inert share start from each kind's soft mineral table
+# (Resources/Prototypes/_NF/Entities/Markers/Spawners/Random/Salvage/minerals.yml), tilted towards iron and coal, which
+# steel and plasteel need, at the expense of malachite, quartz and salt; each kind keeps its signature ores. Lithium,
+# the economy's main tuning knob, keeps its share and comes mostly from chromite as before. Volatility feeds the
+# overcharge blast.
+
+# Plain and gas-bearing rock asteroids (NFRockMineralSoft): about 38% plain rock.
+- type: wfAsteroidComposition
+  id: WFAsteroidRock
+  minInert: 0.28
+  maxInert: 0.48
+  minResistance: 0.05
+  maxResistance: 0.3
+  minInstability: 0.1
+  maxInstability: 0.45
+  ores:
+  - ore: NFOreSteel
+    weight: 20
+    color: "#c98a6b"
+  - ore: NFOreCoal
+    weight: 12
+    color: "#5a5652"
+  - ore: NFOrePlasma
+    weight: 7
+    color: "#b04cff"
+    volatility: 1
+  - ore: NFOreSpaceQuartz
+    weight: 5
+    color: "#e6f2ff"
+  - ore: NFOreSalt
+    weight: 4
+    color: "#f4f1ea"
+  - ore: CopperOre
+    weight: 4
+    color: "#3fb58a"
+  - ore: NFOreSilver
+    weight: 4
+    color: "#d8dde3"
+  - ore: NFOreUranium
+    weight: 4
+    color: "#5fe04a"
+    volatility: 0.3
+  - ore: LithiumOre
+    weight: 4
+    color: "#f2a8d8"
+  - ore: NFOreGold
+    weight: 1
+    color: "#ffd040"
+  - ore: NFOreBananium
+    weight: 1
+    color: "#ffe94a"
+  - ore: OreArtifactFragment
+    weight: 1
+    color: "#c88cff"
+  - ore: NFOreBluespace
+    weight: 0.3
+    color: "#3d7bff"
+    volatility: 0.5
+  - ore: OreDiamond
+    weight: 0.2
+    color: "#9ff0ff"
+
+# Ice (NFIceMineralSoft): soft and unstable, about 63% plain ice.
+- type: wfAsteroidComposition
+  id: WFAsteroidIce
+  minInert: 0.53
+  maxInert: 0.73
+  minResistance: 0.02
+  maxResistance: 0.2
+  minInstability: 0.3
+  maxInstability: 0.7
+  ores:
+  - ore: CopperOre
+    weight: 3
+    color: "#3fb58a"
+  - ore: NFOrePlasma
+    weight: 4
+    color: "#b04cff"
+    volatility: 1
+  - ore: NFOreSteel
+    weight: 7
+    color: "#c98a6b"
+  - ore: OreArtifactFragment
+    weight: 3
+    color: "#c88cff"
+  - ore: NFOreCoal
+    weight: 4
+    color: "#5a5652"
+  - ore: NFOreGold
+    weight: 2
+    color: "#ffd040"
+  - ore: NFOreSilver
+    weight: 2
+    color: "#d8dde3"
+  - ore: LithiumOre
+    weight: 2
+    color: "#f2a8d8"
+  - ore: NFOreSpaceQuartz
+    weight: 1
+    color: "#e6f2ff"
+  - ore: NFOreSalt
+    weight: 1
+    color: "#f4f1ea"
+  - ore: NFOreUranium
+    weight: 1
+    color: "#5fe04a"
+    volatility: 0.3
+  - ore: NFOreBluespace
+    weight: 1
+    color: "#3d7bff"
+    volatility: 0.5
+  - ore: NFOreBananium
+    weight: 0.5
+    color: "#ffe94a"
+  - ore: OreDiamond
+    weight: 0.2
+    color: "#9ff0ff"
+
+# Basalt (NFBasaltMineralSoft): hard and steady, plasma-rich, about 59% plain basalt.
+- type: wfAsteroidComposition
+  id: WFAsteroidBasalt
+  minInert: 0.49
+  maxInert: 0.69
+  minResistance: 0.15
+  maxResistance: 0.42
+  minInstability: 0.05
+  maxInstability: 0.3
+  ores:
+  - ore: NFOrePlasma
+    weight: 10
+    color: "#b04cff"
+    volatility: 1
+  - ore: NFOreSteel
+    weight: 7
+    color: "#c98a6b"
+  - ore: NFOreUranium
+    weight: 4
+    color: "#5fe04a"
+    volatility: 0.3
+  - ore: NFOreSilver
+    weight: 3
+    color: "#d8dde3"
+  - ore: CopperOre
+    weight: 2
+    color: "#3fb58a"
+  - ore: NFOreCoal
+    weight: 4
+    color: "#5a5652"
+  - ore: NFOreSpaceQuartz
+    weight: 1
+    color: "#e6f2ff"
+  - ore: NFOreSalt
+    weight: 1
+    color: "#f4f1ea"
+  - ore: NFOreGold
+    weight: 1
+    color: "#ffd040"
+  - ore: LithiumOre
+    weight: 1
+    color: "#f2a8d8"
+  - ore: OreArtifactFragment
+    weight: 1
+    color: "#c88cff"
+  - ore: NFOreBananium
+    weight: 0.5
+    color: "#ffe94a"
+  - ore: NFOreBluespace
+    weight: 0.5
+    color: "#3d7bff"
+    volatility: 0.5
+  - ore: OreDiamond
+    weight: 0.5
+    color: "#9ff0ff"
+
+# Sand (NFSandMineralSoft): soft, quartz and precious metals, about 52% plain sand.
+- type: wfAsteroidComposition
+  id: WFAsteroidSand
+  minInert: 0.42
+  maxInert: 0.62
+  minResistance: 0.03
+  maxResistance: 0.22
+  minInstability: 0.2
+  maxInstability: 0.5
+  ores:
+  - ore: NFOreSpaceQuartz
+    weight: 10
+    color: "#e6f2ff"
+  - ore: NFOreSilver
+    weight: 7
+    color: "#d8dde3"
+  - ore: CopperOre
+    weight: 5
+    color: "#3fb58a"
+  - ore: NFOreGold
+    weight: 7
+    color: "#ffd040"
+  - ore: LithiumOre
+    weight: 2
+    color: "#f2a8d8"
+  - ore: NFOreSteel
+    weight: 6
+    color: "#c98a6b"
+  - ore: NFOreCoal
+    weight: 3.5
+    color: "#5a5652"
+  - ore: NFOreSalt
+    weight: 1
+    color: "#f4f1ea"
+  - ore: NFOrePlasma
+    weight: 1
+    color: "#b04cff"
+    volatility: 1
+  - ore: NFOreUranium
+    weight: 1
+    color: "#5fe04a"
+    volatility: 0.3
+  - ore: NFOreBananium
+    weight: 1
+    color: "#ffe94a"
+  - ore: OreArtifactFragment
+    weight: 1
+    color: "#c88cff"
+  - ore: NFOreBluespace
+    weight: 0.2
+    color: "#3d7bff"
+    volatility: 0.5
+  - ore: OreDiamond
+    weight: 0.2
+    color: "#9ff0ff"
+
+# Chromite (NFChromiteMineralSoft): tough, the lithium and uranium source, about 56% plain chromite.
+- type: wfAsteroidComposition
+  id: WFAsteroidChromite
+  minInert: 0.46
+  maxInert: 0.66
+  minResistance: 0.2
+  maxResistance: 0.45
+  minInstability: 0.1
+  maxInstability: 0.4
+  ores:
+  - ore: LithiumOre
+    weight: 9
+    color: "#f2a8d8"
+  - ore: NFOreUranium
+    weight: 9
+    color: "#5fe04a"
+    volatility: 0.3
+  - ore: NFOreSalt
+    weight: 2.5
+    color: "#f4f1ea"
+  - ore: NFOrePlasma
+    weight: 4
+    color: "#b04cff"
+    volatility: 1
+  - ore: NFOreSteel
+    weight: 5
+    color: "#c98a6b"
+  - ore: NFOreBananium
+    weight: 1
+    color: "#ffe94a"
+  - ore: NFOreCoal
+    weight: 3
+    color: "#5a5652"
+  - ore: NFOreSpaceQuartz
+    weight: 1
+    color: "#e6f2ff"
+  - ore: NFOreGold
+    weight: 1
+    color: "#ffd040"
+  - ore: NFOreSilver
+    weight: 1
+    color: "#d8dde3"
+  - ore: CopperOre
+    weight: 0.5
+    color: "#3fb58a"
+  - ore: OreArtifactFragment
+    weight: 1
+    color: "#c88cff"
+  - ore: OreDiamond
+    weight: 0.5
+    color: "#9ff0ff"
+  - ore: NFOreBluespace
+    weight: 0.25
+    color: "#3d7bff"
+    volatility: 0.5
+
+# Andesite (NFAndesiteMineralSoft), Very Far only: about 65% plain andesite.
+- type: wfAsteroidComposition
+  id: WFAsteroidAndesite
+  minInert: 0.55
+  maxInert: 0.75
+  minResistance: 0.1
+  maxResistance: 0.35
+  minInstability: 0.1
+  maxInstability: 0.4
+  ores:
+  - ore: NFOreSteel
+    weight: 8
+    color: "#c98a6b"
+  - ore: LithiumOre
+    weight: 6
+    color: "#f2a8d8"
+  - ore: NFOreSpaceQuartz
+    weight: 4
+    color: "#e6f2ff"
+  - ore: NFOreCoal
+    weight: 5
+    color: "#5a5652"
+  - ore: CopperOre
+    weight: 1.5
+    color: "#3fb58a"
+  - ore: NFOreSalt
+    weight: 1
+    color: "#f4f1ea"
+  - ore: NFOreGold
+    weight: 1
+    color: "#ffd040"
+  - ore: NFOreSilver
+    weight: 1
+    color: "#d8dde3"
+  - ore: NFOrePlasma
+    weight: 1
+    color: "#b04cff"
+    volatility: 1
+  - ore: NFOreUranium
+    weight: 1
+    color: "#5fe04a"
+    volatility: 0.3
+  - ore: OreArtifactFragment
+    weight: 1
+    color: "#c88cff"
+  - ore: OreDiamond
+    weight: 0.8
+    color: "#9ff0ff"
+  - ore: NFOreBananium
+    weight: 0.5
+    color: "#ffe94a"
+  - ore: NFOreBluespace
+    weight: 0.2
+    color: "#3d7bff"
+    volatility: 0.5
+
+# Metallic: the rare rich kind, rolled by a few rocks in any cluster. Little plain rock, mostly iron, silver and gold
+# with a chance of diamond, and tough: crack it at high power or with two lasers. Drawn in blue steel with bare plates.
+- type: wfAsteroidComposition
+  id: WFAsteroidMetallic
+  name: wf-asteroid-name-metallic
+  examine: wf-asteroid-examine-metallic
+  look: metallic
+  # Dense ore: each vein drops half again as much, on top of the rock's own yield.
+  oreYield: 1.5
+  minOres: 2
+  maxOres: 3
+  minInert: 0.12
+  maxInert: 0.25
+  minResistance: 0.45
+  maxResistance: 0.6
+  minInstability: 0.05
+  maxInstability: 0.25
+  ores:
+  - ore: NFOreSteel
+    weight: 6
+    color: "#c98a6b"
+  - ore: NFOreSilver
+    weight: 5
+    color: "#d8dde3"
+  - ore: NFOreGold
+    weight: 5
+    color: "#ffd040"
+  - ore: CopperOre
+    weight: 3
+    color: "#3fb58a"
+  - ore: NFOreUranium
+    weight: 2
+    color: "#5fe04a"
+    volatility: 0.3
+  - ore: OreDiamond
+    weight: 1.5
+    color: "#9ff0ff"
+  - ore: NFOreBluespace
+    weight: 0.5
+    color: "#3d7bff"
+    volatility: 0.5

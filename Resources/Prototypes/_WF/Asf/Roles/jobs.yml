@@ -1,0 +1,422 @@
+- type: job
+  id: WFAsfEnvoy
+  name: wf-asf-job-envoy
+  description: wf-asf-job-envoy-description
+  playTimeTracker: JobWFAsfEnvoy
+  startingGear: WFAsfEnvoyGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  icon: JobIconWFAsfEnvoy
+  supervisors: wf-asf-job-supervisors-council
+  assignedCompany: WFAsf
+  canBeAntag: false
+  weight: 40
+  displayWeight: 40
+  accessGroups:
+  - GeneralAccess
+  - WFAsfCommand
+
+- type: playTimeTracker
+  id: JobWFAsfEnvoy
+
+- type: startingGear
+  id: WFAsfEnvoyGear
+  equipment:
+    shoes: WFAsfClothingShoesBoots
+    ears: WFAsfClothingHeadset
+    id: WFAsfEnvoyPDA
+  storage:
+    back:
+    - RadioHandheldNF
+    - WFAsfVoucherEscort
+
+- type: roleLoadout
+  id: JobWFAsfEnvoy
+  groups:
+  - WFAsfJumpsuitService
+  - WFAsfHeadEnvoy
+  - WFAsfNeckEnvoy
+  - WFAsfOuterEnvoy
+  - WFAsfGloves
+  - WFAsfBackpack
+  - MercenaryGlasses
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific
+  - ContractorArmorPlates
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWFAsfEnvoy
+  icon:
+    sprite: /Textures/_WF/Asf/Interface/job_icons.rsi
+    state: Envoy
+  jobName: wf-asf-job-envoy
+  allowSelection: false
+
+- type: entity
+  parent: IDCardStandard
+  id: WFAsfEnvoyIDCard
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Misc/id_cards.rsi
+    layers:
+    - state: asfbase
+    - state: idasfenvoy
+  - type: PresetIdCard
+    job: WFAsfEnvoy
+
+- type: entity
+  parent: BasePDA
+  id: WFAsfEnvoyPDA
+  components:
+  - type: Pda
+    id: WFAsfEnvoyIDCard
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+  - type: Icon
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+    state: pda-envoy
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-envoy
+  - type: PdaBorderColor
+    borderColor: "#7B52B8"
+    accentVColor: "#EBC913"
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: WFAsfSpawnPointEnvoy
+  components:
+  - type: SpawnPoint
+    job_id: WFAsfEnvoy
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/federation.rsi
+    state: asf-federation-banner
+
+- type: job
+  id: WFAsfEnforcer
+  name: wf-asf-job-enforcer
+  description: wf-asf-job-enforcer-description
+  playTimeTracker: JobWFAsfEnforcer
+  startingGear: WFAsfEnforcerGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  icon: JobIconWFAsfEnforcer
+  supervisors: wf-asf-job-supervisors-envoy
+  assignedCompany: WFAsf
+  canBeAntag: false
+  weight: 30
+  displayWeight: 30
+  accessGroups:
+  - GeneralAccess
+  - WFAsfSecurity
+
+- type: playTimeTracker
+  id: JobWFAsfEnforcer
+
+- type: startingGear
+  id: WFAsfEnforcerGear
+  equipment:
+    shoes: WFAsfClothingShoesBoots
+    ears: WFAsfClothingHeadset
+    id: WFAsfEnforcerPDA
+    outerClothing: ClothingOuterArmorBasic
+    pocket1: WeaponDisabler
+  storage:
+    back:
+    - RadioHandheldNF
+    - Handcuffs
+    - Handcuffs
+    - WFAsfWeaponPistolCoil
+    - WFAsfMagazinePistolCoil
+
+- type: roleLoadout
+  id: JobWFAsfEnforcer
+  groups:
+  - WFAsfJumpsuitService
+  - WFAsfHeadEnforcer
+  - WFAsfNeck
+  - WFAsfGloves
+  - WFAsfBackpack
+  - MercenaryGlasses
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific
+  - ContractorArmorPlates
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWFAsfEnforcer
+  icon:
+    sprite: /Textures/_WF/Asf/Interface/job_icons.rsi
+    state: Enforcer
+  jobName: wf-asf-job-enforcer
+  allowSelection: false
+
+- type: entity
+  parent: IDCardStandard
+  id: WFAsfEnforcerIDCard
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Misc/id_cards.rsi
+    layers:
+    - state: asfbase
+    - state: idasfenforcer
+  - type: PresetIdCard
+    job: WFAsfEnforcer
+
+- type: entity
+  parent: BasePDA
+  id: WFAsfEnforcerPDA
+  components:
+  - type: Pda
+    id: WFAsfEnforcerIDCard
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+  - type: Icon
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+    state: pda-enforcer
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-enforcer
+  - type: PdaBorderColor
+    borderColor: "#7B52B8"
+    accentVColor: "#F2EEFB"
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: WFAsfSpawnPointEnforcer
+  components:
+  - type: SpawnPoint
+    job_id: WFAsfEnforcer
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/federation.rsi
+    state: asf-federation-banner
+
+- type: job
+  id: WFAsfFieldResearcher
+  name: wf-asf-job-field-researcher
+  description: wf-asf-job-field-researcher-description
+  playTimeTracker: JobWFAsfFieldResearcher
+  startingGear: WFAsfFieldResearcherGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  icon: JobIconWFAsfFieldResearcher
+  supervisors: wf-asf-job-supervisors-envoy
+  assignedCompany: WFAsf
+  canBeAntag: false
+  weight: 20
+  displayWeight: 20
+  accessGroups:
+  - GeneralAccess
+  - WFAsfResearch
+
+- type: playTimeTracker
+  id: JobWFAsfFieldResearcher
+
+- type: startingGear
+  id: WFAsfFieldResearcherGear
+  equipment:
+    shoes: WFAsfClothingShoesBoots
+    ears: WFAsfClothingHeadset
+    id: WFAsfFieldResearcherPDA
+    outerClothing: WFAsfClothingOuterCoatLab
+  storage:
+    back:
+    - RadioHandheldNF
+    - HandheldHealthAnalyzer
+    - AnomalyScanner
+
+- type: roleLoadout
+  id: JobWFAsfFieldResearcher
+  groups:
+  - WFAsfJumpsuitResearcher
+  - WFAsfHead
+  - WFAsfNeck
+  - WFAsfGloves
+  - WFAsfBackpack
+  - MercenaryGlasses
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific
+  - ContractorArmorPlates
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWFAsfFieldResearcher
+  icon:
+    sprite: /Textures/_WF/Asf/Interface/job_icons.rsi
+    state: Researcher
+  jobName: wf-asf-job-field-researcher
+  allowSelection: false
+
+- type: entity
+  parent: IDCardStandard
+  id: WFAsfFieldResearcherIDCard
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Misc/id_cards.rsi
+    layers:
+    - state: asfbase
+    - state: idasfresearcher
+  - type: PresetIdCard
+    job: WFAsfFieldResearcher
+
+- type: entity
+  parent: BasePDA
+  id: WFAsfFieldResearcherPDA
+  components:
+  - type: Pda
+    id: WFAsfFieldResearcherIDCard
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+  - type: Icon
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+    state: pda-researcher
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-researcher
+  - type: PdaBorderColor
+    borderColor: "#7B52B8"
+    accentVColor: "#C9BFE0"
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: WFAsfSpawnPointFieldResearcher
+  components:
+  - type: SpawnPoint
+    job_id: WFAsfFieldResearcher
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/federation.rsi
+    state: asf-federation-banner
+
+- type: job
+  id: WFAsfColonist
+  name: wf-asf-job-colonist
+  description: wf-asf-job-colonist-description
+  playTimeTracker: JobWFAsfColonist
+  startingGear: WFAsfColonistGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  icon: JobIconWFAsfColonist
+  supervisors: wf-asf-job-supervisors-envoy
+  assignedCompany: WFAsf
+  canBeAntag: false
+  weight: 10
+  displayWeight: 10
+  accessGroups:
+  - GeneralAccess
+  - WFAsfCrew
+
+- type: playTimeTracker
+  id: JobWFAsfColonist
+
+- type: startingGear
+  id: WFAsfColonistGear
+  equipment:
+    shoes: WFAsfClothingShoesBoots
+    ears: WFAsfClothingHeadset
+    id: WFAsfColonistPDA
+    belt: ClothingBeltUtilityFilled
+  storage:
+    back:
+    - RadioHandheldNF
+
+- type: roleLoadout
+  id: JobWFAsfColonist
+  groups:
+  - WFAsfJumpsuitColonist
+  - WFAsfHead
+  - WFAsfNeck
+  - WFAsfGlovesColonist
+  - WFAsfBackpack
+  - MercenaryGlasses
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific
+  - ContractorArmorPlates
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWFAsfColonist
+  icon:
+    sprite: /Textures/_WF/Asf/Interface/job_icons.rsi
+    state: Colonist
+  jobName: wf-asf-job-colonist
+  allowSelection: false
+
+- type: entity
+  parent: IDCardStandard
+  id: WFAsfColonistIDCard
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Misc/id_cards.rsi
+    layers:
+    - state: asfbase
+    - state: idasfcolonist
+  - type: PresetIdCard
+    job: WFAsfColonist
+
+- type: entity
+  parent: BasePDA
+  id: WFAsfColonistPDA
+  components:
+  - type: Pda
+    id: WFAsfColonistIDCard
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+  - type: Icon
+    sprite: _WF/Asf/Objects/Devices/pda.rsi
+    state: pda-colonist
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType:
+        !type:String
+        pda-colonist
+  - type: PdaBorderColor
+    borderColor: "#7B52B8"
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: WFAsfSpawnPointColonist
+  components:
+  - type: SpawnPoint
+    job_id: WFAsfColonist
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/federation.rsi
+    state: asf-federation-banner

@@ -3,9 +3,9 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Paper;
 
-public sealed class EnvelopeSystem : VisualizerSystem<EnvelopeComponent>
+public sealed partial class EnvelopeSystem : VisualizerSystem<EnvelopeComponent>
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

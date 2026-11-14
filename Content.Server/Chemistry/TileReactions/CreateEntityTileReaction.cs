@@ -6,7 +6,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Prototypes;
 using System.Numerics;
 
 namespace Content.Server.Chemistry.TileReactions;
@@ -41,6 +40,12 @@ public sealed partial class CreateEntityTileReaction : ITileReaction
         IEntityManager entityManager,
         List<ReagentData>? data)
     {
+        // WOLFGATE(Planets) START: spilled chimera blood cannot seed an unbounded planetary hive.
+        if (Entity == "ChimeraFleshKudzu" &&
+            entityManager.System<Content.Server._WF.Planets.WFPlanetBiomassSystem>().IsPlanet(tile.GridUid))
+            return FixedPoint2.Zero;
+        // WOLFGATE END
+
         if (reactVolume < Usage)
             return FixedPoint2.Zero;
 

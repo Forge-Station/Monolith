@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Bubberstation at commit https://github.com/Bubberstation/Bubberstation/commit/792301a70da075679790652676e6774e746df81d.",
+  "size": {
+    "x": 40,
+    "y": 40
+  },
+  "states": [
+    {
+      "name": "icerock_wall-0"
+    },
+    {
+      "name": "icerock_wall-1"
+    },
+    {
+      "name": "icerock_wall-2"
+    },
+    {
+      "name": "icerock_wall-3"
+    },
+    {
+      "name": "icerock_wall-4"
+    },
+    {
+      "name": "icerock_wall-5"
+    },
+    {
+      "name": "icerock_wall-6"
+    },
+    {
+      "name": "icerock_wall-7"
+    },
+    {
+      "name": "icerock_wall-8"
+    },
+    {
+      "name": "icerock_wall-9"
+    },
+    {
+      "name": "icerock_wall-10"
+    },
+    {
+      "name": "icerock_wall-11"
+    },
+    {
+      "name": "icerock_wall-12"
+    },
+    {
+      "name": "icerock_wall-13"
+    },
+    {
+      "name": "icerock_wall-14"
+    },
+    {
+      "name": "icerock_wall-15"
+    },
+    {
+      "name": "icerock_wall-21"
+    },
+    {
+      "name": "icerock_wall-23"
+    },
+    {
+      "name": "icerock_wall-29"
+    },
+    {
+      "name": "icerock_wall-31"
+    },
+    {
+      "name": "icerock_wall-38"
+    },
+    {
+      "name": "icerock_wall-39"
+    },
+    {
+      "name": "icerock_wall-46"
+    },
+    {
+      "name": "icerock_wall-47"
+    },
+    {
+      "name": "icerock_wall-55"
+    },
+    {
+      "name": "icerock_wall-63"
+    },
+    {
+      "name": "icerock_wall-74"
+    },
+    {
+      "name": "icerock_wall-75"
+    },
+    {
+      "name": "icerock_wall-78"
+    },
+    {
+      "name": "icerock_wall-79"
+    },
+    {
+      "name": "icerock_wall-95"
+    },
+    {
+      "name": "icerock_wall-110"
+    },
+    {
+      "name": "icerock_wall-111"
+    },
+    {
+      "name": "icerock_wall-127"
+    },
+    {
+      "name": "icerock_wall-137"
+    },
+    {
+      "name": "icerock_wall-139"
+    },
+    {
+      "name": "icerock_wall-141"
+    },
+    {
+      "name": "icerock_wall-143"
+    },
+    {
+      "name": "icerock_wall-157"
+    },
+    {
+      "name": "icerock_wall-159"
+    },
+    {
+      "name": "icerock_wall-175"
+    },
+    {
+      "name": "icerock_wall-191"
+    },
+    {
+      "name": "icerock_wall-203"
+    },
+    {
+      "name": "icerock_wall-207"
+    },
+    {
+      "name": "icerock_wall-223"
+    },
+    {
+      "name": "icerock_wall-239"
+    },
+    {
+      "name": "icerock_wall-255"
+    }
+  ]
+}

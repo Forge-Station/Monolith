@@ -112,3 +112,11 @@ marking-LizardChestBackspikes = Lizard Back Spikes (Four)
 marking-LizardSnoutSplotch = Lizard Snout (Splotch)
 marking-LizardSnoutSplotch-snout_splotch_primary = Muzzle
 marking-LizardSnoutSplotch-snout_splotch_secondary = Snoot
+
+# Wolfgate: ported from HardLight
+marking-LizardChestFin = Lizard Fin
+marking-LizardChestFin-body_fin = Lizard Fin
+marking-LizardTailAquatic = Lizard Tail (Aquatic)
+marking-LizardTailAquatic-tail_aquatic = Lizard Tail (Aquatic)
+
+# Wolfgate: ported from HardLight

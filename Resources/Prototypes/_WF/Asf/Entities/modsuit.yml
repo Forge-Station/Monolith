@@ -1,0 +1,196 @@
+# ASF field modsuit: the Minerva (RD) modsuit re-plated for field work. Armour matches the TSF M82c; the chestplate
+# takes armour plates like every modsuit. The Aegis upgrade adds a personal shield on the control unit, because the
+# chestplate's item toggle already drives its seal (ComponentToggler), so a shield toggle there would unseal it.
+# The shield only comes up while the suit is sealed (ShieldRequiresSeal).
+
+# Field
+
+- type: entity
+  parent: [ ClothingModsuitBase, BaseFactionGearOtherFactionT2 ]
+  id: WFAsfClothingModsuitField
+  components:
+  - type: Contraband
+    allowedDepartments: [ WFAsf ]
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Back/modsuit.rsi
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: WFAsfClothingModsuitHelmetField
+      gloves: WFAsfClothingModsuitGauntletsField
+      outerClothing: WFAsfClothingModsuitChestplateField
+      shoes: WFAsfClothingModsuitBootsField
+  - type: StaticPrice
+    price: 5000
+
+- type: entity
+  parent: WFAsfClothingModsuitField
+  id: WFAsfClothingModsuitFieldPowerCell
+  suffix: High-Capacity Battery
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+        whitelist:
+          components:
+          - PowerCell
+
+- type: entity
+  parent: ClothingModsuitHelmetResearchDirector
+  id: WFAsfClothingModsuitHelmetField
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/modsuit.rsi
+  - type: Armor
+    coverage: [Head]
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.9
+        Radiation: 0.5
+
+- type: entity
+  parent: ClothingModsuitGauntletsResearchDirector
+  id: WFAsfClothingModsuitGauntletsField
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Hands/modsuit.rsi
+
+- type: entity
+  parent: ClothingModsuitChestplateResearchDirector
+  id: WFAsfClothingModsuitChestplateField
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/modsuit.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.95
+    sprintModifier: 0.95
+  - type: ExplosionResistance
+    damageCoefficient: 0.6
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.65
+        Slash: 0.65
+        Piercing: 0.6
+        Heat: 0.65
+        Shock: 0.85
+        Radiation: 0.4 # kept from the Minerva's lab heritage
+        Caustic: 0.7
+  - type: StaminaDamageResistance
+    coefficient: 0.3
+  - type: HarpyHideWings # covers harpy and IPC wings, as hardsuits do
+
+- type: entity
+  parent: ClothingModsuitBootsResearchDirector
+  id: WFAsfClothingModsuitBootsField
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Shoes/modsuit.rsi
+
+# Aegis: same armour, plus a hardlight personal shield in the control unit; dark armour so it reads apart
+
+- type: entity
+  parent: [ WFAsfClothingModsuitField, MonoEnergyShieldClothing, BaseFactionGearOtherFactionT3 ]
+  id: WFAsfClothingModsuitAegis
+  components:
+  - type: Contraband
+    severity: OtherFactionGear3
+    allowedDepartments: [ WFAsf ]
+    turnInValues:
+      FederationMilitaryCredit: 45
+      Doubloon: 45
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Back/modsuit_aegis.rsi
+  - type: ToggleableClothing
+    clothingPrototypes:
+      head: WFAsfClothingModsuitHelmetAegis
+      gloves: WFAsfClothingModsuitGauntletsAegis
+      outerClothing: WFAsfClothingModsuitChestplateAegis
+      shoes: WFAsfClothingModsuitBootsAegis
+  - type: PersonalShield
+    visuals:
+      fillLevel: 0.15
+      hexDensity: 3
+      pixelGrid: 96
+      color: "#A66BE0"
+      scale: 2.0
+    shield:
+      requiredSlot: BACK
+      maxCharge: 250
+      regenRate: 5
+      spinupTime: 1
+      breakCooldown: 20
+      powerDraw: 0.5
+      blockModifier:
+        coefficients:
+          Heat: 1.25
+          Radiation: 1.5
+  - type: ShieldRequiresSeal
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 5
+    autoRechargePauseTime: 5
+  - type: ExtendDescription
+    descriptionList:
+    - description: wf-asf-modsuit-aegis-shield-hint
+      color: "#A66BE0"
+      requireDetailRange: true
+  - type: StaticPrice
+    price: 9000
+
+- type: entity
+  parent: WFAsfClothingModsuitAegis
+  id: WFAsfClothingModsuitAegisPowerCell
+  suffix: High-Capacity Battery
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellHigh
+        whitelist:
+          components:
+          - PowerCell
+
+- type: entity
+  parent: WFAsfClothingModsuitHelmetField
+  id: WFAsfClothingModsuitHelmetAegis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/modsuit_aegis.rsi
+
+- type: entity
+  parent: WFAsfClothingModsuitGauntletsField
+  id: WFAsfClothingModsuitGauntletsAegis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Hands/modsuit_aegis.rsi
+
+- type: entity
+  parent: WFAsfClothingModsuitChestplateField
+  id: WFAsfClothingModsuitChestplateAegis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/modsuit_aegis.rsi
+
+- type: entity
+  parent: WFAsfClothingModsuitBootsField
+  id: WFAsfClothingModsuitBootsAegis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Shoes/modsuit_aegis.rsi

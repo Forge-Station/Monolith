@@ -11,7 +11,9 @@ namespace Content.Server.Body.Systems
     public sealed partial class StomachSystem : EntitySystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
+        [Dependency] private Content.Server._WF.Dormancy.WFDormancySystem _wfDormancy = default!; // WOLFGATE(Dormancy): skips NPC bodies nobody is near
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private Content.Server._WF.Wolfmed.Medical.WolfmedOralAbsorptionSystem _wolfmedAbsorption = default!; // WOLFGATE(Wolfmed): playtest 1
 
         public const string DefaultSolutionName = "stomach";
 
@@ -41,6 +43,7 @@ namespace Content.Server.Body.Systems
                     continue;
 
                 stomach.NextUpdate += stomach.UpdateInterval;
+                if (_wfDormancy.BodySleeps(uid)) continue; // WOLFGATE(Dormancy): an NPC body no player is near on a planet skips its upkeep
 
                 // Get our solutions
                 if (!_solutionContainerSystem.ResolveSolution(uid, DefaultSolutionName, ref stomach.Solution, out var stomachSolution))
@@ -55,7 +58,7 @@ namespace Content.Server.Body.Systems
                 foreach (var delta in stomach.ReagentDeltas)
                 {
                     delta.Increment(stomach.UpdateInterval);
-                    if (delta.Lifetime > stomach.DigestionDelay)
+                    if (delta.Lifetime > _wolfmedAbsorption.GetDigestionDelay(stomach, delta.ReagentQuantity.Reagent.Prototype)) // WOLFGATE(Wolfmed): playtest 1: painkillers absorb fast
                     {
                         if (stomachSolution.TryGetReagent(delta.ReagentQuantity.Reagent, out var reagent))
                         {

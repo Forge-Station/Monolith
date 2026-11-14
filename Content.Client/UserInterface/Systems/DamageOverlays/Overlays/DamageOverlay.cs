@@ -63,6 +63,11 @@ public sealed partial class DamageOverlay : Overlay
         if (args.Viewport.Eye != eyeComp.Eye)
             return;
 
+        if (WolfmedOwnsScreen()) // WOLFGATE(Wolfmed): the dead view and a synthetic body's readout are Wolfmed's; the white fade-out here never cleared.
+            return;
+
+        TryApplyWolfmedPain(); // WOLFGATE(Wolfmed): HOOK 15 — pain owns the brute vignette on wound hosts (Wolfmed phase 2).
+
         /*
          * Here's the rundown:
          * 1. There's lerping for each level so the transitions are smooth.
@@ -155,7 +160,7 @@ public sealed partial class DamageOverlay : Overlay
 
             _bruteShader.SetParameter("time", pulse);
             _bruteShader.SetParameter("color", new Vector3(1f, 0f, 0f));
-            _bruteShader.SetParameter("darknessAlphaOuter", 0.8f);
+            _bruteShader.SetParameter("darknessAlphaOuter", 0.8f * level); // WOLFGATE(Wolfmed): HOOK 15 — ONYX Content.Client/DamageOverlay/DamageOverlay.cs:175
 
             _bruteShader.SetParameter("outerCircleRadius", outerRadius);
             _bruteShader.SetParameter("outerCircleMaxRadius", outerRadius + 0.2f * distance);

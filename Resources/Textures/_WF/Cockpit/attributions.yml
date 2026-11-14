@@ -1,0 +1,4 @@
+- files: ["gun_sight.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "By Arteben. Copied from Resources/Textures/Interface/Misc/crosshair_pointers.rsi so a packaged client, which packs every RSI into one file, can read it as an image."
+  source: "https://github.com/Arteben"

@@ -1,0 +1,189 @@
+# Wolfgate: ported from HardLight - Protogen subspecies.
+# The base Protogen prototypes are NOT taken; Wolfgate already has its own under _Mono.
+# Reparented onto Wolfgate's protogen organs; sprites pointing at the uncopied
+# _FarHorizons protogen sheet are dropped in favour of the inherited _Mono ones.
+
+- type: entity
+  id: OrganProtogenTongueForked
+  parent: OrganProtogenTongue # Wolfgate: single parent, see port notes
+  name: Forked Cybernetic Tongue
+  description: "A completely glowing organ commonly used for lying or self-expression. Sometimes both. Now split in two."
+  components:
+  - type: Sprite
+    sprite: _Mono/Mobs/Species/Protogen/organs.rsi
+    state: tongueforked
+
+- type: entity
+  id: OrganProtoMothStomach
+  parent: OrganProtogenStomach # Wolfgate: reparented off the animal stomach
+  name: Biological Reactor
+  description: "Some call it over-engineered, but it's vital to the function of a protogen. Turns organic matter into organic and electrical energy to power the protogen's cybernetics and flesh."
+  components:
+  - type: Item
+    size: Small
+    heldPrefix: stomach
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - ClothMade
+    isSpecialDigestibleExclusive: false
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 50
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
+
+#### Dwarf Specific ####
+
+- type: entity
+  id: OrganProtoDawiHeart
+  parent: OrganProtogenHeart
+  name: Cybernetic Heart
+  description: "Doesn't actually need to beat, simply mimics the movement to provide comfort for the user."
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [Dwarf]
+
+- type: entity
+  id: OrganProtoDawiLiver
+  parent: OrganProtogenLiver
+  name: Cybernetic Liver
+  description: "Pairing suggestion: fermented RAM sticks and CPU drives."
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [Dwarf]
+
+- type: entity
+  id: OrganProtoDawiStomach
+  parent: OrganProtogenStomach
+  name: Biological Reactor
+  description: "Some call it over-engineered, but it's vital to the function of a protogen. Turns organic matter into organic and electrical energy to power the protogen's cybernetics and flesh."
+  components:
+  - type: Organ
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 75
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
+  - type: Metabolizer
+    # mm very yummy
+    maxReagents: 5
+    metabolizerTypes: [Dwarf]
+
+#### Avali specific organs ####
+
+- type: entity
+  id: OrganProtoAvaliStomach
+  name: Biological Reactor # Wolfgate: matches the other protogen stomachs
+  parent: OrganProtogenStomach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - RamChip
+    isSpecialDigestibleExclusive: false
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 50
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
+
+- type: entity
+  id: OrganProtoAvaliHeart
+  parent: OrganProtogenHeart
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Metabolizer
+    maxReagents: 2
+    metabolizerTypes: [Avali]
+    groups:
+    - id: Medicine
+    - id: Cryogenic
+    - id: Poison
+    - id: Narcotic
+
+- type: entity
+  id: OrganProtoAvaliLiver
+  parent: OrganProtogenLiver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Metabolizer # The liver metabolizes certain chemicals only, like alcohol.
+    updateInterval: 1.5
+    maxReagents: 1
+    metabolizerTypes: [Avali]
+    groups:
+    - id: Alcohol
+      rateModifier: 0.1 # removes alcohol very slowly along with the stomach removing it as a drink
+
+# Arachnid
+
+- type: entity
+  id: OrganProtoArachnidHeart
+  parent: [BaseProtogenOrgan, OrganProtogenHeart]
+  name: Cybernetic Heart
+  components:
+  - type: Sprite
+    state: heart-on
+  - type: Item
+    size: Small
+    heldPrefix: heart
+  - type: Metabolizer
+    updateInterval: 1.5
+    maxReagents: 2
+    metabolizerTypes: [Arachnid]
+    groups:
+    - id: Medicine
+    - id: Cryogenic
+    - id: Poison
+    - id: Narcotic
+
+# Vox
+
+- type: entity
+  id: OrganProtoVoxStomach
+  name: Biological Reactor # Wolfgate: matches the other protogen stomachs
+  parent: OrganProtogenStomach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [Vox]
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - Trash
+    isSpecialDigestibleExclusive: false
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 50
+      food:
+        maxVol: 5
+        reagents:
+        - ReagentId: UncookedAnimalProteins
+          Quantity: 5
+
+- type: entity
+  id: OrganProtoVoxHeart
+  parent: [BaseProtogenOrgan, OrganProtogenHeart]
+  name: Cybernetic Heart
+  components:
+  - type: Sprite
+    state: heart-on
+  - type: Item
+    size: Small
+    heldPrefix: heart
+  - type: Metabolizer
+    metabolizerTypes: [Vox]

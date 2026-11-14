@@ -194,7 +194,7 @@ public sealed class TurretCommandSystem : EntitySystem
     {
         if (string.IsNullOrEmpty(ent.Comp.Prototype)
             || !_proto.TryIndex<EntityPrototype>(ent.Comp.Prototype, out var proto)
-            || !proto.TryGetComponent<TurretCommandLinkComponent>(out var link, EntityManager.ComponentFactory)
+            || !proto.TryComp<TurretCommandLinkComponent>(out var link, EntityManager.ComponentFactory)
             || !link.Managed)
             return;
 

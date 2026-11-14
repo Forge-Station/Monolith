@@ -46,7 +46,7 @@ public sealed partial class StationAiMenu : RadialMenu
         _entManager.EventBus.RaiseLocalEvent(_tracked, ref ev);
 
         var main = FindControl<RadialContainer>("Main");
-        main.DisposeAllChildren();
+        main.RemoveAllChildren();
         var sprites = _entManager.System<SpriteSystem>();
 
         foreach (var action in ev.Actions)

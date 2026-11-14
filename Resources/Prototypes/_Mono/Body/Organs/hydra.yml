@@ -90,7 +90,7 @@
 
 - type: entity
   id: OrganHydrakinLungs
-  parent: BaseHydrakinOrgan
+  parent: [BaseHydrakinOrgan, WFWolfmedOrganLungs] # WOLFGATE(Wolfmed): M4: OD16 parity, Wolfmed lung data (plan 9.2 group A-prime)
   name: hydrakin lungs
   description: "Hydrakin lungs, capable of processing any gas without negative effects."
   components:

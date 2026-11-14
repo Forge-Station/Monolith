@@ -18,5 +18,6 @@
     Welder: 1
     Screwdriver: 2
     Crowbar: 2
+    WFMedkitSyntheticFilled: 2 # WOLFGATE(Wolfmed): ITEMS: a first aid kit for synthetic crew, beside the robotics tools.
   contrabandInventory:
     FoodBurgerRobot: 1

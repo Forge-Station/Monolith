@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CEV-Eris at commit https://github.com/discordia-space/CEV-Eris/commit/5f7847f26585d80505500be5a62e621022a56bf7.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "eris_reinf_wall0",
+      "directions": 4
+    },
+    {
+      "name": "eris_reinf_wall1",
+      "directions": 4
+    },
+    {
+      "name": "eris_reinf_wall2",
+      "directions": 4
+    },
+    {
+      "name": "eris_reinf_wall3",
+      "directions": 4
+    },
+    {
+      "name": "eris_reinf_wall4",
+      "directions": 4
+    },
+    {
+      "name": "eris_reinf_wall5",
+      "directions": 4
+    },
+    {
+      "name": "eris_reinf_wall6",
+      "directions": 4
+    },
+    {
+      "name": "eris_reinf_wall7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

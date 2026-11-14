@@ -121,7 +121,7 @@ public sealed partial class AnchorableStorageSystem : EntitySystem
             return false;
 
         var indices = _map.TileIndicesFor(grid, gridComp, ent.Comp2.Coordinates);
-        var enumerator = _map.GetAnchoredEntitiesEnumerator(grid, gridComp, indices);
+        var enumerator = _map.GetAnchoredEntities(grid, gridComp, indices);
 
         while (enumerator.MoveNext(out var otherEnt))
         {

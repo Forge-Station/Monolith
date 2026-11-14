@@ -622,6 +622,104 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("connection_log", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.ConsentFreetextReadReceipt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("consent_freetext_read_receipt_id");
+
+                    b.Property<DateTime>("ReadAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("read_at");
+
+                    b.Property<int>("ReadConsentSettingsId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("read_consent_settings_id");
+
+                    b.Property<Guid>("ReaderUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("reader_user_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_consent_freetext_read_receipt");
+
+                    b.HasIndex("ReadConsentSettingsId")
+                        .HasDatabaseName("IX_consent_freetext_read_receipt_read_consent_settings_id");
+
+                    b.HasIndex("ReaderUserId", "ReadConsentSettingsId")
+                        .IsUnique();
+
+                    b.ToTable("consent_freetext_read_receipt", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("consent_settings_id");
+
+                    b.Property<string>("ConsentFreetext")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("consent_freetext");
+
+                    b.Property<DateTime>("ConsentFreetextUpdatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("consent_freetext_updated_at");
+
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_id");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_consent_settings");
+
+                    b.HasIndex("ProfileId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_consent_settings_profile_id");
+
+                    b.HasIndex("UserId", "ProfileId")
+                        .IsUnique();
+
+                    b.ToTable("consent_settings", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentToggle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("consent_toggle_id");
+
+                    b.Property<int>("ConsentSettingsId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("consent_settings_id");
+
+                    b.Property<string>("ToggleProtoId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("toggle_proto_id");
+
+                    b.Property<string>("ToggleProtoState")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("toggle_proto_state");
+
+                    b.HasKey("Id")
+                        .HasName("PK_consent_toggle");
+
+                    b.HasIndex("ConsentSettingsId", "ToggleProtoId")
+                        .IsUnique();
+
+                    b.ToTable("consent_toggle", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
                 {
                     b.Property<int>("Id")
@@ -782,21 +880,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("selected_character_slot");
 
-                    b.Property<string>("SponsorGhostSkin")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("sponsor_ghost_skin");
-
-                    b.Property<string>("SponsorLOOCColor")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("sponsor_looc_color");
-
-                    b.Property<string>("SponsorOOCColor")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("sponsor_ooc_color");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT")
                         .HasColumnName("user_id");
@@ -821,24 +904,52 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("age");
 
+                    b.Property<string>("AugmentUnlocks")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("augment_unlocks");
+
+                    b.Property<string>("Augments")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("augments");
+
                     b.Property<int>("BankBalance")
                         .HasColumnType("INTEGER")
                         .HasColumnName("bank_balance");
 
-                    b.Property<string>("BarkVoice")
-                        .IsRequired()
+                    b.Property<int>("Biotype")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("biotype");
+
+                    b.Property<string>("BloodColor")
                         .HasColumnType("TEXT")
-                        .HasColumnName("bark_voice");
+                        .HasColumnName("blood_color");
 
                     b.Property<string>("CharacterName")
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("char_name");
 
+                    b.Property<string>("ChatFont")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("chat_font");
+
                     b.Property<string>("Company")
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("company");
+
+                    b.Property<string>("CustomMarkings")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("custom_markings");
+
+                    b.Property<string>("CustomSpeciesName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("custom_species_name");
 
                     b.Property<string>("EyeColor")
                         .IsRequired()
@@ -855,6 +966,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("facial_hair_name");
 
+                    b.PrimitiveCollection<string>("Flags")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("flags");
+
                     b.Property<string>("FlavorText")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -864,6 +980,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("gender");
+
+                    b.Property<string>("Genitals")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("genitals");
 
                     b.Property<string>("HairColor")
                         .IsRequired()
@@ -875,18 +996,31 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("hair_name");
 
+                    b.Property<string>("HeadshotUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("headshot_url");
+
                     b.Property<float>("Height")
                         .HasColumnType("REAL")
                         .HasColumnName("height");
+
+                    b.Property<string>("LaughVoice")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("laugh_voice");
+
+                    b.Property<int>("LegStance")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("leg_stance");
 
                     b.Property<byte[]>("Markings")
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
 
-                    b.Property<string>("Nationality")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("nationality");
+                    b.Property<bool>("MismatchedParts")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("mismatched_parts");
 
                     b.Property<int>("PreferenceId")
                         .HasColumnType("INTEGER")
@@ -895,6 +1029,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Property<int>("PreferenceUnavailable")
                         .HasColumnType("INTEGER")
                         .HasColumnName("pref_unavailable");
+
+                    b.Property<string>("ScreamVoice")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("scream_voice");
 
                     b.Property<string>("Sex")
                         .IsRequired()
@@ -919,10 +1058,13 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("species");
 
-                    b.Property<string>("Voice")
-                        .IsRequired()
+                    b.Property<string>("SpeechVoice")
                         .HasColumnType("TEXT")
-                        .HasColumnName("voice");
+                        .HasColumnName("speech_voice");
+
+                    b.Property<string>("TypingIndicator")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("typing_indicator");
 
                     b.Property<float>("Width")
                         .HasColumnType("REAL")
@@ -938,6 +1080,62 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsUnique();
 
                     b.ToTable("profile", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_component_id");
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("data");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_id");
+
+                    b.Property<bool>("Sticky")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("sticky");
+
+                    b.HasKey("Id")
+                        .HasName("PK_profile_component");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("profile_component", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_item_id");
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("data");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_id");
+
+                    b.Property<bool>("Sticky")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("sticky");
+
+                    b.HasKey("Id")
+                        .HasName("PK_profile_item");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("profile_item", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.ProfileLoadout", b =>
@@ -994,6 +1192,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
                         .HasColumnName("profile_role_loadout_id");
+
+                    b.Property<string>("CustomJobTitle")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("custom_job_title");
 
                     b.Property<string>("EntityName")
                         .HasMaxLength(256)
@@ -1403,6 +1606,91 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("uploaded_resource_log", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.WayfarerSafetyDepositBox", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("wayfarer_safety_deposit_box_id");
+
+                    b.Property<Guid>("BoxId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("box_id");
+
+                    b.Property<int>("CharacterIndex")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("character_index");
+
+                    b.Property<DateTime?>("LastWithdrawn")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("last_withdrawn");
+
+                    b.Property<int?>("LastWithdrawnRoundId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("last_withdrawn_round_id");
+
+                    b.Property<string>("Nickname")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("nickname");
+
+                    b.Property<string>("OwnerName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("owner_name");
+
+                    b.Property<Guid>("OwnerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("owner_user_id");
+
+                    b.Property<string>("ProtoId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("proto_id");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("purchase_date");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wayfarer_safety_deposit_box");
+
+                    b.HasIndex("BoxId")
+                        .IsUnique();
+
+                    b.HasIndex("OwnerUserId");
+
+                    b.ToTable("wayfarer_safety_deposit_box", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WayfarerSafetyDepositBoxItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("wayfarer_safety_deposit_box_item_id");
+
+                    b.Property<int>("BoxId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("box_id");
+
+                    b.Property<DateTime>("DepositDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("deposit_date");
+
+                    b.Property<string>("EntityData")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("entity_data");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wayfarer_safety_deposit_box_item");
+
+                    b.HasIndex("BoxId")
+                        .HasDatabaseName("IX_wayfarer_safety_deposit_box_item_box_id");
+
+                    b.ToTable("wayfarer_safety_deposit_box_item", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.Whitelist", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -1414,6 +1702,299 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasName("PK_whitelist");
 
                     b.ToTable("whitelist", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateContractStanding", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("wolfgate_contract_standing_id");
+
+                    b.Property<string>("CharacterName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("character_name");
+
+                    b.Property<string>("Contractor")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("contractor");
+
+                    b.Property<int>("LastRound")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("last_round");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("points");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("updated");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_contract_standing");
+
+                    b.HasIndex("PlayerUserId", "CharacterName", "Contractor")
+                        .IsUnique();
+
+                    b.ToTable("wolfgate_contract_standing", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateCustomMarking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("wolfgate_custom_marking_id");
+
+                    b.Property<string>("ArtHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("art_hash");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Placement")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("placement");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_custom_marking");
+
+                    b.HasIndex("ArtHash");
+
+                    b.HasIndex("PlayerUserId");
+
+                    b.ToTable("wolfgate_custom_marking", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateCustomMarkingArt", b =>
+                {
+                    b.Property<string>("Hash")
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("hash");
+
+                    b.Property<bool>("Blocked")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("blocked");
+
+                    b.Property<byte[]>("Erase")
+                        .HasColumnType("BLOB")
+                        .HasColumnName("erase");
+
+                    b.Property<byte[]>("FrameTimes")
+                        .HasColumnType("BLOB")
+                        .HasColumnName("frame_times");
+
+                    b.Property<byte[]>("Png")
+                        .IsRequired()
+                        .HasColumnType("BLOB")
+                        .HasColumnName("png");
+
+                    b.Property<DateTime?>("UnusedSince")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("unused_since");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("uploaded_at");
+
+                    b.Property<Guid>("UploaderUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("uploader_user_id");
+
+                    b.HasKey("Hash")
+                        .HasName("PK_wolfgate_custom_marking_art");
+
+                    b.HasIndex("UploaderUserId", "UploadedAt");
+
+                    b.ToTable("wolfgate_custom_marking_art", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateFeedbackReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("wolfgate_feedback_report_id");
+
+                    b.Property<string>("BuildVersion")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("build_version");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("category");
+
+                    b.Property<string>("Context")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("context");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Expected")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("expected");
+
+                    b.Property<string>("Frustrations")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("frustrations");
+
+                    b.Property<string>("Kind")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("kind");
+
+                    b.Property<bool>("NotifyPlayer")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("notify_player");
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_name");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int?>("Rating")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("rating");
+
+                    b.Property<int>("RoundId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("round_id");
+
+                    b.Property<byte[]>("Screenshot")
+                        .HasColumnType("BLOB")
+                        .HasColumnName("screenshot");
+
+                    b.Property<string>("ServerName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("server_name");
+
+                    b.Property<string>("Severity")
+                        .HasMaxLength(16)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("severity");
+
+                    b.Property<string>("StaffMessage")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("staff_message");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("status");
+
+                    b.Property<DateTime?>("StatusChangedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("status_changed_at");
+
+                    b.Property<string>("Steps")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("steps");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_feedback_report");
+
+                    b.HasIndex("Status");
+
+                    b.HasIndex("PlayerUserId", "CreatedAt");
+
+                    b.ToTable("wolfgate_feedback_report", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateGameScore", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("wolfgate_game_score_id");
+
+                    b.Property<string>("Game")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("game");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("level");
+
+                    b.Property<string>("PlayerName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_name");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("score");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("time");
+
+                    b.HasKey("Id")
+                        .HasName("PK_wolfgate_game_score");
+
+                    b.HasIndex("Game");
+
+                    b.HasIndex("PlayerUserId", "Game", "Level")
+                        .IsUnique();
+
+                    b.ToTable("wolfgate_game_score", (string)null);
                 });
 
             modelBuilder.Entity("PlayerRound", b =>
@@ -1707,6 +2288,40 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Server");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.ConsentFreetextReadReceipt", b =>
+                {
+                    b.HasOne("Content.Server.Database.ConsentSettings", "ReadConsentSettings")
+                        .WithMany("ReadReceipts")
+                        .HasForeignKey("ReadConsentSettingsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_consent_freetext_read_receipt_consent_settings_read_consent_settings_id");
+
+                    b.Navigation("ReadConsentSettings");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentSettings", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithOne("ConsentSettings")
+                        .HasForeignKey("Content.Server.Database.ConsentSettings", "ProfileId")
+                        .HasConstraintName("FK_consent_settings_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentToggle", b =>
+                {
+                    b.HasOne("Content.Server.Database.ConsentSettings", "ConsentSettings")
+                        .WithMany("ConsentToggles")
+                        .HasForeignKey("ConsentSettingsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_consent_toggle_consent_settings_consent_settings_id");
+
+                    b.Navigation("ConsentSettings");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Job", b =>
                 {
                     b.HasOne("Content.Server.Database.Profile", "Profile")
@@ -1760,6 +2375,30 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasConstraintName("FK_profile_preference_preference_id");
 
                     b.Navigation("Preference");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileComponent", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("Components")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_profile_component_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileItem", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("Items")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_profile_item_profile_profile_id");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Content.Server.Database.ProfileLoadout", b =>
@@ -1992,6 +2631,30 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.WayfarerSafetyDepositBoxItem", b =>
+                {
+                    b.HasOne("Content.Server.Database.WayfarerSafetyDepositBox", "Box")
+                        .WithMany("Items")
+                        .HasForeignKey("BoxId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_wayfarer_safety_deposit_box_item_wayfarer_safety_deposit_box_box_id");
+
+                    b.Navigation("Box");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WolfgateCustomMarking", b =>
+                {
+                    b.HasOne("Content.Server.Database.WolfgateCustomMarkingArt", "Art")
+                        .WithMany()
+                        .HasForeignKey("ArtHash")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_wolfgate_custom_marking_art");
+
+                    b.Navigation("Art");
+                });
+
             modelBuilder.Entity("PlayerRound", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", null)
@@ -2029,6 +2692,13 @@ namespace Content.Server.Database.Migrations.Sqlite
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>
                 {
                     b.Navigation("BanHits");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ConsentSettings", b =>
+                {
+                    b.Navigation("ConsentToggles");
+
+                    b.Navigation("ReadReceipts");
                 });
 
             modelBuilder.Entity("Content.Server.Database.Player", b =>
@@ -2081,6 +2751,12 @@ namespace Content.Server.Database.Migrations.Sqlite
                 {
                     b.Navigation("Antags");
 
+                    b.Navigation("Components");
+
+                    b.Navigation("ConsentSettings");
+
+                    b.Navigation("Items");
+
                     b.Navigation("Jobs");
 
                     b.Navigation("Loadouts");
@@ -2120,6 +2796,11 @@ namespace Content.Server.Database.Migrations.Sqlite
             modelBuilder.Entity("Content.Server.Database.ServerRoleBan", b =>
                 {
                     b.Navigation("Unban");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.WayfarerSafetyDepositBox", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

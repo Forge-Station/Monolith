@@ -1,0 +1,152 @@
+# Everything Wolfmed treatment uses, in one crate. Spawn-menu only; never mapped or sold.
+
+- type: entity
+  parent: CrateMedical
+  id: WFCrateWolfmedDebug
+  name: wolfmed debug crate
+  suffix: DEBUG
+  description: Every item, tool and drug that treats a wound. For testing.
+  components:
+  - type: EntityStorage
+    capacity: 100
+  - type: StorageFill
+    contents:
+    # Diagnostics
+    - id: HandheldHealthAnalyzer
+    - id: Defibrillator
+    # Topicals and dressings
+    - id: Brutepack
+    - id: Ointment
+    - id: Gauze
+    - id: MedicatedSuture
+    - id: RegenerativeMesh
+    - id: Bloodpack
+    - id: Tourniquet
+      amount: 3
+    - id: MedicalPatchMakeshift
+      amount: 3
+    - id: WFWolfmedSplint
+      amount: 3
+    - id: WFWolfmedSplintImprovised
+      amount: 2
+    - id: WFWolfmedSkinGraft
+      amount: 3
+    # Surgery
+    - id: Scalpel
+    - id: Hemostat
+    - id: Retractor
+    - id: Cautery
+    - id: Saw
+    - id: Drill
+    - id: Bonesetter
+    - id: BoneGel
+    # Dirty embedded-object removal
+    - id: CombatKnife
+    # Chassis repair
+    - id: WelderExperimental
+    - id: CableApcStack
+    - id: Wrench
+    - id: NaniteApplicator
+    - id: WFWolfmedHydraulicFluidPack
+    # Washing and cleaning
+    - id: WFWolfmedAntisepticSpray
+      amount: 2
+    - id: SprayBottleWater
+    - id: SprayBottleSpaceCleaner
+    - id: Soap
+    # Drugs
+    - id: Syringe
+      amount: 4
+    - id: WFSpaceacillinChemistryBottle
+      amount: 2
+    - id: EthanolChemistryBottle
+    - id: WFWolfmedDebugBottleOsteogen
+    - id: WFWolfmedDebugBottleIbuprofen
+    - id: WFWolfmedDebugBottleTramadol
+    - id: WFWolfmedDebugBottleKetorolac
+    - id: WFWolfmedDebugBottleOxycodone
+    - id: WFWolfmedAnalgesicPill
+      amount: 3
+    - id: WFWolfmedOpiateChemistryBottle
+    - id: WFWolfmedStimPen
+      amount: 2
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: WFWolfmedDebugBottleOsteogen
+  suffix: DEBUG, osteogen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-osteogen
+  - type: SolutionContainerManager
+    solutions:
+      drink: # name and volume are hard-coded in ChemMasterComponent
+        maxVol: 30
+        reagents:
+        - ReagentId: Osteogen
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: WFWolfmedDebugBottleIbuprofen
+  suffix: DEBUG, ibuprofen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-ibuprofen
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Ibuprofen
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: WFWolfmedDebugBottleTramadol
+  suffix: DEBUG, tramadol
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-tramadol
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Tramadol
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: WFWolfmedDebugBottleKetorolac
+  suffix: DEBUG, ketorolac
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-ketorolac
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Ketorolac
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: WFWolfmedDebugBottleOxycodone
+  suffix: DEBUG, oxycodone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Label
+    currentLabel: reagent-name-oxycodone
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Oxycodone
+          Quantity: 30

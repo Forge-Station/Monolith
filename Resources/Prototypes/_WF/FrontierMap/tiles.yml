@@ -1,0 +1,50 @@
+- type: tile
+  id: FloorWoodChessDark
+  name: tiles-wood-chess-dark
+  sprite: /Textures/Corvax/Tiles/wood_chess_dark.png
+  variants: 4
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepWood
+  barestepSounds:
+    collection: BarestepWood
+  itemDrop: FloorTileItemWood
+  heatCapacity: 10000
+
+- type: tile
+  id: NebulaFloorGrassWild
+  name: tiles-wf-nebula-floor-grass-wild
+  sprite: /Textures/_WF/DecorImport/Tiles/nebula/grass_wild.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepGrass
+  itemDrop: FloorTileItemGrass
+  heatCapacity: 10000
+
+- type: tile
+  id: NovaFloorTitaniumTiledWhite
+  name: tiles-wf-nova-floor-titanium-tiled-white
+  sprite: /Textures/_WF/DecorImport/Tiles/nova/tiled_white.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000
+
+- type: tile
+  id: RMCFloorHybrisaWhiteFull
+  name: tiles-wf-rmc-white-metal-tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/metalwhitefull.png
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 10000

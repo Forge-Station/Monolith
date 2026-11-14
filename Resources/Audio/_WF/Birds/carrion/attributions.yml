@@ -1,0 +1,11 @@
+- files:
+  - boid_call01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/boid/boid_call01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - boid_call03.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/boid/boid_call03.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

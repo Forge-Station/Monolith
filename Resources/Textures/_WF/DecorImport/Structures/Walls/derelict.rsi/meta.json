@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "oldr0",
+      "directions": 4
+    },
+    {
+      "name": "oldr1",
+      "directions": 4
+    },
+    {
+      "name": "oldr2",
+      "directions": 4
+    },
+    {
+      "name": "oldr3",
+      "directions": 4
+    },
+    {
+      "name": "oldr4",
+      "directions": 4
+    },
+    {
+      "name": "oldr5",
+      "directions": 4
+    },
+    {
+      "name": "oldr6",
+      "directions": 4
+    },
+    {
+      "name": "oldr7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

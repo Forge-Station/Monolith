@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Drawn by Tools/_WF/WildSlimes/gen_world_jelly_art.py for Wolfgate",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mound"
+    },
+    {
+      "name": "blob"
+    }
+  ]
+}

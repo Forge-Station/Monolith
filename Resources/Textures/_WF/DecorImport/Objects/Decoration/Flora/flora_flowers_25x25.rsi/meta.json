@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22.",
+  "size": {
+    "x": 25,
+    "y": 25
+  },
+  "states": [
+    {
+      "name": "flower_blue"
+    },
+    {
+      "name": "flower_blue2"
+    },
+    {
+      "name": "flower_orange"
+    },
+    {
+      "name": "flower_pink"
+    },
+    {
+      "name": "flower_pink2"
+    },
+    {
+      "name": "flower_pink3"
+    },
+    {
+      "name": "flower_pink4"
+    },
+    {
+      "name": "flower_purple"
+    },
+    {
+      "name": "flower_purple2"
+    },
+    {
+      "name": "flower_red"
+    },
+    {
+      "name": "flower_red2"
+    },
+    {
+      "name": "flower_white"
+    },
+    {
+      "name": "flower_yw"
+    }
+  ]
+}

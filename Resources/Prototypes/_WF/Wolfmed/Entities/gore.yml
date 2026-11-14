@@ -1,0 +1,52 @@
+# Blood thrown around by a hit (GORE/G1). The art is greyscale on purpose: every one of these is tinted
+# on the client with the victim's own blood reagent colour, so a Vox bleeds the colour a Vox bleeds
+# without a second sprite anywhere.
+#
+# Neither entity has physics, a collision or an update loop. The spray is slid along one cardinal by the
+# client for the length of its animation and then thrown away; the wall splat sits still until a janitor
+# washes it off or its clock runs out.
+
+- type: entity
+  id: WFWolfmedHitSplatter
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedHitSplatter
+  - type: TimedDespawn
+    lifetime: 1.2
+  - type: Sprite
+    drawdepth: Effects
+    # The spray leaves on the exact angle of the hit, so it uses the single-direction "_free" states and is
+    # rotated into place. NOT noRot: noRot pins a sprite to the SCREEN, so on a ship (where the camera turns
+    # with the grid) the spray flew off at the camera's angle from the true line. The client turns the sprite
+    # against the entity's world rotation each frame instead.
+    noRot: false
+    sprite: _WF/Wolfmed/Effects/blood_splatter.rsi
+    state: hitsplatter1_free
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# Where the spray hits a wall or a window. An entity and not a decal: decals draw on the floor layer,
+# under walls, so a decal on a wall tile would be invisible.
+- type: entity
+  id: WFWolfmedBloodSplatWall
+  name: blood
+  description: Someone was standing in the wrong place.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedBloodSplat
+  - type: WolfmedCleanable
+    cleanCost: 0.5
+  # Long, but not forever: a round should not end with every wall on the station painted.
+  - type: TimedDespawn
+    lifetime: 900
+  - type: Sprite
+    drawdepth: WallTops
+    # Not noRot and no direction override: the server turns the entity itself, snapped to the grid's axes, and
+    # the ordinary directional rendering does the rest for every camera angle.
+    noRot: false
+    sprite: _WF/Wolfmed/Effects/blood_splatter.rsi
+    state: splatter1
+  - type: Tag
+    tags:
+    - HideContextMenu

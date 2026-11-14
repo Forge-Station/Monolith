@@ -125,6 +125,14 @@
       - !type:AdjustReagent
         reagent: Ethanol
         amount: 0.2
+      # WOLFGATE(Wolfmed): PROTO K: Onyx's <Onyx-PartPain> block on Cognac. Onyx puts it in a `Digestion:` group that
+      # Wolfgate does not have, so it goes in Cognac's only group, `Drink:` - metabolised by the stomach
+      # rather than the liver (recorded as a phase-4 deviation).
+      - !type:SuppressPain
+        amount: 0.25
+        decayDuration: 9
+        identifier: Painkiller
+        recoveryMultiplier: 1.1
 
 - type: reagent
   id: DeadRum

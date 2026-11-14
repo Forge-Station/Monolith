@@ -1,0 +1,30 @@
+# RMC-14: Resources/Prototypes/_RMC14/Entities/Structures/Walls/girder.yml
+# WOLFGATE: simplified; the wall's damaged girder after an acid hole is broken. Upstream girder sprite, no RMC repair or marine examine.
+- type: entity
+  id: RMCGirderDamaged
+  name: damaged girder
+  description: A twisted girder that no longer blocks passage.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Sprite
+    sprite: Structures/Walls/solid.rsi
+    state: wall_girder
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+    structure: true
+  - type: ReceiverXenoClaws
+    minimumClawStrength: Sharp
+    maxHealth: 100

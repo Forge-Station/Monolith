@@ -1,0 +1,17 @@
+- type: constructionGraph
+  id: WFWolfmedMakeshiftSuture
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: suture
+      steps:
+      - material: MetalRod
+        amount: 1
+        doAfter: 2
+      - material: Cloth
+        amount: 1
+        doAfter: 2
+
+  - node: suture
+    entity: WFWolfmedMakeshiftSuture5

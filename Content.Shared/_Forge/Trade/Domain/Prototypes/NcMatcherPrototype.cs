@@ -27,7 +27,7 @@ namespace Content.Shared._Forge.Trade;
 ///     A matcher used in a spawn context must have at least one item in <see cref="Items" />.
 ///     Tag matching is represented by PrototypeMatchMode.Tag and standalone ncTradeTag targets.
 /// </summary>
-[Prototype("ncMatcher")]
+[Prototype]
 public sealed partial class NcMatcherPrototype : IPrototype
 {
     /// <summary>Display name shown in store UI and contract cards.</summary>

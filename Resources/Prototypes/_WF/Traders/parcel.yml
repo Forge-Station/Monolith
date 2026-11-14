@@ -1,0 +1,37 @@
+# WOLFGATE - the carton a trader packs a multi-item order into.
+
+- type: entity
+  id: WFTraderParcel
+  parent: BaseItem
+  name: trader's parcel
+  description: A taped-up cardboard box with a hand-scrawled order number on the lid.
+  categories: [ HideSpawnMenu ]
+  components:
+  # Not Storage on purpose: only the trader fills it, and using it tips the whole lot out.
+  - type: TraderParcel
+  - type: ContainerContainer
+    containers:
+      parcel-contents: !type:Container
+  - type: Item
+    sprite: Objects/Storage/boxes.rsi
+    size: Large
+    shape:
+    - 0,0,2,2
+  - type: Sprite
+    sprite: Objects/Storage/boxes.rsi
+    state: boxwide
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/cardboardbox_pickup.ogg
+      params:
+        volume: -3
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/cardboardbox_drop.ogg
+      params:
+        volume: -3
+  - type: PhysicalComposition
+    materialComposition:
+      Cardboard: 100
+  - type: StaticPrice
+    price: 0

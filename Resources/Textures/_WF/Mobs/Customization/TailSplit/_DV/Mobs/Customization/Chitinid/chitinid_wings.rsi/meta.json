@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Concepts by: https://github.com/ElusiveCoin South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bee_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "bee_primary_FRONT",
+      "directions": 4
+    }
+  ]
+}

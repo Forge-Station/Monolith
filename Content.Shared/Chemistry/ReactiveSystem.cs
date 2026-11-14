@@ -37,6 +37,12 @@ public sealed partial class ReactiveSystem : EntitySystem
         if (!TryComp(uid, out ReactiveComponent? reactive))
             return;
 
+        // WOLFGATE(Xenoarch) START: lets artifact triggers react to reagents
+        // custom event for bypassing reactivecomponent stuff
+        var ev = new ReactionEntityEvent(method, proto, reagentQuantity, source);
+        RaiseLocalEvent(uid, ref ev);
+        // WOLFGATE END
+
         // If we have a source solution, use the reagent quantity we have left. Otherwise, use the reaction volume specified.
         var args = new EntityEffectReagentArgs(uid, EntityManager, null, source, source?.GetReagentQuantity(reagentQuantity.Reagent) ?? reagentQuantity.Quantity, proto, method, 1f);
 
@@ -106,3 +112,13 @@ Touch,
 Injection,
 Ingestion,
 }
+
+// WOLFGATE(Xenoarch) START: lets artifact triggers react to reagents
+[ByRefEvent]
+public readonly record struct ReactionEntityEvent(
+    ReactionMethod Method,
+    ReagentPrototype Reagent,
+    ReagentQuantity ReagentQuantity,
+    Solution? Source
+);
+// WOLFGATE END

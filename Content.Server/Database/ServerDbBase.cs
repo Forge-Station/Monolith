@@ -7,9 +7,21 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._Mono.Company;
+using Content.Server._WF.Voice; // WOLFGATE(Voice)
+using Content.Server._WF.Prototypes; // WOLFGATE(Prototypes)
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Shared._Common.Consent; // WOLFGATE(Genitals)
 using Content.Shared._Mono.Company;
+using Content.Shared._WF.Augments; // WOLFGATE(Augments)
+using Content.Shared._WF.Biotype; // WOLFGATE(Biotype)
+using Content.Shared._WF.BloodColour; // WOLFGATE(BloodColour)
+using Content.Shared._WF.ChatFont; // WOLFGATE(ChatFont)
+using Content.Shared._WF.TypingBubble; // WOLFGATE(TypingBubble)
+using Content.Shared._WF.EmoteVoices; // WOLFGATE(EmoteVoices)
+using Content.Shared._WF.CustomMarkings; // WOLFGATE(CustomMarkings)
+using Content.Shared._WF.LegStyle; // WOLFGATE(LegStyle)
+using Content.Shared._WF.Prototypes; // WOLFGATE(Prototypes)
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.Ghost.Roles;
@@ -27,7 +39,8 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Database
 {
-    public abstract class ServerDbBase
+    // WOLFGATE(CustomMarkings): partial, so the module's queries sit in its own folder
+    public abstract partial class ServerDbBase
     {
         private readonly ISawmill _opsLog;
 
@@ -51,6 +64,8 @@ namespace Content.Server.Database
                 .Include(p => p.Profiles).ThenInclude(h => h.Jobs)
                 .Include(p => p.Profiles).ThenInclude(h => h.Antags)
                 .Include(p => p.Profiles).ThenInclude(h => h.Traits)
+                .Include(p => p.Profiles).ThenInclude(h => h.Components) // Mono
+                .Include(p => p.Profiles).ThenInclude(h => h.Items) // Mono
                 .Include(p => p.Profiles)
                     .ThenInclude(h => h.Loadouts)
                     .ThenInclude(l => l.Groups)
@@ -61,6 +76,15 @@ namespace Content.Server.Database
             if (prefs is null)
                 return null;
 
+            // WOLFGATE(Prototypes) START: rows holding renamed prototype ids are saved under the current ids on load.
+            var legacyRows = false;
+            foreach (var profile in prefs.Profiles)
+                legacyRows |= WFLegacyDbRows.Update(profile);
+
+            if (legacyRows)
+                await WFLegacyDbRows.Save(db.DbContext, _opsLog, cancel);
+            // WOLFGATE END
+
             var maxSlot = prefs.Profiles.Max(p => p.Slot) + 1;
             var profiles = new Dictionary<int, ICharacterProfile>(maxSlot);
             foreach (var profile in prefs.Profiles)
@@ -68,19 +92,7 @@ namespace Content.Server.Database
                 profiles[profile.Slot] = ConvertProfiles(profile);
             }
 
-            return new PlayerPreferences(
-                profiles,
-                prefs.SelectedCharacterSlot,
-                Color.FromHex(prefs.AdminOOCColor),
-                ParseColorOrTransparent(prefs.SponsorOOCColor), // Forge-Change
-                ParseColorOrTransparent(prefs.SponsorLOOCColor), // Forge-Change
-                prefs.SponsorGhostSkin ?? ""); // Forge-Change
-        }
-
-        // Forge-Change: sponsor colors may be empty ("not set"), so parse defensively.
-        private static Color ParseColorOrTransparent(string? hex)
-        {
-            return string.IsNullOrEmpty(hex) ? Color.Transparent : Color.FromHex(hex, Color.Transparent);
+            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor));
         }
 
         public async Task SaveSelectedCharacterIndexAsync(NetUserId userId, int index)
@@ -109,10 +121,21 @@ namespace Content.Server.Database
                 throw new NotImplementedException();
             }
 
-            var oldProfile = await db.DbContext.Profile // Forge-Change
+            var oldProfile = db.DbContext.Profile
+                .Include(p => p.Preference)
                 .Where(p => p.Preference.UserId == userId.UserId)
-                .SingleOrDefaultAsync(h => h.Slot == slot); // Forge-Change
+                .Include(p => p.Jobs)
+                .Include(p => p.Antags)
+                .Include(p => p.Traits)
+                .Include(p => p.Components) // Mono
+                .Include(p => p.Items) // Mono
+                .Include(p => p.Loadouts)
+                    .ThenInclude(l => l.Groups)
+                    .ThenInclude(group => group.Loadouts)
+                .AsSplitQuery()
+                .SingleOrDefault(h => h.Slot == slot);
 
+            var newProfile = ConvertProfiles(humanoid, slot, oldProfile);
             if (oldProfile == null)
             {
                 var prefs = await db.DbContext
@@ -120,26 +143,9 @@ namespace Content.Server.Database
                     .Include(p => p.Profiles)
                     .SingleAsync(p => p.UserId == userId.UserId);
 
-                prefs.Profiles.Add(ConvertProfiles(humanoid, slot)); // Forge-Change
-                await db.DbContext.SaveChangesAsync(); // Forge-Change
-                return; // Forge-Change
+                prefs.Profiles.Add(newProfile);
             }
-            // Forge-Change-start
-            await db.DbContext.Set<Job>()
-                .Where(job => job.ProfileId == oldProfile.Id)
-                .ExecuteDeleteAsync();
-            await db.DbContext.Set<Antag>()
-                .Where(antag => antag.ProfileId == oldProfile.Id)
-                .ExecuteDeleteAsync();
-            await db.DbContext.Set<Trait>()
-                .Where(trait => trait.ProfileId == oldProfile.Id)
-                .ExecuteDeleteAsync();
-            await db.DbContext.Set<ProfileRoleLoadout>()
-                .Where(loadout => loadout.ProfileId == oldProfile.Id)
-                .ExecuteDeleteAsync();
 
-            ConvertProfiles(humanoid, slot, oldProfile);
-            // Forge-Change-end
             await db.DbContext.SaveChangesAsync();
         }
 
@@ -201,21 +207,6 @@ namespace Content.Server.Database
 
         }
 
-        // Forge-Change: persist sponsor cosmetic preferences.
-        public async Task SaveSponsorPreferencesAsync(NetUserId userId, Color oocColor, Color loocColor, string ghostSkin)
-        {
-            await using var db = await GetDb();
-            var prefs = await db.DbContext
-                .Preference
-                .SingleAsync(p => p.UserId == userId.UserId);
-
-            prefs.SponsorOOCColor = oocColor == Color.Transparent ? "" : oocColor.ToHex();
-            prefs.SponsorLOOCColor = loocColor == Color.Transparent ? "" : loocColor.ToHex();
-            prefs.SponsorGhostSkin = ghostSkin ?? "";
-
-            await db.DbContext.SaveChangesAsync();
-        }
-
         private static async Task SetSelectedCharacterSlotAsync(NetUserId userId, int newSlot, ServerDbContext db)
         {
             var prefs = await db.Preference.SingleAsync(p => p.UserId == userId.UserId);
@@ -237,12 +228,6 @@ namespace Content.Server.Database
             var gender = sex == Sex.Male ? Gender.Male : Gender.Female;
             if (Enum.TryParse<Gender>(profile.Gender, true, out var genderVal))
                 gender = genderVal;
-
-            // Corvax-TTS-Start
-            var voice = profile.Voice;
-            if (voice == String.Empty)
-                voice = SharedHumanoidAppearanceSystem.DefaultSexVoice[sex];
-            // Corvax-TTS-End
 
             var balance = profile.BankBalance;
 
@@ -269,6 +254,7 @@ namespace Content.Server.Database
                 var loadout = new RoleLoadout(role.RoleName)
                 {
                     EntityName = role.EntityName,
+                    CustomJobTitle = role.CustomJobTitle, // WOLFGATE(Roles)
                 };
 
                 foreach (var group in role.Groups)
@@ -278,7 +264,8 @@ namespace Content.Server.Database
                     {
                         groupLoadouts.Add(new Loadout()
                         {
-                            Prototype = profLoadout.LoadoutName,
+                            // WOLFGATE(Prototypes): rows saved before a loadout rename load under its current id.
+                            Prototype = WFLegacyPrototypeIds.Resolve(WFLegacyPrototypeIds.Loadouts, profLoadout.LoadoutName),
                         });
                     }
                 }
@@ -294,27 +281,10 @@ namespace Content.Server.Database
             var height = profile.Height <= 0.005f ? 1.0f : profile.Height;
             var width = profile.Width <= 0.005f ? 1.0f : profile.Width;
 
-            // Forge-Change-Start Corvax-Wega-Hair-Extended
-            List<Color> hairColors;
-            try
-            {
-                var hairColorHexCodes = JsonSerializer.Deserialize<List<string>>(profile.HairColor);
-                hairColors = hairColorHexCodes?.Select(color => Color.FromHex(color.Trim())).ToList() ?? new List<Color> { Color.White };
-            }
-            catch (JsonException)
-            {
-                hairColors = new List<Color> { Color.White };
-            }
-            // Forge-Change-End Corvax-Wega-Hair-Extended
-
-            var barkVoice = profile.BarkVoice ?? SharedHumanoidAppearanceSystem.DefaultBarkVoice; // Corvax-Frontier-Barks
-
-            return new  HumanoidCharacterProfile(
+            return new HumanoidCharacterProfile(
                 profile.CharacterName,
                 profile.FlavorText,
-                profile.Species,
-                profile.Nationality,
-                voice, // Corvax-TTS
+                WFLegacyPrototypeIds.Resolve(WFLegacyPrototypeIds.Species, profile.Species), // WOLFGATE(Prototypes): renamed species ids
                 profile.Age,
                 sex,
                 gender,
@@ -322,11 +292,11 @@ namespace Content.Server.Database
                 new HumanoidCharacterAppearance
                 (
                     profile.HairName,
-                    hairColors, // Forge-Change Corvax-Wega-Hair-Extended
+                    ParseHairColors(profile.HairColor),
                     profile.FacialHairName,
-                    Color.FromHex(profile.FacialHairColor),
-                    Color.FromHex(profile.EyeColor),
-                    Color.FromHex(profile.SkinColor),
+                    ParseProfileColor(profile.FacialHairColor),
+                    ParseProfileColor(profile.EyeColor),
+                    ParseProfileColor(profile.SkinColor),
                     markings,
                     height,
                     width
@@ -337,20 +307,95 @@ namespace Content.Server.Database
                 antags.ToHashSet(),
                 traits.ToHashSet(),
                 loadouts,
-                barkVoice, // Corvax-Frontier-Barks
-                company);
+                company,
+                profile.CustomSpeciesName ?? string.Empty, // WOLFGATE(Humanoid)
+                // Mono start
+                profile.Flags,
+                profile.Components.Select(component => new PersistentProfileComponent(
+                    component.Data,
+                    component.Sticky)),
+                profile.Items.Select(item => new PersistentProfileItem(
+                    item.Data,
+                    // WOLFGATE(EmoteVoices) START: the chosen voices follow the Mono data
+                    // item.Sticky))); // Mono end
+                    item.Sticky)), // Mono end
+                EmoteVoiceRules.FromStored(profile.ScreamVoice),
+                EmoteVoiceRules.FromStored(profile.LaughVoice))
+                // WOLFGATE END
+            {
+                HeadshotUrl = profile.HeadshotUrl ?? string.Empty, // WOLFGATE(Headshot)
+                MismatchedParts = profile.MismatchedParts, // WOLFGATE(Species)
+                CustomMarkings = CustomMarkingRules.FromStored(profile.CustomMarkings), // WOLFGATE(CustomMarkings)
+                LegStance = (LegStance) profile.LegStance, // WOLFGATE(LegStyle)
+                Biotype = (WFBiotype) profile.Biotype, // WOLFGATE(Biotype)
+                Augments = WFAugmentRules.FromStored(profile.Augments), // WOLFGATE(Augments)
+                AugmentUnlocks = WFAugmentRules.UnlocksFromStored(profile.AugmentUnlocks), // WOLFGATE(Augments)
+                BloodColor = WFBloodColourRules.FromStored(profile.BloodColor), // WOLFGATE(BloodColour)
+                ChatFont = WFChatFontRules.FromStored(profile.ChatFont), // WOLFGATE(ChatFont)
+                TypingIndicator = WFTypingBubbleRules.FromStored(profile.TypingIndicator), // WOLFGATE(TypingBubble)
+                SpeechVoice = SpeechVoiceJson.FromStored(profile.SpeechVoice), // WOLFGATE(Voice)
+            };
+        }
+
+        private static List<Color> ParseHairColors(string stored)
+        {
+            var colors = new List<Color>();
+            foreach (var part in HairColorParts(stored))
+                colors.Add(ParseProfileColor(part));
+
+            if (colors.Count == 0)
+                colors.Add(Color.Black);
+
+            return colors;
+        }
+
+        /// <summary>
+        /// Older rows stored a hair colour list as a JSON array (<c>["#RRGGBBAA"]</c>).
+        /// Current rows are comma-separated hex. A bad value stays black instead of dropping the player.
+        /// </summary>
+        private static IEnumerable<string> HairColorParts(string stored)
+        {
+            if (string.IsNullOrWhiteSpace(stored))
+                yield break;
+
+            var trimmed = stored.Trim();
+            if (trimmed.StartsWith('['))
+            {
+                List<string>? parsed = null;
+                try
+                {
+                    parsed = JsonSerializer.Deserialize<List<string>>(trimmed);
+                }
+                catch (JsonException)
+                {
+                    parsed = null;
+                }
+
+                if (parsed != null)
+                {
+                    foreach (var part in parsed)
+                        yield return part;
+
+                    yield break;
+                }
+            }
+
+            foreach (var part in trimmed.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                yield return part;
+        }
+
+        private static Color ParseProfileColor(string stored)
+        {
+            var hex = stored.Trim().Trim('"');
+            if (hex.Length == 0)
+                return Color.Black;
+
+            return Color.FromHex(hex, Color.Black);
         }
 
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)
         {
             profile ??= new Profile();
-            UpdateProfileScalarFields(humanoid, slot, profile); // Forge-Change
-            PopulateProfileRelations(humanoid, profile); // Forge-Change
-            return profile;
-        }
-
-        private static void UpdateProfileScalarFields(HumanoidCharacterProfile humanoid, int slot, Profile profile) // Forge-Change
-        {
             var appearance = (HumanoidCharacterAppearance) humanoid.CharacterAppearance;
             List<string> markingStrings = new();
             foreach (var marking in appearance.Markings)
@@ -362,14 +407,12 @@ namespace Content.Server.Database
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
             profile.Species = humanoid.Species;
-            profile.Nationality = humanoid.Nationality;
-            profile.Voice = humanoid.Voice; // Corvax-TTS
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();
             profile.BankBalance = humanoid.BankBalance;
             profile.HairName = appearance.HairStyleId;
-            profile.HairColor = JsonSerializer.Serialize(appearance.HairColor.Select(c => c.ToHex()).ToList()); // Forge-Change Corvax-Wega-Hair-Extended
+            profile.HairColor = string.Join(",", appearance.HairColor.Select(color => color.ToHex()));
             profile.FacialHairName = appearance.FacialHairStyleId;
             profile.FacialHairColor = appearance.FacialHairColor.ToHex();
             profile.EyeColor = appearance.EyeColor.ToHex();
@@ -381,11 +424,37 @@ namespace Content.Server.Database
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
             profile.Company = humanoid.Company;
-            profile.BarkVoice = humanoid.BarkVoice; // Corvax-Frontier-Barks
-        }
+            profile.CustomSpeciesName = humanoid.CustomSpeciesName; // WOLFGATE(Humanoid)
+            profile.HeadshotUrl = humanoid.HeadshotUrl; // WOLFGATE(Headshot)
+            profile.MismatchedParts = humanoid.MismatchedParts; // WOLFGATE(Species)
+            profile.CustomMarkings = CustomMarkingRules.ToStored(humanoid.CustomMarkings); // WOLFGATE(CustomMarkings)
+            profile.LegStance = (int) humanoid.LegStance; // WOLFGATE(LegStyle)
+            profile.Biotype = (int) humanoid.Biotype; // WOLFGATE(Biotype)
+            profile.Augments = WFAugmentRules.ToStored(humanoid.Augments); // WOLFGATE(Augments)
+            profile.AugmentUnlocks = WFAugmentRules.ToStored(humanoid.AugmentUnlocks); // WOLFGATE(Augments)
+            profile.BloodColor = WFBloodColourRules.ToStored(humanoid.BloodColor); // WOLFGATE(BloodColour)
+            profile.ChatFont = WFChatFontRules.ToStored(humanoid.ChatFont); // WOLFGATE(ChatFont)
+            profile.TypingIndicator = WFTypingBubbleRules.ToStored(humanoid.TypingIndicator); // WOLFGATE(TypingBubble)
+            profile.ScreamVoice = EmoteVoiceRules.ToStored(humanoid.ScreamVoice); // WOLFGATE(EmoteVoices)
+            profile.LaughVoice = EmoteVoiceRules.ToStored(humanoid.LaughVoice); // WOLFGATE(EmoteVoices)
+            profile.SpeechVoice = SpeechVoiceJson.ToStored(humanoid.SpeechVoice); // WOLFGATE(Voice)
 
-        private static void PopulateProfileRelations(HumanoidCharacterProfile humanoid, Profile profile) // Forge-Change
-        {
+            // Mono start
+            profile.Flags = [..humanoid.Flags];
+            profile.Components.Clear();
+            profile.Components.AddRange(humanoid.Components.Select(component => new ProfileComponent
+            {
+                Data = component.Data,
+                Sticky = component.Sticky,
+            }));
+            profile.Items.Clear();
+            profile.Items.AddRange(humanoid.Items.Select(item => new ProfileItem
+            {
+                Data = item.Data,
+                Sticky = item.Sticky,
+            }));
+            // Mono end
+
             profile.Jobs.Clear();
             profile.Jobs.AddRange(
                 humanoid.JobPriorities
@@ -413,6 +482,7 @@ namespace Content.Server.Database
                 {
                     RoleName = role,
                     EntityName = loadouts.EntityName ?? string.Empty,
+                    CustomJobTitle = loadouts.CustomJobTitle, // WOLFGATE(Roles)
                 };
 
                 foreach (var (group, groupLoadouts) in loadouts.SelectedLoadouts)
@@ -435,6 +505,8 @@ namespace Content.Server.Database
 
                 profile.Loadouts.Add(dz);
             }
+
+            return profile;
         }
         #endregion
 
@@ -1818,6 +1890,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         #endregion
 
         #region Job Whitelists
+
         public async Task<bool> AddJobWhitelist(Guid player, ProtoId<JobPrototype> job)
         {
             await using var db = await GetDb();
@@ -1872,6 +1945,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
             return true;
         }
+
         // Frontier: Ghost role handling
         # endregion
 
@@ -1992,6 +2066,136 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         }
 
         #endregion
+
+        // WOLFGATE(Genitals) START: consent system ported from HardLight
+        #region Consent Settings
+
+        private static async Task DeletePlayerConsentSettings(ServerDbContext db, NetUserId userId)
+        {
+            var consentSettings = await db.ConsentSettings
+                .Where(c => c.UserId == userId.UserId)
+                .SingleOrDefaultAsync();
+
+            if (consentSettings is null)
+                return;
+
+            db.ConsentSettings.Remove(consentSettings);
+        }
+
+        public async Task<int> SavePlayerConsentSettingsAsync(NetUserId userId, PlayerConsentSettings? consentSettings)
+        {
+            await using var db = await GetDb();
+
+            if (consentSettings is null)
+            {
+                await DeletePlayerConsentSettings(db.DbContext, userId);
+                await db.DbContext.SaveChangesAsync();
+                return 0;
+            }
+
+            // Get current consent settings so we know if freetext needs updating and which toggles to add or remove
+            var currentConsentSettings = await db.DbContext.ConsentSettings
+                .Include(c => c.ConsentToggles)
+                .AsSplitQuery()
+                .SingleOrDefaultAsync(c => c.UserId == userId);
+
+            if (currentConsentSettings is null)
+            {
+                currentConsentSettings = new ConsentSettings
+                {
+                    UserId = userId,
+                    ConsentToggles = new(),
+                    ConsentFreetext = consentSettings.Freetext,
+                    ConsentFreetextUpdatedAt = DateTime.UtcNow,
+                };
+
+                db.DbContext.ConsentSettings.Add(currentConsentSettings);
+            }
+            else if (currentConsentSettings.ConsentFreetext != consentSettings.Freetext)
+            {
+                currentConsentSettings.ConsentFreetext = consentSettings.Freetext;
+                currentConsentSettings.ConsentFreetextUpdatedAt = DateTime.UtcNow;
+            }
+
+            var currentConsentToggles = currentConsentSettings.ConsentToggles.ToDictionary(
+                keySelector: t => new ProtoId<ConsentTogglePrototype>(t.ToggleProtoId),
+                elementSelector: t => t.ToggleProtoState);
+
+            // Remove and update toggles
+            foreach (var toggle in currentConsentToggles)
+            {
+                if (consentSettings.Toggles.TryGetValue(toggle.Key, out var toggleState))
+                    currentConsentSettings.ConsentToggles.First(t => t.ToggleProtoId == toggle.Key).ToggleProtoState = toggleState;
+                else
+                    currentConsentSettings.ConsentToggles.RemoveAll(t => t.ToggleProtoId == toggle.Key);
+            }
+
+            // Add new toggles
+            foreach (var toggle in consentSettings.Toggles)
+            {
+                if (currentConsentToggles.ContainsKey(toggle.Key))
+                    continue;
+
+                currentConsentSettings.ConsentToggles.Add(new()
+                {
+                    ToggleProtoId = toggle.Key,
+                    ToggleProtoState = toggle.Value,
+                });
+            }
+
+            await db.DbContext.SaveChangesAsync();
+            return currentConsentSettings.Id;
+        }
+
+        public async Task<ConsentSettings> GetPlayerConsentSettingsAsync(NetUserId userId)
+        {
+            await using var db = await GetDb();
+
+            var consentSettings = await db.DbContext.ConsentSettings
+                .Include(c => c.ConsentToggles)
+                .Include(c => c.ReadReceipts)
+                .AsSplitQuery()
+                .SingleOrDefaultAsync(c => c.UserId == userId);
+
+            // WOLFGATE(Prototypes): consent rows holding renamed toggle ids are saved under the current ids on load
+            if (consentSettings != null && WFLegacyDbRows.Update(consentSettings))
+                await WFLegacyDbRows.Save(db.DbContext, _opsLog);
+
+            return consentSettings ?? new();
+        }
+
+        public async Task<ConsentFreetextReadReceipt> UpdatePlayerConsentReadReceipt(NetUserId readerUserId, int readConsentSettingsId)
+        {
+            await using var db = await GetDb();
+
+            var readReceipt = await db.DbContext.ConsentFreetextReadReceipt
+                .SingleOrDefaultAsync(c => c.ReaderUserId == readerUserId && c.ReadConsentSettingsId == readConsentSettingsId);
+
+            if (readReceipt is null)
+            {
+                readReceipt = new ConsentFreetextReadReceipt
+                {
+                    ReaderUserId = readerUserId,
+                    ReadConsentSettingsId = readConsentSettingsId,
+                    ReadAt = DateTime.UtcNow,
+                };
+
+                // WOLFGATE(Genitals): persist the new receipt, which HardLight never adds or saves
+                // Read tracking silently did nothing there.
+                db.DbContext.ConsentFreetextReadReceipt.Add(readReceipt);
+            }
+            else
+            {
+                readReceipt.ReadAt = DateTime.UtcNow;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+
+            return readReceipt;
+        }
+
+        #endregion
+        // WOLFGATE END
 
         // Mono
         #region Company
@@ -2150,5 +2354,173 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         {
 
         }
+
+        #region Wayfarer Safety Deposit Box
+
+        public async Task<WayfarerSafetyDepositBox> PurchaseSafetyDepositBox(
+            Guid ownerUserId,
+            int characterIndex,
+            string ownerName,
+            EntProtoId protoId,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var box = new WayfarerSafetyDepositBox
+            {
+                BoxId = Guid.NewGuid(),
+                OwnerUserId = ownerUserId,
+                CharacterIndex = characterIndex,
+                OwnerName = ownerName,
+                ProtoId = protoId,
+                PurchaseDate = DateTime.UtcNow
+            };
+
+            db.DbContext.WayfarerSafetyDepositBox.Add(box);
+            await db.DbContext.SaveChangesAsync(cancel);
+
+            return box;
+        }
+
+        public async Task<List<WayfarerSafetyDepositBox>> GetPlayerSafetyDepositBoxes(
+            Guid ownerUserId,
+            int characterIndex,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            return await db.DbContext.WayfarerSafetyDepositBox
+                .Include(b => b.Items)
+                .Where(b => b.OwnerUserId == ownerUserId && b.CharacterIndex == characterIndex)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<WayfarerSafetyDepositBox?> GetSafetyDepositBox(
+            Guid boxId,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            return await db.DbContext.WayfarerSafetyDepositBox
+                .Include(b => b.Items)
+                .FirstOrDefaultAsync(b => b.BoxId == boxId, cancel);
+        }
+
+        public async Task DepositSafetyDepositBoxItems(
+            Guid boxId,
+            List<string> entityDataList,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var box = await db.DbContext.WayfarerSafetyDepositBox
+                .Include(b => b.Items)
+                .FirstOrDefaultAsync(b => b.BoxId == boxId, cancel);
+
+            if (box == null)
+                return;
+
+            // Clear existing items
+            db.DbContext.WayfarerSafetyDepositBoxItem.RemoveRange(box.Items);
+
+            // Add new items
+            foreach (var entityData in entityDataList)
+            {
+                box.Items.Add(new WayfarerSafetyDepositBoxItem
+                {
+                    BoxId = box.Id,
+                    EntityData = entityData,
+                    DepositDate = DateTime.UtcNow
+                });
+            }
+
+            // Clear LastWithdrawn since the box is now safely stored
+            box.LastWithdrawn = null;
+            box.LastWithdrawnRoundId = null;
+
+            await db.DbContext.SaveChangesAsync(cancel);
+        }
+
+        public async Task UpdateSafetyDepositBoxNickname(
+            Guid boxId,
+            string? nickname,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var box = await db.DbContext.WayfarerSafetyDepositBox
+                .FirstOrDefaultAsync(b => b.BoxId == boxId, cancel);
+
+            if (box == null)
+                return;
+
+            box.Nickname = nickname;
+            await db.DbContext.SaveChangesAsync(cancel);
+        }
+
+        public async Task ClearSafetyDepositBoxItems(
+            Guid boxId,
+            int roundId,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var box = await db.DbContext.WayfarerSafetyDepositBox
+                .Include(b => b.Items)
+                .FirstOrDefaultAsync(b => b.BoxId == boxId, cancel);
+
+            if (box == null)
+                return;
+
+            db.DbContext.WayfarerSafetyDepositBoxItem.RemoveRange(box.Items);
+
+            // Set LastWithdrawn to indicate the box is now in the world
+            box.LastWithdrawn = DateTime.UtcNow;
+            box.LastWithdrawnRoundId = roundId;
+
+            await db.DbContext.SaveChangesAsync(cancel);
+        }
+
+        public async Task<int> DeleteStaleSafetyDepositBoxes(
+            int daysStale,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var cutoffDate = DateTime.UtcNow.AddDays(-daysStale);
+
+            // Find boxes that have been withdrawn and have no items for longer than the cutoff period
+            var staleBoxes = await db.DbContext.WayfarerSafetyDepositBox
+                .Include(b => b.Items)
+                .Where(b => b.LastWithdrawn != null &&
+                            b.LastWithdrawn < cutoffDate &&
+                            b.Items.Count == 0)
+                .ToListAsync(cancel);
+
+            var count = staleBoxes.Count;
+            db.DbContext.WayfarerSafetyDepositBox.RemoveRange(staleBoxes);
+            await db.DbContext.SaveChangesAsync(cancel);
+
+            return count;
+        }
+
+        public async Task DeleteSafetyDepositBox(
+            Guid boxId,
+            CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            var box = await db.DbContext.WayfarerSafetyDepositBox
+                .Include(b => b.Items)
+                .FirstOrDefaultAsync(b => b.BoxId == boxId, cancel);
+
+            if (box == null)
+                return;
+
+            db.DbContext.WayfarerSafetyDepositBox.Remove(box);
+            await db.DbContext.SaveChangesAsync(cancel);
+        }
+
+        #endregion
     }
 }

@@ -17,7 +17,7 @@ public sealed partial class RemnantConsoleWindow : DefaultWindow
 
     public void UpdateButtons(List<string> labels)
     {
-        ButtonContainer.DisposeAllChildren();
+        ButtonContainer.RemoveAllChildren();
         for (var i = 0; i < labels.Count; i++)
         {
             var index = i;

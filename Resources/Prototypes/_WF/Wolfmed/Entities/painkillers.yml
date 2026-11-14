@@ -1,0 +1,278 @@
+# Wolfmed's painkiller ladder in a player's hands (CONSC). A pill for the weak tier, a bottle for the
+# strong one and a pen for the emergency one, because the pen is the only one a Downed player can reach for
+# with one shaking hand.
+
+- type: entity
+  parent: Pill
+  id: WFWolfmedAnalgesicPill
+  name: analgesic pill
+  suffix: Wolfmed
+  description: A chalky painkiller. Takes the edge off a bad limb; heals nothing at all.
+  components:
+  # The client redraws a pill as pill{pillType + 1} on every state, so the type has to match the sprite.
+  - type: Pill
+    pillType: 6
+  - type: Sprite
+    sprite: _DV/Objects/Specific/Chemistry/pills.rsi
+    state: pill7
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: WFWolfmedAnalgesic
+          Quantity: 15
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: WFWolfmedOpiateChemistryBottle
+  name: opiate bottle
+  suffix: opiate
+  components:
+  - type: Label
+    currentLabel: reagent-name-wolfmed-opiate
+  - type: SolutionContainerManager
+    solutions:
+      drink: # This solution name and target volume is hard-coded in ChemMasterComponent
+        maxVol: 30
+        reagents:
+        - ReagentId: WFWolfmedOpiate
+          Quantity: 30
+
+- type: entity
+  parent: ChemicalMedipen
+  id: WFWolfmedStimPen
+  name: stim pen
+  description: Thirty seconds on your feet, and then the bill. For walking out of somewhere, not for staying.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: medipen
+      map: ["enum.SolutionContainerLayers.Fill"]
+      color: "#ff5c3b"
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: medipen_empty
+  - type: Injector
+    transferAmount: 10
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+        reagents:
+        - ReagentId: WFWolfmedStim
+          Quantity: 10
+
+# Playtest 1: the two lower rungs as pens too. A pill waits in the stomach; a pen is in the blood at once and a
+# Downed player can use it on themselves. The opiate pen is dosed to lift pain for about half a minute and to
+# stay under the sedation line that depresses breathing on its own.
+- type: entity
+  parent: ChemicalMedipen
+  id: WFWolfmedAnalgesicPen
+  name: analgesic pen
+  description: A quick shot of plain painkiller. Gets you off the floor if pain is all that keeps you there; heals nothing, and does nothing for blood loss.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: medipen
+      map: ["enum.SolutionContainerLayers.Fill"]
+      color: "#e8d9a6"
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: medipen_empty
+  - type: Injector
+    transferAmount: 10
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+        reagents:
+        - ReagentId: WFWolfmedAnalgesic
+          Quantity: 10
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: ChemicalMedipen
+  id: WFWolfmedOpiatePen
+  name: opiate pen
+  description: A measured shot of opiate. Lifts even a pain faint for about half a minute and slows you down while it works. Do not stack them.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: medipen
+      map: ["enum.SolutionContainerLayers.Fill"]
+      color: "#7a6fd6"
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: medipen_empty
+  - type: Injector
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 3
+        reagents:
+        - ReagentId: WFWolfmedOpiate
+          Quantity: 3
+  - type: StaticPrice
+    price: 20
+
+# M2 (OD14): the antagonist as a pen, so a medic (or a Downed patient on themselves) can reverse an overdose on the
+# spot. 5 u takes up to 1.5 off the sedation over about ten seconds.
+- type: entity
+  parent: ChemicalMedipen
+  id: WFWolfmedNaloxonePen
+  name: naloxone pen
+  description: Reverses a painkiller overdose. Takes the sedation off and gets the patient breathing; the pain comes back with it.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/medipen.rsi
+    layers:
+    - state: medipen
+      map: ["enum.SolutionContainerLayers.Fill"]
+      color: "#b8e3f0"
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: medipen_empty
+  - type: Injector
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 5
+        reagents:
+        - ReagentId: WFWolfmedNaloxone
+          Quantity: 5
+  - type: StaticPrice
+    price: 15
+
+# Playtest 5, ITEMS: the analgesic pill by the canister, the "painkillers in a bottle" the standard medkit carries.
+# A canister's own price leaves its pills out, so the vend price is set for what is inside.
+- type: entity
+  parent: PillCanister
+  id: WFWolfmedAnalgesicPillCanister
+  name: analgesic pill canister
+  suffix: Analgesic, 7
+  components:
+  - type: Label
+    currentLabel: reagent-name-wolfmed-analgesic
+  - type: StorageFill
+    contents:
+    - id: WFWolfmedAnalgesicPill
+      amount: 7
+  - type: StaticPrice
+    price: 0
+    vendPrice: 300
+
+# Playtest 5, ITEMS: the Onyx painkillers each carry a Wolfmed tier (WolfmedPainRelief), so each is a rung of the
+# ladder above and gets the same form: the two weak ones as pills, the two strong ones as bottles.
+- type: entity
+  parent: Pill
+  id: WFWolfmedIbuprofenPill
+  name: ibuprofen pill
+  description: A common anti-inflammatory. Dulls a sore limb and slowly eases bruising; weaker than an analgesic.
+  components:
+  - type: Pill
+    pillType: 10
+  - type: Sprite
+    sprite: _DV/Objects/Specific/Chemistry/pills.rsi
+    state: pill11
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Ibuprofen
+          Quantity: 10
+
+- type: entity
+  parent: PillCanister
+  id: WFWolfmedIbuprofenPillCanister
+  name: ibuprofen pill canister
+  suffix: Ibuprofen 10u, 5
+  components:
+  - type: Label
+    currentLabel: reagent-name-ibuprofen
+  - type: StorageFill
+    contents:
+    - id: WFWolfmedIbuprofenPill
+      amount: 5
+  - type: StaticPrice
+    price: 0
+    vendPrice: 200
+
+# 10 u stays under the 12 u at which ketorolac starts to thin the blood.
+- type: entity
+  parent: Pill
+  id: WFWolfmedKetorolacPill
+  name: ketorolac pill
+  description: The strongest of the mild painkillers. Two at once thin the blood and keep a wound bleeding.
+  components:
+  - type: Pill
+    pillType: 11
+  - type: Sprite
+    sprite: _DV/Objects/Specific/Chemistry/pills.rsi
+    state: pill12
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Ketorolac
+          Quantity: 10
+
+- type: entity
+  parent: PillCanister
+  id: WFWolfmedKetorolacPillCanister
+  name: ketorolac pill canister
+  suffix: Ketorolac 10u, 5
+  components:
+  - type: Label
+    currentLabel: reagent-name-ketorolac
+  - type: StorageFill
+    contents:
+    - id: WFWolfmedKetorolacPill
+      amount: 5
+  - type: StaticPrice
+    price: 0
+    vendPrice: 250
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: WFWolfmedTramadolChemistryBottle
+  name: tramadol bottle
+  suffix: tramadol
+  components:
+  - type: Label
+    currentLabel: reagent-name-tramadol
+  - type: SolutionContainerManager
+    solutions:
+      drink: # This solution name and target volume is hard-coded in ChemMasterComponent
+        maxVol: 30
+        reagents:
+        - ReagentId: Tramadol
+          Quantity: 30
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: WFWolfmedOxycodoneChemistryBottle
+  name: oxycodone bottle
+  suffix: oxycodone
+  components:
+  - type: Label
+    currentLabel: reagent-name-oxycodone
+  - type: SolutionContainerManager
+    solutions:
+      drink: # This solution name and target volume is hard-coded in ChemMasterComponent
+        maxVol: 30
+        reagents:
+        - ReagentId: Oxycodone
+          Quantity: 30

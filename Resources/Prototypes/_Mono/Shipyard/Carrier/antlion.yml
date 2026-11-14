@@ -2,7 +2,7 @@
   id: Antlion
   parent: BaseVessel
   name: DIS Antlion
-  description: A mining drone commissioned by Horizon Energy to the DIS. Basically a chunk of metal with a mining pulser slapped onto it. EVA suit and oxygen not included.
+  description: A mining drone commissioned by Horizon Energy to the DIS. Basically a chunk of metal with an M12 mining laser slapped onto it. EVA suit and oxygen not included.
   price: 13133
   category: Micro
   group: Custom

@@ -1,0 +1,9 @@
+# Held in the left hand, in the contractor fun group beside the instruments.
+- type: loadout
+  id: WFBoombox
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 0
+  inhand:
+  - WFBoombox

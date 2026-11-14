@@ -8,7 +8,7 @@
   id: Arkansaw
   parent: BaseVessel
   name: COG Arkansaw
-  description: Made by a forgotten cult; it is a Capital sized mech carrier with a dedicated science and mining bay with mining pulsars. Relatively thin armor and runs on 3 bananium generators wired together.
+  description: Made by a forgotten cult; it is a Capital sized mech carrier with a dedicated science and mining bay with M12 mining lasers. Relatively thin armor and runs on 3 bananium generators wired together.
   price: 289957 # engine is fueled with bananium, extremely radioactive engine room, thin armor, extremely vulnerable rear thrusters.
   category: Large
   group: Expedition

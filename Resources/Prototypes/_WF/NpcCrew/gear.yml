@@ -1,0 +1,194 @@
+# Crew loadouts. Weapons and ammunition sit in equipment slots and pockets, never in a bag: the crew draws from
+# slots. What a crewman carries is what a boarder loots.
+
+- type: startingGear
+  id: WFCrewDeckhandGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+    ears: WFCrewHeadset
+    outerClothing: ClothingOuterHardsuitSpatio
+    head: ClothingHeadHelmetHardsuitSpatio
+    mask: ClothingMaskBreath
+    suitstorage: OxygenTankFilled
+    belt: WeaponPistolMk58
+    pocket1: Magazine45_ACPPistolFMJ
+    pocket2: Magazine45_ACPPistolFMJ
+
+- type: startingGear
+  id: WFCrewMarineGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+    ears: WFCrewHeadset
+    outerClothing: ClothingOuterHardsuitSpatio
+    head: ClothingHeadHelmetHardsuitSpatio
+    mask: ClothingMaskBreath
+    suitstorage: OxygenTankFilled
+    back: WeaponRifleLecter
+    belt: WeaponPistolMk58
+    pocket1: Magazine68x52mmCaseless
+    pocket2: Magazine45_ACPPistolFMJ
+
+- type: startingGear
+  id: WFCrewOfficerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBlue
+    shoes: ClothingShoesColorBlack
+    ears: WFCrewHeadset
+    outerClothing: ClothingOuterHardsuitSpatio
+    head: ClothingHeadHelmetHardsuitSpatio
+    mask: ClothingMaskBreath
+    suitstorage: OxygenTankFilled
+    belt: WeaponPistolMk58
+    pocket1: Magazine45_ACPPistolFMJ
+
+# Put on crew posted where their ship has no air, over whatever their loadout wore in these slots.
+- type: startingGear
+  id: WFCrewVoidKitGear
+  equipment:
+    outerClothing: ClothingOuterHardsuitSpatio
+    head: ClothingHeadHelmetHardsuitSpatio
+    mask: ClothingMaskBreath
+    suitstorage: OxygenTankFilled
+
+- type: entity
+  parent: ClothingHeadsetGrey
+  id: WFCrewHeadset
+  suffix: NPC crew
+  components:
+  - type: WFCrewRadio
+  - type: TelecomExempt
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyTraffic
+      - WFEncryptionKeyCrewIntercom
+
+# The navies' crews wear their own services' headsets, with the faction channel's key beside the common ones.
+- type: entity
+  parent: ClothingHeadsetTsfmc
+  id: WFCrewHeadsetTsf
+  suffix: NPC crew
+  components:
+  - type: WFCrewRadio
+  - type: TelecomExempt
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyTraffic
+      - EncryptionKeyNfsd
+      - WFEncryptionKeyCrewIntercom
+
+- type: entity
+  parent: ClothingHeadsetFreelance
+  id: WFCrewHeadsetPdv
+  suffix: NPC crew
+  components:
+  - type: WFCrewRadio
+  - type: TelecomExempt
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyTraffic
+      - EncryptionKeyFreelance
+      - WFEncryptionKeyCrewIntercom
+
+- type: entity
+  parent: ClothingHeadsetUSSP
+  id: WFCrewHeadsetUssp
+  suffix: NPC crew
+  components:
+  - type: WFCrewRadio
+  - type: TelecomExempt
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyTraffic
+      - EncryptionKeyUssp
+      - WFEncryptionKeyCrewIntercom
+
+# The crews' own channel, for what they tell each other. Short ranged, and no player kit carries its key.
+- type: radioChannel
+  id: WFCrewIntercom
+  name: wf-crew-radio-channel-intercom
+  keycode: '6'
+  frequency: 1027
+  color: "#8a8f7a"
+  maxRange: 400
+
+- type: entity
+  parent: EncryptionKeyTraffic
+  id: WFEncryptionKeyCrewIntercom
+  name: crew intercom encryption key
+  description: An encryption key for a ship's crew intercom. Good for a few hundred metres.
+  components:
+  - type: EncryptionKey
+    channels:
+    - WFCrewIntercom
+    defaultChannel: WFCrewIntercom
+
+# The Reavers' raider suit: a death squad hardsuit in their red and black, with a pirate's armour under it. The
+# riflemen wear it, so it is what a boarding party meets and what a looter takes home; the rest of the kit is in ReaverGear.
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: WFClothingOuterHardsuitReaver
+  name: reaver raider hardsuit
+  description: A death squad hardsuit stripped of its plating and painted in Ashfall red. The armour under the paint is a pirate's, not a commando's.
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+  - type: Clothing
+    sprite: Clothing/OuterClothing/Hardsuits/deathsquad.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.02
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.7
+        Piercing: 0.75
+        Heat: 0.4
+        Caustic: 0.75
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: HeldSpeedModifier
+  - type: StaminaDamageResistance
+    coefficient: 0.5
+  - type: ToggleableClothing
+    requiredSlot: outerclothing
+    blockUnequipWhenAttached: false
+    replaceCurrentClothing: true
+    clothingPrototypes:
+      head: WFClothingHeadHelmetHardsuitReaver
+      helmetcover: ClothingHeadHelmetCoverBlock
+      helmetattachment: ClothingHeadHelmetAttachmentBlock
+  - type: StaticPrice
+    price: 0
+
+- type: entity
+  parent: ClothingHeadHardsuitBase
+  id: WFClothingHeadHelmetHardsuitReaver
+  name: reaver raider helmet
+  description: A death squad helmet in Ashfall red. The lenses still glow; the electronics behind them are long gone.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hardsuits/deathsquad.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hardsuits/deathsquad.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-vox:
+      - state: equipped-HELMET-vox
+  - type: PressureProtection
+    highPressureMultiplier: 0.3
+    lowPressureMultiplier: 1000

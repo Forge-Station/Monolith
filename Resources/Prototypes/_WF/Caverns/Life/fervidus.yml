@@ -1,0 +1,340 @@
+# The Cinder Vaults' cave life: the lava tubes keep the argocytes, the obsidian galleries and the sulphur vents have
+# their own (Biomes/fervidus.yml). Names and descriptions are in Locale/en-US/_WF/Caverns/life_fervidus.ftl.
+# Fervidus's air is hot and has no oxygen, so no animal here breathes and each takes the heat, as the argocytes do; they
+# share the Xeno faction with them so the vaults' natives don't fight each other.
+
+# ---- Produce ----
+
+# Cook two with water in a big bowl; the heat in them is safe once cooked.
+- type: entity
+  parent: WFWildMushroomBase
+  id: WFCinderCapMushroom
+  components:
+  - type: Sprite
+    color: "#e0a878"
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: CapsaicinOil
+          Quantity: 1
+
+- type: entity
+  parent: FoodSoupMushroom
+  id: WFFoodSoupCinderCap
+
+- type: microwaveMealRecipe
+  id: RecipeWFCinderCapSoup
+  name: wf-recipe-cinder-cap-soup
+  result: WFFoodSoupCinderCap
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    WFCinderCapMushroom: 2
+  recipeType:
+  - Oven
+  - Microwave
+
+# Scraped off a sulphur bloom: grind it for the reagent.
+- type: entity
+  parent: BaseItem
+  id: WFCaveSulphurCrust
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Mono/Objects/Materials/ore.rsi
+    state: sulfur
+  - type: SolutionContainerManager
+    solutions:
+      crust:
+        maxVol: 10
+        reagents:
+        - ReagentId: Sulfur
+          Quantity: 6
+  - type: Extractable
+    grindableSolutionName: crust
+
+# ---- Plants ----
+
+# Not woody: nothing to log when one is trampled.
+- type: entity
+  abstract: true
+  parent: BaseFlora
+  id: WFCaveHotPlantBase
+  components:
+  - type: Appearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 12
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/plant_rustle.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# Obsidian galleries: a shelf fungus that feeds on the heat of the glass; pick the caps.
+- type: entity
+  parent: WFCaveHotPlantBase
+  id: WFCaveHeatShelf
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms.rsi
+    layers:
+    - state: l_mushroom_red1
+      map: [ "plant" ]
+      color: "#ffb070"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6", color: "#6a5048" }
+          False: { scale: "1,1", color: "#ffb070" }
+  - type: WFRegrowingHarvest
+    regrowTime: 600
+    harvestTime: 1.5
+    table: !type:AllSelector
+      children:
+      - id: WFCinderCapMushroom
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Obsidian galleries, rare: a glowing pod that swells while someone stands near, then bursts in a flash of heat.
+# It grows back.
+- type: entity
+  parent: WFCaveHotPlantBase
+  id: WFCaveFirePod
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: xpod1
+      map: [ "plant" ]
+      color: "#ff9a50"
+  - type: PointLight
+    radius: 1.5
+    energy: 0.8
+    color: "#ff7a30"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        plant:
+          Idle: { color: "#ff9a50", scale: "1,1" }
+          Armed: { color: "#ffe9a0", scale: "1.35,1.35" }
+          Spent: { color: "#5a4038", scale: "0.7,0.7" }
+  - type: WFReactiveFlora
+    behaviour: Explode
+    range: 1.8
+    cooldown: 1
+    checkInterval: 0.5
+    ignoreFactions: [ Xeno ]
+    armDelay: 1.5
+    armSound:
+      collection: WFFloraPodSwell
+    armPopup: wf-cave-firepod-swells
+    sound:
+      collection: WFFloraPodBurst
+    popup: wf-cave-firepod-bursts
+    burstRadius: 1.8
+    burstDamage:
+      types:
+        Heat: 14
+    deleteOnBurst: false
+    regrowTime: 300
+
+# Sulphur vents: a yellow flower that grows on the crust; scrape its petals for sulphur.
+- type: entity
+  parent: WFCaveHotPlantBase
+  id: WFCaveSulphurBloom
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: flower
+      map: [ "plant" ]
+      color: "#f2e45a"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.65,0.65", color: "#8a845a" }
+          False: { scale: "1,1", color: "#f2e45a" }
+  - type: WFRegrowingHarvest
+    regrowTime: 720
+    harvestTime: 2
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFCaveSulphurCrust
+
+# Sulphur vents, rare: a vent cap that breathes a yellow, poisonous cloud at anyone who comes close.
+- type: entity
+  parent: WFCaveHotPlantBase
+  id: WFCaveVentPuff
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: lunar_plant2
+      map: [ "plant" ]
+      color: "#e6e070"
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        plant:
+          Idle: { color: "#e6e070", scale: "1,1" }
+          Armed: { color: "#fffbb0", scale: "1.2,1.2" }
+          Spent: { color: "#a39e58", scale: "0.95,0.95" }
+  - type: WFReactiveFlora
+    behaviour: Cloud
+    range: 1.4
+    cooldown: 20
+    checkInterval: 0.75
+    activeTime: 1.5
+    ignoreFactions: [ Xeno ]
+    sound:
+      collection: WFFloraSporePuff
+    popup: wf-cave-ventpuff-puff
+    cloudPrototype: Smoke
+    cloudDuration: 5
+    cloudSpread: 3
+    solution:
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 4
+      - ReagentId: Sulfur
+        Quantity: 2
+
+# ---- Wildlife ----
+# Reskins of the space animals; their sprites are made by Tools/_WF/Caverns/gen_life_karst_cinder_sandstone.py.
+
+- type: entity
+  parent: MobSpiderSpace
+  id: WFMobCinderSpider
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: Temperature
+    heatDamageThreshold: 800
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+  - type: Sprite
+    sprite: _WF/Caverns/Life/fervidus/cinder_spider.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: spacespider
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+
+- type: entity
+  parent: MobCobraSpace
+  id: WFMobEmberViper
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: Temperature
+    heatDamageThreshold: 800
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+  - type: Sprite
+    sprite: _WF/Caverns/Life/fervidus/ember_viper.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: spacecobra
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+
+- type: entity
+  parent: MobTick
+  id: WFMobSlagTick
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: Temperature
+    heatDamageThreshold: 800
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      sprite: _WF/Caverns/Life/fervidus/slag_tick.rsi
+      scale: 0.8, 0.8
+
+# A carp that swims the hot air over the vents.
+- type: entity
+  parent: BaseMobCarp
+  id: WFMobSulphurCarp
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: Temperature
+    heatDamageThreshold: 800
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+  - type: Sprite
+    sprite: _WF/Caverns/Life/fervidus/sulphur_carp.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: mouth
+      shader: unshaded
+
+# ---- Fauna tables ----
+# One marker per zone, in the zone's chambers (HideSpawnMenu markers, like WFCavernFaunaFervidus).
+
+# Obsidian galleries: spiders in the glass and vipers on the ledges.
+- type: entityTable
+  id: WFCavernFaunaFervidusGalleries
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCinderSpider
+      weight: 4
+    - id: WFMobEmberViper
+      weight: 3
+
+- type: entity
+  id: WFCavernFaunaFervidusGalleries
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaFervidusGalleries
+
+# Sulphur vents: ticks on the crust and carp in the hot air above it.
+- type: entityTable
+  id: WFCavernFaunaFervidusVents
+  table: !type:GroupSelector
+    children:
+    - id: WFMobSlagTick
+      weight: 3
+    - id: WFMobSulphurCarp
+      weight: 3
+
+- type: entity
+  id: WFCavernFaunaFervidusVents
+  parent: MarkerBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaFervidusVents

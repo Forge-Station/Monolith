@@ -117,6 +117,11 @@
     interfaces:
       enum.RadarConsoleUiKey.Key:
         type: RadarConsoleBoundUserInterface
+      # WOLFGATE(Xenonids) START: the join-as-xeno hive dialog
+      enum.DialogUiKey.Key:
+        type: DialogBui
+        requireInputValidation: false
+      # WOLFGATE END
   - type: IntrinsicUI
     uis:
       enum.RadarConsoleUiKey.Key:
@@ -134,6 +139,8 @@
   - type: CollectiveMind
     hearAll: true
     seeAllNames: true
+  # WOLFGATE(Xenonids): ghosts can join a hive as a burrowed larva
+  - type: JoinXeno
 
 # proto for player ghosts specifically
 - type: entity

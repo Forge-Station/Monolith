@@ -151,7 +151,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
                     target = screen.GetDamageableClickedEntity(mousePos); // Goob edit
                 }
 
-                EntityManager.RaisePredictiveEvent(new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(coordinates)));
+                RaisePredictiveEvent(new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(coordinates)));
                 return;
             }
 
@@ -255,7 +255,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     /// Raises a heavy attack event with the relevant attacked entities.
     /// This is to avoid lag effecting the client's perspective too much.
     /// </summary>
-    private void ClientHeavyAttack(EntityUid user, EntityCoordinates coordinates, EntityUid meleeUid, MeleeWeaponComponent component)
+    public void ClientHeavyAttack(EntityUid user, EntityCoordinates coordinates, EntityUid meleeUid, MeleeWeaponComponent component) // WOLFGATE(Xenonids): xeno wide swing calls it
     {
         // Only run on first prediction to avoid the potential raycast entities changing.
         if (!_xformQuery.TryGetComponent(user, out var userXform) ||

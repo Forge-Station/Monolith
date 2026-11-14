@@ -19,6 +19,9 @@
     minimumWait: 30
     maximumWait: 120
     nextAdvertisementTime: 10
+  # WOLFGATE(NpcIntents): cultists cut a trophy off the downed instead of killing
+  - type: WFNpcIntent
+    set: WFIntentsCultist
   - type: AutoWakeUp
   - type: TriggerOnBeingGibbed
   - type: GibOnTrigger

@@ -5,7 +5,6 @@ using Content.Shared.Store;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Revenant.Components;
 

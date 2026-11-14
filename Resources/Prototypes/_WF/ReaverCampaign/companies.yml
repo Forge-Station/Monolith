@@ -1,0 +1,8 @@
+# The flag of the Underground black market and the people who work out of it. Nobody can pick it at character setup;
+# the Reavers leave its ships, crews and station alone (see the neutralCompanies on their sector faction).
+- type: company
+  id: WFUnderground
+  name: Underground
+  description: wf-company-underground-description
+  color: "#991111"
+  disabled: true

@@ -5,10 +5,12 @@
   id: BaseMobMoth
   abstract: true
   components:
+  # WOLFGATE(Planets) START: z-level flight is back on, which Monolith#4812 turned off
   - type: CEZFlyer # Mono: z-level flight
     flightSpeed: 0.35
     flightMoveSpeedModifier: 0.35
     hoverStaminaDrain: 4
+  # WOLFGATE END
   - type: CEControllableFlight
     startFlightDoAfter: 2
   - type: HumanoidAppearance
@@ -88,6 +90,7 @@
     noRot: true
     drawdepth: Mobs
     layers:
+      - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
       - map: [ "enum.HumanoidVisualLayers.Head" ]
       - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -96,6 +99,8 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear layers ported from HardLight
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear layers ported from HardLight
       - map: [ "jumpsuit" ]
       - map: [ "enum.HumanoidVisualLayers.LHand" ]
       - map: [ "enum.HumanoidVisualLayers.RHand" ]
@@ -113,7 +118,9 @@
       - map: [ "outerClothing" ] # mono - i hate you upstream
       - map: [ "eyes" ]
       - map: [ "belt" ]
-      - map: [ "enum.HumanoidVisualLayers.Tail" ] #in the utopian future we should probably have a wings enum inserted here so everyhting doesn't break
+      # WOLFGATE START: Tail moved above the neck slots, after TailOversuit, so cloaks do not cover it
+      # - map: [ "enum.HumanoidVisualLayers.Tail" ] #in the utopian future we should probably have a wings enum inserted here so everyhting doesn't break
+      # WOLFGATE END
       - map: [ "back" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
@@ -123,6 +130,10 @@
       - map: [ "mask" ]
       - map: [ "head" ]
       - map: [ "neck" ]
+      - map: [ "neck2" ]
+      - map: [ "neck3" ]
+      - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
+      - map: [ "enum.HumanoidVisualLayers.Tail" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
       - map: [ "helmetcover" ]
       - map: [ "helmetattachment" ]
       - map: [ "pocket1" ]

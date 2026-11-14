@@ -146,7 +146,7 @@ public sealed partial class NcStoreInventorySystem
         if (!_protos.TryIndex<EntityPrototype>(protoId, out var proto))
             return false;
 
-        if (!proto.TryGetComponent(out TagComponent? tagComponent, _compFactory) || tagComponent == null)
+        if (!proto.TryComp(out TagComponent? tagComponent, _compFactory) || tagComponent == null)
             return false;
 
         return _tags.HasTag(tagComponent, tagId);

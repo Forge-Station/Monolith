@@ -13,4 +13,9 @@ public sealed class RequestShootEvent : EntityEventArgs
     public NetCoordinates Coordinates;
     public NetEntity? Target;
     public List<int>? Shot;
+
+    /// <summary>
+    /// Whether the client is drawing this shot's own effects, so the server can skip sending them back.
+    /// </summary>
+    public bool Predicted;
 }

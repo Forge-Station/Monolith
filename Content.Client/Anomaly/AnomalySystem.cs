@@ -9,6 +9,7 @@ namespace Content.Client.Anomaly;
 
 public sealed partial class AnomalySystem : SharedAnomalySystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private FloatingVisualizerSystem _floating = default!;
 
@@ -49,12 +50,12 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
         if (HasComp<AnomalySupercriticalComponent>(uid))
             pulsing = true;
 
-        if (!sprite.LayerMapTryGet(AnomalyVisualLayers.Base, out var layer) ||
-            !sprite.LayerMapTryGet(AnomalyVisualLayers.Animated, out var animatedLayer))
+        if (!_sprite.LayerMapTryGet((uid, sprite), AnomalyVisualLayers.Base, out var layer, false) ||
+            !_sprite.LayerMapTryGet((uid, sprite), AnomalyVisualLayers.Animated, out var animatedLayer, false))
             return;
 
-        sprite.LayerSetVisible(layer, !pulsing);
-        sprite.LayerSetVisible(animatedLayer, pulsing);
+        _sprite.LayerSetVisible((uid, sprite), layer, !pulsing);
+        _sprite.LayerSetVisible((uid, sprite), animatedLayer, pulsing);
     }
 
     public override void Update(float frameTime)

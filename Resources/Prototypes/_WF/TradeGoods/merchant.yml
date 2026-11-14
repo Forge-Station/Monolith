@@ -1,0 +1,51 @@
+# A wandering merchant: a hauler with a turn-in chute in its hold that buys a few goods at a premium. It drifts
+# about the sector and leaves when its run is up, so its market has to be chased. The chute's grid is a market like
+# any station's and shows in the Market app.
+- type: entity
+  parent: BaseCargoChute
+  id: WFCargoChuteMerchant
+  name: merchant's turn-in chute
+  description: A merchant's intake chute. It only buys a few goods, but pays well for them.
+  components:
+  - type: Dispenser
+    defaultItem: PaperWrittenDispenserInstructions
+    inventory:
+      TradeGoodLuxuries: SpaceCash20000
+      TradeGoodMedicalSupplies: SpaceCash8000
+      TradeGoodFusionFuel: SpaceCash18000
+      TradeGoodWeaponParts: SpaceCash14000
+      TradeGoodFabric: SpaceCash6000
+
+- type: wfEncounter
+  id: WFEncounterWanderingMerchant
+  name: wf-encounter-name-merchant
+  announcement: wf-encounter-announce-merchant
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 1.5
+  cooldown: 3000
+  duration: 2400
+  minDistance: 2000
+  maxDistance: 5000
+  ships:
+  - key: merchant
+    navigation: WFCrewNavigationFreight
+    vessel: Twilight
+    side: merchant
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 1
+    roles: [ WFCrewPilot, WFCrewDeckhand ]
+    passengers: [ WFTraderWanderer, WFCargoChuteMerchant ]
+    skill: Regular
+    wander: 3
+    wanderRadius: 3000
+    wanderPause: 420
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true

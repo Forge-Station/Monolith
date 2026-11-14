@@ -1,0 +1,11 @@
+# Wolfgate: ported from HardLight
+- type: entity
+  parent: ActionToggleWagging
+  id: ActionToggleAvaliWagging
+  components:
+  - type: InstantAction
+    icon: { sprite: _RMC14/Mobs/Avali/avali_parts.rsi, state: tail-wag-icon }
+    iconOn: { sprite: _RMC14/Mobs/Avali/avali_parts.rsi, state: tail-wag-icon }
+    itemIconStyle: NoItem
+    useDelay: 1 # Prevents Emote Spam
+    event: !type:ToggleActionEvent

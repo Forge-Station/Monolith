@@ -1,0 +1,32 @@
+# M3: condition alerts for the organ causes (plan §3.6, §5.2). Health category like every condition alert, so
+# each replaces the last. Placeholder icons (art debt), as the M1a ones are.
+
+- type: alert
+  id: WFWolfmedFaintHeadBlow
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/_Crescent/Interface/Alerts/human_critical.rsi
+    state: critical
+  name: alerts-wolfmed-faint-head-blow-name
+  description: alerts-wolfmed-faint-head-blow-desc
+
+- type: alert
+  id: WFWolfmedDownedBrain
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/_WF/Wolfmed/Interface/Alerts/downed.rsi
+    state: downed
+  name: alerts-wolfmed-downed-brain-name
+  description: alerts-wolfmed-downed-brain-desc
+
+- type: alert
+  id: WFWolfmedDownedCore
+  category: Health
+  clickEvent: !type:WolfmedConditionAlertEvent
+  icons:
+  - sprite: /Textures/_WF/Wolfmed/Interface/Alerts/downed.rsi
+    state: downed
+  name: alerts-wolfmed-downed-core-name
+  description: alerts-wolfmed-downed-core-desc

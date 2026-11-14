@@ -139,7 +139,10 @@ public sealed partial class SiliconChargeSystem : EntitySystem
     /// </summary>
     public void UpdateChargeState(EntityUid uid, short chargePercent, SiliconComponent component)
     {
+        var changed = component.ChargeState != chargePercent; // WOLFGATE(Wolfmed): playtest 1
         component.ChargeState = chargePercent;
+        if (changed) // WOLFGATE(Wolfmed): playtest 1: the client predicts the crawl speed from it
+            Dirty(uid, component);
 
         RaiseLocalEvent(uid, new SiliconChargeStateUpdateEvent(chargePercent));
 

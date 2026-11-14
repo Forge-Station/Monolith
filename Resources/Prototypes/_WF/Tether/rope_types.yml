@@ -1,0 +1,17 @@
+# Stage 2A owns the real rope types. This one exists so the rope core can be tried in game.
+- type: ropeType
+  id: RopeDebug
+  name: rope-name-debug
+  stiffness: 6000
+  dampingRatio: 0.7
+  maxStretch: 0.1
+  breakForce: 0
+  maxLength: 20
+  loadBearing: true
+  color: "#9c8460"
+  tautColor: "#f0dfae"
+  width: 0.12
+  segmentsPerMetre: 3
+  stackType: WFRopeDebug
+  breakSound:
+    path: /Audio/Items/snap.ogg

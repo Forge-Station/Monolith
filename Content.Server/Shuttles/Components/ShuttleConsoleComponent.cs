@@ -1,11 +1,10 @@
 using System.Numerics;
 using Content.Shared._NF.Shuttles.Events;
 using Content.Shared.DeviceLinking;
-using Content.Shared.Shuttles; // BUI tab tracking
-using Content.Shared.Shuttles.BUIStates; // Forge-Change - BioScan
 using Content.Shared.Shuttles.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.Shuttles.BUIStates; // Forge-Change - BioScan
 using Content.Shared.Timing;
 using Content.Shared.Timing.Components;
 using Content.Shared.Timing.Systems; // Forge-Change - BioScan
@@ -60,6 +59,7 @@ namespace Content.Server.Shuttles.Components
         [DataField, ViewVariables(VVAccess.ReadWrite)]
         public InertiaDampeningMode DampeningMode = InertiaDampeningMode.Dampen;
         // End Frontier
+
         // <Mono>
         [DataField]
         public string AutopilotTargetKey = "Target";
@@ -68,58 +68,12 @@ namespace Content.Server.Shuttles.Components
         public string AutopilotRotationKey = "TargetRotation";
 
         [DataField]
-        public SoundSpecifier? AutopilotDoneSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/radar_ping.ogg");
-        // Forge-Change-start
-
-        [DataField]
-        public float BioScanRange = 300f;
-
-        [DataField]
-        public float BioScanDuration = 8f;
-
-        [DataField]
-        public float BioScanMaxVelocity = 0.05f;
-
-        [DataField]
-        public float BioScanMaxAngularVelocity = 0.01f;
-
-        [ViewVariables]
-        public StartEndTime BioScanTime;
-
-        [ViewVariables]
-        public bool BioScanActive;
-
-        [ViewVariables]
-        public EntityUid? BioScanTarget;
-
-        [ViewVariables]
-        public ShuttleBioScanStatus BioScanStatus = ShuttleBioScanStatus.None;
-
-        /// <summary>
-        /// Maximum allowed shuttle speed set via BUI request.
-        /// </summary>
-        [DataField]
-        public float MaxPilotSetSpeed = 100f;
-
-        /// <summary>
-        /// Minimum delay between shuttle speed update requests.
-        /// </summary>
-        [DataField]
-        public float SpeedSetRateLimit = 0.2f;
-
-        [ViewVariables]
-        public TimeSpan NextSpeedSetTime = TimeSpan.Zero;
-
-        [ViewVariables]
-        public ShuttleConsoleMapScreenMode MapScreenMode = ShuttleConsoleMapScreenMode.BioScan; // Forge-Change - Cloaking
-        // Forge-Change-end
+        // WOLFGATE(Shuttles) START: use the supplied quiet autopilot disengagement cue.
+        // public SoundSpecifier? AutopilotDoneSound = new SoundPathSpecifier("/Audio/Effects/Shuttle/radar_ping.ogg");
+        public SoundSpecifier? AutopilotDoneSound = new SoundPathSpecifier(
+            "/Audio/_WF/Shuttles/Autopilot/autopilot_disengaged.ogg", AudioParams.Default.WithVolume(-12f));
+        // WOLFGATE END
         // </Mono>
-
-        /// <summary>
-        /// Server-only: which BUI tab the client last reported; used to omit heavy beacon/exclusion lists on Nav/Dock.
-        /// </summary>
-        [ViewVariables(VVAccess.ReadWrite)]
-        public ShuttleConsoleUiTab BuiActiveTab = ShuttleConsoleUiTab.Nav;
 
         // Network Port Button Source Ports
         [DataField]
@@ -134,5 +88,39 @@ namespace Content.Server.Shuttles.Components
             "device-button-7",
             "device-button-8"
         };
+
+        // Forge-Change - BioScan
+        [DataField]
+        public bool BioScanActive;
+
+        [DataField]
+        public EntityUid? BioScanTarget;
+
+        [DataField]
+        public StartEndTime BioScanTime;
+
+        [DataField]
+        public float BioScanDuration = 5f;
+
+        [DataField]
+        public float BioScanRange = 500f;
+
+        [DataField]
+        public float BioScanMaxVelocity = 0.5f;
+
+        [DataField]
+        public float BioScanMaxAngularVelocity = 0.1f;
+
+        [DataField]
+        public ShuttleBioScanStatus BioScanStatus;
+
+        [DataField]
+        public TimeSpan NextSpeedSetTime;
+
+        [DataField]
+        public float SpeedSetRateLimit = 1f;
+
+        [DataField]
+        public float MaxPilotSetSpeed = 100f;
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq; // WOLFGATE: copy of the dock set in UndockDocks and RedockDocks
 using Content.Server.Doors.Systems;
 using Content.Server.NPC.Pathfinding;
 using Content.Server.Shuttles.Components;
@@ -63,7 +64,8 @@ namespace Content.Server.Shuttles.Systems
             _dockingSet.Clear();
             _lookup.GetChildEntities(gridUid, _dockingSet);
 
-            foreach (var dock in _dockingSet)
+            // WOLFGATE: undock handlers call GetDocks, which refills _dockingSet mid-loop; iterate a copy.
+            foreach (var dock in _dockingSet.ToArray())
             {
                 Undock(dock);
             }
@@ -75,7 +77,8 @@ namespace Content.Server.Shuttles.Systems
             _dockingSet.Clear();
             _lookup.GetChildEntities(gridUid, _dockingSet);
 
-            foreach (var dock in _dockingSet)
+            // WOLFGATE: undock handlers call GetDocks, which refills _dockingSet mid-loop; iterate a copy.
+            foreach (var dock in _dockingSet.ToArray())
             {
                 if (dock.Comp.DockedWith is not { } with || !TryComp<DockingComponent>(with, out var otherDock))
                     continue;

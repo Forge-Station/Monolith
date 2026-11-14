@@ -20,8 +20,8 @@ public abstract partial class SharedMobCollisionSystem : EntitySystem
     [Dependency] protected SharedPhysicsSystem Physics = default!;
     [Dependency] private   SharedTransformSystem _xformSystem = default!;
 
-    [Dependency] protected readonly EntityQuery<MobCollisionComponent> MobQuery = default!;
-    [Dependency] protected readonly EntityQuery<PhysicsComponent> PhysicsQuery = default!;
+    [Dependency] protected EntityQuery<MobCollisionComponent> MobQuery = default!;
+    [Dependency] protected EntityQuery<PhysicsComponent> PhysicsQuery = default!;
 
     /// <summary>
     /// <see cref="CCVars.MovementPushingCap"/>
@@ -247,7 +247,7 @@ public abstract partial class SharedMobCollisionSystem : EntitySystem
                 continue;
             }
 
-            var targetEv = new AttemptMobTargetCollideEvent();
+            var targetEv = new AttemptMobTargetCollideEvent { Entity = entity.Owner }; // WOLFGATE(Xenonids): RMC passes the pushing mob
             RaiseLocalEvent(other, ref targetEv);
 
             if (targetEv.Cancelled)
@@ -333,4 +333,5 @@ public record struct AttemptMobCollideEvent
 public record struct AttemptMobTargetCollideEvent
 {
     public bool Cancelled;
+    public EntityUid Entity; // WOLFGATE(Xenonids): the mob pushing into this one
 }

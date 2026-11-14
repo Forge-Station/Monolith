@@ -1,16 +1,12 @@
 using Content.Shared.GameTicking;
 using System.Linq;
 using System.Numerics;
-using Content.Server._Forge.Sponsor; // Forge-Change
-using Content.Shared._Forge.Sponsor; // Forge-Change
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers; // Frontier
 using Content.Server.Cargo.Systems; // Frontier
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Components;
-using Content.Server.Ghost.Roles;
-using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
@@ -24,6 +20,7 @@ using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
 using Content.Shared.Follower;
 using Content.Shared.Ghost;
+using Content.Shared._Forge.Sponsor;
 using Content.Shared.GhostTypes;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -32,11 +29,9 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Players.RateLimiting; // Forge-Change
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
-using Content.Server.Players.RateLimiting; // Forge-Change
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -79,18 +74,14 @@ namespace Content.Server.Ghost
         [Dependency] private TagSystem _tag = default!;
         [Dependency] private IAdminManager _admin = default!; // Frontier
         [Dependency] private IServerPreferencesManager _preferencesManager = default!;
+        [Dependency] private Content.Server._Forge.Sponsor.SponsorManager _sponsors = default!;
         [Dependency] private GhostSpriteStateSystem _ghostState = default!;
-        [Dependency] private SponsorManager _sponsors = default!; // Forge-Change
-        [Dependency] private PlayerRateLimitManager _rateLimit = default!; // Forge-Change
-        [Dependency] private GhostRoleSystem _ghostRoles = default!; // Forge-Change
-
-        private const string InvalidGhostRequestRateLimitKey = "GhostInvalidRequests"; // Forge-Change
+        [Dependency] private Content.Server._WF.Wolfmed.Life.WolfmedDyingActionsSystem _wolfmedEndings = default!; // WOLFGATE(Wolfmed): M1a: honest endings
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
 
         private static readonly ProtoId<TagPrototype> AllowGhostShownByEventTag = "AllowGhostShownByEvent";
-        private static readonly ProtoId<TagPrototype> StationAiTag = "StationAi"; // Forge-Change
 
         public override void Initialize()
         {
@@ -98,15 +89,7 @@ namespace Content.Server.Ghost
 
             _ghostQuery = GetEntityQuery<GhostComponent>();
             _physicsQuery = GetEntityQuery<PhysicsComponent>();
-            // Forge-Change-start
-            _rateLimit.Register(InvalidGhostRequestRateLimitKey,
-                new RateLimitRegistration(CCVars.GhostInvalidRequestRateLimitPeriod,
-                    CCVars.GhostInvalidRequestRateLimitCount,
-                    OnInvalidGhostRequestRateLimited,
-                    CCVars.GhostInvalidRequestRateLimitAnnounceAdminsDelay,
-                    OnInvalidGhostRequestAlertAdmins)
-            );
-            // Forge-Change-end
+
             SubscribeLocalEvent<GhostComponent, ComponentStartup>(OnGhostStartup);
             SubscribeLocalEvent<GhostComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<GhostComponent, ComponentShutdown>(OnGhostShutdown);
@@ -308,7 +291,7 @@ namespace Content.Server.Ghost
                 || !ghost.CanReturnToBody
                 || !TryComp(attached, out ActorComponent? actor))
             {
-                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} sent an invalid {nameof(GhostReturnToBodyRequest)}"); // Forge-Change
+                Log.Warning($"User {args.SenderSession.Name} sent an invalid {nameof(GhostReturnToBodyRequest)}");
                 return;
             }
 
@@ -322,7 +305,7 @@ namespace Content.Server.Ghost
             if (args.SenderSession.AttachedEntity is not {Valid: true} entity
                 || !_ghostQuery.HasComp(entity))
             {
-                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} sent a {nameof(GhostWarpsRequestEvent)} without being a ghost."); // Forge-Change
+                Log.Warning($"User {args.SenderSession.Name} sent a {nameof(GhostWarpsRequestEvent)} without being a ghost.");
                 return;
             }
 
@@ -349,7 +332,7 @@ namespace Content.Server.Ghost
             if (args.SenderSession.AttachedEntity is not {Valid: true} attached
                 || !_ghostQuery.HasComp(attached))
             {
-                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to warp to {msg.Target} without being a ghost."); // Forge-Change
+                Log.Warning($"User {args.SenderSession.Name} tried to warp to {msg.Target} without being a ghost.");
                 return;
             }
 
@@ -357,7 +340,7 @@ namespace Content.Server.Ghost
 
             if (!Exists(target))
             {
-                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to warp to an invalid entity id: {msg.Target}"); // Forge-Change
+                Log.Warning($"User {args.SenderSession.Name} tried to warp to an invalid entity id: {msg.Target}");
                 return;
             }
 
@@ -366,7 +349,7 @@ namespace Content.Server.Ghost
                 TryComp<WarpPointComponent>(target, out var warpPoint) &&
                 warpPoint.AdminOnly)
             {
-                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to warp to an admin-only warp point: {msg.Target}"); // Forge-Change
+                Log.Warning($"User {args.SenderSession.Name} tried to warp to an admin-only warp point: {msg.Target}");
                 _adminLog.Add(LogType.Action, LogImpact.Medium, $"{EntityManager.ToPrettyString(attached):player} tried to warp to admin warp point {EntityManager.ToPrettyString(msg.Target)}");
                 return;
             }
@@ -380,7 +363,7 @@ namespace Content.Server.Ghost
             if (args.SenderSession.AttachedEntity is not {} uid
                 || !_ghostQuery.HasComp(uid))
             {
-                HandleInvalidGhostRequest(args, $"User {args.SenderSession.Name} tried to ghostnado without being a ghost."); // Forge-Change
+                Log.Warning($"User {args.SenderSession.Name} tried to ghostnado without being a ghost.");
                 return;
             }
 
@@ -499,26 +482,7 @@ namespace Content.Server.Ghost
                 yield return new GhostWarp(GetNetEntity(attached), playerInfo, false);
             }
         }
-        // Forge-Change-start
-        private void HandleInvalidGhostRequest(EntitySessionEventArgs args, string message)
-        {
-            if (_rateLimit.CountAction(args.SenderSession, InvalidGhostRequestRateLimitKey) != RateLimitStatus.Allowed)
-                return;
 
-            Log.Warning(message);
-        }
-
-        private void OnInvalidGhostRequestRateLimited(ICommonSession session)
-        {
-            if (_configurationManager.GetCVar(CCVars.GhostInvalidRequestRateLimitDisconnect))
-                session.Channel.Disconnect("Too many invalid ghost requests.");
-        }
-
-        private void OnInvalidGhostRequestAlertAdmins(ICommonSession session)
-        {
-            _chatManager.SendAdminAlert($"Player {session.Name} is spamming invalid ghost requests.");
-        }
-        // Forge-Change-end
         #endregion
 
         private void OnEntityStorageInsertAttempt(EntityUid uid, GhostComponent comp, ref InsertIntoEntityStorageAttemptEvent args)
@@ -620,11 +584,11 @@ namespace Content.Server.Ghost
             var user = mind.Comp.UserId;
             try
             {
-                if (user != null && _sponsors.TryGetSponsor(user.Value, out var level))
+                if (user is { } sponsorUser && _sponsors.TryGetSponsor(sponsorUser, out var level))
                 {
                     // Forge-Change: prefer the sponsor's explicitly chosen ghost skin (validated against their level),
                     // then fall back to the default skin tied to their level, then to the normal observer.
-                    var chosenSkin = _preferencesManager.GetPreferencesOrNull(user.Value)?.SponsorGhostSkin;
+                    var chosenSkin = _preferencesManager.GetPreferencesOrNull(sponsorUser)?.SponsorGhostSkin;
                     if (!string.IsNullOrEmpty(chosenSkin) && SponsorData.IsGhostSkinAllowed(level, chosenSkin))
                         ghost = Spawn(chosenSkin, spawnPosition.Value);
                     else if (_sponsors.TryGetSponsorGhost(level, out var sponsorGhost))
@@ -651,14 +615,10 @@ namespace Content.Server.Ghost
 
             var ghostComponent = Comp<GhostComponent>(ghost);
 
-	    // Corvax-forge-start
-	    /*
             if (TryComp<GhostSpriteStateComponent>(ghost, out var state))  // If more TryComps are added this should be turned into an event
             {
                 _ghostState.SetGhostSprite((ghost, state), mind);
             }
-	    */
-	    // Corvax-forge-end
 
             // Try setting the ghost entity name to either the character name or the player name.
             // If all else fails, it'll default to the default entity prototype name, "observer".
@@ -712,11 +672,8 @@ namespace Content.Server.Ghost
             if (!_preferencesManager.TryGetCachedPreferences(session.UserId, out var prefs))
                 return;
 
-            // Only tint the ghost sprite when the admin explicitly chose a color.
-            // Transparent is the "unset" sentinel; Red is the legacy DB default that every admin
-            // who never ran setadminooc still has, which would otherwise turn every admin ghost red.
-            // Both are treated as "no custom color" so the original sprite color is preserved.
-            if (prefs.AdminOOCColor == Color.Transparent || prefs.AdminOOCColor == Color.Red)
+            // Only apply the color if it's not transparent (the default)
+            if (prefs.AdminOOCColor == Color.Transparent)
                 return;
 
             // Make the color slightly transparent for ghosts
@@ -775,6 +732,12 @@ namespace Content.Server.Ghost
             if (TryComp<GhostComponent>(playerEntity, out var comp) && !comp.CanGhostInteract)
                 return false;
 
+            // WOLFGATE(Wolfmed): M1a: a wound host's own ghost command opens Wolfmed's honest dialog instead (plan 5.4):
+            // Succumb while Dying, "left alive but empty" otherwise. Handled, so the command prints no denial.
+            if (viaCommand && !forced && canReturnGlobal && playerEntity is { } wolfmedBody &&
+                _wolfmedEndings.TryOpenGhostDialog(wolfmedBody))
+                return true;
+
             if (mind.VisitingEntity != default)
             {
                 _mind.UnVisit(mindId, mind: mind);
@@ -797,20 +760,9 @@ namespace Content.Server.Ghost
             //   (If the mob survives, that's a bug. Ghosting is kept regardless.)
             var canReturn = canReturnGlobal && _mind.IsCharacterDeadPhysically(mind);
 
-            // Forge-Change: an AI brain has no MobState and is otherwise treated as dead.
-            // Ghosting from an occupied core must remove its mind so the takeover role can reopen.
-            GhostRoleComponent? stationAiRole = null;
-            var ownedEntity = mind.OwnedEntity ?? playerEntity; // Forge - change: also release an AI visiting a borg.
-            var stationAiBrain = ownedEntity != null &&
-                                 _tag.HasTag(ownedEntity.Value, StationAiTag) &&
-                                 TryComp(ownedEntity.Value, out stationAiRole)
-                ? ownedEntity
-                : null;
-            if (stationAiBrain != null)
-                canReturn = false;
-
             if (_configurationManager.GetCVar(CCVars.GhostKillCrit) &&
                 canReturnGlobal &&
+                !_wolfmedEndings.OwnsEnding(playerEntity) && // WOLFGATE(Wolfmed): M1a: no Asphyxiation top-up or free return on a wound host
                 TryComp(playerEntity, out MobStateComponent? mobState))
             {
                 if (_mobState.IsCritical(playerEntity.Value, mobState))
@@ -842,13 +794,6 @@ namespace Content.Server.Ghost
 
             if (ghost == null)
                 return false;
-
-            // Forge-Change: the takeover MindRemovedMessage is unreliable for station AI brains on this fork.
-            if (stationAiBrain is { } brain && stationAiRole?.ReregisterOnGhost == true)
-            {
-                EnsureComp<GhostTakeoverAvailableComponent>(brain);
-                _ghostRoles.ReregisterGhostRole((brain, stationAiRole));
-            }
 
             return true;
         }

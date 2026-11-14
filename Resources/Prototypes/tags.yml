@@ -1393,3 +1393,15 @@
   id: WriteIgnoreStamps
 
 # ALPHABETICAL
+
+# Wolfgate: ported from HardLight (Synth)
+- type: Tag
+  id: SiliconEmotes
+
+# Wolfgate: ported from HardLight
+- type: Tag
+  id: ConstructionMaterial
+
+# Wolfgate: ported from HardLight
+- type: Tag
+  id: PetOnly

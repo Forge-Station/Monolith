@@ -1,0 +1,179 @@
+# The Bobmed sound pack (playtest 4, package SOUNDS). The owner's picks from Bobstation reignited, plus the emote
+# sounds the emote audit ported from Bob and Nova. Every sound a system plays is one of these collections, so a file
+# is retuned here without touching code. The dying gasp is the upstream MaleGasp / FemaleGasp pair
+# (SoundCollections/gasp.yml), re-pointed at Audio/_WF/Wolfmed/Gasp.
+
+# --- Bodies (WolfmedBodySoundSystem, WolfmedBleedDripSystem) -----------------------------------------------------
+
+# A body bleeding lightly: one drip every wolfmed.drip_sound_interval seconds.
+- type: soundCollection
+  id: WFWolfmedBloodDrip
+  files:
+  - /Audio/_WF/Wolfmed/Bleeding/blood1.ogg
+  - /Audio/_WF/Wolfmed/Bleeding/blood2.ogg
+  - /Audio/_WF/Wolfmed/Bleeding/blood3.ogg
+  - /Audio/_WF/Wolfmed/Bleeding/blood4.ogg
+  - /Audio/_WF/Wolfmed/Bleeding/blood5.ogg
+  - /Audio/_WF/Wolfmed/Bleeding/blood6.ogg
+
+# A bone breaking, or a break getting worse.
+- type: soundCollection
+  id: WFWolfmedBoneCrack
+  files:
+  - /Audio/_WF/Wolfmed/Bone/crack1.ogg
+  - /Audio/_WF/Wolfmed/Bone/crack2.ogg
+  - /Audio/_WF/Wolfmed/Bone/crack3.ogg
+
+# A tendon cut through.
+- type: soundCollection
+  id: WFWolfmedTendonSnap
+  files:
+  - /Audio/_WF/Wolfmed/Bone/tendon_snap1.ogg
+  - /Audio/_WF/Wolfmed/Bone/tendon_snap2.ogg
+
+# --- Melee on flesh (WolfmedOrganicSoundSystem) -------------------------------------------------------------------
+
+# A held weapon's hit that is mostly Piercing.
+- type: soundCollection
+  id: WFWolfmedStab
+  files:
+  - /Audio/_WF/Wolfmed/Melee/stab1.ogg
+  - /Audio/_WF/Wolfmed/Melee/stab2.ogg
+  - /Audio/_WF/Wolfmed/Melee/stab3.ogg
+
+# A mostly Blunt or Slash hit from a weapon that names no hit sound of its own.
+- type: soundCollection
+  id: WFWolfmedMelee
+  files:
+  - /Audio/_WF/Wolfmed/Melee/melee1.ogg
+  - /Audio/_WF/Wolfmed/Melee/melee2.ogg
+  - /Audio/_WF/Wolfmed/Melee/melee3.ogg
+
+# --- Items -------------------------------------------------------------------------------------------------------
+
+# Swallowing a pill (the Pill prototype's use sound).
+- type: soundCollection
+  id: WFWolfmedPillSwallow
+  files:
+  - /Audio/_WF/Wolfmed/Pill/pill_swallow.ogg
+
+# --- Emotes (WFWolfmedMaleEmotes / WFWolfmedFemaleEmotes) ---------------------------------------------------------
+
+- type: soundCollection
+  id: WFWolfmedSneezeMale
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/sneeze_male1.ogg
+  - /Audio/_WF/Wolfmed/Emotes/sneeze_male2.ogg
+  - /Audio/_WF/Wolfmed/Emotes/sneeze_male3.ogg
+
+- type: soundCollection
+  id: WFWolfmedSneezeFemale
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/sneeze_female1.ogg
+  - /Audio/_WF/Wolfmed/Emotes/sneeze_female2.ogg
+
+- type: soundCollection
+  id: WFWolfmedSnore
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/snore1.ogg
+  - /Audio/_WF/Wolfmed/Emotes/snore2.ogg
+  - /Audio/_WF/Wolfmed/Emotes/snore3.ogg
+  - /Audio/_WF/Wolfmed/Emotes/snore4.ogg
+  - /Audio/_WF/Wolfmed/Emotes/snore5.ogg
+  - /Audio/_WF/Wolfmed/Emotes/snore6.ogg
+  - /Audio/_WF/Wolfmed/Emotes/snore7.ogg
+
+- type: soundCollection
+  id: WFWolfmedSniffMale
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/sniff_male1.ogg
+
+- type: soundCollection
+  id: WFWolfmedSniffFemale
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/sniff_female1.ogg
+
+- type: soundCollection
+  id: WFWolfmedGulp
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/gulp1.ogg
+  - /Audio/_WF/Wolfmed/Emotes/gulp2.ogg
+
+# For the SEPSIS package's emotes; the orchestrator maps them in Voice/bobmed_emote_sounds.yml. No wheeze exists in
+# tgstation, NovaSector or Bobstation, so WFWolfmedWheeze is not shipped.
+- type: soundCollection
+  id: WFWolfmedCoughMale
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/cough_male1.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male2.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male3.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male4.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male5.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male6.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male7.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male8.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male9.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male10.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male11.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male12.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male13.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male14.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male15.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_male16.ogg
+
+- type: soundCollection
+  id: WFWolfmedCoughFemale
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/cough_female1.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female2.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female3.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female4.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female5.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female6.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female7.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female8.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female9.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female10.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female11.ogg
+  - /Audio/_WF/Wolfmed/Emotes/cough_female12.ogg
+
+# Bob has one choke per sex, so the choke is split by sex like the cough.
+- type: soundCollection
+  id: WFWolfmedChokeMale
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/choke_male1.ogg
+
+- type: soundCollection
+  id: WFWolfmedChokeFemale
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/choke_female1.ogg
+
+- type: soundCollection
+  id: WFWolfmedRetch
+  files:
+  - /Audio/_WF/Wolfmed/Emotes/gag1.ogg
+  - /Audio/_WF/Wolfmed/Emotes/gag2.ogg
+  - /Audio/_WF/Wolfmed/Emotes/gag3.ogg
+  - /Audio/_WF/Wolfmed/Emotes/gag4.ogg
+  - /Audio/_WF/Wolfmed/Emotes/gag5.ogg
+
+# Playtest 4, the owner's second round: fists, chopping weapons and crowbars.
+- type: soundCollection
+  id: WFWolfmedPunch
+  files:
+  - /Audio/_WF/Wolfmed/Melee/punch1.ogg
+  - /Audio/_WF/Wolfmed/Melee/punch2.ogg
+  - /Audio/_WF/Wolfmed/Melee/punch3.ogg
+
+- type: soundCollection
+  id: WFWolfmedChop
+  files:
+  - /Audio/_WF/Wolfmed/Melee/chop2.ogg
+  - /Audio/_WF/Wolfmed/Melee/chop4.ogg
+  - /Audio/_WF/Wolfmed/Melee/chop5.ogg
+
+- type: soundCollection
+  id: WFWolfmedCrowbarHit
+  files:
+  - /Audio/_WF/Wolfmed/Melee/crowbarhit1.ogg
+  - /Audio/_WF/Wolfmed/Melee/crowbarhit2.ogg

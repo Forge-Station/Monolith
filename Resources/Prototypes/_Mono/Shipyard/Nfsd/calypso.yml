@@ -1,18 +1,20 @@
 #kasature90 (github)/_starch_ (discord)
 - type: vessel
   id: Calypso
-  parent: BaseVesselAntag
+  parent: BaseVesselIFFDisabled
   name: TSF-SKR Calypso
-  description: Moderately armed and (relatively) heavily armored multipurpose corvette. Armed with 2 AK-820s and 2 AK-570s for consistent damage, 4 Phalanxes for PD, and 2 ASM-220s for the biggest targets.
-  price: 168619
-  purchasable: false # voucher only
+  description: A long-range corvette armed with 6 anti-fighter missile pods and 2 90x630mm TARNYX guns, plus some light point-defence.
+  # WOLFGATE(ArmorBalance): reverts Monolith#4845.
+  price: 173000
+  purchasable: false # voucher only - T1
   category: Medium
   group: Security
   access: Security
-  shuttlePath: /SharedMaps/_Mono/Shuttles/Nfsd/calypso.yml
+  shuttlePath: /SharedMaps/_Mono/Shuttles/TSF/calypso.yml
   guidebookPage: Null
   class:
   - Patrol
+  - MissileCarrier
   - Corvette
   engine:
   - AME
@@ -20,7 +22,7 @@
 - type: gameMap
   id: Calypso
   mapName: 'Calypso'
-  mapPath: /SharedMaps/_Mono/Shuttles/Nfsd/calypso.yml
+  mapPath: /SharedMaps/_Mono/Shuttles/TSF/calypso.yml
   minPlayers: 0
   stations:
     Calypso:

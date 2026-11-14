@@ -1,0 +1,89 @@
+# The Automated Defense System's hulls, copied from the pre-Fracture derelicts with their ghost-role spawners removed.
+# Never sold at a shipyard; only the ADS campaign and admins spawn them.
+- type: vessel
+  id: WFAdsNebula
+  parent: BaseVesselIFFDisabled
+  name: ADS Nebula
+  description: A pre-Fracture Automated Defense System light cruiser, built to hold a position and burn down what crosses it. Not for sale; admins and the ADS only.
+  price: 1650000
+  purchasable: false
+  category: Medium
+  group: BlackMarket
+  shuttlePath: /SharedMaps/_WF/AdsIncursion/nebula.yml
+  guidebookPage: null
+  class:
+  - Cruiser
+  - Brawler
+  engine:
+  - RTG
+  - APU
+
+- type: vessel
+  id: WFAdsWyrm
+  parent: BaseVesselIFFDisabled
+  name: ADS Wyrm
+  description: A pre-Fracture Automated Defense System gunship with torpedo tubes and a long reach. Not for sale; admins and the ADS only.
+  price: 350000
+  purchasable: false
+  category: Small
+  group: BlackMarket
+  shuttlePath: /SharedMaps/_WF/AdsIncursion/wyrm.yml
+  guidebookPage: null
+  class:
+  - Frigate
+  - Pursuit
+  engine:
+  - RTG
+  - APU
+
+- type: vessel
+  id: WFAdsZenith
+  parent: BaseVesselIFFDisabled
+  name: ADS Zenith
+  description: A pre-Fracture Automated Defense System fortress hull with a shield and four heavy batteries. Not for sale; admins and the ADS only.
+  price: 1950000
+  purchasable: false
+  category: Medium
+  group: BlackMarket
+  shuttlePath: /SharedMaps/_WF/AdsIncursion/zenith.yml
+  guidebookPage: null
+  class:
+  - Cruiser
+  - Brawler
+  engine:
+  - RTG
+  - APU
+
+- type: vessel
+  id: WFAdsRazorN
+  parent: BaseVesselIFFDisabled
+  name: ADS Razor N
+  description: A pre-Fracture Automated Defense System scuttle hull with no guns, only a charge to bring itself down. Not for sale; admins and the ADS only.
+  price: 175000
+  purchasable: false
+  category: Small
+  group: BlackMarket
+  shuttlePath: /SharedMaps/_WF/AdsIncursion/razorn.yml
+  guidebookPage: null
+  class:
+  - Fighter
+  engine:
+  - RTG
+  - APU
+
+- type: vessel
+  id: WFAdsWyvern
+  parent: BaseVesselIFFDisabled
+  name: ADS Wyvern
+  description: A pre-Fracture Automated Defense System dreadnought, a capital hull built to break fortresses. Not for sale; admins and the ADS only.
+  price: 11840000
+  purchasable: false
+  category: Large
+  group: BlackMarket
+  shuttlePath: /SharedMaps/_WF/AdsIncursion/wyvern.yml
+  guidebookPage: null
+  class:
+  - Capital
+  engine:
+  - RTG
+  - APU

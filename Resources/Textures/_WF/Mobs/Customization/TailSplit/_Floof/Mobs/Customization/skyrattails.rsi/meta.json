@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Nova Sector at https://github.com/NovaSector/NovaSector South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m_tail_shark_FRONT_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_tail_sharknofin_FRONT_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_fox_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_fox_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_fox_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tail_fox_secondary_FRONT",
+      "directions": 4
+    }
+  ]
+}

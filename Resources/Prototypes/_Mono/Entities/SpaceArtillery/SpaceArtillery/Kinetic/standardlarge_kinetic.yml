@@ -68,7 +68,7 @@
       rotate: true
       bounds: "-1.5,-1.5,1.5,1.5"
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     whitelist:
       tags:
       - 220mmCartridge
@@ -180,7 +180,7 @@
       rotate: true
       bounds: "-1.5,-1.5,1.5,1.5"
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     whitelist:
       tags:
       - 120mmCartridge
@@ -271,7 +271,7 @@
       rotate: true
       bounds: "-1.5,-1.5,1.5,1.5"
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     whitelist:
       tags:
       - 220mmCartridge
@@ -339,7 +339,7 @@
     powerUseActive: 0
   - type: Actions
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     whitelist:
       tags:
       - 255mmCartridge
@@ -418,7 +418,7 @@
     powerUseActive: 0
   - type: Actions
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     whitelist:
       tags:
       - 255mmCartridge

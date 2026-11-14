@@ -1,0 +1,51 @@
+# Hand-written: the spawn-menu category and the two tile bases the generated tile files parent to.
+
+- type: entityCategory
+  id: WFStreets
+  name: wf-streets-entity-category
+
+- type: entityCategory
+  id: WFStreetsBuildings
+  name: wf-streets-entity-category-buildings
+
+- type: entityCategory
+  id: WFStreetsFurniture
+  name: wf-streets-entity-category-furniture
+
+- type: entityCategory
+  id: WFStreetsLighting
+  name: wf-streets-entity-category-lighting
+
+- type: entityCategory
+  id: WFStreetsSigns
+  name: wf-streets-entity-category-signs
+
+- type: entityCategory
+  id: WFStreetsYards
+  name: wf-streets-entity-category-yards
+
+# Roads, pavements and bare ground: open to the weather, and not pried up.
+- type: tile
+  abstract: true
+  id: WFStreetsOutdoorTile
+  # Road lines, kerbs and markings turn with a turned site or a mapper's rotation.
+  allowRotationMirror: true
+  baseTurf: FloorDirt
+  isSubfloor: false
+  deconstructTools: []
+  footstepSounds:
+    collection: FootstepTile
+  heatCapacity: 10000
+  weather: true
+
+# Shop, office and hall floors.
+- type: tile
+  abstract: true
+  id: WFStreetsIndoorTile
+  allowRotationMirror: true
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepFloor
+  heatCapacity: 10000

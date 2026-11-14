@@ -24,7 +24,14 @@ public sealed partial class SurgeryBui : BoundUserInterface
     private bool _isBody;
     private (EntityUid Ent, EntProtoId Proto)? _surgery;
     private readonly List<EntProtoId> _previousSurgeries = new();
-    public SurgeryBui(EntityUid owner, Enum uiKey) : base(owner, uiKey) => _system = _entities.System<SurgerySystem>();
+
+    // WOLFGATE - the last state's choices; every read uses this.
+    private Dictionary<NetEntity, List<EntProtoId>> _choices = new();
+
+    public SurgeryBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        _system = _entities.System<SurgerySystem>();
+    }
 
     protected override void ReceiveMessage(BoundUserInterfaceMessage message)
     {
@@ -47,11 +54,15 @@ public sealed partial class SurgeryBui : BoundUserInterface
     {
         base.Dispose(disposing);
         if (disposing)
+        {
             _window?.Dispose();
+        }
     }
 
     private void Update(SurgeryBuiState state)
     {
+        _choices = state.Choices; // Forge-Change: the anatomy filter is removed with the anatomy module
+
         if (!_entities.TryGetComponent(_player.LocalEntity, out SurgeryTargetComponent? surgeryTargetComp)
             || !surgeryTargetComp.CanOperate)
             return;
@@ -77,8 +88,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
                 _previousSurgeries.Clear();
 
                 if (!_entities.TryGetNetEntity(_part, out var netPart)
-                    || State is not SurgeryBuiState s
-                    || !s.Choices.TryGetValue(netPart.Value, out var surgeries))
+                    || !_choices.TryGetValue(netPart.Value, out var surgeries)) // WOLFGATE - filtered choices
                     return;
 
                 OnPartPressed(netPart.Value, surgeries);
@@ -101,9 +111,9 @@ public sealed partial class SurgeryBui : BoundUserInterface
             };
         }
 
-        _window.Surgeries.DisposeAllChildren();
-        _window.Steps.DisposeAllChildren();
-        _window.Parts.DisposeAllChildren();
+        _window.Surgeries.RemoveAllChildren();
+        _window.Steps.RemoveAllChildren();
+        _window.Parts.RemoveAllChildren();
         View(ViewType.Parts);
 
         var oldSurgery = _surgery;
@@ -112,7 +122,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
         _surgery = null;
 
         var options = new List<(NetEntity netEntity, EntityUid entity, string Name, BodyPartType? PartType)>();
-        foreach (var choice in state.Choices.Keys)
+        foreach (var choice in _choices.Keys) // WOLFGATE - filtered choices; a part the filter emptied is gone
             if (_entities.TryGetEntity(choice, out var ent))
             {
                 if (_entities.TryGetComponent(ent, out BodyPartComponent? part))
@@ -145,7 +155,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
         foreach (var (netEntity, entity, partName, _) in options)
         {
             //var netPart = _entities.GetNetEntity(part.Owner);
-            var surgeries = state.Choices[netEntity];
+            var surgeries = _choices[netEntity]; // WOLFGATE - filtered choices
             var partButton = new XenoChoiceControl();
 
             partButton.Set(partName, null);
@@ -195,7 +205,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
         _isBody = _entities.HasComponent<BodyComponent>(_part);
         _surgery = (surgery, surgeryId);
 
-        _window.Steps.DisposeAllChildren();
+        _window.Steps.RemoveAllChildren();
 
         // This apparently does not consider if theres multiple surgery requirements in one surgery. Maybe thats fine.
         if (surgery.Comp.Requirement is { } requirementId && _system.GetSingleton(requirementId) is { } requirement)
@@ -231,7 +241,7 @@ public sealed partial class SurgeryBui : BoundUserInterface
 
         _part = _entities.GetEntity(netPart);
         _isBody = _entities.HasComponent<BodyComponent>(_part);
-        _window.Surgeries.DisposeAllChildren();
+        _window.Surgeries.RemoveAllChildren();
 
         var surgeries = new List<(Entity<SurgeryComponent> Ent, EntProtoId Id, string Name)>();
         foreach (var surgeryId in surgeryIds)

@@ -32,6 +32,28 @@ public abstract partial class ObfuscationMethod
     }
 }
 
+// WOLFGATE - ported from HardLight/Starlight: needed by the Avali "Scratch" language.
+/// <summary>
+///     Obfuscates the letters and digits of a message into random ones, keeping spaces and
+///     punctuation intact.
+/// </summary>
+public partial class RandomObfuscation : ObfuscationMethod
+{
+    internal override void Obfuscate(StringBuilder builder, string message, SharedLanguageSystem context)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        message = message.ToUpper();
+
+        for (var i = 0; i < chars.Length; i++)
+        {
+            message = message.Replace(chars[i], chars[context.PseudoRandomNumber(message.GetHashCode() + i, 0, chars.Length - 1)]);
+        }
+
+        builder.Append(message);
+    }
+}
+// End WOLFGATE
+
 /// <summary>
 ///     The most primitive method of obfuscation - replaces the entire message with one random replacement phrase.
 ///     Similar to ReplacementAccent. Base for all replacement-based obfuscation methods.

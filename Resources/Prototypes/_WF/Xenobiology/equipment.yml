@@ -1,0 +1,114 @@
+# Ported from Goobstation via Trauma Station (xenovac.yml, slime_scanner.yml).
+
+- type: entity
+  parent:
+  - Clothing
+  - ClothingSlotBase
+  id: ClothingBackpackXenoBioTank
+  name: xenovac containment tank
+  description: Holds xenofauna. Also contains a vacuum nozzle on it's side. It's just like slime rancher.
+  components:
+  - type: XenoVacuumTank
+  - type: Appearance
+  - type: Sprite
+    sprite: _WF/Xenobiology/Specific/Xenobiology/slime_pack.rsi
+    state: icon
+  - type: Item
+    size: Ginormous
+  - type: StaticPrice
+    price: 400
+  - type: Clothing
+    slots:
+    - SUITSTORAGE
+    - BACK
+    sprite: _WF/Xenobiology/Specific/Xenobiology/slime_pack.rsi
+  - type: ContainerContainer
+    containers:
+      tankbase: !type:Container {}
+      item: !type:ContainerSlot {}
+      StorageTank: !type:Container {}
+  - type: Damageable
+    damageModifierSet: Metallic
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts:
+        - Destruction
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: ItemSlots
+    slots:
+      item:
+        priority: 2
+        whitelist:
+          components:
+          - XenoVacuum
+  - type: ItemMapper
+    mapLayers:
+      icon-filled:
+        whitelist:
+          components:
+          - XenoVacuum
+
+- type: entity
+  id: ClothingBackpackXenoBioTankFilled
+  parent: ClothingBackpackXenoBioTank
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - WeaponXenoVacNozzle
+
+- type: entity
+  id: WeaponXenoVacNozzle
+  parent: BaseItem
+  name: xenovac nozzle
+  description: A high-powered vacuum nozzle used in conjunction with a backpack-mounted storage tank to store slimes.
+  components:
+  - type: Sprite
+    sprite: _WF/Xenobiology/Specific/Xenobiology/slime_nozzle.rsi
+    state: icon
+  - type: Item
+    sprite: _WF/Xenobiology/Specific/Xenobiology/slime_nozzle.rsi
+    size: Normal
+  - type: StaticPrice
+    price: 150
+  - type: Appearance
+  - type: XenoVacuum
+    entityWhitelist:
+      components:
+      - Slime
+      - XenoVacTarget
+  - type: UseDelay
+    delays:
+      release:
+        length: 3
+      suction:
+        length: 1
+
+- type: entity
+  parent: BaseItem
+  id: SlimeScannerXenobio
+  name: slime scanner
+  description: Applying on a slime and it's produces will grant you all the info you'll ever need. A must for any slime rancher!
+  components:
+  - type: SlimeScanner
+  - type: Sprite
+    noRot: true
+    sprite: _WF/Xenobiology/Specific/Xenobiology/slime_scanner.rsi
+    layers:
+    - state: icon
+    - state: analyzer
+      shader: unshaded
+      visible: true
+  - type: Item
+    heldPrefix: analyzer
+    storedRotation: -90
+  - type: StaticPrice
+    price: 150

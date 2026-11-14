@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "meatier-0"
+    },
+    {
+      "name": "meatier-1"
+    },
+    {
+      "name": "meatier-2"
+    },
+    {
+      "name": "meatier-3"
+    },
+    {
+      "name": "meatier-4"
+    },
+    {
+      "name": "meatier-5"
+    },
+    {
+      "name": "meatier-6"
+    },
+    {
+      "name": "meatier-7"
+    },
+    {
+      "name": "meatier-8"
+    },
+    {
+      "name": "meatier-9"
+    },
+    {
+      "name": "meatier-10"
+    },
+    {
+      "name": "meatier-11"
+    },
+    {
+      "name": "meatier-12"
+    },
+    {
+      "name": "meatier-13"
+    },
+    {
+      "name": "meatier-14"
+    },
+    {
+      "name": "meatier-15"
+    },
+    {
+      "name": "meatier-21"
+    },
+    {
+      "name": "meatier-23"
+    },
+    {
+      "name": "meatier-29"
+    },
+    {
+      "name": "meatier-31"
+    },
+    {
+      "name": "meatier-38"
+    },
+    {
+      "name": "meatier-39"
+    },
+    {
+      "name": "meatier-46"
+    },
+    {
+      "name": "meatier-47"
+    },
+    {
+      "name": "meatier-55"
+    },
+    {
+      "name": "meatier-63"
+    },
+    {
+      "name": "meatier-74"
+    },
+    {
+      "name": "meatier-75"
+    },
+    {
+      "name": "meatier-78"
+    },
+    {
+      "name": "meatier-79"
+    },
+    {
+      "name": "meatier-95"
+    },
+    {
+      "name": "meatier-110"
+    },
+    {
+      "name": "meatier-111"
+    },
+    {
+      "name": "meatier-127"
+    },
+    {
+      "name": "meatier-137"
+    },
+    {
+      "name": "meatier-139"
+    },
+    {
+      "name": "meatier-141"
+    },
+    {
+      "name": "meatier-143"
+    },
+    {
+      "name": "meatier-157"
+    },
+    {
+      "name": "meatier-159"
+    },
+    {
+      "name": "meatier-175"
+    },
+    {
+      "name": "meatier-191"
+    },
+    {
+      "name": "meatier-203"
+    },
+    {
+      "name": "meatier-207"
+    },
+    {
+      "name": "meatier-223"
+    },
+    {
+      "name": "meatier-239"
+    },
+    {
+      "name": "meatier-255"
+    }
+  ]
+}

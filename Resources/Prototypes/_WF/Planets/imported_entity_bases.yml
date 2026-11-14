@@ -1,0 +1,551 @@
+# Stand-ins for imported parents this build does not have. Wolfgate entities keep their own sprites and components.
+# Each one inherits a local prototype of the same kind: plants, trees, structures, items, a helmet, a vendor, a wall, weeds.
+
+# parent: BaseFlora
+- type: entity
+  parent: BaseFlora
+  id: AuroraAssunzioneBushLucevine
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: AuroraFloraBushMushroom
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: AuroraFloraGrassDesert
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_grass.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: BeeFloraAshStrange
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: ChompFloraDesertPlanetBarrelcacti
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_cacti.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: CMGrassDesertHeavy
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_grass.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: CoyoteFloraWasteplantWildAgave
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: CoyoteFloraWasteplantWildFeracactus
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: GoonShrub
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_bushes_goonstation.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: NebulaFloraPlantMushroom
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: NovaFloraBiolumiMine
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: PolarisFloraSifFrostbelle
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: ShiptestFloraAshCacti
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_cacti.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: ShiptestFluffGlowshroom
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: TgFloraAshCapShroom
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: TgFloraAshFireblossom
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: TgFloraAshFonarstolbe
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: TgFloraAshLeafShroom
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: TgFloraAshPlasmaFlower
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: TgFloraAshVahrezjia
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+    state: flowerpod1
+    offset: "0,0"
+    layers:
+    - state: flowerpod1
+
+- type: entity
+  parent: BaseFlora
+  id: GoonLantern
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Lighting/lamps_goonstation.rsi
+
+
+# parent: XenoWeeds
+- type: entity
+  parent: XenoWeeds
+  id: WFXenoWeedsBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+# parent: BaseGunWieldable
+- type: entity
+  parent: BaseGunWieldable
+  id: WFHackHarpoonGunRaider
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+
+# parent: BaseTree
+- type: entity
+  parent: BaseTree
+  id: ChompTreeDesertPlanetPalmtree
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseTree
+  id: CoyoteFloraBurnedtree1
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseTree
+  id: CoyoteFloraBurnedtree3
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseTree
+  id: NebulaTreeDeadMahogany
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseTree
+  id: NebulaTreeDeadWalnut
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseTree
+  id: NebulaTreeDeadYew
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseTree
+  id: ShiptestTreeDeadBarren
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+
+# parent: BaseStructure
+- type: entity
+  parent: BaseStructure
+  id: CoyoteChompBonesLbone
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: CoyoteChompBonesLribs
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: CoyoteChompBonesLribs1
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: CoyoteChompBonesLrock
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: CoyoteChompBonesLrock2
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: CoyoteChompBonesLrock4
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: CoyoteChompBonesLskullW
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: TgBoneSkullHalf
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: TgBoneSkullHalf2
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: TgStatueBoneRib
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: TgStatueBoneRib2
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: TgStatueBoneSkull
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: CMFence
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: RMCFenceBroken
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: RMCPropBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: RMCPropTyrargoVehicleHumvee
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: RMCPropTyrargoVehicleHumveeDestroyed
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: RMCPropTyrargoVehicleTruck
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/Props/Tyrargo/tyrargo_truck.rsi
+
+- type: entity
+  parent: BaseStructure
+  id: RMCPropTyrargoVehicleTruckAlt
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/Props/Tyrargo/tyrargo_truck.rsi
+
+- type: entity
+  parent: BaseStructure
+  id: RMCPropVehicleBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseStructure
+  id: RMCContainerBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+
+# parent: WallSolid
+- type: entity
+  parent: WallSolid
+  id: WallConcreteIndestructible
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+
+# parent: BaseItem
+- type: entity
+  parent: BaseItem
+  id: RMCAPCHardpointBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/hardpoints/apc.rsi
+
+- type: entity
+  parent: BaseItem
+  id: VehicleAmmoBoxBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/ammo/vehicles.rsi
+
+- type: entity
+  parent: BaseItem
+  id: VehicleHumveeHardpointBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/hardpoints/humvee.rsi
+
+- type: entity
+  parent: BaseItem
+  id: VehicleSPPAPCHardpointBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: BaseItem
+  id: VehicleTankHardpointBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Vehicles/hardpoints/tank.rsi
+
+
+# parent: VendingMachine
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineCredit
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+
+# parent: ClothingHeadHelmetMercenary
+- type: entity
+  parent: ClothingHeadHelmetMercenary
+  id: ClothingHeadHelmetCombatPDV
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+# parent: BaseFlora
+- type: entity
+  parent: BaseFlora
+  id: AuroraFloraBushKonyangReeds
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_grass.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: ChompFloraDesertPlanetShrubber
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: CoyoteFloraWasteplantWildBuffalogourd
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: DarkPackFloraDarkpackFlowerYerba
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_flowers.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: GoonFakeobjectLotus
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_water_plants_goonstation.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: GoonMushrooms
+  suffix: mushrooms
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms_goonstation.rsi
+    state: mushroom7
+    offset: "0,0"
+    layers:
+    - state: mushroom7
+
+- type: entity
+  parent: BaseFlora
+  id: GoonMushroomsType1
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_mushrooms_goonstation.rsi
+
+- type: entity
+  parent: BaseFlora
+  id: TgFloraAshChilly
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+
+# Shared crew-body parent. The IPC crew mob also parents MobIPC.
+- type: entity
+  id: WFCrewKit
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+# Station crane the mobile drydock crane is cut down from.
+- type: entity
+  parent: BaseStructure
+  id: WFDrydockCrane
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Drydock/crane_machine.rsi

@@ -1,0 +1,67 @@
+// Body warmth warnings. Frost creeps in from the screen's edges in crystalline patches while the cold warns; a heat
+// shimmer wavers the view and warms its edges while the heat does.
+
+light_mode unshaded;
+
+uniform sampler2D SCREEN_TEXTURE;
+uniform highp float frost;   // 0 to 1.
+uniform highp float heat;    // 0 to 1.
+
+// Lattice gradient in -1..1. Hash without sine, after Dave Hoskins.
+highp vec2 warmthGradient(highp vec2 cell) {
+    highp vec3 p = fract(mod(cell, 256.0).xyx * vec3(0.1031, 0.1030, 0.0973));
+    p += dot(p, p.yzx + 33.33);
+    return fract((p.xx + p.yz) * p.zy) * 2.0 - 1.0;
+}
+
+// Gradient noise, roughly -0.7 to 0.7.
+highp float warmthNoise(highp vec2 p) {
+    highp vec2 cell = floor(p);
+    highp vec2 f = p - cell;
+    highp vec2 u = f * f * (3.0 - 2.0 * f);
+
+    highp float a = dot(warmthGradient(cell), f);
+    highp float b = dot(warmthGradient(cell + vec2(1.0, 0.0)), f - vec2(1.0, 0.0));
+    highp float c = dot(warmthGradient(cell + vec2(0.0, 1.0)), f - vec2(0.0, 1.0));
+    highp float d = dot(warmthGradient(cell + vec2(1.0, 1.0)), f - vec2(1.0, 1.0));
+
+    return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+}
+
+void fragment() {
+    highp vec2 uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
+    highp float aspect = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+    highp vec2 centered = uv * 2.0 - 1.0;
+    // 0 at the centre, about 1 at the edges' middles and 1.4 in the corners.
+    highp float edge = length(centered);
+
+    highp vec2 offset = vec2(0.0);
+    if (heat > 0.001) {
+        highp float t = mod(TIME, 1000.0);
+        offset.x = (sin(uv.y * 45.0 + t * 2.7) * 0.6 + sin(uv.y * 113.0 - t * 4.1) * 0.4) * 0.0018 * heat;
+        offset.y = sin(uv.x * 37.0 * aspect + t * 1.9) * 0.0009 * heat;
+    }
+
+    highp vec4 color = zTextureSpec(SCREEN_TEXTURE, uv + offset);
+
+    if (frost > 0.001) {
+        highp vec2 p = vec2(uv.x * aspect, uv.y) * 7.0;
+        // Sharp ridges read as ice crystals; the coarse octave breaks up the frost's front.
+        highp float crystal = 1.0 - abs(warmthNoise(p * 3.1)) * 1.6;
+        highp float front = warmthNoise(p * 0.6) * 0.35;
+        highp float reach = 1.25 - 0.6 * frost;
+        highp float mask = smoothstep(reach, reach + 0.35, edge + front + crystal * 0.12);
+        highp vec3 ice = mix(vec3(0.72, 0.86, 0.98), vec3(0.93, 0.97, 1.0), clamp(crystal, 0.0, 1.0));
+        color.rgb = mix(color.rgb, ice, mask * (0.55 + 0.3 * frost));
+        // The whole view cools a little.
+        color.rgb = mix(color.rgb, color.rgb * vec3(0.86, 0.94, 1.08), 0.35 * frost);
+    }
+
+    if (heat > 0.001) {
+        highp float mask = smoothstep(1.25 - 0.45 * heat, 1.6, edge);
+        color.rgb = mix(color.rgb, vec3(1.0, 0.55, 0.22), mask * 0.4 * heat);
+        color.rgb = mix(color.rgb, color.rgb * vec3(1.08, 0.97, 0.88), 0.3 * heat);
+    }
+
+    COLOR = color;
+}

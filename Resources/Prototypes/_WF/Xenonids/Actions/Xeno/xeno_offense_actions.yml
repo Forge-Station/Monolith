@@ -1,0 +1,52 @@
+- type: entity
+  id: ActionXenoTailStab
+  parent: ActionXenoBase
+  name: Tail Stab
+  description: Strikes the targeted enemy or barricade. The cooldown is faster if you miss.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: tail_attack
+    useDelay: 10
+    range: 2.5
+    checkCanAccess: false
+    event: !type:XenoTailStabEvent
+  - type: XenoTailStabAction
+  - type: RMCDazeableAction
+  - type: ActionInRangeUnobstructed
+    range: 2.5
+
+- type: entity
+  id: ActionXenoCharge
+  parent: ActionXenoBase
+  name: Charge (20)
+  description: Click on a tile you want to charge at, after a brief non cancel-able windup time. Slows around the impact area. [color=green]Cooldown is partially refunded upon attacking an enemy, scaling with the amount of enemies you cleave with your passive.[/color]
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: ready_charge
+    useDelay: 14
+    range: 7
+    checkCanAccess: false
+    event: !type:XenoChargeActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoToggleCharging
+  name: Toggle Charging
+  description: Enable charging when moving in a straight line, which increases your speed and impact damage depending on the total distance travelled.
+  components:
+  - type: InstantAction
+    backgroundOn:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: template_active_big
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: ready_charge
+    useDelay: 0.25
+    event: !type:XenoToggleChargingActionEvent

@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wood_wall-0"
+    },
+    {
+      "name": "wood_wall-1"
+    },
+    {
+      "name": "wood_wall-2"
+    },
+    {
+      "name": "wood_wall-3"
+    },
+    {
+      "name": "wood_wall-4"
+    },
+    {
+      "name": "wood_wall-5"
+    },
+    {
+      "name": "wood_wall-6"
+    },
+    {
+      "name": "wood_wall-7"
+    },
+    {
+      "name": "wood_wall-8"
+    },
+    {
+      "name": "wood_wall-9"
+    },
+    {
+      "name": "wood_wall-10"
+    },
+    {
+      "name": "wood_wall-11"
+    },
+    {
+      "name": "wood_wall-12"
+    },
+    {
+      "name": "wood_wall-13"
+    },
+    {
+      "name": "wood_wall-14"
+    },
+    {
+      "name": "wood_wall-15"
+    },
+    {
+      "name": "wood_wall-21"
+    },
+    {
+      "name": "wood_wall-23"
+    },
+    {
+      "name": "wood_wall-29"
+    },
+    {
+      "name": "wood_wall-31"
+    },
+    {
+      "name": "wood_wall-38"
+    },
+    {
+      "name": "wood_wall-39"
+    },
+    {
+      "name": "wood_wall-46"
+    },
+    {
+      "name": "wood_wall-47"
+    },
+    {
+      "name": "wood_wall-55"
+    },
+    {
+      "name": "wood_wall-63"
+    },
+    {
+      "name": "wood_wall-74"
+    },
+    {
+      "name": "wood_wall-75"
+    },
+    {
+      "name": "wood_wall-78"
+    },
+    {
+      "name": "wood_wall-79"
+    },
+    {
+      "name": "wood_wall-95"
+    },
+    {
+      "name": "wood_wall-110"
+    },
+    {
+      "name": "wood_wall-111"
+    },
+    {
+      "name": "wood_wall-127"
+    },
+    {
+      "name": "wood_wall-137"
+    },
+    {
+      "name": "wood_wall-139"
+    },
+    {
+      "name": "wood_wall-141"
+    },
+    {
+      "name": "wood_wall-143"
+    },
+    {
+      "name": "wood_wall-157"
+    },
+    {
+      "name": "wood_wall-159"
+    },
+    {
+      "name": "wood_wall-175"
+    },
+    {
+      "name": "wood_wall-191"
+    },
+    {
+      "name": "wood_wall-203"
+    },
+    {
+      "name": "wood_wall-207"
+    },
+    {
+      "name": "wood_wall-223"
+    },
+    {
+      "name": "wood_wall-239"
+    },
+    {
+      "name": "wood_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

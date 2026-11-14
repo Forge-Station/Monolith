@@ -1,0 +1,69 @@
+# Mapping markers for city plot and sewer templates. The city generator reads and deletes them; see
+# Content.Server/_WF/PlanetCities/README.md for where each one goes.
+- type: entity
+  id: WFCityMarkerBase
+  parent: MarkerBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+
+- type: entity
+  id: WFCityFrontDoor
+  parent: WFCityMarkerBase
+  name: city front door marker
+  description: The plot's street door. Goes on the south edge, on the door's tile.
+  suffix: City
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  id: WFCityBackDoor
+  parent: WFCityMarkerBase
+  name: city back door marker
+  description: An optional door onto the back alley. Goes on the north edge, on the door's tile.
+  suffix: City
+  components:
+  - type: Sprite
+    state: blue
+
+- type: entity
+  id: WFCityStairs
+  parent: WFCityMarkerBase
+  name: city stairs marker
+  description: The foot of stairs up to the floor above. The floor above has a stairwell marker on the same tile.
+  suffix: City
+  components:
+  - type: Sprite
+    state: pink
+
+- type: entity
+  id: WFCityStairwell
+  parent: WFCityMarkerBase
+  name: city stairwell marker
+  description: The open shaft over stairs on the floor below. The generator removes this tile's floor.
+  suffix: City
+  components:
+  - type: Sprite
+    state: red
+
+- type: entity
+  id: WFCitySewerLink
+  parent: WFCityMarkerBase
+  name: city sewer link marker
+  description: An opening in a sewer piece's edge, or a basement door into the sewer. Goes on the edge tile.
+  suffix: City
+  components:
+  - type: Sprite
+    state: timed
+
+- type: entity
+  id: WFCityManhole
+  parent: WFCityMarkerBase
+  name: city manhole marker
+  description: A ladder from the sewer up to the street. Goes on a sewer walkway tile.
+  suffix: City
+  components:
+  - type: Sprite
+    state: ai

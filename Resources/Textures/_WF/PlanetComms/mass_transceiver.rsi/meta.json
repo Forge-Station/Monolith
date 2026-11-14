@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e77c994c8b3fcf97b13886de7c56c6b407108598/icons/obj/structures/machinery/comm_tower3.dmi. Ported from RMC-14 (https://github.com/RMC-14/RMC-14, Resources/Textures/_RMC14/Structures/communications_tower.rsi), static1 states only.",
+  "size": {
+    "x": 64,
+    "y": 128
+  },
+  "states": [
+    {
+      "name": "static1",
+      "delays": [
+        [
+          2,
+          2.5
+        ]
+      ]
+    },
+    {
+      "name": "static1_off"
+    },
+    {
+      "name": "static1_broken"
+    }
+  ]
+}

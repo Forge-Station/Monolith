@@ -51,22 +51,22 @@ public abstract partial class SharedMoverController : VirtualController
     [Dependency] private   TagSystem _tags = default!;
     [Dependency] private   IEntityManager _entities = default!; // Delta V-NoShoesSilentFootstepsComponent
 
-    [Dependency] protected readonly EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery = default!;
-    [Dependency] protected readonly EntityQuery<FootstepModifierComponent> FootstepModifierQuery = default!;
-    [Dependency] protected readonly EntityQuery<FTLComponent> FTLQuery = default!;
-    [Dependency] protected readonly EntityQuery<InputMoverComponent> MoverQuery = default!;
-    [Dependency] protected readonly EntityQuery<MapComponent> MapQuery = default!;
-    [Dependency] protected readonly EntityQuery<MapGridComponent> MapGridQuery = default!;
-    [Dependency] protected readonly EntityQuery<MobMoverComponent> MobMoverQuery = default!;
-    [Dependency] protected readonly EntityQuery<MovementRelayTargetComponent> RelayTargetQuery = default!;
-    [Dependency] protected readonly EntityQuery<MovementSpeedModifierComponent> ModifierQuery = default!;
-    [Dependency] protected readonly EntityQuery<NoRotateOnMoveComponent> NoRotateQuery = default!;
-    [Dependency] protected readonly EntityQuery<PhysicsComponent> PhysicsQuery = default!;
-    [Dependency] protected readonly EntityQuery<PilotComponent> PilotQuery = default!;
-    [Dependency] protected readonly EntityQuery<PreventPilotComponent> PreventPilotQuery = default!;
-    [Dependency] protected readonly EntityQuery<RelayInputMoverComponent> RelayQuery = default!;
-    [Dependency] protected readonly EntityQuery<PullableComponent> PullableQuery = default!;
-    [Dependency] protected readonly EntityQuery<TransformComponent> XformQuery = default!;
+    [Dependency] protected EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery = default!;
+    [Dependency] protected EntityQuery<FootstepModifierComponent> FootstepModifierQuery = default!;
+    [Dependency] protected EntityQuery<FTLComponent> FTLQuery = default!;
+    [Dependency] protected EntityQuery<InputMoverComponent> MoverQuery = default!;
+    [Dependency] protected EntityQuery<MapComponent> MapQuery = default!;
+    [Dependency] protected EntityQuery<MapGridComponent> MapGridQuery = default!;
+    [Dependency] protected EntityQuery<MobMoverComponent> MobMoverQuery = default!;
+    [Dependency] protected EntityQuery<MovementRelayTargetComponent> RelayTargetQuery = default!;
+    [Dependency] protected EntityQuery<MovementSpeedModifierComponent> ModifierQuery = default!;
+    [Dependency] protected EntityQuery<NoRotateOnMoveComponent> NoRotateQuery = default!;
+    [Dependency] protected EntityQuery<PhysicsComponent> PhysicsQuery = default!;
+    [Dependency] protected EntityQuery<PilotComponent> PilotQuery = default!;
+    [Dependency] protected EntityQuery<PreventPilotComponent> PreventPilotQuery = default!;
+    [Dependency] protected EntityQuery<RelayInputMoverComponent> RelayQuery = default!;
+    [Dependency] protected EntityQuery<PullableComponent> PullableQuery = default!;
+    [Dependency] protected EntityQuery<TransformComponent> XformQuery = default!;
 
     private static readonly ProtoId<TagPrototype> FootstepSoundTag = "FootstepSound";
 
@@ -628,7 +628,7 @@ public abstract partial class SharedMoverController : VirtualController
 
         // If the coordinates have a FootstepModifier component
         // i.e. component that emit sound on footsteps emit that sound
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, position);
+        var anchored = _mapSystem.GetAnchoredEntities(xform.GridUid.Value, grid, position);
 
         while (anchored.MoveNext(out var maybeFootstep))
         {
@@ -662,6 +662,16 @@ public abstract partial class SharedMoverController : VirtualController
             return false;
         }
         // End Delta V NoShoesSilentFootsteps
+
+        // WOLFGATE(GroundCover) START: snow cover crunches underfoot over the floor's own sound
+        var snowStep = new Content.Shared._WF.GroundCover.WFSnowFootstepEvent(uid, xform.GridUid.Value, position);
+        RaiseLocalEvent(ref snowStep);
+        if (snowStep.Sound != null)
+        {
+            sound = snowStep.Sound;
+            return true;
+        }
+        // WOLFGATE END
 
         // Walking on a tile.
         // Tile def might have been passed in already from previous methods, so use that

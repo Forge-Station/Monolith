@@ -37,7 +37,7 @@ public sealed partial class RadarBlipsSystem : EntitySystem
         SubscribeNetworkEvent<GiveBlipsEvent>(HandleReceiveBlips);
         SubscribeNetworkEvent<BlipRemovalEvent>(RemoveBlip);
         // Forge-Change: hide blip on local hit before server sends BlipRemovalEvent / next report.
-        SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
+        SubscribeLocalEvent<ProjectileComponent, ProjectileHitNoticedEvent>(OnProjectileHit);
     }
 
     private void HandleReceiveBlips(GiveBlipsEvent ev, EntitySessionEventArgs args)
@@ -65,7 +65,7 @@ public sealed partial class RadarBlipsSystem : EntitySystem
     }
 
     // Forge-Change-Start
-    private void OnProjectileHit(EntityUid uid, ProjectileComponent component, ref ProjectileHitEvent args)
+    private void OnProjectileHit(EntityUid uid, ProjectileComponent component, ref ProjectileHitNoticedEvent args)
     {
         SuppressBlip(GetNetEntity(uid));
     }

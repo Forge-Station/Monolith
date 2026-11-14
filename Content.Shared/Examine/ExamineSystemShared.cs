@@ -24,7 +24,7 @@ namespace Content.Shared.Examine
         [Dependency] private SharedInteractionSystem _interactionSystem = default!;
         [Dependency] protected MobStateSystem MobStateSystem = default!;
 
-        [Dependency] private readonly EntityQuery<GhostComponent> _ghostQuery = default!;
+        [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
 
         public const float MaxRaycastRange = 100;
 
@@ -114,7 +114,7 @@ namespace Content.Shared.Examine
             if (!examinerComp.CheckInRangeUnOccluded)
                 return true;
 
-            if (EntityManager.GetComponent<TransformComponent>(examiner).MapID != target.MapId)
+            if (Comp<TransformComponent>(examiner).MapID != target.MapId)
                 return false;
 
             // Do target InRangeUnoccluded which has different checks.

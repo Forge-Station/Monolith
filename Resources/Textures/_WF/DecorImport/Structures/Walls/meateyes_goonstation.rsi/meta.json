@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "meateyes-0"
+    },
+    {
+      "name": "meateyes-1"
+    },
+    {
+      "name": "meateyes-2"
+    },
+    {
+      "name": "meateyes-3"
+    },
+    {
+      "name": "meateyes-4"
+    },
+    {
+      "name": "meateyes-5"
+    },
+    {
+      "name": "meateyes-6"
+    },
+    {
+      "name": "meateyes-7"
+    },
+    {
+      "name": "meateyes-8"
+    },
+    {
+      "name": "meateyes-9"
+    },
+    {
+      "name": "meateyes-10"
+    },
+    {
+      "name": "meateyes-11"
+    },
+    {
+      "name": "meateyes-12"
+    },
+    {
+      "name": "meateyes-13"
+    },
+    {
+      "name": "meateyes-14"
+    },
+    {
+      "name": "meateyes-15"
+    },
+    {
+      "name": "meateyes-21"
+    },
+    {
+      "name": "meateyes-23"
+    },
+    {
+      "name": "meateyes-29"
+    },
+    {
+      "name": "meateyes-31"
+    },
+    {
+      "name": "meateyes-38"
+    },
+    {
+      "name": "meateyes-39"
+    },
+    {
+      "name": "meateyes-46"
+    },
+    {
+      "name": "meateyes-47"
+    },
+    {
+      "name": "meateyes-55"
+    },
+    {
+      "name": "meateyes-63"
+    },
+    {
+      "name": "meateyes-74"
+    },
+    {
+      "name": "meateyes-75"
+    },
+    {
+      "name": "meateyes-78"
+    },
+    {
+      "name": "meateyes-79"
+    },
+    {
+      "name": "meateyes-95"
+    },
+    {
+      "name": "meateyes-110"
+    },
+    {
+      "name": "meateyes-111"
+    },
+    {
+      "name": "meateyes-127"
+    },
+    {
+      "name": "meateyes-137"
+    },
+    {
+      "name": "meateyes-139"
+    },
+    {
+      "name": "meateyes-141"
+    },
+    {
+      "name": "meateyes-143"
+    },
+    {
+      "name": "meateyes-157"
+    },
+    {
+      "name": "meateyes-159"
+    },
+    {
+      "name": "meateyes-175"
+    },
+    {
+      "name": "meateyes-191"
+    },
+    {
+      "name": "meateyes-203"
+    },
+    {
+      "name": "meateyes-207"
+    },
+    {
+      "name": "meateyes-223"
+    },
+    {
+      "name": "meateyes-239"
+    },
+    {
+      "name": "meateyes-255"
+    }
+  ]
+}

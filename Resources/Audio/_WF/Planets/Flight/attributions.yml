@@ -1,0 +1,35 @@
+# Sourced by the maintainer (2026-09-14), converted to mono 44.1 kHz Vorbis on import.
+- files: ["lift_lost.ogg", "dont_sink.ogg", "sink_rate.ogg", "terrain.ogg", "too_low_terrain.ogg", "pull_up.ogg", "hard_landing.ogg", "skid.ogg"]
+  license: CC0-1.0
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Flight
+
+# The tree's own weather wind loop, kept as the permanent atmosphere airflow bed.
+- files: ["atmo_wind.ogg"]
+  license: CC-BY-SA-3.0
+  copyright: '"wind_2_1.ogg" by Citadel Station 13. Modified for looping.'
+  source: https://github.com/Citadel-Station-13/Citadel-Station-13-RP/tree/28e11dee540e61b6c42fa293c1e1da087c1c2b0a
+
+# Sourced by the maintainer (2026-09-14), converted to mono 44.1 kHz Vorbis on import.
+- files: ["fall_rumble.ogg"]
+  license: CC0-1.0
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Flight
+
+# Supplied by the maintainer, 2026-09-18; converted to mono Vorbis.
+- files: ["ground_grind_loop.ogg", "crash10.ogg", "crash11.ogg", "crash12.ogg", "crash3.ogg", "crash4.ogg"]
+  license: CC0-1.0
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Flight
+
+# First 9 s of sound/bms_objects/rocket/rocket_booster.wav, faded out, mono, normalised to -14 LUFS.
+- files: ["takeoff.ogg"]
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/bms_objects/rocket/rocket_booster.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+# Sourced by the maintainer (2026-09-15), converted to stereo 44.1 kHz Vorbis on import.
+- files: ["thrust_loop.ogg"]
+  license: CC0-1.0
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Flight

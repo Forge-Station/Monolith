@@ -1,0 +1,5124 @@
+# Fighters fly with a pilot and a gunner and nobody else.
+# A pair of TSF fighters holding station off a station for the whole round. They warn ships that dock with them,
+# fight boarders, and only drive attackers off. Ships of a company the TSF is at war with are warned off at 900 m
+# and fired on inside 450 m; everyone else may pass.
+- type: wfEncounter
+  id: WFEncounterTsfPatrol
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  name: wf-encounter-name-patrol
+  start: RoundStart
+  lifetime: Persistent
+  category: Patrol
+  cost: 1
+  replaceable: true
+  placement: Station
+  standoff: 500
+  cooldown: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, QJ271, Paladin, Ocelot, Seax, Xiphos ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 900
+    attackRange: 450
+    zoneTargets: AtWar
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 700
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 120, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 900
+    attackRange: 450
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+# The Dynasty's answer to the TSF patrol: a pair of Vanguard gunboats holding station off a station for the whole round. They
+# warn ships that dock with them, fight boarders, and only drive attackers off. Ships of a company the Dynasty is at war with are
+# warned off at 900 m and fired on inside 450 m; everyone else may pass. Both patrols come at round start, at different stations.
+- type: wfEncounter
+  id: WFEncounterPdvPatrol
+  avoidStations: [ TSF, Caelestinus ]
+  name: wf-encounter-name-pdv-patrol
+  start: RoundStart
+  lifetime: Persistent
+  category: Patrol
+  cost: 1
+  replaceable: true
+  placement: Station
+  standoff: 500
+  cooldown: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly, Gadfly, Kresta, Ontos ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 900
+    attackRange: 450
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 700
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Gadfly, Kresta ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 120, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 900
+    attackRange: 450
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+# Independent freight runs. A hauler enters the sector well out from its first stop, its captain calls its cargo
+# and route on the common channel, and it docks at two to four stations in turn before flying clear and jumping out.
+# The crew are ordinary spacers in working clothes: the hands only fight back when attacked, and an officer may have the only gun.
+- type: wfEncounter
+  id: WFEncounterFreightSmall
+  freight: true
+  name: wf-encounter-name-freighter
+  announcement: wf-encounter-announce-freight-run
+  announceOnRadio: true
+  start: Scheduled
+  category: Traffic
+  cost: 1
+  weight: 3
+  minPlayers: 0
+  placement: Circuit
+  cooldown: 1500
+  duration: 5400
+  route:
+    minStops: 2
+    maxStops: 4
+  manifests: [ WFManifestGeneral, WFManifestGeneral, WFManifestFood, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels:
+    - Plutomkii
+    - Twilight
+    - Piva
+    - Hermes
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 1
+    guards: 0
+    captain: false
+    cargo: 8
+    flyRoute: true
+    boarding: Warn
+    docking: Warn
+    disengage: Deter
+
+- type: wfEncounter
+  id: WFEncounterFreightMedium
+  freight: true
+  name: wf-encounter-name-freighter
+  announcement: wf-encounter-announce-freight-run
+  announceOnRadio: true
+  start: Scheduled
+  category: Traffic
+  cost: 2
+  weight: 2
+  minPlayers: 0
+  placement: Circuit
+  cooldown: 1500
+  duration: 5400
+  route:
+    minStops: 2
+    maxStops: 4
+  manifests: [ WFManifestGeneral, WFManifestFood, WFManifestMedical, WFManifestIndustrial, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels:
+    - Brute
+    - Zhuangzi
+    - Argent
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 2
+    guards: 0
+    captain: true
+    cargo: 16
+    flyRoute: true
+    boarding: Warn
+    docking: Warn
+    disengage: Deter
+
+- type: wfEncounter
+  id: WFEncounterFreightLarge
+  freight: true
+  name: wf-encounter-name-freighter
+  announcement: wf-encounter-announce-freight-run
+  announceOnRadio: true
+  start: Scheduled
+  category: Traffic
+  cost: 3
+  weight: 1
+  minPlayers: 6
+  placement: Circuit
+  cooldown: 1500
+  duration: 5400
+  route:
+    minStops: 2
+    maxStops: 4
+  manifests: [ WFManifestGeneral, WFManifestMedical, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury, WFManifestArms, WFManifestContraband ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels:
+    - Olympus
+    - Autumn
+    - Windreign
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 4
+    guards: 2
+    captain: true
+    cargo: 28
+    flyRoute: true
+    boarding: Warn
+    docking: Warn
+    disengage: Deter
+
+# A TSF transport carrying munitions under fighter escort. It holds its course whatever happens, warns ships of
+# other companies off at a kilometre and fires on them inside four hundred metres.
+- type: wfEncounter
+  id: WFEncounterTsfTransport
+  avoidStations: [ Helios, PDV ]
+  name: wf-encounter-name-tsf-transport
+  announcement: wf-encounter-announce-tsf-transport
+  announceOnRadio: true
+  start: Scheduled
+  category: Patrol
+  cost: 3
+  weight: 1
+  minPlayers: 6
+  placement: Circuit
+  cooldown: 3600
+  duration: 5400
+  route:
+    minStops: 1
+    maxStops: 2
+    dwellMin: 180
+    dwellMax: 300
+  manifests: [ WFManifestMunitions, WFManifestMunitions, WFManifestMunitions, WFManifestMedical, WFManifestParts ]
+  ships:
+  - key: transport
+    navigation: WFCrewNavigationWarship
+    vessel: Argent
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    deckhands: 2
+    guards: 2
+    cargo: 20
+    flyRoute: true
+    evades: false
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 1000
+    attackRange: 400
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 150, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Escort
+      target: transport
+
+# A Dynasty supply run: a Layak corvette with materiel in its stern bay under gunboat escort. It holds its course whatever
+# happens, warns ships of the Dynasty's enemies off at a kilometre and fires on them inside four hundred metres.
+- type: wfEncounter
+  id: WFEncounterPdvTransport
+  avoidStations: [ TSF ]
+  name: wf-encounter-name-pdv-transport
+  announcement: wf-encounter-announce-pdv-transport
+  announceOnRadio: true
+  start: Scheduled
+  category: Patrol
+  cost: 3
+  weight: 1
+  minPlayers: 6
+  placement: Circuit
+  cooldown: 3600
+  duration: 5400
+  route:
+    minStops: 1
+    maxStops: 2
+    dwellMin: 180
+    dwellMax: 300
+  manifests: [ WFManifestArms, WFManifestArms, WFManifestIndustrial, WFManifestIndustrial, WFManifestParts ]
+  ships:
+  - key: transport
+    navigation: WFCrewNavigationWarship
+    vessel: Layak
+    skill: Green
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    deckhands: 2
+    guards: 2
+    cargo: 16
+    flyRoute: true
+    evades: false
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 800
+    attackRange: 300
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 150, 0
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Escort
+      target: transport
+
+# A hauler in open space with a pirate ship lying off it. The hauler makes its own distress call on the common channel at
+# once; the attack only begins when a player comes within a kilometre and a half, so somebody is there to see it.
+- type: wfEncounter
+  id: WFEncounterPirateAmbush
+  leash: 2500
+  name: wf-encounter-name-ambush
+  announcement: wf-encounter-announce-ambush
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: hauler
+  start: Scheduled
+  category: Distress
+  icon: Skull
+  cost: 2
+  startRadius: 1500
+  rewards:
+  - side: freight
+    spesos: 24000
+    thanks: wf-encounter-reward-thanks-hauler
+  minPlayers: 4
+  cooldown: 2700
+  duration: 2400
+  manifests: [ WFManifestGeneral, WFManifestFood ]
+  ships:
+  - key: hauler
+    navigation: WFCrewNavigationFreight
+    vessel: Piva
+    side: freight
+    profile: WFCrewProfileHauler
+    company: TSFCivilian
+    cargo: 4
+    docking: Warn
+    disengage: Deter
+    objectives:
+    - kind: Hold
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    offset: 0, 450
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: hauler
+
+# Raiders sit on a station's approaches. While they hold them the station is blockaded: its supply lines are cut,
+# freighters stay away and it pays relief prices. Driving them off lifts it and pays whoever did.
+- type: wfEncounter
+  id: WFEncounterStationBlockade
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  leash: 2500
+  name: wf-encounter-name-station-blockade
+  announcement: wf-encounter-announce-station-blockade
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 2
+  weight: 1.5
+  minPlayers: 4
+  placement: Station
+  standoff: 1500
+  blockades: true
+  cooldown: 3600
+  duration: 3600
+  rewards:
+  - side: pirates
+    spesos: 40000
+  ships:
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-blockade-zone
+    zoneTargets: Everyone
+    disengage: Deter
+    disengageRange: 1500
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 700
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    offset: 0, 450
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-blockade-zone
+    zoneTargets: Everyone
+    disengage: Deter
+    disengageRange: 1500
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 700
+
+# The same ambush on a bigger scale, for more players: a large freighter with its guns and shields, and a raider with a
+# wingman on it. The freighter makes its own call, as before.
+- type: wfEncounter
+  id: WFEncounterPirateAmbushLarge
+  leash: 2500
+  name: wf-encounter-name-ambush-large
+  announcement: wf-encounter-announce-ambush-large
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: hauler
+  start: Scheduled
+  category: Distress
+  icon: Skull
+  cost: 3
+  weight: 0.5
+  startRadius: 1800
+  rewards:
+  - side: freight
+    spesos: 44000
+    thanks: wf-encounter-reward-thanks-hauler
+  minPlayers: 7
+  cooldown: 3300
+  duration: 2700
+  manifests: [ WFManifestGeneral, WFManifestIndustrial, WFManifestParts, WFManifestMedical ]
+  ships:
+  - key: hauler
+    navigation: WFCrewNavigationFreight
+    vessels: [ Olympus, Autumn, Windreign ]
+    side: freight
+    profile: WFCrewProfileHauler
+    company: TSFCivilian
+    deckhands: 3
+    guards: 1
+    cargo: 12
+    docking: Warn
+    disengage: Deter
+    objectives:
+    - kind: Hold
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    offset: 0, 600
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    deckhands: 2
+    objectives:
+    - kind: Attack
+      target: hauler
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 200, 650
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: hauler
+
+# Pirates on the prowl: two raiders arrive in open space near traffic, meander from point to point for a while and
+# jump out. Any ship that strays near is told to heave to, and fired on if it comes closer.
+- type: wfEncounter
+  id: WFEncounterPirateRaiders
+  stationClearance: 3000
+  name: wf-encounter-name-pirates
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 2
+  weight: 2
+  minPlayers: 3
+  cooldown: 2400
+  duration: 3600
+  minDistance: 2500
+  maxDistance: 4500
+  ships:
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 3
+    wander: 6
+    wanderRadius: 3000
+    warnRange: 900
+    attackRange: 450
+    zoneLines: wf-encounter-pirate-zone
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    warnRange: 900
+    attackRange: 450
+    zoneLines: wf-encounter-pirate-zone
+    objectives:
+    - kind: Escort
+      target: raider
+
+# Pirate boarders: one small, lightly armed ship that gives no warning. It runs down the nearest player ship and
+# tries to dock; every time it is shaken off it comes again. If it gets a port, its hands come aboard, shoot at
+# whoever they see, carry off a few loose things, and the ship casts off and jumps out.
+- type: wfEncounter
+  id: WFEncounterPirateBoarders
+  stationClearance: 3000
+  name: wf-encounter-name-boarders
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 2
+  weight: 2
+  minPlayers: 2
+  hidden: true
+  cooldown: 2400
+  duration: 1800
+  minDistance: 1500
+  maxDistance: 2500
+  ships:
+  - key: boarder
+    navigation: WFCrewNavigationRaider
+    vessels: [ Hazel, Metis, Mudskipper ]
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Takeaway, Caracara ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Takeaway, Arribane, Zeros, Peregrine ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 4
+      vessels: [ Hazel, Metis, Mudskipper ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 2
+    guards: 2
+    hunt: true
+    evades: false
+
+# The traders fly hulls whose doors ask for no access, so any customer can walk from the dock to the dealer.
+# A wandering trader: a small hauler with a pilot, a guard and a trader aboard, drifting from point to point and
+# stopping a while at each. Dock with it and deal; the stock is small, cheap and gone when it is gone. All can be killed.
+- type: wfEncounter
+  id: WFEncounterWanderingTrader
+  name: wf-encounter-name-trader
+  announcement: wf-encounter-announce-trader
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 2
+  cooldown: 2400
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Twilight
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 1
+    roles: [ WFCrewPilot, WFCrewDeckhand ]
+    passengers: [ WFTraderWanderer ]
+    skill: Regular
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true
+
+# A TSF patrol ship has been jumped by pirates and calls for backup. Shoot the pirates and the TSF ship takes you
+# for an ally and pays when they are beaten; TSF players get military credits as well. Shoot the TSF ship and the
+# pirates leave you be, but they pay nothing: what you can take off the wreck is the reward.
+- type: wfEncounter
+  id: WFEncounterBackupRequest
+  leash: 2500
+  name: wf-encounter-name-backup
+  announcement: wf-encounter-announce-backup
+  announceOnRadio: true
+  announcer: patrol
+  start: Scheduled
+  category: Distress
+  cost: 3
+  weight: 2
+  minPlayers: 3
+  cooldown: 2700
+  duration: 2700
+  startRadius: 2000
+  minDistance: 2500
+  maxDistance: 4000
+  rewards:
+  - side: tsf
+    spesos: 48000
+    credits: 30
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    objectives:
+    - kind: Attack
+      target: raider
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    offset: 0, 500
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 3
+    objectives:
+    - kind: Attack
+      target: patrol
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 180, 520
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: patrol
+
+# A Dynasty gunboat has been jumped by a Federation strike pair and calls for backup. Shoot the Federation ships and the Dynasty
+# boat takes you for an ally and pays when they are beaten; Dynasty players get data chits as well. Shoot the Dynasty boat and
+# the strike pair leaves you be, but they pay nothing: what you can take off the wreck is the reward.
+- type: wfEncounter
+  id: WFEncounterPdvBackupRequest
+  leash: 2500
+  name: wf-encounter-name-pdv-backup
+  announcement: wf-encounter-announce-pdv-backup
+  announceOnRadio: true
+  announcer: patrol
+  start: Scheduled
+  category: Distress
+  cost: 3
+  weight: 2
+  minPlayers: 3
+  requiresWar: true
+  cooldown: 2700
+  duration: 2700
+  startRadius: 2000
+  minDistance: 2500
+  maxDistance: 4000
+  rewards:
+  - side: pdv
+    spesos: 48000
+    credits: 30
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: striker
+  - key: striker
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 500
+    side: tsf
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: patrol
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 180, 520
+    side: tsf
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: patrol
+
+# A military surplus dealer in a mercenary gunboat: arms, kit and ammunition. Among the best defended of the traders,
+# with a gunner at the guns and veteran guards aboard. Kill the dealer and a box of the stock is left.
+- type: wfEncounter
+  id: WFEncounterSurplusTrader
+  name: wf-encounter-name-trader-surplus
+  announcement: wf-encounter-announce-trader-surplus
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 1
+  cooldown: 3000
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Femur
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 3
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderSurplus ]
+    skill: Veteran
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true
+
+# A dealer in antiques and curiosities: one of each, priced to the piece. Two guards.
+- type: wfEncounter
+  id: WFEncounterCuriosTrader
+  name: wf-encounter-name-trader-curios
+  announcement: wf-encounter-announce-trader-curios
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 1
+  cooldown: 3000
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Kestrel
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 2
+    roles: [ WFCrewPilot, WFCrewDeckhand ]
+    passengers: [ WFTraderCurios ]
+    skill: Regular
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true
+
+# A medical supplier selling clinic overstock below station prices, out of a medical hull. One guard and a gunner.
+- type: wfEncounter
+  id: WFEncounterMedicTrader
+  name: wf-encounter-name-trader-medic
+  announcement: wf-encounter-announce-trader-medic
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 1.5
+  cooldown: 3000
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Triage
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 1
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderMedic ]
+    skill: Regular
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true
+
+# A shipwright in a gunned scrap-built hull, selling thrusters, drives and hull fittings for refits. The drives and the
+# repair kit make it a target, so it carries a gunner and two veteran guards.
+- type: wfEncounter
+  id: WFEncounterShipwrightTrader
+  name: wf-encounter-name-trader-shipwright
+  announcement: wf-encounter-announce-trader-shipwright
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 0.75
+  cooldown: 3000
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Mudskipper
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 2
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderShipwright ]
+    skill: Veteran
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true
+
+# A fence moving contraband and hard goods cheap. It trades with anyone who comes alongside, like the others, but its
+# hold is full of guns, so it keeps a gunner and three veteran guards.
+- type: wfEncounter
+  id: WFEncounterFenceTrader
+  name: wf-encounter-name-trader-fence
+  announcement: wf-encounter-announce-trader-fence
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 0.5
+  cooldown: 3000
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Scallywag
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 3
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderFence ]
+    skill: Veteran
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true
+
+# A freighter that has lost its way, adrift in open space: out of fuel, or with its thrusters wrecked, picked at random. Its
+# mayday says which. Put fuel in its generators or rebuild a thruster and its hands thank whoever helped, and pay them.
+# Then it casts off and flies on. The hulls run on fuel generators or an antimatter engine, which is what running dry empties.
+# Its crew let anyone aboard: rescuers have to be able to work.
+- type: wfEncounter
+  id: WFEncounterStrandedSmall
+  name: wf-encounter-name-stranded
+  start: Scheduled
+  category: Distress
+  cost: 1
+  weight: 1.5
+  minPlayers: 2
+  cooldown: 2400
+  duration: 2700
+  minDistance: 2000
+  maxDistance: 4000
+  stationClearance: 1500
+  rewards:
+  - side: freight
+    spesos: 10500
+    thanks: wf-encounter-reward-thanks-stranded
+  manifests: [ WFManifestGeneral, WFManifestFood, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels: [ Plutomkii, Piva, Twilight ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 1
+    guards: 0
+    captain: false
+    cargo: 6
+    stranded: Random
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    objectives:
+    - kind: Hold
+      duration: 60
+    - kind: Undock
+    - kind: GoTo
+      offset: 3500, 1500
+      range: 200
+
+- type: wfEncounter
+  id: WFEncounterStrandedMedium
+  name: wf-encounter-name-stranded
+  start: Scheduled
+  category: Distress
+  cost: 1
+  weight: 1
+  minPlayers: 3
+  cooldown: 2700
+  duration: 2700
+  minDistance: 2000
+  maxDistance: 4000
+  stationClearance: 1500
+  rewards:
+  - side: freight
+    spesos: 16500
+    thanks: wf-encounter-reward-thanks-stranded
+  manifests: [ WFManifestGeneral, WFManifestFood, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels: [ Brute, Argent ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 2
+    guards: 0
+    captain: true
+    cargo: 12
+    stranded: Random
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    objectives:
+    - kind: Hold
+      duration: 60
+    - kind: Undock
+    - kind: GoTo
+      offset: 4000, -1500
+      range: 200
+
+- type: wfEncounter
+  id: WFEncounterStrandedLarge
+  name: wf-encounter-name-stranded
+  start: Scheduled
+  category: Distress
+  cost: 2
+  weight: 0.5
+  minPlayers: 6
+  cooldown: 3000
+  duration: 3000
+  minDistance: 2000
+  maxDistance: 4000
+  stationClearance: 1500
+  rewards:
+  - side: freight
+    spesos: 24000
+    thanks: wf-encounter-reward-thanks-stranded
+  manifests: [ WFManifestGeneral, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels: [ Olympus, Autumn, Windreign ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 3
+    guards: 1
+    captain: true
+    cargo: 20
+    stranded: Random
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    objectives:
+    - kind: Hold
+      duration: 90
+    - kind: Undock
+    - kind: GoTo
+      offset: 4500, 2000
+      range: 200
+
+# A distress call that is a trap. The ship that makes it is wrecked as a stranded hulk would be, but its crew are pirates, and
+# a second pirate ship lies in wait off it, its label hidden and without a sector marker, until a player is close enough to be
+# worth jumping. The tell: a real call gives the ship's registered name as the scanner shows it, and its position, and this one
+# gives neither and names a hull class that is not the one on the scanner. It claims a Brute and the ship is a Piva or a Pluto.
+# The ambusher gives up after five minutes and then sits where it is until the encounter expires, so the scene can be searched.
+- type: wfEncounter
+  id: WFEncounterFalseMayday
+  name: wf-encounter-name-stranded
+  announcement: wf-encounter-announce-false-mayday
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: bait
+  start: Scheduled
+  category: Distress
+  cost: 2
+  weight: 0.5
+  minPlayers: 4
+  startRadius: 300
+  cooldown: 3000
+  duration: 2400
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  ships:
+  - key: bait
+    navigation: WFCrewNavigationFreight
+    vessels: [ Piva, Plutomkii ]
+    side: pirates
+    faction: PirateNF
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 2
+    skill: Green
+    distress: false
+    stranded: Thrusters
+  - key: ambusher
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 650
+    side: pirates
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    distress: false
+    evades: false
+    lurks: true
+    objectives:
+    - kind: Attack
+      target: "@player"
+      duration: 300
+    - kind: Hold
+
+# The trap again with a larger bait and two ships in wait, for more players. It claims an Olympus; the bait is a Brute or an Argent.
+- type: wfEncounter
+  id: WFEncounterFalseMaydayLarge
+  name: wf-encounter-name-stranded
+  announcement: wf-encounter-announce-false-mayday-large
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: bait
+  start: Scheduled
+  category: Distress
+  cost: 3
+  weight: 0.35
+  minPlayers: 7
+  startRadius: 350
+  cooldown: 3600
+  duration: 2700
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  ships:
+  - key: bait
+    navigation: WFCrewNavigationFreight
+    vessels: [ Brute, Argent ]
+    side: pirates
+    faction: PirateNF
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 3
+    skill: Green
+    distress: false
+    stranded: Thrusters
+  - key: ambusher
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -150, 700
+    side: pirates
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    distress: false
+    evades: false
+    lurks: true
+    objectives:
+    - kind: Attack
+      target: "@player"
+      duration: 300
+    - kind: Hold
+  - key: second
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 150, 750
+    side: pirates
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    distress: false
+    evades: false
+    lurks: true
+    objectives:
+    - kind: Attack
+      target: "@player"
+      duration: 300
+    - kind: Hold
+
+# Two sides fighting each other where they meet: a TSF patrol and the pirates it has run down, each ship on its own opponent
+# and on the next once that one is beaten. They wait for a player to come within sight before they begin, and nobody here is
+# after the players. Whoever helps one side beat the other is paid by it, and the one they helped counts them an ally.
+- type: wfEncounter
+  id: WFEncounterSkirmishPatrol
+  leash: 2500
+  name: wf-encounter-name-skirmish-patrol
+  announcement: wf-encounter-announce-skirmish-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.75
+  minPlayers: 3
+  startRadius: 1800
+  cooldown: 3000
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 28000
+    credits: 22
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-tsf
+  - side: pirates
+    spesos: 18000
+    thanks: wf-encounter-reward-thanks-skirmish-pirates
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: raider
+    - kind: Attack
+      target: wing
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: wing
+    - kind: Attack
+      target: raider
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 550
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    iffColor: "#ff5c5c"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 570
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: escort
+    - kind: Attack
+      target: patrol
+
+# Two raider bands settling a score: a Dynasty pair against a RedSail corsair in a heavier hull. Either pays for help against the other.
+- type: wfEncounter
+  id: WFEncounterSkirmishBands
+  leash: 2500
+  name: wf-encounter-name-skirmish-bands
+  announcement: wf-encounter-announce-skirmish-bands
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.5
+  minPlayers: 3
+  startRadius: 1800
+  cooldown: 3000
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: dynasty
+    spesos: 18000
+    thanks: wf-encounter-reward-thanks-skirmish-pirates
+  - side: corsairs
+    spesos: 22000
+    thanks: wf-encounter-reward-thanks-skirmish-corsairs
+  ships:
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: dynasty
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    iffColor: "#ff5c5c"
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: dynasty
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: corsair
+    navigation: WFCrewNavigationRaider
+    vessel: Scallywag
+    offset: 0, 600
+    side: corsairs
+    faction: PirateNF
+    distress: false
+    company: RedSailCorsairs
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    evades: false
+    iffColor: "#c792ff"
+    objectives:
+    - kind: Attack
+      target: raider
+    - kind: Attack
+      target: wing
+
+# A TSF patrol against a RedSail crew in a shielded gunboat. TSF is at war with the corsairs, but that is their own business.
+- type: wfEncounter
+  id: WFEncounterSkirmishCorsairs
+  leash: 2500
+  name: wf-encounter-name-skirmish-corsairs
+  announcement: wf-encounter-announce-skirmish-corsairs
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.5
+  minPlayers: 3
+  startRadius: 1800
+  cooldown: 3000
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 28000
+    credits: 22
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-tsf
+  - side: corsairs
+    spesos: 22000
+    thanks: wf-encounter-reward-thanks-skirmish-corsairs
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: corsair
+    navigation: WFCrewNavigationRaider
+    vessel: Mudskipper
+    offset: 0, 600
+    side: corsairs
+    faction: PirateNF
+    distress: false
+    company: RedSailCorsairs
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    evades: false
+    iffColor: "#ff5c5c"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort
+
+# The two navies meeting in open space: a TSF patrol and a Dynasty patrol, each ship on its own opponent and on the next once that
+# one is beaten. They wait for a player to come within sight before they begin, and nobody here is after the players. Whoever
+# helps one side beat the other is paid by it, and the one they helped counts them an ally.
+- type: wfEncounter
+  id: WFEncounterSkirmishNavies
+  leash: 2500
+  name: wf-encounter-name-skirmish-navies
+  announcement: wf-encounter-announce-skirmish-navies
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.75
+  minPlayers: 3
+  requiresWar: true
+  startRadius: 1800
+  cooldown: 3000
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 28000
+    credits: 22
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-tsf
+  - side: pdv
+    spesos: 28000
+    credits: 22
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-pdv
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: lead
+    - kind: Attack
+      target: wing
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: wing
+    - kind: Attack
+      target: lead
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 550
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 570
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: escort
+    - kind: Attack
+      target: patrol
+
+# A Dynasty patrol against a RedSail crew in a shielded gunboat, the counterpart of the TSF's fight with the corsairs.
+- type: wfEncounter
+  id: WFEncounterSkirmishPdvCorsairs
+  leash: 2500
+  name: wf-encounter-name-skirmish-pdv-corsairs
+  announcement: wf-encounter-announce-skirmish-pdv-corsairs
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.5
+  minPlayers: 3
+  startRadius: 1800
+  cooldown: 3000
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: pdv
+    spesos: 28000
+    credits: 22
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-pdv
+  - side: corsairs
+    spesos: 22000
+    thanks: wf-encounter-reward-thanks-skirmish-corsairs
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: corsair
+    navigation: WFCrewNavigationRaider
+    vessel: Mudskipper
+    offset: 0, 600
+    side: corsairs
+    faction: PirateNF
+    distress: false
+    company: RedSailCorsairs
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    evades: false
+    iffColor: "#c792ff"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort
+
+# The same fight with the guard up: every ship warns off and then fires on anything that comes near, the players too, whichever
+# side they are on until they have fought for one. Two raider bands, in the smaller version of it.
+- type: wfEncounter
+  id: WFEncounterHostileSkirmishBands
+  leash: 2500
+  name: wf-encounter-name-skirmish-hostile
+  announcement: wf-encounter-announce-skirmish-hostile
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.5
+  minPlayers: 5
+  startRadius: 1800
+  cooldown: 3600
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: dynasty
+    spesos: 20000
+    thanks: wf-encounter-reward-thanks-skirmish-pirates
+  - side: corsairs
+    spesos: 24000
+    thanks: wf-encounter-reward-thanks-skirmish-corsairs
+  ships:
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: dynasty
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pirate-zone
+    zoneTargets: Everyone
+    iffColor: "#ff5c5c"
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: dynasty
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pirate-zone
+    zoneTargets: Everyone
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: corsair
+    navigation: WFCrewNavigationRaider
+    vessel: Mudskipper
+    offset: 0, 600
+    side: corsairs
+    faction: PirateNF
+    distress: false
+    company: RedSailCorsairs
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pirate-zone
+    zoneTargets: Everyone
+    iffColor: "#c792ff"
+    objectives:
+    - kind: Attack
+      target: raider
+    - kind: Attack
+      target: wing
+
+# The guarded fight between a TSF pair and a pair of raiders. The patrol warns in its own words, the raiders in theirs.
+- type: wfEncounter
+  id: WFEncounterHostileSkirmishPatrol
+  leash: 2500
+  name: wf-encounter-name-skirmish-hostile
+  announcement: wf-encounter-announce-skirmish-hostile
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 3
+  weight: 0.35
+  minPlayers: 6
+  startRadius: 1800
+  cooldown: 3600
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 30000
+    credits: 22
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-tsf
+  - side: pirates
+    spesos: 20000
+    thanks: wf-encounter-reward-thanks-skirmish-pirates
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneTargets: Everyone
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: raider
+    - kind: Attack
+      target: wing
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneTargets: Everyone
+    objectives:
+    - kind: Attack
+      target: wing
+    - kind: Attack
+      target: raider
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 550
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pirate-zone
+    zoneTargets: Everyone
+    iffColor: "#ff5c5c"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 570
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pirate-zone
+    zoneTargets: Everyone
+    objectives:
+    - kind: Attack
+      target: escort
+    - kind: Attack
+      target: patrol
+
+# The guarded fight between the two navies: a TSF pair and a Dynasty pair, each warning in its own words, and the players too are
+# fired on if they come near.
+- type: wfEncounter
+  id: WFEncounterHostileSkirmishNavies
+  leash: 2500
+  name: wf-encounter-name-skirmish-hostile
+  announcement: wf-encounter-announce-skirmish-hostile
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 3
+  weight: 0.35
+  minPlayers: 6
+  requiresWar: true
+  startRadius: 1800
+  cooldown: 3600
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 30000
+    credits: 22
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-tsf
+  - side: pdv
+    spesos: 30000
+    credits: 22
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-pdv
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneTargets: Everyone
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: lead
+    - kind: Attack
+      target: wing
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneTargets: Everyone
+    objectives:
+    - kind: Attack
+      target: wing
+    - kind: Attack
+      target: lead
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 550
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: Everyone
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 570
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    skill: Regular
+    evades: false
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: Everyone
+    objectives:
+    - kind: Attack
+      target: escort
+    - kind: Attack
+      target: patrol
+
+# A smuggler's run: a small freighter with a black market hold, wandering open space on no manifest and in no hurry. It warns
+# off whatever comes near and fires on whatever ignores it, and the crew shoot boarders. Nothing is announced until it has been
+# fought, and then only as a rumour. The hold is a few crates, and it is not worth hunting down for the haul.
+- type: wfEncounter
+  id: WFEncounterBlackMarketSmall
+  name: wf-encounter-name-blackmarket
+  announcement: wf-encounter-announce-blackmarket
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  cost: 1
+  weight: 0.75
+  minPlayers: 3
+  hidden: true
+  cooldown: 5400
+  duration: 3600
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  manifests: [ WFManifestContraband ]
+  ships:
+  - key: smuggler
+    navigation: WFCrewNavigationFreight
+    vessel: Twilight
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 2
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    cargo: 6
+    skill: Regular
+    wander: 5
+    wanderRadius: 3000
+    wanderPause: 90
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+
+- type: wfEncounter
+  id: WFEncounterBlackMarketMedium
+  name: wf-encounter-name-blackmarket
+  announcement: wf-encounter-announce-blackmarket
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  cost: 2
+  weight: 0.5
+  minPlayers: 5
+  hidden: true
+  cooldown: 5400
+  duration: 3600
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  manifests: [ WFManifestContraband ]
+  ships:
+  - key: smuggler
+    navigation: WFCrewNavigationFreight
+    vessels: [ Brute, Zhuangzi ]
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 3
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    cargo: 10
+    skill: Regular
+    wander: 5
+    wanderRadius: 3000
+    wanderPause: 90
+    warnRange: 1000
+    attackRange: 400
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+
+# The big one has two escorts that fly on it and fire inside their own short range, and a bigger hold.
+- type: wfEncounter
+  id: WFEncounterBlackMarketLarge
+  name: wf-encounter-name-blackmarket
+  announcement: wf-encounter-announce-blackmarket
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  cost: 3
+  weight: 0.35
+  minPlayers: 8
+  hidden: true
+  cooldown: 5400
+  duration: 3600
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  manifests: [ WFManifestContraband ]
+  ships:
+  - key: smuggler
+    navigation: WFCrewNavigationFreight
+    vessels: [ Olympus, Autumn, Windreign ]
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 3
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    cargo: 16
+    skill: Regular
+    wander: 5
+    wanderRadius: 3000
+    wanderPause: 90
+    warnRange: 1200
+    attackRange: 500
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+  - key: escort
+    navigation: WFCrewNavigationRaider
+    vessels: [ Gadfly, Scallywag ]
+    offset: 220, 0
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 0
+    guards: 1
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    skill: Regular
+    attackRange: 350
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Escort
+      target: smuggler
+  - key: picket
+    navigation: WFCrewNavigationRaider
+    vessels: [ Gadfly, Scallywag ]
+    offset: -220, 0
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 0
+    guards: 1
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    skill: Regular
+    attackRange: 350
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Escort
+      target: smuggler
+
+# A dweller hulk: a hull adrift with no crew and no fuel, its decks littered, and squatters living aboard under a chief. They
+# attack whoever comes in. The chief leaves the ship's papers when he dies; used aboard, with an ID card that holds no deed,
+# they register the ship to the player, who then has to fuel it. A claimed hulk sells for a quarter of its worth.
+- type: wfEncounter
+  id: WFEncounterDwellerHulk
+  name: wf-encounter-name-hulk
+  announcement: wf-encounter-announce-hulk
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Distress
+  icon: Ghost
+  cost: 1
+  weight: 0.6
+  minPlayers: 2
+  cooldown: 3600
+  duration: 3000
+  minDistance: 2000
+  maxDistance: 4500
+  stationClearance: 2000
+  ships:
+  - key: hulk
+    vessels: [ Piva, Plutomkii, Twilight ]
+    side: hulk
+    distress: false
+    derelict:
+      dwellers: 6
+      dwellerPool: [ WFMobDweller, WFMobDweller, WFMobDwellerHooded ]
+      king: WFMobDwellerKing
+      debris: 30
+      debrisPool: [ RandomSpawner, RandomSpawner, SalvageSpawnerScrapCommon, ShardGlass, PartRodMetal1, Cobweb1 ]
+      resale: 0.25
+
+# The same with a bigger hull and more squatters, for more players.
+- type: wfEncounter
+  id: WFEncounterDwellerHulkLarge
+  name: wf-encounter-name-hulk
+  announcement: wf-encounter-announce-hulk
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Distress
+  icon: Ghost
+  cost: 1
+  weight: 0.35
+  minPlayers: 5
+  cooldown: 3600
+  duration: 3000
+  minDistance: 2000
+  maxDistance: 4500
+  stationClearance: 2000
+  ships:
+  - key: hulk
+    vessels: [ Brute, Argent ]
+    side: hulk
+    distress: false
+    derelict:
+      dwellers: 11
+      dwellerPool: [ WFMobDweller, WFMobDweller, WFMobDwellerHooded ]
+      king: WFMobDwellerKing
+      debris: 50
+      debrisPool: [ RandomSpawner, RandomSpawner, SalvageSpawnerScrapCommon, ShardGlass, PartRodMetal1, Cobweb1 ]
+      resale: 0.25
+
+# A Federation frigate ship beset by a pirate pack: two raiders and four fighters, all on it at once from every side. Its
+# gunner shares the guns out among the attackers, each gun on the one nearest it. It calls for help on the common channel;
+# whoever helps beat the pirates off is paid by the Federation, well, and TSF players get military credits as well.
+- type: wfEncounter
+  id: WFEncounterFrigateUnderAttack
+  leash: 3000
+  name: wf-encounter-name-frigate
+  announcement: wf-encounter-announce-frigate
+  announceOnRadio: true
+  announcer: frigate
+  start: Scheduled
+  category: Distress
+  icon: Swords
+  cost: 4
+  weight: 0.8
+  minPlayers: 6
+  cooldown: 3600
+  duration: 3000
+  startRadius: 2500
+  minDistance: 3000
+  maxDistance: 4500
+  stationClearance: 2500
+  rewards:
+  - side: tsf
+    spesos: 90000
+    credits: 52
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  ships:
+  - key: frigate
+    navigation: WFCrewNavigationWarship
+    vessels: [ Fujian, Altair, Andromeda ]
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    deckhands: 3
+    guards: 2
+    objectives:
+    - kind: Attack
+      target: raider
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, 750
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: second
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, -750
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 700, 250
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingtwo
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -700, 250
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingthree
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 650, -350
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingfour
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -650, -350
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: frigate
+
+# The Dynasty's frigate ship caught by a Federation strike group: five fighters on it at once. As above, with the Vanguard paying.
+- type: wfEncounter
+  id: WFEncounterPdvFrigateUnderAttack
+  leash: 3000
+  name: wf-encounter-name-pdv-frigate
+  announcement: wf-encounter-announce-pdv-frigate
+  announceOnRadio: true
+  announcer: frigate
+  start: Scheduled
+  category: Distress
+  icon: Swords
+  cost: 4
+  weight: 0.8
+  minPlayers: 6
+  requiresWar: true
+  cooldown: 3600
+  duration: 3000
+  startRadius: 2500
+  minDistance: 3000
+  maxDistance: 4500
+  stationClearance: 2500
+  rewards:
+  - side: pdv
+    spesos: 90000
+    credits: 52
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: frigate
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kortik, Europa, Saintie ]
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    iffColor: "#ffae3d"
+    deckhands: 3
+    guards: 2
+    objectives:
+    - kind: Attack
+      target: striker
+  - key: striker
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 750
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 700, 250
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -700, 250
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingthree
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 650, -350
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingfour
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -650, -350
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate
+
+# Heavier patrols that come and go: a gunboat with two fighters holds station off a station for a while and leaves. They
+# mind the same things as the round-start pairs, with a longer reach.
+- type: wfEncounter
+  id: WFEncounterTsfPatrolHeavy
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  name: wf-encounter-name-patrol-heavy
+  announcement: wf-encounter-announce-patrol-heavy
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  cost: 2
+  weight: 0.9
+  minPlayers: 3
+  placement: Station
+  standoff: 600
+  cooldown: 3600
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Banshee, Dagger, Fracture, Calypso ]
+    deckhands: 1
+    guards: 1
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneTargets: AtWar
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 750
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 130, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -130, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+- type: wfEncounter
+  id: WFEncounterPdvPatrolHeavy
+  avoidStations: [ TSF, Caelestinus ]
+  name: wf-encounter-name-pdv-patrol-heavy
+  announcement: wf-encounter-announce-pdv-patrol-heavy
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  cost: 2
+  weight: 0.9
+  minPlayers: 3
+  placement: Station
+  standoff: 600
+  cooldown: 3600
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Tethys, Neptune ]
+    deckhands: 1
+    guards: 1
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 750
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 130, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -130, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+# A remnant of the Union's fleet, still flying the flag in open space: a gunboat and a fighter that patrol a patch of
+# nothing, leg by leg around where they were found, and warn everyone off it. They take no company's word for anything
+# and fire on whoever presses in.
+- type: wfEncounter
+  id: WFEncounterUsspRemnantPatrol
+  name: wf-encounter-name-ussp-patrol
+  announcement: wf-encounter-announce-ussp-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  cost: 2
+  weight: 0.6
+  minPlayers: 3
+  cooldown: 4200
+  duration: 2400
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 2500
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Natisk, Akula, Tayfun, Sekunda ]
+    deckhands: 1
+    guards: 1
+    side: remnant
+    faction: USSP
+    company: USSP
+    profile: WFCrewProfileUssp
+    docking: Hostile
+    boarding: Hostile
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1100
+    attackRange: 550
+    zoneLines: wf-encounter-ussp-zone
+    zoneTargets: Everyone
+    iffColor: "#d94c4c"
+    wander: 12
+    wanderRadius: 1500
+    wanderPause: 60
+    objectives:
+    - kind: Hold
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Svinya, Strayk ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 140, 0
+    side: remnant
+    faction: USSP
+    company: USSP
+    profile: WFCrewProfileUssp
+    docking: Hostile
+    boarding: Hostile
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1100
+    attackRange: 550
+    zoneLines: wf-encounter-ussp-zone
+    zoneTargets: Everyone
+    objectives:
+    - kind: Escort
+      target: lead
+
+# A capital fleet action, for admins to set off: a Federation capital ship and a Dynasty one, each with a screen of two
+# frigates and a wing of fighters, each side on the other. Players may join either; whichever side they help pays when it
+# wins. Never scheduled.
+- type: wfEncounter
+  id: WFEncounterFleetBattle
+  leash: 4000
+  name: wf-encounter-name-fleet-battle
+  announcement: wf-encounter-announce-fleet-battle
+  announcementSender: wf-encounter-sender-traffic
+  announcementSound:
+    path: /Audio/Misc/gamma.ogg
+    params:
+      volume: -2
+  announcementColor: "#db7093"
+  start: Manual
+  category: Threat
+  icon: Flag
+  cost: 8
+  weight: 0
+  minPlayers: 0
+  duration: 3600
+  minDistance: 3000
+  maxDistance: 5000
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 150000
+    credits: 80
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  - side: pdv
+    spesos: 150000
+    credits: 80
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: dreadnought
+    navigation: WFCrewNavigationWarship
+    vessel: Flyssa
+    deckhands: 4
+    guards: 3
+    offset: -1000, 0
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: battleship
+  - key: carrier
+    navigation: WFCrewNavigationWarship
+    vessels: [ Fujian, Altair, Andromeda ]
+    deckhands: 3
+    guards: 2
+    offset: -900, 400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: flagship
+  - key: carriertwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ Fujian, Altair, Andromeda ]
+    deckhands: 3
+    guards: 2
+    offset: -900, -400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: flagshiptwo
+  - key: fighter
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -700, -150
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: battleship
+  - key: fightertwo
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -650, 600
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: wing
+  - key: fighterthree
+    navigation: WFCrewNavigationWarship
+    vessel: Paladin
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -650, -600
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: wingtwo
+  - key: battleship
+    navigation: WFCrewNavigationWarship
+    vessel: Saturn
+    deckhands: 4
+    guards: 3
+    offset: 1000, 0
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: dreadnought
+  - key: flagship
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kortik, Europa, Saintie ]
+    deckhands: 3
+    guards: 2
+    offset: 900, -400
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: carrier
+  - key: flagshiptwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kortik, Europa, Saintie ]
+    deckhands: 3
+    guards: 2
+    offset: 900, 400
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: carriertwo
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 700, 150
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: dreadnought
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 650, -600
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: fightertwo
+  - key: wingthree
+    navigation: WFCrewNavigationWarship
+    vessel: Kresta
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 650, 600
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: fighterthree
+
+# A capital ship under attack: the Federation's Flyssa beset by a whole pirate flotilla, or the Dynasty's Saturn by a
+# Federation strike wing. The biggest fights the storyteller sets on its own, for a full server.
+- type: wfEncounter
+  id: WFEncounterCapitalUnderAttack
+  leash: 3500
+  name: wf-encounter-name-capital
+  announcement: wf-encounter-announce-capital
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: capital
+  start: Scheduled
+  category: Distress
+  icon: Swords
+  cost: 6
+  weight: 0.4
+  minPlayers: 9
+  cooldown: 5400
+  duration: 3600
+  startRadius: 2500
+  minDistance: 3000
+  maxDistance: 5000
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 150000
+    credits: 80
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  ships:
+  - key: capital
+    navigation: WFCrewNavigationWarship
+    vessel: Flyssa
+    deckhands: 4
+    guards: 3
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    objectives:
+    - kind: Attack
+      target: raider
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, 900
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: second
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, -900
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: third
+    navigation: WFCrewNavigationRaider
+    vessels: [ Fenrir, Garm, Ganymede ]
+    deckhands: 2
+    offset: 900, 0
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 800, 400
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingtwo
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -800, 400
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingthree
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 800, -400
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfour
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -800, -400
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfive
+    navigation: WFCrewNavigationRaider
+    vessels: [ Fenrir, Ganymede, Vulture ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -900, 0
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+
+- type: wfEncounter
+  id: WFEncounterPdvCapitalUnderAttack
+  leash: 3500
+  name: wf-encounter-name-pdv-capital
+  announcement: wf-encounter-announce-pdv-capital
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: capital
+  start: Scheduled
+  category: Distress
+  icon: Swords
+  cost: 6
+  weight: 0.4
+  minPlayers: 9
+  requiresWar: true
+  cooldown: 5400
+  duration: 3600
+  startRadius: 2500
+  minDistance: 3000
+  maxDistance: 5000
+  stationClearance: 3000
+  rewards:
+  - side: pdv
+    spesos: 150000
+    credits: 80
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: capital
+    navigation: WFCrewNavigationWarship
+    vessel: Saturn
+    deckhands: 4
+    guards: 3
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: striker
+  - key: striker
+    navigation: WFCrewNavigationWarship
+    vessels: [ Banshee, Dagger, Calypso ]
+    deckhands: 1
+    guards: 1
+    offset: 0, 900
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: strikertwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ Banshee, Dagger, Calypso ]
+    deckhands: 1
+    guards: 1
+    offset: 0, -900
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 800, 400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -800, 400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingthree
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 800, -400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfour
+    navigation: WFCrewNavigationWarship
+    vessel: Paladin
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -800, -400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfive
+    navigation: WFCrewNavigationWarship
+    vessel: Ocelot
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 900, 0
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+
+# A supercapital under attack, for admins: the Federation's Chengdu beset by a pirate flotilla of raiders, heavies, a
+# frigate and six fighters, or the Dynasty's Jupiter by a Federation strike force. Never scheduled.
+- type: wfEncounter
+  id: WFEncounterSupercapitalUnderAttack
+  leash: 4500
+  name: wf-encounter-name-supercapital
+  announcement: wf-encounter-announce-supercapital
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: capital
+  start: Manual
+  category: Distress
+  icon: Swords
+  cost: 10
+  weight: 0
+  minPlayers: 0
+  cooldown: 5400
+  duration: 4200
+  startRadius: 2500
+  minDistance: 3500
+  maxDistance: 5500
+  stationClearance: 3500
+  rewards:
+  - side: tsf
+    spesos: 250000
+    credits: 130
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  ships:
+  - key: capital
+    navigation: WFCrewNavigationWarship
+    vessel: WFChengdu
+    deckhands: 5
+    guards: 4
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: raider
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, 1200
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: second
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, -1200
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: third
+    navigation: WFCrewNavigationRaider
+    vessels: [ Fenrir, Garm, Ganymede ]
+    deckhands: 2
+    offset: 1200, 0
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: fourth
+    navigation: WFCrewNavigationRaider
+    vessels: [ Fenrir, Garm, Ganymede ]
+    deckhands: 2
+    offset: -1200, 0
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: fifth
+    navigation: WFCrewNavigationRaider
+    vessels: [ Fenrir, Ganymede, Vulture ]
+    deckhands: 2
+    offset: 900, 900
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 1000, 450
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingtwo
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -1000, 450
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingthree
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 1000, -450
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfour
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -1000, -450
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfive
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 450, 1000
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingsix
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -450, -1000
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+
+- type: wfEncounter
+  id: WFEncounterPdvSupercapitalUnderAttack
+  leash: 4500
+  name: wf-encounter-name-pdv-supercapital
+  announcement: wf-encounter-announce-pdv-supercapital
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: capital
+  start: Manual
+  category: Distress
+  icon: Swords
+  cost: 10
+  weight: 0
+  minPlayers: 0
+  cooldown: 5400
+  duration: 4200
+  startRadius: 2500
+  minDistance: 3500
+  maxDistance: 5500
+  stationClearance: 3500
+  rewards:
+  - side: pdv
+    spesos: 250000
+    credits: 130
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: capital
+    navigation: WFCrewNavigationWarship
+    vessel: WFJupiter
+    deckhands: 5
+    guards: 4
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: striker
+  - key: striker
+    navigation: WFCrewNavigationWarship
+    vessels: [ Banshee, Dagger, Calypso ]
+    deckhands: 1
+    guards: 1
+    offset: 0, 1200
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: strikertwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ Banshee, Dagger, Calypso ]
+    deckhands: 1
+    guards: 1
+    offset: 0, -1200
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: strikerthree
+    navigation: WFCrewNavigationWarship
+    vessels: [ Banshee, Dagger, Calypso ]
+    deckhands: 1
+    guards: 1
+    offset: 1200, 0
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: strikerfour
+    navigation: WFCrewNavigationWarship
+    vessels: [ Fujian, Altair, Andromeda ]
+    deckhands: 3
+    guards: 2
+    offset: -1200, 0
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 1000, 450
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -1000, 450
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingthree
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 1000, -450
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfour
+    navigation: WFCrewNavigationWarship
+    vessel: Paladin
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -1000, -450
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfive
+    navigation: WFCrewNavigationWarship
+    vessel: Ocelot
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 450, 1000
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingsix
+    navigation: WFCrewNavigationWarship
+    vessel: Paladin
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -450, -1000
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+
+# The fleet action at full scale, for admins: each side brings its supercapital, a capital ship and a wing of fighters.
+# The grandest alarm there is.
+- type: wfEncounter
+  id: WFEncounterFleetBattleLarge
+  leash: 6000
+  name: wf-encounter-name-fleet-battle-large
+  announcement: wf-encounter-announce-fleet-battle-large
+  announcementSender: wf-encounter-sender-traffic
+  announcementSound:
+    path: /Audio/Misc/epsilon.ogg
+    params:
+      volume: -2
+  announcementColor: "#ff3030"
+  start: Manual
+  category: Threat
+  icon: Flag
+  cost: 14
+  weight: 0
+  minPlayers: 0
+  cooldown: 5400
+  duration: 4800
+  startRadius: 2500
+  minDistance: 3500
+  maxDistance: 5500
+  stationClearance: 3500
+  rewards:
+  - side: tsf
+    spesos: 250000
+    credits: 130
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  - side: pdv
+    spesos: 250000
+    credits: 130
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: supercapital
+    navigation: WFCrewNavigationWarship
+    vessel: WFChengdu
+    deckhands: 5
+    guards: 4
+    offset: -1500, 0
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: supership
+  - key: dreadnought
+    navigation: WFCrewNavigationWarship
+    vessel: Flyssa
+    deckhands: 4
+    guards: 3
+    offset: -1300, 700
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: battleship
+  - key: fighter
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -1000, 250
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: supership
+  - key: fightertwo
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -1000, -450
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: battleship
+  - key: fighterthree
+    navigation: WFCrewNavigationWarship
+    vessel: Paladin
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -950, 900
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: wing
+  - key: fighterfour
+    navigation: WFCrewNavigationWarship
+    vessel: Ocelot
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -950, -900
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: wingtwo
+  - key: supership
+    navigation: WFCrewNavigationWarship
+    vessel: WFJupiter
+    deckhands: 5
+    guards: 4
+    offset: 1500, 0
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    skill: Regular
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: supercapital
+  - key: battleship
+    navigation: WFCrewNavigationWarship
+    vessel: Saturn
+    deckhands: 4
+    guards: 3
+    offset: 1300, -700
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: dreadnought
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 1000, -250
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: supercapital
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 1000, 450
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: dreadnought
+  - key: wingthree
+    navigation: WFCrewNavigationWarship
+    vessel: Kresta
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 950, -900
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: fighterthree
+  - key: wingfour
+    navigation: WFCrewNavigationWarship
+    vessel: Kynda
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 950, 900
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: fighterfour
+
+# The exotic dealers: an armourer with ship guns that never reach a catalogue and a systems broker with shields and drives,
+# travelling together on a Blackhawk corvette with four veteran guards aboard and two mercenary gunboats on escort. Rare,
+# dear, and well protected: the guns alone are worth a raid, which is what the escort is for. Like every trader they let
+# anyone come alongside and only drive attackers off.
+- type: wfEncounter
+  id: WFEncounterExoticTrader
+  name: wf-encounter-name-trader-exotic
+  announcement: wf-encounter-announce-trader-exotic
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 2
+  weight: 0.35
+  cooldown: 4800
+  duration: 3600
+  minPlayers: 6
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessels: [ Xinhua, Petra, Hornet ]
+    side: trader
+    company: blackhawkpmc
+    profile: WFCrewProfileMercenary
+    captain: false
+    deckhands: 0
+    guards: 4
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderArmourer, WFTraderSystemsBroker ]
+    skill: Veteran
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessels: [ Venom, Yukikaze, Kite ]
+    offset: 150, 0
+    side: trader
+    company: blackhawkpmc
+    profile: WFCrewProfileMercenary
+    captain: false
+    deckhands: 0
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    skill: Veteran
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1500
+    objectives:
+    - kind: Escort
+      target: trader
+  - key: escort2
+    navigation: WFCrewNavigationWarship
+    vessels: [ Venom, Yukikaze, Kite ]
+    offset: -150, 0
+    side: trader
+    company: blackhawkpmc
+    profile: WFCrewProfileMercenary
+    captain: false
+    deckhands: 0
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    skill: Veteran
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1500
+    objectives:
+    - kind: Escort
+      target: trader
+
+# Frigate patrols: a frigate with a wing of two fighters circles off a station for a while. Rare; it minds the same
+# enemies as the smaller patrols, with a longer reach.
+- type: wfEncounter
+  id: WFEncounterTsfFrigatePatrol
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  name: wf-encounter-name-frigate-patrol
+  announcement: wf-encounter-announce-frigate-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  icon: Flag
+  cost: 4
+  weight: 0.4
+  minPlayers: 6
+  placement: Station
+  standoff: 900
+  cooldown: 5400
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Fujian, Altair, Andromeda ]
+    deckhands: 3
+    guards: 2
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 900
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing2
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -160, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+# The Dynasty's frigate patrol.
+- type: wfEncounter
+  id: WFEncounterPdvFrigatePatrol
+  avoidStations: [ TSF, Caelestinus ]
+  name: wf-encounter-name-pdv-frigate-patrol
+  announcement: wf-encounter-announce-pdv-frigate-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  icon: Flag
+  cost: 4
+  weight: 0.4
+  minPlayers: 6
+  placement: Station
+  standoff: 900
+  cooldown: 5400
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kortik, Europa, Saintie ]
+    deckhands: 3
+    guards: 2
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 900
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing2
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -160, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+# Capital patrols: the Federation's Flyssa or the Dynasty's Saturn with three fighters, circling off a station. Very
+# rare, and the biggest thing a faction sends out on its own.
+- type: wfEncounter
+  id: WFEncounterTsfCapitalPatrol
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  name: wf-encounter-name-capital-patrol
+  announcement: wf-encounter-announce-capital-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  icon: Flag
+  cost: 6
+  weight: 0.2
+  minPlayers: 9
+  placement: Station
+  standoff: 900
+  cooldown: 7200
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessel: Flyssa
+    deckhands: 4
+    guards: 3
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 900
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 200, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing2
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -200, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing3
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, -200
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+# The Dynasty's capital patrol.
+- type: wfEncounter
+  id: WFEncounterPdvCapitalPatrol
+  avoidStations: [ TSF, Caelestinus ]
+  name: wf-encounter-name-pdv-capital-patrol
+  announcement: wf-encounter-announce-pdv-capital-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  icon: Flag
+  cost: 6
+  weight: 0.2
+  minPlayers: 9
+  placement: Station
+  standoff: 900
+  cooldown: 7200
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessel: Saturn
+    deckhands: 4
+    guards: 3
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 900
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 200, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing2
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -200, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing3
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, -200
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+# Supercapital patrols, for admins to set off: the Federation's Chengdu or the Dynasty's Jupiter with four fighters, circling
+# off a station. Never scheduled.
+- type: wfEncounter
+  id: WFEncounterTsfSupercapitalPatrol
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  name: wf-encounter-name-supercapital-patrol
+  announcement: wf-encounter-announce-supercapital-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Manual
+  category: Patrol
+  icon: Flag
+  cost: 10
+  weight: 0
+  minPlayers: 0
+  placement: Station
+  standoff: 1200
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessel: WFChengdu
+    deckhands: 5
+    guards: 4
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 1200
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 250, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing2
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -250, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing3
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, -250
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing4
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 250
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+# The Dynasty's supercapital patrol.
+- type: wfEncounter
+  id: WFEncounterPdvSupercapitalPatrol
+  avoidStations: [ TSF, Caelestinus ]
+  name: wf-encounter-name-pdv-supercapital-patrol
+  announcement: wf-encounter-announce-pdv-supercapital-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Manual
+  category: Patrol
+  icon: Flag
+  cost: 10
+  weight: 0
+  minPlayers: 0
+  placement: Station
+  standoff: 1200
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessel: WFJupiter
+    deckhands: 5
+    guards: 4
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 1200
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 250, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing2
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -250, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing3
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, -250
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing4
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 250
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead

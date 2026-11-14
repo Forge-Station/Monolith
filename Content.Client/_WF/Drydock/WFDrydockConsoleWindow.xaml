@@ -1,0 +1,17 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:drydock="clr-namespace:Content.Client._WF.Drydock"
+                      MinSize="860 560"
+                      Title="{Loc 'drydock-ui-title'}">
+    <!-- Bound controls; the constructor houses them in the instrument deck. -->
+    <BoxContainer Name="Body" Orientation="Horizontal" Margin="10" SeparationOverride="6">
+        <drydock:WFDrydockBerthPlot Name="Plot"/>
+        <Label Name="NoticeLabel" ClipText="True" HorizontalExpand="True"/>
+        <Button Name="RepairButton" HorizontalExpand="True" MinSize="0 38"/>
+        <controls:ConfirmButton Name="BreakButton" HorizontalExpand="True" MinSize="0 38"/>
+        <BoxContainer Name="RefitContainer" Orientation="Vertical" SeparationOverride="10"/>
+        <Button Name="BerthLightsButton" ToggleMode="True" HorizontalExpand="True"/>
+        <Label Name="BookedLabel" ClipText="True" HorizontalExpand="True"/>
+        <Button Name="CancelBookingButton" HorizontalExpand="True" Text="{Loc 'drydock-ui-cancel-booking'}"/>
+    </BoxContainer>
+</controls:FancyWindow>

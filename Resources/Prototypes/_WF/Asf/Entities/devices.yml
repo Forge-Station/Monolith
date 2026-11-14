@@ -1,0 +1,177 @@
+- type: entity
+  parent: EncryptionKey
+  id: WFAsfEncryptionKey
+  components:
+  - type: EncryptionKey
+    channels:
+    - WFAsf
+    defaultChannel: WFAsf
+  - type: Sprite
+    layers:
+    - state: crypt_gray
+    - state: com_label
+
+- type: entity
+  parent: ClothingHeadsetAlt
+  id: WFAsfClothingHeadset
+  components:
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/science.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/science.rsi
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - WFAsfEncryptionKey
+
+- type: entity
+  parent: DoorElectronics
+  id: WFAsfDoorElectronics
+  suffix: ASF, Locked
+  components:
+  - type: AccessReader
+    access: [["WFAsf"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: WFAsfDoorElectronicsBridge
+  suffix: ASF Bridge, Locked
+  components:
+  - type: AccessReader
+    access: [["WFAsfBridge"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: WFAsfDoorElectronicsSecurity
+  suffix: ASF Security, Locked
+  components:
+  - type: AccessReader
+    access: [["WFAsfSecurity"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: WFAsfDoorElectronicsCommand
+  suffix: ASF Command, Locked
+  components:
+  - type: AccessReader
+    access: [["WFAsfCommand"]]
+
+- type: entity
+  parent: AirlockScience
+  id: WFAsfAirlock
+  suffix: ASF, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronics ]
+
+- type: entity
+  parent: AirlockScienceGlass
+  id: WFAsfAirlockGlass
+  suffix: ASF, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronics ]
+
+- type: entity
+  parent: AirlockScience
+  id: WFAsfAirlockCommand
+  suffix: ASF Command, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronicsCommand ]
+
+- type: entity
+  parent: AirlockScience
+  id: WFAsfAirlockBridge
+  suffix: ASF Bridge, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronicsBridge ]
+
+- type: entity
+  parent: AirlockScience
+  id: WFAsfAirlockSecurity
+  suffix: ASF Security, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronicsSecurity ]
+
+- type: entity
+  parent: LockerSecurity
+  id: WFAsfLockerSecurity
+  components:
+  - type: AccessReader
+    access: [["WFAsfSecurity"]]
+
+- type: entity
+  parent: BaseCarrierComputer
+  id: WFAsfComputerShipyard
+  suffix: ASF
+  components:
+  - type: Sprite
+    sprite: _NF/Structures/Machines/computers.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: _WF/Asf/Structures/shipyard_screen.rsi
+      state: shipyard_asf
+    - map: ["computerLayerKeys"]
+      state: telesci_key
+  - type: ShipyardListing
+    shuttles:
+    - WFAsfGleaner
+    - WFAsfPorter
+    - WFAsfLamplighter
+    - WFAsfVigil
+    - WFAsfBulwark
+    - WFAsfGuardian
+    - WFAsfLodestar
+  # Checked by company, not ID: a buyer's only ID card is in the console's slot while they buy.
+  - type: CompanyAccessReader
+    requiredCompanies:
+    - WFAsf
+
+- type: entity
+  parent: Thruster
+  id: WFAsfThruster
+  suffix: ASF
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Structures/thruster.rsi
+
+- type: entity
+  parent: ThrusterLarge
+  id: WFAsfThrusterLarge
+  suffix: ASF
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Structures/thruster_large.rsi
+
+- type: entity
+  parent: ShieldGeneratorPOI
+  id: WFAsfShieldGenerator
+  suffix: POI ONLY
+  components:
+  - type: ShipShieldEmitter
+    shieldColor: "#A66BE0"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/fobshield.rsi
+    snapCardinals: true
+    layers:
+    - state: fobshield
+    - state: fobshield_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#A66BE0"
+  - type: PointLight
+    color: "#A66BE0"

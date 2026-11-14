@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server._NF.Trade;
+using Content.Server._WF.TradeGoods.Components; // WOLFGATE(TradeGoods)
 using Content.Server.GameTicking;
 using Content.Server.Station.Systems;
 using Content.Shared._NF.CCVar;
@@ -12,6 +13,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Server._NF.Station.Systems;
 using Robust.Shared.EntitySerialization.Systems;
+using Content.Server._WF.PlanetCargoHubs; // WOLFGATE(PlanetCargoHubs)
 
 namespace Content.Server._NF.GameRule;
 
@@ -29,6 +31,7 @@ public sealed partial class PointOfInterestSystem : EntitySystem
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private StationRenameWarpsSystems _renameWarps = default!;
     [Dependency] private ServerStationSystem _station = default!;
+    [Dependency] private WFPlanetCargoHubSystem _wfCargoHubs = default!; // WOLFGATE(PlanetCargoHubs)
 
     private readonly List<PoiPlacement> _stationPlacements = new();
 
@@ -75,6 +78,14 @@ public sealed partial class PointOfInterestSystem : EntitySystem
 
         for (int i = 0; i < depotCount && depotPrototypes.Count > 0; i++)
         {
+            // WOLFGATE(PlanetCargoHubs) START: a depot built on a planet this round gets no space station
+            if (_wfCargoHubs.IsPlanetside(i))
+            {
+                rotationOffset += rotation;
+                continue;
+            }
+            // WOLFGATE END
+
             var proto = _random.Pick(depotPrototypes);
 
             // Safety check: ensure selected POIs are either fine in any preset or accepts this current one.
@@ -277,6 +288,7 @@ public sealed partial class PointOfInterestSystem : EntitySystem
         _meta.SetEntityName(loadedGrid.Value, stationName, meta);
 
         EntityManager.AddComponents(loadedGrid.Value, proto.AddComponents);
+        EnsureComp<WFTradeStationComponent>(loadedGrid.Value).Id = proto.ID; // WOLFGATE(TradeGoods): stations take their economy role from their POI
 
         // Rename warp points after set up if needed
         if (proto.NameWarp)

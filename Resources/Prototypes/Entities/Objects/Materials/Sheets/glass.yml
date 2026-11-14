@@ -10,7 +10,9 @@
   - type: Item
     sprite: Objects/Materials/Sheets/glass.rsi
     size: Normal
-  - type: BulkMaterial # Forge-change
+  # WOLFGATE(CargoLoad): sheets weigh down the ship carrying them
+  - type: WFCargoMass
+    perUnit: 0.02
   - type: StaticPrice
     price: 0
   - type: Tag
@@ -53,6 +55,9 @@
   - type: BlindHealing
     damageContainers:
       - Silicon
+      # WOLFGATE(Wolfmed): IPCs, synthetic biotypes and Synths moved off Silicon and could no longer fix their optics
+      - WFSiliconWolfmed
+      - Synth
   - type: StackPrice
     price: 2
 

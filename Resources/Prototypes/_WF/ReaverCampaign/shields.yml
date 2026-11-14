@@ -1,0 +1,6 @@
+# The shield generator the Reaver campaign anchors on a stronghold hub whose hull carries none: the Aegis, the
+# strongest generator there is, so a founding hub comes up shielded.
+- type: entity
+  parent: ShieldGeneratorMedium
+  id: WFReaverHubShieldGenerator
+  suffix: REAVER HUB

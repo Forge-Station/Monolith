@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made for Wolfgate. cart-market's shell is from _NF cartridge.rsi cart-ledger (tgstation commit 0c15d9dbcf0f2beb230eba5d9d889ef2d1945bb8, edited by Whatstone); greens follow program_icons.rsi news_read by Misha_Unity",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "cart-market"
+    }
+  ]
+}

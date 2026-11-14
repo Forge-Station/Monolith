@@ -1,0 +1,13 @@
+- type: entity
+  id: OrganFelionoidEyes
+  parent: OrganHumanEyes
+  name: eyes
+  suffix: Felionoid
+  description: "The eyes of a Felionoid."
+
+- type: entity
+  id: OrganFelionoidStomach
+  parent: OrganResomiStomach
+  name: stomach
+  suffix: Felionoid
+  description: "The stomach of a Felionoid."

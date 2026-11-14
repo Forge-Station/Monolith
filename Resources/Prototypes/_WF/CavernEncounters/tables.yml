@@ -1,0 +1,94 @@
+# Which encounters each world's cavern holds. The count follows the cavern's area (perArea, default 1.4 per 10,000
+# square tiles: about one every couple of minutes of exploring), the first two go near the gate, and kinds are picked
+# by weight up to their limits. The Old Wise Miner, the Echo and the Lamplighter are one of a kind; the paying
+# rescues are capped; raiders, crawlers and abandoned camps fill the rest, and the scary ones weigh least.
+# Planned counts at each world's own radius: Asclepiu 54, Merak 36, Fervidus and Thrascias 21, Aerumna and Carcinoma 11.
+
+# The Underkarst: wet limestone, the busiest mining world.
+- type: wfCavernEncounterTable
+  id: WFCavernEncountersAsclepiu
+  surface: WFSurfaceAsclepiu
+  encounters:
+    WFCavernEncounterMinerCamp: 4
+    WFCavernEncounterRaiders: 3
+    WFCavernEncounterAbandonedCamp: 3
+    WFCavernEncounterSurveyor: 1.5
+    WFCavernEncounterTrappedMiner: 1.5
+    WFCavernEncounterCrawlers: 1
+    WFCavernEncounterEcho: 0.6
+    WFCavernEncounterLamplighter: 0.5
+  limits: &standardLimits
+    WFCavernEncounterMinerCamp: 1
+    WFCavernEncounterEcho: 1
+    WFCavernEncounterLamplighter: 1
+    WFCavernEncounterSurveyor: 4
+    WFCavernEncounterTrappedMiner: 4
+
+# The Cinder Vaults: lava tubes, raiders and collapses.
+- type: wfCavernEncounterTable
+  id: WFCavernEncountersFervidus
+  surface: WFSurfaceFervidus
+  encounters:
+    WFCavernEncounterMinerCamp: 4
+    WFCavernEncounterRaiders: 3.5
+    WFCavernEncounterAbandonedCamp: 2
+    WFCavernEncounterTrappedMiner: 2
+    WFCavernEncounterCrawlers: 1.5
+    WFCavernEncounterLamplighter: 0.8
+    WFCavernEncounterEcho: 0.5
+  limits: *standardLimits
+
+# The Sandstone Galleries: long pillared halls that carry a voice.
+- type: wfCavernEncounterTable
+  id: WFCavernEncountersMerak
+  surface: WFSurfaceMerak
+  encounters:
+    WFCavernEncounterMinerCamp: 4
+    WFCavernEncounterRaiders: 3
+    WFCavernEncounterAbandonedCamp: 3
+    WFCavernEncounterSurveyor: 2
+    WFCavernEncounterEcho: 1
+    WFCavernEncounterCrawlers: 1
+    WFCavernEncounterLamplighter: 0.5
+  limits: *standardLimits
+
+# The Umbral Deeps: the darkest caverns, the Lamplighter's.
+- type: wfCavernEncounterTable
+  id: WFCavernEncountersAerumna
+  surface: WFSurfaceAerumna
+  encounters:
+    WFCavernEncounterMinerCamp: 3
+    WFCavernEncounterAbandonedCamp: 3
+    WFCavernEncounterLamplighter: 2
+    WFCavernEncounterCrawlers: 1.5
+    WFCavernEncounterEcho: 1
+    WFCavernEncounterSurveyor: 1.5
+    WFCavernEncounterRaiders: 1
+  limits: *standardLimits
+
+# The Rime Galleries: ice falls bury miners.
+- type: wfCavernEncounterTable
+  id: WFCavernEncountersThrascias
+  surface: WFSurfaceThrascias
+  encounters:
+    WFCavernEncounterMinerCamp: 4
+    WFCavernEncounterAbandonedCamp: 3
+    WFCavernEncounterTrappedMiner: 2.5
+    WFCavernEncounterSurveyor: 2
+    WFCavernEncounterRaiders: 1.5
+    WFCavernEncounterLamplighter: 0.8
+    WFCavernEncounterEcho: 0.6
+  limits: *standardLimits
+
+# The Gut: few people go down, and fewer come back.
+- type: wfCavernEncounterTable
+  id: WFCavernEncountersCarcinoma
+  surface: WFSurfaceCarcinoma
+  encounters:
+    WFCavernEncounterAbandonedCamp: 3
+    WFCavernEncounterCrawlers: 2.5
+    WFCavernEncounterEcho: 1.5
+    WFCavernEncounterLamplighter: 1
+    WFCavernEncounterMinerCamp: 1
+    WFCavernEncounterRaiders: 0.5
+  limits: *standardLimits

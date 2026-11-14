@@ -4,9 +4,9 @@ using Content.Shared.DeviceLinking.Events;
 
 namespace Content.Shared._Forge.Features;
 
-public sealed class AdminOnlyDeviceLinkSystem : EntitySystem
+public sealed partial class AdminOnlyDeviceLinkSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminManager _admin = default!;
+    [Dependency] private ISharedAdminManager _admin = default!;
 
     public override void Initialize()
     {

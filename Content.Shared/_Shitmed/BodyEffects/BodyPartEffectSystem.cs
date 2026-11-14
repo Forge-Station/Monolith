@@ -73,7 +73,7 @@ public partial class BodyPartEffectSystem : EntitySystem
                 continue;
 
             var newComp = (Component) _serManager.CreateCopy(comp.Component, notNullableOverride: true);
-            EntityManager.AddComponent(body, newComp, true);
+            AddComp(body, newComp, true);
 
             effectComp.Active[key] = comp;
         }

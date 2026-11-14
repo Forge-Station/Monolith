@@ -245,6 +245,21 @@ public sealed partial class SatiationSystem : EntitySystem
 
         return _timing.CurTime + TimeSpan.FromSeconds((value - threshold) / satiation.ActualDecayRate);
     }
+
+    /// <summary>Sets the hunger satiation. No effect when the entity has none.</summary>
+    public void SetHunger(EntityUid uid, float value)
+    {
+        if (TryComp<SatiationComponent>(uid, out var satiation))
+            SetValue((uid, satiation), Hunger, value);
+    }
+
+    /// <summary>Current hunger, or zero when the entity has none.</summary>
+    public float GetHunger(EntityUid uid)
+    {
+        return TryComp<SatiationComponent>(uid, out var satiation)
+            ? GetValueOrNull((uid, satiation), Hunger) ?? 0f
+            : 0f;
+    }
 }
 
 // Best effort on change to authoritative value or decay rate

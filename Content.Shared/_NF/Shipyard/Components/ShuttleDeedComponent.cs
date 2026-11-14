@@ -7,13 +7,14 @@ namespace Content.Shared._NF.Shipyard.Components;
 /// <summary>
 /// Tied to an ID card when a ship is purchased. 1 ship per captain.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedShipyardSystem), typeof(SharedShuttleRecordsSystem), typeof(SharedShuttleConsoleLockSystem))]
+// WOLFGATE(ShipAccess): AutoGenerateComponentState, so the client knows which ship a deed is for
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(SharedShipyardSystem), typeof(SharedShuttleRecordsSystem), typeof(SharedShuttleConsoleLockSystem))]
 public sealed partial class ShuttleDeedComponent : Component
 {
     public const int MaxNameLength = 30;
     public const int MaxSuffixLength = 4 + 1 + 4; // 4 digits, dash, up to 4 letters - should be enough
 
-    [DataField]
+    [DataField, AutoNetworkedField] // WOLFGATE(ShipAccess): the access tab and door prediction read it on the client
     public EntityUid? ShuttleUid = null;
 
     [DataField]

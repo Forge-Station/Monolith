@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "portfiend South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mouse_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "mouse_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "short_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "short_FRONT",
+      "directions": 4
+    }
+  ]
+}

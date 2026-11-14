@@ -56,7 +56,7 @@ public sealed partial class CompanySelectControl : BoxContainer
         _selectedCompanyId = _currentCompanyId;
         _companyButtons.Clear();
 
-        CompanyListContainer.DisposeAllChildren();
+        CompanyListContainer.RemoveAllChildren();
 
         foreach (var company in _companies)
         {

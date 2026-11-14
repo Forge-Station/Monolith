@@ -155,7 +155,7 @@ public sealed partial class BiomeSystem
                     continue;
 
                 // Check if it's a valid spawn, if so then use it.
-                var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, node);
+                var enumerator = _mapSystem.GetAnchoredEntities(gridUid, grid, node);
                 enumerator.MoveNext(out var existing);
 
                 if (!forced && existing != null)

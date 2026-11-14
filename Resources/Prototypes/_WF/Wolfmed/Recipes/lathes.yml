@@ -1,0 +1,27 @@
+# Skin graft lathe recipe (W7). The graft is the only thing that clears charring, so medbay has to be able
+# to make more than the two the surgical crate ships. Costed beside Ointment and Gauze in the same pack.
+
+- type: latheRecipe
+  id: WFWolfmedSkinGraft
+  result: WFWolfmedSkinGraft
+  completetime: 2
+  materials:
+    Plastic: 50
+    Cloth: 50
+
+# Playtest 5: the plain suture, one a print like the bruise pack and gauze beside it. A needle's worth of steel and
+# a spool of thread.
+- type: latheRecipe
+  id: WFWolfmedSuture
+  result: WFWolfmedSuture1
+  completetime: 1
+  materials:
+    Steel: 25
+    Cloth: 50
+
+# Playtest 5, ITEMS: the empty synthetic repair kit sits with the other empty kits in EmptyMedkitsStatic, at their cost.
+- type: latheRecipe
+  parent: Medkit
+  id: WFMedkitSynthetic
+  result: WFMedkitSynthetic
+  name: lathe-recipe-WFMedkitSynthetic-name

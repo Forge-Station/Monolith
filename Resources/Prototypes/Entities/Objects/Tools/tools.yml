@@ -134,6 +134,17 @@
   id: Wrench
   description: 'A common tool for assembly and disassembly. Remember: lefty latchy, righty removey.'
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   # Goobstation edit start
   - type: EmitSoundOnPickup
     sound:
@@ -152,6 +163,22 @@
   - type: Tag
     tags:
     - Wrench
+  # WOLFGATE(Wolfmed): W6: panel-beating. WeldingHealableSystem gates on this component, not on being a welder;
+  # fuelCost 0 is what tells its Wolfmed half to skip the fuel check and the fuel spend. Blunt only, so a
+  # wrench takes dents out of a chassis and never seals a breach.
+  - type: WeldingHealing
+    qualityNeeded: Anchoring
+    fuelCost: 0
+    doAfterDelay: 4
+    damageContainers:
+    - WFSiliconWolfmed
+    - WFInorganicWolfmed
+    damage:
+      types:
+        Blunt: -15
+  - type: WolfmedHullPlate # WOLFGATE(Wolfmed): EVISC: the surgery step that seats a torn chassis panel
+  # WOLFGATE(Wolfmed): V124: the ratchet plays when the pass starts; this is the panel going back into shape.
+  - type: WolfmedRepairSound
   - type: Sprite
     sprite: _Forge/Objects/Tools/Standart/wrench.rsi
     state: icon
@@ -215,6 +242,7 @@
   - type: Tool
     qualities:
     - Pulsing
+  - type: WolfmedCoreProbe # WOLFGATE(Wolfmed): M2: OD10, the core repair step that re-flashes a positronic core
   - type: NetworkConfigurator
   - type: ActivatableUI
     key: enum.NetworkConfiguratorUiKey.List
@@ -618,6 +646,17 @@
   id: Shovel
   description: A large tool for digging and moving dirt.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: Objects/Tools/shovel.rsi
     state: icon
@@ -647,6 +686,7 @@
   # - type: EarthDigging # Frontier
   - type: Shovel
   - type: ToolTileCompatible # Frontier
+  - type: WFSnowShovel # WOLFGATE(GroundCover): clears snow cover
 
 - type: entity
   parent: BaseItem
@@ -654,6 +694,17 @@
   name: rolling pin
   description: A tool used to shape and flatten dough.
   components:
+  # WOLFGATE(Wolfmed) START: a blunt weapon can execute, with bludgeoning lines in place of the throat-slitting ones
+  - type: Execution
+    internalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-internal
+    externalMeleeExecutionMessage: wolfmed-execution-bludgeon-initial-external
+    completeInternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-internal
+    completeExternalMeleeExecutionMessage: wolfmed-execution-bludgeon-complete-external
+    internalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-internal
+    externalSelfExecutionMessage: wolfmed-execution-bludgeon-self-initial-external
+    completeInternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-internal
+    completeExternalSelfExecutionMessage: wolfmed-execution-bludgeon-self-complete-external
+  # WOLFGATE END
   - type: Sprite
     sprite: Objects/Tools/rolling_pin.rsi
     state: icon

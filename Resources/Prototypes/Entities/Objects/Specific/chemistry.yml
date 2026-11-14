@@ -548,7 +548,11 @@
     forceFeedDelay: 2
     transferAmount: null
     eatMessage: food-swallow
-    useSound: /Audio/Items/pill.ogg
+    # WOLFGATE(Wolfmed) START: Bobstation's pill swallow (owner's pick, playtest 4), inherited by every Pill variant
+    # useSound: /Audio/Items/pill.ogg
+    useSound:
+      collection: WFWolfmedPillSwallow
+    # WOLFGATE END
   - type: BadFood
   - type: FlavorProfile
     ignoreReagents: []

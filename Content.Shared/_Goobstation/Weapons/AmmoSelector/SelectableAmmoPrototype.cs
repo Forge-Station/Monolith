@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._Goobstation.Weapons.AmmoSelector;
 
-[Prototype("selectableAmmo")]
+[Prototype]
 public sealed partial class SelectableAmmoPrototype : IPrototype
 {
     [IdDataField]

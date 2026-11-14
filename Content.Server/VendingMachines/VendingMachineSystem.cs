@@ -358,6 +358,7 @@ namespace Content.Server.VendingMachines
             var priceVend = _pricing.GetEstimatedVendPrice(proto);
             if (priceVend > 0.0 && component.RequiresCash) // if vending price exists, overwrite it.
                 totalPrice = (int) priceVend;
+            totalPrice = WfTradeBuyPrice(uid, proto, totalPrice); // WOLFGATE(TradeGoods): trade vendors charge the station's live price
 
             if (IsAuthorized(uid, sender, component))
             {

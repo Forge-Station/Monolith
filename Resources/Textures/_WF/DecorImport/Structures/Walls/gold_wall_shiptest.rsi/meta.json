@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "gold_wall-0"
+    },
+    {
+      "name": "gold_wall-1"
+    },
+    {
+      "name": "gold_wall-2"
+    },
+    {
+      "name": "gold_wall-3"
+    },
+    {
+      "name": "gold_wall-4"
+    },
+    {
+      "name": "gold_wall-5"
+    },
+    {
+      "name": "gold_wall-6"
+    },
+    {
+      "name": "gold_wall-7"
+    },
+    {
+      "name": "gold_wall-8"
+    },
+    {
+      "name": "gold_wall-9"
+    },
+    {
+      "name": "gold_wall-10"
+    },
+    {
+      "name": "gold_wall-11"
+    },
+    {
+      "name": "gold_wall-12"
+    },
+    {
+      "name": "gold_wall-13"
+    },
+    {
+      "name": "gold_wall-14"
+    },
+    {
+      "name": "gold_wall-15"
+    },
+    {
+      "name": "gold_wall-21"
+    },
+    {
+      "name": "gold_wall-23"
+    },
+    {
+      "name": "gold_wall-29"
+    },
+    {
+      "name": "gold_wall-31"
+    },
+    {
+      "name": "gold_wall-38"
+    },
+    {
+      "name": "gold_wall-39"
+    },
+    {
+      "name": "gold_wall-46"
+    },
+    {
+      "name": "gold_wall-47"
+    },
+    {
+      "name": "gold_wall-55"
+    },
+    {
+      "name": "gold_wall-63"
+    },
+    {
+      "name": "gold_wall-74"
+    },
+    {
+      "name": "gold_wall-75"
+    },
+    {
+      "name": "gold_wall-78"
+    },
+    {
+      "name": "gold_wall-79"
+    },
+    {
+      "name": "gold_wall-95"
+    },
+    {
+      "name": "gold_wall-110"
+    },
+    {
+      "name": "gold_wall-111"
+    },
+    {
+      "name": "gold_wall-127"
+    },
+    {
+      "name": "gold_wall-137"
+    },
+    {
+      "name": "gold_wall-139"
+    },
+    {
+      "name": "gold_wall-141"
+    },
+    {
+      "name": "gold_wall-143"
+    },
+    {
+      "name": "gold_wall-157"
+    },
+    {
+      "name": "gold_wall-159"
+    },
+    {
+      "name": "gold_wall-175"
+    },
+    {
+      "name": "gold_wall-191"
+    },
+    {
+      "name": "gold_wall-203"
+    },
+    {
+      "name": "gold_wall-207"
+    },
+    {
+      "name": "gold_wall-223"
+    },
+    {
+      "name": "gold_wall-239"
+    },
+    {
+      "name": "gold_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

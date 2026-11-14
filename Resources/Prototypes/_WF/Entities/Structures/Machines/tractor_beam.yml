@@ -1,0 +1,152 @@
+- type: entity
+  parent: BaseMachine
+  id: WFTractorBeamEmitter
+  name: tractor beam emitter
+  description: A massive six-tile-wide gravitic dish for an arrestor vessel. Aim its open face toward the target and connect it to high-voltage power. Its control computer shows the forward operating cone. Resisting vessels and debris caught in the beam increase its power demand.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/Structures/Machines/tractor_dish.rsi
+    state: base
+    scale: 1.5, 1.5
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-2.8,-1,2.8,1"
+        density: 750
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Anchorable
+    delay: 5
+  - type: Rotatable
+  - type: PowerConsumer
+    voltage: High
+    drawRate: 5000
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      input:
+        !type:CableDeviceNode
+        nodeGroupID: HVPower
+  - type: TractorBeamEmitter
+    maxRange: 200
+    rangeStrainAtMaxRange: 0.6
+    maxForce: 10000
+    idlePower: 5000
+    holdingPower: 100000
+    maxPower: 2000000
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: WFTractorBeamEmitter
+  id: WFTractorBeamEmitterSmall
+  name: small tractor beam emitter
+  description: A compact three-tile-wide gravitic dish for debris recovery and small-craft towing. Aim its open face toward the target and connect it to medium-voltage power. Controlled through a tractor beam control computer.
+  components:
+  - type: Sprite
+    scale: 0.75, 0.75
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.4,-0.5,1.4,0.5"
+        density: 300
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Anchorable
+    delay: 2
+  - type: PowerConsumer
+    voltage: Medium
+    drawRate: 10000
+  - type: NodeContainer
+    nodes:
+      input:
+        !type:CableDeviceNode
+        nodeGroupID: MVPower
+  - type: TractorBeamEmitter
+    maxRange: 80
+    maxForce: 6000
+    idlePower: 10000
+    holdingPower: 30000
+    maxPower: 150000
+    visualWidthScale: 0.5
+    engageSound:
+      path: /Audio/_WF/TractorBeam/tractorbeam_engage.ogg
+      params:
+        volume: -6
+    loopSound:
+      path: /Audio/_WF/TractorBeam/tractorbeam_loop.ogg
+      params:
+        volume: -12.0206
+    disengageSound:
+      path: /Audio/_WF/TractorBeam/tractorbeam_disengage.ogg
+      params:
+        volume: -6
+
+- type: entity
+  parent: BaseComputer
+  id: WFComputerTractorBeam
+  name: tractor beam control computer
+  description: Selects targets and controls powered tractor dishes installed on this vessel. Beam strain shows how hard a target is resisting the lock.
+  components:
+  - type: TractorBeamConsole
+  - type: Computer
+    board: WFTractorBeamComputerCircuitboard
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: Sprite
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: computer
+    - map: [ "computerLayerKeyboard" ]
+      state: generic_keyboard
+    - map: [ "computerLayerScreen" ]
+      state: eris_control
+    - map: [ "computerLayerKeys" ]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: ActivatableUI
+    key: enum.TractorBeamUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.TractorBeamUiKey.Key:
+        type: TractorBeamConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: PointLight
+    color: "#40ccff"
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: WFTractorBeamComputerCircuitboard
+  name: tractor beam control computer board
+  description: A circuit board for a tractor beam control computer.
+  components:
+  - type: Sprite
+    state: cpu_command
+  - type: ComputerBoard
+    prototype: WFComputerTractorBeam

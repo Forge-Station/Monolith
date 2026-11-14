@@ -2,8 +2,8 @@
 - type: emote
   id: Hiss
   category: Vocal
-  name: chat-emote-name-hiss       # Forge-Change
-  icon: Interface/Emotes/vocal.png # Forge-Change
+  name: Hiss
+  icon: { sprite: _RMC14/Actions/xeno_emotes.rsi, state: hiss } # Wolfgate: was the default scream icon
   available: false
   whitelist:
     components:
@@ -11,7 +11,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: ["chat-emote-msg-hiss"] # Forge-Change
+  chatMessages: [hisses.]
   chatTriggers:
     - hiss
     - hisses
@@ -22,13 +22,12 @@
     - hissed
     - hissing.
     - hissed.
-    - шипит #Forge-Change
 
 - type: emote
   id: Meow
   category: Vocal
   name: Meow
-  icon: Interface/Actions/scream.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: meow } # Wolfgate: was the default scream icon
   available: false
   whitelist:
     components:
@@ -36,7 +35,7 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: ["chat-emote-msg-meow"] #Forge-Change
+  chatMessages: [meows.]
   chatTriggers:
     - meow
     - meows
@@ -65,17 +64,12 @@
     - mraows.
     - mraows!
     - mraows~
-    - мяу #Forge-Change
-    - мяу! #Forge-Change
-    - мяукает #Forge-Change
-    - мяукает! #Forge-Change
-    - ня #Forge-Change
 
 - type: emote
   id: Mew
   category: Vocal
   name: Mew
-  icon: Interface/Actions/scream.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: mew } # Wolfgate: was the default scream icon
   available: false
   whitelist:
     components:
@@ -83,19 +77,18 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: ["chat-emote-msg-mew"] #Forge-Change
+  chatMessages: [mews.]
   chatTriggers:
     - mew
     - mews
     - mewing
     - mewed
-    - миукает #Forge-Change
 
 - type: emote
   id: Growl
   category: Vocal
   name: Growl
-  icon: Interface/Actions/scream.png
+  icon: { sprite: _RMC14/Actions/xeno_emotes.rsi, state: growl } # Wolfgate: was the default scream icon
   available: false
   whitelist:
     components:
@@ -103,20 +96,18 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: ["chat-emote-msg-growl"] #Forge-Change
+  chatMessages: [growls.]
   chatTriggers:
     - growl
     - growls
     - growling
     - growled
-    - громко рычит #Forge-Change
-    - скалиться #Forge-Change
 
 - type: emote
   id: Purr
   category: Vocal
   name: Purr
-  icon: Interface/Actions/scream.png
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: purr } # Wolfgate: was the default scream icon
   available: false
   whitelist:
     components:
@@ -124,10 +115,9 @@
   blacklist:
     components:
     - BorgChassis
-  chatMessages: ["chat-emote-msg-purr"] #Forge-Change
+  chatMessages: [purrs.]
   chatTriggers:
     - purr
     - purrs
     - purring
     - purred
-    - мурчит #Forge-Change

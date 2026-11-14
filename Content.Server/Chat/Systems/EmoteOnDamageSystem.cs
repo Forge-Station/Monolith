@@ -24,6 +24,8 @@ public sealed partial class EmoteOnDamageSystem : EntitySystem
 
     private void OnDamage(EntityUid uid, EmoteOnDamageComponent emoteOnDamage, DamageChangedEvent args)
     {
+        HandlePainDamageEmote(uid, emoteOnDamage, args); // WOLFGATE(Wolfmed): HOOK 18, Wolfmed pain sounds (<Onyx-PainSounds>); never a second subscription.
+
         if (!args.DamageIncreased)
             return;
 

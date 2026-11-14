@@ -2,7 +2,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Forge.AutoSalarySystem;
 
-[Prototype("autoSalaryConfig")]
+[Prototype]
 public sealed partial class AutoSalaryConfigPrototype : IPrototype
 {
     [IdDataField]

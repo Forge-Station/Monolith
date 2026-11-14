@@ -1,0 +1,234 @@
+- type: guideEntry
+  id: RMCGuideXenonids
+  name: guide-entry-xeno-xenonids
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideXenonidRoles.xml"
+  priority: 9
+  children:
+  - RMCGuideRoleDrone
+  - RMCGuideXenonidRoles
+  - RMCGuideXenonidStructures
+
+- type: guideEntry
+  id: RMCGuideRoleDrone
+  priority: 2
+  name: guide-entry-xeno-drone
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleDrone.xml"
+
+# Xenonid roles
+- type: guideEntry
+  id: RMCGuideXenonidRoles
+  name: guide-entry-xeno-xenonid-roles
+  priority: 4
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideXenonidRoles.xml"
+  children:
+  - RMCGuideXenonidT1
+  - RMCGuideXenonidT2
+  - RMCGuideXenonidT3
+  - RMCGuideRoleQueen
+  - RMCGuideRoleParasite
+
+# Xenonid roles - T1
+- type: guideEntry
+  id: RMCGuideXenonidT1
+  name: guide-entry-xeno-xenonid-t1
+  priority: 1
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideXenonidRoles.xml"
+  children:
+  - RMCGuideRoleDefender
+  - RMCGuideRoleSentinel
+  - RMCGuideRoleRunner
+
+- type: guideEntry
+  id: RMCGuideRoleDefender
+  priority: 1
+  name: guide-entry-xeno-defender
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleDefender.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleSentinel
+  priority: 2
+  name: guide-entry-xeno-sentinel
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleSentinel.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleRunner
+  priority: 3
+  name: guide-entry-xeno-runner
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleRunner.xml"
+
+# Xenonid roles - T2
+- type: guideEntry
+  id: RMCGuideXenonidT2
+  name: guide-entry-xeno-xenonid-t2
+  priority: 2
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideXenonidRoles.xml"
+  children:
+  - RMCGuideRoleWarrior
+  - RMCGuideRoleSpitter
+  - RMCGuideRoleLurker
+  - RMCGuideRoleHivelord
+  - RMCGuideRoleBurrower
+  - RMCGuideRoleCarrier
+
+- type: guideEntry
+  id: RMCGuideRoleWarrior
+  priority: 1
+  name: guide-entry-xeno-warrior
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleWarrior.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleSpitter
+  priority: 2
+  name: guide-entry-xeno-spitter
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleSpitter.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleLurker
+  priority: 3
+  name: guide-entry-xeno-lurker
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleLurker.xml"
+  children:
+  - RMCGuideRoleVampire
+
+# Xenonid roles - T2 - Lurker Strains
+- type: guideEntry
+  id: RMCGuideRoleVampire
+  priority: 1
+  name: guide-entry-xeno-vampire
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleVampire.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleHivelord
+  priority: 4
+  name: guide-entry-xeno-hivelord
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleHivelord.xml"
+  children:
+  - RMCGuideRoleDesigner
+
+- type: guideEntry
+  id: RMCGuideRoleDesigner
+  priority: 1
+  name: guide-entry-xeno-designer
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideDesignerHivelord.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleBurrower
+  priority: 5
+  name: guide-entry-xeno-burrower
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleBurrower.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleCarrier
+  priority: 6
+  name: guide-entry-xeno-carrier
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleCarrier.xml"
+  children:
+  - RMCGuideRoleEggsac
+
+# Xenonid roles - T2 - Carrier Strains
+- type: guideEntry
+  id: RMCGuideRoleEggsac
+  priority: 1
+  name: guide-entry-xeno-eggsac
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleEggsac.xml"
+
+# Xenonid roles - T3
+- type: guideEntry
+  id: RMCGuideXenonidT3
+  name: guide-entry-xeno-xenonid-t3
+  priority: 3
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideXenonidRoles.xml"
+  children:
+  - RMCGuideRoleCrusher
+  - RMCGuideRolePraetorian
+  - RMCGuideRoleRavager
+  - RMCGuideRoleBoiler
+
+- type: guideEntry
+  id: RMCGuideRoleCrusher
+  priority: 1
+  name: guide-entry-xeno-crusher
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleCrusher.xml"
+
+- type: guideEntry
+  id: RMCGuideRolePraetorian
+  priority: 2
+  name: guide-entry-xeno-praetorian
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRolePraetorian.xml"
+  children:
+  - RMCGuideRoleValkyrie
+  - RMCGuideRoleOppressor
+  - RMCGuideRoleVanguard
+
+# Xenonid roles - T3 - Praetorian Strains
+- type: guideEntry
+  id: RMCGuideRoleValkyrie
+  priority: 1
+  name: guide-entry-xeno-valkyrie
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleValkyrie.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleOppressor
+  priority: 2
+  name: guide-entry-xeno-oppressor
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleOppressor.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleVanguard
+  priority: 3
+  name: guide-entry-xeno-vanguard
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleVanguard.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleRavager
+  priority: 3
+  name: guide-entry-xeno-ravager
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleRavager.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleBoiler
+  priority: 4
+  name: guide-entry-xeno-boiler
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleBoiler.xml"
+  children:
+  - RMCGuideRoleSapper
+
+- type: guideEntry
+  id: RMCGuideRoleSapper
+  priority: 1
+  name: guide-entry-xeno-sapper
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleSapper.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleQueen
+  priority: 4
+  name: guide-entry-xeno-queen
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleQueen.xml"
+
+- type: guideEntry
+  id: RMCGuideRoleParasite
+  priority: 5
+  name: guide-entry-xeno-parasite
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideRoleParasite.xml"
+
+# Xenonid structures
+- type: guideEntry
+  id: RMCGuideXenonidStructures
+  name: guide-entry-xeno-xenonid-structures
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideHiveStructures.xml"
+  priority: 5
+  children:
+  - RMCGuideHiveStructures
+  - RMCGuideResinHoles
+
+- type: guideEntry
+  id: RMCGuideHiveStructures
+  priority: 1
+  name: guide-entry-xeno-hive-structures
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideHiveStructures.xml"
+
+- type: guideEntry
+  id: RMCGuideResinHoles
+  priority: 2
+  name: guide-entry-xeno-resin-holes
+  text: "/ServerInfo/_WF/Xenonids/Guides/RMCGuideResinHoles.xml"

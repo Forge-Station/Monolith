@@ -1,0 +1,1688 @@
+- type: loadout
+  id: WFRMCLoadoutArmorM3
+  equipment:
+    outerClothing: WFRMCArmorM3
+
+- type: loadout
+  id: WFRMCLoadoutArmorM3L
+  equipment:
+    outerClothing: WFRMCArmorM3L
+
+- type: loadout
+  id: WFRMCLoadoutArmorM3EOD
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobTsfEngineer
+  equipment:
+    outerClothing: WFRMCArmorM3EOD
+
+- type: loadout
+  id: WFRMCLoadoutArmorM3T
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobTsfEngineer
+  equipment:
+    outerClothing: WFRMCArmorM3T
+
+- type: loadout
+  id: WFRMCLoadoutArmorB12
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobSeniorOfficer
+    - JobBailiff
+  equipment:
+    outerClothing: WFRMCArmorB12
+
+- type: loadout
+  id: WFRMCLoadoutArmorM3G4
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobSeniorOfficer
+  equipment:
+    outerClothing: WFRMCArmorM3G4
+
+- type: loadout
+  id: WFRMCLoadoutArmorM35
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobSeniorOfficer
+  equipment:
+    outerClothing: WFRMCArmorM35
+
+- type: loadout
+  id: WFRMCLoadoutArmorML66A
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobSeniorOfficer
+  equipment:
+    outerClothing: WFRMCArmorML66A
+
+- type: loadout
+  id: WFRMCLoadoutArmorXM4
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobSeniorOfficer
+  equipment:
+    outerClothing: WFRMCArmorXM4
+
+- type: loadout
+  id: WFRMCLoadoutArmorM3CO
+  equipment:
+    outerClothing: WFRMCArmorM3CO
+
+- type: loadout
+  id: WFRMCLoadoutArmorM3XL
+  equipment:
+    outerClothing: WFRMCArmorM3XL
+
+- type: loadout
+  id: WFRMCLoadoutArmorM3Scout
+  equipment:
+    outerClothing: WFRMCArmorM3Scout
+
+- type: loadout
+  id: WFRMCLoadoutArmorM70Flak
+  equipment:
+    outerClothing: WFRMCArmorM70Flak
+
+- type: loadout
+  id: WFRMCLoadoutArmorM3Officer
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobBailiff
+    - JobSheriff
+  equipment:
+    outerClothing: WFRMCArmorM3Officer
+
+- type: loadout
+  id: WFRMCLoadoutCoatService
+  equipment:
+    outerClothing: WFRMCCoatService
+
+- type: loadout
+  id: WFRMCLoadoutCoatTanker
+  equipment:
+    outerClothing: WFRMCCoatTanker
+
+- type: loadout
+  id: WFRMCLoadoutCoatPilot
+  equipment:
+    outerClothing: WFRMCCoatPilot
+
+- type: loadout
+  id: WFRMCLoadoutCoatDressEnlisted
+  equipment:
+    outerClothing: WFRMCCoatDressEnlisted
+
+- type: loadout
+  id: WFRMCLoadoutCoatDressSenior
+  equipment:
+    outerClothing: WFRMCCoatDressSenior
+
+- type: loadout
+  id: WFRMCLoadoutCoatDressGeneral
+  equipment:
+    outerClothing: WFRMCCoatDressGeneral
+
+- type: loadout
+  id: WFRMCLoadoutArmorUM5
+  equipment:
+    outerClothing: WFRMCArmorUM5
+
+- type: loadout
+  id: WFRMCLoadoutArmorB80
+  equipment:
+    outerClothing: WFRMCArmorB80
+
+- type: loadout
+  id: WFRMCLoadoutArmorUM5CU
+  equipment:
+    outerClothing: WFRMCArmorUM5CU
+
+- type: loadout
+  id: WFRMCLoadoutArmorUH7
+  equipment:
+    outerClothing: WFRMCArmorUH7
+
+- type: loadout
+  id: WFRMCLoadoutArmorUL6
+  equipment:
+    outerClothing: WFRMCArmorUL6
+
+- type: loadout
+  id: WFRMCLoadoutArmorCCC5
+  equipment:
+    outerClothing: WFRMCArmorCCC5
+
+- type: loadout
+  id: WFRMCLoadoutArmorCCC5Heavy
+  equipment:
+    outerClothing: WFRMCArmorCCC5Heavy
+
+- type: loadout
+  id: WFRMCLoadoutArmorCCC5Plated
+  equipment:
+    outerClothing: WFRMCArmorCCC5Plated
+
+- type: loadout
+  id: WFRMCLoadoutCoatUL4
+  equipment:
+    outerClothing: WFRMCCoatUL4
+
+- type: loadout
+  id: WFRMCLoadoutCoatOfficer
+  equipment:
+    outerClothing: WFRMCCoatOfficer
+
+- type: loadout
+  id: WFRMCLoadoutCoatSenior
+  equipment:
+    outerClothing: WFRMCCoatSenior
+
+- type: loadout
+  id: WFRMCLoadoutCoatPCG
+  equipment:
+    outerClothing: WFRMCCoatPCG
+
+- type: loadout
+  id: WFRMCLoadoutCoatKommissarBlack
+  equipment:
+    outerClothing: WFRMCCoatKommissarBlack
+
+- type: loadout
+  id: WFRMCLoadoutCoatKommissarBlackLong
+  equipment:
+    outerClothing: WFRMCCoatKommissarBlackLong
+
+- type: loadout
+  id: WFRMCLoadoutCoatKommissarWhite
+  equipment:
+    outerClothing: WFRMCCoatKommissarWhite
+
+- type: loadout
+  id: WFRMCLoadoutCoatKommissarWhiteLong
+  equipment:
+    outerClothing: WFRMCCoatKommissarWhiteLong
+
+- type: loadout
+  id: WFRMCLoadoutCoatSnowSoviet
+  equipment:
+    outerClothing: WFRMCCoatSnowSoviet
+
+- type: loadout
+  id: WFRMCLoadoutArmorMilitiaHauberk
+  equipment:
+    outerClothing: WFRMCArmorMilitiaHauberk
+
+- type: loadout
+  id: WFRMCLoadoutArmorMilitiaPartial
+  equipment:
+    outerClothing: WFRMCArmorMilitiaPartial
+
+- type: loadout
+  id: WFRMCLoadoutArmorMilitiaBrace
+  equipment:
+    outerClothing: WFRMCArmorMilitiaBrace
+
+- type: loadout
+  id: WFRMCLoadoutArmorMilitiaVest
+  equipment:
+    outerClothing: WFRMCArmorMilitiaVest
+
+- type: loadout
+  id: WFRMCLoadoutGhillie
+  equipment:
+    outerClothing: WFRMCGhillie
+
+- type: loadout
+  id: WFRMCLoadoutGhillieUDEP
+  equipment:
+    outerClothing: WFRMCGhillieUDEP
+
+- type: loadout
+  id: WFRMCLoadoutCoatSnow
+  equipment:
+    outerClothing: WFRMCCoatSnow
+
+- type: loadout
+  id: WFRMCLoadoutCoatSnowGreen
+  equipment:
+    outerClothing: WFRMCCoatSnowGreen
+
+- type: loadout
+  id: WFRMCLoadoutCoatSnowNavy
+  equipment:
+    outerClothing: WFRMCCoatSnowNavy
+
+- type: loadout
+  id: WFRMCLoadoutCoatWindbreaker
+  equipment:
+    outerClothing: WFRMCCoatWindbreaker
+
+- type: loadout
+  id: WFRMCLoadoutCoatWindbreakerBrown
+  equipment:
+    outerClothing: WFRMCCoatWindbreakerBrown
+
+- type: loadout
+  id: WFRMCLoadoutCoatWindbreakerGrey
+  equipment:
+    outerClothing: WFRMCCoatWindbreakerGrey
+
+- type: loadout
+  id: WFRMCLoadoutCoatWindbreakerExpedition
+  equipment:
+    outerClothing: WFRMCCoatWindbreakerExpedition
+
+- type: loadout
+  id: WFRMCLoadoutUniformMarine
+  equipment:
+    jumpsuit: WFRMCUniformMarine
+
+- type: loadout
+  id: WFRMCLoadoutUniformMarineEngineer
+  equipment:
+    jumpsuit: WFRMCUniformMarineEngineer
+
+- type: loadout
+  id: WFRMCLoadoutUniformMarineMedic
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobBrigmedic
+  equipment:
+    jumpsuit: WFRMCUniformMarineMedic
+
+- type: loadout
+  id: WFRMCLoadoutUniformMarineRTO
+  equipment:
+    jumpsuit: WFRMCUniformMarineRTO
+
+- type: loadout
+  id: WFRMCLoadoutUniformMarineTanker
+  equipment:
+    jumpsuit: WFRMCUniformMarineTanker
+
+- type: loadout
+  id: WFRMCLoadoutUniformIntel
+  equipment:
+    jumpsuit: WFRMCUniformIntel
+
+- type: loadout
+  id: WFRMCLoadoutUniformBoiler
+  equipment:
+    jumpsuit: WFRMCUniformBoiler
+
+- type: loadout
+  id: WFRMCLoadoutUniformMP
+  equipment:
+    jumpsuit: WFRMCUniformMP
+
+- type: loadout
+  id: WFRMCLoadoutUniformMarsoc
+  equipment:
+    jumpsuit: WFRMCUniformMarsoc
+
+- type: loadout
+  id: WFRMCLoadoutUniformDressEnlisted
+  equipment:
+    jumpsuit: WFRMCUniformDressEnlisted
+
+- type: loadout
+  id: WFRMCLoadoutUniformDressSenior
+  equipment:
+    jumpsuit: WFRMCUniformDressSenior
+
+- type: loadout
+  id: WFRMCLoadoutUniformDressGeneral
+  equipment:
+    jumpsuit: WFRMCUniformDressGeneral
+
+- type: loadout
+  id: WFRMCLoadoutUniformPDVArmy
+  equipment:
+    jumpsuit: WFRMCUniformPDVArmy
+
+- type: loadout
+  id: WFRMCLoadoutUniformPDV
+  equipment:
+    jumpsuit: WFRMCUniformPDV
+
+- type: loadout
+  id: WFRMCLoadoutUniformPDVEngineer
+  equipment:
+    jumpsuit: WFRMCUniformPDVEngineer
+
+- type: loadout
+  id: WFRMCLoadoutUniformPDVMedic
+  equipment:
+    jumpsuit: WFRMCUniformPDVMedic
+
+- type: loadout
+  id: WFRMCLoadoutUniformPDVMP
+  equipment:
+    jumpsuit: WFRMCUniformPDVMP
+
+- type: loadout
+  id: WFRMCLoadoutUniformPDVOfficer
+  equipment:
+    jumpsuit: WFRMCUniformPDVOfficer
+
+- type: loadout
+  id: WFRMCLoadoutUniformPDVOfficerShirt
+  equipment:
+    jumpsuit: WFRMCUniformPDVOfficerShirt
+
+- type: loadout
+  id: WFRMCLoadoutUniformPDVSOF
+  equipment:
+    jumpsuit: WFRMCUniformPDVSOF
+
+- type: loadout
+  id: WFRMCLoadoutUniformPDVGuard
+  equipment:
+    jumpsuit: WFRMCUniformPDVGuard
+
+- type: loadout
+  id: WFRMCLoadoutUniformMilitia
+  equipment:
+    jumpsuit: WFRMCUniformMilitia
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM10
+  equipment:
+    head: WFRMCHelmetM10
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM10Medic
+  equipment:
+    head: WFRMCHelmetM10Medic
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM10Tech
+  equipment:
+    head: WFRMCHelmetM10Tech
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM10Officer
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobBailiff
+    - JobSheriff
+  equipment:
+    head: WFRMCHelmetM10Officer
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM11
+  equipment:
+    head: WFRMCHelmetM11
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM12
+  equipment:
+    head: WFRMCHelmetM12
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM30
+  equipment:
+    head: WFRMCHelmetM30
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM35
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobSeniorOfficer
+  equipment:
+    head: WFRMCHelmetM35
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM3Demo
+  equipment:
+    head: WFRMCHelmetM3Demo
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM3G4
+  effects:
+  - !type:WFRoleWhitelistLoadoutEffect
+    roles:
+    - JobSeniorOfficer
+  equipment:
+    head: WFRMCHelmetM3G4
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM3Scout
+  equipment:
+    head: WFRMCHelmetM3Scout
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM50
+  equipment:
+    head: WFRMCHelmetM50
+
+- type: loadout
+  id: WFRMCLoadoutHelmetMarsoc
+  equipment:
+    head: WFRMCHelmetMarsoc
+
+- type: loadout
+  id: WFRMCLoadoutHelmetM45
+  equipment:
+    head: WFRMCHelmetM45
+
+- type: loadout
+  id: WFRMCLoadoutHatBeret
+  equipment:
+    head: WFRMCHatBeret
+
+- type: loadout
+  id: WFRMCLoadoutHatBeretTan
+  equipment:
+    head: WFRMCHatBeretTan
+
+- type: loadout
+  id: WFRMCLoadoutHatCap
+  equipment:
+    head: WFRMCHatCap
+
+- type: loadout
+  id: WFRMCLoadoutHatCapOfficer
+  equipment:
+    head: WFRMCHatCapOfficer
+
+- type: loadout
+  id: WFRMCLoadoutHatFlapCap
+  equipment:
+    head: WFRMCHatFlapCap
+
+- type: loadout
+  id: WFRMCLoadoutHatDressEnlisted
+  equipment:
+    head: WFRMCHatDressEnlisted
+
+- type: loadout
+  id: WFRMCLoadoutHatDressOfficer
+  equipment:
+    head: WFRMCHatDressOfficer
+
+- type: loadout
+  id: WFRMCLoadoutHelmetPDV
+  equipment:
+    head: WFRMCHelmetPDV
+
+- type: loadout
+  id: WFRMCLoadoutHelmetPDVArmy
+  equipment:
+    head: WFRMCHelmetPDVArmy
+
+- type: loadout
+  id: WFRMCLoadoutHelmetPDVHeavy
+  equipment:
+    head: WFRMCHelmetPDVHeavy
+
+- type: loadout
+  id: WFRMCLoadoutHelmetPDVEngineer
+  equipment:
+    head: WFRMCHelmetPDVEngineer
+
+- type: loadout
+  id: WFRMCLoadoutHatPDVBeret
+  equipment:
+    head: WFRMCHatPDVBeret
+
+- type: loadout
+  id: WFRMCLoadoutHatPDVArmyBeret
+  equipment:
+    head: WFRMCHatPDVArmyBeret
+
+- type: loadout
+  id: WFRMCLoadoutHatPDVBeretSOF
+  equipment:
+    head: WFRMCHatPDVBeretSOF
+
+- type: loadout
+  id: WFRMCLoadoutHatPDVCap
+  equipment:
+    head: WFRMCHatPDVCap
+
+- type: loadout
+  id: WFRMCLoadoutHatPDVUshanka
+  equipment:
+    head: WFRMCHatPDVUshanka
+
+- type: loadout
+  id: WFRMCLoadoutHatPDVPeaked
+  equipment:
+    head: WFRMCHatPDVPeaked
+
+- type: loadout
+  id: WFRMCLoadoutHatPDVPeakedBlack
+  equipment:
+    head: WFRMCHatPDVPeakedBlack
+
+- type: loadout
+  id: WFRMCLoadoutHatPDVPeakedWhite
+  equipment:
+    head: WFRMCHatPDVPeakedWhite
+
+- type: loadout
+  id: WFRMCLoadoutHatMilitiaHood
+  equipment:
+    head: WFRMCHatMilitiaHood
+
+- type: loadout
+  id: WFRMCLoadoutHatMilitiaHeadband
+  equipment:
+    head: WFRMCHatMilitiaHeadband
+
+- type: loadout
+  id: WFRMCLoadoutHatBoonie
+  equipment:
+    head: WFRMCHatBoonie
+
+- type: loadout
+  id: WFRMCLoadoutHatBoonieTan
+  equipment:
+    head: WFRMCHatBoonieTan
+
+- type: loadout
+  id: WFRMCLoadoutHatBeaniesBeanie
+  equipment:
+    head: WFRMCHatBeaniesBeanie
+
+- type: loadout
+  id: WFRMCLoadoutHatBeaniesGray
+  equipment:
+    head: WFRMCHatBeaniesGray
+
+- type: loadout
+  id: WFRMCLoadoutHatBeaniesGreen
+  equipment:
+    head: WFRMCHatBeaniesGreen
+
+- type: loadout
+  id: WFRMCLoadoutHatBeaniesTan
+  equipment:
+    head: WFRMCHatBeaniesTan
+
+- type: loadout
+  id: WFRMCLoadoutHatHeadbandBrown
+  equipment:
+    head: WFRMCHatHeadbandBrown
+
+- type: loadout
+  id: WFRMCLoadoutHatHeadbandGray
+  equipment:
+    head: WFRMCHatHeadbandGray
+
+- type: loadout
+  id: WFRMCLoadoutHatHeadbandGreen
+  equipment:
+    head: WFRMCHatHeadbandGreen
+
+- type: loadout
+  id: WFRMCLoadoutHatHeadbandRed
+  equipment:
+    head: WFRMCHatHeadbandRed
+
+- type: loadout
+  id: WFRMCLoadoutHatHeadbandTan
+  equipment:
+    head: WFRMCHatHeadbandTan
+
+- type: loadout
+  id: WFRMCLoadoutBootsBlack
+  equipment:
+    shoes: WFRMCBootsBlack
+
+- type: loadout
+  id: WFRMCLoadoutBootsBrown
+  equipment:
+    shoes: WFRMCBootsBrown
+
+- type: loadout
+  id: WFRMCLoadoutBootsGrey
+  equipment:
+    shoes: WFRMCBootsGrey
+
+- type: loadout
+  id: WFRMCLoadoutBootsJungle
+  equipment:
+    shoes: WFRMCBootsJungle
+
+- type: loadout
+  id: WFRMCLoadoutBootsUrban
+  equipment:
+    shoes: WFRMCBootsUrban
+
+- type: loadout
+  id: WFRMCLoadoutBootsJackboots
+  equipment:
+    shoes: WFRMCBootsJackboots
+
+- type: loadout
+  id: WFRMCLoadoutBootsSwat
+  equipment:
+    shoes: WFRMCBootsSwat
+
+- type: loadout
+  id: WFRMCLoadoutGlovesBlack
+  equipment:
+    gloves: WFRMCGlovesBlack
+
+- type: loadout
+  id: WFRMCLoadoutGlovesBrown
+  equipment:
+    gloves: WFRMCGlovesBrown
+
+- type: loadout
+  id: WFRMCLoadoutGlovesGrey
+  equipment:
+    gloves: WFRMCGlovesGrey
+
+- type: loadout
+  id: WFRMCLoadoutGlovesLightBrown
+  equipment:
+    gloves: WFRMCGlovesLightBrown
+
+- type: loadout
+  id: WFRMCLoadoutGlovesLeatherBlack
+  equipment:
+    gloves: WFRMCGlovesLeatherBlack
+
+- type: loadout
+  id: WFRMCLoadoutGlovesVeteran
+  equipment:
+    gloves: WFRMCGlovesVeteran
+
+- type: loadout
+  id: WFRMCLoadoutGogglesBallisticGoggles
+  equipment:
+    eyes: WFRMCGogglesBallisticGoggles
+
+- type: loadout
+  id: WFRMCLoadoutGogglesM1A1BallisticGoggles
+  equipment:
+    eyes: WFRMCGogglesM1A1BallisticGoggles
+
+- type: loadout
+  id: WFRMCLoadoutGogglesM1A1BallisticGogglesBlue
+  equipment:
+    eyes: WFRMCGogglesM1A1BallisticGogglesBlue
+
+- type: loadout
+  id: WFRMCLoadoutGogglesBlackBallisticGoggles
+  equipment:
+    eyes: WFRMCGogglesBlackBallisticGoggles
+
+- type: loadout
+  id: WFRMCLoadoutGogglesBallisticGogglesRcm
+  equipment:
+    eyes: WFRMCGogglesBallisticGogglesRcm
+
+- type: loadout
+  id: WFRMCLoadoutGogglesBallisticGogglesRcmTint
+  equipment:
+    eyes: WFRMCGogglesBallisticGogglesRcmTint
+
+- type: loadout
+  id: WFRMCLoadoutGogglesSwatgoggles
+  equipment:
+    eyes: WFRMCGogglesSwatgoggles
+
+- type: loadout
+  id: WFRMCLoadoutKeffiyehKeffiyeh
+  storage:
+    back:
+    - WFRMCKeffiyehKeffiyeh
+
+- type: loadout
+  id: WFRMCLoadoutKeffiyehKeffiyehBlack
+  storage:
+    back:
+    - WFRMCKeffiyehKeffiyehBlack
+
+- type: loadout
+  id: WFRMCLoadoutKeffiyehKeffiyehBlue
+  storage:
+    back:
+    - WFRMCKeffiyehKeffiyehBlue
+
+- type: loadout
+  id: WFRMCLoadoutKeffiyehKeffiyehGreen
+  storage:
+    back:
+    - WFRMCKeffiyehKeffiyehGreen
+
+- type: loadout
+  id: WFRMCLoadoutKeffiyehKeffiyehRed
+  storage:
+    back:
+    - WFRMCKeffiyehKeffiyehRed
+
+- type: loadout
+  id: WFRMCLoadoutKeffiyehKeffiyehWhite
+  storage:
+    back:
+    - WFRMCKeffiyehKeffiyehWhite
+
+- type: loadout
+  id: WFRMCLoadoutScarfAlpha
+  storage:
+    back:
+    - WFRMCScarfAlpha
+
+- type: loadout
+  id: WFRMCLoadoutNeckScarfAlpha
+  equipment:
+    neck: WFRMCNeckScarfAlpha
+
+- type: loadout
+  id: WFRMCLoadoutScarfBlack
+  storage:
+    back:
+    - WFRMCScarfBlack
+
+- type: loadout
+  id: WFRMCLoadoutNeckScarfBlack
+  equipment:
+    neck: WFRMCNeckScarfBlack
+
+- type: loadout
+  id: WFRMCLoadoutScarfBravo
+  storage:
+    back:
+    - WFRMCScarfBravo
+
+- type: loadout
+  id: WFRMCLoadoutNeckScarfBravo
+  equipment:
+    neck: WFRMCNeckScarfBravo
+
+- type: loadout
+  id: WFRMCLoadoutScarfCharlie
+  storage:
+    back:
+    - WFRMCScarfCharlie
+
+- type: loadout
+  id: WFRMCLoadoutNeckScarfCharlie
+  equipment:
+    neck: WFRMCNeckScarfCharlie
+
+- type: loadout
+  id: WFRMCLoadoutScarfDelta
+  storage:
+    back:
+    - WFRMCScarfDelta
+
+- type: loadout
+  id: WFRMCLoadoutNeckScarfDelta
+  equipment:
+    neck: WFRMCNeckScarfDelta
+
+- type: loadout
+  id: WFRMCLoadoutScarfEcho
+  storage:
+    back:
+    - WFRMCScarfEcho
+
+- type: loadout
+  id: WFRMCLoadoutNeckScarfEcho
+  equipment:
+    neck: WFRMCNeckScarfEcho
+
+- type: loadout
+  id: WFRMCLoadoutScarfGray
+  storage:
+    back:
+    - WFRMCScarfGray
+
+- type: loadout
+  id: WFRMCLoadoutNeckScarfGray
+  equipment:
+    neck: WFRMCNeckScarfGray
+
+- type: loadout
+  id: WFRMCLoadoutScarfGreen
+  storage:
+    back:
+    - WFRMCScarfGreen
+
+- type: loadout
+  id: WFRMCLoadoutNeckScarfGreen
+  equipment:
+    neck: WFRMCNeckScarfGreen
+
+- type: loadout
+  id: WFRMCLoadoutScarfTan
+  storage:
+    back:
+    - WFRMCScarfTan
+
+- type: loadout
+  id: WFRMCLoadoutNeckScarfTan
+  equipment:
+    neck: WFRMCNeckScarfTan
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefAlpha
+  storage:
+    back:
+    - WFRMCNeckerchiefAlpha
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefAlpha
+  equipment:
+    neck: WFRMCNeckNeckerchiefAlpha
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefBlack
+  storage:
+    back:
+    - WFRMCNeckerchiefBlack
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefBlack
+  equipment:
+    neck: WFRMCNeckNeckerchiefBlack
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefBravo
+  storage:
+    back:
+    - WFRMCNeckerchiefBravo
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefBravo
+  equipment:
+    neck: WFRMCNeckNeckerchiefBravo
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefCharlie
+  storage:
+    back:
+    - WFRMCNeckerchiefCharlie
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefCharlie
+  equipment:
+    neck: WFRMCNeckNeckerchiefCharlie
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefDelta
+  storage:
+    back:
+    - WFRMCNeckerchiefDelta
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefDelta
+  equipment:
+    neck: WFRMCNeckNeckerchiefDelta
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefEcho
+  storage:
+    back:
+    - WFRMCNeckerchiefEcho
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefEcho
+  equipment:
+    neck: WFRMCNeckNeckerchiefEcho
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefGray
+  storage:
+    back:
+    - WFRMCNeckerchiefGray
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefGray
+  equipment:
+    neck: WFRMCNeckNeckerchiefGray
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefGreen
+  storage:
+    back:
+    - WFRMCNeckerchiefGreen
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefGreen
+  equipment:
+    neck: WFRMCNeckNeckerchiefGreen
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefTan
+  storage:
+    back:
+    - WFRMCNeckerchiefTan
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefTan
+  equipment:
+    neck: WFRMCNeckNeckerchiefTan
+
+- type: loadout
+  id: WFRMCLoadoutNeckerchiefWhite
+  storage:
+    back:
+    - WFRMCNeckerchiefWhite
+
+- type: loadout
+  id: WFRMCLoadoutNeckNeckerchiefWhite
+  equipment:
+    neck: WFRMCNeckNeckerchiefWhite
+
+- type: loadout
+  id: WFRMCLoadoutSmock
+  storage:
+    back:
+    - WFRMCSmock
+
+- type: loadout
+  id: WFRMCLoadoutNeckSmock
+  equipment:
+    neck: WFRMCNeckSmock
+
+- type: loadout
+  id: WFRMCLoadoutTornScarfBlack
+  storage:
+    back:
+    - WFRMCTornScarfBlack
+
+- type: loadout
+  id: WFRMCLoadoutNeckTornScarfBlack
+  equipment:
+    neck: WFRMCNeckTornScarfBlack
+
+- type: loadout
+  id: WFRMCLoadoutTornScarfDesert
+  storage:
+    back:
+    - WFRMCTornScarfDesert
+
+- type: loadout
+  id: WFRMCLoadoutNeckTornScarfDesert
+  equipment:
+    neck: WFRMCNeckTornScarfDesert
+
+- type: loadout
+  id: WFRMCLoadoutTornScarfGreen
+  storage:
+    back:
+    - WFRMCTornScarfGreen
+
+- type: loadout
+  id: WFRMCLoadoutNeckTornScarfGreen
+  equipment:
+    neck: WFRMCNeckTornScarfGreen
+
+- type: loadout
+  id: WFRMCLoadoutTornScarfGrey
+  storage:
+    back:
+    - WFRMCTornScarfGrey
+
+- type: loadout
+  id: WFRMCLoadoutNeckTornScarfGrey
+  equipment:
+    neck: WFRMCNeckTornScarfGrey
+
+- type: loadout
+  id: WFRMCLoadoutTornScarfSnow
+  storage:
+    back:
+    - WFRMCTornScarfSnow
+
+- type: loadout
+  id: WFRMCLoadoutNeckTornScarfSnow
+  equipment:
+    neck: WFRMCNeckTornScarfSnow
+
+- type: loadout
+  id: WFRMCLoadoutTornScarfUrban
+  storage:
+    back:
+    - WFRMCTornScarfUrban
+
+- type: loadout
+  id: WFRMCLoadoutNeckTornScarfUrban
+  equipment:
+    neck: WFRMCNeckTornScarfUrban
+
+- type: loadout
+  id: WFRMCLoadoutCoifBalaclava
+  storage:
+    back:
+    - WFRMCCoifBalaclava
+
+- type: loadout
+  id: WFRMCLoadoutCoifCoif
+  storage:
+    back:
+    - WFRMCCoifCoif
+
+- type: loadout
+  id: WFRMCLoadoutCoifGreenCoif
+  storage:
+    back:
+    - WFRMCCoifGreenCoif
+
+- type: loadout
+  id: WFRMCLoadoutCoifGreyCoif
+  storage:
+    back:
+    - WFRMCCoifGreyCoif
+
+- type: loadout
+  id: WFRMCLoadoutCoifTanCoif
+  storage:
+    back:
+    - WFRMCCoifTanCoif
+
+- type: loadout
+  id: WFRMCLoadoutCoifSkullCoif
+  storage:
+    back:
+    - WFRMCCoifSkullCoif
+
+- type: loadout
+  id: WFRMCLoadoutPoncho
+  equipment:
+    neck: WFRMCPoncho
+
+- type: loadout
+  id: WFRMCLoadoutNeckGuard
+  equipment:
+    neck: WFRMCNeckGuard
+
+- type: loadout
+  id: WFRMCLoadoutTieBlack
+  equipment:
+    neck: WFRMCTieBlack
+
+- type: loadout
+  id: WFRMCLoadoutTieBlue
+  equipment:
+    neck: WFRMCTieBlue
+
+- type: loadout
+  id: WFRMCLoadoutTieGold
+  equipment:
+    neck: WFRMCTieGold
+
+- type: loadout
+  id: WFRMCLoadoutTieGreen
+  equipment:
+    neck: WFRMCTieGreen
+
+- type: loadout
+  id: WFRMCLoadoutTieHorrible
+  equipment:
+    neck: WFRMCTieHorrible
+
+- type: loadout
+  id: WFRMCLoadoutTiePurple
+  equipment:
+    neck: WFRMCTiePurple
+
+- type: loadout
+  id: WFRMCLoadoutTieRed
+  equipment:
+    neck: WFRMCTieRed
+
+- type: loadout
+  id: WFRMCLoadoutArmbandRedArmband
+  equipment:
+    neck: WFRMCArmbandRedArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandAlphaArmband
+  equipment:
+    neck: WFRMCArmbandAlphaArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandBravoArmband
+  equipment:
+    neck: WFRMCArmbandBravoArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandCharlieArmband
+  equipment:
+    neck: WFRMCArmbandCharlieArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandDeltaArmband
+  equipment:
+    neck: WFRMCArmbandDeltaArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandEchoArmband
+  equipment:
+    neck: WFRMCArmbandEchoArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandFoxtrotArmband
+  equipment:
+    neck: WFRMCArmbandFoxtrotArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandSquadArmband
+  equipment:
+    neck: WFRMCArmbandSquadArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandMedArmband
+  equipment:
+    neck: WFRMCArmbandMedArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandMedGreenArmband
+  equipment:
+    neck: WFRMCArmbandMedGreenArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandEngiArmband
+  equipment:
+    neck: WFRMCArmbandEngiArmband
+
+- type: loadout
+  id: WFRMCLoadoutArmbandMpArmband
+  equipment:
+    neck: WFRMCArmbandMpArmband
+
+- type: loadout
+  id: WFRMCLoadoutDropPouchDropPouch
+  equipment:
+    neck: WFRMCDropPouchDropPouch
+
+- type: loadout
+  id: WFRMCLoadoutDropPouchDropPouchBlack
+  equipment:
+    neck: WFRMCDropPouchDropPouchBlack
+
+- type: loadout
+  id: WFRMCLoadoutDropPouchDropPouchRcm
+  equipment:
+    neck: WFRMCDropPouchDropPouchRcm
+
+- type: loadout
+  id: WFRMCLoadoutDropPouchGrenadePouch
+  equipment:
+    neck: WFRMCDropPouchGrenadePouch
+
+- type: loadout
+  id: WFRMCLoadoutDropPouchMl66aPouch
+  equipment:
+    neck: WFRMCDropPouchMl66aPouch
+
+- type: loadout
+  id: WFRMCLoadoutLegPouch
+  equipment:
+    neck: WFRMCLegPouch
+
+- type: loadout
+  id: WFRMCLoadoutArmorPouchesMag
+  equipment:
+    neck: WFRMCArmorPouchesMag
+
+- type: loadout
+  id: WFRMCLoadoutArmorPouchesDrum
+  equipment:
+    neck: WFRMCArmorPouchesDrum
+
+- type: loadout
+  id: WFRMCLoadoutArmorPouchesNade
+  equipment:
+    neck: WFRMCArmorPouchesNade
+
+- type: loadout
+  id: WFRMCLoadoutArmorPouchesShell
+  equipment:
+    neck: WFRMCArmorPouchesShell
+
+- type: loadout
+  id: WFRMCLoadoutArmorPouchesPouch
+  equipment:
+    neck: WFRMCArmorPouchesPouch
+
+- type: loadout
+  id: WFRMCLoadoutShoulderPads
+  equipment:
+    neck: WFRMCShoulderPads
+
+- type: loadout
+  id: WFRMCLoadoutBracers
+  equipment:
+    neck: WFRMCBracers
+
+- type: loadout
+  id: WFRMCLoadoutThighGuards
+  equipment:
+    neck: WFRMCThighGuards
+
+- type: loadout
+  id: WFRMCLoadoutShinGuards
+  equipment:
+    neck: WFRMCShinGuards
+
+- type: loadout
+  id: WFRMCLoadoutGroinPlate
+  equipment:
+    neck: WFRMCGroinPlate
+
+- type: loadout
+  id: WFRMCLoadoutArmorPaintSkull
+  equipment:
+    neck: WFRMCArmorPaintSkull
+
+- type: loadout
+  id: WFRMCLoadoutArmorPaintCross
+  equipment:
+    neck: WFRMCArmorPaintCross
+
+- type: loadout
+  id: WFRMCLoadoutArmorPaintHeart
+  equipment:
+    neck: WFRMCArmorPaintHeart
+
+- type: loadout
+  id: WFRMCLoadoutArmorPaintMedic
+  equipment:
+    neck: WFRMCArmorPaintMedic
+
+- type: loadout
+  id: WFRMCLoadoutArmorPaintTarget
+  equipment:
+    neck: WFRMCArmorPaintTarget
+
+- type: loadout
+  id: WFRMCLoadoutArmorPaintSmiley
+  equipment:
+    neck: WFRMCArmorPaintSmiley
+
+- type: loadout
+  id: WFRMCLoadoutArmorPaintMixtape
+  equipment:
+    neck: WFRMCArmorPaintMixtape
+
+- type: loadout
+  id: WFRMCLoadoutArmorPaintInscription
+  equipment:
+    neck: WFRMCArmorPaintInscription
+
+- type: loadout
+  id: WFRMCLoadoutArmorPaintNeutral
+  equipment:
+    neck: WFRMCArmorPaintNeutral
+
+- type: loadout
+  id: WFRMCLoadoutPatchTSFMC
+  equipment:
+    neck: WFRMCPatchTSFMC
+
+- type: loadout
+  id: WFRMCLoadoutPatchTSFMCRecon
+  equipment:
+    neck: WFRMCPatchTSFMCRecon
+
+- type: loadout
+  id: WFRMCLoadoutPatchPDV
+  equipment:
+    neck: WFRMCPatchPDV
+
+- type: loadout
+  id: WFRMCLoadoutPatchPDVAlt
+  equipment:
+    neck: WFRMCPatchPDVAlt
+
+- type: loadout
+  id: WFRMCLoadoutPatchTSFFlag
+  equipment:
+    neck: WFRMCPatchTSFFlag
+
+- type: loadout
+  id: WFRMCLoadoutPatchTSFFlagSquare
+  equipment:
+    neck: WFRMCPatchTSFFlagSquare
+
+- type: loadout
+  id: WFRMCLoadoutPatchTSFMCSenior
+  equipment:
+    neck: WFRMCPatchTSFMCSenior
+
+- type: loadout
+  id: WFRMCLoadoutPatchTSFMCDevils
+  equipment:
+    neck: WFRMCPatchTSFMCDevils
+
+- type: loadout
+  id: WFRMCLoadoutPatchTSFMCFalcons
+  equipment:
+    neck: WFRMCPatchTSFMCFalcons
+
+- type: loadout
+  id: WFRMCLoadoutPatchTSFMCFalconsLarge
+  equipment:
+    neck: WFRMCPatchTSFMCFalconsLarge
+
+- type: loadout
+  id: WFRMCLoadoutPatchPDVMedical
+  equipment:
+    neck: WFRMCPatchPDVMedical
+
+- type: loadout
+  id: WFRMCLoadoutPatchMerc
+  equipment:
+    neck: WFRMCPatchMerc
+
+- type: loadout
+  id: WFRMCLoadoutPatchMercAlt
+  equipment:
+    neck: WFRMCPatchMercAlt
+
+- type: loadout
+  id: WFRMCLoadoutPatchMedic
+  equipment:
+    neck: WFRMCPatchMedic
+
+- type: loadout
+  id: WFRMCLoadoutPatchOlive
+  equipment:
+    neck: WFRMCPatchOlive
+
+- type: loadout
+  id: WFRMCLoadoutPatchPeace
+  equipment:
+    neck: WFRMCPatchPeace
+
+- type: loadout
+  id: WFRMCLoadoutCloakGeneral
+  equipment:
+    neck: WFRMCCloakGeneral
+
+- type: loadout
+  id: WFRMCLoadoutBackpackMarineMedic
+  equipment:
+    back: WFRMCBackpackMarineMedic
+
+- type: loadout
+  id: WFRMCLoadoutBackpackMarineTech
+  equipment:
+    back: WFRMCBackpackMarineTech
+
+- type: loadout
+  id: WFRMCLoadoutBackpackMarineWelder
+  equipment:
+    back: WFRMCBackpackMarineWelder
+
+- type: loadout
+  id: WFRMCLoadoutBackpackMarineRadio
+  equipment:
+    back: WFRMCBackpackMarineRadio
+
+- type: loadout
+  id: WFRMCLoadoutBackpackMarineMortar
+  equipment:
+    back: WFRMCBackpackMarineMortar
+
+- type: loadout
+  id: WFRMCLoadoutBackpackMarineMolle
+  equipment:
+    back: WFRMCBackpackMarineMolle
+
+- type: loadout
+  id: WFRMCLoadoutBackpackMarinePhone
+  equipment:
+    back: WFRMCBackpackMarinePhone
+
+- type: loadout
+  id: WFRMCLoadoutBackpackSmockPlain
+  equipment:
+    back: WFRMCBackpackSmockPlain
+
+- type: loadout
+  id: WFRMCLoadoutSatchelMarineLarge
+  equipment:
+    back: WFRMCSatchelMarineLarge
+
+- type: loadout
+  id: WFRMCLoadoutSatchelMarineMedic
+  equipment:
+    back: WFRMCSatchelMarineMedic
+
+- type: loadout
+  id: WFRMCLoadoutSatchelMarineTech
+  equipment:
+    back: WFRMCSatchelMarineTech
+
+- type: loadout
+  id: WFRMCLoadoutSatchelMarineIntel
+  equipment:
+    back: WFRMCSatchelMarineIntel
+
+- type: loadout
+  id: WFRMCLoadoutSatchelMarineMolle
+  equipment:
+    back: WFRMCSatchelMarineMolle
+
+- type: loadout
+  id: WFRMCLoadoutSatchelMarineGrenade
+  equipment:
+    back: WFRMCSatchelMarineGrenade
+
+- type: loadout
+  id: WFRMCLoadoutSatchelMarineRocket
+  equipment:
+    back: WFRMCSatchelMarineRocket
+
+- type: loadout
+  id: WFRMCLoadoutChestRigIntel
+  equipment:
+    back: WFRMCChestRigIntel
+
+- type: loadout
+  id: WFRMCLoadoutChestRigTechSnowUrban
+  equipment:
+    back: WFRMCChestRigTechSnowUrban
+
+- type: loadout
+  id: WFRMCLoadoutLightPackLightpack
+  equipment:
+    back: WFRMCLightPackLightpack
+
+- type: loadout
+  id: WFRMCLoadoutLightPackLightpackBlack
+  equipment:
+    back: WFRMCLightPackLightpackBlack
+
+- type: loadout
+  id: WFRMCLoadoutLightPackLightpackMedic
+  equipment:
+    back: WFRMCLightPackLightpackMedic
+
+- type: loadout
+  id: WFRMCLoadoutBackpackPDVRadio
+  equipment:
+    back: WFRMCBackpackPDVRadio
+
+- type: loadout
+  id: WFRMCLoadoutSatchelPDVWelder
+  equipment:
+    back: WFRMCSatchelPDVWelder
+
+- type: loadout
+  id: WFRMCLoadoutBackpackBlack
+  equipment:
+    back: WFRMCBackpackBlack
+
+- type: loadout
+  id: WFRMCLoadoutBackpackCommando
+  equipment:
+    back: WFRMCBackpackCommando
+
+- type: loadout
+  id: WFRMCLoadoutBackpackBlackRadio
+  equipment:
+    back: WFRMCBackpackBlackRadio
+
+- type: loadout
+  id: WFRMCLoadoutCloakM68
+  equipment:
+    back: WFRMCCloakM68
+
+- type: loadout
+  id: WFRMCLoadoutCloakV86
+  equipment:
+    back: WFRMCCloakV86
+
+- type: loadout
+  id: WFRMCLoadoutBackpackMarine
+  equipment:
+    back: WFRMCBackpackMarine
+
+- type: loadout
+  id: WFRMCLoadoutSatchelMarine
+  equipment:
+    back: WFRMCSatchelMarine
+
+- type: loadout
+  id: WFRMCLoadoutBackpackSmock
+  equipment:
+    back: WFRMCBackpackSmock
+
+- type: loadout
+  id: WFRMCLoadoutSatchelPDV
+  equipment:
+    back: WFRMCSatchelPDV
+
+- type: loadout
+  id: WFRMCLoadoutBeltMarine
+  equipment:
+    belt: WFRMCBeltMarine
+
+- type: loadout
+  id: WFRMCLoadoutBeltPDV
+  equipment:
+    belt: WFRMCBeltPDV
+
+- type: loadout
+  id: WFRMCLoadoutBeltSparePouch
+  equipment:
+    belt: WFRMCBeltSparePouch
+
+- type: loadout
+  id: WFRMCLoadoutBeltMedicBag
+  equipment:
+    belt: WFRMCBeltMedicBag
+
+- type: loadout
+  id: WFRMCLoadoutBeltMortar
+  equipment:
+    belt: WFRMCBeltMortar
+
+- type: loadout
+  id: WFRMCLoadoutBeltHeavyGunner
+  equipment:
+    belt: WFRMCBeltHeavyGunner
+
+- type: loadout
+  id: WFRMCLoadoutBeltHolster
+  equipment:
+    belt: WFRMCBeltHolster
+
+- type: loadout
+  id: WFRMCLoadoutBeltTanker
+  equipment:
+    belt: WFRMCBeltTanker
+
+- type: loadout
+  id: WFRMCLoadoutBeltMedicBagPDV
+  equipment:
+    belt: WFRMCBeltMedicBagPDV
+
+- type: loadout
+  id: WFRMCLoadoutBeltHolsterPDV
+  equipment:
+    belt: WFRMCBeltHolsterPDV
+
+- type: loadout
+  id: WFRMCLoadoutBeltMedicBagBlack
+  equipment:
+    belt: WFRMCBeltMedicBagBlack
+
+- type: loadout
+  id: WFRMCLoadoutBeltBlack
+  equipment:
+    belt: WFRMCBeltBlack
+
+- type: loadout
+  id: WFRMCLoadoutBeltBlackLight
+  equipment:
+    belt: WFRMCBeltBlackLight
+
+- type: loadout
+  id: WFRMCLoadoutBeltMedical
+  equipment:
+    belt: WFRMCBeltMedical
+
+- type: loadout
+  id: WFRMCLoadoutBeltMachinegunner
+  equipment:
+    belt: WFRMCBeltMachinegunner
+
+- type: loadout
+  id: WFRMCLoadoutBeltUtility
+  equipment:
+    belt: WFRMCBeltUtility
+
+- type: loadout
+  id: WFRMCLoadoutBeltCombatUtility
+  equipment:
+    belt: WFRMCBeltCombatUtility
+
+- type: loadout
+  id: WFRMCLoadoutBeltConstruction
+  equipment:
+    belt: WFRMCBeltConstruction
+
+- type: loadout
+  id: WFRMCLoadoutBeltSecurity
+  equipment:
+    belt: WFRMCBeltSecurity
+
+- type: loadout
+  id: WFRMCLoadoutBeltGrenade
+  equipment:
+    belt: WFRMCBeltGrenade
+
+- type: loadout
+  id: WFRMCLoadoutBeltHolsterSMG
+  equipment:
+    belt: WFRMCBeltHolsterSMG
+
+- type: loadout
+  id: WFRMCLoadoutBeltTanAmmo
+  equipment:
+    belt: WFRMCBeltTanAmmo
+
+- type: loadout
+  id: WFRMCLoadoutBeltTanGeneral
+  equipment:
+    belt: WFRMCBeltTanGeneral
+
+- type: loadout
+  id: WFRMCLoadoutBeltTanMedical
+  equipment:
+    belt: WFRMCBeltTanMedical

@@ -1,0 +1,42 @@
+# A bolted-down towing eye ropes can be tied to. Buildable on any tile (including hull plating),
+# not just against a wall - see debug.yml's RopeAttachPointDebug for the same no-collision
+# anchored-fixture pattern.
+- type: entity
+  id: TetherAnchorEye
+  name: tether anchor eye
+  description: A padeye bolted to the deck. Rope or cable can be tied off here.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _WF/Tether/anchor_eye.rsi
+    state: icon
+  - type: RopeAttachPoint
+    maxRopes: 2
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Construction
+    graph: TetherAnchorEye
+    node: eye

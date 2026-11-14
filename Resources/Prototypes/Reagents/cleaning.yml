@@ -45,6 +45,7 @@
   tileReactions:
     - !type:CleanTileReaction {}
     - !type:CleanDecalsReaction {}
+    - !type:WolfmedCleanSplats {} # WOLFGATE(Wolfmed): GORE: wall blood splats are entities, not decals.
 
 - type: reagent
   id: SoapReagent

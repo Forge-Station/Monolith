@@ -1,0 +1,21 @@
+# The book every synthetic starts with in its backpack (WFSynthManualSystem). It opens the guide page; nothing prints it.
+
+- type: entity
+  parent: BaseGuidebook
+  id: WFBookSynthsAndYou
+  name: Synths and You
+  description: A worn manual on keeping a synthetic chassis running, written for the people standing over one.
+  components:
+  - type: Sprite
+    layers:
+    - state: paper
+    - state: cover_base
+      color: "#3d4f5c"
+    - state: decor_wingette
+      color: "#2c3a44"
+    - state: icon_borg
+      color: "#c9d6dd"
+  - type: GuideHelp
+    openOnActivation: true
+    guides:
+    - WFSynthsAndYou

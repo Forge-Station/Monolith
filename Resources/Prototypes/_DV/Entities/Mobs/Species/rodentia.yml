@@ -19,11 +19,6 @@
   - type: Icon
     sprite: _DV/Mobs/Species/Rodentia/parts.rsi
     state: full
-  # Forge-change-start
-  - type: NightVision
-  - type: Puller
-    needsHands: false
-  # Forge-change-end
   - type: Body
     prototype: Rodentia
   - type: Speech
@@ -47,6 +42,7 @@
   - type: Sprite
     scale: 0.8, 0.8
     layers:
+      - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - split tail layers ported from HardLight/Floof
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
       - map: [ "enum.HumanoidVisualLayers.Head" ]
       - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -55,6 +51,8 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ] # WOLFGATE - underwear layers ported from HardLight
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # WOLFGATE - underwear layers ported from HardLight
       - map: [ "jumpsuit" ]
       - map: [ "balaclava" ]
       - map: [ "enum.HumanoidVisualLayers.LHand" ]
@@ -75,6 +73,9 @@
       - map: [ "belt" ]
       - map: [ "back" ]
       - map: [ "neck" ]
+      - map: [ "neck2" ]
+      - map: [ "neck3" ]
+      - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - drawn above the neck slots so cloaks do not cover the tail
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
@@ -128,6 +129,9 @@
       - 0, 2, 5, 4
   - type: CrawlUnderObjects
     actionProto: ActionToggleSneakMode
+    sneakSpeedModifier: 0.55 # WOLFGATE: HardLight balance, squeeze instead of walking under tables
+    squeezeRadiusScale: 0.9
+    unsqueezedRadiusScale: 1.0
 
 - type: entity
   save: false

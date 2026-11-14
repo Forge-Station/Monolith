@@ -1,0 +1,248 @@
+# Queen, king and command actions. RMC's Action/TargetAction pairs are single action components here.
+- type: entity
+  id: ActionXenoScreech
+  parent: ActionXenoBase
+  name: Screech (250)
+  description: A wide area of effect stun, screeches upon activation. [color=red]This will also stun parasites, and is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: screech
+    useDelay: 50
+    event: !type:XenoScreechActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoGut
+  parent: ActionXenoBase
+  name: Gut (200)
+  description: Gibs the mob you decide to gut.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: gut
+    range: 2
+    event: !type:XenoGutActionEvent
+
+- type: entity
+  id: ActionXenoSpitQueen
+  parent: ActionXenoSpit
+  name: Xeno Spit (50/25)
+  description: Launches a projectile that will either paralyze the first enemy it hits or damage them and cover them in acid.
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoToggleSpitType
+  name: Toggle Spit Type
+  description: Toggle between Neurotoxic or Acidic spit. Neurotoxic has less range and costs 50 plasma, and knocks down the first enemy it hits. Acidic has more range and costs 25 plasma, and damages and covers in acid the first enemy it hits.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: shift_spit_neurotoxin
+    iconOn:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: shift_spit_xeno_acid
+    event: !type:XenoSpitToggleActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoRend
+  name: Rend (25)
+  description: Claw at enemies around you.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    useDelay: 2.5
+    event: !type:XenoRendActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 50
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoDestroy
+  name: Destroy
+  description: After a short time, jump to the targeted location, destroying structures and gibbing hostiles within a 3x3 range. Works over barricades and other short barriers.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: charge
+    useDelay: 60
+    range: 7
+    deselectOnMiss: false
+    event: !type:XenoDestroyActionEvent
+
+- type: entity
+  id: ActionXenoWordQueen
+  parent: ActionXenoBase
+  name: Word of the Queen (50) # TODO RMC14 proper plasma costs
+  description: Sends a message to all members of your hive.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: queen_word
+    useDelay: 10
+    event: !type:XenoWordQueenActionEvent
+  - type: XenoWordQueenAction
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoPsychicWhisper
+  parent: ActionXenoBase
+  name: Psychic Whisper
+  description: Whisper a psychic message to a nearby mind.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: psychic_whisper
+    useDelay: 10
+    range: 7
+    canTargetSelf: false
+    whitelist:
+      components:
+      - MobState
+    event: !type:XenoPsychicWhisperActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoPsychicRadiance
+  parent: ActionXenoBase
+  name: Psychic Radiance (100)
+  description: Radiate a psychic message to nearby minds.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: psychic_radiance
+    useDelay: 10
+    event: !type:XenoPsychicRadianceActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoGiveOrder
+  parent: ActionXenoBase
+  name: Give Order (100)
+  description: Send a psychic order to the xenonid you are watching.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: queen_order
+    useDelay: 10
+    event: !type:XenoGiveOrderActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoManageHive
+  name: Manage The Hive
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: xeno_readmit
+    useDelay: 0.5
+    event: !type:ManageHiveActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoLeader
+  name: Choose/Follow Xenonid Leaders
+  description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: xeno_lead
+    useDelay: 3
+    event: !type:HiveLeaderActionEvent
+
+- type: entity
+  parent: ActionXenoTransferPlasma
+  id: ActionXenoTransferPlasmaQueen
+  name: Give Plasma (400) # TODO RMC14 proper plasma costs
+  description: Remotely restores 75% of a single xenonid's max plasma.
+  components:
+  - type: EntityTargetAction
+    useDelay: 12
+    range: -1
+    checkCanAccess: false
+    event: !type:XenoTransferPlasmaActionEvent
+      cost: 400
+      amount: 0
+      targetPercentage: 0.75
+      range: null
+
+- type: entity
+  parent: ActionXenoTransferPlasma
+  id: ActionXenoTransferPlasmaHivelord
+  name: Transfer plasma (200) # TODO RMC14 proper plasma costs
+  description: Give plasma to a xenonid.
+  components:
+  - type: EntityTargetAction
+    range: 7
+    event: !type:XenoTransferPlasmaActionEvent
+      amount: 200
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoQueenEye
+  name: Enter Eye Form
+  description: Look around any area with weeds remotely. You can use infinite range abilities while in this form, and build resin from afar.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: queen_eye
+    useDelay: 0.25
+    event: !type:QueenEyeActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoBulwarkOfTheHive
+  name: Bulwark Of The Hive
+  description: Grants all hivemembers around you a temporary shield that blocks 200 damage for 10 seconds. While their shield is up, hivemembers can only take damage up to 10% of their health at a time.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: soak
+    useDelay: 60
+    event: !type:XenoBulwarkOfTheHiveActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoDoom
+  name: Doom (50)
+  description: Turns off lights around you for 10 seconds, and slows, dazes, and drains hostiles as well.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: screech
+    useDelay: 45
+    event: !type:XenoDoomActionEvent
+  - type: XenoActionPlasma
+    cost: 50

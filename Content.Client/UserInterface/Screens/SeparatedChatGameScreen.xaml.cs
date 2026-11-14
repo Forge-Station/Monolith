@@ -34,7 +34,7 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
     private void ResizeActionContainer()
     {
         float indent = 20;
-        Actions.ActionsContainer.MaxGridWidth = ViewportContainer.Size.X - indent;
+        Actions.ActionsContainer.MaxGridWidth = Math.Max(ViewportContainer.Size.X - indent, 1); // WOLFGATE(Cockpit): Hidden HUD containers can briefly have zero width while borrowed.
     }
 
     public override ChatBox ChatBox => GetWidget<ChatBox>()!;

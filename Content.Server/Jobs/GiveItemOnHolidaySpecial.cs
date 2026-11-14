@@ -3,7 +3,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Jobs
 {

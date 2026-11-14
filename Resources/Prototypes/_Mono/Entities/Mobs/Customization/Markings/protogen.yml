@@ -2,34 +2,64 @@
   id: ProtogenTail
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Protogen]
+  speciesRestriction: [Protogen, ProtoAvali, ProtoDawi, ProtoFeline, ProtoHumie, ProtoKin, ProtoMoth, ProtoResomi, ProtoThaven, ProtoVox, ProtoVulp]
+  # WOLFGATE - the south frame draws behind the body so it no longer covers the groin. The other three
+  # facings move from Tail to the protogen TailOversuit slot, which sits above the anatomy anchors and,
+  # since the layer order fix, above the neck slots, so the tail still draws over anatomy and cloaks.
+  layering:
+    tail_protogen_FRONT: TailOversuit
+    tail_protogen_BEHIND: TailBehind
+  colorLinks: # WOLFGATE
+    tail_protogen_BEHIND: tail_protogen_FRONT
   sprites:
-  - sprite: _Mono/Mobs/Customization/protogen_parts.rsi
-    state: tail_protogen
+  - sprite: _WF/Mobs/Customization/protogen_tails.rsi # WOLFGATE - split art
+    state: tail_protogen_FRONT # index 0 keeps the saved single colour
+  - sprite: _WF/Mobs/Customization/protogen_tails.rsi
+    state: tail_protogen_BEHIND
 
 - type: marking
   id: ProtogenTailBushy
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Protogen]
+  speciesRestriction: [Protogen, ProtoAvali, ProtoDawi, ProtoFeline, ProtoHumie, ProtoKin, ProtoMoth, ProtoResomi, ProtoThaven, ProtoVox, ProtoVulp]
+  # WOLFGATE - the south frame draws behind the body so it no longer covers the groin. The other three
+  # facings move from Tail to the protogen TailOversuit slot, which sits above the anatomy anchors and,
+  # since the layer order fix, above the neck slots, so the tail still draws over anatomy and cloaks.
+  layering:
+    bushy_tail_protogen_FRONT: TailOversuit
+    bushy_tail_protogen_BEHIND: TailBehind
+  colorLinks: # WOLFGATE
+    bushy_tail_protogen_BEHIND: bushy_tail_protogen_FRONT
   sprites:
-  - sprite: _Mono/Mobs/Customization/protogen_parts.rsi
-    state: bushy_tail_protogen
+  - sprite: _WF/Mobs/Customization/protogen_tails.rsi # WOLFGATE - split art
+    state: bushy_tail_protogen_FRONT # index 0 keeps the saved single colour
+  - sprite: _WF/Mobs/Customization/protogen_tails.rsi
+    state: bushy_tail_protogen_BEHIND
 
 - type: marking
   id: ProtogenTailShark
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Protogen]
+  speciesRestriction: [Protogen, ProtoAvali, ProtoDawi, ProtoFeline, ProtoHumie, ProtoKin, ProtoMoth, ProtoResomi, ProtoThaven, ProtoVox, ProtoVulp]
+  # WOLFGATE - the south frame draws behind the body so it no longer covers the groin. The other three
+  # facings move from Tail to the protogen TailOversuit slot, which sits above the anatomy anchors and,
+  # since the layer order fix, above the neck slots, so the tail still draws over anatomy and cloaks.
+  layering:
+    shark_tail_protogen_FRONT: TailOversuit
+    shark_tail_protogen_BEHIND: TailBehind
+  colorLinks: # WOLFGATE
+    shark_tail_protogen_BEHIND: shark_tail_protogen_FRONT
   sprites:
-  - sprite: _Mono/Mobs/Customization/protogen_parts.rsi
-    state: shark_tail_protogen
+  - sprite: _WF/Mobs/Customization/protogen_tails.rsi # WOLFGATE - split art
+    state: shark_tail_protogen_FRONT # index 0 keeps the saved single colour
+  - sprite: _WF/Mobs/Customization/protogen_tails.rsi
+    state: shark_tail_protogen_BEHIND
 
 - type: marking
   id: ProtogenEars
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Protogen]
+  speciesRestriction: [Protogen, ProtoAvali, ProtoDawi, ProtoFeline, ProtoHumie, ProtoKin, ProtoMoth, ProtoThaven, ProtoVox, ProtoVulp]
   sprites:
   - sprite: _Mono/Mobs/Customization/protogen_parts.rsi
     state: ears_protogen
@@ -38,7 +68,7 @@
   id: TwoProtogenEars
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Protogen]
+  speciesRestriction: [Protogen, ProtoAvali, ProtoDawi, ProtoFeline, ProtoHumie, ProtoKin, ProtoMoth, ProtoThaven, ProtoVox, ProtoVulp]
   sprites:
   - sprite: _Mono/Mobs/Customization/protogen_parts.rsi
     state: two_ears_protogen
@@ -47,7 +77,7 @@
   id: ProtogenVisor
   bodyPart: Snout
   markingCategory: Snout
-  speciesRestriction: [Protogen]
+  speciesRestriction: [Protogen, ProtoDawi, ProtoHumie]
   sprites:
   - sprite: _Mono/Mobs/Customization/protogen_parts.rsi
     state: visor_protogen

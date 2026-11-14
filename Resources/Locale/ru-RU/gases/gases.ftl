@@ -11,3 +11,4 @@ gases-bz = BZ
 gases-healium = Хилиум
 gases-nitrium = Нитриум
 gases-pluoxium = Плуоксиум
+gases-smoke = Дым

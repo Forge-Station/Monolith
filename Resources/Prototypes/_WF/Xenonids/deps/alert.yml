@@ -1,0 +1,137 @@
+# RMC-14: Resources/Prototypes/_RMC14/Alerts/alerts.yml
+# WOLFGATE: alerts have no inheritance here; HiveTracker's fields are copied
+- type: alert
+  id: HiveCoreTracker
+  category: Tracker
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-center
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-south
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southeast
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-east
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northeast
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-north
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northwest
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-west
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southwest
+  name: Hive Core Tracker
+  description: Tracks the hive core.
+  clickEvent: !type:HiveTrackerClickedAlertEvent
+  minSeverity: 0
+  maxSeverity: 10
+
+# RMC-14: Resources/Prototypes/_RMC14/Alerts/alerts.yml
+- type: alert
+  id: HiveTracker
+  # WOLFGATE: no alt-click on alerts here, so tracker modes cycle from the alert menu only
+  category: Tracker
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-center
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-south
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southeast
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-east
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northeast
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-north
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northwest
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-west
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southwest
+  name: Xenonid Tracker
+  description: Tracks the Queen.
+  clickEvent: !type:HiveTrackerClickedAlertEvent
+  minSeverity: 0
+  maxSeverity: 10
+
+# RMC-14: Resources/Prototypes/_RMC14/Alerts/alerts.yml
+# WOLFGATE: alerts have no inheritance here; HiveTracker's fields are copied
+- type: alert
+  id: LeaderTracker
+  category: Tracker
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-center
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-south
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southeast
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-east
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northeast
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-north
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northwest
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-west
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southwest
+  name: Hive Leader Tracker
+  description: Tracks a hive leader.
+  clickEvent: !type:HiveTrackerClickedAlertEvent
+  minSeverity: 0
+  maxSeverity: 10
+
+# RMC-14: Resources/Prototypes/_RMC14/Alerts/alerts.yml
+- type: alert
+  id: RMCUnconscious
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/status.rsi
+    state: sleeping
+  name: rmc-alerts-unconscious-name
+  description: rmc-alerts-unconscious-desc
+
+# RMC-14: Resources/Prototypes/_RMC14/Alerts/alerts.yml
+- type: alert
+  id: TunnelTracker
+  category: Tracker
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-center
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-south
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southeast
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-east
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northeast
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-north
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northwest
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-west
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southwest
+  name: Tunnel Tracker
+  description: Tracks a tunnel.
+  clickEvent: !type:HiveTrackerClickedAlertEvent
+  minSeverity: 0
+  maxSeverity: 10
+
+# RMC-14: Resources/Prototypes/_RMC14/Alerts/alerts.yml

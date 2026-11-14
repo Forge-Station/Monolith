@@ -18,7 +18,7 @@
       - AnomalyGenerator
       - TegGenerator
       - TegCirculator
-      - Artifact
+      - XenoArtifact # WOLFGATE(Xenoarch)
     canTargetSelf: false
     interactOnMiss: false
     sound: !type:SoundPathSpecifier

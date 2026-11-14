@@ -1,0 +1,38 @@
+# The choices in the creator's Augments tab. Only the base cybernetic limbs for now; more kinds (plating, missing
+# limbs, organs) and priced augments, which are bought once from the character's bank, can be added here.
+
+- type: wfAugment
+  id: WFAugmentCyberLeftArm
+  name: wf-augment-cyber-arm
+  description: wf-augment-cyber-arm-desc
+  slot: LeftArm
+  kind: Limb
+  part: WFAugmentLeftArm
+  styled: true
+
+- type: wfAugment
+  id: WFAugmentCyberRightArm
+  name: wf-augment-cyber-arm
+  description: wf-augment-cyber-arm-desc
+  slot: RightArm
+  kind: Limb
+  part: WFAugmentRightArm
+  styled: true
+
+- type: wfAugment
+  id: WFAugmentCyberLeftLeg
+  name: wf-augment-cyber-leg
+  description: wf-augment-cyber-leg-desc
+  slot: LeftLeg
+  kind: Limb
+  part: WFAugmentLeftLeg
+  styled: true
+
+- type: wfAugment
+  id: WFAugmentCyberRightLeg
+  name: wf-augment-cyber-leg
+  description: wf-augment-cyber-leg-desc
+  slot: RightLeg
+  kind: Limb
+  part: WFAugmentRightLeg
+  styled: true

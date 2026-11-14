@@ -1,0 +1,5 @@
+- type: guideEntry
+  id: WFAsf
+  name: guide-entry-wf-asf
+  text: "/ServerInfo/_WF/Asf/Guidebook/Factions/Asf.xml"
+  priority: 13

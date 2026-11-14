@@ -1,0 +1,10 @@
+<controls:RoadmapVersionHeader
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._WF.Roadmap"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    Orientation="Horizontal"
+    Margin="0 0 0 15">
+    <cc:HSeparator SeparatorColor="#4972A1" HorizontalExpand="True" MaxHeight="2" VerticalAlignment="Center" />
+    <Label Name="Version" Margin="5 0" />
+    <cc:HSeparator SeparatorColor="#4972A1" HorizontalExpand="True" MaxHeight="2" VerticalAlignment="Center" />
+</controls:RoadmapVersionHeader>

@@ -1,0 +1,38 @@
+# Wolfgate: ported from HardLight
+# RMCSkrellWarble removed: its trigger words duplicated Warble, so Skrell use Warble with their own sound.
+# Punctuated trigger variants removed: chat input is trimmed of punctuation before lookup, so they never matched.
+- type: emote
+  id: RMCSkrellAnger
+  name: rmc-emote-name-anger
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: skrellanger } # Wolfgate: was the default scream icon
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-anger"]
+  chatTriggers:
+    - anger
+    - angers
+    - trill angrily
+    - trills angrily
+
+- type: emote
+  id: RMCSkrellPeep
+  name: rmc-emote-name-peep
+  icon: { sprite: _RMC14/Actions/species_emotes.rsi, state: peep } # Wolfgate: was the default scream icon
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-peep"]
+  chatTriggers:
+    - peep
+    - peeps

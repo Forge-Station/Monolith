@@ -13,6 +13,7 @@
       - id: Retractor
       - id: Scalpel
       - id: BoneGel # Shitmed Change
+      - id: WFWolfmedSkinGraft # WOLFGATE(Wolfmed): W4: the graft step's tool, beside the bone gel it mirrors.
       - id: NitrousOxideTankFilled # Mono
 
 - type: entity

@@ -1,0 +1,97 @@
+# The ancient temple (ancient_temple.yml, its halls in ancient_temple_below.yml): skeletal guardians with old blades
+# who attack anyone who comes down the stairs, and relics left in its vault and throne room.
+
+- type: entity
+  parent: MobSkeletonPerson
+  id: WFTempleSkeleton
+  name: temple guardian
+  description: Old bones that still keep their watch. It grips its blade and won't let you pass.
+  suffix: AI, Hostile
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHumanoidHostileCompound
+  - type: Loadout
+    prototypes: [ WFTempleSkeletonGear ]
+  # Nothing left to breathe, freeze or burst: the temple sits in whatever the world's caverns hold.
+  - type: PressureImmunity
+  - type: BreathingImmunity
+  - type: TemperatureImmunity
+
+- type: startingGear
+  id: WFTempleSkeletonGear
+  inhand:
+  - WFTempleBlade
+
+# Weaker than a claymore: there are several guardians, and their blades are loot.
+- type: entity
+  parent: BaseSword
+  id: WFTempleBlade
+  name: corroded temple blade
+  description: An ancient sword gone green and pitted with age. The edge is long gone, but it still hits hard.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/claymore.rsi
+  - type: MeleeWeapon
+    attackRate: 0.8
+    damage:
+      types:
+        Slash: 8
+        Blunt: 6
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Clothing
+    sprite: Objects/Weapons/Melee/claymore.rsi
+    slots:
+    - back
+    - suitStorage
+  - type: DisarmMalus
+
+- type: entity
+  parent: MarkerBase
+  id: WFTempleSkeletonSpawner
+  name: temple guardian spawner
+  suffix: AI, Hostile
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Mobs/Species/Skeleton/parts.rsi
+      state: full
+  - type: ConditionalSpawner
+    prototypes:
+    - WFTempleSkeleton
+
+- type: entity
+  parent: MarkerBase
+  id: WFTempleRelicSpawner
+  name: temple relic spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Objects/Specific/Xenoarchaeology/item_artifacts.rsi
+      state: ano01
+  - type: EntityTableSpawner
+    offset: 0.3
+    table: !type:NestedSelector
+      tableId: WFTempleRelics
+
+# An alien artifact, a handful of old coins and sometimes a fragment of another.
+- type: entityTable
+  id: WFTempleRelics
+  table: !type:AllSelector
+    children:
+    # The xenoarch rework (#394) leaves only the complex artifact; the simple and medium ones are migrated to it.
+    - id: ComplexXenoArtifactItem
+    - !type:NestedSelector
+      tableId: TreasureCoinPileRare
+      rolls: !type:RangeNumberSelector
+        range: 2, 4
+    - id: ArtifactFragment1
+      prob: 0.5

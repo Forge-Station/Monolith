@@ -1,0 +1,6 @@
+# The access a locked ship's doors and lockers require on top of their record keys. No ID card can carry it,
+# so such a reader admits only the deed holder, the allow list and, on a faction ship, the company's access.
+- type: accessLevel
+  id: WFShipLocked
+  name: id-card-access-level-wf-ship-locked
+  canAddToIdCard: false

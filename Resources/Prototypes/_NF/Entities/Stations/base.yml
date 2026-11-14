@@ -89,6 +89,7 @@
       - Paper
       components:
       - Anchorable # No structures, they won't fit in crates
+      - WFTradeOrigin # WOLFGATE(TradeGoods): trade crates are materials to lathes, not console stock
       - Food
       - Currency # No selling money.
       - SpaceGarbage
@@ -103,7 +104,7 @@
       - MindContainer # Positronic brains
       - Body # No corpses
       - MobPrice # Animals (live or dead) and the like
-      - Artifact # Unique, abusable for research points
+      - XenoArtifact # Unique, abusable for research points # WOLFGATE(Xenoarch): the xenoarch rework renamed Artifact
       - RCD # Dup charges
       - Storage # Till fixed
       - StorageFill # Till fixed

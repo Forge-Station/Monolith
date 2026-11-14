@@ -1,0 +1,12 @@
+# Orbit layer centre marker: a warp point and radar label, deliberately without an FTLBeacon.
+
+- type: entity
+  id: WFOrbitBeacon
+  name: Orbital marker # Renamed at spawn
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: WarpPoint
+      adminOnly: true
+    - type: FTLSmashImmune
+    - type: IFF
+      color: '#7FFFD4'

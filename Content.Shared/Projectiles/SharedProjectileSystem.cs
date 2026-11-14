@@ -14,12 +14,10 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events; // Mono
-using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -38,7 +36,6 @@ using Content.Shared.Tag;
 using Robust.Shared.Configuration;
 using Content.Shared._Mono.CCVar;
 using Robust.Shared;
-using Robust.Shared.Spawners;
 using Content.Shared.BarricadeBlock; // BF14
 using Robust.Shared.Random; // BF14
 
@@ -81,11 +78,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     {
         base.Initialize();
 
-        EntityManager.EntityDeleted += OnEntityDeleted; // Forge-Change
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<ProjectileComponent, PreventCollideEvent>(PreventCollision);
-        SubscribeLocalEvent<ProjectileComponent, EntGotInsertedIntoContainerMessage>(OnProjectileInserted);
-        SubscribeLocalEvent<ProjectileComponent, PullStartedMessage>(OnProjectilePullStarted);
         SubscribeLocalEvent<EmbeddableProjectileComponent, PreventCollideEvent>(EmbeddablePreventCollision); // Goobstation - Crawl Fix
         SubscribeLocalEvent<EmbeddableProjectileComponent, ProjectileHitEvent>(OnEmbedProjectileHit);
         SubscribeLocalEvent<EmbeddableProjectileComponent, ThrowDoHitEvent>(OnEmbedThrowDoHit);
@@ -103,48 +97,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         // Mono End
     }
 
-    // Forge-Change-Start
-    public override void Shutdown()
-    {
-        EntityManager.EntityDeleted -= OnEntityDeleted;
-        base.Shutdown();
-    }
-
-    /// <summary>
-    /// A deleted shooter or gun still sits on the projectile. The generated networked state is the
-    /// only allowed <c>ComponentGetState</c> handler, and it calls <c>GetNetEntity</c>, which logs
-    /// for every viewer. Deletion finishes before the game state is sent, so clear the ids here.
-    /// A shot that only collides once a weapon is set must keep some weapon id, or it turns back
-    /// into dormant ammo in mid-air.
-    /// </summary>
-    private void OnEntityDeleted(Entity<MetaDataComponent> entity)
-    {
-        var deleted = entity.Owner;
-        var query = EntityQueryEnumerator<ProjectileComponent>();
-        while (query.MoveNext(out var uid, out var component))
-        {
-            if (uid == deleted || TerminatingOrDeleted(uid))
-                continue;
-
-            var changed = false;
-            if (component.Shooter == deleted)
-            {
-                component.Shooter = null;
-                changed = true;
-            }
-
-            if (component.Weapon == deleted)
-            {
-                component.Weapon = component.OnlyCollideWhenShot ? uid : null;
-                changed = true;
-            }
-
-            if (changed)
-                Dirty(uid, component);
-        }
-    }
-    // Forge-Change-End
-
     /// <summary>
     /// Mono: Handles whether a projectile is raycasted based off projectile speed.
     /// </summary>
@@ -152,78 +104,28 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     /// <returns></returns>
     public bool ShouldRaycastProjectile(float speed)
     {
-        if (_adaptiveRaycasting && speed > _minRaycastVelocity * ((float) _physicsTickrate / BasePhysicsTickrate)) // Forge-Change
+        // WOLFGATE(Weapons) START: scale by the real ratio, as whole-number division made any tickrate under 60 a threshold of zero
+        // if (_adaptiveRaycasting && speed > _minRaycastVelocity * (_physicsTickrate / BasePhysicsTickrate))
+        if (_adaptiveRaycasting && speed > _minRaycastVelocity * ((float) _physicsTickrate / BasePhysicsTickrate))
             return true;
+        // WOLFGATE END
         else if (speed > _minRaycastVelocity)
             return true;
 
         return false;
     }
 
-    /// <summary>
-    /// Returns whether the entity should currently behave like an active projectile.
-    /// Dormant ammo items keep their projectile component so they can be shot later,
-    /// but should otherwise behave like ordinary items in hands, pockets, and containers.
-    /// </summary>
-    protected static bool IsActiveProjectile(in ProjectileComponent component)
-    {
-        return !component.ProjectileSpent &&
-               !(component.OnlyCollideWhenShot && component.Weapon == null);
-    }
-
-    /// <summary>
-    /// Returns reusable ammo to dormant item behavior after pickup/pull.
-    /// Shot projectiles stay InAir with Weapon set, which otherwise lets them
-    /// levitate when pulled and keep projectile embedding after a throw.
-    /// </summary>
-    public void DeactivateShotProjectile(EntityUid uid, ProjectileComponent? component = null)
-    {
-        if (!Resolve(uid, ref component, false) || !component.OnlyCollideWhenShot)
-            return;
-
-        // Weapon is what IsActiveProjectile checks; clear networked shot identity only when needed.
-        if (component.Weapon != null || component.Shooter != null)
-        {
-            component.Weapon = null;
-            component.Shooter = null;
-            Dirty(uid, component);
-        }
-
-        // Server-local raycast hack; not networked, so no Dirty.
-        component.RaycastResetVelocity = null;
-
-        // Cancel flight despawn once the ammo is recovered / landed.
-        RemComp<TimedDespawnComponent>(uid);
-
-        // Physics is what stops levitation; BodyStatus/velocity replicate via physics, not Dirty.
-        if (!TryComp(uid, out PhysicsComponent? physics))
-            return;
-
-        if (physics.BodyStatus == BodyStatus.InAir)
-            _physics.SetBodyStatus(uid, physics, BodyStatus.OnGround);
-
-        _physics.SetLinearVelocity(uid, Vector2.Zero, body: physics);
-        _physics.SetAngularVelocity(uid, 0f, body: physics);
-    }
-
-    private void OnProjectileInserted(EntityUid uid, ProjectileComponent component, EntGotInsertedIntoContainerMessage args)
-    {
-        DeactivateShotProjectile(uid, component);
-    }
-
-    private void OnProjectilePullStarted(EntityUid uid, ProjectileComponent component, PullStartedMessage args)
-    {
-        if (args.PulledUid != uid)
-            return;
-
-        DeactivateShotProjectile(uid, component);
-    }
-
     private void OnStartCollide(EntityUid uid, ProjectileComponent component, ref StartCollideEvent args)
     {
         // This is so entities that shouldn't get a collision are ignored.
-        if (args.OurFixtureId != ProjectileFixture || !args.OtherFixture.Hard || !IsActiveProjectile(component))
+        if (args.OurFixtureId != ProjectileFixture || !args.OtherFixture.Hard
+            || component.ProjectileSpent || component is { Weapon: null, OnlyCollideWhenShot: true })
             return;
+
+        // WOLFGATE(Weapons) START: the client's GunPredictionSystem handles its predicted copies
+        if (HasComp<PredictedProjectileClientComponent>(uid))
+            return;
+        // WOLFGATE END
 
         ProjectileCollide((uid, component, args.OurBody), args.OtherEntity);
     }
@@ -242,6 +144,11 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         RaiseLocalEvent(target, ref attemptEv);
         if (attemptEv.Cancelled)
         {
+            // WOLFGATE(Weapons) START: a reflected projectile is no longer the shooter's predicted bullet, so stop hiding it from them
+            if (_net.IsServer)
+                RemComp<PredictedProjectileServerComponent>(uid);
+            // WOLFGATE END
+
             SetShooter(uid, component, target);
             return null;
         }
@@ -292,7 +199,19 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         var impactFilter = Robust.Shared.Player.Filter.Pvs(coordinates, entityMan: EntityManager);
         var damageFilter = Robust.Shared.Player.Filter.Pvs(coordinates, entityMan: EntityManager);
 
-        if (modifiedDamage is not null && (EntityManager.EntityExists(component.Shooter) || EntityManager.EntityExists(component.Weapon)))
+        // WOLFGATE(Weapons) START: skip these for a shooter whose own predicted copy already played them
+        // Hit means the shooter's client reported this projectile as having hit something, which it only does
+        // after playing the impact and the flash locally, so a projectile they never claimed still shows them both.
+        if (_guns.GunPrediction &&
+            CompOrNull<PredictedProjectileServerComponent>(projectile) is { Shooter: { } predictedShooter } predictedServer &&
+            (predicted || predictedServer.Hit))
+        {
+            impactFilter = impactFilter.RemovePlayer(predictedShooter);
+            damageFilter = damageFilter.RemovePlayer(predictedShooter);
+        }
+        // WOLFGATE END
+
+        if (modifiedDamage is not null && (Exists(component.Shooter) || Exists(component.Weapon)))
         {
             if (modifiedDamage.AnyPositive() && !deleted)
             {
@@ -300,7 +219,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
                 _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, damageFilter);
             }
 
-            var shooterOrWeapon = EntityManager.EntityExists(component.Shooter) ? component.Shooter!.Value : component.Weapon!.Value;
+            var shooterOrWeapon = Exists(component.Shooter) ? component.Shooter!.Value : component.Weapon!.Value;
 
             var projectileName = ToPrettyString(uid);
             var shooterName = ToPrettyString(shooterOrWeapon);
@@ -383,7 +302,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
                 continue;
 
             // Check if entities still exist
-            if (!EntityManager.EntityExists(check.Uid) || !EntityManager.EntityExists(check.Target))
+            if (!Exists(check.Uid) || !Exists(check.Target))
                 continue;
 
             collisionChecks.Add(check);
@@ -443,7 +362,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     public bool CheckShieldCollision(EntityUid uid, ProjectileComponent component, EntityUid target)
     {
         // Check if projectile entity still exists (might have been deleted during processing)
-        if (!EntityManager.EntityExists(uid) || !EntityManager.EntityExists(target))
+        if (!Exists(uid) || !Exists(target))
             return false;
 
         // Raise event to check if any shield system wants to prevent collision
@@ -586,11 +505,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
     private void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)
     {
-        // Forge-Change-start: prediction can embed twice (Drake hardsuit grappling hook).
-        if (component.EmbeddedIntoUid != null)
-            return;
-        // Forge-Change-end
-
         TryComp<PhysicsComponent>(uid, out var physics);
         _physics.SetLinearVelocity(uid, Vector2.Zero, body: physics);
         _physics.SetBodyType(uid, BodyType.Static, body: physics);
@@ -607,22 +521,18 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         _audio.PlayPredicted(component.Sound, uid, null);
         component.EmbeddedIntoUid = target;
-        // Embedded ammo should not despawn while stuck in a target, exception tesla-bolts.
-        if (TryComp<ProjectileComponent>(uid, out var projectile) && projectile.FlightLifetime > 0f)
-            RemComp<TimedDespawnComponent>(uid);
         var ev = new EmbedEvent(user, target);
         RaiseLocalEvent(uid, ref ev);
         Dirty(uid, component);
 
         EnsureComp<EmbeddedContainerComponent>(target, out var embeddedContainer);
 
-        // Forge-Change-start
-        if (embeddedContainer.EmbeddedObjects.Contains(uid))
-            return;
-        // Forge-Change-end
-
+        // WOLFGATE START: the client replays a thrown embed's collision in prediction, and the projectile is already in
+        // the target's set from the first pass; the debug assert took a debug client down for it. The set add is idempotent.
+        //Assert that this entity not embed
+        // DebugTools.AssertEqual(embeddedContainer.EmbeddedObjects.Contains(uid), false);
+        // WOLFGATE END
         embeddedContainer.EmbeddedObjects.Add(uid);
-        Dirty(target, embeddedContainer);
     }
 
     public void EmbedDetach(EntityUid uid, EmbeddableProjectileComponent? component, EntityUid? user = null)
@@ -638,15 +548,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         if (component.EmbeddedIntoUid is not null)
         {
-            var embeddedInto = component.EmbeddedIntoUid.Value;  // Forge-Change Begin
-            if (TryComp<EmbeddedContainerComponent>(embeddedInto, out var embeddedContainer))
-            {
+            if (TryComp<EmbeddedContainerComponent>(component.EmbeddedIntoUid.Value, out var embeddedContainer))
                 embeddedContainer.EmbeddedObjects.Remove(uid);
-                if (embeddedContainer.EmbeddedObjects.Count == 0)
-                    RemCompDeferred<EmbeddedContainerComponent>(embeddedInto);
-                else
-                    Dirty(embeddedInto, embeddedContainer);
-            }  // Forge-Change End
         }
 
         var xform = Transform(uid);
@@ -662,7 +565,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             projectile.Shooter = null;
             projectile.Weapon = null;
             projectile.ProjectileSpent = false;
-            projectile.RaycastResetVelocity = null; /// Forge-Change
 
             Dirty(uid, projectile);
         }
@@ -703,10 +605,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     // Mono
     private void OnTileFriction(Entity<ProjectileComponent> ent, ref TileFrictionEvent args)
     {
-        /// Forge-Change-Start
-        if(ent.Comp.ProjectileSpent)
-            args.Modifier = ent.Comp.LinearDampening;
-        /// Forge-Change-End
+        args.Modifier = ent.Comp.LinearDampening;
     }
 
     public void SetShooter(EntityUid id, ProjectileComponent component, EntityUid shooterId)
@@ -749,6 +648,12 @@ public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, Projectile
 /// </summary>
 [ByRefEvent]
 public record struct ProjectileHitEvent(DamageSpecifier Damage, EntityUid Target, EntityUid? Shooter = null, bool Handled = false);
+
+/// <summary>
+/// Raised on the projectile for every hit. The shield handler owns <see cref="ProjectileHitEvent"/> and raises this even when it returns early.
+/// </summary>
+[ByRefEvent]
+public readonly record struct ProjectileHitNoticedEvent;
 
 /// <summary>
 /// Mono - raised when a projectile is spent

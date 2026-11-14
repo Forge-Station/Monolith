@@ -1,0 +1,27 @@
+- type: entity
+  id: WFCrashBurst
+  categories: [ HideSpawnMenu ]
+  name: crash explosion
+  components:
+  - type: Sprite
+    sprite: Effects/explosion.rsi
+    state: explosionfast
+    scale: 1.2, 1.2
+    drawdepth: Effects
+    noRot: true
+    shader: unshaded
+  - type: TimedDespawn
+    lifetime: 0.48
+  - type: PointLight
+    color: "#ff9e42"
+    radius: 3.5
+    energy: 2
+
+- type: soundCollection
+  id: WFGroundCrashImpacts
+  files:
+  - /Audio/_WF/Planets/Flight/crash10.ogg
+  - /Audio/_WF/Planets/Flight/crash11.ogg
+  - /Audio/_WF/Planets/Flight/crash12.ogg
+  - /Audio/_WF/Planets/Flight/crash3.ogg
+  - /Audio/_WF/Planets/Flight/crash4.ogg

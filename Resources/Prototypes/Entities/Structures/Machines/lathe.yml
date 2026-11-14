@@ -180,7 +180,6 @@
     - NFLights # Frontier
     - NFServiceStatic # Frontier
     - MonoRestraintsStatic # Mono
-    - ReportingStatic # DeltaV
     - TetherStatic # WOLFGATE(Tether)
   - type: EmagLatheRecipes
     emagStaticPacks:

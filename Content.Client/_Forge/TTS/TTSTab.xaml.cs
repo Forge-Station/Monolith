@@ -17,9 +17,9 @@ namespace Content.Client._Forge.TTS;
 [GenerateTypedNameReferences]
 public sealed partial class TTSTab : Control
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly ISharedSponsorManager _sponsorMng = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private ISharedSponsorManager _sponsorMng = default!;
 
     public event Action<string>? OnVoiceSelected;
     public event Action<string>? OnPreviewRequested;

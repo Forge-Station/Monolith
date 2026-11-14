@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -34,6 +35,30 @@ namespace Content.IntegrationTests.Tests
             Dirty = true,
         };
 
+        /// <summary>
+        /// Delete remaining entities after spawn-all tests, then force a GC.
+        /// </summary>
+        private static void DeleteRemainingEntities(IEntityManager entityMan)
+        {
+            var entityMetas = new List<(EntityUid, MetaDataComponent)>();
+            var query = entityMan.AllEntityQueryEnumerator<MetaDataComponent>();
+            while (query.MoveNext(out var uid, out var meta))
+            {
+                entityMetas.Add((uid, meta));
+            }
+
+            foreach (var (uid, meta) in entityMetas)
+            {
+                if (!meta.EntityDeleted)
+                    entityMan.DeleteEntity(uid);
+            }
+
+            Assert.That(entityMan.EntityCount, Is.Zero);
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
         [Test]
         [PairConfig(nameof(Disconnected))]
         public async Task SpawnAndDeleteAllEntitiesOnDifferentMaps()
@@ -65,33 +90,13 @@ namespace Content.IntegrationTests.Tests
                     var coord = new EntityCoordinates(grid.Owner, 0, 0);
                     SpawnEntity(entityMan, protoId, coord); // Mono
 
-                    mapSystem.DeleteMap(mapId); // Forge-change: Out Of Memory. OOM. OOM.
+                    // Forge-change: delete each map immediately so Solutions child entities do not accumulate → OOM.
+                    mapSystem.DeleteMap(mapId);
                 }
             });
 
             await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
-
-            await server.WaitPost(() =>
-            {
-                static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
-                    where TComp : Component
-                {
-                    var query = entityMan.AllEntityQueryEnumerator<TComp>();
-                    while (query.MoveNext(out var uid, out var meta))
-                    {
-                        yield return (uid, meta);
-                    }
-                }
-
-                var entityMetas = Query<MetaDataComponent>(entityMan).ToList();
-                foreach (var (uid, meta) in entityMetas)
-                {
-                    if (!meta.EntityDeleted)
-                        entityMan.DeleteEntity(uid);
-                }
-
-                Assert.That(entityMan.EntityCount, Is.Zero);
-            });
+            await server.WaitPost(() => DeleteRemainingEntities(entityMan));
         }
 
         [Test]
@@ -108,45 +113,36 @@ namespace Content.IntegrationTests.Tests
 
             await server.WaitPost(() =>
             {
+                // Same-spot stacks everything on one tile for hundreds of ticks. Explosives / anomalies /
+                // meteors chain-react and gib body parts (actions without physics, container mutation, etc.).
+                var sameSpotExcluded = new[]
+                {
+                    "MapGrid",
+                    "RoomFill",
+                    "GridSpawner", // Mono
+                    "Meteor", // Mono
+                    "Explosive",
+                    "ExplodeOnTrigger",
+                    "Anomaly",
+                };
 
                 var protoIds = prototypeMan
                     .EnumeratePrototypes<EntityPrototype>()
                     .Where(p => !p.Abstract)
                     .Where(p => !pair.IsTestPrototype(p))
-                    .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
-                    .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
-                    .Where(p => !p.Components.ContainsKey("GridSpawner")) // Mono - We shouldn't spawn grids.
-                    .Where(p => !p.Components.ContainsKey("Meteor")) // Mono
+                    .Where(p => !sameSpotExcluded.Any(p.Components.ContainsKey))
                     .Where(p => p.Categories.All(x => !IgnoredCategories.Contains(x.ID))) // Forge-change: just believe.
                     .Select(p => p.ID)
                     .ToList();
+
                 foreach (var protoId in protoIds)
                 {
                     SpawnEntity(entityMan, protoId, map.GridCoords); // Monolith
                 }
             });
+
             await server.WaitRunTicks(450); // 15 seconds, enough to trigger most update loops
-            await server.WaitPost(() =>
-            {
-                static IEnumerable<(EntityUid, TComp)> Query<TComp>(IEntityManager entityMan)
-                    where TComp : Component
-                {
-                    var query = entityMan.AllEntityQueryEnumerator<TComp>();
-                    while (query.MoveNext(out var uid, out var meta))
-                    {
-                        yield return (uid, meta);
-                    }
-                }
-
-                var entityMetas = Query<MetaDataComponent>(entityMan).ToList();
-                foreach (var (uid, meta) in entityMetas)
-                {
-                    if (!meta.EntityDeleted)
-                        entityMan.DeleteEntity(uid);
-                }
-
-                Assert.That(entityMan.EntityCount, Is.Zero);
-            });
+            await server.WaitPost(() => DeleteRemainingEntities(entityMan));
         }
 
         /// <summary>

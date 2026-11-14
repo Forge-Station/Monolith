@@ -29,7 +29,7 @@ public sealed partial class GunSystem
 
     private DamageSpecifier? GetProjectileDamage(string proto)
     {
-        if (!ProtoManager.TryIndex<EntityPrototype>(proto, out var entityProto))
+        if (!ProtoMan.TryIndex<EntityPrototype>(proto, out var entityProto))
             return null;
 
         if (entityProto.Components

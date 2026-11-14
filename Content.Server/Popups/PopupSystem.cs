@@ -20,7 +20,7 @@ namespace Content.Server.Popups
 
         public override void PopupCursor(string? message, ICommonSession recipient, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             RaiseNetworkEvent(new PopupCursorEvent(message, type), recipient);
@@ -28,7 +28,7 @@ namespace Content.Server.Popups
 
         public override void PopupCursor(string? message, EntityUid recipient, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             if (TryComp(recipient, out ActorComponent? actor))
@@ -47,7 +47,7 @@ namespace Content.Server.Popups
 
         public override void PopupCoordinates(string? message, EntityCoordinates coordinates, Filter filter, bool replayRecord, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             RaiseNetworkEvent(new PopupCoordinatesEvent(message, type, GetNetCoordinates(coordinates)), filter, replayRecord);
@@ -55,7 +55,7 @@ namespace Content.Server.Popups
 
         public override void PopupCoordinates(string? message, EntityCoordinates coordinates, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
             var mapPos = _transform.ToMapCoordinates(coordinates);
             var filter = Filter.Empty().AddPlayersByPvs(mapPos, entManager: EntityManager, playerMan: _player, cfgMan: _cfg);
@@ -64,7 +64,7 @@ namespace Content.Server.Popups
 
         public override void PopupCoordinates(string? message, EntityCoordinates coordinates, ICommonSession recipient, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             RaiseNetworkEvent(new PopupCoordinatesEvent(message, type, GetNetCoordinates(coordinates)), recipient);
@@ -72,7 +72,7 @@ namespace Content.Server.Popups
 
         public override void PopupCoordinates(string? message, EntityCoordinates coordinates, EntityUid recipient, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             if (TryComp(recipient, out ActorComponent? actor))
@@ -81,7 +81,7 @@ namespace Content.Server.Popups
 
         public override void PopupPredictedCoordinates(string? message, EntityCoordinates coordinates, EntityUid? recipient, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             var mapPos = _transform.ToMapCoordinates(coordinates);
@@ -96,7 +96,7 @@ namespace Content.Server.Popups
 
         public override void PopupEntity(string? message, EntityUid uid, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             var filter = Filter.Empty().AddPlayersByPvs(uid, entityManager: EntityManager, playerMan: _player, cfgMan: _cfg);
@@ -105,7 +105,7 @@ namespace Content.Server.Popups
 
         public override void PopupEntity(string? message, EntityUid uid, EntityUid recipient, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             if (TryComp(recipient, out ActorComponent? actor))
@@ -127,7 +127,7 @@ namespace Content.Server.Popups
 
         public override void PopupEntity(string? message, EntityUid uid, ICommonSession recipient, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             RaiseNetworkEvent(new PopupEntityEvent(message, type, GetNetEntity(uid)), recipient);
@@ -135,7 +135,7 @@ namespace Content.Server.Popups
 
         public override void PopupEntity(string? message, EntityUid uid, Filter filter, bool recordReplay, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             RaiseNetworkEvent(new PopupEntityEvent(message, type, GetNetEntity(uid)), filter, recordReplay);
@@ -143,7 +143,7 @@ namespace Content.Server.Popups
 
         public override void PopupPredicted(string? message, EntityUid uid, EntityUid? recipient, PopupType type = PopupType.Small)
         {
-            if (message == null)
+            if (string.IsNullOrWhiteSpace(message))
                 return;
 
             if (recipient != null)

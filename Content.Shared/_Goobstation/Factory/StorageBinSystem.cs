@@ -1,5 +1,6 @@
 using Content.Shared._Goobstation.Factory.Filters;
 using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Systems;
 using Robust.Shared.Containers;
 
 namespace Content.Shared._Goobstation.Factory;
@@ -7,7 +8,7 @@ namespace Content.Shared._Goobstation.Factory;
 public sealed partial class StorageBinSystem : EntitySystem
 {
     [Dependency] private AutomationFilterSystem _filter = default!;
-    [Dependency] private SharedDeviceLinkSystem _device = default!;
+    [Dependency] private DeviceLinkSystem _device = default!;
 
     public const string ContainerId = "storagebase";
 
@@ -34,7 +35,7 @@ public sealed partial class StorageBinSystem : EntitySystem
         if (args.Container.ID != ContainerId)
             return;
 
-        _device.InvokePort(ent, ent.Comp.InsertedPort);
+        _device.InvokePort((ent.Owner, null), ent.Comp.InsertedPort);
     }
 
     private void OnEntRemoved(Entity<StorageBinComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -42,6 +43,6 @@ public sealed partial class StorageBinSystem : EntitySystem
         if (args.Container.ID != ContainerId)
             return;
 
-        _device.InvokePort(ent, ent.Comp.RemovedPort);
+        _device.InvokePort((ent.Owner, null), ent.Comp.RemovedPort);
     }
 }

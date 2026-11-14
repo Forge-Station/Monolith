@@ -22,11 +22,11 @@ public sealed partial class SponsorWindow : FancyWindow
     // Forge-Change: hardcoded "become a sponsor" link. Update this if the donation page changes.
     private const string SponsorUrl = "https://boosty.to/corvaxforge";
 
-    [Dependency] private readonly IClientPreferencesManager _prefs = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly ISharedSponsorManager _sponsors = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IClientPreferencesManager _prefs = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
+    [Dependency] private ISharedSponsorManager _sponsors = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private readonly ColorSelectorSliders _oocColorSelector = new();
     private readonly ColorSelectorSliders _loocColorSelector = new();

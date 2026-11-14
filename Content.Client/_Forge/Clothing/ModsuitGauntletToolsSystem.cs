@@ -7,7 +7,7 @@ namespace Content.Client._Forge.Clothing;
 
 public sealed partial class ModsuitGauntletToolsSystem : SharedModsuitGauntletToolsSystem
 {
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
 
     private ModsuitGauntletToolsRadialMenu? _menu;
 

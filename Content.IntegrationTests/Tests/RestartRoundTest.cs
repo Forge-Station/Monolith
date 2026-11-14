@@ -20,7 +20,7 @@ namespace Content.IntegrationTests.Tests
 
             await server.WaitPost(() =>
             {
-                sysManager.GetEntitySystem<GameTicker>().RestartRound();
+                sysManager.GetEntitySystem<ServerGameTicker>().RestartRound();
             });
 
             await pair.RunTicksSync(10);

@@ -11,12 +11,12 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Server._Forge.Access;
 
-public sealed class JobReassignmentInjectorSystem : EntitySystem
+public sealed partial class JobReassignmentInjectorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly JobReassignmentSystem _reassignment = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private JobReassignmentSystem _reassignment = default!;
 
     public override void Initialize()
     {

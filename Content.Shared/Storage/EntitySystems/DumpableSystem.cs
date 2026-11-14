@@ -14,18 +14,17 @@ namespace Content.Shared.Storage.EntitySystems;
 
 public sealed partial class DumpableSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
 
-    private EntityQuery<ItemComponent> _itemQuery;
+    [Dependency] private readonly EntityQuery<ItemComponent> _itemQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        _itemQuery = GetEntityQuery<ItemComponent>();
+
         SubscribeLocalEvent<DumpableComponent, AfterInteractEvent>(OnAfterInteract, after: new[]{ typeof(SharedEntityStorageSystem) });
         SubscribeLocalEvent<DumpableComponent, GetVerbsEvent<AlternativeVerb>>(AddDumpVerb);
         SubscribeLocalEvent<DumpableComponent, GetVerbsEvent<UtilityVerb>>(AddUtilityVerbs);
@@ -108,7 +107,7 @@ public sealed partial class DumpableSystem : EntitySystem
         foreach (var entity in storage.Container.ContainedEntities)
         {
             if (!_itemQuery.TryGetComponent(entity, out var itemComp) ||
-                !_prototypeManager.TryIndex(itemComp.Size, out var itemSize))
+                !ProtoMan.TryIndex(itemComp.Size, out var itemSize))
             {
                 continue;
             }

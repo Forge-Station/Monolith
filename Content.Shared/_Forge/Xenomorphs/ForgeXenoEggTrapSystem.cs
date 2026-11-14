@@ -8,10 +8,10 @@ namespace Content.Shared._Forge.Xenomorphs;
 /// <summary>
 /// Facehugger eggs stun the first non-hive walker that bumps them, then hatch open.
 /// </summary>
-public sealed class ForgeXenoEggTrapSystem : EntitySystem
+public sealed partial class ForgeXenoEggTrapSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     public override void Initialize()
     {

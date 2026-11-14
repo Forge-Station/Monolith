@@ -1,3 +1,4 @@
+using Content.Shared.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Cargo.Systems;
@@ -33,7 +34,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
     [Dependency] private DockingSystem _docking = default!;
     [Dependency] private PricingSystem _pricing = default!;
     [Dependency] private ShuttleSystem _shuttle = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private MapLoaderSystem _mapLoader = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private MapSystem _map = default!;

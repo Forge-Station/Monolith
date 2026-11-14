@@ -1,6 +1,7 @@
 using Content.Shared._Forge.Features;
 using Content.Shared._Forge.Features.Components;
 using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
@@ -9,12 +10,12 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Server._Forge.Features;
 
-public sealed class CombinationLockSystem : SharedCombinationLockSystem
+public sealed partial class CombinationLockSystem : SharedCombinationLockSystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

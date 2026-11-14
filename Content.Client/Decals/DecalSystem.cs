@@ -14,9 +14,9 @@ namespace Content.Client.Decals
 {
     public sealed partial class DecalSystem : SharedDecalSystem
     {
-        [Dependency] private readonly IOverlayManager _overlayManager = default!;
-        [Dependency] private readonly SpriteSystem _sprites = default!;
-        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private IOverlayManager _overlayManager = default!;
+        [Dependency] private SpriteSystem _sprites = default!;
+        [Dependency] private  IConfigurationManager _cfg = default!;
 
         private DecalOverlay? _overlay;
 
@@ -27,7 +27,7 @@ namespace Content.Client.Decals
         {
             base.Initialize();
 
-            _overlay = new DecalOverlay(_sprites, EntityManager, PrototypeManager);
+            _overlay = new DecalOverlay(_sprites, EntityManager, ProtoMan);
             _overlay.MaxPerTileDraw = _cfg.GetCVar(CCVars.DecalsMaxPerTile);
             _overlay.RemoveIdenticalDuplicates = _cfg.GetCVar(CCVars.DecalsClientDeduplicateIdentical);
             _overlayManager.AddOverlay(_overlay);

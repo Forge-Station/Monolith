@@ -1,4 +1,4 @@
-﻿using Content.Server._Crescent.ShipShields.Components;
+using Content.Server._Crescent.ShipShields.Components;
 using Content.Server._Mono.SpaceArtillery.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Radio;
@@ -10,17 +10,19 @@ using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.CloakingShuttle;
 
-public sealed class CloakingShuttleSystem : EntitySystem
+public sealed partial class CloakingShuttleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedShuttleSystem _sharedShuttleSystem = default!;
-    [Dependency] private readonly PowerReceiverSystem _powerReceiverSystem = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private SharedShuttleSystem _sharedShuttleSystem = default!;
+    [Dependency] private PowerReceiverSystem _powerReceiverSystem = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

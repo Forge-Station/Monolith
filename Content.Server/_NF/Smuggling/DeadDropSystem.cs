@@ -44,10 +44,10 @@ public sealed partial class DeadDropSystem : EntitySystem
     [Dependency] private ShuttleSystem _shuttle = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedMapSystem _mapManager = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private SectorServiceSystem _sectorService = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private GameTicker _ticker = default!;
     [Dependency] private LinkedLifecycleGridSystem _linkedLifecycleGrid = default!;
     [Dependency] private StationRenameWarpsSystems _stationRenameWarps = default!;
     private ISawmill _sawmill = default!;

@@ -10,8 +10,8 @@ namespace Content.Client._Forge.Contractor.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class ActiveContractEntry : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     public Action? OnCompleteButtonPressed;
 

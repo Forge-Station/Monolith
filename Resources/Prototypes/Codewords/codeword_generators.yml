@@ -1,0 +1,6 @@
+- type: codewordGenerator
+  id: TraitorCodewordGenerator
+  words:
+  - adjectives
+  - verbs
+  amount: 4

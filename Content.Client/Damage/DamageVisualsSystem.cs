@@ -361,7 +361,7 @@ public sealed partial class DamageVisualsSystem : VisualizerSystem<DamageVisuals
         if (damageVisComp.TargetLayers != null && damageVisComp.DamageOverlayGroups != null)
             UpdateDisabledLayers(uid, spriteComponent, component, damageVisComp);
 
-        if (damageVisComp.Overlay && damageVisComp.DamageOverlayGroups != null && damageVisComp.TargetLayers == null)
+        if (damageVisComp.Overlay && damageVisComp.TargetLayers == null)
             CheckOverlayOrdering(spriteComponent, damageVisComp);
 
         if (AppearanceSystem.TryGetData<bool>(uid, DamageVisualizerKeys.ForceUpdate, out var update, component)

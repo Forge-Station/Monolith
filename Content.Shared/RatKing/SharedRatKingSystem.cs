@@ -18,7 +18,6 @@ public abstract partial class SharedRatKingSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!; // Used for rummage cooldown
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected IPrototypeManager PrototypeManager = default!;
     [Dependency] protected IRobustRandom Random = default!;
     [Dependency] private SharedActionsSystem _action = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -171,7 +170,7 @@ public abstract partial class SharedRatKingSystem : EntitySystem
         Dirty(uid, component);
         _audio.PlayPredicted(component.Sound, uid, args.User);
 
-        var spawn = PrototypeManager.Index<WeightedRandomEntityPrototype>(component.RummageLoot).Pick(Random);
+        var spawn = ProtoMan.Index<WeightedRandomEntityPrototype>(component.RummageLoot).Pick(Random);
         if (_net.IsServer)
             Spawn(spawn, Transform(uid).Coordinates);
     }

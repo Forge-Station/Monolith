@@ -43,6 +43,7 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     // how often to recheck possible targets (prevents calling expensive
     // check logic each update)
@@ -176,7 +177,7 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
 
     private bool OnUseMouseDown(in PointerInputCmdHandler.PointerInputCmdArgs args)
     {
-        if (args.Session?.AttachedEntity is not {Valid: true} dragger ||
+        if (args.Session?.AttachedEntity is not { Valid: true } dragger ||
             _combatMode.IsInCombatMode())
         {
             return false;
@@ -247,11 +248,11 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
             var mousePos = _eyeManager.PixelToMap(screenPos);
             _dragShadow = EntityManager.SpawnEntity("dragshadow", mousePos);
             var dragSprite = Comp<SpriteComponent>(_dragShadow.Value);
-            dragSprite.CopyFrom(draggedSprite);
+            _sprite.CopySprite((_draggedEntity.Value, draggedSprite), (_dragShadow.Value, dragSprite));
             dragSprite.RenderOrder = EntityManager.CurrentTick.Value;
-            dragSprite.Color = dragSprite.Color.WithAlpha(0.7f);
+            _sprite.SetColor((_dragShadow.Value, dragSprite), dragSprite.Color.WithAlpha(0.7f));
             // keep it on top of everything
-            dragSprite.DrawDepth = (int) DrawDepth.Overlays;
+            _sprite.SetDrawDepth((_dragShadow.Value, dragSprite), (int)DrawDepth.Overlays);
             if (!dragSprite.NoRotation)
             {
                 _transformSystem.SetWorldRotationNoLerp(_dragShadow.Value, _transformSystem.GetWorldRotation(_draggedEntity.Value));

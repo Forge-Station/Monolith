@@ -9,7 +9,7 @@
   - type: Docking
     radarColor: "#d4a017"
     highlightedRadarColor: "#ffd34f"
-    name: DRYDOCK
+    name: docking-port-name-drydock
 
 - type: entity
   parent: AirlockGlassShuttle
@@ -22,7 +22,7 @@
   - type: Docking
     radarColor: "#d4a017"
     highlightedRadarColor: "#ffd34f"
-    name: DRYDOCK
+    name: docking-port-name-drydock
 
 - type: entity
   parent: AirlockGlassShuttleOutpost
@@ -35,4 +35,4 @@
   - type: Docking
     radarColor: "#d4a017"
     highlightedRadarColor: "#ffd34f"
-    name: DRYDOCK
+    name: docking-port-name-drydock

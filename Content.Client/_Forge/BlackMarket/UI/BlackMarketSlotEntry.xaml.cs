@@ -16,7 +16,7 @@ public sealed partial class BlackMarketSlotEntry : BoxContainer
 {
     private const float ConfirmTimeoutSeconds = 3f;
 
-    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public Action? OnPurchasePressed;
 

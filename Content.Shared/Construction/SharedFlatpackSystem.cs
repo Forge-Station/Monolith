@@ -23,7 +23,6 @@ public abstract partial class SharedFlatpackSystem : EntitySystem
 {
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private INetManager _net = default!;
-    [Dependency] protected IPrototypeManager PrototypeManager = default!;
     [Dependency] protected SharedAppearanceSystem Appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedContainerSystem _container = default!;
@@ -81,7 +80,7 @@ public abstract partial class SharedFlatpackSystem : EntitySystem
             return;
         }
 
-        if (!PrototypeManager.Resolve(comp.Entity, out var proto) ||
+        if (!ProtoMan.Resolve(comp.Entity, out var proto) ||
             !proto.TryGetComponent<FixturesComponent>(out var fixture, EntityManager.ComponentFactory))
         {
             return;
@@ -115,7 +114,7 @@ public abstract partial class SharedFlatpackSystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
         //Forge-Change-Start
-        if (PrototypeManager.TryIndex(ent.Comp.QualityNeeded, out var qualityProto))
+        if (ProtoMan.TryIndex(ent.Comp.QualityNeeded, out var qualityProto))
         {
             var toolName = Loc.GetString(qualityProto.Name);
             args.PushMarkup(Loc.GetString("flatpack-examine", ("tool", toolName)));
@@ -129,7 +128,7 @@ public abstract partial class SharedFlatpackSystem : EntitySystem
             return;
 
         ent.Comp.Entity = proto;
-        var machinePrototype = PrototypeManager.Index<EntityPrototype>(proto);
+        var machinePrototype = ProtoMan.Index<EntityPrototype>(proto);
 
         var meta = MetaData(ent);
         _metaData.SetEntityName(ent, Loc.GetString("flatpack-entity-name", ("name", machinePrototype.Name)), meta);

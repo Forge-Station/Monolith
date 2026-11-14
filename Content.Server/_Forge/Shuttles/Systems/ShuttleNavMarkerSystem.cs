@@ -10,10 +10,10 @@ using System.Numerics;
 
 namespace Content.Server._Forge.Shuttles.Systems;
 
-public sealed class ShuttleNavMarkerSystem : EntitySystem
+public sealed partial class ShuttleNavMarkerSystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private static readonly Color[] Palette =
     [

@@ -23,13 +23,13 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.RCD;
 
-public sealed class AlignRCDConstruction : SnapgridCenter
+public sealed partial class AlignRCDConstruction : SnapgridCenter
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IEyeManager _eyeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IStateManager _stateManager = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IEyeManager _eyeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IStateManager _stateManager = default!;
+    [Dependency] private IPrototypeManager _protoManager = default!;
 
     private readonly SharedMapSystem _mapSystem;
     private readonly RCDSystem _rcdSystem;

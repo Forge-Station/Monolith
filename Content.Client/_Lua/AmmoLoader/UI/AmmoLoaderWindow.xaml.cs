@@ -48,8 +48,8 @@ public sealed partial class AmmoLoaderWindow : FancyWindow
     private const int QuickUnloadSlotCount = 8;
     private const int StorageColumns = 5;
     private const int DefaultTurretColumns = 16;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IInputManager _input = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private IInputManager _input = default!;
     private readonly List<AmmoLoaderInventoryGroup> _groups = new();
     private readonly List<AmmoLoaderLinkedTurret> _linkedTurrets = new();
     private readonly Dictionary<string, PanelContainer> _slotPanels = new();

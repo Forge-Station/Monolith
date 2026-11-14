@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server._WF.BloodTrail;
+using Content.Server._WF.Cleaning;
 using Content.Server.Body.Components;
 using Content.Server.Decals;
 using Content.Shared._WF.Wolfmed.Gore;
@@ -31,6 +33,7 @@ namespace Content.Server._WF.Wolfmed.Gore;
 /// </remarks>
 public sealed class WolfmedGoreSystem : EntitySystem
 {
+    [Dependency] private WFDecalCleaningSystem _cleaning = default!;
     [Dependency] private DecalSystem _decals = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -168,13 +171,13 @@ public sealed class WolfmedGoreSystem : EntitySystem
         }
 
         // Playtest 5: the floor half too, for a reagent that is no cleaner of decals in general (a mop's water). Only
-        // Wolfmed's own blood and gibs go, so a spilled cup never washes a mapper's paint.
+        // blood goes (Wolfmed's splats and gibs, BloodTrail's prints), so a spilled cup never washes a mapper's paint.
         if (TryComp(gridUid, out DecalGridComponent? decalGrid))
         {
             var bounds = _lookup.GetLocalBounds(tile, grid.TileSize).Enlarged(0.5f).Translated(new Vector2(-0.5f, -0.5f));
             foreach (var (index, decal) in _decals.GetDecalsIntersecting(gridUid, bounds, decalGrid).ToList())
             {
-                if (!decal.Cleanable || !decal.Id.StartsWith(WolfmedDecalPrefix) || spent + DecalCleanCost > budget)
+                if (!_cleaning.IsCleanable(decal) || !IsBloodDecal(decal.Id) || spent + DecalCleanCost > budget)
                     continue;
 
                 _decals.RemoveDecal(gridUid, index, decalGrid);
@@ -187,6 +190,13 @@ public sealed class WolfmedGoreSystem : EntitySystem
 
     /// <summary>Every decal Wolfmed leaves starts with this: the floor splats and the gibs.</summary>
     public const string WolfmedDecalPrefix = "WFWolfmed";
+
+    /// <summary>A decal blood left: Wolfmed's splats and gibs, or a footprint or drag mark.</summary>
+    private static bool IsBloodDecal(string id)
+    {
+        return id.StartsWith(WolfmedDecalPrefix, StringComparison.Ordinal)
+               || id.StartsWith(FootPrintsSystem.DecalPrefix, StringComparison.Ordinal);
+    }
 
     /// <summary>Reagent units one Wolfmed decal costs to wash away, the same as CleanDecalsReaction charges.</summary>
     private const float DecalCleanCost = 0.25f;

@@ -38,6 +38,7 @@ rcd-component-latticetiles = Lattice tiles
 rcd-component-platingtiles = Plating tiles
 rcd-component-windows-and-grilles = Windows and grilles
 rcd-component-airlocks = Airlocks
+rcd-component-windoor = Windoor
 rcd-component-electrical = Electrical
 rcd-component-lighting = Lighting
 rcd-component-diagonal-windows = Diagonal Windows

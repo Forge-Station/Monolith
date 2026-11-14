@@ -76,7 +76,17 @@
     <ui:RadialContainer Name="DirectionalWindows" VerticalExpand="True" HorizontalExpand="True" InitialRadius="100"/>
 
     <!-- Airlocks -->
-    <ui:RadialContainer Name="Airlocks"  VerticalExpand="True" HorizontalExpand="True" InitialRadius="100"/>
+    <ui:RadialContainer Name="Airlocks"  VerticalExpand="True" HorizontalExpand="True" InitialRadius="100">
+        <ui:RadialMenuTextureButtonWithSector SetSize="64 64" ToolTip="{Loc 'rcd-component-airlocks'}" TargetLayer="AirlockTypes" Visible="True">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/Interface/Radial/RCD/airlock.png"/>
+        </ui:RadialMenuTextureButtonWithSector>
+        <ui:RadialMenuTextureButtonWithSector SetSize="64 64" ToolTip="{Loc 'rcd-component-windoor'}" TargetLayer="Windoor" Visible="True">
+            <TextureRect VerticalAlignment="Center" HorizontalAlignment="Center" TextureScale="2 2" TexturePath="/Textures/Interface/Radial/RCD/secure_underlay.png"/>
+        </ui:RadialMenuTextureButtonWithSector>
+    </ui:RadialContainer>
+
+    <ui:RadialContainer Name="AirlockTypes" VerticalExpand="True" HorizontalExpand="True" InitialRadius="100"/>
+    <ui:RadialContainer Name="Windoor" VerticalExpand="True" HorizontalExpand="True" InitialRadius="100"/>
 
     <!-- Computer and machine frames -->
     <ui:RadialContainer Name="Electrical"  VerticalExpand="True" HorizontalExpand="True" InitialRadius="100"/>

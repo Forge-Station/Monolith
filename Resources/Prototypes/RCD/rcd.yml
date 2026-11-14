@@ -1293,7 +1293,7 @@
 - type: rcd
   id: WindoorSecureUranium
   name: ent-WindoorSecureUranium
-  category: Airlocks
+  category: Windoor # Forge-Change
   sprite: { entity: WindoorSecureUranium }
   mode: ConstructObject
   prototype: WindoorSecureUranium
@@ -1306,7 +1306,7 @@
 - type: rcd
   id: WindoorUranium
   name: ent-WindoorUranium
-  category: Airlocks
+  category: Windoor # Forge-Change
   sprite: { entity: WindoorUranium }
   mode: ConstructObject
   prototype: WindoorUranium
@@ -1319,7 +1319,7 @@
 - type: rcd
   id: WindoorSecurePlasma
   name: ent-WindoorSecurePlasma
-  category: Airlocks
+  category: Windoor # Forge-Change
   sprite: { entity: WindoorSecurePlasma }
   mode: ConstructObject
   prototype: WindoorSecurePlasma
@@ -1332,7 +1332,7 @@
 - type: rcd
   id: WindoorPlasma
   name: ent-WindoorPlasma
-  category: Airlocks
+  category: Windoor # Forge-Change
   sprite: { entity: WindoorPlasma }
   mode: ConstructObject
   prototype: WindoorPlasma
@@ -1345,7 +1345,7 @@
 - type: rcd
   id: WindoorSecure
   name: ent-WindoorSecure
-  category: Airlocks
+  category: Windoor # Forge-Change
   sprite: { entity: WindoorSecure }
   mode: ConstructObject
   prototype: WindoorSecure
@@ -1358,7 +1358,7 @@
 - type: rcd
   id: Windoor
   name: ent-Windoor
-  category: Airlocks
+  category: Windoor # Forge-Change
   sprite: { entity: Windoor }
   mode: ConstructObject
   prototype: Windoor
@@ -1372,7 +1372,7 @@
 # Airlocks
 - type: rcd
   id: Airlock
-  category: Airlocks
+  category: AirlockTypes # Forge-Change
   sprite: /Textures/Interface/Radial/RCD/airlock.png
   mode: ConstructObject
   prototype: Airlock
@@ -1384,7 +1384,7 @@
 
 - type: rcd
   id: AirlockGlass
-  category: Airlocks
+  category: AirlockTypes # Forge-Change
   sprite: /Textures/Interface/Radial/RCD/glass_airlock.png
   mode: ConstructObject
   prototype: AirlockGlass
@@ -1522,7 +1522,6 @@
   prototype: AirAlarm
   cost: 2
   delay: 1
-  collisionMask: TabletopMachineMask
-  collisionBounds: "-0.23,-0.49,0.23,-0.36"
   rotation: User
+  fix: EffectRCDConstruct0
 # Forge-Change-End

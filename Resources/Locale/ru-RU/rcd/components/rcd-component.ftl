@@ -35,6 +35,7 @@ rcd-component-platingtiles = покрытие
 rcd-component-latticetiles = Напольные решётки
 rcd-component-windows-and-grilles = Окна и решётки
 rcd-component-airlocks = Шлюзы
+rcd-component-windoor = Виндоры
 rcd-component-electrical = Электроприборы
 rcd-component-lighting = Освещение
 rcd-component-diagonal-windows = Диагональные окна

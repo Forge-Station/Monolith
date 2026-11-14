@@ -1494,7 +1494,7 @@
     delay: 8
     fx: EffectRCDDeconstruct8
   # Forge-Change-End
-  #   deconstructable: false # Frontier # Forge-Delete
+  #   deconstructable: false # Frontier # Forge-Change-Delete
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: WallDefense1

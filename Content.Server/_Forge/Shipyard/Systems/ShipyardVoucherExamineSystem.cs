@@ -9,7 +9,7 @@ namespace Content.Server._Forge.Shipyard.Systems;
 /// <summary>
 /// Examine text for shipyard vouchers: redemptions, reclaim hint, and sector vessel limits.
 /// </summary>
-public sealed class ShipyardVoucherExamineSystem : EntitySystem
+public sealed partial class ShipyardVoucherExamineSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;

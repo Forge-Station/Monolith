@@ -19,7 +19,6 @@ public abstract partial class SharedBorgSwitchableTypeSystem : EntitySystem
 
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
-    [Dependency] protected IPrototypeManager Prototypes = default!;
     [Dependency] private InteractionPopupSystem _interactionPopup = default!;
 
     public const string ActionId = "ActionSelectBorgType";
@@ -77,7 +76,7 @@ public abstract partial class SharedBorgSwitchableTypeSystem : EntitySystem
         if (ent.Comp.SelectedBorgType != null)
             return;
 
-        if (!Prototypes.HasIndex(args.Prototype) || !Prototypes.HasIndex(args.Subtype))
+        if (!ProtoMan.HasIndex(args.Prototype) || !ProtoMan.HasIndex(args.Subtype))
             return;
         //Mono: Selectable borg whitelist - Validation
         if (ent.Comp.TypeWhitelist.Count == 0)
@@ -116,9 +115,9 @@ public abstract partial class SharedBorgSwitchableTypeSystem : EntitySystem
 
     protected void UpdateEntityAppearance(Entity<BorgSwitchableTypeComponent> entity)
     {
-        if (!Prototypes.TryIndex(entity.Comp.SelectedBorgType, out var proto) ||
+        if (!ProtoMan.TryIndex(entity.Comp.SelectedBorgType, out var proto) ||
             !TryComp(entity, out BorgSwitchableSubtypeComponent? subtype) ||
-            !Prototypes.TryIndex(subtype.BorgSubtype, out var subtypeProto))
+            !ProtoMan.TryIndex(subtype.BorgSubtype, out var subtypeProto))
             return;
 
         UpdateEntityAppearance(entity, proto, subtypeProto);

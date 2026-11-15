@@ -77,57 +77,17 @@ public sealed partial class NPCSteeringSystem
 
             GetObstacleEntities(poly, mask, layer, obstacleEnts);
             var isDoor = (poly.Data.Flags & PathfindingBreadcrumbFlag.Door) != 0x0;
-            var isAccessRequired = (poly.Data.Flags & PathfindingBreadcrumbFlag.Access) != 0x0;
             var isClimbable = (poly.Data.Flags & PathfindingBreadcrumbFlag.Climb) != 0x0;
 
-            // Just walk into it stupid
-            if (isDoor && !isAccessRequired)
+            if (isDoor && TryGetDoor(poly, obstacleEnts, out var doorEnt, out var door) && door != null)
             {
-                var doorQuery = GetEntityQuery<DoorComponent>();
-
-                // ... At least if it's not a bump open.
-                foreach (var ent in obstacleEnts)
-                {
-                    if (!doorQuery.TryGetComponent(ent, out var door))
-                        continue;
-
-                    if (!door.BumpOpen && (component.Flags & PathFlags.Interact) != 0x0)
-                    {
-                        if (door.State != DoorState.Opening)
-                        {
-                            _interaction.InteractionActivate(uid, ent);
-                            return SteeringObstacleStatus.Continuing;
-                        }
-                    }
-                }
-
-                // If we get to here then didn't succeed for reasons.
+                var doorStatus = HandleDoor(uid, component, doorEnt, door);
+                if (doorStatus != SteeringObstacleStatus.Failed)
+                    return doorStatus;
             }
 
-            if ((component.Flags & PathFlags.Prying) != 0x0 && isDoor)
-            {
-                var doorQuery = GetEntityQuery<DoorComponent>();
-
-                // Get the relevant obstacle
-                foreach (var ent in obstacleEnts)
-                {
-                    if (doorQuery.TryGetComponent(ent, out var door) && door.State != DoorState.Open)
-                    {
-                        // TODO: Use the verb.
-
-                        if (door.State != DoorState.Opening)
-                            _pryingSystem.TryPry(ent, uid, out id, uid);
-
-                        component.DoAfterId = id;
-                        return SteeringObstacleStatus.Continuing;
-                    }
-                }
-
-                if (obstacleEnts.Count == 0)
-                    return SteeringObstacleStatus.Completed;
-            }
-            // Try climbing obstacles
-            else if ((component.Flags & PathFlags.Climbing) != 0x0 && isClimbable)
+            // Try climbing obstacles. A door we could not open still falls through to smashing.
+            if ((component.Flags & PathFlags.Climbing) != 0x0 && isClimbable)
             {
                 if (TryComp<ClimbingComponent>(uid, out var climbing))
                 {
@@ -158,12 +118,15 @@ public sealed partial class NPCSteeringSystem
                 if (obstacleEnts.Count == 0)
                     return SteeringObstacleStatus.Completed;
             }
-            // Try smashing obstacles.
-            else if ((component.Flags & PathFlags.Smashing) != 0x0)
+            // A railing we failed to vault is still in the way. Smash it instead of giving up the path.
+            if ((component.Flags & PathFlags.Smashing) != 0x0)
             {
                 if (_melee.TryGetWeapon(uid, out _, out var meleeWeapon) && meleeWeapon.NextAttack <= _timing.CurTime && TryComp<CombatModeComponent>(uid, out var combatMode))
                 {
-                    _combat.SetInCombatMode(uid, true, combatMode);
+                    // Turning combat off here drops NPCMeleeCombatComponent and they stop dead on the broken tile.
+                    var wasInCombat = combatMode.IsInCombatMode;
+                    if (!wasInCombat)
+                        _combat.SetInCombatMode(uid, true, combatMode);
                     var destructibleQuery = GetEntityQuery<DestructibleComponent>();
 
                     // TODO: This is a hack around grilles and windows.
@@ -180,7 +143,8 @@ public sealed partial class NPCSteeringSystem
                         }
                     }
 
-                    _combat.SetInCombatMode(uid, false, combatMode);
+                    if (!wasInCombat)
+                        _combat.SetInCombatMode(uid, false, combatMode);
 
                     // Blocked or the likes?
                     if (!attackResult)
@@ -197,6 +161,92 @@ public sealed partial class NPCSteeringSystem
         }
 
         return SteeringObstacleStatus.Completed;
+    }
+
+    /// <summary>
+    /// Open, wait for, or pry a door without cancelling the path while it is still moving.
+    /// Failed means this door cannot be opened, so smashing may still run.
+    /// </summary>
+    private SteeringObstacleStatus HandleDoor(EntityUid uid, NPCSteeringComponent component, EntityUid doorEnt, DoorComponent door)
+    {
+        switch (door.State)
+        {
+            case DoorState.Open:
+                return SteeringObstacleStatus.Completed;
+            case DoorState.Opening:
+            case DoorState.Emagging:
+            case DoorState.Closing:
+            case DoorState.Denying:
+                return SteeringObstacleStatus.Continuing;
+        }
+
+        if (door.State == DoorState.Closed && door.BumpOpen)
+            return SteeringObstacleStatus.Completed;
+
+        // A deny just played. Stand until it finishes instead of pathing away and back.
+        var now = _timing.CurTime;
+        if (now < component.NextDoorAttempt)
+            return SteeringObstacleStatus.Continuing;
+
+        // NextDoorAttempt stays set after the wait, so a second refusal can fall through to prying or smashing.
+        var alreadyWaited = component.NextDoorAttempt != default;
+
+        if (door.State == DoorState.Closed && (component.Flags & PathFlags.Interact) != 0x0)
+        {
+            if (_doors.TryOpen(doorEnt, door, uid))
+            {
+                component.NextDoorAttempt = default;
+                return SteeringObstacleStatus.Continuing;
+            }
+
+            if (!alreadyWaited)
+            {
+                component.NextDoorAttempt = now + TimeSpan.FromSeconds(1.25);
+                return SteeringObstacleStatus.Continuing;
+            }
+
+            component.NextDoorAttempt = default;
+        }
+
+        if ((component.Flags & PathFlags.Prying) != 0x0 && door.State != DoorState.Open)
+        {
+            if (_pryingSystem.TryPry(doorEnt, uid, out var pryId, uid))
+            {
+                component.DoAfterId = pryId;
+                return SteeringObstacleStatus.Continuing;
+            }
+        }
+
+        return SteeringObstacleStatus.Failed;
+    }
+
+    private bool TryGetDoor(PathPoly poly, List<EntityUid> obstacleEnts, out EntityUid doorEnt, out DoorComponent? door)
+    {
+        var doorQuery = GetEntityQuery<DoorComponent>();
+        foreach (var ent in obstacleEnts)
+        {
+            if (!doorQuery.TryGetComponent(ent, out door))
+                continue;
+
+            doorEnt = ent;
+            return true;
+        }
+
+        if (TryComp<MapGridComponent>(poly.GraphUid, out var grid))
+        {
+            foreach (var ent in _mapSystem.GetLocalAnchoredEntities(poly.GraphUid, grid, poly.Box))
+            {
+                if (!doorQuery.TryGetComponent(ent, out door))
+                    continue;
+
+                doorEnt = ent;
+                return true;
+            }
+        }
+
+        doorEnt = default;
+        door = null;
+        return false;
     }
 
     private void GetObstacleEntities(PathPoly poly, int mask, int layer, List<EntityUid> ents)

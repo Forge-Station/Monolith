@@ -6,7 +6,6 @@ namespace Content.Shared.EntityTable;
 
 public sealed partial class EntityTableSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
 
     public IEnumerable<EntProtoId> GetSpawns(EntityTableSelector? table, System.Random? rand = null)
@@ -15,6 +14,6 @@ public sealed partial class EntityTableSystem : EntitySystem
             return new List<EntProtoId>();
 
         rand ??= _random.GetRandom();
-        return table.GetSpawns(rand, EntityManager, _prototypeManager);
+        return table.GetSpawns(rand, EntityManager, ProtoMan);
     }
 }

@@ -94,6 +94,9 @@ public abstract partial class SharedMaterialReclaimerSystem : EntitySystem
     /// </summary>
     public bool TryStartProcessItem(EntityUid uid, EntityUid item, MaterialReclaimerComponent? component = null, EntityUid? user = null, bool predictSound = true) // Frontier: add predictSound
     {
+        if (EntityManager.IsQueuedForDeletion(item))
+            return false;
+
         if (!Resolve(uid, ref component))
             return false;
 

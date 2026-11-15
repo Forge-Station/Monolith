@@ -13,9 +13,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._Forge.BoardingTeleport;
 
-public sealed class BoardingTeleportSectorMapControl : BoxContainer
+public sealed partial class BoardingTeleportSectorMapControl : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
+    [Dependency] private IEntityManager _entManager = default!;
 
     private readonly SharedMapSystem _mapSystem;
 

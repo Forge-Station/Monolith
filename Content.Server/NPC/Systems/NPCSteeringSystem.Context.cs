@@ -227,12 +227,6 @@ public sealed partial class NPCSteeringSystem
                 // Breaking behaviours and the likes.
                 lock (_obstacles)
                 {
-                    // We're still coming to a stop so wait for the do_after.
-                    if (body.LinearVelocity.LengthSquared() > 0.01f)
-                    {
-                        return true;
-                    }
-
                     status = TryHandleFlags(uid, steering, node);
                 }
 
@@ -249,6 +243,13 @@ public sealed partial class NPCSteeringSystem
                         return false;
                     case SteeringObstacleStatus.Continuing:
                         CheckPath(uid, steering, xform, needsPath, targetDistance);
+                        // Stay on the tile and bleed speed. Pushing into a closed door just bounces the NPC back down the corridor.
+                        if (body.LinearVelocity.LengthSquared() > 0.01f)
+                        {
+                            moveMultiplier = 1f;
+                            ApplySeek(interest, -offsetRot.RotateVec(body.LinearVelocity / body.LinearVelocity.Length()), 1f);
+                        }
+
                         return true;
                     default:
                         throw new ArgumentOutOfRangeException();

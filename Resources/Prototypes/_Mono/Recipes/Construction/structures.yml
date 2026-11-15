@@ -7,7 +7,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: /Textures/Structures/Walls/solid_diagonal.rsi
+    sprite: /Textures/Structures/Walls/solid-diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -25,7 +25,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: /Textures/Structures/Walls/reinforced_diagonal.rsi
+    sprite: /Textures/Structures/Walls/reinforced-diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -43,7 +43,7 @@
   category: construction-category-structures
   description: Keeps the air in and the greytide out.
   icon:
-    sprite: /Textures/Structures/Walls/plastitanium_diagonal.rsi
+    sprite: /Textures/Structures/Walls/plastitanium-diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter

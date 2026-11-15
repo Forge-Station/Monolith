@@ -5,9 +5,9 @@ using JetBrains.Annotations;
 namespace Content.Shared._Forge.Crypto.Systems;
 
 [UsedImplicitly]
-public abstract class SharedCryptoSellConsoleSystem : EntitySystem
+public abstract partial class SharedCryptoSellConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private ItemSlotsSystem _itemSlots = default!;
 
     public override void Initialize()
     {

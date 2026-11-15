@@ -41,6 +41,5 @@
         Sharp: 25 # double yowch
   - type: IconSmooth
     key: chitin
-    mode: NoSprite
   - type: ExplosionResistance
     damageCoefficient: 0

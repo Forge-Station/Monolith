@@ -6,12 +6,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.Genetics.Mutations;
 
-public sealed class GeneticEpilepsySystem : EntitySystem
+public sealed partial class GeneticEpilepsySystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

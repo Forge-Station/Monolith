@@ -13,7 +13,6 @@ namespace Content.Shared.Inventory;
 
 public partial class InventorySystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IViewVariablesManager _vvm = default!;
     [Dependency] private RandomHelperSystem _randomHelper = default!; // Shitmed Change
 
@@ -61,7 +60,7 @@ public partial class InventorySystem : EntitySystem
 
     protected virtual void OnInit(EntityUid uid, InventoryComponent component, ComponentInit args)
     {
-        if (!_prototypeManager.TryIndex(component.TemplateId, out InventoryTemplatePrototype? invTemplate))
+        if (!ProtoMan.TryIndex(component.TemplateId, out InventoryTemplatePrototype? invTemplate))
             return;
 
         component.Slots = invTemplate.Slots;
@@ -85,7 +84,7 @@ public partial class InventorySystem : EntitySystem
         if (ent.Comp.LifeStage < ComponentLifeStage.Initialized)
             return;
 
-        if (!_prototypeManager.TryIndex(ent.Comp.TemplateId, out InventoryTemplatePrototype? invTemplate))
+        if (!ProtoMan.TryIndex(ent.Comp.TemplateId, out InventoryTemplatePrototype? invTemplate))
             return;
 
         DebugTools.Assert(ent.Comp.Slots.Length == invTemplate.Slots.Length);
@@ -214,7 +213,7 @@ public partial class InventorySystem : EntitySystem
     /// </exception>
     public void SetTemplateId(Entity<InventoryComponent> ent, ProtoId<InventoryTemplatePrototype> newTemplate)
     {
-        var newPrototype = _prototypeManager.Index(newTemplate);
+        var newPrototype = ProtoMan.Index(newTemplate);
 
         if (!newPrototype.Slots.Select(x => x.Name).SequenceEqual(ent.Comp.Slots.Select(x => x.Name)))
             throw new ArgumentException("Incompatible inventory template!");

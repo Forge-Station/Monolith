@@ -14,12 +14,12 @@ namespace Content.Server._Forge.Guard;
 /// <summary>
 /// Adds or removes the guard overlay component when the empire guard implant is inserted or removed.
 /// </summary>
-public sealed class GuardSystem : EntitySystem
+public sealed partial class GuardSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
-    [Dependency] private readonly MindShieldSystem _mindShield = default!;
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private IAdminLogManager _adminLogManager = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
+    [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {

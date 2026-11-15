@@ -4,9 +4,9 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Forge.BluespaceHarvester;
 
-public sealed class BluespaceHarvesterBundleSystem : EntitySystem
+public sealed partial class BluespaceHarvesterBundleSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

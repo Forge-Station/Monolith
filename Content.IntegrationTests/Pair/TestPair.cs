@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Content.Client.IoC;
 using Content.Client.Parallax.Managers;
+using Content.Client.Sprite;
 using Content.IntegrationTests.Tests.Destructible;
 using Content.IntegrationTests.Tests.DeviceNetwork;
 using Content.Server.GameTicking;
@@ -30,7 +31,7 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair
         var settings = (PoolSettings)Settings;
         if (!settings.DummyTicker)
         {
-            var gameTicker = Server.System<GameTicker>();
+            var gameTicker = Server.System<ServerGameTicker>();
             await Server.WaitPost(() => gameTicker.RestartRound());
         }
     }
@@ -87,7 +88,17 @@ public sealed partial class TestPair : RobustIntegrationTest.TestPair
         {
             IoCManager.Resolve<IModLoader>().SetModuleBaseCallbacks(new ClientModuleTestingCallbacks
                 {
-                    ClientBeforeIoC = () => IoCManager.Register<IParallaxManager, DummyParallaxManager>(true)
+                    ClientBeforeIoC = () =>
+                    {
+                        IoCManager.Register<IParallaxManager, DummyParallaxManager>(true);
+                        // Before the engine decodes every RSI into one retained pool.
+                        TestClientHooks.LimitImagePool();
+                    },
+                    ClientPostInit = () =>
+                    {
+                        SpriteTreeGuardSystem.Repair = TestClientHooks.OnFrame;
+                        TestClientHooks.ReleaseImageMemory();
+                    },
                 });
         };
         return opts;

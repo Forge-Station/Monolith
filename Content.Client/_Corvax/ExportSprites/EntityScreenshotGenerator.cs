@@ -233,7 +233,7 @@ public sealed partial class EntityScreenshotGenerator
         if (!_entityManager.TryGetComponent(entity, out AppearanceComponent? appearance))
             return;
 
-        if (!prototype.TryGetComponent<SolutionContainerManagerComponent>(out var manager, _entityManager.ComponentFactory) ||
+        if (!prototype.TryComp<SolutionContainerManagerComponent>(out var manager, _entityManager.ComponentFactory) ||
             manager.Solutions == null ||
             manager.Solutions.Count == 0)
         {

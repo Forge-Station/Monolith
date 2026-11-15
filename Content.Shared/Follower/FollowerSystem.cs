@@ -293,6 +293,18 @@ public sealed partial class FollowerSystem : EntitySystem
     }
 
     /// <summary>
+    /// Moves every follower of <paramref name="from"/> over to <paramref name="to"/>.
+    /// </summary>
+    public void TransferFollowers(Entity<FollowedComponent?> from, EntityUid to)
+    {
+        if (from.Owner == to || !Resolve(from, ref from.Comp, false))
+            return;
+
+        foreach (var follower in from.Comp.Following.ToArray())
+            StartFollowingEntity(follower, to);
+    }
+
+    /// <summary>
     /// Gets the entity with the most non-admin ghosts following it.
     /// </summary>
     public EntityUid? GetMostGhostFollowed()

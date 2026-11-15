@@ -27,7 +27,7 @@ public sealed partial class PublicTransitSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfgManager = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private MapSystem _map = default!;
     [Dependency] private MapLoaderSystem _loader = default!;
     [Dependency] private ShuttleSystem _shuttles = default!;

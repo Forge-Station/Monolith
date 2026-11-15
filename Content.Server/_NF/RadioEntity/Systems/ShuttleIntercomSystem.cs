@@ -15,7 +15,7 @@ namespace Content.Server.Radio.EntitySystems;
 public sealed partial class ShuttleIntercomSystem : EntitySystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
 
     public override void Initialize()
     {

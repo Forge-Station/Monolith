@@ -4,7 +4,8 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 
 namespace Content.Shared.Friends.Systems;
 
@@ -14,15 +15,12 @@ public sealed partial class PettableFriendSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
 
-    private EntityQuery<FactionExceptionComponent> _exceptionQuery;
-    private EntityQuery<UseDelayComponent> _useDelayQuery;
+    [Dependency] private readonly EntityQuery<FactionExceptionComponent> _exceptionQuery = default!;
+    [Dependency] private readonly EntityQuery<UseDelayComponent> _useDelayQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _exceptionQuery = GetEntityQuery<FactionExceptionComponent>();
-        _useDelayQuery = GetEntityQuery<UseDelayComponent>();
 
         SubscribeLocalEvent<PettableFriendComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<PettableFriendComponent, GotRehydratedEvent>(OnRehydrated);

@@ -10,7 +10,7 @@ using Content.Server._NF.GameRule.Components;
 using Content.Server._NF.GameTicking.Events;
 using Content.Server.Cargo.Components;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Presets;
+using Content.Shared.GameTicking.Prototypes;
 using Content.Server.GameTicking.Rules;
 using Content.Shared._NF.Bank;
 using Content.Shared._NF.CCVar;
@@ -36,7 +36,7 @@ public sealed partial class NFAdventureRuleSystem : GameRuleSystem<NFAdventureRu
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private BankSystem _bank = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private PointOfInterestSystem _poi = default!;
     [Dependency] private IBaseServer _baseServer = default!;
     [Dependency] private IEntitySystemManager _entSys = default!;
@@ -92,7 +92,7 @@ public sealed partial class NFAdventureRuleSystem : GameRuleSystem<NFAdventureRu
         _player.PlayerStatusChanged += PlayerManagerOnPlayerStatusChanged;
     }
 
-    protected override void AppendRoundEndText(EntityUid uid, NFAdventureRuleComponent component, GameRuleComponent gameRule, ref RoundEndTextAppendEvent ev)
+    protected override void AppendRoundEndText(Entity<NFAdventureRuleComponent> rule, ref RoundEndTextAppendEvent ev)
     {
         ev.AddLine(Loc.GetString("adventure-list-start"));
         var allScores = new List<BankData>();
@@ -315,7 +315,7 @@ public sealed partial class NFAdventureRuleSystem : GameRuleSystem<NFAdventureRu
             return;
         }
 
-        var mapUid = GameTicker.DefaultMap;
+        var mapUid = ServerGameTicker.DefaultMap;
 
         //First, we need to grab the list and sort it into its respective spawning logics
         List<PointOfInterestPrototype> depotProtos = [];
@@ -378,7 +378,7 @@ public sealed partial class NFAdventureRuleSystem : GameRuleSystem<NFAdventureRu
             return;
 
         var serverName = _baseServer.ServerName;
-        var gameTicker = _entSys.GetEntitySystemOrNull<GameTicker>();
+        var gameTicker = _entSys.GetEntitySystemOrNull<ServerGameTicker>();
         var runId = gameTicker?.RoundId ?? 0;
 
         var payload = new WebhookPayload
@@ -416,7 +416,7 @@ public sealed partial class NFAdventureRuleSystem : GameRuleSystem<NFAdventureRu
         Logger.InfoS("discord", ledgerPrintout);
 
         var serverName = _baseServer.ServerName;
-        var gameTicker = _entSys.GetEntitySystemOrNull<GameTicker>();
+        var gameTicker = _entSys.GetEntitySystemOrNull<ServerGameTicker>();
         var runId = gameTicker?.RoundId ?? 0;
 
         var payload = new WebhookPayload

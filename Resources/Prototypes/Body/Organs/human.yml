@@ -55,7 +55,6 @@
   description: "The source of incredible, unending intelligence. Honk."
   components:
   - type: MindContainer
-    showExamineInfo: true
   - type: Speech
     enabled: false
   - type: TypingIndicator

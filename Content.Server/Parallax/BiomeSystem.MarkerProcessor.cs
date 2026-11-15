@@ -45,7 +45,7 @@ public sealed partial class BiomeSystem
 
                 // Essentially get the seed + work out a buffer to adjacent chunks so we don't
                 // inadvertantly spawn too many near the edges.
-                var layerProto = ProtoManager.Index<BiomeMarkerLayerPrototype>(layer);
+                var layerProto = ProtoMan.Index<BiomeMarkerLayerPrototype>(layer);
                 var markerSeed = seed + chunk.X * ChunkSize + chunk.Y + localIdx;
                 var rand = new Random(markerSeed);
                 var buffer = (int)(layerProto.Radius / 2f);
@@ -274,7 +274,7 @@ public sealed partial class BiomeSystem
 
         foreach (var (layer, nodes) in layers)
         {
-            var layerProto = ProtoManager.Index<BiomeMarkerLayerPrototype>(layer);
+            var layerProto = ProtoMan.Index<BiomeMarkerLayerPrototype>(layer);
 
             foreach (var node in nodes)
             {

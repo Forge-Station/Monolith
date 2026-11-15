@@ -11,13 +11,13 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Forge.Mapping;
 
-public sealed class MappingEyedropperSystem : EntitySystem
+public sealed partial class MappingEyedropperSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private SharedMapSystem _mapSystem = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     private DecalSystem _decals = default!;
     private SpriteSystem _sprites = default!;

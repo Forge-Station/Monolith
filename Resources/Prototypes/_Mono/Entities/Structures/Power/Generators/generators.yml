@@ -121,7 +121,7 @@
     gasType: CarbonDioxide
     # 0.5 moles of gas for every sheet of plasma.
     moleRatio: 0.5
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 200
   - type: LanguageSpeaker
   - type: LanguageKnowledge

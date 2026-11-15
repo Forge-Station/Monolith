@@ -10,6 +10,7 @@ using Content.Shared.Foldable;
 using Content.Shared.Interaction;
 using Content.Shared.Lock;
 using Content.Shared.Movement.Events;
+using Content.Shared.Atmos;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tools.Systems;

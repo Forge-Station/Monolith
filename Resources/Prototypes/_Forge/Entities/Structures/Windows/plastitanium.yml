@@ -5,9 +5,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Forge/Structures/Windows/plastitanium_uran_window.rsi
+    sprite: _Forge/Structures/Windows/window-plastitanium-uran.rsi
   - type: Icon
-    sprite: _Forge/Structures/Windows/plastitanium_uran_window.rsi
+    sprite: _Forge/Structures/Windows/window-plastitanium-uran.rsi
     state: full
   - type: Destructible
     thresholds:
@@ -62,10 +62,10 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Forge/Structures/Windows/plastitanium_uran_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/window-diagonal-plastitanium-uran.rsi
     state: state0
   - type: Icon
-    sprite: _Forge/Structures/Windows/plastitanium_uran_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/window-diagonal-plastitanium-uran.rsi
     state: state0
   - type: Destructible
     thresholds:
@@ -97,7 +97,7 @@
     damageDivisor: 20
     trackAllDamage: true
     damageOverlay:
-      sprite: Structures/Windows/cracks_diagonal.rsi
+      sprite: Structures/Windows/cracks-diagonal.rsi
   - type: Repairable
     fuelCost: 15
     doAfterDelay: 3
@@ -117,9 +117,9 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Forge/Structures/Windows/plastitanium_plasma_window.rsi
+    sprite: _Forge/Structures/Windows/window-plastitanium-plasma.rsi
   - type: Icon
-    sprite: _Forge/Structures/Windows/plastitanium_plasma_window.rsi
+    sprite: _Forge/Structures/Windows/window-plastitanium-plasma.rsi
     state: full
   - type: Destructible
     thresholds:
@@ -174,10 +174,10 @@
   components:
   - type: Sprite
     drawdepth: WallTops
-    sprite: _Forge/Structures/Windows/plastitanium_plasma_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/window-diagonal-plastitanium-plasma.rsi
     state: state0
   - type: Icon
-    sprite: _Forge/Structures/Windows/plastitanium_plasma_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/window-diagonal-plastitanium-plasma.rsi
     state: state0
   - type: Destructible
     thresholds:
@@ -209,7 +209,7 @@
     damageDivisor: 20
     trackAllDamage: true
     damageOverlay:
-      sprite: Structures/Windows/cracks_diagonal.rsi
+      sprite: Structures/Windows/cracks-diagonal.rsi
   - type: Repairable
     fuelCost: 15
     doAfterDelay: 3

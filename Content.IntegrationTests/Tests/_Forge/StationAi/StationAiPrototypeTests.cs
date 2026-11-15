@@ -140,7 +140,7 @@ public sealed class StationAiPrototypeTests
                     Does.Contain((ProtoId<RadioChannelPrototype>) "Handheld"));
                 configurable.Frequency = 1459;
                 Assert.That(radio.GetFrequency(brain, handheld), Is.EqualTo(1459));
-                Assert.That(radio.GetFrequency(brain, common), Is.EqualTo(common.Frequency));
+                Assert.That(radio.GetFrequency(brain, common), Is.EqualTo((int) common.Frequency.FrequencyId));
             }
             entityManager.DeleteEntity(forerunnerCore);
             entityManager.DeleteEntity(forerunnerWhitelistCore);

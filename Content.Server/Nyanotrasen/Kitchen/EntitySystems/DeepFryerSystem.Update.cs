@@ -26,7 +26,7 @@ public sealed partial class DeepFryerSystem
 
                 UpdateNextFryTime(uid, component);
 
-                if (!_solutionContainerSystem.TryGetSolution(uid, component.Solution.Name, out var solution))
+                if (!_solutionContainerSystem.TryGetSolution(uid, component.SolutionName, out var solution))
                     continue;
 
                 // Heat the vat solution and contained entities.

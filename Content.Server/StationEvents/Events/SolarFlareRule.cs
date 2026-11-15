@@ -64,7 +64,7 @@ public sealed partial class SolarFlareRule : StationEventSystem<SolarFlareRuleCo
         var query = EntityQueryEnumerator<SolarFlareRuleComponent, GameRuleComponent>();
         while (query.MoveNext(out var uid, out var flare, out var gameRule))
         {
-            if (!GameTicker.IsGameRuleActive(uid, gameRule))
+            if (!ServerGameTicker.IsGameRuleActive((uid, gameRule)))
                 continue;
 
             if (!flare.AffectedChannels.Contains(args.Channel.ID))

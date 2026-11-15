@@ -3,6 +3,28 @@ using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
+/// <summary>
+/// Controls how an unfilled round-start minimum job slot may ignore player job preferences.
+/// </summary>
+public enum MinimumJobFallback : int // needs int backing because cvar
+{
+    /// <summary>
+    /// Select a player who prefers another role in the target job's primary department.
+    /// </summary>
+    SameDepartment = 1,
+
+    /// <summary>
+    /// First select a player who prefers another role in the target job's primary department,
+    /// then select any player who otherwise qualifies for the target job.
+    /// </summary>
+    AnyEligiblePlayer = 2,
+
+    /// <summary>
+    /// Leave the minimum slot empty when no player prefers the target job.
+    /// </summary>
+    None = 3,
+}
+
 public sealed partial class CCVars
 {
     /// <summary>
@@ -10,6 +32,14 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool>
         GameDummyTicker = CVarDef.Create("game.dummyticker", false, CVar.ARCHIVE | CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Determines how unfilled round-start minimum job slots fall back when no player prefers the job.
+    ///     Role bans, whitelists, playtime requirements, and antag restrictions always apply.
+    /// </summary>
+    public static readonly CVarDef<MinimumJobFallback>
+        GameMinimumJobFallback = CVarDef.Create("game.minimum_job_fallback", MinimumJobFallback.None,
+            CVar.ARCHIVE | CVar.SERVERONLY);
 
     // Mono Start
     /// Enables the automatic voting system.
@@ -44,6 +74,12 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool>
         GameDisallowLateJoins = CVarDef.Create("game.disallowlatejoins", false, CVar.ARCHIVE | CVar.SERVERONLY);
+
+    /// <summary>
+    /// Comma-separated game preset ids that the ticker will not start.
+    /// </summary>
+    public static readonly CVarDef<string>
+        GameTickerIgnoredPresets = CVarDef.Create("game.ignoredpresets", "", CVar.ARCHIVE);
 
     /// <summary>
     ///     Controls the default game preset.

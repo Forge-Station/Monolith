@@ -25,7 +25,6 @@ public sealed partial class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
 
         SubscribeLocalEvent<CartridgeLoaderComponent, MapInitEvent>(OnMapInit);
 
-        SubscribeLocalEvent<CartridgeLoaderComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
         SubscribeLocalEvent<CartridgeLoaderComponent, AfterInteractEvent>(OnUsed);
         SubscribeLocalEvent<CartridgeLoaderComponent, CartridgeLoaderUiMessage>(OnLoaderUiMessage);
         SubscribeLocalEvent<CartridgeLoaderComponent, CartridgeUiMessage>(OnUiMessage);
@@ -410,11 +409,6 @@ public sealed partial class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
         RelayEvent(component, new CartridgeAfterInteractEvent(uid, args));
     }
 
-    private void OnPacketReceived(EntityUid uid, CartridgeLoaderComponent component, DeviceNetworkPacketEvent args)
-    {
-        RelayEvent(component, new CartridgeDeviceNetPacketEvent(uid, args));
-    }
-
     private void OnLoaderUiMessage(EntityUid loaderUid, CartridgeLoaderComponent component, CartridgeLoaderUiMessage message)
     {
         var cartridge = GetEntity(message.CartridgeUid);
@@ -499,22 +493,6 @@ public sealed partial class CartridgeLoaderSystem : SharedCartridgeLoaderSystem
     private bool HasProgram(EntityUid loader, EntityUid program, CartridgeLoaderComponent component)
     {
         return component.CartridgeSlot.Item == program || GetInstalled(loader).Contains(program);
-    }
-}
-
-/// <summary>
-/// Gets sent to running programs when the cartridge loader receives a device net package
-/// </summary>
-/// <seealso cref="DeviceNetworkPacketEvent"/>
-public sealed class CartridgeDeviceNetPacketEvent : EntityEventArgs
-{
-    public readonly EntityUid Loader;
-    public readonly DeviceNetworkPacketEvent PacketEvent;
-
-    public CartridgeDeviceNetPacketEvent(EntityUid loader, DeviceNetworkPacketEvent packetEvent)
-    {
-        Loader = loader;
-        PacketEvent = packetEvent;
     }
 }
 

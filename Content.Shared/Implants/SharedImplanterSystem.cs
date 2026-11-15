@@ -27,7 +27,8 @@ public abstract partial class SharedImplanterSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
+
+    [Dependency] private readonly EntityQuery<SubdermalImplantComponent> _implantCompQuery = default!;
 
     public override void Initialize()
     {
@@ -194,13 +195,11 @@ public abstract partial class SharedImplanterSystem : EntitySystem
 
         if (_container.TryGetContainer(target, ImplanterComponent.ImplantSlotId, out var implantContainer))
         {
-            var implantCompQuery = GetEntityQuery<SubdermalImplantComponent>();
-
             if (component.AllowDeimplantAll)
             {
                 foreach (var implant in implantContainer.ContainedEntities)
                 {
-                    if (!implantCompQuery.TryGetComponent(implant, out var implantComp))
+                    if (!_implantCompQuery.TryGetComponent(implant, out var implantComp))
                         continue;
 
                     //Don't remove a permanent implant and look for the next that can be drawn
@@ -235,7 +234,7 @@ public abstract partial class SharedImplanterSystem : EntitySystem
                     }
                 }
 
-                if (implant != null && implantCompQuery.TryGetComponent(implant, out var implantComp))
+                if (implant != null && _implantCompQuery.TryGetComponent(implant, out var implantComp))
                 {
                     //Don't remove a permanent implant
                     if (!_container.CanRemove(implant.Value, implantContainer))
@@ -337,7 +336,7 @@ public abstract partial class SharedImplanterSystem : EntitySystem
         if (!Resolve(uid, ref component, false))
             return;
 
-        if (implant != null && _proto.TryIndex(implant, out EntityPrototype? proto))
+        if (implant != null && ProtoMan.TryIndex(implant, out EntityPrototype? proto))
             component.DeimplantChosen = proto;
 
         Dirty(uid, component);

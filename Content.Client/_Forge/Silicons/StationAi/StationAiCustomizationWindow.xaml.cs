@@ -18,10 +18,10 @@ namespace Content.Client._Forge.Silicons.StationAi;
 [GenerateTypedNameReferences]
 public sealed partial class StationAiCustomizationWindow : FancyWindow
 {
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     public event Action<string, ProtoId<StationAiScreenPrototype>, Color>? OnApply;
 

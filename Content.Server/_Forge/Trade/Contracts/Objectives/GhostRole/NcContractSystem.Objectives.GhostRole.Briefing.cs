@@ -1,4 +1,5 @@
 using Content.Server.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared._Forge.Trade;
 using Content.Shared.Mind;
 using Robust.Shared.Map;

@@ -1,3 +1,4 @@
+using Content.Shared.Station.Systems;
 using System.Linq;
 using Content.Server.Administration.Commands;
 using Content.Server.GameTicking.Rules.Components;
@@ -44,7 +45,7 @@ public sealed partial class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRule
         var query = EntityQueryEnumerator<DeathMatchRuleComponent, RespawnTrackerComponent, PointManagerComponent, GameRuleComponent>();
         while (query.MoveNext(out var uid, out var dm, out var tracker, out var point, out var rule))
         {
-            if (!GameTicker.IsGameRuleActive(uid, rule))
+            if (!ServerGameTicker.IsGameRuleActive(uid, rule))
                 continue;
 
             var newMind = _mind.CreateMind(ev.Player.UserId, ev.Profile.Name);
@@ -72,7 +73,7 @@ public sealed partial class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRule
         var query = EntityQueryEnumerator<DeathMatchRuleComponent, RespawnTrackerComponent, GameRuleComponent>();
         while (query.MoveNext(out var uid, out _, out var tracker, out var rule))
         {
-            if (!GameTicker.IsGameRuleActive(uid, rule))
+            if (!ServerGameTicker.IsGameRuleActive(uid, rule))
                 continue;
             _respawn.AddToTracker((ev.Mob, null), (uid, tracker));
         }
@@ -83,7 +84,7 @@ public sealed partial class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRule
         var query = EntityQueryEnumerator<DeathMatchRuleComponent, PointManagerComponent, GameRuleComponent>();
         while (query.MoveNext(out var uid, out var dm, out var point, out var rule))
         {
-            if (!GameTicker.IsGameRuleActive(uid, rule))
+            if (!ServerGameTicker.IsGameRuleActive(uid, rule))
                 continue;
 
             // YOU SUICIDED OR GOT THROWN INTO LAVA!
@@ -116,8 +117,9 @@ public sealed partial class DeathMatchRuleSystem : GameRuleSystem<DeathMatchRule
         _roundEnd.EndRound(component.RestartDelay);
     }
 
-    protected override void AppendRoundEndText(EntityUid uid, DeathMatchRuleComponent component, GameRuleComponent gameRule, ref RoundEndTextAppendEvent args)
+    protected override void AppendRoundEndText(Entity<DeathMatchRuleComponent> rule, ref RoundEndTextAppendEvent args)
     {
+        var (uid, component) = (rule.Owner, rule.Comp);
         if (!TryComp<PointManagerComponent>(uid, out var point))
             return;
 

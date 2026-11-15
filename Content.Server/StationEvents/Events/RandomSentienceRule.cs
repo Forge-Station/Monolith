@@ -23,7 +23,7 @@ public sealed partial class RandomSentienceRule : StationEventSystem<RandomSenti
         var query = EntityQueryEnumerator<SentienceTargetComponent, TransformComponent>();
         while (query.MoveNext(out var targetUid, out var target, out var xform))
         {
-            var owningStation = StationSystem.GetOwningStation(targetUid, xform);
+            var owningStation = ServerStationSystem.GetOwningStation(targetUid, xform);
             if (!owningStation.HasValue || !stations.Contains(owningStation.Value)) // Mono change: multiple stations
                 continue;
 

@@ -5546,8 +5546,6 @@ entities:
       pos: -0.6298993,4.7431083
       parent: 2
     - type: NetworkConfigurator
-      devices:
-        'UID: 31739': 40
 - proto: NitrogenCanister
   entities:
   - uid: 858

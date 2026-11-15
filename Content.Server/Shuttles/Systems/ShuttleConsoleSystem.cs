@@ -32,6 +32,8 @@ using Content.Shared.Access.Systems; // Frontier
 using Content.Shared.Construction.Components; // Frontier
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Station.Components;
+using Content.Server._NF.Shuttles.Components;
+using Content.Server._NF.Station.Components;
 using Content.Shared._Forge.CloakingShuttle; // Forge-Change - Cloaking
 using Content.Shared._Mono.FireControl;
 using Content.Shared._Mono.Shuttles; // Forge-Change - BioScan
@@ -767,6 +769,18 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         if (owningStation == null)
             return;
 
+        // Outposts (Центральный аванпост and the other late-join stations) are not ships.
+        // Every grid still gets ShuttleComponent, and these maps place shuttle/traffic consoles
+        // on that grid. A brownout, or a split-off chunk whose console never gets power again,
+        // used to save every slot and then set it to 0 — including unlimited (-1) jobs.
+        // The saved counts live on whichever grid lost power, so the outpost stays at 0 slots
+        // until someone edits them by hand.
+        if (IsOutpostStation(owningStation.Value, gridUid))
+        {
+            ReleaseOutpostJobSlots(owningStation.Value);
+            return;
+        }
+
         // Check if the grid has any powered shuttle consoles
         var hasPoweredConsole = HasPoweredShuttleConsole(gridUid);
 
@@ -779,6 +793,39 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         {
             // Has powered console
             RestoreJobSlots(gridUid, owningStation.Value);
+        }
+    }
+
+    /// <summary>
+    /// Late-join stations and anchored outposts. Helm power on these grids is not
+    /// "the ship is dead", so it must not close their job slots.
+    /// </summary>
+    private bool IsOutpostStation(EntityUid station, EntityUid gridUid)
+    {
+        if (HasComp<ExtraStationInformationComponent>(station))
+            return true;
+
+        if (HasComp<ForceAnchorComponent>(gridUid))
+            return true;
+
+        // A split-off chunk does not copy ForceAnchor, but the station's main grid still has it.
+        var largest = _station.GetLargestGrid(station);
+        return largest != null && HasComp<ForceAnchorComponent>(largest.Value);
+    }
+
+    /// <summary>
+    /// Puts back slots that an earlier power loss already closed, then leaves them alone.
+    /// The saved copy may sit on a split-off grid, not on the console that just changed.
+    /// </summary>
+    private void ReleaseOutpostJobSlots(EntityUid station)
+    {
+        var query = EntityQueryEnumerator<ShuttleConsoleJobSlotsComponent>();
+        while (query.MoveNext(out var grid, out var jobSlots))
+        {
+            if (jobSlots.SavedJobSlots.Count == 0 || jobSlots.OwningStation != station)
+                continue;
+
+            RestoreJobSlots(grid, station);
         }
     }
 

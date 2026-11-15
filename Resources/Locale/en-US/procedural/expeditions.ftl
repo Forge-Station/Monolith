@@ -52,7 +52,7 @@ salvage-biome-mod-hive = Hive
 salvage-dungeon-mod-hive = Overrun expedition post
 salvage-faction-forge-xeno = Hive xenomorphs
 salvage-light-mod-hive = Dim resin light
-salvage-time-mod-hive = Long deployment, 20 minutes
+salvage-time-mod-hive = Long deployment, 30 minutes
 # Forge-Change-End
 
 

@@ -5,14 +5,14 @@
     Blunt:
       min: 150 # Forge-change 150->250
       max: 400 # Forge-change 400->500
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Asphyxiation:
       min: 50
       max: 200
       value: 10
       penalty: 10
-  baseReward: 2000 # Forge-change 4k-8k -> 2375-5750 
+  baseReward: 2000 # Forge-change 4k-8k -> 2375-5750
   bonusRewardPercent: 0.003 # Forge-change (7-17)
 
 - type: medicalBounty
@@ -21,14 +21,14 @@
     Piercing:
       min: 250 # Forge-change 150->250
       max: 500 # Forge-change 400->500
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Bloodloss:
       min: 50
       max: 200
       value: 10
       penalty: 10
-  baseReward: 2000 # Forge-change 4k-8k -> 2375-5750 
+  baseReward: 2000 # Forge-change 4k-8k -> 2375-5750
   bonusRewardPercent: 0.003 # Forge-change (7-17)
 
 - type: medicalBounty
@@ -37,14 +37,14 @@
     Slash:
       min: 250 # Forge-change 150->250
       max: 500 # Forge-change 400->500
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Bloodloss:
       min: 50
       max: 200
       value: 10
       penalty: 10
-  baseReward: 2000 # Forge-change 4k-8k -> 2375-5750 
+  baseReward: 2000 # Forge-change 4k-8k -> 2375-5750
   bonusRewardPercent: 0.003 # Forge-change (7-17)
 
 - type: medicalBounty
@@ -53,24 +53,24 @@
     Blunt:
       min: 125 # Forge-change 75->125
       max: 200 # Forge-change 150->200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Piercing:
       min: 125 # Forge-change 75->125
       max: 200 # Forge-change 150->200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Slash:
       min: 125 # Forge-change 75->125
       max: 200 # Forge-change 150->200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Bloodloss:
       min: 100 # Forge-change 75->100
       max: 150
       value: 10
       penalty: 10
-  baseReward: 2000 # Forge-change 5k-8k -> 3812-6000 
+  baseReward: 2000 # Forge-change 5k-8k -> 3812-6000
   bonusRewardPercent: 0.003 # Forge-change (11-18)
 
 - type: medicalBounty
@@ -95,7 +95,7 @@
     Heat:
       min: 1000
       max: 2250
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
   baseReward: 2000 # Forge-change 10k-32k -> 7500-16875
   bonusRewardPercent: 0.002 # Forge-change (15-33)
@@ -106,22 +106,22 @@
     Blunt:
       min: 100 # Forge-change 50->100
       max: 150 # Forge-change 100->150
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Piercing:
       min: 100 # Forge-change 50->100
       max: 150 # Forge-change 100->150
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Slash:
       min: 100 # Forge-change 50->100
       max: 150 # Forge-change 100->150
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Cold:
       min: 600
       max: 2000
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
   baseReward: 1000 # Forge-change 8500-24k -> 6750-18375
   bonusRewardPercent: 0.0015 # Forge-change (10-27)
@@ -132,22 +132,22 @@
     Heat:
       min: 100 # Forge-change 50->100
       max: 200 # Forge-change 150->200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Cold:
       min: 100 # Forge-change 50->100
       max: 200 # Forge-change 150->200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Shock:
       min: 100 # Forge-change 50->100
       max: 200 # Forge-change 150->200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Caustic:
       min: 100 # Forge-change 50->100
       max: 200 # Forge-change 150->200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
   baseReward: 2000 # Forge-change 4k-8k -> 3000-6000
   bonusRewardPercent: 0.003 # Forge-change (9-18)
@@ -158,12 +158,12 @@
     Heat:
       min: 200
       max: 400
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Shock:
       min: 400
       max: 600
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
   baseReward: 1500 # Forge-change 7500-11500 -> 4500-7500
   bonusRewardPercent: 0.003 # Forge-change (13-22)
@@ -190,7 +190,7 @@
     Asphyxiation:
       min: 150 # Forge-change 100->150
       max: 200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
   reagents:
     Mechanotoxin:
@@ -227,7 +227,7 @@
     Asphyxiation:
       min: 100
       max: 200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
   reagents:
     Amatoxin:
@@ -253,7 +253,7 @@
     Asphyxiation:
       min: 100
       max: 200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
   baseReward: 6000 # Forge-change 6250-19k -> 10150-21100
   bonusRewardPercent: 0.004 # Forge-change (40-84)
@@ -264,7 +264,7 @@
     Asphyxiation:
       min: 100 # Forge-change 200->100
       max: 200 # Forge-change 400->200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
     Cellular:
       min: 200 # Forge-change 60->200

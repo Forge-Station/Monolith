@@ -1510,6 +1510,8 @@
   - type: Construction
     graph: Girder
     node: wallMiningDiagonal
+  - type: StaticPrice
+    price: 115
   # Forge-Change-End
 
 # Mime

@@ -398,3 +398,10 @@ Entries:
   id: 30
   time: '2026-11-14T21:56:36.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/594
+- author: holodilnik66
+  changes:
+    - type: Tweak
+      message: Обновление внутриигровых правил - актуализация с правилами в дискорде.
+  id: 31
+  time: '2026-11-15T14:34:21.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/595

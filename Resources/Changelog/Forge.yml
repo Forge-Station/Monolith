@@ -379,3 +379,14 @@ Entries:
   id: 29
   time: '2026-11-10T10:53:19.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/558
+- author: DRON5011
+  changes:
+    - type: Tweak
+      message: Показатели скафандров T-23, T-44 и T-53
+    - type: Tweak
+      message: Обновлен асортимент оружия в аплинке ТТИ
+    - type: Tweak
+      message: Пересмотрены цены в аплинке ТТИ
+  id: 30
+  time: '2026-11-15T17:44:06.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/476

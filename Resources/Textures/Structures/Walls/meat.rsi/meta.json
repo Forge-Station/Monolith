@@ -11,35 +11,59 @@
             "name": "full"
         },
         {
-            "name": "meat0",
+            "name": "wall0",
             "directions": 4
         },
         {
-            "name": "meat1",
+            "name": "wall1",
             "directions": 4
         },
         {
-            "name": "meat2",
+            "name": "wall2",
             "directions": 4
         },
         {
-            "name": "meat3",
+            "name": "wall3",
             "directions": 4
         },
         {
-            "name": "meat4",
+            "name": "wall4",
             "directions": 4
         },
         {
-            "name": "meat5",
+            "name": "wall5",
             "directions": 4
         },
         {
-            "name": "meat6",
+            "name": "wall6",
             "directions": 4
         },
         {
-            "name": "meat7",
+            "name": "wall7",
+            "directions": 4
+        },
+        {
+            "name": "wall8",
+            "directions": 4
+        },
+        {
+            "name": "wall9",
+            "directions": 4
+        },
+        {
+            "name": "wall10",
+            "directions": 4
+        },
+        {
+            "name": "wall11",
+            "directions": 4
+        },
+        {
+            "name": "wall12",
+            "directions": 4
+        },
+        {
+            "name": "wall13",
             "directions": 4
         }
     ]

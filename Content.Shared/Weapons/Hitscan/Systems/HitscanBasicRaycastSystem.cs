@@ -95,7 +95,7 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem
         {
             foreach (var hitEntity in trace.HitEntities)
             {
-                var strike = new HitscanRaycastStrikeEvent(ent.Owner, trace.Gun, trace.Shooter);
+                var strike = new HitscanRaycastStrikeEvent(ent.Owner, trace.Gun, trace.Shooter, trace.FromCoordinates);
                 RaiseLocalEvent(hitEntity, ref strike);
             }
         }

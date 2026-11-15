@@ -66,9 +66,6 @@
   id: Jetpack
 
 - type: Tag
-  id: SpaceCash
-
-- type: Tag
   id: CyberPen
 
 - type: Tag

@@ -9,7 +9,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Projectiles;
-using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Robust.Server.Containers;
 using Robust.Shared.Map;
@@ -34,8 +33,8 @@ public sealed class NpcThreatMemorySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
-        SubscribeLocalEvent<HitscanBasicRaycastComponent, HitscanRaycastFiredEvent>(OnHitscanFired);
+        SubscribeLocalEvent<ProjectileComponent, ProjectileHitNoticedEvent>(OnProjectileHit);
+        SubscribeLocalEvent<HTNComponent, HitscanRaycastStrikeEvent>(OnHitscanStrike);
     }
 
     public override void Update(float frameTime)
@@ -50,17 +49,14 @@ public sealed class NpcThreatMemorySystem : EntitySystem
         }
     }
 
-    private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
+    private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitNoticedEvent args)
     {
         RememberShot(args.Target, args.Shooter, ent);
     }
 
-    private void OnHitscanFired(Entity<HitscanBasicRaycastComponent> ent, ref HitscanRaycastFiredEvent args)
+    private void OnHitscanStrike(Entity<HTNComponent> ent, ref HitscanRaycastStrikeEvent args)
     {
-        if (args.Canceled || args.HitEntity is not { } hit)
-            return;
-
-        RememberShot(hit, args.Shooter, null, args.FromCoordinates);
+        RememberShot(ent, args.Shooter, null, args.FromCoordinates);
     }
 
     private void RememberShot(EntityUid target, EntityUid? shooter, Entity<ProjectileComponent>? projectile, EntityCoordinates? from = null)

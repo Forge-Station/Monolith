@@ -44,10 +44,6 @@ public sealed class ExamineCardControl : PanelContainer
 
     private const string FontBold = "/Fonts/RobotoMono/RobotoMono-Bold.ttf";
     private const string FontRegular = "/Fonts/RobotoMono/RobotoMono-Regular.ttf";
-    private const string Logo = "/Textures/_WF/Branding/Logo/logo.png";
-
-    /// <summary>The opaque part of the 800x266 logo.</summary>
-    private static readonly UIBox2 LogoRegion = new(48, 67, 754, 199);
 
     public static readonly Color Paper = Color.FromHex("#161A18");
     public static readonly Color PaperShade = Color.FromHex("#262C29");
@@ -323,7 +319,7 @@ public sealed class ExamineCardControl : PanelContainer
             },
         });
 
-        // Footer band, the same colour as the header: the Wolfgate mark on the left, verb buttons on the right.
+        // Footer band, the same colour as the header, with verb buttons on the right.
         _footer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
@@ -331,16 +327,6 @@ public sealed class ExamineCardControl : PanelContainer
             HorizontalExpand = true,
         };
         var footerRow = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal, MinHeight = 24 };
-        footerRow.AddChild(new TextureRect
-        {
-            // The logo file has wide transparent margins; draw only the mark itself.
-            Texture = new AtlasTexture(resources.GetResource<TextureResource>(Logo).Texture, LogoRegion),
-            Stretch = TextureRect.StretchMode.KeepAspectCentered,
-            SetSize = new Vector2(117, 22),
-            Modulate = BandText.WithAlpha(0.85f),
-            VerticalAlignment = VAlignment.Center,
-            Margin = new Thickness(8, 3, 0, 3),
-        });
         footerRow.AddChild(_footer);
         root.AddChild(new PanelContainer { PanelOverride = Box(band.WithAlpha(BandAlpha), null, 0), Children = { footerRow } });
     }

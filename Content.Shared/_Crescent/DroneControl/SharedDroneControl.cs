@@ -1,3 +1,4 @@
+using Content.Shared.DeviceNetwork;
 using Content.Shared.Shuttles.BUIStates;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
@@ -60,13 +61,24 @@ public sealed class DroneConsoleTargetMessage : BoundUserInterfaceMessage
 }
 
 /// <summary>
-///     Constants for DeviceNetwork packet keys.
+/// Order sent from a drone console to a linked drone.
+/// </summary>
+public partial record struct DroneOrderPayload : INetworkPayload
+{
+    [DataField]
+    public string Command;
+
+    [DataField]
+    public EntityCoordinates Coordinates;
+}
+
+/// <summary>
+///     Constants for drone console orders.
 /// </summary>
 public static class DroneConsoleConstants
 {
     public const string CommandMove = "drone_cmd_move";
     public const string CommandTarget = "drone_cmd_target";
-    public const string TargetCoords = "target";
 }
 
 public enum DroneOrderType

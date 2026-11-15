@@ -3,7 +3,7 @@ using Content.Shared._Forge.Movement.Components; // Forge-Change
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Examine;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Toggleable;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
@@ -174,7 +174,7 @@ public abstract partial class SharedGasTankSystem : EntitySystem
         if (!component.IsConnected)
             return false;
 
-        component.ConnectStream = _audio.Stop(component.ConnectStream);
+        component.DisconnectStream = _audio.Stop(component.DisconnectStream);
         component.ConnectStream = _audio.PlayPredicted(component.ConnectSound, owner, user)?.Entity;
         UpdateUserInterface(ent);
         return true;
@@ -243,7 +243,7 @@ public abstract partial class SharedGasTankSystem : EntitySystem
         if (internalsUid != null && internalsComp != null)
             _internals.DisconnectTank((internalsUid.Value, internalsComp), forced: forced);
 
-        component.DisconnectStream = _audio.Stop(component.DisconnectStream);
+        component.ConnectStream = _audio.Stop(component.ConnectStream);
         component.DisconnectStream = _audio.PlayPredicted(component.DisconnectSound, owner, user)?.Entity;
         UpdateUserInterface(ent);
         return true;

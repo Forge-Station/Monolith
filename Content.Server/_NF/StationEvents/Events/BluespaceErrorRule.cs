@@ -1,3 +1,4 @@
+using Content.Shared.Shuttles.Components;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
 using Robust.Server.GameObjects;
@@ -52,7 +53,7 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
     {
         base.Started(uid, component, gameRule, args);
 
-        if (!_map.TryGetMap(GameTicker.DefaultMap, out var mapUid))
+        if (!_map.TryGetMap(ServerGameTicker.DefaultMap, out var mapUid))
             return;
 
         var spawnCoords = new EntityCoordinates(mapUid.Value, Vector2.Zero);
@@ -205,9 +206,10 @@ public sealed partial class BluespaceErrorRule : StationEventSystem<BluespaceErr
         return false;
     }
 
-    protected override void Ended(EntityUid uid, BluespaceErrorRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    protected override void Ended(Entity<BluespaceErrorRuleComponent> rule, ref GameRuleEndedEvent args)
     {
-        base.Ended(uid, component, gameRule, args);
+        base.Ended(rule, ref args);
+        var component = rule.Comp;
 
         if (component.GridsUid == null)
             return;

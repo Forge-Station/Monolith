@@ -18,10 +18,10 @@ namespace Content.Server._Forge.Genetics;
 
 public sealed partial class GeneticsSystem
 {
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private readonly LanguageSystem _languages = default!;
-    [Dependency] private readonly ContainerSystem _containers = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private SharedHumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private LanguageSystem _languages = default!;
+    [Dependency] private ContainerSystem _containers = default!;
 
     /// <summary>Chance a species rewrite never lets the old body back, even after death.</summary>
     private const float PermanentSpeciesChance = 0.05f;

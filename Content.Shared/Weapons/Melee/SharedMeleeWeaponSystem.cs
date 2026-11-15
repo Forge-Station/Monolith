@@ -46,7 +46,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private   InventorySystem         _inventory       = default!;
     [Dependency] private   MeleeSoundSystem        _meleeSound      = default!;
     [Dependency] private   SharedPhysicsSystem     _physics         = default!;
-    [Dependency] private   IPrototypeManager       _protoManager    = default!;
     [Dependency] private   StaminaSystem           _stamina         = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
@@ -612,7 +611,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        _meleeSound.PlayHitSound(target.Value, playerUid, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+        _meleeSound.PlayHitSound(target.Value, playerUid, GetHighestDamageSound(modifiedDamage, ProtoMan), hitEvent.HitSoundOverride, component);
 
         if (damageResult?.GetTotal() > FixedPoint2.Zero)
         {
@@ -795,7 +794,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         if (entities.Count != 0)
         {
             var target = entities.First();
-            _meleeSound.PlayHitSound(target, playerUid, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+            _meleeSound.PlayHitSound(target, playerUid, GetHighestDamageSound(appliedDamage, ProtoMan), hitEvent.HitSoundOverride, component);
         }
 
         // Forge-Change: the first target can already be gone. Transform() would throw.

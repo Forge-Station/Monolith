@@ -94,4 +94,10 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<float> PointingCooldownSeconds =
         CVarDef.Create("pointing.cooldown_seconds", 0.5f, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     If enabled, every structure aligner is aligned when the map initializes.
+    /// </summary>
+    public static readonly CVarDef<bool> MapInitAlign =
+        CVarDef.Create("align.map_init", false, CVar.SERVER | CVar.REPLICATED);
 }

@@ -47,7 +47,7 @@ public sealed partial class AmmoLoaderSystem : EntitySystem
         if (TryComp<DeviceLinkSourceComponent>(ent, out var sourceComponent) &&
             sourceComponent.LinkedPorts.Count > ent.Comp.MaxConnections)
         {
-            args.Cancel();
+            args.Cancelled = true;
         }
     }
 

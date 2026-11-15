@@ -7,9 +7,9 @@ namespace Content.Shared._Forge.Xenomorphs;
 /// <summary>
 /// Resin doors open when a xenomorph bumps them and close again after it passes.
 /// </summary>
-public sealed class ForgeXenoResinDoorSystem : EntitySystem
+public sealed partial class ForgeXenoResinDoorSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDoorSystem _doors = default!;
+    [Dependency] private SharedDoorSystem _doors = default!;
 
     public override void Initialize()
     {

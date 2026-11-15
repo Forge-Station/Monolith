@@ -153,6 +153,12 @@ public sealed partial class NPCSteeringComponent : Component
     /// </summary>
     [DataField("doAfterId")]
     public DoAfterId? DoAfterId = null;
+
+    /// <summary>
+    /// Don't spam a door that just denied us.
+    /// </summary>
+    [ViewVariables]
+    public TimeSpan NextDoorAttempt;
 }
 
 public enum SteeringStatus : byte

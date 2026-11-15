@@ -6025,8 +6025,6 @@ entities:
       pos: -0.6298993,4.7431083
       parent: 2
     - type: NetworkConfigurator
-      devices:
-        'UID: 31739': 42
 - proto: NanoManipulatorStockPart
   entities:
   - uid: 912

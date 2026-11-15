@@ -11,6 +11,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Server.Body.Components;
 using System.Linq;
@@ -261,10 +263,13 @@ public sealed partial class HypospraySystem : SharedHypospraySystem
         // TODO: Does checking for BodyComponent make sense as a "can be hypospray'd" tag?
         // In SS13 the hypospray ONLY works on mobs, NOT beakers or anything else.
         // But this is 14, we dont do what SS13 does just because SS13 does it.
+        // SolutionContainerManager is converted to SolutionManager on MapInit (solutions refactor).
+        var hasSolution = entMan.HasComponent<SolutionManagerComponent>(entity)
+            || entMan.HasComponent<SolutionContainerManagerComponent>(entity);
+
         return component.OnlyAffectsMobs
-            ? entMan.HasComponent<SolutionContainerManagerComponent>(entity) &&
-              entMan.HasComponent<MobStateComponent>(entity)
-            : entMan.HasComponent<SolutionContainerManagerComponent>(entity);
+            ? hasSolution && entMan.HasComponent<MobStateComponent>(entity)
+            : hasSolution;
     }
 
     // Frontier: Upstream: #30704 - MIT

@@ -1,10 +1,9 @@
 using Content.Server.Administration.Logs;
 using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
-using Content.Server.DeviceNetwork.Systems;
+using Content.Shared.DeviceNetwork.Systems;
 using Content.Server.Popups;
 using Content.Server.RoundEnd;
-using Content.Server.Screens.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
@@ -13,10 +12,11 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Communications;
 using Content.Shared.Database;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
+using Content.Shared.Screens;
+using Content.Shared.Station.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Content.Server._NF.SectorServices; // Frontier
@@ -32,7 +32,7 @@ namespace Content.Server.Communications
         [Dependency] private EmergencyShuttleSystem _emergency = default!;
         [Dependency] private PopupSystem _popupSystem = default!;
         [Dependency] private RoundEndSystem _roundEndSystem = default!;
-        [Dependency] private StationSystem _stationSystem = default!;
+        [Dependency] private ServerStationSystem _stationSystem = default!;
         [Dependency] private UserInterfaceSystem _uiSystem = default!;
         [Dependency] private IConfigurationManager _cfg = default!;
         [Dependency] private IAdminLogManager _adminLogger = default!;
@@ -322,12 +322,12 @@ namespace Content.Server.Communications
             if (!CanBroadcast(component)) // Forge-Change
                 return; // Forge-Change
 
-            var payload = new NetworkPayload
+            var payload = new ScreenTextPayload
             {
-                [ScreenMasks.Text] = message.Message
+                Text = message.Message,
             };
 
-            _deviceNetworkSystem.QueuePacket(uid, null, payload, net.TransmitFrequency);
+            _deviceNetworkSystem.SendPacket(uid, null, ref payload, net.TransmitFrequency);
             component.BroadcastCooldownRemaining = component.BroadcastDelay; // Forge-Change
             UpdateCommsConsoleInterface(uid, component); // Forge-Change
 

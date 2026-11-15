@@ -53,7 +53,7 @@ public sealed partial class AdminVerbSystem
     [Dependency] private HandsSystem _handsSystem = default!;
     [Dependency] private QuickDialogSystem _quickDialog = default!;
     [Dependency] private AdminTestArenaSystem _adminTestArenaSystem = default!;
-    [Dependency] private StationJobsSystem _stationJobsSystem = default!;
+    [Dependency] private ServerStationJobsSystem _stationJobsSystem = default!;
     [Dependency] private JointSystem _jointSystem = default!;
     [Dependency] private BatterySystem _batterySystem = default!;
     [Dependency] private MetaDataSystem _metaSystem = default!;

@@ -72,12 +72,12 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedSalvageSystem _salvage = default!;
     [Dependency] private ShuttleConsoleSystem _console = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private StunSystem _stuns = default!;
     [Dependency] private ThrowingSystem _throwing = default!;
     [Dependency] private ThrusterSystem _thruster = default!;
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private GameTicker _ticker = default!; //frontier edit to get the main map in FTL
+    [Dependency] private ServerGameTicker _ticker = default!; //frontier edit to get the main map in FTL
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private PopupSystem _popup = default!;
 

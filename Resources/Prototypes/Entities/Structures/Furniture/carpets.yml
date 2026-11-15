@@ -12,7 +12,11 @@
     state: full
   - type: IconSmooth
     key: full
-    base: carpet_
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ full ]
+      base: carpet_
+      swapOuterBits: false
   - type: Tag
     tags:
     - Carpet

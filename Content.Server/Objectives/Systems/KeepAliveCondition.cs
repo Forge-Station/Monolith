@@ -16,7 +16,7 @@ public sealed partial class KeepAliveConditionSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private TargetObjectiveSystem _target = default!;
-    [Dependency] private TraitorRuleSystem _traitorRule = default!;
+    [Dependency] private ServerTraitorRuleSystem _traitorRule = default!;
 
     public override void Initialize()
     {

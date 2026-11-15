@@ -59,8 +59,8 @@ public sealed partial class DrinkSystem : SharedDrinkSystem
         base.Initialize();
 
         // TODO add InteractNoHandEvent for entities like mice.
-        SubscribeLocalEvent<DrinkComponent, SolutionContainerChangedEvent>(OnSolutionChange);
-        SubscribeLocalEvent<DrinkComponent, ComponentInit>(OnDrinkInit);
+        SubscribeLocalEvent<DrinkComponent, SolutionChangedEvent>(OnSolutionChange);
+        SubscribeLocalEvent<DrinkComponent, MapInitEvent>(OnDrinkInit, after: [typeof(SharedSolutionContainerSystem)]);
         // run before inventory so for bucket it always tries to drink before equipping (when empty)
         // run after openable so its always open -> drink
         SubscribeLocalEvent<DrinkComponent, UseInHandEvent>(OnUse, before: [typeof(ServerInventorySystem)], after: [typeof(OpenableSystem)]);
@@ -119,7 +119,7 @@ public sealed partial class DrinkSystem : SharedDrinkSystem
         args.Handled = TryDrink(args.User, args.User, entity.Comp, entity);
     }
 
-    private void OnDrinkInit(Entity<DrinkComponent> entity, ref ComponentInit args)
+    private void OnDrinkInit(Entity<DrinkComponent> entity, ref MapInitEvent args)
     {
         if (TryComp<DrainableSolutionComponent>(entity, out var existingDrainable))
         {
@@ -140,7 +140,7 @@ public sealed partial class DrinkSystem : SharedDrinkSystem
             drainComp.Solution = entity.Comp.Solution;
     }
 
-    private void OnSolutionChange(Entity<DrinkComponent> entity, ref SolutionContainerChangedEvent args)
+    private void OnSolutionChange(Entity<DrinkComponent> entity, ref SolutionChangedEvent args)
     {
         UpdateAppearance(entity, entity.Comp);
     }

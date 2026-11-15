@@ -19,7 +19,6 @@ public abstract partial class SharedIdCardSystem : EntitySystem
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private MetaDataSystem _metaSystem = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -182,7 +181,7 @@ public abstract partial class SharedIdCardSystem : EntitySystem
             return false;
 
         id.JobDepartments.Clear();
-        foreach (var department in _prototypeManager.EnumeratePrototypes<DepartmentPrototype>())
+        foreach (var department in ProtoMan.EnumeratePrototypes<DepartmentPrototype>())
         {
             if (department.Roles.Contains(job.ID))
                 id.JobDepartments.Add(department.ID);
@@ -256,7 +255,7 @@ public abstract partial class SharedIdCardSystem : EntitySystem
         if (id.CompanyName.Id == companyName)
             return true;
 
-        id.CompanyName = _prototypeManager.Index<CompanyPrototype>(companyName ?? "None");
+        id.CompanyName = ProtoMan.Index<CompanyPrototype>(companyName ?? "None");
         Dirty(uid, id);
 
         if (player != null)

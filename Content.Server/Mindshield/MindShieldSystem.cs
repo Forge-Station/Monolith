@@ -1,3 +1,4 @@
+using Content.Shared.Roles.Components;
 using Content.Server.Administration.Logs;
 using Content.Server.Mind;
 using Content.Server.Popups;

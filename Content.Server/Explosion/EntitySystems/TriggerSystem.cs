@@ -86,7 +86,7 @@ namespace Content.Server.Explosion.EntitySystems
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private InventorySystem _inventory = default!;
         [Dependency] private ElectrocutionSystem _electrocution = default!;
-        [Dependency] private StationSystem _station = default!; // Frontier: medical insurance
+        [Dependency] private ServerStationSystem _station = default!; // Frontier: medical insurance
         [Dependency] private SharedMapSystem _map = default!; // Frontier: medical insurance
 
         public override void Initialize()
@@ -414,12 +414,10 @@ namespace Content.Server.Explosion.EntitySystems
                     // If a beaker is missing, the entity won't explode, so no reason to log it
                     if (chemicalPayloadComponent?.BeakerSlotA.Item is not { } beakerA ||
                         chemicalPayloadComponent?.BeakerSlotB.Item is not { } beakerB ||
-                        !TryComp(beakerA, out SolutionContainerManagerComponent? containerA) ||
-                        !TryComp(beakerB, out SolutionContainerManagerComponent? containerB) ||
                         !TryComp(beakerA, out FitsInDispenserComponent? fitsA) ||
                         !TryComp(beakerB, out FitsInDispenserComponent? fitsB) ||
-                        !_solutionContainerSystem.TryGetSolution((beakerA, containerA), fitsA.Solution, out _, out var solutionA) ||
-                        !_solutionContainerSystem.TryGetSolution((beakerB, containerB), fitsB.Solution, out _, out var solutionB))
+                        !_solutionContainerSystem.TryGetSolution(beakerA, fitsA.Solution, out _, out var solutionA) ||
+                        !_solutionContainerSystem.TryGetSolution(beakerB, fitsB.Solution, out _, out var solutionB))
                         return;
 
                     _adminLogger.Add(LogType.Trigger,

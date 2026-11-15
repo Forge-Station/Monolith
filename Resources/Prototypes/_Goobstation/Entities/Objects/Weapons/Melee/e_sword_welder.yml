@@ -56,7 +56,7 @@
     fuelConsumption: 3
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 100
@@ -68,7 +68,7 @@
     tags:
     - EnergySword
   - type: RefillableSolution
-    solution: Welder
+    solution: welder
   - type: Construction
     graph: WelderSword
     node: welderSword
@@ -90,7 +90,7 @@
       map: [ "blade" ]
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 250
@@ -119,7 +119,7 @@
     activatedColor: LightBlue
   - type: SolutionContainerManager
     solutions:
-      Welder:
+      welder:
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 1000
@@ -128,7 +128,7 @@
     graph: WelderSwordExperimental
     node: welderSwordExperimental
   - type: SolutionRegeneration
-    solution: Welder
+    solution: welder
     generated:
       reagents:
         - ReagentId: WeldingFuel

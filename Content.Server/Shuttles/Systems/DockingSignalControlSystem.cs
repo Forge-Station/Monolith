@@ -1,6 +1,9 @@
-using Content.Server.DeviceLinking.Systems;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
+using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Events;
+using Content.Shared.DeviceLinking.Payloads;
+using Content.Shared.DeviceLinking.Systems;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -18,11 +21,11 @@ public sealed partial class DockingSignalControlSystem : EntitySystem
 
     private void OnDocked(Entity<DockingSignalControlComponent> ent, ref DockEvent args)
     {
-        _deviceLinkSystem.SendSignal(ent, ent.Comp.DockStatusSignalPort, signal: true);
+        _deviceLinkSystem.SendSignal(ent.Owner, ent.Comp.DockStatusSignalPort, signal: true);
     }
 
     private void OnUndocked(Entity<DockingSignalControlComponent> ent, ref UndockEvent args)
     {
-        _deviceLinkSystem.SendSignal(ent, ent.Comp.DockStatusSignalPort, signal: false);
+        _deviceLinkSystem.SendSignal(ent.Owner, ent.Comp.DockStatusSignalPort, signal: false);
     }
 }

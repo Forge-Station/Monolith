@@ -67,7 +67,7 @@ public sealed partial class DeepFryerSystem
 
             // Ensure it's Food here, so it passes the whitelist.
             var mobFoodComponent = EnsureComp<FoodComponent>(mob);
-            _solutionContainerSystem.EnsureSolution(mob, mobFoodComponent.Solution, out var alreadyHadFood);
+            var alreadyHadFood = _solutionContainerSystem.EnsureSolution(mob, mobFoodComponent.Solution, out _);
 
             if (!_solutionContainerSystem.TryGetSolution(mob, mobFoodComponent.Solution, out var mobFoodSolution))
                 return false;
@@ -179,8 +179,9 @@ public sealed partial class DeepFryerSystem
         }
 
         // Make sure there's enough room for the fryer solution.
-        var foodSolution = _solutionContainerSystem.EnsureSolution(item, foodComponent.Solution);
-        if (!_solutionContainerSystem.TryGetSolution(item, foodSolution.Name, out var foodContainer))
+        _solutionContainerSystem.EnsureSolution(item, foodComponent.Solution, out var foodSolutionEnt);
+        var foodSolution = foodSolutionEnt.Comp.Solution;
+        if (!_solutionContainerSystem.TryGetSolution(item, foodComponent.Solution, out var foodContainer))
             return;
 
         // The solution quantity is used to give the fried food an extra

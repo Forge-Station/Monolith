@@ -42,10 +42,10 @@ public sealed class AbsorbentTest
   name: {RefillableDummyId}
   id: {RefillableDummyId}
   components:
-  - type: SolutionContainerManager
-    solutions:
-      refillable:
-        maxVol: 200
+  - type: Solution
+    id: refillable
+    solution:
+      maxVol: 200
   - type: RefillableSolution
     solution: refillable
 
@@ -53,10 +53,10 @@ public sealed class AbsorbentTest
   name: {SmallRefillableDummyId}
   id: {SmallRefillableDummyId}
   components:
-  - type: SolutionContainerManager
-    solutions:
-      refillable:
-        maxVol: 20
+  - type: Solution
+    id: refillable
+    solution:
+      maxVol: 20
   - type: RefillableSolution
     solution: refillable
 ";

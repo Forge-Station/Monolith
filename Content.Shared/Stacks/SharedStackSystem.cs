@@ -20,7 +20,6 @@ namespace Content.Shared.Stacks
     public abstract partial class SharedStackSystem : EntitySystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
-        [Dependency] private IPrototypeManager _prototype = default!;
         [Dependency] private IViewVariablesManager _vvm = default!;
         [Dependency] protected SharedAppearanceSystem Appearance = default!;
         [Dependency] protected SharedHandsSystem Hands = default!;
@@ -284,7 +283,7 @@ namespace Content.Shared.Stacks
         [PublicAPI]
         public int GetMaxCount(string entityId)
         {
-            var entProto = _prototype.Index<EntityPrototype>(entityId);
+            var entProto = ProtoMan.Index<EntityPrototype>(entityId);
             entProto.TryGetComponent<StackComponent>(out var stackComp, EntityManager.ComponentFactory);
             return GetMaxCount(stackComp);
         }
@@ -324,7 +323,7 @@ namespace Content.Shared.Stacks
             var cap = component.MaxCountOverride
                 ?? (string.IsNullOrEmpty(component.StackTypeId)
                     ? 1
-                    : _prototype.Index<StackPrototype>(component.StackTypeId).MaxCount ?? int.MaxValue);
+                    : ProtoMan.Index<StackPrototype>(component.StackTypeId).MaxCount ?? int.MaxValue);
 
             // Bulk ore and sheets stack past the prototype cap. Read it here so the cap is not
             // copied onto the component during init (that fails the uninitialized-map save test).

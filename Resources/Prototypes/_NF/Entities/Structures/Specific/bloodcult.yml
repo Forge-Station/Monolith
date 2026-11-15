@@ -76,7 +76,10 @@
     sprite: _NF/Structures/Specific/BloodCult/wall.rsi
   - type: IconSmooth
     key: walls
-    base: cult
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ walls, windows, grilles, marble, doors ]
+      base: cult
 
 - type: entity
   parent: BaseStructure

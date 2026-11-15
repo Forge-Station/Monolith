@@ -60,7 +60,7 @@
   - type: DeviceNetwork # Mono
     deviceNetId: Wireless # Mono
     receiveFrequencyId: BasicDevice # Mono
-  - type: WirelessNetworkConnection # Mono
+  - type: WirelessNetwork # Mono
     range: 200 # Mono
   - type: DeviceLinkSink # Mono
     ports: # Mono

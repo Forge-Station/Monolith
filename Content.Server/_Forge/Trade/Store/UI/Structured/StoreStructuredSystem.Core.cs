@@ -86,7 +86,7 @@ public sealed partial class StoreStructuredSystem : EntitySystem
         SubscribeLocalEvent<NcStoreComponent, ComponentShutdown>(OnStoreShutdown);
         SubscribeLocalEvent<ContainerManagerComponent, EntInsertedIntoContainerMessage>(OnUserEntInserted);
         SubscribeLocalEvent<ContainerManagerComponent, EntRemovedFromContainerMessage>(OnUserEntRemoved);
-        SubscribeLocalEvent<RefillableSolutionComponent, SolutionContainerChangedEvent>(OnRefillableSolutionChanged);
+        SubscribeLocalEvent<RefillableSolutionComponent, SolutionChangedEvent>(OnRefillableSolutionChanged);
         SubscribeLocalEvent<BalanceChangedEvent>(OnBankBalanceChanged);
         SubscribeLocalEvent<StackComponent, StackCountChangedEvent>(OnStackCountChanged);
         SubscribeLocalEvent<EntParentChangedMessage>(OnWatchedEntityParentChanged);

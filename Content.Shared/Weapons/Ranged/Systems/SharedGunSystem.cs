@@ -18,7 +18,7 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Melee;
@@ -56,7 +56,6 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedMapSystem MapManager = default!;
     [Dependency] private   INetManager _netManager = default!;
-    [Dependency] protected IPrototypeManager ProtoManager = default!;
     [Dependency] protected IRobustRandom Random = default!;
     [Dependency] protected ISharedAdminLogManager Logs = default!;
     [Dependency] protected DamageableSystem Damageable = default!;
@@ -609,7 +608,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     {
         if (cartridge.TryGetComponent<CartridgeAmmoComponent>(out var cartComp, Factory))
         {
-            return ProtoManager.Index(cartComp.Prototype);
+            return ProtoMan.Index(cartComp.Prototype);
         }
         return cartridge;
     }

@@ -13,6 +13,7 @@ public sealed partial class CardboardBoxSystem : SharedCardboardBoxSystem
     [Dependency] private EntityLookupSystem _entityLookup = default!;
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private EntityQuery<BodyComponent> _bodyQuery;
 
@@ -74,7 +75,7 @@ public sealed partial class CardboardBoxSystem : SharedCardboardBoxSystem
             if (!xformQuery.TryGetComponent(ent, out var entTransform) || !TryComp<SpriteComponent>(ent, out var sprite))
                 continue;
 
-            sprite.Offset = new Vector2(0, 1);
+            _sprite.SetOffset((ent, sprite), new Vector2(0, 1));
             _transform.SetParent(ent, entTransform, mob);
         }
 

@@ -96,6 +96,7 @@
       state: rock_wall_west
     - state: rock_copper
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
 - type: entity
   id: WallRockSnowCopper
   parent: NFWallRockSnowOre

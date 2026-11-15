@@ -32330,7 +32330,6 @@ entities:
       pos: 14.5,-4.5
       parent: 31
     - type: FaxMachine
-      destinationAddress: Medical
       name: Medical
   - uid: 1264
     components:
@@ -32345,7 +32344,6 @@ entities:
       pos: -17.5,-25.5
       parent: 31
     - type: FaxMachine
-      destinationAddress: Science
       name: Science
   - uid: 8323
     components:
@@ -32360,7 +32358,6 @@ entities:
       pos: 13.5,12.5
       parent: 31
     - type: FaxMachine
-      destinationAddress: Cargo
       name: Cargo
   - uid: 9687
     components:
@@ -32375,7 +32372,6 @@ entities:
       pos: 1.5,32.5
       parent: 31
     - type: FaxMachine
-      destinationAddress: bridge
       name: bridge
 - proto: FaxMachineCaptain
   entities:

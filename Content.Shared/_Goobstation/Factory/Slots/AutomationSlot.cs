@@ -1,5 +1,6 @@
 using Content.Shared._Goobstation.Factory.Filters;
 using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceLinking.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager.Attributes;
@@ -45,7 +46,7 @@ public abstract partial class AutomationSlot
     [Dependency] public IEntityManager EntMan = default!;
     protected AutomationFilterSystem _filter;
     protected EntityWhitelistSystem _whitelist;
-    protected SharedDeviceLinkSystem _device;
+    protected DeviceLinkSystem _device;
 
     /// <summary>
     /// Initialize the slot after <see cref="Owner"/> is set.
@@ -57,7 +58,7 @@ public abstract partial class AutomationSlot
 
         _filter = EntMan.System<AutomationFilterSystem>();
         _whitelist = EntMan.System<EntityWhitelistSystem>();
-        _device = EntMan.System<SharedDeviceLinkSystem>();
+        _device = EntMan.System<DeviceLinkSystem>();
     }
 
     /// <summary>

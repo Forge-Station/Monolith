@@ -1,4 +1,5 @@
 // Forge-Change-full
+using Content.Shared.Shuttles.Components;
 using Content.Server._NF.Shipyard;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Mono.ShipRepair;

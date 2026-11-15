@@ -20,6 +20,6 @@ public sealed class AdminOnlyDeviceLinkSystem : EntitySystem
             return;
 
         if (!_admin.IsAdmin(args.User.Value, includeDeAdmin: true))
-            args.Cancel();
+            args.Cancelled = true;
     }
 }

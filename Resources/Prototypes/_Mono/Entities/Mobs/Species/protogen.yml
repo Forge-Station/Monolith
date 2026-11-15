@@ -22,14 +22,12 @@
         type: StrippableBoundUserInterface
       enum.SurgeryUIKey.Key: # Shitmed
         type: SurgeryBui
-  - type: Hunger
   - type: Icon # It will not have an icon in the adminspawn menu without this. Body parts seem fine for whatever reason.
     sprite: Mobs/Species/Human/parts.rsi
     state: full
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Protogen
-  - type: Thirst
   - type: Butcherable
     butcheringType: Spike
     spawned:

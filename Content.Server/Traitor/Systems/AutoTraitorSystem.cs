@@ -1,8 +1,8 @@
 using Content.Server.Antag;
 using Content.Server.Traitor.Components;
+using Content.Shared.Antag;
 using Content.Shared.Mind.Components;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Traitor.Systems;
 
@@ -11,7 +11,7 @@ namespace Content.Server.Traitor.Systems;
 /// </summary>
 public sealed partial class AutoTraitorSystem : EntitySystem
 {
-    [Dependency] private AntagSelectionSystem _antag = default!;
+    [Dependency] private ServerAntagSelectionSystem _antag = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
 
     public override void Initialize()

@@ -36,7 +36,7 @@ public sealed partial class BluespaceCargoRule : StationEventSystem<BluespaceCar
         if (!TryComp<StationDataComponent>(chosenStation, out var stationData))
             return;
 
-        var grid = StationSystem.GetLargestGrid((chosenStation!.Value, stationData));
+        var grid = ServerStationSystem.GetLargestGrid((chosenStation!.Value, stationData));
 
         if (grid is null)
             return;

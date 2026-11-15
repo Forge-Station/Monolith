@@ -146,7 +146,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             expires = DateTimeOffset.Now + TimeSpan.FromMinutes(minutes.Value);
         }
 
-        _systems.TryGetEntitySystem<GameTicker>(out var ticker);
+        _systems.TryGetEntitySystem<ServerGameTicker>(out var ticker);
         int? roundId = ticker == null || ticker.RoundId == 0 ? null : ticker.RoundId;
         var playtime = target == null ? TimeSpan.Zero : (await _db.GetPlayTimes(target.Value)).Find(p => p.Tracker == PlayTimeTrackingShared.TrackerOverall)?.TimeSpent ?? TimeSpan.Zero;
 
@@ -249,7 +249,7 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             expires = DateTimeOffset.Now + TimeSpan.FromMinutes(minutes.Value);
         }
 
-        _systems.TryGetEntitySystem(out GameTicker? ticker);
+        _systems.TryGetEntitySystem(out ServerGameTicker? ticker);
         int? roundId = ticker == null || ticker.RoundId == 0 ? null : ticker.RoundId;
         var playtime = target == null ? TimeSpan.Zero : (await _db.GetPlayTimes(target.Value)).Find(p => p.Tracker == PlayTimeTrackingShared.TrackerOverall)?.TimeSpent ?? TimeSpan.Zero;
 

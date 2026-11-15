@@ -8,7 +8,7 @@ namespace Content.Client._Forge.WallPaint.UI;
 
 public sealed partial class WallPaintUIController : UIController, IOnStateExited<GameplayState>, IOnSystemChanged<SandboxSystem>
 {
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
     [UISystemDependency] private readonly SandboxSystem _sandbox = default!;
 
     private WallPaintWindow? _window;

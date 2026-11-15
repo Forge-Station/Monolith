@@ -19,7 +19,7 @@ namespace Content.Shared._Forge.Materials;
 /// <summary>
 /// Merges nearby ore and material stacks, and sizes a stack in storage by its count.
 /// </summary>
-public sealed class BulkMaterialSystem : EntitySystem
+public sealed partial class BulkMaterialSystem : EntitySystem
 {
     private const float MergeInterval = 4f;
     private const int MergeBudget = 12;

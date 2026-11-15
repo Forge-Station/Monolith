@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking.Events;
 using Content.Server.Administration;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
@@ -19,7 +20,7 @@ namespace Content.Server.Worldgen.Systems;
 /// </summary>
 public sealed partial class WorldgenConfigSystem : EntitySystem
 {
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IConsoleHost _conHost = default!;
     [Dependency] private SharedMapSystem _map = default!;

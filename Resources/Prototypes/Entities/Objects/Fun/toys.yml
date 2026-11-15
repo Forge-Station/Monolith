@@ -1461,7 +1461,7 @@
     deviceNetId: Wired
     receiveFrequencyId: SurveillanceCamera
     transmitFrequencyId: SurveillanceCamera
-  - type: WiredNetworkConnection
+  - type: WiredNetwork
   - type: SurveillanceCameraMonitor
 
 - type: entity

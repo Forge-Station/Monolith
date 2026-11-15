@@ -1,3 +1,4 @@
+using Content.Shared.GameTicking;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
@@ -14,12 +15,13 @@ using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Mobs.Components; // Goob Station
+using Content.Shared.Station.Systems;
 
 namespace Content.Server.Mind;
 
 public sealed partial class MindSystem : SharedMindSystem
 {
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IPlayerManager _players = default!;
     [Dependency] private GhostSystem _ghosts = default!;
@@ -31,7 +33,13 @@ public sealed partial class MindSystem : SharedMindSystem
         base.Initialize();
 
         SubscribeLocalEvent<MindContainerComponent, EntityTerminatingEvent>(OnMindContainerTerminating);
+        SubscribeLocalEvent<MakeSentientRequestEvent>(OnMakeSentientRequest);
         SubscribeLocalEvent<MindComponent, ComponentShutdown>(OnMindShutdown);
+    }
+
+    private void OnMakeSentientRequest(ref MakeSentientRequestEvent args)
+    {
+        MakeSentientCommand.MakeSentient(args.Entity, EntityManager);
     }
 
     private void OnMindShutdown(EntityUid uid, MindComponent mind, ComponentShutdown args)
@@ -78,7 +86,7 @@ public sealed partial class MindSystem : SharedMindSystem
 
         var ghost = _ghosts.SpawnGhost((mindId, mind), uid);
         if (ghost != null)
-            // Log these to make sure they're not causing the GameTicker round restart bugs...
+            // Log these to make sure they're not causing the ServerGameTicker round restart bugs...
             Log.Debug($"Entity \"{ToPrettyString(uid)}\" for {mind.CharacterName} was deleted, spawned \"{ToPrettyString(ghost)}\".");
         else
             // This should be an error, if it didn't cause tests to start erroring when they delete a player.
@@ -218,7 +226,7 @@ public sealed partial class MindSystem : SharedMindSystem
                 ? _transform.ToMapCoordinates(_gameTicker.GetObserverSpawnPoint())
                 : _transform.GetMapCoordinates(mind.OwnedEntity.Value);
 
-            entity = Spawn(GameTicker.ObserverPrototypeName, position);
+            entity = Spawn(ServerGameTicker.ObserverPrototypeName, position);
             component = EnsureComp<MindContainerComponent>(entity.Value);
             var ghostComponent = Comp<GhostComponent>(entity.Value);
             _ghosts.SetCanReturnToBody(ghostComponent, false);
@@ -243,6 +251,11 @@ public sealed partial class MindSystem : SharedMindSystem
             // Yes this control flow sucks.
             mind.VisitingEntity = null;
             RemComp<VisitingMindComponent>(entity!.Value);
+            // If you are transferring to your own ghost then you can no longer return to body
+            if (TryComp(entity.Value, out GhostComponent? ghostComponent))
+            {
+                _ghosts.SetCanReturnToBody(ghostComponent, false);
+            }
         }
         else if (mind.VisitingEntity != null
               && (ghostCheckOverride // to force mind transfer, for example from ControlMobVerb
@@ -263,6 +276,10 @@ public sealed partial class MindSystem : SharedMindSystem
 
         if (entity != null)
         {
+            if (component!.Mind.HasValue && TryComp(component!.Mind.Value, out MindComponent? newMind))
+            {
+                TransferTo(component!.Mind.Value, newMind?.VisitingEntity);
+            }
             component!.Mind = mindId;
             mind.OwnedEntity = entity;
             mind.OriginalOwnedEntity ??= GetNetEntity(mind.OwnedEntity);

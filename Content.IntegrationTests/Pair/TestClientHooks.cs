@@ -47,16 +47,16 @@ public static class TestClientHooks
         SixLabors.ImageSharp.Configuration.Default.MemoryAllocator.ReleaseRetainedResources();
     }
 
-    private static readonly FieldInfo? SpriteBoundsDirty =
+    private static readonly FieldInfo SpriteBoundsDirty =
         typeof(SpriteComponent).GetField("BoundsDirty", BindingFlags.Instance | BindingFlags.NonPublic);
 
-    private static readonly FieldInfo? SnapCardinalsField =
+    private static readonly FieldInfo SnapCardinalsField =
         typeof(SpriteComponent).GetField("_snapCardinals", BindingFlags.Instance | BindingFlags.NonPublic);
 
-    private static readonly FieldInfo? LayersField =
+    private static readonly FieldInfo LayersField =
         typeof(SpriteComponent).GetField("Layers", BindingFlags.Instance | BindingFlags.NonPublic);
 
-    private static readonly FieldInfo? LayerBoundsDirty =
+    private static readonly FieldInfo LayerBoundsDirty =
         typeof(SpriteComponent.Layer).GetField("BoundsDirty", BindingFlags.Instance | BindingFlags.NonPublic);
 
     /// <summary>

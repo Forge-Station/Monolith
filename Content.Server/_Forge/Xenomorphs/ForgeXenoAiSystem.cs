@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 namespace Content.Server._Forge.Xenomorphs;
 
 /// <summary>
-/// Grants a caste's actions. Unpossessed xenomorphs spend the combat ones on the HTN target.
+/// Unpossessed xenomorphs spend the combat actions granted by their glands on the HTN target.
 /// </summary>
 public sealed class ForgeXenoAiSystem : EntitySystem
 {
@@ -25,25 +25,6 @@ public sealed class ForgeXenoAiSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ForgeXenoAiComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<ForgeXenoAiComponent, ComponentShutdown>(OnShutdown);
-    }
-
-    private void OnMapInit(Entity<ForgeXenoAiComponent> ent, ref MapInitEvent args)
-    {
-        foreach (var action in ent.Comp.Actions)
-        {
-            ent.Comp.ActionEntities.Add(_actions.AddAction(ent, action) ?? EntityUid.Invalid);
-        }
-    }
-
-    private void OnShutdown(Entity<ForgeXenoAiComponent> ent, ref ComponentShutdown args)
-    {
-        foreach (var action in ent.Comp.ActionEntities)
-        {
-            if (action.IsValid())
-                _actions.RemoveAction(ent.Owner, action);
-        }
     }
 
     public override void Update(float frameTime)
@@ -65,7 +46,11 @@ public sealed class ForgeXenoAiSystem : EntitySystem
             var targetOk = target.IsValid() && !_mobs.IsDead(target);
             var hurt = HurtFraction(uid);
 
-            foreach (var actionEnt in ai.ActionEntities)
+            if (!TryComp<ActionsComponent>(uid, out var actions))
+                continue;
+
+            // Abilities live on the caste's glands, which grant them to the body.
+            foreach (var actionEnt in actions.Actions)
             {
                 if (!actionEnt.IsValid())
                     continue;

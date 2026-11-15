@@ -1,5 +1,4 @@
 using Content.Server.DeviceNetwork.Components;
-using Content.Server.NodeContainer;
 using Content.Server.NodeContainer.EntitySystems;
 using JetBrains.Annotations;
 using Content.Server.Power.EntitySystems;
@@ -27,19 +26,20 @@ namespace Content.Server.DeviceNetwork.Systems
         /// <summary>
         /// Checks if both devices are connected to the same apc
         /// </summary>
-        private void OnBeforePacketSent(EntityUid uid, ApcNetworkComponent receiver, BeforePacketSentEvent args)
+        private void OnBeforePacketSent(Entity<ApcNetworkComponent> ent, ref BeforePacketSentEvent args)
         {
-            if (!EntityManager.TryGetComponent(args.Sender, out ApcNetworkComponent? sender)) return;
+            if (!TryComp(args.Sender, out ApcNetworkComponent? sender))
+                return;
 
-            if (sender.ConnectedNode?.NodeGroup == null || !sender.ConnectedNode.NodeGroup.Equals(receiver.ConnectedNode?.NodeGroup))
+            if (sender.ConnectedNode?.NodeGroup == null || !sender.ConnectedNode.NodeGroup.Equals(ent.Comp.ConnectedNode?.NodeGroup))
             {
-                args.Cancel();
+                args.Cancelled = true;
             }
         }
 
         private void OnProviderConnected(EntityUid uid, ApcNetworkComponent component, ExtensionCableSystem.ProviderConnectedEvent args)
         {
-            if (!EntityManager.TryGetComponent(args.Provider.Owner, out NodeContainerComponent? nodeContainer)) return;
+            if (!TryComp(args.Provider.Owner, out NodeContainerComponent? nodeContainer)) return;
 
             if (_nodeContainer.TryGetNode(nodeContainer, "power", out CableNode? node))
             {

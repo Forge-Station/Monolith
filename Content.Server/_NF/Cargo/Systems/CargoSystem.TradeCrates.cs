@@ -9,7 +9,7 @@ namespace Content.Server.Cargo.Systems; // Needs to collide with base namespace
 
 public sealed partial class CargoSystem
 {
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     private readonly List<EntityUid> _destinations = new();
 
     private void InitializeTradeCrates()

@@ -92,6 +92,8 @@
   - type: ContainerContainer
     containers:
       harvestContainer: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
   # Forge-Change-end
   - type: Destructible
     thresholds:
@@ -123,7 +125,7 @@
     receiveFrequencyId: BasicDevice
     prefix: device-address-prefix-hydroponics
     examinableAddress: true
-  - type: WiredNetworkConnection
+  - type: WiredNetwork
   - type: PirateBountyItem # Frontier
     id: HydroponicsTray # Frontier
   #<Forge>

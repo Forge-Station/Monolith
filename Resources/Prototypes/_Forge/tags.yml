@@ -283,9 +283,22 @@
 - type: Tag
   id: Type3
 
+- type: Tag
+  id: PortableRadioRig
+
+- type: Tag
+  id: PortableVinylPlayer
+
 #region TTI
 - type: Tag
   id: FactionStaticUplinkTTI
 
 - type: Tag
   id: TTIEquip
+
+#nuclear machines
+- type: Tag
+  id: NuclearReactorSmallMachineCircuitboard
+
+- type: Tag
+  id: TurbineSmallMachineCircuitboard

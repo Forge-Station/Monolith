@@ -6,7 +6,6 @@ using Content.Server._NF.Salvage; // Frontier: job complete event
 using Content.Server.Atmos;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
-using Robust.Shared.CPUJob.JobQueues;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Parallax;
 using Content.Server.Procedural;
@@ -16,6 +15,7 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Dataset;
 using Content.Shared.Gravity;
@@ -32,12 +32,15 @@ using Content.Shared.Storage;
 using Content.Server.Weather;
 using Content.Shared.Weather;
 using Robust.Shared.Map;
+using Robust.Shared.Collections;
+using Robust.Shared.CPUJob.JobQueues;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Salvage;
 
@@ -53,7 +56,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
     private readonly DungeonSystem _dungeon;
     private readonly MetaDataSystem _metaData;
     private readonly ShuttleSystem _shuttle;
-    private readonly StationSystem _stationSystem;
+    private readonly ServerStationSystem _stationSystem;
     private readonly SalvageSystem _salvage;
     private readonly SharedTransformSystem _xforms;
 
@@ -85,7 +88,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         WeatherSystem weather,
         DungeonSystem dungeon,
         ShuttleSystem shuttle,
-        StationSystem stationSystem,
+        ServerStationSystem stationSystem,
         MetaDataSystem metaData,
         SalvageSystem salvage,
         SharedTransformSystem xform,
@@ -295,6 +298,15 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
             dungeonBox = dungeonBox.ExtendToContain(tile);
         }
 
+        // Forge-Change: dungeon floors, structures and room fills are not biome content.
+        // Without this, a chunk unload treats matching tiles as untouched and wipes them.
+        if (biome != null)
+        {
+            var reserved = new List<(Vector2i Index, Tile Tile)>();
+            var reserveBox = new Box2(dungeonBox.Left - 1, dungeonBox.Bottom - 1, dungeonBox.Right + 1, dungeonBox.Top + 1);
+            _biome.ReserveTiles(mapUid, reserveBox, reserved, biome, grid);
+        }
+
         var stationData = _entManager.GetComponent<StationDataComponent>(Station);
 
         // Frontier: get ship bounding box relative to largest grid coords
@@ -502,6 +514,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
         var groupSpawns = _salvage.GetSpawnCount(mission.Difficulty) * scale;
         var groupSum = faction.MobGroups.Sum(o => o.Prob);
         var validSpawns = new List<Vector2i>();
+        var roomCounts = new Dictionary<int, int>(); // Forge-Change
 
         for (var i = 0; i < groupSpawns; i++)
         {
@@ -518,14 +531,17 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                 var mobGroupIndex = random.Next(faction.MobGroups.Count);
                 var mobGroup = faction.MobGroups[mobGroupIndex];
 
-                var spawnRoomIndex = random.Next(dungeon.Rooms.Count);
-                var spawnRoom = dungeon.Rooms[spawnRoomIndex];
-                validSpawns.Clear();
-                validSpawns.AddRange(spawnRoom.Tiles);
-                random.Shuffle(validSpawns);
-
                 foreach (var entry in EntitySpawnCollection.GetSpawns(mobGroup.Entries, random))
                 {
+                    // Forge-Change: spread mobs so one room cannot absorb every group.
+                    if (!TryPickSpawnRoom(dungeon, faction.MaxMobsPerRoom, roomCounts, random, out var spawnRoomIndex))
+                        continue;
+
+                    var spawnRoom = dungeon.Rooms[spawnRoomIndex];
+                    validSpawns.Clear();
+                    validSpawns.AddRange(spawnRoom.Tiles);
+                    random.Shuffle(validSpawns);
+
                     while (validSpawns.Count > 0)
                     {
                         var spawnTile = validSpawns[^1];
@@ -543,6 +559,7 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                         _entManager.RemoveComponent<GhostTakeoverAvailableComponent>(uid);
                         _entManager.RemoveComponent<GhostRoleComponent>(uid);
                         _entManager.InitializeAndStartEntity(uid);
+                        roomCounts[spawnRoomIndex] = roomCounts.GetValueOrDefault(spawnRoomIndex) + 1;
 
                         break;
                     }
@@ -552,6 +569,41 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// Forge-Change: pick a room that still has space under <paramref name="maxPerRoom"/>.
+    /// A non-positive cap keeps the old fully random pick.
+    /// </summary>
+    private static bool TryPickSpawnRoom(
+        Dungeon dungeon,
+        int maxPerRoom,
+        Dictionary<int, int> roomCounts,
+        Random random,
+        out int roomIndex)
+    {
+        roomIndex = 0;
+        if (dungeon.Rooms.Count == 0)
+            return false;
+
+        if (maxPerRoom <= 0)
+        {
+            roomIndex = random.Next(dungeon.Rooms.Count);
+            return true;
+        }
+
+        var open = new List<int>();
+        for (var i = 0; i < dungeon.Rooms.Count; i++)
+        {
+            if (roomCounts.GetValueOrDefault(i) < maxPerRoom)
+                open.Add(i);
+        }
+
+        if (open.Count == 0)
+            return false;
+
+        roomIndex = open[random.Next(open.Count)];
+        return true;
     }
 
     #endregion

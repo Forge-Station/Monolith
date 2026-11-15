@@ -346,14 +346,18 @@ public abstract partial class SharedGrapplingGunSystem : VirtualController
                 var targetDirection = (bodyAWorldPos - bodyBWorldPos).Normalized();
 
                 var grapplerUidA = _container.TryGetOuterContainer(physicalHook, Transform(physicalHook), out var containerA) ? containerA.Owner : physicalHook;
-                var grapplerOffsetA = _transform.GetRelativePosition(Transform(joint.BodyAUid), grapplerUidA);
-                var grapplerBodyA = Comp<PhysicsComponent>(grapplerUidA);
+                if (!TryComp<PhysicsComponent>(grapplerUidA, out var grapplerBodyA))
+                    continue;
 
                 var grapplerUidB = _container.TryGetOuterContainer(physicalGrapple, Transform(physicalGrapple), out var containerB) ? containerB.Owner : physicalGrapple;
                 if (attachedToGrid)
                     grapplerUidB = _transform.GetGrid(joint.BodyBUid) ?? grapplerUidB;
+
+                if (!TryComp<PhysicsComponent>(grapplerUidB, out var grapplerBodyB))
+                    continue;
+
+                var grapplerOffsetA = _transform.GetRelativePosition(Transform(joint.BodyAUid), grapplerUidA);
                 var grapplerOffsetB = _transform.GetRelativePosition(Transform(joint.BodyBUid), grapplerUidB);
-                var grapplerBodyB = Comp<PhysicsComponent>(grapplerUidB);
 
                 // Handle edge-cases where the mass is zero (e.g. station anchor). Treat that as infinite weight.
                 float massFactor;

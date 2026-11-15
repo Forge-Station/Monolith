@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server._Forge.Genetics.Components;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Power.EntitySystems;
@@ -17,16 +16,16 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Forge.Genetics;
 
-public sealed class GeneticsConsoleSystem : EntitySystem
+public sealed partial class GeneticsConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly DnaModifierScannerSystem _scanner = default!;
-    [Dependency] private readonly GeneticsSystem _genetics = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly PowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private DnaModifierScannerSystem _scanner = default!;
+    [Dependency] private GeneticsSystem _genetics = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private PowerReceiverSystem _power = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -43,46 +42,67 @@ public sealed class GeneticsConsoleSystem : EntitySystem
 
     private void OnInit(Entity<GeneticsConsoleComponent> ent, ref ComponentInit args)
     {
-        _deviceLink.EnsureSourcePorts(ent, GeneticsConsoleComponent.ScannerPort);
+        _deviceLink.EnsureSourcePorts(ent, GeneticsConsoleComponent.ScannerPort, GeneticsConsoleComponent.ServerPort);
     }
 
     private void OnMapInit(Entity<GeneticsConsoleComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp<DeviceLinkSourceComponent>(ent, out var source))
-            return;
-
-        foreach (var port in source.Outputs.Values.SelectMany(static ports => ports))
-        {
-            if (!TryComp<DnaModifierScannerComponent>(port, out var scanner))
-                continue;
-
-            ent.Comp.Scanner = port;
-            scanner.ConnectedConsole = ent;
-        }
-
+        RefreshLinks(ent);
         RecheckRange(ent);
         UpdateUserInterface(ent);
     }
 
     private void OnNewLink(Entity<GeneticsConsoleComponent> ent, ref NewLinkEvent args)
     {
-        if (!TryComp<DnaModifierScannerComponent>(args.Sink, out var scanner) ||
-            args.SourcePort != GeneticsConsoleComponent.ScannerPort)
+        if (args.SourcePort != GeneticsConsoleComponent.ScannerPort &&
+            args.SourcePort != GeneticsConsoleComponent.ServerPort)
             return;
 
-        ent.Comp.Scanner = args.Sink;
-        scanner.ConnectedConsole = ent;
+        RefreshLinks(ent);
         RecheckRange(ent);
         UpdateUserInterface(ent);
     }
 
     private void OnPortDisconnected(Entity<GeneticsConsoleComponent> ent, ref PortDisconnectedEvent args)
     {
-        if (args.Port != GeneticsConsoleComponent.ScannerPort)
+        if (args.Port != GeneticsConsoleComponent.ScannerPort &&
+            args.Port != GeneticsConsoleComponent.ServerPort)
             return;
 
-        ent.Comp.Scanner = null;
+        RefreshLinks(ent);
+        RecheckRange(ent);
         UpdateUserInterface(ent);
+    }
+
+    private void RefreshLinks(Entity<GeneticsConsoleComponent> ent)
+    {
+        if (ent.Comp.Scanner is { } previous
+            && TryComp<DnaModifierScannerComponent>(previous, out var previousScanner)
+            && previousScanner.ConnectedConsole == ent.Owner)
+            previousScanner.ConnectedConsole = null;
+
+        ent.Comp.Scanner = null;
+        ent.Comp.Servers.Clear();
+
+        if (!TryComp<DeviceLinkSourceComponent>(ent, out var source))
+            return;
+
+        foreach (var (sink, links) in source.LinkedPorts)
+        {
+            foreach (var (sourcePort, _) in links)
+            {
+                if (sourcePort == GeneticsConsoleComponent.ScannerPort
+                    && TryComp<DnaModifierScannerComponent>(sink, out var scanner))
+                {
+                    ent.Comp.Scanner = sink;
+                    scanner.ConnectedConsole = ent;
+                }
+
+                if (sourcePort == GeneticsConsoleComponent.ServerPort
+                    && HasComp<GeneticsServerComponent>(sink))
+                    ent.Comp.Servers.Add(sink);
+            }
+        }
     }
 
     private void OnAnchor(Entity<GeneticsConsoleComponent> ent, ref AnchorStateChangedEvent args)
@@ -126,6 +146,8 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             case GeneticsConsoleAction.Irradiate:
                 if (!hasOccupant || ent.Comp.Scanner is not { } irradiateScanner)
                     break;
+                if (!_genetics.TryEnsureCanModifyGenes(occupant))
+                    break;
                 if (!TryComp<DnaModifierScannerComponent>(irradiateScanner, out var irradiateComp) ||
                     !_scanner.TryConsumeMutagen(irradiateScanner, irradiateComp.IrradiateCost, irradiateComp))
                 {
@@ -136,7 +158,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
                 _genetics.IrradiateSubject(occupant);
                 break;
             case GeneticsConsoleAction.Activate:
-                if (!hasOccupant)
+                if (!hasOccupant || !_genetics.TryEnsureCanModifyGenes(occupant))
                     break;
                 if (args.GeneId != null && Enum.TryParse(args.GeneId, out GeneBranch expressBranch))
                     _genetics.TryExpressBranch(occupant, expressBranch);
@@ -144,7 +166,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
                     _genetics.TryActivateGene(occupant, args.GeneId);
                 break;
             case GeneticsConsoleAction.Deactivate:
-                if (!hasOccupant)
+                if (!hasOccupant || !_genetics.TryEnsureCanModifyGenes(occupant))
                     break;
                 if (args.GeneId != null && Enum.TryParse(args.GeneId, out GeneBranch dropBranch))
                     _genetics.TryDeactivateBranch(occupant, dropBranch, requireAssembled: true);
@@ -171,6 +193,8 @@ public sealed class GeneticsConsoleSystem : EntitySystem
                 break;
             case GeneticsConsoleAction.PulseBlock:
                 if (!hasOccupant || args.GeneId == null || args.BlockIndex is not { } block)
+                    break;
+                if (!_genetics.TryEnsureCanModifyGenes(occupant))
                     break;
                 if (ent.Comp.Scanner is not { } pulseScanner ||
                     !TryComp<DnaModifierScannerComponent>(pulseScanner, out var pulseComp) ||
@@ -210,7 +234,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (!_prototypes.TryIndex<GenePrototype>(geneId, out var proto))
             return;
 
-        if (!_genetics.IsDiscovered(geneId))
+        if (!_genetics.IsDiscovered(ent, geneId))
             return;
 
         if (requireAssembled)
@@ -237,7 +261,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             return _genetics.TryGetPrintableGene(occupant, branch, requireAssembled, out geneId);
 
         geneId = selectedId;
-        return _prototypes.HasIndex<GenePrototype>(selectedId) && _genetics.IsDiscovered(selectedId);
+        return _prototypes.HasIndex<GenePrototype>(selectedId) && _genetics.IsDiscovered(occupant, selectedId);
     }
 
     public void RecheckRange(EntityUid uid, GeneticsConsoleComponent? console = null)
@@ -290,7 +314,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
         if (TryGetOccupant((uid, console), out var occupant))
         {
             state.OccupantPresent = true;
-            state.OccupantCritical = _genetics.CanIrradiate(occupant) == false;
+            state.OccupantCritical = !_genetics.CanModifyGenes(occupant);
             state.OccupantName = Identity.Name(occupant, EntityManager);
             state.UniqueDna = _genetics.GetUniqueDna(occupant);
 
@@ -318,7 +342,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
                         var active = genome.Genes.TryGetValue(geneId, out var geneState) && geneState.Active;
                         expressed |= active;
 
-                        if (!_genetics.IsDiscovered(geneId))
+                        if (!_genetics.IsDiscovered(uid, geneId))
                             continue;
 
                         discovered = true;
@@ -370,7 +394,7 @@ public sealed class GeneticsConsoleSystem : EntitySystem
             }
         }
 
-        state.Discoveries = _genetics.GetDiscoveryJournal();
+        state.Discoveries = _genetics.GetDiscoveryJournal(uid);
 
         _ui.SetUiState(uid, GeneticsConsoleUiKey.Key, state);
     }

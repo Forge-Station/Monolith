@@ -10,7 +10,7 @@
         icon:
           sprite: Nyanotrasen/Objects/Materials/mothroach.rsi
           state: mothroachhide
-        name: mothroach hide
+        name: construction-required-mothroach-hide # Forge-change
       - material: Cloth
         amount: 3
         doAfter: 5

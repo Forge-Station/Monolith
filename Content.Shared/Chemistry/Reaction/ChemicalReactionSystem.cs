@@ -20,7 +20,6 @@ namespace Content.Shared.Chemistry.Reaction
         /// </summary>
         private const int MaxReactionIterations = 20;
 
-        [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private SharedAudioSystem _audio = default!;
         [Dependency] private ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private SharedTransformSystem _transformSystem = default!;
@@ -51,7 +50,7 @@ namespace Content.Shared.Chemistry.Reaction
         {
             // Construct single-reaction dictionary.
             var dict = new Dictionary<string, List<ReactionPrototype>>();
-            foreach (var reaction in _prototypeManager.EnumeratePrototypes<ReactionPrototype>())
+            foreach (var reaction in ProtoMan.EnumeratePrototypes<ReactionPrototype>())
             {
                 // For this dictionary we only need to cache based on the first reagent.
                 var reagent = reaction.Reactants.Keys.First();
@@ -61,7 +60,7 @@ namespace Content.Shared.Chemistry.Reaction
             _reactionsSingle = dict.ToFrozenDictionary();
 
             dict.Clear();
-            foreach (var reaction in _prototypeManager.EnumeratePrototypes<ReactionPrototype>())
+            foreach (var reaction in ProtoMan.EnumeratePrototypes<ReactionPrototype>())
             {
                 foreach (var reagent in reaction.Reactants.Keys)
                 {
@@ -164,7 +163,7 @@ namespace Content.Shared.Chemistry.Reaction
             var (uid, comp) = soln;
             var solution = comp.Solution;
 
-            var energy = reaction.ConserveEnergy ? solution.GetThermalEnergy(_prototypeManager) : 0;
+            var energy = reaction.ConserveEnergy ? solution.GetThermalEnergy(ProtoMan) : 0;
 
             //Remove reactants
             foreach (var reactant in reaction.Reactants)
@@ -186,7 +185,7 @@ namespace Content.Shared.Chemistry.Reaction
 
             if (reaction.ConserveEnergy)
             {
-                var newCap = solution.GetHeatCapacity(_prototypeManager);
+                var newCap = solution.GetHeatCapacity(ProtoMan);
                 if (newCap > 0)
                     solution.Temperature = energy / newCap;
             }

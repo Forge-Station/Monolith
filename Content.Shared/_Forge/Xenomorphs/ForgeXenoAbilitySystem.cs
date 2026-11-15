@@ -11,9 +11,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.Standing;
 using Content.Shared.Stealth;
-using Content.Shared._White.Standing;
 using Content.Shared.Stealth.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -34,34 +32,31 @@ using Content.Shared.Coordinates.Helpers;
 
 namespace Content.Shared._Forge.Xenomorphs;
 
-public sealed class ForgeXenoAbilitySystem : EntitySystem
+public sealed partial class ForgeXenoAbilitySystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedLayingDownSystem _laying = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly ForgeXenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly SharedContentEyeSystem _eye = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
+    [Dependency] private ForgeXenoPlasmaSystem _plasma = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+    [Dependency] private SharedContentEyeSystem _eye = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ForgeXenoRestActionEvent>(OnRest);
         SubscribeLocalEvent<ForgeXenoHideActionEvent>(OnHide);
         SubscribeLocalEvent<ForgeXenoFortifyActionEvent>(OnFortify);
         SubscribeLocalEvent<ForgeXenoZoomActionEvent>(OnZoom);
@@ -83,25 +78,6 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
         SubscribeLocalEvent<ForgeXenoFortifyComponent, DamageModifyEvent>(OnFortifyDamage);
         SubscribeLocalEvent<ForgeXenoComponent, MeleeAttackEvent>(OnMeleeAttack);
         SubscribeLocalEvent<ForgeXenoComponent, ShotAttemptedEvent>(OnShotAttempted);
-    }
-
-    private void OnRest(ForgeXenoRestActionEvent args)
-    {
-        BreakStealth(args.Performer);
-        var uid = args.Performer;
-        if (HasComp<ForgeXenoRestingComponent>(uid))
-        {
-            RemComp<ForgeXenoRestingComponent>(uid);
-            _standing.Stand(uid);
-            _popup.PopupClient(Loc.GetString("forge-xeno-rest-up"), uid, uid);
-        }
-        else if (_laying.TryLieDown(uid))
-        {
-            EnsureComp<ForgeXenoRestingComponent>(uid);
-            _popup.PopupClient(Loc.GetString("forge-xeno-rest-down"), uid, uid);
-        }
-
-        args.Handled = true;
     }
 
     private void OnHide(ForgeXenoHideActionEvent args)
@@ -295,6 +271,10 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
 
         if (!TryComp<ForgeXenoPlasmaComponent>(args.Performer, out var source) || source.Plasma < args.Amount)
         {
+            // A person has nothing to give. Spend the click so the grafted cooldown still applies.
+            if (!HasComp<ForgeXenoComponent>(args.Performer))
+                args.Handled = true;
+
             Deny(args.Performer);
             return;
         }
@@ -554,6 +534,23 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
+        // Grafted hosts have no plasma pool and a long action cooldown instead of a build do-after.
+        // The do-after + BreakOnMove combination cancelled every attempt and still burned the minute wait.
+        if (!HasComp<ForgeXenoComponent>(args.Performer))
+        {
+            if (!_plasma.TryUse(args.Performer, args.PlasmaCost))
+            {
+                Deny(args.Performer);
+                return;
+            }
+
+            if (_net.IsServer)
+                Spawn(args.Prototype, args.Target.SnapToGrid(EntityManager));
+
+            args.Handled = true;
+            return;
+        }
+
         if (!TryComp<ForgeXenoPlasmaComponent>(args.Performer, out var plasma) || plasma.Plasma < args.PlasmaCost)
         {
             Deny(args.Performer);
@@ -582,6 +579,12 @@ public sealed class ForgeXenoAbilitySystem : EntitySystem
             return;
 
         if (!_plasma.TryUse(args.User, args.PlasmaCost))
+        {
+            Deny(args.User);
+            return;
+        }
+
+        if (_net.IsClient)
             return;
 
         var coords = GetCoordinates(args.Target).SnapToGrid(EntityManager);

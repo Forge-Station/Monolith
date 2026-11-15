@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Map;
@@ -35,7 +35,7 @@ public partial class SharedGunSystem
     // Mono
     private void OnSolutionCheckProto(Entity<SolutionAmmoProviderComponent> ent, ref CheckShootPrototypeEvent args)
     {
-        ProtoManager.TryIndex(ent.Comp.Prototype, out var proto);
+        ProtoMan.TryIndex(ent.Comp.Prototype, out var proto);
         args.ShootPrototype = proto;
     }
 

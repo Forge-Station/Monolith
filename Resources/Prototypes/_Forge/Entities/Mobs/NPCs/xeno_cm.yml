@@ -81,15 +81,11 @@
     maxPlasma: 400
     regenOnWeeds: 3
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcidWeak
-    - ActionForgeXenoPlantWeeds
-    - ActionForgeXenoResinWall
-    - ActionForgeXenoResinMembrane
-    - ActionForgeXenoResinDoor
-    - ActionForgeXenoStickyResin
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTail
+    - OrganXenoAcidWeak
+    - OrganXenoResin
 
 - type: entity
   parent: MobXenoCMBase
@@ -120,18 +116,12 @@
     maxPlasma: 1000
     regenOnWeeds: 4.5
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcidWeak
-    - ActionForgeXenoPheromones
-    - ActionForgeXenoTransferPlasma
-    - ActionForgeXenoPlantWeeds
-    - ActionForgeXenoResinWall
-    - ActionForgeXenoResinMembrane
-    - ActionForgeXenoResinDoor
-    - ActionForgeXenoStickyResin
-    - ActionForgeXenoFastResin
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTail
+    - OrganXenoAcidWeak
+    - OrganXenoPheromoneTransfer
+    - OrganXenoResinFast
 
 - type: entity
   parent: MobXenoCMBase
@@ -164,11 +154,11 @@
     regen: 0
     regenOnWeeds: 0
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoHide
-    - ActionForgeXenoLeap
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTail
+    - OrganXenoHide
+    - OrganXenoLeap
   - type: Fixtures
     fixtures:
       fix1:
@@ -210,11 +200,10 @@
     maxPlasma: 400
     regenOnWeeds: 3
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcidWeak
-    - ActionForgeXenoSpit
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTail
+    - OrganXenoAcidSpit
 
 - type: entity
   parent: MobXenoCMBase
@@ -245,18 +234,16 @@
     maxPlasma: 600
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcid
-    - ActionForgeXenoSpit
-    - ActionForgeXenoSpitHeavy
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTail
+    - OrganXenoSpitter
 
 - type: entity
   parent: MobXenoCMBase
   id: MobXenoCMBoiler
   name: xenomorph boiler
-  description: Bloated artillery. Slow, tough, and full of acid.
+  description: Bloated artillery. Spits acid while alive; ruptures into corrosive fog when killed.
   components:
   - type: Sprite
     sprite: _CM/Mobs/Xenonids/boiler.rsi
@@ -281,11 +268,20 @@
     maxPlasma: 800
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoAcid
-    - ActionForgeXenoSpitHeavy
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTailHeavy
+    - OrganXenoBoiler
+  - type: TriggerOnMobstateChange
+    mobState:
+    - Dead
+  - type: SmokeOnTrigger
+    duration: 12
+    spreadAmount: 28
+    solution:
+      reagents:
+      - ReagentId: FluorosulfuricAcid
+        Quantity: 35
   - type: Fixtures
     fixtures:
       fix1:
@@ -328,12 +324,10 @@
     regen: 0
     regenOnWeeds: 0
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoPunch
-    - ActionForgeXenoLunge
-    - ActionForgeXenoFling
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTailHeavy
+    - OrganXenoWarrior
 
 - type: entity
   parent: MobXenoCMBase
@@ -365,11 +359,11 @@
     maxPlasma: 400
     regenOnWeeds: 4.5
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoPounce
-    - ActionForgeXenoHide
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTailHeavy
+    - OrganXenoPounce
+    - OrganXenoHide
 
 - type: entity
   parent: MobXenoCMBase
@@ -389,8 +383,8 @@
       600: Critical
       700: Dead
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.8
-    baseSprintSpeed: 3
+    baseWalkSpeed: 2.4
+    baseSprintSpeed: 4.2
   - type: MeleeWeapon
     damage:
       groups:
@@ -400,10 +394,10 @@
     maxPlasma: 200
     regenOnWeeds: 2
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoFortify
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTail
+    - OrganXenoFortify
 
 - type: entity
   parent: MobXenoCMBase
@@ -435,11 +429,10 @@
     regen: 0
     regenOnWeeds: 0
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoCharge
-    - ActionForgeXenoStomp
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTailHeavy
+    - OrganXenoStomp
   - type: Fixtures
     fixtures:
       fix1:
@@ -481,13 +474,11 @@
     maxPlasma: 800
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoAcid
-    - ActionForgeXenoSpit
-    - ActionForgeXenoPheromones
-    - ActionForgeXenoScreech
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTailHeavy
+    - OrganXenoPraetorianAcid
+    - OrganXenoScreech
   - type: Fixtures
     fixtures:
       fix1:
@@ -531,11 +522,10 @@
     maxPlasma: 400
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabHeavy
-    - ActionForgeXenoCharge
-    - ActionForgeXenoStomp
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTailHeavy
+    - OrganXenoStomp
   - type: Fixtures
     fixtures:
       fix1:
@@ -577,24 +567,18 @@
     maxPlasma: 1200
     regenOnWeeds: 5
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoAcid
-    - ActionForgeXenoPheromones
-    - ActionForgeXenoTransferPlasma
-    - ActionForgeXenoPlantWeeds
-    - ActionForgeXenoResinWall
-    - ActionForgeXenoResinMembrane
-    - ActionForgeXenoResinDoor
-    - ActionForgeXenoStickyResin
-    - ActionForgeXenoFastResin
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTail
+    - OrganXenoAcid
+    - OrganXenoPheromoneTransfer
+    - OrganXenoResinFast
 
 - type: entity
   parent: MobXenoCMBase
   id: MobXenoCMCarrier
   name: xenomorph carrier
-  description: A walking egg rack. The hive's logistics caste, with claws.
+  description: A walking egg rack. Spits a sticky glob that drains stamina, then closes in.
   components:
   - type: Sprite
     sprite: _CM/Mobs/Xenonids/carrier.rsi
@@ -619,10 +603,11 @@
     maxPlasma: 600
     regenOnWeeds: 3.5
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoLayEgg
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTail
+    - OrganXenoEgg
+    - OrganXenoStaminaSpit
 
 - type: entity
   parent: MobXenoCMBase
@@ -653,10 +638,10 @@
     maxPlasma: 600
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStab
-    - ActionForgeXenoPlantWeeds
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTail
+    - OrganXenoWeeds
 
 - type: entity
   parent: MobXenoCMBase
@@ -687,21 +672,13 @@
     maxPlasma: 1000
     regenOnWeeds: 4
   - type: ForgeXenoAi
-    actions:
-    - ActionForgeXenoRest
-    - ActionForgeXenoTailStabQueen
-    - ActionForgeXenoAcid
-    - ActionForgeXenoSpit
-    - ActionForgeXenoPheromones
-    - ActionForgeXenoScreech
-    - ActionForgeXenoGut
-    - ActionForgeXenoZoom
-    - ActionForgeXenoTransferPlasma
-    - ActionForgeXenoPlantWeeds
-    - ActionForgeXenoResinWall
-    - ActionForgeXenoResinMembrane
-    - ActionForgeXenoResinDoor
-    - ActionForgeXenoLayEgg
+  - type: ForgeXenoOrganHost
+    organs:
+    - OrganXenoTailQueen
+    - OrganXenoPraetorianAcid
+    - OrganXenoQueen
+    - OrganXenoResin
+    - OrganXenoEgg
   - type: Fixtures
     fixtures:
       fix1:

@@ -166,6 +166,9 @@
       - JanicartFlatpack
       # - FireExtinguisherBluespace # DeltaV
       - StationRadioReceiverHandheldRecipe #Forge-Change
+      - StationRadioServerPortableRecipe #Forge-Change
+      - StationRadioRigPortableRecipe #Forge-Change
+      - VinylPlayerPortableRecipe #Forge-Change
 
 - type: latheRecipePack
   id: NFServiceTechfabDeprecatedEmagStatic

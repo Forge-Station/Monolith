@@ -19,7 +19,8 @@ public sealed partial class BorgSystem
 
     private void InitializeTransponder()
     {
-        SubscribeLocalEvent<BorgTransponderComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
+        SubscribeLocalEvent<BorgTransponderComponent, DeviceNetworkPacketEvent<RoboticsCyborgDisablePayload>>(OnDisable);
+        SubscribeLocalEvent<BorgTransponderComponent, DeviceNetworkPacketEvent<RoboticsCyborgDestroyPayload>>(OnDestroy);
     }
 
     public override void Update(float frameTime)
@@ -47,17 +48,17 @@ public sealed partial class BorgSystem
                 comp.Name,
                 meta.EntityName,
                 charge,
+                1f,
                 chassis.ModuleCount,
                 hasBrain,
                 canDisable,
                 HasComp<AiRemoteControllerComponent>(uid)); // Corvax-Next-AiRemoteControl
 
-            var payload = new NetworkPayload()
+            var payload = new RoboticsCyborgDataPayload
             {
-                [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdUpdatedState,
-                [RoboticsConsoleConstants.NET_CYBORG_DATA] = data
+                Data = data,
             };
-            _deviceNetwork.QueuePacket(uid, null, payload, device: device);
+            _deviceNetwork.SendPacket(uid, null, ref payload);
 
             comp.NextBroadcast = now + comp.BroadcastDelay;
         }
@@ -81,16 +82,14 @@ public sealed partial class BorgSystem
         _container.Remove(brain, ent.Comp2.BrainContainer);
     }
 
-    private void OnPacketReceived(Entity<BorgTransponderComponent> ent, ref DeviceNetworkPacketEvent args)
+    private void OnDisable(Entity<BorgTransponderComponent> ent, ref DeviceNetworkPacketEvent<RoboticsCyborgDisablePayload> args)
     {
-        var payload = args.Data;
-        if (!payload.TryGetValue(DeviceNetworkConstants.Command, out string? command))
-            return;
+        Disable(ent);
+    }
 
-        if (command == RoboticsConsoleConstants.NET_DISABLE_COMMAND)
-            Disable(ent);
-        else if (command == RoboticsConsoleConstants.NET_DESTROY_COMMAND)
-            Destroy(ent);
+    private void OnDestroy(Entity<BorgTransponderComponent> ent, ref DeviceNetworkPacketEvent<RoboticsCyborgDestroyPayload> args)
+    {
+        Destroy(ent);
     }
 
     private void Disable(Entity<BorgTransponderComponent, BorgChassisComponent?> ent)

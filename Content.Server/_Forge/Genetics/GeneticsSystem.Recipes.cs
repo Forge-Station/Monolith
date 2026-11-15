@@ -25,7 +25,6 @@ public sealed class GeneRoundPayload
 public sealed partial class GeneticsSystem
 {
     private readonly Dictionary<string, GeneRoundPayload> _payloads = new();
-    private readonly HashSet<string> _discovered = new();
 
     private void InitializeRecipes()
     {
@@ -36,7 +35,6 @@ public sealed partial class GeneticsSystem
     private void ClearRecipes()
     {
         _payloads.Clear();
-        _discovered.Clear();
     }
 
     public void EnsureRecipes()
@@ -312,14 +310,14 @@ public sealed partial class GeneticsSystem
         return GetOrCreatePayload(geneId).Recipe;
     }
 
-    public bool IsDiscovered(string geneId)
+    public bool IsDiscovered(EntityUid context, string geneId)
     {
-        return _discovered.Contains(geneId);
+        return _servers.IsDiscovered(context, geneId);
     }
 
-    public void Discover(string geneId)
+    public bool Discover(EntityUid context, string geneId)
     {
-        _discovered.Add(geneId);
+        return _servers.Discover(context, geneId);
     }
 
     public IEnumerable<string> EnumerateRoundGenes(GeneBranch branch)
@@ -332,11 +330,11 @@ public sealed partial class GeneticsSystem
         }
     }
 
-    public List<GeneticsConsoleDiscoveryEntry> GetDiscoveryJournal()
+    public List<GeneticsConsoleDiscoveryEntry> GetDiscoveryJournal(EntityUid context)
     {
         EnsureRecipes();
         var list = new List<GeneticsConsoleDiscoveryEntry>();
-        foreach (var id in _discovered)
+        foreach (var id in _servers.GetDiscovered(context))
         {
             if (!Prototypes.TryIndex<GenePrototype>(id, out var proto))
                 continue;
@@ -457,7 +455,7 @@ public sealed partial class GeneticsSystem
         string? fallback = null;
         foreach (var id in EnumerateRoundGenes(branch))
         {
-            if (!IsDiscovered(id) || !Prototypes.TryIndex<GenePrototype>(id, out var proto))
+            if (!IsDiscovered(uid, id) || !Prototypes.TryIndex<GenePrototype>(id, out var proto))
                 continue;
 
             fallback ??= id;

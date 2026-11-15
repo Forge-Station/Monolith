@@ -57,7 +57,8 @@
   - AdvancedRetractor
   - DefibrillatorCompact
   - ShitmedOmnimedTool
-
+  - ClothingHandsGlovesSurgical #Forge-Change
+  
 # Smartgun Change
 - type: latheRecipePack
   id: SmartGun

@@ -23,7 +23,7 @@ public sealed partial class RiggableSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<RiggableComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<RiggableComponent, BeingMicrowavedEvent>(OnMicrowaved);
-        SubscribeLocalEvent<RiggableComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
+        SubscribeLocalEvent<RiggableComponent, SolutionChangedEvent>(OnSolutionChanged);
     }
 
     private void OnRejuvenate(Entity<RiggableComponent> entity, ref RejuvenateEvent args)
@@ -50,13 +50,14 @@ public sealed partial class RiggableSystem : EntitySystem
         Explode(entity.Owner, batteryComponent, args.User);
     }
 
-    private void OnSolutionChanged(Entity<RiggableComponent> entity, ref SolutionContainerChangedEvent args)
+    private void OnSolutionChanged(Entity<RiggableComponent> entity, ref SolutionChangedEvent args)
     {
-        if (args.SolutionId != entity.Comp.Solution)
+        if (args.Solution.Comp.Id != entity.Comp.Solution)
             return;
 
         var wasRigged = entity.Comp.IsRigged;
-        var quantity = args.Solution.GetReagentQuantity(entity.Comp.RequiredQuantity.Reagent);
+        var solution = args.Solution.Comp.Solution;
+        var quantity = solution.GetReagentQuantity(entity.Comp.RequiredQuantity.Reagent);
         entity.Comp.IsRigged = quantity >= entity.Comp.RequiredQuantity.Quantity;
 
         if (entity.Comp.IsRigged && !wasRigged)

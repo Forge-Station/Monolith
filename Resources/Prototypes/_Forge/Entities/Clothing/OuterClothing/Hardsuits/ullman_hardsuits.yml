@@ -20,7 +20,7 @@
         Piercing: 0.6
         Heat: 0.5
         Radiation: 0.45
-        Caustic: 0.4
+        Caustic: 0.3
   - type: ClothingSpeedModifier
     walkModifier: 0.975
     sprintModifier: 0.975
@@ -60,8 +60,6 @@
   components:
   - type: Sprite
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_light_juggernaut_outer.rsi
-  - type: Item
-    size: Huge
   - type: Clothing
     sprite: _Forge/Clothing/OuterClothing/Hardsuits/ui_light_juggernaut_outer.rsi
   - type: PressureProtection

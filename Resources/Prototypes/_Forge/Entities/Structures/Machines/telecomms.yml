@@ -23,3 +23,16 @@
       key_slots:
       - EncryptionKeyEmpire
       - EncryptionKeyEmpireCommand
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServerTrauma
+  name: TTI telecommunication server
+  suffix: TTI
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyMedical
+      - EncryptionKeyHospital

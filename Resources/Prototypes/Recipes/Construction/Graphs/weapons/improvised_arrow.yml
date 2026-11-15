@@ -13,7 +13,7 @@
         amount: 1
         doAfter: 0.5
       - tag: GlassShard
-        name: glass shard
+        name: construction-required-glass-shard # Forge-change
         icon:
           sprite: Objects/Materials/Shards/shard.rsi
           state: shard1
@@ -37,7 +37,7 @@
         amount: 1
         doAfter: 0.5
       - tag: PlasmaGlassShard
-        name: plasma glass shard
+        name: construction-required-plasma-glass-shard # Forge-change
         icon:
           sprite: Objects/Materials/Shards/shard.rsi
           state: shard1
@@ -61,7 +61,7 @@
         amount: 1
         doAfter: 0.5
       - tag: UraniumGlassShard
-        name: uranium glass shard
+        name: construction-required-uranium-glass-shard # Forge-change
         icon:
           sprite: Objects/Materials/Shards/shard.rsi
           state: shard1

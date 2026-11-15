@@ -51,7 +51,7 @@
   parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
   id: ComputerCrewNanotrasenMonitoring
   name: crew NT monitoring console
-  description: Used to monitor active health sensors built into most of the crew's NT and TTI implants.
+  description: Used to monitor active health sensors built into most of the crew's NT implants.
   suffix: NT
   components:
   - type: Sprite
@@ -70,6 +70,30 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: CrewNanotrasenMonitor
+
+- type: entity
+  parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]
+  id: ComputerCrewTTIMonitoring
+  name: crew TTI monitoring console
+  description: Used to monitor active health sensors built into most of the crew's TTI implants.
+  suffix: NT
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      sprite: _Forge/Structures/Machines/factions_crew_monitors_screens.rsi
+      state: crew-nt
+    - map: ["computerLayerKeys"]
+      state: med_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: CrewTTIMonitor
 
 - type: entity
   parent: [ComputerCrewMonitoring, BaseStructureDisableToolUse]

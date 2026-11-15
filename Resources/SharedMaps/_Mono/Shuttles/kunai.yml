@@ -777,20 +777,6 @@ entities:
     - type: Transform
       pos: 5.5,11.5
       parent: 1
-- proto: AlwaysPoweredLightLED
-  entities:
-  - uid: 26
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 1.5,8.5
-      parent: 1
-  - uid: 27
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -0.5,20.5
-      parent: 1
 - proto: AmeController
   entities:
   - uid: 28
@@ -3854,6 +3840,18 @@ entities:
       parent: 1
 - proto: PoweredlightLED
   entities:
+  - uid: 26
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -0.5,20.5
+      parent: 1
   - uid: 485
     components:
     - type: Transform

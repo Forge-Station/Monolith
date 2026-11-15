@@ -1,19 +1,33 @@
+using Content.Server._EinsteinEngines.Language;
 using Content.Server._Forge.Genetics.Components;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
+using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._Forge.Genetics;
 using Content.Shared._Forge.Genetics.Components;
+using Content.Shared.Damage;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Polymorph;
+using Robust.Server.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server._Forge.Genetics;
 
 public sealed partial class GeneticsSystem
 {
-    [Dependency] private readonly PolymorphSystem _polymorph = default!;
-    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private PolymorphSystem _polymorph = default!;
+    [Dependency] private SharedHumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private LanguageSystem _languages = default!;
+    [Dependency] private ContainerSystem _containers = default!;
+
+    /// <summary>Chance a species rewrite never lets the old body back, even after death.</summary>
+    private const float PermanentSpeciesChance = 0.05f;
+
+    /// <summary>Chance an animal form keeps only that animal's speech and hearing.</summary>
+    private const float FeralSpeechChance = 0.15f;
 
     private void InitializeMorph()
     {
@@ -36,6 +50,10 @@ public sealed partial class GeneticsSystem
         var payload = GetOrCreatePayload(geneId);
         var target = uid;
 
+        // ContainerSlot cannot hold both parent and child. Polymorph tries to insert the child while the
+        // parent still occupies the scanner, then banishes the parent — leaving the new body outside.
+        var hadScanner = TryGetDnaScanner(uid, out _, out var scannerComp);
+
         if (payload.Polymorph != null && !HasComp<PolymorphedEntityComponent>(uid))
         {
             var child = _polymorph.PolymorphEntity(uid, payload.Polymorph.Value);
@@ -43,10 +61,35 @@ public sealed partial class GeneticsSystem
             {
                 TransferGenome(uid, child.Value, reapplyComponents: true);
                 target = child.Value;
+                MaybeFeralSpeech(target, payload.Polymorph.Value);
+
+                if (hadScanner && scannerComp.BodyContainer.ContainedEntity == null)
+                {
+                    _containers.Insert(child.Value, scannerComp.BodyContainer);
+                    EnsureComp<GenomeComponent>(child.Value);
+                }
             }
         }
 
         ApplyMorphExtras(target, geneId);
+    }
+
+    private bool TryGetDnaScanner(EntityUid uid, out EntityUid scannerUid, out DnaModifierScannerComponent scannerComp)
+    {
+        scannerUid = default;
+        scannerComp = null!;
+        if (!_containers.TryGetContainingContainer(uid, out var cont))
+            return false;
+
+        if (cont.ID != DnaModifierScannerComponent.ContainerId)
+            return false;
+
+        if (!TryComp(cont.Owner, out DnaModifierScannerComponent? found))
+            return false;
+
+        scannerUid = cont.Owner;
+        scannerComp = found;
+        return true;
     }
 
     private void RemoveMorphEffects(EntityUid uid, string geneId)
@@ -135,11 +178,61 @@ public sealed partial class GeneticsSystem
 
         _humanoid.SetSpecies(uid, target, false, humanoid);
         _humanoid.SetSkinColor(uid, SkinColor.ValidSkinTone(species.SkinColoration, humanoid.SkinColor), verify: false, humanoid: humanoid);
+        var snapshot = morph.Species[geneId];
+        ApplySpeciesResistances(uid, species, snapshot);
+
+        snapshot.Locked = _random.Prob(PermanentSpeciesChance);
+        if (snapshot.Locked)
+            _popup.PopupEntity(Loc.GetString("genetics-species-locked"), uid);
+    }
+
+    /// <summary>
+    /// The new body keeps that species' heat, cold and brute modifiers.
+    /// The sprite change alone left every form with the old resistances.
+    /// </summary>
+    private void ApplySpeciesResistances(EntityUid uid, SpeciesPrototype species, GeneticSpeciesSnapshot snapshot)
+    {
+        if (!Prototypes.TryIndex<EntityPrototype>(species.Prototype, out var mob)
+            || !mob.TryComp(out DamageableComponent? speciesDamage, EntityManager.ComponentFactory)
+            || speciesDamage.DamageModifierSetId is not { } setId)
+            return;
+
+        if (!TryComp<DamageableComponent>(uid, out var damage) || damage.DamageModifierSetId == setId)
+            return;
+
+        snapshot.RevertDamageModifier = true;
+        snapshot.DamageModifierSet = damage.DamageModifierSetId is { } previous ? previous.Id : null;
+        _damageable.SetDamageModifierSetId(uid, setId, damage);
+    }
+
+    /// <summary>
+    /// Sometimes the beast's throat wins. Common speech is gone; only the animal's own tongue remains.
+    /// </summary>
+    private void MaybeFeralSpeech(EntityUid animal, ProtoId<PolymorphPrototype> polymorphId)
+    {
+        if (!_random.Prob(FeralSpeechChance))
+            return;
+
+        if (!Prototypes.TryIndex(polymorphId, out PolymorphPrototype? polymorph)
+            || !Prototypes.TryIndex<EntityPrototype>(polymorph.Configuration.Entity, out var animalProto)
+            || !animalProto.TryComp(out LanguageKnowledgeComponent? native, EntityManager.ComponentFactory)
+            || native.SpokenLanguages.Count == 0)
+            return;
+
+        var knowledge = EnsureComp<LanguageKnowledgeComponent>(animal);
+        knowledge.SpokenLanguages = new List<ProtoId<LanguagePrototype>>(native.SpokenLanguages);
+        knowledge.UnderstoodLanguages = new List<ProtoId<LanguagePrototype>>(native.UnderstoodLanguages);
+        _languages.UpdateEntityLanguages(animal);
+        _popup.PopupEntity(Loc.GetString("genetics-feral-speech"), animal);
     }
 
     private void RestoreSpecies(EntityUid uid, string geneId, GeneticMorphComponent morph)
     {
         if (!morph.Species.Remove(geneId, out var snapshot))
+            return;
+
+        // The form stuck. The corpse, and any clone taken from it, stays this species.
+        if (snapshot.Locked)
             return;
 
         if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
@@ -148,6 +241,9 @@ public sealed partial class GeneticsSystem
         humanoid.Species = snapshot.Species;
         humanoid.MarkingSet = new MarkingSet(snapshot.Markings);
         _humanoid.SetSkinColor(uid, snapshot.SkinColor, verify: false, humanoid: humanoid);
+
+        if (snapshot.RevertDamageModifier)
+            _damageable.SetDamageModifierSetId(uid, snapshot.DamageModifierSet);
     }
 
     private void ApplyLimbReplacement(EntityUid uid, string geneId, GeneRoundPayload payload, GeneticMorphComponent morph)

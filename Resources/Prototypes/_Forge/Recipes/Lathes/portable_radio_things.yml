@@ -1,0 +1,45 @@
+- type: latheRecipe
+  id: StationRadioReceiverHandheldRecipe
+  icon:
+    sprite: _Forge/Objects/Devices/handheld_station_radio.rsi
+    state: base
+  result: StationRadioReceiverHandheld
+  completetime: 4
+  materials:
+    Steel: 500
+    Plastic: 100
+
+- type: latheRecipe
+  id: StationRadioServerPortableRecipe
+  icon:
+    sprite: _Forge/Objects/Devices/radio_server_portable.rsi
+    state: server
+  result: StationRadioServerPortable
+  completetime: 4
+  materials:
+    Steel: 4000
+    Plastic: 1000
+    Plasma: 500
+
+- type: latheRecipe
+  id: StationRadioRigPortableRecipe
+  icon:
+    sprite: _Forge/Objects/Devices/radio_rig_portable.rsi
+    state: icon
+  result: StationRadioRigPortable
+  completetime: 4
+  materials:
+    Steel: 3000
+    Plastic: 1000
+    Glass: 2000
+
+- type: latheRecipe
+  id: VinylPlayerPortableRecipe
+  icon:
+    sprite: _Forge/Objects/Devices/radio_player_portable.rsi
+    state: player-close
+  result: VinylPlayerPortable
+  completetime: 4
+  materials:
+    Steel: 1000
+    Plastic: 1500

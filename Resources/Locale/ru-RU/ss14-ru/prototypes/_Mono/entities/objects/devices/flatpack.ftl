@@ -50,3 +50,6 @@ ent-ResearchAndDevelopmentServerMercFlatpack = упакованный серве
     .desc = Набор для сборки сервера R&D наёмников.
 ent-ChemMasterFilledFlatpack = упакованный ХимМастер 4000
     .desc = Набор для сборки ХимМастера 4000.
+
+ent-InteractorCCTCFlatpack = упакованный проприетарный интерактор
+    .desc = Комплект для сборки проприетарного интерактора.

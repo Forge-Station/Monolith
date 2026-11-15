@@ -19,19 +19,19 @@ using Content.Shared._Forge.Contractors;
 
 namespace Content.Shared._EE.Contractors.Systems;
 
-public sealed class SharedPassportSystem : EntitySystem
+public sealed partial class SharedPassportSystem : EntitySystem
 {
     public const int CurrentYear = 3026;
     const string PIDChars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789";
 
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly SharedTransformSystem _sharedTransformSystem = default!;
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogManager = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedStorageSystem _storage = default!;
+    [Dependency] private SharedTransformSystem _sharedTransformSystem = default!;
+    [Dependency] private IConfigurationManager _configManager = default!;
+    [Dependency] private ISharedAdminLogManager _adminLogManager = default!;
+    [Dependency] private SharedUserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {

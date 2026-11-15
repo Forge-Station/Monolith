@@ -23,7 +23,6 @@ namespace Content.Shared.Radio.EntitySystems;
 /// </summary>
 public sealed partial class EncryptionKeySystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedToolSystem _tool = default!;
@@ -188,7 +187,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                 AddChannelsExamine(component.Channels,
                     component.DefaultChannel,
                     args,
-                    _protoManager,
+                    ProtoMan,
                     "examine-encryption-channel");
             }
         }
@@ -202,7 +201,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         if(component.Channels.Count > 0)
         {
             args.PushMarkup(Loc.GetString("examine-encryption-channels-prefix"));
-            AddChannelsExamine(component.Channels, component.DefaultChannel, args, _protoManager, "examine-encryption-channel");
+            AddChannelsExamine(component.Channels, component.DefaultChannel, args, ProtoMan, "examine-encryption-channel");
         }
     }
 
@@ -217,7 +216,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
         RadioChannelPrototype? proto;
         foreach (var id in channels)
         {
-            proto = _protoManager.Index<RadioChannelPrototype>(id);
+            proto = ProtoMan.Index<RadioChannelPrototype>(id);
 
             var key = id == SharedChatSystem.CommonChannel
                 ? SharedChatSystem.RadioCommonPrefix.ToString()
@@ -230,7 +229,7 @@ public sealed partial class EncryptionKeySystem : EntitySystem
                 ("freq", proto.Frequency / 10f)));
         }
 
-        if (defaultChannel != null && _protoManager.TryIndex(defaultChannel, out proto))
+        if (defaultChannel != null && ProtoMan.TryIndex(defaultChannel, out proto))
         {
             if (HasComp<HeadsetComponent>(examineEvent.Examined))
             {

@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Server.Gatherable;
 using Content.Server.Gatherable.Components;
 using Content.Shared._Forge.Gatherable;
+using Content.Shared._Forge.OrePipe;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
@@ -12,14 +13,14 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Forge.Gatherable;
 
-public sealed class DrakeHitscanGatheringSystem : EntitySystem
+public sealed partial class DrakeHitscanGatheringSystem : EntitySystem
 {
-    [Dependency] private readonly GatherableSystem _gather = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private GatherableSystem _gather = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private const float OreTeleportGatherRadius = 1.5f;
     private const float OreTeleportSpread = 0.35f;
@@ -66,13 +67,19 @@ public sealed class DrakeHitscanGatheringSystem : EntitySystem
 
         _shotContext.Remove(ent);
 
+        var collector = ResolveCollector(ent.Comp, ctx.Gun, ctx.Shooter);
+
+        // Ship mining lasers with OrePipeBuffer: deposit into the gun like ship drills
+        // (abstract counts → flush into disposal trunk under the turret).
+        if (collector != null && HasComp<OrePipeBufferComponent>(collector.Value))
+        {
+            _gather.Gather(ev.Target, collector, gatherable, spawnOnGatherer: true);
+            return;
+        }
+
         _gather.Gather(ev.Target, ent, gatherable);
 
-        if (!ent.Comp.TeleportOre)
-            return;
-
-        var collector = ResolveCollector(ent.Comp, ctx.Gun, ctx.Shooter);
-        if (collector == null)
+        if (!ent.Comp.TeleportOre || collector == null)
             return;
 
         TeleportMiningDropsToCollector(rockCoords, collector.Value, ent.Comp);

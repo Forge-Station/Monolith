@@ -75,16 +75,28 @@
             - tool: Welding
               doAfter: 20
 
-        - to: plasticWall
+        - to: brassWall
           completed:
             - !type:SnapToGrid
               southRotation: true
           conditions:
             - !type:EntityAnchored {}
           steps:
-            - material: Plastic
+            - material: Brass
               amount: 2
-              doAfter: 2
+            - tool: Welding
+              doAfter: 20
+
+        # - to: plasticWall
+        #   completed:
+        #     - !type:SnapToGrid
+        #       southRotation: true
+        #   conditions:
+        #     - !type:EntityAnchored {}
+        #   steps:
+        #     - material: Plastic
+        #       amount: 2
+        #       doAfter: 2
 
         - to: plasmaWall
           completed:
@@ -110,18 +122,18 @@
             - tool: Welding
               doAfter: 20
 
-        - to: bananiumWall
-          completed:
-            - !type:SnapToGrid
-              southRotation: true
-          conditions:
-            - !type:EntityAnchored {}
-          steps:
-            - material: Bananium
-              amount: 2
-              doAfter: 2
-            - tool: Welding
-              doAfter: 20
+        # - to: bananiumWall
+        #   completed:
+        #     - !type:SnapToGrid
+        #       southRotation: true
+        #   conditions:
+        #     - !type:EntityAnchored {}
+        #   steps:
+        #     - material: Bananium
+        #       amount: 2
+        #       doAfter: 2
+        #     - tool: Welding
+        #       doAfter: 20
 
         - to: meatWall
           completed:
@@ -133,22 +145,6 @@
             - material: MeatSheets
               amount: 2
               doAfter: 2
-
-        - to: shuttleInteriorWall
-          completed:
-            - !type:SnapToGrid
-              southRotation: true
-          conditions:
-            - !type:EntityAnchored { }
-          steps:
-            - material: MetalRod
-              amount: 2
-              doAfter: 1
-            - tool: Screwing
-              doAfter: 1
-            - material: Steel
-              amount: 2
-              doAfter: 1
 
         #Mono - create diagonal wall
         - to: wallSolidDiagonal
@@ -216,17 +212,31 @@
             - tool: Prying
               doAfter: 10
 
-    - node: plasticWall
-      entity: WallPlastic
+    - node: brassWall
+      entity: WallBrass
       edges:
-        - to: girder
-          completed:
-            - !type:GivePrototype
-              prototype: SheetPlastic1
-              amount: 2
-          steps:
-            - tool: Prying
-              doAfter: 10
+      - to: girder
+        completed:
+        - !type:GivePrototype
+          prototype: SheetBrass1
+          amount: 2
+        steps:
+          - tool: Welding
+            doAfter: 20
+          - tool: Prying
+            doAfter: 10
+
+    # - node: plasticWall
+    #   entity: WallPlastic
+    #   edges:
+    #     - to: girder
+    #       completed:
+    #         - !type:GivePrototype
+    #           prototype: SheetPlastic1
+    #           amount: 2
+    #       steps:
+    #         - tool: Prying
+    #           doAfter: 10
 
     - node: plasmaWall
       entity: WallPlasma
@@ -256,19 +266,19 @@
             - tool: Prying
               doAfter: 10
 
-    - node: bananiumWall
-      entity: WallClown
-      edges:
-        - to: girder
-          completed:
-            - !type:GivePrototype
-              prototype: MaterialBananium1
-              amount: 2
-          steps:
-            - tool: Welding
-              doAfter: 20
-            - tool: Prying
-              doAfter: 10
+    # - node: bananiumWall
+    #   entity: WallClown
+    #   edges:
+    #     - to: girder
+    #       completed:
+    #         - !type:GivePrototype
+    #           prototype: MaterialBananium1
+    #           amount: 2
+    #       steps:
+    #         - tool: Welding
+    #           doAfter: 20
+    #         - tool: Prying
+    #           doAfter: 10
 
     - node: meatWall
       entity: WallMeat
@@ -281,23 +291,6 @@
           steps:
             - tool: Prying
               doAfter: 5
-
-    - node: shuttleInteriorWall
-      entity: WallShuttleInterior
-      edges:
-        - to: girder
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetSteel1
-              amount: 2
-            - !type:SpawnPrototype
-              prototype: PartRodMetal1
-              amount: 2
-          steps:
-            - tool: Welding
-              doAfter: 10
-            - tool: Screwing
-              doAfter: 1
 
     #Mono - diagonal wall node
     - node: wallSolidDiagonal

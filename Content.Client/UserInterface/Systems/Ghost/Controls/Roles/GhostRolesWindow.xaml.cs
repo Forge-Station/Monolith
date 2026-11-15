@@ -87,10 +87,18 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
                     Margin = new Thickness(0, 0, 0, 8),
                 };
 
-                body.AddChild(buttons);
-
-                EntryContainer.AddChild(collapsible);
-                _collapsibleBoxes.Add(key, collapsible);
+                // Forge-Change: two groups can share a name and description (different prototype or
+                // requirements). Add throws and the window is left on the empty "no roles" label.
+                if (_collapsibleBoxes.ContainsKey(key))
+                {
+                    EntryContainer.AddChild(buttons);
+                }
+                else
+                {
+                    body.AddChild(buttons);
+                    EntryContainer.AddChild(collapsible);
+                    _collapsibleBoxes.Add(key, collapsible);
+                }
             }
             else
             {

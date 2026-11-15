@@ -24,3 +24,137 @@
         steps:
           - tool: Welding
             doAfter: 5
+
+- type: constructionGraph
+  id: TurbineSmallConstructableGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: TurbineSmall
+      steps:
+      - material: Steel
+        amount: 100
+      - material: Plastic
+        amount: 50
+      - material: Plasteel
+        amount: 50
+      - material: Plastitanium
+        amount: 20
+      - material: Copper
+        amount: 50
+      - material: Gold
+        amount: 20
+      - material: CableHV
+        amount: 30
+      - material: UraniumDepleted
+        amount: 5
+        doAfter: 15
+      - tag: TurbineSmallMachineCircuitboard
+        name: Small Turbine Machine Board
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: engineering
+  - node: TurbineSmall
+    entity: TurbineSmallConstructable
+    edges:
+      - to: start
+        completed:
+        - !type:SpawnPrototype
+              prototype: SheetSteel
+              amount: 100
+        - !type:SpawnPrototype
+              prototype: SheetPlastic
+              amount: 50
+        - !type:SpawnPrototype
+              prototype: SheetPlasteel
+              amount: 50
+        - !type:SpawnPrototype
+              prototype: SheetPlastitanium
+              amount: 20
+        - !type:SpawnPrototype
+              prototype: SheetCopper1
+              amount: 50
+        - !type:SpawnPrototype
+              prototype: IngotGold
+              amount: 20
+        - !type:SpawnPrototype
+              prototype: CableHVStack1
+              amount: 30
+        - !type:SpawnPrototype
+              prototype: SheetUraniumDepleted1
+              amount: 5
+        - !type:SpawnPrototype
+              prototype: TurbineSmallMachineCircuitboard
+              amount: 1
+        - !type:DeleteEntity {}
+        steps:
+          - tool: Prying
+            doAfter: 60
+
+- type: constructionGraph
+  id: NuclearReactorSmallConstructableGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: NuclearReactorSmall
+      steps:
+      - material: Steel
+        amount: 100
+        doAfter: 1
+      - material: Steel
+        amount: 100
+        doAfter: 1
+      - material: ReinforcedPlasmaGlass
+        amount: 25
+        doAfter: 1
+      - material: Plastic
+        amount: 50
+        doAfter: 1
+      - material: Plasteel
+        amount: 100
+        doAfter: 1
+      - material: Plastitanium
+        amount: 20
+      - material: UraniumFissile
+        amount: 2
+        doAfter: 15
+      - tag: NuclearReactorSmallMachineCircuitboard
+        name: Small Nuclear Reactor Machine Board
+        icon:
+          sprite: Objects/Misc/module.rsi
+          state: engineering
+  - node: NuclearReactorSmall
+    entity: NuclearReactorSmallConstructable
+    edges:
+      - to: start
+        completed:
+        - !type:SpawnPrototype
+              prototype: SheetSteel
+              amount: 100
+        - !type:SpawnPrototype
+              prototype: SheetSteel
+              amount: 100
+        - !type:SpawnPrototype
+              prototype: SheetRPGlass
+              amount: 25
+        - !type:SpawnPrototype
+              prototype: SheetPlastic
+              amount: 50
+        - !type:SpawnPrototype
+              prototype: SheetPlasteel
+              amount: 100
+        - !type:SpawnPrototype
+              prototype: SheetPlastitanium
+              amount: 20
+        - !type:SpawnPrototype
+              prototype: SheetUraniumFissile1
+              amount: 2
+        - !type:SpawnPrototype
+              prototype: NuclearReactorSmallMachineCircuitboard
+              amount: 1
+        - !type:DeleteEntity {}
+        steps:
+          - tool: Prying
+            doAfter: 300

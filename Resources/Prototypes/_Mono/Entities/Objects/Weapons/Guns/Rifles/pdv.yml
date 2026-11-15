@@ -85,14 +85,14 @@
     maxAngle: 0 # Forge-change -41->0
   - type: Gun
     minAngle: 2 # Forge-change
-    maxAngle: 8 # Forge-change
-    angleIncrease: 1 # Forge-change
+    maxAngle: 12 # Forge-change
+    angleIncrease: 1.25 # Forge-change
     angleDecay: 10 # Forge-change
     availableModes:
     - Burst
     selectedMode: Burst
     burstFireRate: 20 # Mono
-    burstCooldown: 0.5 # Forge-change 0.6->0.5
+    burstCooldown: 0.6 # Forge-change 0.6->0.65
     projectileSpeed: 50 # Forge-change 45->50
     fireRate: 7.5 # Mono, does nothing because its burst only but it makes it clear it can fire at this rate.
     soundGunshot:

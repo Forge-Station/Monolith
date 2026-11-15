@@ -10,7 +10,7 @@
 
 - type: cargoProduct
   id: CargoBarrel
-  name: barrel (empty)
+  # Forge-change: use the localized product name instead of an English override.
   icon:
     sprite: _NF/Objects/Storage/Barrels/white.rsi
     state: icon
@@ -21,7 +21,7 @@
 
 - type: cargoProduct
   id: CargoBarrelCarbon
-  name: barrel of carbon
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/black.rsi
@@ -33,7 +33,7 @@
 
 - type: cargoProduct
   id: CargoBarrelIodine
-  name: barrel of iodine
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/red.rsi
@@ -45,7 +45,7 @@
 
 - type: cargoProduct
   id: CargoBarrelFluorine
-  name: barrel of fluorine
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/blue.rsi
@@ -57,7 +57,7 @@
 
 - type: cargoProduct
   id: CargoBarrelChlorine
-  name: barrel of chlorine
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/green.rsi
@@ -69,7 +69,7 @@
 
 - type: cargoProduct
   id: CargoBarrelAluminium
-  name: barrel of aluminium
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/white.rsi
@@ -81,7 +81,7 @@
 
 - type: cargoProduct
   id: CargoBarrelPhosphorus
-  name: barrel of phosphorus
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/red.rsi
@@ -93,7 +93,7 @@
 
 - type: cargoProduct
   id: CargoBarrelSulfur
-  name: barrel of sulfur
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/yellow.rsi
@@ -105,7 +105,7 @@
 
 - type: cargoProduct
   id: CargoBarrelSilicon
-  name: barrel of silicon
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/black.rsi
@@ -117,7 +117,7 @@
 
 - type: cargoProduct
   id: CargoBarrelHydrogen
-  name: barrel of hydrogen
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/white.rsi
@@ -129,7 +129,7 @@
 
 - type: cargoProduct
   id: CargoBarrelLithium
-  name: barrel of lithium
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/grey.rsi
@@ -141,7 +141,7 @@
 
 - type: cargoProduct
   id: CargoBarrelSodium
-  name: barrel of sodium
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/grey.rsi
@@ -153,7 +153,7 @@
 
 - type: cargoProduct
   id: CargoBarrelPotassium
-  name: barrel of potassium
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/yellow.rsi
@@ -165,7 +165,7 @@
 
 - type: cargoProduct
   id: CargoBarrelRadium
-  name: barrel of radium
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/green.rsi
@@ -177,7 +177,7 @@
 
 - type: cargoProduct
   id: CargoBarrelIron
-  name: barrel of iron
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/grey.rsi
@@ -189,7 +189,7 @@
 
 - type: cargoProduct
   id: CargoBarrelCopper
-  name: barrel of copper
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/red.rsi
@@ -201,7 +201,7 @@
 
 - type: cargoProduct
   id: CargoBarrelGold
-  name: barrel of gold
+  # Forge-change: use the localized product name instead of an English override.
   abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/yellow.rsi
@@ -213,7 +213,7 @@
 
 - type: cargoProduct
   id: CargoBarrelMercury
-  name: barrel of mercury
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/grey.rsi
@@ -225,7 +225,7 @@
 
 - type: cargoProduct
   id: CargoBarrelSilver
-  name: barrel of silver
+  # Forge-change: use the localized product name instead of an English override.
   abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/white.rsi
@@ -237,7 +237,7 @@
 
 - type: cargoProduct
   id: CargoBarrelEthanol
-  name: barrel of ethanol
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/blue.rsi
@@ -249,7 +249,7 @@
 
 - type: cargoProduct
   id: CargoBarrelSugar
-  name: barrel of sugar
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/white.rsi
@@ -261,7 +261,7 @@
 
 - type: cargoProduct
   id: CargoBarrelNitrogen
-  name: barrel of nitrogen
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/red.rsi
@@ -273,7 +273,7 @@
 
 - type: cargoProduct
   id: CargoBarrelOxygen
-  name: barrel of oxygen
+  # Forge-change: use the localized product name instead of an English override.
 #  abstract: true #Mono in
   icon:
     sprite: _NF/Objects/Storage/Barrels/blue.rsi
@@ -285,7 +285,7 @@
 
 - type: cargoProduct
   id: CargoBarrelOil
-  name: barrel of oil
+  # Forge-change: use the localized product name instead of an English override.
   abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/black.rsi
@@ -297,7 +297,7 @@
 
 - type: cargoProduct
   id: CargoBarrelDiethylamine
-  name: barrel of diethylamine
+  # Forge-change: use the localized product name instead of an English override.
   abstract: true
   icon:
     sprite: _NF/Objects/Storage/Barrels/green.rsi

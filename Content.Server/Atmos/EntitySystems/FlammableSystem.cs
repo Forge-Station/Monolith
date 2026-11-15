@@ -19,12 +19,12 @@ using Content.Shared.Projectiles;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Temperature;
 using Content.Shared.Throwing;
-using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.FixedPoint;
 using Content.Shared.Temperature.Components;
 using Content.Shared.Hands;
+using Content.Shared.Timing.Systems;
 using Robust.Server.Audio;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -194,7 +194,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             args.Handled = true;
 
-            if (!TryComp(uid, out UseDelayComponent? useDelay) || !_useDelay.TryResetDelay((uid, useDelay), true))
+            if (!_useDelay.TryResetDelay(uid, true))
                 return;
 
             _audio.PlayPvs(component.ExtinguishAttemptSound, uid);
@@ -283,8 +283,13 @@ namespace Content.Server.Atmos.EntitySystems
 
         public void UpdateAppearance(EntityUid uid, FlammableComponent? flammable = null, AppearanceComponent? appearance = null)
         {
-            if (!Resolve(uid, ref flammable, ref appearance))
+            // Forge-change-start
+            if (!Resolve(uid, ref flammable, false))
                 return;
+            // safe AppearanceComp check
+            if (appearance == null && !TryComp<AppearanceComponent>(uid, out appearance))
+                return;
+            // Forge-change-end
 
             _appearance.SetData(uid, FireVisuals.OnFire, flammable.OnFire, appearance);
             _appearance.SetData(uid, FireVisuals.FireStacks, flammable.FireStacks, appearance);

@@ -1,7 +1,7 @@
-entity-heater-examined = Выбран режим [color=gray]{ $setting }[/color]
-entity-heater-switch-setting = Переключить на { $setting }
-entity-heater-switched-setting = Переключён на { $setting }
--entity-heater-setting-name = { $setting ->
+entity-heater-examined = Выбран режим [color=gray]{ entity-heater-setting-name }[/color]
+entity-heater-switch-setting = Переключить на { entity-heater-setting-name }
+entity-heater-switched-setting = Переключён на { entity-heater-setting-name }
+entity-heater-setting-name = { $setting ->
         [off] Выкл
         [low] Низкий
         [medium] Средний

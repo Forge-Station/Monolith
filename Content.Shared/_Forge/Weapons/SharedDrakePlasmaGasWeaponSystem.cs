@@ -16,12 +16,12 @@ namespace Content.Shared._Forge.Weapons;
 
 public abstract partial class SharedDrakePlasmaGasWeaponSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
 
     /// <summary>Ignore trace amounts when distinguishing empty tanks from wrong gas.</summary>
     private const float TankMoleThreshold = 0.01f;

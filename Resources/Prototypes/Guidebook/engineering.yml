@@ -252,6 +252,14 @@
   id: Gasses
   name: guide-entry-gasses
   text: "/ServerInfo/_Forge/Guidebook/Engineering/Gasses.xml" # Forge-change
+  children:
+  - Neurotoxins # Forge-change start
+
+- type: guideEntry
+  id: Neurotoxins
+  name: guide-entry-neurotoxins
+  text: "/ServerInfo/_Forge/Guidebook/Engineering/Neurotoxins.xml" 
+  # Forge-change end
 
 - type: guideEntry
   id: ShuttleCraft

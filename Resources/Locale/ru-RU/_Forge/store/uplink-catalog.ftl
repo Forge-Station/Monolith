@@ -156,6 +156,8 @@ uplink-tti-blueprintadvancedtools-name = чертёж продвинутых и�
 uplink-tti-blueprintadvancedtools-desc = содержит в себе различные продвинутые инженерные инструменты
 uplink-tti-blueprintadvancedshiprepairtools-name = чертёж средств для ремонта корабля
 uplink-tti-blueprintadvancedshiprepairtools-desc = содержит в себе рецепты УРКа и заряды для него
+uplink-tti-blueprint-turret-name = Турели
+uplink-tti-blueprint-turret-desc = Чертеж турелей. Включает в себя турели, магазины к ним и консоль контроля турелей.
 
 # Bundle
 uplink-tti-SurgeryBundle-name = хирургический набор

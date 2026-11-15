@@ -3594,7 +3594,7 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 2
-- proto: AlwaysPoweredlightBlue
+- proto: PoweredlightBlue
   entities:
   - uid: 61
     components:
@@ -3620,7 +3620,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -8.5,-3.5
       parent: 1
-- proto: AlwaysPoweredLightExterior
+- proto: PoweredLightExterior
   entities:
   - uid: 65
     components:
@@ -3634,7 +3634,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -6.5,27.5
       parent: 1
-- proto: AlwaysPoweredlightGreen
+- proto: PoweredlightGreen
   entities:
   - uid: 67
     components:
@@ -3678,7 +3678,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 4.5,-15.5
       parent: 1
-- proto: AlwaysPoweredlightRed
+- proto: PoweredlightRed
   entities:
   - uid: 74
     components:

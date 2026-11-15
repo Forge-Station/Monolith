@@ -27,17 +27,16 @@ namespace Content.Server.Body.Systems
         [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
         private EntityQuery<OrganComponent> _organQuery;
-        private EntityQuery<SolutionContainerManagerComponent> _solutionQuery;
+        private EntityQuery<SolutionManagerComponent> _solutionQuery;
 
         public override void Initialize()
         {
             base.Initialize();
 
             _organQuery = GetEntityQuery<OrganComponent>();
-            _solutionQuery = GetEntityQuery<SolutionContainerManagerComponent>();
+            _solutionQuery = GetEntityQuery<SolutionManagerComponent>();
 
-            SubscribeLocalEvent<MetabolizerComponent, ComponentInit>(OnMetabolizerInit);
-            SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit, after: [typeof(SharedSolutionContainerSystem)]);
             SubscribeLocalEvent<MetabolizerComponent, EntityUnpausedEvent>(OnUnpaused);
             SubscribeLocalEvent<MetabolizerComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
         }
@@ -45,23 +44,20 @@ namespace Content.Server.Body.Systems
         private void OnMapInit(Entity<MetabolizerComponent> ent, ref MapInitEvent args)
         {
             ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.UpdateInterval;
+
+            if (!ent.Comp.SolutionOnBody)
+            {
+                _solutionContainerSystem.EnsureSolution(ent.Owner, ent.Comp.SolutionName, out _);
+            }
+            else if (_organQuery.CompOrNull(ent)?.Body is { } body)
+            {
+                _solutionContainerSystem.EnsureSolution(body, ent.Comp.SolutionName, out _);
+            }
         }
 
         private void OnUnpaused(Entity<MetabolizerComponent> ent, ref EntityUnpausedEvent args)
         {
             ent.Comp.NextUpdate += args.PausedTime;
-        }
-
-        private void OnMetabolizerInit(Entity<MetabolizerComponent> entity, ref ComponentInit args)
-        {
-            if (!entity.Comp.SolutionOnBody)
-            {
-                _solutionContainerSystem.EnsureSolution(entity.Owner, entity.Comp.SolutionName, out _);
-            }
-            else if (_organQuery.CompOrNull(entity)?.Body is { } body)
-            {
-                _solutionContainerSystem.EnsureSolution(body, entity.Comp.SolutionName, out _);
-            }
         }
 
         private void OnApplyMetabolicMultiplier(
@@ -103,7 +99,7 @@ namespace Content.Server.Body.Systems
             }
         }
 
-        private void TryMetabolize(Entity<MetabolizerComponent, OrganComponent?, SolutionContainerManagerComponent?> ent)
+        private void TryMetabolize(Entity<MetabolizerComponent, OrganComponent?, SolutionManagerComponent?> ent)
         {
             _organQuery.Resolve(ent, ref ent.Comp2, logMissing: false);
 
@@ -120,7 +116,7 @@ namespace Content.Server.Body.Systems
                     if (!_solutionQuery.Resolve(body, ref ent.Comp3, logMissing: false))
                         return;
 
-                    _solutionContainerSystem.TryGetSolution((body, ent.Comp3), solutionName, out soln, out solution);
+                    _solutionContainerSystem.TryGetSolution(body, solutionName, out soln, out solution);
                     solutionEntityUid = body;
                 }
             }
@@ -129,7 +125,7 @@ namespace Content.Server.Body.Systems
                 if (!_solutionQuery.Resolve(ent, ref ent.Comp3, logMissing: false))
                     return;
 
-                _solutionContainerSystem.TryGetSolution((ent, ent), solutionName, out soln, out solution);
+                _solutionContainerSystem.TryGetSolution(ent.Owner, solutionName, out soln, out solution);
                 solutionEntityUid = ent;
             }
 

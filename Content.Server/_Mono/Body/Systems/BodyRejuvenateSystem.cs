@@ -4,6 +4,7 @@ using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Body.Systems;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -17,6 +18,7 @@ namespace Content.Server._Mono.Body.Systems;
 public sealed partial class BodyRejuvenateSystem : EntitySystem
 {
     [Dependency] private SharedBodySystem _bodySystem = default!;
+    [Dependency] private MobStateSystem _mobStateSystem = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
@@ -91,6 +93,14 @@ public sealed partial class BodyRejuvenateSystem : EntitySystem
                 if (organComp.Body == bodyEntity.Owner)
                     continue;
 
+                // Never delete organs sitting in storage / on a table / in a crate.
+                if (_containerSystem.TryGetContainingContainer(organUid, out _))
+                    continue;
+
+                // Still attached to some other living body — leave alone.
+                if (organComp.Body != null && Exists(organComp.Body.Value) && !TerminatingOrDeleted(organComp.Body.Value))
+                    continue;
+
                 // Check if this organ originally belonged to this body
                 if (organComp.OriginalBody == bodyEntity.Owner)
                 {
@@ -127,6 +137,12 @@ public sealed partial class BodyRejuvenateSystem : EntitySystem
                 if (organComp.Body == bodyEntity.Owner)
                     continue;
 
+                if (_containerSystem.TryGetContainingContainer(organUid, out _))
+                    continue;
+
+                if (organComp.Body != null && Exists(organComp.Body.Value) && !TerminatingOrDeleted(organComp.Body.Value))
+                    continue;
+
                 // Check if this organ originally belonged to this body
                 if (organComp.OriginalBody == bodyEntity.Owner)
                 {
@@ -149,48 +165,31 @@ public sealed partial class BodyRejuvenateSystem : EntitySystem
 
     /// <summary>
     /// Checks if a body part was originally part of the specified body.
-    /// This is used to identify severed/gibbed parts that should be cleaned up.
+    /// Only deletes parts that still carry organs tagged with OriginalBody == this body.
+    /// Loose fauna parts (carp tails, etc.) must NOT be assumed to belong to a rejuvenating humanoid.
     /// </summary>
     private bool WasPartOfBody(EntityUid partUid, EntityUid bodyUid, BodyPartComponent? partComp = null)
     {
         if (!Resolve(partUid, ref partComp, logMissing: false))
             return false;
 
-        // Check if the part has any organs that originally belonged to this body
+        // Never wipe parts sitting in storage / on a table / in a crate.
+        if (_containerSystem.TryGetContainingContainer(partUid, out _))
+            return false;
+
+        // Only clean parts that still contain organs clearly tagged as belonging to this body.
         foreach (var organSlotId in partComp.Organs.Keys)
         {
             var containerId = SharedBodySystem.GetOrganContainerId(organSlotId);
-            if (_containerSystem.TryGetContainer(partUid, containerId, out var container))
-            {
-                foreach (var organUid in container.ContainedEntities)
-                {
-                    if (TryComp<OrganComponent>(organUid, out var organComp)
-                        && organComp.OriginalBody == bodyUid)
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
+            if (!_containerSystem.TryGetContainer(partUid, containerId, out var container))
+                continue;
 
-        // More aggressive cleanup: if the part is not in a container (i.e., lying on the ground)
-        // and has the same prototype structure as what the body should have, assume it belongs to this body
-        if (!_containerSystem.TryGetContainingContainer(partUid, out var _))
-        {
-            // Check if this part type matches what should be on this body
-            if (TryComp<BodyComponent>(bodyUid, out var bodyComp) && bodyComp.Prototype != null)
+            foreach (var organUid in container.ContainedEntities)
             {
-                if (_prototypeManager.TryIndex(bodyComp.Prototype.Value, out BodyPrototype? prototype))
+                if (TryComp<OrganComponent>(organUid, out var organComp)
+                    && organComp.OriginalBody == bodyUid)
                 {
-                    // If this part type exists in the body prototype, it's likely from this body
-                    foreach (var slot in prototype.Slots.Values)
-                    {
-                        if (slot.Part != null && HasComp<BodyPartComponent>(partUid))
-                        {
-                            // This is a more aggressive approach - delete loose body parts near the body
-                            return true;
-                        }
-                    }
+                    return true;
                 }
             }
         }
@@ -204,17 +203,9 @@ public sealed partial class BodyRejuvenateSystem : EntitySystem
     /// </summary>
     private void EnsureProperMobState(Entity<BodyComponent> bodyEntity)
     {
-        // The rejuvenate event should have already handled damage and mob state,
-        // but we need to make sure the body is properly recognized as complete
-
-        // Force a body update to recalculate mob state based on new parts
-        var rootPart = _bodySystem.GetRootPartOrNull(bodyEntity, bodyEntity.Comp);
-        if (rootPart != null)
-        {
-            // Trigger a recursive body update to ensure all new parts are properly registered
-            var updateEvent = new BodyPartAddedEvent("rejuvenate_update", rootPart.Value);
-            RaiseLocalEvent(bodyEntity, ref updateEvent);
-        }
+        // Restored parts already raise BodyPartAddedEvent when attached. Raising it again
+        // for the existing root reapplies cached markings, duplicating animated tails.
+        _mobStateSystem.UpdateMobState(bodyEntity.Owner);
     }
 
     /// <summary>

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Examine;
@@ -17,7 +17,6 @@ namespace Content.Shared.Contraband;
 public sealed partial class ContrabandSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _configuration = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private SharedIdCardSystem _id = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
 
@@ -62,10 +61,10 @@ public sealed partial class ContrabandSystem : EntitySystem
         // two strings:
         // one, the actual informative 'this is restricted'
         // then, the 'you can/shouldn't carry this around' based on the ID the user is wearing
-        var localizedDepartments = component.AllowedDepartments.Select(p => Loc.GetString("contraband-department-plural", ("department", Loc.GetString(_proto.Index(p).Name))));
-        var jobs = component.AllowedJobs.Select(p => _proto.Index(p).LocalizedName).ToArray();
+        var localizedDepartments = component.AllowedDepartments.Select(p => Loc.GetString("contraband-department-plural", ("department", Loc.GetString(ProtoMan.Index(p).Name))));
+        var jobs = component.AllowedJobs.Select(p => ProtoMan.Index(p).LocalizedName).ToArray();
         var localizedJobs = jobs.Select(p => Loc.GetString("contraband-job-plural", ("job", p)));
-        var severity = _proto.Index(component.Severity);
+        var severity = ProtoMan.Index(component.Severity);
         String? departmentExamineMessage = null;
         if (severity.ShowDepartmentsAndJobs)
         {

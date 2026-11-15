@@ -10,7 +10,7 @@ ent-Magazine12_gaugeBeanbag = барабан боеприпасов (12 кали
 ent-Magazine12_gaugeBuckshot = барабан боеприпасов (12 калибр картечь)
 ent-Magazine12_gaugePractice = барабан боеприпасов (12 калибр учебные)
 ent-Magazine12_gaugeEmpty = барабан боеприпасов (12 калибр)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой
 ent-Magazine12_gaugeSlug = барабан боеприпасов (12 калибр пуля)
 

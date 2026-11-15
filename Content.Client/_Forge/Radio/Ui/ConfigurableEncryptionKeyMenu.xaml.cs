@@ -9,7 +9,7 @@ namespace Content.Client._Forge.Radio.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class ConfigurableEncryptionKeyMenu : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     public event Action<string>? OnFrequencyChanged;
 

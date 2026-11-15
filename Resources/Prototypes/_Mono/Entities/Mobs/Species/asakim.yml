@@ -16,7 +16,6 @@
     - Snout
     #    - HeadTop # WWDP - Because visible horns its cool
     - HeadSide
-  - type: Hunger
   - type: Puller
     needsHands: false
   - type: MovementSpeedModifier
@@ -41,7 +40,6 @@
   #   scale: 1.2, 1.2
   - type: PlayerToolModifier
     pryTimeMultiplier: 0.7
-  - type: Thirst
   - type: Icon
     sprite: _Mono/Mobs/Species/Asakim/parts.rsi
     state: full

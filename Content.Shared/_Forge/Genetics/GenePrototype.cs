@@ -96,6 +96,13 @@ public sealed partial class GenePrototype : IPrototype
     [DataField]
     public Color OverlayColor { get; private set; } = Color.Transparent;
 
+    /// <summary>
+    /// Paints the owner's screen. Only vision defects should set this.
+    /// A body rewrite or a useful gene must not cloud sight.
+    /// </summary>
+    [DataField]
+    public bool ScreenTint { get; private set; }
+
     [DataField]
     public Color GlowColor { get; private set; } = Color.Transparent;
 

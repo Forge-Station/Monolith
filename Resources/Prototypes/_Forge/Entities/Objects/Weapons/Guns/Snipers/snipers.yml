@@ -56,8 +56,15 @@
     soundRack:
       path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
   - type: SpeedModifiedOnWield
-    walkModifier: 0.55
+    walkModifier: 0.7
     sprintModifier: 0.55
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: WieldDelay
+    baseDelay: 0.75
+    modifiedDelay: 0.75
+    preventFiring: true
   - type: CursorOffsetRequiresWield
   - type: MagazineVisuals
     magState: mag

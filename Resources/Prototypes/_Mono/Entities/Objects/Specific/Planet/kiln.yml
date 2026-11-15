@@ -106,18 +106,18 @@
         amount: 10
         doAfter: 1
       - tag: RockMaterial
-        name: a rock
+        name: construction-required-rock # Forge-change
         icon:
           sprite: _Mono/Objects/Misc/desert_stone.rsi
           state: icon
       - tag: RockMaterial
-        name: a rock
+        name: construction-required-rock # Forge-change
         icon:
           sprite: _Mono/Objects/Misc/desert_stone.rsi
           state: icon
         doAfter: 4
       - tag: RockMaterial
-        name: a rock
+        name: construction-required-rock # Forge-change
         icon:
           sprite: _Mono/Objects/Misc/desert_stone.rsi
           state: icon

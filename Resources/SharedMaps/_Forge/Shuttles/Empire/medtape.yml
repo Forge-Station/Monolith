@@ -1493,7 +1493,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: ClothingOuterHardsuitRI22
+- proto: ClothingOuterHardsuitRI14
   entities:
   - uid: 145
     components:

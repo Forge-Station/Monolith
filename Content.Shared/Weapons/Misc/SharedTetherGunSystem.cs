@@ -139,15 +139,24 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
         gunUid = null;
         gun = null;
 
-        if (!TryComp<HandsComponent>(user, out var hands) ||
-            !TryComp(hands.ActiveHandEntity, out gun) ||
-            _container.IsEntityInContainer(user))
-        {
+        if (_container.IsEntityInContainer(user))
             return false;
+
+        // Prefer a held tether gun, then a body-mounted one (telekinesis gene, etc.).
+        if (TryComp<HandsComponent>(user, out var hands) &&
+            TryComp(hands.ActiveHandEntity, out gun))
+        {
+            gunUid = hands.ActiveHandEntity.Value;
+            return true;
         }
 
-        gunUid = hands.ActiveHandEntity.Value;
-        return true;
+        if (TryComp(user, out gun))
+        {
+            gunUid = user;
+            return true;
+        }
+
+        return false;
     }
 
     private void OnTetherActivate(EntityUid uid, TetherGunComponent component, ActivateInWorldEvent args)
@@ -167,6 +176,52 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
             return false;
 
         StartTether(gun, component, target, user);
+        return true;
+    }
+
+    /// <summary>
+    /// Drops a tethered target (lands it). Used by telekinesis and similar abilities.
+    /// </summary>
+    public bool TryStopTether(EntityUid gun, BaseForceGunComponent component, bool land = true)
+    {
+        if (component.Tethered == null)
+            return false;
+
+        StopTether(gun, component, land);
+        return true;
+    }
+
+    /// <summary>
+    /// Launches the currently tethered target toward <paramref name="target"/> like a force gun.
+    /// </summary>
+    public bool TryLaunchTethered(EntityUid gun, ForceGunComponent component, EntityCoordinates target)
+    {
+        return TryLaunchTethered(gun, component, target, component.ThrowForce, component.ThrowDistance, component.LaunchSound);
+    }
+
+    /// <summary>
+    /// Launches a tethered target for body-mounted tethers (telekinesis) that are not ForceGuns.
+    /// </summary>
+    public bool TryLaunchTethered(
+        EntityUid gun,
+        BaseForceGunComponent component,
+        EntityCoordinates target,
+        float throwForce,
+        float throwDistance,
+        SoundSpecifier? launchSound = null)
+    {
+        if (component.Tethered == null)
+            return false;
+
+        if (!target.TryDistance(EntityManager, TransformSystem, Transform(gun).Coordinates, out var distance) ||
+            distance > throwDistance)
+            return false;
+
+        var tethered = component.Tethered;
+        StopTether(gun, component, land: false);
+        _throwing.TryThrow(tethered.Value, target, throwForce, playSound: false);
+        if (launchSound != null)
+            _audio.PlayPredicted(launchSound, gun, null);
         return true;
     }
 

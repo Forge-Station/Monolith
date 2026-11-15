@@ -4,6 +4,7 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.RandomMetadata;
 using Content.Shared._Forge.CCVars;
+using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
 using Content.Shared._Forge.Silicons.StationAi;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -25,21 +26,21 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.Silicons.StationAi;
 
-public sealed class StationAiPersonalitySystem : EntitySystem
+public sealed partial class StationAiPersonalitySystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _adminLog = default!;
-    [Dependency] private readonly IConfigurationManager _configuration = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly GhostRoleSystem _ghostRoles = default!;
-    [Dependency] private readonly RandomMetadataSystem _randomMetadata = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedStationAiSystem _stationAi = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private IConfigurationManager _configuration = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _players = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
+    [Dependency] private MetaDataSystem _metadata = default!;
+    [Dependency] private MindSystem _mind = default!;
+    [Dependency] private GhostRoleSystem _ghostRoles = default!;
+    [Dependency] private RandomMetadataSystem _randomMetadata = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStationAiSystem _stationAi = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     private static readonly TimeSpan CustomizationCooldown = TimeSpan.FromSeconds(60);
     private readonly Dictionary<EntityUid, SsdRelease> _ssdReleases = new();
@@ -54,6 +55,7 @@ public sealed class StationAiPersonalitySystem : EntitySystem
         SubscribeLocalEvent<StationAiPersonalityComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<StationAiPersonalityComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<StationAiPersonalityComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<AiRemoteControllerComponent, PlayerDetachedEvent>(OnRemotePlayerDetached);
         SubscribeLocalEvent<StationAiPersonalityComponent, ComponentShutdown>(OnPersonalityShutdown);
         SubscribeLocalEvent<StationAiHeldComponent, OpenStationAiCustomizationEvent>(OnOpenCustomization);
         SubscribeLocalEvent<StationAiHeldComponent, StationAiCustomizationApplyMessage>(OnApplyCustomization);
@@ -144,17 +146,28 @@ public sealed class StationAiPersonalitySystem : EntitySystem
     private void OnPlayerDetached(Entity<StationAiPersonalityComponent> ent, ref PlayerDetachedEvent args)
     {
         RaiseAvailabilityChanged(ent.Owner, true);
-        if (args.Player.Status is not (SessionStatus.Disconnected or SessionStatus.Zombie) ||
-            !TryGetOwnedMind(ent.Owner, out var mind) ||
-            mind.Comp.UserId != args.Player.UserId)
+        ScheduleSsdRelease(ent.Owner, args.Player);
+    }
+
+    private void OnRemotePlayerDetached(Entity<AiRemoteControllerComponent> ent, ref PlayerDetachedEvent args)
+    {
+        if (ent.Comp.AiHolder is { } brain)
+            ScheduleSsdRelease(brain, args.Player);
+    }
+
+    private void ScheduleSsdRelease(EntityUid brain, ICommonSession player)
+    {
+        if (player.Status is not (SessionStatus.Disconnected or SessionStatus.Zombie) ||
+            !TryGetOwnedMind(brain, out var mind) ||
+            mind.Comp.UserId != player.UserId)
         {
             return;
         }
 
         var timeout = Math.Max(1f, _configuration.GetCVar(ForgeCCVars.StationAiSsdGracePeriod));
-        _ssdReleases[ent.Owner] = new SsdRelease(
+        _ssdReleases[brain] = new SsdRelease(
             mind.Owner,
-            args.Player.UserId,
+            player.UserId,
             _timing.CurTime + TimeSpan.FromSeconds(timeout));
     }
 

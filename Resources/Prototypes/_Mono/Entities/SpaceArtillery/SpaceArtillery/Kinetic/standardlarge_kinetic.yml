@@ -1,4 +1,4 @@
-﻿
+
 # Cyrexa 220mm
 
 - type: entity
@@ -20,7 +20,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Fixtures
@@ -139,7 +139,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Fixtures
@@ -224,7 +224,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Fixtures
@@ -307,7 +307,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Fixtures
@@ -386,7 +386,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Fixtures
@@ -468,7 +468,7 @@
     maxCharge: 12000
     startingCharge: 12000
   - type: ExaminableBattery
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Fixtures
     fixtures:
@@ -550,7 +550,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Fixtures
     fixtures:
@@ -626,7 +626,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Fixtures
     fixtures:
@@ -710,7 +710,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Fixtures
     fixtures:

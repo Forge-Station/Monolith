@@ -10,6 +10,10 @@
 - changed-files:
   - any-glob-to-any-file: "Resources/Maps/_NF/Bluespace/**/*.yml" # Grid Files
 
+"Map-Event":
+- changed-files:
+  - any-glob-to-any-file: "Resources/Maps/_Forge/Event/**/*.yml" # Grid Files
+
 "Map-Dungeon":
 - changed-files:
   - any-glob-to-any-file: "Resources/Maps/_NF/Dungeon/**/*.yml" # Grid Files
@@ -17,20 +21,27 @@
 "Map-Outpost":
 - changed-files:
   - any-glob-to-any-file:
-    - "Resources/Maps/_NF/Outpost/*.yml" # Map Files
-    - "Resources/Prototypes/_MF/Maps/Outpost/*.yml" # Prototypes Files
+    - "Resources/Maps/_Forge/Outpost/*.yml" # Map Files
+    - "Resources/Prototypes/_Forge/Outpost/*.yml" # Prototypes Files
 
 "Map-Shuttle":
 - changed-files:
   - any-glob-to-any-file:
-    - "Resources/Maps/_NF/Shuttles/**/*.yml" # Grid Files
-    - "Resources/Prototypes/_NF/Shipyard/**/*.yml" # Prototypes Files
+    - "Resources/SharedMaps/_Forge/Shuttles/**/*.yml" # Grid Files
+    - "Resources/Prototypes/_Forge/Shipyard/**/*.yml" # Prototypes Files
+    - "Resources/SharedMaps/_Mono/Shuttles/**/*.yml" # Grid Files
+    - "Resources/Prototypes/_Mono/Shipyard/**/*.yml" # Prototypes Files
 
 "Map-POI":
 - changed-files:
   - any-glob-to-any-file:
+    - "Resources/Maps/_Forge/POI/**/*.yml" # Grid Files
+    - "Resources/Prototypes/_Forge/PointsOflnterest/**/*.yml" # Prototypes Files
+    - "Resources/Maps/_Mono/POI/**/*.yml" # Grid Files
+    - "Resources/Prototypes/_Mono/PointsOfInterest/**/*.yml" # Prototypes Files
     - "Resources/Maps/_NF/POI/**/*.yml" # Grid Files
-    - "Resources/Prototypes/_MF/Maps/POI/**/*.yml" # Prototypes Files
+    - "Resources/Prototypes/_NF/PointsOfInterest/**/*.yml" # Prototypes Files
+
 
 "Sprites":
 - changed-files:
@@ -73,8 +84,9 @@
   - changed-files:
     - any-glob-to-any-file: "**/*.yml"
     - all-globs-to-any-file:
-      - "!Resources/Maps/_NF/**/*.yml"
-      - "!Resources/Prototypes/Maps/_NF/**/*.yml"
+      - "!Resources/Maps/**/*.yml"
+      - "!Resources/Prototypes/Maps/**/*.yml"
+      - "!Resources/SharedMaps/**/*.yml"
 
 "DB Migration":
 - changed-files:

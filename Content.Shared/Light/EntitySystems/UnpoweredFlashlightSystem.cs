@@ -16,7 +16,6 @@ public sealed partial class UnpoweredFlashlightSystem : EntitySystem
 {
     // TODO: Split some of this to ItemTogglePointLight
 
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private ActionContainerSystem _actionContainer = default!;
@@ -86,7 +85,7 @@ public sealed partial class UnpoweredFlashlightSystem : EntitySystem
         if (!_light.TryGetLight(uid, out var light))
             return;
 
-        if (_prototypeManager.TryIndex(component.EmaggedColorsPrototype, out var possibleColors))
+        if (ProtoMan.TryIndex(component.EmaggedColorsPrototype, out var possibleColors))
         {
             var pick = _random.Pick(possibleColors.Colors.Values);
             _light.SetColor(uid, pick, light);

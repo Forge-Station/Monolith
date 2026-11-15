@@ -23860,57 +23860,6 @@ entities:
       powerLoad: 5
     - type: Battery
       startingCharge: 0
-- proto: ComputerBlackMarketBankATM
-  entities:
-  - uid: 3612
-    components:
-    - type: Transform
-      pos: 20.5,13.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
-  - uid: 3613
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 1.5,6.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
-  - uid: 3614
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,6.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
-  - uid: 3615
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,10.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
-  - uid: 3616
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 1.5,10.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
 - proto: ComputerCrewMonitoring
   entities:
   - uid: 3617
@@ -45214,18 +45163,6 @@ entities:
     - type: Transform
       pos: 14.5,21.5
       parent: 1
-- proto: StationAdminBankATMBlackMarket
-  entities:
-  - uid: 6586
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -4.5,41.5
-      parent: 1
-    - type: ApcPowerReceiver
-      powerLoad: 5
-    - type: Battery
-      startingCharge: 0
 - proto: StationAiUploadComputer
   entities:
   - uid: 6587

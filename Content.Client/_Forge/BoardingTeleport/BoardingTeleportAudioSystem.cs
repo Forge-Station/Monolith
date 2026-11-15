@@ -7,10 +7,10 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client._Forge.BoardingTeleport;
 
-public sealed class BoardingTeleportAudioSystem : EntitySystem
+public sealed partial class BoardingTeleportAudioSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

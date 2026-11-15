@@ -15,7 +15,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
-using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -61,7 +61,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
     private const int MaxSquadNameLength = 16;
     private const int MaxSquadDescriptionLength = 512;
 
-    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly ServerStationSystem _station = default!;
     [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -1151,22 +1151,24 @@ public sealed partial class SecApartmentSystem : EntitySystem
         if (member.OwnerUid == null && member.SensorStatus == null)
             return null;
 
-        var status = member.SensorStatus == null
-            ? null
-            : new SuitSensorStatus(
-                member.SensorStatus.SuitSensorUid,
-                member.SensorStatus.Name,
-                member.SensorStatus.Job,
-                member.SensorStatus.JobIcon,
-                member.SensorStatus.JobDepartments,
-                member.SensorStatus.LocationName)
+        SuitSensorStatus? status = null;
+        if (member.SensorStatus is { } sensorStatus)
+        {
+            status = new SuitSensorStatus(
+                sensorStatus.SuitSensorUid,
+                sensorStatus.Name,
+                sensorStatus.Job,
+                sensorStatus.JobIcon,
+                sensorStatus.JobDepartments,
+                sensorStatus.LocationName)
             {
                 Timestamp = _gameTiming.CurTime,
-                Coordinates = member.SensorStatus.Coordinates,
+                Coordinates = sensorStatus.Coordinates,
                 IsAlive = false,
-                TotalDamage = member.SensorStatus.TotalDamage,
-                TotalDamageThreshold = member.SensorStatus.TotalDamageThreshold
+                TotalDamage = sensorStatus.TotalDamage,
+                TotalDamageThreshold = sensorStatus.TotalDamageThreshold
             };
+        }
 
         return new CrewMemberInfo(
             member.MemberId,
@@ -1475,7 +1477,7 @@ public sealed partial class SecApartmentSystem : EntitySystem
                 continue;
             }
 
-            var total = TimeSpan.FromSeconds(timerComp.Delay);
+            var total = timerComp.Delay;
             TimeSpan remaining;
 
             if (TryComp<ActiveSignalTimerComponent>(timerUid, out var activeComp))

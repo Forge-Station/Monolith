@@ -26,7 +26,7 @@
   - type: FireControlRotate
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 700
   - type: DeviceLinkSink
     ports:
@@ -91,7 +91,7 @@
     maxCharge: 40000
     startingCharge: 40000
   - type: ExaminableBattery
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Gun
     fireRate: 2.5
@@ -170,7 +170,7 @@
     maxCharge: 12000
     startingCharge: 12000
   - type: ExaminableBattery
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Fixtures
     fixtures:
@@ -269,7 +269,7 @@
     maxCharge: 15000
     startingCharge: 15000
   - type: ExaminableBattery
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Fixtures
     fixtures:

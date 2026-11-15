@@ -18,7 +18,7 @@
   assignedCompany: MD
   canBeAntag: false
   accessGroups:
-  - GeneralAccess
+  - GeneralTraumaAccess #Forge-Change
   - Medical
   special:
   - !type:AddImplantSpecial

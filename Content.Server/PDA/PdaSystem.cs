@@ -12,9 +12,16 @@ using Content.Shared._DV.CCVars; // DeltaV - PDA date
 using Content.Shared.Access.Components;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.Chat;
+using Content.Shared.DeviceNetwork;
+using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.Implants;
+using Content.Shared.Inventory;
 using Content.Shared.Light;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.PDA;
+using Content.Shared.PDA.Ringer;
+using Content.Shared.Silicons.Borgs.Components; // DeltaV - silicon PDAs
+using Content.Shared.Silicons.StationAi; // DeltaV - silicon PDAs
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration; // DeltaV - PDA date
@@ -36,7 +43,7 @@ namespace Content.Server.PDA
         [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
         [Dependency] private InstrumentSystem _instrument = default!;
         [Dependency] private RingerSystem _ringer = default!;
-        [Dependency] private StationSystem _station = default!;
+        [Dependency] private ServerStationSystem _station = default!;
         [Dependency] private StoreSystem _store = default!;
         [Dependency] private IChatManager _chatManager = default!;
         [Dependency] private UserInterfaceSystem _ui = default!;
@@ -107,7 +114,8 @@ namespace Content.Server.PDA
                 {
                     if (comp.ContainedId == idCard)
                     {
-                        SetOwner(uid, comp, ev.Uid, ev.NewName);
+                        comp.OwnerName = ev.NewName;
+                        Dirty(uid, comp);
                     }
                 }
             }
@@ -153,13 +161,6 @@ namespace Content.Server.PDA
             UpdatePdaUi(uid, pda);
         }
 
-        public void SetOwner(EntityUid uid, PdaComponent pda, EntityUid owner, string ownerName)
-        {
-            pda.OwnerName = ownerName;
-            pda.PdaOwner = owner;
-            UpdatePdaUi(uid, pda);
-        }
-
         private void OnStationRenamed(StationRenamedEvent ev)
         {
             UpdateAllPdaUisOnStation();
@@ -190,9 +191,12 @@ namespace Content.Server.PDA
         {
             _ringer.RingerPlayRingtone(ent.Owner);
 
-            if (!_containerSystem.TryGetContainingContainer((ent, null, null), out var container)
-                || !TryComp<ActorComponent>(container.Owner, out var actor))
+            // Begin DeltaV - PDAs can be self-viewed
+            if (!(TryComp<ActorComponent>(ent, out var actor) ||
+                (_containerSystem.TryGetContainingContainer((ent, null, null), out var container)
+                && TryComp<ActorComponent>(container.Owner, out actor))))
                 return;
+            // End DeltaV - PDAs can be self-viewed
 
             var message = FormattedMessage.EscapeText(args.Message);
             var wrappedMessage = Loc.GetString("pda-notification-message",
@@ -260,6 +264,26 @@ namespace Content.Server.PDA
                 }
             }
 
+
+            // Begin DeltaV - PDAs can be silicons
+            var owner = id?.FullName;
+            var job = id?.LocalizedJobTitle;
+            if (HasComp<BorgChassisComponent>(uid))
+            {
+                if (TryComp<BorgSwitchableTypeComponent>(uid, out var switchable) && switchable.SelectedBorgType is { } borgType)
+                    job = Loc.GetString($"borg-type-{borgType}-transponder");
+                else
+                    job = Loc.GetString("borg-type-any-transponder");
+
+                owner = MetaData(uid).EntityName;
+            }
+            if (HasComp<StationAiHeldComponent>(uid))
+            {
+                job = Loc.GetString($"station-ai-transponder");
+                owner = MetaData(uid).EntityName;
+            }
+            // End DeltaV - PDAs can be silicons
+
             var state = new PdaUpdateState(
                 programs,
                 GetNetEntity(loader.ActiveProgram),
@@ -269,8 +293,8 @@ namespace Content.Server.PDA
                 new PdaIdInfoText
                 {
                     ActualOwnerName = pda.OwnerName,
-                    IdOwner = id?.FullName,
-                    JobTitle = id?.LocalizedJobTitle,
+                    IdOwner = owner,
+                    JobTitle = job,
                     CompanyName = companyName,
                     CompanyColor = companyColor,
                     CurrentDate = pda.CurrentDate, // DeltaV - PDA date
@@ -394,7 +418,7 @@ namespace Content.Server.PDA
 
             if (TryComp(uid, out DeviceNetworkComponent? deviceNetworkComponent))
             {
-                address = deviceNetworkComponent?.Address;
+                address = DeviceLocalizationHelpers.GetAddressFromId(deviceNetworkComponent);
             }
 
             return address;

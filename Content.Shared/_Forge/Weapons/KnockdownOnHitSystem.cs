@@ -4,10 +4,10 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._Forge.Weapons;
 
-public sealed class KnockdownOnHitSystem : EntitySystem
+public sealed partial class KnockdownOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

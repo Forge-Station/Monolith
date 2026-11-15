@@ -81,12 +81,21 @@ public sealed partial class ShipAccessReaderSystem : EntitySystem
     /// <summary>
     /// Checks if a user has access to a ship entity by verifying they have the correct ship deed.
     /// </summary>
+    public bool HasShipAccess(EntityUid user, EntityUid target, ShipAccessReaderComponent component, bool silent = false)
+    {
+        return HasShipAccess(user, target, silent, component);
+    }
+
+    /// <summary>
+    /// Checks if a user has access to a ship entity by verifying they have the correct ship deed.
+    /// If the target is not on a deeded ship, access is granted.
+    /// </summary>
     /// <param name="user">The user trying to access the entity</param>
     /// <param name="target">The entity being accessed</param>
-    /// <param name="component">The ship access reader component</param>
     /// <param name="silent">Whether to suppress popup messages</param>
+    /// <param name="component">Optional reader used for denied popup settings</param>
     /// <returns>True if access is granted, false otherwise</returns>
-    public bool HasShipAccess(EntityUid user, EntityUid target, ShipAccessReaderComponent component, bool silent = false)
+    public bool HasShipAccess(EntityUid user, EntityUid target, bool silent = false, ShipAccessReaderComponent? component = null)
     {
         // Allow admin ghosts to bypass ship access checks
         if (TryComp<GhostComponent>(user, out var ghost) && ghost.CanGhostInteract)
@@ -216,9 +225,11 @@ public sealed partial class ShipAccessReaderSystem : EntitySystem
         // Log.Debug("ShipAccess: User {0} denied access to target {1} on grid {2}", user, target, gridUid);
 
         // Access denied - show popup if not silent
-        if (!silent && component.ShowDeniedPopup)
+        var showPopup = component?.ShowDeniedPopup ?? true;
+        if (!silent && showPopup)
         {
-            _popup.PopupClient(Loc.GetString(component.DeniedMessage), target, user);
+            var message = component?.DeniedMessage ?? "ship-access-denied";
+            _popup.PopupClient(Loc.GetString(message), target, user);
         }
 
         return false;

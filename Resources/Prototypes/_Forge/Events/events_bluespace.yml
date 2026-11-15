@@ -1,57 +1,57 @@
 #CorvaxForge (by. Mersen and autsaider_m)
-- type: entity
-  id: BluespaceSalvage
-  parent: BaseStationEventShortDelay
-  name: NT Bluespace Monitoring # This name shows up in the radio messages.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: StationEvent
-    # TODO: add path to  start warning and end Voiceover
-    startRadioAnnouncement: station-event-bluespace-scrap-start-announcement
-    startRadioAnnouncementChannel: Engineering
-    warningRadioAnnouncement: station-event-bluespace-scrap-warning-announcement
-    warningRadioAnnouncementChannel: Engineering
-    endRadioAnnouncement: station-event-bluespace-scrap-end-announcement
-    endRadioAnnouncementChannel: Engineering
-    weight: 5
-    duration: 1800 # 30 minutes
-    maxDuration: 1800 # 30 minutes
-  - type: BluespaceErrorRule
-    groups:
-      grid: !type:GridSpawnGroup
-        nameDataset: NamesScrap
-        nameDatasetType: Nanotrasen # they're shuttles
-        minCount: 2
-        maxCount: 3
-        minimumDistance: 1000
-        maximumDistance: 2000
-        addComponents:
-        - type: IFF
-          color: "#AAAAAA"
-        - type: LinkedLifecycleGridParent
-        - type: ProtectedGrid
-          preventArtifactTriggers: true
-        - type: PreventPilot
-        paths:
+#- type: entity
+#  id: BluespaceSalvage
+#  parent: BaseStationEventShortDelay
+#  name: NT Bluespace Monitoring # This name shows up in the radio messages.
+#  categories: [ HideSpawnMenu ]
+#  components:
+#  - type: StationEvent
+#    # TODO: add path to  start warning and end Voiceover
+#    startRadioAnnouncement: station-event-bluespace-scrap-start-announcement
+#    startRadioAnnouncementChannel: Engineering
+#    warningRadioAnnouncement: station-event-bluespace-scrap-warning-announcement
+#    warningRadioAnnouncementChannel: Engineering
+#    endRadioAnnouncement: station-event-bluespace-scrap-end-announcement
+#    endRadioAnnouncementChannel: Engineering
+#    weight: 5
+#    duration: 1800 # 30 minutes
+#    maxDuration: 1800 # 30 minutes
+#  - type: BluespaceErrorRule
+#    groups:
+#      grid: !type:GridSpawnGroup
+#        nameDataset: NamesScrap
+#        nameDatasetType: Nanotrasen # they're shuttles
+#        minCount: 2
+#        maxCount: 3
+#        minimumDistance: 1000
+#        maximumDistance: 2000
+#        addComponents:
+#        - type: IFF
+#          color: "#AAAAAA"
+#        - type: LinkedLifecycleGridParent
+#        - type: ProtectedGrid
+#          preventArtifactTriggers: true
+#        - type: PreventPilot
+#        paths:
 #        - /Maps/_Forge/Shuttles/Scrap/canister.yml # Too small
-        - /Maps/_Forge/Shuttles/Archive/Scrap/disciple.yml
-        - /Maps/_Forge/Shuttles/Archive/Scrap/nugget.yml
-        - /Maps/_Forge/Shuttles/Archive/Scrap/orange.yml
-        - /Maps/_Forge/Shuttles/Archive/Scrap/point.yml
-        - /Maps/_Forge/Shuttles/Archive/Scrap/tide.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedHauler.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedBarge.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedCourser.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedComet.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedCrescent.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedInv.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedSprinter.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedInquisitor.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedChisel.yml
-        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/dest_mercenary_shuttle.yml
-  - type: ActiveRadio
-    channels:
-    - Engineering
+#        - /Maps/_Forge/Shuttles/Archive/Scrap/disciple.yml
+#        - /Maps/_Forge/Shuttles/Archive/Scrap/nugget.yml
+#        - /Maps/_Forge/Shuttles/Archive/Scrap/orange.yml
+#        - /Maps/_Forge/Shuttles/Archive/Scrap/point.yml
+#        - /Maps/_Forge/Shuttles/Archive/Scrap/tide.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedHauler.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedBarge.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedCourser.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedComet.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedCrescent.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedInv.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedSprinter.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedInquisitor.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/RuinedChisel.yml
+#        - /Maps/_Forge/Events/Periodic/DestroyedShuttles/dest_mercenary_shuttle.yml
+#  - type: ActiveRadio
+#    channels:
+#    - Engineering
 
 - type: entity
   id: BluespaceSyndicate

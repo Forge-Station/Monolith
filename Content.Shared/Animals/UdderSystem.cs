@@ -5,9 +5,11 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Nutrition.Prototypes;
 using Content.Shared.Popups;
 using Content.Shared.Udder;
 using Content.Shared.Verbs;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Animals;
@@ -17,7 +19,7 @@ namespace Content.Shared.Animals;
 /// </summary>
 public sealed partial class UdderSystem : EntitySystem
 {
-    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
@@ -59,13 +61,15 @@ public sealed partial class UdderSystem : EntitySystem
                 continue;
 
             // Actually there is food digestion so no problem with instant reagent generation "OnFeed"
-            if (EntityManager.TryGetComponent(uid, out HungerComponent? hunger))
+            if (TryComp<SatiationComponent>(uid, out var satiation))
             {
                 // Is there enough nutrition to produce reagent?
-                if (_hunger.GetHungerThreshold(hunger) < HungerThreshold.Okay)
+                if (!_satiation.IsValueInRange((uid, satiation), SatiationSystem.Hunger, above: udder.MinHungerThreshold, hypotheticalValueDelta: -udder.HungerUsage))
+                {
                     continue;
+                }
 
-                _hunger.ModifyHunger(uid, -udder.HungerUsage, hunger);
+                _satiation.ModifyValue((uid, satiation), SatiationSystem.Hunger, -udder.HungerUsage);
             }
 
             //TODO: toxins from bloodstream !?

@@ -37,3 +37,31 @@ ent-MechDurandTSF = { ent-MechDurand } TSF
     .desc = { ent-MechDurand.desc }
 ent-MechGygaxTSF = { ent-MechGygax } TSF
     .desc = { ent-MechGygax.desc }
+
+ent-MechGygaxPDV = { ent-MechGygax }
+    .desc = { ent-MechGygax.desc }
+    .suffix = ПДВ
+
+ent-MechDurandPDV = { ent-MechDurand }
+    .desc = { ent-MechDurand.desc }
+    .suffix = ПДВ
+
+ent-AFInterceptorPDV = { ent-AFInterceptor }
+    .desc = { ent-AFInterceptor.desc }
+    .suffix = ПДВ
+
+ent-AFInterceptorMPDV = { ent-AFInterceptorM }
+    .desc = { ent-AFInterceptorM.desc }
+    .suffix = ПДВ
+
+ent-AFFlailPDV = { ent-AFFlail }
+    .desc = { ent-AFFlail.desc }
+    .suffix = ПДВ
+
+ent-AFFlailEPDV = { ent-AFFlailE }
+    .desc = { ent-AFFlailE.desc }
+    .suffix = ПДВ
+
+ent-AFMacePDV = { ent-AFMace }
+    .desc = { ent-AFMace.desc }
+    .suffix = ПДВ

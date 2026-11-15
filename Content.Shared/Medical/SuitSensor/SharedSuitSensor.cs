@@ -1,11 +1,21 @@
+using Content.Shared.DeviceNetwork;
 using Content.Shared.DoAfter;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Medical.SuitSensor;
+namespace Content.Shared.Medical.SuitSensors;
 
-[Serializable, NetSerializable]
-public sealed class SuitSensorStatus
+/// <summary>
+/// A network payload that contains <see cref="SuitSensorStatus"/>.
+/// </summary>
+public partial record struct SuitSensorStatusPayload : INetworkPayload
+{
+    [DataField]
+    public SuitSensorStatus Data;
+}
+
+[DataDefinition, Serializable, NetSerializable]
+public partial struct SuitSensorStatus : IEquatable<SuitSensorStatus>
 {
     public SuitSensorStatus(NetEntity suitSensorUid, string name, string job, string jobIcon, List<string> jobDepartments, string locationName)
     {
@@ -28,7 +38,52 @@ public sealed class SuitSensorStatus
     public int? TotalDamageThreshold;
     public float? DamagePercentage => TotalDamageThreshold == null || TotalDamage == null ? null : TotalDamage / (float) TotalDamageThreshold;
     public NetCoordinates? Coordinates;
-	public string LocationName;
+    public string LocationName;
+
+    public bool Equals(SuitSensorStatus other)
+    {
+        return Timestamp.Equals(other.Timestamp)
+               && SuitSensorUid.Equals(other.SuitSensorUid)
+               && Name == other.Name
+               && Job == other.Job
+               && JobIcon == other.JobIcon
+               && IsAlive == other.IsAlive
+               && TotalDamage == other.TotalDamage
+               && TotalDamageThreshold == other.TotalDamageThreshold
+               && Nullable.Equals(Coordinates, other.Coordinates)
+               && LocationName == other.LocationName;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is SuitSensorStatus other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        var hashCode = new HashCode();
+        hashCode.Add(Timestamp);
+        hashCode.Add(SuitSensorUid);
+        hashCode.Add(Name);
+        hashCode.Add(Job);
+        hashCode.Add(JobIcon);
+        hashCode.Add(IsAlive);
+        hashCode.Add(TotalDamage);
+        hashCode.Add(TotalDamageThreshold);
+        hashCode.Add(Coordinates);
+        hashCode.Add(LocationName);
+        return hashCode.ToHashCode();
+    }
+
+    public static bool operator ==(SuitSensorStatus left, SuitSensorStatus right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(SuitSensorStatus left, SuitSensorStatus right)
+    {
+        return !left.Equals(right);
+    }
 }
 
 [Serializable, NetSerializable]
@@ -53,23 +108,6 @@ public enum SuitSensorMode : byte
     /// Sensor sends vitals status and GPS position
     /// </summary>
     SensorCords = 3
-}
-
-public static class SuitSensorConstants
-{
-    public const string NET_NAME = "name";
-    public const string NET_JOB = "job";
-    public const string NET_JOB_ICON = "jobIcon";
-    public const string NET_JOB_DEPARTMENTS = "jobDepartments";
-    public const string NET_IS_ALIVE = "alive";
-    public const string NET_TOTAL_DAMAGE = "vitals";
-    public const string NET_TOTAL_DAMAGE_THRESHOLD = "vitalsThreshold";
-    public const string NET_COORDINATES = "coords";
-    public const string NET_SUIT_SENSOR_UID = "uid";
-	public const string NET_LOCATION_NAME = "location"; // Frontier modification
-
-    ///Used by the CrewMonitoringServerSystem to send the status of all connected suit sensors to each crew monitor
-    public const string NET_STATUS_COLLECTION = "suit-status-collection";
 }
 
 [Serializable, NetSerializable]

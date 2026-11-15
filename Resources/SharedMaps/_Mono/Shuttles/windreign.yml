@@ -9216,7 +9216,7 @@ entities:
     - type: Transform
       pos: -9.229659,26.493763
       parent: 1
-- proto: GasDepositLocatorUnpowered
+- proto: GasDepositLocator
   entities:
   - uid: 861
     components:
@@ -15870,6 +15870,12 @@ entities:
       parent: 1
 - proto: WallReinforced
   entities:
+  - uid: 2491
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -6.5,20.5
+      parent: 1
   - uid: 359
     components:
     - type: Transform
@@ -17559,14 +17565,6 @@ entities:
     components:
     - type: Transform
       pos: -13.5,0.5
-      parent: 1
-- proto: WallReinforcedOutpost
-  entities:
-  - uid: 2491
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -6.5,20.5
       parent: 1
 - proto: WallSolid
   entities:

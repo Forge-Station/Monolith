@@ -39,9 +39,10 @@ namespace Content.Server.StationEvents.Events
             component.NumberPerSecond = Math.Max(1, (int)(component.Powered.Count / component.SecondsUntilOff)); // Number of APCs to turn off every second. At least one.
         }
 
-        protected override void Ended(EntityUid uid, PowerGridCheckRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+        protected override void Ended(Entity<PowerGridCheckRuleComponent> rule, ref GameRuleEndedEvent args)
         {
-            base.Ended(uid, component, gameRule, args);
+            base.Ended(rule, ref args);
+            var component = rule.Comp;
 
             foreach (var entity in component.Unpowered)
             {

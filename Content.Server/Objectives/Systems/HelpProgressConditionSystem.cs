@@ -17,7 +17,7 @@ public sealed partial class HelpProgressConditionSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
     [Dependency] private TargetObjectiveSystem _target = default!;
-    [Dependency] private TraitorRuleSystem _traitorRule = default!;
+    [Dependency] private ServerTraitorRuleSystem _traitorRule = default!;
 
     public override void Initialize()
     {

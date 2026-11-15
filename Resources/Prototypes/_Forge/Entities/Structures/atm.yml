@@ -27,3 +27,35 @@
       state: icon
     - map: ["computerLayerScreen"]
       state: unshaded
+
+#KoT-change-start
+
+- type: entity
+  parent: BaseStationAdminBankATM
+  id: StationAdminBankATMImperial
+  description: Used to transfer funds to and from Empire's bank account.
+  suffix: Imperial
+  components:
+  - type: StationBankATM
+    account: Imperial
+  - type: CompanyAccessReader
+    requiredCompanies:
+    - Imperial
+  - type: AccessReader
+    access: [["Empire"]]
+
+- type: entity
+  parent: BaseStationAdminBankATM
+  id: StationAdminBankATMRenegates
+  description: Used to transfer funds to and from Renegate's bank account.
+  suffix: Renegates
+  components:
+  - type: StationBankATM
+    account: Renegates
+  - type: CompanyAccessReader
+    requiredCompanies:
+    - Renegates
+  - type: AccessReader
+    access: [["Renegate"]]
+
+#KoT-change-end

@@ -12,10 +12,33 @@ public sealed partial class ResearchSystem
         SubscribeLocalEvent<ResearchServerComponent, ComponentStartup>(OnServerStartup);
         SubscribeLocalEvent<ResearchServerComponent, ComponentShutdown>(OnServerShutdown);
         SubscribeLocalEvent<ResearchServerComponent, TechnologyDatabaseModifiedEvent>(OnServerDatabaseModified);
-
+        SubscribeLocalEvent<ResearchServerComponent, MapInitEvent>(OnServerMapInit); // Forge-change
 
         SubscribeLocalEvent<ResearchServerComponent, EntInsertedIntoContainerMessage>(OnDiskInserted); // Forge-change
         SubscribeLocalEvent<ResearchServerComponent, EntRemovedFromContainerMessage>(OnDiskRemoved); // Forge-change
+    }
+
+    /// <summary>
+    /// Authorizes and links mapped research clients on the same grid when the server initializes.
+    /// Newly built equipment must be authorized later via the research server link UI.
+    /// </summary>
+    private void OnServerMapInit(EntityUid uid, ResearchServerComponent component, MapInitEvent args)
+    {
+        var maybeGrid = Transform(uid).GridUid;
+        if (maybeGrid is not { } grid)
+            return;
+
+        var clients = new HashSet<Entity<ResearchClientComponent>>();
+        _lookup.GetChildEntities(grid, clients);
+
+        foreach (var client in clients)
+        {
+            if (!CanClientAccessServer(client, uid, checkAuthorization: false))
+                continue;
+
+            AuthorizeClient(uid, client, component);
+            RegisterClient(client, uid, client, component);
+        }
     }
 
     private void OnServerStartup(EntityUid uid, ResearchServerComponent component, ComponentStartup args)

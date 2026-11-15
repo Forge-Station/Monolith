@@ -42,6 +42,7 @@ public sealed partial class BeforeLightTargetOverlay : Overlay
         // This just exists to copy the lightrendertarget and write back to it.
         if (res.EnlargedLightTarget?.Size != size)
         {
+            res.EnlargedLightTarget?.Dispose();
             res.EnlargedLightTarget = _clyde
                 .CreateRenderTarget(size, new RenderTargetFormatParameters(RenderTargetColorFormat.Rgba8Srgb), name: "enlarged-light-copy");
         }

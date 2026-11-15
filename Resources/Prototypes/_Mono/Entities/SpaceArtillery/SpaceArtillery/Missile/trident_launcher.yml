@@ -15,7 +15,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Gun
     fireRate: 0.1
@@ -67,7 +67,7 @@
     - state: space_artillery
   - type: Appearance
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Gun
     fireRate: 0.1

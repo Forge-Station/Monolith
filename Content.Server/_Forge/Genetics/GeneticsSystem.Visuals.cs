@@ -6,7 +6,7 @@ namespace Content.Server._Forge.Genetics;
 
 public sealed partial class GeneticsSystem
 {
-    [Dependency] private readonly SharedPointLightSystem _lights = default!;
+    [Dependency] private SharedPointLightSystem _lights = default!;
 
     public void RefreshVisuals(EntityUid uid, GenomeComponent? genome = null)
     {
@@ -30,7 +30,7 @@ public sealed partial class GeneticsSystem
                 continue;
 
             any = true;
-            if (proto.OverlayColor.A > 0)
+            if (proto.ScreenTint && proto.OverlayColor.A > 0)
                 overlay = Blend(overlay, proto.OverlayColor);
 
             if (proto.GlowColor.A > 0 || proto.GlowEnergy > 0)

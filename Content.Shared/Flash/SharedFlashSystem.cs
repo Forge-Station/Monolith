@@ -11,7 +11,7 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
@@ -38,8 +38,9 @@ public abstract partial class SharedFlashSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
 
-    private EntityQuery<StatusEffectsComponent> _statusEffectsQuery;
-    private EntityQuery<DamagedByFlashingComponent> _damagedByFlashingQuery;
+    [Dependency] private readonly EntityQuery<StatusEffectsComponent> _statusEffectsQuery = default!;
+    [Dependency] private readonly EntityQuery<DamagedByFlashingComponent> _damagedByFlashingQuery = default!;
+
     private HashSet<EntityUid> _entSet = new();
 
     // The tag to add when a flash has no charges left.
@@ -58,9 +59,6 @@ public abstract partial class SharedFlashSystem : EntitySystem
         SubscribeLocalEvent<TemporaryBlindnessComponent, FlashAttemptEvent>(OnTemporaryBlindnessFlashAttempt);
         Subs.SubscribeWithRelay<FlashImmunityComponent, FlashAttemptEvent>(OnFlashImmunityFlashAttempt, held: false);
         SubscribeLocalEvent<FlashImmunityComponent, ExaminedEvent>(OnExamine);
-
-        _statusEffectsQuery = GetEntityQuery<StatusEffectsComponent>();
-        _damagedByFlashingQuery = GetEntityQuery<DamagedByFlashingComponent>();
     }
 
     private void OnFlashMeleeHit(Entity<FlashComponent> ent, ref MeleeHitEvent args)

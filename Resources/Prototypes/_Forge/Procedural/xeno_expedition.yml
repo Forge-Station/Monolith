@@ -59,6 +59,7 @@
     DefenseStructure: XenoHiveCore
     Mining: Xenos
     Megafauna: MobXenoCMQueen
+  maxMobsPerRoom: 5
 
 - type: salvageBiomeMod
   id: ForgeXenoHive
@@ -199,7 +200,6 @@
     replacements:
       WallMining: WallXenoResin
       WallPlastitanium: WallXenoResin
-      MiningWindowDungeon: WallXenoMembrane
       WindowDungeon: WallXenoMembrane
       WindowDirectionalDungeon: WallXenoMembrane
       WindowReinforcedDirectionalDungeon: WallXenoMembrane

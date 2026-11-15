@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseComputer
+  parent: [BaseStructureDisableToolUse, BaseStructureIndestructible, BaseComputer]
   id: ComputerForgeBlackMarketContracts
   name: black market contract console
   description: Purchase rotating contraband contracts with bank credits.

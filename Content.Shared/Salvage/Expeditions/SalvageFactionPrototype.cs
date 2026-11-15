@@ -25,4 +25,11 @@ public sealed partial class SalvageFactionPrototype : IPrototype, ISalvageMod
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("configs")]
     public Dictionary<string, string> Configs = new();
+
+    /// <summary>
+    /// Forge-Change: cap how many faction mobs a single dungeon room can hold.
+    /// Zero means no cap.
+    /// </summary>
+    [DataField]
+    public int MaxMobsPerRoom;
 }

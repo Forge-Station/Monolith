@@ -24,3 +24,15 @@ ent-WeaponTurretMk290Empty = { ent-BaseMk290Sentry }
 ent-WeaponTurretMk290Packed = упакованная турель MK-290
     .suffix = ТСКМП, Упакованная
     .desc = Разобранная и упакованная сторожевая система MK-290.
+
+ent-WeaponTurretXenoborg = { ent-BaseWeaponBallisticTurret }
+    .desc = { ent-BaseWeaponBallisticTurret.desc }
+    .suffix = Ксеноборги
+
+ent-WeaponTurretCC = { ent-BaseWeaponBallisticTurret }
+    .desc = { ent-BaseWeaponBallisticTurret.desc }
+    .suffix = Колосс
+
+ent-WeaponTurretViper = { ent-BaseWeaponBallisticTurret }
+    .desc = { ent-BaseWeaponBallisticTurret.desc }
+    .suffix = Viper Group

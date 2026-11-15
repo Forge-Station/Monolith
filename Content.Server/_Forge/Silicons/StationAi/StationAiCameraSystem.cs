@@ -13,12 +13,12 @@ using Robust.Shared.Player;
 
 namespace Content.Server._Forge.Silicons.StationAi;
 
-public sealed class StationAiCameraSystem : EntitySystem
+public sealed partial class StationAiCameraSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedStationAiSystem _stationAi = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedStationAiSystem _stationAi = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<EntityUid, HashSet<EntityUid>> _activeByGrid = new();
     private readonly Dictionary<EntityUid, EntityUid> _brainGrids = new();
@@ -97,16 +97,30 @@ public sealed class StationAiCameraSystem : EntitySystem
             closest = camera.Owner;
         }
 
-        if (closest == null)
-            return;
-
         foreach (var brain in activeBrains)
         {
+            var hearingEntity = closest;
+            var hearingDistance = closestDistance;
+            if (_stationAi.TryGetCore(brain, out var core))
+            {
+                var coreCoordinates = _transform.GetMapCoordinates(core.Owner);
+                var coreDistance = (coreCoordinates.Position - sourcePosition).Length();
+                if (coreCoordinates.MapId == sourceCoordinates.MapId &&
+                    coreDistance <= ev.VoiceRange && coreDistance < hearingDistance)
+                {
+                    hearingEntity = core.Owner;
+                    hearingDistance = coreDistance;
+                }
+            }
+
+            if (hearingEntity == null)
+                continue;
+
             if (TryComp(brain, out ActorComponent? actor))
             {
-                ev.Recipients.TryAdd(
-                    actor.PlayerSession,
-                    new ChatSystem.ICChatRecipientData(closestDistance, false, HearingEntity: closest));
+                if (!ev.Recipients.TryGetValue(actor.PlayerSession, out var existing) || existing.Range > hearingDistance)
+                    ev.Recipients[actor.PlayerSession] =
+                        new ChatSystem.ICChatRecipientData(hearingDistance, false, HearingEntity: hearingEntity);
             }
         }
     }

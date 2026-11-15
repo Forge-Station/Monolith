@@ -23,7 +23,7 @@ GITHUB_API_URL = os.environ.get("GITHUB_API_URL", "https://api.github.com")
 DISCORD_SPLIT_LIMIT = 2000
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 
-CHANGELOG_FILE = "Resources/Changelog/Monolith.yml" # Monolith
+CHANGELOG_FILE = os.environ.get("CHANGELOG_DIR", "Resources/Changelog/Forge.yml")
 
 TYPES_TO_EMOJI = {"Fix": "🐛", "Add": "🆕", "Remove": "❌", "Tweak": "⚒️"}
 
@@ -122,6 +122,9 @@ def get_last_changelog_by_sha(
         headers=headers,
         params=params,
     )
+    if resp.status_code == 404:
+        print("Previous changelog not found; assuming empty")
+        return "Entries: []"
     resp.raise_for_status()
     return resp.text
 

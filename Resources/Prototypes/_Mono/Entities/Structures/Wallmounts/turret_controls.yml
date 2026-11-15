@@ -22,7 +22,7 @@
     proto: Bullet762x51mmRubber
     fireCost: 100
   - type: DeviceNetworkRequiresPower
-  - type: WiredNetworkConnection
+  - type: WiredNetwork
   - type: UserInterface
     interfaces:
       enum.WiresUiKey.Key:

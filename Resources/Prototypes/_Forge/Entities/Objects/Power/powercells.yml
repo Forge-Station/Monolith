@@ -24,6 +24,13 @@
   name: Internal power cell hardsuit
   categories: [ HideSpawnMenu ]
   components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: small
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
   - type: Battery
     maxCharge: 150
     startingCharge: 150

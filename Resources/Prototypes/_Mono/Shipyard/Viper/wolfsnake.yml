@@ -13,8 +13,8 @@
   price: 196620
   purchasable: false # Voucher only
   category: Large
-  group: Viper
-  access: Viper
+  group: Shipyard
+  access: Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/Viper/wolfsnake.yml
   guidebookPage: Null
   class:

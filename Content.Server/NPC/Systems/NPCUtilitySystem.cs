@@ -56,6 +56,7 @@ public sealed partial class NPCUtilitySystem : EntitySystem
     [Dependency] private DrinkSystem _drink = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private FoodSystem _food = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private NpcFactionSystem _npcFaction = default!;
@@ -208,7 +209,9 @@ public sealed partial class NPCUtilitySystem : EntitySystem
                 var avoidBadFood = !HasComp<IgnoreBadFoodComponent>(owner);
 
                 // only eat when hungry or if it will eat anything
-                if (TryComp<HungerComponent>(owner, out var hunger) && hunger.CurrentThreshold > HungerThreshold.Okay && avoidBadFood)
+                if (TryComp<SatiationComponent>(owner, out var hunger) &&
+                    !_satiation.IsValueInRange((owner, hunger), SatiationSystem.Hunger, below: "Overfed") &&
+                    avoidBadFood)
                     return 0f;
 
                 // no mouse don't eat the uranium-235
@@ -227,7 +230,8 @@ public sealed partial class NPCUtilitySystem : EntitySystem
                     return 0f;
 
                 // only drink when thirsty
-                if (TryComp<ThirstComponent>(owner, out var thirst) && thirst.CurrentThirstThreshold > ThirstThreshold.Okay)
+                if (TryComp<SatiationComponent>(owner, out var thirst) &&
+                    !_satiation.IsValueInRange((owner, thirst), SatiationSystem.Thirst, below: "Overhydrated"))
                     return 0f;
 
                 // no janicow don't drink the blood puddle

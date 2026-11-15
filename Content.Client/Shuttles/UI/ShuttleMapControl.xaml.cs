@@ -625,6 +625,15 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
                 uiPos + new Vector2(-size, 0f),
             };
 
+            var unknownMassLabelStr = string.Empty;
+            var hideLabel = false;
+            if (EntManager.GetEntity(marker.Target) is { } targetUid && targetUid.IsValid())
+            {
+                unknownMassLabelStr = _detection.HandleUnknownMassLabel(targetUid);
+                if (EntManager.TryGetComponent<IFFComponent>(targetUid, out var iff))
+                    hideLabel = (iff.Flags & IFFFlags.HideLabel) != 0x0;
+            }
+
             handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts, color.WithAlpha(0.3f));
             handle.DrawLine(verts[0], verts[1], color);
             handle.DrawLine(verts[1], verts[2], color);
@@ -633,7 +642,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
             handle.DrawCircle(uiPos, 3f * UIScale, color, true);
 
             var labelPos = uiPos + new Vector2(8f, -6f);
-            handle.DrawString(_font, labelPos, marker.Name, color);
+            handle.DrawString(_font, labelPos, hideLabel ? unknownMassLabelStr : marker.Name, color);
         }
     }
 

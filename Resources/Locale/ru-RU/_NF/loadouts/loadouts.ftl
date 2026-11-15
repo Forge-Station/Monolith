@@ -44,6 +44,11 @@ loadout-name-ContractorClothingOuterCoatBomberRandomized = панковская 
 loadout-name-ContractorClothingShoesBootsPunkRandomized = панковские ботинки (случайные)
 loadout-name-ContractorClothingMaskPunkHalf = панковская полумаска (случайная)
 
+loadout-name-tti-belt-webbing-empty = разгрузка травматологии (пустой)
+loadout-name-tti-belt-webbing-filled = разгрузка травматологии (заполненный)
+loadout-name-tti-belt-trauma-empty = пояс парамедика TTI (пустой)
+loadout-name-tti-belt-trauma-filled = пояс парамедика TTI (заполненный)
+
 loadout-name-ContractorBoxSurvivalNFOxygenExtended = расширенный аварийный запас
     .suffix = Кислород
 loadout-name-ContractorBoxSurvivalNFNitrogenExtended = расширенный аварийный запас

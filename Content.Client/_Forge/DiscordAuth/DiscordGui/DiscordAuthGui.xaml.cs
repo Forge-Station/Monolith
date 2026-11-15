@@ -10,9 +10,9 @@ namespace Content.Client._Forge.DiscordAuth.DiscordGui;
 [GenerateTypedNameReferences]
 public sealed partial class DiscordAuthGui : Control
 {
-    [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
-    [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IClientConsoleHost _consoleHost = default!;
+    [Dependency] private DiscordAuthManager _discordAuthManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
     private TimeSpan? _skipButtonResetOn;
 
     public DiscordAuthGui()

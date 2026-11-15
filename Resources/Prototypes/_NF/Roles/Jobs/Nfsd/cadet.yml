@@ -49,6 +49,6 @@
     back:
     - Magazine45_ACPPistolFMJ
     - FederationMilitaryCredit50
-    - BaseSecurityUplinkRadio
+ #  - BaseSecurityUplinkRadio
     - RadioHandheldNF # Mono
-#    - BookTSFSOP # Forge-change delete
+#   - BookTSFSOP # Forge-change delete

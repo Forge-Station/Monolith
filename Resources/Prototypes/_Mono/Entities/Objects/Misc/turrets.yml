@@ -45,14 +45,6 @@
   - type: NpcFactionMember
     factions:
     - CC
-  # Forge-Change-start
-  - type: TurretCommandLink
-    faction: CC
-  - type: Construction
-    deconstructionTarget: null
-    graph: WeaponTurretCCPackingGraph
-    node: WeaponTurretCCPacked
-  # Forge-Change-end
 
 - type: entity
   parent: BaseWeaponCommandBallisticTurret # Forge-Change

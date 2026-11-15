@@ -5031,7 +5031,7 @@ entities:
     - type: Transform
       pos: 12.5,-2.5
       parent: 1
-- proto: WallShuttleInterior
+- proto: WallShuttle
   entities:
   - uid: 5
     components:

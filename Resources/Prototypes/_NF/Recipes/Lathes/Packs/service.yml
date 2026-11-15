@@ -31,6 +31,9 @@
   - JanicartFlatpack # Frontier
   - PlantBagOfHolding # Delta-V
   - StationRadioReceiverHandheldRecipe #Forge-Change
+  - StationRadioServerPortableRecipe #Forge-Change
+  - StationRadioRigPortableRecipe #Forge-Change
+  - VinylPlayerPortableRecipe #Forge-Change
 
 - type: latheRecipePack
   id: NFServiceBoardsStatic

@@ -1,0 +1,34 @@
+- type: accessLevel
+  id: Trauma
+  name: id-card-access-level-trauma
+
+- type: accessLevel
+  id: TraumaCommand
+  name: id-card-access-level-trauma-command
+
+- type: accessLevel
+  id: TraumaSecApartment
+  name: id-card-access-level-trauma-sec-apartment
+
+- type: accessGroup
+  id: GeneralTraumaAccess
+  tags:
+  - Maintenance
+  - External
+  - Trauma
+  - TurretCommandTraumaShuttle
+  - Captain
+  - Mercenary
+
+- type: accessGroup
+  id: CommandTraumaAccess
+  tags:
+  - Maintenance
+  - External
+  - Trauma
+  - TraumaCommand
+  - TraumaSecApartment
+  - TurretCommandTraumaShuttle
+  - TurretCommandTrauma
+  - Captain
+  - Mercenary

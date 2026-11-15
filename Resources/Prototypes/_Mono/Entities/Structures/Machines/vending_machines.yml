@@ -238,8 +238,8 @@
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
-    taxAccounts:
-      Mieyo: 0.8
+    # taxAccounts: # Froge-change-del
+    #   Mieyo: 0.8
   - type: Advertise
     pack: MieyoAds
   - type: MarketModifier

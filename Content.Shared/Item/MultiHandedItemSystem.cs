@@ -3,6 +3,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Popups;
+using Content.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Item;
@@ -25,6 +26,10 @@ public sealed class MultiHandedItemSystem : EntitySystem
 
     private void OnEquipped(Entity<MultiHandedItemComponent> ent, ref GotEquippedHandEvent args)
     {
+        // Cyborg manipulators handle oversized reactor parts / tools with a single grip.
+        if (HasComp<BorgChassisComponent>(args.User))
+            return;
+
         for (var i = 0; i < ent.Comp.HandsNeeded - 1; i++)
         {
             _virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.User);
@@ -38,7 +43,10 @@ public sealed class MultiHandedItemSystem : EntitySystem
 
     private void OnAttemptPickup(Entity<MultiHandedItemComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
-        if (args.Cancelled || TryComp<HandsComponent>(args.User, out var hands) && hands.CountFreeHands() >= ent.Comp.HandsNeeded)
+        if (args.Cancelled || HasComp<BorgChassisComponent>(args.User))
+            return;
+
+        if (TryComp<HandsComponent>(args.User, out var hands) && hands.CountFreeHands() >= ent.Comp.HandsNeeded)
             return;
 
         args.Cancel();
@@ -56,6 +64,9 @@ public sealed class MultiHandedItemSystem : EntitySystem
         if (args.BlockingEntity != ent.Owner || _timing.ApplyingState)
             return;
 
-        _hands.TryDrop(args.User, ent.Owner);
+        // If the virtual item was dropped independently, drop the real item as well. If the real item cannot be
+        // dropped (for example, because it is glued), restore the virtual item to keep the item multi-handed.
+        if (!_hands.TryDrop(args.User, ent.Owner) && _hands.IsHolding(args.User, ent.Owner))
+            _virtualItem.TrySpawnVirtualItemInHand(ent.Owner, args.User);
     }
 }

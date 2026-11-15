@@ -157,6 +157,8 @@
     containers:
       gun_magazine: !type:ContainerSlot
 
+#region Empire
+
 - type: entity
   parent: BaseWeaponShotgunTurret
   id: WeaponTurretEmpireShotgun
@@ -204,6 +206,8 @@
     deconstructionTarget: null
     graph: WeaponTurretEmpireMachinegunPackingGraph
     node: WeaponTurretEmpireMachinegunPacked
+
+#region TSF
 
 - type: entity
   parent: BaseWeaponShotgunTurret
@@ -253,53 +257,7 @@
     graph: WeaponTurretTSFMachinegunPackingGraph
     node: WeaponTurretTSFMachinegunPacked
 
-- type: entity
-  parent: BaseWeaponShotgunTurret
-  id: WeaponTurretCCShotgun
-  name: Colossus shotgun turret
-  suffix: CC
-  components:
-  - type: NpcFactionMember
-    factions:
-    - CC
-  - type: TurretCommandLink
-    faction: CC
-  - type: Construction
-    deconstructionTarget: null
-    graph: WeaponTurretCCShotgunPackingGraph
-    node: WeaponTurretCCShotgunPacked
-
-- type: entity
-  parent: BaseWeaponSniperTurret
-  id: WeaponTurretCCSniper
-  name: Colossus sniper turret
-  suffix: CC
-  components:
-  - type: NpcFactionMember
-    factions:
-    - CC
-  - type: TurretCommandLink
-    faction: CC
-  - type: Construction
-    deconstructionTarget: null
-    graph: WeaponTurretCCSniperPackingGraph
-    node: WeaponTurretCCSniperPacked
-
-- type: entity
-  parent: BaseWeaponMachinegunTurret
-  id: WeaponTurretCCMachinegun
-  name: Colossus machine gun turret
-  suffix: CC
-  components:
-  - type: NpcFactionMember
-    factions:
-    - CC
-  - type: TurretCommandLink
-    faction: CC
-  - type: Construction
-    deconstructionTarget: null
-    graph: WeaponTurretCCMachinegunPackingGraph
-    node: WeaponTurretCCMachinegunPacked
+#region USSP
 
 - type: entity
   parent: BaseWeaponShotgunTurret
@@ -349,6 +307,8 @@
     graph: WeaponTurretUSSPMachinegunPackingGraph
     node: WeaponTurretUSSPMachinegunPacked
 
+#region PDV
+
 - type: entity
   parent: BaseWeaponShotgunTurret
   id: WeaponTurretPDVShotgun
@@ -396,6 +356,8 @@
     deconstructionTarget: null
     graph: WeaponTurretPDVMachinegunPackingGraph
     node: WeaponTurretPDVMachinegunPacked
+
+#region VG
 
 - type: entity
   parent: BaseWeaponShotgunTurret
@@ -445,6 +407,8 @@
     graph: WeaponTurretVGMachinegunPackingGraph
     node: WeaponTurretVGMachinegunPacked
 
+#region NT
+
 - type: entity
   parent: BaseWeaponShotgunTurret
   id: WeaponTurretNTShotgun
@@ -492,3 +456,69 @@
     deconstructionTarget: null
     graph: WeaponTurretNTMachinegunPackingGraph
     node: WeaponTurretNTMachinegunPacked
+
+#region TTI
+
+- type: entity
+  parent: BaseWeaponCommandBallisticTurret
+  id: WeaponTurretTrauma
+  name: TTI ballistic turret
+  suffix: TTI
+  components:
+  - type: NpcFactionMember
+    factions:
+    - MD
+  - type: TurretCommandLink
+    faction: MD
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTraumaPackingGraph
+    node: WeaponTurretTraumaPacked
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretTraumaShotgun
+  name: TTI shotgun turret
+  suffix: TTI
+  components:
+  - type: NpcFactionMember
+    factions:
+    - MD
+  - type: TurretCommandLink
+    faction: MD
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTraumaShotgunPackingGraph
+    node: WeaponTurretTraumaShotgunPacked
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretTraumaSniper
+  name: TTI sniper turret
+  suffix: TTI
+  components:
+  - type: NpcFactionMember
+    factions:
+    - MD
+  - type: TurretCommandLink
+    faction: MD
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTraumaSniperPackingGraph
+    node: WeaponTurretTraumaSniperPacked
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretTraumaMachinegun
+  name: TTI machine gun turret
+  suffix: TTI
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: TurretCommandLink
+    faction: MD
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTraumaMachinegunPackingGraph
+    node: WeaponTurretTraumaMachinegunPacked

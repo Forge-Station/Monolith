@@ -53,7 +53,7 @@ salvage-biome-mod-hive = Улей
 salvage-dungeon-mod-hive = Захваченный экспедиционный пост
 salvage-faction-forge-xeno = Ксеноморфы улья
 salvage-light-mod-hive = Тусклый смоляной свет
-salvage-time-mod-hive = Долгая высадка, 20 минут
+salvage-time-mod-hive = Долгая высадка, 30 минут
 # Forge-Change-End
 
 # Runner

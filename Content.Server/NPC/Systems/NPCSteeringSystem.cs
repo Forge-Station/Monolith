@@ -33,6 +33,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.Doors.Systems;
 using Content.Shared.Prying.Systems;
 using Microsoft.Extensions.ObjectPool;
 using Robust.Server.Player;
@@ -62,6 +63,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ClimbSystem _climb = default!;
     [Dependency] private DoAfterSystem _doAfter = default!;
+    [Dependency] private SharedDoorSystem _doors = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private GravitySystem _gravity = default!;
     [Dependency] private NpcFactionSystem _npcFaction = default!;
@@ -365,8 +367,8 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
             return;
         }
 
-        // No path set from pathfinding or the likes.
-        if (steering.Status == SteeringStatus.NoPath)
+        // A failed path still walks forward while breaching. NoPath would freeze them on the tile they just opened.
+        if (steering.Status == SteeringStatus.NoPath && !steering.DirectMove)
         {
             SetDirection(uid, mover, steering, Vector2.Zero);
             return;
@@ -522,7 +524,7 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
             steering.CurrentPath.Clear();
             steering.FailedPathCount++;
 
-            if (steering.FailedPathCount >= NPCSteeringComponent.FailedPathLimit)
+            if (steering.FailedPathCount >= NPCSteeringComponent.FailedPathLimit && !steering.DirectMove)
             {
                 steering.Status = SteeringStatus.NoPath;
             }

@@ -11,9 +11,9 @@ public sealed partial class StealthSystem : SharedStealthSystem
 {
     private const string StealthPostShaderId = "Stealth";
 
-    [Dependency] private readonly IPrototypeManager _protoMan = default!;
-    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private IPrototypeManager _protoMan = default!;
+    [Dependency] private SharedTransformSystem _transformSystem = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private ShaderInstance _shader = default!;
 

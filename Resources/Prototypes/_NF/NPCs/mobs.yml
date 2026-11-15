@@ -4,7 +4,13 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
+          task: IncomingFireCompound
+    - tasks:
+        - !type:HTNCompoundTask
           task: MeleeCombatCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: InvestigateCompound
     - tasks:
         - !type:HTNCompoundTask
           task: FollowCompound
@@ -17,7 +23,13 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
+          task: IncomingFireCompound
+    - tasks:
+        - !type:HTNCompoundTask
           task: InnateRangedCombatCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: InvestigateCompound
     - tasks:
         - !type:HTNCompoundTask
           task: FollowCompound

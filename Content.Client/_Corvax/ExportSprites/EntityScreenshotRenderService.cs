@@ -368,7 +368,7 @@ public sealed partial class EntityScreenshotRenderService
 
     private static int ToDelayMilliseconds(float seconds)
     {
-        return Math.Max(1, (int) MathF.Round(seconds * 1000f));
+        return Math.Max(1, (int)MathF.Round(seconds * 1000f));
     }
 
     private void WriteAnimationMetadata(ResPath animationDir, IReadOnlyList<AnimationFrameInfo> animationFrames)
@@ -476,10 +476,10 @@ public sealed partial class EntityScreenshotRenderService
     private static Rgba32 Modulate(Rgba32 texel, Color modulation)
     {
         return new Rgba32(
-            (byte) (texel.R * modulation.RByte / byte.MaxValue),
-            (byte) (texel.G * modulation.GByte / byte.MaxValue),
-            (byte) (texel.B * modulation.BByte / byte.MaxValue),
-            (byte) (texel.A * modulation.AByte / byte.MaxValue));
+            (byte)(texel.R * modulation.RByte / byte.MaxValue),
+            (byte)(texel.G * modulation.GByte / byte.MaxValue),
+            (byte)(texel.B * modulation.BByte / byte.MaxValue),
+            (byte)(texel.A * modulation.AByte / byte.MaxValue));
     }
 
     private static void BlendPixel(ref Rgba32 destination, Rgba32 source)
@@ -512,17 +512,17 @@ public sealed partial class EntityScreenshotRenderService
         var outB = (srcB * srcAlpha + dstB * dstAlpha * (1f - srcAlpha)) / outAlpha;
 
         destination = new Rgba32(
-            (byte) Math.Clamp((int) MathF.Round(outR * 255f), 0, 255),
-            (byte) Math.Clamp((int) MathF.Round(outG * 255f), 0, 255),
-            (byte) Math.Clamp((int) MathF.Round(outB * 255f), 0, 255),
-            (byte) Math.Clamp((int) MathF.Round(outAlpha * 255f), 0, 255));
+            (byte)Math.Clamp((int)MathF.Round(outR * 255f), 0, 255),
+            (byte)Math.Clamp((int)MathF.Round(outG * 255f), 0, 255),
+            (byte)Math.Clamp((int)MathF.Round(outB * 255f), 0, 255),
+            (byte)Math.Clamp((int)MathF.Round(outAlpha * 255f), 0, 255));
     }
 
     private static Vector2i ToPixelOffset(Vector2 offset)
     {
         return new Vector2i(
-            (int) MathF.Round(offset.X * EyeManager.PixelsPerMeter),
-            (int) MathF.Round(offset.Y * EyeManager.PixelsPerMeter));
+            (int)MathF.Round(offset.X * EyeManager.PixelsPerMeter),
+            (int)MathF.Round(offset.Y * EyeManager.PixelsPerMeter));
     }
 
     private bool TryGetLayerImage(
@@ -542,7 +542,7 @@ public sealed partial class EntityScreenshotRenderService
         }
 
         var rsi = layer.ActualRsi;
-        var stateId = ((ISpriteLayer) layer).RsiState;
+        var stateId = ((ISpriteLayer)layer).RsiState;
         if (rsi == null ||
             !stateId.IsValid ||
             !rsi.TryGetState(stateId, out var state))
@@ -579,7 +579,7 @@ public sealed partial class EntityScreenshotRenderService
         var framesPerDirection = totalFrames / dirCount;
         var frame = Math.Clamp(layer.AnimationFrame, 0, framesPerDirection - 1);
         var rsiDirection = direction.Convert(state.RsiDirections).OffsetRsiDir(layer.DirOffset);
-        var target = (int) rsiDirection * framesPerDirection + frame;
+        var target = (int)rsiDirection * framesPerDirection + frame;
         var targetY = target / statesX;
         var targetX = target % statesX;
         sourceRect = new PixelRect(targetX * frameWidth, targetY * frameHeight, frameWidth, frameHeight);
@@ -609,13 +609,13 @@ public sealed partial class EntityScreenshotRenderService
 
     private readonly record struct PixelRect(int Left, int Top, int Width, int Height);
 
-    private sealed class EntityScreenshotRenderControl : Control
+    private sealed partial class EntityScreenshotRenderControl : Control
     {
         private static readonly Color ExportBackgroundColor = new(128, 128, 128, 0);
 
-        [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly ILogManager _logManager = default!;
-        [Dependency] private readonly IResourceManager _resourceManager = default!;
+        [Dependency] private IEntityManager _entityManager = default!;
+        [Dependency] private ILogManager _logManager = default!;
+        [Dependency] private IResourceManager _resourceManager = default!;
 
         internal readonly Queue<(
             IRenderTexture Texture,

@@ -179,7 +179,7 @@ public abstract partial class SharedSalvageSystem : EntitySystem
             "Mix1",
             293.15f,
             Color.FromHex("#3F6B2A"),
-            TimeSpan.FromMinutes(20),
+            TimeSpan.FromMinutes(30),
             rewards,
             mods);
     }

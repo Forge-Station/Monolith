@@ -15,9 +15,9 @@ namespace Content.Server._Forge.Genetics;
 
 public sealed partial class GeneticsSystem
 {
-    [Dependency] private readonly HTNSystem _htn = default!;
-    [Dependency] private readonly NPCSystem _npc = default!;
-    [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private HTNSystem _htn = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private NpcFactionSystem _npcFaction = default!;
 
     private static readonly ProtoId<NpcFactionPrototype> HostileFaction = "SimpleHostile";
     private const string HostileTask = "SimpleHostileCompound";

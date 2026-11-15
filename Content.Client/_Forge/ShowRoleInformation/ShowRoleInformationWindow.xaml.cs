@@ -13,9 +13,8 @@ namespace Content.Client._Forge.ShowRoleInformation;
 [GenerateTypedNameReferences]
 public sealed partial class ShowRoleInformationWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private ProtoId<ShowRoleInformationWindowData> _currentKeyWindow;
     private float _remainingTime;

@@ -4,11 +4,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._Forge.Xenomorphs;
 
-public sealed class ForgeXenoPlasmaSystem : EntitySystem
+public sealed partial class ForgeXenoPlasmaSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private float _accumulator;
 

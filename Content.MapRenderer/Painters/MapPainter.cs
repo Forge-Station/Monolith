@@ -120,7 +120,7 @@ namespace Content.MapRenderer.Painters
             {
                 if (cEntityManager.TryGetComponent(cPlayerManager.LocalEntity, out SpriteComponent? sprite))
                 {
-                    sprite.Visible = false;
+                    cEntityManager.System<SpriteSystem>().SetVisible((cPlayerManager.LocalEntity.Value, sprite), false);
                 }
             });
 

@@ -8,6 +8,13 @@
     sprite: Nyanotrasen/Structures/Furniture/Tables/rwood.rsi
   - type: Icon
     sprite: Nyanotrasen/Structures/Furniture/Tables/rwood.rsi
+  - type: IconSmooth
+    key: table
+    states:
+    - !type:CornerSpriteSmoothing
+      mask: [ table ]
+      base: state_
+      swapOuterBits: true
   - type: Damageable
     damageModifierSet: Wood
   - type: Destructible

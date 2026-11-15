@@ -7,12 +7,12 @@ using Content.Shared.Popups;
 
 namespace Content.Server._Forge.Demon.Systems;
 
-public sealed class DamageOnActionSystem : EntitySystem
+public sealed partial class DamageOnActionSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SatiationSystem _satiation = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

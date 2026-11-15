@@ -347,7 +347,11 @@ public sealed partial class ServerStationSystem : Shared.Station.Systems.Station
 
         for (var i = 0; i < numAttempts; i++)
         {
-            // Find random tile within list.
+            // A station with only a handful of tiles (the test map) runs out before numAttempts.
+            // Next(-1) throws, and the count has to be written back: the list stores a struct.
+            if (totalTiles <= 0)
+                return false;
+
             var nextTileIndex = Random.Next(totalTiles);
             TileRef? randomTileRef = null;
             var startIndex = 0;
@@ -379,6 +383,7 @@ public sealed partial class ServerStationSystem : Shared.Station.Systems.Station
                 grid.Tiles.RemoveSwap(ourTileIndex);
                 grid.Count--;
                 totalTiles--;
+                grids[j] = grid;
 
                 // Empty list, remove element
                 if (grid.Tiles.Count <= 0)

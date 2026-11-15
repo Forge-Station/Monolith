@@ -1,0 +1,15 @@
+# Maps still name entities whose prototypes were removed. These stand in so those maps load.
+- type: entity
+  parent: WallSolid
+  id: WallRiveted
+  suffix: map fallback
+
+- type: entity
+  parent: GrilleBroken
+  id: ClockworkGrilleBroken
+  suffix: map fallback
+
+- type: entity
+  parent: Window
+  id: MiningWindow
+  suffix: map fallback

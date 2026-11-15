@@ -165,11 +165,14 @@ namespace Content.Client.Entry
             _titleWindowManager.Shutdown();
         }
 
-        public override void PostInit()
-        {
-            base.PostInit();
+public override void PostInit()
+{
+    base.PostInit();
 
-            _stylesheetManager.Initialize();
+    // Texture preload has finished. Tests drop the decode buffers here.
+    InvokeClientTesting(static callbacks => callbacks.ClientPostInit);
+
+    _stylesheetManager.Initialize();
 
             // Setup key contexts
             ContentContexts.SetupContexts(_inputManager.Contexts);
@@ -208,7 +211,16 @@ namespace Content.Client.Entry
             SwitchToDefaultState();
         }
 
-        private void SwitchToDefaultState(bool disconnected = false)
+        private void InvokeClientTesting(Func<ClientModuleTestingCallbacks, Action?> select)
+{
+    foreach (var callback in TestingCallbacks)
+    {
+        if (callback is ClientModuleTestingCallbacks cast)
+            select(cast)?.Invoke();
+    }
+}
+
+private void SwitchToDefaultState(bool disconnected = false)
         {
             // Fire off into state dependent on launcher or not.
 

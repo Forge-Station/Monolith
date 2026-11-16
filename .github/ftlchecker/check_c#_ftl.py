@@ -13,7 +13,6 @@ from pathlib import Path
 
 DEFAULT_LOCALE_DIRS = (
     Path("Resources/Locale"),
-    Path("RobustToolbox/Resources/Locale"),
 )
 DEFAULT_SOURCE_DIRS = (
     Path("Content.Client"),
@@ -22,6 +21,11 @@ DEFAULT_SOURCE_DIRS = (
 )
 
 FTL_KEY_RE = re.compile(r"^(?P<key>[A-Za-z][A-Za-z0-9_-]*)\s*=")
+FTL_TERM_RE = re.compile(r"^(?P<key>-[A-Za-z][A-Za-z0-9_-]*)\s*=")
+FTL_REFERENCE_RE = re.compile(
+    r"\{\s*(?P<term>-)?(?P<key>[A-Za-z][A-Za-z0-9_-]*)"
+    r"(?:\.[A-Za-z][A-Za-z0-9_-]*)?(?![A-Za-z0-9_-])"
+)
 LOC_CALL_RE = re.compile(
     r'\bLoc\.(?:GetString|TryGetString)\s*\(\s*(?P<prefix>\$@|@\$|\$|@)?'
     r'"(?P<key>[^"\\\r\n]*)"(?=\s*[,)])'
@@ -38,6 +42,13 @@ CONST_STRING_RE = re.compile(
 
 @dataclass(frozen=True)
 class CSharpReference:
+    key: str
+    path: Path
+    line: int
+
+
+@dataclass(frozen=True)
+class FtlReference:
     key: str
     path: Path
     line: int
@@ -83,9 +94,12 @@ def get_ftl_files(directory: Path) -> list[Path]:
     return sorted(path for path in directory.rglob("*.ftl") if path.is_file())
 
 
-def read_ftl_keys(locale_dirs: list[Path]) -> set[str]:
-    """Collect top-level FTL messages; indented attributes are not message keys."""
+def read_ftl_data(
+    locale_dirs: list[Path],
+) -> tuple[set[str], list[FtlReference]]:
+    """Collect FTL declarations and references to other messages."""
     keys: set[str] = set()
+    references: list[FtlReference] = []
     for locale_dir in locale_dirs:
         for path in get_ftl_files(locale_dir):
             try:
@@ -93,13 +107,33 @@ def read_ftl_keys(locale_dirs: list[Path]) -> set[str]:
             except OSError as exc:
                 raise RuntimeError(f"Cannot read FTL file {path}: {exc}") from exc
 
+            line_starts = [0]
+            line_starts.extend(match.end() for match in re.finditer("\n", content))
+
             for line in content.splitlines():
                 if line.lstrip().startswith("#"):
                     continue
                 match = FTL_KEY_RE.match(line)
                 if match:
                     keys.add(match.group("key"))
-    return keys
+                    continue
+                term_match = FTL_TERM_RE.match(line)
+                if term_match:
+                    keys.add(term_match.group("key"))
+
+            for match in FTL_REFERENCE_RE.finditer(content):
+                key = (match.group("term") or "") + match.group("key")
+                if not match.group("term") and key.isupper():
+                    if content[match.end():].lstrip().startswith("("):
+                        continue
+                references.append(
+                    FtlReference(
+                        key,
+                        path,
+                        line_number_at(line_starts, match.start()),
+                    )
+                )
+    return keys, references
 
 
 def strip_csharp_comments(content: str) -> str:
@@ -238,6 +272,17 @@ def find_missing_references(
     )
 
 
+def find_missing_ftl_references(
+    references: list[FtlReference],
+    ftl_keys: set[str],
+) -> list[FtlReference]:
+    """Return FTL references without a matching message or term declaration."""
+    return sorted(
+        (reference for reference in references if reference.key not in ftl_keys),
+        key=lambda reference: (str(reference.path).casefold(), reference.line, reference.key),
+    )
+
+
 def main() -> int:
     args = parse_args()
     root = args.root.resolve()
@@ -274,7 +319,7 @@ def main() -> int:
 
     try:
         print("Reading FTL message declarations...")
-        ftl_keys = read_ftl_keys(locale_dirs)
+        ftl_keys, ftl_references = read_ftl_data(locale_dirs)
         print("Scanning C# localization lookups...")
         references = scan_csharp_references(source_dirs)
     except RuntimeError as exc:
@@ -282,26 +327,40 @@ def main() -> int:
         return 2
 
     missing = find_missing_references(references, ftl_keys)
+    missing_ftl_references = find_missing_ftl_references(ftl_references, ftl_keys)
 
     if args.show_used:
         print()
         print("Scan statistics:")
         print(f"  FTL message keys: {len(ftl_keys)}")
+        print(f"  FTL message references: {len(ftl_references)}")
         print(f"  Static C# lookups: {len(references)}")
         print(f"  Missing FTL keys: {len(missing)}")
+        print(f"  Missing FTL references: {len(missing_ftl_references)}")
         print()
 
-    if not missing:
+    if not missing and not missing_ftl_references:
         print("All static C# localization keys have FTL declarations.")
         return 0
 
-    print(f"Found {len(missing)} C# localization lookups without an FTL declaration:")
-    for reference in missing:
-        try:
-            relative_path = reference.path.relative_to(root)
-        except ValueError:
-            relative_path = reference.path
-        print(f"{relative_path}:{reference.line}: {reference.key}")
+    if missing:
+        print(f"Found {len(missing)} C# localization lookups without an FTL declaration:")
+        for reference in missing:
+            try:
+                relative_path = reference.path.relative_to(root)
+            except ValueError:
+                relative_path = reference.path
+            print(f"{relative_path}:{reference.line}: {reference.key}")
+
+    if missing_ftl_references:
+        print(f"Found {len(missing_ftl_references)} FTL references without a declaration:")
+        for reference in missing_ftl_references:
+            try:
+                relative_path = reference.path.relative_to(root)
+            except ValueError:
+                relative_path = reference.path
+            print(f"{relative_path}:{reference.line}: {reference.key}")
+
     return 1
 
 

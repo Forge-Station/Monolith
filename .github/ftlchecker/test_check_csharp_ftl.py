@@ -63,7 +63,7 @@ class CSharpFtlCheckerTests(unittest.TestCase):
             encoding="utf-8",
         )
 
-        keys = checker.read_ftl_keys([self.locale_dir, engine_locale_dir.parent])
+        keys, _ = checker.read_ftl_data([self.locale_dir, engine_locale_dir.parent])
         references = checker.scan_csharp_references([self.source_dir])
         missing = checker.find_missing_references(references, keys)
 
@@ -97,7 +97,7 @@ class CSharpFtlCheckerTests(unittest.TestCase):
         self.assertEqual(
             checker.find_missing_references(
                 references,
-                checker.read_ftl_keys([self.locale_dir]),
+                checker.read_ftl_data([self.locale_dir])[0],
             ),
             [],
         )
@@ -116,9 +116,33 @@ class CSharpFtlCheckerTests(unittest.TestCase):
         references = checker.scan_csharp_references([self.source_dir])
         missing = checker.find_missing_references(
             references,
-            checker.read_ftl_keys([self.locale_dir]),
+            checker.read_ftl_data([self.locale_dir])[0],
         )
         self.assertEqual([reference.key for reference in missing], ["only-message.desc"])
+
+    def test_undeclared_ftl_references_report_the_ftl_file_and_line(self) -> None:
+        ftl_path = self.locale_dir / "en-US" / "strings.ftl"
+        ftl_path.parent.mkdir()
+        ftl_path.write_text(
+            "declared-key = Value\n"
+            "message-with-missing-reference = { missing-key }\n"
+            "attribute-reference = { missing-message.desc }\n"
+            "function-call = { NUMBER($value) }\n"
+            "-declared-term = A term\n"
+            "term-reference = { -declared-term }\n",
+            encoding="utf-8",
+        )
+
+        keys, references = checker.read_ftl_data([self.locale_dir])
+        missing = checker.find_missing_ftl_references(references, keys)
+
+        self.assertEqual(
+            [(reference.path, reference.line, reference.key) for reference in missing],
+            [
+                (ftl_path, 2, "missing-key"),
+                (ftl_path, 3, "missing-message"),
+            ],
+        )
 
 
 if __name__ == "__main__":

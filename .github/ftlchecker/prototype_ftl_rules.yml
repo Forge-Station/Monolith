@@ -1,6 +1,5 @@
 # Type-specific rules used by check_prototype_ftl.py.
 # generated_keys describes keys derived from a prototype ID.
-# attributes are Fluent attributes on that message, not separate FTL keys.
 # field_patterns validates localization IDs explicitly stored in prototype fields.
 prototype_types:
   entity:
@@ -8,9 +7,6 @@ prototype_types:
       - template: "ent-{id}"
         id_transforms:
           - identity
-        attributes:
-          - desc
-          - suffix
 
   construction:
     generated_keys:

@@ -76,6 +76,8 @@ CSHARP_LOC_CALL_RE = re.compile(
     r'"(?P<key>[A-Za-z][A-Za-z0-9_-]*)"'
 )
 DIRECT_KEY_RE = re.compile(r"[A-Za-z][A-Za-z0-9_-]*")
+
+
 @dataclass(frozen=True)
 class FtlMessage:
     path: Path
@@ -243,28 +245,8 @@ def walk_mappings(node: Node, seen: set[int] | None = None):
             yield from walk_mappings(child, seen)
 
 
-def iter_scalar_values(node: Node, seen: set[int] | None = None):
-    """Yield scalar values nested inside a YAML field value."""
-    if seen is None:
-        seen = set()
-
-    node_id = id(node)
-    if node_id in seen:
-        return
-    seen.add(node_id)
-
-    if isinstance(node, ScalarNode):
-        yield node.value
-    elif isinstance(node, MappingNode):
-        for _, value_node in node.value:
-            yield from iter_scalar_values(value_node, seen)
-    elif isinstance(node, SequenceNode):
-        for child in node.value:
-            yield from iter_scalar_values(child, seen)
-
-
 def iter_scalar_nodes(node: Node, seen: set[int] | None = None):
-    """Yield scalar nodes in a field value so diagnostics retain source lines."""
+    """Yield scalar nodes in a field value."""
     if seen is None:
         seen = set()
 
@@ -355,7 +337,6 @@ def load_prototype_rules(
             template = generated_rule.get("template")
             transforms = generated_rule.get("id_transforms", ["identity"])
             suffixes = generated_rule.get("suffixes", [""])
-            attributes = generated_rule.get("attributes", [])
 
             if (
                 not isinstance(template, str)
@@ -385,19 +366,11 @@ def load_prototype_rules(
                 raise RuntimeError(
                     f"'suffixes' for generated key rule {prototype_type} must be strings"
                 )
-            if not isinstance(attributes, list) or any(
-                not isinstance(attribute, str) for attribute in attributes
-            ):
-                raise RuntimeError(
-                    f"'attributes' for generated key rule {prototype_type} must be strings"
-                )
-
             generated_rules.append(
                 {
                     "template": template,
                     "id_transforms": transforms,
                     "suffixes": suffixes,
-                    "attributes": attributes,
                 }
             )
 
@@ -619,8 +592,8 @@ def scan_prototypes(
                         if normalize_field(field_name) not in localized_fields:
                             continue
 
-                        for value in iter_scalar_values(value_node):
-                            value = value.strip()
+                        for scalar_node in iter_scalar_nodes(value_node):
+                            value = scalar_node.value.strip()
                             if DIRECT_KEY_RE.fullmatch(value):
                                 references.add(value)
                             references.update(

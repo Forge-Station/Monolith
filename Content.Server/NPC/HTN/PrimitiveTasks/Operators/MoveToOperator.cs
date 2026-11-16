@@ -189,8 +189,9 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
 
         // Need to remove the planning value for execution.
         blackboard.Remove<EntityCoordinates>(NPCBlackboard.OwnerCoordinates);
-        var targetCoordinates = blackboard.GetValue<EntityCoordinates>(TargetKey);
-        var uid = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
+        if (!blackboard.TryGetValue<EntityCoordinates>(TargetKey, out var targetCoordinates, _entManager) ||
+            !blackboard.TryGetValue<EntityUid>(NPCBlackboard.Owner, out var uid, _entManager))
+            return;
 
         // Re-use the path we may have if applicable.
         var comp = _steering.Register(uid, targetCoordinates);
@@ -225,10 +226,23 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
 
     public override HTNOperatorStatus Update(NPCBlackboard blackboard, float frameTime)
     {
-        var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
+        if (!blackboard.TryGetValue<EntityUid>(NPCBlackboard.Owner, out var owner, _entManager) ||
+            !blackboard.TryGetValue<EntityCoordinates>(TargetKey, out var updated, _entManager))
+            return HTNOperatorStatus.Failed;
 
         if (!_entManager.TryGetComponent<NPCSteeringComponent>(owner, out var steering))
             return HTNOperatorStatus.Failed;
+
+        // Gunfire and a fleeing target move the coordinate after steering has started.
+        if (steering.Coordinates.TryDistance(_entManager, updated, out var shifted) &&
+            shifted > 1.5f)
+        {
+            steering.Coordinates = updated;
+            steering.PathfindToken?.Cancel();
+            steering.PathfindToken = null;
+            steering.CurrentPath.Clear();
+            steering.Status = SteeringStatus.Moving;
+        }
 
         // Just keep moving in the background and let the other tasks handle it.
         if (ShutdownState == HTNPlanState.PlanFinished && steering.Status == SteeringStatus.Moving)

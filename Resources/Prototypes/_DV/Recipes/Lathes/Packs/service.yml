@@ -1,8 +1,0 @@
-# Reporting gear printed on the autolathe. The cassette and recorder recipes are the
-# Delta-V pack; the devices themselves are not ported, so printing them does nothing
-# until those entities exist.
-- type: latheRecipePack
-  id: ReportingStatic
-  recipes:
-  - CassetteTape
-  - TapeRecorder

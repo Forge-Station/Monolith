@@ -2,6 +2,7 @@ flavor-complex-resomi = like chicken, but more exotic
 
 # MOTD: Teas
 
+flavor-complex-tea-black = rich, malty, and robust
 flavor-complex-tea-green = grassy, fresh, and slightly sweet
 flavor-complex-tea-chamomile = floral, soothing, and honey-like
 flavor-complex-tea-berry = sweet, tart, and bursting with berry notes

@@ -13,3 +13,5 @@ ent-GasbenderMothershipComputer = консоль верфи газового г�
     .desc = { ent-BaseMothershipComputer.desc }
 ent-CrescentMothershipComputer = консоль верфи полумесяца
     .desc = { ent-BaseMothershipComputer.desc }
+ent-MailCarrierMothershipComputer = консоль почтовой верфи
+    .desc = { ent-BaseMothershipComputer.desc }

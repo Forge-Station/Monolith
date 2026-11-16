@@ -55,3 +55,4 @@ shuttle-console-map-track = ⌖
 shuttle-console-marker-autopilot = AP
 shuttle-console-marker-autopilot-tooltip = Send autopilot to this marker
 shuttle-console-marker-focus-tooltip = Center map on this marker
+shuttle-console-marker-wrong-map = Autopilot only works on the current map.

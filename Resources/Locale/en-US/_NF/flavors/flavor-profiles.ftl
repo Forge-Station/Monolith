@@ -1,4 +1,6 @@
 flavor-base-basic = basic
+flavor-base-earthy = earthy
+
 flavor-complex-avocado = like avocado
 flavor-complex-cucumber = crisp and refreshing
 flavor-complex-honeycomb = like waxy honey

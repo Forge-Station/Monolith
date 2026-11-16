@@ -25,3 +25,4 @@ panicbunker-command-min-account-age-set = Установлен минималь�
 cmd-panicbunker_min_overall_minutes-desc = Получает или устанавливает минимальное общее время игры в минутах, при котором аккаунт может подключаться при включенном panicbunker.
 cmd-panicbunker_min_overall_minutes-help = Использование: panicbunker_min_overall_minutes <минуты>
 panicbunker-command-min-overall-minutes-is = Минимальное общее время игры для panicbunker составляет { $minutes } минут.
+panicbunker-command-min-overall-minutes-set = Установлено минимальное общее время игры для panicbunker на { $minutes } минут.

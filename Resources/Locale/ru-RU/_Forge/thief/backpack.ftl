@@ -1,3 +1,7 @@
+ent-ToolboxEngineerSyn = набор снаряжения Горлекса
+    .suffix = Техник
+    .desc = Что же взять на этот раз?
+
 SyndEngineer1Set-name = Техник-Штурмовичок
 SyndEngineer1Set-description =
     Простой набор без излишек. В него входит:

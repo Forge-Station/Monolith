@@ -1,3 +1,5 @@
+ent-GameRuleMeteorScheduler = { ent-BaseGameRule }
+    .desc = { ent-BaseGameRule.desc }
 ent-GameRuleMeteorSwarm = { ent-BaseGameRule }
     .desc = { ent-BaseGameRule.desc }
 ent-GameRuleSpaceDustMinor = { ent-GameRuleMeteorSwarm }

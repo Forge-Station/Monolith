@@ -66,3 +66,6 @@ ent-RadioImplanter = { ent-BaseImplantOnlyImplanterSyndi }
     .desc = { ent-BaseImplantOnlyImplanterSyndi.desc }
 
 # Forge-Frontier
+ent-OverlordImplanter = { ent-Implanter }
+    .desc = { ent-BaseImplantOnlyImplanter.desc }
+    .suffix = Оверлорд

@@ -8,6 +8,7 @@ plant-holder-component-no-weeds-message = This plot is devoid of weeds! It doesn
 plant-holder-component-remove-plant-message = You remove the plant from the {$name}.
 plant-holder-component-remove-plant-others-message = {$name} removes the plant.
 plant-holder-component-no-plant-message = There is no plant to remove.
+plant-holder-component-transfer-message = You transfer {$amount}u to {$owner}.
 plant-holder-component-nothing-to-sample-message = There is nothing to take a sample of!
 plant-holder-component-already-sampled-message = This plant has already been sampled.
 plant-holder-component-dead-plant-message = This plant is dead.

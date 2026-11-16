@@ -1,4 +1,8 @@
+ent-GrenadeBaton = шоковая граната
+    .desc = { ent-BaseGrenade.desc }
 ent-GrenadeBlast = фугасная граната
+    .desc = { ent-BaseGrenade.desc }
+ent-GrenadeFlash = светошумовая граната
     .desc = { ent-BaseGrenade.desc }
 ent-GrenadeFrag = осколочная граната
     .desc = { ent-BaseGrenade.desc }

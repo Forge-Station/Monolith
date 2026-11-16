@@ -85,6 +85,7 @@ reagent-physical-desc-inky = inky
 reagent-physical-desc-enigmatic = enigmatic
 reagent-physical-desc-exotic-smelling = exotic smelling
 reagent-physical-desc-energizing = energizing
+reagent-physical-desc-exhilarating = exhilarating
 reagent-physical-desc-vibrant = vibrant
 reagent-physical-desc-inversed = inversed
 reagent-physical-desc-fluffy = fluffy

@@ -1,0 +1,14 @@
+ent-ParamedAdvancedLethalSet = набор ДОК: летальное
+    .desc = Продвинутый смертоносный набор парамедика.
+ent-ParamedAdvancedLaserSet = набор ДОК: лазерное
+    .desc = Продвинутый лазерный набор парамедика.
+ent-ParamedMobileSet = мобильный набор
+    .desc = Мобильный набор парамедика.
+ent-ParamedNonlethalSet = набор ДОК: несмертельное
+    .desc = Несмертоносный набор парамедика.
+ent-ToolboxParamed = медицинский ящик неопределённости
+    .desc = Что же взять на этот раз?
+ent-ToolboxParamedAdvanced = продвинутый медицинский ящик неопределённости
+    .desc = Что же взять на этот раз?
+ent-ParamedDisablerSet = набор ДОК: станнер
+    .desc = Набор со станнером для парамедика.

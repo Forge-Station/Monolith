@@ -25,5 +25,7 @@ ent-FoodContainerEggEmpty = { ent-FoodContainerEgg }
     .desc = { ent-FoodContainerEgg.desc }
 ent-FoodBoxDonutEmpty = { ent-FoodBoxDonut }
     .desc = { ent-FoodBoxDonut.desc }
+ent-HappyHonkCargo = Ланчбокс МакКарго
+
 ent-FoodBoxWaffleCone = коробка вафельных рожков
     .desc = Коробка вафельных рожков бренда Waffle Co. На ней слегка пугающая картинка улыбающегося ребёнка.

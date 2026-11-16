@@ -1,0 +1,12 @@
+ent-SyndicateTechFabCircuitboard = ТехФаб Горлекса (машинная плата)
+    .desc = Плата для создания техфаба Горлекса.
+ent-GyroscopeSyndicateMachineCircuitboard = гироскоп Горлекса (машинная плата)
+    .desc = Плата для создания техфаба Горлекса.
+ent-ThrusterSyndicateMachineCircuitboard = двигатель Горлекса (машинная плата)
+    .desc = Плата для созд
+ent-TechFabInterdyneMachineCircuitboard = техфаб Interdyne (машинная плата)
+    .desc = Плата для создания техфаба компании Interdyne Pharmaceutics.
+ent-SyndicateTradingConsoleCircuitboard = Автомат торгов Горлекса (машинная плата)
+    .desc = Плата для создания автомата торгов.
+ent-ShuttleGunSunsetCircuitboard = Закат (машинная плата)
+    .desc = машинная плата для сборки стационарного орудия Закат

@@ -19,6 +19,7 @@ fax-machine-ui-refresh-button = Обновить
 fax-machine-ui-no-peers = Нет получателей
 fax-machine-ui-to = Получатель:
 fax-machine-ui-from = Отправитель:
+fax-machine-ui-paper = Бумага:
 fax-machine-ui-paper-inserted = Бумага в лотке
 fax-machine-ui-paper-not-inserted = Нет бумаги
 fax-machine-ui-paper-stock = Запас - Обычная: { $normal }, Офисная: { $office }

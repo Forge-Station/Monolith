@@ -1,3 +1,5 @@
+ent-PartSkeleton = часть тела скелета
+    .desc = { ent-BaseItem.desc }
 ent-TorsoSkeleton = туловище скелета
     .desc = { ent-PartSkeleton.desc }
 ent-HeadSkeleton = череп

@@ -16,6 +16,7 @@ ent-BaseC3SyndicateContrabandUnredeemable = BaseC3SyndicateContrabandUnredeemabl
 ent-BaseC3PirateContraband = BaseC3PirateContraband
 ent-BaseC2ContrabandUnredeemable = BaseC2ContrabandUnredeemable
 ent-BaseC3CultContraband = BaseC3CultContraband
+ent-BaseC2ContrabandDisallowSecs = BaseC2ContrabandDisallowSecs
 ent-BaseC3PirateContrabandNoValue = BaseC3PirateContrabandNoValue
 ent-BasePirateTarget = BasePirateTarget
 ent-BaseC3WizardContraband = BaseC3WizardContraband

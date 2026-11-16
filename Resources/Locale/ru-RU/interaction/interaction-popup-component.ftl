@@ -92,6 +92,8 @@ fence-rattle-success = *бдзынь*
 
 hugging-success-generic = Вы обнимаете { $target }.
 hugging-success-generic-others = { CAPITALIZE($user) } обнимает { $target }.
+hugging-success-generic-target = { CAPITALIZE($user) } обнимает вас.
+
 ## Other
 
 petting-success-tesla = Вы гладите { $target }, попутно нарушая законы природы и физики.

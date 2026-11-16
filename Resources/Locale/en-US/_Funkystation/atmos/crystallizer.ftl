@@ -1,4 +1,5 @@
 # Crystallizer UI
+crystallizer-ui-title = Crystallizer
 crystallizer-ui-controls = Controls
 crystallizer-ui-power = Power:
 crystallizer-ui-recipe = Recipe:

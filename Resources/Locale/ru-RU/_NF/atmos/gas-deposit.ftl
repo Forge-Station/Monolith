@@ -5,3 +5,4 @@ gas-deposit-drill-system-examined-amount = Экстрактор сообщает
         [0] [color={$statusColor}]почти ничего[/color] не осталось.
         *[other] [color={$statusColor}]{GASQUANTITY($value)}[/color] осталось.
     }
+gas-deposit-extraction-rate = скорость извлечения

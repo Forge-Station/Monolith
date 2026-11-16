@@ -1,3 +1,5 @@
+ent-BaseSkrellOrgan = { ent-BaseHumanOrganUnGibbable }
+    .desc = { ent-BaseHumanOrganUnGibbable.desc }
 ent-OrganSkrellBrain = мозг
     .desc = Источник невероятного, бесконечного интеллекта. Хонк.
 ent-OrganSkrellEyes = глаза

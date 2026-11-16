@@ -1,0 +1,1 @@
+ent-HypoBrigmedicPlus = гипоспрей бригмедика

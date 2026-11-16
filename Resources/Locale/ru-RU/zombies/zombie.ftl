@@ -5,4 +5,5 @@ zombie-generic = зомби
 zombie-name-prefix = { $baseName }
 zombie-role-desc = Зловещий мертвец.
 zombie-role-rules = Вы - антагонист. Ищите и кусайте живых людей, чтобы заразить их и превратить в зомби. Работайте сообща с другими зомби, чтобы захватить станцию.
+zombie-permadeath = В этот раз вы мертвы по-настоящему.
 zombification-resistance-coefficient-value = - шанс [color=violet]Заражения[/color] снижен на [color=lightblue]{$value}%[/color].

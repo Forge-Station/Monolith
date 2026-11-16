@@ -14,3 +14,5 @@ ent-ForgeCartridgePistol35Emp = патрон (.35 пистолетный ЭМИ)
     .desc = { ent-BaseCartridgeRifle.desc }
 ent-ForgeCartridgePistol45AP = патрон (.45 магнум бронебойный)
     .desc = { ent-BaseCartridgeRifle.desc }
+ent-NFBulletPistol35Emp = { ent-ForgeCartridgePistol35Emp.desc }
+    .desc = { ent-ForgeCartridgePistol35Emp.desc }

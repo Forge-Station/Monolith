@@ -12,3 +12,5 @@ ent-ForgeCartridgePistol45Rubber = патрон (.45 магнум резинов
     .desc = { ent-BaseCartridgeRifle.desc }
 ent-ForgeCartridgePistol45Emp = патрон (.45 магнум ЭМИ)
     .desc = { ent-BaseCartridgeRifle.desc }
+ent-ForgeCartridgePistol45BB = патрон (.45 магнум бронебойный)
+    .desc = { ent-BaseCartridgeRifle.desc }

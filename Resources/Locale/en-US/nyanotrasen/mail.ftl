@@ -1,3 +1,4 @@
+mail-recipient-mismatch = Recipient name or job does not match.
 mail-recipient-mismatch-name = Recipient name does not match.
 mail-invalid-access = Recipient name and job match, but access isn't as expected.
 mail-locked = The anti-tamper lock hasn't been removed. Tap the recipient's ID.

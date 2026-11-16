@@ -19,6 +19,10 @@ ent-BiogeneratorFill = { ent-Biogenerator }
     .suffix = Биомасса, 50
     .desc = { ent-Biogenerator.desc }
 
+ent-PirateTechFab = пиратский техфаб
+    .desc = Вы можете услышать, как оно гудит в предвкушении того, что его накормят новыми чертежами.
+    .suffix = DoNotMap
+
 ent-BlueprintReceiverBase = сервисный техфаб
     .desc = Печатает снаряжение для обслуживающего персонала.
 ent-Techfab = инженерный техфаб

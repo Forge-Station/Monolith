@@ -1,3 +1,5 @@
+ent-PartSilicon = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }
 ent-BaseBorgArmLeft = левая рука киборга
     .desc = { ent-PartSilicon.desc }
 ent-BaseBorgArmRight = правая рука киборга

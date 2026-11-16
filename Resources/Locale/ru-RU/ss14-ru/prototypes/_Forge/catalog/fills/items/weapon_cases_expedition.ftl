@@ -1,0 +1,11 @@
+ent-WeaponCaseLongWeaponRifleCascadeExpedition = кейс: винтовка Каскад (экспедиция)
+ent-WeaponCaseLongWeaponSniperDawnExpedition = кейс: снайперская Рассвет (экспедиция)
+ent-WeaponCaseLongWeaponShotgunSuppressorExpedition = кейс: дробовик Супрессор (экспедиция)
+ent-WeaponCaseLongWeaponSubMachineGunScorpionExpedition = кейс: ПП Скорпион (экспедиция)
+ent-WeaponCaseLongJackdaw1 = кейс: случайное оружие
+ent-SpawnDungeonLootGunT6 = случайное оружие
+ent-WeaponCaseLongWeaponWeaponPistolSwiftExpedition = кейс: пистолет Стриж (экспедиция)
+ent-WeaponCaseLongWeaponSniperSignExpedition = кейс: снайперская Знак (экспедиция)
+ent-WeaponCaseLongWeaponSubMachineGunGalemExpedition = кейс: случайное оружие
+ent-WeaponCaseLongWeaponRifleDaggerExpedition = кейс: винтовка Кинжал (экспедиция)
+ent-WeaponCaseLongWeaponShotgunAD12Expedition = кейс: дробовик АД-12 (экспедиция)

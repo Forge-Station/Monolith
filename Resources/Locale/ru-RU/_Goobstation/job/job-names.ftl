@@ -2,6 +2,7 @@ job-name-overall = Оверолл
 job-name-futureagent = Агент будущего
 
 # Navy Stuff
+job-name-navyofficer = Офицер высшего командования ТСФ
 job-name-navy-officer = Офицер высшего командования ТСФ
 job-name-navy-officer-undercover = Оперативник высшего командования ТСФ
 job-name-navycaptain = Капитан высшего командования ТСФ

@@ -10,6 +10,7 @@ plant-holder-component-remove-plant-others-message = { $name } удаляет р
 plant-holder-component-no-plant-message = Отсутствует растение для удаления.
 plant-holder-component-empty-message = { $owner } пуст!
 plant-holder-component-spray-message = Вы опрыскиваете { $owner }.
+plant-holder-component-transfer-message = Вы перемещаете { $amount }ед. в { $owner }.
 plant-holder-component-nothing-to-sample-message = Из этого не извлечь семян!
 plant-holder-component-already-sampled-message = Из этого растения уже извлекли семена.
 plant-holder-component-dead-plant-message = Это растение мертво.

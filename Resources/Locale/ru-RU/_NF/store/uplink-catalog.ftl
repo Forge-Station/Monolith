@@ -166,6 +166,7 @@ uplink-security-trackingdart-ammo-name = Набор отслеживающих �
 uplink-security-trackingdart-ammo-desc = Ящик, содержащий 4 отслеживающих дротика.
 uplink-security-spaceblade-sec-name = Вихревой диск ТСФ
 uplink-security-spaceblade-sec-desc = Экзотическое оглушающее оружие ТСФ.
+store-category-piratehardsuits = Скафандры
 store-category-pirateweapons = Оружие
 store-category-pirateutility = Утилиты
 store-category-pirateammo = Боеприпасы

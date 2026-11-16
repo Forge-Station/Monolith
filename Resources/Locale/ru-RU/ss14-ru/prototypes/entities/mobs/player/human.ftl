@@ -13,3 +13,5 @@ ent-MobHumanNukeOp = Ядерный оперативник
     .desc = { ent-MobHuman.desc }
 ent-MobHumanLoneNuclearOperative = Одинокий оперативник
     .desc = { ent-MobHuman.desc }
+ent-MobHumanSpaceNinja = Космический Ниндзя
+    .desc = { ent-MobHuman.desc }

@@ -35,6 +35,8 @@ analysis-console-no-server-connected = Cannot extract. No server connected.
 analysis-console-no-artifact-placed = No artifact on scanner.
 analysis-console-no-points-to-extract = No points to extract.
 
+analyzer-artifact-component-upgrade-analysis = analysis duration
+
 analysis-console-print-popup = The console printed out a report.
 analyzer-artifact-extract-popup = Energy shimmers on the artifact's surface!
 

@@ -1,3 +1,24 @@
+ent-EngineerNfsdPDA = КПК специалиста
+    .desc = Вы находитесь на грани величия. Этот КПК — знак того, что вы почти достигли вершины в иерархии закона. Ещё немного усилий — и вы станете легендой.
+ent-SpecOperPDA = КПК офицера
+    .desc = Сам списывает штрафы со счёта .
+ent-MSFOperatorPDA = КПК УСФ
+    .desc = Светло-зелёный символ ходячей бюрократии.
+ent-CentcomIDCardMSFRep = КПК УСФ
+    .desc = Светло-зелёный символ ходячей бюрократии.
+ent-CentcomIDCardMSFAdmiral = КПК УСФ
+    .desc = Светло-зелёный символ ходячей бюрократии.
+ent-SyndicateIDCardMedSyn = КПК контрабандиста
+    .desc = Время быть продуктивным членом общества... О, я плохой парень, пора убивать людей!
+ent-MSFAdmiralPDA = КПК УСФ
+    .desc = Светло-зелёный символ ходячей бюрократии.
+ent-CentcomIDCardMSFOperator = КПК УСФ
+    .desc = Светло-зелёный символ ходячей бюрократии.
+ent-CentcomIDCardMSFSpecOpsOfficer = КПК офицера
+    .desc = Сам списывает штрафы со счёта .
+ent-MSFRepPDA = КПК УСФ
+    .desc = Светло-зелёный символ ходячей бюрократии.
+
 ent-EmpirePDA = КПК имперца
     .desc = { ent-BasePDA.desc }
 ent-EmpireGoldPDA = КПК имперца

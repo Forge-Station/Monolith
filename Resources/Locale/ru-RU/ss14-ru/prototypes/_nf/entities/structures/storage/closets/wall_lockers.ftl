@@ -1,3 +1,5 @@
+ent-BaseWallmount = { ent-BaseStructureUnanchorable }
+    .desc = { ent-BaseStructureUnanchorable.desc }
 ent-LockerWallChemistry = настенный шкаф химика
     .desc = { ent-LockerWallMedical.desc }
 ent-LockerWallChemistryFilled = { ent-LockerWallChemistry }

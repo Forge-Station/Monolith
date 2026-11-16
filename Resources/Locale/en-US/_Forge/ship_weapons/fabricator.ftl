@@ -30,6 +30,7 @@ ship-weapon-fabricator-ui-no-board-details = Insert a researched ship weapon boa
 ship-weapon-fabricator-ui-no-loaded-parts = No stock parts have been loaded yet.
 ship-weapon-fabricator-ui-no-extra-requirements = No additional parts are required for this blueprint.
 ship-weapon-fabricator-ui-requirement-line = {$current}/{$required} {$name}
+ship-weapon-fabricator-ui-stored-part-line = {$count}x {$name}
 ship-weapon-fabricator-ui-stored-part-with-rating-line = {$count}x {$name} (tier {$rating}+)
 ship-weapon-fabricator-ui-stored-part-incompatible-line = {$count}x {$name} (tier {$rating}+, incompatible with current board)
 ship-weapon-fabricator-ui-stored-material-line = {$count}x {$name}

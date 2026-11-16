@@ -5,6 +5,7 @@ appraisal-label-price = Appraised Price
 
 # Ledger cartridge
 ledger-program-name = CreditFlow Lite
+ledger-header = Sector Ledger
 ledger-total-income = Total Income
 ledger-no-income = None
 ledger-total-expenses = Total Expenses

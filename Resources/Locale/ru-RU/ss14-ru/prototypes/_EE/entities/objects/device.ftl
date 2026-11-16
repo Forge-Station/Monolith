@@ -64,3 +64,6 @@ ent-FreespeakTranslator = { ent-Translator } с кадриса
     .suffix = Кадрис
 
 # Forge-change add
+ent-ForgeSiberaTranslator = { ent-Translator }
+    .desc = { ent-Translator.desc } с сиберы
+    .suffix = Сибера

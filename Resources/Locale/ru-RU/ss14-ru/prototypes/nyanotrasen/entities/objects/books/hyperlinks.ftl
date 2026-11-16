@@ -1,5 +1,7 @@
 ent-BaseHyperlinkBook = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
+ent-NFHyperlinkBookSpaceLaw = космический закон
+    .desc = Большая книга космических законов.
 ent-HyperlinkBookNfsdSop = СРП ТСФ
     .desc = Книга содержащая стандартные рабочие процедуры ТСФ.
 ent-HyperlinkBookSupernanny = книга несанкционированных космических наказаний

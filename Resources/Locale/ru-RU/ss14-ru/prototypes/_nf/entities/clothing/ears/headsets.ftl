@@ -40,4 +40,6 @@ ent-ClothingHeadsetServiceCommon = { ent-ClothingHeadsetService }
 # Forge
 ent-ClothingHeadsetDoc = гарнитура Директора TTI
     .desc = Дает знать о случившемся директору.
+ent-ClothingHeadsetNfsdCreamMed = { ent-ClothingHeadsetNfsdCream }
+    .desc = { ent-ClothingHeadsetNfsdCream.desc }
 # Forge end

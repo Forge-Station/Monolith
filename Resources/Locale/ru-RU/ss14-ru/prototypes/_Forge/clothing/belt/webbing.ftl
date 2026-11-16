@@ -1,5 +1,11 @@
 ent-ClothingBeltMilitaryWebbingSyndicate = РПС Горлекса
     .desc = Ременно-плечевая система тактических ремней.
+ent-ClothingBeltMilitaryWebbingSyndicateShturm = РПС штурмовика Горлекса
+    .desc = Ременно-плечевая система тактических ремней.
+ent-ClothingBeltMilitaryWebbingSyndicateCommand = РПС командира Горлекса
+    .desc = Ременно-плечевая система тактических ремней.
+ent-ClothingBeltMilitaryWebbingSyndicateEng = РПС техника Горлекса
+    .desc = Ременно-плечевая система тактических ремней.
 ent-ClothingBeltMilitaryWebbingSyndicateMed = РПС санитара Горлекса
     .desc = Ременно-плечевая система тактических ремней.
 ent-ClothingBeltWebbingsNormalRenegate = РПС ренегатов

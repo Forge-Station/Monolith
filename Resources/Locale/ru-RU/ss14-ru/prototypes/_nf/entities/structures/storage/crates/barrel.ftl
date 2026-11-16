@@ -233,6 +233,9 @@ ent-ChemicalBarrelOliveoil = { ent-BaseBarrel }
     .desc = { ent-BaseBarrel.desc }
     .suffix = Оливковое масло
 
+ent-LabelOliveoil = { ent-Paper }
+    .desc = { ent-Paper.desc }
+
 ent-ChemicalBarrelSpaceLube = { ent-BaseBarrel }
     .desc = { ent-BaseBarrel.desc }
     .suffix = Космическая смазка

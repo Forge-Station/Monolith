@@ -25,6 +25,22 @@ ent-WeaponTurretTSFMachinegunPacked = упакованная пулемётна�
 ent-WeaponTurretViperPacked = упакованная баллистическая турель Viper Group
     .desc = Разобранная турель. Разверните её и загрузите комплект боеприпасов. Внутри нет патронов.
 
+ent-WeaponTurretCCPacked = упакованная баллистическая турель «Колосс»
+    .desc = Разобранная турель «Колосс». Разверните её, затем загрузите комплект боеприпасов. Внутри боеприпасов нет.
+    .suffix = Упакованная
+
+ent-WeaponTurretCCShotgunPacked = упакованная дробовая турель «Колосс»
+    .desc = { ent-WeaponTurretCCPacked.desc }
+    .suffix = Упакованная
+
+ent-WeaponTurretCCSniperPacked = упакованная снайперская турель «Колосс»
+    .desc = { ent-WeaponTurretCCPacked.desc }
+    .suffix = Упакованная
+
+ent-WeaponTurretCCMachinegunPacked = упакованная пулемётная турель «Колосс»
+    .desc = { ent-WeaponTurretCCPacked.desc }
+    .suffix = Упакованная
+
 ent-WeaponTurretEmpirePacked = упакованная баллистическая турель Империя
     .desc = Разобранная турель Империя. Разверните её, затем загрузите комплект боеприпасов. Внутри боеприпасов нет.
     .suffix = Упакованная, Империя

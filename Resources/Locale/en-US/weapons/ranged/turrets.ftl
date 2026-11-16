@@ -8,3 +8,4 @@ deployable-turret-component-no-ammo = Weapon systems depleted
 deployable-turret-component-is-broken = The turret is heavily damaged and must be repaired
 deployable-turret-component-cant-access-wires = You can't reach the maintenance panel while the turret is active
 # Turret notification for station AI
+station-ai-turret-is-attacking-warning = {CAPITALIZE($source)} has engaged a hostile target.

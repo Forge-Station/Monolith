@@ -7,3 +7,5 @@ ent-JetpackNfsdFilled = джетпак ТСФ
 
 ent-JetpackPirate = подозрительный джетпак
     .desc = Это слегка подозрительный джетпак. Он вмешащает до 5 литров газа.
+ent-JetpackPirateFilled = { ent-JetpackPirate }
+    .desc = { ent-JetpackPirate.desc }

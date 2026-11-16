@@ -11,6 +11,7 @@ ore-hold-module-examine = Добавляет [color=cyan]{$extra}[/color] ёмк
 ore-hold-ui-title = Рудохранилище
 ore-hold-ui-capacity-prefix = Запасы:
 ore-hold-ui-empty = Пусто
+ore-hold-ui-entry = {$name}: {$count}
 ore-hold-ui-eject-all-type = Всё
 ore-hold-ui-eject-tooltip = Выгрузить {$amount} единиц
 ore-hold-ui-eject-all-tooltip = Выгрузить весь этот тип руды

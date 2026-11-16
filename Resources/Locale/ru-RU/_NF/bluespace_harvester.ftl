@@ -7,6 +7,7 @@ bluespace-harvester-window-level-current = Текущий уровень:
 bluespace-harvester-window-level-desired = Желаемый уровень:
 bluespace-harvester-window-power-usage = Использование энергии:
 bluespace-harvester-window-power-next = Мощность до следующего уровня:
+bluespace-harvester-window-power-surplus = Избыток энергии:
 bluespace-harvester-window-points-available = Доступно очков:
 bluespace-harvester-window-points-generation = Очки генерации:
 bluespace-harvester-window-points-total = Всего очков:

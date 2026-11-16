@@ -11,6 +11,7 @@ ore-hold-module-examine = Adds [color=cyan]{$extra}[/color] capacity to nearby o
 ore-hold-ui-title = Ore Hold
 ore-hold-ui-capacity-prefix = Stored:
 ore-hold-ui-empty = Empty
+ore-hold-ui-entry = {$name}: {$count}
 ore-hold-ui-eject-all-type = All
 ore-hold-ui-eject-tooltip = Eject {$amount} units
 ore-hold-ui-eject-all-tooltip = Eject all of this ore type

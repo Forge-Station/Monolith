@@ -6,6 +6,12 @@ cuffable-component-start-uncuffing-target-message = Вы начинаете ра
 cuffable-component-start-uncuffing-by-other-message = { $otherName } начинает расковывать вас!
 cuffable-component-remove-cuffs-success-message = Вы успешно снимаете наручники.
 cuffable-component-remove-cuffs-by-other-success-message = { $otherName } снимает с вас наручники.
+cuffable-component-remove-cuffs-to-other-partial-success-message =
+    Вы успешно снимаете наручники. { $cuffedHandCount } { $cuffedHandCount ->
+        [one] рука осталась
+        [few] руки остались
+       *[other] рук остались
+    } у { $otherName } в наручниках.
 cuffable-component-remove-cuffs-by-other-partial-success-message =
     { $otherName } успешно снимает с вас наручники. { $cuffedHandCount } { $cuffedHandCount ->
         [one] ваша рука осталась

@@ -1,8 +1,11 @@
 ent-USSPRiflemanIDCard = ID-карта стрелка СССП
+ent-USSPCorporalIDCard = ID-карта ефрейтора СССП
+ent-USSPMedicIDCard = ID-карта боевого медика СССП
 ent-USSPSergeantIDCard = ID-карта сержанта СССП
 ent-USSPCommissarIDCard = ID-карта комиссара СССП
 ent-MedMedicIDCard = ID-карта экстренного реагирования
 ent-TsfEngiIDCard = ID-карта инженера ВСКМП
+ent-TsfMarsocFTLIDCard = TSFMC MARSOC fire team leader ID card
 ent-TsfMarsocIDCard = ID-карта оперативника MARSOC ТСФ
     .desc = { ent-IDCardStandard.desc }
 ent-PDVRakhshanIDCard = ID-карта рахшана ФДА

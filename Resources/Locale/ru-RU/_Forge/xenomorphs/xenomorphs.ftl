@@ -5,6 +5,8 @@ forge-xeno-fortify-on = Вы запираете гребень. Двигатьс
 forge-xeno-fortify-off = Вы опускаете гребень.
 forge-xeno-pheromones-on = Вы испускаете резкий боевой запах.
 forge-xeno-pheromones-off = Запах рассеивается.
+forge-xeno-acid = Кислота въедается в цель.
+
 alerts-forge-xeno-plasma-name = Плазма
 alerts-forge-xeno-plasma-desc = Топливо улья. Способности его тратят. Сорняки и отдых восполняют.
 

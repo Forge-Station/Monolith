@@ -47,6 +47,7 @@ ent-BsReceiverCircuitboardT2 = блюспейс приёмник энергии 
 ent-BsReceiverCircuitboardT3 = блюспейс приёмник энергии Т3 (машинная плата)
     .desc = Печатная плата блюспейс приёмника энергии Т3
 
+ui-bs-energy-power-mvt = мВт
 ui-bs-energy-power-kvt = кВт
 ui-bs-energy-time-minute = минут
 ui-bs-energy-time-hour = ч

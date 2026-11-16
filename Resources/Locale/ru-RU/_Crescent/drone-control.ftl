@@ -1,3 +1,4 @@
+drone-control-no-grid = Нет грида
 drone-control-out-of-range = За пределами дальности
 
 drone-control-autolink = Автосоединение

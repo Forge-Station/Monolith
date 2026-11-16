@@ -3,6 +3,7 @@ pirate-bounty-console-accept-button-chest = Призвать сундук
 pirate-bounty-console-accept-button-label = Принять
 pirate-bounty-console-skip-button-text = Пропустить
 pirate-bounty-console-skip-button-accepted = Отменить
+pirate-bounty-console-time-label = Время: [color=orange]{ $time }[/color]
 pirate-bounty-console-reward-label = Награда: [color=limegreen]{ $reward } кредов[/color]
 pirate-bounty-console-manifest-label = Список: [color=orange]{ $item }[/color]
 pirate-bounty-console-manifest-entry =    { $amount ->

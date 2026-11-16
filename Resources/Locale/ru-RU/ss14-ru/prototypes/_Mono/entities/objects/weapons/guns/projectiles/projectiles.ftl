@@ -1,3 +1,4 @@
+ent-BulletEnergyGun45_magnum = заряд .45 магнум
 ent-HeavyPulse = тяжёлый импульсный заряд
     .desc = { ent-BaseBullet.desc }
 ent-HeavyPulseExp = разрывной импульсный заряд

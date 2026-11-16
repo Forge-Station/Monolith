@@ -4,3 +4,5 @@ entity-storage-component-already-contains-user-message = Здесь слишко
 entity-storage-component-cannot-open-no-space = Не хватает места, чтобы открыть это!
 
 ## OpenToggleVerb
+
+open-toggle-verb-welded-shut-message = { $verb } (заварено наглухо)

@@ -3,6 +3,7 @@ job-name-futureagent = Future Agent
 
 # Navy Stuff
 # All of those changed from Goob
+job-name-navyofficer = Winter Solstice Officer
 job-name-navy-officer = Winter Solstice Officer
 job-name-navy-officer-undercover = Winter Solstice Operative
 job-name-navycaptain = Winter Solstice HiCom

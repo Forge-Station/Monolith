@@ -3,6 +3,7 @@ research-discipline-NSC = Nexus Star Consortium
 research-technology-nsc-basic-apparel = Полевая форма NSC
 research-technology-nsc-bureaucracy = Бюрократия Nexus
 research-technology-nsc-vss-equipment = Экипировка VSS
+research-technology-nsc-field-equipment = Экипировка VSS
 research-technology-nsc-worker-hardsuit = Рабочий скафандр NSC
 research-technology-nsc-ballistic-smg = Баллистическое оружие: Щебет
 research-technology-nsc-mil-hardsuit-t1 = Бронескафандр 1-о поколения

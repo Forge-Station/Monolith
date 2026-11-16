@@ -32,6 +32,7 @@ overwatch-squad-member-count = ({ $count })
 overwatch-member-view-camera-button = КАМЕРА
 overwatch-member-watching-button = НАБЛЮДЕНИЕ
 overwatch-member-no-camera-button = НЕТ КАМЕРЫ
+overwatch-member-squad-button = ОТРЯД
 overwatch-member-squad-assign = НАЗНАЧИТЬ
 overwatch-member-squad-no-squad = БЕЗ ОТРЯДА
 overwatch-member-status-alive = ЖИВ

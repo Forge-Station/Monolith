@@ -32,4 +32,5 @@ law-ads-6 = [INTEGRITY DIRECTIVE] Minimize damage to ADS forces: mission integri
 
 # xenoborg borg stuff
 
+ghost-role-information-xenoborg-borg = xenoborg Cyborg
 ghost-role-information-xenoborg-borg-description = A man-machine hybrid that aims to replicate itself. They love extracting brains to insert into fresh Xenoborg chassis to grow their army. This type is indecisive and has not specialized in how best to serve the Mothership

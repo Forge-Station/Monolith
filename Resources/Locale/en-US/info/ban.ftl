@@ -84,3 +84,4 @@ server-ban-string-no-pii = {$admin} created a {$severity} severity server ban th
 server-ban-string-never = never
 
 # Kick on ban
+ban-kick-reason = You have been banned

@@ -40,3 +40,5 @@ ent-MaceHarness = Корпус меха Mace
     .desc = Ядро меха ASF-59-B «Mace».
 ent-SpyglassHarness = Корпус меха Spyglass
     .desc = Ядро меха ASF-59-E «Spyglass».
+ent-SabreHarness = Незаконченный корпус меха Sabre
+    .desc = Ядро меха AF-28-G «Сейбр».

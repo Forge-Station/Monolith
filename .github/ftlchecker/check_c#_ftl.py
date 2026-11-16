@@ -1,0 +1,309 @@
+#!/usr/bin/env python3
+"""Find static C# localization keys without any FTL declaration."""
+
+from __future__ import annotations
+
+import argparse
+import bisect
+import re
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+
+
+DEFAULT_LOCALE_DIRS = (
+    Path("Resources/Locale"),
+    Path("RobustToolbox/Resources/Locale"),
+)
+DEFAULT_SOURCE_DIRS = (
+    Path("Content.Client"),
+    Path("Content.Server"),
+    Path("Content.Shared"),
+)
+
+FTL_KEY_RE = re.compile(r"^(?P<key>[A-Za-z][A-Za-z0-9_-]*)\s*=")
+LOC_CALL_RE = re.compile(
+    r'\bLoc\.(?:GetString|TryGetString)\s*\(\s*(?P<prefix>\$@|@\$|\$|@)?'
+    r'"(?P<key>[^"\\\r\n]*)"(?=\s*[,)])'
+)
+LOC_IDENTIFIER_CALL_RE = re.compile(
+    r"\bLoc\.(?:GetString|TryGetString)\s*\(\s*@?(?P<name>[A-Za-z_]\w*)"
+    r"\s*(?=[,)])"
+)
+CONST_STRING_RE = re.compile(
+    r'\bconst\s+string\s+@?(?P<name>[A-Za-z_]\w*)\s*=\s*@?'
+    r'"(?P<key>[^"\\\r\n]*)"(?=\s*;)'
+)
+
+
+@dataclass(frozen=True)
+class CSharpReference:
+    key: str
+    path: Path
+    line: int
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Check static C# localization references against FTL messages."
+    )
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=Path("."),
+        help="Repository root. Defaults to the current directory.",
+    )
+    parser.add_argument(
+        "--locale-dir",
+        type=Path,
+        action="append",
+        default=None,
+        help=(
+            "Directory containing locale FTL files, relative to repository root; "
+            "can be specified multiple times."
+        ),
+    )
+    parser.add_argument(
+        "--source-dir",
+        action="append",
+        type=Path,
+        default=None,
+        help="C# source directory, relative to repository root; can be repeated.",
+    )
+    parser.add_argument(
+        "--show-used",
+        action="store_true",
+        help="Print additional scan statistics.",
+    )
+    return parser.parse_args()
+
+
+def get_ftl_files(directory: Path) -> list[Path]:
+    """Return all FTL files under a locale directory."""
+    return sorted(path for path in directory.rglob("*.ftl") if path.is_file())
+
+
+def read_ftl_keys(locale_dirs: list[Path]) -> set[str]:
+    """Collect top-level FTL messages; indented attributes are not message keys."""
+    keys: set[str] = set()
+    for locale_dir in locale_dirs:
+        for path in get_ftl_files(locale_dir):
+            try:
+                content = path.read_text(encoding="utf-8-sig")
+            except OSError as exc:
+                raise RuntimeError(f"Cannot read FTL file {path}: {exc}") from exc
+
+            for line in content.splitlines():
+                if line.lstrip().startswith("#"):
+                    continue
+                match = FTL_KEY_RE.match(line)
+                if match:
+                    keys.add(match.group("key"))
+    return keys
+
+
+def strip_csharp_comments(content: str) -> str:
+    """Mask C# comments while leaving string literals and line positions intact."""
+    characters = list(content)
+    index = 0
+
+    def mask(start: int, end: int) -> None:
+        for offset in range(start, end):
+            if characters[offset] not in "\r\n":
+                characters[offset] = " "
+
+    while index < len(content):
+        if content.startswith("//", index):
+            end = content.find("\n", index + 2)
+            if end == -1:
+                end = len(content)
+            mask(index, end)
+            index = end
+            continue
+
+        if content.startswith("/*", index):
+            end = content.find("*/", index + 2)
+            end = len(content) if end == -1 else end + 2
+            mask(index, end)
+            index = end
+            continue
+
+        if content.startswith('"""', index):
+            end = content.find('"""', index + 3)
+            index = len(content) if end == -1 else end + 3
+            continue
+
+        if content[index] == '"':
+            verbatim = (
+                index > 0 and content[index - 1] == "@"
+                or index > 1 and content[index - 2 : index] == "@$"
+            )
+            index += 1
+            while index < len(content):
+                if verbatim and content.startswith('""', index):
+                    index += 2
+                elif content[index] == "\\" and not verbatim:
+                    index += 2
+                elif content[index] == '"':
+                    index += 1
+                    break
+                else:
+                    index += 1
+            continue
+
+        if content[index] == "'":
+            index += 1
+            while index < len(content):
+                if content[index] == "\\":
+                    index += 2
+                elif content[index] == "'":
+                    index += 1
+                    break
+                else:
+                    index += 1
+            continue
+
+        index += 1
+
+    return "".join(characters)
+
+
+def line_number_at(line_starts: list[int], offset: int) -> int:
+    """Return a one-based line number for a source offset."""
+    return bisect.bisect_right(line_starts, offset)
+
+
+def scan_csharp_file(path: Path) -> list[CSharpReference]:
+    """Extract direct literal keys and uniquely resolvable string constants."""
+    try:
+        source = strip_csharp_comments(path.read_text(encoding="utf-8-sig"))
+    except OSError as exc:
+        raise RuntimeError(f"Cannot read C# file {path}: {exc}") from exc
+
+    constants: dict[str, set[str]] = {}
+    for match in CONST_STRING_RE.finditer(source):
+        constants.setdefault(match.group("name"), set()).add(match.group("key"))
+
+    line_starts = [0]
+    line_starts.extend(
+        match.end() for match in re.finditer("\n", source)
+    )
+
+    references = []
+    for match in LOC_CALL_RE.finditer(source):
+        key = match.group("key")
+        if "$" in (match.group("prefix") or "") and "{" in key:
+            continue
+        references.append(
+            CSharpReference(
+                key,
+                path,
+                line_number_at(line_starts, match.start()),
+            )
+        )
+
+    for match in LOC_IDENTIFIER_CALL_RE.finditer(source):
+        values = constants.get(match.group("name"), set())
+        if len(values) != 1:
+            continue
+        references.append(
+            CSharpReference(
+                next(iter(values)),
+                path,
+                line_number_at(line_starts, match.start()),
+            )
+        )
+
+    return references
+
+
+def scan_csharp_references(source_dirs: list[Path]) -> list[CSharpReference]:
+    """Collect static localization references under the supplied source roots."""
+    references: list[CSharpReference] = []
+    for directory in source_dirs:
+        for path in sorted(directory.rglob("*.cs")):
+            if path.is_file():
+                references.extend(scan_csharp_file(path))
+    return references
+
+
+def find_missing_references(
+    references: list[CSharpReference],
+    ftl_keys: set[str],
+) -> list[CSharpReference]:
+    """Return every static C# lookup whose key has no FTL message."""
+    return sorted(
+        (reference for reference in references if reference.key not in ftl_keys),
+        key=lambda reference: (str(reference.path).casefold(), reference.line, reference.key),
+    )
+
+
+def main() -> int:
+    args = parse_args()
+    root = args.root.resolve()
+    locale_dirs = args.locale_dir or list(DEFAULT_LOCALE_DIRS)
+    locale_dirs = [
+        (root / directory).resolve() if not directory.is_absolute()
+        else directory.resolve()
+        for directory in locale_dirs
+    ]
+    source_dirs = args.source_dir or list(DEFAULT_SOURCE_DIRS)
+    source_dirs = [
+        (root / directory).resolve() if not directory.is_absolute()
+        else directory.resolve()
+        for directory in source_dirs
+    ]
+
+    missing_locales = [directory for directory in locale_dirs if not directory.is_dir()]
+    if missing_locales:
+        print(
+            "ERROR: FTL directory not found: "
+            + ", ".join(str(directory) for directory in missing_locales),
+            file=sys.stderr,
+        )
+        return 2
+
+    missing_sources = [directory for directory in source_dirs if not directory.is_dir()]
+    if missing_sources:
+        print(
+            "ERROR: C# source directory not found: "
+            + ", ".join(str(directory) for directory in missing_sources),
+            file=sys.stderr,
+        )
+        return 2
+
+    try:
+        print("Reading FTL message declarations...")
+        ftl_keys = read_ftl_keys(locale_dirs)
+        print("Scanning C# localization lookups...")
+        references = scan_csharp_references(source_dirs)
+    except RuntimeError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
+
+    missing = find_missing_references(references, ftl_keys)
+
+    if args.show_used:
+        print()
+        print("Scan statistics:")
+        print(f"  FTL message keys: {len(ftl_keys)}")
+        print(f"  Static C# lookups: {len(references)}")
+        print(f"  Missing FTL keys: {len(missing)}")
+        print()
+
+    if not missing:
+        print("All static C# localization keys have FTL declarations.")
+        return 0
+
+    print(f"Found {len(missing)} C# localization lookups without an FTL declaration:")
+    for reference in missing:
+        try:
+            relative_path = reference.path.relative_to(root)
+        except ValueError:
+            relative_path = reference.path
+        print(f"{relative_path}:{reference.line}: {reference.key}")
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

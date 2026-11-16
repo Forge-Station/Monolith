@@ -1,0 +1,46 @@
+# Type-specific rules used by check_prototype_ftl.py.
+# generated_keys describes keys derived from a prototype ID.
+# attributes are Fluent attributes on that message, not separate FTL keys.
+# field_patterns validates localization IDs explicitly stored in prototype fields.
+prototype_types:
+  entity:
+    generated_keys:
+      - template: "ent-{id}"
+        id_transforms:
+          - identity
+        attributes:
+          - desc
+          - suffix
+
+  construction:
+    generated_keys:
+      - template: "construction-recipe-{id}"
+        id_transforms:
+          - kebab
+          - construction_recipe_locale
+        suffixes:
+          - ""
+          - "-desc"
+
+  job:
+    field_patterns:
+      name: "^(?:job-name|forge-job-name)-[A-Za-z0-9_-]+$"
+      description: "^(?:job-description|forge-job-desc)-[A-Za-z0-9_-]+$"
+
+  department:
+    field_patterns:
+      name: "^department-[A-Za-z0-9_-]+$"
+      description: "^department-[A-Za-z0-9_-]+-description$"
+
+  species:
+    field_patterns:
+      name: "^species-name-[A-Za-z0-9_-]+$"
+
+  radioChannel:
+    field_patterns:
+      name: "^chat-radio-[A-Za-z0-9_-]+$"
+
+  emote:
+    field_patterns:
+      name: "^(?:delta-)?chat-emote-name-[A-Za-z0-9_-]+$"
+    # ChatMessages may intentionally contain untranslated literal strings.

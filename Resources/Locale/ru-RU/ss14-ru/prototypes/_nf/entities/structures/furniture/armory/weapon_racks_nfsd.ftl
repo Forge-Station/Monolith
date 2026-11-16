@@ -1,9 +1,9 @@
-ent-StructurePistolRackNfsd = { ent-WeaponRackPistolBase }
+ent-StructurePistolRackNfsd = { ent-StructurePistolRack }
     .suffix = ТСФ, Пустой
-    .desc = { ent-WeaponRackPistolBase.desc }
-ent-StructurePistolRackWallmountedNfsd = { ent-WeaponRackPistolBase }
+    .desc = { ent-StructurePistolRack.desc }
+ent-StructurePistolRackWallmountedNfsd = { ent-StructurePistolRack }
     .suffix = ТСФ, Пустой, Настенный
-    .desc = { ent-WeaponRackPistolBase.desc }
+    .desc = { ent-StructurePistolRack.desc }
 ent-StructureGunRackNfsd = { ent-WeaponRackBase }
     .suffix = ТСФ, Пустой
     .desc = { ent-WeaponRackBase.desc }

@@ -1,6 +1,6 @@
 ent-BaseWeaponLightMachineGun = BaseWeaponLightMachineGun
     .desc = Дерзай — налетай, целься и стреляй.
-ent-WeaponLightMachineGunL6 = { ent-NFWeaponLightMachineGunL6 }
-    .desc = { ent-NFWeaponLightMachineGunL6.desc }
-ent-WeaponLightMachineGunL6C = { ent-NFWeaponLightMachineGunL6C }
-    .desc = { ent-NFWeaponLightMachineGunL6C.desc }
+ent-WeaponLightMachineGunL6 = L6 SAW
+    .desc = Нелегальное оружие используемое агентами синдиката. Весьма традиционный лёгкий пулемёт с удобной лакированной деревянной пистолетной рукоятью. Использует патроны калибра .30 винтовочный.
+ent-WeaponLightMachineGunL6C = L6C ROW
+    .desc = Нелегальное оружие используемое агентами синдиката. Весьма традиционный лёгкий пулемёт с удобной лакированной деревянной пистолетной рукоятью. Использует патроны калибра .30 винтовочный.

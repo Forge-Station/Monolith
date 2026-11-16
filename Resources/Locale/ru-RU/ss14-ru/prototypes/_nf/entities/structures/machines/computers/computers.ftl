@@ -29,8 +29,8 @@ ent-ComputerContrabandPalletConsolePirate = компьютер обмена на
     .desc = Сбывай здесь свои незаконно добытые товары!
 ent-ComputerPirateBountyRedemption = консоль пиратских вознаграждений
     .desc = Вернулся из плавания? Обменивай здесь свои награды, дружище.
-ent-ComputerShuttleAntag = { ent-ComputerShuttleAntagEmpty }
-    .desc = { ent-ComputerShuttleAntagEmpty.desc }
+ent-ComputerShuttleAntag = { ent-ComputerShuttle}
+    .desc = { ent-ComputerShuttle.desc }
 
 # Gas Sale console
 ent-GasSaleConsole = консоль продажи газа

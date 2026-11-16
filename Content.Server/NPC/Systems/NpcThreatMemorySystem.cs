@@ -26,7 +26,6 @@ public sealed class NpcThreatMemorySystem : EntitySystem
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private ExamineSystemShared _examine = default!;
     [Dependency] private HTNSystem _htn = default!;
-    [Dependency] private NPCCombatSystem _combat = default!;
     [Dependency] private NpcFactionSystem _factions = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -46,7 +45,7 @@ public sealed class NpcThreatMemorySystem : EntitySystem
         while (query.MoveNext(out var uid, out _, out var htn, out _))
         {
             WatchHiding(uid, htn);
-            RememberTarget(uid, htn);
+            RememberTarget(htn);
         }
     }
 
@@ -126,54 +125,75 @@ public sealed class NpcThreatMemorySystem : EntitySystem
         return coords.IsValid(EntityManager);
     }
 
-    private void RememberTarget(EntityUid uid, HTNComponent htn)
+    private void RememberTarget(HTNComponent htn)
     {
         var blackboard = htn.Blackboard;
-        blackboard.ReadOnly = false;
 
         if (blackboard.ContainsKey(NPCBlackboard.IncomingFireCoordinates))
         {
+            if (!blackboard.ContainsKey(NPCBlackboard.LastSeenCoordinates))
+                return;
+
+            blackboard.ReadOnly = false;
             blackboard.Remove<EntityCoordinates>(NPCBlackboard.LastSeenCoordinates);
             return;
         }
 
+        // The combat target is already the mob HTN can see. Another raycast here was most of the tick.
         if (blackboard.TryGetValue<EntityUid>("Target", out var target, EntityManager) &&
             target.IsValid() &&
             !TerminatingOrDeleted(target) &&
-            (!TryComp<MobStateComponent>(target, out var mob) || mob.CurrentState == MobState.Alive) &&
-            CanSee(uid, target, blackboard))
+            (!TryComp<MobStateComponent>(target, out var mob) || mob.CurrentState == MobState.Alive))
         {
-            blackboard.SetValue(NPCBlackboard.LastSeenCoordinates, Transform(target).Coordinates);
+            var coords = Transform(target).Coordinates;
+            if (blackboard.TryGetValue<EntityCoordinates>(NPCBlackboard.LastSeenCoordinates, out var last, EntityManager) &&
+                last.EntityId == coords.EntityId &&
+                (last.Position - coords.Position).LengthSquared() < 0.04f)
+                return;
+
+            blackboard.ReadOnly = false;
+            blackboard.SetValue(NPCBlackboard.LastSeenCoordinates, coords);
             blackboard.Remove<EntityCoordinates>(NPCBlackboard.InvestigateCoordinates);
             return;
         }
 
-        if (!blackboard.TryGetValue<EntityCoordinates>(NPCBlackboard.LastSeenCoordinates, out var last, EntityManager))
+        if (!blackboard.TryGetValue<EntityCoordinates>(NPCBlackboard.LastSeenCoordinates, out var lost, EntityManager))
             return;
 
+        blackboard.ReadOnly = false;
         blackboard.Remove<EntityCoordinates>(NPCBlackboard.LastSeenCoordinates);
 
         if (blackboard.ContainsKey(NPCBlackboard.InvestigateCoordinates))
             return;
 
-        blackboard.SetValue(NPCBlackboard.InvestigateCoordinates, last);
+        blackboard.SetValue(NPCBlackboard.InvestigateCoordinates, lost);
         _htn.Replan(htn);
     }
 
-    private bool CanSee(EntityUid uid, EntityUid target, NPCBlackboard blackboard)
-    {
-        var radius = blackboard.GetValueOrDefault<float>(blackboard.GetVisionRadiusKey(EntityManager), EntityManager);
-        return _examine.InRangeUnOccluded(uid, _combat.GetAttackTarget(uid, target), radius + 0.5f, null);
-    }
-
     /// <summary>
-    /// Remember a hostile only when they were visible in the open and then shut the crate in view.
+    /// Remember a hostile only when they were the current target in the open and then shut the crate in view.
+    /// One line-of-sight check, and only on that transition. Not a vision scan of every nearby faction member.
     /// </summary>
     private void WatchHiding(EntityUid uid, HTNComponent htn)
     {
-        var memory = EnsureComp<NpcHidingMemoryComponent>(uid);
+        var hasTarget = htn.Blackboard.TryGetValue<EntityUid>("Target", out var current, EntityManager);
+        if (!TryComp<NpcHidingMemoryComponent>(uid, out var memory))
+        {
+            if (!hasTarget || !IsLivingLoose(current))
+                return;
+
+            memory = EnsureComp<NpcHidingMemoryComponent>(uid);
+        }
+
         var radius = htn.Blackboard.GetValueOrDefault<float>(htn.Blackboard.GetVisionRadiusKey(EntityManager), EntityManager);
         var range = radius + 0.5f;
+        var rangeSq = range * range;
+
+        var seen = memory.SeenScratch;
+        seen.Clear();
+
+        if (hasTarget && IsLivingLoose(current) && InRange(uid, current, rangeSq))
+            seen.Add(current);
 
         foreach (var previous in memory.SeenLoose)
         {
@@ -184,29 +204,43 @@ public sealed class NpcThreatMemorySystem : EntitySystem
                 continue;
 
             if (_container.TryGetContainingContainer(previous, out var container) &&
-                HasComp<EntityStorageComponent>(container.Owner) &&
-                _examine.InRangeUnOccluded(uid, container.Owner, range, null))
-                memory.WitnessedContainers.Add(container.Owner);
-        }
-
-        var seen = memory.SeenScratch;
-        seen.Clear();
-
-        foreach (var hostile in _factions.GetNearbyHostiles(uid, range))
-        {
-            if (!TryComp<MobStateComponent>(hostile, out var mob) || mob.CurrentState != MobState.Alive)
+                HasComp<EntityStorageComponent>(container.Owner))
+            {
+                if (InRange(uid, container.Owner, rangeSq) &&
+                    _examine.InRangeUnOccluded(uid, container.Owner, range, null))
+                    memory.WitnessedContainers.Add(container.Owner);
                 continue;
+            }
 
-            if (_container.TryGetContainingContainer(hostile, out _))
-                continue;
-
-            if (_examine.InRangeUnOccluded(uid, hostile, range, null))
-                seen.Add(hostile);
+            if (InRange(uid, previous, rangeSq))
+                seen.Add(previous);
         }
 
         (memory.SeenLoose, memory.SeenScratch) = (seen, memory.SeenLoose);
 
-        memory.WitnessedContainers.RemoveWhere(crate => !StillHidesSomeone(crate));
+        if (memory.WitnessedContainers.Count > 0)
+            memory.WitnessedContainers.RemoveWhere(crate => !StillHidesSomeone(crate));
+    }
+
+    private bool IsLivingLoose(EntityUid uid)
+    {
+        if (!uid.IsValid() || TerminatingOrDeleted(uid))
+            return false;
+
+        if (!TryComp<MobStateComponent>(uid, out var mob) || mob.CurrentState != MobState.Alive)
+            return false;
+
+        return !_container.TryGetContainingContainer(uid, out _);
+    }
+
+    private bool InRange(EntityUid from, EntityUid to, float rangeSq)
+    {
+        var origin = Transform(from);
+        var other = Transform(to);
+        if (origin.MapID != other.MapID)
+            return false;
+
+        return (_transform.GetWorldPosition(origin) - _transform.GetWorldPosition(other)).LengthSquared() <= rangeSq;
     }
 
     private bool StillHidesSomeone(EntityUid crate)

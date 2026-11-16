@@ -1,5 +1,7 @@
 using Content.Client.IoC;
 using Content.Client.Parallax.Managers;
+using Content.Client.Sprite;
+using Content.IntegrationTests.Pair;
 using Robust.Client;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
@@ -39,9 +41,15 @@ public sealed class SandboxTest
                 ClientBeforeIoC = () =>
                 {
                     IoCManager.Register<IParallaxManager, DummyParallaxManager>(true);
+                    TestClientHooks.LimitImagePool();
                     IoCManager.Resolve<ILogManager>().GetSawmill("loc").Level = LogLevel.Error;
                     IoCManager.Resolve<IConfigurationManager>()
                         .OnValueChanged(RTCVars.FailureLogLevel, value => logHandler.FailureLevel = value, true);
+                },
+                ClientPostInit = () =>
+                {
+                    SpriteTreeGuardSystem.Repair = TestClientHooks.OnFrame;
+                    TestClientHooks.ReleaseImageMemory();
                 }
             });
         };

@@ -1,4 +1,3 @@
-using Content.Client._WF.Headshot;
 using Content.Client._WF.Wolfmed.Medical;
 using Content.Client.Examine;
 using Content.Shared._WF.ExamineCard;
@@ -57,8 +56,7 @@ public sealed partial class ExamineCardSystem : SharedExamineCardSystem
 
         SubscribeNetworkEvent<ExamineCardEvent>(OnCard);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ClientExaminedEvent>(OnClientExamined);
-        // After the headshot, so its portrait can move into the card's photo frame.
-        SubscribeLocalEvent<ExamineServerInfoShownEvent>(OnServerInfoShown, after: new[] { typeof(HeadshotSystem) });
+        SubscribeLocalEvent<ExamineServerInfoShownEvent>(OnServerInfoShown);
     }
 
     /// <summary>
@@ -120,9 +118,6 @@ public sealed partial class ExamineCardSystem : SharedExamineCardSystem
         {
             switch (child)
             {
-                case HeadshotPortrait portrait:
-                    buttons.Add(portrait);
-                    break;
                 case BoxContainer { Name: "ExamineButtonsHBox" } row:
                     foreach (var button in row.Children)
                     {
@@ -134,13 +129,6 @@ public sealed partial class ExamineCardSystem : SharedExamineCardSystem
             }
         }
 
-        // The portrait rode along in the list so the loop above never reparents while iterating.
-        foreach (var control in buttons)
-        {
-            if (control is HeadshotPortrait portrait)
-                card.SetPhoto(portrait);
-        }
-        buttons.RemoveAll(c => c is HeadshotPortrait);
         card.SetButtons(buttons);
 
         for (var i = box.ChildCount - 1; i >= 1; i--)

@@ -441,8 +441,6 @@
                     <Label Name="DescriptionCounter" StyleClasses="CreatorFieldLabel" VAlign="Center" />
                 </BoxContainer>
             </BoxContainer>
-            <!-- WOLFGATE(Headshot): opens the headshot URL editor -->
-            <Button Name="HeadshotButton" StyleClasses="LinkButton" HorizontalAlignment="Left" />
             <BoxContainer Orientation="Horizontal" SeparationOverride="4">
                 <OptionButton Name="BarkVoiceButton" HorizontalExpand="True" />
                 <Button Name="BarkVoicePlayButton" Text="▶" />

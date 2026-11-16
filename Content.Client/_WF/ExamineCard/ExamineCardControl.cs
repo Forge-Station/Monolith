@@ -60,7 +60,7 @@ public sealed class ExamineCardControl : PanelContainer
     public const float BandAlpha = 0.88f;
     public static readonly Color InsetText = Color.FromHex("#C9D3C6");
 
-    /// <summary>The photo frame; the headshot replaces its sprite when there is one.</summary>
+    /// <summary>The photo frame containing the character sprite.</summary>
     public readonly PanelContainer Photo;
 
     private readonly SpriteView _photoSprite;
@@ -606,18 +606,6 @@ public sealed class ExamineCardControl : PanelContainer
                 new Label { Text = chip.Label, FontOverride = font, FontColorOverride = ink },
             },
         };
-    }
-
-    /// <summary>Puts the headshot in the photo frame in place of the sprite.</summary>
-    public void SetPhoto(Control portrait)
-    {
-        _photoSprite.Visible = false;
-        portrait.Orphan();
-        portrait.SetSize = new Vector2(80, 100);
-        portrait.Margin = new Thickness(0);
-        portrait.HorizontalAlignment = HAlignment.Center;
-        portrait.VerticalAlignment = VAlignment.Center;
-        Photo.AddChild(portrait);
     }
 
     /// <summary>Room for a field's value beside its label: a full 32-character name fits on one line.</summary>

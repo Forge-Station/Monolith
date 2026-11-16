@@ -29,7 +29,7 @@ public sealed partial class DockObject : PanelContainer
         
         var viewButton = new Button()
         {
-            Text = Loc.GetString("View"),
+            Text = Loc.GetString("docking-component-view"),
         };
 
         viewButton.OnPressed += args =>

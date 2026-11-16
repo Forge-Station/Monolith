@@ -101,7 +101,7 @@ public sealed partial class CEWeatherCommand : LocalizedCommands
             {
                 opts.Add(new CompletionOption(proto.ID));
             }
-            return CompletionResult.FromHintOptions(opts, Loc.GetString("cmd-weather-hint-prototype"));
+            return CompletionResult.FromHintOptions(opts, Loc.GetString("cmd-weather-hint"));
         }
 
         if (args.Length == 3)

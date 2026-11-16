@@ -13,12 +13,15 @@ from pathlib import Path
 
 DEFAULT_LOCALE_DIRS = (
     Path("Resources/Locale"),
+    Path("RobustToolbox/Resources/Locale"),
 )
 DEFAULT_SOURCE_DIRS = (
     Path("Content.Client"),
     Path("Content.Server"),
     Path("Content.Shared"),
 )
+DEFAULT_PROTOTYPES_DIR = Path("Resources/Prototypes")
+DEFAULT_RULES_FILE = Path(".github/ftlchecker/prototype_ftl_rules.yml")
 
 FTL_KEY_RE = re.compile(r"^(?P<key>[A-Za-z][A-Za-z0-9_-]*)\s*=")
 FTL_TERM_RE = re.compile(r"^(?P<key>-[A-Za-z][A-Za-z0-9_-]*)\s*=")
@@ -28,7 +31,7 @@ FTL_REFERENCE_RE = re.compile(
 )
 LOC_CALL_RE = re.compile(
     r'\bLoc\.(?:GetString|TryGetString)\s*\(\s*(?P<prefix>\$@|@\$|\$|@)?'
-    r'"(?P<key>[^"\\\r\n]*)"(?=\s*[,)])'
+    r'"(?P<key>[A-Za-z][A-Za-z0-9_-]*(?:\.[A-Za-z][A-Za-z0-9_-]*)?)"(?=\s*[,)])'
 )
 LOC_IDENTIFIER_CALL_RE = re.compile(
     r"\bLoc\.(?:GetString|TryGetString)\s*\(\s*@?(?P<name>[A-Za-z_]\w*)"
@@ -36,7 +39,7 @@ LOC_IDENTIFIER_CALL_RE = re.compile(
 )
 CONST_STRING_RE = re.compile(
     r'\bconst\s+string\s+@?(?P<name>[A-Za-z_]\w*)\s*=\s*@?'
-    r'"(?P<key>[^"\\\r\n]*)"(?=\s*;)'
+    r'"(?P<key>[A-Za-z][A-Za-z0-9_-]*(?:\.[A-Za-z][A-Za-z0-9_-]*)?)"(?=\s*;)'
 )
 
 
@@ -82,6 +85,18 @@ def parse_args() -> argparse.Namespace:
         help="C# source directory, relative to repository root; can be repeated.",
     )
     parser.add_argument(
+        "--prototypes-dir",
+        type=Path,
+        default=DEFAULT_PROTOTYPES_DIR,
+        help="Prototype YAML directory relative to repository root.",
+    )
+    parser.add_argument(
+        "--rules-file",
+        type=Path,
+        default=DEFAULT_RULES_FILE,
+        help="Prototype localization rules YAML file relative to repository root.",
+    )
+    parser.add_argument(
         "--show-used",
         action="store_true",
         help="Print additional scan statistics.",
@@ -92,6 +107,61 @@ def parse_args() -> argparse.Namespace:
 def get_ftl_files(directory: Path) -> list[Path]:
     """Return all FTL files under a locale directory."""
     return sorted(path for path in directory.rglob("*.ftl") if path.is_file())
+
+
+def mask_ftl_comments_and_strings(content: str) -> str:
+    """Mask Fluent comments and quoted literals while preserving line positions."""
+    characters = list(content)
+    line_start = True
+    in_comment = False
+    in_string = False
+    index = 0
+
+    while index < len(content):
+        char = content[index]
+
+        if char in "\r\n":
+            in_comment = False
+            line_start = True
+            index += 1
+            continue
+
+        if in_comment:
+            characters[index] = " "
+            index += 1
+            continue
+
+        if line_start and char.isspace():
+            index += 1
+            continue
+
+        if line_start and char == "#":
+            in_comment = True
+            characters[index] = " "
+            line_start = False
+            index += 1
+            continue
+
+        line_start = False
+
+        if in_string:
+            characters[index] = " "
+            if char == "\\" and index + 1 < len(content):
+                if content[index + 1] not in "\r\n":
+                    characters[index + 1] = " "
+                index += 2
+                continue
+            if char == '"':
+                in_string = False
+            index += 1
+            continue
+
+        if char == '"':
+            in_string = True
+            characters[index] = " "
+        index += 1
+
+    return "".join(characters)
 
 
 def read_ftl_data(
@@ -121,16 +191,22 @@ def read_ftl_data(
                 if term_match:
                     keys.add(term_match.group("key"))
 
-            for match in FTL_REFERENCE_RE.finditer(content):
+            reference_content = mask_ftl_comments_and_strings(content)
+            for match in FTL_REFERENCE_RE.finditer(reference_content):
                 key = (match.group("term") or "") + match.group("key")
                 if not match.group("term") and key.isupper():
-                    if content[match.end():].lstrip().startswith("("):
+                    if reference_content[match.end():].lstrip().startswith("("):
                         continue
                 references.append(
                     FtlReference(
                         key,
                         path,
-                        line_number_at(line_starts, match.start()),
+                        line_number_at(
+                            line_starts,
+                            match.start("term")
+                            if match.group("term")
+                            else match.start("key"),
+                        ),
                     )
                 )
     return keys, references
@@ -283,6 +359,30 @@ def find_missing_ftl_references(
     )
 
 
+def load_generated_prototype_keys(
+    prototypes_dir: Path,
+    rules_path: Path,
+) -> set[str]:
+    """Load keys that are generated from configured prototype IDs."""
+    try:
+        import check_prototype_ftl as prototype_checker
+
+        rules = prototype_checker.load_prototype_rules(rules_path)
+        prototype_ids, _, _ = prototype_checker.scan_prototypes(
+            prototypes_dir,
+            set(),
+            rules,
+        )
+        generated_keys, _ = prototype_checker.generated_prototype_keys(
+            prototype_ids,
+            rules,
+        )
+    except RuntimeError as exc:
+        raise RuntimeError(f"Cannot load generated prototype localization keys: {exc}") from exc
+
+    return generated_keys
+
+
 def main() -> int:
     args = parse_args()
     root = args.root.resolve()
@@ -298,6 +398,16 @@ def main() -> int:
         else directory.resolve()
         for directory in source_dirs
     ]
+    prototypes_dir = (
+        (root / args.prototypes_dir).resolve()
+        if not args.prototypes_dir.is_absolute()
+        else args.prototypes_dir.resolve()
+    )
+    rules_path = (
+        (root / args.rules_file).resolve()
+        if not args.rules_file.is_absolute()
+        else args.rules_file.resolve()
+    )
 
     missing_locales = [directory for directory in locale_dirs if not directory.is_dir()]
     if missing_locales:
@@ -316,10 +426,15 @@ def main() -> int:
             file=sys.stderr,
         )
         return 2
+    if not prototypes_dir.is_dir():
+        print(f"ERROR: Prototype directory not found: {prototypes_dir}", file=sys.stderr)
+        return 2
 
     try:
         print("Reading FTL message declarations...")
         ftl_keys, ftl_references = read_ftl_data(locale_dirs)
+        generated_keys = load_generated_prototype_keys(prototypes_dir, rules_path)
+        ftl_keys.update(generated_keys)
         print("Scanning C# localization lookups...")
         references = scan_csharp_references(source_dirs)
     except RuntimeError as exc:

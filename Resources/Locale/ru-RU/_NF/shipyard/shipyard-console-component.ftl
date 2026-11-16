@@ -19,7 +19,7 @@ shipyard-console-sale-not-docked = Шаттл должен быть присты
 shipyard-console-sale-organic-aboard = Экипаж должен покинуть шаттл. { $name } всё еще на шаттле.
 # This error message is bad, but if it happens, something awful's happened.
 shipyard-console-sale-invalid-ship = Шаттл не соответствует нормам и не может быть продан.
-shipyard-console-sale-unknown-reason = Шаттл не может быть продан: { reason }
+shipyard-console-sale-unknown-reason = Шаттл не может быть продан: { $reason }
 shipyard-console-deed-label = Зарегистрированный шаттл:
 shipyard-console-appraisal-label = Оценочная стоимость шаттла:{ " " }
 shipyard-console-no-voucher-redemptions = Все ваучеры использованы.

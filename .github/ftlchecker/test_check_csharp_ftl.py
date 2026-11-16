@@ -87,6 +87,9 @@ class CSharpFtlCheckerTests(unittest.TestCase):
             'var url = "https://example.test/a";\n'
             'Loc.GetString($"dynamic-{suffix}");\n'
             'Loc.GetString("prefix-" + dynamicKey);\n'
+            'Loc.GetString("<username>");\n'
+            'Loc.GetString("5 minutes");\n'
+            'Loc.GetString("[seconds]");\n'
             "Loc.GetString(dynamicKey);\n"
             'Loc.GetString("real-key");\n',
             encoding="utf-8",
@@ -129,7 +132,12 @@ class CSharpFtlCheckerTests(unittest.TestCase):
             "attribute-reference = { missing-message.desc }\n"
             "function-call = { NUMBER($value) }\n"
             "-declared-term = A term\n"
-            "term-reference = { -declared-term }\n",
+            "term-reference = { -declared-term }\n"
+            "quoted-literal = { \"literal { not-a-reference }\" }\n"
+            "# { commented-reference }\n"
+            "multiline-reference = {\n"
+            "    missing-on-next-line\n"
+            "}\n",
             encoding="utf-8",
         )
 
@@ -141,8 +149,25 @@ class CSharpFtlCheckerTests(unittest.TestCase):
             [
                 (ftl_path, 2, "missing-key"),
                 (ftl_path, 3, "missing-message"),
+                (ftl_path, 10, "missing-on-next-line"),
             ],
         )
+
+    def test_generated_entity_localization_keys_are_known(self) -> None:
+        prototypes_dir = self.root / "prototypes"
+        prototypes_dir.mkdir()
+        (prototypes_dir / "entities.yml").write_text(
+            "- type: entity\n"
+            "  id: ExampleEntity\n",
+            encoding="utf-8",
+        )
+
+        generated_keys = checker.load_generated_prototype_keys(
+            prototypes_dir,
+            SCRIPT_PATH.with_name("prototype_ftl_rules.yml"),
+        )
+
+        self.assertIn("ent-ExampleEntity", generated_keys)
 
 
 if __name__ == "__main__":

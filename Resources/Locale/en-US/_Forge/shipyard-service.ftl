@@ -46,6 +46,7 @@ shipyard-service-action-repair = Repair
 shipyard-service-action-upgradeparts = Component upgrade
 shipyard-service-action-reinforce = Structure reinforce
 shipyard-service-action-plastitanium = Plastitanium plating
+shipyard-service-purchase-complete = { $action } complete: { $count } items for { $amount } credits.
 shipyard-service-dock-confirm-title = Drydock lock
 shipyard-service-dock-confirm-text = Occupying this berth costs [color=#ffd34f]10%[/color] of the shuttle's listed price. The fee is charged only if you use repair on the drydock console. Docking and leaving without repair is free.
 shipyard-service-dock-confirm-yes = Dock

@@ -82,6 +82,19 @@ class PrototypeFtlCheckerTests(unittest.TestCase):
 
         self.assertEqual(self.scan(), ["construction-recipe-no-such-recipe"])
 
+    def test_vessel_generated_keys_follow_display_locale_id_transform(self) -> None:
+        self.write_yaml(
+            "- type: vessel\n"
+            "  id: NFSDPatrolShip\n"
+        )
+        self.write_ftl(
+            "vessel-n-f-s-d-patrol-ship-name = Patrol ship\n"
+            "vessel-n-f-s-d-patrol-ship-desc = Patrol vessel\n"
+            "vessel-missing-name = Unused\n"
+        )
+
+        self.assertEqual(self.scan(), ["vessel-missing-name"])
+
     def test_nested_yaml_localization_and_ftl_references_count_as_usage(self) -> None:
         self.write_yaml(
             "- type: job\n"
@@ -106,6 +119,23 @@ class PrototypeFtlCheckerTests(unittest.TestCase):
         )
 
         self.assertEqual(self.scan(), ["message-never-used"])
+
+    def test_paper_content_and_entity_desc_fields_count_as_localization_references(self) -> None:
+        self.write_yaml(
+            "- type: entity\n"
+            "  id: ExampleEntity\n"
+            "  desc: example-entity-desc\n"
+            "- type: paper\n"
+            "  id: ExamplePaper\n"
+            "  content: paper-content-example\n"
+        )
+        self.write_ftl(
+            "ent-ExampleEntity = Example\n"
+            "example-entity-desc = Description\n"
+            "paper-content-example = Paper text\n"
+        )
+
+        self.assertEqual(self.scan(), [])
 
     def test_static_csharp_localization_calls_count_but_comments_do_not(self) -> None:
         self.write_ftl(

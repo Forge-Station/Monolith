@@ -18,6 +18,15 @@ prototype_types:
           - ""
           - "-desc"
 
+  vessel:
+    generated_keys:
+      - template: "vessel-{id}-name"
+        id_transforms:
+          - vessel_display_locale
+      - template: "vessel-{id}-desc"
+        id_transforms:
+          - vessel_display_locale
+
   job:
     field_patterns:
       name: "^(?:job-name|forge-job-name)-[A-Za-z0-9_-]+$"

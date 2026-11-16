@@ -1,1 +1,1 @@
-gas-fallback = Gas #{number}
+gas-fallback = Gas #{$number}

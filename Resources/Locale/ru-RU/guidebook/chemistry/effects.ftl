@@ -382,6 +382,15 @@ reagent-effect-guidebook-stamina-crit =
         [1] Вызывает
        *[other] вызывают
     } полное истощение выносливости
+reagent-effect-guidebook-drop-items =
+    { $chance ->
+        [1] Заставляет
+       *[other] Может заставить
+    } цель выбросить предметы из рук
+reagent-effect-condition-guidebook-species-type-empty = Раса не указана.
+reagent-effect-condition-guidebook-species-type-species = { $species }
+reagent-effect-condition-guidebook-species-type-whitelist = Действует только на { $species }.
+reagent-effect-condition-guidebook-species-type-blacklist = Не действует на { $species }.
 reagent-effect-guidebook-absorb-reagent =
     { $chance ->
         [1] Всасывается

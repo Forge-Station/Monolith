@@ -5,6 +5,7 @@ time-transfer-panel-add-time = Add time
 time-transfer-panel-set-time = Set time
 time-transfer-panel-set-time-confirm = Confirm
 time-transfer-panel-warning-no-player = Player not selected
+time-transfer-panel-warning-no-perms = You do not have permission to use this panel
 time-transfer-panel-warning-no-job = Role not selected
 time-transfer-panel-warning-group-no-time = Group time is empty
 time-transfer-panel-warning-add-success = Time successfully added

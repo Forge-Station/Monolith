@@ -46,6 +46,7 @@ shipyard-service-action-repair = Ремонт
 shipyard-service-action-upgradeparts = Улучшение комплектующих
 shipyard-service-action-reinforce = Укрепление сооружений
 shipyard-service-action-plastitanium = Пластитановое укрепление
+shipyard-service-purchase-complete = { $action } завершено: { $count } шт. за { $amount } кредитов.
 shipyard-service-dock-confirm-title = Ремонтный шлюз
 shipyard-service-dock-confirm-text = Занятие этого стыковочного шлюза стоит [color=#ffd34f]10%[/color] от цены шаттла. Плата снимается только если вы воспользуетесь ремонтом на консоли верфи. Просто пристыковаться и уйти можно бесплатно.
 shipyard-service-dock-confirm-yes = Пристыковаться

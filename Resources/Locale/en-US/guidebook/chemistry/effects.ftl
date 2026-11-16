@@ -458,6 +458,15 @@ reagent-effect-guidebook-stamina-crit =
         [1] Causes
        *[other] Cause
     } complete stamina exhaustion
+reagent-effect-guidebook-drop-items =
+    { $chance ->
+        [1] Causes
+       *[other] May cause
+    } the target to drop held items
+reagent-effect-condition-guidebook-species-type-empty = No species are specified.
+reagent-effect-condition-guidebook-species-type-species = { $species }
+reagent-effect-condition-guidebook-species-type-whitelist = Only affects { $species }.
+reagent-effect-condition-guidebook-species-type-blacklist = Does not affect { $species }.
 reagent-effect-guidebook-absorb-reagent =
     { $chance ->
         [1] Seeps

@@ -33,6 +33,8 @@ DEFAULT_SOURCE_DIRS = (
 LOCALIZED_FIELDS = {
     "name",
     "description",
+    "desc",
+    "content",
     "suffix",
     "title",
     "label",
@@ -312,6 +314,7 @@ def load_prototype_rules(
         "identity",
         "kebab",
         "construction_recipe_locale",
+        "vessel_display_locale",
     }
     rules: dict[str, dict[str, object]] = {}
 
@@ -519,6 +522,8 @@ def transform_prototype_id(prototype_id: str, transform: str) -> str:
         return prototype_id_to_kebab(prototype_id)
     if transform == "construction_recipe_locale":
         return construction_recipe_locale_suffix(prototype_id)
+    if transform == "vessel_display_locale":
+        return re.sub(r"([A-Z])", r"-\1", prototype_id).lstrip("-").lower()
     raise ValueError(f"Unsupported prototype ID transform: {transform}")
 
 

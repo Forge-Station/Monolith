@@ -19,6 +19,7 @@ bank-insufficient-funds = Insufficient Funds
 bank-atm-menu-transaction-denied = Transaction Denied
 bank-atm-menu-deposit-successful = Deposit Accepted
 bank-atm-menu-withdraw-successful = Transfer Approved
+bank-withdraw-failed = Withdrawal failed. Please try again.
 bank-atm-menu-wrong-cash = Wrong Currency Type
 station-bank-atm-menu-title = Station Administration
 # Withdrawal reasons

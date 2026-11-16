@@ -1,4 +1,0 @@
-ent-SpawnMobWeaponTurretSyndicate25 = спавнер баллистической турели Горлекса
-ent-SpawnMobWeaponTurretSyndicateAntiMateriel = спавнер баллистической турели Горлекса
-ent-SpawnMobWeaponTurretSyndicateShotgun = спавнер баллистической турели Горлекса
-ent-SpawnMobWeaponTurretSyndicateMagnumAP = спавнер баллистической турели Горлекса

@@ -1,5 +1,3 @@
-ent-MobBloodCultistTimedDespawn = { "" }
-    .desc = { "" }
 ent-MobBloodCultistBase = кровавый культист
     .desc = { ent-MobHumanoidHostileBase.desc }
 ent-MobBloodCultistPriest = кровавый жрец

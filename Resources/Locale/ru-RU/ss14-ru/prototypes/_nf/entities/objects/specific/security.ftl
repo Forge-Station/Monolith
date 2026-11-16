@@ -1,15 +1,3 @@
-ent-FrontierUplinkCoin = таможенные кредиты
-    .desc = Таможенные кредиты, которые выдаются за представителям ТСФ за успешный перехват контрабанды.
-    .suffix = 20 ТК
-ent-FrontierUplinkCoin1 = { ent-FrontierUplinkCoin }
-    .suffix = 1 ТК
-    .desc = { ent-FrontierUplinkCoin.desc }
-ent-FrontierUplinkCoin5 = { ent-FrontierUplinkCoin }
-    .suffix = 5 ТК
-    .desc = { ent-FrontierUplinkCoin.desc }
-ent-FrontierUplinkCoin10 = { ent-FrontierUplinkCoin }
-    .suffix = 10 ТК
-    .desc = { ent-FrontierUplinkCoin.desc }
 ent-BaseSecurityUplinkRadio = аплинк ТСФ
     .desc = Винтажно выглядящее радио...
     .suffix = Пустое

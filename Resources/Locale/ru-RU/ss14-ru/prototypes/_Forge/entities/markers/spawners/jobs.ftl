@@ -1,7 +1,3 @@
-ent-SpawnPointServiceOutpost = { forge-job-name-outpostservice }
-ent-SpawnPointMedicOutpost = { forge-job-name-outpostmedic }
-ent-SpawnPointEngineerOutpost = { forge-job-name-outpostengineer }
-
 ent-ForgeSpawnPointTsfCommandingOfficer = спавнер командующего офицера ТСФ
     .desc = { ent-SpawnPointSheriff.desc }
 ent-ForgeSpawnPointTsfExecutiveOfficer = спавнер исполнительного офицера ТСФ

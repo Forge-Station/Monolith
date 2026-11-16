@@ -9,6 +9,8 @@ prototype_types:
           - identity
 
   construction:
+    ignored_key_prefixes:
+      - construction-recipe-
     generated_keys:
       - template: "construction-recipe-{id}"
         id_transforms:

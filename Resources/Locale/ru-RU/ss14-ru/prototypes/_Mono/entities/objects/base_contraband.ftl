@@ -1,8 +1,4 @@
 ﻿ent-BaseFactionGearT0 = базовое снаряжение фракции T0
-ent-BaseFactionGearPDVT0 = базовое снаряжение ФДА T0
-ent-BaseFactionGearPDVT1 = снаряжение ФДА T1
-ent-BaseFactionGearPDVT2 = снаряжение ФДА T2
-ent-BaseFactionGearPDVT3 = снаряжение ФДА T3
 ent-BaseFactionGearTSFT0 = базовое снаряжение ТСФ T0
 ent-BaseFactionGearTSFT1 = снаряжение ТСФ T1
 ent-BaseFactionGearTSFT2 = снаряжение ТСФ T2

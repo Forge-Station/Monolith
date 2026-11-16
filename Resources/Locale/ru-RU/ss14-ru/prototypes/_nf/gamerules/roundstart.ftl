@@ -1,10 +1,5 @@
 ent-SmugglingEventScheduler = планировщик контрабанды
 ent-FrontierRoundstartVariation = вариация старта Фронтира
-ent-DungeonBluespaceEventsTable = таблица событий блюспейс-подземелий
 ent-NFAdventure = приключение
-ent-SalvageBluespaceEventsTable = таблица событий блюспейс-утилизации
 ent-BluespaceDungeonEventScheduler = планировщик блюспейс-подземелий
 ent-BluespaceEventScheduler = планировщик блюспейс-событий
-ent-MajorSmugglingEventsTable = таблица крупной контрабанды
-ent-BluespaceSalvageEventScheduler = планировщик блюспейс-утилизации
-ent-MajorBluespaceEventsTable = таблица крупных блюспейс-событий

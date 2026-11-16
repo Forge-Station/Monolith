@@ -8,8 +8,6 @@ ent-LockerRenBaron = шкаф коммодора ренегатов
     .desc = { ent-LockerRen.desc }
 ent-LockerRenSpec = шкаф специалиста ренегатов
     .desc = { ent-LockerRen.desc }
-ent-RenegateLockerBaseSecure = шкаф коммодора ренегатов
-    .desc = { ent-LockerRen.desc }
 ent-LockerRen = шкаф ренегатов
     .desc = Стандартное складское хранилищ
 

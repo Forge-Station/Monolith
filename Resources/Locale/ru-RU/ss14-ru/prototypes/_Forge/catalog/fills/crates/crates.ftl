@@ -1,6 +1,3 @@
-ent-CrateContractorSpaceKit = космический набор подрядчика
-    .desc = Ящик с экипировкой подрядчика ДСН.
-
 ent-SuitStorageRI14 = { ent-SuitStorageBase }
     .suffix = Империя, RI-14
     .desc = { ent-SuitStorageBase.desc }
@@ -20,10 +17,6 @@ ent-SuitStorageInqusitor = { ent-SuitStorageBase }
 ent-SuitStorageCommander = { ent-SuitStorageBase }
     .suffix = Империя, RI-22c, Лорд
     .desc = { ent-SuitStorageBase.desc }
-ent-SuitStorageHV7 = { ent-SuitStorageBase }
-    .suffix = Империя, HV-7, DoNotMap
-    .desc = { ent-SuitStorageBase.desc }
-
 ent-SuitStoragebsii20 = { ent-SuitStorageBase }
     .suffix = Forge, Ренегаты, BSII-20
     .desc = { ent-SuitStorageBase.desc }
@@ -37,9 +30,6 @@ ent-SuitStorageyiv3020 = { ent-SuitStorageBase }
     .suffix = Forge, Ренегаты, YIV-3020
     .desc = { ent-SuitStorageBase.desc }
 
-ent-CrateEmpireWarcrime = имперский ящик
-    .desc = { ent-CrateGenericSteel.desc }
-    .suffix = Warcrime
 ent-CrateEmpireShip = имперский ящик
     .desc = { ent-CrateBaseSecure.desc }
     .suffix = Ship

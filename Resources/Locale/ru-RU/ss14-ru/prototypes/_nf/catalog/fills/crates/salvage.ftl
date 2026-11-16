@@ -6,5 +6,3 @@ ent-NFCrateSalvageAssortedGoodiesPlastic = { ent-CratePlastic }
 
 ent-NFCrateSalvageAssortedGoodiesTrashCart = { ent-CrateTrashCart }
     .desc = { ent-CrateTrashCart.desc }
-
-ent-NFSalvageAssortedGoodies = NFSalvageAssortedGoodies

@@ -1,6 +1,3 @@
-ent-EngineerNfsdIDCard = ID карта специалиста ТСФ
-    .desc = { ent-CadetIDCard.desc }
-
 ent-EmpireIDCard = ID карта
     .desc = { ent-IDCardStandard.desc }
 ent-EmpireGoldIDCard = ID карта

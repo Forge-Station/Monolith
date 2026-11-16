@@ -1,7 +1,5 @@
 ent-BaseIntercom = интерком
     .desc = Интерком. На случай, когда необходимо что-то сообщить станции.
-ent-IntercomAssesmbly = разобранный интерком
-    .desc = Интерком. На данный момент он не представляет особой пользы.
 ent-IntercomAssembly = интерком
     .desc = Интерком. На данный момент он бесполезен.
 ent-IntercomConstructed = { ent-BaseIntercom }

@@ -80,7 +80,30 @@ class PrototypeFtlCheckerTests(unittest.TestCase):
             "construction-recipe-no-such-recipe = Unused\n"
         )
 
-        self.assertEqual(self.scan(), ["construction-recipe-no-such-recipe"])
+        prototype_ids_by_type, _, _ = checker.scan_prototypes(
+            self.prototypes_dir,
+            {checker.normalize_field(field) for field in checker.LOCALIZED_FIELDS},
+            self.rules,
+        )
+        generated_keys, _ = checker.generated_prototype_keys(
+            prototype_ids_by_type,
+            self.rules,
+        )
+        self.assertTrue(
+            {
+                "construction-recipe-light-switch-directional",
+                "construction-recipe-light-switch-directional-desc",
+            }.issubset(generated_keys)
+        )
+        self.assertEqual(self.scan(), [])
+
+    def test_construction_key_family_is_ignored_without_construction_prototypes(self) -> None:
+        self.write_ftl(
+            "construction-recipe-legacy-entry = Legacy recipe\n"
+            "construction-recipe-legacy-entry-desc = Legacy description\n"
+        )
+
+        self.assertEqual(self.scan(), [])
 
     def test_vessel_generated_keys_follow_display_locale_id_transform(self) -> None:
         self.write_yaml(

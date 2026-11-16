@@ -38,5 +38,3 @@ ent-NFHolopadEdisonReception = { ent-NFHolopadShip }
   .desc = { ent-NFHolopadShip.desc }
 ent-NFHolopadTinnia = { ent-NFHolopadShip }
   .desc = { ent-NFHolopadShip.desc }
-ent-NFHolopadBarrier = { ent-NFHolopadShip }
-  .desc = { ent-NFHolopadShip.desc }

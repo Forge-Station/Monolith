@@ -8,6 +8,3 @@ ent-WeaponMailLake = почтовый СБДП
     .desc = Система Быстрой Доставки Посылок.
 ent-WeaponLauncherNfsdLake = Гранатомёт ТСФ
     .desc = Система Быстрой Доставки гранат от ТСФ.
-
-ent-NFWeaponLauncherPirateCannon = пиратская пушка
-    .desc = Кабум!

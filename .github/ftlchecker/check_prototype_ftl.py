@@ -381,6 +381,14 @@ def load_prototype_rules(
         if not isinstance(raw_field_patterns, dict):
             raise RuntimeError(f"'field_patterns' for {prototype_type} must be a mapping")
 
+        ignored_key_prefixes = raw_rule.get("ignored_key_prefixes", [])
+        if not isinstance(ignored_key_prefixes, list) or any(
+            not isinstance(prefix, str) for prefix in ignored_key_prefixes
+        ):
+            raise RuntimeError(
+                f"'ignored_key_prefixes' for {prototype_type} must be a list of strings"
+            )
+
         field_patterns: dict[str, tuple[str, re.Pattern[str]]] = {}
         for field_name, pattern in raw_field_patterns.items():
             if not isinstance(field_name, str) or not isinstance(pattern, str):
@@ -397,6 +405,7 @@ def load_prototype_rules(
 
         rules[prototype_type] = {
             "generated_keys": generated_rules,
+            "ignored_key_prefixes": ignored_key_prefixes,
             "field_patterns": field_patterns,
         }
 
@@ -664,9 +673,23 @@ def find_unused_keys(
     )
     used.update(generated_keys)
 
+    ignored_key_prefixes: set[str] = set()
+    for rule in rules.values():
+        prefixes = rule["ignored_key_prefixes"]
+        assert isinstance(prefixes, list)
+        ignored_key_prefixes.update(prefixes)
+    used.update(
+        key
+        for key in messages
+        if any(key.startswith(prefix) for prefix in ignored_key_prefixes)
+    )
+
     for key in messages:
         if any(key.startswith(prefix) for prefix in generated_prefixes):
-            if key not in generated_keys:
+            if (
+                key not in generated_keys
+                and not any(key.startswith(prefix) for prefix in ignored_key_prefixes)
+            ):
                 used.discard(key)
 
     return sorted(set(messages) - used)

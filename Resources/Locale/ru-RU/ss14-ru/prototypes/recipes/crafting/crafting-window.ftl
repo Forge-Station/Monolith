@@ -779,7 +779,6 @@ construction-recipe-clothing-neck-cloak-web-recipe = { ent-ClothingNeckCloakWeb 
 construction-recipe-clothing-neck-cloak-web-recipe-desc = { ent-ClothingNeckCloakWeb.desc }
 construction-recipe-nf-goblin-made-clothing-backpack-duffel-trash-blue-recipe = { ent-NFGoblinMadeClothingBackpackDuffelTrashBlue }
 construction-recipe-nf-goblin-made-clothing-backpack-duffel-trash-blue-recipe-desc = { ent-NFGoblinMadeClothingBackpackDuffelTrashBlue.desc }
-computer-circuit-board-name = любую консольную плату
 tabletop-computer-circuit-board = любую консольную плату
 wallmount-computer-circuit-board = любую консольную плату
 apc-electronics = микросхему ЛКП

@@ -1,7 +1,3 @@
-ent-WallRivetedOutpost = { ent-WallRiveted }
-    .desc = { ent-WallRiveted.desc }
-    .suffix = АВАНПОСТ
-
 ent-WallReinforcedOutpost = { ent-WallReinforced }
     .desc = { ent-WallReinforced.desc }
     .suffix = АВАНПОСТ

@@ -19,7 +19,6 @@ materials-raw-lithium = lithium
 # Components
 materials-components-electronics = electronics
 materials-components-electronics-advanced = advanced electronics
-materials-components-explosives = pyrotechnics
 materials-components-fcs = fire control systems
 materials-components-mechanical = mechanical parts
 materials-components-plates = armor components

@@ -1,7 +1,6 @@
 ## TabletopGameComponent
 
 tabletop-verb-play-game = Играть
-tabletop-verb-dump-pieces = Скинуть фигурки
 tabletop-default-board-name = Настольная игра
 tabletop-error-remove-non-hologram = Вы не можете убрать встроенную фигурку!
 tabletop-added-piece = Доска ярко сияет!

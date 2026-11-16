@@ -12,8 +12,6 @@ ghost-role-information-navy-officer-rules = Follow the orders of the [color=#yel
 
 ghost-role-information-navy-officer-undercover-name = Winter Solstice Operative
 ghost-role-information-navy-officer-undercover-description = Covert assignments. Eliminate objectives, gather intelligence, maintain cover at all costs. Good luck.
-ghost-role-information-navy-officer-undercover-rules = Follow the orders of the [color=#yellow][bold]HiCom[/bold][/color], or other Winter Solstice official. Survival depends on discretion and precision.
-
 ghost-role-information-diplomat-name = TSF Diplomat
 ghost-role-information-diplomat-description = Maintain relations between TSF and other sector factions. Smooth over conflicts and mitigates the fallout from aggressive TSF operations. Cleanup the issues the Colonel has likely caused.
 ghost-role-information-diplomat-rules = Prioritize negotiation, but protect TSF interests at all costs. Sometimes diplomacy requires… a firm hand.

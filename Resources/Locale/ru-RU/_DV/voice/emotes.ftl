@@ -16,7 +16,6 @@ delta-chat-emote-msg-bark = гавкает
 delta-chat-emote-name-snarl = Рычать
 delta-chat-emote-msg-snarl = рычит
 delta-chat-emote-name-whine = Скулить
-delta-chat-emote-msg-whine = скулит
 delta-chat-emote-name-howl = Выть
 delta-chat-emote-msg-howl = воет
 delta-chat-emote-name-awoo = Авууу!

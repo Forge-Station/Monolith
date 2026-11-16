@@ -55,7 +55,6 @@ sec-apartment-unknown = НЕИЗВЕСТНО
 sec-apartment-active = Активен
 sec-apartment-on-break = На перерыве
 
-sec-apartment-assign-button = Назначить
 sec-apartment-assign-no-squads = Нет отрядов
 sec-apartment-assign-select-squad = Выберите отряд
 

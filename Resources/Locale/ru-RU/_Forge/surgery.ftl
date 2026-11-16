@@ -73,14 +73,12 @@ ent-SurgeryStepRemoveXenoGraft = Извлечь железу ксеноморф�
 ent-SurgeryStepSealOrganWound = Запечатать рану
 ent-SurgeryStepRemoveCorticalBorer = Удалить кортикального бурильщика
 
-surgery-popup-procedure-SurgeryRemoveKidneys-step-SurgeryStepRemoveOrgan = { $user } удаляет почки из { $part } у { $target }!
 surgery-popup-step-SurgeryStepInsertKidneys = { $user } вставляет почки в { $part } у { $target }!
 surgery-popup-step-SurgeryStepInsertXenoGraft = { $user } вживляет железу ксеноморфа в { $part } у { $target }!
 surgery-popup-step-SurgeryStepAffixXenoGraft = { $user } запечатывает трансплантат на { $part } у { $target }.
 surgery-popup-step-SurgeryStepRemoveXenoGraft = { $user } извлекает железу ксеноморфа из { $part } у { $target }!
 
 # КПБ
-ent-PartIPC = часть тела КПБ
 ent-TorsoIPC = торс КПБ
     .desc = { "" }
 ent-HeadIPC = голова КПБ

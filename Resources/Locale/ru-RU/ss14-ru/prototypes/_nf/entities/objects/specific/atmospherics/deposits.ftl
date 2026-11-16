@@ -37,9 +37,6 @@ ent-GasDepositMuddlePlasma = { ent-BaseGasDeposit }
     .desc = { ent-BaseGasDeposit.desc }
     .suffix = Смешанный, плазма
 
-ent-GasDepositHelium = { ent-BaseGasDeposit }
-    .desc = { ent-BaseGasDeposit.desc }
-
 ent-BaseGasDepositVerySmall = { ent-BaseGasDeposit }
     .desc = { ent-BaseGasDeposit.desc }
 
@@ -94,9 +91,6 @@ ent-GasDepositMuddlePlasmaVerySmall = { ent-BaseGasDeposit }
     .desc = { ent-BaseGasDeposit.desc }
     .suffix = Смешанный, плазма
 
-ent-GasDepositHeliumVerySmall = { ent-BaseGasDeposit }
-    .desc = { ent-BaseGasDeposit.desc }
-
 ent-GasDepositOxygenSmall = { ent-BaseGasDeposit }
     .desc = { ent-BaseGasDeposit.desc }
     .suffix = Кислород
@@ -135,9 +129,6 @@ ent-GasDepositMuddleEvenSmall = { ent-BaseGasDeposit }
 ent-GasDepositMuddlePlasmaSmall = { ent-BaseGasDeposit }
     .desc = { ent-BaseGasDeposit.desc }
     .suffix = Смешанный, плазма
-
-ent-GasDepositHeliumSmall = { ent-BaseGasDeposit }
-    .desc = { ent-BaseGasDeposit.desc }
 
 ent-GasDepositOxygenLarge = { ent-BaseGasDeposit }
     .desc = { ent-BaseGasDeposit.desc }
@@ -178,9 +169,6 @@ ent-GasDepositMuddlePlasmaLarge = { ent-BaseGasDeposit }
     .desc = { ent-BaseGasDeposit.desc }
     .suffix = Смешанный, плазма
 
-ent-GasDepositHeliumLarge = { ent-BaseGasDeposit }
-    .desc = { ent-BaseGasDeposit.desc }
-
 ent-GasDepositOxygenVeryLarge = { ent-BaseGasDeposit }
     .desc = { ent-BaseGasDeposit.desc }
     .suffix = Кислород
@@ -219,10 +207,6 @@ ent-GasDepositMuddleEvenVeryLarge = { ent-BaseGasDeposit }
 ent-GasDepositMuddlePlasmaVeryLarge = { ent-BaseGasDeposit }
     .desc = { ent-BaseGasDeposit.desc }
     .suffix = Смешанный, плазма
-
-ent-GasDepositHeliumVeryLarge = { ent-BaseGasDeposit }
-    .desc = { ent-BaseGasDeposit.desc }
-
 
 ent-PinpointerGasDeposit = Пинпоинтер газовых месторождений
     .desc = Указывает на ближайшее газовое месторождение.

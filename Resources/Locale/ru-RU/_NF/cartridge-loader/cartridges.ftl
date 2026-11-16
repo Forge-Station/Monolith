@@ -5,7 +5,6 @@ appraisal-label-price = Оценочная стоимость
 
 # Ledger cartridge
 ledger-program-name = ДеньгоСчёт Лайт
-ledger-header = Гроссбух сектора
 ledger-total-income = Общий доход
 ledger-no-income = Нет
 ledger-total-expenses = Общий убыток

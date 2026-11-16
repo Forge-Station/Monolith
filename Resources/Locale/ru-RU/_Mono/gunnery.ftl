@@ -82,7 +82,6 @@ research-technology-shuttle-grenadeemp = Электромагнитная бал
 research-technology-shuttle-gunduster = Автоматизированная подача
 research-technology-shuttle-gunnery-high-upgrade = Усиленный сервер наведения
 research-technology-shuttle-gunnery-ultra-upgrade = Сверхтяжёлая сеть наведения
-research-technology-shuttle-gunnery-omega-upgrade = Омега-ядро наведения
 research-technology-turret-one-ap = Бронебойные пулемётные снаряды
 research-technology-shields = Щиты
 research-technology-turret-two-ap = Бронебойные миномётные снаряды

@@ -6,4 +6,3 @@ petting-failure-artifact = You reach out to pet {THE($target)}, but a voice in y
 ## Patting players
 pat-success-generic = You pet {THE($target)} on {POSS-ADJ($target)} soft fluffy head.
 pat-success-generic-others = { CAPITALIZE(THE($user)) } pets {THE($target)} on {POSS-ADJ($target)} soft fluffy head.
-pat-success-generic-target = { CAPITALIZE(THE($user)) } pets your soft fluffy head.

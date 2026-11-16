@@ -14,7 +14,6 @@ artifact-effect-hint-gun = Маленький ускоритель частиц
 artifact-effect-hint-multitool = Конгломерат устройств
 artifact-effect-hint-storage = Внутренняя камера
 artifact-effect-hint-drill = Зазубренный вращатель
-artifact-effect-hint-soap = Смазанная поверхность
 artifact-effect-hint-communication = Дистанционная связь
 artifact-effect-hint-phasing = Структурное фазирование
 artifact-effect-hint-sentience = Неврологическая активность

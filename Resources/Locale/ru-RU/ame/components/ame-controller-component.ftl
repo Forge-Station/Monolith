@@ -12,7 +12,6 @@ ame-window-toggle-injection-button = Переключение впрыска
 ame-window-fuel-status-label = Количество топлива:
 ame-window-fuel-not-inserted-text = Топливо не вставлено
 ame-window-injection-amount-label = Количество впрыска:
-ame-window-refresh-parts-button = Обновить детали
 ame-window-core-count-label = Количество ядер:
 ame-window-power-currentsupply-label = Текущее электроснабжение:
 ame-window-power-targetsupply-label = Целевое электроснабжение:

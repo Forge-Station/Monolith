@@ -1,5 +1,4 @@
 # Интерфейс кристаллизатора
-crystallizer-ui-title = Кристаллизатор
 crystallizer-ui-controls = Управление
 crystallizer-ui-power = Питание:
 crystallizer-ui-recipe = Рецепт:

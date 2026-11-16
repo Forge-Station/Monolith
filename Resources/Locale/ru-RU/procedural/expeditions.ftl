@@ -6,7 +6,6 @@ salvage-expedition-structure-remaining =
        *[other] целей.
     }
 salvage-expedition-megafauna-remaining = Осталось { $count } мегафауны.
-salvage-expedition-type = Миссии
 salvage-expedition-window-title = Утилизаторские экспедиции
 salvage-expedition-window-difficulty = Сложность:
 salvage-expedition-window-details = Подробности:

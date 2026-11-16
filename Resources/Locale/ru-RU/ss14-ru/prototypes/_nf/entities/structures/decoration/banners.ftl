@@ -8,5 +8,3 @@ ent-BannerFsb = Баннер FSB
     .desc = Баннер с гербом корпорации «Far Star Biotech».
 ent-BannerTL = знамя TechnicLogistic
     .desc = Знамя передовой военно-производственной корпорации TechnicLogistic.
-ent-TL_flag = флаг TechnicLogistic
-    .desc = Флаг передовой военно-производственной корпорации TechnicLogistic.

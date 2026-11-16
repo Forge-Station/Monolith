@@ -51,7 +51,6 @@ analysis-console-bias-button-info-down = Направляет переходы �
 analysis-console-no-server-connected = Невозможно извлечь очки: сервер не подключён.
 analysis-console-no-artifact-placed = На сканере нет артефакта.
 analysis-console-no-points-to-extract = Нет очков для извлечения.
-analyzer-artifact-component-upgrade-analysis = длительность анализа
 analysis-console-print-popup = Консоль напечатала отчёт.
 analysis-report-title = Отчёт об артефакте: узел {$id}
 artifact-analyzer-upgrade-duration = Время сканирования

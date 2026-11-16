@@ -1,7 +1,6 @@
 medical-bounty-redemption-fail-no-items = Nothing detected in container.
 medical-bounty-redemption-fail-no-bounty = No bounty found on items in container.
 medical-bounty-redemption-fail-too-much-damage = Recovered body too damaged to redeem bounty.
-medical-bounty-redemption-fail-not-alive = Body must be revived before redeeming bounty.
 medical-bounty-redemption-success = Bounty redeemed! Payment dispensed.
 
 medical-bounty-redemption-ui-title = Body Retrieval Unit

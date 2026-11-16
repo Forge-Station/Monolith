@@ -25,7 +25,6 @@ borg-select-type-menu-available = Доступные типы
 borg-select-type-menu-information = Информация
 borg-select-type-menu-select-type = Выберите тип для просмотра информации
 borg-select-type-menu-confirm = Подтвердить выбор
-borg-select-type-menu-guidebook = Руководство
 borg-type-generic-name = Универсал
 borg-type-generic-desc = Хорош во всём, но не очень. Выполняет различные случайные задачи на станции или помогает научному отделу, создавшему вас.
 borg-type-generic-transponder = обычный киборг

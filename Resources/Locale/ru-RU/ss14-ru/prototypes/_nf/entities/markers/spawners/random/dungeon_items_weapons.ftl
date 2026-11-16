@@ -1,6 +1,3 @@
-ent-SpawnInhandMeleeWeaponPunkGangLow = случайное оружие
-    .suffix = Панки, Ближний бой, T1
-    .desc = { ent-MarkerBase.desc }
 ent-SpawnDungeonLootMeleeT1 = случайное оружие
     .suffix = Экспедиция, Ближний бой, T1
     .desc = { ent-MarkerBasePlaceFree.desc }

@@ -1,7 +1,5 @@
 ## UI
 
-ui-disposal-unit-title = Disposal Unit
-
 ui-disposal-unit-label-state = State:
 ui-disposal-unit-label-pressure = Pressure:
 ui-disposal-unit-label-status = Ready

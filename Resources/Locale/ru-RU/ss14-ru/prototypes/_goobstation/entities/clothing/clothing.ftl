@@ -1,17 +1,7 @@
-ent-ClothingOuterArmorHoSVestWeb = бронежилет главы службы безопасности
-    .desc = Высококачественный бронированный жилет из прочного синтетического материала. Несмотря на внушительную защиту, он гибкий и лёгкий.
 ent-ClothingShoesBootsJackAdvanced = продвинутые офицерские сапоги
     .desc = Магпространственно усиленные боевые ботинки безопасности Nanotrasen для боевых операций. Эта пара предназначена для начальника службы безопасности.
-ent-ClothingOuterArmorHoSExperimental = экспериментальный тренчкот ГСБ
-    .desc = Пальто, усиленное экспериментальным сплавом с поддержкой bluespace для дополнительной защиты и стиля тех, кто обладает командным присутствием.
-ent-ClothingHeadHatBeretHeadOfSecurityAdvanced = парадный берет ГСБ
-    .desc = Особенно украшенный берет, предназначенный для начальника службы безопасности.
-ent-ClothingShoesBootsJackAdvancedFilled = { ent-ClothingShoesBootsJackAdvanced }
-    .desc = { ent-ClothingShoesBootsJackAdvanced.desc }
 ent-ClothingShoesWinterCombatBoots = боевые снежные ботинки
     .desc = Боевые ботинки службы безопасности Nanotrasen для боевых ситуаций. Теперь в зимнем исполнении.
-ent-ClothingShoesWinterCombatBootsFilled = { ent-ClothingShoesWinterCombatBoots }
-    .desc = { ent-ClothingShoesWinterCombatBoots.desc }
 ent-ClothingHandsGlovesHeavyGoldenTrim = тяжёлые перчатки с золотой отделкой
     .desc = Пара перчаток с золотой отделкой и изоляцией.
 ent-ClothingEyesGlassesCentComm = очки УСФ

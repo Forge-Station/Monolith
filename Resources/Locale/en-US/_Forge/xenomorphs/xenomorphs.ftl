@@ -5,8 +5,6 @@ forge-xeno-fortify-on = You lock your crest. Moving is almost impossible.
 forge-xeno-fortify-off = You lower your crest.
 forge-xeno-pheromones-on = You emit a sharp combat scent.
 forge-xeno-pheromones-off = The scent fades.
-forge-xeno-acid = Acid eats into the target.
-
 alerts-forge-xeno-plasma-name = Plasma
 alerts-forge-xeno-plasma-desc = The hive's fuel. Abilities spend it. Weeds and rest refill it.
 

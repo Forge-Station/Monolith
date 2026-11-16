@@ -1,5 +1,3 @@
-ent-MobWizFedTimedDespawn = { "" }
-    .desc = { "" }
 ent-MobWizFedlBase = Волшебник
     .desc = { ent-MobHumanoidHostileBase.desc }
 ent-MobWizFedWizardBlue = Синий Волшебник

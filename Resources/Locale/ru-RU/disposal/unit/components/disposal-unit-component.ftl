@@ -1,6 +1,5 @@
 ## UI
 
-ui-disposal-unit-title = Утилизационный блок
 ui-disposal-unit-label-state = Состояние:
 ui-disposal-unit-label-pressure = Давление:
 ui-disposal-unit-label-status = Готов

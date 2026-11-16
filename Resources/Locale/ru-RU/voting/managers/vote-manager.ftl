@@ -18,7 +18,6 @@ ui-vote-map-win = { $winner } выиграла голосование о выб�
 ui-vote-map-notlobby = Голосование о выборе карты действует только в предраундовом лобби!
 ui-vote-map-notlobby-time = Голосование о выборе карты действует только в предраундовом лобби, когда осталось { $time }!
 ui-vote-votekick-unknown-initiator = Игрок
-ui-vote-votekick-unknown-target = Неизвестный игрок
 ui-vote-votekick-title = { $initiator } запустил голосование за кик { $targetEntity }. Причина: { $reason }
 ui-vote-votekick-yes = Да
 ui-vote-votekick-no = Нет

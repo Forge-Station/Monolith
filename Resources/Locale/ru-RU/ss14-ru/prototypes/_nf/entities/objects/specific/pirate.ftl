@@ -7,9 +7,6 @@ ent-Doubloon1 = { ent-Doubloon }
 ent-Doubloon5 = { ent-Doubloon }
     .suffix = 5 ДБ
     .desc = { ent-Doubloon.desc }
-ent-Doubloon10 = { ent-Doubloon }
-    .suffix = 10 ДБ
-    .desc = { ent-Doubloon.desc }
 ent-BasePirateUplink = аплинк ПДВ
     .desc = Потрёпанный планшет в корпусе из жаропрочного композита с боковой щелью для жетонов.
     .suffix = Пустой
@@ -22,23 +19,8 @@ ent-BasePirateUplinkRadioPirateCaptain = { ent-BasePirateUplink }
 ent-BasePirateUplinkPirateCrew = { ent-BasePirateUplink }
     .suffix = Пир. матрос 15
     .desc = { ent-BasePirateUplink.desc }
-ent-BaseSecurityUplinkRadioPirateCaptain = { ent-BasePirateUplink }
-    .suffix = Капитан 20 ДБ
-    .desc = { ent-BasePirateUplink.desc }
-ent-BaseSecurityUplinkPirateCrew = { ent-BasePirateUplink }
-    .suffix = Матрос 15 ДБ
-    .desc = { ent-BasePirateUplink.desc }
-
 ent-PinpointerScannerUnpowered = сканер целей пинпойнтера
     .desc = Сканер, который ищет сигналы пинпойнтера.
-ent-PinpointerScanner = { ent-PinpointerScannerUnpowered }
-    .desc = { ent-PinpointerScannerUnpowered.desc }
-ent-PinpointerScannerEmpty = { ent-PinpointerScannerUnpowered }
-    .desc = { ent-PinpointerScannerUnpowered.desc }
-
-ent-IonizedBluespaceDustBag = мешок ионизированной блюспейс-пыли
-    .desc = Одни утверждают, что он очищает магнитные навигационные поля пинпоинтера... Другие считают, что это просто мешок синей пыли.
-
 ent-Doubloon25 = аплинк PDV
     .desc = Потрёпанный планшет в термостойком корпусе со слотом для жетонов сбоку.
 ent-Doubloon50 = аплинк PDV

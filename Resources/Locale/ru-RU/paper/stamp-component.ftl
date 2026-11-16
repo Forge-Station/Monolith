@@ -18,4 +18,3 @@ stamp-component-stamped-name-trader = Торговец
 stamp-component-stamped-name-syndicate = Горлекс
 stamp-component-stamped-name-ce = Старший инженер
 stamp-component-stamped-name-greytide = Грейтайд
-stamp-component-stamped-name-wizard = Волшебник

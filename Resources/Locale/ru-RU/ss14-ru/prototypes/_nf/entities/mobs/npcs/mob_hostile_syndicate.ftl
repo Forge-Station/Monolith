@@ -1,5 +1,3 @@
-ent-MobSyndicateNavalTimedDespawn = { "" }
-    .desc = { "" }
 ent-MobSyndicateNavalBase = агент Горлекса
     .desc = { ent-MobHumanoidHostileBase.desc }
 ent-MobSyndicateNavalCaptainA = капитан Горлекса

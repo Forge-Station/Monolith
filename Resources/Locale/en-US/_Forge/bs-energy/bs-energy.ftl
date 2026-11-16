@@ -47,7 +47,6 @@ ent-BsReceiverCircuitboardT2 = bluespace energy receiver T2 (machine board)
 ent-BsReceiverCircuitboardT3 = bluespace energy receiver T3 (machine board)
     .desc = A machine board for an bluespace energy receiver T3
 
-ui-bs-energy-power-mvt = Mw
 ui-bs-energy-power-kvt = Kw
 ui-bs-energy-time-minute = minutes
 ui-bs-energy-time-hour = h

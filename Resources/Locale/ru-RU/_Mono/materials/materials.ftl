@@ -19,7 +19,6 @@ materials-raw-lithium = литий
 # Компонентные пакеты
 materials-components-electronics = электроника
 materials-components-electronics-advanced = продвинутая электроника
-materials-components-explosives = пиротехника
 materials-components-fcs = системы управления огнём
 materials-components-mechanical = механические детали
 materials-components-plates = бронекомпоненты

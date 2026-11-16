@@ -6,7 +6,6 @@ anomaly-vessel-component-upgrade-output = исходящие ОИ
 anomaly-particles-delta = Дельта-частицы
 anomaly-particles-epsilon = Эпсилон-частицы
 anomaly-particles-zeta = Зета-частицы
-anomaly-particles-omega = Омега-частицы
 anomaly-particles-sigma = Сигма-частицы
 anomaly-scanner-component-scan-complete = Сканирование завершено!
 anomaly-scanner-ui-title = сканер аномалий

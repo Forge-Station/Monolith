@@ -24,7 +24,6 @@ rcd-component-no-valid-grid = Вы слишком далеко в космосе
 rcd-component-must-build-on-empty-tile-message = Здесь уже имеется фундамент!
 rcd-component-cannot-build-on-empty-tile-message = Это не может быть построено без фундамента.
 rcd-component-must-build-on-subfloor-message = Это может быть построено только на покрытии!
-rcd-component-cannot-build-on-subfloor-message = Это не может быть построено на покрытии!
 rcd-component-cannot-build-on-occupied-tile-message = Здесь нельзя строить, место уже занято!
 rcd-component-cannot-build-identical-tile = Эта клетка уже тут имеется!
 

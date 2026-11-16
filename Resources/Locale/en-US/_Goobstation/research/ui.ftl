@@ -17,7 +17,6 @@ research-console-search-expand = Search
 research-console-tabs-collapse = Hide disciplines
 research-console-tabs-expand = Disciplines
 research-console-search-empty = No technologies found.
-research-console-search-result = { $name }  [{ $discipline }]
 research-console-tree-hint = Top row is the start of each branch. Lines lead down to what those technologies unlock. Select one to highlight the path.
 research-console-path = Path: { $path }
 research-console-path-root = { $name } starts this branch. Nothing else in this discipline is required first.

@@ -1,1 +1,0 @@
-loadout-group-paraMedic-backpack-items = Гипоспреи

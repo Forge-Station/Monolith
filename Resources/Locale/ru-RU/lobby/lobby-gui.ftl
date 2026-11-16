@@ -5,5 +5,4 @@ ui-lobby-sponsor-button = Спонсорство
 ui-lobby-leave-button = Выйти
 ui-lobby-observe-button = Наблюдать
 ui-lobby-ready-up-button = Готовность
-ui-lobby-online-players-block = Текущие игроки
 ui-lobby-server-info-block = Серверная информация

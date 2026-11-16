@@ -101,7 +101,4 @@ black-market-contract-drink-premium-rum-bottle-full = A premium crate of rum bot
 black-market-contract-drink-premium-rum-bottle-full-desc = The pirates really didn't want to give it up.
 
 ent-ComputerForgeBlackMarketContracts = black market contract console
-ent-ComputerForgeBlackMarketContracts-desc = Purchase rotating contraband contracts with bank credits.
-
 ent-BlackMarketCrateMachine = black market cargo lift
-ent-BlackMarketCrateMachine-desc = Delivers contraband crates for the black market console.

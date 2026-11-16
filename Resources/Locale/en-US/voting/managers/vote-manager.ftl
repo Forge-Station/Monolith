@@ -24,7 +24,6 @@ ui-vote-map-notlobby-time = Voting for maps is only valid in the pre-round lobby
 
 # Votekick votes
 ui-vote-votekick-unknown-initiator = A player
-ui-vote-votekick-unknown-target = Unknown Player
 ui-vote-votekick-title = { $initiator } has called a votekick for user: { $targetEntity }. Reason: { $reason }
 ui-vote-votekick-yes = Yes
 ui-vote-votekick-no = No

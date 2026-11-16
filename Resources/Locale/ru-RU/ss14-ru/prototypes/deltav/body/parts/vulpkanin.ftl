@@ -1,5 +1,3 @@
-ent-PartVulpkanin = часть тела вульпканина
-    .desc = { ent-BasePart.desc }
 ent-TorsoVulpkanin = торс вульпканина
     .desc = { ent-PartVulpkanin.desc }
 ent-HeadVulpkanin = голова вульпканина

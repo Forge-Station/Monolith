@@ -21,7 +21,6 @@ bank-atm-reason-label = Причина:{ " " }
 bank-atm-description-label = Описание:{ " " }
 vending-machine-menu-cash-slot-label = Наличные:{" "}
 station-bank-payroll = Заработная плата
-station-bank-workorder = Рабочий заказ
 station-bank-supplies = Ресурсы станции
 station-bank-bounty = Контракт
 station-bank-other = Другое

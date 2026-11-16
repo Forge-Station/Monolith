@@ -4,7 +4,6 @@ frontier-lobby-tsfmc-secondary-description = The TFSMC Secondary Outpost is a al
 frontier-lobby-camelot-subtext = A military station operated by the USSP.
 frontier-lobby-camelot-description = This is NOT a safezone. This is not a recommended spawn point for new players. Both a expedition and standard shipyard is available here however.
 
-frontier-lobby-hokkaido-subtext = An industrial station owned by MMC.
 frontier-lobby-hokkaido-description = Hokkaido is the center of industrial and commerce activites of MMC in the sector. Don't expect combat action from this faction if you join.
 
 frontier-lobby-jupiter-subtext = A mobile large mech-carrier.

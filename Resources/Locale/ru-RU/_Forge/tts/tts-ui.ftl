@@ -1,6 +1,5 @@
 ui-options-tts-volume = Громкость TTS:
 ui-options-radio-tts-volume = Громкость TTS(радио):
-credits-window-tts-title = Функция TTS (Text-To-Speech)
 tts-rate-limited = Вы генерируете TTS слишком быстро!
 humanoid-profile-editor-voice-tab = Голос
 humanoid-profile-editor-voice-placeholder = Поиск по голосам...

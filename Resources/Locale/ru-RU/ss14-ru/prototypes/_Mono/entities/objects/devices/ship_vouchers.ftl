@@ -1,6 +1,4 @@
 # Прочие
-ent-BaseShipLPC = ship LPC
-    .desc = Содержит необходимые данные для консоли верфи для производства определённого проекта.
 ent-ShipVoucherFrontierIronMan = ваучер на «Бег»
     .desc = Позволяет бесплатный приобрести одино судно «Бег» на верфи. Уничтожается при продаже.
 ent-ShipVoucherHound = ваучер на «Гончая»
@@ -37,9 +35,6 @@ ent-ShipVoucherTsfT0 = корабельный ваучер ТСФ уровня T
 ent-ShipVoucherTsfT1Random = случайный ваучер ТСФ
     .desc = { ent-ShipVoucherTsfT0.desc }
     .suffix = Т1
-ent-ShipVoucherTsfT2Random = { ent-ShipVoucherTsfT1Random }
-    .desc = { ent-ShipVoucherTsfT0.desc }
-    .suffix = Т2
 ent-ShipVoucherBalor = ваучер «Балор»
     .desc = Небольшая карта, содержащая данные для получения любого дрона из резервов верфи «Балор».
 ent-ShipVoucherTsfT1 =  корабельный ваучер ТСФ уровня T1

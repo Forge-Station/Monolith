@@ -1,7 +1,5 @@
 ## Admin menu
 
-ui-options-enable-overlay-nf-balance = Показать баланс
-
 ## Controls menu
 
 ui-options-function-smart-equip-wallet = Оснащение в слот кошелька

@@ -4,8 +4,6 @@ pneumatic-cannon-component-itemslot-name = Gas Tank
 
 ## Shown when trying to fire, but no gas
 
-pneumatic-cannon-component-fire-no-gas = { CAPITALIZE(THE($cannon)) } clicks, but no gas comes out.
-
 ## Shown when changing power.
 
 pneumatic-cannon-component-change-power = { $power ->

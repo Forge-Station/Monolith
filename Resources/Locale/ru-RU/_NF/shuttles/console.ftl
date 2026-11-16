@@ -25,7 +25,6 @@ shuttle-console-map-track = ⌖
 shuttle-console-marker-autopilot = АП
 shuttle-console-marker-autopilot-tooltip = Отправить автопилот к этой метке
 shuttle-console-marker-focus-tooltip = Центрировать карту на метке
-shuttle-console-marker-wrong-map = Автопилот работает только на текущей карте.
 shuttle-console-markers-label = Метки
 shuttle-console-marker-x = X
 shuttle-console-marker-y = Y

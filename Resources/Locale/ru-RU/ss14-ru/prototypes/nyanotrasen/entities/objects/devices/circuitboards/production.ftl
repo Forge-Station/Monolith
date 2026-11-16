@@ -6,5 +6,3 @@ ent-ScienceTechFabCircuitboard = научный техфаб (машинная �
     .desc = Плата для создания научного техфаба.
 ent-DeepFryerMachineCircuitboard = фритюрница (машинная плата)
     .desc = { ent-BaseMachineCircuitboard.desc }
-ent-ImpCoffeeMachineCircuitboard = кофемашина "Спейспрессо" (машинная плата)
-    .desc = { ent-BaseMachineCircuitboard.desc }

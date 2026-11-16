@@ -1,5 +1,5 @@
 # Frontier map machines and placed objects.
-# Genetic database, thermobath and the safety-deposit console have no gameplay
+# Genetic database and thermobath have no gameplay
 # components in this repo, so they are visual stand-ins of the Wolfgate sprites.
 # Luvvits food prototypes are not ported, so the vendor starts empty.
 
@@ -28,21 +28,6 @@
     drawdepth: SmallObjects
     snapCardinals: true
     state: base
-
-- type: entity
-  id: SafetyDepositConsole
-  name: safety deposit box console
-  description: A console for purchasing and managing safety deposit boxes.
-  parent: BaseStructure
-  components:
-  - type: Sprite
-    noRot: true
-    sprite: _WF/SafetyDepositBox/Structures/Machines/atm/depositatm.rsi
-    layers:
-    - map: ["computerLayerBody"]
-      state: icon
-    - map: ["computerLayerScreen"]
-      state: unshaded
 
 - type: entity
   id: ShieldGeneratorPOIBio

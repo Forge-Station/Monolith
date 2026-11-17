@@ -167,7 +167,7 @@
       activationContainer: "implant"
     - type: DeviceNetwork
       deviceNetId: Wireless
-      transmitFrequencyId: SuitNanotrasenSensor
+      transmitFrequencyId: SuitTTISensor
     - type: TriggerOnMobstateChange
       mobState:
       - Critical
@@ -290,7 +290,7 @@
       activationContainer: "implant"
     - type: DeviceNetwork
       deviceNetId: Wireless
-      transmitFrequencyId: SuitNanotrasenSensor
+      transmitFrequencyId: SuitTTISensor
     - type: TriggerOnMobstateChange
       mobState:
       - Critical

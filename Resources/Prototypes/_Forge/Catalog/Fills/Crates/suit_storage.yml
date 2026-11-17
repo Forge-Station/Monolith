@@ -160,6 +160,8 @@
   - type: AccessReader
     access: [["Renegate"]]
 
+#region NT
+
 - type: entity
   id: SuitStorageLeaderERT
   parent: SuitStorageBase
@@ -175,11 +177,28 @@
     - id: ClothingMaskGasERT
   - type: AccessReader
     access: [["Command"]]
-    
+
+#region TTI
+
+- type: entity
+  id: SuitStorageHardsuitTrauma
+  parent: SuitStorageBase
+  suffix: Hardsuit, TTI, T-23
+  components:
+  - type: StorageFill
+    contents:
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+    - id: ClothingOuterHardsuitTrauma
+    - id: ClothingShoesBootsMagTrauma
+    - id: ClothingMaskSterileTrauma
+  - type: AccessReader
+    access: [["Trauma"]]
+
 - type: entity
   id: SuitStorageTraumaLeader
   parent: SuitStorageBase
-  suffix: Hardsuit, TTI
+  suffix: Hardsuit, TTI, T-53, Director
   components:
   - type: StorageFill
     contents:
@@ -189,4 +208,4 @@
     - id: ClothingShoesBootsMagTrauma
     - id: ClothingMaskSterileTrauma
   - type: AccessReader
-    access: [["Command"]]
+    access: [["TraumaCommand"]]

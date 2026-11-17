@@ -60,6 +60,18 @@
 
 - type: entity
   parent: ComputerTurretCommandTSF
+  id: ComputerTurretCommandTTI
+  name: TTI turret command console
+  description: Sets the doctrine and friend or foe list for TTI turrets on this grid. The Director can open it.
+  components:
+  - type: TurretCommandServer
+    faction: MD
+    accent: "#2f4e47"
+  - type: AccessReader
+    access: [["TurretCommandTrauma"]]
+
+- type: entity
+  parent: ComputerTurretCommandTSF
   id: ComputerTurretCommandUSSP
   name: USSP turret command console
   description: Sets the doctrine and friend or foe list for USSP turrets on this grid. Sergeants and the commissar can open it.
@@ -171,6 +183,16 @@
   components:
   - type: AccessReader
     access: [["TurretCommandNTShuttle"]]
+
+- type: entity
+  parent: ComputerTurretCommandTTI
+  id: ComputerTurretCommandTTIShuttle
+  name: TTI shuttle turret command console
+  suffix: Shuttle
+  description: Sets the doctrine and friend or foe list for TTI turrets on this shuttle. Any TTI crew member can open it.
+  components:
+  - type: AccessReader
+    access: [["TurretCommandTraumaShuttle"]]
 
 - type: entity
   parent: ComputerTurretCommandUSSP

@@ -120,3 +120,27 @@
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsProvostInspector ]
+
+#region TTI
+- type: entity
+  parent: Airlock
+  id: AirlockTrauma
+  suffix: TTI, Locked
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/tti.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsTrauma ]
+
+- type: entity
+  parent: Airlock
+  id: AirlockTraumaCommand
+  suffix: TTI, Command, Locked
+  components:
+  - type: Sprite
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/tti.rsi
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsTraumaCommand ]
+

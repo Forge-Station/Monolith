@@ -157,6 +157,8 @@
     containers:
       gun_magazine: !type:ContainerSlot
 
+#region Empire
+
 - type: entity
   parent: BaseWeaponShotgunTurret
   id: WeaponTurretEmpireShotgun
@@ -204,6 +206,8 @@
     deconstructionTarget: null
     graph: WeaponTurretEmpireMachinegunPackingGraph
     node: WeaponTurretEmpireMachinegunPacked
+
+#region TSF
 
 - type: entity
   parent: BaseWeaponShotgunTurret
@@ -253,6 +257,8 @@
     graph: WeaponTurretTSFMachinegunPackingGraph
     node: WeaponTurretTSFMachinegunPacked
 
+#region USSP
+
 - type: entity
   parent: BaseWeaponShotgunTurret
   id: WeaponTurretUSSPShotgun
@@ -300,6 +306,8 @@
     deconstructionTarget: null
     graph: WeaponTurretUSSPMachinegunPackingGraph
     node: WeaponTurretUSSPMachinegunPacked
+
+#region PDV
 
 - type: entity
   parent: BaseWeaponShotgunTurret
@@ -349,6 +357,8 @@
     graph: WeaponTurretPDVMachinegunPackingGraph
     node: WeaponTurretPDVMachinegunPacked
 
+#region VG
+
 - type: entity
   parent: BaseWeaponShotgunTurret
   id: WeaponTurretVGShotgun
@@ -397,6 +407,8 @@
     graph: WeaponTurretVGMachinegunPackingGraph
     node: WeaponTurretVGMachinegunPacked
 
+#region NT
+
 - type: entity
   parent: BaseWeaponShotgunTurret
   id: WeaponTurretNTShotgun
@@ -444,3 +456,69 @@
     deconstructionTarget: null
     graph: WeaponTurretNTMachinegunPackingGraph
     node: WeaponTurretNTMachinegunPacked
+
+#region TTI
+
+- type: entity
+  parent: BaseWeaponCommandBallisticTurret
+  id: WeaponTurretTrauma
+  name: TTI ballistic turret
+  suffix: TTI
+  components:
+  - type: NpcFactionMember
+    factions:
+    - MD
+  - type: TurretCommandLink
+    faction: MD
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTraumaPackingGraph
+    node: WeaponTurretTraumaPacked
+
+- type: entity
+  parent: BaseWeaponShotgunTurret
+  id: WeaponTurretTraumaShotgun
+  name: TTI shotgun turret
+  suffix: TTI
+  components:
+  - type: NpcFactionMember
+    factions:
+    - MD
+  - type: TurretCommandLink
+    faction: MD
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTraumaShotgunPackingGraph
+    node: WeaponTurretTraumaShotgunPacked
+
+- type: entity
+  parent: BaseWeaponSniperTurret
+  id: WeaponTurretTraumaSniper
+  name: TTI sniper turret
+  suffix: TTI
+  components:
+  - type: NpcFactionMember
+    factions:
+    - MD
+  - type: TurretCommandLink
+    faction: MD
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTraumaSniperPackingGraph
+    node: WeaponTurretTraumaSniperPacked
+
+- type: entity
+  parent: BaseWeaponMachinegunTurret
+  id: WeaponTurretTraumaMachinegun
+  name: TTI machine gun turret
+  suffix: TTI
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: TurretCommandLink
+    faction: MD
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretTraumaMachinegunPackingGraph
+    node: WeaponTurretTraumaMachinegunPacked

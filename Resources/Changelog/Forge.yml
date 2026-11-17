@@ -83,7 +83,7 @@ Entries:
     - type: Fix
       message: >-
         Воздушная сигнализация теперь знает что делать. Скрубберы теперь могут
-        его собирать. 
+        его собирать.
   id: 7
   time: '2026-10-18T18:25:28.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/537
@@ -412,3 +412,14 @@ Entries:
   id: 32
   time: '2026-11-16T20:28:31.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/605
+- author: DRON5011
+  changes:
+    - type: Tweak
+      message: Показатели скафандров T-23, T-44 и T-53
+    - type: Tweak
+      message: Обновлен асортимент оружия в аплинке ТТИ
+    - type: Tweak
+      message: Пересмотрены цены в аплинке ТТИ
+  id: 33
+  time: '2026-11-15T17:44:06.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/476

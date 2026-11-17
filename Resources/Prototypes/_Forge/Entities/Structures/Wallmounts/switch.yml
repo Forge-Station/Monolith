@@ -21,3 +21,19 @@
   components:
   - type: AccessReader
     access: [["Remnant"]]
+
+- type: entity
+  id: LockableButtonTrauma
+  suffix: TTI
+  parent: LockableButton
+  components:
+  - type: AccessReader
+    access: [["Trauma"]]
+
+- type: entity
+  id: LockableButtonTraumaCommand
+  suffix: TTI, Command
+  parent: LockableButton
+  components:
+  - type: AccessReader
+    access: [["TraumaCommand"]]

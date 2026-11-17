@@ -1,4 +1,8 @@
 # Packed command turrets. They deploy empty; load a cartridge kit.
+
+#region Ballistic turret
+
+#Empire
 - type: entity
   parent: BaseItem
   id: WeaponTurretEmpirePacked
@@ -37,6 +41,7 @@
       - tool: Screwing
         doAfter: 14
 
+# NT
 - type: entity
   parent: BaseItem
   id: WeaponTurretNanoTrasenPacked
@@ -75,6 +80,46 @@
       - tool: Screwing
         doAfter: 14
 
+#TTI
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretTraumaPacked
+  name: packed TTI ballistic turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretTrauma
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_lethal
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretTraumaPackingGraph
+  start: WeaponTurretTraumaPacked
+  graph:
+  - node: WeaponTurretTraumaPacked
+    entity: WeaponTurretTrauma
+    edges:
+    - to: WeaponTurretTraumaPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretTraumaPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+#TSF
 - type: entity
   parent: BaseItem
   id: WeaponTurretTSFMCPacked
@@ -113,6 +158,7 @@
       - tool: Screwing
         doAfter: 14
 
+#USSP
 - type: entity
   parent: BaseItem
   id: WeaponTurretUSSPPacked
@@ -151,6 +197,7 @@
       - tool: Screwing
         doAfter: 14
 
+#PDV
 - type: entity
   parent: BaseItem
   id: WeaponTurretPDVPacked
@@ -189,6 +236,7 @@
       - tool: Screwing
         doAfter: 14
 
+#Viper
 - type: entity
   parent: BaseItem
   id: WeaponTurretViperPacked
@@ -227,6 +275,9 @@
       - tool: Screwing
         doAfter: 14
 
+
+
+#region Empire
 - type: entity
   parent: BaseItem
   id: WeaponTurretEmpireShotgunPacked
@@ -341,6 +392,7 @@
       - tool: Screwing
         doAfter: 14
 
+#region TSF
 - type: entity
   parent: BaseItem
   id: WeaponTurretTSFShotgunPacked
@@ -455,6 +507,7 @@
       - tool: Screwing
         doAfter: 14
 
+#USSP
 - type: entity
   parent: BaseItem
   id: WeaponTurretUSSPShotgunPacked
@@ -569,6 +622,7 @@
       - tool: Screwing
         doAfter: 14
 
+#region PDV
 - type: entity
   parent: BaseItem
   id: WeaponTurretPDVShotgunPacked
@@ -683,6 +737,7 @@
       - tool: Screwing
         doAfter: 14
 
+#region Viper
 - type: entity
   parent: BaseItem
   id: WeaponTurretVGShotgunPacked
@@ -797,6 +852,7 @@
       - tool: Screwing
         doAfter: 14
 
+#region NT
 - type: entity
   parent: BaseItem
   id: WeaponTurretNTShotgunPacked
@@ -911,3 +967,117 @@
       - tool: Screwing
         doAfter: 14
 
+#region TTI
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretTraumaShotgunPacked
+  name: packed TTI shotgun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretNTShotgun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_shotgun
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretTraumaShotgunPackingGraph
+  start: WeaponTurretTraumaShotgunPacked
+  graph:
+  - node: WeaponTurretTraumaShotgunPacked
+    entity: WeaponTurretTraumaShotgun
+    edges:
+    - to: WeaponTurretTraumaShotgunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretTraumaShotgunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretTraumaSniperPacked
+  name: packed NanoTrasen sniper turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretNTSniper
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_sniper
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretTraumaSniperPackingGraph
+  start: WeaponTurretTraumaSniperPacked
+  graph:
+  - node: WeaponTurretTraumaSniperPacked
+    entity: WeaponTurretTraumaSniper
+    edges:
+    - to: WeaponTurretTraumaSniperPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretTraumaSniperPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14
+
+- type: entity
+  parent: BaseItem
+  id: WeaponTurretTraumaMachinegunPacked
+  name: packed TTI machine gun turret
+  description: A disassembled command turret. Deploy it, then load a cartridge kit. It has no ammunition inside.
+  suffix: Packed
+  components:
+  - type: MultiHandedItem
+  - type: SpawnAfterInteract
+    prototype: WeaponTurretTraumaMachinegun
+    doAfter: 5
+    removeOnInteract: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/turrets.rsi
+    state: syndie_mg
+  - type: Item
+    size: Ginormous
+    shape:
+    - 0,0,3,3
+
+- type: constructionGraph
+  id: WeaponTurretTraumaMachinegunPackingGraph
+  start: WeaponTurretTraumaMachinegunPacked
+  graph:
+  - node: WeaponTurretTraumaMachinegunPacked
+    entity: WeaponTurretTraumaMachinegun
+    edges:
+    - to: WeaponTurretTraumaMachinegunPacked
+      completed:
+      - !type:SpawnPrototype
+        prototype: WeaponTurretTraumaMachinegunPacked
+        amount: 1
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Screwing
+        doAfter: 14

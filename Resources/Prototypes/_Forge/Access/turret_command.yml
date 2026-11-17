@@ -25,3 +25,12 @@
 - type: accessLevel
   id: TurretCommandVG
   name: id-card-access-level-turret-command-vg
+
+- type: accessLevel
+  id: TurretCommandTrauma
+  name: id-card-access-level-turret-command-trauma
+
+- type: accessLevel
+  id: TurretCommandTraumaShuttle
+  name: id-card-access-level-turret-command-trauma-shuttle
+

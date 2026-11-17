@@ -22,10 +22,12 @@
   displayWeight: 40 # Forge
   canBeAntag: false
   accessGroups:
-  - AllAccessMono #Mono
-  access:
-  - ChiefMedicalOfficer #Mono
-  - NtSecApartment
+  # - AllAccessMono #Mono
+  - GeneralTraumaAccess #Forge-Change
+  - CommandTraumaAccess #Forge-Change
+  # access:
+  # - ChiefMedicalOfficer #Mono
+  # - NtSecApartment
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant, TTITrackingImplant ] # Forge-change
@@ -53,8 +55,9 @@
     - RubberStampDoc
     - BoxFolderMedicalDoctor
     - StationAdministrationConsoleFlatpack
-    # Forge-Change
-    - NTSecApartmentTablet
+    # Forge-Change-start
+    - TTISecApartmentTablet
     - PhoneInstrumentHigh
     - WeaponCaseShortMk58Expedition # Forge
-    - MDHandheldOverwatchConsole
+    #- MDHandheldOverwatchConsole
+    #Forge-Change-end

@@ -1,23 +1,23 @@
 - type: job
-  id: NtMedicPilot
-  name: job-name-nt-medic-pilot
-  description: job-description-nt-medic-pilot
-  playTimeTracker: NtMedicPilot
+  id: NtMedicGunner
+  name: job-name-nt-medic-gunner
+  description: job-description-nt-medic-gunner
+  playTimeTracker: NtMedicGunner
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 21600 # 6 hrs
   setPreference: false
   overrideConsoleVisibility: true
-  startingGear: NtMedicPilotGear
+  startingGear: NtMedicGunnerGear
   alwaysUseSpawner: true
-  icon: "JobIconntmedicpilot"
+  icon: "JobIconntmedicgunner"
   supervisors: job-supervisors-doc
   weight: 170
   displayWeight: 38
   assignedCompany: MD
   canBeAntag: false
   accessGroups:
-  - GeneralAccess
+  - GeneralTraumaAccess
   - Medical
   special:
   - !type:AddImplantSpecial
@@ -34,4 +34,4 @@
     prototype: FrontierBirthdayGift
 
 - type: startingGear
-  id: NtMedicPilotGear
+  id: NtMedicGunnerGear

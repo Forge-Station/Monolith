@@ -54,7 +54,7 @@ public abstract partial class StationEventSystem<T> : GameRuleSystem<T> where T 
             ChatSystem.DispatchFilteredAnnouncement(allPlayersInGame, Loc.GetString(stationEvent.StartAnnouncement), sender: stationEvent.AnnounceSender is { } send ? Loc.GetString(send) : null, playSound: false, colorOverride: stationEvent.StartAnnouncementColor);
 
         // Frontier
-        if (stationEvent.StartRadioAnnouncement != null)
+        if (stationEvent.StartRadioAnnouncement != null && MapSystem.MapExists(ServerGameTicker.DefaultMap))
         {
             var message = Loc.GetString(stationEvent.StartRadioAnnouncement);
             var mapUid = MapSystem.GetMap(ServerGameTicker.DefaultMap); // Hack: need a reference to a valid entity on the default map - the map itself works.
@@ -102,7 +102,7 @@ public abstract partial class StationEventSystem<T> : GameRuleSystem<T> where T 
             ChatSystem.DispatchFilteredAnnouncement(allPlayersInGame, Loc.GetString(stationEvent.EndAnnouncement), sender: stationEvent.AnnounceSender is { } send ? Loc.GetString(send) : null, playSound: false, colorOverride: stationEvent.EndAnnouncementColor);
 
         // Frontier: radio announcements
-        if (stationEvent.EndRadioAnnouncement != null)
+        if (stationEvent.EndRadioAnnouncement != null && MapSystem.MapExists(ServerGameTicker.DefaultMap))
         {
             var message = Loc.GetString(stationEvent.EndRadioAnnouncement);
             var mapUid = MapSystem.GetMap(ServerGameTicker.DefaultMap); // Hack: need a reference to a valid entity on the default map - the map itself works.
@@ -110,8 +110,11 @@ public abstract partial class StationEventSystem<T> : GameRuleSystem<T> where T 
         }
         // End Frontier
 
-        Audio.PlayGlobal(stationEvent.EndAudio, allPlayersInGame, true);
-    }
+// Deleting the rule (round restart flushes every entity) also raises Ended.
+// The leave sound would spawn an Audio entity after the flush snapshot and the flush then fails.
+if (MetaData(uid).EntityLifeStage < EntityLifeStage.Terminating)
+    Audio.PlayGlobal(stationEvent.EndAudio, allPlayersInGame, true);
+}
 
     /// <summary>
     ///     Called every tick when this event is running.
@@ -142,7 +145,7 @@ public abstract partial class StationEventSystem<T> : GameRuleSystem<T> where T 
                 Filter allPlayersInGame = Filter.Empty().AddWhere(ServerGameTicker.UserHasJoinedGame); // we don't want to send to players who aren't in game (i.e. in the lobby)
                 if (stationEvent.WarningAnnouncement != null)
                     ChatSystem.DispatchFilteredAnnouncement(allPlayersInGame, Loc.GetString(stationEvent.WarningAnnouncement), sender: stationEvent.AnnounceSender is { } send ? Loc.GetString(send) : null, playSound: false, colorOverride: stationEvent.WarningAnnouncementColor);
-                if (stationEvent.WarningRadioAnnouncement != null)
+                if (stationEvent.WarningRadioAnnouncement != null && MapSystem.MapExists(ServerGameTicker.DefaultMap))
                 {
                     var message = Loc.GetString(stationEvent.WarningRadioAnnouncement);
                     var mapUid = MapSystem.GetMap(ServerGameTicker.DefaultMap); // Hack: need a reference to a valid entity on the default map - the map itself works.

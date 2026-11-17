@@ -379,3 +379,81 @@ Entries:
   id: 29
   time: '2026-11-10T10:53:19.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/558
+- author: mersen-tyn
+  changes:
+    - type: Tweak
+      message: >-
+        Ходячие НПС открывают двери, бегут на источник огня и ищут цель в
+        последней видимой точке.
+    - type: Tweak
+      message: НПС атакует ящик, только если сам видел, как в него залез живой человек.
+    - type: Tweak
+      message: НПС ломает перила, ящики и обычные окна на пути и проходит дальше.
+    - type: Tweak
+      message: >-
+        Экспериментальная экспедиция улья ксено без окон, только стены, и длится
+        30 минут.
+    - type: Fix
+      message: Корабельный ИИ больше не сыпет ошибкой из-за отсутствующего Owner.
+  id: 30
+  time: '2026-11-14T21:56:36.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/594
+- author: holodilnik66
+  changes:
+    - type: Tweak
+      message: Обновление внутриигровых правил - актуализация с правилами в дискорде.
+  id: 31
+  time: '2026-11-15T14:34:21.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/595
+- author: teasum
+  changes:
+    - type: Fix
+      message: пофиксил сервера мониторинга
+  id: 32
+  time: '2026-11-16T20:28:31.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/605
+- author: charlottenobot-art
+  changes:
+    - type: Add
+      message: Вайтлист на АДС Разор-Н.
+    - type: Fix
+      message: Скручиваемость щитов и энергомодулей POI.
+    - type: Fix
+      message: Омега сервер с Оружейной кузницы больше нельзя скрутить или разобрать.
+  id: 33
+  time: '2026-11-17T18:30:35.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/557
+- author: charlottenobot-art
+  changes:
+    - type: Add
+      message: Новый шаттл мусорной верфи - Стилетто
+  id: 34
+  time: '2026-11-17T18:54:59.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/571
+- author: TenLimo
+  changes:
+    - type: Add
+      message: Добавил крафт дренажа(и разборку)
+  id: 35
+  time: '2026-11-17T19:21:35.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/574
+- author: tolikhorenko346-dotcom
+  changes:
+    - type: Add
+      message: добавлено ядро ии на НО наемников.
+    - type: Tweak
+      message: >-
+        замена стенок на НО синди, наемников, ии, а так же ПОИ бункер империи,
+        браво, психлечебница сургут, на неразрушимые.
+    - type: Fix
+      message: исправлена проблема питания на адс зенит.
+  id: 36
+  time: '2026-11-17T19:37:54.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/575
+- author: cotofish
+  changes:
+    - type: Tweak
+      message: 'замена скафандров вг на шатлах вг на обычные наемнические '
+  id: 37
+  time: '2026-11-17T19:56:35.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/582

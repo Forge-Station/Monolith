@@ -3,7 +3,13 @@
   branches:
     - tasks:
         - !type:HTNCompoundTask
+          task: IncomingFireCompound
+    - tasks:
+        - !type:HTNCompoundTask
           task: GoliathMeleeCombatPrecondition
+    - tasks:
+        - !type:HTNCompoundTask
+          task: InvestigateCompound
     - tasks:
         - !type:HTNCompoundTask
           task: IdleCompound

@@ -51,6 +51,11 @@ namespace Content.Server.GameTicking
                         var data = new ContentPlayerData(session.UserId, args.Session.Name);
                         data.Mind = mindId;
                         data.Whitelisted = await _db.GetWhitelistStatusAsync(session.UserId); // Nyanotrasen - Whitelist
+                        // Dummy sessions are removed before this database round-trip finishes.
+                        // Touching the session after that kills the server on the next idle tick.
+                        if (session.Status == SessionStatus.Disconnected)
+                            return;
+
                         session.Data.ContentDataUncast = data;
                     }
 
@@ -59,6 +64,9 @@ namespace Content.Server.GameTicking
                     // Timer.Spawn(0, () => _playerManager.JoinGame(args.Session)); // Forge-Change ╨╗╨╛╨╝╨░╨╡╤В ╨░╨▓╤В╨╛╤А╨╕╨╖╨░╤Ж╨╕╤О, ╨┤╨╡╤А╨╢╨░╤В╤М ╨▓ ╨║╨╛╨╝╨╝╨╡╨╜╤В╨╡
 
                     var record = await _db.GetPlayerRecordByUserId(args.Session.UserId);
+                    if (session.Status == SessionStatus.Disconnected)
+                        return;
+
                     var firstConnection = record != null &&
                                           Math.Abs((record.FirstSeenTime - record.LastSeenTime).TotalMinutes) < 1;
 

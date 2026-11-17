@@ -9,39 +9,63 @@
     },
     "states": [
         {
-            "name": "wood0",
-            "directions": 4
-        },
-        {
-            "name": "wood1",
-            "directions": 4
-        },
-        {
-            "name": "wood2",
-            "directions": 4
-        },
-        {
-            "name": "wood3",
-            "directions": 4
-        },
-        {
-            "name": "wood4",
-            "directions": 4
-        },
-        {
-            "name": "wood5",
-            "directions": 4
-        },
-        {
-            "name": "wood6",
-            "directions": 4
-        },
-        {
-            "name": "wood7",
-            "directions": 4
-        },
-        {
             "name": "full"
+        },
+        {
+            "name": "wall0",
+            "directions": 4
+        },
+        {
+            "name": "wall1",
+            "directions": 4
+        },
+        {
+            "name": "wall2",
+            "directions": 4
+        },
+        {
+            "name": "wall3",
+            "directions": 4
+        },
+        {
+            "name": "wall4",
+            "directions": 4
+        },
+        {
+            "name": "wall5",
+            "directions": 4
+        },
+        {
+            "name": "wall6",
+            "directions": 4
+        },
+        {
+            "name": "wall7",
+            "directions": 4
+        },
+        {
+            "name": "wall8",
+            "directions": 4
+        },
+        {
+            "name": "wall9",
+            "directions": 4
+        },
+        {
+            "name": "wall10",
+            "directions": 4
+        },
+        {
+            "name": "wall11",
+            "directions": 4
+        },
+        {
+            "name": "wall12",
+            "directions": 4
+        },
+        {
+            "name": "wall13",
+            "directions": 4
         }
     ]
 }

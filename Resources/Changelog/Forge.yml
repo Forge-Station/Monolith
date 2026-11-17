@@ -475,3 +475,12 @@ Entries:
   id: 39
   time: '2026-11-17T21:22:17.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/585
+- author: KoT-Corvax
+  changes:
+    - type: Add
+      message: >-
+        Добавлены новые боковые и задние стейты для банкоматов, теперь их можно
+        рассмотреть со всех сторон!
+  id: 40
+  time: '2026-11-17T21:42:34.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/604

@@ -37,23 +37,23 @@
                 </BoxContainer>
             </BoxContainer>
             <BoxContainer Name="EntityContainer" Access="Public" Orientation="Horizontal"
-                          Visible="False">
+                          Visible="False" SeparationOverride="0">
                 <Button Name="EntityReplaceButton" Access="Public" ToggleMode="True"
-                        SetHeight="48"
-                        StyleClasses="ButtonSquare" Text="{Loc 'mapping-replace'}" HorizontalExpand="True" />
+                        SetHeight="36"
+                        StyleClasses="OpenRight" Text="{Loc 'mapping-replace'}" HorizontalExpand="True" />
                 <OptionButton Name="EntityPlacementMode" Access="Public"
-                              SetHeight="48"
-                              StyleClasses="ButtonSquare" TooltipDelay="0"
+                              SetHeight="36"
+                              StyleClasses="OpenLeft" TooltipDelay="0"
                               ToolTip="{Loc entity-spawn-window-override-menu-tooltip}"
                               HorizontalExpand="True" />
             </BoxContainer>
-            <BoxContainer Orientation="Horizontal">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="0">
                 <Button Name="EraseEntityButton" Access="Public" HorizontalExpand="True"
-                        SetHeight="48"
-                        ToggleMode="True" Text="{Loc 'mapping-erase-entity'}" StyleClasses="ButtonSquare" />
+                        SetHeight="36"
+                        ToggleMode="True" Text="{Loc 'mapping-erase-entity'}" StyleClasses="OpenRight Caution" />
                 <Button Name="EraseDecalButton" Access="Public" HorizontalExpand="True"
-                        SetHeight="48"
-                        ToggleMode="True" Text="{Loc 'mapping-erase-decal'}" StyleClasses="ButtonSquare" />
+                        SetHeight="36"
+                        ToggleMode="True" Text="{Loc 'mapping-erase-decal'}" StyleClasses="OpenLeft Caution" />
             </BoxContainer>
             <widgets:ChatBox Visible="False" />
         </BoxContainer>

@@ -15,6 +15,7 @@
   minimumDistance: 3400
   maximumDistance: 5800
   spawnGroup: RestStop
+  spawnSectors: [ poiWest ]
   gridPath: /Maps/_NF/POI/tinnia.yml
   addComponents:
   - type: StationTransit

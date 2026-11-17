@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Server._Forge.Sponsor;
 using Content.Shared._Forge.DiscordAuth;
 using Content.Shared._Forge.Sponsor;
@@ -42,10 +42,10 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
     {
         _sawmill = Logger.GetSawmill("discordAuth");
 
-        _cfg.OnValueChanged(ForgeVars.DiscordAuthEnabled, v => _enabled = v, true);
-        _cfg.OnValueChanged(ForgeVars.DiscordApiUrl, v => _apiUrl = v, true);
-        _cfg.OnValueChanged(ForgeVars.ApiKey, v => _apiKey = v, true);
-        _cfg.OnValueChanged(ForgeVars.DiscordGuildID, v => _discordGuild = v, true);
+        _cfg.OnValueChanged(ForgeCCVars.DiscordAuthEnabled, v => _enabled = v, true);
+        _cfg.OnValueChanged(ForgeCCVars.DiscordApiUrl, v => _apiUrl = v, true);
+        _cfg.OnValueChanged(ForgeCCVars.ApiKey, v => _apiKey = v, true);
+        _cfg.OnValueChanged(ForgeCCVars.DiscordGuildID, v => _discordGuild = v, true);
 
         _netMgr.RegisterNetMessage<MsgDiscordAuthRequired>();
         _netMgr.RegisterNetMessage<MsgSyncSponsorData>();

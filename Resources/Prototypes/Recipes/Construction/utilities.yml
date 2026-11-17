@@ -226,6 +226,38 @@
     state: conpipe-j2s
   mirror: DisposalRouter
 
+# Forge-Change: ore filter for ship-drill logistics
+- type: construction
+  name: ore filter
+  description: Splits an ore stream. Selected types go sideways; the rest continue straight.
+  id: OreDisposalFilter
+  graph: DisposalPipe
+  startNode: start
+  targetNode: oreFilter
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  icon:
+    sprite: Structures/Piping/disposal.rsi
+    state: conpipe-j1s
+  mirror: OreDisposalFilterFlipped
+
+- type: construction
+  hide: true
+  name: ore filter
+  description: Splits an ore stream. Selected types go sideways; the rest continue straight.
+  id: OreDisposalFilterFlipped
+  graph: DisposalPipe
+  startNode: start
+  targetNode: oreFilterFlipped
+  category: construction-category-utilities
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  icon:
+    sprite: Structures/Piping/disposal.rsi
+    state: conpipe-j2s
+  mirror: OreDisposalFilter
+
 - type: construction
   name: disposal signal router
   description: A signal-controlled three-way router.

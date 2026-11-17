@@ -13,7 +13,7 @@ namespace Content.Server._Mono.Cleanup;
 /// </summary>
 public sealed partial class CleanupHelperSystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private SharedMapSystem _mapMan = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -113,7 +113,7 @@ public sealed partial class CleanupHelperSystem : EntitySystem
         var pos = mapPos.Position;
 
         _gridsFound.Clear();
-        _mapMan.FindGridsIntersecting(mapPos.MapId, new Box2(pos - rangeVec, pos + rangeVec), ref _gridsFound, true);
+        _mapMan.FindGridsIntersecting(mapPos.MapId, new Box2(pos - rangeVec, pos + rangeVec), ref _gridsFound, approx: true, includeMap: false);
 
         return _gridsFound.Count > 0;
     }

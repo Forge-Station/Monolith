@@ -1,12 +1,19 @@
 - type: entity
-  parent: BaseItem
-  id: ChameleonProjector
+  parent: BaseItem # Forge-change: remove BaseSyndicateContraband
+  id: ChameleonProjectorNoBattery
   name: chameleon projector
   description: Holoparasite technology used to create a hard-light replica of any object around you. Disguise is destroyed when picked up or deactivated.
   components:
   - type: Sprite
     sprite: /Textures/Objects/Devices/chameleon_projector.rsi
-    state: icon
+    layers:
+    - state: icon
+    - state: powered
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      visible: false
+    - state: decharging
+      map: [ "enum.PowerDeviceVisualLayers.Charging" ]
+      visible: false
   - type: ChameleonProjector
     whitelist:
       components:
@@ -25,6 +32,43 @@
       - Catwalk # monolith edit - Catwalks make you invisible
       - Window # monolith edit - Windows makes you invisible
     disguiseProto: ChameleonDisguise
+  - type: StaticPrice
+    price: 5000
+
+- type: entity
+  parent: ChameleonProjectorNoBattery
+  id: ChameleonProjector
+  name: chameleon projector
+  description: Holoparasite technology used to create a hard-light replica of any object around you. Disguise is destroyed when picked up or deactivated.
+  suffix: Battery
+  components:
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      # ItemToggle sets this only while the disguise is drawing power.
+      enum.ToggleableVisuals.Enabled:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+        enum.PowerDeviceVisualLayers.Charging:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: PowerCellDraw
+    drawRate: 4 # About 3 minutes with a medium cell.
+  - type: ToggleCellDraw
+  - type: ItemToggle
+    onActivate: false
+    onUse: false
 
 - type: entity
   categories: [ HideSpawnMenu ]

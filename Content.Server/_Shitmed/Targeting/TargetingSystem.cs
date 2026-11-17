@@ -3,11 +3,13 @@ using Content.Shared.Mobs;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Targeting.Events;
 using Content.Shared.Body.Part;
+using Robust.Shared.Player;
 
 namespace Content.Server._Shitmed.Targeting;
 public sealed partial class TargetingSystem : SharedTargetingSystem
 {
     [Dependency] private SharedBodySystem _bodySystem = default!;
+    [Dependency] private ISharedPlayerManager _players = default!; // Forge-Change
 
     public override void Initialize()
     {
@@ -49,7 +51,9 @@ public sealed partial class TargetingSystem : SharedTargetingSystem
         if (changed)
         {
             Dirty(uid, component);
-            RaiseNetworkEvent(new TargetIntegrityChangeEvent(GetNetEntity(uid)), uid);
+            // Forge-Change: same guard as part damage. A disconnecting body must not be mailed this event.
+            if (_players.TryGetSessionByEntity(uid, out var session) && session.Channel is { IsConnected: true })
+                RaiseNetworkEvent(new TargetIntegrityChangeEvent(GetNetEntity(uid)), uid);
         }
     }
 }

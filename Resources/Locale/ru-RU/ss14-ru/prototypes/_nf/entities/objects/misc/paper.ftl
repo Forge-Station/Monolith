@@ -6,12 +6,10 @@ ent-BoxFolderClipboardPal = планшет ПЮД
     .desc = { ent-BoxFolderClipboard.desc }
 ent-BoxFolderPalBrown = папка ПЮД
     .desc = Папка, содержащая важные формы ТСФ.
-ent-BoxFolderNfsdForms = { ent-BoxFolderPalBrown }
-    .desc = Папка, заполненная шаблонами документов ТСФ.
-ent-BoxFolderNfsdFormsBrown = { ent-BoxFolderPalBrown }
-    .desc = { ent-BoxFolderNfsdForms.desc }
+    .suffix = Коричневая
 ent-BoxFolderPalGreen = { ent-BoxFolderPalBrown }
     .desc = { ent-BoxFolderPalBrown.desc }
+    .suffix = Зелёная
 
 
 ent-PaperDeadDropHint = подозрительная записка

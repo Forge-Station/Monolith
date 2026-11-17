@@ -1,7 +1,7 @@
 ent-CrateContractorSpaceKit = космический набор подрядчика
     .desc = Ящик с экипировкой подрядчика ДСН.
 
-ent-SuitStorageEmpire14m = { ent-SuitStorageBase }
+ent-SuitStorageRI14 = { ent-SuitStorageBase }
     .suffix = Империя, RI-14
     .desc = { ent-SuitStorageBase.desc }
 ent-SuitStorageRI14i = { ent-SuitStorageBase }
@@ -27,9 +27,6 @@ ent-SuitStorageHV7 = { ent-SuitStorageBase }
 ent-SuitStoragebsii20 = { ent-SuitStorageBase }
     .suffix = Forge, Ренегаты, BSII-20
     .desc = { ent-SuitStorageBase.desc }
-ent-SuitStoragebsii30 = { ent-SuitStorageBase }
-    .suffix = Forge, Ренегаты, BSII-30
-    .desc = { ent-SuitStorageBase.desc }
 ent-SuitStoragecriii200 = { ent-SuitStorageBase }
     .suffix = Forge, Ренегаты, CRIII-200
     .desc = { ent-SuitStorageBase.desc }
@@ -50,3 +47,9 @@ ent-CrateEmpireMaterial = имперский ящик
     .desc = { ent-CrateBaseSecure.desc }
     .suffix = Материалы
 
+ent-CrateMaterialsAdvancedFilled = { ent-CrateGenericSteel }
+    .desc = { ent-CrateGenericSteel.desc }
+    .suffix = Продвинутые материалы, Full
+ent-CrateMaterialsSuperFilled = { ent-CrateGenericSteel }
+    .desc = { ent-CrateGenericSteel.desc }
+    .suffix = Супер материалы, Full

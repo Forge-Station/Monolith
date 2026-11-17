@@ -12,7 +12,7 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item # Mono
-    size: Huge
+    size: Large # Forge-change Huge->Large
     sprite: _Mono/Objects/Weapons/Guns/Snipers/lee_enfield_inhands_32x.rsi
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Snipers/lee_enfield_inhands_32x.rsi
@@ -21,11 +21,12 @@
     - Back
     - suitStorage
   - type: GunWieldBonus
-    minAngle: -27
-    maxAngle: -36
+    minAngle: 0 # Forge-change -27->0
+    maxAngle: 0 # Forge-change -36->0
   - type: Gun
-    minAngle: 27
-    maxAngle: 39
+    minAngle: 2 # Forge-change 27->2
+    maxAngle: 4 # Forge-change 39->4
+    projectileSpeed: 50 # Forge-change
     fireRate: 2
     selectedMode: SemiAuto
     availableModes:

@@ -48,6 +48,9 @@ public abstract partial class SharedSalvageSystem : EntitySystem
     /// </summary>
     public int GetStructureCount(DifficultyRating baseRating)
     {
+        if (baseRating == DifficultyRating.ExtraHard) // Forge-Change
+            return 4;
+
         return 1 + (int) baseRating * 2;
     }
 
@@ -67,6 +70,8 @@ public abstract partial class SharedSalvageSystem : EntitySystem
                 return 20;
             case DifficultyRating.Extreme:
                 return 30;
+            case DifficultyRating.ExtraHard: // Forge-Change
+                return 40;
             default:
                 throw new ArgumentOutOfRangeException(nameof(rating), rating, null);
         }
@@ -89,6 +94,9 @@ public abstract partial class SharedSalvageSystem : EntitySystem
     public SalvageMission GetMission(SalvageMissionType config, DifficultyRating difficulty, int seed)
     {
         // This is on shared to ensure the client display for missions and what the server generates are consistent
+        if (difficulty == DifficultyRating.ExtraHard) // Forge-Change
+            return GetHiveMission(config, seed);
+
         var rating = (float) GetDifficulty(difficulty);
         // Don't want easy missions to have any negative modifiers but also want
         // easy to be a 1 for difficulty.
@@ -145,6 +153,38 @@ public abstract partial class SharedSalvageSystem : EntitySystem
         var rewards = GetRewards(difficulty, rand);
         return new SalvageMission(seed, difficulty, dungeon.ID, faction.ID, config, biome.ID, weather.ID, air.ID, temp.Temperature, light.Color, duration, rewards, mods);
     }
+
+    // Forge-Change-Start: one fixed hive world. The column does not roll other biomes, factions, or dungeons.
+    /// <summary>
+    /// One fixed hive world. The column does not roll other biomes, factions, or dungeons.
+    /// </summary>
+    private SalvageMission GetHiveMission(SalvageMissionType config, int seed)
+    {
+        var rewards = GetRewards(DifficultyRating.ExtraHard, new System.Random(seed));
+        var mods = new List<string>
+        {
+            Loc.GetString("salvage-air-mod-1"),
+            Loc.GetString("salvage-temperature-mod-room-temperature"),
+            Loc.GetString("salvage-light-mod-hive"),
+            Loc.GetString("salvage-time-mod-hive"),
+        };
+
+        return new SalvageMission(
+            seed,
+            DifficultyRating.ExtraHard,
+            "ForgeXenoHiveDungeon",
+            "ForgeXenoCM",
+            config,
+            "ForgeXenoHive",
+            "ClearWeather",
+            "Mix1",
+            293.15f,
+            Color.FromHex("#3F6B2A"),
+            TimeSpan.FromMinutes(20),
+            rewards,
+            mods);
+    }
+    // Forge-Change-End
 
     public T GetBiomeMod<T>(string biome, System.Random rand, ref float rating) where T : class, IPrototype, IBiomeSpecificMod
     {
@@ -222,6 +262,8 @@ public abstract partial class SharedSalvageSystem : EntitySystem
                 return new string[] { t4 }; // Frontier - Update tiers
             case DifficultyRating.Extreme:
                 return new string[] { t5 }; // Frontier - Update tiers
+            case DifficultyRating.ExtraHard: // Forge-Change
+                return new string[] { "ExpeditionRewardT6" };
             default:
                 throw new NotImplementedException();
         }
@@ -255,4 +297,11 @@ public enum DifficultyRating : byte
     Moderate,
     Hazardous,
     Extreme,
+
+    // Forge-Change-Start
+    /// <summary>
+    /// A single hive world. Offered as its own expedition column.
+    /// </summary>
+    ExtraHard,
+    // Forge-Change-End
 }

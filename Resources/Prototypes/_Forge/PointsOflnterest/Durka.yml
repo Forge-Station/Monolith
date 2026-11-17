@@ -5,6 +5,7 @@
   minimumDistance: 12500
   maximumDistance: 13500
   spawnGroup: Required
+  spawnSectors: [ siv ]
   gridPath: /Maps/_Forge/POI/Durka.yml
   addComponents:
   - type: IFF

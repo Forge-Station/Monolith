@@ -26,7 +26,6 @@ namespace Content.Client.RCD;
 public sealed class AlignRCDConstruction : SnapgridCenter
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IStateManager _stateManager = default!;
@@ -68,6 +67,11 @@ public sealed class AlignRCDConstruction : SnapgridCenter
         if (ShouldHidePlacementOverlay())
             return;
 
+        // Forge-Change: SnapgridCenter.Render assumes GetGrid(MouseCoords) when Grid != null.
+        // During mining debris can vanish between Align and draw — clear Grid to avoid NRE spam/freeze.
+        if (Grid != null && _transformSystem.GetGrid(MouseCoords) == null)
+            Grid = null;
+
         if (!ShouldDrawPipeLayerGuides(out var gridUid, out var mapGrid))
         {
             base.Render(args);
@@ -104,12 +108,17 @@ public sealed class AlignRCDConstruction : SnapgridCenter
         }
 
         // Forge-Change: do not chain SnapgridCenter + tile-index offset (ghost lands on 2x2 junction)
-        MouseCoords = _unalignedMouseCoords.AlignWithClosestGridTile(SearchBoxSize, _entityManager, _mapManager);
+        MouseCoords = _unalignedMouseCoords.AlignWithClosestGridTile(SearchBoxSize, _entityManager);
 
         var gridId = _transformSystem.GetGrid(MouseCoords);
 
+        // Forge-Change: clear Grid so SnapgridCenter.Render does not NRE when the
+        // cursor leaves the grid (e.g. drilling asteroid debris into empty space).
         if (!_entityManager.TryGetComponent<MapGridComponent>(gridId, out var mapGrid))
+        {
+            Grid = null;
             return;
+        }
 
         CurrentTile = _mapSystem.GetTileRef(gridId.Value, mapGrid, MouseCoords);
         GridDistancing = mapGrid.TileSize;

@@ -16,6 +16,7 @@ using Content.Shared.Interaction;
 using Content.Shared.PDA;
 using Robust.Shared.Audio;
 using Robust.Shared.Map.Components;
+using Content.Shared._Forge.Persistence;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -626,6 +627,23 @@ public sealed partial class ShuttleConsoleLockSystem : SharedShuttleConsoleLockS
             console,
             idCard,
             lockComp.ShuttleId);
+
+        if (user is { Valid: true } crewMember && gridUid is { Valid: true } shipGrid)
+        {
+            var crewAccess = new PersistentShipCrewAccessEvent(crewMember);
+            RaiseLocalEvent(shipGrid, ref crewAccess);
+            if (crewAccess.Allowed)
+            {
+                if (gridLock != null)
+                    SetGridLockState(shipGrid, false);
+                else
+                    lockComp.Locked = false;
+
+                _audio.PlayPvs(idComp.SwipeSound, console);
+                Popup.PopupEntity(Loc.GetString("shuttle-console-unlocked"), console);
+                return true;
+            }
+        }
 
         // First approach: Check if this ID card IS the deed holder
         var deedFound = false;

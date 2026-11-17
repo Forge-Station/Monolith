@@ -5,7 +5,7 @@ using Content.Shared.Damage;
 using Content.Shared.DeviceLinking; // Frontier
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Shuttles.Components
 {
@@ -66,7 +66,7 @@ namespace Content.Server.Shuttles.Components
         public TimeSpan NextFire = TimeSpan.Zero;
 
         // Frontier: upgradeable parts, togglable thrust
-        [DataField("machinePartThrust", customTypeSerializer: typeof(PrototypeIdSerializer<MachinePartPrototype>))]
+        [DataField("machinePartThrust", customTypeSerializer: typeof(ProtoId<MachinePartPrototype>))]
         public string MachinePartThrust = "Capacitor";
 
         [DataField("partRatingThrustMultiplier")]
@@ -80,13 +80,13 @@ namespace Content.Server.Shuttles.Components
         /// <summary>
         ///     Frontier - Make linkable to buttons
         /// </summary>
-        [DataField("onPort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))] // Frontier
+        [DataField("onPort", customTypeSerializer: typeof(ProtoId<SinkPortPrototype>))] // Frontier
         public string OnPort = "On"; // Frontier
 
-        [DataField("offPort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))] // Frontier
+        [DataField("offPort", customTypeSerializer: typeof(ProtoId<SinkPortPrototype>))] // Frontier
         public string OffPort = "Off"; // Frontier
 
-        [DataField("togglePort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))] // Frontier
+        [DataField("togglePort", customTypeSerializer: typeof(ProtoId<SinkPortPrototype>))] // Frontier
         public string TogglePort = "Toggle"; // Frontier
         // End Frontier: upgradeable parts, togglable thrust
 

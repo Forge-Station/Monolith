@@ -223,6 +223,21 @@
           Quantity: 30
 
 - type: entity
+  id: GeneStabilizerChemistryBottle
+  suffix: gene stabilizer
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-gene-stabilizer
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: GeneStabilizer
+          Quantity: 30
+
+- type: entity
   id: PotassiumChemistryBottle
   suffix: potassium
   parent: BaseChemistryBottleFilled

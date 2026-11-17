@@ -1,7 +1,7 @@
 - type: vessel
   id: pathfinder
   parent: BaseVessel
-  name: 'Следопыт'
+  name: '«Следопыт»'
   description: Малый экспедиционный шаттл. Без вооружения
   price: 47000
   category: Small

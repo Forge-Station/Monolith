@@ -85,7 +85,7 @@
 - type: entity
   parent: DoorElectronics
   id: DoorElectronicsRemnant
-  suffix: Empire Secure, Locked
+  suffix: Remnant Secure, Locked
   components:
   - type: AccessReader
     access: [["Remnant"]]

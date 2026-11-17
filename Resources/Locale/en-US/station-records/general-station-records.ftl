@@ -1,4 +1,13 @@
-﻿general-station-record-console-window-title = Station Records Computer
+station-records-shuttle-crew-title = Permanent shuttle crew
+station-records-shuttle-crew-empty = No crew members assigned.
+station-records-shuttle-crew-add = Add selected character
+station-records-shuttle-crew-remove = Remove
+station-records-shuttle-crew-owner-only = Only the shuttle owner can manage its crew.
+station-records-shuttle-crew-update-failed = Unable to update the shuttle crew.
+station-records-shuttle-crew-added = {$name} was added to the shuttle crew.
+station-records-shuttle-owner-job = Shuttle captain
+station-records-shuttle-crew-member-job = Shuttle crew
+general-station-record-console-window-title = Station Records Computer
 general-station-record-console-select-record-info = Select a record on the left.
 general-station-record-console-empty-state = No records found!
 general-station-record-console-no-record-found = No record was found for the selected person.

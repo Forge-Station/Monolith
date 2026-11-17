@@ -4,6 +4,7 @@ using Content.Shared.Examine;
 using Content.Shared._Forge.Radio;
 using Content.Shared._Forge.Radio.Components;
 using Content.Shared.Radio.Components;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
@@ -15,6 +16,7 @@ public sealed class ConfigurableEncryptionKeySystem : EntitySystem
 {
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedStationAiSystem _stationAi = default!;
 
     public override void Initialize()
     {
@@ -33,6 +35,12 @@ public sealed class ConfigurableEncryptionKeySystem : EntitySystem
         EncryptionKeyHolderComponent? holder = null)
     {
         frequency = default;
+
+        if (HasComp<StationAiHeldComponent>(uid) && _stationAi.TryGetCore(uid, out var core))
+        {
+            uid = core.Owner;
+            holder = null;
+        }
 
         if (!Resolve(uid, ref holder, false))
             return false;

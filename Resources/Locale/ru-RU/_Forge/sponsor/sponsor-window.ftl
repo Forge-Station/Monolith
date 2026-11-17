@@ -17,3 +17,4 @@ sponsor-window-levels-header = Уровни спонсорства
 sponsor-window-perk-ooc = • Свой цвет ника в OOC
 sponsor-window-perk-looc = • Свой цвет ника в LOOC
 sponsor-window-perk-ghost-skin = • Особый скин госта
+sponsor-window-perk-company-ui = • Цветные палитры меню компании

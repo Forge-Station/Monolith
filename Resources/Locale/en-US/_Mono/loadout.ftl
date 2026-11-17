@@ -77,4 +77,16 @@ loadout-tsfmc-headset-senior = TSF senior over-ear headset
 loadout-tsfmc-iff-orange = IFF strap (orange)
 loadout-tsfmc-iff-white = IFF strap (white)
 loadout-tsfmc-ammo-68x52 = 6.8x52mm ammo box
+
+loadout-name-ContractorSpecialGunMalandro = RS-2 Malandro gun case
+loadout-name-SecurityGuardIrohLoadout = Iroh gun case
+loadout-name-FactionRiversongLoadout = TCA QBZ-91 Riversong (6.8x52mm Caseless)
+loadout-name-FactionDragonfangLoadout = TCA QBB-81-1 Dragonfang (7.62x51mm)
+loadout-name-MercenaryMagnum357Loadout = ammunition box (.357 magnum FMJ)
+loadout-name-FactionMagnum357Loadout = ammunition box (.357 magnum FMJ)
+loadout-name-TsfmcUtilityCap = TSFMC's utility cap
+loadout-name-TsfmcBeretCommon = TSFMC's blue beret
+loadout-name-RenegatesCombatWebbing = chest rig
+loadout-name-RenegatesCombatWebbingLarge = large chest rig
+loadout-name-Renegatesbandolier = bandolier
 loadout-group-chatrank = chat rank

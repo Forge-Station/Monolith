@@ -40,7 +40,7 @@ namespace Content.Server.GameTicking
         [Dependency] private IGameMapManager _gameMapManager = default!;
         [Dependency] private IGameTiming _gameTiming = default!;
         [Dependency] private ILogManager _logManager = default!;
-        [Dependency] private IMapManager _mapManager = default!;
+        [Dependency] private SharedMapSystem _map = default!;
         [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private IRobustRandom _robustRandom = default!;
 #if EXCEPTION_TOLERANCE
@@ -50,7 +50,6 @@ namespace Content.Server.GameTicking
         [Dependency] private IServerDbManager _db = default!;
         [Dependency] private ChatSystem _chatSystem = default!;
         [Dependency] private MapLoaderSystem _loader = default!;
-        [Dependency] private SharedMapSystem _map = default!;
         [Dependency] private GhostSystem _ghost = default!;
         [Dependency] private SharedMindSystem _mind = default!;
         [Dependency] private PlayTimeTrackingSystem _playTimeTrackings = default!;

@@ -1,0 +1,64 @@
+- type: entityTable
+  id: VgroidGasCloudTable
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      tableId: GasCloudSmallTable
+      weight: 0.35
+    - !type:NestedSelector
+      tableId: GasCloudStandardTable
+      weight: 0.45
+    - !type:NestedSelector
+      tableId: GasCloudLargeTable
+      weight: 0.2
+
+- type: entityTable
+  id: GasCloudSmallTable
+  table: !type:GroupSelector
+    children:
+    - id: GasCloudOxygenSmall
+    - id: GasCloudNitrogenSmall
+    - id: GasCloudCarbonDioxideSmall
+    - id: GasCloudPlasmaSmall
+    - id: GasCloudAmmoniaSmall
+    - id: GasCloudWaterVaporSmall
+    - id: GasCloudNitrousOxideSmall
+    - id: GasCloudAirSmall
+    - id: GasCloudMuddleEvenSmall
+    - id: GasCloudMuddlePlasmaSmall
+    - id: GasCloudFrezonSmall
+      weight: 0.35
+
+- type: entityTable
+  id: GasCloudStandardTable
+  table: !type:GroupSelector
+    children:
+    - id: GasCloudOxygen
+    - id: GasCloudNitrogen
+    - id: GasCloudCarbonDioxide
+    - id: GasCloudPlasma
+    - id: GasCloudAmmonia
+    - id: GasCloudWaterVapor
+    - id: GasCloudNitrousOxide
+    - id: GasCloudAir
+    - id: GasCloudMuddleEven
+    - id: GasCloudMuddlePlasma
+    - id: GasCloudFrezon
+      weight: 0.35
+
+- type: entityTable
+  id: GasCloudLargeTable
+  table: !type:GroupSelector
+    children:
+    - id: GasCloudOxygenLarge
+    - id: GasCloudNitrogenLarge
+    - id: GasCloudCarbonDioxideLarge
+    - id: GasCloudPlasmaLarge
+    - id: GasCloudAmmoniaLarge
+    - id: GasCloudWaterVaporLarge
+    - id: GasCloudNitrousOxideLarge
+    - id: GasCloudAirLarge
+    - id: GasCloudMuddleEvenLarge
+    - id: GasCloudMuddlePlasmaLarge
+    - id: GasCloudFrezonLarge
+      weight: 0.35

@@ -55,7 +55,7 @@
   - AmmoBox762x51mmRIP
   - Magazine762x54mmRFMJ
   - Magazine762x54mmRPlasteelAP
-  - Magazine762x54mmRRubber
+#  - Magazine762x54mmRRubber # Forge-change
   - Magazine762x54mmRIncendiary
   - Magazine762x54mmRPractice
   - Magazine762x54mmREmpty
@@ -65,7 +65,7 @@
   - SpeedLoader762x54mmRFMJ
   - AmmoBox762x54mmRFMJ
   - AmmoBox762x54mmRPlasteelAP
-  - AmmoBox762x54mmRRubber
+#  - AmmoBox762x54mmRRubber # Forge-change
   - AmmoBox762x54mmRIncendiary
   - AmmoBox762x54mmRPractice
   - AmmoBox762x54mmRUranium
@@ -310,6 +310,12 @@
   - Magazine45_ACPPistolUranium
   - Magazine45_ACPSubMachineGunUranium
   - AmmoBox45_ACPUranium
+  - Magazine635x40mmCaselessUranium # Forge-change
+  - AmmoBox635x40mmCaselessUranium # Forge-change
+  - Magazine8x65mmSKRUranium # Forge-change
+  - AmmoBox8x65mmSKRUranium # Forge-change
+  - Magazine68x52mmCaselessUranium # Forge-change
+  - AmmoBox68x52mmCaselessUranium # Forge-change
 
 #Empty recipes
 
@@ -403,13 +409,17 @@
   - Magazine45_ACPSubMachineGunIncendiary
   - AmmoBox45_ACPIncendiary
   - AmmoBox23x75mmFlashbang
+  - Magazine635x40mmCaselessIncendiary # Forge-change
+  - AmmoBox635x40mmCaselessIncendiary # Forge-change
+  - Magazine68x52mmCaselessIncendiary # Forge-change
+  - AmmoBox68x52mmCaselessIncendiary # Forge-change
 
 #Rubber recipes
 
   - Magazine762x51mmRubber
   - AmmoBox762x51mmRubber
-  - Magazine762x54mmRRubber
-  - AmmoBox762x54mmRRubber
+#  - Magazine762x54mmRRubber # Forge-change
+#  - AmmoBox762x54mmRRubber # Forge-change
   - Magazine556x45mmRubber
   - SpeedLoader556x45mmRubber
   - AmmoBox556x45mmRubber
@@ -515,6 +525,10 @@
   - AmmoBox23x75mmFlechette
   - Magazine12_gaugeFlechette
   - AmmoBox12_gaugeFlechette
+  - Magazine635x40mmCaselessPlasteelAP # Forge-change
+  - AmmoBox635x40mmCaselessPlasteelAP # Forge-change
+  - Magazine8x65mmSKRPlasteelAP # Forge-change
+  - AmmoBox8x65mmSKRPlasteelAP # Forge-change
 
 #HP recipes
 
@@ -542,6 +556,10 @@
   - Magazine45_ACPPistolHP
   - Magazine45_ACPSubMachineGunHP
   - AmmoBox45_ACPHP
+  - Magazine635x40mmCaselessHP # Forge-change
+  - AmmoBox635x40mmCaselessHP # Forge-change
+  - Magazine8x65mmSKRHP # Forge-change
+  - AmmoBox8x65mmSKRHP # Forge-change
 
 #RIP recipes
 
@@ -572,6 +590,10 @@
   - Magazine45_ACPPistolRIP
   - Magazine45_ACPSubMachineGunRIP
   - AmmoBox45_ACPRIP
+  - Magazine635x40mmCaselessRIP # Forge-change
+  - AmmoBox635x40mmCaselessRIP # Forge-change
+  - Magazine8x65mmSKRRIP # Forge-change
+  - AmmoBox8x65mmSKRRIP # Forge-change
 
 #civilian = FMJ + practice + empty + rubber + HP + Steel AP
 # MARK: Static
@@ -697,8 +719,8 @@
 
   - Magazine762x51mmRubber
   - AmmoBox762x51mmRubber
-  - Magazine762x54mmRRubber
-  - AmmoBox762x54mmRRubber
+#  - Magazine762x54mmRRubber # Forge-change
+#  - AmmoBox762x54mmRRubber # Forge-change
   - Magazine556x45mmRubber
   - SpeedLoader556x45mmRubber
   - AmmoBox556x45mmRubber
@@ -751,6 +773,10 @@
   - AmmoBox45_ACPHP
   - Magazine68x52mmHP
   - AmmoBox68x52mmHP
+  - Magazine635x40mmCaselessHP # Forge-change
+  - AmmoBox635x40mmCaselessHP # Forge-change
+  - Magazine8x65mmSKRHP # Forge-change
+  - AmmoBox8x65mmSKRHP # Forge-change
 
 # Energy
   - Magazine700Thz
@@ -792,6 +818,12 @@
   - Magazine45_ACPPistolUranium
   - Magazine45_ACPSubMachineGunUranium
   - AmmoBox45_ACPUranium
+  - Magazine635x40mmCaselessUranium # Forge-change
+  - AmmoBox635x40mmCaselessUranium # Forge-change
+  - Magazine8x65mmSKRUranium # Forge-change
+  - AmmoBox8x65mmSKRUranium # Forge-change
+  - Magazine68x52mmCaselessUranium # Forge-change
+  - AmmoBox68x52mmCaselessUranium # Forge-change
 
 #Incendiary recipes
 
@@ -825,6 +857,10 @@
   - Magazine45_ACPSubMachineGunIncendiary
   - AmmoBox45_ACPIncendiary
   - AmmoBox23x75mmFlashbang
+  - Magazine635x40mmCaselessIncendiary # Forge-change
+  - AmmoBox635x40mmCaselessIncendiary # Forge-change
+  - Magazine68x52mmCaselessIncendiary # Forge-change
+  - AmmoBox68x52mmCaselessIncendiary # Forge-change
 
 #Plasteel AP recipes
 
@@ -858,6 +894,10 @@
   - AmmoBox23x75mmFlechette
   - Magazine12_gaugeFlechette
   - AmmoBox12_gaugeFlechette
+  - Magazine635x40mmCaselessPlasteelAP # Forge-change
+  - AmmoBox635x40mmCaselessPlasteelAP # Forge-change
+  - Magazine8x65mmSKRPlasteelAP # Forge-change
+  - AmmoBox8x65mmSKRPlasteelAP # Forge-change
 
 #RIP recipes
 
@@ -888,6 +928,10 @@
   - Magazine45_ACPPistolRIP
   - Magazine45_ACPSubMachineGunRIP
   - AmmoBox45_ACPRIP
+  - Magazine635x40mmCaselessRIP # Forge-change
+  - AmmoBox635x40mmCaselessRIP # Forge-change
+  - Magazine8x65mmSKRRIP # Forge-change
+  - AmmoBox8x65mmSKRRIP # Forge-change
 
 #Misc
   - Magazine762x39mmSubsonic

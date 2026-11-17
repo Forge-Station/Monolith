@@ -1,0 +1,31 @@
+- type: entity
+  name: radio receiver handheld
+  description: A handy handheld radio with adjustible frequency.
+  parent: [BaseItem, RecyclableItemDeviceSmall]
+  id: StationRadioReceiverHandheld
+  components:
+  - type: Sprite
+    sprite: _Forge/Objects/Devices/handheld_station_radio.rsi
+    layers:
+    - state: base
+  - type: RadioSpeaker
+    powerRequired: False
+    speakNormally: true
+    enabled: true
+    channels:
+    - RadioShow
+  - type: Speech
+    speechVerb: StationRadio
+  - type: ActiveRadio
+    channels:
+    - RadioShow
+  - type: StationRadioReceiver
+    frequency: 1285
+  - type: ActivatableUI
+    key: enum.StationRadioFrequencyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.StationRadioFrequencyUiKey.Key:
+        type: StationRadioFrequencyBoundUserInterface
+  - type: StaticPrice
+    price: 50

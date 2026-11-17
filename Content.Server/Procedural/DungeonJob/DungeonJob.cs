@@ -232,6 +232,11 @@ public sealed partial class DungeonJob : Job<List<Dungeon>>
             case EntranceFlankDunGen flank:
                 await PostGen(flank, data, dungeons[^1], reservedTiles, random);
                 break;
+            // Forge-Change-Start
+            case EntityReplaceDunGen replaceEntities:
+                await PostGen(replaceEntities, dungeons[^1], random);
+                break;
+            // Forge-Change-End
             case ExteriorDunGen exterior:
                 dungeons.AddRange(await GenerateExteriorDungen(position, exterior, reservedTiles, random));
                 break;

@@ -1,0 +1,33 @@
+lobby-hub-hint = WASD — ходить · E — взаимодействовать с объектами
+lobby-hub-prompt-generic = E — Взаимодействовать
+lobby-hub-prompt-character = E — Настройка персонажа
+lobby-hub-prompt-ready = E — Готовность ({$status})
+lobby-hub-prompt-join = E — Войти в раунд
+lobby-hub-prompt-observe = E — Наблюдать
+lobby-hub-prompt-options = E — Настройки
+lobby-hub-prompt-ahelp = E — Помощь администрации
+lobby-hub-prompt-sponsor = E — Спонсорство
+lobby-hub-prompt-vote = E — Голосование
+lobby-hub-prompt-leave = E — Отключиться
+lobby-hub-ready-yes = готов
+lobby-hub-ready-no = не готов
+
+ent-LobbyHubSpawn = точка появления лобби
+    .desc = Где появляется манекен игрока. На карте хаба должна быть ровно одна.
+
+ent-LobbyHubCharacter = терминал персонажа
+    .desc = Внешность, роли, снаряжение и компания.
+ent-LobbyHubReady = консоль посадки
+    .desc = Отметиться готовым или зайти в уже идущий раунд.
+ent-LobbyHubObserve = кабина наблюдателя
+    .desc = Войти в раунд призраком.
+ent-LobbyHubOptions = терминал настроек
+    .desc = Настройки игры и клиента.
+ent-LobbyHubAHelp = интерком администрации
+    .desc = Связь с администрацией.
+ent-LobbyHubSponsor = киоск спонсорства
+    .desc = Привилегии спонсоров.
+ent-LobbyHubVote = доска голосований
+    .desc = Голосование за карту или режим.
+ent-LobbyHubLeave = шлюз выхода
+    .desc = Отключиться от сервера.

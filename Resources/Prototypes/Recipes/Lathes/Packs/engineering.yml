@@ -20,6 +20,7 @@
   - HandheldStationMap
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
+  - SprayPainterAmmo  # Forge-Change
   - EconomyPlanner # Mono
 
 - type: latheRecipePack
@@ -53,6 +54,7 @@
   id: EngineeringBoardsStatic
   recipes:
   - SpaceHeaterMachineCircuitBoard
+  - MaterialReclaimerMachineCircuitboardRecipe # Forge-Change
 
 ## Dynamic
 

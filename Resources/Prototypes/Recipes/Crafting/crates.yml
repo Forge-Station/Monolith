@@ -108,6 +108,6 @@
   targetNode: crategenericbs #Forge-Change
   category: construction-category-storage
   description: A metal bluespace crate for storing things.
-  icon: { sprite: Forge/Structures/Storage/Crates/bluespace_crate.rsi, state: icon }
+  icon: { sprite: _Forge/Structures/Storage/Crates/bluespace_crate.rsi, state: icon }
   objectType: Structure
 #Forge-change end

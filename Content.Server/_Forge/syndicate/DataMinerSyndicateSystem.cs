@@ -16,7 +16,6 @@ public sealed class DataMinerSystem : EntitySystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
 
-    [ValidatePrototypeId<StackPrototype>]
     private const string Credit = "CreditCounterfeit";
 
     public override void Initialize()

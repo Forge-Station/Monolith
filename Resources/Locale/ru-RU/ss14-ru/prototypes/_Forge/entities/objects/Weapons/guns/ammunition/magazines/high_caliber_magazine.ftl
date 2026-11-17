@@ -5,6 +5,7 @@ ent-MagazineAntiMaterielIncendiary = магазин (.60, зажигательн
 ent-MagazineAntiMaterielEmpty = магазин (.60, пустой)
 ent-BaseMagazineAntiMateriel = магазин (.60 калибр)
 
-ent-BaseMagazineUllman127x85mm = магазин (12.7x85мм)
-ent-ForgeMagazineUllman127x85mmEmpty = магазин (12.7x85мм, пустой)
-ent-ForgeMagazineUllman127x85mm = магазин (12.7x85мм)
+ent-BaseMagazineUllman135x110mm = магазин (13.5x110мм)
+ent-ForgeMagazineUllman135x110mmEmpty = магазин (13.5x110мм, пустой)
+ent-ForgeMagazineUllman135x110mm = магазин (13.5x110мм)
+ent-ForgeMagazineUllman135x110mmHE = магазин (13.5x110мм HE)

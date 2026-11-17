@@ -1,6 +1,6 @@
-﻿using Content.Server.Worldgen.Systems.Biomes;
+using Content.Server.Worldgen.Systems.Biomes;
 using Content.Server.Worldgen.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Worldgen.Components;
 
@@ -8,7 +8,7 @@ namespace Content.Server.Worldgen.Components;
 ///     This is used for selecting the biome(s) to be used during world generation.
 /// </summary>
 [RegisterComponent]
-[Access(typeof(BiomeSelectionSystem))]
+[Access(typeof(BiomeSelectionSystem), typeof(Content.Server._Forge.Bss.BssWorldSystem))] // Forge-Change
 public sealed partial class BiomeSelectionComponent : Component
 {
     /// <summary>
@@ -16,6 +16,6 @@ public sealed partial class BiomeSelectionComponent : Component
     /// </summary>
     /// <remarks>This is always sorted by priority after ComponentStartup.</remarks>
     [DataField("biomes", required: true,
-        customTypeSerializer: typeof(PrototypeIdListSerializer<BiomePrototype>))] public List<string> Biomes = new();
+        customTypeSerializer: typeof(ProtoId<BiomePrototype>))] public List<string> Biomes = new();
 }
 

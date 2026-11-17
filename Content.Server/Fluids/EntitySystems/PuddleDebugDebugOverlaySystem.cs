@@ -11,10 +11,9 @@ namespace Content.Server.Fluids.EntitySystems;
 public sealed partial class PuddleDebugDebugOverlaySystem : SharedPuddleDebugOverlaySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IMapManager _mapManager = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
     [Dependency] private PuddleSystem _puddle = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private SharedMapSystem _map = default!;
 
     private readonly HashSet<ICommonSession> _playerObservers = [];
     private List<Entity<MapGridComponent>> _grids = [];
@@ -72,14 +71,14 @@ public sealed partial class PuddleDebugDebugOverlaySystem : SharedPuddleDebugOve
                 if (!Exists(gridUid))
                     continue;
 
-                foreach (var uid in _map.GetAnchoredEntities(gridUid, grid, worldBounds))
+                foreach (var uid in _mapManager.GetAnchoredEntities(gridUid, grid, worldBounds))
                 {
                     PuddleComponent? puddle = null;
                     TransformComponent? xform = null;
                     if (!Resolve(uid, ref puddle, ref xform, false))
                         continue;
 
-                    var pos = xform.Coordinates.ToVector2i(EntityManager, _mapManager, _transform);
+                    var pos = xform.Coordinates.ToVector2i(EntityManager, _transform);
                     var vol = _puddle.CurrentVolume(uid, puddle);
                     data.Add(new PuddleDebugOverlayData(pos, vol));
                 }

@@ -23,12 +23,15 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
 
     public event Action<MapCoordinates, Angle>? RequestFTL;
     public event Action<NetEntity, Angle>? RequestBeaconFTL;
+    public event Action<string>? RequestBssJump;
 
     // Mono
     public event Action<MapCoordinates, Angle>? RequestAutopilot;
     public event Action<MapCoordinates>? RequestBioScan; // Forge-Change - BioScan
+    public event Action? OnCloaking; // Forge-Change - Cloaking
+    public event Action? OnMapToggleMod; // Forge-Change - Cloaking
 
-    public event Action<NetEntity, NetEntity>? DockRequest;
+    public event Action<NetEntity, NetEntity, bool>? DockRequest; // Forge-Change
     public event Action<NetEntity>? UndockRequest;
     public event Action<List<NetEntity>>? UndockAllRequest;
     public event Action<List<NetEntity>, bool>? ToggleFTLLockRequest;
@@ -42,6 +45,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         NavModeButton.OnPressed += NavPressed;
         MapModeButton.OnPressed += MapPressed;
         DockModeButton.OnPressed += DockPressed;
+        SystemModeButton.OnPressed += SystemPressed;
 
         // Modes are exclusive
         var group = new ButtonGroup();
@@ -49,6 +53,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         NavModeButton.Group = group;
         MapModeButton.Group = group;
         DockModeButton.Group = group;
+        SystemModeButton.Group = group;
 
         NavModeButton.Pressed = true;
         SetupMode(_mode);
@@ -69,14 +74,26 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
             RequestAutopilot?.Invoke(coords, angle);
         };
 
+        // Forge-Change-start - Cloaking
+        MapContainer.OnCloaking += () =>
+        {
+            OnCloaking?.Invoke();
+        };
+
+        MapContainer.OnMapToggleMod += () =>
+        {
+            OnMapToggleMod?.Invoke();
+        };
+        // Forge-Change-end - Cloaking
+
         MapContainer.RequestBioScan += coords => // Forge-Change - BioScan
         {
             RequestBioScan?.Invoke(coords);
         };
 
-        DockContainer.DockRequest += (entity, netEntity) =>
+        DockContainer.DockRequest += (entity, netEntity, shipyard) => // Forge-Change
         {
-            DockRequest?.Invoke(entity, netEntity);
+            DockRequest?.Invoke(entity, netEntity, shipyard); // Forge-Change
         };
 
         DockContainer.UndockRequest += entity =>
@@ -93,6 +110,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         {
             ToggleFTLLockRequest?.Invoke(dockEntities, enabled);
         };
+        SystemContainer.RequestJump += sector => RequestBssJump?.Invoke(sector);
 
         NfInitialize(); // Frontier Initialization for the ShuttleConsoleWindow
     }
@@ -119,6 +137,11 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         {
             DockContainer.Visible = false;
         }
+
+        if (mode != ShuttleConsoleMode.System)
+        {
+            SystemContainer.Visible = false;
+        }
     }
 
     private void NavPressed(BaseButton.ButtonEventArgs obj)
@@ -136,6 +159,11 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         SwitchMode(ShuttleConsoleMode.Dock);
     }
 
+    private void SystemPressed(BaseButton.ButtonEventArgs obj)
+    {
+        SwitchMode(ShuttleConsoleMode.System);
+    }
+
     private void SetupMode(ShuttleConsoleMode mode)
     {
         switch (mode)
@@ -149,6 +177,9 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
                 break;
             case ShuttleConsoleMode.Dock:
                 DockContainer.Visible = true;
+                break;
+            case ShuttleConsoleMode.System:
+                SystemContainer.Visible = true;
                 break;
             default:
                 throw new NotImplementedException();
@@ -175,6 +206,7 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         Nav,
         Map,
         Dock,
+        System,
     }
 
     public void UpdateState(EntityUid owner, ShuttleBoundUserInterfaceState cState)
@@ -188,5 +220,6 @@ public sealed partial class ShuttleConsoleWindow : FancyWindow,
         NavContainer.UpdateState(cState.NavState);
         MapContainer.UpdateState(cState.MapState);
         DockContainer.UpdateState(coordinates?.EntityId, cState.DockState);
+        SystemContainer.UpdateState(cState.SystemMapState);
     }
 }

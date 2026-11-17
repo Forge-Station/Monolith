@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: TurretCommandShipCircuitboard
+  name: ship turret command console board
+  description: A computer printed circuit board for a ship turret command console.
+  components:
+  - type: Sprite
+    state: cpu_command
+  - type: ComputerBoard
+    prototype: ComputerTurretCommandShip

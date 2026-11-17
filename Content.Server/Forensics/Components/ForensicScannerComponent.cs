@@ -1,7 +1,7 @@
 using System.Threading;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Forensics
 {
@@ -90,7 +90,7 @@ namespace Content.Server.Forensics
         /// <summary>
         /// What the machine will print
         /// </summary>
-        [DataField("machineOutput", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("machineOutput", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
         public string MachineOutput = "ForensicReportPaper";
 
     }

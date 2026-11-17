@@ -27,6 +27,12 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+/// Forge-Change-Start
+using Content.Shared.Database;
+using Content.Shared.Interaction;
+using Content.Shared.Tools.Systems;
+using Content.Shared.UserInterface;
+/// Forge-Change-End
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -48,7 +54,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 {
     [Dependency] private   ActionBlockerSystem _actionBlockerSystem = default!;
     [Dependency] protected IGameTiming Timing = default!;
-    [Dependency] protected IMapManager MapManager = default!;
+    [Dependency] protected SharedMapSystem MapManager = default!;
     [Dependency] private   INetManager _netManager = default!;
     [Dependency] protected IPrototypeManager ProtoManager = default!;
     [Dependency] protected IRobustRandom Random = default!;
@@ -73,6 +79,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   UseDelaySystem _useDelay = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] protected SharedGunPredictionSystem? _gunPrediction = default!;
+    [Dependency] protected SharedToolSystem Tool = default!; /// Forge-Change
 
     protected EntityQuery<PhysicsComponent> _physQuery; // Mono
     protected EntityQuery<ProjectileComponent> _projQuery; // Mono
@@ -113,6 +120,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, CycleModeEvent>(OnCycleMode);
         SubscribeLocalEvent<GunComponent, HandSelectedEvent>(OnGunSelected);
         SubscribeLocalEvent<GunComponent, MapInitEvent>(OnMapInit);
+        /// Forge-Change-Start
+        SubscribeLocalEvent<GunComponent, SabotageDoAfterEvent>(OnScrewdriverSabotage);
+        SubscribeLocalEvent<GunComponent, InteractUsingEvent>(OnInteractUsing);
+        /// Forge-Change-End
 
         InitializeHolders(); // DeltaV
 

@@ -1,3 +1,4 @@
+using Content.Server._Forge.OrePipe;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Disposal.Tube;
 using Content.Shared.Body.Components;
@@ -113,9 +114,8 @@ namespace Content.Server.Disposal.Unit
                 }
             }
 
-            // We're purposely iterating over all the holder's children
-            // because the holder might have something teleported into it,
-            // outside the usual container insertion logic.
+            // Forge-Change: collect children first so ore-hold can absorb without mid-loop mutation issues.
+            var exiting = new List<EntityUid>();
             var children = holderTransform.ChildEnumerator;
             while (children.MoveNext(out var entity))
             {
@@ -129,12 +129,29 @@ namespace Content.Server.Disposal.Unit
                 if (xform.ParentUid != uid)
                     continue;
 
+                exiting.Add(entity);
+            }
+
+            // Forge-Change: fallback deposit if holder exits without the trunk Invalid-direction path.
+            if (exiting.Count > 0)
+                EntityManager.System<OrePipeSystem>().TryAbsorbExitingEntities(holderTransform.Coordinates, exiting);
+
+            foreach (var entity in exiting)
+            {
+                if (Terminating(entity))
+                    continue;
+
+                var xform = _xformQuery.GetComponent(entity);
+                var meta = _metaQuery.GetComponent(entity);
+
                 if (duc != null)
                     _containerSystem.Insert((entity, xform, meta), duc.Container);
                 else
                 {
                     _xformSystem.AttachToGridOrMap(entity, xform);
-                    var direction = holder.CurrentDirection == Direction.Invalid ? holder.PreviousDirection : holder.CurrentDirection;
+                    var direction = holder.CurrentDirection == Direction.Invalid
+                        ? holder.PreviousDirection
+                        : holder.CurrentDirection;
 
                     if (direction != Direction.Invalid && _xformQuery.TryGetComponent(gridUid, out var gridXform))
                     {
@@ -204,6 +221,11 @@ namespace Content.Server.Disposal.Unit
             // Invalid direction = exit now!
             if (holder.CurrentDirection == Direction.Invalid)
             {
+                // Forge-Change: ore hold / processor on this trunk tile takes cargo straight into storage
+                // (no eject / throw / suction path).
+                if (EntityManager.System<OrePipeSystem>().TryDepositHolderAtTube(toUid, holderUid, holder))
+                    return false;
+
                 ExitDisposals(holderUid, holder, holderTransform);
                 return false;
             }

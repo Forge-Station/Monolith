@@ -14,6 +14,19 @@
             <!-- Record listing -->
             <BoxContainer Orientation="Vertical" Margin="5" MinWidth="328" MaxWidth="360">
                 <Label Name="RecordListingStatus" Visible="False" />
+                <BoxContainer Name="ShuttleCrewContainer"
+                              Orientation="Vertical"
+                              HorizontalExpand="True"
+                              Margin="0 0 0 8"
+                              Visible="False">
+                    <Label Text="{Loc 'station-records-shuttle-crew-title'}" StyleClasses="LabelHeading"/>
+                    <BoxContainer Name="ShuttleCrewList" Orientation="Vertical" HorizontalExpand="True"/>
+                    <Label Name="ShuttleCrewEmpty" Text="{Loc 'station-records-shuttle-crew-empty'}"/>
+                    <OptionButton Name="ShuttleCrewCandidate" Margin="0 4 0 0"/>
+                    <Button Name="ShuttleCrewAdd"
+                            Text="{Loc 'station-records-shuttle-crew-add'}"
+                            Margin="0 4 0 0"/>
+                </BoxContainer>
                 <ScrollContainer VerticalExpand="True">
                     <ItemList Name="RecordListing" />
                 </ScrollContainer>

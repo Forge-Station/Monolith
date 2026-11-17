@@ -29,6 +29,10 @@ public sealed partial class WorldgenConfigPrototype : IPrototype
         // Add all components required by the prototype. Engine update for this whenst.
         foreach (var data in Components.Values)
         {
+            var compType = data.Component.GetType();
+            if (entityManager.HasComponent(target, compType))
+                continue;
+
             var comp = (Component) serialization.CreateCopy(data.Component, notNullableOverride: true);
             entityManager.AddComponent(target, comp);
         }

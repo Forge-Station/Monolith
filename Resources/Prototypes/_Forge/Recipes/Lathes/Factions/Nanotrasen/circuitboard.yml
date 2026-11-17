@@ -55,15 +55,6 @@
 
 - type: latheRecipe
   parent: BaseGoldCircuitboardRecipe
-  id: LaserDrillCircuitboard
-  result: LaserDrillCircuitboard
-  materials:
-    Glass: 2000
-    Steel: 300
-    Gold: 15
-
-- type: latheRecipe
-  parent: BaseGoldCircuitboardRecipe
   id: MedicalBiofabMachineBoard 
   result: MedicalBiofabMachineBoard 
 

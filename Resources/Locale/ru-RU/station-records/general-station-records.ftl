@@ -1,3 +1,12 @@
+station-records-shuttle-crew-title = Постоянный экипаж шаттла
+station-records-shuttle-crew-empty = Экипаж не назначен.
+station-records-shuttle-crew-add = Добавить выбранного персонажа
+station-records-shuttle-crew-remove = Удалить
+station-records-shuttle-crew-owner-only = Управлять экипажем может только владелец шаттла.
+station-records-shuttle-crew-update-failed = Не удалось обновить экипаж шаттла.
+station-records-shuttle-crew-added = { $name } добавлен в экипаж шаттла.
+station-records-shuttle-owner-job = Капитан шаттла
+station-records-shuttle-crew-member-job = Экипаж шаттла
 general-station-record-console-window-title = Консоль станционного учёта
 general-station-record-console-select-record-info = Выберите запись слева.
 general-station-record-console-empty-state = Записей не найдено!

@@ -6,8 +6,7 @@ namespace Content.Server._CE.ZLevels.Gravity;
 
 public sealed partial class CEAutoGridGravitySystem : EntitySystem
 {
-    [Dependency] private IMapManager _mapManager = default!;
-    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedMapSystem _mapManager = default!;
 
     public override void Initialize()
     {
@@ -21,7 +20,7 @@ public sealed partial class CEAutoGridGravitySystem : EntitySystem
     // If not yet initialized, GridInitializeEvent handles each grid as it comes up.
     private void OnComponentInit(Entity<CEAutoGridGravityComponent> ent, ref MapInitEvent args)
     {
-        if (!TryComp<MapComponent>(ent, out var mapComp) || !_map.IsInitialized(ent.Owner))
+        if (!TryComp<MapComponent>(ent, out var mapComp) || !_mapManager.IsInitialized(ent.Owner))
             return;
 
         foreach (var grid in _mapManager.GetAllGrids(mapComp.MapId))

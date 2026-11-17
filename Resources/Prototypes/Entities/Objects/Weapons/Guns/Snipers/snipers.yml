@@ -68,19 +68,22 @@
   - type: Sharp
   - type: Item
     size: Large
+    shape: # Forge-change
+    - 0,0,4,3 # Forge-change
   - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/musket.rsi
     state: base
   - type: Clothing
     sprite: Objects/Weapons/Guns/Snipers/musket.rsi
+  - type: GunWieldBonus # Forge-change
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    projectileSpeed: 25 # Mono
+    projectileSpeed: 65 # Forge-change 25->65
   - type: UseDelayOnShoot
   - type: UseDelay
-    delay: 8 #it's a musket
+    delay: 4 # Forge-change 8->4
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -109,7 +112,7 @@
   - type: Gun
     minAngle: 0
     maxAngle: 30 #miss him entirely because the barrel is smoothbore
-    projectileSpeed: 25 # Mono
+    projectileSpeed: 35 # Forge-change 25->35
   - type: Item
     size: Small
     storedRotation: 90
@@ -119,7 +122,7 @@
     sprite: Objects/Weapons/Guns/Snipers/flintlock.rsi
   - type: UseDelayOnShoot
   - type: UseDelay
-    delay: 8 #it's a flintlock
+    delay: 4 # Forge-change 8->4
   - type: BallisticAmmoProvider
     whitelist:
       tags:

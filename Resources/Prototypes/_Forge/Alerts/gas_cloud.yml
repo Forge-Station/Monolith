@@ -1,0 +1,7 @@
+- type: alert
+  id: GasCloud
+  icons:
+  - sprite: /Textures/Interface/Alerts/breathing.rsi
+    state: too_much_tox
+  name: alerts-gas-cloud-name
+  description: alerts-gas-cloud-desc

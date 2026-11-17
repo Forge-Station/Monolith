@@ -1,0 +1,26 @@
+﻿# Pocket crossbows
+- type: entity
+  id: CrossbowGoblinHand
+  parent: [BaseCrossbow, NFBaseGoblinMadeTools]
+  name: weapon-goblin-trashbow
+  description: weapon-goblin-trashbow-desc
+  components:
+  - type: Gun
+    fireRate: 1
+    minAngle: 15
+    maxAngle: 20
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: BulletMiss
+    soundEmpty: null
+    DeleteOnShoot: true
+    Sabotageable: false
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Goblin/trashbow.rsi
+  - type: Item
+    size: Small
+  - type: Construction
+    graph: crossbowGoblinHand
+    node: crossbowGoblinHand

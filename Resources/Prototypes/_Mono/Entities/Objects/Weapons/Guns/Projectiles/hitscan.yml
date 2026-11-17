@@ -6,11 +6,12 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 95
-        Blunt: 5
-        Shock: 10
-        Radiation: 65
-        Structural: 700
+        Heat: 40 # Forge-change 95->40
+        # Blunt: 5 # Forge-change
+        # Shock: 10 # Forge-change
+        Radiation: 20 # Forge-change 65->20
+        Structural: 400 # Forge-change 700->400
+    ignoreResistances: true # Forge-change
   - type: HitscanBasicRaycast
     maxDistance: 120.0
   - type: HitscanBasicVisuals
@@ -23,6 +24,8 @@
     impactFlash:
       sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
       state: impact_beam_light_pulse
+  - type: HitscanReflect # Forge-change
+    reflectiveType: None # Forge-change
 
 - type: entity
   id: UllmanPulse
@@ -32,8 +35,9 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 28
-        Structural: 30
+        Heat: 35 # Forge-change 28->35
+        Structural: 20 # Forge-change 30->20
+    armorPenetration: 0.25 # Forge-change
   - type: HitscanBasicRaycast
     maxDistance: 120.0
   - type: HitscanBasicVisuals
@@ -56,9 +60,10 @@
     damage:
       types:
         Heat: 75
-        Structural: 300
+        Structural: 150 # Forge-change 300->150
+    armorPenetration: 0.5 # Forge-change
   - type: HitscanBasicRaycast
-    maxDistance: 360.0
+    maxDistance: 150.0 # Forge-change 360->150
 
 - type: entity
   parent: Pulse
@@ -68,9 +73,10 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Heat: 25 # Mono
-        Shock: 10
-        Structural: 70
+        Heat: 40 # Forge-change 25->40
+        # Shock: 10 # Forge-change
+        Structural: 20 # Forge-change 70->20
+    armorPenetration: 0.3 # Forge-change
 
 - type: entity
   id: Coilgun134x92mm
@@ -80,11 +86,11 @@
   - type: HitscanBasicDamage
     damage:
       types:
-        Piercing: 120
-        Structural: 500
-    armorPenetration: 0.8
+        Piercing: 65 # Forge-change 120->65
+        Structural: 400 # Forge-change 500->400
+    ignoreResistances: true # Forge-change
   - type: HitscanBasicRaycast
-    maxDistance: 200
+    maxDistance: 100 # Forge-change 200->100
     collisionMask:
     - Impassable
     - Opaque

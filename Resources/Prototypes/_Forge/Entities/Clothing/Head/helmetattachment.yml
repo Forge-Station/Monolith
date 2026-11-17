@@ -6,9 +6,9 @@
   description: A pair of basic optoelectronics night vision goggles with high sensibility to flashes, worn in the helmet attachment slot. Whoops, those are broken.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Head/Headattachments/NVGs.rsi
+    sprite: _Forge/Clothing/Head/Headattachments/NVGs.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Head/Headattachments/NVGs.rsi
+    sprite: _Forge/Clothing/Head/Headattachments/NVGs.rsi
     clothingVisuals:
       helmetattachment:
       - state: equipped-HELMETATTACHMENT

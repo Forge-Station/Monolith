@@ -1,0 +1,41 @@
+- type: entity
+  parent: BaseItem
+  id: BssVoidCoordinatesDisk
+  name: void coordinates disk
+  description: A scorched disk holding a one-shot bluespace vector into a shadowed system.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/cd.rsi
+    state: icon
+    color: "#4a4a55"
+  - type: BssVoidDisk
+  - type: StaticPrice
+    price: 2500
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 1
+
+- type: entity
+  parent: BssVoidCoordinatesDisk
+  id: BssVoidCoordinatesDiskWest
+  suffix: West
+  components:
+  - type: BssVoidDisk
+    targetSystem: voidWest
+
+- type: entity
+  parent: BssVoidCoordinatesDisk
+  id: BssVoidCoordinatesDiskNorth
+  suffix: North
+  components:
+  - type: BssVoidDisk
+    targetSystem: voidNorth
+
+- type: entity
+  parent: BssVoidCoordinatesDisk
+  id: BssVoidCoordinatesDiskSouth
+  suffix: South
+  components:
+  - type: BssVoidDisk
+    targetSystem: voidSouth

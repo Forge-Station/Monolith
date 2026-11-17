@@ -1,4 +1,4 @@
-﻿using Content.Client._NF.ShuttleRecords.UI;
+using Content.Client._NF.ShuttleRecords.UI;
 using Content.Shared._NF.ShuttleRecords;
 using Content.Shared._NF.ShuttleRecords.Components;
 using Content.Shared._NF.ShuttleRecords.Events;

@@ -1,7 +1,7 @@
 - type: vessel
   id: eagle
   parent: BaseVessel
-  name: Орел
+  name: «Орел»
   description: Середнегабаритный исстребитель Ренегатов.
   price: 160000 # 373 price fix
   category: Medium

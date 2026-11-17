@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._Forge.LobbyHub;
 using Content.Client._Mono.Company;
 
 // Forge-Change-delete
@@ -251,10 +252,19 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
             }
         }
 
-        var dummy = LoadProfileEntity(humanoid, null, true);
-        PreviewPanel.SetSprite(dummy);
-        PreviewPanel.SetSummaryText(humanoid.Summary);
-        PreviewPanel.SetBankBalanceText(humanoid.BankBalanceText); // Frontier
+        if (EntityManager.TrySystem<LobbyHubSystem>(out var hub) && hub.IsActive)
+        {
+            hub.ReloadAvatar();
+            PreviewPanel.SetSummaryText(humanoid.Summary);
+            PreviewPanel.SetBankBalanceText(humanoid.BankBalanceText); // Frontier
+        }
+        else
+        {
+            var dummy = LoadProfileEntity(humanoid, null, true);
+            PreviewPanel.SetSprite(dummy);
+            PreviewPanel.SetSummaryText(humanoid.Summary);
+            PreviewPanel.SetBankBalanceText(humanoid.BankBalanceText); // Frontier
+        }
 
         // Company Display
         var companyId = humanoid.Company;

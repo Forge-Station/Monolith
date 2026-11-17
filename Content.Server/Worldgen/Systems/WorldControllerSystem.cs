@@ -6,7 +6,9 @@ using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
+using Robust.Shared.EntitySerialization.Systems; // Forge-Change
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components; // Forge-Change
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
@@ -23,6 +25,7 @@ public sealed partial class WorldControllerSystem : EntitySystem
     [Dependency] private ILogManager _logManager = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!; // Forge-Change
 
     // <Mono>
     private const int PlayerLoadRadius = 2;
@@ -40,7 +43,25 @@ public sealed partial class WorldControllerSystem : EntitySystem
         SubscribeLocalEvent<LoadedChunkComponent, ComponentStartup>(OnChunkLoadedCore);
         SubscribeLocalEvent<LoadedChunkComponent, ComponentShutdown>(OnChunkUnloadedCore);
         SubscribeLocalEvent<WorldChunkComponent, ComponentShutdown>(OnChunkShutdown);
+        _mapLoader.OnIsSerializable += OnPersistenceSerializable; // Forge-Change
     }
+
+    // Forge-Change-Start
+    public override void Shutdown()
+    {
+        _mapLoader.OnIsSerializable -= OnPersistenceSerializable;
+        base.Shutdown();
+    }
+
+    /// <summary>
+    /// Worldgen chunks regenerate on load; persisting them dominates weekly map YAML size.
+    /// </summary>
+    private void OnPersistenceSerializable(Entity<MetaDataComponent> ent, ref bool serializable)
+    {
+        if (serializable && HasComp<WorldChunkComponent>(ent))
+            serializable = false;
+    }
+    // Forge-Change-End
 
     /// <summary>
     ///     Handles deleting chunks properly.

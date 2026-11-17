@@ -94,6 +94,25 @@ public sealed partial class GravityGeneratorSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Restores the runtime-only gravity state after a grid has been deserialized.
+    /// PowerCharge.Active is persisted, but GravityActive is deliberately runtime state,
+    /// so an already-charged generator otherwise never raises its activation event.
+    /// </summary>
+    public void SynchronizeGrid(EntityUid gridUid)
+    {
+        var query = EntityQueryEnumerator<GravityGeneratorComponent, PowerChargeComponent, TransformComponent>();
+        while (query.MoveNext(out _, out var generator, out var charge, out var transform))
+        {
+            if (transform.GridUid != gridUid)
+                continue;
+
+            generator.GravityActive = charge.Active;
+        }
+
+        _gravitySystem.RefreshGravity(gridUid);
+    }
+
     private void OnActivated(Entity<GravityGeneratorComponent> ent, ref ChargedMachineActivatedEvent args)
     {
         ent.Comp.GravityActive = true;

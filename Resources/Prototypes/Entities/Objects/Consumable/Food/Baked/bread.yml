@@ -885,6 +885,8 @@
           Quantity: 1
         - ReagentId: Flavorol
           Quantity: 1
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.75          # Forge-change
 # Tastes like bread, butter.
 
 - type: entity
@@ -910,6 +912,8 @@
           Quantity: 2
         - ReagentId: Flavorol
           Quantity: 1
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 0.25          # Forge-change
 # Tastes like bread, butter.
 
 - type: entity

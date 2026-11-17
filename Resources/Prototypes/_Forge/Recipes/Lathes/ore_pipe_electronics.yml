@@ -1,0 +1,11 @@
+# Forge-Change: lathe recipes for ship-drill ore logistics machines.
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: OrePipeStorageMachineCircuitboard
+  result: OrePipeStorageMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: OreHoldModuleMachineCircuitboard
+  result: OreHoldModuleMachineCircuitboard

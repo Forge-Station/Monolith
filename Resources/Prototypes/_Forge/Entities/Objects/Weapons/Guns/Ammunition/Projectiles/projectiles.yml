@@ -220,6 +220,56 @@
   categories: [ HideSpawnMenu ]
 
 - type: entity
+  parent: BulletAcid
+  id: BulletXenoAcid
+  name: corrosive acid
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Caustic: 20
+        Heat: 8
+
+- type: entity
+  parent: BulletXenoAcid
+  id: BulletXenoAcidWeak
+  name: weak acid
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Caustic: 12
+        Heat: 4
+
+- type: entity
+  parent: BulletXenoAcid
+  id: BulletXenoAcidHeavy
+  name: heavy acid
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Caustic: 35
+        Heat: 15
+
+- type: entity
+  parent: BulletXenoAcid
+  id: BulletXenoStamina
+  name: neurotoxin spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Poison: 4
+        Asphyxiation: 2
+  - type: StaminaDamageOnCollide
+    damage: 55
+
+- type: entity
   parent: BulletCannonBall
   id: ForgeBulletCannonBall
   categories: [ HideSpawnMenu ]

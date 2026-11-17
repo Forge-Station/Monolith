@@ -6,8 +6,7 @@
   tier: 1
   cost: 35000
   recipeUnlocks:
-  - ClothingOuterHardsuitRenegatebsii20Rogue
-  - ClothingOuterHardsuitRenegatebsii30Rogue
+  - ClothingOuterHardsuitRenegatebsii20
   - ClothingOuterArmorRenegatesRogue
   - ClothingHeadHelmetRenegateRogue
   - ClothingShoesBootsMagRenegadeRogue
@@ -23,7 +22,8 @@
   tier: 2
   cost: 75000
   recipeUnlocks:
-  - ClothingOuterHardsuitRenegatecriii200Rogue
+  - ClothingOuterHardsuitRenegatecriii200
+  - ClothingOuterHardsuitRenegateLightweightJuggernaut
   technologyPrerequisites:
   - RogueRenegateEquipmentT1
   - UniversalMaterialResearchT2
@@ -33,13 +33,16 @@
 - type: technology
   id: RogueRenegateEquipmentT3
   name: research-technology-rogue-renegate-equipment-t3
-  entityIcon: ClothingOuterHardsuitRenegateoiii18
+  entityIcon: ClothingOuterHardsuitRenegateEnergyShield
   discipline: RenegateEquipment
   tier: 3
   cost: 185000
   recipeUnlocks:
-  - ClothingOuterHardsuitRenegateoiii18Rogue
-  - ClothingOuterHardsuitRenegateyiv3020Rogue
+  - ClothingOuterHardsuitRenegateEnergyShield
+  - ClothingOuterHardsuitRenegateHeavyJuggernaut
+  - ClothingOuterHardsuitRenegateStealth
+  - ClothingOuterHardsuitRenegateAdvancedLight
+  - ClothingOuterHardsuitRenegateReflectElite
   technologyPrerequisites:
   - RogueRenegateEquipmentT2
   - UniversalMaterialResearchT3

@@ -10,6 +10,7 @@
   - type: Item
     sprite: Objects/Materials/Sheets/glass.rsi
     size: Normal
+  - type: BulkMaterial # Forge-change
   - type: StaticPrice
     price: 0
   - type: Tag

@@ -55,7 +55,6 @@ namespace Content.Shared.Interaction
     public abstract partial class SharedInteractionSystem : EntitySystem
     {
         [Dependency] private IGameTiming _gameTiming = default!;
-        [Dependency] private IMapManager _mapManager = default!;
         [Dependency] private ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
         [Dependency] private RotateToFaceSystem _rotateToFaceSystem = default!;
@@ -745,7 +744,9 @@ namespace Content.Shared.Interaction
             bool popup = false,
             bool overlapCheck = true)
         {
-            if (!Resolve(other, ref other.Comp))
+            // Forge-Change: a deleted or not-yet-replicated target is a failed range check, not an error.
+            // Resolve() logs a full stack trace by default, and heavy attacks send one of these per swing.
+            if (!Resolve(other, ref other.Comp, false))
                 return false;
 
             var ev = new InRangeOverrideEvent(origin, other);
@@ -825,7 +826,7 @@ namespace Content.Shared.Interaction
                 fixtureA.FixtureCount > 0 &&
                 _fixtureQuery.TryComp(other, out var fixtureB) &&
                 fixtureB.FixtureCount > 0 &&
-                Resolve(origin, ref origin.Comp))
+                Resolve(origin, ref origin.Comp, false)) // Forge-Change
             {
                 var (worldPosA, worldRotA) = _transform.GetWorldPositionRotation(origin.Comp);
                 var xfA = new Transform(worldPosA, worldRotA);
@@ -871,9 +872,17 @@ namespace Content.Shared.Interaction
             // No fixtures, e.g. wallmounts.
             else
             {
-                originPos = _transform.GetMapCoordinates(origin, origin);
-                var otherParent = (other.Comp ?? Transform(other)).ParentUid;
-                targetRot = otherParent.IsValid() ? Transform(otherParent).LocalRotation + otherAngle : otherAngle;
+                // Forge-Change: a missing transform here used to throw and log once per swing.
+                var originXform = origin.Comp;
+                var otherXform = other.Comp;
+                if (!Resolve(origin, ref originXform, false) || !Resolve(other, ref otherXform, false))
+                    return false;
+
+                originPos = _transform.GetMapCoordinates(originXform);
+                var otherParent = otherXform.ParentUid;
+                targetRot = otherParent.IsValid() && TryComp(otherParent, out TransformComponent? parentXform)
+                    ? parentXform.LocalRotation + otherAngle
+                    : otherAngle;
             }
 
             // Do a raycast to check if relevant
@@ -944,7 +953,7 @@ namespace Content.Shared.Interaction
                     ignoreAnchored = angleDelta < wallMount.Arc / 2 || Math.Tau - angleDelta < wallMount.Arc / 2;
                 }
 
-                if (ignoreAnchored && _mapManager.TryFindGridAt(targetCoords, out var gridUid, out var grid))
+                if (ignoreAnchored && _map.TryFindGridAt(targetCoords, out var gridUid, out var grid))
                     ignored.UnionWith(_map.GetAnchoredEntities((gridUid, grid), targetCoords));
             }
 

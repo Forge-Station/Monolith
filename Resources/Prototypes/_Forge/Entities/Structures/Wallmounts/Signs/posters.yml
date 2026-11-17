@@ -5,7 +5,7 @@
   description: "Плакат намекающий на истинного врага Фронтира."
   components:
     - type: Sprite
-      sprite: Forge/Structures/Wallmounts/posters.rsi
+      sprite: _Forge/Structures/Wallmounts/posters.rsi
       state: cf_poster1_contraband
 
 - type: entity
@@ -16,7 +16,7 @@
   suffix: Ренегаты
   components:
     - type: Sprite
-      sprite: Forge/Structures/Wallmounts/posters.rsi
+      sprite: _Forge/Structures/Wallmounts/posters.rsi
       state: ren
 
 - type: entity
@@ -27,7 +27,7 @@
   suffix: Forge, USSP
   components:
     - type: Sprite
-      sprite: Forge/Structures/Wallmounts/posters.rsi
+      sprite: _Forge/Structures/Wallmounts/posters.rsi
       state: cf_poster2_contraband
 
 - type: entity
@@ -38,7 +38,7 @@
   suffix: Forge, Fun
   components:
     - type: Sprite
-      sprite: Forge/Structures/Wallmounts/posters.rsi
+      sprite: _Forge/Structures/Wallmounts/posters.rsi
       state: cf_poster3_contraband
 
 - type: entity
@@ -49,7 +49,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Structures/Wallmounts/posters.rsi
+    sprite: _Forge/Structures/Wallmounts/posters.rsi
     state: cf_poster_ardente
 
 - type: entity
@@ -60,5 +60,5 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: Forge/Structures/Wallmounts/posters.rsi
+    sprite: _Forge/Structures/Wallmounts/posters.rsi
     state: cf_poster_aam

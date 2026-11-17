@@ -91,7 +91,20 @@
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/Rifles/gestio.rsi
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
+    minAngle: 5 # Forge-change
+    maxAngle: 15 # Forge-change
+    angleIncrease: 2.5 # Forge-change
+    angleDecay: 5 # Forge-change
+    projectileSpeed: 50 # Forge-change
     fireRate: 4
     burstFireRate: 8
     shotsPerBurst: 3
@@ -174,8 +187,20 @@
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/Rifles/novalitec1.rsi
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: -33 # Forge-change
+    maxAngle: -33 # Forge-change
   - type: Gun
-    fireRate: 5
+    minAngle: 38 # Forge-change
+    maxAngle: 52 # Forge-change
+    angleIncrease: 1.25 # Forge-change
+    angleDecay: 10 # Forge-change
+    projectileSpeed: 50 # Forge-change
+    fireRate: 6 # Forge-change
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -256,8 +281,21 @@
     slots:
     - Back
     - suitStorage
+  - type: Item # Forge-change
+    size: Huge # Forge-change
+    shape: # Forge-change
+    - 0,0,4,3 # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
+  - type: GunRequiresWield # Forge-change
   - type: Gun
-    fireRate: 1.9
+    fireRate: 1.8 # Forge-change 1.9->1.8
+    projectileSpeed: 55 # Forge-change
+    angleIncrease: 1.5 # Forge-change
+    angleDecay: 2 # Forge-change
+    minAngle: 2 # Forge-change
+    maxAngle: 8 # Forge-change
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
@@ -299,8 +337,8 @@
     maxOffset: 1.5
     pvsIncrease: 0.15
   - type: SpeedModifiedOnWield # Mono
-    walkModifier: 0.95
-    sprintModifier: 0.95
+    walkModifier: 0.9 # Forge-change 0.95->0.9
+    sprintModifier: 0.9 # Forge-change 0.95->0.9
   - type: AltFireMelee
     attackType: Light
   - type: PirateBountyItem # Mono
@@ -322,7 +360,20 @@
       map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/Rifles/gestio.rsi
+  - type: Item # Forge-change
+    size: Large # Forge-change
+    shape: # Forge-change
+    - 0,0,3,3 # Forge-change
+  - type: GunRequiresWield # Forge-change
+  - type: GunWieldBonus # Forge-change
+    minAngle: 0 # Forge-change
+    maxAngle: 0 # Forge-change
   - type: Gun
+    minAngle: 5 # Forge-change
+    maxAngle: 15 # Forge-change
+    angleIncrease: 2.5 # Forge-change
+    angleDecay: 5 # Forge-change
+    projectileSpeed: 50 # Forge-change
     fireRate: 4
     burstFireRate: 8
     shotsPerBurst: 3

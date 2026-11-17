@@ -28,6 +28,15 @@ public sealed class GeneralStationRecordConsoleBoundUserInterface : BoundUserInt
         _window.OnJobSubtract += OnJobsSubtract; // Frontier: job modification buttons
         _window.OnDeleted += id => SendMessage(new DeleteStationRecord(id));
         _window.OnAdvertisementChanged += OnAdvertisementChanged; // Frontier: job modification buttons
+        _window.OnShuttleCrewAdd += candidate =>
+            SendMessage(new AddShuttleCrewMemberMessage(
+                candidate.PlayerUserId,
+                candidate.CharacterSlot));
+        _window.OnShuttleCrewRemove += member =>
+            SendMessage(new RemoveShuttleCrewMemberMessage(
+                member.PlayerUserId,
+                member.CharacterSlot));
+        SendMessage(new RefreshShuttleCrewMessage());
     }
 
     // Frontier: job modification buttons, ship advertisements

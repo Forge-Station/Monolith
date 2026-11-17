@@ -29,6 +29,10 @@
         Healium: stationNO #
         Nitrium: danger  #Funky/Goob
         Pluoxium: ignore #Funky/Goob
+        N611: danger #Forge-change start
+        N611P: danger
+        A517: danger
+        V903: danger #Foege change end
     - type: Tag
       tags:
         - AirSensor

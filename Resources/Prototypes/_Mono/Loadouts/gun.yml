@@ -155,6 +155,7 @@
 
 - type: loadout #.45 Magnum Ammo
   id: MercenaryMagnum357Loadout
+  name: loadout-name-MercenaryMagnum357Loadout
   price: 1000
   storage:
     back:
@@ -436,7 +437,7 @@
 
 - type: loadout #Iroh
   id: SecurityGuardIrohLoadout
-  name: iroh gun case
+  name: loadout-name-SecurityGuardIrohLoadout
   price: 0
   inhand:
   - WeaponCaseLongIrohSecurity
@@ -548,6 +549,7 @@
 
 - type: loadout #Riversong
   id: FactionRiversongLoadout
+  name: loadout-name-FactionRiversongLoadout
   price: 0
   storage:
     back:
@@ -555,6 +557,7 @@
 
 - type: loadout #Dragonfang
   id: FactionDragonfangLoadout
+  name: loadout-name-FactionDragonfangLoadout
   price: 0
   storage:
     back:
@@ -826,6 +829,7 @@
 
 - type: loadout #.357 Magnum Ammo
   id: FactionMagnum357Loadout
+  name: loadout-name-FactionMagnum357Loadout
   price: 0
   storage:
     back:

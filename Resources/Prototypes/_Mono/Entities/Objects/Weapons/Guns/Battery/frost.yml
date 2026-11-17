@@ -14,18 +14,23 @@
       shader: unshaded
   - type: Item
     size: Large
+    shape: # Forge-change
+    - 0,0,3,2 # Forge-change
   - type: Clothing
     quickEquip: false
     slots:
     - Back
     - suitStorage
     sprite: _Mono/Objects/Weapons/Guns/Battery/frost.rsi
+  - type: GunRequiresWield # Forge-change
   - type: GunWieldBonus
-    minAngle: -20
-    maxAngle: -25
+    minAngle: 0 # Forge-change -20->0
+    maxAngle: 0 # Forge-change -25->0
   - type: Gun
-    minAngle: 21
-    maxAngle: 34
+    minAngle: 1 # Forge-change 21->1
+    maxAngle: 15 # Forge-change 34->15
+    angleIncrease: 1.5 # Forge-change
+    angleDecay: 12 # Forge-change
     fireRate: 5
     selectedMode: FullAuto
     availableModes:

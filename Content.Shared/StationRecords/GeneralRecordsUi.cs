@@ -1,6 +1,7 @@
 using Robust.Shared.Prototypes;
 using Content.Shared.Roles;
 using Robust.Shared.Serialization;
+using Content.Shared._Forge.Persistence;
 
 namespace Content.Shared.StationRecords;
 
@@ -42,9 +43,16 @@ public sealed class GeneralStationRecordConsoleState : BoundUserInterfaceState
     public readonly StationRecordsFilter? Filter;
     public readonly bool CanDeleteEntries;
     public readonly string? Advertisement; // Frontier
+    public readonly List<HangarVesselCrewRecord>? ShuttleCrew;
+    public readonly List<StationRecordsCrewCandidate>? ShuttleCrewCandidates;
+    public readonly bool CanManageShuttleCrew;
 
     public GeneralStationRecordConsoleState(uint? key, GeneralStationRecord? record,
-        Dictionary<uint, string>? recordListing, IReadOnlyDictionary<ProtoId<JobPrototype>, int?>? jobList, StationRecordsFilter? newFilter, bool canDeleteEntries, string? advertisement) // Frontier: add jobList, advertisement
+        Dictionary<uint, string>? recordListing, IReadOnlyDictionary<ProtoId<JobPrototype>, int?>? jobList,
+        StationRecordsFilter? newFilter, bool canDeleteEntries, string? advertisement,
+        List<HangarVesselCrewRecord>? shuttleCrew = null,
+        List<StationRecordsCrewCandidate>? shuttleCrewCandidates = null,
+        bool canManageShuttleCrew = false) // Frontier: add jobList, advertisement
     {
         SelectedKey = key;
         Record = record;
@@ -53,6 +61,9 @@ public sealed class GeneralStationRecordConsoleState : BoundUserInterfaceState
         JobList = jobList; // Frontier
         CanDeleteEntries = canDeleteEntries;
         Advertisement = advertisement; // Frontier
+        ShuttleCrew = shuttleCrew;
+        ShuttleCrewCandidates = shuttleCrewCandidates;
+        CanManageShuttleCrew = canManageShuttleCrew;
     }
 
     public GeneralStationRecordConsoleState() : this(null, null, null, null, null, false, string.Empty)
@@ -62,6 +73,12 @@ public sealed class GeneralStationRecordConsoleState : BoundUserInterfaceState
     public bool IsEmpty() => SelectedKey == null
         && Record == null && RecordListing == null;
 }
+
+[Serializable, NetSerializable]
+public sealed record StationRecordsCrewCandidate(
+    Guid PlayerUserId,
+    int CharacterSlot,
+    string CharacterName);
 
 /// <summary>
 /// Select a specific crewmember's record, or deselect.
@@ -88,4 +105,23 @@ public sealed class DeleteStationRecord : BoundUserInterfaceMessage
     }
 
     public readonly uint Id;
+}
+
+[Serializable, NetSerializable]
+public sealed class RefreshShuttleCrewMessage : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class AddShuttleCrewMemberMessage(Guid playerUserId, int characterSlot)
+    : BoundUserInterfaceMessage
+{
+    public Guid PlayerUserId { get; } = playerUserId;
+    public int CharacterSlot { get; } = characterSlot;
+}
+
+[Serializable, NetSerializable]
+public sealed class RemoveShuttleCrewMemberMessage(Guid playerUserId, int characterSlot)
+    : BoundUserInterfaceMessage
+{
+    public Guid PlayerUserId { get; } = playerUserId;
+    public int CharacterSlot { get; } = characterSlot;
 }

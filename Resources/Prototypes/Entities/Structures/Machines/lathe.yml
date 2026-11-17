@@ -250,6 +250,8 @@
     - ScienceWeapons
     - Mining
     - ForgeEngineeringTools # Forge-Change: handheld monitors
+    - ForgeTurretAdventurer # Forge-Change
+    - ForgeTurretKits # Forge-Change
     - ResearchedExplosives # Mono
     # - EngineeringWeapons # Frontier
     - Chemistry
@@ -275,9 +277,10 @@
     - SmartGun # Goobstation
     # Einstein Engines Packs
     - Translators
-    # Forge-change
+    # Forge-change-start
     - BSparts
     - ForgePublicWeapons
+    #Forge-Change-end
 
   - type: EmagLatheRecipes
     emagDynamicPacks:
@@ -351,6 +354,7 @@
     - ForgeShipWeaponsDynamic # Forge-Change
     - ForgeAdvancedShuttleComponents # Forge-Change
     - ForgeBoardingTeleportRecipes # Forge-Change
+    - CloakingShuttleCircuitsPack # Forge-Change
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
@@ -360,6 +364,7 @@
     - DrakeIndustriesCircuitBoards # Forge-change
     - ReactorCircuitboards # FH edit
     - BsEnergyCircuitsPack # Forge-Change
+    - ServiceBoardsGoob #Forge-Change
   - type: MaterialStorage
     whitelist:
       tags:
@@ -403,6 +408,7 @@
     - EngineeringBoardsGoob #Goob Factorio port
     - NanotrasenCircuitBoard # Forge-change
     - DrakeIndustriesCircuitBoards # Forge-change
+    - CloakingShuttleCircuitsADSPack # Forge-change
     - ReactorCircuitboards # FH edit
     - ForgeHyperConvectionFSGTier4Boards # Forge — FSG T4 boards (disk-unlocked), hyper imprinter only
 
@@ -539,6 +545,8 @@
     dynamicPacks:
     - NanotrasenWeapon # Forge-change
     - NanotrasenEquipment # Forge-change
+    - ForgeTurretNT # Forge-Change
+    - ForgeTurretKits # Forge-Change
     - SecurityEquipment
     - SecurityExplosives
     - DynamicAmmoRecipePack
@@ -763,6 +771,7 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
+    - BioGenSwabsStatic
     - FriendlyCubesStatic # Frontier
     - NFBioGenIngredientsStatic # Frontier
     - NFBioGenMaterialsStatic # Frontier
@@ -810,6 +819,9 @@
   - type: PlaceableSurface # DeltaV: Allow ore bags to dump into it directly
     isPlaceable: false # but not place on it if you just click it with a random item
   - type: OreSiloClient #Gives silo access to ore holding
+  # Forge-Change: accept ore from disposal trunks into MaterialStorage.
+  - type: OrePipeOutlet
+    maxInsertPerFlush: 40
 
 - type: entity
   parent: OreProcessor
@@ -915,7 +927,7 @@
   components:
   # Forge-change-start
   - type: Sprite
-    sprite: Forge/Structures/Machines/organprinter.rsi
+    sprite: _Forge/Structures/Machines/organprinter.rsi
     snapCardinals: true
     layers:
     - state: base

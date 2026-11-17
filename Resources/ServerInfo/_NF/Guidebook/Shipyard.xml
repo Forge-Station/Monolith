@@ -6,6 +6,13 @@ All rentals last for one shift. Rented shuttles return to the corporate parent c
 The value of shuttles is returned to the purchaser when ended through a ship console.
 To avoid losses, [bold]make sure you end your rental before ending your shift[/bold].
 
+## Character Hangar
+Each character has two persistent hangar slots. Dock the shuttle at a shipyard,
+insert the deed ID, make sure no living crew remain aboard, then select
+[bold]Store vessel[/bold]. Stored vessels survive a shift restart and can be
+retrieved from a shipyard by the same character. A deployed vessel is not saved
+automatically and is lost when the shift ends.
+
 ## Shipyard Console
   <Box>
     <GuideEntityEmbed Entity="PassengerIDCard"/>

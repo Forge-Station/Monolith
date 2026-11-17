@@ -1,7 +1,7 @@
 - type: vessel
   id: OneFight
   parent: BaseVessel
-  name: EBS Клеймор
+  name: EBS «Клеймор»
   description: Маневренный боевой шаттл средне-малого размера. Вооружен двумя установками типа "Гидра"
   price: 86600
   category: Small

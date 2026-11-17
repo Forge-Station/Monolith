@@ -1,0 +1,511 @@
+# Visible, harvestable gas clouds. Parent regular gas deposits so the existing mining drill can extract from them.
+# region Base
+- type: entity
+  parent: BaseGasDeposit
+  id: BaseGasCloud
+  name: gas cloud
+  description: A dense cloud of gas seeping from a subsurface deposit. Siphon it with a gas cloud siphon. Standing in it without protection is dangerous.
+  abstract: true
+  components:
+  - type: GasCloud
+    radius: 8
+    currentRadius: 8
+    walkSpeedModifier: 0.7
+    sprintSpeedModifier: 0.65
+    hungerMultiplier: 2
+    pressure: 800
+  - type: PointLight
+    enabled: true
+    radius: 8
+    energy: 1.4
+    color: "#88AACC"
+    netsync: false
+  - type: AmbientSound
+    range: 8
+    volume: -10
+    sound:
+      path: /Audio/Ambience/Objects/gas_hiss.ogg
+  - type: RadarBlip
+    visibleFromOtherGrids: true
+    config:
+      color: "#88AACC73"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _NF/Objects/Specific/Atmospherics/deposit.rsi
+    layers:
+    - state: deposit
+    - sprite: Effects/chemsmoke.rsi
+      state: chemsmoke
+      shader: unshaded
+      scale: 4, 4
+      map: [ "gascloud-smoke" ]
+
+- type: entity
+  parent: BaseGasCloud
+  id: BaseGasCloudSmall
+  abstract: true
+  components:
+  - type: GasCloud
+    radius: 5
+    currentRadius: 5
+    walkSpeedModifier: 0.8
+    sprintSpeedModifier: 0.75
+    hungerMultiplier: 1.6
+    pressure: 620
+  - type: RandomGasDeposit
+    scale: 0.6
+  - type: PointLight
+    radius: 5
+  - type: AmbientSound
+    range: 5
+  - type: RadarBlip
+    config:
+      respectZoom: true
+      shape: Circle
+      bounds: "-5,-5,5,5"
+
+- type: entity
+  parent: BaseGasCloud
+  id: BaseGasCloudLarge
+  abstract: true
+  components:
+  - type: GasCloud
+    radius: 12
+    currentRadius: 12
+    walkSpeedModifier: 0.55
+    sprintSpeedModifier: 0.5
+    hungerMultiplier: 2.8
+    pressure: 1100
+  - type: RandomGasDeposit
+    scale: 1.4
+  - type: PointLight
+    radius: 12
+    energy: 1.8
+  - type: AmbientSound
+    range: 12
+  - type: RadarBlip
+    config:
+      respectZoom: true
+      shape: Circle
+      bounds: "-12,-12,12,12"
+# endregion Base
+
+# region Standard
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudOxygen
+  suffix: Oxygen
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: MostlyOxygen
+  - type: GasCloud
+    color: "#2887E8"
+  - type: PointLight
+    color: "#2887E8"
+  - type: Sprite
+    color: "#DDDDEE"
+  - type: RadarBlip
+    config:
+      color: "#2887E873"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudNitrogen
+  suffix: Nitrogen
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: MostlyNitrogen
+  - type: GasCloud
+    color: "#DA1010"
+  - type: PointLight
+    color: "#DA1010"
+  - type: Sprite
+    color: "#FFCCCC"
+  - type: RadarBlip
+    config:
+      color: "#DA101073"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudCarbonDioxide
+  suffix: Carbon Dioxide
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: MostlyCarbonDioxide
+  - type: GasCloud
+    color: "#6E6E6E"
+    toxinDamage:
+      types:
+        Asphyxiation: 0.8
+  - type: PointLight
+    color: "#6E6E6E"
+  - type: Sprite
+    color: "#CCCCCC"
+  - type: RadarBlip
+    config:
+      color: "#6E6E6E73"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudPlasma
+  suffix: Plasma
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: MostlyPlasma
+  - type: GasCloud
+    color: "#FF3300"
+    pressure: 950
+    hungerMultiplier: 2.4
+    temperature: 385
+    toxinDamage:
+      types:
+        Poison: 1.2
+  - type: PointLight
+    color: "#FF3300"
+  - type: Sprite
+    color: "#FFCCFF"
+  - type: RadarBlip
+    config:
+      color: "#FF330073"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudAmmonia
+  suffix: Ammonia
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: MostlyAmmonia
+  - type: GasCloud
+    color: "#56941E"
+    toxinDamage:
+      types:
+        Poison: 1.0
+  - type: PointLight
+    color: "#56941E"
+  - type: Sprite
+    color: "#FFFFCC"
+  - type: RadarBlip
+    config:
+      color: "#56941E73"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudWaterVapor
+  suffix: Water Vapor
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: MostlyWaterVapor
+  - type: GasCloud
+    color: "#BFFFFD"
+    walkSpeedModifier: 0.6
+    sprintSpeedModifier: 0.55
+    temperature: 345
+  - type: PointLight
+    color: "#BFFFFD"
+  - type: Sprite
+    color: "#DDEEEE"
+  - type: RadarBlip
+    config:
+      color: "#BFFFFD73"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudNitrousOxide
+  suffix: Nitrous Oxide
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: MostlyNitrousOxide
+  - type: GasCloud
+    color: "#8F00FF"
+    toxinDamage:
+      types:
+        Asphyxiation: 0.4
+        Poison: 0.35
+  - type: PointLight
+    color: "#8F00FF"
+  - type: Sprite
+    color: "#EEDDDD"
+  - type: RadarBlip
+    config:
+      color: "#8F00FF73"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudAir
+  suffix: Air-like
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: AirLike
+  - type: GasCloud
+    color: "#88BBEE"
+    pressure: 650
+    hungerMultiplier: 1.4
+    walkSpeedModifier: 0.85
+    sprintSpeedModifier: 0.8
+  - type: PointLight
+    color: "#88BBEE"
+  - type: RadarBlip
+    config:
+      color: "#88BBEE73"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudMuddleEven
+  suffix: Muddled
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: MuddleEven
+  - type: GasCloud
+    color: "#88AA88"
+    toxinDamage:
+      types:
+        Poison: 0.45
+  - type: PointLight
+    color: "#88AA88"
+  - type: Sprite
+    color: "#DDEEDD"
+  - type: RadarBlip
+    config:
+      color: "#88AA8873"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudMuddlePlasma
+  suffix: Muddled PL+
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: MuddlePlasma
+  - type: GasCloud
+    color: "#CC66AA"
+    pressure: 900
+    temperature: 360
+    toxinDamage:
+      types:
+        Poison: 0.9
+  - type: PointLight
+    color: "#CC66AA"
+  - type: Sprite
+    color: "#F0DDF0"
+  - type: RadarBlip
+    config:
+      color: "#CC66AA73"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+
+- type: entity
+  parent: BaseGasCloud
+  id: GasCloudFrezon
+  suffix: Frezon
+  components:
+  - type: RandomGasDeposit
+    depositPrototype: Frezon
+  - type: GasDeposit
+    outputTemperature: 23.15
+  - type: GasCloud
+    color: "#3A758C"
+    pressure: 700
+    hungerMultiplier: 2.6
+    temperature: 140
+    toxinDamage:
+      types:
+        Poison: 0.3
+  - type: PointLight
+    color: "#3A758C"
+  - type: Sprite
+    color: "#AADDFF"
+  - type: RadarBlip
+    config:
+      color: "#3A758C73"
+      shape: Circle
+      respectZoom: true
+      bounds: "-8,-8,8,8"
+# endregion Standard
+
+# region Small
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudOxygen
+  id: GasCloudOxygenSmall
+  suffix: Oxygen, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudNitrogen
+  id: GasCloudNitrogenSmall
+  suffix: Nitrogen, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudCarbonDioxide
+  id: GasCloudCarbonDioxideSmall
+  suffix: Carbon Dioxide, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudPlasma
+  id: GasCloudPlasmaSmall
+  suffix: Plasma, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudAmmonia
+  id: GasCloudAmmoniaSmall
+  suffix: Ammonia, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudWaterVapor
+  id: GasCloudWaterVaporSmall
+  suffix: Water Vapor, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudNitrousOxide
+  id: GasCloudNitrousOxideSmall
+  suffix: Nitrous Oxide, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudAir
+  id: GasCloudAirSmall
+  suffix: Air-like, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudMuddleEven
+  id: GasCloudMuddleEvenSmall
+  suffix: Muddled, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudMuddlePlasma
+  id: GasCloudMuddlePlasmaSmall
+  suffix: Muddled P+, Small
+
+- type: entity
+  parent:
+  - BaseGasCloudSmall
+  - GasCloudFrezon
+  id: GasCloudFrezonSmall
+  suffix: Frezon, Small
+# endregion Small
+
+# region Large
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudOxygen
+  id: GasCloudOxygenLarge
+  suffix: Oxygen, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudNitrogen
+  id: GasCloudNitrogenLarge
+  suffix: Nitrogen, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudCarbonDioxide
+  id: GasCloudCarbonDioxideLarge
+  suffix: Carbon Dioxide, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudPlasma
+  id: GasCloudPlasmaLarge
+  suffix: Plasma, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudAmmonia
+  id: GasCloudAmmoniaLarge
+  suffix: Ammonia, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudWaterVapor
+  id: GasCloudWaterVaporLarge
+  suffix: Water Vapor, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudNitrousOxide
+  id: GasCloudNitrousOxideLarge
+  suffix: Nitrous Oxide, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudAir
+  id: GasCloudAirLarge
+  suffix: Air-like, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudMuddleEven
+  id: GasCloudMuddleEvenLarge
+  suffix: Muddled, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudMuddlePlasma
+  id: GasCloudMuddlePlasmaLarge
+  suffix: Muddled P+, Large
+
+- type: entity
+  parent:
+  - BaseGasCloudLarge
+  - GasCloudFrezon
+  id: GasCloudFrezonLarge
+  suffix: Frezon, Large
+# endregion Large

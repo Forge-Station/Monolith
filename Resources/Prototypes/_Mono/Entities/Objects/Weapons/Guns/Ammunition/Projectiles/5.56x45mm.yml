@@ -7,8 +7,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 23
-    armorPenetration: 0.1
+        Piercing: 27 # Forge-change 23->27
+    armorPenetration: 0.15 # Forge-change 0.1->0.15
 
 - type: entity
   id: Bullet556x45mmPractice
@@ -30,7 +30,9 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 3
+        Blunt: 4 # Forge-change 3->4
+  - type: StaminaDamageOnCollide # Forge-change
+    damage: 25 # Forge-change
 
 - type: entity
   id: Bullet556x45mmIncendiary
@@ -41,8 +43,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
+        Piercing: 12 # Forge-change 10->12
         Heat: 9
+    armorPenetration: -0.1 # Forge-change
 
 - type: entity
   id: Bullet556x45mmUranium
@@ -53,8 +56,9 @@
   - type: Projectile
     damage:
       types:
-        Radiation: 8
-        Piercing: 11
+        Radiation: 10 # Forge-change 8->10
+        Piercing: 18 # Forge-change 11->18
+    armorPenetration: -0.075 # Forge-change
 
 # Mono AP syst
 # + 0.05 base AP
@@ -69,7 +73,7 @@
     damage:
       types:
         Slash: 4
-        Piercing: 30
+        Piercing: 28 # Forge-change 30->28
     armorPenetration: -0.55
 
 - type: entity
@@ -82,7 +86,7 @@
     damage:
       types:
         Slash: 7
-        Piercing: 37
+        Piercing: 33 # Forge-change 37->33
     armorPenetration: -0.9
 
 #armor-piercing:
@@ -96,6 +100,6 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 10
-        Structural: 35
-    armorPenetration: 0.7
+        Piercing: 18 # Forge-change 10->18
+        Structural: 23 # Forge-change 35->23
+    armorPenetration: 0.55 # Forge-change 0.7->0.55

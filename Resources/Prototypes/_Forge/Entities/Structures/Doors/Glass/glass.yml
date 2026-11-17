@@ -5,7 +5,7 @@
   suffix: Empire, Public
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/empire.rsi
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/empire.rsi
 
 - type: entity
   parent: AirlockGlass
@@ -13,7 +13,7 @@
   suffix: Empire
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/empire.rsi
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/empire.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsEmpire ]
@@ -24,7 +24,7 @@
   suffix: Empire, Officer
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/empire.rsi
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/empire.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsEmpireOfficer ]
@@ -35,7 +35,7 @@
   suffix: Empire, Inquisitor
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/empire_inq.rsi
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/empire_inq.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsEmpireInqusitor ]
@@ -46,7 +46,7 @@
   suffix: Empire, Lord
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/empire_lord.rsi
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/empire_lord.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsEmpireCommander ]
@@ -57,7 +57,7 @@
   suffix: Empire, Diplomacy
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/empire_diplomacy.rsi
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/empire_diplomacy.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsEmpireDiplomacy ]
@@ -69,7 +69,7 @@
   suffix: Ренегаты, Locked
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/ren_glass.rsi
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/ren_glass.rsi
   - type: ContainerFill
     containers:
       board: [ DoorElectronicsRenegate ]
@@ -81,7 +81,7 @@
   suffix: Provost
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/provost.rsi
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/provost.rsi
 
 - type: entity
   parent: AirlockGlassProvost

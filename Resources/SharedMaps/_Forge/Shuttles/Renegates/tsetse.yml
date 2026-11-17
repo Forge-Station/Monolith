@@ -242,7 +242,7 @@ entities:
     - type: Transform
       pos: -0.5,-5.5
       parent: 1
-- proto: AlwaysPoweredlightRed
+- proto: PoweredlightRed
   entities:
   - uid: 7
     components:
@@ -250,7 +250,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5,-0.5
       parent: 1
-- proto: AlwaysPoweredLightSodium
+- proto: PoweredLightSodium
   entities:
   - uid: 8
     components:

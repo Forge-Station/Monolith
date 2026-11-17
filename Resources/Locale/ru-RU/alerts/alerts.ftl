@@ -8,6 +8,8 @@ alerts-low-pressure-name = [color=red]Низкий уровень давлени
 alerts-low-pressure-desc = Воздух вокруг вас [color=red]опасно разрежён[/color]. [color=green]Космический скафандр[/color] защитит вас.
 alerts-high-pressure-name = [color=red]Высокий уровень давления[/color]
 alerts-high-pressure-desc = Воздух вокруг вас [color=red]опасно плотный[/color]. [color=green]Герметичный костюм[/color] будет достаточной защитой.
+alerts-gas-cloud-name = [color=orange]Газовое облако[/color]
+alerts-gas-cloud-desc = Вы находитесь в [color=orange]плотном газовом облаке[/color]. Оно замедляет вас и быстрее вызывает голод. [color=green]Скафандр[/color] поможет от давления и температуры, [color=green]баллон с маской[/color] — от токсинов. Выйдите из облака, чтобы снять остальные эффекты.
 alerts-on-fire-name = [color=red]В огне[/color]
 alerts-on-fire-desc = Вы [color=red]горите[/color]. Щёлкните по иконке, чтобы остановиться, лечь, и начать кататься по земле, пытаясь погасить пламя или переместиться в безвоздушное пространство.
 alerts-too-cold-name = [color=cyan]Слишком холодно[/color]

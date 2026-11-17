@@ -5,6 +5,7 @@
   minimumDistance: 10800
   maximumDistance: 11800
   spawnGroup: Required
+  spawnSectors: [ poiEast ]
   gridPath: /Maps/_Forge/POI/ForgeVulcan.yml
   addComponents:
   - type: IFF

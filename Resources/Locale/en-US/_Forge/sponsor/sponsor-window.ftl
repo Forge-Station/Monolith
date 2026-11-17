@@ -17,3 +17,4 @@ sponsor-window-levels-header = Sponsor levels
 sponsor-window-perk-ooc = • Custom OOC name color
 sponsor-window-perk-looc = • Custom LOOC name color
 sponsor-window-perk-ghost-skin = • Special ghost skin
+sponsor-window-perk-company-ui = • Colored company menu palettes

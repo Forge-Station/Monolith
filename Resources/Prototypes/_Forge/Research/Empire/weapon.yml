@@ -47,24 +47,50 @@
   - WeaponSubMachineGunWt550Rogue
   - WeaponSubMachineGunAtreidesRogue
   - WeaponShotgunBulldogRogue
+  - WeaponRifleSeraphim
+  - WeaponRifleSong
   technologyPrerequisites:
   - EmpireSubsonic
   - UniversalMaterialResearchT2
   position: 7, 14
+
+- type: technology
+  id: EmpireAdvancedEnergyGuns
+  name: research-technology-empire-advanced-energy-guns 
+  entityIcon: WeaponEnergyRifleUnion
+  discipline: Empire
+  tier: 2
+  cost: 100000
+  recipeUnlocks:
+  - WeaponEnergyRifleUnion
+  - WeaponEnergyLMGHeavion
+  - WeaponEnergyShotgunKiller
+  - MagazinePowerUnion
+  - MagazinePowerUnionOverpressure
+  - MagazinePowerUnionXRay
+  - MagazinePowerUnionOverpressureXRay
+  - MagazinePowerUnionDisabler
+  - MagazinePowerUnionOverpressureDisabler
+  - MagazinePowerHeavion
+  - MagazinePowerShotgun 
+  technologyPrerequisites:
+  - EmpireBasicGuns
+  - UniversalMaterialResearchT2
+  position: 10, 13
   
 - type: technology
   id: EmpireHeavyWeapons
   name: research-technology-empire-heavy-weapons
-  entityIcon: WeaponSniperHristov
+  entityIcon: WeaponAMRShenzhen
   discipline: Empire
   tier: 1
   cost: 75000
   recipeUnlocks:
-  - WeaponSniperHristovRogue
-  - AmmoBox145x114mm
-  - AmmoBox145x114mmBig
+  - AmmoBoxShenzhenBig
+  - WeaponAMRShenzhenTSF
   technologyPrerequisites:
   - EmpireAdvancedGuns
+  - EmpireAdvancedEnergyGuns
   - UniversalMaterialResearchT3
   position: 7, 15
 

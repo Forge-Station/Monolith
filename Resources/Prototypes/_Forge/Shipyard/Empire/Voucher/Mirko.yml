@@ -3,7 +3,7 @@
 - type: vessel
   id: Mirko
   parent: BaseVessel
-  name: CWH Миррко
+  name: CWH «Миррко»
   description: Большой военный шаттл Империи с тяжелым вооружением на борту.
   purchasable: false
   limit: 3

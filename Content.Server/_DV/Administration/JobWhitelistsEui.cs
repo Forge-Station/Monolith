@@ -11,6 +11,7 @@ using Content.Shared.Ghost.Roles; // Frontier
 using Content.Shared.Roles;
 using Content.Server._Mono.Company; // Forge-Change: company whitelist
 using Content.Shared._Mono.Company; // Forge-Change: company whitelist
+using Robust.Server.Player;
 using Robust.Shared.Log;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -25,6 +26,8 @@ public sealed partial class JobWhitelistsEui : BaseEui
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly JobWhitelistManager _jobWhitelist = default!;
     [Dependency] private readonly CompanyManager _companyManager = default!;
+    [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private readonly IEntitySystemManager _entitySystems = default!;
 
     private readonly ISawmill _sawmill;
 
@@ -34,6 +37,7 @@ public sealed partial class JobWhitelistsEui : BaseEui
     public HashSet<ProtoId<JobPrototype>> Whitelists = new();
     public HashSet<ProtoId<GhostRolePrototype>> GhostRoleWhitelists = new(); // Frontier
     public HashSet<ProtoId<CompanyPrototype>> CompanyWhitelists = new(); // Forge-Change: company whitelist
+    public HashSet<ProtoId<CompanyPrototype>> CompanyOwners = new(); // Forge-Change: company owners
     public bool GlobalWhitelist = false;
 
     public JobWhitelistsEui(NetUserId playerId, string playerName)
@@ -59,13 +63,26 @@ public sealed partial class JobWhitelistsEui : BaseEui
 
         GlobalWhitelist = await _db.GetWhitelistStatusAsync(PlayerId); // Frontier: get global whitelist
         CompanyWhitelists = _companyManager.GetPlayerCompanies(PlayerId); // Forge-Change: company whitelist
+        CompanyOwners = new HashSet<ProtoId<CompanyPrototype>>();
+        foreach (var company in CompanyWhitelists)
+        {
+            var member = _companyManager.GetCompanyMember(company, PlayerId);
+            if (member is { Owner: true })
+                CompanyOwners.Add(company);
+        }
 
         StateDirty();
     }
 
     public override EuiStateBase GetNewState()
     {
-        return new JobWhitelistsEuiState(PlayerName, Whitelists, GhostRoleWhitelists, CompanyWhitelists.Select(c => c).ToHashSet(), GlobalWhitelist); // Forge-Change: company whitelist
+        return new JobWhitelistsEuiState(
+            PlayerName,
+            Whitelists,
+            GhostRoleWhitelists,
+            CompanyWhitelists.Select(c => c).ToHashSet(),
+            CompanyOwners.Select(c => c).ToHashSet(),
+            GlobalWhitelist);
     }
 
     public override void HandleMessage(EuiMessageBase msg)
@@ -137,23 +154,11 @@ public sealed partial class JobWhitelistsEui : BaseEui
                 break;
             // Forge-Change-start: company whitelist
             case SetCompanyWhitelistedMessage:
-                var companyArgs = (SetCompanyWhitelistedMessage)msg;
-                if (!_proto.HasIndex<CompanyPrototype>(companyArgs.CompanyId))
-                    return;
-
-                added = companyArgs.Whitelisting;
-                role = $"company:{companyArgs.CompanyId}";
-                if (added)
-                {
-                    _companyManager.AddMember(PlayerId, companyArgs.CompanyId);
-                    CompanyWhitelists.Add(companyArgs.CompanyId);
-                }
-                else
-                {
-                    _ = _companyManager.RemoveMember(PlayerId, companyArgs.CompanyId);
-                    CompanyWhitelists.Remove(companyArgs.CompanyId);
-                }
-                break;
+                HandleCompanyWhitelist((SetCompanyWhitelistedMessage)msg);
+                return;
+            case SetCompanyOwnerMessage:
+                HandleCompanyOwner((SetCompanyOwnerMessage)msg);
+                return;
             // Forge-Change-end: company whitelist
             default:
                 return;
@@ -164,5 +169,82 @@ public sealed partial class JobWhitelistsEui : BaseEui
         // End Frontier
 
         StateDirty();
+    }
+
+    private async void HandleCompanyWhitelist(SetCompanyWhitelistedMessage companyArgs)
+    {
+        if (!_proto.HasIndex<CompanyPrototype>(companyArgs.CompanyId))
+            return;
+
+        var added = companyArgs.Whitelisting;
+        var role = $"company:{companyArgs.CompanyId}";
+        if (added)
+        {
+            var ok = await _companyManager.AddMemberForPlayer(PlayerId, companyArgs.CompanyId);
+            if (ok)
+            {
+                CompanyWhitelists.Add(companyArgs.CompanyId);
+                TryApplyCompanyToOnlinePlayer();
+            }
+            else
+            {
+                added = false;
+                _sawmill.Warning($"Failed to add company membership for {PlayerName}: character already in a company or no free slot");
+            }
+        }
+        else
+        {
+            await _companyManager.RemoveMember(PlayerId, companyArgs.CompanyId);
+            CompanyWhitelists.Remove(companyArgs.CompanyId);
+            CompanyOwners.Remove(companyArgs.CompanyId);
+        }
+
+        var verb = added ? "added" : "removed";
+        _sawmill.Info($"{Player.Name} ({Player.UserId}) {verb} whitelist for {role} to player {PlayerName} ({PlayerId.UserId})");
+        StateDirty();
+    }
+
+    private async void HandleCompanyOwner(SetCompanyOwnerMessage ownerArgs)
+    {
+        if (!_proto.HasIndex<CompanyPrototype>(ownerArgs.CompanyId))
+            return;
+
+        if (!_companyManager.IsMember(PlayerId, ownerArgs.CompanyId))
+        {
+            if (!ownerArgs.Owner)
+                return;
+            var joined = await _companyManager.AddMemberForPlayer(PlayerId, ownerArgs.CompanyId);
+            if (!joined)
+            {
+                _sawmill.Warning($"Failed to add company membership for {PlayerName} before owner assign");
+                return;
+            }
+
+            CompanyWhitelists.Add(ownerArgs.CompanyId);
+            TryApplyCompanyToOnlinePlayer();
+        }
+
+        var added = ownerArgs.Owner;
+        var role = $"company-owner:{ownerArgs.CompanyId}";
+        if (_companyManager.SetOwner(ownerArgs.CompanyId, PlayerId, ownerArgs.Owner))
+        {
+            if (ownerArgs.Owner)
+                CompanyOwners.Add(ownerArgs.CompanyId);
+            else
+                CompanyOwners.Remove(ownerArgs.CompanyId);
+            TryApplyCompanyToOnlinePlayer();
+        }
+
+        var verb = added ? "added" : "removed";
+        _sawmill.Info($"{Player.Name} ({Player.UserId}) {verb} whitelist for {role} to player {PlayerName} ({PlayerId.UserId})");
+        StateDirty();
+    }
+
+    private void TryApplyCompanyToOnlinePlayer()
+    {
+        if (!_players.TryGetSessionById(PlayerId, out var session))
+            return;
+
+        _entitySystems.GetEntitySystem<CompanySystem>().TryApplyMembershipToSession(session);
     }
 }

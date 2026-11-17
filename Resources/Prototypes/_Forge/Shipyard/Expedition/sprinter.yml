@@ -1,7 +1,7 @@
 - type: vessel
   id: sprinter
   parent: BaseVessel
-  name: 'Спринтер'
+  name: '«Спринтер»'
   description: Средний экспедиционный шаттл.
   price: 96000
   category: Medium

@@ -1,11 +1,11 @@
 # FUC->FMC. FMC cost 5x - Mono
 
 - type: listing
-  id: UplinkClothingOuterHardsuitM82c
+  id: UplinkClothingOuterHardsuitTSFMCM82c # Forge Change
   name: uplink-security-hardsuit-m82c-name
   description: uplink-security-hardsuit-m82c-desc
-  productEntity: ClothingOuterHardsuitM82c
-  icon: { sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82c.rsi, state: icon }
+  productEntity: ClothingOuterHardsuitTSFMCM82c # Forge Change
+  icon: { sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_kalenval.rsi, state: icon } # Forge Change
   cost:
     FederationMilitaryCredit: 10
   categories:
@@ -17,11 +17,11 @@
           - SecurityUplink
 
 - type: listing
-  id: UplinkClothingOuterHardsuitM82b
+  id: UplinkClothingOuterHardsuitTSFMCM82b # Forge Change
   name: uplink-security-hardsuit-m82b-name
   description: uplink-security-hardsuit-m82b-desc
-  productEntity: ClothingOuterHardsuitM82b
-  icon: { sprite: _Mono/Clothing/OuterClothing/Hardsuits/m82b.rsi, state: icon }
+  productEntity: ClothingOuterHardsuitTSFMCM82b # Forge Change
+  icon: { sprite: _Forge/Clothing/OuterClothing/Hardsuits/tsf_low.rsi, state: icon } # Forge Change
   cost:
     FederationMilitaryCredit: 10
   categories:

@@ -13,3 +13,11 @@
   components:
   - type: AccessReader
     access: [["EmpireOfficer"]]
+
+- type: entity
+  id: LockableButtonRemnant
+  suffix: Forge, Remnant
+  parent: LockableButton
+  components:
+  - type: AccessReader
+    access: [["Remnant"]]

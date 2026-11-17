@@ -19,7 +19,6 @@ namespace Content.Client.Viewport;
 
 public sealed partial class ScalingViewport
 {
-    [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private IEyeManager _eyeManager = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private ITileDefinitionManager _tile = default!;
@@ -71,7 +70,9 @@ public sealed partial class ScalingViewport
         var mapCoordsBottomLeft = new MapCoordinates(new Vector2(minX, minY), mapId);
         var mapCoordsTopRight = new MapCoordinates(new Vector2(maxX, maxY), mapId);
 
-        if (_mapSystem is null || !_mapManager.TryFindGridAt(mapUid, mapCoordsBottomLeft.Position, out var gridUid, out var grid))
+        _mapSystem ??= _entityManager.System<SharedMapSystem>();
+
+        if (!_mapSystem.TryFindGridAt(mapUid, mapCoordsBottomLeft.Position, out var gridUid, out var grid))
             return true;
 
         var tileBottomLeft = _mapSystem.TileIndicesFor(gridUid, grid, mapCoordsBottomLeft);
@@ -96,6 +97,35 @@ public sealed partial class ScalingViewport
     private ShaderInstance? _transitBlitShader;
     private ShaderInstance? _cloudShader;
 
+    // Forge-Change: free Z-level GPU resources when the control is torn down. The transit
+    // viewport is otherwise only disposed on size change (in RenderTransitOverhead), so it
+    // leaks a viewport + render target every time this control is destroyed.
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (!disposing)
+            return;
+
+        _transitViewport?.Dispose();
+        _transitViewport = null;
+        _transitBlitShader?.Dispose();
+        _transitBlitShader = null;
+        _cloudShader?.Dispose();
+        _cloudShader = null;
+    }
+
+    /// <summary>
+    /// Plain world blit used when Z-level compositing does not apply (lobby, menus, no attached player).
+    /// The stock <c>_viewport.Render()</c> in <see cref="Draw"/> is commented out in favor of this path.
+    /// </summary>
+    private void RenderSingleEye(IClydeViewport viewport)
+    {
+        viewport.Eye = _eye;
+        viewport.ClearColor = Color.Black;
+        viewport.Render();
+    }
+
     private void RenderZLevels(IRenderHandle renderHandle, IClydeViewport viewport)
     {
         if (_eye is null)
@@ -111,17 +141,16 @@ public sealed partial class ScalingViewport
         _zLevels ??= _entityManager.System<CEClientZLevelsSystem>();
         _mapSystem ??= _entityManager.System<SharedMapSystem>();
 
-        if (_player.LocalEntity is null)
+        // Lobby / character preview / any ScalingViewport without a spawned player.
+        // Returning without Render() left the render target uncleared (black hub).
+        if (_player.LocalEntity is null
+            || !_entityManager.TryGetComponent<CEZLevelViewerComponent>(_player.LocalEntity.Value, out var zLevelViewer)
+            || !_xformQuery.Value.TryComp(_player.LocalEntity, out var playerXform)
+            || playerXform.MapUid is null)
+        {
+            RenderSingleEye(viewport);
             return;
-
-        if (!_entityManager.TryGetComponent<CEZLevelViewerComponent>(_player.LocalEntity.Value, out var zLevelViewer))
-            return;
-
-        if (!_xformQuery.Value.TryComp(_player.LocalEntity, out var playerXform))
-            return;
-
-        if (playerXform.MapUid is null)
-            return;
+        }
 
         var playerMap = playerXform.MapUid.Value;
 

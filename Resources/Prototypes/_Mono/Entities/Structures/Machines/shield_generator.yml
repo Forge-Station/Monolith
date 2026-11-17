@@ -1,9 +1,9 @@
 # Mono shield fixture density (1x1 bounds −0.45): MS-100 / Sentinel 190; MS-250 / Aegis 300; MS-500 / Titan 450;
 # LM-212 capital 550; FS-421 POI 700.
-# Base
+# Base — Forge-Change: powered by ShieldPowerConsumer / ИП, not ApcPowerReceiver / Pow3r.
 - type: entity
   id: ShieldGeneratorBase
-  parent: BaseMachinePowered
+  parent: BaseMachine
   name: Shield Generator
   abstract: true
   components:
@@ -77,9 +77,10 @@
     color: "#FF3333"
   - type: AnimationPlayer
   - type: LitOnPowered
-  - type: PowerSwitch
-  - type: ApcPowerReceiver
-    powerLoad: 60000
+  - type: ShieldPowerConsumer
+  - type: StationAiWhitelist
+  - type: LightningTarget
+    priority: 1
   - type: Appearance
   - type: WiresPanel
   - type: WiresVisuals
@@ -128,7 +129,7 @@
 # POI
 - type: entity
   id: ShieldGeneratorPOI
-  parent: ShieldGeneratorBase
+  parent: [ShieldGeneratorBase, BaseStructureDisableToolUse] # Forge-Change
   name: FS-421 "Fortress" Outpost Shield Generator
   description: The Fortress. The latest and greatest in static, large-scale shielding.
   suffix: POI ONLY
@@ -196,8 +197,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 1000
-  - type: ApcPowerReceiver
-    powerLoad: 100000 # Forge-Change
   - type: PointLight
     enabled: false
     castShadows: true
@@ -279,8 +278,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 1000
-  - type: ApcPowerReceiver
-    powerLoad: 80000 # Forge-Change
   - type: PointLight
     enabled: false
     castShadows: true
@@ -294,7 +291,7 @@
 # High-End
 - type: entity
   id: ShieldGenerator
-  parent: ShieldGeneratorBase
+  parent: [ ShieldGeneratorBase , BaseFactionGearOtherFactionT3 ]  # Froge-change add parent forbidden ADS
   name: MS-500 "Titan" Shield Generator
   description: The Titan. Advanced shielding, with a quick recharge time, and excels against colisions.
   suffix: ADS ONLY
@@ -313,14 +310,12 @@
     damageLimit: 225000 # Forge-Change
     damageOverloadTimePunishment: 120 # Forge-Change
     healPerSecond: 2250 # Forge-Change
-    damageExp: 5.5 # Forge-Change
+    damageExp: 1.05 # Forge-Change
     baseDraw: 60000 # Forge-Change
     maxDraw: 180000 # Forge-Change
     unpoweredBonus: 5 # Forge-Change
     shieldColor: "#FF3333"
     collisionResistanceMultiplier: 0.5
-  - type: ApcPowerReceiver
-    powerLoad: 60000 # Forge-Change
   - type: ShipRepairable
     repairTime: 30
     repairCost: 300
@@ -399,8 +394,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 400
-  - type: ApcPowerReceiver
-    powerLoad: 40000
   - type: PointLight
     enabled: false
     castShadows: true
@@ -494,8 +487,6 @@
     maxIntensity: 4000
     intensitySlope: 4
     totalIntensity: 300
-  - type: ApcPowerReceiver
-    powerLoad: 20000
   - type: PointLight
     enabled: false
     castShadows: true

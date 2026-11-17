@@ -107,6 +107,12 @@ public sealed partial class PointOfInterestPrototype : IPrototype, IInheritingPr
     public ResPath GridPath { get; private set; } = default!;
 
     /// <summary>
+    ///     BSS sector ids this POI may spawn on. Empty means the primary sector only.
+    /// </summary>
+    [DataField]
+    public List<string> SpawnSectors { get; private set; } = [];
+
+    /// <summary>
     ///     Tags for spawn placement rules (e.g. faction id). Used with <see cref="MinDistanceFromTags"/>.
     /// </summary>
     [DataField]

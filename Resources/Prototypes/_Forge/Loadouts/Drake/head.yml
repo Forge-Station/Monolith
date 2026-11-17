@@ -1,8 +1,0 @@
-- type: loadout
-  id: DrakeBeret
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: ContractorT1
-  price: 0
-  equipment:
-    head: ClothingHeadHatBeretDrakeIndustries

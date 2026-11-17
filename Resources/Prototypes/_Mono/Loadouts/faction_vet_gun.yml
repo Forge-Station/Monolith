@@ -112,7 +112,7 @@
 
 - type: loadout
   id: ContractorSpecialGunMalandro
-  name: RS-2 Malandro gun case
+  name: loadout-name-ContractorSpecialGunMalandro
   effects:
   - !type:GroupLoadoutEffect
     proto: MonoCivVet

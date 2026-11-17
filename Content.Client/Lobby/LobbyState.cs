@@ -1,3 +1,4 @@
+using Content.Client._Forge.LobbyHub;
 using Content.Client._NF.LateJoin;
 using Content.Client.Audio;
 using Content.Client.Eui;
@@ -57,6 +58,9 @@ namespace Content.Client.Lobby
             _voteManager.SetPopupContainer(Lobby.VoteContainer);
             LayoutContainer.SetAnchorPreset(Lobby, LayoutContainer.LayoutPreset.Wide);
 
+            if (_entityManager.TrySystem<LobbyHubSystem>(out var hub))
+                hub.Start(Lobby);
+
             var lobbyNameCvar = _cfg.GetCVar(CCVars.ServerLobbyName);
             var serverName = _baseClient.GameInfo?.ServerName ?? string.Empty;
 
@@ -93,6 +97,11 @@ namespace Content.Client.Lobby
             Lobby!.ReadyButton.OnPressed -= OnReadyPressed;
             Lobby!.ReadyButton.OnToggled -= OnReadyToggled;
 
+            if (_entityManager.TrySystem<LobbyHubSystem>(out var hub))
+                hub.Stop(Lobby);
+            else
+                Lobby?.SetHubMode(false);
+
             Lobby = null;
         }
 
@@ -102,18 +111,47 @@ namespace Content.Client.Lobby
             Lobby?.SwitchState(state);
         }
 
-        private void OnSetupPressed(BaseButton.ButtonEventArgs args)
+        public void OpenCharacterSetup()
         {
             SetReady(false);
             Lobby?.SwitchState(LobbyGui.LobbyGuiState.CharacterSetup);
         }
 
-        private void OnReadyPressed(BaseButton.ButtonEventArgs args)
+        public void ReadyOrJoinFromHub()
         {
-            if (!_gameTicker.IsGameStarted)
+            if (_gameTicker.IsGameStarted)
             {
+                OpenJoinPicker();
                 return;
             }
+
+            SetReady(!_gameTicker.AreWeReady);
+        }
+
+        public void OpenObserveFromHub()
+        {
+            if (!_gameTicker.IsGameStarted)
+                return;
+
+            var window = new ObserveWarningWindow();
+            window.OpenCentered();
+        }
+
+        private void OnSetupPressed(BaseButton.ButtonEventArgs args)
+        {
+            OpenCharacterSetup();
+        }
+
+        private void OnReadyPressed(BaseButton.ButtonEventArgs args)
+        {
+            OpenJoinPicker();
+        }
+
+        private void OpenJoinPicker()
+        {
+            if (!_gameTicker.IsGameStarted)
+                return;
+
             // Frontier to downstream: if you want to skip the first window and go straight to station picker,
             // simply change the enum to station or crew in the PickerWindow constructor.
             _pickerWindow ??= new PickerWindow();
@@ -130,6 +168,8 @@ namespace Content.Client.Lobby
             if (_gameTicker.IsGameStarted)
             {
                 Lobby!.StartTime.Text = string.Empty;
+                Lobby!.HubStartTime.Text = string.Empty;
+                Lobby!.HubStartTimePanel.Visible = false;
                 var roundTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
                 Lobby!.StationTime.Text = Loc.GetString("lobby-state-player-status-round-time", ("hours", roundTime.Hours), ("minutes", roundTime.Minutes));
                 return;
@@ -166,6 +206,9 @@ namespace Content.Client.Lobby
             }
 
             Lobby!.StartTime.Text = Loc.GetString("lobby-state-round-start-countdown-text", ("timeLeft", text));
+            Lobby!.HubStartTime.Text = Lobby.StartTime.Text;
+            if (Lobby.HubViewport.Visible)
+                Lobby.HubStartTimePanel.Visible = true;
         }
 
         private void LobbyStatusUpdated()
@@ -191,6 +234,7 @@ namespace Content.Client.Lobby
             else
             {
                 Lobby!.StartTime.Text = string.Empty;
+                Lobby!.HubStartTime.Text = string.Empty;
                 Lobby!.ReadyButton.Text = Loc.GetString(Lobby!.ReadyButton.Pressed ? "lobby-state-player-status-ready": "lobby-state-player-status-not-ready");
                 Lobby!.ReadyButton.ToggleMode = true;
                 Lobby!.ReadyButton.Disabled = false;

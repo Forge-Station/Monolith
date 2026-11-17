@@ -1,7 +1,7 @@
 using System.Linq;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
-using Content.Shared._Forge;
+using Content.Shared._Forge.CCVars;
 using Content.Shared.Ghost;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -83,8 +83,8 @@ public sealed class AutoKickSystem : EntitySystem
         }
 
         var now = _timing.RealTime;
-        var pendingKickDelay = TimeSpan.FromMinutes(_cfg.GetCVar(ForgeVars.AutoKickPendingClockInMinutes));
-        var inactivityKickDelay = TimeSpan.FromMinutes(_cfg.GetCVar(ForgeVars.AutoKickGuestAfkMinutes));
+        var pendingKickDelay = TimeSpan.FromMinutes(_cfg.GetCVar(ForgeCCVars.AutoKickPendingClockInMinutes));
+        var inactivityKickDelay = TimeSpan.FromMinutes(_cfg.GetCVar(ForgeCCVars.AutoKickGuestAfkMinutes));
         var activeUsers = new HashSet<NetUserId>();
 
         foreach (var session in _players.Sessions)

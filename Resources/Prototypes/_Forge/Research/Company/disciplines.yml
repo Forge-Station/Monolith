@@ -4,7 +4,7 @@
   name: research-discipline-HME
   color: "#FF8C00"
   icon:
-    sprite: Forge/Interface/Misc/company_icons.rsi
+    sprite: _Forge/Interface/Misc/company_icons.rsi
     state: harmony
   tierPrerequisites:
     1: 0
@@ -18,7 +18,7 @@
   name: research-discipline-drake-industries
   color: "#C97D7D"
   icon:
-    sprite: Forge/Interface/Misc/company_icons.rsi
+    sprite: _Forge/Interface/Misc/company_icons.rsi
     state: drake
   tierPrerequisites:
     1: 0
@@ -32,7 +32,7 @@
   name: research-discipline-NSC
   color: "#0f3b62"
   icon:
-    sprite: Forge/Interface/Misc/company_icons.rsi
+    sprite: _Forge/Interface/Misc/company_icons.rsi
     state: nexus
   tierPrerequisites:
     1: 0

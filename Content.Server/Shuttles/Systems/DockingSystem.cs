@@ -19,7 +19,6 @@ namespace Content.Server.Shuttles.Systems
 {
     public sealed partial class DockingSystem : SharedDockingSystem
     {
-        [Dependency] private IMapManager _mapManager = default!;
         [Dependency] private SharedMapSystem _mapSystem = default!;
         [Dependency] private DoorSystem _doorSystem = default!;
         [Dependency] private EntityLookupSystem _lookup = default!;
@@ -178,6 +177,15 @@ namespace Content.Server.Shuttles.Systems
             // This little gem is for docking deserialization
             if (component.DockedWith != null)
             {
+                if (!Exists(component.DockedWith.Value) ||
+                    !HasComp<DockingComponent>(component.DockedWith.Value))
+                {
+                    component.DockedWith = null;
+                    component.DockJoint = null;
+                    component.DockJointId = null;
+                    return;
+                }
+
                 // They're still initialising so we'll just wait for both to be ready.
                 if (MetaData(component.DockedWith.Value).EntityLifeStage < EntityLifeStage.Initialized)
                     return;
@@ -358,6 +366,14 @@ namespace Content.Server.Shuttles.Systems
 
             // Check if either shuttle is in FTL before undocking
             var otherDockUid = dock.Comp.DockedWith.Value;
+            if (!Exists(otherDockUid) || !HasComp<TransformComponent>(otherDockUid))
+            {
+                dock.Comp.DockedWith = null;
+                dock.Comp.DockJoint = null;
+                dock.Comp.DockJointId = null;
+                return;
+            }
+
             var shuttleUid = Transform(dock).GridUid;
             var otherShuttleUid = Transform(otherDockUid).GridUid;
 
@@ -399,6 +415,7 @@ namespace Content.Server.Shuttles.Systems
                     // Make sure the undocked shuttle maintains the same FTL state
                     // This allows the undocked shuttle to complete its FTL journey
                     // Set no LinkedShuttle so it will be processed independently
+                    CopyFtlDestination(shuttleFtlComp, mainFTLShuttle); // Forge-Change
                     shuttleFtlComp.LinkedShuttle = null;
                     Dirty(shuttleUid.Value, shuttleFtlComp);
                 }
@@ -409,10 +426,28 @@ namespace Content.Server.Shuttles.Systems
                     // Make sure the undocked shuttle maintains the same FTL state
                     // This allows the undocked shuttle to complete its FTL journey
                     // Set no LinkedShuttle so it will be processed independently
+                    CopyFtlDestination(otherFtlComp, mainFTLShuttle); // Forge-Change
                     otherFtlComp.LinkedShuttle = null;
                     Dirty(otherShuttleUid.Value, otherFtlComp);
                 }
             }
+        }
+
+        /// <summary>
+        /// Forge-Change: a docked shuttle does not own the jump. Give it the main shuttle's destination
+        /// before it is processed on its own, so arrival does not target entity 0.
+        /// </summary>
+        private void CopyFtlDestination(FTLComponent docked, EntityUid mainShuttle)
+        {
+            if (docked.TargetCoordinates.IsValid(EntityManager))
+                return;
+
+            if (!TryComp(mainShuttle, out FTLComponent? main))
+                return;
+
+            docked.TargetCoordinates = main.TargetCoordinates;
+            if (docked.StateTime.End <= TimeSpan.Zero)
+                docked.StateTime = main.StateTime;
         }
 
         private void OnUndock(EntityUid dockUid)

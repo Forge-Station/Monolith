@@ -18,6 +18,21 @@
     },
     {
       "name": "rubber"
+    },
+    {
+      "name": "incendiary"
+    },
+    {
+      "name": "uranium"
+    },
+    {
+      "name": "HP"
+    },
+    {
+      "name": "RIP"
+    },
+    {
+      "name": "steelAP"
     }
   ]
 }

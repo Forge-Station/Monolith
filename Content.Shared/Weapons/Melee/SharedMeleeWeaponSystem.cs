@@ -39,7 +39,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] protected SharedCombatModeSystem   CombatMode      = default!;
     [Dependency] protected DamageableSystem         Damageable      = default!;
     [Dependency] protected SharedInteractionSystem  Interaction     = default!;
-    [Dependency] protected IMapManager              MapManager      = default!;
+    [Dependency] protected SharedMapSystem              MapManager      = default!;
     [Dependency] protected SharedPopupSystem        PopupSystem     = default!;
     [Dependency] protected IGameTiming              Timing          = default!;
     [Dependency] protected SharedTransformSystem    TransformSystem = default!;
@@ -304,8 +304,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         if (ev.Handled)
         {
             // Mono
-            if (ev.User != null)
-                user = ev.User.Value;
+            // Forge-Change: EntityUid.Invalid is a non-null Nullable and would replace the real attacker.
+            if (ev.User is { Valid: true } overrideUser)
+                user = overrideUser;
 
             if (TryComp(ev.Weapon, out melee))
             {
@@ -407,6 +408,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         if (!CombatMode.IsInCombatMode(user))
             return false;
 
+        if (!GetCoordinates(attack.Coordinates).IsValid(EntityManager)) // Forge-Change
+            return false;
+
         var attacker = attackerOverride ?? user; // Mono
         EntityUid? target = null;
         switch (attack)
@@ -459,6 +463,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             swings++;
         }
 
+        if (weapon.SwingBeverage) // Forge-Change
+            weapon.SwingLeft = !weapon.SwingLeft; // Forge-Change
+
         Dirty(weaponUid, weapon);
 
         // Do this AFTER attack so it doesn't spam every tick
@@ -484,12 +491,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             {
                 case LightAttackEvent light:
                     DoLightAttack(attacker, light, weaponUid, weapon, session, user);
-                    animation = weapon.Animation;
+                    animation = GetLightAnimation(user, attacker, weaponUid, weapon); // Forge-Change: weapon.Animation > GetLightAnimation
                     break;
                 case DisarmAttackEvent disarm:
                     DoDisarm(user, disarm, weaponUid, weapon, session); // Goob edit
 
-                    animation = weapon.Animation;
+                    animation = GetLightAnimation(user, attacker, weaponUid, weapon); // Forge-Change: weapon.Animation > GetLightAnimation
                     break;
                 case HeavyAttackEvent heavy:
                     if (!DoHeavyAttack(attacker, heavy, weaponUid, weapon, session, user))
@@ -615,20 +622,24 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 
     protected abstract void DoDamageEffect(List<EntityUid> targets, EntityUid? user,  TransformComponent targetXform);
 
+    // Forge-Change-Start
+    private static EntProtoId GetLightAnimation(EntityUid user, EntityUid attacker, EntityUid weaponUid, MeleeWeaponComponent weapon)
+    {
+        if (weapon.Animation == MeleeWeaponComponent.ItemLightAnimation && (weaponUid == user || weaponUid == attacker))
+            return MeleeWeaponComponent.UnarmedLightAnimation;
+
+        return weapon.Animation;
+    }
+    // Forge-Change-End
+
     private bool DoHeavyAttack(EntityUid user, HeavyAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session,
         EntityUid? realUser = null) // Mono
     {
         // TODO: This is copy-paste as fuck with DoPreciseAttack
         var playerUid = realUser ?? user; // Mono
 
-        // Validate that the user entity is valid
-        if (!user.IsValid())
-        {
-            Log.Error($"DoHeavyAttack called with invalid user entity: {playerUid}");
-            return false;
-        }
-
-        if (!TryComp(user, out TransformComponent? userXform))
+        // Forge-Change: a desynced client can submit a swing for an attacker that is already gone.
+        if (!user.IsValid() || !TryComp(user, out TransformComponent? userXform))
             return false;
 
         var targetMap = TransformSystem.ToMapCoordinates(GetCoordinates(ev.Coordinates));
@@ -672,10 +683,18 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             entities.RemoveRange(MaxTargets, entities.Count - MaxTargets);
         }
 
-        // Validate client
+        // Forge-Change: unknown net entities arrive as EntityUid.Invalid (0/n0D) and must not
+        // be passed into range checks: those Resolve TransformComponent and log a stack trace per swing.
         for (var i = entities.Count - 1; i >= 0; i--)
         {
-            if (ArcRaySuccessful(entities[i],
+            var entity = entities[i];
+            if (!entity.IsValid() || TerminatingOrDeleted(entity) || !HasComp<TransformComponent>(entity))
+            {
+                entities.RemoveAt(i);
+                continue;
+            }
+
+            if (ArcRaySuccessful(entity,
                     userPos,
                     direction.ToWorldAngle(),
                     component.Angle,
@@ -779,9 +798,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             _meleeSound.PlayHitSound(target, playerUid, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride, component);
         }
 
-        if (appliedDamage.GetTotal() > FixedPoint2.Zero)
+        // Forge-Change: the first target can already be gone. Transform() would throw.
+        if (appliedDamage.GetTotal() > FixedPoint2.Zero &&
+            targets.Count > 0 &&
+            TryComp(targets[0], out TransformComponent? damageXform))
         {
-            DoDamageEffect(targets, playerUid, Transform(targets[0]));
+            DoDamageEffect(targets, playerUid, damageXform);
         }
 
         // goob edit - stunmeta
@@ -820,6 +842,10 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
                 var resChecked = res.Where(x => x.Distance.Equals(res[0].Distance));
                 foreach (var r in resChecked)
                 {
+                    // Forge-Change: a hit with no transform must not reach InRangeUnobstructed.
+                    if (!r.HitEntity.IsValid() || TerminatingOrDeleted(r.HitEntity) || !HasComp<TransformComponent>(r.HitEntity))
+                        continue;
+
                     if (Interaction.InRangeUnobstructed(ignore, r.HitEntity, range + 0.1f, overlapCheck: false))
                         resSet.Add(r.HitEntity);
                 }

@@ -205,7 +205,9 @@
     - state: mag-0
       map: ["enum.GunVisualLayers.Mag"]
   - type: Item
-    size: Huge
+    size: Ginormous # Forge-change
+    shape: # Forge-change
+    - 0,0,7,2 # Forge-change
     sprite: _Mono/Objects/Weapons/Guns/Launchers/mk6-tpgl_inhands_32x.rsi
   - type: Clothing
     sprite: _Mono/Objects/Weapons/Guns/Launchers/mk6-tpgl_inhands_32x.rsi
@@ -220,7 +222,7 @@
     minAngle: 27
     maxAngle: 39
     projectileSpeed: 70
-    fireRate: 0.2
+    fireRate: 0.5 # Forge-change 0.2->0.5
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -236,8 +238,8 @@
   - type: Wieldable
   - type: GunRequiresWield
   - type: WieldDelay
-    baseDelay: 1.1
-    modifiedDelay: 1.1
+    baseDelay: 0.75 # Forge-change 1.1->0.75
+    modifiedDelay: 0.75 # Forge-change 1.1->0.75
     preventFiring: true
   - type: ItemSlots
     slots:
@@ -275,6 +277,8 @@
     sprintModifier: 0.5
   - type: PirateBountyItem
     id: ExperimentalFactionWeapon
-  - type: LaserPointer
-    targetedColor: "#ff0037"
-    defaultColor: "#03c2fc"
+  # Forge-change-start
+  #- type: LaserPointer
+  #  targetedColor: "#ff0037"
+  #  defaultColor: "#03c2fc"
+  # Forge-change-end

@@ -39,7 +39,6 @@ public abstract partial class InventorySystem
     [Dependency] private SharedStrippableSystem _strippable = default!;
     [Dependency] private SharedBodySystem _body = default!; // Mono
 
-    [ValidatePrototypeId<ItemSizePrototype>]
     private const string PocketableItemSize = "Small";
 
     private void InitializeEquip()

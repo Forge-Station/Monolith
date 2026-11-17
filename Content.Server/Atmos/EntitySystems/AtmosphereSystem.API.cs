@@ -15,6 +15,34 @@ namespace Content.Server.Atmos.EntitySystems;
 
 public partial class AtmosphereSystem
 {
+    public bool ColdStartGrid(EntityUid uid)
+    {
+        if (!TryComp(uid, out GridAtmosphereComponent? atmosphere) ||
+            !TryComp(uid, out GasTileOverlayComponent? overlay) ||
+            !TryComp(uid, out MapGridComponent? mapGrid) ||
+            !TryComp(uid, out TransformComponent? transform))
+        {
+            return false;
+        }
+
+        Entity<GridAtmosphereComponent, GasTileOverlayComponent, MapGridComponent, TransformComponent> grid =
+            new(uid, atmosphere, overlay, mapGrid, transform);
+        RebuildGridTiles(grid);
+
+        foreach (var tile in atmosphere.Tiles.Values)
+        {
+            if (tile.Air is not { Immutable: false } air)
+                continue;
+
+            air.Clear();
+            air.AdjustMoles(Gas.Oxygen, Atmospherics.OxygenMolesStandard);
+            air.AdjustMoles(Gas.Nitrogen, Atmospherics.NitrogenMolesStandard);
+            air.Temperature = Atmospherics.T20C;
+        }
+
+        return true;
+    }
+
     public GasMixture? GetContainingMixture(Entity<TransformComponent?> ent, bool ignoreExposed = false, bool excite = false)
     {
         if (!Resolve(ent, ref ent.Comp))

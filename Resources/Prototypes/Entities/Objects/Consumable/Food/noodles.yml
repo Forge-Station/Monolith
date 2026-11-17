@@ -177,4 +177,6 @@
           Quantity: 8
         - ReagentId: Vitamin
           Quantity: 1
+        - ReagentId: Lactozit     # Forge-change
+          Quantity: 2             # Forge-change
 # Tastes like pasta, butter.

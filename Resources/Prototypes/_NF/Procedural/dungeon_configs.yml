@@ -384,6 +384,8 @@
       CornerClutter: NFBaseClutter
       Entrance: NFMiningAirlock
       EntranceFlank: NFMiningWindow
+      # Forge-Change: JunctionDunGen skips and logs twice when this key is absent.
+      Junction: NFMiningAirlock
       WallMounts: NFBaseWallMounts
       Window: NFMiningWindow
     tiles:

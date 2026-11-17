@@ -59,7 +59,7 @@
   - type: HumanoidAppearance
     species: Hydrakin
   - type: ThermalRegulator #Todo, implement hydrakin thermal movement generation
-    metabolismHeat: 1600
+    metabolismHeat: 400 #Forge-Change 1600 => 400
     radiatedHeat: 100
     implicitHeatRegulation: 250
     sweatHeatRegulation: 400
@@ -69,7 +69,7 @@
     processWhileCrit: false
     # Goob
   - type: PassiveHeatGeneration
-    watts: 3900
+    watts: 800 # ~ +0.3 heat per second #Forge-Change 3900 => 800
     mobStateModifier:
       Alive: 1
       Critical: 0

@@ -1,5 +1,5 @@
 ent-BaseMagazine127x99mm = магазин (12.7x99мм)
-ent-Magazine127x99mm = магазин (12.7x99мм противоматериальные)
+ent-Magazine127x99mm = магазин (12.7x99мм крупнокалиберный)
 ent-Magazine127x99mmEmpty = магазин (12.7x99мм)
     .desc = " "
     .suffix = Пустой

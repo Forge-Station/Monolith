@@ -1,7 +1,8 @@
-﻿using Content.Server.GameTicking.Rules.Components;
+using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
+using Content.Server._Forge.Persistence; // Forge-Change
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Station.Components;
 using Content.Shared.Storage;
@@ -13,6 +14,7 @@ namespace Content.Server.GameTicking.Rules;
 public sealed partial class RoundstartStationVariationRuleSystem : GameRuleSystem<RoundstartStationVariationRuleComponent>
 {
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private PersistentWorldSystem _persistentWorld = default!; // Forge-Change
 
     public override void Initialize()
     {
@@ -35,6 +37,17 @@ public sealed partial class RoundstartStationVariationRuleSystem : GameRuleSyste
         // as long as one is running
         if (!GameTicker.IsGameRuleAdded<RoundstartStationVariationRuleComponent>())
             return;
+
+        // Forge-Change-Start
+        // Restored weekly worlds already have their mess, damage, and loot.
+        // Re-running puddle/debris passes also crashes: persisted grids skip
+        // GridInitialize so SpreaderGrid queues are empty.
+        if (_persistentWorld.HasLoadedWorld)
+        {
+            EnsureComp<StationVariationHasRunComponent>(ev.Station);
+            return;
+        }
+        // Forge-Change-End
 
         // this is unlikely, but could theoretically happen if it was saved and reloaded, so check anyway
         if (HasComp<StationVariationHasRunComponent>(ev.Station))

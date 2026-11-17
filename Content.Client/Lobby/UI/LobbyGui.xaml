@@ -9,16 +9,21 @@
     xmlns:lobbyUi="clr-namespace:Content.Client.Lobby.UI"
     xmlns:info="clr-namespace:Content.Client.Info"
     xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Chat.Widgets"
-    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:viewport="clr-namespace:Content.Client.Viewport">
+    <viewport:ScalingViewport Name="HubViewport" Access="Public" Visible="False"
+                              HorizontalExpand="True" VerticalExpand="True"
+                              MouseFilter="Stop" />
     <!-- Background -->
     <TextureRect Access="Public" VerticalExpand="True" HorizontalExpand="True" Name="Background"
-                 Stretch="KeepAspectCovered" />
+                 Stretch="KeepAspectCovered" MouseFilter="Ignore" />
     <BoxContainer Name="MainContainer" VerticalExpand="True" HorizontalExpand="True" Orientation="Horizontal"
-                  Margin="10 10 10 10" SeparationOverride="2">
-        <SplitContainer State="Auto" ResizeMode="NotResizable" HorizontalExpand="True">
+                  Margin="10 10 10 10" SeparationOverride="2" MouseFilter="Ignore">
+        <SplitContainer State="Auto" ResizeMode="NotResizable" HorizontalExpand="True" MouseFilter="Ignore">
             <!-- LHS Controls -->
-            <BoxContainer Name="LeftSide" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
-                <Control Name="DefaultState" VerticalExpand="True">
+            <BoxContainer Name="LeftSide" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True"
+                          MouseFilter="Ignore">
+                <Control Name="DefaultState" VerticalExpand="True" MouseFilter="Ignore">
                     <BoxContainer Name="TopLeft" Orientation="Vertical">
                         <!-- Left Top Panel -->
                         <PanelContainer StyleClasses="AngleRect" HorizontalAlignment="Left" Name="LeftSideTop"
@@ -123,4 +128,16 @@
             </PanelContainer>
         </SplitContainer>
     </BoxContainer>
+    <PanelContainer Name="HubStartTimePanel" Access="Public" Visible="False"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Margin="0 12 0 0" MouseFilter="Ignore" StyleClasses="AngleRect">
+        <Label Name="HubStartTime" Access="Public"
+               Margin="12 4" StyleClasses="LabelBig" MouseFilter="Ignore" />
+    </PanelContainer>
+    <PanelContainer Name="HubPromptPanel" Access="Public" Visible="False"
+                    HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                    Margin="0 0 0 20" MouseFilter="Ignore" StyleClasses="AngleRect">
+        <Label Name="HubPrompt" Access="Public"
+               Margin="12 4" StyleClasses="LabelBig" MouseFilter="Ignore" />
+    </PanelContainer>
 </lobbyUi:LobbyGui>

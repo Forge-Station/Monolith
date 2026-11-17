@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
-  forkId: frontier_mapping
-  forkVersion: 875882f3e4a4c3254cbe3717117402458c208127
-  time: 03/09/2026 08:43:06
-  entityCount: 773
+  engineVersion: 277.0.0
+  forkId: ""
+  forkVersion: ""
+  time: 08/18/2026 18:34:49
+  entityCount: 774
 maps: []
 grids:
 - 1
@@ -76,9 +76,9 @@ entities:
     - type: SpreaderGrid
       spreadQueues:
         Kudzu: []
-        Smoke: []
         MetalFoam: []
         Puddle: []
+        Smoke: []
     - type: Shuttle
       dampingModifier: 0.25
     - type: GridPathfinding
@@ -87,7 +87,7 @@ entities:
         path: /Audio/Effects/alert.ogg
     - type: DecalGrid
       chunkCollection:
-        version: 2
+        version: 3
         nodes:
         - node:
             color: '#FFFFFFFF'
@@ -907,60 +907,14 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 21.824879
-          - 82.10312
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - volume: 2500
           temperature: 293.15
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+          moles: {}
         - volume: 2500
           immutable: True
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
+          moles: {}
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
@@ -968,6 +922,9 @@ entities:
       id: pathfinder
     - type: ShipGridLock
       locked: False
+    - type: ThermalSignature
+    - type: ImplicitRoof
+    - type: ExplosionAirtightGrid
 - proto: AirAlarm
   entities:
   - uid: 2
@@ -3554,7 +3511,7 @@ entities:
   - uid: 394
     components:
     - type: Transform
-      pos: -1.5,-3.5
+      pos: -1.5397921,-4.202175
       parent: 1
 - proto: Poweredlight
   entities:
@@ -4953,71 +4910,99 @@ entities:
     - type: Transform
       pos: 7.5,-5.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 634
     components:
     - type: Transform
       pos: -7.5,-2.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 635
     components:
     - type: Transform
       pos: -1.5,2.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 636
     components:
     - type: Transform
       pos: -2.5,1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 637
     components:
     - type: Transform
       pos: -2.5,-9.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 638
     components:
     - type: Transform
       pos: 6.5,-8.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 639
     components:
     - type: Transform
       pos: 3.5,-9.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 640
     components:
     - type: Transform
       pos: 10.5,-6.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 641
     components:
     - type: Transform
       pos: -5.5,-1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 642
     components:
     - type: Transform
       pos: 5.5,-8.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 643
     components:
     - type: Transform
       pos: 10.5,-5.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 644
     components:
     - type: Transform
       pos: -5.5,-8.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 645
     components:
     - type: Transform
       pos: -4.5,-8.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 646
     components:
     - type: Transform
       pos: -0.5,2.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: ReinforcedWindowDiagonal
   entities:
   - uid: 647
@@ -5025,6 +5010,8 @@ entities:
     - type: Transform
       pos: -2.5,2.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: ShelfWallFreezerDark
   entities:
   - uid: 648
@@ -5268,6 +5255,13 @@ entities:
     components:
     - type: Transform
       pos: -2.5,-1.5
+      parent: 1
+- proto: StationRadioReceiver
+  entities:
+  - uid: 774
+    components:
+    - type: Transform
+      pos: -1.5,-3.5
       parent: 1
 - proto: SubstationWallBasic
   entities:
@@ -5782,17 +5776,23 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 1.5,0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 765
     components:
     - type: Transform
       pos: 6.5,-2.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 766
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.5,0.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: Window
   entities:
   - uid: 767
@@ -5800,16 +5800,22 @@ entities:
     - type: Transform
       pos: -3.5,-3.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 768
     components:
     - type: Transform
       pos: -3.5,-4.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 769
     components:
     - type: Transform
       pos: 0.5,-3.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: WindowDirectional
   entities:
   - uid: 770
@@ -5818,12 +5824,16 @@ entities:
       rot: 3.141592653589793 rad
       pos: -2.5,-3.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 771
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -1.5,-3.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 - proto: WindowReinforcedDirectional
   entities:
   - uid: 772
@@ -5832,10 +5842,14 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5,1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
   - uid: 773
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 1.5,1.5
       parent: 1
+    - type: DeltaPressure
+      gridUid: 1
 ...

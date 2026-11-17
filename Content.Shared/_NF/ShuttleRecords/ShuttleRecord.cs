@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._NF.ShuttleRecords;
 
@@ -14,7 +14,9 @@ public class ShuttleRecord(
     NetEntity entityUid,
     bool purchasedWithVoucher,
     uint purchasePrice,
-    TimeSpan? timeOfPurchase = null
+    TimeSpan? timeOfPurchase = null,
+    Guid? persistedVesselId = null,
+    uint spawnAppraisalValue = 0 // Forge-change
 )
 {
     [ViewVariables]
@@ -42,4 +44,10 @@ public class ShuttleRecord(
 
     [ViewVariables]
     public bool PurchasedWithVoucher { get; set; } = purchasedWithVoucher;
+
+    [ViewVariables]
+    public Guid? PersistedVesselId { get; set; } = persistedVesselId;
+    // Forge-change: copied to deeds for voucher shuttle resale baseline.
+    [ViewVariables]
+    public uint SpawnAppraisalValue { get; set; } = spawnAppraisalValue;
 }

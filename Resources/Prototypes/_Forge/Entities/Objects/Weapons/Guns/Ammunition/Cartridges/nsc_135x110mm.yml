@@ -1,0 +1,38 @@
+- type: entity
+  parent: BaseCartridge
+  id: Cartridge135x110mm
+  name: cartridge (13.5x110mm)
+  suffix: Нексус
+  description: Full metal jacket anti-materiel round for the NEX-SR-91 Dlan.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - Cartridge135x110mm
+  - type: CartridgeAmmo
+    proto: Bullet135x110mm
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Casings/nexus_135x110mm_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip
+      map: ["enum.AmmoVisualLayers.Tip"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+
+- type: entity
+  parent: Cartridge135x110mm
+  id: Cartridge135x110mmHE
+  name: cartridge (13.5x110mm HE)
+  suffix: Нексус
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet135x110mmHE
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+    - state: tip-he
+      map: ["enum.AmmoVisualLayers.Tip"]
+      color: "#ff6622"

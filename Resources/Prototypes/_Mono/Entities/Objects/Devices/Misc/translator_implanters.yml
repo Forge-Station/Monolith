@@ -1,6 +1,6 @@
 - type: entity
   id: NovaCygniTranslatorImplanter
-  parent: [ BaseTranslatorImplanter ]
+  parent: [ BaseTranslatorImplanter, BaseFactionGearOtherFactionT3 ] # Forge-change add parent forbidden ADS
   name: nova cygni translator implanter
   components:
   - type: Implanter

@@ -563,3 +563,11 @@ SellOnlyMothershipComputer: null # Mono
 GunneryServer: GunneryServerMedium # Mono
 
 # Frontier: put Frontier-related migrations in nf_migration.yml. Thank you.
+
+# 2026-10-09
+StationAdminBankATMBlackMarket: null # Forge-change-del - delet all notice with LedgerCartridgeRework
+ComputerBlackMarketBankATM: null # Forge-change-del - delet all notice with LedgerCartridgeRework
+
+# 2026-10-14
+PoweredLightSodium: PoweredlightSodium
+PoweredLightExterior: PoweredlightExterior

@@ -81,7 +81,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/plastitanium_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/plastitanium_window_diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -99,7 +99,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/plastitanium_window.rsi
+    sprite: _Forge/Structures/Windows/plastitanium_window.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -118,7 +118,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/plastitanium_uran_window.rsi
+    sprite: _Forge/Structures/Windows/plastitanium_uran_window.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -137,7 +137,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/plastitanium_uran_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/plastitanium_uran_window_diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -155,7 +155,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/plastitanium_plasma_window.rsi
+    sprite: _Forge/Structures/Windows/plastitanium_plasma_window.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -174,7 +174,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/plastitanium_plasma_window_diagonal.rsi
+    sprite: _Forge/Structures/Windows/plastitanium_plasma_window_diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -229,7 +229,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/mining_uran.rsi
+    sprite: _Forge/Structures/Windows/mining_uran.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -248,7 +248,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/mining_uran_diagonal.rsi
+    sprite: _Forge/Structures/Windows/mining_uran_diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter
@@ -266,7 +266,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/mining_plasma.rsi
+    sprite: _Forge/Structures/Windows/mining_plasma.rsi
     state: full
   objectType: Structure
   placementMode: SnapgridCenter
@@ -285,7 +285,7 @@
     - !type:EmptyOrWindowValidInTile
     - !type:NoWindowsInTile
   icon:
-    sprite: Forge/Structures/Windows/mining_plasma_diagonal.rsi
+    sprite: _Forge/Structures/Windows/mining_plasma_diagonal.rsi
     state: state0
   objectType: Structure
   placementMode: SnapgridCenter

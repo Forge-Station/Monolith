@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Numerics;
+using Content.Client._Forge.Mapping; // Forge-Change
 using Content.Client.Administration.Managers;
 using Content.Client.ContextMenu.UI;
 using Content.Client.Decals;
@@ -11,6 +12,7 @@ using Content.Shared.Administration;
 using Content.Shared.Decals;
 using Content.Shared.Input;
 using Content.Shared.Maps;
+using Robust.Shared.Configuration; // Forge-Change
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -38,11 +40,11 @@ namespace Content.Client.Mapping;
 public sealed partial class MappingState : GameplayStateBase
 {
     [Dependency] private IClientAdminManager _admin = default!;
+    [Dependency] private IConfigurationManager _cfg = default!; // Forge-Change
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private IEntityNetworkManager _entityNetwork = default!;
     [Dependency] private IInputManager _input = default!;
     [Dependency] private ILogManager _log = default!;
-    [Dependency] private IMapManager _mapMan = default!;
     [Dependency] private MappingManager _mapping = default!;
     [Dependency] private IOverlayManager _overlays = default!;
     [Dependency] private IPlacementManager _placement = default!;
@@ -56,6 +58,8 @@ public sealed partial class MappingState : GameplayStateBase
     private SpriteSystem _sprite = default!;
     private TransformSystem _transform = default!;
     private VerbSystem _verbs = default!;
+    private MappingEyedropperSystem _eyedropper = default!; // Forge-Change
+    private MappingPaletteSession _palette = default!; // Forge-Change
 
     private readonly ISawmill _sawmill;
     private readonly GameplayStateLoadController _loadController;
@@ -91,7 +95,6 @@ public sealed partial class MappingState : GameplayStateBase
         _loadController.LoadScreen();
 
         var context = _input.Contexts.GetContext("common");
-        context.AddFunction(ContentKeyFunctions.MappingUnselect);
         context.AddFunction(ContentKeyFunctions.SaveMap);
         context.AddFunction(ContentKeyFunctions.MappingEnablePick);
         context.AddFunction(ContentKeyFunctions.MappingEnableDelete);
@@ -104,9 +107,13 @@ public sealed partial class MappingState : GameplayStateBase
         Screen.Prototypes.SearchBar.OnTextChanged += OnSearch;
         Screen.Prototypes.CollapseAllButton.OnPressed += OnCollapseAll;
         Screen.Prototypes.ClearSearchButton.OnPressed += OnClearSearch;
+        Screen.Prototypes.ClearPlacementButton.OnPressed += OnClearPlacement; // Forge-Change
         Screen.Prototypes.GetPrototypeData += OnGetData;
         Screen.Prototypes.SelectionChanged += OnSelected;
         Screen.Prototypes.CollapseToggled += OnCollapseToggled;
+        Screen.Prototypes.TabChanged += OnPaletteTabChanged; // Forge-Change
+        Screen.Prototypes.FavoriteToggled += OnPaletteFavoriteToggled; // Forge-Change
+        Screen.Prototypes.RecentClicked += OnPaletteRecentClicked; // Forge-Change
         Screen.Pick.OnPressed += OnPickPressed;
         Screen.Delete.OnPressed += OnDeletePressed;
         Screen.EntityReplaceButton.OnToggled += OnEntityReplacePressed;
@@ -124,13 +131,18 @@ public sealed partial class MappingState : GameplayStateBase
             .Bind(ContentKeyFunctions.MappingRemoveDecal, new PointerInputCmdHandler(HandleEditorCancelPlace, outsidePrediction: true))
             .Bind(ContentKeyFunctions.MappingCancelEraseDecal, new PointerInputCmdHandler(HandleCancelEraseDecal, outsidePrediction: true))
             .Bind(ContentKeyFunctions.MappingOpenContextMenu, new PointerInputCmdHandler(HandleOpenContextMenu, outsidePrediction: true))
+            .Bind(ContentKeyFunctions.MappingEyedropper, new PointerInputCmdHandler((s, c, u) => HandleEyedropper(s, c, u, MappingEyedropperMode.Auto), outsidePrediction: true)) // Forge-Change
+            .Bind(ContentKeyFunctions.MappingEyedropperTile, new PointerInputCmdHandler((s, c, u) => HandleEyedropper(s, c, u, MappingEyedropperMode.Tile), outsidePrediction: true)) // Forge-Change
+            .Bind(ContentKeyFunctions.MappingEyedropperDecal, new PointerInputCmdHandler((s, c, u) => HandleEyedropper(s, c, u, MappingEyedropperMode.Decal), outsidePrediction: true)) // Forge-Change
             .Register<MappingState>();
 
         _overlays.AddOverlay(new MappingOverlay(this));
 
         _prototypeManager.PrototypesReloaded += OnPrototypesReloaded;
 
-        Screen.Prototypes.UpdateVisible(_prototypes);
+        Screen.Prototypes.UpdateVisible(_palette.RootsFor(Screen.Prototypes.CurrentTab));
+        Screen.Prototypes.SetFavoritePredicate(_palette.IsFavorite);
+        RefreshPaletteChrome();
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs obj)
@@ -163,9 +175,13 @@ public sealed partial class MappingState : GameplayStateBase
         Screen.Prototypes.SearchBar.OnTextChanged -= OnSearch;
         Screen.Prototypes.CollapseAllButton.OnPressed -= OnCollapseAll;
         Screen.Prototypes.ClearSearchButton.OnPressed -= OnClearSearch;
+        Screen.Prototypes.ClearPlacementButton.OnPressed -= OnClearPlacement; // Forge-Change
         Screen.Prototypes.GetPrototypeData -= OnGetData;
         Screen.Prototypes.SelectionChanged -= OnSelected;
         Screen.Prototypes.CollapseToggled -= OnCollapseToggled;
+        Screen.Prototypes.TabChanged -= OnPaletteTabChanged; // Forge-Change
+        Screen.Prototypes.FavoriteToggled -= OnPaletteFavoriteToggled; // Forge-Change
+        Screen.Prototypes.RecentClicked -= OnPaletteRecentClicked; // Forge-Change
         Screen.Pick.OnPressed -= OnPickPressed;
         Screen.Delete.OnPressed -= OnDeletePressed;
         Screen.EntityReplaceButton.OnToggled -= OnEntityReplacePressed;
@@ -180,7 +196,6 @@ public sealed partial class MappingState : GameplayStateBase
         UserInterfaceManager.UnloadScreen();
 
         var context = _input.Contexts.GetContext("common");
-        context.RemoveFunction(ContentKeyFunctions.MappingUnselect);
         context.RemoveFunction(ContentKeyFunctions.SaveMap);
         context.RemoveFunction(ContentKeyFunctions.MappingEnablePick);
         context.RemoveFunction(ContentKeyFunctions.MappingEnableDelete);
@@ -207,11 +222,21 @@ public sealed partial class MappingState : GameplayStateBase
         _sprite = _entityManager.System<SpriteSystem>();
         _transform = _entityManager.System<TransformSystem>();
         _verbs = _entityManager.System<VerbSystem>();
+        _eyedropper = _entityManager.System<MappingEyedropperSystem>(); // Forge-Change
+        _palette = new MappingPaletteSession(new MappingPaletteMemory(_cfg)); // Forge-Change
         ReloadPrototypes();
     }
 
     private void ReloadPrototypes()
     {
+        // Forge-Change-Start: rebuild from scratch so hot-reload doesn't duplicate the tree.
+        _allPrototypes.Clear();
+        _allPrototypesDict.Clear();
+        _idDict.Clear();
+        _prototypes.Clear();
+        _palette.Reset();
+        // Forge-Change-End
+
         var entities = new MappingPrototype(null, Loc.GetString("mapping-entities")) { Children = new List<MappingPrototype>() };
         _prototypes.Add(entities);
 
@@ -245,6 +270,13 @@ public sealed partial class MappingState : GameplayStateBase
 
         Sort(mappings, decals);
         mappings.Clear();
+
+        // Forge-Change-Start
+        _palette.HierarchyRoots.AddRange(_prototypes);
+        _palette.BuildGroups(_prototypeManager);
+        if (UserInterfaceManager.ActiveScreen is MappingScreen)
+            RefreshPaletteView();
+        // Forge-Change-End
     }
 
     private void Sort(Dictionary<string, MappingPrototype> prototypes, MappingPrototype topLevel)
@@ -411,22 +443,11 @@ public sealed partial class MappingState : GameplayStateBase
     {
         if (string.IsNullOrEmpty(args.Text))
         {
-            Screen.Prototypes.PrototypeList.Visible = true;
-            Screen.Prototypes.SearchList.Visible = false;
+            RefreshPaletteView();
             return;
         }
 
-        var matches = new List<MappingPrototype>();
-        foreach (var prototype in _allPrototypes)
-        {
-            if (prototype.Name.Contains(args.Text, OrdinalIgnoreCase))
-                matches.Add(prototype);
-        }
-
-        matches.Sort(static (a, b) => string.Compare(a.Name, b.Name, OrdinalIgnoreCase));
-
-        Screen.Prototypes.PrototypeList.Visible = false;
-        Screen.Prototypes.SearchList.Visible = true;
+        var matches = _palette.Search(args.Text, Screen.Prototypes.CurrentTab);
         Screen.Prototypes.Search(matches);
     }
 
@@ -447,6 +468,11 @@ public sealed partial class MappingState : GameplayStateBase
     {
         Screen.Prototypes.SearchBar.Text = string.Empty;
         OnSearch(new LineEditEventArgs(Screen.Prototypes.SearchBar, string.Empty));
+    }
+
+    private void OnClearPlacement(ButtonEventArgs obj)
+    {
+        Deselect();
     }
 
     private void OnGetData(IPrototype prototype, List<Texture> textures)
@@ -471,15 +497,32 @@ public sealed partial class MappingState : GameplayStateBase
         if (mapping.Prototype == null)
             return;
 
+        // Forge-Change-Start: search/grid already virtualizes; walking the tree would expand huge groups.
+        if (!Screen.Prototypes.PrototypeList.Visible)
+        {
+            PlacePrototype(mapping.Prototype);
+            return;
+        }
+        // Forge-Change-End
+
         var chain = new Stack<MappingPrototype>();
         chain.Push(mapping);
 
-        var parent = mapping.Parents?.FirstOrDefault();
-        while (parent != null)
+        // Forge-Change-Start: grouped tabs walk the palette folder, hierarchy still uses YAML parents.
+        if (Screen.Prototypes.NestedChildren)
         {
-            chain.Push(parent);
-            parent = parent.Parents?.FirstOrDefault();
+            var parent = mapping.Parents?.FirstOrDefault();
+            while (parent != null)
+            {
+                chain.Push(parent);
+                parent = parent.Parents?.FirstOrDefault();
+            }
         }
+        else if (mapping.PaletteGroup != null)
+        {
+            chain.Push(mapping.PaletteGroup);
+        }
+        // Forge-Change-End
 
         _lastClicked = null;
 
@@ -492,6 +535,13 @@ public sealed partial class MappingState : GameplayStateBase
                 if (child is MappingSpawnButton button &&
                     button.Prototype == prototype)
                 {
+                    // Forge-Change: never inline-expand folders with thousands of children.
+                    if (Screen.Prototypes.IsLargeGroup(prototype))
+                    {
+                        PlacePrototype(mapping.Prototype);
+                        return;
+                    }
+
                     UnCollapse(button);
                     OnSelected(button, prototype.Prototype);
                     children = button.ChildrenPrototypes.Children;
@@ -503,6 +553,8 @@ public sealed partial class MappingState : GameplayStateBase
 
         if (last != null && Screen.Prototypes.PrototypeList.Visible)
             _scrollTo = last;
+        else if (mapping.Prototype != null) // Forge-Change: still place when the tree isn't on-screen (grid/search).
+            PlacePrototype(mapping.Prototype);
     }
 
     private void OnSelected(MappingSpawnButton button, IPrototype? prototype)
@@ -548,48 +600,8 @@ public sealed partial class MappingState : GameplayStateBase
         Screen.EntityContainer.Visible = false;
         Screen.DecalContainer.Visible = false;
 
-        switch (prototype)
-        {
-            case EntityPrototype entity:
-            {
-                var placementId = Screen.EntityPlacementMode.SelectedId;
-
-                var placement = new PlacementInformation
-                {
-                    PlacementOption = placementId > 0 ? EntitySpawnWindow.InitOpts[placementId] : entity.PlacementMode,
-                    EntityType = entity.ID,
-                    IsTile = false
-                };
-
-                Screen.EntityContainer.Visible = true;
-                _decal.SetActive(false);
-                _placement.BeginPlacing(placement);
-                break;
-            }
-            case DecalPrototype decal:
-                _placement.Clear();
-
-                _decal.SetActive(true);
-                _decal.UpdateDecalInfo(decal.ID, Color.White, 0, true, 0, false);
-                Screen.DecalContainer.Visible = true;
-                break;
-            case ContentTileDefinition tile:
-            {
-                var placement = new PlacementInformation
-                {
-                    PlacementOption = "AlignTileAny",
-                    TileType = tile.TileId,
-                    IsTile = true
-                };
-
-                _decal.SetActive(false);
-                _placement.BeginPlacing(placement);
-                break;
-            }
-            default:
-                _placement.Clear();
-                break;
-        }
+        if (prototype != null)
+            PlacePrototype(prototype);
 
         Screen.Prototypes.Selected = button;
 
@@ -602,23 +614,16 @@ public sealed partial class MappingState : GameplayStateBase
         {
             selected.Button.Pressed = false;
             Screen.Prototypes.Selected = null;
-
-            if (selected.Prototype?.Prototype is DecalPrototype)
-            {
-                _decal.SetActive(false);
-                Screen.DecalContainer.Visible = false;
-            }
-
-            if (selected.Prototype?.Prototype is EntityPrototype)
-            {
-                _placement.Clear();
-            }
-
-            if (selected.Prototype?.Prototype is ContentTileDefinition)
-            {
-                _placement.Clear();
-            }
         }
+
+        Screen.Prototypes.SetSelectionInfo(null, null); // Forge-Change
+        Screen.EntityContainer.Visible = false;
+        Screen.DecalContainer.Visible = false;
+        Screen.EraseEntityButton.Pressed = false;
+        Screen.EraseDecalButton.Pressed = false;
+        _updateEraseDecal = false;
+        _decal.SetActive(false);
+        _placement.Clear();
     }
 
     private void OnCollapseToggled(MappingSpawnButton button, ButtonToggledEventArgs args)
@@ -735,8 +740,20 @@ public sealed partial class MappingState : GameplayStateBase
 
     private bool HandleMappingUnselect(in PointerInputCmdArgs args)
     {
-        if (Screen.Prototypes.Selected is not { Prototype.Prototype: DecalPrototype })
+        // Forge-Change: RMB cancels spawn; Shift+RMB is the eyedropper.
+        if (!_timing.IsFirstTimePredicted)
             return false;
+
+        if (UserInterfaceManager.CurrentlyHovered is not IViewportControl)
+            return false;
+
+        if (!_placement.IsActive &&
+            _decal.GetActiveDecal().Decal is null &&
+            !_placement.Eraser &&
+            !_updateEraseDecal)
+        {
+            return false;
+        }
 
         Deselect();
         return true;
@@ -783,43 +800,7 @@ public sealed partial class MappingState : GameplayStateBase
         if (State != CursorState.Pick)
             return false;
 
-        MappingPrototype? button = null;
-
-        // Try and get tile under it
-        // TODO: Separate mode for decals.
-        if (!uid.IsValid())
-        {
-            var mapPos = _transform.ToMapCoordinates(coords);
-
-            if (_mapMan.TryFindGridAt(mapPos, out var gridUid, out var grid) &&
-                _entityManager.System<SharedMapSystem>().TryGetTileRef(gridUid, grid, coords, out var tileRef) &&
-                _allPrototypesDict.TryGetValue(_entityManager.System<TurfSystem>().GetContentTileDefinition(tileRef), out button))
-            {
-                OnSelected(button);
-                return true;
-            }
-        }
-
-        if (button == null)
-        {
-            if (uid == EntityUid.Invalid ||
-                _entityManager.GetComponentOrNull<MetaDataComponent>(uid) is not { EntityPrototype: { } prototype } ||
-                !_allPrototypesDict.TryGetValue(prototype, out button))
-            {
-                // we always block other input handlers if pick mode is enabled
-                // this makes you not accidentally place something in space because you
-                // miss-clicked while holding down the pick hotkey
-                return true;
-            }
-
-            // Selected an entity
-            OnSelected(button);
-
-            // Match rotation
-            _placement.Direction = _entityManager.GetComponent<TransformComponent>(uid).LocalRotation.GetDir();
-        }
-
-        return true;
+        return ApplyEyedropper(coords, uid, MappingEyedropperMode.Auto, deselectOnMiss: true); // Forge-Change
     }
 
     private bool HandleEditorCancelPlace(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
@@ -849,13 +830,8 @@ public sealed partial class MappingState : GameplayStateBase
     {
         if (button.CollapseButton.Pressed)
         {
-            if (button.Prototype?.Children != null)
-            {
-                foreach (var child in button.Prototype.Children)
-                {
-                    Screen.Prototypes.Insert(button.ChildrenPrototypes, child, true);
-                }
-            }
+            if (button.Prototype != null)
+                Screen.Prototypes.InsertChildren(button.ChildrenPrototypes, button.Prototype, Screen.Prototypes.NestedChildren); // Forge-Change
 
             button.CollapseButton.Label.Text = "▼";
         }
@@ -933,4 +909,143 @@ public sealed partial class MappingState : GameplayStateBase
         Pick,
         Delete
     }
+
+    // Forge-Change-Start
+    private void PlacePrototype(IPrototype prototype, Decal? sampledDecal = null)
+    {
+        Screen.EntityContainer.Visible = prototype is EntityPrototype;
+        Screen.DecalContainer.Visible = prototype is DecalPrototype;
+
+        var mode = prototype is EntityPrototype
+            ? MappingPalettePlacement.ModeName(Screen.EntityPlacementMode.SelectedId)
+            : null;
+        MappingPalettePlacement.Begin(_placement, _decal, prototype, mode, sampledDecal);
+
+        if (prototype is DecalPrototype)
+            Screen.SelectDecal(prototype.ID, sampledDecal);
+
+        var name = prototype switch
+        {
+            EntityPrototype entity => entity.Name,
+            ContentTileDefinition tile => Loc.GetString(tile.Name),
+            _ => prototype.ID
+        };
+        Screen.Prototypes.SetSelectionInfo(name, prototype.ID);
+
+        if (MappingPaletteCatalog.GetRef(prototype) is { } id)
+        {
+            _palette.Memory.PushRecent(id);
+            RefreshPaletteChrome();
+        }
+    }
+
+    private void RefreshPaletteView()
+    {
+        var tab = Screen.Prototypes.CurrentTab;
+        if (Screen.Prototypes.GridMode && tab is MappingPaletteTab.Tiles or MappingPaletteTab.Decals)
+        {
+            var query = Screen.Prototypes.SearchBar.Text;
+            var items = string.IsNullOrEmpty(query)
+                ? _palette.FlatFor(tab)
+                : _palette.Search(query, tab);
+            Screen.Prototypes.PopulateGrid(items);
+        }
+        else
+        {
+            Screen.Prototypes.UpdateVisible(_palette.RootsFor(tab));
+        }
+
+        RefreshPaletteChrome();
+    }
+
+    private void RefreshPaletteChrome()
+    {
+        Screen.Prototypes.SetFavoritePredicate(_palette.IsFavorite);
+        Screen.Prototypes.RefreshRecents(_palette.ResolveRecents());
+    }
+
+    private void OnPaletteTabChanged(MappingPaletteTab tab)
+    {
+        if (string.IsNullOrEmpty(Screen.Prototypes.SearchBar.Text) || Screen.Prototypes.GridMode)
+            RefreshPaletteView();
+        else
+            OnSearch(new LineEditEventArgs(Screen.Prototypes.SearchBar, Screen.Prototypes.SearchBar.Text));
+    }
+
+    private void OnPaletteFavoriteToggled(MappingPrototype mapping, bool pressed)
+    {
+        if (mapping.Prototype == null || MappingPaletteCatalog.GetRef(mapping.Prototype) is not { } id)
+            return;
+
+        if (_palette.Memory.IsFavorite(id) != pressed)
+            _palette.Memory.ToggleFavorite(id);
+    }
+
+    private void OnPaletteRecentClicked(MappingPrototype mapping)
+    {
+        if (mapping.Prototype == null)
+            return;
+
+        RevealAndSelect(mapping);
+    }
+
+    private bool HandleEyedropper(ICommonSession? session, EntityCoordinates coords, EntityUid uid, MappingEyedropperMode mode)
+    {
+        if (State == CursorState.Delete)
+            return false;
+
+        return ApplyEyedropper(coords, uid, mode, deselectOnMiss: false);
+    }
+
+    private bool ApplyEyedropper(EntityCoordinates coords, EntityUid uid, MappingEyedropperMode mode, bool deselectOnMiss)
+    {
+        // Predicted replays re-run this with EntId=0; skip before ToMapCoordinates.
+        if (!_timing.IsFirstTimePredicted)
+            return false;
+
+        if (UserInterfaceManager.CurrentlyHovered is not IViewportControl)
+            return false;
+
+        if (!_eyedropper.TryPick(coords, uid, mode, out var prototype, out var sampledDecal) || prototype == null)
+        {
+            if (!deselectOnMiss)
+                return false;
+
+            Deselect();
+            return true;
+        }
+
+        DisablePick();
+
+        if (!_allPrototypesDict.TryGetValue(prototype, out var mapping))
+        {
+            PlacePrototype(prototype, sampledDecal);
+            return true;
+        }
+
+        if (mode != MappingEyedropperMode.Tile && uid.IsValid() &&
+            _eyedropper.GetEntityDirection(uid) is { } dir)
+        {
+            _placement.Direction = dir;
+        }
+
+        RevealAndSelect(mapping, sampledDecal);
+        return true;
+    }
+
+    private void RevealAndSelect(MappingPrototype mapping, Decal? sampledDecal = null)
+    {
+        if (mapping.Prototype == null)
+            return;
+
+        var tab = MappingPaletteCatalog.TabFor(mapping.Prototype);
+        if (Screen.Prototypes.CurrentTab is not (MappingPaletteTab.Favorites or MappingPaletteTab.Recents or MappingPaletteTab.Hierarchy))
+            Screen.Prototypes.SetTab(tab, invoke: false);
+
+        // Search-by-ID uses the virtualized list instead of expanding huge folders.
+        Screen.Prototypes.SearchBar.Text = mapping.Prototype.ID;
+        OnSearch(new LineEditEventArgs(Screen.Prototypes.SearchBar, mapping.Prototype.ID));
+        PlacePrototype(mapping.Prototype, sampledDecal);
+    }
+    // Forge-Change-End
 }

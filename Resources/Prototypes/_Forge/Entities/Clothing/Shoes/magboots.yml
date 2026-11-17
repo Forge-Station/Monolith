@@ -6,17 +6,17 @@
   name: renegade magboots
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/magboots-renegade.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/magboots-renegade.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/magboots-renegade.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/magboots-renegade.rsi
   - type: Magboots
     magbootsAlert: MagbootsRenegade
 
 - type: alert
   id: MagbootsRenegade
   icons:
-  - sprite: Forge/Clothing/Shoes/Boots/magboots-renegade.rsi
+  - sprite: _Forge/Clothing/Shoes/Boots/magboots-renegade.rsi
     state: icon-on
   name: alerts-magboots-name
   description: alerts-magboots-desc
@@ -30,10 +30,10 @@
   suffix: Нексус
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/nexus_magboots.rsi
   - type: Magboots
     magbootsAlert: MagbootsSecurity
   - type: ClothingSpeedModifier
@@ -52,10 +52,10 @@
   description: Reverse-engineered magnetic boots that have a heavy magnetic pull and integrated thrusters. It can hold 0.75 L of gas.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/magboots_viper_group.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/magboots_viper_group.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/magboots_viper_group.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/magboots_viper_group.rsi
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
@@ -82,10 +82,10 @@
   description: One moment and you are already here.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/jetboots.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/jetboots.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/jetboots.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/jetboots.rsi
   - type: Magboots
     magbootsAlert: ActionToggleJetBoots
   - type: ClothingSpeedModifier
@@ -96,7 +96,7 @@
 - type: alert
   id: ActionToggleJetBoots
   icons:
-  - sprite: Forge/Clothing/Shoes/Boots/jetboots.rsi
+  - sprite: _Forge/Clothing/Shoes/Boots/jetboots.rsi
     state: icon
   name: alerts-magboots-name
   description: alerts-magboots-desc
@@ -108,10 +108,10 @@
   description: Magnetic boots with a unique design, which appear to be based on an improved model, as they have a lighter magnetic attraction.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/magboots-contractor.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/magboots-contractor.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/magboots-contractor.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/magboots-contractor.rsi
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 1
@@ -137,7 +137,7 @@
 - type: alert
   id: MagbootsContractor
   icons:
-  - sprite: Forge/Clothing/Shoes/Boots/magboots-contractor.rsi
+  - sprite: _Forge/Clothing/Shoes/Boots/magboots-contractor.rsi
     state: icon-on
   name: alerts-magboots-name
   description: alerts-magboots-desc
@@ -150,10 +150,10 @@
   components:
   - type: UnremovableClothing
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/advs_magboots_promax.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/advs_magboots_promax.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/advs_magboots_promax.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/advs_magboots_promax.rsi
     stripDelay: 120
     equipDelay: 120
   - type: FootstepModifier
@@ -173,10 +173,10 @@
   suffix: TTI
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/tti_magboots.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/tti_magboots.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/tti_magboots.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/tti_magboots.rsi
   - type: Magboots
     magbootsAlert: MagbootsSecurity
   - type: ClothingSpeedModifier
@@ -191,10 +191,10 @@
   suffix: UI
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Shoes/Boots/ui_magboots.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/ui_magboots.rsi
     state: icon
   - type: Clothing
-    sprite: Forge/Clothing/Shoes/Boots/ui_magboots.rsi
+    sprite: _Forge/Clothing/Shoes/Boots/ui_magboots.rsi
   - type: Magboots
     magbootsAlert: MagbootsSecurity
   - type: ClothingSpeedModifier

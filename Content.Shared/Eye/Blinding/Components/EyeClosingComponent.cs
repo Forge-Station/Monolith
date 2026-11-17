@@ -1,7 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Eye.Blinding.Components;
 
@@ -24,7 +24,7 @@ public sealed partial class EyeClosingComponent : Component
     /// <summary>
     /// The prototype to grant to enable eye-toggling action.
     /// </summary>
-    [DataField("eyeToggleAction", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("eyeToggleAction", customTypeSerializer: typeof(ProtoId<EntityPrototype>))]
     public string EyeToggleAction = "ActionToggleEyes";
 
     /// <summary>

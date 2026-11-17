@@ -1,0 +1,209 @@
+- type: entity
+  id: LobbyHubBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: LobbyHubInteractable
+  - type: LobbyHubBlocker
+
+- type: entity
+  id: LobbyHubSpawn
+  categories: [ HideSpawnMenu ]
+  name: lobby hub spawn
+  description: Where the player dummy appears. Place exactly one on the hub map.
+  components:
+  - type: Transform
+  - type: LobbyHubSpawn
+
+- type: entity
+  id: LobbyHubWallSolid
+  categories: [ HideSpawnMenu ]
+  name: wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Structures/Walls/solid.rsi
+    drawdepth: Walls
+  - type: IconSmooth
+    key: walls
+    base: solid
+  - type: LobbyHubBlocker
+
+- type: entity
+  id: LobbyHubLight
+  categories: [ HideSpawnMenu ]
+  name: light
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: Structures/Wallmounts/Lighting/light_tube.rsi
+    drawdepth: WallMountedItems
+    layers:
+    - state: base
+    - state: glow
+      shader: unshaded
+  - type: PointLight
+    radius: 8
+    energy: 2.2
+    color: "#FFE6C0"
+    castShadows: false
+
+- type: entity
+  parent: LobbyHubBase
+  id: LobbyHubCharacter
+  name: character terminal
+  description: Adjust your appearance, jobs, loadouts, and company.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    noRot: true
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: crew
+      shader: unshaded
+    - state: generic_keys
+      shader: unshaded
+  - type: LobbyHubInteractable
+    action: CharacterSetup
+    prompt: lobby-hub-prompt-character
+
+- type: entity
+  parent: LobbyHubBase
+  id: LobbyHubReady
+  name: boarding console
+  description: Mark yourself ready, or join the round in progress.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    noRot: true
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: shuttle
+      shader: unshaded
+    - state: generic_keys
+      shader: unshaded
+  - type: LobbyHubInteractable
+    action: ReadyOrJoin
+    prompt: lobby-hub-prompt-ready
+
+- type: entity
+  parent: LobbyHubBase
+  id: LobbyHubObserve
+  name: observation booth
+  description: Enter the round as a ghost.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    noRot: true
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: cameras
+      shader: unshaded
+    - state: generic_keys
+      shader: unshaded
+  - type: LobbyHubInteractable
+    action: Observe
+    prompt: lobby-hub-prompt-observe
+
+- type: entity
+  parent: LobbyHubBase
+  id: LobbyHubOptions
+  name: settings terminal
+  description: Game and client options.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    noRot: true
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: generic
+      shader: unshaded
+    - state: generic_keys
+      shader: unshaded
+  - type: LobbyHubInteractable
+    action: Options
+    prompt: lobby-hub-prompt-options
+
+- type: entity
+  parent: LobbyHubBase
+  id: LobbyHubAHelp
+  name: admin intercom
+  description: Contact the administration.
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/intercom.rsi
+    drawdepth: WallMountedItems
+    layers:
+    - state: base
+    - state: unshaded
+      shader: unshaded
+  - type: LobbyHubInteractable
+    action: AHelp
+    prompt: lobby-hub-prompt-ahelp
+
+- type: entity
+  parent: LobbyHubBase
+  id: LobbyHubSponsor
+  name: sponsorship kiosk
+  description: View sponsorship perks.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    noRot: true
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: id
+      shader: unshaded
+    - state: generic_keys
+      shader: unshaded
+  - type: LobbyHubInteractable
+    action: Sponsor
+    prompt: lobby-hub-prompt-sponsor
+
+- type: entity
+  parent: LobbyHubBase
+  id: LobbyHubVote
+  name: vote board
+  description: Call a map or gamemode vote.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/computers.rsi
+    noRot: true
+    layers:
+    - state: computer
+    - state: generic_keyboard
+    - state: request
+      shader: unshaded
+    - state: generic_keys
+      shader: unshaded
+  - type: LobbyHubInteractable
+    action: Vote
+    prompt: lobby-hub-prompt-vote
+
+- type: entity
+  parent: LobbyHubBase
+  id: LobbyHubLeave
+  name: departure airlock
+  description: Disconnect from the server.
+  components:
+  - type: Sprite
+    sprite: Forge/Structures/Doors/Airlocks/Standard/basic.rsi
+    noRot: true
+    layers:
+    - state: closed
+    - state: closed_unlit
+      shader: unshaded
+  - type: LobbyHubInteractable
+    action: Leave
+    prompt: lobby-hub-prompt-leave

@@ -1,7 +1,7 @@
 - type: vessel
   id: Beskriliy
   parent: BaseVessel
-  name: GSI Бескрылый
+  name: GSI «Бескрылый»
   description: Необычный древний истребитель со свалки
   price: 30000
   category: Medium

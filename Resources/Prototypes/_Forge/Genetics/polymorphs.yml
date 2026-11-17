@@ -1,0 +1,445 @@
+# New Frontiers - This file is licensed under AGPLv3
+# Copyright (c) 2026 New Frontiers Contributors
+# See AGPLv3.txt for details.
+
+- type: polymorph
+  id: GeneForcedMonkey
+  configuration:
+    entity: MobMonkey
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedCat
+  configuration:
+    entity: MobCat
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedMouse
+  configuration:
+    entity: MobMouse
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedPig
+  configuration:
+    entity: MobPig
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedCow
+  configuration:
+    entity: MobCow
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedGoat
+  configuration:
+    entity: MobGoat
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedFox
+  configuration:
+    entity: MobFox
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedChicken
+  configuration:
+    entity: MobChicken
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedDuck
+  configuration:
+    entity: MobDuckMallard
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedPenguin
+  configuration:
+    entity: MobPenguin
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedParrot
+  configuration:
+    entity: MobParrot
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedCrab
+  configuration:
+    entity: MobCrab
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedHamster
+  configuration:
+    entity: MobHamster
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedGoose
+  configuration:
+    entity: MobGoose
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedButterfly
+  configuration:
+    entity: MobButterfly
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedBat
+  configuration:
+    entity: MobBat
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedBee
+  configuration:
+    entity: MobBee
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedSpaceSpider
+  configuration:
+    entity: MobGeneSpaceSpider
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedSpaceDragon
+  configuration:
+    entity: MobGeneSpaceDragon
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedSpaceBear
+  configuration:
+    entity: MobGeneSpaceBear
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedSpaceCarp
+  configuration:
+    entity: MobGeneSpaceCarp
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedSpaceCobra
+  configuration:
+    entity: MobGeneSpaceCobra
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedGoliath
+  configuration:
+    entity: MobGeneGoliath
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedWatcher
+  configuration:
+    entity: MobGeneWatcher
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedXenoRunner
+  configuration:
+    entity: MobGeneXenoRunner
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome
+
+- type: polymorph
+  id: GeneForcedShark
+  configuration:
+    entity: MobGeneShark
+    forced: true
+    inventory: Drop
+    transferName: true
+    transferDamage: true
+    revertOnCrit: false
+    revertOnDeath: false
+    allowRepeatedMorphs: false
+    copiedComponents:
+    - LanguageKnowledge
+    - LanguageSpeaker
+    - Grammar
+    - Genome

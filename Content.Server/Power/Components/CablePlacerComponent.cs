@@ -1,5 +1,5 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 using Content.Shared.Power;
 
 namespace Content.Server.Power.Components
@@ -7,7 +7,7 @@ namespace Content.Server.Power.Components
     [RegisterComponent]
     public sealed partial class CablePlacerComponent : Component
     {
-        [DataField("cablePrototypeID", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
+        [DataField("cablePrototypeID", customTypeSerializer:typeof(ProtoId<EntityPrototype>))]
         public string? CablePrototypeId = "CableHV";
 
         [DataField("blockingWireType")]

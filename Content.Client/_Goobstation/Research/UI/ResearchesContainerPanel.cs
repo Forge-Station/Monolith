@@ -19,71 +19,196 @@ public sealed partial class ResearchesContainerPanel : LayoutContainer
 
     protected override void Draw(DrawingHandleScreen handle)
     {
-        // First draw all children (tech items)
-        base.Draw(handle);
-
-        // Then draw prerequisite lines
+        // Lines sit under the technology cards so icons stay readable.
         DrawPrerequisiteLines(handle);
+        base.Draw(handle);
     }
 
     private void DrawPrerequisiteLines(DrawingHandleScreen handle)
     {
-        foreach (var child in Children)
+        var technologies = Children.OfType<FancyResearchConsoleItem>().Where(item => !item.IsGhostPreview).ToList();
+        var rects = technologies.Select(GetTechRect).ToList();
+
+        foreach (var dependentItem in technologies)
         {
-            if (child is not FancyResearchConsoleItem dependentItem)
-                continue;
-
-            if (dependentItem.IsGhostPreview)
-                continue;
-
             if (dependentItem.Prototype.TechnologyPrerequisites.Count <= 0)
                 continue;
 
-            var prerequisiteItems = Children.Where(x => x is FancyResearchConsoleItem second &&
-                !second.IsGhostPreview &&
-                dependentItem.Prototype.TechnologyPrerequisites.Contains(second.Prototype.ID))
-                .Cast<FancyResearchConsoleItem>().ToList();
-
-            // Special handling for Tree line type - draw all prerequisites as a unified tree
-            if (dependentItem.Prototype.PrerequisiteLineType == PrerequisiteLineType.Tree && prerequisiteItems.Count > 1)
+            foreach (var prerequisiteItem in technologies)
             {
-                var lineColor = GetRefinedConnectionColor(prerequisiteItems.First(), dependentItem);
-                DrawTreeConnections(handle, prerequisiteItems, dependentItem, lineColor);
-            }
-            // Special handling for Spread line type - draw with anti-overlap logic
-            else if (dependentItem.Prototype.PrerequisiteLineType == PrerequisiteLineType.Spread && prerequisiteItems.Count > 1)
-            {
-                var lineColor = GetRefinedConnectionColor(prerequisiteItems.First(), dependentItem);
-                DrawSpreadConnections(handle, prerequisiteItems, dependentItem, lineColor);
-            }
-            else
-            {
-                // Regular individual connections for all other line types
-                foreach (var prerequisiteItem in prerequisiteItems)
-                {
-                    // Calculate connection points - use side connections for Spread type, center for others
-                    Vector2 startCoords, endCoords;
+                if (!dependentItem.Prototype.TechnologyPrerequisites.Contains(prerequisiteItem.Prototype.ID))
+                    continue;
 
-                    if (dependentItem.Prototype.PrerequisiteLineType == PrerequisiteLineType.Spread)
-                    {
-                        // For now, let's try using the same direction for both to see if that fixes the visual issue
-                        startCoords = GetTechSideConnection(prerequisiteItem, dependentItem);  // Exit point from prerequisite
-                        endCoords = GetTechSideConnection(dependentItem, prerequisiteItem);    // Entry point to dependent
-                    }
-                    else
-                    {
-                        startCoords = GetTechCenter(prerequisiteItem);
-                        endCoords = GetTechCenter(dependentItem);
-                    }
-
-                    // Determine line color based on dependent tech's availability
-                    var lineColor = GetRefinedConnectionColor(prerequisiteItem, dependentItem);
-
-                    // Draw connection based on the dependent tech's line type configuration
-                    DrawConfigurableConnection(handle, startCoords, endCoords, lineColor, dependentItem.Prototype.PrerequisiteLineType);
-                }
+                DrawChannelConnection(
+                    handle,
+                    prerequisiteItem,
+                    dependentItem,
+                    rects,
+                    GetRefinedConnectionColor(prerequisiteItem, dependentItem),
+                    prerequisiteItem.IsOnPath && dependentItem.IsOnPath);
             }
         }
+    }
+
+    /// <summary>
+    /// Orthogonal link that leaves one card and enters only its real prerequisite target.
+    /// The horizontal run stays in the gap between rows, so it does not skim neighboring cards.
+    /// </summary>
+    private void DrawChannelConnection(
+        DrawingHandleScreen handle,
+        FancyResearchConsoleItem prerequisite,
+        FancyResearchConsoleItem dependent,
+        List<UIBox2> rects,
+        Color color,
+        bool emphasis)
+    {
+        var from = GetTechRect(prerequisite);
+        var to = GetTechRect(dependent);
+        var sameRow = RangesOverlap(from.Top, from.Bottom, to.Top, to.Bottom, 8f);
+
+        Vector2 start;
+        Vector2 end;
+        float channelY;
+
+        if (sameRow)
+        {
+            start = new Vector2(from.Center.X, from.Top);
+            end = new Vector2(to.Center.X, to.Top);
+            channelY = Math.Min(from.Top, to.Top) - 18f;
+            for (var i = 0; i < 6 && !IsChannelClear(channelY, start.X, end.X, rects); i++)
+                channelY -= 10f;
+        }
+        else if (from.Center.Y <= to.Center.Y)
+        {
+            start = new Vector2(from.Center.X, from.Bottom);
+            end = new Vector2(to.Center.X, to.Top);
+            channelY = FindClearChannelY(start.Y, end.Y, start.X, end.X, rects);
+        }
+        else
+        {
+            start = new Vector2(from.Center.X, from.Top);
+            end = new Vector2(to.Center.X, to.Bottom);
+            channelY = FindClearChannelY(start.Y, end.Y, start.X, end.X, rects);
+        }
+
+        var bendA = new Vector2(start.X, channelY);
+        var bendB = new Vector2(end.X, channelY);
+        DrawVerticalRouted(handle, start.X, start.Y, channelY, rects, color, emphasis);
+        DrawCleanLine(handle, bendA, bendB, color, emphasis);
+        DrawVerticalRouted(handle, end.X, channelY, end.Y, rects, color, emphasis);
+    }
+
+    /// <summary>
+    /// Vertical run that steps around any technology card it would otherwise pass through.
+    /// </summary>
+    private void DrawVerticalRouted(
+        DrawingHandleScreen handle,
+        float x,
+        float yFrom,
+        float yTo,
+        List<UIBox2> rects,
+        Color color,
+        bool emphasis,
+        int depth = 0)
+    {
+        if (depth > 6 || Math.Abs(yTo - yFrom) < 1f)
+        {
+            DrawCleanLine(handle, new Vector2(x, yFrom), new Vector2(x, yTo), color, emphasis);
+            return;
+        }
+
+        if (!TryFindVerticalBlocker(x, yFrom, yTo, rects, out var blocker))
+        {
+            DrawCleanLine(handle, new Vector2(x, yFrom), new Vector2(x, yTo), color, emphasis);
+            return;
+        }
+
+        var goingDown = yTo > yFrom;
+        var edgeY = goingDown ? blocker.Top - 8f : blocker.Bottom + 8f;
+        var pastY = goingDown ? blocker.Bottom + 8f : blocker.Top - 8f;
+        var leavesSpan = goingDown
+            ? edgeY <= yFrom + 1f || edgeY >= yTo
+            : edgeY >= yFrom - 1f || edgeY <= yTo;
+        if (leavesSpan)
+        {
+            DrawCleanLine(handle, new Vector2(x, yFrom), new Vector2(x, yTo), color, emphasis);
+            return;
+        }
+
+        var sideX = x >= blocker.Center.X ? blocker.Right + 14f : blocker.Left - 14f;
+        DrawCleanLine(handle, new Vector2(x, yFrom), new Vector2(x, edgeY), color, emphasis);
+        DrawCleanLine(handle, new Vector2(x, edgeY), new Vector2(sideX, edgeY), color, emphasis);
+        DrawCleanLine(handle, new Vector2(sideX, edgeY), new Vector2(sideX, pastY), color, emphasis);
+        DrawCleanLine(handle, new Vector2(sideX, pastY), new Vector2(x, pastY), color, emphasis);
+        DrawVerticalRouted(handle, x, pastY, yTo, rects, color, emphasis, depth + 1);
+    }
+
+    private static bool TryFindVerticalBlocker(float x, float yFrom, float yTo, List<UIBox2> rects, out UIBox2 blocker)
+    {
+        var yMin = Math.Min(yFrom, yTo);
+        var yMax = Math.Max(yFrom, yTo);
+        foreach (var rect in rects)
+        {
+            if (x <= rect.Left + 2f || x >= rect.Right - 2f)
+                continue;
+
+            if (rect.Bottom <= yMin + 4f || rect.Top >= yMax - 4f)
+                continue;
+
+            blocker = rect;
+            return true;
+        }
+
+        blocker = default;
+        return false;
+    }
+
+    /// <summary>
+    /// Picks a horizontal channel between the two anchors that does not cut through other technology cards.
+    /// </summary>
+    private static float FindClearChannelY(float fromY, float toY, float x1, float x2, List<UIBox2> rects)
+    {
+        var minY = Math.Min(fromY, toY);
+        var maxY = Math.Max(fromY, toY);
+        var span = maxY - minY;
+        if (span < 12f)
+            return (minY + maxY) / 2f;
+
+        // Search from the target backwards so the last vertical segment is a short stub into that card only.
+        var targetY = Math.Abs(toY - maxY) < 0.5f ? maxY : minY;
+        var sourceY = targetY == maxY ? minY : maxY;
+        for (var step = 1; step <= 8; step++)
+        {
+            var y = targetY + (sourceY - targetY) * (step / 9f);
+            if (IsChannelClear(y, x1, x2, rects))
+                return y;
+        }
+
+        return targetY + (sourceY - targetY) * 0.5f;
+    }
+
+    private static bool IsChannelClear(float y, float x1, float x2, List<UIBox2> rects)
+    {
+        var left = Math.Min(x1, x2);
+        var right = Math.Max(x1, x2);
+
+        foreach (var rect in rects)
+        {
+            if (y <= rect.Top + 3f || y >= rect.Bottom - 3f)
+                continue;
+
+            if (right < rect.Left || left > rect.Right)
+                continue;
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool RangesOverlap(float aMin, float aMax, float bMin, float bMax, float slack)
+    {
+        return aMin < bMax - slack && bMin < aMax - slack;
     }
 
     /// <summary>
@@ -342,7 +467,13 @@ public sealed partial class ResearchesContainerPanel : LayoutContainer
     /// <summary>
     /// Draw connection based on the configured line type
     /// </summary>
-    private void DrawConfigurableConnection(DrawingHandleScreen handle, Vector2 start, Vector2 end, Color color, PrerequisiteLineType lineType)
+    private void DrawConfigurableConnection(
+        DrawingHandleScreen handle,
+        Vector2 start,
+        Vector2 end,
+        Color color,
+        PrerequisiteLineType lineType,
+        bool emphasis = false)
     {
         var delta = end - start;
         var distance = delta.Length();
@@ -354,11 +485,11 @@ public sealed partial class ResearchesContainerPanel : LayoutContainer
         switch (lineType)
         {
             case PrerequisiteLineType.LShape:
-                DrawLShapeConnection(handle, start, end, delta, color);
+                DrawLShapeConnection(handle, start, end, delta, color, emphasis);
                 break;
 
             case PrerequisiteLineType.Diagonal:
-                DrawDiagonalConnection(handle, start, end, color);
+                DrawCleanLine(handle, start, end, color, emphasis);
                 break;
 
             case PrerequisiteLineType.Tree:
@@ -370,8 +501,7 @@ public sealed partial class ResearchesContainerPanel : LayoutContainer
                 break;
 
             default:
-                // Fallback to L-shape
-                DrawLShapeConnection(handle, start, end, delta, color);
+                DrawLShapeConnection(handle, start, end, delta, color, emphasis);
                 break;
         }
     }
@@ -379,49 +509,28 @@ public sealed partial class ResearchesContainerPanel : LayoutContainer
     /// <summary>
     /// Draw L-shaped connection (default clean style)
     /// </summary>
-    private void DrawLShapeConnection(DrawingHandleScreen handle, Vector2 start, Vector2 end, Vector2 delta, Color color)
+    private void DrawLShapeConnection(DrawingHandleScreen handle, Vector2 start, Vector2 end, Vector2 delta, Color color, bool emphasis = false)
     {
         const float straightLineThreshold = 15f;
-        const float directDiagonalThreshold = 120f;
 
-        // Check if it's a direct line (same row or column)
-        if (Math.Abs(delta.X) < straightLineThreshold) // Same column - direct vertical
-        {
-            DrawCleanLine(handle, start, end, color);
-        }
-        else if (Math.Abs(delta.Y) < straightLineThreshold) // Same row - direct horizontal
-        {
-            DrawCleanLine(handle, start, end, color);
-        }
-        else if (delta.Length() < directDiagonalThreshold) // Close diagonal - use direct line
-        {
-            DrawCleanLine(handle, start, end, color);
-        }
-        else // Longer distance - use L-shape
-        {
-            DrawSimpleLShape(handle, start, end, delta, color);
-        }
+        if (Math.Abs(delta.X) < straightLineThreshold || Math.Abs(delta.Y) < straightLineThreshold)
+            DrawCleanLine(handle, start, end, color, emphasis);
+        else
+            DrawSimpleLShape(handle, start, end, delta, color, emphasis);
     }
 
     /// <summary>
     /// Draw simple L-shaped path
     /// </summary>
-    private void DrawSimpleLShape(DrawingHandleScreen handle, Vector2 start, Vector2 end, Vector2 delta, Color color)
+    private void DrawSimpleLShape(DrawingHandleScreen handle, Vector2 start, Vector2 end, Vector2 delta, Color color, bool emphasis = false)
     {
-        Vector2 corner;
+        // Vertical trees read better when the bend stays on the child's column.
+        var corner = Math.Abs(delta.Y) >= Math.Abs(delta.X)
+            ? new Vector2(start.X, end.Y)
+            : new Vector2(end.X, start.Y);
 
-        // Simple corner selection - prefer horizontal-first for better readability
-        if (Math.Abs(delta.X) > Math.Abs(delta.Y))
-        {
-            corner = new Vector2(end.X, start.Y);
-        }
-        else
-        {
-            corner = new Vector2(start.X, end.Y);
-        }
-
-        DrawCleanLine(handle, start, corner, color);
-        DrawCleanLine(handle, corner, end, color);
+        DrawCleanLine(handle, start, corner, color, emphasis);
+        DrawCleanLine(handle, corner, end, color, emphasis);
     }
 
     /// <summary>
@@ -490,21 +599,29 @@ public sealed partial class ResearchesContainerPanel : LayoutContainer
     /// </summary>
     private Color GetRefinedConnectionColor(FancyResearchConsoleItem prerequisite, FancyResearchConsoleItem dependent)
     {
+        if (prerequisite.IsOnPath && dependent.IsOnPath)
+            return Color.FromHex("#7AD7FF");
+
+        if (prerequisite.IsDimmed || dependent.IsDimmed)
+            return new Color(0.55f, 0.2f, 0.2f, 0.22f);
+
         return ResearchColorScheme.GetConnectionColor(dependent.Availability);
     }
 
     /// <summary>
     /// Draw a clean line with subtle thickness
     /// </summary>
-    private void DrawCleanLine(DrawingHandleScreen handle, Vector2 start, Vector2 end, Color color)
+    private void DrawCleanLine(DrawingHandleScreen handle, Vector2 start, Vector2 end, Color color, bool emphasis = false)
     {
         handle.DrawLine(start, end, color);
 
-        // Add subtle thickness
         var direction = (end - start).Normalized();
-        var perpendicular = new Vector2(-direction.Y, direction.X) * 0.5f;
+        if (direction.LengthSquared() < 0.001f)
+            return;
 
-        var thicknessColor = new Color(color.R, color.G, color.B, color.A * 0.6f);
+        var spread = emphasis ? 1.35f : 0.5f;
+        var perpendicular = new Vector2(-direction.Y, direction.X) * spread;
+        var thicknessColor = new Color(color.R, color.G, color.B, color.A * (emphasis ? 0.85f : 0.6f));
         handle.DrawLine(start + perpendicular, end + perpendicular, thicknessColor);
         handle.DrawLine(start - perpendicular, end - perpendicular, thicknessColor);
     }

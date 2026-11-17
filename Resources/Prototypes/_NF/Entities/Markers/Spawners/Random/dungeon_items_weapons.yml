@@ -415,11 +415,11 @@
     - WeaponCaseLongAtreidesExpedition
     - WeaponCaseLongLauncherRocketExpedition
     - WeaponCaseLongLauncherChinaLake
-    - WeaponCaseLongLightMachineGunL6
+    - WeaponCaseHeavyLightMachineGunL6 # Forge-change WeaponCaseLong->WeaponCaseHeavy
     - WeaponCaseHeavyAsmgtExpeditions
     - WeaponCaseLongXrayCannonExpedition
     - WeaponCaseLongJackdaw
-    - WeaponCaseLongHristovExpedition
+    - WeaponCaseHeavyHristovExpedition # Forge-change WeaponCaseLong->WeaponCaseHeavy
     - WeaponCaseMr8c # Mono
     - WeaponCaseMla79 # Mono
     chance: 1.0

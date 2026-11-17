@@ -3,7 +3,7 @@ using Content.Shared._NF.Atmos.Systems;
 
 namespace Content.Shared._NF.Atmos.Components;
 
-[RegisterComponent, Access(typeof(SharedGasDepositSystem))]
+[RegisterComponent, Access(typeof(SharedGasDepositSystem), typeof(Content.Shared._Forge.Atmos.Systems.SharedGasCloudSystem))]
 public sealed partial class GasDepositComponent : Component
 {
     /// <summary>

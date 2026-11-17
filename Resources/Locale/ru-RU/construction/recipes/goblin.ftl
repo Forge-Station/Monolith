@@ -44,6 +44,10 @@ construction-recipe-n-f-goblin-made-remote-signaller-desc = { ent-NFGoblinMadeRe
 construction-recipe-n-f-goblin-made-lantern = { ent-NFGoblinMadeLantern }
 construction-recipe-n-f-goblin-made-lantern-desc = { ent-NFGoblinMadeLantern.desc }
 
+# Weapon
+construction-recipe-crossbow-goblin-hand = { ent-CrossbowGoblinHand }
+construction-recipe-crossbow-goblin-hand-desc = { ent-CrossbowGoblinHand.desc }
+
 # Power/Electrical
 construction-recipe-n-f-goblin-made-power-cell = { ent-NFGoblinMadePowerCell }
 construction-recipe-n-f-goblin-made-power-cell-desc = { ent-NFGoblinMadePowerCell.desc }

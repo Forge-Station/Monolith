@@ -47,6 +47,14 @@ namespace Content.Server.Database
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
         public DbSet<CompanyMember> CompanyMembers { get; set; } = null!;
+        public DbSet<CompanyRole> CompanyRoles { get; set; } = null!;
+        public DbSet<CompanyBankAccount> CompanyBankAccounts { get; set; } = null!;
+        public DbSet<CompanyRelation> CompanyRelations { get; set; } = null!;
+        public DbSet<CompanyInvitation> CompanyInvitations { get; set; } = null!;
+        public DbSet<CompanyLog> CompanyLogs { get; set; } = null!;
+        public DbSet<CompanyBulletin> CompanyBulletins { get; set; } = null!;
+        public DbSet<HangarVessel> HangarVessels { get; set; } = null!;
+        public DbSet<HangarVesselCrew> HangarVesselCrew { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -380,6 +388,62 @@ namespace Content.Server.Database
                 .HasForeignKey(w => w.PlayerUserId)
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<HangarVessel>()
+                .HasOne(w => w.Player)
+                .WithMany(p => p.HangarVessels)
+                .HasForeignKey(w => w.PlayerUserId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<HangarVessel>()
+                .HasIndex(w => new { w.PlayerUserId, w.CharacterSlot });
+
+            modelBuilder.Entity<HangarVesselCrew>()
+                .HasKey(member => new { member.VesselId, member.PlayerUserId, member.CharacterSlot });
+
+            modelBuilder.Entity<HangarVesselCrew>()
+                .HasOne(member => member.Vessel)
+                .WithMany(vessel => vessel.Crew)
+                .HasForeignKey(member => member.VesselId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<HangarVesselCrew>()
+                .HasOne(member => member.Player)
+                .WithMany(player => player.HangarCrewMemberships)
+                .HasForeignKey(member => member.PlayerUserId)
+                .HasPrincipalKey(player => player.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Forge: company organization
+            modelBuilder.Entity<CompanyRole>()
+                .HasIndex(r => new { r.CompanyId, r.Name })
+                .IsUnique();
+
+            modelBuilder.Entity<CompanyBankAccount>()
+                .HasKey(a => a.CompanyId);
+
+            modelBuilder.Entity<CompanyInvitation>(e =>
+            {
+                e.HasOne(i => i.TargetPlayer)
+                    .WithMany()
+                    .HasForeignKey(i => i.TargetUserId)
+                    .HasPrincipalKey(p => p.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                // Avoid multiple cascade paths onto player.
+                e.HasOne(i => i.FromPlayer)
+                    .WithMany()
+                    .HasForeignKey(i => i.FromUserId)
+                    .HasPrincipalKey(p => p.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                e.HasIndex(i => new { i.CompanyId, i.TargetUserId, i.Status });
+            });
+
+            modelBuilder.Entity<CompanyLog>()
+                .HasIndex(l => new { l.CompanyId, l.Timestamp });
+
+            modelBuilder.Entity<CompanyBulletin>()
+                .HasKey(b => b.CompanyId);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -617,6 +681,8 @@ namespace Content.Server.Database
         public List<ServerRoleBan> AdminServerRoleBansLastEdited { get; set; } = null!;
         public List<RoleWhitelist> JobWhitelists { get; set; } = null!;
         public List<CompanyMember> CompanyMembers { get; set; } = null!; // Mono
+        public List<HangarVessel> HangarVessels { get; set; } = null!; // Forge
+        public List<HangarVesselCrew> HangarCrewMemberships { get; set; } = null!; // Forge
     }
 
     [Table("whitelist")]
@@ -1356,16 +1422,147 @@ namespace Content.Server.Database
     }
 
     // Mono-Start
-    [PrimaryKey(nameof(PlayerUserId), nameof(CompanyId))]
+    [PrimaryKey(nameof(PlayerUserId), nameof(CharacterSlot))]
     public class CompanyMember
     {
         [Required, ForeignKey("Player")]
         public Guid PlayerUserId { get; set; }
         public Player Player { get; set; } = default!;
+
+        /// <summary>
+        /// Character slot this membership is bound to. One company per character.
+        /// </summary>
+        public int CharacterSlot { get; set; }
+
+        [Required]
+        public string CharacterName { get; set; } = string.Empty;
+
         public bool Owner { get; set; } = false;
 
         [Required]
         public string CompanyId { get; set; } = default!;
+
+        /// <summary>
+        /// Assigned company role. Null means default member role.
+        /// </summary>
+        public Guid? RoleId { get; set; }
     }
     // Mono-End
+
+    /// <summary>
+    /// Character ownership metadata for a file-backed hangar shuttle.
+    /// The serialized grid itself is deliberately not stored in the database.
+    /// </summary>
+    public class HangarVessel
+    {
+        [Key]
+        public Guid VesselId { get; set; }
+
+        [Required, ForeignKey("Player")]
+        public Guid PlayerUserId { get; set; }
+        public Player Player { get; set; } = default!;
+
+        public int CharacterSlot { get; set; }
+        public string? VesselPrototypeId { get; set; }
+
+        [Required]
+        public string CustomName { get; set; } = string.Empty;
+
+        [Required]
+        public string SavePath { get; set; } = string.Empty;
+
+        public int State { get; set; }
+        public DateTime LastStored { get; set; }
+        public List<HangarVesselCrew> Crew { get; set; } = null!;
+    }
+
+    public class HangarVesselCrew
+    {
+        public Guid VesselId { get; set; }
+        public HangarVessel Vessel { get; set; } = default!;
+
+        public Guid PlayerUserId { get; set; }
+        public Player Player { get; set; } = default!;
+
+        public int CharacterSlot { get; set; }
+
+        [Required]
+        public string CharacterName { get; set; } = string.Empty;
+    }
+
+    // Forge-Start: company organization
+    public class CompanyRole
+    {
+        public Guid Id { get; set; }
+        [Required]
+        public string CompanyId { get; set; } = default!;
+        [Required]
+        public string Name { get; set; } = default!;
+        /// <summary>
+        /// Bitfield of <c>CompanyPermission</c>.
+        /// </summary>
+        public long Permissions { get; set; }
+        /// <summary>
+        /// <c>CompanyAccessTier</c> as int: 0 None, 1 Low, 2 Medium, 3 High.
+        /// </summary>
+        public int AccessTier { get; set; } = 1;
+        public bool IsDefault { get; set; }
+    }
+
+    public class CompanyBankAccount
+    {
+        [Required]
+        public string CompanyId { get; set; } = default!;
+        public int Balance { get; set; }
+    }
+
+    [PrimaryKey(nameof(CompanyAId), nameof(CompanyBId))]
+    public class CompanyRelation
+    {
+        [Required]
+        public string CompanyAId { get; set; } = default!;
+        [Required]
+        public string CompanyBId { get; set; } = default!;
+        /// <summary>
+        /// <c>CompanyRelationKind</c>: 1 War, 2 Alliance.
+        /// </summary>
+        public int RelationType { get; set; }
+    }
+
+    public class CompanyInvitation
+    {
+        public Guid Id { get; set; }
+        [Required]
+        public string CompanyId { get; set; } = default!;
+        public Guid TargetUserId { get; set; }
+        public Player TargetPlayer { get; set; } = default!;
+        public Guid FromUserId { get; set; }
+        public Player FromPlayer { get; set; } = default!;
+        public DateTime CreatedAt { get; set; }
+        /// <summary>
+        /// 0 Pending, 1 Accepted, 2 Declined, 3 Cancelled.
+        /// </summary>
+        public int Status { get; set; }
+    }
+
+    public class CompanyLog
+    {
+        public long Id { get; set; }
+        [Required]
+        public string CompanyId { get; set; } = default!;
+        public DateTime Timestamp { get; set; }
+        public int LogType { get; set; }
+        [Required]
+        public string Message { get; set; } = default!;
+        public Guid? ActorUserId { get; set; }
+    }
+
+    public class CompanyBulletin
+    {
+        [Required]
+        public string CompanyId { get; set; } = default!;
+        [Required]
+        public string Text { get; set; } = string.Empty;
+    }
+    // Forge-End
 }

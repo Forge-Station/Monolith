@@ -111,6 +111,20 @@
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
   fizziness: 0
+  # Forge-change-Start
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:GenericStatusEffect
+        key: Drowsiness
+        time: 1.0
+        type: Remove
+      - !type:AdjustReagent
+        reagent: Lactozit
+        amount: 0.01
+  # Forge-change-End
 
 - type: reagent
   id: LemonLime

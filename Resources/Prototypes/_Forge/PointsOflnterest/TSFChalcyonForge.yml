@@ -18,6 +18,7 @@
   maximumDistance: 5500 # Mono
   spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ]
   spawnGroup: Required
+  spawnSectors: [ tsf ]
   placementTags: [ TSF ] # Forge-Change
   minDistanceFromTags: # Forge-Change
     Renegates: 5000
@@ -94,6 +95,7 @@
   maximumDistance: 5500
   spawnGamePreset: [ MonoRogueTSFHyperwar ]
   spawnGroup: Required
+  spawnSectors: [ tsf ]
   gridPath: /Maps/_Mono/POI/tsfmchalcyon_hw.yml
   addComponents:
   - type: IFF

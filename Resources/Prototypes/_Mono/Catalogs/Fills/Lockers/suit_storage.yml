@@ -60,7 +60,7 @@
     contents:
     - id: OxygenTankFilled
     - id: NitrogenTankFilled
-    - id: ClothingOuterHardsuitM82c
+    - id: ClothingOuterHardsuitTSFMCM82c # Forge Change
     - id: JetpackNfsdFilled
     - id: ClothingShoesBootsMagSecurity
   - type: AccessReader
@@ -75,7 +75,7 @@
     contents:
     - id: OxygenTankFilled
     - id: NitrogenTankFilled
-    - id: ClothingOuterHardsuitM82b
+    - id: ClothingOuterHardsuitTSFMCM82b # Forge Change
     - id: JetpackNfsdFilled
     - id: ClothingShoesBootsMagSecurity
   - type: AccessReader
@@ -90,7 +90,7 @@
     contents:
     - id: OxygenTankFilled
     - id: NitrogenTankFilled
-    - id: ClothingOuterHardsuitM86
+    - id: ClothingOuterHardsuitTSFMCM86 # Forge-change
     - id: JetpackNfsdFilled
     - id: ClothingShoesBootsMagSecurity
   - type: AccessReader
@@ -106,7 +106,7 @@
     contents:
         - id: OxygenTankFilled
         - id: NitrogenTankFilled
-        - id: ClothingOuterHardsuitNfsdSheriff # Frontier
+        - id: ClothingOuterHardsuitTSFMCM86C # Forge-change
         - id: ClothingMaskGasSheriff
         - id: JetpackNfsdFilled
         - id: ClothingShoesBootsMagSecurity # Frontier

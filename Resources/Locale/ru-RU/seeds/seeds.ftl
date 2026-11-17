@@ -141,3 +141,5 @@ seeds-cherry-name = Вишня
 seeds-cherry-display-name = вишневое дерево
 seeds-anomaly-berry-name = Аномальные ягода
 seeds-anomaly-berry-display-name = куст аномальных ягод
+seeds-bluespacetomato-name = блюспейс томат
+seeds-bluespacetomato-display-name = куст блюспейс томата

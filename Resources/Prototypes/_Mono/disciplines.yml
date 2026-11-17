@@ -82,7 +82,7 @@
   name: research-discipline-ullman
   color: "#52326A"
   icon:
-    sprite: Forge/Interface/Misc/company_icons.rsi
+    sprite: _Forge/Interface/Misc/company_icons.rsi
     state: ullman
   tierPrerequisites:
     1: 0

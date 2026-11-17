@@ -1,0 +1,57 @@
+- type: entity
+  parent: GasMiningDrill
+  id: GasCloudSiphon
+  name: gas cloud siphon
+  description: A wide-intake siphon that pulls gas from a nearby cloud into a pipe. Powered by a dedicated siphon accumulator — not the grid.
+  components:
+  - type: GasCloudSiphon
+  - type: GasDepositExtractor
+    extractionRate: 75
+    port: outlet
+  - type: ApcPowerReceiver
+    powerLoad: 2500
+  - type: DeviceNetwork
+    deviceNetId: AtmosDevices
+    receiveFrequencyId: AtmosMonitor
+    transmitFrequencyId: AtmosMonitor
+    sendBroadcastAttemptEvent: true
+    examinableAddress: true
+    prefix: device-address-prefix-gas-siphon
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      cell_slot: !type:ContainerSlot
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+    fitsInCharger: false
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: gas-cloud-siphon-slot-cell
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+          - GasCloudSiphonCell
+        startingItem: GasCloudSiphonCell
+  - type: PowerCellDraw
+    drawRate: 12
+    enabled: false
+  - type: Sprite
+    sprite: _Forge/Structures/Piping/Atmospherics/gas_cloud_siphon.rsi
+    snapCardinals: true
+    granularLayersRendering: true
+    layers:
+      - state: pipe
+        map: [ "enum.PipeVisualLayers.Pipe" ]
+        renderingStrategy: Default
+      - state: drill-off
+        map: [ "drill" ]
+      - state: base
+      - state: base-powered
+        shader: unshaded
+        map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+      - state: drill-empty-unlit
+        shader: unshaded
+        map: [ "light" ]

@@ -4,9 +4,9 @@
   name: Dr. Ist cigpack
   components:
   - type: Sprite
-    sprite: Forge/Objects/Specific/Medical/fakecig.rsi
+    sprite: _Forge/Objects/Specific/Medical/fakecig.rsi
   - type: Item
-    sprite: Forge/Objects/Specific/Medical/fakecig.rsi
+    sprite: _Forge/Objects/Specific/Medical/fakecig.rsi
   - type: StorageFill
     contents:
     - id: FakeCigarette
@@ -25,3 +25,13 @@
         reagents:
           - ReagentId: Tabex
             Quantity: 10
+
+- type: entity
+  id: SyringeCaseMiniSyringeFilled
+  parent: SyringeCase
+  suffix: Filled, MiniSyringe
+  components:
+  - type: StorageFill
+    contents:
+    - id: MiniSyringe
+      amount: 8

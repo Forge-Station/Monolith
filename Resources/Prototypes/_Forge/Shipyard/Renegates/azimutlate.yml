@@ -1,7 +1,7 @@
 - type: vessel
   id: azimutlate
   parent: BaseVessel
-  name: Азимут-Лайт
+  name: «Азимут-Лайт»
   description: Линейный фрегат, лайт Версия азимута,слабее но не значит хуже . Рекомендованный состав 3-6 человек
   price: 330000
   purchasable: false

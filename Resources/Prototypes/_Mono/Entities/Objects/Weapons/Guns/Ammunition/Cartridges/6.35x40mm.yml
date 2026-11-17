@@ -53,3 +53,80 @@
         map: [ "enum.AmmoVisualLayers.Tip" ]
         color: "#dbdbdb"
 
+# Forge-change-start
+- type: entity
+  id: Cartridge635x40mmCaselessIncendiary
+  name: cartridge (6.35x40mm Caseless incendiary)
+  parent: BaseCartridge635x40mmCaseless
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet635x40mmCaselessIncendiary
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#ff6e52"
+
+- type: entity
+  id: Cartridge635x40mmCaselessUranium
+  name: cartridge (6.35x40mm Caseless uranium)
+  parent: BaseCartridge635x40mmCaseless
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet635x40mmCaselessUranium
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#65fe08"
+
+- type: entity
+  id: Cartridge635x40mmCaselessHP
+  name: cartridge (6.35x40mm Caseless hollow-point)
+  parent: BaseCartridge635x40mmCaseless
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet635x40mmCaselessHP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#90EE90"
+
+- type: entity
+  id: Cartridge635x40mmCaselessRIP
+  name: cartridge (6.35x40mm Caseless RIP)
+  parent: BaseCartridge635x40mmCaseless
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet635x40mmCaselessRIP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#C04000"
+
+- type: entity
+  id: Cartridge635x40mmCaselessPlasteelAP
+  name: cartridge (6.35x40mm Caseless AP)
+  parent: BaseCartridge635x40mmCaseless
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet635x40mmCaselessPlasteelAP
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        map: [ "enum.AmmoVisualLayers.Tip" ]
+        color: "#888888"
+# Forge-change-end
+

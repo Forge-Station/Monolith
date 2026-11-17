@@ -21,6 +21,10 @@ namespace Content.Client.Lobby.UI
             IoCManager.InjectDependencies(this);
             SetAnchorPreset(MainContainer, LayoutPreset.Wide);
             SetAnchorPreset(Background, LayoutPreset.Wide);
+            SetAnchorPreset(HubViewport, LayoutPreset.Wide);
+            HubViewport.AlwaysRender = true;
+            SetAnchorPreset(HubStartTimePanel, LayoutPreset.TopWide);
+            SetAnchorPreset(HubPromptPanel, LayoutPreset.BottomWide);
 
             LobbySong.SetMarkup(Loc.GetString("lobby-state-song-no-song-text"));
 
@@ -30,7 +34,7 @@ namespace Content.Client.Lobby.UI
         }
 
         // Forge-Change: open (or focus) the sponsorship window.
-        private void OpenSponsorWindow()
+        public void OpenSponsorWindow()
         {
             // A closed window is removed from its parent (IsOpen == false) but not disposed,
             // so only focus it when it is actually open; otherwise (re)create it.
@@ -42,6 +46,18 @@ namespace Content.Client.Lobby.UI
 
             _sponsorWindow = new SponsorWindow();
             _sponsorWindow.OpenCentered();
+        }
+
+        public void SetHubMode(bool enabled)
+        {
+            HubViewport.Visible = enabled;
+            HubPrompt.Visible = enabled;
+            HubPromptPanel.Visible = enabled;
+            HubStartTime.Visible = enabled;
+            HubStartTimePanel.Visible = enabled;
+            Background.Visible = !enabled;
+            CharacterPreview.Visible = !enabled;
+            LeftSideTop.Visible = !enabled;
         }
 
         public void SwitchState(LobbyGuiState state)

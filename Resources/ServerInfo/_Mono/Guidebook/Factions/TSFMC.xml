@@ -60,9 +60,9 @@
   - While their weapons are powerful, they can each be countered through specific items - vary your loadout or stay with your squad.
 
   <Box>
-    <GuideEntityEmbed Entity="ClothingOuterHardsuitM82c"/>
-    <GuideEntityEmbed Entity="ClothingOuterHardsuitM86"/>
-    <GuideEntityEmbed Entity="ClothingOuterHardsuitNfsdExperimental"/>
+    <GuideEntityEmbed Entity="ClothingOuterHardsuitTSFMCM82c"/> # Forge-change
+    <GuideEntityEmbed Entity="ClothingOuterHardsuitTSFMCM86"/> # Forge-change
+    <GuideEntityEmbed Entity="ClothingOuterHardsuitTSFMCEnergyShield"/> # Forge-change
   </Box>
 
   The [color=cyan]TSFMC[/color] use heavy power armor for boarding operations, with more advanced equipment sacrificing base statistics for additional combat features.

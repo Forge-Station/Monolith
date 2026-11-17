@@ -26,3 +26,11 @@ ent-VendingMachineCompanyHME = автомат снабжения HME
 ent-VendingMachineNanotrasen = вендомат NT
     .desc = Здесь есть (почти) всё, что может понадобится представителю НТ. Кажется, его только недавно покрасили.
     .suffix = NT, Централ
+ent-VendingMachineFlatpackVendRadio = Популярный Упак-О-Мат
+    .desc = В нем есть все для того чтобы стать популярным.
+ent-VendingMachineCompanyCL = вендомат Chun Logistics
+    .desc = Продаёт различные вещи компании Chun Logistics.
+    .suffix = Chun Logistics
+
+ent-VendingMachineMedicalTTI = ТТИ-Мед
+    .desc = Медицинский вендор компании «Trauma Team I.». Снабжает проверенными медицинскими препаратами и имплантами.

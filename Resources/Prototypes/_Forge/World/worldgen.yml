@@ -1,0 +1,43 @@
+- type: worldgenConfig
+  id: ForgeWorldgenGreen
+  components:
+  - type: WorldController
+  - type: BiomeSelection
+    biomes:
+    - MonoEmptyFallback
+    - NFAsteroidsNear
+    - ForgeEmptyFallback
+    - ForgeAsteroidsGreen
+
+- type: worldgenConfig
+  id: ForgeWorldgenYellow
+  components:
+  - type: WorldController
+  - type: BiomeSelection
+    biomes:
+    - MonoEmptyFallback
+    - MonoWorldgenAsteroidRing9km
+    - ForgeEmptyFallback
+    - ForgeAsteroidsYellow
+
+- type: worldgenConfig
+  id: ForgeWorldgenRed
+  components:
+  - type: WorldController
+  - type: BiomeSelection
+    biomes:
+    - MonoEmptyFallback
+    - MonoWildsCore
+    - ForgeEmptyFallback
+    - ForgeAsteroidsRed
+
+- type: worldgenConfig
+  id: ForgeWorldgenBlack
+  components:
+  - type: WorldController
+  - type: BiomeSelection
+    biomes:
+    - MonoEmptyFallback
+    - MonoWorldgenHyperwarAsteroidRing
+    - ForgeEmptyFallback
+    - ForgeAsteroidsBlack

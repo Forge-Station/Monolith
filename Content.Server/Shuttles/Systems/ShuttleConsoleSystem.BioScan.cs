@@ -78,7 +78,7 @@ public sealed partial class ShuttleConsoleSystem
         out EntityUid targetGrid,
         out ShuttleBioScanStatus failStatus)
     {
-        if (!_mapManager.TryFindGridAt(mapCoordinates, out targetGrid, out _))
+        if (!_mapSystem.TryFindGridAt(mapCoordinates, out targetGrid, out _))
         {
             failStatus = ShuttleBioScanStatus.InvalidTarget;
             return false;

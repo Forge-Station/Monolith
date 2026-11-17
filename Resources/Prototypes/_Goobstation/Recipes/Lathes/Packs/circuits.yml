@@ -9,3 +9,12 @@
   - ConstructorCircuitboard
   - StorageBinCircuitboard
   - InteractorCircuitboard
+
+- type: latheRecipePack
+  id: ServiceBoardsGoob 
+  recipes:
+  - VinylPlayerCircuitboard
+  - StationRadioServerCircuitboard
+  - StationRadioRigCircuitboard
+  - StationRadioCircuitboard
+  - StationRadioUwUCircuitboard #Forge-Change-UwU

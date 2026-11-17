@@ -1,4 +1,5 @@
 using System.Text;
+using Content.Shared._EinsteinEngines.Language.Components; // Forge-Change
 using Content.Shared.GameTicking;
 using Robust.Shared.Prototypes;
 
@@ -9,19 +10,16 @@ public abstract partial class SharedLanguageSystem : EntitySystem
     /// <summary>
     ///     The language used as a fallback in cases where an entity suddenly becomes a Language Speaker (e.g. the usage of make-sentient).
     /// </summary>
-    [ValidatePrototypeId<LanguagePrototype>]
     public static readonly string FallbackLanguagePrototype = "TauCetiBasic";
 
     /// <summary>
     ///     The language whose speakers are assumed to understand and speak every language. Should never be added directly.
     /// </summary>
-    [ValidatePrototypeId<LanguagePrototype>]
     public static readonly string UniversalPrototype = "Universal";
 
     /// <summary>
     ///     Language used for Xenoglossy, should have same effects as Universal but with different language prototype.
     /// </summary>
-    [ValidatePrototypeId<LanguagePrototype>]
     public static readonly string PsychomanticPrototype = "Psychomantic";
 
     /// <summary>
@@ -59,6 +57,18 @@ public abstract partial class SharedLanguageSystem : EntitySystem
         language.Obfuscation.Obfuscate(builder, message, this);
 
         return builder.ToString();
+    }
+
+    /// <summary>
+    ///     Whether the entity currently understands the given language.
+    /// </summary>
+    // Forge-Change: shared so client paper/UI can obfuscate unknown languages
+    public virtual bool CanUnderstand(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language)
+    {
+        if (language == PsychomanticPrototype || language == UniversalPrototype)
+            return true;
+
+        return Resolve(ent, ref ent.Comp, logMissing: false) && ent.Comp.UnderstoodLanguages.Contains(language);
     }
 
     /// <summary>

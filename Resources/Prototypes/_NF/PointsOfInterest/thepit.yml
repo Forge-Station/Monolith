@@ -15,6 +15,7 @@
   minimumDistance: 5200
   maximumDistance: 6200
   spawnGroup: Arena
+  spawnSectors: [ poiEast ]
   gridPath: /Maps/_NF/POI/arena.yml
   addComponents:
   - type: SolarPoweredGrid

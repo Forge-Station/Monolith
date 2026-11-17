@@ -581,13 +581,135 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("blacklist", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CompanyBankAccount", b =>
+                {
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("text")
+                        .HasColumnName("company_id");
+
+                    b.Property<int>("Balance")
+                        .HasColumnType("integer")
+                        .HasColumnName("balance");
+
+                    b.HasKey("CompanyId")
+                        .HasName("PK_company_bank_accounts");
+
+                    b.ToTable("company_bank_accounts", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyBulletin", b =>
+                {
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("text")
+                        .HasColumnName("company_id");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("text");
+
+                    b.HasKey("CompanyId")
+                        .HasName("PK_company_bulletins");
+
+                    b.ToTable("company_bulletins", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyInvitation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("company_invitations_id");
+
+                    b.Property<string>("CompanyId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("company_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid>("FromUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("from_user_id");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("status");
+
+                    b.Property<Guid>("TargetUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("target_user_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_company_invitations");
+
+                    b.HasIndex("FromUserId");
+
+                    b.HasIndex("TargetUserId");
+
+                    b.HasIndex("CompanyId", "TargetUserId", "Status");
+
+                    b.ToTable("company_invitations", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyLog", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_logs_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<Guid?>("ActorUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("actor_user_id");
+
+                    b.Property<string>("CompanyId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("company_id");
+
+                    b.Property<int>("LogType")
+                        .HasColumnType("integer")
+                        .HasColumnName("log_type");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("message");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("timestamp");
+
+                    b.HasKey("Id")
+                        .HasName("PK_company_logs");
+
+                    b.HasIndex("CompanyId", "Timestamp");
+
+                    b.ToTable("company_logs", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.CompanyMember", b =>
                 {
                     b.Property<Guid>("PlayerUserId")
                         .HasColumnType("uuid")
                         .HasColumnName("player_user_id");
 
+                    b.Property<int>("CharacterSlot")
+                        .HasColumnType("integer")
+                        .HasColumnName("character_slot");
+
+                    b.Property<string>("CharacterName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("character_name");
+
                     b.Property<string>("CompanyId")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("company_id");
 
@@ -595,10 +717,72 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("boolean")
                         .HasColumnName("owner");
 
-                    b.HasKey("PlayerUserId", "CompanyId")
+                    b.Property<Guid?>("RoleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("role_id");
+
+                    b.HasKey("PlayerUserId", "CharacterSlot")
                         .HasName("PK_company_members");
 
                     b.ToTable("company_members", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyRelation", b =>
+                {
+                    b.Property<string>("CompanyAId")
+                        .HasColumnType("text")
+                        .HasColumnName("company_a_id");
+
+                    b.Property<string>("CompanyBId")
+                        .HasColumnType("text")
+                        .HasColumnName("company_b_id");
+
+                    b.Property<int>("RelationType")
+                        .HasColumnType("integer")
+                        .HasColumnName("relation_type");
+
+                    b.HasKey("CompanyAId", "CompanyBId")
+                        .HasName("PK_company_relations");
+
+                    b.ToTable("company_relations", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CompanyRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("company_roles_id");
+
+                    b.Property<int>("AccessTier")
+                        .HasColumnType("integer")
+                        .HasColumnName("access_tier");
+
+                    b.Property<string>("CompanyId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("company_id");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_default");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<long>("Permissions")
+                        .HasColumnType("bigint")
+                        .HasColumnName("permissions");
+
+                    b.HasKey("Id")
+                        .HasName("PK_company_roles");
+
+                    b.HasIndex("CompanyId", "Name")
+                        .IsUnique();
+
+                    b.ToTable("company_roles", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>
@@ -656,6 +840,78 @@ namespace Content.Server.Database.Migrations.Postgres
                         {
                             t.HasCheckConstraint("AddressNotIPv6MappedIPv4", "NOT inet '::ffff:0.0.0.0/96' >>= address");
                         });
+                });
+
+            modelBuilder.Entity("Content.Server.Database.HangarVessel", b =>
+                {
+                    b.Property<Guid>("VesselId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("vessel_id");
+
+                    b.Property<int>("CharacterSlot")
+                        .HasColumnType("integer")
+                        .HasColumnName("character_slot");
+
+                    b.Property<string>("CustomName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("custom_name");
+
+                    b.Property<DateTime>("LastStored")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_stored");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<string>("SavePath")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("save_path");
+
+                    b.Property<int>("State")
+                        .HasColumnType("integer")
+                        .HasColumnName("state");
+
+                    b.Property<string>("VesselPrototypeId")
+                        .HasColumnType("text")
+                        .HasColumnName("vessel_prototype_id");
+
+                    b.HasKey("VesselId")
+                        .HasName("PK_hangar_vessels");
+
+                    b.HasIndex("PlayerUserId", "CharacterSlot");
+
+                    b.ToTable("hangar_vessels", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.HangarVesselCrew", b =>
+                {
+                    b.Property<Guid>("VesselId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vessel_id");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("CharacterSlot")
+                        .HasColumnType("integer")
+                        .HasColumnName("character_slot");
+
+                    b.Property<string>("CharacterName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("character_name");
+
+                    b.HasKey("VesselId", "PlayerUserId", "CharacterSlot")
+                        .HasName("PK_hangar_vessel_crew");
+
+                    b.HasIndex("PlayerUserId");
+
+                    b.ToTable("hangar_vessel_crew", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.IPIntelCache", b =>
@@ -1730,6 +1986,29 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CompanyInvitation", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "FromPlayer")
+                        .WithMany()
+                        .HasForeignKey("FromUserId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_company_invitations_player_from_player_id");
+
+                    b.HasOne("Content.Server.Database.Player", "TargetPlayer")
+                        .WithMany()
+                        .HasForeignKey("TargetUserId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_company_invitations_player_target_player_id");
+
+                    b.Navigation("FromPlayer");
+
+                    b.Navigation("TargetPlayer");
+                });
+
             modelBuilder.Entity("Content.Server.Database.CompanyMember", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -1781,6 +2060,41 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("HWId");
 
                     b.Navigation("Server");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.HangarVessel", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("HangarVessels")
+                        .HasForeignKey("PlayerUserId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_hangar_vessels_player_player_user_id");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.HangarVesselCrew", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("HangarCrewMemberships")
+                        .HasForeignKey("PlayerUserId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_hangar_vessel_crew_player_player_id");
+
+                    b.HasOne("Content.Server.Database.HangarVessel", "Vessel")
+                        .WithMany("Crew")
+                        .HasForeignKey("VesselId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_hangar_vessel_crew_hangar_vessels_vessel_temp_id");
+
+                    b.Navigation("Player");
+
+                    b.Navigation("Vessel");
                 });
 
             modelBuilder.Entity("Content.Server.Database.Job", b =>
@@ -2107,6 +2421,11 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("BanHits");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.HangarVessel", b =>
+                {
+                    b.Navigation("Crew");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
                     b.Navigation("AdminLogs");
@@ -2144,6 +2463,10 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("AdminWatchlistsReceived");
 
                     b.Navigation("CompanyMembers");
+
+                    b.Navigation("HangarCrewMemberships");
+
+                    b.Navigation("HangarVessels");
 
                     b.Navigation("JobWhitelists");
                 });

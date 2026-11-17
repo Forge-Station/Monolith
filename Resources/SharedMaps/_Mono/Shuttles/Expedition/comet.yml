@@ -1625,8 +1625,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: 4.5,9.5
       parent: 1
-    - type: PaintableAirlock
-      department: null
+    # - type: PaintableAirlock # Forge-Change-Del
+    #   department: null # Forge-Change-Del
 - proto: AirlockScienceGlass
   entities:
   - uid: 31

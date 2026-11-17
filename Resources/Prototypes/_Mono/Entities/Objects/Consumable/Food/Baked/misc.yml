@@ -8,12 +8,23 @@
     sprite: _Mono/Objects/Consumable/Food/Baked/misc.rsi
     state: biscuit-simple
   - type: Tag
-    tags: 
+    tags:
     - SimpleBiscuit
+  # Forge-Change-Start
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Lactozit
+          Quantity: 0.25
+  # Forge-Change-End
 
 - type: entity
   name: sugar biscuit
-  parent: FoodBakedBase
+  parent: FoodBakedBiscuitSimple # Forge-Change
   id: FoodBakedBiscuitSugar
   description: A biscuit with a sugar coating, perfect pair for some tea or coffee.
   components:
@@ -21,12 +32,12 @@
     sprite: _Mono/Objects/Consumable/Food/Baked/misc.rsi
     state: biscuit-sugar
   - type: Tag
-    tags: 
+    tags:
     - SugarBiscuit
 
 - type: entity
   name: oatmeal biscuit
-  parent: FoodBakedBase
+  parent: FoodBakedBiscuitSimple # Forge-Change
   id: FoodBakedBiscuitOatmeal
   description: A biscuit made with oatmeal, perfect pair for some tea or coffee.
   components:
@@ -34,5 +45,5 @@
     sprite: _Mono/Objects/Consumable/Food/Baked/misc.rsi
     state: biscuit-oatmeal
   - type: Tag
-    tags: 
+    tags:
     - OatmealBiscuit

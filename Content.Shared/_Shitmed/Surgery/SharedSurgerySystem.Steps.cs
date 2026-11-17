@@ -12,6 +12,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
+using Content.Shared._Shitmed.Surgery;
 using Content.Shared._Shitmed.Medical.Surgery.Conditions;
 using Content.Shared._Shitmed.Medical.Surgery.Effects.Step;
 using Content.Shared._Shitmed.Medical.Surgery.Steps;
@@ -34,6 +35,10 @@ public abstract partial class SharedSurgerySystem
 {
     private static readonly string[] BruteDamageTypes = { "Slash", "Blunt", "Piercing" };
     private static readonly string[] BurnDamageTypes = { "Heat", "Shock", "Cold", "Caustic" };
+    private readonly List<EntityUid> _nextStepList = new();
+
+    private EntityQuery<SurgeryToolComponent> _toolQuery;
+
     private void InitializeSteps()
     {
         SubscribeLocalEvent<SurgeryStepComponent, SurgeryStepEvent>(OnToolStep);
@@ -84,7 +89,7 @@ public abstract partial class SharedSurgerySystem
                     TryComp(tool, out SurgeryToolComponent? toolComp) &&
                     toolComp.EndSound != null)
                 {
-                    _audio.PlayEntity(toolComp.EndSound, args.User, tool);
+                    _audio.PlayPvs(toolComp.EndSound, tool);
                 }
             }
         }
@@ -281,6 +286,9 @@ public abstract partial class SharedSurgerySystem
 
         if (_inventory.TryGetContainerSlotEnumerator(args.Body, out var containerSlotEnumerator, args.TargetSlots))
         {
+            if (HasComp<SurgeryIgnoreClothingComponent>(args.User))
+                return;
+                
             while (containerSlotEnumerator.MoveNext(out var containerSlot))
             {
                 if (!containerSlot.ContainedEntity.HasValue)
@@ -372,27 +380,6 @@ public abstract partial class SharedSurgerySystem
             || HasDamageGroup(args.Part, group, out var _))
             args.Cancelled = true;
     }
-
-    /*private void OnCutLarvaRootsStep(Entity<SurgeryCutLarvaRootsStepComponent> ent, ref SurgeryStepEvent args)
-    {
-        if (TryComp(args.Body, out VictimInfectedComponent? infected) &&
-            infected.BurstAt > _timing.CurTime &&
-            infected.SpawnedLarva == null)
-        {
-            infected.RootsCut = true;
-        }
-    }
-
-    private void OnCutLarvaRootsCheck(Entity<SurgeryCutLarvaRootsStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)
-    {
-        if (!TryComp(args.Body, out VictimInfectedComponent? infected) || !infected.RootsCut)
-            args.Cancelled = true;
-
-        // The larva has fully developed and surgery is now impossible
-        // TODO: Surgery should still be possible, but the fully developed larva should escape while also saving the hosts life
-        if (infected != null && infected.SpawnedLarva != null)
-            args.Cancelled = true;
-    }*/
 
     private void OnCavityStep(Entity<SurgeryStepCavityEffectComponent> ent, ref SurgeryStepEvent args)
     {
@@ -542,9 +529,10 @@ public abstract partial class SharedSurgerySystem
             return;
 
         // Adding organs is generally done for a single one at a time, so we only need to check for the first.
-        var firstOrgan = organComp.Organ.Values.FirstOrDefault();
-        if (firstOrgan == default)
+        if (organComp.Organ.Count == 0)
             return;
+
+        var firstOrgan = organComp.Organ.Values.First();
 
         foreach (var tool in args.Tools)
         {
@@ -661,9 +649,10 @@ public abstract partial class SharedSurgerySystem
             || ent.Comp.Organ == null)
             return;
 
-        var organType = ent.Comp.Organ.Values.FirstOrDefault();
-        if (organType == default)
+        if (ent.Comp.Organ.Count == 0)
             return;
+
+        var organType = ent.Comp.Organ.Values.First();
 
         var markingCategory = MarkingCategoriesConversion.FromHumanoidVisualLayers(ent.Comp.MarkingCategory);
         foreach (var tool in args.Tools)
@@ -715,19 +704,28 @@ public abstract partial class SharedSurgerySystem
     private void OnSurgeryTargetStepChosen(Entity<SurgeryTargetComponent> ent, ref SurgeryStepChosenBuiMsg args)
     {
         var user = args.Actor;
-        if (GetEntity(args.Entity) is not { Valid: true } body ||
-            GetEntity(args.Part) is not { Valid: true } targetPart ||
-            !IsSurgeryValid(body, targetPart, args.Surgery, args.Step, user, out var surgery, out var part, out var step))
+        if (GetEntity(args.Entity) is {} body &&
+            GetEntity(args.Part) is {} targetPart)
         {
-            return;
+            TryDoSurgeryStep(body, targetPart, user, args.Surgery, args.Step);
         }
+    }
 
-        if (!PreviousStepsComplete(body, part, surgery, args.Step) ||
-            IsStepComplete(body, part, args.Step, surgery))
-            return;
+    /// <summary>
+    /// Do a surgery step on a part, if it can be done.
+    /// Returns true if it succeeded.
+    /// </summary>
+    public bool TryDoSurgeryStep(EntityUid body, EntityUid targetPart, EntityUid user, EntProtoId surgeryId, EntProtoId stepId)
+    {
+        if (!IsSurgeryValid(body, targetPart, surgeryId, stepId, user, out var surgery, out var part, out var step))
+            return false;
+
+        if (!PreviousStepsComplete(body, part, surgery, stepId) ||
+            IsStepComplete(body, part, stepId, surgery))
+            return false;
 
         if (!CanPerformStep(user, body, part, step, true, out _, out _, out var validTools))
-            return;
+            return false;
 
         var speed = 1f;
         var usedEv = new SurgeryToolUsedEvent(user, body);
@@ -738,7 +736,7 @@ public abstract partial class SharedSurgerySystem
             {
                 RaiseLocalEvent(tool, ref usedEv);
                 if (usedEv.Cancelled)
-                    return;
+                    return false;
 
                 speed *= toolSpeed;
             }
@@ -750,7 +748,7 @@ public abstract partial class SharedSurgerySystem
                     if (TryComp(tool, out SurgeryToolComponent? toolComp) &&
                         toolComp.StartSound != null)
                     {
-                        _audio.PlayEntity(toolComp.StartSound, user, tool);
+                        _audio.PlayPvs(toolComp.StartSound, tool);
                     }
                 }
             }
@@ -759,7 +757,7 @@ public abstract partial class SharedSurgerySystem
         if (TryComp(body, out TransformComponent? xform))
             _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
-        var ev = new SurgeryDoAfterEvent(args.Surgery, args.Step);
+        var ev = new SurgeryDoAfterEvent(surgeryId, stepId);
         // TODO: Move 2 seconds to a field of SurgeryStepComponent
         var duration = GetSurgeryDuration(step, user, body, speed);
 
@@ -779,21 +777,22 @@ public abstract partial class SharedSurgerySystem
             BreakOnHandChange = true,
         };
 
-        if (_doAfter.TryStartDoAfter(doAfter))
-        {
-            var userName = Identity.Entity(user, EntityManager);
-            var targetName = Identity.Entity(ent.Owner, EntityManager);
+        if (!_doAfter.TryStartDoAfter(doAfter))
+            return false;
 
-            var locName = $"surgery-popup-procedure-{args.Surgery}-step-{args.Step}";
-            var locResult = Loc.GetString(locName,
+        var userName = Identity.Entity(user, EntityManager);
+        var targetName = Identity.Entity(body, EntityManager);
+
+        var locName = $"surgery-popup-procedure-{surgeryId}-step-{stepId}";
+        var locResult = Loc.GetString(locName,
+            ("user", userName), ("target", targetName), ("part", part));
+
+        if (locResult == locName)
+            locResult = Loc.GetString($"surgery-popup-step-{stepId}",
                 ("user", userName), ("target", targetName), ("part", part));
 
-            if (locResult == locName)
-                locResult = Loc.GetString($"surgery-popup-step-{args.Step}",
-                    ("user", userName), ("target", targetName), ("part", part));
-
-            _popup.PopupEntity(locResult, user);
-        }
+        _popup.PopupEntity(locResult, user);
+        return true;
     }
 
     private float GetSurgeryDuration(EntityUid surgeryStep, EntityUid user, EntityUid target, float toolSpeed)
@@ -808,6 +807,7 @@ public abstract partial class SharedSurgerySystem
 
         return stepComp.Duration / speed;
     }
+    
     private (Entity<SurgeryComponent> Surgery, int Step)? GetNextStep(EntityUid body, EntityUid part, Entity<SurgeryComponent?> surgery, List<EntityUid> requirements)
     {
         if (!Resolve(surgery, ref surgery.Comp))
@@ -936,5 +936,53 @@ public abstract partial class SharedSurgerySystem
         withComp = EntityUid.Invalid;
         speed = 1f;
         return false;
+    }
+
+    private (Entity<SurgeryComponent> Surgery, int Step)? GetNextStep(EntityUid body, EntityUid part, Entity<SurgeryComponent?> surgery, List<EntityUid> requirements, EntityUid user)
+    {
+        if (!Resolve(surgery, ref surgery.Comp))
+            return null;
+
+        if (requirements.Contains(surgery))
+            throw new ArgumentException($"Surgery {surgery} has a requirement loop: {string.Join(", ", requirements)}");
+
+
+        var ev = new SurgeryIgnorePreviousStepsEvent();
+        RaiseLocalEvent(user, ev);
+        if (ev.Handled)
+        {
+            for (var i = surgery.Comp.Steps.Count - 1; i >= 0; i--)
+            {
+                var surgeryStep = surgery.Comp.Steps[i];
+                if (!IsStepComplete(body, part, surgeryStep, surgery))
+                    return ((surgery, surgery.Comp), -i - 1);
+            }
+
+            return null;
+        }
+
+        requirements.Add(surgery);
+
+        if (surgery.Comp.Requirement is { } requirementId &&
+            GetSingleton(requirementId) is { } requirement &&
+            GetNextStep(body, part, requirement, requirements, user) is { } requiredNext)
+        {
+            return requiredNext;
+        }
+
+        for (var i = 0; i < surgery.Comp.Steps.Count; i++)
+        {
+            var surgeryStep = surgery.Comp.Steps[i];
+            if (!IsStepComplete(body, part, surgeryStep, surgery))
+                return ((surgery, surgery.Comp), i);
+        }
+
+        return null;
+    }
+
+    public (Entity<SurgeryComponent> Surgery, int Step)? GetNextStep(EntityUid body, EntityUid part, EntityUid surgery, EntityUid user)
+    {
+        _nextStepList.Clear();
+        return GetNextStep(body, part, surgery, _nextStepList, user);
     }
 }

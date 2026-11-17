@@ -35,6 +35,5 @@ public sealed partial class DataMinerSyndicateComponent : Component
     /// <summary>
     /// The type of balance extraction tool
     /// </summary>
-    [ValidatePrototypeId<ToolQualityPrototype>]
     public string ExtractQuality = "Pulsing";
 }

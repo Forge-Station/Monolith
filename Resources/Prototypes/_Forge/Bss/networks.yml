@@ -1,0 +1,169 @@
+# Frontier region: three coloured sectors of systems, plus hidden black systems.
+# Green = standard ores. Yellow = clustered richer belts. Red = high-value loot.
+# Black systems have no static gates; they open via void disk or a red-zone warp event.
+# Routing rule: green systems never share an edge, and a green-to-green trip
+# must pass through a red system (yellow belts are local to one green).
+- type: bssNetwork
+  id: ForgeBssNetwork
+  region: frontier
+  regionName: Фронтир
+  groups:
+  - id: green
+    name: Внутренние системы
+    color: "#4fd18b"
+  - id: yellow
+    name: Пояс
+    color: "#e6c14a"
+  - id: red
+    name: Глубь
+    color: "#c4453c"
+  - id: black
+    name: Затенённые
+    color: "#2a2a30"
+  sectors:
+  - id: central
+    name: НТ
+    group: green
+    position: -210, 40
+    mapKey: central
+    primary: true
+    parallax: BssParallaxNt
+    worldgen: ForgeWorldgenGreen
+  - id: siv
+    name: СИВ
+    group: green
+    position: 30, 230
+    mapKey: siv
+    parallax: BssParallaxSiv
+    worldgen: ForgeWorldgenGreen
+  - id: tsf
+    name: ТСФ
+    group: green
+    position: 240, -170
+    mapKey: tsf
+    parallax: BssParallaxTsf
+    worldgen: ForgeWorldgenGreen
+  - id: poiWest
+    name: Западный пояс
+    group: yellow
+    position: -105, 95
+    mapKey: poiWest
+    parallax: BssParallaxPoi
+    worldgen: ForgeWorldgenYellow
+  - id: poiNorth
+    name: Северный пояс
+    group: yellow
+    position: 20, 140
+    mapKey: poiNorth
+    parallax: BssParallaxPoiNorth
+    worldgen: ForgeWorldgenYellow
+  - id: poiEast
+    name: Восточный пояс
+    group: yellow
+    position: 185, 25
+    mapKey: poiEast
+    parallax: BssParallaxPoiEast
+    worldgen: ForgeWorldgenYellow
+  - id: poiSouth
+    name: Южный пояс
+    group: yellow
+    position: 40, -205
+    mapKey: poiSouth
+    parallax: BssParallaxPoiSouth
+    worldgen: ForgeWorldgenYellow
+  - id: vkr
+    name: ВКР
+    group: red
+    position: -195, -70
+    mapKey: vkr
+    parallax: BssParallaxVkr
+    worldgen: ForgeWorldgenRed
+  - id: nexus
+    name: Разлом
+    group: red
+    position: 25, -5
+    mapKey: nexus
+    parallax: BssParallaxNexus
+    worldgen: ForgeWorldgenRed
+  - id: wildWest
+    name: Западная глубь
+    group: red
+    position: -140, -165
+    mapKey: wildWest
+    parallax: BssParallaxWild
+    worldgen: ForgeWorldgenRed
+  - id: wildEast
+    name: Восточная глубь
+    group: red
+    position: 175, -80
+    mapKey: wildEast
+    parallax: BssParallaxWildEast
+    worldgen: ForgeWorldgenRed
+  - id: voidWest
+    name: Тень Запада
+    group: black
+    position: -390, 85
+    mapKey: voidWest
+    access: Hidden
+    parallax: BssParallaxVoid
+    worldgen: ForgeWorldgenBlack
+  - id: voidNorth
+    name: Тень Севера
+    group: black
+    position: 290, 220
+    mapKey: voidNorth
+    access: Hidden
+    parallax: BssParallaxVoidNorth
+    worldgen: ForgeWorldgenBlack
+  - id: voidSouth
+    name: Тень Юга
+    group: black
+    position: 45, -340
+    mapKey: voidSouth
+    access: Hidden
+    parallax: BssParallaxVoidSouth
+    worldgen: ForgeWorldgenBlack
+  links:
+  # HT: local yellow belt + VKR. Never a direct hop to СИВ/ТСФ.
+  - from: { sector: central, gate: central-poiWest }
+    to: { sector: poiWest, gate: poiWest-central }
+  - from: { sector: central, gate: central-vkr }
+    to: { sector: vkr, gate: vkr-central }
+  # СИВ: own yellow belt + red hub. No green-yellow-green shortcuts.
+  - from: { sector: siv, gate: siv-poiNorth }
+    to: { sector: poiNorth, gate: poiNorth-siv }
+  - from: { sector: siv, gate: siv-nexus }
+    to: { sector: nexus, gate: nexus-siv }
+  # ТСФ: southern/eastern yellow + eastern red.
+  - from: { sector: tsf, gate: tsf-poiEast }
+    to: { sector: poiEast, gate: poiEast-tsf }
+  - from: { sector: tsf, gate: tsf-poiSouth }
+    to: { sector: poiSouth, gate: poiSouth-tsf }
+  - from: { sector: tsf, gate: tsf-wildEast }
+    to: { sector: wildEast, gate: wildEast-tsf }
+  # Yellow belts feed into the red core, never into another green.
+  - from: { sector: poiWest, gate: poiWest-vkr }
+    to: { sector: vkr, gate: vkr-poiWest }
+  - from: { sector: poiWest, gate: poiWest-nexus }
+    to: { sector: nexus, gate: nexus-poiWest }
+  - from: { sector: poiWest, gate: poiWest-wildWest }
+    to: { sector: wildWest, gate: wildWest-poiWest }
+  - from: { sector: poiNorth, gate: poiNorth-nexus }
+    to: { sector: nexus, gate: nexus-poiNorth }
+  - from: { sector: poiEast, gate: poiEast-nexus }
+    to: { sector: nexus, gate: nexus-poiEast }
+  - from: { sector: poiEast, gate: poiEast-wildEast }
+    to: { sector: wildEast, gate: wildEast-poiEast }
+  - from: { sector: poiSouth, gate: poiSouth-nexus }
+    to: { sector: nexus, gate: nexus-poiSouth }
+  - from: { sector: poiSouth, gate: poiSouth-wildWest }
+    to: { sector: wildWest, gate: wildWest-poiSouth }
+  - from: { sector: poiSouth, gate: poiSouth-wildEast }
+    to: { sector: wildEast, gate: wildEast-poiSouth }
+  # Red core: VKR / Разлом / depths stay a connected hub.
+  - from: { sector: vkr, gate: vkr-nexus }
+    to: { sector: nexus, gate: nexus-vkr }
+  - from: { sector: nexus, gate: nexus-wildWest }
+    to: { sector: wildWest, gate: wildWest-nexus }
+  - from: { sector: nexus, gate: nexus-wildEast }
+    to: { sector: wildEast, gate: wildEast-nexus }

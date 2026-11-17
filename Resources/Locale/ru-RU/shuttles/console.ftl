@@ -38,6 +38,12 @@ shuttle-console-ftl-state-Arriving = Прибытие
 shuttle-console-ftl-state-Cooldown = Перезарядка
 shuttle-console-map-settings = Настройки
 shuttle-console-ftl-button = БСС
+shuttle-console-cloak-button = Стелс
+shuttle-console-toggle-mod-button = Сменить режим
+shuttle-console-cloak-none = Стелс: Отсутствует
+shuttle-console-cloak-ready = Стелс: Готов
+shuttle-console-cloak-active = Стелс: Активен
+shuttle-console-cloak-cooldown = Стелс: Перезарядка
 shuttle-console-map-rebuild =
     Сканировать на
     наличие объектов

@@ -4,12 +4,14 @@
   suffix: Pinion, Clockwork
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Standard/clockwork_pinion.rsi # Forge-Change
   - type: Construction
     graph: PinionAirlock
     node: airlock
     containers:
     - board
+  - type: Paintable # Forge-Change
+    group: null     # Forge-Change
 
 - type: entity
   parent: AirlockGlass
@@ -17,7 +19,7 @@
   suffix: Pinion, Clockwork
   components:
   - type: Sprite
-    sprite: Forge/Structures/Doors/Airlocks/Glass/clockwork_pinion.rsi # Forge-Change
+    sprite: _Forge/Structures/Doors/Airlocks/Glass/clockwork_pinion.rsi # Forge-Change
   - type: Construction
     graph: PinionAirlock
     node: glassAirlock
@@ -25,3 +27,5 @@
     - board
   # - type: StaticPrice # Frontier - TODO: material value rework
   #   price: 165 # Frontier
+  - type: Paintable # Forge-Change
+    group: null     # Forge-Change

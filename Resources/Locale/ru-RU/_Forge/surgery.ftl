@@ -34,6 +34,8 @@ ent-SurgeryRemoveEyes = Удалить глаза
 ent-SurgeryInsertEyes = Вставить глаза
 ent-SurgeryRemoveKidneys = Удалить почки
 ent-SurgeryInsertKidneys = Вставить почки
+ent-SurgeryInsertXenoGraft = Вживить железу ксеноморфа
+ent-SurgeryRemoveXenoGraft = Извлечь железу ксеноморфа
 ent-SurgeryAttachTail = Прикрепить хвост
 
 # Этапы операций
@@ -62,14 +64,20 @@ ent-SurgeryStepOpenOrganSlot = Вырезать полость
 ent-SurgeryStepInsertLungs = Установить лёгкие
 ent-SurgeryStepInsertStomach = Установить желудок
 ent-SurgeryStepInsertLiver = Установить печень
-ent-SurgeryStepInsertEyes = Установить печень
+ent-SurgeryStepInsertEyes = Установить глаза
 ent-SurgeryStepInsertHeart = Установить сердце
 ent-SurgeryStepInsertKidneys = Установить почки
+ent-SurgeryStepInsertXenoGraft = Вживить железу ксеноморфа
+ent-SurgeryStepAffixXenoGraft = Запечатать трансплантат
+ent-SurgeryStepRemoveXenoGraft = Извлечь железу ксеноморфа
 ent-SurgeryStepSealOrganWound = Запечатать рану
 ent-SurgeryStepRemoveCorticalBorer = Удалить кортикального бурильщика
 
 surgery-popup-procedure-SurgeryRemoveKidneys-step-SurgeryStepRemoveOrgan = { $user } удаляет почки из { $part } у { $target }!
 surgery-popup-step-SurgeryStepInsertKidneys = { $user } вставляет почки в { $part } у { $target }!
+surgery-popup-step-SurgeryStepInsertXenoGraft = { $user } вживляет железу ксеноморфа в { $part } у { $target }!
+surgery-popup-step-SurgeryStepAffixXenoGraft = { $user } запечатывает трансплантат на { $part } у { $target }.
+surgery-popup-step-SurgeryStepRemoveXenoGraft = { $user } извлекает железу ксеноморфа из { $part } у { $target }!
 
 # КПБ
 ent-PartIPC = часть тела КПБ

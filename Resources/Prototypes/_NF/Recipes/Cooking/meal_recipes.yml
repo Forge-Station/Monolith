@@ -1463,6 +1463,19 @@
     PolypyryliumOligomers: 2
   recipeType:
   - Assembler
+# Forge-Changes-Start
+- type: microwaveMealRecipe
+  id: RecipeFoodCakeSpaceman
+  name: spaceman's jelly-donut recipe
+  result: FoodCakeSpaceman
+  time: 5
+  group: Dessert
+  solids:
+    FoodCakePlain: 1
+    FoodSpacemansTrumpet: 4
+  recipeType:
+  - Assembler
+# Forge-Changes-End
 # NOT ACTUAL FOOD
 
 - type: microwaveMealRecipe

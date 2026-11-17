@@ -3,6 +3,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
+using Content.Shared._Forge.Persistence;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
@@ -155,6 +156,13 @@ public sealed partial class StationSystem : SharedStationSystem
                 stationConfig = ev.GameMap.Stations[id];
             else
             {
+                // Persisted sector maps include extra POI grids whose BecomesStation
+                // ids are not on the Frontier template. Those stations are restored
+                // via PersistentGridComponent instead.
+                var mapUid = Transform(gridIds[0]).MapUid;
+                if (mapUid != null && HasComp<PersistentMapComponent>(mapUid.Value))
+                    continue;
+
                 _sawmill.Error($"The station {id} in map {ev.GameMap.ID} does not have an associated station config!");
                 continue;
             }

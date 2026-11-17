@@ -1,6 +1,6 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
@@ -12,7 +12,7 @@ namespace Content.Shared.Weapons.Ranged.Components;
 public sealed partial class BasicEntityAmmoProviderComponent : AmmoProviderComponent
 {
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("proto", required: true, customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
+    [DataField("proto", required: true, customTypeSerializer:typeof(ProtoId<EntityPrototype>))]
     public string Proto = default!;
 
     /// <summary>

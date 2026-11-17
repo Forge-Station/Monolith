@@ -561,7 +561,9 @@ public abstract partial class SharedDisposalUnitSystem : EntitySystem
         if (state == DisposalsPressureState.Ready)
         {
             component.NextPressurized = TimeSpan.Zero;
-            _device.InvokePort(uid, ReadyPort); // Goobstation
+            // Forge-Change: a disposal unit is not always a link source. InvokePort logs a stack when the component is missing.
+            if (HasComp<DeviceLinkSourceComponent>(uid))
+                _device.InvokePort(uid, ReadyPort); // Goobstation
 
             // Manually engaged
             if (component.Engaged)

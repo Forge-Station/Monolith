@@ -44,6 +44,8 @@ guide-entry-brute =
     механических повреждений
 guide-entry-botanicals = Ботаника
 guide-entry-cloning = Клонирование
+guide-entry-genetics = Генетика
+guide-entry-genetics-genes = Гены
 guide-entry-cryogenics = Криогеника
 guide-entry-survival = Выживание
 guide-entry-technologies = Технологии
@@ -167,6 +169,7 @@ guide-entry-atmosphericupsets = Атмосферные помехи
 guide-entry-spacing = Интервалы
 guide-entry-atmostools = Инструменты атмоса
 guide-entry-gasses = Газы
+guide-entry-neurotoxins = Нейротоксины
 guide-entry-inspectingpower = Проверка питания
 guide-entry-powerstorage = Хранение энергии
 guide-entry-ramping = Рампы

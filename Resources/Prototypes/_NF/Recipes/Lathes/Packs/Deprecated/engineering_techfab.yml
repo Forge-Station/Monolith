@@ -45,6 +45,8 @@
   ## Tools
     - NetworkConfigurator
     - SprayPainter
+    - SprayPainterAmmo  # Forge-Change
+    - MaintenanceJack   # Forge-Change
     - TRayScanner
     - GasAnalyzer
     - Holoprojector

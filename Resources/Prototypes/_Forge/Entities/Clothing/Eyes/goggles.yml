@@ -6,9 +6,9 @@
   description: Imperial Operator visor that allows for ID card identification, rapid equipment diagnostics, and drone control within a two-kilometer radius.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/operator.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/operator.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/operator.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/operator.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: IdentityBlocker
@@ -49,9 +49,9 @@
   description: There is an incomprehensible engraving on the glasses; all I can make out is the word "Nian"
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/diagnostic_nightvision_techniclogistic.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: StaticPrice
@@ -77,9 +77,9 @@
   description: An advanced heads-up display which provides id data and vision in complete darkness.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/nightvision.rsi
   - type: FlashImmunity
   - type: StaticPrice
     price: 30
@@ -105,9 +105,9 @@
   description: An advanced heads-up display which provides id data and vision in complete darkness.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/medical_nightvision.rsi
   - type: FlashImmunity
   - type: StaticPrice
     price: 30
@@ -134,9 +134,9 @@
   description: An advanced heads-up display which provides id data and vision in complete darkness.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/security_nightvision.rsi
   - type: FlashImmunity
   - type: StaticPrice
     price: 30
@@ -161,9 +161,9 @@
   description: An advanced heads-up display which provides id data and vision in complete darkness.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/diagnostic_nightvision.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: StaticPrice
@@ -281,9 +281,9 @@
   description: Усовершенствованный сенсорный дисплей, который выдает идентификационные данные и обеспечивает видимость в полной темноте.
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/dcn_nightvision.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: StaticPrice
@@ -312,9 +312,9 @@
   description: Now you can see in the dark everyone!
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/therm_nightvision.rsi
   - type: FlashImmunity
   - type: EyeProtection
   - type: StaticPrice
@@ -344,9 +344,9 @@
   description: Стильные фиолетовые очки с возможностью просмотра профессии и компаний
   components:
   - type: Sprite
-    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/uiglasses.rsi
   - type: Clothing
-    sprite: Forge/Clothing/Eyes/Goggles/uiglasses.rsi
+    sprite: _Forge/Clothing/Eyes/Goggles/uiglasses.rsi
   - type: FlashImmunity
   - type: EyeProtection
     protectionTime: 5

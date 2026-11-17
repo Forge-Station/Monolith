@@ -290,7 +290,7 @@
     Asphyxiation: # Value padding
       min: 100
       max: 200
-      value: 7.5 # Forge-change 10->7.5
+      value: 7 # Forge-change 10->7
       penalty: 10
   reagents:
     Uranium:

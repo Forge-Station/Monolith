@@ -437,3 +437,16 @@ Entries:
   id: 35
   time: '2026-11-17T19:21:35.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/574
+- author: tolikhorenko346-dotcom
+  changes:
+    - type: Add
+      message: добавлено ядро ии на НО наемников.
+    - type: Tweak
+      message: >-
+        замена стенок на НО синди, наемников, ии, а так же ПОИ бункер империи,
+        браво, психлечебница сургут, на неразрушимые.
+    - type: Fix
+      message: исправлена проблема питания на адс зенит.
+  id: 36
+  time: '2026-11-17T19:37:54.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/575

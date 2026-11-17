@@ -464,3 +464,14 @@ Entries:
   id: 38
   time: '2026-11-17T20:55:10.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/603
+- author: tolikhorenko346-dotcom
+  changes:
+    - type: Tweak
+      message: >-
+        перемешена консоль верфи дабы не мешала доступ к кнопке на аванпосте
+        ренегатов.
+    - type: Fix
+      message: подключены неподключеные к кнопке гермазатворы на аванпосте ренегатов.
+  id: 39
+  time: '2026-11-17T21:22:17.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/585

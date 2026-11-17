@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/infector.dmi)",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "preview"
+    },
+    {
+      "name": "infector_chest",
+      "directions": 4
+    },
+    {
+      "name": "infector_head",
+      "directions": 4
+    },
+    {
+      "name": "infector_proboscis",
+      "directions": 4
+    },
+    {
+      "name": "infector_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "infector_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "infector_r_leg"
+    },
+    {
+      "name": "infector_l_leg"
+    },
+    {
+      "name": "infector_chest_lying"
+    },
+    {
+      "name": "infector_r_wing_lying"
+    },
+    {
+      "name": "infector_head_lying",
+      "directions": 4
+    },
+    {
+      "name": "infector_proboscis_lying"
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

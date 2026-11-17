@@ -123,8 +123,9 @@
     anchored: false
   - type: Sprite
     sprite: _WF/Traders/barter_zone.rsi
-    state: zone
-    shader: unshaded
+    layers:
+    - state: zone
+      shader: unshaded
     # Above tables/furniture (Objects), below carried items (Items) - DrawDepth.SmallObjects sits
     # exactly between the two.
     drawdepth: SmallObjects

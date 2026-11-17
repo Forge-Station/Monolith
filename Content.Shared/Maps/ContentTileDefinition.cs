@@ -176,6 +176,10 @@ namespace Content.Shared.Maps
         [DataField]
         public float FallDamageMultiplier { get; private set; } = 1f;
 
+        /// <summary>Multiplier on how long a fall onto this tile stuns. The cavern drop uses it with the damage multiplier.</summary>
+        [DataField]
+        public float FallStunMultiplier { get; private set; } = 1f;
+
         /// <summary>Liquid this tile is made of, when standing on it means wading.</summary>
         [DataField]
         public ProtoId<ReagentPrototype>? Reagent { get; private set; }

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/slasher/fleshy.dmi)",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "preview"
+    },
+    {
+      "name": "slasher_head",
+      "directions": 4
+    },
+    {
+      "name": "slasher_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "slasher_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "slasher_chest",
+      "directions": 4
+    },
+    {
+      "name": "slasher_r_leg",
+      "directions": 4
+    },
+    {
+      "name": "slasher_l_leg",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_lying"
+    },
+    {
+      "name": "r_leg_lying"
+    },
+    {
+      "name": "l_arm_lying"
+    },
+    {
+      "name": "r_arm_lying"
+    },
+    {
+      "name": "head_lying"
+    },
+    {
+      "name": "torso_lying"
+    },
+    {
+      "name": "fend",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

@@ -50,6 +50,11 @@ shipyard-console-class-Corvette = Корвет
 shipyard-console-class-Frigate = Фрегат
 shipyard-console-class-Destroyer = Эсминец
 shipyard-console-class-Cruiser = Крейсер
+shipyard-console-class-MissileCarrier = Ракетоносец
+shipyard-console-class-AntiShipMissileCarrier = Противокорабельный ракетоносец
+shipyard-console-class-Brawler = Штурмовик
+shipyard-console-class-Escort = Эскорт
+shipyard-console-class-Carrier = Авианесущий
 
 shipyard-console-class-Syndicate = Горлекс
 shipyard-console-class-Pirate = Пиратский

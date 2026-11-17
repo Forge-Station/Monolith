@@ -1,0 +1,54 @@
+- type: entity
+  parent: CrateGenericSteel
+  id: CompanyCrateMaterials
+  name: company materials crate
+  description: Steel, glass and plastic bought by a company treasury.
+  components:
+  - type: StorageFill
+    contents:
+    - id: SheetSteel10
+      amount: 3
+    - id: SheetGlass10
+      amount: 2
+    - id: SheetPlastic10
+      amount: 1
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CompanyCrateMedical
+  name: company medical crate
+  description: Medical supplies bought by a company treasury.
+  components:
+  - type: StorageFill
+    contents:
+    - id: MedkitFilled
+    - id: Brutepack
+      amount: 4
+    - id: Ointment
+      amount: 4
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CompanyCrateAmmo
+  name: company ammunition crate
+  description: Magazines bought by a company treasury.
+  components:
+  - type: StorageFill
+    contents:
+    - id: Magazine45_ACPPistolFMJ
+      amount: 4
+    - id: Magazine9x19mmPistolFMJ
+      amount: 4
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CompanyCrateTools
+  name: company tool crate
+  description: Tools bought by a company treasury.
+  components:
+  - type: StorageFill
+    contents:
+    - id: ToolboxEmergencyFilled
+    - id: Welder
+    - id: CableApcStack10
+      amount: 2

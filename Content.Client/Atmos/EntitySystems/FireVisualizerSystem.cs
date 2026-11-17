@@ -18,6 +18,7 @@ public sealed partial class FireVisualizerSystem : VisualizerSystem<FireVisualsC
         base.Initialize();
 
         SubscribeLocalEvent<FireVisualsComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<FireVisualsComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<FireVisualsComponent, ComponentShutdown>(OnShutdown);
     }
 
@@ -48,6 +49,14 @@ public sealed partial class FireVisualizerSystem : VisualizerSystem<FireVisualsC
         sprite.LayerSetShader(FireVisualLayers.Fire, "unshaded");
         if (component.Sprite != null)
             SpriteSystem.LayerSetRsi((uid, sprite), FireVisualLayers.Fire, new ResPath(component.Sprite));
+
+        UpdateAppearance(uid, component, sprite, appearance);
+    }
+
+    private void OnComponentStartup(EntityUid uid, FireVisualsComponent component, ComponentStartup args)
+    {
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || !TryComp(uid, out AppearanceComponent? appearance))
+            return;
 
         UpdateAppearance(uid, component, sprite, appearance);
     }
@@ -87,6 +96,11 @@ public sealed partial class FireVisualizerSystem : VisualizerSystem<FireVisualsC
         if (LifeStage(uid) < EntityLifeStage.Initialized)
             return;
         // WOLFGATE END
+
+        // The light is a child. Spawning it while this entity is still in ComponentInit parents the
+        // child before the parent is initialized, and deleting that child then asserts.
+        if (!Initialized(uid))
+            return;
 
         component.LightEntity ??= Spawn(null, new EntityCoordinates(uid, default));
         var light = EnsureComp<PointLightComponent>(component.LightEntity.Value);

@@ -1,7 +1,9 @@
+using Content.Shared._Forge.Company;
 using Content.Shared.Database;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
 using JetBrains.Annotations;
+using Robust.Shared.Player;
 
 namespace Content.Server.Research.Systems;
 
@@ -103,6 +105,7 @@ public sealed partial class ResearchSystem
 
         _adminLog.Add(LogType.Action, LogImpact.Medium,
             $"{ToPrettyString(user):player} unlocked {prototype.ID} (discipline: {prototype.Discipline}, tier: {prototype.Tier}) at {ToPrettyString(client)}, for server {ToPrettyString(serverEnt.Value)}.");
+        CreditCompanyResearch(user, prototype.Cost);
         return true;
     }
 
@@ -172,6 +175,28 @@ public sealed partial class ResearchSystem
             return false;
 
         return true;
+    }
+
+    private void CreditCompanyResearch(EntityUid user, int cost)
+    {
+        if (!TryComp<ActorComponent>(user, out var actor) ||
+            !_companies.TryGetCharacterContext(actor.PlayerSession.UserId, out var slot, out _))
+            return;
+
+        var member = _companies.GetMemberForCharacter(actor.PlayerSession.UserId, slot);
+        if (member == null || member.Value.Company == "None")
+            return;
+
+        var gain = _companies.CreditResearch(member.Value.Company, cost);
+        if (gain <= 0)
+            return;
+
+        _popup.PopupEntity(
+            Loc.GetString("company-research-gained",
+                ("gain", CompanyNumbers.Format(gain)),
+                ("total", CompanyNumbers.Format(_companies.GetResearchArchive(member.Value.Company)))),
+            user,
+            user);
     }
 
     private void OnDatabaseRegistrationChanged(EntityUid uid, TechnologyDatabaseComponent component, ref ResearchRegistrationChangedEvent args)

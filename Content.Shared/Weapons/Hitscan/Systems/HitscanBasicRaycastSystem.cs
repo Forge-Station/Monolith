@@ -102,5 +102,9 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem
         // WOLFGATE END
 
         RaiseLocalEvent(ent, ref trace);
+
+        // Dodge owns HitscanRaycastFiredEvent on this component. Hand the result off for other listeners.
+        var noticed = new HitscanRaycastNoticedEvent(trace.FromCoordinates, trace.HitEntity, trace.Shooter, trace.Canceled);
+        RaiseLocalEvent(ent, ref noticed);
     }
 }

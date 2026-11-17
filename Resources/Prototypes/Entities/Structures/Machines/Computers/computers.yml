@@ -1126,6 +1126,7 @@
     - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       state: generic_panel_open
   - type: CargoBountyConsole
+  - type: CompanyContractBoard
   - type: ActivatableUI
     key: enum.CargoConsoleUiKey.Bounty
   - type: UserInterface

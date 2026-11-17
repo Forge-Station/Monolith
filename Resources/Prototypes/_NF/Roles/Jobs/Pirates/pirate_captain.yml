@@ -13,7 +13,6 @@
       inverted: true
       traits:
       - Heretic
-  enforcedPlayTime: true #Monolith
   whitelisted: true
   startingGear: PirateCaptainNFGear
   alwaysUseSpawner: true

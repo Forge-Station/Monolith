@@ -35,7 +35,9 @@ public sealed partial class AudioEffectSystem : EntitySystem
     // actually this problem applies for effects too
     private bool? _auxiliariesSafe = null;
 
-    private static readonly Dictionary<ProtoId<AudioPresetPrototype>, (EntityUid AuxiliaryUid, EntityUid EffectUid)> CachedEffects = new();
+    // Instance cache. A static one keeps deleted entities after a test pair or round restart,
+    // and SetAuxiliary then debug-asserts on the dead uid.
+    private readonly Dictionary<ProtoId<AudioPresetPrototype>, (EntityUid AuxiliaryUid, EntityUid EffectUid)> CachedEffects = new();
 
     /// <summary>
     ///     An auxiliary with no effect; for removing effects.
@@ -158,6 +160,9 @@ public sealed partial class AudioEffectSystem : EntitySystem
             !ResolveCachedEffect(preset, out var auxiliaryUid, out _))
             return false;
 
+        if (!Exists(auxiliaryUid.Value) || !HasComp<AudioAuxiliaryComponent>(auxiliaryUid.Value))
+            return false;
+
         _audioSystem.SetAuxiliary(entity, entity.Comp, auxiliaryUid);
         return true;
     }
@@ -176,8 +181,11 @@ public sealed partial class AudioEffectSystem : EntitySystem
             return true;
 
         // resolve the cached auxiliary
-        if (!_cachedBlankAuxiliaryUid.IsValid())
+        if (!_cachedBlankAuxiliaryUid.IsValid() || !Exists(_cachedBlankAuxiliaryUid))
             _cachedBlankAuxiliaryUid = _audioSystem.CreateAuxiliary().Entity;
+
+        if (!Exists(_cachedBlankAuxiliaryUid) || !HasComp<AudioAuxiliaryComponent>(_cachedBlankAuxiliaryUid))
+            return false;
 
         _audioSystem.SetAuxiliary(entity, entity.Comp, _cachedBlankAuxiliaryUid);
         return true;
@@ -197,12 +205,16 @@ public sealed partial class AudioEffectSystem : EntitySystem
             return false;
         }
 
-        if (CachedEffects.TryGetValue(preset, out var cached))
+        if (CachedEffects.TryGetValue(preset, out var cached) &&
+            Exists(cached.AuxiliaryUid) &&
+            Exists(cached.EffectUid))
         {
             auxiliaryUid = cached.AuxiliaryUid;
             effectUid = cached.EffectUid;
             return true;
         }
+
+        CachedEffects.Remove(preset);
 
         return TryCacheEffect(preset, out auxiliaryUid, out effectUid);
     }
@@ -239,11 +251,19 @@ public sealed partial class AudioEffectSystem : EntitySystem
         // only when initially determining if auxiliaries are safe will we have a pair to use. in future attempts, we won't so just make one if necessary
         var auxiliaryPair = maybeAuxiliaryPair ?? _audioSystem.CreateAuxiliary();
 
-        DebugTools.Assert(Exists(auxiliaryPair.Entity), "Audio auxiliary pair's entity does not exist!");
-        if (!Exists(auxiliaryPair.Entity))
+        if (!Exists(auxiliaryPair.Entity) || !HasComp<AudioAuxiliaryComponent>(auxiliaryPair.Entity))
+        {
+            _auxiliariesSafe = false;
             return false;
+        }
 
         var effectPair = _audioSystem.CreateEffect();
+        if (!Exists(effectPair.Entity) || !HasComp<AudioEffectComponent>(effectPair.Entity))
+        {
+            _auxiliariesSafe = false;
+            TryQueueDel(effectPair.Entity);
+            return false;
+        }
         _audioSystem.SetEffectPreset(effectPair.Entity, effectPair.Component, presetPrototype);
         _audioSystem.SetEffect(auxiliaryPair.Entity, auxiliaryPair.Component, effectPair.Entity);
 

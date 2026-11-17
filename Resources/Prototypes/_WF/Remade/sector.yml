@@ -23,7 +23,6 @@
       70: Critical
       100: Dead
   - type: DamageStateVisuals
-    rotate: true
   - type: RotationVisuals
     defaultRotation: 90
     horizontalRotation: 90

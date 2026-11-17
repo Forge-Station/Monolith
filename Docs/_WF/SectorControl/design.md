@@ -129,7 +129,7 @@ control, like the Planets and Encounters hooks.
 console's MAP tab would not: a dark backing, zoom from 1.5 to 60 km half-width (fitted at first to the named grids
 within 60 km, the player's ship and the territory, plus 3 km), the wheel zooming about the cursor, right-drag panning
 and a left double-click centring on the player's own grid. It draws a faint outline (white at alpha 0.08, one LineList) of
-every cell whose centre lies within 30 km of the origin (`WFSectorClientSystem.SectorRadius`; `WFSectorHex.CellsWithin`),
+every cell whose centre lies within 60 km of the origin (`WFSectorClientSystem.SectorRadius`; `WFSectorHex.CellsWithin`),
 each shared edge once and none once a cell is under 6 px across; the territory over it through `WFSectorOverlay` (one
 `worldToView` matrix a frame, `view = (world - centre) * scale` with Y flipped about the midpoint); the callsign of every
 cell once a cell spans 60 px, held cells in their faction's colour and open ones in dim grey (a contested cell shows its

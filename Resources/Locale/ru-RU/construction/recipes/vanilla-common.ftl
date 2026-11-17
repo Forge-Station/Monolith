@@ -64,3 +64,6 @@ construction-recipe-light-switch = выключатель света
 construction-recipe-signal-switch = сигнальный переключатель
 construction-recipe-signal-button = сигнальная кнопка
 construction-recipe-two-way-lever = двухпозиционный рычаг
+
+construction-recipe-floor-drain = дренаж
+construction-recipe-floor-drain-desc = Сливает лужи вокруг в себя. Пригодится для опорожнения вёдер или поддержания чистоты в определённых помещениях.

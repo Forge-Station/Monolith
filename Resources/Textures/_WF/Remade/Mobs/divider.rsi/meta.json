@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/divider.dmi)",
+  "size": {
+    "x": 48,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "preview"
+    },
+    {
+      "name": "divider_chest",
+      "directions": 4
+    },
+    {
+      "name": "divider_head",
+      "directions": 4
+    },
+    {
+      "name": "divider_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "divider_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "divider_r_leg",
+      "directions": 4
+    },
+    {
+      "name": "divider_l_leg",
+      "directions": 4
+    },
+    {
+      "name": "divider_head_human",
+      "directions": 4
+    },
+    {
+      "name": "full",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<cartridges:CompanyManagementUiFragment
+    xmlns:cartridges="clr-namespace:Content.Client._Forge.Company"
+    xmlns="https://spacestation14.io"
+    Margin="0"
+    VerticalExpand="True"
+    HorizontalExpand="True"
+    Orientation="Vertical">
+
+    <PanelContainer Name="ContentBorder" StyleClasses="PdaBackground" HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer Name="ContentBackground" StyleClasses="PdaContentBackground" Margin="2" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" Margin="8 6" HorizontalExpand="True" VerticalExpand="True">
+
+                <BoxContainer Orientation="Horizontal" Margin="2 0 2 2" SeparationOverride="10">
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                        <Label Name="HeaderLabel" StyleClasses="LabelHeading" HorizontalExpand="True"/>
+                        <Label Name="StatusLabel"/>
+                    </BoxContainer>
+                    <OptionButton Name="PaletteOption" MinWidth="150" VerticalAlignment="Center" ToolTip=""/>
+                </BoxContainer>
+
+                <PanelContainer Name="MainDivider" HorizontalExpand="True" SetHeight="2" Margin="0 2 0 4"/>
+
+                <TabContainer Name="Tabs" VerticalExpand="True" HorizontalExpand="True" Access="Public"/>
+
+            </BoxContainer>
+        </PanelContainer>
+    </PanelContainer>
+</cartridges:CompanyManagementUiFragment>

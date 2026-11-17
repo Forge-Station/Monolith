@@ -1,0 +1,161 @@
+- files: ["voice_behind_you_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["voice_behind_you_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["voice_look_up_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["voice_look_up_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["voice_over_here_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["voice_over_here_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["voice_over_here_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["voice_turn_around_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["voice_turn_around_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["menace_growl_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["menace_growl_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["menace_growl_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["menace_far_noise.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["menace_very_far_noise.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["menace_wail.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["menace_heart_beat.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+# GENERATED START: Tools/_WF/Remade/port_dread.py
+- files: ["whisper_hit_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 0.0 to 5.6 s, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_low_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 0.0 to 5.6 s, slowed to 0.8 and echoed, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_back_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 0.0 to 5.6 s, reversed and slowed, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_hit_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 5.6 to 8.4 s, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_low_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 5.6 to 8.4 s, slowed to 0.8 and echoed, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_back_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 5.6 to 8.4 s, reversed and slowed, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_hit_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 8.4 to 13.1 s, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_low_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 8.4 to 13.1 s, slowed to 0.8 and echoed, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_back_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 8.4 to 13.1 s, reversed and slowed, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_hit_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 13.1 to 17.28 s, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_low_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 13.1 to 17.28 s, slowed to 0.8 and echoed, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["whisper_back_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, cut 13.1 to 17.28 s, reversed and slowed, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["bed_whisper_a.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, whole recording with soft ends, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["bed_whisper_b.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, whole recording reversed and slowed to 0.85, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["bed_whisper_c.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/voice/ghost_whisper.ogg, whole recording sped to 1.18, high-passed and echoed, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["bed_drone.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0 sound/ambience/spookyspace1.ogg, cut 8 to 56 s, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+# GENERATED END

@@ -21,7 +21,6 @@
   - type: Jetpack
     acceleration: 1.15
     weightlessModifier: 2.4
-    flightMaxSpeed: 0.5 # Half a layer per second up or down.
     toggleAction: WFActionToggleJetpackAtmospheric
   - type: WFAtmosphericJetpack
   - type: SolutionContainerManager

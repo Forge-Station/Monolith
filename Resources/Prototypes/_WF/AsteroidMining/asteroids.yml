@@ -375,7 +375,7 @@
   - type: WFAsteroidCluster
     composition: WFAsteroidRock
     rareComposition: WFAsteroidMetallic
-    # Richer further out: 1% by the stations, about 4% on the 9 km ring, 5% in the Wilds, 8% Very Far.
+    # Inside 30 km only about a third of fields appear. Past 30 km a cluster is heavier and 15% more often metallic.
     rareChance: 0.01
     rareChancePerKm: 0.0035
     # By count: medium and large rocks lead, so a cluster is a few big grids rather than many small ones.

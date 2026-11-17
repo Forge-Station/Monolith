@@ -38,6 +38,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
     [Dependency] private MapLoaderSystem _mapLoader = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private MapSystem _map = default!;
+    [Dependency] private Content.Server._Mono.Company.CompanyManager _companyTreasury = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ShipOwnershipSystem _shipOwnership = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;

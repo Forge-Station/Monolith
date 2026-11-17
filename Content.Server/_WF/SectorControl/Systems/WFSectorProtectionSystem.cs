@@ -1,4 +1,5 @@
 using Content.Server.Station.Components;
+using Content.Server._WF.SectorControl.Components;
 using Content.Shared._WF.SectorControl;
 using Content.Shared.Station.Components;
 using Robust.Shared.Configuration;
@@ -34,6 +35,10 @@ public sealed partial class WFSectorProtectionSystem : EntitySystem
 
     private void OnClaimAttempt(ref WFSectorClaimAttemptEvent args)
     {
+        // Company homes paint the origin and a faction station's own cell. Every other claim still stops there.
+        if (!args.Cancelled && args.Source is { } source && HasComp<WFSectorCompanyHomeComponent>(source))
+            return;
+
         if (!args.Cancelled && IsProtected(args.Map, args.Cell))
             args.Cancelled = true;
     }

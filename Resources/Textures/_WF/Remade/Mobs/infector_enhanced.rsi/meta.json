@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/infector_enhanced.dmi)",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "preview"
+    },
+    {
+      "name": "enhanced_infector_head"
+    },
+    {
+      "name": "enhanced_infector_r_arm"
+    },
+    {
+      "name": "enhanced_infector_l_arm"
+    },
+    {
+      "name": "enhanced_infector_r_leg",
+      "directions": 4
+    },
+    {
+      "name": "enhanced_infector_l_leg",
+      "directions": 4
+    },
+    {
+      "name": "enhanced_infector_proboscis",
+      "directions": 4
+    },
+    {
+      "name": "enhanced_infector_chest",
+      "directions": 4
+    },
+    {
+      "name": "enhanced_infector_r_arm_lying"
+    },
+    {
+      "name": "enhanced_infector_l_arm_lying"
+    },
+    {
+      "name": "enhanced_infector_proboscis_lying"
+    },
+    {
+      "name": "enhanced_infector_chest_lying"
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

@@ -5,11 +5,12 @@
   components:
   - type: Sprite
     sprite: Effects/explosion.rsi
-    state: explosionfast
     scale: 1.2, 1.2
     drawdepth: Effects
     noRot: true
-    shader: unshaded
+    layers:
+    - state: explosionfast
+      shader: unshaded
   - type: TimedDespawn
     lifetime: 0.48
   - type: PointLight

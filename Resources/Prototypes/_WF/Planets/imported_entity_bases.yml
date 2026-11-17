@@ -534,12 +534,6 @@
   - type: Sprite
     sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
 
-# Shared crew-body parent. The IPC crew mob also parents MobIPC.
-- type: entity
-  id: WFCrewKit
-  abstract: true
-  categories: [ HideSpawnMenu ]
-
 # Station crane the mobile drydock crane is cut down from.
 - type: entity
   parent: BaseStructure

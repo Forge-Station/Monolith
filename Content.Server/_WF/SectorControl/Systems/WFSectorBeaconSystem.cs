@@ -1,6 +1,7 @@
 using Content.Server._WF.NpcCrew.Systems;
 using Content.Server._WF.SectorControl.Components;
 using Content.Server.Administration.Managers;
+using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Shared._Mono.Company;
 using Content.Shared._WF.SectorControl;
@@ -10,10 +11,10 @@ using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Player;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Verbs;
+using Robust.Server.Player;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -28,7 +29,9 @@ namespace Content.Server._WF.SectorControl.Systems;
 public sealed class WFSectorBeaconSystem : EntitySystem
 {
     [Dependency] private IAdminManager _admin = default!;
+    [Dependency] private IChatManager _chat = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _players = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private MobStateSystem _mobs = default!;
@@ -205,12 +208,31 @@ public sealed class WFSectorBeaconSystem : EntitySystem
         if (!ent.Comp.Active)
             return;
 
+        if (ent.Comp.Cell is { } lost)
+            AnnounceDestroyed(lost, ent.Comp.Company);
+
         var faction = ent.Comp.Faction;
         ent.Comp.Active = false;
         ent.Comp.Cell = null;
         _territory.Release(ent.Owner);
         if (faction is { } id)
             RefreshLegend(id);
+    }
+
+    /// <summary>Tells every company, in chat, that a beacon is gone and names the hex.</summary>
+    private void AnnounceDestroyed(WFSectorCell cell, ProtoId<CompanyPrototype>? company)
+    {
+        var name = company is { } id ? CompanyName(id) : Loc.GetString("wf-sector-beacon-name");
+        var text = Loc.GetString("wf-sector-beacon-destroyed", ("company", name), ("callsign", WFSectorHex.Callsign(cell)));
+        foreach (var session in _players.Sessions)
+        {
+            if (session.AttachedEntity is not { } mob)
+                continue;
+            if (!TryComp<CompanyComponent>(mob, out var member) || member.CompanyName == "None")
+                continue;
+
+            _chat.DispatchServerMessage(session, text);
+        }
     }
 
     /// <summary>A living beacon keeps its cell. Parking a ship on it does not free the colour.</summary>

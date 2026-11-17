@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/spitter.dmi)",
+  "size": {
+    "x": 40,
+    "y": 40
+  },
+  "states": [
+    {
+      "name": "preview",
+      "directions": 4
+    },
+    {
+      "name": "spitter_chest",
+      "directions": 4
+    },
+    {
+      "name": "spitter_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "spitter_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "spitter_r_leg",
+      "directions": 4
+    },
+    {
+      "name": "spitter_l_leg",
+      "directions": 4
+    },
+    {
+      "name": "spitter_head",
+      "directions": 4
+    },
+    {
+      "name": "spitter_torso_lying",
+      "directions": 4
+    },
+    {
+      "name": "spitter_r_arm_lying",
+      "directions": 4
+    },
+    {
+      "name": "spitter_l_arm_lying",
+      "directions": 4
+    },
+    {
+      "name": "spitter_r_leg_lying",
+      "directions": 4
+    },
+    {
+      "name": "spitter_l_leg_lying",
+      "directions": 4
+    },
+    {
+      "name": "spitter_head_lying",
+      "directions": 4
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

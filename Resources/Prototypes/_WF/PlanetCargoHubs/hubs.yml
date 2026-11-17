@@ -140,8 +140,8 @@
       property: Energy
       interpolate: Nearest
       maxDuration: 1.6
-      minValue: 0.1
-      maxValue: 2.5
+      startValue: 0.1
+      endValue: 2.5
       isLooped: true
       enabled: true
   - type: Damageable

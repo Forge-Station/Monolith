@@ -101,3 +101,40 @@ wf-sector-beacon-legend = {$faction}: {$count} {$count ->
     *[other] beacons
 }
 research-technology-sector-beacon = Claim beacons
+wf-sector-home-nt = NT sector
+wf-sector-beacon-destroyed = {$company} beacon destroyed in {$callsign}.
+wf-sector-toll-paid = Paid {$amount} to {$company} for passage through {$callsign}.
+
+# Player beacon factions
+wf-sector-faction-aetheriondynamics = Aetherion Dynamics
+wf-sector-faction-cerberussurplusprovisions = Cerberus Surplus Provisions
+wf-sector-faction-civildefensemilita = Civil Defense Militia
+wf-sector-faction-colonial = NanoTrasen
+wf-sector-faction-darkmatterenterprises = Dark Matter Enterprises
+wf-sector-faction-drakeindustries = Drake Industries
+wf-sector-faction-harmonymedicalenterprises = Harmony Medical Enterprises
+wf-sector-faction-horizonenergy = Horizon Energy
+wf-sector-faction-imperial = Священная Империя Вермиллионов
+wf-sector-faction-md = Trauma Team International
+wf-sector-faction-mmc = Mieyo Manufacturing Concern
+wf-sector-faction-midnightarmsco = Midnight Arms Co.
+wf-sector-faction-nexus = Nexus Star Consortium
+wf-sector-faction-nosskeeienresearchanddevelopment = Nosske-Eien Research and Development
+wf-sector-faction-pdv = PDV
+wf-sector-faction-plxcor = PLXCOR
+wf-sector-faction-redsailcorsairs = RedSail Corsairs
+wf-sector-faction-renegates = Восставшие колонии Ренегатов
+wf-sector-faction-steelhammermanufacturing = Steel Hammer Manufacturing
+wf-sector-faction-tsf = Транс-Солнечная Федерация
+wf-sector-faction-tsfhighcomm = Winter Solstice
+wf-sector-faction-techniclogistic = TechnicLogistic
+wf-sector-faction-thehive = Улей
+wf-sector-faction-thevipergroup = Viper Group
+wf-sector-faction-ussp = СССП(К)
+wf-sector-faction-ullmanindustries = Ullman Industries
+wf-sector-faction-universalstatesofamerica = Universal States of America
+wf-sector-faction-wfads = Automated Defense System
+wf-sector-faction-wfasf = Astraeus Solar Federation
+wf-sector-faction-wfunderground = Underground
+wf-sector-faction-blackhawkpmc = Blackhawk Military Contracting
+wf-sector-faction-paycheckbratva = Paycheck Bratva

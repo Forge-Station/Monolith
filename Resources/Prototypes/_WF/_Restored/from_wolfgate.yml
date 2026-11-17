@@ -7481,12 +7481,10 @@
   - type: ItemSlots
     slots:
       turret:
-        startingItem: VehicleHumveeTurretArmed
         whitelist:
           components:
           - HardpointItem
       wheel-1:
-        startingItem: VehicleHumveeWheel
         whitelist:
           components:
           - VehicleWheelItem
@@ -7561,7 +7559,6 @@
   - type: ItemSlots
     slots:
       wheel-1:
-        startingItem: VehicleHumveeWheel
         whitelist:
           components:
           - VehicleWheelItem
@@ -7640,7 +7637,6 @@
   - type: ItemSlots
     slots:
       wheel-1:
-        startingItem: RMCVanWheel
         whitelist:
           components:
           - VehicleWheelItem
@@ -12702,7 +12698,7 @@
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
-    Chest: WFMobVulpkaninTorso
+    Chest: MobVulpkaninTorso
     UndergarmentTop: MobHumanoidAnyMarking
     UndergarmentBottom: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
@@ -12711,14 +12707,14 @@
     TailBehind: MobHumanoidAnyMarking
     TailOversuit: MobHumanoidAnyMarking
     Eyes: MobHumanoidEyes
-    LArm: WFMobVulpkaninLArm
-    RArm: WFMobVulpkaninRArm
-    LHand: WFMobVulpkaninLHand
-    RHand: WFMobVulpkaninRHand
-    LLeg: WFMobVulpkaninLLegDigi
-    RLeg: WFMobVulpkaninRLegDigi
-    LFoot: WFMobVulpkaninLFootDigi
-    RFoot: WFMobVulpkaninRFootDigi
+    LArm: MobVulpkaninLArm
+    RArm: MobVulpkaninRArm
+    LHand: MobVulpkaninLHand
+    RHand: MobVulpkaninRHand
+    LLeg: MobVulpkaninLLeg
+    RLeg: MobVulpkaninRLeg
+    LFoot: MobVulpkaninLFoot
+    RFoot: MobVulpkaninRFoot
 
 - type: humanoidBaseSprite
   id: WFMobCanineHead

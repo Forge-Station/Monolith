@@ -9,9 +9,9 @@
     sprite: _Forge/Structures/Machines/ATM/ren_ATM.rsi
     layers:
     - map: ["computerLayerBody"]
-      state: icon
+      state: icon-1
     - map: ["computerLayerScreen"]
-      state: unshaded
+      state: unshaded-1
 
 - type: entity
   parent: [ComputerWallmountBankATM]

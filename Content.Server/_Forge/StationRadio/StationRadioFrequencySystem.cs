@@ -14,14 +14,14 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._Forge.StationRadio;
 
-public sealed class StationRadioFrequencySystem : EntitySystem
+public sealed partial class StationRadioFrequencySystem : EntitySystem
 {
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly RadioDeviceSystem _radioDevice = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _containers = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private RadioDeviceSystem _radioDevice = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _containers = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

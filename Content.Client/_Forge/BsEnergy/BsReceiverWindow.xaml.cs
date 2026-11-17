@@ -11,7 +11,7 @@ namespace Content.Client._Forge.BsEnergy;
 [GenerateTypedNameReferences]
 public sealed partial class BsReceiverWindow : FancyWindow
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private readonly string _minuteLocStr = Loc.GetString("ui-bs-energy-time-minute");
     private readonly string _hourLocStr = Loc.GetString("ui-bs-energy-time-hour");

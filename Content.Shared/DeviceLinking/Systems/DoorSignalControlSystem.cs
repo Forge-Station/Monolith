@@ -17,8 +17,10 @@ public sealed partial class DoorSignalControlSystem : EntitySystem
     [Dependency] private EntityQuery<DoorComponent> _doorQuery;
     [Dependency] private EntityQuery<DoorBoltComponent> _doorBoltQuery;
 
+    // Map init, not component init. Adding the bolt port during component init changes the
+    // saved component on an uninitialized map, and the prototype save test rejects that.
     [SubscribeLocalEvent]
-    private void OnInit(Entity<DoorSignalControlComponent> ent, ref ComponentInit args)
+    private void OnMapInit(Entity<DoorSignalControlComponent> ent, ref MapInitEvent args)
     {
         _signal.EnsureSinkPorts(ent.Owner, ent.Comp.OpenPort, ent.Comp.ClosePort, ent.Comp.TogglePort);
 

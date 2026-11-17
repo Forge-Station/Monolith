@@ -1,16 +1,14 @@
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
-using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._Crescent.ShipShields;
 
 public sealed partial class ShipShieldOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly SharedMapSystem _mapManager = default!; // Forge-Change
+    [Dependency] private IOverlayManager _overlayManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
 
     public override void Initialize()
     {

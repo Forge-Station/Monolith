@@ -58,27 +58,27 @@ public sealed partial class BoardingTeleportConsoleSystem : EntitySystem
 
 {
 
-    [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
+    [Dependency] private AtmosphereSystem _atmosphere = default!;
 
-    [Dependency] private readonly DeviceListSystem _deviceList = default!;
+    [Dependency] private DeviceListSystem _deviceList = default!;
 
-    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private SharedMapSystem _map = default!;
 
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
-    [Dependency] private readonly ShuttleConsoleSystem _shuttleConsole = default!;
+    [Dependency] private ShuttleConsoleSystem _shuttleConsole = default!;
 
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    [Dependency] private readonly BoardingTeleportEngineSystem _engine = default!;
+    [Dependency] private BoardingTeleportEngineSystem _engine = default!;
 
-    [Dependency] private readonly BoardingTeleportLockSystem _lock = default!;
+    [Dependency] private BoardingTeleportLockSystem _lock = default!;
 
 
 

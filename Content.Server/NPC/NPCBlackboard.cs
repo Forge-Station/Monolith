@@ -327,6 +327,21 @@ public sealed partial class NPCBlackboard : IEnumerable<KeyValuePair<string, obj
     public const string RotateSpeed = "RotateSpeed";
     public const string UtilityTarget = "UtilityTarget";
 
+    /// <summary>
+    /// Where shots at this NPC came from. Cleared once they arrive.
+    /// </summary>
+    public const string IncomingFireCoordinates = "IncomingFireCoordinates";
+
+    /// <summary>
+    /// Last place a combat target was seen.
+    /// </summary>
+    public const string LastSeenCoordinates = "LastSeenCoordinates";
+
+    /// <summary>
+    /// Spot to check after the target is lost, before going back to idle.
+    /// </summary>
+    public const string InvestigateCoordinates = "InvestigateCoordinates";
+
     private const string VisionRadius = "VisionRadius";
     private const string AggroVisionRadius = "AggroVisionRadius";
 

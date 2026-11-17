@@ -20,10 +20,10 @@ namespace Content.Client._Forge.Botany.HydroponicsConsole;
 [GenerateTypedNameReferences]
 public sealed partial class HydroponicsConsoleWindow : BaseWindow
 {
-    [Dependency] private readonly IResourceCache _resCache = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IResourceCache _resCache = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private readonly BotanyUiStyles _styles;
     private readonly ClientGameTicker _ticker;

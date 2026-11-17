@@ -11,10 +11,10 @@ namespace Content.Shared._Forge.Xenomorphs;
 /// and standing on weeds speeds them up while slowing everyone else via
 /// <see cref="SpeedModifierContactsComponent"/>.
 /// </summary>
-public sealed class ForgeXenoWeedsSystem : EntitySystem
+public sealed partial class ForgeXenoWeedsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private MovementSpeedModifierSystem _movement = default!;
 
     public override void Initialize()
     {

@@ -12,7 +12,7 @@ namespace Content.Server._Forge.Trade;
 
 public sealed partial class NcContractSystem : EntitySystem
 {
-    [Dependency] private readonly MapLoaderSystem _contractMapLoader = default!;
+    [Dependency] private MapLoaderSystem _contractMapLoader = default!;
 
     private readonly HashSet<string> _droneHuntCorePrototypeScratch = new(StringComparer.Ordinal);
     private List<Entity<MapGridComponent>> _droneHuntPlacementGridScratch = new();

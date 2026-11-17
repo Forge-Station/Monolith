@@ -9,7 +9,7 @@ public static class WFSectorHex
     private static readonly float Sqrt3 = MathF.Sqrt(3f);
 
     /// <summary>How far from the origin the sector's cells reach, in metres: the grid the sector map outlines, and the only cells anyone may hold.</summary>
-    public const float SectorRadius = 30000f;
+    public const float SectorRadius = 60000f;
 
     /// <summary>Whether a cell is one of the sector's: its centre lies within <see cref="SectorRadius"/>.</summary>
     public static bool InSector(WFSectorCell cell, float size)

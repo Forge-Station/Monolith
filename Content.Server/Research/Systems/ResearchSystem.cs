@@ -27,6 +27,7 @@ namespace Content.Server.Research.Systems
         [Dependency] private ServerStationSystem _station = default!;
         [Dependency] private EntityLookupSystem _lookup = default!;
         [Dependency] private ShuttleConsoleLockSystem _shuttleLock = default!;
+        [Dependency] private Content.Server._Mono.Company.CompanyManager _companies = default!;
 
         public override void Initialize()
         {

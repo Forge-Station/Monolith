@@ -131,21 +131,22 @@ public sealed partial class ShipAccessReaderSystem : EntitySystem
         // Find all accessible ID cards for the user
         var accessibleCards = FindAccessibleIdCards(user);
 
-        // Check for company-based access (USSP, Rogue, TSF) using ID card company
-        if (TryComp<CompanyComponent>(gridUid, out var shipCompany))
+        // Matching company on the body or an ID grants ship access.
+        if (TryComp<CompanyComponent>(gridUid, out var shipCompany) &&
+            shipCompany.CompanyName != "None")
         {
-            // Check if ship has one of the special company designations
-            if (shipCompany.CompanyName == "USSP" || shipCompany.CompanyName == "Rogue" || shipCompany.CompanyName == "TSF")
+            if (TryComp<CompanyComponent>(user, out var userCompany) &&
+                userCompany.CompanyName == shipCompany.CompanyName)
             {
-                // Check each accessible ID card for matching company
-                foreach (var cardUid in accessibleCards)
+                return true;
+            }
+
+            foreach (var cardUid in accessibleCards)
+            {
+                if (TryComp<IdCardComponent>(cardUid, out var idCard) &&
+                    idCard.CompanyName == shipCompany.CompanyName)
                 {
-                    if (TryComp<IdCardComponent>(cardUid, out var idCard) &&
-                        idCard.CompanyName == shipCompany.CompanyName)
-                    {
-                        // Log.Debug("ShipAccess: User {0} has company access to {1} ship via ID card {2}", user, shipCompany.CompanyName, cardUid);
-                        return true; // ID card company matches ship company
-                    }
+                    return true;
                 }
             }
         }

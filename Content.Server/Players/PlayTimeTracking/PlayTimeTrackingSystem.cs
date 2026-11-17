@@ -200,17 +200,21 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
         var isWhitelisted = player.ContentData()?.Whitelisted ?? false;
         var enforcePlaytime = _cfg.GetCVar(CCVars.GameRoleTimers);
 
-        if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
-        {
-            Log.Error($"Unable to check playtimes {Environment.StackTrace}");
-            playTimes = new Dictionary<string, TimeSpan>();
-        }
+if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
+{
+    if (enforcePlaytime)
+        Log.Error($"Unable to check playtimes {Environment.StackTrace}");
+    playTimes = new Dictionary<string, TimeSpan>();
+}
 
-        return JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes,
-            (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter,
-            bypassPlaytimeForGlobalWhitelist: isWhitelisted,
-            enforcePlaytimeRequirements: enforcePlaytime);
-    }
+if (!TryGetProfile(player.UserId, enforcePlaytime, out var profile))
+    return true;
+
+return JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes,
+    profile,
+    bypassPlaytimeForGlobalWhitelist: isWhitelisted,
+    enforcePlaytimeRequirements: enforcePlaytime);
+}
 
     public HashSet<ProtoId<JobPrototype>> GetDisallowedJobs(ICommonSession player)
     {
@@ -218,13 +222,15 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
         var isWhitelisted = player.ContentData()?.Whitelisted ?? false;
         var enforcePlaytime = _cfg.GetCVar(CCVars.GameRoleTimers);
 
-        if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
-        {
-            Log.Error($"Unable to check playtimes {Environment.StackTrace}");
-            playTimes = new Dictionary<string, TimeSpan>();
-        }
+if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
+{
+    if (enforcePlaytime)
+        Log.Error($"Unable to check playtimes {Environment.StackTrace}");
+    playTimes = new Dictionary<string, TimeSpan>();
+}
 
-        var profile = (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter;
+if (!TryGetProfile(player.UserId, enforcePlaytime, out var profile))
+    return roles;
 
         foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
         {
@@ -242,20 +248,25 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
         if (!_playerManager.TryGetSessionById(userId, out var player))
             return;
 
-        if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
-        {
-            // Sorry mate but your playtimes haven't loaded.
-            Log.Error($"Playtimes weren't ready yet for {player} on roundstart!");
-            playTimes ??= new Dictionary<string, TimeSpan>();
-        }
         var isWhitelisted = player.ContentData()?.Whitelisted ?? false;
         var enforcePlaytime = _cfg.GetCVar(CCVars.GameRoleTimers);
+
+        if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
+        {
+            // Dummy sessions never load a database record. That is only a problem when role timers are on.
+            if (enforcePlaytime)
+                Log.Error($"Playtimes weren't ready yet for {player} on roundstart!");
+            playTimes = new Dictionary<string, TimeSpan>();
+        }
+
+        if (!TryGetProfile(userId, enforcePlaytime, out var profile))
+            return;
 
         for (var i = 0; i < jobs.Count; i++)
         {
             if (_prototypes.TryIndex(jobs[i], out var job)
                 && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes,
-                    (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter,
+                    profile,
                     bypassPlaytimeForGlobalWhitelist: isWhitelisted,
                     enforcePlaytimeRequirements: enforcePlaytime))
             {
@@ -265,6 +276,19 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
             jobs.RemoveSwap(i);
             i--;
         }
+    }
+
+    /// <summary>
+    /// Dummy sessions never load a profile. With role timers off there is nothing to filter.
+    /// </summary>
+    private bool TryGetProfile(NetUserId userId, bool enforcePlaytime, out HumanoidCharacterProfile? profile)
+    {
+        profile = null;
+        if (!_preferencesManager.TryGetCachedPreferences(userId, out var prefs))
+            return enforcePlaytime;
+
+        profile = prefs.SelectedCharacter as HumanoidCharacterProfile;
+        return true;
     }
 
     public void PlayerRolesChanged(ICommonSession player)

@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Meridian Rift at https://github.com/Aphelion-Moon/Meridian-Rift/tree/5cec204da500c61fa94fdaf5c5a138764920e2c1 (/obj/item/clothing/suit/toggle/jacket/croptop_bomber_jacket/badge, /datum/greyscale_config/croptop_bomber_jacket), which carries the art of NovaSector, Skyrat-tg and tgstation. Converted for Wolfgate by Tools/_WF/MeridianClothing/port.py.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equipped-OUTERCLOTHING-1-c1",
+      "directions": 4
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-2-c2",
+      "directions": 4
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-3-c3",
+      "directions": 4
+    },
+    {
+      "name": "icon-1-c1"
+    },
+    {
+      "name": "icon-2-c2"
+    },
+    {
+      "name": "icon-3-c3"
+    }
+  ]
+}

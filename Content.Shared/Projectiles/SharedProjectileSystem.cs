@@ -653,7 +653,7 @@ public record struct ProjectileHitEvent(DamageSpecifier Damage, EntityUid Target
 /// Raised on the projectile for every hit. The shield handler owns <see cref="ProjectileHitEvent"/> and raises this even when it returns early.
 /// </summary>
 [ByRefEvent]
-public readonly record struct ProjectileHitNoticedEvent;
+public readonly record struct ProjectileHitNoticedEvent(EntityUid Target, EntityUid? Shooter);
 
 /// <summary>
 /// Mono - raised when a projectile is spent

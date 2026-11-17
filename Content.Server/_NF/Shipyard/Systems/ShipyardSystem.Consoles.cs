@@ -28,6 +28,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Mind;
 using Content.Server.Preferences.Managers;
 using Content.Server.StationRecords;
+using Content.Server._Forge.Company;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Database;
 using Content.Shared.Preferences;
@@ -318,6 +319,13 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         var deedShuttle = EnsureComp<ShuttleDeedComponent>(shuttleUid);
         AssignShuttleDeedProperties(deedShuttle, shuttleUid, name, shuttleOwner, voucherUsed, voucherUsed ? targetId.ToString() : null);
 
+        if (TryComp<CompanyTreasuryShipComponent>(targetId, out var treasuryShip))
+        {
+            var copy = EnsureComp<CompanyTreasuryShipComponent>(shuttleUid);
+            copy.CompanyId = treasuryShip.CompanyId;
+            copy.RefundPercent = treasuryShip.RefundPercent;
+        }
+
         // Lock all shuttle consoles on the ship to this deed
         var shuttleConsoleQuery = EntityQueryEnumerator<ShuttleConsoleComponent, TransformComponent>();
         while (shuttleConsoleQuery.MoveNext(out var consoleUid, out _, out var transform))
@@ -535,6 +543,14 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             return;
         }
 
+        var treasuryCompany = string.Empty;
+        var treasuryRefund = 0f;
+        if (TryComp<CompanyTreasuryShipComponent>(shuttleUid, out var treasuryShip))
+        {
+            treasuryCompany = treasuryShip.CompanyId;
+            treasuryRefund = treasuryShip.RefundPercent;
+        }
+
         var saleResult = TrySellShuttle(stationUid, shuttleUid, uid, out var bill);
         if (saleResult.Error != ShipyardSaleError.Success)
         {
@@ -573,7 +589,15 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             }
             bill = int.Max(0, bill);
 
-            _bank.TryBankDeposit(player, bill);
+            PayShipSale(player, bill, treasuryCompany, treasuryRefund);
+            PlayConfirmSound(player, uid, component);
+        }
+        else if (!string.IsNullOrEmpty(treasuryCompany) && treasuryRefund > 0f)
+        {
+            if (!component.IgnoreBaseSaleRate)
+                bill = (int)(bill * _baseSaleRate);
+            bill = int.Max(0, bill);
+            PayShipSale(player, bill, treasuryCompany, treasuryRefund);
             PlayConfirmSound(player, uid, component);
         }
 
@@ -1050,6 +1074,25 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
     }
 
     // Calculates sales tax for a particular account.
+    private void PayShipSale(EntityUid player, int bill, string companyId, float refundPercent)
+    {
+        if (bill <= 0)
+            return;
+
+        if (string.IsNullOrEmpty(companyId) || refundPercent <= 0f)
+        {
+            _bank.TryBankDeposit(player, bill);
+            return;
+        }
+
+        var companyCut = (int)Math.Round(bill * Math.Clamp(refundPercent, 0f, 1f));
+        companyCut = Math.Clamp(companyCut, 0, bill);
+        if (companyCut > 0)
+            _ = _companyTreasury.TryDepositBank(companyId, companyCut);
+        if (bill - companyCut > 0)
+            _bank.TryBankDeposit(player, bill - companyCut);
+    }
+
     private int CalculateSalesTax(int sellValue, float taxRate)
     {
         if (float.IsFinite(taxRate) && taxRate > 0f)

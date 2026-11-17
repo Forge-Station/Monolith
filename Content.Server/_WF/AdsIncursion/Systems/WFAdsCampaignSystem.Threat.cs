@@ -10,7 +10,7 @@ public sealed partial class WFAdsCampaignSystem
     public const int MaxTier = 5;
 
     /// <summary>The sector's radius, against which a held cell's nearness to the origin is scored.</summary>
-    private const float SectorRadius = 27000f;
+    private static readonly float SectorRadius = WFSectorHex.SectorRadius * 0.9f;
 
     /// <summary>The most the nearness of held space to the origin adds to the score.</summary>
     private const float NearnessScore = 20f;

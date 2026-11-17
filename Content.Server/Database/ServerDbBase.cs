@@ -1,4 +1,6 @@
 using System.Collections.Immutable;
+using System.Data;
+using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
@@ -12,6 +14,7 @@ using Content.Server._WF.Prototypes; // WOLFGATE(Prototypes)
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Shared._Common.Consent; // WOLFGATE(Genitals)
+using Content.Shared._Forge.Company;
 using Content.Shared._Mono.Company;
 using Content.Shared._WF.Augments; // WOLFGATE(Augments)
 using Content.Shared._WF.Biotype; // WOLFGATE(Biotype)
@@ -2200,21 +2203,24 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         // Mono
         #region Company
 
-        public async Task<bool> AddCompanyMember(Guid player, ProtoId<CompanyPrototype> company)
+        public async Task<bool> AddCompanyMember(Guid player, ProtoId<CompanyPrototype> company, int characterSlot, string characterName)
         {
             await using var db = await GetDb();
-            var exists = await db.DbContext.CompanyMembers
-                .Where(w => w.PlayerUserId == player)
-                .Where(w => w.CompanyId == company.Id)
-                .AnyAsync();
 
-            if (exists)
+            // One company per character.
+            var slotTaken = await db.DbContext.CompanyMembers
+                .Where(w => w.PlayerUserId == player)
+                .Where(w => w.CharacterSlot == characterSlot)
+                .AnyAsync();
+            if (slotTaken)
                 return false;
 
             var member = new CompanyMember
             {
                 PlayerUserId = player,
                 CompanyId = company,
+                CharacterSlot = characterSlot,
+                CharacterName = characterName,
             };
             db.DbContext.CompanyMembers.Add(member);
             await db.DbContext.SaveChangesAsync();
@@ -2227,7 +2233,32 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return await db.DbContext.CompanyMembers
                 .Where(w => w.PlayerUserId == player)
                 .Select(w => w.CompanyId)
+                .Distinct()
                 .ToListAsync(cancel);
+        }
+
+        public async Task<CompanyMemberRecord?> GetCompanyMemberForCharacter(Guid player, int characterSlot, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var member = await db.DbContext.CompanyMembers
+                .Where(w => w.PlayerUserId == player)
+                .Where(w => w.CharacterSlot == characterSlot)
+                .Include(c => c.Player)
+                .FirstOrDefaultAsync(cancel);
+
+            if (member == null)
+                return null;
+
+            return new CompanyMemberRecord
+            {
+                Company = member.CompanyId,
+                Owner = member.Owner,
+                PlayerUserId = member.PlayerUserId,
+                CharacterSlot = member.CharacterSlot,
+                CharacterName = member.CharacterName,
+                LastSeenUserName = member.Player.LastSeenUserName,
+                RoleId = member.RoleId,
+            };
         }
 
         public async Task<IEnumerable<CompanyMemberRecord>> GetCompanyMembers(ProtoId<CompanyPrototype> company, CancellationToken cancel)
@@ -2243,7 +2274,10 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 Company = company,
                 Owner = m.Owner,
                 PlayerUserId = m.PlayerUserId,
+                CharacterSlot = m.CharacterSlot,
+                CharacterName = m.CharacterName,
                 LastSeenUserName = m.Player.LastSeenUserName,
+                RoleId = m.RoleId,
             });
         }
 
@@ -2259,7 +2293,10 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 Company = m.CompanyId,
                 Owner = m.Owner,
                 PlayerUserId = m.PlayerUserId,
+                CharacterSlot = m.CharacterSlot,
+                CharacterName = m.CharacterName,
                 LastSeenUserName = m.Player.LastSeenUserName,
+                RoleId = m.RoleId,
             });
         }
 
@@ -2270,7 +2307,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .Where(w => w.CompanyId == company.Id)
                 .Where(w => w.PlayerUserId == player)
                 .Include(c => c.Player)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancel);
 
             if (member == null)
                 return null;
@@ -2281,32 +2318,1009 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 LastSeenUserName = member.Player.LastSeenUserName,
                 Owner = member.Owner,
                 PlayerUserId = member.PlayerUserId,
+                CharacterSlot = member.CharacterSlot,
+                CharacterName = member.CharacterName,
+                RoleId = member.RoleId,
             };
         }
 
-        public async Task SetCompanyOwner(ProtoId<CompanyPrototype> company, Guid player, bool owner)
+        public async Task SetCompanyOwner(ProtoId<CompanyPrototype> company, Guid player, int characterSlot, bool owner)
+        {
+            await using var db = await GetDb();
+
+            if (owner)
+            {
+                // Only one leader character per company; clear other owners first.
+                await db.DbContext.CompanyMembers
+                    .Where(w => w.CompanyId == company.Id && w.Owner)
+                    .ExecuteUpdateAsync(setters => setters.SetProperty(m => m.Owner, false));
+            }
+
+            await db.DbContext.CompanyMembers
+                .Where(w => w.CompanyId == company.Id)
+                .Where(w => w.PlayerUserId == player)
+                .Where(w => w.CharacterSlot == characterSlot)
+                .ExecuteUpdateAsync(setters => setters.SetProperty(m => m.Owner, owner));
+        }
+
+        public async Task SetCompanyMemberRole(ProtoId<CompanyPrototype> company, Guid player, int characterSlot, Guid? roleId)
         {
             await using var db = await GetDb();
             await db.DbContext.CompanyMembers
                 .Where(w => w.CompanyId == company.Id)
                 .Where(w => w.PlayerUserId == player)
-                .ExecuteUpdateAsync(setters => setters.SetProperty(m => m.Owner, owner));
+                .Where(w => w.CharacterSlot == characterSlot)
+                .ExecuteUpdateAsync(setters => setters.SetProperty(m => m.RoleId, roleId));
         }
 
-        public async Task<bool> RemoveCompanyMember(Guid player, ProtoId<CompanyPrototype> company)
+        public async Task<bool> RemoveCompanyMember(Guid player, ProtoId<CompanyPrototype> company, int? characterSlot = null)
         {
             await using var db = await GetDb();
-            var entry = await db.DbContext.CompanyMembers
+            var query = db.DbContext.CompanyMembers
                 .Where(w => w.PlayerUserId == player)
-                .Where(w => w.CompanyId == company.Id)
-                .SingleOrDefaultAsync();
+                .Where(w => w.CompanyId == company.Id);
 
-            if (entry == null)
+            if (characterSlot != null)
+                query = query.Where(w => w.CharacterSlot == characterSlot);
+
+            var entries = await query.ToListAsync();
+            if (entries.Count == 0)
                 return false;
 
-            db.DbContext.CompanyMembers.Remove(entry);
+            db.DbContext.CompanyMembers.RemoveRange(entries);
             await db.DbContext.SaveChangesAsync();
             return true;
+        }
+
+        // Forge: company organization
+        public async Task<List<CompanyRole>> GetCompanyRoles(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyRoles
+                .Where(r => r.CompanyId == companyId)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<CompanyRole?> GetCompanyRole(Guid roleId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyRoles.FirstOrDefaultAsync(r => r.Id == roleId, cancel);
+        }
+
+        public async Task<CompanyRole> UpsertCompanyRole(CompanyRole role)
+        {
+            await using var db = await GetDb();
+            var existing = await db.DbContext.CompanyRoles.FirstOrDefaultAsync(r => r.Id == role.Id);
+            if (existing == null)
+            {
+                db.DbContext.CompanyRoles.Add(role);
+            }
+            else
+            {
+                existing.Name = role.Name;
+                existing.Permissions = role.Permissions;
+                existing.AccessTier = role.AccessTier;
+                existing.IsDefault = role.IsDefault;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+            return role;
+        }
+
+        public async Task<bool> DeleteCompanyRole(Guid roleId)
+        {
+            await using var db = await GetDb();
+            var role = await db.DbContext.CompanyRoles.FirstOrDefaultAsync(r => r.Id == roleId);
+            if (role == null)
+                return false;
+
+            // Clear role from members
+            await db.DbContext.CompanyMembers
+                .Where(m => m.RoleId == roleId)
+                .ExecuteUpdateAsync(s => s.SetProperty(m => m.RoleId, (Guid?)null));
+
+            db.DbContext.CompanyRoles.Remove(role);
+            await db.DbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task EnsureDefaultCompanyRole(string companyId)
+        {
+            await using var db = await GetDb();
+            var roles = await db.DbContext.CompanyRoles
+                .Where(r => r.CompanyId == companyId)
+                .ToListAsync();
+            var changed = false;
+
+            foreach (var preset in Content.Shared._Forge.Company.CompanyRolePresets.All)
+            {
+                var role = roles.FirstOrDefault(r => r.Name == preset.Name);
+                if (role == null && preset.Leader)
+                    role = roles.FirstOrDefault(r => r.Name is "Лидер" or "Leader");
+                if (role == null && preset.Default)
+                    role = roles.FirstOrDefault(r => r.IsDefault || r.Name == "Member");
+
+                if (role == null)
+                {
+                    role = new CompanyRole
+                    {
+                        Id = Guid.NewGuid(),
+                        CompanyId = companyId,
+                        Name = preset.Name,
+                        Permissions = (long)preset.Permissions,
+                        AccessTier = (int)preset.Tier,
+                        IsDefault = preset.Default,
+                    };
+                    db.DbContext.CompanyRoles.Add(role);
+                    roles.Add(role);
+                    changed = true;
+                    continue;
+                }
+
+                // Adopt a legacy name once. Later edits of a preset keep their flags.
+                if (role.Name != preset.Name)
+                {
+                    role.Name = preset.Name;
+                    role.Permissions = (long)preset.Permissions;
+                    role.AccessTier = (int)preset.Tier;
+                    role.IsDefault = preset.Default;
+                    changed = true;
+                }
+                else
+                {
+                    // A stock preset that is only missing the safe flag picks it up.
+                    // A role someone already edited is left alone.
+                    var updated = (long)preset.Permissions;
+                    var missing = updated & ~role.Permissions;
+                    var extra = role.Permissions & ~updated;
+                    if (extra == 0 && missing == (long)Content.Shared._Forge.Company.CompanyPermission.Vault)
+                    {
+                        role.Permissions = updated;
+                        changed = true;
+                    }
+                }
+            }
+
+            foreach (var role in roles)
+            {
+                if (!Content.Shared._Forge.Company.CompanyRolePresets.IsPreset(role.Name))
+                    continue;
+
+                var shouldDefault = role.Name == Content.Shared._Forge.Company.CompanyRolePresets.Member;
+                if (role.IsDefault == shouldDefault)
+                    continue;
+
+                role.IsDefault = shouldDefault;
+                changed = true;
+            }
+
+            if (changed)
+                await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> GetCompanyBankBalance(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var account = await db.DbContext.CompanyBankAccounts
+                .FirstOrDefaultAsync(a => a.CompanyId == companyId, cancel);
+            return account?.Balance ?? 0;
+        }
+
+        public async Task<Dictionary<string, int>> GetAllCompanyBankBalances(CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyBankAccounts
+                .ToDictionaryAsync(a => a.CompanyId, a => a.Balance, cancel);
+        }
+
+        public async Task SetCompanyBankBalance(string companyId, int balance)
+        {
+            await using var db = await GetDb();
+            var account = await db.DbContext.CompanyBankAccounts
+                .FirstOrDefaultAsync(a => a.CompanyId == companyId);
+            if (account == null)
+            {
+                db.DbContext.CompanyBankAccounts.Add(new CompanyBankAccount
+                {
+                    CompanyId = companyId,
+                    Balance = balance,
+                });
+            }
+            else
+            {
+                account.Balance = balance;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task EnsureCompanyBankAccount(string companyId)
+        {
+            await using var db = await GetDb();
+            if (await db.DbContext.CompanyBankAccounts.AnyAsync(a => a.CompanyId == companyId))
+                return;
+
+            db.DbContext.CompanyBankAccounts.Add(new CompanyBankAccount
+            {
+                CompanyId = companyId,
+                Balance = 0,
+            });
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<CompanyRelation>> GetCompanyRelations(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyRelations
+                .Where(r => r.CompanyAId == companyId || r.CompanyBId == companyId)
+                .ToListAsync(cancel);
+        }
+
+        public async Task SetCompanyRelation(string companyA, string companyB, int relationType)
+        {
+            // Canonicalize pair order
+            if (string.CompareOrdinal(companyA, companyB) > 0)
+                (companyA, companyB) = (companyB, companyA);
+
+            await using var db = await GetDb();
+            var existing = await db.DbContext.CompanyRelations
+                .FirstOrDefaultAsync(r => r.CompanyAId == companyA && r.CompanyBId == companyB);
+            if (existing == null)
+            {
+                db.DbContext.CompanyRelations.Add(new CompanyRelation
+                {
+                    CompanyAId = companyA,
+                    CompanyBId = companyB,
+                    RelationType = relationType,
+                });
+            }
+            else
+            {
+                existing.RelationType = relationType;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task ClearCompanyRelation(string companyA, string companyB)
+        {
+            if (string.CompareOrdinal(companyA, companyB) > 0)
+                (companyA, companyB) = (companyB, companyA);
+
+            await using var db = await GetDb();
+            var existing = await db.DbContext.CompanyRelations
+                .FirstOrDefaultAsync(r => r.CompanyAId == companyA && r.CompanyBId == companyB);
+            if (existing == null)
+                return;
+
+            db.DbContext.CompanyRelations.Remove(existing);
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<CompanyInvitation> AddCompanyInvitation(CompanyInvitation invite)
+        {
+            await using var db = await GetDb();
+            db.DbContext.CompanyInvitations.Add(invite);
+            await db.DbContext.SaveChangesAsync();
+            return invite;
+        }
+
+        public async Task<List<CompanyInvitation>> GetPendingInvitationsForPlayer(Guid player, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations
+                .Include(i => i.FromPlayer)
+                .Include(i => i.TargetPlayer)
+                .Where(i => i.TargetUserId == player && i.Status == 0)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<List<CompanyInvitation>> GetPendingInvitationsForCompany(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations
+                .Include(i => i.FromPlayer)
+                .Include(i => i.TargetPlayer)
+                .Where(i => i.CompanyId == companyId && i.Status == 0)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<CompanyInvitation?> GetCompanyInvitation(Guid inviteId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations
+                .Include(i => i.FromPlayer)
+                .Include(i => i.TargetPlayer)
+                .FirstOrDefaultAsync(i => i.Id == inviteId, cancel);
+        }
+
+        public async Task SetCompanyInvitationStatus(Guid inviteId, int status)
+        {
+            await using var db = await GetDb();
+            await db.DbContext.CompanyInvitations
+                .Where(i => i.Id == inviteId)
+                .ExecuteUpdateAsync(s => s.SetProperty(i => i.Status, status));
+        }
+
+        public async Task<bool> DeleteCompanyInvitation(Guid inviteId)
+        {
+            await using var db = await GetDb();
+            var removed = await db.DbContext.CompanyInvitations
+                .Where(i => i.Id == inviteId)
+                .ExecuteDeleteAsync();
+            return removed > 0;
+        }
+
+        /// <summary>
+        /// Removes non-pending invitation rows left from older builds.
+        /// </summary>
+        public async Task<int> PurgeResolvedCompanyInvitations(CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations
+                .Where(i => i.Status != 0)
+                .ExecuteDeleteAsync(cancel);
+        }
+
+        public async Task<bool> HasPendingCompanyInvitation(string companyId, Guid targetUserId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations.AnyAsync(
+                i => i.CompanyId == companyId && i.TargetUserId == targetUserId && i.Status == 0,
+                cancel);
+        }
+
+        public async Task<int> CountPendingInvitationsForCompany(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyInvitations.CountAsync(
+                i => i.CompanyId == companyId && i.Status == 0,
+                cancel);
+        }
+
+        public async Task AddCompanyLog(CompanyLog log, int keep = CompanyOrgLimits.MaxLogsPerCompany)
+        {
+            if (log.Message.Length > CompanyOrgLimits.MaxLogMessageLength)
+                log.Message = log.Message[..CompanyOrgLimits.MaxLogMessageLength];
+
+            await using var db = await GetDb();
+            db.DbContext.CompanyLogs.Add(log);
+            await db.DbContext.SaveChangesAsync();
+
+            if (keep <= 0)
+                return;
+
+            var excessIds = await db.DbContext.CompanyLogs
+                .Where(l => l.CompanyId == log.CompanyId)
+                .OrderByDescending(l => l.Timestamp)
+                .ThenByDescending(l => l.Id)
+                .Skip(keep)
+                .Select(l => l.Id)
+                .ToListAsync();
+
+            if (excessIds.Count == 0)
+                return;
+
+            await db.DbContext.CompanyLogs
+                .Where(l => excessIds.Contains(l.Id))
+                .ExecuteDeleteAsync();
+        }
+
+        public async Task<List<CompanyLog>> GetCompanyLogs(string companyId, int limit = 100, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            return await db.DbContext.CompanyLogs
+                .Where(l => l.CompanyId == companyId)
+                .OrderByDescending(l => l.Timestamp)
+                .Take(limit)
+                .ToListAsync(cancel);
+        }
+
+        public async Task<string> GetCompanyBulletin(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            var bulletin = await db.DbContext.CompanyBulletins
+                .FirstOrDefaultAsync(b => b.CompanyId == companyId, cancel);
+            return bulletin?.Text ?? string.Empty;
+        }
+
+        public async Task SetCompanyBulletin(string companyId, string text)
+        {
+            await using var db = await GetDb();
+            var bulletin = await db.DbContext.CompanyBulletins
+                .FirstOrDefaultAsync(b => b.CompanyId == companyId);
+            if (bulletin == null)
+            {
+                db.DbContext.CompanyBulletins.Add(new CompanyBulletin
+                {
+                    CompanyId = companyId,
+                    Text = text,
+                });
+            }
+            else
+            {
+                bulletin.Text = text;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task EnsureCompanyDevelopmentTable()
+        {
+            await using var db = await GetDb();
+            await EnsureDevelopmentTable(db);
+        }
+
+        public async Task<CompanyDevelopmentRecord> GetCompanyDevelopment(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            await EnsureDevelopmentTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync(cancel);
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT projects, contract_id, contract_funded, research_points FROM company_developments WHERE company_id = @id";
+            AddParam(cmd, "@id", companyId);
+
+            await using var reader = await cmd.ExecuteReaderAsync(cancel);
+            if (!await reader.ReadAsync(cancel))
+                return new CompanyDevelopmentRecord();
+
+            return new CompanyDevelopmentRecord
+            {
+                Projects = reader.IsDBNull(0) ? string.Empty : reader.GetString(0),
+                ContractId = reader.IsDBNull(1) ? null : reader.GetString(1),
+                ContractFunded = !reader.IsDBNull(2) && Convert.ToInt32(reader.GetValue(2)) != 0,
+                ResearchPoints = reader.IsDBNull(3) ? 0 : Convert.ToInt64(reader.GetValue(3)),
+            };
+        }
+
+        public async Task SetCompanyDevelopment(string companyId, string projects, string? contractId, bool contractFunded)
+        {
+            await using var db = await GetDb();
+            await EnsureDevelopmentTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO company_developments (company_id, projects, contract_id, contract_funded)
+                VALUES (@id, @projects, @contract, @funded)
+                ON CONFLICT (company_id) DO UPDATE SET
+                    projects = @projects,
+                    contract_id = @contract,
+                    contract_funded = @funded
+                """;
+            AddParam(cmd, "@id", companyId);
+            AddParam(cmd, "@projects", projects);
+            AddParam(cmd, "@contract", (object?)contractId ?? DBNull.Value);
+            AddParam(cmd, "@funded", contractFunded ? 1 : 0);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task AddCompanyResearchPoints(string companyId, long amount)
+        {
+            if (amount <= 0)
+                return;
+
+            await using var db = await GetDb();
+            await EnsureDevelopmentTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO company_developments (company_id, projects, research_points)
+                VALUES (@id, '', @amount)
+                ON CONFLICT (company_id) DO UPDATE SET
+                    research_points = company_developments.research_points + @amount
+                """;
+            AddParam(cmd, "@id", companyId);
+            AddParam(cmd, "@amount", amount);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task EnsureCompanyPeaceTable()
+        {
+            await using var db = await GetDb();
+            await EnsurePeaceTable(db);
+        }
+
+        public async Task<List<CompanyPeaceTermRecord>> GetCompanyPeaceTerms(CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            await EnsurePeaceTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync(cancel);
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT company_id, other_id, free_offer, ransom_percent FROM company_peace_terms";
+
+            var result = new List<CompanyPeaceTermRecord>();
+            await using var reader = await cmd.ExecuteReaderAsync(cancel);
+            while (await reader.ReadAsync(cancel))
+            {
+                result.Add(new CompanyPeaceTermRecord
+                {
+                    CompanyId = reader.GetString(0),
+                    OtherId = reader.GetString(1),
+                    FreeOffer = !reader.IsDBNull(2) && Convert.ToInt32(reader.GetValue(2)) != 0,
+                    RansomPercent = reader.IsDBNull(3) ? 0 : Convert.ToInt32(reader.GetValue(3)),
+                });
+            }
+
+            return result;
+        }
+
+        public async Task UpsertCompanyPeaceTerm(string companyId, string otherId, bool freeOffer, int ransomPercent)
+        {
+            await using var db = await GetDb();
+            await EnsurePeaceTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO company_peace_terms (company_id, other_id, free_offer, ransom_percent)
+                VALUES (@company, @other, @free, @percent)
+                ON CONFLICT (company_id, other_id) DO UPDATE SET
+                    free_offer = @free,
+                    ransom_percent = @percent
+                """;
+            AddParam(cmd, "@company", companyId);
+            AddParam(cmd, "@other", otherId);
+            AddParam(cmd, "@free", freeOffer ? 1 : 0);
+            AddParam(cmd, "@percent", ransomPercent);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task DeleteCompanyPeaceTerms(string companyA, string companyB)
+        {
+            await using var db = await GetDb();
+            await EnsurePeaceTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                DELETE FROM company_peace_terms
+                WHERE (company_id = @a AND other_id = @b)
+                   OR (company_id = @b AND other_id = @a)
+                """;
+            AddParam(cmd, "@a", companyA);
+            AddParam(cmd, "@b", companyB);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task EnsureCompanyAllianceTable()
+        {
+            await using var db = await GetDb();
+            await EnsureAllianceTable(db);
+        }
+
+        public async Task<List<CompanyAllianceOfferRecord>> GetCompanyAllianceOffers(CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            await EnsureAllianceTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync(cancel);
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT company_id, other_id FROM company_alliance_offers";
+
+            var result = new List<CompanyAllianceOfferRecord>();
+            await using var reader = await cmd.ExecuteReaderAsync(cancel);
+            while (await reader.ReadAsync(cancel))
+            {
+                result.Add(new CompanyAllianceOfferRecord
+                {
+                    CompanyId = reader.GetString(0),
+                    OtherId = reader.GetString(1),
+                });
+            }
+
+            return result;
+        }
+
+        public async Task AddCompanyAllianceOffer(string companyId, string otherId)
+        {
+            await using var db = await GetDb();
+            await EnsureAllianceTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO company_alliance_offers (company_id, other_id)
+                VALUES (@company, @other)
+                ON CONFLICT (company_id, other_id) DO NOTHING
+                """;
+            AddParam(cmd, "@company", companyId);
+            AddParam(cmd, "@other", otherId);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task DeleteCompanyAllianceOffer(string companyId, string otherId)
+        {
+            await using var db = await GetDb();
+            await EnsureAllianceTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                DELETE FROM company_alliance_offers
+                WHERE company_id = @company AND other_id = @other
+                """;
+            AddParam(cmd, "@company", companyId);
+            AddParam(cmd, "@other", otherId);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task DeleteCompanyAlliancePair(string companyA, string companyB)
+        {
+            await using var db = await GetDb();
+            await EnsureAllianceTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                DELETE FROM company_alliance_offers
+                WHERE (company_id = @a AND other_id = @b)
+                   OR (company_id = @b AND other_id = @a)
+                """;
+            AddParam(cmd, "@a", companyA);
+            AddParam(cmd, "@b", companyB);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task EnsureCompanyAllyWarTable()
+        {
+            await using var db = await GetDb();
+            await EnsureAllyWarTable(db);
+        }
+
+        public async Task<List<CompanyAllyWarRecord>> GetCompanyAllyWars(CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            await EnsureAllyWarTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync(cancel);
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT company_id, auto_join FROM company_ally_wars";
+
+            var result = new List<CompanyAllyWarRecord>();
+            await using var reader = await cmd.ExecuteReaderAsync(cancel);
+            while (await reader.ReadAsync(cancel))
+            {
+                result.Add(new CompanyAllyWarRecord
+                {
+                    CompanyId = reader.GetString(0),
+                    AutoJoin = !reader.IsDBNull(1) && Convert.ToInt32(reader.GetValue(1)) != 0,
+                });
+            }
+
+            return result;
+        }
+
+        public async Task SetCompanyAllyWar(string companyId, bool autoJoin)
+        {
+            await using var db = await GetDb();
+            await EnsureAllyWarTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO company_ally_wars (company_id, auto_join)
+                VALUES (@id, @join)
+                ON CONFLICT (company_id) DO UPDATE SET
+                    auto_join = @join
+                """;
+            AddParam(cmd, "@id", companyId);
+            AddParam(cmd, "@join", autoJoin ? 1 : 0);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task EnsureCompanyVaultTable()
+        {
+            await using var db = await GetDb();
+            await EnsureVaultTable(db);
+        }
+
+        public async Task<CompanyVaultRecord> GetCompanyVault(string companyId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            await EnsureVaultTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync(cancel);
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT grid_width, grid_height, items FROM company_vaults WHERE company_id = @id";
+            AddParam(cmd, "@id", companyId);
+
+            await using var reader = await cmd.ExecuteReaderAsync(cancel);
+            if (!await reader.ReadAsync(cancel))
+                return new CompanyVaultRecord();
+
+            var width = reader.IsDBNull(0) ? CompanyOrgLimits.VaultGrid : Convert.ToInt32(reader.GetValue(0));
+            var height = reader.IsDBNull(1) ? CompanyOrgLimits.VaultGrid : Convert.ToInt32(reader.GetValue(1));
+            var items = reader.IsDBNull(2) ? "[]" : reader.GetString(2);
+            return new CompanyVaultRecord
+            {
+                Width = Math.Clamp(width, 1, CompanyOrgLimits.VaultGridMax),
+                Height = Math.Clamp(height, 1, CompanyOrgLimits.VaultGridMax),
+                Items = ReadVaultItems(items),
+            };
+        }
+
+        public async Task SetCompanyVault(string companyId, int width, int height, IReadOnlyList<string> items)
+        {
+            await using var db = await GetDb();
+            await EnsureVaultTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO company_vaults (company_id, grid_width, grid_height, items)
+                VALUES (@id, @width, @height, @items)
+                ON CONFLICT (company_id) DO UPDATE SET
+                    grid_width = @width,
+                    grid_height = @height,
+                    items = @items
+                """;
+            AddParam(cmd, "@id", companyId);
+            AddParam(cmd, "@width", width);
+            AddParam(cmd, "@height", height);
+            AddParam(cmd, "@items", System.Text.Json.JsonSerializer.Serialize(items));
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        private static List<string> ReadVaultItems(string json)
+        {
+            if (string.IsNullOrWhiteSpace(json))
+                return new();
+
+            try
+            {
+                return System.Text.Json.JsonSerializer.Deserialize<List<string>>(json) ?? new();
+            }
+            catch (System.Text.Json.JsonException)
+            {
+                return new();
+            }
+        }
+
+        private static async Task EnsureVaultTable(DbGuard db)
+        {
+            await db.DbContext.Database.ExecuteSqlRawAsync("""
+                CREATE TABLE IF NOT EXISTS company_vaults (
+                    company_id TEXT PRIMARY KEY NOT NULL,
+                    grid_width INTEGER NOT NULL DEFAULT 3,
+                    grid_height INTEGER NOT NULL DEFAULT 3,
+                    items TEXT NOT NULL DEFAULT '[]'
+                )
+                """);
+        }
+
+        private static async Task EnsurePeaceTable(DbGuard db)
+        {
+            await db.DbContext.Database.ExecuteSqlRawAsync("""
+                CREATE TABLE IF NOT EXISTS company_peace_terms (
+                    company_id TEXT NOT NULL,
+                    other_id TEXT NOT NULL,
+                    free_offer INTEGER NOT NULL DEFAULT 0,
+                    ransom_percent INTEGER NOT NULL DEFAULT 0,
+                    PRIMARY KEY (company_id, other_id)
+                )
+                """);
+        }
+
+        private static async Task EnsureAllianceTable(DbGuard db)
+        {
+            await db.DbContext.Database.ExecuteSqlRawAsync("""
+                CREATE TABLE IF NOT EXISTS company_alliance_offers (
+                    company_id TEXT NOT NULL,
+                    other_id TEXT NOT NULL,
+                    PRIMARY KEY (company_id, other_id)
+                )
+                """);
+        }
+
+        private static async Task EnsureAllyWarTable(DbGuard db)
+        {
+            await db.DbContext.Database.ExecuteSqlRawAsync("""
+                CREATE TABLE IF NOT EXISTS company_ally_wars (
+                    company_id TEXT PRIMARY KEY NOT NULL,
+                    auto_join INTEGER NOT NULL
+                )
+                """);
+        }
+
+        private static async Task EnsureDevelopmentTable(DbGuard db)
+        {
+            await db.DbContext.Database.ExecuteSqlRawAsync("""
+                CREATE TABLE IF NOT EXISTS company_developments (
+                    company_id TEXT PRIMARY KEY NOT NULL,
+                    projects TEXT NOT NULL DEFAULT '',
+                    contract_id TEXT NULL,
+                    contract_funded INTEGER NOT NULL DEFAULT 0,
+                    research_points INTEGER NOT NULL DEFAULT 0
+                )
+                """);
+            if (_researchColumnReady || await HasColumn(db, "company_developments", "research_points"))
+            {
+                _researchColumnReady = true;
+                return;
+            }
+
+            await db.DbContext.Database.ExecuteSqlRawAsync(
+                "ALTER TABLE company_developments ADD COLUMN research_points INTEGER NOT NULL DEFAULT 0");
+            _researchColumnReady = true;
+        }
+
+        private static bool _researchColumnReady;
+
+        private static async Task<bool> HasColumn(DbGuard db, string table, string column)
+        {
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            var sqlite = conn.GetType().Name.Contains("Sqlite", StringComparison.Ordinal);
+            // The table name is one of our own identifiers, not player input.
+            cmd.CommandText = sqlite
+                ? $"SELECT 1 FROM pragma_table_info('{table}') WHERE name = @column"
+                : """
+                  SELECT 1 FROM information_schema.columns
+                  WHERE table_name = @table AND column_name = @column
+                  """;
+            if (!sqlite)
+                AddParam(cmd, "@table", table);
+            AddParam(cmd, "@column", column);
+            var found = await cmd.ExecuteScalarAsync();
+            return found != null && found != DBNull.Value;
+        }
+
+        public async Task EnsureCompanyJobTable()
+        {
+            await using var db = await GetDb();
+            await EnsureJobTable(db);
+        }
+
+        public async Task<List<CompanyJobRecord>> GetCompanyJobs(CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            await EnsureJobTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync(cancel);
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                SELECT job_id, poster_id, taker_id, description, reward_kind, reward_amount, reward_proto
+                FROM company_jobs
+                """;
+
+            var list = new List<CompanyJobRecord>();
+            await using var reader = await cmd.ExecuteReaderAsync(cancel);
+            while (await reader.ReadAsync(cancel))
+            {
+                list.Add(new CompanyJobRecord
+                {
+                    Id = reader.GetString(0),
+                    PosterId = reader.GetString(1),
+                    TakerId = reader.IsDBNull(2) ? null : reader.GetString(2),
+                    Description = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
+                    RewardKind = reader.IsDBNull(4) ? 0 : Convert.ToInt32(reader.GetValue(4)),
+                    RewardAmount = reader.IsDBNull(5) ? 0 : Convert.ToInt32(reader.GetValue(5)),
+                    RewardProto = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
+                });
+            }
+
+            return list;
+        }
+
+        public async Task UpsertCompanyJob(CompanyJobRecord job)
+        {
+            await using var db = await GetDb();
+            await EnsureJobTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = """
+                INSERT INTO company_jobs
+                    (job_id, poster_id, taker_id, description, reward_kind, reward_amount, reward_proto)
+                VALUES (@id, @poster, @taker, @description, @kind, @amount, @proto)
+                ON CONFLICT (job_id) DO UPDATE SET
+                    taker_id = EXCLUDED.taker_id,
+                    description = EXCLUDED.description,
+                    reward_kind = EXCLUDED.reward_kind,
+                    reward_amount = EXCLUDED.reward_amount,
+                    reward_proto = EXCLUDED.reward_proto
+                """;
+            AddParam(cmd, "@id", job.Id);
+            AddParam(cmd, "@poster", job.PosterId);
+            AddParam(cmd, "@taker", (object?)job.TakerId ?? DBNull.Value);
+            AddParam(cmd, "@description", job.Description);
+            AddParam(cmd, "@kind", job.RewardKind);
+            AddParam(cmd, "@amount", job.RewardAmount);
+            AddParam(cmd, "@proto", job.RewardProto ?? string.Empty);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        public async Task DeleteCompanyJob(string jobId)
+        {
+            await using var db = await GetDb();
+            await EnsureJobTable(db);
+
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM company_jobs WHERE job_id = @id";
+            AddParam(cmd, "@id", jobId);
+            await cmd.ExecuteNonQueryAsync();
+        }
+
+        private static async Task EnsureJobTable(DbGuard db)
+        {
+            await db.DbContext.Database.ExecuteSqlRawAsync("""
+                CREATE TABLE IF NOT EXISTS company_jobs (
+                    job_id TEXT PRIMARY KEY NOT NULL,
+                    poster_id TEXT NOT NULL,
+                    taker_id TEXT NULL,
+                    description TEXT NOT NULL,
+                    reward_kind INTEGER NOT NULL,
+                    reward_amount INTEGER NOT NULL,
+                    reward_proto TEXT NOT NULL DEFAULT ''
+                )
+                """);
+        }
+
+        private static void AddParam(DbCommand cmd, string name, object value)
+        {
+            var param = cmd.CreateParameter();
+            param.ParameterName = name;
+            param.Value = value;
+            cmd.Parameters.Add(param);
         }
 
         #endregion

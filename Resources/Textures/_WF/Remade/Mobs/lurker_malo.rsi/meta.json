@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/lurker/lurker_malo.dmi)",
+  "size": {
+    "x": 70,
+    "y": 45
+  },
+  "states": [
+    {
+      "name": "example",
+      "directions": 4
+    },
+    {
+      "name": "torso",
+      "directions": 4
+    },
+    {
+      "name": "shell",
+      "directions": 4
+    },
+    {
+      "name": "tentacle_1",
+      "directions": 4
+    },
+    {
+      "name": "tentacle_2",
+      "directions": 4
+    },
+    {
+      "name": "tentacle_3",
+      "directions": 4
+    },
+    {
+      "name": "torso_lying"
+    },
+    {
+      "name": "tentacles",
+      "directions": 4
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

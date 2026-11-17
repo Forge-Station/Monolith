@@ -1,0 +1,26 @@
+<Document>
+  # Feroxi
+
+  <Box>
+    <GuideEntityEmbed Entity="MobFeroxiDummy" Caption=""/>
+  </Box>
+
+  The Feroxi (fer-ox-i) are a race of humanoid shark-like beings. Carnivourous in nature with a strong bite force.
+
+  ## Diet
+
+  - Can ONLY eat meat.
+
+  ## Benefits
+
+  - Uses their jaws to do piercing damage, and harder than other species, rivaling Oni.
+  - Their cartilaginous skeleton allows them to resist blunt force trauma 10% more easily.
+  - Their adaptation to native environments allows them to resist the cold 10% more easily.
+  - Their biology allow them to breathe water vapour.
+
+  ## Drawbacks
+
+  - They take 10% more Slash damage.
+<!-- WOLFGATE(Species): Feroxi never get thirsty; removed the thirst, "Parched" suffocation and saline drawbacks -->  - Your lungs are unremovable as theyre intergrated with your gills.
+
+</Document>

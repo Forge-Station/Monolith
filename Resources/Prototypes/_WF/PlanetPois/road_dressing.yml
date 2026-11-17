@@ -28,7 +28,7 @@
   brokenLightChance: 0.12
   lightSpacing: 12
   junctionLight: RMCTrafficLight
-  scatter:
+  scatter: []
   # Parked cars.
   # - prototypes: [ RMCPropVehicleMonoSupronBlack, RMCPropVehicleMonoSupronBlackFlipped,
   #     RMCPropVehicleMonoSupronBlue, RMCPropVehicleMonoSupronBlueFlipped, RMCPropVehicleMonoSupronBrown,

@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/lurker/lurker.dmi)",
+  "size": {
+    "x": 64,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "preview"
+    },
+    {
+      "name": "lurker_chest",
+      "directions": 4
+    },
+    {
+      "name": "lurker_tentacle_1",
+      "directions": 4
+    },
+    {
+      "name": "lurker_tentacle_2",
+      "directions": 4
+    },
+    {
+      "name": "lurker_chest_lying"
+    },
+    {
+      "name": "lurker_tentacle_3",
+      "directions": 4
+    },
+    {
+      "name": "lurker_lurker_shell",
+      "directions": 4
+    },
+    {
+      "name": "spine_projectile"
+    },
+    {
+      "name": "spine"
+    },
+    {
+      "name": "lurker_head"
+    },
+    {
+      "name": "lurker_r_leg"
+    },
+    {
+      "name": "lurker_l_leg"
+    },
+    {
+      "name": "lurker_r_arm"
+    },
+    {
+      "name": "lurker_l_arm"
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

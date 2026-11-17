@@ -19,7 +19,6 @@
   tier: 2
   cost: 65000
   recipeUnlocks:
-  - ShipVoucherUsspAkula
   - ShipVoucherUsspDrakon
   - ShipVoucherUsspTayfun
   technologyPrerequisites:

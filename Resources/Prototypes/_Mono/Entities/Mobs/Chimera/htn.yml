@@ -5,7 +5,13 @@
   branches:
   - tasks:
     - !type:HTNCompoundTask
+      task: IncomingFireCompound
+  - tasks:
+    - !type:HTNCompoundTask
       task: ChimeraMeleeCombatCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: InvestigateCompound
   - tasks:
     - !type:HTNCompoundTask
       task: IdleCompound

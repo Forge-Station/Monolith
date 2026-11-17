@@ -379,3 +379,47 @@ Entries:
   id: 29
   time: '2026-11-10T10:53:19.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/558
+- author: mersen-tyn
+  changes:
+    - type: Tweak
+      message: >-
+        Ходячие НПС открывают двери, бегут на источник огня и ищут цель в
+        последней видимой точке.
+    - type: Tweak
+      message: НПС атакует ящик, только если сам видел, как в него залез живой человек.
+    - type: Tweak
+      message: НПС ломает перила, ящики и обычные окна на пути и проходит дальше.
+    - type: Tweak
+      message: >-
+        Экспериментальная экспедиция улья ксено без окон, только стены, и длится
+        30 минут.
+    - type: Fix
+      message: Корабельный ИИ больше не сыпет ошибкой из-за отсутствующего Owner.
+  id: 30
+  time: '2026-11-14T21:56:36.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/594
+- author: holodilnik66
+  changes:
+    - type: Tweak
+      message: Обновление внутриигровых правил - актуализация с правилами в дискорде.
+  id: 31
+  time: '2026-11-15T14:34:21.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/595
+- author: teasum
+  changes:
+    - type: Fix
+      message: пофиксил сервера мониторинга
+  id: 32
+  time: '2026-11-16T20:28:31.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/605
+  - author: DRON5011
+  changes:
+    - type: Tweak
+      message: Показатели скафандров T-23, T-44 и T-53
+    - type: Tweak
+      message: Обновлен асортимент оружия в аплинке ТТИ
+    - type: Tweak
+      message: Пересмотрены цены в аплинке ТТИ
+  id: 33
+  time: '2026-11-15T17:44:06.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/476

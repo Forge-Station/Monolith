@@ -7,6 +7,14 @@
   - Turrets
 
 - type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: ComputerTurretCommandTTIShuttleircuitboard
+  result: ComputerTurretCommandTTIShuttleircuitboard
+  categories:
+  - Circuitry
+  - Turrets
+
+- type: latheRecipe
   id: WeaponTurretMercenaryPacked
   result: WeaponTurretMercenaryPacked
   categories:

@@ -173,12 +173,9 @@
   - type: SSDIndicator
   - type: StandingState
   - type: Dna
-  # New Frontiers - Genetics - Organic genome for DNA modifier
-  # This code is licensed under AGPLv3. See LICENSE
   - type: Genome
-  # End of modified code
   - type: MindContainer
-    showExamineInfo: true
+  - type: MindExaminable
   - type: CanEnterCryostorage
   - type: InteractionPopup
     successChance: 1
@@ -250,6 +247,18 @@
   id: BaseMobSpeciesOrganic
   abstract: true
   components:
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+      Thirst:
+        prototype: NormalSatiationThirst
+  - type: SatiationSpeedModifier
+    satiations:
+      Hunger:
+        Starving: 0.75
+      Thirst:
+        Parched: 0.75
   - type: Barotrauma
     damage:
       types:

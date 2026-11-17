@@ -8,10 +8,10 @@ using Robust.Shared.GameObjects;
 
 namespace Content.Shared._Forge.Movement;
 
-public sealed class JetpackOnlyFuelSystem : EntitySystem
+public sealed partial class JetpackOnlyFuelSystem : EntitySystem
 {
-    [Dependency] private readonly SharedGasTankSystem _gasTank = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedGasTankSystem _gasTank = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

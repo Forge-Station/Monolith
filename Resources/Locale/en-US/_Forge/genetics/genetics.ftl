@@ -324,9 +324,90 @@ ent-DnaInjectorFilledHulk = DNA injector
     .suffix = Hulk
     .desc = { ent-DnaInjector.desc }
 
+# Ability genes
+
+gene-telekinesis-name = Telekinesis
+gene-telekinesis-desc = Lift objects within five tiles of clear sight and steer them with the mouse. RMB verbs (rack, unload, etc.) work at that range; shooting still needs a held gun. Breaking LOS or range drops the hold. Destabilizes the genome.
+
+gene-telepathy-name = Telepathy
+gene-telepathy-desc = Project a silent thought into another mind within five tiles. Target from the action hotbar, then write the message like a prayer.
+
+gene-strong-stomach-name = Strong stomach
+gene-strong-stomach-desc = Rotten and spoiled meat no longer sickens you. Naturally toxic or acidic flesh (xeno and the like) still burns.
+
+gene-unstable-dna-name = Unstable DNA chain
+gene-unstable-dna-desc = Rewrite the body into living slime. Shift between a flesh blob and a slimeperson — each change tears 5 slash of tissue.
+
+gene-stabilized-dna-name = Stabilized DNA
+gene-stabilized-dna-desc = Strip every other beneficial and harmful mutation. In return, cellular damage heals at an extraordinary rate.
+
+gene-bone-weapon-name = Combat skeleton
+gene-bone-weapon-desc = Grow a bone blade straight into your hand. Forcing it out costs 15 slash. Press again to retract it.
+
+gene-atomic-metabolism-name = Atomic metabolism
+gene-atomic-metabolism-desc = Convert radiation into healing and nutrition — about three hit points and some satiety per rad. You glow green and leak a little radiation yourself.
+
+gene-organ-adapt-name = Organ adaptation
+gene-organ-adapt-desc = Skin hardens against vacuum and internal pressure drops (half blood volume). A biological air reserve (~2 min) appears inside your backpack without taking the back slot.
+
+gene-telekinesis-blocked = You cannot reach that through the obstruction.
+gene-telekinesis-pull = The object lifts — steer it with your cursor.
+gene-telekinesis-release = You let it fall.
+gene-telekinesis-fling = You hurl it away.
+gene-telekinesis-nothing = You are not holding anything with your mind.
+gene-telekinesis-fail = Your grip slips off that target.
+gene-telekinesis-lost = You lose sight of it — the telekinetic grip breaks.
+
+gene-telepathy-no-mind = There is no mind to touch there.
+gene-telepathy-blocked = The thought cannot cross that distance.
+gene-telepathy-ui-title = Telepathy
+gene-telepathy-ui-message = Message
+gene-telepathy-heard = A voice speaks inside your head
+gene-telepathy-sent = The thought is gone.
+gene-telepathy-admin = TELEPATHY: {$user} → {$target}: {$message}
+
+gene-slime-form-activate = Your flesh softens into living slime.
+gene-slime-form-humanoid = You pull yourself into a humanoid slime body.
+gene-slime-form-blob = You collapse into an amorphous blob.
+gene-slime-form-fail = The slime refuses to reshape.
+
+gene-stabilized-stripped = The genome sheds {$count} conflicting mutations.
+
+gene-bone-weapon-retracted = The bone blade sinks back into your arm.
+gene-bone-weapon-grown = Bone splits the skin and hardens into a blade.
+gene-bone-weapon-drop = The blade tears free but your hands are full.
+
+gene-organ-adapt-activate = A biological air reserve forms in your body. Your blood thins.
+gene-organ-adapt-sac-fail = The biological air reserve fails to form.
+
+metabolizer-type-strong-stomach = strong stomach
+reagent-effect-condition-guidebook-genetic-strong-stomach = the target { $shouldhave ->
+    [true] has
+    *[false] does not have
+} a strong stomach gene
+
+ent-ActionGeneticTelekinesis = Telekinetic grasp
+    .desc = Lift a target within five tiles, then steer it with the mouse. Use again on it to drop.
+ent-ActionGeneticTelekinesisFling = Telekinetic fling
+    .desc = Hurl your telekinetic hold toward a point.
+ent-ActionGeneticTelepathy = Telepathy
+    .desc = Send a silent mental message to a visible mind.
+ent-ActionGeneticSlimeTransform = Slime transformation
+    .desc = Toggle between blob and slimeperson. Costs 5 slash.
+ent-ActionGeneticBoneWeapon = Grow bone blade
+    .desc = Grow or retract a bone blade. Growing costs 15 slash.
+
+ent-GeneBoneBlade = bone blade
+    .desc = A jagged blade of living bone forced out through flesh. It still feels warm.
+ent-ClothingBackGeneticAirSac = biological air sac
+    .desc = A living bladder of respiratory mix fused into the back. Roughly two minutes of breathable gas.
+ent-MobGeneSlimeBlob = flesh slime blob
+    .desc = An unstable clot of living slime. It can reshape into a slimeperson body.
+
 # Research / ports / guidebook
 
 research-technology-genetic-manipulation = Genetic Manipulation
+
 
 signal-port-name-genetics-scanner-sender = DNA modifier scanner
 signal-port-description-genetics-scanner-sender = Genetics console signal sender

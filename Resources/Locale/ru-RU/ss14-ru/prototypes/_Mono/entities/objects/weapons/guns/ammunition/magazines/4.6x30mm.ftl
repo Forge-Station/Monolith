@@ -1,7 +1,7 @@
 ent-BaseMagazine46x30mm = пистолетный магазин (4.6x30мм FMJ)
 ent-Magazine46x30mmPistolFMJ = { ent-BaseMagazine46x30mm }
 ent-Magazine46x30mmPistolEmpty = пистолетный магазин (4.6x30мм)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой
 ent-Magazine46x30mmPistolHP = пистолетный магазин (4.6x30мм экспансивные)
 ent-Magazine46x30mmPistolPractice = пистолетный магазин (4.6x30мм учебные)
@@ -23,12 +23,12 @@ ent-Magazine46x30mmSubMachineGunRubber = магазин ПП (4.6x30мм рез�
 
 ent-Magazine46x30mmPistolHighCapacityFMJ = большой пистолетный магазин (4.6x30мм FMJ)
 ent-Magazine46x30mmPistolHighCapacityEmpty = большой пистолетный магазин (4.6x30мм)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой
 ent-Magazine46x30mmPistolHighCapacityPractice = большой пистолетный магазин (4.6x30мм учебные)
 ent-Magazine46x30mmPistolHighCapacityRubber = большой пистолетный магазин (4.6x30мм резиновые)
 
 ent-Magazine46x30mmSubMachineGunTopMountedFMJ = магазин WT550 (4.6x30мм FMJ)
 ent-Magazine46x30mmSubMachineGunTopMountedEmpty = магазин WT550 (4.6x30мм)
-    .desc = " "
+    .desc = { "" }
     .suffix = Пустой

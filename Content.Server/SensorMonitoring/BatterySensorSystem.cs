@@ -1,47 +1,36 @@
-﻿using Content.Server.DeviceNetwork.Systems;
+using Content.Shared.DeviceNetwork.Systems;
 using Content.Server.Power.Components;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Power.Components;
+using Content.Shared.SensorMonitoring;
 
 namespace Content.Server.SensorMonitoring;
 
 public sealed partial class BatterySensorSystem : EntitySystem
 {
-    public const string DeviceNetworkCommandSyncData = "bat_sync_data";
-
     [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<BatterySensorComponent, DeviceNetworkPacketEvent>(PacketReceived);
+        SubscribeLocalEvent<BatterySensorComponent, DeviceNetworkPacketEvent<BatterySensorSyncPayload>>(PacketReceived);
     }
 
-    private void PacketReceived(EntityUid uid, BatterySensorComponent component, DeviceNetworkPacketEvent args)
+    private void PacketReceived(EntityUid uid, BatterySensorComponent component, ref DeviceNetworkPacketEvent<BatterySensorSyncPayload> args)
     {
-        if (!args.Data.TryGetValue(DeviceNetworkConstants.Command, out string? cmd))
-            return;
+        var battery = Comp<BatteryComponent>(uid);
+        var netBattery = Comp<PowerNetworkBatteryComponent>(uid);
 
-        switch (cmd)
+        var payload = new BatterySensorDataPayload
         {
-            case DeviceNetworkCommandSyncData:
-                var battery = Comp<BatteryComponent>(uid);
-                var netBattery = Comp<PowerNetworkBatteryComponent>(uid);
+            Data = new BatterySensorData(
+                battery.CurrentCharge,
+                battery.MaxCharge,
+                netBattery.CurrentReceiving,
+                netBattery.MaxChargeRate,
+                netBattery.CurrentSupply,
+                netBattery.MaxSupply),
+        };
 
-                var payload = new NetworkPayload
-                {
-                    [DeviceNetworkConstants.Command] = DeviceNetworkCommandSyncData,
-                    [DeviceNetworkCommandSyncData] = new BatterySensorData(
-                        battery.CurrentCharge,
-                        battery.MaxCharge,
-                        netBattery.CurrentReceiving,
-                        netBattery.MaxChargeRate,
-                        netBattery.CurrentSupply,
-                        netBattery.MaxSupply)
-                };
-
-                _deviceNetwork.QueuePacket(uid, args.SenderAddress, payload);
-                break;
-        }
+        _deviceNetwork.SendPacket(uid, args.SenderAddress, ref payload);
     }
 }

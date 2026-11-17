@@ -1,11 +1,14 @@
 using Content.Shared.Disposal;
 using Content.Shared.Disposal.Components;
 using Content.Shared.Disposal.Mailing;
+using Content.Shared.UserInterface;
 
 namespace Content.Client.Disposal.Mailing;
 
 public sealed class MailingUnitSystem : SharedMailingUnitSystem
 {
+    [Dependency] private SharedUserInterfaceSystem UserInterfaceSystem = default!;
+
     public override void Initialize()
     {
         base.Initialize();

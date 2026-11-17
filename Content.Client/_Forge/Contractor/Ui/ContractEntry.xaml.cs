@@ -9,7 +9,7 @@ namespace Content.Client._Forge.Contractor.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class ContractEntry : BoxContainer
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     public Action? OnAcceptButtonPressed;
 

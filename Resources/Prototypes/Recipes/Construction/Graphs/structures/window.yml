@@ -90,11 +90,12 @@
               amount: 2
               doAfter: 4
         # Forge-Change-End
-        - to: clockworkWindow
-          steps:
-            - material: ClockworkGlass
-              amount: 2
-              doAfter: 3
+
+#        - to: clockworkWindow
+#          steps:
+#            - material: ClockworkGlass
+#              amount: 2
+#              doAfter: 3
 
     - node: window
       entity: Window
@@ -237,28 +238,28 @@
             - tool: Anchoring
               doAfter: 3
 
-    - node: clockworkWindow
-      entity: ClockworkWindow
-      edges:
-        - to: start
-          completed:
-            - !type:SpawnPrototype
-              prototype: SheetClockworkGlass1
-              amount: 2
-            - !type:DeleteEntity {}
-          steps:
-            - tool: Welding
-              doAfter: 5
-            - tool: Screwing
-              doAfter: 2
-            - tool: Prying
-              doAfter: 3
-            - tool: Welding
-              doAfter: 5
-            - tool: Screwing
-              doAfter: 2
-            - tool: Anchoring
-              doAfter: 3
+#    - node: clockworkWindow
+#      entity: ClockworkWindow
+#      edges:
+#        - to: start
+#          completed:
+#            - !type:SpawnPrototype
+#              prototype: SheetClockworkGlass1
+#              amount: 2
+#            - !type:DeleteEntity {}
+#          steps:
+#            - tool: Welding
+#              doAfter: 5
+#            - tool: Screwing
+#              doAfter: 2
+#            - tool: Prying
+#              doAfter: 3
+#            - tool: Welding
+#              doAfter: 5
+#            - tool: Screwing
+#              doAfter: 2
+#            - tool: Anchoring
+#              doAfter: 3
 
     - node: shuttleWindow
       entity: ShuttleWindow

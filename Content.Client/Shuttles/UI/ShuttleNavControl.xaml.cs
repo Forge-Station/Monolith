@@ -35,7 +35,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 {
     [Dependency] private IUserInterfaceManager _uiManager = default!;
     private readonly DetectionSystem _detection; // Mono
-    private readonly StationSystem _station; // Frontier
+    private readonly ClientStationSystem _station; // Frontier
     private readonly SharedShuttleSystem _shuttles;
     private readonly SharedTransformSystem _transform;
     private readonly RadarBlipsSystem _blips;
@@ -132,7 +132,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         _detection = EntManager.System<DetectionSystem>(); // Mono
         _shuttles = EntManager.System<SharedShuttleSystem>();
         _transform = EntManager.System<SharedTransformSystem>();
-        _station = EntManager.System<StationSystem>(); // Frontier
+        _station = EntManager.System<ClientStationSystem>(); // Frontier
         _blips = EntManager.System<RadarBlipsSystem>();
 
         OnMouseEntered += HandleMouseEntered;

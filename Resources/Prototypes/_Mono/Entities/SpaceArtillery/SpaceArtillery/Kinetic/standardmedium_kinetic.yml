@@ -20,7 +20,7 @@
   - type: AmmoCounter
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Gun
     fireRate: 3
@@ -95,7 +95,7 @@
   - type: AmmoCounter
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Gun
     damageModifier: 1.1
@@ -167,7 +167,7 @@
   - type: AmmoCounter
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Gun
     fireRate: 1.5
@@ -229,7 +229,7 @@
   - type: AmmoCounter
   - type: AutoShootGun
   - type: GunSignalControl
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: Gun
     damageModifier: 4

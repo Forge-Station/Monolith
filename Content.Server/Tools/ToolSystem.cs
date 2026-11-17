@@ -34,8 +34,8 @@ public sealed partial class ToolSystem : SharedToolSystem
     //todo move to shared once you can remove reagents from shared without it freaking out.
     private void UpdateWelders(float frameTime)
     {
-        var query = EntityQueryEnumerator<WelderComponent, SolutionContainerManagerComponent>();
-        while (query.MoveNext(out var uid, out var welder, out var solutionContainer))
+        var query = EntityQueryEnumerator<WelderComponent, SolutionManagerComponent>();
+        while (query.MoveNext(out var uid, out var welder, out _))
         {
             if (!welder.Enabled)
                 continue;
@@ -45,7 +45,7 @@ public sealed partial class ToolSystem : SharedToolSystem
             if (welder.WelderTimer < welder.WelderUpdateTimer)
                 continue;
 
-            if (!SolutionContainerSystem.TryGetSolution((uid, solutionContainer), welder.FuelSolutionName, out var solutionComp, out var solution))
+            if (!SolutionContainerSystem.TryGetSolution(uid, welder.FuelSolutionName, out var solutionComp, out var solution))
                 continue;
 
             SolutionContainerSystem.RemoveReagent(solutionComp.Value, welder.FuelReagent, welder.FuelConsumption * welder.WelderTimer);

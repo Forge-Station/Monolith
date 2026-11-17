@@ -14,7 +14,7 @@ namespace Content.Client._Forge.ShipyardService.UI;
 [GenerateTypedNameReferences]
 public sealed partial class ShipyardServiceWindow : FancyWindow
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private ShipyardServiceBoundUserInterfaceState _state = new();
     private bool _updatingShuttles;

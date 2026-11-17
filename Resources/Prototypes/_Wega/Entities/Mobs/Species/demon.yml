@@ -10,10 +10,8 @@
     - Snout
     - HeadSide
   - type: Carriable
-  - type: Hunger
   - type: Puller
     needsHands: false
-  - type: Thirst
   - type: Body
     prototype: Demon
     requiredLegs: 2

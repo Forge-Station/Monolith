@@ -81,12 +81,6 @@
   components:
   - type: IdentityBlocker
   - type: IngestionBlocker
-  - type: HideLayerClothing
-    slots:
-    - Hair
-    - Snout
-    - HeadTop
-    - HeadSide
 
 - type: entity
   parent: BaseClothingModsuitHelmet

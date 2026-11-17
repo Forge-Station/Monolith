@@ -6,6 +6,7 @@
   molarMass: 32
   color: 2887E8
   reagent: Oxygen
+  isOxidizer: true
   pricePerMole: 0.13 # Mono: 0<0.13
 
 - type: gas
@@ -38,6 +39,7 @@
   gasOverlayState: plasma
   color: FF3300
   reagent: Plasma
+  isFuel: true
   pricePerMole: 2 # Mono 1<2
 
 - type: gas
@@ -50,6 +52,7 @@
   gasOverlayState: tritium
   color: 13FF4B
   reagent: Tritium
+  isFuel: true
   pricePerMole: 6 # Mono 2.5<6
 
 - type: gas

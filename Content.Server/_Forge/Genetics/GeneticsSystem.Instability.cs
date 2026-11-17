@@ -8,7 +8,7 @@ namespace Content.Server._Forge.Genetics;
 
 public sealed partial class GeneticsSystem
 {
-    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private SharedJitteringSystem _jitter = default!;
 
     private static readonly TimeSpan InstabilityInterval = TimeSpan.FromSeconds(12);
 

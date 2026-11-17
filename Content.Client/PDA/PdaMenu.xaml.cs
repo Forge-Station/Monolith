@@ -1,4 +1,4 @@
-using Content.Client.GameTicking.Managers;
+using Content.Client.GameTicking;
 using Content.Shared.PDA;
 using Robust.Shared.Utility;
 using Content.Shared.CartridgeLoader;

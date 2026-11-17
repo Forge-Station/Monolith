@@ -158,12 +158,9 @@ public sealed partial class NcContractSystem
             : solution;
         maxVolume = FixedPoint2.Max(reagentAmount, FixedPoint2.New(1));
 
-        if (!TryComp(source, out SolutionContainerManagerComponent? manager))
-            return true;
-
         if (!IsAnySolutionName(solution))
         {
-            if (!_solutions.TryGetSolution((source, manager), solution, out _, out var sourceSolution))
+            if (!_solutions.TryGetSolution(source, solution, out _, out var sourceSolution))
                 return true;
 
             solutionName = solution;
@@ -171,7 +168,7 @@ public sealed partial class NcContractSystem
             return true;
         }
 
-        foreach (var (name, solutionEnt) in _solutions.EnumerateSolutions((source, manager), false))
+        foreach (var (name, solutionEnt) in _solutions.EnumerateSolutions(source, false))
         {
             if (string.IsNullOrWhiteSpace(name))
                 continue;
@@ -201,33 +198,26 @@ public sealed partial class NcContractSystem
             reagentAmount <= FixedPoint2.Zero)
             return false;
 
-        if (!_solutions.EnsureSolutionEntity((returned, null), solutionName, out var targetSolutionEnt, maxVolume) ||
-            targetSolutionEnt == null)
-            return false;
+        _solutions.EnsureSolution(returned, solutionName, out var targetSolutionEnt);
 
-        _solutions.RemoveAllSolution(targetSolutionEnt.Value);
-        _solutions.SetCapacity(targetSolutionEnt.Value, FixedPoint2.Max(maxVolume, reagentAmount));
-        return _solutions.TryAddSolution(targetSolutionEnt.Value, new Solution(reagentId, reagentAmount));
+        _solutions.RemoveAllSolution(targetSolutionEnt);
+        _solutions.SetCapacity(targetSolutionEnt, FixedPoint2.Max(maxVolume, reagentAmount));
+        return _solutions.TryAddSolution(targetSolutionEnt, new Solution(reagentId, reagentAmount));
     }
 
     private void CopySolutionsBestEffort(EntityUid source, EntityUid target)
     {
-        if (!TryComp(source, out SolutionContainerManagerComponent? sourceManager))
-            return;
-
-        foreach (var (name, sourceSolutionEnt) in _solutions.EnumerateSolutions((source, sourceManager), false))
+        foreach (var (name, sourceSolutionEnt) in _solutions.EnumerateSolutions(source, false))
         {
             if (string.IsNullOrWhiteSpace(name))
                 continue;
 
             var sourceSolution = sourceSolutionEnt.Comp.Solution;
-            if (!_solutions.EnsureSolutionEntity((target, null), name, out var targetSolutionEnt, sourceSolution.MaxVolume) ||
-                targetSolutionEnt == null)
-                continue;
+            _solutions.EnsureSolution(target, name, out var targetSolutionEnt);
 
-            _solutions.RemoveAllSolution(targetSolutionEnt.Value);
-            _solutions.SetCapacity(targetSolutionEnt.Value, sourceSolution.MaxVolume);
-            _solutions.TryAddSolution(targetSolutionEnt.Value, new(sourceSolution));
+            _solutions.RemoveAllSolution(targetSolutionEnt);
+            _solutions.SetCapacity(targetSolutionEnt, sourceSolution.MaxVolume);
+            _solutions.TryAddSolution(targetSolutionEnt, new(sourceSolution));
         }
     }
 

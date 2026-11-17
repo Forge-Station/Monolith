@@ -16,7 +16,7 @@
   - type: Appearance
   - type: FireControlRotate
   - type: AmmoCounter
-  - type: WirelessNetworkConnection
+  - type: WirelessNetwork
     range: 500
   - type: GunSignalControl
   - type: Gun

@@ -1,6 +1,7 @@
 ﻿- type: entity
   id: NoticeBoard
   name: notice board
+  categories: [ HideSpawnMenu ] # Forge-change
   description: Is there a job for a witcher?
   placement:
     mode: SnapgridCenter

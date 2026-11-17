@@ -106,3 +106,7 @@ ent-WallAndesiteCobblebrick = андезитовая булыжниковая с
 ent-WallPlastitaniumDiagonalIndestructible = пластитановая стена
     .desc = { ent-WallShuttleDiagonal.desc }
     .suffix = Диагональ, Неразрушимое
+ent-WallXenoborg = стена ксеноборгов
+ent-WallXenoborgDiagonal = { ent-WallXenoborg }
+    .desc = { ent-WallPlastitaniumDiagonal.desc }
+    .suffix = Диагональная

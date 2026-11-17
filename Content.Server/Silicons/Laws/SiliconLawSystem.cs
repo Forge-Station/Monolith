@@ -34,7 +34,7 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private SharedRoleSystem _roles = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private UserInterfaceSystem _userInterface = default!;
     [Dependency] private EmagSystem _emag = default!;
     [Dependency] private TagSystem _tagSystem = default!; // Corvax-Next-AiRemoteControl

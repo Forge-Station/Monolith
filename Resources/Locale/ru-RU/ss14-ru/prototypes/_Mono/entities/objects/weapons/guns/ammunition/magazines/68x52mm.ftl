@@ -1,7 +1,7 @@
 ent-BaseMagazine68x52mmCaseless = магазин (6.8x52мм STANAG безгильзовые)
 ent-Magazine68x52mmCaseless = { ent-BaseMagazine68x52mmCaseless }
 ent-Magazine68x52mmCaselessEmpty = магазин (6.8x52мм STANAG)
-    .desc = " "
+    .desc = { "" }
     .suffix= пустой
 ent-Magazine68x52mmCaselessPlasteelAP = магазин (6.8x52мм STANAG бронебойные)
 ent-Magazine68x52mmCaselessHP = магазин (6.8x52мм STANAG экспансивные)

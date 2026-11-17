@@ -18,15 +18,14 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.BluespaceHarvester;
 
-public sealed class BluespaceHarvesterSystem : EntitySystem
+public sealed partial class BluespaceHarvesterSystem : EntitySystem
 {
     private const float UpdateTime = 1.0f;
-    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambientSound = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private readonly List<BluespaceHarvesterTap> _taps =
     [
@@ -38,9 +37,8 @@ public sealed class BluespaceHarvesterSystem : EntitySystem
         new() { Level = 20, Visual = BluespaceHarvesterVisuals.Tap5 },
     ];
 
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private TransformSystem _transform = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
 
 
     private float _updateTimer;

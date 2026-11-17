@@ -126,16 +126,16 @@ public sealed partial class DrainSystem : SharedDrainSystem
             return;
         _updateAccumulator -= _updateInterval;
 
-        var managerQuery = GetEntityQuery<SolutionContainerManagerComponent>();
+        var managerQuery = GetEntityQuery<SolutionManagerComponent>();
 
         var query = EntityQueryEnumerator<DrainComponent>();
         while (query.MoveNext(out var uid, out var drain))
         {
-            if (!managerQuery.TryGetComponent(uid, out var manager))
+            if (!managerQuery.TryGetComponent(uid, out _))
                 continue;
 
             // Best to do this one every second rather than once every tick...
-            if (!_solutionContainerSystem.ResolveSolution((uid, manager), DrainComponent.SolutionName, ref drain.Solution, out var drainSolution))
+            if (!_solutionContainerSystem.ResolveSolution(uid, DrainComponent.SolutionName, ref drain.Solution, out var drainSolution))
                 continue;
 
             if (drainSolution.Volume <= 0 && !drain.AutoDrain)
@@ -145,7 +145,7 @@ public sealed partial class DrainSystem : SharedDrainSystem
             }
 
             // Remove a bit from the buffer
-            _solutionContainerSystem.SplitSolution(drain.Solution.Value, (drain.UnitsDestroyedPerSecond * _updateInterval));
+            _solutionContainerSystem.SplitSolution(drain.Solution!.Value, (drain.UnitsDestroyedPerSecond * _updateInterval));
 
             // This will ensure that UnitsPerSecond is per second...
             var amount = drain.UnitsPerSecond * _updateInterval;

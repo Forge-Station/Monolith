@@ -88,8 +88,9 @@ public sealed partial class ShipFireGunsOperator : HTNOperator, IHtnConditionalS
 
         // Need to remove the planning value for execution.
         blackboard.Remove<EntityCoordinates>(NPCBlackboard.OwnerCoordinates);
-        var targetCoordinates = blackboard.GetValue<EntityCoordinates>(TargetKey);
-        var uid = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
+        if (!blackboard.TryGetValue<EntityCoordinates>(TargetKey, out var targetCoordinates, _entManager)
+            || !blackboard.TryGetValue<EntityUid>(NPCBlackboard.Owner, out var uid, _entManager))
+            return;
 
         var comp = _targeting.Target(uid, targetCoordinates);
 
@@ -101,7 +102,8 @@ public sealed partial class ShipFireGunsOperator : HTNOperator, IHtnConditionalS
 
     public override HTNOperatorStatus Update(NPCBlackboard blackboard, float frameTime)
     {
-        var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
+        if (!blackboard.TryGetValue<EntityUid>(NPCBlackboard.Owner, out var owner, _entManager))
+            return HTNOperatorStatus.Failed;
 
         if (!blackboard.TryGetValue<EntityCoordinates>(TargetKey, out var target, _entManager)
             || !_entManager.TryGetComponent<TransformComponent>(owner, out var xform)
@@ -149,7 +151,8 @@ public sealed partial class ShipFireGunsOperator : HTNOperator, IHtnConditionalS
         if (RemoveKeyOnFinish)
             blackboard.Remove<EntityCoordinates>(TargetKey);
 
-        _targeting.Stop(blackboard.GetValue<EntityUid>(NPCBlackboard.Owner));
+        if (blackboard.TryGetValue<EntityUid>(NPCBlackboard.Owner, out var uid, _entManager))
+            _targeting.Stop(uid);
     }
 
     public override void PlanShutdown(NPCBlackboard blackboard)

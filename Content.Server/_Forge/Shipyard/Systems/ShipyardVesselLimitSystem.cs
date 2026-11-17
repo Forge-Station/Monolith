@@ -7,7 +7,7 @@ namespace Content.Server._Forge.Shipyard.Systems;
 /// <summary>
 /// Shared sector limit counting for shipyard vessel purchases.
 /// </summary>
-public sealed class ShipyardVesselLimitSystem : EntitySystem
+public sealed partial class ShipyardVesselLimitSystem : EntitySystem
 {
     [Dependency] private HyperwarRuleSystem _hyperwar = default!;
 

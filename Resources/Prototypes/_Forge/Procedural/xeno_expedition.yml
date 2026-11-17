@@ -160,10 +160,10 @@
     spawnGroups:
       CornerClutter: ForgeXenoHiveClutter
       Entrance: ForgeXenoHiveDoor
-      EntranceFlank: ForgeXenoHiveWindow
+      EntranceFlank: ForgeXenoHiveWall
       Junction: ForgeXenoHiveDoor
       WallMounts: ForgeXenoHiveWalls
-      Window: ForgeXenoHiveWindow
+      Window: ForgeXenoHiveWall
     tiles:
       FallbackTile: FloorXeno
       WidenTile: FloorXeno
@@ -200,12 +200,18 @@
     replacements:
       WallMining: WallXenoResin
       WallPlastitanium: WallXenoResin
-      MiningWindowDungeon: WallXenoMembrane
-      WindowDungeon: WallXenoMembrane
-      WindowDirectionalDungeon: WallXenoMembrane
-      WindowReinforcedDirectionalDungeon: WallXenoMembrane
-      PlasmaWindowDirectionalDungeon: WallXenoMembrane
-      PlasmaReinforcedWindowDirectionalDungeon: WallXenoMembrane
+      WindowDungeon: WallXenoResin
+      ReinforcedWindowDungeon: WallXenoResin
+      PlasmaWindowDungeon: WallXenoResin
+      ReinforcedPlasmaWindowDungeon: WallXenoResin
+      ReinforcedUraniumWindowDungeon: WallXenoResin
+      WindowDirectionalDungeon: WallXenoResin
+      WindowFrostedDirectionalDungeon: WallXenoResin
+      WindowReinforcedDirectionalDungeon: WallXenoResin
+      PlasmaWindowDirectionalDungeon: WallXenoResin
+      PlasmaReinforcedWindowDirectionalDungeon: WallXenoResin
+      UraniumWindowDirectionalDungeon: WallXenoResin
+      UraniumReinforcedWindowDirectionalDungeon: WallXenoResin
 
 - type: entitySpawnEntry
   id: ForgeXenoHiveDoor
@@ -213,9 +219,9 @@
   - id: DoorXenoResin
 
 - type: entitySpawnEntry
-  id: ForgeXenoHiveWindow
+  id: ForgeXenoHiveWall
   entries:
-  - id: WallXenoMembrane
+  - id: WallXenoResin
 
 - type: entitySpawnEntry
   id: ForgeXenoHiveClutter

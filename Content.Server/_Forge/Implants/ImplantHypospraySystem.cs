@@ -8,9 +8,9 @@ namespace Content.Server._Forge.Implants;
 /// <summary>
 /// Injects hypospray solution from subdermal implants when their trigger fires (crit, implant action, etc.).
 /// </summary>
-public sealed class ImplantHypospraySystem : EntitySystem
+public sealed partial class ImplantHypospraySystem : EntitySystem
 {
-    [Dependency] private readonly HypospraySystem _hypospray = default!;
+    [Dependency] private HypospraySystem _hypospray = default!;
 
     public override void Initialize()
     {

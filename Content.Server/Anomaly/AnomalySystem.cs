@@ -1,3 +1,4 @@
+using Content.Server.Station.Systems;
 using Content.Server.Anomaly.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Audio;
@@ -5,13 +6,13 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.Materials;
 using Content.Server.Radiation.Systems;
 using Content.Server.Radio.EntitySystems;
-using Content.Server.Station.Systems;
 using Content.Shared.Anomaly;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Anomaly.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Station.Systems;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -34,7 +35,7 @@ public sealed partial class AnomalySystem : SharedAnomalySystem
     [Dependency] private ExplosionSystem _explosion = default!;
     [Dependency] private MaterialStorageSystem _material = default!;
     [Dependency] private SharedPointLightSystem _pointLight = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private RadiationSystem _radiation = default!;

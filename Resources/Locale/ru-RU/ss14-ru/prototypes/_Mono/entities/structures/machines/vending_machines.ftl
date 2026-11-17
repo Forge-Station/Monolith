@@ -10,15 +10,21 @@ ent-VendingMachineSyndieContrabandPOI = КонтраВенд
     .suffix = POI
 ent-VendingMachineBarista = автомат Barista
     .desc = Продаёт разнообразные кофе, чай и выпечку.
-ent-VendingMachineBaristaShip = автомат Barista
-    .desc = Продаёт разнообразные кофе, чай и выпечку.
+ent-VendingMachineBaristaShip = { ent-VendingMachineBarista }
+    .desc = { ent-VendingMachineBarista.desc }
 ent-VendingMachinePMCclothingsPOI = автомат излишков дяди Бориса
     .desc = Продаёт снаряжение PMC и военные излишки.
 ent-VendingMachineTraderBaikal = торговый автомат товаров Camelot
     .desc = Продаёт различные торговые товары.
 ent-VendingMachineTraderDepot = торговый автомат товаров грузового депо
     .desc = { ent-VendingMachineTraderBaikal.desc }
-ent-VendingMachineTraderDepotAlt = торговый автомат товаров грузового депо
+ent-VendingMachineTraderDepotAlt = { ent-VendingMachineTraderDepot }
     .desc = { ent-VendingMachineTraderBaikal.desc }
 ent-VendingMachineTraderTradeMall = торговый автомат товаров торгового центра
     .desc = { ent-VendingMachineTraderBaikal.desc }
+
+ent-VendingMachineMieyoAutomated = торговый автомат ММС
+    .desc = Продаёт различные товары ММС и отправляет 80% прибыли обратно на «Хоккайдо».
+
+ent-VendingMachineMieyoAutomatedFlatpack = упакованный торговый автомат ММС
+    .desc = Комплект для сборки торгового автомата ММС.

@@ -2,6 +2,7 @@
   "version": 1,
   "license": "CC-BY-SA-3.0",
   "copyright": "Taken from goonstation https://github.com/goonstation/goonstation/blob/master/icons/obj/radiostation.dmi",
+  "copyright": "placeholder by teasum",
   "size": {
     "x": 32,
     "y": 32
@@ -90,6 +91,9 @@
     },
 	  {
       "name": "ttd-vinyl-disk"
+    },
+    {
+      "name": "placeholder"
     }
   ]
 }

@@ -28,7 +28,7 @@ public sealed partial class ArtifactSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private IEntityManager _entityManager = default!;
-    [Dependency] private StationSystem _station = default!; // Frontier
+    [Dependency] private ServerStationSystem _station = default!; // Frontier
 
 
     public override void Initialize()

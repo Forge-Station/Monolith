@@ -6,10 +6,9 @@ using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Labels;
 using Content.Server.Popups;
 using Content.Shared._Forge.Botany;
-using Content.Shared._Forge.Botany;
 using Content.Shared._Forge.Botany.HydroponicsConsole;
 using Content.Shared.Atmos;
-using Content.Shared.Atmos;
+using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Systems;
 using Content.Shared.Examine;
@@ -20,17 +19,17 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.Botany.HydroponicsConsole;
 
-public sealed class HydroponicsConsoleSystem : EntitySystem
+public sealed partial class HydroponicsConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceListSystem _deviceList = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly BotanySystem _botany = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly PlantHolderSystem _plantHolder = default!;
-    [Dependency] private readonly LabelSystem _label = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private DeviceListSystem _deviceList = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private BotanySystem _botany = default!;
+    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private PlantHolderSystem _plantHolder = default!;
+    [Dependency] private LabelSystem _label = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private MetaDataSystem _meta = default!;
 
     public override void Initialize()
     {
@@ -300,7 +299,7 @@ public sealed class HydroponicsConsoleSystem : EntitySystem
         var entry = new HydroponicsConsoleTrayEntry
         {
             Entity = GetNetEntity(tray),
-            Address = net?.Address ?? string.Empty,
+            Address = net == null ? string.Empty : DeviceLocalizationHelpers.GetAddressFromId(net),
             TrayName = meta?.EntityName ?? Name(tray),
             HasPlant = holder.Seed != null,
             Dead = holder.Dead,

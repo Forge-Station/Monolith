@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client._Forge.Botany.UI;
-using Content.Client.GameTicking.Managers;
+using Content.Client.GameTicking;
 using Content.Shared._Forge.Botany;
 using Content.Shared._Forge.Botany.HydroponicsConsole;
 using Content.Shared.Atmos;
@@ -20,10 +20,10 @@ namespace Content.Client._Forge.Botany.HydroponicsConsole;
 [GenerateTypedNameReferences]
 public sealed partial class HydroponicsConsoleWindow : BaseWindow
 {
-    [Dependency] private readonly IResourceCache _resCache = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IEntitySystemManager _systems = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IResourceCache _resCache = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IEntitySystemManager _systems = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     private readonly BotanyUiStyles _styles;
     private readonly ClientGameTicker _ticker;

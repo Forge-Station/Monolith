@@ -15,12 +15,12 @@ namespace Content.Server._Forge.ExecutionChair
 {
     public sealed partial class ExecutionChairSystem : EntitySystem
     {
-        [Dependency] private readonly IGameTiming _gameTimer = default!;
-        [Dependency] private readonly IRobustRandom _randomGen = default!;
-        [Dependency] private readonly DeviceLinkSystem _deviceSystem = default!;
-        [Dependency] private readonly ElectrocutionSystem _shockSystem = default!;
-        [Dependency] private readonly SharedAudioSystem _soundSystem = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
+        [Dependency] private IGameTiming _gameTimer = default!;
+        [Dependency] private IRobustRandom _randomGen = default!;
+        [Dependency] private DeviceLinkSystem _deviceSystem = default!;
+        [Dependency] private ElectrocutionSystem _shockSystem = default!;
+        [Dependency] private SharedAudioSystem _soundSystem = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
 
         private ISawmill _sawmill = default!;
 

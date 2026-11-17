@@ -35,7 +35,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     [Dependency] private FixtureSystem _fixtureSystem = default!;
     [Dependency] private PhysicsSystem _physicsSystem = default!;
     [Dependency] private PvsOverrideSystem _pvsSys = default!;
-    [Dependency] private StationSystem _station = default!; // Forge-Change
+    [Dependency] private ServerStationSystem _station = default!; // Forge-Change
     [Dependency] private SharedAudioSystem _audio = default!; // Forge-Change
     [Dependency] private IGameTiming _timing = default!; // Forge-Change
 

@@ -17,4 +17,4 @@ ent-Forge20mmBulletAPCBC = 20мм снаряд
 ent-Forge255ProjectileHESH = 255мм HESH
 ent-Forge90mmBulletAPHE = 90мм
 ent-Forge30mmBulletAPHE = 30мм APHE
-ent-Forge255ProjectileHE = снаряд Bofors 255мм
+ent-Forge255ProjectileHE = снаряд «Бофорс» 255мм

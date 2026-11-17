@@ -19,6 +19,8 @@ using Content.Shared.Station.Components; // Forge-Change
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Whitelist;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
@@ -41,6 +43,7 @@ namespace Content.Server.Shuttles.Systems;
 
 public sealed partial class ShuttleSystem
 {
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
     /*
      * This is a way to move a shuttle from one location to another, via an intermediate map for fanciness.
      */
@@ -304,6 +307,12 @@ public sealed partial class ShuttleSystem
         float? hyperspaceTime = null,
         string? priorityTag = null)
     {
+        if (!coordinates.IsValid(EntityManager) || !double.IsFinite(angle.Theta))
+        {
+            Log.Error($"Found invalid FTL destination with coordinates {coordinates} and angle {angle} for shuttle {shuttleUid}");
+            return;
+        }
+
         // Check if destination is an expedition map
         bool isExpedition = IsTargetExpedition(coordinates);
 
@@ -793,12 +802,27 @@ public sealed partial class ShuttleSystem
 
         if (!Exists(comp.TargetCoordinates.EntityId))
         {
-            // Uhh good luck
-            // Pick earliest map?
-            var maps = EntityQuery<MapComponent>().Select(o => o.MapId).ToList();
-            var map = maps.Min(o => o.GetHashCode());
-            mapId = new MapId(map);
-            TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            // Prefer a map that actually allows this shuttle, instead of whichever map id hashes lowest.
+            var allowed = EntityQuery<MapComponent, FTLDestinationComponent>()
+                .Where(o => _whitelistSystem.IsWhitelistPassOrNull(o.Item2.Whitelist, uid))
+                .OrderBy(o => o.Item1.MapId.GetHashCode())
+                .FirstOrDefault();
+
+            if (allowed.Item1 != null)
+            {
+                mapId = allowed.Item1.MapId;
+                TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            }
+            else
+            {
+                var maps = EntityQuery<MapComponent>().Select(o => o.MapId).ToList();
+                if (maps.Count == 0)
+                    return;
+
+                var map = maps.Min(o => o.GetHashCode());
+                mapId = new MapId(map);
+                TryFTLProximity(uid, _mapSystem.GetMap(mapId));
+            }
         }
         // Docking FTL
         else if (HasComp<MapGridComponent>(target.EntityId) && !HasComp<MapComponent>(target.EntityId))

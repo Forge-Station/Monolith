@@ -1,0 +1,31 @@
+# Run toward whoever just shot us. Cleared when we arrive.
+- type: htnCompound
+  id: IncomingFireCompound
+  branches:
+    - preconditions:
+        - !type:KeyExistsPrecondition
+          key: IncomingFireCoordinates
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+            pathfindInPlanning: false
+            removeKeyOnFinish: true
+            targetKey: IncomingFireCoordinates
+            pathfindKey: IncomingFirePathfind
+            rangeKey: MeleeRange
+
+# After the target is gone, check the last place we saw them, then go back to idle.
+- type: htnCompound
+  id: InvestigateCompound
+  branches:
+    - preconditions:
+        - !type:KeyExistsPrecondition
+          key: InvestigateCoordinates
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+            pathfindInPlanning: false
+            removeKeyOnFinish: true
+            targetKey: InvestigateCoordinates
+            pathfindKey: InvestigatePathfind
+            rangeKey: MovementRange

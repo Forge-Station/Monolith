@@ -283,6 +283,12 @@
 - type: Tag
   id: Type3
 
+- type: Tag
+  id: PortableRadioRig
+
+- type: Tag
+  id: PortableVinylPlayer
+
 #region TTI
 - type: Tag
   id: FactionStaticUplinkTTI

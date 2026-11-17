@@ -4,10 +4,10 @@ using Robust.Client.Player;
 
 namespace Content.Client._Shitmed.Autodoc;
 
-public sealed class AutodocBoundUserInterface : BoundUserInterface
+public sealed partial class AutodocBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     [ViewVariables]
     private AutodocWindow? _window;

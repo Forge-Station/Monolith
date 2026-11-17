@@ -18,6 +18,7 @@ using Content.Shared.Chat.Prototypes;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
+using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs;
@@ -83,7 +84,7 @@ public sealed partial class StationAiSystem : SharedStationAiSystem
             if (range < 0 || range > ev.VoiceRange)
                 continue;
 
-            ev.Recipients.TryAdd(actor.PlayerSession, new ICChatRecipientData(range, false, HearingEntity: xform.Owner)); // Forge-Change
+            ev.Recipients.TryAdd(actor.PlayerSession, new ICChatRecipientData(range, false, HearingEntity: xform.Owner));
         }
     }
 

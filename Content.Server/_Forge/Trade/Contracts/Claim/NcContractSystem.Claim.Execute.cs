@@ -5,7 +5,7 @@ namespace Content.Server._Forge.Trade;
 
 public sealed partial class NcContractSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStackSystem _stacks = default!;
+    [Dependency] private SharedStackSystem _stacks = default!;
 
     private bool TryExecuteClaimTakePlan(
         ClaimContext ctx,

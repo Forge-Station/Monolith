@@ -95,7 +95,7 @@
 #      deviceNetId: Wireless # Frontier
 #      transmitFrequencyId: SuitSensor # Frontier
 #    - type: StationLimitedNetwork # Frontier
-#    - type: WirelessNetworkConnection # Frontier
+#    - type: WirelessNetwork # Frontier
 #      range: 500 # Frontier
     - type: TriggerOnMobstateChange
       mobState:

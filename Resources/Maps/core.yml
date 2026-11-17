@@ -72006,7 +72006,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Engineering
-      destinationAddress: Engineering
   - uid: 998
     components:
     - type: Transform
@@ -72014,7 +72013,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Atmospherics
-      destinationAddress: Atmospherics
   - uid: 4498
     components:
     - type: Transform
@@ -72022,7 +72020,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Lawyer
-      destinationAddress: Lawyer
   - uid: 4655
     components:
     - type: Transform
@@ -72030,7 +72027,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Reporter
-      destinationAddress: Reporter
   - uid: 5155
     components:
     - type: Transform
@@ -72038,7 +72034,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Security
-      destinationAddress: Security
   - uid: 5422
     components:
     - type: Transform
@@ -72046,7 +72041,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Chapel
-      destinationAddress: Chapel
   - uid: 5568
     components:
     - type: Transform
@@ -72054,7 +72048,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Cargo
-      destinationAddress: Cargo
   - uid: 5699
     components:
     - type: Transform
@@ -72062,7 +72055,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Quartermaster
-      destinationAddress: Quartermaster
   - uid: 7155
     components:
     - type: Transform
@@ -72070,7 +72062,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Science
-      destinationAddress: Science
   - uid: 7442
     components:
     - type: Transform
@@ -72078,7 +72069,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Research Director
-      destinationAddress: Research Director
   - uid: 8346
     components:
     - type: Transform
@@ -72086,7 +72076,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Library
-      destinationAddress: Library
   - uid: 9182
     components:
     - type: Transform
@@ -72094,7 +72083,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Detective
-      destinationAddress: Detective
   - uid: 16527
     components:
     - type: Transform
@@ -72102,7 +72090,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Bridge
-      destinationAddress: Bridge
   - uid: 20485
     components:
     - type: Transform
@@ -72110,7 +72097,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Medical
-      destinationAddress: Medical
   - uid: 20494
     components:
     - type: Transform
@@ -72118,7 +72104,6 @@ entities:
       parent: 2
     - type: FaxMachine
       name: Head of Personel
-      destinationAddress: Head of Personnel
 - proto: FaxMachineCaptain
   entities:
   - uid: 13489

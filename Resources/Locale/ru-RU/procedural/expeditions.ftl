@@ -53,7 +53,7 @@ salvage-biome-mod-hive = Улей
 salvage-dungeon-mod-hive = Захваченный экспедиционный пост
 salvage-faction-forge-xeno = Ксеноморфы улья
 salvage-light-mod-hive = Тусклый смоляной свет
-salvage-time-mod-hive = Долгая высадка, 20 минут
+salvage-time-mod-hive = Долгая высадка, 30 минут
 # Forge-Change-End
 
 # Runner
@@ -95,6 +95,7 @@ salvage-biome-mod-caves = Пещеры
 salvage-biome-mod-grasslands = Луга
 salvage-biome-mod-snow = Снежная тайга
 salvage-biome-mod-lava = Вулкан
+salvage-biome-mod-mono-desert = Пустыня
 salvage-dungeon-mod-lava-brig = Лавовый бриг
 salvage-dungeon-mod-snowy-labs = Снежные лаборатории
 salvage-dungeon-mod-experiment = Эксперимент

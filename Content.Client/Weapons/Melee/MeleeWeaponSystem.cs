@@ -33,6 +33,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     [Dependency] private SharedColorFlashEffectSystem _color = default!;
     [Dependency] private MapSystem _map = default!;
     [Dependency] private TransformSystem _transform = default!; // Goobstation
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 

@@ -1,6 +1,6 @@
 // Forge-Change
 using Content.Shared._Mono.Company;
-using Content.Shared.Medical.SuitSensor;
+using Content.Shared.Medical.SuitSensors;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;

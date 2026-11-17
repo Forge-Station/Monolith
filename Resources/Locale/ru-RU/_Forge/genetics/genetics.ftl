@@ -324,9 +324,90 @@ ent-DnaInjectorFilledHulk = ДНК-инъектор
     .suffix = Халк
     .desc = { ent-DnaInjector.desc }
 
+# Гены способностей
+
+gene-telekinesis-name = Телекинез
+gene-telekinesis-desc = Поднимает предметы в пределах пяти тайлов прямой видимости и позволяет вести их курсором. ПКМ-действия (зарядить/разрядить, сдёрнуть затвор и т.п.) работают на этой дистанции; стрельба — только из руки. Потеря LOS или дистанции сбрасывает хватку. Сильно повышает нестабильность.
+
+gene-telepathy-name = Телепатия
+gene-telepathy-desc = Посылайте мысленное сообщение в голову цели в пределах пяти тайлов. Выберите действие в хотбаре, кликните по цели и напишите текст, как при молитве.
+
+gene-strong-stomach-name = Крепкий желудок
+gene-strong-stomach-desc = Протухшее и порченое мясо больше не травит. Натурально токсичная и кислотная плоть (ксено и подобное) по-прежнему опасна.
+
+gene-unstable-dna-name = Нестабильная цепочка ДНК
+gene-unstable-dna-desc = Переписывает тело в живую слизь. Переключайтесь между комком плоти и слаймолюдом — каждое превращение наносит 5 режущего.
+
+gene-stabilized-dna-name = Стабилизированная ДНК
+gene-stabilized-dna-desc = Снимает все прочие полезные и вредные мутации. Взамен клеточные повреждения заживают невероятно быстро.
+
+gene-bone-weapon-name = Боевой скелет
+gene-bone-weapon-desc = Отращивайте костное лезвие прямо в руку. Отращивание стоит 15 режущего урона. Повторное нажатие втягивает клинок.
+
+gene-atomic-metabolism-name = Атомный метаболизм
+gene-atomic-metabolism-desc = Превращает радиацию в лечение и сытость — около трёх единиц здоровья и питания за рад. Вы светитесь зелёным и слегка фоните.
+
+gene-organ-adapt-name = Адаптация внутренних органов
+gene-organ-adapt-desc = Кожа держит вакуум, внутреннее давление падает (объём крови вдвое). Биологический запас воздуха (~2 мин) появляется внутри рюкзака, не занимая слот спины.
+
+gene-telekinesis-blocked = Нельзя дотянуться сквозь преграду.
+gene-telekinesis-pull = Предмет поднят — ведите его курсором.
+gene-telekinesis-release = Вы отпускаете хватку.
+gene-telekinesis-fling = Вы швыряете это прочь.
+gene-telekinesis-nothing = Разумом вы ничего не держите.
+gene-telekinesis-fail = Хватка соскальзывает с цели.
+gene-telekinesis-lost = Теряете из виду — телекинетическая хватка рвётся.
+
+gene-telepathy-no-mind = Здесь нечего касаться разумом.
+gene-telepathy-blocked = Мысль не проходит на такое расстояние.
+gene-telepathy-ui-title = Телепатия
+gene-telepathy-ui-message = Сообщение
+gene-telepathy-heard = Голос звучит у вас в голове
+gene-telepathy-sent = Мысль ушла.
+gene-telepathy-admin = ТЕЛЕПАТИЯ: {$user} → {$target}: {$message}
+
+gene-slime-form-activate = Плоть расползается в живую слизь.
+gene-slime-form-humanoid = Вы собираете себя в тело слаймолюда.
+gene-slime-form-blob = Вы оседаете бесформенным комком.
+gene-slime-form-fail = Слизь отказывается менять форму.
+
+gene-stabilized-stripped = Геном сбрасывает {$count} конфликтующих мутаций.
+
+gene-bone-weapon-retracted = Костное лезвие втягивается обратно в руку.
+gene-bone-weapon-grown = Кость рвёт кожу и твердеет в клинок.
+gene-bone-weapon-drop = Клинок вырывается, но руки заняты.
+
+gene-organ-adapt-activate = В теле формируется биологический запас воздуха. Кровь редеет.
+gene-organ-adapt-sac-fail = Биологический воздушный запас не может сформироваться.
+
+metabolizer-type-strong-stomach = крепкий желудок
+reagent-effect-condition-guidebook-genetic-strong-stomach = цель { $shouldhave ->
+    [true] имеет
+    *[false] не имеет
+} ген крепкого желудка
+
+ent-ActionGeneticTelekinesis = Телекинетический хват
+    .desc = Поднять цель в пределах пяти тайлов и вести курсором. Повтор по ней — отпустить.
+ent-ActionGeneticTelekinesisFling = Телекинетический бросок
+    .desc = Швырнуть удержание разума в указанную точку.
+ent-ActionGeneticTelepathy = Телепатия
+    .desc = Послать беззвучное мысленное сообщение видимому разуму.
+ent-ActionGeneticSlimeTransform = Слайм-трансформация
+    .desc = Переключение между комком и слаймолюдом. Стоит 5 режущего.
+ent-ActionGeneticBoneWeapon = Отрастить костное лезвие
+    .desc = Отрастить или втянуть костное лезвие. Отращивание стоит 15 режущего.
+
+ent-GeneBoneBlade = костное лезвие
+    .desc = Зазубренный клинок из живой кости, вырванный сквозь плоть. Ещё тёплый.
+ent-ClothingBackGeneticAirSac = биологический воздушный баллон
+    .desc = Живой резервуар дыхательной смеси, вросший в спину. Примерно на две минуты.
+ent-MobGeneSlimeBlob = сгусток слизи
+    .desc = Нестабильный комок живой слизи. Может снова стать слаймолюдом.
+
 # Исследования / порты / гайдбук
 
 research-technology-genetic-manipulation = Генетические манипуляции
+
 
 signal-port-name-genetics-scanner-sender = ДНК-модификатор
 signal-port-description-genetics-scanner-sender = Передатчик сигнала консоли генетики

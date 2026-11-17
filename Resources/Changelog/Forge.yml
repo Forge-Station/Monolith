@@ -457,3 +457,10 @@ Entries:
   id: 37
   time: '2026-11-17T19:56:35.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/582
+- author: KoT-Corvax
+  changes:
+    - type: Tweak
+      message: Респрайт диагональных окон!
+  id: 38
+  time: '2026-11-17T20:55:10.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/603

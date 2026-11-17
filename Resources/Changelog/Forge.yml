@@ -412,3 +412,14 @@ Entries:
   id: 32
   time: '2026-11-16T20:28:31.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/605
+- author: charlottenobot-art
+  changes:
+    - type: Add
+      message: Вайтлист на АДС Разор-Н.
+    - type: Fix
+      message: Скручиваемость щитов и энергомодулей POI.
+    - type: Fix
+      message: Омега сервер с Оружейной кузницы больше нельзя скрутить или разобрать.
+  id: 33
+  time: '2026-11-17T18:30:35.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/557

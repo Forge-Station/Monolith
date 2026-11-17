@@ -55484,8 +55484,6 @@ entities:
     - type: Transform
       pos: 13.5,15.5
       parent: 1
-    missingComponents:
-    - Anchorable
 - proto: ShuttersNormal
   entities:
   - uid: 8343

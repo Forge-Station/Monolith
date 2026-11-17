@@ -450,3 +450,10 @@ Entries:
   id: 36
   time: '2026-11-17T19:37:54.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/575
+- author: cotofish
+  changes:
+    - type: Tweak
+      message: 'замена скафандров вг на шатлах вг на обычные наемнические '
+  id: 37
+  time: '2026-11-17T19:56:35.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/582

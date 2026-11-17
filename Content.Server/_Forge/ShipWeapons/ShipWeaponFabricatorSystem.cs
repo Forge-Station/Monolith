@@ -32,7 +32,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server._Forge.ShipWeapons;
 
-public sealed class ShipWeaponFabricatorSystem : EntitySystem
+public sealed partial class ShipWeaponFabricatorSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> MachineBoard2x1Tag = "MachineBoard2x1";
     private static readonly ProtoId<TagPrototype> MachineBoard2x2Tag = "MachineBoard2x2";
@@ -50,22 +50,21 @@ public sealed class ShipWeaponFabricatorSystem : EntitySystem
         "BluespaceMatterBinStockPart",
     };
 
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedConstructionSystem _construction = default!;
-    [Dependency] private readonly FlatpackSystem _flatpack = default!;
-    [Dependency] private readonly MachinePartSystem _machinePart = default!;
-    [Dependency] private readonly MaterialStorageSystem _materialStorage = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly StackSystem _stack = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AmbientSoundSystem _ambientSound = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedConstructionSystem _construction = default!;
+    [Dependency] private FlatpackSystem _flatpack = default!;
+    [Dependency] private MaterialStorageSystem _materialStorage = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private StackSystem _stack = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AmbientSoundSystem _ambientSound = default!;
 
     public override void Initialize()
     {

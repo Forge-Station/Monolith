@@ -4,10 +4,10 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._Forge.ShowRoleInformation;
 
-public sealed class RoleDescriptionSystem : EntitySystem
+public sealed partial class RoleDescriptionSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
 
     private readonly HashSet<ProtoId<ShowRoleInformationWindowData>> _skipWindows = [];
     private readonly HashSet<EntityUid> _visitedEntities = [];

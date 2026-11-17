@@ -8,10 +8,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._Forge.Features;
 
-public sealed class ApcRequiresSlotSystem : SharedApcRequiresSlotSystem
+public sealed partial class ApcRequiresSlotSystem : SharedApcRequiresSlotSystem
 {
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

@@ -4,8 +4,10 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client.Lock.Visualizers;
 
-public sealed class LockVisualizerSystem : VisualizerSystem<LockVisualsComponent>
+public sealed partial class LockVisualizerSystem : VisualizerSystem<LockVisualsComponent>
 {
+    [Dependency] private SpriteSystem _sprite = default!;
+
     protected override void OnAppearanceChange(EntityUid uid, LockVisualsComponent comp, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null
@@ -20,15 +22,15 @@ public sealed class LockVisualizerSystem : VisualizerSystem<LockVisualsComponent
 
         if (hasOpen)
         {
-            args.Sprite.LayerSetVisible(LockVisualLayers.Lock, !open);
+            _sprite.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, !open);
         }
-        else if (!unlockedStateExist)
-            args.Sprite.LayerSetVisible(LockVisualLayers.Lock, locked);
+        else if (!(bool)unlockedStateExist!)
+            _sprite.LayerSetVisible((uid, args.Sprite), LockVisualLayers.Lock, locked);
 
         // When Open is missing, treat as closed (open defaults false) — same as upstream.
-        if ((!hasOpen || !open) && unlockedStateExist)
+        if (!open && (bool)unlockedStateExist!)
         {
-            args.Sprite.LayerSetState(LockVisualLayers.Lock, locked ? comp.StateLocked : comp.StateUnlocked);
+            _sprite.LayerSetRsiState((uid, args.Sprite), LockVisualLayers.Lock, locked ? comp.StateLocked : comp.StateUnlocked);
         }
     }
 }

@@ -29,7 +29,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityWhitelistSystem _whitelistSystem = default!; // Forge-Change
     [Dependency] private SharedBodySystem _body = default!; // Forge-Change
-    [Dependency] private readonly IGameTiming _gameTiming = default!; // Forge-Change
+    [Dependency] private IGameTiming _gameTiming = default!; // Forge-Change
 
     [Dependency] private readonly EntityQuery<ItemToggleComponent> _itemToggleQuery = default!;
 

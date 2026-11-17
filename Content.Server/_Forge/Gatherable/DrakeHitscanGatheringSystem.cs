@@ -13,14 +13,14 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Forge.Gatherable;
 
-public sealed class DrakeHitscanGatheringSystem : EntitySystem
+public sealed partial class DrakeHitscanGatheringSystem : EntitySystem
 {
-    [Dependency] private readonly GatherableSystem _gather = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private GatherableSystem _gather = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private const float OreTeleportGatherRadius = 1.5f;
     private const float OreTeleportSpread = 0.35f;

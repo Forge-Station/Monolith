@@ -172,6 +172,14 @@ public sealed partial class NPCUtilitySystem : EntitySystem
         return result;
     }
 
+    /// <summary>
+    /// A crate is visible only after this NPC watched the mob climb into it.
+    /// </summary>
+    private EntityUid GetLosTarget(EntityUid owner, EntityUid target)
+    {
+        return _npcCombat.GetAttackTarget(owner, target);
+    }
+
     private float GetScore(IUtilityCurve curve, float conScore)
     {
         switch (curve)
@@ -359,12 +367,15 @@ public sealed partial class NPCUtilitySystem : EntitySystem
             {
                 var radius = blackboard.GetValueOrDefault<float>(blackboard.GetVisionRadiusKey(EntityManager), EntityManager);
 
-                return _examine.InRangeUnOccluded(owner, targetUid, radius + 0.5f, null) ? 1f : 0f;
+                return _examine.InRangeUnOccluded(owner, GetLosTarget(owner, targetUid), radius + 0.5f, null) ? 1f : 0f;
             }
             case TargetInLOSOrCurrentCon:
             {
                 var radius = blackboard.GetValueOrDefault<float>(blackboard.GetVisionRadiusKey(EntityManager), EntityManager);
                 const float bufferRange = 0.5f;
+
+                if (_npcCombat.IsHiddenFrom(owner, targetUid))
+                    return 0f;
 
                 if (blackboard.TryGetValue<EntityUid>("Target", out var currentTarget, EntityManager) &&
                     currentTarget == targetUid &&
@@ -376,7 +387,7 @@ public sealed partial class NPCUtilitySystem : EntitySystem
                     return 1f;
                 }
 
-                return _examine.InRangeUnOccluded(owner, targetUid, radius + bufferRange, null) ? 1f : 0f;
+                return _examine.InRangeUnOccluded(owner, GetLosTarget(owner, targetUid), radius + bufferRange, null) ? 1f : 0f;
             }
             // Mono
             case GunTargetGoodCon con:
@@ -387,7 +398,7 @@ public sealed partial class NPCUtilitySystem : EntitySystem
                 var radius = blackboard.GetValueOrDefault<float>(blackboard.GetVisionRadiusKey(EntityManager), EntityManager);
                 const float bufferRange = 0.5f;
 
-                return _npcCombat.InRangeGoodTarget((gunUid, gun), owner, targetUid, radius + bufferRange, con.ShootThroughThreshold) ? 1f : 0f;
+                return _npcCombat.InRangeGoodTarget((gunUid, gun), owner, GetLosTarget(owner, targetUid), radius + bufferRange, con.ShootThroughThreshold) ? 1f : 0f;
             }
             case TargetIsAliveCon:
             {

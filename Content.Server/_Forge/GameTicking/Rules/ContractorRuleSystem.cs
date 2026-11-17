@@ -36,20 +36,19 @@ namespace Content.Server.GameTicking.Rules
     /// <summary>
     /// Alternative type of simple antagonists for more flexible use in the main idea of Contractor
     /// </summary>
-    public sealed class ContractorRuleSystem : GameRuleSystem<ContractorRuleComponent>
+    public sealed partial class ContractorRuleSystem : GameRuleSystem<ContractorRuleComponent>
     {
-        [Dependency] private readonly ServerAntagSelectionSystem _antag = default!;
-        [Dependency] private readonly AudioSystem _audio = default!;
-        [Dependency] private readonly EuiManager _euiMan = default!;
-        [Dependency] private readonly NpcFactionSystem _factionSystem = default!;
-        [Dependency] private readonly ISharedPlayerManager _player = default!;
-        [Dependency] private readonly MindSystem _mind = default!;
-        [Dependency] private readonly PopupSystem _popup = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly RoleSystem _role = default!;
-        [Dependency] private readonly SharedHandsSystem _hands = default!;
-        [Dependency] private readonly SharedJobSystem _jobSystem = default!;
-        [Dependency] private readonly LoadoutSystem _loadout = default!;
+        [Dependency] private ServerAntagSelectionSystem _antag = default!;
+        [Dependency] private AudioSystem _audio = default!;
+        [Dependency] private EuiManager _euiMan = default!;
+        [Dependency] private ISharedPlayerManager _player = default!;
+        [Dependency] private MindSystem _mind = default!;
+        [Dependency] private PopupSystem _popup = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private RoleSystem _role = default!;
+        [Dependency] private SharedHandsSystem _hands = default!;
+        [Dependency] private SharedJobSystem _jobSystem = default!;
+        [Dependency] private LoadoutSystem _loadout = default!;
 
         private const string MindRole = "MindRoleContractor";
         private const string Uplink = "ContractorUplink";

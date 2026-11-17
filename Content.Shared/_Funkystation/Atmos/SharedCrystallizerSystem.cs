@@ -7,9 +7,9 @@ namespace Content.Shared._Funkystation.Atmos;
 /// <summary>
 /// Crystallizer sprite is offset from its grid origin; use unobstructed reach checks for BUI messages.
 /// </summary>
-public sealed class SharedCrystallizerSystem : EntitySystem
+public sealed partial class SharedCrystallizerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
 
     /// <summary>Matches <c>interactionRange</c> on the crystallizer UI in prototype YAML.</summary>
     public const float UiReachRange = 4f;

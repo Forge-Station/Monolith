@@ -10,7 +10,7 @@ namespace Content.Client._Forge.StationRadio;
 [GenerateTypedNameReferences]
 public sealed partial class StationRadioFrequencyMenu : FancyWindow
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private IPrototypeManager _prototypes = default!;
 
     public event Action<string>? OnFrequencyChanged;
     public event Action? OnReceiverToggled;

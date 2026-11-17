@@ -13,12 +13,12 @@ using Robust.Shared.Player;
 
 namespace Content.Server._Forge.Silicons.StationAi;
 
-public sealed class StationAiCameraSystem : EntitySystem
+public sealed partial class StationAiCameraSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly SharedPowerReceiverSystem _power = default!;
-    [Dependency] private readonly SharedStationAiSystem _stationAi = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPowerReceiverSystem _power = default!;
+    [Dependency] private SharedStationAiSystem _stationAi = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<EntityUid, HashSet<EntityUid>> _activeByGrid = new();
     private readonly Dictionary<EntityUid, EntityUid> _brainGrids = new();

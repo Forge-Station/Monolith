@@ -11,11 +11,11 @@ using Content.Shared.Wieldable.Components;
 
 namespace Content.Shared._Forge.Weapons;
 
-public sealed class SpeciesWieldSystem : EntitySystem
+public sealed partial class SpeciesWieldSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedWieldableSystem _wieldable = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedWieldableSystem _wieldable = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     private readonly Dictionary<EntityUid, EntityUid> _pendingDrops = new();
 

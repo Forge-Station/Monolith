@@ -4,10 +4,10 @@ using Robust.Shared.Random;
 
 namespace Content.Server._Forge.Crypto.Systems;
 
-public sealed class CryptoMarketSystem : EntitySystem
+public sealed partial class CryptoMarketSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private IRobustRandom _random = default!;
     /// <summary>
     /// Forge-Change: one shared order book per <see cref="CryptoCoinComponent.MarketId"/> for the whole server,
     /// so multiple sell consoles stay in sync (not keyed by map / grid).

@@ -18,13 +18,13 @@ namespace Content.Server._Forge.AutoKick;
 /// <summary>
 /// Forge-Change: disconnects latejoin players that never clock in and inactive players by input timeout.
 /// </summary>
-public sealed class AutoKickSystem : EntitySystem
+public sealed partial class AutoKickSystem : EntitySystem
 {
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ServerGameTicker _gameTicker = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IServerNetManager _net = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IServerNetManager _net = default!;
+    [Dependency] private IPlayerManager _players = default!;
 
     private readonly Dictionary<NetUserId, TimeSpan> _pendingClockInSinceReal = new();
     private readonly Dictionary<NetUserId, TimeSpan> _lastInputTimes = new();

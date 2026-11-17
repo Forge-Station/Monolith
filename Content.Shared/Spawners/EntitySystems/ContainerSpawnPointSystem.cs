@@ -21,6 +21,10 @@ public sealed partial class ContainerSpawnPointSystem : EntitySystem
         if (args.SpawnResult != null)
             return;
 
+        // alwaysUseSpawner jobs must land on their job marker, not in a cryopod on whatever station was clicked.
+        if (args.DesiredSpawnPointType == SpawnPointType.Job)
+            return;
+
         // If it's just a spawn pref check if it's for cryo (silly).
         if (args.HumanoidCharacterProfile?.SpawnPriority != SpawnPriorityPreference.Cryosleep &&
             (!ProtoMan.Resolve(args.Job, out var jobProto) || jobProto.JobEntity == null))

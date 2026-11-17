@@ -50,6 +50,7 @@ public sealed partial class HTNSystem : EntitySystem
         _mapQuery = GetEntityQuery<WorldControllerComponent>(); // Frontier
         _loadedQuery = GetEntityQuery<LoadedChunkComponent>(); // Frontier
         SubscribeLocalEvent<HTNComponent, MobStateChangedEvent>(_npc.OnMobStateChange);
+        SubscribeLocalEvent<HTNComponent, ComponentStartup>(OnHTNStartup);
         SubscribeLocalEvent<HTNComponent, MapInitEvent>(_npc.OnNPCMapInit);
         SubscribeLocalEvent<HTNComponent, PlayerAttachedEvent>(_npc.OnPlayerNPCAttach);
         SubscribeLocalEvent<HTNComponent, PlayerDetachedEvent>(_npc.OnPlayerNPCDetach);
@@ -144,6 +145,24 @@ public sealed partial class HTNSystem : EntitySystem
         }
     }
 
+    private void OnHTNStartup(EntityUid uid, HTNComponent component, ComponentStartup args)
+    {
+        // MapInit is skipped for entities loaded already initialized. Operators assume Owner exists.
+        EnsureOwner(uid, component);
+    }
+
+    /// <summary>
+    /// Ship tasks call GetValue(Owner) every tick. A missing key used to throw and leave the plan running.
+    /// </summary>
+    private void EnsureOwner(EntityUid uid, HTNComponent component)
+    {
+        if (component.Blackboard.ContainsKey(NPCBlackboard.Owner))
+            return;
+
+        component.Blackboard.ReadOnly = false;
+        component.Blackboard.SetValue(NPCBlackboard.Owner, uid);
+    }
+
     private void OnHTNShutdown(EntityUid uid, HTNComponent component, ComponentShutdown args)
     {
         _npc.OnNPCShutdown(uid, component, args);
@@ -227,6 +246,8 @@ public sealed partial class HTNSystem : EntitySystem
 
             if (!comp.Enabled)
                 continue;
+
+            EnsureOwner(uid, comp);
 
             if (comp.PlanningJob != null)
             {

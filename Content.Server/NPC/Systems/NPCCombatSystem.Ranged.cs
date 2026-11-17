@@ -101,7 +101,15 @@ public sealed partial class NPCCombatSystem
                 continue;
             }
 
-            if (_steeringQuery.TryGetComponent(uid, out var steering) && steering.Status == SteeringStatus.NoPath)
+            _steeringQuery.TryGetComponent(uid, out var steering);
+
+            // Same cover as melee: if the path is gone, walk up and break the railing or crate.
+            if (_melee.TryGetWeapon(uid, out var meleeUid, out var meleeWeapon) &&
+                TryBreach(uid, GetAttackTarget(uid, comp.Target), meleeUid, meleeWeapon, steering, _timing.CurTime, out _))
+            {
+                comp.Status = CombatStatus.Normal;
+            }
+            else if (steering != null && steering.Status == SteeringStatus.NoPath)
             {
                 comp.Status = CombatStatus.TargetUnreachable;
                 comp.ShootAccumulator = 0f;
@@ -123,6 +131,15 @@ public sealed partial class NPCCombatSystem
                 comp.Status = CombatStatus.TargetUnreachable;
                 comp.ShootAccumulator = 0f;
                 continue;
+            }
+
+            // A living target shut in a crate is shot through the crate.
+            var attackTarget = GetAttackTarget(uid, comp.Target);
+            if (attackTarget != comp.Target && _xformQuery.TryGetComponent(attackTarget, out var storageXform))
+            {
+                targetXform = storageXform;
+                if (_physicsQuery.TryGetComponent(attackTarget, out var storageBody))
+                    targetBody = storageBody;
             }
 
             if (_combatQuery.TryGetComponent(uid, out var combatMode) && !combatMode.IsInCombatMode) // Forge-Change
@@ -165,7 +182,7 @@ public sealed partial class NPCCombatSystem
 
                 // For consistency with NPC steering.
                 var collisionGroup = comp.UseOpaqueForLOSChecks ? CollisionGroup.Opaque : (CollisionGroup.Impassable | CollisionGroup.InteractImpassable);
-                comp.TargetInLOS = _interaction.InRangeUnobstructed(uid, comp.Target, distance + 0.1f, collisionGroup);
+                comp.TargetInLOS = _interaction.InRangeUnobstructed(uid, attackTarget, distance + 0.1f, collisionGroup);
             }
 
             if (!comp.TargetInLOS)
@@ -242,7 +259,7 @@ public sealed partial class NPCCombatSystem
                 continue; // Forge-Change
             }
 
-            _gun.SetTarget(gun, comp.Target); // Frontier - This ensures that the bullet won't fly over the target if it's downed
+            _gun.SetTarget(gun, attackTarget); // Frontier - This ensures that the bullet won't fly over the target if it's downed
             _gun.AttemptShoot(uid, gunUid, gun, targetCordinates);
         }
     }

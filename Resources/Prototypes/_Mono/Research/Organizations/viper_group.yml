@@ -56,6 +56,7 @@
   cost: 50000
   recipeUnlocks:
   - ShipVoucherVGWolf
+  - ShipVoucherVGLance # Forge-change
   technologyPrerequisites:
   - UniversalMaterialResearchT2
   position: 8, -16

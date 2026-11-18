@@ -12,3 +12,68 @@
       sprite: Interface/Actions/actions_ai.rsi
       state: ai_core
     event: !type:OpenStationAiCustomizationEvent
+
+- type: entity
+  id: ActionJumpToCoreADS
+  parent: ActionJumpToCore
+  name: Jump to core
+  description: Sends your eye back to the core.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Action/actions_ai.rsi
+      state: ai_core
+
+- type: entity
+  id: ActionCustomizeStationAiADS
+  parent: ActionCustomizeStationAi
+  name: Personalization
+  description: Open the AI core personalization settings.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Action/actions_ai.rsi
+      state: ai_core
+
+- type: entity
+  id: ActionSurvCameraLightsADS
+  parent: ActionSurvCameraLights
+  name: Toggle camera lights
+  description: Enable surveillance camera lights near wherever you're viewing.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Action/actions_ai.rsi
+      state: camera_light
+
+- type: entity
+  id: ActionAIViewLawsADS
+  parent: ActionAIViewLaws
+  name: View Laws
+  description: View the laws that you must follow.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Action/actions_ai.rsi
+      state: state_laws
+
+- type: entity
+  id: ActionOpenRemoteDevicesMenuADS
+  parent: ActionOpenRemoteDevicesMenu
+  name: Open list of remote devices
+  description: Opens a menu with available remote devices.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _Forge/Interface/Action/actions_ai.rsi
+      state: robot
+
+- type: entity
+  id: ActionAGhostShowRadarADS
+  parent: ActionAGhostShowRadar
+  name: Mass Scanner Interface
+  description: View a Mass Scanner Interface.
+  components:
+  - type: InstantAction
+    icon: { sprite: _Forge/Interface/Action/actions_ai.rsi, state: mass_scanner }
+    iconOn: { sprite: _Forge/Interface/Action/actions_ai.rsi, state: mass_scanner }

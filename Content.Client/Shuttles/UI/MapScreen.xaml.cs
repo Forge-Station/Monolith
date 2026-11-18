@@ -586,6 +586,8 @@ public sealed partial class MapScreen : BoxContainer
                 gridContents.AddChild(control);
             }
         }
+
+        WfFilterDestinations();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

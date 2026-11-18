@@ -602,7 +602,7 @@ namespace Content.Server.Database
         public List<ProfileItem> Items { get; } = [];
         // Mono end
 
-        // WOLFGATE(Headshot): image URL shown on examine, empty when unused.
+        // Legacy column retained for database compatibility; custom portraits are no longer used.
         [Column("headshot_url")] public string HeadshotUrl { get; set; } = "";
 
         // WOLFGATE(Species): saves the Mismatched parts option (every species' markings, hair and facial hair)
@@ -1688,6 +1688,10 @@ namespace Content.Server.Database
         [Required]
         public string CompanyId { get; set; } = default!;
         public int Balance { get; set; }
+        /// <summary>
+        /// When true, anyone may join without prior membership. Leaders toggle this in-game.
+        /// </summary>
+        public bool RecruitingOpen { get; set; }
     }
 
     [PrimaryKey(nameof(CompanyAId), nameof(CompanyBId))]

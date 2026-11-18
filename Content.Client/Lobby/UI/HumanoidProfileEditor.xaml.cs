@@ -61,6 +61,7 @@ namespace Content.Client.Lobby.UI
         private readonly LobbyUIController _controller;
         private readonly EntityWhitelistSystem _whitelist; // Frontier
         private readonly CompanyManager _companyManager; // Mono
+        private List<CompanyPrototype> _companyCatalog = new();
         // Mono start
         private readonly MapLoaderSystem _mapLoader;
         private readonly BoxContainer _savedItemsTab = new()
@@ -515,65 +516,16 @@ namespace Content.Client.Lobby.UI
 
             TabContainer.SetTabTitle(4, Loc.GetString("humanoid-profile-editor-company-tab")); // WOLFGATE(Humanoid): shifted by the species tab
 
-            // Clear any existing items
-            CompanyButton.Clear();
-
-            // Add all companies from prototypes - use consistent sorting with UpdateCompanyControls
-            var companies = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
-                .Where(c => !c.Disabled && _companyManager.IsAllowed(c.ID))
-                .ToList();
-            companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
-
-            // Make sure "None" is first in the list
-            var noneIndex = companies.FindIndex(c => c.ID == "None");
-            if (noneIndex != -1)
-            {
-                var none = companies[noneIndex];
-                companies.RemoveAt(noneIndex);
-                companies.Insert(0, none);
-            }
-
-            // Add to TSF company dropdown
-            for (var i = 0; i < companies.Count; i++)
-            {
-                CompanyButton.AddItem(companies[i].Name, i);
-                //Logger.Debug($"Added company to dropdown: {i} - {companies[i].ID} - {companies[i].Name}");
-            }
+            RebuildCompanyCatalog();
+            _companyManager.CatalogUpdated += OnCompanyCatalogUpdated;
 
             CompanyButton.OnItemSelected += args =>
             {
                 CompanyButton.SelectId(args.Id);
-                if (args.Id >= 0 && args.Id < companies.Count)
-                {
-                    var companyId = companies[args.Id].ID;
+                if (args.Id < 0 || args.Id >= _companyCatalog.Count)
+                    return;
 
-                    // Description of Company (pointed-to in prototype, defined in Locale)
-                    CompanyDescriptionLabel.SetMessage(!string.IsNullOrEmpty(companies[args.Id].Description)
-                        ? Loc.GetString(companies[args.Id].Description)
-                        : "N/A"); // Only if there's a description. If not, then set to N/A.
-
-                    // Display company image if available
-                    if (!string.IsNullOrEmpty(companies[args.Id].Image))
-                    {
-                        CompanyImage.Texture = IoCManager.Resolve<IResourceCache>().GetResource<TextureResource>(companies[args.Id].Image!).Texture;
-                        CompanyImage.Visible = true;
-                    }
-                    else
-                    {
-                        CompanyImage.Visible = false;
-                    }
-
-                    // Get the current profile for comparison
-                    var oldCompany = Profile?.Company;
-                    // Update the profile with the new company
-                    Profile = Profile?.WithCompany(companyId);
-
-                    // Debug logging to verify selection
-                    //Logger.Debug($"Company changed from {oldCompany} to {companyId}");
-
-                    // Explicitly call SetDirty to update save button state
-                    SetDirty();
-                }
+                ShowCompanyCatalogEntry(_companyCatalog[args.Id], tryJoin: true);
             };
 
             #endregion Company
@@ -590,7 +542,6 @@ namespace Content.Client.Lobby.UI
             #endregion Markings
 
             RefreshFlavorText();
-            InitializeHeadshot(); // WOLFGATE(Headshot)
             InitializeCustomMarkings(); // WOLFGATE(CustomMarkings)
             InitializeMismatchedParts(); // WOLFGATE(Species)
             InitializeBiotype(); // WOLFGATE(Biotype)
@@ -1318,7 +1269,6 @@ namespace Content.Client.Lobby.UI
 
             UpdateNameEdit();
             UpdateFlavorTextEdit();
-            UpdateHeadshot(); // WOLFGATE(Headshot)
             UpdateCustomMarkings(); // WOLFGATE(CustomMarkings)
             UpdateMismatchedParts(); // WOLFGATE(Species)
             UpdateBiotype(); // WOLFGATE(Biotype)
@@ -1937,8 +1887,8 @@ namespace Content.Client.Lobby.UI
             _loadoutWindow?.Dispose();
             _loadoutWindow = null;
             CloseCustomJobTitle(); // WOLFGATE(Roles): close the custom job title window
-            CloseHeadshotWindow(); // WOLFGATE(Headshot)
             CloseCustomMarkings(); // WOLFGATE(CustomMarkings)
+            _companyManager.CatalogUpdated -= OnCompanyCatalogUpdated;
 
             // Mono start
             foreach (var entity in _savedItemEntities)
@@ -2634,71 +2584,106 @@ namespace Content.Client.Lobby.UI
             ExportButton.Disabled = false;
         }
 
+        private void OnCompanyCatalogUpdated()
+        {
+            RebuildCompanyCatalog();
+            UpdateCompanyControls();
+        }
+
+        private void RebuildCompanyCatalog()
+        {
+            // Full public catalog: closed companies stay readable, join is gated separately.
+            _companyCatalog = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
+                .Where(c => !c.Disabled && !c.Hidden)
+                .OrderBy(c => c.ID == "None" ? 0 : 1)
+                .ThenBy(c => c.Name, StringComparer.Ordinal)
+                .ToList();
+
+            CompanyButton.Clear();
+            for (var i = 0; i < _companyCatalog.Count; i++)
+            {
+                var company = _companyCatalog[i];
+                var label = _companyManager.CanJoin(company.ID) || company.ID == "None"
+                    ? company.Name
+                    : Loc.GetString("company-catalog-locked-name", ("name", company.Name));
+                CompanyButton.AddItem(label, i);
+            }
+        }
+
+        private void ShowCompanyCatalogEntry(CompanyPrototype company, bool tryJoin)
+        {
+            var description = !string.IsNullOrEmpty(company.Description)
+                ? Loc.GetString(company.Description)
+                : Loc.GetString("company-none-description");
+            CompanyDescriptionLabel.SetMessage(FormattedMessage.FromMarkupPermissive(description));
+
+            var diplomacy = _companyManager.FormatDiplomacy(company.ID);
+            CompanyDiplomacyLabel.Visible = !string.IsNullOrEmpty(diplomacy);
+            if (!string.IsNullOrEmpty(diplomacy))
+                CompanyDiplomacyLabel.SetMessage(FormattedMessage.FromMarkupPermissive(diplomacy));
+
+            if (!string.IsNullOrEmpty(company.Image))
+            {
+                CompanyImage.Texture = IoCManager.Resolve<IResourceCache>()
+                    .GetResource<TextureResource>(company.Image!).Texture;
+                CompanyImage.Visible = true;
+            }
+            else
+            {
+                CompanyImage.Visible = false;
+            }
+
+            var canJoin = _companyManager.CanJoin(company.ID);
+            if (company.ID == "None")
+            {
+                CompanyJoinStatusLabel.Text = string.Empty;
+                if (tryJoin && Profile?.Company != "None")
+                {
+                    Profile = Profile?.WithCompany("None");
+                    SetDirty();
+                }
+
+                return;
+            }
+
+            if (canJoin)
+            {
+                CompanyJoinStatusLabel.Text = Loc.GetString("company-catalog-joinable");
+                if (tryJoin && Profile?.Company != company.ID)
+                {
+                    Profile = Profile?.WithCompany(company.ID);
+                    SetDirty();
+                }
+            }
+            else
+            {
+                CompanyJoinStatusLabel.Text = Loc.GetString("company-catalog-readonly");
+                // Browsing a locked company must not change the saved affiliation.
+            }
+        }
+
         private void UpdateCompanyControls()
         {
             if (Profile is null)
                 return;
 
-            var companies = _prototypeManager.EnumeratePrototypes<CompanyPrototype>()
-                .Where(c => !c.Disabled && _companyManager.IsAllowed(c.ID))
-                .ToList();
-            companies.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
+            if (_companyCatalog.Count == 0)
+                RebuildCompanyCatalog();
 
-            // Make sure "None" is first in the list
-            var noneIndex = companies.FindIndex(c => c.ID == "None");
-            if (noneIndex != -1)
+            // Rights removed: affiliation falls back to unemployed.
+            if (Profile.Company != "None" && !_companyManager.CanJoin(Profile.Company))
             {
-                var none = companies[noneIndex];
-                companies.RemoveAt(noneIndex);
-                companies.Insert(0, none);
+                Profile = Profile.WithCompany("None");
+                SetDirty();
             }
 
-            //Logger.Debug($"Updating company controls." +
-                         //$"Current profile company: {Profile.Company}\n");
+            var index = _companyCatalog.FindIndex(c => c.ID == Profile.Company);
+            if (index < 0)
+                index = 0;
 
-            // Find the company in the list and select it
-            bool found = false;
-            for (var i = 0; i < companies.Count; i++)
-            {
-                if (companies[i].ID != Profile.Company)
-                    continue; // Short circuit.
-
-                //Logger.Debug($"Found company at index {i}: {companies[i].ID} - {companies[i].Name}");
-                CompanyButton.SelectId(i);
-
-                // Description of Company (pointed-to in prototype, defined in Locale)
-                CompanyDescriptionLabel.SetMessage(!string.IsNullOrEmpty(companies[i].Description)
-                    ? Loc.GetString(companies[i].Description)
-                    : "N/A"); // Only if there's a description. If not, then set to N/A.
-
-                // Display company image if available
-                if (!string.IsNullOrEmpty(companies[i].Image))
-                {
-                    CompanyImage.Texture = IoCManager.Resolve<IResourceCache>().GetResource<TextureResource>(companies[i].Image!).Texture;
-                    CompanyImage.Visible = true;
-                }
-                else
-                {
-                    CompanyImage.Visible = false;
-                }
-
-                found = true;
-                break;
-            }
-
-            // If company wasn't found, default to "None" (index 0)
-            if (!found)
-            {
-                //Logger.Debug($"Company {Profile.Company} not found in list, defaulting to None");
-                CompanyButton.SelectId(0);
-                CompanyImage.Visible = false;
-
-                // Also reset the profile's company to None if the current one is disabled
-                if (_prototypeManager.TryIndex<CompanyPrototype>(Profile.Company, out var companyProto) && companyProto.Disabled)
-                {
-                    Profile = Profile.WithCompany("None");
-                }
-            }
+            CompanyButton.SelectId(index);
+            if (index < _companyCatalog.Count)
+                ShowCompanyCatalogEntry(_companyCatalog[index], tryJoin: false);
         }
     }
 }

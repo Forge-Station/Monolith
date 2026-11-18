@@ -15,7 +15,7 @@ public sealed partial class MapScreen
             _shuttleEntity == null || _state == FTLState.Invalid ? null : FTLBar.Value * 100, 0, 100, "wf-gauge-unit-percent"), true);
         var jump = Panel("wf-console-drive", Column(_wfDriveNotice, new WFGlassReadout(MapFTLState), progress, FTLBar,
             MapFTLButton, MapAutopilotButton, MapRebuildButton, MapBeaconsButton));
-        var destinations = Panel("wf-console-destinations", Scroll(HyperspaceDestinations), true);
+        var destinations = Panel("wf-console-destinations", Column(DestinationSearch, Scroll(HyperspaceDestinations)), true);
         // Forge-Change-Start: the Forge marker register (centre the map on a marker, autopilot to it, remove it) stays on
         // the deck. It was left in the old tree, which is disposed below, and nothing filled it any more.
         MapMarkerCountLabel.Align = Robust.Client.UserInterface.Controls.Label.AlignMode.Right;

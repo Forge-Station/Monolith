@@ -385,6 +385,9 @@ namespace Content.Server.Database
         Task<Dictionary<string, int>> GetAllCompanyBankBalances(CancellationToken cancel = default);
         Task SetCompanyBankBalance(string companyId, int balance);
         Task EnsureCompanyBankAccount(string companyId);
+        Task EnsureCompanyRecruitingColumn();
+        Task<Dictionary<string, bool>> GetAllCompanyRecruitingOpen(CancellationToken cancel = default);
+        Task SetCompanyRecruitingOpen(string companyId, bool open);
         Task<List<CompanyRelation>> GetCompanyRelations(string companyId, CancellationToken cancel = default);
         Task SetCompanyRelation(string companyA, string companyB, int relationType);
         Task ClearCompanyRelation(string companyA, string companyB);
@@ -1285,6 +1288,24 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.EnsureCompanyBankAccount(companyId));
+        }
+
+        public Task EnsureCompanyRecruitingColumn()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EnsureCompanyRecruitingColumn());
+        }
+
+        public Task<Dictionary<string, bool>> GetAllCompanyRecruitingOpen(CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetAllCompanyRecruitingOpen(cancel));
+        }
+
+        public Task SetCompanyRecruitingOpen(string companyId, bool open)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCompanyRecruitingOpen(companyId, open));
         }
 
         public Task<List<CompanyRelation>> GetCompanyRelations(string companyId, CancellationToken cancel = default)

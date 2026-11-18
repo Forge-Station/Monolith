@@ -270,7 +270,7 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
         var mapObjects = _mapObjects;
         DrawRecenter();
 
-        if (InFtl || mapObjects.Count == 0)
+        if (InFtl)
         {
             DrawBacking(handle);
             DrawNoSignal(handle);
@@ -500,6 +500,9 @@ public sealed partial class ShuttleMapControl : BaseShuttleControl
                 }
             }
         }
+
+        DrawForgeMapMarkers(handle, matty * Matrix3x2.CreateScale(new Vector2(MinimapScale, -MinimapScale))
+            * Matrix3x2.CreateTranslation(ScalePosition(Vector2.Zero)));
 
         var mousePos = _inputs.MouseScreenPosition;
         var mouseLocalPos = GetLocalPosition(mousePos);

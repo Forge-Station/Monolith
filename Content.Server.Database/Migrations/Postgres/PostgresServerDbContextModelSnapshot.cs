@@ -591,6 +591,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("balance");
 
+                    b.Property<bool>("RecruitingOpen")
+                        .HasColumnType("boolean")
+                        .HasColumnName("recruiting_open");
+
                     b.HasKey("CompanyId")
                         .HasName("PK_company_bank_accounts");
 

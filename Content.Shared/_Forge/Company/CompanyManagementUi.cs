@@ -13,6 +13,8 @@ public sealed class CompanyManagementUiState : BoundUserInterfaceState
     public string CompanyName = string.Empty;
     public bool IsOwner;
     public string LeaderName = string.Empty;
+    /// <summary>Leader opened free joining; otherwise invite / admin whitelist only.</summary>
+    public bool RecruitingOpen;
     public CompanyPermission Permissions;
     public CompanyAccessTier AccessTier;
     public string Bulletin = string.Empty;
@@ -132,6 +134,7 @@ public enum CompanyManagementUiAction : byte
     AcceptJob,
     AbandonJob,
     CancelJob,
+    SetRecruitingOpen,
 }
 
 [Serializable, NetSerializable]

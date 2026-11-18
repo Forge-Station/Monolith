@@ -75,6 +75,7 @@ public sealed partial class NavScreen
     /// <summary>Refreshes contextual flight data when the original navigation panel is hidden.</summary>
     public void WfCockpitRefresh()
     {
+        ForgeUpdateMarkers();
         if (_entManager.TryGetComponent(_shuttleEntity, out TransformComponent? transform))
         {
             UpdateAltitude(transform);
@@ -98,6 +99,12 @@ public sealed partial class NavScreen
         radar.WfCockpitInteraction(lease);
         radar.VerticalExpand = true;
         return ScopeLayers(radar, Vector2.Zero);
+    }
+
+    /// <summary>Shares coordinate entry with the strategic page using the helm's existing message bindings.</summary>
+    public Control WfCockpitMarkerEntry(WFCockpitLease lease)
+    {
+        return Column(Row(lease.Take(MarkerXEdit), lease.Take(MarkerYEdit)), lease.Take(MarkerTrackButton));
     }
 
     /// <summary>Keeps sensor configuration and wired auxiliary controls available without another window.</summary>

@@ -366,8 +366,12 @@
                                 <OptionButton Name="CompanyButton" MinWidth="220" />
                             </BoxContainer>
                         </PanelContainer>
+                        <Label Name="CompanyJoinStatusLabel" StyleClasses="CreatorFieldLabel" />
                         <PanelContainer StyleClasses="CreatorCard" MaxWidth="1200">
-                            <RichTextLabel Name="CompanyDescriptionLabel" VerticalAlignment="Top" HorizontalExpand="True" />
+                            <BoxContainer Orientation="Vertical" SeparationOverride="6">
+                                <RichTextLabel Name="CompanyDescriptionLabel" VerticalAlignment="Top" HorizontalExpand="True" />
+                                <RichTextLabel Name="CompanyDiplomacyLabel" VerticalAlignment="Top" HorizontalExpand="True" />
+                            </BoxContainer>
                         </PanelContainer>
                         <BoxContainer HorizontalAlignment="Center">
                             <TextureRect Name="CompanyImage" HorizontalAlignment="Center" Stretch="KeepAspect"
@@ -441,8 +445,6 @@
                     <Label Name="DescriptionCounter" StyleClasses="CreatorFieldLabel" VAlign="Center" />
                 </BoxContainer>
             </BoxContainer>
-            <!-- WOLFGATE(Headshot): opens the headshot URL editor -->
-            <Button Name="HeadshotButton" StyleClasses="LinkButton" HorizontalAlignment="Left" />
             <BoxContainer Orientation="Horizontal" SeparationOverride="4">
                 <OptionButton Name="BarkVoiceButton" HorizontalExpand="True" />
                 <Button Name="BarkVoicePlayButton" Text="▶" />

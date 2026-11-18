@@ -4,6 +4,7 @@
   form: Neutral # Do NOT apply "Neutral" to anywhere outside "None"
   name: Безработный
   color: "#FFFFFF"
+  whitelisted: false
 
 # ====DO NOT TOUCH - ADMIN COMPANIES====
 # On a less serious note, these are just companies that are auto-assigned to jobs.
@@ -112,7 +113,7 @@
   form: Antagonist
   name: СССП(К) # Forge-change: locale and small rename: К = Кораблей
   color: "#B01340"
-  whitelisted: false # Mercs are now USSP-pilled.
+  whitelisted: true
   description: ussp-description
   # Forge-change: add icon, note & special's
   note: ussp-company-note

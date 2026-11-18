@@ -171,7 +171,12 @@ public sealed partial class CompanyCommand : ToolshedCommand
             return;
         }
 
-        _company.SetOwner(company, lookup.UserId, owner);
+        if (_company.SetOwner(company, lookup.UserId, owner) &&
+            IoCManager.Resolve<IPlayerManager>().TryGetSessionById(lookup.UserId, out var session))
+        {
+            EntitySystem.Get<CompanySystem>().TryApplyMembershipToSession(session);
+        }
+
         ctx.WriteLine(Loc.GetString("cmd-company-setowner-success", ("player", username), ("status", owner)));
     }
 

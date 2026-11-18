@@ -33,6 +33,7 @@ public sealed partial class CompanyManager
 {
     private readonly Dictionary<string, List<CompanyRole>> _roles = new();
     private readonly Dictionary<string, int> _bankBalances = new();
+    private readonly Dictionary<string, bool> _recruitingOpen = new();
     private readonly Dictionary<string, string> _bulletins = new();
     private readonly Dictionary<string, List<CompanyRelation>> _relations = new();
     private readonly ConcurrentDictionary<string, SemaphoreSlim> _bankLocks = new();
@@ -77,9 +78,13 @@ public sealed partial class CompanyManager
             }
 
             _bankBalances[proto.ID] = await _db.GetCompanyBankBalance(proto.ID);
+            _recruitingOpen[proto.ID] = false;
             _bulletins[proto.ID] = await _db.GetCompanyBulletin(proto.ID);
             _relations[proto.ID] = await _db.GetCompanyRelations(proto.ID);
         }
+
+        foreach (var (companyId, open) in await _db.GetAllCompanyRecruitingOpen())
+            _recruitingOpen[companyId] = open;
 
         await _db.EnsureCompanyPeaceTable();
         foreach (var term in await _db.GetCompanyPeaceTerms())
@@ -326,6 +331,57 @@ public sealed partial class CompanyManager
         await _db.UpsertCompanyRole(role);
         await AddLog(company, CompanyLogType.RoleUpdated, $"Role '{name}' updated", null);
         return true;
+    }
+
+    public bool IsRecruitingOpen(ProtoId<CompanyPrototype> company)
+    {
+        return _recruitingOpen.GetValueOrDefault(company.Id);
+    }
+
+    public HashSet<ProtoId<CompanyPrototype>> GetRecruitingOpenCompanies()
+    {
+        var open = new HashSet<ProtoId<CompanyPrototype>>();
+        foreach (var (id, value) in _recruitingOpen)
+        {
+            if (value)
+                open.Add(id);
+        }
+
+        return open;
+    }
+
+    public List<(string CompanyA, string CompanyB, CompanyRelationKind Kind)> GetPublicRelations()
+    {
+        var seen = new HashSet<(string, string)>();
+        var result = new List<(string, string, CompanyRelationKind)>();
+        foreach (var (companyId, relations) in _relations)
+        {
+            foreach (var rel in relations)
+            {
+                var a = rel.CompanyAId;
+                var b = rel.CompanyBId;
+                if (string.CompareOrdinal(a, b) > 0)
+                    (a, b) = (b, a);
+
+                if (!seen.Add((a, b)))
+                    continue;
+
+                result.Add((a, b, (CompanyRelationKind)rel.RelationType));
+            }
+        }
+
+        return result;
+    }
+
+    public async Task SetRecruitingOpen(ProtoId<CompanyPrototype> company, bool open, NetUserId? actor = null)
+    {
+        _recruitingOpen[company.Id] = open;
+        await _db.SetCompanyRecruitingOpen(company.Id, open);
+        await AddLog(company,
+            CompanyLogType.BulletinUpdated,
+            open ? "Recruiting opened" : "Recruiting closed",
+            actor);
+        BroadcastCompanyAccess();
     }
 
     public async Task<bool> DeleteRole(ProtoId<CompanyPrototype> company, Guid roleId)
@@ -661,6 +717,7 @@ public sealed partial class CompanyManager
         await AddLog(company, logType, logMessage ?? $"{kind} with {otherName}", actor);
         await ClearPeaceTerms(company, other);
         await ClearAllianceOffers(company, other);
+        BroadcastCompanyAccess();
         return true;
     }
 
@@ -697,6 +754,7 @@ public sealed partial class CompanyManager
         await AddLog(company, CompanyLogType.RelationCleared, $"Cleared relation with {otherName}", actor);
         await ClearPeaceTerms(company, other);
         await ClearAllianceOffers(company, other);
+        BroadcastCompanyAccess();
         return true;
     }
 
@@ -1125,5 +1183,17 @@ public sealed partial class CompanyManager
         await RemoveMember(target, company, member.CharacterSlot);
         await AddLog(company, CompanyLogType.Kicked, $"Kicked {name}", actor);
         return true;
+    }
+
+    public IEnumerable<CompanyMemberRecord> GetMembersWithRole(ProtoId<CompanyPrototype> company, Guid roleId)
+    {
+        if (!_companies.TryGetValue(company, out var members))
+            yield break;
+
+        foreach (var member in members)
+        {
+            if (member.RoleId == roleId)
+                yield return member;
+        }
     }
 }

@@ -32,12 +32,13 @@ namespace Content.Server.Database.Migrations.Postgres
                 nullable: false,
                 defaultValue: "");
 
-            migrationBuilder.AddColumn<string>(
+            // string[] maps to text[]. A plain text column fails every preference load.
+            migrationBuilder.AddColumn<string[]>(
                 name: "flags",
                 table: "profile",
-                type: "text",
+                type: "text[]",
                 nullable: false,
-                defaultValue: "[]");
+                defaultValueSql: "ARRAY[]::text[]");
 
             migrationBuilder.AddColumn<string>(
                 name: "headshot_url",

@@ -298,7 +298,13 @@ public sealed partial class CompanyManagementCartridgeSystem : EntitySystem
                 if (company != null &&
                     _company.HasPermission(session, company.Value, CompanyPermission.Kick))
                 {
-                    await _company.KickMember(company.Value, new NetUserId(msg.GuidValue), session.UserId, msg.CharacterSlot);
+                    var kicked = new NetUserId(msg.GuidValue);
+                    if (await _company.KickMember(company.Value, kicked, session.UserId, msg.CharacterSlot) &&
+                        _player.TryGetSessionById(kicked, out var kickedSession) &&
+                        kickedSession.AttachedEntity is { } kickedMob)
+                    {
+                        _companySystem.ClearCompanyFromMob(kickedMob, company.Value, kickedSession);
+                    }
                 }
                 break;
 
@@ -324,7 +330,12 @@ public sealed partial class CompanyManagementCartridgeSystem : EntitySystem
                         : _company.GetPermissions(session, company.Value);
                     var perms = msg.Permissions & grantable;
                     var tier = _company.ClampGrantableAccessTier(session, company.Value, msg.AccessTier);
-                    await _company.UpdateRole(company.Value, msg.GuidValue, msg.Text, perms, tier);
+                    if (await _company.UpdateRole(company.Value, msg.GuidValue, msg.Text, perms, tier))
+                    {
+                        _companySystem.RefreshAccessForMembers(
+                            company.Value,
+                            _company.GetMembersWithRole(company.Value, msg.GuidValue));
+                    }
                 }
                 break;
 
@@ -332,7 +343,10 @@ public sealed partial class CompanyManagementCartridgeSystem : EntitySystem
                 if (company != null &&
                     _company.HasPermission(session, company.Value, CompanyPermission.ManageRoles))
                 {
-                    await _company.DeleteRole(company.Value, msg.GuidValue);
+                    var deletedRole = msg.GuidValue;
+                    var affected = _company.GetMembersWithRole(company.Value, deletedRole).ToList();
+                    if (await _company.DeleteRole(company.Value, deletedRole))
+                        _companySystem.RefreshAccessForMembers(company.Value, affected);
                 }
                 break;
 
@@ -353,6 +367,11 @@ public sealed partial class CompanyManagementCartridgeSystem : EntitySystem
                         }
                     }
                 }
+                break;
+
+            case CompanyManagementUiAction.SetRecruitingOpen:
+                if (company != null && _company.IsOwnerSession(session, company.Value))
+                    await _company.SetRecruitingOpen(company.Value, msg.BoolValue, session.UserId);
                 break;
         }
 
@@ -407,6 +426,7 @@ public sealed partial class CompanyManagementCartridgeSystem : EntitySystem
         state.IsOwner = isOwner;
         state.LeaderName = _company.GetLeaderCharacterName(company.Value)
             ?? Loc.GetString("company-pda-leader-none");
+        state.RecruitingOpen = _company.IsRecruitingOpen(company.Value);
         state.Permissions = isMember
             ? _company.GetPermissions(session, company.Value)
             : CompanyPermission.None;

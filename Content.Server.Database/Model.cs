@@ -1688,6 +1688,10 @@ namespace Content.Server.Database
         [Required]
         public string CompanyId { get; set; } = default!;
         public int Balance { get; set; }
+        /// <summary>
+        /// When true, anyone may join without prior membership. Leaders toggle this in-game.
+        /// </summary>
+        public bool RecruitingOpen { get; set; }
     }
 
     [PrimaryKey(nameof(CompanyAId), nameof(CompanyBId))]

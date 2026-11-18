@@ -1,6 +1,6 @@
 ﻿- type: entity
   id: OrganReptilianStomach
-  parent: OrganAnimalStomach
+  parent: [OrganAnimalStomach, WFWolfmedOrganStomach] # WOLFGATE(Wolfmed): expose the stomach to diagnostics and surgery.
   categories: [ HideSpawnMenu ]
   components:
   - type: OrganPhysiology # Forge-change

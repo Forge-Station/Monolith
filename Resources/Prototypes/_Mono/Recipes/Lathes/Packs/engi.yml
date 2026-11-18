@@ -13,7 +13,7 @@
   - ConstructorCircuitboard
   - StorageBinCircuitboard
   - InteractorCircuitboard
-  - UpgradeKitAutomation
+  #- UpgradeKitAutomation #Forge-Change-remove
 
 ## Dynamic
 

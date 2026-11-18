@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 12/31/2025 12:10:34
-  entityCount: 524
+  entityCount: 518
 maps: []
 grids:
 - 841
@@ -3173,38 +3173,6 @@ entities:
     components:
     - type: Transform
       pos: 2.3485851,-6.3644123
-      parent: 841
-- proto: UpgradeKitAutomation
-  entities:
-  - uid: 994
-    components:
-    - type: Transform
-      pos: 8.313065,-7.6026325
-      parent: 841
-  - uid: 995
-    components:
-    - type: Transform
-      pos: 8.64119,-7.5713825
-      parent: 841
-  - uid: 996
-    components:
-    - type: Transform
-      pos: 8.64119,-7.4307575
-      parent: 841
-  - uid: 998
-    components:
-    - type: Transform
-      pos: 8.29744,-7.2588825
-      parent: 841
-  - uid: 999
-    components:
-    - type: Transform
-      pos: 8.29744,-7.4463825
-      parent: 841
-  - uid: 1001
-    components:
-    - type: Transform
-      pos: 8.64119,-7.3213825
       parent: 841
 - proto: MissileMagazine50mmHE
   entities:

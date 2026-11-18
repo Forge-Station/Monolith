@@ -291,7 +291,7 @@
       children:
       - id: LatheUpgradeKitCryo
       - id: LatheUpgradeKitHyper
-      - id: UpgradeKitAutomation
+      #- id: UpgradeKitAutomation #Forge-Change-remove
     #Med&Chem
     - id: CloningPodMachineCircuitboard
     - id: MedicalScannerMachineCircuitboard

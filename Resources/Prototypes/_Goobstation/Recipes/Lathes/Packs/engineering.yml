@@ -7,5 +7,5 @@
   recipes:
   - LatheUpgradeKitHyper
   - LatheUpgradeKitCryo
-  - UpgradeKitAutomation
+  #- UpgradeKitAutomation #Forge-Change-remove
   - AutodocUpgradeKitBluespace

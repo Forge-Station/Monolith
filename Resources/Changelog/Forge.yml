@@ -499,3 +499,17 @@ Entries:
   id: 41
   time: '2026-11-18T06:50:37.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/581
+- author: tolikhorenko346-dotcom
+  changes:
+    - type: Tweak
+      message: полное изменение маккарго
+  id: 42
+  time: '2026-11-18T10:17:36.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/599
+- author: tolikhorenko346-dotcom
+  changes:
+    - type: Fix
+      message: исправление неработоюшего двигателя на шатле бег
+  id: 43
+  time: '2026-11-18T10:41:44.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/608

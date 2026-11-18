@@ -183,6 +183,11 @@
   - type: ShipRepairable
     repairTime: 3
     repairCost: 6
+  # ES Start
+  - type: ESSparkOnHit
+    prob: 0.25
+    count: 2
+  # ES End
 
 - type: entity
   id: BaseSecureWindoor

@@ -10,6 +10,9 @@
   - type: IgnitionSource
     temperature: 800
   - type: IgniteOnTrigger
+    # ES START
+  - type: ESSparkOnTrigger
+    # ES END
   - type: TriggerOnSignal
   - type: DeviceNetwork
     deviceNetId: Wireless

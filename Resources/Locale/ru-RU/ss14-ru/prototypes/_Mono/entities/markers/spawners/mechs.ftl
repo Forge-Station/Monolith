@@ -7,22 +7,12 @@ ent-AFInterceptorMBattery = { ent-AFInterceptorM }
 ent-AFInterceptorMFilled = { ent-AFInterceptorM }
     .desc = { ent-AFInterceptorM.desc }
     .suffix = Батарея, Заполненный
-ent-AFInterceptorGBattery = { ent-AFInterceptorG }
-    .desc = { ent-AFInterceptorG.desc }
-    .suffix = Батарея
-ent-AFInterceptorGFilled = { ent-AFInterceptorG }
-    .desc = { ent-AFInterceptorG.desc }
-    .suffix = Батарея, Заполненный
 ent-SpawnMechAFInterceptorFilled = спавнер меха AF-28 "Бродсворд"
     .desc = { "" }
     .suffix = Заполненный
 ent-SpawnMechAFInterceptorMFilled = спавнер меха AF-28-M "Халберд"
     .desc = { ent-SpawnMechAFInterceptorFilled.desc }
     .suffix = Заполненный
-ent-SpawnMechAFInterceptorGFilled = спавнер меха AF-28-G "Сейбер"
-    .desc = { ent-SpawnMechAFInterceptorFilled.desc }
-    .suffix = Заполненный
-
 ent-SpawnTSFFlail = спавнер меха «Flail» ТСФ
     .desc = { ent-MarkerBase.desc }
 

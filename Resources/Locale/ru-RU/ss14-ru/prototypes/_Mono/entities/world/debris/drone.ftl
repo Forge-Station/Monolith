@@ -1,6 +1,3 @@
-ent-MonoRamDroneSpawnerT1 = спавнер таранного дрона T1
-ent-MonoRamDroneSpawnerT2Inner = спавнер таранного дрона T2 (внутренний)
-ent-MonoRamDroneSpawnerT2Middle = спавнер таранного дрона T2 (средний)
 ent-MonoDroneSpawnerT1 = спавнер дрона T1
 ent-MonoDroneSpawnerT2Inner = спавнер дрона T2 (внутренний)
 ent-MonoDroneSpawnerT2Middle = спавнер дрона T2 (средний)

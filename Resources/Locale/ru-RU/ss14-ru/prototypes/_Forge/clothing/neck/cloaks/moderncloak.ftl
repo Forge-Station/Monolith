@@ -34,5 +34,3 @@ ent-ClothingHeadHatHoodModernCloakBYellow = Капюшон "Модерн" [Чё�
     .desc = Прочный капюшон из современных материалов.
 ent-ClothingHeadHatHoodModernCloakBRed = Капюшон "Модерн" [Чёрно-красный]
     .desc = Прочный капюшон из современных материалов.
-ent-ModernNeckAll = Капюшон "Модерн
-    .desc = Прочный капюшон из современных материалов.

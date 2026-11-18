@@ -46,6 +46,8 @@ shell-argument-number-must-be-between = Argument {$index} must be a number betwe
 shell-argument-station-id-invalid = Argument {$index} must be a valid station id!
 shell-argument-map-id-invalid = Argument {$index} must be a valid map id!
 shell-argument-number-invalid = Argument {$index} must be a valid number!
+shell-can-only-run-from-pre-round-lobby = This command can only be run from the pre-round lobby.
+shell-invalid-bool-value = { $value } is not a valid boolean.
 
 # Hints
 shell-argument-username-hint = <username>

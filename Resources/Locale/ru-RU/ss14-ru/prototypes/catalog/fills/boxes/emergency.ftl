@@ -40,5 +40,3 @@ ent-BoxMime = { ent-BoxSurvival }
 ent-BoxMimeNitrogen = { ent-BoxSurvivalNitrogen }
     .suffix = Мим, Аварийный Азот N2
     .desc = { ent-BoxSurvivalNitrogen.desc }
-ent-repairkit = Набор для экстренной починки
-    .desc = Содержит небольшое количество материалов способных помочь вам в случае столкновения

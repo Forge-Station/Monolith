@@ -1,5 +1,3 @@
-ent-MobAtmosNF = { "" }
-    .desc = { "" }
 ent-MobPassiveRegen = { "" }
     .desc = { "" }
 ent-MobPassiveRegenStrong = { "" }

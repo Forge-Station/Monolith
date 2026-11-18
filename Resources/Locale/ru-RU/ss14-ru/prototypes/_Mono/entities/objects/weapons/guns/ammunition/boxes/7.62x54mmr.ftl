@@ -3,7 +3,6 @@ ent-AmmoBox762x54mmRFMJ = коробка боеприпасов (7.62x54ммR FM
 ent-AmmoBox762x54mmRPractice = коробка боеприпасов (7.62x54ммR учебные)
 ent-AmmoBox762x54mmRIncendiary = коробка боеприпасов (7.62x54ммR зажигательные)
 ent-AmmoBox762x54mmRUranium = коробка боеприпасов (7.62x54ммR урановые)
-ent-AmmoBox762x54mmRRubber = коробка боеприпасов (7.62x54ммR резиновые)
 ent-AmmoBox762x54mmRHP = коробка боеприпасов (7.62x54ммR экспансивные)
 ent-AmmoBox762x54mmRRIP = коробка боеприпасов (7.62x54ммR RIP)
 ent-AmmoBox762x54mmRPlasteelAP = коробка боеприпасов (7.62x54ммR бронебойные)

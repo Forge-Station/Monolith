@@ -1,16 +1,10 @@
 ent-BaseUSSPPDA = КПК СССП
     .desc = Базовый персональный компьютер для ограничения доступа и организации, произведённый в СССП.
-ent-BaseUSSPMedicPDA = КПК медика СССП
-    .desc = { ent-BaseUSSPPDA.desc }
 ent-USSPRiflemanPDA = КПК стрелка СССП
-ent-USSPMedicPDA = КПК боевого медика СССП
-ent-USSPCorporalPDA = КПК ефрейтора СССП
 ent-USSPSergeantPDA = КПК сержанта СССП
 ent-USSPCommissarPDA = КПК комиссара СССП
 ent-TsfEngiPDA = КПК инженера ВСКМП
     .desc = Стандартный персональный компьютер ВСКМП.
-ent-MarsocFTLPDA = TSFMC MARSOC fire team leader PDA
-    .desc = { ent-TsfEngiPDA.desc }
 ent-MarsocPDA = КПК оперативника MARSOC ТСФ
     .desc = Стандартный персональный компьютер ТСФ.
 ent-BasePDVPDA = КПК ПДВ

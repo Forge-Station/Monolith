@@ -14,5 +14,3 @@ ent-SpaceCash100000 = кредиты
 ent-SpaceCashCounterfeit200000 = { ent-SpaceCashCounterfeit }
     .desc = Стандартные кре... Что за чёрт?.. ЭТО ЖАЛКИЕ ПОДДЕЛКИ!!!
     .suffix = 200000
-ent-CreditCounterfeit = кредит
-ent-Spesso = кредит

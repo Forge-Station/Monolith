@@ -1,15 +1,1 @@
-ent-NFVGRoidInterior11x5a = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5i = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5c = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5k = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5f = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5g = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5b = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5h = маркер интерьера VGRoid
-ent-NFVGRoidInterior11x5b = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5e = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5l = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5j = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5d = маркер интерьера VGRoid
 ent-NFVGRoidInteriorRoomMarker = маркер интерьера VGRoid
-ent-NFVGRoidInterior5x5a = маркер интерьера VGRoid

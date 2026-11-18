@@ -1,11 +1,6 @@
-ent-WeaponRackPistolBase = стойка для пистолетов
-    .desc = Хранилище для ускоренных мер по умиротворению.
-ent-WeaponRackPistolWallmountedBase = { ent-WeaponRackPistolBase }
-    .suffix = Настенный
-    .desc = { ent-WeaponRackPistolBase.desc }
-ent-StructurePistolRackPirates = { ent-WeaponRackPistolBase }
+ent-StructurePistolRackPirates = { ent-StructurePistolRack }
     .suffix = Пираты, Пустой
-    .desc = { ent-WeaponRackPistolBase.desc }
-ent-StructurePistolRackPiratesFilled = { ent-WeaponRackPistolBase }
+    .desc = { ent-StructurePistolRack.desc }
+ent-StructurePistolRackPiratesFilled = { ent-StructurePistolRack }
     .suffix = Пираты, Пустой, Настенный
-    .desc = { ent-WeaponRackPistolBase.desc }
+    .desc = { ent-StructurePistolRack.desc }

@@ -1,7 +1,5 @@
 ent-ComputerTabletopShipyard = { ent-ComputerShipyard }
     .desc = { ent-ComputerShipyard.desc }
-ent-BaseMothershipComputerTabletop = { ent-BaseMothershipComputer }
-    .desc = { ent-BaseMothershipComputer.desc }
 ent-ComputerTabletopShipyardSecurity = { ent-ComputerShipyardSecurity }
     .desc = { ent-ComputerShipyardSecurity.desc }
 ent-ComputerTabletopShipyardNfsd = { ent-ComputerShipyardNfsd }

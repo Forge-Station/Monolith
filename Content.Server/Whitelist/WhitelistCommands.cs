@@ -43,7 +43,7 @@ public sealed partial class AddWhitelistCommand : LocalizedCommands
 
             _jobWhitelist.AddGlobalWhitelist(guid);
 
-            shell.WriteLine(Loc.GetString("command-whitelistadd-added", ("username", data.Username)));
+            shell.WriteLine(Loc.GetString("cmd-whitelistadd-added", ("username", data.Username)));
             return;
         }
 
@@ -94,7 +94,7 @@ public sealed partial class RemoveWhitelistCommand : LocalizedCommands
 
             _jobWhitelist.RemoveGlobalWhitelist(guid);
 
-            shell.WriteLine(Loc.GetString("command-whitelistremove-removed", ("username", data.Username)));
+            shell.WriteLine(Loc.GetString("cmd-whitelistremove-removed", ("username", data.Username)));
             return;
         }
 

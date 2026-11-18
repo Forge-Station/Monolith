@@ -4,8 +4,3 @@ ent-RandomHumanoidSpawnerERTMailCarrier = почтальон ОБР
 ent-RandomHumanoidSpawnerERTMailCarrierEVA = почтальон ОБР
     .suffix = ОБР, Скафандр
     .desc = { ent-RandomHumanoidSpawnerERTMailCarrier.desc }
-
-ent-ERTMailCarrier = ghost-role-information-ert-mailcarrier-name
-    .desc = ghost-role-information-ert-mailcarrier-description
-ent-ERTMailCarrierEVA = ghost-role-information-ert-mailcarrier-name
-    .desc = ghost-role-information-ert-mailcarrier-description

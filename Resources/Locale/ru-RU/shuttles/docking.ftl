@@ -1,5 +1,6 @@
 docking-component-dock = Пристыковать
 docking-component-undock = Отстыковать
+docking-component-view = Просмотр
 cmd-dock-desc = Попытаться состыковать 2 шлюза вместе. Не проверяется, является ли это допустимым.
 cmd-dock-help = dock <airlock entityuid1> <airlock entityuid2>
 cmd-dock-args = Неверное число аргументов

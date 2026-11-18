@@ -29,8 +29,3 @@ ent-WeaponTurretAsmgtHostileUniversallyDeployed = { ent-WeaponTurretAsmgtNtDeplo
 ent-WeaponTurretAsmgtHostileUniversallyPacked = { ent-WeaponTurretAsmgtNtPacked }
   .desc = Разобранная и упакованная Автономная Сторожевая Пулеметная Турель (АСПТ). После установки слушается консоли турелей на этом гриде.
   .suffix = Враждебная, Упакованная
-
-ent-WeaponTurretLaserNanoTrasenPackingGraph = WeaponTurretLaserNanoTrasenPackingGraph
-ent-WeaponTurretAsmgtHostileUniversallyPackingGraph = WeaponTurretAsmgtHostileUniversallyPackingGraph
-ent-WeaponTurretAsmgtNtPackingGraph = WeaponTurretAsmgtNtPackingGraph
-ent-WeaponTurretContrabandDenyingPackingGraph = WeaponTurretContrabandDenyingPackingGraph

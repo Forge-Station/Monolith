@@ -1,0 +1,174 @@
+#!/usr/bin/env python3
+"""Focused tests for the C# localization key checker."""
+
+from __future__ import annotations
+
+import importlib.util
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+
+SCRIPT_PATH = Path(__file__).with_name("check_c#_ftl.py")
+SPEC = importlib.util.spec_from_file_location("check_csharp_ftl", SCRIPT_PATH)
+if SPEC is None or SPEC.loader is None:
+    raise RuntimeError(f"Cannot load checker from {SCRIPT_PATH}")
+checker = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = checker
+SPEC.loader.exec_module(checker)
+
+
+class CSharpFtlCheckerTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp_dir.name)
+        self.locale_dir = self.root / "locale"
+        self.source_dir = self.root / "source"
+        self.locale_dir.mkdir()
+        self.source_dir.mkdir()
+
+    def tearDown(self) -> None:
+        self.temp_dir.cleanup()
+
+    def test_static_calls_constants_and_line_numbers(self) -> None:
+        (self.locale_dir / "en-US").mkdir()
+        (self.locale_dir / "ru-RU").mkdir()
+        (self.locale_dir / "en-US" / "strings.ftl").write_text(
+            "translated-key = Value\n"
+            "attribute-owner = Value\n"
+            "    .desc = Description\n",
+            encoding="utf-8",
+        )
+        (self.locale_dir / "ru-RU" / "strings.ftl").write_text(
+            "second-locale-key = Значение\n",
+            encoding="utf-8",
+        )
+        engine_locale_dir = self.root / "engine-locale" / "en-US"
+        engine_locale_dir.mkdir(parents=True)
+        (engine_locale_dir / "engine.ftl").write_text(
+            "engine-key = Engine value\n",
+            encoding="utf-8",
+        )
+
+        source = self.source_dir / "Example.cs"
+        source.write_text(
+            'const string ConstantKey = "constant-key";\n'
+            'Loc.GetString("translated-key");\n'
+            'Loc.GetString("engine-key");\n'
+            'Loc.TryGetString(@"second-locale-key", out var value);\n'
+            "Loc.GetString(ConstantKey);\n"
+            'Loc.GetString("missing-key");\n'
+            'Loc.GetString("attribute-owner.desc");\n',
+            encoding="utf-8",
+        )
+
+        keys, _ = checker.read_ftl_data([self.locale_dir, engine_locale_dir.parent])
+        references = checker.scan_csharp_references([self.source_dir])
+        missing = checker.find_missing_references(references, keys)
+
+        self.assertEqual(
+            [(reference.line, reference.key) for reference in missing],
+            [
+                (5, "constant-key"),
+                (6, "missing-key"),
+                (7, "attribute-owner.desc"),
+            ],
+        )
+
+    def test_comments_and_dynamic_lookups_are_not_reported_as_static(self) -> None:
+        (self.locale_dir / "strings.ftl").write_text(
+            "real-key = Value\n",
+            encoding="utf-8",
+        )
+        (self.source_dir / "Example.cs").write_text(
+            '// Loc.GetString("commented-key");\n'
+            '/* Loc.GetString("also-commented"); */\n'
+            'var url = "https://example.test/a";\n'
+            'Loc.GetString($"dynamic-{suffix}");\n'
+            'Loc.GetString("prefix-" + dynamicKey);\n'
+            'Loc.GetString("<username>");\n'
+            'Loc.GetString("5 minutes");\n'
+            'Loc.GetString("[seconds]");\n'
+            "Loc.GetString(dynamicKey);\n"
+            'Loc.GetString("real-key");\n',
+            encoding="utf-8",
+        )
+
+        references = checker.scan_csharp_references([self.source_dir])
+        self.assertEqual([reference.key for reference in references], ["real-key"])
+        self.assertEqual(
+            checker.find_missing_references(
+                references,
+                checker.read_ftl_data([self.locale_dir])[0],
+            ),
+            [],
+        )
+
+    def test_unused_ftl_attributes_do_not_create_independent_keys(self) -> None:
+        (self.locale_dir / "strings.ftl").write_text(
+            "only-message = Value\n"
+            "    .desc = Attribute\n",
+            encoding="utf-8",
+        )
+        (self.source_dir / "Example.cs").write_text(
+            'Loc.GetString("only-message.desc");\n',
+            encoding="utf-8",
+        )
+
+        references = checker.scan_csharp_references([self.source_dir])
+        missing = checker.find_missing_references(
+            references,
+            checker.read_ftl_data([self.locale_dir])[0],
+        )
+        self.assertEqual([reference.key for reference in missing], ["only-message.desc"])
+
+    def test_undeclared_ftl_references_report_the_ftl_file_and_line(self) -> None:
+        ftl_path = self.locale_dir / "en-US" / "strings.ftl"
+        ftl_path.parent.mkdir()
+        ftl_path.write_text(
+            "declared-key = Value\n"
+            "message-with-missing-reference = { missing-key }\n"
+            "attribute-reference = { missing-message.desc }\n"
+            "function-call = { NUMBER($value) }\n"
+            "-declared-term = A term\n"
+            "term-reference = { -declared-term }\n"
+            "quoted-literal = { \"literal { not-a-reference }\" }\n"
+            "# { commented-reference }\n"
+            "multiline-reference = {\n"
+            "    missing-on-next-line\n"
+            "}\n",
+            encoding="utf-8",
+        )
+
+        keys, references = checker.read_ftl_data([self.locale_dir])
+        missing = checker.find_missing_ftl_references(references, keys)
+
+        self.assertEqual(
+            [(reference.path, reference.line, reference.key) for reference in missing],
+            [
+                (ftl_path, 2, "missing-key"),
+                (ftl_path, 3, "missing-message"),
+                (ftl_path, 10, "missing-on-next-line"),
+            ],
+        )
+
+    def test_generated_entity_localization_keys_are_known(self) -> None:
+        prototypes_dir = self.root / "prototypes"
+        prototypes_dir.mkdir()
+        (prototypes_dir / "entities.yml").write_text(
+            "- type: entity\n"
+            "  id: ExampleEntity\n",
+            encoding="utf-8",
+        )
+
+        generated_keys = checker.load_generated_prototype_keys(
+            prototypes_dir,
+            SCRIPT_PATH.with_name("prototype_ftl_rules.yml"),
+        )
+
+        self.assertIn("ent-ExampleEntity", generated_keys)
+
+
+if __name__ == "__main__":
+    unittest.main()

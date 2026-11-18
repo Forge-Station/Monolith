@@ -1,17 +1,5 @@
 ent-BaseWeaponRevolver = BaseWeaponRevolver
     .desc = Дерзай — налетай, целься и стреляй.
-ent-NFWeaponRevolverDeckard = Декард
-    .desc = Легальное гражданское оружие. Редкий, изготавливаемый на заказ револьвер. Используйте, когда нет времени на тест Войта-Кампфа. Использует патроны калибра .45 магнум.
-    .suffix = Револьвер
-ent-NFWeaponRevolverInspector = Инспектор (.357 магнум)
-    .desc = Лучший друг детектива. Использует патроны калибра .357 магнум.
-    .suffix = Револьвер
-ent-NFWeaponRevolverWard45 = Матеба (.357 магнум)
-    .desc = Знаковое оружие элиты корпорации. Использует патроны калибра .357 магнум.
-    .suffix = Револьвер
-ent-NFWeaponRevolverRitland45 = Питон (.357 магнум)
-    .desc = Нелегальное оружие. Надёжный револьвер, предпочитаемый агентами Горлекса. Использует патроны калибра .357 магнум.
-    .suffix = Револьвер
 ent-WeaponRevolverPython = { ent-NFWeaponRevolverRitland45 }
     .desc = { ent-NFWeaponRevolverRitland45.desc }
     .suffix = Револьвер
@@ -23,22 +11,6 @@ ent-WeaponRevolverPythonAP = { ent-NFWeaponRevolverRitland45 }
     .suffix = Револьвер, Бронебойные
 
 
-ent-NFWeaponRevolverPirate = Пиратский револьвер
-    .desc = Нелегальное оружие. Странный дульнозарядный револьвер, который использовали пираты. Использует патроны калибра .357 магнум.
-    .suffix = Револьвер
-
-ent-NFWeaponRevolverArgenti = Аргенти
-    .desc = Гражданский револьвер Argenti Type 35. Изготовлен компанией Silver Industries. Несмотря на то, что конструкция с расширенным цилиндром довольно древняя, опытный стрелок знает, как с ним обращаться.
-    .suffix = Револьвер
-ent-NFWeaponRevolverFaith = Вера
-    .desc = Доставляет благословения в виде пули.
-    .suffix = Револьвер
-ent-NFWeaponRevolverFitz = Фитз
-    .desc = Компактный и легко скрываемый короткоствольный револьвер для самообороны.
-    .suffix = Револьвер
-ent-NFWeaponRevolverLucky = Счастливчик
-    .desc = Удача всегда побеждает мастерство, проныра.
-    .suffix = Револьвер
 ent-WeaponRevolverMatebaAP = NT { ent-NFWeaponRevolverWard45 }
     .desc = { ent-NFWeaponRevolverWard45.desc }
     .suffix = .357 магнум, бронебойные

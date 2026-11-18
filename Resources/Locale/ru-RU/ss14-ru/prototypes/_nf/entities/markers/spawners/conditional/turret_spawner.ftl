@@ -7,6 +7,3 @@ ent-SpawnMobWeaponTurretSyndicate = спавнер баллистической 
 ent-SpawnMobWeaponTurretLaserNanoTrasenDeployed = спавнер САЛТ
     .suffix = NT, Фронтир
     .desc = { ent-MarkerBase.desc }
-ent-NFSpawnMobWeaponTurretLaserSyndicate = { ent-SpawnMobWeaponTurretLaserNanoTrasenDeployed }
-    .suffix = Синдикат, Фронтир
-    .desc = { ent-MarkerBase.desc }

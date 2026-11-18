@@ -136,7 +136,7 @@ public sealed partial class LoadoutSystem : EntitySystem
             }
         }
 
-        return Loc.GetString($"unknown");
+        return Loc.GetString("generic-unknown");
     }
 
     private void OnMapInit(EntityUid uid, LoadoutComponent component, MapInitEvent args)

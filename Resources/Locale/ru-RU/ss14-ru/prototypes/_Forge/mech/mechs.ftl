@@ -61,17 +61,3 @@ ent-MechMaulerSyndieBattery = { ent-MechMaulerSyndie }
 ent-MechMaulerSyndieFilled = { ent-MechMaulerSyndieBattery }
     .suffix = Батарея, Заполненный
     .desc = { ent-MechMaulerSyndieBattery.desc }
-
-ent-MechAres = Арес
-    .desc = Тяжелый аргумент для подавления беспорядков, прорыва укреплений, эвакуации под огнем и противодействия тяжелым угрозам внутренней и внешней безопасности. "Железный кулак" ТСФ.
-ent-MechAresBattery = { ent-MechAres }
-    .suffix = Батарея
-    .desc = { ent-MechAres.desc }
-ent-MechGygaxPirate = Чёрная Жемчужина
-    .desc = Не ищи логотип NanoTrasen на этой боевой машине, приятель. Перед тобой "Чёрная Жемчужина" – гордость Пиратского Братства и кошмар корпоративных крыс!
-ent-MechGygaxPirateBattery = { ent-MechGygaxPirate }
-    .suffix = Батарея
-    .desc = { ent-MechGygaxPirate.desc }
-ent-MechGygaxPirateFilled = { ent-MechGygaxPirateBattery }
-    .suffix = Батарея, Заполненный
-    .desc = { ent-MechGygaxPirateBattery.desc }

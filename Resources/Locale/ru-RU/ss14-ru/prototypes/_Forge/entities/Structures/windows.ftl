@@ -9,17 +9,6 @@ ent-ShuttleWindowPlasmaDiagonal = { ent-ShuttleWindowPlasma }
     .suffix = Диагональ
     .desc = { ent-ShuttleWindow.desc }
 
-ent-MiningWindowUran = урановое шахтёрское окно
-    .desc = { ent-Window.desc }
-ent-MiningWindowUranDiagonal = { ent-MiningWindowUran }
-    .suffix = Диагональ
-    .desc = { ent-ShuttleWindow.desc }
-ent-MiningWindowPlasma = плазменное шахтёрское окно
-    .desc = { ent-Window.desc }
-ent-MiningWindowPlasmaDiagonal = { ent-MiningWindowPlasma }
-    .suffix = Диагональ
-    .desc = { ent-ShuttleWindow.desc }
-
 ent-PlastitaniumWindowUran = урановое пластитановое стекло
     .desc = { ent-Window.desc }
 ent-PlastitaniumWindowUranDiagonal = урановое пластитановое окно

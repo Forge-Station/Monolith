@@ -63,7 +63,7 @@ public sealed partial class RoundNotificationsSystem : EntitySystem
             return;
 
         var map = _gameMapManager.GetSelectedMap();
-        var mapName = map?.MapName ?? Loc.GetString("discord-round-unknown-map");
+        var mapName = map?.MapName ?? Loc.GetString("discord-round-notifications-unknown-map");
         var text = Loc.GetString("discord-round-start",
             ("id", e.RoundId),
             ("map", mapName));

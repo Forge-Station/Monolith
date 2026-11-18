@@ -1,33 +1,3 @@
-ent-ClothingHeadHatCapHoS = фуражка ГСБ
-    .desc = Тканевая фуражка, судя по всему поношенная...
-
-ent-ClothingHeadCapCentcomBlack = чёрная фуражка УСФ
-    .desc = Строгая офицерская фуражка ... Это что, бирка аренды?
-
-ent-ClothingNeckMantleHOSshoulder = наплечная мантия ГСБ
-    .desc = Нарисованный череп с париком клоуна не даёт вам покоя...
-
-ent-ClothingUniformJumpsuitCentcomOfficerBlack = чёрный комбинезон УСФ
-    .desc = Пахнет кофе и свежими факсами
-
-ent-ClothingNeckCloakCentcomBlack = чёрная мантия УСФ
-    .desc = На краю чуть подгорелая, словно после боя
-
-ent-ClothingMaskGasBrigmed = медицинский противогаз
-    .desc = Продвинутый медицинский противогаз, обеспечивающий владельцу полную защиту от нежелательных газов... Конечно при наличии кислородного баллона
-
-ent-ClothingEyesGlassesMedSec = охранно-медицинские очки
-    .desc = Солнцезащитные очки с встроенными линзами двух разных визоров
-
-ent-ClothingEyesGlassesMed = медицинские очки
-    .desc = Обычные очки с встроенной линзой медицинского визора
-
-ent-ClothingBackpackCentcom = рюкзак УСФ
-    .desc = Стандартный рюкзак сотрудников УСФ
-
-ent-ClothingBackpackSatchelCentcom = сумка УСФ
-    .desc = Стандартная сумка сотрудников УСФ
-
 ent-ClothingUniformJumpsuitSpecOper = униформа офицера
     .desc = Серый комбинезон с серебристыми элементами. Практичный и строгий.
 
@@ -40,14 +10,6 @@ ent-ClothingHeadHatSpecOper = офицерская фуражка
 ent-ClothingOuterCoatSpecOperGreatcoat = бронированная шинель офицера
     .desc = Усиленная шинель из плотной ткани с вшитыми бронепластинами. Совмещает защиту и офицерский авторитет.
 
-ent-ClothingUniformJumpsuitCasualCentcom = повседневный комбинезон УСФ
-
-ent-ClothingUniformJumpsuitNanotrasenRepresentative = комбинезон представителя NanoTrasen
-
-ent-ClothingUniformJumpskirtNanotrasenRepresentative = юбка-комбинезон Представителя NanoTrasen
-
-ent-CentcomAgentSkirt = юбка агента УСФ
-
 ent-ClothingBackpackMessengerCentcom = мессенджер УСФ
 
 # NFSD
@@ -59,12 +21,6 @@ ent-ClothingMaskGasNfsdCoroner = противогаз коронера
 
 ent-ClothingMaskGasNfsdAdvanced = усиленный противогаз ТСФ
     .desc = Версия противогаза, разработанная для опасных операций и экстремальных условий.
-
-ent-ClothingBeltNfsdEngineer = пояс специалиста ТСФ
-    .desc = Плотный тактический пояс с множеством креплений для инструментов и устройств технической поддержки.
-
-ent-ClothingBeltNfsdEngineerFilled = { ent-ClothingBeltNfsdEngineer }
-    .desc = { ent-ClothingBeltNfsdEngineer.desc }
 
 ent-ClothingUniformJumpsuitNfsdForgeDec = униформа детектива ТСФ
     .desc = Строгая, но функциональная униформа для сотрудников следственного отдела.
@@ -100,9 +56,6 @@ ent-ClothingUniformJumpsuitMilitaryMercTac = чёрный тактический
     .desc = Обычный тактический комбинезон без знаков отличия.
 ent-ClothingHandsGlovesCombatUpgrade = усиленные боевые перчатки
     .desc = Усиленные тактические перчатки, позволяющие чаще побеждать в драках на яме.
-
-ent-ClothingBackpackSyndicateRaidBundle = { ent-ClothingBackpackSyndicate }
-    .desc = { ent-ClothingBackpackSyndicate.desc }
 
 ent-ClothingUniformJumpsuitParamedicOld = { ent-ClothingUniformJumpsuitParamedic }
     .desc = { ent-ClothingUniformJumpsuitParamedic.desc }

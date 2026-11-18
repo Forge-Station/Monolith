@@ -1,5 +1,3 @@
-ent-PartVox = часть тела вокса
-    .desc = { ent-BaseItem.desc }
 ent-TorsoVox = туловище вокса
     .desc = { ent-PartVox.desc }
 ent-HeadVox = голова вокса

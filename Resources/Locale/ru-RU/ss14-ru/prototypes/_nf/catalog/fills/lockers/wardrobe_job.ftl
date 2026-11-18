@@ -4,4 +4,3 @@ ent-NFPrisonerClosetWallOrangeFilled = { ent-ClosetWallOrange }
 ent-NFWardrobePrisonFilled = тюремный гардероб
     .suffix = Заполненный
     .desc = { ent-NFWardrobePrison.desc }
-ent-NFLockerFillPrisonWardrobe = NFLockerFillPrisonWardrobe

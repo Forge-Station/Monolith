@@ -11,6 +11,7 @@ bank-insufficient-funds = Неправильная сумма!
 bank-atm-menu-transaction-denied = Транзакция отклонена
 bank-atm-menu-deposit-successful = Депозит принят
 bank-atm-menu-withdraw-successful = Перевод одобрен
+bank-withdraw-failed = Не удалось выполнить снятие средств. Попробуйте ещё раз.
 bank-atm-menu-wrong-cash = Неправильный тип валюты!
 station-bank-atm-menu-title = Администрация Станции
 station-bank-fines = Штраф

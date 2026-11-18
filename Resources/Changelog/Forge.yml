@@ -484,3 +484,76 @@ Entries:
   id: 40
   time: '2026-11-17T21:42:34.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/604
+- author: Roasan
+  changes:
+    - type: Add
+      message: Новый ваучерный шаттл VG "Lancehead" на общей верфи
+    - type: Add
+      message: Новый ваучер Viper Group "LPC Lancehead"
+    - type: Add
+      message: Новый ваучер в исследованиях Viper Group
+    - type: Tweak
+      message: Поменяны нектороые доступы на шаттлах VG
+    - type: Fix
+      message: Ваучер "Wolfsnake" вновь можно купить по ваучеру
+  id: 41
+  time: '2026-11-18T06:50:37.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/581
+- author: tolikhorenko346-dotcom
+  changes:
+    - type: Tweak
+      message: полное изменение маккарго
+  id: 42
+  time: '2026-11-18T10:17:36.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/599
+- author: tolikhorenko346-dotcom
+  changes:
+    - type: Fix
+      message: исправление неработоюшего двигателя на шатле бег
+  id: 43
+  time: '2026-11-18T10:41:44.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/608
+- author: tolikhorenko346-dotcom
+  changes:
+    - type: Tweak
+      message: ремап пои зенита
+  id: 44
+  time: '2026-11-18T10:56:57.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/607
+- author: TenLimo
+  changes:
+    - type: Add
+      message: >-
+        Добавил объектов для АДСов(в основном пустышки для маперства):
+        Криокапсулы/Стазис кровати/Мебель/Консоли/Турель/Машинерия-пустышка
+    - type: Tweak
+      message: Респрайт Ядра АДС
+    - type: Add
+      message: >-
+        Добавил спавны: трупов асакимов(в чём мать-колба родила), классы боргов
+        АДС с разным вооружением (ППшка, Пулемёт, Снайперка, Двойной меч и
+        БИМБА), НПЦ АДС(2 слабых(все враги, не сильнее силиконов), 2 сильных(во
+        фракции АДС, на уровне обычных АДС боргов))
+  id: 45
+  time: '2026-11-18T12:56:55.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/460
+- author: der-n-e
+  changes:
+    - type: Fix
+      message: Исправлены все баги с отображениями, связанные со шлемами МОДов.
+  id: 46
+  time: '2026-11-18T12:57:28.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/555
+- author: Gordod3
+  changes:
+    - type: Add
+      message: Больше стен и окон для РСУ!
+    - type: Tweak
+      message: РСУ теперь может заменять окна строя поверх них новые!
+    - type: Add
+      message: Новые схемы плат инженерных компьютеров.
+    - type: Fix
+      message: Внешние Стыковочные Шлюзы можно разбирать РСУ.
+  id: 47
+  time: '2026-11-18T12:59:41.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/561

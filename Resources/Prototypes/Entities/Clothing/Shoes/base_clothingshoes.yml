@@ -33,11 +33,13 @@
     size: Normal
   - type: Food
     requiresSpecialDigestion: true
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Fiber
-        Quantity: 20
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Fiber
+          Quantity: 10
   - type: Tag
     tags:
     - ClothMade
@@ -71,7 +73,7 @@
           - Knife
           - Sidearm
   - type: ClothingSlowOnDamageModifier # Mono: Added to parent
-    modifier: 0.5
+    modifier: 0.5 
 
 - type: entity
   abstract: true

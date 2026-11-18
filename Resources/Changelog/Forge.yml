@@ -544,3 +544,16 @@ Entries:
   id: 46
   time: '2026-11-18T12:57:28.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/555
+- author: Gordod3
+  changes:
+    - type: Add
+      message: Больше стен и окон для РСУ!
+    - type: Tweak
+      message: РСУ теперь может заменять окна строя поверх них новые!
+    - type: Add
+      message: Новые схемы плат инженерных компьютеров.
+    - type: Fix
+      message: Внешние Стыковочные Шлюзы можно разбирать РСУ.
+  id: 47
+  time: '2026-11-18T12:59:41.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/561

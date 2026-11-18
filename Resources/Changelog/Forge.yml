@@ -537,3 +537,10 @@ Entries:
   id: 45
   time: '2026-11-18T12:56:55.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/460
+- author: der-n-e
+  changes:
+    - type: Fix
+      message: Исправлены все баги с отображениями, связанные со шлемами МОДов.
+  id: 46
+  time: '2026-11-18T12:57:28.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/555

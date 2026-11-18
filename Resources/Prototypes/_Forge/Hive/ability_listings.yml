@@ -1,0 +1,198 @@
+# Способности Улья в окне эволюции. Цена — в HiveDNA (временная, регулируется здесь).
+# Каждая покупается один раз. Название/описание берутся из локализации hive-ability-*.
+
+# Рука-клинок
+- type: listing
+  id: HiveAbilityArmBlade
+  name: hive-ability-arm-blade-name
+  description: hive-ability-arm-blade-desc
+  productAction: ActionHiveArmBlade
+  cost:
+    HiveDNA: 10
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Молот плоти
+- type: listing
+  id: HiveAbilityFleshyMaul
+  name: hive-ability-fleshy-maul-name
+  description: hive-ability-fleshy-maul-desc
+  productAction: ActionHiveFleshyMaul
+  cost:
+    HiveDNA: 10
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Мясное щупальце
+- type: listing
+  id: HiveAbilityTentacle
+  name: hive-ability-tentacle-name
+  description: hive-ability-tentacle-desc
+  productAction: ActionHiveTentacle
+  cost:
+    HiveDNA: 5
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Костяной щит
+- type: listing
+  id: HiveAbilityOrganicShield
+  name: hive-ability-organic-shield-name
+  description: hive-ability-organic-shield-desc
+  productAction: ActionHiveOrganicShield
+  cost:
+    HiveDNA: 5
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Хитиновая броня
+- type: listing
+  id: HiveAbilityChitinousArmor
+  name: hive-ability-chitinous-armor-name
+  description: hive-ability-chitinous-armor-desc
+  productAction: ActionHiveChitinousArmor
+  cost:
+    HiveDNA: 10
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Выброс адреналина
+- type: listing
+  id: HiveAbilityAdrenaline
+  name: hive-ability-adrenaline-name
+  description: hive-ability-adrenaline-desc
+  productAction: ActionHiveAdrenaline
+  cost:
+    HiveDNA: 10
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Исцеление плоти
+- type: listing
+  id: HiveAbilityFleshmend
+  name: hive-ability-fleshmend-name
+  description: hive-ability-fleshmend-desc
+  productAction: ActionHiveFleshmend
+  cost:
+    HiveDNA: 10
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Диссонирующий крик
+- type: listing
+  id: HiveAbilityDissonantShriek
+  name: hive-ability-dissonant-shriek-name
+  description: hive-ability-dissonant-shriek-desc
+  productAction: ActionHiveDissonantShriek
+  cost:
+    HiveDNA: 5
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Резонансный крик
+- type: listing
+  id: HiveAbilityResonantShriek
+  name: hive-ability-resonant-shriek-name
+  description: hive-ability-resonant-shriek-desc
+  productAction: ActionHiveResonantShriek
+  cost:
+    HiveDNA: 5
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Продвинутое зрение
+- type: listing
+  id: HiveAbilityAugmentedEyesight
+  name: hive-ability-augmented-eyesight-name
+  description: hive-ability-augmented-eyesight-desc
+  productAction: ActionHiveAugmentedEyesight
+  cost:
+    HiveDNA: 5
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Напряжение мышц
+- type: listing
+  id: HiveAbilityStrainedMuscles
+  name: hive-ability-strained-muscles-name
+  description: hive-ability-strained-muscles-desc
+  productAction: ActionHiveStrainedMuscles
+  cost:
+    HiveDNA: 5
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Кожа-хамелеон
+- type: listing
+  id: HiveAbilityChameleonSkin
+  name: hive-ability-chameleon-skin-name
+  description: hive-ability-chameleon-skin-desc
+  productAction: ActionHiveChameleonSkin
+  cost:
+    HiveDNA: 5
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Канал поглощённого ДНК
+- type: listing
+  id: HiveAbilityDnaChannel
+  name: hive-ability-dna-channel-name
+  description: hive-ability-dna-channel-desc
+  productAction: ActionHiveDnaChannel
+  cost:
+    HiveDNA: 0
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# Связь Улья
+- type: listing
+  id: HiveAbilityHivemindLink
+  name: hive-ability-hivemind-link-name
+  description: hive-ability-hivemind-link-desc
+  productAction: ActionHiveHivemindLink
+  cost:
+    HiveDNA: 0
+  categories:
+  - HiveAbilities
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1

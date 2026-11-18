@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by Mother of Hive and Fallen Seraphim for Forge",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "andrenalin"
+    },
+    {
+      "name": "armour"
+    },
+    {
+      "name": "eatdna"
+    },
+    {
+      "name": "force"
+    },
+    {
+      "name": "hammer"
+    },
+    {
+      "name": "high_cortizole"
+    },
+    {
+      "name": "low_cortisole"
+    },
+    {
+      "name": "mindhive"
+    },
+    {
+      "name": "sharedDNA"
+    },
+        {
+      "name": "shield"
+    },
+        {
+      "name": "stels"
+    },
+        {
+      "name": "watch"
+    },
+        {
+      "name": "handblade"
+    },
+    
+        {
+      "name": "pu"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+
+- type: collectiveMind
+  id: Hive
+  name: collective-mind-hive
+  keycode: 's'
+  color: "#5918a8"

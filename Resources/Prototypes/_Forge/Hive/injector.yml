@@ -1,0 +1,15 @@
+- type: entity
+  parent: BaseItem
+  id: HiveInjector
+  name: hive injector
+  description: A single-use injector filled with a murky greenish liquid. It seems to be moving.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Injectorhive.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Specific/Injectorhive.rsi
+    size: Tiny
+  - type: HiveInjector
+  - type: StaticPrice
+    price: 0

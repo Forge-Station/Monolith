@@ -1417,7 +1417,7 @@ entities:
       parent: 1
     - type: DeltaPressure
       gridUid: 1
-- proto: PlayerStationAiForerunner
+- proto: PlayerStationAiForerunnerWhitelist
   entities:
   - uid: 211
     components:

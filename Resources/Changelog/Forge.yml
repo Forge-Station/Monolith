@@ -484,3 +484,18 @@ Entries:
   id: 40
   time: '2026-11-17T21:42:34.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/604
+- author: Roasan
+  changes:
+    - type: Add
+      message: Новый ваучерный шаттл VG "Lancehead" на общей верфи
+    - type: Add
+      message: Новый ваучер Viper Group "LPC Lancehead"
+    - type: Add
+      message: Новый ваучер в исследованиях Viper Group
+    - type: Tweak
+      message: Поменяны нектороые доступы на шаттлах VG
+    - type: Fix
+      message: Ваучер "Wolfsnake" вновь можно купить по ваучеру
+  id: 41
+  time: '2026-11-18T06:50:37.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/581

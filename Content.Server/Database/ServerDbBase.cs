@@ -2537,6 +2537,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task EnsureCompanyBankAccount(string companyId)
         {
             await using var db = await GetDb();
+            await EnsureCompanyRecruitingColumn(db);
             if (await db.DbContext.CompanyBankAccounts.AnyAsync(a => a.CompanyId == companyId))
                 return;
 
@@ -2544,7 +2545,85 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             {
                 CompanyId = companyId,
                 Balance = 0,
+                RecruitingOpen = false,
             });
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task EnsureCompanyRecruitingColumn()
+        {
+            await using var db = await GetDb();
+            await EnsureCompanyRecruitingColumn(db);
+        }
+
+        private static async Task EnsureCompanyRecruitingColumn(DbGuard db)
+        {
+            var conn = db.DbContext.Database.GetDbConnection();
+            if (conn.State != ConnectionState.Open)
+                await conn.OpenAsync();
+
+            await using var cmd = conn.CreateCommand();
+            if (db.DbContext is SqliteServerDbContext)
+            {
+                cmd.CommandText = """
+                    SELECT COUNT(*) FROM pragma_table_info('company_bank_accounts')
+                    WHERE name = 'recruiting_open'
+                    """;
+                var exists = Convert.ToInt32(await cmd.ExecuteScalarAsync() ?? 0) > 0;
+                if (exists)
+                    return;
+
+                await using var alter = conn.CreateCommand();
+                alter.CommandText =
+                    "ALTER TABLE company_bank_accounts ADD COLUMN recruiting_open INTEGER NOT NULL DEFAULT 0";
+                await alter.ExecuteNonQueryAsync();
+                return;
+            }
+
+            cmd.CommandText = """
+                SELECT COUNT(*) FROM information_schema.columns
+                WHERE table_schema = 'public'
+                  AND table_name = 'company_bank_accounts'
+                  AND column_name = 'recruiting_open'
+                """;
+            var pgExists = Convert.ToInt32(await cmd.ExecuteScalarAsync() ?? 0) > 0;
+            if (pgExists)
+                return;
+
+            await using var pgAlter = conn.CreateCommand();
+            pgAlter.CommandText =
+                "ALTER TABLE company_bank_accounts ADD COLUMN recruiting_open boolean NOT NULL DEFAULT false";
+            await pgAlter.ExecuteNonQueryAsync();
+        }
+
+        public async Task<Dictionary<string, bool>> GetAllCompanyRecruitingOpen(CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+            await EnsureCompanyRecruitingColumn(db);
+            return await db.DbContext.CompanyBankAccounts
+                .ToDictionaryAsync(a => a.CompanyId, a => a.RecruitingOpen, cancel);
+        }
+
+        public async Task SetCompanyRecruitingOpen(string companyId, bool open)
+        {
+            await using var db = await GetDb();
+            await EnsureCompanyRecruitingColumn(db);
+            var account = await db.DbContext.CompanyBankAccounts
+                .FirstOrDefaultAsync(a => a.CompanyId == companyId);
+            if (account == null)
+            {
+                db.DbContext.CompanyBankAccounts.Add(new CompanyBankAccount
+                {
+                    CompanyId = companyId,
+                    Balance = 0,
+                    RecruitingOpen = open,
+                });
+            }
+            else
+            {
+                account.RecruitingOpen = open;
+            }
+
             await db.DbContext.SaveChangesAsync();
         }
 

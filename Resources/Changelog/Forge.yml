@@ -513,3 +513,10 @@ Entries:
   id: 43
   time: '2026-11-18T10:41:44.0000000+00:00'
   url: https://github.com/Forge-Station/Monolith/pull/608
+- author: tolikhorenko346-dotcom
+  changes:
+    - type: Tweak
+      message: ремап пои зенита
+  id: 44
+  time: '2026-11-18T10:56:57.0000000+00:00'
+  url: https://github.com/Forge-Station/Monolith/pull/607

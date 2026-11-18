@@ -300,6 +300,23 @@ public sealed partial class CompanyManagementUiFragment : BoxContainer
         stats.AddChild(_styles.MakeText(Loc.GetString("company-pda-info-members", ("count", state.MemberCount))));
         stats.AddChild(_styles.MakeText(Loc.GetString("company-pda-info-access",
             ("tier", Loc.GetString($"company-pda-access-{state.AccessTier.ToString().ToLowerInvariant()}")))));
+        stats.AddChild(_styles.MakeText(Loc.GetString(state.RecruitingOpen
+            ? "company-pda-recruiting-open"
+            : "company-pda-recruiting-closed")));
+        if (state.IsOwner)
+        {
+            var recruiting = _styles.MakeButton(Loc.GetString(state.RecruitingOpen
+                ? "company-pda-recruiting-close"
+                : "company-pda-recruiting-open-action"));
+            var open = !state.RecruitingOpen;
+            recruiting.OnPressed += _ => Send(new CompanyManagementUiMessageEvent
+            {
+                Action = CompanyManagementUiAction.SetRecruitingOpen,
+                BoolValue = open,
+            });
+            stats.AddChild(recruiting);
+        }
+
         right.AddChild(_styles.MakeCard(stats));
         AddBank(right, state);
         AddVault(right, state);

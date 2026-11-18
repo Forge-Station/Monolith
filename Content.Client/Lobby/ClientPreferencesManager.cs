@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._Mono.Company;
 using Content.Shared._Forge.Sponsor; // Forge-Change
 using Content.Shared._Mono.Company;
 using Content.Shared.CCVar;
@@ -78,10 +79,14 @@ namespace Content.Client.Lobby
 
                 var protoManager = IoCManager.Resolve<IPrototypeManager>();
                 if (!string.IsNullOrEmpty(humanoid.Company) &&
-                    humanoid.Company != "None" &&
-                    !protoManager.HasIndex<CompanyPrototype>(humanoid.Company))
+                    humanoid.Company != "None")
                 {
-                    humanoid = humanoid.WithCompany("None");
+                    var companyManager = IoCManager.Resolve<CompanyManager>();
+                    if (!protoManager.HasIndex<CompanyPrototype>(humanoid.Company) ||
+                        !companyManager.CanJoin(humanoid.Company))
+                    {
+                        humanoid = humanoid.WithCompany("None");
+                    }
                 }
 
                 profile = humanoid;
@@ -186,11 +191,15 @@ namespace Content.Client.Lobby
 
                     if (profile is HumanoidCharacterProfile humanoidProfile &&
                         !string.IsNullOrEmpty(humanoidProfile.Company) &&
-                        humanoidProfile.Company != "None" &&
-                        !protoManager.HasIndex<CompanyPrototype>(humanoidProfile.Company))
+                        humanoidProfile.Company != "None")
                     {
-                        updatedProfile = humanoidProfile.WithCompany("None");
-                        needsUpdate = true;
+                        var companyManager = IoCManager.Resolve<CompanyManager>();
+                        if (!protoManager.HasIndex<CompanyPrototype>(humanoidProfile.Company) ||
+                            !companyManager.CanJoin(humanoidProfile.Company))
+                        {
+                            updatedProfile = humanoidProfile.WithCompany("None");
+                            needsUpdate = true;
+                        }
                     }
 
                     characters[slot] = updatedProfile;

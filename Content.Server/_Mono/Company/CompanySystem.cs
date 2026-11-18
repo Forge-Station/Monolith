@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Content.Server.Database;
 using Content.Server.Preferences.Managers;
 using Content.Shared._Forge.Company;
 using Content.Shared._Mono.Company;
@@ -8,6 +11,7 @@ using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Player;
@@ -25,6 +29,7 @@ public sealed partial class CompanySystem : EntitySystem
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private CompanyManager _manager = default!;
     [Dependency] private IServerPreferencesManager _prefs = default!;
+    [Dependency] private IPlayerManager _player = default!;
 
     private readonly Dictionary<string, string> _playerOriginalCompanies = new();
 
@@ -77,6 +82,18 @@ public sealed partial class CompanySystem : EntitySystem
                 : string.IsNullOrEmpty(profileCompany) ? "None" : profileCompany;
         }
 
+        // Open recruiting: selecting the company in the lobby creates membership on spawn.
+        if (!forcedCompany &&
+            membership == null &&
+            companyComp.CompanyName != "None" &&
+            _manager.IsRecruitingOpen(companyComp.CompanyName))
+        {
+            var characterName = args.Profile is HumanoidCharacterProfile humanoid
+                ? humanoid.Name
+                : $"Slot {slot}";
+            _ = EnsureMembershipOnSpawn(args.Player.UserId, companyComp.CompanyName, slot, characterName);
+        }
+
         // Forge-change-start
         if (!forcedCompany && companyComp.CompanyName != "None" && _prototypeManager.HasIndex<CompanyPrototype>(companyComp.CompanyName)
             && !_manager.IsAllowed(args.Player, companyComp.CompanyName))
@@ -109,20 +126,76 @@ public sealed partial class CompanySystem : EntitySystem
 
     /// <summary>
     /// If the player's selected character has a company membership, apply it to their attached mob.
+    /// Always refreshes ID access tags so role/leader changes take effect immediately.
     /// </summary>
     public void TryApplyMembershipToSession(ICommonSession session)
     {
         if (session.AttachedEntity is not { } mob)
             return;
 
-        if (!_manager.TryGetCharacterContext(session.UserId, out var slot, out _))
+        if (!_manager.TryGetCharacterContext(session.UserId, out var slot, out var characterName))
             return;
 
         var membership = _manager.GetMemberForCharacter(session.UserId, slot);
-        if (membership == null || membership.Value.Company == "None")
+        if (membership != null && membership.Value.Company != "None")
+        {
+            ApplyCompanyToMob(mob, membership.Value.Company, session);
+            return;
+        }
+
+        // Leader opened recruiting: doll company becomes a real membership on first PDA sync.
+        if (TryComp<CompanyComponent>(mob, out var companyComp) &&
+            companyComp.CompanyName != "None" &&
+            _manager.IsRecruitingOpen(companyComp.CompanyName))
+        {
+            _ = EnsureMembershipOnSpawn(session.UserId, companyComp.CompanyName, slot, characterName);
+        }
+    }
+
+    private async Task EnsureMembershipOnSpawn(NetUserId userId, ProtoId<CompanyPrototype> company, int slot, string characterName)
+    {
+        if (_manager.GetMemberForCharacter(userId, slot) != null)
             return;
 
-        ApplyCompanyToMob(mob, membership.Value.Company, session);
+        if (!await _manager.AddMember(userId, company, slot, characterName))
+            return;
+
+        if (_player.TryGetSessionById(userId, out var session) && session.AttachedEntity is { } mob)
+            ApplyCompanyToMob(mob, company, session);
+    }
+
+    /// <summary>Clears company affiliation and door tags after a kick or leave.</summary>
+    public void ClearCompanyFromMob(EntityUid mob, ProtoId<CompanyPrototype> company, ICommonSession session)
+    {
+        if (TryComp<CompanyComponent>(mob, out var companyComp) && companyComp.CompanyName == company)
+        {
+            companyComp.CompanyName = "None";
+            Dirty(mob, companyComp);
+        }
+
+        if (_prefs.TryGetCachedPreferences(session.UserId, out var prefs) &&
+            prefs.SelectedCharacter is HumanoidCharacterProfile profile)
+        {
+            SyncProfileCompany(session.UserId, prefs.SelectedCharacterIndex, profile, "None");
+        }
+
+        ClearCompanyAccessTags(mob, company);
+    }
+
+    public void RefreshAccessForMembers(ProtoId<CompanyPrototype> company, IEnumerable<CompanyMemberRecord> members)
+    {
+        foreach (var member in members)
+        {
+            if (!_player.TryGetSessionById(new NetUserId(member.PlayerUserId), out var session) ||
+                session.AttachedEntity is not { } mob)
+                continue;
+
+            if (!_manager.TryGetCharacterContext(session.UserId, out var slot, out _) ||
+                slot != member.CharacterSlot)
+                continue;
+
+            ApplyCompanyAccessTags(mob, company, session);
+        }
     }
 
     /// <summary>

@@ -26,7 +26,7 @@ public sealed partial class ShuttleConsoleWindow
         {
             ("wf-cockpit-nav", NavContainer.WfCockpitRadar(lease)),
             ("wf-cockpit-ship", ship),
-            ("wf-cockpit-map", MapContainer.WfCockpitMap(lease)),
+            ("wf-cockpit-map", MapContainer.WfCockpitMap(lease, NavContainer.WfCockpitMarkerEntry(lease))),
             ("wf-cockpit-dock", DockContainer.WfCockpitDock(lease)),
             ("wf-cockpit-access", AccessContainer),
             ("wf-cockpit-shield-page", shieldDetails),

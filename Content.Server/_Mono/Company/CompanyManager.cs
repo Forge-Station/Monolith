@@ -162,7 +162,7 @@ public sealed partial class CompanyManager
     }
 
     /// <summary>
-    /// Admin helper: add membership for the first character without a company, or a specific slot.
+    /// Admin helper: add membership for the selected character when free, else the first free slot.
     /// </summary>
     public async Task<bool> AddMemberForPlayer(NetUserId player, ProtoId<CompanyPrototype> company, int? preferredSlot = null)
     {
@@ -182,6 +182,16 @@ public sealed partial class CompanyManager
                 ? humanoid.Name
                 : $"Slot {preferredSlot.Value}";
             return await AddMember(player, company, preferredSlot.Value, name);
+        }
+
+        // Prefer the character the player is currently using, so leader rights land on that slot.
+        if (GetMemberForCharacter(player, prefs.SelectedCharacterIndex) == null &&
+            prefs.Characters.TryGetValue(prefs.SelectedCharacterIndex, out var selectedProfile))
+        {
+            var selectedName = selectedProfile is HumanoidCharacterProfile humanoid
+                ? humanoid.Name
+                : $"Slot {prefs.SelectedCharacterIndex}";
+            return await AddMember(player, company, prefs.SelectedCharacterIndex, selectedName);
         }
 
         foreach (var (slot, profile) in prefs.Characters.OrderBy(c => c.Key))
@@ -208,6 +218,9 @@ public sealed partial class CompanyManager
         {
             return true;
         }
+
+        if (IsRecruitingOpen(company))
+            return true;
 
         return IsMember(session.UserId, company);
     }
@@ -237,6 +250,9 @@ public sealed partial class CompanyManager
 
         if (characterSlot != null)
             target = GetCompanyMember(company, userId, characterSlot.Value);
+        else if (_prefs.TryGetCachedPreferences(userId, out var prefs) &&
+                 GetCompanyMember(company, userId, prefs.SelectedCharacterIndex) is { } selectedMember)
+            target = selectedMember;
         else
             target = GetCompanyMember(company, userId);
 
@@ -321,10 +337,18 @@ public sealed partial class CompanyManager
     {
         var msg = new MsgCompanyWhitelist
         {
-            Whitelist = GetPlayerCompanies(player.UserId)
+            Whitelist = GetPlayerCompanies(player.UserId),
+            RecruitingOpen = GetRecruitingOpenCompanies(),
+            Relations = GetPublicRelations(),
         };
 
         _net.ServerSendMessage(msg, player);
+    }
+
+    public void BroadcastCompanyAccess()
+    {
+        foreach (var session in _player.Sessions)
+            SendCompanyWhitelist(session.Channel);
     }
 
     public bool TryGetCharacterContext(NetUserId player, out int slot, out string characterName)

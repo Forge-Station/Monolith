@@ -49,4 +49,25 @@ public sealed partial class CompanySystem
 
         _access.TrySetTags(target, current, accessComp);
     }
+
+    public void ClearCompanyAccessTags(EntityUid mob, ProtoId<CompanyPrototype> company)
+    {
+        if (!_inventorySystem.TryGetSlotEntity(mob, "id", out var idUid))
+            return;
+
+        var target = idUid.Value;
+        if (TryComp<PdaComponent>(target, out var pda) && pda.ContainedId is { } containedId)
+            target = containedId;
+
+        if (!TryComp<AccessComponent>(target, out var accessComp))
+            return;
+
+        var companyTags = new HashSet<ProtoId<AccessLevelPrototype>>();
+        foreach (var t in new[] { CompanyAccessTier.Low, CompanyAccessTier.Medium, CompanyAccessTier.High })
+            companyTags.Add(CompanyAccessHelper.GetAccessLevelId(company, t));
+
+        var current = accessComp.Tags.ToHashSet();
+        current.ExceptWith(companyTags);
+        _access.TrySetTags(target, current, accessComp);
+    }
 }

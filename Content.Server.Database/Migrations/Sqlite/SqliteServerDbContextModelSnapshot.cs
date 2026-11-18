@@ -560,6 +560,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("balance");
 
+                    b.Property<bool>("RecruitingOpen")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("recruiting_open");
+
                     b.HasKey("CompanyId")
                         .HasName("PK_company_bank_accounts");
 

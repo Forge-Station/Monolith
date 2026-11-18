@@ -45762,6 +45762,8 @@ entities:
     - type: Transform
       parent: 1
       pos: 3.5,-33.5
+    missingComponents:
+    - Anchorable
 - proto: Magazine8x65mmSKR
   entities:
   - uid: 6968
@@ -49756,6 +49758,22 @@ entities:
     - type: Transform
       parent: 1
       pos: 3.5,-32.5
+      anchored: true
+    - type: Physics
+      bodyType: Static
+    - type: DisableToolUse
+      anchoring: true
+      prying: true
+      screwing: true
+      cutting: true
+      welding: true
+      pulsing: true
+      slicing: true
+      sawing: true
+      honking: true
+      rolling: true
+      digging: true
+
 - proto: ShipBattlemap
   entities:
   - uid: 7627

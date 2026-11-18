@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/twitcher_oracle.dmi)",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "preview"
+    },
+    {
+      "name": "oracle_twitcher_chest",
+      "directions": 4
+    },
+    {
+      "name": "oracle_twitcher_r_leg",
+      "directions": 4
+    },
+    {
+      "name": "oracle_twitcher_l_leg",
+      "directions": 4
+    },
+    {
+      "name": "oracle_twitcher_head",
+      "directions": 4
+    },
+    {
+      "name": "oracle_twitcher_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "oracle_twitcher_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "oracle_twitcher_chest_lying"
+    },
+    {
+      "name": "oracle_twitcher_r_leg_lying"
+    },
+    {
+      "name": "oracle_twitcher_l_leg_lying"
+    },
+    {
+      "name": "oracle_twitcher_head_lying"
+    },
+    {
+      "name": "oracle_twitcher_r_arm_lying"
+    },
+    {
+      "name": "oracle_twitcher_l_arm_lying"
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

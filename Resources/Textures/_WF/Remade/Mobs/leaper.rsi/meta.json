@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/leaper.dmi)",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "preview",
+      "directions": 4
+    },
+    {
+      "name": "leaper_chest",
+      "directions": 4
+    },
+    {
+      "name": "leaper_r_leg",
+      "directions": 4
+    },
+    {
+      "name": "leaper_l_leg",
+      "directions": 4
+    },
+    {
+      "name": "leaper_head",
+      "directions": 4
+    },
+    {
+      "name": "leaper_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "leaper_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "leaper_torso_lying"
+    },
+    {
+      "name": "leaper_r_leg_lying"
+    },
+    {
+      "name": "leaper_l_leg_lying"
+    },
+    {
+      "name": "leaper_head_lying"
+    },
+    {
+      "name": "leaper_r_arm_lying"
+    },
+    {
+      "name": "leaper_l_arm_lying"
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

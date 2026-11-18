@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server._NF.Trade;
+using Content.Server._WF.SectorControl.Systems; // WOLFGATE(SectorControl): faction homes
 using Content.Server._WF.TradeGoods.Components; // WOLFGATE(TradeGoods)
 using Content.Server.GameTicking;
 using Content.Server.Station.Systems;
@@ -32,6 +33,12 @@ public sealed partial class PointOfInterestSystem : EntitySystem
     [Dependency] private StationRenameWarpsSystems _renameWarps = default!;
     [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private WFPlanetCargoHubSystem _wfCargoHubs = default!; // WOLFGATE(PlanetCargoHubs)
+    [Dependency] private WFSectorCompanyHomeSystem _homes = default!; // WOLFGATE(SectorControl)
+
+    /// <summary>Prototype distances are written for the old sector. This spreads every POI out with the field.</summary>
+    private float Spread => MathF.Max(_cfg.GetCVar(NFCCVars.POIDistanceModifier), 0f);
+
+    private float Scaled(float metres) => metres * Spread;
 
     private readonly List<PoiPlacement> _stationPlacements = new();
 
@@ -92,7 +99,11 @@ public sealed partial class PointOfInterestSystem : EntitySystem
             if (proto.SpawnGamePreset.Length > 0 && !proto.SpawnGamePreset.Contains(currentPreset))
                 continue;
 
-            Vector2i offset = new Vector2i(_random.Next(proto.MinimumDistance, proto.MaximumDistance), 0);
+            var near = (int) Scaled(proto.MinimumDistance);
+            var far = (int) Scaled(proto.MaximumDistance);
+            if (far <= near)
+                far = near + 1;
+            Vector2i offset = new Vector2i(_random.Next(near, far), 0);
             offset = offset.Rotate(rotationOffset);
             rotationOffset += rotation;
             // Append letter to depot name.
@@ -145,7 +156,7 @@ public sealed partial class PointOfInterestSystem : EntitySystem
 
             var offset = GetRandomPOICoord(proto);
             Log.Info($"pre-offset coords for {proto.Name}: {offset.X}, {offset.Y}");
-            var coords = new Vector2(offset.X + proto.PositionX, offset.Y + proto.PositionY);
+            var coords = Placed(proto, offset);
             Log.Info($"post-offset coords for {proto.Name}: {coords.X}, {coords.Y}");
 
             if (TrySpawnPoiGrid(mapUid, proto, coords, out var marketUid) && marketUid is { Valid: true } market)
@@ -183,7 +194,7 @@ public sealed partial class PointOfInterestSystem : EntitySystem
 
             var offset = GetRandomPOICoord(proto);
             Log.Info($"pre-offset coords for {proto.Name}: {offset.X}, {offset.Y}");
-            var coords = new Vector2(offset.X + proto.PositionX, offset.Y + proto.PositionY);
+            var coords = Placed(proto, offset);
             Log.Info($"post-offset coords for {proto.Name}: {coords.X}, {coords.Y}");
 
             if (TrySpawnPoiGrid(mapUid, proto, coords, out var optionalUid) && optionalUid is { Valid: true } uid)
@@ -215,7 +226,7 @@ public sealed partial class PointOfInterestSystem : EntitySystem
 
             var offset = GetRandomPOICoord(proto);
             Log.Info($"pre-offset coords for {proto.Name}: {offset.X}, {offset.Y}");
-            var coords = new Vector2(offset.X + proto.PositionX, offset.Y + proto.PositionY);
+            var coords = Placed(proto, offset);
             Log.Info($"post-offset coords for {proto.Name}: {coords.X}, {coords.Y}");
 
             if (TrySpawnPoiGrid(mapUid, proto, coords, out var requiredUid) && requiredUid is { Valid: true } uid)
@@ -256,7 +267,7 @@ public sealed partial class PointOfInterestSystem : EntitySystem
                 {
                     var offset = GetRandomPOICoord(proto);
                     Log.Info($"pre-offset coords for {proto.Name}: {offset.X}, {offset.Y}");
-                    var coords = new Vector2(offset.X + proto.PositionX, offset.Y + proto.PositionY);
+                    var coords = Placed(proto, offset);
                     Log.Info($"post-offset coords for {proto.Name}: {coords.X}, {coords.Y}");
 
                     if (TrySpawnPoiGrid(mapUid, proto, coords, out var optionalUid) && optionalUid is { Valid: true } uid)
@@ -289,6 +300,7 @@ public sealed partial class PointOfInterestSystem : EntitySystem
 
         EntityManager.AddComponents(loadedGrid.Value, proto.AddComponents);
         EnsureComp<WFTradeStationComponent>(loadedGrid.Value).Id = proto.ID; // WOLFGATE(TradeGoods): stations take their economy role from their POI
+        _homes.ClaimPoi(loadedGrid.Value, proto.PlacementTags); // WOLFGATE(SectorControl): faction stations paint their hex
 
         // Rename warp points after set up if needed
         if (proto.NameWarp)
@@ -309,13 +321,18 @@ public sealed partial class PointOfInterestSystem : EntitySystem
         if (proto.MinDistanceFromTags.Count > 0)
             numRetries = int.Max(numRetries, 50);
 
-        var coords = _random.NextVector2(proto.MinimumDistance, proto.MaximumDistance);
+        var min = Scaled(proto.MinimumDistance);
+        var max = Scaled(proto.MaximumDistance);
+        if (max <= min)
+            max = min + 1f;
+
+        var coords = _random.NextVector2(min, max);
         for (var i = 0; i < numRetries; i++)
         {
             if (IsPoiPlacementValid(coords, proto))
                 break;
 
-            coords = _random.NextVector2(proto.MinimumDistance, proto.MaximumDistance);
+            coords = _random.NextVector2(min, max);
         }
 
         return coords;
@@ -323,7 +340,7 @@ public sealed partial class PointOfInterestSystem : EntitySystem
 
     private bool IsPoiPlacementValid(Vector2 coords, PointOfInterestPrototype proto)
     {
-        var minDistance = float.Max(_cfg.GetCVar(NFCCVars.MinPOIDistance), 0);
+        var minDistance = Scaled(float.Max(_cfg.GetCVar(NFCCVars.MinPOIDistance), 0));
 
         foreach (var existing in _stationPlacements)
         {
@@ -333,17 +350,23 @@ public sealed partial class PointOfInterestSystem : EntitySystem
 
             foreach (var tag in existing.Tags)
             {
-                if (proto.MinDistanceFromTags.TryGetValue(tag, out var required) && dist < required)
+                if (proto.MinDistanceFromTags.TryGetValue(tag, out var required) && dist < Scaled(required))
                     return false;
             }
 
             foreach (var tag in proto.PlacementTags)
             {
-                if (existing.MinDistanceFromTags.TryGetValue(tag, out var required) && dist < required)
+                if (existing.MinDistanceFromTags.TryGetValue(tag, out var required) && dist < Scaled(required))
                     return false;
             }
         }
 
         return true;
+    }
+
+    /// <summary>The random offset plus the prototype's fixed shift, both at the sector's spread.</summary>
+    private Vector2 Placed(PointOfInterestPrototype proto, Vector2 offset)
+    {
+        return new Vector2(offset.X + Scaled(proto.PositionX), offset.Y + Scaled(proto.PositionY));
     }
 }

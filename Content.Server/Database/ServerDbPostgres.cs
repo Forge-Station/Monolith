@@ -44,6 +44,8 @@ namespace Content.Server.Database
                 await using var ctx = new PostgresServerDbContext(_options);
                 try
                 {
+                    CompanyOrganizationMigration.MarkAppliedIfSchemaExists(
+                        ctx, "20261116065027_CompanyOrganization", postgres: true);
                     await ctx.Database.MigrateAsync();
                 }
                 finally

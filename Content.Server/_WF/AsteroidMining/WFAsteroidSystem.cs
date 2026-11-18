@@ -56,6 +56,16 @@ public sealed partial class WFAsteroidSystem : EntitySystem
 
     private static readonly EntProtoId CrackEffect = "WFAsteroidCrackEffect";
 
+    /// <summary>From here out, a cluster carries more rock and rolls the rich composition more often. Inside, most fields are skipped.</summary>
+    private const float OuterBeltKm = 30f;
+
+    /// <summary>The fraction of asteroid fields inside <see cref="OuterBeltKm"/> that still appear.</summary>
+    private const float InnerKeep = 0.35f;
+
+    private const float OuterMass = 1.6f;
+    private const float OuterRare = 0.15f;
+    private const int OuterRocks = 4;
+
     private static readonly SoundSpecifier CrackSound = new SoundPathSpecifier("/Audio/Effects/break_stone.ogg",
         AudioParams.Default.WithVolume(4f).WithMaxDistance(40f));
 
@@ -107,6 +117,12 @@ public sealed partial class WFAsteroidSystem : EntitySystem
         _replacements ??= BuildReplacements();
         if (!_replacements.TryGetValue(args.Proto, out var replacement))
             return;
+
+        if (args.At.Position.Length() < OuterBeltKm * 1000f && !_random.Prob(InnerKeep))
+        {
+            args.Cancelled = true;
+            return;
+        }
 
         if (replacement.Barren is { } barren && _random.Prob(replacement.Kind.BarrenChance))
         {
@@ -672,11 +688,17 @@ public sealed partial class WFAsteroidSystem : EntitySystem
 
         sizes.Sort((a, b) => a.Mass.CompareTo(b.Mass));
         var smallest = sizes[0].Mass;
+        var km = center.Position.Length() / 1000f;
+        var outer = km >= OuterBeltKm;
+        if (outer)
+            budget *= OuterMass;
+
         var spread = 10f + 2.6f * MathF.Sqrt(budget);
-        var rareChance = Math.Clamp(cluster.RareChance + cluster.RareChancePerKm * center.Position.Length() / 1000f, 0f, 1f);
+        var rareChance = Math.Clamp(cluster.RareChance + cluster.RareChancePerKm * km + (outer ? OuterRare : 0f), 0f, 1f);
+        var maxRocks = cluster.MaxRocks + (outer ? OuterRocks : 0);
         var remaining = budget;
         var planned = new List<(Vector2 Position, float Radius)>();
-        for (var attempt = 0; attempt < 60 && planned.Count < cluster.MaxRocks && remaining >= smallest * 0.5f; attempt++)
+        for (var attempt = 0; attempt < 60 && planned.Count < maxRocks && remaining >= smallest * 0.5f; attempt++)
         {
             var size = PickSize(sizes, remaining);
             var position = attempt == 0

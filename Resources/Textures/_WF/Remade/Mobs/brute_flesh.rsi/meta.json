@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/brute_flesh.dmi)",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "preview",
+      "directions": 4
+    },
+    {
+      "name": "brutef_chest",
+      "directions": 4
+    },
+    {
+      "name": "brutef_chest_lying"
+    },
+    {
+      "name": "brutef_head"
+    },
+    {
+      "name": "brutef_l_arm"
+    },
+    {
+      "name": "brutef_r_arm"
+    },
+    {
+      "name": "brutef_l_leg"
+    },
+    {
+      "name": "brutef_r_leg"
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

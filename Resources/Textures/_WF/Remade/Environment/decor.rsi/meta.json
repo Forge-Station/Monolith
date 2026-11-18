@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Gore, organs and veins from DS13-1.0 (https://github.com/DS-13-Dev-Team/DS13-1.0, icons/effects/blood.dmi and spacevines.dmi) and DS13-2.0 (https://github.com/DS-13-Dev-Team/DS13-2.0, necromorph_organ.dmi), recoloured; the rest drawn by Tools/_WF/Remade/port_environment.py",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sac1",
+      "delays": [
+        [
+          0.55,
+          0.35,
+          0.55,
+          0.9
+        ]
+      ]
+    },
+    {
+      "name": "sac2",
+      "delays": [
+        [
+          0.55,
+          0.35,
+          0.55,
+          0.9
+        ]
+      ]
+    },
+    {
+      "name": "sac3",
+      "delays": [
+        [
+          0.55,
+          0.35,
+          0.55,
+          0.9
+        ]
+      ]
+    },
+    {
+      "name": "spur1"
+    },
+    {
+      "name": "spur2"
+    },
+    {
+      "name": "spur3"
+    },
+    {
+      "name": "organs1",
+      "delays": [
+        [
+          0.7,
+          0.7
+        ]
+      ]
+    },
+    {
+      "name": "organs2",
+      "delays": [
+        [
+          0.7,
+          0.7
+        ]
+      ]
+    },
+    {
+      "name": "organs3",
+      "delays": [
+        [
+          0.7,
+          0.7
+        ]
+      ]
+    },
+    {
+      "name": "gore1"
+    },
+    {
+      "name": "gore2"
+    },
+    {
+      "name": "gore3"
+    },
+    {
+      "name": "gore4"
+    },
+    {
+      "name": "gore5"
+    },
+    {
+      "name": "gore6"
+    },
+    {
+      "name": "gore7"
+    },
+    {
+      "name": "gore8"
+    },
+    {
+      "name": "gore9"
+    },
+    {
+      "name": "remains"
+    },
+    {
+      "name": "mucus"
+    },
+    {
+      "name": "web1"
+    },
+    {
+      "name": "web2"
+    },
+    {
+      "name": "web3"
+    },
+    {
+      "name": "drip",
+      "delays": [
+        [
+          0.45,
+          0.45,
+          0.45,
+          0.45
+        ]
+      ]
+    },
+    {
+      "name": "screen1",
+      "delays": [
+        [
+          0.7,
+          0.12,
+          0.5,
+          0.18
+        ]
+      ]
+    },
+    {
+      "name": "screen2",
+      "delays": [
+        [
+          0.4,
+          0.15,
+          0.9,
+          0.12
+        ]
+      ]
+    },
+    {
+      "name": "haze1",
+      "delays": [
+        [
+          2.5,
+          2.5,
+          2.5,
+          2.5
+        ]
+      ]
+    },
+    {
+      "name": "haze2",
+      "delays": [
+        [
+          3.0,
+          3.0,
+          3.0,
+          3.0
+        ]
+      ]
+    }
+  ]
+}

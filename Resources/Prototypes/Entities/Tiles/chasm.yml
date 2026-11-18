@@ -34,7 +34,7 @@
     states:
     - !type:CornerSpriteSmoothing
       mask: [ chasm, walls ]
-      base: chasm_
+      base: chasm
       swapOuterBits: false
 
   - type: Physics

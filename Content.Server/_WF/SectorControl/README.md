@@ -4,8 +4,10 @@ Faction territory on the sector map. The sector is a grid of flat-top hexes (`wf
 the origin; a `wfSectorFaction` holds cells, and the shuttle console's MAP tab, the nav radar and the sector map
 window show them in the faction's colour. The module only keeps and shows territory: who claims what, and why, is up to a driver such as the
 Reaver campaign. Every cell has a callsign (`WFSectorHex.Callsign`, such as `N-13` for the origin) for
-announcements and the map. The sector is the cells whose centre lies within `WFSectorHex.SectorRadius` (30 km)
-of the origin, the grid the map outlines; a cell past it can't be claimed or contested.
+announcements and the map. The sector is the cells whose centre lies within `WFSectorHex.SectorRadius` (60 km)
+of the origin, the grid the map outlines; a cell past it can't be claimed or contested. Points of interest spawn at
+`nf14.worldgen.distance_modifier` (2) times the distances in their prototypes. The origin hex is held by NanoTrasen.
+A station tagged Imperial, TSF or Renegates holds the hex it appears in for that company.
 
 A company claims one cell with a beacon (`WFSectorBeacon`). The flatpack is unlocked by the universal technology
 `WFSectorBeacons` and printed at a protolathe or an engineering techfab. Anchored on a grid in the sector and
@@ -15,6 +17,11 @@ an NPC faction or an admin beacon already holds. Player beacons take damage only
 NPC beacons (`WFSectorBeaconImmortal`, or `immortal: true` with `autoActivate` and a `company`) take none. Destroying
 a beacon, or flying it out of its cell, frees the cell and the colour goes. A parked ship does not retake a cell a
 beacon still holds.
+
+A foreign crewed ship that stays in a held hex for ten seconds pays 500 spesos, once per stay, into the holding
+company's bank (`WFSectorTollSystem`). Its own ships pay nothing. Destroying a beacon tells every company the hex,
+at once. `WFSectorTradeSystem.Quote` is the later price tilt for a station moved into a held hex: the holder buys at
+0.9 and others at 1.15. It returns even prices until that move exists. Inside 30 km about a third of asteroid fields appear. Past 30 km a cluster is heavier and more often metallic.
 
 Players see held cells, borders and contested cells with their countdown on the map, and a legend line per faction
 that the driver writes. A crewed player ship that has been inside a faction's space for ten seconds is told "WARNING:
@@ -42,7 +49,7 @@ company. Such ships are left out of the faction's disputes and retakes and get n
 neutral station is not cut off by a blockade. `CrewedShips(map, faction)` lists the crewed ships without them.
 
 The sector map window shows the sector and nothing a shuttle console's MAP scan would not: the whole hex grid out to
-30 km with every cell's callsign, held and contested cells, the grids the MAP tab names (none hidden by IFF, and no
+60 km with every cell's callsign, held and contested cells, the grids the MAP tab names (none hidden by IFF, and no
 label-hidden ones, since the map has no console to detect them) as blips in their IFF colour (a ringed dot for a station,
 a diamond for a ship), one glyph per encounter and the player's own ship, from 1.5 km to 60 km either side of centre.
 A blip's name shows only while the cursor is on it, at any zoom. The server sends only territory;
@@ -78,13 +85,17 @@ Admins use `wf_sector status | claim <faction> <q> <r> | free <q> <r> | contest 
 
 - [`Content.Server/_WF/SectorControl/Commands/WFSectorCommand.cs`](Commands/WFSectorCommand.cs)
 - [`Content.Server/_WF/SectorControl/Components/WFSectorBeaconComponent.cs`](Components/WFSectorBeaconComponent.cs)
+- [`Content.Server/_WF/SectorControl/Components/WFSectorCompanyHomeComponent.cs`](Components/WFSectorCompanyHomeComponent.cs)
 - [`Content.Server/_WF/SectorControl/Components/WFSectorTerritoryComponent.cs`](Components/WFSectorTerritoryComponent.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorActivitySystem.cs`](Systems/WFSectorActivitySystem.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorBeaconSystem.cs`](Systems/WFSectorBeaconSystem.cs)
+- [`Content.Server/_WF/SectorControl/Systems/WFSectorCompanyHomeSystem.cs`](Systems/WFSectorCompanyHomeSystem.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorNoticeSystem.cs`](Systems/WFSectorNoticeSystem.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorProtectionSystem.cs`](Systems/WFSectorProtectionSystem.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorSyncSystem.cs`](Systems/WFSectorSyncSystem.cs)
 - [`Content.Server/_WF/SectorControl/Systems/WFSectorTerritorySystem.cs`](Systems/WFSectorTerritorySystem.cs)
+- [`Content.Server/_WF/SectorControl/Systems/WFSectorTollSystem.cs`](Systems/WFSectorTollSystem.cs)
+- [`Content.Server/_WF/SectorControl/Systems/WFSectorTradeSystem.cs`](Systems/WFSectorTradeSystem.cs)
 - [`Content.Server/_WF/SectorControl/WFSectorEvents.cs`](WFSectorEvents.cs)
 
 ### Shared

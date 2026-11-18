@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/necromorphs/brute.dmi)",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "preview"
+    },
+    {
+      "name": "brute_chest",
+      "directions": 4
+    },
+    {
+      "name": "brute_head",
+      "directions": 4
+    },
+    {
+      "name": "brute_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "brute_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "brute_l_leg",
+      "directions": 4
+    },
+    {
+      "name": "brute_r_leg",
+      "directions": 4
+    },
+    {
+      "name": "brute_chest_lying"
+    },
+    {
+      "name": "brute_head_lying"
+    },
+    {
+      "name": "brute_l_arm_lying"
+    },
+    {
+      "name": "brute_r_arm_lying"
+    },
+    {
+      "name": "brute_l_leg_lying"
+    },
+    {
+      "name": "brute_r_leg_lying"
+    },
+    {
+      "name": "preview_old"
+    },
+    {
+      "name": "brute_chest_old",
+      "directions": 4
+    },
+    {
+      "name": "brute_chest_lying_old"
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

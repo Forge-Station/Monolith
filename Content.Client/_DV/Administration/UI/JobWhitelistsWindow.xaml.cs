@@ -29,6 +29,7 @@ public sealed partial class JobWhitelistsWindow : FancyWindow
     public Action<ProtoId<GhostRolePrototype>, bool>? OnSetGhostRole; // Frontier
     public Action<bool>? OnSetGlobal; // Frontier
     public Action<string, bool>? OnSetCompany; // Forge-Change: company whitelist
+    public Action<string, bool>? OnSetCompanyOwner; // Forge-Change: company owners
 
     public JobWhitelistsWindow()
     {
@@ -125,8 +126,10 @@ public sealed partial class JobWhitelistsWindow : FancyWindow
             "Company whitelists",
             Color.FromHex("#8db9ff"),
             _proto,
-            state.CompanyWhitelists.Select(c => c.ToString()).ToHashSet());
+            state.CompanyWhitelists.Select(c => c.ToString()).ToHashSet(),
+            state.CompanyOwners.Select(c => c.ToString()).ToHashSet());
         companyPanel.OnSetCompany += (id, whitelisting) => OnSetCompany?.Invoke(id, whitelisting);
+        companyPanel.OnSetOwner += (id, owner) => OnSetCompanyOwner?.Invoke(id, owner);
         Companies.AddChild(companyPanel);
         // Forge-Change-end: company whitelist
     }

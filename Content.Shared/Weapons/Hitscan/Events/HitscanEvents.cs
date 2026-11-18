@@ -96,6 +96,17 @@ public record struct HitscanRaycastFiredEvent
     public bool Predicted;
 }
 
+/// <summary>
+/// Raised on the hitscan after <see cref="HitscanRaycastFiredEvent"/> handlers have run.
+/// Dodge owns that event on <c>HitscanBasicRaycastComponent</c>.
+/// </summary>
+[ByRefEvent]
+public readonly record struct HitscanRaycastNoticedEvent(
+    EntityCoordinates FromCoordinates,
+    EntityUid? HitEntity,
+    EntityUid? Shooter,
+    bool Canceled);
+
 [ByRefEvent]
 public record struct HitscanDamageDealtEvent
 {

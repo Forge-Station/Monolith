@@ -25,6 +25,7 @@ using MSLogLevel = Microsoft.Extensions.Logging.LogLevel;
 using Content.Shared._Common.Consent; // WOLFGATE
 using Content.Shared._Mono.Company;
 using Content.Server._Mono.Company; // Mono
+using Content.Shared._Forge.Company;
 
 namespace Content.Server.Database
 {
@@ -365,14 +366,64 @@ namespace Content.Server.Database
 
         // Mono
         #region Company
-        Task AddCompanyMember(Guid player, ProtoId<CompanyPrototype> company);
+        Task<bool> AddCompanyMember(Guid player, ProtoId<CompanyPrototype> company, int characterSlot, string characterName);
 
         Task<List<string>> GetPlayerCompanies(Guid player, CancellationToken cancel = default);
+        Task<CompanyMemberRecord?> GetCompanyMemberForCharacter(Guid player, int characterSlot, CancellationToken cancel = default);
         Task<IEnumerable<CompanyMemberRecord>> GetCompanyMembers(ProtoId<CompanyPrototype> company, CancellationToken cancel = default);
         Task<IEnumerable<CompanyMemberRecord>> GetAllCompanyMembers(CancellationToken cancel = default);
         Task<CompanyMemberRecord?> GetCompanyMember(ProtoId<CompanyPrototype> company, Guid player, CancellationToken cancel = default);
-        Task SetCompanyOwner(ProtoId<CompanyPrototype> company, Guid player, bool owner);
-        Task<bool> RemoveCompanyMember(Guid player, ProtoId<CompanyPrototype> company);
+        Task SetCompanyOwner(ProtoId<CompanyPrototype> company, Guid player, int characterSlot, bool owner);
+        Task SetCompanyMemberRole(ProtoId<CompanyPrototype> company, Guid player, int characterSlot, Guid? roleId);
+        Task<bool> RemoveCompanyMember(Guid player, ProtoId<CompanyPrototype> company, int? characterSlot = null);
+        Task<List<CompanyRole>> GetCompanyRoles(string companyId, CancellationToken cancel = default);
+        Task<CompanyRole?> GetCompanyRole(Guid roleId, CancellationToken cancel = default);
+        Task<CompanyRole> UpsertCompanyRole(CompanyRole role);
+        Task<bool> DeleteCompanyRole(Guid roleId);
+        Task EnsureDefaultCompanyRole(string companyId);
+        Task<int> GetCompanyBankBalance(string companyId, CancellationToken cancel = default);
+        Task<Dictionary<string, int>> GetAllCompanyBankBalances(CancellationToken cancel = default);
+        Task SetCompanyBankBalance(string companyId, int balance);
+        Task EnsureCompanyBankAccount(string companyId);
+        Task<List<CompanyRelation>> GetCompanyRelations(string companyId, CancellationToken cancel = default);
+        Task SetCompanyRelation(string companyA, string companyB, int relationType);
+        Task ClearCompanyRelation(string companyA, string companyB);
+        Task<CompanyInvitation> AddCompanyInvitation(CompanyInvitation invite);
+        Task<List<CompanyInvitation>> GetPendingInvitationsForPlayer(Guid player, CancellationToken cancel = default);
+        Task<List<CompanyInvitation>> GetPendingInvitationsForCompany(string companyId, CancellationToken cancel = default);
+        Task<CompanyInvitation?> GetCompanyInvitation(Guid inviteId, CancellationToken cancel = default);
+        Task SetCompanyInvitationStatus(Guid inviteId, int status);
+        Task<bool> DeleteCompanyInvitation(Guid inviteId);
+        Task<int> PurgeResolvedCompanyInvitations(CancellationToken cancel = default);
+        Task<bool> HasPendingCompanyInvitation(string companyId, Guid targetUserId, CancellationToken cancel = default);
+        Task<int> CountPendingInvitationsForCompany(string companyId, CancellationToken cancel = default);
+        Task AddCompanyLog(CompanyLog log, int keep = CompanyOrgLimits.MaxLogsPerCompany);
+        Task<List<CompanyLog>> GetCompanyLogs(string companyId, int limit = 100, CancellationToken cancel = default);
+        Task<string> GetCompanyBulletin(string companyId, CancellationToken cancel = default);
+        Task SetCompanyBulletin(string companyId, string text);
+        Task EnsureCompanyDevelopmentTable();
+        Task<CompanyDevelopmentRecord> GetCompanyDevelopment(string companyId, CancellationToken cancel = default);
+        Task SetCompanyDevelopment(string companyId, string projects, string? contractId, bool contractFunded);
+        Task AddCompanyResearchPoints(string companyId, long amount);
+        Task EnsureCompanyPeaceTable();
+        Task<List<CompanyPeaceTermRecord>> GetCompanyPeaceTerms(CancellationToken cancel = default);
+        Task UpsertCompanyPeaceTerm(string companyId, string otherId, bool freeOffer, int ransomPercent);
+        Task DeleteCompanyPeaceTerms(string companyA, string companyB);
+        Task EnsureCompanyAllianceTable();
+        Task<List<CompanyAllianceOfferRecord>> GetCompanyAllianceOffers(CancellationToken cancel = default);
+        Task AddCompanyAllianceOffer(string companyId, string otherId);
+        Task DeleteCompanyAllianceOffer(string companyId, string otherId);
+        Task DeleteCompanyAlliancePair(string companyA, string companyB);
+        Task EnsureCompanyAllyWarTable();
+        Task<List<CompanyAllyWarRecord>> GetCompanyAllyWars(CancellationToken cancel = default);
+        Task SetCompanyAllyWar(string companyId, bool autoJoin);
+        Task EnsureCompanyVaultTable();
+        Task<CompanyVaultRecord> GetCompanyVault(string companyId, CancellationToken cancel = default);
+        Task SetCompanyVault(string companyId, int width, int height, IReadOnlyList<string> items);
+        Task EnsureCompanyJobTable();
+        Task<List<CompanyJobRecord>> GetCompanyJobs(CancellationToken cancel = default);
+        Task UpsertCompanyJob(CompanyJobRecord job);
+        Task DeleteCompanyJob(string jobId);
 
         #endregion
 
@@ -1128,16 +1179,22 @@ namespace Content.Server.Database
         }
 
         // Mono-Start
-        public Task AddCompanyMember(Guid player, ProtoId<CompanyPrototype> company)
+        public Task<bool> AddCompanyMember(Guid player, ProtoId<CompanyPrototype> company, int characterSlot, string characterName)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.AddCompanyMember(player, company));
+            return RunDbCommand(() => _db.AddCompanyMember(player, company, characterSlot, characterName));
         }
 
         public Task<List<string>> GetPlayerCompanies(Guid player, CancellationToken cancel = default)
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetPlayerCompanies(player, cancel));
+        }
+
+        public Task<CompanyMemberRecord?> GetCompanyMemberForCharacter(Guid player, int characterSlot, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyMemberForCharacter(player, characterSlot, cancel));
         }
 
         public Task<IEnumerable<CompanyMemberRecord>> GetCompanyMembers(ProtoId<CompanyPrototype> company, CancellationToken cancel = default)
@@ -1158,16 +1215,310 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetCompanyMember(company, player, cancel));
         }
 
-        public Task SetCompanyOwner(ProtoId<CompanyPrototype> company, Guid player, bool owner)
+        public Task SetCompanyOwner(ProtoId<CompanyPrototype> company, Guid player, int characterSlot, bool owner)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.SetCompanyOwner(company, player, owner));
+            return RunDbCommand(() => _db.SetCompanyOwner(company, player, characterSlot, owner));
         }
 
-        public Task<bool> RemoveCompanyMember(Guid player, ProtoId<CompanyPrototype> company)
+        public Task SetCompanyMemberRole(ProtoId<CompanyPrototype> company, Guid player, int characterSlot, Guid? roleId)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.RemoveCompanyMember(player, company));
+            return RunDbCommand(() => _db.SetCompanyMemberRole(company, player, characterSlot, roleId));
+        }
+
+        public Task<bool> RemoveCompanyMember(Guid player, ProtoId<CompanyPrototype> company, int? characterSlot = null)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveCompanyMember(player, company, characterSlot));
+        }
+
+        public Task<List<CompanyRole>> GetCompanyRoles(string companyId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyRoles(companyId, cancel));
+        }
+
+        public Task<CompanyRole?> GetCompanyRole(Guid roleId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyRole(roleId, cancel));
+        }
+
+        public Task<CompanyRole> UpsertCompanyRole(CompanyRole role)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpsertCompanyRole(role));
+        }
+
+        public Task<bool> DeleteCompanyRole(Guid roleId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCompanyRole(roleId));
+        }
+
+        public Task EnsureDefaultCompanyRole(string companyId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EnsureDefaultCompanyRole(companyId));
+        }
+
+        public Task<int> GetCompanyBankBalance(string companyId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyBankBalance(companyId, cancel));
+        }
+
+        public Task<Dictionary<string, int>> GetAllCompanyBankBalances(CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetAllCompanyBankBalances(cancel));
+        }
+
+        public Task SetCompanyBankBalance(string companyId, int balance)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCompanyBankBalance(companyId, balance));
+        }
+
+        public Task EnsureCompanyBankAccount(string companyId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EnsureCompanyBankAccount(companyId));
+        }
+
+        public Task<List<CompanyRelation>> GetCompanyRelations(string companyId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyRelations(companyId, cancel));
+        }
+
+        public Task SetCompanyRelation(string companyA, string companyB, int relationType)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCompanyRelation(companyA, companyB, relationType));
+        }
+
+        public Task ClearCompanyRelation(string companyA, string companyB)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.ClearCompanyRelation(companyA, companyB));
+        }
+
+        public Task<CompanyInvitation> AddCompanyInvitation(CompanyInvitation invite)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddCompanyInvitation(invite));
+        }
+
+        public Task<List<CompanyInvitation>> GetPendingInvitationsForPlayer(Guid player, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPendingInvitationsForPlayer(player, cancel));
+        }
+
+        public Task<List<CompanyInvitation>> GetPendingInvitationsForCompany(string companyId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPendingInvitationsForCompany(companyId, cancel));
+        }
+
+        public Task<CompanyInvitation?> GetCompanyInvitation(Guid inviteId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyInvitation(inviteId, cancel));
+        }
+
+        public Task SetCompanyInvitationStatus(Guid inviteId, int status)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCompanyInvitationStatus(inviteId, status));
+        }
+
+        public Task<bool> DeleteCompanyInvitation(Guid inviteId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCompanyInvitation(inviteId));
+        }
+
+        public Task<int> PurgeResolvedCompanyInvitations(CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.PurgeResolvedCompanyInvitations(cancel));
+        }
+
+        public Task<bool> HasPendingCompanyInvitation(string companyId, Guid targetUserId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.HasPendingCompanyInvitation(companyId, targetUserId, cancel));
+        }
+
+        public Task<int> CountPendingInvitationsForCompany(string companyId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.CountPendingInvitationsForCompany(companyId, cancel));
+        }
+
+        public Task AddCompanyLog(CompanyLog log, int keep = CompanyOrgLimits.MaxLogsPerCompany)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddCompanyLog(log, keep));
+        }
+
+        public Task<List<CompanyLog>> GetCompanyLogs(string companyId, int limit = 100, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyLogs(companyId, limit, cancel));
+        }
+
+        public Task<string> GetCompanyBulletin(string companyId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyBulletin(companyId, cancel));
+        }
+
+        public Task SetCompanyBulletin(string companyId, string text)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCompanyBulletin(companyId, text));
+        }
+
+        public Task EnsureCompanyDevelopmentTable()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EnsureCompanyDevelopmentTable());
+        }
+
+        public Task<CompanyDevelopmentRecord> GetCompanyDevelopment(string companyId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyDevelopment(companyId, cancel));
+        }
+
+        public Task SetCompanyDevelopment(string companyId, string projects, string? contractId, bool contractFunded)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCompanyDevelopment(companyId, projects, contractId, contractFunded));
+        }
+
+        public Task AddCompanyResearchPoints(string companyId, long amount)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddCompanyResearchPoints(companyId, amount));
+        }
+
+        public Task EnsureCompanyPeaceTable()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EnsureCompanyPeaceTable());
+        }
+
+        public Task<List<CompanyPeaceTermRecord>> GetCompanyPeaceTerms(CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyPeaceTerms(cancel));
+        }
+
+        public Task UpsertCompanyPeaceTerm(string companyId, string otherId, bool freeOffer, int ransomPercent)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpsertCompanyPeaceTerm(companyId, otherId, freeOffer, ransomPercent));
+        }
+
+        public Task DeleteCompanyPeaceTerms(string companyA, string companyB)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCompanyPeaceTerms(companyA, companyB));
+        }
+
+        public Task EnsureCompanyAllianceTable()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EnsureCompanyAllianceTable());
+        }
+
+        public Task<List<CompanyAllianceOfferRecord>> GetCompanyAllianceOffers(CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyAllianceOffers(cancel));
+        }
+
+        public Task AddCompanyAllianceOffer(string companyId, string otherId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddCompanyAllianceOffer(companyId, otherId));
+        }
+
+        public Task DeleteCompanyAllianceOffer(string companyId, string otherId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCompanyAllianceOffer(companyId, otherId));
+        }
+
+        public Task DeleteCompanyAlliancePair(string companyA, string companyB)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCompanyAlliancePair(companyA, companyB));
+        }
+
+        public Task EnsureCompanyAllyWarTable()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EnsureCompanyAllyWarTable());
+        }
+
+        public Task<List<CompanyAllyWarRecord>> GetCompanyAllyWars(CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyAllyWars(cancel));
+        }
+
+        public Task SetCompanyAllyWar(string companyId, bool autoJoin)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCompanyAllyWar(companyId, autoJoin));
+        }
+
+        public Task EnsureCompanyVaultTable()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EnsureCompanyVaultTable());
+        }
+
+        public Task<CompanyVaultRecord> GetCompanyVault(string companyId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyVault(companyId, cancel));
+        }
+
+        public Task SetCompanyVault(string companyId, int width, int height, IReadOnlyList<string> items)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCompanyVault(companyId, width, height, items));
+        }
+
+        public Task EnsureCompanyJobTable()
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.EnsureCompanyJobTable());
+        }
+
+        public Task<List<CompanyJobRecord>> GetCompanyJobs(CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCompanyJobs(cancel));
+        }
+
+        public Task UpsertCompanyJob(CompanyJobRecord job)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpsertCompanyJob(job));
+        }
+
+        public Task DeleteCompanyJob(string jobId)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCompanyJob(jobId));
         }
         // Mono-End
 

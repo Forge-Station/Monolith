@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7, Baystation 12 at commit https://github.com/Baystation12/Baystation12/commit/64fcc7090fbf1d9255446154730a57586cec3355, CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/d5306e2724d6006e69439d9cf64a2b166fe4ed15, Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22, Nebula at commit https://github.com/NebulaSS13/Nebula/commit/d7a668ec0268164d33a13481e2e5ce307996ff76, VOREStation at commit https://github.com/VOREStation/VOREStation/commit/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bedroll"
+    },
+    {
+      "name": "bedroll_comfy_o",
+      "directions": 8
+    },
+    {
+      "name": "bedroll_comfy_o_blue",
+      "directions": 8
+    },
+    {
+      "name": "bedroll_comfy_o_green",
+      "directions": 8
+    },
+    {
+      "name": "bedroll_comfy_o_pink",
+      "directions": 8
+    },
+    {
+      "name": "bedroll_comfy_o_red",
+      "directions": 8
+    },
+    {
+      "name": "bedroll_comfy_o_yellow",
+      "directions": 8
+    },
+    {
+      "name": "dirty_mattress"
+    },
+    {
+      "name": "kbraid_hammock_upper"
+    },
+    {
+      "name": "mattress0",
+      "directions": 4
+    },
+    {
+      "name": "nest_chair"
+    },
+    {
+      "name": "nest_chair_large_coyote"
+    },
+    {
+      "name": "nest_chair_large_vore"
+    },
+    {
+      "name": "pillowpile_large_black"
+    },
+    {
+      "name": "pillowpile_large_black_overlay"
+    },
+    {
+      "name": "pillowpile_large_green"
+    },
+    {
+      "name": "pillowpile_large_red"
+    },
+    {
+      "name": "pillowpile_large_teal_overlay"
+    },
+    {
+      "name": "pillowpile_large_white"
+    },
+    {
+      "name": "pillowpile_large_white_overlay"
+    },
+    {
+      "name": "pillowpile_large_yellow_overlay"
+    },
+    {
+      "name": "sleepingbag_floor"
+    }
+  ]
+}

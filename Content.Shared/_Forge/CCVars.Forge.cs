@@ -43,6 +43,12 @@ public sealed class ForgeCCVars
         CVarDef.Create("voice.barks_volume", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
     #endregion
 
+    /// <summary>
+    /// Selected company PDA UI palette prototype id. Colored palettes require sponsor.
+    /// </summary>
+    public static readonly CVarDef<string> CompanyUiPalette =
+        CVarDef.Create("forge.company_ui_palette", "CompanyUiGrey", CVar.CLIENTONLY | CVar.ARCHIVE);
+
     #region Discord
     public static readonly CVarDef<string> DiscordApiUrl =
         CVarDef.Create("jerry.discord_api_url", "", CVar.CONFIDENTIAL | CVar.SERVERONLY);

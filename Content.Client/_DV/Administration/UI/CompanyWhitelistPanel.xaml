@@ -1,4 +1,4 @@
- <!-- Forge-Change-full: company whitelist -->
+<!-- Forge-Change-full: company whitelist -->
 <PanelContainer
         xmlns="https://spacestation14.io"
         StyleClasses="BackgroundDark"
@@ -6,6 +6,6 @@
         Margin="4">
     <BoxContainer Orientation="Vertical">
         <CheckBox Name="CompaniesSet"/>
-        <GridContainer Name="CompaniesContainer" Columns="4"/>
+        <GridContainer Name="CompaniesContainer" Columns="2"/>
     </BoxContainer>
 </PanelContainer>

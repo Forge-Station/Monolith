@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseShipVoucher
+  id: CompanyShipVoucher
+  name: company ship voucher
+  description: A treasury-paid voucher for one ship from a shipyard console.
+  components:
+  - type: ShipyardVoucher
+    consoleType: Shipyard
+    destroyOnEmpty: true
+    redemptionsLeft: 1

@@ -36,6 +36,7 @@
         - MobLayer
   - type: Body
     prototype: Felionoid
+    requiredLegs: 2
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Vox
@@ -95,7 +96,6 @@
   - type: Icon
     sprite: _Starlight/Mobs/Species/Felionoid/parts.rsi
     state: felionoid
-    requiredLegs: 2
   - type: MobThresholds
     allowRevives: true
     thresholds:

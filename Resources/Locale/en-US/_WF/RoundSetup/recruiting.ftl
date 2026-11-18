@@ -1,13 +1,10 @@
-wf-round-setup-row-recruiting = Recruiting
-wf-round-setup-row-recruiting-tooltip = This crew is looking for members.
-
 wf-round-setup-scenario-formed = Formed Crew
 wf-round-setup-formed-description = A crew formed mid-round around characters already playing. Nobody respawns or changes gear. Pick up a ship from a member's deed under Your ship.
 wf-round-setup-formed-create = Form a crew
 wf-round-setup-formed-create-help = You're already in the round, so the crew forms around your current character. Add openings on the Crew page, then invite players or post for crew.
 wf-round-setup-formed-no-ship = This crew has no ship to spawn on yet.
 
-wf-round-setup-live-join-help = You join with the character you're playing now. Your ID, job and gear stay as they are; you get the crew radio (:k) and crew ship access.
+wf-round-setup-live-join-help = You join with the character you're playing now. Your ID, job and gear stay as they are; you get the crew radio (:c) and crew ship access.
 wf-round-setup-live-unavailable = Characters already in the round can only join Formed crews and launched Ship crews.
 
 wf-round-setup-recruiting = Recruiting

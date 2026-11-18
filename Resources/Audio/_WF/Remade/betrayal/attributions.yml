@@ -1,0 +1,146 @@
+# GENERATED START: Tools/_WF/Remade/port_betrayal.py
+- files: ["music_credits_rock.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/music/ds13/credits_rock.ogg, re-encoded at a lower bitrate"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["music_credits_violin.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/music/ds13/credits_violin.ogg, re-encoded at a lower bitrate"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["music_danik_speech.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/music/ds13/danik_speech.ogg, re-encoded at a lower bitrate"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["music_nicole.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/music/ds13/nicole.ogg, re-encoded at a lower bitrate"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["music_pensive.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/music/ds13/pensive.ogg, re-encoded at a lower bitrate"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["music_unitology.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/music/ds13/unitology.ogg, re-encoded at a lower bitrate"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["stinger_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Cut from DS13-2.0 sound/music/ds13/unitology.ogg at 99.7 s"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["stinger_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Cut from DS13-2.0 sound/music/ds13/pensive.ogg at 83.7 s"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["stinger_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Cut from DS13-2.0 sound/music/ds13/nicole.ogg at 61.2 s"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["knock_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0 sound/effects/impacts/thud1.ogg, low-passed and downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["knock_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0 sound/effects/impacts/thud2.ogg, low-passed and downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["knock_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0 sound/effects/impacts/thud3.ogg, low-passed and downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["knock_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0 sound/effects/bang.ogg, low-passed and downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["scrape_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0 sound/effects/metalscrape1.ogg, low-passed and downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["scrape_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0 sound/effects/metalscrape2.ogg, low-passed and downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["scrape_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0 sound/effects/metalscrape3.ogg, low-passed and downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-1.0"
+
+- files: ["step_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/plating1.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["step_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/plating2.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["step_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/plating3.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["step_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/plating4.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["step_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/plating5.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["step_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/floor1.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["step_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/floor2.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["step_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/floor3.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["step_9.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/floor4.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["step_10.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0 sound/effects/footstep/floor5.ogg, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["breath_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Synthesised for Wolfgate with ffmpeg anoisesrc (pink noise, filtered, with a breath envelope)"
+  source: "https://github.com/VanguardControl/Wolfgate"
+
+- files: ["breath_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Synthesised for Wolfgate with ffmpeg anoisesrc (pink noise, filtered, with a breath envelope)"
+  source: "https://github.com/VanguardControl/Wolfgate"
+
+- files: ["breath_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Synthesised for Wolfgate with ffmpeg anoisesrc (pink noise, filtered, with a breath envelope)"
+  source: "https://github.com/VanguardControl/Wolfgate"
+# GENERATED END

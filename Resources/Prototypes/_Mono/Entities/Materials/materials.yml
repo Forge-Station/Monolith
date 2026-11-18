@@ -192,6 +192,48 @@
   - type: Stack
     count: 10
 
+- type: entity
+  parent: MaterialBase
+  id: SheetPlastitaniumGlass
+  name: plastitanium glass
+  description: A sheet of plastitanium glass.
+  suffix: 1
+  components:
+  - type: Sprite
+    sprite: _Mono/Objects/Materials/plastitaniumglass.rsi
+    state: plastitaniumglass
+    layers:
+    - state: plastitaniumglass
+      map: ["base"]
+  - type: Tag
+    tags:
+    - Sheet
+  - type: Item
+    sprite: _Mono/Objects/Materials/plastitaniumglass.rsi
+    heldPrefix: plastitaniumglass
+  - type: Stack
+    stackType: PlastitaniumGlass
+    count: 1
+    baseLayer: base
+    layerStates:
+    - plastitaniumglass
+    - plastitaniumglass_2
+    - plastitaniumglass_3
+  - type: Material
+  - type: Appearance
+  - type: PhysicalComposition
+    materialComposition:
+      Plastitanium: 50
+      Glass: 50
+
+- type: entity
+  parent: SheetPlastitaniumGlass
+  id: SheetPlastitaniumGlass1
+  suffix: 1
+  components:
+  - type: Stack
+    count: 1
+
 # Misc
 
 - type: entity

@@ -415,11 +415,12 @@
   components:
   - type: Sprite
     sprite: /Textures/_WF/Planets/Effects/thunderbolt.rsi
-    state: thunderbolt
     offset: 0, 1
     drawdepth: Effects
     noRot: true
-    shader: unshaded
+    layers:
+    - state: thunderbolt
+      shader: unshaded
   - type: PointLight
     radius: 14
     energy: 10
@@ -436,12 +437,13 @@
   components:
   - type: Sprite
     sprite: /Textures/_WF/Planets/Effects/thunderbolt.rsi
-    state: thunderbolt
     offset: 0, 1
     drawdepth: Effects
     noRot: true
-    shader: unshaded
-    color: "#dfe8ffcc"
+    layers:
+    - state: thunderbolt
+      shader: unshaded
+      color: "#dfe8ffcc"
   - type: PointLight
     radius: 10
     energy: 6

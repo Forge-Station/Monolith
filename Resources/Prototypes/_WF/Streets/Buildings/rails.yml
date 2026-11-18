@@ -55,8 +55,6 @@
   - type: Sprite
     sprite: _WF/Streets/CMU/Structures/concretebarrier.rsi
     state: concrete
-  #- type: VehicleSmashable
-    minDestroyWeightClass: Heavy
   - type: Damageable
     damageModifierSet: StructuralMetallic
   - type: Destructible

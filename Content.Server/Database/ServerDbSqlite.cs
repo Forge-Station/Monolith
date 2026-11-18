@@ -49,6 +49,8 @@ namespace Content.Server.Database
 
             if (synchronous)
             {
+                CompanyOrganizationMigration.MarkAppliedIfSchemaExists(
+                    prefsCtx, "20261116065002_CompanyOrganization", postgres: false);
                 prefsCtx.Database.Migrate();
                 _dbReadyTask = Task.CompletedTask;
                 prefsCtx.Dispose();
@@ -57,6 +59,8 @@ namespace Content.Server.Database
             {
                 _dbReadyTask = Task.Run(() =>
                 {
+                    CompanyOrganizationMigration.MarkAppliedIfSchemaExists(
+                        prefsCtx, "20261116065002_CompanyOrganization", postgres: false);
                     prefsCtx.Database.Migrate();
                     prefsCtx.Dispose();
                 });

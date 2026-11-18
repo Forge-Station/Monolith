@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Created by EmoGarbage, reshaded by Checkraze, resprited by Aelout",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon-1",
+      "directions": 4
+    },
+    {
+      "name": "printing",
+      "delays": [[0.25, 0.25, 0.25, 0.25]]
+    },
+    {
+      "name": "unshaded-1",
+      "directions": 4
+    }
+  ]
+}

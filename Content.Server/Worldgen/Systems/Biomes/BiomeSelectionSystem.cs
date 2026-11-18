@@ -1,4 +1,7 @@
 using System.Linq;
+using Content.Server._Forge.BiomeSystem;
+using Content.Server._Forge.Worldgen.Components; // Forge-Change
+// Forge-Change
 using Content.Server.Worldgen.Components;
 using Content.Server.Worldgen.Prototypes;
 using Robust.Shared.Prototypes;
@@ -20,30 +23,30 @@ public sealed partial class BiomeSelectionSystem : BaseWorldSystem
     {
         SubscribeLocalEvent<BiomeSelectionComponent, ComponentStartup>(OnBiomeSelectionStartup);
         SubscribeLocalEvent<BiomeSelectionComponent, WorldChunkAddedEvent>(OnWorldChunkAdded);
+        SubscribeLocalEvent<BiomeSelectionComponent, BiomeControlChangedEvent>(OnRefresh); //Forge-Change
     }
+
+    //Forge-Change-Start
+    private void OnRefresh(EntityUid uid, BiomeSelectionComponent component, BiomeControlChangedEvent args)
+    {
+        RefreshBiomeChunks(uid);
+    }
+    //Forge-Change-End
 
     private void OnWorldChunkAdded(EntityUid uid, BiomeSelectionComponent component, ref WorldChunkAddedEvent args)
     {
-        var coords = args.Coords;
-        var lengthSquared = WorldGen.ChunkToWorldCoordsCentered(coords).LengthSquared(); // Frontier: cache world coords of center of chunk
+        //Forge-Change-Start
+        var biome = SelectBiome(args.Chunk, args.Coords, component);
 
-        foreach (var biomeId in component.Biomes)
+        if (biome == null)
         {
-            var biome = _proto.Index<BiomePrototype>(biomeId);
-
-            // Frontier: check range
-            if (!CheckBiomeRange(biome, lengthSquared))
-                continue;
-            // End Frontier
-
-            if (!CheckBiomeValidity(args.Chunk, biome, coords))
-                continue;
-
-            biome.Apply(args.Chunk, _ser, EntityManager);
+            Log.Error($"Biome selection ran out of biomes to select? See biomes list: {component.Biomes}");
             return;
         }
 
-        Log.Error($"Biome selection ran out of biomes to select? See biomes list: {component.Biomes}");
+        biome.Apply(args.Chunk, _ser, EntityManager);
+        AddComp(args.Chunk, new CurrentBiomeComponent { BiomeId = biome.ID });
+        //Forge-Change-End
     }
 
 
@@ -53,6 +56,38 @@ public sealed partial class BiomeSelectionSystem : BaseWorldSystem
             .OrderByDescending(x => x.Priority)
             .Select(x => x.Id)
             .ToList();
+
+    //Forge-Change-Start
+    private BiomePrototype? SelectBiome(EntityUid chunk, Vector2i coords, BiomeSelectionComponent selection)
+    {
+        var lengthSquared = WorldGen.ChunkToWorldCoordsCentered(coords).LengthSquared();
+        return selection.Biomes
+            .Select(biomeId => _proto.Index<BiomePrototype>(biomeId))
+            .Where(biome => CheckBiomeRange(biome, lengthSquared))
+            .FirstOrDefault(biome => CheckBiomeValidity(chunk, biome, coords));
+    }
+
+    private void RefreshBiomeChunks(EntityUid map)
+    {
+        if (!map.IsValid())
+            return;
+
+        if (!TryComp<BiomeSelectionComponent>(map, out var selection))
+            return;
+
+        if (!TryComp<WorldControllerComponent>(map, out var controller))
+            return;
+
+        foreach (var (coords, chunk) in controller.Chunks)
+        {
+            if (SelectBiome(chunk, coords, selection) is not { } biome)
+                continue;
+
+            if (TryComp<CurrentBiomeComponent>(chunk, out var appliedBiomeComponent) && appliedBiomeComponent.BiomeId != biome.ID)
+                QueueDel(chunk);
+        }
+    }
+    // Forge-Change-End
 
     // Frontier: check that a given point (passed as the square of its length) meets the range requirements of a biome
     private bool CheckBiomeRange(BiomePrototype biome, float centerLengthSquared)

@@ -238,7 +238,6 @@ namespace Content.Shared.Preferences
                 other.ScreamVoice, other.LaughVoice)
                 // WOLFGATE END
         {
-            HeadshotUrl = other.HeadshotUrl; // WOLFGATE(Headshot)
             MismatchedParts = other.MismatchedParts; // WOLFGATE(Species)
             CustomMarkings = new(other.CustomMarkings); // WOLFGATE(CustomMarkings)
             LegStance = other.LegStance; // WOLFGATE(LegStyle)
@@ -281,7 +280,6 @@ namespace Content.Shared.Preferences
                 other.LaughVoice)
                 // WOLFGATE END
         {
-            HeadshotUrl = other.HeadshotUrl; // WOLFGATE(Headshot)
             MismatchedParts = other.MismatchedParts; // WOLFGATE(Species)
             CustomMarkings = new(other.CustomMarkings); // WOLFGATE(CustomMarkings)
             LegStance = other.LegStance; // WOLFGATE(LegStyle)
@@ -622,7 +620,6 @@ namespace Content.Shared.Preferences
             if (Nationality != other.Nationality) return false;
             if (Company != other.Company) return false;
             if (CustomSpeciesName != other.CustomSpeciesName) return false; // WOLFGATE(Humanoid)
-            if (HeadshotUrl != other.HeadshotUrl) return false; // WOLFGATE(Headshot)
             if (MismatchedParts != other.MismatchedParts) return false; // WOLFGATE(Species)
             if (!CustomMarkingsEqual(other)) return false; // WOLFGATE(CustomMarkings)
             if (LegStance != other.LegStance) return false; // WOLFGATE(LegStyle)
@@ -826,7 +823,6 @@ namespace Content.Shared.Preferences
                 .Trim();
             // WOLFGATE END
 
-            EnsureHeadshotValid(); // WOLFGATE(Headshot)
             EnsureCustomMarkingsValid(configManager); // WOLFGATE(CustomMarkings)
             EnsureValidEmoteVoices(prototypeManager); // WOLFGATE(EmoteVoices)
             SpeechVoice = (SpeechVoice ?? new SpeechVoice()).Clamped(); // WOLFGATE(Voice): out-of-range sliders come back inside their range; crafted network data can deliver null
@@ -976,7 +972,6 @@ namespace Content.Shared.Preferences
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(Company); // WOLFGATE: the company is part of the hash
             hashCode.Add(CustomSpeciesName); // WOLFGATE(Humanoid)
-            hashCode.Add(HeadshotUrl); // WOLFGATE(Headshot)
             hashCode.Add(MismatchedParts); // WOLFGATE(Species)
             hashCode.Add(CustomMarkings.Count); // WOLFGATE(CustomMarkings)
             hashCode.Add((int) LegStance); // WOLFGATE(LegStyle)

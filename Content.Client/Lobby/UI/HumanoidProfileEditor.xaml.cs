@@ -542,7 +542,6 @@ namespace Content.Client.Lobby.UI
             #endregion Markings
 
             RefreshFlavorText();
-            InitializeHeadshot(); // WOLFGATE(Headshot)
             InitializeCustomMarkings(); // WOLFGATE(CustomMarkings)
             InitializeMismatchedParts(); // WOLFGATE(Species)
             InitializeBiotype(); // WOLFGATE(Biotype)
@@ -1270,7 +1269,6 @@ namespace Content.Client.Lobby.UI
 
             UpdateNameEdit();
             UpdateFlavorTextEdit();
-            UpdateHeadshot(); // WOLFGATE(Headshot)
             UpdateCustomMarkings(); // WOLFGATE(CustomMarkings)
             UpdateMismatchedParts(); // WOLFGATE(Species)
             UpdateBiotype(); // WOLFGATE(Biotype)
@@ -1889,7 +1887,6 @@ namespace Content.Client.Lobby.UI
             _loadoutWindow?.Dispose();
             _loadoutWindow = null;
             CloseCustomJobTitle(); // WOLFGATE(Roles): close the custom job title window
-            CloseHeadshotWindow(); // WOLFGATE(Headshot)
             CloseCustomMarkings(); // WOLFGATE(CustomMarkings)
             _companyManager.CatalogUpdated -= OnCompanyCatalogUpdated;
 

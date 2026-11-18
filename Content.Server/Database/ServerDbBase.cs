@@ -326,7 +326,6 @@ namespace Content.Server.Database
                 EmoteVoiceRules.FromStored(profile.LaughVoice))
                 // WOLFGATE END
             {
-                HeadshotUrl = profile.HeadshotUrl ?? string.Empty, // WOLFGATE(Headshot)
                 MismatchedParts = profile.MismatchedParts, // WOLFGATE(Species)
                 CustomMarkings = CustomMarkingRules.FromStored(profile.CustomMarkings), // WOLFGATE(CustomMarkings)
                 LegStance = (LegStance) profile.LegStance, // WOLFGATE(LegStyle)
@@ -428,7 +427,6 @@ namespace Content.Server.Database
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
             profile.Company = humanoid.Company;
             profile.CustomSpeciesName = humanoid.CustomSpeciesName; // WOLFGATE(Humanoid)
-            profile.HeadshotUrl = humanoid.HeadshotUrl; // WOLFGATE(Headshot)
             profile.MismatchedParts = humanoid.MismatchedParts; // WOLFGATE(Species)
             profile.CustomMarkings = CustomMarkingRules.ToStored(humanoid.CustomMarkings); // WOLFGATE(CustomMarkings)
             profile.LegStance = (int) humanoid.LegStance; // WOLFGATE(LegStyle)

@@ -126,5 +126,5 @@ public record struct HitscanDamageDealtEvent
 /// Raised on an entity struck by a hitscan, after ship shields intercept it.
 /// </summary>
 [ByRefEvent]
-public record struct HitscanRaycastStrikeEvent(EntityUid Hitscan, EntityUid Gun, EntityUid? Shooter);
+public record struct HitscanRaycastStrikeEvent(EntityUid Hitscan, EntityUid Gun, EntityUid? Shooter, EntityCoordinates FromCoordinates);
 // WOLFGATE END

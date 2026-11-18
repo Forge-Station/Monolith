@@ -1197,7 +1197,36 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, origin, channel, voiceGetRange, recipients));
+        FilterRecipientsByVisibilityLayer(channel, source, recipients);
         return recipients;
+    }
+
+    public void FilterRecipientsByVisibilityLayer(
+        ChatChannel channel,
+        EntityUid source,
+        Dictionary<ICommonSession, ICChatRecipientData> recipients)
+    {
+        if (channel == ChatChannel.LOOC || channel == ChatChannel.OOC)
+            return;
+
+        if (!TryComp<VisibilityComponent>(source, out var visibility) || visibility.Layer == 1)
+            return;
+
+        foreach (var session in recipients.Keys.ToArray())
+        {
+            if (session.AttachedEntity is { } listener)
+            {
+                if (TryComp<VisibilityComponent>(listener, out var listenerVisibility) &&
+                    listenerVisibility.Layer == visibility.Layer)
+                    continue;
+
+                if (TryComp<EyeComponent>(listener, out var eye) &&
+                    (eye.VisibilityMask & visibility.Layer) == visibility.Layer)
+                    continue;
+            }
+
+            recipients.Remove(session);
+        }
     }
 
     private EntityUid ResolveLocalSpeechOrigin(EntityUid speaker)

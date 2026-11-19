@@ -1,0 +1,7 @@
+- type: radioChannel
+  id: WFAsf
+  name: wf-asf-radio
+  keycode: '7'
+  frequency: 1987
+  color: "#C79DD0"
+  longRange: true

@@ -1,0 +1,61 @@
+- type: guideEntry
+  id: WFRuleConflictFiveDeclaringWar
+  name: guide-entry-wf-rule-conflict-five-declaring-war
+  text: "/ServerInfo/_WF/ColdWar/Guidebook/Rules/Conflict/Five_DeclaringWar.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: WFPdvStandingOrders
+  name: guide-entry-wf-pdv-standing-orders
+  text: "/ServerInfo/_WF/ColdWar/Guidebook/Factions/PDV_StandingOrders.xml"
+
+- type: guideEntry
+  id: WFRuleConflictSixNewPlayers
+  name: guide-entry-wf-rule-conflict-six-new-players
+  text: "/ServerInfo/_WF/Newbie/Guidebook/Rules/Conflict/Six_NewPlayers.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: Canine
+  name: species-name-canine
+  text: "/ServerInfo/_WF/Guidebook/Mobs/Canine.xml"
+
+# The synthetic repair guide, a child of the Medical guide (Resources/Prototypes/Guidebook/medical.yml).
+- type: guideEntry
+  id: WFSynthsAndYou
+  name: guide-entry-synths-and-you
+  text: "/ServerInfo/_WF/Synthetics/SynthsAndYou.xml"
+
+- type: guideEntry
+  id: WFPlanetFlight
+  name: guide-entry-wf-planet-flight
+  text: "/ServerInfo/_WF/Planets/Guidebook/PlanetFlight.xml"
+  priority: 0
+  children:
+  - WFPlanetComms
+
+- type: guideEntry
+  id: WFPlanetComms
+  name: guide-entry-wf-planet-comms
+  text: "/ServerInfo/_WF/PlanetComms/PlanetComms.xml"
+  priority: 1
+
+- type: guideEntry
+  id: WFContracts
+  name: guide-entry-wf-contracts
+  text: "/ServerInfo/_WF/Contracts/Guidebook/Contracts.xml"
+  priority: 6
+
+- type: guideEntry
+  id: WFAsf
+  name: guide-entry-wf-asf
+  text: "/ServerInfo/_WF/Asf/Guidebook/Factions/Asf.xml"
+  priority: 13
+
+- type: guideEntry
+  id: WFAds
+  name: guide-entry-wf-ads
+  text: "/ServerInfo/_WF/AdsIncursion/Guidebook/Ads.xml"
+  priority: 14
+
+

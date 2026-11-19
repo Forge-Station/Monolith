@@ -1,5 +1,0 @@
-- type: entity
-  id: WFReaverCampaignRule
-  parent: BaseGameRule
-  components:
-  - type: WFReaverCampaignRule

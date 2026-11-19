@@ -190,3 +190,9 @@
     - state: alarm_b1
       map: [ "enum.ConstructionVisuals.Layer" ]
   - type: Construction
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructionVisuals.Key:
+        enum.ConstructionVisuals.Layer:
+          assembly: { state: alarm_b1 }
+          electronics: { state: alarm_b1 }

@@ -138,3 +138,18 @@
   id: WFFenceInventory
   startingInventory:
     WFTradeGoodContraband: 4294967295 # Infinite
+
+- type: entity
+  parent: BaseCargoChute
+  id: WFCargoChuteMerchant
+  name: merchant's turn-in chute
+  description: A merchant's intake chute. It only buys a few goods, but pays well for them.
+  components:
+  - type: Dispenser
+    defaultItem: PaperWrittenDispenserInstructions
+    inventory:
+      TradeGoodLuxuries: SpaceCash20000
+      TradeGoodMedicalSupplies: SpaceCash8000
+      TradeGoodFusionFuel: SpaceCash18000
+      TradeGoodWeaponParts: SpaceCash14000
+      TradeGoodFabric: SpaceCash6000

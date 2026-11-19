@@ -1,0 +1,63 @@
+- type: roleLoadout
+  id: JobWFAsfEnvoy
+  groups:
+  - WFAsfJumpsuitService
+  - WFAsfHeadEnvoy
+  - WFAsfNeckEnvoy
+  - WFAsfOuterEnvoy
+  - WFAsfGloves
+  - WFAsfBackpack
+  - MercenaryGlasses
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific
+  - ContractorArmorPlates
+
+- type: roleLoadout
+  id: JobWFAsfEnforcer
+  groups:
+  - WFAsfJumpsuitService
+  - WFAsfHeadEnforcer
+  - WFAsfNeck
+  - WFAsfGloves
+  - WFAsfBackpack
+  - MercenaryGlasses
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific
+  - ContractorArmorPlates
+
+- type: roleLoadout
+  id: JobWFAsfColonist
+  groups:
+  - WFAsfJumpsuitColonist
+  - WFAsfHead
+  - WFAsfNeck
+  - WFAsfGlovesColonist
+  - WFAsfBackpack
+  - MercenaryGlasses
+  - ContractorEncryptionKey
+  - ContractorBoxSurvival
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorUtility
+  - ContractorFun
+  - ContractorTrinkets
+  - ContractorBureaucracy
+  - NFSpeciesSpecific
+  - ContractorArmorPlates

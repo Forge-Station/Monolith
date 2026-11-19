@@ -1,0 +1,30 @@
+- type: job
+  id: WFAsfFieldResearcher
+  name: wf-asf-job-field-researcher
+  description: wf-asf-job-field-researcher-description
+  playTimeTracker: JobWFAsfFieldResearcher
+  startingGear: WFAsfFieldResearcherGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  icon: JobIconWFAsfFieldResearcher
+  supervisors: wf-asf-job-supervisors-envoy
+  assignedCompany: WFAsf
+  canBeAntag: false
+  weight: 20
+  displayWeight: 20
+  accessGroups:
+  - GeneralAccess
+  - WFAsfResearch
+
+- type: startingGear
+  id: WFAsfFieldResearcherGear
+  equipment:
+    shoes: WFAsfClothingShoesBoots
+    ears: WFAsfClothingHeadset
+    id: WFAsfFieldResearcherPDA
+    outerClothing: WFAsfClothingOuterCoatLab
+  storage:
+    back:
+    - RadioHandheldNF
+    - HandheldHealthAnalyzer
+    - AnomalyScanner

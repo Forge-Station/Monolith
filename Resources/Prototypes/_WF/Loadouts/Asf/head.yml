@@ -1,0 +1,47 @@
+- type: loadout
+  id: WFAsfLoadoutBeretPlumed
+  equipment:
+    head: WFAsfClothingHeadBeretPlumed
+
+- type: loadout
+  id: WFAsfLoadoutBeret
+  equipment:
+    head: WFAsfClothingHeadBeret
+
+- type: loadout
+  id: WFAsfLoadoutCap
+  equipment:
+    head: WFAsfClothingHeadCap
+
+- type: loadout
+  id: WFAsfLoadoutHat
+  equipment:
+    head: WFAsfClothingHeadHat
+
+- type: loadoutGroup
+  id: WFAsfHeadEnvoy
+  name: loadout-group-contractor-head
+  loadouts:
+  - WFAsfLoadoutBeretPlumed
+  - WFAsfLoadoutBeret
+  - WFAsfLoadoutCap
+  - WFAsfLoadoutHat
+  fallbacks:
+  - WFAsfLoadoutBeretPlumed
+
+- type: loadoutGroup
+  id: WFAsfHeadEnforcer
+  name: loadout-group-contractor-head
+  loadouts:
+  - WFAsfLoadoutBeret
+  - WFAsfLoadoutCap
+  fallbacks:
+  - WFAsfLoadoutBeret
+
+- type: loadoutGroup
+  id: WFAsfHead
+  name: loadout-group-contractor-head
+  minLimit: 0
+  loadouts:
+  - WFAsfLoadoutBeret
+  - WFAsfLoadoutCap

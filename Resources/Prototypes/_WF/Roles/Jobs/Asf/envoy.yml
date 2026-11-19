@@ -1,0 +1,28 @@
+- type: job
+  id: WFAsfEnvoy
+  name: wf-asf-job-envoy
+  description: wf-asf-job-envoy-description
+  playTimeTracker: JobWFAsfEnvoy
+  startingGear: WFAsfEnvoyGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  icon: JobIconWFAsfEnvoy
+  supervisors: wf-asf-job-supervisors-council
+  assignedCompany: WFAsf
+  canBeAntag: false
+  weight: 40
+  displayWeight: 40
+  accessGroups:
+  - GeneralAccess
+  - WFAsfCommand
+
+- type: startingGear
+  id: WFAsfEnvoyGear
+  equipment:
+    shoes: WFAsfClothingShoesBoots
+    ears: WFAsfClothingHeadset
+    id: WFAsfEnvoyPDA
+  storage:
+    back:
+    - RadioHandheldNF
+    - WFAsfVoucherEscort

@@ -1,0 +1,33 @@
+- type: job
+  id: WFAsfEnforcer
+  name: wf-asf-job-enforcer
+  description: wf-asf-job-enforcer-description
+  playTimeTracker: JobWFAsfEnforcer
+  startingGear: WFAsfEnforcerGear
+  alwaysUseSpawner: true
+  hideConsoleVisibility: true
+  icon: JobIconWFAsfEnforcer
+  supervisors: wf-asf-job-supervisors-envoy
+  assignedCompany: WFAsf
+  canBeAntag: false
+  weight: 30
+  displayWeight: 30
+  accessGroups:
+  - GeneralAccess
+  - WFAsfSecurity
+
+- type: startingGear
+  id: WFAsfEnforcerGear
+  equipment:
+    shoes: WFAsfClothingShoesBoots
+    ears: WFAsfClothingHeadset
+    id: WFAsfEnforcerPDA
+    outerClothing: ClothingOuterArmorBasic
+    pocket1: WeaponDisabler
+  storage:
+    back:
+    - RadioHandheldNF
+    - Handcuffs
+    - Handcuffs
+    - WFAsfWeaponPistolCoil
+    - WFAsfMagazinePistolCoil

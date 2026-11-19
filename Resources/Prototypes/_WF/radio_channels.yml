@@ -5,3 +5,13 @@
   frequency: 1987
   color: "#C79DD0"
   longRange: true
+
+# The crews' own channel, for what they tell each other. Short ranged, and no player kit carries its key.
+- type: radioChannel
+  id: WFCrewIntercom
+  name: wf-crew-radio-channel-intercom
+  keycode: '6'
+  frequency: 1027
+  color: "#8a8f7a"
+  maxRange: 400
+

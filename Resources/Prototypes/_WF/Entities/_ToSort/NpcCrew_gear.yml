@@ -1,48 +1,3 @@
-# Crew loadouts. Weapons and ammunition sit in equipment slots and pockets, never in a bag: the crew draws from
-# slots. What a crewman carries is what a boarder loots.
-
-- type: startingGear
-  id: WFCrewDeckhandGear
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitColorGrey
-    shoes: ClothingShoesColorBlack
-    ears: WFCrewHeadset
-    outerClothing: ClothingOuterHardsuitSpatio
-    head: ClothingHeadHelmetHardsuitSpatio
-    mask: ClothingMaskBreath
-    suitstorage: OxygenTankFilled
-    belt: WeaponPistolMk58
-    pocket1: Magazine45_ACPPistolFMJ
-    pocket2: Magazine45_ACPPistolFMJ
-
-- type: startingGear
-  id: WFCrewMarineGear
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitColorGrey
-    shoes: ClothingShoesColorBlack
-    ears: WFCrewHeadset
-    outerClothing: ClothingOuterHardsuitSpatio
-    head: ClothingHeadHelmetHardsuitSpatio
-    mask: ClothingMaskBreath
-    suitstorage: OxygenTankFilled
-    back: WeaponRifleLecter
-    belt: WeaponPistolMk58
-    pocket1: Magazine68x52mmCaseless
-    pocket2: Magazine45_ACPPistolFMJ
-
-- type: startingGear
-  id: WFCrewOfficerGear
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitColorBlue
-    shoes: ClothingShoesColorBlack
-    ears: WFCrewHeadset
-    outerClothing: ClothingOuterHardsuitSpatio
-    head: ClothingHeadHelmetHardsuitSpatio
-    mask: ClothingMaskBreath
-    suitstorage: OxygenTankFilled
-    belt: WeaponPistolMk58
-    pocket1: Magazine45_ACPPistolFMJ
-
 # Put on crew posted where their ship has no air, over whatever their loadout wore in these slots.
 - type: startingGear
   id: WFCrewVoidKitGear
@@ -112,14 +67,6 @@
       - EncryptionKeyUssp
       - WFEncryptionKeyCrewIntercom
 
-# The crews' own channel, for what they tell each other. Short ranged, and no player kit carries its key.
-- type: radioChannel
-  id: WFCrewIntercom
-  name: wf-crew-radio-channel-intercom
-  keycode: '6'
-  frequency: 1027
-  color: "#8a8f7a"
-  maxRange: 400
 
 - type: entity
   parent: EncryptionKeyTraffic

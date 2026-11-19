@@ -1,0 +1,24 @@
+- type: loadout
+  id: WFAsfLoadoutGreatcoat
+  equipment:
+    outerClothing: WFAsfClothingOuterGreatcoat
+
+- type: loadout
+  id: WFAsfLoadoutParade
+  equipment:
+    outerClothing: WFAsfClothingOuterParade
+
+- type: loadout
+  id: WFAsfLoadoutRobe
+  equipment:
+    outerClothing: WFAsfClothingOuterRobe
+
+- type: loadoutGroup
+  id: WFAsfOuterEnvoy
+  name: loadout-group-contractor-outerclothing
+  loadouts:
+  - WFAsfLoadoutGreatcoat
+  - WFAsfLoadoutParade
+  - WFAsfLoadoutRobe
+  fallbacks:
+  - WFAsfLoadoutGreatcoat

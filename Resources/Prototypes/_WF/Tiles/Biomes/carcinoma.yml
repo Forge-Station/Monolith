@@ -1,0 +1,69 @@
+# Scab crust where a blood lake meets the shore.
+- type: tile
+  id: WFFloorFleshScab
+  parent: NovaFloorMeatFresh
+  sprite: /Textures/_WF/Planets/BoneField/scab_shore.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+
+# The bone field's ground: calcified flesh at the base, bleached bone plates and cartilage patches on top. The ids keep
+# their old Meaty/Spine/Straight names, which the planet's layers and tests already use.
+- type: tile
+  id: WFFloorFleshBoneMeaty
+  parent: NovaFloorBoneMeaty
+  sprite: /Textures/_WF/Planets/BoneField/calcified_flesh.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+
+- type: tile
+  id: WFFloorFleshBoneSpine
+  parent: NovaFloorBoneSpine
+  sprite: /Textures/_WF/Planets/BoneField/bleached_bone.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+
+- type: tile
+  id: WFFloorFleshBoneStraight
+  parent: NovaFloorBoneStraight
+  sprite: /Textures/_WF/Planets/BoneField/cartilage.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+
+# Dried blood round the groves.
+- type: tile
+  id: WFFloorFleshCrust
+  parent: ChompFloorOutdoorsRocksCetus
+  sprite: /Textures/_WF/Planets/BoneField/dried_crust.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+
+# Dark wet ground of the meat marsh.
+- type: tile
+  id: WFFloorFleshMarshMud
+  parent: FloorPlanetDirtCrocus
+  sprite: /Textures/_WF/Planets/BoneField/marsh_mud.png
+  variants: 5
+  placementVariants: [1, 1, 1, 1, 1]
+  weather: true
+
+- type: tile
+  id: WFFloorFleshMarshDirt
+  parent: PolarisFloorOutdoorsDirt
+  sprite: /Textures/_WF/Planets/BoneField/marsh_scab.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+
+# Clotted blood; the surface no longer uses it (its rivers are lakes now), but the Gut's clot floor is built on it.
+- type: tile
+  id: WFFloorFleshRiverBank
+  parent: NovaFloorMeatFresh
+  sprite: /Textures/_WF/Planets/BoneField/clotted_blood.png
+  variants: 5
+  placementVariants: [1, 1, 1, 1, 1]
+  weather: true

@@ -1,0 +1,122 @@
+# The Dynasty's supercapital patrol.
+- type: wfEncounter
+  id: WFEncounterPdvSupercapitalPatrol
+  avoidStations: [ TSF, Caelestinus ]
+  name: wf-encounter-name-pdv-supercapital-patrol
+  announcement: wf-encounter-announce-pdv-supercapital-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Manual
+  category: Patrol
+  icon: Flag
+  cost: 10
+  weight: 0
+  minPlayers: 0
+  placement: Station
+  standoff: 1200
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessel: WFJupiter
+    deckhands: 5
+    guards: 4
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 1200
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 250, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing2
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -250, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing3
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, -250
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing4
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 250
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead

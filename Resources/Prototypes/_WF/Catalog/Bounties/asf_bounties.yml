@@ -2,15 +2,6 @@
 # A crystal pays about 1.25 ARG per 1,000 spesos of its sale price. Artifact bounties ask for an effect an artifact
 # keeps for good once its node is reached, so the property is still there when it is shipped.
 
-- type: Tag
-  id: WFMonolithicCrystalSmall
-
-- type: Tag
-  id: WFMonolithicCrystalMedium
-
-- type: Tag
-  id: WFMonolithicCrystalLarge
-
 # Crystals
 
 - type: cargoBounty

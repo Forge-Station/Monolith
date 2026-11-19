@@ -1,0 +1,274 @@
+# A capital fleet action, for admins to set off: a Federation capital ship and a Dynasty one, each with a screen of two
+# frigates and a wing of fighters, each side on the other. Players may join either; whichever side they help pays when it
+# wins. Never scheduled.
+- type: wfEncounter
+  id: WFEncounterFleetBattle
+  leash: 4000
+  name: wf-encounter-name-fleet-battle
+  announcement: wf-encounter-announce-fleet-battle
+  announcementSender: wf-encounter-sender-traffic
+  announcementSound:
+    path: /Audio/Misc/gamma.ogg
+    params:
+      volume: -2
+  announcementColor: "#db7093"
+  start: Manual
+  category: Threat
+  icon: Flag
+  cost: 8
+  weight: 0
+  minPlayers: 0
+  duration: 3600
+  minDistance: 3000
+  maxDistance: 5000
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 150000
+    credits: 80
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  - side: pdv
+    spesos: 150000
+    credits: 80
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: dreadnought
+    navigation: WFCrewNavigationWarship
+    vessel: Flyssa
+    deckhands: 4
+    guards: 3
+    offset: -1000, 0
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: battleship
+  - key: carrier
+    navigation: WFCrewNavigationWarship
+    vessels: [ Fujian, Altair, Andromeda ]
+    deckhands: 3
+    guards: 2
+    offset: -900, 400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: flagship
+  - key: carriertwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ Fujian, Altair, Andromeda ]
+    deckhands: 3
+    guards: 2
+    offset: -900, -400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: flagshiptwo
+  - key: fighter
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -700, -150
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: battleship
+  - key: fightertwo
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -650, 600
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: wing
+  - key: fighterthree
+    navigation: WFCrewNavigationWarship
+    vessel: Paladin
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -650, -600
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    objectives:
+    - kind: Attack
+      target: wingtwo
+  - key: battleship
+    navigation: WFCrewNavigationWarship
+    vessel: Saturn
+    deckhands: 4
+    guards: 3
+    offset: 1000, 0
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: dreadnought
+  - key: flagship
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kortik, Europa, Saintie ]
+    deckhands: 3
+    guards: 2
+    offset: 900, -400
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: carrier
+  - key: flagshiptwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kortik, Europa, Saintie ]
+    deckhands: 3
+    guards: 2
+    offset: 900, 400
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: carriertwo
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 700, 150
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: dreadnought
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessel: Gadfly
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 650, -600
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: fightertwo
+  - key: wingthree
+    navigation: WFCrewNavigationWarship
+    vessel: Kresta
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 650, 600
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    distress: false
+    objectives:
+    - kind: Attack
+      target: fighterthree

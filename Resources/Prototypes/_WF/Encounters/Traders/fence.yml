@@ -1,0 +1,35 @@
+# A fence moving contraband and hard goods cheap. It trades with anyone who comes alongside, like the others, but its
+# hold is full of guns, so it keeps a gunner and three veteran guards.
+- type: wfEncounter
+  id: WFEncounterFenceTrader
+  name: wf-encounter-name-trader-fence
+  announcement: wf-encounter-announce-trader-fence
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 0.5
+  cooldown: 3000
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Scallywag
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 3
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderFence ]
+    skill: Veteran
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true

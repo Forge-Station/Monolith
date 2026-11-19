@@ -1,0 +1,157 @@
+# The Dynasty's frigate ship caught by a Federation strike group: five fighters on it at once. As above, with the Vanguard paying.
+- type: wfEncounter
+  id: WFEncounterPdvFrigateUnderAttack
+  leash: 3000
+  name: wf-encounter-name-pdv-frigate
+  announcement: wf-encounter-announce-pdv-frigate
+  announceOnRadio: true
+  announcer: frigate
+  start: Scheduled
+  category: Distress
+  icon: Swords
+  cost: 4
+  weight: 0.8
+  minPlayers: 6
+  requiresWar: true
+  cooldown: 3600
+  duration: 3000
+  startRadius: 2500
+  minDistance: 3000
+  maxDistance: 4500
+  stationClearance: 2500
+  rewards:
+  - side: pdv
+    spesos: 90000
+    credits: 52
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: frigate
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kortik, Europa, Saintie ]
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    iffColor: "#ffae3d"
+    deckhands: 3
+    guards: 2
+    objectives:
+    - kind: Attack
+      target: striker
+  - key: striker
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 750
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 700, 250
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -700, 250
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingthree
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 650, -350
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate
+  - key: wingfour
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -650, -350
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: frigate

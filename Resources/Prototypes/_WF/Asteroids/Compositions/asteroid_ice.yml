@@ -1,0 +1,62 @@
+# What each kind of asteroid holds. Every unit of rock mass is one vein of the picked ore, so yields follow the ore
+# prototypes that vein rocks use. Ore weights and the inert share start from each kind's soft mineral table
+# (Resources/Prototypes/_NF/Entities/Markers/Spawners/Random/Salvage/minerals.yml), tilted towards iron and coal, which
+# steel and plasteel need, at the expense of malachite, quartz and salt; each kind keeps its signature ores. Lithium,
+# the economy's main tuning knob, keeps its share and comes mostly from chromite as before. Volatility feeds the
+# overcharge blast.
+
+# Ice (NFIceMineralSoft): soft and unstable, about 63% plain ice.
+- type: wfAsteroidComposition
+  id: WFAsteroidIce
+  minInert: 0.53
+  maxInert: 0.73
+  minResistance: 0.02
+  maxResistance: 0.2
+  minInstability: 0.3
+  maxInstability: 0.7
+  ores:
+  - ore: CopperOre
+    weight: 3
+    color: "#3fb58a"
+  - ore: NFOrePlasma
+    weight: 4
+    color: "#b04cff"
+    volatility: 1
+  - ore: NFOreSteel
+    weight: 7
+    color: "#c98a6b"
+  - ore: OreArtifactFragment
+    weight: 3
+    color: "#c88cff"
+  - ore: NFOreCoal
+    weight: 4
+    color: "#5a5652"
+  - ore: NFOreGold
+    weight: 2
+    color: "#ffd040"
+  - ore: NFOreSilver
+    weight: 2
+    color: "#d8dde3"
+  - ore: LithiumOre
+    weight: 2
+    color: "#f2a8d8"
+  - ore: NFOreSpaceQuartz
+    weight: 1
+    color: "#e6f2ff"
+  - ore: NFOreSalt
+    weight: 1
+    color: "#f4f1ea"
+  - ore: NFOreUranium
+    weight: 1
+    color: "#5fe04a"
+    volatility: 0.3
+  - ore: NFOreBluespace
+    weight: 1
+    color: "#3d7bff"
+    volatility: 0.5
+  - ore: NFOreBananium
+    weight: 0.5
+    color: "#ffe94a"
+  - ore: OreDiamond
+    weight: 0.2
+    color: "#9ff0ff"

@@ -1,0 +1,64 @@
+# A remnant of the Union's fleet, still flying the flag in open space: a gunboat and a fighter that patrol a patch of
+# nothing, leg by leg around where they were found, and warn everyone off it. They take no company's word for anything
+# and fire on whoever presses in.
+- type: wfEncounter
+  id: WFEncounterUsspRemnantPatrol
+  name: wf-encounter-name-ussp-patrol
+  announcement: wf-encounter-announce-ussp-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  cost: 2
+  weight: 0.6
+  minPlayers: 3
+  cooldown: 4200
+  duration: 2400
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 2500
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Natisk, Akula, Tayfun, Sekunda ]
+    deckhands: 1
+    guards: 1
+    side: remnant
+    faction: USSP
+    company: USSP
+    profile: WFCrewProfileUssp
+    docking: Hostile
+    boarding: Hostile
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1100
+    attackRange: 550
+    zoneLines: wf-encounter-ussp-zone
+    zoneTargets: Everyone
+    iffColor: "#d94c4c"
+    wander: 12
+    wanderRadius: 1500
+    wanderPause: 60
+    objectives:
+    - kind: Hold
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Svinya, Strayk ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 140, 0
+    side: remnant
+    faction: USSP
+    company: USSP
+    profile: WFCrewProfileUssp
+    docking: Hostile
+    boarding: Hostile
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1100
+    attackRange: 550
+    zoneLines: wf-encounter-ussp-zone
+    zoneTargets: Everyone
+    objectives:
+    - kind: Escort
+      target: lead

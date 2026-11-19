@@ -1,0 +1,59 @@
+# Outlaw crews wear what the Reavers wear and fight only whoever attacks them, marines included.
+- type: wfCrewProfile
+  id: WFCrewProfileFugitive
+  bodies:
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyReptilian
+  - WFMobCrewBodyDwarf
+  - WFMobCrewBodyVulpkanin
+  - WFMobCrewBodyTajaran
+  - WFMobCrewBodyRodentia
+  - WFMobCrewBodyArachnid
+  - WFMobCrewBodyMoth
+  skills: [ Green, Regular ]
+  # Outlaws fly plastitanium as the Reavers do (WFCrewProfilePirate).
+  hullSwaps:
+    WFWallDurasteel: WallPlastitanium
+    WFWallDurasteelDiagonal: WallPlastitaniumDiagonal
+    WFWallDurasteelCapital: WallPlastitaniumCapital
+    WFWallDurasteelDiagonalCapital: WallPlastitaniumDiagonalCapital
+  engagement:
+    WFCrewDeckhand: WhenAttacked
+    WFCrewMarine: WhenAttacked
+  loadouts:
+    WFCrewDeckhand: [ WFCrewPirateHand, WFCrewPirateHand, WFCrewPirateBruiser ]
+    WFCrewEngineer: [ WFCrewPirateHand ]
+    WFCrewMarine: [ WFCrewPirateBruiser, WFCrewPirateHand ]
+    WFCrewPilot: [ WFCrewPirateOfficer ]
+    WFCrewRadioOperator: [ WFCrewPirateOfficer ]
+    WFCrewCaptain: [ WFCrewPirateOfficer ]
+    WFCrewGunner: [ WFCrewPirateHand, WFCrewPirateOfficer ]
+
+# The hard cases: armour and rifles on the hands as well as the guards.
+- type: wfCrewProfile
+  id: WFCrewProfileFugitiveArmed
+  bodies:
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyReptilian
+  - WFMobCrewBodyDwarf
+  - WFMobCrewBodyVulpkanin
+  - WFMobCrewBodyTajaran
+  skills: [ Veteran, Elite ]
+  hullSwaps:
+    WFWallDurasteel: WallPlastitanium
+    WFWallDurasteelDiagonal: WallPlastitaniumDiagonal
+    WFWallDurasteelCapital: WallPlastitaniumCapital
+    WFWallDurasteelDiagonalCapital: WallPlastitaniumDiagonalCapital
+  engagement:
+    WFCrewDeckhand: WhenAttacked
+    WFCrewMarine: WhenAttacked
+  loadouts:
+    WFCrewDeckhand: [ WFCrewPirateBruiser, WFCrewPirateRifle ]
+    WFCrewEngineer: [ WFCrewPirateBruiser ]
+    WFCrewMarine: [ WFCrewPirateRifle, WFCrewPirateRifle, WFCrewPirateBruiser ]
+    WFCrewPilot: [ WFCrewPirateOfficer ]
+    WFCrewRadioOperator: [ WFCrewPirateOfficer ]
+    WFCrewCaptain: [ WFCrewPirateOfficer ]
+    WFCrewGunner: [ WFCrewPirateBruiser, WFCrewPirateOfficer ]

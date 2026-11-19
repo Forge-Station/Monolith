@@ -1,0 +1,135 @@
+# Fighters fly with a pilot and a gunner and nobody else.
+# A pair of TSF fighters holding station off a station for the whole round. They warn ships that dock with them,
+# fight boarders, and only drive attackers off. Ships of a company the TSF is at war with are warned off at 900 m
+# and fired on inside 450 m; everyone else may pass.
+- type: wfEncounter
+  id: WFEncounterTsfPatrol
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  name: wf-encounter-name-patrol
+  start: RoundStart
+  lifetime: Persistent
+  category: Patrol
+  cost: 1
+  replaceable: true
+  placement: Station
+  standoff: 500
+  cooldown: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, QJ271, Paladin, Ocelot, Seax, Xiphos ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 900
+    attackRange: 450
+    zoneTargets: AtWar
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 700
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 120, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 900
+    attackRange: 450
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+# Heavier patrols that come and go: a gunboat with two fighters holds station off a station for a while and leaves. They
+# mind the same things as the round-start pairs, with a longer reach.
+- type: wfEncounter
+  id: WFEncounterTsfPatrolHeavy
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  name: wf-encounter-name-patrol-heavy
+  announcement: wf-encounter-announce-patrol-heavy
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  cost: 2
+  weight: 0.9
+  minPlayers: 3
+  placement: Station
+  standoff: 600
+  cooldown: 3600
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Banshee, Dagger, Fracture, Calypso ]
+    deckhands: 1
+    guards: 1
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneTargets: AtWar
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 750
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 130, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -130, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead

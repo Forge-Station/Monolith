@@ -1,0 +1,193 @@
+- type: wfEncounter
+  id: WFEncounterPdvCapitalUnderAttack
+  leash: 3500
+  name: wf-encounter-name-pdv-capital
+  announcement: wf-encounter-announce-pdv-capital
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: capital
+  start: Scheduled
+  category: Distress
+  icon: Swords
+  cost: 6
+  weight: 0.4
+  minPlayers: 9
+  requiresWar: true
+  cooldown: 5400
+  duration: 3600
+  startRadius: 2500
+  minDistance: 3000
+  maxDistance: 5000
+  stationClearance: 3000
+  rewards:
+  - side: pdv
+    spesos: 150000
+    credits: 80
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: capital
+    navigation: WFCrewNavigationWarship
+    vessel: Saturn
+    deckhands: 4
+    guards: 3
+    side: pdv
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: striker
+  - key: striker
+    navigation: WFCrewNavigationWarship
+    vessels: [ Banshee, Dagger, Calypso ]
+    deckhands: 1
+    guards: 1
+    offset: 0, 900
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: strikertwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ Banshee, Dagger, Calypso ]
+    deckhands: 1
+    guards: 1
+    offset: 0, -900
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 800, 400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -800, 400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingthree
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 800, -400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfour
+    navigation: WFCrewNavigationWarship
+    vessel: Paladin
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -800, -400
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfive
+    navigation: WFCrewNavigationWarship
+    vessel: Ocelot
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 900, 0
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    distress: false
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: capital

@@ -1,0 +1,178 @@
+# A smuggler's run: a small freighter with a black market hold, wandering open space on no manifest and in no hurry. It warns
+# off whatever comes near and fires on whatever ignores it, and the crew shoot boarders. Nothing is announced until it has been
+# fought, and then only as a rumour. The hold is a few crates, and it is not worth hunting down for the haul.
+- type: wfEncounter
+  id: WFEncounterBlackMarketSmall
+  name: wf-encounter-name-blackmarket
+  announcement: wf-encounter-announce-blackmarket
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  cost: 1
+  weight: 0.75
+  minPlayers: 3
+  hidden: true
+  cooldown: 5400
+  duration: 3600
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  manifests: [ WFManifestContraband ]
+  ships:
+  - key: smuggler
+    navigation: WFCrewNavigationFreight
+    vessel: Twilight
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 2
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    cargo: 6
+    skill: Regular
+    wander: 5
+    wanderRadius: 3000
+    wanderPause: 90
+    warnRange: 800
+    attackRange: 350
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+
+- type: wfEncounter
+  id: WFEncounterBlackMarketMedium
+  name: wf-encounter-name-blackmarket
+  announcement: wf-encounter-announce-blackmarket
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  cost: 2
+  weight: 0.5
+  minPlayers: 5
+  hidden: true
+  cooldown: 5400
+  duration: 3600
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  manifests: [ WFManifestContraband ]
+  ships:
+  - key: smuggler
+    navigation: WFCrewNavigationFreight
+    vessels: [ Brute, Zhuangzi ]
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 3
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    cargo: 10
+    skill: Regular
+    wander: 5
+    wanderRadius: 3000
+    wanderPause: 90
+    warnRange: 1000
+    attackRange: 400
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+
+ The big one has two escorts that fly on it and fire inside their own short range, and a bigger hold.
+- type: wfEncounter
+  id: WFEncounterBlackMarketLarge
+  name: wf-encounter-name-blackmarket
+  announcement: wf-encounter-announce-blackmarket
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  cost: 3
+  weight: 0.35
+  minPlayers: 8
+  hidden: true
+  cooldown: 5400
+  duration: 3600
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  manifests: [ WFManifestContraband ]
+  ships:
+  - key: smuggler
+    navigation: WFCrewNavigationFreight
+    vessels: [ Olympus, Autumn, Windreign ]
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 3
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    cargo: 16
+    skill: Regular
+    wander: 5
+    wanderRadius: 3000
+    wanderPause: 90
+    warnRange: 1200
+    attackRange: 500
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+  - key: escort
+    navigation: WFCrewNavigationRaider
+    vessels: [ Gadfly, Scallywag ]
+    offset: 220, 0
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 0
+    guards: 1
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    skill: Regular
+    attackRange: 350
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Escort
+      target: smuggler
+  - key: picket
+    navigation: WFCrewNavigationRaider
+    vessels: [ Gadfly, Scallywag ]
+    offset: -220, 0
+    side: smugglers
+    faction: PirateNF
+    company: paycheckbratva
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 0
+    guards: 1
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    skill: Regular
+    attackRange: 350
+    zoneLines: wf-encounter-blackmarket-zone
+    zoneTargets: Everyone
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Escort
+      target: smuggler

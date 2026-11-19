@@ -1,0 +1,55 @@
+# A TSF transport carrying munitions under fighter escort. It holds its course whatever happens, warns ships of
+# other companies off at a kilometre and fires on them inside four hundred metres.
+- type: wfEncounter
+  id: WFEncounterTsfTransport
+  avoidStations: [ Helios, PDV ]
+  name: wf-encounter-name-tsf-transport
+  announcement: wf-encounter-announce-tsf-transport
+  announceOnRadio: true
+  start: Scheduled
+  category: Patrol
+  cost: 3
+  weight: 1
+  minPlayers: 6
+  placement: Circuit
+  cooldown: 3600
+  duration: 5400
+  route:
+    minStops: 1
+    maxStops: 2
+    dwellMin: 180
+    dwellMax: 300
+  manifests: [ WFManifestMunitions, WFManifestMunitions, WFManifestMunitions, WFManifestMedical, WFManifestParts ]
+  ships:
+  - key: transport
+    navigation: WFCrewNavigationWarship
+    vessel: Argent
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    deckhands: 2
+    guards: 2
+    cargo: 20
+    flyRoute: true
+    evades: false
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 1000
+    attackRange: 400
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 150, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    disengage: Deter
+    disengageRange: 1200
+    objectives:
+    - kind: Escort
+      target: transport

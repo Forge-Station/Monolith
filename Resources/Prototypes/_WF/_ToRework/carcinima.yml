@@ -1,0 +1,36 @@
+# Dead growth gets flesh names so the planet map doesn't paint the grove edges as vegetation.
+- type: entity
+  id: WFFleshSnagMahogany
+  parent: NebulaTreeDeadMahogany
+  name: withered limb
+  description: A dead trunk, stripped and stiff. Whatever grew it has moved on.
+
+- type: entity
+  id: WFFleshSnagYew
+  parent: NebulaTreeDeadYew
+  name: withered limb
+  description: A dead trunk, stripped and stiff. Whatever grew it has moved on.
+
+- type: entity
+  id: WFFleshSnagWalnut
+  parent: NebulaTreeDeadWalnut
+  name: withered limb
+  description: A dead trunk, stripped and stiff. Whatever grew it has moved on.
+
+- type: entity
+  id: WFFleshSnagBarren
+  parent: ShiptestTreeDeadBarren
+  name: withered limb
+  description: A dead trunk, stripped and stiff. Whatever grew it has moved on.
+
+- type: entity
+  id: WFFleshSnagBurnedOne
+  parent: CoyoteFloraBurnedtree1
+  name: withered limb
+  description: A dead trunk, stripped and stiff. Whatever grew it has moved on.
+
+- type: entity
+  id: WFFleshSnagBurnedThree
+  parent: CoyoteFloraBurnedtree3
+  name: withered limb
+  description: A dead trunk, stripped and stiff. Whatever grew it has moved on.

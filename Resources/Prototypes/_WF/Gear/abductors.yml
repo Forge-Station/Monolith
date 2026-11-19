@@ -1,0 +1,13 @@
+- type: startingGear
+  id: WFCrewAbductorGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    shoes: ClothingShoesColorBlack
+    ears: WFCrewHeadset
+    outerClothing: ClothingOuterHardsuitSpatio
+    head: ClothingHeadHelmetHardsuitSpatio
+    mask: ClothingMaskBreath
+    suitstorage: OxygenTankFilled
+    belt: WFCrewAbductorBaton
+    pocket1: Handcuffs
+    pocket2: Handcuffs

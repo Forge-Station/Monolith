@@ -1,0 +1,36 @@
+# The traders fly hulls whose doors ask for no access, so any customer can walk from the dock to the dealer.
+# A wandering trader: a small hauler with a pilot, a guard and a trader aboard, drifting from point to point and
+# stopping a while at each. Dock with it and deal; the stock is small, cheap and gone when it is gone. All can be killed.
+- type: wfEncounter
+  id: WFEncounterWanderingTrader
+  name: wf-encounter-name-trader
+  announcement: wf-encounter-announce-trader
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 2
+  cooldown: 2400
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Twilight
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 1
+    roles: [ WFCrewPilot, WFCrewDeckhand ]
+    passengers: [ WFTraderWanderer ]
+    skill: Regular
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true

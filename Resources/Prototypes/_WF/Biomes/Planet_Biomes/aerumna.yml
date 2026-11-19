@@ -1,33 +1,6 @@
 # Aerumna: a dark 3 g world that went wrong, and the xenonids' homeworld. Chromite flats and shrouded clay under rain, a
 # fungal forest, boulders the gravity left where they fell, crystal spires, a few overgrown ruins and the hive. The pools,
 # ore, fauna and the shadow grove stay in WFShadowClearings (open_biomes.yml), which pulls these regions in.
-# The Decor Import tiles have no weather, so every tile placed outdoors is a weather child.
-
-- type: tile
-  id: WFFloorAerumnaShroud
-  parent: NebulaFloorShrouded
-  weather: true
-
-- type: tile
-  id: WFFloorAerumnaClay
-  parent: NebulaFloorClay
-  weather: true
-
-- type: tile
-  id: WFFloorAerumnaClayRock
-  parent: ChompFloorOutdoorsLavalandAshrock
-  weather: true
-
-# Grey ground between the dark chromite and the pale clay, round every clay flat, crystal bed and the hive.
-- type: tile
-  id: WFFloorAerumnaDusk
-  parent: FloorCave
-  weather: true
-
-- type: tile
-  id: WFFloorAerumnaCrystalBed
-  parent: AuroraFloorExoplanetCrystal
-  weather: true
 
 # A region of giant mushrooms on shrouded ground; the fungus decal pales the floor between them.
 - type: biomeTemplate
@@ -195,14 +168,6 @@
     entities: [WFAerumnaLuceVine]
     threshold: 0.8
     noise: { seed: 157, noiseType: OpenSimplex2, frequency: 2.5 }
-
-# The xenonid homeworld's hive: dark crust under wild weeds, with small resin chambers, resin doors and eggs in them.
-# A minority region (WFShadowClearings pulls it in last, so its ground wins where it overlaps the others). Everything it
-# lays stands on the hive ground only; the weeds never spread (WFXenoWeedsWild) and the eggs lie dormant until walked up to.
-- type: tile
-  id: WFFloorAerumnaHive
-  parent: ChompFloorOutdoorsRocksCetus
-  weather: true
 
 - type: biomeTemplate
   id: WFAerumnaHive

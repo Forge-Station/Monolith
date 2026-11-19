@@ -1,0 +1,82 @@
+
+# The Dynasty's frigate patrol.
+- type: wfEncounter
+  id: WFEncounterPdvFrigatePatrol
+  avoidStations: [ TSF, Caelestinus ]
+  name: wf-encounter-name-pdv-frigate-patrol
+  announcement: wf-encounter-announce-pdv-frigate-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  icon: Flag
+  cost: 4
+  weight: 0.4
+  minPlayers: 6
+  placement: Station
+  standoff: 900
+  cooldown: 5400
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kortik, Europa, Saintie ]
+    deckhands: 3
+    guards: 2
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 900
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing2
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -160, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead

@@ -14,3 +14,11 @@
 - type: Tag
   id: WindowFrame
 
+- type: Tag
+  id: WFMonolithicCrystalSmall
+
+- type: Tag
+  id: WFMonolithicCrystalMedium
+
+- type: Tag
+  id: WFMonolithicCrystalLarge

@@ -1,0 +1,4 @@
+- type: sinkPort
+  id: WFDrydockCraneReceiver
+  name: drydock-port-name-crane-receiver
+  description: drydock-port-description-crane-receiver

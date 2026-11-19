@@ -1,0 +1,201 @@
+# A capital ship under attack: the Federation's Flyssa beset by a whole pirate flotilla, or the Dynasty's Saturn by a
+# Federation strike wing. The biggest fights the storyteller sets on its own, for a full server.
+- type: wfEncounter
+  id: WFEncounterCapitalUnderAttack
+  leash: 3500
+  name: wf-encounter-name-capital
+  announcement: wf-encounter-announce-capital
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: capital
+  start: Scheduled
+  category: Distress
+  icon: Swords
+  cost: 6
+  weight: 0.4
+  minPlayers: 9
+  cooldown: 5400
+  duration: 3600
+  startRadius: 2500
+  minDistance: 3000
+  maxDistance: 5000
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 150000
+    credits: 80
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  ships:
+  - key: capital
+    navigation: WFCrewNavigationWarship
+    vessel: Flyssa
+    deckhands: 4
+    guards: 3
+    side: tsf
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    objectives:
+    - kind: Attack
+      target: raider
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, 900
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: second
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    deckhands: 2
+    offset: 0, -900
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: third
+    navigation: WFCrewNavigationRaider
+    vessels: [ Fenrir, Garm, Ganymede ]
+    deckhands: 2
+    offset: 900, 0
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 800, 400
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingtwo
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -800, 400
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingthree
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 800, -400
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfour
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -800, -400
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital
+  - key: wingfive
+    navigation: WFCrewNavigationRaider
+    vessels: [ Fenrir, Ganymede, Vulture ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -900, 0
+    side: pirates
+    disengage: Deter
+    disengageRange: 2000
+    warnRange: 1500
+    attackRange: 1500
+    zoneTargets: AtWar
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    distress: false
+    objectives:
+    - kind: Attack
+      target: capital

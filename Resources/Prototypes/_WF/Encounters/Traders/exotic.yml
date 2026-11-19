@@ -1,0 +1,75 @@
+# The exotic dealers: an armourer with ship guns that never reach a catalogue and a systems broker with shields and drives,
+# travelling together on a Blackhawk corvette with four veteran guards aboard and two mercenary gunboats on escort. Rare,
+# dear, and well protected: the guns alone are worth a raid, which is what the escort is for. Like every trader they let
+# anyone come alongside and only drive attackers off.
+- type: wfEncounter
+  id: WFEncounterExoticTrader
+  name: wf-encounter-name-trader-exotic
+  announcement: wf-encounter-announce-trader-exotic
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 2
+  weight: 0.35
+  cooldown: 4800
+  duration: 3600
+  minPlayers: 6
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessels: [ Xinhua, Petra, Hornet ]
+    side: trader
+    company: blackhawkpmc
+    profile: WFCrewProfileMercenary
+    captain: false
+    deckhands: 0
+    guards: 4
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderArmourer, WFTraderSystemsBroker ]
+    skill: Veteran
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessels: [ Venom, Yukikaze, Kite ]
+    offset: 150, 0
+    side: trader
+    company: blackhawkpmc
+    profile: WFCrewProfileMercenary
+    captain: false
+    deckhands: 0
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    skill: Veteran
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1500
+    objectives:
+    - kind: Escort
+      target: trader
+  - key: escort2
+    navigation: WFCrewNavigationWarship
+    vessels: [ Venom, Yukikaze, Kite ]
+    offset: -150, 0
+    side: trader
+    company: blackhawkpmc
+    profile: WFCrewProfileMercenary
+    captain: false
+    deckhands: 0
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    skill: Veteran
+    evades: false
+    distress: false
+    disengage: Deter
+    disengageRange: 1500
+    objectives:
+    - kind: Escort
+      target: trader

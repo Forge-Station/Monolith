@@ -3,51 +3,6 @@
 # Natural ground: unbreakable. Names steer the orbit map: ash and tar read as rock, ash dirt as dry ground (WFPlanetMapSystem).
 # Every kind of flora has a layer of its own: a layer picks from its list by a noise value that bunches, so a list shows one or two kinds.
 
-# Ash flats.
-- type: tile
-  parent: ChompFloorOutdoorsLavalandAsh
-  id: WFFloorFervidusAshDust
-  isSubfloor: true
-  deconstructTools: []
-  indestructible: true
-  weather: true
-
-# Cooled crust: gray rock round the lava channels and in the ashfields.
-- type: tile
-  parent: ChompFloorOutdoorsLavalandAshrock
-  id: WFFloorFervidusAshRock
-  isSubfloor: true
-  deconstructTools: []
-  indestructible: true
-  weather: true
-
-# Ash-choked scrub ground.
-- type: tile
-  parent: NovaFloorGrassLavaland
-  id: WFFloorFervidusAshDirt
-  isSubfloor: true
-  deconstructTools: []
-  indestructible: true
-  weather: true
-
-# Small pools of tar. Cosmetic: they are tiles, so roads and POIs still count them as dry ground.
-- type: tile
-  parent: BayFloorWaterShallowTar
-  id: WFFloorFervidusTarPool
-  isSubfloor: true
-  deconstructTools: []
-  indestructible: true
-  weather: true
-
-# Small pale pools of sulfur.
-- type: tile
-  parent: BayFloorWaterShallowChlorineLiquid
-  id: WFFloorFervidusSulfurPool
-  isSubfloor: true
-  deconstructTools: []
-  indestructible: true
-  weather: true
-
 # Where the ashfields lie; tiles and flora both. Tar and sulfur pools are kept to ash ground.
 - type: biomeTemplate
   id: WFFervidusAshFields

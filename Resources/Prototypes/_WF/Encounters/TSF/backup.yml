@@ -1,0 +1,69 @@
+# A TSF patrol ship has been jumped by pirates and calls for backup. Shoot the pirates and the TSF ship takes you
+# for an ally and pays when they are beaten; TSF players get military credits as well. Shoot the TSF ship and the
+# pirates leave you be, but they pay nothing: what you can take off the wreck is the reward.
+- type: wfEncounter
+  id: WFEncounterBackupRequest
+  leash: 2500
+  name: wf-encounter-name-backup
+  announcement: wf-encounter-announce-backup
+  announceOnRadio: true
+  announcer: patrol
+  start: Scheduled
+  category: Distress
+  cost: 3
+  weight: 2
+  minPlayers: 3
+  cooldown: 2700
+  duration: 2700
+  startRadius: 2000
+  minDistance: 2500
+  maxDistance: 4000
+  rewards:
+  - side: tsf
+    spesos: 48000
+    credits: 30
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-tsf
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    objectives:
+    - kind: Attack
+      target: raider
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    offset: 0, 500
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 3
+    objectives:
+    - kind: Attack
+      target: patrol
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 180, 520
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    objectives:
+    - kind: Attack
+      target: patrol

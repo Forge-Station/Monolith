@@ -1,0 +1,35 @@
+# A shipwright in a gunned scrap-built hull, selling thrusters, drives and hull fittings for refits. The drives and the
+# repair kit make it a target, so it carries a gunner and two veteran guards.
+- type: wfEncounter
+  id: WFEncounterShipwrightTrader
+  name: wf-encounter-name-trader-shipwright
+  announcement: wf-encounter-announce-trader-shipwright
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 0.75
+  cooldown: 3000
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Mudskipper
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 2
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderShipwright ]
+    skill: Veteran
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true

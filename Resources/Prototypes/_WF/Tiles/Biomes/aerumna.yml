@@ -1,0 +1,59 @@
+# The Decor Import tiles have no weather, so every tile placed outdoors is a weather child.
+- type: tile
+  id: WFFloorAerumnaShroud
+  parent: NebulaFloorShrouded
+  weather: true
+
+- type: tile
+  id: WFFloorAerumnaClay
+  parent: NebulaFloorClay
+  weather: true
+
+- type: tile
+  id: WFFloorAerumnaClayRock
+  parent: ChompFloorOutdoorsLavalandAshrock
+  weather: true
+
+# Grey ground between the dark chromite and the pale clay, round every clay flat, crystal bed and the hive.
+- type: tile
+  id: WFFloorAerumnaDusk
+  parent: FloorCave
+  weather: true
+
+- type: tile
+  id: WFFloorAerumnaCrystalBed
+  parent: AuroraFloorExoplanetCrystal
+  weather: true
+
+# The xenonid homeworld's hive: dark crust under wild weeds, with small resin chambers, resin doors and eggs in them.
+# A minority region (WFShadowClearings pulls it in last, so its ground wins where it overlaps the others). Everything it
+# lays stands on the hive ground only; the weeds never spread (WFXenoWeedsWild) and the eggs lie dormant until walked up to.
+- type: tile
+  id: WFFloorAerumnaHive
+  parent: ChompFloorOutdoorsRocksCetus
+  weather: true
+
+# The Umbral Deeps' halls: chromite crawls and bedrock galleries (tiles.yml), blue-black shroud for the shadow groves,
+# grey dusk rock under the geodes and the brown hive floor of the deep nest. Each is indestructible, can't be dug and
+# has no base turf.
+
+- type: tile
+  id: WFCavernFloorUmbralShroud
+  parent: WFFloorAerumnaShroud
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+- type: tile
+  id: WFCavernFloorUmbralDusk
+  parent: WFFloorAerumnaDusk
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+- type: tile
+  id: WFCavernFloorNest
+  parent: WFFloorAerumnaHive
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""

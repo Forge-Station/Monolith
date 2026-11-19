@@ -1,4 +1,16 @@
-# Wayfarer Tags
-
+# Wayfarer Tag
 - type: Tag
   id: SafetyDepositBox
+
+# Machines lathe upgrade kits can't be fitted to; ore processors carry it.
+- type: Tag
+  id: WFNoLatheUpgradeKit
+
+# PDV composite sheets, for the Hokkaido composite bounty.
+- type: Tag
+  id: WFPdvComposite
+
+#RMC
+- type: Tag
+  id: WindowFrame
+

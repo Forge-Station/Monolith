@@ -1,0 +1,11 @@
+- type: accent
+  id: CMChatSanitize
+  wordReplacements: {}
+
+- type: accent
+  id: CMChatSanitizeMarine
+  wordReplacements: {}
+
+- type: accent
+  id: CMChatSanitizeXeno
+  wordReplacements: {}

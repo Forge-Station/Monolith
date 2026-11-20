@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Audio;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Teleportation.Components;
@@ -53,4 +53,19 @@ public sealed partial class PortalComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField, ViewVariables(VVAccess.ReadWrite)]
     public bool RandomTeleport = true;
+}
+
+// WOLFGATE - ported from HardLight/Starlight: lets systems veto a portal teleport.
+public sealed class OnAttemptPortalEvent : CancellableEntityEventArgs
+{
+    public EntityUid Subject { get; }
+
+    /// <summary>
+    /// Raised when an entity attempts to use a portal. Cancel this event to prevent teleportation
+    /// </summary>
+    /// <param name="subject">The entity attempting to use the portal</param>
+    public OnAttemptPortalEvent(EntityUid subject)
+    {
+        Subject = subject;
+    }
 }

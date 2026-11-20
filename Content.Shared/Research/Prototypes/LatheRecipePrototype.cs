@@ -68,6 +68,14 @@ namespace Content.Shared.Research.Prototypes
         [DataField]
         public Dictionary<ProtoId<MaterialPrototype>, int> Materials = new();
 
+        /// <summary>Item prototypes this recipe consumes, besides materials.</summary>
+        [DataField]
+        public Dictionary<EntProtoId, int> Entities = new();
+
+        /// <summary>Reagents this recipe consumes.</summary>
+        [DataField]
+        public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> Reagents = new();
+
         [DataField]
         public float MaterialDiscountScale = 1f; // Mono - changed from bool to float
 

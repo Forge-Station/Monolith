@@ -1,0 +1,44 @@
+<tabs:WolfgateConsentTab xmlns="https://spacestation14.io"
+                         xmlns:tabs="clr-namespace:Content.Client._WF.Options.UI.Tabs"
+                         xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls">
+    <BoxContainer Orientation="Vertical">
+        <!-- Shown when the client is not connected, since consent lives on the server. -->
+        <Label Name="UnavailableLabel"
+               Text="{Loc 'ui-options-consent-unavailable'}"
+               Margin="8 8 8 8"
+               Visible="False" />
+        <BoxContainer Name="ConsentContent" Orientation="Vertical" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" Margin="8 8 8 8" VerticalExpand="True">
+                <Label Text="{Loc 'consent-window-text'}" />
+                <!-- Toggles left, freetext right. Each pane scrolls on its own, so neither grows the tab. -->
+                <BoxContainer Orientation="Horizontal" VerticalExpand="True" SeparationOverride="12" Margin="0 8 0 0">
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="58">
+                        <Label Text="{Loc 'consent-window-toggles-label'}" StyleClasses="LabelKeyText" />
+                        <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+                            <BoxContainer Name="ConsentSettings" Orientation="Vertical" HorizontalExpand="True" SeparationOverride="2">
+                                <!-- One control per consent toggle prototype, generated in code -->
+                            </BoxContainer>
+                        </ScrollContainer>
+                    </BoxContainer>
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="42">
+                        <Label Text="{Loc 'consent-window-freetext-label'}" StyleClasses="LabelKeyText" />
+                        <!-- Margin lines the inset up with the toggle cards. The editor fills the pane and scrolls itself. -->
+                        <PanelContainer StyleClasses="CreatorInset" HorizontalExpand="True" VerticalExpand="True" Margin="5">
+                            <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False">
+                                <TextEdit Name="ConsentFreetext" HorizontalExpand="True" VerticalExpand="True" MinHeight="110" />
+                            </ScrollContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+            <!-- Save row under both panes, in the same strip as the other tabs' Apply row. -->
+            <controls:StripeBack HasBottomEdge="False">
+                <BoxContainer Orientation="Horizontal" Margin="2">
+                    <Label Name="SaveLabel" StyleClasses="Danger" Margin="8 0" />
+                    <Control HorizontalExpand="True" />
+                    <Button Name="SaveConsentSettings" Text="{Loc 'ui-options-consent-save'}" Disabled="True" />
+                </BoxContainer>
+            </controls:StripeBack>
+        </BoxContainer>
+    </BoxContainer>
+</tabs:WolfgateConsentTab>

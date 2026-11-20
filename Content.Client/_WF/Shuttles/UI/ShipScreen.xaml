@@ -1,0 +1,128 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:wf="clr-namespace:Content.Client._WF.Shuttles.UI"
+              xmlns:pa="clr-namespace:Content.Client._WF.ShipPa.UI"
+              xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              Visible="False"
+              HorizontalExpand="True">
+    <LayoutContainer Margin="5 4 10 5">
+        <wf:ShipViewControl Name="ShipView"
+                            MouseFilter="Stop"
+                            VerticalAlignment="Stretch"
+                            VerticalExpand="True"
+                            HorizontalExpand="True"/>
+        <Label Name="NoDataLabel"
+               Text="{Loc 'shuttle-console-ship-no-data'}"
+               FontColorOverride="#ff4040"
+               Visible="False"/>
+    </LayoutContainer>
+    <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="4 4 4 4">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#525252" BackgroundColor="#3d474d"/>
+        </PanelContainer.PanelOverride>
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="2 2 2 2">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#333333" BackgroundColor="#181818"/>
+            </PanelContainer.PanelOverride>
+            <!-- The side column is taller than the console on small screens, so it scrolls. -->
+            <ScrollContainer VerticalExpand="True"
+                             HorizontalExpand="True"
+                             VScrollEnabled="True"
+                             HScrollEnabled="False">
+                <BoxContainer VerticalAlignment="Top"
+                              HorizontalAlignment="Center"
+                              VerticalExpand="True"
+                              MinWidth="256"
+                              MaxWidth="256"
+                              Margin="5 5 5 5"
+                              Orientation="Vertical">
+                    <controls:StripeBack MinSize="48 48">
+                        <Label Text="{Loc 'shuttle-console-ship-display-label'}"
+                               VerticalExpand="True"
+                               HorizontalAlignment="Center"/>
+                    </controls:StripeBack>
+                    <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
+                        </PanelContainer.PanelOverride>
+                        <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="8 8 8 8">
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
+                            </PanelContainer.PanelOverride>
+                            <GridContainer Columns="2"
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Top"
+                                           HorizontalExpand="True"
+                                           Margin="6 6 6 6">
+                                <Label Text="{Loc 'shuttle-console-ship-name'}" FontColorOverride="#00ff2a"/>
+                                <Label Name="ShipNameLabel"
+                                       Text="{Loc 'shuttle-console-ship-name-unknown'}"
+                                       HorizontalExpand="True"
+                                       Align="Right"
+                                       FontColorOverride="#00ff2a"/>
+                                <Label Text="{Loc 'shuttle-console-ship-tiles'}" FontColorOverride="#00ff2a"/>
+                                <Label Name="ShipTilesLabel"
+                                       Text="-"
+                                       HorizontalExpand="True"
+                                       Align="Right"
+                                       FontColorOverride="#00ff2a"/>
+                                <Label Text="{Loc 'shuttle-console-ship-integrity'}" FontColorOverride="#00ff2a"/>
+                                <Label Name="IntegrityLabel"
+                                       Text="-"
+                                       HorizontalExpand="True"
+                                       Align="Right"
+                                       FontColorOverride="#00ff2a"/>
+                                <Label Text="{Loc 'shuttle-console-ship-damaged'}" FontColorOverride="#ffae3d"/>
+                                <Label Name="DamagedLabel"
+                                       Text="-"
+                                       HorizontalExpand="True"
+                                       Align="Right"
+                                       FontColorOverride="#ffae3d"/>
+                                <Label Text="{Loc 'shuttle-console-ship-fires'}" FontColorOverride="#ff8038"/>
+                                <Label Name="FiresLabel"
+                                       Text="-"
+                                       HorizontalExpand="True"
+                                       Align="Right"
+                                       FontColorOverride="#ff8038"/>
+                                <Label Text="{Loc 'shuttle-console-ship-vented'}" FontColorOverride="#3fc8ff"/>
+                                <Label Name="VentedLabel"
+                                       Text="-"
+                                       HorizontalExpand="True"
+                                       Align="Right"
+                                       FontColorOverride="#3fc8ff"/>
+                                <Label Text="{Loc 'shuttle-console-ship-unpowered'}" FontColorOverride="#ffc23f"/>
+                                <Label Name="UnpoweredLabel"
+                                       Text="-"
+                                       HorizontalExpand="True"
+                                       Align="Right"
+                                       FontColorOverride="#ffc23f"/>
+                            </GridContainer>
+                        </PanelContainer>
+                    </PanelContainer>
+                    <controls:StripeBack MinSize="48 48">
+                        <Label Text="{Loc 'shuttle-console-ship-overlays'}"
+                               VerticalExpand="True"
+                               HorizontalAlignment="Center"/>
+                    </controls:StripeBack>
+                    <BoxContainer Orientation="Vertical" Margin="8 4 8 4">
+                        <CheckBox Name="DamageToggle" Text="{Loc 'shuttle-console-ship-overlay-damage'}" Pressed="True"/>
+                        <CheckBox Name="FireToggle" Text="{Loc 'shuttle-console-ship-overlay-fire'}" Pressed="True"/>
+                        <CheckBox Name="PressureToggle" Text="{Loc 'shuttle-console-ship-overlay-pressure'}"/>
+                        <CheckBox Name="PowerToggle" Text="{Loc 'shuttle-console-ship-overlay-power'}"/>
+                    </BoxContainer>
+                    <Button Name="FitButton"
+                            Text="{Loc 'shuttle-console-ship-fit'}"
+                            StyleClasses="ButtonSquare"
+                            MinSize="0 40"
+                            Margin="4 4 4 4"/>
+                    <Label Name="TruncatedLabel"
+                           Text="{Loc 'shuttle-console-ship-truncated'}"
+                           FontColorOverride="#ff4040"
+                           Margin="4 0 4 0"
+                           Visible="False"/>
+                    <pa:ShipAlarmPanel Name="AlarmPanel" Margin="0 8 0 0"/>
+                </BoxContainer>
+            </ScrollContainer>
+        </PanelContainer>
+    </PanelContainer>
+</BoxContainer>

@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "<site>_artery0/1 from modular_septic/icons/mob/human/overlays/artery.dmi, https://gitgud.io/bobstation/bobstation-reignited, recoloured to grey by Tools/_WF/Wolfmed/gen_wolfmed_overlays.py for Wolfgate (Wolfmed)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "head_artery0",
+      "directions": 4
+    },
+    {
+      "name": "head_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "neck_artery0",
+      "directions": 4
+    },
+    {
+      "name": "neck_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "r_arm_artery0",
+      "directions": 4
+    },
+    {
+      "name": "r_arm_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "l_arm_artery0",
+      "directions": 4
+    },
+    {
+      "name": "l_arm_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "r_hand_artery0",
+      "directions": 4
+    },
+    {
+      "name": "r_hand_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "l_hand_artery0",
+      "directions": 4
+    },
+    {
+      "name": "l_hand_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "r_leg_artery0",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "l_leg_artery0",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "r_foot_artery0",
+      "directions": 4
+    },
+    {
+      "name": "r_foot_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "l_foot_artery0",
+      "directions": 4
+    },
+    {
+      "name": "l_foot_artery1",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

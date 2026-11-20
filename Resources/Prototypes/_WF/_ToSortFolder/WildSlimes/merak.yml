@@ -1,0 +1,433 @@
+# Merak's wild slimes: the sandglass slime and the amber slime bred from it. Patches of fused desert glass at the edge of
+# the oases, each over a fossil-bed grotto in the Sandstone Galleries. The zone is the oasis noise itself, lower than the
+# oasis, and the glass stops where the oasis begins. The cavern's seed is the surface's plus 7927, so each cavern noise
+# seed is the surface one less 7927, and lower thresholds make each grotto a little wider than its patch.
+
+- type: wfWildSlimeHabitat
+  id: WFWildSlimesMerak
+  surface: WFSurfaceMerak
+  breed: WFSandglassMutation
+  babyPrototype: WFMobSlimeTranslucentBaby
+  adultPrototype: WFMobSlimeTranslucentAdult
+  adultChance: 0.3
+  patchTemplate: WFMerakSlimeZone
+  patchTile: WFFloorMerakGlassSand
+  grottoTile: WFCavernFloorMerakGlassSand
+  minPatchTiles: 24
+  surfaceSlimes: 3
+  grottoSlimes: 2
+  respawnDelay: 600
+
+# Glassy and slow: it stores water, so water heals it and it spills some when it dies, and it digs in when hurt. It
+# shrugs off the desert's heat and grows and splits only in hot air.
+- type: breed
+  breedName: sandglass slime
+  id: WFSandglassMutation
+  producedExtract: WFSandglassSlimeExtract
+  components:
+  - type: Slime
+    breed: WFSandglassMutation
+    slimeColor: "#d6b07a"
+    defaultSlimeProto: WFMobSlimeTranslucentBaby
+    maxOffspring: 4
+    mutationChance: 0.1
+    potentialMutations:
+    - WFAmberMutation
+  - type: WFSlimeClimate
+    minTemperature: 305
+    maxTemperature: 340
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.2
+    baseSprintSpeed: 2.4
+  - type: Temperature
+    heatDamageThreshold: 360
+    coldDamageThreshold: 260
+    currentTemperature: 318.15
+    specificHeat: 42
+    coldDamage:
+      types:
+        Cold: 1
+    heatDamage:
+      types:
+        Heat: 1.5
+  - type: Reactive
+    groups:
+      Flammable:
+      - Touch
+      Extinguish:
+      - Touch
+    reactions:
+    - reagents:
+      - Water
+      - SpaceCleaner
+      methods:
+      - Touch
+      effects:
+      - !type:WashCreamPieReaction {}
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -2
+  - type: WFReagentBathHeal
+    reagents:
+    - Water
+    heal:
+      groups:
+        Brute: -1
+  - type: WFSpillOnDeath
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 15
+  - type: WFDigIn
+
+# Bred only from sandglass slimes, gold with a fossil speck; it breeds back to them.
+- type: breed
+  breedName: amber slime
+  id: WFAmberMutation
+  producedExtract: WFAmberSlimeExtract
+  components:
+  - type: Slime
+    breed: WFAmberMutation
+    slimeColor: "#e8a530"
+    defaultSlimeProto: WFMobSlimeTranslucentBaby
+    maxOffspring: 3
+    mutationChance: 0.3
+    potentialMutations:
+    - WFSandglassMutation
+  - type: WFSlimeClimate
+    minTemperature: 305
+    maxTemperature: 340
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.2
+    baseSprintSpeed: 2.4
+  - type: Temperature
+    heatDamageThreshold: 360
+    coldDamageThreshold: 260
+    currentTemperature: 318.15
+    specificHeat: 42
+    coldDamage:
+      types:
+        Cold: 1
+    heatDamage:
+      types:
+        Heat: 1.5
+  - type: Reactive
+    groups:
+      Flammable:
+      - Touch
+      Extinguish:
+      - Touch
+    reactions:
+    - reagents:
+      - Water
+      - SpaceCleaner
+      methods:
+      - Touch
+      effects:
+      - !type:WashCreamPieReaction {}
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -2
+  - type: WFReagentBathHeal
+    reagents:
+    - Water
+    heal:
+      groups:
+        Brute: -1
+  - type: WFSpillOnDeath
+    solution:
+      reagents:
+      - ReagentId: Water
+        Quantity: 15
+  - type: WFDigIn
+
+# Admin and mapper spawners; neither is sold or bred from anything else.
+- type: entity
+  parent: MobSlimeXenobioBabyPending
+  id: WFMobSlimeBabySandglass
+  name: sandglass slime
+  components:
+  - type: PendingSlimeSpawn
+    basePrototype: WFMobSlimeTranslucentBaby
+    breed: WFSandglassMutation
+
+- type: entity
+  parent: MobSlimeXenobioBabyPending
+  id: WFMobSlimeBabyAmber
+  name: amber slime
+  components:
+  - type: PendingSlimeSpawn
+    basePrototype: WFMobSlimeTranslucentBaby
+    breed: WFAmberMutation
+
+# Plasma grows glass, blood a jug of clean water, and water throws up a blinding cloud of sand.
+- type: entity
+  id: WFSandglassSlimeExtract
+  parent: BaseSlimeExtract
+  name: sandglass slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#d6b07a"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: SheetGlass1
+          number: 5
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: DrinkWaterJug
+          number: 1
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSmoke
+          smokePrototype: Smoke
+          duration: 8
+          spreadAmount: 30
+          solution:
+            reagents:
+            - ReagentId: TearGas
+              Quantity: 10
+        - !type:XenobioRelayNearby
+          compName: StatusEffects
+          range: 4
+          effect: !type:GenericStatusEffect
+            key: TemporaryBlindness
+            component: TemporaryBlindness
+            time: 6
+  - type: Tag
+    tags:
+    - WFXenobiologySandglassExtract
+
+# Plasma grows a preservative that holds off rot, blood stays the rot of the dead round it, and water throws up a
+# bigger, longer blinding cloud.
+- type: entity
+  id: WFAmberSlimeExtract
+  parent: BaseSlimeExtract
+  name: amber slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#e8a530"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: Opporozidone
+          amount: 10
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: Perishable
+          range: 4
+          effect: !type:ReduceRotting
+            seconds: 300
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSmoke
+          smokePrototype: Smoke
+          duration: 12
+          spreadAmount: 60
+          solution:
+            reagents:
+            - ReagentId: TearGas
+              Quantity: 20
+        - !type:XenobioRelayNearby
+          compName: StatusEffects
+          range: 6
+          effect: !type:GenericStatusEffect
+            key: TemporaryBlindness
+            component: TemporaryBlindness
+            time: 10
+  - type: Tag
+    tags:
+    - WFXenobiologyAmberExtract
+
+- type: Tag
+  id: WFXenobiologySandglassExtract
+
+- type: Tag
+  id: WFXenobiologyAmberExtract
+
+- type: xenobiologyBounty
+  id: WFBountySandglassExtract
+  pointsAwarded: 15000
+  entries:
+  - name: bounty-item-wf-sandglass-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologySandglassExtract
+
+- type: xenobiologyBounty
+  id: WFBountyAmberExtract
+  pointsAwarded: 40000
+  entries:
+  - name: bounty-item-wf-amber-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologyAmberExtract
+
+# The id says "sand" so the planet map colours the glass as desert.
+- type: tile
+  id: WFFloorMerakGlassSand
+  parent: WFFloorMerakGoldSand
+  name: tiles-wf-merak-glass-sand
+  sprite: /Textures/_WF/WildSlimes/Merak/Tiles/glass_sand.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+  transparent: true
+  deconstructTools: []
+
+# The grotto floor: the same glass, solid, since nothing lies below the Sandstone Galleries.
+- type: tile
+  id: WFCavernFloorMerakGlassSand
+  parent: WFFloorMerakGlassSand
+  sprite: /Textures/_WF/WildSlimes/Merak/Tiles/glass_sand_cavern.png
+  transparent: false
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+- type: biomeTemplate
+  id: WFMerakSlimeZone
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFMerakSlimePatch
+    threshold: 0.87
+    noise: { seed: 331, noiseType: OpenSimplex2, frequency: 0.03 }
+
+- type: biomeTemplate
+  id: WFCavernSlimeZoneMerak
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernSlimeGrottoMerak
+    threshold: 0.84
+    noise: { seed: -7596, noiseType: OpenSimplex2, frequency: 0.03 }
+
+# The glass ends at the oasis: the oasis noise turned over, so the tile is laid only below the oasis's threshold.
+- type: biomeTemplate
+  id: WFMerakSlimePatch
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFFloorMerakGlassSand
+    invert: true
+    threshold: -0.82
+    noise: { seed: 41, noiseType: OpenSimplex2, frequency: 0.0075, fractalType: FBm, octaves: 2 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorMerakGlassSand]
+    entities: [WFMerakGlassLump, WFMerakGlassLumpSmall]
+    threshold: 0.88
+    noise: { seed: 333, noiseType: OpenSimplex2, frequency: 1 }
+
+# A fossil-bed grotto: glass floor with bones in it, lit amber by lamp agaves.
+- type: biomeTemplate
+  id: WFCavernSlimeGrottoMerak
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorMerakGlassSand
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorMerakGlassSand]
+    entities: [WFCavernLampAgave]
+    threshold: 0.9
+    noise: { seed: 335, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorMerakGlassSand]
+    entities: [CoyoteChompBonesLskullW, CoyoteChompBonesLbone, CoyoteChompBonesLribs, CoyoteChompBonesLribs1]
+    threshold: 0.92
+    noise: { seed: 336, noiseType: OpenSimplex2, frequency: 2.5 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorMerakGlassSand]
+    entities: [WFMerakGlassLump, WFMerakGlassLumpSmall]
+    threshold: 0.9
+    noise: { seed: 334, noiseType: OpenSimplex2, frequency: 1 }
+
+- type: entity
+  parent: WFCarcinomaJellyMound
+  id: WFMerakGlassLump
+  name: glass lump
+  description: A heap of sand fused to cloudy glass, still faintly warm. Something small moves inside it.
+  components:
+  - type: Sprite
+    sprite: _WF/WildSlimes/Merak/glass_lump.rsi
+    state: mound
+
+- type: entity
+  parent: WFMerakGlassLump
+  id: WFMerakGlassLumpSmall
+  name: glass bead
+  description: A small lump of fused sand.
+  components:
+  - type: Sprite
+    state: blob

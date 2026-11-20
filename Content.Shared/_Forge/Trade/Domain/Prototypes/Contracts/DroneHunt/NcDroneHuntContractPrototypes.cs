@@ -45,7 +45,7 @@ public sealed partial class NcDroneHuntCompletionData
     public string Proof { get; set; } = string.Empty;
 }
 
-[Prototype("ncDroneHuntContract")]
+[Prototype]
 public sealed partial class NcDroneHuntContractPrototype : IPrototype
 {
     [DataField("name", required: true)]

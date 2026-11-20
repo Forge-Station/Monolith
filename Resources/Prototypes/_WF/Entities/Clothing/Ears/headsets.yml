@@ -1,0 +1,73 @@
+- type: entity
+  parent: ClothingHeadsetGrey
+  id: WFCrewHeadset
+  suffix: NPC crew
+  components:
+  - type: WFCrewRadio
+  - type: TelecomExempt
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyTraffic
+      - WFEncryptionKeyCrewIntercom
+
+# The navies' crews wear their own services' headsets, with the faction channel's key beside the common ones.
+- type: entity
+  parent: ClothingHeadsetTsfmc
+  id: WFCrewHeadsetTsf
+  suffix: NPC crew
+  components:
+  - type: WFCrewRadio
+  - type: TelecomExempt
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyTraffic
+      - EncryptionKeyNfsd
+      - WFEncryptionKeyCrewIntercom
+
+- type: entity
+  parent: ClothingHeadsetFreelance
+  id: WFCrewHeadsetPdv
+  suffix: NPC crew
+  components:
+  - type: WFCrewRadio
+  - type: TelecomExempt
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyTraffic
+      - EncryptionKeyFreelance
+      - WFEncryptionKeyCrewIntercom
+
+- type: entity
+  parent: ClothingHeadsetUSSP
+  id: WFCrewHeadsetUssp
+  suffix: NPC crew
+  components:
+  - type: WFCrewRadio
+  - type: TelecomExempt
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - EncryptionKeyTraffic
+      - EncryptionKeyUssp
+      - WFEncryptionKeyCrewIntercom
+
+- type: entity
+  parent: 
+  id: WFAsfClothingHeadset
+  components:
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/science.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/science.rsi
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - WFAsfEncryptionKey

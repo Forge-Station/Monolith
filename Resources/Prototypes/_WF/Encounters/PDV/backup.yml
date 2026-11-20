@@ -1,0 +1,76 @@
+# A Dynasty gunboat has been jumped by a Federation strike pair and calls for backup. Shoot the Federation ships and the Dynasty
+# boat takes you for an ally and pays when they are beaten; Dynasty players get data chits as well. Shoot the Dynasty boat and
+# the strike pair leaves you be, but they pay nothing: what you can take off the wreck is the reward.
+- type: wfEncounter
+  id: WFEncounterPdvBackupRequest
+  leash: 2500
+  name: wf-encounter-name-pdv-backup
+  announcement: wf-encounter-announce-pdv-backup
+  announceOnRadio: true
+  announcer: patrol
+  start: Scheduled
+  category: Distress
+  cost: 3
+  weight: 2
+  minPlayers: 3
+  requiresWar: true
+  cooldown: 2700
+  duration: 2700
+  startRadius: 2000
+  minDistance: 2500
+  maxDistance: 4000
+  rewards:
+  - side: pdv
+    spesos: 48000
+    credits: 30
+    creditEntity: Doubloon1
+    creditCompanies: [ PDV, PDVCivilian ]
+    thanks: wf-encounter-reward-thanks-pdv
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: pdv
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Attack
+      target: striker
+  - key: striker
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 500
+    side: tsf
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: patrol
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 180, 520
+    side: tsf
+    faction: TSFMC
+    distress: false
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: patrol

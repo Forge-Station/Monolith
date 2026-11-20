@@ -25,6 +25,10 @@ public sealed partial class CompanyPrototype : IPrototype
     [DataField]
     public string Form { get; private set; } = "Neutral";
 
+    /// <summary>Hidden from character setup. Forge companies leave this unset.</summary>
+    [DataField]
+    public bool Disabled { get; private set; }
+
 
     /// <summary>
     /// The name of the company.
@@ -44,15 +48,12 @@ public sealed partial class CompanyPrototype : IPrototype
     [DataField]
     public Color Color { get; private set; } = Color.Yellow;
 
-    /// </summary>
-    /// Forge-change: delete Logins, Disabled = Whitelisted
-    /// Whether this company requires whitelist to join.
-    /// Companies with this set to true will be displayed in the selection UI,
-    /// but players won't be able to select them unless they are whitelisted.
-    /// These companies can still be assigned automatically through the job system.
+    /// <summary>
+    /// Closed by default: players need membership, an invite, or the leader to open recruiting.
+    /// Set false only for special open companies (e.g. <c>None</c>).
     /// </summary>
     [DataField]
-    public bool Whitelisted { get; private set; } = false;
+    public bool Whitelisted { get; private set; } = true;
 
     /// <summary>
     /// The image to display for this company in the UI.

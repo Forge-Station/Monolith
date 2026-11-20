@@ -28,7 +28,7 @@ namespace Content.Server.GameTicking
         /// <summary>
         ///     For access to the round ID in status responses.
         /// </summary>
-        [Dependency] private GameTicker _gameTicker = default!;
+        [Dependency] private ServerGameTicker _gameTicker = default!;
         [Dependency] private JoinQueueManager _joinQueue = default!; // Forge-Change
 
         private void InitializeStatusShell()

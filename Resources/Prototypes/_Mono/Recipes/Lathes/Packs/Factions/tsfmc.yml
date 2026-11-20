@@ -1,18 +1,13 @@
 - type: latheRecipePack
   id: MonoTSFGearDynamic
   recipes:
-  - ClothingOuterHardsuitTSFMCM82c # Forge-change
-  - ClothingOuterHardsuitTSFMCM82b # Forge-change
-  - ClothingOuterHardsuitTSFMCM86 # Forge-change
-  - ClothingOuterHardsuitTSFMCLightJuggernaut # Forge-change
-  - ClothingOuterHardsuitTSFMCEnergyShield # Forge-change
-  - ClothingOuterHardsuitTSFMCStealth # Forge-change
-  - ClothingOuterHardsuitTSFMCReflectElite # Forge-change
-  - ClothingOuterHardsuitTSFMCAdvancedLight # Forge-change
-  - ClothingOuterHardsuitTSFMCHeavyJuggernaut # Forge-change
+  - ClothingOuterHardsuitM82cTsf
+  - ClothingOuterHardsuitM82bTsf
+  - ClothingOuterHardsuitM86Tsf
+  - ClothingOuterHardsuitM92XTsf
   - ClothingEyesNightVisionGoggles
-  - ClothingUniformTsfmcMoppTsf # Forge-change
-  - ClothingHandsGlovesMoppTsf # Forge-change
+# - ClothingUniformTsfmcMoppTsf
+# - ClothingHandsGlovesMoppTsf
 
 - type: latheRecipePack
   id: MonoTSFWeaponsDynamicMelee
@@ -24,9 +19,7 @@
   id: MonoTSFWeaponsDynamicRanged
   recipes:
   - WeaponRifleLecterTSF
-  - WeaponRifleVulcanTSF
   - WeaponSubMachineGunDrozdTSF
-  - WeaponRifleMR3CTSF
   - WeaponRifleAnnieTSF
   #- WeaponLMGMR8BTSF
   - WeaponRifleMR8CTSF
@@ -34,7 +27,7 @@
   - WeaponLMGGrizzlyTSF
   - WeaponDEWCalico
   - WeaponDEWSmilodon
-  - WeaponLauncherTSFOsiris
+  #- WeaponLauncherTSFOsiris
   - WeaponLauncherTSFAnubis
   - WeaponAMRShenzhenTSF
   - WeaponRifleRiversongTSF
@@ -43,13 +36,16 @@
 - type: latheRecipePack
   id: MonoTSFVouchersDynamic
   recipes:
-  - FlyssaVoucherTSF
-  - FujianVoucherTSF
-  - AltairVoucherTSF
-  - PolarisVoucherTSF
   - ShipVoucherTsfT0Recipe
   - ShipVoucherTsfT1Recipe
   - ShipVoucherTsfT2Recipe
+  - ShipVoucherPolarisRecipe
+  - ShipVoucherLudaRecipe
+  # WOLFGATE(OldVessels) START: classic ship LPCs
+  - AltairVoucherTSF
+  - WFAndromedaVoucherTSF
+  - FlyssaVoucherTSF
+  # WOLFGATE END
 
 - type: latheRecipePack
   id: MonoTSFMiscDynamic

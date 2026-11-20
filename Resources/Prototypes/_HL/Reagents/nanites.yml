@@ -1,0 +1,109 @@
+- type: reagent
+  id: Nanites
+  name: reagent-name-nanites
+  group: Medicine
+  desc: reagent-desc-nanites
+  physicalDesc: reagent-physical-desc-glowing
+  flavor: metallic
+  color: "#8AFFFd"
+  recognizable: true
+  worksOnTheDead: true
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        ignoreResistances: false
+        conditions:
+        - !type:HasTag
+          tag: Synth
+          invert: true
+        damage:
+          types:
+            Slash: 0.15
+            Piercing: 0.1
+            Blunt: 0.05
+      - !type:Emote
+        emote: Scream
+        probability: 0.1
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Synth
+        - !type:ReagentThreshold
+          reagent: Nanites
+          max: 10.5
+        damage:
+          groups:
+            Brute: -6 # -3 after modifiers
+            Burn: -8 # -4 after modifiers
+            Toxin: -6 # -3 after modifiers
+          types:
+            Bloodloss: -1.8 # -0.9 after modifiers
+            Cellular: -3 # -1.5 after modifiers
+      - !type:ModifyBleedAmount
+        conditions:
+        - !type:OrganType
+          type: Synth
+        - !type:ReagentThreshold
+          reagent: Nanites
+          max: 10.5
+        amount: -0.75 # -0.375 after modifiers
+      - !type:ModifyBloodLevel
+        conditions:
+        - !type:OrganType
+          type: Synth
+        - !type:ReagentThreshold
+          reagent: Nanites
+          max: 10.5
+        amount: 3 # 1.5 after modifiers
+      # OD
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Synth
+        - !type:ReagentThreshold
+          reagent: Nanites
+          min: 10.5
+        damage:
+          groups:
+            Brute: 1.5 # 0.75 after modifiers
+      - !type:ModifyBleedAmount
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Nanites
+          min: 10.5
+        - !type:OrganType
+          type: Synth
+        amount: 0.3 # 0.15 after modifiers
+      - !type:Jitter
+        conditions:
+        - !type:OrganType
+          type: Synth
+        - !type:ReagentThreshold
+          reagent: Nanites
+          min: 10.5
+    Poison:
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Synth
+          shouldHave: false
+        damage:
+          groups:
+            Brute: 3
+      - !type:Emote
+        conditions:
+        - !type:OrganType
+          type: Synth
+          shouldHave: false
+        emote: Scream
+        probability: 0.2
+  footstepSound:
+    collection: FootstepBlood
+    params:
+      volume: 6

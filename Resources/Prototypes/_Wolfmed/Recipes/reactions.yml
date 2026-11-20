@@ -1,0 +1,70 @@
+# Spaceacillin (W5). Two medical reagents chemistry already stocks, so an infected crew is a problem
+# medbay can solve from its own dispenser.
+
+- type: reaction
+  id: Spaceacillin
+  reactants:
+    Cryptobiolin:
+      amount: 1
+    Inaprovaline:
+      amount: 1
+  products:
+    Spaceacillin: 2
+
+# Wolfmed's painkiller ladder (CONSC). Each one is two things chemistry already stocks, so the ladder is
+# reachable from the dispenser on a shift with no cargo.
+
+- type: reaction
+  id: WFWolfmedAnalgesic
+  reactants:
+    Ibuprofen:
+      amount: 1
+    Sugar:
+      amount: 1
+  products:
+    WFWolfmedAnalgesic: 2
+
+# Tramadol and sugar rather than tramadol and ethanol: Onyx's oxycodone is tramadol, ethanol and epinephrine, and a
+# recipe that is a subset of another fires as soon as its part is poured (TryAllReactionsTest adds one reagent at a time).
+- type: reaction
+  id: WFWolfmedOpiate
+  reactants:
+    Tramadol:
+      amount: 1
+    Sugar:
+      amount: 1
+  products:
+    WFWolfmedOpiate: 2
+
+- type: reaction
+  id: WFWolfmedStim
+  reactants:
+    Ephedrine:
+      amount: 1
+    Epinephrine:
+      amount: 1
+  products:
+    WFWolfmedStim: 2
+
+# M2 (OD14): naloxone, the overdose's definitive fix, from two things chemistry makes from its own dispenser.
+- type: reaction
+  id: WFWolfmedNaloxone
+  reactants:
+    Inaprovaline:
+      amount: 1
+    Ammonia:
+      amount: 1
+  products:
+    WFWolfmedNaloxone: 2
+
+# Playtest 3 IPC 2: hydraulic fluid, a silicone oil that does not burn, from oil and silicon off the dispenser. A chassis
+# runs on it now, so chemistry can make a refill without cargo.
+- type: reaction
+  id: WFWolfmedHydraulicFluid
+  reactants:
+    Oil:
+      amount: 1
+    Silicon:
+      amount: 1
+  products:
+    WFWolfmedHydraulicFluid: 2

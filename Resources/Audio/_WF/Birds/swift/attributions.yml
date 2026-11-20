@@ -1,0 +1,17 @@
+- files:
+  - boid_chirp03.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/boid/boid_chirp03.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - boid_chirp04.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/npc/boid/boid_chirp04.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - xen_bird2.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/ambience/xen_bird2.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

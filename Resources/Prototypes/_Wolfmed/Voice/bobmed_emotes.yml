@@ -1,0 +1,81 @@
+# Playtest 4 (SOUNDS): humanoid emotes NovaSector voices that Wolfgate could not type. Upstream Sneeze and Snore
+# exist but have no trigger words, no whitelist and no icon, so they never reach the chat box or the emote menu;
+# these replace them for players rather than editing the upstream prototypes. Their voices come from
+# WFWolfmedMaleEmotes / WFWolfmedFemaleEmotes, and every one of them is flesh only (WolfmedBodySoundSystem):
+# a silicon cannot use them, and any other mechanical body that does makes no sound.
+
+- type: emote
+  id: WFWolfmedSneeze
+  name: wolfmed-emote-name-sneeze
+  category: Vocal
+  icon: Interface/Emotes/cough.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - Silicon
+  chatMessages: ["wolfmed-emote-msg-sneeze"]
+  chatTriggers:
+  - sneeze
+  - sneezes
+  - sneezed
+  - sneezing
+
+- type: emote
+  id: WFWolfmedSnore
+  name: wolfmed-emote-name-snore
+  category: Vocal
+  icon: Interface/Emotes/yawn.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - Silicon
+  chatMessages: ["wolfmed-emote-msg-snore"]
+  chatTriggers:
+  - snore
+  - snores
+  - snored
+  - snoring
+
+- type: emote
+  id: WFWolfmedSniff
+  name: wolfmed-emote-name-sniff
+  category: Vocal
+  icon: Interface/Emotes/sigh.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - Silicon
+  chatMessages: ["wolfmed-emote-msg-sniff"]
+  chatTriggers:
+  - sniff
+  - sniffs
+  - sniffed
+  - sniffing
+
+- type: emote
+  id: WFWolfmedGulp
+  name: wolfmed-emote-name-gulp
+  category: Vocal
+  icon: Interface/Emotes/vocal.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+    - Silicon
+  chatMessages: ["wolfmed-emote-msg-gulp"]
+  chatTriggers:
+  - gulp
+  - gulps
+  - gulped
+  - gulping

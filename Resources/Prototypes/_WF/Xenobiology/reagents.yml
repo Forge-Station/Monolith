@@ -1,0 +1,95 @@
+# Ported from Goobstation via Trauma Station (Reagents/reagents.yml).
+
+- type: reagent
+  id: BaseXenobioReagent
+  abstract: true
+  group: Biological
+  flavor: horrible
+  physicalDesc: reagent-physical-desc-viscous
+  recognizable: false
+  viscosity: 0.25
+
+- type: reagent
+  parent: BaseXenobioReagent
+  id: XenobioJellyPurple
+  name: xenobio-reagent-jelly-purple-name
+  desc: xenobio-reagent-jelly-purple-desc
+  color: "#BF77F6"
+  metabolisms:
+    Medicine:
+      metabolismRate: 1
+      effects:
+      - !type:XenobioModifySlime
+        extractBonus: 1
+
+- type: reagent
+  parent: BaseXenobioReagent
+  id: XenobioJellyBlue
+  name: xenobio-reagent-jelly-blue-name
+  desc: xenobio-reagent-jelly-blue-desc
+  color: "#79F6FC"
+  metabolisms:
+    Medicine:
+      metabolismRate: 1
+      effects:
+      - !type:XenobioModifySlime
+        chanceModifier: -0.25
+
+- type: reagent
+  parent: BaseXenobioReagent
+  id: XenobioJellyDarkBlue
+  name: xenobio-reagent-jelly-darkblue-name
+  desc: xenobio-reagent-jelly-darkblue-desc
+  color: "#1E8CFA"
+  metabolisms:
+    Medicine:
+      metabolismRate: 1
+      effects:
+      - !type:XenobioGrantComponents
+        duration: 60
+        components:
+        - type: TemperatureImmunity
+
+- type: reagent
+  parent: BaseXenobioReagent
+  id: XenobioJellyCerulean
+  name: xenobio-reagent-jelly-cerulean-name
+  desc: xenobio-reagent-jelly-cerulean-desc
+  color: "#2A52BE"
+  metabolisms:
+    Medicine:
+      metabolismRate: 1
+      effects:
+      - !type:XenobioModifySlime
+        offspringBonus: 2
+
+- type: reagent
+  parent: BaseXenobioReagent
+  id: XenobioJellyRed
+  name: xenobio-reagent-jelly-red-name
+  desc: xenobio-reagent-jelly-red-desc
+  color: "#FF3333"
+  metabolisms:
+    Medicine:
+      metabolismRate: 1
+      effects:
+      - !type:XenobioModifySlime
+        chanceModifier: 0.25
+
+- type: reagent
+  parent: BaseXenobioReagent
+  id: XenobioJellyPink
+  name: xenobio-reagent-jelly-pink-name
+  desc: xenobio-reagent-jelly-pink-desc
+  color: "#FF4DD2"
+  metabolisms:
+    Medicine:
+      metabolismRate: 1
+      effects:
+      - !type:XenobioChangeFaction
+        newFaction: Passive
+        duration: 5
+        conditions:
+        - !type:ReagentThreshold
+          reagent: XenobioJellyPink
+          min: 5

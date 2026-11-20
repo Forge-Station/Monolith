@@ -17,7 +17,7 @@ namespace Content.Shared.Tag;
 public sealed partial class TagSystem : EntitySystem
 {
 
-    [Dependency] private readonly EntityQuery<TagComponent> _tagQuery = default!;
+    [Dependency] private EntityQuery<TagComponent> _tagQuery = default!;
 
     public override void Initialize()
     {

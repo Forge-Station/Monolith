@@ -1,0 +1,19 @@
+- type: cargoProduct
+  id: WFMiningBeam
+  icon:
+    sprite: _WF/AsteroidMining/Structures/mining_beam.rsi
+    state: space_artillery
+  product: WFFlatpackMiningBeam
+  cost: 7500
+  category: cargoproduct-category-name-shuttle
+  group: market
+
+- type: cargoProduct
+  id: WFMiningLaserSmall
+  icon:
+    sprite: _WF/AsteroidMining/Structures/mining_laser_small.rsi
+    state: space_artillery
+  product: WFFlatpackMiningLaserSmall
+  cost: 2500
+  category: cargoproduct-category-name-shuttle
+  group: market

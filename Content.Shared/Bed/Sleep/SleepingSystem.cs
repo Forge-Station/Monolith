@@ -21,7 +21,6 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Verbs;
-using Content.Shared.Speech.Components; /// Forge-Change
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -31,7 +30,6 @@ namespace Content.Shared.Bed.Sleep;
 
 public sealed partial class SleepingSystem : EntitySystem
 {
-    private const string SnoreEmoteId = "Snore"; /// Forge-Change
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private BlindableSystem _blindableSystem = default!;
@@ -66,32 +64,11 @@ public sealed partial class SleepingSystem : EntitySystem
         SubscribeLocalEvent<SleepingComponent, InteractHandEvent>(OnInteractHand);
 
         SubscribeLocalEvent<ForcedSleepingComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<ForcedSleepingComponent, MobStateChangedEvent>(OnForcedSleepMobStateChanged); // Forge-Change: added forced sleep mob state changed event
-        SubscribeLocalEvent<ForcedSleepingComponent, SpeakAttemptEvent>(OnForcedSleepSpeakAttempt); // Forge-Change: added forced sleep speak attempt event
-        SubscribeLocalEvent<ForcedSleepingComponent, EmoteAttemptEvent>(OnForcedSleepEmoteAttempt); // Forge-Change: added forced sleep emote attempt event
         SubscribeLocalEvent<SleepingComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
         SubscribeLocalEvent<SleepingComponent, EmoteAttemptEvent>(OnEmoteAttempt);
-        SubscribeLocalEvent<SnoringComponent, ComponentStartup>(OnSnoringStartup); /// Forge-Change
 
-        SubscribeLocalEvent<SleepingComponent, BeforeForceSayEvent>(OnChangeForceSay, after: new[] { typeof(PainNumbnessSystem) }); // Forge-Change: added forced sleep before force say event
+        SubscribeLocalEvent<SleepingComponent, BeforeForceSayEvent>(OnChangeForceSay, after: new []{typeof(PainNumbnessSystem)});
     }
-    /// Forge-Change-Start
-    private void OnSnoringStartup(Entity<SnoringComponent> ent, ref ComponentStartup args)
-    {
-        TryCacheSnoreFromEmoteSounds(ent);
-    }
-
-    private void TryCacheSnoreFromEmoteSounds(Entity<SnoringComponent> ent)
-    {
-        if (!TryComp<VocalComponent>(ent, out var vocal) || vocal.EmoteSounds == null)
-            return;
-
-        if (!vocal.EmoteSounds.Sounds.TryGetValue(SnoreEmoteId, out var snoreSound))
-            return;
-
-        ent.Comp.Snore = snoreSound;
-    }
-/// Forge-Change-End
 
     private void OnUnbuckleAttempt(Entity<SleepingComponent> ent, ref UnbuckleAttemptEvent args)
     {
@@ -134,15 +111,10 @@ public sealed partial class SleepingSystem : EntitySystem
             if (TryComp<SleepEmitSoundComponent>(ent, out var sleepSound))
             {
                 var emitSound = EnsureComp<SpamEmitSoundComponent>(ent);
-                /// Forge-Change-Start
-                if (TryComp<SnoringComponent>(ent, out var snoring))
+                if (HasComp<SnoringComponent>(ent))
                 {
-                    if (snoring.Snore == null)
-                        TryCacheSnoreFromEmoteSounds((ent.Owner, snoring));
-
-                    emitSound.Sound = snoring.Snore ?? sleepSound.Snore;
+                    emitSound.Sound = sleepSound.Snore;
                 }
-                /// Forge-Change-End
                 emitSound.MinInterval = sleepSound.Interval;
                 emitSound.MaxInterval = sleepSound.MaxInterval;
                 emitSound.PopUp = sleepSound.PopUp;
@@ -249,7 +221,7 @@ public sealed partial class SleepingSystem : EntitySystem
             return;
 
         // Wake up if either damage or healing exceeds the threshold
-        if ((totalChange > 0 || -totalChange > 0) &&
+        if ((totalChange > 0 || -totalChange > 0) && 
             (totalChange >= ent.Comp.WakeThreshold || -totalChange >= ent.Comp.WakeThreshold)
             && !HasComp<ForcedSleepingComponent>(ent))
             TryWaking((ent, ent.Comp));
@@ -263,9 +235,13 @@ public sealed partial class SleepingSystem : EntitySystem
     {
         if (args.NewMobState == MobState.Dead)
         {
-            // Ensure forced sleep from chems/gases does not persist through death-revive loops.
-            _statusEffectsSystem.TryRemoveStatusEffect(ent.Owner, "ForcedSleep"); // Forge-Change: removed forced sleep status effect
-            TryWaking((ent, ent.Comp), force: true); // Forge-Change: woke up entity
+            RemComp<SpamEmitSoundComponent>(ent);
+            // WOLFGATE(Wolfmed) START: playtest 5, a body that died asleep stayed stunned and knocked down once revived.
+            // Falling asleep stuns and knocks down with no timer, and only Wake takes them and the Wake action off; a
+            // body in cardiac arrest looks dead and can still fall asleep.
+            // RemComp<SleepingComponent>(ent);
+            Wake(ent);
+            // WOLFGATE END
             return;
         }
         if (TryComp<SpamEmitSoundComponent>(ent, out var spam))
@@ -277,28 +253,6 @@ public sealed partial class SleepingSystem : EntitySystem
         TrySleeping(ent.Owner);
     }
 
-    // Forge-Change-start: added forced sleep mob state changed event
-    private void OnForcedSleepMobStateChanged(Entity<ForcedSleepingComponent> ent, ref MobStateChangedEvent args)
-    {
-        if (args.NewMobState != MobState.Dead)
-            return;
-
-        _statusEffectsSystem.TryRemoveStatusEffect(ent.Owner, "ForcedSleep");
-        if (TryComp<SleepingComponent>(ent, out var sleeping))
-            TryWaking((ent.Owner, sleeping), force: true);
-        RemComp<ForcedSleepingComponent>(ent);
-    }
-
-    private void OnForcedSleepSpeakAttempt(Entity<ForcedSleepingComponent> ent, ref SpeakAttemptEvent args)
-    {
-        args.Cancel();
-    }
-
-    private void OnForcedSleepEmoteAttempt(Entity<ForcedSleepingComponent> ent, ref EmoteAttemptEvent args)
-    {
-        args.Cancel();
-    }
-    // Forge-Change-end: added forced sleep mob state changed event
     private void Wake(Entity<SleepingComponent> ent)
     {
         RemComp<SleepingComponent>(ent);

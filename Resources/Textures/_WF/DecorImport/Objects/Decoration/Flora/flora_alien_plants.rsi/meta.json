@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7, BeeStation at commit https://github.com/BeeStation/BeeStation-Hornet/commit/c10d715d09ebbc501f8c127c55db9cee7f7b9c8d, CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/d5306e2724d6006e69439d9cf64a2b166fe4ed15, NovaSector at commit https://github.com/NovaSector/NovaSector/commit/3754f28afedc5e20e1bc76dd6c5568c957a4a9de, Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3, tgstation at commit https://github.com/tgstation/tgstation/commit/0f669632f5f8972a04df1e24bb987240dbaf7518.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cavefern"
+    },
+    {
+      "name": "chilly_pepper1"
+    },
+    {
+      "name": "chilly_pepper2"
+    },
+    {
+      "name": "drakebeet1"
+    },
+    {
+      "name": "flower"
+    },
+    {
+      "name": "garden"
+    },
+    {
+      "name": "gardenarid"
+    },
+    {
+      "name": "gardencold"
+    },
+    {
+      "name": "gardensick"
+    },
+    {
+      "name": "glowgrowth1"
+    },
+    {
+      "name": "lamp"
+    },
+    {
+      "name": "lamppostfruit1"
+    },
+    {
+      "name": "lunar_plant1"
+    },
+    {
+      "name": "lunar_plant2"
+    },
+    {
+      "name": "lunar_plant3"
+    },
+    {
+      "name": "lvcluster_1"
+    },
+    {
+      "name": "lvcluster_1-em"
+    },
+    {
+      "name": "lvcluster_2"
+    },
+    {
+      "name": "lvcluster_2-em"
+    },
+    {
+      "name": "lvcluster_3"
+    },
+    {
+      "name": "lvcluster_3-em"
+    },
+    {
+      "name": "melon"
+    },
+    {
+      "name": "mine"
+    },
+    {
+      "name": "plantbot1"
+    },
+    {
+      "name": "planttop1"
+    },
+    {
+      "name": "shrub1"
+    },
+    {
+      "name": "stick"
+    },
+    {
+      "name": "xpod1",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    }
+  ]
+}

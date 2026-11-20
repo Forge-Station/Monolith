@@ -1,0 +1,6 @@
+# Wolfgate: PotentialPsionic dropped - Wolfgate has no psionics system.
+- type: entity
+  save: false
+  name: Urist McBeeper
+  parent: BaseMobSynth
+  id: MobSynth

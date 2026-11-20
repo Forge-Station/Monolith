@@ -1,0 +1,24 @@
+- type: loadout
+  id: WFAsfLoadoutBackpack
+  equipment:
+    back: WFAsfClothingBackpack
+
+- type: loadout
+  id: WFAsfLoadoutSatchel
+  equipment:
+    back: WFAsfClothingBackpackSatchel
+
+- type: loadout
+  id: WFAsfLoadoutDuffel
+  equipment:
+    back: WFAsfClothingBackpackDuffel
+
+- type: loadoutGroup
+  id: WFAsfBackpack
+  name: loadout-group-contractor-backpack
+  loadouts:
+  - WFAsfLoadoutBackpack
+  - WFAsfLoadoutSatchel
+  - WFAsfLoadoutDuffel
+  fallbacks:
+  - WFAsfLoadoutBackpack

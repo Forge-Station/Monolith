@@ -108,6 +108,12 @@ public sealed partial class TraitPreferenceSelector : Control
     /// instead of coloring the entire button.
     /// </summary>
     /// <param name="unavailable">Whether the trait is unavailable for selection</param>
+    public void SetExcluded(bool excluded)
+    {
+        TraitButton.Disabled = excluded && !Preference;
+        Modulate = excluded ? Color.FromHex("#888888") : Color.White;
+    }
+
     public void SetUnavailable(bool unavailable)
     {
         if (unavailable)

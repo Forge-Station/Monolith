@@ -1,0 +1,44 @@
+- type: construction
+  name: cavern stairs
+  id: WFCavernStairs
+  graph: WFCavernStairs
+  startNode: start
+  targetNode: stairs
+  category: construction-category-structures
+  description: Steel stairs from a cavern floor up to the surface. They break through the ground above them and come out on the side they climb towards.
+  icon:
+    sprite: _WF/Caverns/Stairs/steel.rsi
+    state: straight
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  - !type:WFCavernStairsSite
+
+- type: constructionGraph
+  id: WFCavernStairs
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: stairs
+      completed:
+      - !type:SnapToGrid {}
+      steps:
+      - material: Steel
+        amount: 10
+        doAfter: 8
+
+  - node: stairs
+    entity: WFCavernStairs
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 10
+      - !type:DeleteEntity {}
+      steps:
+      - tool: Anchoring
+        doAfter: 4

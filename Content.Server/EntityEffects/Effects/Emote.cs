@@ -4,7 +4,6 @@ using Content.Shared.Chat.Prototypes;
 using Content.Shared.EntityEffects;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.EntityEffects.Effects;
 

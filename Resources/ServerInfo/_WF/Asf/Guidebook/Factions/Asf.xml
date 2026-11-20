@@ -1,0 +1,37 @@
+<Document>
+  # Astraeus Solar Federation
+
+  <Box>
+    <GuideEntityEmbed Entity="WFAsfBanner" Caption="ASF"/>
+  </Box>
+
+  The [color=#A66BE0]Astraeus Solar Federation[/color] (ASF) is a union of many species, Sol among them. The moth fleet ended humanity's last great war and offered the survivors a seat on the Federation council, where humans now sit as one member of many.
+
+  The ASF keeps only a small presence in the Colossus Sector: a handful of envoys, researchers and colonists working out of [color=#A66BE0]Lantern Post[/color]. It is not a combat faction but it's trained to defend itself. Relations with the [color=cyan]Trans-Solarian Federation[/color] are cordial, if a little awkward given the names.
+
+  The Federation council asks three things of its people in the sector:
+
+  > [bold][color=#A66BE0]Try to establish a more permanent presence; including colonization[/color][/bold]
+
+  > [bold][color=#A66BE0]Study the sector, its artifacts, and bring the data home.[/color][/bold]
+
+  > [bold][color=#A66BE0]Help whoever docks at Lantern Post, whatever their flag, within reason.[/color][/bold]
+
+  ## Roles
+
+  - [color=#A66BE0]Envoy[/color]: runs Lantern Post and speaks for the Federation.
+  - [color=#A66BE0]Enforcer[/color]: keeps the post and ASF members safe. May or may not hold a rank within the Navy.
+  - [color=#A66BE0]Field Researcher[/color]: takes survey ships out, studies what they find and brings the data back to the lab.
+  - [color=#A66BE0]Colonist[/color]: keeps the post running and looks for expansion opportunities.
+
+  All ASF crew answer to the Envoy, and the Envoy to the Federation council.
+
+  ## Astraeus Reward Grants
+
+  <Box>
+    <GuideEntityEmbed Entity="WFAsfRewardGrant" Caption="Astraeus Reward Grant"/>
+  </Box>
+
+  The bounty console in Lantern Post's cargo bay offers ASF bounties, and they pay in Astraeus Reward Grants (ARG), which can be traded for valuables from home.
+
+</Document>

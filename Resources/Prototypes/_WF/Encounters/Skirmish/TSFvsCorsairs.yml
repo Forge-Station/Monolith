@@ -1,0 +1,80 @@
+# A TSF patrol against a RedSail crew in a shielded gunboat. TSF is at war with the corsairs, but that is their own business.
+- type: wfEncounter
+  id: WFEncounterSkirmishCorsairs
+  leash: 2500
+  name: wf-encounter-name-skirmish-corsairs
+  announcement: wf-encounter-announce-skirmish-corsairs
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Threat
+  icon: Swords
+  cost: 2
+  weight: 0.5
+  minPlayers: 3
+  startRadius: 1800
+  cooldown: 3000
+  duration: 1800
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  rewards:
+  - side: tsf
+    spesos: 28000
+    credits: 22
+    creditEntity: FederationMilitaryCredit1
+    creditCompanies: [ TSF, TSFCivilian ]
+    thanks: wf-encounter-reward-thanks-skirmish-tsf
+  - side: corsairs
+    spesos: 22000
+    thanks: wf-encounter-reward-thanks-skirmish-corsairs
+  ships:
+  - key: patrol
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: escort
+    navigation: WFCrewNavigationWarship
+    vessel: QJ271
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: tsf
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    skill: Regular
+    evades: false
+    objectives:
+    - kind: Attack
+      target: corsair
+  - key: corsair
+    navigation: WFCrewNavigationRaider
+    vessel: Mudskipper
+    offset: 0, 600
+    side: corsairs
+    faction: PirateNF
+    distress: false
+    company: RedSailCorsairs
+    profile: WFCrewProfilePirate
+    deckhands: 1
+    skill: Regular
+    evades: false
+    iffColor: "#ff5c5c"
+    objectives:
+    - kind: Attack
+      target: patrol
+    - kind: Attack
+      target: escort

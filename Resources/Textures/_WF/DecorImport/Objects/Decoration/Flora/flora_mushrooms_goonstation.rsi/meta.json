@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mushroom1"
+    },
+    {
+      "name": "mushroom2"
+    },
+    {
+      "name": "mushroom3"
+    },
+    {
+      "name": "mushroom4"
+    },
+    {
+      "name": "mushroom5"
+    },
+    {
+      "name": "mushroom6"
+    },
+    {
+      "name": "mushroom7"
+    },
+    {
+      "name": "shrooms"
+    }
+  ]
+}

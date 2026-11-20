@@ -1,0 +1,61 @@
+- type: wolfWeather
+  id: WFFogWisps
+  wind: 0.35, 0.1
+  gust: 0.1
+  gustPeriod: 30
+  fadeIn: 40
+  fadeOut: 40
+  ambientTint: "#e6eaeeff"
+  layers:
+  - kind: Fog
+    spacing: 3
+    density: 0.45
+    softness: 0.15
+    windScale: 1
+    color: "#d0d8e073"
+  - kind: Fog
+    spacing: 1.5
+    density: 0.35
+    softness: 0.1
+    windScale: 1.4
+    color: "#dfe5eb4d"
+    minQuality: 2
+
+- type: wolfWeather
+  id: WFFogBank
+  wind: 0.3, 0.1
+  gust: 0.1
+  gustPeriod: 30
+  fadeIn: 40
+  fadeOut: 40
+  ambientTint: "#c4ccd4ff"
+  layers:
+  - kind: Fog
+    spacing: 8
+    density: 0.7
+    softness: 0.35
+    windScale: 0.8
+    color: "#c8d0d899"
+  - kind: Fog
+    spacing: 4
+    density: 0.55
+    softness: 0.3
+    windScale: 1.2
+    color: "#d8dee459"
+    minQuality: 2
+
+- type: wolfWeather
+  id: WFFogHaze
+  wind: 0.2, 0.05
+  gust: 0.05
+  gustPeriod: 30
+  fadeIn: 40
+  fadeOut: 40
+  ambientTint: "#d0d4d8ff"
+  layers:
+  - kind: Fog
+    spacing: 12
+    density: 0.95
+    softness: 0.6
+    windScale: 0.6
+    color: "#c8ccd066"

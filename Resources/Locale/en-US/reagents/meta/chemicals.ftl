@@ -10,6 +10,10 @@ reagent-desc-sodium-carbonate = A white, odorless, water-soluble salt that yield
 reagent-name-artifexium = artifexium
 reagent-desc-artifexium = A lavender mixture of microscopic artifact fragments and a strong acid. It has the ability to activate artifacts.
 
+# WOLFGATE(Xenoarch)
+reagent-name-artifact-glue = artifact glue
+reagent-desc-artifact-glue = Mixture of glue and artifexium. It can restore durability of nodes in artifact on touch.
+
 reagent-name-benzene = benzene
 reagent-desc-benzene = An aromatic, slightly carcinogenic, ring of carbon, forming a base for many organic compounds.
 

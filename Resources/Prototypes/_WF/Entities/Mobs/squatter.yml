@@ -1,0 +1,77 @@
+# A squatter who moves into a landed ship nobody is minding (WFShipSquatterSystem). Not violent until forced. His brain
+# stays off until then; PlanetNpcGear dresses him for the world's air, and WFNpcIntent has him stop on a downed target.
+
+- type: entity
+  parent: BaseMobHuman
+  id: WFShipSquatter
+  name: squatter
+  description: Someone who has made himself at home.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: SimpleHumanoidHostileCompound
+  - type: ActiveListener
+    range: 6
+  - type: WFNpcIntent
+    set: WFIntentsSquatter
+    leaveSeconds: 3
+    leaveDistance: 2
+  - type: Loadout
+    prototypes: [ WFShipSquatterGear ]
+  - type: WFShipSquatter
+    boardBarks:
+    - wf-ship-squatter-board-1
+    - wf-ship-squatter-board-2
+    - wf-ship-squatter-board-3
+    - wf-ship-squatter-board-4
+    - wf-ship-squatter-board-5
+    nearBarks:
+    - wf-ship-squatter-near-1
+    - wf-ship-squatter-near-2
+    - wf-ship-squatter-near-3
+    talkedBarks:
+    - wf-ship-squatter-talked-1
+    - wf-ship-squatter-talked-2
+    - wf-ship-squatter-talked-3
+    - wf-ship-squatter-talked-4
+    giftBarks:
+    - wf-ship-squatter-gift-1
+    - wf-ship-squatter-gift-2
+    angryBarks:
+    - wf-ship-squatter-angry-1
+    - wf-ship-squatter-angry-2
+    - wf-ship-squatter-angry-3
+    calmBarks:
+    - wf-ship-squatter-calm-1
+    - wf-ship-squatter-calm-2
+
+# A mean spear for the one who made him do it.
+- type: startingGear
+  id: WFShipSquatterGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    outerClothing: ClothingOuterWinterCoat
+    gloves: ClothingHandsGlovesFingerless
+    shoes: ClothingShoesBootsWork
+  inhand:
+  - Spear
+
+# He only ever beats you down: no gun, no killing blow, and he leaves a downed man be.
+- type: wfNpcIntentSet
+  id: WFIntentsSquatter
+  intents:
+  - kind: BeatDown
+    weight: 1
+  cooldown: 300
+  beatLines:
+  - wf-ship-squatter-beat-1
+  - wf-ship-squatter-beat-2
+  - wf-ship-squatter-beat-3

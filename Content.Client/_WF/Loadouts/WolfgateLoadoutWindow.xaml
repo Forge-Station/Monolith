@@ -1,0 +1,67 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:loadouts="clr-namespace:Content.Client._WF.Loadouts"
+                      MinSize="900 440"
+                      SetSize="1240 800">
+    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+        <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+            <loadouts:LoadoutSearchBox Name="SearchBar" HorizontalExpand="True" MinWidth="110"
+                                       PlaceHolder="{Loc 'wf-loadout-search-placeholder'}" />
+            <Button Name="ClearButton" Text="{Loc 'wf-loadout-search-clear'}" Disabled="True" />
+            <BoxContainer Name="RoleNameBox" Orientation="Horizontal" SeparationOverride="4">
+                <Label Text="{Loc 'wf-loadout-name-label'}" StyleClasses="CreatorFieldLabel" VerticalAlignment="Center" />
+                <LineEdit Name="RoleNameEdit" MinWidth="130" />
+            </BoxContainer>
+            <BoxContainer Name="BudgetBox" Orientation="Vertical" MinWidth="165" VerticalAlignment="Center"
+                          MouseFilter="Stop">
+                <Label Name="BudgetLabel" />
+                <ProgressBar Name="BudgetBar" MinValue="0" MaxValue="1" SetHeight="4" />
+            </BoxContainer>
+        </BoxContainer>
+
+        <!-- Fixed height, so a warning appearing never pushes the panes below it down. -->
+        <BoxContainer Name="AttentionRow" Orientation="Horizontal" SeparationOverride="14" SetHeight="24">
+            <Label Name="ReadyLabel" Text="{Loc 'wf-loadout-attention-ok'}" StyleClasses="LabelSubText"
+                   VerticalAlignment="Center" />
+            <Button Name="PickLink" StyleClasses="LinkButton" VerticalAlignment="Center" Visible="False" />
+            <Button Name="AffordLink" StyleClasses="LinkButton" VerticalAlignment="Center" Visible="False" />
+            <Control HorizontalExpand="True" />
+            <Label Name="PointsLabel" StyleClasses="LabelSubText" VerticalAlignment="Center" Visible="False" />
+        </BoxContainer>
+
+        <BoxContainer Name="Body" Orientation="Horizontal" VerticalExpand="True" SeparationOverride="8">
+            <PanelContainer StyleClasses="LoadoutPanel" SetWidth="300" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                    <Label Text="{Loc 'wf-loadout-kit-heading'}" StyleClasses="CreatorHeading" />
+                    <ScrollContainer Name="RailScroll" HScrollEnabled="False" VerticalExpand="True">
+                        <BoxContainer Name="Rail" Orientation="Vertical" SeparationOverride="1" />
+                    </ScrollContainer>
+                </BoxContainer>
+            </PanelContainer>
+
+            <PanelContainer StyleClasses="LoadoutPanel" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Name="Locker" Orientation="Vertical" SeparationOverride="4">
+                    <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                        <Label Name="GroupHeading" StyleClasses="CreatorHeading" />
+                        <Label Name="GroupLimit" StyleClasses="LabelSubText" VerticalAlignment="Center"
+                               HorizontalExpand="True" ClipText="True" />
+                        <Label Name="GroupCount" StyleClasses="LabelSubText" VerticalAlignment="Center" />
+                    </BoxContainer>
+                    <Label Name="HintLabel" SetHeight="24" ClipText="True" />
+                    <ScrollContainer Name="GridScroll" HScrollEnabled="False" VerticalExpand="True">
+                        <loadouts:LoadoutTileGrid Name="Grid" />
+                    </ScrollContainer>
+                    <BoxContainer Name="EmptyBox" Orientation="Vertical" VerticalExpand="True"
+                                  VerticalAlignment="Center" SeparationOverride="6" Visible="False">
+                        <Label Name="EmptyLabel" Align="Center" StyleClasses="LabelSubText" />
+                        <Button Name="EmptyClearButton" Text="{Loc 'wf-loadout-search-clear-link'}"
+                                StyleClasses="LinkButton" HorizontalAlignment="Center" />
+                    </BoxContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+
+        <Label Name="NoOptionsLabel" Text="{Loc 'wf-loadout-no-options'}" StyleClasses="LabelSubText"
+               Visible="False" />
+    </BoxContainer>
+</controls:FancyWindow>

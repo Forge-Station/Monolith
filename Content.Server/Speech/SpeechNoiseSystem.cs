@@ -2,6 +2,7 @@ using Robust.Shared.Audio;
 using Content.Server.Chat;
 using Content.Server.Chat.Systems;
 using Content.Shared.Speech;
+using Content.Shared._WF.Voice; // WOLFGATE(Voice)
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -61,6 +62,10 @@ namespace Content.Server.Speech
         private void OnEntitySpoke(EntityUid uid, SpeechComponent component, EntitySpokeEvent args)
         {
             if (component.SpeechSounds == null)
+                return;
+
+            // WOLFGATE(Voice): the voice plays instead, unless the character chose the message sound
+            if (TryComp<SpeechVoiceComponent>(uid, out var voice) && voice.Voice.Enabled)
                 return;
 
             var currentTime = _gameTiming.CurTime;

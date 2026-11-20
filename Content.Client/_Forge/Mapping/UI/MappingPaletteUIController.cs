@@ -344,7 +344,7 @@ public sealed partial class MappingPaletteUIController : UIController, IOnStateE
         }
         else
         {
-            button.ChildrenPrototypes.DisposeAllChildren();
+            button.ChildrenPrototypes.RemoveAllChildren();
             button.CollapseButton.Label.Text = "▶";
         }
     }

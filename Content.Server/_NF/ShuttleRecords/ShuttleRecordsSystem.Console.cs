@@ -206,7 +206,7 @@ public sealed partial class ShuttleRecordsSystem
         deed.ShuttleName = shuttleRecord.Name;
         deed.ShuttleNameSuffix = shuttleRecord.Suffix;
         deed.PurchasedWithVoucher = shuttleRecord.PurchasedWithVoucher;
-        deed.SpawnAppraisalValue = (int)shuttleRecord.SpawnAppraisalValue; // Forge-change
+        Dirty(targetId, deed); // WOLFGATE(ShipAccess): the ship link is networked, and this card may already have held a deed
     }
 
     /// <summary>

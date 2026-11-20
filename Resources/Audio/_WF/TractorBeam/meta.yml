@@ -1,0 +1,3 @@
+- files: ["tractorbeam_engage.ogg", "tractorbeam_loop.ogg", "tractorbeam_disengage.ogg", "creak1.ogg", "creak2.ogg", "creak3.ogg"]
+  copyright: "User-provided tractor beam sound assets, supplied for Wolfgate on 2026-09-17. Converted to mono OGG Vorbis for positional playback. Beam engage/loop/disengage were replaced with the user's newer mono WAV clips and attenuated by 2 dB for encoding headroom; no filtering or loudness normalization. Creak clips unchanged. Original authorship and license were not specified."
+  source: "User-provided local SFX/Tractor Beam folder"

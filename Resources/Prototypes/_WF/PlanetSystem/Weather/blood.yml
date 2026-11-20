@@ -1,0 +1,65 @@
+# Red weathers for Carcinoma, as variants of the normal rain and fog.
+- type: wolfWeather
+  parent: WFRainLight
+  id: WFBloodRainLight
+  groundTint: "#8c0a0d"
+  ambientTint: "#f0c8c8"
+  layerOverrides:
+  - index: 0
+    color: "#d0141cb3"
+  - index: 1
+    color: "#e0202ab3"
+
+- type: wolfWeather
+  parent: WFRainModerate
+  id: WFBloodRainModerate
+  groundTint: "#8c0a0d"
+  ambientTint: "#e0b0b0"
+  layerOverrides:
+  - index: 0
+    color: "#a80c14b3"
+  - index: 1
+    color: "#e01a22cc"
+  - index: 2
+    color: "#e0202acc"
+
+- type: wolfWeather
+  parent: WFRainHeavy
+  id: WFBloodRainHeavy
+  groundTint: "#8c0a0d"
+  ambientTint: "#c89090"
+  lightning:
+    interval: 30, 90
+    flashColor: "#ffd0c8"
+    farSound:
+      collection: WFWolfThunderFar
+      params:
+        volume: 0
+        variation: 0.05
+  layerOverrides:
+  - index: 0
+    color: "#a80c14bf"
+  - index: 1
+    color: "#d0141cd9"
+  - index: 2
+    color: "#f02830e6"
+  - index: 3
+    color: "#e0202ad9"
+
+- type: wolfWeather
+  parent: WFFogBank
+  id: WFBloodFog
+  ambientTint: "#d8a8a8ff"
+  layerOverrides:
+  - index: 0
+    color: "#9a0f14b3"
+  - index: 1
+    color: "#c4141e80"
+
+- type: wolfWeather
+  parent: WFFogHaze
+  id: WFBloodHaze
+  ambientTint: "#e8c4c4ff"
+  layerOverrides:
+  - index: 0
+    color: "#a3141a8c"

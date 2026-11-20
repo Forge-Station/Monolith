@@ -1,0 +1,23 @@
+# RMC-14: Resources/Prototypes/_RMC14/Trackers/Trackers.yml
+- type: trackerMode
+  id: HiveCore
+  component: HiveCore
+  alert: HiveCoreTracker
+
+# RMC-14: Resources/Prototypes/_RMC14/Trackers/Trackers.yml
+- type: trackerMode
+  id: HiveLeader
+  component: HiveLeader
+  alert: LeaderTracker
+
+# RMC-14: Resources/Prototypes/_RMC14/Trackers/Trackers.yml
+- type: trackerMode
+  id: Queen
+  component: XenoOvipositorCapable
+  alert: HiveTracker
+
+# RMC-14: Resources/Prototypes/_RMC14/Trackers/Trackers.yml
+- type: trackerMode
+  id: Tunnel
+  component: XenoTunnel
+  alert: TunnelTracker

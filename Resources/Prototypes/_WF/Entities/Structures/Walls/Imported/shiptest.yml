@@ -1,0 +1,289 @@
+- type: entity
+  parent: [ BaseWallTierTwo, BaseWallBitmask ]
+  id: ShiptestConcreteReinforced
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/hexacrete_shiptest.rsi
+    state: hexacrete-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/hexacrete_shiptest.rsi
+  - type: IconSmooth
+    base: hexacrete-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralDiamond
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/diamond_wall_shiptest.rsi
+    state: diamond_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/diamond_wall_shiptest.rsi
+  - type: IconSmooth
+    base: diamond_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralGold
+  components:
+  - type: Construction
+    graph: Girder
+    node: goldWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/gold_wall_shiptest.rsi
+    state: gold_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/gold_wall_shiptest.rsi
+  - type: IconSmooth
+    base: gold_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralIron
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/iron_wall_shiptest.rsi
+    state: iron_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/iron_wall_shiptest.rsi
+  - type: IconSmooth
+    base: iron_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralPlasma
+  components:
+  - type: Construction
+    graph: Girder
+    node: plasmaWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall_shiptest.rsi
+    state: plasma_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall_shiptest.rsi
+  - type: IconSmooth
+    base: plasma_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralPlastitanium
+  components:
+  - type: StaticPrice
+    price: 110
+  - type: Construction
+    graph: Girder
+    node: plastitaniumWall
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plastitanium_wall_shiptest.rsi
+    state: plastitanium_wall-0
+    color: "#777880"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plastitanium_wall_shiptest.rsi
+  - type: IconSmooth
+    base: plastitanium_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralSandstone
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_wall_shiptest.rsi
+    state: sandstone_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_wall_shiptest.rsi
+  - type: IconSmooth
+    base: sandstone_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralSilver
+  components:
+  - type: Construction
+    graph: Girder
+    node: silverWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/silver_wall_shiptest.rsi
+    state: silver_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/silver_wall_shiptest.rsi
+  - type: IconSmooth
+    base: silver_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralUranium
+  components:
+  - type: Construction
+    graph: Girder
+    node: uraniumWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/uranium_wall_shiptest.rsi
+    state: uranium_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/uranium_wall_shiptest.rsi
+  - type: IconSmooth
+    base: uranium_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralWood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wood_wall_shiptest.rsi
+    state: wood_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wood_wall_shiptest.rsi
+  - type: IconSmooth
+    base: wood_wall-
+
+- type: entity
+  parent: [ BaseWallTierTwo, BaseWallBitmask ]
+  id: ShiptestRWallRust
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWallRust
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rusty_reinforced_wall_shiptest.rsi
+    state: rusty_reinforced_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rusty_reinforced_wall_shiptest.rsi
+  - type: IconSmooth
+    base: rusty_reinforced_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestRust
+  components:
+  - type: Construction
+    graph: Girder
+    node: wallrust
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rusty_wall_shiptest.rsi
+    state: rusty_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rusty_wall_shiptest.rsi
+  - type: IconSmooth
+    base: rusty_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ShiptestMineralShrouded
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: SoundOnGather
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/break_stone.ogg
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/shrouded_shiptest.rsi
+    state: shrouded-0
+    offset: -0.125,-0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/shrouded_shiptest.rsi
+    state: shrouded-0
+  - type: IconSmooth
+    base: shrouded-
+
+- type: entity
+  parent: ShiptestMineralShrouded
+  id: ShiptestMineralSnow
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rockwall_icemoon_shiptest.rsi
+    state: rockwall_icemoon-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rockwall_icemoon_shiptest.rsi
+    state: rockwall_icemoon-0
+  - type: IconSmooth
+    base: rockwall_icemoon-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: SkyratClosedWall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wall_skyrat.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wall_skyrat.rsi
+  - type: IconSmooth
+    base: wall-

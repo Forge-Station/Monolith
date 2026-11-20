@@ -1,0 +1,383 @@
+# MMC Hokkaido: ore, refined stock, claim jumpers.
+
+- type: wfContract
+  id: WFContractMMCIronQuota
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 1
+  title: wf-contract-mmc-iron-quota
+  briefing: wf-contract-mmc-iron-quota-brief
+  reward: 7500, 10500
+  minutes: 50
+  crewBonus: 0.5
+  weight: 2.5
+  objective: !type:WFContractSupply
+    premium: 2
+    goods:
+    - stack: SteelOre
+      count: 40, 70
+
+- type: wfContract
+  id: WFContractMMCBulkMinerals
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 1
+  title: wf-contract-mmc-bulk-minerals
+  briefing: wf-contract-mmc-bulk-minerals-brief
+  reward: 7000, 10000
+  minutes: 50
+  crewBonus: 0.5
+  weight: 2
+  objective: !type:WFContractSupply
+    pick: 2
+    premium: 2
+    goods:
+    - stack: SpaceQuartz
+      count: 30, 50
+    - stack: Coal
+      count: 30, 50
+    - stack: SaltOre
+      count: 20, 40
+
+- type: wfContract
+  id: WFContractMMCPreciousOre
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 2
+  title: wf-contract-mmc-precious-ore
+  briefing: wf-contract-mmc-precious-ore-brief
+  reward: 15000, 20000
+  deposit: 1000
+  minutes: 55
+  crewBonus: 0.5
+  weight: 1.5
+  objective: !type:WFContractSupply
+    pick: 2
+    premium: 2
+    goods:
+    - stack: GoldOre
+      count: 12, 20
+    - stack: SilverOre
+      count: 12, 20
+    - stack: CopperOre
+      count: 20, 30
+
+- type: wfContract
+  id: WFContractMMCPlasmaOre
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 2
+  title: wf-contract-mmc-plasma-ore
+  briefing: wf-contract-mmc-plasma-ore-brief
+  reward: 16250, 21250
+  deposit: 1000
+  minutes: 55
+  crewBonus: 0.5
+  weight: 1.2
+  objective: !type:WFContractSupply
+    premium: 2
+    goods:
+    - stack: PlasmaOre
+      count: 20, 35
+
+- type: wfContract
+  id: WFContractMMCLithium
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 3
+  title: wf-contract-mmc-lithium
+  briefing: wf-contract-mmc-lithium-brief
+  reward: 25000, 35000
+  deposit: 3000
+  minutes: 60
+  crewBonus: 0.5
+  weight: 1
+  objective: !type:WFContractSupply
+    premium: 2
+    goods:
+    - stack: LithiumOre
+      count: 10, 20
+
+- type: wfContract
+  id: WFContractMMCRareOre
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 3
+  title: wf-contract-mmc-rare-ore
+  briefing: wf-contract-mmc-rare-ore-brief
+  reward: 30000, 40000
+  deposit: 3000
+  minutes: 60
+  crewBonus: 0.5
+  weight: 0.8
+  harms:
+    WFContractorAnomalousLab: 1
+  objective: !type:WFContractSupply
+    pick: 1
+    premium: 2
+    goods:
+    - stack: UraniumOre
+      count: 20, 30
+    - stack: DiamondOre
+      count: 4, 8
+    - stack: BluespaceOre
+      count: 4, 8
+
+- type: wfContract
+  id: WFContractMMCRefined
+  contractor: WFContractorMMC
+  category: Supply
+  tier: 2
+  title: wf-contract-mmc-refined
+  briefing: wf-contract-mmc-refined-brief
+  reward: 12500, 17500
+  deposit: 1000
+  minutes: 50
+  weight: 1.2
+  objective: !type:WFContractSupply
+    pick: 2
+    premium: 1.5
+    goods:
+    - stack: Steel
+      count: 60, 100
+    - stack: Plasteel
+      count: 20, 40
+    - stack: Gold
+      count: 10, 20
+    - stack: Silver
+      count: 10, 20
+
+- type: wfContract
+  id: WFContractMMCMachineParts
+  contractor: WFContractorMMC
+  category: Hauling
+  tier: 2
+  title: wf-contract-mmc-machine-parts
+  briefing: wf-contract-mmc-machine-parts-brief
+  reward: 13750, 17500
+  deposit: 2000
+  minutes: 50
+  weight: 1.2
+  objective: !type:WFContractCourier
+    package: WFContractFreightComponents
+    count: 2, 4
+    from: Board
+    to: Contractor
+    perPackage: 2250
+    perKilometre: 1625
+
+- type: wfContract
+  id: WFContractMMCClaimJumpers
+  contractor: WFContractorMMC
+  category: Bounty
+  tier: 2
+  title: wf-contract-mmc-claim-jumpers
+  briefing: wf-contract-mmc-claim-jumpers-brief
+  reward: 32500, 40000
+  deposit: 2000
+  minutes: 55
+  crewBonus: 0.25
+  weight: 1.2
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetClaimJumper ]
+    minDistance: 3500
+    maxDistance: 5500
+
+- type: wfContract
+  id: WFContractMMCSurveyRecorder
+  contractor: WFContractorMMC
+  category: Salvage
+  tier: 2
+  title: wf-contract-mmc-survey-recorder
+  briefing: wf-contract-mmc-survey-recorder-brief
+  reward: 18750, 23750
+  deposit: 1000
+  minutes: 50
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractRecovery
+    item: WFContractFlightRecorder
+    minDistance: 3500
+    maxDistance: 5500
+    wrecks:
+    - /Maps/Salvage/small-ai-survey-drone.yml
+    - /Maps/Salvage/hauling-shuttle.yml
+    - /Maps/Salvage/medium-crashed-shuttle.yml
+    - /Maps/Salvage/small-cargo.yml
+
+- type: wfContract
+  id: WFContractMMCEscortOreHauler
+  contractor: WFContractorMMC
+  category: Escort
+  tier: 2
+  title: wf-contract-mmc-escort-ore-hauler
+  briefing: wf-contract-mmc-escort-ore-hauler-brief
+  reward: 20000, 26250
+  deposit: 1500
+  minutes: 60
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractEscort
+    encounters: [ WFContractEscortLight ]
+    destinations: [ WFContractorCaelPort, WFContractorStellarBlessing ]
+    perKilometre: 1250
+
+# Crew work: big quotas priced for a crew, so each share beats a solo quota.
+
+- type: wfContract
+  id: WFContractMMCBulkOre
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 1
+  title: wf-contract-mmc-bulk-ore
+  briefing: wf-contract-mmc-bulk-ore-brief
+  reward: 20000, 26000
+  minutes: 75
+  minCrew: 2
+  crewBonus: 0.4
+  weight: 2
+  objective: !type:WFContractSupply
+    premium: 1.5
+    goodsCap: 18000
+    goods:
+    - stack: SteelOre
+      count: 120, 180
+    - stack: SpaceQuartz
+      count: 60, 90
+    - stack: Coal
+      count: 60, 90
+
+- type: wfContract
+  id: WFContractMMCDeepCore
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 2
+  title: wf-contract-mmc-deep-core
+  briefing: wf-contract-mmc-deep-core-brief
+  reward: 42000, 52000
+  deposit: 3000
+  minutes: 90
+  minCrew: 3
+  crewBonus: 0.35
+  weight: 1.2
+  objective: !type:WFContractSupply
+    pick: 3
+    premium: 1.5
+    goodsCap: 36000
+    goods:
+    - stack: GoldOre
+      count: 40, 60
+    - stack: SilverOre
+      count: 40, 60
+    - stack: PlasmaOre
+      count: 60, 90
+    - stack: UraniumOre
+      count: 50, 80
+
+- type: wfContract
+  id: WFContractMMCStripClaim
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 3
+  title: wf-contract-mmc-strip-claim
+  briefing: wf-contract-mmc-strip-claim-brief
+  reward: 64000, 80000
+  deposit: 5000
+  minutes: 105
+  minCrew: 4
+  crewBonus: 0.3
+  weight: 0.8
+  objective: !type:WFContractSupply
+    premium: 1.5
+    goodsCap: 56000
+    goods:
+    - stack: SteelOre
+      count: 250, 350
+    - stack: SpaceQuartz
+      count: 150, 220
+    - stack: GoldOre
+      count: 40, 60
+    - stack: PlasmaOre
+      count: 60, 90
+    - stack: DiamondOre
+      count: 6, 10
+
+- type: wfContract
+  id: WFContractMMCHaulerHull
+  contractor: WFContractorMMC
+  category: Salvage
+  tier: 2
+  title: wf-contract-mmc-hauler-hull
+  briefing: wf-contract-mmc-hauler-hull-brief
+  reward: 18000, 23000
+  deposit: 1000
+  minutes: 60
+  crewBonus: 0.25
+  weight: 1
+  requires:
+  - tag: WFTowRope
+    name: wf-contract-requires-rope
+  - entity: WFTetherInstaller
+    name: wf-contract-requires-tether-installer
+  objective: !type:WFContractTow
+    range: 150
+    minDistance: 2500
+    maxDistance: 4000
+    wrecks:
+    - /Maps/Salvage/medium-crashed-shuttle.yml
+    - /Maps/Salvage/medium-ruined-emergency-shuttle.yml
+    - /Maps/Salvage/cargo-1.yml
+
+# Bulk orders: huge quotas on a long clock, for crews that want to settle in and mine.
+
+- type: wfContract
+  id: WFContractMMCMotherlode
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 2
+  title: wf-contract-mmc-motherlode
+  briefing: wf-contract-mmc-motherlode-brief
+  reward: 70000, 85000
+  deposit: 4000
+  minutes: 150
+  minCrew: 2
+  crewBonus: 0.35
+  weight: 0.8
+  objective: !type:WFContractSupply
+    premium: 1.25
+    goodsCap: 60000
+    goods:
+    - stack: SteelOre
+      count: 500, 700
+    - stack: SpaceQuartz
+      count: 300, 400
+    - stack: Coal
+      count: 300, 400
+
+- type: wfContract
+  id: WFContractMMCAnnualQuota
+  contractor: WFContractorMMC
+  category: Mining
+  tier: 3
+  title: wf-contract-mmc-annual-quota
+  briefing: wf-contract-mmc-annual-quota-brief
+  reward: 110000, 130000
+  deposit: 7500
+  minutes: 180
+  minCrew: 3
+  crewBonus: 0.3
+  weight: 0.5
+  objective: !type:WFContractSupply
+    premium: 1.25
+    goodsCap: 90000
+    goods:
+    - stack: SteelOre
+      count: 800, 1000
+    - stack: SpaceQuartz
+      count: 400, 500
+    - stack: GoldOre
+      count: 100, 150
+    - stack: PlasmaOre
+      count: 150, 200
+    - stack: UraniumOre
+      count: 100, 150

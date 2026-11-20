@@ -1,4 +1,4 @@
-using System.Numerics;
+using System.Numerics; //Frontier modification
 using Content.Server.Access.Systems;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Shared.DeviceNetwork.Systems;
@@ -24,14 +24,11 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.DeviceNetwork.Components;
-using Content.Shared.Medical.SuitSensors;
 using Robust.Shared.Timing;
-using System.Numerics; //Frontier modification
 using Content.Server.Salvage.Expeditions;
 using Content.Server._Mono.Radar; // Monolith
 using Content.Server.Explosion.EntitySystems;
 using Content.Server._NF.Medical.SuitSensors; // Frontier modification
-using Content.Shared.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Components; // Forge-Change
 
 namespace Content.Server.Medical.SuitSensors;
@@ -478,6 +475,72 @@ public sealed partial class SuitSensorSystem : EntitySystem
                 break;
         }
 
+        return status;
+    }
+
+    /// <summary>
+    ///     Serialize create a device network package from the suit sensors status.
+    /// </summary>
+    public NetworkPayload SuitSensorToPacket(SuitSensorStatus status)
+    {
+        var payload = new NetworkPayload()
+        {
+            [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdUpdatedState,
+            [SuitSensorConstants.NET_NAME] = status.Name,
+            [SuitSensorConstants.NET_JOB] = status.Job,
+            [SuitSensorConstants.NET_JOB_ICON] = status.JobIcon,
+            [SuitSensorConstants.NET_WF_COMPANY_RANK] = status.WFCompanyRank, // WOLFGATE(Companies)
+            [SuitSensorConstants.NET_JOB_DEPARTMENTS] = status.JobDepartments,
+            [SuitSensorConstants.NET_IS_ALIVE] = status.IsAlive,
+            [SuitSensorConstants.NET_SUIT_SENSOR_UID] = status.SuitSensorUid,
+        };
+
+        if (status.TotalDamage != null)
+            payload.Add(SuitSensorConstants.NET_TOTAL_DAMAGE, status.TotalDamage);
+        if (status.TotalDamageThreshold != null)
+            payload.Add(SuitSensorConstants.NET_TOTAL_DAMAGE_THRESHOLD, status.TotalDamageThreshold);
+        if (status.Coordinates != null)
+            payload.Add(SuitSensorConstants.NET_COORDINATES, status.Coordinates);
+        if (status.LocationName != null) //Frontier modification
+            payload.Add(SuitSensorConstants.NET_LOCATION_NAME, status.LocationName); //Frontier modification
+
+        return payload;
+    }
+
+    /// <summary>
+    ///     Try to create the suit sensors status from the device network message
+    /// </summary>
+    public SuitSensorStatus? PacketToSuitSensor(NetworkPayload payload)
+    {
+        // check command
+        if (!payload.TryGetValue(DeviceNetworkConstants.Command, out string? command))
+            return null;
+        if (command != DeviceNetworkConstants.CmdUpdatedState)
+            return null;
+
+        // check name, job and alive
+        if (!payload.TryGetValue(SuitSensorConstants.NET_NAME, out string? name)) return null;
+        if (!payload.TryGetValue(SuitSensorConstants.NET_JOB, out string? job)) return null;
+        if (!payload.TryGetValue(SuitSensorConstants.NET_JOB_ICON, out string? jobIcon)) return null;
+        if (!payload.TryGetValue(SuitSensorConstants.NET_JOB_DEPARTMENTS, out List<string>? jobDepartments)) return null;
+        if (!payload.TryGetValue(SuitSensorConstants.NET_IS_ALIVE, out bool? isAlive)) return null;
+        if (!payload.TryGetValue(SuitSensorConstants.NET_SUIT_SENSOR_UID, out NetEntity suitSensorUid)) return null;
+        if (!payload.TryGetValue(SuitSensorConstants.NET_LOCATION_NAME, out string? location)) return null; // Frontier modification
+
+        // try get total damage and cords and location name (optionals)
+        payload.TryGetValue(SuitSensorConstants.NET_TOTAL_DAMAGE, out int? totalDamage);
+        payload.TryGetValue(SuitSensorConstants.NET_TOTAL_DAMAGE_THRESHOLD, out int? totalDamageThreshold);
+        payload.TryGetValue(SuitSensorConstants.NET_COORDINATES, out NetCoordinates? coords);
+
+        var status = new SuitSensorStatus(suitSensorUid, name, job, jobIcon, jobDepartments, location)
+        {
+            IsAlive = isAlive.Value,
+            TotalDamage = totalDamage,
+            TotalDamageThreshold = totalDamageThreshold,
+            Coordinates = coords,
+        };
+        if (payload.TryGetValue(SuitSensorConstants.NET_WF_COMPANY_RANK, out int wfCompanyRank)) // WOLFGATE(Companies)
+            status.WFCompanyRank = wfCompanyRank; // WOLFGATE(Companies)
         return status;
     }
 

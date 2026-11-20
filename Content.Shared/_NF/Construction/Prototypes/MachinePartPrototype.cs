@@ -7,7 +7,7 @@ namespace Content.Shared.Construction.Prototypes; // NOTE: currently exists unde
 /// This is a prototype for categorizing
 /// different types of machine parts.
 /// </summary>
-[Prototype("machinePart")]
+[Prototype]
 public sealed partial class MachinePartPrototype : IPrototype
 {
     /// <inheritdoc/>

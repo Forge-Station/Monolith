@@ -1,0 +1,32 @@
+speech-voice-tab = Голос
+speech-voice-mode = Говорить
+speech-voice-mode-voice = Голосом персонажа
+speech-voice-mode-sound = Звуком сообщения
+speech-voice-mode-sound-hint = Используется звук сообщения с карточки голоса на вкладке внешности.
+speech-voice-pitch = Высота
+speech-voice-pitch-variance = Разброс высоты
+speech-voice-speed = Скорость
+speech-voice-intonation = Интонация
+speech-voice-vibrato-depth = Глубина вибрато
+speech-voice-vibrato-rate = Скорость вибрато
+speech-voice-tremolo = Тремоло
+speech-voice-filter = Фильтр
+speech-voice-filter-strength = Сила фильтра
+speech-voice-test = Проба
+speech-voice-test-placeholder = Привет! Как дела сегодня?
+
+speech-voice-filter-none = Нет
+speech-voice-filter-dog = Пёс
+speech-voice-filter-cat = Кот
+speech-voice-filter-bird = Птица
+speech-voice-filter-lizard = Ящер
+speech-voice-filter-mouse = Мышь
+speech-voice-filter-slime = Слизь
+speech-voice-filter-plant = Растение
+speech-voice-filter-robot = Робот
+speech-voice-filter-alien = Пришелец
+speech-voice-filter-insect = Насекомое
+speech-voice-filter-ghost = Призрак
+
+ui-options-speech-voices = Голоса персонажей (выкл.: у всех звук сообщения)
+ui-options-speech-voices-volume = Голоса персонажей

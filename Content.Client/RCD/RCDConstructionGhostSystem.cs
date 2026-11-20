@@ -25,6 +25,7 @@ namespace Content.Client.RCD;
 /// </summary>
 public sealed partial class RCDConstructionGhostSystem : EntitySystem
 {
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     private const string PlacementMode = nameof(AlignRCDConstruction);
     private const string AtmosPipePlacementMode = nameof(AlignAtmosPipeLayers);
 
@@ -279,7 +280,7 @@ public sealed partial class RCDConstructionGhostSystem : EntitySystem
         if (_placementManager is not PlacementManager manager
             || manager.CurrentPlacementOverlayEntity is not { } overlay
             || !TryComp<SpriteComponent>(overlay, out var sprite)
-            || !sprite.LayerMapTryGet(PipeVisualLayers.Pipe, out var pipeLayer))
+            || !sprite.LayerMapTryGet(PipeVisualLayers.Pipe, out var pipeLayer, false))
         {
             return;
         }

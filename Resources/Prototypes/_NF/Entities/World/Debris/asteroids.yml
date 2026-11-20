@@ -439,7 +439,10 @@
     - type: SimpleFloorPlanPopulator
       entries:
         Lattice:
-          - id: NFScrapMineralSoft
+          # WOLFGATE(AsteroidMining) START: scrap asteroids hold only scrap, ore comes from the rock clusters
+          # - id: NFScrapMineralSoft
+          - id: WallRockScrapPile
+          # WOLFGATE END
             orGroup: rock
             prob: 0.77
           - id: WallSolidRust

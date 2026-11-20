@@ -19,4 +19,10 @@ public sealed partial class MarketModifierComponent : Component
     /// </summary>
     [DataField]
     public bool Buy { get; set; } = true;
+
+    // WOLFGATE(Mining) START: a console can state its rate in its description instead
+    /// <summary>Whether examining leaves out the rate line.</summary>
+    [DataField]
+    public bool HideExamine { get; set; }
+    // WOLFGATE END
 }

@@ -1,0 +1,437 @@
+# Actions of the praetorian, defender and crusher lines, from RMC xeno_offense_actions.yml, xeno_self_actions.yml and xeno_utility_actions.yml.
+# WOLFGATE: RMC's guidebook action entities are not ported; RMC's Action, TargetAction and *TargetAction components are one component here
+
+- type: entity
+  id: ActionXenoTailSlam
+  parent: ActionXenoTailStab
+  name: Tail Slam
+
+- type: entity
+  id: ActionXenoTailStabLance
+  parent: ActionXenoTailStab
+  name: Tail Lance Stab
+  components:
+  - type: ActionSharedCooldown
+    id: ActionXenoTailStabLance
+    ids:
+    - ActionXenoTailStabLanceAlt
+    cooldown: 10
+
+- type: entity
+  id: ActionXenoTailStabLanceAlt
+  parent: ActionXenoTailStabLance
+  name: Tail Lance Slam
+  description: Strikes the targeted enemy, doing low armor-piercing damage. The cooldown is faster if you miss.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: tail_attack
+    useDelay: 3
+    event: !type:XenoTailStabEvent
+      useAltTailStab: True
+  - type: ActionSharedCooldown
+    id: ActionXenoTailStabLanceAlt
+    ids:
+    - ActionXenoTailStabLance
+    cooldown: 3
+
+- type: entity
+  id: ActionXenoHeadbutt
+  parent: ActionXenoBase
+  name: Headbutt
+  description: Charge towards the targeted enemy and push back the first enemy hit, piercing armor slightly. Does less damage but has more knockback when crest is lowered.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: headbutt
+    useDelay: 4
+    range: 3.5
+    deselectOnMiss: false
+    event: !type:XenoHeadbuttActionEvent
+    whitelist:
+      components:
+      - HumanoidAppearance # WOLFGATE: humanoids stand in for marines
+      - Xeno
+  - type: XenoOffensiveAction
+
+- type: entity
+  id: ActionXenoTailSweep
+  parent: ActionXenoBase
+  name: Tail Sweep (10) # See XenoTailSweepComponent.cs for cost
+  description: Knock down any enemies close to you.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: tail_sweep
+    useDelay: 11
+    event: !type:XenoTailSweepActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoImpale
+  name: Impale (80)
+  description: Impales an adjacent enemy with your tail. Hits twice on a marked target and removes the mark. Pierces some armor. [color=green]Attacking or using Impale on an enemy with a critical mark refunds cooldown.[/color]
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_impale
+    useDelay: 13
+    range: 2
+    deselectOnMiss: false
+    repeat: true
+    event: !type:XenoImpaleActionEvent
+  - type: XenoOffensiveAction
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 80
+  - type: RMCCooldownOnMiss
+    missCooldown: 0.7
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailTrip
+  name: Tail Trip (30)
+  description: Disarms and dazes an unmarked enemy. Stuns and dazes for longer on a marked target, and removes the mark. [color=green]Attacking or using Tail Trip on an enemy with a critical mark refunds cooldown.[/color]
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_tail_trip
+    useDelay: 13
+    range: 2
+    deselectOnMiss: false
+    repeat: true
+    event: !type:XenoTailTripActionEvent
+  - type: XenoOffensiveAction
+  - type: XenoActionPlasma
+    cost: 30
+  - type: ActionBlockIfResting
+  - type: RMCCooldownOnMiss
+    missCooldown: 0.7
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoPierce
+  name: Pierce (50)
+  description: Pierce through enemies in a 3 tile range, doing high damage and piercing some armor. Hitting 2 or more recharges your shield.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_pierce
+    useDelay: 3
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoPierceActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 50
+
+- type: entity
+  parent: ActionXenoDash
+  id: ActionXenoBlitz
+  name: Blitz (50)
+  description: Dash a short distance towards a given location. After 3 seconds or if you use it again before then, damages enemies around you. Hitting 1 or more recharges your shield.
+  components:
+  - type: WorldTargetAction
+    useDelay: 0
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoCleaveRoot
+  name: Cleave Root
+  description: Root an enemy for a second. The duration is higher if your shield is up.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_cleave_root
+    useDelay: 12
+    range: 1.5
+    deselectOnMiss: false
+    event: !type:XenoCleaveActionEvent
+  - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoCleaveRoot
+    ids:
+    - ActionXenoCleaveFling
+    cooldown: 12
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoCleaveFling
+  name: Cleave Fling
+  description: Fling an enemy. The distance is doubled if your shield is up.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_cleave_fling
+    useDelay: 12
+    range: 1.5
+    deselectOnMiss: false
+    event: !type:XenoCleaveActionEvent
+      flings: true
+  - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoCleaveFling
+    ids:
+    - ActionXenoCleaveRoot
+    cooldown: 12
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHighGallop
+  name: High Gallop
+  description: Stuns foes in a 2x3 area in targeted direction, and slows them. Also flings back grenades.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: stomp
+    useDelay: 12
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoHighGallopActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailSeize
+  name: Tail Seize
+  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival. [color=red]Has a 3-tile range![/color]
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: tail_seize
+    useDelay: 15
+    range: 15
+    deselectOnMiss: false
+    checkCanAccess: false
+    event: !type:XenoTailSeizeActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAbduct
+  name: Abduct (180)
+  description: Cast out a line that after a small doafter pulls in enemies towards you, disarming them. Catching 1 target slows them, 2 roots them, and 3 or more stuns them.
+  components:
+  # WOLFGATE: a WorldTargetAction only, RMC also listed EntityTargetAction and the event reads the tile
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: abduct
+    useDelay: 15
+    range: 15 # the actual range is in XenoAbductComponent
+    deselectOnMiss: false
+    checkCanAccess: false
+    event: !type:XenoAbductActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailLash
+  name: Tail Lash (80)
+  description: Fling back foes in a 2x3 area in targeted direction after a very short doafter. Also slows.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_tail_lash
+    useDelay: 13
+    range: 15
+    deselectOnMiss: false
+    checkCanAccess: false
+    event: !type:XenoTailLashActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoDislocate
+  parent: ActionXenoBase
+  name: Dislocate (55)
+  description: Punch a targeted enemy, doing some damage and pushing them back. If the target is slowed, stunned, downed, or rooted, instead roots and completely pierces armor. Reduces the cooldown of Abduct and Tail Lash.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: dislocate
+    useDelay: 10
+    range: 1.5
+    deselectOnMiss: false
+    event: !type:XenoDislocateActionEvent
+  - type: XenoOffensiveAction
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 55
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTumble
+  name: Tumble (25) # TODO RMC14 proper plasma costs
+  description: Charge towards your side and push back the first enemy hit. Can only be used towards either side of where you are facing.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: tumble
+    useDelay: 10
+    range: 20
+    deselectOnMiss: false
+    checkCanAccess: false
+    event: !type:XenoTumbleActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 25
+
+- type: entity
+  id: ActionXenoToggleCrest
+  parent: ActionXenoBase
+  name: Toggle Crest Defense
+  description: Increases your resistance to direct damage but slows you down. You count as one size bigger while you're crest is lowered.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: crest_defense
+    useDelay: 2
+    event: !type:XenoToggleCrestActionEvent
+
+- type: entity
+  id: ActionXenoFortify
+  parent: ActionXenoBase
+  name: Fortify
+  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage and explosions. Damage is further reduced from the direction you are facing. You can't be stunned by minor explosions. You count as two sizes bigger while fortified and still can attack structures or use tail slam.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: fortify
+    useDelay: 5
+    event: !type:XenoFortifyActionEvent
+
+- type: entity
+  id: ActionXenoFortifySteelcrest
+  parent: ActionXenoFortify
+  name: Fortify
+  description: Become much slower, increasing your resistance to direct damage and explosions. Damage is greatly reduced from the direction you are facing. You count as two sizes bigger while fortified and still can attack structures or use tail slam, but your slashes do less damage.
+
+- type: entity
+  id: ActionXenoDefensiveShield
+  parent: ActionXenoBase
+  name: Defensive Shield (50)
+  description: Gain a temporary shield that blocks the next 200 damage (and is immune to explosive damage) that lasts 7 seconds. Any damage that impacts the shield is reduced by 10 before processing. [color=green]Cooldown is partially refunded upon attacking an enemy.[/color]
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: empower
+    useDelay: 26
+    event: !type:XenoDefensiveShieldActionEvent
+
+- type: entity
+  id: ActionXenoDodge
+  parent: ActionXenoBase
+  name: Dodge
+  description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. You dodge every 3rd projectile that could hit you [color=red]excluding sniper bullets and rockets[/color]. Can be toggled off early to stop dodging, cooldown is equal to twice the duration used.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_dodge
+    useDelay: 13
+    event: !type:XenoDodgeActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSoak
+  name: Soak (20)
+  description: Soak in damage for 6 seconds. If you take 140 damage or higher, you regen 75 health and your tail slam gets refreshed.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: soak
+    useDelay: 17
+    event: !type:XenoSoakActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoRetrieve
+  name: Retrieve (180 plasma, 100 fury)
+  description: Pulls a xenonid to you if they are still, with a 0.6 second doafter. You can't pull very big xenonids unless they are downed.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: retrieve
+    range: 7
+    event: !type:XenoRetrieveActionEvent
+  - type: XenoActionPlasma
+    cost: 180
+  - type: XenoActionEnergy
+    cost: 100
+  - type: ActionCooldown
+    cooldown: 10
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailFountain
+  name: Tail Fountain
+  description: Extinguishes fire from a nearby ally or foe. Uses up your melee attack.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_tail_fountain
+    useDelay: 10
+    range: 2
+    event: !type:XenoTailFountainActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoFightOrFlight
+  name: Fight or Flight (300 plasma, 75 fury)
+  description: Remove ailments and stuns from all allies around you. The radius is longer if you have 75+ fury after paying the cost.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: screech
+    useDelay: 45
+    event: !type:XenoFightOrFlightActionEvent
+  - type: XenoActionEnergy
+    cost: 75
+  - type: XenoActionPlasma
+    cost: 300

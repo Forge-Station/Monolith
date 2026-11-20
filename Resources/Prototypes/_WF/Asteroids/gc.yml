@@ -1,0 +1,7 @@
+# Asteroid rocks unload far more grids than the shared debris queue holds; its overflow deletes them all in one tick.
+- type: gcQueue
+  id: WFAsteroids
+  depth: 3000
+  minDepthToProcess: 25
+  # 2 ms a tick per 100 rocks waiting, so a field unloads over a few seconds.
+  timeDeletePerObject: 0.02

@@ -1,0 +1,9 @@
+# RMC-14: Resources/Prototypes/_RMC14/Audio/explosion_sound_collections.yml
+- type: soundCollection
+  id: RMCExplosionBig
+  files:
+  - /Audio/_WF/Xenonids/Explosion/bigboom1.ogg
+  - /Audio/_WF/Xenonids/Explosion/bigboom2.ogg
+  - /Audio/_WF/Xenonids/Explosion/bigboom3.ogg
+  - /Audio/_WF/Xenonids/Explosion/bigboom4.ogg
+

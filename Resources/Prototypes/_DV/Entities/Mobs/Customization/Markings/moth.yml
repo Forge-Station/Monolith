@@ -3,25 +3,45 @@
   bodyPart: Tail
   markingCategory: Tail
   forcedColoring: true
-  speciesRestriction: [Moth]
+  speciesRestriction: [Moth, ProtoMoth]
   coloring:
     default:
       type:
         !type:SimpleColoring
           color: "#FFFFFF"
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    selene_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    selene_BEHIND: selene_FRONT
   sprites:
-  - sprite: _DV/Mobs/Customization/Moth/moth_wings.rsi
-    state: selene
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Moth/moth_wings.rsi # WOLFGATE - split art, anatomy zone only
+    state: selene_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Moth/moth_wings.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+    state: selene_BEHIND
 
 - type: marking
   id: MothWingsSelene
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Moth]
+  speciesRestriction: [Moth, ProtoMoth]
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    selene_primary_BEHIND: TailBehind
+    selene_secondary_BEHIND: TailBehind
+    selene_tertiary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    selene_primary_BEHIND: selene_primary_FRONT
+    selene_secondary_BEHIND: selene_secondary_FRONT
+    selene_tertiary_BEHIND: selene_tertiary_FRONT
   sprites:
-  - sprite: _DV/Mobs/Customization/Moth/moth_wings.rsi
-    state: selene_primary
-  - sprite: _DV/Mobs/Customization/Moth/moth_wings.rsi
-    state: selene_secondary
-  - sprite: _DV/Mobs/Customization/Moth/moth_wings.rsi
-    state: selene_tertiary
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Moth/moth_wings.rsi # WOLFGATE - split art, anatomy zone only
+    state: selene_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Moth/moth_wings.rsi # WOLFGATE - split art, anatomy zone only
+    state: selene_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Moth/moth_wings.rsi # WOLFGATE - split art, anatomy zone only
+    state: selene_tertiary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Moth/moth_wings.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+    state: selene_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Moth/moth_wings.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+    state: selene_secondary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/Moth/moth_wings.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+    state: selene_tertiary_BEHIND

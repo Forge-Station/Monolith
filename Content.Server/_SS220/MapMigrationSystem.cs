@@ -44,7 +44,7 @@ public sealed partial class MapMigrationSystem_SS220 : EntitySystem
 
     private bool CheckTileOccupied(Vector2i pos, EntityUid gridUid, MapGridComponent grid)
     {
-        var entitiesOnTile = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, pos);
+        var entitiesOnTile = _map.GetAnchoredEntities(gridUid, grid, pos);
         while (entitiesOnTile.MoveNext(out var entity))
         {
             var proto = MetaData(entity.Value).EntityPrototype;

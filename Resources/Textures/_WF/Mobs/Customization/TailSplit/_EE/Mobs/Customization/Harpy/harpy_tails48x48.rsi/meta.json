@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Peacock by stillxicarus (Discord). South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "peacock_tail_eyes_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "peacock_tail_eyes_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "peacock_tail_feathers_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "peacock_tail_feathers_FRONT",
+      "directions": 4
+    }
+  ]
+}

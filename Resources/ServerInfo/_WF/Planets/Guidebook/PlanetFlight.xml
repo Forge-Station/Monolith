@@ -1,0 +1,32 @@
+<Document>
+  # Planet Flight
+
+  Over a planet, your gravity generator does nothing. Your thrusters hold the ship up. The flight panel on the shuttle console shows whether they can.
+
+  ## The flight panel
+
+  - The top line says what the ship is doing: in orbit, landed, lifting off, climbing, hovering, descending, or [color=#ff3030]LIFT LOST[/color].
+  - [bold]Lift[/bold] is thrust against the ship's weight on this planet. You need [color=#3fe05a]100%[/color] to hover, climb or take off. Under 100% the ship sinks. Under 50% it falls.
+  - [bold]Power[/bold] says whether your grid can run every thruster. If it is short, thrusters cut out and lift drops.
+  - When landed, the panel says [color=#3fe05a]READY FOR LIFTOFF[/color] or [color=#ff3030]NOT READY[/color], and why.
+  - A [color=#ffd23f]Fix[/color] line tells you how many thrusters to convert or add, or how much power you are missing.
+
+  ## Thrusters in atmosphere
+
+  - Ordinary thrusters give [bold]half thrust[/bold] below orbit.
+  - Landing thrusters give [bold]full thrust[/bold]. Convert an anchored thruster with a landing thruster conversion kit, or have a drydock fit atmospheric thrusters to the whole ship.
+  - Heavier planets need more lift. The ship previewer estimates the strongest gravity a ship can lift off in.
+
+  ## Going down and coming back up
+
+  1. Fly to the planet and press [bold]Enter orbit[/bold].
+  2. Check the panel. With 100% lift and enough power, hold [bold]descend[/bold] or press [bold]Enter atmosphere[/bold]. With less, the console asks you to confirm, because the ship will not be able to climb back out.
+  3. In the air, ascend and descend change altitude. Land gently.
+  4. To leave, hold [bold]ascend[/bold] or press [bold]Liftoff[/bold]. Keep climbing to reach orbit, then press [bold]Leave orbit[/bold].
+
+  ## When it goes wrong
+
+  - A ship that loses lift glides down and the alarms call out its height. Restore power or thrust and it recovers.
+  - Hitting the ground too fast is a crash: hull damage, a skid and broken systems.
+  - Force-anchored ships and ships held by something on the ground cannot lift off. The panel says what is holding you.
+</Document>

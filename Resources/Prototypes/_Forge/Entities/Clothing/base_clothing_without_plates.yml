@@ -75,3 +75,9 @@
   - type: StaticPrice
     price: 20
     vendPrice: 1500
+
+# Older ports still parent this id. It is the same suit, without an armor-plate slot.
+- type: entity
+  abstract: true
+  parent: ClothingOuterHardsuitBaseWithoutArmorPlates
+  id: ClothingOuterHardsuitBaseNoPlateholder

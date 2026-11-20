@@ -1,0 +1,99 @@
+# Capital patrols: the Federation's Flyssa or the Dynasty's Saturn with three fighters, circling off a station. Very
+# rare, and the biggest thing a faction sends out on its own.
+- type: wfEncounter
+  id: WFEncounterTsfCapitalPatrol
+  avoidStations: [ Helios, PDV, Caelestinus ]
+  name: wf-encounter-name-capital-patrol
+  announcement: wf-encounter-announce-capital-patrol
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  icon: Flag
+  cost: 6
+  weight: 0.2
+  minPlayers: 9
+  placement: Station
+  standoff: 900
+  cooldown: 7200
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessel: Flyssa
+    deckhands: 4
+    guards: 3
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    iffColor: "#6fb6ff"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 900
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 200, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing2
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -200, 0
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wing3
+    navigation: WFCrewNavigationWarship
+    vessels: [ QJ271, Paladin, Ocelot ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, -200
+    side: patrol
+    faction: TSFMC
+    company: TSF
+    profile: WFCrewProfileTsf
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1600
+    warnRange: 1200
+    attackRange: 600
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead

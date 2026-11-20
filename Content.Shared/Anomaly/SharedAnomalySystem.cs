@@ -37,7 +37,7 @@ public abstract partial class SharedAnomalySystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedAnomalyCoreSystem _anomalyCore = default!; // Frontier
 
-    [Dependency] private readonly EntityQuery<PhysicsComponent> _physQuery = default!;
+    [Dependency] private EntityQuery<PhysicsComponent> _physQuery = default!;
 
     public override void Initialize()
     {

@@ -109,5 +109,11 @@ namespace Content.Shared.Atmos.Components
 
         [DataField]
         public ProtoId<AlertPrototype> FireAlert = "Fire";
+
+        /// <summary>
+        /// Divides firestacks before they are shown, so a visual stage covers several stacks.
+        /// </summary>
+        [DataField]
+        public float FirestackVisualDivisor = 1.0f;
     }
 }

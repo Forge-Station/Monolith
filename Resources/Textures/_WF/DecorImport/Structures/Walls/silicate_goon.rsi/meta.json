@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "silicate-0"
+    },
+    {
+      "name": "silicate-1"
+    },
+    {
+      "name": "silicate-2"
+    },
+    {
+      "name": "silicate-3"
+    },
+    {
+      "name": "silicate-4"
+    },
+    {
+      "name": "silicate-5"
+    },
+    {
+      "name": "silicate-6"
+    },
+    {
+      "name": "silicate-7"
+    },
+    {
+      "name": "silicate-8"
+    },
+    {
+      "name": "silicate-9"
+    },
+    {
+      "name": "silicate-10"
+    },
+    {
+      "name": "silicate-11"
+    },
+    {
+      "name": "silicate-12"
+    },
+    {
+      "name": "silicate-13"
+    },
+    {
+      "name": "silicate-14"
+    },
+    {
+      "name": "silicate-15"
+    },
+    {
+      "name": "silicate-21"
+    },
+    {
+      "name": "silicate-23"
+    },
+    {
+      "name": "silicate-29"
+    },
+    {
+      "name": "silicate-31"
+    },
+    {
+      "name": "silicate-38"
+    },
+    {
+      "name": "silicate-39"
+    },
+    {
+      "name": "silicate-46"
+    },
+    {
+      "name": "silicate-47"
+    },
+    {
+      "name": "silicate-55"
+    },
+    {
+      "name": "silicate-63"
+    },
+    {
+      "name": "silicate-74"
+    },
+    {
+      "name": "silicate-75"
+    },
+    {
+      "name": "silicate-78"
+    },
+    {
+      "name": "silicate-79"
+    },
+    {
+      "name": "silicate-95"
+    },
+    {
+      "name": "silicate-110"
+    },
+    {
+      "name": "silicate-111"
+    },
+    {
+      "name": "silicate-127"
+    },
+    {
+      "name": "silicate-137"
+    },
+    {
+      "name": "silicate-139"
+    },
+    {
+      "name": "silicate-141"
+    },
+    {
+      "name": "silicate-143"
+    },
+    {
+      "name": "silicate-157"
+    },
+    {
+      "name": "silicate-159"
+    },
+    {
+      "name": "silicate-175"
+    },
+    {
+      "name": "silicate-191"
+    },
+    {
+      "name": "silicate-203"
+    },
+    {
+      "name": "silicate-207"
+    },
+    {
+      "name": "silicate-223"
+    },
+    {
+      "name": "silicate-239"
+    },
+    {
+      "name": "silicate-255"
+    }
+  ]
+}

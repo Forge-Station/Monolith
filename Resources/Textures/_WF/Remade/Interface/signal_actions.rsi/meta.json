@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/hud/signal_icons.dmi)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "scry"
+    },
+    {
+      "name": "tracer"
+    },
+    {
+      "name": "flicker"
+    },
+    {
+      "name": "mass_flicker"
+    },
+    {
+      "name": "blowout"
+    },
+    {
+      "name": "false_sound"
+    },
+    {
+      "name": "whisper"
+    },
+    {
+      "name": "meddle"
+    },
+    {
+      "name": "writing"
+    },
+    {
+      "name": "rune"
+    }
+  ]
+}

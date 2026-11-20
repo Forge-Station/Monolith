@@ -1,0 +1,182 @@
+# Wolfgate: ported from HardLight
+- type: marking
+  id: ReptilianChestUnderbellyFeminine
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Reptilian/underbellyfemale.rsi
+    state: body_underbelly
+
+- type: marking
+  id: ReptilianChestFemaleAlternate
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Skrell, Reptilian, ProtoReptile]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Reptilian/chest_female_alternate.rsi
+    state: chest
+  - sprite: _HL/Mobs/Customization/Reptilian/chest_female_alternate.rsi
+    state: chest_secondary
+  - sprite: _HL/Mobs/Customization/Reptilian/chest_female_alternate.rsi
+    state: nipples
+
+- type: marking
+  id: ReptilianTailNaga
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, Human, ProtoReptile, IPC, Oni]
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    naga_primary_BEHIND: TailBehind
+    naga_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    naga_primary_BEHIND: naga_primary_FRONT
+    naga_secondary_BEHIND: naga_secondary_FRONT
+  sprites:
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - split art, anatomy zone only
+      state: naga_primary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - split art, anatomy zone only
+      state: naga_secondary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: naga_primary_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: naga_secondary_BEHIND
+
+- type: marking
+  id: ReptilianTailNagaStriped
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, Human, ProtoReptile, IPC, Oni]
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    naga_striped_primary_BEHIND: TailBehind
+    naga_striped_secondary_BEHIND: TailBehind
+    naga_striped_tertiary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    naga_striped_primary_BEHIND: naga_striped_primary_FRONT
+    naga_striped_secondary_BEHIND: naga_striped_secondary_FRONT
+    naga_striped_tertiary_BEHIND: naga_striped_tertiary_FRONT
+  sprites:
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - split art, anatomy zone only
+      state: naga_striped_primary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - split art, anatomy zone only
+      state: naga_striped_secondary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - split art, anatomy zone only
+      state: naga_striped_tertiary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: naga_striped_primary_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: naga_striped_secondary_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: naga_striped_tertiary_BEHIND
+
+- type: marking
+  id: ReptilianTailNagaRattlesnake
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Reptilian, Human, ProtoReptile, IPC, Oni]
+  layering: # WOLFGATE - the anatomy zone of the south frame draws behind the body, so the tail never covers anatomy
+    naga_rattlesnake_primary_BEHIND: TailBehind
+    naga_rattlesnake_secondary_BEHIND: TailBehind
+    naga_rattlesnake_tertiary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    naga_rattlesnake_primary_BEHIND: naga_rattlesnake_primary_FRONT
+    naga_rattlesnake_secondary_BEHIND: naga_rattlesnake_secondary_FRONT
+    naga_rattlesnake_tertiary_BEHIND: naga_rattlesnake_tertiary_FRONT
+  sprites:
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - split art, anatomy zone only
+      state: naga_rattlesnake_primary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - split art, anatomy zone only
+      state: naga_rattlesnake_secondary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - split art, anatomy zone only
+      state: naga_rattlesnake_tertiary_FRONT
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: naga_rattlesnake_primary_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: naga_rattlesnake_secondary_BEHIND
+    - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/naga.rsi # WOLFGATE - anatomy zone of the south frame on TailBehind
+      state: naga_rattlesnake_tertiary_BEHIND
+
+# Xeno Spines
+
+- type: marking
+  id: XenoSpineGorjira
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Reptilian, ProtoReptile]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Reptilian/xeno_spines.rsi
+    state: xeno_gorjira
+
+- type: marking
+  id: XenoSpineOsteospines
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Reptilian, ProtoReptile]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Reptilian/xeno_spines.rsi
+    state: xeno_osteospines
+
+- type: marking
+  id: XenoSpineSpinosaurus
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Reptilian, ProtoReptile]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Reptilian/xeno_spines.rsi
+    state: xeno_spinosaurus
+
+- type: marking
+  id: XenoSpineXenomorph
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Reptilian, ProtoReptile]
+  sprites:
+  - sprite: _HL/Mobs/Customization/Reptilian/xeno_spines.rsi
+    state: xeno_xenomorph
+
+# Xeno Tails
+
+- type: marking
+  id: XenoTailCurl
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    xeno_curl_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    xeno_curl_BEHIND: xeno_curl_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/xeno_tails.rsi # WOLFGATE - split art
+    state: xeno_curl_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/xeno_tails.rsi # WOLFGATE - south frame on TailBehind
+    state: xeno_curl_BEHIND
+
+- type: marking
+  id: XenoTailSpike
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    xeno_spike_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    xeno_spike_BEHIND: xeno_spike_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/xeno_tails.rsi # WOLFGATE - split art
+    state: xeno_spike_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/xeno_tails.rsi # WOLFGATE - south frame on TailBehind
+    state: xeno_spike_BEHIND
+
+- type: marking
+  id: XenoTailSpined
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Reptilian, ProtoReptile]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    xeno_spined_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    xeno_spined_BEHIND: xeno_spined_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/xeno_tails.rsi # WOLFGATE - split art
+    state: xeno_spined_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_HL/Mobs/Customization/Reptilian/xeno_tails.rsi # WOLFGATE - south frame on TailBehind
+    state: xeno_spined_BEHIND

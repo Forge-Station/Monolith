@@ -1,0 +1,11 @@
+- type: playTimeTracker
+  id: JobWFAsfEnvoy
+
+- type: playTimeTracker
+  id: JobWFAsfEnforcer
+
+- type: playTimeTracker
+  id: JobWFAsfFieldResearcher
+
+- type: playTimeTracker
+  id: JobWFAsfColonist

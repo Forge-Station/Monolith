@@ -33,14 +33,10 @@ public partial class BaseShuttleControl : MapGridControl
 
     private GridDrawJob _drawJob;
 
-    // Cache grid drawing data as it can be expensive to build.
-    // Forge-Change-Start: prune unused radar/shuttle meshes; previously every drawn grid stayed in RAM forever.
+    // Cache grid drawing data as it can be expensive to build
     public readonly Dictionary<EntityUid, GridDrawData> GridData = new();
-    private readonly HashSet<EntityUid> _drawnGrids = new();
-    private readonly List<EntityUid> _staleGrids = new();
-    // Forge-Change-End
 
-    // Per-draw scratch — cleared after each mesh rebuild so large stations don't linger. // Forge-Change
+    // Per-draw caching
     private readonly Dictionary<Vector2i, ContentTileDefinition> _gridTileList = new(); // Mono
     // Mono - tile mapped to vector lying along each of 4 directions, if any
     private readonly Dictionary<Vector2i, Box2?[]> _gridDirEdges = new();
@@ -75,67 +71,11 @@ public partial class BaseShuttleControl : MapGridControl
 
         for (var i = 0; i < 4; i++)
         {
-            var dir = (DirectionFlag) Math.Pow(2, i);
+            var dir = (DirectionFlag)Math.Pow(2, i);
             var dirVec = dir.AsDir().ToIntVec();
             _neighborDirections[i] = (dir, dirVec);
         }
     }
-
-    // Forge-Change-Start: prune radar mesh cache each frame and when the control leaves the tree.
-    protected override void FrameUpdate(FrameEventArgs args)
-    {
-        base.FrameUpdate(args);
-        PruneGridDrawCache();
-    }
-
-    protected override void ExitedTree()
-    {
-        ClearGridDrawCache();
-        base.ExitedTree();
-    }
-
-    private void PruneGridDrawCache()
-    {
-        if (GridData.Count == 0)
-        {
-            _drawnGrids.Clear();
-            return;
-        }
-
-        // Hidden tabs (NAV/MAP/DOCK) keep the control in the tree; drop meshes immediately.
-        if (!VisibleInTree)
-        {
-            ClearGridDrawCache();
-            return;
-        }
-
-        _staleGrids.Clear();
-        foreach (var uid in GridData.Keys)
-        {
-            if (!_drawnGrids.Contains(uid) || !EntManager.EntityExists(uid))
-                _staleGrids.Add(uid);
-        }
-
-        foreach (var uid in _staleGrids)
-            GridData.Remove(uid);
-
-        _drawnGrids.Clear();
-        _staleGrids.Clear();
-    }
-
-    private void ClearGridDrawCache()
-    {
-        GridData.Clear();
-        _drawnGrids.Clear();
-        _staleGrids.Clear();
-        _gridTileList.Clear();
-        _gridDirEdges.Clear();
-        _edges.Clear();
-        _edgeMarkers.Clear();
-        _allVertices = Array.Empty<Vector2>();
-        _drawJob.ScaledVertices = _allVertices;
-    }
-    // Forge-Change-End
 
     protected void DrawData(DrawingHandleScreen handle, string text)
     {
@@ -158,7 +98,7 @@ public partial class BaseShuttleControl : MapGridControl
 
         var minDistance = MathF.Pow(EquatorialMultiplier, EquatorialMultiplier * 1.5f);
         var maxDistance = MathF.Pow(2f, EquatorialMultiplier * 6f);
-        var cornerDistance = MathF.Sqrt(WorldRange * WorldRange + WorldRange * WorldRange);
+        var cornerDistance = WfFitInstrument ? WorldRangeVector.Length() : MathF.Sqrt(WorldRange * WorldRange + WorldRange * WorldRange); // WOLFGATE(CombatConsole): fill rectangular plots with range rings.
 
         var origin = MidPointVector; // Mono
 
@@ -182,7 +122,7 @@ public partial class BaseShuttleControl : MapGridControl
         {
             Angle angle = (Math.PI / gridLinesRadial) * i;
             // TODO: Handle distance properly.
-            var aExtent = angle.ToVec() * ScaledMinimapRadius * 1.42f;
+            var aExtent = angle.ToVec() * (WfFitInstrument ? WorldRangeVector.Length() * MinimapScale : ScaledMinimapRadius * 1.42f); // WOLFGATE(CombatConsole): extend plot axes to the viewport corners.
             var lineColor = Color.MediumSpringGreen.WithAlpha(0.02f);
             handle.DrawLine(origin - aExtent, origin + aExtent, lineColor);
         }
@@ -192,7 +132,7 @@ public partial class BaseShuttleControl : MapGridControl
     protected void DrawNorthLine(DrawingHandleScreen handle, Angle angle)
     {
         var origin = MidPointVector;
-        var aExtent = (angle - Math.Tau / 4).ToVec() * ScaledMinimapRadius * 1.42f;
+        var aExtent = (angle - Math.Tau / 4).ToVec() * (WfFitInstrument ? WorldRangeVector.Length() * MinimapScale : ScaledMinimapRadius * 1.42f); // WOLFGATE(CombatConsole): extend the north line across the rectangular viewport.
         var lineColor = Color.Red.WithAlpha(0.1f);
         handle.DrawLine(origin, origin + aExtent, lineColor);
     }
@@ -293,7 +233,7 @@ public partial class BaseShuttleControl : MapGridControl
         const float cardinalLabelScale = 0.72f;
 
         var origin = MidPointVector;
-        var radius = MathF.Max(8f, ScaledMinimapRadius - ringInset); // Forge-Change
+        var radius = MathF.Max(8f, SizeFull * 0.5f - ringInset);
 
         var subtleGray = Color.FromHex("#676767");
         var northAccent = Color.FromHex("#7F7442");
@@ -480,19 +420,21 @@ public partial class BaseShuttleControl : MapGridControl
     private static Vector2 GetAzimuthDirection(Angle baseAngle, float azimuthDegrees)
     {
         var angle = baseAngle + Angle.FromDegrees(azimuthDegrees);
-        var radians = (float) angle.Theta - MathF.PI / 2f;
+        var radians = (float)angle.Theta - MathF.PI / 2f;
         return new Vector2(MathF.Cos(radians), MathF.Sin(radians));
     }
     // End Mono
 
-    protected void DrawGrid(DrawingHandleScreen handle, Matrix3x2 gridToView, Entity<MapGridComponent> grid, Color color, float alpha = 0.01f)
+    // WOLFGATE(AsteroidMining): queue lets the radar's grid loops batch every grid into one draw call
+    protected void DrawGrid(DrawingHandleScreen handle, Matrix3x2 gridToView, Entity<MapGridComponent> grid, Color color, float alpha = 0.01f, bool drawFill = false, bool queue = false)
     {
-        var rator = Maps.GetAllTilesEnumerator(grid.Owner, grid.Comp);
+        var rator = Maps.GetAllTiles(grid.Owner, grid.Comp);
         var minimapScale = MinimapScale;
-        var midpoint = MidPointVector; // Forge-Change
+        var midpoint = new Vector2(MidPoint, MidPoint);
         var tileSize = grid.Comp.TileSize;
 
-        _drawnGrids.Add(grid.Owner); // Forge-Change: track grids drawn this frame for cache prune
+        // Check if we even have data
+        // TODO: Need to prune old grid-data if we don't draw it.
         var gridData = GridData.GetOrNew(grid.Owner);
 
         if (gridData.LastBuild < grid.Comp.LastTileModifiedTick)
@@ -547,7 +489,7 @@ public partial class BaseShuttleControl : MapGridControl
                     {
                         var idxVec = dirFlag.AsDir().ToIntVec();
                         var arrIdx = GetDirIndex(idxVec);
-                        _gridDirEdges[index][arrIdx] = Box2.FromTwoPoints(wasPrev, vert);
+                        _gridDirEdges[index][arrIdx] = new Box2(Vector2.Min(wasPrev, vert), Vector2.Max(wasPrev, vert)); // WOLFGATE: v291 Box2 asserts on inverted corners in debug builds; order them
                     }
                 }
             }
@@ -714,14 +656,15 @@ public partial class BaseShuttleControl : MapGridControl
             }
 
             gridData.LastBuild = grid.Comp.LastTileModifiedTick;
-
-            // Forge-Change-Start: scratch collections only needed during rebuild.
-            _gridTileList.Clear();
-            _gridDirEdges.Clear();
-            _edges.Clear();
-            _edgeMarkers.Clear();
-            // Forge-Change-End
         }
+
+        // WOLFGATE(AsteroidMining) START: queued grids are transformed and drawn with the rest of their loop
+        if (queue)
+        {
+            WfQueueGrid(handle, gridToView, gridData, color, alpha, drawFill);
+            return;
+        }
+        // WOLFGATE END
 
         var totalData = gridData.Vertices.Count;
         var triCount = gridData.EdgeIndex;
@@ -736,17 +679,33 @@ public partial class BaseShuttleControl : MapGridControl
 
         _parallel.ProcessNow(_drawJob, totalData);
 
-        const float BatchSize = 3f * 4096;
-
-        for (var i = 0; i < Math.Ceiling(triCount / BatchSize); i++)
+        if (drawFill)
         {
-            var start = (int) (i * BatchSize);
-            var end = (int) Math.Min(triCount, start + BatchSize);
-            var count = end - start;
-            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, new Span<Vector2>(_allVertices, start, count), color.WithAlpha(alpha));
-        }
+            const float BatchSize = 3f * 4096;
+            var fillColor = Color.ToSrgb(Color.InterpolateBetween(BackingColor, color, alpha)).WithAlpha(1f);
 
-        handle.DrawPrimitives(DrawPrimitiveTopology.LineList, new Span<Vector2>(_allVertices, gridData.EdgeIndex, edgeCount), color);
+            for (var i = 0; i < Math.Ceiling(triCount / BatchSize); i++)
+            {
+                var start = (int)(i * BatchSize);
+                var end = (int)Math.Min(triCount, start + BatchSize);
+                var count = end - start;
+                handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, new Span<Vector2>(_allVertices, start, count), fillColor);
+            }
+        }
+        else
+        {
+            // WOLFGATE START: batch radar edges so huge grids don't overflow the game thread stack
+            // DrawPrimitives stackallocs every vertex (~32 bytes each).
+            // handle.DrawPrimitives(DrawPrimitiveTopology.LineList, new Span<Vector2>(_allVertices, gridData.EdgeIndex, edgeCount), color);
+            const int EdgeBatchSize = 2 * 4096;
+
+            for (var start = 0; start < edgeCount; start += EdgeBatchSize)
+            {
+                var count = Math.Min(EdgeBatchSize, edgeCount - start);
+                handle.DrawPrimitives(DrawPrimitiveTopology.LineList, new Span<Vector2>(_allVertices, gridData.EdgeIndex + start, count), color);
+            }
+            // WOLFGATE END
+        }
     }
 
     private static int GetDirIndex(Vector2i dir)
@@ -761,6 +720,7 @@ public partial class BaseShuttleControl : MapGridControl
     private record struct GridDrawJob : IParallelRobustJob
     {
         public int BatchSize => 64;
+        public int MinimumBatchParallel => 64; // WOLFGATE(AsteroidMining): small grids aren't worth a thread-pool round trip
 
         public float MinimapScale;
         public Vector2 MidPoint;

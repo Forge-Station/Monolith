@@ -1,0 +1,36 @@
+# Cargo weight in grid-mass units, shown as tonnes. A hull tile weighs 0.5, so a 200-tile hauler is about 100.
+- type: wfCargoLoad
+  id: WFCargoLoadDefault
+  classes:
+    Light: 1
+    Standard: 2
+    Heavy: 3
+    Bulk: 5
+  defaultClass: Standard
+  goods:
+    TradeGoodLuxuries: Light
+    TradeGoodMedicalSupplies: Light
+    TradeGoodFabric: Light
+    TradeGoodComponents: Light
+    TradeGoodSupplies: Standard
+    TradeGoodChemicalSupplies: Standard
+    TradeGoodChemicalsVolatile: Standard
+    TradeGoodEquipment: Standard
+    TradeGoodWeaponParts: Standard
+    TradeGoodFusionFuel: Standard
+    TradeGoodAmmo: Heavy
+    TradeGoodShipComponents: Heavy
+    TradeGoodFertilizer: Heavy
+    TradeGoodFissionFuel: Bulk
+    TradeGoodMetals: Bulk
+    TradeGoodScrap: Bulk
+    CrateTradeSecureNormal: Heavy
+    CrateTradeSecureHigh: Bulk
+  massScale: 1
+  thrustFloor: 0.4
+  spoolPerTonne: 0.1
+  spoolCap: 6
+  bands: [ 0.8, 0.6 ]
+  hysteresis: 0.05
+  # Materials in a silo or lathe weigh half what the same sheets and ore weigh loose.
+  storedFactor: 0.5

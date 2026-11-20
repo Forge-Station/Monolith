@@ -2,6 +2,7 @@ using Content.Server.Destructible;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
+using System.Numerics;
 using Robust.Shared.Containers; // Forge-Change
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -136,7 +137,7 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
             // Raycast only active in-flight projectiles. Dormant ammo in containers must not be
             // re-positioned because SetCoordinates will detach it from the container hierarchy.
             if (TerminatingOrDeleted(uid) ||
-                !IsActiveProjectile(projectileComp) ||
+                !IsActiveProjectile(uid, projectileComp) ||
                 _container.IsEntityInContainer(uid))
                 continue;
 
@@ -144,7 +145,7 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
             ApplyInFlightDamping(uid, projectileComp, physicsComp, xform, frameTime);
 
             // Damping may have landed the ammo; do not keep raycasting a dormant item.
-            if (!IsActiveProjectile(projectileComp))
+            if (!IsActiveProjectile(uid, projectileComp))
                 continue;
 
             var currentVelocity = projectileComp.RaycastResetVelocity ?? _physics.GetMapLinearVelocity(uid, physicsComp, xform);
@@ -284,5 +285,22 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
 
         var parentVelocity = _physics.GetMapLinearVelocity(xform.ParentUid);
         _physics.SetLinearVelocity(uid, dampedMapVelocity - parentVelocity, body: physics);
+    }
+
+    private bool IsActiveProjectile(EntityUid uid, ProjectileComponent projectile)
+    {
+        return !projectile.ProjectileSpent
+            && _physQuery.TryComp(uid, out var body)
+            && body.BodyStatus == BodyStatus.InAir;
+    }
+
+    private void DeactivateShotProjectile(EntityUid uid, ProjectileComponent projectile)
+    {
+        projectile.RaycastResetVelocity = null;
+        if (!_physQuery.TryComp(uid, out var body))
+            return;
+
+        _physics.SetLinearVelocity(uid, Vector2.Zero, body: body);
+        _physics.SetBodyStatus(uid, body, BodyStatus.OnGround);
     }
 }

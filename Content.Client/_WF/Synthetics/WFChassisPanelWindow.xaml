@@ -1,0 +1,38 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'wf-chassis-ui-title'}"
+                      MinSize="900 420"
+                      SetSize="1100 580">
+    <PanelContainer Name="Backdrop" VerticalExpand="True" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical" SeparationOverride="6">
+            <PanelContainer Name="HeaderPanel" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" SeparationOverride="4">
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                        <Label Name="PanelTitle" Text="{Loc 'wf-chassis-ui-title'}"/>
+                        <Label Name="StatusLabel" HorizontalExpand="True" Align="Right"/>
+                    </BoxContainer>
+                    <BoxContainer Name="GaugeRow" Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="18">
+                        <Label Name="PowerLabel"/>
+                        <Label Name="FluidLabel"/>
+                        <Label Name="SensorLabel"/>
+                        <Label Name="CoreLabel"/>
+                    </BoxContainer>
+                    <BoxContainer Name="RadRow" Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="18">
+                        <Label Name="RadCollectorLabel"/>
+                        <Label Name="RadiationLabel"/>
+                    </BoxContainer>
+                </BoxContainer>
+            </PanelContainer>
+            <TabContainer Name="Tabs" VerticalExpand="True" HorizontalExpand="True"/>
+            <PanelContainer Name="ControlsPanel" HorizontalExpand="True">
+                <BoxContainer Name="ControlsHost" Orientation="Vertical" HorizontalExpand="True" SeparationOverride="4">
+                    <BoxContainer Name="ControlsRow" Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="8">
+                        <Button Name="OpenBayButton" MinWidth="130"/>
+                        <Button Name="RebootButton" MinWidth="130"/>
+                        <Button Name="OverclockButton" ToggleMode="True" MinWidth="190"/>
+                    </BoxContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:FancyWindow>

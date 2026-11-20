@@ -20,6 +20,10 @@ public sealed partial class MarketModifierSystem : EntitySystem
         if (HasComp<VendingMachineComponent>(ent))
             return;
 
+        // WOLFGATE(Mining): some consoles state their rate in their description instead
+        if (ent.Comp.HideExamine)
+            return;
+
         string locVerb = ent.Comp.Buy ? "buy" : "sell";
         if (ent.Comp.Mod >= 1.0f)
             args.PushMarkup(Loc.GetString($"market-modifier-{locVerb}-high", ("mod", ent.Comp.Mod)));

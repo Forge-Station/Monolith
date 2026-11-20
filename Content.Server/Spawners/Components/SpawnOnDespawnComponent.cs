@@ -1,6 +1,5 @@
 using Content.Server.Spawners.EntitySystems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Spawners.Components;
 

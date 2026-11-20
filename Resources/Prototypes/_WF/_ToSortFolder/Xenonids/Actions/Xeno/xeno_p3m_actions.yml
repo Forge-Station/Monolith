@@ -1,0 +1,482 @@
+# Runner, lurker, warrior and ravager abilities. RMC's Action + TargetAction pairs became one action component each.
+- type: entity
+  id: ActionXenoLeap
+  parent: ActionXenoBase
+  name: Leap
+  description: Jump towards a given location and knock down the first enemy hit.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: pounce
+    useDelay: 3
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoLeapActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  id: ActionXenoRush
+  parent: ActionXenoLeap
+  name: Rush
+  description: Jump towards a given location and slash the enemy you hit, shaking their screen.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    useDelay: 6
+    checkCanAccess: false
+    event: !type:XenoLeapActionEvent
+
+- type: entity
+  parent: ActionXenoLeap
+  id: ActionXenoPounce
+  name: Pounce (20) # TODO RMC14 proper plasma costs
+  description: Jump towards a given location and knock down the first enemy hit [color=red]if you are invisible.[/color]
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: pounce
+    useDelay: 6
+    checkCanAccess: false
+    event: !type:XenoLeapActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPounce
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: pounce
+
+- type: entity
+  parent: ActionXenoLeap
+  id: ActionXenoAssault
+  name: Assault (25)
+  description: Charge towards a location. Destroys some objects in your path. Melee slashes reduce assault's cooldown. If Super-Empowered, stuns and flings back the first enemy hit.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: charge
+    useDelay: 14
+    checkCanAccess: false
+    event: !type:XenoLeapActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoAssault
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: charge
+
+- type: entity
+  id: ActionXenoHide
+  parent: ActionXenoBase
+  name: Hide
+  description: Hide under tables and other objects.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: xenohide
+    useDelay: 0.5
+    event: !type:XenoHideActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoHide
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xenohide
+
+- type: entity
+  id: ActionXenoTurnInvisible
+  parent: ActionXenoBase
+  name: Turn Invisible (20) # TODO RMC14 proper plasma costs
+  description: Become partially invisible for 30 seconds, or until you either damage or attempt to devour an enemy. Can be toggled off to become visible again, with a refund of 90% remaining cloak time. Increases your movement speed by 15% until the ability expires.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: lurker_invisibility
+    event: !type:XenoTurnInvisibleActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTurnInvisible
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lurker_invisibility
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoCripplingStrike
+  name: Crippling Strike (20) # TODO RMC14 proper plasma costs
+  description: Temporarily charge up a melee attack that will slow the first enemy it hits and do 20% more damage.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: lurker_inject_neuro
+    useDelay: 10
+    event: !type:XenoCripplingStrikeActionEvent
+  - type: XenoActionPlasma
+    cost: 20
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoCripplingStrike
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lurker_inject_neuro
+
+- type: entity
+  id: ActionXenoPunch
+  parent: ActionXenoBase
+  name: Punch
+  description: Punches the targeted enemy to deal a hefty amount of damage, slowing them and pushing them away.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: punch
+    useDelay: 4.5
+    range: 1.5
+    deselectOnMiss: false
+    event: !type:XenoPunchActionEvent
+  - type: XenoOffensiveAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoPunch
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: punch
+
+- type: entity
+  id: ActionXenoFling
+  parent: ActionXenoBase
+  name: Fling
+  description: Flings the targeted enemy a few tiles, knocking them down and damaging them.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: fling
+    useDelay: 7
+    range: 1.5
+    deselectOnMiss: false
+    event: !type:XenoFlingActionEvent
+  - type: XenoOffensiveAction
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoFling
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: fling
+
+# WOLFGATE: the lunge takes an entity and a tile, so it is an EntityWorldTargetAction (RMC combines two target components)
+- type: entity
+  id: ActionXenoLunge
+  parent: ActionXenoBase
+  name: Lunge
+  description: Lunges towards the targeted enemy and grabs the first enemy hit.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: lunge
+    useDelay: 10
+    range: 5
+    deselectOnMiss: false
+    event: !type:XenoLungeActionEvent
+  - type: XenoOffensiveAction
+  - type: RMCDazeableAction
+  - type: RMCCooldownOnMiss
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoLunge
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lunge
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoForTheHive
+  name: For The Hive!
+  description: Prime yourself to detonate in a massive acid explosion in 20 seconds. Requires 200 acid at the minimum. The more acid reserves you have, the larger and more damaging the explosion will be. It will also coat barricades and mobs in acid, in a range equal to 1/2th the damage range. Damage is less the farther the mob is from the explosion. You will be slowed, change visually, and make an a loud wailing sound charging up. Dying will prevent the explosion from going off, but if successful you will respawn as a larva at your hive's hive core or at your corpse if theres none. Using this ability while primed will cancel the explosion at the cost of a 1/4th of your acid reserves.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: screech
+    event: !type:XenoForTheHiveActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoScissorCut
+  name: Scissor Cut (25)
+  description: Cuts enemies and fences in a straight line. If Super-Empowered, slows enemies hit too.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: rav_scissor_cut
+    useDelay: 6
+    checkCanAccess: false
+    range: 15
+    event: !type:XenoScissorCutActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 25
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoScissorCut
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_scissor_cut
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailJab
+  name: Tail Jab
+  description: Jab an enemy in a 2.5 tile range, doing high damage and slowing them.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_pierce
+    useDelay: 7
+    range: 2.5
+    checkCanAccess: false
+    deselectOnMiss: false
+    event: !type:XenoTailJabActionEvent
+  - type: ActionBlockIfResting
+  - type: ActionInRangeUnobstructed
+    range: 2.5
+  - type: XenoOffensiveAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoFlurry
+  name: Flurry
+  description: An attack that has a range of 1x3 tiles, dealing damage per target and healing you.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: rav_spike
+    useDelay: 3
+    checkCanAccess: false
+    range: 15
+    event: !type:XenoFlurryActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoFlurry
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_spike
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHeadbite
+  name: Headbite
+  description: Instantly kills unconscious targets and heals you for 150 HP.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: headbite
+    useDelay: 10
+    range: 1.5
+    checkCanAccess: false
+    deselectOnMiss: false
+    event: !type:XenoHeadbiteActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoOffensiveAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoHeadbite
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: headbite
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoApprehend
+  name: Apprehend
+  description: Increases your movement speed and applies a slow on the next target you slash.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: rav_enrage
+    useDelay: 18
+    event: !type:XenoCripplingStrikeActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoEviscerate
+  name: Eviscerate
+  description: Eviscerate nearby enemies after a short delay. Costs 1 rage stack.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    useDelay: 23
+    event: !type:XenoEviscerateActionEvent
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoClothesline
+  name: Clothesline
+  description: Flings a target, doing minimal damage and healing you. The amount healed is higher the more rage stacks you have.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: prae_cleave_fling
+    useDelay: 16
+    range: 1.5
+    deselectOnMiss: false
+    event: !type:XenoFlingActionEvent
+  - type: XenoOffensiveAction
+  - type: RMCDazeableAction
+
+# WOLFGATE: the scattered spit takes an entity or a tile, so this is an EntityWorldTargetAction
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoFireSpikes
+  name: Fire Spikes (75 shards)
+  description: Launch 8 small shards of spikes in the direction you click.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: rav_spike
+    useDelay: 10
+    range: 15
+    checkCanAccess: false
+    event: !type:XenoScatteredSpitActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionEnergy
+    cost: 75
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSpikeShed
+  name: Spike Shed (all shards)
+  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds. Requires 50 shards minimum
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: rav_shard_shed
+    useDelay: 30
+    event: !type:ActionXenoSpikeShedEvent
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSpikeShield
+  name: Spike Shield (150 shards)
+  description: Expend shards to gain a temporary shield that lasts for a short amount of time. Whenever the shield is damaged, spray bone shards around you in a 5x5 AoE centered on yourself. Shield lasts for 2 seconds.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: rav_shard_shield
+    useDelay: 11.5
+    event: !type:ActionXenoSpikeShieldEvent
+  - type: ActionBlockIfResting
+  - type: RMCDazeableAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoEmpower
+  name: Empower (50)
+  description: On first activation it, gain a small amount of shield. After 6 seconds or using it again, get empowered based on surrounding enemies (max 6), gaining shield from each. If you empowered from at least 3 targets, you become Super-Empowered, gaing additional damage on melee attacks, and changing how some of your other abilities work.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: rav_empower
+    event: !type:XenoEmpowerActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoEmpower
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_empower
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTantrum
+  name: Tantrum (100 plasma, 75 fury)
+  description: Give an ally and yourself temporary armor for a few seconds, which lasts longer on you. Crushers and Ravagers get a speed boost instead.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _WF/Xenonids/Actions/xeno_actions.rsi
+      state: warden_heal
+    useDelay: 7
+    checkCanAccess: false
+    range: 8
+    event: !type:XenoTantrumActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoTantrum
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: warden_heal

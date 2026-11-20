@@ -1,0 +1,7 @@
+using Robust.Shared.Serialization;
+
+namespace Content.Shared._WF.Xenonids.ManageHive;
+
+[ByRefEvent]
+[Serializable, NetSerializable]
+public readonly record struct ManageHiveDevolveEvent;

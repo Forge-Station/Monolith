@@ -1,0 +1,9 @@
+- type: latheRecipePack
+  id: TetherStatic
+  recipes:
+  - RopeHempCoil
+  - RopeSyntheticCoil
+  - RopeBungeeCoil
+  - RopeSteelCableCoil
+  - RopeTowCableCoil
+  - TetherInstaller

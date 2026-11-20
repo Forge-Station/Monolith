@@ -1065,7 +1065,7 @@ public sealed partial class NcContractSystem : EntitySystem
         var bottom = 0;
         var top = 0;
 
-        var enumerator = _map.GetAllTilesEnumerator(site, grid, true);
+        var enumerator = _map.GetAllTiles(site, grid, true);
         while (enumerator.MoveNext(out var tile))
         {
             var tileRef = tile.Value;
@@ -1382,7 +1382,7 @@ public sealed partial class NcContractSystem : EntitySystem
         List<EntityCoordinates> output
     )
     {
-        var enumerator = _map.GetAllTilesEnumerator(grid.Owner, grid.Comp, true);
+        var enumerator = _map.GetAllTiles(grid.Owner, grid.Comp, true);
         while (enumerator.MoveNext(out var tile))
         {
             var tileRef = tile.Value;

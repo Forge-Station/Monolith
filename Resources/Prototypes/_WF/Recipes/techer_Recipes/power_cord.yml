@@ -1,0 +1,27 @@
+# Cord coils are made a metre at a time, like cable. Registered into the CablesStatic pack.
+
+- type: latheRecipe
+  id: WFPowerCordCoilHV
+  result: PowerCordCoilHV1
+  categories:
+  - Parts
+  completetime: 0.2
+  materials:
+    Steel: 40
+    Plastic: 20
+
+- type: latheRecipe
+  parent: WFPowerCordCoilHV
+  id: WFPowerCordCoilMV
+  result: PowerCordCoilMV1
+  materials:
+    Steel: 30
+    Plastic: 20
+
+- type: latheRecipe
+  parent: WFPowerCordCoilHV
+  id: WFPowerCordCoilLV
+  result: PowerCordCoilLV1
+  materials:
+    Steel: 20
+    Plastic: 20

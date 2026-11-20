@@ -1,0 +1,159 @@
+# Wolfgate: ported from HardLight
+- type: emoteSounds
+  parent: UnisexSilicon
+  id: UnisexSynth
+  params:
+    variation: 0
+  sounds:
+    Scream:
+      collection: SiliconScreams
+    Laugh:
+      path: /Audio/_EE/Voice/IPC/robot-laugh_3.ogg
+      params:
+        variation: 0.125
+    Chitter:
+      path: /Audio/Voice/Talk/pai.ogg
+    Squeak:
+      path: /Audio/Voice/Talk/pai.ogg
+    Sigh:
+      path: /Audio/Voice/Talk/pai.ogg
+      params:
+        variation: 0.125
+    Crying:
+      path: /Audio/_EE/Voice/IPC/cry_robot_1.ogg
+      params:
+        variation: 0.125
+    Whistle:
+      path: /Audio/_EE/Voice/IPC/pai_whistle.ogg
+      params:
+        variation: 0.125
+    RobotBeep: # disease
+      path: /Audio/Effects/tesla_consume.ogg
+      params:
+        variation: 0.125
+    Honk:
+      path: /Audio/Items/bikehorn.ogg
+      params:
+        variation: 0.125
+    Purr:
+      path: /Audio/_RMC14/Voice/Reptilian/lizard_purr.ogg
+      params:
+        variation: 0.125
+    Whirr:
+      collection: IPCWhirrs
+      params:
+        variation: 0
+
+# Xeno vocalization set (generic). Uses available hiss sounds and a harsh scream stand-in.
+
+# Wolfgate: ported from HardLight
+- type: emoteSounds
+  parent: UnisexShadekin
+  id: MaleShadekin
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: ShadekinMaleScreams
+    Laugh:
+      collection: ShadowkinMaleLaughs
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Sigh:
+      collection: MaleSigh
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+
+- type: emoteSounds
+  parent: UnisexShadekin
+  id: FemaleShadekin
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: ShadekinFemaleScreams
+    Laugh:
+      collection: ShadowkinFemaleLaughs
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Sigh:
+      collection: FemaleSigh
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+
+# Wolfgate: ported from HardLight
+- type: emoteSounds
+  id: UnisexAvali
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/_Starlight/Effects/avali_scream.ogg
+    Laugh:
+      path: /Audio/_Starlight/Voice/Avali/avali_laugh.ogg
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Hiss:
+      collection: FelionoidHisses
+    Purr:
+      collection: FelionoidPurrs
+    Growl:
+      collection: FelionoidGrowls
+    Trill:
+      collection: FelionoidTrills
+    Scree:
+      collection: ResomiScrees
+    Call:
+      collection: ResomiCalls
+    Squawk:
+      collection: ResomiSquawk
+    Honk:
+      collection: BikeHorn
+    Whistle:
+      path: /Audio/Voice/Resomi/resomi_whistle.ogg
+    Chirp:
+      collection: ResomiChirp
+
+- type: emoteSounds
+  id: UnisexShadekin
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: ShadowkinMaleScreams
+    Yip:
+      path: /Audio/_Starlight/Effects/yip.ogg
+    Snore:
+      collection: Snores
+    Crying:
+      path: /Audio/Voice/Shadekin/shadekin_cry.ogg
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Marr:
+      path: /Audio/_Starlight/Voice/Shadekin/marr.ogg
+    Wurble:
+      path: /Audio/_Starlight/Voice/Shadekin/wurble.ogg
+    Hiss:
+      collection: FelionoidHisses
+    Purr:
+      collection: FelionoidPurrs
+    Growl:
+      collection: FelionoidGrowls

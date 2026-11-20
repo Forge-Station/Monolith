@@ -167,7 +167,7 @@ public sealed partial class GridCleanupSystem : BaseCleanupSystem<MapGridCompone
     private int CountTiles(EntityUid uid, MapGridComponent grid)
     {
         var count = 0;
-        var enumerator = _map.GetAllTilesEnumerator(uid, grid);
+        var enumerator = _map.GetAllTiles(uid, grid);
         while (enumerator.MoveNext(out _))
         {
             count++;

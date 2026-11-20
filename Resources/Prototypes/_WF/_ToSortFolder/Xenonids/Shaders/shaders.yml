@@ -1,0 +1,11 @@
+- type: shader
+  id: RMCXenoScreechShockWave
+  kind: source
+  path: "/Textures/_WF/Xenonids/Shaders/screech_shock_wave.swsl"
+
+- type: shader
+  id: RMCDoomVision
+  kind: source
+  path: "/Textures/_WF/Xenonids/Shaders/night_vision.swsl"
+  params:
+    nv_color: 0.5, 0.5, 0.5

@@ -30,7 +30,6 @@
   id: MonoUSSPVouchersDynamic
   recipes:
   - ShipVoucherUsspRemontnik
-  - ShipVoucherUsspAkula
   - ShipVoucherUsspDrakon
   - ShipVoucherUsspTayfun
   - ShipVoucherUsspBuran

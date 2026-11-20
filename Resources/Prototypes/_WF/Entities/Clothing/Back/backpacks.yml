@@ -1,0 +1,9 @@
+#region Asf
+- type: entity
+  parent: ClothingBackpack
+  id: WFAsfClothingBackpack
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Back/backpack.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Back/backpack.rsi

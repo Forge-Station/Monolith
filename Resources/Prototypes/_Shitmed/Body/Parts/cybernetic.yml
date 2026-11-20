@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  parent: BasePartInorganic
+  parent: [ WFWolfmedPartCybernetic, BasePartInorganic ] # WOLFGATE(Wolfmed): P5-1: cybernetic wound + frame-fracture profile; WFWolfmedPartCybernetic must stay FIRST (RT first-parent-wins)
   id: CyberneticPartBase
   components:
   - type: Sprite
@@ -8,7 +8,31 @@
   - type: Icon
     sprite: _EinsteinEngines/Mobs/Species/Cybernetics/bishop/bishop_main.rsi
   - type: Damageable
-    damageContainer: Silicon
+    # WOLFGATE(Wolfmed): P5-2/P5-D20, U13'b: restores Cold and Caustic, which Onyx's SiliconIpc supports and
+    # the stock Silicon container does not - 2 of the 7 acceptedDamageTypes on CyberneticBodyPartProfile
+    # and 2 of the 6 damageTypes on CyberneticMechanicalDamageWound. WFInorganicWolfmed is a superset of
+    # Silicon (Brute + Heat/Shock/Radiation), so no type is lost.
+    damageContainer: WFInorganicWolfmed
+  # WOLFGATE(Wolfmed): P5-D8b, U15a: CyberneticPartBase declared no Destructible, so every concrete limb took its
+  # OTHER parent's - Mono's MajorLimb (Blunt 190 / Slash 210 / Heat 250) or MinorLimb (150/180/230) - and
+  # a steel prosthetic spawned Ash, ran BurnBodyBehavior and played the MeatLaserImpact flesh sound at
+  # Heat 250. Declaring one here wins (first parent, and thresholds is a non-Always DataField) and drops
+  # the ashing rung, mirroring PartIPCBase's "# no ashing trigger". Side effect: cybernetic hands/feet
+  # now gib at 190/210 instead of MinorLimb's 150/180.
+  - type: Destructible # no ashing trigger
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 190
+      behaviors:
+      - !type:GibPartBehavior { }
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Slash
+        damage: 210
+      behaviors:
+      - !type:GibPartBehavior { }
   - type: Cybernetics
   - type: PirateBountyItem # Mono
     id: Cybernetics

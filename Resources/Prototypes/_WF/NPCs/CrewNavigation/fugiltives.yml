@@ -1,0 +1,18 @@
+# Fast enough to keep ahead of a hull that is not trying hard; the pilots stay short of the ceiling the raiders fly at.
+- type: wfCrewNavigation
+  id: WFCrewNavigationFugitive
+  name: wf-crew-navigation-fugitive
+  settings:
+    cruiseSpeed: 20
+    followSpeed: 20
+    loiterSpeed: 12
+    circleSpeed: 10
+    attackSpeed: 14
+    nearTargetSpeed: 6
+    maximumTurnRate: 0.5
+    thrustMultiplier: 1
+    angularThrustMultiplier: 1
+    dockApproachSpeed: 8
+    dockCreepSpeed: 2.5
+    undockSpeed: 6
+    attackRange: 250

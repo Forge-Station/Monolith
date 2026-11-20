@@ -42,9 +42,9 @@ public sealed partial class ClimbSystem : VirtualController
     [Dependency] private SharedStunSystem _stunSystem = default!;
     [Dependency] private SharedTransformSystem _xformSystem = default!;
 
-    [Dependency] private readonly EntityQuery<ClimbableComponent> _climbableQuery = default!;
-    [Dependency] private readonly EntityQuery<FixturesComponent> _fixturesQuery = default!;
-    [Dependency] private readonly EntityQuery<TransformComponent> _xformQuery = default!;
+    [Dependency] private EntityQuery<ClimbableComponent> _climbableQuery = default!;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
+    [Dependency] private EntityQuery<TransformComponent> _xformQuery = default!;
 
     private const string ClimbingFixtureName = "climb";
     private const int ClimbingCollisionGroup = (int) (CollisionGroup.TableLayer | CollisionGroup.LowImpassable);

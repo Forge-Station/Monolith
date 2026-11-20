@@ -38,7 +38,6 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared.Maps;
 using Content.Shared.Shuttles.Components;
 
 namespace Content.Server.Shuttles.Systems;

@@ -1,0 +1,39 @@
+- type: entity
+  parent: SpawnPointJobBase
+  id: WFAsfSpawnPointEnvoy
+  components:
+  - type: SpawnPoint
+    job_id: WFAsfEnvoy
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/federation.rsi
+    state: asf-federation-banner
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: WFAsfSpawnPointEnforcer
+  components:
+  - type: SpawnPoint
+    job_id: WFAsfEnforcer
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/federation.rsi
+    state: asf-federation-banner
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: WFAsfSpawnPointFieldResearcher
+  components:
+  - type: SpawnPoint
+    job_id: WFAsfFieldResearcher
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/federation.rsi
+    state: asf-federation-banner
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: WFAsfSpawnPointColonist
+  components:
+  - type: SpawnPoint
+    job_id: WFAsfColonist
+  - type: Sprite
+    sprite: _WF/Asf/Structures/Banners/federation.rsi
+    state: asf-federation-banner

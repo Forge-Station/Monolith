@@ -439,8 +439,13 @@ public sealed partial class CryoSleepSystem : SharedCryoSleepSystem
                     jobTitle.Equals(Loc.GetString("job-name-pal"), StringComparison.OrdinalIgnoreCase);
         }
 
-        // Send radio message on appropriate channel
-        if (isPirate)
+        // A job can name its own channel. Pirates and TSF keep the older title check when it does not.
+        if (TryComp<RadioOnCryosleepComponent>(bodyId, out var cryoRadio)
+            && _prototypeManager.TryIndex<RadioChannelPrototype>(cryoRadio.RadioChannel, out var jobChannel))
+        {
+            _radioSystem.SendRadioMessage(cryopod, message, jobChannel, cryopod);
+        }
+        else if (isPirate)
         {
             // Use Freelancer channel for pirates
             if (_prototypeManager.TryIndex<RadioChannelPrototype>("Freelance", out var freelanceChannel))

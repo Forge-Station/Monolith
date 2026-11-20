@@ -1,0 +1,20 @@
+- type: entity
+  parent: [ BaseWallTierTwo, BaseWallBitmask ]
+  id: SkyratRWall
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_skyrat.rsi
+    state: reinforced_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_skyrat.rsi
+  - type: IconSmooth
+    base: reinforced_wall-

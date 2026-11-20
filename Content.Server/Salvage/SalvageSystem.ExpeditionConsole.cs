@@ -51,6 +51,11 @@ public sealed partial class SalvageSystem
         if (!data.Missions.TryGetValue(args.Index, out var missionparams))
             return;
 
+        // WOLFGATE(PlanetExpeditions) START: a site mission is claimed in place, with no jump
+        if (WfTryClaimPlanetMission(uid, component, station.Value, data, missionparams))
+            return;
+        // WOLFGATE END
+
         // Frontier: FTL travel is currently restricted to expeditions and such, and so we need to put this here
         // until FTL changes for us in some way.
         if (!component.Debug) // Skip the test
@@ -157,6 +162,11 @@ public sealed partial class SalvageSystem
         var station = _station.GetOwningStation(entity);
         if (!TryComp<SalvageExpeditionDataComponent>(station, out var data) || !data.CanFinish)
             return;
+
+        // WOLFGATE(PlanetExpeditions) START: finishing a site mission gives it up
+        if (WfTryFinishPlanetMission(station.Value, data))
+            return;
+        // WOLFGATE END
 
         // Based on SalvageSystem.Runner:OnConsoleFTLAttempt
         if (!TryComp(entity, out TransformComponent? xform)) // Get the console's grid (if you move it, rip you)

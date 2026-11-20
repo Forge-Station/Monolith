@@ -1,0 +1,16 @@
+# Parachutes: strapped onto a crate, an object or a person, and opened by the fall itself.
+
+- type: entity
+  id: WFParachute
+  parent: BaseItem
+  name: parachute pack
+  description: A packed canopy and harness. Use it on a crate or a person - or on yourself - before they go over the side; it opens on the way down and is left where they land.
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/Objects/parachute.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: WFParachute
+  - type: StaticPrice
+    price: 150

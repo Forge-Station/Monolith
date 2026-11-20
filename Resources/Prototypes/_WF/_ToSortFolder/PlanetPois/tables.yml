@@ -1,0 +1,741 @@
+# Every world keeps its procedural dungeons beside the authored sites. On Verda they sit off the roads, which join the
+# house and the gas station; elsewhere the roads join the dungeons.
+# The mechanic's garage and the roadside inn carry their own strip of asphalt, so they go only on the paved worlds:
+# always on Verda, now and then on Merak. The hospital sits on its own stretch of road too, on Verda alone: its grounds
+# are Verda's crocus grass.
+# A site that finds no room is skipped, so the counts are ceilings.
+# Armour (the Reaver APC road patrols) drives only Verda's and Merak's roads; the other worlds keep their parked
+# civilian vehicles and nothing heavier.
+
+- type: wfPlanetPoiTable
+  id: WFPoisAsclepiu
+  residents: WFStrangerHouseSpawner
+  residentHome: WFStrangerHouseHome
+  residentChance: 0.6
+  vehicles:
+    spawns: !type:NestedSelector
+      tableId: WFPlanetVehicles
+    minCount: 2
+    maxCount: 4
+    squatter: WFStrangerSquatter
+  roadPatrols:
+  - crew: WFVehicleCrewReaverRoadPatrol
+  roamers:
+  - id: WFStrangerRandomSpawner
+    minCount: 4
+    maxCount: 8
+  camps:
+  - camp: WFCampReavers
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampAds
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampCrazies
+    minCount: 1
+    maxCount: 2
+  wrecks:
+    theme: WFWreckThemeVerda
+    minCount: 1
+    maxCount: 2
+  difficulty: Moderate
+  roads:
+    # Few roads join few sites, so a site off them can be well out: its footpath reaches that far.
+    trailLength: 480
+    tile: RMCPlanetHybrisaAsphalt
+    width: 5
+    shoulderTile: RMCPlanetHybrisaSidewalk
+    shoulderWidth: 1
+    dressing: WFRoadDressingAsclepiu
+    tunnels:
+      wall: WallRock
+      lurkers: !type:NestedSelector
+        tableId: WFTunnelLurkersVerda
+      clutter: [ SpiderWeb, MaterialBones1 ]
+  minCount: 7
+  maxCount: 11
+  entries:
+  - mapPath: /Maps/_WF/PlanetComms/comms_outpost.yml
+    name: wf-poi-comms-outpost
+    expeditions: false
+    footprint: -4,-5,14,10
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 8,-5
+      direction: South
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/atalis_house.yml
+    name: wf-poi-atalis-house
+    expeditions: false
+    footprint: -16,2,1,15
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    dwelling: true
+    sockets:
+    - offset: -10,4
+      direction: South
+    rotate: true
+    below: /Maps/_WF/PlanetPois/atalis_house_below.yml
+  - mapPath: /Maps/_WF/PlanetPois/planetary_vault.yml
+    name: wf-poi-planetary-vault
+    expeditions: false
+    footprint: -9,-21,16,10
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: -5,-5
+      direction: West
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/greenhouse.yml
+    name: wf-poi-greenhouse
+    expeditions: false
+    footprint: -8,-12,2,2
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: -4,-12
+      direction: South
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/ancient_temple.yml
+    name: wf-poi-ancient-temple
+    expeditions: false
+    footprint: -15,-1,14,31
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 2,-1
+      direction: South
+    rotate: true
+    below: /Maps/_WF/PlanetPois/ancient_temple_below.yml
+  - mapPath: /Maps/_WF/PlanetPois/verda_house_1.yml
+    name: wf-poi-verda-house-1
+    expeditions: false
+    footprint: 0,-7,11,12
+    minCount: 1
+    maxCount: 1
+    connection: Through
+    dwelling: true
+    sockets:
+    - offset: 0,-4
+      direction: West
+    - offset: 10,-4
+      direction: East
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/verda_corner_house.yml
+    name: wf-poi-verda-corner-house
+    expeditions: false
+    footprint: -3,-8,6,2
+    minCount: 1
+    maxCount: 3
+    connection: Isolated
+    trail: true
+    dwelling: true
+    sockets:
+    - offset: -1,-8
+      direction: South
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/verda_small_house.yml
+    name: wf-poi-verda-small-house
+    expeditions: false
+    footprint: -1,-8,10,5
+    minCount: 1
+    maxCount: 2
+    connection: Isolated
+    trail: true
+    dwelling: true
+    sockets:
+    - offset: -1,-1
+      direction: West
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/abandoned_bandit_hideout.yml
+    name: wf-poi-abandoned-bandit-hideout
+    expeditions: false
+    footprint: -4,-4,13,10
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    dwelling: true
+    sockets:
+    - offset: 12,2
+      direction: East
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/verda_gas_station.yml
+    name: wf-poi-verda-gas-station
+    expeditions: false
+    footprint: -3,-16,13,3
+    minCount: 1
+    maxCount: 1
+    connection: Through
+    sockets:
+    - offset: -3,-13
+      direction: West
+    - offset: 12,-13
+      direction: East
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/mechanic_shop.yml
+    name: wf-poi-mechanic-shop
+    expeditions: false
+    footprint: 0,-10,15,11
+    minCount: 1
+    maxCount: 1
+    connection: Through
+    sockets:
+    - offset: 0,-7
+      direction: West
+    - offset: 14,-7
+      direction: East
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/roadside_inn.yml
+    name: wf-poi-roadside-inn
+    expeditions: false
+    footprint: -7,-8,13,15
+    minCount: 1
+    maxCount: 1
+    connection: Through
+    sockets:
+    - offset: -7,-5
+      direction: West
+    - offset: 12,-5
+      direction: East
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/planetary_hospital.yml
+    name: wf-poi-planetary-hospital
+    expeditions: false
+    footprint: -18,-55,25,29
+    minCount: 1
+    maxCount: 1
+    connection: Through
+    sockets:
+    - offset: -18,-52
+      direction: West
+    - offset: 24,-52
+      direction: East
+    rotate: true
+  - dungeon: WFPoiAsclepiuResearch
+    name: wf-poi-asclepiu-research
+    connection: Isolated
+    maxCount: 1
+  - dungeon: WFPoiAsclepiuClinic
+    name: wf-poi-asclepiu-clinic
+    connection: Isolated
+    maxCount: 1
+  - dungeon: WFPoiAsclepiuDorms
+    name: wf-poi-asclepiu-dorms
+    connection: Isolated
+    maxCount: 1
+  spacing: 96
+  edgeMargin: 96
+  centreClear: 96
+- type: wfPlanetPoiTable
+  id: WFPoisMerak
+  residents: WFStrangerHouseSpawner
+  residentHome: WFStrangerHouseHome
+  residentChance: 0.6
+  vehicles:
+    spawns: !type:NestedSelector
+      tableId: WFPlanetVehicles
+    minCount: 2
+    maxCount: 4
+    squatter: WFStrangerSquatter
+  roadPatrols:
+  - crew: WFVehicleCrewReaverRoadPatrol
+  camps:
+  - camp: WFCampReavers
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampAds
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampCrazies
+    minCount: 1
+    maxCount: 2
+  roamers:
+  - id: WFStrangerRandomSpawner
+    minCount: 4
+    maxCount: 8
+  - id: WFMerakSandMaw
+    minCount: 10
+    maxCount: 20
+  wrecks:
+    theme: WFWreckThemeMerak
+    minCount: 1
+    maxCount: 3
+  difficulty: Moderate
+  roads:
+    # Few roads join few sites, so a site off them can be well out: its footpath reaches that far.
+    trailLength: 480
+    tile: RMCPlanetHybrisaAsphalt
+    width: 5
+    shoulderTile: RMCPlanetHybrisaSidewalk
+    shoulderWidth: 1
+    dressing: WFRoadDressingMerak
+    tunnels:
+      wall: WallRockSand
+      lurkers: !type:NestedSelector
+        tableId: WFTunnelLurkersMerak
+      clutter: [ MaterialBones1 ]
+  minCount: 5
+  maxCount: 8
+  entries:
+  - mapPath: /Maps/_WF/PlanetComms/comms_outpost.yml
+    name: wf-poi-comms-outpost
+    expeditions: false
+    footprint: -4,-5,14,10
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 8,-5
+      direction: South
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/atalis_house.yml
+    name: wf-poi-atalis-house
+    expeditions: false
+    footprint: -16,2,1,15
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    dwelling: true
+    sockets:
+    - offset: -10,4
+      direction: South
+    rotate: true
+    below: /Maps/_WF/PlanetPois/atalis_house_below.yml
+  - mapPath: /Maps/_WF/PlanetPois/planetary_vault.yml
+    name: wf-poi-planetary-vault
+    expeditions: false
+    footprint: -9,-21,16,10
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: -5,-5
+      direction: West
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/greenhouse.yml
+    name: wf-poi-greenhouse
+    expeditions: false
+    footprint: -8,-12,2,2
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: -4,-12
+      direction: South
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/ancient_temple.yml
+    name: wf-poi-ancient-temple
+    expeditions: false
+    footprint: -15,-1,14,31
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 2,-1
+      direction: South
+    rotate: true
+    below: /Maps/_WF/PlanetPois/ancient_temple_below.yml
+  - mapPath: /Maps/_WF/PlanetPois/abandoned_bandit_hideout.yml
+    name: wf-poi-abandoned-bandit-hideout
+    expeditions: false
+    footprint: -4,-4,13,10
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    dwelling: true
+    sockets:
+    - offset: 12,2
+      direction: East
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/mechanic_shop.yml
+    name: wf-poi-mechanic-shop
+    expeditions: false
+    footprint: 0,-10,15,11
+    minCount: 0
+    maxCount: 1
+    connection: Through
+    sockets:
+    - offset: 0,-7
+      direction: West
+    - offset: 14,-7
+      direction: East
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/roadside_inn.yml
+    name: wf-poi-roadside-inn
+    expeditions: false
+    footprint: -7,-8,13,15
+    minCount: 0
+    maxCount: 1
+    connection: Through
+    sockets:
+    - offset: -7,-5
+      direction: West
+    - offset: 12,-5
+      direction: East
+    rotate: true
+  - dungeon: WFPoiMerakMineshaft
+    name: wf-poi-merak-mineshaft
+    minCount: 1
+    maxCount: 2
+  - dungeon: WFPoiMerakOutpost
+    name: wf-poi-merak-outpost
+    minCount: 1
+    maxCount: 2
+  spacing: 96
+  edgeMargin: 96
+  centreClear: 96
+- type: wfPlanetPoiTable
+  id: WFPoisFervidus
+  residents: WFStrangerHouseSpawner
+  residentHome: WFStrangerHouseHome
+  residentChance: 0.6
+  vehicles:
+    spawns: !type:NestedSelector
+      tableId: WFPlanetVehicles
+    minCount: 2
+    maxCount: 4
+    squatter: WFStrangerSquatter
+  roamers:
+  - id: WFStrangerRandomSpawner
+    minCount: 4
+    maxCount: 8
+  camps:
+  - camp: WFCampReavers
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampAds
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampCrazies
+    minCount: 1
+    maxCount: 2
+  wrecks:
+    theme: WFWreckThemeFervidus
+    minCount: 1
+    maxCount: 3
+  difficulty: Hazardous
+  roads:
+    tile: FloorDarkPavement
+    width: 3
+    tunnels:
+      wall: WallRockBasalt
+      lurkers: !type:NestedSelector
+        tableId: WFTunnelLurkersFervidus
+      clutter: [ MaterialBones1 ]
+  minCount: 2
+  maxCount: 3
+  entries:
+  - mapPath: /Maps/_WF/PlanetComms/comms_outpost.yml
+    name: wf-poi-comms-outpost
+    expeditions: false
+    footprint: -4,-5,14,10
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 8,-5
+      direction: South
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/planetary_vault.yml
+    name: wf-poi-planetary-vault
+    expeditions: false
+    footprint: -9,-21,16,10
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: -5,-5
+      direction: West
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/ancient_temple.yml
+    name: wf-poi-ancient-temple
+    expeditions: false
+    footprint: -15,-1,14,31
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 2,-1
+      direction: South
+    rotate: true
+    below: /Maps/_WF/PlanetPois/ancient_temple_below.yml
+  - dungeon: WFPoiFervidusBrig
+    name: wf-poi-fervidus-brig
+  - dungeon: WFPoiFervidusCamp
+    name: wf-poi-fervidus-camp
+- type: wfPlanetPoiTable
+  id: WFPoisThrascias
+  residents: WFStrangerHouseSpawner
+  residentHome: WFStrangerHouseHome
+  residentChance: 0.6
+  vehicles:
+    spawns: !type:NestedSelector
+      tableId: WFPlanetVehicles
+    minCount: 2
+    maxCount: 4
+    squatter: WFStrangerSquatter
+  roamers:
+  - id: WFStrangerRandomSpawner
+    minCount: 4
+    maxCount: 8
+  camps:
+  - camp: WFCampReavers
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampAds
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampCrazies
+    minCount: 1
+    maxCount: 2
+  wrecks:
+    theme: WFWreckThemeThrascias
+    minCount: 1
+    maxCount: 3
+  difficulty: Hazardous
+  roads:
+    tile: FloorSnowDug
+    width: 3
+    tunnels:
+      wall: WallRockSnow
+      lurkers: !type:NestedSelector
+        tableId: WFTunnelLurkersThrascias
+      clutter: [ SpiderWeb, MaterialBones1 ]
+  minCount: 2
+  maxCount: 3
+  entries:
+  - mapPath: /Maps/_WF/PlanetComms/comms_outpost.yml
+    name: wf-poi-comms-outpost
+    expeditions: false
+    footprint: -4,-5,14,10
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 8,-5
+      direction: South
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/planetary_vault.yml
+    name: wf-poi-planetary-vault
+    expeditions: false
+    footprint: -9,-21,16,10
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: -5,-5
+      direction: West
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/ancient_temple.yml
+    name: wf-poi-ancient-temple
+    expeditions: false
+    footprint: -15,-1,14,31
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 2,-1
+      direction: South
+    rotate: true
+    below: /Maps/_WF/PlanetPois/ancient_temple_below.yml
+  - dungeon: WFPoiThrasciasLabs
+    name: wf-poi-thrascias-labs
+  - dungeon: WFPoiThrasciasVirology
+    name: wf-poi-thrascias-virology
+- type: wfPlanetPoiTable
+  id: WFPoisAerumna
+  residents: WFStrangerHouseSpawner
+  residentHome: WFStrangerHouseHome
+  residentChance: 0.6
+  vehicles:
+    spawns: !type:NestedSelector
+      tableId: WFPlanetVehicles
+    minCount: 2
+    maxCount: 4
+    squatter: WFStrangerSquatter
+  camps:
+  - camp: WFCampReavers
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampAds
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampCrazies
+    minCount: 1
+    maxCount: 2
+  - camp: WFCampXenoHive
+    minCount: 1
+    maxCount: 1
+  roamers:
+  - id: WFStrangerRandomSpawner
+    minCount: 4
+    maxCount: 8
+  - id: WFAerumnaLeviathan
+    minCount: 1
+    maxCount: 2
+  wrecks:
+    theme: WFWreckThemeAerumna
+    minCount: 1
+    maxCount: 3
+  difficulty: Extreme
+  roads:
+    tile: FloorChromite
+    width: 3
+    tunnels:
+      wall: WallRockChromite
+      lurkers: !type:NestedSelector
+        tableId: WFTunnelLurkersAerumna
+      clutter: [ SpiderWeb, MaterialBones1 ]
+  minCount: 2
+  maxCount: 2
+  spacing: 96
+  edgeMargin: 72
+  centreClear: 64
+  entries:
+  - mapPath: /Maps/_WF/PlanetComms/comms_outpost.yml
+    name: wf-poi-comms-outpost
+    expeditions: false
+    footprint: -4,-5,14,10
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 8,-5
+      direction: South
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/planetary_vault.yml
+    name: wf-poi-planetary-vault
+    expeditions: false
+    footprint: -9,-21,16,10
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: -5,-5
+      direction: West
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/ancient_temple.yml
+    name: wf-poi-ancient-temple
+    expeditions: false
+    footprint: -15,-1,14,31
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 2,-1
+      direction: South
+    rotate: true
+    below: /Maps/_WF/PlanetPois/ancient_temple_below.yml
+  - dungeon: WFPoiAerumnaFactory
+    name: wf-poi-aerumna-factory
+  - dungeon: WFPoiAerumnaMine
+    name: wf-poi-aerumna-mine
+- type: wfPlanetPoiTable
+  id: WFPoisCarcinoma
+  residents: WFStrangerHouseSpawner
+  residentHome: WFStrangerHouseHome
+  residentChance: 0.6
+  vehicles:
+    spawns: !type:NestedSelector
+      tableId: WFPlanetVehicles
+    minCount: 2
+    maxCount: 4
+    squatter: WFStrangerSquatter
+  roamers:
+  - id: WFStrangerRandomSpawner
+    minCount: 4
+    maxCount: 8
+  camps:
+  - camp: WFCampReavers
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampAds
+    minCount: 1
+    maxCount: 1
+  - camp: WFCampCrazies
+    minCount: 1
+    maxCount: 2
+  wrecks:
+    theme: WFWreckThemeCarcinoma
+    minCount: 2
+    maxCount: 3
+    # The world is small and its sites keep far from the edge; the wrecks need not.
+    edgeMargin: 24
+  difficulty: Extreme
+  roads:
+    tile: FloorDirt
+    width: 3
+    tunnels:
+      wall: WallMeat
+      lurkers: !type:NestedSelector
+        tableId: WFTunnelLurkersCarcinoma
+      clutter: [ WFFleshPolyp, MaterialBones1 ]
+  minCount: 3
+  maxCount: 3
+  # The smallest world, and wet: at 96 and 72 a site could find no dry room between centreClear and edgeMargin.
+  spacing: 64
+  footprint: 24
+  edgeMargin: 48
+  centreClear: 64
+  entries:
+  - mapPath: /Maps/_WF/PlanetComms/comms_outpost.yml
+    name: wf-poi-comms-outpost
+    expeditions: false
+    footprint: -4,-5,14,10
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: 8,-5
+      direction: South
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/planetary_vault.yml
+    name: wf-poi-planetary-vault
+    expeditions: false
+    footprint: -9,-21,16,10
+    minCount: 0
+    maxCount: 1
+    connection: Isolated
+    trail: true
+    sockets:
+    - offset: -5,-5
+      direction: West
+    rotate: true
+  - mapPath: /Maps/_WF/PlanetPois/carcinoma_fountain_of_life.yml
+    name: wf-poi-carcinoma-fountain-of-life
+    expeditions: false
+    footprint: -12,-12,13,13
+    minCount: 1
+    maxCount: 1
+    connection: Isolated
+    sockets: []
+  - dungeon: WFPoiCarcinomaRuin
+    name: wf-poi-carcinoma-ruin

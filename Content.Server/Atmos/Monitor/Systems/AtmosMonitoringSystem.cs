@@ -464,7 +464,9 @@ public sealed partial class AtmosMonitorSystem : EntitySystem
         SetThreshold(uid, AtmosMonitorThresholdType.Pressure, allThresholdDataPayload.PressureThreshold);
         foreach (var gas in Enum.GetValues<Gas>())
         {
-            SetThreshold(uid, AtmosMonitorThresholdType.Gas, allThresholdDataPayload.GasThresholds[gas], gas);
+            // A missing threshold means this gas has no configured alarm limits.
+            var threshold = allThresholdDataPayload.GasThresholds.GetValueOrDefault(gas) ?? new AtmosAlarmThreshold();
+            SetThreshold(uid, AtmosMonitorThresholdType.Gas, threshold, gas);
         }
     }
 }

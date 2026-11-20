@@ -1,0 +1,55 @@
+# region Grids
+- type: entity
+  id: WFAsteroidGridBase
+  abstract: true
+  name: asteroid
+  components:
+  - type: MapGrid
+  - type: LinkedLifecycleGridParent
+  - type: GCAbleObject
+    queue: WFAsteroids
+  - type: ProtectedGrid
+    preventFloorRemoval: true
+    preventFloorPlacement: true
+    preventRCDUse: true
+    preventArtifactTriggers: true
+  - type: IFF
+    flags: HideLabel, HideLabelAlways, AlwaysShowColor
+    color: "#d67e27"
+  - type: WFAdminRadarUnlabelled
+  - type: WFAsteroidGridVisuals
+  - type: DetectedAtRangeMultiplier
+    visualBias: 1024
+
+- type: entity
+  parent: WFAsteroidGridBase
+  id: WFAsteroidSmall
+  suffix: Small
+  components:
+  - type: WFAsteroidGrid
+    rock: WFAsteroidRockSmall
+
+- type: entity
+  parent: WFAsteroidGridBase
+  id: WFAsteroidMedium
+  suffix: Medium
+  components:
+  - type: WFAsteroidGrid
+    rock: WFAsteroidRockMedium
+
+- type: entity
+  parent: WFAsteroidGridBase
+  id: WFAsteroidLarge
+  suffix: Large
+  components:
+  - type: WFAsteroidGrid
+    rock: WFAsteroidRockLarge
+
+- type: entity
+  parent: WFAsteroidGridBase
+  id: WFAsteroidHuge
+  suffix: Huge
+  components:
+  - type: WFAsteroidGrid
+    rock: WFAsteroidRockHuge
+# endregion

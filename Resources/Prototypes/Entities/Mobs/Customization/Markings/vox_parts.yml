@@ -137,7 +137,7 @@
   id: VoxTail
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Vox]
+  speciesRestriction: [Vox, ProtoVox]
   forcedColoring: true
   sprites:
   - sprite: Mobs/Customization/vox_parts.rsi

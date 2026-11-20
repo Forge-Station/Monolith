@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._WF.RMCCore.Inventory; // WOLFGATE(Xenonids)
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -72,6 +73,13 @@ public abstract partial class SharedVirtualItemSystem : EntitySystem
 
     private void OnBeforeRangedInteract(Entity<VirtualItemComponent> ent, ref BeforeRangedInteractEvent args)
     {
+        // WOLFGATE(Xenonids) START: the held entity may take over the click (devouring a pulled victim, nesting)
+        var handleEv = new ShouldHandleVirtualItemInteractEvent(args);
+        RaiseLocalEvent(ent.Comp.BlockingEntity, ref handleEv);
+        if (handleEv.Handle)
+            RaiseLocalEvent(ent.Comp.BlockingEntity, args);
+        // WOLFGATE END
+
         // No interactions with a virtual item, please.
         args.Handled = true;
     }

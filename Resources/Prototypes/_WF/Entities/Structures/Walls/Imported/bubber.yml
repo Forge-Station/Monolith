@@ -1,0 +1,351 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralBamboo
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bamboo_wall_bubberstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bamboo_wall_bubberstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: bamboo_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralBananium
+  components:
+  - type: Construction
+    graph: Girder
+    node: bananiumWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bananium_wall_bubberstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bananium_wall_bubberstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: bananium_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralBronze
+  components:
+  - type: Construction
+    graph: ClockworkGirder
+    node: clockworkWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/clockwork_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/clockwork_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: clockwork_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralDiamond
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/diamond_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/diamond_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: diamond_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralGold
+  components:
+  - type: Construction
+    graph: Girder
+    node: goldWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/gold_wall_bubberstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/gold_wall_bubberstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: gold_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralIron
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/iron_wall_bubberstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/iron_wall_bubberstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: iron_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralPlasma
+  components:
+  - type: Construction
+    graph: Girder
+    node: plasmaWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall_bubberstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall_bubberstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: plasma_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralPlastitanium
+  components:
+  - type: StaticPrice
+    price: 110
+  - type: Construction
+    graph: Girder
+    node: plastitaniumWall
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plastitanium_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plastitanium_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: plastitanium_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralSandstone
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: sandstone_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralSnow
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/snow_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/snow_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: snow_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralTitanium
+  components:
+  - type: StaticPrice
+    price: 125
+  - type: Construction
+    graph: Girder
+    node: shuttleWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: shuttle_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralUranium
+  components:
+  - type: Construction
+    graph: Girder
+    node: uraniumWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/uranium_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/uranium_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: uranium_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralWood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wood_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wood_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: wood_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMineralPlastitaniumDarkpod
+  components:
+  - type: StaticPrice
+    price: 110
+  - type: Construction
+    graph: Girder
+    node: plastitaniumWall
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/dark_pod.rsi
+    color: "#5F5F62"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/dark_pod.rsi
+  - type: IconSmooth
+    key: walls
+    base: dark_pod_walls
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberIce
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/icedmetal_wall_bubberstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/icedmetal_wall_bubberstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: icedmetal_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BubberMaterial
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/material_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/material_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: material_wall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: BubberRWall
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_bubberstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_bubberstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: reinforced_wall
+
+- type: entity
+  parent: ShiptestMineralShrouded
+  id: BubberMineralLunarCave
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/lunar_rock_wall_bubber.rsi
+    state: rock_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/lunar_rock_wall_bubber.rsi
+    state: rock_wall-0
+  - type: IconSmooth
+    base: rock_wall-
+
+- type: entity
+  parent: ShiptestMineralShrouded
+  id: BubberMineralIcerock
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/icerock_wall_bubber.rsi
+    state: icerock_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/icerock_wall_bubber.rsi
+    state: icerock_wall-0
+  - type: IconSmooth
+    base: icerock_wall-
+
+- type: entity
+  parent: DecorImportMeatWallBase
+  id: BubberIndestructibleMeat
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/meat_wall_bubberstation.rsi
+    state: meat_wall0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/meat_wall_bubberstation.rsi
+    state: meat_wall0
+  - type: IconSmooth
+    key: walls
+    base: meat_wall
+    mode: CardinalFlags

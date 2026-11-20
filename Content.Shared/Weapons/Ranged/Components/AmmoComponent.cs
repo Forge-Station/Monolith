@@ -1,7 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
@@ -38,6 +37,10 @@ public sealed partial class CartridgeAmmoComponent : AmmoComponent
 
     [DataField("soundEject")]
     public SoundSpecifier? EjectSound = new SoundCollectionSpecifier("CasingEject");
+
+    /// <summary>Overrides the firing sound of the gun for this cartridge.</summary>
+    [DataField]
+    public SoundSpecifier? SoundGunshot;
 
     // Mono start
     /// <summary>

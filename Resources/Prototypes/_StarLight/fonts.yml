@@ -1,0 +1,12 @@
+# Wolfgate: ported from HardLight
+- type: font
+  id: Scratch
+  path: /Fonts/_Starlight/Scratch.ttf
+
+- type: font
+  id: Octatrax
+  path: /Fonts/_Starlight/Octatrax.ttf
+
+- type: font
+  id: Thaveyan
+  path: /Fonts/_Starlight/Thaveyan.ttf

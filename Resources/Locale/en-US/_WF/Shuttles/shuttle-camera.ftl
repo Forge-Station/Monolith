@@ -1,0 +1,17 @@
+shuttle-console-camera-label = VIEW
+shuttle-console-camera-helm = HELM
+shuttle-console-camera-front = FRONT
+shuttle-console-camera-rear = REAR
+shuttle-console-camera-left = LEFT
+shuttle-console-camera-right = RIGHT
+shuttle-console-camera-external = EXTERNAL
+shuttle-console-camera-external-tooltip = See the whole ship from outside. Drag with the right mouse button to pan and scroll to zoom, over the part of the view this console doesn't cover. Not available on a planet's surface.
+shuttle-console-camera-external-unavailable = The external view only works for a ship in open space, not on a planet's surface.
+shuttle-console-camera-zoom = ZOOM
+shuttle-console-camera-zoom-value = {$value}x
+shuttle-console-camera-low-light = LOW-LIGHT
+shuttle-console-camera-low-light-tooltip = Feed the hull cameras through a low-light sensor. Has no effect at the helm.
+shuttle-camera-hud-speed = SPD {$speed} m/s
+shuttle-camera-hud-heading = HDG {$heading}°
+shuttle-camera-hud-drift = DRIFT {$angle}°
+shuttle-camera-hud-turn = TURN {$rate}°/s

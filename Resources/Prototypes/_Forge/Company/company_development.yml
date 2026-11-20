@@ -1,0 +1,95 @@
+- type: companyProject
+  id: CompanyProjectRoster
+  name: company-project-roster
+  purpose: company-project-roster-purpose
+  cost: 75000000
+  effect: MemberSlots
+  amount: 16
+
+- type: companyProject
+  id: CompanyProjectDiplomacy
+  name: company-project-diplomacy
+  purpose: company-project-diplomacy-purpose
+  cost: 40000000
+  effect: RelationCooldown
+  amount: 45
+
+- type: companyProject
+  id: CompanyProjectSupply
+  name: company-project-supply
+  purpose: company-project-supply-purpose
+  cost: 1500000
+  effect: SupplyDiscount
+  amount: 20
+
+- type: companyProject
+  id: CompanyProjectShipyard
+  name: company-project-shipyard
+  purpose: company-project-shipyard-purpose
+  cost: 10000000
+  effect: ShipDiscount
+  amount: 15
+
+- type: companySupply
+  id: CompanySupplyMaterials
+  name: company-supply-materials
+  purpose: company-supply-materials-purpose
+  cost: 8000
+  crate: CompanyCrateMaterials
+
+- type: companySupply
+  id: CompanySupplyMedical
+  name: company-supply-medical
+  purpose: company-supply-medical-purpose
+  cost: 6000
+  crate: CompanyCrateMedical
+
+- type: companySupply
+  id: CompanySupplyAmmo
+  name: company-supply-ammo
+  purpose: company-supply-ammo-purpose
+  cost: 12000
+  crate: CompanyCrateAmmo
+
+- type: companySupply
+  id: CompanySupplyTools
+  name: company-supply-tools
+  purpose: company-supply-tools-purpose
+  cost: 5000
+  crate: CompanyCrateTools
+
+- type: companyShipOffer
+  id: CompanyShipBaeg
+  vessel: Baeg
+
+- type: companyShipOffer
+  id: CompanyShipJitterbug
+  vessel: Jitterbug
+
+- type: companyShipOffer
+  id: CompanyShipPulsar
+  vessel: Pulsar
+
+- type: companyContract
+  id: CompanyContractSteel
+  name: company-contract-steel
+  purpose: company-contract-steel-purpose
+  stackType: Steel
+  count: 30
+  reward: 9000
+
+- type: companyContract
+  id: CompanyContractMedical
+  name: company-contract-medical
+  purpose: company-contract-medical-purpose
+  item: Brutepack
+  count: 8
+  reward: 7000
+
+- type: companyContract
+  id: CompanyContractTools
+  name: company-contract-tools
+  purpose: company-contract-tools-purpose
+  item: Welder
+  count: 2
+  reward: 6000

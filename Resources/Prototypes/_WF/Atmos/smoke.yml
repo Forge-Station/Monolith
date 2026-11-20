@@ -1,0 +1,12 @@
+# Gas id matches Gas.Smoke. The overlay is the Einstein Engines smoke sheet.
+- type: gas
+  id: 17
+  name: gases-smoke
+  specificHeat: 25
+  heatCapacityRatio: 1.4
+  molarMass: 40
+  gasOverlaySprite: /Textures/_ES/Effects/atmospherics.rsi
+  gasOverlayState: smoke
+  color: 2e2e2e
+  pricePerMole: 1
+  gasMolesVisible: 0.25

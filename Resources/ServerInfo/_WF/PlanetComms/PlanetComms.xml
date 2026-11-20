@@ -1,0 +1,27 @@
+<Document>
+  # Planetary Comms
+
+  Wolfgate's pull drags space-time around every world in the sector. Below orbit that drag smears the phase of ordinary radio until nothing can lock onto it. A [bold]mass transceiver[/bold] gets around this by riding a world's signals on a mass-modulated carrier, which the drag doesn't scramble.
+
+  <Box>
+    <GuideEntityEmbed Entity="WFMassTransceiver"/>
+    <GuideEntityEmbed Entity="WFMassTransceiverBroken"/>
+  </Box>
+
+  ## When a world is dark
+
+  A world is [color=#3fe05a]up[/color] while any mass transceiver on it, from the caverns to orbit, has power and is in one piece. Otherwise it is [color=#ff3030]dark[/color]:
+
+  - Headsets, intercoms and other radios on it can't send or hear. Talking into one says [italic]No signal[/italic].
+  - Announcements from off-world don't reach anyone on it, and a global announcement can't leave it.
+  - The world's own PAs and station announcements still work, since they're wired.
+  - A ship in orbit counts as on the world.
+
+  The [bold]crew channel[/bold] and [bold]handheld radios[/bold] work either way.
+
+  ## Keeping it running
+
+  - The transceiver draws 3 kW from the nearest APC. Cut the power, or hit it with an EMP, and the world goes dark.
+  - Enough damage from gunfire or explosions wrecks it.
+  - To fix a wreck: add [bold]5 steel sheets[/bold], use a [bold]screwdriver[/bold], then a [bold]welder[/bold]. It comes back working, but still needs power.
+</Document>

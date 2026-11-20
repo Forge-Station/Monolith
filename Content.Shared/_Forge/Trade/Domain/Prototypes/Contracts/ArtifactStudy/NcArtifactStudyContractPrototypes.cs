@@ -11,7 +11,7 @@ public sealed partial class NcArtifactStudySpawnData
     public ContractPointSelectorPrototype Point { get; private set; } = new();
 }
 
-[Prototype("ncArtifactStudyContract")]
+[Prototype]
 public sealed partial class NcArtifactStudyContractPrototype : IPrototype
 {
     [DataField("name", required: true)]

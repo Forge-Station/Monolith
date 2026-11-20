@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._NF.Smuggling.Prototypes;
 
 // Data types for the sending of smuggling messages over radio.
-[Prototype("smugglingReportMessageSet")]
+[Prototype]
 public sealed partial class SmugglingReportMessageSetPrototype : IPrototype
 {
     [IdDataField]

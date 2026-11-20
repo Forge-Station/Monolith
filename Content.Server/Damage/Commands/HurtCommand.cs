@@ -50,6 +50,11 @@ namespace Content.Server.Damage.Commands
                 return CompletionResult.FromHint(Loc.GetString("damage-command-arg-target"));
             }
 
+            // WOLFGATE(Wolfmed) START: P6, optional 5th arg is a body part.
+            if (args.Length == 5)
+                return WolfmedPartCompletion(args);
+            // WOLFGATE END
+
             return CompletionResult.Empty;
         }
 
@@ -98,7 +103,7 @@ namespace Content.Server.Damage.Commands
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            if (args.Length < 2 || args.Length > 4)
+            if (args.Length < 2 || args.Length > 5) // WOLFGATE(Wolfmed): P6, optional 5th arg is a body part.
             {
                 shell.WriteLine(Loc.GetString("damage-command-error-args"));
                 return;
@@ -106,7 +111,7 @@ namespace Content.Server.Damage.Commands
 
             EntityUid? target;
 
-            if (args.Length == 4)
+            if (args.Length >= 4) // WOLFGATE(Wolfmed): P6, the uid stays args[3] when a body part follows it.
             {
                 if (!_entManager.TryParseNetEntity(args[3], out target) || !_entManager.EntityExists(target))
                 {
@@ -123,6 +128,14 @@ namespace Content.Server.Damage.Commands
                 shell.WriteLine(Loc.GetString("damage-command-error-player"));
                 return;
             }
+
+            // WOLFGATE(Wolfmed) START: P6, the body-part form routes through Wolfmed, not the flat path.
+            if (args.Length == 5)
+            {
+                WolfmedHurtPart(shell, target.Value, args);
+                return;
+            }
+            // WOLFGATE END
 
             if (!TryParseDamageArgs(shell, target.Value, args, out var damageFunc))
                 return;

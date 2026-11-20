@@ -1,0 +1,18 @@
+light_mode unshaded;
+
+uniform highp vec2 texelStep;
+uniform highp vec3 radius;
+
+// One direction of a tent blur, with its own radius per colour channel, in texels, up to 7.
+void fragment() {
+    highp vec3 sum = vec3(0.0);
+    highp vec3 total = vec3(0.0);
+    for (int i = -8; i <= 8; i++) {
+        highp float k = abs(float(i));
+        highp vec3 w = max(vec3(0.0), vec3(1.0) - vec3(k) / (radius + vec3(1.0)));
+        sum += texture(TEXTURE, UV + texelStep * float(i)).rgb * w;
+        total += w;
+    }
+
+    COLOR = vec4(sum / total, 1.0);
+}

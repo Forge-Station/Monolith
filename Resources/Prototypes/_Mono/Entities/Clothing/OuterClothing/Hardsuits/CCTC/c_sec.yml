@@ -4,6 +4,12 @@
   name: MP-EVA CSW-19 "Century" tacsuit
   description: A general purpose, combat-ready hardsuit designed by Centennial Armsworks, for Centennial Armsworks. Designed to be usable for riot control, gunfights, and biohazards, but due to cheap materials it isn't particularly effective.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/cctc_lstar.rsi
   - type: Clothing
@@ -48,6 +54,14 @@
   name: MP-EVA CSW-21 "Centurion" tacsuit
   description: A reinforced variant of the CSW-19 "Century", the "Centurion" is designed with the PMC's commanders in mind, boasting improved quality and protection.
   components:
+  # WOLFGATE(ArmorSpecialization): bone plating and blast liner.
+  - type: WFBlastLiner
+  - type: WFWoundWard
+    examine: wf-armor-spec-bone-plating-examine
+    hardens:
+      InternalBleedingWound: 2
+      WFWolfmedCrushInjuryWound: 2
+      WFWolfmedDislocationWound: 2
   - type: Sprite
     sprite: _Mono/Clothing/OuterClothing/Hardsuits/cctc_lstarpremium.rsi
   - type: Clothing

@@ -95,7 +95,7 @@ public sealed partial class DamageOverlayUiController : UIController
         {
             case MobState.Alive:
                 {
-                    if (!EntityManager.HasComponent<PainNumbnessComponent>(entity)) // Mono - makes this look better
+                    if (!EntityManager.HasComponent<PainNumbnessComponent>(entity) && !WolfmedPainOwnsVignette(entity)) // Mono - makes this look better // WOLFGATE(Wolfmed): HOOK 16 — pain owns the vignette on wound hosts
                     {
                         if (damageable.DamagePerGroup.TryGetValue("Brute", out var bruteDamage))
                             _overlay.BruteLevel = FixedPoint2.Min(1f, bruteDamage / critThreshold).Float();

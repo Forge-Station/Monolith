@@ -1,0 +1,77 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: ErisTurfWall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/eris_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/eris_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: eris_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: ErisUntintedOnestar
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/onestar_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/onestar_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: onestar_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: ErisFrontier
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/frontier_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/frontier_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: frontier_wall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: ErisReinforced
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/eris_reinf_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/eris_reinf_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: eris_reinf_wall

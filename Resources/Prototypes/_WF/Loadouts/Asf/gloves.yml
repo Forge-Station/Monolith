@@ -1,0 +1,25 @@
+- type: loadout
+  id: WFAsfLoadoutGloves
+  equipment:
+    gloves: WFAsfClothingHandsGloves
+
+- type: loadout
+  id: WFAsfLoadoutGlovesInsulated
+  equipment:
+    gloves: ClothingHandsGlovesColorYellow
+
+- type: loadoutGroup
+  id: WFAsfGloves
+  name: loadout-group-contractor-gloves
+  minLimit: 0
+  loadouts:
+  - WFAsfLoadoutGloves
+
+- type: loadoutGroup
+  id: WFAsfGlovesColonist
+  name: loadout-group-contractor-gloves
+  loadouts:
+  - WFAsfLoadoutGlovesInsulated
+  - WFAsfLoadoutGloves
+  fallbacks:
+  - WFAsfLoadoutGlovesInsulated

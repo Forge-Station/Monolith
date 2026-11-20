@@ -1,0 +1,302 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreBayBlack
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bay_black_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bay_black_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreBayOrange
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bay_orange_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bay_orange_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreBayWhite
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bay_white_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bay_white_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: VoreBayRWallBlack
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bay_reinforced_black_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bay_reinforced_black_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: rgeneric
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: VoreBayRWallWhite
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bay_reinforced_white_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bay_reinforced_white_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: rgeneric
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreAcaciawood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/acaciawood_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/acaciawood_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: acaciawood
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreBirchwood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/birchwood_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/birchwood_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: birchwood
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreDiamond
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/diamond_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/diamond_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: diamond
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreGhull
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/hull_titanium_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/hull_titanium_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: hull-titanium
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreGlamourbrick
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/glamourbrick_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/glamourbrick_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: glamourbrick
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VorePinewood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/pinewood_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/pinewood_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: pinewood
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreRplastihull
+  components:
+  - type: StaticPrice
+    price: 110
+  - type: Construction
+    graph: Girder
+    node: plastitaniumWall
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_hull_plastitanium_vorestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_hull_plastitanium_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: rhull-plastitanium
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreRplastitanium
+  components:
+  - type: StaticPrice
+    price: 110
+  - type: Construction
+    graph: Girder
+    node: plastitaniumWall
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_plastitanium_vorestation.rsi
+    color: "#424142"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_plastitanium_vorestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: rwall-plastitanium
+
+- type: entity
+  parent: BaseWallTierOne
+  id: VoreWall1
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/walls_vorestation.rsi
+    state: riveted1
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/walls_vorestation.rsi
+    state: riveted1
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: VoreWallAlienBlue
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/alien_blue_vore.rsi
+    state: alien0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/alien_blue_vore.rsi
+  - type: IconSmooth
+    key: walls
+    base: alien
+    mode: CardinalFlags
+  - type: PointLight
+    radius: 3
+    energy: 0.75
+    color: "#1fdbf4"
+
+- type: entity
+  parent: VoreWallAlienBlue
+  id: ChompWallAlienOrange
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/alien_orange_chomp.rsi
+    state: alien0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/alien_orange_chomp.rsi
+  - type: PointLight
+    color: "#FF3300"

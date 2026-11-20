@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "by Widgetbeck, eyeglow/sharkminnow/stub/nurse/eel made by Sha-Seng (github), arm and leg fins by AraiMaia, carp, fairy fins, draconic and fish tails by trixxedheart (Discord), stub/nurse/eel/carp/draconic/fish tails and ears edited by zergologist (discord) South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "carpish_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "carpish_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "draconiclong_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "draconiclong_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "fishtail_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "fishtail_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "taileel1_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "taileel1_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "taileel2_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "taileel2_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "taileel3_BEHIND",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "taileel3_FRONT",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "tailnurse1_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tailnurse1_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tailnurse2_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "tailnurse2_FRONT",
+      "directions": 4
+    }
+  ]
+}

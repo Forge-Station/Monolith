@@ -13,8 +13,8 @@ public sealed partial class ShuttleComponent : Component
 
     /// <summary>
     /// Thrust gets multiplied by this value if it's for braking.
+    /// A constant: prototypes do not override it, and a data-field on a const fails prototype validation.
     /// </summary>
-    [DataField]
     public const float BrakeCoefficient = 1.5f;
 
     /// <summary>
@@ -23,7 +23,6 @@ public sealed partial class ShuttleComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public float BaseMaxLinearVelocity = 50f;
 
-    [DataField]
     public const float MaxAngularVelocity = 4f;
 
     /// <summary>

@@ -7,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Client._Forge.Silicons.StationAi;
 
-public sealed class StationAiScreenSystem : EntitySystem
+public sealed partial class StationAiScreenSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private IResourceCache _resources = default!;

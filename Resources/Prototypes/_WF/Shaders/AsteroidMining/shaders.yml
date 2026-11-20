@@ -1,0 +1,6 @@
+# Additive and unlit, for beams and glowing rock cracks.
+- type: shader
+  id: WFAdditiveUnshaded
+  kind: canvas
+  light_mode: unshaded
+  blend_mode: Add

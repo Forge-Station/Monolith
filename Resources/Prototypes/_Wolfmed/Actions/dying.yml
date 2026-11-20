@@ -1,0 +1,31 @@
+# M1a (plan §5.4): Succumb and Last Words, granted only while Dying (cardiac arrest) and doing exactly what
+# their dialog says. Their own event types: upstream's CritSuccumbEvent runs the upstream ghost path.
+
+- type: entity
+  id: WFActionWolfmedSuccumb
+  name: Let go
+  description: Your heart has stopped. Choose to let go; a dialog tells you exactly what happens first.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    checkCanInteract: false
+    checkConsciousness: false
+    icon:
+      sprite: Mobs/Ghosts/ghost_human.rsi
+      state: icon
+    event: !type:WolfmedSuccumbActionEvent
+
+- type: entity
+  id: WFActionWolfmedLastWords
+  name: Last words
+  description: Choose whether to let go; if you do, whisper your last words to anyone nearby first.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    checkCanInteract: false
+    checkConsciousness: false
+    icon:
+      sprite: Interface/Actions/actions_crit.rsi
+      state: lastwords
+    event: !type:WolfmedLastWordsActionEvent
+      maxLength: 30

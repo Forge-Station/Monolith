@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Aurora at commit https://github.com/Aurorastation/Aurora.3/commit/4c83a7bac48311e4e0fd9449a27980ca35eed7a7, Baystation 12 at commit https://github.com/Baystation12/Baystation12/commit/64fcc7090fbf1d9255446154730a57586cec3355, NovaSector at commit https://github.com/NovaSector/NovaSector/commit/3754f28afedc5e20e1bc76dd6c5568c957a4a9de, Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3, VOREStation at commit https://github.com/VOREStation/VOREStation/commit/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "coral"
+    },
+    {
+      "name": "glowweed"
+    },
+    {
+      "name": "lilypad1"
+    },
+    {
+      "name": "lilypad2"
+    },
+    {
+      "name": "lilypad3"
+    },
+    {
+      "name": "longseaweed"
+    },
+    {
+      "name": "plant-2"
+    },
+    {
+      "name": "plant-3"
+    },
+    {
+      "name": "plant-4"
+    },
+    {
+      "name": "plant-5"
+    },
+    {
+      "name": "seaweed-1"
+    },
+    {
+      "name": "seaweed-2"
+    },
+    {
+      "name": "seaweed-3"
+    },
+    {
+      "name": "seaweed1"
+    },
+    {
+      "name": "seaweed2"
+    },
+    {
+      "name": "seaweed_baystation"
+    },
+    {
+      "name": "seaweed_nova"
+    },
+    {
+      "name": "seaweed_shiptest"
+    },
+    {
+      "name": "water_stalks"
+    }
+  ]
+}

@@ -4,7 +4,6 @@ using Content.Server.Chemistry.EntitySystems;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Dispenser;
 using Robust.Shared.Audio;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Prototypes; // Frontier
 using Content.Shared.Construction.Prototypes; // Frontier
 

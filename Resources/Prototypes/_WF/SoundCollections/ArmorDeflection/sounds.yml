@@ -1,0 +1,8 @@
+- type: soundCollection
+  id: WFRicochet
+  files:
+  - /Audio/Weapons/Guns/Hits/ric1.ogg
+  - /Audio/Weapons/Guns/Hits/ric2.ogg
+  - /Audio/Weapons/Guns/Hits/ric3.ogg
+  - /Audio/Weapons/Guns/Hits/ric4.ogg
+  - /Audio/Weapons/Guns/Hits/ric5.ogg

@@ -27,6 +27,13 @@
               Airloss: -20
               Toxin: -20
               Genetic: -20
+        # WOLFGATE(Wolfmed): PROTO H: Onyx's Stasizium fracture block, from _Onyx/Reagents/Medicine/first_aid.yml.
+        # Group is Medicine, not Onyx's Bloodstream — Wolfgate has no Bloodstream metabolism group.
+        - !type:MendFractures
+          amount: 10
+          wounds: []
+          minimumGrade: Hairline
+          maximumGrade: Comminuted
         - !type:HealthChange
           conditions:
           - !type:ReagentThreshold

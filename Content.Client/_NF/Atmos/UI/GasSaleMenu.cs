@@ -21,7 +21,7 @@ public sealed partial class GasSaleMenu : FancyWindow
         SellButton.OnPressed += OnSellPressed;
     }
 
-    public void SetMixture(GasMixture mixture, int appraisal)
+    public void SetMixture(GasMixture mixture, int appraisal, string? currency = null) // WOLFGATE(Mining): payout currency
     {
         Gases.Children.Clear();
         GasAmounts.Children.Clear();
@@ -56,7 +56,10 @@ public sealed partial class GasSaleMenu : FancyWindow
             Gases.Children.Add(noGasLabel);
         }
 
-        AppraisalLabel.Text = BankSystemExtensions.ToSpesoString(appraisal);
+        // WOLFGATE(Mining): a console paying another currency appraises in it
+        AppraisalLabel.Text = currency == null
+            ? BankSystemExtensions.ToSpesoString(appraisal)
+            : Loc.GetString("gas-sale-menu-appraisal-currency", ("amount", appraisal), ("currency", currency));
     }
 
     public void SetEnabled(bool enabled)

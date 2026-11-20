@@ -1,0 +1,571 @@
+# Fervidus's living world: wildlife for each region and plants that do something (LivingWorld components).
+# Basalt flats keep the argocytes (fauna.yml); the ashfields and the lava crust (Biomes/fervidus.yml) have their own.
+# Names and descriptions are in Resources/Locale/en-US/_WF/Planets/life_fervidus.ftl.
+
+# Wildlife. Fervidus's air is hot and has no oxygen, so none of these breathes and each takes the heat, as the argocytes do.
+# They share the Xeno faction with the argocytes so the planet's natives don't fight each other.
+
+# Ashfields: a laser raptor, or a slow ash golem.
+# Built on the space-mob base, not MobLaserRaptor: that one breathes, and Fervidus's air has no oxygen.
+- type: entity
+  id: WFMobLaserRaptorFervidus
+  parent: SimpleSpaceMobBase
+  suffix: Fervidus
+  components:
+  - type: Body
+    prototype: LaserRaptor
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: HTN
+    rootTask:
+      task: SimpleRangedHostileCompound
+  - type: Temperature
+    heatDamageThreshold: 500
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/laser_raptor.rsi
+    color: "#d8b9a4"
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: laser_raptor
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: laser_raptor
+      Dead:
+        Base: laser_raptor_dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatChicken
+      amount: 2
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 5
+  - type: Tag
+    tags:
+    - FootstepSound
+    - DoorBumpOpener
+  - type: HitscanBatteryAmmoProvider
+    proto: RedLightLaser
+    fireCost: 50
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 50
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: Gun
+    fireRate: 1
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  - type: CombatMode
+  - type: InteractionPopup
+    successChance: 0.3
+    interactSuccessString: petting-success-reptile
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Animals/lizard_happy.ogg
+
+- type: entity
+  id: WFMobAshGolem
+  parent: MobCoalGolem
+  suffix: Fervidus
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: Temperature
+    heatDamageThreshold: 800
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.2
+    baseSprintSpeed: 1.5
+  - type: Sprite
+    color: "#b3a9a3"
+
+# Lava crust: a slime that burns what it touches, and rarely the hellspawn.
+# A basic slime rebuilt on the space-mob base: the stock one breathes. Burns what it hits.
+- type: entity
+  id: WFMobCinderSlime
+  parent: SimpleSpaceMobBase
+  suffix: Fervidus
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: Temperature
+    heatDamageThreshold: 800
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/slimes.rsi
+    color: "#ff6a2e"
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: yellow_adult_slime
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: yellow_adult_slime
+      Dead:
+        Base: yellow_adult_slime_dead
+  - type: PointLight
+    radius: 1.8
+    energy: 1.2
+    color: "#ff6a2e"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.30
+        density: 80
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      120: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 4
+  - type: FootstepModifier
+    footstepSoundCollection:
+      path: /Audio/Effects/Footsteps/slime1.ogg
+      params:
+        volume: 3
+  - type: Tag
+    tags:
+    - FootstepSound
+    - DoorBumpOpener
+  - type: Butcherable
+    butcheringType: Knife
+    spawned:
+    - id: FoodMeatSlime
+      amount: 2
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Slime
+  - type: Bloodstream
+    bloodReagent: Slime
+  - type: Body
+    prototype: Slimes
+    requiredLegs: 1
+  - type: MeleeWeapon
+    altDisarm: false
+    soundHit:
+      path: /Audio/Weapons/punch3.ogg
+    angle: 0
+    animation: WeaponArcPunch
+    damage:
+      types:
+        Blunt: 3
+        Structural: 2
+        Heat: 7
+  - type: IgniteOnMeleeHit
+    fireStacks: 0.5
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-slimes
+    interactFailureString: petting-failure-generic
+  - type: Speech
+    speechVerb: Slime
+    speechSounds: Slime
+  - type: TypingIndicator
+    proto: slime
+
+- type: entity
+  id: WFMobHellspawnFervidus
+  parent: MobHellspawn
+  suffix: Fervidus
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: Temperature
+    heatDamageThreshold: 1000
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+
+- type: entityTable
+  id: WFFaunaFervidusAshfields
+  table: !type:GroupSelector
+    children:
+    # A bird flock (_WF/Birds); the leader spawns the rest.
+    - id: WFMobBirdAshHawk
+      weight: 2
+    - id: WFMobLaserRaptorFervidus
+      weight: 3
+    - id: WFMobAshGolem
+      weight: 2
+
+- type: entity
+  id: WFFaunaFervidusAshfields
+  parent: MarkerBase
+  name: fervidus ashfield wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaFervidusAshfields
+
+- type: entityTable
+  id: WFFaunaFervidusCrust
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCinderSlime
+      weight: 32
+    - id: WFMobHellspawnFervidus
+      weight: 1
+
+- type: entity
+  id: WFFaunaFervidusCrust
+  parent: MarkerBase
+  name: fervidus lava crust wildlife spawner
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFFaunaFervidusCrust
+
+# Produce.
+
+# Raw it burns the mouth; two of them with water and sugar make a can of blossom fizz (below).
+- type: entity
+  id: WFFireBlossomBloom
+  parent: WFWildProduceBase
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/chili.rsi
+    color: "#ffb24a"
+  - type: FlavorProfile
+    flavors:
+    - spicy
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: CapsaicinOil
+          Quantity: 2
+
+# Mildly toxic raw; cooking throws the poison away (the oven makes a new dish from the solids).
+- type: entity
+  id: WFAshShroom
+  parent: WFWildMushroomBase
+  components:
+  - type: Sprite
+    color: "#8c8c96"
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Toxin
+          Quantity: 2
+
+- type: entity
+  id: WFCactusWaterPod
+  parent: WFWildProduceBase
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/aloe.rsi
+    color: "#7fd1c0"
+  - type: FlavorProfile
+    flavors:
+    - sweet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Water
+          Quantity: 15
+        - ReagentId: Nutriment
+          Quantity: 1
+  - type: Tag
+    tags:
+    - Fruit
+
+- type: entity
+  id: WFFoodSoupAshcap
+  parent: FoodSoupMushroom
+
+- type: entity
+  id: WFDrinkBlossomFizz
+  parent: DrinkEnergyDrinkCan
+  components:
+  - type: Sprite
+    color: "#ffb070"
+
+- type: microwaveMealRecipe
+  id: RecipeWFAshShroomSoup
+  name: wf-recipe-ash-shroom-soup
+  result: WFFoodSoupAshcap
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    WFAshShroom: 2
+  recipeType:
+  - Oven
+  - Microwave
+
+- type: microwaveMealRecipe
+  id: RecipeWFBlossomFizz
+  name: wf-recipe-blossom-fizz
+  result: WFDrinkBlossomFizz
+  time: 10
+  group: Other
+  reagents:
+    Water: 10
+    Sugar: 5
+  solids:
+    WFFireBlossomBloom: 2
+  recipeType:
+  - Oven
+  - Microwave
+
+# Plants. All are walk-through (BaseFlora); only the ones that react hurt.
+
+# Stepping onto one burns. The bloom can be picked from a step away, which is safe.
+- type: entity
+  id: WFFloraFireBlossom
+  parent: TgFloraAshFireblossom
+  components:
+  - type: Sprite
+    layers:
+    - state: fireblossom1
+      map: ["bloom"]
+  - type: PointLight
+    radius: 1.2
+    energy: 1.0
+    color: "#ff8a3a"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        bloom:
+          True: { scale: "0.75,0.75", color: "#7a6a60" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: WFReactiveFlora
+    behaviour: Lash
+    range: 0.6
+    cooldown: 4
+    checkInterval: 0.5
+    maxTargets: 0
+    ignoreFactions: [Xeno]
+    sound:
+      collection: WFFloraSporePuff
+    popup: wf-flora-fireblossom-singe
+    damage:
+      types:
+        Heat: 4
+  - type: WFRegrowingHarvest
+    regrowTime: 480
+    harvestTime: 2
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFFireBlossomBloom
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+- type: entity
+  id: WFFloraAshCapShroom
+  parent: TgFloraAshCapShroom
+  components:
+  - type: Sprite
+    layers:
+    - state: r_mushroom1
+      map: ["shroom"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        shroom:
+          True: { scale: "0.7,0.7", color: "#6a625c" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    regrowTime: 420
+    harvestTime: 1.5
+    table: !type:AllSelector
+      children:
+      - id: WFAshShroom
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+- type: entity
+  id: WFFloraAshLeafShroom
+  parent: TgFloraAshLeafShroom
+  components:
+  - type: Sprite
+    layers:
+    - state: s_mushroom1
+      map: ["shroom"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        shroom:
+          True: { scale: "0.7,0.7", color: "#6a625c" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    regrowTime: 420
+    harvestTime: 1.5
+    table: !type:AllSelector
+      children:
+      - id: WFAshShroom
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# A cactus that stores cold water in its pads.
+- type: entity
+  id: WFFloraCoolCactus
+  parent: ShiptestFloraAshCacti
+  components:
+  - type: Sprite
+    layers:
+    - state: cactus
+      map: ["cactus"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        cactus:
+          True: { scale: "0.85,0.85", color: "#a39a8c" }
+          False: { scale: "1,1", color: "#ffffff" }
+  - type: WFRegrowingHarvest
+    regrowTime: 600
+    harvestTime: 2
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFCactusWaterPod
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Spits an ember at anything that comes within five metres. Grows by the lava.
+- type: entity
+  id: WFEmberSpit
+  parent: BaseBullet
+  name: ember
+  categories: [HideSpawnMenu]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 5
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
+      shader: unshaded
+    scale: 0.5, 0.5
+  - type: PointLight
+    color: "#E25822"
+    radius: 1.5
+    energy: 3.0
+  - type: IgniteOnCollide
+    fireStacks: 0.3
+  - type: Ammo
+    muzzleFlash: null
+
+- type: entity
+  id: WFFloraPlasmaSpitter
+  parent: TgFloraAshPlasmaFlower
+  components:
+  - type: Sprite
+    layers:
+    - state: plasma_flower1
+      map: ["flower"]
+      color: "#ff9a5a"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        flower:
+          Idle: { scale: "1,1", color: "#ff9a5a" }
+          Armed: { scale: "1.2,1.2", color: "#ffe08a" }
+          Spent: { scale: "1,1", color: "#ff9a5a" }
+  - type: WFReactiveFlora
+    behaviour: Spit
+    range: 5
+    cooldown: 10
+    checkInterval: 1
+    ignoreFactions: [Xeno]
+    projectile: WFEmberSpit
+    projectileSpeed: 9
+    sound:
+      collection: WFFloraSpit
+    popup: wf-flora-spitter-spit
+
+# Puffs a short smoke cloud with a weak toxin when someone passes close.
+- type: entity
+  id: WFFloraAshLung
+  parent: TgFloraAshVahrezjia
+  components:
+  - type: Sprite
+    layers:
+    - state: flowerpod1
+      map: ["pod"]
+      color: "#b8a89a"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        pod:
+          Idle: { scale: "1,1", color: "#b8a89a" }
+          Armed: { scale: "1.4,1.4", color: "#d8cfc4" }
+          Spent: { scale: "1,1", color: "#b8a89a" }
+  - type: WFReactiveFlora
+    behaviour: Cloud
+    range: 1.3
+    cooldown: 20
+    checkInterval: 0.75
+    ignoreFactions: [Xeno]
+    activeTime: 1.5
+    sound:
+      collection: WFFloraSporePuff
+    popup: wf-flora-ashlung-puff
+    cloudPrototype: Smoke
+    cloudDuration: 5
+    cloudSpread: 3
+    solution:
+      reagents:
+      - ReagentId: Toxin
+        Quantity: 4

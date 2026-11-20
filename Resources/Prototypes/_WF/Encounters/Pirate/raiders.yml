@@ -1,0 +1,138 @@
+# Pirates on the prowl: two raiders arrive in open space near traffic, meander from point to point for a while and
+# jump out. Any ship that strays near is told to heave to, and fired on if it comes closer.
+- type: wfEncounter
+  id: WFEncounterPirateRaiders
+  stationClearance: 3000
+  name: wf-encounter-name-pirates
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 2
+  weight: 2
+  minPlayers: 3
+  cooldown: 2400
+  duration: 3600
+  minDistance: 2500
+  maxDistance: 4500
+  ships:
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    deckhands: 3
+    wander: 6
+    wanderRadius: 3000
+    warnRange: 900
+    attackRange: 450
+    zoneLines: wf-encounter-pirate-zone
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 160, 0
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    warnRange: 900
+    attackRange: 450
+    zoneLines: wf-encounter-pirate-zone
+    objectives:
+    - kind: Escort
+      target: raider
+
+# Pirate boarders: one small, lightly armed ship that gives no warning. It runs down the nearest player ship and
+# tries to dock; every time it is shaken off it comes again. If it gets a port, its hands come aboard, shoot at
+# whoever they see, carry off a few loose things, and the ship casts off and jumps out.
+- type: wfEncounter
+  id: WFEncounterPirateBoarders
+  stationClearance: 3000
+  name: wf-encounter-name-boarders
+  start: Scheduled
+  category: Threat
+  icon: Skull
+  cost: 2
+  weight: 2
+  minPlayers: 2
+  hidden: true
+  cooldown: 2400
+  duration: 1800
+  minDistance: 1500
+  maxDistance: 2500
+  ships:
+  - key: boarder
+    navigation: WFCrewNavigationRaider
+    vessels: [ Hazel, Metis, Mudskipper ]
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Takeaway, Caracara ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Takeaway, Arribane, Zeros, Peregrine ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 4
+      vessels: [ Hazel, Metis, Mudskipper ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 2
+    guards: 2
+    hunt: true
+    evades: false

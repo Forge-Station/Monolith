@@ -1,0 +1,47 @@
+# Playtest 5, ITEMS: a first aid kit for a chassis. Wolfmed's synthetic repairs run on ordinary tools (the cable's
+# servo step, the wrench's hull plate, the welder's seal, the multitool's core probe) and one consumable, the
+# hydraulic fluid pack; this puts one of each in a kit a medic or a synthetic can buy. Shaped like a medkit, in the
+# first aid sprite's unused grey state.
+- type: entity
+  parent: BaseStorageItem
+  id: WFMedkitSynthetic
+  name: synthetic repair kit
+  description: A grey field kit for synthetic crew. Tools to patch a chassis and fluid to refill it.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Medical/firstaidkits.rsi
+    state: multikit
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,2,1
+    sprite: Objects/Specific/Medical/firstaidkits.rsi
+    heldPrefix: multikit
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 150
+  - type: Tag
+    tags:
+    - Medkit
+
+# 11 of the 12 cells. The kit's own price leaves its contents out, so the vend price is set for what is inside.
+- type: entity
+  parent: WFMedkitSynthetic
+  id: WFMedkitSyntheticFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CableApcStack10
+    - id: WelderMini
+    - id: Wrench
+    - id: Multitool
+    - id: WFWolfmedHydraulicFluidPack
+      amount: 2
+  - type: StaticPrice
+    price: 0
+    vendPrice: 400

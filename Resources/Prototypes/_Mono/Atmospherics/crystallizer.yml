@@ -31,39 +31,40 @@
     SheetIridite1: 1
   dangerous: false
   minimumRequirements:
-# Forge start
-  - 150   # oxygen
-  - 20    # nitrogen
-  - 10    # carbon dioxide
+  - 7     # oxygen
+  - 3     # nitrogen
+  - 3     # carbon dioxide
   - 0     # plasma
-  - 10    # tritium
+  - 2     # tritium
   - 0     # vapor
   - 0     # ammonia
-  - 10    # n2o
-  - 5     # frezon
+  - 1     # n2o
+  - 2     # frezon
   - 0     # bz
   - 0     # healium
   - 0     # nitrium
-# Forge end
+
 
 - type: crystallizerRecipe
   id: Plastitanium
-  name: Plastitanium (10)
+  # WOLFGATE(Mining): one plastitanium sheet per batch from about 480 mol of gas, most of it ammonia
+  # Was 10 sheets from 35 O2, 3 N2, 8 CO2, 9 plasma, 3 tritium, 7 ammonia and 2 N2O.
+  name: Plastitanium (1)
   minimumTemperature: 7920
   maximumTemperature: 8150
   energyRelease: 1840
   products:
-    SheetPlastitanium10: 1
+    SheetPlastitanium1: 1
   dangerous: true
   minimumRequirements:
-  - 60     # oxygen // Forge-change
-  - 5     # nitrogen // Forge-change
-  - 8     # carbon dioxide
-  - 9     # plasma
-  - 3     # tritium
+  - 105     # oxygen
+  - 9     # nitrogen
+  - 24     # carbon dioxide
+  - 27     # plasma
+  - 9     # tritium
   - 0     # vapor
-  - 7     # ammonia
-  - 2     # n2o
+  - 300     # ammonia
+  - 6     # n2o
   - 0     # frezon
   - 0     # bz
   - 0     # healium
@@ -81,8 +82,8 @@
   minimumRequirements:
   - 6     # oxygen
   - 0     # nitrogen
-  - 8     # carbon dioxide
-  - 5     # plasma
+  - 100     # carbon dioxide # WOLFGATE(Mining): crystallizer plasteel costs real gas, 8 -> 100
+  - 200     # plasma # WOLFGATE(Mining): crystallizer plasteel plasma, 5 -> 200
   - 0     # tritium
   - 0     # vapor
   - 0     # ammonia
@@ -105,7 +106,7 @@
   - 1     # oxygen
   - 0     # nitrogen
   - 0     # carbon dioxide
-  - 10     # plasma
+  - 40     # plasma # WOLFGATE(Mining): gas plasma costs 40 mol per sheet, 10 -> 40
   - 0     # tritium
   - 0     # vapor
   - 0     # ammonia

@@ -8,19 +8,15 @@
   },
   "states": [
     {
-      "name": "icon"
-    },
-    {
-      "name": "icon-unshaded"
-    },
-    {
-      "name": "icon-flash"
-    },
-    {
-      "name": "light-overlay"
-    },
-    {
       "name": "equipped-head",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-avali",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-hydrakin",
       "directions": 4
     },
     {
@@ -28,23 +24,7 @@
       "directions": 4
     },
     {
-      "name": "equipped-head-unshaded",
-      "directions": 4
-    },
-    {
-      "name": "equipped-head-vox",
-      "directions": 4
-    },
-    {
-      "name": "equipped-head-light-vox",
-      "directions": 4
-    },
-    {
-      "name": "equipped-head-unshaded-vox",
-      "directions": 4
-    },
-	{
-      "name": "equipped-head-hydrakin",
+      "name": "equipped-head-light-avali",
       "directions": 4
     },
     {
@@ -52,11 +32,27 @@
       "directions": 4
     },
     {
+      "name": "equipped-head-light-vox",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-light-vulpkanin",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-unshaded",
+      "directions": 4
+    },
+    {
+      "name": "equipped-head-unshaded-avali",
+      "directions": 4
+    },
+    {
       "name": "equipped-head-unshaded-hydrakin",
       "directions": 4
     },
     {
-      "name": "equipped-head-vulpkanin",
+      "name": "equipped-head-unshaded-vox",
       "directions": 4
     },
     {
@@ -64,8 +60,24 @@
       "directions": 4
     },
     {
-      "name": "equipped-head-light-vulpkanin",
+      "name": "equipped-head-vox",
       "directions": 4
+    },
+    {
+      "name": "equipped-head-vulpkanin",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon-flash"
+    },
+    {
+      "name": "icon-unshaded"
+    },
+    {
+      "name": "light-overlay"
     }
   ]
 }

@@ -1,0 +1,86 @@
+- type: entity
+  id: WFWeaponTurretMiningBeam
+  name: M40 Prospector mining laser
+  parent:
+  - BallisticArtillery
+  - BallisticArtilleryTier2HP
+  - ConstructibleMachine
+  description: A heavy industrial mining laser. It pours heat into an asteroid until the gases trapped inside expand and split the rock apart from within. Push it too hard and the rock goes off all at once.
+  components:
+  - type: StaticPrice
+    price: 6000
+  - type: Sprite
+    sprite: _WF/AsteroidMining/Structures/mining_beam.rsi
+    layers:
+    - state: space_artillery
+      map: [ "enum.WFMiningBeamVisualLayers.Base" ]
+  - type: Appearance
+  - type: AmmoCounter
+  # Draws 5 kW from the grid while firing and 1 kW idle; firing outpaces the recharge slightly, so a full battery covers a minute.
+  - type: Battery
+    maxCharge: 30000
+    startingCharge: 30000
+  - type: ExaminableBattery
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 4000
+  - type: WirelessNetwork
+    range: 500
+  - type: FireControlRotate
+  - type: Gun
+    fireRate: 10
+    recoil: 0
+    minAngle: 0
+    maxAngle: 0
+    shootThermalSignature: 20000
+    soundGunshot: null
+    soundEmpty:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+  - type: SpaceArtillery
+    powerChargeRate: 4000
+    powerUsePassive: 1000
+    powerUseActive: 0
+  - type: Actions
+  - type: HitscanBatteryAmmoProvider
+    proto: WFMiningBeamPulse
+    fireCost: 450
+  - type: Machine
+    board: WFWeaponTurretMiningBeamCircuitboard
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.75,-0.75,0.75,0.75"
+        density: 1500
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: RadarBlip
+    radarColor: "#ffb347"
+    scale: 1.5
+    visibleFromOtherGrids: true
+    gridConfig:
+      color: "#ffb347"
+      shape: Square
+      respectZoom: true
+      rotate: true
+      bounds: "-1,-1,1,1"
+  - type: ShipGunType
+    shipType: Energy
+  - type: ShipGunClass
+    shipClass: Light
+  - type: ShipRepairable
+    repairTime: 15
+    repairCost: 40
+  - type: HardpointAnchorableOnly
+    class: Energy
+    size: Heavy
+  - type: WFMiningBeamEmitter
+    strength: 1.5
+    crackRate: 2

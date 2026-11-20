@@ -1,0 +1,47 @@
+# The Contracts PDA app.
+- type: entity
+  parent: NFBasePDACartridge
+  id: WFContractsCartridge
+  name: contracts cartridge
+  description: A PDA program tracking the contracts you took at a contract board.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-q
+  - type: Icon
+    sprite: Objects/Devices/cartridge.rsi
+    state: cart-q
+  - type: UIFragment
+    ui: !type:ContractsUi
+  - type: Cartridge
+    programName: wf-contract-program-name
+    icon: { sprite: Objects/Misc/clipboard.rsi, state: clipboard_paper }
+    readonly: true
+  - type: WFContractCartridge
+  - type: StaticPrice
+    price: 50
+    vendPrice: 500
+
+# The Market PDA app: live chute prices, sector alerts and the hold.
+- type: entity
+  parent: NFBasePDACartridge
+  id: WFMarketCartridge
+  name: market cartridge
+  description: A PDA program listing what every station's turn-in chute pays right now, and the reason for each price.
+  components:
+  - type: Sprite
+    sprite: _WF/TradeGoods/market.rsi
+    state: cart-market
+  - type: Icon
+    sprite: _WF/TradeGoods/market.rsi
+    state: cart-market
+  - type: UIFragment
+    ui: !type:MarketUi
+  - type: Cartridge
+    programName: wf-market-program-name
+    icon: { sprite: _WF/TradeGoods/market.rsi, state: icon }
+    readonly: true
+  - type: WFMarketCartridge
+  - type: StaticPrice
+    price: 50
+    vendPrice: 500

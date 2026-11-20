@@ -1,0 +1,39 @@
+# What an Automated Defense System node carries: the repair devices that can mend its hulls, and the energy weapons its
+# crews were issued. The reason to board one.
+- type: wfEncounterManifest
+  id: WFManifestAdsTech
+  name: wf-ads-cargo-tech
+  crates:
+  - WFCrateAdsRepair
+  - WFCrateAdsRepair
+  - WFCrateAdsArms
+  - WFCrateAdsArms
+  - TradeGoodComponents
+  - TradeGoodEquipment
+
+- type: entity
+  id: WFCrateAdsRepair
+  parent: CrateEngineering
+  name: pre-fracture repair crate
+  description: Two arcane repair devices that can mend ADS ships, with a spare matter cartridge for each.
+  components:
+  - type: StorageFill
+    contents:
+    - id: ShipRepairDeviceRedacted
+      amount: 2
+    - id: ShipRepairDeviceAmmo
+      amount: 2
+
+- type: entity
+  id: WFCrateAdsArms
+  parent: CrateAmmoGeneric
+  name: ADS arms crate
+  description: Laser weapons from the armoury of an Automated Defense System hull.
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponLaserCarbine
+      amount: 2
+    - id: WeaponLaserGun
+      amount: 2
+    - id: WeaponAdvancedLaser

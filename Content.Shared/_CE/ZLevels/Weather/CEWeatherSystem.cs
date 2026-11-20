@@ -4,6 +4,7 @@
  */
 
 using Content.Shared._CE.ZLevels.Core.Components;
+using Content.Shared._WF.WolfWeather; // WOLFGATE(WolfWeather)
 using Content.Shared.Weather;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -16,6 +17,7 @@ namespace Content.Shared._CE.ZLevels.Weather;
 public sealed partial class CEWeatherSystem : EntitySystem
 {
     [Dependency] private SharedWeatherSystem _weather = default!;
+    [Dependency] private SharedWolfWeatherSystem _wolfWeather = default!; // WOLFGATE(WolfWeather)
 
     public void SetWeather(Entity<CEZMapNetworkComponent?> network, WeatherPrototype? proto, TimeSpan? duration)
     {
@@ -25,6 +27,10 @@ public sealed partial class CEWeatherSystem : EntitySystem
         foreach (var (_, map) in network.Comp.ZLevels)
         {
             if (!TryComp<MapComponent>(map, out var mapComp))
+                continue;
+
+            // WOLFGATE(WolfWeather): weather falls on a surface only, never on a level below or above one.
+            if (proto != null && !_wolfWeather.IsSurface(map.Value))
                 continue;
 
             _weather.SetWeather(mapComp.MapId, proto, duration);

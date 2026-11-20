@@ -23,6 +23,8 @@
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobHumanTorso
+    UndergarmentTop: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
+    UndergarmentBottom: MobHumanoidAnyMarking # WOLFGATE - underwear layers ported from HardLight
     Eyes: MobHumanoidEyes
     HeadTop: MobHumanoidAnyMarking
     LArm: MobHumanLArm
@@ -34,6 +36,8 @@
     LFoot: MobHumanLFoot
     RFoot: MobHumanRFoot
     Tail: MobHumanoidAnyMarking # Nyanotrasen - Felinid, harpies & Tajaran.
+    TailBehind: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
+    TailOversuit: MobHumanoidAnyMarking # WOLFGATE - split tail layers ported from HardLight/Floof
     HeadSide: MobHumanoidAnyMarking # Einstein Engines - Oni
 
 - type: markingPoints

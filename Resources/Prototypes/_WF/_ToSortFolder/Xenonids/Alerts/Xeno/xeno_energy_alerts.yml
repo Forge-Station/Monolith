@@ -1,0 +1,238 @@
+- type: alert
+  id: XenoEnergyBase #used by default
+  category: Energy
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_full
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_16
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_15
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_14
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_13
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_12
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_11
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_10
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_9
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_8
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_7
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_6
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_5
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_4
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_3
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_2
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_1
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_0
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_empty
+  name: Energy reserves
+  description: Your stored energy. Used by different abilities
+  minSeverity: 0
+  maxSeverity: 18
+
+# WOLFGATE: alerts have no inheritance here; XenoEnergyBase's fields are copied
+- type: alert
+  id: XenoEnergyAcider
+  category: Energy
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_full
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_16
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_15
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_14
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_13
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_12
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_11
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_10
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_9
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_8
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_7
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_6
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_5
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_4
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_3
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_2
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_1
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_0
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_empty
+  name: Acid reserves
+  description: Your stored acid. Used by different abilities. You can only passively generate up to 400.
+  minSeverity: 0
+  maxSeverity: 18
+
+# WOLFGATE: alerts have no inheritance here; XenoEnergyBase's fields are copied
+- type: alert
+  id: XenoEnergyValkyrie
+  category: Energy
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_full
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_16
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_15
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_14
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_13
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_12
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_11
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_10
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_9
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_8
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_7
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_6
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_5
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_4
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_3
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_2
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_1
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_0
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_empty
+  name: Fury
+  description: Your built-up rage. Used by different abilities.
+  minSeverity: 0
+  maxSeverity: 18
+
+# WOLFGATE: alerts have no inheritance here; XenoEnergyBase's fields are copied
+- type: alert
+  id: XenoEnergyHealer
+  category: Energy
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_full
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_16
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_15
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_14
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_13
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_12
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_11
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_10
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_9
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_8
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_7
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_6
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_5
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_4
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_3
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_2
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_1
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_0
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_empty
+  name: Transferred health
+  description: Your total health transferred. If full you'll revive after using sacrifice.
+  minSeverity: 0
+  maxSeverity: 18
+
+# WOLFGATE: alerts have no inheritance here; XenoEnergyBase's fields are copied
+- type: alert
+  id: XenoEnergyShards
+  category: Energy
+  icons:
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_full
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_16
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_15
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_14
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_13
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_12
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_11
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_10
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_9
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_8
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_7
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_6
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_5
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_4
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_3
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_2
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_1
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_0
+  - sprite: /Textures/_WF/Xenonids/Interface/Alerts/xeno_energy.rsi
+    state: power_display_empty
+  name: Shards
+  description: Your built-up shards. Used by different abilities. You gain more armor with more shards.
+  minSeverity: 0
+  maxSeverity: 18

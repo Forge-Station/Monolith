@@ -21,6 +21,9 @@
     size: Small
     storedRotation: -90
   - type: CablePlacer
+  # WOLFGATE(Wolfmed): W6: the surgery tool for the servo step. Servo damage carries no damage type, so the coil's
+  # Healing block below cannot reach it; replacing the run is a procedure, and this is what it needs.
+  - type: WolfmedServoKit
   - type: Clickable
   - type: StaticPrice
     price: 0
@@ -37,6 +40,7 @@
     delay: 0.6
     damageContainers:
     - Silicon
+    treatmentCapabilities: [Electrical] # WOLFGATE(Wolfmed): P5-3: matches ONYX cable_coils.yml:179 and Wolfgate's own damageContainers: [Silicon] intent. Without it the default [Biological] (HealingComponent.cs:72-73) overlaps OrganicBodyPartProfile and the coil heals human Heat/Shock wounds at -3/-3 per 0.6s, because HOOK 8 skips the damageContainers check for wound hosts (HealingSystem.cs:201-210) and WoundHealingSystem.IsCompatiblePart never reads it (:154-166).
     damage:
       types: # these are all split across multiple types
         Heat: -3.0

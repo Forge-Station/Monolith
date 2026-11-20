@@ -1,0 +1,182 @@
+# A hauler in open space with a pirate ship lying off it. The hauler makes its own distress call on the common channel at
+# once; the attack only begins when a player comes within a kilometre and a half, so somebody is there to see it.
+- type: wfEncounter
+  id: WFEncounterPirateAmbush
+  leash: 2500
+  name: wf-encounter-name-ambush
+  announcement: wf-encounter-announce-ambush
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: hauler
+  start: Scheduled
+  category: Distress
+  icon: Skull
+  cost: 2
+  startRadius: 1500
+  rewards:
+  - side: freight
+    spesos: 24000
+    thanks: wf-encounter-reward-thanks-hauler
+  minPlayers: 4
+  cooldown: 2700
+  duration: 2400
+  manifests: [ WFManifestGeneral, WFManifestFood ]
+  ships:
+  - key: hauler
+    navigation: WFCrewNavigationFreight
+    vessel: Piva
+    side: freight
+    profile: WFCrewProfileHauler
+    company: TSFCivilian
+    cargo: 4
+    docking: Warn
+    disengage: Deter
+    objectives:
+    - kind: Hold
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    offset: 0, 450
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: hauler
+
+# The same ambush on a bigger scale, for more players: a large freighter with its guns and shields, and a raider with a
+# wingman on it. The freighter makes its own call, as before.
+- type: wfEncounter
+  id: WFEncounterPirateAmbushLarge
+  leash: 2500
+  name: wf-encounter-name-ambush-large
+  announcement: wf-encounter-announce-ambush-large
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: hauler
+  start: Scheduled
+  category: Distress
+  icon: Skull
+  cost: 3
+  weight: 0.5
+  startRadius: 1800
+  rewards:
+  - side: freight
+    spesos: 44000
+    thanks: wf-encounter-reward-thanks-hauler
+  minPlayers: 7
+  cooldown: 3300
+  duration: 2700
+  manifests: [ WFManifestGeneral, WFManifestIndustrial, WFManifestParts, WFManifestMedical ]
+  ships:
+  - key: hauler
+    navigation: WFCrewNavigationFreight
+    vessels: [ Olympus, Autumn, Windreign ]
+    side: freight
+    profile: WFCrewProfileHauler
+    company: TSFCivilian
+    deckhands: 3
+    guards: 1
+    cargo: 12
+    docking: Warn
+    disengage: Deter
+    objectives:
+    - kind: Hold
+  - key: raider
+    navigation: WFCrewNavigationRaider
+    vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+    # Retrofitted civilian hulls at the low tiers, gunships from tier 3, the full black-market line from tier 4.
+    tiers:
+    - minTier: 0
+      vessels: [ Spessbite, Victoria, Sakuratsu, Pillbox, Noble, Caracara, Takeaway ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Peregrine, Shuilian, Arribane, Autumn, Zeros, WFDredger ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Windreign, Zhuangzi, Rosetta, WFDredger, Kalisto, Metis, Bastion, Garm ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Kalisto, Metis, Mudskipper, Scallywag ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    offset: 0, 600
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    deckhands: 2
+    objectives:
+    - kind: Attack
+      target: hauler
+  - key: wing
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    tiers:
+    - minTier: 0
+      vessels: [ Horsefly, Tick ]
+      skills: [ Green ]
+      retrofit: WFPirateRetrofitLight
+    - minTier: 2
+      vessels: [ Horsefly, Tick, Carrion ]
+      skills: [ Green, Regular ]
+      retrofit: WFPirateRetrofitMedium
+    - minTier: 3
+      vessels: [ Carrion, Hazel, Horsefly, Tick ]
+      skills: [ Regular ]
+      retrofit: WFPirateRetrofitHeavy
+    - minTier: 4
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Regular, Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    - minTier: 5
+      vessels: [ Carrion, Horsefly, Tick, Hazel ]
+      skills: [ Veteran ]
+      retrofit: WFPirateRetrofitGrime
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 200, 650
+    side: pirates
+    faction: PirateNF
+    distress: false
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    objectives:
+    - kind: Attack
+      target: hauler

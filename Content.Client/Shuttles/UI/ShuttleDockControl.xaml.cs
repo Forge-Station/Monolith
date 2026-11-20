@@ -34,6 +34,8 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
 
     public DockingInterfaceState? DockState = null;
 
+    private const float MinDisplaySize = 256f;
+
     private List<Entity<MapGridComponent>> _grids = new();
 
     private readonly HashSet<DockingPortState> _drawnDocks = new();
@@ -66,6 +68,9 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
 
     public void SetViewedDock(DockingPortState? dockState)
     {
+        // WOLFGATE(Cockpit): selecting an approach target recentres its panned plot.
+        if (WfCockpitControls)
+            Offset = Vector2.Zero;
         _viewedState = dockState;
 
         if (dockState != null)
@@ -93,6 +98,7 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
         base.Draw(handle);
 
         DrawBacking(handle);
+        WfBeginCockpitDockDraw(); // WOLFGATE(Cockpit): reset compact port callout placement for this frame.
 
         if (_coordinates == null ||
             _angle == null ||
@@ -112,9 +118,13 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
         var selectedDockToWorld = Matrix3x2.Multiply(selectedDockToOurGrid, ourGridToWorld);
 
         Box2 viewBoundsWorld = Matrix3Helpers.TransformBox(selectedDockToWorld, new Box2(-WorldRangeVector, WorldRangeVector));
+        // WOLFGATE(Cockpit): find grids in the panned approach plot without changing the selected dock.
+        if (WfCockpitControls)
+            viewBoundsWorld = Matrix3Helpers.TransformBox(selectedDockToWorld, new Box2(Offset - WorldRangeVector, Offset + WorldRangeVector));
 
         Matrix3x2.Invert(selectedDockToWorld, out var worldToSelectedDock);
         var selectedDockToView = Matrix3x2.CreateScale(new Vector2(MinimapScale, -MinimapScale)) * Matrix3x2.CreateTranslation(MidPointVector);
+        selectedDockToView *= Matrix3x2.CreateTranslation(-WfCockpitDockPan); // WOLFGATE(Cockpit): pan hulls and their dock buttons together.
 
         // Draw nearby grids
         var controlBounds = PixelSizeBox;
@@ -127,6 +137,7 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
         if (viewedDockPos != null)
         {
             viewedDockPos = viewedDockPos.Value + _angle.Value.RotateVec(new Vector2(0f, -0.6f) * MinimapScale);
+            viewedDockPos -= WfCockpitDockPan; // WOLFGATE(Cockpit): keep approach guidance anchored to its panned dock.
         }
 
         var canDockChange = _timing.CurTime > _nextDockChange;
@@ -300,6 +311,13 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
                 handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts, otherDockColor.WithAlpha(0.2f));
                 handle.DrawPrimitives(DrawPrimitiveTopology.LineList, verts, otherDockColor);
 
+                // WOLFGATE(Cockpit) START: keep full port names and actions out of the approach geometry.
+                if (WfDrawCockpitDockMarker(handle, dock, canDraw, curGridToView))
+                {
+                    _drawnDocks.Add(dock);
+                    continue;
+                }
+                // WOLFGATE END
                 // Position the dock control above it
                 var container = _dockContainers[dock];
                 container.Visible = canDraw;
@@ -330,6 +348,10 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
         var dockPosB = ScalePosition(Vector2.Transform(new Vector2(0.5f, -0.5f), rotation));
         var ourDock = new UIBox2(Vector2.Min(dockPosA, dockPosB), Vector2.Max(dockPosA, dockPosB));
 
+        // WOLFGATE(Cockpit) START: pan the pilot's dock marker with the rest of the approach plot.
+        ourDockConnection = ourDockConnection.Translated(-WfCockpitDockPan);
+        ourDock = ourDock.Translated(-WfCockpitDockPan);
+        // WOLFGATE END
         var dockColor = _viewedState?.HighlightedRadarColor ?? Color.Magenta; // Frontier - use ViewedState
         var connectionColor = Color.Pink;
 
@@ -369,6 +391,7 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
 
         _dockButtons.Clear();
         _dockContainers.Clear();
+        _wfCockpitDockNumbers.Clear(); // WOLFGATE(Cockpit): rebuild port callout numbers with their live action rows.
 
         if (DockState == null)
             return;
@@ -462,6 +485,10 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
 
                 button.HorizontalAlignment = HAlignment.Center;
                 container.AddChild(button);
+
+                // WOLFGATE(Cockpit): use numbered callouts and a separate list for full port actions.
+                if (WfBuildCockpitDockRow(dock, button, panel))
+                    continue;
 
                 AddChild(panel);
                 panel.Measure(Vector2Helpers.Infinity);

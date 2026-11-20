@@ -1,0 +1,8 @@
+# Invisible viewpoint a pilot's eye rides on while looking through a hull camera.
+- type: entity
+  id: WFShuttleCamera
+  name: hull camera
+  save: false
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Eye

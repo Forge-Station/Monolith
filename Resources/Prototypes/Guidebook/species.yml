@@ -1,7 +1,7 @@
 - type: guideEntry
   id: Species
   name: guide-entry-species
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Species.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/Species.xml"
   children:
   - Arachnid
   - Diona # Note: Frontier changes inside
@@ -13,87 +13,133 @@
   - Vox
   - Goblin # Frontier
   - Vulpkanin # DeltaV
+  - Canine # Wolfgate
   - Harpy # DeltaV
- # - Felinid # DeltaV #Forge-change-del
+  - Felinid # DeltaV
+  - Felionoid # Wolfgate: ported from HardLight/Starlight
+  - Avali # Wolfgate: ported from HardLight/Starlight
+  - Skrell # Wolfgate: ported from HardLight
+  - Shadekin # Wolfgate: ported from HardLight/Starlight
+  - Thaven # Wolfgate: ported from HardLight/Impstation
+  - Synth # Wolfgate: ported from HardLight
   - Oni # DeltaV
   - Chitinid # DeltaV
   - Resomi # Floof
- # - Protogen # Mono
+  - Protogen # Mono
   - IPC # EE
   - Rodentia # DeltaV
   - Tajaran # Goobstation
   - Hydrakin # Monolith/Obelisk
-  - Demon # Wega
-  - Skrell # Wega
-  - Ariral # Wega
- # - Flight # CE #Forge-change-del
+  - Feroxi
+  - Flight # CE
 
 - type: guideEntry
   id: Arachnid
   name: species-name-arachnid
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Arachnid.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/Arachnid.xml"
 
 - type: guideEntry
   id: Diona
   name: species-name-diona
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Diona.xml" # Forge-change
+  text: "/ServerInfo/_NF/Guidebook/Mobs/Diona.xml" # Frontier: moved to _NF folder
 
 - type: guideEntry
   id: Dwarf
   name: species-name-dwarf
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Dwarf.xml" # Forge-change
+  text: "/ServerInfo/_NF/Guidebook/Mobs/Dwarf.xml" # Frontier: moved to _NF folder
 
 - type: guideEntry
   id: Human
   name: species-name-human
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Human.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/Human.xml"
 
 - type: guideEntry
   id: Moth
   name: species-name-moth
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Moth.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/Moth.xml"
 
 - type: guideEntry
   id: Reptilian
   name: species-name-reptilian
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/_Mono/MonoReptilian.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/_Mono/MonoReptilian.xml" # Mono
 
 - type: guideEntry
   id: SlimePerson
   name: species-name-slime
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/SlimePerson.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/SlimePerson.xml"
 
 - type: guideEntry
   id: Vox
   name: species-name-vox
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Vox.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/Vox.xml"
 
 - type: guideEntry
   id: Resomi
   name: species-name-resomi
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Resomi.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/Resomi.xml"
 
-#- type: guideEntry
-#  id: Protogen
-#  name: species-name-protogen
-#  text: "/ServerInfo/Guidebook/Mobs/Protogen.xml"
+- type: guideEntry
+  id: Protogen
+  name: species-name-protogen
+  text: "/ServerInfo/Guidebook/Mobs/Protogen.xml"
+  children: # Wolfgate: the 14 subspecies ported from HardLight
+  - ProtoVulp
+  - ProtoVox
+  - ProtoThaven
+  - ProtoSlimePerson
+  - ProtoKin
+  - ProtoResomi
+  - ProtoReptile
+  - ProtoMoth
+  - ProtoHumie
+  - ProtoFeline
+  - ProtoDawi
+  - ProtoDionae
+  - ProtoAvali
+  - ProtoArachnid
 
 - type: guideEntry
   id: IPC
   name: species-name-ipc
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/IPCs.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/IPCs.xml"
 
 - type: guideEntry
   id: Tajaran
   name: species-name-tajaran
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Tajaran.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/Tajaran.xml"
 
 - type: guideEntry
   id: Hydrakin
   name: species-name-hydrakin
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/Hydrakin.xml" # Forge-change
+  text: "/ServerInfo/Guidebook/Mobs/Hydrakin.xml"
+
+# Wolfgate: ported from HardLight
+- type: guideEntry
+  id: Felionoid
+  name: species-name-felionoid
+  text: "/ServerInfo/_StarLight/Guidebook/Mobs/Felionoid.xml"
 
 - type: guideEntry
-  id: Ariral
-  name: species-name-ariral
-  text: "/ServerInfo/_Forge/Guidebook/Mobs/_Wega/Ariral.xml" # Forge-change
+  id: Avali
+  name: species-name-avali
+  text: "/ServerInfo/Guidebook/Mobs/Avali.xml"
+
+- type: guideEntry
+  id: Skrell
+  name: species-name-skrell
+  text: "/ServerInfo/Guidebook/Mobs/Skrell.xml"
+
+- type: guideEntry
+  id: Shadekin
+  name: species-name-shadekin
+  text: "/ServerInfo/Guidebook/Mobs/Shadekin.xml"
+
+- type: guideEntry
+  id: Thaven
+  name: species-name-thaven
+  text: "/ServerInfo/_Impstation/Guidebook/Mobs/Thaven.xml"
+
+- type: guideEntry
+  id: Synth
+  name: species-name-synth
+  text: "/ServerInfo/_HL/Guidebook/Mobs/Synth.xml"

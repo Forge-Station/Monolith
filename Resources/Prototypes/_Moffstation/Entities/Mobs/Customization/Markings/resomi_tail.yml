@@ -14,7 +14,7 @@
   id: ResomiTail
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Resomi]
+  speciesRestriction: [Resomi, ProtoResomi]
   sprites:
   - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_tail_markings.rsi
     state: tail
@@ -24,9 +24,15 @@
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [Resomi]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    tail_bird_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    tail_bird_BEHIND: tail_bird_FRONT
   sprites:
-  - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_tail_markings.rsi
-    state: tail_bird
+  - sprite: _WF/Mobs/Customization/TailSplit/_Moffstation/Mobs/Customization/Resomi/resomi_tail_markings.rsi # WOLFGATE - split art
+    state: tail_bird_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_Moffstation/Mobs/Customization/Resomi/resomi_tail_markings.rsi # WOLFGATE - south frame on TailBehind
+    state: tail_bird_BEHIND
 
 - type: marking
   id: ResomiTailComplex
@@ -86,7 +92,7 @@
   id: ResomiTailFeathers # Same as default tail but you can change the colors.
   bodyPart: Tail
   markingCategory: TailExtras
-  speciesRestriction: [Resomi]
+  speciesRestriction: [Resomi, ProtoResomi]
   sprites:
   - sprite: _Moffstation/Mobs/Customization/Resomi/resomi_tail_markings.rsi
     state: tail_feathers

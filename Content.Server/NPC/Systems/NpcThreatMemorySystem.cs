@@ -33,8 +33,10 @@ public sealed class NpcThreatMemorySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
-        SubscribeLocalEvent<HitscanBasicRaycastComponent, HitscanRaycastFiredEvent>(OnHitscanFired);
+        // PersonalShield already owns ProjectileHitEvent and re-raises this for every hit.
+        SubscribeLocalEvent<ProjectileComponent, ProjectileHitNoticedEvent>(OnProjectileHit);
+        // Dodge already owns HitscanRaycastFiredEvent on this component.
+        SubscribeLocalEvent<HitscanBasicRaycastComponent, HitscanRaycastNoticedEvent>(OnHitscanFired);
     }
 
     public override void Update(float frameTime)
@@ -49,12 +51,12 @@ public sealed class NpcThreatMemorySystem : EntitySystem
         }
     }
 
-    private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
+    private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitNoticedEvent args)
     {
         RememberShot(args.Target, args.Shooter, ent);
     }
 
-    private void OnHitscanFired(Entity<HitscanBasicRaycastComponent> ent, ref HitscanRaycastFiredEvent args)
+    private void OnHitscanFired(Entity<HitscanBasicRaycastComponent> ent, ref HitscanRaycastNoticedEvent args)
     {
         if (args.Canceled || args.HitEntity is not { } hit)
             return;

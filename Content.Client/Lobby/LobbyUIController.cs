@@ -3,6 +3,7 @@ using Content.Client._Mono.Company;
 
 // Forge-Change-delete
 // using Content.Client._Mono.MonoCoins;
+using Content.Client.Gameplay;
 using Content.Client.Guidebook;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
@@ -33,7 +34,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Lobby;
 
-public sealed partial class LobbyUIController : UIController, IOnStateEntered<LobbyState>, IOnStateExited<LobbyState>
+public sealed partial class LobbyUIController : UIController, IOnStateEntered<LobbyState>, IOnStateExited<LobbyState>, IOnStateExited<GameplayState>
 {
     [Dependency] private IClientPreferencesManager _preferencesManager = default!;
     [Dependency] private IConfigurationManager _configurationManager = default!;
@@ -229,7 +230,7 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
         if (character is not HumanoidCharacterProfile humanoid)
         {
             PreviewPanel.SetSprite(EntityUid.Invalid);
-            PreviewPanel.SetSummaryText(string.Empty);
+            PreviewPanel.SetIdentity(string.Empty, string.Empty); // Forge-Change
             PreviewPanel.SetBankBalanceText(string.Empty); // Frontier
             PreviewPanel.SetCompanyText(string.Empty); // Company Display
             // PreviewPanel.SetMonoCoinsText("MonoCoins: -1"); // MonoCoins Display
@@ -253,19 +254,30 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
         var dummy = LoadProfileEntity(humanoid, null, true);
         PreviewPanel.SetSprite(dummy);
-        PreviewPanel.SetSummaryText(humanoid.Summary);
+        // Forge-Change-Start: name and a short details line for the lobby card
+        var speciesName = _prototypeManager.TryIndex(humanoid.Species, out var speciesProto)
+            ? Loc.GetString(speciesProto.Name)
+            : humanoid.Species.Id;
+        PreviewPanel.SetIdentity(humanoid.Name,
+            Loc.GetString("forge-lobby-hero-details", ("species", speciesName), ("age", humanoid.Age)));
+        // Forge-Change-End
         PreviewPanel.SetBankBalanceText(humanoid.BankBalanceText); // Frontier
 
         // Company Display
         var companyId = humanoid.Company;
-        var companyLabel = Loc.GetString("lobby-character-preview-panel-company-label"); // Forge-Change
         if (_prototypeManager.TryIndex<CompanyPrototype>(companyId, out var company))
         {
-            PreviewPanel.SetCompanyText($"[color=white]{companyLabel}[/color] [color={company.Color.ToHex()}]{company.Name}[/color]"); // Forge-Change
+            // Forge-Change-Start: the card has its own caption; dark company colours are lifted so the name stays readable
+            var companyColor = company.Color;
+            var luminance = 0.2126f * companyColor.R + 0.7152f * companyColor.G + 0.0722f * companyColor.B;
+            if (luminance < 0.45f)
+                companyColor = Color.InterpolateBetween(companyColor, Color.White, 0.55f);
+            PreviewPanel.SetCompanyText($"[color={companyColor.WithAlpha(1f).ToHex()}]{company.Name}[/color]");
+            // Forge-Change-End
         }
         else
         {
-            PreviewPanel.SetCompanyText($"[color=white]{companyLabel}[/color] [color=yellow]{companyId}[/color]"); // Forge-Change
+            PreviewPanel.SetCompanyText($"[color=yellow]{companyId}[/color]"); // Forge-Change: the card has its own caption
         }
 
         // MonoCoins Display - Request balance from server and update display
@@ -311,7 +323,11 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
         }
     }
 
-    private void OpenSavePanel()
+    /// <summary>
+    /// WOLFGATE: asks about unsaved changes, then runs <paramref name="onContinue"/>. Used by closing the editor,
+    /// switching character and creating one, so none of them can drop edits silently. Cancel keeps the editor.
+    /// </summary>
+    private void OpenSavePanel(Action onContinue)
     {
         if (_savePanel is { IsOpen: true })
             return;
@@ -324,15 +340,18 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
             _savePanel.Close();
 
-            CloseProfileEditor();
+            onContinue();
         };
 
         _savePanel.NoSaveButton.OnPressed += _ =>
         {
             _savePanel.Close();
 
-            CloseProfileEditor();
+            onContinue();
         };
+
+        // WOLFGATE: Cancel goes back to the editor with the edits intact.
+        _savePanel.CancelButton.OnPressed += _ => _savePanel.Close();
 
         _savePanel.OpenCentered();
     }
@@ -368,7 +387,7 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
             // Open the save panel if we have unsaved changes.
             if (_profileEditor.Profile != null && _profileEditor.IsDirty)
             {
-                OpenSavePanel();
+                OpenSavePanel(CloseProfileEditor);
 
                 return;
             }
@@ -381,8 +400,32 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
 
         _characterSetup.SelectCharacter += args =>
         {
-            _preferencesManager.SelectCharacter(args);
-            ReloadCharacterSetup();
+            // WOLFGATE: switching used to drop unsaved edits without asking.
+            void Switch()
+            {
+                _preferencesManager.SelectCharacter(args);
+                ReloadCharacterSetup();
+            }
+
+            if (_profileEditor.Profile != null && _profileEditor.IsDirty)
+                OpenSavePanel(Switch);
+            else
+                Switch();
+        };
+
+        // WOLFGATE: creating a character used to drop unsaved edits without asking.
+        _characterSetup.NewCharacter += () =>
+        {
+            void Create()
+            {
+                _preferencesManager.CreateCharacter(HumanoidCharacterProfile.Random());
+                _characterSetup?.ReloadCharacterPickers();
+            }
+
+            if (_profileEditor.Profile != null && _profileEditor.IsDirty)
+                OpenSavePanel(Create);
+            else
+                Create();
         };
 
         _characterSetup.DeleteCharacter += args =>
@@ -536,6 +579,18 @@ public sealed partial class LobbyUIController : UIController, IOnStateEntered<Lo
     public EntityUid LoadProfileEntity(HumanoidCharacterProfile? humanoid, JobPrototype? job, bool jobClothes)
     {
         EntityUid dummyEnt;
+
+        // WOLFGATE: a character saved on a build that has a species this one does not must not throw. The picker list
+        // is built in one loop that ends with the create-character button, so one bad profile used to hide every
+        // character after it and the button with them.
+        if (humanoid != null && !_prototypeManager.HasIndex<SpeciesPrototype>(humanoid.Species))
+        {
+            _logManager.GetSawmill("lobby").Warning(
+                $"Character \"{humanoid.Name}\" uses unknown species {humanoid.Species}; previewing it as {SharedHumanoidAppearanceSystem.DefaultSpecies}.");
+
+            humanoid = humanoid.WithSpecies(SharedHumanoidAppearanceSystem.DefaultSpecies);
+        }
+        // End WOLFGATE
 
         EntProtoId? previewEntity = null;
         if (humanoid != null && jobClothes)

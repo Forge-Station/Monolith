@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By GitHub Mspaintwizard Discord 426969028796350485",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "xeno_gorjira",
+      "directions": 4
+    },
+    {
+      "name": "xeno_osteospines",
+      "directions": 4
+    },
+    {
+      "name": "xeno_spinosaurus",
+      "directions": 4
+    },
+    {
+      "name": "xeno_xenomorph",
+      "directions": 4
+    }
+  ]
+}

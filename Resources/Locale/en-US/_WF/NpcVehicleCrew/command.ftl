@@ -1,0 +1,59 @@
+wf-vehiclecrew-desc = Spawns, lists and clears NPC-crewed vehicles.
+wf-vehiclecrew-help = Usage: wf_vehiclecrew spawn <crew> [behaviour] [distance] | list | clear [group]
+wf-vehiclecrew-unknown-sub = Unknown subcommand {$sub}.
+wf-vehiclecrew-no-entity = You need a body to spawn a vehicle beside.
+wf-vehiclecrew-unknown-crew = Unknown vehicle crew {$crew}.
+wf-vehiclecrew-bad-behaviour = Unknown behaviour {$behaviour}. Use Hold, Patrol, Hunt, Escort or Flee.
+wf-vehiclecrew-bad-distance = Distance must be a number of tiles, 0 or more.
+wf-vehiclecrew-spawn-failed = Could not spawn {$crew}; see the server log.
+wf-vehiclecrew-spawned = Spawned {$vehicle}, crew group {$group}.
+wf-vehiclecrew-list-empty = No NPC vehicle crews.
+wf-vehiclecrew-list-line = {$vehicle} ({$crew}), group {$group}: {$behaviour}, {$alive} alive
+wf-vehiclecrew-list-line-bailed = {$vehicle} ({$crew}), group {$group}: bailed out, {$alive} alive
+wf-vehiclecrew-cleared = Cleared {$count} {$count ->
+    [one] vehicle
+   *[other] vehicles
+}.
+wf-vehiclecrew-hint-sub = spawn, list or clear
+wf-vehiclecrew-hint-crew = vehicle crew
+wf-vehiclecrew-hint-group = crew group
+wf-vehiclecrew-hint-behaviour = behaviour
+wf-vehiclecrew-hint-distance = tiles from you, default 6
+
+# The vehicle crew panel
+wf-vehiclecrew-panel-title = NPC vehicle crews
+wf-vehiclecrew-panel-roster = Crews
+wf-vehiclecrew-panel-search = Search crews
+wf-vehiclecrew-panel-setup = Spawn
+wf-vehiclecrew-panel-pick = Pick a crew on the left.
+wf-vehiclecrew-panel-details = { $vehicle }, { $faction }. { $seats } aboard, { $skill }. Engages at { $range } tiles.
+wf-vehiclecrew-panel-unarmed = { $vehicle }, { $faction }. { $seats } aboard. Unarmed: it runs when shot at.
+wf-vehiclecrew-panel-orders = Orders
+wf-vehiclecrew-panel-orders-default = Its own ({ $behaviour })
+wf-vehiclecrew-panel-count = How many
+wf-vehiclecrew-panel-distance = Tiles away
+wf-vehiclecrew-panel-spawn = Spawn beside me
+wf-vehiclecrew-panel-live = Live crews
+wf-vehiclecrew-panel-none = None yet.
+wf-vehiclecrew-panel-clear-all = Clear all
+wf-vehiclecrew-panel-row = { $name } ({ $crew }): { $behaviour }, crew { $alive }/{ $total }, hull { $integrity }%. { $location }
+wf-vehiclecrew-panel-row-bailed = { $name } ({ $crew }): bailed out, crew { $alive }/{ $total }. { $location }
+wf-vehiclecrew-panel-order = Order
+wf-vehiclecrew-panel-home = Home here
+wf-vehiclecrew-panel-home-tooltip = Make where you stand its home: where it holds, patrols round and retreats to.
+wf-vehiclecrew-panel-goto = Go to
+wf-vehiclecrew-panel-delete = Delete
+wf-vehiclecrew-panel-escort-tooltip = Escort follows you.
+wf-vehiclecrew-panel-spawned = Spawned { $count } { $crew }.
+wf-vehiclecrew-panel-ordered = { $vehicle }: { $behaviour }.
+wf-vehiclecrew-panel-homed = { $vehicle } now calls this home.
+wf-vehiclecrew-panel-deleted = Deleted { $vehicle } and its crew.
+wf-vehiclecrew-panel-bailed = { $vehicle }'s crew has bailed out; it takes no orders.
+wf-vehiclecrew-panel-other-map = { $vehicle } is on another map.
+wf-vehiclecrew-behaviour-hold = Hold
+wf-vehiclecrew-behaviour-patrol = Patrol
+wf-vehiclecrew-behaviour-hunt = Hunt
+wf-vehiclecrew-behaviour-escort = Escort me
+wf-vehiclecrew-behaviour-flee = Flee
+wf-vehiclecrew-behaviour-retreat = Retreat
+wf-vehiclecrew-behaviour-bail = Bailed out

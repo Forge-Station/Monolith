@@ -1,0 +1,35 @@
+# A military surplus dealer in a mercenary gunboat: arms, kit and ammunition. Among the best defended of the traders,
+# with a gunner at the guns and veteran guards aboard. Kill the dealer and a box of the stock is left.
+- type: wfEncounter
+  id: WFEncounterSurplusTrader
+  name: wf-encounter-name-trader-surplus
+  announcement: wf-encounter-announce-trader-surplus
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Traffic
+  icon: Coins
+  cost: 1
+  weight: 1
+  cooldown: 3000
+  duration: 3600
+  minDistance: 1500
+  maxDistance: 3000
+  ships:
+  - key: trader
+    navigation: WFCrewNavigationFreight
+    vessel: Femur
+    side: trader
+    profile: WFCrewProfileHauler
+    captain: false
+    deckhands: 0
+    guards: 3
+    roles: [ WFCrewPilot, WFCrewGunner, WFCrewDeckhand ]
+    passengers: [ WFTraderSurplus ]
+    skill: Veteran
+    wander: 4
+    wanderRadius: 2500
+    wanderPause: 300
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    distress: true

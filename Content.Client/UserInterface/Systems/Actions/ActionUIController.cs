@@ -373,6 +373,10 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
             return;
         }
 
+        // WOLFGATE(Vehicles): Keep panel-only vehicle controls out of the action hotbar.
+        if (!action.AutoPopulate)
+            return;
+
         // if the action is toggled when we add it, start targeting
         if (action is BaseTargetActionComponent targetAction && action.Toggled)
             StartTargeting(actionId, targetAction);

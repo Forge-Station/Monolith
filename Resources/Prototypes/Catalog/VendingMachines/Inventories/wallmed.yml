@@ -4,10 +4,24 @@
     Brutepack: 6 # Frontier: 3<6
     Ointment: 6 # Frontier: 3<6
     Bloodpack: 6 # Frontier: 3<6
+    WFWolfmedHydraulicFluidPack: 2 # WOLFGATE(Wolfmed): playtest 3 IPC 2: a chassis's refill, beside the blood packs.
     Gauze: 6 # Frontier
     EpinephrineChemistryBottle: 6 # Frontier: 3<6
     Syringe: 6 # Frontier: 3<6
     BoxFolderMedicalDoctor: 1 #Frontier
     MedTekCartridge: 1 # Frontier
+    WFWolfmedSplint: 2 # WOLFGATE(Wolfmed): V5: field fracture care.
+    WFWolfmedAntisepticSpray: 2 # WOLFGATE(Wolfmed): W5: clean a wound before it turns.
+    WFWolfmedAnalgesicPill: 4 # WOLFGATE(Wolfmed): CONSC: enough to get back on your feet.
+    WFWolfmedAnalgesicPen: 4 # WOLFGATE(Wolfmed): playtest 1: a painkiller a Downed player can use on themselves.
+    WFWolfmedOpiatePen: 2 # WOLFGATE(Wolfmed): playtest 1: the strong rung as a pen.
+    WFWolfmedNaloxonePen: 1 # WOLFGATE(Wolfmed): M2: OD14, reverses an overdose.
+    Tourniquet: 2 # WOLFGATE(Wolfmed): ITEMS: stops a limb bleeding out.
+    WFWolfmedSuture: 2 # WOLFGATE(Wolfmed): playtest 5: the plain suture, no research needed.
+    WFWolfmedAnalgesicPillCanister: 2 # WOLFGATE(Wolfmed): ITEMS: the weak rung by the canister.
+    WFWolfmedIbuprofenPillCanister: 1 # WOLFGATE(Wolfmed): ITEMS: a mild painkiller that eases bruising.
+    WFWolfmedKetorolacPillCanister: 1 # WOLFGATE(Wolfmed): ITEMS: the strongest mild painkiller.
+    WFWolfmedOsteogenPillCanister: 2 # WOLFGATE(Wolfmed): ITEMS: knits a simple fracture without surgery.
+    WFWolfmedOsteogenChemistryBottle: 1 # WOLFGATE(Wolfmed): ITEMS: osteogen beside the epinephrine bottles.
   contrabandInventory:
     PowerCellSmall: 2

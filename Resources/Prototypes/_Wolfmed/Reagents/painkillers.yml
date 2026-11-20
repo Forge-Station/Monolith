@@ -1,0 +1,99 @@
+# Wolfmed's own painkiller ladder (CONSC). The shipped chems all treat something as well; these three do
+# nothing but hold a wounded body up, which is what makes the tiers readable at a glance.
+
+- type: reagent
+  id: WFWolfmedAnalgesic
+  name: reagent-name-wolfmed-analgesic
+  group: Medicine
+  desc: reagent-desc-wolfmed-analgesic
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: bitter
+  color: "#e8d9a6"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.15
+      effects:
+      # Weak: takes the edge off enough to get back on your feet, never enough to keep you awake.
+      - !type:WolfmedPainRelief
+        tier: Weak
+        strength: 22
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          reagent: WFWolfmedAnalgesic
+          min: 20
+        damage:
+          types:
+            Poison: 0.6
+
+- type: reagent
+  id: WFWolfmedOpiate
+  name: reagent-name-wolfmed-opiate
+  group: Medicine
+  desc: reagent-desc-wolfmed-opiate
+  physicalDesc: reagent-physical-desc-thick
+  flavor: medicine
+  color: "#7a6fd6"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      # Strong: enough to walk a patient off the field, at the price of the sedation meter. M2 (plan §3.4):
+      # sedation aims for 0.22 per unit in the blood, so one 3 u pen levels off under the 0.6 breathing line and
+      # two put the patient on the floor.
+      - !type:WolfmedPainRelief
+        tier: Strong
+        strength: 70
+        sedationPerUnit: 0.22
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          reagent: WFWolfmedOpiate
+          min: 15
+        damage:
+          types:
+            Poison: 0.8
+
+- type: reagent
+  id: WFWolfmedStim
+  name: reagent-name-wolfmed-stim
+  group: Medicine
+  desc: reagent-desc-wolfmed-stim
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#ff5c3b"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.4
+      effects:
+      # Emergency: 30 seconds on your feet whatever the pain says, then the bill.
+      - !type:WolfmedPainRelief
+        tier: Emergency
+        strength: 0
+        duration: 30
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          reagent: WFWolfmedStim
+          min: 10
+        damage:
+          types:
+            Poison: 1.5
+
+# M2 (OD14): the opioid antagonist. The overdose loop's definitive fix: each unit metabolised takes 0.3 off the
+# sedation, and while it is in the blood the painkillers still there cannot pull the sedation back up. It wears off
+# faster than they do, so a big overdose can come back and need a second dose.
+- type: reagent
+  id: WFWolfmedNaloxone
+  name: reagent-name-wolfmed-naloxone
+  group: Medicine
+  desc: reagent-desc-wolfmed-naloxone
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: bitter
+  color: "#b8e3f0"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.5
+      effects:
+      - !type:WolfmedReverseSedation
+        sedationReversePerUnit: 0.3

@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "license": "CC0-1.0",
+    "copyright": "Threat rank glyphs drawn in code for Wolfgate.",
+    "size": {
+        "x": 16,
+        "y": 16
+    },
+    "states": [
+        {
+            "name": "chevron"
+        },
+        {
+            "name": "star"
+        }
+    ]
+}

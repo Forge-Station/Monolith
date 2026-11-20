@@ -1,0 +1,264 @@
+# Sevastopol: data couriers, hardware, lost cores.
+
+- type: wfContract
+  id: WFContractSevDataCourier
+  contractor: WFContractorSevastopol
+  category: Delivery
+  tier: 1
+  title: wf-contract-sev-data-courier
+  briefing: wf-contract-sev-data-courier-brief
+  reward: 5500, 7500
+  minutes: 40
+  weight: 2.5
+  objective: !type:WFContractCourier
+    package: WFContractDataCase
+    count: 1, 2
+    from: Contractor
+    to: Other
+    perPackage: 750
+    perKilometre: 1250
+
+- type: wfContract
+  id: WFContractSevDataInbound
+  contractor: WFContractorSevastopol
+  category: Delivery
+  tier: 1
+  title: wf-contract-sev-data-inbound
+  briefing: wf-contract-sev-data-inbound-brief
+  reward: 5000, 7000
+  minutes: 40
+  weight: 2
+  objective: !type:WFContractCourier
+    package: WFContractDataCase
+    count: 1, 3
+    from: Board
+    to: Contractor
+    perPackage: 750
+    perKilometre: 1250
+
+- type: wfContract
+  id: WFContractSevSecureTransfer
+  contractor: WFContractorSevastopol
+  category: Delivery
+  tier: 3
+  title: wf-contract-sev-secure-transfer
+  briefing: wf-contract-sev-secure-transfer-brief
+  reward: 15000, 20000
+  deposit: 3000
+  minutes: 35
+  weight: 1
+  objective: !type:WFContractCourier
+    package: WFContractDataCase
+    count: 3, 5
+    from: Contractor
+    to: Other
+    perPackage: 1500
+    perKilometre: 1750
+
+- type: wfContract
+  id: WFContractSevServerRacks
+  contractor: WFContractorSevastopol
+  category: Hauling
+  tier: 2
+  title: wf-contract-sev-server-racks
+  briefing: wf-contract-sev-server-racks-brief
+  reward: 13750, 17500
+  deposit: 2000
+  minutes: 50
+  weight: 1.2
+  objective: !type:WFContractCourier
+    package: WFContractFreightComponents
+    count: 2, 3
+    from: Board
+    to: Contractor
+    perPackage: 2500
+    perKilometre: 1625
+
+- type: wfContract
+  id: WFContractSevHardware
+  contractor: WFContractorSevastopol
+  category: Supply
+  tier: 2
+  title: wf-contract-sev-hardware
+  briefing: wf-contract-sev-hardware-brief
+  reward: 11250, 15000
+  deposit: 1000
+  minutes: 50
+  weight: 1.5
+  objective: !type:WFContractSupply
+    pick: 2
+    premium: 1.5
+    goods:
+    - entity: PowerCellHigh
+      count: 4, 8
+    - stack: CableHV
+      count: 30, 60
+    - stack: Glass
+      count: 40, 60
+    - stack: Plastic
+      count: 30, 50
+    - stack: Gold
+      count: 5, 10
+
+- type: wfContract
+  id: WFContractSevCoreRecovery
+  contractor: WFContractorSevastopol
+  category: Salvage
+  tier: 2
+  title: wf-contract-sev-core-recovery
+  briefing: wf-contract-sev-core-recovery-brief
+  reward: 17500, 23750
+  deposit: 1000
+  minutes: 50
+  crewBonus: 0.25
+  weight: 1.2
+  objective: !type:WFContractRecovery
+    item: WFContractDataCore
+    minDistance: 3500
+    maxDistance: 5500
+    wrecks:
+    - /Maps/Salvage/small-ai-survey-drone.yml
+    - /Maps/Salvage/medium-ruined-emergency-shuttle.yml
+    - /Maps/Salvage/small-a-1.yml
+    - /Maps/Salvage/engineering-chunk.yml
+
+- type: wfContract
+  id: WFContractSevDataThief
+  contractor: WFContractorSevastopol
+  category: Bounty
+  tier: 2
+  title: wf-contract-sev-data-thief
+  briefing: wf-contract-sev-data-thief-brief
+  reward: 30000, 37500
+  deposit: 2000
+  minutes: 50
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractBounty
+    encounters: [ WFContractTargetDataThief ]
+    minDistance: 3500
+    maxDistance: 5500
+
+- type: wfContract
+  id: WFContractSevSignalSurvey
+  contractor: WFContractorSevastopol
+  category: Science
+  tier: 2
+  title: wf-contract-sev-signal-survey
+  briefing: wf-contract-sev-signal-survey-brief
+  reward: 15000, 20000
+  deposit: 1000
+  minutes: 55
+  crewBonus: 0.25
+  weight: 1
+  objective: !type:WFContractSurvey
+    count: 1, 2
+    perAnomaly: 3500
+    minDistance: 3000
+    maxDistance: 5000
+    anomalies: [ AnomalyElectricity, AnomalyBluespace, AnomalyGravity ]
+    infestation:
+    - entity: MobCarpSalvage
+      count: 2, 4
+    wrecks:
+    - /Maps/Salvage/small-ai-survey-drone.yml
+    - /Maps/Salvage/small-tesla.yml
+    - /Maps/Salvage/engineering-chunk.yml
+
+# Second batch.
+
+- type: wfContract
+  id: WFContractSevElectronics
+  contractor: WFContractorSevastopol
+  category: Supply
+  tier: 2
+  title: wf-contract-sev-electronics
+  briefing: wf-contract-sev-electronics-brief
+  reward: 12500, 16500
+  deposit: 1000
+  minutes: 55
+  weight: 1.2
+  objective: !type:WFContractSupply
+    premium: 1.25
+    goods:
+    - component: MachineBoard
+      name: wf-contract-goods-machine-boards
+      count: 6, 10
+      value: 150
+    - component: ComputerBoard
+      name: wf-contract-goods-computer-boards
+      count: 3, 5
+      value: 150
+
+# New objectives.
+
+- type: wfContract
+  id: WFContractSevArchivePull
+  contractor: WFContractorSevastopol
+  category: Salvage
+  tier: 2
+  title: wf-contract-sev-archive-pull
+  briefing: wf-contract-sev-archive-pull-brief
+  reward: 22000, 28000
+  deposit: 1500
+  minutes: 55
+  crewBonus: 0.3
+  weight: 1
+  objective: !type:WFContractDownload
+    duration: 180
+    waveInterval: 50
+    waves:
+    - entity: MobCarpSalvage
+      count: 1, 2
+    - entity: MobFleshClampSalvage
+      count: 0, 1
+    wrecks:
+    - /Maps/Salvage/small-ai-survey-drone.yml
+    - /Maps/Salvage/engineering-chunk.yml
+    - /Maps/Salvage/medium-library.yml
+
+- type: wfContract
+  id: WFContractSevDeepArchive
+  contractor: WFContractorSevastopol
+  category: Salvage
+  tier: 3
+  title: wf-contract-sev-deep-archive
+  briefing: wf-contract-sev-deep-archive-brief
+  reward: 45000, 55000
+  deposit: 3000
+  minutes: 65
+  minCrew: 2
+  crewBonus: 0.3
+  weight: 0.8
+  objective: !type:WFContractDownload
+    duration: 300
+    waveInterval: 45
+    waves:
+    - entity: MobXenoDrone
+      count: 1, 2
+    - entity: MobXenoRunner
+      count: 1, 2
+    - entity: MobXenoSpitter
+      count: 0, 1
+    minDistance: 4000
+    maxDistance: 6000
+    wrecks:
+    - /Maps/Salvage/medium-vault-1.yml
+    - /Maps/Salvage/security-chunk.yml
+    - /Maps/Salvage/tick-colony.yml
+
+- type: wfContract
+  id: WFContractSevDebrisCharting
+  contractor: WFContractorSevastopol
+  category: Science
+  tier: 2
+  title: wf-contract-sev-debris-charting
+  briefing: wf-contract-sev-debris-charting-brief
+  reward: 9000, 12000
+  minutes: 55
+  weight: 1
+  objective: !type:WFContractSweep
+    points: 4, 5
+    perPoint: 1750
+    minDistance: 3000
+    maxDistance: 6500

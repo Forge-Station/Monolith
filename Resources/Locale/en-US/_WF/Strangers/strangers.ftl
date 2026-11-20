@@ -1,0 +1,89 @@
+wf-stranger-verb-talk = Talk
+wf-stranger-hail-title = { $name } wants a word
+wf-stranger-hail-talk = Talk
+wf-stranger-hail-ignore = Ignore
+wf-stranger-dialogue-close = Leave
+wf-stranger-option-cost = { $text } ({ $cost } spesos)
+
+wf-stranger-dealer-hail = Psst. Hey. You. Over here.
+wf-stranger-dealer-pitch = You look like you've had a long day. I can make it shorter. Or longer. Whatever you need.
+wf-stranger-dealer-ask = What've you got?
+wf-stranger-dealer-no = Not interested.
+wf-stranger-dealer-menu = Space dust, rainbow joints, the good stuff. Two hundred a hit, no questions.
+wf-stranger-dealer-buy = I'll take one.
+wf-stranger-dealer-pass = Too rich for me.
+wf-stranger-dealer-sold = Pleasure. You never saw me.
+wf-stranger-dealer-broke = You're broke? Don't waste my time. Beat it.
+wf-stranger-dealer-snubbed = Oh, you're too good for me, huh? HUH?!
+wf-stranger-dealer-threaten = Get lost before I call security.
+wf-stranger-dealer-shrug = Your loss. You know where to find me.
+
+wf-stranger-mugger-hail = Hey! Hold up a second, friend.
+wf-stranger-mugger-demand = Nice boots. Real nice. Hand over a hundred and fifty and you get to keep walking in them.
+wf-stranger-mugger-pay = Fine. Take it.
+wf-stranger-mugger-refuse = No.
+wf-stranger-mugger-bluff = My friends are right behind me.
+wf-stranger-mugger-paid = Smart. Off you go.
+wf-stranger-mugger-bluffed = Sure they are. Last chance.
+wf-stranger-mugger-refused = Wrong answer.
+wf-stranger-mugger-waved = Yeah, keep walking. Next time.
+
+wf-stranger-preacher-hail = Brother! Sister! Hear me!
+wf-stranger-preacher-sermon = The stars are going out one by one! The end is near, and it is coming for this rock first!
+wf-stranger-preacher-more = Go on, tell me more.
+wf-stranger-preacher-mock = You're out of your mind.
+wf-stranger-preacher-prophecy = The old ones sleep under the stone. When the last ship leaves, they wake. Will you help spread the word?
+wf-stranger-preacher-donate = Here's something for the cause.
+wf-stranger-preacher-leave = I'll pass.
+wf-stranger-preacher-blessed = Bless you! Take this, and read it before the sky falls.
+wf-stranger-preacher-pity = Your pockets are as empty as your soul. Go in peace, lost one.
+wf-stranger-preacher-cursed = The end comes for you too! Remember I warned you!
+wf-stranger-preacher-threaten = Shut up or I'll shut you up.
+wf-stranger-preacher-wrath = Heretic! I'll send you to the old ones myself!
+
+wf-stranger-conspiracist-hail = You. You're not one of them. I can tell.
+wf-stranger-conspiracist-warning = They're watching us. The satellites, the radios. Through the WALLS.
+wf-stranger-conspiracist-who = Who's watching?
+wf-stranger-conspiracist-help = You need help.
+wf-stranger-conspiracist-theory = The Reavers, the ADS, the Union. All one company. Same paycheque. And they put chips in the ration bars.
+wf-stranger-conspiracist-believe = I believe you.
+wf-stranger-conspiracist-doubt = That's ridiculous.
+wf-stranger-conspiracist-gift = Finally, someone awake! Here. Wear this. It blocks the signal.
+wf-stranger-conspiracist-offended = That's exactly what they'd want you to say. Exactly.
+wf-stranger-conspiracist-insult = Take that tinfoil off, you lunatic.
+wf-stranger-conspiracist-accuse = Maybe I'm one of them.
+wf-stranger-conspiracist-snapped = I KNEW IT! You're one of THEM!
+
+wf-stranger-beggar-hail = Spare a moment, friend?
+wf-stranger-beggar-plea = Spare some credits for a meal? Anything helps. I'll give you something I found out there.
+wf-stranger-beggar-give = Here's twenty.
+wf-stranger-beggar-refuse = Sorry, I can't.
+wf-stranger-beggar-thanks = Bless you, friend. Here, take this. Found it in the dirt.
+wf-stranger-beggar-sorry = No money either, huh? Hard times all round.
+wf-stranger-beggar-sad = Yeah. Nobody can, these days.
+wf-stranger-beggar-mock = Get a job.
+wf-stranger-beggar-spite = Think you're better than me? Let's see about that!
+
+wf-stranger-stalker-caught = ...I'm not following you.
+wf-stranger-stalker-who = Who are you?
+wf-stranger-stalker-leave = Leave me alone.
+wf-stranger-stalker-nobody = Nobody. Just walking. Same way as you.
+wf-stranger-stalker-okay = Okay.
+wf-stranger-stalker-threaten = Follow me again and I'll kill you.
+wf-stranger-stalker-unmasked = ...not if I get you first.
+wf-stranger-stalker-mutter-1 = ...nice ship...
+wf-stranger-stalker-mutter-2 = ...same way as you...
+wf-stranger-stalker-mutter-3 = ...don't mind me...
+wf-stranger-stalker-mutter-4 = ...I like your boots...
+wf-stranger-stalker-mutter-5 = ...we're friends now...
+
+wf-stranger-squatter-mine = MINE! It's MINE! Get OUT!
+
+wf-stranger-greeting-house-1 = Hey there! Come on over, stranger.
+wf-stranger-greeting-house-2 = Visitors! Haven't seen one in a while.
+wf-stranger-greeting-house-3 = Don't be shy. Come say hello.
+wf-stranger-greeting-house-4 = You there! You lost, or just passing?
+wf-stranger-greeting-camp-1 = Welcome to our camp, stranger.
+wf-stranger-greeting-camp-2 = What brings you to our fire?
+wf-stranger-greeting-camp-3 = You look like you could use some company.
+wf-stranger-greeting-camp-4 = Hey! Over here. Don't mind the smell.

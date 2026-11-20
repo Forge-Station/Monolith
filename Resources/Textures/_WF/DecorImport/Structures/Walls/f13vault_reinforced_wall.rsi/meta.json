@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Coyote Bayou at commit https://github.com/ARF-SS13/coyote-bayou/commit/af94b33c76dffc30896d97f20bcea09cbed14b22.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "vaultwall0",
+      "directions": 4
+    },
+    {
+      "name": "vaultwall1",
+      "directions": 4
+    },
+    {
+      "name": "vaultwall2",
+      "directions": 4
+    },
+    {
+      "name": "vaultwall3",
+      "directions": 4
+    },
+    {
+      "name": "vaultwall4",
+      "directions": 4
+    },
+    {
+      "name": "vaultwall5",
+      "directions": 4
+    },
+    {
+      "name": "vaultwall6",
+      "directions": 4
+    },
+    {
+      "name": "vaultwall7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

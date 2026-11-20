@@ -1,0 +1,2598 @@
+- files: ["attacks/big_swoosh_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["attacks/big_swoosh_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["attacks/big_swoosh_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_death.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_pain_extreme.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["brute/brute_shout_long.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["cyst/cyst_fire_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["cyst/cyst_fire_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["cyst/cyst_fire_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["cyst/cyst_fire_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/arm_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/arm_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/arm_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/arm_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/arm_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/arm_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/arm_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/arm_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/head_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/head_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/head_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/head_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/leg_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/leg_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/leg_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/leg_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/leg_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/leg_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/leg_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/component/leg_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_death.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_posession.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_long_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_shout_long_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["divider/divider_split.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_blast_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_blast_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_blast_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_blast_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_blast_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_shout_long_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_speech_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_speech_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_speech_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_speech_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["exploder/exploder_speech_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/brute_step_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/brute_step_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/brute_step_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/brute_step_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/brute_step_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/brute_step_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_multi_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_multi_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_multi_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/exploder_footstep_multi_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/infector_footstep_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/infector_footstep_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/infector_footstep_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/infector_footstep_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/leaper_footstep_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/leaper_footstep_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/leaper_footstep_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/leaper_footstep_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/leaper_footstep_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/lurker_footstep_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/lurker_footstep_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/lurker_footstep_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/lurker_footstep_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/lurker_footstep_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/lurker_footstep_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/lurker_footstep_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/tripod_footstep_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/tripod_footstep_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/tripod_footstep_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/tripod_footstep_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/tripod_footstep_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/tripod_footstep_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/twitcher_footstep_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/twitcher_footstep_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/twitcher_footstep_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/twitcher_footstep_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/undying_footstep_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/undying_footstep_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/undying_footstep_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["footstep/undying_footstep_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_death_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_flap_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_flap_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_flap_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_flap_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_flap_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_speech_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_work_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_work_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["infector/infector_work_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_attack_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_attack_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_claw_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_claw_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_footstep_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_footstep_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_footstep_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_footstep_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_footstep_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_pain_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_pain_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_shout_long_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_speech_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_speech_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_tailswing_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_tailswing_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_tailswing_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["leaper/leaper_tailswing_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_attack_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_attack_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_attack_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_attack_9.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_climb_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_climb_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_climb_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_climb_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_climb_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_climb_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_pain_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_pain_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_speech_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/lurker_speech_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/spine_fire_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/spine_fire_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/spine_fire_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/spine_woosh1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/spine_woosh2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["lurker/spine_woosh3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["monolith/alarm.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["monolith/throb.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_footstep_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_footstep_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_footstep_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_footstep_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_footstep_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_footstep_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_footstep_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_footstep_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_footstep_9.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_pain_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_pain_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["puker/puker_speech_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_attack_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_attack_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_death_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_pain_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher/slasher_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_attack_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_attack_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_attack_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_pain_extreme.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_long_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_shout_long_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_speech_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["slasher_enhanced/eslasher_speech_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_9.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_attack_extreme.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_extreme.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_pain_extreme_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_shout_long_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_speech_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_speech_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["spitter/spitter_speech_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_attack_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_attack_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_attack_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_attack_9.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_death_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_long_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_shout_long_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongue_extract_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongue_extract_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongue_extract_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongue_lash_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongue_lash_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongue_lash_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongue_lash_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongue_lash_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongueforce_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongueforce_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["tripod/tripod_tongueforce_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_attack_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_attack_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_attack_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_death_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_death_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_death_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_death_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_9.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_pain_extreme.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_shout_long_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_speech_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_speech_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["twitcher/twitcher_speech_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/Ubermorph_spawn_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/Ubermorph_spawn_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/Ubermorph_spawn_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/Ubermorph_spawn_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_attack_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_attack_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_attack_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_attack_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_attack_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_attack_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_attack_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_attack_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_pain_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_pain_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_pain_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_pain_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_pain_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_pain_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_pain_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_pain_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_regen_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_regen_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_long_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_long_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_long_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_shout_long_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_speech_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_speech_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_speech_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_speech_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_speech_5.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_speech_6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_speech_7.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["undying/undying_speech_8.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-2.0, downmixed to mono"
+  source: "https://github.com/DS-13-Dev-Team/DS13-2.0"
+
+- files: ["cutter/plasma_cutter.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from DS13-1.0"
+  source: "https://github.com/DS-13-Dev-Team/DS13"
+- files: ["monolith/crescendo_song.ogg"]
+  license: "Custom"
+  copyright: "Twinkle Twinkle Little Star, from Dead Space 2"
+  source: "https://www.youtube.com/watch?v=bpYz4EQVo1w"
+
+- files: ["monolith/stage_hymn.ogg", "monolith/stage_growth.ogg", "monolith/stage_harvest.ogg", "monolith/stage_rapture.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Mixed by Tools/_WF/Remade/make_stage_stings.py from tgstation sound/effects/curse and sound/ambience/misc/signal.ogg, and DS13-2.0 markerthrob.ogg and ghost_whisper.ogg"
+  source: "https://github.com/tgstation/tgstation"

@@ -1,0 +1,30 @@
+- type: soundCollection
+  id: WFFleshTickBite
+  files:
+  - /Audio/_WF/Chimera/FleshTick/bite01.ogg
+  - /Audio/_WF/Chimera/FleshTick/bite02.ogg
+  - /Audio/_WF/Chimera/FleshTick/bite03.ogg
+  - /Audio/_WF/Chimera/FleshTick/bite04.ogg
+  - /Audio/_WF/Chimera/FleshTick/bite05.ogg
+
+- type: soundCollection
+  id: WFFleshTickHunt
+  files:
+  - /Audio/_WF/Chimera/FleshTick/hunt01.ogg
+  - /Audio/_WF/Chimera/FleshTick/hunt02.ogg
+  - /Audio/_WF/Chimera/FleshTick/hunt03.ogg
+  - /Audio/_WF/Chimera/FleshTick/hunt04.ogg
+
+- type: soundCollection
+  id: WFFleshTickDie
+  files:
+  - /Audio/_WF/Chimera/FleshTick/die01.ogg
+  - /Audio/_WF/Chimera/FleshTick/die02.ogg
+  - /Audio/_WF/Chimera/FleshTick/die03.ogg
+  - /Audio/_WF/Chimera/FleshTick/die04.ogg
+
+- type: soundCollection
+  id: WFFleshPustuleBurst
+  files:
+  - /Audio/_WF/Chimera/FleshTick/break01.ogg
+  - /Audio/_WF/Chimera/FleshTick/break02.ogg

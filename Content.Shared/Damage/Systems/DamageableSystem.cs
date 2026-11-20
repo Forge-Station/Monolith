@@ -1,9 +1,12 @@
+using Content.Shared._FarHorizons.Damage; // WOLFGATE(Species)
 using Content.Shared._Shitmed.Targeting;
 // Shitmed Change
 using Content.Shared.Body.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Chemistry;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared._WF.Wolfmed.Compat; // WOLFGATE(Wolfmed): Wolfmed routing seam event (DamageDealtEvent).
+using Content.Shared._Onyx.Wounds; // WOLFGATE(Wolfmed): Wolfmed routing seam gate (WoundHostComponent).
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
@@ -19,6 +22,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using static Content.Shared.Damage.DamageableSystem;
+using Content.Shared._WF.RMCCore.Damage; // WOLFGATE(RMCCore)
 
 namespace Content.Shared.Damage
 {
@@ -33,8 +37,10 @@ namespace Content.Shared.Damage
         [Dependency] private SharedChemistryGuideDataSystem _chemistryGuideData = default!;
         [Dependency] private SharedExplosionSystem _explosion = default!;
 
-        [Dependency] private readonly EntityQuery<AppearanceComponent> _appearanceQuery = default!;
-        [Dependency] private readonly EntityQuery<DamageableComponent> _damageableQuery = default!;
+        private EntityQuery<AppearanceComponent> _appearanceQuery;
+        private EntityQuery<DamageableComponent> _damageableQuery;
+        private EntityQuery<WoundHostComponent> _woundHostQuery; // WOLFGATE(Wolfmed)
+
         public float UniversalAllDamageModifier { get; private set; } = 1f;
         public float UniversalAllHealModifier { get; private set; } = 1f;
         public float UniversalMeleeDamageModifier { get; private set; } = 1f;
@@ -54,6 +60,9 @@ namespace Content.Shared.Damage
             SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated);
             SubscribeLocalEvent<DamageableComponent, RejuvenateEvent>(OnRejuvenate);
 
+            _appearanceQuery = GetEntityQuery<AppearanceComponent>();
+            _damageableQuery = GetEntityQuery<DamageableComponent>();
+            _woundHostQuery = GetEntityQuery<WoundHostComponent>(); // WOLFGATE(Wolfmed)
 
             // Damage modifier CVars are updated and stored here to be queried in other systems.
             // Note that certain modifiers requires reloading the guidebook.
@@ -168,7 +177,10 @@ namespace Content.Shared.Damage
         public enum DamageOriginFlag
         {
             Explosion, // flag set by ExplosionSystem.Processing
-            Barotrauma // flag set by BarotraumaSystem
+            // WOLFGATE(Wolfmed) START: passive recovery origin flag for the wound rules.
+            Barotrauma, // flag set by BarotraumaSystem
+            PassiveRecovery // Explicitly distinguishes regeneration from treatment by a living healer.
+            // WOLFGATE END
         }
 
         /// <summary>
@@ -204,11 +216,20 @@ namespace Content.Shared.Damage
             }
 
             var before = new BeforeDamageChangedEvent(damage, origin, targetPart, //Shitmed Change
-                false, originFlag); // Mono: originFlag
+                // WOLFGATE(Wolfmed) START: D23 and M6, the routed pass gets the caller's arguments.
+                // false, originFlag, tool); // Mono: originFlag, shield-breaking ammunition
+                false, originFlag, // Mono: originFlag
+                armorPenetration, tool, // WOLFGATE(Wolfmed): D23, Wolfmed routing cancels before the resistance block, so the routed pass needs these. Mono: tool also serves shield-breaking ammunition.
+                IgnoreResistances: ignoreResistances, InterruptsDoAfters: interruptsDoAfters, PartMultiplier: partMultiplier ?? 1f); // WOLFGATE(Wolfmed): M6: P25, the routed pass re-applies the caller's arguments.
+            // WOLFGATE END
             RaiseLocalEvent(uid.Value, ref before);
 
+            // WOLFGATE(Wolfmed) START: D27, Wolfmed routing applies the damage itself and reports it here.
+            // Every other cancelling handler leaves Applied null, so it still returns null.
             if (before.Cancelled)
-                return null;
+                // return null;
+                return before.Applied;
+            // WOLFGATE END
 
             // Shitmed Change Start
             var partDamage = new TryChangePartDamageEvent(damage, origin, targetPart, ignoreResistances, canSever ?? true, canEvade ?? false, partMultiplier ?? 1.00f);
@@ -240,8 +261,42 @@ namespace Content.Shared.Damage
                 }
             }
 
+            // WOLFGATE(RMCCore) START: RMC shields take their share after resistances, even when resistances are ignored
+            var afterResist = new DamageModifyAfterResistEvent(damage, origin, tool);
+            RaiseLocalEvent(uid.Value, afterResist);
+            damage = afterResist.Damage;
+
+            if (damage.Empty)
+                return damage;
+            // WOLFGATE END
+
+            // WOLFGATE(Species) START: heal modifiers, ported from HardLight
+            // Lets healing be adjusted even when resistances are ignored. Synths use this to be immune to
+            // organic medicine.
+            if (!ignoreGlobalModifiers && damage.GetTotal() < 0)
+            {
+                var healEv = new HealModifyEvent(damage, origin);
+                RaiseLocalEvent(uid.Value, healEv);
+                damage = healEv.Damage;
+            }
+            // WOLFGATE END
+
             if (!ignoreGlobalModifiers)
                 damage = ApplyUniversalAllModifiers(damage);
+
+            // WOLFGATE(Wolfmed) START: Wolfmed routing seam.
+            // A handler that clears the dict keeps the damage off this entity's own DamageableComponent and applies it
+            // to body parts instead. The copy matters: with ignoreResistances the local is still the caller's object,
+            // and many call sites pass a component datafield straight in.
+            if (_woundHostQuery.HasComp(uid.Value))
+            {
+                damage = new DamageSpecifier(damage);
+                var dealt = new DamageDealtEvent(damage, origin, interruptsDoAfters);
+                RaiseLocalEvent(uid.Value, ref dealt);
+                if (damage.Empty || dealt.Suppressed) // WOLFGATE(Wolfmed): P6, Suppressed skips the write but still reports the damage.
+                    return damage;
+            }
+            // WOLFGATE END
 
             var delta = new DamageSpecifier();
             delta.DamageDict.EnsureCapacity(damage.DamageDict.Count);
@@ -468,7 +523,18 @@ namespace Content.Shared.Damage
         EntityUid? Origin = null,
         TargetBodyPart? TargetPart = null, // Shitmed Change
         bool Cancelled = false,
-        DamageOriginFlag? OriginFlag = null); // Mono: OriginFlag
+        // WOLFGATE(Wolfmed) START: D23, D27 and M6 arguments for a handler that re-applies the damage itself.
+        DamageOriginFlag? OriginFlag = null, // Mono: OriginFlag
+        // EntityUid? Tool = null) : IInventoryRelayEvent // Mono: early shield interception
+        float ArmorPenetration = 0f, // WOLFGATE(Wolfmed): D23, armour penetration for a handler that re-applies the damage itself.
+        EntityUid? Tool = null, // WOLFGATE(Wolfmed): D23, the tool that dealt it, same reason. Mono: early shield interception reads it too.
+        DamageSpecifier? Applied = null, // WOLFGATE(Wolfmed): D27, what a cancelling handler actually applied; TryChangeDamage returns it.
+        bool IgnoreResistances = false, bool InterruptsDoAfters = true, float PartMultiplier = 1.00f) // WOLFGATE(Wolfmed): M6: P25, the caller's arguments for a handler that re-applies the damage itself.
+        : IInventoryRelayEvent // Mono: early shield interception
+        // WOLFGATE END
+    {
+        public SlotFlags TargetSlots => ~SlotFlags.POCKET;
+    }
 
     /// <summary>
     ///     Shitmed Change: Raised on parts before damage is done so we can cancel the damage if they evade.

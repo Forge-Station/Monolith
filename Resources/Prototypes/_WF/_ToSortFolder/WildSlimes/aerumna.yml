@@ -1,0 +1,340 @@
+# Aerumna's wild slimes: the umbral slime, near-black and half unseen, and the glowing lumen slime bred from it. They
+# need next to no air and the planet's natives (its xenonids among them) leave them be. They live in patches of
+# see-through pink crystal in the fungal forest, each over a geode chamber in the Umbral Deeps. The fungal forest's own
+# noise gates the patches and a blob noise lays them. The surface layers (from WFBiomeAerumna) and the cavern layers
+# (from WFCavernBiomeAerumna) share both noises: the cavern's seed is the surface's plus 7933, so each cavern noise seed
+# is the surface one less 7933, and lower thresholds make each chamber a little wider than its patch.
+
+# ---- Breeds ------------------------------------------------------------------------------------------------------
+
+- type: breed
+  breedName: umbral slime
+  id: WFUmbralMutation
+  producedExtract: WFUmbralSlimeExtract
+  components:
+  - type: Slime
+    breed: WFUmbralMutation
+    slimeColor: "#2a2238"
+    defaultSlimeProto: WFMobSlimeTranslucentBaby
+    maxOffspring: 4
+    mutationChance: 0.1
+    potentialMutations:
+    - WFLumenMutation
+  # Grows and splits only in Aerumna's cool air.
+  - type: WFSlimeClimate
+    minTemperature: 275
+    maxTemperature: 300
+  - type: BreathingImmunity
+  # Half unseen, always; close enough to examine.
+  - type: Stealth
+    lastVisibility: 0.35
+    minVisibility: 0.35
+    examineThreshold: 0.2
+
+# Bred only from umbral slimes; it breeds back to them.
+- type: breed
+  breedName: lumen slime
+  id: WFLumenMutation
+  producedExtract: WFLumenSlimeExtract
+  components:
+  - type: Slime
+    breed: WFLumenMutation
+    slimeColor: "#6fe8c8"
+    defaultSlimeProto: WFMobSlimeTranslucentBaby
+    maxOffspring: 3
+    mutationChance: 0.3
+    potentialMutations:
+    - WFUmbralMutation
+  # Grows and splits only in Aerumna's cool air.
+  - type: WFSlimeClimate
+    minTemperature: 275
+    maxTemperature: 300
+  - type: BreathingImmunity
+  - type: PointLight
+    radius: 2.5
+    energy: 1
+    color: "#6fe8c8"
+    castShadows: false
+
+# ---- Slimes ------------------------------------------------------------------------------------------------------
+
+# Admin and mapper spawners; neither is sold or bred from anything else.
+- type: entity
+  parent: MobSlimeXenobioBabyPending
+  id: WFMobSlimeBabyUmbral
+  name: umbral slime
+  components:
+  - type: PendingSlimeSpawn
+    basePrototype: WFMobSlimeTranslucentBaby
+    breed: WFUmbralMutation
+
+- type: entity
+  parent: MobSlimeXenobioBabyPending
+  id: WFMobSlimeBabyLumen
+  name: lumen slime
+  components:
+  - type: PendingSlimeSpawn
+    basePrototype: WFMobSlimeTranslucentBaby
+    breed: WFLumenMutation
+
+# ---- Extracts ----------------------------------------------------------------------------------------------------
+
+# Plasma hides whoever stands close, blood grows glowcaps, and water fills the room with black smoke and an angry xenonid.
+- type: entity
+  id: WFUmbralSlimeExtract
+  parent: BaseSlimeExtract
+  name: umbral slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#2a2238"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: StatusEffects
+          range: 1.5
+          effect: !type:XenobioStealth
+            duration: 180
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: WFAerumnaGlowcap
+          number: 3
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSmoke
+          smokePrototype: Smoke
+          duration: 15
+          spreadAmount: 50
+          solution:
+            reagents:
+            - ReagentId: Carbon
+              Quantity: 20
+        - !type:XenobioSpawnEntity
+          entity: MobXenoRunner
+          number: 1
+  - type: Tag
+    tags:
+    - WFXenobiologyUmbralExtract
+
+# Plasma grows glow sap and lights up whoever stands close for a long while, blood grows glowcaps and sap pods, and
+# water goes off in a blinding flash.
+- type: entity
+  id: WFLumenSlimeExtract
+  parent: BaseSlimeExtract
+  name: lumen slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#6fe8c8"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: WFGlowSap
+          amount: 20
+        - !type:XenobioRelayNearby
+          compName: StatusEffects
+          range: 1.5
+          effect: !type:XenobioGrantComponents
+            duration: 900
+            components:
+            - type: PointLight
+              radius: 3
+              energy: 1
+              color: "#6fe8c8"
+              castShadows: false
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: WFAerumnaGlowcap
+          number: 3
+        - !type:XenobioSpawnEntity
+          entity: WFAerumnaSapPod
+          number: 2
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:FlashReactionEffect
+          maxRange: 7
+          rangePerUnit: 7
+          sound: /Audio/Weapons/flash.ogg
+  - type: Tag
+    tags:
+    - WFXenobiologyLumenExtract
+
+- type: Tag
+  id: WFXenobiologyUmbralExtract
+
+- type: Tag
+  id: WFXenobiologyLumenExtract
+
+- type: xenobiologyBounty
+  id: WFBountyUmbralExtract
+  pointsAwarded: 15000
+  entries:
+  - name: bounty-item-wf-umbral-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologyUmbralExtract
+
+- type: xenobiologyBounty
+  id: WFBountyLumenExtract
+  pointsAwarded: 40000
+  entries:
+  - name: bounty-item-wf-lumen-extract
+    amount: 1
+    whitelist:
+      tags:
+      - WFXenobiologyLumenExtract
+
+# ---- Habitat -----------------------------------------------------------------------------------------------------
+
+- type: wfWildSlimeHabitat
+  id: WFWildSlimesAerumna
+  surface: WFSurfaceAerumna
+  breed: WFUmbralMutation
+  babyPrototype: WFMobSlimeTranslucentBaby
+  adultPrototype: WFMobSlimeTranslucentAdult
+  adultChance: 0.3
+  patchTemplate: WFAerumnaSlimeZone
+  patchTile: WFFloorAerumnaPinkCrystal
+  grottoTile: WFCavernFloorAerumnaPinkCrystal
+  minPatchTiles: 24
+  surfaceSlimes: 3
+  grottoSlimes: 2
+  respawnDelay: 600
+
+# The ids name no colouring word, so the planet map reads the crystal as rock like the ground round it.
+- type: tile
+  id: WFFloorAerumnaPinkCrystal
+  parent: WFFloorAerumnaCrystalBed
+  name: tiles-wf-aerumna-pink-crystal
+  sprite: /Textures/_WF/WildSlimes/Aerumna/pink_crystal.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+  transparent: true
+
+# The geode chamber floor: the same crystal, solid, since nothing lies below the Umbral Deeps.
+- type: tile
+  id: WFCavernFloorAerumnaPinkCrystal
+  parent: WFFloorAerumnaPinkCrystal
+  sprite: /Textures/_WF/WildSlimes/Aerumna/pink_crystal_cavern.png
+  transparent: false
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+# Inside the fungal forest only (its own noise and threshold, from WFShadowClearings), then the patch blobs.
+- type: biomeTemplate
+  id: WFAerumnaSlimeZone
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFAerumnaSlimePatch
+    threshold: 0.86
+    noise: { seed: 331, noiseType: OpenSimplex2, frequency: 0.03 }
+
+- type: biomeTemplate
+  id: WFCavernSlimeZoneAerumna
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernSlimeGrottoAerumna
+    threshold: 0.83
+    noise: { seed: -7602, noiseType: OpenSimplex2, frequency: 0.03 }
+
+# Crystal with pink crystal spurs and glowshrooms on it.
+- type: biomeTemplate
+  id: WFAerumnaSlimePatch
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFFloorAerumnaPinkCrystal
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorAerumnaPinkCrystal]
+    entities: [CrystalPink]
+    threshold: 0.93
+    noise: { seed: 333, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorAerumnaPinkCrystal]
+    entities: [ShiptestFloraGlowshroom]
+    threshold: 0.94
+    noise: { seed: 334, noiseType: OpenSimplex2, frequency: 1 }
+
+# The geode chamber: crystal floor studded with pink crystal, geode clusters and shadow blooms.
+- type: biomeTemplate
+  id: WFCavernSlimeGrottoAerumna
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorAerumnaPinkCrystal
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAerumnaPinkCrystal]
+    entities: [CrystalPink]
+    threshold: 0.88
+    noise: { seed: 335, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAerumnaPinkCrystal]
+    entities: [WFCavernGeodeCluster]
+    threshold: 0.92
+    noise: { seed: 336, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorAerumnaPinkCrystal]
+    entities: [WFCavernShadowBloom]
+    threshold: 0.92
+    noise: { seed: 337, noiseType: OpenSimplex2, frequency: 1 }

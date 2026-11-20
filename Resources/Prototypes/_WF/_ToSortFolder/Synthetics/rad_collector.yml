@@ -1,0 +1,24 @@
+# The radiation collector in a synthetic chassis's torso (WFRadCollectorSystem). It soaks up radiation that would
+# otherwise build on the body for ever; full, it strains and leaks into the core; burnt out (zero integrity) it is gone
+# and a new one is printed at the exosuit fabricator, with the other chassis organs.
+
+- type: entity
+  id: WFOrganRadCollector
+  parent: BaseIPCOrgan
+  name: radiation collector
+  description: A shielded capacitor stack that soaks up the radiation reaching a chassis. Pull it to let it vent; weld it to restore its integrity.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/stock_parts.rsi
+    state: super_capacitor
+  - type: Organ
+    slotId: radcollector
+  - type: WolfmedOrgan
+    health: 30
+    maxHealth: 30
+  - type: WFRadCollector
+
+- type: latheRecipe
+  parent: BaseIPCOrganRecipe
+  id: WFOrganRadCollector
+  result: WFOrganRadCollector

@@ -9,7 +9,9 @@
   - type: Item
     sprite: Objects/Materials/Sheets/metal.rsi
     size: Normal
-  - type: BulkMaterial # Forge-change
+  # WOLFGATE(CargoLoad): sheets weigh down the ship carrying them
+  - type: WFCargoMass
+    perUnit: 0.02
   - type: StaticPrice
     price: 0
   - type: Tag

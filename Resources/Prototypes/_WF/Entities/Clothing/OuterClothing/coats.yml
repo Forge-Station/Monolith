@@ -1,0 +1,43 @@
+#region Asf
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFAsfClothingOuterGreatcoat
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/greatcoat.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/greatcoat.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1
+
+- type: entity
+  parent: ClothingOuterCoatLab
+  id: WFAsfClothingOuterCoatLab
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/labcoat.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/labcoat.rsi
+
+- type: entity
+  parent: [ClothingOuterStorageFoldableBaseOpened, WFAsfClothingOuterCoatLab]
+  id: WFAsfClothingOuterCoatLabOpened
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFAsfClothingOuterParade
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/parade.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/parade.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFAsfClothingOuterRobe
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/robe.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/robe.rsi

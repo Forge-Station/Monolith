@@ -13,12 +13,8 @@ using Content.Shared.PowerCell.Components;
 using Content.Shared.Rounding;
 using Content.Shared.UserInterface;
 using Robust.Shared.Containers;
-using System.Diagnostics.CodeAnalysis;
-using Content.Server.Power.EntitySystems;
 using Content.Server.UserInterface;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Mech.Components;
-using Content.Shared.Popups;
 using ActivatableUISystem = Content.Shared.UserInterface.ActivatableUISystem;
 
 namespace Content.Server.PowerCell;

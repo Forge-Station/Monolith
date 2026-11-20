@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "redweed1"
+    },
+    {
+      "name": "shrub",
+      "directions": 8
+    },
+    {
+      "name": "shrub-dead",
+      "directions": 4
+    },
+    {
+      "name": "snowshrub",
+      "directions": 4
+    }
+  ]
+}

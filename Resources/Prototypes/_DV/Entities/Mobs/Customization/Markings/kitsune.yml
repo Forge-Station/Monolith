@@ -1,0 +1,151 @@
+# All the Kitsune customization
+
+# Tail Markings
+# Wolfgate: ported from HardLight
+- type: marking
+  id: KitsuneTailDefault
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Canine]
+  coloring:
+    default:
+      type: !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+      - !type:SimpleColoring
+        color: "#fffafa"
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    kitsune_primary_BEHIND: TailBehind
+    kitsune_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    kitsune_primary_BEHIND: kitsune_primary_FRONT
+    kitsune_secondary_BEHIND: kitsune_secondary_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - split art
+    state: kitsune_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - split art
+    state: kitsune_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - south frame on TailBehind
+    state: kitsune_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - south frame on TailBehind
+    state: kitsune_secondary_BEHIND
+
+- type: marking
+  id: KitsuneTailsNine
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Canine]
+  coloring:
+    default:
+      type: !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+      - !type:SimpleColoring
+        color: "#fffafa"
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    foxninetailstone1_BEHIND: TailBehind
+    foxninetailstone2_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    foxninetailstone1_BEHIND: foxninetailstone1_FRONT
+    foxninetailstone2_BEHIND: foxninetailstone2_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - split art
+    state: foxninetailstone1_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - split art
+    state: foxninetailstone2_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - south frame on TailBehind
+    state: foxninetailstone1_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - south frame on TailBehind
+    state: foxninetailstone2_BEHIND
+
+- type: marking
+  id: KitsuneTailsThree
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Canine]
+  coloring:
+    default:
+      type: !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+      - !type:SimpleColoring
+        color: "#fffafa"
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    foxthreetailstone1_BEHIND: TailBehind
+    foxthreetailstone2_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    foxthreetailstone1_BEHIND: foxthreetailstone1_FRONT
+    foxthreetailstone2_BEHIND: foxthreetailstone2_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - split art
+    state: foxthreetailstone1_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - split art
+    state: foxthreetailstone2_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - south frame on TailBehind
+    state: foxthreetailstone1_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - south frame on TailBehind
+    state: foxthreetailstone2_BEHIND
+
+- type: marking
+  id: KitsuneTailsTwo
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Canine]
+  coloring:
+    default:
+      type: !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+      - !type:SimpleColoring
+        color: "#fffafa"
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    foxtwotailstone1_BEHIND: TailBehind
+    foxtwotailstone2_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    foxtwotailstone1_BEHIND: foxtwotailstone1_FRONT
+    foxtwotailstone2_BEHIND: foxtwotailstone2_FRONT
+  sprites:
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - split art
+    state: foxtwotailstone1_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - split art
+    state: foxtwotailstone2_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - south frame on TailBehind
+    state: foxtwotailstone1_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/_DV/Mobs/Customization/kitsune/tails.rsi # WOLFGATE - south frame on TailBehind
+    state: foxtwotailstone2_BEHIND
+
+# Ear Markings
+
+- type: marking
+  id: KitsuneEarsDefault
+  bodyPart: Head
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Canine]
+  coloring:
+    default:
+      type: !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+      - !type:SimpleColoring
+        color: "#fffafa"
+  sprites:
+  - sprite: _DV/Mobs/Customization/kitsune/ears.rsi
+    state: kitsune_fluffy_ears
+  - sprite: _DV/Mobs/Customization/kitsune/ears.rsi
+    state: kitsune_fluffy_fluff
+
+- type: marking
+  id: KitsuneEarsFox
+  bodyPart: Head
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell, Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid, Canine]
+  coloring:
+    default:
+      type: !type:CategoryColoring
+        category: Hair
+      fallbackTypes:
+      - !type:SimpleColoring
+        color: "#fffafa"
+  sprites:
+  - sprite: _DV/Mobs/Customization/kitsune/ears.rsi
+    state: foxears

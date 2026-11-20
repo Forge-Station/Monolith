@@ -1,0 +1,8 @@
+# Wolfgate: ported from HardLight
+- type: marking
+  id: HumanHairOmbreAlternate
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: _HL/Mobs/Customization/Human/human_hair.rsi
+      state: ombre_alt

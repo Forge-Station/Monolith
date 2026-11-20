@@ -117,6 +117,11 @@ public sealed record SalvageMissionParams : IComparable<SalvageMissionParams>
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)] public DifficultyRating Difficulty;
 
+    // WOLFGATE(PlanetExpeditions) START: a mission on a planet site names the site and its world for the console
+    [ViewVariables] public string? WfSite;
+    [ViewVariables] public string? WfWorld;
+    // WOLFGATE END
+
     public int CompareTo(SalvageMissionParams? other)
     {
         if (other == null)

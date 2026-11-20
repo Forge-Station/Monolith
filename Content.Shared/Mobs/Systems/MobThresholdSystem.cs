@@ -5,6 +5,7 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Events;
+using Content.Shared._WF.Wolfmed.Consciousness; // WOLFGATE(Wolfmed): CONSC
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Mobs.Systems;
@@ -13,6 +14,7 @@ public sealed partial class MobThresholdSystem : EntitySystem
 {
     [Dependency] private MobStateSystem _mobStateSystem = default!;
     [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private SharedWolfmedConsciousnessSystem _wolfmedConsciousness = default!; // WOLFGATE(Wolfmed): CONSC
 
     public override void Initialize()
     {
@@ -328,6 +330,18 @@ public sealed partial class MobThresholdSystem : EntitySystem
         VerifyThresholds(uid, component);
     }
 
+    // WOLFGATE(Wolfmed) START: M1a, lets _WF code hand a wound host's health alerts to Wolfmed's condition alerts.
+    // This is the one way to do it (plan §5.2); the component's access rule keeps TriggersAlerts to this system.
+    public void SetTriggersAlerts(EntityUid uid, bool value, MobThresholdsComponent? component = null)
+    {
+        if (!Resolve(uid, ref component, false) || component.TriggersAlerts == value)
+            return;
+
+        component.TriggersAlerts = value;
+        Dirty(uid, component);
+    }
+    // WOLFGATE END
+
     #endregion
 
     #region Private Implementation
@@ -335,10 +349,20 @@ public sealed partial class MobThresholdSystem : EntitySystem
     private void CheckThresholds(EntityUid target, MobStateComponent mobStateComponent,
         MobThresholdsComponent thresholdsComponent, DamageableComponent damageableComponent, EntityUid? origin = null)
     {
+        // WOLFGATE(Wolfmed): CONSC: a wound host's mob state belongs to consciousness, not to a damage total.
+        if (_wolfmedConsciousness.OwnsMobState(target))
+            return;
+
+        // WOLFGATE(Wolfmed) START: HOOK 11, wound hosts cross mob-state thresholds on vital-part plus systemic damage.
+        // CheckVitalDamage falls back to TotalDamage for everything else. Hoisted out of the loop because it
+        // walks the body; Onyx calls it per threshold, which is the same answer for more work.
+        var vitalDamage = CheckVitalDamage(target, damageableComponent);
         foreach (var (threshold, mobState) in thresholdsComponent.Thresholds.Reverse())
         {
-            if (damageableComponent.TotalDamage < threshold)
+            // if (damageableComponent.TotalDamage < threshold)
+            if (vitalDamage < threshold)
                 continue;
+            // WOLFGATE END
 
             TriggerThreshold(target, mobState, mobStateComponent, thresholdsComponent, origin);
             break;
@@ -403,7 +427,10 @@ public sealed partial class MobThresholdSystem : EntitySystem
             }
 
             if (TryGetNextState(target, currentMobState, out var nextState, threshold) &&
-                TryGetPercentageForState(target, nextState.Value, damageable.TotalDamage, out var percentage))
+                // WOLFGATE(Wolfmed) START: HOOK 11, the health alert's severity lerps off the same number the thresholds use.
+                // TryGetPercentageForState(target, nextState.Value, damageable.TotalDamage, out var percentage))
+                TryGetPercentageForState(target, nextState.Value, CheckVitalDamage(target, damageable), out var percentage))
+                // WOLFGATE END
             {
                 percentage = FixedPoint2.Clamp(percentage.Value, 0, 1);
 

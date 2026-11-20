@@ -8,6 +8,38 @@
   },
   "states": [
     {
+      "name": "tattoo_campbell_l_arm",
+      "directions": 4
+    },
+    {
+      "name": "tattoo_campbell_l_leg",
+      "directions": 4
+    },
+    {
+      "name": "tattoo_campbell_r_arm",
+      "directions": 4
+    },
+    {
+      "name": "tattoo_campbell_r_leg",
+      "directions": 4
+    },
+    {
+      "name": "tattoo_eye_l",
+      "directions": 4
+    },
+    {
+      "name": "tattoo_eye_moth_l",
+      "directions": 4
+    },
+    {
+      "name": "tattoo_eye_moth_r",
+      "directions": 4
+    },
+    {
+      "name": "tattoo_eye_r",
+      "directions": 4
+    },
+    {
       "name": "tattoo_hive_chest",
       "directions": 4
     },
@@ -16,35 +48,11 @@
       "directions": 4
     },
     {
-      "name": "tattoo_campbell_r_arm",
-      "directions": 4
-    },
-    {
-      "name": "tattoo_campbell_l_arm",
-      "directions": 4
-    },
-    {
-      "name": "tattoo_campbell_r_leg",
-      "directions": 4
-    },
-    {
-      "name": "tattoo_campbell_l_leg",
-      "directions": 4
-    },
-    {
-      "name": "tattoo_silverburgh_r_leg",
-      "directions": 4
-    },
-    {
       "name": "tattoo_silverburgh_l_leg",
       "directions": 4
     },
     {
-      "name": "tattoo_eye_r",
-      "directions": 4
-    },
-    {
-      "name": "tattoo_eye_l",
+      "name": "tattoo_silverburgh_r_leg",
       "directions": 4
     }
   ]

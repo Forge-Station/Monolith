@@ -1,0 +1,9 @@
+- files: ["heartbeat_loop.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Skyrat-tg by Skyrat-SS13. Downmixed to mono."
+  source: "https://github.com/Skyrat-SS13/Skyrat-tg"
+
+- files: ["flatline.ogg"]
+  license: "CC0-1.0"
+  copyright: "Made for Wolfgate (Wolfmed). Generated 1 kHz sine tone, ffmpeg lavfi."
+  source: "https://github.com/VanguardControl/Wolfgate"

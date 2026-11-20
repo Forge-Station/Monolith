@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from NovaSector at commit https://github.com/NovaSector/NovaSector/commit/3754f28afedc5e20e1bc76dd6c5568c957a4a9de.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hauntium_wall0",
+      "directions": 4
+    },
+    {
+      "name": "hauntium_wall1",
+      "directions": 4
+    },
+    {
+      "name": "hauntium_wall2",
+      "directions": 4
+    },
+    {
+      "name": "hauntium_wall3",
+      "directions": 4
+    },
+    {
+      "name": "hauntium_wall4",
+      "directions": 4
+    },
+    {
+      "name": "hauntium_wall5",
+      "directions": 4
+    },
+    {
+      "name": "hauntium_wall6",
+      "directions": 4
+    },
+    {
+      "name": "hauntium_wall7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using System.Globalization;
 using Content.Shared.CCVar;
+using Content.Server._WF.ExamineCard; // WOLFGATE(ExamineCard)
 
 namespace Content.Server._White.Examine
 {
@@ -17,6 +18,7 @@ namespace Content.Server._White.Examine
         [Dependency] private EntityManager _entityManager = default!;
         [Dependency] private IChatManager _chatManager = default!;
         [Dependency] private INetConfigurationManager _netConfigManager = default!;
+        [Dependency] private ExamineCardSystem _examineCard = default!; // WOLFGATE(ExamineCard)
 
         public override void Initialize()
         {
@@ -25,6 +27,15 @@ namespace Content.Server._White.Examine
 
         private void HandleExamine(EntityUid uid, ExaminableCharacterComponent comp, ExaminedEvent args)
         {
+            // WOLFGATE(ExamineCard) START: the ID card replaces the worn-item lines and their copy in chat, at any range
+            if (_examineCard.Enabled)
+            {
+                if (TryComp<ActorComponent>(args.Examiner, out var examiner))
+                    _examineCard.SendCard(uid, args.Examiner, examiner.PlayerSession, args.IsInDetailsRange);
+                return;
+            }
+            // WOLFGATE END
+
             if (!TryComp<ActorComponent>(args.Examiner, out var actorComponent)
                 || !args.IsInDetailsRange)
                 return;

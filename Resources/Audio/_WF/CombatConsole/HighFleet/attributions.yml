@@ -1,0 +1,4 @@
+- files: ["key.ogg", "switch_on.ogg", "switch_off.ogg", "selector.ogg", "bearing.ogg", "warning.ogg"]
+  license: "Custom"
+  copyright: "Credited to Extreme Sound Effects on YouTube, per the Wolfgate maintainer. Edited and adapted for Wolfgate by Wolfgate contributors. Free-to-use permission reported by the maintainer."
+  source: "NA" # YouTube: Extreme Sound Effects (specific video/channel URL not supplied).

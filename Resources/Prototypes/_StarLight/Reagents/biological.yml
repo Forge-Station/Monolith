@@ -1,0 +1,34 @@
+# Wolfgate: ported from HardLight.
+# HardLight's Vampiric-organ variants are dropped here - Wolfgate has no vampire system.
+- type: reagent
+  parent: Blood
+  id: AvaliBlood
+  name: reagent-name-avali-blood
+  group: Biological
+  desc: reagent-desc-avali-blood
+  flavor: beer
+  color: "#6C3BAA"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-avali
+  # Hardlight addition for Floofstation vampires - start
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 0.5
+        conditions:
+          - !type:OrganType
+            type: Human
+            shouldHave: false
+  # Hardlight addition for Floofstation vampires - end
+
+- type: reagent
+  parent: Blood
+  id: DarkBlood
+  name: reagent-name-dark-blood
+  group: Biological
+  desc: reagent-desc-dark-blood
+  flavor: metallic
+  color: "#1c1624"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-unidentifiable

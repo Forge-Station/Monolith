@@ -3,7 +3,6 @@ using Robust.Shared.GameStates;
 using Content.Shared.Tools;
 using Content.Shared.Atmos;
 using Content.Shared.DeviceLinking;
-using Robust.Shared.Prototypes;
 using System.Numerics;
 
 namespace Content.Shared._FarHorizons.Power.Generation.FissionGenerator;

@@ -7,6 +7,7 @@ using Content.Server.Physics.Controllers;
 using Content.Server.Shuttles.Components;
 using Content.Shared._Crescent.DroneControl;
 using Content.Shared._Forge.CCVars;
+using Content.Shared._Forge.Drones;
 using Content.Shared.Damage;
 using Content.Shared.Mind.Components;
 using Robust.Shared.Audio;
@@ -86,8 +87,6 @@ public sealed partial class DroneInnerZoneFleeSystem : EntitySystem
         }, true);
         Subs.CVar(_cfg, ForgeCCVars.DroneInnerZoneCheckInterval, val => _zoneCheckInterval = MathF.Max(0.1f, val), true);
         ClampDeleteTimes();
-
-        SubscribeLocalEvent<DamageableComponent, BeforeDamageChangedEvent>(OnFleeGridDamage);
     }
 
     public override void Update(float frameTime)
@@ -169,7 +168,7 @@ public sealed partial class DroneInnerZoneFleeSystem : EntitySystem
                 continue;
 
             var mapPos = _transform.GetMapCoordinates(gridUid, gridXform);
-            if (mapPos.Position.Length() >= _innerZoneRadius)
+            if (mapPos.Position.Length() >= _innerZoneRadius && !WithinStationDroneClearance(mapPos))
                 continue;
 
             if (!TryFindFleeAiCore(gridUid, out var aiUid, out var htn))
@@ -177,6 +176,24 @@ public sealed partial class DroneInnerZoneFleeSystem : EntitySystem
 
             StartFlee((aiUid, htn), gridUid);
         }
+    }
+
+    /// <summary>
+    /// Stations mark a circle where drones are not welcome. Distance is on the station grid, in meters.
+    /// </summary>
+    private bool WithinStationDroneClearance(MapCoordinates dronePos)
+    {
+        var query = EntityQueryEnumerator<DeleteNearbyDronesComponent, TransformComponent>();
+        while (query.MoveNext(out var station, out var clearance, out var xform))
+        {
+            if (xform.MapID != dronePos.MapId)
+                continue;
+
+            if (Vector2.Distance(_transform.GetWorldPosition(station), dronePos.Position) <= clearance.Distance)
+                return true;
+        }
+
+        return false;
     }
 
     private bool TryFindFleeAiCore(EntityUid gridUid, out EntityUid aiUid, out HTNComponent htn)
@@ -324,7 +341,10 @@ public sealed partial class DroneInnerZoneFleeSystem : EntitySystem
     /// Cancels damage on entities whose <see cref="TransformComponent.GridUid"/> is a fleeing drone grid.
     /// Uses grid membership, not AABB overlap, and never applies godmode/Rejuvenate.
     /// </summary>
-    private void OnFleeGridDamage(Entity<DamageableComponent> ent, ref BeforeDamageChangedEvent args)
+    /// <summary>
+    /// Called from the one <see cref="BeforeDamageChangedEvent"/> subscriber on <see cref="DamageableComponent"/>.
+    /// </summary>
+    public void OnFleeGridDamage(Entity<DamageableComponent> ent, ref BeforeDamageChangedEvent args)
     {
         if (args.Cancelled)
             return;

@@ -219,7 +219,7 @@ public sealed partial class BiomeSystem
 
     private bool TryGetAnchoredCaveWall(EntityUid gridUid, MapGridComponent grid, Vector2i tile, out EntityUid wall)
     {
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridUid, grid, tile);
 
         while (anchored.MoveNext(out var ent))
         {
@@ -241,7 +241,7 @@ public sealed partial class BiomeSystem
 
     private bool HasAnchoredPrototype(EntityUid gridUid, MapGridComponent grid, Vector2i tile, string prototype)
     {
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridUid, grid, tile);
+        var anchored = _mapSystem.GetAnchoredEntities(gridUid, grid, tile);
 
         while (anchored.MoveNext(out var ent))
         {

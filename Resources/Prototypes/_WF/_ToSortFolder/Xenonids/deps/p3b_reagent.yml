@@ -1,0 +1,25 @@
+# RMC-14: Resources/Prototypes/_RMC14/Reagents/toxins.yml
+# WOLFGATE: RMC's CMReagent parent and Toxic/Corrosive effects are not ported; HealthChange per metabolised unit stands in (Poison 1, Caustic 2)
+- type: reagent
+  id: RMCMolecularAcid
+  name: reagent-name-rmcmolecularacid
+  group: Toxins
+  desc: reagent-desc-rmcmolecularacid
+  physicalDesc: reagent-physical-desc-acidic
+  color: "#669900"
+  metabolisms:
+    Poison:
+      #TODO hurts on inject equal to amount
+      metabolismRate: 0.05
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          types:
+            Poison: 1
+            Caustic: 2
+      - !type:PopupMessage
+        type: Local
+        visualType: SmallCaution
+        messages: [ "rmc-body-stings" ]
+        probability: 0.2

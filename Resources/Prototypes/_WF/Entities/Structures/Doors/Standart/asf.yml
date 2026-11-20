@@ -1,0 +1,35 @@
+- type: entity
+  parent: AirlockScience
+  id: WFAsfAirlock
+  suffix: ASF, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronics ]
+
+- type: entity
+  parent: AirlockScience
+  id: WFAsfAirlockCommand
+  suffix: ASF Command, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronicsCommand ]
+
+- type: entity
+  parent: AirlockScience
+  id: WFAsfAirlockBridge
+  suffix: ASF Bridge, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronicsBridge ]
+
+- type: entity
+  parent: AirlockScience
+  id: WFAsfAirlockSecurity
+  suffix: ASF Security, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ WFAsfDoorElectronicsSecurity ]

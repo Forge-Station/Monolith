@@ -23,6 +23,7 @@
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 10000
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.95 # Forge-change 0.9->0.95
@@ -119,6 +120,7 @@
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.8
@@ -142,6 +144,7 @@
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.9

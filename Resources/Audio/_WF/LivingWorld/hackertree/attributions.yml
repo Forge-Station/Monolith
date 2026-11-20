@@ -1,0 +1,17 @@
+- files:
+  - attack1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/hackertree/attack1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - die1.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/hackertree/die1.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"
+
+- files:
+  - retract_to_idle01.ogg
+  license: "Custom"
+  copyright: "Black Mesa (Crowbar Collective) sounds, supplied by the owner as open source; ported from sound/xen/hackertree/retract_to_idle01.wav"
+  source: "https://www.crowbarcollective.com/games/black-mesa"

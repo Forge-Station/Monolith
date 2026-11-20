@@ -8,15 +8,293 @@
   },
   "states": [
     {
-      "name": "tail_smooth_front",
+      "name": "body_backspikes",
       "directions": 4
     },
     {
-      "name": "tail_large_front",
+      "name": "body_fin",
       "directions": 4
     },
     {
-      "name": "tail_spikes_front",
+      "name": "body_tiger",
+      "directions": 4
+    },
+    {
+      "name": "body_underbelly",
+      "directions": 4
+    },
+    {
+      "name": "floof_neckfull",
+      "directions": 4
+    },
+    {
+      "name": "frills_aquatic",
+      "directions": 4
+    },
+    {
+      "name": "frills_axolotl",
+      "directions": 4
+    },
+    {
+      "name": "frills_big",
+      "directions": 4
+    },
+    {
+      "name": "frills_divinity",
+      "directions": 4
+    },
+    {
+      "name": "frills_hood_primary",
+      "directions": 4
+    },
+    {
+      "name": "frills_hood_secondary",
+      "directions": 4
+    },
+    {
+      "name": "frills_neckfull",
+      "directions": 4
+    },
+    {
+      "name": "frills_short",
+      "directions": 4
+    },
+    {
+      "name": "frills_simple",
+      "directions": 4
+    },
+    {
+      "name": "head_tiger",
+      "directions": 4
+    },
+    {
+      "name": "horns_angler",
+      "directions": 4
+    },
+    {
+      "name": "horns_argali",
+      "directions": 4
+    },
+    {
+      "name": "horns_argali_l",
+      "directions": 4
+    },
+    {
+      "name": "horns_argali_r",
+      "directions": 4
+    },
+    {
+      "name": "horns_ayrshire",
+      "directions": 4
+    },
+    {
+      "name": "horns_ayrshire_l",
+      "directions": 4
+    },
+    {
+      "name": "horns_ayrshire_r",
+      "directions": 4
+    },
+    {
+      "name": "horns_bighorn",
+      "directions": 4
+    },
+    {
+      "name": "horns_bighorn_l",
+      "directions": 4
+    },
+    {
+      "name": "horns_bighorn_r",
+      "directions": 4
+    },
+    {
+      "name": "horns_curled",
+      "directions": 4
+    },
+    {
+      "name": "horns_curled_l",
+      "directions": 4
+    },
+    {
+      "name": "horns_curled_r",
+      "directions": 4
+    },
+    {
+      "name": "horns_demonic",
+      "directions": 4
+    },
+    {
+      "name": "horns_demonic_l",
+      "directions": 4
+    },
+    {
+      "name": "horns_demonic_r",
+      "directions": 4
+    },
+    {
+      "name": "horns_double",
+      "directions": 4
+    },
+    {
+      "name": "horns_floppy_kobold_ears",
+      "directions": 4
+    },
+    {
+      "name": "horns_kobold_ears",
+      "directions": 4
+    },
+    {
+      "name": "horns_myrsore",
+      "directions": 4
+    },
+    {
+      "name": "horns_myrsore_l",
+      "directions": 4
+    },
+    {
+      "name": "horns_myrsore_r",
+      "directions": 4
+    },
+    {
+      "name": "horns_ram",
+      "directions": 4
+    },
+    {
+      "name": "horns_short",
+      "directions": 4
+    },
+    {
+      "name": "horns_simple",
+      "directions": 4
+    },
+    {
+      "name": "l_arm_tiger",
+      "directions": 4
+    },
+    {
+      "name": "l_leg_tiger",
+      "directions": 4
+    },
+    {
+      "name": "r_arm_tiger",
+      "directions": 4
+    },
+    {
+      "name": "r_leg_tiger",
+      "directions": 4
+    },
+    {
+      "name": "snout_round",
+      "directions": 4
+    },
+    {
+      "name": "snout_roundlight",
+      "directions": 4
+    },
+    {
+      "name": "snout_sharp",
+      "directions": 4
+    },
+    {
+      "name": "snout_sharplight",
+      "directions": 4
+    },
+    {
+      "name": "snout_splotch_primary",
+      "directions": 4
+    },
+    {
+      "name": "snout_splotch_secondary",
+      "directions": 4
+    },
+    {
+      "name": "tail_aquatic",
+      "directions": 4
+    },
+    {
+      "name": "tail_aquatic_wagging",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "tail_dtiger",
+      "directions": 4
+    },
+    {
+      "name": "tail_dtiger_behind",
       "directions": 4
     },
     {
@@ -24,7 +302,269 @@
       "directions": 4
     },
     {
+      "name": "tail_dtiger_wagging",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "tail_large",
+      "directions": 4
+    },
+    {
+      "name": "tail_large_behind",
+      "directions": 4
+    },
+    {
+      "name": "tail_large_front",
+      "directions": 4
+    },
+    {
+      "name": "tail_large_wagging",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "tail_ltiger",
+      "directions": 4
+    },
+    {
+      "name": "tail_ltiger_behind",
+      "directions": 4
+    },
+    {
       "name": "tail_ltiger_front",
+      "directions": 4
+    },
+    {
+      "name": "tail_ltiger_wagging",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "tail_smooth",
+      "directions": 4
+    },
+    {
+      "name": "tail_smooth_behind",
       "directions": 4
     },
     {
@@ -36,23 +576,7 @@
       "directions": 4
     },
     {
-      "name": "tail_smooth_behind",
-      "directions": 4
-    },
-    {
-      "name": "tail_large_behind",
-      "directions": 4
-    },
-    {
-      "name": "tail_spikes_behind",
-      "directions": 4
-    },
-    {
-      "name": "tail_dtiger_behind",
-      "directions": 4
-    },
-    {
-      "name": "tail_ltiger_behind",
+      "name": "tail_smooth_front",
       "directions": 4
     },
     {
@@ -61,26 +585,6 @@
     },
     {
       "name": "tail_smooth_secondary",
-      "directions": 4
-    },
-    {
-      "name": "tail_smooth",
-      "directions": 4
-    },
-    {
-      "name": "tail_large",
-      "directions": 4
-    },
-    {
-      "name": "tail_spikes",
-      "directions": 4
-    },
-    {
-      "name": "tail_dtiger",
-      "directions": 4
-    },
-    {
-      "name": "tail_ltiger",
       "directions": 4
     },
     {
@@ -240,160 +744,16 @@
       ]
     },
     {
-      "name": "tail_dtiger_wagging",
-      "directions": 4,
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
+      "name": "tail_spikes",
+      "directions": 4
     },
     {
-      "name": "tail_ltiger_wagging",
-      "directions": 4,
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
+      "name": "tail_spikes_behind",
+      "directions": 4
+    },
+    {
+      "name": "tail_spikes_front",
+      "directions": 4
     },
     {
       "name": "tail_spikes_wagging",
@@ -472,150 +832,6 @@
           0.1
         ]
       ]
-    },
-    {
-      "name": "snout_round",
-      "directions": 4
-    },
-    {
-      "name": "snout_roundlight",
-      "directions": 4
-    },
-    {
-      "name": "snout_sharp",
-      "directions": 4
-    },
-    {
-      "name": "snout_sharplight",
-      "directions": 4
-    },
-    {
-      "name": "horns_simple",
-      "directions": 4
-    },
-    {
-      "name": "horns_short",
-      "directions": 4
-    },
-    {
-      "name": "horns_curled",
-      "directions": 4
-    },
-    {
-      "name": "horns_ram",
-      "directions": 4
-    },
-    {
-      "name": "horns_angler",
-      "directions": 4
-    },
-    {
-      "name": "frills_simple",
-      "directions": 4
-    },
-    {
-      "name": "frills_short",
-      "directions": 4
-    },
-    {
-      "name": "frills_aquatic",
-      "directions": 4
-    },
-    {
-      "name": "frills_divinity",
-      "directions": 4
-    },
-    {
-      "name": "horns_double",
-      "directions": 4
-    },
-    {
-      "name": "frills_axolotl",
-      "directions": 4
-    },
-    {
-      "name": "frills_hood_primary",
-      "directions": 4
-    },
-    {
-      "name": "frills_hood_secondary",
-      "directions": 4
-    },
-    {
-      "name": "frills_big",
-      "directions": 4
-    },
-    {
-      "name": "body_tiger",
-      "directions": 4
-    },
-    {
-      "name": "head_tiger",
-      "directions": 4
-    },
-    {
-      "name": "l_arm_tiger",
-      "directions": 4
-    },
-    {
-      "name": "l_leg_tiger",
-      "directions": 4
-    },
-    {
-      "name": "r_arm_tiger",
-      "directions": 4
-    },
-    {
-      "name": "horns_argali",
-      "directions": 4
-    },
-    {
-      "name": "horns_ayrshire",
-      "directions": 4
-    },
-    {
-      "name": "horns_myrsore",
-      "directions": 4
-    },
-    {
-      "name": "horns_bighorn",
-      "directions": 4
-    },
-    {
-      "name": "horns_demonic",
-      "directions": 4
-    },
-    {
-      "name": "horns_kobold_ears",
-      "directions": 4
-    },
-    {
-      "name": "r_leg_tiger",
-      "directions": 4
-    },
-    {
-      "name": "horns_floppy_kobold_ears",
-      "directions": 4
-    },
-    {
-      "name": "body_underbelly",
-      "directions": 4
-    },
-    {
-      "name": "body_backspikes",
-      "directions": 4
-    },
-    {
-      "name": "snout_splotch_primary",
-      "directions": 4
-    },
-    {
-      "name": "snout_splotch_secondary",
-      "directions": 4
-    },
-    {
-      "name": "frills_neckfull",
-      "directions": 4
     }
   ]
 }

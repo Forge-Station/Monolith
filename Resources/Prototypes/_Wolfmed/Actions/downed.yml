@@ -1,0 +1,39 @@
+# M1a (plan §5.3): the crawling stage's own action. Granted while Downed and nowhere else.
+
+- type: entity
+  id: WFActionWolfmedCallForHelp
+  name: Call for help
+  description: Shout for help and mark yourself on medical HUDs for a minute.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    checkCanInteract: false
+    icon: Interface/Actions/scream.png
+    event: !type:WolfmedCallForHelpActionEvent
+      maxLength: 60
+
+# M2 (plan §5.3): Play dead replaces Fake Death (OD20), Downed only; Check yourself, Up or Downed.
+
+- type: entity
+  id: WFActionWolfmedPlayDead
+  name: Play dead
+  description: Lie still and look dead from a distance. Moving, speaking or doing anything ends it.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    checkCanInteract: false
+    icon:
+      sprite: Interface/Actions/actions_crit.rsi
+      state: fakedeath
+    event: !type:WolfmedPlayDeadActionEvent
+
+- type: entity
+  id: WFActionWolfmedCheckYourself
+  name: Check yourself
+  description: Look yourself over and list what is wrong, in words.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    checkCanInteract: false
+    icon: Interface/Actions/eyeopen.png
+    event: !type:WolfmedCheckYourselfActionEvent

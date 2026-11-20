@@ -1,0 +1,60 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: MonkeClosedWall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wall_monkestation.rsi
+    color: "#98A5AC"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wall_monkestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: MonkeMaterialSilk
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/silk_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/silk_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: wall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: MonkeRWall
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_monkestation.rsi
+    color: "#99A5AB"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_monkestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: reinforced_wall

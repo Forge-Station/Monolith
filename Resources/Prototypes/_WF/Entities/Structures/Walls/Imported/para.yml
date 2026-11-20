@@ -1,0 +1,289 @@
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralBananium
+  components:
+  - type: Construction
+    graph: Girder
+    node: bananiumWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/bananium_wall_paradise.rsi
+    state: bananium_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/bananium_wall_paradise.rsi
+  - type: IconSmooth
+    base: bananium_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralDiamond
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/diamond_wall_paradise.rsi
+    state: diamond_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/diamond_wall_paradise.rsi
+  - type: IconSmooth
+    base: diamond_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralGold
+  components:
+  - type: Construction
+    graph: Girder
+    node: goldWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/gold_wall_paradise.rsi
+    state: gold_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/gold_wall_paradise.rsi
+  - type: IconSmooth
+    base: gold_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralIron
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/iron_wall_paradise.rsi
+    state: iron_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/iron_wall_paradise.rsi
+  - type: IconSmooth
+    base: iron_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralPlasma
+  components:
+  - type: Construction
+    graph: Girder
+    node: plasmaWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall_paradise.rsi
+    state: plasma_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall_paradise.rsi
+  - type: IconSmooth
+    base: plasma_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralPlastitanium
+  components:
+  - type: StaticPrice
+    price: 110
+  - type: Construction
+    graph: Girder
+    node: plastitaniumWall
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plastitanium_wall_paradise.rsi
+    state: plastitanium_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plastitanium_wall_paradise.rsi
+  - type: IconSmooth
+    base: plastitanium_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralSandstone
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_wall_paradise.rsi
+    state: sandstone_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_wall_paradise.rsi
+  - type: IconSmooth
+    base: sandstone_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralSilver
+  components:
+  - type: Construction
+    graph: Girder
+    node: silverWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/silver_wall_paradise.rsi
+    state: silver_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/silver_wall_paradise.rsi
+  - type: IconSmooth
+    base: silver_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralTitanium
+  components:
+  - type: StaticPrice
+    price: 125
+  - type: Construction
+    graph: Girder
+    node: shuttleWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plastinum_wall.rsi
+    state: plastinum_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plastinum_wall.rsi
+  - type: IconSmooth
+    base: plastinum_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralUranium
+  components:
+  - type: Construction
+    graph: Girder
+    node: uraniumWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/uranium_wall_paradise.rsi
+    state: uranium_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/uranium_wall_paradise.rsi
+  - type: IconSmooth
+    base: uranium_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralWood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wood_wall_paradise.rsi
+    state: wood_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wood_wall_paradise.rsi
+  - type: IconSmooth
+    base: wood_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaSimulatedWall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wall_paradise.rsi
+    state: wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wall_paradise.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaMineralTitaniumSurvival
+  components:
+  - type: StaticPrice
+    price: 125
+  - type: Construction
+    graph: Girder
+    node: shuttleWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/survival_pod_walls.rsi
+    state: survival_pod_walls-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/survival_pod_walls.rsi
+  - type: IconSmooth
+    base: survival_pod_walls-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaBoss
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/boss_wall.rsi
+    state: boss_wall-0
+    offset: 0,0.125
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/boss_wall.rsi
+  - type: IconSmooth
+    base: boss_wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: ParaFlock
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/flock.rsi
+    state: flock-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/flock.rsi
+  - type: IconSmooth
+    base: flock-
+  - type: PointLight
+    radius: 1
+    energy: 0.5
+    color: "#19b299"

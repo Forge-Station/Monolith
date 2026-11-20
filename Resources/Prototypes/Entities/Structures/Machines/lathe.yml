@@ -18,7 +18,7 @@
         layer:
         - MachineLayer
   - type: Lathe
-    productValueModifier: 0.1 # Forge-change
+  - type: FabricationSiloClient # WOLFGATE(Lathe): lathes link fabrication silos
   - type: MaterialStorage
     whitelist: # Frontier
       tags: # Frontier
@@ -164,6 +164,7 @@
     unlitRunningState: unlit-building
     staticPacks:
     - ToolsStatic
+    - WFPlanetStatic # WOLFGATE(Planets): landing thruster kits and parachutes.
     - PartsStatic
     - AtmosStatic
     - CablesStatic
@@ -179,6 +180,7 @@
     - NFLights # Frontier
     - NFServiceStatic # Frontier
     - MonoRestraintsStatic # Mono
+    - TetherStatic # WOLFGATE(Tether)
   - type: EmagLatheRecipes
     emagStaticPacks:
     - StaticAmmoRecipePack
@@ -253,9 +255,7 @@
     - PowerCells
     - ScienceWeapons
     - Mining
-    - ForgeEngineeringTools # Forge-Change: handheld monitors
-    - ForgeTurretAdventurer # Forge-Change
-    - ForgeTurretKits # Forge-Change
+    - AtmosTools
     - ResearchedExplosives # Mono
     # - EngineeringWeapons # Frontier
     - Chemistry
@@ -273,7 +273,6 @@
     - CarpEquipment # Mono
     - UpgradeKits # Mono
     - UpgradeKits_Goob # Mono
-    - RCD # Mono!
     - SMSurgery # Shitmed Change
     # WD EDIT START
     - VisionGoggles
@@ -281,11 +280,9 @@
     - SmartGun # Goobstation
     # Einstein Engines Packs
     - Translators
-    # Forge-change-start
-    - BSparts
-    - ForgePublicWeapons
-    #Forge-Change-end
-
+    - RCD # Mono!
+    - WFXenobiologyTools # WOLFGATE(Xenobiology): slime scanner and xenovac
+    - WFSectorBeaconPack # WOLFGATE(SectorControl): company claim beacons
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - DynamicAmmoRecipePack
@@ -355,20 +352,14 @@
     - NFMedicalBoards # Frontier + Shitmed Change
     - NFServiceBoards # Frontier
     - MonoAdvancedShuttleComponents # Mono
-    - ForgeShipWeaponsDynamic # Forge-Change
-    - ForgeAdvancedShuttleComponents # Forge-Change
-    - ForgeBoardingTeleportRecipes # Forge-Change
-    - CloakingShuttleCircuitsPack # Forge-Change
     - CarpCaller # Mono
     - MechBoardsPlus
     - AiCoreBoard
     - S2MechBoards
     - EngineeringBoardsGoob #Goob Factorio port
-    - NanotrasenCircuitBoard # Forge-change
-    - DrakeIndustriesCircuitBoards # Forge-change
-    - ReactorCircuitboards # FH edit
-    - BsEnergyCircuitsPack # Forge-Change
+    - ReactorCircuitboards # FH edit\
     - ServiceBoardsGoob #Forge-Change
+    - WFXenobiologyBoards # WOLFGATE(Xenobiology): slime grinder and bounty console boards
   - type: MaterialStorage
     whitelist:
       tags:
@@ -387,34 +378,6 @@
     sprite: Structures/Machines/circuit_imprinter_hypercon.rsi
   - type: Machine
     board: CircuitImprinterHyperConvectionMachineCircuitboard
-  # Inherits CircuitImprinter Lathe fields except dynamicPacks: child replaces the whole list, so duplicate parent packs + T4.
-  - type: Lathe
-    dynamicPacks:
-    - MonoEconomyLatheBoards # Mono
-    - EngineeringBoards
-    - CargoBoards
-    - MedicalBoards
-    - ServiceBoards
-    - ScienceBoards
-    - CameraBoards
-    - MechBoards
-    - ShuttleBoards
-    - NFEngineeringBoards # Frontier
-    - NFMedicalBoards # Frontier + Shitmed Change
-    - NFServiceBoards # Frontier
-    - MonoAdvancedShuttleComponents # Mono
-    - ForgeAdvancedShuttleComponents # Forge
-    - ForgeBoardingTeleportRecipes # Forge
-    - CarpCaller # Mono
-    - MechBoardsPlus
-    - AiCoreBoard
-    - S2MechBoards
-    - EngineeringBoardsGoob #Goob Factorio port
-    - NanotrasenCircuitBoard # Forge-change
-    - DrakeIndustriesCircuitBoards # Forge-change
-    - CloakingShuttleCircuitsADSPack # Forge-change
-    - ReactorCircuitboards # FH edit
-    - ForgeHyperConvectionFSGTier4Boards # Forge — FSG T4 boards (disk-unlocked), hyper imprinter only
 
 - type: entity
   id: ExosuitFabricator
@@ -443,8 +406,8 @@
     - MechMiscStatic # Mono
     # Shitmed Change
     - IPCPartsStatic
+    - WFSynthOrgansStatic # WOLFGATE(Wolfmed): replacement synth organs
     dynamicPacks:
-    - NanotrasenMechWeapon # Forge-change
     - Robotics
     - BorgModules
     - MechParts
@@ -546,16 +509,12 @@
     - StaticAmmoRecipePack
     - StaticGrenades
     - SecurityWeaponsStatic
+    - WFRavagerDroneVouchersStatic # WOLFGATE(OldVessels): Ravager drone LPCs
     dynamicPacks:
-    - NanotrasenWeapon # Forge-change
-    - NanotrasenEquipment # Forge-change
-    - ForgeTurretNT # Forge-Change
-    - ForgeTurretKits # Forge-Change
     - SecurityEquipment
     - SecurityExplosives
     - DynamicAmmoRecipePack
     - SecurityWeapons
-    - ForgePublicWeapons # Forge-change
     - SecurityDisablers
     - SMCybernetics
     # Mono - Mechs
@@ -666,10 +625,10 @@
     - Chemistry
     - SyringeGuns # DeltaV
     - NFMedical # Frontier
-    - HMERecipes # Forge-change
     # Shitmed Change
     - SMSurgery
     - SMCybernetics
+    - WFWolfmedAutodocPrograms # WOLFGATE(Wolfmed): AUTODOC: the four program disks, behind the same research as the rest of medbay.
     # Einstein Engines Packs
     - Translators # Language
     - TranslatorImplanters # Language
@@ -701,7 +660,6 @@
     idleState: icon
     runningState: building
     staticPacks:
-    - NanotrasenClothing # Forge-change
     - ClothingCivilian
     - ClothingCargo
     - ClothingCommand
@@ -719,9 +677,7 @@
     - NFFloorTilesCarpet # Frontier
     - NFWallets # Frontier
     dynamicPacks: # Frontier
-    - NanotrasenClothing # Forge: AllTechPrintableTest only indexes dynamicPacks
     - NFPouches # Frontier
-    - ClothingEmpirePack # Forge-change
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ClothingCentComm
@@ -775,7 +731,6 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
-    - BioGenSwabsStatic
     - FriendlyCubesStatic # Frontier
     - NFBioGenIngredientsStatic # Frontier
     - NFBioGenMaterialsStatic # Frontier
@@ -813,6 +768,7 @@
       tags:
       - Ore
   - type: Lathe
+    partRatingMaterialUseMultiplier: 0.9 # Mono
     idleState: icon
     runningState: building
     defaultProductionAmount: 10
@@ -823,9 +779,12 @@
   - type: PlaceableSurface # DeltaV: Allow ore bags to dump into it directly
     isPlaceable: false # but not place on it if you just click it with a random item
   - type: OreSiloClient #Gives silo access to ore holding
-  # Forge-Change: accept ore from disposal trunks into MaterialStorage.
-  - type: OrePipeOutlet
-    maxInsertPerFlush: 40
+  # WOLFGATE(Mining) START: lathe upgrade kits don't fit ore processors; Structure repeats BaseStructure's tag
+  - type: Tag
+    tags:
+    - Structure
+    - WFNoLatheUpgradeKit
+  # WOLFGATE END
 
 - type: entity
   parent: OreProcessor
@@ -838,7 +797,9 @@
   - type: Machine
     board: OreProcessorIndustrialMachineCircuitboard
   - type: Lathe
-    materialUseMultiplier: 0.75
+    # WOLFGATE(Mining): smaller matter-bin bonus on the industrial processor, 0.92 -> 0.97
+    partRatingMaterialUseMultiplier: 0.97 # Mono
+    materialUseMultiplier: 0.6 # Mono
     timeMultiplier: 0.5
     staticPacks:
     - OreSmelting
@@ -929,22 +890,19 @@
   name: medical biofabricator
   description: Produces organs and other organic matter that can be surgically grafted onto patients with biomass.
   components:
-  # Forge-change-start
   - type: Sprite
-    sprite: _Forge/Structures/Machines/organprinter.rsi
+    sprite: _Shitmed/Structures/Machines/limbgrower.rsi
     snapCardinals: true
     layers:
-    - state: base
-    - state: screen
-      shader: unshaded
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
-    - state: running
+    - state: limbgrower_idleoff
       map: ["enum.LatheVisualLayers.IsRunning"]
-    - state: inserting
-      map: ["enum.MaterialStorageVisualLayers.Inserting"]
-    - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  # Forge-change-end
+  #    - state: limbgrower_idleoff
+  #      shader: unshaded
+  #      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  #    - state: inserting
+  #      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+  #    - state: panel
+  #      map: ["enum.WiresVisualLayers.MaintenancePanel"]
   - type: Machine
     board: MedicalBiofabMachineBoard
   - type: MaterialStorage
@@ -953,9 +911,8 @@
       - Sheet
       - RawMaterial
   - type: Lathe
-    idleState: base # Forge-change
-    runningState: running # Forge-change
-    unlitRunningState: screen_running # Forge-change
+    idleState: limbgrower_idleoff
+    runningState: limbgrower_idleon
     productValueModifier: 0.05
     staticPacks:
     - MedicalSynthLimbsStatic

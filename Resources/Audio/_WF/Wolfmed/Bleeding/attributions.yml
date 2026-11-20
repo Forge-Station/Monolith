@@ -1,0 +1,14 @@
+- files: ["blood1.ogg", "blood2.ogg", "blood3.ogg", "blood4.ogg", "blood5.ogg", "blood6.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Bobstation reignited (tgstation lineage), modular_septic/sound/gore, at commit 7850ebd9f86f8ba7cef23b34b60e309c39e156e9. They replace NovaSector's blood1-3 under the same names."
+  source: "https://gitgud.io/bobstation/bobstation-reignited/-/tree/7850ebd9f86f8ba7cef23b34b60e309c39e156e9/modular_septic/sound/gore"
+
+- files: ["splatter.ogg", "crackandbleed.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from NovaSector (originally tgstation), sound/effects/wounds, at commit 7499f47bfc6b768a72c922be46971ebfccf794a1. Downmixed to mono."
+  source: "https://github.com/NovaSector/NovaSector/tree/7499f47bfc6b768a72c922be46971ebfccf794a1/sound/effects/wounds"
+
+- files: ["artery3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from Bobstation reignited (tgstation lineage), modular_septic/sound/effects, at commit 7850ebd9f86f8ba7cef23b34b60e309c39e156e9. Converted from wav to mono ogg."
+  source: "https://gitgud.io/bobstation/bobstation-reignited/-/tree/7850ebd9f86f8ba7cef23b34b60e309c39e156e9/modular_septic/sound/effects"

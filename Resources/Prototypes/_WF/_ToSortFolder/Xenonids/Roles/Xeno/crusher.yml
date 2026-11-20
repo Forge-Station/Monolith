@@ -1,0 +1,15 @@
+# WOLFGATE: Wolfgate jobs have no inheritance, isCM, isXeno or hidden; the shared CMJobXenoBase fields are inlined.
+- type: job
+  id: CMXenoCrusher
+  name: cm-job-name-xeno-crusher
+  playTimeTracker: CMJobXenoCrusher
+  supervisors: cm-job-supervisors-queen
+  icon: RMCJobIconXeno
+  joinNotifyCrew: false
+  canBeAntag: false
+  setPreference: false
+  accessGroups:
+  - CMAccessXeno
+
+- type: playTimeTracker
+  id: CMJobXenoCrusher

@@ -42,7 +42,7 @@ public sealed partial class CEZLevelsRoofSystem
             if (!GridQuery.TryComp(map, out var mapGrid))
                 continue;
 
-            var enumerator = Map.GetAllTilesEnumerator(map, mapGrid);
+            var enumerator = Map.GetAllTiles(map, mapGrid);
             var roofComp = EnsureComp<RoofComponent>(map);
 
             while (enumerator.MoveNext(out var tileRef))

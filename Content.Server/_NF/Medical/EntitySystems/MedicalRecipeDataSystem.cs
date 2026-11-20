@@ -62,11 +62,11 @@ public sealed partial class MedicalRecipeDataSystem : SharedMedicalGuideDataSyst
             var proto = _protoMan.Index<EntityPrototype>(result);
             ReagentQuantity[] reagents = [];
             // Hack: assume there is only one solution in the result
-            if (proto.TryGetComponent<SolutionContainerManagerComponent>(out var manager, Factory))
+            if (proto.TryComp<SolutionContainerManagerComponent>(out var manager, Factory))
                 reagents = manager?.Solutions?.FirstOrNull()?.Value?.Contents?.ToArray() ?? [];
 
             DamageSpecifier? damage = null;
-            if (proto.TryGetComponent<HealingComponent>(out var healing, Factory))
+            if (proto.TryComp<HealingComponent>(out var healing, Factory))
                 damage = healing.Damage;
 
             // Limit the number of sources to 10 - shouldn't be an issue for medical recipes, but just in case.

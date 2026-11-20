@@ -34,7 +34,6 @@ using Content.Server._NF.Shipyard.Systems; // Frontier
 using Content.Server._NF.SectorServices; // Frontier
 using Content.Shared._Mono.Company;
 using Robust.Shared.Prototypes;
-using Content.Shared.DeviceNetwork.Components;
 
 namespace Content.Server.PDA
 {

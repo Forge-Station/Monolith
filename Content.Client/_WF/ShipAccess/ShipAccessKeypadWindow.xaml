@@ -1,0 +1,9 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               Title="{Loc 'ship-access-keypad-title'}"
+               MinSize="200 280"
+               Resizable="False">
+    <BoxContainer Orientation="Vertical" Margin="8 8 8 8" SeparationOverride="8">
+        <Label Name="CodeLabel" Text="" HorizontalAlignment="Center" StyleClasses="LabelHeading"/>
+        <GridContainer Name="Keys" Columns="3" HorizontalAlignment="Center" HSeparationOverride="4" VSeparationOverride="4"/>
+    </BoxContainer>
+</DefaultWindow>

@@ -1,0 +1,404 @@
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteMineralBrickOld
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/brick_wall_old.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/brick_wall_old.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteClosedWall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wall_coyote.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wall_coyote.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteCorrugatedGreen
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/corrugated_wall_green.rsi
+    state: wall-0
+    color: "#505A49"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/corrugated_wall_green.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteF13CoyoteDarkwoodwall
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wood_nordic.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wood_nordic.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteF13CoyoteOldwood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wood_wall_coyote.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wood_wall_coyote.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteF13Tentwall
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/tent_wall.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/tent_wall.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteF13Tunnel
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/utility_wall.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/utility_wall.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteF13Wood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wood_log.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wood_log.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteMineralBrick
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/brick_wall.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/brick_wall.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteMineralConcrete
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/concrete_coyote.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/concrete_coyote.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteMineralDiamond
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/diamond_wall_coyote.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/diamond_wall_coyote.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteMineralPlasma
+  components:
+  - type: Construction
+    graph: Girder
+    node: plasmaWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall_coyote.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall_coyote.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteMineralSilver
+  components:
+  - type: Construction
+    graph: Girder
+    node: silverWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/silver_wall_coyote.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/silver_wall_coyote.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteMineralTitanium
+  components:
+  - type: StaticPrice
+    price: 125
+  - type: Construction
+    graph: Girder
+    node: shuttleWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_wall_coyote.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_wall_coyote.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierTwo, BaseWallBitmask ]
+  id: CoyoteRWallF13vaultrusted
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWallRust
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rusty_reinforced_wall_coyote.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rusty_reinforced_wall_coyote.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteVault
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wall_vault.rsi
+    state: wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wall_vault.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: CoyoteF13WoodHouse
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/house_wall_dirty.rsi
+    state: wall-0
+    color: "#B4AAA3"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/house_wall_dirty.rsi
+  - type: IconSmooth
+    base: wall-
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: CoyoteRWallF13vault
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/f13vault_reinforced_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/f13vault_reinforced_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: vaultwall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CoyoteF13Vault
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/vault.rsi
+    state: vault0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/vault.rsi
+  - type: IconSmooth
+    key: walls
+    base: vault
+    mode: CardinalFlags
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: CoyoteRWallF13Vault
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/vault_reinforced.rsi
+    state: vaultrwall0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/vault_reinforced.rsi
+  - type: IconSmooth
+    key: walls
+    base: vaultrwall
+    mode: CardinalFlags
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CoyoteF13SunsetBrickSmall
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/brick_small.rsi
+    state: brick0
+    color: "#6A4E44"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/brick_small.rsi
+  - type: IconSmooth
+    key: walls
+    base: brick
+    mode: CardinalFlags

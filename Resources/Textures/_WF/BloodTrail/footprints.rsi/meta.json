@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "IMPERIAL SPACE, taken from https://github.com/AU-14/ColonialMarinesUniverse at e9fbdd07ac73ffa094aa681aea11988e6e81a074",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "footprint-left-bare-human"
+    },
+    {
+      "name": "footprint-right-bare-human"
+    },
+    {
+      "name": "footprint-shoes"
+    },
+    {
+      "name": "footprint-suit"
+    },
+    {
+      "name": "dragging-1"
+    },
+    {
+      "name": "dragging-2"
+    },
+    {
+      "name": "dragging-3"
+    },
+    {
+      "name": "dragging-4"
+    },
+    {
+      "name": "dragging-5"
+    }
+  ]
+}

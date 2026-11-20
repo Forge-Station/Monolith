@@ -3,7 +3,7 @@
   id: ArachnidCheliceraeDownwards
   bodyPart: HeadSide
   markingCategory: HeadSide
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chelicerae.rsi
     state: downwards
@@ -12,7 +12,7 @@
   id: ArachnidCheliceraeInwards
   bodyPart: HeadSide
   markingCategory: HeadSide
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chelicerae.rsi
     state: inwards
@@ -22,107 +22,197 @@
   id: ArachnidAppendagesDefault
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    long_primary_BEHIND: TailBehind
+    long_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    long_primary_BEHIND: long_primary_FRONT
+    long_secondary_BEHIND: long_secondary_FRONT
   sprites:
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: long_primary
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: long_secondary
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: long_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: long_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: long_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: long_secondary_BEHIND
 
 - type: marking
   id: ArachnidAppendagesSharp
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    sharp_primary_BEHIND: TailBehind
+    sharp_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    sharp_primary_BEHIND: sharp_primary_FRONT
+    sharp_secondary_BEHIND: sharp_secondary_FRONT
   sprites:
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: sharp_primary
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: sharp_secondary
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: sharp_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: sharp_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: sharp_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: sharp_secondary_BEHIND
 
 - type: marking
   id: ArachnidAppendagesStingers
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    stingers_primary_BEHIND: TailBehind
+    stingers_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    stingers_primary_BEHIND: stingers_primary_FRONT
+    stingers_secondary_BEHIND: stingers_secondary_FRONT
   sprites:
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: stingers_primary
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: stingers_secondary
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: stingers_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: stingers_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: stingers_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: stingers_secondary_BEHIND
 
 - type: marking
   id: ArachnidAppendagesZigZag
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    zigzag_primary_BEHIND: TailBehind
+    zigzag_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    zigzag_primary_BEHIND: zigzag_primary_FRONT
+    zigzag_secondary_BEHIND: zigzag_secondary_FRONT
   sprites:
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: zigzag_primary
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: zigzag_secondary
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: zigzag_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: zigzag_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: zigzag_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: zigzag_secondary_BEHIND
 
 - type: marking
   id: ArachnidAppendagesCurled
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    curled_primary_BEHIND: TailBehind
+    curled_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    curled_primary_BEHIND: curled_primary_FRONT
+    curled_secondary_BEHIND: curled_secondary_FRONT
   sprites:
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: curled_primary
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: curled_secondary
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: curled_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: curled_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: curled_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: curled_secondary_BEHIND
 
 - type: marking
   id: ArachnidAppendagesChipped
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    chipped_primary_BEHIND: TailBehind
+    chipped_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    chipped_primary_BEHIND: chipped_primary_FRONT
+    chipped_secondary_BEHIND: chipped_secondary_FRONT
   sprites:
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: chipped_primary
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: chipped_secondary
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: chipped_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: chipped_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: chipped_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: chipped_secondary_BEHIND
 
 - type: marking
   id: ArachnidAppendagesHarvest
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    harvest_primary_BEHIND: TailBehind
+    harvest_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    harvest_primary_BEHIND: harvest_primary_FRONT
+    harvest_secondary_BEHIND: harvest_secondary_FRONT
   sprites:
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: harvest_primary
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: harvest_secondary
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: harvest_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: harvest_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: harvest_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: harvest_secondary_BEHIND
 
 - type: marking
   id: ArachnidAppendagesShort
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    short_primary_BEHIND: TailBehind
+    short_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    short_primary_BEHIND: short_primary_FRONT
+    short_secondary_BEHIND: short_secondary_FRONT
   sprites:
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: short_primary
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: short_secondary
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: short_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: short_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: short_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: short_secondary_BEHIND
 
 - type: marking
   id: ArachnidAppendagesFreaky
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
+  layering: # WOLFGATE - the south frame draws behind the body, so the tail never covers anatomy
+    freaky_primary_BEHIND: TailBehind
+    freaky_secondary_BEHIND: TailBehind
+  colorLinks: # WOLFGATE - both halves of a tail share one colour
+    freaky_primary_BEHIND: freaky_primary_FRONT
+    freaky_secondary_BEHIND: freaky_secondary_FRONT
   sprites:
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: freaky_primary
-  - sprite: Mobs/Customization/Arachnid/appendages.rsi
-    state: freaky_secondary
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: freaky_primary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - split art
+    state: freaky_secondary_FRONT
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: freaky_primary_BEHIND
+  - sprite: _WF/Mobs/Customization/TailSplit/Mobs/Customization/Arachnid/appendages.rsi # WOLFGATE - south frame on TailBehind
+    state: freaky_secondary_BEHIND
 
 # Chest
 - type: marking
   id: ArachnidTorsoStripes
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: stripes
@@ -135,7 +225,7 @@
   id: ArachnidTorsoSlashes
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: slashes
@@ -148,7 +238,7 @@
   id: ArachnidTorsoX
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: x
@@ -161,7 +251,7 @@
   id: ArachnidTorsoCross
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: cross
@@ -174,7 +264,7 @@
   id: ArachnidTorsoHeart
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: heart
@@ -187,7 +277,7 @@
   id: ArachnidTorsoHourglass
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: hourglass
@@ -200,7 +290,7 @@
   id: ArachnidTorsoNailAndHammer
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: nail-and-hammer
@@ -213,7 +303,7 @@
   id: ArachnidTorsoStar
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: star
@@ -226,7 +316,7 @@
   id: ArachnidTorsoArrows
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: arrows
@@ -239,7 +329,7 @@
   id: ArachnidTorsoCore
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: core
@@ -252,7 +342,7 @@
   id: ArachnidTorsoFiddleback
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: fiddleback
@@ -265,7 +355,7 @@
   id: ArachnidTorsoSkull
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: skull
@@ -278,7 +368,7 @@
   id: ArachnidTorsoTarget
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chest.rsi
     state: target
@@ -292,7 +382,7 @@
   id: ArachnidRArmStripes
   bodyPart: RArm
   markingCategory: Arms
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/arms.rsi
     state: stripes_right
@@ -305,7 +395,7 @@
   id: ArachnidLArmStripes
   bodyPart: LArm
   markingCategory: Arms
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/arms.rsi
     state: stripes_left
@@ -319,7 +409,7 @@
   id: ArachnidRLegStripes
   bodyPart: RLeg
   markingCategory: Legs
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/legs.rsi
     state: stripes_right
@@ -332,7 +422,7 @@
   id: ArachnidLLegStripes
   bodyPart: LLeg
   markingCategory: Legs
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/legs.rsi
     state: stripes_left
@@ -347,7 +437,7 @@
   bodyPart: Chest
   markingCategory: Overlay
   forcedColoring: true
-  speciesRestriction: [Arachnid]
+  speciesRestriction: [Arachnid, ProtoArachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/overlay.rsi
     state: fuzzy

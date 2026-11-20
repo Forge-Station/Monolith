@@ -79,6 +79,7 @@ namespace Content.Server.NPC.Systems
         public void OnNPCMapInit(EntityUid uid, HTNComponent component, MapInitEvent args)
         {
             component.Blackboard.SetValue(NPCBlackboard.Owner, uid);
+            EntityManager.System<Content.Server._WF.PlanetNatives.WFPlanetNativeSystem>().TryMark(uid); // WOLFGATE(PlanetNatives): NPCs born on a planet leave each other alone.
             WakeNPC(uid, component);
         }
 

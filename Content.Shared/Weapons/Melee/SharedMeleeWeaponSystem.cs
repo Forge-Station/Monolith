@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Shared._WF.Wolfmed.Sounds; // WOLFGATE(Wolfmed)
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
@@ -47,6 +48,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
     [Dependency] private   MeleeSoundSystem        _meleeSound      = default!;
     [Dependency] private   SharedPhysicsSystem     _physics         = default!;
     [Dependency] private   StaminaSystem           _stamina         = default!;
+    [Dependency] private   WolfmedOrganicSoundSystem _wolfmedSounds = default!; // WOLFGATE(Wolfmed): Bob's stab and melee hit sounds on flesh
+    [Dependency] private   IPrototypeManager        _protoManager    = default!;
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -317,12 +320,12 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         }
 
         // Use inhands entity if we got one.
-        if (EntityManager.TryGetComponent(entity, out HandsComponent? hands) &&
+        if (TryComp(entity, out HandsComponent? hands) &&
             hands.ActiveHandEntity is { } held)
         {
             // Make sure the entity is a weapon AND it doesn't need
             // to be equipped to be used (E.g boxing gloves).
-            if (EntityManager.TryGetComponent(held, out melee) &&
+            if (TryComp(held, out melee) &&
                 !melee.MustBeEquippedToUse)
             {
                 weaponUid = held;
@@ -586,7 +589,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(target.Value, attackedEvent);
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
-        var damageResult = Damageable.TryChangeDamage(target, modifiedDamage, origin: user, armorPenetration: component.ArmorPenetration, partMultiplier: component.ClickPartDamageMultiplier); // Shitmed Change
+        var damageResult = Damageable.TryChangeDamage(target, modifiedDamage, origin: user, armorPenetration: component.ArmorPenetration, partMultiplier: component.ClickPartDamageMultiplier, tool: meleeUid); // Shitmed Change // WOLFGATE(Wolfmed): W1: tool = the weapon, so Wolfmed's wound rules can tell melee from gunfire.
 
         if (damageResult is {Empty: false})
         {
@@ -611,7 +614,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        _meleeSound.PlayHitSound(target.Value, playerUid, GetHighestDamageSound(modifiedDamage, ProtoMan), hitEvent.HitSoundOverride, component);
+        _meleeSound.PlayHitSound(target.Value, playerUid, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride ?? _wolfmedSounds.GetHitSound(target.Value, modifiedDamage, meleeUid, user, component), component); // WOLFGATE(Wolfmed): flesh takes Bob's stab or melee sound
+        _wolfmedSounds.PlayHitOverlays(target.Value, playerUid, meleeUid, modifiedDamage); // WOLFGATE(Wolfmed): playtest 4, the crowbar's clang and the heavy chop over the hit sound
 
         if (damageResult?.GetTotal() > FixedPoint2.Zero)
         {
@@ -764,7 +768,7 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             RaiseLocalEvent(entity, attackedEvent);
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
 
-            var damageResult = Damageable.TryChangeDamage(entity, modifiedDamage, origin: user, armorPenetration: component.ArmorPenetration, partMultiplier: component.HeavyPartDamageMultiplier); // Shitmed Change
+            var damageResult = Damageable.TryChangeDamage(entity, modifiedDamage, origin: user, armorPenetration: component.ArmorPenetration, partMultiplier: component.HeavyPartDamageMultiplier, tool: meleeUid); // Shitmed Change // WOLFGATE(Wolfmed): W1: tool = the weapon, see the light attack above.
 
             if (damageResult != null && damageResult.GetTotal() > FixedPoint2.Zero)
             {
@@ -794,7 +798,8 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         if (entities.Count != 0)
         {
             var target = entities.First();
-            _meleeSound.PlayHitSound(target, playerUid, GetHighestDamageSound(appliedDamage, ProtoMan), hitEvent.HitSoundOverride, component);
+            _meleeSound.PlayHitSound(target, playerUid, GetHighestDamageSound(appliedDamage, _protoManager), hitEvent.HitSoundOverride ?? _wolfmedSounds.GetHitSound(target, appliedDamage, meleeUid, user, component), component); // WOLFGATE(Wolfmed): flesh takes Bob's stab or melee sound
+            _wolfmedSounds.PlayHitOverlays(target, playerUid, meleeUid, appliedDamage); // WOLFGATE(Wolfmed): playtest 4, as above
         }
 
         // Forge-Change: the first target can already be gone. Transform() would throw.

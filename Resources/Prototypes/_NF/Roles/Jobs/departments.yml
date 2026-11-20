@@ -14,37 +14,28 @@
   id: Frontier
   name: department-Frontier
   description: department-NF-description
-  color: "#334e6d" # Forge
-  weight: 80 # Forge
-  primary: false
+  color: "#334E6D"
+  weight: 50 # accounted for in jobs
   roles:
   - StationRepresentative
   - StationTrafficController
   - CCServiceWorker # nyano
-  - Nt_Scientist # Forge
-  - Nt_Engineer # Forge
-  - Nt_Botanist # Forge
-  - Nt_Cook # Forge
   - NFJanitor
   - MailCarrier # nyano
   - SecurityGuard
-  #- DirectorOfCare
-  #- MdMedic
-  #- NtMedic
-  #- NtMedicGunner
-  #- NtMedicPilot
+  - DirectorOfCare
+  - MdMedic
 
-# - type: department
-  # id: Antag
-  # name: department-Antag
-  # description: department-NFAntag-description
-  # color: "#DE3A3A"
-  # weight: 115 # Mono
-  # roles:
-  # - PirateCaptain
-  # - PirateFirstMate
-  # - PDVDenasvar # Mono
-  # - Pirate
-  # - PDVInfiltrator # Mono
-  # - PdvBorg # Mono
-  # - Prisoner #nyano
+- type: department
+  id: Antag
+  name: department-Antag
+  description: department-NFAntag-description
+  color: "#DE3A3A"
+  weight: 115 # Mono
+  roles:
+  - PirateCaptain
+  - WFPdvJarrah # WOLFGATE(PdvMedic): PDV field medic
+  - Pirate
+  - PdvBorg # Mono
+  - PDVTarkhan
+  - Prisoner #nyano

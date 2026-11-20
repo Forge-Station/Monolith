@@ -1,0 +1,142 @@
+# Carcinoma's wild slimes: small patches of see-through jelly on the surface, each over a slime grotto in the Gut that
+# shows through it. A sparse zone noise picks where they may be and a blob noise lays the patches. The surface layers
+# (from WFBiomeCarcinoma) and the cavern layers (from WFCavernBiomeCarcinoma) share both noises: the cavern's seed is
+# the surface's plus 7949, so each cavern noise seed is the surface one less 7949, and lower thresholds make each grotto
+# a little wider than its patch.
+
+- type: wfWildSlimeHabitat
+  id: WFWildSlimesCarcinoma
+  surface: WFSurfaceCarcinoma
+  breed: WFCarcinomaMutation
+  babyPrototype: WFMobSlimeTranslucentBaby
+  adultPrototype: WFMobSlimeTranslucentAdult
+  adultChance: 0.3
+  patchTemplate: WFCarcinomaSlimeZone
+  patchTile: WFFloorFleshJelly
+  grottoTile: WFCavernFloorFleshJelly
+  minPatchTiles: 24
+  surfaceSlimes: 3
+  grottoSlimes: 2
+  respawnDelay: 600
+
+# The ids say "flesh" so the planet map colours the jelly as flesh.
+- type: tile
+  id: WFFloorFleshJelly
+  parent: WFFloorFlesh
+  name: tiles-wf-flesh-jelly
+  sprite: /Textures/_WF/WildSlimes/Tiles/flesh_jelly.png
+  variants: 4
+  placementVariants: [1, 1, 1, 1]
+  weather: true
+  transparent: true
+  footstepSounds:
+    collection: FootstepBlood
+
+# The grotto floor: the same jelly, solid, since nothing lies below the Gut.
+- type: tile
+  id: WFCavernFloorFleshJelly
+  parent: WFFloorFleshJelly
+  sprite: /Textures/_WF/WildSlimes/Tiles/flesh_jelly_cavern.png
+  transparent: false
+  indestructible: true
+  deconstructTools: []
+  baseTurf: ""
+
+- type: biomeTemplate
+  id: WFCarcinomaSlimeZone
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCarcinomaSlimePatch
+    threshold: 0.86
+    noise: { seed: 131, noiseType: OpenSimplex2, frequency: 0.03 }
+
+- type: biomeTemplate
+  id: WFCavernSlimeZoneCarcinoma
+  layers:
+  - !type:BiomeMetaLayer
+    template: WFCavernSlimeGrottoCarcinoma
+    threshold: 0.83
+    noise: { seed: -7818, noiseType: OpenSimplex2, frequency: 0.03 }
+
+- type: biomeTemplate
+  id: WFCarcinomaSlimePatch
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFFloorFleshJelly
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFleshJelly]
+    entities: [WFCarcinomaJellyMound, WFCarcinomaJellyMoundSmall]
+    threshold: 0.88
+    noise: { seed: 133, noiseType: OpenSimplex2, frequency: 1 }
+
+- type: biomeTemplate
+  id: WFCavernSlimeGrottoCarcinoma
+  layers:
+  - !type:BiomeTileLayer
+    tile: WFCavernFloorFleshJelly
+    threshold: -1
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFleshJelly]
+    entities: [WFCavernNerveCluster]
+    threshold: 0.96
+    noise: { seed: 135, noiseType: OpenSimplex2, frequency: 1 }
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFCavernFloorFleshJelly]
+    entities: [WFCarcinomaJellyMound, WFCarcinomaJellyMoundSmall]
+    threshold: 0.88
+    noise: { seed: 134, noiseType: OpenSimplex2, frequency: 1 }
+
+- type: entity
+  id: WFCarcinomaJellyMound
+  name: jelly mound
+  description: A quivering heap of see-through jelly. Something small moves inside it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Sprite
+    sprite: _WF/WildSlimes/jelly_mound.rsi
+    state: mound
+    drawdepth: FloorObjects
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.7
+    sprintSpeedModifier: 0.7
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/Fluids/splat.ogg
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: WFCarcinomaJellyMound
+  id: WFCarcinomaJellyMoundSmall
+  name: jelly blob
+  description: A small wobbling lump of jelly.
+  components:
+  - type: Sprite
+    state: blob

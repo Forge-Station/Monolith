@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created by EmoGarbage, with influence from xeno burrower sprite; recoloured for Wolfgate (crypt tick) by Tools/_WF/Caverns/gen_life_karst_cinder_sandstone.py",
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

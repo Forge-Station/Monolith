@@ -10,7 +10,7 @@ public abstract partial class SharedOreSiloSystem : EntitySystem
     [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    [Dependency] private readonly EntityQuery<OreSiloClientComponent> _clientQuery = default!;
+    [Dependency] private EntityQuery<OreSiloClientComponent> _clientQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

@@ -1,0 +1,383 @@
+# The Umbral Deeps' own life. Crawls and bedrock galleries: deep bats, umbral spiders, umbral caps and pale lichen.
+# Shadow groves: bats, shadow cats and glow slugs under dark wood. Geode chambers: geode crabs, geode clusters, bursters
+# and radiant crystal. The deep nest: xenos, wild weeds and eggs. Names are in Locale/en-US/_WF/Caverns/life_aerumna.ftl.
+
+# ---- Wildlife ---------------------------------------------------------------------------------------------------
+
+- type: entity
+  abstract: true
+  id: WFCavernAerumnaNoBreath
+  components:
+  - type: BreathingImmunity
+
+# A black bat that nests in the groves. It only flutters about.
+- type: entity
+  parent: [MobBat, WFCavernAerumnaNoBreath]
+  id: WFMobCavernDeepBat
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: bat
+      sprite: _WF/Caverns/Life/deep_bat.rsi
+
+# A blind spider the colour of the chromite; it feels you coming through the rock.
+- type: entity
+  parent: [MobSpiderSpace, WFCavernAerumnaNoBreath]
+  id: WFMobCavernUmbralSpider
+  components:
+  - type: Sprite
+    color: "#7a5ab0"
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      80: Critical
+      120: Dead
+
+# An ore crab grown from pink geode crystal; it drops what it is made of.
+- type: entity
+  parent: [MobPlasmaCrabNF, WFCavernAerumnaNoBreath]
+  id: WFMobCavernGeodeCrab
+  components:
+  - type: Sprite
+    color: "#ff8fe0"
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 4
+        Slash: 5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 70
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardCrystalPink:
+            min: 1
+            max: 3
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# ---- Spawner tables, one per hall -------------------------------------------------------------------------------
+
+- type: entityTable
+  id: WFCavernFaunaAerumnaGrove
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCavernDeepBat
+      weight: 4
+    - id: WFMobShadowCat
+      weight: 3
+    - id: WFMobGlowSlug
+      weight: 2
+    - id: WFMobCavernUmbralSpider
+      weight: 1
+
+- type: entity
+  id: WFCavernFaunaAerumnaGrove
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaAerumnaGrove
+
+- type: entityTable
+  id: WFCavernFaunaAerumnaGeode
+  table: !type:GroupSelector
+    children:
+    - id: WFMobCavernGeodeCrab
+      weight: 5
+    - id: MobLuminousObject
+      weight: 1
+    - id: MobArgocyteSlurva
+      weight: 2
+
+- type: entity
+  id: WFCavernFaunaAerumnaGeode
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaAerumnaGeode
+
+# The nest's own: nothing but xenos.
+- type: entityTable
+  id: WFCavernFaunaAerumnaNest
+  table: !type:GroupSelector
+    children:
+    - id: MobXenoRunner
+      weight: 5
+    - id: MobXenoDrone
+      weight: 4
+    - id: MobXenoSpitter
+      weight: 2
+    - id: MobXenoPraetorian
+      weight: 0.5
+
+- type: entity
+  id: WFCavernFaunaAerumnaNest
+  parent: MarkerBase
+  categories: [HideSpawnMenu]
+  components:
+  - type: WFPlanetFaunaSpawner
+    table: WFCavernFaunaAerumnaNest
+
+# ---- Produce ----------------------------------------------------------------------------------------------------
+
+# Two cook into mushroom soup like any foraged mushroom.
+- type: entity
+  parent: WFWildMushroomBase
+  id: WFUmbralCap
+  components:
+  - type: Sprite
+    color: "#b79cf2"
+
+- type: microwaveMealRecipe
+  id: RecipeWFUmbralCapSoup
+  name: umbral cap soup recipe
+  result: FoodSoupMushroom
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    WFUmbralCap: 2
+  recipeType:
+  - Oven
+  - Microwave
+
+# Eat it for a little of everything the body needs mending; cut it for a poultice like any herb.
+- type: entity
+  parent: WFHealingHerbBase
+  id: WFPaleLichen
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/aloe.rsi
+    state: produce
+    color: "#d8dcf8"
+
+# ---- Plants -----------------------------------------------------------------------------------------------------
+
+# A cap that grows where the chromite is damp; pick it and cook it.
+- type: entity
+  parent: NebulaFloraPlantMushroom
+  id: WFCavernUmbralCapPlant
+  components:
+  - type: Sprite
+    layers:
+    - state: t_mushroom_blue1
+      color: "#c9b4ff"
+      map: ["plant"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6" }
+          False: { scale: "1,1" }
+  - type: WFRegrowingHarvest
+    harvestTime: 1.5
+    regrowTime: 600
+    table: !type:AllSelector
+      children:
+      - id: WFUmbralCap
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# Pale lichen on the bedrock; cut it with a knife, eat it or bind it on a wound.
+- type: entity
+  parent: BaseFlora
+  id: WFCavernPaleLichenPlant
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: gardencold
+      color: "#e4e8ff"
+      map: ["plant"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6", color: "#7a7e96" }
+          False: { scale: "1,1", color: "#e4e8ff" }
+  - type: WFRegrowingHarvest
+    tool: Slicing
+    harvestTime: 1.5
+    regrowTime: 720
+    harvestSound:
+      collection: WFFloraVineSnap
+    table: !type:AllSelector
+      children:
+      - id: WFPaleLichen
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# A pink crystal cluster in the geodes; chipped with a pickaxe or shovel for shards, and it grows back.
+- type: entity
+  parent: BaseFlora
+  id: WFCavernGeodeCluster
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_rocks.rsi
+    layers:
+    - state: bsc
+      color: "#ff9ad8"
+      map: ["plant"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFRegrowingHarvestVisuals.Harvested:
+        plant:
+          True: { scale: "0.6,0.6", color: "#8a5f7e" }
+          False: { scale: "1,1", color: "#ff9ad8" }
+  - type: WFRegrowingHarvest
+    tool: Digging
+    toolTags: [ Pickaxe ]
+    toolHint: wf-harvest-tool-pickaxe-or-shovel
+    harvestTime: 3
+    regrowTime: 720
+    harvestSound:
+      collection: GlassBreak
+    table: !type:AllSelector
+      children:
+      - id: ShardCrystalPink
+        amount: !type:RangeNumberSelector
+          range: 1, 2
+
+# A geode that has grown too full. Walk up to it and it cracks, then bursts in pink shards.
+- type: entity
+  parent: BaseFlora
+  id: WFCavernGeodeBloom
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: lamp
+      color: "#ff7ad9"
+      map: ["geode"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        geode:
+          Idle: { scale: "1,1", color: "#ff7ad9" }
+          Armed: { scale: "1.2,1.2", color: "#ffd6f4" }
+          Spent: { scale: "1,1", color: "#ff7ad9" }
+  - type: WFReactiveFlora
+    behaviour: Explode
+    range: 1.1
+    checkInterval: 0.4
+    armDelay: 1.2
+    armSound:
+      collection: WFFloraCrystalCharge
+    armPopup: wf-cavern-geode-cracks
+    sound:
+      collection: GlassBreak
+    popup: wf-cavern-geode-bursts
+    burstRadius: 1.5
+    burstDamage:
+      types:
+        Piercing: 16
+    burstSpawns:
+    - ShardCrystalPink
+    burstOnDamage: false
+    ignoreFactions: [SimpleHostile, Passive, Xeno]
+
+# A violet crystal that hums with more than light. Standing near it for long is a mistake.
+- type: entity
+  parent: BaseFlora
+  id: WFCavernRadiantCrystal
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_rocks.rsi
+    layers:
+    - state: bsc
+      color: "#c070ff"
+      map: ["crystal"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        crystal:
+          Idle: { scale: "1,1", color: "#c070ff" }
+          Armed: { scale: "1.1,1.1", color: "#e8c4ff" }
+          Spent: { scale: "1,1", color: "#c070ff" }
+  - type: WFReactiveFlora
+    behaviour: Irradiate
+    range: 2.2
+    cooldown: 3
+    checkInterval: 1
+    maxTargets: 0
+    radsPerSecond: 1.5
+    sound:
+      collection: WFFloraCrystalHum
+    ignoreFactions: [Xeno]
+
+# A dark bulb on the chromite that spits acid at whatever walks within sight of it.
+- type: entity
+  parent: BaseFlora
+  id: WFCavernAcidSpitter
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Objects/Decoration/Flora/flora_alien_plants.rsi
+    layers:
+    - state: planttop1
+      color: "#9b6bd0"
+      map: ["bulb"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WFReactiveFloraVisuals.State:
+        bulb:
+          Idle: { color: "#9b6bd0" }
+          Armed: { color: "#d4ff7a" }
+          Spent: { color: "#9b6bd0" }
+  - type: WFReactiveFlora
+    behaviour: Spit
+    range: 5
+    cooldown: 8
+    checkInterval: 0.5
+    projectile: WFCavernAcidSpit
+    projectileSpeed: 8
+    sound:
+      collection: WFFloraSpit
+    ignoreFactions: [Passive, SimpleHostile, SimpleNeutral, Xeno]
+
+- type: entity
+  id: WFCavernAcidSpit
+  parent: BaseBullet
+  categories: [HideSpawnMenu]
+  components:
+  - type: Sprite
+    layers:
+    - state: bullet
+      shader: unshaded
+      color: "#b6ff5a"
+  - type: Projectile
+    damage:
+      types:
+        Caustic: 8
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Tracer
+    color: "#FFB6FF5A"
+    length: 1

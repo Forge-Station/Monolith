@@ -10,6 +10,7 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Vests/webvest.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.6 #ballistic plates = better protection
@@ -33,6 +34,7 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Vests/mercwebvest.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.65

@@ -67,7 +67,7 @@ public sealed partial class TargetingUIController : UIController, IOnStateEntere
     public void CycleTarget(TargetBodyPart bodyPart)
     {
         if (_playerManager.LocalEntity is not { } user
-            || _entManager.GetComponent<TargetingComponent>(user) is not { } targetingComponent
+            || !_entManager.TryGetComponent<TargetingComponent>(user, out var targetingComponent) // WOLFGATE(Wolfmed): GetComponent threw for an aghost using the analyzer doll
             || TargetingControl == null)
             return;
 

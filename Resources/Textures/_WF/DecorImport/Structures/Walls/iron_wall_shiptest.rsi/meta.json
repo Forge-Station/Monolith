@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "iron_wall-0"
+    },
+    {
+      "name": "iron_wall-1"
+    },
+    {
+      "name": "iron_wall-2"
+    },
+    {
+      "name": "iron_wall-3"
+    },
+    {
+      "name": "iron_wall-4"
+    },
+    {
+      "name": "iron_wall-5"
+    },
+    {
+      "name": "iron_wall-6"
+    },
+    {
+      "name": "iron_wall-7"
+    },
+    {
+      "name": "iron_wall-8"
+    },
+    {
+      "name": "iron_wall-9"
+    },
+    {
+      "name": "iron_wall-10"
+    },
+    {
+      "name": "iron_wall-11"
+    },
+    {
+      "name": "iron_wall-12"
+    },
+    {
+      "name": "iron_wall-13"
+    },
+    {
+      "name": "iron_wall-14"
+    },
+    {
+      "name": "iron_wall-15"
+    },
+    {
+      "name": "iron_wall-21"
+    },
+    {
+      "name": "iron_wall-23"
+    },
+    {
+      "name": "iron_wall-29"
+    },
+    {
+      "name": "iron_wall-31"
+    },
+    {
+      "name": "iron_wall-38"
+    },
+    {
+      "name": "iron_wall-39"
+    },
+    {
+      "name": "iron_wall-46"
+    },
+    {
+      "name": "iron_wall-47"
+    },
+    {
+      "name": "iron_wall-55"
+    },
+    {
+      "name": "iron_wall-63"
+    },
+    {
+      "name": "iron_wall-74"
+    },
+    {
+      "name": "iron_wall-75"
+    },
+    {
+      "name": "iron_wall-78"
+    },
+    {
+      "name": "iron_wall-79"
+    },
+    {
+      "name": "iron_wall-95"
+    },
+    {
+      "name": "iron_wall-110"
+    },
+    {
+      "name": "iron_wall-111"
+    },
+    {
+      "name": "iron_wall-127"
+    },
+    {
+      "name": "iron_wall-137"
+    },
+    {
+      "name": "iron_wall-139"
+    },
+    {
+      "name": "iron_wall-141"
+    },
+    {
+      "name": "iron_wall-143"
+    },
+    {
+      "name": "iron_wall-157"
+    },
+    {
+      "name": "iron_wall-159"
+    },
+    {
+      "name": "iron_wall-175"
+    },
+    {
+      "name": "iron_wall-191"
+    },
+    {
+      "name": "iron_wall-203"
+    },
+    {
+      "name": "iron_wall-207"
+    },
+    {
+      "name": "iron_wall-223"
+    },
+    {
+      "name": "iron_wall-239"
+    },
+    {
+      "name": "iron_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

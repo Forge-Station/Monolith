@@ -1,0 +1,47 @@
+- type: entity
+  parent: IDCardStandard
+  id: WFAsfEnvoyIDCard
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Misc/id_cards.rsi
+    layers:
+    - state: asfbase
+    - state: idasfenvoy
+  - type: PresetIdCard
+    job: WFAsfEnvoy
+
+- type: entity
+  parent: IDCardStandard
+  id: WFAsfEnforcerIDCard
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Misc/id_cards.rsi
+    layers:
+    - state: asfbase
+    - state: idasfenforcer
+  - type: PresetIdCard
+    job: WFAsfEnforcer
+
+- type: entity
+  parent: IDCardStandard
+  id: WFAsfFieldResearcherIDCard
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Misc/id_cards.rsi
+    layers:
+    - state: asfbase
+    - state: idasfresearcher
+  - type: PresetIdCard
+    job: WFAsfFieldResearcher
+
+- type: entity
+  parent: IDCardStandard
+  id: WFAsfColonistIDCard
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/Misc/id_cards.rsi
+    layers:
+    - state: asfbase
+    - state: idasfcolonist
+  - type: PresetIdCard
+    job: WFAsfColonist

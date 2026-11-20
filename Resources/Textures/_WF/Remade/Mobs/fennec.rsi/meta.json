@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-1.0 at https://github.com/DS-13-Dev-Team/DS13-1.0 (icons/mob/necromorph/leaper_fennec.dmi)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blank"
+    },
+    {
+      "name": "example",
+      "directions": 4
+    },
+    {
+      "name": "example_dead",
+      "directions": 4
+    },
+    {
+      "name": "head",
+      "directions": 4
+    },
+    {
+      "name": "r_arm",
+      "directions": 4
+    },
+    {
+      "name": "l_arm",
+      "directions": 4
+    },
+    {
+      "name": "tail",
+      "directions": 4
+    },
+    {
+      "name": "torso",
+      "directions": 4
+    },
+    {
+      "name": "torso_lying"
+    },
+    {
+      "name": "tail_lying"
+    },
+    {
+      "name": "head_lying"
+    },
+    {
+      "name": "r_arm_lying"
+    },
+    {
+      "name": "l_arm_lying"
+    },
+    {
+      "name": "full",
+      "directions": 4
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

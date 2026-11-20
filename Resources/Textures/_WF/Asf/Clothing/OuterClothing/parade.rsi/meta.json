@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest and modified for use. Source repository: https://github.com/shiptest-ss13/Shiptest. Ported from Hullrot: Eclipsion (https://github.com/eclipsion-team/eclipsion, _Crescent/Clothing/Empire/OuterClothing/mandateparade.rsi) for Wolfgate. Inhands: warden.rsi from upstream SS14 (CC-BY-SA-3.0), repaletted to this item for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

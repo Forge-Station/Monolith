@@ -592,9 +592,24 @@
     flavors:
       - mushroom
       - jelly
+  # WOLFGATE(JigglePhysics) START: amanita jelly wobbles, from Trauma Station
+  - type: JigglePhysics
+    springiness: 30
+    damping: 0.3
+    inertiaScale: 15
+    jiggleLimit: 0.2
+    slapLimit: 3
+    displacementsRsi: _WF/JigglePhysics/jelly_jiggle.rsi
+    displacementCount: 3
+    layers:
+    - jiggle
   - type: Sprite
     sprite: Objects/Consumable/Food/meals.rsi
-    state: amanita-jelly
+    # state: amanita-jelly
+    layers:
+    - state: amanita-jelly
+      map: [ "jiggle" ]
+  # WOLFGATE END
   - type: SolutionContainerManager
     solutions:
       food:

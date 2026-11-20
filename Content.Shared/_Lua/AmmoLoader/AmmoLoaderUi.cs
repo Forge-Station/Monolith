@@ -31,6 +31,10 @@ public sealed class AmmoLoaderUnloadOneMessage : BoundUserInterfaceMessage
 [Serializable, NetSerializable]
 public sealed class AmmoLoaderEjectAllMessage : BoundUserInterfaceMessage;
 
+// Forge-Change: fill every assigned ship gun from storage.
+[Serializable, NetSerializable]
+public sealed class AmmoLoaderReplenishMessage : BoundUserInterfaceMessage;
+
 [Serializable, NetSerializable]
 public sealed class AmmoLoaderLoadTurretMessage : BoundUserInterfaceMessage
 {

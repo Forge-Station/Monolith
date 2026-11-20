@@ -26,6 +26,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared._WF.RMCCore.Storage; // WOLFGATE(RMCCore)
 
 namespace Content.Shared.Storage.EntitySystems;
 
@@ -483,6 +484,13 @@ public abstract partial class SharedEntityStorageSystem : EntitySystem
         RaiseLocalEvent(toInsert, ref attemptEvent);
         if (attemptEvent.Cancelled)
             return false;
+
+        // WOLFGATE(RMCCore) START: RMC's BlockEntityStorage needs to know which storage the entity is going into
+        var rmcAttemptEvent = new RMCInsertIntoEntityStorageAttemptEvent(container);
+        RaiseLocalEvent(toInsert, ref rmcAttemptEvent);
+        if (rmcAttemptEvent.Cancelled)
+            return false;
+        // WOLFGATE END
 
         var targetIsMob = HasComp<BodyComponent>(toInsert);
         var storageIsItem = HasComp<ItemComponent>(container);

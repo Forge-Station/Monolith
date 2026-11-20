@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Bushy + normal tail sprites and ear sprites Taken from https://github.com/ParadiseSS13/Paradise and edited by Floofers and SuperJoelD00D. Shark tail sprite created by BlitzTheSquishy. Split into FRONT/BEHIND states for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tail_protogen_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "tail_protogen_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "bushy_tail_protogen_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "bushy_tail_protogen_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "shark_tail_protogen_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "shark_tail_protogen_BEHIND",
+      "directions": 4
+    }
+  ]
+}

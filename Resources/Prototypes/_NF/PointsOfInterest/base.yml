@@ -12,13 +12,13 @@
   abstract: true
   minimumDistance: 4000 # Some sane defaults
   maximumDistance: 8000
-  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, MonoRogueTSF, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed ] # Behold my list of gamerules
+  # WOLFGATE(ReaverCampaign): the Contested Sector game mode spawns the same sector as Standard
+  spawnGamePreset: [ NFAdventure, NFPirate, MonoStandard, WFContestedSector, MonoRogueTSF, MonoRogueUSSP, MonoTSFUSSP, MonoADS, MonoChimera, MonoMixed   ] # Behold my list of gamerules
   spawnGroup: Optional
   addComponents:
   - type: IFF
     color: "#ffa600"
     readOnly: true
-  - type: CleanupImmune # Forge-Change: idle shuttle cleanup must not despawn POIs
 
 - type: pointOfInterest
   parent: BaseMobilePOI

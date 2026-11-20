@@ -18,7 +18,7 @@ public partial class MobStateSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     private ISawmill _sawmill = default!;
 
-    [Dependency] private readonly EntityQuery<MobStateComponent> _mobStateQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;
 
     public override void Initialize()
     {

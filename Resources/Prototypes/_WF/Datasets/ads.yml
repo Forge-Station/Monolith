@@ -1,0 +1,66 @@
+# Names for the Automated Defense System's units: a core's designation, then the unit's serial number.
+
+- type: dataset
+  id: WFNamesAdsDesignation
+  values:
+  - Glimmer
+  - Orion
+  - Expanse
+  - Symphony
+  - Chorus
+  - Flashpoint
+  - Phoron
+  - Conquest
+  - Prime
+  - Firestorm
+  - Retaliation
+  - Horizon
+  - Marksman
+  - Barricade
+  - Vein
+  - Zero
+  - Midnight
+  - Interdiction
+  - Mist
+  - Granite
+  - Typhoon
+  - Storm
+  - Rubicon
+  - Cauterizer
+  - Evasion
+  - Apprehension
+
+- type: dataset
+  id: WFNamesAdsSerial
+  values:
+  - Unit 03
+  - Unit 07
+  - Unit 09
+  - Unit 11
+  - Unit 14
+  - Unit 17
+  - Unit 21
+  - Unit 23
+  - Unit 26
+  - Unit 29
+  - Unit 31
+  - Unit 34
+  - Unit 38
+  - Unit 40
+  - Unit 42
+  - Unit 45
+  - Unit 47
+  - Unit 52
+  - Unit 55
+  - Unit 58
+  - Unit 61
+  - Unit 64
+  - Unit 68
+  - Unit 72
+  - Unit 75
+  - Unit 79
+  - Unit 83
+  - Unit 88
+  - Unit 92
+  - Unit 96
+  - Unit 99

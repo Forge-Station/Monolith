@@ -1,0 +1,93 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:radar="clr-namespace:Content.Client._WF.Administration.UI.AdminRadar"
+                      Title="{Loc 'wf-admin-radar-title'}"
+                      SetSize="648 672"
+                      MinSize="256 256">
+    <!-- The nav control adds its mode buttons to a LayoutContainer parent -->
+    <LayoutContainer Margin="4">
+        <radar:AdminRadarControl Name="RadarScreen" />
+    </LayoutContainer>
+    <BoxContainer Orientation="Vertical" Margin="2">
+        <Button Name="IffDetailedToggle"
+                Text="{Loc 'shuttle-console-iff-detailed-short'}"
+                TextAlign="Center"
+                StyleClasses="ButtonSquare"
+                ToggleMode="True"
+                HorizontalAlignment="Left"
+                Pressed="True" />
+        <Button Name="IffToggle"
+                Text="{Loc 'shuttle-console-iff-toggle-short'}"
+                TextAlign="Center"
+                StyleClasses="ButtonSquare"
+                ToggleMode="True"
+                HorizontalAlignment="Left"
+                Pressed="True" />
+        <Button Name="TrueIffToggle"
+                Text="{Loc 'wf-admin-radar-true-iff'}"
+                ToolTip="{Loc 'wf-admin-radar-true-iff-tooltip'}"
+                TextAlign="Center"
+                StyleClasses="ButtonSquare"
+                ToggleMode="True"
+                HorizontalAlignment="Left" />
+        <Button Name="PlayersToggle"
+                Text="{Loc 'wf-admin-radar-players'}"
+                ToolTip="{Loc 'wf-admin-radar-players-tooltip'}"
+                TextAlign="Center"
+                StyleClasses="ButtonSquare"
+                ToggleMode="True"
+                HorizontalAlignment="Left" />
+        <Button Name="EncountersToggle"
+                Text="{Loc 'wf-admin-radar-encounters'}"
+                ToolTip="{Loc 'wf-admin-radar-encounters-tooltip'}"
+                TextAlign="Center"
+                StyleClasses="ButtonSquare"
+                ToggleMode="True"
+                HorizontalAlignment="Left" />
+        <Button Name="AdminTeleportToggle"
+                Text="{Loc 'wf-radar-teleport-toggle'}"
+                ToolTip="{Loc 'wf-radar-teleport-tooltip'}"
+                TextAlign="Center"
+                StyleClasses="ButtonSquare"
+                ToggleMode="True"
+                HorizontalAlignment="Left" />
+        <Button Name="MaximizeToggle"
+                Text="{Loc 'wf-admin-radar-maximize'}"
+                ToolTip="{Loc 'wf-admin-radar-maximize-tooltip'}"
+                TextAlign="Center"
+                StyleClasses="ButtonSquare"
+                ToggleMode="True"
+                HorizontalAlignment="Left" />
+        <Button Name="JumpToggle"
+                Text="{Loc 'wf-admin-radar-jump'}"
+                ToolTip="{Loc 'wf-admin-radar-jump-tooltip'}"
+                TextAlign="Center"
+                StyleClasses="ButtonSquare"
+                ToggleMode="True"
+                HorizontalAlignment="Left" />
+        <!-- Stops the mouse, so a click between the rows doesn't land on the scanner underneath -->
+        <PanelContainer Name="JumpPanel"
+                        Visible="False"
+                        MouseFilter="Stop"
+                        HorizontalAlignment="Left"
+                        SetSize="240 240">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#141414" BorderColor="#333333" BorderThickness="1" />
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical" Margin="4">
+                <LineEdit Name="JumpSearch"
+                          PlaceHolder="{Loc 'wf-admin-radar-jump-search'}" />
+                <Label Name="JumpEmpty"
+                       Text="{Loc 'wf-admin-radar-jump-empty'}"
+                       StyleClasses="LabelSubText"
+                       Margin="2 4 0 0" />
+                <ScrollContainer HScrollEnabled="False" VerticalExpand="True" Margin="0 4 0 0">
+                    <BoxContainer Name="JumpList"
+                                  Orientation="Vertical"
+                                  HorizontalExpand="True" />
+                </ScrollContainer>
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</controls:FancyWindow>

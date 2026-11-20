@@ -5,7 +5,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Nyanotrasen.Kitchen.Prototypes;
 
-[Prototype("crispinessLevelSet")]
+[Prototype]
 public sealed partial class CrispinessLevelSetPrototype : IPrototype
 {
     [IdDataField] public string ID { get; private set; } = default!;

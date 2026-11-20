@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Recoloured from the MMC techfab stripe in _Mono/Structures/Machines/techfab.rsi (Cosmological Pillow, kasature90; base by EmoGarbage).",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "techfab-asf"
+        }
+    ]
+}

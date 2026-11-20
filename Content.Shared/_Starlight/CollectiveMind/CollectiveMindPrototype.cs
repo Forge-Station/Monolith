@@ -2,7 +2,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Starlight.CollectiveMind;
 
-[Prototype("collectiveMind")]
+[Prototype]
 public sealed partial class CollectiveMindPrototype : IPrototype
 {
     [IdDataField, ViewVariables]

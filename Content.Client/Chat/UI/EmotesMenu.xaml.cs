@@ -23,6 +23,24 @@ public sealed partial class EmotesMenu : RadialMenu
 
     public event Action<ProtoId<EmotePrototype>>? OnPlayEmote;
 
+    /// <summary>
+    /// Whether the player may use an emote, by the same rule the server applies in
+    /// ChatSystem.AllowedToUseEmote: a granted emote bypasses both lists, otherwise the lists decide and
+    /// the emote must be generally available.
+    /// </summary>
+    private bool CanUseEmote(EntityUid player, EmotePrototype emote, EntityWhitelistSystem whitelist)
+    {
+        if (_entManager.TryGetComponent<SpeechComponent>(player, out var speech) &&
+            speech.AllowedEmotes.Contains(emote.ID))
+            return true;
+
+        if (whitelist.IsWhitelistFail(emote.Whitelist, player) ||
+            whitelist.IsBlacklistPass(emote.Blacklist, player))
+            return false;
+
+        return emote.Available;
+    }
+
     public EmotesMenu()
     {
         IoCManager.InjectDependencies(this);
@@ -34,18 +52,18 @@ public sealed partial class EmotesMenu : RadialMenu
         var main = FindControl<RadialContainer>("Main");
 
         var emotes = _prototypeManager.EnumeratePrototypes<EmotePrototype>();
+        var player = _playerManager.LocalSession?.AttachedEntity;
         foreach (var emote in emotes)
         {
-            var player = _playerManager.LocalSession?.AttachedEntity;
-            if (emote.Category == EmoteCategory.Invalid ||
-                emote.ChatTriggers.Count == 0 ||
-                !(player.HasValue && whitelistSystem.IsWhitelistPassOrNull(emote.Whitelist, player.Value)) ||
-                whitelistSystem.IsBlacklistPass(emote.Blacklist, player.Value))
+            // An emote with no trigger words cannot be spoken, so it has nothing to show.
+            if (emote.Category == EmoteCategory.Invalid || emote.ChatTriggers.Count == 0)
                 continue;
 
-            if (!emote.Available &&
-                _entManager.TryGetComponent<SpeechComponent>(player.Value, out var speech) &&
-                !speech.AllowedEmotes.Contains(emote.ID))
+            // WOLFGATE: was testing the whitelist before AllowedEmotes, the opposite of the server. Every
+            // emote a species is granted through its Speech component while the emote's own whitelist
+            // rejects it - Synth and all fourteen Protogen chassis with Beep, Ping, Buzz, Chime, Honk,
+            // Whirr - was typeable but never appeared here.
+            if (player is not { Valid: true } playerUid || !CanUseEmote(playerUid, emote, whitelistSystem))
                 continue;
 
             var parent = FindControl<RadialContainer>(emote.Category.ToString());

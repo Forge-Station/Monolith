@@ -1,0 +1,25 @@
+- type: entity
+  id: CompanyVault
+  name: company-vault-name
+  description: company-vault-desc
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CompanyVault
+  - type: Storage
+    grid:
+    - 0,0,2,2
+    maxItemSize: Huge
+    clickInsert: false
+    openOnActivate: false
+    blacklist:
+      components:
+      - MobState
+      - CompanyVault
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface

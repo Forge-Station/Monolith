@@ -1,0 +1,45 @@
+# Brains for the cavern people (WFCavernWalkerSystem writes their keys). A spot to walk or run to comes first, then
+# someone to follow, then idling about.
+- type: htnCompound
+  id: WFCavernWalkerCompound
+  branches:
+  - preconditions:
+    - !type:KeyExistsPrecondition
+      key: WFCavernMoveTarget
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        pathfindInPlanning: false
+        targetKey: WFCavernMoveTarget
+  - preconditions:
+    - !type:KeyExistsPrecondition
+      key: FollowTarget
+    tasks:
+    - !type:HTNCompoundTask
+      task: FollowCompound
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleCompound
+
+# A tunnel raider fights like any armed humanoid until WFCavernRaiderSystem sends him running or WFNpcIntentSystem has him hold someone up.
+- type: htnCompound
+  id: WFCavernRaiderCompound
+  branches:
+  - preconditions:
+    - !type:KeyExistsPrecondition
+      key: WFCavernMoveTarget
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:MoveToOperator
+        pathfindInPlanning: false
+        targetKey: WFCavernMoveTarget
+  # Holding someone up (WFNpcIntentSystem): stand and wait for the answer.
+  - preconditions:
+    - !type:KeyExistsPrecondition
+      key: WFIntentHold
+    tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:WFIntentHoldOperator
+  - tasks:
+    - !type:HTNCompoundTask
+      task: SimpleHumanoidHostileCompound

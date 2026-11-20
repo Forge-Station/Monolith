@@ -1,0 +1,156 @@
+# Playtest 5: sutures below the medicated one, so a cut can be closed without research or a chemist.
+#
+# The plain suture is the everyday tier: printed at the medical techfab from the start, sold in the medical vendors,
+# carried in the standard medkit and the EMT belt, and found in medical loot. It closes cuts and punctures and counts
+# as sutured for infection (WolfmedSuture) like the medicated one, at half the closing and a bit over half the bleed
+# per use, and slower to apply.
+#
+# The makeshift suture is a sharpened rod and thread pulled from cloth, crafted by hand anywhere. Weaker and slower
+# again, and dirty (WolfmedDirtyTreatment): every wound it treats is contaminated and is not counted as sutured, so it
+# keeps an infection clock until antiseptic or a proper suture.
+
+- type: entity
+  abstract: true
+  parent: BaseHealingItem
+  id: WFWolfmedBaseSuture
+  components:
+  - type: Tag
+    tags:
+    - Brutepack
+  - type: Sprite
+    sprite: _WF/Wolfmed/Medical/sutures.rsi
+  - type: Appearance
+  - type: Item
+    heldPrefix: medicated-suture
+    storedRotation: -90
+
+- type: entity
+  parent: WFWolfmedBaseSuture
+  id: WFWolfmedSuture
+  name: suture
+  suffix: Full
+  description: A curved needle and a spool of plain surgical thread. Closes cuts and punctures and stops their bleeding, more slowly than a medicated suture.
+  components:
+  - type: Sprite
+    state: suture_3
+    layers:
+    - state: suture_3
+      map: ["base"]
+  - type: WolfmedSuture
+  - type: Healing
+    damageContainers:
+    - Biological
+    damage:
+      groups:
+        Brute: -30 # half the medicated suture's -60: 10 Slash and 10 Piercing a use
+    treatedDamageTypes: [ Slash, Piercing ]
+    bloodlossModifier: -6
+    delay: 3
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+  - type: Stack
+    stackType: WFWolfmedSuture
+    count: 15
+    baseLayer: base
+    layerStates:
+    - suture
+    - suture_2
+    - suture_3
+  - type: StackPrice
+    price: 5 # a little over the 4 its print costs; the kits and free loadout belts carry a stack
+
+- type: entity
+  parent: WFWolfmedSuture
+  id: WFWolfmedSuture1
+  suffix: Single
+  components:
+  - type: Sprite
+    state: suture
+    layers:
+    - state: suture
+      map: ["base"]
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: WFWolfmedBaseSuture
+  id: WFWolfmedMakeshiftSuture
+  name: makeshift suture
+  suffix: Full
+  description: A rod filed to a point and thread pulled from cloth, blackened with whatever was to hand. It closes a cut, slowly, and leaves it dirty.
+  components:
+  - type: Sprite
+    state: suture_tar_3
+    layers:
+    - state: suture_tar_3
+      map: ["base"]
+  # No WolfmedSuture: a dirty stitch is not a closed wound to infection, or the dirt could never take hold.
+  - type: WolfmedDirtyTreatment
+  - type: Healing
+    damageContainers:
+    - Biological
+    damage:
+      groups:
+        Brute: -18 # 6 Slash and 6 Piercing a use
+    treatedDamageTypes: [ Slash, Piercing ]
+    bloodlossModifier: -4
+    delay: 5
+    healingBeginSound:
+      path: "/Audio/Items/Medical/brutepack_begin.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+    healingEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+      params:
+        volume: 1.0
+        variation: 0.125
+  - type: Stack
+    stackType: WFWolfmedMakeshiftSuture
+    count: 15
+    baseLayer: base
+    layerStates:
+    - suture_tar
+    - suture_tar_2
+    - suture_tar_3
+  - type: StackPrice
+    price: 1
+  - type: Construction
+    graph: WFWolfmedMakeshiftSuture
+    node: suture
+
+# What one rod and one cloth make.
+- type: entity
+  parent: WFWolfmedMakeshiftSuture
+  id: WFWolfmedMakeshiftSuture5
+  suffix: 5
+  components:
+  - type: Sprite
+    state: suture_tar_2
+    layers:
+    - state: suture_tar_2
+      map: ["base"]
+  - type: Stack
+    count: 5
+
+- type: stack
+  id: WFWolfmedSuture
+  name: wolfmed-stack-suture
+  icon: { sprite: _WF/Wolfmed/Medical/sutures.rsi, state: suture_3 }
+  spawn: WFWolfmedSuture1
+  maxCount: 15
+
+- type: stack
+  id: WFWolfmedMakeshiftSuture
+  name: wolfmed-stack-makeshift-suture
+  icon: { sprite: _WF/Wolfmed/Medical/sutures.rsi, state: suture_tar_3 }
+  spawn: WFWolfmedMakeshiftSuture
+  maxCount: 15

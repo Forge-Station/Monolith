@@ -5,6 +5,12 @@
   name: mercenary hardsuit
   description: A special suit that protects from the danger of space, employed by mercenary forces. Certified to be blunderbuss-resistant.
   components:
+  # WOLFGATE(ArmorSpecialization): spall liner.
+  - type: WFWoundWard
+    examine: wf-armor-spec-spall-liner-examine
+    blocks:
+    - WFWolfmedLodgedRoundWound
+    - WFWolfmedShrapnelWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Hardsuits/mercenary.rsi
   - type: Clothing
@@ -66,6 +72,14 @@
   name: pilot hardsuit
   description: A hardsuit tailored for someone who spends the majority of their time buckled to a chair.
   components:
+  # WOLFGATE(ArmorSpecialization): impact dampers and emergency thrusters.
+  - type: WFSuitThrusters
+  - type: WFWoundWard
+    examine: wf-armor-spec-impact-dampers-examine
+    blockRules:
+    - WFWolfmedRuleDislocationThrown
+    hardens:
+      WFWolfmedConcussionWound: 2
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Hardsuits/pilot.rsi
   - type: Clothing
@@ -147,6 +161,18 @@
   name: experimental salvager hardsuit
   description: Fire. Heat. These things forge great weapons, they also forge great salvagers.
   components:
+  # WOLFGATE(ArmorSpecialization): fire rating and ore sense.
+  - type: WFAblativeCoat
+    damageType: Heat
+    maxCharge: 80
+    charge: 80
+    regenRate: 10
+    examine: wf-armor-spec-fire-rated-examine
+  - type: ItemToggle
+    activated: true
+    onUse: false
+    onActivate: false
+  - type: MiningScanner
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Hardsuits/maxim_prototype.rsi
   - type: Clothing
@@ -213,6 +239,13 @@
   name: tactical maid hardsuit
   description: Layers of stain resistant alloys built into a single suit. It even comes with a reinforced apron!
   components:
+  # WOLFGATE(ArmorSpecialization): anti-slip treads, tendon guards and decon coating.
+  - type: WFDeconCoating
+  - type: NoSlip
+  - type: WFWoundWard
+    examine: wf-armor-spec-tendon-ward-examine
+    blocks:
+    - WFWolfmedTendonCutWound
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Hardsuits/tactical_hardsuit.rsi
   - type: Clothing
@@ -253,6 +286,9 @@
   name: elite pirate hardsuit
   description: An ancient elite armored hardsuit, designed by an unknown bearded man and built like a brick house.
   components:
+  # WOLFGATE(ArmorSpecialization): limb lock.
+  - type: WFLimbLock
+    breakthrough: 40
   - type: Sprite
     sprite: _NF/Clothing/OuterClothing/Hardsuits/pirate_elite.rsi
   - type: Clothing

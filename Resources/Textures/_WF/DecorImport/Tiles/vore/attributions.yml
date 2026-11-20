@@ -1,0 +1,194 @@
+- files: [ acacia_vert_panel.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_vert_panel)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ alt_vert_panel.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_vert_panel)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ birch_panel.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_panel)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ birch_parquet.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_parquet)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ birch_tile.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_tile)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ dark_techfloor_grid.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/eris/tiles_dark.dmi (state techfloor_grid)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ floor_hull.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/eris/hull.dmi (state hullcenter0)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ floor_sky.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/floors.dmi (state sky_slow)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ hardwood_vert_panel.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_vert_panel)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ indoors_open.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/effects/weather.dmi (state underwater-indoors)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ oak_panel.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_panel)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ oak_parquet.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_parquet)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ oak_tile.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_tile)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ pine_vert_panel.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_vert_panel)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ redwood_vert_panel.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_vert_panel)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ sif_vert_panel.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood_vert_panel)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ steel_panels.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/eris/tiles_steel.dmi (state panels)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ steel_techfloor_grid.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/eris/tiles_steel.dmi (state techfloor_grid)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ water_digestive_enzymes.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/stomach_vr.dmi (state composite)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ water_glamour.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/glamour.dmi (state water)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ white_cargo.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/eris/tiles_white.dmi (state cargo)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ white_panels.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/eris/tiles_white.dmi (state panels)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ wood_acacia.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ wood_alt.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ wood_birch.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ wood_hardwood.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ wood_oak.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ wood_pine.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ wood_redwood.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ wood_sif.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/flooring/wood_greyscale.dmi (state wood)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ reinforced.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/floors_vr.dmi (state reinforced)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ alienplatinghalf.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/shuttle_alien_blue.dmi (state alienplatinghalf)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ alienplating.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/shuttle_alien_blue.dmi (state alienplating)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ flesh_floor.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/stomach_vr.dmi (state flesh_floor)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ c_flesh_floor.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/stomach_vr.dmi (state c_flesh_floor)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ nanites.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/nanitegoo.dmi (state composite)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ grass_winter.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/seasonal/turf.dmi (states grass-winter0 to grass-winter11)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ grass_winter_edge.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/seasonal/turf_edge.dmi (state grass-winter0-edge)."
+  source: "https://github.com/VOREStation/VOREStation"
+
+- files: [ flesh_floor_edge_south.png, flesh_floor_edge_north.png, flesh_floor_edge_east.png, flesh_floor_edge_west.png, flesh_floor_edge_southeast.png, flesh_floor_edge_southwest.png, flesh_floor_edge_northeast.png, flesh_floor_edge_northwest.png ]
+  license: CC-BY-SA-3.0
+  copyright: "Taken from https://github.com/VOREStation/VOREStation/blob/87b3dbf0ec98646a502ec3a8a9b8a2abe8322d88/icons/turf/stomach_vr.dmi (state flesh_floor_edges)."
+  source: "https://github.com/VOREStation/VOREStation"

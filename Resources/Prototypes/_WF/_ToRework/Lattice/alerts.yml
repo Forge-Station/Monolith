@@ -1,0 +1,95 @@
+# The Drift gauge: shown while out of anchored space or holding Drift. Severity 0-20 is the Drift level, 21 is the Deep,
+# where it reads nothing, and 22-42 is a Monolith's Drift, in red.
+- type: alert
+  id: WFDrift
+  icons:
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift0
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift1
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift2
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift3
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift4
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift5
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift6
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift7
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift8
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift9
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift10
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift11
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift12
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift13
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift14
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift15
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift16
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift17
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift18
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift19
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: drift20
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: garbled
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone0
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone1
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone2
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone3
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone4
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone5
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone6
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone7
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone8
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone9
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone10
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone11
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone12
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone13
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone14
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone15
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone16
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone17
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone18
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone19
+  - sprite: /Textures/_WF/Lattice/drift_alert.rsi
+    state: stone20
+  minSeverity: 0
+  maxSeverity: 42
+  name: wf-drift-alert-name
+  description: wf-drift-alert-desc

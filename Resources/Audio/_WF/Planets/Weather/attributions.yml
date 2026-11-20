@@ -1,0 +1,10 @@
+- files: ["rain_start.ogg", "rain_mid.ogg", "rain_end.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Rain loops by Cuboos from royalty-free sources, taken from tgstation (sound/ambience/weather/rain)."
+  source: "https://github.com/tgstation/tgstation/pull/89550"
+
+# Supplied by the maintainer (2026-09-21), converted to mono 44.1 kHz Vorbis on import.
+- files: ["thunder_1.ogg", "thunder_2.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original audio by Gandalf; dedicated to the public domain under CC0."
+  source: "https://github.com/VanguardControl/Wolfgate/tree/Planets-and-cracking/Resources/Audio/_WF/Planets/Weather"

@@ -78,6 +78,7 @@
 
 - type: entity
   abstract: true
+  parent: WFWolfmedBaseHead # WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/amputation data
   id: BaseHead
   name: "head"
   description: "Doesn't make sense not to live for fun, your brain gets smart but your head gets dumb."
@@ -133,7 +134,7 @@
 
 - type: entity
   abstract: true
-  parent: MajorLimb # Mono
+  parent: [MajorLimb, WFWolfmedBaseLeftArm] # Mono, WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/amputation data
   id: BaseLeftArm
   name: "left arm"
   components:
@@ -152,7 +153,7 @@
 
 - type: entity
   abstract: true
-  parent: MajorLimb # Mono
+  parent: [MajorLimb, WFWolfmedBaseRightArm] # Mono, WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/amputation data
   id: BaseRightArm
   name: "right arm"
   components:
@@ -172,7 +173,7 @@
 
 - type: entity
   abstract: true
-  parent: MinorLimb # Mono
+  parent: [MinorLimb, WFWolfmedBaseLeftHand] # Mono, WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/amputation data
   id: BaseLeftHand
   name: "left hand"
   components:
@@ -187,7 +188,7 @@
 
 - type: entity
   abstract: true
-  parent: MinorLimb # Mono
+  parent: [MinorLimb, WFWolfmedBaseRightHand] # Mono, WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/amputation data
   id: BaseRightHand
   name: "right hand"
   components:
@@ -202,7 +203,7 @@
 
 - type: entity
   abstract: true
-  parent: MajorLimb # Mono
+  parent: [MajorLimb, WFWolfmedBaseLeftLeg] # Mono, WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/amputation data
   id: BaseLeftLeg
   name: "left leg"
   components:
@@ -222,7 +223,7 @@
 
 - type: entity
   abstract: true
-  parent: MajorLimb # Mono
+  parent: [MajorLimb, WFWolfmedBaseRightLeg] # Mono, WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/amputation data
   id: BaseRightLeg
   name: "right leg"
   components:
@@ -242,7 +243,7 @@
 
 - type: entity
   abstract: true
-  parent: MinorLimb # Mono
+  parent: [MinorLimb, WFWolfmedBaseLeftFoot] # Mono, WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/amputation data
   id: BaseLeftFoot
   name: "left foot"
   components:
@@ -257,7 +258,7 @@
 
 - type: entity
   abstract: true
-  parent: MinorLimb # Mono
+  parent: [MinorLimb, WFWolfmedBaseRightFoot] # Mono, WOLFGATE(Wolfmed): WP7, D8: adds Wolfmed fracture/amputation data
   id: BaseRightFoot
   name: "right foot"
   components:
@@ -281,7 +282,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 190 # 110->190
+        damage: 400 # 110->190; WOLFGATE(Wolfmed): M3: 190->400, above the leg's Blunt sever 300 so a beaten limb comes off with a stump first (P19)
       behaviors:
       - !type:GibPartBehavior { }
     - trigger:
@@ -293,7 +294,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Heat
-        damage: 250 # 200->250
+        damage: 350 # 200->250; WOLFGATE(Wolfmed): M3: 250->350, above the Heat sever 250 (P19)
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawnInContainer: true
@@ -316,7 +317,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Blunt
-        damage: 150 # 110->150
+        damage: 270 # 110->150; WOLFGATE(Wolfmed): M3: 150->270, above the foot's Blunt sever 170 (P19)
       behaviors:
       - !type:GibPartBehavior { }
     - trigger:
@@ -328,7 +329,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Heat
-        damage: 230 # 200->230
+        damage: 320 # 200->230; WOLFGATE(Wolfmed): M3: 230->320, above the foot's Heat sever 220 (P19)
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawnInContainer: true

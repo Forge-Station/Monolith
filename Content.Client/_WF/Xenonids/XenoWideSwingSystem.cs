@@ -1,0 +1,67 @@
+using Content.Client.Weapons.Melee;
+using Content.Shared._WF.RMCCore.Input;
+using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
+using Robust.Client.Input;
+using Robust.Client.Player;
+using Robust.Shared.Input.Binding;
+using Robust.Shared.Map;
+
+namespace Content.Client._WF.Xenonids;
+
+/// <summary>RMC's xeno wide swing: the CMXenoWideSwing key does a heavy attack with a WidePrimary weapon.</summary>
+public sealed partial class XenoWideSwingSystem : EntitySystem
+{
+    [Dependency] private IEyeManager _eye = default!;
+    [Dependency] private IInputManager _input = default!;
+    [Dependency] private MapSystem _map = default!;
+    [Dependency] private MeleeWeaponSystem _melee = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private TransformSystem _transform = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        CommandBinds.Builder
+            .Bind(CMKeyFunctions.CMXenoWideSwing,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if (session?.AttachedEntity != null)
+                        TryPrimaryHeavyAttack();
+                }, handle: false))
+            .Register<XenoWideSwingSystem>();
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        CommandBinds.Unregister<XenoWideSwingSystem>();
+    }
+
+    private void TryPrimaryHeavyAttack()
+    {
+        var mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
+        if (mousePos.MapId == MapId.Nullspace)
+            return;
+
+        EntityUid grid;
+        if (_map.TryFindGridAt(mousePos, out var gridUid, out _))
+            grid = gridUid;
+        else if (_map.TryGetMap(mousePos.MapId, out var map))
+            grid = map.Value;
+        else
+            return;
+
+        var coordinates = _transform.ToCoordinates(grid, mousePos);
+
+        if (_player.LocalEntity is not { } entity)
+            return;
+
+        if (!_melee.TryGetWeapon(entity, out var weaponUid, out var weapon))
+            return;
+
+        if (weapon.WidePrimary)
+            _melee.ClientHeavyAttack(entity, coordinates, weaponUid, weapon);
+    }
+}

@@ -1,0 +1,381 @@
+# Planet birds (Content.Server/_WF/Birds). Each world's fauna tables roll a flock leader, which spawns the rest of its
+# flock; WFBirdSystem flies them, so they carry no HTN. Names and descriptions are in Locale/en-US/_WF/Birds/birds.ftl.
+# Sprites: Resources/Textures/_WF/Birds, built by Tools/_WF/Birds/build_bird_sprites.py.
+
+- type: entity
+  abstract: true
+  parent: [BaseSimpleMob, MobCombat, MobBloodstream, MobFlammable]
+  id: WFBirdBase
+  components:
+  - type: WFBird
+    takeoffSound:
+      collection: WFBirdTakeoff
+      params:
+        volume: -4
+  # Birds never fall down a cavern mouth they fly over.
+  - type: CEZPhysics
+    fallable: false
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: Body
+    prototype: Animal
+  - type: Sprite
+    drawdepth: SmallMobs
+    layers:
+    - map: [ "enum.WFBirdLayers.Shadow" ]
+      state: shadow
+      visible: false
+    - map: [ "enum.WFBirdLayers.Body" ]
+      state: sit
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 5
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+      # Where a flying bird is drawn, above its shadow: shots take it there. No layer until it takes off.
+      flight:
+        shape:
+          !type:PhysShapeCircle
+          position: 0, 0.5
+          radius: 0.35
+        density: 1
+        hard: true # rays only see hard fixtures; with no mask it pushes nothing
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      15: Dead
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 2
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatChicken
+      amount: 1
+  - type: Bloodstream
+    bloodMaxVolume: 30
+  - type: Temperature
+    heatDamageThreshold: 360
+    coldDamageThreshold: 200
+    currentTemperature: 300
+  - type: Perishable
+  - type: Tag
+    tags: []
+
+# ---- Asclepiu ----
+
+# Verda's meadows and woods: small, quick flocks that sing on the ground.
+- type: entity
+  parent: WFBirdBase
+  id: WFMobBirdVerdaSongbird
+  components:
+  - type: Sprite
+    sprite: _WF/Birds/songbird.rsi
+    scale: 0.6, 0.6
+  - type: WFBird
+    minFlock: 3
+    maxFlock: 6
+    flySpeed: 6
+    flightLift: 0.4
+    takeoffSound:
+      collection: WFBirdTakeoff
+      params:
+        volume: -6
+        pitch: 1.3
+    callSound:
+      collection: WFBirdSongbirdCall
+      params:
+        volume: -6
+  - type: AmbientSound
+    volume: -10
+    range: 7
+    sound:
+      collection: WFBirdSongbirdChatter
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      8: Dead
+
+# The lake shores: white gulls that wheel over the water before they settle.
+- type: entity
+  parent: WFBirdBase
+  id: WFMobBirdAsclepiuGull
+  components:
+  - type: Sprite
+    sprite: _WF/Birds/lake_gull.rsi
+    scale: 0.75, 0.75
+  - type: WFBird
+    minFlock: 2
+    maxFlock: 5
+    circleTime: 3, 10
+    circleRadius: 4
+    roamRange: 18
+    flightLift: 0.6
+    takeoffSound:
+      collection: WFBirdTakeoff
+      params:
+        volume: -4
+    callSound:
+      collection: WFBirdGullCall
+      params:
+        volume: -4
+        pitch: 1.25
+    callChance: 0.008
+
+# ---- Merak ----
+
+# Desert swifts with clear wings; the fastest, flightiest flock there is.
+- type: entity
+  parent: WFBirdBase
+  id: WFMobBirdGlassSwift
+  components:
+  - type: Sprite
+    sprite: _WF/Birds/glass_swift.rsi
+    scale: 0.6, 0.6
+  - type: WFBird
+    minFlock: 4
+    maxFlock: 7
+    flySpeed: 8
+    scareRange: 7
+    perchTime: 6, 18
+    circleTime: 2, 8
+    roamRange: 18
+    flightLift: 0.5
+    takeoffSound:
+      collection: WFBirdTakeoff
+      params:
+        volume: -6
+        pitch: 1.4
+    callSound:
+      collection: WFBirdSwiftCall
+      params:
+        volume: -6
+        pitch: 1.2
+  - type: AmbientSound
+    volume: -10
+    range: 7
+    sound:
+      collection: WFBirdSwiftChatter
+  - type: Temperature
+    heatDamageThreshold: 380
+    coldDamageThreshold: 200
+    currentTemperature: 318
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      8: Dead
+
+# ---- Thrascias ----
+
+# Plump white grouse that sit tight in the snow and burst up only when you're close.
+- type: entity
+  parent: WFBirdBase
+  id: WFMobBirdSnowGrouse
+  components:
+  - type: Sprite
+    sprite: _WF/Birds/snow_grouse.rsi
+    scale: 0.75, 0.75
+  - type: WFBird
+    minFlock: 2
+    maxFlock: 4
+    flySpeed: 4.5
+    nearRange: 2
+    scareRange: 4
+    scareSpeed: 4
+    perchTime: 20, 45
+    circleTime: 0, 0
+    roamRange: 10
+    flightLift: 0.4
+    takeoffSound:
+      collection: WFBirdTakeoff
+      params:
+        volume: -2
+        pitch: 0.8
+  - type: AmbientSound
+    volume: -12
+    range: 6
+    sound:
+      collection: WFBirdGrouseChatter
+      params:
+        pitch: 0.8
+  - type: Temperature
+    heatDamageThreshold: 320
+    coldDamageThreshold: 0
+    currentTemperature: 250
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatChicken
+      amount: 2
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      20: Dead
+
+# ---- Fervidus ----
+
+# Charcoal hawks that ride the heat over the ash and stoop on anyone walking alone.
+- type: entity
+  parent: WFBirdBase
+  id: WFMobBirdAshHawk
+  components:
+  - type: Sprite
+    sprite: _WF/Birds/ash_hawk.rsi
+    scale: 0.9, 0.9
+  - type: WFBird
+    minFlock: 1
+    maxFlock: 2
+    flySpeed: 5.5
+    nearRange: 2
+    scareRange: 0
+    perchTime: 8, 20
+    circleTime: 4, 12
+    circleRadius: 4
+    roamRange: 20
+    flightLift: 0.8
+    takeoffSound:
+      collection: WFBirdTakeoff
+      params:
+        volume: -2
+        pitch: 0.7
+    callSound:
+      collection: WFBirdHawkCall
+      params:
+        volume: -3
+    callChance: 0.006
+  - type: WFBirdHostile
+    loneOnly: true
+    loneRadius: 6
+    diveRange: 9
+    diveSpeed: 9
+    cooldown: 5
+    diveSound:
+      collection: WFBirdHawkDive
+      params:
+        volume: -2
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    animation: WeaponArcClaw
+    soundHit:
+      collection: AlienClaw
+    damage:
+      types:
+        Slash: 6
+        Piercing: 2
+  - type: Temperature
+    heatDamageThreshold: 500
+    coldDamageThreshold: 0
+    currentTemperature: 373.15
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      35: Dead
+
+# ---- Aerumna ----
+
+# Soot-black scavengers that circle anything bleeding and come down to peck at it.
+- type: entity
+  parent: WFBirdBase
+  id: WFMobBirdCarrion
+  components:
+  - type: Sprite
+    sprite: _WF/Birds/carrion_bird.rsi
+    scale: 0.85, 0.85
+  - type: WFBird
+    minFlock: 2
+    maxFlock: 4
+    flySpeed: 4.5
+    perchTime: 10, 25
+    circleTime: 3, 10
+    circleRadius: 3.5
+    flightLift: 0.7
+    takeoffSound:
+      collection: WFBirdTakeoff
+      params:
+        volume: -4
+        pitch: 0.85
+    callSound:
+      collection: WFBirdCarrionCall
+      params:
+        volume: -4
+    callChance: 0.008
+  - type: WFBirdHostile
+    playersOnly: false
+    minTargetDamage: 30
+    diveRange: 10
+    diveSpeed: 7
+    circleTime: 4
+    cooldown: 4
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: MeleeWeapon
+    hidden: true
+    angle: 0
+    animation: WeaponArcBite
+    soundHit:
+      path: /Audio/Effects/bite.ogg
+    damage:
+      types:
+        Piercing: 4
+  - type: Temperature
+    heatDamageThreshold: 360
+    coldDamageThreshold: 150
+    currentTemperature: 285
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      25: Dead
+
+# ---- Carcinoma ----
+
+# Featherless skin-winged things of the flesh, flapping between the groves in loose flocks.
+- type: entity
+  parent: WFBirdBase
+  id: WFMobBirdFleshKite
+  components:
+  - type: Sprite
+    sprite: _WF/Birds/flesh_kite.rsi
+    scale: 0.8, 0.8
+  - type: WFBird
+    minFlock: 2
+    maxFlock: 4
+    flySpeed: 4
+    perchTime: 10, 25
+    circleTime: 2, 8
+    flightLift: 0.6
+    takeoffSound:
+      collection: WFFloraWetSquelch
+      params:
+        volume: -6
+    callSound:
+      collection: WFBirdFleshCall
+      params:
+        volume: -4
+    callChance: 0.008
+  - type: NpcFactionMember
+    factions:
+    - AberrantFleshExpeditionNF
+  - type: Butcherable
+    spawned:
+    - id: FoodMeat
+      amount: 1
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      20: Dead

@@ -1,0 +1,213 @@
+# What the strangers say (strangers.yml). A node's line is spoken aloud; an option with a cost takes cash in hand, else
+# the bank, and goes to `broke` when the player can't pay; a node with no options ends the talk.
+# Only a provocation (an insult, a threat, refusing a mugger once he has made his) turns a stranger hostile. A polite
+# no, being broke or ignoring a hail ends the talk with a grumble at most.
+
+- type: wfStrangerDialogue
+  id: WFStrangerDialogueDealer
+  hail: wf-stranger-dealer-hail
+  start: pitch
+  ignored: shrug
+  nodes:
+    pitch:
+      line: wf-stranger-dealer-pitch
+      options:
+      - text: wf-stranger-dealer-ask
+        next: menu
+      - text: wf-stranger-dealer-no
+        next: shrug
+      - text: wf-stranger-dealer-threaten
+        next: snubbed
+    menu:
+      line: wf-stranger-dealer-menu
+      options:
+      - text: wf-stranger-dealer-buy
+        cost: 200
+        items: [ CigaretteSpaceDrugs, JointRainbow, BluntRainbow ]
+        next: sold
+        broke: broke
+      - text: wf-stranger-dealer-pass
+        next: shrug
+    sold:
+      line: wf-stranger-dealer-sold
+      action: Leave
+    broke:
+      line: wf-stranger-dealer-broke
+      action: Leave
+    shrug:
+      line: wf-stranger-dealer-shrug
+      action: Leave
+    snubbed:
+      line: wf-stranger-dealer-snubbed
+      action: Hostile
+
+- type: wfStrangerDialogue
+  id: WFStrangerDialogueMugger
+  hail: wf-stranger-mugger-hail
+  start: demand
+  ignored: waved
+  nodes:
+    demand:
+      line: wf-stranger-mugger-demand
+      options:
+      - text: wf-stranger-mugger-pay
+        cost: 150
+        next: paid
+        broke: refused
+      - text: wf-stranger-mugger-refuse
+        next: refused
+      - text: wf-stranger-mugger-bluff
+        next: bluffed
+    paid:
+      line: wf-stranger-mugger-paid
+      action: Leave
+    bluffed:
+      line: wf-stranger-mugger-bluffed
+      options:
+      - text: wf-stranger-mugger-pay
+        cost: 150
+        next: paid
+        broke: refused
+      - text: wf-stranger-mugger-refuse
+        next: refused
+    refused:
+      line: wf-stranger-mugger-refused
+      action: Hostile
+    waved:
+      line: wf-stranger-mugger-waved
+      action: Leave
+
+- type: wfStrangerDialogue
+  id: WFStrangerDialoguePreacher
+  hail: wf-stranger-preacher-hail
+  start: sermon
+  nodes:
+    sermon:
+      line: wf-stranger-preacher-sermon
+      options:
+      - text: wf-stranger-preacher-more
+        next: prophecy
+      - text: wf-stranger-preacher-mock
+        next: cursed
+      - text: wf-stranger-preacher-threaten
+        next: wrath
+    prophecy:
+      line: wf-stranger-preacher-prophecy
+      options:
+      - text: wf-stranger-preacher-donate
+        cost: 50
+        items: [ Bible ]
+        next: blessed
+        broke: pity
+      - text: wf-stranger-preacher-leave
+        next: cursed
+    blessed:
+      line: wf-stranger-preacher-blessed
+      action: Leave
+    pity:
+      line: wf-stranger-preacher-pity
+      action: Leave
+    cursed:
+      line: wf-stranger-preacher-cursed
+      action: Leave
+    wrath:
+      line: wf-stranger-preacher-wrath
+      action: Hostile
+
+- type: wfStrangerDialogue
+  id: WFStrangerDialogueConspiracist
+  hail: wf-stranger-conspiracist-hail
+  start: warning
+  nodes:
+    warning:
+      line: wf-stranger-conspiracist-warning
+      options:
+      - text: wf-stranger-conspiracist-who
+        next: theory
+      - text: wf-stranger-conspiracist-help
+        next: offended
+      - text: wf-stranger-conspiracist-insult
+        next: snapped
+    theory:
+      line: wf-stranger-conspiracist-theory
+      options:
+      - text: wf-stranger-conspiracist-believe
+        items: [ ClothingHeadTinfoil ]
+        next: gift
+      - text: wf-stranger-conspiracist-doubt
+        next: offended
+      - text: wf-stranger-conspiracist-accuse
+        next: snapped
+    gift:
+      line: wf-stranger-conspiracist-gift
+      action: Leave
+    offended:
+      line: wf-stranger-conspiracist-offended
+      action: Leave
+    snapped:
+      line: wf-stranger-conspiracist-snapped
+      action: Hostile
+
+- type: wfStrangerDialogue
+  id: WFStrangerDialogueBeggar
+  hail: wf-stranger-beggar-hail
+  start: plea
+  nodes:
+    plea:
+      line: wf-stranger-beggar-plea
+      options:
+      - text: wf-stranger-beggar-give
+        cost: 20
+        items: [ FlashlightLantern, Crowbar, FoodSnackChips ]
+        next: thanks
+        broke: sorry
+      - text: wf-stranger-beggar-refuse
+        next: sad
+      - text: wf-stranger-beggar-mock
+        next: spite
+    thanks:
+      line: wf-stranger-beggar-thanks
+      action: Leave
+    sorry:
+      line: wf-stranger-beggar-sorry
+      action: Leave
+    sad:
+      line: wf-stranger-beggar-sad
+      action: Leave
+    spite:
+      line: wf-stranger-beggar-spite
+      action: Hostile
+
+# The stalker never starts a conversation; this is what he says when someone confronts him.
+- type: wfStrangerDialogue
+  id: WFStrangerDialogueStalker
+  start: caught
+  nodes:
+    caught:
+      line: wf-stranger-stalker-caught
+      options:
+      - text: wf-stranger-stalker-who
+        next: nobody
+      - text: wf-stranger-stalker-leave
+        next: okay
+      - text: wf-stranger-stalker-threaten
+        next: unmasked
+    nobody:
+      line: wf-stranger-stalker-nobody
+      options:
+      - text: wf-stranger-stalker-leave
+        next: okay
+    okay:
+      line: wf-stranger-stalker-okay
+    unmasked:
+      line: wf-stranger-stalker-unmasked
+      action: Hostile
+
+# The squatter attacks on sight; this is all he has to say to anyone who gets a word in first.
+- type: wfStrangerDialogue
+  id: WFStrangerDialogueSquatter
+  start: mine
+  nodes:
+    mine:
+      line: wf-stranger-squatter-mine
+      action: Hostile

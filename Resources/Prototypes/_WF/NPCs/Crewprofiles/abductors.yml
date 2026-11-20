@@ -1,0 +1,31 @@
+# The Ashfall Reavers' pirate crew, armed to take people alive.
+- type: wfCrewProfile
+  id: WFCrewProfileAbductor
+  firstNames: WFNamesPirateFirst
+  lastNames: WFNamesPirateLast
+  hullSwaps:
+    WFWallDurasteel: WallPlastitanium
+    WFWallDurasteelDiagonal: WallPlastitaniumDiagonal
+    WFWallDurasteelCapital: WallPlastitaniumCapital
+    WFWallDurasteelDiagonalCapital: WallPlastitaniumDiagonalCapital
+  components:
+  - type: WFCrewNonLethal
+  - type: PirateAccent
+  - type: WFCrewSuitUp
+  - type: PressureImmunity
+  - type: BreathingImmunity
+  bodies:
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyHuman
+  - WFMobCrewBodyReptilian
+  - WFMobCrewBodyDwarf
+  - WFMobCrewBodyVulpkanin
+  skills: [ Green, Regular, Regular, Veteran ]
+  loadouts:
+    WFCrewCaptain: [ WFCrewAbductorGear ]
+    WFCrewPilot: [ WFCrewAbductorGear ]
+    WFCrewGunner: [ WFCrewAbductorGear ]
+    WFCrewRadioOperator: [ WFCrewAbductorGear ]
+    WFCrewMarine: [ WFCrewAbductorGear ]
+    WFCrewEngineer: [ WFCrewAbductorGear ]
+    WFCrewDeckhand: [ WFCrewAbductorGear ]

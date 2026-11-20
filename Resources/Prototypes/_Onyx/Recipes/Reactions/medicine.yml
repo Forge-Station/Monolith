@@ -1,0 +1,72 @@
+# WOLFGATE(Wolfmed): vendored from ONYX Resources/Prototypes/_Onyx/Recipes/Reactions/medicine.yml (pin 2f5bab9),
+# Tier A recipes only (PLAN4 P4-D2). Ordered so Ketorolac's two precursors are declared above it.
+
+- type: reaction
+  id: Osteogen
+  reactants:
+    Bicaridine:
+      amount: 1
+    Milk:
+      amount: 1
+    Phosphorus:
+      amount: 1
+  products:
+    Osteogen: 3
+
+- type: reaction
+  id: Ibuprofen
+  reactants:
+    Charcoal:
+      amount: 1
+    Benzene:
+      amount: 1
+    Fluorine:
+      amount: 1
+  products:
+    Ibuprofen: 3
+
+- type: reaction
+  id: Tramadol
+  reactants:
+    Acetone:
+      amount: 1
+    Inaprovaline:
+      amount: 1
+    Ethanol:
+      amount: 1
+  products:
+    Tramadol: 3
+
+- type: reaction
+  id: Ketorolac
+  minTemp: 350
+  reactants:
+    Ibuprofen:
+      amount: 1
+    Tramadol:
+      amount: 1
+    Carbon:
+      amount: 1
+    Plasma:
+      amount: 1
+      catalyst: true
+  products:
+    Ketorolac: 1
+
+# WOLFGATE(Wolfmed): P4-D2: Onyx's recipe is Tramadol + Heroin + Epinephrine + Plasma. `Heroin` lives in
+# _Onyx/Reagents/Narcotics/opioids.yml, outside P4-1's scope and absent from Wolfgate, so the recipe is
+# re-authored with Ethanol in its place; every other reactant, the catalyst and the yield are Onyx's.
+- type: reaction
+  id: Oxycodone
+  reactants:
+    Tramadol:
+      amount: 1
+    Ethanol:
+      amount: 1
+    Epinephrine:
+      amount: 1
+    Plasma:
+      amount: 1
+      catalyst: true
+  products:
+    Oxycodone: 1

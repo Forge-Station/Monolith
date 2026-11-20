@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from BeeStation at commit https://github.com/BeeStation/BeeStation-Hornet/commit/c10d715d09ebbc501f8c127c55db9cee7f7b9c8d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "copper_wall-0"
+    },
+    {
+      "name": "copper_wall-1"
+    },
+    {
+      "name": "copper_wall-2"
+    },
+    {
+      "name": "copper_wall-3"
+    },
+    {
+      "name": "copper_wall-4"
+    },
+    {
+      "name": "copper_wall-5"
+    },
+    {
+      "name": "copper_wall-6"
+    },
+    {
+      "name": "copper_wall-7"
+    },
+    {
+      "name": "copper_wall-8"
+    },
+    {
+      "name": "copper_wall-9"
+    },
+    {
+      "name": "copper_wall-10"
+    },
+    {
+      "name": "copper_wall-11"
+    },
+    {
+      "name": "copper_wall-12"
+    },
+    {
+      "name": "copper_wall-13"
+    },
+    {
+      "name": "copper_wall-14"
+    },
+    {
+      "name": "copper_wall-15"
+    },
+    {
+      "name": "copper_wall-21"
+    },
+    {
+      "name": "copper_wall-23"
+    },
+    {
+      "name": "copper_wall-29"
+    },
+    {
+      "name": "copper_wall-31"
+    },
+    {
+      "name": "copper_wall-38"
+    },
+    {
+      "name": "copper_wall-39"
+    },
+    {
+      "name": "copper_wall-46"
+    },
+    {
+      "name": "copper_wall-47"
+    },
+    {
+      "name": "copper_wall-55"
+    },
+    {
+      "name": "copper_wall-63"
+    },
+    {
+      "name": "copper_wall-74"
+    },
+    {
+      "name": "copper_wall-75"
+    },
+    {
+      "name": "copper_wall-78"
+    },
+    {
+      "name": "copper_wall-79"
+    },
+    {
+      "name": "copper_wall-95"
+    },
+    {
+      "name": "copper_wall-110"
+    },
+    {
+      "name": "copper_wall-111"
+    },
+    {
+      "name": "copper_wall-127"
+    },
+    {
+      "name": "copper_wall-137"
+    },
+    {
+      "name": "copper_wall-139"
+    },
+    {
+      "name": "copper_wall-141"
+    },
+    {
+      "name": "copper_wall-143"
+    },
+    {
+      "name": "copper_wall-157"
+    },
+    {
+      "name": "copper_wall-159"
+    },
+    {
+      "name": "copper_wall-175"
+    },
+    {
+      "name": "copper_wall-191"
+    },
+    {
+      "name": "copper_wall-203"
+    },
+    {
+      "name": "copper_wall-207"
+    },
+    {
+      "name": "copper_wall-223"
+    },
+    {
+      "name": "copper_wall-239"
+    },
+    {
+      "name": "copper_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

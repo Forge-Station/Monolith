@@ -1,0 +1,17 @@
+- type: constructionGraph
+  id: WFLatticeAnchorShield
+  start: shield
+  graph:
+  - node: shield
+
+- type: latheRecipe
+  id: WFFlatpackLatticeRelay
+  result: WFFlatpackLatticeRelay
+  categories:
+  - Tools
+  completetime: 30
+  materials:
+    Steel: 5000
+    Plasteel: 2000
+    Gold: 1000
+    WFExoticMatter: 2000

@@ -54,20 +54,21 @@ public sealed partial class SensorInfo : BoxContainer
         {
             var label = new RichTextLabel();
 
-            var fractionGas = amount / dataPayload.TotalMoles;
+            var fractionGas = dataPayload.TotalMoles > 0 ? amount / dataPayload.TotalMoles : 0;
+            // Not every gas has a configured alarm threshold. Missing thresholds are disabled.
+            var threshold = dataPayload.GasThresholds.GetValueOrDefault(gas) ?? new AtmosAlarmThreshold();
 
             ProtoId<GasPrototype> gasProtoId = atmosphereSystem.GetGas(gas);
             var gasName = _prototypeManager.Index(gasProtoId).Name;
 
             label.SetMarkup(Loc.GetString("air-alarm-ui-gases-indicator",
                 ("gas", Loc.GetString(gasName)),
-                ("color", AirAlarmWindow.ColorForThreshold(fractionGas, dataPayload.GasThresholds[gas])),
+                ("color", AirAlarmWindow.ColorForThreshold(fractionGas, threshold)),
                 ("amount", $"{amount:0.####}"),
                 ("percentage", $"{(100 * fractionGas):0.##}")));
             GasContainer.AddChild(label);
             _gasLabels.Add(gas, label);
 
-            var threshold = dataPayload.GasThresholds[gas];
             var gasThresholdControl = new ThresholdControl(Loc.GetString($"air-alarm-ui-thresholds-gas-title"), threshold, AtmosMonitorThresholdType.Gas, gas, 100);
             gasThresholdControl.Margin = new Thickness(20, 2, 2, 2);
             gasThresholdControl.ThresholdDataChanged += (type, alarmThreshold, arg3) =>
@@ -104,7 +105,6 @@ public sealed partial class SensorInfo : BoxContainer
 
     public void ChangeData(AtmosMonitorData dataPayload)
     {
-        IoCManager.InjectDependencies(this);
         var atmosphereSystem = _entMan.System<SharedAtmosphereSystem>();
 
         SensorAddress.Title = Loc.GetString("air-alarm-ui-window-listing-title", ("address", _address), ("state", dataPayload.AlarmState));
@@ -128,14 +128,16 @@ public sealed partial class SensorInfo : BoxContainer
                 continue;
             }
 
-            var fractionGas = amount / dataPayload.TotalMoles;
+            var fractionGas = dataPayload.TotalMoles > 0 ? amount / dataPayload.TotalMoles : 0;
+            // Not every gas has a configured alarm threshold. Missing thresholds are disabled.
+            var threshold = dataPayload.GasThresholds.GetValueOrDefault(gas) ?? new AtmosAlarmThreshold();
 
             ProtoId<GasPrototype> gasProtoId = atmosphereSystem.GetGas(gas);
             var gasName = _prototypeManager.Index(gasProtoId).Name;
 
             label.SetMarkup(Loc.GetString("air-alarm-ui-gases-indicator",
                 ("gas", Loc.GetString(gasName)),
-                ("color", AirAlarmWindow.ColorForThreshold(fractionGas, dataPayload.GasThresholds[gas])),
+                ("color", AirAlarmWindow.ColorForThreshold(fractionGas, threshold)),
                 ("amount", $"{amount:0.####}"),
                 ("percentage", $"{(100 * fractionGas):0.##}")));
         }
@@ -144,12 +146,11 @@ public sealed partial class SensorInfo : BoxContainer
         _temperatureThreshold.UpdateThresholdData(dataPayload.TemperatureThreshold, dataPayload.Temperature);
         foreach (var (gas, control) in _gasThresholds)
         {
-            if (!dataPayload.GasThresholds.TryGetValue(gas, out var threshold))
-            {
-                continue;
-            }
-
-            control.UpdateThresholdData(threshold, dataPayload.Gases[gas] / dataPayload.TotalMoles);
+            var threshold = dataPayload.GasThresholds.GetValueOrDefault(gas) ?? new AtmosAlarmThreshold();
+            var fractionGas = dataPayload.TotalMoles > 0
+                ? dataPayload.Gases.GetValueOrDefault(gas) / dataPayload.TotalMoles
+                : 0;
+            control.UpdateThresholdData(threshold, fractionGas);
         }
     }
 

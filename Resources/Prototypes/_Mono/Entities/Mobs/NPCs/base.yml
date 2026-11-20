@@ -37,6 +37,7 @@
   - type: Sprite
     sprite: _Mono/Mobs/monolithic.rsi
     layers:
+    - map: [ "enum.HumanoidVisualLayers.TailBehind" ] # WOLFGATE - the south frame of a split tail draws here
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
     - map: [ "enum.HumanoidVisualLayers.Head" ]
     - map: [ "enum.HumanoidVisualLayers.Snout" ]
@@ -63,12 +64,13 @@
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
-    - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "enum.HumanoidVisualLayers.Wings" ] # For IPC wings porting from SimpleStation
     - map: [ "balaclava" ]
     - map: [ "mask" ]
     - map: [ "head" ]
     - map: [ "neck" ]
+    - map: [ "enum.HumanoidVisualLayers.TailOversuit" ] # WOLFGATE - split tail layers, drawn above the neck slot so cloaks do not cover the tail
+    - map: [ "enum.HumanoidVisualLayers.Tail" ] # WOLFGATE
     - map: [ "helmetcover" ]
     - map: [ "helmetattachment" ]
     - map: [ "pocket1" ]

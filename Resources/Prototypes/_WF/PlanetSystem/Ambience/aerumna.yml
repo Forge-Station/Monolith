@@ -1,0 +1,18 @@
+# Deep under the chromite: a low dark bed, and now and then something huge moving far off or the rock settling. Named
+# by the Umbral Deeps in caverns.yml and played clear underground.
+
+- type: wfPlanetAmbience
+  id: WFPlanetAmbienceAerumnaCavern
+  loops:
+  - path: /Audio/Ambience/ambimystery.ogg
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_ambience_loop_3.ogg
+  oneShots:
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_1.ogg
+  - path: /Audio/_WF/Planets/Worlds/aerumna/aerumna_random_sound_3.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/garg_xen_far01.ogg
+  - path: /Audio/_WF/LivingWorld/ambience/boid_xen_medium01.ogg
+  - path: /Audio/Effects/break_stone.ogg
+  loopVolume: -9
+  oneShotVolume: -9
+  minInterval: 25
+  maxInterval: 70

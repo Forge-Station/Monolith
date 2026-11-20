@@ -32,6 +32,8 @@
         </BoxContainer>
 
         <!-- Colors -->
-        <BoxContainer Name="CMarkingColors" Orientation="Vertical" Visible="False" />
+        <PanelContainer StyleClasses="CreatorCard" HorizontalExpand="True" Name="CMarkingColorsCard" Visible="False">
+            <BoxContainer Name="CMarkingColors" Orientation="Vertical" />
+        </PanelContainer>
     </BoxContainer>
 </Control>

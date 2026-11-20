@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Drawn by Mal (GitHub vinylspiders) for Meridian Rift, https://github.com/Aphelion-Moon/Meridian-Rift/pull/242",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "off"
+    },
+    {
+      "name": "broken"
+    },
+    {
+      "name": "normal-unshaded",
+      "delays": [
+        [
+          1.4,
+          0.1,
+          1.2,
+          0.1,
+          1.2,
+          0.1,
+          1.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "panel"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# RMC-14: Resources/Prototypes/_RMC14/Damage/marine_damage_containers.yml
+- type: damageContainer
+  id: StructuralMarine
+  supportedGroups:
+  - Brute
+  supportedTypes:
+  - Heat
+  - Shock
+  - Structural
+

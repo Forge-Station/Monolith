@@ -41,9 +41,21 @@ The following document outlines the general procedures and behavior marines shou
 
 1. If it looks like a civilian ship, ask them to turn their IFF on. They are more likely hiding from PDV and pirates than from TSF.
 
-2. If it looks like a PDV ship, you may choose to hail or immediately open fire, depending on the situation you find yourself in.
+<!-- WOLFGATE(ColdWar): hail and warn off under the ceasefire; was "you may choose to hail or immediately open fire" at all times -->2. If it looks like a PDV ship, hail it and tell it to leave. Only open fire if it shoots first or keeps heading for Halcyon. If war has been declared, you may choose to hail or immediately open fire, depending on the situation you find yourself in.
 
-### With Regards to Prisoners
+<!-- WOLFGATE(ColdWar) START: conduct toward the Dynasty under the ceasefire and in a declared war -->### With Regards to the PDV
+
+1. During the ceasefire (WAR LEVEL: COLD), do not fire on PDV ships or personnel unless they shoot first, board you, or ignore a warning to leave Halcyon. Stop when they leave.
+
+2. If you spot a PDV ship, follow it and report it. Do not chase it down.
+
+3. Seize their contraband and intercept their dead drops.
+
+4. Event POIs, PDV drop pods and Monolithic Fragments are contested. You can fight the PDV there, but do not chase them once they leave. Anywhere else, order ships carrying PDV crates to stop and hand them over.
+
+5. Only the Colonel declares war. Once the war level is HOT, PDV ships and personnel can be engaged anywhere. If a ceasefire is announced, stop fighting.
+
+<!-- WOLFGATE END -->### With Regards to Prisoners
 Treat them with dignity and respect. Do not perform experiments on them, do not leave them without basic clothes, PDA, food and water. Torture should be avoided unless absolutely necessary, i.e. to reveal critically important information.
 
 

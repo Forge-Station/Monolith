@@ -81,10 +81,29 @@
     Acidic:
       methods: [ Touch ]
       effects:
-      - !type:NFActivateArtifact # Frontier: ActivateArtifact<NFActivateArtifact
+      - !type:ArtifactUnlock # WOLFGATE(Xenoarch)
         conditions:
         - !type:ReagentThreshold
           min: 5
+
+# WOLFGATE(Xenoarch) START: artifact glue from the xenoarch rework
+- type: reagent
+  parent: Artifexium
+  id: ArtifactGlue
+  name: reagent-name-artifact-glue
+  desc: reagent-desc-artifact-glue
+  flavor: artifactglue
+  physicalDesc: reagent-physical-desc-non-newtonian
+  color: "#827394"
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:ArtifactDurabilityRestore
+        conditions:
+        - !type:ReagentThreshold
+          min: 5
+# WOLFGATE END
 
 - type: reagent
   id: Benzene

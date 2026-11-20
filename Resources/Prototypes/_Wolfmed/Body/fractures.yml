@@ -1,0 +1,51 @@
+# Wolfgate's organic fracture profile (DECISIONS "Balance note", W0). Onyx's OrganicFractureProfile in
+# _Onyx/Wounds/wounds.yml stays untouched as the vendored reference; every organic part in parts.yml points
+# here instead.
+#
+# Why: Onyx tuned 20/35/50/60 at 5/25/65/100 % against its own melee. Wolfgate melee lands 8-15 Blunt a
+# swing, so the first grade was practically unreachable and fractures never happened outside explosions and
+# falls. accumulationMultiplier 0.4 -> 0.8 makes repeated hits on one limb the main route to a break, which
+# is what a beating should do; the per-hit thresholds drop so a solid hit can still break a bone outright.
+# Everything else is Onyx's, including the manipulationModifier inversion fix (DECISIONS Sec 8.2-1).
+#
+# BoneFractureWound's stage thresholds in _Onyx/Wounds/wounds.yml track these grades, or a fresh Hairline
+# fracture would sit below its own lowest stage and carry no pain or functionality effect at all.
+- type: fractureProfile
+  id: WFWolfmedFractureProfile
+  damageType: Blunt
+  wound: BoneFractureWound
+  severityMultiplier: 1
+  resetTreatmentOnDamage: true
+  worsenMinimumDamage: 5
+  minimumHitDamage: 3
+  accumulationMultiplier: 0.8
+  reductionMinimumGrade: Simple
+  removeWoundWhenMended: true
+  alert: BrokenBones
+  alertMinimumGrade: Simple
+  alertHiddenTreatments: [Mended]
+  treatmentEffectScales:
+    None: 1
+    Reduced: 0.25
+    Mended: 0
+  grades:
+    Hairline:
+      threshold: 12
+      creationChance: 0.25
+      movementModifier: 0.625
+      manipulationModifier: 1.1
+    Simple:
+      threshold: 20
+      creationChance: 0.5
+      movementModifier: 0.5
+      manipulationModifier: 1.25
+    Displaced:
+      threshold: 32
+      creationChance: 0.8
+      movementModifier: 0
+      manipulationModifier: 1.5
+    Comminuted:
+      threshold: 45
+      creationChance: 1
+      movementModifier: 0
+      manipulationModifier: 2.0

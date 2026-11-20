@@ -103,13 +103,8 @@ public sealed class EntityHealthBarOverlay : Overlay
             // Hardcoded width of the progress bar because it doesn't match the texture.
             const float startX = 8f;
             var endX = widthOfMob - 8f;
-            // Forge-Change-Start: overkill pushes the ratio below 0, and a narrow sprite makes endX < startX.
-            // Either one builds a box with Left > Right and crashes the client.
-            if (endX <= startX)
-                continue;
 
-            var xProgress = Math.Clamp((endX - startX) * deathProgress.ratio + startX, startX, endX);
-            // Forge-Change-End
+            var xProgress = (endX - startX) * deathProgress.ratio + startX;
 
             var boxBackground = new Box2(new Vector2(startX, 0f) / EyeManager.PixelsPerMeter, new Vector2(endX, 3f) / EyeManager.PixelsPerMeter);
             boxBackground = boxBackground.Translated(position);
@@ -141,8 +136,8 @@ public sealed class EntityHealthBarOverlay : Overlay
                 !_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out threshold, thresholds))
                 return (1, false);
 
-            var ratio = 1 - ((FixedPoint2) (dmg.TotalDamage / threshold)).Float();
-            return (Math.Clamp(ratio, 0f, 1f), false); // Forge-Change
+            var ratio = Math.Clamp(1 - ((FixedPoint2) (dmg.TotalDamage / threshold)).Float(), 0f, 1f); // WOLFGATE(Wolfmed): wound hosts can carry damage past the threshold
+            return (ratio, false);
         }
 
         if (_mobStateSystem.IsCritical(uid, component))
@@ -153,9 +148,9 @@ public sealed class EntityHealthBarOverlay : Overlay
                 return (1, true);
             }
 
-            var ratio = 1 - ((dmg.TotalDamage - critThreshold) / (deadThreshold - critThreshold)).Value.Float();
+            var ratio = Math.Clamp(1 - ((dmg.TotalDamage - critThreshold) / (deadThreshold - critThreshold)).Value.Float(), 0f, 1f); // WOLFGATE(Wolfmed): clamp, projected damage can exceed the dead threshold
 
-            return (Math.Clamp(ratio, 0f, 1f), true); // Forge-Change
+            return (ratio, true);
         }
 
         return (0, true);

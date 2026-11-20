@@ -1,0 +1,23 @@
+# The synthetic readout's line for a limb put back on by hand (see wounds.yml).
+
+- type: syntheticHudLine
+  id: WFSyntheticHudLooseCoupling
+  wound: WFWolfmedLooseCouplingWound
+  line: wf-synthetic-line-loose
+  severity: Warn
+  advice: wf-synthetic-advice-loose
+
+# The radiation collector (rad_collector.yml): full, or missing and burnt out.
+- type: syntheticHudLine
+  id: WFSyntheticHudRadSaturated
+  condition: RadSaturated
+  line: wf-synthetic-line-rad-saturated
+  severity: Warn
+  advice: wf-synthetic-advice-rad-saturated
+
+- type: syntheticHudLine
+  id: WFSyntheticHudRadMissing
+  condition: RadMissing
+  line: wf-synthetic-line-rad-missing
+  severity: Crit
+  advice: wf-synthetic-advice-rad-missing

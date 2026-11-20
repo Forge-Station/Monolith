@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Taken from Goonstation at commit https://github.com/goonstation/goonstation/commit/5c2227ce62cee48048c7944aea340b0a14c88a7d.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "meaty-0"
+    },
+    {
+      "name": "meaty-1"
+    },
+    {
+      "name": "meaty-2"
+    },
+    {
+      "name": "meaty-3"
+    },
+    {
+      "name": "meaty-4"
+    },
+    {
+      "name": "meaty-5"
+    },
+    {
+      "name": "meaty-6"
+    },
+    {
+      "name": "meaty-7"
+    },
+    {
+      "name": "meaty-8"
+    },
+    {
+      "name": "meaty-9"
+    },
+    {
+      "name": "meaty-10"
+    },
+    {
+      "name": "meaty-11"
+    },
+    {
+      "name": "meaty-12"
+    },
+    {
+      "name": "meaty-13"
+    },
+    {
+      "name": "meaty-14"
+    },
+    {
+      "name": "meaty-15"
+    },
+    {
+      "name": "meaty-21"
+    },
+    {
+      "name": "meaty-23"
+    },
+    {
+      "name": "meaty-29"
+    },
+    {
+      "name": "meaty-31"
+    },
+    {
+      "name": "meaty-38"
+    },
+    {
+      "name": "meaty-39"
+    },
+    {
+      "name": "meaty-46"
+    },
+    {
+      "name": "meaty-47"
+    },
+    {
+      "name": "meaty-55"
+    },
+    {
+      "name": "meaty-63"
+    },
+    {
+      "name": "meaty-74"
+    },
+    {
+      "name": "meaty-75"
+    },
+    {
+      "name": "meaty-78"
+    },
+    {
+      "name": "meaty-79"
+    },
+    {
+      "name": "meaty-95"
+    },
+    {
+      "name": "meaty-110"
+    },
+    {
+      "name": "meaty-111"
+    },
+    {
+      "name": "meaty-127"
+    },
+    {
+      "name": "meaty-137"
+    },
+    {
+      "name": "meaty-139"
+    },
+    {
+      "name": "meaty-141"
+    },
+    {
+      "name": "meaty-143"
+    },
+    {
+      "name": "meaty-157"
+    },
+    {
+      "name": "meaty-159"
+    },
+    {
+      "name": "meaty-175"
+    },
+    {
+      "name": "meaty-191"
+    },
+    {
+      "name": "meaty-203"
+    },
+    {
+      "name": "meaty-207"
+    },
+    {
+      "name": "meaty-223"
+    },
+    {
+      "name": "meaty-239"
+    },
+    {
+      "name": "meaty-255"
+    }
+  ]
+}

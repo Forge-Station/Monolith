@@ -4,7 +4,7 @@ using Content.Shared.Inventory;
 
 namespace Content.Shared.Clothing.EntitySystems;
 
-public sealed class AntiGravityClothingSystem : EntitySystem
+public sealed partial class AntiGravityClothingSystem : EntitySystem
 {
     [Dependency] SharedGravitySystem _gravity = default!;
     /// <inheritdoc/>

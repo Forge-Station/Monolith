@@ -1,0 +1,106 @@
+# The order S.A.M. treats a patient in when it plans for itself, for the PLAN button, the FIX ME button and
+# the autofix module. Walked top to bottom; each step queues every procedure the occupant's condition allows
+# and the pod's disks unlock. Nothing here is a procedure an operator could not queue by hand.
+
+- type: autodocTriage
+  id: WFWolfmedAutodocTriage
+  steps:
+  # Playtest 4, IV: blood out of the blood reservoir, started first and running beside everything below. It queues
+  # nothing; with no blood loaded for a patient who needs it the pod says NO BLOOD LOADED.
+  - transfuse: true
+
+  # Playtest 5: the antibiotic course out of the reservoir, beside everything below. Nothing queued; an infected patient
+  # with no antibiotic loaded gets NO ANTIBIOTIC LOADED.
+  - antibiotics: true
+
+  # 1. A heart that is not beating comes before every surgery, and the module is the only thing that helps.
+  - defibrillate: true
+    condition: Arrest
+
+  # 2. Anything still lodged in a part. WolfmedEmbeddedObjectComponent refuses every treatment on the wound
+  # it is in, so a round left in the torso makes every other procedure on that torso hopeless.
+  - surgeries:
+    - WFSurgeryRemoveEmbeddedObjects
+
+  # 3. What is emptying the patient fastest.
+  - ignorePodWounds: true
+    surgeries:
+    - WFSurgeryRepairArtery
+    - WFSurgeryStopInternalBleeding
+
+  # 4. Then the rest of the bleeding. A part whose only wounds the pod made is skipped: surgery leaves an
+  # incision and a sutured slash of its own, and treating those would have the pod re-plan after every run.
+  - ignorePodWounds: true
+    surgeries:
+    - WFSurgeryStopBleeding
+
+  # 5. An open abdomen: not fatal this second, but everything after it is worse with the organs out.
+  - surgeries:
+    - WFSurgeryCloseEvisceration
+
+  # 6. Organ repair in place. Removal and insertion need a hand at the tray, so the planner skips them.
+  - surgeries:
+    - WFSurgeryHealHeart
+    - WFSurgeryHealLungs
+    - WFSurgeryHealLiver
+    - WFSurgeryHealStomach
+    - WFSurgeryHealKidneys
+    - WFSurgeryRepairBrain
+    - WFSurgeryHealBrain
+    - WFSurgeryHealEyes
+    - WFSurgeryRepairCore
+    - WFSurgeryRepairSynthCore
+
+  # 7. Joints back in their sockets before the bones under them are opened.
+  - surgeries:
+    - WFSurgeryRelocateJoint
+
+  # 8. Bones.
+  - surgeries:
+    - WFSurgeryMendFracture
+    - WFSurgeryHealAmputationConsequence
+
+  # 9. Deep tissue before shallow: the deep surgeries are the ones gauze cannot reach.
+  - ignorePodWounds: true
+    surgeries:
+    - WFSurgeryTendWoundsBruteDeep
+    - WFSurgeryTendWoundsBurnDeep
+
+  # 10. Everything else on the surface.
+  - ignorePodWounds: true
+    surgeries:
+    - SurgeryTendWoundsBrute
+    - SurgeryTendWoundsBurn
+    - WFSurgeryGraftSkin
+    - WFSurgeryRepairTendon
+
+  # 11. Synthetic bodies.
+  - categories:
+    - WFWolfmedAutodocCategoryMechanical
+
+  # 12. Putting parts and organs back. The planner skips every one of these unless the delivery tray
+  # already holds something that fits, so it never queues a procedure it cannot finish alone.
+  - surgeries:
+    - SurgeryAttachHead
+    - SurgeryAttachLeftArm
+    - SurgeryAttachRightArm
+    - SurgeryAttachLeftLeg
+    - SurgeryAttachRightLeg
+    - SurgeryAttachLeftHand
+    - SurgeryAttachRightHand
+    - SurgeryAttachLeftFoot
+    - SurgeryAttachRightFoot
+    - SurgeryAttachHands
+    - SurgeryInsertHeart
+    - SurgeryInsertLungs
+    - SurgeryInsertLiver
+    - SurgeryInsertStomach
+    - SurgeryInsertBrain
+    - SurgeryInsertEyes
+    - SurgeryInsertPump
+
+  # 13. Whatever somebody else left open. Every procedure above closes after itself, so this only ever
+  # catches a patient who was already lying open when they went in; requiresStarted is what says so.
+  - requiresStarted: true
+    surgeries:
+    - SurgeryCloseIncision

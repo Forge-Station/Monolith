@@ -1,0 +1,101 @@
+# The shade over each hole tile of a mouth. The stairs cut under its edge are below.
+# A shade draws the hole's crumbling lip and leaves its middle clear, so the cavern below shows through. The art is
+# the same on every world: the client lays the floor round the hole under its lip.
+
+# Unanchored with no physics, so it never falls into the hole it marks.
+- type: entity
+  id: WFCavernShadeBase
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: false
+  # The whole tile, so the clear middle still examines.
+  - type: Clickable
+    bounds:
+      all: "-0.5,-0.5,0.5,0.5"
+  - type: Sprite
+    drawdepth: LowFloors
+    sprite: _WF/Caverns/Mouths/pit.rsi
+    state: pit
+  - type: WFCavernShaft
+
+- type: entity
+  id: WFCavernShadeAsclepiu
+  parent: WFCavernShadeBase
+
+- type: entity
+  id: WFCavernShadeFervidus
+  parent: WFCavernShadeBase
+
+- type: entity
+  id: WFCavernShadeMerak
+  parent: WFCavernShadeBase
+
+- type: entity
+  id: WFCavernShadeAerumna
+  parent: WFCavernShadeBase
+
+- type: entity
+  id: WFCavernShadeThrascias
+  parent: WFCavernShadeBase
+
+- type: entity
+  id: WFCavernShadeCarcinoma
+  parent: WFCavernShadeBase
+
+# Stairs cut into the cavern under a hole's edge, one set per world. CE stairs: walked up and down, never climbed. They
+# open nothing they were not given: WFCavernStairsSystem opens the ground over them as it does for built stairs.
+# The art is CE's stone stairs, recoloured per world.
+- type: entity
+  id: WFCavernStairsCutBase
+  parent: CEZLevelLadderBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _CE/Structures/Architecture/Ladders/stone.rsi
+  - type: InteractionOutline
+  - type: WFCavernStairs
+
+- type: entity
+  id: WFCavernStairsAsclepiu
+  parent: WFCavernStairsCutBase
+  components:
+  - type: Sprite
+    sprite: _CE/Structures/Architecture/Ladders/dirt_cliff.rsi
+
+- type: entity
+  id: WFCavernStairsFervidus
+  parent: WFCavernStairsCutBase
+  components:
+  - type: Sprite
+    color: "#5a4a44"
+
+- type: entity
+  id: WFCavernStairsMerak
+  parent: WFCavernStairsCutBase
+  components:
+  - type: Sprite
+    color: "#c9a46a"
+
+- type: entity
+  id: WFCavernStairsAerumna
+  parent: WFCavernStairsCutBase
+  components:
+  - type: Sprite
+    color: "#3a3342"
+
+- type: entity
+  id: WFCavernStairsThrascias
+  parent: WFCavernStairsCutBase
+  components:
+  - type: Sprite
+    color: "#bfe6ff"
+
+- type: entity
+  id: WFCavernStairsCarcinoma
+  parent: WFCavernStairsCutBase
+  components:
+  - type: Sprite
+    color: "#b0525e"

@@ -27,3 +27,15 @@
   id: DoNotMap
   name: entity-category-name-donotmap
   suffix: entity-category-suffix-donotmap
+
+# WOLFGATE(Xenoarch) START: artifact effect category from the wizden xenoarch rework
+- type: entityCategory
+  id: XenoArtifactEffects
+  name: entity-category-name-xeno-artifact-effects
+  hideSpawnMenu: true
+
+- type: entityCategory
+  id: XenoArtifactTriggers
+  name: entity-category-name-xeno-artifact-triggers
+  hideSpawnMenu: true
+# WOLFGATE END

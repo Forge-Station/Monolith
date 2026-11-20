@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "uranium_wall-0"
+    },
+    {
+      "name": "uranium_wall-1"
+    },
+    {
+      "name": "uranium_wall-2"
+    },
+    {
+      "name": "uranium_wall-3"
+    },
+    {
+      "name": "uranium_wall-4"
+    },
+    {
+      "name": "uranium_wall-5"
+    },
+    {
+      "name": "uranium_wall-6"
+    },
+    {
+      "name": "uranium_wall-7"
+    },
+    {
+      "name": "uranium_wall-8"
+    },
+    {
+      "name": "uranium_wall-9"
+    },
+    {
+      "name": "uranium_wall-10"
+    },
+    {
+      "name": "uranium_wall-11"
+    },
+    {
+      "name": "uranium_wall-12"
+    },
+    {
+      "name": "uranium_wall-13"
+    },
+    {
+      "name": "uranium_wall-14"
+    },
+    {
+      "name": "uranium_wall-15"
+    },
+    {
+      "name": "uranium_wall-21"
+    },
+    {
+      "name": "uranium_wall-23"
+    },
+    {
+      "name": "uranium_wall-29"
+    },
+    {
+      "name": "uranium_wall-31"
+    },
+    {
+      "name": "uranium_wall-38"
+    },
+    {
+      "name": "uranium_wall-39"
+    },
+    {
+      "name": "uranium_wall-46"
+    },
+    {
+      "name": "uranium_wall-47"
+    },
+    {
+      "name": "uranium_wall-55"
+    },
+    {
+      "name": "uranium_wall-63"
+    },
+    {
+      "name": "uranium_wall-74"
+    },
+    {
+      "name": "uranium_wall-75"
+    },
+    {
+      "name": "uranium_wall-78"
+    },
+    {
+      "name": "uranium_wall-79"
+    },
+    {
+      "name": "uranium_wall-95"
+    },
+    {
+      "name": "uranium_wall-110"
+    },
+    {
+      "name": "uranium_wall-111"
+    },
+    {
+      "name": "uranium_wall-127"
+    },
+    {
+      "name": "uranium_wall-137"
+    },
+    {
+      "name": "uranium_wall-139"
+    },
+    {
+      "name": "uranium_wall-141"
+    },
+    {
+      "name": "uranium_wall-143"
+    },
+    {
+      "name": "uranium_wall-157"
+    },
+    {
+      "name": "uranium_wall-159"
+    },
+    {
+      "name": "uranium_wall-175"
+    },
+    {
+      "name": "uranium_wall-191"
+    },
+    {
+      "name": "uranium_wall-203"
+    },
+    {
+      "name": "uranium_wall-207"
+    },
+    {
+      "name": "uranium_wall-223"
+    },
+    {
+      "name": "uranium_wall-239"
+    },
+    {
+      "name": "uranium_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

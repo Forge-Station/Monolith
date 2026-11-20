@@ -1,0 +1,7 @@
+# RMC-14: Resources/Prototypes/_RMC14/rmc_tags.yml
+- type: Tag
+  id: RMCXenoLarva
+
+# RMC-14: Resources/Prototypes/_RMC14/Entities/Structures/Platforms/platform.yml
+- type: Tag
+  id: Platform

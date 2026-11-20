@@ -1,0 +1,162 @@
+# Durasteel walls: plastitanium walls with five thirds the health of the wall they refit, keeping its resistances, so a
+# straight hull wall takes three Cyrexa APHE shells where plastitanium takes two. Only a drydock refit makes them
+# (WFRefitDurasteel); there is no recipe.
+
+- type: entity
+  parent: WallPlastitanium
+  id: WFWallDurasteel
+  name: durasteel wall
+  description: A durasteel frame under plastitanium skin. Best in class for protection.
+  components:
+  - type: Sprite
+    sprite: _WF/ShipArmor/durasteel.rsi
+  - type: Icon
+    sprite: _WF/ShipArmor/durasteel.rsi
+  - type: Construction
+    graph: WFDurasteelWall
+    node: durasteelWall
+  - type: ArmorThickness
+    thickness: 13
+    canBePierced: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+    - trigger:
+        !type:DamageTrigger
+        damage: 5500
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: WallPlastitaniumDiagonal
+  id: WFWallDurasteelDiagonal
+  name: durasteel wall
+  description: A durasteel frame under plastitanium skin. Best in class for protection.
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _WF/ShipArmor/durasteel_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _WF/ShipArmor/durasteel_diagonal.rsi
+    state: state0
+  - type: Construction
+    graph: WFDurasteelWall
+    node: durasteelWallDiagonal
+  - type: ArmorThickness
+    thickness: 13
+    canBePierced: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 4585
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+    - trigger:
+        !type:DamageTrigger
+        damage: 5420
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: WallPlastitaniumCapital
+  id: WFWallDurasteelCapital
+  name: reinforced durasteel wall
+  description: Durasteel laid thick for capital hulls. Best in class for protection.
+  components:
+  - type: Sprite
+    sprite: _WF/ShipArmor/rdurasteel.rsi
+  - type: Icon
+    sprite: _WF/ShipArmor/rdurasteel.rsi
+  - type: Construction
+    graph: WFDurasteelWall
+    node: durasteelWall
+  - type: ArmorThickness
+    thickness: 15
+    canBePierced: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5835
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+    - trigger:
+        !type:DamageTrigger
+        damage: 6670
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalSlam
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: WallPlastitaniumDiagonalCapital
+  id: WFWallDurasteelDiagonalCapital
+  name: reinforced durasteel wall
+  description: Durasteel laid thick for capital hulls. Best in class for protection.
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    sprite: _WF/ShipArmor/rdurasteel_diagonal.rsi
+    state: state0
+  - type: Icon
+    sprite: _WF/ShipArmor/rdurasteel_diagonal.rsi
+    state: state0
+  - type: Construction
+    graph: WFDurasteelWall
+    node: durasteelWallDiagonal
+  - type: ArmorThickness
+    thickness: 15
+    canBePierced: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 3335
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Girder:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

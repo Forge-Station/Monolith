@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Drawn by Tools/_WF/Shrines/fountain_of_life.py for Wolfgate; dedicated to the public domain",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "basin"
+    },
+    {
+      "name": "fill-1",
+      "delays": [
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ]
+      ]
+    },
+    {
+      "name": "fill-2",
+      "delays": [
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ]
+      ]
+    },
+    {
+      "name": "fill-3",
+      "delays": [
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ]
+      ]
+    },
+    {
+      "name": "spire",
+      "delays": [
+        [
+          0.18,
+          0.18,
+          0.18,
+          0.18
+        ]
+      ]
+    },
+    {
+      "name": "spire-dry"
+    }
+  ]
+}

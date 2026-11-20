@@ -1,6 +1,5 @@
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Atmos.Prototypes
 {

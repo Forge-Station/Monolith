@@ -1,7 +1,7 @@
 <Document>
 # TSFMC
 
-  The [color=cyan]Trans-Solarian Federation Marine Corps[/color], the space-ground fighting force for the TSF, is one of the primary actors in the Colossus Sector. This brigade-level detachment has been deployed to Colossus in the interest of keeping the peace, although their constant conflicts with insurgent cells, pirates, and the local [color=tan]Phaethon Dynasty[/color] speak otherwise. Their natural militant approach and tendency to overhanded brute force methods have painted them as invaders to the locals who side with the [color=tan]Dynasty[/color], the 'rightful rulers of the sector.'
+  <!-- WOLFGATE(ColdWar): a standoff with the Dynasty; was "constant conflicts with insurgent cells, pirates, and the local Phaethon Dynasty" -->The [color=cyan]Trans-Solarian Federation Marine Corps[/color], the space-ground fighting force for the TSF, is one of the primary actors in the Colossus Sector. This brigade-level detachment has been deployed to Colossus in the interest of keeping the peace, although their constant conflicts with insurgent cells and pirates, and their armed standoff with the local [color=tan]Phaethon Dynasty[/color], speak otherwise. Their natural militant approach and tendency to overhanded brute force methods have painted them as invaders to the locals who side with the [color=tan]Dynasty[/color], the 'rightful rulers of the sector.'
 
   The [color=cyan]TSFMC[/color] detachment is backed by powerful futuristic technology, their gear favoring durable equipment and heavier weapons such as pulse lasers.
   However, they are at an extreme disadvantage due to being separated from reinforcements by interference from the monolithic region and the many AI drones corrupted by the [color=pink]local anomalous emissions[/color].
@@ -10,9 +10,9 @@
 
   The detachment's overall objectives, as briefed by High Command before deployment to the Colossus sector, are to:
 
-  > [bold][color=red]Confiscate and study Corporate-war era technology wielded by the locals[/bold][/color]
+  > [bold][color=red]Assert your new-found control over the Colossus sector and enforce the law of the Colonel and the Federation.[/bold][/color]
 
-  > [bold][color=red]Eliminate opposition and establish control over the sector for the TSF[/bold][/color]
+  <!-- WOLFGATE(ColdWar): was "Bring the displaced terrorists of the Phaethon Dynasty, as well as anyone who dares support them, to justice." -->> [bold][color=red]Keep the Phaethon Dynasty in check, and bring anyone who smuggles for them to justice.[/bold][/color]
 
   Detailed objectives for the everyday [color=yellow]Marine[/color] will be outlined by the commanding officer in charge as situations unfold, but with the detachment largely cut off from High Command and the outer sectors of [color=cyan]TSF[/color] space, the overall task is clear: survival. [color=yellow]Marines[/color] might very well be called upon to fend off anomalous threats, collect resources from debris and detritus, and study any relevant technology to strengthen their local military. Only through discipline and following the Chain of Command can a [color=yellow]Marine[/color] expect to thrive in this unforgiving sector.
 
@@ -60,9 +60,9 @@
   - While their weapons are powerful, they can each be countered through specific items - vary your loadout or stay with your squad.
 
   <Box>
-    <GuideEntityEmbed Entity="ClothingOuterHardsuitTSFMCM82c"/> # Forge-change
-    <GuideEntityEmbed Entity="ClothingOuterHardsuitTSFMCM86"/> # Forge-change
-    <GuideEntityEmbed Entity="ClothingOuterHardsuitTSFMCEnergyShield"/> # Forge-change
+    <GuideEntityEmbed Entity="ClothingOuterHardsuitM82c"/>
+    <GuideEntityEmbed Entity="ClothingOuterHardsuitM86"/>
+    <GuideEntityEmbed Entity="ClothingOuterHardsuitNfsdExperimental"/>
   </Box>
 
   The [color=cyan]TSFMC[/color] use heavy power armor for boarding operations, with more advanced equipment sacrificing base statistics for additional combat features.

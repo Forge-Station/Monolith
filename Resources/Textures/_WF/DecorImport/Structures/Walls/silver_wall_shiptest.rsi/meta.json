@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "silver_wall-0"
+    },
+    {
+      "name": "silver_wall-1"
+    },
+    {
+      "name": "silver_wall-2"
+    },
+    {
+      "name": "silver_wall-3"
+    },
+    {
+      "name": "silver_wall-4"
+    },
+    {
+      "name": "silver_wall-5"
+    },
+    {
+      "name": "silver_wall-6"
+    },
+    {
+      "name": "silver_wall-7"
+    },
+    {
+      "name": "silver_wall-8"
+    },
+    {
+      "name": "silver_wall-9"
+    },
+    {
+      "name": "silver_wall-10"
+    },
+    {
+      "name": "silver_wall-11"
+    },
+    {
+      "name": "silver_wall-12"
+    },
+    {
+      "name": "silver_wall-13"
+    },
+    {
+      "name": "silver_wall-14"
+    },
+    {
+      "name": "silver_wall-15"
+    },
+    {
+      "name": "silver_wall-21"
+    },
+    {
+      "name": "silver_wall-23"
+    },
+    {
+      "name": "silver_wall-29"
+    },
+    {
+      "name": "silver_wall-31"
+    },
+    {
+      "name": "silver_wall-38"
+    },
+    {
+      "name": "silver_wall-39"
+    },
+    {
+      "name": "silver_wall-46"
+    },
+    {
+      "name": "silver_wall-47"
+    },
+    {
+      "name": "silver_wall-55"
+    },
+    {
+      "name": "silver_wall-63"
+    },
+    {
+      "name": "silver_wall-74"
+    },
+    {
+      "name": "silver_wall-75"
+    },
+    {
+      "name": "silver_wall-78"
+    },
+    {
+      "name": "silver_wall-79"
+    },
+    {
+      "name": "silver_wall-95"
+    },
+    {
+      "name": "silver_wall-110"
+    },
+    {
+      "name": "silver_wall-111"
+    },
+    {
+      "name": "silver_wall-127"
+    },
+    {
+      "name": "silver_wall-137"
+    },
+    {
+      "name": "silver_wall-139"
+    },
+    {
+      "name": "silver_wall-141"
+    },
+    {
+      "name": "silver_wall-143"
+    },
+    {
+      "name": "silver_wall-157"
+    },
+    {
+      "name": "silver_wall-159"
+    },
+    {
+      "name": "silver_wall-175"
+    },
+    {
+      "name": "silver_wall-191"
+    },
+    {
+      "name": "silver_wall-203"
+    },
+    {
+      "name": "silver_wall-207"
+    },
+    {
+      "name": "silver_wall-223"
+    },
+    {
+      "name": "silver_wall-239"
+    },
+    {
+      "name": "silver_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

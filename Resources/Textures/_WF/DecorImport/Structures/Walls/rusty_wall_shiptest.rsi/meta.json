@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Shiptest at commit https://github.com/shiptest-ss13/Shiptest/commit/1d98db044a8a61499ef1e2d54fa2d8516a8e7da3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rusty_wall-0"
+    },
+    {
+      "name": "rusty_wall-1"
+    },
+    {
+      "name": "rusty_wall-2"
+    },
+    {
+      "name": "rusty_wall-3"
+    },
+    {
+      "name": "rusty_wall-4"
+    },
+    {
+      "name": "rusty_wall-5"
+    },
+    {
+      "name": "rusty_wall-6"
+    },
+    {
+      "name": "rusty_wall-7"
+    },
+    {
+      "name": "rusty_wall-8"
+    },
+    {
+      "name": "rusty_wall-9"
+    },
+    {
+      "name": "rusty_wall-10"
+    },
+    {
+      "name": "rusty_wall-11"
+    },
+    {
+      "name": "rusty_wall-12"
+    },
+    {
+      "name": "rusty_wall-13"
+    },
+    {
+      "name": "rusty_wall-14"
+    },
+    {
+      "name": "rusty_wall-15"
+    },
+    {
+      "name": "rusty_wall-21"
+    },
+    {
+      "name": "rusty_wall-23"
+    },
+    {
+      "name": "rusty_wall-29"
+    },
+    {
+      "name": "rusty_wall-31"
+    },
+    {
+      "name": "rusty_wall-38"
+    },
+    {
+      "name": "rusty_wall-39"
+    },
+    {
+      "name": "rusty_wall-46"
+    },
+    {
+      "name": "rusty_wall-47"
+    },
+    {
+      "name": "rusty_wall-55"
+    },
+    {
+      "name": "rusty_wall-63"
+    },
+    {
+      "name": "rusty_wall-74"
+    },
+    {
+      "name": "rusty_wall-75"
+    },
+    {
+      "name": "rusty_wall-78"
+    },
+    {
+      "name": "rusty_wall-79"
+    },
+    {
+      "name": "rusty_wall-95"
+    },
+    {
+      "name": "rusty_wall-110"
+    },
+    {
+      "name": "rusty_wall-111"
+    },
+    {
+      "name": "rusty_wall-127"
+    },
+    {
+      "name": "rusty_wall-137"
+    },
+    {
+      "name": "rusty_wall-139"
+    },
+    {
+      "name": "rusty_wall-141"
+    },
+    {
+      "name": "rusty_wall-143"
+    },
+    {
+      "name": "rusty_wall-157"
+    },
+    {
+      "name": "rusty_wall-159"
+    },
+    {
+      "name": "rusty_wall-175"
+    },
+    {
+      "name": "rusty_wall-191"
+    },
+    {
+      "name": "rusty_wall-203"
+    },
+    {
+      "name": "rusty_wall-207"
+    },
+    {
+      "name": "rusty_wall-223"
+    },
+    {
+      "name": "rusty_wall-239"
+    },
+    {
+      "name": "rusty_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

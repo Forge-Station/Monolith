@@ -1,0 +1,22 @@
+# V3: what a limb looks like once its wounds are past being bruises. One shipped profile;
+# WolfmedDegradationVisualsSystem indexes it by id, so the thresholds and the art are retuned here.
+#
+# stage1/stage2 are the SUMMED severity of that part's wounds, not the part's damage: a limb with three
+# small cuts degrades like one deep one. For scale, a part comes off at 80 (hand, foot) to 200 (head)
+# severity, so stage 2 lands roughly a third of the way to losing the limb.
+#
+# The art is cut from the human body-part sprites, so the overlays are small central patches that still sit
+# inside most species' limbs. A species whose silhouette they do not fit opts out with
+# `- type: WolfmedDegradationVisuals` / `enabled: false` on its mob prototype.
+
+- type: wolfmedDegradationProfile
+  id: WFWolfmedDegradationDefault
+  rsi: _WF/Wolfmed/Effects/part_degradation.rsi
+  stage1: 25
+  stage2: 60
+  suffixes:
+    Muscle: muscle
+    Bone: bone
+    Struts: strut
+    Wiring: wire
+    Necrotic: necrotic

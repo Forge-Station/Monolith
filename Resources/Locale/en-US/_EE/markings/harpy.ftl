@@ -92,3 +92,7 @@ marking-HarpyLegsDefault-thighs = Thighs
 marking-HarpyFeetDefault = Avian Feet
 marking-HarpyFeetDefault-feet = Feet
 marking-HarpyFeetDefault-talons = Talons
+
+# Wolfgate: ported from HardLight
+marking-HarpyWingFoldedWhitescale2 = Folded Wings 2 (Whitescale)
+marking-HarpyWingFoldedWhitescale2-whitescale_harpy_folded = Wings

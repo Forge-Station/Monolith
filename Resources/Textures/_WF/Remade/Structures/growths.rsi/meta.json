@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from DS13-2.0 at https://github.com/DS-13-Dev-Team/DS13-2.0 (deadspace/icons/effects/corruption.dmi)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "growth"
+    },
+    {
+      "name": "light"
+    },
+    {
+      "name": "eye",
+      "delays": [
+        [
+          5.0,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.5,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ]
+      ]
+    },
+    {
+      "name": "minieye",
+      "delays": [
+        [
+          3.0,
+          0.4,
+          0.4,
+          0.4,
+          2.0,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "maw"
+    },
+    {
+      "name": "maw_active",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.4,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "maw_new",
+      "delays": [
+        [
+          2.5,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "maw_new_active",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.4,
+          0.2,
+          0.2,
+          0.2,
+          0.4,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "cyst-bomb-primed",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cyst-empty"
+    },
+    {
+      "name": "cyst-full",
+      "delays": [
+        [
+          2.0,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "cryst-firing",
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cyst-bomb",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "minigrowth1"
+    },
+    {
+      "name": "minigrowth2"
+    },
+    {
+      "name": "minigrowth3"
+    },
+    {
+      "name": "minigrowth4"
+    },
+    {
+      "name": "snare"
+    },
+    {
+      "name": "wall"
+    },
+    {
+      "name": "nest"
+    }
+  ]
+}

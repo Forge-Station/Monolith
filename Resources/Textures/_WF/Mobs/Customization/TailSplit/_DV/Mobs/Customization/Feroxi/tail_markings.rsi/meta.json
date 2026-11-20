@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA-3.0",
+  "copyright": "Made by BlitzTheSquishy South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "feroxi-tail-bottom-tip_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail-bottom-tip_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail-second-dorsal-tip_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail-second-dorsal-tip_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail-stripes_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail-stripes_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail-top-tip_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail-top-tip_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail-under_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail-under_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "feroxi-tail_FRONT",
+      "directions": 4
+    }
+  ]
+}

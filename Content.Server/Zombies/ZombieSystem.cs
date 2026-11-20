@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server._WF.PlanetPois; // WOLFGATE(PlanetPois)
 using Content.Server.Actions;
 using Content.Server.Body.Systems;
 using Content.Server.Chat;
@@ -253,7 +254,8 @@ namespace Content.Server.Zombies
                     }
                 }
 
-                if (_mobState.IsIncapacitated(entity, mobState) && !HasComp<ZombieComponent>(entity) && !HasComp<ZombieImmuneComponent>(entity))
+                if (_mobState.IsIncapacitated(entity, mobState) && !HasComp<ZombieComponent>(entity) && !HasComp<ZombieImmuneComponent>(entity)
+                    && !HasComp<WFInertZombieComponent>(args.User)) // WOLFGATE(PlanetPois): an inert zombie's kills do not rise
                 {
                     ZombifyEntity(entity);
                     args.BonusDamage = -args.BaseDamage;

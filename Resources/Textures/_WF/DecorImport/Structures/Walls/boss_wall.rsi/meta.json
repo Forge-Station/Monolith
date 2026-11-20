@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise at commit https://github.com/ParadiseSS13/Paradise/commit/7cd73f80152a5e234249d99cace75ce2b5c1c54b.",
+  "size": {
+    "x": 32,
+    "y": 40
+  },
+  "states": [
+    {
+      "name": "boss_wall-0"
+    },
+    {
+      "name": "boss_wall-1"
+    },
+    {
+      "name": "boss_wall-2"
+    },
+    {
+      "name": "boss_wall-3"
+    },
+    {
+      "name": "boss_wall-4"
+    },
+    {
+      "name": "boss_wall-5"
+    },
+    {
+      "name": "boss_wall-6"
+    },
+    {
+      "name": "boss_wall-7"
+    },
+    {
+      "name": "boss_wall-8"
+    },
+    {
+      "name": "boss_wall-9"
+    },
+    {
+      "name": "boss_wall-10"
+    },
+    {
+      "name": "boss_wall-11"
+    },
+    {
+      "name": "boss_wall-12"
+    },
+    {
+      "name": "boss_wall-13"
+    },
+    {
+      "name": "boss_wall-14"
+    },
+    {
+      "name": "boss_wall-15"
+    },
+    {
+      "name": "boss_wall-21"
+    },
+    {
+      "name": "boss_wall-23"
+    },
+    {
+      "name": "boss_wall-29"
+    },
+    {
+      "name": "boss_wall-31"
+    },
+    {
+      "name": "boss_wall-38"
+    },
+    {
+      "name": "boss_wall-39"
+    },
+    {
+      "name": "boss_wall-46"
+    },
+    {
+      "name": "boss_wall-47"
+    },
+    {
+      "name": "boss_wall-55"
+    },
+    {
+      "name": "boss_wall-63"
+    },
+    {
+      "name": "boss_wall-74"
+    },
+    {
+      "name": "boss_wall-75"
+    },
+    {
+      "name": "boss_wall-78"
+    },
+    {
+      "name": "boss_wall-79"
+    },
+    {
+      "name": "boss_wall-95"
+    },
+    {
+      "name": "boss_wall-110"
+    },
+    {
+      "name": "boss_wall-111"
+    },
+    {
+      "name": "boss_wall-127"
+    },
+    {
+      "name": "boss_wall-137"
+    },
+    {
+      "name": "boss_wall-139"
+    },
+    {
+      "name": "boss_wall-141"
+    },
+    {
+      "name": "boss_wall-143"
+    },
+    {
+      "name": "boss_wall-157"
+    },
+    {
+      "name": "boss_wall-159"
+    },
+    {
+      "name": "boss_wall-175"
+    },
+    {
+      "name": "boss_wall-191"
+    },
+    {
+      "name": "boss_wall-203"
+    },
+    {
+      "name": "boss_wall-207"
+    },
+    {
+      "name": "boss_wall-223"
+    },
+    {
+      "name": "boss_wall-239"
+    },
+    {
+      "name": "boss_wall-255"
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

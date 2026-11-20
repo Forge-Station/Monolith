@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Selene wings by @bogus_0451 on discord South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "selene_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "selene_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "selene_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "selene_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "selene_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "selene_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "selene_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "selene_tertiary_FRONT",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWFAsfEnvoy
+  icon:
+    sprite: /Textures/_WF/Asf/Interface/job_icons.rsi
+    state: Envoy
+  jobName: wf-asf-job-envoy
+  allowSelection: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWFAsfEnforcer
+  icon:
+    sprite: /Textures/_WF/Asf/Interface/job_icons.rsi
+    state: Enforcer
+  jobName: wf-asf-job-enforcer
+  allowSelection: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWFAsfFieldResearcher
+  icon:
+    sprite: /Textures/_WF/Asf/Interface/job_icons.rsi
+    state: Researcher
+  jobName: wf-asf-job-field-researcher
+  allowSelection: false
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconWFAsfColonist
+  icon:
+    sprite: /Textures/_WF/Asf/Interface/job_icons.rsi
+    state: Colonist
+  jobName: wf-asf-job-colonist
+  allowSelection: false

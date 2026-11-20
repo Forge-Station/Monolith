@@ -1,0 +1,112 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              Orientation="Vertical"
+              HorizontalExpand="True">
+    <controls:StripeBack MinSize="48 48">
+        <Label Text="{Loc 'shuttle-console-ship-alarms-label'}"
+               VerticalExpand="True"
+               HorizontalAlignment="Center"/>
+    </controls:StripeBack>
+    <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="4 4 4 4">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BorderThickness="4" BorderColor="#333333" BackgroundColor="#141414"/>
+        </PanelContainer.PanelOverride>
+        <PanelContainer VerticalExpand="False" HorizontalExpand="True" Margin="8 8 8 8">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#151515" BackgroundColor="#050505"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="6 6 6 6">
+                <Label Text="{Loc 'shuttle-console-ship-condition'}" FontColorOverride="#00ff2a"/>
+                <Label Name="ConditionLabel"
+                       Text="-"
+                       HorizontalExpand="True"
+                       Align="Right"
+                       FontColorOverride="#00ff2a"/>
+            </BoxContainer>
+        </PanelContainer>
+    </PanelContainer>
+    <BoxContainer Name="CodeContainer"
+                  Orientation="Vertical"
+                  HorizontalExpand="True"
+                  SeparationOverride="4"
+                  Margin="4 0 4 0"/>
+    <Button Name="GeneralQuartersButton"
+            Text="{Loc 'shuttle-console-ship-general-quarters-sound'}"
+            StyleClasses="ButtonSquare"
+            MinSize="0 40"
+            Margin="4 8 4 4"/>
+    <Button Name="CollisionAlertButton"
+            Text="{Loc 'shuttle-console-ship-collision-alert-off'}"
+            StyleClasses="ButtonSquare"
+            MinSize="0 40"
+            Margin="4 0 4 4"/>
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 0 8 4">
+        <Label Name="SpeakersCaption" Text="{Loc 'shuttle-console-ship-speakers'}" FontColorOverride="#00ff2a"/>
+        <Label Name="SpeakersLabel"
+               Text="-"
+               HorizontalExpand="True"
+               Align="Right"
+               FontColorOverride="#00ff2a"/>
+    </BoxContainer>
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="4 0 4 4">
+        <LineEdit Name="AnnounceEdit"
+                  PlaceHolder="{Loc 'shuttle-console-ship-announce-placeholder'}"
+                  HorizontalExpand="True"/>
+        <Button Name="AnnounceButton"
+                Text="{Loc 'shuttle-console-ship-announce'}"
+                StyleClasses="ButtonSquare"
+                Margin="4 0 0 0"/>
+    </BoxContainer>
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="4 0 4 4">
+        <LineEdit Name="SoundEdit"
+                  PlaceHolder="{Loc 'shuttle-console-ship-sound-placeholder'}"
+                  HorizontalExpand="True"/>
+        <Button Name="SoundButton"
+                Text="{Loc 'shuttle-console-ship-sound'}"
+                ToolTip="{Loc 'shuttle-console-ship-sound-tooltip'}"
+                StyleClasses="ButtonSquare"
+                Margin="4 0 0 0"/>
+        <Button Name="SoundStopButton"
+                Text="{Loc 'shuttle-console-ship-sound-stop'}"
+                ToolTip="{Loc 'shuttle-console-ship-sound-stop-tooltip'}"
+                StyleClasses="ButtonSquare"
+                Margin="4 0 0 0"/>
+    </BoxContainer>
+    <!-- What the PA is playing and what waits behind it; shown only while the ship has either. -->
+    <BoxContainer Name="PlaylistBox"
+                  Orientation="Vertical"
+                  HorizontalExpand="True"
+                  Margin="4 0 4 4"
+                  Visible="False">
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <Label Name="NowPlayingLabel"
+                   HorizontalExpand="True"
+                   ClipText="True"
+                   FontColorOverride="#00ff2a"/>
+            <Button Name="SkipButton"
+                    Text="{Loc 'shuttle-console-ship-playlist-skip'}"
+                    ToolTip="{Loc 'shuttle-console-ship-playlist-skip-tooltip'}"
+                    StyleClasses="ButtonSquare"
+                    Margin="4 0 0 0"/>
+        </BoxContainer>
+        <BoxContainer Name="QueueHeader" Orientation="Horizontal" HorizontalExpand="True" Margin="0 4 0 0">
+            <Label Name="QueueLabel"
+                   HorizontalExpand="True"
+                   ClipText="True"
+                   FontColorOverride="#00ff2a"/>
+            <Button Name="ClearQueueButton"
+                    Text="{Loc 'shuttle-console-ship-playlist-clear'}"
+                    ToolTip="{Loc 'shuttle-console-ship-playlist-clear-tooltip'}"
+                    StyleClasses="ButtonSquare"
+                    Margin="4 0 0 0"/>
+        </BoxContainer>
+        <ScrollContainer Name="QueueScroll"
+                         HScrollEnabled="False"
+                         ReturnMeasure="True"
+                         MaxHeight="120"
+                         HorizontalExpand="True">
+            <BoxContainer Name="QueueList" Orientation="Vertical" HorizontalExpand="True"/>
+        </ScrollContainer>
+    </BoxContainer>
+</BoxContainer>

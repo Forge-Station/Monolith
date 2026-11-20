@@ -1,0 +1,28 @@
+# WOLFGATE: Wolfgate jobs have no inheritance, isCM, isXeno or hidden; the shared CMJobXenoBase fields are inlined.
+# WOLFGATE: cut the queen's playtime requirements (RMC job groups and TotalJobsTimeRequirement are not ported).
+- type: job
+  id: CMXenoQueen
+  name: cm-job-name-xeno-queen
+  playTimeTracker: CMJobXenoQueen
+  icon: RMCJobIconXenoQueen
+  supervisors: nobody
+  joinNotifyCrew: false
+  canBeAntag: false
+  setPreference: false
+  jobPreviewEntity: RMCPlayerXenoQueenPreview
+  accessGroups:
+  - CMAccessXeno
+  - CMAccessXenoQueen
+
+- type: playTimeTracker
+  id: CMJobXenoQueen
+
+- type: entity
+  id: RMCPlayerXenoQueenPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _WF/Xenonids/Mobs/Xenonids/Queen/queen.rsi
+    layers:
+    - state: alive
+      scale: 0.5, 0.5

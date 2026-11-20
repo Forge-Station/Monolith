@@ -1,7 +1,7 @@
 - type: entity
   id: Magazine57mmHE
   name: "57mm HE ammo loader"
-  description: "An ammunition loader containing infinite 57mm high-explosive rounds. Usable by vessel-mounted artillery pieces."
+  description: "An ammunition loader containing 600 57mm high-explosive rounds. Usable by vessel-mounted artillery pieces."
   parent: [BaseItem, RecyclableItemSteelTiny]
   components:
   - type: Tag
@@ -10,9 +10,9 @@
   - type: Item
     size: Small
   - type: BallisticAmmoProvider
-    infiniteUnspawned: true
+    infiniteUnspawned: false # Forge-Change: finite ship ammo; Infinite prototypes stay unlimited
     proto: 57mmCartridgeHE
-    capacity: 1 # normally should hold 600
+    capacity: 600 # Forge-Change: was 1 while infinite
     mayTransfer: true
     whitelist:
       tags:

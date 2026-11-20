@@ -17,3 +17,10 @@
     Goblin: 2 # Frontier
     Harpy: 1 # Frontier
     Tajaran: 3 # Goobstation
+    Feroxi: 3 # DeltaV - Feroxi, see Prototypes/_DV/Entities/Mobs/Species/feroxi.yml
+    Felionoid: 3 # Wolfgate: ported from HardLight/Starlight
+    Avali: 3 # Wolfgate: ported from HardLight/Starlight
+    Skrell: 3 # Wolfgate: ported from HardLight
+    Shadekin: 2 # Wolfgate: ported from HardLight/Starlight
+    Thaven: 2 # Wolfgate: ported from HardLight/Impstation
+    Synth: 2 # Wolfgate: ported from HardLight

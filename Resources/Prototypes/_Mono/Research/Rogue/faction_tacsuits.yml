@@ -3,59 +3,47 @@
   id: RogueBasicEquipment
   name: research-technology-rogue-basic-equipment
   entityIcon: ClothingOuterHardsuitPirateScaf
-  discipline: Pdv
+  discipline: RogueEquipment
   tier: 1
   cost: 20000
   recipeUnlocks:
   - ClothingOuterHardsuitPirateScafRogue
   - ClothingOuterVestWebRogue
+  - ClothingOuterVestWebEliteRogue
+  - MechIFFPDV
+  - ClothingShoesBootsMagSyndieRogue
+  - ClothingMaskGasSyndicateRogue
   technologyPrerequisites:
   - UniversalMaterialResearchT1
-  position: 12, 1
-
+  position: -2, -13
+  #WOLFGATE(MonoReverts) START: Brigs back pdv suits into their research tree.
 - type: technology
   id: RogueAdvancedEquipment
   name: research-technology-rogue-advanced-equipment
-  entityIcon: ClothingOuterHardsuitPDVMedic
-  discipline: Pdv
+  entityIcon: ClothingOuterHardsuitAshen
+  discipline: RogueEquipment
   tier: 2
   cost: 35000
-  recipeUnlocks:
-  - ClothingOuterHardsuitPDVMedic
-  - ClothingShoesBootsMagSyndieRogue
-  - ClothingMaskGasSyndicateRogue
-  - MechIFFPDV
-  technologyPrerequisites:
-  - RogueBasicEquipment
-  - UniversalMaterialResearchT2
-  position: 12, 7
-
-- type: technology
-  id: RogueSyndicateTacsuits
-  name: research-technology-rogue-syndicate-tacsuits
-  entityIcon: ClothingOuterHardsuitAshen
-  discipline: Pdv
-  tier: 2
-  cost: 50000
   recipeUnlocks:
   - ClothingOuterHardsuitSyndieRogue
   - ClothingOuterHardsuitSyndieEliteRogue
   technologyPrerequisites:
-  - RogueAdvancedEquipment
-  - UniversalMaterialResearchT3
-  position: 12, 12
+  - RogueBasicEquipment
+  position: -2, -23
 
 - type: technology
-  id: RogueSuperArmor
-  name: research-technology-rogue-super-armor
-  entityIcon: ClothingOuterHardsuitCybersunStealth
-  discipline: Pdv
+  id: RogueSyndicateTacsuits
+  name: research-technology-rogue-syndicate-tacsuits
+  entityIcon: ClothingOuterHardsuitJuggernaut
+  discipline: RogueEquipment
   tier: 2
-  cost: 20000
+  cost: 75000
   recipeUnlocks:
+  - ClothingOuterHardsuitPDVMedic
   - ClothingOuterHardsuitCybersunStealthRogue
   - ClothingOuterHardsuitJuggernautRogue
   technologyPrerequisites:
-  - RogueSyndicateTacsuits
-  position: 13, 12
-
+  - RogueAdvancedEquipment
+  - UniversalMaterialResearchT3
+  position: -2, -29
+#WOLFGATE END

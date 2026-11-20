@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Nebula at commit https://github.com/NebulaSS13/Nebula/commit/d7a668ec0268164d33a13481e2e5ce307996ff76.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "metal0",
+      "directions": 4
+    },
+    {
+      "name": "metal1",
+      "directions": 4
+    },
+    {
+      "name": "metal2",
+      "directions": 4
+    },
+    {
+      "name": "metal3",
+      "directions": 4
+    },
+    {
+      "name": "metal4",
+      "directions": 4
+    },
+    {
+      "name": "metal5",
+      "directions": 4
+    },
+    {
+      "name": "metal6",
+      "directions": 4
+    },
+    {
+      "name": "metal7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

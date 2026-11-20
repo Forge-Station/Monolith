@@ -4,6 +4,7 @@ using Content.Server._NF.GameTicking.Events;
 using Content.Server._NF.SectorServices;
 using Content.Server._NF.Smuggling.Components;
 using Content.Server.Administration.Logs;
+using Content.Server.GameTicking;
 using Content.Server.Radio.EntitySystems;
 using Content.Server._NF.Shipyard.Systems;
 using Content.Server.Shuttles.Components;
@@ -47,7 +48,7 @@ public sealed partial class DeadDropSystem : EntitySystem
     [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private SectorServiceSystem _sectorService = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-    [Dependency] private GameTicker _ticker = default!;
+    [Dependency] private ServerGameTicker _ticker = default!;
     [Dependency] private LinkedLifecycleGridSystem _linkedLifecycleGrid = default!;
     [Dependency] private StationRenameWarpsSystems _stationRenameWarps = default!;
     private ISawmill _sawmill = default!;

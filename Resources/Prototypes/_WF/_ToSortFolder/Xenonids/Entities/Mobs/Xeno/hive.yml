@@ -1,0 +1,12 @@
+- type: entity
+  id: CMXenoHive
+  name: Default
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Hive
+    lateJoinGainLarva: true
+    freeSlots:
+      CMXenoHivelord: 1
+      CMXenoCarrier: 1
+      CMXenoBurrower: 1
+

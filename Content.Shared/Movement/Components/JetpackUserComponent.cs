@@ -54,4 +54,10 @@ public sealed partial class JetpackUserComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan CombatPenaltyEndTime = TimeSpan.Zero;
     // Forge-Change-end
+
+    [DataField, AutoNetworkedField]
+    public bool AscendHeld;
+
+    [DataField, AutoNetworkedField]
+    public bool DescendHeld;
 }

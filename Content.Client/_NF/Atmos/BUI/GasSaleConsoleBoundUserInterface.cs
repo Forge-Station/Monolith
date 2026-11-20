@@ -37,6 +37,6 @@ public sealed class GasSaleConsoleBoundUserInterface(EntityUid owner, Enum uiKey
             return;
 
         _menu?.SetEnabled(gasState.Enabled);
-        _menu?.SetMixture(gasState.Mixture, gasState.Appraisal);
+        _menu?.SetMixture(gasState.Mixture, gasState.Appraisal, gasState.Currency); // WOLFGATE(Mining): payout currency
     }
 }

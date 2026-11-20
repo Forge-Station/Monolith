@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared.Dataset;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Random;
+using Robust.Shared.Timing; // WOLFGATE(Xenoarch)
 
 namespace Content.Shared.Random.Helpers
 {
@@ -210,5 +211,28 @@ namespace Content.Shared.Random.Helpers
             }
             return hash;
         }
+
+        // WOLFGATE(Xenoarch) START: wizden's predicted random helpers, used by the xenoarch effects
+        /// <summary>
+        /// Creates an instance of IRobustRandom that will be the same for both the server and client.
+        /// </summary>
+        public static IRobustRandom PredictedRandom(IGameTiming timing, NetEntity netEnt, NetEntity? netEnt2 = null)
+        {
+            var seed = HashCodeCombine((int)timing.CurTick.Value, netEnt.Id, netEnt2?.Id ?? 0);
+            var random = new RobustRandom();
+            random.SetSeed(seed);
+            return random;
+        }
+
+        /// <summary>
+        /// Checks a probability against a <see cref="PredictedRandom"/> instance.
+        /// Returns true if the amount rolled is below the probability.
+        /// </summary>
+        public static bool PredictedProb(IGameTiming timing, float probability, NetEntity netEnt1, NetEntity? netEnt2 = null)
+        {
+            var rand = PredictedRandom(timing, netEnt1, netEnt2);
+            return rand.Prob(probability);
+        }
+        // WOLFGATE END
     }
 }

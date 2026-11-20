@@ -8,7 +8,7 @@ namespace Content.Client._NF.Storage;
 /// <summary>
 /// Applies anchorable storage world-sprite visibility and draw depth from appearance state.
 /// </summary>
-public sealed class AnchorableStorageVisualSystem : EntitySystem
+public sealed partial class AnchorableStorageVisualSystem : EntitySystem
 {
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;

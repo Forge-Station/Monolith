@@ -1,4 +1,5 @@
 using Content.Client.Interactable.Components;
+using Content.Client.StatusIcon;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 using Robust.Client.GameObjects;
@@ -42,23 +43,13 @@ public sealed partial class StealthSystem : SharedStealthSystem
         if (!Resolve(uid, ref component, ref sprite, false))
             return;
 
-        _sprite.SetColor((uid, sprite), Color.White);
-
-        // After multi-post-shader support, GetScreenTexture / RaiseShaderEvent must be set on the
-        // PostShaderEntry. Setting the obsolete SpriteComponent fields does nothing for Clyde,
-        // which left SCREEN_TEXTURE unbound → solid black silhouettes.
+        sprite.Color = Color.White;
+        // WOLFGATE START: engine 291 ignores the sprite-wide GetScreenTexture/RaiseShaderEvent; they are per post-shader now
+        // upstream original: sprite.PostShader = enabled ? _shader : null; sprite.GetScreenTexture = enabled; sprite.RaiseShaderEvent = enabled;
+        sprite.PostShader = null;
         if (enabled)
-        {
-            _sprite.SetPostShader((uid, sprite), new SpriteComponent.PostShaderArgs(StealthPostShaderId, _shader)
-            {
-                GetScreenTexture = true,
-                RaiseShaderEvent = true,
-            });
-        }
-        else
-        {
-            _sprite.RemovePostShader((uid, sprite), StealthPostShaderId);
-        }
+            _sprite.SetPostShader(sprite, new SpriteComponent.PostShaderArgs("Stealth", _shader) { GetScreenTexture = true, RaiseShaderEvent = true });
+        // WOLFGATE END
 
         if (!enabled)
         {
@@ -85,7 +76,7 @@ public sealed partial class StealthSystem : SharedStealthSystem
             SetShader(uid, false, component);
     }
 
-    private void OnShaderRender(EntityUid uid, StealthComponent component, ref BeforePostShaderRenderEvent args)
+    private void OnShaderRender(EntityUid uid, StealthComponent component, BeforePostShaderRenderEvent args)
     {
         // Distortion effect uses screen coordinates. If a player moves, the entities appear to move on screen. this
         // makes the distortion very noticeable.
@@ -105,11 +96,19 @@ public sealed partial class StealthSystem : SharedStealthSystem
         // actual visual visibility effect is limited to -1.5 to 1.
         visibility = Math.Clamp(visibility, -1.5f, 1f);
 
-        args.Shader.SetParameter("reference", reference);
-        args.Shader.SetParameter("visibility", visibility);
-        args.Shader.SetParameter("shimmer_frequency", component.ShimmerFrequency);
+        _shader.SetParameter("reference", reference);
+        _shader.SetParameter("visibility", visibility);
+        // WOLFGATE(Stealth) START: a glowing visor keeps its own colour; the blue tint would blacken it.
+        var wfGlow = TryComp<Content.Shared._WF.Stealth.WFStealthGlowComponent>(uid, out var glow) ? glow.Strength : 0f;
+        _shader.SetParameter("glow", wfGlow);
+        if (wfGlow > 0f)
+        {
+            args.Sprite.Color = Color.White;
+            return;
+        }
+        // WOLFGATE END
 
         visibility = MathF.Max(0, visibility);
-        _sprite.SetColor((uid, args.Sprite), new Color(visibility, visibility, 1, 1));
+        args.Sprite.Color = new Color(visibility, visibility, 1, 1);
     }
 }

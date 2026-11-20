@@ -1,0 +1,138 @@
+# The Dynasty's answer to the TSF patrol: a pair of Vanguard gunboats holding station off a station for the whole round. They
+# warn ships that dock with them, fight boarders, and only drive attackers off. Ships of a company the Dynasty is at war with are
+# warned off at 900 m and fired on inside 450 m; everyone else may pass. Both patrols come at round start, at different stations.
+- type: wfEncounter
+  id: WFEncounterPdvPatrol
+  avoidStations: [ TSF, Caelestinus ]
+  name: wf-encounter-name-pdv-patrol
+  start: RoundStart
+  lifetime: Persistent
+  category: Patrol
+  cost: 1
+  replaceable: true
+  placement: Station
+  standoff: 500
+  cooldown: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Kynda, Gadfly, Gadfly, Kresta, Ontos ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 900
+    attackRange: 450
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 700
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Gadfly, Kresta ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 120, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1200
+    warnRange: 900
+    attackRange: 450
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+
+- type: wfEncounter
+  id: WFEncounterPdvPatrolHeavy
+  avoidStations: [ TSF, Caelestinus ]
+  name: wf-encounter-name-pdv-patrol-heavy
+  announcement: wf-encounter-announce-pdv-patrol-heavy
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Patrol
+  cost: 2
+  weight: 0.9
+  minPlayers: 3
+  placement: Station
+  standoff: 600
+  cooldown: 3600
+  duration: 2400
+  ships:
+  - key: lead
+    navigation: WFCrewNavigationWarship
+    vessels: [ Tethys, Neptune ]
+    deckhands: 1
+    guards: 1
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    iffColor: "#ffae3d"
+    objectives:
+    - kind: Circle
+      target: "@origin"
+      range: 750
+  - key: wing
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 130, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead
+  - key: wingtwo
+    navigation: WFCrewNavigationWarship
+    vessels: [ Gadfly, Kresta, Kynda ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -130, 0
+    side: patrol
+    faction: WFPdvNavy
+    company: PDV
+    profile: WFCrewProfilePdv
+    docking: Warn
+    disengage: Deter
+    disengageRange: 1400
+    warnRange: 1000
+    attackRange: 500
+    zoneLines: wf-encounter-pdv-zone
+    zoneTargets: AtWar
+    objectives:
+    - kind: Escort
+      target: lead

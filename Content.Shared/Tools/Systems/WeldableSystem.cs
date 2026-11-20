@@ -15,7 +15,7 @@ public sealed partial class WeldableSystem : EntitySystem
     [Dependency] private SharedToolSystem _toolSystem = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly EntityQuery<WeldableComponent> _query = default!;
+    [Dependency] private EntityQuery<WeldableComponent> _query = default!;
     public override void Initialize()
     {
         base.Initialize();

@@ -2,29 +2,37 @@
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls">
-    <BoxContainer Name="VBox" Orientation="Vertical">
-        <controls:NanoHeading Name="Header" Text="{Loc 'lobby-character-preview-panel-header'}">
-
-        </controls:NanoHeading>
-        <BoxContainer Name="Loaded" Orientation="Vertical"
-                      Visible="False">
-            <Label Name="Summary" HorizontalAlignment="Center" Margin="3 3"/>
-            <!-- Frontier -->
-            <Label Name="BankBalance" HorizontalAlignment="Center" Margin="3 3"/>
-            <!-- Company Display -->
-            <RichTextLabel Name="Company" HorizontalAlignment="Center" Margin="3 3"/>
-            <!-- End Frontier -->
-            <BoxContainer Name="ViewBox" Orientation="Horizontal" HorizontalAlignment="Center">
-
+    <BoxContainer Name="VBox" Orientation="Vertical" HorizontalAlignment="Center">
+        <controls:NanoHeading Name="Header" Text="{Loc 'lobby-character-preview-panel-header'}" Visible="False" />
+        <!-- Forge-Change: folded by default so the centre of the lobby stays clear for the art -->
+        <Button Name="ShowCard" Text="{Loc 'forge-lobby-hero-show'}" StyleClasses="LobbyNavPrimary"
+                HorizontalAlignment="Center" MinWidth="180" MinHeight="40" />
+        <PanelContainer Name="Loaded" StyleClasses="LobbyCard" Visible="False" HorizontalAlignment="Center">
+            <BoxContainer Orientation="Vertical" SeparationOverride="0" Margin="14 10 14 12" SetWidth="300">
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Label Text="{Loc 'lobby-character-preview-panel-header'}" StyleClasses="LobbyCaption"
+                           HorizontalExpand="True" VerticalAlignment="Center" />
+                    <Button Name="HideCard" Text="{Loc 'forge-lobby-hero-hide'}" StyleClasses="LobbyNav" MinHeight="28" />
+                </BoxContainer>
+                <PanelContainer StyleClasses="LobbyDivider" MinHeight="1" Margin="0 6 0 10" />
+                <PanelContainer StyleClasses="LobbyHero" HorizontalExpand="True">
+                    <BoxContainer Name="ViewBox" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 6" />
+                </PanelContainer>
+                <Label Name="CharacterName" Align="Center" ClipText="True" StyleClasses="LobbyHeroName" Margin="0 12 0 0" />
+                <Label Name="Details" Align="Center" ClipText="True" StyleClasses="LobbyHeroText" />
+                <PanelContainer StyleClasses="LobbyDivider" MinHeight="1" Margin="0 10 0 8" />
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8">
+                    <Label Text="{Loc 'forge-lobby-hero-balance'}" StyleClasses="LobbyHeroText" HorizontalExpand="True" />
+                    <Label Name="BankBalance" StyleClasses="LobbyHeroValue" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="0 2 0 0">
+                    <Label Text="{Loc 'lobby-character-preview-panel-company-label'}" StyleClasses="LobbyHeroText" HorizontalExpand="True" />
+                    <RichTextLabel Name="Company" StyleClasses="LobbyHeroText" />
+                </BoxContainer>
+                <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"
+                        StyleClasses="LobbyNavPrimary" HorizontalExpand="True" Margin="0 12 0 0" MinHeight="40" />
             </BoxContainer>
-            <controls:VSpacer/>
-            <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"
-                    HorizontalAlignment="Center"
-                    Margin="0 5 0 0"/>
-            <!-- Forge-Change-delete -->
-            <!-- MonoCoins Display -->
-            <!-- <Label Name="MonoCoins" HorizontalAlignment="Center" Margin="3 3"/> -->
-        </BoxContainer>
-        <Label Name="Unloaded" Text="{Loc 'lobby-character-preview-panel-unloaded-preferences-label'}"/>
+        </PanelContainer>
+        <Label Name="Unloaded" Text="{Loc 'lobby-character-preview-panel-unloaded-preferences-label'}" Visible="False" />
     </BoxContainer>
 </Control>

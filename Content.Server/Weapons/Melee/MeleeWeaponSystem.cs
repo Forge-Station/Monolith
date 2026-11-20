@@ -23,6 +23,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Numerics;
+using Content.Shared._WF.RMCCore.Tackle; // WOLFGATE(RMCCore)
 
 namespace Content.Server.Weapons.Melee;
 
@@ -113,6 +114,13 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         {
             return false;
         }
+
+        // WOLFGATE(RMCCore) START: RMC tackles replace the disarm when the target handles CMDisarmEvent
+        var cmDisarmEvent = new CMDisarmEvent(user);
+        RaiseLocalEvent(target, ref cmDisarmEvent);
+        if (cmDisarmEvent.Handled)
+            return true;
+        // WOLFGATE END
 
         EntityUid? inTargetHand = null;
 

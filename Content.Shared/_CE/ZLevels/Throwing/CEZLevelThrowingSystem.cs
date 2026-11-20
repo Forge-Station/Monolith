@@ -16,6 +16,14 @@ public sealed partial class CEZLevelThrowingSystem : EntitySystem
 
     private void OnThrown(Entity<CEZPhysicsComponent> ent, ref ThrownEvent args)
     {
+        // WOLFGATE(Planets) START: a throw only has an arc where there are levels to arc through.
+        // Off a z-network nothing ever integrates this velocity, so it sat on the body until its ship next reached a
+        // planet and launched it then.
+        var map = Transform(ent).MapUid;
+        if (!HasComp<CEZMapComponent>(map) && !HasComp<CEZTransitMapComponent>(map))
+            return;
+        // WOLFGATE END
+
         if (!TryComp<ThrownItemComponent>(ent, out var thrown)
             || thrown.LandTime is not { } landTime
             || thrown.ThrownTime is not { } thrownTime)

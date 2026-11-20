@@ -1,0 +1,31 @@
+# Flutter: three heavy pulses, then a pause. Flat armour reduction takes far less off a pulse than off a Phalanx hit.
+
+- type: entity
+  id: WFAsfTurretFlutter
+  parent: WeaponLaserTurretL1Phalanx
+  components:
+  - type: StaticPrice
+    price: 3500
+  - type: Sprite
+    sprite: _WF/Asf/Objects/ShuttleWeapons/flutter.rsi
+    layers:
+    - state: space_artillery
+  - type: Battery
+    maxCharge: 9000
+    startingCharge: 9000
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 450
+  - type: Gun
+    fireRate: 12
+    burstFireRate: 12
+    shotsPerBurst: 3
+    burstCooldown: 2
+    selectedMode: Burst
+    availableModes:
+    - Burst
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/ship_perforator.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: WFAsfFlutterPulse
+    fireCost: 300

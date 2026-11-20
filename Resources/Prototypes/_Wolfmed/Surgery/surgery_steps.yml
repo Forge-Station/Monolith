@@ -1,0 +1,543 @@
+# Wolfmed surgery steps. Re-expresses Space Onyx's wound surgeries on Shitmed's step system (D7, P4-3).
+# Tools and sprites reuse Wolfgate's existing Shitmed set - no new tool prototype and no new sprite is needed.
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepSutureBleeding
+  name: Suture the bleeding wound
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Hemostat
+    duration: 2
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryClampBleedingEffect
+    amount: 10
+  - type: WolfmedSurgeryPainEffect
+  - type: SurgeryRepeatableStep
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepStopInternalBleeding
+  name: Stop the internal bleeding
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Hemostat
+    duration: 4
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryTreatWoundEffect
+    internalBleeding: true
+  - type: WolfmedSurgeryPainEffect
+  - type: SurgeryStepEmoteEffect
+
+# Fracture ladder: BoneSetter reduces, BoneGel mends (P4-D20).
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepSetBone
+  name: Set the bone
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: BoneSetter
+    duration: 3
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/bonesetter.rsi
+    state: bonesetter
+  - type: WolfmedSurgeryMendFractureEffect
+    treatment: Reduced
+  - type: WolfmedSurgeryPainEffect
+    amount: 12
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepMendFracture
+  name: Mend the fracture
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: BoneGel
+    duration: 3
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/bone-gel.rsi
+    state: bone-gel
+  - type: WolfmedSurgeryMendFractureEffect
+    treatment: Mended
+  - type: WolfmedSurgeryPainEffect
+    amount: 12
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepHealAmputationConsequence
+  name: Repair the amputation damage
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Tending
+    duration: 4
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryTreatWoundEffect
+    woundPrototype: AmputationConsequenceWound
+  - type: WolfmedSurgeryPainEffect
+  - type: SurgeryStepEmoteEffect
+
+# Organ healing ---------------------------------------------------------------
+# Reversible only while the organ lives: OrganHealthSystem destroys any organ at Health <= 0 on the next
+# tick, so a destroyed organ still needs SurgeryInsert<Organ> (P4-D24).
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepHealOrganBase
+  name: Heal the organ
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Tending
+    duration: 2
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryPainEffect
+    amount: 24
+    sleepModifier: 0
+  - type: SurgeryRepeatableStep
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: WFSurgeryStepHealOrganBase
+  id: WFSurgeryStepHealBrain
+  name: Heal the brain
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: brain
+    amount: 3 # WOLFGATE (P4 balance): Onyx ships 1; 15 repeats of a 2 s step is dead time. Revert by editing this line.
+
+- type: entity
+  parent: WFSurgeryStepHealOrganBase
+  id: WFSurgeryStepHealEyes
+  name: Heal the eyes
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: eyes
+    amount: 3 # WOLFGATE (P4 balance): Onyx ships 1; 15 repeats of a 2 s step is dead time. Revert by editing this line.
+
+- type: entity
+  parent: WFSurgeryStepHealOrganBase
+  id: WFSurgeryStepHealHeart
+  name: Heal the heart
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: heart
+    amount: 3 # WOLFGATE (P4 balance): Onyx ships 1; 15 repeats of a 2 s step is dead time. Revert by editing this line.
+
+- type: entity
+  parent: WFSurgeryStepHealOrganBase
+  id: WFSurgeryStepHealLungs
+  name: Heal the lungs
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: lungs
+    amount: 3 # WOLFGATE (P4 balance): Onyx ships 1; 15 repeats of a 2 s step is dead time. Revert by editing this line.
+
+- type: entity
+  parent: WFSurgeryStepHealOrganBase
+  id: WFSurgeryStepHealLiver
+  name: Heal the liver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: liver
+    amount: 3 # WOLFGATE (P4 balance): Onyx ships 1; 15 repeats of a 2 s step is dead time. Revert by editing this line.
+
+- type: entity
+  parent: WFSurgeryStepHealOrganBase
+  id: WFSurgeryStepHealStomach
+  name: Heal the stomach
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: stomach
+    amount: 3 # WOLFGATE (P4 balance): Onyx ships 1; 15 repeats of a 2 s step is dead time. Revert by editing this line.
+
+- type: entity
+  parent: WFSurgeryStepHealOrganBase
+  id: WFSurgeryStepHealKidneys
+  name: Heal the kidneys
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WolfmedSurgeryOrganHealEffect
+    slot: kidneys
+    amount: 3 # WOLFGATE (P4 balance): Onyx ships 1; 15 repeats of a 2 s step is dead time. Revert by editing this line.
+
+# Slash and bite (W2) ---------------------------------------------------------
+# The artery is clamped first and sutured second: WolfmedArterialBleedBehavior refuses every treatment
+# while the bleed is still running, so the clamp step is what makes the suture step possible.
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepClampArtery
+  name: Clamp the severed artery
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Hemostat
+    duration: 3
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryIncisionTreatmentEffect
+    wound: WFWolfmedArterialBleedWound
+    treatment: Clamp
+  - type: WolfmedSurgeryPainEffect
+    amount: 8
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepRepairArtery
+  name: Suture the artery
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Tending
+    duration: 4
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryTreatWoundEffect
+    woundPrototype: WFWolfmedArterialBleedWound
+  - type: WolfmedSurgeryPainEffect
+    amount: 8
+  - type: SurgeryStepEmoteEffect
+
+# Burns (W4) ------------------------------------------------------------------
+# Charring carries no damage types, so the default Amount (remove it outright) is the only sensible one:
+# there is nothing to whittle down, the dead tissue is cut away and replaced in one step.
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepGraftSkin
+  name: Graft the burned tissue
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedSkinGraft
+    duration: 6
+  - type: Sprite
+    sprite: _DV/Objects/Specific/medical.rsi
+    state: regenerative-mesh
+  - type: WolfmedSurgeryTreatWoundEffect
+    woundPrototype: WFWolfmedCharringWound
+  # M1b: the graft closes the part's weeping burns too; their fluid loss stops.
+  - type: WolfmedSurgeryGraftBurnsEffect
+  - type: WolfmedSurgeryPainEffect
+    amount: 14
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepRepairTendon
+  name: Repair the tendon
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Tending
+    duration: 5
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryTreatWoundEffect
+    woundPrototype: WFWolfmedTendonCutWound
+  - type: WolfmedSurgeryPainEffect
+    amount: 10
+  - type: SurgeryStepEmoteEffect
+
+# Mechanical (W6) -------------------------------------------------------------
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepReplaceServo
+  name: Replace the servo run
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedServoKit
+    duration: 6
+  - type: Sprite
+    sprite: Objects/Tools/cable-coils.rsi
+    state: coillv-30
+  - type: WolfmedSurgeryTreatWoundEffect
+    woundPrototype: WFWolfmedServoDamageWound
+  - type: WolfmedSurgeryPainEffect
+    amount: 6
+  - type: SurgeryStepEmoteEffect
+
+# Evisceration (EVISC) --------------------------------------------------------
+# The organic pair mirrors the artery repair (clamp with a hemostat, then close), and the mechanical pair
+# mirrors it in metal: seat the plating with a wrench, then run the seam with a welder. The two tools carry
+# WolfmedHullPlate and WolfmedHullWeld the way the cable coil carries WolfmedServoKit (W6).
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepClampEvisceration
+  name: Clamp the torn vessels
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Hemostat
+    duration: 5
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryIncisionTreatmentEffect
+    wound: WFWolfmedEviscerationWound
+    treatment: Clamp
+  - type: WolfmedSurgeryPainEffect
+    amount: 12
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepCloseEvisceration
+  name: Close the abdomen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Cautery
+    duration: 8
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/cautery.rsi
+    state: cautery
+  - type: WolfmedSurgeryCloseEviscerationEffect
+    woundPrototype: WFWolfmedEviscerationWound
+  - type: WolfmedSurgeryPainEffect
+    amount: 20
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepSeatChassisPlating
+  name: Seat the torn plating
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedHullPlate
+    duration: 5
+  - type: Sprite
+    sprite: Objects/Tools/wrench.rsi
+    state: icon
+  - type: WolfmedSurgeryIncisionTreatmentEffect
+    wound: WFWolfmedChassisBreachWound
+    treatment: Clamp
+  - type: WolfmedSurgeryPainEffect
+    amount: 4
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepWeldChassisBreach
+  name: Weld the breach shut
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedHullWeld
+    duration: 8
+  - type: Sprite
+    sprite: Objects/Tools/welder.rsi
+    state: icon
+  - type: WolfmedSurgeryCloseEviscerationEffect
+    woundPrototype: WFWolfmedChassisBreachWound
+  - type: WolfmedSurgeryPainEffect
+    amount: 6
+  - type: SurgeryStepEmoteEffect
+
+# Chassis repair (playtest 3 IPC round 2) -------------------------------------
+# One pass each of what a welder and a cable coil do in a hand, three seconds like the hand welder's. The tools carry
+# WolfmedHullWeld and WolfmedServoKit, so the pod says WELDING and REWIRING. No pain and no scream: neither tool costs
+# any by hand.
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepWeldChassis
+  name: Weld the chassis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedHullWeld
+    duration: 3
+  - type: Sprite
+    sprite: Objects/Tools/welder.rsi
+    state: icon
+  - type: WolfmedSurgeryWeldChassisEffect
+    wounds:
+    - IpcMechanicalDamageWound
+    - WFWolfmedDentWound
+    - WFWolfmedBreachWound
+    - CyberneticMechanicalDamageWound
+  - type: SurgeryRepeatableStep
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepRewireChassis
+  name: Rewire the chassis
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedServoKit
+    duration: 3
+  - type: Sprite
+    sprite: Objects/Tools/cable-coils.rsi
+    state: coillv-30
+  - type: WolfmedSurgeryRewireChassisEffect
+    uses: 5
+    wounds:
+    - WFWolfmedShortCircuitWound
+    - ElectricalWound
+  - type: SurgeryRepeatableStep
+
+# Brain repair (BRAIN) --------------------------------------------------------
+# Unlike the heal steps above this one works on a DESTROYED organ, which is the only reason a brain-dead
+# body can ever be defibrillated again. One pass restores the whole organ and leaves the trauma behind.
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepRepairBrain
+  name: Repair the brain
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Tending
+    duration: 8
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryPainEffect
+    amount: 40
+    sleepModifier: 0
+  - type: WolfmedSurgeryBrainRepairEffect
+  - type: SurgeryStepEmoteEffect
+
+# Hand-only treatments as surgery steps (AUTODOC4) ----------------------------
+# W1 and W3 built embedded-object removal and joint relocation as do-after interactions, which a machine
+# with no hands cannot drive. These two steps call the very same code those do-afters call, so the pod
+# leaves what a medic's hemostat would have left, and the hand verbs keep working untouched.
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepExtractEmbedded
+  name: Extract the foreign objects
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: Hemostat
+    duration: 5
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
+    state: hemostat
+  - type: WolfmedSurgeryExtractEmbeddedEffect
+  - type: WolfmedSurgeryPainEffect
+    amount: 10
+  - type: SurgeryStepEmoteEffect
+
+# No tool: the relocate do-after needs a hand, not an instrument, and the pod's manipulator is its hand.
+# The pain the wrench costs is the dislocation behavior's own, charged by the relocate code.
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepRelocateJoint
+  name: Relocate the joint
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    duration: 5
+  - type: Sprite
+    sprite: _Shitmed/Objects/Specific/Medical/Surgery/bonesetter.rsi
+    state: bonesetter
+  - type: WolfmedSurgeryRelocateJointEffect
+  - type: SurgeryStepEmoteEffect
+
+# Core repair (M2, OD10) ------------------------------------------------------
+# The three chassis steps: the wrench opens the housing, the multitool re-flashes the core, the welder seals it.
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepUnseatCore
+  name: Unbolt the core housing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedHullPlate
+    add:
+    - type: WolfmedCoreHousingOpen
+    duration: 4
+  - type: Sprite
+    sprite: Objects/Tools/wrench.rsi
+    state: icon
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepRepairCore
+  name: Re-flash the positronic core
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedCoreProbe
+    duration: 8
+  - type: Sprite
+    sprite: _NF/Objects/Tools/multitool.rsi
+    state: icon
+  - type: WolfmedSurgeryBrainRepairEffect
+    slot: posbrain
+  - type: SurgeryStepEmoteEffect
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFSurgeryStepReseatCore
+  name: Weld the core housing shut
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WolfmedHullWeld
+    remove:
+    - type: WolfmedCoreHousingOpen
+    duration: 4
+  - type: Sprite
+    sprite: Objects/Tools/welder.rsi
+    state: icon
+  - type: SurgeryStepEmoteEffect

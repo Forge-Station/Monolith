@@ -1,6 +1,6 @@
 - type: entity
   id: OrganHarpyLungs
-  parent: BaseHumanOrgan
+  parent: [BaseHumanOrgan, WFWolfmedOrganLungs] # WOLFGATE(Wolfmed): M4: OD16 parity, Wolfmed lung data (plan 9.2 group A-prime)
   name: lungs
   description: "An advanced pair of avian lungs. Filters oxygen by way of moving air constantly through air sacs."
   components:

@@ -41,11 +41,11 @@ public sealed partial class MailJobVisualizerSystem : VisualizerSystem<MailCompo
 
         if (!_prototypeManager.TryIndex<JobIconPrototype>(job, out var icon))
         {
-            args.Sprite.LayerSetTexture(MailVisualLayers.JobStamp, _spriteSystem.Frame0(_prototypeManager.Index("JobIconUnknown")));
+            SpriteSystem.LayerSetTexture((uid, args.Sprite), MailVisualLayers.JobStamp, _spriteSystem.Frame0(_prototypeManager.Index("JobIconUnknown")));
             return;
         }
 
-        args.Sprite.LayerSetTexture(MailVisualLayers.JobStamp, _spriteSystem.Frame0(icon.Icon));
+        SpriteSystem.LayerSetTexture((uid, args.Sprite), MailVisualLayers.JobStamp, _spriteSystem.Frame0(icon.Icon));
     }
 }
 

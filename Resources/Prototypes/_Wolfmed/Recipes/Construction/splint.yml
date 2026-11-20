@@ -1,0 +1,15 @@
+# V5: the improvised splint is the route when medbay is out of the proper ones. A rod and a bandage,
+# craftable anywhere.
+
+- type: construction
+  name: improvised splint
+  id: WFWolfmedSplintImprovised
+  graph: WFWolfmedSplintImprovised
+  startNode: start
+  targetNode: splint
+  category: construction-category-tools
+  description: A metal rod bound with cloth. Holds a broken arm or leg still until someone with bone gel takes over.
+  icon:
+    sprite: _WF/Wolfmed/Objects/Medical/splint.rsi
+    state: splint-improvised
+  objectType: Item

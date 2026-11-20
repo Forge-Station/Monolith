@@ -1,0 +1,375 @@
+// Weather on open ground: wet floor, puddles with raindrop ripples, and snow cover.
+// Pass 0 draws over the floor, under entities, from the floor under it (SCREEN_TEXTURE). Pass 1 runs after entities
+// with the whole scene in SCREEN_TEXTURE and the floor copy in floorTex: it redoes pass 0 to find water pixels nothing
+// covers, and gives them a mirror of what stands above. Both light the result by hand, so the engine's light is off.
+// Pass 2 bakes the puddle height field into a texture over the mask's rect, so the passes read it instead of redoing
+// ten noise lookups at every pixel.
+// fragment() is pasted into the engine's main(), so it must not return early: that would skip writing the colour.
+
+uniform sampler2D SCREEN_TEXTURE;
+uniform sampler2D mask;
+uniform sampler2D floorTex;
+uniform sampler2D heights;
+// 1 when heights holds the baked puddle heights over the mask's rect.
+uniform highp float useHeights;
+uniform highp float pass;
+uniform highp vec2 maskOffset;
+uniform highp vec2 maskSize;
+uniform highp vec2 size;
+uniform highp vec2 origin;
+uniform highp float wetness;
+uniform highp float puddles;
+uniform highp float rain;
+uniform highp float time;
+// 1 for ripples and splashes (Full quality), 0 without (Reduced).
+uniform highp float detail;
+// Screen UV change per world unit along x and y.
+uniform highp vec2 uvDx;
+uniform highp vec2 uvDy;
+// Screen up in world space, snapped to a tile axis; reflections mirror about tile edges along it.
+uniform highp vec2 up;
+// The camera, relative to this quad's bottom-left corner, and half the view's size, in world units.
+uniform highp vec2 eye;
+uniform highp vec2 halfView;
+// World units per screen pixel, for antialiased edges.
+uniform highp float pixel;
+uniform highp vec3 ambient;
+// Tuning from the wf.ground_cover cvars; 1 is the default look for all but puddleOpacity.
+uniform highp float puddleOpacity;
+uniform highp float puddleCoverage;
+uniform highp float reflection;
+uniform highp float sparkle;
+uniform highp float wetDarkening;
+// Tiles from a puddle's rim to its full water.
+uniform highp float puddleEdge;
+// The colour of the weather's water; anything but plain water (blood rain) lends the wet ground and puddles its colour.
+uniform highp vec3 tint;
+
+const highp vec3 sunDir = vec3(-0.3, 0.45, 1.0);
+const highp vec3 plainWater = vec3(0.42, 0.5, 0.62);
+
+// Lattice hash, repeating every 256 cells. Noise scales are multiples of 0.25 (or reach the lattice through those), so
+// wrapping world coordinates every 1024 tiles never shifts the pattern.
+highp float hash(highp vec2 p) {
+    p = mod(p, 256.0);
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+highp vec2 hash2(highp vec2 p) {
+    p = mod(p, 256.0);
+    return fract(sin(vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)))) * 43758.5453);
+}
+
+highp float vnoise(highp vec2 x) {
+    highp vec2 i = floor(x);
+    highp vec2 f = fract(x);
+    f = f * f * (3.0 - 2.0 * f);
+    highp float a = hash(i);
+    highp float b = hash(i + vec2(1.0, 0.0));
+    highp float c = hash(i + vec2(0.0, 1.0));
+    highp float d = hash(i + vec2(1.0, 1.0));
+    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+highp float fbm(highp vec2 p) {
+    return 0.55 * vnoise(p) + 0.3 * vnoise(p * 2.0 + vec2(5.0, 9.0)) + 0.15 * vnoise(p * 4.0 + vec2(13.0, 2.0));
+}
+
+highp float luma(highp vec3 c) {
+    return dot(c, vec3(0.299, 0.587, 0.114));
+}
+
+// Puts colour b with alpha bA over colour a with alpha aA.
+highp vec4 over(highp vec4 a, highp vec3 b, highp float bA) {
+    highp float outA = bA + a.a * (1.0 - bA);
+    if (outA <= 0.0)
+        return vec4(0.0);
+
+    return vec4((b * bA + a.rgb * a.a * (1.0 - bA)) / outA, outA);
+}
+
+highp vec3 maskAt(highp vec2 local) {
+    return texture(mask, (local + maskOffset) / maskSize).rgb;
+}
+
+// The mask filters linearly, so its 0.5 contour is the roof line; wetness fades in from it.
+highp float openOf(highp vec3 m) {
+    return smoothstep(0.5, 0.95, m.r);
+}
+
+// Puddles sit in the low spots of a warped height field: a few small pools in light rain, merging into larger ones
+// only as heavy rain raises the level. The height is baked (pass 2) and read back from the texture when it holds it.
+highp float puddleHeight(highp vec2 world) {
+    highp vec2 q = world * 0.25;
+    highp vec2 warp = vec2(fbm(q + vec2(1.7, 9.2)), fbm(q + vec2(8.3, 2.8)));
+    return 0.7 * fbm(q + warp * 1.5) + 0.3 * vnoise(world * 0.75 + vec2(4.0, 21.0));
+}
+
+// Returns height, level.
+highp vec2 puddleField(highp vec2 world, highp vec2 local) {
+    highp float h = useHeights > 0.5 ? texture(heights, (local + maskOffset) / maskSize).r : puddleHeight(world);
+    highp float p = clamp(puddles, 0.0, 1.0);
+    return vec2(h, (0.19 + 0.15 * p * p) * puddleCoverage);
+}
+
+highp float waterOf(highp vec2 field, highp vec3 m) {
+    highp float aa = max(pixel * 0.3, 0.002);
+    return smoothstep(field.y + aa, field.y - aa, field.x) * smoothstep(0.75, 1.0, m.r);
+}
+
+// Raindrop rings on water: x, y is the surface slope they add, z the light their crests catch, brightest on the side
+// facing the light so each ring reads as a bright crescent.
+highp vec3 ripples(highp vec2 w, highp float density) {
+    const highp float cell = 0.4;
+    const highp float period = 0.9;
+    highp vec2 toLight = normalize(sunDir.xy);
+    highp vec2 c = floor(w / cell);
+    // A ring is under a quarter tile wide, so only the cell the point is in and its nearest neighbour each way reach it.
+    highp vec2 side = step(vec2(0.5), fract(w / cell)) * 2.0 - 1.0;
+    highp vec3 sum = vec3(0.0);
+    for (int y = 0; y < 2; y++) {
+        for (int x = 0; x < 2; x++) {
+            highp vec2 id = c + side * vec2(float(x), float(y));
+            highp float t = time / period + hash(id + vec2(31.0, 17.0));
+            highp float cycle = floor(t);
+            highp float age = t - cycle;
+            highp vec2 seed = id + vec2(mod(cycle, 61.0) * 3.0, mod(cycle, 47.0) * 5.0);
+            if (hash(seed + vec2(7.0, 1.0)) > density)
+                continue;
+
+            highp vec2 centre = (id + 0.2 + 0.6 * hash2(seed)) * cell;
+            highp vec2 d = w - centre;
+            highp float dist = length(d);
+            highp float band = (dist - age * 0.24) / 0.024;
+            if (abs(band) > 4.0)
+                continue;
+
+            highp float fade = (1.0 - age) * (1.0 - age);
+            // A leading crest and a fainter second ring behind it.
+            highp float wave = (exp(-band * band) + 0.45 * exp(-(band + 2.8) * (band + 2.8))) * fade;
+            highp vec2 dir = d / max(dist, 0.001);
+            sum.xy += dir * wave;
+            sum.z += wave * (0.25 + 0.75 * max(dot(dir, toLight), 0.0));
+        }
+    }
+
+    return sum;
+}
+
+highp vec3 viewAt(highp vec2 local) {
+    // The view tilts towards each pixel from the camera, so glints slide over the ground as the camera moves.
+    return normalize(vec3((eye - local) / halfView * 0.7, 1.0));
+}
+
+// Overcast sky over a puddle: the light there, a cool grey, so it stays dark at night. Colours are linear, so this
+// is already well above the ground's own brightness.
+highp vec3 skyOf(highp vec3 lit) {
+    return lit * vec3(0.11, 0.13, 0.16);
+}
+
+// Specks of light that twinkle on the art's own pixels: sparse on wet ground, denser on water.
+highp float twinkle(highp vec2 world, highp float density) {
+    highp vec2 texel = floor(world * 32.0);
+    highp float h = hash(texel + vec2(2.0, 9.0));
+    if (h < 1.0 - density)
+        return 0.0;
+
+    highp float phase = hash(texel + vec2(8.0, 3.0)) * 6.2832;
+    highp float rate = 1.5 + 2.5 * hash(texel + vec2(1.0, 14.0));
+    return pow(0.5 + 0.5 * sin(time * rate + phase), 10.0);
+}
+
+// Wet ground and puddles at one point, from the floor colour there. rgb is the colour, a how much is water.
+// mirror replaces the sky in the water when hasMirror is 1; lit is the light there, localLight the lamps' share of it.
+// ringIn gives the ripples when its w is 1, so a caller that has them needn't redo them; fine 0 leaves ripples and
+// drops out, for a rough copy.
+highp vec4 ground(highp vec2 world, highp vec2 local, highp vec3 m, highp vec3 floorCol, highp vec3 mirror,
+                  highp float hasMirror, highp vec3 lit, highp vec3 localLight, highp vec4 ringIn, highp float fine) {
+    highp float open = openOf(m);
+    highp float w = open * wetness;
+    highp vec3 view = viewAt(local);
+    highp vec3 halfway = normalize(normalize(sunDir) + view);
+
+    // Wet floor: a little darker and richer, keeping its colour and pixel art.
+    highp float l = luma(floorCol);
+    highp vec3 result = mix(vec3(l), floorCol, 1.0 + 0.15 * w * wetDarkening) * (1.0 - 0.12 * w * wetDarkening);
+    highp float body = smoothstep(0.1, 0.5, length(tint - plainWater));
+    result = mix(result, tint * lit * 0.35, w * body * 0.3);
+
+    // Gloss runs in faint streaks: a sheen of sky where the view lines up with the sun, and single-pixel glints that
+    // slide with the camera and twinkle.
+    highp float streak = vnoise(vec2(world.x * 1.5, world.y * 0.5) + vec2(3.0, 7.0));
+    highp vec2 slope = vec2(vnoise(world * 2.0) - 0.5, vnoise(world * 2.0 + vec2(17.0, 4.0)) - 0.5) * 0.5;
+    highp float gloss = w * smoothstep(0.4, 0.9, streak);
+    highp float sheen = pow(max(dot(normalize(vec3(slope * 0.3, 1.0)), halfway), 0.0), 24.0);
+    highp vec2 texel = floor(world * 32.0);
+    highp vec2 tilt = hash2(texel + vec2(5.0, 1.0)) - 0.5;
+    highp float glint = step(0.95, hash(texel + vec2(2.0, 9.0)))
+        * pow(max(dot(normalize(vec3(tilt * 0.9, 1.0)), halfway), 0.0), 90.0);
+    highp float speck = twinkle(world + vec2(0.0, 0.5), 0.004) * w;
+    result += lit * (sheen * 0.012 * gloss + (glint * gloss * 0.3 + speck * 0.5) * sparkle)
+        + localLight * (0.02 * gloss + (glint * gloss * 0.3 + speck * 0.4) * sparkle);
+
+    highp float water = 0.0;
+    if (puddles > 0.0) {
+        highp vec2 field = puddleField(world, local);
+        water = waterOf(field, m);
+        // A damp rim round each puddle.
+        highp float damp = smoothstep(field.y + 0.035, field.y, field.x) * smoothstep(0.75, 1.0, m.r) * (1.0 - water);
+        result *= 1.0 - 0.05 * damp * wetness * wetDarkening;
+
+        if (water > 0.0) {
+            // 0 at the rim, 1 about a quarter tile in: depth over the height field's slope gives the distance to the
+            // rim, so the rim keeps one width in shallow and deep puddles alike.
+            highp vec2 grad = vec2(puddleField(world + vec2(0.0625, 0.0), local + vec2(0.0625, 0.0)).x,
+                                   puddleField(world + vec2(0.0, 0.0625), local + vec2(0.0, 0.0625)).x) - field.x;
+            highp float edgeDist = (field.y - field.x) * 0.0625 / max(length(grad), 0.0005);
+            highp float inward = smoothstep(0.0, 0.25, edgeDist);
+            highp vec3 ring = ringIn.xyz;
+            if (ringIn.w < 0.5 && fine > 0.0 && detail > 0.0 && rain > 0.0)
+                ring = ripples(world, rain * 0.75 + 0.1);
+
+            // Glints catch the sun on single pixels, each tilted its own way, so they glitter and slide with the
+            // camera instead of pooling into one soft highlight.
+            highp vec2 wTilt = hash2(texel + vec2(12.0, 7.0)) - 0.5;
+            highp vec3 nw = normalize(vec3(wTilt * 0.8 + ring.xy * 0.1, 1.0));
+            highp vec3 reflected = mix(skyOf(lit), mirror, hasMirror);
+
+            // Clear water: the ground shows through, a little darker and cooler.
+            highp vec3 under = floorCol * mix(vec3(1.0), vec3(0.64, 0.75, 0.9), puddleOpacity);
+            under = mix(under, tint * lit, body * 0.85);
+
+            // Fresnel-like: the reflection is strong at the rim and towards the view's edges, faint in the middle.
+            highp float grazing = clamp(length(view.xy) * 1.3, 0.0, 1.0);
+            highp float fresnel = clamp((mix(0.32, 0.05, inward) + 0.12 * grazing) * reflection, 0.0, 1.0);
+            highp vec3 surface = mix(under, reflected, fresnel * mix(0.6, 1.0, puddleOpacity));
+
+            // Sun glints and twinkling specks of sky, and the lit crests of the ripples.
+            highp float specW = step(0.9, hash(texel + vec2(6.0, 4.0))) * pow(max(dot(nw, halfway), 0.0), 120.0);
+            highp float speckW = twinkle(world, 0.012);
+            surface += (lit * (specW * 0.6 + speckW * 0.7 + ring.z * 0.3) + localLight * (specW * 0.6 + speckW * 0.5
+                + ring.z * 0.4)) * sparkle;
+
+            // A thin bright lip where the water meets the ground.
+            surface += (lit * 0.012 + localLight * 0.03) * (1.0 - inward) * sparkle;
+
+            // The rim is barely there and the water thickens going in, so no edge is drawn round it.
+            result = mix(result, surface, water * smoothstep(0.0, puddleEdge, edgeDist));
+        }
+    }
+
+    // Drops landing on open ground: tiny short-lived flecks.
+    if (fine > 0.0 && detail > 0.0 && rain > 0.0) {
+        highp vec2 sc = floor(world * 2.0);
+        highp float st = time * 2.5 + hash(sc + vec2(4.0, 9.0)) * 10.0;
+        highp float sAge = fract(st);
+        highp vec2 sp = (sc + 0.15 + 0.7 * hash2(sc + vec2(floor(st), 3.0))) * 0.5;
+        highp float sd = length(world - sp);
+        highp float fleck = (1.0 - smoothstep(0.015, 0.03 + sAge * 0.04, sd)) * (1.0 - sAge) * step(sAge, 0.3);
+        fleck *= step(hash(sc + vec2(floor(st), 11.0)), rain * 0.5) * (1.0 - water);
+        result += (lit * 0.25 + localLight * 0.25) * fleck * open;
+    }
+
+    return vec4(mix(floorCol, result, open), water);
+}
+
+// How much snow covers an art pixel, from the mask there. Green is the blurred snow depth and blue the blurred share of
+// ground under snow, so green over blue is how deep the snow is where it lies, and blue's 0.5 contour is its edge, which
+// the blur has rounded off the tile squares. Thin cover lies in patches, deep cover is unbroken, and noise ripples the
+// edge. p is snapped to the 32 pixels of a tile.
+highp float snowAt(highp vec2 p, highp vec3 ms) {
+    if (ms.b <= 0.1)
+        return 0.0;
+
+    highp float depth = ms.g / ms.b;
+    highp float n = 0.6 * vnoise(p * 0.75) + 0.4 * vnoise(p * 3.0 + vec2(11.0, 5.0));
+    highp float edge = smoothstep(0.4, 0.6, ms.b + (n - 0.5) * 0.3);
+    return edge * smoothstep(0.0, 0.18, depth * 1.6 - n * 0.35) * (0.55 + 0.42 * clamp(depth * 1.5, 0.0, 1.0));
+}
+
+// The art pixel a point lies in.
+highp vec2 pixelOf(highp vec2 world) {
+    return (floor(world * 32.0) + 0.5) / 32.0;
+}
+
+highp float differs(highp vec3 a, highp vec3 b) {
+    highp vec3 d = abs(a - b);
+    return max(d.r, max(d.g, d.b)) - 0.03 * max(a.r, max(a.g, a.b));
+}
+
+void fragment() {
+    highp vec3 light = lightSample;
+    lightSample = vec3(1.0);
+
+    highp vec2 local = UV2 * size;
+    highp vec2 world = local + origin;
+    highp vec3 m = maskAt(local);
+    highp vec2 screen = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
+
+    if (pass > 1.5) {
+        COLOR = vec4(puddleHeight(world), 0.0, 0.0, 1.0);
+    } else if (pass > 0.5) {
+        // Reflections: only water pixels with nothing drawn over them since pass 0.
+        highp vec2 pc = pixelOf(world);
+        if (snowAt(pc, maskAt(local + pc - world)) > 0.0 || openOf(m) <= 0.0)
+            discard;
+
+        highp vec2 field = puddleField(world, local);
+        highp float water = waterOf(field, m);
+        if (water <= 0.0)
+            discard;
+
+        highp vec3 floorCol = zTextureSpec(floorTex, screen).rgb;
+        highp vec3 scene = zTextureSpec(SCREEN_TEXTURE, screen).rgb;
+        highp vec3 ring = vec3(0.0);
+        if (detail > 0.0 && rain > 0.0)
+            ring = ripples(world, rain * 0.75 + 0.1);
+
+        highp vec4 ringIn = vec4(ring, 1.0);
+        highp vec3 base = ground(world, local, m, floorCol, vec3(0.0), 0.0, light, vec3(0.0), ringIn, 1.0).rgb;
+        if (differs(scene, base) > 0.02)
+            discard;
+
+        // Mirror about the tile edge above, so things standing a tile up show upside down below them.
+        highp float t = dot(world, up);
+        highp vec2 delta = up * (2.0 * (ceil(t) - t)) + ring.xy * 0.04;
+        highp vec2 uv = screen + delta.x * uvDx + delta.y * uvDy;
+        highp float inView = step(0.0, uv.x) * step(uv.x, 1.0) * step(0.0, uv.y) * step(uv.y, 1.0);
+        highp vec3 sceneT = zTextureSpec(SCREEN_TEXTURE, uv).rgb;
+        highp vec3 floorT = zTextureSpec(floorTex, uv).rgb;
+        highp vec3 mT = maskAt(local + delta);
+        highp vec3 baseT = ground(world + delta, local + delta, mT, floorT, vec3(0.0), 0.0, light, vec3(0.0),
+                                  vec4(0.0), 0.0).rgb;
+        highp vec2 pcT = pixelOf(world + delta);
+        if (snowAt(pcT, maskAt(local + pcT - world)) > 0.0)
+            baseT = sceneT;
+        // Only what stands there is mirrored; bare ground and water there leave the sky. The copy there is rough (no
+        // ripples or drops), hence the loose threshold.
+        highp float standing = smoothstep(0.06, 0.14, differs(sceneT, baseT)) * inView;
+        highp vec3 mirror = mix(skyOf(light), sceneT * vec3(0.8, 0.86, 0.95), standing);
+
+        highp vec3 localLight = max(light - ambient, vec3(0.0));
+        COLOR = vec4(ground(world, local, m, floorCol, mirror, 1.0, light, localLight, ringIn, 1.0).rgb, 1.0);
+    } else {
+        highp vec4 col = vec4(0.0);
+        if (wetness > 0.0 && openOf(m) > 0.0) {
+            highp vec3 floorCol = zTextureSpec(SCREEN_TEXTURE, screen).rgb;
+            col = vec4(ground(world, local, m, floorCol, vec3(0.0), 0.0, light, vec3(0.0), vec4(0.0), 1.0).rgb, 1.0);
+        }
+
+        // Green is snow depth, blue the share of ground under snow.
+        highp vec2 p = pixelOf(world);
+        highp vec3 ms = maskAt(local + p - world);
+        highp float cover = snowAt(p, ms);
+        if (cover > 0.0) {
+            highp float shade = vnoise(p * 1.5 + vec2(3.0, 17.0));
+            highp vec3 snow = mix(vec3(0.80, 0.85, 0.92), vec3(0.97, 0.98, 1.0), shade * 0.7 + ms.g / ms.b * 0.3);
+            col = over(col, snow * light, cover);
+        }
+
+        if (col.a <= 0.004)
+            discard;
+
+        COLOR = col;
+    }
+}

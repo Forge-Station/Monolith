@@ -1,0 +1,63 @@
+# The Choir's mark over a member's head: a white C on red, seen by ghosts, admins and other members.
+- type: factionIcon
+  id: WFChoirFaction
+  priority: 11
+  visibleToGhosts: true
+  showTo:
+    components:
+    - ShowAntagIcons
+    - WFChoirMember
+  icon:
+    sprite: /Textures/_WF/Lattice/choir_icon.rsi
+    state: choir
+
+# Lists a Choir player as an antagonist in admin tools.
+- type: antag
+  id: WFChoirAntag
+  name: wf-choir-antag-name
+  antagonist: true
+  setPreference: false
+  objective: wf-choir-antag-objective
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: WFMindRoleChoir
+  name: Choir Role
+  components:
+  - type: MindRole
+    antagPrototype: WFChoirAntag
+    roleType: TeamAntagonist
+  - type: WFChoirRole
+
+# Cutting the song out of a Choir member: saw the skull, then excise it with a shard of exotic matter. Most wake free;
+# some die on the table and rise Remade. Not in the Coda, where the song is too loud.
+- type: entity
+  parent: SurgeryBase
+  id: WFSurgeryExciseSong
+  name: Excise the Song
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Surgery
+    requirement: SurgeryOpenIncision
+    steps:
+    - SurgeryStepSawBones
+    - WFLatticeStepExciseSong
+  - type: SurgeryPartCondition
+    part: Head
+  - type: WFSongExcisionCondition
+
+- type: entity
+  parent: SurgeryStepBase
+  id: WFLatticeStepExciseSong
+  name: Excise the song
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurgeryStep
+    tool:
+    - type: WFSongExcisionTool
+    duration: 15
+  - type: Sprite
+    sprite: Nyanotrasen/Objects/Materials/materials.rsi
+    state: bluespace
+  - type: WFSongExcisionEffect
+  - type: SurgeryStepEmoteEffect

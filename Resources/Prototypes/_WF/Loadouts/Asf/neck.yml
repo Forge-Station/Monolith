@@ -1,0 +1,25 @@
+- type: loadout
+  id: WFAsfLoadoutCapelet
+  equipment:
+    neck: WFAsfClothingNeckCapelet
+
+- type: loadout
+  id: WFAsfLoadoutCape
+  equipment:
+    neck: WFAsfClothingNeckCape
+
+- type: loadoutGroup
+  id: WFAsfNeckEnvoy
+  name: loadout-group-contractor-neck
+  loadouts:
+  - WFAsfLoadoutCapelet
+  - WFAsfLoadoutCape
+  fallbacks:
+  - WFAsfLoadoutCapelet
+
+- type: loadoutGroup
+  id: WFAsfNeck
+  name: loadout-group-contractor-neck
+  minLimit: 0
+  loadouts:
+  - WFAsfLoadoutCapelet

@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Bubberstation @ commit 0d3a319248ca4b46b55578cc5e73fc0184eccd65 South frame separated onto the TailBehind layer for Wolfgate.",
+  "size": {
+    "x": 64,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "naga_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "naga_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "naga_rattlesnake_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "naga_rattlesnake_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "naga_rattlesnake_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "naga_rattlesnake_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "naga_rattlesnake_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "naga_rattlesnake_tertiary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "naga_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "naga_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "naga_striped_primary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "naga_striped_primary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "naga_striped_secondary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "naga_striped_secondary_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "naga_striped_tertiary_BEHIND",
+      "directions": 4
+    },
+    {
+      "name": "naga_striped_tertiary_FRONT",
+      "directions": 4
+    }
+  ]
+}

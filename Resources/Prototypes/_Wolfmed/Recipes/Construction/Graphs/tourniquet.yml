@@ -1,0 +1,18 @@
+- type: constructionGraph
+  id: WFWolfmedMakeshiftTourniquet
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: tourniquet
+      steps:
+      # Every jumpsuit with suit sensors, and nothing else carries them.
+      - component: SuitSensor
+        name: a jumpsuit
+        icon:
+          sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+          state: icon
+        doAfter: 3
+
+  - node: tourniquet
+    entity: WFWolfmedMakeshiftTourniquet

@@ -1,0 +1,96 @@
+# Bone field scenery: the same sprites as the imported bones, recoloured to bleached bone.
+- type: entity
+  id: WFCarcinomaBoneHorn
+  parent: TgStatueBoneRib
+  name: bone horn
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/bones.rsi
+
+- type: entity
+  id: WFCarcinomaBoneHornTurned
+  parent: TgStatueBoneRib2
+  name: bone horn
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/bones.rsi
+
+- type: entity
+  id: WFCarcinomaBoneSkull
+  parent: TgStatueBoneSkull
+  name: bone skull
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/bones.rsi
+
+- type: entity
+  id: WFCarcinomaBoneSkullHalf
+  parent: TgBoneSkullHalf
+  name: cracked skull
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/bones.rsi
+
+- type: entity
+  id: WFCarcinomaBoneSkullHalfTurned
+  parent: TgBoneSkullHalf2
+  name: cracked skull
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/bones.rsi
+
+- type: entity
+  id: WFCarcinomaBoneLong
+  parent: CoyoteChompBonesLbone
+  name: long bone
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/bones_64x64.rsi
+
+- type: entity
+  id: WFCarcinomaBoneRibs
+  parent: CoyoteChompBonesLribs
+  name: rib bones
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/bones_64x64.rsi
+
+- type: entity
+  id: WFCarcinomaBoneRibsTall
+  parent: CoyoteChompBonesLribs1
+  name: rib bones
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/bones_64x64.rsi
+
+- type: entity
+  id: WFCarcinomaBoneSkullGreat
+  parent: CoyoteChompBonesLskullW
+  name: great skull
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/bones_64x64.rsi
+
+- type: entity
+  id: WFCarcinomaBoneLumpOne
+  parent: CoyoteChompBonesLrock
+  name: calcified lump
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/lumps.rsi
+
+- type: entity
+  id: WFCarcinomaBoneLumpTwo
+  parent: CoyoteChompBonesLrock2
+  name: calcified lump
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/lumps.rsi
+
+- type: entity
+  id: WFCarcinomaBoneLumpThree
+  parent: CoyoteChompBonesLrock4
+  name: calcified lump
+  components:
+  - type: Sprite
+    sprite: _WF/Planets/BoneField/lumps.rsi

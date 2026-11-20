@@ -1,0 +1,23 @@
+- type: company
+  id: WFAsf
+  name: Astraeus Solar Federation
+  description: wf-asf-company-description
+  color: "#A66BE0"
+  disabled: true # assigned by ASF jobs, not picked in the lobby
+
+# The flag of the Underground black market and the people who work out of it. Nobody can pick it at character setup;
+# the Reavers leave its ships, crews and station alone (see the neutralCompanies on their sector faction).
+- type: company
+  id: WFUnderground
+  name: Underground
+  description: wf-company-underground-description
+  color: "#991111"
+  disabled: true
+
+# The flag of the Automated Defense System's hulls and crews. Nobody can pick it at character setup.
+- type: company
+  id: WFAds
+  name: Automated Defense System
+  description: wf-company-ads-description
+  color: "#9B4DFF"
+  disabled: true

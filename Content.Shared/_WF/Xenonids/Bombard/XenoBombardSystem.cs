@@ -1,0 +1,154 @@
+using System.Numerics;
+using Content.Shared._WF.RMCCore.Actions;
+using Content.Shared._WF.RMCCore.Projectiles;
+using Content.Shared._WF.RMCCore.Slow;
+using Content.Shared._WF.Xenonids.GasToggle;
+using Content.Shared._WF.Xenonids.Hive;
+using Content.Shared._WF.Xenonids.Plasma;
+using Content.Shared.Actions;
+using Content.Shared.DoAfter;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Popups;
+using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
+
+namespace Content.Shared._WF.Xenonids.Bombard;
+
+public sealed partial class XenoBombardSystem : EntitySystem
+{
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private RMCSlowSystem _slow = default!;
+    [Dependency] private SharedXenoHiveSystem _hive = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private RMCProjectileSystem _rmcProjectile = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoPlasmaSystem _xenoPlasma = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<XenoBombardComponent, XenoBombardActionEvent>(OnBombard);
+        SubscribeLocalEvent<XenoBombardComponent, DoAfterAttemptEvent<XenoBombardDoAfterEvent>>(OnBombardDoAfterAttempt);
+        SubscribeLocalEvent<XenoBombardComponent, XenoBombardDoAfterEvent>(OnBombardDoAfter);
+        SubscribeLocalEvent<XenoBombardComponent, XenoGasToggleActionEvent>(OnToggleType);
+    }
+
+    private void OnBombard(Entity<XenoBombardComponent> ent, ref XenoBombardActionEvent args)
+    {
+        var source = _transform.GetMapCoordinates(ent);
+        var target = _transform.ToMapCoordinates(args.Target);
+        if (source.MapId != target.MapId)
+            return;
+
+        args.Handled = true;
+
+        if (!_xenoPlasma.HasPlasmaPopup(ent.Owner, ent.Comp.PlasmaCost))
+            return;
+
+        var direction = target.Position - source.Position;
+        if (direction.Length() > ent.Comp.Range)
+            target = source.Offset(direction.Normalized() * ent.Comp.Range);
+
+        _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
+
+        var ev = new XenoBombardDoAfterEvent { Coordinates = target, };
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true };
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            // WOLFGATE: DoAfterArgs has no RootEntity here, so the xeno is rooted for the delay instead
+            _slow.TryRoot(ent, ent.Comp.Delay);
+            _rmcActions.DisableSharedCooldownEvents(args.Action.Owner, ent);
+
+            var selfMsg = Loc.GetString("rmc-glob-start-self");
+            _popup.PopupClient(selfMsg, ent, ent);
+
+            foreach (var session in Filter.PvsExcept(ent, entityManager: EntityManager).Recipients)
+            {
+                if (session.AttachedEntity is not { } viewer)
+                    continue;
+
+                var name = Identity.Name(ent, EntityManager, viewer);
+                var othersMsg = Loc.GetString("rmc-glob-start-others", ("user", name));
+                _popup.PopupEntity(othersMsg, ent, session, PopupType.MediumCaution);
+            }
+        }
+    }
+
+    private void OnBombardDoAfterAttempt(Entity<XenoBombardComponent> ent, ref DoAfterAttemptEvent<XenoBombardDoAfterEvent> args)
+    {
+        if (args.Event.Target is { } action &&
+            HasComp<InstantActionComponent>(action) &&
+            _actions.TryGetActionData(action, out var actionComponent) &&
+            !actionComponent.Enabled)
+        {
+            _rmcActions.EnableSharedCooldownEvents(action, ent);
+            args.Cancel();
+        }
+    }
+
+    private void OnBombardDoAfter(Entity<XenoBombardComponent> ent, ref XenoBombardDoAfterEvent args)
+    {
+        if (args.Target is not { } action)
+            return;
+        _rmcActions.EnableSharedCooldownEvents(action, ent);
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (!_xenoPlasma.TryRemovePlasmaPopup(ent.Owner, ent.Comp.PlasmaCost))
+            return;
+
+        if (_net.IsClient)
+            return;
+
+        var source = _transform.GetMapCoordinates(ent);
+        if (source.MapId != args.Coordinates.MapId)
+            return;
+
+        var direction = args.Coordinates.Position - source.Position;
+        var projectile = Spawn(ent.Comp.Projectile, source);
+        _hive.SetSameHive(ent.Owner, projectile);
+
+        _rmcProjectile.SetMaxRange(projectile, direction.Length());
+
+        _gun.ShootProjectile(projectile, direction, Vector2.Zero, ent, ent, speed: 7.5f);
+        _audio.PlayEntity(ent.Comp.ShootSound, ent, ent);
+
+        _rmcActions.ActivateSharedCooldown(action, ent);
+
+        var selfMessage = Loc.GetString("rmc-glob-shoot-self");
+        _popup.PopupClient(selfMessage, ent, ent);
+
+        foreach (var session in Filter.PvsExcept(ent, entityManager: EntityManager).Recipients)
+        {
+            if (session.AttachedEntity is not { } viewer)
+                continue;
+
+            var name = Identity.Name(ent, EntityManager, viewer);
+            var othersMessage = Loc.GetString("rmc-glob-shoot-others", ("user", name));
+            _popup.PopupEntity(othersMessage, ent, session, PopupType.MediumCaution);
+        }
+    }
+
+    private void OnToggleType(Entity<XenoBombardComponent> ent, ref XenoGasToggleActionEvent args)
+    {
+        if (ent.Comp.Projectiles.Length == 0)
+            return;
+
+        var index = Array.IndexOf(ent.Comp.Projectiles, ent.Comp.Projectile);
+        if (index == -1 || index >= ent.Comp.Projectiles.Length - 1)
+            index = 0;
+        else
+            index++;
+
+        ent.Comp.Projectile = ent.Comp.Projectiles[index];
+        Dirty(ent);
+    }
+}

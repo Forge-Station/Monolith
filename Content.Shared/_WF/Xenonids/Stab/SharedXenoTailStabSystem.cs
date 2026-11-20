@@ -1,0 +1,336 @@
+using Content.Shared._RMC14.Random;
+using Content.Shared._WF.Barricades;
+using Content.Shared._WF.RMCCore.CameraShake;
+using Content.Shared._WF.RMCCore.Stun;
+using Content.Shared._WF.Xenonids.GasToggle;
+using Content.Shared._WF.Xenonids.Neurotoxin;
+using Content.Shared._WF.Xenonids.Rotate;
+using Content.Shared.ActionBlocker;
+using Content.Shared.Actions;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Coordinates;
+using Content.Shared.Damage;
+using Content.Shared.Effects;
+using Content.Shared.FixedPoint;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction;
+using Content.Shared.Popups;
+using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using System.Linq;
+using System.Numerics;
+
+namespace Content.Shared._WF.Xenonids.Stab;
+
+public abstract partial class SharedXenoTailStabSystem : EntitySystem
+{
+    [Dependency] private ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private INetManager _net = default!;
+    [Dependency] private SharedDirectionalAttackBlockSystem _directionBlock = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private XenoSystem _xeno = default!;
+    [Dependency] private XenoRotateSystem _rotate = default!;
+    [Dependency] private RMCDazedSystem _daze = default!;
+    [Dependency] private RMCCameraShakeSystem _cameraShake = default!;
+    [Dependency] private RMCSizeStunSystem _size = default!;
+
+    protected Box2Rotated LastTailAttack;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<XenoTailStabComponent, XenoTailStabEvent>(OnXenoTailStab);
+        SubscribeLocalEvent<XenoTailStabComponent, XenoGasToggleActionEvent>(OnXenoGasToggle);
+    }
+
+    private void OnXenoGasToggle(Entity<XenoTailStabComponent> stab, ref XenoGasToggleActionEvent args)
+    {
+        if (!stab.Comp.Toggle)
+            return;
+
+        stab.Comp.InjectNeuro = !stab.Comp.InjectNeuro;
+    }
+
+
+    private void OnXenoTailStab(Entity<XenoTailStabComponent> stab, ref XenoTailStabEvent args)
+    {
+        if (!_actionBlocker.CanAttack(stab) ||
+            !TryComp(stab, out TransformComponent? transform))
+        {
+            return;
+        }
+
+        var userCoords = _transform.GetMapCoordinates(stab, transform);
+        if (userCoords.MapId == MapId.Nullspace)
+            return;
+
+        if (args.Coords is not { } argCoords)
+            return;
+
+        var targetCoords = _transform.ToMapCoordinates(argCoords);
+        if (userCoords.MapId != targetCoords.MapId)
+            return;
+
+        if (TryComp(stab, out MeleeWeaponComponent? melee))
+        {
+            if (_timing.CurTime < melee.NextAttack)
+                return;
+
+            melee.NextAttack = _timing.CurTime + TimeSpan.FromSeconds(1);
+            Dirty(stab, melee);
+        }
+
+        TailStabStats stabStats = new(stab.Comp);
+        if (args.UseAltTailStab && TryComp<XenoAltTailStabComponent>(stab, out var altTailStab))
+            stabStats = new(altTailStab);
+
+        // TODO RMC14 sounds
+        // TODO RMC14 lag compensation
+        var damaged = false;
+        var damage = new DamageSpecifier(stabStats.TailDamage);
+        var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
+        RaiseLocalEvent(stab, ref eve);
+        damage += eve.Damage;
+        if (args.Entity == null ||
+            TerminatingOrDeleted(args.Entity) ||
+            !_xeno.CanAbilityAttackTarget(stab, args.Entity.Value, !stabStats.HitMobsOnly))
+        {
+            var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
+            RaiseLocalEvent(stab, missEvent);
+
+            foreach (var action in _actions.GetActions(stab))
+            {
+                if (TryComp(action.Id, out XenoTailStabActionComponent? actionComp))
+                    _actions.SetCooldown(action.Id, actionComp.MissCooldown);
+            }
+        }
+        else
+        {
+            args.Handled = true;
+
+            var hit = args.Entity.Value;
+            var hitEvent = new MeleeHitEvent(new List<EntityUid>{hit}, stab, stab, damage, null);
+            RaiseLocalEvent(stab, hitEvent);
+
+            if (!hitEvent.Handled)
+            {
+                _interaction.DoContactInteraction(stab, stab);
+                _interaction.DoContactInteraction(stab, hit);
+
+                var targetPosition = _transform.GetMoverCoordinates(hit).Position;
+                var userPosition = _transform.GetMoverCoordinates(stab).Position;
+                var entities = GetNetEntityList(_melee.ArcRayCast(userPosition,
+                        (targetPosition -
+                         userPosition).ToWorldAngle(),
+                        0,
+                        stab.Comp.TailRange.Float(),
+                        _transform.GetMapId(stab.Owner),
+                        stab)
+                    .ToList());
+
+                foreach (var potentialTarget in entities)
+                {
+                    var target = GetEntity(potentialTarget);
+                    if (!IsAttackBlocked(stab, target))
+                        continue;
+
+                    hit = target;
+                    break;
+                }
+
+                var filter = Filter.Pvs(transform.Coordinates, entityMan: EntityManager).RemoveWhereAttachedEntity(o => o == stab.Owner);
+
+                var attackedEv = new AttackedEvent(stab, stab, argCoords);
+                RaiseLocalEvent(hit, attackedEv);
+
+                var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
+                var change = _damageable.TryChangeDamage(hit, _xeno.TryApplyXenoSlashDamageMultiplier(hit, modifiedDamage), origin: stab , tool: stab); // WOLFGATE: no armor piercing argument here; CMArmor reads CMArmorPiercing on the tool
+
+                if (change?.GetTotal() > FixedPoint2.Zero)
+                {
+                    damaged = true;
+                    _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
+                }
+
+                if (_net.IsServer)
+                {
+                    SpawnAttachedTo(stabStats.HitAnimationId, hit.ToCoordinates());
+
+                    if (_size.TryGetSize(stab, out var size))
+                    {
+                        if (size >= RMCSizes.Big)
+                            _daze.TryDaze(hit, stabStats.BigDazeTime, true);
+                        else if (size == RMCSizes.Xeno)
+                            _daze.TryDaze(hit, stabStats.DazeTime, true);
+                    }
+                }
+
+                _cameraShake.ShakeCamera(hit, 2, 1);
+
+                if (!HasComp<XenoComponent>(hit))
+                {
+                    if (stab.Comp.InjectNeuro &&
+                        TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox))
+                    {
+
+
+                        if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
+                        {
+                            neuro.LastMessage = _timing.CurTime;
+                            neuro.LastAccentTime = _timing.CurTime;
+                            neuro.LastStumbleTime = _timing.CurTime;
+                        }
+                        neuro.NeurotoxinAmount += neuroTox.NeuroPerSecond;
+                        neuro.ToxinDamage = neuroTox.ToxinDamage;
+                        neuro.OxygenDamage = neuroTox.OxygenDamage;
+                        neuro.CoughDamage = neuroTox.CoughDamage;
+                    }
+                    else if (stab.Comp.Inject != null &&
+                             _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
+                    {
+                        var total = FixedPoint2.Zero;
+                        foreach (var amount in stab.Comp.Inject.Values)
+                        {
+                            total += amount;
+                        }
+
+                        var available = solutionEnt!.Value
+.Comp.Solution.AvailableVolume;
+                        if (available < total)
+                        {
+                            _solutionContainer.SplitSolution(solutionEnt!.Value
+, total - available);
+                        }
+
+                        foreach (var (reagent, amount) in stab.Comp.Inject)
+                        {
+                            _solutionContainer.TryAddReagent(solutionEnt!.Value
+, reagent, amount);
+                        }
+                    }
+                }
+
+                var hitName = Identity.Name(hit, EntityManager, stab);
+                var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hitName));
+                if (_net.IsServer)
+                    _popup.PopupEntity(msg, stab, stab);
+
+                var userName = Identity.Name(stab, EntityManager, hit);
+                msg = Loc.GetString("rmc-xeno-tail-stab-target", ("user", userName));
+                _popup.PopupEntity(msg, stab, hit, PopupType.MediumCaution);
+
+                var othersFilter = Filter.PvsExcept(stab).RemovePlayerByAttachedEntity(hit);
+                foreach (var other in othersFilter.Recipients)
+                {
+                    if (other.AttachedEntity is not { } otherEnt)
+                        continue;
+
+                    userName = Identity.Name(stab, EntityManager, otherEnt);
+                    hitName = Identity.Name(hit, EntityManager, otherEnt);
+                    msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", userName), ("target", hitName));
+                    _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
+                }
+            }
+        }
+
+        if (_net.IsServer)
+        {
+            if (args.Entity != null && !TerminatingOrDeleted(args.Entity))
+            {
+                var direction = _transform.GetWorldRotation(stab).GetDir();
+                var angle = direction.ToAngle() - Angle.FromDegrees(180);
+                _rotate.RotateXeno(stab, angle.GetDir());
+            }
+
+            var sound = args.Entity != null && damaged && !TerminatingOrDeleted(args.Entity) && args.Entity != stab ? stabStats.SoundHit : stab.Comp.SoundMiss;
+            _audio.PlayPvs(sound, stab);
+        }
+
+        var attackEv = new MeleeAttackEvent(stab);
+        RaiseLocalEvent(stab, ref attackEv);
+    }
+
+    protected virtual void DoLunge(Entity<XenoTailStabComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
+    {
+    }
+
+    //Ideally tail stab stuff would be in the action event
+    //But this would make it so every caste needs their own action
+    //So for now this exists
+
+    /// <summary>RMC's directional block roll for a barricade between the stab and its target (Wolfgate's barricade system has no such helper).</summary>
+    private bool IsAttackBlocked(EntityUid attacker, EntityUid target)
+    {
+        if (!TryComp(target, out DirectionalAttackBlockerComponent? blocker) || !Transform(target).Anchored)
+            return false;
+
+        if (!_directionBlock.IsFacingTarget(target, attacker))
+            return false;
+
+        var seed = ((long) _timing.CurTick.Value << 32) | (uint) GetNetEntity(attacker).Id;
+        if (TryComp(target, out DamageableComponent? damageable) && blocker.MaxHealth > 0)
+        {
+            var blockChance = Math.Max(blocker.MinimumBlockChance, (blocker.MaxHealth - (float) damageable.TotalDamage) / blocker.MaxHealth);
+            if (blockChance < new Xoroshiro64S(seed).NextFloat(0, 1))
+                return false;
+        }
+
+        return true;
+    }
+
+    public partial struct TailStabStats
+    {
+        public EntProtoId HitAnimationId;
+
+        public DamageSpecifier TailDamage;
+
+        public SoundSpecifier SoundHit;
+
+        public TimeSpan DazeTime;
+
+        public TimeSpan BigDazeTime;
+
+        public int ArmorPiercing;
+
+        public bool HitMobsOnly;
+
+        public TailStabStats(XenoTailStabComponent stab)
+        {
+            HitAnimationId = stab.HitAnimationId;
+            TailDamage = stab.TailDamage;
+            SoundHit = stab.SoundHit;
+            DazeTime = stab.DazeTime;
+            BigDazeTime = stab.BigDazeTime;
+            ArmorPiercing = stab.ArmorPiercing;
+            HitMobsOnly = stab.HitMobsOnly;
+        }
+
+        public TailStabStats(XenoAltTailStabComponent stab)
+        {
+            HitAnimationId = stab.HitAnimationId;
+            TailDamage = stab.TailDamage;
+            SoundHit = stab.SoundHit;
+            DazeTime = stab.DazeTime;
+            BigDazeTime = stab.BigDazeTime;
+            ArmorPiercing = stab.ArmorPiercing;
+            HitMobsOnly = stab.HitMobsOnly;
+        }
+    }
+}

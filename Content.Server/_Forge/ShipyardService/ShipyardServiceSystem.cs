@@ -634,7 +634,7 @@ public sealed partial class ShipyardServiceSystem : EntitySystem
             return list;
 
         var tile = _map.CoordinatesToTile(shuttle, grid, coords.Value);
-        var enumerator = _map.GetAnchoredEntitiesEnumerator(shuttle, grid, tile);
+        var enumerator = _map.GetAnchoredEntities(shuttle, grid, tile);
         while (enumerator.MoveNext(out var uid))
         {
             if (uid == shuttle || list.Contains(uid.Value) || TerminatingOrDeleted(uid.Value))

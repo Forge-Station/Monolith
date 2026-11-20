@@ -1,0 +1,19 @@
+# RMC-14: Resources/Prototypes/Alerts/categories.yml
+- type: alertCategory
+  id: Armor
+
+# RMC-14: Resources/Prototypes/Alerts/categories.yml
+- type: alertCategory
+  id: Energy
+
+# RMC-14: Resources/Prototypes/_RMC14/Alerts/alerts.yml
+- type: alertCategory
+  id: HiveTracker
+
+# RMC-14: Resources/Prototypes/Alerts/categories.yml
+- type: alertCategory
+  id: Plasma
+
+# RMC-14: Resources/Prototypes/Alerts/categories.yml
+- type: alertCategory
+  id: Tracker

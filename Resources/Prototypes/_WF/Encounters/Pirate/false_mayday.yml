@@ -1,0 +1,127 @@
+# A distress call that is a trap. The ship that makes it is wrecked as a stranded hulk would be, but its crew are pirates, and
+# a second pirate ship lies in wait off it, its label hidden and without a sector marker, until a player is close enough to be
+# worth jumping. The tell: a real call gives the ship's registered name as the scanner shows it, and its position, and this one
+# gives neither and names a hull class that is not the one on the scanner. It claims a Brute and the ship is a Piva or a Pluto.
+# The ambusher gives up after five minutes and then sits where it is until the encounter expires, so the scene can be searched.
+- type: wfEncounter
+  id: WFEncounterFalseMayday
+  name: wf-encounter-name-stranded
+  announcement: wf-encounter-announce-false-mayday
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: bait
+  start: Scheduled
+  category: Distress
+  cost: 2
+  weight: 0.5
+  minPlayers: 4
+  startRadius: 300
+  cooldown: 3000
+  duration: 2400
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  ships:
+  - key: bait
+    navigation: WFCrewNavigationFreight
+    vessels: [ Piva, Plutomkii ]
+    side: pirates
+    faction: PirateNF
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 2
+    skill: Green
+    distress: false
+    stranded: Thrusters
+  - key: ambusher
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 0, 650
+    side: pirates
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    distress: false
+    evades: false
+    lurks: true
+    objectives:
+    - kind: Attack
+      target: "@player"
+      duration: 300
+    - kind: Hold
+
+# The trap again with a larger bait and two ships in wait, for more players. It claims an Olympus; the bait is a Brute or an Argent.
+- type: wfEncounter
+  id: WFEncounterFalseMaydayLarge
+  name: wf-encounter-name-stranded
+  announcement: wf-encounter-announce-false-mayday-large
+  announcementSender: wf-encounter-sender-traffic
+  announceOnRadio: true
+  announcer: bait
+  start: Scheduled
+  category: Distress
+  cost: 3
+  weight: 0.35
+  minPlayers: 7
+  startRadius: 350
+  cooldown: 3600
+  duration: 2700
+  minDistance: 2500
+  maxDistance: 4500
+  stationClearance: 3000
+  ships:
+  - key: bait
+    navigation: WFCrewNavigationFreight
+    vessels: [ Brute, Argent ]
+    side: pirates
+    faction: PirateNF
+    profile: WFCrewProfilePirate
+    captain: false
+    deckhands: 3
+    skill: Green
+    distress: false
+    stranded: Thrusters
+  - key: ambusher
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: -150, 700
+    side: pirates
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    distress: false
+    evades: false
+    lurks: true
+    objectives:
+    - kind: Attack
+      target: "@player"
+      duration: 300
+    - kind: Hold
+  - key: second
+    navigation: WFCrewNavigationRaider
+    vessels: [ Carrion, Horsefly, Tick, Hazel ]
+    deckhands: 0
+    captain: false
+    roles: [ WFCrewPilot, WFCrewGunner ]
+    offset: 150, 750
+    side: pirates
+    faction: PirateNF
+    company: WFAshfallReavers
+    profile: WFCrewProfilePirate
+    skill: Regular
+    distress: false
+    evades: false
+    lurks: true
+    objectives:
+    - kind: Attack
+      target: "@player"
+      duration: 300
+    - kind: Hold

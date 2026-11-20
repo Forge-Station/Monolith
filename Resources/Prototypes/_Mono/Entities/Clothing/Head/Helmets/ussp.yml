@@ -12,6 +12,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.8
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.85

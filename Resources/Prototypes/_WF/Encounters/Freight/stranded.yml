@@ -1,0 +1,123 @@
+# A freighter that has lost its way, adrift in open space: out of fuel, or with its thrusters wrecked, picked at random. Its
+# mayday says which. Put fuel in its generators or rebuild a thruster and its hands thank whoever helped, and pay them.
+# Then it casts off and flies on. The hulls run on fuel generators or an antimatter engine, which is what running dry empties.
+# Its crew let anyone aboard: rescuers have to be able to work.
+- type: wfEncounter
+  id: WFEncounterStrandedSmall
+  name: wf-encounter-name-stranded
+  start: Scheduled
+  category: Distress
+  cost: 1
+  weight: 1.5
+  minPlayers: 2
+  cooldown: 2400
+  duration: 2700
+  minDistance: 2000
+  maxDistance: 4000
+  stationClearance: 1500
+  rewards:
+  - side: freight
+    spesos: 10500
+    thanks: wf-encounter-reward-thanks-stranded
+  manifests: [ WFManifestGeneral, WFManifestFood, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels: [ Plutomkii, Piva, Twilight ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 1
+    guards: 0
+    captain: false
+    cargo: 6
+    stranded: Random
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    objectives:
+    - kind: Hold
+      duration: 60
+    - kind: Undock
+    - kind: GoTo
+      offset: 3500, 1500
+      range: 200
+
+- type: wfEncounter
+  id: WFEncounterStrandedMedium
+  name: wf-encounter-name-stranded
+  start: Scheduled
+  category: Distress
+  cost: 1
+  weight: 1
+  minPlayers: 3
+  cooldown: 2700
+  duration: 2700
+  minDistance: 2000
+  maxDistance: 4000
+  stationClearance: 1500
+  rewards:
+  - side: freight
+    spesos: 16500
+    thanks: wf-encounter-reward-thanks-stranded
+  manifests: [ WFManifestGeneral, WFManifestFood, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels: [ Brute, Argent ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 2
+    guards: 0
+    captain: true
+    cargo: 12
+    stranded: Random
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    objectives:
+    - kind: Hold
+      duration: 60
+    - kind: Undock
+    - kind: GoTo
+      offset: 4000, -1500
+      range: 200
+
+- type: wfEncounter
+  id: WFEncounterStrandedLarge
+  name: wf-encounter-name-stranded
+  start: Scheduled
+  category: Distress
+  cost: 2
+  weight: 0.5
+  minPlayers: 6
+  cooldown: 3000
+  duration: 3000
+  minDistance: 2000
+  maxDistance: 4000
+  stationClearance: 1500
+  rewards:
+  - side: freight
+    spesos: 24000
+    thanks: wf-encounter-reward-thanks-stranded
+  manifests: [ WFManifestGeneral, WFManifestMedical, WFManifestIndustrial, WFManifestParts, WFManifestSalvage, WFManifestLuxury ]
+  ships:
+  - key: freighter
+    navigation: WFCrewNavigationFreight
+    vessels: [ Olympus, Autumn, Windreign ]
+    side: freight
+    profile: WFCrewProfileHauler
+    deckhands: 3
+    guards: 1
+    captain: true
+    cargo: 20
+    stranded: Random
+    boarding: Ignore
+    docking: Ignore
+    disengage: Deter
+    objectives:
+    - kind: Hold
+      duration: 90
+    - kind: Undock
+    - kind: GoTo
+      offset: 4500, 2000
+      range: 200

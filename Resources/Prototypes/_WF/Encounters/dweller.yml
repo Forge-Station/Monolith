@@ -1,0 +1,61 @@
+# A dweller hulk: a hull adrift with no crew and no fuel, its decks littered, and squatters living aboard under a chief. They
+# attack whoever comes in. The chief leaves the ship's papers when he dies; used aboard, with an ID card that holds no deed,
+# they register the ship to the player, who then has to fuel it. A claimed hulk sells for a quarter of its worth.
+- type: wfEncounter
+  id: WFEncounterDwellerHulk
+  name: wf-encounter-name-hulk
+  announcement: wf-encounter-announce-hulk
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Distress
+  icon: Ghost
+  cost: 1
+  weight: 0.6
+  minPlayers: 2
+  cooldown: 3600
+  duration: 3000
+  minDistance: 2000
+  maxDistance: 4500
+  stationClearance: 2000
+  ships:
+  - key: hulk
+    vessels: [ Piva, Plutomkii, Twilight ]
+    side: hulk
+    distress: false
+    derelict:
+      dwellers: 6
+      dwellerPool: [ WFMobDweller, WFMobDweller, WFMobDwellerHooded ]
+      king: WFMobDwellerKing
+      debris: 30
+      debrisPool: [ RandomSpawner, RandomSpawner, SalvageSpawnerScrapCommon, ShardGlass, PartRodMetal1, Cobweb1 ]
+      resale: 0.25
+
+# The same with a bigger hull and more squatters, for more players.
+- type: wfEncounter
+  id: WFEncounterDwellerHulkLarge
+  name: wf-encounter-name-hulk
+  announcement: wf-encounter-announce-hulk
+  announcementSender: wf-encounter-sender-traffic
+  start: Scheduled
+  category: Distress
+  icon: Ghost
+  cost: 1
+  weight: 0.35
+  minPlayers: 5
+  cooldown: 3600
+  duration: 3000
+  minDistance: 2000
+  maxDistance: 4500
+  stationClearance: 2000
+  ships:
+  - key: hulk
+    vessels: [ Brute, Argent ]
+    side: hulk
+    distress: false
+    derelict:
+      dwellers: 11
+      dwellerPool: [ WFMobDweller, WFMobDweller, WFMobDwellerHooded ]
+      king: WFMobDwellerKing
+      debris: 50
+      debrisPool: [ RandomSpawner, RandomSpawner, SalvageSpawnerScrapCommon, ShardGlass, PartRodMetal1, Cobweb1 ]
+      resale: 0.25

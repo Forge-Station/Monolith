@@ -1,0 +1,91 @@
+# How each faction's fights end (WFNpcIntentSystem). Every engagement rolls one endpoint by weight. HoldUp only comes up
+# for a brain with the hold branch (WFIntentHold) and a hold-up that is refused turns into `refusal`. Kinds: HoldUp, Mug,
+# BeatDown, Harvest, WarnOff, Lethal. Anything with no WFNpcIntent keeps fighting to the death.
+
+# Scavengers living off what miners leave behind: mostly want the cash, rarely the kill.
+- type: wfNpcIntentSet
+  id: WFIntentsTunnelRaider
+  intents:
+  - kind: Mug
+    weight: 40
+  - kind: HoldUp
+    weight: 40
+  - kind: BeatDown
+    weight: 15
+  - kind: Lethal
+    weight: 5
+  refusal: Mug
+  demandMin: 30
+  demandMax: 120
+  demandSeconds: 25
+  cooldown: 600
+
+# Armed raiders and road bandits: hold you up first.
+- type: wfNpcIntentSet
+  id: WFIntentsBandit
+  intents:
+  - kind: HoldUp
+    weight: 65
+  - kind: Mug
+    weight: 25
+  - kind: Lethal
+    weight: 10
+  refusal: Mug
+  demandMin: 100
+  demandMax: 400
+  cooldown: 600
+
+# The Ashfall Reavers are cannibals: they down you and cut something out instead of killing you.
+- type: wfNpcIntentSet
+  id: WFIntentsReaver
+  intents:
+  - kind: Harvest
+    weight: 85
+  - kind: Mug
+    weight: 15
+  harvestOrgans: [ kidneys, liver ]
+  harvestLimbChance: 0.15
+  cooldown: 600
+  harvestLines:
+  - wf-npc-intent-reaver-harvest-1
+  - wf-npc-intent-reaver-harvest-2
+  mugLines:
+  - wf-npc-intent-reaver-mug-1
+
+# Cultists take a trophy.
+- type: wfNpcIntentSet
+  id: WFIntentsCultist
+  intents:
+  - kind: Harvest
+    weight: 90
+  - kind: BeatDown
+    weight: 10
+  harvestLimbChance: 1
+  cooldown: 600
+  harvestLines:
+  - wf-npc-intent-cultist-harvest-1
+  - wf-npc-intent-cultist-harvest-2
+
+# Settlers and guards see you off their ground.
+- type: wfNpcIntentSet
+  id: WFIntentsSettler
+  intents:
+  - kind: WarnOff
+    weight: 80
+  - kind: BeatDown
+    weight: 20
+  cooldown: 300
+  warnSeconds: 8
+  warnRange: 14
+
+# A lone mugger finishes his fight with your wallet.
+- type: wfNpcIntentSet
+  id: WFIntentsMugger
+  intents:
+  - kind: Mug
+    weight: 70
+  - kind: BeatDown
+    weight: 25
+  - kind: Lethal
+    weight: 5
+  cooldown: 600

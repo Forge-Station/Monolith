@@ -1,0 +1,91 @@
+# Barren tile asteroids: plain rock with no ore veins, which worldgen places for some of the large gas-bearing
+# asteroids it would otherwise swap for rock clusters (see replacement.yml). They keep their source's gas deposits,
+# its anomaly rock and its rooms, so gas miners still have something to drill; their ore comes from the clusters.
+
+# Walls at the rock asteroid's rates, with its ore veins turned into plain rock.
+- type: entity
+  id: WFBaseAsteroidBarrenDebris
+  parent: NFBaseDebris
+  abstract: true
+  components:
+  - type: BlobFloorPlanBuilder
+    floorTileset:
+    - FloorAsteroidSand
+  - type: SimpleFloorPlanPopulator
+    entries:
+      FloorAsteroidSand:
+      - id: AsteroidRock
+        orGroup: rock
+        prob: 1.56
+      - id: AsteroidRockArtifactAnomaly
+        orGroup: rock
+        prob: 0.00035
+      - id: NFAsteroidRockRoomMarker
+        orGroup: rock
+        prob: 0.0002
+  - type: IFF
+    color: "#BF8C5C"
+
+# region From plain asteroids: oxygen, nitrogen, CO2, air and plasma deposits.
+- type: entity
+  id: WFAsteroidBarrenDebrisEnormous
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidGas, NFBaseAsteroidEnormous]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenDebrisExtraEnormous
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidGas, NFBaseAsteroidExtraEnormous]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenDebrisMassive
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidGas, NFBaseAsteroidMassive]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenDebrisExtraMassive
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidGas, NFBaseAsteroidExtraMassive]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenDebrisGigantic
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidGas, NFBaseAsteroidGigantic]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenDebrisExtraGigantic
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidGas, NFBaseAsteroidExtraGigantic]
+  categories: [ HideSpawnMenu ]
+# endregion
+
+# region From rock asteroids: nitrous oxide, muddled, CO2, air and plasma deposits.
+- type: entity
+  id: WFAsteroidBarrenRockDebrisEnormous
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidRockGas, NFBaseAsteroidEnormous]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenRockDebrisExtraEnormous
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidRockGas, NFBaseAsteroidExtraEnormous]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenRockDebrisMassive
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidRockGas, NFBaseAsteroidMassive]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenRockDebrisExtraMassive
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidRockGas, NFBaseAsteroidExtraMassive]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenRockDebrisGigantic
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidRockGas, NFBaseAsteroidGigantic]
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: WFAsteroidBarrenRockDebrisExtraGigantic
+  parent: [WFBaseAsteroidBarrenDebris, NFBaseAsteroidRockGas, NFBaseAsteroidExtraGigantic]
+  categories: [ HideSpawnMenu ]
+# endregion

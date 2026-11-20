@@ -23,12 +23,14 @@
     lightingColor: "#FFFFFFFF" #Forge-Change #FFFFFF32 to #FFFFFFFF
     amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        # WOLFGATE(ArmorBalance): helmet tier rule, T2 0.9 and T3 0.85.
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
   - type: HideLayerClothing
     slots:
     - Hair
@@ -40,7 +42,7 @@
   parent: [NFClothingHeadHardsuitWithLightBaseNfsd, ShowMedicalIcons, ShowSecurityIcons]
   id: ClothingHeadHelmetHardsuitM86
   name: M86 helmet
-  description: Modified from M82 series helmets, outfitted with night-vision equipment and refined gel-layers.
+  description: Modified from M82-series helmets, outfitted with night-vision equipment and refined gel layers. # WOLFGATE(ArmorBalance): grammar pass.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -61,12 +63,14 @@
     lightingColor: "#FFFFFFFF" #Forge-Change #FFFFFF32 to #FFFFFFFF
     amplification: 1.2 #Forge-Change 32 to 1.2 // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
+        # WOLFGATE(ArmorBalance): helmet tier rule, T2 0.9 and T3 0.85.
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
   - type: HideLayerClothing
     slots:
     - Hair
@@ -103,6 +107,15 @@
   description: An armored tacsuit helmet used by the TSFMC.
   categories: [ HideSpawnMenu ]
   components:
+  # WOLFGATE(ArmorBalance): helmet tier rule, T2 0.9 and T3 0.85.
+  - type: Armor
+    coverage: [Head]
+    modifiers:
+      coefficients:
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
   - type: Sprite
     sprite: _NF/Clothing/Head/Hardsuits/nfsd_sheriff.rsi
   - type: Clothing
@@ -128,7 +141,7 @@
   id: ClothingHeadHelmetHardsuitNfsdExperimental
   categories: [ HideSpawnMenu ]
   name: TSFMC M92-X tacsuit helmet
-  description: Heavily armored hardsuit helmet for TSFMC raids.
+  description: A heavily armored hardsuit helmet for TSFMC raids. # WOLFGATE(ArmorBalance): grammar pass.
   components:
   - type: Sprite
     sprite: _NF/Clothing/Head/Hardsuits/nfsd_experimental.rsi
@@ -150,12 +163,14 @@
     lightingColor: "#FFFFFFFF" #Forge-change #FFFFFF32 to #0CFFFF32 // баланс яркости to #FFFFFFFF
     amplification: 1.2 #32 to 1.2 #Forge-change // параметр Усиление влияет на то как сильно слепят источники света
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
+        # WOLFGATE(ArmorBalance): helmet tier rule, T2 0.9 and T3 0.85.
+        Blunt: 0.85
+        Slash: 0.85
+        Piercing: 0.85
+        Heat: 0.85
 
 #Security Command Hardsuit
 - type: entity
@@ -175,6 +190,7 @@
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
   - type: Armor
+    coverage: [Head] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.9

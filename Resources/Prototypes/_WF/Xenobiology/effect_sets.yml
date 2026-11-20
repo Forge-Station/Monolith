@@ -1,0 +1,102 @@
+# Ported from Goobstation via Trauma Station (_Trauma/EntityEffects/xenobio.yml).
+
+- type: xenobioEffectSet
+  id: XenobioExtractBase
+  effects:
+  - !type:XenobioSpendExtract {}
+  - !type:XenobioPlaySound
+    sound: /Audio/Effects/Chemistry/bubbles.ogg
+
+- type: xenobioEffectSet
+  id: XenobioExtractDelete
+  effects:
+  - !type:XenobioReaction
+    base: XenobioExtractBase
+    once: false
+  - !type:XenobioDelete {}
+
+- type: xenobioEffectSet
+  id: XenobioExtractEvil
+  effects:
+  - !type:XenobioReaction
+    base: XenobioExtractDelete
+    once: false
+  - !type:PopupMessage
+    type: Pvs
+    messages:
+    - xeno-extract-reaction-evil
+
+- type: xenobioEffectSet
+  id: XenobioExtractEvilBase
+  effects:
+  - !type:XenobioReaction
+    base: XenobioExtractBase
+    once: false
+  - !type:PopupMessage
+    type: Pvs
+    messages:
+    - xeno-extract-reaction-evil
+
+- type: xenobioEffectSet
+  id: XenobioExtractFail
+  effects:
+  - !type:XenobioReaction
+    base: XenobioExtractDelete
+    once: false
+  - !type:PopupMessage
+    type: Pvs
+    messages:
+    - xeno-extract-reaction-fail
+
+- type: xenobioEffectSet
+  id: XenobioExtractFailBase
+  effects:
+  - !type:XenobioReaction
+    base: XenobioExtractBase
+    once: false
+  - !type:PopupMessage
+    type: Pvs
+    messages:
+    - xeno-extract-reaction-fail
+
+- type: xenobioEffectSet
+  id: XenobioExtractReaction
+  effects:
+  - !type:XenobioReaction
+    base: XenobioExtractDelete
+    once: false
+  - !type:PopupMessage
+    type: Pvs
+    messages:
+    - xeno-extract-reaction
+
+- type: xenobioEffectSet
+  id: XenobioExtractReactionBase
+  effects:
+  - !type:XenobioReaction
+    base: XenobioExtractBase
+    once: false
+  - !type:PopupMessage
+    type: Pvs
+    messages:
+    - xeno-extract-reaction
+
+- type: xenobioEffectSet
+  id: XenobioExtractReagent
+  effects:
+  - !type:XenobioReaction
+    base: XenobioExtractBase
+    once: false
+  - !type:XenobioAddTag
+    tag: Trash
+  - !type:PopupMessage
+    type: Pvs
+    messages:
+    - xeno-extract-reaction-reagent
+
+- type: xenobioEffectSet
+  id: Ignite5
+  effects:
+  - !type:FlammableReaction
+    multiplier: 5
+  - !type:Ignite {}

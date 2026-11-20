@@ -1,0 +1,73 @@
+# Hit debris (V124/V4). Short-lived, no component that ticks: a sprite and a TimedDespawn, spawned at the
+# body by WolfmedWoundSfxSystem and thrown away half a second later. Three coarse sizes per tissue, so a
+# pellet and a shotgun slug do not look the same.
+#
+# The sprite is Fluids/splatter.rsi, which is greyscale so a puddle can tint it; the colour here is what
+# makes it read as blood rather than water.
+
+- type: entity
+  id: WFWolfmedBloodMistSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    color: "#8f1616"
+    scale: 0.4, 0.4
+    sprite: Fluids/splatter.rsi
+    state: splatter-2
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: WFWolfmedBloodMistSmall
+  id: WFWolfmedBloodMistMedium
+  components:
+  - type: TimedDespawn
+    lifetime: 0.5
+  - type: Sprite
+    scale: 0.7, 0.7
+    state: splatter-4
+
+- type: entity
+  parent: WFWolfmedBloodMistSmall
+  id: WFWolfmedBloodMistLarge
+  components:
+  - type: TimedDespawn
+    lifetime: 0.6
+  - type: Sprite
+    scale: 1.1, 1.1
+    state: splatter-5
+
+# The chassis half. EffectSparks already is the right sprite and the right lifetime; these only resize it.
+
+- type: entity
+  parent: EffectSparks
+  id: WFWolfmedSparkBurstSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    scale: 0.5, 0.5
+
+- type: entity
+  parent: EffectSparks
+  id: WFWolfmedSparkBurstMedium
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    scale: 0.8, 0.8
+
+- type: entity
+  parent: EffectSparks
+  id: WFWolfmedSparkBurstLarge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.6
+  - type: Sprite
+    scale: 1.2, 1.2

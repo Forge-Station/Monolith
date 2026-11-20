@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Created for Wolfgate (AsteroidMining), metallic",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rock0"
+    },
+    {
+      "name": "rock1"
+    },
+    {
+      "name": "rock2"
+    },
+    {
+      "name": "veins0"
+    },
+    {
+      "name": "veins1"
+    },
+    {
+      "name": "veins2"
+    },
+    {
+      "name": "heat0"
+    },
+    {
+      "name": "heat1"
+    },
+    {
+      "name": "heat2"
+    }
+  ]
+}

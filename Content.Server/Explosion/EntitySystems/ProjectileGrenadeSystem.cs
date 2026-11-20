@@ -4,6 +4,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
+using Content.Shared._WF.RMCCore.Explosion; // WOLFGATE(RMCCore)
 
 namespace Content.Server.Explosion.EntitySystems;
 
@@ -62,6 +63,7 @@ public sealed partial class ProjectileGrenadeSystem : EntitySystem
         if (totalCount != 0) // Mono - Stupid fucking sanity check, because it doesn't stop whining about dividing by 0 when I put this shit on a bullet.
             segmentAngle = 360 / totalCount;
 
+        var rmcSpawned = new List<EntityUid>(); // WOLFGATE(RMCCore): fragments for CMClusterSpawnedEvent below
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
         {
             Angle angle;
@@ -79,8 +81,15 @@ public sealed partial class ProjectileGrenadeSystem : EntitySystem
             // slightly uneven, doesn't really change much, but it looks better
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
-            _gun.ShootProjectile(contentUid, direction, velocity, uid, null);
+            _gun.ShootProjectile(contentUid, direction, velocity, null); // WOLFGATE(Performance): wizden#36641, the grenade is deleted so it can't be the gun; was uid, null
+            InheritWolfgateShipProjectileSource(uid, contentUid); // WOLFGATE(ShipShields): preserve outgoing fragments and mines through their own shields.
+            rmcSpawned.Add(contentUid); // WOLFGATE(RMCCore)
         }
+
+        // WOLFGATE(RMCCore) START: RMC cluster rules (limited hits, xeno spit fragments) need the fragments it fired
+        var clusterEv = new CMClusterSpawnedEvent(rmcSpawned, new List<EntityUid>(), uid);
+        RaiseLocalEvent(uid, ref clusterEv);
+        // WOLFGATE END
     }
 
     /// <summary>

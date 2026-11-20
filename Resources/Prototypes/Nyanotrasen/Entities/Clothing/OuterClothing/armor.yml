@@ -9,6 +9,7 @@
   - type: Clothing
     sprite: Nyanotrasen/Clothing/OuterClothing/Armor/gladiator.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -26,6 +27,7 @@
   - type: Clothing
     sprite: Nyanotrasen/Clothing/OuterClothing/Armor/bogu.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.75
@@ -45,6 +47,7 @@
   - type: Clothing
     sprite: Nyanotrasen/Clothing/OuterClothing/Armor/touseigusoku.rsi
   - type: Armor
+    coverage: [Torso, Arm, Leg] # WOLFGATE(Wolfmed): P6, P3-D6: locational armour coverage
     modifiers:
       coefficients:
         Blunt: 0.60

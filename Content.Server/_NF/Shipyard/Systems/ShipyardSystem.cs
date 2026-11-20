@@ -38,6 +38,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
     [Dependency] private MapLoaderSystem _mapLoader = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private MapSystem _map = default!;
+    [Dependency] private Content.Server._Mono.Company.CompanyManager _companyTreasury = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ShipOwnershipSystem _shipOwnership = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
@@ -261,6 +262,10 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
         }
 
         bill = (int)_pricing.AppraiseGrid(shuttleUid, LacksPreserveOnSaleComp);
+
+        // WOLFGATE: last look at the grid, with its deed, before it goes. See _WF/Shipyard.
+        var soldEv = new _WF.Shipyard.ShipSoldEvent(shuttleUid, consoleUid, stationUid, bill);
+        RaiseLocalEvent(ref soldEv);
 
         QueueDel(shuttleUid);
         _sawmill.Info($"Sold shuttle {shuttleUid} for {bill}");

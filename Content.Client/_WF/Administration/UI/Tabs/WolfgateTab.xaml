@@ -1,0 +1,20 @@
+<Control
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:crew="clr-namespace:Content.Client._WF.NpcCrew"
+    xmlns:vehiclecrew="clr-namespace:Content.Client._WF.NpcVehicleCrew"
+    xmlns:encounters="clr-namespace:Content.Client._WF.Encounters"
+    xmlns:planets="clr-namespace:Content.Client._WF.Planets.Administration"
+    Margin="4"
+    MinSize="50 50">
+    <BoxContainer Orientation="Vertical">
+        <GridContainer Columns="3">
+            <cc:UICommandButton Command="wf_crew" Text="{Loc wf-crew-setup-title}" WindowType="{x:Type crew:WFCrewSetupWindow}" />
+            <cc:UICommandButton Command="wf_vehiclecrew" Text="{Loc wf-vehiclecrew-panel-title}" WindowType="{x:Type vehiclecrew:WFVehicleCrewPanel}" />
+            <cc:UICommandButton Command="wf_encounter" Text="{Loc wf-encounter-admin-title}" WindowType="{x:Type encounters:WFEncounterWindow}" />
+            <cc:CommandButton Command="rpannounce" Text="{Loc wf-announce-button}" />
+            <cc:UICommandButton Command="planetcontrol" Text="{Loc wf-admin-tab-planet-control}" WindowType="{x:Type planets:PlanetControlWindow}" />
+        </GridContainer>
+    </BoxContainer>
+</Control>

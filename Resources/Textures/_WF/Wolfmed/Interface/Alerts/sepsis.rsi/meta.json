@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made for Wolfgate (Wolfmed); septicshock bordered by Tools/_WF/Wolfmed/gen_wolfmed_overlays.py",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sepsis"
+    },
+    {
+      "name": "septicshock",
+      "delays": [
+        [
+          0.4,
+          0.4
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+# What a wound sounds like, what a limb coming off sounds and looks like, and what a hit throws off a body
+# (V124: V1, V2, V4). One shipped profile; WolfmedWoundSfxSystem indexes it by id, so all of this is
+# retuned by editing this file. Every sound is a _WF collection from SoundCollections/wounds.yml.
+#
+# woundSounds is ordered: the first entry whose filters match wins. Fractures and dislocations come first
+# because they are Blunt wounds that must not sound like a bruise; the mechanical block comes before the
+# organic one because a chassis never wants a flesh sound.
+#
+# Nothing here decides WHEN a sound plays. The system plays one only for a wound that landed or jumped a
+# stage in the same tick something hit the body, so infection, necrosis and healing stay silent.
+
+- type: wolfmedSfxProfile
+  id: WFWolfmedSfxDefault
+  minSeverity: 5
+  soundInterval: 0.4
+  debrisInterval: 0.25
+
+  woundSounds:
+  # Bone. Claimed with no sound: WolfmedBodySoundSystem plays WFWolfmedBoneCrack whenever a fracture appears or its
+  # grade rises (playtest 4), hit or not, and a second bone sound here would double it.
+  - wounds: [ BoneFractureWound ]
+
+  - wounds: [ WFWolfmedDislocationWound ]
+    sound:
+      collection: WFWolfmedWoundBone
+      params:
+        volume: -2
+        variation: 0.12
+
+  # A structural member in a chassis giving way.
+  - wounds: [ CyberneticFrameFractureWound ]
+    sound:
+      collection: WFWolfmedWoundFrame
+      params:
+        variation: 0.12
+
+  # Chassis: current first, then everything else that lands on metal.
+  - tissue: Mechanical
+    damageTypes: [ Shock ]
+    sound:
+      collection: WFWolfmedWoundShock
+      params:
+        volume: -3
+        variation: 0.12
+
+  - tissue: Mechanical
+    sound:
+      collection: WFWolfmedWoundChassis
+      params:
+        volume: -4
+        variation: 0.15
+
+  # Flesh, by what did it.
+  - tissue: Organic
+    damageTypes: [ Shock ]
+    sound:
+      collection: WFWolfmedWoundShock
+      params:
+        volume: -3
+        variation: 0.12
+
+  - tissue: Organic
+    damageTypes: [ Heat, Cold, Caustic ]
+    sound:
+      collection: WFWolfmedWoundBurn
+      params:
+        volume: -2
+        variation: 0.12
+
+  - tissue: Organic
+    damageTypes: [ Piercing ]
+    sound:
+      collection: WFWolfmedWoundPierce
+      params:
+        volume: -4
+        variation: 0.15
+
+  - tissue: Organic
+    damageTypes: [ Slash ]
+    sound:
+      collection: WFWolfmedWoundFlesh
+      params:
+        volume: -4
+        variation: 0.15
+
+  # Blunt is last: a fracture and a dislocation are Blunt too and have already been answered above.
+  - tissue: Organic
+    damageTypes: [ Blunt ]
+    minSeverity: 10
+    sound:
+      collection: WFWolfmedWoundBlunt
+      params:
+        volume: -6
+        variation: 0.15
+
+  # A limb coming off. The spill is the body's own reagent, so an IPC puts hydraulic fluid on the deck.
+  organicDismemberment:
+    sound:
+      collection: WFWolfmedDismemberOrganic
+      params:
+        variation: 0.1
+    effect: WFWolfmedBloodMistLarge
+    spillVolume: 25
+
+  mechanicalDismemberment:
+    sound:
+      collection: WFWolfmedDismemberMechanical
+      params:
+        variation: 0.1
+    effect: WFWolfmedSparkBurstLarge
+    spillVolume: 10
+
+  # Debris tiers, largest first: the first tier the hit clears is the one spawned.
+  # FIX1: the organic tiers are read with the bleeding a hit opened, not with the wound's severity, and
+  # hitSplatter.minBleedIncrease is the floor now, so the smallest tier starts at nothing.
+  organicDebris:
+  - effect: WFWolfmedBloodMistLarge
+    minSeverity: 15
+  - effect: WFWolfmedBloodMistMedium
+    minSeverity: 6
+  - effect: WFWolfmedBloodMistSmall
+    minSeverity: 0
+
+  mechanicalDebris:
+  - effect: WFWolfmedSparkBurstLarge
+    minSeverity: 25
+  - effect: WFWolfmedSparkBurstMedium
+    minSeverity: 12
+  - effect: WFWolfmedSparkBurstSmall
+    minSeverity: 4
+
+  # G1. Flesh throws this instead of the mist above; the mist stays as the fallback for a body with no
+  # bloodstream to take a colour from. Wall states 1, 2 and 6 have eight directions, 3, 4 and 5 four.
+  #
+  # FIX1: a spray happens when, and only when, the hit made the body bleed more, so a blunt hit that opens
+  # a bleed throws blood and a slash that clots on contact does not. minBleedIncrease is the graze floor
+  # and the distance bands read the same figure, so a bleed a gunshot opens travels further than a knick.
+  # The burst budget is what keeps automatic fire to a few sprays a second.
+  hitSplatter:
+    effect: WFWolfmedHitSplatter
+    travel: 1.1
+    states: [ hitsplatter1_free, hitsplatter2_free, hitsplatter3_free ]
+    minBleedIncrease: 1
+    burstWindow: 1.5
+    burstBudget: 3
+    distances:
+    - minSeverity: 15
+      tiles: 3
+    - minSeverity: 6
+      tiles: 2
+    - minSeverity: 0
+      tiles: 1
+    wallSplat: WFWolfmedBloodSplatWall
+    wallStates: [ splatter1, splatter2, splatter3, splatter4, splatter5, splatter6 ]
+    floorDecals:
+    - WFWolfmedBloodFloor1
+    - WFWolfmedBloodFloor2
+    - WFWolfmedBloodFloor3
+    - WFWolfmedBloodFloor4
+    - WFWolfmedBloodFloor5
+    - WFWolfmedBloodFloor6
+    - WFWolfmedBloodFloor7
+    maxPerTile: 3
+
+  # G2. An arterial bleed or an open stump throws blood every few seconds on its own. majorRate is what an
+  # ordinary wound has to reach to join them: a critical slash runs about 0.1, so 0.45 is four or five bad
+  # ones at once or one that nobody has touched.
+  bleedSpurt:
+    majorRate: 0.45 # 1.5 at bleed_rate 1, 0.9 at 0.6; halved with wolfmed.bleed_rate 0.3 (playtest 1)
+    stumpWounds: [ DismembermentWound ]
+    interval: 6
+    jitter: 2.5
+    minBloodLevel: 0.35
+    severity: 14
+    spillVolume: 2
+    sound:
+      collection: WFWolfmedBleedSpurt
+      params:
+        volume: -4
+        variation: 0.12
+    stumpSound:
+      collection: WFWolfmedBleedStump
+      params:
+        volume: -2
+        variation: 0.12
+    mechanicalSound:
+      collection: WFWolfmedLeakHiss
+      params:
+        volume: -3
+        variation: 0.15
+
+  # A machine part that is damaged past minDamage, or knocked out by an EMP, sparks until it is fixed.
+  machineSparks:
+    minDamage: 10
+    interval: 5
+    jitter: 3
+    effect: WFWolfmedSparkBurstSmall
+    sound:
+      collection: sparks
+      params:
+        volume: -4
+        variation: 0.15

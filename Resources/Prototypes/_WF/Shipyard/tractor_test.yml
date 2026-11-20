@@ -1,0 +1,15 @@
+# Administrative test vessel: listed by the Wolfgate ship spawn menu, not sold by shipyards.
+- type: vessel
+  id: WFTractorTest
+  parent: BaseVessel
+  name: TRACTOR TEST
+  description: A small arrestor test vessel with a tractor dish, tractor control computer, flight controls, and an oversized 2 MW test power supply. Board through the port airlock; the dish is on the foredeck.
+  price: 0
+  purchasable: false
+  category: Small
+  group: Shipyard
+  shuttlePath: /Maps/_WF/Shuttles/tractor_test.yml
+  guidebookPage: null
+  class:
+  - Science
+  - Engineering

@@ -13,6 +13,11 @@ namespace Content.Shared.Weapons.Melee;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class MeleeWeaponComponent : Component
 {
+    // WOLFGATE(Xenonids) START: xeno wide swing; the wide-swing key does a heavy attack with this weapon
+    [DataField]
+    public bool WidePrimary;
+    // WOLFGATE END
+
     // TODO: This is becoming bloated as shit.
     // This should just be its own component for alt attacks.
     /// <summary>

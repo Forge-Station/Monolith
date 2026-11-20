@@ -1,0 +1,1107 @@
+# Ported from Goobstation via Trauma Station (Extracts).
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseSlimeExtract
+  name: slime extract
+  description: Goo extracted from a slime. Legends claim these to have "magical powers".
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#828282"
+  - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      extract:
+        maxVol: 100
+  - type: InjectableSolution
+    solution: extract
+  - type: DrawableSolution
+    solution: extract
+  - type: ExaminableSolution
+    solution: extract
+  - type: SlimeExtract
+  - type: Reactive
+  - type: StatusEffects
+    allowed:
+    - Jitter
+  - type: GuideHelp
+    guides:
+    - Xenobiology
+
+- type: entity
+  id: GreySlimeExtract
+  parent: BaseSlimeExtract
+  name: grey slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#828282"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: Epinephrine
+          amount: 15
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSpawnEntity
+          entity: MobSlimeXenobioBabyGreySpawner
+          number: 3
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: MonkeyCube
+          number: 3
+  - type: Tag
+    tags:
+    - XenobiologyGreyExtract
+
+- type: entity
+  id: BlueSlimeExtract
+  parent: BaseSlimeExtract
+  name: blue slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#79F6FC"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSmoke
+          smokePrototype: Foam
+          duration: 10
+          spreadAmount: 75
+        - !type:XenobioPlaySound
+          sound: /Audio/Effects/extinguish.ogg
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: FrostOil
+          amount: 15
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: XenobioJellyBlue
+          amount: 1
+  - type: Tag
+    tags:
+    - XenobiologyBlueExtract
+
+- type: entity
+  id: MetalSlimeExtract
+  parent: BaseSlimeExtract
+  name: metal slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#595959"
+      shader: XenoMetallic
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: SheetGlass10
+        - !type:XenobioSpawnEntity
+          entity: SheetRGlass1
+          number: 5
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: SheetSteel10
+        - !type:XenobioSpawnEntity
+          entity: SheetPlasteel1
+          number: 5
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractFail
+  - type: Tag
+    tags:
+    - XenobiologyMetalExtract
+
+- type: entity
+  id: OrangeSlimeExtract
+  parent: BaseSlimeExtract
+  name: orange slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ff9f1a"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSmoke
+          smokePrototype: Smoke
+          duration: 10
+          spreadAmount: 75
+          solution:
+            reagents:
+            - ReagentId: TearGas
+              Quantity: 20
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: Flammable
+          range: 3
+          effect: !type:XenobioReaction
+            base: Ignite5
+            once: false
+        - !type:FlashReactionEffect
+          maxRange: 7
+          rangePerUnit: 7
+          sound: /Audio/Weapons/flash.ogg
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: CapsaicinOil
+          amount: 15
+  - type: Tag
+    tags:
+    - XenobiologyOrangeExtract
+
+- type: entity
+  id: PurpleSlimeExtract
+  parent: BaseSlimeExtract
+  name: purple slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#BF77F6"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: ArtifactFragment1
+          number: 4
+          offset: 1.0
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: XenobioJellyPurple
+          amount: 1
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: Omnizine
+          amount: 15
+  - type: Tag
+    tags:
+    - XenobiologyPurpleExtract
+
+- type: entity
+  id: CeruleanSlimeExtract
+  parent: BaseSlimeExtract
+  name: cerulean slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#2A52BE"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: Body
+          range: 7
+          effect: !type:Oxygenate
+            factor: 10
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: OnFire
+          range: 12
+          effect: !type:ExtinguishReaction
+            fireStacksAdjustment: -20
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: XenobioJellyCerulean
+          amount: 1
+  - type: Tag
+    tags:
+    - XenobiologyCeruleanExtract
+
+- type: entity
+  id: DarkBlueSlimeExtract
+  parent: BaseSlimeExtract
+  name: dark blue slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#1e8cfa"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: XenobioJellyDarkBlue
+          amount: 1
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:CreateGas
+          gas: Frezon
+          multiplier: 35
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: Leporazine
+          amount: 15
+  - type: Tag
+    tags:
+    - XenobiologyDarkBlueExtract
+
+- type: entity
+  id: DarkPurpleSlimeExtract
+  parent: BaseSlimeExtract
+  name: dark purple slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#8e0ff0"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: SheetPlastic10
+          number: 3
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: SheetPlasma1
+          number: 3
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractFail
+  - type: Tag
+    tags:
+    - XenobiologyDarkPurpleExtract
+
+- type: entity
+  id: SilverSlimeExtract
+  parent: BaseSlimeExtract
+  name: silver slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#c4c4c4"
+      shader: XenoMetallic
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvilBase
+        effects:
+        - !type:Jitter
+          time: 5
+          frequency: 20
+        - !type:XenobioDelayed
+          delay: 5
+          effects:
+          - !type:XenobioSmoke
+            smokePrototype: AluminiumMetalFoam
+            duration: 10
+            spreadAmount: 6
+          - !type:XenobioPlaySound
+            sound:
+              path: /Audio/Effects/extinguish.ogg
+          - !type:XenobioDelete {}
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: IngotSilver1
+          number: 2
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: XenobioGoopBall
+          number: 3
+  - type: Tag
+    tags:
+    - XenobiologySilverExtract
+
+- type: entity
+  id: YellowSlimeExtract
+  parent: BaseSlimeExtract
+  name: yellow slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ffff1a"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractFail
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: XenobioVolatileOrgan
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:EmpReactionEffect {}
+  - type: Tag
+    tags:
+    - XenobiologyYellowExtract
+
+- type: entity
+  id: BluespaceSlimeExtract
+  parent: BaseSlimeExtract
+  name: bluespace slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#f0f8ff"
+      shader: XenoBluespace
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: FloorTileItemBluespace30
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: MaterialBluespace1
+          number: 5
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: MobState
+          range: 7
+          blacklist:
+            components:
+            - BorgBrain
+          effect: !type:XenobioRandomTeleport {}
+  - type: Tag
+    tags:
+    - XenobiologyBluespaceExtract
+
+- type: entity
+  id: GoldSlimeExtract
+  parent: BaseSlimeExtract
+  name: gold slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#e8b923"
+      shader: XenoMetallic
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSpawnEntity
+          entity: RPassiveMobSpawner
+          number: 2
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSpawnEntity
+          entity: RHostileMobSpawner
+          number: 2
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:Jitter
+          time: 3
+          frequency: 20
+        - !type:XenobioSpawnEntity
+          entity: RNeutralMobSpawner
+          number: 2
+  - type: Tag
+    tags:
+    - XenobiologyGoldExtract
+
+- type: entity
+  id: GreenSlimeExtract
+  parent: BaseSlimeExtract
+  name: green slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#4dff4d"
+  - type: Reactive
+    # Goob's green extract changes species; Wolfgate has no species change, so it makes unstable mutagen.
+    reactions:
+    - reagents:
+      - Radium
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: UnstableMutagen
+          amount: 15
+  - type: Tag
+    tags:
+    - XenobiologyGreenExtract
+
+- type: entity
+  id: PinkSlimeExtract
+  parent: BaseSlimeExtract
+  name: pink slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ff33cc"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: PlantHolder
+          range: 5
+          effect: !type:PlantAdjustMutationLevel
+            amount: 20
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: XenobioJellyPink
+          amount: 10
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractFail
+  - type: Tag
+    tags:
+    - XenobiologyPinkExtract
+
+- type: entity
+  id: PyriteSlimeExtract
+  parent: BaseSlimeExtract
+  name: pyrite slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#dcaa4f"
+      shader: XenoMetallic
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: StatusEffects
+          range: 12
+          effect: !type:XenobioStealth
+            duration: 60
+            probability: 0.5
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSmoke
+          smokePrototype: Smoke
+          duration: 5
+          spreadAmount: 75
+        - !type:XenobioRelayNearby
+          compName: StatusEffects
+          range: 7
+          effect: !type:XenobioStealth
+            duration: 30
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: StatusEffects
+          range: 1.5
+          effect: !type:XenobioStealth
+            duration: 120
+  - type: Tag
+    tags:
+    - XenobiologyPyriteExtract
+
+- type: entity
+  id: RedSlimeExtract
+  parent: BaseSlimeExtract
+  name: red slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ff3333"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: XenobioJellyRed
+          amount: 1
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioRelayNearby
+          compName: NpcFactionMember
+          range: 3
+          effect: !type:XenobioChangeFaction
+            newFaction: SimpleHostile
+            duration: 30
+  - type: Tag
+    tags:
+    - XenobiologyRedExtract
+
+- type: entity
+  id: SepiaSlimeExtract
+  parent: BaseSlimeExtract
+  name: sepia slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#704214"
+      shader: XenoSepia
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: Tricordrazine
+          amount: 15
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: FloorTileItemSepia30
+  - type: Tag
+    tags:
+    - XenobiologySepiaExtract
+
+- type: entity
+  id: AdamantineSlimeExtract
+  parent: BaseSlimeExtract
+  name: adamantine slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#005c33"
+      shader: XenoMetallic
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvil
+        effects:
+        - !type:CreateGas
+          gas: Healium
+          multiplier: 55
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSpawnEntity
+          entity: SheetPdvComposite5
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractFail
+  - type: Tag
+    tags:
+    - XenobiologyAdamantineExtract
+
+- type: entity
+  id: BlackSlimeExtract
+  parent: BaseSlimeExtract
+  name: black slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#000000"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractFail
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractFail
+  - type: Tag
+    tags:
+    - XenobiologyBlackExtract
+
+- type: entity
+  id: LightPinkSlimeExtract
+  parent: BaseSlimeExtract
+  name: light pink slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#ffb3ec"
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReaction
+        effects:
+        - !type:XenobioSmoke
+          smokePrototype: Foam
+          duration: 15
+          spreadAmount: 50
+          solution:
+            reagents:
+            - ReagentId: Pax
+              Quantity: 30
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: Cognizine
+          amount: 10
+  - type: Tag
+    tags:
+    - XenobiologyLightPinkExtract
+
+- type: entity
+  id: OilSlimeExtract
+  parent: BaseSlimeExtract
+  name: oil slime extract
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _WF/Xenobiology/Specific/Xenobiology/extract.rsi
+      state: core
+      color: "#383936"
+      shader: XenoMetallic
+  - type: Reactive
+    reactions:
+    - reagents:
+      - Water
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractReagent
+        effects:
+        - !type:XenobioAdjustSolution
+          reagent: SpaceLube
+          amount: 15
+    - reagents:
+      - Plasma
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractEvilBase
+        effects:
+        - !type:Jitter
+          time: 5
+          frequency: 20
+        - !type:XenobioDelayed
+          delay: 5
+          effects:
+          - !type:ExplosionReactionEffect
+            explosionType: FireBomb
+            maxIntensity: 1050
+            intensitySlope: 4
+            intensityPerUnit: 70
+          - !type:XenobioDelete {}
+    - reagents:
+      - Blood
+      methods:
+      - Touch
+      - Injection
+      effects:
+      - !type:XenobioReaction
+        base: XenobioExtractFail
+  - type: Tag
+    tags:
+    - XenobiologyOilExtract

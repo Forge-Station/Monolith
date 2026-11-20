@@ -1,0 +1,182 @@
+- type: entity
+  parent: BaseWallTierTwo
+  id: TgConcreteReinforced
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/hexacrete.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/hexacrete.rsi
+  - type: IconSmooth
+    key: walls
+    base: hexacrete
+
+- type: entity
+  parent: BaseWallTierOne
+  id: TgMineralGold
+  components:
+  - type: Construction
+    graph: Girder
+    node: goldWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/gold_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/gold_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: gold_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: TgMineralIron
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/iron_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/iron_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: iron_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: TgMineralPlasma
+  components:
+  - type: Construction
+    graph: Girder
+    node: plasmaWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plasma_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: plasma_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: TgMineralSilver
+  components:
+  - type: Construction
+    graph: Girder
+    node: silverWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/silver_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/silver_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: silver_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: TgMineralPlastitaniumRedpod
+  components:
+  - type: StaticPrice
+    price: 110
+  - type: Construction
+    graph: Girder
+    node: plastitaniumWall
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/red_pod.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/red_pod.rsi
+  - type: IconSmooth
+    key: walls
+    base: red_pod_walls
+
+- type: entity
+  parent: BaseWallTierOne
+  id: TgConcrete
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/concrete.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/concrete.rsi
+  - type: IconSmooth
+    key: walls
+    base: concrete
+
+- type: entity
+  parent: BaseWallTierOne
+  id: TgIce
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/icedmetal_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/icedmetal_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: icedmetal_wall
+
+- type: entity
+  parent: ShiptestMineralShrouded
+  id: TgMineralRedRock
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/red_rock_tgstation.rsi
+    state: red_rock-0
+    offset: -0.25,-0.25
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/red_rock_tgstation.rsi
+    state: red_rock-0
+  - type: IconSmooth
+    base: red_rock-
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: TgRWall
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: reinforced_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: TgIndestructibleNecropolis
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/necro_tgstation.rsi
+    state: necro
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/necro_tgstation.rsi
+    state: necro

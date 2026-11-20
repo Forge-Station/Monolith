@@ -1,0 +1,144 @@
+- type: entity
+  parent: BaseWallTierTwo
+  id: NebulaConcreteReinforced
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/concrete_reinforced_nebula.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/concrete_reinforced_nebula.rsi
+  - type: IconSmooth
+    key: walls
+    base: stone
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NebulaDaubedPlasteredFramed
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plastered_framed_nebula.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plastered_framed_nebula.rsi
+  - type: IconSmooth
+    key: walls
+    base: framed
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NebulaShuttleLight
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_light_nebula.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_light_nebula.rsi
+  - type: IconSmooth
+    key: walls
+    base: solid
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NebulaBrick
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/brick_nebula.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/brick_nebula.rsi
+  - type: IconSmooth
+    key: walls
+    base: brick
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NebulaConcrete
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/concrete_nebula.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/concrete_nebula.rsi
+  - type: IconSmooth
+    key: walls
+    base: stone
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NebulaContainment
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/containment_nebula.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/containment_nebula.rsi
+  - type: IconSmooth
+    key: walls
+    base: solid
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NebulaPlastic
+  components:
+  - type: Construction
+    graph: Girder
+    node: plasticWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/plastic_nebula.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/plastic_nebula.rsi
+  - type: IconSmooth
+    key: walls
+    base: plastic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: NebulaRaidershuttle
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/raidershuttle_nebula.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/raidershuttle_nebula.rsi
+  - type: IconSmooth
+    key: walls
+    base: metal

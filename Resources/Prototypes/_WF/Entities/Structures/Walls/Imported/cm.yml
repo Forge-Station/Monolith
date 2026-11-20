@@ -1,0 +1,241 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: CMAlmayerAicoreWhite
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/almayer_aicore_white.rsi
+    color: "#CCC4BE"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/almayer_aicore_white.rsi
+  - type: IconSmooth
+    key: walls
+    base: aiwall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: CMAicoreWhiteReinforced
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/almayer_aicore_white_reinforced.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/almayer_aicore_white_reinforced.rsi
+  - type: IconSmooth
+    key: walls
+    base: reinforced
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CMCultDarkTemple
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/runedstone.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/runedstone.rsi
+  - type: IconSmooth
+    key: walls
+    base: runedstone
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CMMineralDiamond
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/diamond_cmss13.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/diamond_cmss13.rsi
+  - type: IconSmooth
+    key: walls
+    base: stone
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CMMineralPhoron
+  components:
+  - type: Construction
+    graph: Girder
+    node: plasmaWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/phoron_cmss13.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/phoron_cmss13.rsi
+  - type: IconSmooth
+    key: walls
+    base: stone
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CMMineralSilver
+  components:
+  - type: Construction
+    graph: Girder
+    node: silverWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/silver_cmss13.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/silver_cmss13.rsi
+  - type: IconSmooth
+    key: walls
+    base: stone
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CMMineralUranium
+  components:
+  - type: Construction
+    graph: Girder
+    node: uraniumWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/uranium_cmss13.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/uranium_cmss13.rsi
+  - type: IconSmooth
+    key: walls
+    base: stone
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CMMineralUraniumLeaking
+  components:
+  - type: Construction
+    graph: Girder
+    node: uraniumWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/uranium_leaking_cmss13.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/uranium_leaking_cmss13.rsi
+  - type: IconSmooth
+    key: walls
+    base: stone
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: CMRWallResearch
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/research_cmss13.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/research_cmss13.rsi
+  - type: IconSmooth
+    key: walls
+    base: research
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CMAncientTempleRunedAlt
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/hunter_temple_deco_2.rsi
+    color: "#998A7B"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/hunter_temple_deco_2.rsi
+  - type: IconSmooth
+    key: walls
+    base: ancient_stone
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: CMUppShipReinforced
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/upp_walls.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/upp_walls.rsi
+  - type: IconSmooth
+    key: walls
+    base: uppwall_reinforced
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CMCult
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/cult_cmss13.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/cult_cmss13.rsi
+  - type: IconSmooth
+    key: walls
+    base: cult
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CMSulaco
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/sulaco_cmss13.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/sulaco_cmss13.rsi
+  - type: IconSmooth
+    key: walls
+    base: sulaco

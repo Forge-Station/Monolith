@@ -1,0 +1,81 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: BeeClosedWall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wall_beestation.rsi
+    color: "#5D5E62"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wall_beestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BeeMineralTitanium
+  components:
+  - type: StaticPrice
+    price: 125
+  - type: Construction
+    graph: Girder
+    node: shuttleWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_wall_beestation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/shuttle_wall_beestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: shuttle_wall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: BeeRWall
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_beestation.rsi
+    color: "#5D5E62"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_wall_beestation.rsi
+  - type: IconSmooth
+    key: walls
+    base: reinforced_wall
+
+- type: entity
+  parent: [ BaseWallTierOne, BaseWallBitmask ]
+  id: BeeMineralCopper
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/copper_wall.rsi
+    state: copper_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/copper_wall.rsi
+  - type: IconSmooth
+    base: copper_wall-

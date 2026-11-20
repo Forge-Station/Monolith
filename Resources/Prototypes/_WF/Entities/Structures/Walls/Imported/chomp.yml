@@ -1,0 +1,105 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: ChompTurfpackStationYellow
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/station_yellow_chompstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/station_yellow_chompstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: brick
+
+- type: entity
+  parent: BaseWallTierOne
+  id: ChompQuartz
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/quartz_chompstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/quartz_chompstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: hull-r_titanium
+
+- type: entity
+  parent: BaseWallTierOne
+  id: ChompResin
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/resin_chompstation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/resin_chompstation.rsi
+  - type: IconSmooth
+    key: walls
+    base: resin
+
+ type: entity
+  parent: BaseWallTierOne
+  id: ChompBronze
+  components:
+  - type: Construction
+    graph: ClockworkGirder
+    node: clockworkWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/clockwork_objects_chompstation.rsi
+    state: clockwork_wall
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/clockwork_objects_chompstation.rsi
+    state: clockwork_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: ChompIce
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/snow_chompstation.rsi
+    state: Icerock
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/snow_chompstation.rsi
+    state: Icerock
+
+- type: entity
+  parent: BaseWallTierOne
+  id: ChompStonebricks
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wall_masks_vr_chompstation.rsi
+    state: stonebrick
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wall_masks_vr_chompstation.rsi
+    state: stonebrick
+
+- type: entity
+  parent: BaseWallTierOne
+  id: ChompStonelogs
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wall_masks_vr_chompstation.rsi
+    state: stonelogs
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wall_masks_vr_chompstation.rsi
+    state: stonelogs

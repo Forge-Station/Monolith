@@ -1,0 +1,270 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisConcrete
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/concrete_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/concrete_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: brick
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisDshull
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/dshull_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/dshull_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisDurasteel
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/durasteel_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/durasteel_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisElevator
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/elevator_polaris.rsi
+    color: "#636363"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/elevator_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisLogSif
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/log_sif_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/log_sif_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisRConcrete
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_concrete_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_concrete_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: rbrick
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: PolarisRWall
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: rgeneric
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisRdshull
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rdshull_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rdshull_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisResin
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/resin_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/resin_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisRthull
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rthull_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rthull_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisSandstone
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisSifwood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/sifwood_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/sifwood_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisSilvergold
+  components:
+  - type: Construction
+    graph: Girder
+    node: silverWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/silvergold_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/silvergold_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisSnowbrick
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/snowbrick_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/snowbrick_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: PolarisWood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wood_polaris.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wood_polaris.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic

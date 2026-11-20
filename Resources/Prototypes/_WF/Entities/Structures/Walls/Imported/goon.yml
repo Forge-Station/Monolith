@@ -1,0 +1,883 @@
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonAutoGannets
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/destiny.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/destiny.rsi
+  - type: IconSmooth
+    key: walls
+    base: destiny
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonAutoReinforcedGannets
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/destiny_reinforced.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/destiny_reinforced.rsi
+  - type: IconSmooth
+    key: walls
+    base: R
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonAutoHedge
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/hedge.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/hedge.rsi
+  - type: IconSmooth
+    key: walls
+    base: hedge
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSupernornColoredBlue
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/colored_blue.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/colored_blue.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonSupernornColoredCyan
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/colored_cyan.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/colored_cyan.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonSupernornColoredGreen
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/colored_green.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/colored_green.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonSupernornColoredPurple
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/colored_purple.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/colored_purple.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonSupernornColoredRed
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/colored_red.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/colored_red.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonSupernornColoredYellow
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/colored_yellow.rsi
+    color: "#CFA756"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/colored_yellow.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonReinforcedSupernornColored
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/colored_black.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/colored_black.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonColoredYellowPlasmasteel
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/colored_yellow_plasmasteel.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/colored_yellow_plasmasteel.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSupernornMaterialMauxite
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/supernorn_mauxite.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/supernorn_mauxite.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonAutoReinforcedOld
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/derelict.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/derelict.rsi
+  - type: IconSmooth
+    key: walls
+    base: oldr
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonAutoReinforcedSupernorn
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/supernorn_reinforced.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/supernorn_reinforced.rsi
+  - type: IconSmooth
+    key: walls
+    base: mapwall_r
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonAutoMarsoutpost
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/marsoutpost.rsi
+    state: interior-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/marsoutpost.rsi
+    state: interior-map
+  - type: IconSmooth
+    key: walls
+    base: interior-
+    mode: Bitmask
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesAzarakCavewall
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/azungar_adventure.rsi
+    state: cave_wall
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/azungar_adventure.rsi
+    state: cave_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonGreekCave
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/adventure_gannets.rsi
+    state: rock
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/adventure_gannets.rsi
+    state: rock
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonGreekUnderwall
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/adventure_gannets.rsi
+    state: under-wall
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/adventure_gannets.rsi
+    state: under-wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesHospitalCavern
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/hospital.rsi
+    state: cavern1
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/hospital.rsi
+    state: cavern1
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesHospital
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/hospital.rsi
+    state: panelwall
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/hospital.rsi
+    state: panelwall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesLeadwallGray
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: leadwall_gray
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: leadwall_gray
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesLeadwallWhite
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: leadwall_white
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: leadwall_white
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesBluewall
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: bluewall
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: bluewall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesBluewallGlowing
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: bluedoor_1
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: bluedoor_1
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesRootwall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: rootwall
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/worlds.rsi
+    state: rootwall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesGauntlet
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/vr.rsi
+    state: gauntwall
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/vr.rsi
+    state: gauntwall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesHive
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: hive
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: hive
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonSetpiecesLunar
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: lunar
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: lunar
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonTrenchSide
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: trench-side
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: trench-side
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonUnsimulatedWall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: riveted
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: riveted
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonAncient
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: ancient
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: ancient
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonCave
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: cave-dark
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: cave-dark
+
+- type: entity
+  parent: [ GoonCave, BaseWallBitmask ]
+  id: GoonAdventureIomoon
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/silicate_goon.rsi
+    state: silicate-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/silicate_goon.rsi
+    state: silicate-0
+  - type: IconSmooth
+    base: silicate-
+
+- type: entity
+  parent: [ GoonCave, BaseWallBitmask ]
+  id: GoonAdventureHospital
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/asteroid_dark_goon.rsi
+    state: exterior-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/asteroid_dark_goon.rsi
+    state: exterior-0
+  - type: IconSmooth
+    base: exterior-
+
+- type: entity
+  parent: [ GoonCave, BaseWallBitmask ]
+  id: GoonAdventureMars
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/mars_goon.rsi
+    state: mars-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/mars_goon.rsi
+    state: mars-0
+  - type: IconSmooth
+    base: mars-
+
+- type: entity
+  parent: [ GoonCave, BaseWallBitmask ]
+  id: GoonAdventureIcemoon
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/ice_goon.rsi
+    state: ice-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/ice_goon.rsi
+    state: ice-0
+  - type: IconSmooth
+    base: ice-
+
+- type: entity
+  parent: [ GoonCave, BaseWallBitmask ]
+  id: TGMCWallLava
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/lava_wall_tgmc.rsi
+    state: lava_wall-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/lava_wall_tgmc.rsi
+    state: lava_wall-0
+  - type: IconSmooth
+    base: lava_wall-
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CitadelGlacierRockBlue
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/glacier_blue_citadel.rsi
+    state: ice0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/glacier_blue_citadel.rsi
+    state: ice0
+  - type: IconSmooth
+    key: glacierBlue
+    base: ice
+    mode: CardinalFlags
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonTrench
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: trench-top
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/walls_goonstation.rsi
+    state: trench-top
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonVoid
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/floors_goonstation.rsi
+    state: darkvoid
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/floors_goonstation.rsi
+    state: darkvoid
+
+- type: entity
+  parent: BaseWallTierOne
+  id: GoonAzarakCavewallEdges
+  components:
+  - type: Gatherable
+    toolWhitelist:
+      tags:
+      - Pickaxe
+      components:
+      - MiningGatheringHard
+      - MiningGatheringSoft
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/azungar_adventure.rsi
+    noRot: true
+    granularLayersRendering: true
+    enableOverrideDir: true
+    overrideDir: South
+    layers:
+    - state: cave_wall_edges
+      renderingStrategy: Default
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/azungar_adventure.rsi
+    state: cave_wall_edges
+
+- type: entity
+  parent: GoonAzarakCavewallEdges
+  id: GoonAzarakCavewallEdgesNorth
+  components:
+  - type: Sprite
+    overrideDir: North
+
+- type: entity
+  parent: GoonAzarakCavewallEdges
+  id: GoonAzarakCavewallEdgesEast
+  components:
+  - type: Sprite
+    overrideDir: East
+
+- type: entity
+  parent: GoonAzarakCavewallEdges
+  id: GoonAzarakCavewallEdgesSouthEast
+  components:
+  - type: Sprite
+    overrideDir: SouthEast
+
+- type: entity
+  parent: GoonAzarakCavewallEdges
+  id: GoonAzarakCavewallEdgesSouthWest
+  components:
+  - type: Sprite
+    overrideDir: SouthWest
+
+- type: entity
+  parent: GoonAzarakCavewallEdges
+  id: GoonAzarakCavewallEdgesNorthEast
+  components:
+  - type: Sprite
+    overrideDir: NorthEast
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: GoonLeadWall
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/leadwall_goon.rsi
+    state: leadwall
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/leadwall_goon.rsi
+    state: leadwall
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+
+- type: entity
+  parent: GoonLeadWall
+  id: GoonLeadWallJunction
+  components:
+  - type: Sprite
+    state: leadjunction
+  - type: Icon
+    state: leadjunction
+
+- type: entity
+  parent: GoonLeadWall
+  id: GoonLeadWallCap
+  components:
+  - type: Sprite
+    state: leadcap
+  - type: Icon
+    state: leadcap
+
+- type: entity
+  parent: GoonLeadWall
+  id: GoonLeadWindow
+  components:
+  - type: Sprite
+    state: leadwindow_1
+  - type: Icon
+    state: leadwindow_1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: GoonLeadWindow
+  id: GoonLeadWindowFull
+  components:
+  - type: Sprite
+    state: leadwindow_2
+  - type: Icon
+    state: leadwindow_2
+
+- type: entity
+  parent: GoonLeadWindow
+  id: GoonLeadWindowAlt
+  components:
+  - type: Sprite
+    state: leadwindow_3
+  - type: Icon
+    state: leadwindow_3
+
+- type: entity
+  parent: [ DecorImportMeatWallBase, BaseWallBitmask ]
+  id: GoonAdventureMeat
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/meaty_goonstation.rsi
+    state: meaty-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/meaty_goonstation.rsi
+    state: meaty-0
+  - type: IconSmooth
+    base: meaty-
+
+- type: entity
+  parent: [ DecorImportMeatWallBase, BaseWallBitmask ]
+  id: GoonAdventureMeatMeatier
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/meatier_goonstation.rsi
+    state: meatier-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/meatier_goonstation.rsi
+    state: meatier-0
+  - type: IconSmooth
+    base: meatier-
+
+- type: entity
+  parent: [ DecorImportMeatWallBase, BaseWallBitmask ]
+  id: GoonAdventureMeatEyes
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/meateyes_goonstation.rsi
+    state: meateyes-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/meateyes_goonstation.rsi
+    state: meateyes-0
+  - type: IconSmooth
+    base: meateyes-
+
+- type: entity
+  parent: [ DecorImportMeatWallBase, BaseWallBitmask ]
+  id: GoonAutoMartian
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/martian_goonstation.rsi
+    state: martian-0
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/martian_goonstation.rsi
+    state: martian-0
+  - type: IconSmooth
+    base: martian-
+
+- type: entity
+  parent: GoonCave
+  id: PolarisMineralCrystal
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rock_crystal_polaris.rsi
+    state: rock-crystal
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rock_crystal_polaris.rsi
+    state: rock-crystal
+
+- type: entity
+  parent: GoonCave
+  id: PolarisMineralIcey
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rock_icey_polaris.rsi
+    state: rock-icey
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rock_icey_polaris.rsi
+    state: rock-icey

@@ -1,0 +1,323 @@
+- type: entity
+  parent: BaseWallTierTwo
+  id: BayRWallHullVox
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/hull_vox_baystation.rsi
+    color: "#8DAF6A"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/hull_vox_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: r_generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayPrepaintedFleet
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/prepainted_fleet_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/prepainted_fleet_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: BayRWallPrepaintedFleet
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_prepainted_fleet_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_prepainted_fleet_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: r_generic
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: BayRWallPrepainted
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_prepainted_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_prepainted_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: r_generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BaySimulatedWall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/steel_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/steel_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayConcrete
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/concrete_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/concrete_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayContainment
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/containment_baystation.rsi
+    color: "#2D2D2D"
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/containment_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayCrystal
+  components:
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/crystal_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/crystal_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayElevator
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/elevator_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/elevator_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayMaple
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/maple_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/maple_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: woodneric
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayOcpWall
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/ocp_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/ocp_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: r_ocp
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayPhoron
+  components:
+  - type: Construction
+    graph: Girder
+    node: plasmaWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/phoron_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/phoron_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayPrepainted
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/prepainted_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/prepainted_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierTwo
+  id: BayRWall
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/reinforced_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: r_generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayRutile
+  components:
+  - type: Construction
+    graph: Girder
+    node: wall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rutile_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rutile_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BaySandstone
+  components:
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/sandstone_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: generic
+
+- type: entity
+  parent: BaseWallTierOne
+  id: BayWood
+  components:
+  - type: StaticPrice
+    price: 30
+  - type: Construction
+    graph: Barricade
+    node: woodWall
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/wood_baystation.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/wood_baystation.rsi
+  - type: IconSmooth
+    key: walls
+    base: woodneric

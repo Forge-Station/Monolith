@@ -1,0 +1,39 @@
+- type: entity
+  parent: BaseWallTierTwo
+  id: CitRWallRust
+  components:
+  - type: StaticPrice
+    price: 115
+  - type: Construction
+    graph: Girder
+    node: reinforcedWallRust
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rusty_reinforced_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rusty_reinforced_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: r_wall
+
+- type: entity
+  parent: BaseWallTierOne
+  id: CitRust
+  components:
+  - type: Construction
+    graph: Girder
+    node: wallrust
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Sprite
+    sprite: _WF/DecorImport/Structures/Walls/rusty_wall.rsi
+  - type: Icon
+    sprite: _WF/DecorImport/Structures/Walls/rusty_wall.rsi
+  - type: IconSmooth
+    key: walls
+    base: wall

@@ -1,0 +1,9 @@
+# A wide field of vents on the surface, a few to a screen; Carcinoma's biome picks where the fields lie.
+- type: biomeTemplate
+  id: WFCarcinomaVentField
+  layers:
+  - !type:BiomeEntityLayer
+    allowedTiles: [WFFloorFlesh, FloorFlesh, WFFloorFleshScab, WFFloorFleshBoneMeaty, WFFloorFleshBoneSpine, WFFloorFleshBoneStraight, WFFloorFleshCrust, WFFloorFleshMarshMud, WFFloorFleshMarshDirt]
+    entities: [WFCarcinomaVent]
+    threshold: 0.9
+    noise: { seed: 142, noiseType: OpenSimplex2, frequency: 0.6 }

@@ -353,3 +353,31 @@
     sprite: _Forge/Clothing/Old/OuterClothing/Coats/windbreaker_paramedic.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Old/OuterClothing/Coats/windbreaker_paramedic.rsi
+
+- type: entity
+  parent: [ ClothingOuterCoatSyndicateOfficer, ClothingOuterStorageFoldableBase ]
+  id: ClothingOuterCoatMercBlack
+  name: dark elite armored jacket
+  description: A black armored jacket created by Blu.FI as stylish protection for expeditions. It can withstand mild cold.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/OuterClothing/Coats/armored_black_naim.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/OuterClothing/Coats/armored_black_naim.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1
+
+- type: entity
+  parent: [ ClothingOuterCoatSyndicateOfficer, ClothingOuterStorageFoldableBase ]
+  id: ClothingOuterCoatMercWhite
+  name: white elite armored jacket
+  description: A white armored jacket created by Blu.FI as stylish protection for expeditions. It can withstand mild cold.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/OuterClothing/Coats/armored_white_naim.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/OuterClothing/Coats/armored_white_naim.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 1.1
+    coolingCoefficient: 0.1

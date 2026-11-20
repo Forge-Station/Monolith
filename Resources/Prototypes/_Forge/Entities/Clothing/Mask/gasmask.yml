@@ -1,24 +1,10 @@
-# region Renegate
-- type: entity
-  parent: ClothingMaskGasSecurity
-  id: ClothingMaskGasRenegate
-  name: renegates gas mask
-  suffix: Ренегаты
-  description: A standard issue renegates gas mask.
-  components:
-  - type: Item
-    size: Tiny
-  - type: Sprite
-    sprite: _Forge/Clothing/Mask/renegate.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Mask/renegate.rsi
 # region Empire
 - type: entity
   parent: ClothingMaskGasSecurity
   id: ClothingMaskGasEmpire
   name: empires gas mask
-  suffix: Empire
   description: A standard issue empires gas mask.
+  suffix: Empire
   components:
   - type: Item
     size: Tiny
@@ -26,6 +12,36 @@
     sprite: _Forge/Clothing/Mask/empire.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Mask/empire.rsi
+
+# region Renegate
+- type: entity
+  parent: ClothingMaskGasSecurity
+  id: ClothingMaskGasRenegate
+  name: renegates gas mask
+  description: A standard issue renegates gas mask.
+  suffix: Ренегаты
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Forge/Clothing/Mask/renegate.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Mask/renegate.rsi
+
+# region TSF
+- type: entity
+  parent: [ ClothingMaskGasSecurity, BaseFactionGearTSFT0 ]
+  id: ClothingMaskGasTSFMC
+  name: federation gas mask
+  description: A very comfortable gas mask supplied by a little-known mercenary company. Quite stylish, too.
+  suffix: TSF
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Forge/Clothing/Mask/tsf_elited_mask.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Mask/tsf_elited_mask.rsi
 
 # region Company
 - type: entity
@@ -175,3 +191,16 @@
         Slash: 0.90
         Piercing: 0.90
         Heat: 0.90
+
+- type: entity
+  parent: ClothingMaskGasSecurity
+  id: ClothingMaskGasMerc
+  name: elite gas mask
+  description: A gas mask created by Blu_Fi so you can breathe easy and look sharp!
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Forge/Clothing/Mask/elite_mask.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Mask/elite_mask.rsi

@@ -212,6 +212,22 @@
   - type: Clothing
     sprite: _Forge/Clothing/Uniforms/Jumpsuits/renegate_suit.rsi
 
+# region TSF
+- type: entity
+  parent: [ ClothingUniformBase, BaseFactionGearTSFT0 ]
+  id: ClothingUniformJumpsuitTSFMCElite
+  name: elite tsf suit
+  description: A uniform gifted to the Federation by an unknown mercenary company. It is highly comfortable, whether one is stationed on a flagship or conducting combat operations.
+  suffix: TSF
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tsf_elite.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/tsf_elite.rsi
+  - type: SuitSensor
+    randomMode: false
+    mode: SensorVitals
+
 # region Company
 - type: entity
   parent: ClothingUniformBase
@@ -260,6 +276,51 @@
     sprite: _Forge/Clothing/Uniforms/Jumpsuits/jumpsuit_techniclogistic.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Uniforms/Jumpsuits/jumpsuit_techniclogistic.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitVdvtyelnyazhka
+  name: VDV tyelnyazhka
+  description: An old piece of the uniform of the Airborne Troops of the USSP. Unfortunately, in space there is no sky and no air.
+  suffix: USSP
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/vdv_tyelnyazhka.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/vdv_tyelnyazhka.rsi
+  - type: StaticPrice
+    price: 10
+    vendPrice: 250
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitViperGroupTankTop
+  name: Viper tank top
+  description: VG-jumpsuit-desc
+  suffix: VG
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
+  - type: StaticPrice
+    price: 0
+    vendPrice: 1150
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitHME
+  name: HME jumpsuit
+  description: HME-jumpsuit-desc
+  suffix: HME
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
+  - type: StaticPrice
+    price: 80
+    vendPrice: 250
 
 #region Other
 - type: entity
@@ -561,22 +622,6 @@
     randomMode: false
     mode: SensorVitals
 
-# Harmony Medical Enterprises company
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitHME
-  name: HME jumpsuit
-  description: HME-jumpsuit-desc
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpsuits/hme_suit.rsi
-  - type: StaticPrice
-    price: 80
-    vendPrice: 250
-
 
 - type: entity
   parent: [BaseC2ContrabandUnredeemable, ClothingUniformBase]
@@ -633,33 +678,24 @@
   - type: Clothing
     sprite: _Forge/Clothing/Uniforms/Jumpsuits/sr.rsi
 
-# Viper company group
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitMercBlack
+  name: formal black uniform
+  description: Dress uniforms for combat — so that, in the event of victory, one looks impeccable, and in the event of death, one departs with dignity.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/elite_black.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/elite_black.rsi
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitViperGroupTankTop
-  name: Viper tank top
-  description: VG-jumpsuit-desc
+  id: ClothingUniformJumpsuitMercBlackElite
+  name: elite mercenary uniform
+  description: A perfect addition to the mercenary look. Created by Blu_FI to ensure you look "sharp as a tack!"
   components:
   - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/elite_naim_black.rsi
   - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpsuits/viper_group_tanktop.rsi
-  - type: StaticPrice
-    price: 0
-    vendPrice: 1150
-
-# USSP(k) company
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitVdvtyelnyazhka
-  name: VDV tyelnyazhka
-  description: An old piece of the uniform of the Airborne Troops of the USSP. Unfortunately, in space there is no sky and no air.
-  components:
-  - type: Sprite
-    sprite: _Forge/Clothing/Uniforms/Jumpsuits/vdv_tyelnyazhka.rsi
-  - type: Clothing
-    sprite: _Forge/Clothing/Uniforms/Jumpsuits/vdv_tyelnyazhka.rsi
-  - type: StaticPrice
-    price: 10
-    vendPrice: 250
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/elite_naim_black.rsi

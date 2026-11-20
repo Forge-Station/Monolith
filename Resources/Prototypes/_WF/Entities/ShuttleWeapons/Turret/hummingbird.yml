@@ -1,0 +1,18 @@
+# Hummingbird: a slow beam that cuts through up to three objects in a line (maxPierce counts hits after the first).
+
+- type: entity
+  id: WFAsfTurretHummingbird
+  parent: WeaponLaserTurretPrometheus
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Objects/ShuttleWeapons/hummingbird.rsi
+    layers:
+    - state: space_artillery
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 4000
+  - type: Gun
+    fireRate: 0.4
+  - type: HitscanBatteryAmmoProvider
+    proto: WFAsfHummingbirdBeam
+    fireCost: 10000

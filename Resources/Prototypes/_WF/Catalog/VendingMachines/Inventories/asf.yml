@@ -1,28 +1,3 @@
-- type: entity
-  parent: VendingMachineCredit
-  id: WFAsfDrobe
-  components:
-  - type: VendingMachine
-    pack: WFAsfDrobeInventory
-    offState: off
-    brokenState: broken
-    normalState: normal-unshaded
-    requiresCash: true
-  - type: Advertise
-    pack: WFAsfDrobeAds
-  - type: Sprite
-    sprite: _WF/Asf/Structures/drobe.rsi
-    layers:
-    - state: "off"
-      map: ["enum.VendingMachineVisualLayers.Base"]
-    - state: "off"
-      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
-      shader: unshaded
-    - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  - type: AccessReader
-    access: [["WFAsf"]]
-
 - type: vendingMachineInventory
   id: WFAsfDrobeInventory
   startingInventory:
@@ -49,9 +24,3 @@
     WFAsfClothingShoesBoots: 20
     WFAsfClothingHandsGloves: 20
     WFAsfClothingHeadset: 20
-
-- type: localizedDataset
-  id: WFAsfDrobeAds
-  values:
-    prefix: wf-asf-drobe-ad-
-    count: 4

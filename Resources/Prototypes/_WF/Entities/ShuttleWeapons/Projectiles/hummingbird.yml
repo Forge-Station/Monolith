@@ -1,0 +1,30 @@
+- type: entity
+  id: WFAsfHummingbirdBeam
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanAmmo
+  - type: HitscanMultiRaycast
+    maxDistance: 1000
+    maxPierce: 2
+    pierceCollisionMask:
+    - None
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: muzzle_cut
+    travelFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: beam_cut
+    impactFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: impact_cut
+  - type: HitscanRadarSignature
+    radarColor: "#c99cf5"
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 120
+        Structural: 450
+  - type: HitscanReflect
+    reflectiveType: None
+  - type: HitscanBasicEffects

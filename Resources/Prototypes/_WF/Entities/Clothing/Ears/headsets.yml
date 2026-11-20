@@ -57,3 +57,17 @@
       - EncryptionKeyTraffic
       - EncryptionKeyUssp
       - WFEncryptionKeyCrewIntercom
+
+- type: entity
+  parent: 
+  id: WFAsfClothingHeadset
+  components:
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/science.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/science.rsi
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyCommon
+      - WFAsfEncryptionKey

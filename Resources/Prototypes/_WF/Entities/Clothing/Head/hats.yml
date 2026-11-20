@@ -1,0 +1,42 @@
+#region Asf
+- type: entity
+  parent: ClothingHeadBase
+  id: WFAsfClothingHeadBeret
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/beret.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Head/beret.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+    - PetWearable
+
+- type: entity
+  parent: ClothingHeadBase
+  id: WFAsfClothingHeadBeretPlumed
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/beret_plumed.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Head/beret_plumed.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: WFAsfClothingHeadCap
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/cap.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Head/cap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: WFAsfClothingHeadHat
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Head/hat.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Head/hat.rsi

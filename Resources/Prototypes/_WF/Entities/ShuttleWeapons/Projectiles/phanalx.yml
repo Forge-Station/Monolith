@@ -1,0 +1,22 @@
+- type: entity
+  parent: PhalanxLaser
+  id: WFAsfFlutterPulse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicVisuals
+    muzzleFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: muzzle_pulse
+    travelFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: beam_pulse
+    impactFlash:
+      sprite: _WF/Asf/Effects/ship_beams.rsi
+      state: impact_pulse
+  - type: HitscanRadarSignature
+    radarColor: "#a66be0"
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 70
+        Structural: 180

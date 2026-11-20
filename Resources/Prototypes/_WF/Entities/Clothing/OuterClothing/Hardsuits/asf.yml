@@ -39,3 +39,12 @@
       helmetattachment: ClothingHeadHelmetAttachmentBlock
   - type: StaticPrice
     price: 0
+
+- type: entity
+  parent: ClothingOuterEVASuitBase
+  id: WFAsfClothingOuterEVA
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/eva.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/eva.rsi

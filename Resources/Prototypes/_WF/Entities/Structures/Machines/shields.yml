@@ -41,3 +41,24 @@
     node: shield
     deconstructionTarget: null
   - type: WFLatticeAnchorShield
+
+#region Asf
+- type: entity
+  parent: ShieldGeneratorPOI
+  id: WFAsfShieldGenerator
+  suffix: POI ONLY
+  components:
+  - type: ShipShieldEmitter
+    shieldColor: "#A66BE0"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/fobshield.rsi
+    snapCardinals: true
+    layers:
+    - state: fobshield
+    - state: fobshield_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#A66BE0"
+  - type: PointLight
+    color: "#A66BE0"

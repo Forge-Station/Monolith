@@ -1,0 +1,15 @@
+- type: entity
+  parent: Thruster
+  id: WFAsfThruster
+  suffix: ASF
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Structures/thruster.rsi
+
+- type: entity
+  parent: ThrusterLarge
+  id: WFAsfThrusterLarge
+  suffix: ASF
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Structures/thruster_large.rsi

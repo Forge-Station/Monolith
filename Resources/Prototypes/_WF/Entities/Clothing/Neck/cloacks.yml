@@ -1,0 +1,18 @@
+#region Asf
+- type: entity
+  parent: ClothingNeckBase
+  id: WFAsfClothingNeckCapelet
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Neck/capelet.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Neck/capelet.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: WFAsfClothingNeckCape
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Neck/cape.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Neck/cape.rsi

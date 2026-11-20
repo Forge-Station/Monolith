@@ -1,0 +1,9 @@
+#region Asf
+- type: entity
+  parent: NFClothingDuffel
+  id: WFAsfClothingBackpackDuffel
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/Back/duffel.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/Back/duffel.rsi

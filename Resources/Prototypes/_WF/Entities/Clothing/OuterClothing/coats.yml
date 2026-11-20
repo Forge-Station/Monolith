@@ -1,27 +1,4 @@
-- type: entity
-  parent: ClothingUniformBase
-  id: WFAsfClothingUniformService
-  components:
-  - type: Sprite
-    sprite: _WF/Asf/Clothing/Uniforms/service.rsi
-  - type: Clothing
-    sprite: _WF/Asf/Clothing/Uniforms/service.rsi
-
-- type: entity
-  parent: ClothingHeadBase
-  id: WFAsfClothingHeadBeret
-  components:
-  - type: Sprite
-    sprite: _WF/Asf/Clothing/Head/beret.rsi
-  - type: Clothing
-    sprite: _WF/Asf/Clothing/Head/beret.rsi
-  - type: Tag
-    tags:
-    - ClothMade
-    - HamsterWearable
-    - WhitelistChameleon
-    - PetWearable
-
+#region Asf
 - type: entity
   parent: ClothingOuterStorageBase
   id: WFAsfClothingOuterGreatcoat
@@ -46,3 +23,21 @@
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, WFAsfClothingOuterCoatLab]
   id: WFAsfClothingOuterCoatLabOpened
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFAsfClothingOuterParade
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/parade.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/parade.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: WFAsfClothingOuterRobe
+  components:
+  - type: Sprite
+    sprite: _WF/Asf/Clothing/OuterClothing/robe.rsi
+  - type: Clothing
+    sprite: _WF/Asf/Clothing/OuterClothing/robe.rsi

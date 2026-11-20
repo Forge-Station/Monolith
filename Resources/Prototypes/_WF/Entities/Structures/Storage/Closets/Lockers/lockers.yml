@@ -1,0 +1,7 @@
+#region Asf
+- type: entity
+  parent: LockerSecurity
+  id: WFAsfLockerSecurity
+  components:
+  - type: AccessReader
+    access: [["WFAsfSecurity"]]

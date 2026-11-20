@@ -1,0 +1,10 @@
+- type: entity
+  parent: EncryptionKeyTraffic
+  id: WFEncryptionKeyCrewIntercom
+  name: crew intercom encryption key
+  description: An encryption key for a ship's crew intercom. Good for a few hundred metres.
+  components:
+  - type: EncryptionKey
+    channels:
+    - WFCrewIntercom
+    defaultChannel: WFCrewIntercom

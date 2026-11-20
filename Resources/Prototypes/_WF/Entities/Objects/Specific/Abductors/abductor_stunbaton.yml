@@ -1,14 +1,3 @@
-# The chair a prisoner is strapped to. Bolted down, so nobody carries off the cell.
-- type: entity
-  parent: Chair
-  id: WFAbductCellChair
-  name: prisoner chair
-  description: A steel chair bolted to the deck, with worn straps. Someone has been kept here.
-  components:
-  - type: Transform
-    anchored: true
-  - type: WFAbductCell
-
 # Their batons come out switched on, an NPC doesn't stop to thumb the switch, and do no harm. WFCrewGrabberSystem keeps them charged in crew hands.
 - type: entity
   parent: Stunbaton

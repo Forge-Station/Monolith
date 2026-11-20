@@ -1,5 +1,12 @@
 # Crew loadouts. Weapons and ammunition sit in equipment slots and pockets, never in a bag: the crew draws from
 # slots. What a crewman carries is what a boarder loots.
+- type: startingGear
+  id: WFCrewVoidKitGear
+  equipment:
+    outerClothing: ClothingOuterHardsuitSpatio
+    head: ClothingHeadHelmetHardsuitSpatio
+    mask: ClothingMaskBreath
+    suitstorage: OxygenTankFilled
 
 - type: startingGear
   id: WFCrewDeckhandGear

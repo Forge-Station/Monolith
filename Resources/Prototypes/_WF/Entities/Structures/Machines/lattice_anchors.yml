@@ -128,57 +128,8 @@
     - state: curiosity-emissive
       shader: unshaded
 
-# The fortress shield round an anchor station; it runs on the anchor, not on power, and its field is drawn as a purple
-# rooted Ward.
-- type: entity
-  parent: ShieldGeneratorPOI
-  id: WFLatticeAnchorShield
-  suffix: Lattice
-  components:
-  - type: ShipShieldEmitter
-    damageLimit: 500000
-    healPerSecond: 2000
-    damageExp: 1
-    baseDraw: 80000
-    maxDraw: 150000
-    unpoweredBonus: 7
-    powerModifier: 0.1
-    damageOverloadTimePunishment: 30
-    shieldColor: "#B040E0"
-    collisionResistanceMultiplier: 0.0
-  - type: Sprite
-    sprite: _Mono/Structures/ShuttleComponents/fobshield.rsi
-    snapCardinals: true
-    layers:
-    - state: fobshield
-    - state: fobshield_on
-      shader: unshaded
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
-      visible: false
-      color: "#B040E0"
-  - type: ApcPowerReceiver
-    needsPower: false
-    powerLoad: 80000
-  - type: PointLight
-    enabled: false
-    castShadows: true
-    radius: 2
-    energy: 1.5
-    color: "#B040E0"
-  # A one-node graph in place of the machine's: nothing takes it apart, and the component stays for the tests.
-  - type: Construction
-    graph: WFLatticeAnchorShield
-    node: shield
-    deconstructionTarget: null
-  - type: WFLatticeAnchorShield
-
-- type: constructionGraph
-  id: WFLatticeAnchorShield
-  start: shield
-  graph:
-  - node: shield
-
 # A relay anchor players build. Powered, anchored and parked for a minute, it holds a little of the field.
+#region Relay
 - type: entity
   parent: [ BaseStructure, BaseMachinePowered ]
   id: WFLatticeRelayAnchor
@@ -261,24 +212,3 @@
     strength: 0.3
     settleSeconds: 5
     needsFuel: false
-
-- type: entity
-  parent: BaseFlatpack
-  id: WFFlatpackLatticeRelay
-  components:
-  - type: Flatpack
-    entity: WFLatticeRelayAnchor
-  - type: StaticPrice
-    price: 25000
-
-- type: latheRecipe
-  id: WFFlatpackLatticeRelay
-  result: WFFlatpackLatticeRelay
-  categories:
-  - Tools
-  completetime: 30
-  materials:
-    Steel: 5000
-    Plasteel: 2000
-    Gold: 1000
-    WFExoticMatter: 2000

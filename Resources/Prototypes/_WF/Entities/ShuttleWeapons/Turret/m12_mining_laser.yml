@@ -1,0 +1,95 @@
+# Can't overcharge a rock alone; metallic rock needs a pair, which works at half an M40's pace.
+- type: entity
+  id: WFWeaponTurretMiningLaserSmall
+  name: M12 Prospector mining laser
+  parent:
+  - BallisticArtillery
+  - BallisticArtilleryTier1HP
+  - ConstructibleMachine
+  description: A compact mining laser for smaller ships. It slowly heats an asteroid until the gases trapped inside expand and crack the rock open.
+  components:
+  - type: StaticPrice
+    price: 2000
+  - type: Sprite
+    sprite: _WF/AsteroidMining/Structures/mining_laser_small.rsi
+    layers:
+    - state: space_artillery
+      map: [ "enum.WFMiningBeamVisualLayers.Base" ]
+  - type: Appearance
+  - type: AmmoCounter
+  # Draws 1.9 kW from the grid while firing and 0.4 kW idle; a full battery covers a minute of fire.
+  - type: Battery
+    maxCharge: 6000
+    startingCharge: 6000
+  - type: ExaminableBattery
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 1500
+  - type: WirelessNetwork
+    range: 500
+  - type: FireControlRotate
+  - type: Gun
+    fireRate: 10
+    recoil: 0
+    minAngle: 0
+    maxAngle: 0
+    shootThermalSignature: 8000
+    soundGunshot: null
+    soundEmpty:
+      path: /Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg
+  - type: SpaceArtillery
+    powerChargeRate: 1500
+    powerUsePassive: 400
+    powerUseActive: 0
+  - type: Actions
+  - type: HitscanBatteryAmmoProvider
+    proto: WFMiningBeamPulseSmall
+    fireCost: 160
+  - type: Machine
+    board: WFWeaponTurretMiningLaserSmallCircuitboard
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 800
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: RadarBlip
+    radarColor: "#ffb347"
+    scale: 1
+    visibleFromOtherGrids: true
+    gridConfig:
+      color: "#ffb347"
+      shape: Square
+      respectZoom: true
+      rotate: true
+      bounds: "-0.6,-0.6,0.6,0.6"
+  - type: ShipGunType
+    shipType: Energy
+  - type: ShipGunClass
+    shipClass: Superlight
+  - type: ShipRepairable
+    repairTime: 10
+    repairCost: 20
+  - type: HardpointAnchorableOnly
+    class: Energy
+    size: Light
+  - type: WFMiningBeamEmitter
+    strength: 0.7
+    crackRate: 0.5
+    loopSound:
+      path: /Audio/_WF/AsteroidMining/mining_laser_light.ogg
+      params:
+        volume: -7
+        loop: true
+        maxDistance: 18
+    beamWidth: 0.55
+    muzzleOffset: 0, -0.34

@@ -1,0 +1,11 @@
+# The manifest crate for supply and mining contracts.
+- type: entity
+  parent: CrateGenericSteel
+  id: WFContractCrate
+  name: contract manifest crate
+  description: An empty crate tagged with a supply manifest. Pack what the manifest asks for, close it on the contractor's station, and it is collected.
+  components:
+  - type: Sprite
+    color: "#bfe6f0"
+  - type: StaticPrice
+    price: 0

@@ -1,0 +1,107 @@
+# Hauling crates: weigh like trade cargo, but no chute buys them.
+- type: entity
+  parent: BaseTradeItem
+  id: WFContractFreight
+  name: contract freight crate
+  description: A sealed freight crate with a contract manifest. Delivered, not sold.
+  components:
+  - type: Sprite
+    layers:
+    - state: metal
+      color: "#9fd3e0"
+  - type: StaticPrice
+    price: 0
+  - type: WFCargoMass
+    class: Standard
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightMedical
+  name: contract medical crate
+  description: Sealed medical stock under a contract manifest. Keep it upright.
+  components:
+  - type: Sprite
+    layers:
+    - state: supplies-med
+  - type: WFCargoMass
+    class: Light
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightComponents
+  name: contract components crate
+  description: Boxed machine parts under a contract manifest.
+  components:
+  - type: Sprite
+    layers:
+    - state: components
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightEquipment
+  name: contract equipment crate
+  description: Crated equipment under a contract manifest.
+  components:
+  - type: Sprite
+    layers:
+    - state: equipment
+  - type: WFCargoMass
+    class: Heavy
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightMunitions
+  name: contract munitions crate
+  description: Military munitions under a sealed contract manifest. Do not drop.
+  components:
+  - type: Sprite
+    layers:
+    - state: ammo
+  - type: WFCargoMass
+    class: Heavy
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightSupplies
+  name: contract supply crate
+  description: "General stores under a contract manifest: rations, filters, spares."
+  components:
+  - type: Sprite
+    layers:
+    - state: supplies
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightReactor
+  name: contract reactor parts crate
+  description: Shielded reactor components under a contract manifest. Heavy.
+  components:
+  - type: Sprite
+    layers:
+    - state: fusion
+  - type: WFCargoMass
+    class: Bulk
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightLuxury
+  name: contract luxury crate
+  description: Fine goods under a contract manifest, insured for more than your ship.
+  components:
+  - type: Sprite
+    layers:
+    - state: luxury
+  - type: WFCargoMass
+    class: Light
+
+- type: entity
+  parent: WFContractFreight
+  id: WFContractFreightScience
+  name: contract science crate
+  description: Instruments and reagents under a sealed contract manifest.
+  components:
+  - type: Sprite
+    layers:
+    - state: chems
+  - type: WFCargoMass
+    class: Light

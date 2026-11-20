@@ -1,0 +1,26 @@
+# One pulse of the mining laser. It draws no flash of its own; the beam overlay draws the laser.
+- type: entity
+  id: WFMiningBeamPulse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanAmmo
+  - type: HitscanBasicRaycast
+    maxDistance: 60
+  - type: HitscanRadarSignature
+    radarColor: "#ffb347"
+  # Enough to break tile rock through gathering; asteroids and boulders it heats are taken out of the hit list first.
+  - type: HitscanBasicDamage
+    damage:
+      types:
+        Heat: 1
+        Structural: 1
+  - type: HitscanGathering
+  - type: WFMiningPulse
+
+- type: entity
+  parent: WFMiningBeamPulse
+  id: WFMiningBeamPulseSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: HitscanBasicRaycast
+    maxDistance: 40

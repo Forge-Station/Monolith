@@ -22,3 +22,9 @@
 
 - type: Tag
   id: WFMonolithicCrystalLarge
+
+- type: Tag
+  id: WFRemade
+
+- type: Tag
+  id: WFSalvagedHardware

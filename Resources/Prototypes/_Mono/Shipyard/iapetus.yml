@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: starch70
 # Discord: _starch_
-
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A basic artifact research ship, with minimal armament.
   price: 62548
   category: Small
-  group: Shipyard
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/iapetus.yml
   guidebookPage: null
   class:

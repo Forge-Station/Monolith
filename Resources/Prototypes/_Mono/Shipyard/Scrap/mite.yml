@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: Ilya246
 # Discord: Ilya246
-
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A heap of scrap of unknown origin, seemingly retrofitted by salvagers into a military ship using salvage weaponry. Was found as a derelict in space and now is being resold without even as much as a cleanup.
   price: 69166 # it's a heap of scrap
   category: Small
-  group: Scrap
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/Scrap/mite.yml
   guidebookPage: Null
   class:

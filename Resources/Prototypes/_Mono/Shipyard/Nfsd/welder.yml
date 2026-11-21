@@ -7,7 +7,7 @@
   description: Многоцелевое утилитарное, но тесное судно, задуманное как универсальный инструмент для ремонта кораблей и добычи ресурсов. Способно обнаруживать замаскированные корабли. # Forge-Change
   price: 101725
   category: Small
-  group: Security
+  group: custom #Forge-Change-Del
   access: Security
   shuttlePath: /SharedMaps/_Mono/Shuttles/Nfsd/welder.yml
   guidebookPage: Null

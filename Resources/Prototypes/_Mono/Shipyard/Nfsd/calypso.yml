@@ -7,7 +7,7 @@
   price: 168619
   purchasable: false # voucher only
   category: Medium
-  group: Security
+  group: custom #Forge-Chenge-Del
   access: Security
   shuttlePath: /SharedMaps/_Mono/Shuttles/Nfsd/calypso.yml
   guidebookPage: Null

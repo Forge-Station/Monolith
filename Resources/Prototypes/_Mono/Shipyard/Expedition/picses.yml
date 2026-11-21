@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: starch70
 # Discord: _starch_
-
+ #Forge-Change-Del
 # Shuttle Notes: its the goob nukeops shuttle exterior (docking ports are a bit different)
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A compact but capable expedition ship, with durable hull plating too. This ship has a military IFF designation.
   price: 82520
   category: Medium
-  group: Expedition
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/Expedition/picses.yml
   guidebookPage: null
   class:

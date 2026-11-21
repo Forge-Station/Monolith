@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2025 DuneTemplar
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
-
+ #Forge-Shenge-Del
 # Author Info
 # GitHub: DuneTemplar
 # Discord: dunetemplar
@@ -13,7 +13,7 @@
   description: Equipped with a full chemistry lab and cryogenics, this ship is Dornan-Weryl Industrial's solution to most medical care.
   price: 108373 # A bit higher than the grid appraisal +vendors
   category: Medium
-  group: Medical
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/kuldi.yml
   guidebookPage: null
   class:

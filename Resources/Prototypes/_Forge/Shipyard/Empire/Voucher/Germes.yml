@@ -9,7 +9,7 @@
   limit: 6
   price: 82000
   category: Large
-  group: Empire
+  group: custom #Forge-Chenge-Del
   access: Empire
   shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Voucher/Germes.yml
   guidebookPage: Null

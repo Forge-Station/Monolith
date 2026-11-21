@@ -5,7 +5,7 @@
   description: Малый истребитель Империи,вооружен двумя пушкам "Лонгбоу" и двумя пулеметами 57мм
   price: 63700
   category: Small
-  group: Empire
+  group: custom #Forge-Change-Del
   access: Empire
   shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Karatel.yml
   guidebookPage: Null

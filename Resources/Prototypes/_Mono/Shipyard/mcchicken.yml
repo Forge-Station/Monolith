@@ -1,7 +1,7 @@
 # Author Info  
 # GitHub: bluebrouny  
 # Discord: half_spinning_monkey  
-  
+  #Forge-Change-Del
 # Shuttle Notes:  # Forge-Change-Del
 #- type: vessel  
 #  id: McChicken  
@@ -10,7 +10,7 @@
 #  description: A cheap, fried food ship. For those who enjoy ungodly ammounts of calories, now made on the go!.  
 #  price: 38485  
 #  category: Medium  
-#  group: Shipyard  
+#  group: custom  
 #  shuttlePath: /SharedMaps/_Mono/Shuttles/mcchicken.yml  
 #  guidebookPage: Null  
 #  class:  

@@ -5,7 +5,7 @@
   description: Ракетный фрегат Империи.
   price: 155400 #PR:238 price UP
   category: Medium
-  group: Empire
+  group: custom #Forge-Chenge-Del
   access: Empire
   shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/menok.yml
   guidebookPage: Null

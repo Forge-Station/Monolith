@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: starch70
 # Discord: _starch_
-
+ #Forge-Change-Del
 # Shuttle Notes:
 - type: vessel
   id: Peregrine
@@ -10,7 +10,7 @@
   description: A dedicated salvage vessel w/ 6 mining autopulsers. No defensive armaments outside of that. Comes with an FTL drive.
   price: 128434
   category: Medium
-  group: Shipyard
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/peregrine.yml
   guidebookPage: Null
   class:

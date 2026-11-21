@@ -7,7 +7,7 @@
   description: A USSP long range harasser, meant for hit and runs. Comes with two dravons and CTLA-25.
   price: 70321
   category: Small
-  group: Shipyard # Forge-change: Ussp to Shipyard
+  group: custom # Forge-change: Del
   access: Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/USSP/akula.yml
   guidebookPage: Null

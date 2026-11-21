@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: OneZerooo0
 # Discord: onezero00
-
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A refitted research vessel armed with expedition-rated combat equipment.
   price: 88594
   category: Medium
-  group: Expedition
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/Expedition/judiciary.yml
   guidebookPage: ShipyardJudiciary
   class:

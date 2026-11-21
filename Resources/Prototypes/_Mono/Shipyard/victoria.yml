@@ -4,7 +4,7 @@
 # Author Info (NOV Victoria)
 # Github: The-Aisen
 # Discord: ich_bin_aisenberg
-#
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -14,7 +14,7 @@
   description: A reworked hull from an unknown salvage ship, thought by a machine intelligence for the scientist that needs all of the manufactoring capabilities imaginable.
   price: 87679
   category: Medium
-  group: Shipyard
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/victoria.yml
   guidebookPage: null
   class:

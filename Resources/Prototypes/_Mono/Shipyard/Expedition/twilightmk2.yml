@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: Rubeebeebee
 # Discord: Rubeebee
-
+ #Forge-Change-Del
 # Shuttle Notes: I LOVE MY SHITTY TECHNICALS
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A CIV-Twilight hull modified with ill-advised retrofits to be a combat capable ship. Mostly used by the desperate and the cheap. EVA protection is required.
   price: 98942 # its not more expensive because 2/3s of the ship is actively spaced.
   category: Medium
-  group: Expedition
+  group: custom
   access: Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/Expedition/twilightmk2.yml
   guidebookPage: null

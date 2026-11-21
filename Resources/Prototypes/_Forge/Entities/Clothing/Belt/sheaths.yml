@@ -90,3 +90,13 @@
     state: sheath
   - type: Clothing
     sprite: _Forge/Clothing/Belt/white_sheath.rsi
+
+- type: entity
+  id: ClothingBeltSheathWhiteFilled
+  parent: ClothingBeltSheathWhite
+  suffix: Заполненные
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - NavyOfficerSabre

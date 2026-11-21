@@ -40,6 +40,20 @@ public sealed partial class ProjectileComponent : Component
     [DataField, AutoNetworkedField]
     public bool IgnoreShooter = true;
 
+    // Forge-Change-Start
+    /// <summary>
+    /// If true, this projectile passes through characters in the same company as its shooter.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool IgnoreSameCompany = false;
+
+    [DataField, AutoNetworkedField]
+    public bool IgnoreHumanoids = false;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> IgnoreEntities = new();
+    // Forge-Change-End
+
     /// <summary>
     ///     The amount of damage the projectile will do.
     /// </summary>

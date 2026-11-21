@@ -99,14 +99,17 @@ ent-BlastDoorAdminOpen = { ent-BlastDoorAdmin }
     .desc = { ent-BlastDoorAdmin.desc }
     .suffix = Forge, Админ, Неразрушимый, Открытый
 
-ent-MobForerunnerBorg = киборг предтеч
-    .desc = Ободранный корпус предтеч на остаточных директивах. Слабее живого тендера, но череп всё ещё продавит.
-    .suffix = Forge, Предтеч, ИИ
-ent-MobForerunnerBorgEngineer = инженерный киборг предтеч
+ent-MobForerunnerEngiSiliconWeak = древний инженерный киборг предтеч
     .desc = Древний инженерный корпус. Инструменты уже грубые, но стену он всё ещё разберёт.
-    .suffix = Forge, Предтеч, ИИ, Инженер
-ent-MobForerunnerBorgAssault = штурмовой киборг предтеч
+    .suffix = Forge, Древний, ИИ, Инженер
+ent-MobForerunnerAssaultSiliconWeak = древний штурмовой киборг предтеч
     .desc = Ободранный штурмовой корпус. Пушка ещё стреляет. Едва.
+    .suffix = Forge, Древний, ИИ, Штурмовой
+ent-MobForerunnerEngiSilicon = инженерный киборг предтеч
+    .desc = Этот древний киборг был создана для вспомогательных задач, но пусть это вас не обманывает: благодаря своим реликтовым технологиям она представляет серьёзную опасность.
+    .suffix = Forge, Предтеч, ИИ, Инженер
+ent-MobForerunnerAssaultSilicon = штурмовой киборг предтеч
+    .desc = Эти боевые киборги пришли из глубокой древности; они создавались как совершенные боевые единицы. Они чрезвычайно опасны, и их следует избегать любой ценой.
     .suffix = Forge, Предтеч, ИИ, Штурмовой
 
 ent-MobXenoCMLarva = личинка ксеноморфа
@@ -161,18 +164,19 @@ ent-MobXenoCMQueen = королева ксеноморфов
     .desc = Мать улья. Крик, оглушающий всех вокруг, кислота, постройки и желание защитить свой улей. Венец эволюции.
     .suffix = Forge, CM, AI
 
-ent-SpawnMobForerunnerBorg = спавнер киборга предтеч
-    .desc = { ent-MarkerBase.desc }
-    .suffix = Forge, Маппинг, ИИ
-ent-SpawnMobForerunnerBorgEngineer = спавнер инженерного киборга предтеч
-    .desc = { ent-MarkerBase.desc }
-    .suffix = Forge, Маппинг, ИИ, Инженер
-ent-SpawnMobForerunnerBorgAssault = спавнер штурмового киборга предтеч
-    .desc = { ent-MarkerBase.desc }
-    .suffix = Forge, Маппинг, ИИ, Штурмовой
-ent-SpawnMobForerunnerBorgRandom = спавнер киборга предтеч
-    .desc = { ent-MarkerBase.desc }
-    .suffix = Forge, Маппинг, ИИ, Случайный
+ent-SpawnerMobForerunnerEngiSiliconWeak = спавнер древних инженерных киборгов
+    .desc = { "" }
+    .suffix = Forge, Мапинг, Древний, ИИ, Инженер
+ent-SpawnerMobForerunnerSiliconWeakRandom = спавнер древних киборгов
+    .desc = { "" }
+    .suffix = Forge, Мапинг, Древний, ИИ, Случайный
+ent-SpawnerMobForerunnerEngiSilicon = спавнер инженерных киборгов предтеч
+    .desc = { "" }
+    .suffix = Forge, Мапинг, Предтеч, ИИ, Инженер
+ent-SpawnerMobForerunnerSiliconRandom = спавнер киборгов предтеч
+    .desc = { "" }
+    .suffix = Forge, Мапинг, Предтеч, ИИ, Случайный
+
 
 ent-SpawnMobXenoCMLarva = спавнер личинки ксеноморфа
     .desc = { ent-MarkerBase.desc }

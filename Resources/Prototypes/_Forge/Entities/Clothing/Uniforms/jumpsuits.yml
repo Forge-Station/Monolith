@@ -699,3 +699,14 @@
     sprite: _Forge/Clothing/Uniforms/Jumpsuits/elite_naim_black.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Uniforms/Jumpsuits/elite_naim_black.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitMercBlackPremium
+  name: premium jumpsuit
+  description: A jumpsuit for true officers. Look absolutely sharp—as if you’ve just stepped out of a tailor’s shop!
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/elite_officer.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Uniforms/Jumpsuits/elite_officer.rsi

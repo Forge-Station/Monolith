@@ -34,3 +34,6 @@ ent-VendingMachineCompanyCL = вендомат Chun Logistics
 
 ent-VendingMachineMedicalTTI = ТТИ-Мед
     .desc = Медицинский вендор компании «Trauma Team I.». Снабжает проверенными медицинскими препаратами и имплантами.
+
+ent-VendingMachineMercElite = ЭлитМат
+    .desc = ЭлитныйМат является раздатчиком роскошных нарядов, чтобы каждый был одет «С иголочки!»

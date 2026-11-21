@@ -568,6 +568,7 @@
     offset: 0.0
     rarePrototypes:
     - VendingMachineArcadia
+    - VendingMachineMercElite
     #- VendingMachineSec
     #- VendingMachineSecDrobe
     - SpawnDungeonMachineFrame

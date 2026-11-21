@@ -495,6 +495,7 @@
     rarePrototypes:
     # - VendingMachineChemicalsSyndicate # A bit less Syndicate loot
     - VendingMachineArcadia
+    - VendingMachineMercElite
     # - VendingMachineSyndieDrobe # A bit less Syndicate loot
     - VendingMachineSyndieContraband
     rareChance: 0.03 # actually rare vs. entry frequencies
@@ -540,6 +541,7 @@
     rarePrototypes:
     - VendingMachineMagivend
     - VendingMachineArcadia
+    - VendingMachineMercElite
     - VendingMachineBountyVendPunk
     - VendingMachineSyndieDrobe #Mono in
     - VendingMachineSyndieContraband
@@ -577,6 +579,7 @@
     - VendingMachineSyndieContraband
     - VendingMachineSec
     - VendingMachineArcadia
+    - VendingMachineMercElite
     - SpawnDungeonMachineFrame
     rareChance: 0.03
 

@@ -42,6 +42,13 @@
     sprite: _Forge/Clothing/Mask/tsf_elited_mask.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Mask/tsf_elited_mask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
 
 # region Company
 - type: entity
@@ -204,3 +211,9 @@
     sprite: _Forge/Clothing/Mask/elite_mask.rsi
   - type: Clothing
     sprite: _Forge/Clothing/Mask/elite_mask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide

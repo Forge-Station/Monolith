@@ -4,7 +4,7 @@
   name: "ESP «Фалько»"
   description: Фалько - средний истребитель Империи, вооруженный одним орудием "Дравон", одним орудием "Tarnyx" и двумя пулеметами "Мародер"
   category: Small
-  group: Empire
+  group: custom #Forge-Chenge-Del
   access: Empire
   price: 73970
   shuttlePath: /SharedMaps/_Forge/Shuttles/Empire/Falyko.yml

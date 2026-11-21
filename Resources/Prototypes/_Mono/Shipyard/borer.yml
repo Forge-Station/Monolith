@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: Rubeebeebee
 # Discord: rubeebee
-
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: designed by SHM and produced in cooperation with DI, the borer is a cost effective ship for salvaging and derilect scrapping.
   price: 37419
   category: Small
-  group: Shipyard
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/borer.yml
   guidebookPage: Null
   class:

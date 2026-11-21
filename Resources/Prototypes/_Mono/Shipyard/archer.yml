@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: starch70
 # Discord: _starch_
-
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A combat ship outfitted with 4 plasma turrets and 6 light autocannons. This ship has a military IFF designation.
   price: 98773 # the plasma and plastitanium tax is real...
   category: Medium
-  group: Shipyard
+  group: custom
   access: Mercenary
   shuttlePath: /SharedMaps/_Mono/Shuttles/archer.yml
   guidebookPage: Null

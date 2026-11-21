@@ -5,7 +5,7 @@
   description: Истребитель VG с хорошим курсовым вооружением. Рассчитан на экипаж 1-2 человека
   price: 49900
   category: Small
-  group: Shipyard
+  group: custom #Forge-Change-Del
   access: Mercenary
   shuttlePath: /SharedMaps/_Forge/Shuttles/Mercenary/Striks.yml
   guidebookPage: Null

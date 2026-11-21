@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: starch70
 # Discord: _starch_
-
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A xenoarcheology ship with a dedicated, reinforced chamber. Contains mining equipment too.
   price: 89293
   category: Medium
-  group: Shipyard
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/sakuratsu.yml
   guidebookPage: null
   class:

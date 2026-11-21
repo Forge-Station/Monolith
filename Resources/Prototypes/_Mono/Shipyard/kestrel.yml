@@ -11,7 +11,7 @@
   description: A small jump-capable science vessel meant for long-term missions. Comes with a living suite and a decent defensive armament for its size, though it is without much maneuvering performance.
   price: 78811
   category: Small
-  group: Shipyard
+  group: custom #Forge-Chenge-Del
   shuttlePath: /SharedMaps/_Mono/Shuttles/kestrel.yml
   guidebookPage: null
   class:

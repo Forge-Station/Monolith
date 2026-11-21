@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: tonotom1
 # Discord: rws
-
+ #Forge-Change-Del
 # Shuttle Notes:
 # hi
  # Forge-Change-Del
@@ -12,7 +12,7 @@
 #  description: An aptly named medium botanical-kitchen vessel with a customer-facing gantry for ordering to-go. Also comes with dine-in.
 #  price: 80968
 #  category: Medium
-#  group: Shipyard
+#  group: custom
 #  shuttlePath: /SharedMaps/_Mono/Shuttles/takeaway.yml
 #  guidebookPage: ShipyardTakeaway
 #  class:

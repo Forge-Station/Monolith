@@ -11,7 +11,7 @@
   description: Cheap and affordable salvage vessel that comes with a comfortable lounge at the cost of leaving no budget for the rest.
   price: 33269
   category: Small
-  group: Shipyard
+  group: custom #Forge-Change-Del
   shuttlePath: /SharedMaps/_Mono/Shuttles/shareholder.yml
   guidebookPage: null
   class:

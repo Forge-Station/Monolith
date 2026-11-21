@@ -4,7 +4,7 @@
   name: TSF-RND «Атолл»
   description: Научный шаттл ТСФ
   category: Medium
-  group: Security
+  group: custom
   access: Security
   price: 77500
   shuttlePath: /SharedMaps/_Forge/Shuttles/TSF/Atoll.yml

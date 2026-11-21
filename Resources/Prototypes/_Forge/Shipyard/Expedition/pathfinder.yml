@@ -5,7 +5,7 @@
   description: Малый экспедиционный шаттл. Без вооружения
   price: 47000
   category: Small
-  group: Expedition
+  group: custom
   shuttlePath: /SharedMaps/_Forge/Shuttles/Expedition/pathfinder.yml
   guidebookPage: null
   class:

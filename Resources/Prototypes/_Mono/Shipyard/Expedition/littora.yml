@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: starch70
 # Discord: _starch_
-
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A medium-to-large sized expedition ship with salvage equipment.
   price: 120788
   category: Large
-  group: Expedition
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/Expedition/littora.yml
   guidebookPage: null
   class:

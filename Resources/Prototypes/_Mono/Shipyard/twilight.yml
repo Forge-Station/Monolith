@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: kyres1
 # Discord: kyres1
-
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A small, fast jump-capable cargo transport with light rear-facing defensive armament.
   price: 73375
   category: Small
-  group: Shipyard
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/twilight.yml
   guidebookPage: Null
   class:

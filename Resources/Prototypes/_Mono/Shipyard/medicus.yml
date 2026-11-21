@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: tonotom1
 # Discord: rws
-
+ #Forge-Change-Del
 # Shuttle Notes:
 # hi
 
@@ -12,7 +12,7 @@
   description: A trustworthy medical vessel equipped with cryogenics, botany, chemistry, and paramedic capabilities.
   price: 119000 #markup 10% from 108200
   category: Medium
-  group: Medical
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/medicus.yml
   guidebookPage: null
   class:

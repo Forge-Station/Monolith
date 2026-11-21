@@ -1,7 +1,7 @@
 # Author Info
 # GitHub: starch70
 # Discord: _starch_
-
+ #Forge-Change-Del
 # Shuttle Notes:
 #
 - type: vessel
@@ -11,7 +11,7 @@
   description: A retired frigate gutted out and refurbished for cargo transport.
   price: 97903
   category: Medium
-  group: Shipyard
+  group: custom
   shuttlePath: /SharedMaps/_Mono/Shuttles/argent.yml
   guidebookPage: ShipyardArgent
   class:

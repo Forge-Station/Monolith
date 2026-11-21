@@ -6,7 +6,7 @@
   description:  A Ullman Industries research ship. This baby is capable of Xenoarcheology and not a whole lot more.
   price: 72298
   category: Small
-  group: Shipyard
+  group: custom #Forge-Chenge-Del
   shuttlePath: /SharedMaps/_Mono/Shuttles/spyglass.yml
   guidebookPage: Null
   class:

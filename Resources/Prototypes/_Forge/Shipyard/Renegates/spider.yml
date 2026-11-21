@@ -5,7 +5,7 @@
   description:  Маскировочный шаттл для диверсий и рейдов. Рекомендованная команда 2-5 человек
   price: 83000 # PR:238 shipyard check fix, price up
   category: Medium
-  group: Renegate
+  group: custom #Forge-Chenge-Del
   access: Renegate
   shuttlePath: /SharedMaps/_Forge/Shuttles/Renegates/spider.yml
   guidebookPage: Null

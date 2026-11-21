@@ -1,11 +1,9 @@
 - type: loadout
   id: TsfmcFighterGloves
-  name: loadout-tsfmc-gloves-fighter
   equipment:
     gloves: ClothingHandsGlovesTSFMCFighter
 
 - type: loadout
   id: TsfmcSOGloves
-  name: loadout-tsfmc-gloves-so
   equipment:
     gloves: ClothingHandsGlovesTSFMCSO

@@ -1,6 +1,5 @@
 - type: loadout
   id: TsfmcGasmaskFull
-  name: loadout-tsfmc-gasmask-full
   storage:
     back:
     - ClothingMaskGasTSFMC

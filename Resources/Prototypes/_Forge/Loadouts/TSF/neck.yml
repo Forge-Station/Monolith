@@ -1,13 +1,11 @@
 
 - type: loadout
   id: TsfmcClothingNeckMantleFolded
-  name: loadout-tsfmc-mantle-folded
   equipment:
     neck: ClothingNeckMantleTSFMCFolded
 
 - type: loadout
   id: TsfmcClothingNeckMantlePouches
-  name: loadout-tsfmc-mantle-pouches
   equipment:
     neck: ClothingNeckMantleTSFMCPouches
 

@@ -47,17 +47,10 @@ public sealed partial class RequireProjectileTargetSystem : EntitySystem
         //     sameCompany = shooterCompany.CompanyName == targetCompany.CompanyName;
         // }
 
-        // Prevent hitting downed mobs ONLY if they are critical or dead
-        // unless the shot is specifically targeted at them (cursor over them when firing)
+        // Critical and dead mobs must remain hittable. In particular, homing and smart
+        // projectiles must not pass through a target only because it became incapacitated.
         if (_mobState.IsIncapacitated(target))
-        {
-            // If the shot is specifically targeted at this critical/dead mob, allow the hit
-            if (isTargeted)
-                return false;
-
-            // Otherwise, mob is critical or dead - prevent collision (shots pass through)
-            return true;
-        }
+            return false;
 
         // // If we reach here, the mob is downed but alive
         // // If shooter and target are in the same company, prevent friendly fire

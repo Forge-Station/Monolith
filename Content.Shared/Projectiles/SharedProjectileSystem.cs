@@ -13,6 +13,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs;
 using Content.Shared.Movement.Events; // Mono
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared._Mono.Company; // Forge-Change
@@ -491,16 +492,21 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     private void PreventCollision(EntityUid uid, ProjectileComponent component, ref PreventCollideEvent args)
     {
         // Forge-Change-Start
-        if (component.IgnoreEntities.Contains(args.OtherEntity) ||
-            component.IgnoreHumanoids &&
-            HasComp<MobStateComponent>(args.OtherEntity) &&
-            HasComp<HumanoidAppearanceComponent>(args.OtherEntity))
+        var isIncapacitated = TryComp<MobStateComponent>(args.OtherEntity, out var mobState) &&
+                              mobState.CurrentState is MobState.Critical or MobState.Dead;
+
+        if (!isIncapacitated &&
+            (component.IgnoreEntities.Contains(args.OtherEntity) ||
+             component.IgnoreHumanoids &&
+             HasComp<MobStateComponent>(args.OtherEntity) &&
+             HasComp<HumanoidAppearanceComponent>(args.OtherEntity)))
         {
             args.Cancelled = true;
         }
         // Forge-Change-End
 
-        if (component.IgnoreSameCompany &&
+        if (!isIncapacitated &&
+            component.IgnoreSameCompany &&
             component.Shooter is { } shooter &&
             HasComp<MobStateComponent>(args.OtherEntity) &&
             TryComp<CompanyComponent>(shooter, out var shooterCompany) &&

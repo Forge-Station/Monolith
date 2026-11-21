@@ -6,6 +6,7 @@ using Content.Shared.Humanoid; // Forge-Change
 using Content.Shared.Interaction; // Forge-Change
 using Content.Shared._Mono.Company; // Forge-Change
 using Content.Shared.Mobs.Components; // Forge-Change
+using Content.Shared.Mobs; // Forge-Change
 using Content.Shared.Popups; // Forge-Change
 using Content.Shared.Projectiles; // Forge-Change
 using Content.Shared.Verbs; // Forge-Change
@@ -192,6 +193,10 @@ public sealed class SmartGunSystem : EntitySystem
 
     private bool ShouldPassThroughTarget(SmartGunComponent smartGun, EntityUid shooter, EntityUid target)
     {
+        if (TryComp<MobStateComponent>(target, out var mobState) &&
+            mobState.CurrentState is MobState.Critical or MobState.Dead)
+            return false;
+
         return smartGun.Mode switch
         {
             SmartGunMode.Company =>

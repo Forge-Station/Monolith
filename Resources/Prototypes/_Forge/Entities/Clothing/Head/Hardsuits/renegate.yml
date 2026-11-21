@@ -144,7 +144,7 @@
 # SYS-549 "Cloak"
 - type: entity
   parent: [ClothingHeadHardsuitBaseMilitary, BaseToggleClothing, PowerCellSlotSmallItem, ClothingNightVision4Renegade, ShowMedicalIcons, BaseClothingHelmetMassScanner]
-  id: ClothingHeadHelmetHardsuitRenegateStealth 
+  id: ClothingHeadHelmetHardsuitRenegateStealth
   name: hardsuit SYS-549 "Cloak"
   description: The interchangeable helmet system for the majority of SYS-549 hardsuits. Has a stealth generator.
   categories: [ HideSpawnMenu ]
@@ -153,7 +153,7 @@
     sprite: _Mono/Clothing/Head/Hardsuits/syndicate.rsi
   - type: Clothing
     sprite: _Mono/Clothing/Head/Hardsuits/syndicate.rsi
-    equippedState: off-equipped-HELMET
+    equippedState: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -215,7 +215,7 @@
     sprite: _Mono/Clothing/Head/Hardsuits/syndieelite.rsi
   - type: Clothing
     sprite: _Mono/Clothing/Head/Hardsuits/syndieelite.rsi
-    equippedState: off-equipped-HELMET
+    equippedState: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -245,7 +245,7 @@
     sprite: _Mono/Clothing/Head/Hardsuits/pdv_medic.rsi
   - type: Clothing
     sprite: _Mono/Clothing/Head/Hardsuits/pdv_medic.rsi
-    equippedState: off-equipped-HELMET
+    equippedState: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
@@ -281,7 +281,7 @@
     sprite: _Mono/Clothing/Head/Hardsuits/pdv_vizier.rsi
   - type: Clothing
     sprite: _Mono/Clothing/Head/Hardsuits/pdv_vizier.rsi
-    equippedState: off-equipped-HELMET
+    equippedState: equipped-HELMET
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000

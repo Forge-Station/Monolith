@@ -10,3 +10,5 @@ ent-ClothingBeltTraumaFilled = { ent-ClothingBeltTrauma }
     .suffix = Заполненый, TTI
 ent-ADTClothingBeltPrazatSheathInq = гидравлические ножны «Серратор»
     .desc = Усиленные гидравлические ножны, предназначенные для фиксации и быстрого извлечения пиломеча «Серратор» Mk. 01M.
+ent-ClothingBeltSheathWhite = белые ножны
+    .desc = Ножны для офицерского клинка.

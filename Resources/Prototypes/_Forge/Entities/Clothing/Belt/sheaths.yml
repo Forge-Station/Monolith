@@ -1,4 +1,5 @@
-﻿- type: entity
+﻿# region Other
+- type: entity
   parent: [ClothingBeltBase, ClothingSlotBase]
   id: OdatiSheath
   name: Ножы одати
@@ -77,3 +78,25 @@
     containers:
       item:
       - Odati
+
+- type: entity
+  parent: ClothingBeltSheath
+  id: ClothingBeltSheathWhite
+  name: white sheath
+  description: An ornate sheath designed to hold an officer's blade.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Belt/white_sheath.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _Forge/Clothing/Belt/white_sheath.rsi
+
+- type: entity
+  id: ClothingBeltSheathWhiteFilled
+  parent: ClothingBeltSheathWhite
+  suffix: Заполненные
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - NavyOfficerSabre

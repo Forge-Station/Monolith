@@ -34,7 +34,7 @@
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
-  - TsfmcOuterClothing
+  - TsfmcOuterClothingSoldiers
   - TsfmcShoes
   - TsfmcFace
   - TsfmcBalaclava
@@ -60,9 +60,9 @@
   - TsfmcHead
   - TsfmcNeckCaptainOfficer
   - TsfmcJumpsuit
-  - TsfmcGloves
+  - TsfmcGlovesSO
   - TsfmcBackpack
-  - TsfmcOuterClothing
+  - TsfmcOuterClothingSoldiers
   - TsfmcShoes
   - TsfmcFace
   - TsfmcBalaclava
@@ -90,7 +90,7 @@
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
-  - TsfmcOuterClothing
+  - TsfmcOuterClothingSoldiers
   - TsfmcShoes
   - TsfmcFace
   - TsfmcBalaclava
@@ -118,7 +118,7 @@
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
-  - TsfmcOuterClothing
+  - TsfmcOuterClothingSoldiers
   - TsfmcShoes
   - TsfmcFace
   - TsfmcBalaclava
@@ -146,7 +146,7 @@
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
-  - TsfmcOuterClothing
+  - TsfmcOuterClothingSoldiers
   - TsfmcShoes
   - TsfmcFace
   - TsfmcBalaclava
@@ -174,7 +174,7 @@
   - TsfmcJumpsuit
   - TsfmcGloves
   - TsfmcBackpack
-  - TsfmcOuterClothing
+  - TsfmcOuterClothingSoldiers
   - TsfmcShoes
   - TsfmcFace
   - TsfmcBalaclava

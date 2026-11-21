@@ -1,0 +1,9 @@
+- type: loadout
+  id: TsfmcFighterGloves
+  equipment:
+    gloves: ClothingHandsGlovesTSFMCFighter
+
+- type: loadout
+  id: TsfmcSOGloves
+  equipment:
+    gloves: ClothingHandsGlovesTSFMCSO

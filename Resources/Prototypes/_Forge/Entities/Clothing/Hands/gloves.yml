@@ -1,3 +1,38 @@
+# region TSF
+- type: entity
+  parent: [ ClothingHandsButcherable, BaseFactionGearTSFT0 ]
+  id: ClothingHandsGlovesTSFMCFighter
+  name: federation-issued reinforced gloves
+  description: Gloves suitable both for combat and for filling out various documents.
+  suffix: TSF
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Hands/Gloves/tsf_fighter.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Hands/Gloves/tsf_fighter.rsi
+  - type: Insulated
+  - type: Fiber
+    fiberMaterial: fibers-durathread
+    fiberColor: fibers-blue
+  - type: FingerprintMask
+
+- type: entity
+  parent: [ ClothingHandsButcherable, BaseFactionGearTSFT0 ]
+  id: ClothingHandsGlovesTSFMCSO
+  name: senior officer’s reinforced gloves
+  description: Custom-made gloves for a senior officer’s personal sidearm.
+  suffix: TSF
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Hands/Gloves/tsf_so.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Hands/Gloves/tsf_so.rsi
+  - type: Insulated
+  - type: Fiber
+    fiberMaterial: fibers-durathread
+    fiberColor: fibers-regal-blue
+  - type: FingerprintMask
+
 # region Company
 - type: entity
   parent: ClothingHandsGlovesCaptain
@@ -115,3 +150,28 @@
   - type: ClothingGrantComponent
     component:
     - type: SurgeryIgnoreClothing
+
+- type: entity
+  parent: ClothingHandsButcherable
+  id: ClothingHandsGlovesMercWhite
+  name: white reinforced gloves
+  description: Gloves created by the Blu.FI company. They protect your hands from everything—from paper cuts to various deep-space critters. The perfect finishing touch to ensure you look "sharp as a tack!"
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Hands/Gloves/elite_white.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Hands/Gloves/elite_white.rsi
+  - type: Insulated
+  - type: Fiber
+    fiberMaterial: fibers-durathread
+    fiberColor: fibers-white
+  - type: FingerprintMask
+  - type: MeleeWeapon
+    attackRate: 1.5
+    damage:
+      types:
+        Blunt: 8
+    soundHit:
+      collection: Punch
+    animation: WeaponArcFist
+    mustBeEquippedToUse: true

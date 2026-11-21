@@ -251,6 +251,7 @@
     - VendingMachineSyndieContraband
     - VendingMachineSyndieDrobe
     - VendingMachineArcadia
+    - VendingMachineMercElite
     rareChance: 0.01
 
 # Other

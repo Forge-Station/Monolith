@@ -1,0 +1,13 @@
+- type: vendingMachineInventory
+  id: MercEliteVendInventory
+  startingInventory:
+    ClothingUniformJumpsuitMercBlack: 10
+    ClothingUniformJumpsuitMercBlackElite: 5
+    ClothingUniformJumpsuitMercBlackOfficer: 3
+    ClothingNeckMantleMercBlack: 10
+    ClothingOuterCoatMercBlack: 5
+    ClothingNeckMantleMercWhite: 10
+    ClothingOuterCoatMercWhite: 5
+    ClothingHeadHatBeretMercWhite: 15
+    ClothingHandsGlovesMercWhite: 10
+    ClothingBeltSheathWhiteFilled: 2

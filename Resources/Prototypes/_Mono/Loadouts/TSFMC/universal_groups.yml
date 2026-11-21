@@ -1,3 +1,4 @@
+# region Backpack
 - type: loadoutGroup
   id: TsfmcBackpack
   name: loadout-group-contractor-backpack
@@ -22,6 +23,7 @@
   fallbacks:
   - TsfmcEngiClothingModsuit
 
+# region Jumpsuit
 - type: loadoutGroup
   id: TsfmcJumpsuit
   name: loadout-group-contractor-jumpsuit
@@ -30,6 +32,7 @@
   - TsfmcClothingJumpsuit
   - TsfmcClothingJumpsuitType47D
   - TsfmcClothingDressUniform
+  - TsfmcClothingJumpsuitElite # Forge-Change
   fallbacks:
   - TsfmcClothingJumpsuit
 
@@ -45,6 +48,7 @@
   fallbacks:
   - TsfmcEngineeringClothingJumpsuit
 
+# region Shoes
 - type: loadoutGroup
   id: TsfmcShoes
   name: loadout-group-contractor-shoes
@@ -56,13 +60,14 @@
   fallbacks:
   - TsfmcCombatBoots
 
+# region Gloves
 - type: loadoutGroup
   id: TsfmcGloves
   name: loadout-group-contractor-gloves
-  hidden: true # No point in showing this, it gets auto-selected.
   minLimit: 1
   loadouts:
   - TsfmcCombatGloves
+  - TsfmcFighterGloves # Forge-Change
   fallbacks:
   - TsfmcCombatGloves
 
@@ -77,7 +82,7 @@
   - TsfmcLatexGloves
   fallbacks:
   - TsfmcNitrileGloves
-
+# region Belt
 - type: loadoutGroup
   id: TsfmcBelt
   name: loadout-group-contractor-belt
@@ -113,6 +118,7 @@
   fallbacks:
   - TsfmcCombatWebbingMedical
 
+# region Face
 - type: loadoutGroup
   id: TsfmcFace
   name: loadout-group-contractor-face
@@ -121,9 +127,11 @@
   loadouts:
   - TsfmcGaiter
   - TsfmcGasmask
+  - TsfmcGasmaskFull # Forge-Change
   fallbacks:
   - TsfmcGaiter
 
+# region Balaclava
 - type: loadoutGroup
   id: TsfmcBalaclava
   name: loadout-group-contractor-balaclava
@@ -142,7 +150,7 @@
   fallbacks:
   - TsfmcHud
 
-
+# region Neck
 - type: loadoutGroup
   id: TsfmcNeck
   name: loadout-group-contractor-neck
@@ -169,6 +177,7 @@
   - TsfmcClothingNeckIFFWhite
   - TsfmcClothingNeckIFFCyan
 
+# region Glasses
 - type: loadoutGroup
   id: TsfmcBrigmedicGlasses
   name: loadout-group-contractor-glasses
@@ -179,6 +188,7 @@
   fallbacks:
   - TsfmcMedSec
 
+# region Head
 - type: loadoutGroup
   id: TsfmcHead
   name: loadout-group-contractor-head
@@ -209,6 +219,7 @@
   - TsfmcUtilityCap
   - TsfmcBeretCommon
 
+# region Headset
 # Grunt headsets
 - type: loadoutGroup
   id: TsfmcEars
@@ -231,7 +242,7 @@
   fallbacks:
   - TsfmcHeadsetSenior
 
-# vests
+# region Vests
 - type: loadoutGroup
   id: TsfmcOuterClothing
   name: loadout-group-contractor-outerclothing
@@ -242,7 +253,7 @@
   fallbacks:
   - TsfmcClothingOuterArmorBPVestLight
 
-# armor plates
+# region Armor Plates
 - type: loadoutGroup
   id: FactionArmorPlates
   name: loadout-group-contractor-armorplates

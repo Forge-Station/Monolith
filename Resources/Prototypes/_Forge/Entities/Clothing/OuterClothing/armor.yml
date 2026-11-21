@@ -25,6 +25,33 @@
   - type: ExplosionResistance
     damageCoefficient: 0.6
 
+# region TSF
+- type: entity
+  parent: [ ClothingOuterBaseMedium, BaseFactionGearTSFT1 ]
+  id: ClothingOuterArmorTSFMC
+  name: federation body armor
+  description: Body armor made in collaboration with an unknown mercenary company. It has a decent plastitanium layer.
+  suffix: TSF
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/OuterClothing/Armor/tsf_black.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/OuterClothing/Armor/tsf_black.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.45
+        Slash: 0.45
+        Piercing: 0.4
+        Heat: 0.5
+        Cold: 0.5
+        Radiation: 0.4
+        Caustic: 0.5
+  - type: FireProtection
+    reduction: 0.5
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+
 # region Company
 - type: entity
   parent: ClothingOuterVestWebMercenary

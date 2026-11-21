@@ -323,3 +323,14 @@
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretMercWhite
+  name: elite beret
+  description: A white beret created by the company Blu.FI as a test of experimental garment-making techniques.
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Head/Hats/elite_naim_white.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Head/Hats/elite_naim_white.rsi

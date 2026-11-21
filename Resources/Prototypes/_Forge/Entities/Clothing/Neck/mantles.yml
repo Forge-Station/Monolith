@@ -1,3 +1,33 @@
+# region TSF
+- type: entity
+  parent: [ ClothingNeckBase, BaseFactionGearTSFT0 ]
+  id: ClothingNeckMantleTSFMCFolded
+  name: folded federation mantle
+  description: A standard mantle folded for convenience, so it won't get in the way during combat. Subtle and tasteful.
+  suffix: TSF
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/mantles/tsf_folded.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/mantles/tsf_folded.rsi
+
+- type: entity
+  parent: [ ClothingNeckBase, BaseStorageItem, BaseFactionGearTSFT0 ]
+  id: ClothingNeckMantleTSFMCPouches
+  name: federation mantle with pouches
+  description: A custom-made Federation mantle from an unknown mercenary company. It has a small storage compartment for various needs.
+  suffix: TSF
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/mantles/tsf_pouches.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/mantles/tsf_pouches.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1
+
+# region Company
 - type: entity
   parent: [ClothingNeckBase, BaseFactionGearOtherFactionT1]
   id: ClothingNeckMantleTrauma
@@ -35,3 +65,33 @@
   - type: Clothing
     sprite: _Forge/Clothing/Neck/mantles/mantles_nexus.rsi
   - type: StaticPrice
+
+# region Other
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMantleMercBlack
+  name: dark elite mantle
+  description: A mantle designed to complement the dark armored jacket. Blu.FI created it so expedition members could explore looking sharp!
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/mantles/naim_mantle_black.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/mantles/naim_mantle_black.rsi
+  - type: StaticPrice
+    price: 50
+    vendPrice: 100
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMantleMercWhite
+  name: white elite mantle
+  description: A mantle designed to complement the white armored jacket. Blu.FI created it so expedition members could explore looking sharp!
+  components:
+  - type: Sprite
+    sprite: _Forge/Clothing/Neck/mantles/naim_mantle_white.rsi
+  - type: Clothing
+    sprite: _Forge/Clothing/Neck/mantles/naim_mantle_white.rsi
+  - type: StaticPrice
+    price: 50
+    vendPrice: 100

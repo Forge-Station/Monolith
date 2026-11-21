@@ -1,0 +1,5 @@
+- type: loadout
+  id: TsfmcClothingJumpsuitElite
+  name: loadout-tsfmc-jumpsuit-elite
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTSFMCElite

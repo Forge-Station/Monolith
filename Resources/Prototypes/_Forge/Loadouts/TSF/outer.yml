@@ -1,0 +1,5 @@
+- type: loadout
+  id: TsfmcClothingOuterArmorFederationVest
+  name: loadout-tsfmc-vest-federation
+  equipment:
+    outerClothing: ClothingOuterArmorTSFMC

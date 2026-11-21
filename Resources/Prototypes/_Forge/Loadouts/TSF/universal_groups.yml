@@ -1,0 +1,115 @@
+# region Gloves
+- type: loadoutGroup
+  id: TsfmcGlovesSO
+  name: loadout-group-contractor-gloves
+  minLimit: 1
+  loadouts:
+  - TsfmcCombatGloves
+  - TsfmcFighterGloves
+  - TsfmcSOGloves
+  fallbacks:
+  - TsfmcSOGloves
+
+# region Neck
+- type: loadoutGroup
+  id: TsfmcNeckOfficer
+  name: loadout-group-contractor-neck
+  minLimit: 1
+  loadouts:
+  - TsfmcClothingNeckIFFCyan
+  - TsfmcClothingNeckMantleFolded
+  - TsfmcClothingNeckMantlePouches
+  - TsfClothingNeckMantleOfficer
+  fallbacks:
+  - TsfmcClothingNeckIFFCyan
+
+- type: loadoutGroup
+  id: TsfmcNeckCaptainOfficer
+  name: loadout-group-contractor-neck
+  minLimit: 1
+  loadouts:
+  - TsfmcClothingNeckIFFCyan
+  - TsfmcClothingNeckMantleFolded
+  - TsfmcClothingNeckMantlePouches
+  - TsfClothingNeckCaptainCloak
+  - TsfClothingNeckMantleOfficer
+  fallbacks:
+  - TsfmcClothingNeckIFFCyan
+
+- type: loadoutGroup
+  id: TsfmcNeckCommanderOfficer
+  name: loadout-group-contractor-neck
+  minLimit: 1
+  loadouts:
+  - TsfmcClothingNeckIFFCyan
+  - TsfmcClothingNeckMantleFolded
+  - TsfmcClothingNeckMantlePouches
+  - TsfClothingNeckColonelCloak
+  - TsfClothingNeckCaptainCloak
+  - TsfClothingNeckMantleOfficer
+  fallbacks:
+  - TsfmcClothingNeckIFFCyan
+
+# region Headset
+- type: loadoutGroup
+  id: TsfmcEarsAmbassador
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetAmbassador
+  fallbacks:
+  - TsfmcHeadsetAmbassador
+
+- type: loadoutGroup
+  id: TsfmcEarsOfficer
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetOfficer
+  fallbacks:
+  - TsfmcHeadsetOfficer
+
+- type: loadoutGroup
+  id: TsfmcEarsCommand
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetCommand
+  fallbacks:
+  - TsfmcHeadsetCommand
+
+- type: loadoutGroup
+  id: TsfmcEarsTech
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetTech
+  fallbacks:
+  - TsfmcHeadsetTech
+
+- type: loadoutGroup
+  id: TsfmcEarsSeniorTech
+  name: loadout-group-contractor-ears
+  hidden: true
+  minLimit: 1
+  loadouts:
+  - TsfmcHeadsetSeniorTech
+  fallbacks:
+  - TsfmcHeadsetSeniorTech
+
+# region V3sts
+- type: loadoutGroup
+  id: TsfmcOuterClothingSoldiers
+  name: loadout-group-contractor-outerclothing
+  minLimit: 1
+  loadouts:
+  - TsfmcClothingOuterArmorBPVestLight
+  - TsfmcClothingOuterArmorBPVestMedium
+  - TsfmcClothingOuterArmorFederationVest
+  fallbacks:
+  - TsfmcClothingOuterArmorBPVestLight
+

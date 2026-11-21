@@ -1,38 +1,18 @@
+
+- type: loadout
+  id: TsfmcClothingNeckMantleFolded
+  name: loadout-tsfmc-mantle-folded
+  equipment:
+    neck: ClothingNeckMantleTSFMCFolded
+
+- type: loadout
+  id: TsfmcClothingNeckMantlePouches
+  name: loadout-tsfmc-mantle-pouches
+  equipment:
+    neck: ClothingNeckMantleTSFMCPouches
+
 - type: loadout
   id: TsfClothingNeckMantleOfficer
   name: loadout-tsfmc-officer-mantle
   equipment:
     neck: ClothingNeckMantleSheriff
-
-- type: loadoutGroup
-  id: TsfmcNeckOfficer
-  name: loadout-group-contractor-neck
-  minLimit: 1
-  loadouts:
-  - TsfmcClothingNeckIFFCyan
-  - TsfClothingNeckMantleOfficer
-  fallbacks:
-  - TsfmcClothingNeckIFFCyan
-
-- type: loadoutGroup
-  id: TsfmcNeckCaptainOfficer
-  name: loadout-group-contractor-neck
-  minLimit: 1
-  loadouts:
-  - TsfmcClothingNeckIFFCyan
-  - TsfClothingNeckCaptainCloak
-  - TsfClothingNeckMantleOfficer
-  fallbacks:
-  - TsfmcClothingNeckIFFCyan
-
-- type: loadoutGroup
-  id: TsfmcNeckCommanderOfficer
-  name: loadout-group-contractor-neck
-  minLimit: 1
-  loadouts:
-  - TsfmcClothingNeckIFFCyan
-  - TsfClothingNeckColonelCloak
-  - TsfClothingNeckCaptainCloak
-  - TsfClothingNeckMantleOfficer
-  fallbacks:
-  - TsfmcClothingNeckIFFCyan

@@ -1,0 +1,13 @@
+# Armour numbers from DS13-2.0's slasher.
+- type: damageModifierSet
+  id: WFRemadeFlesh
+  coefficients:
+    Blunt: 0.6
+    Piercing: 0.55
+    Slash: 0.8
+    Heat: 1.2
+    Cold: 0
+    Poison: 0
+    Radiation: 0
+    Asphyxiation: 0
+    Bloodloss: 0

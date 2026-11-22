@@ -1,0 +1,38 @@
+# The people met in the caverns (WFCavernEncounterSystem lays them out). Names and descriptions are in
+# Locale/en-US/_WF/CavernEncounters/encounters.ftl; they are dressed for the cavern's air by PlanetNpcGear.
+
+# Tunnel raiders: a weak gang of scavengers with shivs and pipe shotguns. They run once badly hurt.
+- type: entity
+  parent: WFMobTunnelRaiderBase
+  id: WFMobTunnelRaider
+  components:
+  - type: Loadout
+    prototypes: [ WFCavernGearRaiderShiv ]
+
+- type: entity
+  parent: WFMobTunnelRaiderBase
+  id: WFMobTunnelRaiderGunner
+  components:
+  - type: WFNpcIntent
+    set: WFIntentsBandit
+    holds: true
+  - type: Loadout
+    prototypes: [ WFCavernGearRaiderGunner ]
+
+# A surveyor who lost his way: wounded, he follows whoever offers to lead him out and pays them on the surface.
+- type: entity
+  parent: WFCavernPersonBase
+  id: WFMobLostSurveyor
+  components:
+  - type: WFCavernSurveyor
+  - type: Loadout
+    prototypes: [ WFCavernGearSurveyor ]
+
+# A miner walled in by a rock fall; dig him out and he pays and walks off.
+- type: entity
+  parent: WFCavernPersonBase
+  id: WFMobTrappedMiner
+  components:
+  - type: WFTrappedMiner
+  - type: Loadout
+    prototypes: [ WFCavernGearTrappedMiner ]

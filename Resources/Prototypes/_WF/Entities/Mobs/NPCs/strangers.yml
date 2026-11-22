@@ -5,24 +5,6 @@
 # guard their homes. Dialogues are in dialogues.yml.
 
 - type: entity
-  abstract: true
-  parent: BaseMobHuman
-  id: WFStrangerBase
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: RandomHumanoidAppearance
-    randomizeName: true
-  - type: NpcFactionMember
-    factions:
-    - SimpleNeutral
-  - type: InputMover
-  - type: MobMover
-  - type: HTN
-    rootTask:
-      task: SimpleHumanoidHostileCompound
-  #- type: WFVehicleBoarder
-
-- type: entity
   parent: WFStrangerBase
   id: WFStrangerDealer
   name: shifty stranger
@@ -121,15 +103,6 @@
   - type: Loadout
     prototypes: [ WFStrangerGearSquatter ]
 
-- type: startingGear
-  id: WFStrangerGearSquatter
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitColorBrown
-    outerClothing: ClothingOuterWinterCoat
-    gloves: ClothingHandsGlovesFingerless
-    shoes: ClothingShoesBootsWork
-    pocket1: KitchenKnife
-
 # A random stranger, for maps, camps and the wilderness.
 - type: entity
   parent: MarkerBase
@@ -183,92 +156,4 @@
     - wf-stranger-greeting-camp-3
     - wf-stranger-greeting-camp-4
 
-- type: entityTable
-  id: WFStrangersHouse
-  table: !type:GroupSelector
-    children:
-    - id: WFStrangerDealer
-      weight: 3
-    - id: WFStrangerConspiracist
-      weight: 2
-    - id: WFStrangerStalker
-      weight: 1
 
-- type: entityTable
-  id: WFStrangersCamp
-  table: !type:GroupSelector
-    children:
-    - id: WFStrangerMugger
-      weight: 2
-    - id: WFStrangerPreacher
-      weight: 2
-    - id: WFStrangerBeggar
-      weight: 3
-
-- type: entityTable
-  id: WFStrangers
-  table: !type:GroupSelector
-    children:
-    - id: WFStrangerDealer
-      weight: 3
-    - id: WFStrangerMugger
-      weight: 2
-    - id: WFStrangerPreacher
-      weight: 2
-    - id: WFStrangerConspiracist
-      weight: 2
-    - id: WFStrangerBeggar
-      weight: 3
-    - id: WFStrangerStalker
-      weight: 1
-
-- type: startingGear
-  id: WFStrangerGearDealer
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitColorBlack
-    outerClothing: ClothingOuterCoatBomber
-    eyes: ClothingEyesGlassesSunglasses
-    shoes: ClothingShoesColorBrown
-    pocket1: KitchenKnife
-
-- type: startingGear
-  id: WFStrangerGearMugger
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitColorBrown
-    outerClothing: ClothingOuterCoatJensen
-    mask: ClothingMaskBandBlack
-    gloves: ClothingHandsGlovesFingerless
-    shoes: ClothingShoesBootsWork
-    pocket1: Machete
-
-- type: startingGear
-  id: WFStrangerGearPreacher
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitChaplain
-    outerClothing: ClothingOuterHoodieChaplain
-    shoes: ClothingShoesColorBrown
-
-- type: startingGear
-  id: WFStrangerGearConspiracist
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitColorGrey
-    outerClothing: ClothingOuterCoatTrench
-    head: ClothingHeadTinfoil
-    shoes: ClothingShoesColorBrown
-
-- type: startingGear
-  id: WFStrangerGearBeggar
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitColorBrown
-    outerClothing: ClothingOuterWinterCoat
-    gloves: ClothingHandsGlovesFingerless
-    neck: ClothingNeckScarfStripedRed
-
-- type: startingGear
-  id: WFStrangerGearStalker
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitColorBlack
-    outerClothing: ClothingOuterCoatTrench
-    head: ClothingHeadHatFedoraBrown
-    shoes: ClothingShoesColorBrown
-    pocket1: CombatKnife

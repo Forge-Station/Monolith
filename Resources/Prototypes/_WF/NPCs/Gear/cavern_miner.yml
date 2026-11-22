@@ -1,0 +1,6 @@
+- type: startingGear
+  id: WFCavernGearTrappedMiner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    head: ClothingHeadHatHardhatYellow
+    shoes: ClothingShoesBootsWork

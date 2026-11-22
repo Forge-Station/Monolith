@@ -87,7 +87,7 @@
     disengage: Deter
     disengageRange: 1200
 
- The big one has two escorts that fly on it and fire inside their own short range, and a bigger hold.
+# The big one has two escorts that fly on it and fire inside their own short range, and a bigger hold.
 - type: wfEncounter
   id: WFEncounterBlackMarketLarge
   name: wf-encounter-name-blackmarket

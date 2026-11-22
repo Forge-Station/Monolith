@@ -45,7 +45,7 @@
     key: walls
     base: resin
 
- type: entity
+- type: entity
   parent: BaseWallTierOne
   id: ChompBronze
   components:

@@ -1,0 +1,10 @@
+# A mean spear for the one who made him do it.
+- type: startingGear
+  id: WFShipSquatterGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    outerClothing: ClothingOuterWinterCoat
+    gloves: ClothingHandsGlovesFingerless
+    shoes: ClothingShoesBootsWork
+  inhand:
+  - Spear

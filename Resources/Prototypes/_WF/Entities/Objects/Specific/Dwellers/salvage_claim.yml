@@ -1,0 +1,13 @@
+# Left where a hulk's chief dies. Used aboard the hulk, it registers the ship to the holder's ID card.
+- type: entity
+  parent: BaseItem
+  id: WFSalvageClaim
+  name: ship's papers
+  description: The registry papers of an unowned ship, greasy and much handled. Use them aboard her, with an ID card that holds no deed, and she is yours.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    state: envelope_closed
+  - type: Item
+    size: Small
+  - type: WFSalvageClaim

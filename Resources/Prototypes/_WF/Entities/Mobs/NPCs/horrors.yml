@@ -4,32 +4,7 @@
 # set (Audio/_WF/CavernEncounters, Tools/_WF/LivingWorld/import_bms.py --encounters). Names are in
 # Locale/en-US/_WF/CavernEncounters/encounters.ftl.
 
-- type: entity
-  abstract: true
-  parent: SimpleSpaceMobBase
-  id: WFCavernHorrorBase
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: NpcFactionMember
-    factions:
-    - Passive
-  - type: HTN
-    rootTask:
-      task: SimpleHostileCompound
-    blackboard:
-      NavSmash: !type:Bool
-        false
-  - type: NPCRetaliation
-    attackMemoryLength: 15
-  - type: InputMover
-  - type: MobMover
-  - type: MovementAlwaysTouching
-  - type: CombatMode
-  - type: BreathingImmunity
-  - type: MobState
-    allowedStates:
-    - Alive
-    - Dead
+
 
 # Blind crawlers hunt by sound (WFCavernCrawler): walk past them and they never notice; run and the nest comes for you.
 - type: entity

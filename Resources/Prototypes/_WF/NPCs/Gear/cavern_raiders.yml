@@ -1,0 +1,19 @@
+- type: startingGear
+  id: WFCavernGearRaiderShiv
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorBrown
+    mask: ClothingMaskBandBlack
+    gloves: ClothingHandsGlovesFingerless
+    shoes: ClothingShoesBootsWork
+  inhand:
+  - Shiv
+
+- type: startingGear
+  id: WFCavernGearRaiderGunner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorGrey
+    head: ClothingHeadBandBlack
+    outerClothing: ClothingOuterCoatJensen
+    shoes: ClothingShoesBootsWork
+  inhand:
+  - WeaponShotgunImprovisedLoaded

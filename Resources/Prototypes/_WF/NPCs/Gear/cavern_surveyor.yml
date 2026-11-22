@@ -1,0 +1,7 @@
+- type: startingGear
+  id: WFCavernGearSurveyor
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    head: ClothingHeadHatHardhatOrange
+    outerClothing: ClothingOuterVestHazard
+    shoes: ClothingShoesBootsWork

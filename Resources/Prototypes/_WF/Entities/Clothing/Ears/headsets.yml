@@ -59,7 +59,7 @@
       - WFEncryptionKeyCrewIntercom
 
 - type: entity
-  parent: 
+  parent: WFCrewHeadset
   id: WFAsfClothingHeadset
   components:
   - type: Sprite

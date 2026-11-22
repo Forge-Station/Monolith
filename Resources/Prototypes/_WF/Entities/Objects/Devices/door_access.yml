@@ -1,5 +1,5 @@
 - type: entity
-  parent: 
+  parent: DoorElectronics
   id: WFAsfDoorElectronics
   suffix: ASF, Locked
   components:

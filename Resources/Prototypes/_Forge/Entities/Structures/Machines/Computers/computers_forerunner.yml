@@ -13,15 +13,9 @@
       state: holocomputer
     - map: ["computerLayerScreen"]
       state: holoscreen
-  - type: SignalSwitch
-    onPort: Pressed
-    offPort: Pressed
-    statusPort: Pressed
   - type: DisableToolUse
     prying: True
   - type: PowerSwitch
-
-
 
 #Frame and computers with different screens in forerunner style
 

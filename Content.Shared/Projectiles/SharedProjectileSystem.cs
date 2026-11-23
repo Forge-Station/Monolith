@@ -632,7 +632,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         if (component.DeleteOnRemove)
         {
-            QueueDel(uid);
+            // Клиент не удаляет networked-сущности — сервер пришлёт удаление в game state.
+            if (_net.IsServer)
+                QueueDel(uid);
             return;
         }
 

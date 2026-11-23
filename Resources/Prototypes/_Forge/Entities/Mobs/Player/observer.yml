@@ -3,6 +3,7 @@
   - Incorporeal
   - BaseMob
   id: SponsorMobObserverBase
+  abstract: true
   name: observer
   description: Boo!
   categories: [ HideSpawnMenu ]

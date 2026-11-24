@@ -232,16 +232,26 @@
 
 - type: Tag
   id: 40mmCartridge
+#Имперское энергооружие
+#Forge-change-start
+- type: Tag
+  id: MagazineHEVShotgun
 
 - type: Tag
-  id: HEVPowerCellShotgun
+  id: MagazineHEVLMG
 
 - type: Tag
-  id: HEVPowerCellLMG
+  id: MagazineHEVRifle
 
 - type: Tag
-  id: HEVPowerCellRifle
+  id: CartridgeHEVShotgun
 
+- type: Tag
+  id: CartridgeHEVLMG
+
+- type: Tag
+  id: CartridgeHEVRifle
+#Forge-change-end
 - type: Tag
   id: EmpireUplink
 

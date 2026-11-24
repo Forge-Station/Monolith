@@ -63,13 +63,21 @@
   - WeaponEnergyRifleUnion
   - WeaponEnergyLMGHeavion
   - WeaponEnergyShotgunKiller
-  - MagazinePowerUnion
-  - MagazinePowerUnionOverpressure
-  - MagazinePowerUnionXRay
-  - MagazinePowerUnionOverpressureXRay
-  - MagazinePowerUnionDisabler
-  - MagazinePowerUnionOverpressureDisabler
-  - MagazinePowerHeavion
-  - MagazinePowerShotgun
+  - MagazineHEVRifle
+  - MagazineHEVRifleOverpressure
+  - MagazineHEVRifleXRay
+  - MagazineHEVRifleOverpressureXRay
+  - MagazineHEVRifleDisabler
+  - MagazineHEVRifleOverpressureDisabler
+  - MagazineHEVLMG
+  - MagazineHEVShotgun
+  - AmmoBoxHEVRifle
+  - AmmoBoxHEVRifleXRay
+  - AmmoBoxHEVRifleDisabler
+  - AmmoBoxHEVRifleOverpressure
+  - AmmoBoxHEVRifleOverpressureXRay
+  - AmmoBoxHEVRifleOverpressureDisabler
+  - AmmoBoxHEVLMG
+  - AmmoBoxHEVShotgun
   - WeaponRifleSeraphim
   - WeaponRifleSong

@@ -365,7 +365,7 @@
   parent: [BaseWeaponCustomCell, BaseGunWieldable]
   id: WeaponEnergyShotgunKiller
   name: AE E-SG 'Killer'
-  description: An energy weapon that fires shotgun-like spreads. The magazine serves as its battery.
+  description: An energy weapon that fires shotgun-like spreads. Uses energy cartridge magazines.
   components:
   - type: Sprite
     sprite: _Forge/Objects/Weapons/Guns/Shotguns/e_sg.rsi
@@ -408,11 +408,9 @@
     slots:
       gun_magazine:
         name: gun_magazine
-        startingItem: MagazinePowerShotgun
+        startingItem: MagazineHEVShotgun # Forge-change: energy cells -> cartridges
         insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
         whitelist:
           tags:
-          - HEVPowerCellShotgun
-  - type: BatterySlotRequiresToggle
-    itemSlot: gun_magazine
+          - MagazineHEVShotgun

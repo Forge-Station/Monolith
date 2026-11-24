@@ -1,0 +1,16 @@
+ent-AmmoBoxHEVRifle = коробка патронов (Онион)
+    .desc = Коробка энергетических патронов для энергетических винтовок.
+ent-AmmoBoxHEVRifleXRay = коробка патронов (Онион, XRay)
+    .desc = { ent-AmmoBoxHEVRifle.desc }
+ent-AmmoBoxHEVRifleDisabler = коробка патронов (Онион, Станнер)
+    .desc = { ent-AmmoBoxHEVRifle.desc }
+ent-AmmoBoxHEVRifleOverpressure = коробка патронов (Онион, Скоростной)
+    .desc = { ent-AmmoBoxHEVRifle.desc }
+ent-AmmoBoxHEVRifleOverpressureXRay = коробка патронов (Онион, XRay, Скоростной)
+    .desc = { ent-AmmoBoxHEVRifle.desc }
+ent-AmmoBoxHEVRifleOverpressureDisabler = коробка патронов (Онион, Станнер, Скоростной)
+    .desc = { ent-AmmoBoxHEVRifle.desc }
+ent-AmmoBoxHEVLMG = коробка патронов (Хевион)
+    .desc = Коробка энергетических патронов для энергетических пулемётов.
+ent-AmmoBoxHEVShotgun = коробка патронов (Гекс)
+    .desc = Коробка энергетических патронов для энергетических дробовиков.

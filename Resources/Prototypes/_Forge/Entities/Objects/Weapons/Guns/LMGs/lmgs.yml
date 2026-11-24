@@ -206,7 +206,7 @@
   parent: BaseWeaponCustomCell
   id: WeaponEnergyLMGHeavion
   name: AE E-LMG 'Heavion'
-  description: An improved energy machine gun with reinforced components for sustained fire. Uses specialized power cells.
+  description: An improved energy machine gun with reinforced components for sustained fire. Uses energy cartridge magazines.
   components:
   - type: Item
     size: Huge
@@ -233,10 +233,10 @@
     slots:
       gun_magazine:
         name: gun_magazine
-        startingItem: MagazinePowerHeavion
+        startingItem: MagazineHEVLMG # Forge-change: energy cells -> cartridges
         whitelist:
           tags:
-          - HEVPowerCellLMG
+          - MagazineHEVLMG
   - type: Sprite
     sprite: _Forge/Objects/Weapons/Guns/LMGs/heavion.rsi
     layers:
@@ -267,5 +267,3 @@
     walkModifier: 0.9 # 0.7->0.9
     sprintModifier: 0.75 # 0.6->0.75
   - type: AmmoCounter
-  - type: BatterySlotRequiresToggle
-    itemSlot: gun_magazine

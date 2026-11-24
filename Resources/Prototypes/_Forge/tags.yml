@@ -233,14 +233,24 @@
 - type: Tag
   id: 40mmCartridge
 
+# Forge: энергооружие Империи на патронах
 - type: Tag
-  id: HEVPowerCellShotgun
+  id: MagazineHEVShotgun
 
 - type: Tag
-  id: HEVPowerCellLMG
+  id: MagazineHEVLMG
 
 - type: Tag
-  id: HEVPowerCellRifle
+  id: MagazineHEVRifle
+
+- type: Tag
+  id: CartridgeHEVShotgun
+
+- type: Tag
+  id: CartridgeHEVLMG
+
+- type: Tag
+  id: CartridgeHEVRifle
 
 - type: Tag
   id: EmpireUplink

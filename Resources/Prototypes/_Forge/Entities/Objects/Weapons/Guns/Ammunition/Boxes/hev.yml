@@ -1,0 +1,187 @@
+
+- type: entity
+  abstract: true
+  parent: [BaseItem, RecyclableItemCardboard]
+  id: BaseAmmoBoxHEV
+  components:
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Mono/Objects/Weapons/Guns/Ammunition/Boxes/700Thz.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: false
+  - type: Appearance
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_Goobstation/Items/handling/ammobox_drop.ogg
+
+- type: entity
+  parent: BaseAmmoBoxHEV
+  id: AmmoBoxHEVRifle
+  name: ammunition box (AE-AR energy)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVRifle
+    proto: CartridgeHEVRifle
+    capacity: 50
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#ffd988"
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseAmmoBoxHEV
+  id: AmmoBoxHEVRifleXRay
+  name: ammunition box (AE-AR energy, x-ray)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVRifle
+    proto: CartridgeHEVRifleXRay
+    capacity: 30
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#4b692f"
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseAmmoBoxHEV
+  id: AmmoBoxHEVRifleDisabler
+  name: ammunition box (AE-AR energy, disabler)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVRifle
+    proto: CartridgeHEVRifleDisabler
+    capacity: 40
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#1b78cf"
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseAmmoBoxHEV
+  id: AmmoBoxHEVRifleOverpressure
+  name: ammunition box (AE-AR energy, overpressure)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVRifle
+    proto: CartridgeHEVRifleOverpressure
+    capacity: 38
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#ff8f3a"
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseAmmoBoxHEV
+  id: AmmoBoxHEVRifleOverpressureXRay
+  name: ammunition box (AE-AR energy, overpressure x-ray)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVRifle
+    proto: CartridgeHEVRifleOverpressureXRay
+    capacity: 26
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#7fd04b"
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseAmmoBoxHEV
+  id: AmmoBoxHEVRifleOverpressureDisabler
+  name: ammunition box (AE-AR energy, overpressure disabler)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVRifle
+    proto: CartridgeHEVRifleOverpressureDisabler
+    capacity: 20
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#5fb8ff"
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseAmmoBoxHEV
+  id: AmmoBoxHEVLMG
+  name: ammunition box (AE-LMG energy)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVLMG
+    proto: CartridgeHEVLMG
+    capacity: 110
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#f0a32f"
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: BaseAmmoBoxHEV
+  id: AmmoBoxHEVShotgun
+  name: ammunition box (AE-SG energy)
+  components:
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVShotgun
+    proto: CartridgeHEVShotgun
+    capacity: 12
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+      color: "#ffd988"
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]

@@ -58,11 +58,11 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePowerUnion
+  id: MagazineHEVRifle
   categories:
   - MiscAmmo
   - Ammo
-  result: MagazinePowerUnion
+  result: MagazineHEVRifle
   materials:
     Steel: 1000
     Plastic: 500
@@ -70,11 +70,11 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePowerUnionOverpressure
+  id: MagazineHEVRifleOverpressure
   categories:
   - MiscAmmo
   - Ammo
-  result: MagazinePowerUnionOverpressure
+  result: MagazineHEVRifleOverpressure
   materials:
     Steel: 1000
     Plastic: 500
@@ -82,11 +82,11 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePowerUnionXRay
+  id: MagazineHEVRifleXRay
   categories:
   - MiscAmmo
   - Ammo
-  result: MagazinePowerUnionXRay
+  result: MagazineHEVRifleXRay
   materials:
     Steel: 1000
     Plastic: 500
@@ -95,11 +95,11 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePowerUnionOverpressureXRay
+  id: MagazineHEVRifleOverpressureXRay
   categories:
   - MiscAmmo
   - Ammo
-  result: MagazinePowerUnionOverpressureXRay
+  result: MagazineHEVRifleOverpressureXRay
   materials:
     Steel: 1000
     Plastic: 500
@@ -108,11 +108,11 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePowerUnionDisabler
+  id: MagazineHEVRifleDisabler
   categories:
   - MiscAmmo
   - Ammo
-  result: MagazinePowerUnionDisabler
+  result: MagazineHEVRifleDisabler
   materials:
     Steel: 1000
     Plastic: 500
@@ -120,11 +120,11 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePowerUnionOverpressureDisabler
+  id: MagazineHEVRifleOverpressureDisabler
   categories:
   - MiscAmmo
   - Ammo
-  result: MagazinePowerUnionOverpressureDisabler
+  result: MagazineHEVRifleOverpressureDisabler
   materials:
     Steel: 1000
     Plastic: 500
@@ -132,11 +132,11 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePowerHeavion
+  id: MagazineHEVLMG
   categories:
   - MiscAmmo
   - Ammo
-  result: MagazinePowerHeavion
+  result: MagazineHEVLMG
   materials:
     Steel: 1250
     Plastic: 1000
@@ -144,15 +144,114 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
-  id: MagazinePowerShotgun
+  id: MagazineHEVShotgun
   categories:
   - MiscAmmo
   - Ammo
-  result: MagazinePowerShotgun
+  result: MagazineHEVShotgun
   materials:
     Steel: 750
     Plastic: 750
     Plasma: 300
+
+# Forge: коробки патронов энергооружия Империи (материалы = магазин x1.5)
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: AmmoBoxHEVRifle
+  categories:
+  - MiscAmmo
+  - Ammo
+  result: AmmoBoxHEVRifle
+  materials:
+    Steel: 1500
+    Plastic: 750
+    Plasma: 375
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: AmmoBoxHEVRifleXRay
+  categories:
+  - MiscAmmo
+  - Ammo
+  result: AmmoBoxHEVRifleXRay
+  materials:
+    Steel: 1500
+    Plastic: 750
+    Plasma: 375
+    Uranium: 375
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: AmmoBoxHEVRifleDisabler
+  categories:
+  - MiscAmmo
+  - Ammo
+  result: AmmoBoxHEVRifleDisabler
+  materials:
+    Steel: 1500
+    Plastic: 750
+    Plasma: 225
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: AmmoBoxHEVRifleOverpressure
+  categories:
+  - MiscAmmo
+  - Ammo
+  result: AmmoBoxHEVRifleOverpressure
+  materials:
+    Steel: 1500
+    Plastic: 750
+    Plasma: 450
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: AmmoBoxHEVRifleOverpressureXRay
+  categories:
+  - MiscAmmo
+  - Ammo
+  result: AmmoBoxHEVRifleOverpressureXRay
+  materials:
+    Steel: 1500
+    Plastic: 750
+    Plasma: 450
+    Uranium: 450
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: AmmoBoxHEVRifleOverpressureDisabler
+  categories:
+  - MiscAmmo
+  - Ammo
+  result: AmmoBoxHEVRifleOverpressureDisabler
+  materials:
+    Steel: 1500
+    Plastic: 750
+    Plasma: 300
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: AmmoBoxHEVLMG
+  categories:
+  - MiscAmmo
+  - Ammo
+  result: AmmoBoxHEVLMG
+  materials:
+    Steel: 1875
+    Plastic: 1500
+    Plasma: 1125
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: AmmoBoxHEVShotgun
+  categories:
+  - MiscAmmo
+  - Ammo
+  result: AmmoBoxHEVShotgun
+  materials:
+    Steel: 1125
+    Plastic: 1125
+    Plasma: 450
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong

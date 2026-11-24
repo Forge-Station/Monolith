@@ -1,0 +1,207 @@
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseMagazineHEV
+  components:
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Appearance
+
+- type: entity
+  abstract: true
+  parent: BaseMagazineHEV
+  id: BaseMagazineHEVRifle
+  components:
+  - type: Tag
+    tags:
+    - MagazineHEVRifle
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVRifle
+
+- type: entity
+  parent: BaseMagazineHEVRifle
+  id: MagazineHEVRifleEmpty
+  name: AE-AR energy magazine
+  suffix: empty
+  description: A compact magazine for AE energy rifles.
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+    capacity: 25
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - state: icon
+
+- type: entity
+  parent: BaseMagazineHEVRifle
+  id: MagazineHEVRifle
+  name: AE-AR energy magazine
+  description: A compact magazine of energy capsules for AE energy rifles.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHEVRifle
+    capacity: 25
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - state: icon
+    - state: o3
+      shader: unshaded
+
+- type: entity
+  parent: BaseMagazineHEVRifle
+  id: MagazineHEVRifleXRay
+  name: AE-AR energy magazine (x-ray)
+  description: A compact magazine of x-ray energy capsules for AE energy rifles.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHEVRifleXRay
+    capacity: 15
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - state: xray
+    - state: o3
+      shader: unshaded
+
+- type: entity
+  parent: BaseMagazineHEVRifle
+  id: MagazineHEVRifleDisabler
+  name: AE-AR energy magazine (disabler)
+  description: A compact magazine of disabler energy capsules for AE energy rifles.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHEVRifleDisabler
+    capacity: 20
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - state: disabler
+    - state: o3
+      shader: unshaded
+
+- type: entity
+  parent: BaseMagazineHEVRifle
+  id: MagazineHEVRifleOverpressure
+  name: AE-AR energy magazine (overpressure)
+  description: A compact magazine of overpressure energy capsules for AE energy rifles.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHEVRifleOverpressure
+    capacity: 19
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - state: hitscan
+    - state: o3
+      shader: unshaded
+
+- type: entity
+  parent: BaseMagazineHEVRifle
+  id: MagazineHEVRifleOverpressureXRay
+  name: AE-AR energy magazine (overpressure x-ray)
+  description: A compact magazine of overpressure x-ray energy capsules for AE energy rifles.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHEVRifleOverpressureXRay
+    capacity: 13
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - state: xray_hs
+    - state: o3
+      shader: unshaded
+
+- type: entity
+  parent: BaseMagazineHEVRifle
+  id: MagazineHEVRifleOverpressureDisabler
+  name: AE-AR energy magazine (overpressure disabler)
+  description: A compact magazine of overpressure disabler energy capsules for AE energy rifles.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeHEVRifleOverpressureDisabler
+    capacity: 10
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/union.rsi
+    layers:
+    - state: disabler_hs
+    - state: o3
+      shader: unshaded
+
+- type: entity
+  parent: BaseMagazineHEV
+  id: MagazineHEVLMG
+  name: AE-LMG energy magazine
+  description: A large magazine of energy capsules for AE energy machine guns.
+  components:
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - MagazineHEVLMG
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVLMG
+    proto: CartridgeHEVLMG
+    capacity: 55
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/heavion.rsi
+    layers:
+    - state: icon
+    - state: o3
+      shader: unshaded
+
+- type: entity
+  parent: MagazineHEVLMG
+  id: MagazineHEVLMGEmpty
+  suffix: empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Sprite
+    layers:
+    - state: icon
+
+- type: entity
+  parent: BaseMagazineHEV
+  id: MagazineHEVShotgun
+  name: AE-SG energy magazine
+  description: A magazine of energy spread capsules for AE energy shotguns.
+  components:
+  - type: Tag
+    tags:
+    - MagazineHEVShotgun
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CartridgeHEVShotgun
+    proto: CartridgeHEVShotgun
+    capacity: 6
+  - type: Sprite
+    sprite: _Forge/Objects/Weapons/Guns/Ammunition/Magazine/energyshotgun.rsi
+    layers:
+    - state: icon
+    - state: o3
+      shader: unshaded
+
+- type: entity
+  parent: MagazineHEVShotgun
+  id: MagazineHEVShotgunEmpty
+  suffix: empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+  - type: Sprite
+    layers:
+    - state: icon

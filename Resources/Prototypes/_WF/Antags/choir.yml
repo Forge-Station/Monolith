@@ -1,0 +1,7 @@
+# Lists a Choir player as an antagonist in admin tools.
+- type: antag
+  id: WFChoirAntag
+  name: wf-choir-antag-name
+  antagonist: true
+  setPreference: false
+  objective: wf-choir-antag-objective

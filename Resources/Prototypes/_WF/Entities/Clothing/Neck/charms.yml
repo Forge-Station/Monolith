@@ -1,0 +1,19 @@
+# Worn round the neck: Drift reaches its wearer more slowly.
+- type: entity
+  parent: ClothingNeckBase
+  id: WFLatticeCharm
+  components:
+  - type: Sprite
+    sprite: Clothing/Neck/Misc/dinkystar.rsi
+    color: "#d070ff"
+  - type: Clothing
+    sprite: Clothing/Neck/Misc/dinkystar.rsi
+  - type: PointLight
+    radius: 0.8
+    energy: 0.5
+    color: "#b040e0"
+  - type: StaticPrice
+    price: 3500
+  - type: WFLatticeShelter
+    shelter: 0.5
+    stopsTaking: false

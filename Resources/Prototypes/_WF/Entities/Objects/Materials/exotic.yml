@@ -1,0 +1,56 @@
+- type: entity
+  parent: MaterialBase
+  id: WFMaterialExoticMatter
+  suffix: Full
+  components:
+  - type: Sprite
+    sprite: Nyanotrasen/Objects/Materials/materials.rsi
+    color: "#d070ff"
+    layers:
+    - state: bluespace_3
+      map: ["base"]
+      shader: unshaded
+  - type: Appearance
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      WFExoticMatter: 100
+  - type: Tag
+    tags:
+    - RawMaterial
+  - type: Stack
+    stackType: WFExoticMatter
+    baseLayer: base
+    layerStates:
+    - bluespace
+    - bluespace_2
+    - bluespace_3
+    count: 10
+  - type: PointLight
+    radius: 1.2
+    energy: 0.8
+    color: "#b040e0"
+  - type: Item
+    size: Tiny
+  # Cuts the song out of a Choir member's head, a shard at a time.
+  - type: WFSongExcisionTool
+  # Matter from outside the Lattice's hold still carries a little of it.
+  - type: WFDriftSource
+    rate: 0.1
+    range: 2
+    carried: 0.15
+    touch: 1
+    cap: 30
+
+- type: entity
+  parent: WFMaterialExoticMatter
+  id: WFMaterialExoticMatter1
+  suffix: 1
+  components:
+  - type: Sprite
+    layers:
+    - state: bluespace
+      map: ["base"]
+      shader: unshaded
+  - type: Stack
+    count: 1

@@ -1,0 +1,12 @@
+# The Choir's mark over a member's head: a white C on red, seen by ghosts, admins and other members.
+- type: factionIcon
+  id: WFChoirFaction
+  priority: 11
+  visibleToGhosts: true
+  showTo:
+    components:
+    - ShowAntagIcons
+    - WFChoirMember
+  icon:
+    sprite: /Textures/_WF/Lattice/choir_icon.rsi
+    state: choir

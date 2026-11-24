@@ -1,0 +1,6 @@
+- type: stack
+  id: WFExoticMatter
+  name: wf-material-exotic-matter
+  icon: { sprite: Nyanotrasen/Objects/Materials/materials.rsi, state: bluespace }
+  spawn: WFMaterialExoticMatter1
+  maxCount: 10

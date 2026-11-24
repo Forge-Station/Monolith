@@ -232,8 +232,8 @@
 
 - type: Tag
   id: 40mmCartridge
-
-# Forge: энергооружие Империи на патронах
+#Имперское энергооружие
+#Forge-change-start
 - type: Tag
   id: MagazineHEVShotgun
 
@@ -251,7 +251,7 @@
 
 - type: Tag
   id: CartridgeHEVRifle
-
+#Forge-change-end
 - type: Tag
   id: EmpireUplink
 

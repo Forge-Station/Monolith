@@ -154,7 +154,7 @@
     Plastic: 750
     Plasma: 300
 
-# Forge: коробки патронов энергооружия Империи (материалы = магазин x1.5)
+#Forge-change start
 - type: latheRecipe
   parent: BaseAmmoRecipe
   id: AmmoBoxHEVRifle
@@ -252,6 +252,7 @@
     Steel: 1125
     Plastic: 1125
     Plasma: 450
+#Forge-change end
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
